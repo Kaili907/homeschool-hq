@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u03-l18",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u03-l18",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Complex Numbers and Nonlinear Systems",
+    "dayInUnit": 18,
+    "courseDay": 54,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "verifying nonlinear system solutions graphically",
+    "title": "Publication, presentation, or reflection: verifying nonlinear system solutions graphically"
+  },
+  "standards": [
+    "N-CN.1",
+    "N-CN.2",
+    "N-CN.7",
+    "A-REI.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 1,
+          "prompt": "Solve y = x² and y = 5x − 6.",
+          "workedSolution": {
+            "steps": [
+              "x² − 5x + 6 = 0.",
+              "(x − 2)(x − 3) = 0.",
+              "x = 2, 3."
+            ],
+            "answer": "2, 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 2,
+          "prompt": "Simplify i^12.",
+          "choices": [
+            "−1",
+            "1",
+            "−i",
+            "i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 2,
+          "prompt": "Multiply and write in the form a + bi: (-1 + 4i)(1 − 4i).",
+          "choices": [
+            "15",
+            "-1 − 16i",
+            "15 + 8i",
+            "-17 + 8i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 3,
+          "prompt": "Solve x^2 + 8x + 52 = 0 over the complex numbers.",
+          "choices": [
+            "x = 4 + 6i or x = 4 − 6i",
+            "x = -4 or x = 4",
+            "x = -4 + 6i or x = -4 − 6i",
+            "x = -4 + 6i only"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = 3x − 2. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-2, -1",
+            "2, 3",
+            "3, -2",
+            "1, 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 3,
+          "prompt": "Simplify i^31.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (5 + 5i)(6 + 6i).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u03-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u03-l18"
+  }
+}

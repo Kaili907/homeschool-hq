@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l13",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l13",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 13,
+    "courseDay": 49,
+    "phase": "Performance task: plan",
+    "focus": "the fact-strategy deck",
+    "title": "Performance task: plan: the fact-strategy deck"
+  },
+  "standards": [
+    "3.OA.5",
+    "3.OA.7",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 7 × 8.",
+          "workedSolution": {
+            "steps": [
+              "7 groups of 8: 8, 16, 24, 32, 40, 48, 56.",
+              "7 × 8 = 56."
+            ],
+            "answer": "56"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 15 ÷ 5.",
+          "choices": [
+            "5",
+            "4",
+            "10",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression is equal to 8 × 4 by the commutative property?",
+          "choices": [
+            "8 × 5",
+            "8 + 4",
+            "9 × 4",
+            "4 × 8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 8 × 6.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 10 ÷ 5.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l13"
+  }
+}

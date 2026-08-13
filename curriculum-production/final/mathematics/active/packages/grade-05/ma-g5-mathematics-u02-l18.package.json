@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l18",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l18",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 18,
+    "courseDay": 36,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "number lines and place-value charts",
+    "title": "Publication, presentation, or reflection: number lines and place-value charts"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-number-line",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "A number line from 2.3 to 2.4 has 10 equal intervals. Point P is 7 intervals after 2.3. What number is P?",
+          "workedSolution": {
+            "steps": [
+              "The distance from 2.3 to 2.4 is one tenth.",
+              "Ten equal intervals make each interval one hundredth.",
+              "Seven hundredths after 2.30 is 2.37."
+            ],
+            "answer": "2.37"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "place-value-chart",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "Place-value chart:\nhundreds | tens | ones | tenths | hundredths\n7 | 1 | 9 | 3 | 8\nWhat value does the 9 in the ones place represent?",
+          "choices": [
+            "0.09",
+            "9",
+            "0.9",
+            "900"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "In 889, how does the value of the 8 in the hundreds place compare with the value of the 8 in the tens place?",
+          "choices": [
+            "1/10 as much",
+            "10 times",
+            "the same value",
+            "100 times"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "power-of-ten-notation",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "10^6 = ?",
+          "choices": [
+            "10000",
+            "1",
+            "1000000",
+            "1000"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "2.12 × 10^1 = ?",
+          "choices": [
+            "21.2",
+            "212",
+            "0.212",
+            "2.12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "divide-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "5.30 ÷ 10^2 = ?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "How is 304.236 written in words?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l18"
+  }
+}

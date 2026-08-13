@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u06-l02",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Vectors",
+    "dayInUnit": 2,
+    "courseDay": 92,
+    "phase": "Concept model A",
+    "focus": "component form from initial and terminal points",
+    "title": "Concept model A: component form from initial and terminal points"
+  },
+  "standards": [
+    "N-VM.1",
+    "N-VM.2",
+    "N-VM.3",
+    "N-VM.4",
+    "N-VM.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 1,
+          "prompt": "v = ⟨3, 4⟩, find −2v.",
+          "workedSolution": {
+            "steps": [
+              "⟨−6, −8⟩.",
+              "Magnitude 2 × 5 = 10, direction reversed."
+            ],
+            "answer": "⟨−6, −8⟩, magnitude 10, reversed"
+          }
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 2,
+          "prompt": "Unit vector in the direction of ⟨3, 4⟩?",
+          "workedSolution": {
+            "steps": [
+              "Magnitude 5.",
+              "Divide: ⟨3/5, 4/5⟩."
+            ],
+            "answer": "⟨3/5, 4/5⟩"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 1,
+          "prompt": "A vector has components ⟨3, -4⟩. Find its magnitude.",
+          "choices": [
+            "1",
+            "7",
+            "5",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 1,
+          "prompt": "Given u = ⟨1, 6⟩ and v = ⟨-7, -5⟩, find u − v.",
+          "choices": [
+            "⟨-8, -11⟩",
+            "⟨8, 1⟩",
+            "⟨8, 11⟩",
+            "⟨-6, 1⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 2,
+          "prompt": "Let v = ⟨5, 12⟩, which has magnitude 13. Find -2v and its magnitude, and say how the direction changes.",
+          "choices": [
+            "⟨-10, -24⟩, magnitude 13, direction reversed",
+            "⟨3, 10⟩, magnitude 26, direction unchanged",
+            "⟨-10, -24⟩, magnitude 26, direction reversed",
+            "⟨-10, -24⟩, magnitude 26, direction unchanged"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 1,
+          "prompt": "Find the unit vector in the direction of ⟨-3, -4⟩.",
+          "choices": [
+            "⟨-3/5, -4/5⟩",
+            "⟨-3, -4⟩",
+            "⟨5/-3, 5/-4⟩",
+            "⟨-3/25, -4/25⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 2,
+          "prompt": "A vector has components ⟨-6, 8⟩. Find its magnitude.",
+          "choices": [
+            "100",
+            "14",
+            "10",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 2,
+          "prompt": "Given u = ⟨6, -7⟩ and v = ⟨3, 7⟩, find u − v.",
+          "choices": [
+            "⟨3, 0⟩",
+            "⟨-3, 14⟩",
+            "⟨3, -14⟩",
+            "⟨9, 0⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 3,
+          "prompt": "Let v = ⟨5, 12⟩, which has magnitude 13. Find -4v and its magnitude, and say how the direction changes.",
+          "choices": [
+            "⟨-20, -48⟩, magnitude 52, direction reversed",
+            "⟨-20, -48⟩, magnitude 52, direction unchanged",
+            "⟨1, 8⟩, magnitude 52, direction unchanged",
+            "⟨-20, -48⟩, magnitude 13, direction reversed"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 2,
+          "prompt": "Find the unit vector in the direction of ⟨6, 8⟩.",
+          "choices": [
+            "⟨6/100, 8/100⟩",
+            "⟨10/6, 10/8⟩",
+            "⟨6, 8⟩",
+            "⟨6/10, 8/10⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 2,
+          "prompt": "A vector has components ⟨-6, -8⟩. Find its magnitude.",
+          "choices": [
+            "2",
+            "14",
+            "10",
+            "100"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u06-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u06-l02"
+  }
+}

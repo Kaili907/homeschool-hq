@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u04-l16",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u04-l16",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Properties, Patterns, and Two-Step Problems",
+    "dayInUnit": 16,
+    "courseDay": 70,
+    "phase": "Unit assessment",
+    "focus": "two-step problems and pattern reasoning",
+    "title": "Unit assessment: two-step problems and pattern reasoning"
+  },
+  "standards": [
+    "3.OA.5",
+    "3.OA.8",
+    "3.OA.9",
+    "3.NBT.3"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 1,
+          "prompt": "The pattern 10, 16, 22, 28, ... continues by the same rule. What is the 7th term?",
+          "choices": [
+            "47",
+            "40",
+            "46",
+            "52"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations-application",
+          "standard": "3.OA.5",
+          "difficulty": 1,
+          "prompt": "Which expression is equal to 3 × 4 by the commutative property?",
+          "choices": [
+            "4 × 3",
+            "4 × 4",
+            "3 + 4",
+            "3 × 5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-multiples-of-ten-fluency",
+          "standard": "3.NBT.3",
+          "difficulty": 2,
+          "prompt": "Find 9 × 30.",
+          "choices": [
+            "260",
+            "280",
+            "27",
+            "270"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 5 shelves with 5 boxes on each shelf, then adds 3 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "13",
+            "22",
+            "28",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 2,
+          "prompt": "The pattern 2, 4, 6, 8, ... continues by the same rule. What is the 5th term?",
+          "choices": [
+            "12",
+            "11",
+            "10",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations-application",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression is equal to 2 × 8 by the commutative property?",
+          "choices": [
+            "3 × 8",
+            "2 × 9",
+            "8 × 2",
+            "2 + 8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-multiples-of-ten-fluency",
+          "standard": "3.NBT.3",
+          "difficulty": 3,
+          "prompt": "Find 5 × 60.",
+          "choices": [
+            "300",
+            "30",
+            "290",
+            "310"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A store arranges 3 shelves with 9 boxes on each shelf, then adds 6 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "21",
+            "33",
+            "27",
+            "18"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 3,
+          "prompt": "The pattern 4, 12, 20, 28, ... continues by the same rule. What is the 6th term?",
+          "choices": [
+            "52",
+            "36",
+            "45",
+            "44"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations-application",
+          "standard": "3.OA.5",
+          "difficulty": 3,
+          "prompt": "Which expression is equal to 8 × 2 by the commutative property?",
+          "choices": [
+            "2 × 8",
+            "9 × 2",
+            "8 + 2",
+            "8 × 3"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u04-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u04-l16"
+  }
+}

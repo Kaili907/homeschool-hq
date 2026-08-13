@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l14",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l14",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 14,
+    "courseDay": 104,
+    "phase": "Transfer challenge",
+    "focus": "creating inequalities in one variable",
+    "title": "Transfer challenge: creating inequalities in one variable"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 1,
+          "prompt": "Solve A = 2bh + 5 for h.",
+          "workedSolution": {
+            "steps": [
+              "2bh = A − 5.",
+              "Divide by the whole coefficient 2b.",
+              "h = (A − 5)/(2b)."
+            ],
+            "answer": "h = (A − 5)/(2b)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $15 each and item B costs $23 each. You may spend at most $210 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "a + b ≤ 210",
+            "15a + 23b ≤ 210",
+            "15a + 23b = 210",
+            "15a + 23b ≥ 210"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 130 litres and is filling at 9 litres per minute. After how many minutes does it hold 211 litres?",
+          "choices": [
+            "81 minutes",
+            "9 minutes",
+            "23 minutes",
+            "38 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives the number of buses needed as 4.3. How should this solution be interpreted?",
+          "choices": [
+            "The model must be wrong, because the answer is not a whole number.",
+            "Round down to 4, because 4.3 is closer to 4.",
+            "Report 4.3, because the model is exact.",
+            "Round up to 5; a fractional bus is not viable and rounding down leaves people behind."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $175 call-out fee plus $18 per hour. A job cost $409 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "18 + 175h = 409",
+            "175 + 18h = 409",
+            "175 + 18 + h = 409",
+            "175h + 18 = 409"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = 2bh − 4 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = (A − 4) / (2b)",
+            "h = 2b(A + 4)",
+            "h = (A + 4) / (2b)",
+            "h = A / (2b) + 4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $10 each and item B costs $28 each. You may spend at most $130 in total. Which inequality expresses this constraint on the counts a and b?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 110 litres and is filling at 13 litres per minute. After how many minutes does it hold 175 litres?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives a required side length of −6 metres. How should this solution be interpreted?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l14"
+  }
+}

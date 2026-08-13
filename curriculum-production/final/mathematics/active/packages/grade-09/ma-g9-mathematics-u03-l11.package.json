@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l11",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l11",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 11,
+    "courseDay": 47,
+    "phase": "Performance task planning",
+    "focus": "intersection of two graphs as a solution",
+    "title": "Performance task planning: intersection of two graphs as a solution"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 1,
+          "prompt": "Why may 2(x + 3) = 10 be rewritten as 2x + 6 = 10?",
+          "workedSolution": {
+            "steps": [
+              "The left side was expanded over the sum.",
+              "That is licensed by the distributive property."
+            ],
+            "answer": "the distributive property"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 2,
+          "prompt": "Does the point (-5, 22) lie on the graph of y = -5x − 2?",
+          "choices": [
+            "Only if the graph is extended beyond the plotted window.",
+            "Yes; the coordinates satisfy the equation.",
+            "It cannot be determined without graphing the line.",
+            "No; substituting x = -5 gives y = 23, not 22."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 2,
+          "prompt": "The graphs of f(x) = 5x + 5 and g(x) = 7x + 3 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = -4",
+            "x = -1",
+            "x = -1/6",
+            "x = 1"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve 2x + 9y = -4 for y.",
+          "choices": [
+            "y = -4 − 2x",
+            "y = (-4 + 2x)/9",
+            "y = (-4 − 2x)/9",
+            "y = (2x − -4)/9"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x: -6x − 12 = 7x − 38.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x and state the solution set: 10x − 2 < 21.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 3x = 9 to x = 3. Which property justifies that step?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l11"
+  }
+}

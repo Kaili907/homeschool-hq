@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l02",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 2,
+    "courseDay": 38,
+    "phase": "Concept build A",
+    "focus": "doubling and the twos, fours, and eights chain",
+    "title": "Concept build A: doubling and the twos, fours, and eights chain"
+  },
+  "standards": [
+    "3.OA.5",
+    "3.OA.7"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 1,
+          "prompt": "Which expression is equal to 3 × 7 by the commutative property?",
+          "workedSolution": {
+            "steps": [
+              "Changing the order of the factors keeps the same product.",
+              "3 × 7 = 7 × 3."
+            ],
+            "answer": "7 × 3"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 7 × 8.",
+          "workedSolution": {
+            "steps": [
+              "7 groups of 8: 8, 16, 24, 32, 40, 48, 56.",
+              "7 × 8 = 56."
+            ],
+            "answer": "56"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 6 ÷ 2.",
+          "choices": [
+            "2",
+            "3",
+            "6",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 1,
+          "prompt": "Which expression shows 6 × (4 + 8) rewritten using the distributive property?",
+          "choices": [
+            "6 × 4 × 8",
+            "6 + 4 + 8",
+            "(6 + 4) × (6 + 8)",
+            "(6 × 4) + (6 × 8)"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 4 × 2.",
+          "choices": [
+            "12",
+            "8",
+            "4",
+            "6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 10 ÷ 2.",
+          "choices": [
+            "2",
+            "8",
+            "6",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 4 × (3 + 4) rewritten using the distributive property?",
+          "choices": [
+            "4 × 3 × 4",
+            "(4 + 3) × (4 + 4)",
+            "(4 × 3) + (4 × 4)",
+            "4 + 3 + 4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 9 × 5.",
+          "choices": [
+            "14",
+            "54",
+            "36",
+            "45"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 21 ÷ 3.",
+          "choices": [
+            "8",
+            "18",
+            "3",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 4 × (2 × 7) rewritten using the associative property?",
+          "choices": [
+            "(4 × 2) × 7",
+            "4 × 2 + 7",
+            "4 × 7 × 2 × 2",
+            "(4 + 2) × 7"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l02"
+  }
+}

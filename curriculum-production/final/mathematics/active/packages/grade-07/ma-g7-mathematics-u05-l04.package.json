@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u05-l04",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Percent and Proportional Applications",
+    "dayInUnit": 4,
+    "courseDay": 76,
+    "phase": "Independent application A",
+    "focus": "simple interest",
+    "title": "Independent application A: simple interest"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.EE.3"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "percent-increase-decrease",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "Increase $80 by 25%.",
+          "workedSolution": {
+            "steps": [
+              "Convert the percent to a fraction with denominator 100.",
+              "Use integer cents for money and simplify only after the exact calculation."
+            ],
+            "answer": "$100"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "discount-markup",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "A store marks up $260.00 by 10%. What is the new price?",
+          "choices": [
+            "$286.00",
+            "$287.00",
+            "$26.00",
+            "$260.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "tax-tip",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "A meal costs $260.00 before 25% tax. What is the total?",
+          "choices": [
+            "$325.00",
+            "$326.00",
+            "$130.00",
+            "$260.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "simple-interest",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "Find the simple interest on $400.00 at 5% for 2 years.",
+          "choices": [
+            "$20.00",
+            "$41.00",
+            "$45.00",
+            "$40.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "percent-error",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "The actual value is 600 and the measured value is 720. What is the percent error?",
+          "choices": [
+            "4%",
+            "40%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-percent-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "An item costs $920.00, is discounted 25%, then taxed 10%. What is the final price?",
+          "choices": [
+            "$1012.00",
+            "$760.00",
+            "$690.00",
+            "$759.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "percent-increase-decrease",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "Increase $460.00 by 5%.",
+          "choices": [
+            "$484.00",
+            "$483.00",
+            "$23.00",
+            "$437.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "discount-markup",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A store discounts $800.00 by 20%. What is the new price?",
+          "choices": [
+            "$800.00",
+            "$960.00",
+            "$640.00",
+            "$641.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "tax-tip",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A meal costs $120.00 before 20% tax. What is the total?",
+          "choices": [
+            "$145.00",
+            "$144.00",
+            "$96.00",
+            "$120.00"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "simple-interest",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "Find the simple interest on $580.00 at 25% for 2 years.",
+          "choices": [
+            "$291.00",
+            "$315.00",
+            "$870.00",
+            "$290.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "percent-error",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "The actual value is 2200 and the measured value is 2640. What is the percent error?",
+          "choices": [
+            "4%",
+            "21%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-percent-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "An item costs $380.00, is discounted 25%, then taxed 10%. What is the final price?",
+          "choices": [
+            "$323.00",
+            "$313.50",
+            "$285.00",
+            "$314.50"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u05-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u05-l04"
+  }
+}

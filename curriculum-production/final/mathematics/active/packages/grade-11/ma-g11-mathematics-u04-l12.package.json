@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u04-l12",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u04-l12",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Exponential, Logarithmic, and Series Models",
+    "dayInUnit": 12,
+    "courseDay": 66,
+    "phase": "Performance task build",
+    "focus": "financial and growth applications of both tools",
+    "title": "Performance task build: financial and growth applications of both tools"
+  },
+  "standards": [
+    "F-LE.4",
+    "A-SSE.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 2,
+          "prompt": "Find the sum of the first 3 terms of the geometric series with first term 5 and common ratio 3.",
+          "choices": [
+            "65",
+            "15",
+            "45",
+            "135"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "An investment of $2900 grows by 15% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "5 years",
+            "15 years",
+            "8 years",
+            "7 years"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "Evaluate log_5(125).",
+          "choices": [
+            "25",
+            "125",
+            "3",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Solve 3^x = 729 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = 729/3 = 243",
+            "x = log_729(3) = 1/6",
+            "x = log_3(729) = 7",
+            "x = log_3(729) = 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 3,
+          "prompt": "Find the sum of the first 4 terms of the geometric series with first term 4 and common ratio 4.",
+          "choices": [
+            "256",
+            "340",
+            "1024",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "An investment of $900 grows by 6% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "15 years",
+            "14 years",
+            "17 years",
+            "12 years"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Evaluate log_10(1000000).",
+          "choices": [
+            "10",
+            "6",
+            "1000000",
+            "100000"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Solve 3^x = 27 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = log_3(27) = 4",
+            "x = log_27(3) = 1/3",
+            "x = 27/3 = 9",
+            "x = log_3(27) = 3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 3,
+          "prompt": "Find the sum of the first 6 terms of the geometric series with first term 8 and common ratio 4.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "An investment of $1500 grows by 4% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u04-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u04-l12"
+  }
+}

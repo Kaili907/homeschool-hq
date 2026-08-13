@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u10-l18",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u10-l18",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Statistical Inference Capstone",
+    "dayInUnit": 18,
+    "courseDay": 180,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "comparing two treatments and evaluating published reports",
+    "title": "Publication, presentation, or reflection: comparing two treatments and evaluating published reports"
+  },
+  "standards": [
+    "S-ID.4",
+    "S-IC.1",
+    "S-IC.2",
+    "S-IC.3",
+    "S-IC.4",
+    "S-IC.5",
+    "S-IC.6",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "margin-of-error-interpretation",
+          "standard": "S-IC.4",
+          "difficulty": 1,
+          "prompt": "n = 400, sample proportion 55%. Margin and interval?",
+          "workedSolution": {
+            "steps": [
+              "1/√400 = 0.05 = 5%.",
+              "55% ± 5% gives 50% to 60%."
+            ],
+            "answer": "±5%, giving 50% to 60%"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "simulation-based-significance",
+          "standard": "S-IC.5",
+          "difficulty": 2,
+          "prompt": "In 1000 simulations under the assumption of no difference, 14 produced a result at least as extreme as the one observed. What should be concluded?",
+          "choices": [
+            "The observed result is not statistically significant: it occurred in 1.4% of simulations, which is not unusual.",
+            "The observed result is statistically significant: it occurred in only 1.4% of simulations, below the usual 5% threshold.",
+            "The simulation proves that there is no difference.",
+            "The simulation proves that the observed difference is real."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "normal-empirical-rule",
+          "standard": "S-ID.4",
+          "difficulty": 2,
+          "prompt": "A quantity is approximately normal with mean 54 and standard deviation 6. Approximately what percentage of values lie between 42 and 66?",
+          "choices": [
+            "about 68%",
+            "about 99.7%",
+            "about 95%",
+            "about 50%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "study-design-and-inference",
+          "standard": "S-IC.3",
+          "difficulty": 3,
+          "prompt": "A researcher runs an observational study of volunteers who chose their own group. What kind of conclusion does this design support?",
+          "choices": [
+            "It supports a causal conclusion about the treatment, within the population studied.",
+            "It supports both generalisation and causation, provided the sample is large.",
+            "It supports generalising from the sample to the population, but not a causal claim.",
+            "It supports neither generalisation nor causation, because self-selection can bias both."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "margin-of-error-interpretation",
+          "standard": "S-IC.4",
+          "difficulty": 3,
+          "prompt": "A random sample of 100 people gives a sample proportion of 55%. Using the conservative margin of error 1/√n, give the approximate margin of error and the resulting interval.",
+          "choices": [
+            "±10%, giving 45% to 65%",
+            "±20%, giving 35% to 75%",
+            "±55%, giving 0% to 110%",
+            "±1%, giving 54% to 56%"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "simulation-based-significance",
+          "standard": "S-IC.5",
+          "difficulty": 3,
+          "prompt": "In 100 simulations under the assumption of no difference, 2 produced a result at least as extreme as the one observed. What should be concluded?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "normal-empirical-rule",
+          "standard": "S-ID.4",
+          "difficulty": 3,
+          "prompt": "A quantity is approximately normal with mean 67 and standard deviation 20. Approximately what percentage of values lie between 27 and 107?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u10-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u10-l18"
+  }
+}

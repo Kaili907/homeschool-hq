@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u01-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u01-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Place Value to One Million",
+    "dayInUnit": 17,
+    "courseDay": 17,
+    "phase": "Targeted correction and reassessment",
+    "focus": "comparison and rounding",
+    "title": "Targeted correction and reassessment: comparison and rounding"
+  },
+  "standards": [
+    "4.NBT.2",
+    "4.NBT.3"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 48,213 ___ 48,129",
+          "workedSolution": {
+            "steps": [
+              "Both have 4 in the ten thousands place.",
+              "Compare the thousands: 8 vs 8, tie.",
+              "Compare the hundreds: 2 vs 1.",
+              "48,213 > 48,129."
+            ],
+            "answer": ">"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 583,204 to the nearest 10,000.",
+          "workedSolution": {
+            "steps": [
+              "The nearest multiples of 10,000 are 580,000 and 590,000.",
+              "583,204 is closer to 580,000."
+            ],
+            "answer": "580000"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 8992 ___ 4473",
+          "choices": [
+            "<",
+            "Cannot be compared without more information",
+            ">",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 85266 to the nearest 1,000.",
+          "choices": [
+            "85266",
+            "85001",
+            "86000",
+            "85000"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 90754 ___ 27039",
+          "choices": [
+            "Cannot be compared without more information",
+            ">",
+            "<",
+            "="
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 80540 to the nearest 1,000.",
+          "choices": [
+            "81001",
+            "80000",
+            "80540",
+            "81000"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 53225 ___ 98787",
+          "choices": [
+            "<",
+            "Cannot be compared without more information",
+            ">",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 103116 to the nearest 10,000.",
+          "choices": [
+            "110000",
+            "100001",
+            "100000",
+            "103116"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u01-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u01-l17"
+  }
+}

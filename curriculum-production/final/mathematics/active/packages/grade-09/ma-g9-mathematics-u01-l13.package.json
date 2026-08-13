@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l13",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l13",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 13,
+    "courseDay": 13,
+    "phase": "Skill consolidation",
+    "focus": "quantities, units, and derived rates in context",
+    "title": "Skill consolidation: quantities, units, and derived rates in context"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 1,
+          "prompt": "A bottling line operates at 28 grams per second. Express this rate in kilograms per hour.",
+          "choices": [
+            "7.78 kilograms per hour",
+            "28 kilograms per hour",
+            "100.8 kilograms per hour",
+            "1008 kilograms per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 2,
+          "prompt": "Rewrite the square root expression √(x^4) using a rational exponent, in lowest terms.",
+          "choices": [
+            "4x^(1/2)",
+            "x^(8)",
+            "x^(2)",
+            "x^(1/2)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Evaluate 16^(3/2) exactly.",
+          "choices": [
+            "64",
+            "256",
+            "48",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Write √54 in simplest radical form.",
+          "choices": [
+            "6√3",
+            "6√6",
+            "3√6",
+            "18"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 3,
+          "prompt": "Classify the sum of the irrational numbers √5 and −√5 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "undefined",
+            "irrational",
+            "both rational and irrational",
+            "rational"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "Option A delivers 12 units of output over 6 hours. Option B delivers 156 units over 13 hours. Which has the greater output per hour?",
+          "choices": [
+            "Option A",
+            "There is not enough information without knowing the total hours available.",
+            "The two rates are equal.",
+            "Option B"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 3,
+          "prompt": "A rectangular plot measures 27.6 m by 12.7 m, each measured to the nearest tenth of a metre. Report the area to 2 decimal places.",
+          "choices": [
+            "40.30 m²",
+            "350.5200 m²",
+            "80.60 m²",
+            "350.52 m²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 3,
+          "prompt": "You are building a model of the rate at which a reservoir is draining. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "hours per cubic metre",
+            "cubic metres",
+            "cubic metres per hour",
+            "metres per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "An irrigation pump operates at 58 liters per minute. Express this rate in liters per hour.",
+          "choices": [
+            "3480 liters per hour",
+            "34800 liters per hour",
+            "0.97 liters per hour",
+            "58 liters per hour"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 2,
+          "prompt": "Rewrite the index-5 radical expression 5√(x^5) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(1)",
+            "x^(0)",
+            "x^(25)",
+            "5x^(1/5)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Evaluate 9^(3/2) exactly.",
+          "choices": [
+            "12",
+            "14",
+            "27",
+            "81"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Write √117 in simplest radical form.",
+          "choices": [
+            "6√13",
+            "39",
+            "13√3",
+            "3√13"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l13"
+  }
+}

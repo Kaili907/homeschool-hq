@@ -1,0 +1,33 @@
+{
+  "inputs": [
+    {
+      "branch": "mac/g34-math-production-r1",
+      "sha": "c3b24f047b8aebd5e08f9b8022eef20ea187e190",
+      "command": "npx vitest run --config curriculum-production/student-work/mathematics-g34/tooling/vitest.config.mts && npx tsc --noEmit -p curriculum-production/student-work/mathematics-g34/tooling/tsconfig.json",
+      "result": "PASS",
+      "tests": "23/23",
+      "authority": "every Grade 3/4 generated answer exercises an independent recomputation oracle"
+    },
+    {
+      "branch": "mac/math-production-materials-r1",
+      "sha": "314f517f98a5d4a10415676f49576f526cd1f1d9",
+      "command": "npx vitest run --config curriculum-production/student-work/mathematics/tooling/vitest.config.mts && npx tsc --noEmit -p curriculum-production/student-work/mathematics/tooling/tsconfig.json",
+      "result": "PASS",
+      "tests": "22/22",
+      "authority": "high-school answers are oracle-recomputed; Grades 5/7/8 retain canonical generator authority"
+    },
+    {
+      "branch": "mac/g8-math-remediation-integration-r2",
+      "sha": "6cde12f62d2ff432f45c5a6bb45f7d5a5f19b0de",
+      "command": "python3 curriculum-release-corrections/grade8-mathematics-integration/validate.py",
+      "result": "PASS",
+      "tests": "43/43",
+      "authority": "47/47 new keyed answers independently re-derived from recorded parameters"
+    }
+  ],
+  "preservation": {
+    "grades03To04": "evidence/oracle-sources/grades-03-04",
+    "grades05To12": "evidence/oracle-sources/grades-05-12",
+    "grade8Integration": "evidence/grade8-integration/build_student_work.py#oracle"
+  }
+}

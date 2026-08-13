@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u09-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u09-l01",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability and Simulation",
+    "dayInUnit": 1,
+    "courseDay": 145,
+    "phase": "Launch and diagnostic",
+    "focus": "probability scale",
+    "title": "Launch and diagnostic: probability scale"
+  },
+  "standards": [
+    "7.SP.5",
+    "7.SP.6",
+    "7.SP.7",
+    "7.SP.8"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "probability-scale",
+          "standard": "7.SP.5",
+          "difficulty": 1,
+          "prompt": "A probability of 1 means an event is...",
+          "workedSolution": {
+            "steps": [
+              "Identify the favorable outcomes and the total possible outcomes.",
+              "Write the probability as a reduced fraction, or use it to predict or evaluate a count."
+            ],
+            "answer": "certain"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "experimental-probability",
+          "standard": "7.SP.6",
+          "difficulty": 1,
+          "prompt": "A spinner was spun 20 times and landed on blue 2 times. Based on this experiment, what is the experimental probability of landing on blue?",
+          "choices": [
+            "1/10",
+            "1/5",
+            "3/20",
+            "1/20"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "theoretical-probability",
+          "standard": "7.SP.7",
+          "difficulty": 1,
+          "prompt": "A bag has 5 red, 7 blue, and 12 green marbles. If one marble is drawn at random, what is the theoretical probability of drawing red, P(red)?",
+          "choices": [
+            "5/24",
+            "1/2",
+            "23/24",
+            "7/24"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compound-events",
+          "standard": "7.SP.8",
+          "difficulty": 2,
+          "prompt": "A fair coin is flipped and a spinner with 5 equal sections numbered 1 to 5 is spun. What is the probability of getting heads on the coin and landing on 5 on the spinner?",
+          "choices": [
+            "1/5",
+            "1/10",
+            "3/10",
+            "2/5"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "sample-spaces",
+          "standard": "7.SP.8",
+          "difficulty": 2,
+          "prompt": "A meal is made by choosing one main dish from 2 options and one side dish from 3 options. How many different meals are possible?",
+          "choices": [
+            "7",
+            "8",
+            "6",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "simulation-and-model-limitations",
+          "standard": "7.SP.7",
+          "difficulty": 3,
+          "prompt": "A probability model predicts a fair 5-section spinner lands on a chosen section about 16 times in 80 spins. A simulation of 80 spins landed on that section 19 times. How does the simulated count compare to the model's prediction?",
+          "choices": [
+            "exactly as predicted",
+            "4 more than predicted",
+            "2 more than predicted",
+            "3 more than predicted"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "probability-scale",
+          "standard": "7.SP.5",
+          "difficulty": 1,
+          "prompt": "An event has a probability of 9/10. How would you describe how likely the event is to happen?",
+          "choices": [
+            "impossible",
+            "certain",
+            "unlikely",
+            "likely"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "experimental-probability",
+          "standard": "7.SP.6",
+          "difficulty": 2,
+          "prompt": "A spinner was spun 30 times and landed on blue 15 times. Based on this experiment, what is the experimental probability of landing on blue?",
+          "choices": [
+            "17/30",
+            "8/15",
+            "1/2",
+            "13/30"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u09-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u09-l01"
+  }
+}

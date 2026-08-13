@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u03-l14",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u03-l14",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Complex Numbers and Nonlinear Systems",
+    "dayInUnit": 14,
+    "courseDay": 50,
+    "phase": "Transfer challenge",
+    "focus": "addition, subtraction, and multiplication of complex numbers",
+    "title": "Transfer challenge: addition, subtraction, and multiplication of complex numbers"
+  },
+  "standards": [
+    "N-CN.1",
+    "N-CN.2",
+    "N-CN.7",
+    "A-REI.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 1,
+          "prompt": "Solve y = x² and y = 5x − 6.",
+          "workedSolution": {
+            "steps": [
+              "x² − 5x + 6 = 0.",
+              "(x − 2)(x − 3) = 0.",
+              "x = 2, 3."
+            ],
+            "answer": "2, 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 3,
+          "prompt": "Simplify i^25.",
+          "choices": [
+            "−1",
+            "i",
+            "−i",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (4 + 6i)(5 + 7i).",
+          "choices": [
+            "62 + 58i",
+            "20 + 42i",
+            "-22 + 58i",
+            "-22 − 2i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 3,
+          "prompt": "Solve x^2 + 2x + 37 = 0 over the complex numbers.",
+          "choices": [
+            "x = -1 or x = 1",
+            "x = -1 + 6i only",
+            "x = -1 + 6i or x = -1 − 6i",
+            "x = 1 + 6i or x = 1 − 6i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = -3x + 10. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-5, 2",
+            "-2, 5",
+            "-4, 3",
+            "-3, 10"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 3,
+          "prompt": "Simplify i^59.",
+          "choices": [
+            "i",
+            "−i",
+            "−1",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (1 + 5i)(-4 + 8i).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 3,
+          "prompt": "Solve x^2 - 12x + 52 = 0 over the complex numbers.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = -9x − 20. Give the x-coordinates of the intersection points in increasing order.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u03-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u03-l14"
+  }
+}

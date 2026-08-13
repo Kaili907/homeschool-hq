@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u04-l08",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u04-l08",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Properties, Patterns, and Two-Step Problems",
+    "dayInUnit": 8,
+    "courseDay": 62,
+    "phase": "Error analysis and repair",
+    "focus": "stopped-at-step-one errors",
+    "title": "Error analysis and repair: stopped-at-step-one errors"
+  },
+  "standards": [
+    "3.OA.8",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 1,
+          "prompt": "A theater sets up 5 rows of 8 chairs, then adds 6 more chairs. How many chairs in all?",
+          "workedSolution": {
+            "steps": [
+              "5 × 8 = 40.",
+              "40 + 6 = 46."
+            ],
+            "answer": "46"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 1,
+          "prompt": "A store arranges 5 shelves with 4 boxes on each shelf, then adds 6 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "15",
+            "20",
+            "14",
+            "26"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 1,
+          "prompt": "A store arranges 3 shelves with 3 boxes on each shelf, then sells 3 boxes from the display. How many boxes are left?",
+          "choices": [
+            "9",
+            "6",
+            "12",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 9 shelves with 6 boxes on each shelf, then sells 3 boxes from the display. How many boxes are left?",
+          "choices": [
+            "51",
+            "18",
+            "54",
+            "57"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 7 shelves with 3 boxes on each shelf, then sells 3 boxes from the display. How many boxes are left?",
+          "choices": [
+            "24",
+            "13",
+            "18",
+            "21"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 8 shelves with 4 boxes on each shelf, then sells 7 boxes from the display. How many boxes are left?",
+          "choices": [
+            "39",
+            "32",
+            "25",
+            "19"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 3 shelves with 6 boxes on each shelf, then sells 4 boxes from the display. How many boxes are left?",
+          "choices": [
+            "14",
+            "18",
+            "22",
+            "13"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A store arranges 5 shelves with 7 boxes on each shelf, then sells 5 boxes from the display. How many boxes are left?",
+          "choices": [
+            "17",
+            "40",
+            "30",
+            "35"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u04-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u04-l08"
+  }
+}

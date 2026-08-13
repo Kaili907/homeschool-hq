@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u03-l16",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u03-l16",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multi-Digit Multiplication",
+    "dayInUnit": 16,
+    "courseDay": 52,
+    "phase": "Unit assessment",
+    "focus": "standard multiplication algorithm",
+    "title": "Unit assessment: standard multiplication algorithm"
+  },
+  "standards": [
+    "5.NBT.5",
+    "5.OA.1",
+    "5.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use the standard multiplication algorithm to calculate 895 × 9.",
+          "choices": [
+            "0",
+            "8055",
+            "8046",
+            "8064"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 1,
+          "prompt": "Estimate 62 × 33 by rounding 62 to the nearest ten and 33 to the nearest ten.",
+          "choices": [
+            "1980",
+            "1200",
+            "1800",
+            "1900"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "write-grouped-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Multiply 8 by 16. Then add 11 to the product. Which numerical expression represents the calculation?",
+          "choices": [
+            "8 + (16 × 11)",
+            "(8 + 16) × 11",
+            "8 × (16 + 11)",
+            "(8 × 16) + 11"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-grouped-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate: [19 + (6 × 3)] × 6",
+          "choices": [
+            "222",
+            "212",
+            "221",
+            "232"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Without evaluating it, which statement describes (23 × 11) + 5?",
+          "choices": [
+            "Add 23 and the product of 11 and 5.",
+            "Multiply the sum of 23 and 11 by 5.",
+            "Multiply 23 by the sum of 11 and 5.",
+            "Add 5 to the product of 23 and 11."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "For 6 event days, a booth sells 32 tickets each day at $9 per ticket. What projected revenue will the booth earn?",
+          "choices": [
+            "$1728",
+            "$192",
+            "$1737",
+            "$288"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Maya has 972 cards and Leo has 81 cards. How many times as many cards does Maya have as Leo?",
+          "choices": [
+            "13 times",
+            "891 times",
+            "81 times",
+            "12 times"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "area-model-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "An area model for 2226 × 84 splits 2226 into 2000 + 200 + 20 + 6 and 84 into 80 + 4. What total product does the model represent?",
+          "choices": [
+            "186900",
+            "17808",
+            "189210",
+            "186984"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "partial-products",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use partial products to calculate 2583 × 75. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?",
+          "choices": [
+            "193710",
+            "193650",
+            "193725",
+            "191142"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use the standard multiplication algorithm to calculate 4358 × 96.",
+          "choices": [
+            "39222",
+            "418368",
+            "418464",
+            "414010"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "A student says 5425 × 827 = 44864750. Round 5425 to the nearest thousand and 827 to the nearest hundred. Is the claim reasonable?",
+          "choices": [
+            "Yes; the rounded estimate is 4000000.",
+            "No; the rounded estimate is 3500000.",
+            "No; the rounded estimate is 4000000.",
+            "Yes; the rounded estimate is 3500000."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "write-grouped-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Add 77 and 14. Then multiply the sum by 4. Which numerical expression represents the calculation?",
+          "choices": [
+            "(77 + 14) × 4",
+            "(77 × 14) + 4",
+            "77 × (14 + 4)",
+            "77 + (14 × 4)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u03-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u03-l16"
+  }
+}

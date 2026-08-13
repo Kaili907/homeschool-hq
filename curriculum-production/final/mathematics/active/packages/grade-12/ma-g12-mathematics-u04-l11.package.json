@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u04-l11",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u04-l11",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "The Complex Plane",
+    "dayInUnit": 11,
+    "courseDay": 65,
+    "phase": "Performance task planning",
+    "focus": "distance and midpoint on the complex plane",
+    "title": "Performance task planning: distance and midpoint on the complex plane"
+  },
+  "standards": [
+    "N-CN.3",
+    "N-CN.4",
+    "N-CN.5",
+    "N-CN.6",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 1,
+          "prompt": "For z = 3 + 4i, give z̄ and |z|.",
+          "workedSolution": {
+            "steps": [
+              "Negate the imaginary part: 3 − 4i.",
+              "|z| = √(9 + 16) = 5."
+            ],
+            "answer": "z̄ = 3 − 4i, |z| = 5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 2,
+          "prompt": "Write −1 − i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus √2, argument 225°",
+            "modulus √2, argument 315°",
+            "modulus √2, argument 45°",
+            "modulus √2, argument 135°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 2,
+          "prompt": "Complex numbers z and w have modulus 3 and 4 and arguments 60° and 60°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 12, argument 120°",
+            "modulus 7, argument 120°",
+            "modulus 12, argument 0°",
+            "modulus 12, argument 3600°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 3,
+          "prompt": "Let z = 6 − 6i and w = 9 − 2i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 7, midpoint 7.5 − 4i",
+            "distance 5, midpoint 7.5 − 4i",
+            "distance 25, midpoint 7.5 − 4i",
+            "distance 5, midpoint 3 + 4i"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 3,
+          "prompt": "For z = 3 + 4i, give the conjugate z̄ and the modulus |z|.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 3,
+          "prompt": "Write 2i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 3,
+          "prompt": "Complex numbers z and w have modulus 5 and 2 and arguments 45° and 30°. Give the modulus and argument of zw.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u04-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u04-l11"
+  }
+}

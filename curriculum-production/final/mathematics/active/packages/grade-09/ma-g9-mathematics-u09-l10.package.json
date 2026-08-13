@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u09-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u09-l10",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "dayInUnit": 10,
+    "courseDay": 154,
+    "phase": "Discussion or problem seminar",
+    "focus": "comparing growth rates over the long run",
+    "title": "Discussion or problem seminar: comparing growth rates over the long run"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 1,
+          "prompt": "In V(t) = 2000(0.9)^t, what is 0.9?",
+          "workedSolution": {
+            "steps": [
+              "It is the multiplier per year.",
+              "90% is retained, so 10% is lost."
+            ],
+            "answer": "the fraction retained each year"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A linear model passes through (5, -26) and (9, -42). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = -4x + 6",
+            "f(x) = -4x − 6",
+            "f(x) = 4x − 6",
+            "f(x) = -6x − 4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 20, 60, 180, 540. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Exponential; successive outputs have a constant ratio of 3.",
+            "Linear; successive outputs differ by a constant 3.",
+            "Neither; the pattern does not repeat.",
+            "Quadratic; the second differences are constant."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A population of 2300 grows by 10% per year. Write the model P(t) and find the population after 3 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 2300(1.1)^t; P(3) ≈ 3367",
+            "P(t) = 2300 + 10t; P(3) ≈ 2330",
+            "P(t) = 2300(0.1)^t; P(3) ≈ 2",
+            "P(t) = 2300(1.1)^t; P(3) ≈ 3061"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 3,
+          "prompt": "Quantity A grows by 106 units each year. Quantity B doubles or triples each year, with ratio 3, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "A stays ahead permanently because 106 is larger than 3.",
+            "The two grow at the same eventual rate.",
+            "B exceeds A only if B starts larger than A."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 3,
+          "prompt": "An asset's value is modelled by V(t) = 3800(0.9)^t, with t in years. What does 3800 represent?",
+          "choices": [
+            "the total value lost over the asset's life",
+            "the fraction of value retained each year, 0.9, meaning a 10% annual loss",
+            "the value of the asset when it was new, $3800",
+            "the number of years until the asset is worthless"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (5, -41) and (10, -86). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = 4x − 9",
+            "f(x) = 9x + 4",
+            "f(x) = -9x + 4",
+            "f(x) = -9x − 4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 4, 20, 100, 500. Is the relationship linear or exponential, and why?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A population of 2900 grows by 9% per year. Write the model P(t) and find the population after 7 years, to the nearest whole number.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u09-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u09-l10"
+  }
+}

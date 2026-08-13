@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l05",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 5,
+    "courseDay": 167,
+    "phase": "Concept model B",
+    "focus": "fitting a function to bivariate data and assessing fit with residual plots",
+    "title": "Concept model B: fitting a function to bivariate data and assessing fit with residual plots"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 1,
+          "prompt": "For ŷ = 4x + 60, interpret the slope where x is hours studied.",
+          "workedSolution": {
+            "steps": [
+              "Slope is change in y per unit x.",
+              "One more hour is associated with about 4 more points."
+            ],
+            "answer": "about 4 more points per hour"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 2,
+          "prompt": "Ice cream sales correlate with drowning rates. Does ice cream cause drowning?",
+          "workedSolution": {
+            "steps": [
+              "Both rise in hot weather.",
+              "A lurking variable explains the association."
+            ],
+            "answer": "No; a third variable explains it"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 2,
+          "prompt": "A data set records 9, 2, 18, 13, 17. Give the mean and the median.",
+          "choices": [
+            "mean 12, median 13",
+            "mean 11.8, median 12",
+            "mean 13, median 11.8",
+            "mean 11.8, median 13"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 2,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 181 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "The median rises sharply while the mean changes little.",
+            "Both the mean and the median rise sharply."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 2,
+          "prompt": "A two-way table has row 1: 13 yes, 5 no; row 2: 22 yes, 16 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "13/35",
+            "13/56",
+            "5/18",
+            "13/18"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 2,
+          "prompt": "A least-squares line for a data set is ŷ = 2x + 18, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "The predicted value is 2 test points when x is 0.",
+            "Each additional hour studied causes an increase of exactly 2 test points.",
+            "Each additional test points is associated with 2 more hour studieds.",
+            "Each additional hour studied is associated with an increase of about 2 test points."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 2,
+          "prompt": "Towns with more fire engines report more fire damage. What conclusion is justified?",
+          "choices": [
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "A strong correlation always establishes causation when the sample is large."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 37, 16, 28, 31, 24, 35, 6. Give the mean and the median.",
+          "choices": [
+            "mean 25.29, median 25",
+            "mean 25, median 28",
+            "mean 28, median 25.29",
+            "mean 25.29, median 28"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 385 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 2,
+          "prompt": "A two-way table has row 1: 5 yes, 21 no; row 2: 30 yes, 10 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "1/7",
+            "5/66",
+            "21/26",
+            "5/26"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 15x + 5, where x is measured in kilometre travelleds and y in litres of fuel. Interpret the slope.",
+          "choices": [
+            "Each additional kilometre travelled causes an increase of exactly 15 litres of fuel.",
+            "Each additional kilometre travelled is associated with an increase of about 15 litres of fuel.",
+            "Each additional litres of fuel is associated with 15 more kilometre travelleds.",
+            "The predicted value is 15 litres of fuel when x is 0."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l05"
+  }
+}

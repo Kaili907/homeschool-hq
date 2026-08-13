@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u06-l14",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u06-l14",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Systems of Linear Equations",
+    "dayInUnit": 14,
+    "courseDay": 108,
+    "phase": "Transfer challenge",
+    "focus": "graphing systems",
+    "title": "Transfer challenge: graphing systems"
+  },
+  "standards": [
+    "8.EE.8"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "intersection-from-two-tables",
+          "standard": "8.EE.8a",
+          "difficulty": 1,
+          "prompt": "Relationship A: x: 0, 1, 2, 3 y: 1, 3, 5, 7. Relationship B: x: 0, 1, 2, 3 y: 7, 6, 5, 4. At which x-value do the two relationships have the same y-value?",
+          "workedSolution": {
+            "steps": [
+              "Compare the y-values in each table row by row.",
+              "At x = 2, Relationship A gives 5 and Relationship B also gives 5.",
+              "No other row has matching y-values, so x = 2 is the answer."
+            ],
+            "answer": "2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-quadrant-of-intersection",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Solve the system: y = -x + 15 and y = -9x + 143. In which quadrant does the intersection point lie, or does it lie on an axis?",
+          "choices": [
+            "Quadrant IV",
+            "Quadrant II",
+            "Quadrant I",
+            "Quadrant III"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-substitution",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Solve the system:\ny = -5x + 19\n10x - 7y = 47\nUse substitution to find the solution (x, y).",
+          "choices": [
+            "(5, -1)",
+            "(3, -1)",
+            "(4, -1)",
+            "(4, 0)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-elimination",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Solve the system:\n9x + 3y = -114\n-9x - y = 92\nUse elimination to find the solution (x, y).",
+          "choices": [
+            "(-9, -11)",
+            "(-8, -11)",
+            "(-10, -11)",
+            "(-9, -10)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-solution-count",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Classify the system: y = 6x + 17 and y = 6x - 17. Does it have one solution, no solution, or infinitely many solutions?",
+          "choices": [
+            "no solution",
+            "one solution",
+            "infinitely many solutions"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-equivalent-or-inconsistent-equation",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "The reference equation is y = 2x + 23. Which of these equations, paired with the reference, would give the system infinitely many solutions?",
+          "choices": [
+            "18x + 3y = 87",
+            "-6x + 3y = 63",
+            "4x - 2y = -46",
+            "8x - 2y = 70"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "system-from-context-solve",
+          "standard": "8.EE.8c",
+          "difficulty": 3,
+          "prompt": "Plan A charges a $60 flat fee plus $7 per month. Plan B charges a $50 flat fee plus $9 per month. After how many months do the two plans cost the same, and what is that cost?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "interpret-context-solution",
+          "standard": "8.EE.8c",
+          "difficulty": 3,
+          "prompt": "Plan A charges a $52 flat fee plus $14 per week. Plan B charges a $88 flat fee plus $2 per week. The solution to the system is (3, 94). What does this solution represent?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "check-solution-against-system",
+          "standard": "8.EE.8",
+          "difficulty": 3,
+          "prompt": "System: y = -6x - 78 and y = -8x - 104. Does the point (-12, -5) satisfy both equations, fail one, or fail both?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u06-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u06-l14"
+  }
+}

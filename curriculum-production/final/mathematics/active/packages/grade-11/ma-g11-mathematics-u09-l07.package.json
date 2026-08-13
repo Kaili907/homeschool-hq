@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u09-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u09-l07",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability Rules and Interpretation",
+    "dayInUnit": 7,
+    "courseDay": 151,
+    "phase": "Investigation or close reading",
+    "focus": "everyday examples of conditional probability and independence",
+    "title": "Investigation or close reading: everyday examples of conditional probability and independence"
+  },
+  "standards": [
+    "S-CP.5",
+    "S-CP.6",
+    "S-CP.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 1,
+          "prompt": "P(A and B) = 3/20, P(B) = 5/20. Find P(A|B).",
+          "workedSolution": {
+            "steps": [
+              "Divide: (3/20)/(5/20) = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "Given P(A) = 4/20, P(B) = 8/20, and P(A and B) = 3/20, find P(A or B) in lowest terms.",
+          "choices": [
+            "9/20",
+            "3/4",
+            "-1/20",
+            "3/5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, P(has the condition | tested positive) is much smaller than P(tested positive | has the condition). What is the correct interpretation?",
+          "choices": [
+            "The relationship proves that one event causes the other.",
+            "The two conditional probabilities condition on different events, so they need not be close; a rare condition makes the first much smaller.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The two events are mutually exclusive."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "A box holds 10 items, of which 4 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "3/25",
+            "2/15",
+            "4/25",
+            "2/5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 42/100 and P(B) = 90/100, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "189/500",
+            "15/7",
+            "7/15",
+            "21/50"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 29/100, P(B) = 27/100, and P(A and B) = 20/100, find P(A or B) in lowest terms.",
+          "choices": [
+            "11/50",
+            "9/25",
+            "19/25",
+            "14/25"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, P(passes | attended the workshop) is higher than P(passes) overall. What is the correct interpretation?",
+          "choices": [
+            "The relationship proves that one event causes the other.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "Attendance and passing are associated, though this alone does not show that the workshop caused the improvement.",
+            "The two events are mutually exclusive."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 3,
+          "prompt": "A box holds 16 items, of which 7 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 3,
+          "prompt": "Given P(A and B) = 7/100 and P(B) = 8/100, find P(A | B) as a fraction in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u09-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u09-l07"
+  }
+}

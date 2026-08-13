@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l02",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 2,
+    "courseDay": 38,
+    "phase": "Concept build A",
+    "focus": "interpreting a multiplication equation as a comparison",
+    "title": "Concept build A: interpreting a multiplication equation as a comparison"
+  },
+  "standards": [
+    "4.OA.1"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank: 24 is ___ times as many as 6.",
+          "workedSolution": {
+            "steps": [
+              "? × 6 = 24.",
+              "24 ÷ 6 = 4."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank so the sentence is true: 8 is ___ times as many as 2.",
+          "choices": [
+            "8",
+            "4",
+            "2",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank so the sentence is true: 6 is ___ times as many as 2.",
+          "choices": [
+            "2",
+            "4",
+            "6",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 33 is ___ times as many as 11.",
+          "choices": [
+            "33",
+            "11",
+            "3",
+            "22"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank so the sentence is true: 12 is ___ times as many as 2.",
+          "choices": [
+            "6",
+            "2",
+            "12",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 42 is ___ times as many as 7.",
+          "choices": [
+            "35",
+            "7",
+            "6",
+            "42"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 55 is ___ times as many as 11.",
+          "choices": [
+            "5",
+            "11",
+            "55",
+            "44"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank so the sentence is true: 12 is ___ times as many as 4.",
+          "choices": [
+            "4",
+            "3",
+            "8",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 21 is ___ times as many as 7.",
+          "choices": [
+            "21",
+            "3",
+            "14",
+            "7"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l02"
+  }
+}

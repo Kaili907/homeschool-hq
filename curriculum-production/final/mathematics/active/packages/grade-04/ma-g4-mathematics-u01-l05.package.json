@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u01-l05",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Place Value to One Million",
+    "dayInUnit": 5,
+    "courseDay": 5,
+    "phase": "Independent evidence A",
+    "focus": "expanded form and number names",
+    "title": "Independent evidence A: expanded form and number names"
+  },
+  "standards": [
+    "4.NBT.1",
+    "4.NBT.2"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence A",
+    "profile": "independent-evidence",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 1,
+          "prompt": "The digit 3 is in the thousands place in one number, and the digit 3 is in the hundreds place in another. How many times as great is the first?",
+          "workedSolution": {
+            "steps": [
+              "Thousands is one place left of hundreds.",
+              "Each place is 10 times the place to its right.",
+              "The first digit is 10 times as great."
+            ],
+            "answer": "10"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 71581 ___ 16364",
+          "choices": [
+            "=",
+            ">",
+            "Cannot be compared without more information",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 2,
+          "prompt": "A digit 5 is in the ten thousands place in one number, and the digit 5 is in the thousands place in another number. How many times as great is the first digit's value compared to the second?",
+          "choices": [
+            "1",
+            "10",
+            "20",
+            "100"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 85633 ___ 32474",
+          "choices": [
+            ">",
+            "<",
+            "Cannot be compared without more information",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 3,
+          "prompt": "A digit 5 is in the thousands place in one number, and the digit 5 is in the hundreds place in another number. How many times as great is the first digit's value compared to the second?",
+          "choices": [
+            "100",
+            "20",
+            "1",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l05#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 234635 ___ 648124",
+          "choices": [
+            "<",
+            "Cannot be compared without more information",
+            ">",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l05#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 3,
+          "prompt": "A digit 1 is in the hundred thousands place in one number, and the digit 1 is in the ten thousands place in another number. How many times as great is the first digit's value compared to the second?",
+          "choices": [
+            "20",
+            "100",
+            "1",
+            "10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 47042 ___ 10920",
+          "choices": [
+            "<",
+            ">",
+            "=",
+            "Cannot be compared without more information"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 3,
+          "prompt": "A digit 9 is in the ten thousands place in one number, and the digit 9 is in the thousands place in another number. How many times as great is the first digit's value compared to the second?",
+          "choices": [
+            "10",
+            "100",
+            "1",
+            "20"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u01-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u01-l05"
+  }
+}

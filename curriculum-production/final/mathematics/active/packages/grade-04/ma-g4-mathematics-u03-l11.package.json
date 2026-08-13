@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l11",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l11",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 11,
+    "courseDay": 47,
+    "phase": "Concept extension",
+    "focus": "generating a number pattern from a rule and describing a feature the rule does not state",
+    "title": "Concept extension: generating a number pattern from a rule and describing a feature the rule does not state"
+  },
+  "standards": [
+    "4.OA.5"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 1,
+          "prompt": "The pattern 2, 4, 8, 16, ... follows the rule \"multiply by 2 each time.\" What is the 5th term?",
+          "workedSolution": {
+            "steps": [
+              "2, 4, 8, 16, 32.",
+              "The 5th term is 32."
+            ],
+            "answer": "32"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 2,
+          "prompt": "The pattern 7, 14, 28, 56, ... follows the rule \"multiply by 2 each time.\" What is the 5th term?",
+          "choices": [
+            "112",
+            "35",
+            "56",
+            "224"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 7, 15, 23, 31, ... follows the rule \"add 8 each time.\" What is the 6th term?",
+          "choices": [
+            "47",
+            "39",
+            "42",
+            "55"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 2,
+          "prompt": "The pattern 6, 12, 24, 48, ... follows the rule \"multiply by 2 each time.\" What is the 5th term?",
+          "choices": [
+            "96",
+            "192",
+            "48",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 2,
+          "prompt": "The pattern 3, 9, 15, 21, ... follows the rule \"add 6 each time.\" What is the 5th term?",
+          "choices": [
+            "15",
+            "21",
+            "27",
+            "33"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 8, 12, 16, 20, ... follows the rule \"add 4 each time.\" What is the 6th term?",
+          "choices": [
+            "28",
+            "48",
+            "24",
+            "32"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 6, 11, 16, 21, ... follows the rule \"add 5 each time.\" What is the 6th term?",
+          "choices": [
+            "32",
+            "36",
+            "31",
+            "26"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 5, 9, 13, 17, ... follows the rule \"add 4 each time.\" What is the 6th term?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "number-or-shape-pattern",
+          "standard": "4.OA.5",
+          "difficulty": 3,
+          "prompt": "The pattern 2, 4, 8, 16, ... follows the rule \"multiply by 2 each time.\" What is the 6th term?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l11"
+  }
+}

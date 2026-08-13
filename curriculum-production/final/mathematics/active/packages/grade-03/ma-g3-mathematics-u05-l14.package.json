@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u05-l14",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u05-l14",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Understanding Fractions as Numbers",
+    "dayInUnit": 14,
+    "courseDay": 86,
+    "phase": "Performance task: build",
+    "focus": "gallery entries with equal-partition evidence",
+    "title": "Performance task: build: gallery entries with equal-partition evidence"
+  },
+  "standards": [
+    "3.NF.1",
+    "3.NF.2"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A shape is divided into 6 equal parts. 3 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "6/3",
+            "3/5",
+            "3/6",
+            "2/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point that is 1 lengths from 0?",
+          "choices": [
+            "1/6",
+            "1/5",
+            "5/6",
+            "6/1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A shape is divided into 4 equal parts. 1 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "1/3",
+            "2/4",
+            "1/4",
+            "4/1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point that is 2 lengths from 0?",
+          "choices": [
+            "2/6",
+            "2/5",
+            "4/6",
+            "6/2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A shape is divided into 6 equal parts. 4 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "4/6",
+            "3/6",
+            "6/4",
+            "4/5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 3,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point that is 3 lengths from 0?",
+          "choices": [
+            "3/5",
+            "6/3",
+            "3/6",
+            "4/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A shape is divided into 6 equal parts. 5 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "5/5",
+            "5/6",
+            "4/6",
+            "6/5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 3,
+          "prompt": "A number line from 0 to 1 is divided into 8 equal lengths. What fraction names the point that is 4 lengths from 0?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A shape is divided into 8 equal parts. 6 of the parts are shaded. What fraction of the shape is shaded?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u05-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u05-l14"
+  }
+}

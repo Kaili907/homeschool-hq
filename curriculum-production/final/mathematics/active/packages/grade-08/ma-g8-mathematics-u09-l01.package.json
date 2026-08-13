@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u09-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u09-l01",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Volume and Bivariate Data",
+    "dayInUnit": 1,
+    "courseDay": 149,
+    "phase": "Launch and diagnostic",
+    "focus": "volume of cylinders cones and spheres",
+    "title": "Launch and diagnostic: volume of cylinders cones and spheres"
+  },
+  "standards": [
+    "8.G.9",
+    "8.SP.1",
+    "8.SP.2",
+    "8.SP.3",
+    "8.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "cylinder-volume",
+          "standard": "8.G.9",
+          "difficulty": 1,
+          "prompt": "Find the volume of a cylinder with radius 3 and height 5.",
+          "workedSolution": {
+            "steps": [
+              "Identify the quantities and the applicable model.",
+              "Compute using the stated relationship.",
+              "Check that the result answers the question."
+            ],
+            "answer": "45π cubic units"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "cone-volume",
+          "standard": "8.G.9",
+          "difficulty": 1,
+          "prompt": "Find the exact volume of a cone with radius 3 units and height 12 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "36π cubic units",
+            "18π cubic units",
+            "39π cubic units",
+            "108π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "sphere-volume",
+          "standard": "8.G.9",
+          "difficulty": 1,
+          "prompt": "Find the exact volume of a sphere with radius 6 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "72π cubic units",
+            "216π cubic units",
+            "288π cubic units",
+            "864π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-solid-volumes",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "A cylinder and cone each have radius 5 units and height 9 units. Which has the greater volume?",
+          "choices": [
+            "not enough information",
+            "the cone",
+            "they have equal volume",
+            "the cylinder"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-scatter-association",
+          "standard": "8.SP.1",
+          "difficulty": 2,
+          "prompt": "As x increases, y generally increases. What association does this scatter plot describe?",
+          "choices": [
+            "causation",
+            "positive",
+            "none",
+            "negative"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-outlier",
+          "standard": "8.SP.1",
+          "difficulty": 3,
+          "prompt": "Most plotted points follow y = 2x + 1. Of these points, (6, 13), (7, 15), (5, 11), (6, 28), which point is an outlier?",
+          "choices": [
+            "(6, 13)",
+            "(6, 28)",
+            "(7, 15)",
+            "(5, 11)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "line-of-fit-prediction",
+          "standard": "8.SP.2",
+          "difficulty": 1,
+          "prompt": "A line of fit is y = 2x + 1. Predict y when x = 3.",
+          "choices": [
+            "10",
+            "4",
+            "7",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpolation-or-extrapolation",
+          "standard": "8.SP.2",
+          "difficulty": 2,
+          "prompt": "A data set has x-values from 2 through 8. A prediction is made at x = 12. Is this interpolation or extrapolation?",
+          "choices": [
+            "a census",
+            "extrapolation",
+            "interpolation",
+            "causation"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u09-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u09-l01"
+  }
+}

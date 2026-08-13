@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u08-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u08-l05",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Measurement, Data, and Volume",
+    "dayInUnit": 5,
+    "courseDay": 131,
+    "phase": "Concept model B",
+    "focus": "additive volume",
+    "title": "Concept model B: additive volume"
+  },
+  "standards": [
+    "5.MD.1",
+    "5.MD.2",
+    "5.MD.3",
+    "5.MD.4",
+    "5.MD.5"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u08-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "volume-unit-cubes",
+          "standard": "5.MD.3",
+          "difficulty": 1,
+          "prompt": "A rectangular prism is 2 unit cubes long, 3 wide, and 4 high. How many unit cubes fill it?",
+          "workedSolution": {
+            "steps": [
+              "One layer on the base holds 2 × 3 = 6 cubes.",
+              "The prism is 4 layers tall, so it holds 4 copies of that layer: 6 × 4 = 24 cubes.",
+              "Counting cubes measures volume, so the answer is 24 cubic units — the base alone, 6 square units, is only one layer."
+            ],
+            "answer": "24 cubic units"
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "volume-formula",
+          "standard": "5.MD.5",
+          "difficulty": 2,
+          "prompt": "Find the volume of a rectangular prism with length 3, width 4, and height 5 units.",
+          "workedSolution": {
+            "steps": [
+              "The volume of a rectangular prism is V = length × width × height, so all three dimensions are multiplied.",
+              "Multiply the first two: 3 × 4 = 12, the area of the base.",
+              "Multiply that base by the height: 12 × 5 = 60, so V = 60 cubic units."
+            ],
+            "answer": "60 cubic units"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u08-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "additive-volume",
+          "standard": "5.MD.5",
+          "difficulty": 2,
+          "prompt": "An L-shaped solid is decomposed into two non-congruent rectangular prisms sharing a base of 2 by 5 units and having heights 3 and 4 units. What is its combined volume?",
+          "choices": [
+            "40 cubic units",
+            "30 cubic units",
+            "120 cubic units",
+            "70 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-design",
+          "standard": "5.MD.4",
+          "difficulty": 2,
+          "prompt": "A storage box is 3 inches by 2 inches by 7 inches. What is its capacity?",
+          "choices": [
+            "42 cubic inches",
+            "12 cubic inches",
+            "13 cubic inches",
+            "21 cubic inches"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "measurement-conversion",
+          "standard": "5.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 7 feet to inches.",
+          "choices": [
+            "21 inches",
+            "84 inches",
+            "1008 inches",
+            "70 inches"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u08-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-fraction-data",
+          "standard": "5.MD.2",
+          "difficulty": 2,
+          "prompt": "A line plot has 4 marks at 1/4 meter, 2 marks at 1/2 meter, and 3 marks at 3/4 meter. What total length do the marks represent?",
+          "choices": [
+            "2 1/4 meters",
+            "4 1/4 meters",
+            "3 meters",
+            "5 1/4 meters"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "volume-unit-cubes",
+          "standard": "5.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangular prism is 3 unit cubes long, 4 wide, and 7 high. How many unit cubes fill it?",
+          "choices": [
+            "12 cubic units",
+            "84 cubic units",
+            "19 cubic units",
+            "122 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "volume-formula",
+          "standard": "5.MD.5",
+          "difficulty": 3,
+          "prompt": "Find the volume of a rectangular prism with length 6, width 2, and height 5 units.",
+          "choices": [
+            "60 cubic units",
+            "12 cubic units",
+            "13 cubic units",
+            "30 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "additive-volume",
+          "standard": "5.MD.5",
+          "difficulty": 3,
+          "prompt": "An L-shaped solid is decomposed into two non-congruent rectangular prisms sharing a base of 5 by 5 units and having heights 6 and 2 units. What is its combined volume?",
+          "choices": [
+            "18 cubic units",
+            "300 cubic units",
+            "200 cubic units",
+            "150 cubic units"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u08-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "measurement-design",
+          "standard": "5.MD.4",
+          "difficulty": 2,
+          "prompt": "A storage box is 5 inches by 4 inches by 2 inches. What is its capacity?",
+          "choices": [
+            "76 cubic inches",
+            "40 cubic inches",
+            "11 cubic inches",
+            "10 cubic inches"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u08-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-conversion",
+          "standard": "5.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 4 feet to inches.",
+          "choices": [
+            "12 inches",
+            "48 inches",
+            "40 inches",
+            "16 inches"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u08-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u08-l05"
+  }
+}

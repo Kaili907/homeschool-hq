@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l15",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l15",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 15,
+    "courseDay": 177,
+    "phase": "Synthesis and review",
+    "focus": "the mathematical justifications in the capstone design",
+    "title": "Synthesis and review: the mathematical justifications in the capstone design"
+  },
+  "standards": [
+    "4.G.2",
+    "4.G.3",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 1,
+          "prompt": "A triangle where all three sides are the same length is called what kind of triangle?",
+          "choices": [
+            "acute triangle",
+            "right triangle",
+            "obtuse triangle",
+            "equilateral triangle"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 2,
+          "prompt": "How many lines of symmetry does a regular pentagon have?",
+          "choices": [
+            "10",
+            "6",
+            "5",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 2,
+          "prompt": "A triangle where all three angles measure less than 90° is called what kind of triangle?",
+          "choices": [
+            "equilateral triangle",
+            "right triangle",
+            "acute triangle",
+            "obtuse triangle"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a rectangle (non-square) have?",
+          "choices": [
+            "4",
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 3,
+          "prompt": "A triangle where one angle measures exactly 90° is called what kind of triangle?",
+          "choices": [
+            "acute triangle",
+            "equilateral triangle",
+            "right triangle",
+            "obtuse triangle"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a square have?",
+          "choices": [
+            "8",
+            "5",
+            "3",
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 2,
+          "prompt": "A triangle where one angle measures more than 90° is called what kind of triangle?",
+          "choices": [
+            "obtuse triangle",
+            "equilateral triangle",
+            "acute triangle",
+            "right triangle"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 2,
+          "prompt": "How many lines of symmetry does a circle have?",
+          "choices": [
+            "5",
+            "8",
+            "4",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a equilateral triangle have?",
+          "choices": [
+            "3",
+            "6",
+            "4",
+            "2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l15"
+  }
+}

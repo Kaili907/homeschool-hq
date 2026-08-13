@@ -1,0 +1,188 @@
+{
+  "corpusId": "manuel-academy-final-mathematics-r1",
+  "classification": "FINAL_MATH_PRODUCTION_READY",
+  "subject": "mathematics",
+  "grades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "activeSchedulePolicy": "180 lessons per grade; reserve material is never a school-day lesson",
+  "totals": {
+    "activeLessons": 1620,
+    "items": 15937,
+    "gradedItems": 14363,
+    "workedExamples": 1574,
+    "keyedAnswers": 14363
+  },
+  "reserveLessons": 4,
+  "answerAuthority": {
+    "generator-authority": 4914,
+    "recomputed": 9449
+  },
+  "byGrade": [
+    {
+      "grade": 3,
+      "courseId": "ma-g3-mathematics",
+      "activeLessons": 180,
+      "items": 1555,
+      "gradedItems": 1392,
+      "workedExamples": 163,
+      "keyedAnswers": 1392,
+      "answerAuthority": {
+        "recomputed": 1392
+      }
+    },
+    {
+      "grade": 4,
+      "courseId": "ma-g4-mathematics",
+      "activeLessons": 180,
+      "items": 1571,
+      "gradedItems": 1410,
+      "workedExamples": 161,
+      "keyedAnswers": 1410,
+      "answerAuthority": {
+        "recomputed": 1410
+      }
+    },
+    {
+      "grade": 5,
+      "courseId": "ma-g5-mathematics",
+      "activeLessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "answerAuthority": {
+        "generator-authority": 1650
+      }
+    },
+    {
+      "grade": 7,
+      "courseId": "ma-g7-mathematics",
+      "activeLessons": 180,
+      "items": 1818,
+      "gradedItems": 1650,
+      "workedExamples": 168,
+      "keyedAnswers": 1650,
+      "answerAuthority": {
+        "generator-authority": 1650
+      }
+    },
+    {
+      "grade": 8,
+      "courseId": "ma-g8-mathematics",
+      "activeLessons": 180,
+      "items": 1843,
+      "gradedItems": 1661,
+      "workedExamples": 182,
+      "keyedAnswers": 1661,
+      "answerAuthority": {
+        "generator-authority": 1614,
+        "recomputed": 47
+      }
+    },
+    {
+      "grade": 9,
+      "courseId": "ma-g9-mathematics",
+      "activeLessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "answerAuthority": {
+        "recomputed": 1650
+      }
+    },
+    {
+      "grade": 10,
+      "courseId": "ma-g10-mathematics",
+      "activeLessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "answerAuthority": {
+        "recomputed": 1650
+      }
+    },
+    {
+      "grade": 11,
+      "courseId": "ma-g11-mathematics",
+      "activeLessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "answerAuthority": {
+        "recomputed": 1650
+      }
+    },
+    {
+      "grade": 12,
+      "courseId": "ma-g12-mathematics",
+      "activeLessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "answerAuthority": {
+        "recomputed": 1650
+      }
+    }
+  ],
+  "grade8": {
+    "activeDays": 180,
+    "standards": "28/28",
+    "newLessonIds": [
+      "ma-g8-mathematics-u01-l19",
+      "ma-g8-mathematics-u01-l20",
+      "ma-g8-mathematics-u01-l21",
+      "ma-g8-mathematics-u01-l22"
+    ],
+    "reserveLessonIds": [
+      "ma-g8-mathematics-u10-l10",
+      "ma-g8-mathematics-u10-l13",
+      "ma-g8-mathematics-u10-l14",
+      "ma-g8-mathematics-u10-l17"
+    ],
+    "grade9RootBridge": "Grade 9 Unit 1"
+  },
+  "inputs": {
+    "mac/g34-math-production-r1": "c3b24f047b8aebd5e08f9b8022eef20ea187e190",
+    "mac/math-production-materials-r1": "314f517f98a5d4a10415676f49576f526cd1f1d9",
+    "mac/g8-math-remediation-integration-r2": "6cde12f62d2ff432f45c5a6bb45f7d5a5f19b0de",
+    "mac/curriculum-production-gate-h3": "49b3c4b86cc7764627bd4cfbd752222849831abf"
+  },
+  "inputTrees": {
+    "grades_03_04": "c1ce33d39d6d2b3b576d891f4b3fc60533baecd1",
+    "grades_05_12": "9884475ec8a7588a02dca2da5c31f5fe97d63524",
+    "grade_08_integration": "2e08422d85540920b17b0d239a1f6087a6cc9751",
+    "gate_h3_math_semantics": "6f87e247ea0a798b7ac01c8ec64a86ba17284547"
+  },
+  "gateH3": {
+    "semanticsUnchanged": true,
+    "sourceTree": "6f87e247ea0a798b7ac01c8ec64a86ba17284547"
+  },
+  "scheduleSha256": {
+    "grade-03": "5882ff2b23f0aa639af908d6f115bbd6fdd5373a462e9de0bfc0370ed12b6996",
+    "grade-04": "66ec95c565c4bf51894f52d9c9e8d9d73f467506cf9c97c292edd9a6e7d8ca96",
+    "grade-05": "933e53789efdfd67247405a784e73598d0e3338f46fb6dabc65b421c1a99c3c8",
+    "grade-07": "51112f7081ca33cd4e2e9ba2954c14f3251cb3608dcfcd1d42b0e061fed17f72",
+    "grade-08": "1a5658f9b835078c4e1e9c05f69c66a650f52db1b9fe6dfafdbb063804752746",
+    "grade-09": "df103eae2fa0f485b9aa48f293d53fbb3631d3a445df33af013597013dc68f5c",
+    "grade-10": "5aba13b7442b8c58d8c09ada04ef68ce166f3d87b42cfcd3456a15c284f6272e",
+    "grade-11": "d744faa324050af15b24ed055090c9274f89434881e56222c9c9a0da220b8799",
+    "grade-12": "06dab6710a6390ed60137037c2f8e3875154f4d7229c0d1b9d629bcef353abf0"
+  },
+  "schemas": {
+    "grades03To04": "schemas/grades-03-04",
+    "grades05To12": "schemas/grades-05-12"
+  }
+}

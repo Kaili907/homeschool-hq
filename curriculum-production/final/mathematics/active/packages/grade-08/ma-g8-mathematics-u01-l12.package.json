@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l12",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l12",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 12,
+    "courseDay": 12,
+    "phase": "Performance task build",
+    "focus": "precision and estimation",
+    "title": "Performance task build: precision and estimation"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "A square garden has an area of 153 square feet. Between which two consecutive whole numbers of feet is the side length?",
+          "choices": [
+            "12 and 14",
+            "12 and 13",
+            "13 and 14",
+            "10 and 11"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "root-comparison-error-analysis",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "A student claims √95 > 18 because 95 > 18. Which statement correctly analyzes the claim?",
+          "choices": [
+            "The claim cannot be evaluated without a calculator.",
+            "The claim is correct; 95 > 18, so √95 > 18.",
+            "The claim is incorrect; since 95 < 18² = 324, √95 < 18.",
+            "The claim is incorrect; √95 = 18 exactly."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-rational-or-irrational",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "Classify √36 as rational or irrational.",
+          "choices": [
+            "rational",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "closure-classification",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A rational number (9/8) is added to an irrational number (√141). Is the result rational or irrational?",
+          "choices": [
+            "rational",
+            "sometimes rational and sometimes irrational",
+            "irrational",
+            "cannot be determined without computing"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "Write 0.191919... as a fraction in lowest terms.",
+          "choices": [
+            "19/999",
+            "19/99",
+            "19/100",
+            "20/99"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-error-analysis",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A student writes 0.808080... = 80/100. Which statement best analyzes the claim?",
+          "choices": [
+            "The correct fraction is 80/99; the denominator should be 99 (nine repeated once per repeating digit), not 100.",
+            "The correct fraction is 80/99; the numerator should have one extra digit.",
+            "The claim is close; only the sign needs to be corrected.",
+            "The claim is correct; 80/100 equals 0.808080...."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "consecutive-integers-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Between which two consecutive whole numbers does √354 lie?",
+          "choices": [
+            "16 and 17",
+            "19 and 20",
+            "18 and 19",
+            "17 and 18"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "nearest-tenth-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Estimate √343 to the nearest tenth.",
+          "choices": [
+            "18.3",
+            "18.5",
+            "18.6",
+            "18"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "locate-root-on-number-line",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "On the number line, points A, B, C, and D are located at 27, 28, 29, 30. Which point is closest to √793?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "compare-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Compare 1/5 and 2.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l12"
+  }
+}

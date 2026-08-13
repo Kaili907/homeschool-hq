@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l10",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 10,
+    "courseDay": 46,
+    "phase": "Independent evidence B",
+    "focus": "solving unknown-factor equations",
+    "title": "Independent evidence B: solving unknown-factor equations"
+  },
+  "standards": [
+    "3.OA.4",
+    "3.OA.6"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "find-unknown-factor",
+          "standard": "3.OA.4",
+          "difficulty": 1,
+          "prompt": "Find the missing number: 6 × ? = 48",
+          "workedSolution": {
+            "steps": [
+              "48 ÷ 6 = 8.",
+              "Check: 6 × 8 = 48."
+            ],
+            "answer": "8"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "A teacher has 24 crayons to put into cups of 8 crayons each. How many cups are needed?",
+          "choices": [
+            "24",
+            "8",
+            "3",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-factor",
+          "standard": "3.OA.4",
+          "difficulty": 2,
+          "prompt": "Find the missing number: 9 × ? = 54",
+          "choices": [
+            "9",
+            "54",
+            "6",
+            "45"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "A teacher has 72 crayons to put into cups of 9 crayons each. How many cups are needed?",
+          "choices": [
+            "8",
+            "72",
+            "9",
+            "63"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-factor",
+          "standard": "3.OA.4",
+          "difficulty": 3,
+          "prompt": "Find the missing number: 8 × ? = 56",
+          "choices": [
+            "8",
+            "48",
+            "56",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "A teacher has 4 crayons to put into cups of 2 crayons each. How many cups are needed?",
+          "choices": [
+            "3",
+            "2",
+            "4",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-factor",
+          "standard": "3.OA.4",
+          "difficulty": 3,
+          "prompt": "Find the missing number: 7 × ? = 56",
+          "choices": [
+            "56",
+            "49",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "A teacher has 21 crayons to put into cups of 3 crayons each. How many cups are needed?",
+          "choices": [
+            "3",
+            "21",
+            "7",
+            "18"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-factor",
+          "standard": "3.OA.4",
+          "difficulty": 3,
+          "prompt": "Find the missing number: 4 × ? = 20",
+          "choices": [
+            "20",
+            "16",
+            "5",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "A teacher has 36 crayons to put into cups of 4 crayons each. How many cups are needed?",
+          "choices": [
+            "9",
+            "4",
+            "36",
+            "32"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l10"
+  }
+}

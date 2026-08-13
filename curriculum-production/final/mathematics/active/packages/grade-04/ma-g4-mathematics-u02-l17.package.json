@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u02-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u02-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "dayInUnit": 17,
+    "courseDay": 35,
+    "phase": "Targeted correction and reassessment",
+    "focus": "regrouping",
+    "title": "Targeted correction and reassessment: regrouping"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "A school raised $3,200 in September and $2,750 in October, then spent $1,400 on new books. How much remains?",
+          "workedSolution": {
+            "steps": [
+              "3,200 + 2,750 = 5,950.",
+              "5,950 − 1,400 = 4,550."
+            ],
+            "answer": "4550"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "A theater sold 24,861 tickets in week one and 18,957 in week two. How many total?",
+          "workedSolution": {
+            "steps": [
+              "24,861 + 18,957.",
+              "Add each place, regrouping as needed.",
+              "Total: 43,818."
+            ],
+            "answer": "43818"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a concert had 6494 visitors expected, but only 4929 attended. How many fewer people attended than expected?",
+          "choices": [
+            "1565",
+            "565",
+            "11423",
+            "2565"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A charity collected $7436 in the spring and $2087 in the fall, then received an extra $1420 donation. How much money is there in total?",
+          "choices": [
+            "10943",
+            "8856",
+            "9523",
+            "8103"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a stadium raised 45667 dollars on Saturday and 34819 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "10848",
+            "80486",
+            "79486",
+            "81486"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a stadium had 95427 visitors expected, but only 94336 attended. How many fewer people attended than expected?",
+          "choices": [
+            "2091",
+            "1091",
+            "189763",
+            "91"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A charity collected $9060 in the spring and $7486 in the fall, then received an extra $3288 donation. How much money is there in total?",
+          "choices": [
+            "12348",
+            "13258",
+            "16546",
+            "19834"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a concert raised 398795 dollars on Saturday and 363704 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "761499",
+            "762499",
+            "763499",
+            "35091"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u02-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u02-l17"
+  }
+}

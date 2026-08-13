@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l05",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 5,
+    "courseDay": 95,
+    "phase": "Concept model B",
+    "focus": "judging viable and non-viable options in a modeling context",
+    "title": "Concept model B: judging viable and non-viable options in a modeling context"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 1,
+          "prompt": "A tank holds 50 L and fills at 8 L/min. When does it hold 130 L?",
+          "workedSolution": {
+            "steps": [
+              "50 + 8m = 130.",
+              "8m = 80, so m = 10 minutes."
+            ],
+            "answer": "10 minutes"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "A model needs 3.2 vans. How many are required?",
+          "workedSolution": {
+            "steps": [
+              "Vans are whole objects.",
+              "Three vans leave some load uncarried, so four are needed."
+            ],
+            "answer": "4 vans"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A repair service charges a $40 call-out fee plus $7 per hour. A job cost $145 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "7 + 40h = 145",
+            "40h + 7 = 145",
+            "40 + 7h = 145",
+            "40 + 7 + h = 145"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 2,
+          "prompt": "The formula A = 4bh − 3 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = A / (4b) + 3",
+            "h = (A − 3) / (4b)",
+            "h = 4b(A + 3)",
+            "h = (A + 3) / (4b)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "Item A costs $3 each and item B costs $15 each. You may spend at most $180 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "3a + 15b = 180",
+            "3a + 15b ≥ 180",
+            "a + b ≤ 180",
+            "3a + 15b ≤ 180"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A tank holds 200 litres and is filling at 6 litres per minute. After how many minutes does it hold 224 litres?",
+          "choices": [
+            "24 minutes",
+            "4 minutes",
+            "71 minutes",
+            "37 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "A model gives the number of buses needed as 4.3. How should this solution be interpreted?",
+          "choices": [
+            "Report 4.3, because the model is exact.",
+            "The model must be wrong, because the answer is not a whole number.",
+            "Round down to 4, because 4.3 is closer to 4.",
+            "Round up to 5; a fractional bus is not viable and rounding down leaves people behind."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $225 call-out fee plus $19 per hour. A job cost $472 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "225h + 19 = 472",
+            "225 + 19 + h = 472",
+            "19 + 225h = 472",
+            "225 + 19h = 472"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = -7bh − 2 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = (A − 2) / (-7b)",
+            "h = -7b(A + 2)",
+            "h = (A + 2) / (-7b)",
+            "h = A / (-7b) + 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "Item A costs $13 each and item B costs $8 each. You may spend at most $190 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "13a + 8b = 190",
+            "a + b ≤ 190",
+            "13a + 8b ≤ 190",
+            "13a + 8b ≥ 190"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 245 litres and is filling at 15 litres per minute. After how many minutes does it hold 545 litres?",
+          "choices": [
+            "300 minutes",
+            "20 minutes",
+            "36 minutes",
+            "53 minutes"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l05"
+  }
+}

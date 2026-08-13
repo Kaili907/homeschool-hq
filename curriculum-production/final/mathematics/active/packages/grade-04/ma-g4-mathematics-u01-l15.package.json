@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u01-l15",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u01-l15",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Place Value to One Million",
+    "dayInUnit": 15,
+    "courseDay": 15,
+    "phase": "Synthesis and review",
+    "focus": "place value, comparison, and rounding",
+    "title": "Synthesis and review: place value, comparison, and rounding"
+  },
+  "standards": [
+    "4.NBT.1",
+    "4.NBT.2",
+    "4.NBT.3"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 4572 ___ 1846",
+          "choices": [
+            "Cannot be compared without more information",
+            ">",
+            "=",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 33021 to the nearest 1,000.",
+          "choices": [
+            "33000",
+            "34000",
+            "33001",
+            "33021"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 2,
+          "prompt": "A digit 9 is in the hundreds place in one number, and the digit 9 is in the tens place in another number. How many times as great is the first digit's value compared to the second?",
+          "choices": [
+            "100",
+            "20",
+            "10",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 155147 ___ 438800",
+          "choices": [
+            "=",
+            "Cannot be compared without more information",
+            "<",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 269647 to the nearest 10,000.",
+          "choices": [
+            "270000",
+            "260000",
+            "269647",
+            "270001"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 3,
+          "prompt": "A digit 4 is in the ten thousands place in one number, and the digit 4 is in the thousands place in another number. How many times as great is the first digit's value compared to the second?",
+          "choices": [
+            "100",
+            "10",
+            "20",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 38047 ___ 96521",
+          "choices": [
+            ">",
+            "=",
+            "<",
+            "Cannot be compared without more information"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 14206 to the nearest 1,000.",
+          "choices": [
+            "14000",
+            "14206",
+            "15000",
+            "14001"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 3,
+          "prompt": "A digit 7 is in the thousands place in one number, and the digit 7 is in the hundreds place in another number. How many times as great is the first digit's value compared to the second?",
+          "choices": [
+            "100",
+            "1",
+            "10",
+            "20"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u01-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u01-l15"
+  }
+}

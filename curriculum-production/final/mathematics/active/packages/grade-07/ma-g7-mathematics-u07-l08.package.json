@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l08",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l08",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 8,
+    "courseDay": 116,
+    "phase": "Reteach and varied practice",
+    "focus": "area of circles",
+    "title": "Reteach and varied practice: area of circles"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 1,
+          "prompt": "A circle has a radius of 6 ft. What is its exact area?",
+          "workedSolution": {
+            "steps": [
+              "Area is π times the radius squared: A = πr².",
+              "Square the radius: 6² = 36, so A = 36π ft²."
+            ],
+            "answer": "36π ft²"
+          }
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "circumference-area-relationship",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a circumference of 8π m. A circle’s radius equals its circumference divided by 2π. Use this relationship to find the circle’s exact area.",
+          "workedSolution": {
+            "steps": [
+              "Divide the circumference coefficient by 2 to get the radius: 8 ÷ 2 = 4 m.",
+              "Square the radius and multiply by π: A = π(4)² = 16π m²."
+            ],
+            "answer": "16π m²"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "complementary-supplementary-angle",
+          "standard": "7.G.5",
+          "difficulty": 1,
+          "prompt": "Two angles are complementary. One angle measures 60°. What is the measure of the other angle?",
+          "choices": [
+            "30°",
+            "33°",
+            "29°",
+            "20°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "vertical-angles-with-expressions",
+          "standard": "7.G.5",
+          "difficulty": 1,
+          "prompt": "Two lines intersect, forming vertical angles that measure (3x + 4)° and (4x - 5)°. Vertical angles are congruent. Find the value of x and the measure of the angles.",
+          "choices": [
+            "x = 9, each angle measures 41°",
+            "x = 8, each angle measures 28°",
+            "x = 9, each angle measures 31°",
+            "x = 9, each angle measures 21°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "angle-equation-multistep",
+          "standard": "7.G.5",
+          "difficulty": 2,
+          "prompt": "Two angles are supplementary. Their measures are (5x + 14)° and (4x + 103)°. Find the value of x and the measure of each angle.",
+          "choices": [
+            "x = 7, angles measure 49° and 49°",
+            "x = 7, angles measure 49° and 131°",
+            "x = 8, angles measure 54° and 126°",
+            "x = 7, angles measure 131° and 49°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "angles-on-a-line-or-around-a-point",
+          "standard": "7.G.5",
+          "difficulty": 2,
+          "prompt": "Three angles lie along a straight line and measure 3°, 126°, 21°, and x°. What is the value of x?",
+          "choices": [
+            "30°",
+            "40°",
+            "150°",
+            "32°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-of-composite-figure",
+          "standard": "7.G.6",
+          "difficulty": 1,
+          "prompt": "A room shaped like an L is made from a 9-by-6 rectangle with a 1-by-1 rectangular corner cut out. What is the area of the room, in square units?",
+          "choices": [
+            "52",
+            "53",
+            "55",
+            "56"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "missing-dimension-from-area",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangle has an area of 112 square units and a width of 8 units. What is its exact length, in units?",
+          "choices": [
+            "14",
+            "17",
+            "13",
+            "112"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "surface-area-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangular prism has length 14, width 12, and height 5 (all in units). What is its exact surface area, in square units?",
+          "choices": [
+            "596",
+            "599",
+            "298",
+            "595"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 3,
+          "prompt": "What is the exact volume of a rectangular prism with length 16, width 14, and height 12 (units)? Give your answer in cubic units.",
+          "choices": [
+            "2687 cubic units",
+            "2691 cubic units",
+            "2688 cubic units",
+            "2690 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a diameter of 11 1/2 m. What is its exact circumference? Express your answer as a multiple of π.",
+          "choices": [
+            "29/2π m",
+            "25/2π m",
+            "21/2π m",
+            "23/2π m"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l08"
+  }
+}

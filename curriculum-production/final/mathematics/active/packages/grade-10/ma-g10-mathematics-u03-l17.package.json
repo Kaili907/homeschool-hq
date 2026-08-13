@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u03-l17",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u03-l17",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Congruence and Triangle Criteria",
+    "dayInUnit": 17,
+    "courseDay": 53,
+    "phase": "Targeted correction",
+    "focus": "selecting an efficient criterion",
+    "title": "Targeted correction: selecting an efficient criterion"
+  },
+  "standards": [
+    "G-CO.6",
+    "G-CO.7",
+    "G-CO.8",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 1,
+          "prompt": "Two sides and the included angle are congruent. Which criterion?",
+          "workedSolution": {
+            "steps": [
+              "Side, angle between them, side.",
+              "That is SAS."
+            ],
+            "answer": "SAS"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "why-ssa-is-not-a-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 2,
+          "prompt": "Why is SSA not a congruence criterion?",
+          "workedSolution": {
+            "steps": [
+              "The swinging side can meet the ray at two points.",
+              "Two different triangles result."
+            ],
+            "answer": "The configuration is ambiguous"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 1,
+          "prompt": "Triangle ABC is congruent to triangle DEF. In triangle ABC, ∠A = 32° and ∠B = 44°. Find ∠F.",
+          "choices": [
+            "104°",
+            "32°",
+            "44°",
+            "76°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "rigid-motion-defines-congruence",
+          "standard": "G-CO.6",
+          "difficulty": 2,
+          "prompt": "A rigid motion is a transformation that …",
+          "choices": [
+            "preserves distance and angle measure",
+            "preserves area but may change side lengths",
+            "preserves shape but may change size",
+            "maps every figure to a similar figure"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 2,
+          "prompt": "In two triangles, all three pairs of corresponding sides are congruent. Which congruence criterion applies?",
+          "choices": [
+            "SAS",
+            "AAS",
+            "SSS",
+            "ASA"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "why-ssa-is-not-a-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "Two triangles share two pairs of congruent sides and a pair of congruent angles that are not between those sides. Why does this fail to prove congruence?",
+          "choices": [
+            "The angle must be a right angle for any criterion to apply.",
+            "The triangles are congruent, but the criterion is simply named differently.",
+            "The unknown side can close the triangle in two different ways, producing one acute and one obtuse triangle from the same measurements.",
+            "Two sides are never enough information under any circumstances."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 2,
+          "prompt": "Triangle ABC is congruent to triangle DEF. In triangle ABC, ∠A = 37° and ∠B = 32°. Find ∠F.",
+          "choices": [
+            "69°",
+            "37°",
+            "32°",
+            "111°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rigid-motion-defines-congruence",
+          "standard": "G-CO.6",
+          "difficulty": 2,
+          "prompt": "If a sequence of rigid motions maps △ABC onto △DEF, then …",
+          "choices": [
+            "only the corresponding sides are congruent",
+            "every pair of corresponding sides and angles is congruent",
+            "only the corresponding angles are congruent",
+            "the triangles have equal area but need not be congruent"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "In two triangles, the hypotenuses and one pair of legs of two right triangles are congruent. Which congruence criterion applies?",
+          "choices": [
+            "HL",
+            "SSS",
+            "ASA",
+            "SAS"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "In two triangles, two pairs of corresponding angles and the pair of included sides are congruent. Which congruence criterion applies?",
+          "choices": [
+            "SSS",
+            "ASA",
+            "AAS",
+            "SAS"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u03-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u03-l17"
+  }
+}

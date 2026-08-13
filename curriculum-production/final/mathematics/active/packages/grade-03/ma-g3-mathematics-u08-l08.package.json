@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l08",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l08",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 8,
+    "courseDay": 134,
+    "phase": "Error analysis and repair",
+    "focus": "misleading-scale and axis errors",
+    "title": "Error analysis and repair: misleading-scale and axis errors"
+  },
+  "standards": [
+    "3.MD.3",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "A scaled bar graph uses a scale of 5 per symbol. A bar shows 3 symbols. What does that bar represent?",
+          "workedSolution": {
+            "steps": [
+              "3 symbols × 5 per symbol = 15."
+            ],
+            "answer": "15"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "With a scale of 2 per symbol, \"Dogs\" has 6 symbols and \"Cats\" has 4 symbols. How many more dogs than cats?",
+          "workedSolution": {
+            "steps": [
+              "Dogs: 6 × 2 = 12.",
+              "Cats: 4 × 2 = 8.",
+              "12 − 8 = 4."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 2 per symbol. The bar for \"Grapes\" is worth 4 symbols. How many does \"Grapes\" represent?",
+          "choices": [
+            "8",
+            "10",
+            "6",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Red\" has 5 symbols and \"Blue\" has 2 symbols. How many more does \"Red\" have than \"Blue\"?",
+          "choices": [
+            "6",
+            "14",
+            "3",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Birds\" is worth 6 symbols. How many does \"Birds\" represent?",
+          "choices": [
+            "35",
+            "6",
+            "30",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Dogs\" has 9 symbols and \"Cats\" has 5 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "8",
+            "28",
+            "18",
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Red\" is worth 8 symbols. How many does \"Red\" represent?",
+          "choices": [
+            "45",
+            "8",
+            "35",
+            "40"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Apples\" has 3 symbols and \"Bananas\" has 1 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "choices": [
+            "2",
+            "4",
+            "8",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 10 per symbol. The bar for \"Fish\" is worth 2 symbols. How many does \"Fish\" represent?",
+          "choices": [
+            "10",
+            "20",
+            "30",
+            "2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l08"
+  }
+}

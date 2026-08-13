@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u05-l05",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Complex Solutions, Polynomials, and the Binomial Theorem",
+    "dayInUnit": 5,
+    "courseDay": 77,
+    "phase": "Concept model B",
+    "focus": "expanding binomial powers",
+    "title": "Concept model B: expanding binomial powers"
+  },
+  "standards": [
+    "N-CN.8",
+    "N-CN.9",
+    "A-APR.5",
+    "A-APR.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 1,
+          "prompt": "Factor x² + 9 over the complex numbers.",
+          "workedSolution": {
+            "steps": [
+              "9 = −(3i)².",
+              "x² − (3i)² = (x + 3i)(x − 3i)."
+            ],
+            "answer": "(x + 3i)(x − 3i)"
+          }
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 2,
+          "prompt": "How many complex roots does a degree-4 polynomial have?",
+          "workedSolution": {
+            "steps": [
+              "The fundamental theorem gives 4 linear factors.",
+              "So 4 roots with multiplicity."
+            ],
+            "answer": "exactly 4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 2,
+          "prompt": "In the expansion of (x + y)^6, find the coefficient of the term x^4·y^2.",
+          "choices": [
+            "6",
+            "15",
+            "20",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 2,
+          "prompt": "Complete the statement: the sum of two rational expressions …",
+          "choices": [
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "is always a rational expression, because a common denominator can always be formed",
+            "need not be a rational expression, because the denominators may differ",
+            "is always a rational expression, because dividing is multiplying by the reciprocal"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 2,
+          "prompt": "Factor x² + 49 completely over the complex numbers.",
+          "choices": [
+            "(x + 7i)²",
+            "(x + 7)(x − 7)",
+            "(x + 7i)(x − 7i)",
+            "(x + 7i)(x + 7i)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 2,
+          "prompt": "A polynomial with real coefficients has degree 7. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 7, and any non-real roots occur in conjugate pairs",
+            "exactly 6, and any non-real roots occur in conjugate pairs",
+            "exactly 8, and any non-real roots occur in conjugate pairs",
+            "exactly 4, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 2,
+          "prompt": "In the expansion of (x + y)^5, find the coefficient of the term x^2·y^3.",
+          "choices": [
+            "10",
+            "5",
+            "8",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the quotient of two rational expressions, where the divisor is not the zero expression …",
+          "choices": [
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "is always a rational expression, because a common denominator can always be formed",
+            "need not be a rational expression, because the denominators may differ"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 3,
+          "prompt": "Factor x² + 121 completely over the complex numbers.",
+          "choices": [
+            "(x + 11i)²",
+            "(x + 11)(x − 11)",
+            "(x + 11i)(x − 11i)",
+            "(x + 11i)(x + 11i)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 2,
+          "prompt": "A polynomial with real coefficients has degree 4. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 5, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 2, and any non-real roots occur in conjugate pairs",
+            "exactly 4, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 3,
+          "prompt": "In the expansion of (x + y)^7, find the coefficient of the term x^6·y^1.",
+          "choices": [
+            "1",
+            "8",
+            "21",
+            "7"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u05-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u05-l05"
+  }
+}

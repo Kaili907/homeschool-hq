@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u09-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u09-l10",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Random Variables and Probability Distributions",
+    "dayInUnit": 10,
+    "courseDay": 154,
+    "phase": "Discussion or problem seminar",
+    "focus": "graphing a probability distribution",
+    "title": "Discussion or problem seminar: graphing a probability distribution"
+  },
+  "standards": [
+    "S-CP.8",
+    "S-CP.9",
+    "S-MD.1",
+    "S-MD.2",
+    "S-MD.3",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "general-multiplication-rule",
+          "standard": "S-CP.8",
+          "difficulty": 1,
+          "prompt": "P(A) = 4/10, P(B|A) = 5/10. Find P(A and B).",
+          "workedSolution": {
+            "steps": [
+              "(4/10)(5/10) = 20/100.",
+              "= 1/5."
+            ],
+            "answer": "1/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "probability-distribution-table",
+          "standard": "S-MD.1",
+          "difficulty": 2,
+          "prompt": "A trial succeeds with probability 3/10 and is repeated 3 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+          "choices": [
+            "0.7",
+            "0.343",
+            "0.027",
+            "2.1"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "permutations-and-combinations",
+          "standard": "S-CP.9",
+          "difficulty": 3,
+          "prompt": "From 6 distinct items, how many ways are there to choose 2 and arrange them in order?",
+          "choices": [
+            "30",
+            "12",
+            "15",
+            "36"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "expected-value-of-random-variable",
+          "standard": "S-MD.2",
+          "difficulty": 3,
+          "prompt": "A random variable takes values 20, 4, 1, 1 with probabilities 2/10, 4/10, 2/10, 2/10 respectively. Find its expected value.",
+          "choices": [
+            "60",
+            "20",
+            "6.5",
+            "6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "general-multiplication-rule",
+          "standard": "S-CP.8",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 3/10 and P(B | A) = 9/10, find P(A and B) in lowest terms.",
+          "choices": [
+            "6/5",
+            "27/10",
+            "1/3",
+            "27/100"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "probability-distribution-table",
+          "standard": "S-MD.1",
+          "difficulty": 3,
+          "prompt": "A trial succeeds with probability 5/10 and is repeated 4 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+          "choices": [
+            "2",
+            "0.0625",
+            "0.5",
+            "0.0313"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "permutations-and-combinations",
+          "standard": "S-CP.9",
+          "difficulty": 3,
+          "prompt": "From 6 distinct items, how many ways are there to choose 3 and arrange them in order?",
+          "choices": [
+            "120",
+            "20",
+            "18",
+            "216"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "expected-value-of-random-variable",
+          "standard": "S-MD.2",
+          "difficulty": 3,
+          "prompt": "A random variable takes values 19, 13, 3, 11 with probabilities 7/10, 1/10, 1/10, 1/10 respectively. Find its expected value.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "general-multiplication-rule",
+          "standard": "S-CP.8",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 5/10 and P(B | A) = 6/10, find P(A and B) in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u09-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u09-l10"
+  }
+}

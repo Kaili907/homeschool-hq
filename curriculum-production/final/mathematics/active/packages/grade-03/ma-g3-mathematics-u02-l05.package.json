@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l05",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 5,
+    "courseDay": 23,
+    "phase": "Independent evidence A",
+    "focus": "interpreting products in context",
+    "title": "Independent evidence A: interpreting products in context"
+  },
+  "standards": [
+    "3.OA.1"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence A",
+    "profile": "independent-evidence",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 1,
+          "prompt": "There are 4 boxes with 6 pencils in each box. How many pencils in all?",
+          "workedSolution": {
+            "steps": [
+              "4 equal groups of 6 is 4 × 6.",
+              "4 × 6 = 24."
+            ],
+            "answer": "24"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 4 bags with 4 cookies in each bag. How many cookies are there in all?",
+          "choices": [
+            "12",
+            "8",
+            "20",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 5 bags with 4 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "9",
+            "25",
+            "20",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 6 bags with 3 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "9",
+            "18",
+            "12",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 2 bags with 8 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "14",
+            "18",
+            "10",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l05#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 3 bags with 7 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "10",
+            "21",
+            "24",
+            "18"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l05#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 5 bags with 2 stickers in each bag. How many stickers are there in all?",
+          "choices": [
+            "7",
+            "15",
+            "10",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 4 bags with 6 stickers in each bag. How many stickers are there in all?",
+          "choices": [
+            "28",
+            "20",
+            "24",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 5 bags with 3 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "10",
+            "8",
+            "20",
+            "15"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l05"
+  }
+}

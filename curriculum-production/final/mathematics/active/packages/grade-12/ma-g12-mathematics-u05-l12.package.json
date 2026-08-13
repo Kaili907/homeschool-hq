@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u05-l12",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u05-l12",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Complex Solutions, Polynomials, and the Binomial Theorem",
+    "dayInUnit": 12,
+    "courseDay": 84,
+    "phase": "Performance task build",
+    "focus": "closure and arithmetic of rational expressions",
+    "title": "Performance task build: closure and arithmetic of rational expressions"
+  },
+  "standards": [
+    "N-CN.8",
+    "N-CN.9",
+    "A-APR.5",
+    "A-APR.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 2,
+          "prompt": "In the expansion of (x + y)^4, find the coefficient of the term x^1·y^3.",
+          "choices": [
+            "6",
+            "1",
+            "4",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the quotient of two rational expressions, where the divisor is not the zero expression …",
+          "choices": [
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because a common denominator can always be formed",
+            "need not be a rational expression, because the denominators may differ",
+            "is always a rational expression, because numerators and denominators multiply directly"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 2,
+          "prompt": "Factor x² + 36 completely over the complex numbers.",
+          "choices": [
+            "(x + 6i)(x − 6i)",
+            "(x + 6)(x − 6)",
+            "(x + 6i)(x + 6i)",
+            "(x + 6i)²"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 3,
+          "prompt": "A polynomial with real coefficients has degree 6. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 6, and any non-real roots occur in conjugate pairs",
+            "exactly 7, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 5, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 3,
+          "prompt": "In the expansion of (x + y)^6, find the coefficient of the term x^2·y^4.",
+          "choices": [
+            "15",
+            "6",
+            "20",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the product of two rational expressions …",
+          "choices": [
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because a common denominator can always be formed",
+            "need not be a rational expression, because the denominators may differ",
+            "is always a rational expression, because numerators and denominators multiply directly"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 3,
+          "prompt": "Factor x² + 9 completely over the complex numbers.",
+          "choices": [
+            "(x + 3i)(x + 3i)",
+            "(x + 3i)²",
+            "(x + 3)(x − 3)",
+            "(x + 3i)(x − 3i)"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 3,
+          "prompt": "A polynomial with real coefficients has degree 3. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 2, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 4, and any non-real roots occur in conjugate pairs",
+            "exactly 6, and any non-real roots occur in conjugate pairs"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 3,
+          "prompt": "In the expansion of (x + y)^7, find the coefficient of the term x^5·y^2.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the sum of two rational expressions …",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u05-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u05-l12"
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l15",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l15",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 15,
+    "courseDay": 33,
+    "phase": "Synthesis and review",
+    "focus": "operation meanings and relationships",
+    "title": "Synthesis and review: operation meanings and relationships"
+  },
+  "standards": [
+    "3.OA.1",
+    "3.OA.2",
+    "3.OA.6"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 1,
+          "prompt": "6 stickers are shared equally among 2 bags. How many stickers go in each bag?",
+          "choices": [
+            "4",
+            "6",
+            "3",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "Find 49 ÷ 7 by thinking: 7 × ? = 49.",
+          "choices": [
+            "7",
+            "8",
+            "42",
+            "49"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 4 bags with 2 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "4",
+            "8",
+            "12",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "12 seashells are shared equally among 6 bags. How many seashells go in each bag?",
+          "choices": [
+            "12",
+            "8",
+            "6",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 3,
+          "prompt": "Find 16 ÷ 2 by thinking: 2 × ? = 16.",
+          "choices": [
+            "14",
+            "8",
+            "16",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 8 bags with 4 cookies in each bag. How many cookies are there in all?",
+          "choices": [
+            "32",
+            "12",
+            "24",
+            "40"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 2,
+          "prompt": "16 stickers are shared equally among 8 bags. How many stickers go in each bag?",
+          "choices": [
+            "8",
+            "16",
+            "2",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-as-unknown-factor",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "Find 32 ÷ 8 by thinking: 8 × ? = 32.",
+          "choices": [
+            "4",
+            "8",
+            "24",
+            "32"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 6 bags with 9 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "54",
+            "48",
+            "15",
+            "60"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l15"
+  }
+}

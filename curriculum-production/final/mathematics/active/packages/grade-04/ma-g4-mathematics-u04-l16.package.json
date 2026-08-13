@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l16",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l16",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 16,
+    "courseDay": 70,
+    "phase": "Unit assessment",
+    "focus": "multi-digit multiplication",
+    "title": "Unit assessment: multi-digit multiplication"
+  },
+  "standards": [
+    "4.OA.2",
+    "4.OA.3",
+    "4.NBT.5"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 1,
+          "prompt": "Ben read 7 books this year. Priya read 5 times as many books as Ben. How many books did Priya read?",
+          "choices": [
+            "35",
+            "28",
+            "42",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "A theater has 4 sections with 18 seats each, plus 6 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "28",
+            "72",
+            "78",
+            "66"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 7 × 11. Split 11 into 10 and 1.",
+          "choices": [
+            "77",
+            "71",
+            "70",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 5 × 379 using partial products.",
+          "choices": [
+            "1890",
+            "1895",
+            "1500",
+            "1850"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Carlos read 11 books this year. Emma read 6 times as many books as Carlos. How many books did Emma read?",
+          "choices": [
+            "77",
+            "66",
+            "17",
+            "55"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 9 sections with 32 seats each, plus 25 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "313",
+            "288",
+            "66",
+            "263"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 5 × 32. Split 32 into 30 and 2.",
+          "choices": [
+            "160",
+            "150",
+            "10",
+            "152"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 7 × 315 using partial products.",
+          "choices": [
+            "2170",
+            "2198",
+            "2100",
+            "2205"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Ben read 3 books this year. Priya read 8 times as many books as Ben. How many books did Priya read?",
+          "choices": [
+            "11",
+            "21",
+            "27",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 3 sections with 51 seats each, plus 33 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "186",
+            "87",
+            "120",
+            "153"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l16"
+  }
+}

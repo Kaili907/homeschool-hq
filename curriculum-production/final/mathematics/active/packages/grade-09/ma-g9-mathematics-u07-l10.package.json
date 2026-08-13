@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l10",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 10,
+    "courseDay": 118,
+    "phase": "Discussion or problem seminar",
+    "focus": "sequences as functions on the integers",
+    "title": "Discussion or problem seminar: sequences as functions on the integers"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 1,
+          "prompt": "a(1) = 4, a(n) = a(n−1) + 3. Find a(6).",
+          "workedSolution": {
+            "steps": [
+              "Five steps of +3 from 4.",
+              "4 + 15 = 19."
+            ],
+            "answer": "19"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 2,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time crosses the horizontal axis. Which feature is this, and what does it mean?",
+          "choices": [
+            "the average rate of change over the flight",
+            "the maximum, giving the greatest height",
+            "a zero, giving the time the projectile returns to ground level",
+            "the y-intercept, giving the launch height"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -2x² + 5x − 9, find f(3).",
+          "choices": [
+            "0",
+            "-12",
+            "42",
+            "-3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the relation x = y², for real y define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; each input appears once, so each has exactly one output.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "No; the input 1 is paired with both 3 and 8."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 3,
+          "prompt": "A machine starts with 60 components and consumes 5 per hour. It can run for at most 34 hours. What is the domain of C(h) = 60 − 5h in this context?",
+          "choices": [
+            "0 ≤ h ≤ 34",
+            "all real numbers",
+            "0 ≤ h ≤ 12",
+            "0 ≤ h ≤ 60"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = 10 and a(n) = a(n − 1) + 5 for n > 1. Find a(29).",
+          "choices": [
+            "150",
+            "-130",
+            "155",
+            "1450"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time reaches its highest point. Which feature is this, and what does it mean?",
+          "choices": [
+            "the y-intercept, giving the launch height",
+            "the x-intercept, giving the landing time",
+            "an interval of decrease",
+            "the maximum, giving the greatest height and the time it occurs"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -1x² − 8x − 3, find f(1).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the set {(1, 4), (2, 4), (3, 4), (5, 4)} define y as a function of x? Justify the decision.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l10"
+  }
+}

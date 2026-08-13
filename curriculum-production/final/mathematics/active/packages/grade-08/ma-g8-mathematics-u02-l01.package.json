@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u02-l01",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Integer Exponents and Scientific Notation",
+    "dayInUnit": 1,
+    "courseDay": 23,
+    "phase": "Launch and diagnostic",
+    "focus": "laws of integer exponents",
+    "title": "Launch and diagnostic: laws of integer exponents"
+  },
+  "standards": [
+    "8.EE.1",
+    "8.EE.3",
+    "8.EE.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-integer-exponent",
+          "standard": "8.EE.1",
+          "difficulty": 1,
+          "prompt": "Evaluate 5^-2.",
+          "workedSolution": {
+            "steps": [
+              "A negative exponent means reciprocal: 5^-2 = 1/5².",
+              "5² = 25, so 5^-2 = 1/25."
+            ],
+            "answer": "1/25"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "combine-powers",
+          "standard": "8.EE.1",
+          "difficulty": 1,
+          "prompt": "Simplify 2^3 ÷ 2^4.",
+          "choices": [
+            "2^-1",
+            "2^12",
+            "2^-2",
+            "2^7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "power-of-a-power",
+          "standard": "8.EE.1",
+          "difficulty": 1,
+          "prompt": "Simplify (2^0)^3.",
+          "choices": [
+            "2^0",
+            "2^2",
+            "2^1",
+            "2^-1"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-power-of-ten",
+          "standard": "8.EE.1",
+          "difficulty": 2,
+          "prompt": "Evaluate 10^4.",
+          "choices": [
+            "100000",
+            "10000",
+            "0.0001",
+            "1000"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-powers-of-ten",
+          "standard": "8.EE.1",
+          "difficulty": 2,
+          "prompt": "10^0 is how many times as large as 10^-3?",
+          "choices": [
+            "1000",
+            "0.001",
+            "10000",
+            "100"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "convert-scientific-notation",
+          "standard": "8.EE.3",
+          "difficulty": 3,
+          "prompt": "Write 9.4 × 10^2 in standard form.",
+          "choices": [
+            "940",
+            "0.094",
+            "94000",
+            "9400"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u02-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-scientific-notation",
+          "standard": "8.EE.3",
+          "difficulty": 1,
+          "prompt": "Compare 7.7 × 10^3 and 4.4 × 10^-3.",
+          "choices": [
+            "7.7 × 10^3 < 4.4 × 10^-3",
+            "7.7 × 10^3 > 4.4 × 10^-3",
+            "7.7 × 10^3 = 4.4 × 10^-3",
+            "cannot be compared without a calculator"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u02-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "operate-scientific-notation",
+          "standard": "8.EE.4",
+          "difficulty": 2,
+          "prompt": "Divide (5 × 10^0) ÷ (5 × 10^5) and write the result in scientific notation.",
+          "choices": [
+            "1 × 10^-5",
+            "1 × 10^-6",
+            "1 × 10^-4",
+            "5/5 × 10^-5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u02-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u02-l01"
+  }
+}

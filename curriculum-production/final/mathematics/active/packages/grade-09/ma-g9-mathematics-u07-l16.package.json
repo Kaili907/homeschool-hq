@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l16",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l16",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 16,
+    "courseDay": 124,
+    "phase": "Unit assessment",
+    "focus": "sequences as functions on the integers",
+    "title": "Unit assessment: sequences as functions on the integers"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 1,
+          "prompt": "Given f(x) = 2x² + 4x − 5, find f(4).",
+          "choices": [
+            "48",
+            "19",
+            "75",
+            "43"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 1,
+          "prompt": "Does the set {(1, 3), (2, 5), (3, 7), (4, 9)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "Yes; each input appears once, so each has exactly one output.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 1 is paired with both 3 and 8."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 2,
+          "prompt": "A machine starts with 35 components and consumes 7 per hour. It can run for at most 10 hours. What is the domain of C(h) = 35 − 7h in this context?",
+          "choices": [
+            "all real numbers",
+            "0 ≤ h ≤ 5",
+            "0 ≤ h ≤ 10",
+            "0 ≤ h ≤ 35"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 2,
+          "prompt": "A sequence is defined by a(1) = -5 and a(n) = a(n − 1) + 2 for n > 1. Find a(14).",
+          "choices": [
+            "23",
+            "-31",
+            "21",
+            "-140"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 2,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time crosses the horizontal axis. Which feature is this, and what does it mean?",
+          "choices": [
+            "the average rate of change over the flight",
+            "a zero, giving the time the projectile returns to ground level",
+            "the maximum, giving the greatest height",
+            "the y-intercept, giving the launch height"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 2,
+          "prompt": "Given f(x) = 2x² + 4x + 6, find f(-3).",
+          "choices": [
+            "-12",
+            "12",
+            "6",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the set {(1, 4), (2, 4), (3, 4), (5, 4)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; each input appears once, so each has exactly one output.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not.",
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "No; the input 1 is paired with both 3 and 8."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 3,
+          "prompt": "A machine starts with 120 components and consumes 3 per hour. It can run for at most 14 hours. What is the domain of C(h) = 120 − 3h in this context?",
+          "choices": [
+            "all real numbers",
+            "0 ≤ h ≤ 120",
+            "h ≥ 0",
+            "0 ≤ h ≤ 14"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = 3 and a(n) = a(n − 1) − 3 for n > 1. Find a(24).",
+          "choices": [
+            "-216",
+            "72",
+            "-66",
+            "-69"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a cooling object’s temperature flattens out towards a horizontal line. Which feature is this, and what does it mean?",
+          "choices": [
+            "an end behaviour approaching the surrounding temperature",
+            "an interval of increase",
+            "a zero, giving the time the object freezes",
+            "a maximum, giving the hottest temperature"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -3x² + 9x + 9, find f(6).",
+          "choices": [
+            "-45",
+            "387",
+            "-54",
+            "45"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the relation x = y², for real y define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; each input appears once, so each has exactly one output.",
+            "No; the input 1 is paired with both 3 and 8.",
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l16"
+  }
+}

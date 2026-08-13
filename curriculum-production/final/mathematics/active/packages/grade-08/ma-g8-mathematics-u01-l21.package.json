@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l21",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l21",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 21,
+    "courseDay": 21,
+    "phase": "Consolidation and transfer — correction block",
+    "focus": "irrationality of √2 and transfer of root reasoning",
+    "title": "Knowing that √2 is irrational, and consolidating root reasoning"
+  },
+  "standards": [
+    "8.EE.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Consolidation and transfer — correction block",
+    "profile": "consolidation-transfer-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use these examples as the model for the work below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l21#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-root-rational-or-irrational",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Classify √49 and √50 as rational or irrational.",
+          "workedSolution": {
+            "steps": [
+              "49 is a perfect square: 7² = 49, so √49 = 7, which is the ratio 7/1. It is rational.",
+              "50 is not a perfect square: 7² = 49 and 8² = 64, so √50 lies strictly between 7 and 8.",
+              "A square root of a whole number that is not a perfect square cannot be written as a ratio of two integers, so √50 is irrational."
+            ],
+            "answer": "√49 is rational; √50 is irrational"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#ex-02",
+          "kind": "worked-example",
+          "itemType": "exact-side-length-from-area",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "A square has area 18 square units. Give its exact side length and classify it.",
+          "workedSolution": {
+            "steps": [
+              "A side s satisfies s² = 18, and a length is positive, so s = √18.",
+              "18 is not a perfect square: 16 < 18 < 25, so √18 lies strictly between 4 and 5.",
+              "√18 is irrational. A rounded value such as 4.24 is an approximation, not the exact length."
+            ],
+            "answer": "s = √18, irrational"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l21#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-root-rational-or-irrational",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Classify √36 and give the reason.",
+          "choices": [
+            "Rational, because 36 is a perfect square and √36 = 6 = 6/1",
+            "Irrational, because it is written with a radical symbol",
+            "Rational, because 36 is an even number",
+            "Irrational, because 6 is not a fraction"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-root-rational-or-irrational",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Classify √2 and give the reason.",
+          "choices": [
+            "Rational, because √2 is about 1.41",
+            "Irrational, because 2 is not a perfect square and the decimal expansion of √2 never terminates and never repeats",
+            "Rational, because 2 is a whole number",
+            "Irrational, because 2 is an even number"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-expansion-of-irrational",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Which statement about the decimal expansion of √2 is correct?",
+          "choices": [
+            "It terminates after several digits",
+            "It repeats a fixed block of digits forever",
+            "It never terminates and never repeats",
+            "It has no decimal expansion at all"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "ratio-of-integers-test",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "Which single fact, if someone found it, would show that √2 is NOT irrational?",
+          "choices": [
+            "Whole numbers a and b, with b ≠ 0, satisfying (a/b)² = 2",
+            "A decimal approximation of √2 accurate to twenty places",
+            "A calculation showing 1.41² is close to 2",
+            "An argument showing √2 lies between 1 and 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work these on your own. Report exact values wherever an exact value exists.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l21#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-root-rational-or-irrational",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Classify √121 and give the reason.",
+          "choices": [
+            "Irrational, because it is a square root",
+            "Rational, because 11² = 121, so √121 = 11",
+            "Rational, because 121 is an odd number",
+            "Irrational, because 121 is greater than 100"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-root-rational-or-irrational",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Classify √120 and give the reason.",
+          "choices": [
+            "Rational, because 120 is a whole number",
+            "Rational, because √120 is about 10.95",
+            "Irrational, because 120 lies strictly between the perfect squares 100 and 121",
+            "Irrational, because 120 is an even number"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-cube-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Classify ∛64 and give the reason.",
+          "choices": [
+            "Rational, because 4³ = 64, so ∛64 = 4",
+            "Irrational, because it is written with a radical symbol",
+            "Rational, because 64 is a perfect square",
+            "Irrational, because 64 is an even number"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "exact-side-length-from-area",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "A square garden bed must enclose exactly 20 square feet. What is the exact side length?",
+          "choices": [
+            "s = 5 feet",
+            "s = √20 feet",
+            "s = 10 feet",
+            "s = 4.5 feet"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "exact-edge-length-from-volume",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "A cube-shaped box has volume exactly 27 cubic inches. What is the exact edge length?",
+          "choices": [
+            "9 inches",
+            "3 inches",
+            "∛9 inches",
+            "1.7 inches"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "exact-side-length-from-area",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "For that 20-square-foot bed, which statement about exact and rounded forms is correct?",
+          "choices": [
+            "√20 feet is exact; a rounded value such as 4.5 feet is what a saw cut can realise",
+            "4.5 feet is exact; √20 feet is the approximation",
+            "Both forms are exact",
+            "Neither form is exact"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Work these with no support. Show enough that someone else could check each step.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l21#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-root-rational-or-irrational",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "Is √2 rational or irrational, and why?",
+          "choices": [
+            "Rational — every square root can be written as a fraction",
+            "Irrational — 2 is not a perfect square, so √2 cannot be written as a ratio of two integers",
+            "Rational — √2 is 1.414",
+            "Irrational — √2 is greater than 1"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-root-rational-or-irrational",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Is √49 rational or irrational, and why?",
+          "choices": [
+            "Irrational — it is written with a radical symbol",
+            "Rational — 49 is a perfect square, so √49 = 7 = 7/1",
+            "Irrational — 7 is an odd number",
+            "Rational — 49 is an odd number"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l21#mc-03",
+          "kind": "constructed-response",
+          "itemType": "exact-side-length-from-area",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "A square patio must cover exactly 32 square feet. Give the exact side length in root notation, classify it as rational or irrational with a reason, and explain why a builder would still work from a rounded value.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l21.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.1-correction",
+    "itemSource": "integration-correction-generator@curriculum-release-corrections/grade8-mathematics-integration/build_student_work.py",
+    "seed": "1.0.1-correction|ma-g8-mathematics-u01-l21"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l09",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l09",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 9,
+    "courseDay": 81,
+    "phase": "Retrieval and fluency",
+    "focus": "division facts and multiples",
+    "title": "Retrieval and fluency: division facts and multiples"
+  },
+  "standards": [
+    "4.NBT.6"
+  ],
+  "blueprint": {
+    "phase": "Retrieval and fluency",
+    "profile": "retrieval-and-fluency",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 49 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "12 r1",
+            "11 r1",
+            "12 r2",
+            "13 r1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 373 ÷ 5. Write the answer as a quotient and remainder.",
+          "choices": [
+            "74 r4",
+            "73 r3",
+            "74 r3",
+            "75 r3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 181 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "44 r1",
+            "46 r1",
+            "45 r1",
+            "45 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 412 ÷ 6. Write the answer as a quotient and remainder.",
+          "choices": [
+            "68 r4",
+            "67 r4",
+            "68 r5",
+            "69 r4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 244 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "81 r1",
+            "81 r2",
+            "80 r1",
+            "82 r1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l09#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 1061 ÷ 6. Write the answer as a quotient and remainder.",
+          "choices": [
+            "176 r1",
+            "177 r5",
+            "175 r5",
+            "176 r5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l09#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 645 ÷ 9. Write the answer as a quotient and remainder.",
+          "choices": [
+            "71 r7",
+            "72 r6",
+            "71 r6",
+            "70 r6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 306 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "76 r3",
+            "75 r2",
+            "76 r2",
+            "77 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 374 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "125 r2",
+            "123 r2",
+            "124 r2",
+            "124 r1"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l09"
+  }
+}

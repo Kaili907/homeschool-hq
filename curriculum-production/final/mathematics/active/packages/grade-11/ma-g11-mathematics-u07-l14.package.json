@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u07-l14",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u07-l14",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations and Inverse Functions",
+    "dayInUnit": 14,
+    "courseDay": 122,
+    "phase": "Transfer challenge",
+    "focus": "stretches, compressions, and reflections",
+    "title": "Transfer challenge: stretches, compressions, and reflections"
+  },
+  "standards": [
+    "F-BF.3",
+    "F-BF.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 1,
+          "prompt": "For f(x) = 2x + 1, find f⁻¹(f(5)).",
+          "workedSolution": {
+            "steps": [
+              "f(5) = 11.",
+              "f⁻¹(11) = (11 − 1)/2 = 5."
+            ],
+            "answer": "5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x² + x as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "neither even nor odd",
+            "even; its graph is symmetric about the y-axis",
+            "even; its graph is symmetric about the origin",
+            "odd; its graph is symmetric about the origin"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = f(5x). Describe the transformation.",
+          "choices": [
+            "a vertical shift up by 5",
+            "a horizontal compression by a factor of 5",
+            "a horizontal shift right by 5",
+            "a vertical stretch by a factor of 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = 9x + 6.",
+          "choices": [
+            "f⁻¹(x) = (x − 6) / 9",
+            "f⁻¹(x) = 1 / (9x + 6)",
+            "f⁻¹(x) = (x + 6) / 9",
+            "f⁻¹(x) = 9x − 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = 6x + 1 and its inverse f⁻¹, evaluate f⁻¹(f(6)).",
+          "choices": [
+            "6",
+            "37",
+            "7",
+            "-6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x³ − 4x as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the origin",
+            "odd; its graph is symmetric about the origin",
+            "neither even nor odd",
+            "even; its graph is symmetric about the y-axis"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = 6·f(x). Describe the transformation.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = -2x − 10.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = 7x + 9 and its inverse f⁻¹, evaluate f⁻¹(f(8)).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u07-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u07-l14"
+  }
+}

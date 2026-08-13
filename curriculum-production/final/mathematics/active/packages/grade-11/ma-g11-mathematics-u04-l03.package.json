@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u04-l03",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Exponential, Logarithmic, and Series Models",
+    "dayInUnit": 3,
+    "courseDay": 57,
+    "phase": "Guided practice A",
+    "focus": "evaluating logarithms with technology",
+    "title": "Guided practice A: evaluating logarithms with technology"
+  },
+  "standards": [
+    "F-LE.4",
+    "A-SSE.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 1,
+          "prompt": "Evaluate log_3(81).",
+          "workedSolution": {
+            "steps": [
+              "3^? = 81.",
+              "3⁴ = 81, so the answer is 4."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 1,
+          "prompt": "Solve 3^x = 81 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = log_81(3) = 1/4",
+            "x = 81/3 = 27",
+            "x = log_3(81) = 5",
+            "x = log_3(81) = 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 1,
+          "prompt": "Find the sum of the first 3 terms of the geometric series with first term 3 and common ratio 3.",
+          "choices": [
+            "81",
+            "27",
+            "9",
+            "39"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "An investment of $1200 grows by 8% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "8 years",
+            "13 years",
+            "12 years",
+            "10 years"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "Evaluate log_2(4).",
+          "choices": [
+            "1",
+            "2",
+            "4",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "Solve 3^x = 9 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = log_3(9) = 3",
+            "x = log_3(9) = 2",
+            "x = log_9(3) = 1/2",
+            "x = 9/3 = 3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 2,
+          "prompt": "Find the sum of the first 5 terms of the geometric series with first term 3 and common ratio 3.",
+          "choices": [
+            "15",
+            "729",
+            "243",
+            "363"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "An investment of $1500 grows by 8% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "10 years",
+            "13 years",
+            "8 years",
+            "12 years"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Evaluate log_5(625).",
+          "choices": [
+            "4",
+            "625",
+            "125",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "Solve 5^x = 25 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = log_5(25) = 3",
+            "x = log_5(25) = 2",
+            "x = 25/5 = 5",
+            "x = log_25(5) = 1/2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 2,
+          "prompt": "Find the sum of the first 4 terms of the geometric series with first term 4 and common ratio 3.",
+          "choices": [
+            "16",
+            "324",
+            "108",
+            "160"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u04-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u04-l03"
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u07-l14",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u07-l14",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Right Triangle Trigonometry",
+    "dayInUnit": 14,
+    "courseDay": 122,
+    "phase": "Transfer challenge",
+    "focus": "defining sine, cosine, and tangent",
+    "title": "Transfer challenge: defining sine, cosine, and tangent"
+  },
+  "standards": [
+    "G-SRT.6",
+    "G-SRT.7",
+    "G-SRT.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 1,
+          "prompt": "Write sin 35° as a cosine.",
+          "workedSolution": {
+            "steps": [
+              "sin θ = cos(90 − θ).",
+              "sin 35° = cos 55°."
+            ],
+            "answer": "cos 55°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "From a point 42 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 40 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "tan θ = 40/42",
+            "sin θ = 40/42",
+            "tan θ = 42/40",
+            "cos θ = 40/42"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 3,
+          "prompt": "A right triangle has legs 10 and 24 and hypotenuse 26. Angle θ is opposite the leg of length 10. Find sin θ as an exact fraction in lowest terms.",
+          "choices": [
+            "5/13",
+            "5/12",
+            "12/13",
+            "13/5"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "A right triangle has hypotenuse 125 and one leg 35. Find the other leg.",
+          "choices": [
+            "90",
+            "130",
+            "120",
+            "125"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 3,
+          "prompt": "Express sin 46° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 44°, because the two angles are complementary and swap the roles of opposite and adjacent",
+            "cos 46°, because sine and cosine are always equal",
+            "cos 134°, because the angles are supplementary",
+            "cos 136°, because the angles differ by a right angle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "From a point 63 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 60 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "sin θ = 60/63",
+            "cos θ = 60/63",
+            "tan θ = 63/60",
+            "tan θ = 60/63"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 3,
+          "prompt": "A right triangle has legs 24 and 45 and hypotenuse 51. Angle θ is opposite the leg of length 24. Find sin θ as an exact fraction in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "A right triangle has legs 16 and 30. Find the hypotenuse.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 3,
+          "prompt": "Express sin 53° as a cosine of another angle, and explain why the two are equal.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u07-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u07-l14"
+  }
+}

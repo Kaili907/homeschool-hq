@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l16",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l16",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 16,
+    "courseDay": 142,
+    "phase": "Unit assessment",
+    "focus": "scaled graphs and line plots",
+    "title": "Unit assessment: scaled graphs and line plots"
+  },
+  "standards": [
+    "3.MD.3",
+    "3.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 1 per symbol. The bar for \"Bananas\" is worth 1 symbols. How many does \"Bananas\" represent?",
+          "choices": [
+            "1",
+            "2",
+            "0",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Red\" has 3 symbols and \"Blue\" has 1 symbols. How many more does \"Red\" have than \"Blue\"?",
+          "choices": [
+            "4",
+            "8",
+            "2",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 4/4, 2/4, 2/4, 3/4, 3/4, 2/4, 4/4, 4/4. How many leaves measured exactly 2/4 inch?",
+          "choices": [
+            "2",
+            "4",
+            "8",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 2 per symbol. The bar for \"Dogs\" is worth 1 symbols. How many does \"Dogs\" represent?",
+          "choices": [
+            "4",
+            "1",
+            "2",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Apples\" has 6 symbols and \"Bananas\" has 3 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "choices": [
+            "18",
+            "12",
+            "3",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 3/4, 3/4, 4/4, 1/4, 3/4, 3/4, 2/4, 3/4. How many leaves measured exactly 2/4 inch?",
+          "choices": [
+            "0",
+            "1",
+            "8",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 10 per symbol. The bar for \"Red\" is worth 8 symbols. How many does \"Red\" represent?",
+          "choices": [
+            "8",
+            "70",
+            "80",
+            "90"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 10 per symbol, \"Red\" has 8 symbols and \"Blue\" has 4 symbols. How many more does \"Red\" have than \"Blue\"?",
+          "choices": [
+            "80",
+            "120",
+            "4",
+            "40"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 3/8, 1/8, 3/8, 2/8, 1/8, 5/8, 3/8, 8/8. How many leaves measured exactly 5/8 inch?",
+          "choices": [
+            "8",
+            "0",
+            "2",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Yellow\" is worth 4 symbols. How many does \"Yellow\" represent?",
+          "choices": [
+            "25",
+            "15",
+            "20",
+            "4"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l16"
+  }
+}

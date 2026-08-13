@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l05",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 5,
+    "courseDay": 167,
+    "phase": "Independent evidence A",
+    "focus": "same area, different perimeter",
+    "title": "Independent evidence A: same area, different perimeter"
+  },
+  "standards": [
+    "3.MD.8"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence A",
+    "profile": "independent-evidence",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 1,
+          "prompt": "A rectangular field is 9 ft long and 5 ft wide. What is its perimeter?",
+          "workedSolution": {
+            "steps": [
+              "2 × (9 + 5) = 2 × 14 = 28."
+            ],
+            "answer": "28 ft"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 6 ft long and 8 ft wide. What is its perimeter?",
+          "choices": [
+            "29 ft",
+            "14 ft",
+            "48 ft",
+            "28 ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 8 ft long and 7 ft wide. What is its perimeter?",
+          "choices": [
+            "15 ft",
+            "31 ft",
+            "56 ft",
+            "30 ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 6 cm long and 3 cm wide. What is its perimeter?",
+          "choices": [
+            "19 cm",
+            "9 cm",
+            "18 cm",
+            "17 cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 6 ft long and 14 ft wide. What is its perimeter?",
+          "choices": [
+            "20 ft",
+            "41 ft",
+            "40 ft",
+            "84 ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l05#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 11 ft long and 13 ft wide. What is its perimeter?",
+          "choices": [
+            "143 ft",
+            "49 ft",
+            "48 ft",
+            "24 ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l05#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 11 cm long and 12 cm wide. What is its perimeter?",
+          "choices": [
+            "47 cm",
+            "46 cm",
+            "132 cm",
+            "23 cm"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 10 cm long and 5 cm wide. What is its perimeter?",
+          "choices": [
+            "50 cm",
+            "31 cm",
+            "30 cm",
+            "15 cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 6 ft long and 9 ft wide. What is its perimeter?",
+          "choices": [
+            "54 ft",
+            "30 ft",
+            "31 ft",
+            "15 ft"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l05"
+  }
+}

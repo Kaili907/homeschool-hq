@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l06",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 6,
+    "courseDay": 42,
+    "phase": "Concept build C",
+    "focus": "finding factor pairs for whole numbers within 100",
+    "title": "Concept build C: finding factor pairs for whole numbers within 100"
+  },
+  "standards": [
+    "4.OA.4"
+  ],
+  "blueprint": {
+    "phase": "Concept build C",
+    "profile": "concept-build-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 1,
+          "prompt": "How many whole-number factors does 12 have?",
+          "workedSolution": {
+            "steps": [
+              "1, 2, 3, 4, 6, 12 all divide 12 evenly.",
+              "That is 6 factors."
+            ],
+            "answer": "6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 6th multiple of 4?",
+          "choices": [
+            "28",
+            "10",
+            "20",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 28 have?",
+          "choices": [
+            "3",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 8th multiple of 4?",
+          "choices": [
+            "12",
+            "28",
+            "32",
+            "36"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 36 have?",
+          "choices": [
+            "8",
+            "10",
+            "9",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 11th multiple of 4?",
+          "choices": [
+            "15",
+            "44",
+            "40",
+            "48"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "How many whole-number factors does 48 have?",
+          "choices": [
+            "9",
+            "5",
+            "10",
+            "11"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 10th multiple of 5?",
+          "choices": [
+            "15",
+            "55",
+            "50",
+            "45"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 40 have?",
+          "choices": [
+            "9",
+            "4",
+            "8",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 10th multiple of 9?",
+          "choices": [
+            "81",
+            "19",
+            "90",
+            "99"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l06"
+  }
+}

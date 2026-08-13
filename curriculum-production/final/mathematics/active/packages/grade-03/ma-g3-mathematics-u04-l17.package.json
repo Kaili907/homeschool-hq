@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u04-l17",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u04-l17",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Properties, Patterns, and Two-Step Problems",
+    "dayInUnit": 17,
+    "courseDay": 71,
+    "phase": "Targeted correction and reassessment",
+    "focus": "multi-step reasoning",
+    "title": "Targeted correction and reassessment: multi-step reasoning"
+  },
+  "standards": [
+    "3.OA.8",
+    "3.OA.9"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 1,
+          "prompt": "A theater sets up 5 rows of 8 chairs, then adds 6 more chairs. How many chairs in all?",
+          "workedSolution": {
+            "steps": [
+              "5 × 8 = 40.",
+              "40 + 6 = 46."
+            ],
+            "answer": "46"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 2,
+          "prompt": "The pattern 3, 7, 11, 15, ... continues by the same rule. What is the 6th term?",
+          "workedSolution": {
+            "steps": [
+              "Each term increases by 4.",
+              "Term 6 is 3 + 4 × 5 = 23."
+            ],
+            "answer": "23"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 1,
+          "prompt": "A store arranges 5 shelves with 6 boxes on each shelf, then sells 4 boxes from the display. How many boxes are left?",
+          "choices": [
+            "34",
+            "15",
+            "30",
+            "26"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 2,
+          "prompt": "The pattern 6, 9, 12, 15, ... continues by the same rule. What is the 5th term?",
+          "choices": [
+            "18",
+            "15",
+            "19",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 6 shelves with 4 boxes on each shelf, then adds 3 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "21",
+            "24",
+            "27",
+            "13"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 2,
+          "prompt": "The pattern 7, 10, 13, 16, ... continues by the same rule. What is the 5th term?",
+          "choices": [
+            "20",
+            "19",
+            "22",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 9 shelves with 6 boxes on each shelf, then adds 5 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "49",
+            "20",
+            "59",
+            "54"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 3,
+          "prompt": "The pattern 1, 9, 17, 25, ... continues by the same rule. What is the 5th term?",
+          "choices": [
+            "34",
+            "33",
+            "41",
+            "25"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u04-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u04-l17"
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u08-l13",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u08-l13",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Rate of Change and Building Functions",
+    "dayInUnit": 13,
+    "courseDay": 139,
+    "phase": "Skill consolidation",
+    "focus": "average rate of change over an interval",
+    "title": "Skill consolidation: average rate of change over an interval"
+  },
+  "standards": [
+    "F-IF.6",
+    "F-BF.1",
+    "F-BF.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 1,
+          "prompt": "A table records output 20 at input 2 and output 33 at input 5. What is the average rate of change between these readings?",
+          "choices": [
+            "13/7 output units per input unit",
+            "13 output units per input unit",
+            "-13/3 output units per input unit",
+            "13/3 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "For f(x) = -2x² − 2x − 1, find the average rate of change from x = -1 to x = 2.",
+          "choices": [
+            "-14/3",
+            "-12",
+            "-4",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 2,
+          "prompt": "A sequence has g(1) = 5 and g(n) = 3·g(n − 1). Write the explicit form and find g(6).",
+          "choices": [
+            "g(n) = 5 + 3(n − 1); g(6) = 20",
+            "g(n) = 5·3^n; g(6) = 3645",
+            "g(n) = 3·5^(n−1); g(6) = 9375",
+            "g(n) = 5·3^(n−1); g(6) = 1215"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "A venue charges $60 to open plus $7 per attendee. Write C(n) for the total cost of n attendees, then find C(13).",
+          "choices": [
+            "C(n) = 67n; C(13) = 871",
+            "C(n) = 60n + 7; C(13) = 787",
+            "C(n) = 60 + 7n; C(13) = 151",
+            "C(n) = 7 + 60n; C(13) = 787"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "Revenue is R(x) = -8x − 10 and cost is C(x) = 6x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = -14x − 10",
+            "P(x) = -2x − 10",
+            "P(x) = -14x + 10",
+            "P(x) = 14x − 10"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "A table records output 37 at input 4 and output 17 at input 6. What is the average rate of change between these readings?",
+          "choices": [
+            "-2 output units per input unit",
+            "-10 output units per input unit",
+            "10 output units per input unit",
+            "-20 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "For f(x) = 4x² − 3x + 6, find the average rate of change from x = -1 to x = -5.",
+          "choices": [
+            "27",
+            "-27",
+            "-18",
+            "108"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 3,
+          "prompt": "A sequence has g(1) = 10 and g(n) = 3·g(n − 1). Write the explicit form and find g(7).",
+          "choices": [
+            "g(n) = 10 + 3(n − 1); g(7) = 28",
+            "g(n) = 10·3^(n−1); g(7) = 7290",
+            "g(n) = 3·10^(n−1); g(7) = 3000000",
+            "g(n) = 10·3^n; g(7) = 21870"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "A venue charges $150 to open plus $6 per attendee. Write C(n) for the total cost of n attendees, then find C(7).",
+          "choices": [
+            "C(n) = 150 + 6n; C(7) = 192",
+            "C(n) = 150n + 6; C(7) = 1056",
+            "C(n) = 6 + 150n; C(7) = 1056",
+            "C(n) = 156n; C(7) = 1092"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "Revenue is R(x) = -2x − 6 and cost is C(x) = 4x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = 2x − 6",
+            "P(x) = 6x − 6",
+            "P(x) = -6x − 6",
+            "P(x) = -6x + 6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "A table records output 24 at input 5 and output 25 at input 9. What is the average rate of change between these readings?",
+          "choices": [
+            "1/14 output units per input unit",
+            "1 output units per input unit",
+            "1/4 output units per input unit",
+            "-1/4 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "For f(x) = 4x² − 6x + 4, find the average rate of change from x = -3 to x = 4.",
+          "choices": [
+            "102/7",
+            "2",
+            "-14",
+            "-2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u08-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u08-l13"
+  }
+}

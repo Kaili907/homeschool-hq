@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u07-l13",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u07-l13",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Measurement: Time, Liquid Volume, and Mass",
+    "dayInUnit": 13,
+    "courseDay": 121,
+    "phase": "Performance task: plan",
+    "focus": "the day plan and Measure It station guide",
+    "title": "Performance task: plan: the day plan and Measure It station guide"
+  },
+  "standards": [
+    "3.MD.1",
+    "3.MD.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 1,
+          "prompt": "A movie starts at 2:15 p.m. and lasts 40 minutes. What time does it end?",
+          "workedSolution": {
+            "steps": [
+              "Start at 2:15 p.m. and count forward 40 minutes.",
+              "2:15 + 40 minutes = 2:55 p.m."
+            ],
+            "answer": "2:55 p.m."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 267 kilograms. Another 154 kilograms are poured in. How many kilograms are in the container now?",
+          "choices": [
+            "421",
+            "154",
+            "267",
+            "422"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 12:45 p.m. and lasts 81 minutes. What time does practice end?",
+          "choices": [
+            "2:06 p.m.",
+            "2:36 p.m.",
+            "11:24 a.m.",
+            "1:36 p.m."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 553 grams. Another 179 grams are poured in. How many grams are in the container now?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 3,
+          "prompt": "Practice starts at 12:45 p.m. and lasts 84 minutes. What time does practice end?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u07-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u07-l13"
+  }
+}

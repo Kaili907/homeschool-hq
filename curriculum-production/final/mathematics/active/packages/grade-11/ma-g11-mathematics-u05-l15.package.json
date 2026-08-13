@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u05-l15",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u05-l15",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Trigonometric Functions and Periodic Models",
+    "dayInUnit": 15,
+    "courseDay": 87,
+    "phase": "Assessment preparation",
+    "focus": "quadrant signs of sine, cosine, and tangent",
+    "title": "Assessment preparation: quadrant signs of sine, cosine, and tangent"
+  },
+  "standards": [
+    "F-TF.1",
+    "F-TF.2",
+    "F-TF.5",
+    "F-TF.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 1,
+          "prompt": "Convert 90° to radian measure, in terms of π.",
+          "choices": [
+            "π/6",
+            "π/4",
+            "π/2",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 2,
+          "prompt": "Give the exact value of cos(π/3).",
+          "choices": [
+            "1/2",
+            "√2/2",
+            "√3/2",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 2,
+          "prompt": "A model is f(t) = 3·sin(3t) + 8. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 3; period 2π/3; midline y = 8",
+            "amplitude 8; period 2π/3; midline y = 3",
+            "amplitude 6; period 2π/3; midline y = 8",
+            "amplitude 3; period 3·2π; midline y = 8"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 2,
+          "prompt": "Given sin θ = 3/5 and θ is in the first quadrant, find cos θ exactly.",
+          "choices": [
+            "−4/5",
+            "4/5",
+            "3/5",
+            "5/4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 3,
+          "prompt": "Convert 0° to radian measure, in terms of π.",
+          "choices": [
+            "π/6",
+            "0",
+            "π/3",
+            "π/4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 3,
+          "prompt": "Give the exact value of cos(π/2).",
+          "choices": [
+            "1/2",
+            "√3/2",
+            "0",
+            "√2/2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 3,
+          "prompt": "A model is f(t) = 9·sin(2t) + 1. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 9; period π; midline y = 1",
+            "amplitude 18; period π; midline y = 1",
+            "amplitude 9; period 2·2π; midline y = 1",
+            "amplitude 1; period π; midline y = 9"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 3,
+          "prompt": "Given sin θ = 5/13 and θ is in the first quadrant, find cos θ exactly.",
+          "choices": [
+            "5/13",
+            "12/13",
+            "13/12",
+            "−12/13"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 2,
+          "prompt": "Convert 60° to radian measure, in terms of π.",
+          "choices": [
+            "π/4",
+            "0",
+            "π/6",
+            "π/3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 2,
+          "prompt": "Give the exact value of sin(π/6).",
+          "choices": [
+            "1/2",
+            "√3/2",
+            "√2/2",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 3,
+          "prompt": "A model is f(t) = 3·sin(t) + 11. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 3; period π/2; midline y = 11",
+            "amplitude 11; period 2π; midline y = 3",
+            "amplitude 6; period 2π; midline y = 11",
+            "amplitude 3; period 2π; midline y = 11"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 3,
+          "prompt": "Given sin θ = 7/25 and θ is in the second quadrant, find cos θ exactly.",
+          "choices": [
+            "25/24",
+            "24/25",
+            "7/25",
+            "−24/25"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u05-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u05-l15"
+  }
+}

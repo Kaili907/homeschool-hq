@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u04-l07",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u04-l07",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Equations and Inequalities",
+    "dayInUnit": 7,
+    "courseDay": 61,
+    "phase": "Investigation or close reading",
+    "focus": "multi-step numerical problems",
+    "title": "Investigation or close reading: multi-step numerical problems"
+  },
+  "standards": [
+    "7.EE.3",
+    "7.EE.4"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "multi-step-numerical-problem",
+          "standard": "7.EE.3",
+          "difficulty": 1,
+          "prompt": "A $40 item is discounted 25% and then taxed $3. What is the final cost?",
+          "workedSolution": {
+            "steps": [
+              "Undo operations in reverse order, keeping both sides equivalent.",
+              "Substitute or test a boundary value to check the result."
+            ],
+            "answer": "$33"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-equation",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Solve 3x - 12 = -36.",
+          "choices": [
+            "-12",
+            "-24",
+            "-9",
+            "-8"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve -2x + 13 ≤ -1.",
+          "choices": [
+            "x ≥ 8",
+            "x ≥ 6",
+            "x ≥ 7",
+            "x ≤ 8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solution-set",
+          "standard": "7.EE.4",
+          "difficulty": 2,
+          "prompt": "Which integer satisfies 2x + 6 ≥ 16 and x < 6?",
+          "choices": [
+            "8",
+            "5",
+            "4",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "graph-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Which graph describes x ≤ 12?",
+          "choices": [
+            "open circle at 12, shaded right",
+            "open circle at 12, shaded left",
+            "closed circle at 13, shaded right",
+            "closed circle at 12, shaded left"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "check-and-interpret-solution",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A club charges $8 plus $5 per session for a total of $83. How many sessions were purchased?",
+          "choices": [
+            "16",
+            "16.6",
+            "14",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-numerical-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "A group buys 5 passes at $6 each and pays a $7 service fee. What is the total cost?",
+          "choices": [
+            "$37",
+            "$39",
+            "$38",
+            "$36"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u04-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "two-step-equation",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve -4x - 6 = 8. Write the answer in simplest form.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u04-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "two-step-inequality",
+          "standard": "7.EE.4",
+          "difficulty": 3,
+          "prompt": "Solve 4x + 1 ≥ 45.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u04-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u04-l07"
+  }
+}

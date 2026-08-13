@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u08-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u08-l10",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Circles",
+    "dayInUnit": 10,
+    "courseDay": 136,
+    "phase": "Discussion or problem seminar",
+    "focus": "inscribed and circumscribed circles of a triangle",
+    "title": "Discussion or problem seminar: inscribed and circumscribed circles of a triangle"
+  },
+  "standards": [
+    "G-C.1",
+    "G-C.2",
+    "G-C.3",
+    "G-C.5",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "arc-length-and-sector-area",
+          "standard": "G-C.5",
+          "difficulty": 1,
+          "prompt": "Radius 6, central angle 60°. Arc and sector?",
+          "workedSolution": {
+            "steps": [
+              "Fraction is 60/360 = 1/6.",
+              "Arc = (1/6)(12π) = 2π; sector = (1/6)(36π) = 6π."
+            ],
+            "answer": "arc 2π; sector 6π"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "cyclic-quadrilateral-angle",
+          "standard": "G-C.3",
+          "difficulty": 2,
+          "prompt": "A quadrilateral is inscribed in a circle. One angle measures 54°. Find the measure of the opposite angle.",
+          "choices": [
+            "54°",
+            "90°",
+            "126°",
+            "306°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-angle-measure",
+          "standard": "G-C.2",
+          "difficulty": 3,
+          "prompt": "An inscribed angle in a circle intercepts an arc of 106°. Find the measure of the inscribed angle.",
+          "choices": [
+            "74°",
+            "212°",
+            "53°",
+            "106°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "tangent-radius-perpendicularity",
+          "standard": "G-C.2",
+          "difficulty": 3,
+          "prompt": "A circle has radius 5. From an external point 13 from the centre, a tangent is drawn. Find the length of the tangent segment, and state the fact that makes this possible.",
+          "choices": [
+            "12, because the tangent bisects the radius",
+            "18, because the tangent extends beyond the circle",
+            "12, because the radius is perpendicular to the tangent at the point of tangency",
+            "8, because the radius is perpendicular to the tangent at the point of tangency"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "arc-length-and-sector-area",
+          "standard": "G-C.5",
+          "difficulty": 3,
+          "prompt": "A circle has radius 3. Find the arc length and the sector area for a central angle of 90°, in terms of π.",
+          "choices": [
+            "arc 3/2π; sector 9/4π",
+            "arc 3/2π; sector 9/2π",
+            "arc 9/4π; sector 3/2π",
+            "arc 3/4π; sector 9/4π"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "cyclic-quadrilateral-angle",
+          "standard": "G-C.3",
+          "difficulty": 3,
+          "prompt": "A quadrilateral is inscribed in a circle. One angle measures 121°. Find the measure of the opposite angle.",
+          "choices": [
+            "239°",
+            "90°",
+            "121°",
+            "59°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-angle-measure",
+          "standard": "G-C.2",
+          "difficulty": 3,
+          "prompt": "An inscribed angle in a circle intercepts an arc of 110°. Find the measure of the inscribed angle.",
+          "choices": [
+            "220°",
+            "70°",
+            "110°",
+            "55°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "tangent-radius-perpendicularity",
+          "standard": "G-C.2",
+          "difficulty": 3,
+          "prompt": "A circle has radius 3. From an external point 5 from the centre, a tangent is drawn. Find the length of the tangent segment, and state the fact that makes this possible.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "arc-length-and-sector-area",
+          "standard": "G-C.5",
+          "difficulty": 3,
+          "prompt": "A circle has radius 7. Find the arc length and the sector area for a central angle of 45°, in terms of π.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u08-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u08-l10"
+  }
+}

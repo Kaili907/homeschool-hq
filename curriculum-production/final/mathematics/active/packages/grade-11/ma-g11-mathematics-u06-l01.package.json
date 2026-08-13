@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u06-l01",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Advanced Function Analysis and Graphing",
+    "dayInUnit": 1,
+    "courseDay": 91,
+    "phase": "Launch and diagnostic",
+    "focus": "graphing polynomial functions and identifying zeros and end behavior",
+    "title": "Launch and diagnostic: graphing polynomial functions and identifying zeros and end behavior"
+  },
+  "standards": [
+    "F-IF.7",
+    "F-IF.8",
+    "F-IF.9",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "rational-function-asymptotes",
+          "standard": "F-IF.7",
+          "difficulty": 1,
+          "prompt": "Asymptotes of (x + 1)/(x − 3)?",
+          "workedSolution": {
+            "steps": [
+              "Denominator zero at x = 3.",
+              "Equal degrees give y = 1."
+            ],
+            "answer": "vertical x = 3; horizontal y = 1"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-across-representations",
+          "standard": "F-IF.9",
+          "difficulty": 1,
+          "prompt": "Function f is given in vertex form as f(x) = −3(x + 1)² + 5, so it opens downward. Function g is given by a table whose greatest output is 6. Which function has the greater maximum, and by how much?",
+          "choices": [
+            "g, by 1",
+            "g, by 11",
+            "g, by 6",
+            "g, by 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 1,
+          "prompt": "The function f(x) = (x − 1)² − 5 opens upward. State its minimum value and where it occurs.",
+          "choices": [
+            "minimum -5 at x = 1",
+            "minimum -5 at x = -1",
+            "minimum 5 at x = 1",
+            "minimum 1 at x = -5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-end-behaviour",
+          "standard": "F-IF.7",
+          "difficulty": 2,
+          "prompt": "A polynomial has degree 4 and leading coefficient 1. Describe its end behaviour.",
+          "choices": [
+            "both ends rise",
+            "both ends fall",
+            "the left end rises and the right end falls",
+            "the left end falls and the right end rises"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "rational-function-asymptotes",
+          "standard": "F-IF.7",
+          "difficulty": 2,
+          "prompt": "For f(x) = (x − 1) / (x − 5), state the vertical asymptote and the horizontal asymptote.",
+          "choices": [
+            "vertical x = 1; horizontal y = 1",
+            "vertical x = 5; horizontal y = 0",
+            "vertical x = 5; horizontal y = 1",
+            "vertical x = 5; horizontal y = 1/5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-across-representations",
+          "standard": "F-IF.9",
+          "difficulty": 3,
+          "prompt": "Function f is given in vertex form as f(x) = −2(x − 4)² − 2, so it opens downward. Function g is given by a table whose greatest output is 0. Which function has the greater maximum, and by how much?",
+          "choices": [
+            "g, by 0",
+            "g, by -2",
+            "g, by 3",
+            "g, by 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 1,
+          "prompt": "The function f(x) = 2(x + 1)² − 3 opens upward. State its minimum value and where it occurs.",
+          "choices": [
+            "minimum -3 at x = -1",
+            "minimum -1 at x = -3",
+            "minimum -3 at x = 1",
+            "minimum 3 at x = -1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-end-behaviour",
+          "standard": "F-IF.7",
+          "difficulty": 2,
+          "prompt": "A polynomial has degree 3 and leading coefficient 2. Describe its end behaviour.",
+          "choices": [
+            "the left end rises and the right end falls",
+            "both ends rise",
+            "both ends fall",
+            "the left end falls and the right end rises"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u06-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u06-l01"
+  }
+}

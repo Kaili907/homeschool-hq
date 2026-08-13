@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l09",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l09",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 9,
+    "courseDay": 171,
+    "phase": "Concept model C",
+    "focus": "shape, outliers, and their effect on summaries",
+    "title": "Concept model C: shape, outliers, and their effect on summaries"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 1,
+          "prompt": "How does one very large value affect mean and median?",
+          "workedSolution": {
+            "steps": [
+              "The mean uses value sizes.",
+              "The median uses positions only."
+            ],
+            "answer": "The mean moves much more"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 2,
+          "prompt": "A two-way table has row 1: 24 yes, 10 no; row 2: 6 yes, 16 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "4/5",
+            "12/17",
+            "3/7",
+            "5/17"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 15x + 36, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "Each additional test points is associated with 15 more hour studieds.",
+            "The predicted value is 15 test points when x is 0.",
+            "Each additional hour studied causes an increase of exactly 15 test points.",
+            "Each additional hour studied is associated with an increase of about 15 test points."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "In a randomised trial, one group received a tutoring programme and scored higher on average than the control group. What conclusion is justified?",
+          "choices": [
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "A strong correlation always establishes causation when the sample is large."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 2,
+          "prompt": "A data set records 9, 15, 13, 19, 19. Give the mean and the median.",
+          "choices": [
+            "mean 15, median 15",
+            "mean 15, median 13",
+            "mean 16, median 15",
+            "mean 15, median 16"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 2,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 227 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 3,
+          "prompt": "A two-way table has row 1: 7 yes, 14 no; row 2: 41 yes, 42 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "2/3",
+            "1/3",
+            "7/48",
+            "7/104"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 10x + 16, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "Each additional hour studied causes an increase of exactly 10 test points.",
+            "The predicted value is 10 test points when x is 0.",
+            "Each additional test points is associated with 10 more hour studieds.",
+            "Each additional hour studied is associated with an increase of about 10 test points."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "Ice cream sales and swimming-pool admissions are strongly positively correlated across a year. What conclusion is justified?",
+          "choices": [
+            "A strong correlation always establishes causation when the sample is large.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 38, 2, 28, 23, 5, 28, 17. Give the mean and the median.",
+          "choices": [
+            "mean 20.14, median 20",
+            "mean 20, median 23",
+            "mean 23, median 20.14",
+            "mean 20.14, median 23"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 340 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "Neither statistic changes, because one value cannot affect a summary."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l09"
+  }
+}

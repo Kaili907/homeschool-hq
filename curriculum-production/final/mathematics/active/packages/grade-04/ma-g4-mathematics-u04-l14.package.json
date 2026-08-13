@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l14",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l14",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 14,
+    "courseDay": 68,
+    "phase": "Performance task: build",
+    "focus": "the order with models and estimates",
+    "title": "Performance task: build: the order with models and estimates"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.5"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 5 sections with 38 seats each, plus 23 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "190",
+            "213",
+            "66",
+            "167"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 3 × 42. Split 42 into 40 and 2.",
+          "choices": [
+            "126",
+            "120",
+            "6",
+            "122"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 3 × 157 using partial products.",
+          "choices": [
+            "450",
+            "300",
+            "468",
+            "471"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 3 sections with 25 seats each, plus 10 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "75",
+            "85",
+            "65",
+            "38"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 8 × 63. Split 63 into 60 and 3.",
+          "choices": [
+            "480",
+            "24",
+            "504",
+            "483"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 6 × 191 using partial products.",
+          "choices": [
+            "1146",
+            "1140",
+            "1147",
+            "600"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 6 sections with 16 seats each, plus 7 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "89",
+            "96",
+            "103",
+            "29"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 7 × 28. Split 28 into 20 and 8.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 7 × 541 using partial products.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l14"
+  }
+}

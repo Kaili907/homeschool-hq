@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u05-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u05-l10",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Trigonometric Functions and Periodic Models",
+    "dayInUnit": 10,
+    "courseDay": 82,
+    "phase": "Discussion or problem seminar",
+    "focus": "amplitude, frequency, and midline",
+    "title": "Discussion or problem seminar: amplitude, frequency, and midline"
+  },
+  "standards": [
+    "F-TF.1",
+    "F-TF.2",
+    "F-TF.5",
+    "F-TF.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 1,
+          "prompt": "For f(t) = 3sin(2t) + 5, state amplitude, period, midline.",
+          "workedSolution": {
+            "steps": [
+              "A = 3, B = 2, D = 5.",
+              "Period 2π/2 = π."
+            ],
+            "answer": "amplitude 3; period π; midline y = 5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 2,
+          "prompt": "Given sin θ = 7/25 and θ is in the first quadrant, find cos θ exactly.",
+          "choices": [
+            "24/25",
+            "25/24",
+            "−24/25",
+            "7/25"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 3,
+          "prompt": "Convert 60° to radian measure, in terms of π.",
+          "choices": [
+            "π/3",
+            "π/4",
+            "0",
+            "π/6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 3,
+          "prompt": "Give the exact value of sin(π/2).",
+          "choices": [
+            "√2/2",
+            "0",
+            "1",
+            "1/2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 3,
+          "prompt": "A model is f(t) = 4·sin(2t) + 10. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 10; period π; midline y = 4",
+            "amplitude 4; period π; midline y = 10",
+            "amplitude 4; period 2·2π; midline y = 10",
+            "amplitude 8; period π; midline y = 10"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 3,
+          "prompt": "Given sin θ = 7/25 and θ is in the second quadrant, find cos θ exactly.",
+          "choices": [
+            "25/24",
+            "7/25",
+            "24/25",
+            "−24/25"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 3,
+          "prompt": "Convert 90° to radian measure, in terms of π.",
+          "choices": [
+            "0",
+            "π/2",
+            "π/4",
+            "π/6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 3,
+          "prompt": "Give the exact value of sin(π/6).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 3,
+          "prompt": "A model is f(t) = 8·sin(3t) + 16. State the amplitude, period, and midline.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u05-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u05-l10"
+  }
+}

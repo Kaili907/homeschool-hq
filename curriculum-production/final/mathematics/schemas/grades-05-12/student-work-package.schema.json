@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel-academy.local/schema/student-work-package.schema.json",
+  "title": "Mathematics student-work package (student projection)",
+  "description": "Learner-facing material for one lesson. Contains no answers to graded items; the answers live in the sibling answer-key document referenced by answerKeyRef.",
+  "type": "object",
+  "required": ["schemaVersion", "packageId", "lessonRef", "standards", "blueprint", "sections", "answerKeyRef", "integrity"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "packageId": { "type": "string", "pattern": "^swk-" },
+    "lessonRef": {
+      "type": "object",
+      "required": ["lessonId", "courseId", "grade", "subject", "unitNumber", "unitTitle", "dayInUnit", "courseDay", "phase", "focus", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "lessonId": { "type": "string" },
+        "courseId": { "type": "string" },
+        "grade": { "type": "integer", "enum": [5, 7, 8, 9, 10, 11, 12] },
+        "subject": { "const": "mathematics" },
+        "unitNumber": { "type": "integer", "minimum": 1 },
+        "unitTitle": { "type": "string" },
+        "dayInUnit": { "type": "integer", "minimum": 1 },
+        "courseDay": { "type": "integer", "minimum": 1 },
+        "phase": { "type": "string" },
+        "focus": { "type": "string" },
+        "title": { "type": "string" }
+      }
+    },
+    "standards": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "blueprint": {
+      "type": "object",
+      "required": ["phase", "profile", "sectionKinds"],
+      "additionalProperties": false,
+      "properties": {
+        "phase": { "type": "string" },
+        "profile": { "type": "string" },
+        "sectionKinds": { "type": "array", "items": { "$ref": "#/$defs/sectionKind" } }
+      }
+    },
+    "sections": { "type": "array", "items": { "$ref": "#/$defs/section" }, "minItems": 1 },
+    "answerKeyRef": { "type": "string", "pattern": "^answer-keys/" },
+    "integrity": {
+      "type": "object",
+      "required": ["corpusVersion", "itemSource", "seed"],
+      "additionalProperties": false,
+      "properties": {
+        "corpusVersion": { "type": "string" },
+        "itemSource": { "type": "string" },
+        "seed": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "sectionKind": {
+      "enum": ["instructional-example", "guided-practice", "independent-practice", "mastery-check", "extension"]
+    },
+    "difficulty": { "type": "integer", "enum": [1, 2, 3] },
+    "section": {
+      "type": "object",
+      "required": ["sectionId", "kind", "title", "directions", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "sectionId": { "type": "string" },
+        "kind": { "$ref": "#/$defs/sectionKind" },
+        "title": { "type": "string" },
+        "directions": { "type": "string" },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/item" } }
+      }
+    },
+    "item": {
+      "oneOf": [
+        { "$ref": "#/$defs/workedExampleItem" },
+        { "$ref": "#/$defs/multipleChoiceItem" },
+        { "$ref": "#/$defs/constructedResponseItem" }
+      ]
+    },
+    "workedExampleItem": {
+      "type": "object",
+      "description": "Instructional item. Its solution is student-facing by design and has no answer-key entry.",
+      "required": ["ref", "kind", "itemType", "standard", "difficulty", "prompt", "workedSolution"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": { "type": "string" },
+        "kind": { "const": "worked-example" },
+        "itemType": { "type": "string" },
+        "standard": { "type": "string" },
+        "difficulty": { "$ref": "#/$defs/difficulty" },
+        "prompt": { "type": "string" },
+        "workedSolution": {
+          "type": "object",
+          "required": ["steps", "answer"],
+          "additionalProperties": false,
+          "properties": {
+            "steps": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "answer": { "type": "string" }
+          }
+        }
+      }
+    },
+    "multipleChoiceItem": {
+      "type": "object",
+      "description": "Graded item. Must carry no field from which the answer could be recovered.",
+      "required": ["ref", "kind", "itemType", "standard", "difficulty", "prompt", "choices"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": { "type": "string" },
+        "kind": { "const": "multiple-choice" },
+        "itemType": { "type": "string" },
+        "standard": { "type": "string" },
+        "difficulty": { "$ref": "#/$defs/difficulty" },
+        "prompt": { "type": "string" },
+        "choices": { "type": "array", "items": { "type": "string" }, "minItems": 2, "uniqueItems": true }
+      }
+    },
+    "constructedResponseItem": {
+      "type": "object",
+      "required": ["ref", "kind", "itemType", "standard", "difficulty", "prompt", "responseExpectation"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": { "type": "string" },
+        "kind": { "const": "constructed-response" },
+        "itemType": { "type": "string" },
+        "standard": { "type": "string" },
+        "difficulty": { "$ref": "#/$defs/difficulty" },
+        "prompt": { "type": "string" },
+        "responseExpectation": { "type": "string" }
+      }
+    }
+  }
+}

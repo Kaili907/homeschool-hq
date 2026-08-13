@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u01-l01",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Whole-Number Reasoning",
+    "dayInUnit": 1,
+    "courseDay": 1,
+    "phase": "Launch and diagnostic",
+    "focus": "problem-solving routines",
+    "title": "Launch and diagnostic: problem-solving routines"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.OA.2",
+    "5.NBT.1",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-numerical-expression",
+          "standard": "5.OA.1",
+          "difficulty": 1,
+          "prompt": "Evaluate {18 + [6 × (9 - 4)]}.",
+          "workedSolution": {
+            "steps": [
+              "Evaluate the innermost grouping first: 9 - 4 = 5.",
+              "Multiply inside the brackets: 6 × 5 = 30.",
+              "Add inside the braces: 18 + 30 = 48."
+            ],
+            "answer": "48"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "words-to-expression",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Which expression means: “Add 13 and 8, then multiply the sum by 7.”",
+          "choices": [
+            "(13 + 7) × 8",
+            "(13 × 8) + 7",
+            "(13 + 8) × 7",
+            "13 + 8 + 7"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "expression-to-words",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Which phrase describes (6 + 15) × 9 without evaluating it?",
+          "choices": [
+            "Add 15 and 9, then multiply the sum by 6.",
+            "Add 6 and 15, then multiply the sum by 9.",
+            "Add 6, 15, and 9.",
+            "Multiply 6 by 15, then subtract 9."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "expression-relationship",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Let E represent 7304 + 1353. Without evaluating, how does (7304 + 1353) + 414 compare with E?",
+          "choices": [
+            "415 greater than E",
+            "413 greater than E",
+            "414 greater than E",
+            "414 times as large as E"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "choose-expression-for-situation",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "A supply cart has 19 boxes with 11 markers in each box and 2 loose markers. Which expression represents the total number of markers?",
+          "choices": [
+            "(19 + 11) × 2",
+            "19 × (11 + 2)",
+            "(19 + 2) × 11",
+            "19 × 11 + 2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-multistep-problem",
+          "standard": "MP.1",
+          "difficulty": 3,
+          "prompt": "A team packs 39 crates with 48 bottles in each crate, adds 92 loose bottles, and then uses 75 bottles. How many bottles remain?",
+          "choices": [
+            "1889",
+            "1890",
+            "1891",
+            "1899"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-whole-number-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 1,
+          "prompt": "In 2228, how does the value of the 2 in the tens place compare with the value of the 2 in the hundreds place?",
+          "choices": [
+            "10 times as much",
+            "100 times as much",
+            "1/10 as much",
+            "the same value"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "estimate-sum-difference",
+          "standard": "MP.6",
+          "difficulty": 2,
+          "prompt": "Round each number to the nearest hundred to estimate 2602 + 6925.",
+          "choices": [
+            "9600",
+            "9500",
+            "9527",
+            "9510"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u01-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u01-l01"
+  }
+}

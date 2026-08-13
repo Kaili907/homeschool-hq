@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u02-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u02-l07",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Expression Structure and Equivalence",
+    "dayInUnit": 7,
+    "courseDay": 25,
+    "phase": "Investigation or close reading",
+    "focus": "interpreting parts of an expression in context",
+    "title": "Investigation or close reading: interpreting parts of an expression in context"
+  },
+  "standards": [
+    "A-SSE.1",
+    "A-SSE.2",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 1,
+          "prompt": "In 1200(1 + 0.05)^t, what does 1200 represent?",
+          "workedSolution": {
+            "steps": [
+              "The form is P(1 + r)^t.",
+              "P is the value before any growth is applied."
+            ],
+            "answer": "the starting amount"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor completely: 4x² − 49.",
+          "choices": [
+            "(2x − 7)(2x + 7)",
+            "(2x − 7)²",
+            "(2x − 49)(2x + 1)",
+            "(2x + 7)²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: x^2 - 9x + 20.",
+          "choices": [
+            "(x − 5)(x − 4)",
+            "(x + 5)(x − 4)",
+            "(x − 20)(x + 9)",
+            "(x + 5)(x + 4)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-greatest-common-factor",
+          "standard": "A-SSE.2",
+          "difficulty": 2,
+          "prompt": "Factor out the greatest common factor: 12x^2 + 48x.",
+          "choices": [
+            "12x(x + 8)",
+            "x(12x + 48)",
+            "6x(2x + 8)",
+            "6(2x² + 8x)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-expression-check",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "A student claims that 7(x² − 10x + 4) expands to 7x² − 70x + 29. Is the claim correct?",
+          "choices": [
+            "Yes, the expansion is correct.",
+            "No; the constant term should be 28.",
+            "No; the x term should be -10x.",
+            "No; the leading term should be x²."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "recognize-substitution-structure",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "The expression (x + 7)^6 − 49 can be treated as a difference of squares. Which substitution makes that structure visible?",
+          "choices": [
+            "u = x + 7",
+            "u = (x + 7)^6",
+            "u = x^3",
+            "u = (x + 7)^3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression-part",
+          "standard": "A-SSE.1",
+          "difficulty": 3,
+          "prompt": "An investment is modelled by 3500(1 + 0.03)^t. In this expression, what does 3500 represent?",
+          "choices": [
+            "the growth factor applied once per year",
+            "the amount invested before any interest is added",
+            "the total interest earned over the whole period",
+            "the number of years the investment grows"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u02-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "factor-difference-of-squares",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: 4x² − 9.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u02-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "factor-quadratic-trinomial",
+          "standard": "A-SSE.2",
+          "difficulty": 3,
+          "prompt": "Factor completely: x^2 - x - 20.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u02-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u02-l07"
+  }
+}

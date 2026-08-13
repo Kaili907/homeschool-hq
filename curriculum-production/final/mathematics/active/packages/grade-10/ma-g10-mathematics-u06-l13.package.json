@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u06-l13",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u06-l13",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Similarity Proofs and Applications",
+    "dayInUnit": 13,
+    "courseDay": 103,
+    "phase": "Skill consolidation",
+    "focus": "the triangle proportionality theorem",
+    "title": "Skill consolidation: the triangle proportionality theorem"
+  },
+  "standards": [
+    "G-SRT.4",
+    "G-SRT.5",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "proportional-side-in-similar-triangles",
+          "standard": "G-SRT.5",
+          "difficulty": 1,
+          "prompt": "Triangle ABC is similar to triangle DEF. Side AB = 8 corresponds to DE = 24. If BC = 8, find EF.",
+          "choices": [
+            "24",
+            "3",
+            "72",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "geometric-mean-altitude",
+          "standard": "G-SRT.5",
+          "difficulty": 2,
+          "prompt": "In a right triangle, the altitude to the hypotenuse divides it into segments of length 2 and 18. Find the altitude.",
+          "choices": [
+            "10",
+            "20",
+            "16",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "indirect-measurement-by-similarity",
+          "standard": "G-SRT.5",
+          "difficulty": 2,
+          "prompt": "A 3 m pole casts a 5 m shadow. At the same moment a building casts a 15 m shadow. How tall is the building?",
+          "choices": [
+            "15 m",
+            "9 m",
+            "13 m",
+            "25 m"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "similarity-proof-justification",
+          "standard": "G-SRT.4",
+          "difficulty": 2,
+          "prompt": "Two triangles with all three pairs of sides in the same ratio are similar. Which statement correctly justifies it?",
+          "choices": [
+            "The criterion holds only when the ratio is a whole number.",
+            "This is the SSS similarity criterion: a dilation matches one triangle’s sides to the other’s, and the resulting figures are congruent.",
+            "Equal ratios of sides guarantee congruence, not similarity.",
+            "This is the SSS congruence criterion applied directly."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "proportional-side-in-similar-triangles",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is similar to triangle DEF. Side AB = 14 corresponds to DE = 56. If BC = 17, find EF.",
+          "choices": [
+            "68",
+            "17",
+            "59",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "geometric-mean-altitude",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "In a right triangle, the altitude to the hypotenuse divides it into segments of length 4 and 100. Find the altitude.",
+          "choices": [
+            "52",
+            "104",
+            "96",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "indirect-measurement-by-similarity",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "A 6 m pole casts a 4 m shadow. At the same moment a building casts a 32 m shadow. How tall is the building?",
+          "choices": [
+            "21 m",
+            "48 m",
+            "34 m",
+            "32 m"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "similarity-proof-justification",
+          "standard": "G-SRT.4",
+          "difficulty": 3,
+          "prompt": "A line parallel to one side of a triangle divides the other two sides proportionally. Which statement correctly justifies it?",
+          "choices": [
+            "The result follows from the Pythagorean theorem applied twice.",
+            "The parallel line creates corresponding angles, giving a smaller triangle similar to the original by AA, so the sides are in proportion.",
+            "The parallel line bisects both sides by definition.",
+            "The two parts of each side are congruent because the line is parallel."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "proportional-side-in-similar-triangles",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is similar to triangle DEF. Side AB = 15 corresponds to DE = 30. If BC = 6, find EF.",
+          "choices": [
+            "12",
+            "6",
+            "3",
+            "21"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u06-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "geometric-mean-altitude",
+          "standard": "G-SRT.5",
+          "difficulty": 2,
+          "prompt": "In a right triangle, the altitude to the hypotenuse divides it into segments of length 3 and 3. Find the altitude.",
+          "choices": [
+            "3",
+            "0",
+            "6",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "indirect-measurement-by-similarity",
+          "standard": "G-SRT.5",
+          "difficulty": 3,
+          "prompt": "A 7 m pole casts a 5 m shadow. At the same moment a building casts a 25 m shadow. How tall is the building?",
+          "choices": [
+            "18 m",
+            "25 m",
+            "27 m",
+            "35 m"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u06-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "similarity-proof-justification",
+          "standard": "G-SRT.4",
+          "difficulty": 3,
+          "prompt": "The Pythagorean theorem can be proved using similarity. Which statement correctly justifies it?",
+          "choices": [
+            "Similarity gives a² + b² = c² only for isosceles right triangles.",
+            "The theorem follows from the triangle inequality.",
+            "The theorem follows because all right triangles are similar to each other.",
+            "The altitude to the hypotenuse creates two triangles similar to the original; writing both similarity proportions and adding them yields a² + b² = c²."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u06-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u06-l13"
+  }
+}

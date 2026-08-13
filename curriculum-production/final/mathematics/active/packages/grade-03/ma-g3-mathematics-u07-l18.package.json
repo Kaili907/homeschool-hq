@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u07-l18",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u07-l18",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Measurement: Time, Liquid Volume, and Mass",
+    "dayInUnit": 18,
+    "courseDay": 126,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "measuring safely with an adult at home",
+    "title": "Transfer, reflection, and publication: measuring safely with an adult at home"
+  },
+  "standards": [
+    "3.MD.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 1,
+          "prompt": "A jug has 350 milliliters. Another 120 milliliters are poured in. How much is in the jug now?",
+          "workedSolution": {
+            "steps": [
+              "350 + 120 = 470."
+            ],
+            "answer": "470"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 218 milliliters. Another 33 milliliters are poured in. How many milliliters are in the container now?",
+          "choices": [
+            "251",
+            "33",
+            "218",
+            "252"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 346 milliliters. 173 milliliters are removed. How many milliliters are left?",
+          "choices": [
+            "173",
+            "346",
+            "519",
+            "174"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 309 milliliters. Another 262 milliliters are poured in. How many milliliters are in the container now?",
+          "choices": [
+            "262",
+            "571",
+            "309",
+            "572"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 793 kilograms. 273 kilograms are removed. How many kilograms are left?",
+          "choices": [
+            "520",
+            "1066",
+            "793",
+            "273"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 303 kilograms. 300 kilograms are removed. How many kilograms are left?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 514 kilograms. 208 kilograms are removed. How many kilograms are left?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u07-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u07-l18"
+  }
+}

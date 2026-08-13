@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l18",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l18",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 18,
+    "courseDay": 126,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "surface area and volume",
+    "title": "Publication, presentation, or reflection: surface area and volume"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "surface-area-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 1,
+          "prompt": "A rectangular prism has length 5, width 4, and height 3 (all in units). What is its exact surface area?",
+          "workedSolution": {
+            "steps": [
+              "Surface area is twice the sum of the three face areas: SA = 2(lw + lh + wh).",
+              "Find each face area: lw = 20, lh = 15, wh = 12.",
+              "Add and double: 2(20 + 15 + 12) = 2(47) = 94 square units."
+            ],
+            "answer": "94"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "What is the exact volume of a rectangular prism with length 8, width 12, and height 11 (units)? Give your answer in cubic units.",
+          "choices": [
+            "1055 cubic units",
+            "2112 cubic units",
+            "1056 cubic units",
+            "632 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a radius of 8 in. What is its exact circumference? Express your answer as a multiple of π.",
+          "choices": [
+            "15π in",
+            "16π in",
+            "8π in",
+            "32π in"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "find-radius-or-diameter-from-circumference",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a circumference of 15π in. What is its exact radius?",
+          "choices": [
+            "8 1/2 in",
+            "6 1/2 in",
+            "7 1/2 in",
+            "30 in"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a diameter of 10 ft. What is its exact area? Express your answer as a multiple of π (use a fraction for the coefficient if it is not a whole number).",
+          "choices": [
+            "24π ft²",
+            "27π ft²",
+            "10π ft²",
+            "25π ft²"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "circumference-area-relationship",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle's radius equals its circumference divided by 2π. A circle has a circumference of 8π ft. Use this relationship to find the circle's exact area, as a multiple of π.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "complementary-supplementary-angle",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two angles are complementary. One angle measures 36°. What is the measure of the other angle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l18"
+  }
+}

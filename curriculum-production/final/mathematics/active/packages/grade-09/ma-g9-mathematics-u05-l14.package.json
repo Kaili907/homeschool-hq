@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u05-l14",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u05-l14",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Quadratic Expressions and Equations",
+    "dayInUnit": 14,
+    "courseDay": 86,
+    "phase": "Transfer challenge",
+    "focus": "completing the square to reveal maximum or minimum",
+    "title": "Transfer challenge: completing the square to reveal maximum or minimum"
+  },
+  "standards": [
+    "A-SSE.3",
+    "A-REI.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 1,
+          "prompt": "Describe the roots of x² + 2x + 5 = 0.",
+          "workedSolution": {
+            "steps": [
+              "b² − 4ac = 4 − 20 = −16.",
+              "Negative, so there are no real roots."
+            ],
+            "answer": "no real roots"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "Rewrite x^2 - 14x + 41 in vertex form and state the vertex.",
+          "choices": [
+            "(x + 7)² − 8; vertex (-7, -8)",
+            "(x − 7)² + 41; vertex (7, 41)",
+            "(x − 7)² + 8; vertex (7, 8)",
+            "(x − 7)² − 8; vertex (7, -8)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Use the quadratic formula to solve 3x^2 - 8x + 3 = 0. Give exact values.",
+          "choices": [
+            "x = (-8 ± 2√7) / 6",
+            "x = (8 ± 2√7) / 6",
+            "x = (8 ± √28) / 6",
+            "x = (8 ± 2√7) / 3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the x-intercepts of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "standard form",
+            "vertex form",
+            "recursive form",
+            "factored form"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Solve by factoring: x^2 + 10x + 9 = 0.",
+          "choices": [
+            "x = -8 or x = -1",
+            "x = -9 or x = -1",
+            "x = 9 or x = 1",
+            "x = -9 or x = 1"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Without solving, describe the roots of -5x^2 - x + 11 = 0.",
+          "choices": [
+            "two distinct irrational roots",
+            "exactly one real root (a repeated root)",
+            "two distinct rational roots",
+            "no real roots (two complex conjugate roots)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "Rewrite x^2 - 4x + 14 in vertex form and state the vertex.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Use the quadratic formula to solve 3x^2 - 8x - 4 = 0. Give exact values.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the vertex of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u05-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u05-l14"
+  }
+}

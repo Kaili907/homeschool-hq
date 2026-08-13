@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l15",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l15",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 15,
+    "courseDay": 177,
+    "phase": "Synthesis and review",
+    "focus": "the mathematical justifications in the capstone design",
+    "title": "Synthesis and review: the mathematical justifications in the capstone design"
+  },
+  "standards": [
+    "3.MD.8",
+    "3.G.1",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 1,
+          "prompt": "Which quadrilateral is defined by having exactly one pair of parallel sides?",
+          "choices": [
+            "trapezoid",
+            "rectangle",
+            "square",
+            "rhombus"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 7 m long and 9 m wide. What is its perimeter?",
+          "choices": [
+            "63 m",
+            "33 m",
+            "32 m",
+            "16 m"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having four right angles, with opposite sides equal?",
+          "choices": [
+            "trapezoid",
+            "rhombus",
+            "rectangle",
+            "square"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 12 cm long and 14 cm wide. What is its perimeter?",
+          "choices": [
+            "53 cm",
+            "168 cm",
+            "52 cm",
+            "26 cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 3,
+          "prompt": "Which quadrilateral is defined by having four equal sides, but not necessarily right angles?",
+          "choices": [
+            "trapezoid",
+            "rhombus",
+            "rectangle",
+            "square"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 8 ft long and 3 ft wide. What is its perimeter?",
+          "choices": [
+            "22 ft",
+            "24 ft",
+            "23 ft",
+            "11 ft"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having four equal sides and four right angles?",
+          "choices": [
+            "rectangle",
+            "rhombus",
+            "trapezoid",
+            "square"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 10 ft long and 3 ft wide. What is its perimeter?",
+          "choices": [
+            "26 ft",
+            "13 ft",
+            "27 ft",
+            "30 ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 5 in long and 8 in wide. What is its perimeter?",
+          "choices": [
+            "40 in",
+            "26 in",
+            "27 in",
+            "13 in"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l15"
+  }
+}

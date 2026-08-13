@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l11",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l11",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 11,
+    "courseDay": 173,
+    "phase": "Concept extension",
+    "focus": "design constraints that involve both perimeter and area",
+    "title": "Concept extension: design constraints that involve both perimeter and area"
+  },
+  "standards": [
+    "3.MD.7",
+    "3.MD.8"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangular patio is 7 m long and 4 m wide. What is its area?",
+          "workedSolution": {
+            "steps": [
+              "7 × 4 = 28.",
+              "The area is 28 square meters."
+            ],
+            "answer": "28 sq m"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 9 cm long and 6 cm wide. What is its perimeter?",
+          "choices": [
+            "30 cm",
+            "54 cm",
+            "31 cm",
+            "15 cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular patio is 11 ft long and 7 ft wide. What is its area?",
+          "choices": [
+            "77 sq ft",
+            "78 sq ft",
+            "36 sq ft",
+            "18 sq ft"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 3 in long and 5 in wide. What is its perimeter?",
+          "choices": [
+            "8 in",
+            "17 in",
+            "15 in",
+            "16 in"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular patio is 12 in long and 3 in wide. What is its area?",
+          "choices": [
+            "30 sq in",
+            "15 sq in",
+            "37 sq in",
+            "36 sq in"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 4 cm long and 12 cm wide. What is its perimeter?",
+          "choices": [
+            "33 cm",
+            "48 cm",
+            "32 cm",
+            "16 cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular patio is 10 in long and 7 in wide. What is its area?",
+          "choices": [
+            "71 sq in",
+            "34 sq in",
+            "70 sq in",
+            "17 sq in"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 14 ft long and 2 ft wide. What is its perimeter?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular patio is 3 m long and 2 m wide. What is its area?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l11"
+  }
+}

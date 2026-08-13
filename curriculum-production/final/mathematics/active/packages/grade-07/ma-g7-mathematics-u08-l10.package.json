@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u08-l10",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u08-l10",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Sampling and Statistical Inference",
+    "dayInUnit": 10,
+    "courseDay": 136,
+    "phase": "Discussion or problem seminar",
+    "focus": "measures of center",
+    "title": "Discussion or problem seminar: measures of center"
+  },
+  "standards": [
+    "7.SP.1",
+    "7.SP.2",
+    "7.SP.3",
+    "7.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "compute-mean-median-range",
+          "standard": "7.SP.4",
+          "difficulty": 1,
+          "prompt": "A sample of 5 values is: 12, 15, 18, 20, 25. What is the mean of this data set?",
+          "workedSolution": {
+            "steps": [
+              "Add all the values: 12 + 15 + 18 + 20 + 25 = 90.",
+              "Divide by the number of values: 90 ÷ 5 = 18."
+            ],
+            "answer": "18"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "mean-vs-median-with-outlier",
+          "standard": "7.SP.4",
+          "difficulty": 2,
+          "prompt": "A data set has 5 values: 19, 22, 20, 18, 23. What is the new mean if an outlier of 54 is added to the data set, making 6 values in all?",
+          "choices": [
+            "20 2/5",
+            "26",
+            "28",
+            "29"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "compute-mean-absolute-deviation",
+          "standard": "7.SP.3",
+          "difficulty": 3,
+          "prompt": "A data set is: 36, 21, 46, 22, 45, with a mean of 34. What is the mean absolute deviation (MAD) of this data set?",
+          "choices": [
+            "0",
+            "13",
+            "12",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "visual-overlap-in-mad-units",
+          "standard": "7.SP.3",
+          "difficulty": 3,
+          "prompt": "Two data sets have means of 76 and 89. Their mean absolute deviation (MAD) is 6. Express the difference between the means as a multiple of the MAD.",
+          "choices": [
+            "5 1/6 times the MAD",
+            "4 1/6 times the MAD",
+            "3 1/6 times the MAD",
+            "2 1/6 times the MAD"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-two-samples-center",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "Sample A: 31, 56, 54, 36, 39, 36. Sample B: 44, 50, 50, 55, 62, 87. Based on the means, which sample tends to have greater values?",
+          "choices": [
+            "Sample A, with a mean of 42 compared to 58.",
+            "Sample B, with a mean of 58 compared to 42.",
+            "Sample B, with a mean of 42 compared to 58.",
+            "Both samples have the same mean."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-two-samples-variability",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "Sample A: 53, 29, 47, 56, 27, 48. Sample B: 45, 41, 41, 43, 42, 43. Based on the range of each sample, which sample is more consistent (less variable)?",
+          "choices": [
+            "Both samples have the same range.",
+            "Sample A, with a range of 29 compared to 4.",
+            "Sample B, with a range of 4 compared to 29.",
+            "Sample B, with a range of 29 compared to 4."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-population-vs-sample",
+          "standard": "7.SP.1",
+          "difficulty": 3,
+          "prompt": "A researcher wants to know about all 551 visitors to a science museum. She randomly selects 63 of them to survey. What is the population in this situation?",
+          "choices": [
+            "All 551 visitors to a science museum",
+            "Only the first 63 visitors to a science museum on a list",
+            "The 63 randomly selected visitors to a science museum",
+            "The researcher's own estimate"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "sampling-method-bias-analysis",
+          "standard": "7.SP.1",
+          "difficulty": 3,
+          "prompt": "A student posts an online form, and 79 students at Lincoln Middle School choose to respond. Is this sampling method likely to produce a representative sample?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "estimate-population-from-sample-proportion",
+          "standard": "7.SP.2",
+          "difficulty": 3,
+          "prompt": "In a random sample of 35 shoppers at a grocery store, 8 preferred a new snack flavor. Based on this sample, about how many of the 280 shoppers at a grocery store would you expect to prefer a new snack flavor?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u08-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u08-l10"
+  }
+}

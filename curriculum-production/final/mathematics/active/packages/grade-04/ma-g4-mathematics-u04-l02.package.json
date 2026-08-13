@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l02",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 2,
+    "courseDay": 56,
+    "phase": "Concept build A",
+    "focus": "multiplying by multiples of ten",
+    "title": "Concept build A: multiplying by multiples of ten"
+  },
+  "standards": [
+    "4.NBT.1",
+    "4.NBT.5"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Find 4 × 326 using partial products.",
+          "workedSolution": {
+            "steps": [
+              "4 × 300 = 1200.",
+              "4 × 20 = 80.",
+              "4 × 6 = 24.",
+              "1200 + 80 + 24 = 1304."
+            ],
+            "answer": "1304"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "place-value-relationship-multiplication",
+          "standard": "4.NBT.1",
+          "difficulty": 2,
+          "prompt": "A digit 7 moves one place to the left. By what factor does its value change?",
+          "workedSolution": {
+            "steps": [
+              "Moving one place left multiplies the value by 10."
+            ],
+            "answer": "10"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use an area model to find 4 × 44. Split 44 into 40 and 4.",
+          "choices": [
+            "164",
+            "160",
+            "176",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Find 5 × 219 using partial products.",
+          "choices": [
+            "1090",
+            "1050",
+            "1095",
+            "1000"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship-multiplication",
+          "standard": "4.NBT.1",
+          "difficulty": 2,
+          "prompt": "A digit 7 moves one place to the left in a number. By what factor does its value change?",
+          "choices": [
+            "1",
+            "20",
+            "10",
+            "100"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use an area model to find 5 × 24. Split 24 into 20 and 4.",
+          "choices": [
+            "100",
+            "120",
+            "104",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 2 × 378 using partial products.",
+          "choices": [
+            "740",
+            "756",
+            "754",
+            "600"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship-multiplication",
+          "standard": "4.NBT.1",
+          "difficulty": 2,
+          "prompt": "A digit 5 moves one place to the left in a number. By what factor does its value change?",
+          "choices": [
+            "1",
+            "20",
+            "100",
+            "10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use an area model to find 5 × 28. Split 28 into 20 and 8.",
+          "choices": [
+            "100",
+            "40",
+            "108",
+            "140"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 4 × 122 using partial products.",
+          "choices": [
+            "488",
+            "480",
+            "484",
+            "400"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l02"
+  }
+}

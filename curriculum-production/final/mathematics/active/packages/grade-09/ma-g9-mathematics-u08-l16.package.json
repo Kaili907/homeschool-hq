@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u08-l16",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u08-l16",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Rate of Change and Building Functions",
+    "dayInUnit": 16,
+    "courseDay": 142,
+    "phase": "Unit assessment",
+    "focus": "combining functions arithmetically",
+    "title": "Unit assessment: combining functions arithmetically"
+  },
+  "standards": [
+    "F-IF.6",
+    "F-BF.1",
+    "F-BF.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 1,
+          "prompt": "For f(x) = 2x² + 5x + 7, find the average rate of change from x = -2 to x = 1.",
+          "choices": [
+            "-9",
+            "9",
+            "-3",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 1,
+          "prompt": "A sequence has g(1) = 5 and g(n) = 3·g(n − 1). Write the explicit form and find g(5).",
+          "choices": [
+            "g(n) = 3·5^(n−1); g(5) = 1875",
+            "g(n) = 5·3^(n−1); g(5) = 405",
+            "g(n) = 5·3^n; g(5) = 1215",
+            "g(n) = 5 + 3(n − 1); g(5) = 17"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "A venue charges $25 to open plus $3 per attendee. Write C(n) for the total cost of n attendees, then find C(14).",
+          "choices": [
+            "C(n) = 3 + 25n; C(14) = 353",
+            "C(n) = 25n + 3; C(14) = 353",
+            "C(n) = 28n; C(14) = 392",
+            "C(n) = 25 + 3n; C(14) = 67"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "Revenue is R(x) = -2x + 1 and cost is C(x) = -2x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = 0x − 1",
+            "P(x) = 0x + 1",
+            "P(x) = 0x + 3",
+            "P(x) = -4x + 1"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "A table records output 16 at input 3 and output 29 at input 5. What is the average rate of change between these readings?",
+          "choices": [
+            "13/2 output units per input unit",
+            "13 output units per input unit",
+            "-13/2 output units per input unit",
+            "13/8 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "For f(x) = -2x² − 1x − 9, find the average rate of change from x = 4 to x = 2.",
+          "choices": [
+            "26",
+            "13",
+            "13/3",
+            "-13"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 3,
+          "prompt": "A sequence has g(1) = 9 and g(n) = 3·g(n − 1). Write the explicit form and find g(6).",
+          "choices": [
+            "g(n) = 9 + 3(n − 1); g(6) = 24",
+            "g(n) = 3·9^(n−1); g(6) = 177147",
+            "g(n) = 9·3^(n−1); g(6) = 2187",
+            "g(n) = 9·3^n; g(6) = 6561"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "A venue charges $175 to open plus $2 per attendee. Write C(n) for the total cost of n attendees, then find C(10).",
+          "choices": [
+            "C(n) = 2 + 175n; C(10) = 1752",
+            "C(n) = 177n; C(10) = 1770",
+            "C(n) = 175 + 2n; C(10) = 195",
+            "C(n) = 175n + 2; C(10) = 1752"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "Revenue is R(x) = -6x + 3 and cost is C(x) = -5x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = -1x + 3",
+            "P(x) = 1x + 3",
+            "P(x) = -11x + 3",
+            "P(x) = -1x − 3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "A table records output 41 at input 2 and output 73 at input 4. What is the average rate of change between these readings?",
+          "choices": [
+            "16/3 output units per input unit",
+            "16 output units per input unit",
+            "32 output units per input unit",
+            "-16 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "For f(x) = 4x² + 1x + 3, find the average rate of change from x = 4 to x = 1.",
+          "choices": [
+            "-63",
+            "21",
+            "-63/5",
+            "-21"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 3,
+          "prompt": "A sequence has g(1) = 12 and g(n) = 4·g(n − 1). Write the explicit form and find g(5).",
+          "choices": [
+            "g(n) = 4·12^(n−1); g(5) = 82944",
+            "g(n) = 12 + 4(n − 1); g(5) = 28",
+            "g(n) = 12·4^(n−1); g(5) = 3072",
+            "g(n) = 12·4^n; g(5) = 12288"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u08-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u08-l16"
+  }
+}

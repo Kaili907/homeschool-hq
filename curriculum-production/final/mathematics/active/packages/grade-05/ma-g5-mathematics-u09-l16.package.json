@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u09-l16",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u09-l16",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Geometry and the Coordinate Plane",
+    "dayInUnit": 16,
+    "courseDay": 160,
+    "phase": "Unit assessment",
+    "focus": "hierarchies of properties",
+    "title": "Unit assessment: hierarchies of properties"
+  },
+  "standards": [
+    "5.G.1",
+    "5.G.2",
+    "5.G.3",
+    "5.G.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 1,
+          "prompt": "On a map, the garden is at x = 4 and y = 0. Which point names its location?",
+          "choices": [
+            "(5, 1)",
+            "(0, 4)",
+            "(3, 0)",
+            "(4, 0)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 1,
+          "prompt": "A quadrilateral has four equal sides, 0 right angles, and 2 pairs of parallel sides. What is the most specific name?",
+          "choices": [
+            "pentagon",
+            "rectangle",
+            "triangle",
+            "rhombus"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 2,
+          "prompt": "In the hierarchy square → rectangle → quadrilateral, what category comes immediately after square?",
+          "choices": [
+            "triangle",
+            "rectangle",
+            "pentagon",
+            "circle"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "Lines in a plane that never meet are called what?",
+          "choices": [
+            "vertex",
+            "parallel",
+            "edge",
+            "perpendicular"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-route",
+          "standard": "5.G.2",
+          "difficulty": 2,
+          "prompt": "Start at (0, 7). Move right 3 and up 2. What is the endpoint?",
+          "choices": [
+            "(3, 8)",
+            "(3, 9)",
+            "(3, 10)",
+            "(2, 9)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "identify-coordinate-axes",
+          "standard": "5.G.1",
+          "difficulty": 2,
+          "prompt": "Which coordinate-plane axis is horizontal?",
+          "choices": [
+            "x-axis",
+            "y-axis",
+            "ordered pair",
+            "origin"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "read-ordered-pair",
+          "standard": "5.G.1",
+          "difficulty": 3,
+          "prompt": "What ordered pair has x-coordinate 14 and y-coordinate 13?",
+          "choices": [
+            "(15, 13)",
+            "(14, 12)",
+            "(13, 14)",
+            "(14, 13)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "On a map, the library is at x = 9 and y = 3. Which point names its location?",
+          "choices": [
+            "(9, 3)",
+            "(9, 4)",
+            "(10, 3)",
+            "(8, 3)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 3,
+          "prompt": "A shape has 3 sides, 0 right angles, and 0 pairs of parallel sides. What is the most specific name?",
+          "choices": [
+            "rectangle",
+            "triangle",
+            "parallelogram",
+            "rhombus"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 3,
+          "prompt": "In the hierarchy rhombus → parallelogram → quadrilateral, what category comes immediately after rhombus?",
+          "choices": [
+            "parallelogram",
+            "triangle",
+            "trapezoid",
+            "pentagon"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 3,
+          "prompt": "The point where two sides of a polygon meet are called what?",
+          "choices": [
+            "vertex",
+            "parallel",
+            "edge",
+            "perpendicular"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-route",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "Start at (9, 12). Move right 3 and up 3. What is the endpoint?",
+          "choices": [
+            "(15, 12)",
+            "(11, 15)",
+            "(12, 15)",
+            "(12, 16)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u09-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u09-l16"
+  }
+}

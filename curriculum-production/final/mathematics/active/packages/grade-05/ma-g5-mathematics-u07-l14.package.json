@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u07-l14",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u07-l14",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Decimal Operations",
+    "dayInUnit": 14,
+    "courseDay": 122,
+    "phase": "Transfer challenge",
+    "focus": "decimal subtraction",
+    "title": "Transfer challenge: decimal subtraction"
+  },
+  "standards": [
+    "5.NBT.3",
+    "5.NBT.4",
+    "5.NBT.7"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 1,
+          "prompt": "Find 1.2 × 3.",
+          "workedSolution": {
+            "steps": [
+              "Ignore the decimal point at first and multiply whole numbers: 12 × 3 = 36.",
+              "Count the decimal places in the factors: 1.2 has one and 3 has none, so the product needs one.",
+              "Count one digit from the right of 36 and place the point there: 1.2 × 3 = 3.6."
+            ],
+            "answer": "3.6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 15.4 ÷ 7.",
+          "choices": [
+            "0.022",
+            "2.2",
+            "22",
+            "0.22"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "5 tickets cost $5.43 each. What is the total cost?",
+          "choices": [
+            "$27.15",
+            "$0.2715",
+            "$2.715",
+            "$271.5"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest whole number to estimate 52.98 + 31.66.",
+          "choices": [
+            "84.64",
+            "85",
+            "0.8500",
+            "850"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 40.21 + 58.22.",
+          "choices": [
+            "98.43",
+            "984.3",
+            "9843",
+            "62.24"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "decimal-subtraction",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 7.41 - 4.73.",
+          "choices": [
+            "12.14",
+            "2.68",
+            "26.8",
+            "268"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 8.5 × 5.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 18.9 ÷ 3.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "2 tickets cost $8.60 each. What is the total cost?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u07-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u07-l14"
+  }
+}

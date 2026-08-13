@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u06-l13",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u06-l13",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Fraction Equivalence and Comparison",
+    "dayInUnit": 13,
+    "courseDay": 103,
+    "phase": "Performance task: plan",
+    "focus": "the equivalence proof wall",
+    "title": "Performance task: plan: the equivalence proof wall"
+  },
+  "standards": [
+    "4.NF.1",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 1,
+          "prompt": "Generate a fraction equivalent to 2/5 by multiplying the numerator and denominator by the same number.",
+          "workedSolution": {
+            "steps": [
+              "Multiply numerator and denominator by 3.",
+              "2 × 3 = 6, 5 × 3 = 15.",
+              "2/5 = 6/15."
+            ],
+            "answer": "6/15"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 2,
+          "prompt": "Generate a fraction equivalent to 4/6 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "16/6",
+            "4/24",
+            "16/24",
+            "17/24"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 2,
+          "prompt": "Generate a fraction equivalent to 3/5 by multiplying the numerator and denominator by the same number.",
+          "choices": [
+            "7/10",
+            "6/5",
+            "3/10",
+            "6/10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u06-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 3,
+          "prompt": "Generate a fraction equivalent to 7/8 by multiplying the numerator and denominator by the same number.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u06-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "equivalent-fractions-generate",
+          "standard": "4.NF.1",
+          "difficulty": 3,
+          "prompt": "Generate a fraction equivalent to 3/6 by multiplying the numerator and denominator by the same number.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u06-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u06-l13"
+  }
+}

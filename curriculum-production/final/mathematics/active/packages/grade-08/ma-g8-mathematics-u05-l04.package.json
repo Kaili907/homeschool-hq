@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u05-l04",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Functions",
+    "dayInUnit": 4,
+    "courseDay": 80,
+    "phase": "Independent application A",
+    "focus": "linear versus nonlinear patterns",
+    "title": "Independent application A: linear versus nonlinear patterns"
+  },
+  "standards": [
+    "8.F.1",
+    "8.F.2",
+    "8.F.3",
+    "8.F.4",
+    "8.F.5"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-linear-from-table",
+          "standard": "8.F.3",
+          "difficulty": 1,
+          "prompt": "A table shows:\nx: 0, 1, 2, 3\ny: 2, 5, 8, 11\nIs the relationship linear or nonlinear?",
+          "workedSolution": {
+            "steps": [
+              "Find the differences between consecutive y-values: 5 - 2 = 3, 8 - 5 = 3, 11 - 8 = 3.",
+              "The first differences are all equal to 3.",
+              "A constant first difference means the relationship is linear."
+            ],
+            "answer": "linear"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-from-equation",
+          "standard": "8.F.3",
+          "difficulty": 2,
+          "prompt": "Classify the equation y = x² as linear or nonlinear.",
+          "choices": [
+            "constant",
+            "linear",
+            "cannot be determined from an equation",
+            "nonlinear"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "construct-function-from-two-points",
+          "standard": "8.F.4",
+          "difficulty": 2,
+          "prompt": "A function contains the points (5, -45) and (6, -51). Write the function rule f(x) = mx + b.",
+          "choices": [
+            "f(x) = -6x - 16",
+            "f(x) = -6x + 15",
+            "f(x) = -5x - 15",
+            "f(x) = -6x - 15"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "construct-function-from-context",
+          "standard": "8.F.4",
+          "difficulty": 2,
+          "prompt": "A rental company charges a $66 base fee plus $33 per hour. Which function models the total cost f(x) for x hours?",
+          "choices": [
+            "f(x) = 33x + 67",
+            "f(x) = 33x + 65",
+            "f(x) = 33x + 66",
+            "f(x) = 66x + 33"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "match-graph-description-to-scenario",
+          "standard": "8.F.5",
+          "difficulty": 3,
+          "prompt": "A candle burns down at a steady rate until it is gone. Which description best matches the shape of the graph over time?",
+          "choices": [
+            "increasing at a constant rate the whole time",
+            "constant, then increasing",
+            "increasing, then constant, then decreasing",
+            "decreasing at a constant rate the whole time"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-interval-behavior",
+          "standard": "8.F.5",
+          "difficulty": 3,
+          "prompt": "A graph shows height over time.\nFrom t = 0 to t = 6, height goes from 6 to 7.\nFrom t = 6 to t = 11, height goes from 7 to 7.\nFrom t = 11 to t = 17, height goes from 7 to 6.\nWhich interval shows the height decreasing?",
+          "choices": [
+            "t = 6 to t = 11",
+            "No interval shows this behavior.",
+            "t = 11 to t = 17",
+            "t = 0 to t = 6"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "is-relation-a-function",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Consider the relation {(-13, -5), (-4, 16), (4, 9), (-13, 12)}. Is this relation a function?",
+          "choices": [
+            "It is a function only if every output is different.",
+            "No, this relation is not a function.",
+            "Yes, this relation is a function.",
+            "Cannot be determined from the given pairs."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "function-graph-as-pairs",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Which set of ordered pairs does NOT represent a function?",
+          "choices": [
+            "{(-4, -4), (9, 7), (5, 4), (2, 13)}",
+            "{(0, -15), (-14, 5), (6, -1), (-6, -16)}",
+            "{(11, 13), (-11, 3), (7, -9), (-11, 9)}",
+            "{(6, -1), (4, 5), (-1, -9), (1, 5)}"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Given f(x) = 7x + 8, find f(-10).",
+          "choices": [
+            "-59",
+            "-61",
+            "-62",
+            "-60"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "find-input-from-output",
+          "standard": "8.F.1",
+          "difficulty": 2,
+          "prompt": "Given f(x) = 8x - 5, find the value of x for which f(x) = -61.",
+          "choices": [
+            "-7",
+            "-4",
+            "-10",
+            "-5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-rate-of-change",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function B is given by f(x) = 3x + 19. Function A is given by the table:\nx: 5, 6\ny: 16, 24\nWhich function has the greater rate of change?",
+          "choices": [
+            "Function B",
+            "Cannot be determined from the given information.",
+            "They have the same rate of change.",
+            "Function A"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-value-at-x",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function B is given by f(x) = -8x - 1. Function A starts at 1 and increases by 10 each unit. Which function has the greater value when x = 5?",
+          "choices": [
+            "Function B",
+            "The two functions have equal values at that input.",
+            "Cannot be determined without a graph.",
+            "Function A"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u05-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u05-l04"
+  }
+}

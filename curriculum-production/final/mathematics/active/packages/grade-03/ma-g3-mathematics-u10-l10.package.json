@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l10",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l10",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 10,
+    "courseDay": 172,
+    "phase": "Independent evidence B",
+    "focus": "partitioning shapes into parts with equal areas",
+    "title": "Independent evidence B: partitioning shapes into parts with equal areas"
+  },
+  "standards": [
+    "3.NF.1",
+    "3.G.2"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "partition-shape-equal-areas-capstone",
+          "standard": "3.G.2",
+          "difficulty": 1,
+          "prompt": "A garden plot is partitioned into 6 parts of equal area. What fraction is one part?",
+          "workedSolution": {
+            "steps": [
+              "6 equal parts make up the whole.",
+              "One part is 1/6."
+            ],
+            "answer": "1/6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A garden bed is divided into 6 equal sections. 2 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "2/5",
+            "2/7",
+            "6/2",
+            "2/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "partition-shape-equal-areas-capstone",
+          "standard": "3.G.2",
+          "difficulty": 2,
+          "prompt": "A square garden plot is partitioned into 8 parts of equal area. What fraction of the plot does one part represent?",
+          "choices": [
+            "1/9",
+            "8/1",
+            "1/7",
+            "1/8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A garden bed is divided into 8 equal sections. 5 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "5/8",
+            "5/7",
+            "5/9",
+            "8/5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "partition-shape-equal-areas-capstone",
+          "standard": "3.G.2",
+          "difficulty": 3,
+          "prompt": "A square garden plot is partitioned into 6 parts of equal area. What fraction of the plot does one part represent?",
+          "choices": [
+            "6/1",
+            "1/6",
+            "1/7",
+            "1/5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A garden bed is divided into 8 equal sections. 4 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "4/8",
+            "8/4",
+            "4/7",
+            "4/9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A garden bed is divided into 8 equal sections. 6 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "6/8",
+            "6/9",
+            "8/6",
+            "6/7"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A garden bed is divided into 8 equal sections. 2 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "2/8",
+            "2/9",
+            "8/2",
+            "2/7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A garden bed is divided into 6 equal sections. 3 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "3/7",
+            "3/6",
+            "6/3",
+            "3/5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction-capstone",
+          "standard": "3.NF.1",
+          "difficulty": 3,
+          "prompt": "A garden bed is divided into 6 equal sections. 5 sections are planted with flowers. What fraction of the bed is planted?",
+          "choices": [
+            "5/7",
+            "5/5",
+            "6/5",
+            "5/6"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l10"
+  }
+}

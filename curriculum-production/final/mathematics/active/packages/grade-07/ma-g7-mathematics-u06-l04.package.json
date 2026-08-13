@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u06-l04",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Scale Drawings and Geometric Constructions",
+    "dayInUnit": 4,
+    "courseDay": 94,
+    "phase": "Independent application A",
+    "focus": "reproducing a drawing at a new scale",
+    "title": "Independent application A: reproducing a drawing at a new scale"
+  },
+  "standards": [
+    "7.G.1",
+    "7.G.2"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "scale-factor",
+          "standard": "7.G.1",
+          "difficulty": 1,
+          "prompt": "A 4 cm drawing represents 20 cm. What is the scale factor from drawing to actual?",
+          "workedSolution": {
+            "steps": [
+              "Write the scale as a ratio with matching units.",
+              "Multiply or divide consistently, then check whether the dimensions are possible."
+            ],
+            "answer": "5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scale-drawing",
+          "standard": "7.G.1",
+          "difficulty": 2,
+          "prompt": "A map scale is 2 cm : 8 m. What actual distance does 20 cm represent?",
+          "choices": [
+            "81 m",
+            "83 m",
+            "82 m",
+            "80 m"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "actual-drawing-dimensions",
+          "standard": "7.G.1",
+          "difficulty": 2,
+          "prompt": "A 21 m path is drawn at 1 cm : 7 m. What is its drawing length?",
+          "choices": [
+            "7 cm",
+            "5 cm",
+            "6 cm",
+            "3 cm"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "reproduce-at-new-scale",
+          "standard": "7.G.1",
+          "difficulty": 2,
+          "prompt": "A 7 cm segment is reproduced using a scale factor of 4. What is its new length?",
+          "choices": [
+            "30 cm",
+            "31 cm",
+            "32 cm",
+            "28 cm"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "construct-triangle",
+          "standard": "7.G.2",
+          "difficulty": 3,
+          "prompt": "Can segments of lengths 2, 7, and 9 form a triangle?",
+          "choices": [
+            "only if all sides are equal",
+            "not enough information",
+            "no",
+            "yes"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "unique-triangle-conditions",
+          "standard": "7.G.2",
+          "difficulty": 3,
+          "prompt": "Which condition does not determine a unique triangle: SSA, SSS, SAS, or ASA?",
+          "choices": [
+            "SSA",
+            "ASA",
+            "three side lengths",
+            "SSS"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "scale-factor",
+          "standard": "7.G.1",
+          "difficulty": 3,
+          "prompt": "A 4 cm drawing represents 28 cm. What is the scale factor from drawing to actual?",
+          "choices": [
+            "7",
+            "6",
+            "9",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "scale-drawing",
+          "standard": "7.G.1",
+          "difficulty": 3,
+          "prompt": "A map scale is 3 cm : 2 m. What actual distance does 9 cm represent?",
+          "choices": [
+            "6 m",
+            "8 m",
+            "9 m",
+            "10 m"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "actual-drawing-dimensions",
+          "standard": "7.G.1",
+          "difficulty": 3,
+          "prompt": "A 54 m path is drawn at 1 cm : 6 m. What is its drawing length?",
+          "choices": [
+            "9 cm",
+            "10 cm",
+            "12 cm",
+            "13 cm"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u06-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "reproduce-at-new-scale",
+          "standard": "7.G.1",
+          "difficulty": 2,
+          "prompt": "A 5 cm segment is reproduced using a scale factor of 6. What is its new length?",
+          "choices": [
+            "32 cm",
+            "34 cm",
+            "30 cm",
+            "31 cm"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "construct-triangle",
+          "standard": "7.G.2",
+          "difficulty": 3,
+          "prompt": "Can segments of lengths 2, 8, and 9 form a triangle?",
+          "choices": [
+            "no",
+            "not enough information",
+            "yes",
+            "only if one angle is right"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u06-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "unique-triangle-conditions",
+          "standard": "7.G.2",
+          "difficulty": 3,
+          "prompt": "Which condition does not determine a unique triangle: AAA, SSS, SAS, or ASA?",
+          "choices": [
+            "AAA",
+            "three side lengths",
+            "SSS",
+            "SAS"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u06-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u06-l04"
+  }
+}

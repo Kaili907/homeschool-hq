@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u05-l02",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Division with Remainders",
+    "dayInUnit": 2,
+    "courseDay": 74,
+    "phase": "Concept build A",
+    "focus": "division as an unknown-factor problem with place value",
+    "title": "Concept build A: division as an unknown-factor problem with place value"
+  },
+  "standards": [
+    "4.NBT.6"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 53 ÷ 6.",
+          "workedSolution": {
+            "steps": [
+              "6 × 8 = 48.",
+              "53 − 48 = 5, and 5 is less than 6.",
+              "53 ÷ 6 = 8 remainder 5."
+            ],
+            "answer": "8 r5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 131 ÷ 3. Write the answer as a quotient and remainder.",
+          "choices": [
+            "42 r2",
+            "43 r1",
+            "44 r2",
+            "43 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 159 ÷ 6. Write the answer as a quotient and remainder.",
+          "choices": [
+            "27 r3",
+            "26 r4",
+            "26 r3",
+            "25 r3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 425 ÷ 6. Write the answer as a quotient and remainder.",
+          "choices": [
+            "70 r5",
+            "71 r5",
+            "69 r5",
+            "70 r1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 388 ÷ 5. Write the answer as a quotient and remainder.",
+          "choices": [
+            "77 r3",
+            "78 r3",
+            "77 r4",
+            "76 r3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 271 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "68 r3",
+            "66 r3",
+            "67 r3",
+            "67 r1"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 489 ÷ 6. Write the answer as a quotient and remainder.",
+          "choices": [
+            "80 r3",
+            "82 r3",
+            "81 r3",
+            "81 r4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u05-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 500 ÷ 6. Write the answer as a quotient and remainder.",
+          "choices": [
+            "83 r2",
+            "84 r2",
+            "83 r3",
+            "82 r2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u05-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "4.NBT.6",
+          "difficulty": 2,
+          "prompt": "Find 205 ÷ 4. Write the answer as a quotient and remainder.",
+          "choices": [
+            "51 r2",
+            "50 r1",
+            "51 r1",
+            "52 r1"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u05-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u05-l02"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u04-l18",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u04-l18",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Division and Numerical Expressions",
+    "dayInUnit": 18,
+    "courseDay": 72,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "two-rule numerical patterns",
+    "title": "Publication, presentation, or reflection: two-rule numerical patterns"
+  },
+  "standards": [
+    "5.NBT.6",
+    "5.OA.1",
+    "5.OA.2",
+    "5.OA.3"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u04-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-pattern-relationship",
+          "standard": "5.OA.3",
+          "difficulty": 1,
+          "prompt": "Pattern A is 3, 7, 11, 15. Pattern B is 6, 14, 22, 30. How are corresponding terms related?",
+          "workedSolution": {
+            "steps": [
+              "Compare corresponding pairs: (3, 6), (7, 14), and (11, 22).",
+              "Each Pattern B term is twice its Pattern A partner.",
+              "The relationship continues because Pattern B also grows by twice as much each step."
+            ],
+            "answer": "Each term in Pattern B is 2 times the corresponding term in Pattern A."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u04-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "pattern-ordered-pair",
+          "standard": "5.OA.3",
+          "difficulty": 2,
+          "prompt": "Pattern A starts at 14 and adds 7. Pattern B starts at 10 and adds 12. Using Pattern A as x and Pattern B as y, which point represents term 4?",
+          "choices": [
+            "(35, 34)",
+            "(35, 46)",
+            "(28, 34)",
+            "(46, 35)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-model-equation",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "1128 counters are split into 24 equal groups. Which pair of equations represents the model?",
+          "choices": [
+            "1128 ÷ 25 = 47; 25 × 47 = 1128",
+            "24 ÷ 1128 = 47; 47 × 24 = 1128",
+            "1128 ÷ 24 = 47; 24 × 47 = 1128",
+            "1128 ÷ 24 = 48; 24 × 48 = 1128"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-area-model",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "A rectangle has area 396 square units and one side length is 12 units. What is the missing side length?",
+          "choices": [
+            "12",
+            "45",
+            "34",
+            "33"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "partial-quotients",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "Use these partial-quotients steps to solve 6785 ÷ 81:\n6785 - 81 × 80 = 305\n305 - 81 × 3 = 62\nWhat is the quotient and remainder?",
+          "choices": [
+            "84 R 62",
+            "83 R 63",
+            "3 R 62",
+            "83 R 62"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u04-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "whole-number-quotient",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 3182 ÷ 86.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "division-with-remainder",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 3655 ÷ 28. Write the quotient and remainder.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u04-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u04-l18"
+  }
+}

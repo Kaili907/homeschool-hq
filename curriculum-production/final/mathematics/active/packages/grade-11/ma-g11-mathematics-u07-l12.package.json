@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u07-l12",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u07-l12",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations and Inverse Functions",
+    "dayInUnit": 12,
+    "courseDay": 120,
+    "phase": "Performance task build",
+    "focus": "verifying an inverse by composition",
+    "title": "Performance task build: verifying an inverse by composition"
+  },
+  "standards": [
+    "F-BF.3",
+    "F-BF.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "For f(x) = 3x − 2 and its inverse f⁻¹, evaluate f⁻¹(f(2)).",
+          "choices": [
+            "4",
+            "-2",
+            "2",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x² + x as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the origin",
+            "odd; its graph is symmetric about the origin",
+            "neither even nor odd",
+            "even; its graph is symmetric about the y-axis"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "The graph of y = f(x) is transformed to y = 3·f(x). Describe the transformation.",
+          "choices": [
+            "a horizontal shift right by 3",
+            "a vertical shift up by 3",
+            "a vertical stretch by a factor of 3",
+            "a horizontal compression by a factor of 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = -6x + 8.",
+          "choices": [
+            "f⁻¹(x) = (x − 8) / -6",
+            "f⁻¹(x) = -6x − 8",
+            "f⁻¹(x) = (x + 8) / -6",
+            "f⁻¹(x) = 1 / (-6x + 8)"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = 3x − 7 and its inverse f⁻¹, evaluate f⁻¹(f(-7)).",
+          "choices": [
+            "-14",
+            "-28",
+            "-7",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x⁴ − 3x² + 1 as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the origin",
+            "even; its graph is symmetric about the y-axis",
+            "odd; its graph is symmetric about the origin",
+            "neither even nor odd"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = f(5x). Describe the transformation.",
+          "choices": [
+            "a horizontal compression by a factor of 5",
+            "a vertical stretch by a factor of 5",
+            "a vertical shift up by 5",
+            "a horizontal shift right by 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = -8x − 11.",
+          "choices": [
+            "f⁻¹(x) = 1 / (-8x − 11)",
+            "f⁻¹(x) = (x − 11) / -8",
+            "f⁻¹(x) = (x + 11) / -8",
+            "f⁻¹(x) = -8x + 11"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = -7x − 9 and its inverse f⁻¹, evaluate f⁻¹(f(3)).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x⁵ + x³ as even, odd, or neither, and state the corresponding symmetry.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u07-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u07-l12"
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l10",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l10",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 10,
+    "courseDay": 154,
+    "phase": "Independent evidence B",
+    "focus": "measurement problems involving fractions and decimals",
+    "title": "Independent evidence B: measurement problems involving fractions and decimals"
+  },
+  "standards": [
+    "4.MD.2"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 1,
+          "prompt": "A runner covers 200 meters, then runs 4 more laps of 50 meters each. How many meters total?",
+          "workedSolution": {
+            "steps": [
+              "4 × 50 = 200.",
+              "200 + 200 = 400."
+            ],
+            "answer": "400"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A hiker walks 51 meters, then walks 2 more trips of 97 meters each. How many meters total?",
+          "choices": [
+            "246",
+            "51",
+            "245",
+            "194"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A tank has 299 liters of water. 3 containers of 63 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "110",
+            "488",
+            "189",
+            "299"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 709 meters, then walks 3 more trips of 268 meters each. How many meters total?",
+          "choices": [
+            "804",
+            "709",
+            "1513",
+            "1514"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A tank has 1329 liters of water. 7 containers of 162 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "2463",
+            "195",
+            "1134",
+            "1329"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A tank has 855 liters of water. 3 containers of 250 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "105",
+            "855",
+            "1605",
+            "750"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 253 meters, then walks 6 more trips of 279 meters each. How many meters total?",
+          "choices": [
+            "1674",
+            "1928",
+            "253",
+            "1927"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A tank has 889 liters of water. 5 containers of 146 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "889",
+            "159",
+            "1619",
+            "730"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 759 meters, then walks 2 more trips of 224 meters each. How many meters total?",
+          "choices": [
+            "1207",
+            "1208",
+            "759",
+            "448"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 283 meters, then walks 5 more trips of 294 meters each. How many meters total?",
+          "choices": [
+            "1470",
+            "1754",
+            "1753",
+            "283"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l10"
+  }
+}

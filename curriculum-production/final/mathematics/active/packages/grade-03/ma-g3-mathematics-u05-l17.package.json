@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u05-l17",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u05-l17",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Understanding Fractions as Numbers",
+    "dayInUnit": 17,
+    "courseDay": 89,
+    "phase": "Targeted correction and reassessment",
+    "focus": "partitioning and placement",
+    "title": "Targeted correction and reassessment: partitioning and placement"
+  },
+  "standards": [
+    "3.NF.1",
+    "3.NF.2"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 1,
+          "prompt": "A shape is divided into 6 equal parts. 5 are shaded. What fraction is shaded?",
+          "workedSolution": {
+            "steps": [
+              "6 equal parts is the denominator.",
+              "5 shaded parts is the numerator.",
+              "The fraction is 5/6."
+            ],
+            "answer": "5/6"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point 4 lengths from 0?",
+          "workedSolution": {
+            "steps": [
+              "Each length is 1/6.",
+              "4 lengths from 0 is 4/6."
+            ],
+            "answer": "4/6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 1,
+          "prompt": "A shape is divided into 2 equal parts. 1 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "2/1",
+            "1/2",
+            "1/1",
+            "2/2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 4 equal lengths. What fraction names the point that is 1 lengths from 0?",
+          "choices": [
+            "4/1",
+            "3/4",
+            "1/3",
+            "1/4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A shape is divided into 4 equal parts. 1 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "1/3",
+            "4/1",
+            "2/4",
+            "1/4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u05-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 2,
+          "prompt": "A number line from 0 to 1 is divided into 6 equal lengths. What fraction names the point that is 4 lengths from 0?",
+          "choices": [
+            "6/4",
+            "4/5",
+            "4/6",
+            "2/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-unit-fraction",
+          "standard": "3.NF.1",
+          "difficulty": 2,
+          "prompt": "A shape is divided into 4 equal parts. 2 of the parts are shaded. What fraction of the shape is shaded?",
+          "choices": [
+            "2/3",
+            "1/4",
+            "2/4",
+            "4/2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u05-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "fraction-on-number-line",
+          "standard": "3.NF.2",
+          "difficulty": 3,
+          "prompt": "A number line from 0 to 1 is divided into 8 equal lengths. What fraction names the point that is 2 lengths from 0?",
+          "choices": [
+            "6/8",
+            "2/8",
+            "8/2",
+            "2/7"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u05-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u05-l17"
+  }
+}

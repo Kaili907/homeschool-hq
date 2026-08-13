@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u05-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u05-l07",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Quadratic Expressions and Equations",
+    "dayInUnit": 7,
+    "courseDay": 79,
+    "phase": "Investigation or close reading",
+    "focus": "factoring a quadratic to reveal its zeros",
+    "title": "Investigation or close reading: factoring a quadratic to reveal its zeros"
+  },
+  "standards": [
+    "A-SSE.3",
+    "A-REI.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 1,
+          "prompt": "Write x² − 6x + 11 in vertex form.",
+          "workedSolution": {
+            "steps": [
+              "Half of −6 is −3; (−3)² = 9.",
+              "x² − 6x + 9 + 2 = (x − 3)² + 2.",
+              "Vertex (3, 2)."
+            ],
+            "answer": "(x − 3)² + 2; vertex (3, 2)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Use the quadratic formula to solve x^2 + 4x + 1 = 0. Give exact values.",
+          "choices": [
+            "x = (-4 ± √12) / 2",
+            "x = (-4 ± 2√3) / 2",
+            "x = (-4 ± 2√3) / 1",
+            "x = (4 ± 2√3) / 2"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the x-intercepts of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "factored form",
+            "vertex form",
+            "standard form",
+            "recursive form"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Solve by factoring: x^2 - 12x + 35 = 0.",
+          "choices": [
+            "x = 5 or x = -7",
+            "x = 6 or x = 7",
+            "x = 5 or x = 7",
+            "x = -5 or x = -7"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Without solving, describe the roots of 2x^2 + 10x + 3 = 0.",
+          "choices": [
+            "two distinct rational roots",
+            "two distinct irrational roots",
+            "no real roots (two complex conjugate roots)",
+            "exactly one real root (a repeated root)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "Rewrite x^2 - 14x + 42 in vertex form and state the vertex.",
+          "choices": [
+            "(x + 7)² − 7; vertex (-7, -7)",
+            "(x − 7)² − 7; vertex (7, -7)",
+            "(x − 7)² + 7; vertex (7, 7)",
+            "(x − 7)² + 42; vertex (7, 42)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Use the quadratic formula to solve 3x^2 + 7x + 1 = 0. Give exact values.",
+          "choices": [
+            "x = (-7 ± √37) / 6",
+            "x = (-7 ± √37) / 3",
+            "x = (7 ± √37) / 6",
+            "x = (-7 ± √37) / 7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the vertex of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Solve by factoring: x^2 - 3x - 70 = 0.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u05-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u05-l07"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u07-l11",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations, Congruence, and Similarity",
+    "dayInUnit": 11,
+    "courseDay": 123,
+    "phase": "Performance task planning",
+    "focus": "angle relationships",
+    "title": "Performance task planning: angle relationships"
+  },
+  "standards": [
+    "8.G.1",
+    "8.G.2",
+    "8.G.3",
+    "8.G.4",
+    "8.G.5"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-similar-figures",
+          "standard": "8.G.4",
+          "difficulty": 1,
+          "prompt": "Rectangles 3 by 5 and 6 by 10 are related how?",
+          "workedSolution": {
+            "steps": [
+              "Identify the rule and apply it to each coordinate or corresponding side.",
+              "Check that the resulting coordinates or ratios match the transformation."
+            ],
+            "answer": "similar"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "sequence-transformations",
+          "standard": "8.G.2",
+          "difficulty": 2,
+          "prompt": "Translate (0, -4) by (-7, 6), then reflect the image across the x-axis. What is the final point?",
+          "choices": [
+            "(7, 2)",
+            "(-10, 0)",
+            "(-4, -4)",
+            "(-7, -2)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "angle-relationships",
+          "standard": "8.G.5",
+          "difficulty": 2,
+          "prompt": "Two adjacent angles form a straight line. One angle measures 154°. What is the other angle measure?",
+          "choices": [
+            "27°",
+            "-64°",
+            "334°",
+            "26°"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "informal-geometric-argument",
+          "standard": "8.G.2",
+          "difficulty": 3,
+          "prompt": "A figure is mapped onto another figure by a translation. Which statement justifies that the figures are congruent?",
+          "choices": [
+            "Congruent figures must have different orientations.",
+            "A translation preserves lengths and angle measures.",
+            "The figures have the same position.",
+            "A dilation always preserves lengths."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "identify-translation-rule",
+          "standard": "8.G.1",
+          "difficulty": 3,
+          "prompt": "Point (3, 3) maps to (9, 12). Which translation rule maps the point?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "apply-translation",
+          "standard": "8.G.1",
+          "difficulty": 3,
+          "prompt": "Translate (-8, 2) using (x - 2, y - 8).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "reflect-across-axis",
+          "standard": "8.G.1",
+          "difficulty": 3,
+          "prompt": "Reflect (3, 4) across the y-axis.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u07-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u07-l11"
+  }
+}

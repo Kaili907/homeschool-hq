@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u01-l14",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u01-l14",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Whole-Number Reasoning",
+    "dayInUnit": 14,
+    "courseDay": 14,
+    "phase": "Transfer challenge",
+    "focus": "reading and writing numerical expressions",
+    "title": "Transfer challenge: reading and writing numerical expressions"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.OA.2",
+    "5.NBT.1",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "expression-to-words",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Describe 5 × (12 + 3) in words without evaluating it.",
+          "workedSolution": {
+            "steps": [
+              "The parentheses show that 12 and 3 are added first.",
+              "The 5 multiplies the entire sum."
+            ],
+            "answer": "Add 12 and 3, then multiply the sum by 5."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "expression-relationship",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Let E represent 4530 + 6712. Without evaluating, how does 8 × (4530 + 6712) compare with E?",
+          "choices": [
+            "1/8 as large as E",
+            "8 times as large as E",
+            "9 times as large as E",
+            "7 times as large as E"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-expression-for-situation",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "A supply cart has 89 boxes with 101 markers in each box and 20 loose markers. Which expression represents the total number of markers?",
+          "choices": [
+            "(89 + 101) × 20",
+            "89 × 101 + 20",
+            "89 + 101 + 20",
+            "(89 + 20) × 101"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-multistep-problem",
+          "standard": "MP.1",
+          "difficulty": 3,
+          "prompt": "A team packs 45 crates with 50 bottles in each crate, adds 25 loose bottles, and then uses 46 bottles. How many bottles remain?",
+          "choices": [
+            "2229",
+            "2275",
+            "2230",
+            "2231"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-whole-number-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "In 2519788, how does the value of the 8 in the tens place compare with the value of the 8 in the ones place?",
+          "choices": [
+            "10 times as much",
+            "1/10 as much",
+            "the same value",
+            "100 times as much"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "estimate-sum-difference",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest thousand to estimate 745500 - 305500.",
+          "choices": [
+            "441000",
+            "440000",
+            "439998",
+            "439999"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "estimate-product",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "Round 850 to the nearest hundred and 75 to the nearest ten, then multiply to estimate the product.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "reasonableness-check",
+          "standard": "MP.6",
+          "difficulty": 3,
+          "prompt": "A student says 29 × 75 = 2175. Round each number to the nearest ten. Which choice correctly checks the claim?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "expression-error-analysis",
+          "standard": "MP.3",
+          "difficulty": 3,
+          "prompt": "A student evaluates 4 × [18 + (11 - 8)] + 23: “They multiply 4 by 18 first, then finish the calculation, so the value is 98.” Which statement best identifies the error?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u01-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u01-l14"
+  }
+}

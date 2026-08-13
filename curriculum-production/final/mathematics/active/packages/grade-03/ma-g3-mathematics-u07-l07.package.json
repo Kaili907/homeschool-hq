@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u07-l07",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u07-l07",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Measurement: Time, Liquid Volume, and Mass",
+    "dayInUnit": 7,
+    "courseDay": 115,
+    "phase": "Guided practice B",
+    "focus": "measuring and estimating mass in grams and kilograms",
+    "title": "Guided practice B: measuring and estimating mass in grams and kilograms"
+  },
+  "standards": [
+    "3.MD.2"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 1,
+          "prompt": "A jug has 350 milliliters. Another 120 milliliters are poured in. How much is in the jug now?",
+          "workedSolution": {
+            "steps": [
+              "350 + 120 = 470."
+            ],
+            "answer": "470"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 1,
+          "prompt": "A container has 42 milliliters. Another 13 milliliters are poured in. How many milliliters are in the container now?",
+          "choices": [
+            "55",
+            "56",
+            "42",
+            "13"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 116 liters. Another 64 liters are poured in. How many liters are in the container now?",
+          "choices": [
+            "116",
+            "181",
+            "64",
+            "180"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l07#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 179 liters. Another 33 liters are poured in. How many liters are in the container now?",
+          "choices": [
+            "33",
+            "179",
+            "212",
+            "213"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l07#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 234 milliliters. Another 99 milliliters are poured in. How many milliliters are in the container now?",
+          "choices": [
+            "333",
+            "234",
+            "99",
+            "334"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 135 milliliters. Another 122 milliliters are poured in. How many milliliters are in the container now?",
+          "choices": [
+            "258",
+            "135",
+            "257",
+            "122"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 161 grams. 120 grams are removed. How many grams are left?",
+          "choices": [
+            "41",
+            "281",
+            "120",
+            "161"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 348 kilograms. Another 350 kilograms are poured in. How many kilograms are in the container now?",
+          "choices": [
+            "348",
+            "698",
+            "350",
+            "699"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l07#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 143 milliliters. 116 milliliters are removed. How many milliliters are left?",
+          "choices": [
+            "143",
+            "116",
+            "27",
+            "259"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l07#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 533 milliliters. Another 83 milliliters are poured in. How many milliliters are in the container now?",
+          "choices": [
+            "617",
+            "83",
+            "616",
+            "533"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u07-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u07-l07"
+  }
+}

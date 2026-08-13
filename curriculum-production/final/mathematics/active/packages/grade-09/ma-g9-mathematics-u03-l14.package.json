@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l14",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l14",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 14,
+    "courseDay": 50,
+    "phase": "Transfer challenge",
+    "focus": "solving linear equations with letter coefficients",
+    "title": "Transfer challenge: solving linear equations with letter coefficients"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 1,
+          "prompt": "Why may 2(x + 3) = 10 be rewritten as 2x + 6 = 10?",
+          "workedSolution": {
+            "steps": [
+              "The left side was expanded over the sum.",
+              "That is licensed by the distributive property."
+            ],
+            "answer": "the distributive property"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 3,
+          "prompt": "Does the point (3, -13) lie on the graph of y = -2x − 6?",
+          "choices": [
+            "No; substituting x = 3 gives y = -12, not -13.",
+            "Only if the graph is extended beyond the plotted window.",
+            "It cannot be determined without graphing the line.",
+            "Yes; the coordinates satisfy the equation."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 3,
+          "prompt": "The graphs of f(x) = 8x + 14 and g(x) = 9x + 15 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = -29",
+            "x = 1/17",
+            "x = -1",
+            "x = 1"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve -5x − 8y = 8 for y.",
+          "choices": [
+            "y = (8 − -5x)/-8",
+            "y = (8 + -5x)/-8",
+            "y = (-5x − 8)/-8",
+            "y = 8 − -5x"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x: -12x + 1 = -10x − 15.",
+          "choices": [
+            "x = -8",
+            "x = 7",
+            "x = 8/11",
+            "x = 8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x and state the solution set: -5x − 11 < 9.",
+          "choices": [
+            "x > -4",
+            "x > 2/5",
+            "x > 4",
+            "x < -4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 3(x + 4) = 21 to 3x + 12 = 21. Which property justifies that step?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 3,
+          "prompt": "Does the point (9, 16) lie on the graph of y = 3x − 12?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 3,
+          "prompt": "The graphs of f(x) = 6x + 13 and g(x) = 8x − 3 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l14"
+  }
+}

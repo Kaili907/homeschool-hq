@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u04-l06",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Systems of Linear Equations and Inequalities",
+    "dayInUnit": 6,
+    "courseDay": 60,
+    "phase": "Guided practice B",
+    "focus": "interpreting and verifying a system solution in context",
+    "title": "Guided practice B: interpreting and verifying a system solution in context"
+  },
+  "standards": [
+    "A-REI.5",
+    "A-REI.6",
+    "A-REI.12",
+    "MP.1"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 1,
+          "prompt": "Solve 2x + 3y = 12 and x − y = 1.",
+          "workedSolution": {
+            "steps": [
+              "From the second, x = y + 1.",
+              "2(y + 1) + 3y = 12 gives 5y = 10, y = 2.",
+              "x = 3."
+            ],
+            "answer": "(3, 2)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-system-solution-count",
+          "standard": "A-REI.6",
+          "difficulty": 2,
+          "prompt": "How many solutions does this system have?\n  5x + 4y = -5\n  6x + 4y = -2",
+          "choices": [
+            "infinitely many solutions",
+            "no solution",
+            "exactly one solution",
+            "exactly two solutions"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "half-plane-membership",
+          "standard": "A-REI.12",
+          "difficulty": 2,
+          "prompt": "Is the point (-2, 4) in the solution region of 5x + 1y ≤ 5?",
+          "choices": [
+            "The region cannot be tested without graphing it first.",
+            "Only points on the boundary line are in the solution region.",
+            "Yes; substituting gives -6 ≤ 5.",
+            "No; substituting gives -6, which is greater than 5."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "linear-combination-equivalence",
+          "standard": "A-REI.5",
+          "difficulty": 3,
+          "prompt": "A student replaces the second equation of a system with (second equation) + 2 × (first equation). Which statement is correct?",
+          "choices": [
+            "The new system is equivalent only when 2 is 1.",
+            "The new system may gain solutions that the original did not have.",
+            "The new system has exactly the same solution set, because the replacement step is reversible.",
+            "The new system may lose solutions that the original had."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-substitution",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve by substitution:\n  y = -4x + 8\n  9x − 8y = -433",
+          "choices": [
+            "(44, -9)",
+            "(-8, 44)",
+            "(-9, 28)",
+            "(-9, 44)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 2,
+          "prompt": "Solve the system exactly:\n  3x + 1y = 12\n  -1x − 2y = 1",
+          "choices": [
+            "(5, -3)",
+            "(6, -3)",
+            "(-5, 3)",
+            "(-3, 5)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-system-solution-count",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "How many solutions does this system have?\n  3x − 3y = 1\n  6x − 6y = 7",
+          "choices": [
+            "exactly one solution",
+            "exactly two solutions",
+            "infinitely many solutions",
+            "no solution"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "half-plane-membership",
+          "standard": "A-REI.12",
+          "difficulty": 3,
+          "prompt": "Is the point (-4, -2) in the solution region of 5x + 6y ≤ -2?",
+          "choices": [
+            "The region cannot be tested without graphing it first.",
+            "No; substituting gives -32, which is greater than -2.",
+            "Yes; substituting gives -32 ≤ -2.",
+            "Only points on the boundary line are in the solution region."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "linear-combination-equivalence",
+          "standard": "A-REI.5",
+          "difficulty": 3,
+          "prompt": "A student replaces the second equation of a system with (second equation) + 4 × (first equation). Which statement is correct?",
+          "choices": [
+            "The new system may gain solutions that the original did not have.",
+            "The new system has exactly the same solution set, because the replacement step is reversible.",
+            "The new system may lose solutions that the original had.",
+            "The new system is equivalent only when 4 is 1."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-substitution",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve by substitution:\n  y = -8x − 10\n  -1x − 4y = -22",
+          "choices": [
+            "(-2, 6)",
+            "(-2, 26)",
+            "(-1, 6)",
+            "(6, -2)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve the system exactly:\n  1x + 9y = -68\n  -6x − 9y = 48",
+          "choices": [
+            "(4, -8)",
+            "(-8, 4)",
+            "(5, -8)",
+            "(-4, 8)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u04-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u04-l06"
+  }
+}

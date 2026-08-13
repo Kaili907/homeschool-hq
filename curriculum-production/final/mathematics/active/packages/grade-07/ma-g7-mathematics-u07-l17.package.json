@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l17",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l17",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 17,
+    "courseDay": 125,
+    "phase": "Targeted correction",
+    "focus": "area of composite figures",
+    "title": "Targeted correction: area of composite figures"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-of-composite-figure",
+          "standard": "7.G.6",
+          "difficulty": 1,
+          "prompt": "A room shaped like an L is made from a 10-by-8 rectangle with a 3-by-2 rectangular corner cut out. What is the area of the room, in square units?",
+          "workedSolution": {
+            "steps": [
+              "Find the area of the full rectangle: 10 × 8 = 80.",
+              "Find the area of the removed corner: 3 × 2 = 6.",
+              "Subtract the corner from the rectangle: 80 − 6 = 74 square units."
+            ],
+            "answer": "74"
+          }
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "missing-dimension-from-area",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangle has an area of 51 square units and a width of 6 units. What is its exact length?",
+          "workedSolution": {
+            "steps": [
+              "Length equals area divided by width: 51 ÷ 6.",
+              "Write the exact quotient as a fraction: 51/6 = 17/2.",
+              "Rewrite as a mixed number: 17/2 = 8 1/2."
+            ],
+            "answer": "8 1/2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "surface-area-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 1,
+          "prompt": "A rectangular prism has length 2, width 9, and height 5 (all in units). What is its exact surface area, in square units?",
+          "choices": [
+            "148",
+            "149",
+            "146",
+            "145"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "What is the exact volume of a rectangular prism with length 13, width 7, and height 3 (units)? Give your answer in cubic units.",
+          "choices": [
+            "272 cubic units",
+            "274 cubic units",
+            "273 cubic units",
+            "91 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a diameter of 5 in. What is its exact circumference? Express your answer as a multiple of π.",
+          "choices": [
+            "7π in",
+            "8π in",
+            "5π in",
+            "4π in"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "find-radius-or-diameter-from-circumference",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a circumference of 33/2π cm. What is its exact radius?",
+          "choices": [
+            "8 1/4 cm",
+            "7 1/4 cm",
+            "33 cm",
+            "16 1/2 cm"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a radius of 6 cm. What is its exact area? Express your answer as a multiple of π (use a fraction for the coefficient if it is not a whole number).",
+          "choices": [
+            "36π cm²",
+            "39π cm²",
+            "38π cm²",
+            "144π cm²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "circumference-area-relationship",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle's radius equals its circumference divided by 2π. A circle has a circumference of 16π in. Use this relationship to find the circle's exact area, as a multiple of π.",
+          "choices": [
+            "67π in²",
+            "63π in²",
+            "64π in²",
+            "65π in²"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "complementary-supplementary-angle",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two angles are supplementary. One angle measures 23°. What is the measure of the other angle?",
+          "choices": [
+            "23°",
+            "157°",
+            "147°",
+            "67°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "vertical-angles-with-expressions",
+          "standard": "7.G.5",
+          "difficulty": 3,
+          "prompt": "Two lines intersect, forming vertical angles that measure (3x + 6)° and (2x + 21)°. Vertical angles are congruent. Find the value of x and the measure of the angles.",
+          "choices": [
+            "x = 15, each angle measures 51°",
+            "x = 14, each angle measures 48°",
+            "x = 15, each angle measures 41°",
+            "x = 15, each angle measures 61°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l17"
+  }
+}

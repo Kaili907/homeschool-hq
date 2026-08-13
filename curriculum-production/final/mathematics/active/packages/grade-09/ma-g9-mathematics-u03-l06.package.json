@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l06",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 6,
+    "courseDay": 42,
+    "phase": "Guided practice B",
+    "focus": "approximating solutions with tables and technology",
+    "title": "Guided practice B: approximating solutions with tables and technology"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 1,
+          "prompt": "f(x) = 2x + 1 and g(x) = 5x − 8 meet where?",
+          "workedSolution": {
+            "steps": [
+              "2x + 1 = 5x − 8.",
+              "−3x = −9, so x = 3."
+            ],
+            "answer": "x = 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve 3x − 4y = -5 for y.",
+          "choices": [
+            "y = (-5 − 3x)/-4",
+            "y = (3x − -5)/-4",
+            "y = -5 − 3x",
+            "y = (-5 + 3x)/-4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x: -3x + 6 = 2x + 46.",
+          "choices": [
+            "x = -40",
+            "x = -52/5",
+            "x = 8",
+            "x = -8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x and state the solution set: 4x + 11 < -21.",
+          "choices": [
+            "x < -8",
+            "x < -5/2",
+            "x < 8",
+            "x > -8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 2x + 5 = 5 + 2x to a statement true for all x. Which property justifies that step?",
+          "choices": [
+            "the zero product property",
+            "the commutative property, which shows the two sides are identical",
+            "the distributive property",
+            "dividing both sides by 2x"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 2,
+          "prompt": "Does the point (-4, -14) lie on the graph of y = 5x + 7?",
+          "choices": [
+            "No; substituting x = -4 gives y = -13, not -14.",
+            "Yes; the coordinates satisfy the equation.",
+            "Only if the graph is extended beyond the plotted window.",
+            "It cannot be determined without graphing the line."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 3,
+          "prompt": "The graphs of f(x) = -5x + 14 and g(x) = -3x − 2 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = -8",
+            "x = -6",
+            "x = 8",
+            "x = 2"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve -3x + 1y = 2 for y.",
+          "choices": [
+            "y = (-3x − 2)/1",
+            "y = (2 − -3x)/1",
+            "y = (2 + -3x)/1",
+            "y = 2 − -3x"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x: -11x − 12 = -4x − 75.",
+          "choices": [
+            "x = 21/5",
+            "x = 87/7",
+            "x = -9",
+            "x = 9"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x and state the solution set: 9x + 3 < -9.",
+          "choices": [
+            "x < 4/3",
+            "x > -4/3",
+            "x < -2/3",
+            "x < -4/3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 3x = 9 to x = 3. Which property justifies that step?",
+          "choices": [
+            "subtracting 3 from both sides",
+            "the associative property",
+            "the distributive property",
+            "dividing both sides by 3 (division property of equality)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l06"
+  }
+}

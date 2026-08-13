@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u01-l02",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits, Place Value, and Rounding",
+    "dayInUnit": 2,
+    "courseDay": 2,
+    "phase": "Concept build A",
+    "focus": "the place-value structure of three-digit numbers",
+    "title": "Concept build A: the place-value structure of three-digit numbers"
+  },
+  "standards": [
+    "3.NBT.1",
+    "MP.6",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "Round 647 to the nearest 100.",
+          "workedSolution": {
+            "steps": [
+              "The nearest multiples of 100 are 600 and 700.",
+              "647 is 47 away from 600 and 53 away from 700.",
+              "600 is nearer, so 647 rounds to 600."
+            ],
+            "answer": "600"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "Round 89 to the nearest 10.",
+          "choices": [
+            "80",
+            "89",
+            "90",
+            "91"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "Round 45 to the nearest 10.",
+          "choices": [
+            "40",
+            "45",
+            "50",
+            "51"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 424 to the nearest 10.",
+          "choices": [
+            "424",
+            "421",
+            "420",
+            "430"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "Round 57 to the nearest 10.",
+          "choices": [
+            "61",
+            "50",
+            "60",
+            "57"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 953 to the nearest 10.",
+          "choices": [
+            "950",
+            "960",
+            "951",
+            "953"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 653 to the nearest 10.",
+          "choices": [
+            "650",
+            "651",
+            "660",
+            "653"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "Round 11 to the nearest 10.",
+          "choices": [
+            "11",
+            "20",
+            "9",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 192 to the nearest 10.",
+          "choices": [
+            "191",
+            "192",
+            "200",
+            "190"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u01-l02"
+  }
+}

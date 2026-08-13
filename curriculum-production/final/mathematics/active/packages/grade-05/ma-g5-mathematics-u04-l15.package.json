@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u04-l15",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u04-l15",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Division and Numerical Expressions",
+    "dayInUnit": 15,
+    "courseDay": 69,
+    "phase": "Assessment preparation",
+    "focus": "standard division strategies",
+    "title": "Assessment preparation: standard division strategies"
+  },
+  "standards": [
+    "5.NBT.6",
+    "5.OA.1",
+    "5.OA.2",
+    "5.OA.3"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u04-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-with-remainder",
+          "standard": "5.NBT.6",
+          "difficulty": 1,
+          "prompt": "Find 114 ÷ 9. Write the quotient and remainder.",
+          "choices": [
+            "12 R 6",
+            "12 R 5",
+            "12 R 7",
+            "13 R 6"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-remainder",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "1109 tiles are arranged in complete rows of 21. How many tiles are left after making all possible complete rows?",
+          "choices": [
+            "53",
+            "51",
+            "52",
+            "17"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-numerical-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate 52 - (22 + 14).",
+          "choices": [
+            "16",
+            "15",
+            "6",
+            "26"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "write-numerical-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Which numerical expression records this calculation? Multiply 20 by 6, then subtract 14 from the product.",
+          "choices": [
+            "20 × (6 - 14)",
+            "(20 × 6) - 14",
+            "20 × 6 + 14",
+            "(20 - 14) × 6"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-numerical-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Which description matches 41 - [3 + 29]?",
+          "choices": [
+            "Add 3 and 41, then multiply the sum by 29.",
+            "Subtract 41 from 29, then multiply the difference by 3.",
+            "Add 3 and 29, then subtract the sum from 41.",
+            "Subtract 3 from 41, then add 29."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "extend-two-rule-patterns",
+          "standard": "5.OA.3",
+          "difficulty": 3,
+          "prompt": "Pattern A starts at 12 and adds 19. Pattern B starts at 6 and adds 13. What are the corresponding terms at term 7?",
+          "choices": [
+            "(84, 126)",
+            "(145, 97)",
+            "(126, 71)",
+            "(126, 84)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "identify-pattern-relationship",
+          "standard": "5.OA.3",
+          "difficulty": 3,
+          "prompt": "Pattern A: 11, 14, 17, 20, 23\nPattern B: 33, 42, 51, 60, 69\nWhich statement describes the relationship between corresponding terms?",
+          "choices": [
+            "Each term in Pattern B is 3 times the corresponding term in Pattern A.",
+            "Each term in Pattern B is 3 more than the corresponding term in Pattern A.",
+            "Each term in Pattern A is 1/4 of the corresponding term in Pattern B.",
+            "The corresponding terms in the two patterns are equal."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "pattern-ordered-pair",
+          "standard": "5.OA.3",
+          "difficulty": 3,
+          "prompt": "Pattern A starts at 19 and adds 6. Pattern B starts at 3 and adds 1. Using Pattern A as x and Pattern B as y, which point represents term 10?",
+          "choices": [
+            "(67, 11)",
+            "(12, 73)",
+            "(79, 13)",
+            "(73, 12)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u04-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "division-model-equation",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "A missing-factor model shows 20 × ? = 340. Which pair of equations represents the model?",
+          "choices": [
+            "340 ÷ 17 = 20; 20 × 340 = 17",
+            "340 ÷ 20 = 18; 20 × 18 = 340",
+            "340 ÷ 20 = 17; 20 × 17 = 340",
+            "340 ÷ 21 = 17; 21 × 17 = 340"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-area-model",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 168 square units and one side length is 12 units. What is the missing side length?",
+          "choices": [
+            "15",
+            "12",
+            "13",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "partial-quotients",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "Use these partial-quotients steps to solve 4228 ÷ 25:\n4228 - 25 × 160 = 228\n228 - 25 × 9 = 3\nWhat is the quotient and remainder?",
+          "choices": [
+            "170 R 3",
+            "172",
+            "169 R 3",
+            "169 R 4"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u04-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "whole-number-quotient",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "Find 5254 ÷ 71.",
+          "choices": [
+            "3",
+            "75",
+            "74",
+            "73"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u04-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u04-l15"
+  }
+}

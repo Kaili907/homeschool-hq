@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u10-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u10-l01",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 1,
+    "courseDay": 163,
+    "phase": "Launch and diagnostic",
+    "focus": "problem formulation",
+    "title": "Launch and diagnostic: problem formulation"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.NS.3",
+    "7.EE.4",
+    "7.G.6",
+    "7.SP.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 1,
+          "prompt": "A rental charges a $10 base fee plus $5 per hour, totaling $35. Which equation models this, and how many hours were rented?",
+          "workedSolution": {
+            "steps": [
+              "Identify what the problem is asking and which quantities, assumptions, or constraints matter.",
+              "Build and solve a model, then check the result against the context."
+            ],
+            "answer": "5x + 10 = 35; x = 5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "assumptions-and-constraints",
+          "standard": "7.NS.3",
+          "difficulty": 1,
+          "prompt": "A diver starts at the surface (0 m) and descends 6 m, then descends another 8 m, then ascends 3 m. The dive plan assumes a depth limit of 29 m below the surface. What is the diver's final position, as a signed number of meters?",
+          "choices": [
+            "17",
+            "-11",
+            "-17",
+            "-8"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "proportional-and-algebraic-models",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "A model predicts a $680 rate will increase by 5%. What does the model predict as the new rate?",
+          "choices": [
+            "$714",
+            "$680",
+            "$646",
+            "$34"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "geometry-and-measurement",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A storage container is designed as a rectangular prism 8 ft long, 10 ft wide, and 8 ft high. What is its volume in cubic feet?",
+          "choices": [
+            "640",
+            "648",
+            "448",
+            "632"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "data-and-uncertainty",
+          "standard": "7.SP.4",
+          "difficulty": 2,
+          "prompt": "A data set has the values 30, 45, 60, 75, 90. The mean is 60. What is the mean absolute deviation (MAD), a measure of the data's uncertainty or spread?",
+          "choices": [
+            "30",
+            "18",
+            "21",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "argument-and-presentation",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A student claims a box that is 8 by 7 by 6 units has a volume of 56 cubic units. Evaluate the claim.",
+          "choices": [
+            "Cannot be determined from the given information.",
+            "No; the volume is 336 cubic units, not 56.",
+            "No; the volume is 57 cubic units, not 56.",
+            "Yes; the volume is 56 cubic units."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u10-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "problem-formulation",
+          "standard": "7.EE.4",
+          "difficulty": 1,
+          "prompt": "A rental company charges a $9 base fee plus $5 per hour. A customer's total bill was $34. Which equation models this situation, and how many hours were rented?",
+          "choices": [
+            "5x + 9 = 34; x = 5",
+            "5x - 9 = 34; x = 6",
+            "5x + 9 = 34; x = 4",
+            "5x + 9 = 34; x = 6"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u10-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "assumptions-and-constraints",
+          "standard": "7.NS.3",
+          "difficulty": 2,
+          "prompt": "A diver starts at the surface (0 m) and descends 4 m, then descends another 6 m, then ascends 18 m. The dive plan assumes a depth limit of 30 m below the surface. What is the diver's final position, as a signed number of meters?",
+          "choices": [
+            "16",
+            "-28",
+            "8",
+            "28"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u10-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u10-l01"
+  }
+}
