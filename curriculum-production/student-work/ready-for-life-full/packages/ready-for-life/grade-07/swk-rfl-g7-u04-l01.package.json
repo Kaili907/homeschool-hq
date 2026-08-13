@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u04-l01",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Communication, Boundaries, and Family Teamwork",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: asking for clarification"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners identify a real incomplete or ambiguous instruction given by someone in their household this week and practice asking one specific clarifying question before acting on it, instead of guessing or assuming, then compare what happened when they asked to what they normally do.",
+  "scenario": "The learner watches for one real moment this week when someone they live with gives a task or direction that leaves out an important detail, such as which item, how much, or by when, and asks a specific clarifying question before starting instead of guessing.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real ambiguous instruction comes up this week, the learner instead writes a short imagined script: one vague instruction a household member might realistically give, the specific clarifying question the learner would ask in response, a plausible answer to that question, and what the learner would do next with that information."
+  },
+  "materials": [
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think back to a recent time you were given an instruction that was missing an important detail.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe one instruction you received recently that left out a detail you needed, and what you did instead of asking (guessed, assumed, or did nothing)."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Practice turning a vague direction into a specific clarifying question that names exactly what information is missing.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote down one real vague or incomplete direction I've received."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote a specific question that names exactly what information is missing, not just a general 'what do you mean?'"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "During the next few days, notice one real moment when someone you live with gives you a direction that leaves out a detail you need, such as which container to use, what time something is due, or how thorough the job should be. Before starting the task, ask one specific question that names exactly what information is missing, rather than guessing or complaining.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write down the instruction you received, the exact question you asked, and how the person responded."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what happened when you asked instead of guessing.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain whether asking your clarifying question changed the outcome compared to guessing, and describe one specific way you would phrase your next clarifying question differently."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot identify a real vague instruction to test, or keeps guessing instead of asking, reteach with two example instructions that each have a missing detail (a chore instruction and a plan instruction) and have the learner draft a specific clarifying question for each before returning to a real moment this week.",
+  "extension": "Have the learner keep a running log of every clarifying question they ask a household member for one full week and compare how often asking prevented a mistake to how often it wouldn't have mattered either way.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

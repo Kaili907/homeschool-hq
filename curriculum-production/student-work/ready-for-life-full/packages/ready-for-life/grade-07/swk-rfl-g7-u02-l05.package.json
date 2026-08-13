@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u02-l05",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Care, Laundry, and Maintenance",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: tool boundaries"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners sort a real or provided list of at least ten household tools into three categories, fine to use alone, use with a trusted adult nearby, and adult only, giving a specific reason tied to injury risk or skill level for each placement.",
+  "scenario": "The learner works from a list of common household tools, such as a screwdriver, hammer, tape measure, box cutter, power drill, step stool or ladder, kitchen knife, glue gun, pliers, and staple gun, either the provided list or a real list gathered from the household's own tools, and classifies each one into one of three boundary categories with reasoning.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided tool list, or a real list of tools from the household",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look over the tool list and note which of these tools you have already used on your own.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name two tools from the list you have already used without an adult present, and one tool you have never used at all."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort at least eight tools from the list into the three categories, fine to use alone, use with a trusted adult nearby, adult only, and give a specific reason for each placement.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I placed at least eight tools into one of the three categories, not left ungrouped."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Each placement has a specific reason tied to injury risk or the skill the tool requires, not just 'because it's dangerous.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose two tools you placed in the 'use with a trusted adult nearby' category and explain the specific risk that keeps each one out of the 'fine to use alone' category, along with exactly what a trusted adult's role should be while that tool is in use.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For each of your two chosen tools, name the specific risk, such as a blade that can slip, a moving part that can pinch, or a surface that can burn, and describe exactly what the trusted adult should be watching for or doing while you use it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on a real boundary your household already has around tools.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one rule your household already has about a specific tool, whether your classification in this task matches that household rule, and explain any difference."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's reasons default to 'it's dangerous' for every tool, reteach by comparing two specific tools side by side, such as a butter knife and a box cutter, and naming the exact mechanical difference, blade exposure, moving parts, or force required, that changes the risk.",
+  "extension": "Have the learner classify five more tools not on the original list, including at least one power tool and one tool used in another household space, such as a garage or yard tool, using the same three categories and reasoning standard.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  }
+}

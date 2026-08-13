@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u03-l02",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Skills and Flexible Meal Planning",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: knife and heat boundaries"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "With a trusted adult, learners are explicitly shown their household's specific rules for knives and for the stove or oven, then identify, for a set of real kitchen tasks, which they may do alone, which require an adult present, and which are not allowed yet at their age.",
+  "scenario": "A trusted adult walks the learner through the real kitchen, pointing to the knives normally used there, the stove, and the oven, and states out loud the household's specific boundary for each: what the learner may already do alone, what requires the adult standing right there, and what is off-limits for now.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Knives are held and used only the way the adult demonstrates, blade always pointed away from fingers and body, and are never carried around while walking or handed to anyone unsupervised.",
+    "The stove and oven are only turned on, adjusted, or reached into with the adult physically present for this lesson; the learner does not operate either one alone yet.",
+    "Stop the activity immediately and tell the adult right away for any cut, burn, or other injury, no matter how small it seems."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there is no real kitchen, knife, or stove available to walk through, the learner instead reviews a provided printed list of common kitchen scenarios involving knives and heat and sorts each one into 'may do alone,' 'only with an adult present,' or 'not allowed yet,' explaining the reasoning for three of the sorts."
+  },
+  "materials": [
+    "the household's real knives normally used for food preparation",
+    "the household's real stove and oven",
+    "a trusted adult",
+    "paper or a notes app for recording boundaries"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the walkthrough, write down what you currently think you are and are not allowed to do with knives or the stove in your home.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List one knife task and one stove or oven task you currently believe you are allowed to do alone."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult present, walk through the real kitchen and record the specific boundary they state for each item.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "For at least two real knives used in the household, I recorded whether I may use each alone, only with the adult present, or not yet."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For the stove and for the oven, I recorded the specific boundary the adult stated for each."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I repeated each boundary back to the adult in my own words and they confirmed I understood it correctly."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without the adult prompting you, sort five real, specific kitchen tasks you actually do or want to do into the three boundary categories (alone, adult present, not yet), based on what was stated during the walkthrough.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List five specific real kitchen tasks involving a knife, the stove, or the oven, and sort each one into alone, adult present, or not yet."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Pick one task you sorted as 'adult present' and explain specifically why that boundary makes sense for that task."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why these boundaries exist.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain, using one specific task from your sort, what could go wrong if that boundary were ignored, and why the adult's presence specifically changes the risk for that task."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot state a specific reason for a boundary beyond 'because I was told,' reteach by having the adult demonstrate the specific hazard in slow motion, such as how a slipping knife travels, without the learner handling the tool, then repeat the sort.",
+  "extension": "Have the learner ask the adult about one specific kitchen injury or near-miss the adult remembers, and identify which boundary, if it had been followed, would have prevented it.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}

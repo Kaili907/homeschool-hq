@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u05-l04",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Digital Life, Purchases, and Consumer Skills",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: reviews and scams"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners read real online reviews for one ordinary, everyday product or service category on a household-approved device, with a trusted adult nearby, and identify specific red flags that suggest a scam or fake review, without clicking unfamiliar links or entering any personal information.",
+  "scenario": "On a household-approved device, with a trusted adult nearby or available to check in with, the learner picks one ordinary product or service category, such as headphones or a board game, reads a real set of online reviews for it, and flags specific reviews that show signs of being fake or scam-related, without clicking on unfamiliar links or entering any personal information anywhere online.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "This task is done only on a household-approved device, and the learner does not click unfamiliar links or enter any personal information anywhere online during it.",
+    "A trusted adult is nearby or available to check in with during this task, not browsing alone in a separate room.",
+    "Choose an ordinary, everyday product or service category, such as headphones, sneakers, a board game, or a household service, rather than an adult-restricted one; check with a trusted adult first if unsure whether a category is appropriate."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If supervised internet access is not available, the learner instead sorts a provided set of sample reviews, some genuine-looking and some scam-flagged, into two groups and explains the specific signal that placed each one."
+  },
+  "materials": [
+    "a household-approved device with supervised internet access (or the provided sample review set)",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "On a household-approved device, with a trusted adult nearby, choose one ordinary product or service category and find a real page with several written reviews for it, without clicking on any unfamiliar links or ads.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the category and roughly how many reviews the page shows."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read at least five real reviews and check each one against three warning signs: overly generic praise with no specific detail, an extreme rating with unusual wording, and a reviewer who has posted many other reviews on the same day.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked at least five reviews against all three warning signs."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I did not click any unfamiliar link or enter any personal information anywhere during this task."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Identify the single review that seems most likely to be fake or scam-related and explain, using specific wording or detail from that review, exactly which warning sign or combination of warning signs makes it suspicious rather than simply assuming it is fake.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Quote or paraphrase the specific wording that seemed suspicious and name which warning sign it matches."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Explain what a genuine review about the same category typically includes that this suspicious one is missing."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on trusting reviews online.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific habit you will use before trusting a review in the future, and why relying on a single glowing review is riskier than looking at a pattern across many reviews."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot identify any suspicious review, reteach by comparing two contrasting real examples side by side, one detailed and specific and one generic and vague, and naming the differences together before returning to the independent search.",
+  "extension": "Have the learner research one common scam tactic connected to fake reviews, such as incentivized five-star reviews, and explain in their own words how it works and one way to spot it.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l06",
+  "lessonId": "ma-g7-ready-for-life-u01-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Breakdown-point analysis",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The breakdown point named is generic or does not match a specific real moment, such as 'I'm just bad at this.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific breakdown point is chosen from the real commitment, and the learner describes the exact moment or decision where it occurred."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner distinguishes this breakdown point from other breakdown points that did not apply this time."
+          }
+        ]
+      },
+      {
+        "dimension": "Repair plan concreteness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The repair plan is missing one or more of the three required parts (impact, action, date or time), or the action is vague."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three parts are present: a stated impact, a specific and doable repair action, and an exact date or time."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection explicitly ties the planned change in habits back to the specific breakdown point identified."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The missed commitment is a real, specific past event, not an invented example.",
+      "The repair action is something the learner can carry out without needing anyone else's permission or involvement."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

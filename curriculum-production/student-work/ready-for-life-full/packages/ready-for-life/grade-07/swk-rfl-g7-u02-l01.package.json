@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u02-l01",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Care, Laundry, and Maintenance",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: room and shared-space systems"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners choose one real space they use daily, a personal area or a shared space in the household, and design a specific organizing system for it, including a storage spot for each category of item and a simple reset rule, then set the system up and test whether it still holds after one full day of normal use.",
+  "scenario": "The learner selects one real space that currently lacks a clear organizing system, such as a personal area, a shared closet, a kitchen counter zone, a bathroom shelf, or an entryway, sorts the items normally left there into categories, assigns each category a specific storage spot, and installs the system before testing it against a full day of regular household activity.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner does not have a space of their own to organize, the learner instead selects any shared space in the household, designs the category-and-spot system for it on paper, presents the written plan to another household member, and records that person's specific feedback on whether the plan would work for how the space actually gets used."
+  },
+  "materials": [
+    "paper or a notes app",
+    "storage bins, baskets, hooks, or labels already available in the household",
+    "the items normally kept in the chosen space"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Walk through the space you chose and notice what currently goes wrong with it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the space you chose and describe one specific problem with how it is organized right now, such as items with no assigned spot or a drawer that never stays closed."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort the items normally kept in this space into categories, then assign each category one specific storage spot and write a reset rule for returning items to that spot.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted the items into at least three specific categories, not one catch-all group."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I assigned each category its own storage spot and wrote a reset rule describing how items get back there."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Set up the system physically in the space, then use the space normally for one full day and check, item by item, whether things that were moved, worn, or used actually ended up back in their assigned spot by the end of the day.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List three specific items you used or moved today and note, for each one, whether it landed back in its assigned spot without extra effort."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "checklist-item",
+          "text": "I physically installed the storage spots, such as bins, labels, or hooks, before starting the one-day test, rather than only planning them on paper."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare how this space works now to how it worked before you built the system.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain whether the reset rule was easy or hard to follow today, and name one change you would make to the system after this one-day test."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's system breaks down within the same day, reteach by narrowing scope: pick just one category of items, give it one storage spot, and test that single category alone before expanding back out to the whole space.",
+  "extension": "Have the learner teach the reset rule to another household member who also uses the space and report back on one thing that person does differently that the system should account for.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u01-l05",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Systems and Time Management",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: breaks and resume"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners plan and carry out one real focused work session on a task that will take longer than one sitting, using a specific focus length and a timed break with a planned return cue, then track whether they actually resumed on time and how much progress they made afterward.",
+  "scenario": "The learner picks one real task or assignment that genuinely will take longer than a single sitting to finish, sets a specific focus length and break length in advance, works the session for real today including one timed break, and records exactly what happened at each step, including whether they resumed on time.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no current task needs more than one sitting to finish, the learner instead picks a personal skill they are building, such as reading toward a goal or practicing an instrument, for a session long enough to include a real timed break and resume, and completes the same steps and records for that instead."
+  },
+  "materials": [
+    "paper or a notes app",
+    "a timer (a phone timer, kitchen timer, or clock works)",
+    "the task or materials you will actually be working on"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Name a real task or assignment you plan to work on today that will take longer than one sitting to finish.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the task and estimate honestly how many minutes you can usually focus before you start to lose concentration."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Plan your session before you start: choose a specific focus length, for example 20 minutes, a specific break length, for example 5 minutes, one specific thing you will do during the break that is not the task, such as stretching, getting water, or walking around, and how you will know when the break is over.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote a specific focus length and a specific break length, not a vague plan like 'work for a while.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I named exactly what I will do during the break and set a specific way, such as a timer or alarm, to know when to resume."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Carry out one real focused work session today using the focus length and break length you planned. Note the exact time you started working, the exact time your break began, what you actually did during the break, and the exact time you resumed the task.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Report whether you resumed working at the time you planned or later than planned, and describe how much progress you made on the task after coming back from the break."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare working with a planned break to working straight through without stopping.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain, using what actually happened in this session, whether the break helped you focus better after resuming, made no real difference, or made it harder to get back into the task, and why you think that happened."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner resumes late or skips resuming entirely, reteach by shortening both the focus length and the break length substantially, for example 10 minutes of work and 3 minutes of break, and practicing one short cycle before returning to a full-length session.",
+  "extension": "Have the learner run a second work session on a different task using a different focus length or break length and compare which combination led to more progress after resuming.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

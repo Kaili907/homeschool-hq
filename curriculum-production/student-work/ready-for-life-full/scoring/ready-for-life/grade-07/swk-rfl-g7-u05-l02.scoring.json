@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l02",
+  "lessonId": "ma-g7-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Cost and cancellation identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cost, billing frequency, or cancellation steps are guessed rather than found on the actual screen."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The exact cost, billing frequency, and cancellation steps are all correctly found and recorded."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner notes an easy-to-miss detail such as a trial converting to a paid charge or an automatic renewal date."
+          }
+        ]
+      },
+      {
+        "dimension": "Recurring cost reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No yearly total is calculated, or the comparison to a one-time-cost item is missing."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A correct yearly total is calculated and compared to a specific one-time-cost item."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains specifically why recurring charges are easy to underestimate compared to one-time costs."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner did not sign up for, cancel, or change any real subscription or in-app purchases screen during this task.",
+      "The yearly-cost calculation uses the actual billing rate found, not an estimate.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

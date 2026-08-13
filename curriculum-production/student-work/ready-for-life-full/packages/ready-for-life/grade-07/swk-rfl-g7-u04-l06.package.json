@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u04-l06",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Communication, Boundaries, and Family Teamwork",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: helping without taking over"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners identify a past moment when they took over a task instead of asking first, then practice a corrected way to offer help that asks what kind of help is wanted, gives specific options, and follows the other person's answer even if it means stepping back.",
+  "scenario": "The learner notices one real moment this week when someone in the household is doing a task the learner could help with, and instead of assuming or taking over, asks what kind of help (if any) is wanted, then follows the other person's answer exactly.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real moment arises this week to offer help, the learner instead writes an imagined scene: a specific task a household member is doing, the specific-options offer the learner would make, a realistic answer the person might give, and how the learner would follow that answer."
+  },
+  "materials": [
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Recall a real time you jumped in to help someone without asking, and it didn't go the way you expected.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe what happened and how the other person reacted to you taking over."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Practice a way to offer help that asks first and offers specific options instead of taking over.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My offer asks a specific question about what kind of help is wanted, not just 'let me do it.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My offer includes at least two specific ways I could help, so the other person can choose."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "This week, notice one real moment when someone you live with is doing a task you could help with, ask what kind of help they want using your specific-options offer, and then follow their answer exactly, even if it means doing less than you first planned or stepping back entirely.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write the offer you made, what the person chose, and what you actually did."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Did the person want your help, want a different kind of help than you offered, or want no help at all?",
+          "choices": [
+            "Wanted my help",
+            "Wanted different help",
+            "Wanted no help"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on helping without taking over.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain how following the other person's answer compared to what you would have normally done, and describe one signal you'll watch for next time to know whether help is wanted."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's offer still assumes what kind of help is wanted ('I'll just do the hard part'), reteach by having them write two different specific ways they could help for the same task before approaching the household member, so the offer includes a real choice.",
+  "extension": "Have the learner watch for a second, different moment this week when they are the one whose task someone else might want to help with, and record what kind of offer from that person would have felt respectful versus intrusive.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

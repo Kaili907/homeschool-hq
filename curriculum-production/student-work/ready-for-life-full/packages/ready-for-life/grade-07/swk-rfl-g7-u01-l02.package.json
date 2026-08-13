@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u01-l02",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Systems and Time Management",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: prioritizing and estimating time"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners take a real list of tasks they need to get done, sort each one into a priority tier using an urgent/important framework, and estimate a specific number of minutes each task will realistically take, then check whether their total estimated time actually fits inside the time they have available.",
+  "scenario": "The learner gathers every task currently sitting on their real to-do list, such as schoolwork, chores, and personal commitments, sorts the whole list by priority on paper or in a notes app, assigns a specific time estimate to each task, and checks that total against how much time is actually available before the nearest deadline.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app",
+    "your real current list of tasks, assignments, or chores"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List every task, assignment, or chore you actually need to get done in the next few days.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Write down at least five real tasks currently on your list, in whatever order they come to mind."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort your tasks into three priority tiers: Do First (urgent and important), Schedule (important but not urgent right now), and Do Later (neither urgent nor important right now).",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I placed every task from my list into exactly one of the three tiers and did not leave any task unsorted."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I can explain in one sentence why each Do First task is both urgent and important, not just important."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each task on your sorted list, estimate how many minutes it will realistically take to finish, then add up your total estimated minutes and compare that number to how much time you actually have available before your nearest deadline.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List your estimated time next to each task, then say whether your total estimated time is more or less than the time you actually have, and name one task you would cut, shorten, or move if you are over your available time."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your time estimates to how tasks like these have actually gone for you before.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one task where your estimate is probably wrong, either too short or too long, based on past experience with a similar task, explain why you think so, and give a revised estimate."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's estimates cluster around one guessed number, such as everything estimated at 30 minutes, reteach by having them time one similar task they are currently doing with a clock, then use that real measured time to revise the other estimates on the list.",
+  "extension": "Have the learner repeat the same priority sort and time estimate for next week's task list, then compare whether their Do First tier grew or shrank and explain why.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u01-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u01-l01",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Systems and Time Management",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: weekly planning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL middle-grades progression"],
+  "objective": "Learners build a first draft of a real weekly plan by listing every commitment they actually have this week, such as school, activities, chores, and personal time, on a single page, then identify which days look overloaded and which look empty.",
+  "scenario": "The learner maps out one real upcoming week, using school days plus whatever activities, chores, and personal commitments genuinely apply to their own household, onto a single weekly planning grid, without assuming any commitment that does not actually apply to them.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["paper or a notes app", "a calendar or existing schedule information for the week"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think back on a week when you had no written plan.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe one moment recently when you forgot about something you were supposed to do or somewhere you were supposed to be."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draw a grid with the seven days of this week as columns, then fill in every commitment you already know about for each day.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I included school or schoolwork time on every school day."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I included every activity, chore, or appointment I already know about this week, not just the ones I remembered first."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look across all seven days of your finished grid and mark which day has the most commitments and which has the fewest, then write specifically about the risk on the most-loaded day.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Name the single most loaded day this week and one specific risk of having that much scheduled, such as not enough time to eat, travel between places, or finish homework."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one specific change you could make this week to reduce that risk, such as moving a task to a lighter day."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare having this written plan to how you normally start a week.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain whether seeing the whole week on one page changed how you feel about the week ahead, and name one commitment you almost left off the grid until you thought it through."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's grid is missing whole categories of commitments, such as listing school but no chores or activities, reteach by walking through yesterday and today hour by hour out loud first, then apply the same hour-by-hour scan to the remaining five days before finishing the grid.",
+  "extension": "Have the learner add a second column next to each day estimating how much free time is left after commitments, then rank the seven days from most to least free time and explain the ranking.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

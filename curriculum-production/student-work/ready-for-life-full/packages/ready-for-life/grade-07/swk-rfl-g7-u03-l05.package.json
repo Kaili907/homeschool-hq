@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u03-l05",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Skills and Flexible Meal Planning",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: balanced flexible meal components"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners apply a simple protein-plus-produce-plus-grain balance framework to assemble one real no-heat or minimal-heat snack or meal plate using only foods already available in their household, without following a fixed recipe.",
+  "scenario": "Using whatever real food is already available in their household's kitchen, with no new items brought in, the learner surveys what falls into each of three categories, a protein source, produce, and a grain or starch, and combines at least one real item from each category onto one actual plate, using little or no heat.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner does not have enough real food on hand to cover all three categories, they instead plan a balanced plate on paper using a provided list of common pantry items, sorting the list into protein, produce, and grain categories and choosing one specific item from each to build a planned plate."
+  },
+  "materials": [
+    "real food already available in the household across at least three categories: protein, produce, and grain or starch",
+    "one real plate or container",
+    "paper or a notes app for recording the plan"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking what's available, recall the three balance categories this framework uses.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the three categories in the protein-produce-grain balance framework and give one real example of each from memory."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Survey your household's real available food and list at least two real items you find in each of the three categories.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed at least two real available items for the protein category."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I listed at least two real available items each for the produce category and the grain or starch category."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Using only items you actually found available, assemble one real plate that includes at least one item from each of the three categories, applying little or no heat, and record exactly what you combined and in what amounts.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List exactly which real item you chose from each of the three categories and the approximate amount of each you put on the plate."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Explain one specific tradeoff you made because of what was actually available, for example choosing a less-preferred protein because it was the only one on hand."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on planning from what's available versus following a fixed recipe.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific way building this plate from what was actually available was different from following a fixed recipe, and whether the result still felt balanced to you."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot find a real item for one category, reteach using the simulation alternative's pantry list to practice sorting items into categories, then have them recheck their real household for an overlooked item in that category before assembling the plate.",
+  "extension": "Have the learner assemble a second real balanced plate on a different day using different available items and compare which combination felt more balanced and why.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

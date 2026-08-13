@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u06-l02",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Community Contribution Capstone",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: scope and permission"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners write the specific scope of the need identified on the previous lesson day — what they plan to do, how long it will take, and who or what is involved — and bring that plan to the adults in their household to get real permission before any part of the project begins outside their own immediate control.",
+  "scenario": "With a need already identified, the learner writes out a clear, specific plan for what helping would actually involve, then sits down with the adults in their household to walk through that plan and ask for real permission before doing anything involving people, spaces, or resources outside the learner's own immediate control.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Do not begin any part of this project that involves people, spaces, or resources outside your own immediate control until a trusted adult in your household has given real permission.",
+    "Do not contact anyone outside your household on your own to plan or arrange this project — any outside contact happens through or alongside a trusted adult."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the specific project cannot get real permission from a trusted adult this week, the learner instead writes out the full scope-and-permission conversation as a rehearsal — what they would say, what questions or concerns a trusted adult might raise, and how they would respond — without holding the real conversation yet."
+  },
+  "materials": [
+    "the need identified on the previous lesson day",
+    "paper or a notes app for the scope plan"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before writing your plan, think about what an adult in your household would want to know before agreeing to a project like this.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List three questions you think a trusted adult in your household would ask about this project before saying yes."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Write a specific scope for the project: exactly what you would do, roughly how long it would take, where it would happen, and who besides you would be involved.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My scope names a specific action, not a vague goal like 'help out.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My scope includes a realistic time estimate and names every other person who would be involved."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Bring your written scope to the adults in your household, walk through it together, and get their real permission before treating any part of this project as approved, noting any changes they require to the plan.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Record what a trusted adult in your household changed, added, or restricted in your plan, and whether they gave permission to proceed."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Did a trusted adult give real permission for this project as planned, with changes, or not yet?",
+          "choices": [
+            "Yes, as planned",
+            "Yes, with changes",
+            "Not yet"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the permission conversation.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one concern a trusted adult raised that you had not thought of yourself, and how it changed, or confirmed, your plan."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner writes a vague scope such as 'help out around the house,' have them rewrite it using a single concrete sentence naming the exact task, a start and end point, and every person involved, before bringing it to a trusted adult.",
+  "extension": "Have the learner write a short backup plan for what they would do if a trusted adult approved the need but restricted the scope, so they have already thought through a smaller version of the project.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u06-l04",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Community Contribution Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: communication"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners draft the specific message they need to communicate to the person or group who will receive the help, and — alongside a trusted adult — share that communication as the next real step toward carrying out the project.",
+  "scenario": "With the project planned and its materials checked, the learner writes exactly what needs to be communicated to the person or group involved (what is planned, when, and what to expect) and, together with a trusted adult, delivers or shares that communication.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Any communication with someone outside your household happens through or alongside a trusted adult — you do not contact or respond to anyone outside your household alone.",
+    "Do not share personal information such as your full name, address, school, schedule, or other household details with anyone outside your household as part of this communication."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If this project needs no communication with anyone outside the household (for example, the entire plan involves only people who already live there), or if the person or group who would receive it genuinely cannot be reached this week for a reason outside the learner's control, the learner instead writes the message or spoken script they would use, and reads it aloud to a trusted adult for feedback, without sending or delivering it."
+  },
+  "materials": [
+    "the ordered plan and materials list from the previous lesson",
+    "paper or a notes app for drafting the message"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting anything, think about what the person or group receiving help would most want to know in advance.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List two specific things the person or group involved in your project would need to know before you help — for example, timing or exactly what you plan to do."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft the specific message or spoken script you would use to communicate your plan, including what you intend to do, when, and any question you need answered before proceeding.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My draft states the specific plan clearly, not a vague offer to help."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My draft includes at least one specific question or detail I still need to confirm with the other person or group."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Share your draft with a trusted adult in your household, revise it based on their feedback, and then, with that trusted adult through or alongside you, deliver the message to the person or group involved in the project.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe what changed between your first draft and the version a trusted adult helped you deliver, and what response you got back, if any."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Was your trusted adult present for or directly involved in delivering this communication?",
+          "choices": [
+            "Present the whole time",
+            "Involved but not present the whole time",
+            "Not yet delivered"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on communicating about this project.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one thing you would say differently next time you need to communicate a plan to someone outside your household, based on how this attempt actually went."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's draft is vague or skips necessary details such as timing or exactly what they plan to do, have them rewrite it by first listing the two things from the warm-up prompt and building one sentence around each before combining them into a full message.",
+  "extension": "Have the learner draft a second, shorter version of the same message meant for a quick check-in after the project is finished, and compare what details it needs versus the first message.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

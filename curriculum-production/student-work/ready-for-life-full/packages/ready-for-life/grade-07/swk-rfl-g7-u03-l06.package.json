@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u03-l06",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Skills and Flexible Meal Planning",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: storage and cleanup"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners practice real post-meal habits by storing real leftover or perishable food correctly and promptly, and by fully cleaning a real food-prep area they actually used, correcting any specific habits from earlier in the unit that fell short.",
+  "scenario": "After a real meal or snack is prepared or eaten in their household, the learner stores any real leftover or perishable food using correct timing and storage practice, then completes a full cleanup of the actual prep area used, comparing this attempt to how they have handled storage and cleanup before.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real meal, leftovers, or used prep area are available at the time of this lesson, the learner instead works through a provided list of five food-storage and cleanup scenarios, identifying what is wrong with each and what the correct action would have been."
+  },
+  "materials": [
+    "real leftover or perishable food from an actual meal or snack, if available",
+    "storage containers already in the household",
+    "the real prep area used for that meal or snack",
+    "cleaning supplies already in the household"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before storing or cleaning anything, recall what you were taught earlier in this unit about safe storage timing.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one specific storage habit from earlier in this unit that you have not consistently followed, and why."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Store any real leftover or perishable food from your meal or snack, checking timing and container choice.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I moved perishable leftovers into storage within a reasonable time after the meal or snack ended, rather than leaving them out."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I used a container that actually seals or covers the food, and labeled or noted the date if the household does this."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Fully clean the real prep area you used, including wiping every surface that touched food, washing every dish or utensil used, and putting all cleaning and storage items back where they belong when you finish.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List every specific surface, dish, or utensil you cleaned, and name one you would have skipped if you were not doing this lesson."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Describe exactly what you did differently in this cleanup compared to how you usually finish after a meal or snack."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare this attempt at storage and cleanup to your normal habits, connecting back to what you noted at the start.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain whether you actually corrected the specific habit you named at the start, and describe one concrete change you will make the next time you finish a meal or snack in your household."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's cleanup skips a surface or dish that touched raw food, reteach by having them walk back through the meal step by step and name every object that touched food before repeating the cleanup on that specific area.",
+  "extension": "Have the learner track real storage and cleanup after one additional meal or snack later in the week and compare whether the corrected habit held up without this lesson prompting it.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

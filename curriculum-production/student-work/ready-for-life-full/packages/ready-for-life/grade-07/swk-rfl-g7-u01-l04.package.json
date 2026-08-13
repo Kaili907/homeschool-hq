@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u01-l04",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Systems and Time Management",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: task initiation"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners choose one real task they have been avoiding or putting off, pick a specific starting technique, either the first-two-minutes rule or the smallest-first-step rule, and actually begin that task today using the technique, then record exactly what happened once they started.",
+  "scenario": "The learner names one real task currently stalled because they have not started it, chooses between two starting techniques based on which fits the task better, writes down the exact tiny first action the technique calls for, and then carries out that first action for real today before recording what happened next.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real stalled task is available right now, the learner instead picks one task from their household's ongoing chore list, such as sorting a drawer or clearing off a table, applies the same starting technique to it, and records what happened using the same steps."
+  },
+  "materials": [
+    "paper or a notes app",
+    "a timer (a phone timer, kitchen timer, or clock works)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Name one real task you have been putting off.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the task and estimate how many days or weeks you have been avoiding starting it."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Learn two starting techniques: the first-two-minutes rule, where you work on the task for just two minutes and then decide whether to continue, and the smallest-first-step rule, where you pick one step so small it takes under a minute, like opening a document or getting out one material. Choose whichever technique fits your task better and write down the exact first action you will take.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named which technique I am using and why it fits my task better than the other technique."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote the exact first action in specific, physical terms, such as what I will open, touch, or set out, not a vague plan like 'start working.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Set a timer for your chosen starting technique, either two minutes or your smallest first step, and actually begin the task today. Complete only that small first piece, then stop and pay attention to what happens next.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe what actually happened once your timer went off or your first step was done: did you keep working past that point, stop exactly as planned, or find yourself unable to start at all, and what got in the way if so?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare how starting felt using the technique to how this task, or tasks like it, normally start for you.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain whether the technique made starting easier, about the same, or harder than usual, and say whether you would use this same technique again on a different task you have been putting off."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner still cannot start even with the smallest first step chosen, reteach by breaking that step down again into something that takes fewer than fifteen seconds, such as simply opening a notebook or picking up a pencil, with no requirement to do anything more in that moment.",
+  "extension": "Have the learner apply the technique to a second stalled task this week and compare which of the two techniques got them started faster.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}

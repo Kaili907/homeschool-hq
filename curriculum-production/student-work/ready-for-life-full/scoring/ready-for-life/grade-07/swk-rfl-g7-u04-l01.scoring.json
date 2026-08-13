@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l01",
+  "lessonId": "ma-g7-ready-for-life-u04-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Clarifying question specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The question is vague or general ('what do you mean?') or is not tied to a real missing detail."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The question names the exact missing detail (which one, how much, by when, or similar) tied to a real instruction."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the question is asked before starting the task rather than after guessing partway through."
+          }
+        ]
+      },
+      {
+        "dimension": "Real-world outcome reporting",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No real instruction-and-question exchange is reported, or the other person's response is missing."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The real instruction, the specific question asked, and the other person's response are all reported."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner compares this outcome to what would likely have happened had they guessed instead."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The instruction and clarifying question come from a real moment this week, not an invented example.",
+      "The reflection ties its answer to what actually happened when the learner asked, not a general opinion about asking questions.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

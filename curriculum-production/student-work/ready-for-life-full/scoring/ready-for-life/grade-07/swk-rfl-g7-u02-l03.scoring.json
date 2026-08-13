@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l03",
+  "lessonId": "ma-g7-ready-for-life-u02-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Checklist accuracy and specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than four check points are listed, or normal versus needs-attention conditions are not described before checking."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least four check points are listed with a normal and a needs-attention description written before the walkthrough."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and findings record the specific observed condition at each point rather than a general impression."
+          }
+        ]
+      },
+      {
+        "dimension": "Boundary-respecting report",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner attempts a fix themselves, or no findings are reported to the household."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "No repair is attempted, and findings are reported to the household with at least one item flagged for adult attention if needed."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names specifically which item most needs adult attention and why, based on what was observed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Findings describe the actual observed condition at each check point, not a guess about what it probably looks like.",
+      "The report to the household is concrete enough that an adult could act on it, and no repair was attempted by the learner.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}
