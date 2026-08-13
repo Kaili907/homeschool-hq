@@ -1,17 +1,12 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import type { LessonRef } from './types.ts'
 
 /**
- * Reads the authored Grade 3/4 mathematics lessons this pipeline consumes.
- *
- * The grades 5-12 sibling pipeline (curriculum-production/student-work/
- * mathematics) reads its lesson records directly from the shared authoring
- * trees. Grade 3/4 authoring lives on a separate branch (mac/g34-math-r1)
- * that this pipeline's worktree does not otherwise carry, so its lesson
- * records are vendored read-only into data/source/ (see data/source/README.md
- * for provenance and the pinned source commit) rather than read from a path
- * that would not exist outside that branch.
+ * Reads the canonical Grade 3/4 lesson metadata already retained in the final
+ * Mathematics corpus. This keeps the evidence generator executable in the
+ * convergence worktree instead of depending on a source directory that only
+ * existed on the historical authoring branch.
  */
 
 /**
@@ -35,36 +30,16 @@ function findRepoRoot(): string {
 
 const repoRoot = findRepoRoot()
 
-const VENDORED_ROOT = join(
+const FINAL_ROOT = join(
   repoRoot,
   'curriculum-production',
-  'student-work',
-  'mathematics-g34',
-  'data',
-  'source',
+  'final',
+  'mathematics',
 )
 
 export const ELIGIBLE_GRADES = [3, 4] as const
 
 export type EligibleGrade = (typeof ELIGIBLE_GRADES)[number]
-
-interface RawLesson {
-  lesson_id: string
-  course_id: string
-  grade: number
-  subject: string
-  course_day: number
-  unit_number: number
-  unit_title: string
-  day_in_unit: number
-  title: string
-  phase: string
-  focus: string
-  standards: string[]
-  mastery_rule?: string
-  answer_or_scoring_guidance?: string
-  extension?: string
-}
 
 export interface SourceLesson {
   ref: LessonRef
@@ -74,39 +49,50 @@ export interface SourceLesson {
   extension: string
 }
 
-function lessonsPathFor(grade: EligibleGrade): string {
-  return join(VENDORED_ROOT, `grade-${grade}`, 'lessons.jsonl')
+interface CanonicalPackage {
+  lessonRef: LessonRef
+  standards: string[]
 }
 
-function toSourceLesson(raw: RawLesson): SourceLesson {
+interface CanonicalKey {
+  masteryRule: string
+  scoringGuidance: string
+  extensionGuidance: string[]
+}
+
+const DAY_ONE_DIAGNOSTIC_STANDARDS: Readonly<Record<string, readonly string[]>> = {
+  'ma-g3-mathematics-u01-l01': ['MP.1', 'MP.3', '3.NBT.1', '3.NBT.2'],
+  'ma-g4-mathematics-u01-l01': ['MP.1', 'MP.3', '4.NBT.1', '4.NBT.2', '4.NBT.3'],
+}
+
+function toSourceLesson(materialPackage: CanonicalPackage, answerKey: CanonicalKey): SourceLesson {
+  const lessonId = materialPackage.lessonRef.lessonId
   return {
-    ref: {
-      lessonId: raw.lesson_id,
-      courseId: raw.course_id,
-      grade: raw.grade,
-      subject: 'mathematics',
-      unitNumber: raw.unit_number,
-      unitTitle: raw.unit_title,
-      dayInUnit: raw.day_in_unit,
-      courseDay: raw.course_day,
-      phase: raw.phase,
-      focus: raw.focus,
-      title: raw.title,
-    },
-    standards: [...raw.standards],
-    masteryRule: raw.mastery_rule ?? '',
-    scoringGuidance: raw.answer_or_scoring_guidance ?? '',
-    extension: raw.extension ?? '',
+    ref: materialPackage.lessonRef,
+    standards: [...(DAY_ONE_DIAGNOSTIC_STANDARDS[lessonId] ?? materialPackage.standards)],
+    masteryRule: answerKey.masteryRule,
+    scoringGuidance: answerKey.scoringGuidance,
+    extension: answerKey.extensionGuidance[0] ?? '',
   }
 }
 
 export function readLessons(grade: EligibleGrade): SourceLesson[] {
-  const text = readFileSync(lessonsPathFor(grade), 'utf8')
-  return text
-    .split('\n')
-    .filter((line) => line.trim() !== '')
-    .map((line) => toSourceLesson(JSON.parse(line) as RawLesson))
-    .filter((lesson) => lesson.ref.subject === 'mathematics')
+  const folder = `grade-${String(grade).padStart(2, '0')}`
+  const packageRoot = join(FINAL_ROOT, 'active', 'packages', folder)
+  const keyRoot = join(FINAL_ROOT, 'active', 'answer-keys', folder)
+  return readdirSync(packageRoot)
+    .filter((name) => name.endsWith('.package.json'))
+    .map((name) => {
+      const lessonId = name.slice(0, -'.package.json'.length)
+      const materialPackage = JSON.parse(
+        readFileSync(join(packageRoot, name), 'utf8'),
+      ) as CanonicalPackage
+      const answerKey = JSON.parse(
+        readFileSync(join(keyRoot, `${lessonId}.key.json`), 'utf8'),
+      ) as CanonicalKey
+      return toSourceLesson(materialPackage, answerKey)
+    })
+    .sort((left, right) => left.ref.courseDay - right.ref.courseDay)
 }
 
 export function readAllLessons(): SourceLesson[] {

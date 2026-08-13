@@ -16,7 +16,10 @@
   },
   "standards": [
     "MP.1",
-    "MP.3"
+    "MP.3",
+    "4.NBT.1",
+    "4.NBT.2",
+    "4.NBT.3"
   ],
   "blueprint": {
     "phase": "Launch and diagnostic",
@@ -37,16 +40,17 @@
         {
           "ref": "ma-g4-mathematics-u01-l01#ex-01",
           "kind": "worked-example",
-          "itemType": "mathematical-habits-strategy-choice",
-          "standard": "MP.1",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
           "difficulty": 1,
-          "prompt": "You are not sure whether a word problem wants you to add or multiply. What should you do first?",
+          "prompt": "The digit 3 is in the thousands place in one number, and the digit 3 is in the hundreds place in another. How many times as great is the first?",
           "workedSolution": {
             "steps": [
-              "Reread the problem and picture the situation.",
-              "Decide whether equal groups or a running total is being described."
+              "Thousands is one place left of hundreds.",
+              "Each place is 10 times the place to its right.",
+              "The first digit is 10 times as great."
             ],
-            "answer": "Reread the problem, picture the situation, and decide whether it describes equal groups (multiply) or a running total (add)."
+            "answer": "10"
           }
         }
       ]
@@ -60,29 +64,29 @@
         {
           "ref": "ma-g4-mathematics-u01-l01#ip-01",
           "kind": "multiple-choice",
-          "itemType": "mathematical-habits-strategy-choice",
-          "standard": "MP.1",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
           "difficulty": 1,
-          "prompt": "A problem could be solved more than one way. What should you do before picking a method?",
+          "prompt": "Compare using <, >, or =: 5733 ___ 9065",
           "choices": [
-            "Skip the problem without trying it.",
-            "Guess an answer and move on to the next problem.",
-            "Multiply every number in the problem together.",
-            "Think about which method fits the numbers best, then explain why you chose it."
+            ">",
+            "<",
+            "=",
+            "Cannot be compared without more information"
           ]
         },
         {
           "ref": "ma-g4-mathematics-u01-l01#ip-02",
           "kind": "multiple-choice",
-          "itemType": "mathematical-habits-strategy-choice",
-          "standard": "MP.1",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
           "difficulty": 1,
-          "prompt": "You read a word problem with several numbers in it and are not sure where to start. What should you do first?",
+          "prompt": "Round 1214 to the nearest 100.",
           "choices": [
-            "Skip the problem without trying it.",
-            "Restate the problem in your own words and identify exactly what question is being asked.",
-            "Multiply every number in the problem together.",
-            "Guess an answer and move on to the next problem."
+            "1200",
+            "1300",
+            "1214",
+            "1201"
           ]
         },
         {
@@ -91,12 +95,26 @@
           "itemType": "mathematical-habits-strategy-choice",
           "standard": "MP.1",
           "difficulty": 2,
-          "prompt": "You solved a multi-digit problem, but the answer has way more digits than makes sense. What should you do?",
+          "prompt": "A problem could be solved more than one way. What should you do before picking a method?",
           "choices": [
+            "Think about which method fits the numbers best, then explain why you chose it.",
+            "Guess an answer and move on to the next problem.",
             "Skip the problem without trying it.",
-            "Multiply every number in the problem together.",
-            "Estimate the answer first, then compare your exact answer to the estimate to check for a place-value mistake.",
-            "Guess an answer and move on to the next problem."
+            "Multiply every number in the problem together."
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "place-value-relationship",
+          "standard": "4.NBT.1",
+          "difficulty": 3,
+          "prompt": "A digit 2 is in the thousands place in one number, and the digit 2 is in the hundreds place in another number. How many times as great is the first digit's value compared to the second?",
+          "choices": [
+            "20",
+            "1",
+            "10",
+            "100"
           ]
         }
       ]
@@ -106,13 +124,42 @@
       "kind": "mastery-check",
       "title": "Mastery check",
       "directions": "Show what you can do so far. This sets the starting point, not a grade.",
-      "items": []
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 7617 ___ 6195",
+          "choices": [
+            "=",
+            "<",
+            ">",
+            "Cannot be compared without more information"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 99543 to the nearest 1,000.",
+          "choices": [
+            "100001",
+            "99543",
+            "100000",
+            "99000"
+          ]
+        }
+      ]
     }
   ],
   "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u01-l01.key.json",
   "integrity": {
     "corpusVersion": "1.0.0",
-    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "itemSource": "g34-student-work-generators@curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34",
     "seed": "1.0.0|ma-g4-mathematics-u01-l01"
   }
 }

@@ -10,16 +10,23 @@ const QUADRILATERALS = [
 ] as const
 
 export const GRADE3_UNIT10 = makeG34UnitBank(3, 10, [
-  spec<{ shapeIndex: number }>({
+  spec<{ shapeIndex: number; promptVariant?: number }>({
     itemType: 'classify-quadrilaterals',
     standard: '3.G.1',
     lessonFocus: 'classifying quadrilaterals by their shared attributes',
-    build: () => {
+    build: (_difficulty, variant = 0) => {
       const shapeIndex = rand(0, QUADRILATERALS.length - 1)
       const shape = QUADRILATERALS[shapeIndex]
+      const promptVariant = Math.min(variant, 3)
+      const prompts = [
+        `Which quadrilateral is defined by having ${shape.description}?`,
+        `A shape has ${shape.description}. Which quadrilateral name must apply?`,
+        `Which name belongs to a four-sided figure with ${shape.description}?`,
+        `Classify a quadrilateral described as having ${shape.description}.`,
+      ]
       return {
-        prompt: `Which quadrilateral is defined by having ${shape.description}?`,
-        parameters: { shapeIndex },
+        prompt: prompts[promptVariant],
+        parameters: { shapeIndex, ...(promptVariant === 0 ? {} : { promptVariant }) },
         answer: shape.name,
         distractors: QUADRILATERALS.filter((_, i) => i !== shapeIndex).map((q) => q.name),
         solutionSteps: [

@@ -22,6 +22,13 @@ tips, and validation results are retained under `evidence/`. Learner packages do
 not contain answer-bearing fields. Keys remain outside the learner projection and
 record their oracle or generator authority per item.
 
+Content Repair R2 repairs nine canonical Grade 3/4 lessons whose low-entropy
+prompt pools had caused duplicate suppression to omit promised practice or
+mastery items. Grade 3 and Grade 4 Day 1 remain low-stakes starting-point
+diagnostics, now with grade-appropriate mathematical evidence in addition to
+strategy evidence. The exact before/after record is retained in
+`evidence/content-repair-r2.json`.
+
 Rebuild derived schedules, manifests, and checksums deterministically:
 
 ```bash

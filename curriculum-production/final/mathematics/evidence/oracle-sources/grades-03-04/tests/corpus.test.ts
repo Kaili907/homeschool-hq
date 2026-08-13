@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { setRng } from '../../../../src/genUtils.ts'
+import { setRng } from '../src/random.ts'
 import { blueprintFor } from '../src/blueprint.ts'
-import { CORPUS_VERSION, emitLesson } from '../src/emit.ts'
+import { CONTENT_REPAIR_LESSON_IDS, CORPUS_VERSION, emitLesson } from '../src/emit.ts'
 import { unitBankFor } from '../src/itemBank.ts'
 import {
   ELIGIBLE_GRADES,
   readAllLessons,
   readLessons,
   type EligibleGrade,
+  type SourceLesson,
 } from '../src/lessonSources.ts'
 import { hasEquivalentDistractor, isEquivalentButDifferent, numericValue } from '../src/numericForm.ts'
 import { createRng } from '../src/rng.ts'
@@ -72,6 +73,40 @@ describe('corpus emission', () => {
     )
     // Eighteen lessons from one unit must not produce one repeated worksheet shape.
     expect(shapes.size).toBeGreaterThan(8)
+  })
+
+  it('fills every planned graded slot in the exact Content Repair R2 lesson set', () => {
+    const repairLessons = allLessons.filter((lesson) =>
+      CONTENT_REPAIR_LESSON_IDS.has(lesson.ref.lessonId),
+    )
+    expect(repairLessons).toHaveLength(9)
+    for (const lesson of repairLessons) {
+      const emitted = emitLesson(lesson)
+      const blueprint = blueprintFor(lesson.ref.phase)
+      for (const planned of blueprint.sections) {
+        if (planned.kind === 'instructional-example') continue
+        const actual = emitted.package.sections.find((section) => section.kind === planned.kind)
+        expect(actual?.items).toHaveLength(planned.count)
+      }
+    }
+  })
+
+  it('keeps Day 1 low stakes while collecting grade-appropriate mathematical evidence', () => {
+    for (const grade of ELIGIBLE_GRADES as readonly EligibleGrade[]) {
+      const dayOne = readLessons(grade).find((lesson) => lesson.ref.courseDay === 1)
+      expect(dayOne).toBeDefined()
+      const emitted = emitLesson(dayOne as SourceLesson)
+      const graded = emitted.package.sections
+        .flatMap((section) => section.items)
+        .filter((item) => item.kind !== 'worked-example')
+      const substantive = graded.filter(
+        (item) => !item.standard.startsWith('MP.') && !item.itemType.includes('strategy'),
+      )
+      const mastery = emitted.package.sections.find((section) => section.kind === 'mastery-check')
+      expect(substantive.length).toBeGreaterThanOrEqual(4)
+      expect(mastery?.items).toHaveLength(2)
+      expect(mastery?.directions).toContain('starting point, not a grade')
+    }
   })
 
   it('gives lessons in the same unit different questions', () => {

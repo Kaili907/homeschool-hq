@@ -86,8 +86,9 @@ const manifest = {
   subject: 'mathematics',
   generatedFrom: {
     lessonSource:
-      'curriculum-production/student-work/mathematics-g34/data/source (vendored from mac/g34-math-r1 @ 64c1a5e80ea44c1da4d54a1a22c64b81be74d0ca)',
-    itemGenerators: 'curriculum-production/student-work/mathematics-g34/src/g34 (grades 3-4)',
+      'curriculum-production/final/mathematics/active canonical lesson metadata with Content Repair R2 Day-1 diagnostic standards',
+    itemGenerators:
+      'curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34 (grades 3-4)',
   },
   totals: {
     lessons: summaries.reduce((sum, entry) => sum + entry.lessons, 0),

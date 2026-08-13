@@ -125,21 +125,33 @@ export const GRADE3_UNIT1 = makeG34UnitBank(3, 1, [
     },
   }),
 
-  spec<{ kind: number }>({
+  spec<{ kind: number; variant?: number }>({
     itemType: 'mathematical-habits-strategy-choice',
     standard: 'MP.1',
     lessonFocus: 'making sense of an unfamiliar problem before solving it',
-    build: () => {
+    build: (_difficulty, variant = 0) => {
       const kind = rand(0, 2)
       const prompts = [
         'You read a word problem and are not sure what it is asking. What should you do first?',
         'You solved a problem, but the answer seems much too large for the situation. What should you do?',
         'A problem has more numbers in it than you need. What should you do before solving?',
+        'You need to add 298 + 176. Which first step will make it easier to notice an unreasonable answer?',
+        'You are unsure how to round 347 to the nearest ten. What should you identify first?',
+        'Two learners got different answers for 512 − 168. What is the best way to decide which answer is reasonable?',
+        'A drawing shows 6 equal rows of 4 dots. What should you identify before choosing an operation?',
+        'A learner says 402 − 187 = 385. What should you do before accepting the answer?',
+        'A story gives three amounts but asks only how many remain. What should you decide before calculating?',
       ]
       const answers = [
         'Restate the problem in your own words and identify what question is being asked.',
         'Check the answer against the situation and rework any step that does not make sense.',
         'Decide which numbers the question actually needs before setting up the work.',
+        'Estimate 300 + 180 first, then compare the exact sum with that estimate.',
+        'Identify the two neighboring multiples of 10: 340 and 350.',
+        'Estimate the difference, then check each subtraction by adding it back to 168.',
+        'Identify that the drawing has equal groups and name the number in each group.',
+        'Estimate 400 − 200, then rework the subtraction because 385 is not close to the estimate.',
+        'Identify the starting amount, the amount removed, and which extra amount is not needed.',
       ]
       const distractorPool = [
         'Guess an answer and move on to the next problem.',
@@ -147,24 +159,31 @@ export const GRADE3_UNIT1 = makeG34UnitBank(3, 1, [
         'Skip the problem without trying it.',
         'Copy the answer from a different problem that looks similar.',
       ]
+      const promptIndex = kind + Math.min(variant, 2) * 3
       return {
-        prompt: prompts[kind],
-        parameters: { kind },
-        answer: answers[kind],
+        prompt: prompts[promptIndex],
+        parameters: { kind, ...(variant === 0 ? {} : { variant: Math.min(variant, 2) }) },
+        answer: answers[promptIndex],
         distractors: distractorPool,
         solutionSteps: [
           `The goal is to make sense of the problem before computing anything.`,
-          `${answers[kind]}`,
+          `${answers[promptIndex]}`,
           `Only after that step does it make sense to choose numbers and an operation.`,
         ],
       }
     },
-    oracle: ({ kind }) =>
+    oracle: ({ kind, variant = 0 }) =>
       [
         'Restate the problem in your own words and identify what question is being asked.',
         'Check the answer against the situation and rework any step that does not make sense.',
         'Decide which numbers the question actually needs before setting up the work.',
-      ][kind],
+        'Estimate 300 + 180 first, then compare the exact sum with that estimate.',
+        'Identify the two neighboring multiples of 10: 340 and 350.',
+        'Estimate the difference, then check each subtraction by adding it back to 168.',
+        'Identify that the drawing has equal groups and name the number in each group.',
+        'Estimate 400 − 200, then rework the subtraction because 385 is not close to the estimate.',
+        'Identify the starting amount, the amount removed, and which extra amount is not needed.',
+      ][kind + Math.min(variant, 2) * 3],
     referenceExample: {
       prompt: 'You are not sure a word problem is asking you to add or subtract. What should you do first?',
       steps: ['Reread the problem and picture what is happening.', 'Decide whether the total is growing or shrinking.', 'Only then choose the operation.'],

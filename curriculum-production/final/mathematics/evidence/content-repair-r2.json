@@ -1,0 +1,182 @@
+{
+  "repairId": "math-content-repair-r2",
+  "baseCommit": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "scope": {
+    "subject": "mathematics",
+    "grades": [
+      3,
+      4
+    ],
+    "affectedLessons": [
+      "ma-g3-mathematics-u01-l01",
+      "ma-g3-mathematics-u09-l01",
+      "ma-g3-mathematics-u09-l02",
+      "ma-g3-mathematics-u10-l06",
+      "ma-g3-mathematics-u10-l07",
+      "ma-g3-mathematics-u10-l08",
+      "ma-g4-mathematics-u01-l01",
+      "ma-g4-mathematics-u10-l02",
+      "ma-g4-mathematics-u10-l03"
+    ],
+    "unaffectedGrades": [
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "rootCause": {
+    "mechanism": "The Grade 3/4 emitter exhausted small prompt pools, then returned from the item callback when duplicate suppression could not find another prompt. The return silently omitted later items instead of failing generation.",
+    "strategyPoolBefore": 3,
+    "repair": "Preserve the original 48 deterministic draws, then request explicitly authored deterministic prompt variants. A graded slot now fails closed if no distinct prompt can be generated.",
+    "generatorSource": "evidence/oracle-sources/grades-03-04/src"
+  },
+  "sectionEvidence": {
+    "emptyMasteryBefore": 8,
+    "emptyMasteryAfter": 0,
+    "emptyIndependentPracticeBefore": 3,
+    "emptyIndependentPracticeAfter": 0,
+    "records": [
+      {
+        "lessonId": "ma-g3-mathematics-u01-l01",
+        "before": {
+          "independent-practice": 3,
+          "mastery-check": 0
+        },
+        "after": {
+          "independent-practice": 4,
+          "mastery-check": 2
+        }
+      },
+      {
+        "lessonId": "ma-g3-mathematics-u09-l01",
+        "before": {
+          "independent-practice": 1,
+          "mastery-check": 0
+        },
+        "after": {
+          "independent-practice": 4,
+          "mastery-check": 2
+        }
+      },
+      {
+        "lessonId": "ma-g3-mathematics-u09-l02",
+        "before": {
+          "guided-practice": 1,
+          "independent-practice": 0,
+          "mastery-check": 0
+        },
+        "after": {
+          "guided-practice": 3,
+          "independent-practice": 3,
+          "mastery-check": 2
+        }
+      },
+      {
+        "lessonId": "ma-g3-mathematics-u10-l06",
+        "before": {
+          "independent-practice": 1,
+          "mastery-check": 0
+        },
+        "after": {
+          "independent-practice": 4,
+          "mastery-check": 2
+        }
+      },
+      {
+        "lessonId": "ma-g3-mathematics-u10-l07",
+        "before": {
+          "independent-practice": 0,
+          "mastery-check": 0
+        },
+        "after": {
+          "independent-practice": 3,
+          "mastery-check": 2
+        }
+      },
+      {
+        "lessonId": "ma-g3-mathematics-u10-l08",
+        "before": {
+          "independent-practice": 0
+        },
+        "after": {
+          "independent-practice": 3
+        }
+      },
+      {
+        "lessonId": "ma-g4-mathematics-u01-l01",
+        "before": {
+          "independent-practice": 3,
+          "mastery-check": 0
+        },
+        "after": {
+          "independent-practice": 4,
+          "mastery-check": 2
+        }
+      },
+      {
+        "lessonId": "ma-g4-mathematics-u10-l02",
+        "before": {
+          "independent-practice": 2,
+          "mastery-check": 0
+        },
+        "after": {
+          "independent-practice": 3,
+          "mastery-check": 2
+        }
+      },
+      {
+        "lessonId": "ma-g4-mathematics-u10-l03",
+        "before": {
+          "independent-practice": 4,
+          "mastery-check": 0
+        },
+        "after": {
+          "independent-practice": 4,
+          "mastery-check": 2
+        }
+      }
+    ]
+  },
+  "diagnosticEvidence": {
+    "purpose": "Low-stakes starting-point diagnostic; not a grade and not mastery instruction.",
+    "grade3": {
+      "lessonId": "ma-g3-mathematics-u01-l01",
+      "contentStandards": [
+        "3.NBT.1",
+        "3.NBT.2"
+      ],
+      "substantiveGradedItems": 5,
+      "evidenceTypes": [
+        "round-to-nearest-ten-or-hundred",
+        "add-within-1000",
+        "subtract-within-1000"
+      ]
+    },
+    "grade4": {
+      "lessonId": "ma-g4-mathematics-u01-l01",
+      "contentStandards": [
+        "4.NBT.1",
+        "4.NBT.2",
+        "4.NBT.3"
+      ],
+      "substantiveGradedItems": 5,
+      "evidenceTypes": [
+        "place-value-relationship",
+        "compare-multi-digit-numbers",
+        "round-multi-digit-number"
+      ]
+    }
+  },
+  "preservedInvariants": {
+    "activeLessons": 1620,
+    "daysPerGrade": 180,
+    "grade8Standards": "28/28",
+    "grade8InactiveReserves": 4,
+    "answerKeysSeparatedFromLearnerPackages": true,
+    "globalAdmittedReleaseModified": false
+  }
+}

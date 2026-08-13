@@ -107,6 +107,20 @@
       "directions": "Work on your own. Show the steps that produced each answer.",
       "items": [
         {
+          "ref": "ma-g4-mathematics-u10-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "angle-as-fraction-of-circle",
+          "standard": "4.MD.5",
+          "difficulty": 1,
+          "prompt": "An angle turns through 120° of a full circle. What fraction of a full turn (360°) is this, in lowest terms?",
+          "choices": [
+            "1/3",
+            "2/3",
+            "13/36",
+            "11/36"
+          ]
+        },
+        {
           "ref": "ma-g4-mathematics-u10-l02#ip-02",
           "kind": "multiple-choice",
           "itemType": "angle-as-fraction-of-circle",
@@ -126,12 +140,12 @@
           "itemType": "angle-as-fraction-of-circle",
           "standard": "4.MD.5",
           "difficulty": 2,
-          "prompt": "An angle turns through 120° of a full circle. What fraction of a full turn (360°) is this, in lowest terms?",
+          "prompt": "An angle turns through 135° of a full circle. What fraction of a full turn (360°) is this, in lowest terms?",
           "choices": [
-            "13/36",
-            "2/3",
-            "11/36",
-            "1/3"
+            "25/72",
+            "3/8",
+            "3/4",
+            "29/72"
           ]
         }
       ]
@@ -141,13 +155,42 @@
       "kind": "mastery-check",
       "title": "Mastery check",
       "directions": "Mastery check. Work without help, then stop and hand this section in.",
-      "items": []
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "angle-as-fraction-of-circle",
+          "standard": "4.MD.5",
+          "difficulty": 1,
+          "prompt": "An angle turns through 270° of a full circle. What fraction of a full turn (360°) is this, in lowest terms?",
+          "choices": [
+            "7/9",
+            "3/4",
+            "13/18",
+            "3/2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "angle-as-fraction-of-circle",
+          "standard": "4.MD.5",
+          "difficulty": 2,
+          "prompt": "An angle turns through 40° of a full circle. What fraction of a full turn (360°) is this, in lowest terms?",
+          "choices": [
+            "2/9",
+            "5/36",
+            "1/12",
+            "1/9"
+          ]
+        }
+      ]
     }
   ],
   "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l02.key.json",
   "integrity": {
     "corpusVersion": "1.0.0",
-    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "itemSource": "g34-student-work-generators@curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34",
     "seed": "1.0.0|ma-g4-mathematics-u10-l02"
   }
 }
