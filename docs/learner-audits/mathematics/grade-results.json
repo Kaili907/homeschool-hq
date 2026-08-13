@@ -1,0 +1,897 @@
+{
+  "base_commit": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "browser_projection_result": "FAIL_ALL_LESSONS_UNRESPONDABLE",
+  "classification": "MATH_LEARNER_AUDIT_COMPLETE",
+  "completeness": {
+    "all_1620_audited": true,
+    "bindings": 1620,
+    "keys": 1620,
+    "nine_grades_180_each": true,
+    "packages": 1620,
+    "records": 1620,
+    "scheduled_lessons": 1620
+  },
+  "counts": {
+    "ANSWER_LEAK": 0,
+    "EMPTY_GUIDED_PRACTICE": 0,
+    "EMPTY_INDEPENDENT_PRACTICE": 3,
+    "EMPTY_MASTERY_CHECK": 8,
+    "FLATTENED_MULTIPLE_CHOICE": 1619,
+    "LOST_ITEM_IN_BROWSER": 0,
+    "OTHER_BLOCKER": 1620,
+    "PLACEHOLDER": 0,
+    "STRATEGY_ONLY_DIAGNOSTIC": 2,
+    "UNSUPPORTED_RESPONSE_TYPE": 522,
+    "ZERO_ACTIONABLE_WORK": 2
+  },
+  "grade8_standards": {
+    "covered": 28,
+    "missing": [],
+    "official": 28,
+    "result": "28/28"
+  },
+  "grades": {
+    "10": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 0,
+        "EMPTY_MASTERY_CHECK": 0,
+        "FLATTENED_MULTIPLE_CHOICE": 180,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 0,
+        "UNSUPPORTED_RESPONSE_TYPE": 60,
+        "ZERO_ACTIONABLE_WORK": 0
+      },
+      "content_blocker_lessons": [],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "SAFE_AFTER_RENDERER_FIX",
+      "respondable_lessons": 0
+    },
+    "11": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 0,
+        "EMPTY_MASTERY_CHECK": 0,
+        "FLATTENED_MULTIPLE_CHOICE": 180,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 0,
+        "UNSUPPORTED_RESPONSE_TYPE": 60,
+        "ZERO_ACTIONABLE_WORK": 0
+      },
+      "content_blocker_lessons": [],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "SAFE_AFTER_RENDERER_FIX",
+      "respondable_lessons": 0
+    },
+    "12": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 0,
+        "EMPTY_MASTERY_CHECK": 0,
+        "FLATTENED_MULTIPLE_CHOICE": 180,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 0,
+        "UNSUPPORTED_RESPONSE_TYPE": 60,
+        "ZERO_ACTIONABLE_WORK": 0
+      },
+      "content_blocker_lessons": [],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "SAFE_AFTER_RENDERER_FIX",
+      "respondable_lessons": 0
+    },
+    "3": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 3,
+        "EMPTY_MASTERY_CHECK": 5,
+        "FLATTENED_MULTIPLE_CHOICE": 180,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 1,
+        "UNSUPPORTED_RESPONSE_TYPE": 50,
+        "ZERO_ACTIONABLE_WORK": 1
+      },
+      "content_blocker_lessons": [
+        "ma-g3-mathematics-u01-l01",
+        "ma-g3-mathematics-u09-l01",
+        "ma-g3-mathematics-u09-l02",
+        "ma-g3-mathematics-u10-l06",
+        "ma-g3-mathematics-u10-l07",
+        "ma-g3-mathematics-u10-l08"
+      ],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "DO_NOT_BEGIN_YET",
+      "respondable_lessons": 0
+    },
+    "4": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 0,
+        "EMPTY_MASTERY_CHECK": 3,
+        "FLATTENED_MULTIPLE_CHOICE": 180,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 1,
+        "UNSUPPORTED_RESPONSE_TYPE": 50,
+        "ZERO_ACTIONABLE_WORK": 1
+      },
+      "content_blocker_lessons": [
+        "ma-g4-mathematics-u01-l01",
+        "ma-g4-mathematics-u10-l02",
+        "ma-g4-mathematics-u10-l03"
+      ],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "DO_NOT_BEGIN_YET",
+      "respondable_lessons": 0
+    },
+    "5": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 0,
+        "EMPTY_MASTERY_CHECK": 0,
+        "FLATTENED_MULTIPLE_CHOICE": 180,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 0,
+        "UNSUPPORTED_RESPONSE_TYPE": 60,
+        "ZERO_ACTIONABLE_WORK": 0
+      },
+      "content_blocker_lessons": [],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "SAFE_AFTER_RENDERER_FIX",
+      "respondable_lessons": 0
+    },
+    "7": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 0,
+        "EMPTY_MASTERY_CHECK": 0,
+        "FLATTENED_MULTIPLE_CHOICE": 180,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 0,
+        "UNSUPPORTED_RESPONSE_TYPE": 60,
+        "ZERO_ACTIONABLE_WORK": 0
+      },
+      "content_blocker_lessons": [],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "SAFE_AFTER_RENDERER_FIX",
+      "respondable_lessons": 0
+    },
+    "8": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 0,
+        "EMPTY_MASTERY_CHECK": 0,
+        "FLATTENED_MULTIPLE_CHOICE": 179,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 0,
+        "UNSUPPORTED_RESPONSE_TYPE": 62,
+        "ZERO_ACTIONABLE_WORK": 0
+      },
+      "content_blocker_lessons": [],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "SAFE_AFTER_RENDERER_FIX",
+      "respondable_lessons": 0
+    },
+    "9": {
+      "active_days": 180,
+      "browser_blocker_lessons": 180,
+      "category_counts": {
+        "ANSWER_LEAK": 0,
+        "EMPTY_GUIDED_PRACTICE": 0,
+        "EMPTY_INDEPENDENT_PRACTICE": 0,
+        "EMPTY_MASTERY_CHECK": 0,
+        "FLATTENED_MULTIPLE_CHOICE": 180,
+        "LOST_ITEM_IN_BROWSER": 0,
+        "OTHER_BLOCKER": 180,
+        "PLACEHOLDER": 0,
+        "STRATEGY_ONLY_DIAGNOSTIC": 0,
+        "UNSUPPORTED_RESPONSE_TYPE": 60,
+        "ZERO_ACTIONABLE_WORK": 0
+      },
+      "content_blocker_lessons": [],
+      "lessons_audited": 180,
+      "package_count": 180,
+      "readiness": "SAFE_AFTER_RENDERER_FIX",
+      "respondable_lessons": 0
+    }
+  },
+  "item_impacts": {
+    "flattened_multiple_choice_items": 13179,
+    "lost_items": 0,
+    "unsupported_constructed_response_items": 1184
+  },
+  "negative_controls": {
+    "answerIndex_leak_detected": true,
+    "browser_source_item_count_mismatch_detected": true,
+    "deleted_question_detected": true,
+    "empty_mastery_detected": true,
+    "flattened_choices_detected": true,
+    "zero_work_diagnostic_detected": true
+  },
+  "representatives": {
+    "10": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g10-mathematics-u10-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 8,
+        "course_day": 1,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g10-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": true,
+        "source_items": 8
+      },
+      "first_concept_build": {
+        "browser_items": 11,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g10-mathematics-u01-l02",
+        "profile": "concept-model-introduction",
+        "source_actionable": true,
+        "source_items": 11
+      },
+      "mid_course": {
+        "browser_items": 7,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g10-mathematics-u05-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 12,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g10-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 12
+      }
+    },
+    "11": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g11-mathematics-u10-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 8,
+        "course_day": 1,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g11-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": true,
+        "source_items": 8
+      },
+      "first_concept_build": {
+        "browser_items": 11,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g11-mathematics-u01-l02",
+        "profile": "concept-model-introduction",
+        "source_actionable": true,
+        "source_items": 11
+      },
+      "mid_course": {
+        "browser_items": 7,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g11-mathematics-u05-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 12,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g11-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 12
+      }
+    },
+    "12": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g12-mathematics-u10-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 8,
+        "course_day": 1,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g12-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": true,
+        "source_items": 8
+      },
+      "first_concept_build": {
+        "browser_items": 11,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g12-mathematics-u01-l02",
+        "profile": "concept-model-introduction",
+        "source_actionable": true,
+        "source_items": 11
+      },
+      "mid_course": {
+        "browser_items": 7,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g12-mathematics-u05-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 12,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g12-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 12
+      }
+    },
+    "3": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g3-mathematics-u10-l18",
+        "profile": "transfer-reflection-publication",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 4,
+        "course_day": 1,
+        "findings": [
+          "EMPTY_MASTERY_CHECK",
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "STRATEGY_ONLY_DIAGNOSTIC",
+          "ZERO_ACTIONABLE_WORK"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g3-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": false,
+        "source_items": 4
+      },
+      "first_concept_build": {
+        "browser_items": 9,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g3-mathematics-u01-l02",
+        "profile": "concept-build-introduction",
+        "source_actionable": true,
+        "source_items": 9
+      },
+      "mid_course": {
+        "browser_items": 7,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g3-mathematics-u05-l18",
+        "profile": "transfer-reflection-publication",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 10,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g3-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 10
+      }
+    },
+    "4": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g4-mathematics-u10-l18",
+        "profile": "transfer-reflection-publication",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 4,
+        "course_day": 1,
+        "findings": [
+          "EMPTY_MASTERY_CHECK",
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "STRATEGY_ONLY_DIAGNOSTIC",
+          "ZERO_ACTIONABLE_WORK"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g4-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": false,
+        "source_items": 4
+      },
+      "first_concept_build": {
+        "browser_items": 9,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g4-mathematics-u01-l02",
+        "profile": "concept-build-introduction",
+        "source_actionable": true,
+        "source_items": 9
+      },
+      "mid_course": {
+        "browser_items": 7,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g4-mathematics-u05-l18",
+        "profile": "transfer-reflection-publication",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 10,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g4-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 10
+      }
+    },
+    "5": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g5-mathematics-u10-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 8,
+        "course_day": 1,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g5-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": true,
+        "source_items": 8
+      },
+      "first_concept_build": {
+        "browser_items": 11,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g5-mathematics-u01-l02",
+        "profile": "concept-model-introduction",
+        "source_actionable": true,
+        "source_items": 11
+      },
+      "mid_course": {
+        "browser_items": 7,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g5-mathematics-u05-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 12,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g5-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 12
+      }
+    },
+    "7": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g7-mathematics-u10-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 8,
+        "course_day": 1,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g7-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": true,
+        "source_items": 8
+      },
+      "first_concept_build": {
+        "browser_items": 10,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g7-mathematics-u01-l02",
+        "profile": "concept-model-introduction",
+        "source_actionable": true,
+        "source_items": 10
+      },
+      "mid_course": {
+        "browser_items": 7,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g7-mathematics-u05-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 12,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g7-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 12
+      }
+    },
+    "8": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g8-mathematics-u10-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 8,
+        "course_day": 1,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g8-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": true,
+        "source_items": 8
+      },
+      "first_concept_build": {
+        "browser_items": 11,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g8-mathematics-u01-l02",
+        "profile": "concept-model-introduction",
+        "source_actionable": true,
+        "source_items": 11
+      },
+      "mid_course": {
+        "browser_items": 9,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g8-mathematics-u05-l14",
+        "profile": "transfer",
+        "source_actionable": true,
+        "source_items": 9
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 12,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g8-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 12
+      }
+    },
+    "9": {
+      "final": {
+        "browser_items": 7,
+        "course_day": 180,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g9-mathematics-u10-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "first": {
+        "browser_items": 8,
+        "course_day": 1,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g9-mathematics-u01-l01",
+        "profile": "diagnostic-launch",
+        "source_actionable": true,
+        "source_items": 8
+      },
+      "first_concept_build": {
+        "browser_items": 11,
+        "course_day": 2,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g9-mathematics-u01-l02",
+        "profile": "concept-model-introduction",
+        "source_actionable": true,
+        "source_items": 11
+      },
+      "mid_course": {
+        "browser_items": 7,
+        "course_day": 90,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER",
+          "UNSUPPORTED_RESPONSE_TYPE"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g9-mathematics-u05-l18",
+        "profile": "publication-reflection",
+        "source_actionable": true,
+        "source_items": 7
+      },
+      "unit_assessment_mastery": {
+        "browser_items": 12,
+        "course_day": 16,
+        "findings": [
+          "FLATTENED_MULTIPLE_CHOICE",
+          "OTHER_BLOCKER"
+        ],
+        "learner_can_respond": false,
+        "lesson_id": "ma-g9-mathematics-u01-l16",
+        "profile": "unit-assessment",
+        "source_actionable": true,
+        "source_items": 12
+      }
+    }
+  },
+  "reserve": {
+    "active_schedule_overlap": [],
+    "all_inactive": true,
+    "lesson_ids": [
+      "ma-g8-mathematics-u10-l10",
+      "ma-g8-mathematics-u10-l13",
+      "ma-g8-mathematics-u10-l14",
+      "ma-g8-mathematics-u10-l17"
+    ],
+    "records": 4
+  }
+}
