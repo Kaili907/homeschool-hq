@@ -33,11 +33,30 @@
     "judgmentWorkAuthority": "RUBRIC",
     "fixedAnswerKeys": 0
   },
+  "peLearnerContentRepair": {
+    "evidenceFile": "pe-content-repair-evidence.json",
+    "lessonsAudited": 972,
+    "repairs": {
+      "movementCueRepairs": 756,
+      "equipmentRepairs": 600,
+      "safetyRepairs": 324,
+      "repairLevel": "shared generator/template"
+    },
+    "after": {
+      "missingMovementCues": 0,
+      "equipmentBlockers": 0,
+      "missingRequiredSafety": 0,
+      "missingAdaptation": 0,
+      "homeUseBlockers": 0,
+      "missingCompletionCriteria": 0
+    },
+    "classification": "PE_CONTENT_READY_FOR_CONVERGENCE"
+  },
   "checksums": {
     "algorithm": "SHA-256",
     "file": "SHA256SUMS.txt",
     "scope": "every corpus file except SHA256SUMS.txt itself",
-    "entries": 2874
+    "entries": 2877
   },
   "byGrade": [
     {

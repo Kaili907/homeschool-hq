@@ -5,6 +5,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { resolve, dirname, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { scanDocument } from '../src/lib/privacyScan.mjs'
+import { auditPeLessonExecutability } from '../src/lib/peExecution.mjs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const EXPECTED = { lessons: 1296, assessments: 135, items: 1431 }
@@ -53,6 +54,7 @@ function main() {
   let assessments = 0
   let g3HealthRepinPackages = 0
   let g3HealthRepinGuides = 0
+  const peLessonPackages = []
 
   const packageRelatives = new Set(packageFiles.map((file) => relative(resolve(ROOT, 'packages'), file)))
   const guideRelatives = new Set(guideFiles.map((file) => relative(resolve(ROOT, 'scoring-guides'), file)))
@@ -77,6 +79,7 @@ function main() {
     }
     if (!hasText(doc.adaptationChoices)) errors.push(`${label}: missing adaptation/private-response choice`)
     if (doc.subject === 'physical-education' && !hasText(doc.adaptationChoices)) errors.push(`${label}: PE adaptation choice missing`)
+    if (doc.subject === 'physical-education' && doc.kind === 'lesson-task-card') peLessonPackages.push(doc)
     if (doc.subject === 'health' && !hasText(doc.trustedAdultNote)) errors.push(`${label}: Health trusted-adult/help-seeking note missing`)
     if (doc.subject === 'health' && doc.kind === 'lesson-task-card' && !hasText(doc.privacySafeScenario)) errors.push(`${label}: Health fictional/private scenario missing`)
     privacyViolations += scanDocument(doc, label).length
@@ -97,6 +100,8 @@ function main() {
   }
 
   const manifest = JSON.parse(readFileSync(resolve(ROOT, 'corpus-manifest.json'), 'utf8'))
+  const peEvidence = JSON.parse(readFileSync(resolve(ROOT, 'pe-content-repair-evidence.json'), 'utf8'))
+  const peAudit = auditPeLessonExecutability(peLessonPackages)
   if (manifest.manifestType !== 'manuel-academy-final-production-corpus') errors.push('manifest is not canonical final-production type')
   if (manifest.totals.lessons !== EXPECTED.lessons || lessons !== EXPECTED.lessons) errors.push(`lesson count mismatch: manifest=${manifest.totals.lessons}, disk=${lessons}`)
   if (manifest.totals.unitAssessments !== EXPECTED.assessments || assessments !== EXPECTED.assessments) errors.push(`assessment count mismatch: manifest=${manifest.totals.unitAssessments}, disk=${assessments}`)
@@ -106,12 +111,31 @@ function main() {
   if (manifest.privacyScan.violationCount !== 0 || privacyViolations !== 0) errors.push(`privacy scan is not clean: manifest=${manifest.privacyScan.violationCount}, disk=${privacyViolations}`)
   if (manifest.scoringPolicy?.gateSemantics !== 'H3' || manifest.scoringPolicy?.fixedAnswerKeys !== 0) errors.push('manifest does not record H3 rubric-only Health/PE scoring policy')
   if (g3HealthRepinPackages !== 42 || g3HealthRepinGuides !== 42) errors.push(`Grade 3 Health H2 repin mismatch: ${g3HealthRepinPackages} packages / ${g3HealthRepinGuides} guides`)
+  if (peAudit.lessonsAudited !== 972) errors.push(`PE lesson audit count mismatch: ${peAudit.lessonsAudited}`)
+  const peIssueGroups = {
+    missingMovementCues: peAudit.missingMovementCues,
+    equipmentBlockers: peAudit.equipmentBlockers,
+    missingRequiredSafety: peAudit.missingSafety,
+    missingAdaptation: peAudit.missingAdaptation,
+    homeUseBlockers: peAudit.homeUseBlockers,
+    missingCompletionCriteria: peAudit.missingCompletionCriteria,
+  }
+  for (const [kind, ids] of Object.entries(peIssueGroups)) {
+    if (ids.length > 0) errors.push(`PE ${kind}: ${ids.length} (${ids.slice(0, 5).join(', ')})`)
+    if (peEvidence.after?.[kind] !== ids.length) errors.push(`PE evidence mismatch for ${kind}: evidence=${peEvidence.after?.[kind]}, disk=${ids.length}`)
+    if (manifest.peLearnerContentRepair?.after?.[kind] !== ids.length) errors.push(`PE manifest mismatch for ${kind}: manifest=${manifest.peLearnerContentRepair?.after?.[kind]}, disk=${ids.length}`)
+  }
+  if (peEvidence.confirmedBaseline?.missingMovementCues !== 756 || peEvidence.repairs?.movementCueRepairs !== 756) errors.push('PE movement-cue baseline/repair evidence is not 756')
+  if (peEvidence.confirmedBaseline?.equipmentBlockers !== 600 || peEvidence.repairs?.equipmentRepairs !== 600) errors.push('PE equipment baseline/repair evidence is not 600')
+  if (peEvidence.confirmedBaseline?.missingRequiredSafety !== 324 || peEvidence.repairs?.safetyRepairs !== 324) errors.push('PE safety baseline/repair evidence is not 324')
+  if (peEvidence.classification !== 'PE_CONTENT_READY_FOR_CONVERGENCE' || manifest.peLearnerContentRepair?.classification !== peEvidence.classification) errors.push('PE repair classification is not ready and consistent')
 
   verifyChecksums(errors)
 
   console.log(`Checked ${packageFiles.length} packages + ${guideFiles.length} scoring guides.`)
   console.log(`Counts: ${lessons} lessons + ${assessments} assessments = ${packageFiles.length} items.`)
   console.log(`Grade 3 Health H2 provenance: ${g3HealthRepinPackages} packages + ${g3HealthRepinGuides} guides.`)
+  console.log(`PE content: ${peAudit.lessonsAudited} executable lessons; ${Object.values(peIssueGroups).reduce((sum, ids) => sum + ids.length, 0)} learner-content issue(s).`)
   if (errors.length) {
     console.error(`\n${errors.length} VALIDATION FAILURE(S):`)
     for (const error of errors) console.error(` - ${error}`)

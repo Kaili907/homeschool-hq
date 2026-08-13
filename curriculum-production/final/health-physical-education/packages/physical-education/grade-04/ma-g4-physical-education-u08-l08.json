@@ -12,9 +12,9 @@
   "essentialQuestion": "How do I build an activity plan that fits my body and my life?",
   "estimatedMinutes": "30-50",
   "materials": [
-    "open, cleared movement space",
-    "water available throughout",
-    "unit equipment listed in the guardian safety review"
+    "No specialized equipment is required.",
+    "Optional household or activity equipment may be used when safe and available, but no wearable, machine, weight, gym membership, or purchased item is required.",
+    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
   ],
   "movementCues": [
     "Use the talk test rather than a number.",
@@ -22,6 +22,41 @@
     "Effort is personal and is not compared with anyone else.",
     "Stop for dizziness, sharp pain, or breathlessness that will not settle, and tell an adult."
   ],
+  "ageAppropriateTechnique": "Practice slowly enough to say each cue, and ask a trusted adult to check the cleared area before movement begins.",
+  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "equipmentRequirements": {
+    "required": [
+      "No specialized equipment is required."
+    ],
+    "optional": [
+      "Optional household or activity equipment may be used when safe and available, but no wearable, machine, weight, gym membership, or purchased item is required."
+    ],
+    "householdSubstitutes": [
+      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    ],
+    "equalCreditNoEquipment": "Equal-credit home option: build and try or fully describe a short sequence using comfortable in-place marching or rolling, seated reaches, gentle mobility, and paced breathing; justify how it prepares, challenges, and settles the body."
+  },
+  "safetyRules": [
+    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
+    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
+    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit.",
+    "Use a self-selected easy-to-moderate effort, allow rest at any time, and never use maximal effort, breath-holding, punishment exercise, or exercise through pain."
+  ],
+  "stoppingRules": [
+    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
+    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
+    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+  ],
+  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit home option: build and try or fully describe a short sequence using comfortable in-place marching or rolling, seated reaches, gentle mobility, and paced breathing; justify how it prepares, challenges, and settles the body.",
+  "activitySteps": [
+    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
+    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
+    "Practice: apply the movement cues for judging effort without measurement at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
+    "Apply: show, describe, draw, sign, or write one controlled example of judging effort without measurement, including the cue or decision that made it work.",
+    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+  ],
+  "executionCategory": "training-planning",
   "commonErrorToWatchFor": "Wanting a number to prove effort. Fix: use descriptive effort language and state plainly that no number is collected.",
   "keyPoints": [
     "Use the talk test rather than a number.",
@@ -33,11 +68,12 @@
   "studentTask": "The learner practises judging effort without measurement at a self-selected challenge level, using the adapted alternative whenever it fits better, and names the cue that helped.",
   "knowledgeCheck": "The learner names one cue that helped with judging effort without measurement and one adjustment for next time, by demonstrating, describing, drawing, or writing.",
   "completionCriteria": [
-    "The learner takes part in the task about judging effort without measurement at a self-selected challenge level.",
-    "The learner uses or names the movement cues for judging effort without measurement.",
-    "The learner identifies one adjustment or next step. No score, time, count, or measurement is required."
+    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for judging effort without measurement.",
+    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
+    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
+    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
   ],
-  "adaptationChoices": "Every fitness activity has a lower-impact, seated, and shorter-duration version. Intensity is chosen by the learner using their own sense of effort. No learner is timed against another, ranked, or measured; there is no fitness test, no score, and no body measurement.",
+  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
   "extensionChallenge": "Apply judging effort without measurement under one new condition of the learner choosing — different equipment, space, speed, or partner — and describe what changed.",
   "accessibilitySupports": [
     "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
@@ -58,7 +94,9 @@
     "This task never requires calorie counting or a diet or weight-loss goal.",
     "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
+    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",

@@ -12,21 +12,63 @@
   "essentialQuestion": "How do I plan a season rather than a week?",
   "estimatedMinutes": "35–60",
   "materials": [
-    "course notebook or digital equivalent",
-    "space and equipment appropriate to the chosen goal"
+    "No specialized equipment is required.",
+    "Optional household equipment may be used only when it is safe, available, and helpful. No specialized or purchased equipment is required.",
+    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
   ],
-  "movementCues": null,
+  "movementCues": [
+    "Choose a stable start position and a movement small enough to control in the available space.",
+    "Move smoothly while breathing continuously; change one feature at a time so its effect is clear.",
+    "Keep attention on alignment, space, and the lesson focus rather than speed, force, or comparison.",
+    "Return to a stable finish and explain the cue, decision, or adjustment that made the movement safer or more effective.",
+    "Self-manage the task by rehearsing at low intensity, changing one variable at a time, and choosing control and repeatable technique over a maximal result."
+  ],
+  "ageAppropriateTechnique": "Self-manage the task by rehearsing at low intensity, changing one variable at a time, and choosing control and repeatable technique over a maximal result.",
+  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "equipmentRequirements": {
+    "required": [
+      "No specialized equipment is required."
+    ],
+    "optional": [
+      "Optional household equipment may be used only when it is safe, available, and helpful. No specialized or purchased equipment is required."
+    ],
+    "householdSubstitutes": [
+      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    ],
+    "equalCreditNoEquipment": "Equal-credit no-equipment option: demonstrate the movement pattern in place, seated, supported, or with hand gestures, or draw and explain the movement path and safety decision when movement is not appropriate."
+  },
+  "safetyRules": [
+    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
+    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
+    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit."
+  ],
+  "stoppingRules": [
+    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
+    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
+    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+  ],
+  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit no-equipment option: demonstrate the movement pattern in place, seated, supported, or with hand gestures, or draw and explain the movement path and safety decision when movement is not appropriate.",
+  "activitySteps": [
+    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
+    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
+    "Practice: apply the movement cues for building in review points and objective decision rules at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
+    "Apply: show, describe, draw, sign, or write one controlled example of building in review points and objective decision rules, including the cue or decision that made it work.",
+    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+  ],
+  "executionCategory": "movement-literacy",
   "commonErrorToWatchFor": null,
   "keyPoints": [],
   "privacySafeScenario": "Design a full periodized cycle for a self-chosen capability or activity goal, including phase structure, review points, and pre-committed rules for when to progress, hold, or deload.",
   "studentTask": "Learner applies building in review points and objective decision rules in a new situation at a self-set intensity and records what they did, noticed, and would adjust.",
   "knowledgeCheck": "In one concise response, explain the key idea behind building in review points and objective decision rules and name one adjustment for the next session.",
   "completionCriteria": [
-    "The learner completes or fully describes the building in review points and objective decision rules task using a version their body and setting allow.",
-    "The learner gives a cue, principle, tactic, or documented process rather than an unexplained result.",
-    "The learner self-assesses against the stated criteria and identifies one next adjustment."
+    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for building in review points and objective decision rules.",
+    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
+    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
+    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
   ],
-  "adaptationChoices": "Goals may be endurance, strength, mobility, skill, coordination, or a functional task; any medical restriction is planned around with guardian input.",
+  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
   "extensionChallenge": "Apply building in review points and objective decision rules under a new constraint, in a different activity, or teach the cue to someone else — without completing another learner's graded work.",
   "accessibilitySupports": [
     "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
@@ -49,7 +91,9 @@
     "This task never requires calorie counting or a diet or weight-loss goal.",
     "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
+    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",

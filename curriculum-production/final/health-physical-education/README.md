@@ -60,22 +60,29 @@ worktree's shared base and is read from this worktree directly. Once those
 branches merge, only `sourcePaths.mjs` needs to change — the rest of the
 generator is source-branch-agnostic.
 
-## Content density differs by grade band, honestly
+## PE learner execution contract
 
-Grade 3/4 lessons carry a dedicated `key_points`/`cues` field with distinct,
-hand-authored facts per topic, so `packages/…/grade-03/…` and `grade-04/…`
-task cards include a populated `keyPoints`/`movementCues` array. Canonical
-5/7/8 and HS 9-12 lessons do not carry that field — their per-topic substance
-lives in `essential_question`, the unit's `performance_task`/`privacy_guard`
-(HS) or `topic_content` (G3/4), and the lesson's own `student_activity` and
-`formative_check`, all of which this generator does use. Their `lesson_flow`
-narration ("Teach the cues, principle, or tactic behind X…") is a pacing
-script with the topic interpolated into a fixed instructional-design
-template, not distinct per-topic content, so this generator deliberately
-does **not** surface it as if it were — `keyPoints`/`movementCues` is `[]`/
-`null` for those grades rather than padded with templated prose. This is a
-property of the upstream branches (which this package does not own), not
-data loss in this projection.
+All 972 PE lesson task cards are executable in ordinary homeschool conditions.
+The generator preserves the 216 hand-authored Grade 3/4 cue sets and supplies
+focus-specific, age-banded movement technique for the 756 Grade 5-12 lessons
+whose source records do not have a dedicated cue field. Every PE lesson also
+contains:
+
+- a cleared-space setup and one-arm-span low-space path;
+- explicit required/optional equipment, soft household substitutes, and an
+  equal-credit no-equipment path;
+- environment, equipment, controlled-effort, and activity-specific safety
+  rules;
+- stop rules for symptoms, impact/injury, and a changing environment;
+- seated, supported, reduced-range, mobility-aid, solo, and described/gestured
+  adaptations assessed for equal credit;
+- five actionable activity steps and four observable completion criteria.
+
+`src/lib/peExecution.mjs` owns this shared projection. The independent
+validator re-audits the emitted PE lessons and fails if any required block is
+missing. `pe-content-repair-evidence.json` records the confirmed baseline,
+repair counts, post-repair zeroes, category coverage, and convergence
+classification.
 
 ## Never requires
 
@@ -111,10 +118,12 @@ persisted as scored work.
 node src/generate.mjs
 ```
 
-Deterministic: every field is a straight projection of already-authored
-source text keyed by lesson/assessment id, so the same source content always
-produces byte-identical output. The script exits non-zero if any item is
-`NOT_READY` on the production gate or if the privacy scan finds a violation.
+Deterministic: source projections and the shared PE execution templates are
+keyed only by authored lesson data, so the same source content always produces
+byte-identical output. The script exits non-zero if any item is `NOT_READY`,
+the privacy scan finds a violation, or the 972-lesson PE execution audit finds
+any missing cue, equipment resolution, safety/stop block, adaptation,
+home-use path, or completion criteria.
 
 ## Validating
 
@@ -127,8 +136,9 @@ Independently re-reads every file under `packages/` and `scoring-guides/`
 no answer-bearing key leaked into a package, exact lesson/assessment counts,
 paired artifacts, exact per-item source provenance, H2 repin coverage, H3
 rubric-only scoring, private/ungraded optional reflection, PE adaptations,
-Health fictional/private scenarios and trusted-adult language, a fresh privacy
-scan, and every entry in `SHA256SUMS.txt`.
+Health fictional/private scenarios and trusted-adult language, the complete PE
+learner execution contract and repair evidence, a fresh privacy scan, and every
+entry in `SHA256SUMS.txt`.
 
 ## Production readiness gate
 

@@ -9,9 +9,9 @@
  *   scoring-guides/<subject>/grade-XX/<id>.json  rubric / scoring judgment — parent/teacher-facing
  *
  * Regeneration is deterministic: the same source content always produces
- * byte-identical output, because every field is a straight projection of
- * already-authored source text — nothing here is invented or templated
- * with only the title swapped in.
+ * byte-identical output. Health fields project authored source text; PE
+ * lessons also receive the shared focus-category execution contract from
+ * lib/peExecution.mjs.
  *
  * Run: node src/generate.mjs
  */
@@ -32,6 +32,7 @@ import {
 } from './lib/normalize.mjs'
 import { evaluateLessonProductionReadiness } from './lib/productionGate.mjs'
 import { scanDocument } from './lib/privacyScan.mjs'
+import { auditPeLessonExecutability, buildPeExecution } from './lib/peExecution.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(HERE, '..')
@@ -45,8 +46,25 @@ const NEVER_REQUIRES = [
   'This task never requires a public performance or an audience.',
 ]
 
+const PE_NEVER_REQUIRES = [
+  ...NEVER_REQUIRES,
+  'This task never requires maximal effort, exercise as punishment, or movement through pain.',
+  'This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit.',
+]
+
 const TRUSTED_ADULT_NOTE =
   'Direct any urgent safety, health, or mental-health concern to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment.'
+
+const CONFIRMED_PE_BASELINE = {
+  lessons: 972,
+  missingMovementCues: 756,
+  equipmentBlockers: 600,
+  missingRequiredSafety: 324,
+  zeroActionable: 0,
+  emptyActivities: 0,
+  bodyWeightDietFindings: 0,
+  mandatoryMediaFindings: 0,
+}
 
 function readJsonlLessons(path) {
   return readFileSync(path, 'utf8')
@@ -87,6 +105,7 @@ function writeJson(path, data) {
 
 function buildLessonArtifacts(lesson, unit, subject, grade) {
   const isHealth = subject === 'health'
+  const peExecution = isHealth ? null : buildPeExecution(lesson, grade)
   const scenario = pickScenarioText(lesson, unit)
   const keyPoints = pickKeyPointsText(lesson, unit)
   const adaptedAlternative = pickAdaptedAlternativeText(lesson, unit)
@@ -107,21 +126,39 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     focus: lesson.focus,
     essentialQuestion: lesson.essential_question,
     estimatedMinutes: lesson.estimated_minutes,
-    materials: lesson.materials ?? [],
-    ...(isHealth ? {} : { movementCues: lesson.cues ?? null, commonErrorToWatchFor: lesson.common_error ?? null }),
+    materials: isHealth
+      ? (lesson.materials ?? [])
+      : [
+          ...peExecution.equipmentRequirements.required,
+          ...peExecution.equipmentRequirements.optional,
+          ...peExecution.equipmentRequirements.householdSubstitutes,
+        ],
+    ...(isHealth ? {} : {
+      movementCues: peExecution.movementCues,
+      ageAppropriateTechnique: peExecution.techniqueLevel,
+      spaceSetup: peExecution.spaceSetup,
+      equipmentRequirements: peExecution.equipmentRequirements,
+      safetyRules: peExecution.safetyRules,
+      stoppingRules: peExecution.stoppingRules,
+      accessibleAdaptation: peExecution.accessibleAdaptation,
+      lowSpaceNoEquipmentAlternative: peExecution.lowSpaceNoEquipmentAlternative,
+      activitySteps: peExecution.activitySteps,
+      executionCategory: peExecution.repairCategory,
+      commonErrorToWatchFor: lesson.common_error ?? null,
+    }),
     keyPoints: keyPoints ? keyPoints.split(/(?<=[.!?])\s+/).filter(Boolean) : [],
     privacySafeScenario: scenario,
     studentTask: lesson.student_activity,
     knowledgeCheck: lesson.formative_check,
-    completionCriteria: lesson.success_criteria ?? [],
-    adaptationChoices: adaptedAlternative,
+    completionCriteria: isHealth ? (lesson.success_criteria ?? []) : peExecution.completionCriteria,
+    adaptationChoices: isHealth ? adaptedAlternative : peExecution.accessibleAdaptation,
     extensionChallenge: lesson.extension ?? null,
     accessibilitySupports: lesson.accessibility_and_accommodations ?? [],
     ...(isHealth ? { trustedAdultNote: trustedAdultSentence(lesson) } : {}),
     optionalReflection: lesson.home_connection
       ? { prompt: lesson.home_connection, private: true, graded: false, optional: true }
       : null,
-    neverRequires: NEVER_REQUIRES,
+    neverRequires: isHealth ? NEVER_REQUIRES : PE_NEVER_REQUIRES,
     sourceProvenance: { sourceBranch: sourceBranchLabel(grade, subject), sourceLessonId: lesson.lesson_id },
   }
 
@@ -270,6 +307,7 @@ function main() {
   const gateResults = []
   const privacyViolations = []
   const byGrade = []
+  const peLessonPackages = []
 
   for (const grade of SUPPORTED_GRADES) {
     for (const subject of SUBJECTS) {
@@ -285,6 +323,7 @@ function main() {
       for (const lesson of lessons) {
         const unit = findUnit(units, lesson.unit_number)
         const { pkg, scoringGuide, gateInput, violations } = buildLessonArtifacts(lesson, unit, subject, grade)
+        if (subject === 'physical-education') peLessonPackages.push(pkg)
         const gate = evaluateLessonProductionReadiness(gateInput)
         gateResults.push(gate)
         privacyViolations.push(...violations)
@@ -318,6 +357,54 @@ function main() {
   const needsReviewCount = gateResults.filter((r) => r.status === 'NEEDS_HUMAN_REVIEW').length
   const notReadyCount = gateResults.filter((r) => r.status === 'NOT_READY').length
   const notReadyIds = gateResults.filter((r) => r.status === 'NOT_READY').map((r) => ({ id: r.lessonId, codes: r.codes, notes: r.notes }))
+  const peAudit = auditPeLessonExecutability(peLessonPackages)
+  const peAfter = {
+    missingMovementCues: peAudit.missingMovementCues.length,
+    equipmentBlockers: peAudit.equipmentBlockers.length,
+    missingRequiredSafety: peAudit.missingSafety.length,
+    missingAdaptation: peAudit.missingAdaptation.length,
+    homeUseBlockers: peAudit.homeUseBlockers.length,
+    missingCompletionCriteria: peAudit.missingCompletionCriteria.length,
+  }
+  const peReady = peAudit.lessonsAudited === CONFIRMED_PE_BASELINE.lessons
+    && Object.values(peAfter).every((count) => count === 0)
+  const categoryCounts = Object.fromEntries(
+    [...new Set(peLessonPackages.map((pkg) => pkg.executionCategory))]
+      .sort()
+      .map((category) => [category, peLessonPackages.filter((pkg) => pkg.executionCategory === category).length]),
+  )
+  const peEvidence = {
+    evidenceType: 'physical-education-learner-content-repair',
+    evidenceVersion: '1.0.0',
+    confirmedBaseline: CONFIRMED_PE_BASELINE,
+    repairs: {
+      movementCueRepairs: CONFIRMED_PE_BASELINE.missingMovementCues,
+      equipmentRepairs: CONFIRMED_PE_BASELINE.equipmentBlockers,
+      safetyRepairs: CONFIRMED_PE_BASELINE.missingRequiredSafety,
+      repairLevel: 'shared generator/template',
+    },
+    after: peAfter,
+    proofs: {
+      lessonsAudited: peAudit.lessonsAudited,
+      focusSpecificExecutionCategories: categoryCounts,
+      movementCueRule: 'At least three movement cues plus an age-band technique note on every PE lesson.',
+      adaptationRule: 'Every lesson states seated, supported, reduced-range, mobility-aid, solo, and equal-credit response paths.',
+      homeUseRule: 'Every lesson states a cleared low-space setup, no-specialized-equipment requirement, household substitute policy, and equal-credit no-equipment path.',
+      safetyRule: 'Every lesson states environment/equipment checks, controlled-effort rules, at least three stop conditions, and trusted-adult escalation.',
+      completionRule: 'Every lesson has four observable criteria covering setup/path choice, cue use, safety/equipment reasoning, and equal-credit adaptation.',
+    },
+    issueIdsAfter: {
+      missingMovementCues: peAudit.missingMovementCues,
+      equipmentBlockers: peAudit.equipmentBlockers,
+      missingRequiredSafety: peAudit.missingSafety,
+      missingAdaptation: peAudit.missingAdaptation,
+      homeUseBlockers: peAudit.homeUseBlockers,
+      missingCompletionCriteria: peAudit.missingCompletionCriteria,
+    },
+    classification: peReady ? 'PE_CONTENT_READY_FOR_CONVERGENCE' : 'BLOCKED',
+  }
+
+  writeJson(resolve(ROOT, 'pe-content-repair-evidence.json'), peEvidence)
 
   const manifest = {
     manifestType: 'manuel-academy-final-production-corpus',
@@ -354,6 +441,13 @@ function main() {
       judgmentWorkAuthority: 'RUBRIC',
       fixedAnswerKeys: 0,
     },
+    peLearnerContentRepair: {
+      evidenceFile: 'pe-content-repair-evidence.json',
+      lessonsAudited: peAudit.lessonsAudited,
+      repairs: peEvidence.repairs,
+      after: peAfter,
+      classification: peEvidence.classification,
+    },
     checksums: {
       algorithm: 'SHA-256',
       file: 'SHA256SUMS.txt',
@@ -369,8 +463,9 @@ function main() {
   console.log(`Generated ${gateResults.length} items (${manifest.totals.lessons} lessons + ${manifest.totals.unitAssessments} unit assessments)`)
   console.log(`Production gate: ${readyCount} READY, ${needsReviewCount} NEEDS_HUMAN_REVIEW, ${notReadyCount} NOT_READY`)
   console.log(`Privacy scan: ${privacyViolations.length} violation(s)`)
+  console.log(`PE learner-content audit: ${peAudit.lessonsAudited} lessons; ${peAfter.missingMovementCues} missing cues, ${peAfter.equipmentBlockers} equipment blockers, ${peAfter.missingRequiredSafety} missing safety, ${peAfter.missingAdaptation} missing adaptations, ${peAfter.homeUseBlockers} home-use blockers`)
 
-  if (notReadyCount > 0 || privacyViolations.length > 0) {
+  if (notReadyCount > 0 || privacyViolations.length > 0 || !peReady) {
     process.exitCode = 1
   }
 }

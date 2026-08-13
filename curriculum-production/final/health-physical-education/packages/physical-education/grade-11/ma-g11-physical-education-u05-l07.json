@@ -12,22 +12,64 @@
   "essentialQuestion": "How do I make a movement better before I make it heavier or faster?",
   "estimatedMinutes": "35–60",
   "materials": [
-    "open safe space",
-    "optional household or gym equipment",
-    "course notebook or digital equivalent"
+    "No specialized equipment is required.",
+    "Optional: a stable chair, wall, towel, or light household object approved by an adult. Weights, machines, mats, and gym access are not required.",
+    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
   ],
-  "movementCues": null,
+  "movementCues": [
+    "Start with a stable base, soft joints, long spine, and a chair or wall within reach if support would help.",
+    "Brace gently while breathing continuously; move only through a comfortable, controlled range.",
+    "Align knees, hands, or wheels with the direction of travel and spread force across the whole base of support.",
+    "End the movement while technique is still steady; reduce range, leverage, or resistance at the first sign of form breakdown.",
+    "Self-manage the task by rehearsing at low intensity, changing one variable at a time, and choosing control and repeatable technique over a maximal result."
+  ],
+  "ageAppropriateTechnique": "Self-manage the task by rehearsing at low intensity, changing one variable at a time, and choosing control and repeatable technique over a maximal result.",
+  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "equipmentRequirements": {
+    "required": [
+      "No specialized equipment is required."
+    ],
+    "optional": [
+      "Optional: a stable chair, wall, towel, or light household object approved by an adult. Weights, machines, mats, and gym access are not required."
+    ],
+    "householdSubstitutes": [
+      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    ],
+    "equalCreditNoEquipment": "Equal-credit no-equipment option: use a seated, supported, reduced-range, or gentle isometric version of the same shape and control cues, or demonstrate the joint path with hands while explaining alignment and breathing."
+  },
+  "safetyRules": [
+    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
+    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
+    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit.",
+    "Use only stable supports that cannot roll or tip. Do not use maximal resistance, hold the breath, force a stretch, invert, or add load when alignment is not controlled."
+  ],
+  "stoppingRules": [
+    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
+    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
+    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+  ],
+  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit no-equipment option: use a seated, supported, reduced-range, or gentle isometric version of the same shape and control cues, or demonstrate the joint path with hands while explaining alignment and breathing.",
+  "activitySteps": [
+    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
+    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
+    "Practice: apply the movement cues for technique before load: sequencing a progression at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
+    "Apply: show, describe, draw, sign, or write one controlled example of technique before load: sequencing a progression, including the cue or decision that made it work.",
+    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+  ],
+  "executionCategory": "balance-strength-mobility",
   "commonErrorToWatchFor": null,
   "keyPoints": [],
   "privacySafeScenario": "Build a technique-first strength and mobility progression, document the criteria for advancing each movement, and show a completed progression with the criteria met.",
   "studentTask": "Learner works technique before load: sequencing a progression programmed into the learner’s live plan and progressed across sessions, including one hold or regression made deliberately at a self-set intensity, then records what held, what degraded first, and how this occasion differed from the earlier one.",
   "knowledgeCheck": "In one concise response, say which feature of technique before load: sequencing a progression degraded first under the added demand, why, and what you would change before the next attempt.",
   "completionCriteria": [
-    "The learner holds technique before load: sequencing a progression programmed into the learner’s live plan and progressed across sessions, including one hold or regression made deliberately, in whatever version their body and setting allow.",
-    "The learner names what degraded first and why, rather than reporting only whether it worked.",
-    "The learner compares this occasion with the earlier one and says what actually changed."
+    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for technique before load: sequencing a progression.",
+    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
+    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
+    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
   ],
-  "adaptationChoices": "Every movement has a seated, supported, reduced-range, and unloaded version. Advancement criteria are set by control and range, never by load lifted relative to any other person.",
+  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
   "extensionChallenge": "Design the next progression of technique before load: sequencing a progression yourself, or coach the transfer condition to someone else so that they succeed with it — without completing another learner's graded work.",
   "accessibilitySupports": [
     "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
@@ -50,7 +92,9 @@
     "This task never requires calorie counting or a diet or weight-loss goal.",
     "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
+    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
