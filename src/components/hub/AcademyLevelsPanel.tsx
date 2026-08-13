@@ -1,4 +1,5 @@
 import {
+  ACADEMY_GRADES,
   ACADEMY_SUBJECTS,
   type AcademyGrade,
   type AcademySubject,
@@ -25,8 +26,10 @@ interface Props {
   onPatchProfile: (id: string, update: (prev: Profile) => Profile) => void
 }
 
-/** Levels the curriculum release actually publishes content for. */
-const ACADEMY_LEVELS: AcademyGrade[] = ['5', '7', '8']
+/** Levels curriculum is authored for, from the canonical authority. A level
+ * whose host flag is off still lists here and the caption below says so
+ * plainly — the parent can assign it, she just sees nothing until it ships. */
+const ACADEMY_LEVELS: readonly AcademyGrade[] = ACADEMY_GRADES
 
 export function AcademyLevelsPanel({ profiles, onPatchProfile }: Props) {
   return (

@@ -163,6 +163,10 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'project', label: 'Friday project time' },
         ],
       }
+    // Grades 9 and 11 became representable when Grade gained every high-school
+    // level. Neither has an authored template of its own, so each rides the
+    // adjacent grade's rather than leaving the switch non-total.
+    case '9':
     case '10':
       return {
         weekday: [
@@ -180,6 +184,7 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'catch-up', label: 'Catch-up or elective' },
         ],
       }
+    case '11':
     case '12':
       return {
         // math block pinned first by default order

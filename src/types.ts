@@ -1,5 +1,6 @@
 import type { SkillId } from './skills'
 import type { AssessmentState } from './assessment/types'
+import { SUPPORTED_ACADEMY_GRADES, type AcademySupportedGrade } from './curriculum/grade-authority'
 
 // ---------- questions (unchanged from v1) ----------
 
@@ -36,12 +37,30 @@ export type SkillStatus = 'mastered' | 'developing' | 'not-started'
 
 export type ISODate = string // YYYY-MM-DD
 
-export type Grade = '3' | '4' | '5' | '6' | '7' | '8' | '10' | '12'
+/**
+ * NOMINAL grade — what a girl IS, for transcripts, report cards, placement and
+ * every reporting surface. Distinct from AcademyGrade below, which is what
+ * curriculum EXISTS for; a nominal grade of 6 is a perfectly ordinary student
+ * who simply has no Academy content to receive. Grades 9 and 11 are present
+ * because a nominal grade must be representable whether or not curriculum was
+ * authored for it — see curriculum/grade-authority/gradeKinds.ts.
+ */
+export type Grade = '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12'
 
 // ---------- CURR-1 Manuel Academy curriculum (additive, all OPTIONAL; no schemaVersion bump) ----------
 
-/** Grades served by the imported Manuel Academy curriculum release. */
-export type AcademyGrade = '5' | '7' | '8'
+/**
+ * Grades the authored Manuel Academy curriculum supports, as strings — the
+ * string projection of the canonical numeric list in
+ * curriculum/grade-authority. Derived, never re-listed here, so this type can
+ * never drift from the authority. Grade 6 is absent on purpose.
+ */
+export type AcademyGrade = `${AcademySupportedGrade}`
+
+/** The same list as values, ascending, for enumeration sites (selectors, loaders). */
+export const ACADEMY_GRADES = SUPPORTED_ACADEMY_GRADES.map(
+  (grade) => String(grade) as AcademyGrade,
+)
 
 /** The ten subjects the curriculum release publishes (see academy/contentTypes). */
 export const ACADEMY_SUBJECTS = [
@@ -67,9 +86,10 @@ export type AcademySubject = (typeof ACADEMY_SUBJECTS)[number]
  * before. Levels are per subject because a sixth grader can genuinely need
  * Grade 5 mathematics and Grade 7 ELA in the same term.
  *
- * An explicit level is an AcademyGrade, not any Grade: only 5/7/8 have
- * published content, so assigning '10' would be an inert value nothing can
- * serve. Sync validation enforces the same restriction on untrusted payloads.
+ * An explicit level is an AcademyGrade, not any Grade: only curriculum-
+ * supported grades have published content, so assigning '6' would be an inert
+ * value nothing can serve. Sync validation enforces the same restriction on
+ * untrusted payloads.
  */
 export type WorkingLevels = Partial<Record<AcademySubject, AcademyGrade>>
 

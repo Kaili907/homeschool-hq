@@ -1,3 +1,5 @@
+import { isSupportedAcademyGrade, type AcademySupportedGrade } from '../../../curriculum/grade-authority'
+
 export const STUDY_BOUND_CONTENT_SCHEMA_VERSION = 1 as const
 
 export interface StudyBoundContentRequest {
@@ -35,7 +37,7 @@ export interface StudyLearnerMediaGuidance {
 export interface StudyLearnerLesson {
   readonly lessonId: string
   readonly courseId: string
-  readonly grade: 5 | 7 | 8
+  readonly grade: AcademySupportedGrade
   readonly subject: string
   readonly courseDay: number
   readonly unitNumber: number
@@ -242,7 +244,7 @@ function parseLesson(value: unknown): StudyLearnerLesson | null {
     'extension', 'media', 'homeConnection',
   ])
   if (!candidate || !safeRef(candidate.lessonId) || !safeRef(candidate.courseId) ||
-      ![5, 7, 8].includes(candidate.grade as number) || !text(candidate.subject) ||
+      !isSupportedAcademyGrade(candidate.grade) || !text(candidate.subject) ||
       !integer(candidate.courseDay) || !integer(candidate.unitNumber) ||
       !text(candidate.unitTitle) || !integer(candidate.dayInUnit) || !text(candidate.title) ||
       !text(candidate.schemaVersion, 32) || !text(candidate.formativeCheck)) return null
@@ -267,7 +269,7 @@ function parseLesson(value: unknown): StudyLearnerLesson | null {
   return Object.freeze({
     lessonId: candidate.lessonId,
     courseId: candidate.courseId,
-    grade: candidate.grade as 5 | 7 | 8,
+    grade: candidate.grade as AcademySupportedGrade,
     subject: candidate.subject,
     courseDay: candidate.courseDay,
     unitNumber: candidate.unitNumber,

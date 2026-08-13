@@ -1,5 +1,6 @@
-import { ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade, type Profile } from '../types'
+import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade, type Profile } from '../types'
 import { academyGradeOf, isAcademyGradeEnabledFromHost } from './featureFlag'
+import { ACADEMY_COURSE_ID_PATTERN } from '../curriculum/grade-authority'
 
 /**
  * ACADEMY-LEVEL-DECOUPLE — the one place a "which content does she receive?"
@@ -41,8 +42,9 @@ export function hasExplicitWorkingLevel(p: Profile, subject: AcademySubject): bo
  * profile; `grade` is never touched. Clearing the last entry drops the whole
  * record so an untouched-again profile is indistinguishable from a fresh one.
  *
- * `level` is an AcademyGrade: only 5/7/8 have published content, and sync
- * validation refuses anything else, so the type refuses it here first.
+ * `level` is an AcademyGrade: only curriculum-supported grades have published
+ * content, and sync validation refuses anything else, so the type refuses it
+ * here first.
  */
 export function setWorkingLevel(
   p: Profile,
@@ -58,9 +60,10 @@ export function setWorkingLevel(
   return reconcileEnrollment(moved)
 }
 
-/** Course ids encode their level and subject; mirrors COURSE_ID in
- * academyRoute.ts and ACADEMY_COURSE_ID in sync/provenance.ts. */
-const COURSE_ID = /^ma-g(5|7|8)-([a-z-]+)$/
+/** Course ids encode their level and subject. academyRoute.ts and
+ * sync/provenance.ts now read the same pattern from the grade authority, so the
+ * three copies this comment used to warn about are one definition. */
+const COURSE_ID = ACADEMY_COURSE_ID_PATTERN
 
 /** The level this subject's content may come from, ignoring feature flags —
  * the authorization the profile carries, not what the build currently serves. */
@@ -125,5 +128,5 @@ export function levelsOf(entries: readonly AcademyProgramEntry[]): AcademyGrade[
  * which must stay reachable even when no profile currently resolves into one —
  * otherwise the level that would grant access could never be assigned. */
 export function isAnyAcademyLevelEnabled(): boolean {
-  return (['5', '7', '8'] as const).some(isAcademyGradeEnabledFromHost)
+  return ACADEMY_GRADES.some(isAcademyGradeEnabledFromHost)
 }

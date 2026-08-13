@@ -1,3 +1,7 @@
+import {
+  SUPPORTED_GRADE_ALTERNATION,
+  parseSupportedAcademyGrade,
+} from '../../curriculum/grade-authority'
 export const CURRICULUM_VALIDATION_CAPABILITY = 'curriculum:read' as const
 
 export const VALIDATION_CATEGORY_IDS = [
@@ -168,32 +172,36 @@ function normalizedFindingCode(value: unknown): string | null {
 }
 
 function safeGrade(value: unknown): string | undefined {
-  const grade = typeof value === 'number' ? String(value) : value
-  return grade === '5' || grade === '7' || grade === '8' ? grade : undefined
+  const grade = parseSupportedAcademyGrade(value)
+  return grade === null ? undefined : String(grade)
 }
 
+// All four ref shapes embed the same grade token. The alternation comes from the
+// grade authority so these cannot drift apart from each other, or from the
+// course/lesson id patterns the runtime parses. `SUBJECT` is stricter than the
+// authority's own `[a-z-]+`: findings refs must not carry a leading or trailing
+// dash, so the pattern is composed here rather than reused wholesale.
+const GRADE = `(?:${SUPPORTED_GRADE_ALTERNATION})`
+const SUBJECT = String.raw`[a-z]+(?:-[a-z]+)*`
+const COURSE_REF = new RegExp(`^ma-g${GRADE}-${SUBJECT}$`)
+const UNIT_REF = new RegExp(String.raw`^(?:ma-g${GRADE}-${SUBJECT}-)?u\d{2}$`)
+const LESSON_REF = new RegExp(String.raw`^ma-g${GRADE}-${SUBJECT}-u\d{2}-l\d{2}$`)
+const ASSESSMENT_REF = new RegExp(String.raw`^ma-g${GRADE}-${SUBJECT}-u\d{2}-assessment$`)
+
 function safeCourseRef(value: unknown): string | undefined {
-  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*$/.test(value)
-    ? value
-    : undefined
+  return typeof value === 'string' && COURSE_REF.test(value) ? value : undefined
 }
 
 function safeUnitRef(value: unknown): string | undefined {
-  return typeof value === 'string' && /^(?:ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-)?u\d{2}$/.test(value)
-    ? value
-    : undefined
+  return typeof value === 'string' && UNIT_REF.test(value) ? value : undefined
 }
 
 function safeLessonRef(value: unknown): string | undefined {
-  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-u\d{2}-l\d{2}$/.test(value)
-    ? value
-    : undefined
+  return typeof value === 'string' && LESSON_REF.test(value) ? value : undefined
 }
 
 function safeAssessmentRef(value: unknown): string | undefined {
-  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-u\d{2}-assessment$/.test(value)
-    ? value
-    : undefined
+  return typeof value === 'string' && ASSESSMENT_REF.test(value) ? value : undefined
 }
 
 function safeStandardRef(value: unknown): string | undefined {

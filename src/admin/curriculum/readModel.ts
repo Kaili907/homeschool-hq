@@ -13,8 +13,8 @@ import {
   type CurriculumStandardCoverage,
   type CurriculumUnitSummary,
 } from './contracts'
+import { isSupportedAcademyGrade } from '../../curriculum/grade-authority'
 
-const SUPPORTED_GRADES = new Set<number>([5, 7, 8])
 type JsonObject = Record<string, unknown>
 
 export interface CurriculumCatalogInput {
@@ -69,8 +69,8 @@ function number(value: unknown, label: string): number {
 
 function grade(value: unknown, label: string): CurriculumGrade {
   const parsed = typeof value === 'string' ? Number(value) : value
-  if (typeof parsed !== 'number' || !SUPPORTED_GRADES.has(parsed)) malformed(`${label} is unsupported`)
-  return parsed as CurriculumGrade
+  if (!isSupportedAcademyGrade(parsed)) malformed(`${label} is unsupported`)
+  return parsed
 }
 
 function stringArray(value: unknown, label: string, required = false): string[] {

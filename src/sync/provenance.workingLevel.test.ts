@@ -80,7 +80,7 @@ describe('the tamper boundary survives the decoupling', () => {
   it('rejects unknown subjects and non-grade levels in the working-level record', () => {
     const cases: Record<string, unknown>[] = [
       { 'mind-control': '5' },
-      { mathematics: '9' },
+      { mathematics: '6' },
       { mathematics: 5 },
       { mathematics: null },
       { mathematics: { level: '5' } },
@@ -104,9 +104,11 @@ describe('the tamper boundary survives the decoupling', () => {
 
 // ---------- ACADEMY-LEVEL-DECOUPLE-C fix 1 ----------
 
-describe('a working level must be a level the release actually publishes', () => {
-  it.each(['3', '4', '6', '10', '12'])(
-    'rejects the nominal-only grade %s as a working level',
+describe('a working level must be a grade curriculum is authored for', () => {
+  // Grade 6 is the canonical gap in the supported list; 1, 2 and 13 sit outside
+  // it entirely. See src/curriculum/grade-authority.
+  it.each(['1', '2', '6', '13'])(
+    'rejects grade %s, which has no authored curriculum, as a working level',
     (level) => {
       const candidate = stateWith(
         sixthGrader({ workingLevels: { mathematics: level } as Profile['workingLevels'] }),
@@ -115,7 +117,7 @@ describe('a working level must be a level the release actually publishes', () =>
     },
   )
 
-  it.each(['5', '7', '8'])('accepts the academy level %s', (level) => {
+  it.each(['3', '4', '5', '7', '8', '9', '10', '11', '12'])('accepts the academy level %s', (level) => {
     const candidate = stateWith(
       sixthGrader({ workingLevels: { mathematics: level } as Profile['workingLevels'] }),
     )

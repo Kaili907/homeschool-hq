@@ -17,7 +17,19 @@ const MODE_POLICY = Object.freeze({
   jarvis: { maxTokens: 400, temperature: 0.2 },
 })
 
-const GRADES = new Set(['3', '4', '6', '10', '12'])
+/**
+ * NOMINAL student grades accepted on a tutor request — the same vocabulary as
+ * `Grade` in src/types.ts, which is what the client actually sends
+ * (src/tutor/tutorApi.ts). This is deliberately NOT the curriculum-supported
+ * set from curriculum/grade-authority: the grade here only steers vocabulary in
+ * the system prompt, and a grade-6 girl (a real seeded profile, with no Academy
+ * curriculum authored for her) must still be able to use the tutor.
+ *
+ * Previously ['3','4','6','10','12'] — the seeded-profile list, which rejected
+ * grades 5/7/8 with a 400 even though those are exactly the grades the Academy
+ * serves today.
+ */
+const GRADES = new Set(['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'])
 const ASSESSMENT_STATUSES = new Set([
   'assigned',
   'assigned (not started)',

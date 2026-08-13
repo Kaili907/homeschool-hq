@@ -7,7 +7,9 @@ const GRADE_EMOJI: Record<Grade, string> = {
   '6': '🎨',
   '7': '🚀',
   '8': '🔬',
+  '9': '🧭',
   '10': '📘',
+  '11': '🧪',
   '12': '🎓',
 }
 
@@ -18,7 +20,9 @@ const GRADE_LABEL: Record<Grade, string> = {
   '6': '6th grade',
   '7': '7th grade',
   '8': '8th grade',
+  '9': '9th grade',
   '10': '10th grade',
+  '11': '11th grade',
   '12': '12th grade',
 }
 
