@@ -170,13 +170,42 @@
       "kind": "mastery-check",
       "title": "Mastery check",
       "directions": "Mastery check. Work without help, then stop and hand this section in.",
-      "items": []
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 2,
+          "prompt": "A protractor reads 98° for an angle. Classify the angle.",
+          "choices": [
+            "obtuse",
+            "acute",
+            "right",
+            "straight"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 2,
+          "prompt": "A protractor reads 128° for an angle. Classify the angle.",
+          "choices": [
+            "right",
+            "acute",
+            "straight",
+            "obtuse"
+          ]
+        }
+      ]
     }
   ],
   "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l03.key.json",
   "integrity": {
     "corpusVersion": "1.0.0",
-    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "itemSource": "g34-student-work-generators@curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34",
     "seed": "1.0.0|ma-g4-mathematics-u10-l03"
   }
 }

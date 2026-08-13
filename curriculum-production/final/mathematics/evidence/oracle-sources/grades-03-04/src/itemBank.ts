@@ -34,7 +34,7 @@ export interface UnitBank {
   grade: number
   unitNumber: number
   itemTypes: readonly string[]
-  generate(itemType: string, difficulty: MaterialDifficulty): BankItem
+  generate(itemType: string, difficulty: MaterialDifficulty, variant?: number): BankItem
 }
 
 export const bankKey = (grade: number, unitNumber: number): string => `${grade}:${unitNumber}`
@@ -52,4 +52,4 @@ export function unitBankFor(grade: number, unitNumber: number): UnitBank {
  * sibling pipeline, which splits canonical-vs-authored generators by grade).
  */
 export const itemSourceFor = (_grade: number): string =>
-  'g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34'
+  'g34-student-work-generators@curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34'

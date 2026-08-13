@@ -22,6 +22,18 @@ RESERVE = ROOT / "reserve"
 GRADES = (3, 4, 5, 7, 8, 9, 10, 11, 12)
 H3_SHA = "49b3c4b86cc7764627bd4cfbd752222849831abf"
 H3_TREE = "6f87e247ea0a798b7ac01c8ec64a86ba17284547"
+REPAIR_BASE = "c81ddb6e04bc1c3629212327d47817c1b5677477"
+CONTENT_REPAIR_LESSONS = {
+    "ma-g3-mathematics-u01-l01",
+    "ma-g3-mathematics-u09-l01",
+    "ma-g3-mathematics-u09-l02",
+    "ma-g3-mathematics-u10-l06",
+    "ma-g3-mathematics-u10-l07",
+    "ma-g3-mathematics-u10-l08",
+    "ma-g4-mathematics-u01-l01",
+    "ma-g4-mathematics-u10-l02",
+    "ma-g4-mathematics-u10-l03",
+}
 WITHDRAWN = {
     "ma-g8-mathematics-u10-l10",
     "ma-g8-mathematics-u10-l13",
@@ -158,6 +170,77 @@ check("student-package-and-scoring-authority", not link_errors, link_errors[:3] 
 check("no-answer-leakage", not leaks, leaks[:3] or "no graded learner item carries an answer-bearing field")
 check("answer-key-authority", not authority_errors, authority_errors[:3] or f"methods {dict(authority_methods)}")
 
+empty_mastery = []
+empty_practice = []
+for lesson_id, package in all_packages.items():
+    for section in package["sections"]:
+        if section["kind"] == "mastery-check" and not section["items"]:
+            empty_mastery.append(lesson_id)
+        if section["kind"] == "independent-practice" and not section["items"]:
+            empty_practice.append(lesson_id)
+check("no-empty-mastery-checks", not empty_mastery, empty_mastery[:3] or "0 empty mastery-check sections")
+check("no-empty-independent-practice", not empty_practice,
+      empty_practice[:3] or "0 empty independent-practice sections")
+
+diagnostic_errors = []
+diagnostic_detail = []
+for grade in (3, 4):
+    day_one = next(package for package in packages(grade).values() if package["lessonRef"]["courseDay"] == 1)
+    graded = [
+        item for section in day_one["sections"] for item in section["items"]
+        if item["kind"] != "worked-example"
+    ]
+    substantive = [
+        item for item in graded
+        if not item["standard"].startswith("MP.") and "strategy" not in item["itemType"]
+    ]
+    mastery = next((section for section in day_one["sections"] if section["kind"] == "mastery-check"), None)
+    if len(substantive) < 4:
+        diagnostic_errors.append(f"grade {grade}: only {len(substantive)} substantive graded items")
+    if mastery is None or len(mastery["items"]) != 2:
+        diagnostic_errors.append(f"grade {grade}: mastery diagnostic is not two items")
+    if mastery is None or "starting point, not a grade" not in mastery["directions"]:
+        diagnostic_errors.append(f"grade {grade}: low-stakes direction missing")
+    diagnostic_detail.append(f"G{grade} {len(substantive)} substantive + {len(graded) - len(substantive)} strategy")
+check("day-one-mathematical-diagnostic", not diagnostic_errors,
+      diagnostic_errors[:3] or "; ".join(diagnostic_detail))
+
+changed_paths = subprocess.run(
+    ["git", "-C", str(REPO), "diff", "--name-only", REPAIR_BASE, "--"],
+    text=True, capture_output=True, check=True,
+).stdout.splitlines()
+changed_active = {
+    Path(path).name.split(".package.json")[0].split(".key.json")[0]
+    for path in changed_paths
+    if path.startswith("curriculum-production/final/mathematics/active/")
+}
+scope_errors = []
+if changed_active != CONTENT_REPAIR_LESSONS:
+    scope_errors.append(f"active lesson diff {sorted(changed_active ^ CONTENT_REPAIR_LESSONS)}")
+if any("/grade-05/" in path or "/grade-07/" in path or "/grade-08/" in path
+       or "/grade-09/" in path or "/grade-10/" in path or "/grade-11/" in path
+       or "/grade-12/" in path for path in changed_paths):
+    scope_errors.append("a Grade 5-12 learner package or key changed")
+if any(path.startswith("curriculum-release-admitted/") for path in changed_paths):
+    scope_errors.append("global admitted release changed")
+check("content-repair-scope", not scope_errors,
+      scope_errors[:3] or "exactly 9 active G3/G4 lessons; G5-12 and admitted release unchanged")
+
+standard_errors = []
+for lesson_id in sorted(CONTENT_REPAIR_LESSONS):
+    grade = all_packages[lesson_id]["lessonRef"]["grade"]
+    relative = f"curriculum-production/final/mathematics/active/packages/grade-{grade:02d}/{lesson_id}.package.json"
+    baseline = subprocess.run(
+        ["git", "-C", str(REPO), "show", f"{REPAIR_BASE}:{relative}"],
+        text=True, capture_output=True, check=True,
+    )
+    before = set(json.loads(baseline.stdout)["standards"])
+    after_standards = set(all_packages[lesson_id]["standards"])
+    if not before <= after_standards:
+        standard_errors.append(f"{lesson_id}: lost {sorted(before - after_standards)}")
+check("all-grade-standards-preserved", not standard_errors,
+      standard_errors[:3] or "G3/G4 changed lessons lose no standards; G5-12 content unchanged")
+
 g8 = packages(8)
 official = (
     [f"8.NS.{n}" for n in range(1, 3)]
@@ -231,6 +314,12 @@ check("input-shas-exact", manifest["inputs"] == {
     "mac/g8-math-remediation-integration-r2": "6cde12f62d2ff432f45c5a6bb45f7d5a5f19b0de",
     "mac/curriculum-production-gate-h3": H3_SHA,
 }, "four pinned input tips")
+repair_evidence = load(ROOT / "evidence" / "content-repair-r2.json")
+check("content-repair-evidence", manifest.get("contentRepairR2", {}).get("affectedLessons") == 9
+      and set(repair_evidence["scope"]["affectedLessons"]) == CONTENT_REPAIR_LESSONS
+      and repair_evidence["sectionEvidence"]["emptyMasteryAfter"] == 0
+      and repair_evidence["sectionEvidence"]["emptyIndependentPracticeAfter"] == 0,
+      "9 affected lessons bound to zero-empty post-repair evidence")
 
 width = max(len(name) for name, _, _ in RESULTS)
 for name, ok, detail in RESULTS:

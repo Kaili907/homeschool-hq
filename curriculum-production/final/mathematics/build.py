@@ -196,6 +196,13 @@ def build() -> None:
             "reserveLessonIds": list(WITHDRAWN),
             "grade9RootBridge": "Grade 9 Unit 1",
         },
+        "contentRepairR2": {
+            "baseCommit": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+            "affectedLessons": 9,
+            "evidence": "evidence/content-repair-r2.json",
+            "emptyMasteryAfter": 0,
+            "emptyIndependentPracticeAfter": 0,
+        },
         "inputs": INPUTS,
         "inputTrees": INPUT_TREES,
         "gateH3": {
@@ -212,7 +219,7 @@ def build() -> None:
 
     checksum_lines = []
     for path in sorted(ROOT.rglob("*")):
-        if not path.is_file() or path.name == "SHA256SUMS.txt":
+        if not path.is_file() or path.name == "SHA256SUMS.txt" or "node_modules" in path.parts:
             continue
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
         checksum_lines.append(f"{digest}  {path.relative_to(ROOT).as_posix()}\n")

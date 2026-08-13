@@ -2,18 +2,18 @@
   "corpusVersion": "1.0.0",
   "subject": "mathematics",
   "generatedFrom": {
-    "lessonSource": "curriculum-production/student-work/mathematics-g34/data/source (vendored from mac/g34-math-r1 @ 64c1a5e80ea44c1da4d54a1a22c64b81be74d0ca)",
-    "itemGenerators": "curriculum-production/student-work/mathematics-g34/src/g34 (grades 3-4)"
+    "lessonSource": "curriculum-production/final/mathematics/active canonical lesson metadata with Content Repair R2 Day-1 diagnostic standards",
+    "itemGenerators": "curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34 (grades 3-4)"
   },
   "totals": {
     "lessons": 360,
-    "items": 3126,
-    "gradedItems": 2802,
+    "items": 3162,
+    "gradedItems": 2838,
     "workedExamples": 324,
-    "keyedAnswers": 2802
+    "keyedAnswers": 2838
   },
   "answerAuthority": {
-    "oracleRecomputed": 2802,
+    "oracleRecomputed": 2838,
     "generatorAuthority": 0
   },
   "byGrade": [
@@ -21,20 +21,20 @@
       "grade": 3,
       "courseId": "ma-g3-mathematics",
       "lessons": 180,
-      "items": 1555,
-      "gradedItems": 1392,
+      "items": 1583,
+      "gradedItems": 1420,
       "workedExamples": 163,
-      "keyedAnswers": 1392,
+      "keyedAnswers": 1420,
       "itemTypes": 46
     },
     {
       "grade": 4,
       "courseId": "ma-g4-mathematics",
       "lessons": 180,
-      "items": 1571,
-      "gradedItems": 1410,
+      "items": 1579,
+      "gradedItems": 1418,
       "workedExamples": 161,
-      "keyedAnswers": 1410,
+      "keyedAnswers": 1418,
       "itemTypes": 41
     }
   ],

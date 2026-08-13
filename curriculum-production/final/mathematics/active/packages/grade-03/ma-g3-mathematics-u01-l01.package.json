@@ -16,7 +16,9 @@
   },
   "standards": [
     "MP.1",
-    "MP.3"
+    "MP.3",
+    "3.NBT.1",
+    "3.NBT.2"
   ],
   "blueprint": {
     "phase": "Launch and diagnostic",
@@ -37,17 +39,17 @@
         {
           "ref": "ma-g3-mathematics-u01-l01#ex-01",
           "kind": "worked-example",
-          "itemType": "mathematical-habits-strategy-choice",
-          "standard": "MP.1",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
           "difficulty": 1,
-          "prompt": "You are not sure a word problem is asking you to add or subtract. What should you do first?",
+          "prompt": "Round 647 to the nearest 100.",
           "workedSolution": {
             "steps": [
-              "Reread the problem and picture what is happening.",
-              "Decide whether the total is growing or shrinking.",
-              "Only then choose the operation."
+              "The nearest multiples of 100 are 600 and 700.",
+              "647 is 47 away from 600 and 53 away from 700.",
+              "600 is nearer, so 647 rounds to 600."
             ],
-            "answer": "Reread the problem, picture the situation, and decide whether the amount is growing or shrinking."
+            "answer": "600"
           }
         }
       ]
@@ -61,29 +63,29 @@
         {
           "ref": "ma-g3-mathematics-u01-l01#ip-01",
           "kind": "multiple-choice",
-          "itemType": "mathematical-habits-strategy-choice",
-          "standard": "MP.1",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
           "difficulty": 1,
-          "prompt": "You solved a problem, but the answer seems much too large for the situation. What should you do?",
+          "prompt": "A school had 238 pencils. They received 240 more pencils. How many pencils are there now?",
           "choices": [
-            "Check the answer against the situation and rework any step that does not make sense.",
-            "Multiply every number in the problem together.",
-            "Guess an answer and move on to the next problem.",
-            "Skip the problem without trying it."
+            "488",
+            "-2",
+            "478",
+            "468"
           ]
         },
         {
           "ref": "ma-g3-mathematics-u01-l01#ip-02",
           "kind": "multiple-choice",
-          "itemType": "mathematical-habits-strategy-choice",
-          "standard": "MP.1",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
           "difficulty": 1,
-          "prompt": "A problem has more numbers in it than you need. What should you do before solving?",
+          "prompt": "A farm had 225 apples. 42 apples were given away. How many apples are left?",
           "choices": [
-            "Guess an answer and move on to the next problem.",
-            "Skip the problem without trying it.",
-            "Multiply every number in the problem together.",
-            "Decide which numbers the question actually needs before setting up the work."
+            "283",
+            "267",
+            "193",
+            "183"
           ]
         },
         {
@@ -99,6 +101,20 @@
             "Guess an answer and move on to the next problem.",
             "Skip the problem without trying it."
           ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "round-to-nearest-ten-or-hundred",
+          "standard": "3.NBT.1",
+          "difficulty": 3,
+          "prompt": "Round 132 to the nearest 100.",
+          "choices": [
+            "101",
+            "200",
+            "132",
+            "100"
+          ]
         }
       ]
     },
@@ -107,13 +123,42 @@
       "kind": "mastery-check",
       "title": "Mastery check",
       "directions": "Show what you can do so far. This sets the starting point, not a grade.",
-      "items": []
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 1,
+          "prompt": "A toy store had 95 stickers. They received 208 more stickers. How many stickers are there now?",
+          "choices": [
+            "293",
+            "313",
+            "303",
+            "-113"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A farm had 511 apples. 29 apples were given away. How many apples are left?",
+          "choices": [
+            "582",
+            "540",
+            "492",
+            "482"
+          ]
+        }
+      ]
     }
   ],
   "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l01.key.json",
   "integrity": {
     "corpusVersion": "1.0.0",
-    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "itemSource": "g34-student-work-generators@curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34",
     "seed": "1.0.0|ma-g3-mathematics-u01-l01"
   }
 }

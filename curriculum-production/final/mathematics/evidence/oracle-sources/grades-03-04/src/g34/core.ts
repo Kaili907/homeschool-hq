@@ -1,4 +1,4 @@
-import { pick, ri, shuffle } from '../../../../../src/genUtils.ts'
+import { pick, ri, shuffle } from '../random.ts'
 import type { BankItem, UnitBank } from '../itemBank.ts'
 import type { CommonError, MaterialDifficulty } from '../types.ts'
 
@@ -39,7 +39,7 @@ export interface G34ItemSpec<P = Record<string, unknown>> {
   itemType: string
   standard: string
   lessonFocus: string
-  build: (difficulty: MaterialDifficulty) => G34BuildResult<P>
+  build: (difficulty: MaterialDifficulty, variant?: number) => G34BuildResult<P>
   /** Independent recomputation from parameters. Must not call build(). */
   oracle: (parameters: P) => string
   referenceExample: { prompt: string; steps: readonly string[]; answer: string }
@@ -168,10 +168,10 @@ export function makeG34UnitBank(
     grade,
     unitNumber,
     itemTypes: specs.map((spec) => spec.itemType),
-    generate(itemType: string, difficulty: MaterialDifficulty): BankItem {
+    generate(itemType: string, difficulty: MaterialDifficulty, variant = 0): BankItem {
       const spec = byType.get(itemType)
       if (!spec) throw new Error(`Unknown grade ${grade} unit ${unitNumber} item type ${itemType}`)
-      const built = spec.build(difficulty)
+      const built = spec.build(difficulty, variant)
       const verified = spec.oracle(built.parameters)
       if (verified !== built.answer) {
         throw new Error(
@@ -203,7 +203,7 @@ export function makeG34UnitBank(
         commonErrors: built.commonErrors,
         verification: {
           method: 'recomputed',
-          oracle: `curriculum-production/student-work/mathematics-g34/src/g34/grade${grade}Unit${unitNumber}.ts#${spec.itemType}.oracle`,
+          oracle: `curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34/grade${grade}Unit${unitNumber}.ts#${spec.itemType}.oracle`,
         },
       }
     },

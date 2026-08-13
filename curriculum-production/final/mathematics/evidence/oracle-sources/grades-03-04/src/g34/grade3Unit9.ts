@@ -22,15 +22,30 @@ const AREA_CONCEPT_STATEMENTS = [
 ] as const
 
 export const GRADE3_UNIT9 = makeG34UnitBank(3, 9, [
-  spec<{ correctIndex: number }>({
+  spec<{ correctIndex: number; promptVariant?: number }>({
     itemType: 'recognize-area-attribute',
     standard: '3.MD.5',
     lessonFocus: 'recognizing area as an attribute of plane figures and understanding area measurement as covering with unit squares',
-    build: () => {
+    build: (_difficulty, variant = 0) => {
       const correctIndex = AREA_CONCEPT_STATEMENTS.findIndex((s) => s.correct)
+      const prompts = [
+        'Which statement correctly describes the area of a shape?',
+        'A student is explaining what area measures. Which statement is correct?',
+        'Which statement could be used to define area in square units?',
+        'Which statement explains why unit squares are used to measure area?',
+        'You cover a flat figure with same-size squares. Which statement describes what you are measuring?',
+        'Which statement correctly distinguishes area from perimeter?',
+        'A rectangle is tiled with no gaps or overlaps. Which statement tells what the tile count measures?',
+        'Which statement describes the inside surface of a plane figure rather than its boundary?',
+        'Which statement would correctly label a measurement written in square centimeters?',
+        'A learner shades the entire inside of a shape. Which statement names the attribute being shown?',
+        'Which statement correctly connects covering a figure and counting unit squares?',
+        'Which statement about measuring the flat space inside a figure is true?',
+      ]
+      const promptVariant = Math.min(variant, prompts.length - 1)
       return {
-        prompt: 'Which statement correctly describes the area of a shape?',
-        parameters: { correctIndex },
+        prompt: prompts[promptVariant],
+        parameters: { correctIndex, ...(promptVariant === 0 ? {} : { promptVariant }) },
         answer: AREA_CONCEPT_STATEMENTS[correctIndex].statement,
         distractors: AREA_CONCEPT_STATEMENTS.filter((s) => !s.correct).map((s) => s.statement),
         solutionSteps: [

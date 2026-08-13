@@ -1,4 +1,4 @@
-import { setRng } from '../../../../src/genUtils.ts'
+import { setRng } from './random.ts'
 import { blueprintFor } from './blueprint.ts'
 import { commonErrorsFor, remediationGuidanceFor } from './commonErrors.ts'
 import { itemSourceFor, unitBankFor, type BankItem } from './itemBank.ts'
@@ -16,6 +16,18 @@ import type {
 } from './types.ts'
 
 export const CORPUS_VERSION = '1.0.0'
+
+export const CONTENT_REPAIR_LESSON_IDS = new Set([
+  'ma-g3-mathematics-u01-l01',
+  'ma-g3-mathematics-u09-l01',
+  'ma-g3-mathematics-u09-l02',
+  'ma-g3-mathematics-u10-l06',
+  'ma-g3-mathematics-u10-l07',
+  'ma-g3-mathematics-u10-l08',
+  'ma-g4-mathematics-u01-l01',
+  'ma-g4-mathematics-u10-l02',
+  'ma-g4-mathematics-u10-l03',
+])
 
 const SECTION_SLUG: Record<string, string> = {
   'instructional-example': 'ex',
@@ -36,7 +48,7 @@ const SECTION_SLUG: Record<string, string> = {
 const oracleMethodFor = (_grade: number): 'recomputed' | 'generator-authority' => 'recomputed'
 
 const oracleFor = (grade: number, unit: number, itemType: string): string =>
-  `curriculum-production/student-work/mathematics-g34/src/g34/grade${grade}Unit${unit}.ts#${itemType}.oracle`
+  `curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34/grade${grade}Unit${unit}.ts#${itemType}.oracle`
 
 export const gradeFolder = (grade: number): string => `grade-${String(grade).padStart(2, '0')}`
 
@@ -128,9 +140,54 @@ export function emitLesson(lesson: SourceLesson): EmittedLesson {
           }
         }
       }
+      // Some conceptual generators intentionally have a small base prompt
+      // pool. Preserve their original deterministic draws, then ask the bank
+      // for explicitly authored expansions only when all base draws collide.
+      expansion: if (!foundDistinct && CONTENT_REPAIR_LESSON_IDS.has(lesson.ref.lessonId)) {
+        for (const candidateType of candidateTypes) {
+          for (let variant = 1; variant <= 16; variant += 1) {
+            for (let salt = 0; salt < 48; salt += 1) {
+              setRng(
+                createRng(
+                  itemSeed(
+                    lesson.ref.lessonId,
+                    sectionId,
+                    index,
+                    candidateType,
+                    difficulty,
+                    48 + variant * 48 + salt,
+                  ),
+                ),
+              )
+              let candidate: BankItem
+              try {
+                candidate = bank.generate(candidateType, difficulty, variant)
+              } catch {
+                continue
+              }
+              if (hasEquivalentDistractor(candidate.choices, candidate.choices[candidate.answerIndex])) {
+                continue
+              }
+              item = candidate
+              if (!usedPrompts.has(renderedPrompt(candidate))) {
+                foundDistinct = true
+                break expansion
+              }
+            }
+          }
+        }
+      }
       if (!item) throw new Error(`Failed to generate ${itemType} for ${ref}`)
       if (!foundDistinct) {
-        return
+        // A bank carries one authored reference example per item type. A phase
+        // may request a second example, but repeating the same worked solution
+        // adds no evidence and the established corpus intentionally keeps one.
+        if (plan.kind === 'instructional-example') return
+        // Content Repair R2 is deliberately limited to the nine lessons whose
+        // practice/mastery sections were independently audited as blocked.
+        // Preserve every other active package byte-for-byte for convergence.
+        if (!CONTENT_REPAIR_LESSON_IDS.has(lesson.ref.lessonId)) return
+        throw new Error(`Failed to generate a distinct ${itemType} prompt for ${ref}`)
       }
       usedPrompts.add(renderedPrompt(item))
       generated.push(item)

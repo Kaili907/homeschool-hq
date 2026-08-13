@@ -98,8 +98,14 @@ export const GRADE4_UNIT10 = makeG34UnitBank(4, 10, [
     itemType: 'angle-as-fraction-of-circle',
     standard: '4.MD.5',
     lessonFocus: 'understanding an angle measure as a fraction of a full circular turn',
-    build: (difficulty) => {
-      const degrees = difficulty === 1 ? choose([90, 180]) : difficulty === 2 ? choose([45, 60, 120]) : choose([30, 40, 100, 200])
+    build: (difficulty, variant = 0) => {
+      const basePools = difficulty === 1 ? [90, 180] : difficulty === 2 ? [45, 60, 120] : [30, 40, 100, 200]
+      const expandedPools = difficulty === 1
+        ? [30, 45, 60, 72, 120, 135, 180, 270]
+        : difficulty === 2
+          ? [20, 30, 40, 45, 60, 72, 90, 120, 135, 144, 180, 240]
+          : [10, 20, 24, 30, 36, 40, 45, 60, 72, 90, 100, 120, 135, 144, 180, 200, 240, 270]
+      const degrees = choose(variant === 0 ? basePools : expandedPools)
       return {
         prompt: `An angle turns through ${degrees}° of a full circle. What fraction of a full turn (360°) is this, in lowest terms?`,
         parameters: { degrees },
@@ -120,8 +126,14 @@ export const GRADE4_UNIT10 = makeG34UnitBank(4, 10, [
     itemType: 'classify-angle-by-measure',
     standard: '4.MD.6',
     lessonFocus: 'measuring angles with a protractor and classifying them by measure',
-    build: (difficulty) => {
-      const degrees = difficulty === 1 ? choose([30, 45, 90, 150]) : difficulty === 2 ? choose([20, 75, 110, 170]) : choose([10, 89, 91, 179])
+    build: (difficulty, variant = 0) => {
+      const basePools = difficulty === 1 ? [30, 45, 90, 150] : difficulty === 2 ? [20, 75, 110, 170] : [10, 89, 91, 179]
+      const expandedPools = difficulty === 1
+        ? [15, 25, 35, 50, 65, 80, 90, 105, 125, 145, 160, 175]
+        : difficulty === 2
+          ? [12, 28, 42, 58, 73, 87, 90, 98, 112, 128, 143, 158, 172]
+          : [5, 17, 33, 49, 67, 83, 89, 90, 91, 107, 123, 139, 157, 173, 179]
+      const degrees = choose(variant === 0 ? basePools : expandedPools)
       const classification = degrees === 90 ? 'right' : degrees === 180 ? 'straight' : degrees < 90 ? 'acute' : 'obtuse'
       return {
         prompt: `A protractor reads ${degrees}° for an angle. Classify the angle.`,

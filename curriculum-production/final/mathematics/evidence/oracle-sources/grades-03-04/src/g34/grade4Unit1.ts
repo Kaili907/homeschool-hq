@@ -106,21 +106,33 @@ export const GRADE4_UNIT1 = makeG34UnitBank(4, 1, [
     },
   }),
 
-  spec<{ kind: number }>({
+  spec<{ kind: number; variant?: number }>({
     itemType: 'mathematical-habits-strategy-choice',
     standard: 'MP.1',
     lessonFocus: 'making sense of an unfamiliar problem before solving it',
-    build: () => {
+    build: (_difficulty, variant = 0) => {
       const kind = rand(0, 2)
       const prompts = [
         'You read a word problem with several numbers in it and are not sure where to start. What should you do first?',
         'You solved a multi-digit problem, but the answer has way more digits than makes sense. What should you do?',
         'A problem could be solved more than one way. What should you do before picking a method?',
+        'You need to compare 408,215 and 408,125. What should you examine first?',
+        'You are rounding 583,204 to the nearest 10,000. What should you identify before choosing the rounded number?',
+        'A learner says the 7 in 70,000 has the same value as the 7 in 7,000. What should you compare?',
+        'Two methods give different sums for 38,475 + 16,928. What is the best first check?',
+        'A six-digit answer to a subtraction problem is larger than the starting number. What should you do?',
+        'A multi-step story includes a table and a paragraph. What should you decide before computing?',
       ]
       const answers = [
         'Restate the problem in your own words and identify exactly what question is being asked.',
         'Estimate the answer first, then compare your exact answer to the estimate to check for a place-value mistake.',
         'Think about which method fits the numbers best, then explain why you chose it.',
+        'Compare from the greatest place value and continue only until the first digits differ.',
+        'Identify the neighboring multiples 580,000 and 590,000 and compare distances.',
+        'Write each digit’s full value and compare 70,000 with 7,000.',
+        'Estimate 38,000 + 17,000, then compare both exact sums with the estimate.',
+        'Estimate first, then recheck the operation and every regrouping step.',
+        'Restate the question and label which information is needed for each step.',
       ]
       const distractorPool = [
         'Guess an answer and move on to the next problem.',
@@ -128,20 +140,27 @@ export const GRADE4_UNIT1 = makeG34UnitBank(4, 1, [
         'Skip the problem without trying it.',
         'Copy the answer from a different problem that looks similar.',
       ]
+      const promptIndex = kind + Math.min(variant, 2) * 3
       return {
-        prompt: prompts[kind],
-        parameters: { kind },
-        answer: answers[kind],
+        prompt: prompts[promptIndex],
+        parameters: { kind, ...(variant === 0 ? {} : { variant: Math.min(variant, 2) }) },
+        answer: answers[promptIndex],
         distractors: distractorPool,
-        solutionSteps: [`The goal is to make sense of the problem before or while computing.`, `${answers[kind]}`],
+        solutionSteps: [`The goal is to make sense of the problem before or while computing.`, `${answers[promptIndex]}`],
       }
     },
-    oracle: ({ kind }) =>
+    oracle: ({ kind, variant = 0 }) =>
       [
         'Restate the problem in your own words and identify exactly what question is being asked.',
         'Estimate the answer first, then compare your exact answer to the estimate to check for a place-value mistake.',
         'Think about which method fits the numbers best, then explain why you chose it.',
-      ][kind],
+        'Compare from the greatest place value and continue only until the first digits differ.',
+        'Identify the neighboring multiples 580,000 and 590,000 and compare distances.',
+        'Write each digit’s full value and compare 70,000 with 7,000.',
+        'Estimate 38,000 + 17,000, then compare both exact sums with the estimate.',
+        'Estimate first, then recheck the operation and every regrouping step.',
+        'Restate the question and label which information is needed for each step.',
+      ][kind + Math.min(variant, 2) * 3],
     referenceExample: {
       prompt: 'You are not sure whether a word problem wants you to add or multiply. What should you do first?',
       steps: ['Reread the problem and picture the situation.', 'Decide whether equal groups or a running total is being described.'],

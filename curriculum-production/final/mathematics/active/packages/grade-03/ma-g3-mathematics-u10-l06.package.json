@@ -119,6 +119,48 @@
             "square",
             "rectangle"
           ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 3,
+          "prompt": "A shape has four right angles, with opposite sides equal. Which quadrilateral name must apply?",
+          "choices": [
+            "trapezoid",
+            "square",
+            "rectangle",
+            "rhombus"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 3,
+          "prompt": "A shape has four equal sides, but not necessarily right angles. Which quadrilateral name must apply?",
+          "choices": [
+            "trapezoid",
+            "rhombus",
+            "rectangle",
+            "square"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 3,
+          "prompt": "A shape has four equal sides and four right angles. Which quadrilateral name must apply?",
+          "choices": [
+            "rhombus",
+            "trapezoid",
+            "rectangle",
+            "square"
+          ]
         }
       ]
     },
@@ -127,13 +169,42 @@
       "kind": "mastery-check",
       "title": "Mastery check",
       "directions": "Mastery check. Work without help, then stop and hand this section in.",
-      "items": []
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "A shape has exactly one pair of parallel sides. Which quadrilateral name must apply?",
+          "choices": [
+            "rectangle",
+            "square",
+            "rhombus",
+            "trapezoid"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 3,
+          "prompt": "Which name belongs to a four-sided figure with four equal sides, but not necessarily right angles?",
+          "choices": [
+            "trapezoid",
+            "square",
+            "rhombus",
+            "rectangle"
+          ]
+        }
+      ]
     }
   ],
   "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l06.key.json",
   "integrity": {
     "corpusVersion": "1.0.0",
-    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "itemSource": "g34-student-work-generators@curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34",
     "seed": "1.0.0|ma-g3-mathematics-u10-l06"
   }
 }

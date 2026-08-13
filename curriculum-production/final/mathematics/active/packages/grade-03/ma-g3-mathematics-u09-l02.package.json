@@ -69,6 +69,34 @@
             "Area is the distance around the outside edge of a shape, measured in linear units.",
             "Area is the amount of flat space a shape covers, measured in square units."
           ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 1,
+          "prompt": "A student is explaining what area measures. Which statement is correct?",
+          "choices": [
+            "Area is the amount of flat space a shape covers, measured in square units.",
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is always the same number as the perimeter for any rectangle.",
+            "Area is the distance around the outside edge of a shape, measured in linear units."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 2,
+          "prompt": "Which statement could be used to define area in square units?",
+          "choices": [
+            "Area is always the same number as the perimeter for any rectangle.",
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is the amount of flat space a shape covers, measured in square units."
+          ]
         }
       ]
     },
@@ -77,20 +105,92 @@
       "kind": "independent-practice",
       "title": "Independent practice",
       "directions": "Work on your own. Show the steps that produced each answer.",
-      "items": []
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 1,
+          "prompt": "Which statement explains why unit squares are used to measure area?",
+          "choices": [
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is always the same number as the perimeter for any rectangle.",
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area is the amount of flat space a shape covers, measured in square units."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 2,
+          "prompt": "You cover a flat figure with same-size squares. Which statement describes what you are measuring?",
+          "choices": [
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area is the amount of flat space a shape covers, measured in square units.",
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is always the same number as the perimeter for any rectangle."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 2,
+          "prompt": "Which statement correctly distinguishes area from perimeter?",
+          "choices": [
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is the amount of flat space a shape covers, measured in square units.",
+            "Area is always the same number as the perimeter for any rectangle."
+          ]
+        }
+      ]
     },
     {
       "sectionId": "mc",
       "kind": "mastery-check",
       "title": "Mastery check",
       "directions": "Mastery check. Work without help, then stop and hand this section in.",
-      "items": []
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 1,
+          "prompt": "A rectangle is tiled with no gaps or overlaps. Which statement tells what the tile count measures?",
+          "choices": [
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area is always the same number as the perimeter for any rectangle.",
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is the amount of flat space a shape covers, measured in square units."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 2,
+          "prompt": "Which statement describes the inside surface of a plane figure rather than its boundary?",
+          "choices": [
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area is always the same number as the perimeter for any rectangle.",
+            "Area is the amount of flat space a shape covers, measured in square units.",
+            "Area can be found by counting only the unit squares along one edge of a shape."
+          ]
+        }
+      ]
     }
   ],
   "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u09-l02.key.json",
   "integrity": {
     "corpusVersion": "1.0.0",
-    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "itemSource": "g34-student-work-generators@curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34",
     "seed": "1.0.0|ma-g3-mathematics-u09-l02"
   }
 }
