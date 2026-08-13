@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l01",
+  "lessonId": "ma-g11-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Opening-line completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Opening line is vague, missing what is needed or roughly when (e.g., 'I need an appointment')." },
+          { "label": "Proficient", "descriptor": "Opening line states what is needed and roughly when in one clear sentence." },
+          { "label": "Advanced", "descriptor": "Opening line also anticipates a likely follow-up question a scheduler would ask." }
+        ]
+      },
+      {
+        "dimension": "Question specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Questions are generic and would apply to any appointment of any kind." },
+          { "label": "Proficient", "descriptor": "At least two of three questions are specific to preparing for this particular appointment." },
+          { "label": "Advanced", "descriptor": "All three questions are specific and would change how the learner prepares." }
+        ]
+      },
+      {
+        "dimension": "Self-assessment honesty",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection is generic ('I feel ready now') with no specific part named." },
+          { "label": "Proficient", "descriptor": "Names one specific part they feel ready for and one they'd still want help with." },
+          { "label": "Advanced", "descriptor": "Explains specifically why that one part is still hard, not just that it is." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real health condition, provider name, or personal medical detail appears anywhere in the response.",
+      "The opening line names what is needed and a rough timeframe, not just an intent to schedule.",
+      "The reflection is specific and honest rather than a blanket statement of confidence."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

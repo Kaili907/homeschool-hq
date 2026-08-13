@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u05-l03",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Problem Solving Under Constraint",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: weighing tradeoffs explicitly"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners work through a fictional decision scenario with two viable options, list the tradeoffs of each on the same set of criteria, and make and justify a choice, so they practice deciding by explicit comparison instead of gut feeling alone.",
+  "scenario": "The learner reads a provided fictional scenario (a teen choosing between two realistic part-time commitments that conflict, such as a weekend job offer versus a sports commitment already made) and works through it using a tradeoff table.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The scenario is fictional and does not require the learner to disclose or decide about any real personal commitment of their own."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional scenario", "paper or notes app for the tradeoff table"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before comparing options, write down your first instinct for what the character should choose.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What is your gut-instinct answer for what the character should do, before working through the tradeoffs?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build a tradeoff table comparing both options on the same three criteria: money/commitment, time, and what is given up.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I filled in both options for the money/commitment criterion." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I filled in both options for the time criterion." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I filled in both options for the 'what is given up' criterion." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Using the completed table, decide and justify a choice for the character.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "State which option you recommend and justify it using at least two specific rows from your tradeoff table, not just a general impression." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your final recommendation to your warm-up instinct.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Did the tradeoff table change your answer from your warm-up instinct? If it stayed the same, what changed about how confident you are and why?" }
+      ]
+    }
+  ],
+  "remediation": "If the tradeoff table rows are one-sided (only listing reasons for the option the learner already favors), reteach by requiring the learner to fill in the strongest honest case for the option they did NOT pick before finalizing their recommendation, modeling with one example row done together first.",
+  "extension": "Have the learner rewrite the scenario with a third option added (a compromise or a delayed decision) and redo the tradeoff table with all three options.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}

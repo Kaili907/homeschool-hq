@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u02-l01",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Independent Living Simulation",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: operating a household across a full month"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners set up a fictional one-person household simulation (a made-up income, made-up recurring bills, and a made-up starting balance) that they will operate on paper across the unit, so later lessons in this simulation have a consistent, learner-owned baseline to build on.",
+  "scenario": "Working entirely on paper or in a notes document with invented numbers (never real account information), the learner creates a fictional monthly budget for a fictional first apartment: a made-up take-home pay figure, a list of recurring bills with made-up amounts, and a starting balance, all clearly labeled as fictional.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every number in this simulation is invented by the learner for practice; no real account numbers, real balances, or real household finances are entered anywhere.",
+    "If the learner is tempted to use real family financial details to make it 'realistic,' redirect to inventing plausible round numbers instead."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or a notes/spreadsheet document", "the provided list of common recurring bill categories to choose from"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before inventing numbers, list the bill categories you think a person living alone would have every month.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "extended-response", "text": "List at least six recurring bill categories you expect a person living independently to have (for example, rent, a utility, food)." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Invent a fictional monthly take-home pay figure and a starting balance, and assign a made-up amount to each bill category from your warm-up list.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I invented a plausible fictional monthly take-home pay figure, clearly labeled as fictional." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I assigned a fictional dollar amount to at least six recurring bill categories." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I invented a fictional starting balance." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Total your fictional bills and compare them to your fictional income.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Show your total fictional monthly bills, your fictional income, and what is left over (or short) after bills. This math will be checked for internal consistency, not for matching any real prices." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on setting this up.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which bill category did you most underestimate or forget at first, and how did you find out it belonged on the list?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's bill list is missing entire categories of expense (for example, no utilities separate from rent, or no food budget at all), reteach by providing a checklist of eight common categories and having the learner sort their own list against it, adding any missing ones before finalizing amounts.",
+  "extension": "Have the learner add one unexpected fictional expense (a repair, a fee, a fine) partway through the month and revise their running total to show how it was absorbed or what had to be cut.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u05-l02",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Planning, Belongings, and Communication",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: preparing the night before"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 13–15"
+  ],
+  "objective": "Learners build a short night-before checklist for one real morning responsibility, listing the specific items and decisions that would otherwise slow them down in the morning, then set out or decide each one the evening before to test whether the checklist actually saves time.",
+  "scenario": "The learner picks one real thing that happens most mornings, such as getting to a lesson, an activity, or a shared family errand on time, and writes a short list of everything they would otherwise have to find, decide, or do in the morning. The night before, they act on that list.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app",
+    "the specific items the learner needs for their chosen morning responsibility"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pick one real morning responsibility that happens at least twice a week.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the responsibility and one time in the last week it was rushed or almost late."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "List every item, decision, or step you normally handle in the morning for this responsibility.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed at least three specific items or decisions, not a vague single line like 'get ready.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I marked which of those items could realistically be set out or decided the night before."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The night before, work through your checklist and set out or decide each item you marked.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which items did you actually set out or decide the night before, and which one was hardest to get ready ahead of time?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare the next morning to a typical morning.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe what was different about the next morning because of your night-before checklist, and say whether you will keep using it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's list stays vague ('get ready,' 'find my stuff'), reteach by walking through yesterday morning minute by minute together and naming each specific item touched or decision made, then turn that walkthrough directly into checklist lines.",
+  "extension": "Have the learner build a second night-before checklist for a different weekly responsibility and compare which of the two responsibilities benefited more from advance preparation, and why.",
+  "scoringRef": "scoring/ready-for-life/grade-04/swk-rfl-g4-u05-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

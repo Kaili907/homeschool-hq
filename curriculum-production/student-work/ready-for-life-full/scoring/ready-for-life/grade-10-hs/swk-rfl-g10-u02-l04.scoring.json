@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l04",
+  "lessonId": "ma-g10-ready-for-life-u02-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Answer substance",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Answers are a few words or a single vague sentence with no example." },
+          { "label": "Proficient", "descriptor": "Most answers state a point and back it with one concrete example." },
+          { "label": "Advanced", "descriptor": "All five answers state a point, back it with an example, and connect it to the job." }
+        ]
+      },
+      {
+        "dimension": "Delivery without a script",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Learner read answers directly from written notes." },
+          { "label": "Proficient", "descriptor": "Learner answered out loud in their own words, referring to notes only occasionally." },
+          { "label": "Advanced", "descriptor": "Learner answered fluently without referring to notes and adjusted naturally to follow-up." }
+        ]
+      },
+      {
+        "dimension": "Revision from feedback",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Revised answer is nearly identical to the original despite feedback." },
+          { "label": "Proficient", "descriptor": "Revised answer clearly incorporates the specific feedback given." },
+          { "label": "Advanced", "descriptor": "Revised answer incorporates the feedback and the learner explains why the change makes the answer stronger." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The one-sentence warm-up notes show the learner had a starting point for every question before practicing.",
+      "The revised answer is visibly different from what the warm-up note suggested, not a copy of it.",
+      "The reflection names a specific question, not 'they were all hard.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

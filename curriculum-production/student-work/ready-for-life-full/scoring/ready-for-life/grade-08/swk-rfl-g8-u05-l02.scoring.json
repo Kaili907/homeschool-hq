@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l02",
+  "lessonId": "ma-g8-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Coverage and authenticity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than two real items under one or more headings, or items appear invented rather than genuine."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least two genuine items under each of the four headings."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and items span a genuinely varied range of the learner's actual life rather than repeating one activity across headings."
+          }
+        ]
+      },
+      {
+        "dimension": "Specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The strongest-item sentence stays vague, with no concrete detail or result."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The strongest-item sentence names a specific action and a specific detail or result."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the sentence would be understandable to a stranger with no other context."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No last name, address, or phone number appears anywhere on the document.",
+      "The reflection names one genuinely forgotten item, not a restatement of an item already listed."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

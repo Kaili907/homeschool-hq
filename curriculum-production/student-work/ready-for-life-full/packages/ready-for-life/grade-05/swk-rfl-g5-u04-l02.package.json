@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u04-l02",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Building a Fueling Meal",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: nonjudgmental noticing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 10–12"
+  ],
+  "objective": "Learners practice noticing and naming five body signals (hunger, thirst, tiredness, boredom, and stress) using plain, non-judgmental language, without any reference to weight, size, or calories, so they can recognize what their body is telling them before deciding how to respond.",
+  "scenario": "Across one ordinary day, the learner pauses four separate times to notice what their body is signaling right then, names the signal in a private notebook using neutral words, and picks one helpful response to try for that signal without rating themselves as good or bad for having it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Notebook entries are private; a guardian may see the completion status but not the raw entries themselves.",
+    "No weight, size, calorie, or body-shape language is used anywhere in this task, by the learner or in feedback."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "a private notebook, index cards, or a digital note only the learner and a trusted adult can see",
+    "a pencil or typing device"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the day starts, review the five signal words with your adult: hunger, thirst, tiredness, boredom, stress.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "For each of the five signal words, write one plain-language clue your own body gives you when that signal shows up (for example, a clue for tiredness, not a definition of the word)."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, practice one full round: notice a signal right now, name it using a neutral word, and say one response you could try.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named the signal using one of the five neutral words, not a judgment word."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I named the clue in my body that told me the signal was there."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I named one response I could try, without deciding whether the signal itself was good or bad."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "On your own across the rest of the day, notice and record three more separate signal moments in your private notebook.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "For each of the three moments, record only: the signal word, the clue, and the response you tried. No score or rating."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look back over your four entries for the day.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which signal was hardest to notice or name today, and what made noticing it harder than the others?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner keeps reaching for a judgment word instead of a neutral signal word, reteach with a matching activity: give five neutral signal words and five example body clues on separate cards and have the learner pair them before returning to live noticing.",
+  "extension": "Have the learner notice the same signal at two different times of day and compare, in writing, whether the clue or the helpful response changed between the two moments.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  }
+}

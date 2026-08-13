@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l02",
+  "lessonId": "ma-g9-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Structural completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the four parts (subject, greeting, single clear request, closing) is missing or unclear."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four parts are present and each clearly serves its function."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All four parts are present, and the subject line alone would let the recipient understand the topic before opening the email."
+          }
+        ]
+      },
+      {
+        "dimension": "Clarity and tone",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The request is buried in extra context, or the tone reads as overly casual for an adult outside the family."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The single request is stated plainly, and the tone is appropriately professional."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names a specific, correct tone choice made because of the audience."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Exactly one request appears in the body, not several bundled together.",
+      "The revision response names a real sentence that was changed, not a generic 'I fixed some wording.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}
