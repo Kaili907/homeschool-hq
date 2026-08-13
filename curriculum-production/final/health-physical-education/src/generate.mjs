@@ -21,6 +21,7 @@ import { resolve, dirname, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { SUPPORTED_GRADES, courseDir, sourceBranchLabel } from './lib/sourcePaths.mjs'
+import { healthContentRepair } from './lib/healthContent.mjs'
 import {
   buildSafeAlternativeText,
   pickAdaptedAlternativeText,
@@ -88,7 +89,10 @@ function writeJson(path, data) {
 function buildLessonArtifacts(lesson, unit, subject, grade) {
   const isHealth = subject === 'health'
   const scenario = pickScenarioText(lesson, unit)
-  const keyPoints = pickKeyPointsText(lesson, unit)
+  const repairedContent = healthContentRepair(lesson, unit, subject, grade)
+  const sourceKeyPoints = pickKeyPointsText(lesson, unit)
+  const keyPoints = repairedContent?.keyPoints
+    ?? (sourceKeyPoints ? sourceKeyPoints.split(/(?<=[.!?])\s+/).filter(Boolean) : [])
   const adaptedAlternative = pickAdaptedAlternativeText(lesson, unit)
   const safeAlternativeText = buildSafeAlternativeText(lesson, unit)
   const guardianSafety = pickGuardianSafety(lesson, unit)
@@ -109,11 +113,11 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     estimatedMinutes: lesson.estimated_minutes,
     materials: lesson.materials ?? [],
     ...(isHealth ? {} : { movementCues: lesson.cues ?? null, commonErrorToWatchFor: lesson.common_error ?? null }),
-    keyPoints: keyPoints ? keyPoints.split(/(?<=[.!?])\s+/).filter(Boolean) : [],
+    keyPoints,
     privacySafeScenario: scenario,
-    studentTask: lesson.student_activity,
-    knowledgeCheck: lesson.formative_check,
-    completionCriteria: lesson.success_criteria ?? [],
+    studentTask: repairedContent?.studentTask ?? lesson.student_activity,
+    knowledgeCheck: repairedContent?.knowledgeCheck ?? lesson.formative_check,
+    completionCriteria: repairedContent?.completionCriteria ?? lesson.success_criteria ?? [],
     adaptationChoices: adaptedAlternative,
     extensionChallenge: lesson.extension ?? null,
     accessibilitySupports: lesson.accessibility_and_accommodations ?? [],
@@ -123,6 +127,12 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
       : null,
     neverRequires: NEVER_REQUIRES,
     sourceProvenance: { sourceBranch: sourceBranchLabel(grade, subject), sourceLessonId: lesson.lesson_id },
+    ...(repairedContent ? {
+      contentProvenance: {
+        repairLane: 'mac/health-content-repair-r1',
+        objective: lesson.learning_objectives?.[0] ?? lesson.focus,
+      },
+    } : {}),
   }
 
   const scoringGuide = {
@@ -150,10 +160,10 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     courseId: lesson.course_id,
     unitId: unit?.unit_id ?? `${lesson.course_id}-u${String(lesson.unit_number).padStart(2, '0')}`,
     subjectFamily: 'ARTS_RFL_PE_PROJECT',
-    instruction: keyPoints ? { present: true, text: keyPoints } : { present: false },
+    instruction: keyPoints.length ? { present: true, text: keyPoints.join(' ') } : { present: false },
     independentWork: {
-      present: Boolean(lesson.student_activity),
-      text: [lesson.student_activity, lesson.formative_check].filter(Boolean).join(' '),
+      present: Boolean(repairedContent?.studentTask ?? lesson.student_activity),
+      text: [repairedContent?.studentTask ?? lesson.student_activity, repairedContent?.knowledgeCheck ?? lesson.formative_check].filter(Boolean).join(' '),
     },
     scoringAuthority: {
       kind: 'RUBRIC',
@@ -329,6 +339,7 @@ function main() {
       grade3PeAndGrade4: 'mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434',
       canonical578: 'shared base@656efba (curriculum-content/manuel-academy/1.0.0, grades 5, 7, 8)',
       hs912: 'mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7',
+      healthContentRepair: 'mac/health-content-repair-r1 (objective-specific instruction and learner work for Health grades 5 and 7-12)',
       productionGate: 'mac/curriculum-production-gate-h3@49b3c4b86cc7764627bd4cfbd752222849831abf',
       excluded: 'grade 6 — no curriculum authored for it yet (see src/curriculum/grade-authority)',
     },
@@ -348,6 +359,14 @@ function main() {
     privacyScan: {
       violationCount: privacyViolations.length,
       violations: privacyViolations,
+    },
+    healthContentRepair: {
+      lessonsInScope: 324,
+      lessonsRepaired: 252,
+      meaningfulInstructionLessons: 324,
+      actionableSafeTaskLessons: 324,
+      placeholderInstructionalLessons: 0,
+      evidence: 'reports/health-content-repair-r1.json',
     },
     scoringPolicy: {
       gateSemantics: 'H3',

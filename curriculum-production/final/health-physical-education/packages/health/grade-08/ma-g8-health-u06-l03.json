@@ -16,14 +16,18 @@
     "pencil or accessible response tool",
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
-  "keyPoints": [],
+  "keyPoints": [
+    "Testing and healthcare support can provide information, prevention, or treatment; ask the provider what a service includes, whether consent is needed, and how privacy works.",
+    "Identify the actual biological process or transmission route, choose prevention or care that interrupts it, and correct myths without blaming or stigmatizing a person.",
+    "For testing and healthcare supports, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support."
+  ],
   "privacySafeScenario": "Complete a fact-checked community-health project with family review choices, private questions, and no disclosure requirement.",
-  "studentTask": "Learner completes a new application of testing and healthcare supports and records both the result and the reasoning, evidence, process, or design choice that produced it.",
-  "knowledgeCheck": "In one concise response, show or explain the most important idea about testing and healthcare supports; then identify one check that would catch an error or weak claim.",
+  "studentTask": "Create a cause-and-interruption map for a supplied fictional case about testing and healthcare supports: name the relevant process or transmission route, add two accurate prevention or care supports, and correct one misconception using the lesson facts.",
+  "knowledgeCheck": "In two or three sentences, explain the most important distinction in testing and healthcare supports; use one lesson fact and name the evidence, safety check, or support route that makes the explanation dependable.",
   "completionCriteria": [
-    "The learner completes the central task about testing and healthcare supports.",
-    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
-    "The learner checks or revises the work and can identify a next step."
+    "The response completes every named part of the testing and healthcare supports task using the supplied fictional or public case.",
+    "The response uses at least two accurate details from the lesson instruction and distinguishes evidence from assumption.",
+    "The response gives a safe, feasible next step or support route and does not depend on private disclosure, body comparison, or recorded media proof."
   ],
   "adaptationChoices": "Provide readable text plus optional audio or read-aloud support; no voice feature is required. Chunk directions into one action at a time and show a worked example or model. Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits. Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options. Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media. Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
   "extensionChallenge": "Apply testing and healthcare supports under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work.",
@@ -52,6 +56,10 @@
   "sourceProvenance": {
     "sourceBranch": "shared base@656efba (canonical 5/7/8)",
     "sourceLessonId": "ma-g8-health-u06-l03"
+  },
+  "contentProvenance": {
+    "repairLane": "mac/health-content-repair-r1",
+    "objective": "Practice testing and healthcare supports with prompts, feedback, and gradually reduced support."
   },
   "productionReadiness": {
     "status": "READY",

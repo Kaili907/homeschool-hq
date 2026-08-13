@@ -15,6 +15,7 @@ curriculum-production/final/health-physical-education/
   README.md
   corpus-manifest.json              counts, production-gate summary, privacy-scan summary
   SHA256SUMS.txt                    canonical SHA-256 inventory (all other corpus files)
+  reports/                          subject-content repair evidence
   schema/                           JSON Schema for both artefacts
   packages/<subject>/grade-XX/      student-facing task card, one file per lesson/assessment — no answers
   scoring-guides/<subject>/grade-XX/ rubric / scoring judgment — parent/teacher-facing
@@ -60,22 +61,22 @@ worktree's shared base and is read from this worktree directly. Once those
 branches merge, only `sourcePaths.mjs` needs to change — the rest of the
 generator is source-branch-agnostic.
 
-## Content density differs by grade band, honestly
+## Health instructional content
 
 Grade 3/4 lessons carry a dedicated `key_points`/`cues` field with distinct,
 hand-authored facts per topic, so `packages/…/grade-03/…` and `grade-04/…`
-task cards include a populated `keyPoints`/`movementCues` array. Canonical
-5/7/8 and HS 9-12 lessons do not carry that field — their per-topic substance
-lives in `essential_question`, the unit's `performance_task`/`privacy_guard`
-(HS) or `topic_content` (G3/4), and the lesson's own `student_activity` and
-`formative_check`, all of which this generator does use. Their `lesson_flow`
-narration ("Teach the cues, principle, or tactic behind X…") is a pacing
-script with the topic interpolated into a fixed instructional-design
-template, not distinct per-topic content, so this generator deliberately
-does **not** surface it as if it were — `keyPoints`/`movementCues` is `[]`/
-`null` for those grades rather than padded with templated prose. This is a
-property of the upstream branches (which this package does not own), not
-data loss in this projection.
+task cards include populated `keyPoints`. Health grades 5 and 7–12 previously
+had empty `keyPoints` and focus-interpolated task/check scaffolds. The Health
+Content Repair R1 layer now supplies three age-appropriate teaching points, a
+concrete fictional-case task, a focused knowledge check, and usable completion
+criteria for each of those 252 lesson objectives. The layer is Health-only:
+Grade 3/4 wording, all PE content, scoring, projection, UI, and global
+admission are unchanged. `reports/health-content-repair-r1.json` records the
+independent 324-lesson audit and the exact Grade 3 H2 byte/provenance trace.
+
+PE source lessons in grades 5 and 7–12 still lack distinct source `cues`; the
+generator continues to represent that honestly as `movementCues: null` rather
+than inventing PE instruction in this Health-only repair lane.
 
 ## Never requires
 
@@ -120,6 +121,7 @@ produces byte-identical output. The script exits non-zero if any item is
 
 ```bash
 node tooling/validate.mjs
+node tooling/health-content-audit.mjs
 ```
 
 Independently re-reads every file under `packages/` and `scoring-guides/`
