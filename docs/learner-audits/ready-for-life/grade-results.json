@@ -1,0 +1,320 @@
+{
+  "auditSchema": "rfl-learner-audit-r1",
+  "classification": "RFL_LEARNER_AUDIT_COMPLETE",
+  "status": "PASS",
+  "baseSha": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "expected": {
+    "lessons": 324,
+    "guardianAuthority": 81,
+    "learnerAuthority": 243,
+    "grades": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "coverage": {
+    "complete": true,
+    "manifestLessons": 324,
+    "packageAndScoringPairsRead": 324,
+    "runtimeRecords": 324,
+    "uniqueRuntimeRecords": 324,
+    "authorityProjectionRecords": 324,
+    "uniqueAuthorityProjectionRecords": 324,
+    "admittedBindings": 324,
+    "browserRecords": 324,
+    "uniqueLessonIds": 324
+  },
+  "totals": {
+    "lessonsAudited": 324,
+    "guardianAuthority": 81,
+    "learnerAuthority": 243,
+    "realWorldActions": 133,
+    "fictionalSimulations": 66,
+    "flaggedLessons": 0
+  },
+  "flagsByCode": {
+    "ZERO_ACTIONABLE_WORK": 0,
+    "GENERIC_LIFE_ADVICE_ONLY": 0,
+    "MISSING_TASK_STEPS": 0,
+    "MISSING_SIMULATION_ALTERNATIVE": 0,
+    "AUTHORITY_MISMATCH": 0,
+    "MISSING_ATTESTATION_METADATA": 0,
+    "PRIVATE_DISCLOSURE": 0,
+    "PURCHASE_REQUIREMENT": 0,
+    "CREDENTIAL_REQUIREMENT": 0,
+    "MEDIA_PROOF_REQUIREMENT": 0,
+    "EMPTY_RUBRIC": 0,
+    "PROJECTION_LOSS": 0,
+    "PLACEHOLDER": 0
+  },
+  "byGrade": {
+    "3": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 13,
+      "learnerAuthority": 23,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    },
+    "4": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 14,
+      "learnerAuthority": 22,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    },
+    "5": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 7,
+      "learnerAuthority": 29,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    },
+    "7": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 6,
+      "learnerAuthority": 30,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    },
+    "8": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 2,
+      "learnerAuthority": 34,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    },
+    "9": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 10,
+      "learnerAuthority": 26,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    },
+    "10": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 6,
+      "learnerAuthority": 30,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    },
+    "11": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 13,
+      "learnerAuthority": 23,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    },
+    "12": {
+      "status": "PASS",
+      "lessonsAudited": 36,
+      "guardianAuthority": 10,
+      "learnerAuthority": 26,
+      "flaggedLessons": 0,
+      "flagsByCode": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "GENERIC_LIFE_ADVICE_ONLY": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_SIMULATION_ALTERNATIVE": 0,
+        "AUTHORITY_MISMATCH": 0,
+        "MISSING_ATTESTATION_METADATA": 0,
+        "PRIVATE_DISCLOSURE": 0,
+        "PURCHASE_REQUIREMENT": 0,
+        "CREDENTIAL_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "EMPTY_RUBRIC": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      }
+    }
+  },
+  "negativeControls": {
+    "status": "PASS",
+    "controls": [
+      {
+        "id": "student-self-certification",
+        "expectedFlags": [
+          "AUTHORITY_MISMATCH",
+          "MISSING_ATTESTATION_METADATA"
+        ],
+        "actualFlags": [
+          "AUTHORITY_MISMATCH",
+          "MISSING_ATTESTATION_METADATA",
+          "PROJECTION_LOSS"
+        ],
+        "result": "DETECTED"
+      },
+      {
+        "id": "missing-simulation",
+        "expectedFlags": [
+          "MISSING_SIMULATION_ALTERNATIVE"
+        ],
+        "actualFlags": [
+          "MISSING_SIMULATION_ALTERNATIVE",
+          "PROJECTION_LOSS"
+        ],
+        "result": "DETECTED"
+      },
+      {
+        "id": "missing-task",
+        "expectedFlags": [
+          "ZERO_ACTIONABLE_WORK",
+          "MISSING_TASK_STEPS"
+        ],
+        "actualFlags": [
+          "GENERIC_LIFE_ADVICE_ONLY",
+          "MISSING_TASK_STEPS",
+          "ZERO_ACTIONABLE_WORK"
+        ],
+        "result": "DETECTED"
+      },
+      {
+        "id": "private-disclosure",
+        "expectedFlags": [
+          "PRIVATE_DISCLOSURE"
+        ],
+        "actualFlags": [
+          "PRIVATE_DISCLOSURE"
+        ],
+        "result": "DETECTED"
+      },
+      {
+        "id": "flattened-or-missing-task-steps",
+        "expectedFlags": [
+          "PROJECTION_LOSS"
+        ],
+        "actualFlags": [
+          "PROJECTION_LOSS"
+        ],
+        "result": "DETECTED"
+      }
+    ]
+  },
+  "safeToBeginMatrix": true
+}
