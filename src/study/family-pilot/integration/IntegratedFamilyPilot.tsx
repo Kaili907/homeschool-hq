@@ -122,6 +122,12 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
   }
 
   const open = assignments.find((item) => item.assignmentRef === openAssignmentRef) ?? null
+  // Defense in depth: disables Pause / Save my place / Finish this step /
+  // Finish while a Study action or a Tutor turn (helpBusy covers the exact
+  // window controller.helpTurn's pending-classification guard also covers)
+  // is in flight. The controller is the authority regardless — this only
+  // keeps the UI from offering a click it would refuse anyway.
+  const studyMutationsDisabled = busy || helpBusy
 
   /**
    * Advances the open help session by one learner message. A flagged turn
@@ -168,6 +174,7 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
           setOpenAssignmentRef(null)
           setStudy(null)
         }}
+        actionsDisabled={studyMutationsDisabled}
       />
 
       {message && (
@@ -202,7 +209,7 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
             <button
               type="button"
               className="min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold"
-              disabled={busy}
+              disabled={studyMutationsDisabled}
               onClick={() => void run(() => controller.checkpoint(activeStudentRef, open.assignmentRef))}
             >
               Save my place
@@ -210,7 +217,7 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
             <button
               type="button"
               className="min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold"
-              disabled={busy}
+              disabled={studyMutationsDisabled}
               onClick={() => void run(() => controller.completeSegment(activeStudentRef, open.assignmentRef))}
             >
               Finish this step

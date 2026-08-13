@@ -25,6 +25,7 @@ export function StudentExperience({
   assignments,
   loading = false,
   error = null,
+  actionsDisabled = false,
   onStart,
   onResume,
   onPause,
@@ -85,6 +86,7 @@ export function StudentExperience({
             onResume={onResume}
             onComplete={onComplete}
             onExit={returnToAssignments}
+            actionsDisabled={actionsDisabled}
           />
         )}
 
@@ -167,12 +169,14 @@ export function ActiveAssignmentView({
   onResume,
   onComplete,
   onExit,
+  actionsDisabled = false,
 }: {
   assignment: StudentAssignment
   onPause: (assignmentRef: string) => void
   onResume: (assignmentRef: string) => void
   onComplete: (assignmentRef: string) => void
   onExit: (assignmentRef: string) => void
+  actionsDisabled?: boolean
 }) {
   const currentSegment = resolveCurrentSegment(assignment)
   const progress = resolveSegmentProgress(assignment)
@@ -217,6 +221,7 @@ export function ActiveAssignmentView({
             type="button"
             className="rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-900"
             aria-label={`Pause ${assignment.title}`}
+            disabled={actionsDisabled}
             onClick={() => onPause(assignment.assignmentRef)}
           >
             Pause
@@ -226,6 +231,7 @@ export function ActiveAssignmentView({
           type="button"
           className="rounded-lg bg-emerald-600 px-4 py-2 font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-900"
           aria-label={`Finish ${assignment.title}`}
+          disabled={actionsDisabled}
           onClick={() => onComplete(assignment.assignmentRef)}
         >
           Finish

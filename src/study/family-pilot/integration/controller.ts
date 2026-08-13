@@ -103,6 +103,17 @@ export class FamilyPilotController {
    * into Core by then and the lesson refs they carry are what drives Study.
    */
   readonly #grades = new Map<string, AcademyGrade>()
+  /**
+   * Transient, per-session in-flight guard: which (learnerRef, sessionRef)
+   * pairs currently have a Tutor turn out for safety classification. Set
+   * synchronously the instant helpTurn() is invoked and cleared in a finally,
+   * so no same-session Study mutation can commit while the classification
+   * that is about to decide whether to open a hold is still unresolved. This
+   * is deliberately NOT a hold and NOT persisted: it never survives this
+   * controller instance, holds no text, and a second learner's key is never
+   * touched by it — see #pendingKey.
+   */
+  readonly #pendingClassification = new Set<string>()
 
   constructor(options: FamilyPilotControllerOptions) {
     this.#ports = options.ports
@@ -328,10 +339,14 @@ export class FamilyPilotController {
   }
 
   async pause(ref: string, assignmentRef: string): Promise<FamilyPilotOperationResult> {
+    const gate = checkStudyEntry(this.#safety, { studentRef: ref, assignmentRef })
+    if (!gate.allowed) return this.#refuse(gate.reasonCode, gate.studentMessage)
     const bound = this.#bind(ref, assignmentRef)
     if ('status' in bound) return bound
     const session = this.#session(bound.context, bound.record)
     if (!session) return this.#refuse('assignment-not-started', 'Start this work before pausing it.')
+    const pending = this.#pendingGuard(ref, session.sessionRef)
+    if (pending) return pending
     const paused = await this.#runtime.pause({ context: bound.context, session })
     if (paused.status !== 'ok') return this.#rejected(paused)
     const snapshot = updateFamilyPilotState((state) =>
@@ -350,10 +365,14 @@ export class FamilyPilotController {
    * the first step not in the set is exactly where the learner was.
    */
   async checkpoint(ref: string, assignmentRef: string): Promise<FamilyPilotOperationResult> {
+    const gate = checkStudyEntry(this.#safety, { studentRef: ref, assignmentRef })
+    if (!gate.allowed) return this.#refuse(gate.reasonCode, gate.studentMessage)
     const bound = this.#bind(ref, assignmentRef)
     if ('status' in bound) return bound
     const session = this.#session(bound.context, bound.record)
     if (!session) return this.#refuse('assignment-not-started', 'Start this work before saving it.')
+    const pending = this.#pendingGuard(ref, session.sessionRef)
+    if (pending) return pending
     const saved = await this.#runtime.checkpoint({ context: bound.context, session })
     if (saved.status !== 'ok') return this.#rejected(saved)
     return { status: 'ok', snapshot: this.snapshot(), study: saved.snapshot }
@@ -361,10 +380,14 @@ export class FamilyPilotController {
 
   /** Completes the current segment on both sides. */
   async completeSegment(ref: string, assignmentRef: string): Promise<FamilyPilotOperationResult> {
+    const gate = checkStudyEntry(this.#safety, { studentRef: ref, assignmentRef })
+    if (!gate.allowed) return this.#refuse(gate.reasonCode, gate.studentMessage)
     const bound = this.#bind(ref, assignmentRef)
     if ('status' in bound) return bound
     const session = this.#session(bound.context, bound.record)
     if (!session) return this.#refuse('assignment-not-started', 'Start this work first.')
+    const pending = this.#pendingGuard(ref, session.sessionRef)
+    if (pending) return pending
     const before = await this.#runtime.snapshot({ context: bound.context, session })
     if (before.status !== 'ok') return this.#rejected(before)
     const finished = before.snapshot.segmentRef
@@ -396,10 +419,14 @@ export class FamilyPilotController {
    * the commercial pipeline. It does not forge one.
    */
   async complete(ref: string, assignmentRef: string): Promise<FamilyPilotOperationResult> {
+    const gate = checkStudyEntry(this.#safety, { studentRef: ref, assignmentRef })
+    if (!gate.allowed) return this.#refuse(gate.reasonCode, gate.studentMessage)
     const bound = this.#bind(ref, assignmentRef)
     if ('status' in bound) return bound
     const session = this.#session(bound.context, bound.record)
     if (!session) return this.#refuse('assignment-not-started', 'Start this work first.')
+    const pending = this.#pendingGuard(ref, session.sessionRef)
+    if (pending) return pending
     const current = await this.#runtime.snapshot({ context: bound.context, session })
     if (current.status !== 'ok') return this.#rejected(current)
     if (current.snapshot.assignmentState !== 'completed') {
@@ -448,20 +475,36 @@ export class FamilyPilotController {
     return canHelp(step.session.context)
   }
 
+  /**
+   * From the moment this turn's safety classification begins until it
+   * settles, #pendingGuard refuses every same-session Study mutation — see
+   * INVARIANT 2 on the containing branch. The guard is added before the
+   * first await so a mutation fired in the same synchronous tick as this
+   * call still observes it, and released in `finally` so a CLEAR result, a
+   * CONCERNING result (which hands off to the hold this method itself just
+   * created) and an errored/degraded fallback all release it the same way —
+   * the learner is never left permanently locked out by this guard alone.
+   */
   async helpTurn(session: FamilyPilotHelpSession, message: string): Promise<FamilyPilotHelpStep> {
-    const step = await submitTurn(session, message, this.#tutorDeps)
-    // createSafetyHold is itself idempotent per (studentRef, sessionRef,
-    // reasonCode), so recording on every flagged turn — not just the one that
-    // flipped it — never duplicates a hold.
-    if (step.session.flaggedForAdult) {
-      this.#safetySignals?.recordTutorSignal({
-        studentRef: step.session.scope.learnerRef,
-        sessionRef: step.session.scope.sessionRef,
-        concerning: true,
-        occurredAt: this.#at(),
-      })
+    const key = this.#pendingKey(session.scope.learnerRef, session.scope.sessionRef)
+    this.#pendingClassification.add(key)
+    try {
+      const step = await submitTurn(session, message, this.#tutorDeps)
+      // createSafetyHold is itself idempotent per (studentRef, sessionRef,
+      // reasonCode), so recording on every flagged turn — not just the one that
+      // flipped it — never duplicates a hold.
+      if (step.session.flaggedForAdult) {
+        this.#safetySignals?.recordTutorSignal({
+          studentRef: step.session.scope.learnerRef,
+          sessionRef: step.session.scope.sessionRef,
+          concerning: true,
+          occurredAt: this.#at(),
+        })
+      }
+      return step
+    } finally {
+      this.#pendingClassification.delete(key)
     }
-    return step
   }
 
   closeHelp(session: FamilyPilotHelpSession) {
@@ -528,6 +571,20 @@ export class FamilyPilotController {
 
   #refuse(reason: string, message: string): FamilyPilotOperationResult {
     return { status: 'rejected', reason, message, snapshot: this.snapshot() }
+  }
+
+  /** Narrowly scoped to one learner's one session, so learner B is never touched by learner A's key. */
+  #pendingKey(learnerRef: string, sessionRef: string): string {
+    return `${learnerRef}::${sessionRef}`
+  }
+
+  /** Refuses a mutation still inside another turn's pending classification window for this exact session. */
+  #pendingGuard(ref: string, sessionRef: string): FamilyPilotOperationResult | null {
+    if (!this.#pendingClassification.has(this.#pendingKey(ref, sessionRef))) return null
+    return this.#refuse(
+      'tutor-classification-pending',
+      'One moment — we’re still checking your last message.',
+    )
   }
 
   #rejected(result: FamilyPilotStudyResult): FamilyPilotOperationResult {

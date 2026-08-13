@@ -40,4 +40,11 @@ export interface StudentExperienceProps extends StudentExperienceCallbacks {
   readonly assignments: readonly StudentAssignment[]
   readonly loading?: boolean
   readonly error?: string | null
+  /**
+   * True while a Study action or a Tutor turn is in flight for this learner.
+   * Disables Pause/Finish so a click can't race a mutation already underway
+   * or a safety classification still pending — defense in depth alongside
+   * the authoritative controller-level gating.
+   */
+  readonly actionsDisabled?: boolean
 }
