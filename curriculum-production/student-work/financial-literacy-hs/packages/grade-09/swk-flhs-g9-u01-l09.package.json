@@ -37,7 +37,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "In both fictional periods, gross pay is $1,850 and combined tax is withheld at 18% of taxable wages. In period 1 she contributed nothing to retirement. In period 2 she contributed 5% of gross, taken out before tax is calculated.",
+      "directions": "In both fictional periods, gross pay is $1,850 and combined income tax — federal plus state — is withheld at 18% of taxable wages. Social Security and Medicare are charged on the full $1,850 in both periods and are not shown here, because a pre-tax retirement contribution does not reduce them. In period 1 she contributed nothing to retirement. In period 2 she contributed 5% of gross, taken out before income tax is calculated.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -67,7 +67,7 @@
         {
           "ref": "t2-p2",
           "promptType": "fixed-numeric",
-          "text": "What are her taxable wages in period 2?",
+          "text": "What are her income-taxable wages in period 2?",
           "unit": "USD"
         },
         {
@@ -122,7 +122,7 @@
       ]
     }
   ],
-  "remediation": "If period 2 is coming out with tax on the full $1,850, mark the order of operations on the stub: contribution first, then tax on what is left. Compute the two taxable-wage figures side by side, $1,850 and $1,757.50, before any tax is applied.",
+  "remediation": "If period 2 is coming out with income tax on the full $1,850, mark the order of operations on the stub: contribution first, then income tax on what is left. Compute the two income-taxable figures side by side, $1,850 and $1,757.50, before any tax is applied — and note that the payroll-tax base stays at $1,850 in both periods.",
   "extension": "Recompute period 2 with the contribution taken after tax instead of before, and state exactly how much the pre-tax treatment was worth.",
   "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l09.scoring.json",
   "financialSafety": {

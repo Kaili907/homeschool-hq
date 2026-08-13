@@ -7,10 +7,10 @@
     "items": [
       {
         "ref": "t1-p1",
-        "answer": "$5,048.00",
+        "answer": "$3,992.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,160 on the first $11,600 plus 12% of the remaining $32,400."
+          "reasoning": "Taxable income is $35,000 after the $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $24,600."
         }
       },
       {
@@ -23,10 +23,10 @@
       },
       {
         "ref": "t1-p3",
-        "answer": "$33,276.00",
+        "answer": "$34,332.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$44,000 less $10,724.00 of total tax."
+          "reasoning": "$44,000 less $9,668.00 of total tax."
         }
       },
       {
@@ -39,28 +39,28 @@
       },
       {
         "ref": "t2-p2",
-        "answer": "$1,176.00",
+        "answer": "$2,232.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$33,276.00 of take-home against $32,100.00 allocated."
+          "reasoning": "$34,332.00 of take-home against $32,100.00 allocated."
         }
       },
       {
         "ref": "t2-p3",
-        "answer": "24.4%",
+        "answer": "22.0%",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$10,724.00 of tax on $44,000 of gross income."
+          "reasoning": "$9,668.00 of tax on $44,000 of gross income."
         }
       }
     ],
     "workedSolution": [
       {
         "ref": "t1-p1",
-        "expression": "bracket * lowRate + (income - bracket) * highRate",
-        "substituted": "11600 * 0.1 + (44000 - 11600) * 0.12",
-        "result": "$5,048.00",
-        "why": "$1,160 on the first $11,600 plus 12% of the remaining $32,400."
+        "expression": "bracket * lowRate + (income - deduction - bracket) * highRate",
+        "substituted": "10400 * 0.1 + (44000 - 9000 - 10400) * 0.12",
+        "result": "$3,992.00",
+        "why": "Taxable income is $35,000 after the $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $24,600."
       },
       {
         "ref": "t1-p2",
@@ -73,8 +73,8 @@
         "ref": "t1-p3",
         "expression": "income3 - #t1-p1 - #t1-p2",
         "substituted": "44000 - #t1-p1 - #t1-p2",
-        "result": "$33,276.00",
-        "why": "$44,000 less $10,724.00 of total tax."
+        "result": "$34,332.00",
+        "why": "$44,000 less $9,668.00 of total tax."
       },
       {
         "ref": "t2-p1",
@@ -87,15 +87,15 @@
         "ref": "t2-p2",
         "expression": "#t1-p3 - #t2-p1",
         "substituted": "#t1-p3 - #t2-p1",
-        "result": "$1,176.00",
-        "why": "$33,276.00 of take-home against $32,100.00 allocated."
+        "result": "$2,232.00",
+        "why": "$34,332.00 of take-home against $32,100.00 allocated."
       },
       {
         "ref": "t2-p3",
         "expression": "round((#t1-p1 + #t1-p2) / income4 * 100, 1)",
         "substituted": "round((#t1-p1 + #t1-p2) / 44000 * 100, 1)",
-        "result": "24.4%",
-        "why": "$10,724.00 of tax on $44,000 of gross income."
+        "result": "22.0%",
+        "why": "$9,668.00 of tax on $44,000 of gross income."
       }
     ],
     "criteria": [
@@ -166,16 +166,16 @@
     "judgment": [
       {
         "ref": "t3-p1",
-        "prompt": "Present the plan and show how each of the seven topics from this course appears in it. Say what the $1,176 unallocated should do, and name the one line you would cut first if income fell 10%.",
+        "prompt": "Present the plan and show how each of the seven topics from this course appears in it. Say what the $2,232 unallocated should do, and name the one line you would cut first if income fell 10%.",
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
           "Maps each line to a topic — income and taxes to the top of the plan, essentials to spending, the reserve to saving and protection, the debt line to credit, and the investing line to long-horizon growth.",
-          "Gives the $1,176 a specific job rather than leaving it as slack, and says why that job was chosen.",
-          "Names a cut line and defends the choice against the alternative, recognising that a 10% income fall is about $3,328 of take-home and cannot come from the unallocated amount alone."
+          "Gives the $2,232 a specific job rather than leaving it as slack, and says why that job was chosen.",
+          "Names a cut line and defends the choice against the alternative, recognising that a 10% income fall is about $3,433 of take-home and cannot come from the unallocated amount alone."
         ],
         "evidenceRequirements": [
-          "Uses the $33,276.00 take-home figure, the $32,100.00 allocated total, and at least two individual allocation lines."
+          "Uses the $34,332.00 take-home figure, the $32,100.00 allocated total, and at least two individual allocation lines."
         ],
         "lookFors": [
           "The response does not cut the insurance line without acknowledging the risk exposure that creates.",

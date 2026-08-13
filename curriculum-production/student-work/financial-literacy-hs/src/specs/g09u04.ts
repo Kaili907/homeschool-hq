@@ -228,7 +228,7 @@ export const g09u04: readonly LessonSpec[] = [
           },
           {
             ref: 't2-p2', kind: 'choice',
-            text: 'Closing Card B would remove its $800 limit and its $210 balance. What would that do to utilisation?',
+            text: 'Set the $300 payment aside for a moment and go back to the original balances. Closing Card B would remove its $800 limit and its $210 balance. What would that do to the 37.0% utilisation?',
             choices: ['Lower it', 'Raise it', 'Leave it unchanged'],
             given: { balanceAfter: 640, limitAfter: 1500 },
             decision: { left: 'round(balanceAfter / limitAfter * 100, 1)', cmp: '>', right: '#t1-p2', ifTrue: 'Raise it', ifFalse: 'Lower it' },
@@ -246,7 +246,7 @@ export const g09u04: readonly LessonSpec[] = [
             text: 'A credit report records what this person did with credit. Name two things it records that the figures above show, and two things about their finances it does not record at all, and say why the gap matters when a lender uses it.',
             acceptableAnswerCriteria: [
               'Names two recorded items grounded in the report — the balances and limits behind the 37.0% utilisation, and the payment history behind the 91.7% figure.',
-              'Names two genuinely absent items — income, savings, assets, employment, or expenses — and does not confuse them with what a lender might separately ask for.',
+              'Names two genuinely absent items — how much the person earns, their savings, their assets, or their expenses — and does not confuse them with what a lender might separately ask for.',
               'Explains that a lender reading only this file sees how obligations were handled, not whether the borrower can afford a new one.',
             ],
             evidenceRequirements: [
@@ -254,7 +254,7 @@ export const g09u04: readonly LessonSpec[] = [
             ],
             dimensions: ['evidence-use', 'criteria-application', 'communication-of-uncertainty'],
             lookFors: [
-              'The response does not claim the report contains a judgement about the person.',
+              'The response does not claim the report contains a judgement about the person, and does not list employment among the absent items: a report commonly carries an employer name, though never an income figure.',
               'The response recognises that two missed payments out of 24 is recorded as a fact, not as an explanation.',
             ],
             commonMisconception: 'Believing a credit report reflects how much money a person has.',
@@ -444,7 +444,7 @@ export const g09u04: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'The fictional card charges 24% a year, applied as 2% of the balance each month, and requires a minimum payment of 2.5% of the balance or $25, whichever is greater. Interest is charged first, then the payment is applied. Round each figure to the nearest cent.',
+        directions: 'The fictional card charges 24% a year, applied as 2% of the balance each month. Interest is charged first; the minimum payment is then 2.5% of that new statement balance, or $25, whichever is greater; then the payment is applied. This matches how a real card bills, on the statement balance including the finance charge. Round each figure to the nearest cent.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
@@ -455,14 +455,14 @@ export const g09u04: readonly LessonSpec[] = [
           {
             ref: 't1-p2', kind: 'numeric', unit: 'USD',
             text: 'What is the month 1 minimum payment?',
-            given: { balance2: 1200, minRate: 0.025, minFloor: 25 }, expr: 'max(round(balance2 * minRate, 2), minFloor)', format: 'usd', answer: '$30.00',
-            reasoning: '2.5% of $1,200 is $30.00, which is greater than the $25 floor.',
+            given: { balance2: 1200, minRate: 0.025, minFloor: 25 }, expr: 'max(round((balance2 + #t1-p1) * minRate, 2), minFloor)', format: 'usd', answer: '$30.60',
+            reasoning: 'The statement balance after interest is $1,224.00, and 2.5% of that is $30.60, which is greater than the $25 floor.',
           },
           {
             ref: 't1-p3', kind: 'numeric', unit: 'USD',
             text: 'What is the balance at the end of month 1?',
-            given: { balance3: 1200 }, expr: 'balance3 + #t1-p1 - #t1-p2', format: 'usd', answer: '$1,194.00',
-            reasoning: '$1,200 plus $24.00 of interest less the $30.00 paid, so only $6.00 of the payment reduced the balance.',
+            given: { balance3: 1200 }, expr: 'balance3 + #t1-p1 - #t1-p2', format: 'usd', answer: '$1,193.40',
+            reasoning: '$1,200 plus $24.00 of interest less the $30.60 paid, so only $6.60 of the payment reduced the balance.',
           },
         ],
       },
@@ -473,20 +473,20 @@ export const g09u04: readonly LessonSpec[] = [
           {
             ref: 't2-p1', kind: 'numeric', unit: 'USD',
             text: 'What interest is charged in month 2?',
-            given: { monthlyRate2: 0.02 }, expr: 'round(#t1-p3 * monthlyRate2, 2)', format: 'usd', answer: '$23.88',
-            reasoning: 'The same 2% monthly rate, now applied to the $1,194.00 carried into month 2.',
+            given: { monthlyRate2: 0.02 }, expr: 'round(#t1-p3 * monthlyRate2, 2)', format: 'usd', answer: '$23.87',
+            reasoning: 'The same 2% monthly rate, now applied to the $1,193.40 carried into month 2.',
           },
           {
             ref: 't2-p2', kind: 'numeric', unit: 'USD',
             text: 'What is the month 2 minimum payment?',
-            given: { minRate2: 0.025, minFloor2: 25 }, expr: 'max(round(#t1-p3 * minRate2, 2), minFloor2)', format: 'usd', answer: '$29.85',
-            reasoning: '2.5% of $1,194.00 is $29.85, still above the $25 floor.',
+            given: { minRate2: 0.025, minFloor2: 25 }, expr: 'max(round((#t1-p3 + #t2-p1) * minRate2, 2), minFloor2)', format: 'usd', answer: '$30.43',
+            reasoning: '2.5% of the $1,217.27 statement balance, still above the $25 floor.',
           },
           {
             ref: 't2-p3', kind: 'numeric', unit: 'USD',
             text: 'What is the balance at the end of month 2?',
-            given: {}, expr: '#t1-p3 + #t2-p1 - #t2-p2', format: 'usd', answer: '$1,188.03',
-            reasoning: '$1,194.00 plus $23.88 of interest less the $29.85 paid.',
+            given: {}, expr: '#t1-p3 + #t2-p1 - #t2-p2', format: 'usd', answer: '$1,186.84',
+            reasoning: '$1,193.40 plus $23.87 of interest less the $30.43 paid.',
           },
         ],
       },
@@ -498,21 +498,21 @@ export const g09u04: readonly LessonSpec[] = [
             ref: 't3-p1', kind: 'numeric', unit: 'USD',
             text: 'What is the balance at the end of month 3?',
             given: { monthlyRate3: 0.02, minRate3: 0.025, minFloor3: 25 },
-            expr: '#t2-p3 + round(#t2-p3 * monthlyRate3, 2) - max(round(#t2-p3 * minRate3, 2), minFloor3)',
-            format: 'usd', answer: '$1,182.09',
-            reasoning: '$1,188.03 plus $23.76 of interest less the $29.70 minimum payment.',
+            expr: '#t2-p3 + round(#t2-p3 * monthlyRate3, 2) - max(round((#t2-p3 + round(#t2-p3 * monthlyRate3, 2)) * minRate3, 2), minFloor3)',
+            format: 'usd', answer: '$1,180.32',
+            reasoning: '$1,186.84 plus $23.74 of interest less the $30.26 minimum payment.',
           },
           {
             ref: 't3-p2', kind: 'numeric', unit: 'USD',
             text: 'What was paid in total across the three months?',
-            given: { minRate4: 0.025, minFloor4: 25 }, expr: '#t1-p2 + #t2-p2 + max(round(#t2-p3 * minRate4, 2), minFloor4)', format: 'usd', answer: '$89.55',
-            reasoning: '$30.00 plus $29.85 plus $29.70.',
+            given: { minRate4: 0.025, minFloor4: 25, monthlyRate4: 0.02 }, expr: '#t1-p2 + #t2-p2 + max(round((#t2-p3 + round(#t2-p3 * monthlyRate4, 2)) * minRate4, 2), minFloor4)', format: 'usd', answer: '$91.29',
+            reasoning: '$30.60 plus $30.43 plus $30.26.',
           },
           {
             ref: 't3-p3', kind: 'numeric', unit: 'USD',
             text: 'By how much did the balance actually fall over the three months?',
-            given: { start: 1200 }, expr: 'start - #t3-p1', format: 'usd', answer: '$17.91',
-            reasoning: '$1,200 at the start against $1,182.09 at the end.',
+            given: { start: 1200 }, expr: 'start - #t3-p1', format: 'usd', answer: '$19.68',
+            reasoning: '$1,200 at the start against $1,180.32 at the end.',
           },
         ],
       },
@@ -522,14 +522,14 @@ export const g09u04: readonly LessonSpec[] = [
         items: [
           {
             ref: 't4-p1', kind: 'judgment', length: 'extended',
-            text: 'Of the $89.55 paid, only $17.91 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls.',
+            text: 'Of the $91.29 paid, only $19.68 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls.',
             acceptableAnswerCriteria: [
-              'States that $71.64 of the $89.55 paid went to interest, and shows this as the difference between the two figures.',
+              'States that $71.61 of the $91.29 paid went to interest, and shows this as the difference between the two figures.',
               'Explains that the minimum is a percentage of the balance, so it shrinks as the balance shrinks, which slows repayment further.',
               'Notes that the $25 floor eventually takes over, and that until then each month repeats the same pattern at a slightly smaller scale.',
             ],
             evidenceRequirements: [
-              'Uses the $89.55 total paid and the $17.91 reduction in balance.',
+              'Uses the $91.29 total paid and the $19.68 reduction in balance.',
             ],
             dimensions: ['reasoning-from-figures', 'plan-coherence'],
             lookFors: [
@@ -541,7 +541,7 @@ export const g09u04: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the closing balance is falling by the full payment each month, the interest step is being skipped. Work strictly in the stated order: add the interest to the balance, then subtract the payment, and record all three numbers for each month before moving on.',
+    remediation: 'If the closing balance is falling by the full payment each month, the interest step is being skipped. Work strictly in the stated order: add the interest to the balance, take 2.5% of that new total as the minimum, then subtract it, and record all three numbers for each month before moving on.',
     extension: 'Continue the table until the minimum payment first hits the $25 floor, and say how many months that takes and what the balance is then.',
   },
 
@@ -721,7 +721,7 @@ export const g09u04: readonly LessonSpec[] = [
             ],
             dimensions: ['transfer', 'reasoning-from-figures', 'assumption-identification'],
             lookFors: [
-              'The response notices the monthly payment barely changed, from $253.72 to $241.85, which is the visible sign that the term was extended.',
+              'The response notices the monthly payment barely changed, from $253.72 to $241.85, and attributes that to a smaller balance running over the same 48 remaining months at a lower rate rather than to a longer term.',
               'The response does not treat a lower rate as automatically producing proportional savings.',
             ],
             commonMisconception: 'Judging a refinance by the change in rate without checking what happens to the term.',
@@ -738,7 +738,7 @@ export const g09u04: readonly LessonSpec[] = [
     grade: 9, unit: 4, day: 9,
     actor: 'a fictional lender’s published scoring model',
     objective: 'Compute a fictional lender’s published index from weighted factors, test which factor moves it most, and state what the index does not measure.',
-    scenario: 'A fictional lender publishes the simulated scoring model below and applies it to a fictional applicant’s file. The model, the weights, and the sub-scores are invented for this exercise and are not any real credit score.',
+    scenario: 'A fictional lender publishes the simulated scoring model below and applies it to a fictional applicant’s file. The index and the sub-scores are invented for this exercise and are not any real credit score. The five factors and their weights follow the breakdown a widely used real scoring model publishes, so the categories are realistic even though the numbers are not.',
     materials: ['calculator', 'the fictional model and file in these directions'],
     tasks: [
       {
@@ -1015,7 +1015,7 @@ export const g09u04: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the saving from borrowing less comes out as $2,200 — the raw difference in principal — the repayment multiplier has been dropped. Every dollar not borrowed saves $1.38, not $1.00, so multiply the $2,200 difference by the per-dollar cost.',
+    remediation: 'If the saving from borrowing less comes out as $2,200 — the raw difference in principal — the repayment multiplier has been dropped. Every dollar not borrowed saves about $1.38, so the saving is near $3,036; the keyed $3,039.60 differs slightly because it uses the exact $7,869.60 total on one side rather than the rounded per-dollar figure on both.',
     extension: 'Build a third plan that borrows nothing, state what it requires in hours and advance saving, and say honestly whether it is realistic alongside full-time study.',
   },
 ]

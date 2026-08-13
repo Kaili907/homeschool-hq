@@ -159,7 +159,7 @@
     "judgment": [
       {
         "ref": "t3-p1",
-        "prompt": "A filer with only W-2 income and a filer with 1099-NEC income face the same tax rules but very different experiences at filing time. Explain why, and describe what the second filer should do during the year that the first need not.",
+        "prompt": "A filer with only W-2 income and a filer with 1099-NEC income face different rules and very different experiences at filing time. Explain both differences, and describe what the second filer should do during the year that the first need not.",
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
@@ -172,7 +172,7 @@
         ],
         "lookFors": [
           "The response does not suggest the 1099-NEC income escapes tax.",
-          "The response identifies the absence of withholding as the difference, not a difference in the rules."
+          "The response identifies two distinct differences: nothing is withheld, and the self-employed filer owes both halves of the payroll tax at 15.3% rather than the employee’s 7.65%."
         ],
         "commonMisconception": "Assuming income arrives with tax already handled because that is how a first job worked.",
         "dimensions": [

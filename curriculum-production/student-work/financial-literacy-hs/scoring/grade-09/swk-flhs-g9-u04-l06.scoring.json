@@ -15,66 +15,66 @@
       },
       {
         "ref": "t1-p2",
-        "answer": "$30.00",
+        "answer": "$30.60",
         "verification": {
           "method": "recomputed",
-          "reasoning": "2.5% of $1,200 is $30.00, which is greater than the $25 floor."
+          "reasoning": "The statement balance after interest is $1,224.00, and 2.5% of that is $30.60, which is greater than the $25 floor."
         }
       },
       {
         "ref": "t1-p3",
-        "answer": "$1,194.00",
+        "answer": "$1,193.40",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,200 plus $24.00 of interest less the $30.00 paid, so only $6.00 of the payment reduced the balance."
+          "reasoning": "$1,200 plus $24.00 of interest less the $30.60 paid, so only $6.60 of the payment reduced the balance."
         }
       },
       {
         "ref": "t2-p1",
-        "answer": "$23.88",
+        "answer": "$23.87",
         "verification": {
           "method": "recomputed",
-          "reasoning": "The same 2% monthly rate, now applied to the $1,194.00 carried into month 2."
+          "reasoning": "The same 2% monthly rate, now applied to the $1,193.40 carried into month 2."
         }
       },
       {
         "ref": "t2-p2",
-        "answer": "$29.85",
+        "answer": "$30.43",
         "verification": {
           "method": "recomputed",
-          "reasoning": "2.5% of $1,194.00 is $29.85, still above the $25 floor."
+          "reasoning": "2.5% of the $1,217.27 statement balance, still above the $25 floor."
         }
       },
       {
         "ref": "t2-p3",
-        "answer": "$1,188.03",
+        "answer": "$1,186.84",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,194.00 plus $23.88 of interest less the $29.85 paid."
+          "reasoning": "$1,193.40 plus $23.87 of interest less the $30.43 paid."
         }
       },
       {
         "ref": "t3-p1",
-        "answer": "$1,182.09",
+        "answer": "$1,180.32",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,188.03 plus $23.76 of interest less the $29.70 minimum payment."
+          "reasoning": "$1,186.84 plus $23.74 of interest less the $30.26 minimum payment."
         }
       },
       {
         "ref": "t3-p2",
-        "answer": "$89.55",
+        "answer": "$91.29",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$30.00 plus $29.85 plus $29.70."
+          "reasoning": "$30.60 plus $30.43 plus $30.26."
         }
       },
       {
         "ref": "t3-p3",
-        "answer": "$17.91",
+        "answer": "$19.68",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,200 at the start against $1,182.09 at the end."
+          "reasoning": "$1,200 at the start against $1,180.32 at the end."
         }
       }
     ],
@@ -88,59 +88,59 @@
       },
       {
         "ref": "t1-p2",
-        "expression": "max(round(balance2 * minRate, 2), minFloor)",
-        "substituted": "max(round(1200 * 0.025, 2), 25)",
-        "result": "$30.00",
-        "why": "2.5% of $1,200 is $30.00, which is greater than the $25 floor."
+        "expression": "max(round((balance2 + #t1-p1) * minRate, 2), minFloor)",
+        "substituted": "max(round((1200 + #t1-p1) * 0.025, 2), 25)",
+        "result": "$30.60",
+        "why": "The statement balance after interest is $1,224.00, and 2.5% of that is $30.60, which is greater than the $25 floor."
       },
       {
         "ref": "t1-p3",
         "expression": "balance3 + #t1-p1 - #t1-p2",
         "substituted": "1200 + #t1-p1 - #t1-p2",
-        "result": "$1,194.00",
-        "why": "$1,200 plus $24.00 of interest less the $30.00 paid, so only $6.00 of the payment reduced the balance."
+        "result": "$1,193.40",
+        "why": "$1,200 plus $24.00 of interest less the $30.60 paid, so only $6.60 of the payment reduced the balance."
       },
       {
         "ref": "t2-p1",
         "expression": "round(#t1-p3 * monthlyRate2, 2)",
         "substituted": "round(#t1-p3 * 0.02, 2)",
-        "result": "$23.88",
-        "why": "The same 2% monthly rate, now applied to the $1,194.00 carried into month 2."
+        "result": "$23.87",
+        "why": "The same 2% monthly rate, now applied to the $1,193.40 carried into month 2."
       },
       {
         "ref": "t2-p2",
-        "expression": "max(round(#t1-p3 * minRate2, 2), minFloor2)",
-        "substituted": "max(round(#t1-p3 * 0.025, 2), 25)",
-        "result": "$29.85",
-        "why": "2.5% of $1,194.00 is $29.85, still above the $25 floor."
+        "expression": "max(round((#t1-p3 + #t2-p1) * minRate2, 2), minFloor2)",
+        "substituted": "max(round((#t1-p3 + #t2-p1) * 0.025, 2), 25)",
+        "result": "$30.43",
+        "why": "2.5% of the $1,217.27 statement balance, still above the $25 floor."
       },
       {
         "ref": "t2-p3",
         "expression": "#t1-p3 + #t2-p1 - #t2-p2",
         "substituted": "#t1-p3 + #t2-p1 - #t2-p2",
-        "result": "$1,188.03",
-        "why": "$1,194.00 plus $23.88 of interest less the $29.85 paid."
+        "result": "$1,186.84",
+        "why": "$1,193.40 plus $23.87 of interest less the $30.43 paid."
       },
       {
         "ref": "t3-p1",
-        "expression": "#t2-p3 + round(#t2-p3 * monthlyRate3, 2) - max(round(#t2-p3 * minRate3, 2), minFloor3)",
-        "substituted": "#t2-p3 + round(#t2-p3 * 0.02, 2) - max(round(#t2-p3 * 0.025, 2), 25)",
-        "result": "$1,182.09",
-        "why": "$1,188.03 plus $23.76 of interest less the $29.70 minimum payment."
+        "expression": "#t2-p3 + round(#t2-p3 * monthlyRate3, 2) - max(round((#t2-p3 + round(#t2-p3 * monthlyRate3, 2)) * minRate3, 2), minFloor3)",
+        "substituted": "#t2-p3 + round(#t2-p3 * 0.02, 2) - max(round((#t2-p3 + round(#t2-p3 * 0.02, 2)) * 0.025, 2), 25)",
+        "result": "$1,180.32",
+        "why": "$1,186.84 plus $23.74 of interest less the $30.26 minimum payment."
       },
       {
         "ref": "t3-p2",
-        "expression": "#t1-p2 + #t2-p2 + max(round(#t2-p3 * minRate4, 2), minFloor4)",
-        "substituted": "#t1-p2 + #t2-p2 + max(round(#t2-p3 * 0.025, 2), 25)",
-        "result": "$89.55",
-        "why": "$30.00 plus $29.85 plus $29.70."
+        "expression": "#t1-p2 + #t2-p2 + max(round((#t2-p3 + round(#t2-p3 * monthlyRate4, 2)) * minRate4, 2), minFloor4)",
+        "substituted": "#t1-p2 + #t2-p2 + max(round((#t2-p3 + round(#t2-p3 * 0.02, 2)) * 0.025, 2), 25)",
+        "result": "$91.29",
+        "why": "$30.60 plus $30.43 plus $30.26."
       },
       {
         "ref": "t3-p3",
         "expression": "start - #t3-p1",
         "substituted": "1200 - #t3-p1",
-        "result": "$17.91",
-        "why": "$1,200 at the start against $1,182.09 at the end."
+        "result": "$19.68",
+        "why": "$1,200 at the start against $1,180.32 at the end."
       }
     ],
     "criteria": [
@@ -190,16 +190,16 @@
     "judgment": [
       {
         "ref": "t4-p1",
-        "prompt": "Of the $89.55 paid, only $17.91 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls.",
+        "prompt": "Of the $91.29 paid, only $19.68 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls.",
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
-          "States that $71.64 of the $89.55 paid went to interest, and shows this as the difference between the two figures.",
+          "States that $71.61 of the $91.29 paid went to interest, and shows this as the difference between the two figures.",
           "Explains that the minimum is a percentage of the balance, so it shrinks as the balance shrinks, which slows repayment further.",
           "Notes that the $25 floor eventually takes over, and that until then each month repeats the same pattern at a slightly smaller scale."
         ],
         "evidenceRequirements": [
-          "Uses the $89.55 total paid and the $17.91 reduction in balance."
+          "Uses the $91.29 total paid and the $19.68 reduction in balance."
         ],
         "lookFors": [
           "The response identifies the shrinking minimum as a mechanism rather than describing minimum payments as merely \"bad\".",

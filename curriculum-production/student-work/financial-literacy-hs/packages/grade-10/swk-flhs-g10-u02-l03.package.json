@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u02-l03",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: returns, warranties, and remedies"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "returns, warranties, and remedies",
+  "objective": "Compare a fictional return route with a fictional warranty route on the same defect, compute what each recovers, and identify which remedy the timing allows.",
+  "scenario": "A fictional buyer paid $429 for a simulated appliance. The store policy and manufacturer warranty below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy and warranty terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional store policy: returns accepted within 30 days, subject to a 15% restocking fee. The fictional manufacturer warranty: 12 months, covering repair or replacement of a defect at no charge. The defect appears on day 45.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the buyer could still return it, what would the restocking fee be?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What refund would a return produce?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-choice",
+          "text": "On day 45, which remedy is actually available?",
+          "choices": [
+            "The store return",
+            "The manufacturer warranty",
+            "Both",
+            "Neither"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Compare the value of the two remedies.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "What does the warranty route cost the buyer for the repair itself?",
+          "choices": [
+            "Nothing",
+            "$64.35, the restocking fee",
+            "$429, the purchase price"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much better off is the buyer under the warranty than they would have been returning it on day 20?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "For a buyer who has decided they do not want the appliance at all, which remedy is better?",
+          "choices": [
+            "The store return, even with the fee",
+            "The manufacturer warranty"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "These two remedies solve different problems and expire at different times. Set out when each one is the right tool, and say what a buyer should check in the first 30 days of owning something expensive."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two remedies look interchangeable, ask what the buyer holds at the end of each: under the warranty, a working appliance; under the return, $364.65 and no appliance. Which is better depends entirely on whether the appliance is wanted.",
+  "extension": "Suppose the warranty covered parts only and the repair needed $110 of labour. Recompute both routes and say whether the day-30 decision would have changed.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u02-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

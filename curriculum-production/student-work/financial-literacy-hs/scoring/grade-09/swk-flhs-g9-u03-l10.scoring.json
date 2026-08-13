@@ -50,7 +50,7 @@
         "answer": "$230.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,150 still needed across the last five months is exactly $230.00 a month, up from $150."
+          "reasoning": "$1,800 needed less the $650 in the account leaves $1,150 across the last five months, or exactly $230.00 a month, up from $150."
         }
       }
     ],
@@ -95,7 +95,7 @@
         "expression": "round((goal - #t2-p2) / remainingMonths, 2)",
         "substituted": "round((1800 - #t2-p2) / 5, 2)",
         "result": "$230.00",
-        "why": "$1,150 still needed across the last five months is exactly $230.00 a month, up from $150."
+        "why": "$1,800 needed less the $650 in the account leaves $1,150 across the last five months, or exactly $230.00 a month, up from $150."
       }
     ],
     "criteria": [

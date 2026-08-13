@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u02-l02",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: subscriptions, renewals, and cancellation terms"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "subscriptions, renewals, and cancellation terms",
+  "objective": "Compare a fictional subscription’s monthly and annual prices, price the risk that an auto-renewal is missed, and decide which billing choice fits which subscriber.",
+  "scenario": "The simulated subscription below bills either monthly or annually and renews automatically. All terms are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional subscription terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional subscription costs $12.99 a month billed monthly, or $119 a year billed once in advance. Both renew automatically unless cancelled. A 30-day free trial converts automatically to the annual plan.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the annual plan work out to per month? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of monthly billing cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does the annual plan save over a full year of use?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price what auto-renewal costs when it is missed.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "A monthly subscriber stops using the service but does not cancel for 7 more months. What does that cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "A subscriber who is unsure whether they will still want the service in three months should choose which plan?",
+          "choices": [
+            "The annual plan, to capture the $36.88 saving",
+            "The monthly plan, despite the higher rate"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does a subscriber lose by taking the annual plan and stopping after 3 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A free trial that converts automatically to the $119 annual plan is a different offer from a free trial that ends. Explain the difference in terms of who has to act, and say what a subscriber should do at the moment they start the trial."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the annual plan looks better in every case, notice what the $36.88 saving assumes: a full year of use. Compute the cost of each plan for three months and for twelve, and compare the two pairs.",
+  "extension": "Find the number of months of use at which the annual plan stops being the more expensive choice, and say how a subscriber could estimate that in advance.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u02-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

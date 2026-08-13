@@ -15,7 +15,7 @@ export const g09u03: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'The fictional programme: a saver who deposits $25 a month for 12 months receives a match of 50% of everything deposited. The account also pays 3.4% a year on the balance. A plain chequing account at the same fictional credit union pays 0.05% a year.',
+        directions: 'The fictional programme: a saver who deposits $25 a month for 12 months receives a match of 50% of everything deposited. The account also pays 3.4% a year on the balance. A plain checking account at the same fictional credit union pays 0.05% a year.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
@@ -43,14 +43,14 @@ export const g09u03: readonly LessonSpec[] = [
         items: [
           {
             ref: 't2-p1', kind: 'numeric', unit: 'USD',
-            text: 'How much would a year of interest at 3.4% add to the $450 balance?',
+            text: 'If the $450 balance sat in the account for a full year, how much would interest at 3.4% add?',
             given: { savingsRate: 0.034 }, expr: 'round(#t1-p3 * savingsRate, 2)', format: 'usd', answer: '$15.30',
-            reasoning: '3.4% of $450 is exactly $15.30.',
+            reasoning: '3.4% of $450 is exactly $15.30. This is interest on a full year at the closing balance; because the deposits arrive across the year, the first year’s actual credit would be roughly half of it.',
           },
           {
             ref: 't2-p2', kind: 'numeric', unit: 'USD',
-            text: 'How much would the same balance earn in a year at the chequing rate of 0.05%?',
-            given: { chequingRate: 0.0005 }, expr: 'round(#t1-p3 * chequingRate, 2)', format: 'usd', answer: '$0.23',
+            text: 'How much would the same balance earn in a year at the checking rate of 0.05%?',
+            given: { checkingRate: 0.0005 }, expr: 'round(#t1-p3 * checkingRate, 2)', format: 'usd', answer: '$0.23',
             reasoning: '0.05% of $450 is $0.225, which rounds to $0.23.',
           },
           {
@@ -70,11 +70,11 @@ export const g09u03: readonly LessonSpec[] = [
         items: [
           {
             ref: 't3-p1', kind: 'judgment', length: 'extended',
-            text: 'Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% chequing interest — by how much each one should influence where the saver puts the money, and explain the ranking.',
+            text: 'Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking.',
             acceptableAnswerCriteria: [
-              'Ranks the match first at $150, the savings interest second at $15.30, and the chequing rate last at $0.23.',
+              'Ranks the match first at $150, the savings interest second at $15.30, and the checking rate last at $0.23.',
               'Explains that the match is a return of 50% on money deposited in the first year, which no ordinary interest rate approaches.',
-              'Notes that the interest gap between the two accounts, about $15, is real but small next to the match, so the match is what should decide the choice.',
+              'Notes that the interest gap between the two accounts, about $15 on a full year at the closing balance and less than that in year one, is real but small next to the match.',
             ],
             evidenceRequirements: [
               'Uses all three computed figures — $150.00, $15.30, and $0.23 — in the ranking.',
@@ -185,7 +185,7 @@ export const g09u03: readonly LessonSpec[] = [
             ref: 't4-p1', kind: 'judgment', length: 'extended',
             text: 'A budget that lists only the fixed and variable costs would show $1,129.00 a month. Explain what goes wrong in the month the $148 registration falls due, and what the household should do with the $34.16 of periodic money in the months it is not due.',
             acceptableAnswerCriteria: [
-              'States that a budget omitting periodic costs looks balanced for eleven months and is short by $148 in the twelfth, when the bill arrives with nothing set aside for it.',
+              'States that a budget omitting periodic costs looks balanced in most months and is short by the full bill in each month one falls due — $148 in the registration month, and again for each dentist visit and the subscription.',
               'Explains that the $34.16 of monthly equivalents should be set aside rather than spent, so the money is there when the periodic bills fall due.',
               'Distinguishes this from an emergency: these bills are known in advance, so being surprised by them is a budgeting failure rather than bad luck.',
             ],
@@ -728,9 +728,9 @@ export const g09u03: readonly LessonSpec[] = [
           },
           {
             ref: 't2-p3', kind: 'numeric', unit: 'USD',
-            text: 'How much of that monthly total is fixed — the same every month regardless of use?',
-            given: { loan2: 219 }, expr: 'loan2 + #t1-p1', format: 'usd', answer: '$270.00',
-            reasoning: 'The $219 loan payment and the $51.00 monthly share of insurance do not move with how much the vehicle is driven.',
+            text: 'How much of that monthly total is committed regardless of how much the vehicle is driven?',
+            given: { loan2: 219 }, expr: 'loan2 + #t1-p1 + #t2-p1', format: 'usd', answer: '$282.33',
+            reasoning: 'The $219 loan payment, the $51.00 monthly share of insurance, and the $12.33 share of registration are all owed whether the vehicle covers 200 miles or 2,000. Fuel moves with use, and tyres and oil changes come round sooner the more it is driven.',
           },
         ],
       },
@@ -742,9 +742,9 @@ export const g09u03: readonly LessonSpec[] = [
             ref: 't3-p1', kind: 'judgment', length: 'extended',
             text: 'The owner has a month where money is short by $60. Say which of the six vehicle costs can actually absorb that cut, which cannot, and what happens if the cut is taken from the wrong one.',
             acceptableAnswerCriteria: [
-              'Identifies fuel, at $88 a month, as the only genuinely variable line, and therefore the only one that can absorb a cut by driving less.',
-              'States that the loan and insurance are fixed obligations that cannot be reduced by choice in a single month, and explains the consequence of missing them.',
-              'Explains that cutting the periodic set-asides — tyres, oil, registration, totalling $35.99 a month — does not remove the cost but moves it to the month the bill arrives.',
+              'Identifies fuel, at $88 a month, as the line that responds immediately to driving less, and notes that tyres and oil at $23.66 a month respond too but only over a longer horizon.',
+              'States that the loan, insurance, and registration — $282.33 a month — are committed regardless of use and cannot be reduced by choice in a single month, and explains the consequence of missing them.',
+              'Explains that cutting the periodic set-asides — tyres and oil at $23.66 a month, and registration at $12.33 — does not remove the cost but moves it to the month the bill arrives.',
             ],
             evidenceRequirements: [
               'Uses at least three of the six monthly figures in the argument, including the $88 fuel line.',
@@ -752,7 +752,7 @@ export const g09u03: readonly LessonSpec[] = [
             dimensions: ['transfer', 'plan-coherence', 'tradeoff-defense'],
             lookFors: [
               'The response treats skipping an oil change as deferring a cost with a possible larger cost later, not as a saving.',
-              'The response applies the same three-way classification used for the household budget to a single asset.',
+              'The response notices that use-independence and billing cadence sort these costs differently — registration is periodic in cadence but committed in use — and says which axis it is using.',
             ],
             commonMisconception: 'Treating a periodic set-aside as spare money because no bill is due this month.',
           },
@@ -892,9 +892,9 @@ export const g09u03: readonly LessonSpec[] = [
           },
           {
             ref: 't2-p3', kind: 'numeric', unit: 'USD',
-            text: 'To still reach $1,800 in deposits by month 12, what must each of the remaining 5 monthly deposits become?',
+            text: 'To still reach a balance of $1,800 by month 12, what must each of the remaining 5 monthly deposits become?',
             given: { goal: 1800, remainingMonths: 5 }, expr: 'round((goal - #t2-p2) / remainingMonths, 2)', format: 'usd', answer: '$230.00',
-            reasoning: '$1,150 still needed across the last five months is exactly $230.00 a month, up from $150.',
+            reasoning: '$1,800 needed less the $650 in the account leaves $1,150 across the last five months, or exactly $230.00 a month, up from $150.',
           },
         ],
       },
@@ -938,7 +938,7 @@ export const g09u03: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the repaired deposit is coming out as $360, the $1,800 goal is being divided by the five remaining months without crediting the $650 already saved. Write the sentence first — $1,800 needed, $650 already there, five months left — and then divide what remains.',
+    remediation: 'If the repaired deposit is coming out as $360, the $1,800 target balance is being divided by the five remaining months without crediting the $650 already in the account. Write the sentence first — $1,800 needed as a balance, $650 already there, five months left — and then divide what remains.',
     extension: 'Rebuild the plan assuming the saver can manage only $190 a month after the shock, find the month the goal would then be reached, and say what that costs in delay.',
   },
 ]

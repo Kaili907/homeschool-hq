@@ -39,7 +39,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "The fictional card charges 24% a year, applied as 2% of the balance each month, and requires a minimum payment of 2.5% of the balance or $25, whichever is greater. Interest is charged first, then the payment is applied. Round each figure to the nearest cent.",
+      "directions": "The fictional card charges 24% a year, applied as 2% of the balance each month. Interest is charged first; the minimum payment is then 2.5% of that new statement balance, or $25, whichever is greater; then the payment is applied. This matches how a real card bills, on the statement balance including the finance charge. Round each figure to the nearest cent.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -119,12 +119,12 @@
         {
           "ref": "t4-p1",
           "promptType": "extended-response",
-          "text": "Of the $89.55 paid, only $17.91 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls."
+          "text": "Of the $91.29 paid, only $19.68 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls."
         }
       ]
     }
   ],
-  "remediation": "If the closing balance is falling by the full payment each month, the interest step is being skipped. Work strictly in the stated order: add the interest to the balance, then subtract the payment, and record all three numbers for each month before moving on.",
+  "remediation": "If the closing balance is falling by the full payment each month, the interest step is being skipped. Work strictly in the stated order: add the interest to the balance, take 2.5% of that new total as the minimum, then subtract it, and record all three numbers for each month before moving on.",
   "extension": "Continue the table until the minimum payment first hits the $25 floor, and say how many months that takes and what the balance is then.",
   "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l06.scoring.json",
   "financialSafety": {

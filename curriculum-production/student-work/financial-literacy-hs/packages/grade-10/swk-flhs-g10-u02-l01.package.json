@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u02-l01",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: reading a contract's cost and obligation terms"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "reading a contract's cost and obligation terms",
+  "objective": "Compute the full obligation a fictional contract creates, then compute what leaving it early actually costs and what that makes each month of use worth.",
+  "scenario": "The simulated membership contract below is invented for this exercise. No real provider, contract, or member is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional contract terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional contract: $39 a month, a minimum term of 18 months, a joining fee of $75 paid at signing, and an early-exit buyout of 50% of the payments remaining in the minimum term.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the full obligation the contract creates if it runs the whole minimum term?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "A member who stops attending after 5 months has paid how much by then?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the early-exit buyout at that point, at 50% of the 13 remaining payments?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find what the five months actually cost.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total cost of joining and leaving after 5 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does that make each month of use cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more per month of use is that than the advertised monthly price?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Name the two terms in this contract that turn \"$39 a month\" into an obligation of $777, and say which single question a person should answer honestly before signing anything with a minimum term."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the exit cost comes out as $253.50 alone, the money already paid is being left out. The question is what the five months cost in total, so both the $270.00 paid and the $253.50 buyout belong in the numerator.",
+  "extension": "Find the month at which leaving early stops costing more per month of use than $39, and say what that tells you about when in a contract the terms bite hardest.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u02-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

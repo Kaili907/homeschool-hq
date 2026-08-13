@@ -7,10 +7,10 @@
     "items": [
       {
         "ref": "t1-p1",
-        "answer": "$4,376.00",
+        "answer": "$3,320.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "10% of the first $11,600 is $1,160, and 12% of the remaining $26,800 is $3,216 — only the income above the threshold is taxed at the higher rate."
+          "reasoning": "Taxable income is $38,400 less the $9,000 standard deduction, or $29,400. 10% of the first $10,400 is $1,040, and 12% of the remaining $19,000 is $2,280. The deduction comes off before any rate is applied, and the payroll tax below does not get it."
         }
       },
       {
@@ -39,18 +39,18 @@
       },
       {
         "ref": "t2-p1",
-        "answer": "$10,169.60",
+        "answer": "$9,113.60",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$4,376.00 federal + $2,937.60 payroll + $2,016.00 state and city + $840.00 sales."
+          "reasoning": "$3,320.00 federal + $2,937.60 payroll + $2,016.00 state and city + $840.00 sales."
         }
       },
       {
         "ref": "t2-p2",
-        "answer": "26.5%",
+        "answer": "23.7%",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$10,169.60 against $38,400 of income is 0.26483, or 26.5%."
+          "reasoning": "$9,113.60 against $38,400 of income is 0.23733, or 23.7%."
         }
       },
       {
@@ -58,17 +58,17 @@
         "answer": "Federal income tax",
         "verification": {
           "method": "derived-from-comparison",
-          "reasoning": "$4,376.00 of federal income tax against $2,937.60 of payroll tax, though at lower incomes the ranking commonly reverses."
+          "reasoning": "$3,320.00 of federal income tax against $2,937.60 of payroll tax — close here, and at lower incomes the ranking commonly reverses, because payroll tax has no deduction to shelter the first dollars."
         }
       }
     ],
     "workedSolution": [
       {
         "ref": "t1-p1",
-        "expression": "bracket * lowRate + (income - bracket) * highRate",
-        "substituted": "11600 * 0.1 + (38400 - 11600) * 0.12",
-        "result": "$4,376.00",
-        "why": "10% of the first $11,600 is $1,160, and 12% of the remaining $26,800 is $3,216 — only the income above the threshold is taxed at the higher rate."
+        "expression": "bracket * lowRate + (income - deduction - bracket) * highRate",
+        "substituted": "10400 * 0.1 + (38400 - 9000 - 10400) * 0.12",
+        "result": "$3,320.00",
+        "why": "Taxable income is $38,400 less the $9,000 standard deduction, or $29,400. 10% of the first $10,400 is $1,040, and 12% of the remaining $19,000 is $2,280. The deduction comes off before any rate is applied, and the payroll tax below does not get it."
       },
       {
         "ref": "t1-p2",
@@ -95,22 +95,22 @@
         "ref": "t2-p1",
         "expression": "#t1-p1 + #t1-p2 + #t1-p3 + #t1-p4",
         "substituted": "#t1-p1 + #t1-p2 + #t1-p3 + #t1-p4",
-        "result": "$10,169.60",
-        "why": "$4,376.00 federal + $2,937.60 payroll + $2,016.00 state and city + $840.00 sales."
+        "result": "$9,113.60",
+        "why": "$3,320.00 federal + $2,937.60 payroll + $2,016.00 state and city + $840.00 sales."
       },
       {
         "ref": "t2-p2",
         "expression": "round(#t2-p1 / income4 * 100, 1)",
         "substituted": "round(#t2-p1 / 38400 * 100, 1)",
-        "result": "26.5%",
-        "why": "$10,169.60 against $38,400 of income is 0.26483, or 26.5%."
+        "result": "23.7%",
+        "why": "$9,113.60 against $38,400 of income is 0.23733, or 23.7%."
       },
       {
         "ref": "t2-p3",
         "expression": "#t1-p1 > #t1-p2",
         "substituted": "#t1-p1 > #t1-p2",
         "result": "Federal income tax",
-        "why": "$4,376.00 of federal income tax against $2,937.60 of payroll tax, though at lower incomes the ranking commonly reverses."
+        "why": "$3,320.00 of federal income tax against $2,937.60 of payroll tax — close here, and at lower incomes the ranking commonly reverses, because payroll tax has no deduction to shelter the first dollars."
       }
     ],
     "criteria": [
@@ -160,16 +160,16 @@
     "judgment": [
       {
         "ref": "t3-p1",
-        "prompt": "Only two of these five taxes appear on a pay stub as a deduction. Name which ones do not, and explain why a worker asking \"how much tax do I pay?\" would understate the answer by reading their stub alone.",
+        "prompt": "Only one of these five taxes does not appear on a pay stub as a deduction. Name it, and explain why a worker asking \"how much tax do I pay?\" would understate the answer by reading their stub alone.",
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
-          "Identifies sales tax as the clearest example of a tax paid outside the stub, at $840.00 here, and notes it is paid a little at a time on purchases.",
+          "Identifies sales tax, at $840.00 here, as the one tax of the five that a pay stub never shows, because it is paid a little at a time on purchases rather than withheld from pay.",
           "Explains that a stub shows amounts withheld from that employer’s pay, not the worker’s whole tax position.",
           "Uses the totals to show the size of the understatement rather than describing it in general terms."
         ],
         "evidenceRequirements": [
-          "Cites the $840.00 sales tax figure and the $10,169.60 total."
+          "Cites the $840.00 sales tax figure and the $9,113.60 total."
         ],
         "lookFors": [
           "The response treats the pay stub as an accurate document that answers a narrower question.",

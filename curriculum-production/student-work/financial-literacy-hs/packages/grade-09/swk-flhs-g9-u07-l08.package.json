@@ -37,7 +37,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "Job A pays $22,000 a year and Job B pays $16,000. Each employer withholds 10% of the pay it issues, because at that pay level alone 10% would be about right. The fictional federal schedule charges 10% on the first $11,600 of total income and 12% above that.",
+      "directions": "Job A pays $22,000 a year and Job B pays $16,000. Each employer withholds as though its own pay were the worker’s only income: it subtracts the whole $9,000 standard deduction from that job’s pay and applies the fictional schedule — 10% on the first $10,400 of taxable income, 12% above that. The schedule is meant to be applied once, to total income.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -82,7 +82,7 @@
           "text": "Why did correct-looking withholding at each job still fall short?",
           "choices": [
             "Each employer used the wrong rate for the pay it issued",
-            "Neither employer knew about the other income, so both applied the low-rate band",
+            "Neither employer knew about the other income, so the deduction and the low-rate band were each used twice",
             "The combined income was taxed at a higher rate on every dollar",
             "The worker earned more than either employer reported"
           ]
@@ -102,13 +102,13 @@
         {
           "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "A worker discovers the $528 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December."
+          "text": "A worker discovers the $1,220 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December."
         }
       ]
     }
   ],
-  "remediation": "If the tax owed comes out as the sum of two separate calculations, one per job, reread the schedule: it applies to total income. Add the two salaries first, then apply the bands once to the combined $38,000.",
-  "extension": "Recompute the shortfall if Job B paid $9,000 instead of $16,000, and say whether the problem gets better or worse as the second job gets smaller.",
+  "remediation": "If the tax owed comes out as the sum of two separate calculations, one per job, reread the schedule: it applies once to total income. Add the two salaries first, subtract one $9,000 deduction, then apply the bands to what remains.",
+  "extension": "Recompute the shortfall if Job B paid $11,000 instead of $16,000, and say whether the problem gets better or worse as the second job gets smaller.",
   "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,

@@ -7,88 +7,88 @@
     "items": [
       {
         "ref": "t1-p1",
-        "answer": "$2,200.00",
+        "answer": "$1,352.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "10% of $22,000, computed as though Job A were the worker’s only income."
+          "reasoning": "Job A treats $22,000 as the whole income: the $9,000 deduction leaves $13,000 taxable, taxed as $1,040 on the first $10,400 plus 12% of the remaining $2,600."
         }
       },
       {
         "ref": "t1-p2",
-        "answer": "$3,800.00",
+        "answer": "$2,052.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$2,200.00 from Job A plus $1,600.00 from Job B."
+          "reasoning": "Job B also subtracts the full $9,000, leaving $7,000 taxable, all inside the 10% band at $700. Added to Job A’s $1,352.00 that is $2,052.00 withheld in total."
         }
       },
       {
         "ref": "t1-p3",
-        "answer": "$4,328.00",
+        "answer": "$3,272.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,160 on the first $11,600 plus 12% of the remaining $26,400, because the schedule applies to total income and not to each job separately."
+          "reasoning": "Taxable income is $29,000 after one $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $18,600. The deduction and the low band are each meant to be used once."
         }
       },
       {
         "ref": "t2-p1",
-        "answer": "$528.00",
+        "answer": "$1,220.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$4,328.00 owed against $3,800.00 withheld."
+          "reasoning": "$3,272.00 owed against $2,052.00 withheld."
         }
       },
       {
         "ref": "t2-p2",
-        "answer": "$44.00",
+        "answer": "$101.67",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$528.00 spread over twelve months."
+          "reasoning": "$1,220.00 spread over twelve months."
         }
       },
       {
         "ref": "t2-p3",
-        "answer": "Neither employer knew about the other income, so both applied the low-rate band",
+        "answer": "Neither employer knew about the other income, so the deduction and the low-rate band were each used twice",
         "verification": {
           "method": "asserted-fixed-value",
-          "reasoning": "The 10% band applies once to the first $11,600 of total income, but each employer effectively treated its own pay as starting from zero, so the low band was applied twice."
+          "reasoning": "The $9,000 deduction and the 10% band each apply once to total income, but each employer treated its own pay as starting from zero, so $18,000 of deduction and two low bands were applied instead of one of each."
         }
       }
     ],
     "workedSolution": [
       {
         "ref": "t1-p1",
-        "expression": "payA * rate",
-        "substituted": "22000 * 0.1",
-        "result": "$2,200.00",
-        "why": "10% of $22,000, computed as though Job A were the worker’s only income."
+        "expression": "bracket * lowRate + (payA - deduction - bracket) * highRate",
+        "substituted": "10400 * 0.1 + (22000 - 9000 - 10400) * 0.12",
+        "result": "$1,352.00",
+        "why": "Job A treats $22,000 as the whole income: the $9,000 deduction leaves $13,000 taxable, taxed as $1,040 on the first $10,400 plus 12% of the remaining $2,600."
       },
       {
         "ref": "t1-p2",
-        "expression": "#t1-p1 + payB * rate2",
-        "substituted": "#t1-p1 + 16000 * 0.1",
-        "result": "$3,800.00",
-        "why": "$2,200.00 from Job A plus $1,600.00 from Job B."
+        "expression": "#t1-p1 + (payB - deduction2) * lowRate2",
+        "substituted": "#t1-p1 + (16000 - 9000) * 0.1",
+        "result": "$2,052.00",
+        "why": "Job B also subtracts the full $9,000, leaving $7,000 taxable, all inside the 10% band at $700. Added to Job A’s $1,352.00 that is $2,052.00 withheld in total."
       },
       {
         "ref": "t1-p3",
-        "expression": "bracket * lowRate + (combined - bracket) * highRate",
-        "substituted": "11600 * 0.1 + (38000 - 11600) * 0.12",
-        "result": "$4,328.00",
-        "why": "$1,160 on the first $11,600 plus 12% of the remaining $26,400, because the schedule applies to total income and not to each job separately."
+        "expression": "bracket3 * lowRate3 + (combined - deduction3 - bracket3) * highRate3",
+        "substituted": "10400 * 0.1 + (38000 - 9000 - 10400) * 0.12",
+        "result": "$3,272.00",
+        "why": "Taxable income is $29,000 after one $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $18,600. The deduction and the low band are each meant to be used once."
       },
       {
         "ref": "t2-p1",
         "expression": "#t1-p3 - #t1-p2",
         "substituted": "#t1-p3 - #t1-p2",
-        "result": "$528.00",
-        "why": "$4,328.00 owed against $3,800.00 withheld."
+        "result": "$1,220.00",
+        "why": "$3,272.00 owed against $2,052.00 withheld."
       },
       {
         "ref": "t2-p2",
         "expression": "round(#t2-p1 / 12, 2)",
         "substituted": "round(#t2-p1 / 12, 2)",
-        "result": "$44.00",
-        "why": "$528.00 spread over twelve months."
+        "result": "$101.67",
+        "why": "$1,220.00 spread over twelve months."
       }
     ],
     "criteria": [
@@ -163,11 +163,11 @@
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
-          "Explains that the method assumes the employer sees all of the worker’s income, which is true with one job and false with two.",
-          "Names the step: telling one employer to withhold extra, or making a separate payment, so the total matches the $4,328.00 owed."
+          "Explains that the method assumes the employer sees all of the worker’s income, which is true with one job and false with two, so the $9,000 deduction and the 10% band are each applied twice.",
+          "Names the step: telling one employer to withhold extra, or making a separate payment, so the total matches the $3,272.00 owed."
         ],
         "evidenceRequirements": [
-          "Uses the $3,800.00 withheld and the $4,328.00 owed."
+          "Uses the $2,052.00 withheld and the $3,272.00 owed."
         ],
         "lookFors": [
           "The response does not blame either employer, both of which applied the rule correctly to what they could see."
@@ -180,7 +180,7 @@
       },
       {
         "ref": "t3-p2",
-        "prompt": "A worker discovers the $528 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December.",
+        "prompt": "A worker discovers the $1,220 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December.",
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
@@ -188,7 +188,7 @@
           "Explains that acting early spreads the same total over more paychecks, so each one is affected less than a December correction would be."
         ],
         "evidenceRequirements": [
-          "Refers to the $528.00 shortfall or the $44.00 monthly figure."
+          "Refers to the $1,220.00 shortfall or the $101.67 monthly figure."
         ],
         "lookFors": [
           "The response recognises the correction must be larger per month if started later."

@@ -34,7 +34,7 @@
         "answer": "$15.30",
         "verification": {
           "method": "recomputed",
-          "reasoning": "3.4% of $450 is exactly $15.30."
+          "reasoning": "3.4% of $450 is exactly $15.30. This is interest on a full year at the closing balance; because the deposits arrive across the year, the first year’s actual credit would be roughly half of it."
         }
       },
       {
@@ -81,11 +81,11 @@
         "expression": "round(#t1-p3 * savingsRate, 2)",
         "substituted": "round(#t1-p3 * 0.034, 2)",
         "result": "$15.30",
-        "why": "3.4% of $450 is exactly $15.30."
+        "why": "3.4% of $450 is exactly $15.30. This is interest on a full year at the closing balance; because the deposits arrive across the year, the first year’s actual credit would be roughly half of it."
       },
       {
         "ref": "t2-p2",
-        "expression": "round(#t1-p3 * chequingRate, 2)",
+        "expression": "round(#t1-p3 * checkingRate, 2)",
         "substituted": "round(#t1-p3 * 0.0005, 2)",
         "result": "$0.23",
         "why": "0.05% of $450 is $0.225, which rounds to $0.23."
@@ -187,13 +187,13 @@
     "judgment": [
       {
         "ref": "t3-p1",
-        "prompt": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% chequing interest — by how much each one should influence where the saver puts the money, and explain the ranking.",
+        "prompt": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking.",
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
-          "Ranks the match first at $150, the savings interest second at $15.30, and the chequing rate last at $0.23.",
+          "Ranks the match first at $150, the savings interest second at $15.30, and the checking rate last at $0.23.",
           "Explains that the match is a return of 50% on money deposited in the first year, which no ordinary interest rate approaches.",
-          "Notes that the interest gap between the two accounts, about $15, is real but small next to the match, so the match is what should decide the choice."
+          "Notes that the interest gap between the two accounts, about $15 on a full year at the closing balance and less than that in year one, is real but small next to the match."
         ],
         "evidenceRequirements": [
           "Uses all three computed figures — $150.00, $15.30, and $0.23 — in the ranking."

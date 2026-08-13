@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u02-l07",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: reading a contract's cost and obligation terms"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "reading a contract's cost and obligation terms",
+  "objective": "Find the error in a fictional belief that cancelling a service ends the obligation immediately, compute what is actually owed under the notice term, and state what would have avoided it.",
+  "scenario": "A fictional customer wrote: \"I cancelled on the 12th, so I do not owe anything more.\" The simulated contract terms below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional contract terms in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The fictional contract: $86 a month, billed on the 1st, requiring 30 days written notice to cancel. The customer telephoned on the 12th and sent nothing in writing. A late fee of $45 applies to an unpaid balance after 30 days.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-choice",
+          "text": "Under the contract as written, did the telephone call on the 12th start the notice period?",
+          "choices": [
+            "Yes, cancellation is effective from the call",
+            "No, the contract requires written notice"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Work out the consequence. Assume written notice is eventually sent, and one further monthly charge falls due before the notice period ends.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the further monthly charge the customer owes?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If that charge goes unpaid past 30 days, what is the total owed with the late fee?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The customer expected to owe nothing. By how much was that wrong?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Separate the two parts of the error.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $131.00 was avoidable simply by paying the charge on time, even after the notice mistake?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "The customer made one mistake about the contract and a second mistake in response to it. Name both, and describe the two-step habit that would have prevented the whole $131."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the whole $131 looks avoidable, split it in two. The $86 was owed the moment the notice period ran into another billing cycle; only the $45 depended on what the customer did after the misunderstanding.",
+  "extension": "Rewrite the notice clause in one sentence a customer could not misread, and say what it would have to specify about form, timing, and proof.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u02-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

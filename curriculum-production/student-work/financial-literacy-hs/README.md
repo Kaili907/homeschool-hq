@@ -68,7 +68,12 @@ scoring record rather than left implicit:
 - the parameter-visibility rule above;
 - human review. One high-school personal-finance accuracy reviewer read the
   grade-9 corpus for model correctness, concept accuracy, labelling of
-  simplifications, and the safety boundary.
+  simplifications, and the safety boundary. It found twelve critical defects the
+  oracle could not have caught — including a rubric with no correct answer, a key
+  that contradicted its own sheet's chronology, and a taxes unit that applied
+  brackets to gross income with no standard deduction anywhere in it. All twelve
+  are fixed; the findings, the fixes, and the minor items left open are recorded
+  in [`REVIEW.md`](REVIEW.md). Grades 10-12 carry no review.
 
 ## Judgment work carries no invented key
 

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u02-l08",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: subscriptions, renewals, and cancellation terms"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "subscriptions, renewals, and cancellation terms",
+  "objective": "Apply the subscription-comparison method to a fictional promotional rate that steps up, compute the true average monthly price, and test the advertised figure against it.",
+  "scenario": "A fictional provider advertises a simulated bundle \"from $24.99 a month\". The full price schedule below is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional price schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional schedule: $24.99 a month for the first 6 months, then $79.99 a month for months 7 through 24 — that is 18 months — on a 24-month agreement.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the first 6 months cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do months 7 through 24 cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the whole 24-month agreement cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the advertised figure.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the true average monthly price across the 24 months? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much higher is the true average than the advertised \"from\" price?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Is the advertised claim \"from $24.99 a month\" false as stated?",
+          "choices": [
+            "Yes, no month costs $24.99",
+            "No, six months genuinely cost $24.99, so \"from\" is literally accurate",
+            "The schedule does not say"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "The earlier lesson on subscriptions compared two prices for the same service. This one compares one price that changes over time. Say what stayed the same in the method and what had to be added."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Write the one figure you would want an advertisement for this bundle to display, and say why that figure rather than any other."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the average comes out near $52 — halfway between the two rates — the months are being averaged instead of the payments. Only 6 months are at the low rate and 18 at the high one, so the average must sit much closer to $79.99.",
+  "extension": "Find the promotional length that would make the true average exactly $60 a month, holding both rates fixed, and say whether a provider would offer it.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u02-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

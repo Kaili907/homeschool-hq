@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u02-l06",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: documenting and escalating a consumer complaint"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "documenting and escalating a consumer complaint",
+  "objective": "Track a fictional complaint through its stages, compute what escalating recovered, and price the effort against the recovery.",
+  "scenario": "A fictional consumer disputes a simulated charge of $268.40. The timeline and offers below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional complaint timeline in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional timeline: the disputed charge is $268.40. On day 3 the consumer telephones and gets no resolution. By day 17 there has been no response. On day 18 they send a written complaint keeping a copy. On day 26 the seller offers $120 as a partial settlement. The consumer escalates to a complaints body, and on day 41 the full $268.40 is refunded. Total time spent across all stages is 4.5 hours.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more did escalating recover than accepting the partial offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What did that additional recovery work out to per hour of the consumer’s time? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many days passed between the first contact and the resolution?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Compare the whole recovery with the effort.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Taking the whole $268.40 as what the complaint recovered, what was that per hour? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which single step in the timeline most likely made the escalation possible?",
+          "choices": [
+            "The telephone call on day 3",
+            "The written complaint on day 18, of which a copy was kept",
+            "The partial offer on day 26",
+            "Waiting until day 41"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The partial offer on day 26 was $120 against a $268.40 claim. Explain what a partial offer at that stage is testing, and set out the rule you would use to decide whether to accept one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the per-hour figure is being computed from the $120 offer, reread the question: it asks what escalating recovered beyond the offer, which is the $148.40 difference, not the offer itself.",
+  "extension": "Recompute both per-hour figures if the dispute had taken 14 hours instead of 4.5, and say at what point the effort stops being worth the amount at stake.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u02-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

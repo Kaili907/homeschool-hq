@@ -14,19 +14,19 @@ export const g09u07: readonly LessonSpec[] = [
     grade: 9, unit: 7, day: 1,
     actor: 'a fictional worker counting every tax they pay in a simulated year',
     objective: 'Compute five different taxes a fictional worker pays in one simulated year and express the total as a share of income.',
-    scenario: 'A fictional worker earns $38,400 in a simulated year. Every tax rate below belongs to this invented example and is not a real published rate.',
+    scenario: 'A fictional worker earns $38,400 in a simulated year. The schedule below is a deliberately simplified invented one: its deduction, thresholds, and rates are not real published figures, and a real return has more steps than this.',
     materials: ['calculator', 'the fictional tax schedule in these directions'],
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'The fictional federal schedule charges 10% on the first $11,600 of income and 12% on everything above that. Payroll tax is 7.65% of all income. State income tax is 4.25% and city income tax is 1%. The worker also pays 6% sales tax on $14,000 of taxable purchases.',
+        directions: 'Under the fictional federal schedule, taxable income is gross income less a standard deduction of $9,000. The schedule then charges 10% on the first $10,400 of taxable income and 12% on everything above that. Payroll tax is 7.65% of all gross income, with no deduction. State income tax is 4.25% and city income tax is 1%, both on gross. The worker also pays 6% sales tax on $14,000 of taxable purchases.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
             text: 'What is the federal income tax under this fictional schedule?',
-            given: { income: 38400, bracket: 11600, lowRate: 0.1, highRate: 0.12 },
-            expr: 'bracket * lowRate + (income - bracket) * highRate', format: 'usd', answer: '$4,376.00',
-            reasoning: '10% of the first $11,600 is $1,160, and 12% of the remaining $26,800 is $3,216 — only the income above the threshold is taxed at the higher rate.',
+            given: { income: 38400, deduction: 9000, bracket: 10400, lowRate: 0.1, highRate: 0.12 },
+            expr: 'bracket * lowRate + (income - deduction - bracket) * highRate', format: 'usd', answer: '$3,320.00',
+            reasoning: 'Taxable income is $38,400 less the $9,000 standard deduction, or $29,400. 10% of the first $10,400 is $1,040, and 12% of the remaining $19,000 is $2,280. The deduction comes off before any rate is applied, and the payroll tax below does not get it.',
           },
           {
             ref: 't1-p2', kind: 'numeric', unit: 'USD',
@@ -55,14 +55,14 @@ export const g09u07: readonly LessonSpec[] = [
           {
             ref: 't2-p1', kind: 'numeric', unit: 'USD',
             text: 'What is the total of all five taxes?',
-            given: {}, expr: '#t1-p1 + #t1-p2 + #t1-p3 + #t1-p4', format: 'usd', answer: '$10,169.60',
-            reasoning: '$4,376.00 federal + $2,937.60 payroll + $2,016.00 state and city + $840.00 sales.',
+            given: {}, expr: '#t1-p1 + #t1-p2 + #t1-p3 + #t1-p4', format: 'usd', answer: '$9,113.60',
+            reasoning: '$3,320.00 federal + $2,937.60 payroll + $2,016.00 state and city + $840.00 sales.',
           },
           {
             ref: 't2-p2', kind: 'numeric', unit: 'percent',
             text: 'What percentage of income does the total represent? Round to one decimal place.',
-            given: { income4: 38400 }, expr: 'round(#t2-p1 / income4 * 100, 1)', format: 'percent1', answer: '26.5%',
-            reasoning: '$10,169.60 against $38,400 of income is 0.26483, or 26.5%.',
+            given: { income4: 38400 }, expr: 'round(#t2-p1 / income4 * 100, 1)', format: 'percent1', answer: '23.7%',
+            reasoning: '$9,113.60 against $38,400 of income is 0.23733, or 23.7%.',
           },
           {
             ref: 't2-p3', kind: 'choice',
@@ -71,7 +71,7 @@ export const g09u07: readonly LessonSpec[] = [
             given: {},
             decision: { left: '#t1-p1', cmp: '>', right: '#t1-p2', ifTrue: 'Federal income tax', ifFalse: 'Payroll tax' },
             answer: 'Federal income tax',
-            reasoning: '$4,376.00 of federal income tax against $2,937.60 of payroll tax, though at lower incomes the ranking commonly reverses.',
+            reasoning: '$3,320.00 of federal income tax against $2,937.60 of payroll tax — close here, and at lower incomes the ranking commonly reverses, because payroll tax has no deduction to shelter the first dollars.',
           },
         ],
       },
@@ -81,14 +81,14 @@ export const g09u07: readonly LessonSpec[] = [
         items: [
           {
             ref: 't3-p1', kind: 'judgment', length: 'extended',
-            text: 'Only two of these five taxes appear on a pay stub as a deduction. Name which ones do not, and explain why a worker asking "how much tax do I pay?" would understate the answer by reading their stub alone.',
+            text: 'Only one of these five taxes does not appear on a pay stub as a deduction. Name it, and explain why a worker asking "how much tax do I pay?" would understate the answer by reading their stub alone.',
             acceptableAnswerCriteria: [
-              'Identifies sales tax as the clearest example of a tax paid outside the stub, at $840.00 here, and notes it is paid a little at a time on purchases.',
+              'Identifies sales tax, at $840.00 here, as the one tax of the five that a pay stub never shows, because it is paid a little at a time on purchases rather than withheld from pay.',
               'Explains that a stub shows amounts withheld from that employer’s pay, not the worker’s whole tax position.',
               'Uses the totals to show the size of the understatement rather than describing it in general terms.',
             ],
             evidenceRequirements: [
-              'Cites the $840.00 sales tax figure and the $10,169.60 total.',
+              'Cites the $840.00 sales tax figure and the $9,113.60 total.',
             ],
             dimensions: ['reasoning-from-figures', 'criteria-application'],
             lookFors: [
@@ -100,7 +100,7 @@ export const g09u07: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the federal tax comes out near $4,608, the 12% rate is being applied to the whole $38,400. Under this fictional schedule the first $11,600 is taxed at 10% no matter how much is earned above it; compute the two pieces separately before adding.',
+    remediation: 'If the federal tax comes out near $4,608, the 12% rate is being applied to the whole $38,400 with no deduction. Two things happen before that under this fictional schedule: $9,000 comes off as the standard deduction, and the first $10,400 of what remains is taxed at 10% however much is earned above it. Compute taxable income first, then the two bracket pieces.',
     extension: 'Recompute all five taxes for a fictional worker earning $19,000 with $8,000 of taxable purchases, and say which tax becomes the largest.',
   },
 
@@ -257,7 +257,7 @@ export const g09u07: readonly LessonSpec[] = [
         items: [
           {
             ref: 't3-p1', kind: 'judgment', length: 'extended',
-            text: 'A filer with only W-2 income and a filer with 1099-NEC income face the same tax rules but very different experiences at filing time. Explain why, and describe what the second filer should do during the year that the first need not.',
+            text: 'A filer with only W-2 income and a filer with 1099-NEC income face different rules and very different experiences at filing time. Explain both differences, and describe what the second filer should do during the year that the first need not.',
             acceptableAnswerCriteria: [
               'Explains that W-2 income arrives with tax already paid in — $7,045.63 here — while the $2,800 of 1099-NEC income arrives with nothing withheld.',
               'States that the second filer owes at least the $428.40 of self-employment tax plus income tax on the same amount, all due at filing unless paid in advance.',
@@ -269,7 +269,7 @@ export const g09u07: readonly LessonSpec[] = [
             dimensions: ['criteria-application', 'plan-coherence', 'reasoning-from-figures'],
             lookFors: [
               'The response does not suggest the 1099-NEC income escapes tax.',
-              'The response identifies the absence of withholding as the difference, not a difference in the rules.',
+              'The response identifies two distinct differences: nothing is withheld, and the self-employed filer owes both halves of the payroll tax at 15.3% rather than the employee’s 7.65%.',
             ],
             commonMisconception: 'Assuming income arrives with tax already handled because that is how a first job worked.',
           },
@@ -455,14 +455,14 @@ export const g09u07: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'Gross income is $44,000. The fictional federal schedule charges 10% on the first $11,600 and 12% above it. Payroll tax is 7.65%, state income tax 4.25%, and city income tax 1%.',
+        directions: 'Gross income is $44,000. Under the fictional federal schedule, taxable income is gross less a $9,000 standard deduction, then 10% on the first $10,400 of taxable income and 12% above it. Payroll tax is 7.65%, state income tax 4.25%, and city income tax 1%, all charged on gross with no deduction.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
             text: 'What is the federal income tax?',
-            given: { income: 44000, bracket: 11600, lowRate: 0.1, highRate: 0.12 },
-            expr: 'bracket * lowRate + (income - bracket) * highRate', format: 'usd', answer: '$5,048.00',
-            reasoning: '$1,160 on the first $11,600 plus 12% of the remaining $32,400.',
+            given: { income: 44000, deduction: 9000, bracket: 10400, lowRate: 0.1, highRate: 0.12 },
+            expr: 'bracket * lowRate + (income - deduction - bracket) * highRate', format: 'usd', answer: '$3,992.00',
+            reasoning: 'Taxable income is $35,000 after the $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $24,600.',
           },
           {
             ref: 't1-p2', kind: 'numeric', unit: 'USD',
@@ -474,8 +474,8 @@ export const g09u07: readonly LessonSpec[] = [
           {
             ref: 't1-p3', kind: 'numeric', unit: 'USD',
             text: 'What is take-home income for the year?',
-            given: { income3: 44000 }, expr: 'income3 - #t1-p1 - #t1-p2', format: 'usd', answer: '$33,276.00',
-            reasoning: '$44,000 less $10,724.00 of total tax.',
+            given: { income3: 44000 }, expr: 'income3 - #t1-p1 - #t1-p2', format: 'usd', answer: '$34,332.00',
+            reasoning: '$44,000 less $9,668.00 of total tax.',
           },
         ],
       },
@@ -493,14 +493,14 @@ export const g09u07: readonly LessonSpec[] = [
           {
             ref: 't2-p2', kind: 'numeric', unit: 'USD',
             text: 'How much of take-home pay is unallocated?',
-            given: {}, expr: '#t1-p3 - #t2-p1', format: 'usd', answer: '$1,176.00',
-            reasoning: '$33,276.00 of take-home against $32,100.00 allocated.',
+            given: {}, expr: '#t1-p3 - #t2-p1', format: 'usd', answer: '$2,232.00',
+            reasoning: '$34,332.00 of take-home against $32,100.00 allocated.',
           },
           {
             ref: 't2-p3', kind: 'numeric', unit: 'percent',
             text: 'What percentage of gross income goes to tax? Round to one decimal place.',
-            given: { income4: 44000 }, expr: 'round((#t1-p1 + #t1-p2) / income4 * 100, 1)', format: 'percent1', answer: '24.4%',
-            reasoning: '$10,724.00 of tax on $44,000 of gross income.',
+            given: { income4: 44000 }, expr: 'round((#t1-p1 + #t1-p2) / income4 * 100, 1)', format: 'percent1', answer: '22.0%',
+            reasoning: '$9,668.00 of tax on $44,000 of gross income.',
           },
         ],
       },
@@ -510,14 +510,14 @@ export const g09u07: readonly LessonSpec[] = [
         items: [
           {
             ref: 't3-p1', kind: 'judgment', length: 'extended',
-            text: 'Present the plan and show how each of the seven topics from this course appears in it. Say what the $1,176 unallocated should do, and name the one line you would cut first if income fell 10%.',
+            text: 'Present the plan and show how each of the seven topics from this course appears in it. Say what the $2,232 unallocated should do, and name the one line you would cut first if income fell 10%.',
             acceptableAnswerCriteria: [
               'Maps each line to a topic — income and taxes to the top of the plan, essentials to spending, the reserve to saving and protection, the debt line to credit, and the investing line to long-horizon growth.',
-              'Gives the $1,176 a specific job rather than leaving it as slack, and says why that job was chosen.',
-              'Names a cut line and defends the choice against the alternative, recognising that a 10% income fall is about $3,328 of take-home and cannot come from the unallocated amount alone.',
+              'Gives the $2,232 a specific job rather than leaving it as slack, and says why that job was chosen.',
+              'Names a cut line and defends the choice against the alternative, recognising that a 10% income fall is about $3,433 of take-home and cannot come from the unallocated amount alone.',
             ],
             evidenceRequirements: [
-              'Uses the $33,276.00 take-home figure, the $32,100.00 allocated total, and at least two individual allocation lines.',
+              'Uses the $34,332.00 take-home figure, the $32,100.00 allocated total, and at least two individual allocation lines.',
             ],
             dimensions: ['plan-coherence', 'criteria-application', 'tradeoff-defense'],
             lookFors: [
@@ -529,7 +529,7 @@ export const g09u07: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If take-home comes out near $38,000, only the federal tax has been subtracted. Total the four taxes first — $5,048.00, $3,366.00, $1,870.00, and $440.00 — and take the whole $10,724.00 off gross before any allocation.',
+    remediation: 'If take-home comes out near $40,000, only the federal tax has been subtracted. Total the four taxes first — $3,992.00, $3,366.00, $1,870.00, and $440.00 — and take the whole $9,668.00 off gross before any allocation. Note that only the federal line gets the $9,000 deduction.',
     extension: 'Rebuild the plan on $39,600 of gross income, keeping the reserve and insurance lines intact, and state which two lines absorbed the fall.',
   },
 
@@ -643,26 +643,27 @@ export const g09u07: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'Job A pays $22,000 a year and Job B pays $16,000. Each employer withholds 10% of the pay it issues, because at that pay level alone 10% would be about right. The fictional federal schedule charges 10% on the first $11,600 of total income and 12% above that.',
+        directions: 'Job A pays $22,000 a year and Job B pays $16,000. Each employer withholds as though its own pay were the worker’s only income: it subtracts the whole $9,000 standard deduction from that job’s pay and applies the fictional schedule — 10% on the first $10,400 of taxable income, 12% above that. The schedule is meant to be applied once, to total income.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
             text: 'How much does Job A withhold over the year?',
-            given: { payA: 22000, rate: 0.1 }, expr: 'payA * rate', format: 'usd', answer: '$2,200.00',
-            reasoning: '10% of $22,000, computed as though Job A were the worker’s only income.',
+            given: { payA: 22000, deduction: 9000, bracket: 10400, lowRate: 0.1, highRate: 0.12 },
+            expr: 'bracket * lowRate + (payA - deduction - bracket) * highRate', format: 'usd', answer: '$1,352.00',
+            reasoning: 'Job A treats $22,000 as the whole income: the $9,000 deduction leaves $13,000 taxable, taxed as $1,040 on the first $10,400 plus 12% of the remaining $2,600.',
           },
           {
             ref: 't1-p2', kind: 'numeric', unit: 'USD',
             text: 'How much is withheld across both jobs?',
-            given: { payB: 16000, rate2: 0.1 }, expr: '#t1-p1 + payB * rate2', format: 'usd', answer: '$3,800.00',
-            reasoning: '$2,200.00 from Job A plus $1,600.00 from Job B.',
+            given: { payB: 16000, deduction2: 9000, lowRate2: 0.1 }, expr: '#t1-p1 + (payB - deduction2) * lowRate2', format: 'usd', answer: '$2,052.00',
+            reasoning: 'Job B also subtracts the full $9,000, leaving $7,000 taxable, all inside the 10% band at $700. Added to Job A’s $1,352.00 that is $2,052.00 withheld in total.',
           },
           {
             ref: 't1-p3', kind: 'numeric', unit: 'USD',
             text: 'What is the tax actually owed on the combined income of $38,000?',
-            given: { combined: 38000, bracket: 11600, lowRate: 0.1, highRate: 0.12 },
-            expr: 'bracket * lowRate + (combined - bracket) * highRate', format: 'usd', answer: '$4,328.00',
-            reasoning: '$1,160 on the first $11,600 plus 12% of the remaining $26,400, because the schedule applies to total income and not to each job separately.',
+            given: { combined: 38000, deduction3: 9000, bracket3: 10400, lowRate3: 0.1, highRate3: 0.12 },
+            expr: 'bracket3 * lowRate3 + (combined - deduction3 - bracket3) * highRate3', format: 'usd', answer: '$3,272.00',
+            reasoning: 'Taxable income is $29,000 after one $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $18,600. The deduction and the low band are each meant to be used once.',
           },
         ],
       },
@@ -673,26 +674,26 @@ export const g09u07: readonly LessonSpec[] = [
           {
             ref: 't2-p1', kind: 'numeric', unit: 'USD',
             text: 'What is the shortfall at filing?',
-            given: {}, expr: '#t1-p3 - #t1-p2', format: 'usd', answer: '$528.00',
-            reasoning: '$4,328.00 owed against $3,800.00 withheld.',
+            given: {}, expr: '#t1-p3 - #t1-p2', format: 'usd', answer: '$1,220.00',
+            reasoning: '$3,272.00 owed against $2,052.00 withheld.',
           },
           {
             ref: 't2-p2', kind: 'numeric', unit: 'USD',
             text: 'How much extra would need to be withheld each month across the year to close the gap? Round to the nearest cent.',
-            given: {}, expr: 'round(#t2-p1 / 12, 2)', format: 'usd', answer: '$44.00',
-            reasoning: '$528.00 spread over twelve months.',
+            given: {}, expr: 'round(#t2-p1 / 12, 2)', format: 'usd', answer: '$101.67',
+            reasoning: '$1,220.00 spread over twelve months.',
           },
           {
             ref: 't2-p3', kind: 'choice',
             text: 'Why did correct-looking withholding at each job still fall short?',
             choices: [
               'Each employer used the wrong rate for the pay it issued',
-              'Neither employer knew about the other income, so both applied the low-rate band',
+              'Neither employer knew about the other income, so the deduction and the low-rate band were each used twice',
               'The combined income was taxed at a higher rate on every dollar',
               'The worker earned more than either employer reported',
             ],
-            answer: 'Neither employer knew about the other income, so both applied the low-rate band',
-            reasoning: 'The 10% band applies once to the first $11,600 of total income, but each employer effectively treated its own pay as starting from zero, so the low band was applied twice.',
+            answer: 'Neither employer knew about the other income, so the deduction and the low-rate band were each used twice',
+            reasoning: 'The $9,000 deduction and the 10% band each apply once to total income, but each employer treated its own pay as starting from zero, so $18,000 of deduction and two low bands were applied instead of one of each.',
           },
         ],
       },
@@ -704,11 +705,11 @@ export const g09u07: readonly LessonSpec[] = [
             ref: 't3-p1', kind: 'judgment', length: 'short',
             text: 'This is the same withholding method used on a single job, applied to a case it was not designed for. Explain what changed, and name the step a two-job worker has to take that a one-job worker does not.',
             acceptableAnswerCriteria: [
-              'Explains that the method assumes the employer sees all of the worker’s income, which is true with one job and false with two.',
-              'Names the step: telling one employer to withhold extra, or making a separate payment, so the total matches the $4,328.00 owed.',
+              'Explains that the method assumes the employer sees all of the worker’s income, which is true with one job and false with two, so the $9,000 deduction and the 10% band are each applied twice.',
+              'Names the step: telling one employer to withhold extra, or making a separate payment, so the total matches the $3,272.00 owed.',
             ],
             evidenceRequirements: [
-              'Uses the $3,800.00 withheld and the $4,328.00 owed.',
+              'Uses the $2,052.00 withheld and the $3,272.00 owed.',
             ],
             dimensions: ['transfer', 'reasoning-from-figures'],
             lookFors: [
@@ -718,13 +719,13 @@ export const g09u07: readonly LessonSpec[] = [
           },
           {
             ref: 't3-p2', kind: 'judgment', length: 'short',
-            text: 'A worker discovers the $528 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December.',
+            text: 'A worker discovers the $1,220 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December.',
             acceptableAnswerCriteria: [
               'Recommends raising withholding at one job now, and notes the amount needed spreads across the remaining months rather than the whole year.',
               'Explains that acting early spreads the same total over more paychecks, so each one is affected less than a December correction would be.',
             ],
             evidenceRequirements: [
-              'Refers to the $528.00 shortfall or the $44.00 monthly figure.',
+              'Refers to the $1,220.00 shortfall or the $101.67 monthly figure.',
             ],
             dimensions: ['plan-coherence', 'transfer'],
             lookFors: [
@@ -734,8 +735,8 @@ export const g09u07: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the tax owed comes out as the sum of two separate calculations, one per job, reread the schedule: it applies to total income. Add the two salaries first, then apply the bands once to the combined $38,000.',
-    extension: 'Recompute the shortfall if Job B paid $9,000 instead of $16,000, and say whether the problem gets better or worse as the second job gets smaller.',
+    remediation: 'If the tax owed comes out as the sum of two separate calculations, one per job, reread the schedule: it applies once to total income. Add the two salaries first, subtract one $9,000 deduction, then apply the bands to what remains.',
+    extension: 'Recompute the shortfall if Job B paid $11,000 instead of $16,000, and say whether the problem gets better or worse as the second job gets smaller.',
   },
 
   {
@@ -765,7 +766,7 @@ export const g09u07: readonly LessonSpec[] = [
           },
           {
             ref: 't1-p3', kind: 'numeric', unit: 'USD',
-            text: 'If the $340 of student loan interest is fully deductible, what income figure does the return start from?',
+            text: 'If the $340 of student loan interest is fully deductible, what adjusted income figure does the return arrive at?',
             given: { studentInterest: 340 }, expr: '#t1-p1 - studentInterest', format: 'usd', answer: '$43,796.00',
             reasoning: '$44,136.00 of income less the $340 deduction the 1098-E supports.',
           },

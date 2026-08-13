@@ -66,7 +66,7 @@
     {
       "taskId": "t2",
       "kind": "independent",
-      "directions": "The agency insures deposits. It does not insure investments.",
+      "directions": "The agency insures deposits. It does not insure investments. A separate agency in this simulated system registers investment firms, requires them to disclose material facts, and protects customer assets if a brokerage itself fails — but nothing protects an investment against losing value in the market.",
       "prompts": [
         {
           "ref": "t2-p1",

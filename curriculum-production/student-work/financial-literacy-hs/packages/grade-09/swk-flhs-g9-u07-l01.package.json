@@ -18,7 +18,7 @@
   ],
   "focus": "federal, state, and local taxes a person is likely to pay",
   "objective": "Compute five different taxes a fictional worker pays in one simulated year and express the total as a share of income.",
-  "scenario": "A fictional worker earns $38,400 in a simulated year. Every tax rate below belongs to this invented example and is not a real published rate.",
+  "scenario": "A fictional worker earns $38,400 in a simulated year. The schedule below is a deliberately simplified invented one: its deduction, thresholds, and rates are not real published figures, and a real return has more steps than this.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
   "realWorldAction": false,
@@ -37,7 +37,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "The fictional federal schedule charges 10% on the first $11,600 of income and 12% on everything above that. Payroll tax is 7.65% of all income. State income tax is 4.25% and city income tax is 1%. The worker also pays 6% sales tax on $14,000 of taxable purchases.",
+      "directions": "Under the fictional federal schedule, taxable income is gross income less a standard deduction of $9,000. The schedule then charges 10% on the first $10,400 of taxable income and 12% on everything above that. Payroll tax is 7.65% of all gross income, with no deduction. State income tax is 4.25% and city income tax is 1%, both on gross. The worker also pays 6% sales tax on $14,000 of taxable purchases.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -103,12 +103,12 @@
         {
           "ref": "t3-p1",
           "promptType": "extended-response",
-          "text": "Only two of these five taxes appear on a pay stub as a deduction. Name which ones do not, and explain why a worker asking \"how much tax do I pay?\" would understate the answer by reading their stub alone."
+          "text": "Only one of these five taxes does not appear on a pay stub as a deduction. Name it, and explain why a worker asking \"how much tax do I pay?\" would understate the answer by reading their stub alone."
         }
       ]
     }
   ],
-  "remediation": "If the federal tax comes out near $4,608, the 12% rate is being applied to the whole $38,400. Under this fictional schedule the first $11,600 is taxed at 10% no matter how much is earned above it; compute the two pieces separately before adding.",
+  "remediation": "If the federal tax comes out near $4,608, the 12% rate is being applied to the whole $38,400 with no deduction. Two things happen before that under this fictional schedule: $9,000 comes off as the standard deduction, and the first $10,400 of what remains is taxed at 10% however much is earned above it. Compute taxable income first, then the two bracket pieces.",
   "extension": "Recompute all five taxes for a fictional worker earning $19,000 with $8,000 of taxable purchases, and say which tax becomes the largest.",
   "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l01.scoring.json",
   "financialSafety": {

@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l04",
+  "lessonId": "ma-g10-financial-literacy-u02-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "1.25%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3 defect reports against the 240 units sold in that period."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "6.7%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "16 defect reports against the same 240 units sold in the later comparable period."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "5.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "16 reports against 3, on the same number of units sold."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "More of the defects that were already occurring are now being reported",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The intervention changed how easy it is to report and how visible the route is, not how the product is made, so the most direct reading is that the earlier 1.25% understated what was happening."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "13",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "16 reports against 3 on the same 240 units."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(before / units * 100, 2)",
+        "substituted": "round(3 / 240 * 100, 2)",
+        "result": "1.25%",
+        "why": "3 defect reports against the 240 units sold in that period."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(after / units2 * 100, 1)",
+        "substituted": "round(16 / 240 * 100, 1)",
+        "result": "6.7%",
+        "why": "16 defect reports against the same 240 units sold in the later comparable period."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(after2 / before2, 2)",
+        "substituted": "round(16 / 3, 2)",
+        "result": "5.33",
+        "why": "16 reports against 3, on the same number of units sold."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "after3 - before3",
+        "substituted": "16 - 3",
+        "result": "13",
+        "why": "16 reports against 3 on the same 240 units."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A seller argues that the disclosure requirement made their product look worse without making anything better for buyers. Answer that argument, and say what evidence would be needed to know whether the requirement actually helped.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Answers the argument directly: the 6.7% figure is closer to the truth than the 1.25% figure, and buyers making a decision are better served by a more accurate number even if it is less flattering.",
+          "Notes that a working complaint route also gives buyers a remedy they previously did not use, which is a benefit distinct from the disclosure.",
+          "Names evidence that would settle it — whether defects per unit actually fell over later periods, whether more buyers obtained remedies, and whether buyers changed which products they bought."
+        ],
+        "evidenceRequirements": [
+          "Uses both reported rates, 1.25% and 6.7%, and the 240-unit denominator."
+        ],
+        "lookFors": [
+          "The response recognises the seller’s factual claim is correct — the product does look worse — and disputes the conclusion rather than the fact.",
+          "The response does not assert that defects fell; nothing in the data shows that."
+        ],
+        "commonMisconception": "Reading a rise in reported problems as a rise in problems.",
+        "dimensions": [
+          "evidence-use",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

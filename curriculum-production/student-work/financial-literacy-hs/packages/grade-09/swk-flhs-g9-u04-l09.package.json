@@ -19,7 +19,7 @@
   ],
   "focus": "what a credit history records and why it matters",
   "objective": "Compute a fictional lender’s published index from weighted factors, test which factor moves it most, and state what the index does not measure.",
-  "scenario": "A fictional lender publishes the simulated scoring model below and applies it to a fictional applicant’s file. The model, the weights, and the sub-scores are invented for this exercise and are not any real credit score.",
+  "scenario": "A fictional lender publishes the simulated scoring model below and applies it to a fictional applicant’s file. The index and the sub-scores are invented for this exercise and are not any real credit score. The five factors and their weights follow the breakdown a widely used real scoring model publishes, so the categories are realistic even though the numbers are not.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
   "realWorldAction": false,

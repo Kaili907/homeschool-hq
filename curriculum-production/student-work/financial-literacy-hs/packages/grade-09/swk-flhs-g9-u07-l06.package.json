@@ -38,7 +38,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "Gross income is $44,000. The fictional federal schedule charges 10% on the first $11,600 and 12% above it. Payroll tax is 7.65%, state income tax 4.25%, and city income tax 1%.",
+      "directions": "Gross income is $44,000. Under the fictional federal schedule, taxable income is gross less a $9,000 standard deduction, then 10% on the first $10,400 of taxable income and 12% above it. Payroll tax is 7.65%, state income tax 4.25%, and city income tax 1%, all charged on gross with no deduction.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -93,12 +93,12 @@
         {
           "ref": "t3-p1",
           "promptType": "extended-response",
-          "text": "Present the plan and show how each of the seven topics from this course appears in it. Say what the $1,176 unallocated should do, and name the one line you would cut first if income fell 10%."
+          "text": "Present the plan and show how each of the seven topics from this course appears in it. Say what the $2,232 unallocated should do, and name the one line you would cut first if income fell 10%."
         }
       ]
     }
   ],
-  "remediation": "If take-home comes out near $38,000, only the federal tax has been subtracted. Total the four taxes first — $5,048.00, $3,366.00, $1,870.00, and $440.00 — and take the whole $10,724.00 off gross before any allocation.",
+  "remediation": "If take-home comes out near $40,000, only the federal tax has been subtracted. Total the four taxes first — $3,992.00, $3,366.00, $1,870.00, and $440.00 — and take the whole $9,668.00 off gross before any allocation. Note that only the federal line gets the $9,000 deduction.",
   "extension": "Rebuild the plan on $39,600 of gross income, keeping the reserve and insurance lines intact, and state which two lines absorbed the fall.",
   "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l06.scoring.json",
   "financialSafety": {

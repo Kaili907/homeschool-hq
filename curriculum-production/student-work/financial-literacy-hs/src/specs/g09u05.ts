@@ -70,7 +70,7 @@ export const g09u05: readonly LessonSpec[] = [
             text: 'Describe the pattern linking each option’s expected gain to its spread of outcomes, and explain what an investor is actually paying for when they accept Option A’s $150 instead of Option C’s $410.',
             acceptableAnswerCriteria: [
               'States the pattern: the higher the expected gain, the wider the range of outcomes — A has no spread, B has $700 of spread, C has $3,100.',
-              'Explains that Option A’s lower return buys certainty, so the investor is paying $260 of expected gain for the removal of the possibility of loss.',
+              'Explains that Option A’s lower return buys certainty in dollar terms, so the investor is paying $260 of expected gain to remove the possibility of a nominal loss — noting, if they connect it to the next lesson, that a 3% return can still lose purchasing power.',
               'Notes that an expected return is an average over outcomes, so Option C does not promise $410 in any particular year.',
             ],
             evidenceRequirements: [
@@ -383,7 +383,7 @@ export const g09u05: readonly LessonSpec[] = [
       },
       {
         taskId: 't2', kind: 'independent',
-        directions: 'The agency insures deposits. It does not insure investments.',
+        directions: 'The agency insures deposits. It does not insure investments. A separate agency in this simulated system registers investment firms, requires them to disclose material facts, and protects customer assets if a brokerage itself fails — but nothing protects an investment against losing value in the market.',
         items: [
           {
             ref: 't2-p1', kind: 'choice',
@@ -410,7 +410,7 @@ export const g09u05: readonly LessonSpec[] = [
             acceptableAnswerCriteria: [
               'Distinguishes the risk that an institution fails, which insurance can cover up to $250,000, from the risk that an investment loses value, which it cannot.',
               'Explains why the second is uninsurable: the possibility of loss is the reason the holding is expected to return more in the first place.',
-              'Notes what agencies do instead for investments — requiring disclosure, registration, and honest dealing — rather than guaranteeing outcomes.',
+              'Notes what the second agency does instead for investments — registration, required disclosure, and protection if the brokerage fails — and that none of that guarantees an outcome.',
             ],
             evidenceRequirements: [
               'Uses the $62,000 uninsured figure and the $28,000 post-fall value as the two contrasting cases.',

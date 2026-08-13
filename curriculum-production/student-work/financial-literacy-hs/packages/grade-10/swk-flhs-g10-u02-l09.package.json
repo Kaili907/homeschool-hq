@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u02-l09",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: returns, warranties, and remedies"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "returns, warranties, and remedies",
+  "objective": "Compare two fictional retailers’ return and warranty policies on the same defect and price, and identify which policy difference actually matters.",
+  "scenario": "The same simulated $312 item is sold by two fictional retailers with different policies. A defect appears on day 52. All terms are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional policy summaries in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Retailer G: 90-day returns with no restocking fee, and no retailer warranty beyond the manufacturer’s 12 months. Retailer H: 14-day returns with a 20% restocking fee, plus a 24-month retailer warranty covering repair. The item costs $312 at both.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "On day 52, what refund would Retailer G’s return policy give?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would Retailer H’s restocking fee have been if the item had been returned inside its 14-day window?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-choice",
+          "text": "On day 52, which retailer’s return policy is still available?",
+          "choices": [
+            "Retailer G only",
+            "Retailer H only",
+            "Both",
+            "Neither"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now look past day 52.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months longer does Retailer H’s warranty run than the manufacturer’s 12 months?"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "For a defect appearing in month 14, which retailer’s policies help?",
+          "choices": [
+            "Retailer G",
+            "Retailer H",
+            "Both",
+            "Neither"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Retailer G is better on day 52 and Retailer H is better in month 14. Explain what each policy is actually protecting against, and say what a buyer would need to know about the product to choose between them at the point of purchase."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two retailers look equivalent, draw a single timeline from month 0 to month 24 and mark all four periods on it. The overlaps and the gaps are what the comparison is about.",
+  "extension": "Suppose Retailer H sells the same item for $289. Compute the saving, decide whether it is worth the shorter return window, and state the assumption your answer depends on.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u02-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

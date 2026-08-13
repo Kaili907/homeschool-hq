@@ -52,9 +52,9 @@ export const g09u02: readonly LessonSpec[] = [
           },
           {
             ref: 't2-p2', kind: 'numeric', unit: 'USD',
-            text: 'Over 36 months, how much more would repeated Dunlin purchases cost than repeated Aria 40 purchases, if each is replaced when it wears out?',
-            given: { horizon: 36 }, expr: 'round(#t1-p3 * horizon - #t1-p1 * horizon, 2)', format: 'usd', answer: '$56.16',
-            reasoning: 'At $6.50 a month the Dunlin path costs $234 over 36 months against the Aria path at $4.94 a month, or $177.84 — a difference of $56.16.',
+            text: 'Covering 36 months needs 2 Aria 40s and 5 Dunlins, since 4 Dunlins run out at month 32. How much more would the Dunlin path cost, if each pair is replaced only when it wears out?',
+            given: { priceDunlin2: 52, dunlinCount: 5, priceAria2: 89 }, expr: 'priceDunlin2 * dunlinCount - priceAria2 * 2', format: 'usd', answer: '$82.00',
+            reasoning: 'Headphones are bought whole. Two Arias last 36 months exactly, at $178. Four Dunlins reach only month 32, so covering 36 months takes five, at $260. The difference is $82.00 — larger than the per-month rates suggest, because the fifth Dunlin is bought in full for four months of use.',
           },
         ],
       },
@@ -97,7 +97,7 @@ export const g09u02: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If cost per month is being computed as months divided by price, anchor the units out loud: dollars per month means dollars on top, months underneath. Check the Dunlin first, where $52 over 8 months gives an easy $6.50, before returning to the two that need rounding.',
+    remediation: 'If cost per month is being computed as months divided by price, anchor the units out loud: dollars per month means dollars on top, months underneath. Check the Dunlin first, where $52 over 8 months gives an easy $6.50, before returning to the two that need rounding. For the 36-month question, count whole purchases rather than multiplying the monthly rate: you cannot buy four and a half pairs.',
     extension: 'Suppose the Aria 40 lasted only 12 months rather than 18. Recompute its cost per month and say whether the wired-model ranking changes.',
   },
 
@@ -803,7 +803,7 @@ export const g09u02: readonly LessonSpec[] = [
         items: [
           {
             ref: 't3-p1', kind: 'judgment', length: 'extended',
-            text: 'The label gives an estimated yearly kWh figure and nothing about price. Explain why the label stops there, and what a buyer must supply to turn it into a decision.',
+            text: 'This fictional label gives an estimated yearly kWh figure and nothing about price. Explain why a label might stop there, and what a buyer must supply to turn it into a decision. (Real energy labels usually do print an estimated yearly dollar cost, computed at one national electricity rate.)',
             acceptableAnswerCriteria: [
               'States that electricity prices differ by place and change over time, so a dollar figure printed on the label would be wrong for most buyers, while a kWh figure stays true.',
               'Identifies what the buyer supplies: their own electricity rate, how long they expect to keep the appliance, and the purchase prices.',
@@ -895,7 +895,7 @@ export const g09u02: readonly LessonSpec[] = [
             acceptableAnswerCriteria: [
               'Recommends a model and names the deciding figure explicitly rather than gesturing at overall value.',
               'Uses the totals that meet the requirement ($588, $649, $589), not the advertised prices, and explains why the advertised ranking is misleading here.',
-              'Handles the warranty comparison honestly: the Pellham costs $60 more than the Cedarline in total but carries twice the coverage at $324.50 a year against $588.00.',
+              'Handles the warranty comparison honestly: the Pellham costs $61 more than the Cedarline in total but carries twice the coverage, at $324.50 a year against $588.00.',
               'States a specific, checkable thing that would change the recommendation.',
             ],
             evidenceRequirements: [
@@ -903,7 +903,7 @@ export const g09u02: readonly LessonSpec[] = [
             ],
             dimensions: ['plan-coherence', 'criteria-application', 'tradeoff-defense', 'communication-of-uncertainty'],
             lookFors: [
-              'The response notices that the Vantis Air, cheapest on the shelf at $479, is the most expensive of the three once the requirement and the warranty are counted.',
+              'The response notices that the Vantis Air, cheapest on the shelf at $479, is no cheaper than the Cedarline once the requirement is met, at $589 against $588, and is by far the worst on cost per warranty-year.',
               'The what-would-change-my-mind statement is testable, not a general caveat.',
             ],
             commonMisconception: 'Ranking options by advertised price when the options do not all meet the requirement as sold.',

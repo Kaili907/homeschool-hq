@@ -108,7 +108,7 @@
       ]
     }
   ],
-  "remediation": "If total compensation is being read as a bigger salary, separate the two columns explicitly: cash the worker receives and money the employer spends on the worker’s behalf. Rebuild Offer A as a four-line list ($34,000 cash, $3,600 health, $1,020 retirement, $1,307.69 paid days) and ask which lines would appear in a bank account and which would not.",
+  "remediation": "If total compensation is being read as a bigger salary, separate the two columns explicitly: cash the worker receives and money the employer spends on the worker’s behalf. Rebuild Offer A as a three-line list totalling $38,620 ($34,000 cash, $3,600 health, $1,020 retirement) and ask which lines would appear in a bank account and which would not. Keep the paid days out of that list: Nadia is salaried, so those days are already inside the $34,000, and t3-p1 values them only to show what a day of salary is worth.",
   "extension": "Find the salary Riverbend would have to offer to match Offer A’s total compensation, given that its match stays at 1%.",
   "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l02.scoring.json",
   "financialSafety": {

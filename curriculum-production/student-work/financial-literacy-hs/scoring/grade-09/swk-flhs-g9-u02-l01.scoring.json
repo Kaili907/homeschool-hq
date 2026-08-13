@@ -39,10 +39,10 @@
       },
       {
         "ref": "t2-p2",
-        "answer": "$56.16",
+        "answer": "$82.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "At $6.50 a month the Dunlin path costs $234 over 36 months against the Aria path at $4.94 a month, or $177.84 — a difference of $56.16."
+          "reasoning": "Headphones are bought whole. Two Arias last 36 months exactly, at $178. Four Dunlins reach only month 32, so covering 36 months takes five, at $260. The difference is $82.00 — larger than the per-month rates suggest, because the fifth Dunlin is bought in full for four months of use."
         }
       }
     ],
@@ -77,10 +77,10 @@
       },
       {
         "ref": "t2-p2",
-        "expression": "round(#t1-p3 * horizon - #t1-p1 * horizon, 2)",
-        "substituted": "round(#t1-p3 * 36 - #t1-p1 * 36, 2)",
-        "result": "$56.16",
-        "why": "At $6.50 a month the Dunlin path costs $234 over 36 months against the Aria path at $4.94 a month, or $177.84 — a difference of $56.16."
+        "expression": "priceDunlin2 * dunlinCount - priceAria2 * 2",
+        "substituted": "52 * 5 - 89 * 2",
+        "result": "$82.00",
+        "why": "Headphones are bought whole. Two Arias last 36 months exactly, at $178. Four Dunlins reach only month 32, so covering 36 months takes five, at $260. The difference is $82.00 — larger than the per-month rates suggest, because the fifth Dunlin is bought in full for four months of use."
       }
     ],
     "criteria": [

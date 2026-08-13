@@ -81,7 +81,7 @@ export const g09u06: readonly LessonSpec[] = [
             ref: 't3-p1', kind: 'judgment', length: 'extended',
             text: 'The most likely risk and the most costly risk are different ones. Explain what that means for which risk the household should plan for first, and say why expected loss alone is not enough to decide.',
             acceptableAnswerCriteria: [
-              'States that the phone screen happens most often at 22% but costs least in expectation at $39.60, while the job loss is rare at 6% and largest in expectation at $266.40.',
+              'States that the phone screen happens most often at 22% yet is only the second smallest in expectation at $39.60 — identity-theft cleanup is smaller at $35.60 — while the job loss is rare at 6% and largest in expectation at $266.40.',
               'Argues that the job risk deserves attention first because a $4,440 loss could exceed what the household can absorb, whatever its expected value.',
               'Names what expected loss leaves out: the size of the worst case relative to what the household can survive.',
             ],
@@ -170,7 +170,7 @@ export const g09u06: readonly LessonSpec[] = [
             text: 'The three options cost almost the same in expectation but differ sharply in their worst case. Recommend one for a cyclist who has $150 in savings, and defend it against the option with the lowest expected cost.',
             acceptableAnswerCriteria: [
               'Recognises the three expected costs are effectively tied, at $93.00, $100.00, and $101.00, so expected cost cannot decide the question.',
-              'Applies the $150 savings constraint: a $620 loss cannot be absorbed, while $185 can, which points away from accepting the risk.',
+              'Applies the $150 savings constraint honestly: a $620 loss is more than four times savings, while the transfer’s worst case is $185 and the amount actually due on the day of a claim is only the $100 deductible — so neither option is fully covered by savings, but one is far closer.',
               'Defends the recommendation against the $93.00 option directly rather than ignoring it.',
             ],
             evidenceRequirements: [
@@ -397,7 +397,7 @@ export const g09u06: readonly LessonSpec[] = [
       },
       {
         taskId: 't2', kind: 'independent',
-        directions: 'Two safeguards are available. A credit freeze costs nothing and blocks new accounts from being opened. A monitoring service costs $14.99 a month and alerts the person after something has already happened.',
+        directions: 'Two safeguards are available. A credit freeze costs nothing and blocks most new accounts from being opened in the person’s name; it does not stop misuse of accounts that already exist. A monitoring service costs $14.99 a month and alerts the person after something has already happened.',
         items: [
           {
             ref: 't2-p1', kind: 'numeric', unit: 'USD',
@@ -430,7 +430,7 @@ export const g09u06: readonly LessonSpec[] = [
             ref: 't3-p1', kind: 'judgment', length: 'extended',
             text: 'The free safeguard prevents the loss and the paid one reports it afterwards. Explain why that difference matters more than the price, and name two figures in this lesson that a real decision would need but that the calculation above does not contain.',
             acceptableAnswerCriteria: [
-              'States that a freeze reduces the probability of the loss occurring while monitoring reduces neither the probability nor the size, only the delay in finding out.',
+              'States that a freeze reduces the probability of new-account fraud while monitoring reduces neither the probability nor the size of any loss, only the delay in finding out.',
               'Uses the $179.88 against $9.93 comparison but does not rest the whole argument on it.',
               'Names two genuine gaps — the 20 unpaid hours have no price attached, and the 4% probability is an assumption that could be far wrong for a particular person.',
             ],
@@ -630,7 +630,7 @@ export const g09u06: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the total feels too high, read the list back and ask what each item would cost to buy again today. Replacement cost is the relevant figure for insurance, and it is usually well above what the owner remembers paying.',
+    remediation: 'If the total feels too high, read the list back and ask what each item would cost to buy again today. Replacement cost is the right figure only under a replacement-cost policy; a policy paying actual cash value would deduct for wear and pay less, which is one of the things t3-p1 asks the learner to check.',
     extension: 'Add a $750 deductible to the fictional policy and recompute what the renter would actually receive after a total loss, then revisit the judgement.',
   },
 

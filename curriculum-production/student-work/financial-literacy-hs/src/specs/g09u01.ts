@@ -173,7 +173,7 @@ export const g09u01: readonly LessonSpec[] = [
               'Names a specific condition under which Riverbend could still be the better choice, such as Nadia already being covered by health insurance so the $3,600 is worth nothing to her.',
             ],
             evidenceRequirements: [
-              'Refers to at least one employer-paid figure from Offer A ($3,600 health, $1,020 match, or $1,307.69 in paid days) as the thing the salary comparison omits.',
+              'Refers to at least one employer-paid figure from Offer A — the $3,600 health contribution or the $1,020 match — as the thing the salary comparison omits.',
             ],
             dimensions: ['tradeoff-defense', 'evidence-use', 'assumption-identification'],
             lookFors: [
@@ -185,7 +185,7 @@ export const g09u01: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If total compensation is being read as a bigger salary, separate the two columns explicitly: cash the worker receives and money the employer spends on the worker’s behalf. Rebuild Offer A as a four-line list ($34,000 cash, $3,600 health, $1,020 retirement, $1,307.69 paid days) and ask which lines would appear in a bank account and which would not.',
+    remediation: 'If total compensation is being read as a bigger salary, separate the two columns explicitly: cash the worker receives and money the employer spends on the worker’s behalf. Rebuild Offer A as a three-line list totalling $38,620 ($34,000 cash, $3,600 health, $1,020 retirement) and ask which lines would appear in a bank account and which would not. Keep the paid days out of that list: Nadia is salaried, so those days are already inside the $34,000, and t3-p1 values them only to show what a day of salary is worth.',
     extension: 'Find the salary Riverbend would have to offer to match Offer A’s total compensation, given that its match stays at 1%.',
   },
 
@@ -777,19 +777,19 @@ export const g09u01: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'In both fictional periods, gross pay is $1,850 and combined tax is withheld at 18% of taxable wages. In period 1 she contributed nothing to retirement. In period 2 she contributed 5% of gross, taken out before tax is calculated.',
+        directions: 'In both fictional periods, gross pay is $1,850 and combined income tax — federal plus state — is withheld at 18% of taxable wages. Social Security and Medicare are charged on the full $1,850 in both periods and are not shown here, because a pre-tax retirement contribution does not reduce them. In period 1 she contributed nothing to retirement. In period 2 she contributed 5% of gross, taken out before income tax is calculated.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
             text: 'In period 1, how much tax is withheld?',
             given: { gross: 1850, taxRate: 0.18 }, expr: 'round(gross * taxRate, 2)', format: 'usd', answer: '$333.00',
-            reasoning: 'With no pre-tax deduction, taxable wages equal gross: 18% of $1,850 is $333.00.',
+            reasoning: 'With no pre-tax deduction, income-taxable wages equal gross: 18% of $1,850 is $333.00.',
           },
           {
             ref: 't1-p2', kind: 'numeric', unit: 'USD',
             text: 'What is her period 1 take-home pay?',
             given: { gross2: 1850 }, expr: 'gross2 - #t1-p1', format: 'usd', answer: '$1,517.00',
-            reasoning: '$1,850 less $333.00 of tax, with nothing else withheld.',
+            reasoning: '$1,850 less $333.00 of income tax, setting the unchanged payroll tax aside so the two periods can be compared on the one line that moves.',
           },
         ],
       },
@@ -805,15 +805,15 @@ export const g09u01: readonly LessonSpec[] = [
           },
           {
             ref: 't2-p2', kind: 'numeric', unit: 'USD',
-            text: 'What are her taxable wages in period 2?',
+            text: 'What are her income-taxable wages in period 2?',
             given: { gross4: 1850 }, expr: 'gross4 - #t2-p1', format: 'usd', answer: '$1,757.50',
-            reasoning: 'A pre-tax contribution reduces the wages tax is charged on: $1,850 - $92.50.',
+            reasoning: 'A pre-tax contribution reduces the wages income tax is charged on: $1,850 - $92.50. It does not reduce Social Security or Medicare wages, which stay at $1,850.',
           },
           {
             ref: 't2-p3', kind: 'numeric', unit: 'USD',
             text: 'How much tax is withheld in period 2?',
             given: { taxRate2: 0.18 }, expr: 'round(#t2-p2 * taxRate2, 2)', format: 'usd', answer: '$316.35',
-            reasoning: '18% of the reduced taxable wages of $1,757.50.',
+            reasoning: '18% of the reduced income-taxable wages of $1,757.50.',
           },
           {
             ref: 't2-p4', kind: 'numeric', unit: 'USD',
@@ -855,7 +855,7 @@ export const g09u01: readonly LessonSpec[] = [
             ref: 't4-p1', kind: 'judgment', length: 'extended',
             text: 'Amara set aside $92.50 but her take-home pay fell by less than that. Explain where the rest came from, and state one thing the $92.50 costs her that the arithmetic above does not show.',
             acceptableAnswerCriteria: [
-              'Explains that $16.65 of the contribution was funded by the reduction in tax, because the pre-tax contribution lowered taxable wages from $1,850 to $1,757.50.',
+              'Explains that $16.65 of the contribution was funded by the reduction in income tax, because the pre-tax contribution lowered income-taxable wages from $1,850 to $1,757.50 while leaving Social Security and Medicare wages at $1,850.',
               'States that the money is not gone but moved into a retirement account, so this is a shift between uses rather than a loss.',
               'Names a real cost the arithmetic omits, most directly that the $92.50 is not available to spend now and is generally not withdrawable without conditions.',
             ],
@@ -864,7 +864,7 @@ export const g09u01: readonly LessonSpec[] = [
             ],
             dimensions: ['reasoning-from-figures', 'plan-coherence', 'assumption-identification'],
             lookFors: [
-              'The response says the tax saving depends on the contribution being pre-tax; a post-tax contribution would have cut take-home by the full $92.50.',
+              'The response says the saving depends on the contribution being pre-tax for income tax specifically; a post-tax contribution would have cut take-home by the full $92.50, and payroll tax is unaffected either way.',
               'The response does not present the tax saving as free money.',
             ],
             commonMisconception: 'Expecting take-home pay to fall by the full contribution amount, or treating the tax saving as a gain rather than as part of the money already set aside.',
@@ -872,7 +872,7 @@ export const g09u01: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If period 2 is coming out with tax on the full $1,850, mark the order of operations on the stub: contribution first, then tax on what is left. Compute the two taxable-wage figures side by side, $1,850 and $1,757.50, before any tax is applied.',
+    remediation: 'If period 2 is coming out with income tax on the full $1,850, mark the order of operations on the stub: contribution first, then income tax on what is left. Compute the two income-taxable figures side by side, $1,850 and $1,757.50, before any tax is applied — and note that the payroll-tax base stays at $1,850 in both periods.',
     extension: 'Recompute period 2 with the contribution taken after tax instead of before, and state exactly how much the pre-tax treatment was worth.',
   },
 

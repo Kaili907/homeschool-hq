@@ -37,7 +37,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "The fictional programme: a saver who deposits $25 a month for 12 months receives a match of 50% of everything deposited. The account also pays 3.4% a year on the balance. A plain chequing account at the same fictional credit union pays 0.05% a year.",
+      "directions": "The fictional programme: a saver who deposits $25 a month for 12 months receives a match of 50% of everything deposited. The account also pays 3.4% a year on the balance. A plain checking account at the same fictional credit union pays 0.05% a year.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -67,13 +67,13 @@
         {
           "ref": "t2-p1",
           "promptType": "fixed-numeric",
-          "text": "How much would a year of interest at 3.4% add to the $450 balance?",
+          "text": "If the $450 balance sat in the account for a full year, how much would interest at 3.4% add?",
           "unit": "USD"
         },
         {
           "ref": "t2-p2",
           "promptType": "fixed-numeric",
-          "text": "How much would the same balance earn in a year at the chequing rate of 0.05%?",
+          "text": "How much would the same balance earn in a year at the checking rate of 0.05%?",
           "unit": "USD"
         },
         {
@@ -96,7 +96,7 @@
         {
           "ref": "t3-p1",
           "promptType": "extended-response",
-          "text": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% chequing interest — by how much each one should influence where the saver puts the money, and explain the ranking."
+          "text": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking."
         },
         {
           "ref": "t3-p2",

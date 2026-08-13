@@ -156,14 +156,14 @@
         "exactKey": null,
         "acceptableAnswerCriteria": [
           "Names two recorded items grounded in the report — the balances and limits behind the 37.0% utilisation, and the payment history behind the 91.7% figure.",
-          "Names two genuinely absent items — income, savings, assets, employment, or expenses — and does not confuse them with what a lender might separately ask for.",
+          "Names two genuinely absent items — how much the person earns, their savings, their assets, or their expenses — and does not confuse them with what a lender might separately ask for.",
           "Explains that a lender reading only this file sees how obligations were handled, not whether the borrower can afford a new one."
         ],
         "evidenceRequirements": [
           "Cites the 37.0% utilisation figure and the 91.7% on-time figure as examples of what is recorded."
         ],
         "lookFors": [
-          "The response does not claim the report contains a judgement about the person.",
+          "The response does not claim the report contains a judgement about the person, and does not list employment among the absent items: a report commonly carries an employer name, though never an income figure.",
           "The response recognises that two missed payments out of 24 is recorded as a fact, not as an explanation."
         ],
         "commonMisconception": "Believing a credit report reflects how much money a person has.",

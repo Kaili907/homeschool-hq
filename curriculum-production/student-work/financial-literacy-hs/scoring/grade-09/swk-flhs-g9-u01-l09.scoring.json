@@ -10,7 +10,7 @@
         "answer": "$333.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "With no pre-tax deduction, taxable wages equal gross: 18% of $1,850 is $333.00."
+          "reasoning": "With no pre-tax deduction, income-taxable wages equal gross: 18% of $1,850 is $333.00."
         }
       },
       {
@@ -18,7 +18,7 @@
         "answer": "$1,517.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,850 less $333.00 of tax, with nothing else withheld."
+          "reasoning": "$1,850 less $333.00 of income tax, setting the unchanged payroll tax aside so the two periods can be compared on the one line that moves."
         }
       },
       {
@@ -34,7 +34,7 @@
         "answer": "$1,757.50",
         "verification": {
           "method": "recomputed",
-          "reasoning": "A pre-tax contribution reduces the wages tax is charged on: $1,850 - $92.50."
+          "reasoning": "A pre-tax contribution reduces the wages income tax is charged on: $1,850 - $92.50. It does not reduce Social Security or Medicare wages, which stay at $1,850."
         }
       },
       {
@@ -42,7 +42,7 @@
         "answer": "$316.35",
         "verification": {
           "method": "recomputed",
-          "reasoning": "18% of the reduced taxable wages of $1,757.50."
+          "reasoning": "18% of the reduced income-taxable wages of $1,757.50."
         }
       },
       {
@@ -84,14 +84,14 @@
         "expression": "round(gross * taxRate, 2)",
         "substituted": "round(1850 * 0.18, 2)",
         "result": "$333.00",
-        "why": "With no pre-tax deduction, taxable wages equal gross: 18% of $1,850 is $333.00."
+        "why": "With no pre-tax deduction, income-taxable wages equal gross: 18% of $1,850 is $333.00."
       },
       {
         "ref": "t1-p2",
         "expression": "gross2 - #t1-p1",
         "substituted": "1850 - #t1-p1",
         "result": "$1,517.00",
-        "why": "$1,850 less $333.00 of tax, with nothing else withheld."
+        "why": "$1,850 less $333.00 of income tax, setting the unchanged payroll tax aside so the two periods can be compared on the one line that moves."
       },
       {
         "ref": "t2-p1",
@@ -105,14 +105,14 @@
         "expression": "gross4 - #t2-p1",
         "substituted": "1850 - #t2-p1",
         "result": "$1,757.50",
-        "why": "A pre-tax contribution reduces the wages tax is charged on: $1,850 - $92.50."
+        "why": "A pre-tax contribution reduces the wages income tax is charged on: $1,850 - $92.50. It does not reduce Social Security or Medicare wages, which stay at $1,850."
       },
       {
         "ref": "t2-p3",
         "expression": "round(#t2-p2 * taxRate2, 2)",
         "substituted": "round(#t2-p2 * 0.18, 2)",
         "result": "$316.35",
-        "why": "18% of the reduced taxable wages of $1,757.50."
+        "why": "18% of the reduced income-taxable wages of $1,757.50."
       },
       {
         "ref": "t2-p4",
@@ -215,7 +215,7 @@
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
-          "Explains that $16.65 of the contribution was funded by the reduction in tax, because the pre-tax contribution lowered taxable wages from $1,850 to $1,757.50.",
+          "Explains that $16.65 of the contribution was funded by the reduction in income tax, because the pre-tax contribution lowered income-taxable wages from $1,850 to $1,757.50 while leaving Social Security and Medicare wages at $1,850.",
           "States that the money is not gone but moved into a retirement account, so this is a shift between uses rather than a loss.",
           "Names a real cost the arithmetic omits, most directly that the $92.50 is not available to spend now and is generally not withdrawable without conditions."
         ],
@@ -223,7 +223,7 @@
           "Uses the three period-2 figures — the $92.50 contribution, the $75.85 fall in take-home, and the $16.65 tax saving — and shows they reconcile."
         ],
         "lookFors": [
-          "The response says the tax saving depends on the contribution being pre-tax; a post-tax contribution would have cut take-home by the full $92.50.",
+          "The response says the saving depends on the contribution being pre-tax for income tax specifically; a post-tax contribution would have cut take-home by the full $92.50, and payroll tax is unaffected either way.",
           "The response does not present the tax saving as free money."
         ],
         "commonMisconception": "Expecting take-home pay to fall by the full contribution amount, or treating the tax saving as a gain rather than as part of the money already set aside.",

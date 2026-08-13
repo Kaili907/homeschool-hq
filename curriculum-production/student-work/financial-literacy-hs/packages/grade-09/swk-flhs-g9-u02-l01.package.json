@@ -77,7 +77,7 @@
         {
           "ref": "t2-p2",
           "promptType": "fixed-numeric",
-          "text": "Over 36 months, how much more would repeated Dunlin purchases cost than repeated Aria 40 purchases, if each is replaced when it wears out?",
+          "text": "Covering 36 months needs 2 Aria 40s and 5 Dunlins, since 4 Dunlins run out at month 32. How much more would the Dunlin path cost, if each pair is replaced only when it wears out?",
           "unit": "USD"
         }
       ]
@@ -100,7 +100,7 @@
       ]
     }
   ],
-  "remediation": "If cost per month is being computed as months divided by price, anchor the units out loud: dollars per month means dollars on top, months underneath. Check the Dunlin first, where $52 over 8 months gives an easy $6.50, before returning to the two that need rounding.",
+  "remediation": "If cost per month is being computed as months divided by price, anchor the units out loud: dollars per month means dollars on top, months underneath. Check the Dunlin first, where $52 over 8 months gives an easy $6.50, before returning to the two that need rounding. For the 36-month question, count whole purchases rather than multiplying the monthly rate: you cannot buy four and a half pairs.",
   "extension": "Suppose the Aria 40 lasted only 12 months rather than 18. Recompute its cost per month and say whether the wired-model ranking changes.",
   "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l01.scoring.json",
   "financialSafety": {
