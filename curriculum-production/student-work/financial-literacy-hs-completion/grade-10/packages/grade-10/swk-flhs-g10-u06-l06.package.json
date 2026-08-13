@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l06",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: evaluating an insurance offer without a sales frame"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "evaluating an insurance offer without a sales frame",
+  "objective": "Compute the multi-year cost of two fictional policies under different claim frequencies, and find the claim rate at which the ranking between them reverses.",
+  "scenario": "The two simulated policies below are invented for this exercise. Neither is presented with a sales frame: the only figures given are the premium, the deductible, and the number of claims, so the comparison rests on arithmetic rather than on how the offer is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional policy quotes in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Policy X charges an annual premium of $1,180 with a $500 deductible. Policy Y charges $890 a year with a $1,500 deductible. Assume every claim is large enough that the full deductible is paid and the coverage limit is never reached, so the deductible is the policyholder’s whole cost on a claim.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "In a single year with one claim, what does Policy X cost in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "In the same year, what does Policy Y cost in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "In a year with no claim, how much cheaper is Policy Y?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now run both policies over 5 years, first with one claim in the period and then with two.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Over 5 years with one claim, what does Policy X cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Over the same 5 years with one claim, what does Policy Y cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Which is cheaper over that period, and by how much?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Over 5 years with two claims, what does Policy X cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "Over 5 years with two claims, what does Policy Y cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "With two claims, how much more does Policy Y cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Policy Y is cheaper with one claim in five years and more expensive with two. Explain what a shopper actually has to estimate to choose between them, and say why a policy with a higher deductible can be the wrong choice even for someone who expects few claims."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Policy Y looks cheaper in every case, count both parts of what it costs. Its premium saves $290.00 a year, and each claim costs $1,000 more than under Policy X. One claim in five years leaves Y ahead by $450.00; two claims put it behind by $550.00.",
+  "extension": "Find the number of claims over 5 years at which the two policies cost exactly the same, and say whether that number is one a shopper could estimate with any confidence.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

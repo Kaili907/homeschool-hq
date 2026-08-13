@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l04",
+  "lessonId": "ma-g10-financial-literacy-u04-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$10,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $6,800 grant plus the $3,500 scholarship. This is the only part of the offer that reduces the cost outright."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$11,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$21,400 of cost less $10,300.00 of gift aid. This is the figure that has to be covered by earning, borrowing, or paying."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$8,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,600 of work study plus $3,500 of subsidised loan plus $2,000 of unsubsidised loan. All three appear on the offer as \"aid\" but none of them lower what the year costs."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $11,100.00 net price less the $8,100.00 of self-help aid. This gap is not listed anywhere on the offer, and it is the number the applicant most needs."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$18,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,300.00 of gift aid plus $8,100.00 of self-help aid — the headline total an offer letter would lead with."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "29.89%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $5,500 of loans against the $18,400.00 headline. Close to three dollars in ten of this \"aid\" is debt, and the work study is a fourth kind again — earned, not given and not borrowed."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The work study",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Work study pays for hours worked in an assigned job, so the money arrives only as the work is done. Grants and scholarships require no work and no repayment, and the loans require repayment but no work."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "grant + scholarship",
+        "substituted": "6800 + 3500",
+        "result": "$10,300.00",
+        "why": "The $6,800 grant plus the $3,500 scholarship. This is the only part of the offer that reduces the cost outright."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "coa - #t1-p1",
+        "substituted": "21400 - #t1-p1",
+        "result": "$11,100.00",
+        "why": "$21,400 of cost less $10,300.00 of gift aid. This is the figure that has to be covered by earning, borrowing, or paying."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "workStudy + sub + unsub",
+        "substituted": "2600 + 3500 + 2000",
+        "result": "$8,100.00",
+        "why": "$2,600 of work study plus $3,500 of subsidised loan plus $2,000 of unsubsidised loan. All three appear on the offer as \"aid\" but none of them lower what the year costs."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - #t1-p3",
+        "substituted": "#t1-p2 - #t1-p3",
+        "result": "$3,000.00",
+        "why": "The $11,100.00 net price less the $8,100.00 of self-help aid. This gap is not listed anywhere on the offer, and it is the number the applicant most needs."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p3",
+        "result": "$18,400.00",
+        "why": "$10,300.00 of gift aid plus $8,100.00 of self-help aid — the headline total an offer letter would lead with."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "(sub2 + unsub2) / #t2-p2 * 100",
+        "substituted": "(3500 + 2000) / #t2-p2 * 100",
+        "result": "29.89%",
+        "why": "The $5,500 of loans against the $18,400.00 headline. Close to three dollars in ten of this \"aid\" is debt, and the work study is a fourth kind again — earned, not given and not borrowed."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The offer says $18,400.00 of aid. Write two sentences you would use to explain to a fictional applicant what that number actually means, and name the one figure you would want added to the letter.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the headline bundles three different things — money given, money earned by working, and money borrowed — and that only the $10,300.00 of gift aid lowers what the year costs.",
+          "Names the missing figure as the remaining gap of $3,000.00, or equivalently the net price after all aid, and says why an offer letter that omits it can be read as covering the full cost.",
+          "Notes that the $2,600 of work study depends on actually working the assigned hours, so it is not guaranteed in the way a grant is."
+        ],
+        "evidenceRequirements": [
+          "Uses the $18,400.00 headline, the $10,300.00 of gift aid, and the $3,000.00 gap."
+        ],
+        "lookFors": [
+          "The response distinguishes all three categories, not just gift aid against loans.",
+          "The response does not describe the offer as dishonest; every line is disclosed, and the issue is what the total invites a reader to conclude."
+        ],
+        "commonMisconception": "Reading a single \"total aid\" figure as the amount by which the cost of attending has been reduced.",
+        "dimensions": [
+          "criteria-application",
+          "evidence-use",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

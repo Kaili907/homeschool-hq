@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l02",
+  "lessonId": "ma-g10-financial-literacy-u04-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$40.08",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of the 22.9% rate applied to the $2,100 carried. This is charged for as long as the balance stands, with no end date set by the contract."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$56.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 7.2% on $9,400. The balance is more than four times the card’s and the monthly interest is only 41% higher, because the security behind the loan buys a much lower rate."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$28.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 11.5% on $3,000. Unsecured like the card but on a fixed schedule, and priced between the secured car loan and the revolving card."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$42.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2% of the $2,100 balance, which is what the contract requires rather than what retires the debt."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1.92",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $42.00 minimum less the $40.08 of interest. Paying the minimum on this balance retires under two dollars of what is owed."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$480.96",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve months at $40.08, holding the balance constant. The constant balance is an assumption made to price the carrying cost, not a prediction of what the household will do."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The credit card",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The car loan and the personal loan are installment credit with a fixed schedule that ends. The secured card carries no balance. Only the revolving credit card can be carried indefinitely, which is the structural feature that makes its rate expensive over time."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(cardBal * cardApr / 12, 2)",
+        "substituted": "round(2100 * 0.229 / 12, 2)",
+        "result": "$40.08",
+        "why": "One twelfth of the 22.9% rate applied to the $2,100 carried. This is charged for as long as the balance stands, with no end date set by the contract."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(carBal * carApr / 12, 2)",
+        "substituted": "round(9400 * 0.072 / 12, 2)",
+        "result": "$56.40",
+        "why": "One twelfth of 7.2% on $9,400. The balance is more than four times the card’s and the monthly interest is only 41% higher, because the security behind the loan buys a much lower rate."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(loanBal * loanApr / 12, 2)",
+        "substituted": "round(3000 * 0.115 / 12, 2)",
+        "result": "$28.75",
+        "why": "One twelfth of 11.5% on $3,000. Unsecured like the card but on a fixed schedule, and priced between the secured car loan and the revolving card."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "cardBal2 * minRate",
+        "substituted": "2100 * 0.02",
+        "result": "$42.00",
+        "why": "2% of the $2,100 balance, which is what the contract requires rather than what retires the debt."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p1",
+        "substituted": "#t2-p1 - #t1-p1",
+        "result": "$1.92",
+        "why": "The $42.00 minimum less the $40.08 of interest. Paying the minimum on this balance retires under two dollars of what is owed."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p1 * 12, 2)",
+        "substituted": "round(#t1-p1 * 12, 2)",
+        "result": "$480.96",
+        "why": "Twelve months at $40.08, holding the balance constant. The constant balance is an assumption made to price the carrying cost, not a prediction of what the household will do."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The car loan carries the largest balance but the card is the account to worry about. Using the two axes — secured or unsecured, revolving or installment — explain why, and say what the $500 deposit behind the secured card is actually doing.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the car loan is secured and on an installment schedule, so its rate is low and its balance is guaranteed to reach zero, while the card is unsecured and revolving, so it is priced higher and has no end date.",
+          "Uses the $1.92 figure to show that a minimum payment on revolving credit can leave the balance essentially untouched, which is what makes the structure rather than the amount the problem.",
+          "States that the $500 deposit is collateral that converts an unsecured product into a secured one, which is what lets a lender extend credit to a file with no history."
+        ],
+        "evidenceRequirements": [
+          "Uses the $40.08 monthly card interest, the $56.40 monthly car-loan interest, and the $1.92 that the minimum payment retires."
+        ],
+        "lookFors": [
+          "The response reasons from the two classification axes rather than from the size of the balances.",
+          "The response notes that security lowers a rate because it lowers the lender’s loss if the borrower stops paying, not because it rewards the borrower."
+        ],
+        "commonMisconception": "Ranking debts by balance rather than by rate, structure, and whether the schedule ever ends.",
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

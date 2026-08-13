@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l01",
+  "lessonId": "ma-g10-financial-literacy-u06-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,950.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The five annual premiums added. This is a real claim on the household budget whether or not any claim is ever made."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$412.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $4,950.00 annual total spread across twelve months, which is how it actually lands in a budget."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "55.76%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,760 health premium against the $4,950.00 total — more than half of everything the household spends on protection."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "3.76%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $186 renters premium against the $4,950.00 total — the smallest line of the five by a wide margin."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$15.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $186 annual premium across twelve months."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "78.49",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$14,600 of exposure against $186 of annual premium. This ratio says nothing about whether the coverage is good value on its own — it shows only that the cheapest premium of the five stands behind a large exposure."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The household’s renters policy",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A landlord’s policy covers the building the landlord owns, not a tenant’s possessions. Renters coverage is the only one of the five in this scenario that stands behind the household’s own belongings."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "health + auto + renters + disability + life",
+        "substituted": "2760 + 1344 + 186 + 432 + 228",
+        "result": "$4,950.00",
+        "why": "The five annual premiums added. This is a real claim on the household budget whether or not any claim is ever made."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 / 12",
+        "substituted": "#t1-p1 / 12",
+        "result": "$412.50",
+        "why": "The $4,950.00 annual total spread across twelve months, which is how it actually lands in a budget."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "health2 / #t1-p1 * 100",
+        "substituted": "2760 / #t1-p1 * 100",
+        "result": "55.76%",
+        "why": "The $2,760 health premium against the $4,950.00 total — more than half of everything the household spends on protection."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "renters2 / #t1-p1 * 100",
+        "substituted": "186 / #t1-p1 * 100",
+        "result": "3.76%",
+        "why": "The $186 renters premium against the $4,950.00 total — the smallest line of the five by a wide margin."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "renters3 / 12",
+        "substituted": "186 / 12",
+        "result": "$15.50",
+        "why": "The $186 annual premium across twelve months."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(belongings / renters4, 2)",
+        "substituted": "round(14600 / 186, 2)",
+        "result": "78.49",
+        "why": "$14,600 of exposure against $186 of annual premium. This ratio says nothing about whether the coverage is good value on its own — it shows only that the cheapest premium of the five stands behind a large exposure."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Insurance is worth buying for losses a household could not absorb on its own. Using that test, sort these five coverages into ones that protect against a loss too large to absorb and ones that protect against something else, and say which single coverage you would defend keeping if the household had to drop one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Applies the stated test rather than a preference: health, disability, auto liability, and life all stand behind losses large enough that a household would struggle to absorb them from income alone, while the belongings behind the renters policy are the smallest sum on the sheet at $14,600.",
+          "Names a coverage to drop and defends it with the loss it protects against — for example that the $14,600 of belongings is the only exposure the sheet puts a number on, and is a sum a household might rebuild over time, where a health or disability loss is not bounded at all.",
+          "Recognises that premium size and exposure size are different things: the 3.76% share of the budget says nothing about the size of the risk it stands behind."
+        ],
+        "evidenceRequirements": [
+          "Uses the $4,950.00 annual total and at least two of the individual premium shares."
+        ],
+        "lookFors": [
+          "The response applies the \"could not absorb\" test to each coverage rather than ranking by price.",
+          "Several answers are defensible here; what is scored is whether the exposure behind the chosen coverage is named."
+        ],
+        "commonMisconception": "Judging a policy by the size of its premium rather than by the size of the loss it stands behind.",
+        "dimensions": [
+          "criteria-application",
+          "tradeoff-defense",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,3060 @@
+{
+  "schemaVersion": "1.0",
+  "lane": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10",
+  "grade": 10,
+  "units": [
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "structuredDiscipline": "FINANCIAL_LITERACY",
+  "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+  "gateContract": "src/curriculum/production-quality — a MATH_STRUCTURED_FINLIT lesson declaring structuredDiscipline 'FINANCIAL_LITERACY' carries a ResponseScoringContract of { mode, items[] }, and is failed closed without it.",
+  "modeMapping": [
+    "Every lesson in this lane is authored as mixed work, so its lane scoring kind is HYBRID: at least one fixed item the oracle recomputed, and at least one judgment item scored by rubric.",
+    "HYBRID projects to the gate as responseScoring.mode = MIXED. This is a statement of what the lesson is, not a downgrade: H3 requires both authorities for MIXED, and both are present in every scoring record in this lane.",
+    "The item inventory is derived from the emitted task sheet, not asserted. A prompt typed fixed-numeric or fixed-choice is FIXED; a short- or extended-response prompt is OPEN. H3 checks the declared mode against this inventory, and projectLesson throws rather than emitting a contract its own items contradict.",
+    "The rubric half is not discarded. Every OPEN item keeps its acceptable-answer criteria, evidence requirements, and look-fors in the lesson scoring record, and carries exactCriteria of null there.",
+    "Units 1 and 2 of grade 10 are held by the sibling financial-literacy-hs lane and are not projected here. Convergence is responsible for combining the two into one grade 10 submission of 72 lessons."
+  ],
+  "counts": {
+    "lessons": 52,
+    "byLaneKind": {
+      "HYBRID": 52
+    },
+    "byResponseMode": {
+      "MIXED": 52
+    },
+    "fixedItems": 376,
+    "openItems": 52
+  },
+  "lessons": [
+    {
+      "packageId": "swk-flhs-g10-u03-l01",
+      "lessonId": "ma-g10-financial-literacy-u03-l01",
+      "unit": 3,
+      "day": 1,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "A fictional saver holds $410 in Everyday Checking in every month of the year. What do the monthly fees cost over the year?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "The same saver instead holds $2,600 in Basic Savings for the whole year. What interest is credited at year end?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "In one month the saver makes 9 withdrawals from Basic Savings. What do the withdrawals past the free allowance cost that month?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "The saver puts the $2,600 into the 12-month Term Certificate instead. What interest does a full year earn?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "The saver instead needs the money in month 7. What interest has the certificate credited for the months actually held?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the early-withdrawal penalty, at 90 days of interest?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What interest does the saver actually keep after withdrawing in month 7?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "For money that turns out to be needed in month 7, which account left the saver with more interest?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Rank the three fictional accounts for money that will definitely not be touched for a year, then rank them again for money that might be needed in any month. Say which single term changes the ranking, and why the headline interest rate is not that term."
+          }
+        ]
+      },
+      "fixedItemCount": 8,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l02",
+      "lessonId": "ma-g10-financial-literacy-u03-l02",
+      "unit": 3,
+      "day": 2,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "Compounded once at the end of the year, how much interest does the deposit earn?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the balance after one year with quarterly compounding? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much interest is that, and how does it compare with the once-a-year figure?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the balance after one year with monthly compounding? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much interest does monthly compounding produce?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "State the quarterly schedule as an effective annual rate."
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "State the monthly schedule as an effective annual rate."
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "All three schedules advertise the same 4% rate but pay three different amounts. Explain what the effective annual rate is for, and say what a depositor should ask for when two accounts quote the same nominal rate."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l03",
+      "lessonId": "ma-g10-financial-literacy-u03-l03",
+      "unit": 3,
+      "day": 3,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the balance at the end of the year?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is that year-end balance worth in start-of-year dollars? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much purchasing power did the saver lose over the year, measured in start-of-year dollars?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the exact real rate of return — the growth factor divided by the price factor, less 1?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What do you get by simply subtracting the inflation rate from the interest rate?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "Which statement about the saver’s year is accurate?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "A statement showing a balance that went up is not by itself evidence that a saver is better off. Explain what the statement leaves out, and say what a saver would need to know to judge whether a year of saving worked."
+          }
+        ]
+      },
+      "fixedItemCount": 6,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l04",
+      "lessonId": "ma-g10-financial-literacy-u03-l04",
+      "unit": 3,
+      "day": 4,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "Under the automatic plan, how much moves to savings each month?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the automatic plan save over twelve months?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "Under the second plan, how much is left at the end of a month?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the second plan save over twelve months?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much more does the automatic plan save over the year?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "After 13 months of automatic transfers, how much has the worker saved?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "The worker is saving towards a $3,000 goal. How far short is the balance after those 13 months?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The worker earns the same amount under both plans, yet one saves $849.60 more. Explain where that difference comes from, and name one condition under which the automatic plan would fail rather than help."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l05",
+      "lessonId": "ma-g10-financial-literacy-u03-l05",
+      "unit": 3,
+      "day": 5,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much does the worker earn across the peak months?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much does the worker earn across the off-season months?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the worker’s income for the whole year?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What level monthly amount does the year’s income support?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "Across the off-season, how far does the pay fall short of that level amount in total?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "Across the peak months, how much does the pay exceed the level amount in total?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "If the worker instead budgeted as though every month paid the peak rate, how much income would the plan assume that the year never produces?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The peak surplus and the off-season shortfall both come to $5,120.00. Explain why they have to be equal, and say what the worker must actually do during the peak months for the plan to hold."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l06",
+      "lessonId": "ma-g10-financial-literacy-u03-l06",
+      "unit": 3,
+      "day": 6,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does Vehicle A hold after two years? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does Vehicle B hold after two years? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does Vehicle C hold after two years, before any fee is taken? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What do Vehicle C’s maintenance fees total over the two years?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does Vehicle C actually leave the saver after fees?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much more does Vehicle B leave the saver than Vehicle C, after fees?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which vehicle leaves the most money after two years, counting fees?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Vehicle B ends with the most money, but Vehicle A is the only one of the three a saver can reach at any time without giving anything up. Argue for one of them for money that has a 1-in-4 chance of being needed inside the two years, and name what your choice costs."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l07",
+      "lessonId": "ma-g10-financial-literacy-u03-l07",
+      "unit": 3,
+      "day": 7,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does a 3.6% annual percentage yield actually pay on $1,500 over a year?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "By how much does the student’s $648 claim overstate a year of interest?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What do the three overdrafts cost in per-item charges?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What do the extended overdraft days add?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What did the overdrafts cost altogether?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "The balance fell to $25 on one day, so the waiver condition failed. What does the monthly fee cost over a year if it fails every month?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Name the misconception behind each of the student’s three errors, and say which of the three would cost a real account holder the most over a year."
+          }
+        ]
+      },
+      "fixedItemCount": 6,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l08",
+      "lessonId": "ma-g10-financial-literacy-u03-l08",
+      "unit": 3,
+      "day": 8,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does Account X hold at the end of the term? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does Account Y hold at the end of the term? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "Which account ends higher, and by how much?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What would $8,000 hold after 5 years at 3.00% compounded once a year? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is monthly compounding worth on its own, at the same 3.00% rate?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the extra tenth of a percentage point worth on its own, comparing the two annually compounded figures?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "An earlier lesson showed that compounding more often always pays more. This one shows an annually compounded account beating a monthly one. Explain how both can be true, and state the rule this case gives you for reading two offers."
+          }
+        ]
+      },
+      "fixedItemCount": 6,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l09",
+      "lessonId": "ma-g10-financial-literacy-u03-l09",
+      "unit": 3,
+      "day": 9,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the nominal balance after three years? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the nominal gain over the three years?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is that ending balance worth in the dollars of the day the money was deposited? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the real gain over the three years, in start-of-period dollars?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much of the $853.88 nominal gain was consumed by rising prices?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the real rate of return per year?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The saver gained $853.88 on paper and $210.28 in purchasing power. Explain which figure answers \"did this account do its job\", and identify the assumption in this lesson that a real three-year period would not satisfy."
+          }
+        ]
+      },
+      "fixedItemCount": 6,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u03-l10",
+      "lessonId": "ma-g10-financial-literacy-u03-l10",
+      "unit": 3,
+      "day": 10,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much moves into savings each month?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is left in checking each month after fixed costs and the transfer?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What do the twelve transfers deposit into savings over the year, before interest?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What interest is credited at year end? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the savings balance at the end of the year?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is that ending balance worth in start-of-year dollars? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much purchasing power did the year’s price rise take out of the ending balance?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Report this budget year to the fictional household in three sentences: what was saved, what it is worth, and what the household should change first if the $302.50 monthly remainder is not enough to live on. Justify the change you recommend with a figure from this lesson."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l01",
+      "lessonId": "ma-g10-financial-literacy-u04-l01",
+      "unit": 4,
+      "day": 1,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the borrower’s weighted category score, out of 100?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "Mapped onto the 300 to 850 scale, what is the borrower’s score?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "The amounts-owed category is driven by utilisation. The borrower owes $4,260 against total limits of $9,000. What is the utilisation?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the balance after the paydown?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the new utilisation?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the new weighted category score, out of 100?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What is the new score on the 300 to 850 scale?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "How many points did the paydown move the score?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Using the stated weights, explain why paying down a balance moved this fictional score while opening a new account to raise total limits might not help as much as it appears. Then say what a scoring model of this kind can and cannot tell a lender."
+          }
+        ]
+      },
+      "fixedItemCount": 8,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l02",
+      "lessonId": "ma-g10-financial-literacy-u04-l02",
+      "unit": 4,
+      "day": 2,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is one month of interest on the credit card balance?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is one month of interest on the car loan?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is one month of interest on the personal loan?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the minimum payment on the $2,100 card balance?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "After the month’s interest is covered, how much of that minimum payment reduces the balance?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "If the balance never changed, what would a year of interest on the card cost?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which of the four accounts has no contractual end date by which the balance must be repaid?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The car loan carries the largest balance but the card is the account to worry about. Using the two axes — secured or unsecured, revolving or installment — explain why, and say what the $500 deposit behind the secured card is actually doing."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l03",
+      "lessonId": "ma-g10-financial-literacy-u04-l03",
+      "unit": 4,
+      "day": 3,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the interest charged in month 1?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much of the $200 payment reduces the balance in month 1?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the balance at the start of month 2?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the interest charged in month 2?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much principal does month 2 retire?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the balance at the start of month 3?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What is the interest charged in month 3?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "How much principal does month 3 retire?"
+          },
+          {
+            "ref": "t2-p6",
+            "responseMode": "FIXED",
+            "promptText": "What is the balance at the start of month 4?"
+          },
+          {
+            "ref": "t2-p7",
+            "responseMode": "FIXED",
+            "promptText": "Across the three months, how much of the original $6,000 has actually been repaid?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "A classmate says \"9.6% of $6,000 is $576, so a year of this loan costs $576 in interest.\" Explain what that calculation assumes, why the three months you just worked contradict it, and state whether the true first-year interest is above or below $576."
+          }
+        ]
+      },
+      "fixedItemCount": 10,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 10
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l04",
+      "lessonId": "ma-g10-financial-literacy-u04-l04",
+      "unit": 4,
+      "day": 4,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the total gift aid in the offer?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the net price — the cost of attendance after gift aid only?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What do the three self-help lines — work study and the two loans — come to?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What gap remains after every line of the offer is used?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the total of every line the offer calls aid?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What percentage of that headline total has to be repaid?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which line of the offer requires the applicant to do scheduled work during the year to receive the money?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The offer says $18,400.00 of aid. Write two sentences you would use to explain to a fictional applicant what that number actually means, and name the one figure you would want added to the letter."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l05",
+      "lessonId": "ma-g10-financial-literacy-u04-l05",
+      "unit": 4,
+      "day": 5,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much interest accrues on the unsubsidised loan before repayment begins?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the unsubsidised borrower owe when repayment begins?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much interest accrues on the private loan before repayment begins?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the private borrower owe when repayment begins?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much more does the private borrower owe than the unsubsidised federal borrower?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "The private balance is what percentage of the subsidised balance at that same moment?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which loan owes the most at the moment repayment begins?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "All three fictional students borrowed $3,500 and none of them made a payment during school, yet they owe three different amounts on the first day of repayment. Explain what a subsidy actually pays for, and say what a borrower could do during school to make the unsubsidised loan behave more like the subsidised one."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l06",
+      "lessonId": "ma-g10-financial-literacy-u04-l06",
+      "unit": 4,
+      "day": 6,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "The $60 fee is what percentage of the $400 advanced?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "Annualise that charge: what rate is 15.00% for 14 days, over a 365-day year?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "The borrower renews 5 times, so 6 fees are charged in total. What do the fees come to?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "After the 5 renewals, what does the borrower owe in total, including the principal?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What would 3 months on the fictional credit-union loan cost in interest?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much more did the short-term loan cost over the six fee periods, which run about as long as the credit-union loan’s 3 months?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which feature of the fictional short-term loan is the warning sign that the fee alone does not reveal?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Name the two features that made the fictional short-term loan expensive, and explain why annualising the fee is a fairer comparison than reading the $60 next to the $400. Say what question a borrower should ask about any charge quoted as a flat fee."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l07",
+      "lessonId": "ma-g10-financial-literacy-u04-l07",
+      "unit": 4,
+      "day": 7,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does one month of carrying that balance cost?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does a year of carrying it cost, charging each month and rounding to the cent?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the utilisation before the card is closed?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the utilisation after the card is closed?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "By how many percentage points did closing the card move utilisation? Give the number of points, without a percent sign."
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Under the stated fictional model, which of the student’s three claims is simply false rather than costly?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Correct each of the three claims in one sentence, then rank them by how much acting on them would cost over a year and defend the ranking with figures."
+          }
+        ]
+      },
+      "fixedItemCount": 6,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l08",
+      "lessonId": "ma-g10-financial-literacy-u04-l08",
+      "unit": 4,
+      "day": 8,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What equal monthly payment clears the purchase within the promotional period?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "The shopper misses the final payment, leaving $150 outstanding at the end of month 12. Under the stated terms, what interest is charged?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does the shopper now owe in total at the end of month 12?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "The retroactive interest is how many times the $150 that was left unpaid? Round to two decimal places."
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "Counting the retroactive interest, the shopper paid what percentage of the sticker price?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "Under the stated terms, what determines whether the interest is charged?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Explain the difference between interest that is waived and interest that is deferred, and say what a shopper should set up at the moment of purchase so that this promotion behaves the way it appears to."
+          }
+        ]
+      },
+      "fixedItemCount": 6,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l09",
+      "lessonId": "ma-g10-financial-literacy-u04-l09",
+      "unit": 4,
+      "day": 9,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the level monthly payment over the 36-month term? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is paid in total over the 36-month term?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much of that is interest?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the level monthly payment over the 60-month term? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is paid in total over the 60-month term?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much of that is interest?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much more interest does the longer term cost?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "How much smaller is the monthly payment on the longer term?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The longer term costs $861.72 more and frees $132.97 a month. Argue for one of the two terms for a fictional borrower whose income is steady but whose monthly margin is thin, and name what your choice risks."
+          }
+        ]
+      },
+      "fixedItemCount": 8,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l10",
+      "lessonId": "ma-g10-financial-literacy-u04-l10",
+      "unit": 4,
+      "day": 10,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the pathway cost over the two years?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the total gift aid over the two years?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the total self-help aid — work study and both loans — over the two years?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What gap remains after every line of aid is used across the two years?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much interest accrues on the unsubsidised balance before repayment begins?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the total federal balance when repayment begins?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What is the level monthly payment over 120 months at 5.5%? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "What is repaid in total over the 120 months?"
+          },
+          {
+            "ref": "t2-p6",
+            "responseMode": "FIXED",
+            "promptText": "How much of that total is interest?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Report this plan in four sentences: what the pathway costs, what is given, what is owed, and what repaying it looks like. Then name the single change to the package that would most reduce the total repaid, and defend it with a figure."
+          }
+        ]
+      },
+      "fixedItemCount": 9,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 9
+    },
+    {
+      "packageId": "swk-flhs-g10-u04-l11",
+      "lessonId": "ma-g10-financial-literacy-u04-l11",
+      "unit": 4,
+      "day": 11,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "Under Order A, how much interest accrues on the unsubsidised portion?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does Order A owe when repayment begins?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "Under Order B, how much interest accrues on the private loan?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does Order B owe when repayment begins?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much more does Order B owe than Order A?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "Order B’s balance is what percentage of Order A’s?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which feature of Order A accounts for the larger share of the $2,324.25 difference?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Defend the rule \"take federal aid before private borrowing\" using these figures, then name one circumstance in which a fictional student might still need private borrowing, and say what they should compare before accepting it."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l01",
+      "lessonId": "ma-g10-financial-literacy-u05-l01",
+      "unit": 5,
+      "day": 1,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What did the share position cost to buy?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the position worth at the end of the simulated year?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much did the position gain from the price move alone?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much did the shares pay in dividends over the year?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the total return on the share position in dollars?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is that total return as a percentage of what the position cost?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What does the fictional bond pay in coupon each year?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "What is the bond’s current yield — the coupon measured against the $960 actually paid?"
+          },
+          {
+            "ref": "t2-p6",
+            "responseMode": "FIXED",
+            "promptText": "Which of these instruments carries a stated promise to pay a fixed amount on a schedule?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "A fictional index fund holds small pieces of hundreds of companies at once, while the share position above is one company. Explain what the fund changes about the risk the investor is exposed to, and name one risk it does not remove."
+          }
+        ]
+      },
+      "fixedItemCount": 9,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l02",
+      "lessonId": "ma-g10-financial-literacy-u05-l02",
+      "unit": 5,
+      "day": 2,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is Fund L’s net annual return?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is Fund H’s net annual return?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does Fund L hold after 20 years? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does Fund H hold after 20 years? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much less does the investor end with in Fund H?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "If Fund H’s 0.95% fee were charged on the original $10,000 every year for 20 years, what would the fees add up to?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "By how much does the actual shortfall exceed that estimate?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The difference between the two expense ratios is under one percentage point, and it cost $5,255.45 over twenty years. Explain why the naive fee estimate of $1,900.00 misses most of the cost, and say what this implies about which disclosed number deserves attention on a long-held fund."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l03",
+      "lessonId": "ma-g10-financial-literacy-u05-l03",
+      "unit": 5,
+      "day": 3,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the return on the equally weighted portfolio?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the equally weighted portfolio worth at the end of the year? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What would the whole $8,000 have been worth in the broad domestic stock fund alone?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What would the whole $8,000 have been worth in the international stock fund alone?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the spread between the best and worst single-asset outcomes?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much did the diversified portfolio gain over the year?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much did the diversified investor give up against the best single choice?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The diversified portfolio finished $1,100.00 behind the best single choice and $820.00 ahead of the worst. Explain what an investor is actually buying when they diversify, and say why the $1,100.00 is not evidence that diversifying was a mistake."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l04",
+      "lessonId": "ma-g10-financial-literacy-u05-l04",
+      "unit": 5,
+      "day": 4,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the total value of the customer’s account?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "If the fictional brokerage fails, how much of the securities holding falls within the $500,000 limit?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much of the cash falls within the $250,000 cash sub-limit?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "If that brokerage failed, how much of the second customer’s securities would fall outside the $500,000 limit?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much value does the first customer lose in the 22% market decline?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What are those securities worth after the decline?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much of that $74,800.00 decline does the fictional Investor Protection Fund cover?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "A fictional advertisement says an account is \"protected up to $500,000\". Explain in your own words what that protection actually is, name what it excludes, and say what a disclosure rule requiring risk factors to be published is for."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l05",
+      "lessonId": "ma-g10-financial-literacy-u05-l05",
+      "unit": 5,
+      "day": 5,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the pre-tax account hold after 25 years, before any withdrawal tax?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "If the withdrawal is taxed at 22%, what does the saver keep from the pre-tax account? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much actually goes into the after-tax account, once 22% tax is paid on the $4,000 first?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the after-tax account hold after 25 years, with no tax due on withdrawal? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "Suppose the saver’s rate at withdrawal is 12% instead. What does the pre-tax account leave then? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much better off is the pre-tax account in that case?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What does the ordinary taxable account hold after 25 years, with each year’s 6% growth taxed at 22% as it is earned? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "How much does the annual taxing of growth cost against the after-tax account?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Under this model the pre-tax and after-tax accounts finished exactly level at $13,390.64. State the single condition that made them equal, say which one wins if that condition breaks in each direction, and name one thing this simplified model leaves out."
+          }
+        ]
+      },
+      "fixedItemCount": 8,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l06",
+      "lessonId": "ma-g10-financial-literacy-u05-l06",
+      "unit": 5,
+      "day": 6,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What annual return does a guaranteed 3% a month work out to, if each month’s return compounds?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much money is in the pool?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does one month of promised payouts cost across all 40 investors?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "With no real earnings, how many months of payouts can the pool fund before it is exhausted? Round to one decimal place."
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "A fictional diversified fund states a long-run average of 7% a year. State that as a percentage for comparison."
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "By how many percentage points does the offer exceed that stated average? Give the number of points, without a percent sign."
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which feature of the offer is the strongest single warning sign?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Explain why the arithmetic alone shows this arrangement must fail, and name three checks a person could run before putting money into any offer. Say which of your checks would have been quickest here."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l07",
+      "lessonId": "ma-g10-financial-literacy-u05-l07",
+      "unit": 5,
+      "day": 7,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What was the percentage change on the way down, from $50 to $25?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What percentage rise is needed to get from $25 back to $50?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the fictional bond pay in coupon for its final year?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "With new bonds now paying 5%, what is this bond worth today? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much has the bondholder lost on paper?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Under this model, what caused the bond’s price to fall?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Correct each of the three claims, and explain what the first two have in common as reasoning errors. For the third claim, say what actually determines a fund’s expense ratio."
+          }
+        ]
+      },
+      "fixedItemCount": 6,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l08",
+      "lessonId": "ma-g10-financial-literacy-u05-l08",
+      "unit": 5,
+      "day": 8,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does platform A charge on the $12,000 account in a year?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does platform A charge on the $30,000 account in a year?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "At what balance do the two platforms charge the same amount in a year? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does platform A cost on the $30,000 account over 10 years?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does platform B cost over the same 10 years?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much more does the percentage fee cost on that account over the decade?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "On the $12,000 account, how much more does the flat fee cost than the percentage fee in one year?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Explain why neither fee structure is cheaper in general, using the crossover balance. Then say what changes about this comparison for an investor who is adding money every year, and what that means for someone starting near the crossover."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l09",
+      "lessonId": "ma-g10-financial-literacy-u05-l09",
+      "unit": 5,
+      "day": 9,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the average of Portfolio P’s three annual returns?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is Portfolio P worth after the three years? Round to the nearest cent."
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is Portfolio Q worth after the three years? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much more does the steadier portfolio end with?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much did Portfolio P actually gain over the three years?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much did Portfolio Q gain?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Why does Portfolio P end lower despite having the same average annual return?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Both portfolios averaged 6.00% a year and ended $246.16 apart. Explain what this shows about reading an advertised average return, and connect it to why an investor might accept a lower expected return in exchange for a steadier one."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u05-l10",
+      "lessonId": "ma-g10-financial-literacy-u05-l10",
+      "unit": 5,
+      "day": 10,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much goes into the broad domestic stock index fund?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much goes into the international stock index fund?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much goes into the bond index fund?"
+          },
+          {
+            "ref": "t1-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much goes into the cash reserve?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the weighted expense ratio of the whole allocation?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does that cost in dollars in the first year? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What would the fictional managed alternative cost on the same balance in a year?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What is the annual difference between the two?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Defend this allocation for a goal 15 years away in four sentences: what each of the four parts is there to do, what risk each one accepts, what the whole thing costs, and what would have to be true for the managed alternative’s extra $156.00 a year to be worth paying."
+          }
+        ]
+      },
+      "fixedItemCount": 8,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l01",
+      "lessonId": "ma-g10-financial-literacy-u06-l01",
+      "unit": 6,
+      "day": 1,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What do the five policies cost the household in a year?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does that come to per month?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What share of the total does health coverage take?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What share of the total does renters coverage take?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does renters coverage cost per month?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "The belongings are worth $14,600. How many dollars of belongings does each dollar of annual renters premium stand behind? Round to two decimal places."
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "If the building the household rents burns down, which of these policies is the one that pays for the household’s own furniture and clothing?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Insurance is worth buying for losses a household could not absorb on its own. Using that test, sort these five coverages into ones that protect against a loss too large to absorb and ones that protect against something else, and say which single coverage you would defend keeping if the household had to drop one."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l02",
+      "lessonId": "ma-g10-financial-literacy-u06-l02",
+      "unit": 6,
+      "day": 2,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "On a $6,400 loss, what does the policy pay?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the policyholder pay on that loss?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "On an $18,500 loss, what does the policy pay?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the policyholder pay on that loss?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "A common shortcut says \"the most you can get is the limit minus the deductible.\" On this $18,500 loss, by how much does that shortcut understate what the policy actually pays?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "In a year with the $6,400 loss, what does the policyholder pay in total, counting the premium?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "On which of the two losses is the policyholder’s own cost equal to the deductible?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Write the policy’s payout rule as one sentence a person could apply to any loss. Then explain why \"my deductible is $1,000, so a claim can never cost me more than $1,000\" is false, and say which of the two policy terms a person should check first when deciding whether coverage is enough."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l03",
+      "lessonId": "ma-g10-financial-literacy-u06-l03",
+      "unit": 6,
+      "day": 3,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the renter’s total exposure — the value of everything on the list?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "In the total loss, what does Option 1 pay?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does the renter bear under Option 1?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "In the same total loss, what does Option 2 pay?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the renter bear under Option 2?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much more does Option 2 pay in this loss?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much more does Option 2 cost in annual premium?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Option 2 costs $70.00 more a year and pays $2,350.00 more in a total loss. Explain how a renter should decide between them without knowing whether a fire will happen, and say what would have to change about the inventory for Option 1 to become the better fit."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l04",
+      "lessonId": "ma-g10-financial-literacy-u06-l04",
+      "unit": 6,
+      "day": 4,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "After the deductible is met, how much of the year’s charges remain?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the patient’s 20% share of that remainder?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "Adding the deductible, what would the patient owe before the maximum is considered?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the patient actually pay for the year?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the plan pay for the year?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "At what level of covered charges does the patient first reach the out-of-pocket maximum?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "A second simulated year brings $60,000 of covered charges under the same plan. What does the patient pay?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "A coverage limit on the auto policy earlier in this unit and an out-of-pocket maximum on this health plan both cap something. Explain what each one caps and who it protects, and say which structure leaves the insured party exposed to an unlimited loss."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l05",
+      "lessonId": "ma-g10-financial-literacy-u06-l05",
+      "unit": 6,
+      "day": 5,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What do the unauthorised charges come to?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "If the holder reports the next day, what do they owe under the schedule?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "If instead the holder reports on day 12, what do they owe?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much does reporting the next day save against reporting after 60 days?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much does the delay from day 1 to day 12 cost?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "Under this simulated schedule, what does the account holder control?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Write the first four things a fictional person should do on finding unauthorised charges, in order, and explain why the order matters given this schedule. Say which step you would not delay even by a day."
+          }
+        ]
+      },
+      "fixedItemCount": 6,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l06",
+      "lessonId": "ma-g10-financial-literacy-u06-l06",
+      "unit": 6,
+      "day": 6,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "In a single year with one claim, what does Policy X cost in total?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "In the same year, what does Policy Y cost in total?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "In a year with no claim, how much cheaper is Policy Y?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "Over 5 years with one claim, what does Policy X cost?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "Over the same 5 years with one claim, what does Policy Y cost?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "Which is cheaper over that period, and by how much?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Over 5 years with two claims, what does Policy X cost?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "Over 5 years with two claims, what does Policy Y cost?"
+          },
+          {
+            "ref": "t2-p6",
+            "responseMode": "FIXED",
+            "promptText": "With two claims, how much more does Policy Y cost?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Policy Y is cheaper with one claim in five years and more expensive with two. Explain what a shopper actually has to estimate to choose between them, and say why a policy with a higher deductible can be the wrong choice even for someone who expects few claims."
+          }
+        ]
+      },
+      "fixedItemCount": 9,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 9
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l07",
+      "lessonId": "ma-g10-financial-literacy-u06-l07",
+      "unit": 6,
+      "day": 7,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "The landlord’s policy pays $0 toward the tenant’s possessions. How much of the tenant’s $5,240 of belongings must the tenant replace out of their own pocket?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much income does the fictional worker lose over the 5 months?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much would a disability policy replacing 60% of lost income have paid?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "Even with a disability policy, how much of the lost income is still unreplaced?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What do 20 years of term life premiums come to?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How many dollars of coverage does each dollar of total premium stand behind over the term? Round to two decimal places."
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which of the three claims describes a coverage the student already holds as though it did a different job?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "For each of the three claims, name the exposure the student is leaving uncovered and say what would have to be true for the student to be right. Then explain what \"you get nothing back\" misunderstands about paying a premium."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l08",
+      "lessonId": "ma-g10-financial-literacy-u06-l08",
+      "unit": 6,
+      "day": 8,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the windstorm deductible in dollars?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "On the $47,500 loss, what does the policy pay?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does the homeowner pay on that loss?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "On the $195,000 loss, what does the policy pay?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the homeowner pay on that loss?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "If the policy had carried a flat $1,000 deductible instead, how much more would it have paid on the $47,500 loss?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "If the homeowner raised the dwelling coverage limit to $220,000, what would happen to the windstorm deductible?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The payout rule was the same in this lesson as in the flat-deductible ones, but one input was computed differently. State the rule in a form that covers both, explain what changes when a deductible is set as a percentage of the limit, and say what a homeowner should check before raising a coverage limit."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l09",
+      "lessonId": "ma-g10-financial-literacy-u06-l09",
+      "unit": 6,
+      "day": 9,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much income does the household lose if the earner cannot work for 6 months?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "In a total loss of the belongings, what does the renters policy pay?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does the household bear in that event?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "In a total loss of the car, what does collision pay?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the household bear in that event?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "Of the three events, what is the largest amount the household would have to bear?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "If all three events happened in the same year, what would the household bear in total?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The household insures a $12,300 car down to a $1,000 exposure and leaves a $26,000.00 income exposure entirely uncovered. Explain why this pattern is common, and recommend the single change you would make first, defending it against the alternative of raising the renters limit."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u06-l10",
+      "lessonId": "ma-g10-financial-literacy-u06-l10",
+      "unit": 6,
+      "day": 10,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does collision pay for the policyholder’s car?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does medical payments coverage pay?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does property damage liability pay for the other party’s property?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the insurer pay in total across the three coverages?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the policyholder bear on their own car?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does the policyholder bear on their own medical bills?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What is the policyholder responsible for on the other party’s property?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "What does the policyholder bear in total?"
+          },
+          {
+            "ref": "t2-p6",
+            "responseMode": "FIXED",
+            "promptText": "Check the work: what do the insurer’s payments and the policyholder’s costs come to together?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Report this claim to the fictional policyholder: what the policy paid, what they owe, and which single coverage limit was most costly to have set where it was. Then say which limit you would raise first and what raising it would not fix."
+          }
+        ]
+      },
+      "fixedItemCount": 9,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 9
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l01",
+      "lessonId": "ma-g10-financial-literacy-u07-l01",
+      "unit": 7,
+      "day": 1,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the worker’s taxable income?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much tax is charged on the first bracket?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much tax is charged on the second bracket?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much tax is charged on the third bracket?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the total federal income tax?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the effective rate on taxable income — the total tax divided by taxable income?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What is the effective rate on gross income?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "What rate would apply to one additional dollar of this worker’s gross income?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "This worker has a 24% marginal rate, a 14.19% effective rate on taxable income, and an 11.45% effective rate on gross income. Explain what question each of the three rates answers, and say which one a person should use when deciding whether extra work is worth taking on."
+          }
+        ]
+      },
+      "fixedItemCount": 8,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l02",
+      "lessonId": "ma-g10-financial-literacy-u07-l02",
+      "unit": 7,
+      "day": 2,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is Worker A’s social insurance levy?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is Worker A’s health levy?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is Worker A’s total payroll tax?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is Worker B’s social insurance levy?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is Worker B’s health levy?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is Worker B’s total payroll tax?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What share of Worker B’s wages is that?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "What share of Worker A’s wages was their payroll tax?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The income tax in the previous lesson took a larger share as income rose; this payroll tax takes a smaller one. Explain what feature of each schedule produces that difference, and say why a person comparing two jobs should look at both taxes rather than the income tax alone."
+          }
+        ]
+      },
+      "fixedItemCount": 8,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l03",
+      "lessonId": "ma-g10-financial-literacy-u07-l03",
+      "unit": 7,
+      "day": 3,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the filer’s total income for the year?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the filer’s taxable income?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much tax is charged on the first bracket?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much tax is charged on the second bracket?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the total income tax for the year?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "The employer withheld $2,100. What does the filer owe when the return is filed?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which document tells an employer how much income tax to withhold from a paycheck?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "The filer did nothing wrong and still owes $2,044.00 at filing. Explain how that happens, and describe two different things the filer could have done during the year to avoid being surprised by it."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l04",
+      "lessonId": "ma-g10-financial-literacy-u07-l04",
+      "unit": 7,
+      "day": 4,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the filer’s taxable income before any of the three provisions?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the tax owed before any of the three provisions?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "With the $2,800 nonrefundable credit applied, what tax is owed?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "If the $2,800 credit were refundable instead, what would the filer receive back?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much of the $2,800 does the nonrefundable version leave unused?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "If the $2,800 were an additional deduction rather than a credit, how much tax would it save?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much more is the refundable credit worth to this filer than the deduction?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Rank the three provisions by what they are worth to this filer, then explain how the ranking would change for a filer whose tax owed was $9,000 instead of $2,450.00. State the rule each provision follows in one sentence apiece."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l05",
+      "lessonId": "ma-g10-financial-literacy-u07-l05",
+      "unit": 7,
+      "day": 5,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What income tax does the worker pay in State P?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What sales tax does the worker pay in State P?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does the worker pay in State P in total?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What sales tax does the worker pay in State Q?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the worker pay in State Q in total, including the annual levy?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much less does this worker pay in State Q?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What does State Q recover through, in place of an income tax?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "State Q saved this particular worker $612.00. Describe a fictional worker for whom State P would be cheaper instead, and explain which feature of each schedule decides the answer."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l06",
+      "lessonId": "ma-g10-financial-literacy-u07-l06",
+      "unit": 7,
+      "day": 6,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What were the filer’s deductible expenses in total, documented or not?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What tax does the documented amount actually save at a 14% marginal rate?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What would the full $3,090.00 have saved if all of it had been documented?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What did the missing records cost in extra tax?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the late-filing penalty?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the interest charged over the same period?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What did poor recordkeeping and late filing cost the filer altogether?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Of the $705.60, decide which part was cheapest to have avoided and defend your answer. Then write three recordkeeping habits that would address the larger of the two problems, and say when in the year each one has to happen."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l07",
+      "lessonId": "ma-g10-financial-literacy-u07-l07",
+      "unit": 7,
+      "day": 7,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the worker’s taxable income before the raise?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the tax before the raise?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the worker’s taxable income after the raise?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the tax after the raise?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "How much more tax does the raise cost?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "Of the $2,000 raise, how much does the worker keep?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much of the worker’s taxable income is actually charged at 24%?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Explain in your own words exactly where the worker’s reasoning goes wrong, and write the one sentence you would say to correct it. Then describe what would have to be true of a tax system for the worker’s fear to be justified."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l08",
+      "lessonId": "ma-g10-financial-literacy-u07-l08",
+      "unit": 7,
+      "day": 8,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What payroll tax does the employee pay?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What payroll tax does the contractor pay on the same $46,000?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much more payroll tax does the contractor pay?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does the employee have left after payroll tax?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What would the contractor have to be paid to keep the same amount after their 15% payroll tax? Round to the nearest cent."
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "How much more than the employee offer is that?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What percentage increase over the employee offer does that represent?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Explain why $4,058.82 rather than $3,450.00 is the right uplift, then name two things besides payroll tax that a fictional person should price before accepting contractor work at the same headline rate."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l09",
+      "lessonId": "ma-g10-financial-literacy-u07-l09",
+      "unit": 7,
+      "day": 9,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the filer’s total income for the year?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the filer’s taxable income?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the income tax on that taxable income?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What payroll tax is owed on the self-employment income?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does the filer owe in total for the year?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "After crediting the $3,250 already withheld, what is the balance due at filing?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "Which figure did the $6,500 of self-employment income affect that the same amount of extra W-2 wages would not have?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Work out what fraction of every dollar of the $6,500 side income this filer keeps, and use it to write one sentence of guidance about setting money aside from side income. Explain why the fraction is smaller than the 14% bracket rate alone would suggest."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l10",
+      "lessonId": "ma-g10-financial-literacy-u07-l10",
+      "unit": 7,
+      "day": 10,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What is the filer’s taxable income?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the income tax before the credit?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What is the income tax after the $1,500 nonrefundable credit?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "What payroll tax is charged on the wages?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What is the filer’s total federal tax for the year?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "The $5,900 withheld covered income tax only. What is the balance due or refund on the income tax?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "What is the effective federal rate on gross income, counting both taxes?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "Write a four-sentence year-end summary for this fictional filer: what was owed, what was already paid, what is still due, and what share of gross income the whole federal burden came to. Then name the one change to the W-4 you would recommend and say what it would and would not fix."
+          }
+        ]
+      },
+      "fixedItemCount": 7,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7
+    },
+    {
+      "packageId": "swk-flhs-g10-u07-l11",
+      "lessonId": "ma-g10-financial-literacy-u07-l11",
+      "unit": 7,
+      "day": 11,
+      "subjectFamily": "MATH_STRUCTURED_FINLIT",
+      "structuredDiscipline": "FINANCIAL_LITERACY",
+      "laneScoringKind": "HYBRID",
+      "responseScoring": {
+        "mode": "MIXED",
+        "items": [
+          {
+            "ref": "t1-p1",
+            "responseMode": "FIXED",
+            "promptText": "What does Household A pay in State R in income tax, state and local combined?"
+          },
+          {
+            "ref": "t1-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does Household A pay in State R in total?"
+          },
+          {
+            "ref": "t1-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does Household A pay in State S in total?"
+          },
+          {
+            "ref": "t2-p1",
+            "responseMode": "FIXED",
+            "promptText": "How much more does State S cost Household A than State R does?"
+          },
+          {
+            "ref": "t2-p2",
+            "responseMode": "FIXED",
+            "promptText": "What does Household B pay in State R in total?"
+          },
+          {
+            "ref": "t2-p3",
+            "responseMode": "FIXED",
+            "promptText": "What does Household B pay in State S in total?"
+          },
+          {
+            "ref": "t2-p4",
+            "responseMode": "FIXED",
+            "promptText": "How much less does State S cost Household B than State R does?"
+          },
+          {
+            "ref": "t2-p5",
+            "responseMode": "FIXED",
+            "promptText": "The $2,180 levy is what percentage of Household A’s gross income?"
+          },
+          {
+            "ref": "t2-p6",
+            "responseMode": "FIXED",
+            "promptText": "For which household is the claim \"State S is the cheaper state\" true?"
+          },
+          {
+            "ref": "t3-p1",
+            "responseMode": "OPEN",
+            "promptText": "A fictional advertisement says \"Move to State S and stop paying income tax.\" Say for whom that advice would have worked and for whom it would have backfired, explain which feature of State S produces the split, and state what makes a fixed annual charge fall differently from a percentage one."
+          }
+        ]
+      },
+      "fixedItemCount": 9,
+      "openItemCount": 1,
+      "oracleVerifiedFixedAnswers": 9
+    }
+  ]
+}

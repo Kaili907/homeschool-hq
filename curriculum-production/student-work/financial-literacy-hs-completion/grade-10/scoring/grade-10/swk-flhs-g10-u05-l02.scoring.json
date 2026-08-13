@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l02",
+  "lessonId": "ma-g10-financial-literacy-u05-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "6.42%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The 6.5% gross return less the 0.08% expense ratio. The fee comes out of the return before the investor sees it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "5.55%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same 6.5% gross less the 0.95% expense ratio — a gap of 0.87 percentage points a year."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$34,710.84",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,000 compounded at the 6.42% net rate for 20 years."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$29,455.39",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same $10,000 compounded at the 5.55% net rate for the same 20 years."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$5,255.45",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$34,710.84 against $29,455.39. Both funds earned the same gross return every year."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.95% of $10,000 in each of 20 years. This is what a quick estimate of the fee cost produces, and it is the wrong figure."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,355.45",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,255.45 of actual shortfall against a $1,900.00 estimate. The difference is the growth the money taken as fees would itself have produced, plus the fee charged on a balance that grew well above $10,000."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "(gross - erLow) * 100",
+        "substituted": "(0.065 - 0.0008) * 100",
+        "result": "6.42%",
+        "why": "The 6.5% gross return less the 0.08% expense ratio. The fee comes out of the return before the investor sees it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "(gross2 - erHigh) * 100",
+        "substituted": "(0.065 - 0.0095) * 100",
+        "result": "5.55%",
+        "why": "The same 6.5% gross less the 0.95% expense ratio — a gap of 0.87 percentage points a year."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(start * pow(1 + gross3 - erLow2, 20), 2)",
+        "substituted": "round(10000 * pow(1 + 0.065 - 0.0008, 20), 2)",
+        "result": "$34,710.84",
+        "why": "$10,000 compounded at the 6.42% net rate for 20 years."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(start2 * pow(1 + gross4 - erHigh2, 20), 2)",
+        "substituted": "round(10000 * pow(1 + 0.065 - 0.0095, 20), 2)",
+        "result": "$29,455.39",
+        "why": "The same $10,000 compounded at the 5.55% net rate for the same 20 years."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t2-p1",
+        "substituted": "#t1-p3 - #t2-p1",
+        "result": "$5,255.45",
+        "why": "$34,710.84 against $29,455.39. Both funds earned the same gross return every year."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "start3 * erHigh3 * 20",
+        "substituted": "10000 * 0.0095 * 20",
+        "result": "$1,900.00",
+        "why": "0.95% of $10,000 in each of 20 years. This is what a quick estimate of the fee cost produces, and it is the wrong figure."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 - #t2-p3",
+        "substituted": "#t2-p2 - #t2-p3",
+        "result": "$3,355.45",
+        "why": "$5,255.45 of actual shortfall against a $1,900.00 estimate. The difference is the growth the money taken as fees would itself have produced, plus the fee charged on a balance that grew well above $10,000."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The difference between the two expense ratios is under one percentage point, and it cost $5,255.45 over twenty years. Explain why the naive fee estimate of $1,900.00 misses most of the cost, and say what this implies about which disclosed number deserves attention on a long-held fund.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the fee is charged on the whole balance each year, not on the original $10,000, and that money removed early also gives up every year of growth it would have earned.",
+          "Concludes that the expense ratio deserves close attention precisely because it is small-looking, recurring, and compounds against the investor over a long holding period.",
+          "Notes that the comparison holds gross return equal by assumption, so it isolates the fee and does not claim the cheaper fund performs better before costs."
+        ],
+        "evidenceRequirements": [
+          "Uses the $34,710.84 and $29,455.39 ending balances and both the $5,255.45 and $1,900.00 figures."
+        ],
+        "lookFors": [
+          "The response identifies forgone growth on the fees, not just the fees.",
+          "The response recognises the equal-gross-return assumption as an assumption rather than a finding."
+        ],
+        "commonMisconception": "Treating a fraction of a percent in fees as too small to matter over a long holding period.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

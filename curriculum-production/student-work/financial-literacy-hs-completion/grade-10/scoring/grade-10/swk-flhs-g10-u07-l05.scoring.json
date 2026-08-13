@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l05",
+  "lessonId": "ma-g10-financial-literacy-u07-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,162.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4.6% of the $47,000 gross. This fictional state charges a flat rate on gross with no deduction, which is a different structure from the federal schedule in this unit."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$870.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7.25% of the $12,000 of taxable purchases."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,032.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,162.00 of income tax plus $870.00 of sales tax."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "9% of the same $12,000 of purchases — $210.00 more than State P charges on identical spending."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,420.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,080.00 of sales tax plus the $1,340 annual levy. There is no income tax line, but there are two other lines."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$612.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,032.00 against $2,420.00. State Q is cheaper for this worker — but by $612.00, not by the whole $2,162.00 the missing income tax might suggest."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "A higher sales tax and a separate annual levy",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "State Q charges 9% on purchases against State P’s 7.25%, and adds a $1,340 annual levy that State P does not have. Federal tax is the same in both states and is not affected by where the worker lives in this comparison."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "gross * pRate",
+        "substituted": "47000 * 0.046",
+        "result": "$2,162.00",
+        "why": "4.6% of the $47,000 gross. This fictional state charges a flat rate on gross with no deduction, which is a different structure from the federal schedule in this unit."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "purchases * pSales",
+        "substituted": "12000 * 0.0725",
+        "result": "$870.00",
+        "why": "7.25% of the $12,000 of taxable purchases."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$3,032.00",
+        "why": "$2,162.00 of income tax plus $870.00 of sales tax."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "purchases2 * qSales",
+        "substituted": "12000 * 0.09",
+        "result": "$1,080.00",
+        "why": "9% of the same $12,000 of purchases — $210.00 more than State P charges on identical spending."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 + qLevy",
+        "substituted": "#t2-p1 + 1340",
+        "result": "$2,420.00",
+        "why": "$1,080.00 of sales tax plus the $1,340 annual levy. There is no income tax line, but there are two other lines."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 - #t2-p2",
+        "substituted": "#t1-p3 - #t2-p2",
+        "result": "$612.00",
+        "why": "$3,032.00 against $2,420.00. State Q is cheaper for this worker — but by $612.00, not by the whole $2,162.00 the missing income tax might suggest."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "State Q saved this particular worker $612.00. Describe a fictional worker for whom State P would be cheaper instead, and explain which feature of each schedule decides the answer.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Describes a worker for whom State P wins — a lower income with high taxable spending, or someone facing the $1,340 levy with little income — and explains why from the structures.",
+          "Identifies the deciding features: State P’s bill scales with income, while State Q’s scales with spending and carries a fixed levy that does not fall when income does.",
+          "Notes that the $612.00 saving belongs to this worker’s particular combination of $47,000 of income and $12,000 of purchases, and is not a property of the two states."
+        ],
+        "evidenceRequirements": [
+          "Uses both state totals and refers to the $1,340 levy or the difference between the two sales tax rates."
+        ],
+        "lookFors": [
+          "The response reasons from which base each tax is charged on — income against spending — rather than from the rates alone.",
+          "The response recognises that a fixed levy weighs most heavily on the lowest incomes."
+        ],
+        "commonMisconception": "Reading \"no income tax\" as meaning a lower total tax burden.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

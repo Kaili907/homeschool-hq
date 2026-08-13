@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u03-l07",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: account types and their fee and access structures"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "account types and their fee and access structures",
+  "objective": "Locate and correct three errors in a fictional worked page about account rates, overdraft charges, and a minimum-balance waiver, and state the misconception behind each one.",
+  "scenario": "The simulated worked page below was written by a fictional student for this exercise. Its errors are deliberate. No real bank or account is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional worked page in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional student wrote: \"The account holds $1,500 at a 3.6% annual percentage yield. That is 3.6% each month, so the interest is $54 a month, which comes to $648 a year.\" Check the first claim.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does a 3.6% annual percentage yield actually pay on $1,500 over a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the student’s $648 claim overstate a year of interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The fictional student also wrote: \"Overdraft protection is free, so the three overdrafts cost nothing,\" and \"The balance averaged $310 over the month, so the $10 monthly fee was waived.\" The fictional bank charges $34 for each overdraft, plus $6 a day for each day an account stays overdrawn beyond the first, and waives the $10 monthly fee only in a month when the balance stays at or above $300 every single day. This account was overdrawn for 5 extra days and fell to $25 on one day.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the three overdrafts cost in per-item charges?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do the extended overdraft days add?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What did the overdrafts cost altogether?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "The balance fell to $25 on one day, so the waiver condition failed. What does the monthly fee cost over a year if it fails every month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Name the misconception behind each of the student’s three errors, and say which of the three would cost a real account holder the most over a year."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the annual interest still looks like $648, read the rate name again: an annual percentage yield is what a year pays, not what a month pays. Multiply $1,500 by 3.6% once for a year, and notice that a single month of overdrafts on this same account cost $132.00.",
+  "extension": "Rewrite the fictional student’s three sentences so each one is correct, then say which of the three terms — the yield, the overdraft schedule, or the waiver condition — a person opening an account would be least likely to read.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u03-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

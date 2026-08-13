@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l05",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: subsidised, unsubsidised, and private loan terms"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "subsidised, unsubsidised, and private loan terms",
+  "objective": "Compute what the same fictional principal owes at the start of repayment under subsidised, unsubsidised, and private terms, and attribute the whole difference to in-school interest treatment.",
+  "scenario": "The three simulated loans below are invented for this exercise. In this model, interest accrues at a simple annual rate during the in-school and grace period and is added to the principal once when repayment begins. Real loans vary in how often interest capitalises, and a real schedule can capitalise more than once.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the three fictional loan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Three fictional loans of $3,500 each. The subsidised federal loan is charged 5.5% but no interest accrues during the 4.5 years of school and grace, so nothing is added. The unsubsidised federal loan is charged the same 5.5%, and interest does accrue over those 4.5 years. The private loan is charged 10.9% and interest accrues over the same 4.5 years.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest accrues on the unsubsidised loan before repayment begins?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the unsubsidised borrower owe when repayment begins?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much interest accrues on the private loan before repayment begins?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the three at the moment repayment starts. The subsidised borrower still owes exactly the $3,500 borrowed.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the private borrower owe when repayment begins?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the private borrower owe than the unsubsidised federal borrower?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The private balance is what percentage of the subsidised balance at that same moment?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which loan owes the most at the moment repayment begins?",
+          "choices": [
+            "The subsidised federal loan",
+            "The unsubsidised federal loan",
+            "The private loan"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "All three fictional students borrowed $3,500 and none of them made a payment during school, yet they owe three different amounts on the first day of repayment. Explain what a subsidy actually pays for, and say what a borrower could do during school to make the unsubsidised loan behave more like the subsidised one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If all three loans come out at $3,500, no interest has been accrued. Only the subsidised loan has its in-school interest paid for it. Apply the stated rate to $3,500 across the full 4.5 years for each of the other two, and add the result to the principal.",
+  "extension": "Work out what the unsubsidised borrower would owe at repayment if they paid the accruing interest every year during school, and say how much capitalisation itself cost them.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

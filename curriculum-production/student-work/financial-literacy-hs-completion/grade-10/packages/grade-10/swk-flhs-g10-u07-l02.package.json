@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l02",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: payroll taxes and employer withholding"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "payroll taxes and employer withholding",
+  "objective": "Compute payroll tax for two fictional wage levels under a schedule with a wage cap on one levy and none on the other, and show that the combined rate falls as wages rise past the cap.",
+  "scenario": "The simulated payroll levies below are invented for this exercise. In this fictional system the social insurance levy is 6% of wages up to a cap of $158,000, and the health levy is 1.5% of all wages with no cap. These are separate from the income tax and are withheld from every paycheck.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional payroll schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Worker A earns wages of $58,000 in the simulated year, which is below the $158,000 social insurance cap. Compute each levy separately. Note that no deduction applies to payroll tax in this system: the levies are charged on wages from the first dollar.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker A’s social insurance levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker A’s health levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker A’s total payroll tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Worker B earns wages of $210,000 in the same year, which is above the cap. Apply the cap to the social insurance levy only.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker B’s social insurance levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker B’s health levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Worker B’s total payroll tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What share of Worker B’s wages is that?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What share of Worker A’s wages was their payroll tax?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The income tax in the previous lesson took a larger share as income rose; this payroll tax takes a smaller one. Explain what feature of each schedule produces that difference, and say why a person comparing two jobs should look at both taxes rather than the income tax alone."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Worker B’s social insurance levy comes out as $12,600, the 6% is being charged on the whole $210,000. The cap stops that levy at $158,000 of wages, so the charge is 6% of $158,000. The health levy is the one with no cap, and it does apply to all $210,000.",
+  "extension": "Find the wage level at which the combined payroll rate first falls below 7%, and say what happens to that rate as wages continue to rise.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

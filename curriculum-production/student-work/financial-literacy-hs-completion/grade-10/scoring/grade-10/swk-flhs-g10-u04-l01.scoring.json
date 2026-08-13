@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l01",
+  "lessonId": "ma-g10-financial-literacy-u04-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "75.45",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each category score multiplied by its stated weight and summed. The weights total 100%, so the result is on the same 0-to-100 basis as the inputs."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "715",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "75.45 out of 100 placed proportionally along the 550 points between the 300 floor and the 850 ceiling, then added to the floor. The floor matters: a score of 0 on every category still returns 300."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "47.33%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Balances divided by limits. This is the input behind the weakest of the borrower’s five category scores."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,260 owed less the $1,860 paid down."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "26.67%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,400.00 against the same $9,000 of limits. The limits did not change, which is why the ratio moved as far as it did."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "81.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Only the amounts-owed input changed, from 55 to 78. The other four category scores are carried across unchanged."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "747",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "81.20 mapped onto the same scale as before."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "32",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The 747 score against the 715 score, both as they are reported. A 23-point move in one category worth 25% of the model produced this."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "pay*wPay + owed*wOwed + length*wLen + newc*wNew + mix*wMix",
+        "substituted": "92*0.4 + 55*0.25 + 70*0.15 + 80*0.12 + 60*0.08",
+        "result": "75.45",
+        "why": "Each category score multiplied by its stated weight and summed. The weights total 100%, so the result is on the same 0-to-100 basis as the inputs."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "300 + (#t1-p1 / 100) * (850 - 300)",
+        "substituted": "300 + (#t1-p1 / 100) * (850 - 300)",
+        "result": "715",
+        "why": "75.45 out of 100 placed proportionally along the 550 points between the 300 floor and the 850 ceiling, then added to the floor. The floor matters: a score of 0 on every category still returns 300."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "bal / limits * 100",
+        "substituted": "4260 / 9000 * 100",
+        "result": "47.33%",
+        "why": "Balances divided by limits. This is the input behind the weakest of the borrower’s five category scores."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "bal2 - paydown",
+        "substituted": "4260 - 1860",
+        "result": "$2,400.00",
+        "why": "$4,260 owed less the $1,860 paid down."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 / limits2 * 100",
+        "substituted": "#t2-p1 / 9000 * 100",
+        "result": "26.67%",
+        "why": "$2,400.00 against the same $9,000 of limits. The limits did not change, which is why the ratio moved as far as it did."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "pay2*wPay2 + owed2*wOwed2 + length2*wLen2 + newc2*wNew2 + mix2*wMix2",
+        "substituted": "92*0.4 + 78*0.25 + 70*0.15 + 80*0.12 + 60*0.08",
+        "result": "81.20",
+        "why": "Only the amounts-owed input changed, from 55 to 78. The other four category scores are carried across unchanged."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "300 + (#t2-p3 / 100) * (850 - 300)",
+        "substituted": "300 + (#t2-p3 / 100) * (850 - 300)",
+        "result": "747",
+        "why": "81.20 mapped onto the same scale as before."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p4, 0) - round(#t1-p2, 0)",
+        "substituted": "round(#t2-p4, 0) - round(#t1-p2, 0)",
+        "result": "32",
+        "why": "The 747 score against the 715 score, both as they are reported. A 23-point move in one category worth 25% of the model produced this."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Using the stated weights, explain why paying down a balance moved this fictional score while opening a new account to raise total limits might not help as much as it appears. Then say what a scoring model of this kind can and cannot tell a lender.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Reasons from the weights: amounts owed carries 25%, so a large move there produced 32 points, while a new account touches the 12% new-credit category and the 15% length-of-history category in the opposite direction.",
+          "States what the model measures — a record of repayment behaviour and current obligation — and what it does not: income, savings, assets, or whether a particular loan is affordable.",
+          "Notes that the borrower controls balances and payment timing directly, while length of history moves only with time and cannot be accelerated."
+        ],
+        "evidenceRequirements": [
+          "Uses the 715 and 747 scores and at least two of the stated category weights."
+        ],
+        "lookFors": [
+          "The response uses the weights as the reason rather than asserting that paying down debt is generally good.",
+          "The response does not treat the score as a measure of the borrower as a person; it is a prediction about repayment built from a file."
+        ],
+        "commonMisconception": "Treating a credit score as a measure of wealth or income rather than of borrowing and repayment history.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

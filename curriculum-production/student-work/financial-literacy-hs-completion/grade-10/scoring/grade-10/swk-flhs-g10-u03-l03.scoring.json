@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l03",
+  "lessonId": "ma-g10-financial-literacy-u03-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,075.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,000 plus 2.5% of it. This is the nominal balance — the number the statement prints."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,962.43",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Dividing by 1.038 converts end-of-year dollars back to what they would have bought at the start of the year. Prices rose, so each dollar buys less and the division reduces the figure."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$37.57",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The original $3,000 against the $2,962.43 the ending balance can actually buy. The balance rose by $75.00 and still bought less."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "-1.25%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1.025 divided by 1.038 is less than 1, so the real return is negative. This is the definition: what the money grew by, divided by what prices grew by."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "-1.30%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2.5% less 3.8%. The subtraction is a close approximation and is the wrong sign for nobody here, but it is not the same figure as the exact -1.25%."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "The account gained money and the balance bought less than it would have at the start of the year",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The balance rose from $3,000 to $3,075.00, so nothing was lost in dollars. Because 2.5% is below the 3.8% rise in prices, those dollars buy less than the original ones did."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "saved * (1 + nominalRate)",
+        "substituted": "3000 * (1 + 0.025)",
+        "result": "$3,075.00",
+        "why": "$3,000 plus 2.5% of it. This is the nominal balance — the number the statement prints."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 / (1 + inflation), 2)",
+        "substituted": "round(#t1-p1 / (1 + 0.038), 2)",
+        "result": "$2,962.43",
+        "why": "Dividing by 1.038 converts end-of-year dollars back to what they would have bought at the start of the year. Prices rose, so each dollar buys less and the division reduces the figure."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "saved2 - #t1-p2",
+        "substituted": "3000 - #t1-p2",
+        "result": "$37.57",
+        "why": "The original $3,000 against the $2,962.43 the ending balance can actually buy. The balance rose by $75.00 and still bought less."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "((1 + nominalRate2) / (1 + inflation2) - 1) * 100",
+        "substituted": "((1 + 0.025) / (1 + 0.038) - 1) * 100",
+        "result": "-1.25%",
+        "why": "1.025 divided by 1.038 is less than 1, so the real return is negative. This is the definition: what the money grew by, divided by what prices grew by."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "(nominalRate3 - inflation3) * 100",
+        "substituted": "(0.025 - 0.038) * 100",
+        "result": "-1.30%",
+        "why": "2.5% less 3.8%. The subtraction is a close approximation and is the wrong sign for nobody here, but it is not the same figure as the exact -1.25%."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "nominalRate4 < inflation4",
+        "substituted": "0.025 < 0.038",
+        "result": "The account gained money and the balance bought less than it would have at the start of the year",
+        "why": "The balance rose from $3,000 to $3,075.00, so nothing was lost in dollars. Because 2.5% is below the 3.8% rise in prices, those dollars buy less than the original ones did."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A statement showing a balance that went up is not by itself evidence that a saver is better off. Explain what the statement leaves out, and say what a saver would need to know to judge whether a year of saving worked.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a statement reports nominal dollars only, and that judging a year requires comparing the interest rate against the change in prices over the same period.",
+          "States that the saver needs an inflation figure for the same year, and that without one the $75.00 gain cannot be read as a gain in purchasing power.",
+          "Uses the $2,962.43 figure to make the point concrete: the ending balance buys less than the $3,000 that was deposited."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,075.00 nominal balance and either the $2,962.43 real value or the -1.25% real return."
+        ],
+        "lookFors": [
+          "The response does not describe the account as having lost money; the balance rose.",
+          "The response treats inflation as something that happened to prices, not as a fee the bank charged."
+        ],
+        "commonMisconception": "Reading a rising balance as proof that saving is keeping ahead, without checking what happened to prices.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

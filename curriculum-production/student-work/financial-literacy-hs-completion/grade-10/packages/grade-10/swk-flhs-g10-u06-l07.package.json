@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l07",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: health, auto, renters, disability, and life coverage in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "health, auto, renters, disability, and life coverage in outline",
+  "objective": "Test three fictional claims about landlord coverage, disability coverage, and term life against computed figures, and state what each coverage is actually for.",
+  "scenario": "The three simulated claims below were written by a fictional student for this exercise and are deliberately wrong. No real insurer or policy is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional claims in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional student’s first claim: \"I do not need renters coverage, because my landlord has insurance on the building.\" A fire destroys $5,240 of the tenant’s belongings. The landlord’s fictional policy covers the building the landlord owns and pays $0 toward a tenant’s possessions. The second claim: \"I do not need disability coverage, because I have health coverage.\" A fictional worker earning $3,200 a month is unable to work for 5 months; health coverage pays the medical bills, and a fictional disability policy would replace 60% of lost income.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "The landlord’s policy pays $0 toward the tenant’s possessions. How much of the tenant’s $5,240 of belongings must the tenant replace out of their own pocket?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much income does the fictional worker lose over the 5 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much would a disability policy replacing 60% of lost income have paid?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The student’s third claim: \"Term life is a waste, because if you do not die you get nothing back.\" Consider a fictional 20-year term life policy with a $228 annual premium and $250,000 of coverage.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Even with a disability policy, how much of the lost income is still unreplaced?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do 20 years of term life premiums come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many dollars of coverage does each dollar of total premium stand behind over the term? Round to two decimal places."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which of the three claims describes a coverage the student already holds as though it did a different job?",
+          "choices": [
+            "The claim about the landlord’s building policy",
+            "The claim about health coverage standing in for disability coverage",
+            "The claim about term life returning nothing"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For each of the three claims, name the exposure the student is leaving uncovered and say what would have to be true for the student to be right. Then explain what \"you get nothing back\" misunderstands about paying a premium."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the landlord’s policy looks like it should help, ask whose property it insures. It covers the building, which the landlord owns. The tenant’s $5,240 of belongings are the tenant’s property, and the landlord’s policy pays $0 toward them.",
+  "extension": "Work out how many months of the fictional worker’s lost income a $9,600.00 disability payment would actually cover at their normal spending, and say what that implies about how long a household reserve needs to last.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

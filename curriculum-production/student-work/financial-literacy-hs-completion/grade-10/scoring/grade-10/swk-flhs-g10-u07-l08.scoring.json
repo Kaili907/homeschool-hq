@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l08",
+  "lessonId": "ma-g10-financial-literacy-u07-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7.5% of $46,000. The employer pays a matching $3,450.00 that never appears on the worker’s pay stub."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$6,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15% of $46,000, because a self-employed person is treated as both the employer and the employee under this fictional system."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,900.00 against $3,450.00. The difference is exactly the employer share, which the contractor has nobody to pay on their behalf."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$42,550.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$46,000 less the $3,450.00 employee share. This is the figure the contractor arrangement has to match."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$50,058.82",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The amount that, after 15% is removed, leaves $42,550.00. Dividing by 0.85 is the right operation here; adding 15% to $42,550.00 would not be, because the tax is charged on the larger figure."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$4,058.82",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$50,058.82 against the $46,000 offered. Note this is more than the $3,450.00 extra tax, because the additional pay is itself taxed."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "8.82%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,058.82 against $46,000. A contractor rate has to be meaningfully above an equivalent employee wage before the two arrangements are level on payroll tax alone."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "earnings * employeeShare",
+        "substituted": "46000 * 0.075",
+        "result": "$3,450.00",
+        "why": "7.5% of $46,000. The employer pays a matching $3,450.00 that never appears on the worker’s pay stub."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "earnings2 * bothShares",
+        "substituted": "46000 * 0.15",
+        "result": "$6,900.00",
+        "why": "15% of $46,000, because a self-employed person is treated as both the employer and the employee under this fictional system."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - #t1-p1",
+        "substituted": "#t1-p2 - #t1-p1",
+        "result": "$3,450.00",
+        "why": "$6,900.00 against $3,450.00. The difference is exactly the employer share, which the contractor has nobody to pay on their behalf."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "earnings3 - #t1-p1",
+        "substituted": "46000 - #t1-p1",
+        "result": "$42,550.00",
+        "why": "$46,000 less the $3,450.00 employee share. This is the figure the contractor arrangement has to match."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / (1 - bothShares2), 2)",
+        "substituted": "round(#t2-p1 / (1 - 0.15), 2)",
+        "result": "$50,058.82",
+        "why": "The amount that, after 15% is removed, leaves $42,550.00. Dividing by 0.85 is the right operation here; adding 15% to $42,550.00 would not be, because the tax is charged on the larger figure."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - earnings4",
+        "substituted": "#t2-p2 - 46000",
+        "result": "$4,058.82",
+        "why": "$50,058.82 against the $46,000 offered. Note this is more than the $3,450.00 extra tax, because the additional pay is itself taxed."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 / earnings5 * 100",
+        "substituted": "#t2-p3 / 46000 * 100",
+        "result": "8.82%",
+        "why": "$4,058.82 against $46,000. A contractor rate has to be meaningfully above an equivalent employee wage before the two arrangements are level on payroll tax alone."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain why $4,058.82 rather than $3,450.00 is the right uplift, then name two things besides payroll tax that a fictional person should price before accepting contractor work at the same headline rate.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the extra pay is itself subject to the 15% levy, so covering a $3,450.00 gap requires more than $3,450.00 of additional income — dividing by 0.85 rather than adding 15%.",
+          "Names two concrete items a contractor bears that an employee may not — for example health coverage, paid time off, unemployment protection, retirement contributions, equipment, or the cost of gaps between engagements.",
+          "Notes that the comparison here holds income tax equal and covers only payroll treatment, so the true uplift needed is larger than 8.82%."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,450.00 payroll gap, the $50,058.82 equalising rate, and the 8.82% uplift."
+        ],
+        "lookFors": [
+          "The response identifies the circularity — taxing the raise that covers the tax — as the reason the two figures differ.",
+          "The response does not present contractor work as worse; it prices what has to be recovered for the two to be comparable."
+        ],
+        "commonMisconception": "Equalising two offers by adding the tax difference to the lower one, when the addition is itself taxed.",
+        "dimensions": [
+          "transfer",
+          "tradeoff-defense",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

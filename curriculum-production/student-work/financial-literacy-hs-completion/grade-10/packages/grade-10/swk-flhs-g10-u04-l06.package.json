@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l06",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: predatory lending patterns and warning signs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "predatory lending patterns and warning signs",
+  "objective": "Convert a fictional short-term loan fee into an annualised rate, compute what renewal costs, and compare the result with a rate-priced alternative for the same borrowed amount.",
+  "scenario": "The simulated short-term lender and the simulated credit-union alternative below are invented for this exercise. No real lender is described, and the pattern shown is a teaching example rather than a claim about any actual product.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional loan offers in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional short-term lender advances $400 and charges a flat $60 fee, due with the principal at the end of a 14-day term. The lender advertises the $60 as a fee rather than as interest. If the borrower cannot repay, the loan is renewed for another 14 days for another $60 fee, and the principal does not fall.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "The $60 fee is what percentage of the $400 advanced?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Annualise that charge: what rate is 15.00% for 14 days, over a 365-day year?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "The borrower renews 5 times, so 6 fees are charged in total. What do the fees come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare with a fictional credit-union small-dollar loan of the same $400 at a 28% annual percentage rate. This loan is repaid in a single payment at the end of 3 months, so the whole $400 is held for the full term and interest is charged at the annual rate for the months held. That is why simple interest on the full principal is the right model here, and not for a loan repaid in instalments.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "After the 5 renewals, what does the borrower owe in total, including the principal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would 3 months on the fictional credit-union loan cost in interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more did the short-term loan cost over the six fee periods, which run about as long as the credit-union loan’s 3 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which feature of the fictional short-term loan is the warning sign that the fee alone does not reveal?",
+          "choices": [
+            "That the charge is called a fee rather than interest",
+            "That renewing costs another full fee while the principal never falls",
+            "That the loan is for only $400"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Name the two features that made the fictional short-term loan expensive, and explain why annualising the fee is a fairer comparison than reading the $60 next to the $400. Say what question a borrower should ask about any charge quoted as a flat fee."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the annualised rate comes out near 15%, the 14-day term has not been accounted for. A 15.00% charge every 14 days is not a 15% annual charge: there are about 26 such periods in a 365-day year. Multiply the 15.00% by 365 divided by 14.",
+  "extension": "Work out how many renewals it would take for the accumulated fees to exceed the $400 originally advanced, and say what that says about the relationship between the fee and the principal.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

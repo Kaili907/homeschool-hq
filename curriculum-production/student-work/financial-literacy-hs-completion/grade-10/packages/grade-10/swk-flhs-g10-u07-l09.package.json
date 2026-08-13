@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l09",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: W-4, W-2, 1099, and 1040 in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "W-4, W-2, 1099, and 1040 in outline",
+  "objective": "Reconcile a fictional filer’s whole year — combining wage and self-employment income, applying the deduction and brackets, adding self-employment payroll tax, and crediting withholding — to a single balance due.",
+  "scenario": "The simulated year below is invented for this exercise. It brings together the income tax schedule, the self-employment payroll treatment, and the withholding mechanics used earlier in this unit, all of which are fictional.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional year-end figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional filer’s W-2 reports $41,000 of wages with $3,250 of federal income tax withheld. A 1099 reports $6,500 of self-employment income with nothing withheld. The standard deduction is $11,200; the rates are 10% on the first $9,800 of taxable income and 14% from $9,800 to $42,000. Self-employment income also carries payroll tax at 15%, covering both the employee and employer shares. Payroll tax already withheld on the wages is handled by the employer and is not part of this reconciliation.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the filer’s total income for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the filer’s taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the income tax on that taxable income?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now add the self-employment payroll tax and credit what was already withheld.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What payroll tax is owed on the self-employment income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the filer owe in total for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "After crediting the $3,250 already withheld, what is the balance due at filing?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which figure did the $6,500 of self-employment income affect that the same amount of extra W-2 wages would not have?",
+          "choices": [
+            "The standard deduction",
+            "The amount of payroll tax the filer personally owes",
+            "The bracket thresholds"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Work out what fraction of every dollar of the $6,500 side income this filer keeps, and use it to write one sentence of guidance about setting money aside from side income. Explain why the fraction is smaller than the 14% bracket rate alone would suggest."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the balance due comes out as $1,440.00, the self-employment payroll tax has been left out. The $6,500 of side income owes 15% payroll tax on top of the income tax it generated. Add the $975.00 to the $4,690.00 before crediting the $3,250 withheld.",
+  "extension": "Work out what the balance due would have been if the same $6,500 had been paid as W-2 wages by a second employer withholding nothing, and say which of the two arrangements leaves a larger surprise at filing.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

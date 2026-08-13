@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l05",
+  "lessonId": "ma-g10-financial-literacy-u03-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$11,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4 peak months at $2,900 each. This is the part of the year the whole plan has to be funded from."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$7,840.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "8 off-season months at $980 each."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$19,440.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,600.00 from the peak months plus $7,840.00 from the off-season."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,620.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $19,440.00 annual total spread evenly across twelve months. This is the figure a budget should be built on, and it matches neither the peak pay nor the off-season pay."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$5,120.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each of the 8 off-season months falls $640.00 short of $1,620.00. This is the amount that has to be waiting when the off-season starts."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$5,120.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each of the 4 peak months runs $1,280.00 above $1,620.00. It equals the off-season shortfall exactly, because both are measured against the same average of the same income."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$15,360.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve months at $2,900 is $34,800.00 against actual income of $19,440.00 — the gap a peak-anchored budget would have to borrow or default on."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "peakPay * peakMonths",
+        "substituted": "2900 * 4",
+        "result": "$11,600.00",
+        "why": "4 peak months at $2,900 each. This is the part of the year the whole plan has to be funded from."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "offPay * offMonths",
+        "substituted": "980 * 8",
+        "result": "$7,840.00",
+        "why": "8 off-season months at $980 each."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$19,440.00",
+        "why": "$11,600.00 from the peak months plus $7,840.00 from the off-season."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 / 12",
+        "substituted": "#t1-p3 / 12",
+        "result": "$1,620.00",
+        "why": "The $19,440.00 annual total spread evenly across twelve months. This is the figure a budget should be built on, and it matches neither the peak pay nor the off-season pay."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "(#t2-p1 - offPay2) * offMonths2",
+        "substituted": "(#t2-p1 - 980) * 8",
+        "result": "$5,120.00",
+        "why": "Each of the 8 off-season months falls $640.00 short of $1,620.00. This is the amount that has to be waiting when the off-season starts."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "(peakPay2 - #t2-p1) * peakMonths2",
+        "substituted": "(2900 - #t2-p1) * 4",
+        "result": "$5,120.00",
+        "why": "Each of the 4 peak months runs $1,280.00 above $1,620.00. It equals the off-season shortfall exactly, because both are measured against the same average of the same income."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "peakPay3 * 12 - #t1-p3",
+        "substituted": "2900 * 12 - #t1-p3",
+        "result": "$15,360.00",
+        "why": "Twelve months at $2,900 is $34,800.00 against actual income of $19,440.00 — the gap a peak-anchored budget would have to borrow or default on."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The peak surplus and the off-season shortfall both come to $5,120.00. Explain why they have to be equal, and say what the worker must actually do during the peak months for the plan to hold.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that both figures are deviations from the same average of the same annual income, so the amounts above and below the average necessarily cancel.",
+          "States the required action concretely: the $5,120.00 of peak surplus must be set aside as it arrives rather than spent, so that it is available across the 8 lean months.",
+          "Notes that the equality is arithmetic and guarantees nothing on its own — it holds only if the surplus is actually kept and the $1,620.00 level figure is livable."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,620.00 level monthly figure and the $5,120.00 that appears on both sides."
+        ],
+        "lookFors": [
+          "The response treats the equality as a consequence of using the average, not as a coincidence of these numbers.",
+          "The response recognises that a peak month feels like a raise and that this is exactly when the plan is most likely to break."
+        ],
+        "commonMisconception": "Budgeting seasonal work from the months when money is coming in, and treating the lean months as an emergency rather than as a known part of the year.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

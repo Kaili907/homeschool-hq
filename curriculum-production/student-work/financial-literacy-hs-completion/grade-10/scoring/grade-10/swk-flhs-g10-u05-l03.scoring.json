@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l03",
+  "lessonId": "ma-g10-financial-literacy-u05-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "4.25%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "With equal quarters, the portfolio return is the plain average of the four returns. The -6% is included at the same weight as the 18%."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$8,340.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $8,000 invested grown by the 4.25% portfolio return computed above."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$9,440.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The best of the four outcomes, known only after the year ended."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$7,520.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The worst of the four outcomes, at a -6% return."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,920.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,440.00 against $7,520.00 — the range a concentrated investor was exposed to before knowing which asset would be which."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$340.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,340.00 against the $8,000 invested — a positive year without having had to pick correctly."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,440.00 against $8,340.00. This is the cost of diversification, and it is only visible after the fact."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "(broad + bond + intl + cash) / 4 * 100",
+        "substituted": "(0.18 + 0.03 + -0.06 + 0.02) / 4 * 100",
+        "result": "4.25%",
+        "why": "With equal quarters, the portfolio return is the plain average of the four returns. The -6% is included at the same weight as the 18%."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(invested * (1 + #t1-p1 / 100), 2)",
+        "substituted": "round(8000 * (1 + #t1-p1 / 100), 2)",
+        "result": "$8,340.00",
+        "why": "The $8,000 invested grown by the 4.25% portfolio return computed above."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "invested2 * (1 + broad2)",
+        "substituted": "8000 * (1 + 0.18)",
+        "result": "$9,440.00",
+        "why": "The best of the four outcomes, known only after the year ended."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "invested3 * (1 + intl2)",
+        "substituted": "8000 * (1 + -0.06)",
+        "result": "$7,520.00",
+        "why": "The worst of the four outcomes, at a -6% return."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t2-p1",
+        "substituted": "#t1-p3 - #t2-p1",
+        "result": "$1,920.00",
+        "why": "$9,440.00 against $7,520.00 — the range a concentrated investor was exposed to before knowing which asset would be which."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p2 - invested4",
+        "substituted": "#t1-p2 - 8000",
+        "result": "$340.00",
+        "why": "$8,340.00 against the $8,000 invested — a positive year without having had to pick correctly."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$1,100.00",
+        "why": "$9,440.00 against $8,340.00. This is the cost of diversification, and it is only visible after the fact."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The diversified portfolio finished $1,100.00 behind the best single choice and $820.00 ahead of the worst. Explain what an investor is actually buying when they diversify, and say why the $1,100.00 is not evidence that diversifying was a mistake.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that diversification buys a narrower range of outcomes rather than a higher return, so it gives up the best case in exchange for avoiding the worst.",
+          "Explains that the $1,100.00 is only identifiable after the year ended, and that the investor did not know in advance which of the four would lead, so the choice cannot be judged by the outcome alone.",
+          "Uses the $1,920.00 spread to show how much was at stake in picking a single asset."
+        ],
+        "evidenceRequirements": [
+          "Uses the $8,340.00 diversified value and both of the single-asset outcomes."
+        ],
+        "lookFors": [
+          "The response separates judging a decision from judging its outcome.",
+          "The response does not claim diversification prevents loss; all four assets could have fallen together."
+        ],
+        "commonMisconception": "Judging a diversified allocation against whichever asset happened to do best, once the year is known.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

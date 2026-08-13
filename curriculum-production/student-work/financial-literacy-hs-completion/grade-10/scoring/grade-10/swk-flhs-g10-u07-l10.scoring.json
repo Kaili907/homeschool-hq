@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l10",
+  "lessonId": "ma-g10-financial-literacy-u07-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$52,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$63,400 of wages less the $11,200 standard deduction. The brackets below apply to this figure only."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$7,936.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$980 on the first bracket, $4,508 on the second, and 24% of the $10,200 of taxable income above $42,000."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$6,436.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The credit reduces the tax dollar for dollar. There is far more than $1,500 of tax here, so the whole credit is used and none of it is wasted."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$4,755.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6% plus 1.5% of $63,400, which is below the $158,000 cap so the whole amount is subject to both levies. No deduction and no credit applies to payroll tax."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$11,191.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,436.00 of income tax after the credit plus $4,755.00 of payroll tax. The payroll tax is more than two fifths of the total and receives none of the deduction or credit."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$536.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,436.00 of income tax against $5,900 withheld, leaving $536.00 owing. A positive figure here is a balance due; a negative one would have been a refund."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "17.65%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,191.00 against $63,400 of gross wages. This is well above the 10.15% the income tax alone would give, and well below the 24% marginal bracket rate."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "gross - stdDed",
+        "substituted": "63400 - 11200",
+        "result": "$52,200.00",
+        "why": "$63,400 of wages less the $11,200 standard deduction. The brackets below apply to this figure only."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "b1 * r1 + (b2 - b1) * r2 + (#t1-p1 - b2) * r3",
+        "substituted": "9800 * 0.1 + (42000 - 9800) * 0.14 + (#t1-p1 - 42000) * 0.24",
+        "result": "$7,936.00",
+        "why": "$980 on the first bracket, $4,508 on the second, and 24% of the $10,200 of taxable income above $42,000."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "max(#t1-p2 - credit, 0)",
+        "substituted": "max(#t1-p2 - 1500, 0)",
+        "result": "$6,436.00",
+        "why": "The credit reduces the tax dollar for dollar. There is far more than $1,500 of tax here, so the whole credit is used and none of it is wasted."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "gross2 * socRate + gross2 * healthRate",
+        "substituted": "63400 * 0.06 + 63400 * 0.015",
+        "result": "$4,755.00",
+        "why": "6% plus 1.5% of $63,400, which is below the $158,000 cap so the whole amount is subject to both levies. No deduction and no credit applies to payroll tax."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 + #t2-p1",
+        "substituted": "#t1-p3 + #t2-p1",
+        "result": "$11,191.00",
+        "why": "$6,436.00 of income tax after the credit plus $4,755.00 of payroll tax. The payroll tax is more than two fifths of the total and receives none of the deduction or credit."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 - withheld",
+        "substituted": "#t1-p3 - 5900",
+        "result": "$536.00",
+        "why": "$6,436.00 of income tax against $5,900 withheld, leaving $536.00 owing. A positive figure here is a balance due; a negative one would have been a refund."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 / gross3 * 100",
+        "substituted": "#t2-p2 / 63400 * 100",
+        "result": "17.65%",
+        "why": "$11,191.00 against $63,400 of gross wages. This is well above the 10.15% the income tax alone would give, and well below the 24% marginal bracket rate."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Write a four-sentence year-end summary for this fictional filer: what was owed, what was already paid, what is still due, and what share of gross income the whole federal burden came to. Then name the one change to the W-4 you would recommend and say what it would and would not fix.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Reports the year accurately: $11,191.00 of total federal tax, $5,900 withheld against income tax, $536.00 still due, and a 17.65% effective rate on gross income.",
+          "Recommends increasing W-4 withholding by roughly $45 a month, or an equivalent per-paycheck amount, and ties it to closing the $536.00 gap.",
+          "States what the change would not fix: the $4,755.00 of payroll tax is withheld separately and is not affected by the W-4, and the total owed does not change — only its timing does.",
+          "Notes that the credit was fully used here, so nothing was lost to nonrefundability."
+        ],
+        "evidenceRequirements": [
+          "Uses the $11,191.00 total, the $536.00 balance due, and the 17.65% effective rate."
+        ],
+        "lookFors": [
+          "The response distinguishes changing what is owed from changing when it is paid.",
+          "The response recognises that payroll tax is a large part of the burden and is untouched by the deduction, the credit, and the W-4."
+        ],
+        "commonMisconception": "Treating the income tax on a return as the whole of what a worker pays in federal tax.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

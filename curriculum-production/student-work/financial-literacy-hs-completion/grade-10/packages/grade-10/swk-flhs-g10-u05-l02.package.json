@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l02",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: fees, expense ratios, and their long-run drag"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "fees, expense ratios, and their long-run drag",
+  "objective": "Compute twenty years of growth on two fictional funds that differ only in expense ratio, and show that the cost of the higher fee is far larger than the fees themselves.",
+  "scenario": "The two simulated funds below are invented for this exercise. Both are assumed to earn the same gross return, so the only difference between them is the disclosed expense ratio. A fund’s net return here is its gross return less its expense ratio, applied once a year; a real fund also bears trading costs this model leaves out.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional fund disclosures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional investor places $10,000 for 20 years. Both simulated funds earn a gross return of 6.5% a year. Fund L discloses an expense ratio of 0.08%; Fund H discloses 0.95%. Neither fund receives any further contribution.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Fund L’s net annual return?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Fund H’s net annual return?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Fund L hold after 20 years? Round to the nearest cent.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same for Fund H, and compare the gap with the fees themselves.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Fund H hold after 20 years? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much less does the investor end with in Fund H?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If Fund H’s 0.95% fee were charged on the original $10,000 every year for 20 years, what would the fees add up to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the actual shortfall exceed that estimate?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The difference between the two expense ratios is under one percentage point, and it cost $5,255.45 over twenty years. Explain why the naive fee estimate of $1,900.00 misses most of the cost, and say what this implies about which disclosed number deserves attention on a long-held fund."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the fee cost looks like $1,900.00, the estimate is charging 0.95% on $10,000 every year. The balance is not $10,000 every year — it grows past $29,000 — and the fee is charged on whatever is there. Compute each fund’s ending balance from its own net rate and subtract, which gives $5,255.45.",
+  "extension": "Work out what Fund H would need as a gross return to end level with Fund L after 20 years, and say whether an investor could know in advance that a fund would deliver it.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

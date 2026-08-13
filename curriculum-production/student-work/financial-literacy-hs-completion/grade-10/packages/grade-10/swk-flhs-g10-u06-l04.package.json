@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l04",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: how a claim process works"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "how a claim process works",
+  "objective": "Work a fictional health plan’s deductible, coinsurance, and out-of-pocket maximum in the stated order, and find the charge level at which the maximum takes over.",
+  "scenario": "The simulated health plan below is invented for this exercise. Apply its terms in the stated order: the patient pays the deductible first, then a stated share of what remains, and the out-of-pocket maximum caps the patient’s total for the year. This is a different structure from the property policies earlier in the unit, where a coverage limit capped what the insurer paid.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional plan, the patient pays the first $1,800 of covered charges. After that the patient pays 20% of covered charges and the plan pays the rest. Once the patient’s payments for the year reach the out-of-pocket maximum of $5,400, the plan pays everything further. A simulated year brings $24,000 of covered charges.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "After the deductible is met, how much of the year’s charges remain?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the patient’s 20% share of that remainder?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Adding the deductible, what would the patient owe before the maximum is considered?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now apply the out-of-pocket maximum, and find where it starts to bind.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the patient actually pay for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the plan pay for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "At what level of covered charges does the patient first reach the out-of-pocket maximum?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "A second simulated year brings $60,000 of covered charges under the same plan. What does the patient pay?",
+          "choices": [
+            "$5,400.00",
+            "$12,240.00",
+            "$60,000.00"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A coverage limit on the auto policy earlier in this unit and an out-of-pocket maximum on this health plan both cap something. Explain what each one caps and who it protects, and say which structure leaves the insured party exposed to an unlimited loss."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the patient’s cost comes out as $6,240.00, the out-of-pocket maximum has not been applied. The deductible and coinsurance would have produced that figure, but the plan states that the patient’s payments stop at $5,400 for the year. Take the smaller of the two.",
+  "extension": "Work out what the patient pays in a year with only $1,200 of covered charges, and say which of the plan’s three terms is doing the work in that year.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

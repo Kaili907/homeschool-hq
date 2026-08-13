@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l04",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: standard deduction and common credits in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "standard deduction and common credits in outline",
+  "objective": "Compute the value of an identical fictional amount delivered three different ways, and establish the rule that separates a deduction from a credit and a nonrefundable credit from a refundable one.",
+  "scenario": "The simulated schedule and the three simulated tax provisions below are invented for this exercise. The same $2,800 is offered in three different forms so that the structures, not the amounts, are what differ.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional schedule and provisions in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional filer has a gross income of $31,500. The standard deduction is $11,200, and the rates are 10% on the first $9,800 of taxable income and 14% above that. Three provisions are available, each worth $2,800: an additional deduction, a nonrefundable credit, and a refundable credit. A deduction reduces taxable income. A credit reduces the tax owed dollar for dollar. A nonrefundable credit cannot reduce the tax below zero; a refundable one is paid out to the extent it exceeds the tax.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the filer’s taxable income before any of the three provisions?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax owed before any of the three provisions?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "With the $2,800 nonrefundable credit applied, what tax is owed?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now value the other two provisions on the same filer.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the $2,800 credit were refundable instead, what would the filer receive back?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $2,800 does the nonrefundable version leave unused?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the $2,800 were an additional deduction rather than a credit, how much tax would it save?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much more is the refundable credit worth to this filer than the deduction?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rank the three provisions by what they are worth to this filer, then explain how the ranking would change for a filer whose tax owed was $9,000 instead of $2,450.00. State the rule each provision follows in one sentence apiece."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the deduction looks like it saves $2,800, ask what it actually removes. It takes $2,800 out of taxable income, so the filer does not pay tax on that $2,800 — at a 14% marginal rate, that is $392.00 of tax not paid, not $2,800.",
+  "extension": "Find the amount of tax owed at which the nonrefundable and refundable versions of this credit become worth exactly the same, and say which kind of filer that threshold protects.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

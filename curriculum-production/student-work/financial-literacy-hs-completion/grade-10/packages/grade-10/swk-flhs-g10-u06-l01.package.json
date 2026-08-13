@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l01",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: health, auto, renters, disability, and life coverage in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "health, auto, renters, disability, and life coverage in outline",
+  "objective": "Total a fictional household’s annual premiums across five coverage types, express each as a share of the total, and compare the cheapest premium against the exposure it stands behind.",
+  "scenario": "The five simulated policies below and their premiums are invented for this exercise. No real insurer, product, or household is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional premium schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional household pays these annual premiums: health $2,760, auto $1,344, renters $186, disability $432, and term life $228. Health coverage pays medical bills. Auto covers damage and liability involving the vehicle. Renters covers the household’s own belongings and its liability, not the building. Disability replaces part of an income when illness or injury stops the earner working. Term life pays a stated amount to named survivors if the insured dies during the term.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the five policies cost the household in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does that come to per month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total does health coverage take?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now look at the cheapest of the five. The household’s belongings are worth $14,600.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total does renters coverage take?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does renters coverage cost per month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The belongings are worth $14,600. How many dollars of belongings does each dollar of annual renters premium stand behind? Round to two decimal places."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "If the building the household rents burns down, which of these policies is the one that pays for the household’s own furniture and clothing?",
+          "choices": [
+            "The landlord’s policy on the building",
+            "The household’s renters policy",
+            "The household’s health policy"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Insurance is worth buying for losses a household could not absorb on its own. Using that test, sort these five coverages into ones that protect against a loss too large to absorb and ones that protect against something else, and say which single coverage you would defend keeping if the household had to drop one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If renters coverage looks like the obvious thing to drop because it is cheapest, separate the two figures. Its premium is 3.76% of what the household spends on protection, and it stands behind $14,600 of belongings. A cheap premium is a fact about the price, not about the risk.",
+  "extension": "Work out what share of the annual total each of the remaining three policies takes, and say whether the ranking by premium matches your ranking by size of exposure.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

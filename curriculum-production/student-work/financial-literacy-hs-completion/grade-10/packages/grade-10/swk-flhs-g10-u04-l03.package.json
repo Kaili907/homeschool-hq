@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l03",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: amortisation: how a payment splits into interest and principal"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "amortisation: how a payment splits into interest and principal",
+  "objective": "Carry a fictional installment loan through three months of true amortisation, showing how a fixed payment splits into interest and principal and why the split shifts.",
+  "scenario": "The simulated loan below is invented for this exercise. Interest each month is charged on the balance standing at the start of that month, the fixed payment covers that interest first, and whatever remains reduces the balance. This is how an amortising loan actually behaves, and it is not the same as charging a year of interest on the original amount.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional loan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional borrower owes $6,000 at a 9.6% annual percentage rate and pays a fixed $200 a month. Each month, interest is one twelfth of the annual rate applied to the balance at the start of that month, rounded to the nearest cent. Work through the first month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the interest charged in month 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $200 payment reduces the balance in month 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance at the start of month 2?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now carry the same loan through months 2 and 3, using each month’s starting balance.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the interest charged in month 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much principal does month 2 retire?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance at the start of month 3?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the interest charged in month 3?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much principal does month 3 retire?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance at the start of month 4?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p7",
+          "promptType": "fixed-numeric",
+          "text": "Across the three months, how much of the original $6,000 has actually been repaid?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A classmate says \"9.6% of $6,000 is $576, so a year of this loan costs $576 in interest.\" Explain what that calculation assumes, why the three months you just worked contradict it, and state whether the true first-year interest is above or below $576."
+        }
+      ]
+    }
+  ],
+  "remediation": "If every month’s interest comes out as $48.00, the rate is being applied to the original $6,000 each time. Month 2 charges interest on $5,848.00, because that is what is owed when month 2 begins. Recompute each month from the balance the previous month left behind.",
+  "extension": "Carry this loan two more months and describe, in one sentence, what is happening to the gap between the interest and principal portions of the same $200 payment.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

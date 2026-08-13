@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l07",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: progressive brackets, marginal versus effective rate"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "progressive brackets, marginal versus effective rate",
+  "objective": "Test the claim that entering a higher bracket reduces take-home pay by computing the tax before and after a fictional raise, and isolate the amount actually charged at the higher rate.",
+  "scenario": "The simulated raise below is invented for this exercise, and the schedule is the same fictional one used throughout this unit. The claim being tested is a real and common misunderstanding, stated here by a fictional worker.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional schedule and raise in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional worker earning $52,500 is offered a raise to $54,500 and says: \"That pushes me into the 24% bracket, so I would take home less. I should turn it down.\" The standard deduction is $11,200. The rates are 10% on the first $9,800 of taxable income, 14% from $9,800 to $42,000, and 24% above $42,000. Compute both years.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the worker’s taxable income before the raise?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax before the raise?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the worker’s taxable income after the raise?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compute the tax after the raise and settle the claim.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax after the raise?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more tax does the raise cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Of the $2,000 raise, how much does the worker keep?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much of the worker’s taxable income is actually charged at 24%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain in your own words exactly where the worker’s reasoning goes wrong, and write the one sentence you would say to correct it. Then describe what would have to be true of a tax system for the worker’s fear to be justified."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the raise looks like it costs more than it pays, compare the two bracket calculations line by line. The first bracket charges $980 in both years. The second charges $4,410 before the raise, because taxable income stops at $41,300.00, and $4,508 after, because taxable income now runs past $42,000 and fills the band. That $98 plus 24% of the $1,300.00 above the threshold is the whole extra tax, $410.00 — against $2,000 of extra gross.",
+  "extension": "Determine whether any raise from $52,500 could leave the worker keeping only half of it under this schedule, and say what the top rate implies about the smallest share of a raise a worker can keep.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

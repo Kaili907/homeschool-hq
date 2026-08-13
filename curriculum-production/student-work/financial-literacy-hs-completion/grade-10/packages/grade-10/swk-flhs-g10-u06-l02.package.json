@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l02",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: premium, deductible, co-pay, and coverage limit interacting"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "premium, deductible, co-pay, and coverage limit interacting",
+  "objective": "Apply a fictional policy’s stated payout rule to a loss below the limit and a loss above it, and compute exactly how much a common shortcut misstates the payout.",
+  "scenario": "The simulated auto policy below is invented for this exercise. Read its payout rule carefully: the deductible is subtracted from the loss, and the coverage limit caps what the policy pays. The limit is not reduced by the deductible.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional collision coverage has a limit of $15,000 and a deductible of $1,000, and the annual premium is $1,344. The policy pays the covered loss minus the deductible, up to but not beyond the limit. Start with a loss of $6,400.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "On a $6,400 loss, what does the policy pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the policyholder pay on that loss?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now take a loss of $18,500 against the same policy, and apply the same rule.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "On an $18,500 loss, what does the policy pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the policyholder pay on that loss?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "A common shortcut says \"the most you can get is the limit minus the deductible.\" On this $18,500 loss, by how much does that shortcut understate what the policy actually pays?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "In a year with the $6,400 loss, what does the policyholder pay in total, counting the premium?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "On which of the two losses is the policyholder’s own cost equal to the deductible?",
+          "choices": [
+            "On the $6,400 loss only",
+            "On the $18,500 loss only",
+            "On both losses"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write the policy’s payout rule as one sentence a person could apply to any loss. Then explain why \"my deductible is $1,000, so a claim can never cost me more than $1,000\" is false, and say which of the two policy terms a person should check first when deciding whether coverage is enough."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the $18,500 claim comes out as $14,000, the deductible is being taken off the limit as well as off the loss. Take it off once, from the loss: $18,500 less $1,000 is $17,500. Then cap that at the limit, which pays $15,000.00. The limit is a ceiling on the payment, not an amount the deductible is deducted from.",
+  "extension": "Find the largest loss on which this policyholder’s own cost is still exactly $1,000, and say what that figure tells you about where the limit starts to matter.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

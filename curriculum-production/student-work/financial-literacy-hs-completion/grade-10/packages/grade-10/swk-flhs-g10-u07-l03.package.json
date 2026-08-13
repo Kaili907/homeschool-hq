@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l03",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: W-4, W-2, 1099, and 1040 in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "W-4, W-2, 1099, and 1040 in outline",
+  "objective": "Combine fictional wage income and non-employee income into one taxable figure, compute the income tax, and show why a balance is owed at filing when only one of the two had tax withheld.",
+  "scenario": "The simulated forms and figures below are invented for this exercise. This lesson computes income tax only; the payroll tax on the non-employee income is set aside here and taken up later in the unit. No learner is asked for a real tax document.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional form figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional filer receives two forms for the simulated year. A W-2 reports $34,000 of wages from an employer, with $2,100 of federal income tax withheld across the year — the amount set by the W-4 the filer completed when hired. A 1099 reports $9,600 paid for work done as a non-employee, with nothing withheld. Both figures are reported on the same 1040. The standard deduction is $11,200, and the rates are 10% on the first $9,800 of taxable income and 14% between $9,800 and $42,000.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the filer’s total income for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the filer’s taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is charged on the first bracket?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now finish the tax and compare it with what was withheld.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is charged on the second bracket?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total income tax for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The employer withheld $2,100. What does the filer owe when the return is filed?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which document tells an employer how much income tax to withhold from a paycheck?",
+          "choices": [
+            "The W-2",
+            "The W-4",
+            "The 1099",
+            "The 1040"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The filer did nothing wrong and still owes $2,044.00 at filing. Explain how that happens, and describe two different things the filer could have done during the year to avoid being surprised by it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the amount owed comes out as $4,144.00, the withholding has not been credited. The $2,100 the employer already sent in counts against the year’s tax. Subtract it from the total tax to get what is still due at filing.",
+  "extension": "Work out how much larger the W-4 withholding would have needed to be, per month across 12 months, to leave nothing owing at filing.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

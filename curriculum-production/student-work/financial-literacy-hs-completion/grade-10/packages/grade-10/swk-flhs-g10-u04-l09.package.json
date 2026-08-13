@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l09",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: amortisation: how a payment splits into interest and principal"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "amortisation: how a payment splits into interest and principal",
+  "objective": "Compute the level payment that amortises the same fictional loan over two different terms, compare total interest, and state the tradeoff the longer term buys.",
+  "scenario": "The simulated loan below is invented for this exercise. The level payment is the one that reduces the balance to zero over the stated number of months when interest is charged each month on the balance outstanding. The payment is rounded to the nearest cent, and totals below assume every payment equals that rounded figure; a real final payment absorbs the few cents of difference.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional loan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional borrower needs $12,000 at a 6.6% annual percentage rate, with interest charged each month on the outstanding balance at one twelfth of the annual rate. The lender offers a 36-month term and a 60-month term. The level payment is the loan amount times the monthly rate times the growth factor over the term, divided by that growth factor less one.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the level monthly payment over the 36-month term? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is paid in total over the 36-month term?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of that is interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same for the 60-month term and compare the two.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the level monthly payment over the 60-month term? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is paid in total over the 60-month term?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of that is interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much more interest does the longer term cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much smaller is the monthly payment on the longer term?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The longer term costs $861.72 more and frees $132.97 a month. Argue for one of the two terms for a fictional borrower whose income is steady but whose monthly margin is thin, and name what your choice risks."
+        }
+      ]
+    }
+  ],
+  "remediation": "If total interest comes out as $12,000 times 6.6% times the number of years, the balance is being treated as though it never falls. This loan is repaid every month, so the balance that interest is charged on shrinks throughout. Use the level payment, multiply it by the number of payments, and subtract the $12,000 borrowed.",
+  "extension": "Work out the total interest on a 48-month term at the same rate, and say whether the extra interest per additional year of term is constant as the term lengthens.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

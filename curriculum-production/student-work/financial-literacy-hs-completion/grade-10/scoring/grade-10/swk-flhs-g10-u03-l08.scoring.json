@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l08",
+  "lessonId": "ma-g10-financial-literacy-u03-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$9,292.93",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of the 3.00% nominal rate compounded across 60 months."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$9,319.30",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3.10% applied once in each of 5 years — the less frequent schedule, but the higher rate."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$26.37",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,319.30 against $9,292.93. The annually compounded account wins because its rate advantage is larger than the compounding advantage it gives up."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$9,274.19",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same 3.00% rate as Account X, but credited annually. This isolates what the compounding frequency alone is worth."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$18.74",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,292.93 against $9,274.19. Moving from annual to monthly compounding is worth $18.74 across five years on $8,000."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$45.11",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,319.30 at 3.10% against $9,274.19 at 3.00%, both compounded annually — more than twice what the frequency change was worth."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(start * pow(1 + rateX / 12, 60), 2)",
+        "substituted": "round(8000 * pow(1 + 0.03 / 12, 60), 2)",
+        "result": "$9,292.93",
+        "why": "One twelfth of the 3.00% nominal rate compounded across 60 months."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(start2 * pow(1 + rateY, 5), 2)",
+        "substituted": "round(8000 * pow(1 + 0.031, 5), 2)",
+        "result": "$9,319.30",
+        "why": "3.10% applied once in each of 5 years — the less frequent schedule, but the higher rate."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - #t1-p1",
+        "substituted": "#t1-p2 - #t1-p1",
+        "result": "$26.37",
+        "why": "$9,319.30 against $9,292.93. The annually compounded account wins because its rate advantage is larger than the compounding advantage it gives up."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(start3 * pow(1 + rateX2, 5), 2)",
+        "substituted": "round(8000 * pow(1 + 0.03, 5), 2)",
+        "result": "$9,274.19",
+        "why": "The same 3.00% rate as Account X, but credited annually. This isolates what the compounding frequency alone is worth."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 - #t2-p1",
+        "substituted": "#t1-p1 - #t2-p1",
+        "result": "$18.74",
+        "why": "$9,292.93 against $9,274.19. Moving from annual to monthly compounding is worth $18.74 across five years on $8,000."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p2 - #t2-p1",
+        "substituted": "#t1-p2 - #t2-p1",
+        "result": "$45.11",
+        "why": "$9,319.30 at 3.10% against $9,274.19 at 3.00%, both compounded annually — more than twice what the frequency change was worth."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "An earlier lesson showed that compounding more often always pays more. This one shows an annually compounded account beating a monthly one. Explain how both can be true, and state the rule this case gives you for reading two offers.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that more frequent compounding always beats less frequent compounding at the same rate, and that Account Y wins here because it does not offer the same rate.",
+          "States the transferable rule: convert both offers to an effective annual rate, or compare ending balances, rather than ranking on either the rate or the frequency alone.",
+          "Uses the $18.74 and $45.11 figures to show which of the two effects was larger in this case, and notes that the ranking could reverse at a different rate gap."
+        ],
+        "evidenceRequirements": [
+          "Uses the $9,292.93 and $9,319.30 ending balances and both of the isolated effects."
+        ],
+        "lookFors": [
+          "The response holds one variable fixed at a time rather than arguing from the two headline offers.",
+          "The response does not conclude that compounding frequency is unimportant; it concludes that it was smaller than the rate gap here."
+        ],
+        "commonMisconception": "Treating \"compounds more often\" as a ranking rule that survives a change in the rate.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "error-diagnosis"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

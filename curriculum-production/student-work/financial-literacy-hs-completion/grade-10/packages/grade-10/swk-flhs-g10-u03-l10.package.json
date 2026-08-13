@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u03-l10",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: automating saving and paying yourself first"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "automating saving and paying yourself first",
+  "objective": "Build a twelve-month fictional budget across a checking and a savings account, credit interest on the average month-end balance, and report the ending balance in inflation-adjusted terms.",
+  "scenario": "The simulated household, its pay, its costs, and the simulated inflation rate are all invented for this exercise. No real household finances are described and none are requested.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional budget figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional household takes home $2,450 a month. Fixed costs come to $1,780 a month. An automatic transfer moves 15% of take-home into savings on payday, before anything is spent. The savings account credits 3.9% annual interest once at year end, calculated on the average of the twelve month-end balances; for a level monthly deposit that average is 6.5 times the deposit.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much moves into savings each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is left in checking each month after fixed costs and the transfer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do the twelve transfers deposit into savings over the year, before interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Now finish the year: credit the interest on the stated basis, then convert the result into the purchasing power it represents at the start of the year, when prices in the simulated economy rise 3.4% over the twelve months.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What interest is credited at year end? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the savings balance at the end of the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is that ending balance worth in start-of-year dollars? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much purchasing power did the year’s price rise take out of the ending balance?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences, using the figures you computed.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Report this budget year to the fictional household in three sentences: what was saved, what it is worth, and what the household should change first if the $302.50 monthly remainder is not enough to live on. Justify the change you recommend with a figure from this lesson."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the interest comes out near $171.99, the 3.9% is being applied to the full $4,410.00 of deposits. Money deposited in month 11 was in the account for one month, not twelve. The stated basis here is the average of the twelve month-end balances, which is 6.5 times the $367.50 monthly deposit.",
+  "extension": "Recompute the year with the transfer set at 20% of take-home, and say what the new monthly remainder would be and whether the extra interest or the extra deposits accounts for more of the change.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u03-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

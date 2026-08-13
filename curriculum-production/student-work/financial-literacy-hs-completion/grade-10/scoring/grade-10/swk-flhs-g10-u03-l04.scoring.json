@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l04",
+  "lessonId": "ma-g10-financial-literacy-u03-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$220.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12% of the $1,840 take-home, moved before the month’s spending begins."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,649.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve transfers of $220.80. The amount is fixed by the rule rather than by what is left over."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,840 of take-home less $1,690 of spending. This is the residual the second plan saves."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve months of the $150.00 residual."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$849.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,649.60 against $1,800.00. Nothing about the worker’s income changed between the two plans; only the order in which saving and spending happen did."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,870.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "13 transfers of $220.80, ignoring any interest the account might add."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$129.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,000 against the $2,870.40 accumulated, which shows the goal is not quite reached in 13 months at this transfer rate."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "takeHome * saveRate",
+        "substituted": "1840 * 0.12",
+        "result": "$220.80",
+        "why": "12% of the $1,840 take-home, moved before the month’s spending begins."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 * 12",
+        "substituted": "#t1-p1 * 12",
+        "result": "$2,649.60",
+        "why": "Twelve transfers of $220.80. The amount is fixed by the rule rather than by what is left over."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "takeHome2 - expenses",
+        "substituted": "1840 - 1690",
+        "result": "$150.00",
+        "why": "$1,840 of take-home less $1,690 of spending. This is the residual the second plan saves."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 * 12",
+        "substituted": "#t1-p3 * 12",
+        "result": "$1,800.00",
+        "why": "Twelve months of the $150.00 residual."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 - #t2-p1",
+        "substituted": "#t1-p2 - #t2-p1",
+        "result": "$849.60",
+        "why": "$2,649.60 against $1,800.00. Nothing about the worker’s income changed between the two plans; only the order in which saving and spending happen did."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p1 * months",
+        "substituted": "#t1-p1 * 13",
+        "result": "$2,870.40",
+        "why": "13 transfers of $220.80, ignoring any interest the account might add."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "goal - #t2-p3",
+        "substituted": "3000 - #t2-p3",
+        "result": "$129.60",
+        "why": "$3,000 against the $2,870.40 accumulated, which shows the goal is not quite reached in 13 months at this transfer rate."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The worker earns the same amount under both plans, yet one saves $849.60 more. Explain where that difference comes from, and name one condition under which the automatic plan would fail rather than help.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Locates the difference in the ordering: the automatic plan sets the saving amount first and lets spending adjust to what remains, while the second plan lets spending set the saving amount.",
+          "Names a realistic failure condition — spending that cannot compress to the remaining $1,619.20, leading to overdrafts, borrowing, or transfers pulled straight back out.",
+          "Recognises that the $849.60 gap is a change in behaviour and not new income, so it holds only if the smaller spending figure is actually livable."
+        ],
+        "evidenceRequirements": [
+          "Uses the $2,649.60 and $1,800.00 annual totals, and refers to the $220.80 monthly transfer."
+        ],
+        "lookFors": [
+          "The response identifies the automatic transfer as changing what the month starts with, not as changing what is earned.",
+          "The response does not treat the second plan as a character failing; a residual of $150.00 is what a tight month produces."
+        ],
+        "commonMisconception": "Treating saving as what happens to be left over rather than as a fixed claim on income taken first.",
+        "dimensions": [
+          "plan-coherence",
+          "assumption-identification",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

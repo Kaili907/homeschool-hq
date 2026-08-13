@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l08",
+  "lessonId": "ma-g10-financial-literacy-u05-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$54.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.45% of $12,000. A percentage fee scales with the balance, so it is small when the balance is small."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$135.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.45% of $30,000 — two and a half times the smaller account’s fee, because the base is two and a half times larger."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$21,111.11",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The balance at which 0.45% equals the flat $95. Below it the percentage fee is cheaper; above it the flat fee is."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10 years at $135.00, holding the balance constant so the structures alone are compared."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$950.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10 years at the flat $95, which does not move with the balance."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,350.00 against $950.00, on a balance well above the $21,111.11 crossover."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$41.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$95 against $54.00. On this smaller account the flat fee is the more expensive of the two by $41.00 — the reverse of the $30,000 case, where the percentage fee cost $400.00 more across the decade."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "balSmall * pctFee",
+        "substituted": "12000 * 0.0045",
+        "result": "$54.00",
+        "why": "0.45% of $12,000. A percentage fee scales with the balance, so it is small when the balance is small."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "balBig * pctFee2",
+        "substituted": "30000 * 0.0045",
+        "result": "$135.00",
+        "why": "0.45% of $30,000 — two and a half times the smaller account’s fee, because the base is two and a half times larger."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(flatFee / pctFee3, 2)",
+        "substituted": "round(95 / 0.0045, 2)",
+        "result": "$21,111.11",
+        "why": "The balance at which 0.45% equals the flat $95. Below it the percentage fee is cheaper; above it the flat fee is."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p2 * 10, 2)",
+        "substituted": "round(#t1-p2 * 10, 2)",
+        "result": "$1,350.00",
+        "why": "10 years at $135.00, holding the balance constant so the structures alone are compared."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(flatFee2 * 10, 2)",
+        "substituted": "round(95 * 10, 2)",
+        "result": "$950.00",
+        "why": "10 years at the flat $95, which does not move with the balance."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t2-p2",
+        "substituted": "#t2-p1 - #t2-p2",
+        "result": "$400.00",
+        "why": "$1,350.00 against $950.00, on a balance well above the $21,111.11 crossover."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "flatFee4 - #t1-p1",
+        "substituted": "95 - #t1-p1",
+        "result": "$41.00",
+        "why": "$95 against $54.00. On this smaller account the flat fee is the more expensive of the two by $41.00 — the reverse of the $30,000 case, where the percentage fee cost $400.00 more across the decade."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain why neither fee structure is cheaper in general, using the crossover balance. Then say what changes about this comparison for an investor who is adding money every year, and what that means for someone starting near the crossover.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the two structures cross at $21,111.11, so which is cheaper depends entirely on the balance rather than on the structure itself.",
+          "States that a growing balance moves an investor across the crossover, so a flat fee that starts out expensive becomes the cheaper option once the account passes $21,111.11.",
+          "Concludes that an investor starting near the crossover should weigh the expected direction of the balance, and notes the $400.00 ten-year difference as the size of what is at stake."
+        ],
+        "evidenceRequirements": [
+          "Uses the $21,111.11 crossover balance and both of the one-year fee comparisons."
+        ],
+        "lookFors": [
+          "The response treats the crossover as the answer rather than picking a winner outright.",
+          "The response recognises that the constant-balance assumption is what makes the ten-year totals simple, and that a real balance moves."
+        ],
+        "commonMisconception": "Assuming a flat fee is always worse than a percentage fee because it is charged regardless of the balance.",
+        "dimensions": [
+          "transfer",
+          "tradeoff-defense",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

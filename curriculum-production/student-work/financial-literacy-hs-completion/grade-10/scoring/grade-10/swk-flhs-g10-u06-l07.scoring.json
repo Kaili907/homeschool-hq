@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l07",
+  "lessonId": "ma-g10-financial-literacy-u06-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$5,240.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The landlord’s policy pays $0 toward tenant possessions, so the tenant bears the whole $5,240. The landlord’s coverage is real and it protects the landlord’s property, which is not the same property. Note what the question asks for: the tenant’s own exposure, not the policy’s payment, which is $0."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$16,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5 months at $3,200. Health coverage pays the medical bills and pays none of this, because lost income is not a medical bill."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$9,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60% of the $16,000.00 lost. Disability coverage replaces part of an income; it typically does not replace all of it."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$6,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$16,000.00 lost against $9,600.00 replaced. Coverage reduces an exposure rather than removing it, which is a fact about the policy and not a defect in it."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$4,560.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "20 years at $228 a year. This is what the student is describing as wasted."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "54.82",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$250,000 of coverage against $4,560.00 of premiums. The policy is buying protection during the term, not building a balance to return."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The claim about health coverage standing in for disability coverage",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The landlord’s policy belongs to someone else and the term life claim misreads what a premium buys. Only the second claim takes a policy the worker actually holds — health coverage — and assumes it covers an exposure it does not, namely the $16,000.00 of lost income."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "belongings - landlordPays",
+        "substituted": "5240 - 0",
+        "result": "$5,240.00",
+        "why": "The landlord’s policy pays $0 toward tenant possessions, so the tenant bears the whole $5,240. The landlord’s coverage is real and it protects the landlord’s property, which is not the same property. Note what the question asks for: the tenant’s own exposure, not the policy’s payment, which is $0."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "monthly * months",
+        "substituted": "3200 * 5",
+        "result": "$16,000.00",
+        "why": "5 months at $3,200. Health coverage pays the medical bills and pays none of this, because lost income is not a medical bill."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 * replaceRate",
+        "substituted": "#t1-p2 * 0.6",
+        "result": "$9,600.00",
+        "why": "60% of the $16,000.00 lost. Disability coverage replaces part of an income; it typically does not replace all of it."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - #t1-p3",
+        "substituted": "#t1-p2 - #t1-p3",
+        "result": "$6,400.00",
+        "why": "$16,000.00 lost against $9,600.00 replaced. Coverage reduces an exposure rather than removing it, which is a fact about the policy and not a defect in it."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "lifePrem * 20",
+        "substituted": "228 * 20",
+        "result": "$4,560.00",
+        "why": "20 years at $228 a year. This is what the student is describing as wasted."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(coverage / #t2-p2, 2)",
+        "substituted": "round(250000 / #t2-p2, 2)",
+        "result": "54.82",
+        "why": "$250,000 of coverage against $4,560.00 of premiums. The policy is buying protection during the term, not building a balance to return."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "For each of the three claims, name the exposure the student is leaving uncovered and say what would have to be true for the student to be right. Then explain what \"you get nothing back\" misunderstands about paying a premium.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names all three exposures: $5,240 of belongings, $16,000.00 of lost income of which $6,400.00 would remain unreplaced even with coverage, and the loss to survivors that $250,000 of term coverage stands behind.",
+          "Gives the condition for each claim to hold — owning nothing worth insuring, having savings that can absorb months without income, or having nobody who depends on the insured’s income.",
+          "Explains that a premium buys protection for a period rather than a balance, so a term ending with no claim means the insured event did not happen, which is the outcome the buyer wanted."
+        ],
+        "evidenceRequirements": [
+          "Uses the $5,240 of belongings, the $16,000.00 of lost income, and the $4,560.00 of total premiums."
+        ],
+        "lookFors": [
+          "The response gives an honest condition under which each claim would be correct rather than declaring all three simply wrong.",
+          "The response distinguishes protection from saving without describing term life as good or bad for anyone in particular."
+        ],
+        "commonMisconception": "Judging insurance by whether money comes back, rather than by which exposure it stands behind.",
+        "dimensions": [
+          "error-diagnosis",
+          "criteria-application",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

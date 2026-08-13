@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l02",
+  "lessonId": "ma-g10-financial-literacy-u06-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$5,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,000 deductible comes off the $6,400 loss, leaving $5,400.00, which is below the $15,000 limit, so the limit does not bind and the whole remainder is paid."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $6,400 loss less the $5,400.00 paid. Here the policyholder’s cost equals the deductible exactly — which is true only because the limit did not bind."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$15,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,000 deductible comes off the $18,500 loss, leaving $17,500. That exceeds the $15,000 limit, so the limit binds and the policy pays $15,000.00 — the full limit, not the limit less the deductible."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$3,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $18,500 loss less the $15,000.00 paid. This is three and a half times the deductible, because once the limit binds the policyholder carries the deductible and everything above the limit."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The policy pays $15,000.00; the shortcut gives $14,000. The shortcut subtracts the deductible twice — once from the loss, where it belongs, and once from the limit, where it does not — so it is always wrong by the deductible whenever the limit binds."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$2,344.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,344 annual premium plus the $1,000 the policyholder bore on the claim. The premium is owed whether or not a claim happens, so the true cost of a claim year includes it."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "On the $6,400 loss only",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The policyholder paid $1,000.00 on the smaller loss and $3,500.00 on the larger one. A deductible sets the policyholder’s cost only while the loss stays within the limit."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "min(lossA - deductible, limit)",
+        "substituted": "min(6400 - 1000, 15000)",
+        "result": "$5,400.00",
+        "why": "The $1,000 deductible comes off the $6,400 loss, leaving $5,400.00, which is below the $15,000 limit, so the limit does not bind and the whole remainder is paid."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "lossA2 - #t1-p1",
+        "substituted": "6400 - #t1-p1",
+        "result": "$1,000.00",
+        "why": "The $6,400 loss less the $5,400.00 paid. Here the policyholder’s cost equals the deductible exactly — which is true only because the limit did not bind."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "min(lossB - deductible2, limit2)",
+        "substituted": "min(18500 - 1000, 15000)",
+        "result": "$15,000.00",
+        "why": "The $1,000 deductible comes off the $18,500 loss, leaving $17,500. That exceeds the $15,000 limit, so the limit binds and the policy pays $15,000.00 — the full limit, not the limit less the deductible."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "lossB2 - #t2-p1",
+        "substituted": "18500 - #t2-p1",
+        "result": "$3,500.00",
+        "why": "The $18,500 loss less the $15,000.00 paid. This is three and a half times the deductible, because once the limit binds the policyholder carries the deductible and everything above the limit."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - (limit3 - deductible3)",
+        "substituted": "#t2-p1 - (15000 - 1000)",
+        "result": "$1,000.00",
+        "why": "The policy pays $15,000.00; the shortcut gives $14,000. The shortcut subtracts the deductible twice — once from the loss, where it belongs, and once from the limit, where it does not — so it is always wrong by the deductible whenever the limit binds."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "premium + deductible4",
+        "substituted": "1344 + 1000",
+        "result": "$2,344.00",
+        "why": "The $1,344 annual premium plus the $1,000 the policyholder bore on the claim. The premium is owed whether or not a claim happens, so the true cost of a claim year includes it."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t1-p2 < #t2-p2",
+        "substituted": "#t1-p2 < #t2-p2",
+        "result": "On the $6,400 loss only",
+        "why": "The policyholder paid $1,000.00 on the smaller loss and $3,500.00 on the larger one. A deductible sets the policyholder’s cost only while the loss stays within the limit."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Write the policy’s payout rule as one sentence a person could apply to any loss. Then explain why \"my deductible is $1,000, so a claim can never cost me more than $1,000\" is false, and say which of the two policy terms a person should check first when deciding whether coverage is enough.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States the rule correctly and generally: subtract the deductible from the loss, then pay that amount up to the coverage limit, never more than the limit.",
+          "Explains the falsehood using the $18,500 case: once the limit binds, the policyholder carries the deductible plus everything above the limit, which came to $3,500.00 here.",
+          "Argues that the coverage limit should be checked first against the largest plausible loss, since the deductible only controls the policyholder’s cost while the limit is not reached."
+        ],
+        "evidenceRequirements": [
+          "Uses the $5,400.00 and $15,000.00 payouts and both of the policyholder’s own costs."
+        ],
+        "lookFors": [
+          "The response states the rule in a form that would give the right answer on a loss it has not seen.",
+          "The response identifies the limit rather than the deductible as the term that decides whether a large loss is survivable."
+        ],
+        "commonMisconception": "Reading a deductible as a ceiling on what a claim can cost the policyholder.",
+        "dimensions": [
+          "criteria-application",
+          "error-diagnosis",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

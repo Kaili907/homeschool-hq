@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l11",
+  "lessonId": "ma-g10-financial-literacy-u04-l11",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$618.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5.5% of $2,500 across 4.5 years. The $3,500 subsidised portion accrues nothing over the same period."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$6,618.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $3,500 subsidised and $2,500 unsubsidised principals plus the $618.75 that accrued and capitalised."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$2,943.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10.9% of the whole $6,000 across 4.5 years, with no subsidised portion sheltered from accrual."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$8,943.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $6,000 borrowed plus $2,943.00 of accrued interest, capitalised once."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,324.25",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,943.00 against $6,618.75. The same $6,000 was borrowed for the same 4.5 years; only the order of acceptance differed."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "135.12%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,943.00 measured against $6,618.75 — about a third more owed before the first payment is made."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "That $3,500 of it accrues no interest during school",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The $3,500 subsidised portion avoids the whole 10.9% it would have carried under Order B, worth $1,716.75 across 4.5 years, while the rate advantage on the remaining $2,500 is the 5.4 percentage point gap, worth $607.50. The subsidy is the larger effect, and splitting into two loans is not itself worth anything."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "unsub * fedRate * years",
+        "substituted": "2500 * 0.055 * 4.5",
+        "result": "$618.75",
+        "why": "5.5% of $2,500 across 4.5 years. The $3,500 subsidised portion accrues nothing over the same period."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "sub + unsub2 + #t1-p1",
+        "substituted": "3500 + 2500 + #t1-p1",
+        "result": "$6,618.75",
+        "why": "The $3,500 subsidised and $2,500 unsubsidised principals plus the $618.75 that accrued and capitalised."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "priv * privRate * years2",
+        "substituted": "6000 * 0.109 * 4.5",
+        "result": "$2,943.00",
+        "why": "10.9% of the whole $6,000 across 4.5 years, with no subsidised portion sheltered from accrual."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "priv2 + #t1-p3",
+        "substituted": "6000 + #t1-p3",
+        "result": "$8,943.00",
+        "why": "The $6,000 borrowed plus $2,943.00 of accrued interest, capitalised once."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "$2,324.25",
+        "why": "$8,943.00 against $6,618.75. The same $6,000 was borrowed for the same 4.5 years; only the order of acceptance differed."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 / #t1-p2 * 100",
+        "substituted": "#t2-p1 / #t1-p2 * 100",
+        "result": "135.12%",
+        "why": "$8,943.00 measured against $6,618.75 — about a third more owed before the first payment is made."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "subShelter * privRate4 * years3 > unsubGap * (privRate4 - fedRate3) * years3",
+        "substituted": "3500 * 0.109 * 4.5 > 2500 * (0.109 - 0.055) * 4.5",
+        "result": "That $3,500 of it accrues no interest during school",
+        "why": "The $3,500 subsidised portion avoids the whole 10.9% it would have carried under Order B, worth $1,716.75 across 4.5 years, while the rate advantage on the remaining $2,500 is the 5.4 percentage point gap, worth $607.50. The subsidy is the larger effect, and splitting into two loans is not itself worth anything."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Defend the rule \"take federal aid before private borrowing\" using these figures, then name one circumstance in which a fictional student might still need private borrowing, and say what they should compare before accepting it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Defends the rule from the $2,324.25 difference and attributes it to the two mechanisms present: the subsidised portion that accrues nothing, and the lower rate on the rest.",
+          "Names a realistic circumstance — federal limits reached, the gap left after all aid, or ineligibility — rather than treating private borrowing as always avoidable.",
+          "States what to compare before accepting private borrowing: the rate, whether interest accrues and capitalises during school, and what repayment protections the loan does or does not carry."
+        ],
+        "evidenceRequirements": [
+          "Uses the $6,618.75 and $8,943.00 repayment-start balances and the $2,324.25 difference."
+        ],
+        "lookFors": [
+          "The response defends a general rule with the specific figures rather than asserting it.",
+          "The response acknowledges that a student who has hit federal limits is not choosing between these two orders at all."
+        ],
+        "commonMisconception": "Treating all education borrowing as interchangeable because the amount borrowed is the same.",
+        "dimensions": [
+          "tradeoff-defense",
+          "transfer",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l11",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l11",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 11,
+    "phase": "Defense and extension",
+    "title": "Defense and extension: subsidised, unsubsidised, and private loan terms"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "subsidised, unsubsidised, and private loan terms",
+  "objective": "Price two orders of borrowing the same fictional amount, defend the cheaper order from the figures, and identify the condition under which the defence would not hold.",
+  "scenario": "The simulated loan options below are invented for this exercise. Interest accrues at a simple annual rate over the in-school and grace period and capitalises once at repayment, as elsewhere in this unit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional borrowing options in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional student needs $6,000 for one year and can take it two ways. Order A takes the federal money first: a $3,500 subsidised loan on which no interest accrues in school, plus a $2,500 unsubsidised loan at 5.5%. Order B takes a single $6,000 private loan at 10.9%. Both are held for 4.5 years of school and grace before repayment begins.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under Order A, how much interest accrues on the unsubsidised portion?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Order A owe when repayment begins?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under Order B, how much interest accrues on the private loan?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the two orders at the moment repayment begins.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Order B owe when repayment begins?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Order B owe than Order A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Order B’s balance is what percentage of Order A’s?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which feature of Order A accounts for the larger share of the $2,324.25 difference?",
+          "choices": [
+            "That $3,500 of it accrues no interest during school",
+            "That its rate is 5.5% rather than 10.9%",
+            "That it is split across two loans rather than one"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Defend the rule \"take federal aid before private borrowing\" using these figures, then name one circumstance in which a fictional student might still need private borrowing, and say what they should compare before accepting it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two orders come out equal, the in-school accrual is being skipped. The same $6,000 is borrowed either way, but Order A shelters $3,500 of it from accrual entirely and charges 5.5% on the rest, while Order B charges 10.9% on all of it for the full 4.5 years.",
+  "extension": "Work out how much Order B would owe if the private lender required interest to be paid during school rather than capitalised, and say whether that changes which order you would defend.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l11.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l11",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

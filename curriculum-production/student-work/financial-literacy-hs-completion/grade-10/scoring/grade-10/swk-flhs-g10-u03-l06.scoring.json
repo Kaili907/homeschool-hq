@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l06",
+  "lessonId": "ma-g10-financial-literacy-u03-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$5,418.41",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,000 grown at the disclosed 4.10% yield in each of two years, with the first year’s interest earning in the second."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$5,454.90",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same calculation at the disclosed 4.45% yield. Nothing is deducted, but the money cannot be reached for 24 months."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$5,486.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The highest disclosed yield, 4.75%, applied for two years. On interest alone Vehicle C leads."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$96.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4 charged in each of the 24 months. The fee is flat, so it does not shrink when the yield is high."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$5,390.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,486.28 of balance less $96.00 of fees, which drops the highest-yielding vehicle below both of the others."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$64.62",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,454.90 against $5,390.28 — a 4.45% vehicle beating a 4.75% one because of a fee worth more than the rate difference."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Vehicle B",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Vehicle B ends at $5,454.90 against Vehicle C’s $5,390.28 and Vehicle A’s $5,418.41. The ranking by ending balance is the reverse of the ranking by advertised yield for B and C."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(deposit * pow(1 + apyA, 2), 2)",
+        "substituted": "round(5000 * pow(1 + 0.041, 2), 2)",
+        "result": "$5,418.41",
+        "why": "$5,000 grown at the disclosed 4.10% yield in each of two years, with the first year’s interest earning in the second."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(deposit2 * pow(1 + apyB, 2), 2)",
+        "substituted": "round(5000 * pow(1 + 0.0445, 2), 2)",
+        "result": "$5,454.90",
+        "why": "The same calculation at the disclosed 4.45% yield. Nothing is deducted, but the money cannot be reached for 24 months."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(deposit3 * pow(1 + apyC, 2), 2)",
+        "substituted": "round(5000 * pow(1 + 0.0475, 2), 2)",
+        "result": "$5,486.28",
+        "why": "The highest disclosed yield, 4.75%, applied for two years. On interest alone Vehicle C leads."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "monthlyFee * 24",
+        "substituted": "4 * 24",
+        "result": "$96.00",
+        "why": "$4 charged in each of the 24 months. The fee is flat, so it does not shrink when the yield is high."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t2-p1",
+        "substituted": "#t1-p3 - #t2-p1",
+        "result": "$5,390.28",
+        "why": "$5,486.28 of balance less $96.00 of fees, which drops the highest-yielding vehicle below both of the others."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p2 - #t2-p2",
+        "substituted": "#t1-p2 - #t2-p2",
+        "result": "$64.62",
+        "why": "$5,454.90 against $5,390.28 — a 4.45% vehicle beating a 4.75% one because of a fee worth more than the rate difference."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p2 > #t2-p2",
+        "substituted": "#t1-p2 > #t2-p2",
+        "result": "Vehicle B",
+        "why": "Vehicle B ends at $5,454.90 against Vehicle C’s $5,390.28 and Vehicle A’s $5,418.41. The ranking by ending balance is the reverse of the ranking by advertised yield for B and C."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Vehicle B ends with the most money, but Vehicle A is the only one of the three a saver can reach at any time without giving anything up. Argue for one of them for money that has a 1-in-4 chance of being needed inside the two years, and name what your choice costs.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Chooses either A or B and defends it with the $36.49 difference between their ending balances against the cost of not being able to reach Vehicle B for 24 months.",
+          "Names what the choice gives up specifically — either the $36.49 of extra interest, or the ability to take the money out during the lock period.",
+          "Treats the stated 1-in-4 chance as the fact that decides the question rather than assuming the money will or will not be needed."
+        ],
+        "evidenceRequirements": [
+          "Uses the $5,418.41 and $5,454.90 ending balances, and refers to the 24-month lock on Vehicle B."
+        ],
+        "lookFors": [
+          "Either choice is fully defensible here; what is being scored is whether the cost of the choice is named.",
+          "The response does not select Vehicle C on the strength of its 4.75% headline, having computed the $96.00 of fees."
+        ],
+        "commonMisconception": "Ranking savings vehicles by advertised yield without netting out flat fees or pricing the access restriction.",
+        "dimensions": [
+          "tradeoff-defense",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

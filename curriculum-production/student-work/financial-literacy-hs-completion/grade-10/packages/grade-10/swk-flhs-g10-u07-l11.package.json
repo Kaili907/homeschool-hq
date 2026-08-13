@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l11",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 11,
+    "phase": "Defense and extension",
+    "title": "Defense and extension: state and local tax variation"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "state and local tax variation",
+  "objective": "Test one claim about two simulated states against two fictional households that differ in income and in whether they own, and identify who a fixed annual levy actually falls on.",
+  "scenario": "The two simulated states below are invented for this exercise. This lesson asks who a tax falls on rather than which state is cheaper, because the same pair of systems can favour one household and penalise another.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional state tax schedules and the two household profiles in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "State R charges a 3.2% state income tax and a 1.4% local income tax, both on gross income, plus a 6.5% sales tax. State S charges no income tax at any level and an 8.75% sales tax, plus an annual property levy of $2,180 that is charged only to households that own the home they live in. Household A owns its home, has a gross income of $32,000, and makes $10,000 of taxable purchases a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Household A pay in State R in income tax, state and local combined?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Household A pay in State R in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Household A pay in State S in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Household B rents, so the property levy does not reach it. It has a gross income of $55,000 and makes $14,000 of taxable purchases a year. Work out the same two totals for Household B, then measure the levy against Household A’s income.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does State S cost Household A than State R does?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Household B pay in State R in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Household B pay in State S in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much less does State S cost Household B than State R does?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "The $2,180 levy is what percentage of Household A’s gross income?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-choice",
+          "text": "For which household is the claim \"State S is the cheaper state\" true?",
+          "choices": [
+            "For Household A only",
+            "For Household B only",
+            "For both households",
+            "For neither household"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences, using the figures you computed.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A fictional advertisement says \"Move to State S and stop paying income tax.\" Say for whom that advice would have worked and for whom it would have backfired, explain which feature of State S produces the split, and state what makes a fixed annual charge fall differently from a percentage one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If State S looks cheaper for both households, check which one the $2,180 levy reaches. It is charged only on a home the household owns, so it lands on Household A and not on Household B. Add it to Household A’s State S bill and the ranking for that household turns over: $3,055.00 against $2,122.00.",
+  "extension": "Work out what Household A’s gross income would have to be for State S to become the cheaper option for them while they still own their home, and say what that figure shows about which households a fixed levy is hardest on.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l11.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l11",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

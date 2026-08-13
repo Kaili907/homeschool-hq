@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l03",
+  "lessonId": "ma-g10-financial-literacy-u04-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$48.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 9.6% on the $6,000 standing at the start of month 1."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$152.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The payment covers the $48.00 of interest first; the remainder is principal. Nothing about the payment changes, but this split will."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$5,848.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,000 less the $152.00 of principal retired. Next month’s interest will be charged on this smaller figure, which is the whole mechanism."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$46.78",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 9.6% on the $5,848.00 balance, which is $1.22 less than month 1 charged."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$153.22",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same $200 payment, less the smaller interest charge. The payment did not change; more of it now reaches the balance."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$5,694.78",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,848.00 less the $153.22 retired in month 2."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$45.56",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 9.6% on the $5,694.78 balance."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$154.44",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The remainder of the $200 after $45.56 of interest — $2.44 more principal than month 1 retired, from an identical payment."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "$5,540.34",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,694.78 less the $154.44 retired in month 3."
+        }
+      },
+      {
+        "ref": "t2-p7",
+        "answer": "$459.66",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,000 against the $5,540.34 still owed. The borrower paid $600.00 over the three months, so $140.34 of it went to interest and never touched the debt."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(bal * apr / 12, 2)",
+        "substituted": "round(6000 * 0.096 / 12, 2)",
+        "result": "$48.00",
+        "why": "One twelfth of 9.6% on the $6,000 standing at the start of month 1."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "payment - #t1-p1",
+        "substituted": "200 - #t1-p1",
+        "result": "$152.00",
+        "why": "The payment covers the $48.00 of interest first; the remainder is principal. Nothing about the payment changes, but this split will."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "bal2 - #t1-p2",
+        "substituted": "6000 - #t1-p2",
+        "result": "$5,848.00",
+        "why": "$6,000 less the $152.00 of principal retired. Next month’s interest will be charged on this smaller figure, which is the whole mechanism."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 * apr2 / 12, 2)",
+        "substituted": "round(#t1-p3 * 0.096 / 12, 2)",
+        "result": "$46.78",
+        "why": "One twelfth of 9.6% on the $5,848.00 balance, which is $1.22 less than month 1 charged."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "payment2 - #t2-p1",
+        "substituted": "200 - #t2-p1",
+        "result": "$153.22",
+        "why": "The same $200 payment, less the smaller interest charge. The payment did not change; more of it now reaches the balance."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 - #t2-p2",
+        "substituted": "#t1-p3 - #t2-p2",
+        "result": "$5,694.78",
+        "why": "$5,848.00 less the $153.22 retired in month 2."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p3 * apr3 / 12, 2)",
+        "substituted": "round(#t2-p3 * 0.096 / 12, 2)",
+        "result": "$45.56",
+        "why": "One twelfth of 9.6% on the $5,694.78 balance."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "payment3 - #t2-p4",
+        "substituted": "200 - #t2-p4",
+        "result": "$154.44",
+        "why": "The remainder of the $200 after $45.56 of interest — $2.44 more principal than month 1 retired, from an identical payment."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t2-p3 - #t2-p5",
+        "substituted": "#t2-p3 - #t2-p5",
+        "result": "$5,540.34",
+        "why": "$5,694.78 less the $154.44 retired in month 3."
+      },
+      {
+        "ref": "t2-p7",
+        "expression": "bal3 - #t2-p6",
+        "substituted": "6000 - #t2-p6",
+        "result": "$459.66",
+        "why": "$6,000 against the $5,540.34 still owed. The borrower paid $600.00 over the three months, so $140.34 of it went to interest and never touched the debt."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A classmate says \"9.6% of $6,000 is $576, so a year of this loan costs $576 in interest.\" Explain what that calculation assumes, why the three months you just worked contradict it, and state whether the true first-year interest is above or below $576.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the assumption: that the full $6,000 is owed for the whole year, when in fact the balance falls every month as principal is retired.",
+          "Uses the worked months as the contradiction — interest fell from $48.00 to $46.78 to $45.56 while the payment stayed at $200 — and concludes the true first-year interest is below $576.",
+          "Notes that the simple calculation would be correct only for a loan on which nothing is repaid until the end of the year, which is a different product from this one."
+        ],
+        "evidenceRequirements": [
+          "Uses at least two of the three monthly interest figures and the $459.66 of principal retired."
+        ],
+        "lookFors": [
+          "The response names the declining balance as the reason, not rounding or fees.",
+          "The response recognises that the classmate’s method is not nonsense; it is the right method for a different loan structure."
+        ],
+        "commonMisconception": "Pricing an amortising loan by applying its annual rate once to the amount originally borrowed.",
+        "dimensions": [
+          "error-diagnosis",
+          "assumption-identification",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 10,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

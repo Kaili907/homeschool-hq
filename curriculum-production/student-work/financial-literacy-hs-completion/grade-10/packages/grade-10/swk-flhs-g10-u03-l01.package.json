@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u03-l01",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: account types and their fee and access structures"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "account types and their fee and access structures",
+  "objective": "Compute what each of three fictional account structures costs and earns over a year, and show that access restrictions, not headline rates, decide which one fits money that may be needed early.",
+  "scenario": "Junction Bank and its three accounts are fictional and are invented for this exercise. No real bank, rate, fee schedule, or customer is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional account terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The three fictional accounts. Everyday Checking charges an $8 monthly fee, waived in any month the balance stays at or above $500, and pays no interest. Basic Savings pays 0.75% annual interest credited once at year end, allows 6 free withdrawals a month and charges $5 for each withdrawal beyond that. The 12-month Term Certificate pays 3.20% annual interest but charges a penalty of 90 days of interest on any withdrawal before the term ends.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "A fictional saver holds $410 in Everyday Checking in every month of the year. What do the monthly fees cost over the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "The same saver instead holds $2,600 in Basic Savings for the whole year. What interest is credited at year end?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "In one month the saver makes 9 withdrawals from Basic Savings. What do the withdrawals past the free allowance cost that month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price the certificate, including what happens when the money is needed early. The certificate credits interest for the months actually held, then subtracts the penalty. Basic Savings credits its interest only at year end, so money withdrawn before then earns nothing at all.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "The saver puts the $2,600 into the 12-month Term Certificate instead. What interest does a full year earn?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "The saver instead needs the money in month 7. What interest has the certificate credited for the months actually held?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the early-withdrawal penalty, at 90 days of interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What interest does the saver actually keep after withdrawing in month 7?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "For money that turns out to be needed in month 7, which account left the saver with more interest?",
+          "choices": [
+            "The Term Certificate, even after the penalty",
+            "Basic Savings, because it has no penalty"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rank the three fictional accounts for money that will definitely not be touched for a year, then rank them again for money that might be needed in any month. Say which single term changes the ranking, and why the headline interest rate is not that term."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the certificate looks like the wrong choice for month-7 money, check what Basic Savings actually pays on that money: the account credits interest once at year end, so a withdrawal in month 7 earns nothing. Compare $28.01 against $0.00, not against the $19.50 a full year would have paid.",
+  "extension": "Work out the fee Everyday Checking would have charged if the balance had stayed at or above $500 in 8 of the 12 months, and say what that implies about a waiver tied to a minimum rather than to an average.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u03-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

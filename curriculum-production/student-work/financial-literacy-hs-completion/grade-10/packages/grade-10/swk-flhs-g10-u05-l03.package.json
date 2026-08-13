@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l03",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: diversification across and within asset classes"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "diversification across and within asset classes",
+  "objective": "Compute the one-year outcome of a fictional equally weighted portfolio against single-asset alternatives, and quantify what diversification gave up and what it avoided.",
+  "scenario": "The four simulated asset classes below are invented for this exercise, and the returns shown are the stated outcome of one simulated year rather than a forecast of any real market.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional one-year returns in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Over one simulated year, four fictional asset classes returned: a broad domestic stock fund 18%, a bond fund 3%, an international stock fund -6%, and a cash account 2%. A fictional investor has $8,000 and puts an equal quarter into each.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the return on the equally weighted portfolio?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the equally weighted portfolio worth at the end of the year? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the whole $8,000 have been worth in the broad domestic stock fund alone?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find the worst single choice and measure the spread between the extremes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the whole $8,000 have been worth in the international stock fund alone?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the spread between the best and worst single-asset outcomes?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much did the diversified portfolio gain over the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much did the diversified investor give up against the best single choice?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The diversified portfolio finished $1,100.00 behind the best single choice and $820.00 ahead of the worst. Explain what an investor is actually buying when they diversify, and say why the $1,100.00 is not evidence that diversifying was a mistake."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the portfolio return comes out as 7.67%, the negative return is being left out of the sum altogether while the other three are still divided by 4. The international fund returned -6%, and at an equal quarter weight it pulls the average down. Add all four returns, including the negative one, before dividing by 4.",
+  "extension": "Recompute the equally weighted return if the international fund had instead returned -20% and everything else was unchanged, and say whether the portfolio still finished the year positive.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

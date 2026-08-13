@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l05",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: identity theft response steps"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "identity theft response steps",
+  "objective": "Total a set of fictional unauthorised charges, apply a stated liability schedule at three different reporting dates, and price the value of reporting quickly.",
+  "scenario": "The simulated charges and the simulated liability schedule below are invented for this exercise. The schedule is a simplified teaching device, not a statement of anyone’s legal rights. No learner is asked for any real account, card, or login detail, and nothing here should be used to decide a real dispute — for that, contact the institution and a trusted adult.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional statement and liability schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional statement shows four unauthorised charges: $312.48, $89.99, $1,204.00, and $47.25. Under this simulated liability schedule, an account holder who reports within 2 business days owes at most $50; reporting after that but within 60 days caps the amount owed at $500; reporting after 60 days leaves the whole amount owing.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the unauthorised charges come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the holder reports the next day, what do they owe under the schedule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "If instead the holder reports on day 12, what do they owe?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price the delay itself. Reporting after 60 days leaves the whole $1,653.72 owing.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does reporting the next day save against reporting after 60 days?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the delay from day 1 to day 12 cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Under this simulated schedule, what does the account holder control?",
+          "choices": [
+            "The size of the unauthorised charges",
+            "How quickly the charges are reported",
+            "Whether the institution investigates"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write the first four things a fictional person should do on finding unauthorised charges, in order, and explain why the order matters given this schedule. Say which step you would not delay even by a day."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the amount owed after a next-day report comes out as $1,653.72, the cap has not been applied. The schedule limits what the holder owes to $50 in that tier, so the answer is the smaller of the two figures. Compare the total against each tier’s cap and take the lower.",
+  "extension": "Work out what the holder would owe if only the $1,204.00 charge had been unauthorised and it was reported on day 30, and say whether the size of the charge changes which tier applies.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

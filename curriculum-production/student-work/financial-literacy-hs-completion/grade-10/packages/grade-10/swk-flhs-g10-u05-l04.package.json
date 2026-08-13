@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l04",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: the role of government agencies and disclosure rules"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "the role of government agencies and disclosure rules",
+  "objective": "Apply a fictional custody-protection scheme’s stated limits to two account sizes, and establish that no part of it covers a decline in the value of the investments themselves.",
+  "scenario": "The Investor Protection Fund and the Markets Disclosure Authority described below are fictional stand-ins invented only for this exercise. Their limits and rules are made up. No real agency, protection scheme, or brokerage is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional scheme rules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "In this simulated system, the fictional Investor Protection Fund steps in only when a brokerage fails and customer property is missing. It covers up to $500,000 of securities and cash per customer, with a sub-limit of $250,000 on cash. It does not cover any fall in the value of an investment. A fictional customer holds $340,000 of securities and $18,000 of cash at a simulated brokerage.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total value of the customer’s account?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the fictional brokerage fails, how much of the securities holding falls within the $500,000 limit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of the cash falls within the $250,000 cash sub-limit?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the limit against a larger account, and then against something the scheme does not cover at all. A second fictional customer holds $610,000 of securities. Separately, the first customer’s $340,000 of securities falls 22% in a simulated market decline while the brokerage stays in business.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "If that brokerage failed, how much of the second customer’s securities would fall outside the $500,000 limit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much value does the first customer lose in the 22% market decline?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What are those securities worth after the decline?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "How much of that $74,800.00 decline does the fictional Investor Protection Fund cover?",
+          "choices": [
+            "All of it",
+            "Up to the $500,000 limit",
+            "None of it"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A fictional advertisement says an account is \"protected up to $500,000\". Explain in your own words what that protection actually is, name what it excludes, and say what a disclosure rule requiring risk factors to be published is for."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the decline looks like something the scheme should cover, re-read what triggers it: a brokerage failing and customer property going missing. In the decline, every security is still in the account. The customer holds exactly what they held before, and it is worth $265,200.00 instead of $340,000.",
+  "extension": "Work out how a fictional customer holding $900,000 of securities could stay within the stated per-customer limit, and say what that costs them in convenience.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

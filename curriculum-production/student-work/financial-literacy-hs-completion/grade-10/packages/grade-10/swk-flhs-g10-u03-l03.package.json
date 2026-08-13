@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u03-l03",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: nominal versus real value under inflation"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "nominal versus real value under inflation",
+  "objective": "Convert a fictional year-end balance into start-of-year purchasing power, compute the real rate of return, and show why subtracting inflation from the nominal rate is an approximation rather than the definition.",
+  "scenario": "The simulated savings account and the simulated inflation rate below are invented for this exercise. No real price index or published rate is used.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional account and inflation figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional saver holds $3,000 for one year in an account paying 2.5% annual interest. Over the same year, prices in the simulated economy rise by 3.8%, so what cost $1.00 at the start of the year costs $1.038 at the end of it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance at the end of the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is that year-end balance worth in start-of-year dollars? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much purchasing power did the saver lose over the year, measured in start-of-year dollars?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now state the same result as a rate, two ways.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the exact real rate of return — the growth factor divided by the price factor, less 1?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do you get by simply subtracting the inflation rate from the interest rate?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which statement about the saver’s year is accurate?",
+          "choices": [
+            "The account lost money and the balance fell",
+            "The account gained money and the balance bought less than it would have at the start of the year",
+            "The account gained money and the balance bought more than it would have at the start of the year"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A statement showing a balance that went up is not by itself evidence that a saver is better off. Explain what the statement leaves out, and say what a saver would need to know to judge whether a year of saving worked."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the real value comes out above $3,075.00, the division has been done the wrong way round. Prices rose, so a year-end dollar buys less than a start-of-year dollar; converting back to start-of-year dollars must make the figure smaller. Divide $3,075.00 by 1.038, not multiply.",
+  "extension": "Find the interest rate this fictional account would have needed to leave the saver exactly even in purchasing power, and say whether that rate is above or below the 3.8% rise in prices.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u03-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l01",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: stocks, bonds, funds, and index vehicles"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "stocks, bonds, funds, and index vehicles",
+  "objective": "Compute the total return on a fictional share position from both price change and dividends, compute the current yield on a fictional bond bought below face value, and distinguish what each instrument promises.",
+  "scenario": "The simulated share, bond, and fund described below are invented for this exercise. No real company, security, or fund is named, and the price movements shown are a stated outcome of a simulated period rather than a prediction.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional holdings described in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional investor bought 40 shares of a simulated company at $28.50 a share. Over the simulated year the price moved to $31.75 and the company paid a dividend of $0.42 a share. Ignore any commission.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did the share position cost to buy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the position worth at the end of the simulated year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much did the position gain from the price move alone?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now add the dividends, state the whole result as a return, and compare with a fictional bond. The simulated bond has a face value of $1,000 and pays a 4.5% coupon each year; the investor bought it for $960.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much did the shares pay in dividends over the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total return on the share position in dollars?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is that total return as a percentage of what the position cost?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does the fictional bond pay in coupon each year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What is the bond’s current yield — the coupon measured against the $960 actually paid?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-choice",
+          "text": "Which of these instruments carries a stated promise to pay a fixed amount on a schedule?",
+          "choices": [
+            "The share",
+            "The bond",
+            "Both of them",
+            "Neither of them"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A fictional index fund holds small pieces of hundreds of companies at once, while the share position above is one company. Explain what the fund changes about the risk the investor is exposed to, and name one risk it does not remove."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total return comes out as $130.00, the dividends have been left out. A share position returns both what the price does and what the company pays out. Add the $16.80 of dividends to the $130.00 of price change before dividing by the $1,140.00 cost.",
+  "extension": "Work out what the share position would have returned if the price had ended at $26.00 and the same dividend had been paid, and say whether the dividend made the year positive.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

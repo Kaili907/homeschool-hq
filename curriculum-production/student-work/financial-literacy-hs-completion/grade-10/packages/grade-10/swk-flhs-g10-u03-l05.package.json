@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u03-l05",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: irregular and seasonal income planning"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "irregular and seasonal income planning",
+  "objective": "Convert a fictional uneven income stream into a level monthly figure, compute the shortfall the low months create and the surplus the high months produce, and show that the two must match.",
+  "scenario": "The simulated seasonal job and its pay pattern are invented for this exercise. No real employer, season, or worker is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pay pattern in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional seasonal worker is paid $2,900 a month during 4 peak months and $980 a month during the other 8 months of the year. Nothing else changes across the year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the worker earn across the peak months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the worker earn across the off-season months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the worker’s income for the whole year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now build the level figure the year can actually support, and check that the two halves of the plan balance.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What level monthly amount does the year’s income support?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Across the off-season, how far does the pay fall short of that level amount in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Across the peak months, how much does the pay exceed the level amount in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "If the worker instead budgeted as though every month paid the peak rate, how much income would the plan assume that the year never produces?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The peak surplus and the off-season shortfall both come to $5,120.00. Explain why they have to be equal, and say what the worker must actually do during the peak months for the plan to hold."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the level monthly figure comes out as $1,940, the two monthly pay rates are being averaged without weighting them by how many months each one lasts — $2,900 and $980 average to $1,940, but the year holds only 4 months at the higher rate and 8 at the lower. Total the whole year’s income, $19,440.00, and divide that by 12.",
+  "extension": "Suppose the peak season shortens to 3 months at the same rates. Recompute the level monthly figure and the amount the peak months must now carry, and say which of the two changes more.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u03-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

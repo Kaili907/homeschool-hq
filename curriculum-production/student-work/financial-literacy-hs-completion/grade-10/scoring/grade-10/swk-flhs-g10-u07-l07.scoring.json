@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l07",
+  "lessonId": "ma-g10-financial-literacy-u07-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$41,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$52,500 of gross less the $11,200 standard deduction. This is below the $42,000 threshold, so the top bracket is not reached."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$5,390.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$980 on the first bracket plus 14% of the remaining $31,500 of taxable income. Only two brackets are used."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$43,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$54,500 of gross less the same $11,200 deduction. This does cross the $42,000 threshold, so the worker is right that the top bracket is now in play."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$5,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$980 on the first bracket, $4,508 on the second, and 24% of the $1,300 of taxable income above $42,000. The first two bracket amounts are unchanged from before the raise."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$410.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,800.00 against $5,390.00. The extra tax is charged only on the additional income, not on the income the worker already had."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,590.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,000 of extra gross less $410.00 of extra tax. The worker is $1,590.00 better off, so the claim that the raise reduces take-home pay is false."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$43,300.00 of taxable income less the $42,000 threshold. Entering a bracket means the income above the threshold is charged at that rate, not the whole income."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "grossBefore - stdDed",
+        "substituted": "52500 - 11200",
+        "result": "$41,300.00",
+        "why": "$52,500 of gross less the $11,200 standard deduction. This is below the $42,000 threshold, so the top bracket is not reached."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "b1 * r1 + (#t1-p1 - b1) * r2",
+        "substituted": "9800 * 0.1 + (#t1-p1 - 9800) * 0.14",
+        "result": "$5,390.00",
+        "why": "$980 on the first bracket plus 14% of the remaining $31,500 of taxable income. Only two brackets are used."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "grossAfter - stdDed2",
+        "substituted": "54500 - 11200",
+        "result": "$43,300.00",
+        "why": "$54,500 of gross less the same $11,200 deduction. This does cross the $42,000 threshold, so the worker is right that the top bracket is now in play."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "b1b * r1b + (b2 - b1b) * r2b + (#t1-p3 - b2) * r3",
+        "substituted": "9800 * 0.1 + (42000 - 9800) * 0.14 + (#t1-p3 - 42000) * 0.24",
+        "result": "$5,800.00",
+        "why": "$980 on the first bracket, $4,508 on the second, and 24% of the $1,300 of taxable income above $42,000. The first two bracket amounts are unchanged from before the raise."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "$410.00",
+        "why": "$5,800.00 against $5,390.00. The extra tax is charged only on the additional income, not on the income the worker already had."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "raise - #t2-p2",
+        "substituted": "2000 - #t2-p2",
+        "result": "$1,590.00",
+        "why": "$2,000 of extra gross less $410.00 of extra tax. The worker is $1,590.00 better off, so the claim that the raise reduces take-home pay is false."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 - b2b",
+        "substituted": "#t1-p3 - 42000",
+        "result": "$1,300.00",
+        "why": "$43,300.00 of taxable income less the $42,000 threshold. Entering a bracket means the income above the threshold is charged at that rate, not the whole income."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain in your own words exactly where the worker’s reasoning goes wrong, and write the one sentence you would say to correct it. Then describe what would have to be true of a tax system for the worker’s fear to be justified.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Locates the error precisely: the worker treats a bracket rate as applying to all income once the threshold is crossed, when it applies only to the $1,300.00 above the threshold.",
+          "Gives a correcting sentence that would generalise — a higher bracket taxes only the income above its threshold, so more gross income always leaves more after tax under this schedule.",
+          "Describes what would justify the fear: a system where crossing a threshold changed the rate on all income at once, or where a benefit was withdrawn abruptly at a specific income."
+        ],
+        "evidenceRequirements": [
+          "Uses the $410.00 of extra tax, the $1,590.00 kept, and the $1,300.00 taxed at the top rate."
+        ],
+        "lookFors": [
+          "The response notes that the worker was right that the bracket was entered and wrong about what that means.",
+          "The response identifies abrupt benefit withdrawal as a real case where extra income can leave someone worse off, without claiming it happens under this schedule."
+        ],
+        "commonMisconception": "Believing that crossing into a higher bracket re-taxes all previously earned income at the higher rate.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l08",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: premium, deductible, co-pay, and coverage limit interacting"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "premium, deductible, co-pay, and coverage limit interacting",
+  "objective": "Apply the payout rule where the deductible is a percentage of the coverage limit rather than a flat amount, and compare the result with a flat-deductible policy on the same loss.",
+  "scenario": "The simulated dwelling policy below is invented for this exercise. Its windstorm deductible is a percentage of the dwelling coverage limit, not of the loss — a structure that behaves differently from the flat deductibles used earlier in this unit. The payout rule is unchanged: the deductible comes off the loss, and the coverage limit caps the payment.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional dwelling policy terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional dwelling policy has a coverage limit of $180,000. Its windstorm deductible is 2% of that coverage limit, whatever the size of the loss. Start with a windstorm loss of $47,500.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the windstorm deductible in dollars?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "On the $47,500 loss, what does the policy pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the homeowner pay on that loss?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now take a windstorm loss of $195,000 against the same policy, then compare the percentage deductible with a flat one on the original loss.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "On the $195,000 loss, what does the policy pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the homeowner pay on that loss?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the policy had carried a flat $1,000 deductible instead, how much more would it have paid on the $47,500 loss?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "If the homeowner raised the dwelling coverage limit to $220,000, what would happen to the windstorm deductible?",
+          "choices": [
+            "It would stay at $3,600.00",
+            "It would rise",
+            "It would fall"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The payout rule was the same in this lesson as in the flat-deductible ones, but one input was computed differently. State the rule in a form that covers both, explain what changes when a deductible is set as a percentage of the limit, and say what a homeowner should check before raising a coverage limit."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the $195,000 claim comes out as $176,400, the deductible has been subtracted from the limit as well as from the loss. Take it off once, from the loss, then cap at the limit: the policy pays $180,000.00 and the homeowner bears $15,000.00.",
+  "extension": "Work out the windstorm deductible and the payout on the $47,500 loss if the coverage limit were raised to $220,000, and say whether the homeowner ends up better or worse off on that particular claim.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

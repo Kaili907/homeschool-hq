@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u03-l06",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: comparing savings vehicles on stated terms"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "comparing savings vehicles on stated terms",
+  "objective": "Compare three fictional savings vehicles over two years on their disclosed terms, net of fees, and show that the highest advertised rate produces the worst outcome once a maintenance fee is counted.",
+  "scenario": "The three simulated savings vehicles below are invented for this exercise. Each discloses an annual percentage yield, and the balance is grown by that yield once per year for two years.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the three fictional vehicle disclosures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional saver has $5,000 to place for 2 years. Vehicle A discloses a 4.10% annual percentage yield with no fee and withdrawals at any time. Vehicle B discloses a 4.45% yield with no fee but locks the money for the full 24 months. Vehicle C discloses a 4.75% yield with withdrawals at any time and a $4 monthly maintenance fee. Grow each balance by its disclosed yield once per year, then subtract any fees.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Vehicle A hold after two years? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Vehicle B hold after two years? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Vehicle C hold after two years, before any fee is taken? Round to the nearest cent.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now take the fee into account and rank the three.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Vehicle C’s maintenance fees total over the two years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Vehicle C actually leave the saver after fees?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Vehicle B leave the saver than Vehicle C, after fees?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which vehicle leaves the most money after two years, counting fees?",
+          "choices": [
+            "Vehicle A",
+            "Vehicle B",
+            "Vehicle C"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Vehicle B ends with the most money, but Vehicle A is the only one of the three a saver can reach at any time without giving anything up. Argue for one of them for money that has a 1-in-4 chance of being needed inside the two years, and name what your choice costs."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Vehicle C still looks best, the fee has not been subtracted from the ending balance. The $4 monthly charge runs for all 24 months whatever the yield does, and $96.00 is more than the extra interest the higher yield produced over Vehicle B. Compute each vehicle’s ending balance, then take the fees off before ranking.",
+  "extension": "Find the monthly maintenance fee at which Vehicle C would exactly tie Vehicle B after two years, and say whether a saver could tell from the advertised yields alone that such a fee mattered.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u03-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}
