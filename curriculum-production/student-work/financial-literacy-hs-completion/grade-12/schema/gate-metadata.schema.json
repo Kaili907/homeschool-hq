@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel-academy.local/schema/finlit-g12-gate-metadata.schema.json",
+  "title": "Grade 12 Financial Literacy — Production Gate H3 scoring-mode metadata",
+  "description": "Prepared mapping between this lane's authored scoring kinds and the three scoring modes the shared production-readiness gate recognises. Published per lesson so the ANSWER_KEY claim a hybrid lesson makes to the gate can be audited against the fixed-item counts behind it, rather than trusted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "lane", "grade", "subjectFamily", "sourceCorpusVersion", "gateContract", "modeMapping", "counts", "lessons"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "lane": { "type": "string", "minLength": 1 },
+    "grade": { "const": 12 },
+    "subjectFamily": { "const": "MATH_STRUCTURED_FINLIT" },
+    "sourceCorpusVersion": { "type": "string", "minLength": 1 },
+    "gateContract": { "type": "string", "minLength": 1 },
+    "modeMapping": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 40 } },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lessons", "byLaneKind", "byGateMode", "fixedItems", "rubricItems"],
+      "properties": {
+        "lessons": { "type": "integer", "minimum": 0 },
+        "byLaneKind": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "byGateMode": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "fixedItems": { "type": "integer", "minimum": 0 },
+        "rubricItems": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "lessons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["packageId", "lessonId", "unit", "day", "laneScoringKind", "gateScoringMode", "fixedItemCount", "rubricItemCount", "oracleVerifiedFixedAnswers", "integratedDomains", "isCapstone"],
+        "properties": {
+          "packageId": { "type": "string", "pattern": "^swk-flhs-g12-u\\d{2}-l\\d{2}$" },
+          "lessonId": { "type": "string", "pattern": "^ma-g12-financial-literacy-" },
+          "unit": { "type": "integer", "minimum": 1, "maximum": 7 },
+          "day": { "type": "integer", "minimum": 1 },
+          "laneScoringKind": { "enum": ["ANSWER_KEY", "RUBRIC", "HYBRID"] },
+          "gateScoringMode": {
+            "enum": ["ANSWER_KEY", "RUBRIC", "SCORING_JUDGMENT"],
+            "description": "The gate's own vocabulary. HYBRID has no gate equivalent, so it is projected to ANSWER_KEY and only when fixedItemCount is at least 1."
+          },
+          "fixedItemCount": { "type": "integer", "minimum": 1 },
+          "rubricItemCount": { "type": "integer", "minimum": 1 },
+          "oracleVerifiedFixedAnswers": { "type": "integer", "minimum": 0 },
+          "integratedDomains": { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "type": "string" } },
+          "isCapstone": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}
