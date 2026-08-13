@@ -1,6 +1,5 @@
 export * from './importCompatibility'
 export * from './migration'
-export * from './pinVerifier'
 
 // Only the safe, application-facing learner credential operations are
 // re-exported here. Raw primitives that verify or overwrite credential

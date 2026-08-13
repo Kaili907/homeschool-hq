@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import * as CredentialsBarrel from './index'
+import { verifyPinVerifier } from './pinVerifier'
+import { MemoryCredentialStorage } from './testStorage'
 
 /**
  * Pins the supported application-facing learner credential barrel. Cast
@@ -8,22 +10,38 @@ import * as CredentialsBarrel from './index'
  * no longer type-check against this file's expectations.
  */
 const barrel = CredentialsBarrel as Record<string, unknown>
+const SUPPORTED_RUNTIME_EXPORTS = [
+  'CredentialVaultError',
+  'LEGACY_CREDENTIAL_MIGRATION_NAMESPACE',
+  'LEGACY_CREDENTIAL_MIGRATION_SCHEMA_VERSION',
+  'LEGACY_IMPORT_CREDENTIAL_MIGRATION_NAMESPACE',
+  'classifyLegacyPin',
+  'deleteLearnerCredential',
+  'enrollLearnerPin',
+  'markLearnerCredentialResetRequired',
+  'migrateLegacyEducationalCredentials',
+  'readLegacyCredentialMigrationRecord',
+  'readLearnerCredential',
+  'rotateLearnerPin',
+  'sanitizeAndEnrollLegacyImportCredentials',
+  'verifyLearnerPin',
+] as const
 
 describe('learner credential barrel', () => {
-  it('does not re-export raw verifier or raw write primitives', () => {
-    expect(barrel.verifyLearnerCredentialRecord).toBeUndefined()
-    expect(barrel.writeLearnerCredential).toBeUndefined()
-    expect(barrel.parseLearnerCredentialRecord).toBeUndefined()
-    expect(barrel.createLearnerCredentialRecord).toBeUndefined()
+  it('has exactly the supported application-facing runtime surface', () => {
+    expect(Object.keys(barrel).sort()).toEqual([...SUPPORTED_RUNTIME_EXPORTS].sort())
   })
 
-  it('still exports every supported safe operation', () => {
-    expect(typeof barrel.verifyLearnerPin).toBe('function')
-    expect(typeof barrel.enrollLearnerPin).toBe('function')
-    expect(typeof barrel.rotateLearnerPin).toBe('function')
-    expect(typeof barrel.markLearnerCredentialResetRequired).toBe('function')
-    expect(typeof barrel.deleteLearnerCredential).toBe('function')
-    expect(typeof barrel.readLearnerCredential).toBe('function')
-    expect(typeof barrel.CredentialVaultError).toBe('function')
+  it('does not expose raw verifier authority over retained stale material', async () => {
+    const storage = new MemoryCredentialStorage()
+    const retainedOldMaterial = await CredentialsBarrel.enrollLearnerPin('p1', '1111', { storage })
+
+    await CredentialsBarrel.rotateLearnerPin('p1', '1111', '2222', { storage })
+
+    await expect(CredentialsBarrel.verifyLearnerPin('p1', '1111', { storage })).resolves.toBe(false)
+    await expect(verifyPinVerifier(retainedOldMaterial.profileId, '1111', retainedOldMaterial)).resolves.toBe(true)
+    expect(barrel.verifyPinVerifier).toBeUndefined()
+    expect(barrel.createPinVerifier).toBeUndefined()
+    expect(barrel.createUnusablePinVerifier).toBeUndefined()
   })
 })
