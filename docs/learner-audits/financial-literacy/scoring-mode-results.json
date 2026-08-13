@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0",
+  "status": "FAIL",
+  "expected": {
+    "MIXED": 468,
+    "JUDGMENT_APPLICATION": 36
+  },
+  "h3GateStatus": "READY",
+  "h3EffectiveReady": 504,
+  "sourceAndProductionBindingPreserved": 504,
+  "browserLearnerProjectionPreserved": 0,
+  "byMode": [
+    {
+      "mode": "JUDGMENT_APPLICATION",
+      "expected": 36,
+      "audited": 36,
+      "sourceAndProductionBindingPreserved": 36,
+      "browserLearnerProjectionPreserved": 0,
+      "result": "FAIL"
+    },
+    {
+      "mode": "MIXED",
+      "expected": 468,
+      "audited": 468,
+      "sourceAndProductionBindingPreserved": 468,
+      "browserLearnerProjectionPreserved": 0,
+      "result": "FAIL"
+    }
+  ],
+  "evidence": {
+    "h3Report": "curriculum-production/final/financial-literacy/reports/h3-readiness.json",
+    "productionBindings": "curriculum-release-admitted/family-pilot-r1/production-bindings.jsonl",
+    "browserProjector": "scripts/build-final-family-pilot-data.mjs",
+    "browserBindingDropsScoringMetadata": true,
+    "browserMaterialDropsResponseScoring": true
+  }
+}
