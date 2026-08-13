@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l15",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l15",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 15,
+    "courseDay": 33,
+    "phase": "Assessment preparation",
+    "focus": "expanded form",
+    "title": "Assessment preparation: expanded form"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "How is 2.5 written in words?",
+          "choices": [
+            "two and four tenths",
+            "two and five hundredths",
+            "three and five tenths",
+            "two and five tenths"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "number-name-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "Write “ninety-nine and sixty-one hundredths” as a decimal.",
+          "choices": [
+            "99.62",
+            "99.61",
+            "105.1",
+            "100.61"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-expanded-form",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "Write 9.82 in expanded form.",
+          "choices": [
+            "9 + 0.8 + 0.03",
+            "9 + 0.8 + 0.02",
+            "9.82",
+            "9 + 0.9 + 0.02"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "expanded-form-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "Write 10 + 3 + 0.7 + 0.01 in standard form.",
+          "choices": [
+            "13.72",
+            "13.81",
+            "137.1",
+            "13.71"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Compare 4.6 and 5.364 using <, >, or =.",
+          "choices": [
+            "<",
+            "=",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "round-decimal",
+          "standard": "5.NBT.4",
+          "difficulty": 3,
+          "prompt": "Round 9031.500 to the nearest whole number.",
+          "choices": [
+            "9035",
+            "9033",
+            "9032",
+            "9034"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "decimal-number-line",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "A number line from 7.320 to 7.330 has 10 equal intervals. Point P is 6 intervals after 7.320. What number is P?",
+          "choices": [
+            "7.325",
+            "7.324",
+            "7.327",
+            "7.326"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "place-value-chart",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "Place-value chart:\nthousands | hundreds | tens | ones | tenths | hundredths | thousandths\n7 | 5 | 6 | 2 | 4 | 8 | 1\nWhich place contains the digit 2?",
+          "choices": [
+            "ones",
+            "thousands",
+            "tens",
+            "hundredths"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "In 1137, how does the value of the 1 in the thousands place compare with the value of the 1 in the hundreds place?",
+          "choices": [
+            "the same value",
+            "1/10 as much",
+            "100 times",
+            "10 times"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "power-of-ten-notation",
+          "standard": "5.NBT.2",
+          "difficulty": 2,
+          "prompt": "10^3 = ?",
+          "choices": [
+            "10000",
+            "1",
+            "100000",
+            "1000"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "6.63 × 10^3 = ?",
+          "choices": [
+            "6.63",
+            "6630",
+            "0.00663",
+            "66300"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "divide-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "4.550 ÷ 10^3 = ?",
+          "choices": [
+            "0.000455",
+            "0.00455",
+            "4.55",
+            "0.0455"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l15"
+  }
+}

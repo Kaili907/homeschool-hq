@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l07",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 7,
+    "courseDay": 115,
+    "phase": "Investigation or close reading",
+    "focus": "function as a rule assigning exactly one output",
+    "title": "Investigation or close reading: function as a rule assigning exactly one output"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 1,
+          "prompt": "C(h) = 100 − 20h, machine runs at most 10 hours. Domain?",
+          "workedSolution": {
+            "steps": [
+              "h ≥ 0; h ≤ 10; and 100 − 20h ≥ 0 gives h ≤ 5.",
+              "The binding limit is 5."
+            ],
+            "answer": "0 ≤ h ≤ 5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 2,
+          "prompt": "A sequence is defined by a(1) = 5 and a(n) = a(n − 1) + 3 for n > 1. Find a(5).",
+          "choices": [
+            "20",
+            "-7",
+            "75",
+            "17"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time reaches its highest point. Which feature is this, and what does it mean?",
+          "choices": [
+            "the x-intercept, giving the landing time",
+            "the maximum, giving the greatest height and the time it occurs",
+            "the y-intercept, giving the launch height",
+            "an interval of decrease"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 2,
+          "prompt": "Given f(x) = -3x² − 5x − 4, find f(1).",
+          "choices": [
+            "-2",
+            "0",
+            "-8",
+            "-12"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 3,
+          "prompt": "Does the relation x = y², for real y define y as a function of x? Justify the decision.",
+          "choices": [
+            "Yes; each input appears once, so each has exactly one output.",
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "No; the input 1 is paired with both 3 and 8.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 3,
+          "prompt": "A machine starts with 95 components and consumes 13 per hour. It can run for at most 26 hours. What is the domain of C(h) = 95 − 13h in this context?",
+          "choices": [
+            "0 ≤ h ≤ 95",
+            "0 ≤ h ≤ 26",
+            "all real numbers",
+            "0 ≤ h ≤ 7"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = -15 and a(n) = a(n − 1) − 8 for n > 1. Find a(24).",
+          "choices": [
+            "169",
+            "2880",
+            "-207",
+            "-199"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a projectile’s height against time crosses the horizontal axis. Which feature is this, and what does it mean?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = 5x² − 2x + 11, find f(-5).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l07"
+  }
+}

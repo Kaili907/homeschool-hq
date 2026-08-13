@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u09-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u09-l02",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Geometry and the Coordinate Plane",
+    "dayInUnit": 2,
+    "courseDay": 146,
+    "phase": "Concept model A",
+    "focus": "graphing real-world points",
+    "title": "Concept model A: graphing real-world points"
+  },
+  "standards": [
+    "5.G.1",
+    "5.G.2",
+    "5.G.3",
+    "5.G.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 1,
+          "prompt": "The library is at x = 4 and y = 2. What point names it?",
+          "workedSolution": {
+            "steps": [
+              "Use horizontal distance for x.",
+              "Use vertical distance for y."
+            ],
+            "answer": "(4, 2)"
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "A quadrilateral has 4 right angles and 2 pairs of parallel sides. What is it?",
+          "workedSolution": {
+            "steps": [
+              "Four right angles fit a rectangle.",
+              "Its opposite sides are parallel."
+            ],
+            "answer": "rectangle"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 1,
+          "prompt": "In the hierarchy square → rectangle → quadrilateral, what category comes immediately after square?",
+          "choices": [
+            "triangle",
+            "rectangle",
+            "circle",
+            "trapezoid"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 1,
+          "prompt": "The point where two sides of a polygon meet are called what?",
+          "choices": [
+            "perpendicular",
+            "parallel",
+            "edge",
+            "vertex"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-route",
+          "standard": "5.G.2",
+          "difficulty": 2,
+          "prompt": "Start at (6, 6). Move right 3 and up 3. What is the endpoint?",
+          "choices": [
+            "(8, 9)",
+            "(9, 10)",
+            "(9, 9)",
+            "(10, 9)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-coordinate-axes",
+          "standard": "5.G.1",
+          "difficulty": 1,
+          "prompt": "Which coordinate-plane axis is vertical?",
+          "choices": [
+            "origin",
+            "x-axis",
+            "ordered pair",
+            "y-axis"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "read-ordered-pair",
+          "standard": "5.G.1",
+          "difficulty": 2,
+          "prompt": "What ordered pair has x-coordinate 6 and y-coordinate 2?",
+          "choices": [
+            "(6, 2)",
+            "(7, 2)",
+            "(6, 1)",
+            "(5, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "graph-context-point",
+          "standard": "5.G.2",
+          "difficulty": 2,
+          "prompt": "On a map, the library is at x = 2 and y = 4. Which point names its location?",
+          "choices": [
+            "(4, 2)",
+            "(3, 5)",
+            "(1, 4)",
+            "(2, 4)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-shape-properties",
+          "standard": "5.G.3",
+          "difficulty": 3,
+          "prompt": "A shape has 4 sides, 4 right angles, and 2 pairs of parallel sides. Its opposite sides are equal in length, and its adjacent sides are unequal in length. What is the most specific name?",
+          "choices": [
+            "parallelogram",
+            "rectangle",
+            "triangle",
+            "rhombus"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u09-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "shape-hierarchy",
+          "standard": "5.G.4",
+          "difficulty": 2,
+          "prompt": "In the hierarchy rectangle → parallelogram → quadrilateral, what category comes immediately after rectangle?",
+          "choices": [
+            "parallelogram",
+            "trapezoid",
+            "pentagon",
+            "circle"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u09-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "geometric-vocabulary",
+          "standard": "5.G.3",
+          "difficulty": 2,
+          "prompt": "Lines that meet to form a right angle are called what?",
+          "choices": [
+            "parallel",
+            "vertex",
+            "perpendicular",
+            "edge"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u09-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u09-l02"
+  }
+}

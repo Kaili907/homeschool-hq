@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u04-l15",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u04-l15",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Properties, Patterns, and Two-Step Problems",
+    "dayInUnit": 15,
+    "courseDay": 69,
+    "phase": "Synthesis and review",
+    "focus": "multi-step reasoning and pattern explanation",
+    "title": "Synthesis and review: multi-step reasoning and pattern explanation"
+  },
+  "standards": [
+    "3.OA.8",
+    "3.OA.9"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 1,
+          "prompt": "A store arranges 3 shelves with 3 boxes on each shelf, then sells 6 boxes from the display. How many boxes are left?",
+          "choices": [
+            "12",
+            "15",
+            "9",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 2,
+          "prompt": "The pattern 8, 11, 14, 17, ... continues by the same rule. What is the 5th term?",
+          "choices": [
+            "23",
+            "20",
+            "17",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 3 shelves with 4 boxes on each shelf, then sells 10 boxes from the display. How many boxes are left?",
+          "choices": [
+            "2",
+            "12",
+            "17",
+            "22"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 3,
+          "prompt": "The pattern 8, 13, 18, 23, ... continues by the same rule. What is the 5th term?",
+          "choices": [
+            "33",
+            "29",
+            "23",
+            "28"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A store arranges 8 shelves with 3 boxes on each shelf, then adds 6 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "18",
+            "17",
+            "30",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 3,
+          "prompt": "The pattern 10, 14, 18, 22, ... continues by the same rule. What is the 6th term?",
+          "choices": [
+            "31",
+            "34",
+            "26",
+            "30"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u04-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A store arranges 3 shelves with 6 boxes on each shelf, then adds 10 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "28",
+            "18",
+            "8",
+            "19"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-arithmetic-pattern",
+          "standard": "3.OA.9",
+          "difficulty": 2,
+          "prompt": "The pattern 1, 7, 13, 19, ... continues by the same rule. What is the 7th term?",
+          "choices": [
+            "38",
+            "31",
+            "43",
+            "37"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u04-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A store arranges 4 shelves with 5 boxes on each shelf, then adds 4 more boxes to the display. How many boxes are on display now?",
+          "choices": [
+            "20",
+            "16",
+            "13",
+            "24"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u04-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u04-l15"
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u09-l08",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u09-l08",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Random Variables and Probability Distributions",
+    "dayInUnit": 8,
+    "courseDay": 152,
+    "phase": "Reteach and varied practice",
+    "focus": "permutations and combinations for counting",
+    "title": "Reteach and varied practice: permutations and combinations for counting"
+  },
+  "standards": [
+    "S-CP.8",
+    "S-CP.9",
+    "S-MD.1",
+    "S-MD.2",
+    "S-MD.3",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "general-multiplication-rule",
+          "standard": "S-CP.8",
+          "difficulty": 1,
+          "prompt": "P(A) = 4/10, P(B|A) = 5/10. Find P(A and B).",
+          "workedSolution": {
+            "steps": [
+              "(4/10)(5/10) = 20/100.",
+              "= 1/5."
+            ],
+            "answer": "1/5"
+          }
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "probability-distribution-table",
+          "standard": "S-MD.1",
+          "difficulty": 2,
+          "prompt": "p = 3/10, 2 trials. Find P(X = 0).",
+          "workedSolution": {
+            "steps": [
+              "Failure probability 0.7.",
+              "0.7² = 0.49."
+            ],
+            "answer": "0.49"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "permutations-and-combinations",
+          "standard": "S-CP.9",
+          "difficulty": 1,
+          "prompt": "From 7 distinct items, how many ways are there to choose 2 when the order does not matter?",
+          "choices": [
+            "14",
+            "49",
+            "42",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "expected-value-of-random-variable",
+          "standard": "S-MD.2",
+          "difficulty": 1,
+          "prompt": "A random variable takes values 1, 1, 5 with probabilities 3/10, 4/10, 3/10 respectively. Find its expected value.",
+          "choices": [
+            "5",
+            "2.3333333333333335",
+            "22",
+            "2.2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "general-multiplication-rule",
+          "standard": "S-CP.8",
+          "difficulty": 2,
+          "prompt": "Given P(A) = 1/10 and P(B | A) = 9/10, find P(A and B) in lowest terms.",
+          "choices": [
+            "1",
+            "1/9",
+            "9/10",
+            "9/100"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "probability-distribution-table",
+          "standard": "S-MD.1",
+          "difficulty": 2,
+          "prompt": "A trial succeeds with probability 1/10 and is repeated 3 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+          "choices": [
+            "0.729",
+            "0.9",
+            "0.001",
+            "2.7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "permutations-and-combinations",
+          "standard": "S-CP.9",
+          "difficulty": 1,
+          "prompt": "From 7 distinct items, how many ways are there to choose 3 when the order does not matter?",
+          "choices": [
+            "210",
+            "35",
+            "343",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "expected-value-of-random-variable",
+          "standard": "S-MD.2",
+          "difficulty": 2,
+          "prompt": "A random variable takes values 6, 7, 2 with probabilities 4/10, 1/10, 5/10 respectively. Find its expected value.",
+          "choices": [
+            "4.1",
+            "41",
+            "5",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "general-multiplication-rule",
+          "standard": "S-CP.8",
+          "difficulty": 2,
+          "prompt": "Given P(A) = 4/10 and P(B | A) = 3/10, find P(A and B) in lowest terms.",
+          "choices": [
+            "4/3",
+            "6/5",
+            "7/10",
+            "3/25"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "probability-distribution-table",
+          "standard": "S-MD.1",
+          "difficulty": 3,
+          "prompt": "A trial succeeds with probability 5/10 and is repeated 2 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+          "choices": [
+            "0.5",
+            "1",
+            "0.25",
+            "0.125"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "permutations-and-combinations",
+          "standard": "S-CP.9",
+          "difficulty": 3,
+          "prompt": "From 5 distinct items, how many ways are there to choose 4 when the order does not matter?",
+          "choices": [
+            "625",
+            "120",
+            "20",
+            "5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u09-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u09-l08"
+  }
+}

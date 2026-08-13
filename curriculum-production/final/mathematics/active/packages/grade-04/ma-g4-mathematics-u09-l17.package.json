@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 17,
+    "courseDay": 161,
+    "phase": "Targeted correction and reassessment",
+    "focus": "conversion and formulas",
+    "title": "Targeted correction and reassessment: conversion and formulas"
+  },
+  "standards": [
+    "4.MD.1",
+    "4.MD.3"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 3 meters to centimeters.",
+          "workedSolution": {
+            "steps": [
+              "1 meter = 100 centimeters.",
+              "3 × 100 = 300.",
+              "3 meters = 300 centimeters."
+            ],
+            "answer": "300 centimeters"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 48 square units and one side is 6 units. Find the other side.",
+          "workedSolution": {
+            "steps": [
+              "48 ÷ 6 = 8."
+            ],
+            "answer": "8"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 1,
+          "prompt": "Convert 6 kilograms to grams.",
+          "choices": [
+            "600 grams",
+            "1006 grams",
+            "6000 grams",
+            "6 grams"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 32 square units and one side is 4 units. What is the length of the other side?",
+          "choices": [
+            "32",
+            "4",
+            "28",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 9 feet to inches.",
+          "choices": [
+            "9 inches",
+            "21 inches",
+            "108 inches",
+            "10.8 inches"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 40 square units and one side is 5 units. What is the length of the other side?",
+          "choices": [
+            "5",
+            "35",
+            "8",
+            "40"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 5 meters to centimeters.",
+          "choices": [
+            "500 centimeters",
+            "5 centimeters",
+            "105 centimeters",
+            "50 centimeters"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 3,
+          "prompt": "A rectangle has area 44 square units and one side is 11 units. What is the length of the other side?",
+          "choices": [
+            "44",
+            "33",
+            "4",
+            "11"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l17"
+  }
+}

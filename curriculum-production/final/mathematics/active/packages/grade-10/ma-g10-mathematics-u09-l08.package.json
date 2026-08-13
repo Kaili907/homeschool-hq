@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u09-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u09-l08",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Coordinate Geometry",
+    "dayInUnit": 8,
+    "courseDay": 152,
+    "phase": "Reteach and varied practice",
+    "focus": "completing the square to find a circle's center and radius",
+    "title": "Reteach and varied practice: completing the square to find a circle's center and radius"
+  },
+  "standards": [
+    "G-GPE.1",
+    "G-GPE.2",
+    "G-GPE.4",
+    "G-GPE.5",
+    "G-GPE.6",
+    "G-GPE.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 1,
+          "prompt": "Focus (0, 2), directrix y = −2. Equation?",
+          "workedSolution": {
+            "steps": [
+              "Vertex (0, 0), p = 2.",
+              "y = (1/8)x²."
+            ],
+            "answer": "y = 1/8 x²"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 2,
+          "prompt": "Circle with centre (2, −3), radius 5.",
+          "workedSolution": {
+            "steps": [
+              "(x − h)² + (y − k)² = r².",
+              "(x − 2)² + (y + 3)² = 25."
+            ],
+            "answer": "(x − 2)² + (y + 3)² = 25"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 1,
+          "prompt": "A line has slope 1. What is the slope of a line perpendicular to it?",
+          "choices": [
+            "3",
+            "2",
+            "-1",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 1,
+          "prompt": "Find the point that partitions the segment from A(-5, 3) to B(4, 9) in the ratio 2:1 from A.",
+          "choices": [
+            "(-0.5, 6)",
+            "(1, 7)",
+            "(-2, 5)",
+            "(2, 7)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 2,
+          "prompt": "A right triangle has vertices at (0, 0), (3, 0), and (3, 4). Find its perimeter and area.",
+          "choices": [
+            "perimeter 12; area 6",
+            "perimeter 12; area 3.5",
+            "perimeter 12; area 12",
+            "perimeter 7; area 6"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 2,
+          "prompt": "A parabola has focus (-3, -1) and directrix y = -5. Write its equation in vertex form.",
+          "choices": [
+            "y = 1/8(x − 3)² − 3",
+            "y = 1/8(x + 3)² − 3",
+            "y = 8(x + 3)² − 3",
+            "y = 1/4(x + 3)² − 3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 1,
+          "prompt": "Write the equation of the circle with centre (2, -4) and radius 5.",
+          "choices": [
+            "(x − 2)² + (y + 4)² = 25",
+            "(x − 2)² − (y + 4)² = 25",
+            "(x + 2)² + (y − 4)² = 25",
+            "(x − 2)² + (y + 4)² = 5"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 2,
+          "prompt": "A line has slope -5/4. What is the slope of a line perpendicular to it?",
+          "choices": [
+            "5/4",
+            "-4/5",
+            "-5/4",
+            "4/5"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 2,
+          "prompt": "Find the point that partitions the segment from A(-3, -2) to B(5, 4) in the ratio 1:1 from A.",
+          "choices": [
+            "(0, 1)",
+            "(2, 1)",
+            "(1, 1)",
+            "(1, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 3,
+          "prompt": "A right triangle has vertices at (0, 0), (6, 0), and (6, 8). Find its perimeter and area.",
+          "choices": [
+            "perimeter 14; area 24",
+            "perimeter 24; area 48",
+            "perimeter 24; area 7",
+            "perimeter 24; area 24"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 3,
+          "prompt": "A parabola has focus (4, 1) and directrix y = -7. Write its equation in vertex form.",
+          "choices": [
+            "y = 1/16(x + 4)² − 3",
+            "y = 1/8(x − 4)² − 3",
+            "y = 16(x − 4)² − 3",
+            "y = 1/16(x − 4)² − 3"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u09-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u09-l08"
+  }
+}

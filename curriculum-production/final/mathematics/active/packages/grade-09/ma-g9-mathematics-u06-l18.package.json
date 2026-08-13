@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l18",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l18",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 18,
+    "courseDay": 108,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "rearranging formulas to highlight a chosen variable",
+    "title": "Publication, presentation, or reflection: rearranging formulas to highlight a chosen variable"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 1,
+          "prompt": "A model needs 3.2 vans. How many are required?",
+          "workedSolution": {
+            "steps": [
+              "Vans are whole objects.",
+              "Three vans leave some load uncarried, so four are needed."
+            ],
+            "answer": "4 vans"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A repair service charges a $130 call-out fee plus $11 per hour. A job cost $229 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "11 + 130h = 229",
+            "130h + 11 = 229",
+            "130 + 11 + h = 229",
+            "130 + 11h = 229"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 2,
+          "prompt": "The formula A = -3bh − 3 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = (A + 3) / (-3b)",
+            "h = -3b(A + 3)",
+            "h = A / (-3b) + 3",
+            "h = (A − 3) / (-3b)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $9 each and item B costs $25 each. You may spend at most $360 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "9a + 25b ≤ 360",
+            "a + b ≤ 360",
+            "9a + 25b ≥ 360",
+            "9a + 25b = 360"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 245 litres and is filling at 18 litres per minute. After how many minutes does it hold 677 litres?",
+          "choices": [
+            "51 minutes",
+            "24 minutes",
+            "38 minutes",
+            "432 minutes"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A budget model allows 12.7 units of a product sold individually. How should this solution be interpreted?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $60 call-out fee plus $15 per hour. A job cost $210 in total. Which equation determines the number of hours h?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l18"
+  }
+}

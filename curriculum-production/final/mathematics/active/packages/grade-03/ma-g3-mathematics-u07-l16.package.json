@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u07-l16",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u07-l16",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Measurement: Time, Liquid Volume, and Mass",
+    "dayInUnit": 16,
+    "courseDay": 124,
+    "phase": "Unit assessment",
+    "focus": "time, liquid volume, and mass",
+    "title": "Unit assessment: time, liquid volume, and mass"
+  },
+  "standards": [
+    "3.MD.1",
+    "3.MD.2"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 1,
+          "prompt": "Practice starts at 10:30 a.m. and lasts 9 minutes. What time does practice end?",
+          "choices": [
+            "11:09 a.m.",
+            "10:09 a.m.",
+            "10:39 a.m.",
+            "10:21 a.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 1,
+          "prompt": "A container has 39 kilograms. 36 kilograms are removed. How many kilograms are left?",
+          "choices": [
+            "3",
+            "36",
+            "75",
+            "39"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 12:20 p.m. and lasts 47 minutes. What time does practice end?",
+          "choices": [
+            "1:07 p.m.",
+            "11:33 a.m.",
+            "12:37 p.m.",
+            "1:37 p.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 116 kilograms. 59 kilograms are removed. How many kilograms are left?",
+          "choices": [
+            "175",
+            "57",
+            "116",
+            "59"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 8:20 a.m. and lasts 46 minutes. What time does practice end?",
+          "choices": [
+            "8:36 a.m.",
+            "9:06 a.m.",
+            "9:36 a.m.",
+            "7:34 a.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 109 grams. Another 65 grams are poured in. How many grams are in the container now?",
+          "choices": [
+            "65",
+            "174",
+            "175",
+            "109"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 3,
+          "prompt": "Practice starts at 10:15 a.m. and lasts 96 minutes. What time does practice end?",
+          "choices": [
+            "11:21 a.m.",
+            "8:39 a.m.",
+            "11:51 a.m.",
+            "12:21 p.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 405 kilograms. 128 kilograms are removed. How many kilograms are left?",
+          "choices": [
+            "128",
+            "533",
+            "405",
+            "277"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 3,
+          "prompt": "Practice starts at 3:20 p.m. and lasts 71 minutes. What time does practice end?",
+          "choices": [
+            "5:01 p.m.",
+            "4:31 p.m.",
+            "4:01 p.m.",
+            "2:09 p.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 417 milliliters. Another 320 milliliters are poured in. How many milliliters are in the container now?",
+          "choices": [
+            "320",
+            "738",
+            "417",
+            "737"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u07-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u07-l16"
+  }
+}

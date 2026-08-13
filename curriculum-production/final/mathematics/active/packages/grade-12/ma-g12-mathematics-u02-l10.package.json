@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u02-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u02-l10",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Inverse Trigonometric Functions and Composition",
+    "dayInUnit": 10,
+    "courseDay": 28,
+    "phase": "Discussion or problem seminar",
+    "focus": "evaluating solutions with technology and interpreting them",
+    "title": "Discussion or problem seminar: evaluating solutions with technology and interpreting them"
+  },
+  "standards": [
+    "F-TF.6",
+    "F-TF.7",
+    "F-BF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 1,
+          "prompt": "Why restrict the domain of sine before inverting?",
+          "workedSolution": {
+            "steps": [
+              "Sine repeats, so it is not one-to-one.",
+              "Restricting to [−π/2, π/2] fixes that."
+            ],
+            "answer": "to make it one-to-one"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-trig-equation-all-solutions",
+          "standard": "F-TF.7",
+          "difficulty": 2,
+          "prompt": "Find all solutions of sin θ = 1/2 for 0° ≤ θ < 360°.",
+          "choices": [
+            "θ = 30° or θ = 210°",
+            "θ = 30° or θ = 330°",
+            "θ = 30° only",
+            "θ = 30° or θ = 150°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-inverse-sine",
+          "standard": "F-TF.6",
+          "difficulty": 3,
+          "prompt": "Evaluate arcsin(0) in radians, giving the principal value.",
+          "choices": [
+            "π/3",
+            "π/6",
+            "0",
+            "π/4"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "compose-trig-and-inverse",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Evaluate cos(arcsin(√3/2)) exactly.",
+          "choices": [
+            "1/2",
+            "0",
+            "√2/2",
+            "√3/2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 3,
+          "prompt": "Why does sine on all real numbers not have an inverse function without further restriction?",
+          "choices": [
+            "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2].",
+            "Because its outputs are not all positive.",
+            "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible.",
+            "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-trig-equation-all-solutions",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Find all solutions of sin θ = √3/2 for 0° ≤ θ < 360°.",
+          "choices": [
+            "θ = 60° or θ = 240°",
+            "θ = 60° only",
+            "θ = 60° or θ = 120°",
+            "θ = 60° or θ = 300°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-inverse-sine",
+          "standard": "F-TF.6",
+          "difficulty": 3,
+          "prompt": "Evaluate arcsin(1/2) in radians, giving the principal value.",
+          "choices": [
+            "π/6",
+            "π/3",
+            "π/4",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "compose-trig-and-inverse",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Evaluate cos(arcsin(√2/2)) exactly.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 3,
+          "prompt": "Why does tangent on all real numbers where it is defined not have an inverse function without further restriction?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u02-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u02-l10"
+  }
+}

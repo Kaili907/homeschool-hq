@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u03-l10",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Complex Numbers and Nonlinear Systems",
+    "dayInUnit": 10,
+    "courseDay": 46,
+    "phase": "Discussion or problem seminar",
+    "focus": "the discriminant as a predictor of solution type",
+    "title": "Discussion or problem seminar: the discriminant as a predictor of solution type"
+  },
+  "standards": [
+    "N-CN.1",
+    "N-CN.2",
+    "N-CN.7",
+    "A-REI.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 1,
+          "prompt": "Solve y = x² and y = 5x − 6.",
+          "workedSolution": {
+            "steps": [
+              "x² − 5x + 6 = 0.",
+              "(x − 2)(x − 3) = 0.",
+              "x = 2, 3."
+            ],
+            "answer": "2, 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 2,
+          "prompt": "Simplify i^13.",
+          "choices": [
+            "−i",
+            "i",
+            "−1",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (3 + 2i)(-8 − 5i).",
+          "choices": [
+            "-34 − 31i",
+            "-14 − 31i",
+            "-14 + i",
+            "-24 − 10i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 3,
+          "prompt": "Solve x^2 - 12x + 45 = 0 over the complex numbers.",
+          "choices": [
+            "x = -6 + 3i or x = -6 − 3i",
+            "x = 6 or x = -6",
+            "x = 6 + 3i only",
+            "x = 6 + 3i or x = 6 − 3i"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = -2x + 8. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-3, 3",
+            "-4, 2",
+            "-2, 8",
+            "-2, 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 3,
+          "prompt": "Simplify i^28.",
+          "choices": [
+            "−1",
+            "1",
+            "−i",
+            "i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (4 − 3i)(-4 + 7i).",
+          "choices": [
+            "5 + 40i",
+            "-37 + 40i",
+            "-16 − 21i",
+            "5 + 16i"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 3,
+          "prompt": "Solve x^2 + 10x + 41 = 0 over the complex numbers.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = 5x − 4. Give the x-coordinates of the intersection points in increasing order.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u03-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u03-l10"
+  }
+}

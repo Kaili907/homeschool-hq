@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u08-l18",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u08-l18",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Rate of Change and Building Functions",
+    "dayInUnit": 18,
+    "courseDay": 144,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "arithmetic and geometric sequences, recursive and explicit",
+    "title": "Publication, presentation, or reflection: arithmetic and geometric sequences, recursive and explicit"
+  },
+  "standards": [
+    "F-IF.6",
+    "F-BF.1",
+    "F-BF.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 1,
+          "prompt": "Output 10 at input 2, output 22 at input 5. Rate?",
+          "workedSolution": {
+            "steps": [
+              "Change in output 12, change in input 3.",
+              "12/3 = 4."
+            ],
+            "answer": "4 output units per input unit"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "For f(x) = 2x² + 5x − 8, find the average rate of change from x = -4 to x = 2.",
+          "choices": [
+            "-3",
+            "1",
+            "-1",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 2,
+          "prompt": "A sequence has g(1) = 6 and g(n) = 2·g(n − 1). Write the explicit form and find g(6).",
+          "choices": [
+            "g(n) = 6·2^n; g(6) = 384",
+            "g(n) = 6·2^(n−1); g(6) = 192",
+            "g(n) = 2·6^(n−1); g(6) = 15552",
+            "g(n) = 6 + 2(n − 1); g(6) = 16"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "A venue charges $75 to open plus $12 per attendee. Write C(n) for the total cost of n attendees, then find C(13).",
+          "choices": [
+            "C(n) = 75n + 12; C(13) = 987",
+            "C(n) = 87n; C(13) = 1131",
+            "C(n) = 75 + 12n; C(13) = 231",
+            "C(n) = 12 + 75n; C(13) = 987"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "Revenue is R(x) = -1x − 4 and cost is C(x) = 7x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = 6x − 4",
+            "P(x) = -8x − 4",
+            "P(x) = 8x − 4",
+            "P(x) = -8x + 4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "A table records output 22 at input 4 and output 49 at input 6. What is the average rate of change between these readings?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "For f(x) = 4x² − 4x + 2, find the average rate of change from x = 3 to x = 6.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u08-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u08-l18"
+  }
+}

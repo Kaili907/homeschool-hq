@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u05-l13",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u05-l13",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Percent and Proportional Applications",
+    "dayInUnit": 13,
+    "courseDay": 85,
+    "phase": "Skill consolidation",
+    "focus": "percent increase and decrease",
+    "title": "Skill consolidation: percent increase and decrease"
+  },
+  "standards": [
+    "7.RP.3",
+    "7.EE.3"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "percent-increase-decrease",
+          "standard": "7.RP.3",
+          "difficulty": 1,
+          "prompt": "Decrease $180.00 by 5%.",
+          "choices": [
+            "$171.00",
+            "$172.00",
+            "$189.00",
+            "$9.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "discount-markup",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "A store marks up $480.00 by 5%. What is the new price?",
+          "choices": [
+            "$504.00",
+            "$456.00",
+            "$480.00",
+            "$24.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "tax-tip",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "A meal costs $100.00 before 20% tax. What is the total?",
+          "choices": [
+            "$80.00",
+            "$100.00",
+            "$40.00",
+            "$120.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "simple-interest",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "Find the simple interest on $100.00 at 10% for 5 years.",
+          "choices": [
+            "$50.00",
+            "$10.00",
+            "$150.00",
+            "$60.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "percent-error",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "The actual value is 1500 and the measured value is 1875. What is the percent error?",
+          "choices": [
+            "50%",
+            "25%",
+            "5%",
+            "26%"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-percent-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "An item costs $100.00, is discounted 20%, then taxed 10%. What is the final price?",
+          "choices": [
+            "$88.00",
+            "$90.00",
+            "$80.00",
+            "$110.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "percent-increase-decrease",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "Increase $160.00 by 10%.",
+          "choices": [
+            "$160.00",
+            "$176.00",
+            "$144.00",
+            "$16.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "discount-markup",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A store marks up $1020.00 by 10%. What is the new price?",
+          "choices": [
+            "$1122.00",
+            "$1020.00",
+            "$102.00",
+            "$1123.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "tax-tip",
+          "standard": "7.RP.3",
+          "difficulty": 3,
+          "prompt": "A meal costs $540.00 before 5% tax. What is the total?",
+          "choices": [
+            "$540.00",
+            "$567.00",
+            "$513.00",
+            "$568.00"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u05-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "simple-interest",
+          "standard": "7.RP.3",
+          "difficulty": 2,
+          "prompt": "Find the simple interest on $560.00 at 5% for 2 years.",
+          "choices": [
+            "$61.00",
+            "$28.00",
+            "$56.00",
+            "$616.00"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "percent-error",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "The actual value is 1200 and the measured value is 1260. What is the percent error?",
+          "choices": [
+            "6%",
+            "5%",
+            "1%",
+            "10%"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u05-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-percent-problem",
+          "standard": "7.EE.3",
+          "difficulty": 3,
+          "prompt": "An item costs $180.00, is discounted 10%, then taxed 5%. What is the final price?",
+          "choices": [
+            "$170.10",
+            "$189.00",
+            "$171.10",
+            "$171.00"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u05-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u05-l13"
+  }
+}

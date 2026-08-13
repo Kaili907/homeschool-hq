@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l12",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l12",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 12,
+    "courseDay": 102,
+    "phase": "Performance task build",
+    "focus": "rearranging formulas to highlight a chosen variable",
+    "title": "Performance task build: rearranging formulas to highlight a chosen variable"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "Item A costs $9 each and item B costs $10 each. You may spend at most $340 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "a + b ≤ 340",
+            "9a + 10b ≤ 340",
+            "9a + 10b ≥ 340",
+            "9a + 10b = 340"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 185 litres and is filling at 9 litres per minute. After how many minutes does it hold 266 litres?",
+          "choices": [
+            "9 minutes",
+            "30 minutes",
+            "81 minutes",
+            "50 minutes"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 2,
+          "prompt": "A model gives the number of buses needed as 4.3. How should this solution be interpreted?",
+          "choices": [
+            "Round down to 4, because 4.3 is closer to 4.",
+            "The model must be wrong, because the answer is not a whole number.",
+            "Report 4.3, because the model is exact.",
+            "Round up to 5; a fractional bus is not viable and rounding down leaves people behind."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $265 call-out fee plus $15 per hour. A job cost $415 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "265 + 15h = 415",
+            "265h + 15 = 415",
+            "15 + 265h = 415",
+            "265 + 15 + h = 415"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = -8bh − 9 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = -8b(A + 9)",
+            "h = A / (-8b) + 9",
+            "h = (A − 9) / (-8b)",
+            "h = (A + 9) / (-8b)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $4 each and item B costs $16 each. You may spend at most $160 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "4a + 16b ≥ 160",
+            "4a + 16b = 160",
+            "4a + 16b ≤ 160",
+            "a + b ≤ 160"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 45 litres and is filling at 3 litres per minute. After how many minutes does it hold 120 litres?",
+          "choices": [
+            "75 minutes",
+            "40 minutes",
+            "25 minutes",
+            "55 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A budget model allows 12.7 units of a product sold individually. How should this solution be interpreted?",
+          "choices": [
+            "Round up to 13, because 12.7 is closer to 13.",
+            "Round down to 12; buying a partial unit is not possible and 13 would exceed the budget.",
+            "Report 12.7, because the constraint is satisfied.",
+            "Split the order so the fractional unit is shared."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $10 call-out fee plus $15 per hour. A job cost $205 in total. Which equation determines the number of hours h?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = -2bh + 6 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l12"
+  }
+}

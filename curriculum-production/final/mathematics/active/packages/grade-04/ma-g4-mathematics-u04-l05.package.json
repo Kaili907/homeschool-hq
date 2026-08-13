@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l05",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 5,
+    "courseDay": 59,
+    "phase": "Independent evidence A",
+    "focus": "multiplying up to four digits by one digit",
+    "title": "Independent evidence A: multiplying up to four digits by one digit"
+  },
+  "standards": [
+    "4.NBT.5"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence A",
+    "profile": "independent-evidence",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use an area model to find 6 × 47. Split 47 into 40 and 7.",
+          "workedSolution": {
+            "steps": [
+              "6 × 40 = 240.",
+              "6 × 7 = 42.",
+              "240 + 42 = 282."
+            ],
+            "answer": "282"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 4 × 319 using partial products.",
+          "choices": [
+            "1240",
+            "1272",
+            "1276",
+            "1200"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 7 × 31. Split 31 into 30 and 1.",
+          "choices": [
+            "210",
+            "217",
+            "211",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 4 × 881 using partial products.",
+          "choices": [
+            "3520",
+            "3524",
+            "3200",
+            "3525"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 2 × 27. Split 27 into 20 and 7.",
+          "choices": [
+            "54",
+            "47",
+            "40",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l05#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 7 × 586 using partial products.",
+          "choices": [
+            "3500",
+            "4102",
+            "4060",
+            "4095"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l05#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 7 × 88. Split 88 into 80 and 8.",
+          "choices": [
+            "56",
+            "568",
+            "560",
+            "616"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 4 × 306 using partial products.",
+          "choices": [
+            "1224",
+            "1200",
+            "1225",
+            "1220"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 3 × 84. Split 84 into 80 and 4.",
+          "choices": [
+            "240",
+            "252",
+            "244",
+            "12"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l05"
+  }
+}

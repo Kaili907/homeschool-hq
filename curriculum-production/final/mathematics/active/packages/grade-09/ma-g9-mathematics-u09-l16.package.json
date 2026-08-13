@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u09-l16",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u09-l16",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "dayInUnit": 16,
+    "courseDay": 160,
+    "phase": "Unit assessment",
+    "focus": "comparing growth rates over the long run",
+    "title": "Unit assessment: comparing growth rates over the long run"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 1,
+          "prompt": "A table of successive outputs reads 2, 6, 10, 14. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Quadratic; the second differences are constant.",
+            "Exponential; successive outputs have a constant ratio of 4.",
+            "Neither; the pattern does not repeat.",
+            "Linear; successive outputs differ by a constant 4."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 1,
+          "prompt": "A population of 900 grows by 6% per year. Write the model P(t) and find the population after 2 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 900(0.06)^t; P(2) ≈ 3",
+            "P(t) = 900 + 6t; P(2) ≈ 912",
+            "P(t) = 900(1.06)^t; P(2) ≈ 1072",
+            "P(t) = 900(1.06)^t; P(2) ≈ 1011"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 2,
+          "prompt": "Quantity A grows by 57 units each year. Quantity B doubles or triples each year, with ratio 3, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "B exceeds A only if B starts larger than A.",
+            "The two grow at the same eventual rate.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "A stays ahead permanently because 57 is larger than 3."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 2,
+          "prompt": "An asset's value is modelled by V(t) = 1300(0.85)^t, with t in years. What does 0.85 represent?",
+          "choices": [
+            "the number of years until the asset is worthless",
+            "the value of the asset when it was new, $1300",
+            "the total value lost over the asset's life",
+            "the fraction of value retained each year, 0.85, meaning a 15% annual loss"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A linear model passes through (5, -8) and (7, -10). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = -1x − 3",
+            "f(x) = 1x − 3",
+            "f(x) = -3x − 1",
+            "f(x) = -1x + 3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 2,
+          "prompt": "A table of successive outputs reads 2, 8, 32, 128. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Linear; successive outputs differ by a constant 4.",
+            "Neither; the pattern does not repeat.",
+            "Exponential; successive outputs have a constant ratio of 4.",
+            "Quadratic; the second differences are constant."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A population of 800 grows by 5% per year. Write the model P(t) and find the population after 8 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 800(1.05)^t; P(8) ≈ 1182",
+            "P(t) = 800 + 5t; P(8) ≈ 840",
+            "P(t) = 800(0.05)^t; P(8) ≈ 0",
+            "P(t) = 800(1.05)^t; P(8) ≈ 1241"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 3,
+          "prompt": "Quantity A grows by 87 units each year. Quantity B doubles or triples each year, with ratio 2, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "B exceeds A only if B starts larger than A.",
+            "A stays ahead permanently because 87 is larger than 2.",
+            "The two grow at the same eventual rate."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 3,
+          "prompt": "An asset's value is modelled by V(t) = 1200(0.87)^t, with t in years. What does 0.87 represent?",
+          "choices": [
+            "the fraction of value retained each year, 0.87, meaning a 13% annual loss",
+            "the number of years until the asset is worthless",
+            "the value of the asset when it was new, $1200",
+            "the total value lost over the asset's life"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A linear model passes through (2, -12) and (5, -27). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = -5x − 2",
+            "f(x) = 5x − 2",
+            "f(x) = -5x + 2",
+            "f(x) = -2x − 5"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 9, 11, 13, 15. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Quadratic; the second differences are constant.",
+            "Exponential; successive outputs have a constant ratio of 2.",
+            "Neither; the pattern does not repeat.",
+            "Linear; successive outputs differ by a constant 2."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 3,
+          "prompt": "A population of 300 grows by 2% per year. Write the model P(t) and find the population after 3 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 300(1.02)^t; P(3) ≈ 318",
+            "P(t) = 300(0.02)^t; P(3) ≈ 0",
+            "P(t) = 300(1.02)^t; P(3) ≈ 325",
+            "P(t) = 300 + 2t; P(3) ≈ 306"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u09-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u09-l16"
+  }
+}

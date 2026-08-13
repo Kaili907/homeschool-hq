@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l11",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l11",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 11,
+    "courseDay": 11,
+    "phase": "Performance task planning",
+    "focus": "bisectors, perpendiculars, and parallels through a point",
+    "title": "Performance task planning: bisectors, perpendiculars, and parallels through a point"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 1,
+          "prompt": "Define a circle precisely.",
+          "workedSolution": {
+            "steps": [
+              "Fix a centre and a distance.",
+              "Take every point in the plane at that distance."
+            ],
+            "answer": "the set of points at a fixed distance from a centre"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "choices": [
+            "the reflection of ℓ across P",
+            "a line through P perpendicular to ℓ",
+            "the perpendicular bisector of the transversal",
+            "a line through P parallel to ℓ"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 2,
+          "prompt": "A regular triangle is inscribed in a circle of radius 3. What central angle does each side subtend?",
+          "choices": [
+            "60°",
+            "120°",
+            "240°",
+            "121°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "Which statement correctly justifies the perpendicular bisector construction?",
+          "choices": [
+            "The arcs look symmetric, so the line must be perpendicular.",
+            "The compass width was more than half the segment, which forces perpendicularity.",
+            "Any line through the midpoint is a perpendicular bisector.",
+            "Both constructed points are equidistant from the endpoints, and the locus of such points is exactly the perpendicular bisector."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a perpendicular lines?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. With the compass set to the radius, mark successive arcs around the circle from a starting point, then join consecutive marks. What has been constructed?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 12. What central angle does each side subtend?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l11"
+  }
+}

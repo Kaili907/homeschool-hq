@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u03-l05",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Complex Numbers and Nonlinear Systems",
+    "dayInUnit": 5,
+    "courseDay": 41,
+    "phase": "Concept model B",
+    "focus": "solving a linear-quadratic system algebraically",
+    "title": "Concept model B: solving a linear-quadratic system algebraically"
+  },
+  "standards": [
+    "N-CN.1",
+    "N-CN.2",
+    "N-CN.7",
+    "A-REI.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 1,
+          "prompt": "Multiply (2 + 3i)(1 − 4i).",
+          "workedSolution": {
+            "steps": [
+              "2 − 8i + 3i − 12i².",
+              "i² = −1 gives 2 + 12 − 5i.",
+              "14 − 5i."
+            ],
+            "answer": "14 − 5i"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 2,
+          "prompt": "Solve x² − 4x + 13 = 0.",
+          "workedSolution": {
+            "steps": [
+              "Discriminant 16 − 52 = −36.",
+              "x = (4 ± 6i)/2 = 2 ± 3i."
+            ],
+            "answer": "x = 2 + 3i or x = 2 − 3i"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 2,
+          "prompt": "Solve the system y = x² and y = 5x − 6. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "5, -6",
+            "-3, -2",
+            "3, 4",
+            "2, 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 2,
+          "prompt": "Simplify i^11.",
+          "choices": [
+            "i",
+            "−i",
+            "−1",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 2,
+          "prompt": "Multiply and write in the form a + bi: (-3 − 2i)(2 + 4i).",
+          "choices": [
+            "2 − 16i",
+            "2 − 8i",
+            "-14 − 16i",
+            "-6 − 8i"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 2,
+          "prompt": "Solve x^2 - 2x + 17 = 0 over the complex numbers.",
+          "choices": [
+            "x = 1 + 4i only",
+            "x = -1 + 4i or x = -1 − 4i",
+            "x = 1 + 4i or x = 1 − 4i",
+            "x = 1 or x = -1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 2,
+          "prompt": "Solve the system y = x² and y = 0x + 9. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-3, 3",
+            "0, 9",
+            "-3",
+            "-2, 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "powers-of-i",
+          "standard": "N-CN.1",
+          "difficulty": 3,
+          "prompt": "Simplify i^6.",
+          "choices": [
+            "i",
+            "−1",
+            "1",
+            "−i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiply-complex-numbers",
+          "standard": "N-CN.2",
+          "difficulty": 3,
+          "prompt": "Multiply and write in the form a + bi: (-4 + i)(3 + 3i).",
+          "choices": [
+            "-9 − 9i",
+            "-12 + 3i",
+            "-15 − 9i",
+            "-15 − 15i"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u03-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-with-complex-solutions",
+          "standard": "N-CN.7",
+          "difficulty": 2,
+          "prompt": "Solve x^2 - 6x + 25 = 0 over the complex numbers.",
+          "choices": [
+            "x = 3 + 4i or x = 3 − 4i",
+            "x = 3 or x = -3",
+            "x = 3 + 4i only",
+            "x = -3 + 4i or x = -3 − 4i"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u03-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "linear-quadratic-system",
+          "standard": "A-REI.7",
+          "difficulty": 3,
+          "prompt": "Solve the system y = x² and y = 7x − 12. Give the x-coordinates of the intersection points in increasing order.",
+          "choices": [
+            "-4, -3",
+            "7, -12",
+            "3, 4",
+            "4, 5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u03-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u03-l05"
+  }
+}

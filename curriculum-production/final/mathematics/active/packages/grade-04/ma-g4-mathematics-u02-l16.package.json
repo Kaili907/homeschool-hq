@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u02-l16",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u02-l16",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "dayInUnit": 16,
+    "courseDay": 34,
+    "phase": "Unit assessment",
+    "focus": "multi-digit addition and subtraction",
+    "title": "Unit assessment: multi-digit addition and subtraction"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.3",
+    "4.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a warehouse had 8977 visitors expected, but only 4650 attended. How many fewer people attended than expected?",
+          "choices": [
+            "4327",
+            "5327",
+            "3327",
+            "13627"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "A charity collected $1178 in the spring and $346 in the fall, then received an extra $711 donation. How much money is there in total?",
+          "choices": [
+            "1889",
+            "1524",
+            "813",
+            "2235"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number-review",
+          "standard": "4.NBT.3",
+          "difficulty": 2,
+          "prompt": "Round 42204 to the nearest 1000.",
+          "choices": [
+            "42000",
+            "42001",
+            "43000",
+            "42204"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a concert raised 50765 dollars on Saturday and 38902 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "88667",
+            "89667",
+            "90667",
+            "11863"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a concert had 91563 visitors expected, but only 71531 attended. How many fewer people attended than expected?",
+          "choices": [
+            "163094",
+            "20032",
+            "21032",
+            "19032"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A charity collected $9349 in the spring and $4195 in the fall, then spent $3709 on supplies. How much money remains?",
+          "choices": [
+            "9835",
+            "13058",
+            "13544",
+            "17253"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "round-multi-digit-number-review",
+          "standard": "4.NBT.3",
+          "difficulty": 3,
+          "prompt": "Round 741163 to the nearest 10000.",
+          "choices": [
+            "740001",
+            "740000",
+            "750000",
+            "741163"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a stadium raised 421381 dollars on Saturday and 134590 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "556971",
+            "286791",
+            "554971",
+            "555971"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a warehouse had 313767 visitors expected, but only 310567 attended. How many fewer people attended than expected?",
+          "choices": [
+            "624334",
+            "2200",
+            "4200",
+            "3200"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-addition-subtraction",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A charity collected $10539 in the spring and $27664 in the fall, then spent $18401 on supplies. How much money remains?",
+          "choices": [
+            "38203",
+            "28940",
+            "19802",
+            "56604"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u02-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u02-l16"
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l09",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l09",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 9,
+    "courseDay": 171,
+    "phase": "Retrieval and fluency",
+    "focus": "perimeter, area, and shape names",
+    "title": "Retrieval and fluency: perimeter, area, and shape names"
+  },
+  "standards": [
+    "3.MD.8",
+    "3.G.1"
+  ],
+  "blueprint": {
+    "phase": "Retrieval and fluency",
+    "profile": "retrieval-and-fluency",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 1,
+          "prompt": "Which quadrilateral is defined by having four equal sides and four right angles?",
+          "choices": [
+            "rhombus",
+            "rectangle",
+            "square",
+            "trapezoid"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 1,
+          "prompt": "A rectangular field is 4 m long and 2 m wide. What is its perimeter?",
+          "choices": [
+            "6 m",
+            "12 m",
+            "13 m",
+            "8 m"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having four equal sides, but not necessarily right angles?",
+          "choices": [
+            "square",
+            "rhombus",
+            "rectangle",
+            "trapezoid"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 4 cm long and 7 cm wide. What is its perimeter?",
+          "choices": [
+            "23 cm",
+            "28 cm",
+            "22 cm",
+            "11 cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having four right angles, with opposite sides equal?",
+          "choices": [
+            "rectangle",
+            "square",
+            "trapezoid",
+            "rhombus"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l09#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 13 in long and 14 in wide. What is its perimeter?",
+          "choices": [
+            "182 in",
+            "27 in",
+            "55 in",
+            "54 in"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l09#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 3,
+          "prompt": "Which quadrilateral is defined by having exactly one pair of parallel sides?",
+          "choices": [
+            "rectangle",
+            "square",
+            "trapezoid",
+            "rhombus"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 9 m long and 3 m wide. What is its perimeter?",
+          "choices": [
+            "24 m",
+            "12 m",
+            "27 m",
+            "25 m"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 4 in long and 2 in wide. What is its perimeter?",
+          "choices": [
+            "6 in",
+            "12 in",
+            "13 in",
+            "8 in"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l09"
+  }
+}

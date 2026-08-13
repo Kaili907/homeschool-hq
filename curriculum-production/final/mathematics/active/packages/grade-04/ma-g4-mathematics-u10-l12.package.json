@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l12",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l12",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 12,
+    "courseDay": 174,
+    "phase": "Applied problem solving",
+    "focus": "classifying two-dimensional figures and identifying lines of symmetry",
+    "title": "Applied problem solving: classifying two-dimensional figures and identifying lines of symmetry"
+  },
+  "standards": [
+    "4.G.1",
+    "4.G.2",
+    "4.G.3"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 1,
+          "prompt": "A triangle where one angle measures more than 90° is called what kind of triangle?",
+          "workedSolution": {
+            "steps": [
+              "One angle over 90° makes it an obtuse triangle."
+            ],
+            "answer": "obtuse triangle"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 2,
+          "prompt": "How many lines of symmetry does a square have?",
+          "choices": [
+            "8",
+            "5",
+            "4",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-lines-and-angles",
+          "standard": "4.G.1",
+          "difficulty": 2,
+          "prompt": "Which term describes two lines in the same plane that never meet and stay the same distance apart?",
+          "choices": [
+            "parallel lines",
+            "perpendicular lines",
+            "a line segment",
+            "a ray"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 2,
+          "prompt": "A triangle where all three angles measure less than 90° is called what kind of triangle?",
+          "choices": [
+            "obtuse triangle",
+            "acute triangle",
+            "right triangle",
+            "equilateral triangle"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a equilateral triangle have?",
+          "choices": [
+            "3",
+            "6",
+            "4",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-lines-and-angles",
+          "standard": "4.G.1",
+          "difficulty": 3,
+          "prompt": "Which term describes a part of a line that has one endpoint and extends forever in one direction?",
+          "choices": [
+            "a ray",
+            "a line segment",
+            "perpendicular lines",
+            "parallel lines"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 3,
+          "prompt": "A triangle where all three sides are the same length is called what kind of triangle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a circle have?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l12"
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l11",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l11",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 11,
+    "courseDay": 155,
+    "phase": "Concept extension",
+    "focus": "line plots with halves, quarters, and eighths of an inch",
+    "title": "Concept extension: line plots with halves, quarters, and eighths of an inch"
+  },
+  "standards": [
+    "4.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 1,
+          "prompt": "A line plot shows ribbon lengths to the nearest 1/4 yard: 1/4, 1/4, 2/4, 3/4. What is the combined length of ribbons measuring exactly 1/4 yard?",
+          "workedSolution": {
+            "steps": [
+              "Two ribbons measure 1/4 yard.",
+              "1/4 + 1/4 = 2/4 yard."
+            ],
+            "answer": "2/4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 4/4, 1/4, 4/4, 2/4, 2/4, 2/4, 2/4, 3/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 3/4 yard?",
+          "choices": [
+            "3/8",
+            "2/4",
+            "3/4",
+            "4/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 6/8, 4/8, 6/8, 1/8, 1/8, 5/8, 7/8, 4/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 7/8 yard?",
+          "choices": [
+            "7/16",
+            "6/8",
+            "8/8",
+            "7/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 2/4, 2/4, 2/4, 4/4, 3/4, 4/4, 4/4, 2/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 3/4 yard?",
+          "choices": [
+            "3/8",
+            "2/4",
+            "4/4",
+            "3/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 1/4, 1/4, 4/4, 1/4, 3/4, 4/4, 2/4, 2/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 4/4 yard?",
+          "choices": [
+            "8/4",
+            "9/4",
+            "7/4",
+            "8/8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 3/8, 3/8, 8/8, 8/8, 6/8, 2/8, 5/8, 7/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 7/8 yard?",
+          "choices": [
+            "7/8",
+            "7/16",
+            "6/8",
+            "8/8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 6/8, 2/8, 2/8, 2/8, 7/8, 5/8, 6/8, 4/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 4/8 yard?",
+          "choices": [
+            "3/8",
+            "5/8",
+            "4/16",
+            "4/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 2/8, 6/8, 4/8, 5/8, 8/8, 1/8, 1/8, 3/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 4/8 yard?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 4/8, 1/8, 7/8, 7/8, 8/8, 8/8, 4/8, 8/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 7/8 yard?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l11"
+  }
+}

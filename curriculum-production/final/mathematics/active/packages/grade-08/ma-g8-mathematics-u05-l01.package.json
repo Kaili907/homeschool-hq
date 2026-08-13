@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u05-l01",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Functions",
+    "dayInUnit": 1,
+    "courseDay": 77,
+    "phase": "Launch and diagnostic",
+    "focus": "function definition",
+    "title": "Launch and diagnostic: function definition"
+  },
+  "standards": [
+    "8.F.1",
+    "8.F.2",
+    "8.F.3",
+    "8.F.4",
+    "8.F.5"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "is-relation-a-function",
+          "standard": "8.F.1",
+          "difficulty": 1,
+          "prompt": "Consider the relation {(1, 4), (2, 7), (3, 4)}. Is this relation a function?",
+          "workedSolution": {
+            "steps": [
+              "Every input value (1, 2, and 3) appears only once as a first coordinate.",
+              "Each input is paired with exactly one output, even though the output 4 repeats.",
+              "Because no input has two different outputs, the relation is a function."
+            ],
+            "answer": "Yes, this relation is a function."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "function-graph-as-pairs",
+          "standard": "8.F.1",
+          "difficulty": 1,
+          "prompt": "Which set of ordered pairs does NOT represent a function?",
+          "choices": [
+            "{(2, -1), (1, -5), (-4, -5)}",
+            "{(4, -3), (5, -3), (4, 0)}",
+            "{(2, 3), (4, -1), (-4, -3)}",
+            "{(5, -4), (6, 2), (-3, 6)}"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "8.F.1",
+          "difficulty": 1,
+          "prompt": "Given f(x) = x + 8, find f(-4).",
+          "choices": [
+            "4",
+            "2",
+            "5",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "find-input-from-output",
+          "standard": "8.F.1",
+          "difficulty": 2,
+          "prompt": "Given f(x) = -8x + 7, find the value of x for which f(x) = 47.",
+          "choices": [
+            "-5",
+            "-8",
+            "-6",
+            "-7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-rate-of-change",
+          "standard": "8.F.2",
+          "difficulty": 2,
+          "prompt": "Function A is given by f(x) = -8x - 12. Function B is given by the table:\nx: 0, 4\ny: 9, 29\nWhich function has the greater rate of change?",
+          "choices": [
+            "Function A",
+            "They have the same rate of change.",
+            "Function B",
+            "Cannot be determined from the given information."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-value-at-x",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function A is given by f(x) = 2x - 25. Function B starts at 22 and increases by 4 each unit. Which function has the greater value when x = 0?",
+          "choices": [
+            "The two functions have equal values at that input.",
+            "Function A",
+            "Function B",
+            "Cannot be determined without a graph."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-from-table",
+          "standard": "8.F.3",
+          "difficulty": 1,
+          "prompt": "A table shows:\nx: -3, -2, -1, 0\ny: -8, -2, 4, 10\nIs the relationship linear or nonlinear?",
+          "choices": [
+            "constant",
+            "cannot be determined from a table",
+            "nonlinear",
+            "linear"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-from-equation",
+          "standard": "8.F.3",
+          "difficulty": 2,
+          "prompt": "Classify the equation y = -7x - 5 as linear or nonlinear.",
+          "choices": [
+            "linear",
+            "cannot be determined from an equation",
+            "constant",
+            "nonlinear"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u05-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u05-l01"
+  }
+}

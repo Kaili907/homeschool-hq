@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l01",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 1,
+    "courseDay": 19,
+    "phase": "Launch and diagnostic",
+    "focus": "powers-of-ten patterns",
+    "title": "Launch and diagnostic: powers-of-ten patterns"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "adjacent-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 1,
+          "prompt": "In 6.66, compare the value of the 6 in the tenths place with the 6 in the hundredths place.",
+          "workedSolution": {
+            "steps": [
+              "The 6 in the tenths place has value 0.6.",
+              "The 6 in the hundredths place has value 0.06.",
+              "Because 0.6 = 10 × 0.06, the tenths-place 6 is worth 10 times as much."
+            ],
+            "answer": "10 times"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "power-of-ten-notation",
+          "standard": "5.NBT.2",
+          "difficulty": 1,
+          "prompt": "10^2 = ?",
+          "choices": [
+            "100000",
+            "1000",
+            "1",
+            "100"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 1,
+          "prompt": "48 × 10^1 = ?",
+          "choices": [
+            "480",
+            "48",
+            "4.8",
+            "4800"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "divide-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 2,
+          "prompt": "3.5 ÷ 10^1 = ?",
+          "choices": [
+            "0.35",
+            "35",
+            "3.5",
+            "0.035"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "How is 72.54 written in words?",
+          "choices": [
+            "seventy-three and fifty-four hundredths",
+            "seventy-two and fifty-five hundredths",
+            "seventy-two and fifty-four hundredths",
+            "seventy-two and fifty-three hundredths"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "number-name-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write “thirty-five and six hundred seventy-two thousandths” as a decimal.",
+          "choices": [
+            "35.672",
+            "35.673",
+            "36.672",
+            "41.72"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-expanded-form",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "Write 1.6 in expanded form.",
+          "choices": [
+            "1 + 0.6",
+            "10 + 6",
+            "1.6",
+            "1 + 0.7"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "expanded-form-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "Write 30 + 5 + 0.6 + 0.02 in standard form.",
+          "choices": [
+            "356.2",
+            "35.63",
+            "35.62",
+            "35.72"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l01"
+  }
+}

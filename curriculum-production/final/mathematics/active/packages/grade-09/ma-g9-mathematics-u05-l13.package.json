@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u05-l13",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u05-l13",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Quadratic Expressions and Equations",
+    "dayInUnit": 13,
+    "courseDay": 85,
+    "phase": "Skill consolidation",
+    "focus": "factoring a quadratic to reveal its zeros",
+    "title": "Skill consolidation: factoring a quadratic to reveal its zeros"
+  },
+  "standards": [
+    "A-SSE.3",
+    "A-REI.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 1,
+          "prompt": "You need to read off the x-intercepts of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "standard form",
+            "factored form",
+            "recursive form",
+            "vertex form"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Solve by factoring: x^2 - 11x + 30 = 0.",
+          "choices": [
+            "x = 5 or x = -6",
+            "x = 5 or x = 6",
+            "x = 6 or x = 6",
+            "x = -5 or x = -6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Without solving, describe the roots of -x^2 + 4x + 4 = 0.",
+          "choices": [
+            "exactly one real root (a repeated root)",
+            "two distinct irrational roots",
+            "two distinct rational roots",
+            "no real roots (two complex conjugate roots)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 2,
+          "prompt": "Rewrite x^2 + 10x + 23 in vertex form and state the vertex.",
+          "choices": [
+            "(x − 5)² − 2; vertex (5, -2)",
+            "(x + 5)² + 2; vertex (-5, 2)",
+            "(x + 5)² − 2; vertex (-5, -2)",
+            "(x + 5)² + 23; vertex (-5, 23)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Use the quadratic formula to solve 2x^2 - 8x - 1 = 0. Give exact values.",
+          "choices": [
+            "x = (8 ± 6√2) / 2",
+            "x = (8 ± 6√2) / 4",
+            "x = (-8 ± 6√2) / 4",
+            "x = (8 ± √72) / 4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the y-intercept of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "factored form",
+            "vertex form",
+            "standard form",
+            "recursive form"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Solve by factoring: x^2 + 7x - 8 = 0.",
+          "choices": [
+            "x = -7 or x = 1",
+            "x = -8 or x = 1",
+            "x = 8 or x = -1",
+            "x = -8 or x = -1"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "discriminant-and-root-nature",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Without solving, describe the roots of 2x^2 - 4x + 9 = 0.",
+          "choices": [
+            "two distinct irrational roots",
+            "exactly one real root (a repeated root)",
+            "no real roots (two complex conjugate roots)",
+            "two distinct rational roots"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "complete-the-square-to-vertex-form",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "Rewrite x^2 + 16x + 63 in vertex form and state the vertex.",
+          "choices": [
+            "(x − 8)² − 1; vertex (8, -1)",
+            "(x + 8)² + 63; vertex (-8, 63)",
+            "(x + 8)² − 1; vertex (-8, -1)",
+            "(x + 8)² + 1; vertex (-8, 1)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u05-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "quadratic-formula-exact-roots",
+          "standard": "A-REI.4",
+          "difficulty": 2,
+          "prompt": "Use the quadratic formula to solve 2x^2 + 6x - 1 = 0. Give exact values.",
+          "choices": [
+            "x = (-6 ± √44) / 4",
+            "x = (6 ± 2√11) / 4",
+            "x = (-6 ± 2√11) / 2",
+            "x = (-6 ± 2√11) / 4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-quadratic-form-choice",
+          "standard": "A-SSE.3",
+          "difficulty": 3,
+          "prompt": "You need to read off the vertex of a quadratic function directly, without further calculation. Which form should you write it in?",
+          "choices": [
+            "vertex form",
+            "standard form",
+            "factored form",
+            "recursive form"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u05-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-quadratic-by-factoring",
+          "standard": "A-REI.4",
+          "difficulty": 3,
+          "prompt": "Solve by factoring: x^2 - 14x + 48 = 0.",
+          "choices": [
+            "x = -6 or x = -8",
+            "x = 6 or x = -8",
+            "x = 6 or x = 8",
+            "x = 7 or x = 8"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u05-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u05-l13"
+  }
+}

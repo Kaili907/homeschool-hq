@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l14",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l14",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 14,
+    "courseDay": 140,
+    "phase": "Performance task: build",
+    "focus": "the graph, line plot, and interpretation",
+    "title": "Performance task: build: the graph, line plot, and interpretation"
+  },
+  "standards": [
+    "3.MD.3",
+    "3.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 3/4, 1/4, 4/4, 4/4, 3/4, 2/4, 2/4, 4/4. How many leaves measured exactly 3/4 inch?",
+          "choices": [
+            "2",
+            "8",
+            "3",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 2 per symbol. The bar for \"Fish\" is worth 1 symbols. How many does \"Fish\" represent?",
+          "choices": [
+            "1",
+            "4",
+            "2",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 5 per symbol, \"Dogs\" has 5 symbols and \"Cats\" has 1 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "4",
+            "30",
+            "20",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 1/4, 4/4, 2/4, 1/4, 3/4, 1/4, 4/4, 1/4. How many leaves measured exactly 1/4 inch?",
+          "choices": [
+            "8",
+            "5",
+            "3",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Fish\" is worth 7 symbols. How many does \"Fish\" represent?",
+          "choices": [
+            "35",
+            "30",
+            "7",
+            "40"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 10 per symbol, \"Apples\" has 8 symbols and \"Bananas\" has 4 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "choices": [
+            "4",
+            "120",
+            "80",
+            "40"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-measurement",
+          "standard": "3.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 1/8, 1/8, 7/8, 6/8, 7/8, 3/8, 3/8, 2/8. How many leaves measured exactly 1/8 inch?",
+          "choices": [
+            "1",
+            "8",
+            "3",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 10 per symbol. The bar for \"Grapes\" is worth 3 symbols. How many does \"Grapes\" represent?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 5 per symbol, \"Apples\" has 4 symbols and \"Bananas\" has 2 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l14"
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l03",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 3,
+    "courseDay": 3,
+    "phase": "Guided practice A",
+    "focus": "formal constructions with compass, straightedge, and dynamic tools",
+    "title": "Guided practice A: formal constructions with compass, straightedge, and dynamic tools"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 1,
+          "prompt": "Define a circle precisely.",
+          "workedSolution": {
+            "steps": [
+              "Fix a centre and a distance.",
+              "Take every point in the plane at that distance."
+            ],
+            "answer": "the set of points at a fixed distance from a centre"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 1,
+          "prompt": "A construction proceeds as follows. Open the compass to more than half of AB. From A draw an arc above and below AB; from B, with the same opening, draw arcs crossing them. Draw the line through the two crossing points. What has been constructed?",
+          "choices": [
+            "the perpendicular bisector of AB",
+            "the angle bisector of ∠A",
+            "a line parallel to AB",
+            "a copy of segment AB"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 1,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 4. What central angle does each side subtend?",
+          "choices": [
+            "45°",
+            "90°",
+            "91°",
+            "180°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the perpendicular bisector construction?",
+          "choices": [
+            "The compass width was more than half the segment, which forces perpendicularity.",
+            "Both constructed points are equidistant from the endpoints, and the locus of such points is exactly the perpendicular bisector.",
+            "Any line through the midpoint is a perpendicular bisector.",
+            "The arcs look symmetric, so the line must be perpendicular."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 2,
+          "prompt": "Which statement is a precise definition of a circle?",
+          "choices": [
+            "the set of all points in a plane at a fixed distance from a given centre point",
+            "a closed curve with no corners",
+            "a shape whose area is πr²",
+            "a polygon with infinitely many sides"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "choices": [
+            "the perpendicular bisector of the transversal",
+            "a line through P parallel to ℓ",
+            "a line through P perpendicular to ℓ",
+            "the reflection of ℓ across P"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 2,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 8. What central angle does each side subtend?",
+          "choices": [
+            "60°",
+            "120°",
+            "30°",
+            "61°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the equilateral triangle construction on a given segment?",
+          "choices": [
+            "Both circles have radius equal to the segment, so all three sides are that same length.",
+            "The circles intersect, which guarantees 60° angles by definition.",
+            "The construction works only when the segment is horizontal.",
+            "The intersection point is the midpoint of the segment."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a line segment?",
+          "choices": [
+            "a line with a measurable length",
+            "part of a line that goes on forever in one direction",
+            "the set of two endpoints and all points between them on the line through them",
+            "the shortest path between two shapes"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "A construction proceeds as follows. With the compass set to the radius, mark successive arcs around the circle from a starting point, then join consecutive marks. What has been constructed?",
+          "choices": [
+            "an equilateral triangle inscribed in the circle",
+            "a regular pentagon inscribed in the circle",
+            "a regular hexagon inscribed in the circle",
+            "a square inscribed in the circle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 2,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 10. What central angle does each side subtend?",
+          "choices": [
+            "180°",
+            "90°",
+            "91°",
+            "45°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l03"
+  }
+}

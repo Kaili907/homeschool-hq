@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u05-l15",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u05-l15",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Adding and Subtracting Fractions",
+    "dayInUnit": 15,
+    "courseDay": 87,
+    "phase": "Assessment preparation",
+    "focus": "common denominators",
+    "title": "Assessment preparation: common denominators"
+  },
+  "standards": [
+    "5.NF.1",
+    "5.NF.2"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "least-common-denominator",
+          "standard": "5.NF.1",
+          "difficulty": 1,
+          "prompt": "What is the least common denominator of fractions with denominators 4 and 8?",
+          "choices": [
+            "4",
+            "8",
+            "32",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rewrite-with-common-denominator",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "Rewrite 4/7 and 2/5 as equivalent fractions with the least common denominator.",
+          "choices": [
+            "20/35 and 14/35",
+            "20/35 and 15/35",
+            "4/35 and 2/35",
+            "21/35 and 14/35"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "add-unlike-fractions",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "3/4 + 1/2 = ? Write the answer in simplest form.",
+          "choices": [
+            "1 1/5",
+            "5/6",
+            "1 1/4",
+            "1 1/2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "subtract-unlike-fractions",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "3/7 - 1/3 = ? Write the answer in simplest form.",
+          "choices": [
+            "1/21",
+            "1/7",
+            "3/22",
+            "2/21"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "add-mixed-numbers",
+          "standard": "5.NF.1",
+          "difficulty": 3,
+          "prompt": "6 1/6 + 8 5/8 = ? Write the answer in simplest form.",
+          "choices": [
+            "15 19/24",
+            "14 19/24",
+            "13 17/26",
+            "14 1/5"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "subtract-mixed-numbers",
+          "standard": "5.NF.1",
+          "difficulty": 3,
+          "prompt": "11 1/16 - 10 4/7 = ? Write the answer in simplest form.",
+          "choices": [
+            "55/112",
+            "55/113",
+            "56/113",
+            "1 55/112"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "addition-word-problem",
+          "standard": "5.NF.2",
+          "difficulty": 3,
+          "prompt": "Maya walks 1 4/5 miles in the morning and 3 3/4 miles in the afternoon. How many miles does she walk altogether?",
+          "choices": [
+            "5 2/7",
+            "5 1/22",
+            "5 11/20",
+            "5 3/5"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "subtraction-word-problem",
+          "standard": "5.NF.2",
+          "difficulty": 3,
+          "prompt": "A container holds 8 13/24 liters of water. After 5 3/8 liters are used, how many liters remain?",
+          "choices": [
+            "2 5/7",
+            "3 1/6",
+            "3",
+            "4 1/6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u05-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fraction",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "Complete the equivalent fraction: 2/3 = 8/?.",
+          "choices": [
+            "5",
+            "11",
+            "12",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "simplify-fraction",
+          "standard": "5.NF.1",
+          "difficulty": 2,
+          "prompt": "Write 10/15 in simplest form.",
+          "choices": [
+            "1/3",
+            "2/3",
+            "2/5",
+            "1 2/3"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-to-benchmark",
+          "standard": "5.NF.2",
+          "difficulty": 3,
+          "prompt": "Compare 4/6 with the benchmark 1 using <, >, or =.",
+          "choices": [
+            "=",
+            "<",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u05-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "estimate-fraction-operation",
+          "standard": "5.NF.2",
+          "difficulty": 3,
+          "prompt": "Use 0, 1/2, or 1 for each fraction to estimate 7/12 - 1/3.",
+          "choices": [
+            "about 2",
+            "about 1/2",
+            "about 0",
+            "about 1"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u05-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u05-l15"
+  }
+}

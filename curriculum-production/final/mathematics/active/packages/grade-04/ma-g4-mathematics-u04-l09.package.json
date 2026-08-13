@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l09",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l09",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 9,
+    "courseDay": 63,
+    "phase": "Retrieval and fluency",
+    "focus": "facts and multiples of ten",
+    "title": "Retrieval and fluency: facts and multiples of ten"
+  },
+  "standards": [
+    "4.NBT.5"
+  ],
+  "blueprint": {
+    "phase": "Retrieval and fluency",
+    "profile": "retrieval-and-fluency",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use an area model to find 6 × 45. Split 45 into 40 and 5.",
+          "choices": [
+            "240",
+            "30",
+            "270",
+            "245"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Find 5 × 338 using partial products.",
+          "choices": [
+            "1500",
+            "1685",
+            "1690",
+            "1650"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 7 × 52. Split 52 into 50 and 2.",
+          "choices": [
+            "350",
+            "352",
+            "14",
+            "364"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 2 × 824 using partial products.",
+          "choices": [
+            "1640",
+            "1648",
+            "1646",
+            "1600"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 7 × 49. Split 49 into 40 and 9.",
+          "choices": [
+            "63",
+            "289",
+            "343",
+            "280"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l09#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 5 × 715 using partial products.",
+          "choices": [
+            "3570",
+            "3500",
+            "3575",
+            "3550"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l09#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 6 × 87. Split 87 into 80 and 7.",
+          "choices": [
+            "480",
+            "42",
+            "487",
+            "522"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 5 × 623 using partial products.",
+          "choices": [
+            "3100",
+            "3000",
+            "3110",
+            "3115"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 9 × 13. Split 13 into 10 and 3.",
+          "choices": [
+            "27",
+            "93",
+            "117",
+            "90"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l09"
+  }
+}

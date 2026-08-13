@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l18",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l18",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 18,
+    "courseDay": 54,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "describing real relationships as times as many",
+    "title": "Transfer, reflection, and publication: describing real relationships as times as many"
+  },
+  "standards": [
+    "4.OA.1",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank: 24 is ___ times as many as 6.",
+          "workedSolution": {
+            "steps": [
+              "? × 6 = 24.",
+              "24 ÷ 6 = 4."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 32 is ___ times as many as 8.",
+          "choices": [
+            "32",
+            "8",
+            "24",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 77 is ___ times as many as 11.",
+          "choices": [
+            "7",
+            "66",
+            "77",
+            "11"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 36 is ___ times as many as 9.",
+          "choices": [
+            "9",
+            "4",
+            "36",
+            "27"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 24 is ___ times as many as 8.",
+          "choices": [
+            "24",
+            "3",
+            "16",
+            "8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 15 is ___ times as many as 5.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 72 is ___ times as many as 9.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l18"
+  }
+}

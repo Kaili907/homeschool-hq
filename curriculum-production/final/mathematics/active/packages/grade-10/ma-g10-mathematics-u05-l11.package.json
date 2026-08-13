@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u05-l11",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u05-l11",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Dilations and Similarity",
+    "dayInUnit": 11,
+    "courseDay": 83,
+    "phase": "Performance task planning",
+    "focus": "establishing the AA criterion",
+    "title": "Performance task planning: establishing the AA criterion"
+  },
+  "standards": [
+    "G-SRT.1",
+    "G-SRT.2",
+    "G-SRT.3",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 1,
+          "prompt": "Dilate (3, −2) about the origin by factor 4.",
+          "workedSolution": {
+            "steps": [
+              "Multiply both coordinates by 4.",
+              "(12, −8)."
+            ],
+            "answer": "(12, −8)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "scale-factor-from-lengths",
+          "standard": "G-SRT.2",
+          "difficulty": 2,
+          "prompt": "A figure is dilated so that a side of length 10 becomes a side of length 20. What is the scale factor, and what happens to the figure's area?",
+          "choices": [
+            "scale factor 2; the area is multiplied by 4",
+            "scale factor 1/2; the area is multiplied by 4",
+            "scale factor 10; the area is multiplied by 4",
+            "scale factor 2; the area is multiplied by 2"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 2,
+          "prompt": "Triangle ABC has ∠A = 27° and ∠B = 27°. Triangle DEF has ∠D = 27° and ∠E = 27°. Are the triangles similar, and on what grounds?",
+          "choices": [
+            "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well.",
+            "No; angle information alone never establishes similarity.",
+            "Yes, by SSS similarity.",
+            "Yes, but only if a pair of corresponding sides is also known to be congruent."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "dilation-effect-on-line",
+          "standard": "G-SRT.1",
+          "difficulty": 3,
+          "prompt": "Under a dilation, a segment not through the centre, under a dilation with scale factor k …",
+          "choices": [
+            "is mapped to a perpendicular segment k times as long",
+            "is mapped to a segment of the same length",
+            "is mapped to a parallel segment k times as long",
+            "is mapped to a segment k² times as long"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u05-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "dilation-image-coordinates",
+          "standard": "G-SRT.1",
+          "difficulty": 3,
+          "prompt": "Dilate the point (-7, -2) about the origin with scale factor 5. Give the image.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "scale-factor-from-lengths",
+          "standard": "G-SRT.2",
+          "difficulty": 3,
+          "prompt": "A figure is dilated so that a side of length 7 becomes a side of length 14. What is the scale factor, and what happens to the figure's area?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u05-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "aa-similarity-criterion",
+          "standard": "G-SRT.3",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has ∠A = 65° and ∠B = 26°. Triangle DEF has ∠D = 65° and ∠E = 26°. Are the triangles similar, and on what grounds?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u05-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u05-l11"
+  }
+}

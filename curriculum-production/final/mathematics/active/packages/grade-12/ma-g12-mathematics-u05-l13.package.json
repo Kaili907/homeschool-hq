@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u05-l13",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u05-l13",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Complex Solutions, Polynomials, and the Binomial Theorem",
+    "dayInUnit": 13,
+    "courseDay": 85,
+    "phase": "Skill consolidation",
+    "focus": "extending polynomial identities to the complex numbers",
+    "title": "Skill consolidation: extending polynomial identities to the complex numbers"
+  },
+  "standards": [
+    "N-CN.8",
+    "N-CN.9",
+    "A-APR.5",
+    "A-APR.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 1,
+          "prompt": "Factor x² + 25 completely over the complex numbers.",
+          "choices": [
+            "(x + 5i)²",
+            "(x + 5)(x − 5)",
+            "(x + 5i)(x + 5i)",
+            "(x + 5i)(x − 5i)"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 2,
+          "prompt": "A polynomial with real coefficients has degree 4. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 4, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 2, and any non-real roots occur in conjugate pairs",
+            "exactly 5, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 2,
+          "prompt": "In the expansion of (x + y)^6, find the coefficient of the term x^5·y^1.",
+          "choices": [
+            "7",
+            "1",
+            "6",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 2,
+          "prompt": "Complete the statement: the quotient of two rational expressions, where the divisor is not the zero expression …",
+          "choices": [
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because a common denominator can always be formed",
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "need not be a rational expression, because the denominators may differ"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 3,
+          "prompt": "Factor x² + 64 completely over the complex numbers.",
+          "choices": [
+            "(x + 8i)(x + 8i)",
+            "(x + 8)(x − 8)",
+            "(x + 8i)²",
+            "(x + 8i)(x − 8i)"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 3,
+          "prompt": "A polynomial with real coefficients has degree 2. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 5, and any non-real roots occur in conjugate pairs",
+            "exactly 1, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 2, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 3,
+          "prompt": "In the expansion of (x + y)^7, find the coefficient of the term x^3·y^4.",
+          "choices": [
+            "35",
+            "21",
+            "11",
+            "28"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the sum of two rational expressions …",
+          "choices": [
+            "need not be a rational expression, because the denominators may differ",
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "is always a rational expression, because a common denominator can always be formed"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 3,
+          "prompt": "Factor x² + 100 completely over the complex numbers.",
+          "choices": [
+            "(x + 10i)²",
+            "(x + 10)(x − 10)",
+            "(x + 10i)(x + 10i)",
+            "(x + 10i)(x − 10i)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 2,
+          "prompt": "A polynomial with real coefficients has degree 6. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 6, and any non-real roots occur in conjugate pairs",
+            "exactly 5, and any non-real roots occur in conjugate pairs",
+            "exactly 7, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 3,
+          "prompt": "In the expansion of (x + y)^7, find the coefficient of the term x^5·y^2.",
+          "choices": [
+            "35",
+            "14",
+            "7",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 3,
+          "prompt": "Complete the statement: the product of two rational expressions …",
+          "choices": [
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "need not be a rational expression, because the denominators may differ",
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "is always a rational expression, because a common denominator can always be formed"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u05-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u05-l13"
+  }
+}

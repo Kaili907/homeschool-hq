@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u02-l15",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u02-l15",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rigid Motions and Transformations",
+    "dayInUnit": 15,
+    "courseDay": 33,
+    "phase": "Assessment preparation",
+    "focus": "rotations and reflections that carry a polygon onto itself",
+    "title": "Assessment preparation: rotations and reflections that carry a polygon onto itself"
+  },
+  "standards": [
+    "G-CO.2",
+    "G-CO.3",
+    "G-CO.4",
+    "G-CO.5",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 1,
+          "prompt": "A regular polygon has 7 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "7 rotations; smallest angle 51.42857142857143°",
+            "6 rotations; smallest angle 51.42857142857143°",
+            "6 rotations; smallest angle 25.714285714285715°",
+            "6 rotations; smallest angle 129°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 2,
+          "prompt": "Triangle ABC has vertices A(1, 3) and B(3, -1). After a transformation the images are A′(-1, -3) and B′(-3, 1), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a 180° rotation about the origin",
+            "a reflection across the y-axis",
+            "a translation by ⟨-2, -6⟩",
+            "a reflection across the x-axis"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 2,
+          "prompt": "Point P(1, -7) is translated by the rule (x, y) → (x + 7, y − 1). Give the image P′.",
+          "choices": [
+            "(-8, 8)",
+            "(0, 0)",
+            "(-6, -6)",
+            "(8, -8)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Reflect the point (2, 1) across the line y = x. Give the image.",
+          "choices": [
+            "(-2, 1)",
+            "(-2, -1)",
+            "(1, 2)",
+            "(2, -1)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Rotate the point (-6, -7) counterclockwise about the origin by 180°. Give the image.",
+          "choices": [
+            "(-7, 6)",
+            "(6, 7)",
+            "(7, -6)",
+            "(-7, -6)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 3 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "3 rotations; smallest angle 120°",
+            "2 rotations; smallest angle 60°",
+            "2 rotations; smallest angle 120°",
+            "6 rotations; smallest angle 120°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has vertices A(5, 10) and B(10, -5). After a transformation the images are A′(-5, -10) and B′(-10, 5), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a reflection across the x-axis",
+            "a reflection across the y-axis",
+            "a translation by ⟨-10, -20⟩",
+            "a 180° rotation about the origin"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 3,
+          "prompt": "Point P(1, -7) is translated by the rule (x, y) → (x + 5, y + 2). Give the image P′.",
+          "choices": [
+            "(3, -2)",
+            "(6, -5)",
+            "(-4, -9)",
+            "(-5, 6)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Reflect the point (7, 3) across the line y = x. Give the image.",
+          "choices": [
+            "(-7, -3)",
+            "(-7, 3)",
+            "(3, 7)",
+            "(7, -3)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Rotate the point (-2, 6) counterclockwise about the origin by 90°. Give the image.",
+          "choices": [
+            "(6, -2)",
+            "(6, 2)",
+            "(2, -6)",
+            "(-6, -2)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 10 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "10 rotations; smallest angle 36°",
+            "9 rotations; smallest angle 18°",
+            "9 rotations; smallest angle 144°",
+            "9 rotations; smallest angle 36°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has vertices A(9, -1) and B(-1, -9). After a transformation the images are A′(-9, 1) and B′(1, 9), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "choices": [
+            "a reflection across the y-axis",
+            "a reflection across the x-axis",
+            "a translation by ⟨-18, 2⟩",
+            "a 180° rotation about the origin"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u02-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u02-l15"
+  }
+}

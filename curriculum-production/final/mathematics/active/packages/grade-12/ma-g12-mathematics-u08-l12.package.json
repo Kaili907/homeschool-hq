@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u08-l12",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u08-l12",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Conic Sections and Volume Arguments",
+    "dayInUnit": 12,
+    "courseDay": 138,
+    "phase": "Performance task build",
+    "focus": "volume arguments for spheres and other solids",
+    "title": "Performance task build: volume arguments for spheres and other solids"
+  },
+  "standards": [
+    "G-C.4",
+    "G-GPE.3",
+    "G-GMD.2",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "cavalieri-volume-argument",
+          "standard": "G-GMD.2",
+          "difficulty": 2,
+          "prompt": "Compare an oblique cylinder and a right cylinder with the same base area and the same height. What does Cavalieri’s principle tell us?",
+          "choices": [
+            "They have equal volumes, and matching cross-sections is exactly how the sphere volume formula is derived.",
+            "They have equal volumes, because every horizontal cross-section has the same area at the same height.",
+            "The cone has one third the volume, which Cavalieri’s principle establishes by comparing cross-sections against a reference solid.",
+            "Nothing, because Cavalieri’s principle applies only to prisms."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "tangent-construction-from-external-point",
+          "standard": "G-C.4",
+          "difficulty": 3,
+          "prompt": "A circle has radius 8 and centre O. A point P lies 17 from O. Explain the construction of a tangent from P and give the tangent length.",
+          "choices": [
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 9.",
+            "Draw the perpendicular bisector of OP; the tangent length is 15.",
+            "Draw the circle centred at P with radius 8; the tangent length is 15.",
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 15."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "ellipse-from-foci-and-sum",
+          "standard": "G-GPE.3",
+          "difficulty": 2,
+          "prompt": "An ellipse centred at the origin has foci at (±3, 0) and the sum of distances to the foci equal to 10. Write its equation.",
+          "choices": [
+            "x²/16 + y²/25 = 1",
+            "x²/25 + y²/9 = 1",
+            "x²/25 − y²/16 = 1",
+            "x²/25 + y²/16 = 1"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "hyperbola-from-foci-and-difference",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "A hyperbola centred at the origin has foci at (±5, 0) and the absolute difference of distances to the foci equal to 8. Write its equation.",
+          "choices": [
+            "x²/16 − y²/9 = 1",
+            "y²/16 − x²/9 = 1",
+            "x²/16 + y²/9 = 1",
+            "x²/9 − y²/16 = 1"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "cavalieri-volume-argument",
+          "standard": "G-GMD.2",
+          "difficulty": 3,
+          "prompt": "Compare a sphere of radius r and a cylinder of radius r and height 2r with two cones removed. What does Cavalieri’s principle tell us?",
+          "choices": [
+            "The cone has one third the volume, which Cavalieri’s principle establishes by comparing cross-sections against a reference solid.",
+            "They have equal volumes, and matching cross-sections is exactly how the sphere volume formula is derived.",
+            "They have equal volumes, because every horizontal cross-section has the same area at the same height.",
+            "Nothing, because Cavalieri’s principle applies only to prisms."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "tangent-construction-from-external-point",
+          "standard": "G-C.4",
+          "difficulty": 3,
+          "prompt": "A circle has radius 7 and centre O. A point P lies 25 from O. Explain the construction of a tangent from P and give the tangent length.",
+          "choices": [
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 18.",
+            "Draw the circle on diameter OP; it meets the given circle at the point of tangency, and the tangent length is 24.",
+            "Draw the circle centred at P with radius 7; the tangent length is 24.",
+            "Draw the perpendicular bisector of OP; the tangent length is 24."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "ellipse-from-foci-and-sum",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "An ellipse centred at the origin has foci at (±12, 0) and the sum of distances to the foci equal to 26. Write its equation.",
+          "choices": [
+            "x²/169 − y²/25 = 1",
+            "x²/169 + y²/25 = 1",
+            "x²/169 + y²/144 = 1",
+            "x²/25 + y²/169 = 1"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "hyperbola-from-foci-and-difference",
+          "standard": "G-GPE.3",
+          "difficulty": 3,
+          "prompt": "A hyperbola centred at the origin has foci at (±13, 0) and the absolute difference of distances to the foci equal to 10. Write its equation.",
+          "choices": [
+            "x²/25 + y²/144 = 1",
+            "x²/25 − y²/144 = 1",
+            "x²/144 − y²/25 = 1",
+            "y²/25 − x²/144 = 1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u08-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "cavalieri-volume-argument",
+          "standard": "G-GMD.2",
+          "difficulty": 3,
+          "prompt": "Compare a cone and a cylinder with the same base and height. What does Cavalieri’s principle tell us?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u08-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "tangent-construction-from-external-point",
+          "standard": "G-C.4",
+          "difficulty": 3,
+          "prompt": "A circle has radius 5 and centre O. A point P lies 13 from O. Explain the construction of a tangent from P and give the tangent length.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u08-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u08-l12"
+  }
+}

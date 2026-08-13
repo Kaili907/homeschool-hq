@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l06",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 6,
+    "courseDay": 132,
+    "phase": "Concept build C",
+    "focus": "decimals in money and measurement contexts",
+    "title": "Concept build C: decimals in money and measurement contexts"
+  },
+  "standards": [
+    "4.NF.6",
+    "4.MD.2"
+  ],
+  "blueprint": {
+    "phase": "Concept build C",
+    "profile": "concept-build-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 7/100 using decimal notation.",
+          "workedSolution": {
+            "steps": [
+              "A denominator of 100 means two decimal places.",
+              "7/100 = 0.07."
+            ],
+            "answer": "0.07"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem-measurement-review",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A pitcher holds 3/4 liter per glass. How much liquid fills 3 glasses? Give the answer as a fraction of a liter.",
+          "choices": [
+            "9/4",
+            "3/4",
+            "3/12",
+            "10/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 50/100 using decimal notation.",
+          "choices": [
+            "0.50",
+            "0.51",
+            "0.49",
+            "0.53"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem-measurement-review",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A pitcher holds 6/8 liter per glass. How much liquid fills 2 glasses? Give the answer as a fraction of a liter.",
+          "choices": [
+            "13/8",
+            "12/8",
+            "6/16",
+            "2/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 30/100 using decimal notation.",
+          "choices": [
+            "0.33",
+            "0.29",
+            "0.30",
+            "0.31"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem-measurement-review",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A pitcher holds 5/8 liter per glass. How much liquid fills 6 glasses? Give the answer as a fraction of a liter.",
+          "choices": [
+            "5/48",
+            "31/8",
+            "6/8",
+            "30/8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 11/100 using decimal notation.",
+          "choices": [
+            "0.11",
+            "0.12",
+            "0.10",
+            "0.14"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem-measurement-review",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A pitcher holds 1/4 liter per glass. How much liquid fills 8 glasses? Give the answer as a fraction of a liter.",
+          "choices": [
+            "9/4",
+            "8/32",
+            "1/32",
+            "8/4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 21/100 using decimal notation.",
+          "choices": [
+            "0.20",
+            "0.24",
+            "0.21",
+            "0.22"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "fraction-word-problem-measurement-review",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A pitcher holds 1/4 liter per glass. How much liquid fills 7 glasses? Give the answer as a fraction of a liter.",
+          "choices": [
+            "7/28",
+            "8/4",
+            "1/28",
+            "7/4"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l06"
+  }
+}

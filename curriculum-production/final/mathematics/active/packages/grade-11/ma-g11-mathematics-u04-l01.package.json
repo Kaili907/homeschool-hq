@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u04-l01",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Exponential, Logarithmic, and Series Models",
+    "dayInUnit": 1,
+    "courseDay": 55,
+    "phase": "Launch and diagnostic",
+    "focus": "logarithms as the inverse of exponentiation",
+    "title": "Launch and diagnostic: logarithms as the inverse of exponentiation"
+  },
+  "standards": [
+    "F-LE.4",
+    "A-SSE.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 1,
+          "prompt": "Evaluate log_3(81).",
+          "workedSolution": {
+            "steps": [
+              "3^? = 81.",
+              "3⁴ = 81, so the answer is 4."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 1,
+          "prompt": "Solve 3^x = 9 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = log_9(3) = 1/2",
+            "x = 9/3 = 3",
+            "x = log_3(9) = 3",
+            "x = log_3(9) = 2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 1,
+          "prompt": "Find the sum of the first 4 terms of the geometric series with first term 3 and common ratio 2.",
+          "choices": [
+            "45",
+            "12",
+            "48",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "An investment of $1400 grows by 9% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "8 years",
+            "9 years",
+            "10 years",
+            "11 years"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-logarithm",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "Evaluate log_2(8).",
+          "choices": [
+            "8",
+            "4",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-exponential-equation-with-logs",
+          "standard": "F-LE.4",
+          "difficulty": 3,
+          "prompt": "Solve 2^x = 8 exactly, and state the logarithmic form used.",
+          "choices": [
+            "x = log_2(8) = 3",
+            "x = log_2(8) = 4",
+            "x = 8/2 = 4",
+            "x = log_8(2) = 1/3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u04-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "finite-geometric-series-sum",
+          "standard": "A-SSE.4",
+          "difficulty": 1,
+          "prompt": "Find the sum of the first 4 terms of the geometric series with first term 4 and common ratio 2.",
+          "choices": [
+            "16",
+            "64",
+            "32",
+            "60"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u04-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "logarithm-for-doubling-time",
+          "standard": "F-LE.4",
+          "difficulty": 2,
+          "prompt": "An investment of $200 grows by 9% per year. Using logarithms, find the least whole number of years for it to at least double.",
+          "choices": [
+            "11 years",
+            "9 years",
+            "10 years",
+            "8 years"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u04-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u04-l01"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u07-l18",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u07-l18",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Functions: Concept, Notation, and Interpretation",
+    "dayInUnit": 18,
+    "courseDay": 126,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "relating domain to a quantitative context",
+    "title": "Publication, presentation, or reflection: relating domain to a quantitative context"
+  },
+  "standards": [
+    "F-IF.1",
+    "F-IF.2",
+    "F-IF.3",
+    "F-IF.4",
+    "F-IF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 1,
+          "prompt": "What does the peak of a height-time graph mean?",
+          "workedSolution": {
+            "steps": [
+              "The peak is a maximum.",
+              "It gives the greatest height and when it happens."
+            ],
+            "answer": "the maximum height and its time"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 2,
+          "prompt": "Given f(x) = -1x² + 2x + 2, find f(3).",
+          "choices": [
+            "-3",
+            "-1",
+            "5",
+            "17"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-function-from-relation",
+          "standard": "F-IF.1",
+          "difficulty": 2,
+          "prompt": "Does the set {(1, 4), (2, 4), (3, 4), (5, 4)} define y as a function of x? Justify the decision.",
+          "choices": [
+            "No; the input 4 gives both y = 2 and y = −2.",
+            "No; the input 1 is paired with both 3 and 8.",
+            "Yes; each input appears once, so each has exactly one output.",
+            "Yes; repeated outputs are allowed, only repeated inputs with different outputs are not."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "domain-in-context",
+          "standard": "F-IF.5",
+          "difficulty": 3,
+          "prompt": "A machine starts with 45 components and consumes 6 per hour. It can run for at most 10 hours. What is the domain of C(h) = 45 − 6h in this context?",
+          "choices": [
+            "0 ≤ h ≤ 10",
+            "all real numbers",
+            "0 ≤ h ≤ 45",
+            "0 ≤ h ≤ 7"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "sequence-as-function",
+          "standard": "F-IF.3",
+          "difficulty": 3,
+          "prompt": "A sequence is defined by a(1) = -3 and a(n) = a(n − 1) − 2 for n > 1. Find a(19).",
+          "choices": [
+            "114",
+            "-41",
+            "33",
+            "-39"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u07-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-key-graph-features",
+          "standard": "F-IF.4",
+          "difficulty": 3,
+          "prompt": "In a modelling context, the graph of a cooling object’s temperature flattens out towards a horizontal line. Which feature is this, and what does it mean?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u07-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "evaluate-function-notation",
+          "standard": "F-IF.2",
+          "difficulty": 3,
+          "prompt": "Given f(x) = 3x² − 1x + 2, find f(-3).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u07-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u07-l18"
+  }
+}

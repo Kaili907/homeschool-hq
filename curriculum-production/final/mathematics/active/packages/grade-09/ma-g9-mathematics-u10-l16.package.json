@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l16",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l16",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 16,
+    "courseDay": 178,
+    "phase": "Unit assessment",
+    "focus": "two-way frequency tables, joint, marginal, and conditional relative frequencies",
+    "title": "Unit assessment: two-way frequency tables, joint, marginal, and conditional relative frequencies"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 1,
+          "prompt": "A data set records 12, 19, 12, 13, 15. Give the mean and the median.",
+          "choices": [
+            "mean 13, median 14.2",
+            "mean 14.2, median 14",
+            "mean 14.2, median 13",
+            "mean 14, median 13"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 1,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 202 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "The median rises sharply while the mean changes little.",
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "Both the mean and the median rise sharply."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 2,
+          "prompt": "A two-way table has row 1: 8 yes, 27 no; row 2: 10 yes, 16 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "8/61",
+            "4/9",
+            "27/35",
+            "8/35"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 2,
+          "prompt": "A least-squares line for a data set is ŷ = 7x + 8, where x is measured in kilometre travelleds and y in litres of fuel. Interpret the slope.",
+          "choices": [
+            "Each additional litres of fuel is associated with 7 more kilometre travelleds.",
+            "Each additional kilometre travelled causes an increase of exactly 7 litres of fuel.",
+            "Each additional kilometre travelled is associated with an increase of about 7 litres of fuel.",
+            "The predicted value is 7 litres of fuel when x is 0."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 2,
+          "prompt": "Towns with more fire engines report more fire damage. What conclusion is justified?",
+          "choices": [
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "A strong correlation always establishes causation when the sample is large.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 2,
+          "prompt": "A data set records 10, 18, 12, 6, 10. Give the mean and the median.",
+          "choices": [
+            "mean 11.2, median 10",
+            "mean 10, median 11.2",
+            "mean 11, median 10",
+            "mean 11.2, median 11"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 397 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Both the mean and the median rise sharply.",
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Neither statistic changes, because one value cannot affect a summary."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 3,
+          "prompt": "A two-way table has row 1: 56 yes, 38 no; row 2: 48 yes, 53 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "28/47",
+            "19/47",
+            "56/195",
+            "7/13"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 12x + 22, where x is measured in kilometre travelleds and y in litres of fuel. Interpret the slope.",
+          "choices": [
+            "The predicted value is 12 litres of fuel when x is 0.",
+            "Each additional kilometre travelled causes an increase of exactly 12 litres of fuel.",
+            "Each additional kilometre travelled is associated with an increase of about 12 litres of fuel.",
+            "Each additional litres of fuel is associated with 12 more kilometre travelleds."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "In a randomised trial, one group received a tutoring programme and scored higher on average than the control group. What conclusion is justified?",
+          "choices": [
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link.",
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "A strong correlation always establishes causation when the sample is large.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 7, 31, 23, 18, 20, 9, 31. Give the mean and the median.",
+          "choices": [
+            "mean 19.86, median 18",
+            "mean 20, median 19.86",
+            "mean 19.86, median 20",
+            "mean 20, median 20"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 371 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size.",
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "Both the mean and the median rise sharply."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l16"
+  }
+}

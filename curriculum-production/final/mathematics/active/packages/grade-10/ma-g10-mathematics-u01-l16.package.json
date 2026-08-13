@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l16",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l16",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 16,
+    "courseDay": 16,
+    "phase": "Unit assessment",
+    "focus": "copying segments and angles",
+    "title": "Unit assessment: copying segments and angles"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 1,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 11. What central angle does each side subtend?",
+          "choices": [
+            "91°",
+            "90°",
+            "180°",
+            "45°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 1,
+          "prompt": "Which statement correctly justifies the perpendicular bisector construction?",
+          "choices": [
+            "The arcs look symmetric, so the line must be perpendicular.",
+            "Any line through the midpoint is a perpendicular bisector.",
+            "Both constructed points are equidistant from the endpoints, and the locus of such points is exactly the perpendicular bisector.",
+            "The compass width was more than half the segment, which forces perpendicularity."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 2,
+          "prompt": "Which statement is a precise definition of a circle?",
+          "choices": [
+            "a closed curve with no corners",
+            "a shape whose area is πr²",
+            "a polygon with infinitely many sides",
+            "the set of all points in a plane at a fixed distance from a given centre point"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "A construction proceeds as follows. From vertex V draw an arc crossing both rays at P and Q. From P and Q draw equal arcs meeting at R. Draw ray VR. What has been constructed?",
+          "choices": [
+            "an equilateral triangle on PQ",
+            "the perpendicular bisector of PQ only",
+            "the bisector of the angle at V",
+            "a line perpendicular to one ray"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 2,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 8. What central angle does each side subtend?",
+          "choices": [
+            "30°",
+            "60°",
+            "120°",
+            "61°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the equilateral triangle construction on a given segment?",
+          "choices": [
+            "The construction works only when the segment is horizontal.",
+            "Both circles have radius equal to the segment, so all three sides are that same length.",
+            "The circles intersect, which guarantees 60° angles by definition.",
+            "The intersection point is the midpoint of the segment."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a angle?",
+          "choices": [
+            "a corner of a polygon",
+            "the figure formed by two rays sharing a common endpoint",
+            "the space between two intersecting lines",
+            "the amount of turn measured in degrees"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. With the compass set to the radius, mark successive arcs around the circle from a starting point, then join consecutive marks. What has been constructed?",
+          "choices": [
+            "an equilateral triangle inscribed in the circle",
+            "a square inscribed in the circle",
+            "a regular pentagon inscribed in the circle",
+            "a regular hexagon inscribed in the circle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 3. What central angle does each side subtend?",
+          "choices": [
+            "120°",
+            "30°",
+            "61°",
+            "60°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "Which statement correctly justifies the angle bisector construction?",
+          "choices": [
+            "Equal arcs always produce equal angles regardless of the triangle.",
+            "The construction builds two congruent triangles by SSS, so the angles at the vertex are congruent.",
+            "The ray drawn appears to split the angle evenly.",
+            "The construction relies on the angle being acute."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a line segment?",
+          "choices": [
+            "the set of two endpoints and all points between them on the line through them",
+            "a line with a measurable length",
+            "part of a line that goes on forever in one direction",
+            "the shortest path between two shapes"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "choices": [
+            "a line through P perpendicular to ℓ",
+            "the perpendicular bisector of the transversal",
+            "the reflection of ℓ across P",
+            "a line through P parallel to ℓ"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l16"
+  }
+}

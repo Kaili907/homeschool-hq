@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u09-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u09-l02",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "dayInUnit": 2,
+    "courseDay": 146,
+    "phase": "Concept model A",
+    "focus": "recognizing linear, quadratic, and exponential situations",
+    "title": "Concept model A: recognizing linear, quadratic, and exponential situations"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 1,
+          "prompt": "Does 100t ever fall behind 2^t?",
+          "workedSolution": {
+            "steps": [
+              "2^t doubles each step while 100t adds 100.",
+              "Doubling overtakes any fixed addition."
+            ],
+            "answer": "Yes, eventually"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 2,
+          "prompt": "In V(t) = 2000(0.9)^t, what is 0.9?",
+          "workedSolution": {
+            "steps": [
+              "It is the multiplier per year.",
+              "90% is retained, so 10% is lost."
+            ],
+            "answer": "the fraction retained each year"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 1,
+          "prompt": "A linear model passes through (3, -14) and (6, -23). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = -3x + 5",
+            "f(x) = -3x − 5",
+            "f(x) = 3x − 5",
+            "f(x) = -5x − 3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 1,
+          "prompt": "A table of successive outputs reads 8, 10, 12, 14. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Neither; the pattern does not repeat.",
+            "Quadratic; the second differences are constant.",
+            "Exponential; successive outputs have a constant ratio of 2.",
+            "Linear; successive outputs differ by a constant 2."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A population of 800 grows by 12% per year. Write the model P(t) and find the population after 4 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 800(0.12)^t; P(4) ≈ 0",
+            "P(t) = 800 + 12t; P(4) ≈ 848",
+            "P(t) = 800(1.12)^t; P(4) ≈ 1410",
+            "P(t) = 800(1.12)^t; P(4) ≈ 1259"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 1,
+          "prompt": "Quantity A grows by 50 units each year. Quantity B doubles or triples each year, with ratio 3, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "The two grow at the same eventual rate.",
+            "B exceeds A only if B starts larger than A.",
+            "A stays ahead permanently because 50 is larger than 3.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 2,
+          "prompt": "An asset's value is modelled by V(t) = 2000(0.95)^t, with t in years. What does 2000 represent?",
+          "choices": [
+            "the fraction of value retained each year, 0.95, meaning a 5% annual loss",
+            "the value of the asset when it was new, $2000",
+            "the number of years until the asset is worthless",
+            "the total value lost over the asset's life"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A linear model passes through (4, -14) and (9, -24). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = 2x − 6",
+            "f(x) = -2x + 6",
+            "f(x) = -6x − 2",
+            "f(x) = -2x − 6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 14, 18, 22, 26. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Quadratic; the second differences are constant.",
+            "Linear; successive outputs differ by a constant 4.",
+            "Neither; the pattern does not repeat.",
+            "Exponential; successive outputs have a constant ratio of 4."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A population of 2000 grows by 5% per year. Write the model P(t) and find the population after 8 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 2000(0.05)^t; P(8) ≈ 0",
+            "P(t) = 2000 + 5t; P(8) ≈ 2040",
+            "P(t) = 2000(1.05)^t; P(8) ≈ 3103",
+            "P(t) = 2000(1.05)^t; P(8) ≈ 2955"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 2,
+          "prompt": "Quantity A grows by 73 units each year. Quantity B doubles or triples each year, with ratio 2, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "A stays ahead permanently because 73 is larger than 2.",
+            "The two grow at the same eventual rate.",
+            "B exceeds A only if B starts larger than A.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u09-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u09-l02"
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u07-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u07-l02",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations and Inverse Functions",
+    "dayInUnit": 2,
+    "courseDay": 110,
+    "phase": "Concept model A",
+    "focus": "stretches, compressions, and reflections",
+    "title": "Concept model A: stretches, compressions, and reflections"
+  },
+  "standards": [
+    "F-BF.3",
+    "F-BF.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 1,
+          "prompt": "For f(x) = 2x + 1, find f⁻¹(f(5)).",
+          "workedSolution": {
+            "steps": [
+              "f(5) = 11.",
+              "f⁻¹(11) = (11 − 1)/2 = 5."
+            ],
+            "answer": "5"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "Classify f(x) = x³ − x.",
+          "workedSolution": {
+            "steps": [
+              "f(−x) = −x³ + x = −(x³ − x).",
+              "That is −f(x), so the function is odd."
+            ],
+            "answer": "odd"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 1,
+          "prompt": "The graph of y = f(x) is transformed to y = 5·f(x). Describe the transformation.",
+          "choices": [
+            "a vertical stretch by a factor of 5",
+            "a horizontal shift right by 5",
+            "a horizontal compression by a factor of 5",
+            "a vertical shift up by 5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 1,
+          "prompt": "Find the inverse of f(x) = -4x − 5.",
+          "choices": [
+            "f⁻¹(x) = (x + 5) / -4",
+            "f⁻¹(x) = 1 / (-4x − 5)",
+            "f⁻¹(x) = -4x + 5",
+            "f⁻¹(x) = (x − 5) / -4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "For f(x) = -4x − 1 and its inverse f⁻¹, evaluate f⁻¹(f(3)).",
+          "choices": [
+            "-13",
+            "3",
+            "2",
+            "-3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 1,
+          "prompt": "Classify f(x) = x⁴ − 3x² + 1 as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "neither even nor odd",
+            "even; its graph is symmetric about the y-axis",
+            "even; its graph is symmetric about the origin",
+            "odd; its graph is symmetric about the origin"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x) + 4. Describe the transformation.",
+          "choices": [
+            "a vertical shift up by 4",
+            "a vertical stretch by a factor of 4",
+            "a horizontal shift right by 4",
+            "a horizontal compression by a factor of 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "Find the inverse of f(x) = -5x − 3.",
+          "choices": [
+            "f⁻¹(x) = (x − 3) / -5",
+            "f⁻¹(x) = -5x + 3",
+            "f⁻¹(x) = 1 / (-5x − 3)",
+            "f⁻¹(x) = (x + 3) / -5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = 5x − 3 and its inverse f⁻¹, evaluate f⁻¹(f(-4)).",
+          "choices": [
+            "-4",
+            "4",
+            "-23",
+            "-7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "Classify f(x) = x⁵ + x³ as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the origin",
+            "neither even nor odd",
+            "even; its graph is symmetric about the y-axis",
+            "odd; its graph is symmetric about the origin"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x − 5). Describe the transformation.",
+          "choices": [
+            "a horizontal shift right by 5",
+            "a horizontal compression by a factor of 5",
+            "a vertical stretch by a factor of 5",
+            "a vertical shift up by 5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u07-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u07-l02"
+  }
+}

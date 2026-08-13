@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l06",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 6,
+    "courseDay": 6,
+    "phase": "Guided practice B",
+    "focus": "precision and estimation",
+    "title": "Guided practice B: precision and estimation"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "A square garden has an area of 73 square meters. Between which two consecutive whole numbers of meters is the side length?",
+          "workedSolution": {
+            "steps": [
+              "The side length is √73 meters.",
+              "8² = 64 and 9² = 81, and 64 < 73 < 81, so the side length is between 8 and 9 meters."
+            ],
+            "answer": "8 and 9"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "root-comparison-error-analysis",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "A student claims √59 > 8 because 59 > 8. Which statement correctly analyzes the claim?",
+          "choices": [
+            "The claim is correct; 59 > 8, so √59 > 8.",
+            "The claim is incorrect; √59 = 8 exactly.",
+            "The claim cannot be evaluated without a calculator.",
+            "The claim is incorrect; since 59 < 8² = 64, √59 < 8."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-rational-or-irrational",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "Classify 2/5 as rational or irrational.",
+          "choices": [
+            "rational",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "closure-classification",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A nonzero rational number (2/3) is multiplied by an irrational number (√28). Is the result rational or irrational?",
+          "choices": [
+            "cannot be determined without computing",
+            "irrational",
+            "rational",
+            "sometimes rational and sometimes irrational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "Write 0.533533... as a fraction in lowest terms.",
+          "choices": [
+            "533/9999",
+            "533/1998",
+            "533/999",
+            "534/999"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-error-analysis",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "A student writes 0.626262... = 62/100. Which statement best analyzes the claim?",
+          "choices": [
+            "The correct fraction is 62/99; the numerator should have one extra digit.",
+            "The claim is close; only the sign needs to be corrected.",
+            "The correct fraction is 62/99; the denominator should be 99 (nine repeated once per repeating digit), not 100.",
+            "The claim is correct; 62/100 equals 0.626262...."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "consecutive-integers-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Between which two consecutive whole numbers does √468 lie?",
+          "choices": [
+            "21 and 22",
+            "21 and 23",
+            "22 and 23",
+            "19 and 20"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "nearest-tenth-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Estimate √449 to the nearest tenth.",
+          "choices": [
+            "21.1",
+            "21.3",
+            "21.2",
+            "21.0"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "locate-root-on-number-line",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "On the number line, points A, B, C, and D are located at 14, 15, 16, 17. Which point is closest to √255?",
+          "choices": [
+            "B",
+            "D",
+            "C",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Compare √213 and 6.",
+          "choices": [
+            "√213 > 6",
+            "√213 = 6",
+            "√213 < 6",
+            "cannot be compared without a calculator"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "order-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Order √250, 11/3, 5 from least to greatest.",
+          "choices": [
+            "11/3 < 5 < √250",
+            "√250 < 5 < 11/3",
+            "5 < 11/3 < √250",
+            "11/3 < √250 < 5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l06"
+  }
+}

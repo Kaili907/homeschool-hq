@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l01",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 1,
+    "courseDay": 1,
+    "phase": "Launch and diagnostic",
+    "focus": "precise definitions of angle, circle, line, and segment",
+    "title": "Launch and diagnostic: precise definitions of angle, circle, line, and segment"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 1,
+          "prompt": "Define a circle precisely.",
+          "workedSolution": {
+            "steps": [
+              "Fix a centre and a distance.",
+              "Take every point in the plane at that distance."
+            ],
+            "answer": "the set of points at a fixed distance from a centre"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 1,
+          "prompt": "A construction proceeds as follows. With the compass set to the radius, mark successive arcs around the circle from a starting point, then join consecutive marks. What has been constructed?",
+          "choices": [
+            "a regular pentagon inscribed in the circle",
+            "a regular hexagon inscribed in the circle",
+            "a square inscribed in the circle",
+            "an equilateral triangle inscribed in the circle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 1,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 4. What central angle does each side subtend?",
+          "choices": [
+            "45°",
+            "90°",
+            "91°",
+            "180°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the angle bisector construction?",
+          "choices": [
+            "The construction relies on the angle being acute.",
+            "Equal arcs always produce equal angles regardless of the triangle.",
+            "The ray drawn appears to split the angle evenly.",
+            "The construction builds two congruent triangles by SSS, so the angles at the vertex are congruent."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 2,
+          "prompt": "Which statement is a precise definition of a angle?",
+          "choices": [
+            "the amount of turn measured in degrees",
+            "a corner of a polygon",
+            "the figure formed by two rays sharing a common endpoint",
+            "the space between two intersecting lines"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. From vertex V draw an arc crossing both rays at P and Q. From P and Q draw equal arcs meeting at R. Draw ray VR. What has been constructed?",
+          "choices": [
+            "the perpendicular bisector of PQ only",
+            "a line perpendicular to one ray",
+            "the bisector of the angle at V",
+            "an equilateral triangle on PQ"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 1,
+          "prompt": "A regular quadrilateral is inscribed in a circle of radius 2. What central angle does each side subtend?",
+          "choices": [
+            "45°",
+            "90°",
+            "180°",
+            "91°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the perpendicular bisector construction?",
+          "choices": [
+            "Both constructed points are equidistant from the endpoints, and the locus of such points is exactly the perpendicular bisector.",
+            "Any line through the midpoint is a perpendicular bisector.",
+            "The compass width was more than half the segment, which forces perpendicularity.",
+            "The arcs look symmetric, so the line must be perpendicular."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l01"
+  }
+}

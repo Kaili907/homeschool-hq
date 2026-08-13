@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l16",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l16",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 16,
+    "courseDay": 52,
+    "phase": "Unit assessment",
+    "focus": "comparison, factors, and multiples",
+    "title": "Unit assessment: comparison, factors, and multiples"
+  },
+  "standards": [
+    "4.OA.1",
+    "4.OA.2",
+    "4.OA.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 1,
+          "prompt": "How many whole-number factors does 18 have?",
+          "choices": [
+            "6",
+            "3",
+            "5",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 1,
+          "prompt": "What is the 4th multiple of 4?",
+          "choices": [
+            "12",
+            "16",
+            "20",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 18 is ___ times as many as 6.",
+          "choices": [
+            "12",
+            "6",
+            "3",
+            "18"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Mia has 12 trading cards. Jacob has 5 times as many cards as Mia. How many cards does Jacob have?",
+          "choices": [
+            "17",
+            "48",
+            "72",
+            "60"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 45 have?",
+          "choices": [
+            "7",
+            "3",
+            "5",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 6th multiple of 6?",
+          "choices": [
+            "12",
+            "42",
+            "36",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 20 is ___ times as many as 10.",
+          "choices": [
+            "2",
+            "3",
+            "20",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Liam has 11 trading cards. Sofia has 6 times as many cards as Liam. How many cards does Sofia have?",
+          "choices": [
+            "55",
+            "77",
+            "66",
+            "17"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "How many whole-number factors does 63 have?",
+          "choices": [
+            "7",
+            "5",
+            "3",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 11th multiple of 6?",
+          "choices": [
+            "60",
+            "17",
+            "66",
+            "72"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l16"
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l05",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 5,
+    "courseDay": 5,
+    "phase": "Concept model B",
+    "focus": "radical and rational-exponent notation and rewriting",
+    "title": "Concept model B: radical and rational-exponent notation and rewriting"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 1,
+          "prompt": "A pump moves 12 liters per minute. Express this rate in liters per hour.",
+          "workedSolution": {
+            "steps": [
+              "One minute is 1/60 of an hour, so one liter per minute is 60 liters per hour.",
+              "Multiply: 12 × 60 = 720.",
+              "The rate is 720 liters per hour."
+            ],
+            "answer": "720 liters per hour"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 2,
+          "prompt": "Rewrite ³√(x⁴) using a rational exponent.",
+          "workedSolution": {
+            "steps": [
+              "The index 3 is the denominator and the power 4 is the numerator.",
+              "³√(x⁴) = x^(4/3)."
+            ],
+            "answer": "x^(4/3)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Evaluate 4^(3/2) exactly.",
+          "choices": [
+            "8",
+            "12",
+            "16",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Write √135 in simplest radical form.",
+          "choices": [
+            "45",
+            "15√3",
+            "6√15",
+            "3√15"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 2,
+          "prompt": "Classify the sum of the rational number 8 and the irrational number √10 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "rational",
+            "both rational and irrational",
+            "irrational",
+            "undefined"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 2,
+          "prompt": "Option A delivers 15 units of output over 5 hours. Option B delivers 32 units over 8 hours. Which has the greater output per hour?",
+          "choices": [
+            "The two rates are equal.",
+            "Option A",
+            "Option B",
+            "There is not enough information without knowing the total hours available."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 2,
+          "prompt": "A rectangular plot measures 72.8 m by 20.9 m, each measured to the nearest tenth of a metre. Report the area to 1 decimal place.",
+          "choices": [
+            "187.4 m²",
+            "1521.520 m²",
+            "1521.5 m²",
+            "93.7 m²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 3,
+          "prompt": "You are building a model of the rate at which a reservoir is draining. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "hours per cubic metre",
+            "cubic metres",
+            "cubic metres per hour",
+            "metres per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "An irrigation pump operates at 54 liters per minute. Express this rate in liters per hour.",
+          "choices": [
+            "0.9 liters per hour",
+            "32400 liters per hour",
+            "54 liters per hour",
+            "3240 liters per hour"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 2,
+          "prompt": "Rewrite the index-4 radical expression 4√(x^2) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(8)",
+            "x^(1/2)",
+            "x^(-2)",
+            "x^(2)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Evaluate 4^(1) exactly.",
+          "choices": [
+            "4",
+            "5",
+            "6",
+            "8"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l05"
+  }
+}

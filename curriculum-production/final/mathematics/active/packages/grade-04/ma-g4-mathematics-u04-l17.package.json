@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 17,
+    "courseDay": 71,
+    "phase": "Targeted correction and reassessment",
+    "focus": "partial products and place-value alignment",
+    "title": "Targeted correction and reassessment: partial products and place-value alignment"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.5"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 1,
+          "prompt": "A parking garage has 5 levels with 32 spots each, plus 8 street spots. How many total spots?",
+          "workedSolution": {
+            "steps": [
+              "5 × 32 = 160.",
+              "160 + 8 = 168."
+            ],
+            "answer": "168"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 6 × 47. Split 47 into 40 and 7.",
+          "workedSolution": {
+            "steps": [
+              "6 × 40 = 240.",
+              "6 × 7 = 42.",
+              "240 + 42 = 282."
+            ],
+            "answer": "282"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Find 5 × 357 using partial products.",
+          "choices": [
+            "1750",
+            "1780",
+            "1785",
+            "1500"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 5 sections with 16 seats each, but 22 seats are roped off for repairs. How many usable seats remain?",
+          "choices": [
+            "58",
+            "43",
+            "80",
+            "102"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 2 × 17. Split 17 into 10 and 7.",
+          "choices": [
+            "14",
+            "34",
+            "20",
+            "27"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 5 × 278 using partial products.",
+          "choices": [
+            "1390",
+            "1385",
+            "1000",
+            "1350"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 3 sections with 29 seats each, but 23 seats are roped off for repairs. How many usable seats remain?",
+          "choices": [
+            "55",
+            "87",
+            "64",
+            "110"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 4 × 53. Split 53 into 50 and 3.",
+          "choices": [
+            "200",
+            "212",
+            "12",
+            "203"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l17"
+  }
+}

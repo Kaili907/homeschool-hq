@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u07-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u07-l03",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Circles, Angles, Area, and Surface Area",
+    "dayInUnit": 3,
+    "courseDay": 111,
+    "phase": "Guided practice A",
+    "focus": "angle relationships",
+    "title": "Guided practice A: angle relationships"
+  },
+  "standards": [
+    "7.G.4",
+    "7.G.5",
+    "7.G.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "complementary-supplementary-angle",
+          "standard": "7.G.5",
+          "difficulty": 1,
+          "prompt": "Two angles are supplementary. One measures 125°. What is the measure of the other angle?",
+          "workedSolution": {
+            "steps": [
+              "Supplementary angles sum to 180°.",
+              "Subtract the known angle: 180 − 125 = 55°."
+            ],
+            "answer": "55°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "vertical-angles-with-expressions",
+          "standard": "7.G.5",
+          "difficulty": 1,
+          "prompt": "Two lines intersect, forming vertical angles that measure (4x + 4)° and (3x + 7)°. Vertical angles are congruent. Find the value of x and the measure of the angles.",
+          "choices": [
+            "x = 3, each angle measures 16°",
+            "x = 2, each angle measures 12°",
+            "x = 3, each angle measures 6°",
+            "x = 3, each angle measures 26°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "angle-equation-multistep",
+          "standard": "7.G.5",
+          "difficulty": 1,
+          "prompt": "Two angles are supplementary. Their measures are (3x + 3)° and (2x + 167)°. Find the value of x and the measure of each angle.",
+          "choices": [
+            "x = 1, angles measure 6° and 174°",
+            "x = 2, angles measure 9° and 171°",
+            "x = 2, angles measure 171° and 9°",
+            "x = 2, angles measure 9° and 9°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "angles-on-a-line-or-around-a-point",
+          "standard": "7.G.5",
+          "difficulty": 2,
+          "prompt": "The angles around a point measure 94°, 76°, 85°, 32°, and x°. What is the value of x?",
+          "choices": [
+            "72°",
+            "73°",
+            "83°",
+            "75°"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "area-of-composite-figure",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A room shaped like an L is made from a 17-by-15 rectangle with a 4-by-5 rectangular corner cut out. What is the area of the room, in square units?",
+          "choices": [
+            "234",
+            "236",
+            "235",
+            "237"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "missing-dimension-from-area",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangle has an area of 72 square units and a width of 8 units. What is its exact length, in units?",
+          "choices": [
+            "11",
+            "72",
+            "8",
+            "9"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "surface-area-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "A rectangular prism has length 11, width 10, and height 3 (all in units). What is its exact surface area, in square units?",
+          "choices": [
+            "330",
+            "346",
+            "173",
+            "349"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-rectangular-prism",
+          "standard": "7.G.6",
+          "difficulty": 2,
+          "prompt": "What is the exact volume of a rectangular prism with length 5, width 13, and height 8 (units)? Give your answer in cubic units.",
+          "choices": [
+            "418 cubic units",
+            "520 cubic units",
+            "519 cubic units",
+            "523 cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "circumference-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 3,
+          "prompt": "A circle has a radius of 11 m. What is its exact circumference? Express your answer as a multiple of π.",
+          "choices": [
+            "11π m",
+            "22π m",
+            "23π m",
+            "25π m"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u07-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "find-radius-or-diameter-from-circumference",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a circumference of 23π m. What is its exact radius?",
+          "choices": [
+            "10 1/2 m",
+            "11 1/2 m",
+            "23 m",
+            "5 3/4 m"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u07-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "area-of-circle-from-radius-or-diameter",
+          "standard": "7.G.4",
+          "difficulty": 2,
+          "prompt": "A circle has a diameter of 14 in. What is its exact area? Express your answer as a multiple of π (use a fraction for the coefficient if it is not a whole number).",
+          "choices": [
+            "52π in²",
+            "196π in²",
+            "51π in²",
+            "49π in²"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u07-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u07-l03"
+  }
+}

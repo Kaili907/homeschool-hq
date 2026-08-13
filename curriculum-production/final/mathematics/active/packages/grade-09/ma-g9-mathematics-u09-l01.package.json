@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u09-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u09-l01",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Linear, Quadratic, and Exponential Models",
+    "dayInUnit": 1,
+    "courseDay": 145,
+    "phase": "Launch and diagnostic",
+    "focus": "constant rate of change versus constant ratio",
+    "title": "Launch and diagnostic: constant rate of change versus constant ratio"
+  },
+  "standards": [
+    "F-LE.1",
+    "F-LE.2",
+    "F-LE.3",
+    "F-LE.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 1,
+          "prompt": "Is 3, 6, 12, 24 linear or exponential?",
+          "workedSolution": {
+            "steps": [
+              "Differences 3, 6, 12 are not constant.",
+              "Ratios 2, 2, 2 are constant."
+            ],
+            "answer": "Exponential with ratio 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 1,
+          "prompt": "A population of 1000 grows by 7% per year. Write the model P(t) and find the population after 5 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 1000(0.07)^t; P(5) ≈ 0",
+            "P(t) = 1000(1.07)^t; P(5) ≈ 1501",
+            "P(t) = 1000 + 7t; P(5) ≈ 1035",
+            "P(t) = 1000(1.07)^t; P(5) ≈ 1403"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 1,
+          "prompt": "Quantity A grows by 73 units each year. Quantity B doubles or triples each year, with ratio 3, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "The two grow at the same eventual rate.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "A stays ahead permanently because 73 is larger than 3.",
+            "B exceeds A only if B starts larger than A."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-model-parameters",
+          "standard": "F-LE.5",
+          "difficulty": 2,
+          "prompt": "An asset's value is modelled by V(t) = 1800(0.97)^t, with t in years. What does 0.97 represent?",
+          "choices": [
+            "the number of years until the asset is worthless",
+            "the total value lost over the asset's life",
+            "the value of the asset when it was new, $1800",
+            "the fraction of value retained each year, 0.97, meaning a 3% annual loss"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "write-linear-model-from-two-points",
+          "standard": "F-LE.2",
+          "difficulty": 2,
+          "prompt": "A linear model passes through (6, -9) and (10, -17). Write it in the form f(x) = mx + b.",
+          "choices": [
+            "f(x) = 3x − 2",
+            "f(x) = 2x + 3",
+            "f(x) = -2x − 3",
+            "f(x) = -2x + 3"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-or-exponential",
+          "standard": "F-LE.1",
+          "difficulty": 3,
+          "prompt": "A table of successive outputs reads 9, 36, 144, 576. Is the relationship linear or exponential, and why?",
+          "choices": [
+            "Linear; successive outputs differ by a constant 4.",
+            "Quadratic; the second differences are constant.",
+            "Exponential; successive outputs have a constant ratio of 4.",
+            "Neither; the pattern does not repeat."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u09-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "write-exponential-model",
+          "standard": "F-LE.2",
+          "difficulty": 1,
+          "prompt": "A population of 600 grows by 8% per year. Write the model P(t) and find the population after 5 years, to the nearest whole number.",
+          "choices": [
+            "P(t) = 600(1.08)^t; P(5) ≈ 882",
+            "P(t) = 600(1.08)^t; P(5) ≈ 952",
+            "P(t) = 600 + 8t; P(5) ≈ 640",
+            "P(t) = 600(0.08)^t; P(5) ≈ 0"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u09-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-growth-rates",
+          "standard": "F-LE.3",
+          "difficulty": 2,
+          "prompt": "Quantity A grows by 56 units each year. Quantity B doubles or triples each year, with ratio 2, starting from a much smaller value. Which statement is true in the long run?",
+          "choices": [
+            "A stays ahead permanently because 56 is larger than 2.",
+            "The two grow at the same eventual rate.",
+            "B eventually exceeds A and stays ahead, however large A’s constant increase is.",
+            "B exceeds A only if B starts larger than A."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u09-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u09-l01"
+  }
+}

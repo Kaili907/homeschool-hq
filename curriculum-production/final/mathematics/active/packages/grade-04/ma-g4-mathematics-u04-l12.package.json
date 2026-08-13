@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l12",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l12",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 12,
+    "courseDay": 66,
+    "phase": "Applied problem solving",
+    "focus": "estimating products to check reasonableness",
+    "title": "Applied problem solving: estimating products to check reasonableness"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.5",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Find 4 × 326 using partial products.",
+          "workedSolution": {
+            "steps": [
+              "4 × 300 = 1200.",
+              "4 × 20 = 80.",
+              "4 × 6 = 24.",
+              "1200 + 80 + 24 = 1304."
+            ],
+            "answer": "1304"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 2,
+          "prompt": "A theater has 7 sections with 25 seats each, plus 28 extra folding chairs. How many total seats are there?",
+          "choices": [
+            "175",
+            "203",
+            "147",
+            "60"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 8 × 14. Split 14 into 10 and 4.",
+          "choices": [
+            "80",
+            "84",
+            "32",
+            "112"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 5 × 114 using partial products.",
+          "choices": [
+            "565",
+            "570",
+            "550",
+            "500"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 7 sections with 11 seats each, but 25 seats are roped off for repairs. How many usable seats remain?",
+          "choices": [
+            "102",
+            "77",
+            "52",
+            "43"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 8 × 25. Split 25 into 20 and 5.",
+          "choices": [
+            "200",
+            "40",
+            "165",
+            "160"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 7 × 257 using partial products.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multistep-word-problem-multiplication",
+          "standard": "4.OA.3",
+          "difficulty": 3,
+          "prompt": "A theater has 5 sections with 50 seats each, but 64 seats are roped off for repairs. How many usable seats remain?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l12"
+  }
+}

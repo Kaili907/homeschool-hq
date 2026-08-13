@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u01-l11",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u01-l11",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits, Place Value, and Rounding",
+    "dayInUnit": 11,
+    "courseDay": 11,
+    "phase": "Concept extension",
+    "focus": "subtraction with regrouping across zeros",
+    "title": "Concept extension: subtraction with regrouping across zeros"
+  },
+  "standards": [
+    "3.NBT.2",
+    "MP.1"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "mathematical-habits-strategy-choice",
+          "standard": "MP.1",
+          "difficulty": 1,
+          "prompt": "You are not sure a word problem is asking you to add or subtract. What should you do first?",
+          "workedSolution": {
+            "steps": [
+              "Reread the problem and picture what is happening.",
+              "Decide whether the total is growing or shrinking.",
+              "Only then choose the operation."
+            ],
+            "answer": "Reread the problem, picture the situation, and decide whether the amount is growing or shrinking."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A toy store had 540 stickers. They received 167 more stickers. How many stickers are there now?",
+          "choices": [
+            "717",
+            "697",
+            "373",
+            "707"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A toy store had 597 stickers. 475 stickers were given away. How many stickers are left?",
+          "choices": [
+            "132",
+            "222",
+            "1072",
+            "122"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "mathematical-habits-strategy-choice",
+          "standard": "MP.1",
+          "difficulty": 2,
+          "prompt": "You solved a problem, but the answer seems much too large for the situation. What should you do?",
+          "choices": [
+            "Check the answer against the situation and rework any step that does not make sense.",
+            "Skip the problem without trying it.",
+            "Multiply every number in the problem together.",
+            "Guess an answer and move on to the next problem."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 2,
+          "prompt": "A library had 294 books. They received 153 more books. How many books are there now?",
+          "choices": [
+            "437",
+            "457",
+            "447",
+            "141"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A library had 768 books. 338 books were given away. How many books are left?",
+          "choices": [
+            "1106",
+            "430",
+            "440",
+            "530"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "mathematical-habits-strategy-choice",
+          "standard": "MP.1",
+          "difficulty": 3,
+          "prompt": "You read a word problem and are not sure what it is asking. What should you do first?",
+          "choices": [
+            "Restate the problem in your own words and identify what question is being asked.",
+            "Guess an answer and move on to the next problem.",
+            "Multiply every number in the problem together.",
+            "Skip the problem without trying it."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "add-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A farm had 219 apples. They received 308 more apples. How many apples are there now?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "subtract-within-1000",
+          "standard": "3.NBT.2",
+          "difficulty": 3,
+          "prompt": "A toy store had 436 stickers. 354 stickers were given away. How many stickers are left?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u01-l11"
+  }
+}

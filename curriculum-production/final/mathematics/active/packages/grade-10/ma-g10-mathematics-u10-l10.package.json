@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u10-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u10-l10",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Measurement, Modeling, and Design Capstone",
+    "dayInUnit": 10,
+    "courseDay": 172,
+    "phase": "Discussion or problem seminar",
+    "focus": "modeling physical objects with geometric shapes",
+    "title": "Discussion or problem seminar: modeling physical objects with geometric shapes"
+  },
+  "standards": [
+    "G-GMD.1",
+    "G-GMD.3",
+    "G-GMD.4",
+    "G-MG.1",
+    "G-MG.2",
+    "G-MG.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "density-modelling",
+          "standard": "G-MG.2",
+          "difficulty": 1,
+          "prompt": "Mass 48 g, volume 6 cm³. Density and float?",
+          "workedSolution": {
+            "steps": [
+              "48 ÷ 6 = 8 g/cm³.",
+              "8 > 1, so it sinks."
+            ],
+            "answer": "8 g/cm³; it would sink"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "design-constraint-modelling",
+          "standard": "G-MG.3",
+          "difficulty": 2,
+          "prompt": "A square patio of side 9 m is to be paved at $3 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+          "choices": [
+            "$108; the cost is proportional to the perimeter",
+            "$243; the cost is proportional to the area",
+            "$243; the cost is proportional to the side length",
+            "$27; the cost is proportional to the area"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-solid",
+          "standard": "G-GMD.3",
+          "difficulty": 3,
+          "prompt": "Find the volume of a square pyramid with base edge 3 and height 7. Leave π in the answer where it appears.",
+          "choices": [
+            "63π/3",
+            "63",
+            "63π",
+            "63/3"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "cross-section-identification",
+          "standard": "G-GMD.4",
+          "difficulty": 3,
+          "prompt": "Describe the cross-section formed by a square pyramid cut by a plane parallel to its base.",
+          "choices": [
+            "a circle",
+            "a triangle",
+            "a rectangle",
+            "a square"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "density-modelling",
+          "standard": "G-MG.2",
+          "difficulty": 3,
+          "prompt": "A solid object has mass 180 g and volume 18 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+          "choices": [
+            "10 g/cm³; it would float",
+            "10 g/cm³; it would sink",
+            "3240 g/cm³; it would sink",
+            "0.1 g/cm³; it would float"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "design-constraint-modelling",
+          "standard": "G-MG.3",
+          "difficulty": 3,
+          "prompt": "A square patio of side 12 m is to be paved at $17 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+          "choices": [
+            "$204; the cost is proportional to the area",
+            "$2448; the cost is proportional to the side length",
+            "$2448; the cost is proportional to the area",
+            "$816; the cost is proportional to the perimeter"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-solid",
+          "standard": "G-GMD.3",
+          "difficulty": 3,
+          "prompt": "Find the volume of a square pyramid with base edge 4 and height 12. Leave π in the answer where it appears.",
+          "choices": [
+            "192",
+            "192π",
+            "192/3",
+            "192π/3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "cross-section-identification",
+          "standard": "G-GMD.4",
+          "difficulty": 3,
+          "prompt": "Describe the cross-section formed by a sphere cut by any plane that meets it in more than one point.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "density-modelling",
+          "standard": "G-MG.2",
+          "difficulty": 3,
+          "prompt": "A solid object has mass 132 g and volume 11 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u10-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u10-l10"
+  }
+}

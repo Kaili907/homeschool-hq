@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u04-l01",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Systems of Linear Equations and Inequalities",
+    "dayInUnit": 1,
+    "courseDay": 55,
+    "phase": "Launch and diagnostic",
+    "focus": "proving that replacement by a sum preserves the solution set",
+    "title": "Launch and diagnostic: proving that replacement by a sum preserves the solution set"
+  },
+  "standards": [
+    "A-REI.5",
+    "A-REI.6",
+    "A-REI.12",
+    "MP.1"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 1,
+          "prompt": "Solve 2x + 3y = 12 and x − y = 1.",
+          "workedSolution": {
+            "steps": [
+              "From the second, x = y + 1.",
+              "2(y + 1) + 3y = 12 gives 5y = 10, y = 2.",
+              "x = 3."
+            ],
+            "answer": "(3, 2)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-system-solution-count",
+          "standard": "A-REI.6",
+          "difficulty": 1,
+          "prompt": "How many solutions does this system have?\n  -2x + 2y = -6\n  -8x + 8y = -19",
+          "choices": [
+            "infinitely many solutions",
+            "no solution",
+            "exactly two solutions",
+            "exactly one solution"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "half-plane-membership",
+          "standard": "A-REI.12",
+          "difficulty": 1,
+          "prompt": "Is the point (-4, -3) in the solution region of 2x + 3y ≤ 7?",
+          "choices": [
+            "The region cannot be tested without graphing it first.",
+            "Yes; substituting gives -17 ≤ 7.",
+            "Only points on the boundary line are in the solution region.",
+            "No; substituting gives -17, which is greater than 7."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "linear-combination-equivalence",
+          "standard": "A-REI.5",
+          "difficulty": 2,
+          "prompt": "A student replaces the second equation of a system with (second equation) + 2 × (first equation). Which statement is correct?",
+          "choices": [
+            "The new system may gain solutions that the original did not have.",
+            "The new system has exactly the same solution set, because the replacement step is reversible.",
+            "The new system may lose solutions that the original had.",
+            "The new system is equivalent only when 2 is 1."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-substitution",
+          "standard": "A-REI.6",
+          "difficulty": 2,
+          "prompt": "Solve by substitution:\n  y = 1x − 6\n  -5x − 4y = -21",
+          "choices": [
+            "(6, -1)",
+            "(-1, 5)",
+            "(5, 11)",
+            "(5, -1)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-by-elimination",
+          "standard": "A-REI.6",
+          "difficulty": 3,
+          "prompt": "Solve the system exactly:\n  -4x + 6y = -76\n  -2x + 7y = -70",
+          "choices": [
+            "(8, -8)",
+            "(-7, 8)",
+            "(-8, 7)",
+            "(7, -8)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u04-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-system-solution-count",
+          "standard": "A-REI.6",
+          "difficulty": 1,
+          "prompt": "How many solutions does this system have?\n  4x + 5y = -3\n  8x + 10y = -1",
+          "choices": [
+            "infinitely many solutions",
+            "no solution",
+            "exactly one solution",
+            "exactly two solutions"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u04-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "half-plane-membership",
+          "standard": "A-REI.12",
+          "difficulty": 2,
+          "prompt": "Is the point (-1, 1) in the solution region of 3x − 4y ≤ -6?",
+          "choices": [
+            "The region cannot be tested without graphing it first.",
+            "Only points on the boundary line are in the solution region.",
+            "Yes; substituting gives -7 ≤ -6.",
+            "No; substituting gives -7, which is greater than -6."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u04-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u04-l01"
+  }
+}

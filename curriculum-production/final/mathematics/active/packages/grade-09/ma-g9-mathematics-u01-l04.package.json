@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l04",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 4,
+    "courseDay": 4,
+    "phase": "Independent application A",
+    "focus": "extending integer exponents to rational exponents",
+    "title": "Independent application A: extending integer exponents to rational exponents"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 1,
+          "prompt": "A plot measures 12.4 m by 5.3 m. Report the area to one decimal place.",
+          "workedSolution": {
+            "steps": [
+              "12.4 × 5.3 = 65.72 m².",
+              "The measurements carry one decimal place.",
+              "Report 65.7 m²."
+            ],
+            "answer": "65.7 m²"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 2,
+          "prompt": "You are building a model of the fuel efficiency of a delivery van. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "litres per hour",
+            "kilometres per litre",
+            "litres",
+            "kilometres"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 2,
+          "prompt": "A bottling line operates at 21 grams per second. Express this rate in kilograms per hour.",
+          "choices": [
+            "75.6 kilograms per hour",
+            "21 kilograms per hour",
+            "5.83 kilograms per hour",
+            "756 kilograms per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 2,
+          "prompt": "Rewrite the square root expression √(x^4) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(1/2)",
+            "x^(8)",
+            "x^(2)",
+            "4x^(1/2)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Evaluate 25^(2) exactly.",
+          "choices": [
+            "625",
+            "50",
+            "3125",
+            "100"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 3,
+          "prompt": "Write √180 in simplest radical form.",
+          "choices": [
+            "6√5",
+            "30",
+            "5√6",
+            "12√5"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 3,
+          "prompt": "Classify the product of the rational number 0 and the irrational number √6 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "undefined",
+            "both rational and irrational",
+            "irrational",
+            "rational"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "Option A delivers 30 units of output over 10 hours. Option B delivers 14 units over 7 hours. Which has the greater output per hour?",
+          "choices": [
+            "The two rates are equal.",
+            "Option B",
+            "Option A",
+            "There is not enough information without knowing the total hours available."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 3,
+          "prompt": "A rectangular plot measures 70.6 m by 24.1 m, each measured to the nearest tenth of a metre. Report the area to 2 decimal places.",
+          "choices": [
+            "189.40 m²",
+            "1701.46 m²",
+            "1701.4600 m²",
+            "94.70 m²"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 2,
+          "prompt": "You are building a model of the population density of a county. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "square kilometres",
+            "people",
+            "people per kilometre",
+            "people per square kilometre"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "A bottling line operates at 8 grams per second. Express this rate in kilograms per hour.",
+          "choices": [
+            "28.8 kilograms per hour",
+            "2.22 kilograms per hour",
+            "8 kilograms per hour",
+            "288 kilograms per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 3,
+          "prompt": "Rewrite the square root expression √(x^6) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(4)",
+            "x^(3)",
+            "x^(1/3)",
+            "x^(12)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l04"
+  }
+}

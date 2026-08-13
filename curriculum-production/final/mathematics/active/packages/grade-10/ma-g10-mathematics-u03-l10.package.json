@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u03-l10",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Congruence and Triangle Criteria",
+    "dayInUnit": 10,
+    "courseDay": 46,
+    "phase": "Discussion or problem seminar",
+    "focus": "deriving ASA, SAS, and SSS from rigid motion",
+    "title": "Discussion or problem seminar: deriving ASA, SAS, and SSS from rigid motion"
+  },
+  "standards": [
+    "G-CO.6",
+    "G-CO.7",
+    "G-CO.8",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 1,
+          "prompt": "△ABC ≅ △DEF, ∠A = 50°, ∠B = 60°. Find ∠F.",
+          "workedSolution": {
+            "steps": [
+              "∠F corresponds to ∠C.",
+              "∠C = 180 − 50 − 60 = 70°."
+            ],
+            "answer": "70°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "rigid-motion-defines-congruence",
+          "standard": "G-CO.6",
+          "difficulty": 2,
+          "prompt": "A rigid motion is a transformation that …",
+          "choices": [
+            "maps every figure to a similar figure",
+            "preserves area but may change side lengths",
+            "preserves shape but may change size",
+            "preserves distance and angle measure"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "In two triangles, two pairs of corresponding angles and the pair of included sides are congruent. Which congruence criterion applies?",
+          "choices": [
+            "SAS",
+            "AAS",
+            "ASA",
+            "SSS"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "why-ssa-is-not-a-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "Two triangles share two pairs of congruent sides and a pair of congruent angles that are not between those sides. Why does this fail to prove congruence?",
+          "choices": [
+            "The angle must be a right angle for any criterion to apply.",
+            "Two sides are never enough information under any circumstances.",
+            "The triangles are congruent, but the criterion is simply named differently.",
+            "The unknown side can close the triangle in two different ways, producing one acute and one obtuse triangle from the same measurements."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is congruent to triangle DEF. In triangle ABC, ∠A = 37° and ∠B = 75°. Find ∠F.",
+          "choices": [
+            "112°",
+            "68°",
+            "37°",
+            "75°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rigid-motion-defines-congruence",
+          "standard": "G-CO.6",
+          "difficulty": 3,
+          "prompt": "If a sequence of rigid motions maps △ABC onto △DEF, then …",
+          "choices": [
+            "the triangles have equal area but need not be congruent",
+            "every pair of corresponding sides and angles is congruent",
+            "only the corresponding angles are congruent",
+            "only the corresponding sides are congruent"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "select-congruence-criterion",
+          "standard": "G-CO.8",
+          "difficulty": 3,
+          "prompt": "In two triangles, two pairs of corresponding angles and a pair of non-included sides are congruent. Which congruence criterion applies?",
+          "choices": [
+            "AAS",
+            "ASA",
+            "SSS",
+            "SAS"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u03-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is congruent to triangle DEF. In triangle ABC, ∠A = 67° and ∠B = 46°. Find ∠F.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u03-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "corresponding-parts-value",
+          "standard": "G-CO.7",
+          "difficulty": 3,
+          "prompt": "Triangle ABC is congruent to triangle DEF. In triangle ABC, ∠A = 53° and ∠B = 27°. Find ∠F.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u03-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u03-l10"
+  }
+}

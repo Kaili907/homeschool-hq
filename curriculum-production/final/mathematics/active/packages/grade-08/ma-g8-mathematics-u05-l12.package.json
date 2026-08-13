@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u05-l12",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u05-l12",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Functions",
+    "dayInUnit": 12,
+    "courseDay": 88,
+    "phase": "Performance task build",
+    "focus": "qualitative graph interpretation",
+    "title": "Performance task build: qualitative graph interpretation"
+  },
+  "standards": [
+    "8.F.1",
+    "8.F.2",
+    "8.F.3",
+    "8.F.4",
+    "8.F.5"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "match-graph-description-to-scenario",
+          "standard": "8.F.5",
+          "difficulty": 2,
+          "prompt": "A plant grows at a steady rate the entire time it is measured. Which description best matches the shape of the graph over time?",
+          "choices": [
+            "increasing, then constant, then decreasing",
+            "increasing at a constant rate the whole time",
+            "constant, then increasing",
+            "decreasing at a constant rate the whole time"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-interval-behavior",
+          "standard": "8.F.5",
+          "difficulty": 3,
+          "prompt": "A graph shows height over time.\nFrom t = 0 to t = 2, height goes from 10 to 11.\nFrom t = 2 to t = 7, height goes from 11 to 11.\nFrom t = 7 to t = 8, height goes from 11 to 10.\nWhich interval shows the height constant?",
+          "choices": [
+            "t = 2 to t = 7",
+            "t = 7 to t = 8",
+            "t = 0 to t = 2",
+            "No interval shows this behavior."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "is-relation-a-function",
+          "standard": "8.F.1",
+          "difficulty": 2,
+          "prompt": "Consider the relation {(-10, 4), (9, -4), (2, 8), (2, 7)}. Is this relation a function?",
+          "choices": [
+            "Yes, this relation is a function.",
+            "No, this relation is not a function.",
+            "Cannot be determined from the given pairs.",
+            "It is a function only if every output is different."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "function-graph-as-pairs",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Which set of ordered pairs does NOT represent a function?",
+          "choices": [
+            "{(-15, -9), (-4, 5), (0, -15), (6, -16)}",
+            "{(4, -16), (7, -13), (9, -3), (8, 5)}",
+            "{(13, 9), (10, -6), (-14, 2), (10, 14)}",
+            "{(5, 15), (-4, -14), (7, 0), (-15, 13)}"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Given f(x) = 5x + 21, find f(5).",
+          "choices": [
+            "49",
+            "46",
+            "47",
+            "45"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "find-input-from-output",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -2x + 10, find the value of x for which f(x) = 16.",
+          "choices": [
+            "-3",
+            "-2",
+            "-1",
+            "-4"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-rate-of-change",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function B is given by f(x) = 6x - 12. Function A is given by the table:\nx: 3, 4\ny: -34, -39\nWhich function has the greater rate of change?",
+          "choices": [
+            "They have the same rate of change.",
+            "Function A",
+            "Function B",
+            "Cannot be determined from the given information."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-value-at-x",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function B is given by f(x) = -3x - 3. Function A starts at 10 and decreases by 6 each unit. Which function has the greater value when x = 6?",
+          "choices": [
+            "The two functions have equal values at that input.",
+            "Function A",
+            "Cannot be determined without a graph.",
+            "Function B"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "classify-linear-from-table",
+          "standard": "8.F.3",
+          "difficulty": 3,
+          "prompt": "A table shows:\nx: 1, 4, 7, 10\ny: 3, -6, -15, -24\nIs the relationship linear or nonlinear?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "classify-linear-from-equation",
+          "standard": "8.F.3",
+          "difficulty": 3,
+          "prompt": "Classify the equation y = -8x - 3 as linear or nonlinear.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u05-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u05-l12"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u08-l11",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u08-l11",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Probability, Independence, and Conditional Reasoning",
+    "dayInUnit": 11,
+    "courseDay": 137,
+    "phase": "Performance task planning",
+    "focus": "building and reading two-way frequency tables",
+    "title": "Performance task planning: building and reading two-way frequency tables"
+  },
+  "standards": [
+    "S-CP.1",
+    "S-CP.2",
+    "S-CP.3",
+    "S-CP.4",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u08-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "conditional-probability-from-table",
+          "standard": "S-CP.4",
+          "difficulty": 1,
+          "prompt": "Group X: 12 successes, 8 failures. Find P(success | X).",
+          "workedSolution": {
+            "steps": [
+              "Group X has 20 people.",
+              "12/20 = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u08-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "test-for-independence",
+          "standard": "S-CP.2",
+          "difficulty": 2,
+          "prompt": "Two events have P(A) = 8/10, P(B) = 9/10, and P(A and B) = 77/100. Are A and B independent?",
+          "choices": [
+            "No; P(A and B) differs from P(A)·P(B).",
+            "Yes; P(A and B) equals P(A)·P(B).",
+            "No; the two events are mutually exclusive.",
+            "Yes; the two events cannot occur together."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "union-and-intersection-probability",
+          "standard": "S-CP.1",
+          "difficulty": 2,
+          "prompt": "In a group of 38, 20 do activity A, 20 do activity B, and 10 do both. Find P(A or B) as a fraction in lowest terms.",
+          "choices": [
+            "20/19",
+            "10/19",
+            "5/19",
+            "15/19"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "complement-and-at-least-one",
+          "standard": "S-CP.3",
+          "difficulty": 3,
+          "prompt": "An event has probability 6/7 on a single trial. Two independent trials are run. Find the probability of at least one success, as a fraction in lowest terms.",
+          "choices": [
+            "36/49",
+            "48/49",
+            "1/49",
+            "12/7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u08-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "conditional-probability-from-table",
+          "standard": "S-CP.4",
+          "difficulty": 3,
+          "prompt": "A survey table records: group X with 28 successes and 21 failures; group Y with 40 successes and 29 failures. Find P(success | group X) as a fraction in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "test-for-independence",
+          "standard": "S-CP.2",
+          "difficulty": 3,
+          "prompt": "Two events have P(A) = 8/10, P(B) = 6/10, and P(A and B) = 48/100. Are A and B independent?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u08-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "union-and-intersection-probability",
+          "standard": "S-CP.1",
+          "difficulty": 3,
+          "prompt": "In a group of 62, 32 do activity A, 40 do activity B, and 17 do both. Find P(A or B) as a fraction in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u08-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u08-l11"
+  }
+}

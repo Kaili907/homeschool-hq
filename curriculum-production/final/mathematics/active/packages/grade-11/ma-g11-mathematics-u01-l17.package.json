@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u01-l17",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u01-l17",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Polynomial Arithmetic, Identities, and Zeros",
+    "dayInUnit": 17,
+    "courseDay": 17,
+    "phase": "Targeted correction",
+    "focus": "proving polynomial identities",
+    "title": "Targeted correction: proving polynomial identities"
+  },
+  "standards": [
+    "A-APR.1",
+    "A-APR.2",
+    "A-APR.3",
+    "A-APR.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 1,
+          "prompt": "Expand (2x + 3)(x − 5).",
+          "workedSolution": {
+            "steps": [
+              "2x² − 10x + 3x − 15.",
+              "Collect: 2x² − 7x − 15."
+            ],
+            "answer": "2x² − 7x − 15"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 2,
+          "prompt": "Remainder when x² + 2x − 3 is divided by (x − 2)?",
+          "workedSolution": {
+            "steps": [
+              "Evaluate at x = 2.",
+              "4 + 4 − 3 = 5."
+            ],
+            "answer": "5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 1,
+          "prompt": "A cubic polynomial factors as (x + 3)(x − 2)(x − 4). List its zeros in increasing order.",
+          "choices": [
+            "-3, 2, 4",
+            "-3, 4, 2",
+            "-2, 3, 5",
+            "-4, -2, 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 2,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 2 and y = 2 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "0, 8, 8",
+            "0, 4, 8",
+            "0, 0, 8",
+            "2, 2, 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 2,
+          "prompt": "Expand and simplify: (1x + 4)(-4x + 3).",
+          "choices": [
+            "-4x^2 - 13x + 12",
+            "-4x^2 + 19x + 12",
+            "-4x^2 + 12x",
+            "-3x^2 - 13x + 7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 3,
+          "prompt": "Find the remainder when 8x^2 - x - 6 is divided by (x + 5).",
+          "choices": [
+            "1",
+            "199",
+            "189",
+            "211"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 2,
+          "prompt": "A cubic polynomial factors as (x + 2)(x − 2)(x − 1). List its zeros in increasing order.",
+          "choices": [
+            "-1, 2, 3",
+            "-2, -1, 2",
+            "-2, 1, 2",
+            "-2, 2, 1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 2,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 4 and y = 2 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "2, 4, 6",
+            "12, 16, 20",
+            "8, 12, 20",
+            "12, 12, 16"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 3,
+          "prompt": "Expand and simplify: (8x − 7)(2x + 1).",
+          "choices": [
+            "16x^2 - 6x - 7",
+            "16x^2 - 7x",
+            "10x^2 - 6x - 6",
+            "16x^2 + 22x - 7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 3,
+          "prompt": "Find the remainder when -6x^2 + 6x + 6 is divided by (x + 3).",
+          "choices": [
+            "6",
+            "-30",
+            "-78",
+            "-66"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u01-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u01-l17"
+  }
+}

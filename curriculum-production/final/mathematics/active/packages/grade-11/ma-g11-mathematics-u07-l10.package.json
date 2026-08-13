@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u07-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u07-l10",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations and Inverse Functions",
+    "dayInUnit": 10,
+    "courseDay": 118,
+    "phase": "Discussion or problem seminar",
+    "focus": "even and odd behavior",
+    "title": "Discussion or problem seminar: even and odd behavior"
+  },
+  "standards": [
+    "F-BF.3",
+    "F-BF.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 1,
+          "prompt": "For f(x) = 2x + 1, find f⁻¹(f(5)).",
+          "workedSolution": {
+            "steps": [
+              "f(5) = 11.",
+              "f⁻¹(11) = (11 − 1)/2 = 5."
+            ],
+            "answer": "5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "Classify f(x) = x⁴ − 3x² + 1 as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the y-axis",
+            "neither even nor odd",
+            "even; its graph is symmetric about the origin",
+            "odd; its graph is symmetric about the origin"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x) + 4. Describe the transformation.",
+          "choices": [
+            "a horizontal compression by a factor of 4",
+            "a horizontal shift right by 4",
+            "a vertical stretch by a factor of 4",
+            "a vertical shift up by 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = 3x + 2.",
+          "choices": [
+            "f⁻¹(x) = (x − 2) / 3",
+            "f⁻¹(x) = (x + 2) / 3",
+            "f⁻¹(x) = 1 / (3x + 2)",
+            "f⁻¹(x) = 3x − 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = 4x + 10 and its inverse f⁻¹, evaluate f⁻¹(f(7)).",
+          "choices": [
+            "17",
+            "38",
+            "-7",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x⁵ + x³ as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "odd; its graph is symmetric about the origin",
+            "even; its graph is symmetric about the origin",
+            "neither even nor odd",
+            "even; its graph is symmetric about the y-axis"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x) + 2. Describe the transformation.",
+          "choices": [
+            "a horizontal shift right by 2",
+            "a vertical shift up by 2",
+            "a horizontal compression by a factor of 2",
+            "a vertical stretch by a factor of 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = -5x + 4.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = -2x − 1 and its inverse f⁻¹, evaluate f⁻¹(f(-1)).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u07-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u07-l10"
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l07",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 7,
+    "courseDay": 7,
+    "phase": "Investigation or close reading",
+    "focus": "precise definitions of angle, circle, line, and segment",
+    "title": "Investigation or close reading: precise definitions of angle, circle, line, and segment"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 1,
+          "prompt": "Define a circle precisely.",
+          "workedSolution": {
+            "steps": [
+              "Fix a centre and a distance.",
+              "Take every point in the plane at that distance."
+            ],
+            "answer": "the set of points at a fixed distance from a centre"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "A construction proceeds as follows. With the compass set to the radius, mark successive arcs around the circle from a starting point, then join consecutive marks. What has been constructed?",
+          "choices": [
+            "an equilateral triangle inscribed in the circle",
+            "a regular pentagon inscribed in the circle",
+            "a square inscribed in the circle",
+            "a regular hexagon inscribed in the circle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular triangle is inscribed in a circle of radius 8. What central angle does each side subtend?",
+          "choices": [
+            "120°",
+            "60°",
+            "240°",
+            "121°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the perpendicular bisector construction?",
+          "choices": [
+            "Any line through the midpoint is a perpendicular bisector.",
+            "The arcs look symmetric, so the line must be perpendicular.",
+            "Both constructed points are equidistant from the endpoints, and the locus of such points is exactly the perpendicular bisector.",
+            "The compass width was more than half the segment, which forces perpendicularity."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a parallel lines?",
+          "choices": [
+            "two lines the same distance apart at one point",
+            "two lines with the same length",
+            "two lines that meet only at infinity",
+            "two coplanar lines that never intersect, however far they are extended"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "choices": [
+            "the reflection of ℓ across P",
+            "a line through P perpendicular to ℓ",
+            "the perpendicular bisector of the transversal",
+            "a line through P parallel to ℓ"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 4. What central angle does each side subtend?",
+          "choices": [
+            "120°",
+            "30°",
+            "61°",
+            "60°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "Which statement correctly justifies the equilateral triangle construction on a given segment?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a circle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l07"
+  }
+}

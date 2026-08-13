@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u10-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u10-l06",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Modeling and Capstone",
+    "dayInUnit": 6,
+    "courseDay": 168,
+    "phase": "Guided practice B",
+    "focus": "presenting mathematical arguments",
+    "title": "Guided practice B: presenting mathematical arguments"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.NBT.5",
+    "5.NBT.6",
+    "5.NBT.7",
+    "5.NF.1",
+    "5.NF.4",
+    "5.MD.5",
+    "5.G.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "whole-number-model",
+          "standard": "5.NBT.5",
+          "difficulty": 1,
+          "prompt": "Find 24 × 13.",
+          "workedSolution": {
+            "steps": [
+              "24 × 10 = 240.",
+              "24 × 3 = 72; total 312."
+            ],
+            "answer": "312"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-model",
+          "standard": "5.NBT.6",
+          "difficulty": 2,
+          "prompt": "780 supplies are shared equally among 20 teams. How many supplies does each team receive?",
+          "choices": [
+            "43",
+            "42",
+            "39",
+            "40"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-budget",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "4 tickets cost $4.17 each and there is a $2.50 fee. What is the total cost?",
+          "choices": [
+            "$23.35",
+            "$19.18",
+            "$16.68",
+            "$20.18"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "fraction-project",
+          "standard": "5.NF.1",
+          "difficulty": 3,
+          "prompt": "A project uses 10/12 meter of blue ribbon and 1/12 meter of gold ribbon. How much ribbon is used?",
+          "choices": [
+            "3/4",
+            "5/72",
+            "1",
+            "11/12"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "scale-project",
+          "standard": "5.NF.4",
+          "difficulty": 3,
+          "prompt": "A 1/2-meter path is scaled by 4. What is the new length in meters?",
+          "choices": [
+            "1/2",
+            "1/8",
+            "2 1/2",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "volume-plan",
+          "standard": "5.MD.5",
+          "difficulty": 2,
+          "prompt": "A storage box is 4 units long, 3 units wide, and 9 units high. What is its volume in cubic units?",
+          "choices": [
+            "12",
+            "108",
+            "16",
+            "117"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-data",
+          "standard": "5.G.2",
+          "difficulty": 3,
+          "prompt": "A data point is at (1, 1). Move right 4 and up 5. What is the new point?",
+          "choices": [
+            "(5, 6)",
+            "(6, 5)",
+            "(5, 7)",
+            "(1, 1)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "model-argument",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A student says a 8 by 2 by 6 box has volume 97. Is the claim correct?",
+          "choices": [
+            "No; the volume is 96 cubic units.",
+            "No; the volume is 98 cubic units.",
+            "No; the volume is 97 cubic units.",
+            "No; the volume is 99 cubic units."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "choose-operation",
+          "standard": "5.OA.1",
+          "difficulty": 3,
+          "prompt": "7 packs hold 7 markers each, and 18 markers are loose. How many markers are there?",
+          "choices": [
+            "70",
+            "67",
+            "71",
+            "69"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u10-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "whole-number-model",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 55 × 34.",
+          "choices": [
+            "89",
+            "1870",
+            "1815",
+            "1871"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u10-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-model",
+          "standard": "5.NBT.6",
+          "difficulty": 3,
+          "prompt": "360 supplies are shared equally among 12 teams. How many supplies does each team receive?",
+          "choices": [
+            "30",
+            "33",
+            "31",
+            "34"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u10-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u10-l06"
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l04",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 4,
+    "courseDay": 22,
+    "phase": "Independent application A",
+    "focus": "comparing decimals",
+    "title": "Independent application A: comparing decimals"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-to-expanded-form",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "Write 24.305 in expanded form.",
+          "workedSolution": {
+            "steps": [
+              "The 2 represents 20 and the 4 represents 4.",
+              "The 3 represents 0.3, the 0 contributes no term, and the 5 represents 0.005.",
+              "Add the nonzero place values."
+            ],
+            "answer": "20 + 4 + 0.3 + 0.005"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "expanded-form-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "Write 20 + 1 + 0.9 + 0.06 in standard form.",
+          "choices": [
+            "21.96",
+            "219.6",
+            "21.97",
+            "22.06"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "Compare 3.43 and 0.33 using <, >, or =.",
+          "choices": [
+            ">",
+            "<",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "round-decimal",
+          "standard": "5.NBT.4",
+          "difficulty": 2,
+          "prompt": "Round 474.776 to the nearest hundredth.",
+          "choices": [
+            "474.78",
+            "474.81",
+            "474.80",
+            "474.79"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-number-line",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "A number line from 6.080 to 6.090 has 10 equal intervals. Point P is 9 intervals after 6.080. What number is P?",
+          "choices": [
+            "60.89",
+            "6.089",
+            "6.090",
+            "6.081"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "place-value-chart",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "Place-value chart:\nthousands | hundreds | tens | ones | tenths | hundredths | thousandths\n2 | 8 | 7 | 3 | 5 | 4 | 9\nWhich place contains the digit 8?",
+          "choices": [
+            "hundreds",
+            "tens",
+            "thousandths",
+            "ones"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "In 94.55, how does the value of the 5 in the hundredths place compare with the value of the 5 in the tenths place?",
+          "choices": [
+            "100 times",
+            "10 times",
+            "1/10 as much",
+            "the same value"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "power-of-ten-notation",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "10^5 = ?",
+          "choices": [
+            "10000",
+            "1000000",
+            "100000",
+            "1000"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "2.040 × 10^3 = ?",
+          "choices": [
+            "20400",
+            "204",
+            "2.04",
+            "2040"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "divide-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 2,
+          "prompt": "7.00 ÷ 10^1 = ?",
+          "choices": [
+            "0.7",
+            "0.07",
+            "7",
+            "70"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "How is 706.231 written in words?",
+          "choices": [
+            "seven hundred six and two hundred thirty-one thousandths",
+            "seven hundred seven and two hundred thirty-one thousandths",
+            "seven hundred six and two hundred thirty-two thousandths",
+            "seven hundred six and two hundred thirty-one hundredths"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "number-name-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write “seven hundred ten and two hundred ninety-three thousandths” as a decimal.",
+          "choices": [
+            "710.293",
+            "712.93",
+            "711.293",
+            "710.294"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l04"
+  }
+}

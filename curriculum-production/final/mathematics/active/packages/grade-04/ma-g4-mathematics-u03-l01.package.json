@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l01",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 1,
+    "courseDay": 37,
+    "phase": "Launch and diagnostic",
+    "focus": "more than compared with times as many",
+    "title": "Launch and diagnostic: more than compared with times as many"
+  },
+  "standards": [
+    "4.OA.1",
+    "MP.1"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank: 24 is ___ times as many as 6.",
+          "workedSolution": {
+            "steps": [
+              "? × 6 = 24.",
+              "24 ÷ 6 = 4."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank so the sentence is true: 42 is ___ times as many as 7.",
+          "choices": [
+            "6",
+            "35",
+            "7",
+            "42"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank so the sentence is true: 30 is ___ times as many as 5.",
+          "choices": [
+            "30",
+            "5",
+            "6",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 12 is ___ times as many as 3.",
+          "choices": [
+            "3",
+            "9",
+            "12",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 3,
+          "prompt": "Fill in the blank so the sentence is true: 15 is ___ times as many as 3.",
+          "choices": [
+            "5",
+            "15",
+            "3",
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 1,
+          "prompt": "Fill in the blank so the sentence is true: 12 is ___ times as many as 4.",
+          "choices": [
+            "12",
+            "8",
+            "3",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-statement",
+          "standard": "4.OA.1",
+          "difficulty": 2,
+          "prompt": "Fill in the blank so the sentence is true: 24 is ___ times as many as 4.",
+          "choices": [
+            "4",
+            "24",
+            "20",
+            "6"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l01"
+  }
+}

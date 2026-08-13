@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u09-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u09-l07",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Random Variables and Probability Distributions",
+    "dayInUnit": 7,
+    "courseDay": 151,
+    "phase": "Investigation or close reading",
+    "focus": "the general multiplication rule",
+    "title": "Investigation or close reading: the general multiplication rule"
+  },
+  "standards": [
+    "S-CP.8",
+    "S-CP.9",
+    "S-MD.1",
+    "S-MD.2",
+    "S-MD.3",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "permutations-and-combinations",
+          "standard": "S-CP.9",
+          "difficulty": 1,
+          "prompt": "From 6 items choose 2 with order mattering.",
+          "workedSolution": {
+            "steps": [
+              "6 × 5 = 30."
+            ],
+            "answer": "30"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "expected-value-of-random-variable",
+          "standard": "S-MD.2",
+          "difficulty": 2,
+          "prompt": "A random variable takes values 6, 7, 1 with probabilities 1/10, 8/10, 1/10 respectively. Find its expected value.",
+          "choices": [
+            "63",
+            "7",
+            "6.3",
+            "4.666666666666667"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "general-multiplication-rule",
+          "standard": "S-CP.8",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 6/10 and P(B | A) = 4/10, find P(A and B) in lowest terms.",
+          "choices": [
+            "6/25",
+            "3/2",
+            "12/5",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "probability-distribution-table",
+          "standard": "S-MD.1",
+          "difficulty": 2,
+          "prompt": "A trial succeeds with probability 5/10 and is repeated 2 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+          "choices": [
+            "0.125",
+            "1",
+            "0.25",
+            "0.5"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "permutations-and-combinations",
+          "standard": "S-CP.9",
+          "difficulty": 3,
+          "prompt": "From 6 distinct items, how many ways are there to choose 4 when the order does not matter?",
+          "choices": [
+            "360",
+            "15",
+            "24",
+            "1296"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "expected-value-of-random-variable",
+          "standard": "S-MD.2",
+          "difficulty": 3,
+          "prompt": "A random variable takes values 14, 20, 10, 17 with probabilities 5/10, 3/10, 1/10, 1/10 respectively. Find its expected value.",
+          "choices": [
+            "15.25",
+            "15.7",
+            "20",
+            "157"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "general-multiplication-rule",
+          "standard": "S-CP.8",
+          "difficulty": 3,
+          "prompt": "Given P(A) = 5/10 and P(B | A) = 9/10, find P(A and B) in lowest terms.",
+          "choices": [
+            "9/20",
+            "9/2",
+            "5/9",
+            "7/5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u09-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "probability-distribution-table",
+          "standard": "S-MD.1",
+          "difficulty": 3,
+          "prompt": "A trial succeeds with probability 5/10 and is repeated 3 times independently. Let X count the successes. Find P(X = 0) as a decimal.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u09-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "permutations-and-combinations",
+          "standard": "S-CP.9",
+          "difficulty": 3,
+          "prompt": "From 5 distinct items, how many ways are there to choose 4 when the order does not matter?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u09-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u09-l07"
+  }
+}

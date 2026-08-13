@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u07-l13",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u07-l13",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Decimal Operations",
+    "dayInUnit": 13,
+    "courseDay": 121,
+    "phase": "Skill consolidation",
+    "focus": "decimal addition",
+    "title": "Skill consolidation: decimal addition"
+  },
+  "standards": [
+    "5.NBT.3",
+    "5.NBT.4",
+    "5.NBT.7"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 1,
+          "prompt": "Find 8.57 + 4.07.",
+          "choices": [
+            "4.92",
+            "12.64",
+            "8.97",
+            "126.4"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-subtraction",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 37.36 - 30.26.",
+          "choices": [
+            "0.0710",
+            "37.06",
+            "67.62",
+            "7.10"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 5.3 × 6.",
+          "choices": [
+            "3.18",
+            "0.318",
+            "31.8",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 36.0 ÷ 4.",
+          "choices": [
+            "32",
+            "90",
+            "9",
+            "0.90"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "2 tickets cost $8.90 each. What is the total cost?",
+          "choices": [
+            "$0.1780",
+            "$8.90",
+            "$17.80",
+            "$1.780"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest whole number to estimate 68.70 + 26.69.",
+          "choices": [
+            "96",
+            "9600",
+            "95.39",
+            "94"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "decimal-addition",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 56.88 + 11.24.",
+          "choices": [
+            "68.12",
+            "16.92",
+            "0.6812",
+            "681.2"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "decimal-subtraction",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 88.59 - 46.14.",
+          "choices": [
+            "424.5",
+            "42.45",
+            "0.4245",
+            "4.245"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "decimal-multiplication",
+          "standard": "5.NBT.7",
+          "difficulty": 3,
+          "prompt": "Find 2.2 × 2.",
+          "choices": [
+            "4.2",
+            "44",
+            "4.4",
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u07-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-division",
+          "standard": "5.NBT.7",
+          "difficulty": 2,
+          "prompt": "Find 21.9 ÷ 3.",
+          "choices": [
+            "65.7",
+            "7.3",
+            "0.73",
+            "18.9"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "money-measurement-context",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "5 tickets cost $4.90 each. What is the total cost?",
+          "choices": [
+            "$4.90",
+            "$9.90",
+            "$2.450",
+            "$24.50"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u07-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-estimation-check",
+          "standard": "5.NBT.4",
+          "difficulty": 3,
+          "prompt": "Round each number to the nearest whole number to estimate 93.90 + 33.56.",
+          "choices": [
+            "12800",
+            "1280",
+            "128",
+            "1.2800"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u07-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u07-l13"
+  }
+}

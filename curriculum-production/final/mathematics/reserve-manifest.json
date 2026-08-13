@@ -1,0 +1,51 @@
+{
+  "subject": "mathematics",
+  "lessonCount": 4,
+  "separateFromActiveSchedule": true,
+  "records": [
+    {
+      "lessonId": "ma-g8-mathematics-u10-l10",
+      "status": "RESERVE_TUTOR",
+      "countsAsActiveSchoolDay": false,
+      "package": "reserve/packages/grade-08/ma-g8-mathematics-u10-l10.package.json",
+      "answerKey": "reserve/answer-keys/grade-08/ma-g8-mathematics-u10-l10.key.json",
+      "sealedCourseDay": 172,
+      "phase": "Discussion or problem seminar",
+      "absorbedBy": "ma-g8-mathematics-u10-l11",
+      "absorption": "seminar protocol opens the performance-task planning session"
+    },
+    {
+      "lessonId": "ma-g8-mathematics-u10-l13",
+      "status": "RESERVE_TUTOR",
+      "countsAsActiveSchoolDay": false,
+      "package": "reserve/packages/grade-08/ma-g8-mathematics-u10-l13.package.json",
+      "answerKey": "reserve/answer-keys/grade-08/ma-g8-mathematics-u10-l13.key.json",
+      "sealedCourseDay": 175,
+      "phase": "Skill consolidation",
+      "absorbedBy": "ma-g8-mathematics-u10-l15",
+      "absorption": "consolidation set runs as the fluency half of assessment preparation"
+    },
+    {
+      "lessonId": "ma-g8-mathematics-u10-l14",
+      "status": "RESERVE_TUTOR",
+      "countsAsActiveSchoolDay": false,
+      "package": "reserve/packages/grade-08/ma-g8-mathematics-u10-l14.package.json",
+      "answerKey": "reserve/answer-keys/grade-08/ma-g8-mathematics-u10-l14.key.json",
+      "sealedCourseDay": 176,
+      "phase": "Transfer challenge",
+      "absorbedBy": "ma-g8-mathematics-u10-l15",
+      "absorption": "transfer set runs as the unfamiliar-context half of assessment preparation"
+    },
+    {
+      "lessonId": "ma-g8-mathematics-u10-l17",
+      "status": "RESERVE_TUTOR",
+      "countsAsActiveSchoolDay": false,
+      "package": "reserve/packages/grade-08/ma-g8-mathematics-u10-l17.package.json",
+      "answerKey": "reserve/answer-keys/grade-08/ma-g8-mathematics-u10-l17.key.json",
+      "sealedCourseDay": 179,
+      "phase": "Targeted correction",
+      "absorbedBy": "ma-g8-mathematics-u10-l18",
+      "absorption": "post-assessment correction folded into the revision step of publication"
+    }
+  ]
+}

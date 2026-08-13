@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l17",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l17",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 17,
+    "courseDay": 17,
+    "phase": "Targeted correction",
+    "focus": "radical and rational-exponent notation and rewriting",
+    "title": "Targeted correction: radical and rational-exponent notation and rewriting"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 1,
+          "prompt": "A pump moves 12 liters per minute. Express this rate in liters per hour.",
+          "workedSolution": {
+            "steps": [
+              "One minute is 1/60 of an hour, so one liter per minute is 60 liters per hour.",
+              "Multiply: 12 × 60 = 720.",
+              "The rate is 720 liters per hour."
+            ],
+            "answer": "720 liters per hour"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 2,
+          "prompt": "Rewrite ³√(x⁴) using a rational exponent.",
+          "workedSolution": {
+            "steps": [
+              "The index 3 is the denominator and the power 4 is the numerator.",
+              "³√(x⁴) = x^(4/3)."
+            ],
+            "answer": "x^(4/3)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 1,
+          "prompt": "Evaluate 9^(3/2) exactly.",
+          "choices": [
+            "81",
+            "14",
+            "12",
+            "27"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Write √208 in simplest radical form.",
+          "choices": [
+            "52",
+            "13√4",
+            "4√13",
+            "8√13"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 2,
+          "prompt": "Classify the product of the non-zero rational number 4 and the irrational number √5 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "rational",
+            "undefined",
+            "both rational and irrational",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "Option A delivers 32 units of output over 16 hours. Option B delivers 105 units over 15 hours. Which has the greater output per hour?",
+          "choices": [
+            "The two rates are equal.",
+            "Option B",
+            "Option A",
+            "There is not enough information without knowing the total hours available."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 2,
+          "prompt": "A rectangular plot measures 17.9 m by 29.1 m, each measured to the nearest tenth of a metre. Report the area to 1 decimal place.",
+          "choices": [
+            "47.0 m²",
+            "520.9 m²",
+            "520.890 m²",
+            "94.0 m²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 2,
+          "prompt": "You are building a model of the fuel efficiency of a delivery van. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "kilometres",
+            "kilometres per litre",
+            "litres",
+            "litres per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "A delivery drone operates at 65 kilometers per hour. Express this rate in meters per minute.",
+          "choices": [
+            "1083.33 meters per minute",
+            "3.9 meters per minute",
+            "10833.33 meters per minute",
+            "65 meters per minute"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 3,
+          "prompt": "Rewrite the index-5 radical expression 5√(x^8) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(5/8)",
+            "x^(8/5)",
+            "x^(3)",
+            "x^(40)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l17"
+  }
+}

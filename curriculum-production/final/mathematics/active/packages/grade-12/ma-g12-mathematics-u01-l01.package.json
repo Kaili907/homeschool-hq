@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u01-l01",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Advanced Trigonometry: Unit Circle and Identities",
+    "dayInUnit": 1,
+    "courseDay": 1,
+    "phase": "Launch and diagnostic",
+    "focus": "special triangles and exact trigonometric values",
+    "title": "Launch and diagnostic: special triangles and exact trigonometric values"
+  },
+  "standards": [
+    "F-TF.3",
+    "F-TF.4",
+    "F-TF.9",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "exact-value-beyond-first-quadrant",
+          "standard": "F-TF.3",
+          "difficulty": 1,
+          "prompt": "Give the exact value of cos(2π/3).",
+          "workedSolution": {
+            "steps": [
+              "120° is in quadrant 2 with reference 60°.",
+              "cos 60° = 1/2; cosine is negative there."
+            ],
+            "answer": "−1/2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "reference-angle-identification",
+          "standard": "F-TF.4",
+          "difficulty": 1,
+          "prompt": "Find the reference angle for 300°, and name the quadrant it lies in.",
+          "choices": [
+            "300°, quadrant 4",
+            "60°, quadrant 1",
+            "60°, quadrant 4",
+            "-120°, quadrant 4"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "apply-addition-formula",
+          "standard": "F-TF.9",
+          "difficulty": 1,
+          "prompt": "Find the exact value of sin(15°) using sin(45° − 30°).",
+          "choices": [
+            "(√6 + √2)/4",
+            "(√2 − √6)/4",
+            "(√6 − √2)/4",
+            "√6/4"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "periodicity-and-coterminal-angles",
+          "standard": "F-TF.4",
+          "difficulty": 2,
+          "prompt": "Evaluate sin(480°) exactly, using the periodicity of sine.",
+          "choices": [
+            "√2/2",
+            "√3/2",
+            "1/2",
+            "−1/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "exact-value-beyond-first-quadrant",
+          "standard": "F-TF.3",
+          "difficulty": 2,
+          "prompt": "Give the exact value of cos(5π/6), which is 150°.",
+          "choices": [
+            "−√3/2",
+            "−1/2",
+            "1/2",
+            "√2/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "reference-angle-identification",
+          "standard": "F-TF.4",
+          "difficulty": 3,
+          "prompt": "Find the reference angle for 210°, and name the quadrant it lies in.",
+          "choices": [
+            "30°, quadrant 4",
+            "150°, quadrant 3",
+            "30°, quadrant 3",
+            "210°, quadrant 3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u01-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "apply-addition-formula",
+          "standard": "F-TF.9",
+          "difficulty": 1,
+          "prompt": "Find the exact value of cos(75°) using cos(45° + 30°).",
+          "choices": [
+            "(√6 − √2)/4",
+            "(√6 + √2)/4",
+            "(√2 − √6)/4",
+            "√6/4"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u01-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "periodicity-and-coterminal-angles",
+          "standard": "F-TF.4",
+          "difficulty": 2,
+          "prompt": "Evaluate sin(600°) exactly, using the periodicity of sine.",
+          "choices": [
+            "1/2",
+            "−1/2",
+            "−√3/2",
+            "√2/2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u01-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u01-l01"
+  }
+}

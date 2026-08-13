@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l04",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 4,
+    "courseDay": 4,
+    "phase": "Independent application A",
+    "focus": "locating irrational numbers on number lines",
+    "title": "Independent application A: locating irrational numbers on number lines"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Independent application A",
+    "profile": "independent-application",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "locate-root-on-number-line",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "On the number line, points A, B, C, and D are located at 7, 8, 9, and 10. Which point is closest to √73?",
+          "workedSolution": {
+            "steps": [
+              "√73 is between 8 and 9, closer to 8.5 than to the endpoints.",
+              "8.5 rounds toward 9, but 73 - 64 = 9 while 81 - 73 = 8, so √73 is closer to 9... ",
+              "Checking exactly: (2·8+1)² = 289 < 4·73 = 292, so the nearest whole number is 9, point C."
+            ],
+            "answer": "B"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Compare 4/1 and 6.",
+          "choices": [
+            "4/1 > 6",
+            "cannot be compared without a calculator",
+            "4/1 < 6",
+            "4/1 = 6"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "order-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Order √34, 17/3, 7 from least to greatest.",
+          "choices": [
+            "17/3 < 7 < √34",
+            "√34 < 17/3 < 7",
+            "17/3 < √34 < 7",
+            "7 < √34 < 17/3"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "estimate-root-expression",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Which whole number is closest to √186 - 9?",
+          "choices": [
+            "4",
+            "5",
+            "7",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "A square garden has an area of 618 square meters. Between which two consecutive whole numbers of meters is the side length?",
+          "choices": [
+            "24 and 26",
+            "25 and 26",
+            "24 and 25",
+            "23 and 24"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "root-comparison-error-analysis",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "A student claims √343 > 25 because 343 > 25. Which statement correctly analyzes the claim?",
+          "choices": [
+            "The claim is correct; 343 > 25, so √343 > 25.",
+            "The claim is incorrect; since 343 < 25² = 625, √343 < 25.",
+            "The claim is incorrect; √343 = 25 exactly.",
+            "The claim cannot be evaluated without a calculator."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "classify-rational-or-irrational",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "Classify √4 as rational or irrational.",
+          "choices": [
+            "irrational",
+            "rational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "closure-classification",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A rational number (3/2) is added to an irrational number (√174). Is the result rational or irrational?",
+          "choices": [
+            "cannot be determined without computing",
+            "sometimes rational and sometimes irrational",
+            "rational",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "Write 0.166166... as a fraction in lowest terms.",
+          "choices": [
+            "166/1000",
+            "166/9999",
+            "167/999",
+            "166/999"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-error-analysis",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "A student writes 0.070707... = 7/100. Which statement best analyzes the claim?",
+          "choices": [
+            "The claim is correct; 7/100 equals 0.070707....",
+            "The correct fraction is 7/99; the numerator should have one extra digit.",
+            "The claim is close; only the sign needs to be corrected.",
+            "The correct fraction is 7/99; the denominator should be 99 (nine repeated once per repeating digit), not 100."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "consecutive-integers-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Between which two consecutive whole numbers does √888 lie?",
+          "choices": [
+            "29 and 31",
+            "29 and 30",
+            "27 and 28",
+            "30 and 31"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l04#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "nearest-tenth-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Estimate √307 to the nearest tenth.",
+          "choices": [
+            "17.6",
+            "17.5",
+            "17.3",
+            "17"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l04"
+  }
+}

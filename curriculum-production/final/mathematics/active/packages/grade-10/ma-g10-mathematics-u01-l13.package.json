@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u01-l13",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u01-l13",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Geometric Foundations and Constructions",
+    "dayInUnit": 13,
+    "courseDay": 13,
+    "phase": "Skill consolidation",
+    "focus": "precise definitions of angle, circle, line, and segment",
+    "title": "Skill consolidation: precise definitions of angle, circle, line, and segment"
+  },
+  "standards": [
+    "G-CO.1",
+    "G-CO.12",
+    "G-CO.13",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 1,
+          "prompt": "Which statement is a precise definition of a perpendicular lines?",
+          "choices": [
+            "two lines that never meet",
+            "two lines that form an isosceles triangle",
+            "two lines with opposite slopes",
+            "two lines that intersect to form right angles"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "A construction proceeds as follows. Open the compass to more than half of AB. From A draw an arc above and below AB; from B, with the same opening, draw arcs crossing them. Draw the line through the two crossing points. What has been constructed?",
+          "choices": [
+            "the perpendicular bisector of AB",
+            "the angle bisector of ∠A",
+            "a copy of segment AB",
+            "a line parallel to AB"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 2,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 7. What central angle does each side subtend?",
+          "choices": [
+            "30°",
+            "60°",
+            "61°",
+            "120°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "Which statement correctly justifies the angle bisector construction?",
+          "choices": [
+            "The ray drawn appears to split the angle evenly.",
+            "The construction builds two congruent triangles by SSS, so the angles at the vertex are congruent.",
+            "The construction relies on the angle being acute.",
+            "Equal arcs always produce equal angles regardless of the triangle."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a parallel lines?",
+          "choices": [
+            "two lines with the same length",
+            "two coplanar lines that never intersect, however far they are extended",
+            "two lines that meet only at infinity",
+            "two lines the same distance apart at one point"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "A construction proceeds as follows. From vertex V draw an arc crossing both rays at P and Q. From P and Q draw equal arcs meeting at R. Draw ray VR. What has been constructed?",
+          "choices": [
+            "a line perpendicular to one ray",
+            "an equilateral triangle on PQ",
+            "the bisector of the angle at V",
+            "the perpendicular bisector of PQ only"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular hexagon is inscribed in a circle of radius 3. What central angle does each side subtend?",
+          "choices": [
+            "120°",
+            "61°",
+            "60°",
+            "30°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "Which statement correctly justifies the equilateral triangle construction on a given segment?",
+          "choices": [
+            "The construction works only when the segment is horizontal.",
+            "The circles intersect, which guarantees 60° angles by definition.",
+            "The intersection point is the midpoint of the segment.",
+            "Both circles have radius equal to the segment, so all three sides are that same length."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "precise-geometric-definition",
+          "standard": "G-CO.1",
+          "difficulty": 3,
+          "prompt": "Which statement is a precise definition of a angle?",
+          "choices": [
+            "a corner of a polygon",
+            "the amount of turn measured in degrees",
+            "the figure formed by two rays sharing a common endpoint",
+            "the space between two intersecting lines"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u01-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-construction-outcome",
+          "standard": "G-CO.12",
+          "difficulty": 2,
+          "prompt": "A construction proceeds as follows. Through point P not on line ℓ, copy the angle that a transversal makes with ℓ, placing the copy at P on the same transversal. What has been constructed?",
+          "choices": [
+            "a line through P perpendicular to ℓ",
+            "the perpendicular bisector of the transversal",
+            "the reflection of ℓ across P",
+            "a line through P parallel to ℓ"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-polygon-central-angle",
+          "standard": "G-CO.13",
+          "difficulty": 3,
+          "prompt": "A regular triangle is inscribed in a circle of radius 3. What central angle does each side subtend?",
+          "choices": [
+            "121°",
+            "60°",
+            "120°",
+            "240°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u01-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "justify-construction-validity",
+          "standard": "G-CO.12",
+          "difficulty": 3,
+          "prompt": "Which statement correctly justifies the perpendicular bisector construction?",
+          "choices": [
+            "The compass width was more than half the segment, which forces perpendicularity.",
+            "Any line through the midpoint is a perpendicular bisector.",
+            "The arcs look symmetric, so the line must be perpendicular.",
+            "Both constructed points are equidistant from the endpoints, and the locus of such points is exactly the perpendicular bisector."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u01-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u01-l13"
+  }
+}

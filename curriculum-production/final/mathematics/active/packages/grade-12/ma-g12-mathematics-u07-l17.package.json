@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u07-l17",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u07-l17",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Matrices, Transformations, and Systems",
+    "dayInUnit": 17,
+    "courseDay": 125,
+    "phase": "Targeted correction",
+    "focus": "representing a linear system as a matrix equation",
+    "title": "Targeted correction: representing a linear system as a matrix equation"
+  },
+  "standards": [
+    "N-VM.6",
+    "N-VM.7",
+    "N-VM.8",
+    "N-VM.9",
+    "N-VM.10",
+    "N-VM.11",
+    "N-VM.12",
+    "A-REI.8",
+    "A-REI.9",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 1,
+          "prompt": "Compute 3·[[1, 2], [3, 4]].",
+          "workedSolution": {
+            "steps": [
+              "Multiply every entry by 3.",
+              "[[3, 6], [9, 12]]."
+            ],
+            "answer": "[[3, 6], [9, 12]]"
+          }
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "Compute [[1, 2], [3, 4]]·⟨5, 6⟩.",
+          "workedSolution": {
+            "steps": [
+              "1(5) + 2(6) = 17.",
+              "3(5) + 4(6) = 39."
+            ],
+            "answer": "⟨17, 39⟩"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 1,
+          "prompt": "For M = [[-2, -2], [1, -3]], find det(M) and state whether M is invertible.",
+          "choices": [
+            "det(M) = 4; M is invertible",
+            "det(M) = -8; M is invertible",
+            "det(M) = 9; M is invertible",
+            "det(M) = 8; M is invertible"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "The matrix [[-1, 3], [4, -2]] is applied to a region of area 3. Find the area of the image.",
+          "choices": [
+            "30",
+            "3",
+            "10",
+            "-30"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 2,
+          "prompt": "Compute -2·[[5, -2], [3, 4]].",
+          "choices": [
+            "[[-10, 4], [3, 4]]",
+            "[[-10, -2], [3, 4]]",
+            "[[3, -4], [1, 2]]",
+            "[[-10, 4], [-6, -8]]"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "Compute [[-1, 2], [4, 5]]·⟨-3, -1⟩.",
+          "choices": [
+            "⟨-1, -11⟩",
+            "⟨1, -17⟩",
+            "⟨-17, 1⟩",
+            "⟨3, -5⟩"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u07-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "determinant-and-invertibility",
+          "standard": "N-VM.10",
+          "difficulty": 2,
+          "prompt": "For M = [[5, -2], [-2, 1]], find det(M) and state whether M is invertible.",
+          "choices": [
+            "det(M) = 2; M is invertible",
+            "det(M) = 1; M is invertible",
+            "det(M) = 9; M is invertible",
+            "det(M) = -8; M is invertible"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "determinant-as-area-scale-factor",
+          "standard": "N-VM.11",
+          "difficulty": 2,
+          "prompt": "The matrix [[-2, -3], [3, -3]] is applied to a region of area 8. Find the area of the image.",
+          "choices": [
+            "15",
+            "8",
+            "120",
+            "121"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiple-of-matrix",
+          "standard": "N-VM.7",
+          "difficulty": 3,
+          "prompt": "Compute -4·[[-9, 1], [4, 3]].",
+          "choices": [
+            "[[36, 1], [4, 3]]",
+            "[[36, -4], [4, 3]]",
+            "[[-13, -3], [0, -1]]",
+            "[[36, -4], [-16, -12]]"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u07-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "matrix-vector-product",
+          "standard": "N-VM.11",
+          "difficulty": 3,
+          "prompt": "Compute [[-7, -7], [-7, 7]]·⟨7, 6⟩.",
+          "choices": [
+            "⟨-90, -7⟩",
+            "⟨-91, -7⟩",
+            "⟨-7, -91⟩",
+            "⟨-49, 42⟩"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u07-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u07-l17"
+  }
+}

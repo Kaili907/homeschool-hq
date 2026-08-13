@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l09",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l09",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 9,
+    "courseDay": 27,
+    "phase": "Concept model C",
+    "focus": "expanded form",
+    "title": "Concept model C: expanded form"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 1,
+          "prompt": "Write 12.305 in words.",
+          "workedSolution": {
+            "steps": [
+              "Read 12 as twelve.",
+              "The last decimal digit is in the thousandths place, so read 305 as three hundred five thousandths.",
+              "Use “and” for the decimal point."
+            ],
+            "answer": "twelve and three hundred five thousandths"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "number-name-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "Write “eighty-seven and forty-four hundredths” as a decimal.",
+          "choices": [
+            "87.45",
+            "91.4",
+            "88.44",
+            "87.44"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-expanded-form",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write 430.364 in expanded form.",
+          "choices": [
+            "400 + 30 + 0.4 + 0.06 + 0.004",
+            "4000 + 300 + 3 + 0.6 + 0.04",
+            "400 + 30 + 0.3 + 0.06 + 0.005",
+            "400 + 30 + 0.3 + 0.06 + 0.004"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "expanded-form-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write 400 + 20 + 8 + 0.5 + 0.09 + 0.003 in standard form.",
+          "choices": [
+            "428.594",
+            "4285.93",
+            "428.693",
+            "428.593"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "5.NBT.3",
+          "difficulty": 2,
+          "prompt": "Compare 8.8 and 4.6 using <, >, or =.",
+          "choices": [
+            ">",
+            "=",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "round-decimal",
+          "standard": "5.NBT.4",
+          "difficulty": 2,
+          "prompt": "Round 744.109 to the nearest hundredth.",
+          "choices": [
+            "744.10",
+            "744.13",
+            "744.11",
+            "744.14"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-number-line",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "A number line from 7.860 to 7.870 has 10 equal intervals. Point P is 4 intervals after 7.860. What number is P?",
+          "choices": [
+            "7.864",
+            "7.863",
+            "7.865",
+            "7.866"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "place-value-chart",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "Place-value chart:\nthousands | hundreds | tens | ones | tenths | hundredths | thousandths\n4 | 7 | 2 | 8 | 6 | 5 | 1\nWhich place contains the digit 5?",
+          "choices": [
+            "hundredths",
+            "hundreds",
+            "tens",
+            "thousandths"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "In 777, how does the value of the 7 in the tens place compare with the value of the 7 in the hundreds place?",
+          "choices": [
+            "100 times",
+            "1/10 as much",
+            "10 times",
+            "the same value"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "power-of-ten-notation",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "10^6 = ?",
+          "choices": [
+            "1000",
+            "1000000",
+            "100000",
+            "100"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 3,
+          "prompt": "8.90 × 10^2 = ?",
+          "choices": [
+            "890",
+            "8.9",
+            "8900",
+            "89"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l09"
+  }
+}

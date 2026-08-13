@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u07-l15",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u07-l15",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Measurement: Time, Liquid Volume, and Mass",
+    "dayInUnit": 15,
+    "courseDay": 123,
+    "phase": "Synthesis and review",
+    "focus": "measurement reasoning",
+    "title": "Synthesis and review: measurement reasoning"
+  },
+  "standards": [
+    "3.MD.1",
+    "3.MD.2"
+  ],
+  "blueprint": {
+    "phase": "Synthesis and review",
+    "profile": "synthesis-and-review",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 1,
+          "prompt": "Practice starts at 8:10 a.m. and lasts 12 minutes. What time does practice end?",
+          "choices": [
+            "8:52 a.m.",
+            "7:58 a.m.",
+            "7:52 a.m.",
+            "8:22 a.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 115 grams. Another 137 grams are poured in. How many grams are in the container now?",
+          "choices": [
+            "253",
+            "115",
+            "252",
+            "137"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 3:30 p.m. and lasts 77 minutes. What time does practice end?",
+          "choices": [
+            "4:17 p.m.",
+            "4:47 p.m.",
+            "2:13 p.m.",
+            "5:17 p.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 366 milliliters. 183 milliliters are removed. How many milliliters are left?",
+          "choices": [
+            "184",
+            "183",
+            "366",
+            "549"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 3,
+          "prompt": "Practice starts at 8:20 a.m. and lasts 65 minutes. What time does practice end?",
+          "choices": [
+            "9:55 a.m.",
+            "9:25 a.m.",
+            "7:15 a.m.",
+            "8:55 a.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 3,
+          "prompt": "A container has 314 liters. 163 liters are removed. How many liters are left?",
+          "choices": [
+            "477",
+            "151",
+            "163",
+            "314"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u07-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 2,
+          "prompt": "Practice starts at 1:00 p.m. and lasts 52 minutes. What time does practice end?",
+          "choices": [
+            "12:08 p.m.",
+            "2:22 p.m.",
+            "1:52 p.m.",
+            "1:22 p.m."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "liquid-volume-or-mass-word-problem",
+          "standard": "3.MD.2",
+          "difficulty": 2,
+          "prompt": "A container has 66 liters. Another 150 liters are poured in. How many liters are in the container now?",
+          "choices": [
+            "217",
+            "66",
+            "216",
+            "150"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u07-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "elapsed-time",
+          "standard": "3.MD.1",
+          "difficulty": 3,
+          "prompt": "Practice starts at 7:30 a.m. and lasts 79 minutes. What time does practice end?",
+          "choices": [
+            "6:11 a.m.",
+            "9:19 a.m.",
+            "8:19 a.m.",
+            "8:49 a.m."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u07-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u07-l15"
+  }
+}

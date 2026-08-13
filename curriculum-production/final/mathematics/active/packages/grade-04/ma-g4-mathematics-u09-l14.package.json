@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l14",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l14",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 14,
+    "courseDay": 158,
+    "phase": "Performance task: build",
+    "focus": "the conversion table, area analysis, and line plot",
+    "title": "Performance task: build: the conversion table, area analysis, and line plot"
+  },
+  "standards": [
+    "4.MD.1",
+    "4.MD.3",
+    "4.MD.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 1/4, 2/4, 4/4, 3/4, 3/4, 3/4, 2/4, 4/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 4/4 yard?",
+          "choices": [
+            "9/4",
+            "8/4",
+            "8/8",
+            "7/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 2,
+          "prompt": "Convert 8 liters to milliliters.",
+          "choices": [
+            "1008 milliliters",
+            "8 milliliters",
+            "8000 milliliters",
+            "800 milliliters"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 2,
+          "prompt": "A rectangle has area 30 square units and one side is 5 units. What is the length of the other side?",
+          "choices": [
+            "25",
+            "6",
+            "30",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 2,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/4 yard: 1/4, 1/4, 1/4, 2/4, 1/4, 4/4, 3/4, 3/4. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 1/4 yard?",
+          "choices": [
+            "5/4",
+            "4/8",
+            "4/4",
+            "3/4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 5 meters to centimeters.",
+          "choices": [
+            "5 centimeters",
+            "105 centimeters",
+            "50 centimeters",
+            "500 centimeters"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 3,
+          "prompt": "A rectangle has area 28 square units and one side is 7 units. What is the length of the other side?",
+          "choices": [
+            "21",
+            "28",
+            "4",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "line-plot-with-fractions",
+          "standard": "4.MD.4",
+          "difficulty": 3,
+          "prompt": "A line plot shows 8 ribbon lengths to the nearest 1/8 yard: 1/8, 5/8, 6/8, 3/8, 4/8, 6/8, 6/8, 3/8. What is the combined length, in a fraction of a yard, of all ribbons measuring exactly 1/8 yard?",
+          "choices": [
+            "2/8",
+            "1/16",
+            "3/8",
+            "1/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "convert-measurement-units",
+          "standard": "4.MD.1",
+          "difficulty": 3,
+          "prompt": "Convert 20 liters to milliliters.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "area-perimeter-unknown-side",
+          "standard": "4.MD.3",
+          "difficulty": 3,
+          "prompt": "A rectangle has area 45 square units and one side is 5 units. What is the length of the other side?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l14"
+  }
+}

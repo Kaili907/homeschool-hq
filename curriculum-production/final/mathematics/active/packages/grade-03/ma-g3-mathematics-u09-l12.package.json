@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u09-l12",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u09-l12",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Area and the Distributive Property",
+    "dayInUnit": 12,
+    "courseDay": 156,
+    "phase": "Applied problem solving",
+    "focus": "area of combined rectilinear figures",
+    "title": "Applied problem solving: area of combined rectilinear figures"
+  },
+  "standards": [
+    "3.MD.7"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangular garden bed is 6 ft long and 3 ft wide. What is its area?",
+          "workedSolution": {
+            "steps": [
+              "Area = length × width.",
+              "6 × 3 = 18.",
+              "The area is 18 square feet."
+            ],
+            "answer": "18 sq ft"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangle 5 units long is split into two parts: one 2 units wide and one 4 units wide. Use 5 × (2 + 4) to find the total area.",
+          "choices": [
+            "20",
+            "11",
+            "30",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular rug is 10 in long and 3 in wide. What is its area?",
+          "choices": [
+            "13 sq in",
+            "30 sq in",
+            "31 sq in",
+            "26 sq in"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangle 7 units long is split into two parts: one 4 units wide and one 4 units wide. Use 7 × (4 + 4) to find the total area.",
+          "choices": [
+            "56",
+            "28",
+            "57",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular rug is 5 ft long and 8 ft wide. What is its area?",
+          "choices": [
+            "41 sq ft",
+            "40 sq ft",
+            "26 sq ft",
+            "13 sq ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangle 3 units long is split into two parts: one 3 units wide and one 6 units wide. Use 3 × (3 + 6) to find the total area.",
+          "choices": [
+            "12",
+            "27",
+            "9",
+            "18"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular rug is 11 m long and 5 m wide. What is its area?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangle 3 units long is split into two parts: one 8 units wide and one 4 units wide. Use 3 × (8 + 4) to find the total area.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u09-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u09-l12"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l13",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l13",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 13,
+    "courseDay": 175,
+    "phase": "Performance task: plan",
+    "focus": "the capstone design",
+    "title": "Performance task: plan: the capstone design"
+  },
+  "standards": [
+    "4.G.2",
+    "4.G.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 1,
+          "prompt": "A triangle where one angle measures more than 90° is called what kind of triangle?",
+          "workedSolution": {
+            "steps": [
+              "One angle over 90° makes it an obtuse triangle."
+            ],
+            "answer": "obtuse triangle"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 2,
+          "prompt": "How many lines of symmetry does a square have?",
+          "choices": [
+            "3",
+            "5",
+            "8",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 2,
+          "prompt": "A triangle where all three sides are the same length is called what kind of triangle?",
+          "choices": [
+            "acute triangle",
+            "equilateral triangle",
+            "obtuse triangle",
+            "right triangle"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a rectangle (non-square) have?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 3,
+          "prompt": "A triangle where all three angles measure less than 90° is called what kind of triangle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l13"
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u05-l03",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Complex Solutions, Polynomials, and the Binomial Theorem",
+    "dayInUnit": 3,
+    "courseDay": 75,
+    "phase": "Guided practice A",
+    "focus": "factoring completely over the complex numbers",
+    "title": "Guided practice A: factoring completely over the complex numbers"
+  },
+  "standards": [
+    "N-CN.8",
+    "N-CN.9",
+    "A-APR.5",
+    "A-APR.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 1,
+          "prompt": "Factor x² + 9 over the complex numbers.",
+          "workedSolution": {
+            "steps": [
+              "9 = −(3i)².",
+              "x² − (3i)² = (x + 3i)(x − 3i)."
+            ],
+            "answer": "(x + 3i)(x − 3i)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 1,
+          "prompt": "A polynomial with real coefficients has degree 2. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 5, and any non-real roots occur in conjugate pairs",
+            "exactly 1, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 2, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 1,
+          "prompt": "In the expansion of (x + y)^6, find the coefficient of the term x^1·y^5.",
+          "choices": [
+            "30",
+            "15",
+            "1",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 2,
+          "prompt": "Complete the statement: the sum of two rational expressions …",
+          "choices": [
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because a common denominator can always be formed",
+            "is always a rational expression, because numerators and denominators multiply directly",
+            "need not be a rational expression, because the denominators may differ"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 2,
+          "prompt": "Factor x² + 4 completely over the complex numbers.",
+          "choices": [
+            "(x + 2i)(x − 2i)",
+            "(x + 2i)²",
+            "(x + 2i)(x + 2i)",
+            "(x + 2)(x − 2)"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 2,
+          "prompt": "A polynomial with real coefficients has degree 3. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 4, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 6, and any non-real roots occur in conjugate pairs",
+            "exactly 2, and any non-real roots occur in conjugate pairs"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 2,
+          "prompt": "In the expansion of (x + y)^4, find the coefficient of the term x^3·y^1.",
+          "choices": [
+            "1",
+            "4",
+            "6",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rational-expression-closure",
+          "standard": "A-APR.7",
+          "difficulty": 2,
+          "prompt": "Complete the statement: the product of two rational expressions …",
+          "choices": [
+            "need not be a rational expression, because the denominators may differ",
+            "is always a rational expression, because dividing is multiplying by the reciprocal",
+            "is always a rational expression, because a common denominator can always be formed",
+            "is always a rational expression, because numerators and denominators multiply directly"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "factor-over-complex-numbers",
+          "standard": "N-CN.8",
+          "difficulty": 3,
+          "prompt": "Factor x² + 36 completely over the complex numbers.",
+          "choices": [
+            "(x + 6)(x − 6)",
+            "(x + 6i)(x − 6i)",
+            "(x + 6i)²",
+            "(x + 6i)(x + 6i)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u05-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "fundamental-theorem-root-count",
+          "standard": "N-CN.9",
+          "difficulty": 2,
+          "prompt": "A polynomial with real coefficients has degree 5. How many roots does it have in the complex numbers, counted with multiplicity, and what constrains its non-real roots?",
+          "choices": [
+            "exactly 5, and any non-real roots occur in conjugate pairs",
+            "exactly 3, and any non-real roots occur in conjugate pairs",
+            "exactly 6, and any non-real roots occur in conjugate pairs",
+            "exactly 4, and any non-real roots occur in conjugate pairs"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u05-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "binomial-theorem-coefficient",
+          "standard": "A-APR.5",
+          "difficulty": 2,
+          "prompt": "In the expansion of (x + y)^5, find the coefficient of the term x^4·y^1.",
+          "choices": [
+            "6",
+            "1",
+            "10",
+            "5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u05-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u05-l03"
+  }
+}

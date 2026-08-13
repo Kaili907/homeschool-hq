@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u08-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u08-l05",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Rate of Change and Building Functions",
+    "dayInUnit": 5,
+    "courseDay": 131,
+    "phase": "Concept model B",
+    "focus": "composing functions",
+    "title": "Concept model B: composing functions"
+  },
+  "standards": [
+    "F-IF.6",
+    "F-BF.1",
+    "F-BF.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 1,
+          "prompt": "R(x) = 9x + 4, C(x) = 5x. Find P(x).",
+          "workedSolution": {
+            "steps": [
+              "P = R − C = 9x + 4 − 5x.",
+              "P(x) = 4x + 4."
+            ],
+            "answer": "P(x) = 4x + 4"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "Output 10 at input 2, output 22 at input 5. Rate?",
+          "workedSolution": {
+            "steps": [
+              "Change in output 12, change in input 3.",
+              "12/3 = 4."
+            ],
+            "answer": "4 output units per input unit"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "For f(x) = -2x² − 2x + 1, find the average rate of change from x = 4 to x = -3.",
+          "choices": [
+            "50/7",
+            "28",
+            "-4",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 2,
+          "prompt": "A sequence has g(1) = 3 and g(n) = 3·g(n − 1). Write the explicit form and find g(3).",
+          "choices": [
+            "g(n) = 3·3^(n−1); g(3) = 27",
+            "g(n) = 3·3^(n−1); g(3) = 81",
+            "g(n) = 3 + 3(n − 1); g(3) = 9",
+            "g(n) = 3·3^n; g(3) = 81"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "A venue charges $30 to open plus $2 per attendee. Write C(n) for the total cost of n attendees, then find C(13).",
+          "choices": [
+            "C(n) = 30n + 2; C(13) = 392",
+            "C(n) = 30 + 2n; C(13) = 56",
+            "C(n) = 32n; C(13) = 416",
+            "C(n) = 2 + 30n; C(13) = 392"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "Revenue is R(x) = 4x − 6 and cost is C(x) = -2x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = -6x − 6",
+            "P(x) = 6x − 6",
+            "P(x) = 2x − 6",
+            "P(x) = 6x + 6"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "A table records output 27 at input 4 and output 30 at input 6. What is the average rate of change between these readings?",
+          "choices": [
+            "3/2 output units per input unit",
+            "3/10 output units per input unit",
+            "-3/2 output units per input unit",
+            "3 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "For f(x) = -4x² − 8x + 1, find the average rate of change from x = -1 to x = 2.",
+          "choices": [
+            "-12",
+            "-26/3",
+            "-36",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 3,
+          "prompt": "A sequence has g(1) = 6 and g(n) = 4·g(n − 1). Write the explicit form and find g(7).",
+          "choices": [
+            "g(n) = 6 + 4(n − 1); g(7) = 30",
+            "g(n) = 6·4^(n−1); g(7) = 24576",
+            "g(n) = 6·4^n; g(7) = 98304",
+            "g(n) = 4·6^(n−1); g(7) = 186624"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 2,
+          "prompt": "A venue charges $40 to open plus $8 per attendee. Write C(n) for the total cost of n attendees, then find C(14).",
+          "choices": [
+            "C(n) = 48n; C(14) = 672",
+            "C(n) = 40 + 8n; C(14) = 152",
+            "C(n) = 8 + 40n; C(14) = 568",
+            "C(n) = 40n + 8; C(14) = 568"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "Revenue is R(x) = -2x + 1 and cost is C(x) = -9x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = 7x − 1",
+            "P(x) = 7x + 1",
+            "P(x) = -11x + 1",
+            "P(x) = -7x + 1"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u08-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u08-l05"
+  }
+}

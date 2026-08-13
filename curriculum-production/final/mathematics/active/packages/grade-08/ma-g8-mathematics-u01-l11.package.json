@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l11",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l11",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 11,
+    "courseDay": 11,
+    "phase": "Performance task planning",
+    "focus": "comparing real numbers",
+    "title": "Performance task planning: comparing real numbers"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "order-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "Order √10, 3, and 10/3 from least to greatest.",
+          "workedSolution": {
+            "steps": [
+              "√10² = 10, 3² = 9, (10/3)² = 100/9 ≈ 11.1.",
+              "Comparing squares: 9 < 10 < 11.1, so 3 < √10 < 10/3... ",
+              "Recheck exactly with a common denominator of 9: 9 < 10 < 100/9 · 9 = 100, so 81 < 90 < 100 confirms 3 < √10 < 10/3."
+            ],
+            "answer": "√10 < 10/3 < 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "estimate-root-expression",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Which whole number is closest to √97 - 2?",
+          "choices": [
+            "9",
+            "10",
+            "7",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "A square garden has an area of 200 square inches. Between which two consecutive whole numbers of inches is the side length?",
+          "choices": [
+            "15 and 16",
+            "14 and 16",
+            "14 and 15",
+            "12 and 13"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "root-comparison-error-analysis",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "A student claims √257 > 20 because 257 > 20. Which statement correctly analyzes the claim?",
+          "choices": [
+            "The claim cannot be evaluated without a calculator.",
+            "The claim is incorrect; since 257 < 20² = 400, √257 < 20.",
+            "The claim is incorrect; √257 = 20 exactly.",
+            "The claim is correct; 257 > 20, so √257 > 20."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "classify-rational-or-irrational",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "Classify √22 as rational or irrational.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "closure-classification",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A rational number (19/20) is added to an irrational number (√293). Is the result rational or irrational?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "Write 0.428428... as a fraction in lowest terms.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l11"
+  }
+}

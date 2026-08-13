@@ -1,0 +1,104 @@
+{
+  "correction_id": "g8-math-8ee2-2026-08-12",
+  "title": "Grade 8 Mathematics — 8.EE.2 coverage correction",
+  "created_on": "2026-08-12",
+  "targets_release": "manuel-academy-grades-5-7-8-curriculum-v1 1.0.0",
+  "target_course_id": "ma-g8-mathematics",
+  "status": "authored-additive-overlay-not-integrated",
+  "mode": "additive-overlay",
+  "sealed_release_modified": false,
+  "closes_standards": [
+    "8.EE.2"
+  ],
+  "refuted_claims": [
+    {
+      "claim": "Grade 8 has an inequality-related prerequisite coverage gap.",
+      "verdict": "REFUTED",
+      "basis": "Michigan Grade 8 mathematics contains no inequality standard; zero occurrences of 'inequalit' in the Grade 8 section of the official standards document. Inequalities are owned by 6.EE.5, 6.EE.8 and 7.EE.4b, and Grade 7 of this curriculum already covers 7.EE.4 with a dedicated inequalities unit.",
+      "action": "none — authoring Grade 8 inequality content would attach instruction to a standard that does not exist at this grade"
+    }
+  ],
+  "standards_source": {
+    "document": "Michigan K-12 Standards — Mathematics",
+    "url": "https://www.michigan.gov/-/media/Project/Websites/mde/Literacy/Content-Standards/Math_Standards.pdf",
+    "sha256": "dbbd4e341a046f22fa4df1dec4af2fd06b35249ad3e3ff9734a3f03bcd6b1a54",
+    "grade8_pages": "52-56",
+    "retrieved_on": "2026-08-12",
+    "corroboration": "SHA-256 is bit-identical to the digest recorded independently in curriculum-authoring/full-family-highschool-9-12/subjects/mathematics/standards/standards-custody.md"
+  },
+  "coverage_reconciliation": {
+    "official_grade8_content_standards": 28,
+    "covered_in_1_0_0": 27,
+    "missing_in_1_0_0": [
+      "8.EE.2"
+    ],
+    "by_domain": {
+      "8.NS": {
+        "official": 2,
+        "covered": 2
+      },
+      "8.EE": {
+        "official": 8,
+        "covered": 7
+      },
+      "8.F": {
+        "official": 5,
+        "covered": 5
+      },
+      "8.G": {
+        "official": 9,
+        "covered": 9
+      },
+      "8.SP": {
+        "official": 4,
+        "covered": 4
+      }
+    }
+  },
+  "contents": {
+    "lessons": "lessons.jsonl",
+    "assessment": "assessment.json",
+    "standards_custody": "standards-custody.md",
+    "integration_contract": "INTEGRATION.md",
+    "validator": "validate.py"
+  },
+  "added_lesson_ids": [
+    "ma-g8-mathematics-u01-l19",
+    "ma-g8-mathematics-u01-l20",
+    "ma-g8-mathematics-u01-l21"
+  ],
+  "added_assessment_ids": [
+    "ma-g8-mathematics-c01-assessment"
+  ],
+  "id_stability": {
+    "existing_lesson_ids_changed": 0,
+    "existing_assessment_ids_changed": 0,
+    "existing_unit_ids_changed": 0,
+    "new_ids_collide_with_sealed_ids": false,
+    "note": "Unit 1 in 1.0.0 ends at l18. New lessons continue the same unit at l19-l21 and satisfy the sealed lesson_id pattern in schemas/lesson.schema.json, so integration requires no renumbering of any existing lesson."
+  },
+  "placement": {
+    "unit_number": 1,
+    "unit_title": "Real Numbers and Irrational Numbers",
+    "insertion_anchor_after": "ma-g8-mathematics-u01-l18",
+    "rationale": "8.EE.2's third requirement ('know that √2 is irrational') is Unit 1's core content, and Unit 1 already teaches approximating square roots (8.NS.2) — the approximate counterpart to 8.EE.2's exact-root work. Placement here also precedes Unit 2 (integer exponents) and Unit 8 (Pythagorean theorem), the downstream consumer of root reasoning."
+  },
+  "schedule_impact": {
+    "sealed_model": "180 instructional days, 10 units x 18 days",
+    "lessons_added": 3,
+    "course_day_values_in_overlay": [19, 20, 21],
+    "collision_warning": "course_day 19-21 are currently occupied by ma-g8-mathematics-u02-l01..l03 in the sealed release. These overlay values express the intended insertion position, NOT an assertion that the slots are free.",
+    "resolution_required_at_integration": true,
+    "options": [
+      "SUBSTITUTION (recommended): deliver the three correction lessons in place of three generic-recycle Unit 1 days (l08 reteach, l13 skill consolidation, l14 transfer challenge). Preserves the 180-day model and changes no IDs. This is a delivery-sequencing decision, not a content edit.",
+      "EXTENSION: schedule the three lessons as additional days, shifting sealed course_day 19-180 to 22-183. Closes the gap without displacing any sealed lesson, but breaks the 180-day model."
+    ],
+    "decision_owner": "director — not made by this correction"
+  },
+  "boundaries": [
+    "No file in curriculum-content/manuel-academy/1.0.0/ is created, modified, deleted, or resealed by this correction.",
+    "Grade 8 Mathematics is not rewritten; only the single missing standard is addressed.",
+    "No standard is invented; every code traces to the custody-verified source document.",
+    "This overlay is authored, validated, and staged. It is not integrated into the release or into any host application."
+  ]
+}

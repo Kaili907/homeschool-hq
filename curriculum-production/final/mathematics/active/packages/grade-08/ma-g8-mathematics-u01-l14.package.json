@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l14",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l14",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 14,
+    "courseDay": 14,
+    "phase": "Transfer challenge",
+    "focus": "decimal expansions",
+    "title": "Transfer challenge: decimal expansions"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 1,
+          "prompt": "Write 0.454545... as a fraction in lowest terms.",
+          "workedSolution": {
+            "steps": [
+              "The repeating block is \"45\", which has length 2.",
+              "Write the fraction as 45/99.",
+              "Reduce by the greatest common factor, 9, to get 5/11."
+            ],
+            "answer": "5/11"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-error-analysis",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A student writes 0.378378... = 378/1000. Which statement best analyzes the claim?",
+          "choices": [
+            "The correct fraction is 14/37; the denominator should be 999 (nine repeated once per repeating digit), not 1000.",
+            "The claim is correct; 378/1000 equals 0.378378....",
+            "The claim is close; only the sign needs to be corrected.",
+            "The correct fraction is 14/37; the numerator should have one extra digit."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "consecutive-integers-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Between which two consecutive whole numbers does √807 lie?",
+          "choices": [
+            "28 and 30",
+            "28 and 29",
+            "27 and 28",
+            "26 and 27"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "nearest-tenth-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Estimate √719 to the nearest tenth.",
+          "choices": [
+            "26.6",
+            "26.7",
+            "26.9",
+            "26.8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "locate-root-on-number-line",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "On the number line, points A, B, C, and D are located at 23, 24, 25, 26. Which point is closest to √618?",
+          "choices": [
+            "D",
+            "A",
+            "C",
+            "B"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Compare 5/24 and 11.",
+          "choices": [
+            "5/24 > 11",
+            "5/24 < 11",
+            "5/24 = 11",
+            "cannot be compared without a calculator"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "order-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Order √22, 17/9, 13 from least to greatest.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "estimate-root-expression",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Which whole number is closest to √318 + 2?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "A square garden has an area of 543 square feet. Between which two consecutive whole numbers of feet is the side length?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l14"
+  }
+}

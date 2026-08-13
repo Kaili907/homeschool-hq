@@ -1,0 +1,309 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l20",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l20",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 20,
+    "courseDay": 20,
+    "phase": "Guided and independent practice — correction block",
+    "focus": "exact roots of perfect squares and perfect cubes",
+    "title": "Evaluating small perfect squares and perfect cubes"
+  },
+  "standards": [
+    "8.EE.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Guided and independent practice — correction block",
+    "profile": "guided-practice-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use these examples as the model for the work below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-perfect-square-root",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Evaluate √144 exactly.",
+          "workedSolution": {
+            "steps": [
+              "Look for a whole number whose square is 144.",
+              "12² = 144.",
+              "So √144 = 12. The radical symbol names the non-negative root."
+            ],
+            "answer": "12"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ex-02",
+          "kind": "worked-example",
+          "itemType": "evaluate-perfect-cube-root",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Evaluate ∛343 exactly.",
+          "workedSolution": {
+            "steps": [
+              "Look for a whole number whose cube is 343.",
+              "7³ = 343.",
+              "So ∛343 = 7."
+            ],
+            "answer": "7"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l20#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-perfect-square-root",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Evaluate √169 exactly.",
+          "choices": [
+            "13",
+            "12",
+            "14",
+            "84.5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-perfect-cube-root",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Evaluate ∛216 exactly.",
+          "choices": [
+            "8",
+            "6",
+            "7",
+            "72"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-square-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Evaluate √(16/49) exactly.",
+          "choices": [
+            "8/49",
+            "4/49",
+            "4/7",
+            "16/7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-cube-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Evaluate ∛(1/27) exactly.",
+          "choices": [
+            "1/3",
+            "1/9",
+            "1/27",
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work these on your own. Report exact values wherever an exact value exists.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-perfect-square-root",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Evaluate √225 exactly.",
+          "choices": [
+            "15",
+            "25",
+            "14",
+            "112.5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-perfect-square-root",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Evaluate √400 exactly.",
+          "choices": [
+            "200",
+            "20",
+            "40",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-perfect-cube-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Evaluate ∛512 exactly.",
+          "choices": [
+            "6",
+            "7",
+            "9",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-perfect-cube-root",
+          "standard": "8.EE.2",
+          "difficulty": 1,
+          "prompt": "Evaluate ∛1000 exactly.",
+          "choices": [
+            "10",
+            "100",
+            "30",
+            "1000"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-square-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Evaluate √(25/81) exactly.",
+          "choices": [
+            "5/9",
+            "25/9",
+            "5/81",
+            "50/81"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-cube-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Evaluate ∛(8/125) exactly.",
+          "choices": [
+            "4/25",
+            "2/5",
+            "8/5",
+            "2/25"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "has-exact-whole-number-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Does √150 have an exact whole-number value? Choose the correct statement.",
+          "choices": [
+            "Yes, 15",
+            "Yes, 12",
+            "No — 150 is not a perfect square",
+            "No — only cube roots can have exact whole-number values"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "has-exact-whole-number-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Does ∛64 have an exact whole-number value? Choose the correct statement.",
+          "choices": [
+            "No — 64 is not a perfect cube",
+            "Yes, 8",
+            "Yes, 4",
+            "Yes, 16"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Work these with no support. Show enough that someone else could check each step.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l20#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-perfect-square-root",
+          "standard": "8.EE.2",
+          "difficulty": 2,
+          "prompt": "Evaluate √196 exactly.",
+          "choices": [
+            "16",
+            "14",
+            "98",
+            "13"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-perfect-cube-root",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "Evaluate ∛729 exactly.",
+          "choices": [
+            "9",
+            "27",
+            "81",
+            "243"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l20#mc-03",
+          "kind": "constructed-response",
+          "itemType": "bounding-perfect-powers",
+          "standard": "8.EE.2",
+          "difficulty": 3,
+          "prompt": "√81 and √80 look almost the same. One has an exact whole-number value and one does not. Say which is which, give the exact value where there is one, and explain how you can tell without a calculator.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l20.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.1-correction",
+    "itemSource": "integration-correction-generator@curriculum-release-corrections/grade8-mathematics-integration/build_student_work.py",
+    "seed": "1.0.1-correction|ma-g8-mathematics-u01-l20"
+  }
+}

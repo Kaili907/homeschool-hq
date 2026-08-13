@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u02-l11",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u02-l11",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rigid Motions and Transformations",
+    "dayInUnit": 11,
+    "courseDay": 29,
+    "phase": "Performance task planning",
+    "focus": "specifying a sequence of transformations",
+    "title": "Performance task planning: specifying a sequence of transformations"
+  },
+  "standards": [
+    "G-CO.2",
+    "G-CO.3",
+    "G-CO.4",
+    "G-CO.5",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 1,
+          "prompt": "Translate (2, −3) by (x, y) → (x + 4, y − 1).",
+          "workedSolution": {
+            "steps": [
+              "2 + 4 = 6.",
+              "−3 − 1 = −4."
+            ],
+            "answer": "(6, −4)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Reflect the point (-1, -2) across the x-axis. Give the image.",
+          "choices": [
+            "(1, 2)",
+            "(1, -2)",
+            "(-2, -1)",
+            "(-1, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "image-under-rotation",
+          "standard": "G-CO.5",
+          "difficulty": 2,
+          "prompt": "Rotate the point (-5, -1) counterclockwise about the origin by 90°. Give the image.",
+          "choices": [
+            "(-1, 5)",
+            "(5, 1)",
+            "(-1, -5)",
+            "(1, -5)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "rotational-symmetry-order",
+          "standard": "G-CO.3",
+          "difficulty": 3,
+          "prompt": "A regular polygon has 3 sides. How many rotations about its centre, strictly between 0° and 360°, carry it onto itself, and what is the smallest such angle?",
+          "choices": [
+            "3 rotations; smallest angle 120°",
+            "2 rotations; smallest angle 120°",
+            "6 rotations; smallest angle 120°",
+            "2 rotations; smallest angle 60°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u02-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "describe-transformation-sequence",
+          "standard": "G-CO.4",
+          "difficulty": 3,
+          "prompt": "Triangle ABC has vertices A(7, -5) and B(-5, -7). After a transformation the images are A′(-7, 5) and B′(5, 7), and the triangle keeps its size and orientation sense. Which single rigid motion describes this?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "image-under-translation",
+          "standard": "G-CO.2",
+          "difficulty": 3,
+          "prompt": "Point P(10, -4) is translated by the rule (x, y) → (x − 2, y + 8). Give the image P′.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u02-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "image-under-reflection",
+          "standard": "G-CO.5",
+          "difficulty": 3,
+          "prompt": "Reflect the point (9, 4) across the y-axis. Give the image.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u02-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u02-l11"
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u02-l01",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Rational and Radical Expressions and Equations",
+    "dayInUnit": 1,
+    "courseDay": 19,
+    "phase": "Launch and diagnostic",
+    "focus": "rewriting rational expressions in quotient-plus-remainder form",
+    "title": "Launch and diagnostic: rewriting rational expressions in quotient-plus-remainder form"
+  },
+  "standards": [
+    "A-APR.6",
+    "A-REI.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 1,
+          "prompt": "Simplify (x² − 5x + 6)/(x − 2).",
+          "workedSolution": {
+            "steps": [
+              "Numerator factors as (x − 2)(x − 3).",
+              "Cancel (x − 2): x − 3, x ≠ 2."
+            ],
+            "answer": "x − 3, x ≠ 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 1,
+          "prompt": "Solve √(1x + 11) = 4, then verify the solution.",
+          "choices": [
+            "x = 16",
+            "x = 5",
+            "x = 4",
+            "x = 9"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 1,
+          "prompt": "Write as a single fraction: -1/(x − 4) + -3/(x − 1).",
+          "choices": [
+            "(-4x + 13) / ((x − 4)(x − 1))",
+            "(-4) / ((x − 4)(x − 1))",
+            "(-4x − 13) / ((x − 4)(x − 1))",
+            "(3x + 13) / ((x − 4)(x − 1))"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-extraneous-solution",
+          "standard": "A-REI.2",
+          "difficulty": 2,
+          "prompt": "Solving a rational equation with denominator (x − 5) yields the candidate solutions x = 5 and x = 5. Which are genuine solutions?",
+          "choices": [
+            "Neither is a solution, because the equation has a restricted domain.",
+            "Only x = 5; x = 5 must be rejected.",
+            "Only x = 5; x = 5 makes the original denominator zero, so it is extraneous.",
+            "Both x = 5 and x = 5 are solutions."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "simplify-rational-expression",
+          "standard": "A-APR.6",
+          "difficulty": 2,
+          "prompt": "Simplify (x^2 - 11x + 30) / (x − 6), and state the restriction on x.",
+          "choices": [
+            "x − 5, x ≠ 6",
+            "x + 5, x ≠ 6",
+            "x − 5, x ≠ 5",
+            "x − 6, x ≠ 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-radical-equation-with-check",
+          "standard": "A-REI.2",
+          "difficulty": 3,
+          "prompt": "Solve √(4x − 16) = 4, then verify the solution.",
+          "choices": [
+            "x = 7",
+            "x = 8",
+            "x = 16",
+            "x = 12"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u02-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "add-rational-expressions",
+          "standard": "A-APR.6",
+          "difficulty": 1,
+          "prompt": "Write as a single fraction: 4/(x − 2) + -3/(x + 3).",
+          "choices": [
+            "(-12x + 18) / ((x − 2)(x + 3))",
+            "(1) / ((x − 2)(x + 3))",
+            "(1x − 18) / ((x − 2)(x + 3))",
+            "(1x + 18) / ((x − 2)(x + 3))"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u02-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-extraneous-solution",
+          "standard": "A-REI.2",
+          "difficulty": 2,
+          "prompt": "Solving a rational equation with denominator (x − 3) yields the candidate solutions x = 3 and x = 3. Which are genuine solutions?",
+          "choices": [
+            "Neither is a solution, because the equation has a restricted domain.",
+            "Only x = 3; x = 3 must be rejected.",
+            "Both x = 3 and x = 3 are solutions.",
+            "Only x = 3; x = 3 makes the original denominator zero, so it is extraneous."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u02-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u02-l01"
+  }
+}
