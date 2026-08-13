@@ -23,6 +23,8 @@ export function FamilyPilotLessonPlayer({
   onExit,
 }: FamilyPilotLessonPlayerProps) {
   const [responseText, setResponseText] = useState('')
+  const [selectedChoice, setSelectedChoice] = useState('')
+  const [activityComplete, setActivityComplete] = useState(false)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const sessionKey = snapshot
     ? `${snapshot.session.householdRef}|${snapshot.session.learnerRef}|${snapshot.session.sessionRef}`
@@ -34,7 +36,9 @@ export function FamilyPilotLessonPlayer({
   // anywhere except through onSubmitAction.
   useEffect(() => {
     setResponseText('')
-  }, [sessionKey, snapshot?.segmentRef])
+    setSelectedChoice('')
+    setActivityComplete(false)
+  }, [sessionKey, snapshot?.segmentRef, segmentContent?.itemRef])
 
   useEffect(() => {
     headingRef.current?.focus()
@@ -96,14 +100,18 @@ export function FamilyPilotLessonPlayer({
     )
   }
 
-  const responseKind = segmentContent?.responseKind ?? 'text'
+  const legacyKind = segmentContent?.responseKind
+  const responseKind = legacyKind === 'text' ? 'TEXT'
+    : legacyKind === 'choice' ? 'CHOICE'
+      : legacyKind === 'none' ? 'NONE'
+        : legacyKind ?? 'TEXT'
   const segmentTitle = segmentContent?.title
-  // No Tutor Core mastery decision is possible for this segment (see
-  // FamilyPilotStudyRuntime.submitStudyAction's 'recorded' path): there is
-  // nothing to grade, so the step is acknowledged directly instead of
-  // collecting a response for a decision that will never be made. Unknown
-  // (missing snapshot) defaults to the response path, the more common case.
-  const canSubmitResponse = responseKind !== 'none' && (snapshot?.tutorBridgeAvailable ?? true)
+  // Explicit uppercase kinds come from the learner-response runtime, which
+  // saves evidence as pending even when Tutor Core is unavailable. An old
+  // caller with no explicit response contract retains completion-only behavior.
+  const responseCollectsEvidence = ['CHOICE', 'TEXT', 'NUMERIC', 'CONSTRUCTED_RESPONSE', 'ACTIVITY_EVIDENCE'].includes(responseKind)
+  const isProductionResponse = Boolean(segmentContent?.responseKind && /^[A-Z_]+$/.test(segmentContent.responseKind))
+  const canSubmitResponse = responseCollectsEvidence && (isProductionResponse || (snapshot?.tutorBridgeAvailable ?? true))
 
   const handleSubmit = () => {
     const trimmed = responseText.trim()
@@ -114,7 +122,7 @@ export function FamilyPilotLessonPlayer({
 
   const handleChoice = (choiceId: string) => {
     if (isBusy) return
-    onSubmitAction(choiceId)
+    setSelectedChoice(choiceId)
   }
 
   return (
@@ -135,24 +143,68 @@ export function FamilyPilotLessonPlayer({
         </div>
       ) : null}
       {segmentContent?.prompt ? <p>{segmentContent.prompt}</p> : null}
+      {segmentContent?.pendingAssessmentCount ? (
+        <p role="status">{segmentContent.pendingAssessmentCount} saved response{segmentContent.pendingAssessmentCount === 1 ? '' : 's'} pending assessment.</p>
+      ) : null}
 
-      {responseKind === 'none' ? (
-        <button type="button" disabled={isBusy} onClick={onNext}>Continue</button>
-      ) : !canSubmitResponse ? (
-        // Completion-only work (see FamilyPilotStudySnapshot.tutorBridgeAvailable):
-        // no mastery decision applies, so the step is acknowledged directly.
-        <button type="button" disabled={isBusy} onClick={onCompleteSegment}>Mark step complete</button>
-      ) : responseKind === 'choice' ? (
-        <div role="group" aria-label="Choose your answer">
-          {(segmentContent?.choices ?? []).map((choice) => (
-            <button key={choice.id} type="button" disabled={isBusy} onClick={() => handleChoice(choice.id)}>
-              {choice.label}
-            </button>
-          ))}
-        </div>
-      ) : (
+      {responseKind === 'NONE' || responseKind === 'READ' ? (
         <div>
+          {responseKind === 'READ' ? <p>This is instructional material. No answer is expected.</p> : null}
+          <button type="button" disabled={isBusy} onClick={onNext}>Continue</button>
+        </div>
+      ) : responseKind === 'RUBRIC_REVIEW_PENDING' ? (
+        <div>
+          <p role="status">Your work is saved for rubric review. No correctness claim is shown while review is pending.</p>
+          <button type="button" disabled={isBusy} onClick={onNext}>Continue</button>
+        </div>
+      ) : responseKind === 'GUARDIAN_ATTESTATION' ? (
+        <div>
+          <p role="status">A guardian will attest this activity after your learner work is saved.</p>
+          <button type="button" disabled={isBusy} onClick={onNext}>Continue</button>
+        </div>
+      ) : !canSubmitResponse ? (
+        // Legacy completion-only callers have no learner evidence contract.
+        <button type="button" disabled={isBusy} onClick={onCompleteSegment}>Mark step complete</button>
+      ) : responseKind === 'CHOICE' ? (
+        <form onSubmit={(event) => { event.preventDefault(); if (!isBusy && selectedChoice) onSubmitAction(selectedChoice) }}>
+          <fieldset disabled={isBusy}>
+            <legend>Choose your answer</legend>
+            {(segmentContent?.choices ?? []).map((choice) => (
+              <label key={choice.id} style={{ display: 'block', minHeight: 44 }}>
+                <input
+                  type="radio"
+                  name="family-pilot-lesson-choice"
+                  value={choice.id}
+                  checked={selectedChoice === choice.id}
+                  onChange={() => handleChoice(choice.id)}
+                />
+                {choice.label}
+              </label>
+            ))}
+          </fieldset>
+          <button type="button" disabled={isBusy || !selectedChoice} onClick={() => { if (!isBusy && selectedChoice) onSubmitAction(selectedChoice) }}>Submit answer</button>
+        </form>
+      ) : responseKind === 'NUMERIC' || (responseKind === 'TEXT' && isProductionResponse) ? (
+        <form onSubmit={(event) => { event.preventDefault(); handleSubmit() }}>
           <label htmlFor="family-pilot-lesson-response">Your response</label>
+          <input
+            id="family-pilot-lesson-response"
+            type="text"
+            inputMode={responseKind === 'NUMERIC' ? 'decimal' : 'text'}
+            autoComplete="off"
+            value={responseText}
+            disabled={isBusy}
+            onChange={(event) => setResponseText(event.target.value)}
+            aria-describedby="family-pilot-lesson-response-help"
+          />
+          <p id="family-pilot-lesson-response-help">Your response is saved on this device before assessment.</p>
+          <button type="button" disabled={isBusy || !responseText.trim()} onClick={handleSubmit}>Submit</button>
+        </form>
+      ) : (
+        <form onSubmit={(event) => { event.preventDefault(); handleSubmit() }}>
+          <label htmlFor="family-pilot-lesson-response">
+            {responseKind === 'ACTIVITY_EVIDENCE' ? 'Describe what you completed or where your evidence is saved' : 'Your response'}
+          </label>
           <textarea
             id="family-pilot-lesson-response"
             value={responseText}
@@ -160,9 +212,15 @@ export function FamilyPilotLessonPlayer({
             onChange={(event) => setResponseText(event.target.value)}
             aria-describedby="family-pilot-lesson-response-help"
           />
-          <p id="family-pilot-lesson-response-help">This response is temporary and is not saved by this screen.</p>
-          <button type="button" disabled={isBusy || !responseText.trim()} onClick={handleSubmit}>Submit</button>
-        </div>
+          {responseKind === 'ACTIVITY_EVIDENCE' ? (
+            <label style={{ display: 'block', minHeight: 44 }}>
+              <input type="checkbox" checked={activityComplete} disabled={isBusy} onChange={(event) => setActivityComplete(event.target.checked)} />
+              I completed the action described above.
+            </label>
+          ) : null}
+          <p id="family-pilot-lesson-response-help">Your response is saved on this device before assessment.</p>
+          <button type="button" disabled={isBusy || !responseText.trim() || (responseKind === 'ACTIVITY_EVIDENCE' && !activityComplete)} onClick={handleSubmit}>Submit</button>
+        </form>
       )}
 
       <div>

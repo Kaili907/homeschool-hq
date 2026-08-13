@@ -1,4 +1,5 @@
 import type { FamilyPilotStudySnapshot } from '../study'
+import type { LearnerResponseType } from '../final-app/learner-response'
 
 /**
  * UI status for the player, supplied by the host. It is intentionally not
@@ -27,9 +28,13 @@ export interface FamilyPilotLessonSegmentContent {
   readonly instruction?: string
   readonly prompt?: string
   readonly example?: string
-  /** Defaults to 'text' when omitted. */
-  readonly responseKind?: 'text' | 'choice' | 'none'
+  readonly lessonRef?: string
+  readonly sectionRef?: string
+  readonly itemRef?: string
+  /** Uppercase kinds are the production learner-response contract. Lowercase values remain for legacy callers. */
+  readonly responseKind?: LearnerResponseType | 'text' | 'choice' | 'none'
   readonly choices?: readonly FamilyPilotLessonPlayerChoice[]
+  readonly pendingAssessmentCount?: number
 }
 
 export interface FamilyPilotLessonPlayerProps {

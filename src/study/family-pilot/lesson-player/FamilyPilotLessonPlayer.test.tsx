@@ -176,6 +176,14 @@ describe('FamilyPilotLessonPlayer', () => {
     return findAll(container, 'TEXTAREA')[0] ?? null
   }
 
+  function findRadio(value: string): FakeElement | null {
+    return findAll(container, 'INPUT').find((input) => reactProps(input).type === 'radio' && reactProps(input).value === value) ?? null
+  }
+
+  function findInput(type: string): FakeElement | null {
+    return findAll(container, 'INPUT').find((input) => reactProps(input).type === type) ?? null
+  }
+
   // React writes boolean HTML attributes like `disabled` via setAttribute
   // presence/absence, not a `.disabled` property assignment.
   function isDisabled(el: FakeElement | null): boolean {
@@ -279,8 +287,39 @@ describe('FamilyPilotLessonPlayer', () => {
       },
     })} />)
     expect(findTextarea()).toBeNull()
-    await press(findButton('19'))
+    await typeInto(findRadio('choice-b'), 'choice-b')
+    await press(findButton('Submit answer'))
     expect(handlers.onSubmitAction).toHaveBeenCalledWith('choice-b')
+  })
+
+  it('renders production choices as an accessible radio group even without a Tutor bridge', async () => {
+    await render(<FamilyPilotLessonPlayer {...baseProps({
+      snapshot: baseSnapshot({ tutorBridgeAvailable: false, masteryAuthority: 'completion-only' }),
+      segmentContent: { responseKind: 'CHOICE', choices: [{ id: 'choice-a', label: '12' }, { id: 'choice-b', label: '19' }] },
+    })} />)
+    expect(findAll(container, 'FIELDSET')).toHaveLength(1)
+    expect(findAll(container, 'LEGEND').some((legend) => hasText(legend, 'Choose your answer'))).toBe(true)
+    expect(findRadio('choice-a')).not.toBeNull()
+    expect(findRadio('choice-b')).not.toBeNull()
+    expect(findButton('Mark step complete')).toBeNull()
+    expect(isDisabled(findButton('Submit answer'))).toBe(true)
+  })
+
+  it('renders labelled numeric and long-response controls with mobile keyboard hints', async () => {
+    await render(<FamilyPilotLessonPlayer {...baseProps({ segmentContent: { responseKind: 'NUMERIC', itemRef: 'numeric:1' } })} />)
+    expect(reactProps(findInput('text')!).inputMode).toBe('decimal')
+    expect(hasText(container, 'Your response')).toBe(true)
+    await rerender(<FamilyPilotLessonPlayer {...baseProps({ segmentContent: { responseKind: 'CONSTRUCTED_RESPONSE', itemRef: 'long:1' } })} />)
+    expect(findTextarea()).not.toBeNull()
+    expect(hasText(container, 'saved on this device before assessment')).toBe(true)
+  })
+
+  it('requires an explicit completion check and evidence text for activity evidence', async () => {
+    await render(<FamilyPilotLessonPlayer {...baseProps({ segmentContent: { responseKind: 'ACTIVITY_EVIDENCE', itemRef: 'activity:1' } })} />)
+    expect(findTextarea()).not.toBeNull()
+    expect(findInput('checkbox')).not.toBeNull()
+    expect(hasText(container, 'I completed the action described above')).toBe(true)
+    expect(isDisabled(findButton('Submit'))).toBe(true)
   })
 
   it('calls onNext for a segment that needs no learner response', async () => {
@@ -412,12 +451,12 @@ describe('FamilyPilotLessonPlayer', () => {
     for (const label of ['Submit', 'Pause']) expect(isDisabled(findButton(label))).toBe(true)
   })
 
-  it('disables a choice button and the Continue action while busy', async () => {
+  it('disables a choice group and the Continue action while busy', async () => {
     await render(<FamilyPilotLessonPlayer {...baseProps({
       busy: true,
       segmentContent: { responseKind: 'choice', choices: [{ id: 'choice-a', label: '12' }] },
     })} />)
-    expect(isDisabled(findButton('12'))).toBe(true)
+    expect(findAll(container, 'FIELDSET')[0]?.getAttribute('disabled')).not.toBeNull()
 
     await rerender(<FamilyPilotLessonPlayer {...baseProps({ busy: true, segmentContent: { responseKind: 'none' } })} />)
     expect(isDisabled(findButton('Continue'))).toBe(true)
