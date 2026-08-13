@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u03-l06",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Basic Food Safety",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: storage and cleanup"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 07–09"
+  ],
+  "objective": "Using a specific instance of food or kitchen items not stored or cleaned up correctly, learners diagnose the break with an adult and correct both the immediate problem and their storage/cleanup routine.",
+  "scenario": "The learner looks at a real, current kitchen storage or cleanup problem — leftovers left on the counter, a container put in the wrong cabinet, a dirty surface — and works with an adult to trace back exactly where the storage-and-cleanup routine broke down, then fixes it and adjusts the routine.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No shame language is used toward whoever is responsible for the lapse."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there's no current real storage or cleanup problem to diagnose, the learner instead reviews a short written kitchen-storage scenario, identifies the likely sticking-point step, and proposes a specific fix the same way as the guided task."
+  },
+  "materials": [
+    "the actual current kitchen item(s) needing correction",
+    "storage containers",
+    "cleaning supplies"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Describe the specific storage or cleanup problem you're looking at right now — exactly what's out of place or left undone.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe the specific problem."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, trace back to the exact step where the routine stopped (food not covered, container not labeled, surface not wiped, etc.).",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named the exact step where the routine stopped."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My adult and I agreed on one specific reason that step was skipped."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "We named one small change to make that step easier to remember."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Correct the current problem, then test your one routine change on a second, similar situation.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Did the change work the second time? What did you notice?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Explain your updated routine.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain your updated storage-and-cleanup routine in your own words, and name the one step you'll watch most closely next time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's proposed fix is vague, reteach by having them name a specific trigger (a location, a time, a linked habit) tied to the sticking-point step, then test it on a small, low-stakes situation before applying it to the real problem.",
+  "extension": "Check one additional kitchen storage or cleanup habit for the same kind of breakdown and compare whether it's the same sticking-point step.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

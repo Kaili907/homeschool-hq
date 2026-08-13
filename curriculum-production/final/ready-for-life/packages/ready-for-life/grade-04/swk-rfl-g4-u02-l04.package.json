@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u02-l04",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry Care",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: handwashing a small item"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 04–06"
+  ],
+  "objective": "Learners handwash one small stained item, pretreating the stain with a small amount of detergent rubbed directly into the fabric before soaking, washing, and rinsing, building on the basic handwashing technique from third grade by adding a targeted pretreatment step for a real stain.",
+  "scenario": "A trusted adult identifies one real small item with a visible stain, such as a bandana, a sports sock, or a cloth napkin. The learner examines the stain, pretreats it, then completes the full wash-and-rinse loop with the adult present, checking at the end whether the stain lightened or came out.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "drawing",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult stays present for the entire pretreat-wash-rinse sequence.",
+    "Use only cool or lukewarm water; never water hot enough to be uncomfortable to the touch.",
+    "Check with the adult before using any stain-treatment product beyond plain detergent; some products require adult-only handling."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no stained item is available, the learner instead studies a printed photo or description of a stained item and writes the four-step plan they would follow (identify the stain, pretreat, wash, rinse and check), including one reason pretreating before washing works better than washing first."
+  },
+  "materials": [
+    "a small stained item",
+    "a sink or basin",
+    "mild detergent",
+    "a place to hang the item to dry"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look closely at the stain with your adult before starting.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe the stain: what color is it, roughly how large, and where on the item is it located?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult present, rub a small amount of detergent directly into the stained area and let it sit for two minutes before wetting the whole item.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I rubbed detergent directly onto the stain, not just onto the whole item evenly."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I let the pretreated stain sit for about two minutes before wetting the item."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I then washed and rinsed the whole item using the four-step routine from third grade."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "After rinsing, check the stained area closely before hanging the item to dry.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Compared to before pretreating, is the stain gone, lighter, or unchanged?",
+          "choices": [
+            "Gone",
+            "Lighter",
+            "Unchanged"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "If the stain is still visible, what would you or your adult try next?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare this task to plain handwashing without pretreating.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why pretreating a stain before washing the whole item works better than washing the whole item first and hoping the stain comes out."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner rubs detergent evenly across the whole item instead of targeting the stain, reteach with a marked practice cloth: mark a small circle with washable marker, have the learner pretreat only inside the circle, and check that the surrounding fabric stayed untouched.",
+  "extension": "Have the learner pretreat and wash a second stained item using a different pretreatment wait time (for example five minutes instead of two) and compare which wait time got a better result.",
+  "scoringRef": "scoring/ready-for-life/grade-04/swk-rfl-g4-u02-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u02-l04",
+    "authoredBy": "manual"
+  }
+}

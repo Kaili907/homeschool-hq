@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l04",
+  "lessonId": "ma-g3-ready-for-life-u06-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Step-order fidelity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are skipped or done out of the planned order."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All steps are completed in the order set on the plan."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner adapts appropriately to something the plan did not predict without abandoning the remaining planned steps."
+          }
+        ]
+      },
+      {
+        "dimension": "Supervision boundary respected",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "A step labeled 'adult right there' is started before the guardian is physically present."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner waits for the guardian's presence at every step labeled 'adult right there.'"
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner explicitly checks with the guardian before starting each flagged step."
+          }
+        ]
+      },
+      {
+        "dimension": "Job completion",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The ending step is skipped or the job is left unfinished."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The ending step is completed and the finished job matches the plan."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner names any specific deviation from the plan and explains the on-the-spot response."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner never begins a step labeled 'adult right there' without the guardian physically present.",
+      "The guardian's confirmation, not the learner's self-report, certifies completion."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

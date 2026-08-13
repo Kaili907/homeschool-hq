@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u01-l03",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Independent Planning and Executive Routines",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: priorities and deadlines"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners sort a real list of their own current tasks and deadlines into a four-box urgent and important grid, first with definitions in front of them and then a second time without support, to decide which real tasks deserve attention first.",
+  "scenario": "Right now the learner almost certainly has several real things pending at once, a school assignment due this week, a chore, a message that needs a reply, practice for something, a promise made to a friend or sibling. This lesson has them dump that real list onto paper and sort it using a four-box grid, once with the definitions handy and once from memory.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper",
+    "a pencil or pen",
+    "a ruler or straightedge, optional, for drawing the grid"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting anything, list at least six real tasks or deadlines you currently have pending, mixing small and large ones.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Write your list of at least six real, current tasks or deadlines, in any order."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Round one, with support: draw a four-box grid labeled Urgent and Important, Important and Not Urgent, Urgent and Not Important, and Neither. Using these definitions as your guide, urgent means real time pressure soon, important means it matters for a bigger goal or relationship even without time pressure, sort your first three tasks into the correct boxes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I placed each of my first three tasks in exactly one box, using the definitions provided."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "For one task you placed, explain in one sentence why it landed in that specific box rather than a neighboring one."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Round two, without support: cover or set aside the definitions and sort your remaining tasks into the same four-box grid on your own. For each task you place in Urgent and Important, write the actual date or deadline attached to it. For each task in Important and Not Urgent, write one specific reason it still matters even though nothing forces you to do it soon.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "List where each remaining task landed, with the real deadline for anything in Urgent and Important and a specific reason for anything in Important and Not Urgent."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your two rounds of sorting.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Did anything move to a different box between round one and round two, or did sorting get harder or easier without the definitions in front of you? Explain what changed and why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner consistently confuses urgent with important (treating anything with a deadline as automatically important), reteach with two contrasting examples side by side: a low-stakes task with a tight deadline and a high-stakes task with no deadline, and have them explain the difference out loud before resorting their own list.",
+  "extension": "Have the learner rank just their Urgent and Important box in the exact order they'll tackle those tasks today, and explain what would happen if they instead started with the Urgent and Not Important box first.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u01-l03",
+    "authoredBy": "manual"
+  }
+}

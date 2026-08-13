@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u04-l01",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Civic and Legal Adulthood",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: identification and official records"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners build a general 'which record category might this need' checklist and apply it to six hypothetical situations, so they practice the pattern of anticipating documentation needs while explicitly deferring the specifics to a current, official local source.",
+  "scenario": "Given four generic record categories (a government-issued ID, school records, health records, proof of address) and six hypothetical situations (renting a room, opening a certain kind of account, applying for a certain kind of job, traveling, a medical appointment, registering for something), the learner matches likely categories to each situation and explicitly flags that the exact requirements must be verified with a current local or official source, not assumed from this worksheet.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson names general categories only; it does not assert what any specific real institution actually requires, since that varies by place and changes over time.",
+    "Every match includes an explicit note to verify against a current local or official source before relying on it for a real situation."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided four record categories and six hypothetical situations"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before matching, guess which of the six situations would need the most different record categories.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Of the six hypothetical situations, which do you guess would require the most different kinds of records, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Match likely record categories to each of the six situations.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I matched at least one likely record category to each of the six situations."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For every match, I wrote 'verify with a current local/official source' rather than stating it as certain."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain your reasoning for the two situations you found trickiest to match.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Pick the two situations that were hardest to match, and explain what made them harder and how you resolved it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the limits of this worksheet.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Why can't this worksheet just tell you exactly what you'd need for each real situation?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner states any match as a certain fact rather than something to verify (for example, asserting exactly what a real institution requires), reteach the distinction between 'a plausible category to check' and 'a verified requirement,' then have them revise the phrasing.",
+  "extension": "Have the learner add a seventh, self-invented hypothetical situation and match it the same way.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

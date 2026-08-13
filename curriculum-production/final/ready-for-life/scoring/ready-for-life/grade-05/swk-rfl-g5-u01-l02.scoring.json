@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l02",
+  "lessonId": "ma-g5-ready-for-life-u01-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Following the four-step order",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Skips or reorders steps, for example wiping before sorting."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Completes all four steps in the modeled order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Completes all four steps in order and self-corrects when they notice they skipped one."
+          }
+        ]
+      },
+      {
+        "dimension": "Timing and pacing awareness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Has no clear sense of which step took longest."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Accurately names which step took longest."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names the longest step and explains a specific reason tied to that space."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Sort step produces two distinguishable groups, not one big pile.",
+      "Wipe step happens only after the surface is fully cleared.",
+      "Reflection compares before and after using a specific detail from the space, not a general statement."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

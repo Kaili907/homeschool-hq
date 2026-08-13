@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l03",
+  "lessonId": "ma-g9-ready-for-life-u01-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Correct handling of fixed-time conflicts",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The day-by-day plan schedules the history project or another flexible task directly into a fixed-time block (practice or the birthday dinner), creating a real conflict." },
+          { "label": "Proficient", "descriptor": "The plan correctly avoids scheduling anything into the two fixed-time blocks, placing flexible tasks only in open windows." },
+          { "label": "Advanced", "descriptor": "The plan avoids all fixed-time conflicts and also sequences the two trash/recycling days and the history project work in a way that leaves a visible buffer before Friday's deadline." }
+        ]
+      },
+      {
+        "dimension": "Quality of triage reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reasoning given is generic ('this one felt more important') and does not reference the specific deadlines, times, or flexibility of the four obligations." },
+          { "label": "Proficient", "descriptor": "Reasoning explicitly references the specific fixed times or the Friday deadline to justify at least one scheduling choice." },
+          { "label": "Advanced", "descriptor": "Reasoning explicitly references fixed times and the deadline for multiple choices, and the stated general rule in the reflection accurately describes the logic actually used in the day-by-day plan." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A day-by-day plan where practice (Mon/Wed/Fri 4-5:30pm) and the birthday dinner (Thu 6-8pm) are never double-booked with another task.",
+      "Reasoning that names specific obligations, days, or times from the scenario rather than a general statement like 'I prioritized what mattered most.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

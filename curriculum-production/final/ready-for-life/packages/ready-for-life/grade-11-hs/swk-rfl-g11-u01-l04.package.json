@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u01-l04",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Postsecondary Pathways",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: fit: setting, structure, and support needs"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "With a guardian, learners assess what kind of setting, structure, and support they would actually need to succeed on their current leading pathway, so the shortlist reflects the learner's real working style rather than an assumption that any pathway would suit them equally.",
+  "scenario": "The learner sits down with a guardian and works through specific questions about how independent versus structured an environment the learner tends to do well in, and what kind of support system the leading pathway would need to provide or the learner would need to arrange, then records what the guardian noticed as well as what the learner concluded.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This conversation happens directly with the learner's own guardian; no outside person is contacted for this lesson.",
+    "The learner and guardian share only what is needed to assess fit for the pathway; the lesson does not require disclosing unrelated personal, medical, or family details."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian conversation cannot happen this session, the learner instead completes the same setting-and-support assessment independently in writing, using a provided list of guiding questions, and a guardian reviews and signs off on the written result afterward."
+  },
+  "materials": ["paper or notes app", "the provided setting and support guiding questions", "a guardian to talk with"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before talking with your guardian, write your own first guess about how independent versus structured a setting you tend to do well in.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "On your own, would you say you tend to do better with a lot of structure and close guidance, or with a lot of independence and few set routines? Give one real example that supports your answer." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your guardian, talk through the guiding questions about setting, structure, and support for your current leading pathway.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I talked with my guardian about how independent versus structured a setting I tend to do well in, using real examples, not just opinions." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I talked with my guardian about what kind of support system (academic, financial, logistical, or personal) my leading pathway would need to provide or that I would need to arrange." },
+        { "ref": "t2-p3", "promptType": "extended-response", "text": "Summarize one specific thing your guardian noticed about your working style that you had not already named yourself." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare what the leading pathway typically offers in structure and support to what you and your guardian concluded you need.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Does your current leading pathway's typical setting match what you and your guardian concluded you need? Identify at least one specific match and one specific gap." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what this means for your shortlist going into the unit performance task.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Based on this conversation, does your leading pathway still seem like the strongest fit, or does another pathway from your day-1 list now deserve a closer look? Explain specifically why." }
+      ]
+    }
+  ],
+  "remediation": "If the write-up only restates the learner's own warm-up guess without reflecting anything the guardian actually said (a sign the conversation was skipped or one-sided), reteach by having the guardian and learner redo task 2 together, this time with the guardian naming one concrete past situation where the learner's working style was visible, before the learner writes the summary.",
+  "extension": "Have the learner and guardian identify one specific way the learner could build the kind of structure or support they need even within a pathway that doesn't naturally provide it, and write that adaptation down as a concrete plan.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}

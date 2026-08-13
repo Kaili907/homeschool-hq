@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u01-l02",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Home Care Routines That Last",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: building a ten-minute reset"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last"
+  ],
+  "objective": "Learners plan a ten-minute reset for one room by choosing three or four specific tasks that realistically fit in ten minutes, put those tasks in the order they think will work best, then run the reset once and time themselves to test whether their planned order actually worked.",
+  "scenario": "Building on the four-step five-minute tidy from third grade, the learner now designs their own routine instead of following one fixed sequence. They pick one room, decide which specific tasks belong in a ten-minute reset, and choose the order those tasks happen in before testing the plan with a timer.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a timer or clock",
+    "paper or a notes app to write the plan before starting",
+    "one real room that needs a reset"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look at your chosen room and list everything that would need to happen for it to feel reset.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List every specific task you notice needs doing in this room right now, for example clearing the table, putting away shoes, or straightening cushions."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "From your list, choose three or four tasks that realistically fit in ten minutes and decide what order to do them in.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I chose specific tasks from my list rather than trying to do everything."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote my chosen tasks down in the order I planned to do them, before starting the timer."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I thought about which task should go first and why, instead of picking randomly."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Set a timer for ten minutes and run your planned reset in the order you wrote down.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Did you finish your planned tasks inside ten minutes? If your order didn't work as planned, name which task took longer than expected and explain why you think that happened."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare this planned reset to the fixed four-step routine you used in third grade.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one way that choosing your own tasks and order for this ten-minute reset was different from following a fixed routine, and say whether your order was a good choice or whether you would change it next time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's planned order stalls because they put a long task first and run out of time for the rest, reteach by having them estimate a rough time for each task before ordering the list, then rebuild the order so the estimated times add up to ten minutes or less.",
+  "extension": "Have the learner plan and run a ten-minute reset for a second room and compare, in writing, which of their two planned orders worked better and what they would change about the weaker plan.",
+  "scoringRef": "scoring/swk-rfl-g4-u01-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

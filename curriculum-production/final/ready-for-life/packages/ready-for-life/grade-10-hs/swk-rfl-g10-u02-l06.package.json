@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u02-l06",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Job Readiness: Applications, Resumes, and Interviews",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: understanding working-age rules locally"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners assemble their resume bullet points, application message, and reference plan into one job-readiness portfolio, and research the actual minimum working age and any permit or hour-limit rules that apply where they live, completing this unit's performance task with a factually current local check rather than an assumption.",
+  "scenario": "The learner compiles the resume bullet points, application message, and reference plan from earlier this unit into a single portfolio document, then researches and records the specific minimum working age, work-permit requirement, and any hour limits that apply to their own location from a current source, since these rules genuinely vary by location.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Working-age, work-permit, and hour-limit rules vary by location and change over time; the learner is asked to check a current source rather than assume a rule from somewhere else applies."
+  ],
+  "simulationAlternative": null,
+  "materials": ["resume bullet points, application message, and reference plan from earlier this unit", "access to a current source on local working-age rules, or the provided reference summary", "a notebook or document for the compiled portfolio"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before researching, write your current guess at the minimum working age where you live.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write your current guess, and whether you think there are any permit or hour-limit rules." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Compile your resume bullet points, application message, and reference plan into one portfolio document.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My portfolio includes my resume bullet points from earlier this unit." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My portfolio includes my application message from earlier this unit." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My portfolio includes my two-person reference plan from earlier this unit." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Research the actual minimum working age, permit requirement, and any hour limits that apply where you live, using a current source.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Record what you found: the minimum working age, whether a permit is required, and any hour limits, and name the source you checked." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare what you found to your warm-up guess and reflect on the unit.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "How close was your guess, and what is the one piece of this unit's portfolio you feel most confident about right now?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner records a working-age rule without naming where it came from, or copies a rule from an unrelated location, reteach by requiring the source to be named explicitly and by asking the learner to state, in their own words, why a rule from a different location wouldn't necessarily apply to them.",
+  "extension": "Have the learner research one additional rule relevant to a first job (such as required breaks or pay timing) for their own location and add it to the portfolio with its source.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u02-l06",
+    "authoredBy": "manual"
+  }
+}

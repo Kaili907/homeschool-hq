@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u04-l06",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Appointments, and Community Navigation",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: accessibility and contingency planning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners revise their earlier Cedar Hollow bus trip plan to account for one realistic contingency, a route closure, a schedule delay, or a mobility need, and justify why their backup choice still works.",
+  "scenario": "The Hollow Line Route 4 bus from the earlier Cedar Hollow errand plan is announced fictionally closed for construction this morning. Using the fictional replacement route details printed on this task sheet, the learner revises the original plan with a specific backup, a different stop, a different departure, or an accommodation for a mobility need, and explains why the new plan still gets the errand done before the booth closes.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper",
+    "pencil",
+    "the learner's earlier Cedar Hollow trip plan from an earlier lesson, or the fictional schedule details restated on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Recall or reread the original fictional plan before changing anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In one or two sentences, restate the original Cedar Hollow plan: which bus was going to be caught and what time the errand-runner planned to leave home."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read the new contingency and identify what specifically breaks in the old plan. This morning, Hollow Line Route 4 is closed for construction between 9:00 a.m. and 11:30 a.m. A replacement route, Route 4A, runs from the Elm Street stop, a 12-minute walk from home, at 9:20 and 9:50, taking 20 minutes to reach Riverside Market.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I identified that Route 4 will not run in time for the original plan today."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "Using the Route 4A details above, what time would the errand-runner need to leave home to catch the 9:20 departure from the Elm Street stop?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write the complete revised plan and justify it.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write the full revised fictional trip plan using Route 4A instead of Route 4: what time to leave home, which departure to catch, how long the walk and ride take combined, what time you would arrive at the garden supply booth, and how much buffer time remains before the 11:00 a.m. closing. Then explain in at least two sentences why this backup plan still works even though it uses a different stop and a later departure than the original."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think beyond this one construction closure.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one other realistic contingency, besides a route closure, that could disrupt a real trip plan, such as a schedule delay or a mobility need requiring a different stop, and explain in general terms what a person could do to prepare for that kind of disruption ahead of time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's revised plan ignores the new walking distance to the Elm Street stop, reteach by having them mark both the Oak Street and Elm Street stops on the map description side by side and compare the two walking times before recalculating.",
+  "extension": "Have the learner plan a third contingency for the same fictional errand, this time assuming no bus is running at all that morning, and describe a full alternative plan using only walking and time estimates.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

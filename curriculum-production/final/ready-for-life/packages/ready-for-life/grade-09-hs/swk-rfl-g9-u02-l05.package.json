@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u02-l05",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Household Independence and Living-Space Systems",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: shared-space agreements and boundaries"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft one real, specific shared-space agreement (such as about a common area, a chore split, or quiet hours) and actually propose it to their real household, with a trusted adult confirming afterward that the conversation took place.",
+  "scenario": "The learner identifies one real point of friction or unclear expectation in a shared space in their real household, drafts a specific written agreement addressing it, and proposes the agreement out loud to the household members it affects. A trusted adult confirms the conversation happened.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["written plan", "checklist", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner proposes the agreement as a conversation, not a written contract requiring signatures; no household member is required to agree on the spot.",
+    "Completing this task sheet never certifies the proposal by itself; a guardian confirmation that the conversation happened is required before the task counts as complete, exactly as this course's own safety policy states."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If proposing the agreement to the full household is not possible during the lesson window, the learner instead writes the complete agreement and then role-plays the full proposal conversation with a trusted adult, including the adult responding with at least one realistic objection or question for the learner to address."
+  },
+  "materials": ["paper or a document", "access to the real household members the agreement affects, or a trusted adult for the role-played version"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Identify one real point of friction or unclear expectation in a shared space in your household.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe the specific shared space (for example, a bathroom, kitchen, living room, or laundry area) and the specific problem or unclear expectation around it." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft your agreement with three specific parts: what the expectation is, who it applies to, and what happens if it isn't followed.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My agreement names the specific shared space and the specific expectation, not a vague goal like 'be more considerate.'" },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My agreement names exactly who it applies to." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My agreement states a specific, reasonable next step if the expectation isn't met." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Propose your agreement out loud to the household members it affects, listen to their response, and note what happened.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "What was the outcome of proposing your agreement?", "choices": ["Accepted as written", "Accepted with changes we agreed on together", "Not yet resolved, more discussion needed"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Write down one specific thing a household member said in response, whether it was agreement, a question, or pushback." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the conversation itself.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "What is one thing you would say differently if you proposed this agreement again, based on how the actual conversation went?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's agreement states only a vague goal ('everyone should help more') without naming the specific space, specific expectation, and specific people it applies to, reteach by having them rewrite it as a single sentence following the exact frame 'In [space], [person or people] will [specific action] by [specific time or trigger]' before proposing it.",
+  "extension": "Have the learner draft a second agreement for a different shared space and identify which of the two agreements is more likely to actually get followed, explaining why in terms of how specific and enforceable each one is.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  }
+}

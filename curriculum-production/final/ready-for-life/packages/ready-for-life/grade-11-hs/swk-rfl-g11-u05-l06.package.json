@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u05-l06",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Problem Solving Under Constraint",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: reviewing a decision after the outcome"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners work a realistic multi-constraint fictional problem (competing demands on time, money, and incomplete information) to a defended decision, documenting their reasoning, tradeoffs, and a concrete fallback, present that decision to a guardian, and then review a provided outcome afterward to evaluate what they'd do differently, so the full problem-solving-under-constraint process is practiced start to finish with a real adult reviewer.",
+  "scenario": "The learner reads a provided fictional multi-constraint scenario (a character choosing between two summer opportunities under a tight decision deadline, an uncertain final cost for one option, and no way to do both), works it to a defended decision with a documented fallback, presents that decision and reasoning to a guardian, and then reads a provided account of what happened afterward to review the outcome with the guardian.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The scenario, decision, and outcome are all fictional; the guardian's role is to listen to the learner's reasoning and ask questions, not to grade the fictional character's choice.",
+    "The learner is not required to disclose any real personal decision as part of this task."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian is not available to hear the presentation and outcome review right now, the learner completes the full written performance task and outcome review independently, including a written self-assessment addressing the same questions a guardian's questions would raise, for guardian sign-off once available."
+  },
+  "materials": ["the provided fictional multi-constraint scenario and outcome account", "paper or notes app", "a guardian or trusted adult to present to"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before proposing any option, separate the stated problem from the underlying real problem, and name the three separate constraints (time, money, information) at play in the scenario.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What is the real underlying decision the character has to make, separate from how the scenario first states it?" },
+        { "ref": "t1-p2", "promptType": "checklist-item", "text": "I named the specific time constraint, money constraint, and information gap at play in the scenario." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Generate at least three genuinely distinct options (not variations of the same two choices), build a tradeoff table comparing them on the same criteria, and make and defend a decision using specific rows from your table.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I generated at least three genuinely distinct options, not variations of the original two choices." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I built a tradeoff table comparing all options on the same criteria." },
+        { "ref": "t2-p3", "promptType": "extended-response", "text": "State your defended decision and justify it using at least two specific rows from your tradeoff table." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "guided",
+      "directions": "Build a concrete fallback with a specific trigger condition, then present your full decision, tradeoffs, and fallback to a guardian.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Describe your fallback plan and the exact trigger condition that would cause the character to switch to it." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "I presented my decision, tradeoffs, and fallback out loud to a guardian." },
+        { "ref": "t3-p3", "promptType": "checklist-item", "text": "The guardian asked at least one question about my reasoning." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Read the provided outcome account and review it with your guardian.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Did the outcome match what you expected when you made the decision? What specifically was different, if anything?" },
+        { "ref": "t4-p2", "promptType": "short-response", "text": "After discussing the outcome with your guardian, what is one thing you would do differently in your decision process, not just a different final answer?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's tradeoff table or fallback is thin (fewer than three options, or a fallback with no specific trigger), pause the presentation to the guardian and reteach the missing piece using the day 2 and day 5 lesson patterns before the guardian conversation continues, so the guardian hears a complete defended decision.",
+  "extension": "Have the learner and guardian identify which single piece of information, if the character had known it in advance, would have changed the decision, and discuss how the character could have gotten that information sooner.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l06",
+  "lessonId": "ma-g12-ready-for-life-u03-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Packet completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the four required artifacts is missing from the assembled packet."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four artifacts are present in the packet."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The packet is organized in a way that would actually be usable, not just a loose pile of pieces."
+          }
+        ]
+      },
+      {
+        "dimension": "Source matching",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "All three questions are matched to the same source category with no distinguishing reasoning."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each question is matched to a plausible, distinct source category with a stated reason."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reasoning correctly distinguishes categories by the actual nature of each question (safety versus pay versus scheduling)."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All four earlier artifacts are represented in the assembled packet.",
+      "The three source matches are not all identical.",
+      "No real employer lookup is required to complete the lesson at full credit."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

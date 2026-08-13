@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l05",
+  "lessonId": "ma-g12-ready-for-life-u03-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Line-item accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more lines (gross pay, a deduction, or net pay) are mislabeled."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All lines are correctly labeled."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner can explain in their own words what distinguishes a deduction from gross and net pay, not just label them correctly."
+          }
+        ]
+      },
+      {
+        "dimension": "Arithmetic verification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Gross pay minus the listed deductions does not equal the stated net pay in the learner's work."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The arithmetic correctly reconciles."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Two specific, well-formed questions for a real payroll/HR contact are included, showing readiness to ask rather than assume."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Gross minus deductions equals net exactly in the learner's shown work.",
+      "The two payroll/HR questions are specific enough to actually ask someone, not vague.",
+      "No claim is made anywhere that this sample predicts a real pay statement's actual figures."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

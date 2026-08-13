@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l04",
+  "lessonId": "ma-g7-ready-for-life-u02-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Hazard identification and never-mix reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Labels are not read closely, or no specific never-mix pair is identified."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least one real never-mix pair is correctly identified with a reason drawn from the actual label text."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains the hazard mechanism, such as the specific fumes produced, not just that the pair is dangerous."
+          }
+        ]
+      },
+      {
+        "dimension": "Safe, supervised product use",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Label directions for dwell time or ventilation are not followed, or the trusted adult is not present throughout use."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The product is used exactly as the label directs, with a trusted adult supervising the entire time."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner can explain why each specific direction, such as dwell time or ventilation, matters for that product."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The trusted adult was present for gathering, sorting, and product use, not only signing off afterward.",
+      "The named hazard pair and the surface-cleaning description are specific to the real products and label text used, not generic cleaning advice.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

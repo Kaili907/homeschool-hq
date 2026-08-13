@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l06",
+  "lessonId": "ma-g9-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Contingency plan specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Failure point or backup plan is missing or too vague to act on (such as 'find another way')." },
+          { "label": "Proficient", "descriptor": "Learner names a specific, realistic failure point and a specific backup plan with a clear step-by-step explanation." },
+          { "label": "Advanced", "descriptor": "Learner names a specific failure point, a specific backup plan, and the step-by-step explanation names the exact first real-world action taken to recover." }
+        ]
+      },
+      {
+        "dimension": "Accessibility reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Accessibility need is named but the explanation of how it changes the plan is generic (such as 'make it easier') rather than tied to the specific need." },
+          { "label": "Proficient", "descriptor": "Learner names a specific accessibility need and explains a specific, logical change to the route or backup plan because of it." },
+          { "label": "Advanced", "descriptor": "Learner names a specific accessibility need, explains a specific plan change, and the reflection connects the reasoning to future route planning generally, not just this one trip." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Backup plan names a specific concrete next action rather than a vague phrase like 'figure it out.'",
+      "Accessibility revision names a specific accommodation tied to the specific need chosen, not a generic statement like 'make it easier.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

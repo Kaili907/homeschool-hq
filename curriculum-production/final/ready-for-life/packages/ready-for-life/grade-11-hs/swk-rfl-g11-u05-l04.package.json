@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u05-l04",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Problem Solving Under Constraint",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: deciding under incomplete information"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "With a guardian as a thinking partner, the learner works through a decision currently in front of them that has at least one important piece of missing or unverifiable information, practicing how to decide who to ask, what to try to verify, and when it is reasonable to decide anyway versus wait, so incomplete information does not become an excuse to stall or to guess blindly.",
+  "scenario": "The learner identifies a decision currently in front of them, described at whatever level of detail they are comfortable sharing, that has a missing or unverifiable piece of information, and talks it through with a guardian using a simple decide-now-or-wait framework.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner may keep the specific content of the decision private and describe only its structure (what's missing, who might know it, how time-sensitive it is) if they would rather not share the details.",
+    "The guardian's role is to think through the decision alongside the learner, not to make the decision for them."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian or trusted adult is not available for this conversation right now, the learner instead analyzes a provided fictional scenario involving a decision with missing information, writing out who the character would ask, what the character would try to verify, and when the character should decide anyway versus wait, using only the details given in the scenario."
+  },
+  "materials": ["notebook or notes app", "a guardian or trusted adult willing to talk it through"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the conversation, name the decision and the specific piece of information that is missing or unverifiable.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What is the decision, and what is the one piece of information you don't have or can't confirm? (You may describe the decision only in general terms if you'd rather keep it private.)" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Talk through the decision with a guardian using three questions: who might know or could help verify the missing piece, how time-sensitive the decision actually is, and what you would lose by waiting versus deciding now.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "We named at least one specific person or source who might know the missing information." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "We talked through how much it actually costs (in time, money, or a missed chance) to wait for that information versus deciding now." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "The guardian asked at least one question I hadn't considered." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write down the decide-now-or-wait conclusion you and your guardian reached, and why.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "State whether you decided to act now, wait for more information, or take a specific step to try to verify the missing piece — and explain the reasoning from your conversation." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the process of deciding with incomplete information.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What made this decision harder because of the missing information, and what would make you more comfortable deciding under similar uncertainty next time?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's conclusion defaults to 'wait and see' without naming a concrete next step or a specific point at which they'll decide anyway, reteach by requiring a specific deadline or trigger ('if I don't hear back by ___, I will decide based on what I know now') before the task is considered complete.",
+  "extension": "Have the learner and guardian identify a past decision the learner made without key information, and discuss briefly what, if anything, they would do differently now with this framework.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

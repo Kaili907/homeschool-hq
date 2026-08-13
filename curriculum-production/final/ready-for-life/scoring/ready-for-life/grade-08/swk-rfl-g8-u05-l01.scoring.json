@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l01",
+  "lessonId": "ma-g8-ready-for-life-u05-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Inventory breadth",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than three real items appear in one or more columns, or items are copied across columns without real variation."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least three genuine, distinct items appear in each of the three columns."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the chart includes at least two items honestly starred as belonging in more than one column."
+          }
+        ]
+      },
+      {
+        "dimension": "Self-noticing depth",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The two surprising items are named without any real explanation of why they were surprising."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both surprising items are named, correctly tied to a column, and each includes a genuine reason for the surprise."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reasons show the learner noticing a pattern about themselves rather than just restating the item."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The hardest-column response names a specific column and a specific reason, not a general 'it was all hard.'",
+      "No item on the chart is something the learner admits inventing rather than something real."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

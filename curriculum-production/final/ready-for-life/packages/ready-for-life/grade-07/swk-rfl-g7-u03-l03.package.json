@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u03-l03",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Skills and Flexible Meal Planning",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: recipe reading"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners read one real recipe from start to finish and annotate it, marking every ingredient with its quantity, every step in order, and every tool the recipe requires, without preparing or cooking any of it.",
+  "scenario": "The learner finds one real recipe, such as one from a cookbook, a printed card, a recipe box, or a recipe already used in their household, that has at least five ingredients and at least four steps, and annotates a copy of it by hand or in writing without going into the kitchen to prepare it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "one real recipe with at least five ingredients and four steps",
+    "paper or a notes app for annotating"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before annotating, read the whole recipe once without marking anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the dish and guess how many total ingredients and steps it has before you count."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Go through the recipe and mark every ingredient with its exact quantity and every tool it requires.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed every ingredient in the recipe along with its exact quantity."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I listed every tool or piece of equipment the recipe requires, such as a specific pan, a mixing bowl, or a measuring cup."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Number the recipe's steps in the order they must happen, and identify which steps depend on an earlier step being finished first, for example a step that requires the oven to already be preheated.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List the steps in order, and for at least two of them, name the specific earlier step each one depends on."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Identify one step in the recipe where doing it out of order would cause a specific real problem, and describe that problem."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare annotating this recipe to how you normally look at a recipe.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific detail you noticed only because you annotated closely, such as an ingredient amount, a tool, or a step order, that you would likely have missed on a normal quick read."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's annotation misses ingredient quantities or tools, reteach by having them highlight every number and every noun that names an object in the recipe text before re-listing them.",
+  "extension": "Have the learner annotate a second real recipe for a different type of dish and compare which recipe required more tools or had more order-dependent steps.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u03-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u03-l03",
+    "authoredBy": "manual"
+  }
+}

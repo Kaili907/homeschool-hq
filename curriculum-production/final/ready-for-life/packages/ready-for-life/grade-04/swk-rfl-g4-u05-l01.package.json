@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u05-l01",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Planning, Belongings, and Communication",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: using a weekly calendar"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 5: Planning, Belongings, and Communication"
+  ],
+  "objective": "Learners fill in a blank seven-day weekly calendar with every real activity, lesson, or commitment they already know about for the coming week, then choose and mark one open block of time for something they get to decide for themselves, producing a completed weekly calendar with both fixed and self-chosen entries.",
+  "scenario": "The learner has a real week coming up with some commitments already set, such as lessons, chores, or family plans, and some time that is genuinely open. Rather than being handed a finished schedule, the learner builds the calendar themselves, deciding which day and time to use for one thing they get to choose.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a blank seven-day weekly calendar grid, drawn or printed",
+    "a pencil or pen",
+    "a list of the week's known commitments, from memory or a household calendar"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before filling anything in, think about how you currently keep track of what is happening this week.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Right now, without a calendar, how do you know what you're supposed to do on a given day? Name the method, even if it's just 'someone tells me.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Write in every commitment you already know about for the coming seven days, using the actual day it falls on.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote in at least four real commitments, each on the correct day."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote a rough time or time-of-day next to each commitment, not just the name of the activity."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look across all seven days and find one block of time that is genuinely open, not already claimed by a commitment. Decide for yourself what you want to use that block for, then write it into the calendar in the same way you wrote the fixed commitments.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which open block did you choose (day and rough time), and what did you decide to use it for?"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one other open block you considered instead, and explain why you picked the one you did over that one."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look at your finished weekly calendar as a whole.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain how having every commitment written on one weekly calendar, instead of just remembering one day at a time, changes how you think about planning your week."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner lists commitments without attaching them to a specific day or time, reteach by walking through a single already-known day together first (for example, tomorrow), naming its exact commitments and times out loud, then having the learner copy that pattern across the other six days one at a time.",
+  "extension": "Have the learner build a second weekly calendar for the following week using only commitments they predict rather than ones they already know for certain, then compare after that week which predicted items turned out to be right and which changed.",
+  "scoringRef": "scoring/swk-rfl-g4-u05-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u05-l01",
+    "authoredBy": "manual"
+  }
+}

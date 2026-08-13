@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l06",
+  "lessonId": "ma-g4-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Request specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The 'specific' version still doesn't name both a signal and a clear need."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The specific version names the actual signal and one clear, actionable need."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the vague version is realistic rather than a strawman, making the contrast meaningful."
+          }
+        ]
+      },
+      {
+        "dimension": "Predictive reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Predicted adult responses to the vague and specific versions aren't meaningfully different, or no reason is given."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner predicts a plausible difference in response and names one reason the specific version is easier to act on."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the final two-part request the learner commits to using is well-formed and personally realistic."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The remembered moment is a real, specific instance, not a generic or invented example.",
+      "No response frames asking for help as a weakness or something to avoid."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

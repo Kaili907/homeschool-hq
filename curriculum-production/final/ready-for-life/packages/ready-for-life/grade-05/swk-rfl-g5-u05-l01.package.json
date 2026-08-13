@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u05-l01",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Communication",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: calendar basics"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Learners take a first, unguided attempt at reading a real or provided calendar to identify today's date, one upcoming event, and how many days away that event is.",
+  "scenario": "Before explicit calendar instruction, the learner is given a real family calendar (paper or provided) or a provided sample and attempts, on their own, to answer three questions about it: today's date, one upcoming event, and the number of days until it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Calendar entries stay general (event name and date); no private family detail is required beyond what's already on the calendar."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real family calendar is available, the learner instead uses a provided printed or digital sample calendar with sample events to find today's date, one event, and the day-count the same way."
+  },
+  "materials": [
+    "a real or provided calendar"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before looking at the calendar, guess: how many days until the next event you already know is coming up?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "State your guess."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Using the calendar, find today's date, one upcoming event within the next two weeks, and count the days until that event.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Write today’s date, the event you found, and how many days away it is."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My day-count matches what the calendar actually shows, checked by counting the boxes or days myself."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Compare your guess to the real count.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Was your warm-up guess close to the actual day-count? What made counting on the real calendar easier or harder than guessing?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner miscounts days (off-by-one errors are common), reteach by counting aloud together starting from tomorrow, not today, and physically pointing to each day on the calendar.",
+  "extension": "Find two upcoming events instead of one and compare which is sooner, explaining how they determined that from the calendar.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u05-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u05-l01",
+    "authoredBy": "manual"
+  }
+}

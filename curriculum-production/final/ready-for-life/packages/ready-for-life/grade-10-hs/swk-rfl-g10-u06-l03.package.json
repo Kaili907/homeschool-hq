@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u06-l03",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 10 Work-Readiness Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: professional communication under time pressure"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft a clear, professional response to a provided fictional urgent workplace scenario within a short time limit, then compare it to a version they'd write without time pressure, to practice staying clear and professional even when rushed.",
+  "scenario": "The learner reads a provided fictional urgent scenario (such as a same-day schedule conflict discovered at the last minute), drafts a response within a set short time limit, then afterward drafts an unhurried version of the same response and compares the two.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The urgent scenario is fictional and provided with this lesson; the time limit is a practice constraint the learner sets for themselves, not a real deadline."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional urgent scenario", "a timer", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the urgent scenario and, before timing yourself, note what makes it feel urgent.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name what specifically makes this scenario time-sensitive, not just stressful." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Set a five-minute timer and draft your response to the scenario within that limit.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write your timed response, staying within the five-minute limit." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My timed response still states the key facts clearly, even though it was rushed." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now draft an unhurried version of the same response, without a time limit, and compare the two.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your unhurried version, then name what actually changed between the two, beyond just wording." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what stayed the same under pressure.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What part of your professional communication skills held up fine even under the time limit, and what part slipped?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's timed response omits a key fact or the core request entirely, reteach with a simple checklist to run through even under time pressure (what happened, what's needed, by when), then have the learner redo the timed draft using that checklist as a mental script.",
+  "extension": "Have the learner repeat the exercise with an even shorter time limit for a different fictional scenario, and describe what they had to cut first when time ran shortest.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

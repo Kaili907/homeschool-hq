@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l03",
+  "lessonId": "ma-g10-ready-for-life-u04-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Policy accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The stated remedy does not match what the policy actually allows for this scenario." },
+          { "label": "Proficient", "descriptor": "The stated remedy matches the policy, with the correct term identified." },
+          { "label": "Advanced", "descriptor": "The stated remedy matches the policy exactly, with the specific quoted term as support." }
+        ]
+      },
+      {
+        "dimension": "Message clarity and citation",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The message states the problem but doesn't cite the policy term or clearly request a remedy." },
+          { "label": "Proficient", "descriptor": "The message states the problem, cites the term, and requests a remedy." },
+          { "label": "Advanced", "descriptor": "The message is concise, cites the exact term, and requests exactly the remedy the policy allows, nothing more or less." }
+        ]
+      },
+      {
+        "dimension": "Honest self-correction",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No real comparison is made between the warm-up guess and the actual policy finding." },
+          { "label": "Proficient", "descriptor": "Names a genuine difference between the guess and the finding." },
+          { "label": "Advanced", "descriptor": "Names the difference and states a specific, realistic habit for checking the policy first next time." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The quoted policy term in t2 genuinely exists in the provided document, not paraphrased loosely.",
+      "The drafted message requests exactly the remedy identified in t2, with no scope creep beyond the policy.",
+      "The reflection names a real, specific gap between the initial guess and the policy, not a vague 'I was close.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

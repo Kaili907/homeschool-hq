@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u03-l05",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Meal Planning, Cooking, and Food Management",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: leftovers and storage"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners correctly label and store one real leftover or food item, choosing an appropriate container, writing the date, and placing it in the correct location, while applying food-safety storage rules for that specific food.",
+  "scenario": "The learner finds one real leftover food or an open food item already in the household, such as extra cooked rice, a half-used jar of sauce, or cut fruit, chooses a container that actually fits and seals it, writes today's date on it, and places it in the correct storage location (refrigerator, freezer, or pantry) based on what kind of food it is.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No knife, stove, or hot surface is used in this task; only handling already-cooled or room-temperature food and containers.",
+    "If a food item looks or smells spoiled, the learner shows it to a trusted adult and does not taste it to check."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real leftover food is available right now, the learner instead completes the storage-matching exercise on this task sheet, matching each food on the provided list to its correct container type, storage location, and safe timeframe using the storage rules given."
+  },
+  "materials": [
+    "one real leftover food or open food item from the household",
+    "a storage container or resealable bag that fits the food",
+    "a marker or label",
+    "the storage-rules reference on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before storing anything, find and describe your food item.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the food item you found, how it was left out or stored before now, and roughly how long ago it was prepared or opened."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using the storage-rules reference, decide on the right container, location, and timeframe for your specific food, then store it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I chose a container or bag that seals and actually fits the amount of food."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote today's date clearly on the container or a label attached to it."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I placed the container in the correct location (refrigerator, freezer, or pantry) for that specific food."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Using the storage-rules reference, work out and record the safe timeframe for your specific food item and explain your reasoning. Note whether the food needed to be cooled first, whether it belongs in the refrigerator or freezer, and the latest date by which it should be eaten or thrown out based on the rules provided, then explain in your own words why that particular food has that particular timeframe.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "State the safe-use-by date you calculated for your food item and explain, using the storage rules, why that food has that specific timeframe rather than a longer or shorter one."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about how this food was being stored before you fixed it.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was the food already being stored correctly before you checked it, or did you have to fix something? Describe what, if anything, changed."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner picks the wrong storage location for a food (for example, placing a dairy-based leftover in the pantry, or a shelf-stable item in the freezer unnecessarily), reteach by sorting three example foods from the storage-rules reference together by location before the learner re-decides their own item.",
+  "extension": "Have the learner check two more food items in the household using the same process and compare the three safe-use-by dates, explaining which type of food had the shortest safe window and why.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

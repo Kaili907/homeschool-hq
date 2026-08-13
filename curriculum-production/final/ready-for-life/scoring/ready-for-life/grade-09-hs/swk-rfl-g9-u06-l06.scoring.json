@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l06",
+  "lessonId": "ma-g9-ready-for-life-u06-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Presentation content and specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Presentation omits one of the three required parts (what worked, what didn't, backup plan), or the backup plan is vague." },
+          { "label": "Proficient", "descriptor": "Presentation names one specific thing that worked, one specific thing that didn't, and one specific backup plan naming the trigger and the different action." },
+          { "label": "Advanced", "descriptor": "All three parts are specific, and the learner connects the reflection to a concrete next step for one system going into the rest of the year." }
+        ]
+      },
+      {
+        "dimension": "Guardian-confirmed presentation and engagement",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Guardian confirmation is missing, or no follow-up question is recorded." },
+          { "label": "Proficient", "descriptor": "Guardian confirms the presentation happened, live or via the initialed script, and confirms asking at least one follow-up question." },
+          { "label": "Advanced", "descriptor": "Guardian confirmation is present, and the learner accurately records the specific follow-up question asked and their own answer to it." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A backup plan that names both the specific trigger and the specific different action, not just 'I'll do better.'",
+      "A guardian confirmation of both the presentation happening and at least one follow-up question being asked."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

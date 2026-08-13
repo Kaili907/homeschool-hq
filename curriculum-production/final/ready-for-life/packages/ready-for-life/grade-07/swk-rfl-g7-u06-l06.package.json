@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u06-l06",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Community Contribution Capstone",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: evaluation and handoff"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners evaluate the now-completed, supervised project against its original plan and permission scope, and write handoff notes clear enough that another person could understand what was done and pick up any remaining follow-up.",
+  "scenario": "With the project finished, the learner looks back across every earlier stage — the identified need, the granted permission and scope, the materials plan, the communication, and the actual execution — to judge how well the outcome matched the original intent, then writes handoff notes summarizing what was done and what, if anything, still needs attention.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "the plans, notes, and records from every previous lesson in this project",
+    "paper or a notes app for the evaluation and handoff notes"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before evaluating, recall the original need you identified on the first lesson day of this project.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Restate the original need in one or two sentences, as you understood it before you did any planning."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compare the actual outcome of your project to the scope that was granted permission earlier in this project, noting any place where what you did matched, exceeded, or fell short of that original scope.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I compared the actual outcome to the specific scope that was granted, not to a vague memory of my intentions."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I noted at least one place where the outcome matched the plan and one place where it differed."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write handoff notes that would let someone else who was not involved understand exactly what was done, what materials or steps were used, and what, if anything, still needs follow-up or could be continued by someone else.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write the handoff notes themselves: what was done, when, and any specific follow-up task that still remains."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Explain what a person reading only your handoff notes, with no other context, would need to know to correctly finish or continue any remaining part of this project."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the whole capstone project.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Looking back across identifying the need, getting permission, planning, communicating, and carrying it out, explain which single stage most changed your original idea of the project, and why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's handoff notes are too vague for someone else to act on, have them read the notes aloud to a trusted adult who was not directly involved in the execution step and revise based on what that adult says is unclear.",
+  "extension": "Have the learner write one sentence recommending whether this specific need is a one-time project or an ongoing responsibility someone in the household could keep up, and why.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  }
+}

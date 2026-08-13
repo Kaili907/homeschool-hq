@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u03-l03",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Food Safety",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: cross-contamination basics"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+  ],
+  "objective": "Learners read six short kitchen scenarios describing how raw and ready-to-eat foods, cutting surfaces, and utensils were handled, sort each one as safe or a risk, and rewrite each risky scenario with one specific fix that blocks the exact path germs would have traveled.",
+  "scenario": "The learner is given six short written scenarios about food handling, some safe and some risky, such as using the same cutting board for raw chicken and then bread without washing it, or storing raw meat above ready-to-eat vegetables in a refrigerator.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "six short written kitchen scenarios (provided, or written by the learner and an adult together)",
+    "paper or a notes app",
+    "a pencil or pen"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting anything, define the risk in your own words.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, what does 'cross-contamination' mean, using the words 'raw' and 'germs' somewhere in your answer?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read each of the six scenarios and sort it into 'safe' or 'risk,' marking which specific detail in the scenario made you decide.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted all six scenarios into safe or risk."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For every scenario marked risk, I underlined or named the specific detail, such as a surface, utensil, or storage location, that caused it."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I did not mark a scenario risky just because it mentioned raw meat; I checked whether raw meat actually touched or dripped onto something ready-to-eat."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose the three scenarios you marked as risky and rewrite each one with one specific change that would remove the danger, such as washing a cutting board between uses or moving raw meat to the bottom shelf of the refrigerator.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rewrite your first risky scenario with a specific fix, and explain in one sentence why that fix breaks the exact path germs would have taken from raw food to ready-to-eat food."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Do the same for your second and third risky scenarios: name the specific fix and the path of germs it blocks."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about which of the six scenarios was hardest to judge.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which scenario was hardest to decide was safe or risky, and what extra information would have made the decision easier?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner marks every scenario mentioning raw meat as risky regardless of whether contact actually occurred, reteach with a single paired example: two nearly identical scenarios where raw chicken is present, but in one it touches a cutting board later used for bread and in the other it stays sealed in its own container the whole time, and have the learner name the one difference that changes the answer.",
+  "extension": "Have the learner write two brand-new scenarios of their own, one safe and one risky, using a food and situation not covered in the original six, then trade with an adult or another learner in their household to sort.",
+  "scoringRef": "scoring/swk-rfl-g4-u03-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u03-l03",
+    "authoredBy": "manual"
+  }
+}

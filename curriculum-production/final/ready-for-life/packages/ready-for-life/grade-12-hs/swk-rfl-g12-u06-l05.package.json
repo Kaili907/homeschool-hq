@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u06-l05",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Transition-to-Adulthood Capstone",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: guardian review and attestation of real-world evidence"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners present their portfolio-in-progress to a guardian for a completeness-and-honesty review, so a second, trusted perspective checks the work before the final capstone defense, with the review scoped to completeness and honesty rather than judging the learner's chosen direction.",
+  "scenario": "The learner presents their assembled portfolio index, plan statement, support-needs statement, and contingency branch to a guardian, who reviews it against a completeness checklist and attests that the review happened \u2014 explicitly not judging whether the learner's chosen direction is the 'right' one.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The guardian review checks completeness and honesty against the checklist \u2014 it does not evaluate or approve the learner's chosen life direction, which remains the learner's own.",
+    "Any remaining gap named honestly during this review is a valid outcome, not a failure of the review."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no guardian or trusted adult is available for a live review session today, the learner completes the same checklist as a structured self-review, flags any section they are unsure about, and schedules the guardian review for as soon as one is available; this self-review carries equal credit for completing today's lesson."
+  },
+  "materials": [
+    "the learner's assembled portfolio pieces from this unit",
+    "the provided completeness-review checklist"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the review, predict which piece your guardian will have the most questions about.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which of your four assembled pieces do you predict your guardian (or the self-review checklist) will flag the most questions about, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Present the portfolio pieces for review and record the outcome.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I presented the portfolio index, plan statement, support-needs statement, and contingency branch for review."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "The review (guardian or self-review) checked each piece against the completeness checklist."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Record what the review found.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "What did the review find \u2014 fully complete, or one or more pieces still needing work? Record the outcome honestly, including any remaining gap."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on being reviewed.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "How did it feel to have someone else check your plan for completeness, separate from whether they agreed with your direction?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the review record claims full completeness with no gap at all, and that doesn't match what the earlier portfolio-index lesson honestly identified, reteach by having the learner reconcile the two \u2014 either the gap was genuinely closed since then, or it should still be named honestly here.",
+  "extension": "Have the learner write one sentence describing what they would want a reviewer to ask them at the final capstone defense, based on what came up in this review.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

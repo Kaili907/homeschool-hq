@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l04",
+  "lessonId": "ma-g8-ready-for-life-u06-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Support-role plan completeness and genericness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more roles is missing, left blank, or includes a real name, address, or phone number."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three roles are labeled generically with a clear one-sentence purpose for each, and no real identifying information appears."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and each sentence names a specific, distinct situation that role is best suited for, rather than a generic restatement of the role's title."
+          }
+        ]
+      },
+      {
+        "dimension": "Emergency-response reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The scenario or the first step is missing, or the step is too vague to act on ('get help')."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A plausible scenario is named, paired with a specific first step and a matching support role."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains a clear reason that step should come before any other action."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real name, address, or phone number appears anywhere on the support-contact plan.",
+      "The chosen emergency scenario is plausible for an independent adult's month, not a household-specific event requiring a parent."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

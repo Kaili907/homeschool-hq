@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u06-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Independent-Living Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: health and safety support"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners build a general support-contact plan for their fictional persona using only generic role categories - a doctor, a pharmacy, and one trusted adult contact - with no real names or numbers, then write one specific emergency-response step for a plausible scenario that could occur during the persona's month.",
+  "scenario": "Rather than looking up any real person's information, the learner labels three generic support roles for the persona's plan (a doctor, a pharmacy, and one trusted adult contact) and describes in one sentence each what role that contact plays, then picks one plausible emergency scenario that could happen during the persona's invented month (such as a minor injury at work or feeling seriously ill on a day off) and writes the specific first step the persona should take.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "a blank support-contact plan template provided on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before writing the plan, think through why each role matters.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In one sentence each, explain why a doctor, a pharmacy, and one trusted adult contact are each useful roles for someone living independently to have identified in advance."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Fill in the generic support-contact plan using role labels only - never a real name, address, or phone number.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I labeled a doctor role and wrote one sentence describing what the persona would contact this role for."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I labeled a pharmacy role and wrote one sentence describing what the persona would contact this role for."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I labeled one trusted adult contact role and wrote one sentence describing what makes someone trustworthy enough for this role."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Choose one plausible emergency scenario for the persona and walk through exactly what happens first.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Pick one plausible scenario that could happen during your persona's month (for example, a minor cut while cooking, a high fever on a day off work, or feeling unsafe walking home after dark), then write the specific first step the persona should take, which of the three support roles they should contact for that step, and one reason that step should happen before any other action."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look back at the plan as a whole system, not three separate pieces.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which of the three roles would be hardest for your persona to reach quickly in the scenario you chose, and what does that suggest about a backup option?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's emergency step is vague ('call for help') or skips straight to the trusted adult for every scenario, reteach by sorting three sample scenarios together into which support role responds first, then have the learner revise their own scenario using the same sorting logic.",
+  "extension": "Have the learner add a second plausible emergency scenario of a different type (physical versus safety-related) and write its own first step and role match, comparing how the two responses differ.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

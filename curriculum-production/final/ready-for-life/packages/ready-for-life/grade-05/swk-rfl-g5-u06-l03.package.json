@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u06-l03",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: safety and supervision"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "With an adult, learners review their planned contribution step by step and correctly identify which steps need adult supervision, which need adult permission but not presence, and which they can do fully independently, with the adult confirming each call.",
+  "scenario": "With a trusted adult, the learner goes through their planned contribution step by step and sorts each step into one of three categories — needs adult supervision the whole time, needs adult permission but not presence, or fully independent — with the adult confirming or correcting each judgment.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The adult reviews every step of the plan before the contribution is carried out.",
+    "Any step involving heat, sharp tools, appliances, chemicals, height, or unfamiliar equipment defaults to 'needs supervision' unless the adult explicitly says otherwise."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the adult who will supervise the eventual task can't review the plan together in one sitting, the learner instead writes out their proposed three-category sort for every step with reasoning, and the adult reviews and confirms it in writing or verbally afterward, rather than sorting live together."
+  },
+  "materials": [
+    "the learner's contribution plan from the previous lesson"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reviewing with your adult, guess which one step of your plan you think will need the most supervision, and why.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the step and your reasoning."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, go through your plan step by step and sort each into: needs supervision, needs permission only, or fully independent.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "Every step in my plan is sorted into exactly one of the three categories."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My adult confirmed or corrected each sort."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "For every 'needs supervision' step, I named the specific reason (heat, sharp tool, height, chemical, unfamiliar equipment, etc.)."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write your final, adult-confirmed plan with each step's supervision category clearly marked, so anyone reading it later knows exactly when an adult needs to be present.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List your final supervision categories for each step, and note the specific hazard reason behind every step marked needs-supervision."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on a category surprise.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Was there a step you assumed you could do fully independently that your adult said needed supervision (or the reverse)? What made that step’s category less obvious?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner consistently under-estimates which steps need supervision, reteach by walking through the hazard categories from earlier units (heat, sharp tools, appliances, chemicals, heights, unfamiliar equipment) and checking the plan against that specific list.",
+  "extension": "Identify one step currently marked 'needs supervision' and describe what skill-building would need to happen before that step could move to 'fully independent' in the future.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l01",
+  "lessonId": "ma-g9-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Nutritional balance across the week",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Three or more days are missing at least one of the five food groups."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All seven days include at least one item from each of the five food groups."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the plan varies specific items within each food group across the week rather than repeating the same item every day."
+          }
+        ]
+      },
+      {
+        "dimension": "Budget estimation and adjustment",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The weekly total is not calculated, is calculated incorrectly, or exceeds the budget ceiling with no adjustment shown."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The weekly total is calculated correctly using the provided prices and fits at or under the budget ceiling."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner names a specific same-food-group substitution with its price difference used to reach the ceiling."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The seven-day grid is fully filled in with specific named items, not placeholders like 'protein' or 'vegetable' alone.",
+      "The reflection names one real item swapped for a specific lower-cost item in the same food group, not a general statement about saving money."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

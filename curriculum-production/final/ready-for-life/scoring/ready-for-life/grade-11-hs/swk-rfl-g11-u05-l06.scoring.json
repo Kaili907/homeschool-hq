@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l06",
+  "lessonId": "ma-g11-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Option generation and tradeoff analysis",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than three options, or a table missing criteria or options." },
+          { "label": "Proficient", "descriptor": "At least three genuinely distinct options and a complete tradeoff table." },
+          { "label": "Advanced", "descriptor": "Decision is justified with specific table rows and explains why one criterion outweighed another." }
+        ]
+      },
+      {
+        "dimension": "Fallback and guardian presentation",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fallback has no specific trigger, or the presentation to the guardian is not described." },
+          { "label": "Proficient", "descriptor": "Fallback has a specific trigger, and the learner presented the full reasoning to a guardian." },
+          { "label": "Advanced", "descriptor": "The write-up shows the guardian's question sharpened or changed part of the reasoning." }
+        ]
+      },
+      {
+        "dimension": "Outcome review quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Outcome review doesn't compare the actual outcome to what was expected." },
+          { "label": "Proficient", "descriptor": "Review states clearly whether the outcome matched expectations and why." },
+          { "label": "Advanced", "descriptor": "Review identifies a change to the decision process itself, not just a different final answer." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "At least three genuinely distinct options appear in the tradeoff table, echoing the day 2 skill.",
+      "The fallback trigger is specific, echoing the day 5 skill.",
+      "The outcome review names a process change, not just 'I would have picked the other option.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

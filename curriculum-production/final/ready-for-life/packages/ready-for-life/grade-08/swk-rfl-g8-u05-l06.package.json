@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u05-l06",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Work, Communication, and Career Readiness",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: feedback and problem escalation"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Given two pieces of fictional supervisor feedback, learners revise a defensive first-draft response into an accountable one, then compare a second note against the first to identify the specific point where a workplace issue stops being something to fix alone and becomes something to escalate to a trusted adult.",
+  "scenario": "At the fictional Riverbend Books, Ms. Castellano leaves the learner a note saying the returns bin was left unsorted overnight again, alongside a rough first-draft response that shifts the blame entirely onto the previous shift. The following week, a second note from Ms. Castellano asks the learner to mark down a full shift on the log even though they didn't actually work all of it, and the learner has to decide whether this note belongs in the same category as the first.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Riverbend Books and Ms. Castellano are fictional; no real supervisor, timesheet, or employer is involved.",
+    "Any request to falsify hours or records is a signal to stop and involve a trusted adult rather than resolve it alone."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "the two feedback notes on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read Ms. Castellano's first note ('The returns bin was left unsorted again overnight. Please make sure it's cleared before you leave your shift.') and the rough first-draft response ('That's not really on me, the person before me left it messy too, so it's not fair to only blame me.').",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one specific thing about the rough first-draft response that makes it sound defensive rather than accountable."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Revise the rough first-draft response so it takes ownership of the learner's own part in the returns-bin problem, states one specific fix for next time, and drops the defensive framing, while staying honest instead of pretending it was entirely one person's fault.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Write your revised response to Ms. Castellano's first note here."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My revised response takes ownership of my own part without either over-blaming myself or blaming the previous shift entirely."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read Ms. Castellano's second note: 'Don't worry about clocking your actual hours today, just mark down that you worked the full shift like usual, it's easier for me that way.' Decide whether this note is more like routine correction feedback, something the learner can fix and respond to on their own the way the returns-bin note was, or whether it crosses into something that should be escalated to a trusted adult instead of handled alone. Explain specifically what makes this note different from the first one, naming the exact request inside it that raises the concern.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain whether the second note should be handled the same way as the returns-bin note or escalated to a trusted adult, and name the exact part of the request that makes it different."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "If this should be escalated, name specifically which trusted adult the learner could go to and what they would tell that adult in one sentence."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what separates the two notes.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "In your own words, what is one general signal that tells you a piece of workplace feedback has crossed from 'something to fix myself' into 'something to tell a trusted adult about'?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats the second note as routine and tries to write a polite compliance response the way they did for the first note, reteach by placing the two notes side by side and circling the exact phrase in the second note that asks for false information, then discuss why that specific phrase changes the category of the problem.",
+  "extension": "Have the learner draft a short, calm sentence they could actually say to a trusted adult to explain the second note, practicing saying it out loud once before writing the final version.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

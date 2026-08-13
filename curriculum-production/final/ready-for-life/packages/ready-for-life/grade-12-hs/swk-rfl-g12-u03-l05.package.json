@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u03-l05",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Workplace Entry and Professional Systems",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: understanding a pay statement and schedule"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners correctly identify each line of a sample pay statement and verify that gross pay minus deductions equals net pay, so they can read a real one with confidence later without this lesson claiming to predict what any real statement will show.",
+  "scenario": "Given an annotated, entirely fictional sample pay statement with invented figures for gross pay, a few generic deduction line items, and net pay, the learner labels each part, checks the arithmetic, and writes two questions they would ask a real employer's payroll or HR contact if a real statement's line looked wrong.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This is not tax, payroll, or financial advice \u2014 real pay statements vary by employer, location, and situation, and this lesson only teaches how to read the parts of a sample.",
+    "No real pay statement, real employer, or real income figure is required or should be entered anywhere."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided fictional sample pay statement"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before labeling, guess what you think 'gross pay' and 'net pay' mean.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, before checking, what do you think 'gross pay' and 'net pay' mean, and which one do you think is usually the bigger number?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Label each line of the fictional sample pay statement.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I correctly labeled the gross pay line."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I correctly labeled each of the generic deduction line items."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I correctly labeled the net pay line."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Verify the arithmetic and write two questions for a real payroll or HR contact.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Show that gross pay minus the listed deductions equals the stated net pay. Then write two specific questions you'd ask a real employer's payroll or HR contact if a real line item ever looked wrong to you."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your warm-up guess.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was your warm-up guess about gross versus net pay correct? What surprised you most about the sample statement?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's arithmetic check doesn't actually reconcile (gross minus deductions doesn't equal the stated net), reteach by having them add the deductions one at a time against a running total until the discrepancy is visible and correctable.",
+  "extension": "Have the learner design one additional fictional deduction line item not on the sample, add it to the statement, and recompute net pay correctly.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

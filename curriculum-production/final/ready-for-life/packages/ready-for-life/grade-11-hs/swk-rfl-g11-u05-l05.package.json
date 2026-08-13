@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u05-l05",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Problem Solving Under Constraint",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: building a fallback before committing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners work through a fictional scenario where a character is relying on a single plan with no backup, build a concrete fallback (Plan B), and state the specific trigger condition that would tell the character when to switch to it, so they practice committing to a plan without being blindsided if it fails.",
+  "scenario": "The learner reads a provided fictional scenario in which a character is relying entirely on one teacher to submit a single recommendation letter for a scholarship application with a fixed deadline, with no backup plan if it doesn't come through in time, and builds a concrete fallback with a specific switch-over trigger before the deadline arrives.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The scenario is fictional and does not require the learner to name or rely on any real teacher, deadline, or application of their own."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional scenario", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before building a fallback, state Plan A and why the character currently believes it is enough.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What is the character's Plan A, and why does the character currently believe no backup is needed?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "List at least three specific things that could cause Plan A to fail, using the details given in the scenario.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I listed at least three specific ways Plan A could fail (not just 'it might not work')." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "At least one of my listed risks is something the character could notice before the deadline itself, not only on the deadline." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Build a concrete Plan B and state the exact trigger condition that tells the character when to switch to it.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Describe the character's Plan B in specific terms, and state the exact trigger (a date, a piece of information, or an event) that should cause the character to switch from Plan A to Plan B." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Consider why a stated trigger condition matters.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Why is deciding the trigger condition in advance different from just deciding 'I'll switch to Plan B if things don't work out'? What could go wrong without a specific trigger?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's Plan B is vague ('ask someone else') or the trigger condition is only a feeling rather than a specific date or event, reteach by requiring the fallback to name a specific alternative and the trigger to name a specific day or piece of information relative to the deadline given in the scenario.",
+  "extension": "Have the learner identify a point at which even Plan B could fail, and sketch in one or two sentences what the character's next move would be if that happened too.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

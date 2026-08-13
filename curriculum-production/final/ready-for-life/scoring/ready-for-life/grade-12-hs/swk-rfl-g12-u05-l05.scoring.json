@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l05",
+  "lessonId": "ma-g12-ready-for-life-u05-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Weak-point identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The identified weak point is vague or not clearly the plan's most fragile step."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific, plausible weak point is identified with a clear reason."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reasoning shows the weak point was chosen by genuine comparison against the plan's other steps, not arbitrarily."
+          }
+        ]
+      },
+      {
+        "dimension": "Contingency specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The trigger for activating the contingency is vague (for example, 'if it goes wrong')."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The trigger is specific and recognizable in the moment."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The contingency itself is concrete enough to actually follow, not just a restated goal."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The weak point named is genuinely the most fragile step, not an arbitrary choice.",
+      "The trigger is specific enough that someone else reading it would know exactly when to activate the contingency.",
+      "No real personal plan details are required to be disclosed."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

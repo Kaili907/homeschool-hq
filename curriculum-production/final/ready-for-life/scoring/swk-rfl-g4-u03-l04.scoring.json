@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l04",
+  "lessonId": "ma-g4-ready-for-life-u03-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Hazard-based sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are sorted by how fun, easy, or interesting they look rather than by an actual hazard, or an adult-only step is left unmarked."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical)."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly flags an uncertain step as 'ask the adult' rather than guessing."
+          }
+        ]
+      },
+      {
+        "dimension": "Division-of-labor reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The division-of-labor plan does not clearly connect who does each step to the hazard reasoning from the sort."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The plan names who does each step and ties the reasoning back to the specific hazard identified earlier."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection response describes a specific, plausible real consequence of a kid attempting an adult-only step alone."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult's on-the-spot confirmation or correction during the guided task is recorded, not just the learner's own sort.",
+      "The learner does not physically perform any adult-only step during this lesson; only the sorting and planning are the learner's own work."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

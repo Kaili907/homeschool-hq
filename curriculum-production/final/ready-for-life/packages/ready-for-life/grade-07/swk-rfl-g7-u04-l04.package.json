@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u04-l04",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Communication, Boundaries, and Family Teamwork",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: conflict repair"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners use a three-part repair statement (what happened, how it affected them, and one specific fix or next step) to open a real repair conversation about an unresolved disagreement or moment of friction with a household member, then check whether the conversation actually resolved it.",
+  "scenario": "The learner identifies one real, still-unresolved disagreement or moment of friction with someone in the household from the recent past, builds a three-part repair statement for it, and has a short conversation aimed at resolving it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "If a disagreement ever becomes unsafe rather than just uncomfortable, pause the conversation and get a trusted adult involved instead of continuing on your own.",
+    "Choose an everyday, low-stakes disagreement, such as chores, screen time, or a scheduling mix-up, rather than a deeper or more serious family issue; if the only unresolved friction you can think of feels heavier than that, use the simulation alternative instead."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no suitable moment or unresolved friction is available to address directly this week, the learner instead writes out both sides of the repair conversation as an imagined script, including a realistic response from the other person and how the learner would react to that response."
+  },
+  "materials": [
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think of one real disagreement or moment of friction with someone you live with that still feels unresolved.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe what happened and why it still feels unfinished between you and the other person."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build a three-part repair statement: what happened from your side, how it affected you, and one specific fix or next step you are offering or requesting.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My repair statement describes what happened without blaming the other person for everything."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My repair statement offers or requests one specific, doable next step, not just an apology."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Find a calm moment this week to have the repair conversation with the household member involved, saying your three-part statement and listening to their response before deciding on a next step together.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write what you said, what the other person said back, and what you agreed to do differently."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Did the conversation end with a specific next step you both agreed on?",
+          "choices": [
+            "Yes",
+            "Partly",
+            "No"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on repairing this conflict.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain whether the conversation actually resolved the friction or just opened it up, and describe one thing you would do differently if you had the conversation again."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's repair statement turns into re-litigating who was more at fault, reteach by having them separate the statement into three single sentences, one for each part, and check that the 'what happened' sentence describes actions, not the other person's character.",
+  "extension": "Have the learner check back in with the same household member one week later about whether the agreed next step from the repair conversation actually happened, and record what they find.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

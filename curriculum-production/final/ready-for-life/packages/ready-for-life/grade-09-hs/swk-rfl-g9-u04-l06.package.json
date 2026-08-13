@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u04-l06",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Travel, and Community Logistics",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: contingency and accessibility planning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners plan what to do if a transportation plan fails (such as a missed connection or a closed route) and consider one accessibility need, their own or a general one, that would change the plan.",
+  "scenario": "The learner revisits a route plan, either their own from earlier in the unit or a new one, develops a specific contingency plan for at least one realistic failure point, then revises that plan to account for one accessibility need.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task is planning only; the learner does not need to travel the route or experience an actual disruption as part of the lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the route plan from an earlier lesson in this unit, or a new route the learner chooses",
+    "paper or a document to write the contingency plan"
+  ],
+  "tasks": [
+    { "taskId": "t1", "kind": "warm-up", "directions": "Think of a time a trip didn't go as planned, yours or someone else's.", "prompts": [
+      { "ref": "t1-p1", "promptType": "short-response", "text": "Describe what went wrong and what happened next." }
+    ] },
+    { "taskId": "t2", "kind": "guided", "directions": "Pick a route plan and identify one realistic way it could fail.", "prompts": [
+      { "ref": "t2-p1", "promptType": "checklist-item", "text": "I identified a specific failure point in my route (such as a missed connection, a closed route, or a significant delay)." },
+      { "ref": "t2-p2", "promptType": "checklist-item", "text": "I wrote a specific backup plan for that failure point (an alternate route, a later departure, or a different mode)." },
+      { "ref": "t2-p3", "promptType": "short-response", "text": "Explain step by step what you would do if the failure happened, from noticing the problem to arriving at your destination." }
+    ] },
+    { "taskId": "t3", "kind": "independent", "directions": "Consider one accessibility need, your own or a general one (such as using a mobility device, carrying a heavy bag, traveling with a young sibling, or a sensory sensitivity to crowds or noise), and revise your plan.", "prompts": [
+      { "ref": "t3-p1", "promptType": "short-response", "text": "Name the accessibility need you're considering and explain specifically how it would change your original route or your backup plan (for example, needing a route with fewer stairs or transfers, or extra time between connections)." },
+      { "ref": "t3-p2", "promptType": "short-response", "text": "Write the revised version of your plan that accounts for this accessibility need." }
+    ] },
+    { "taskId": "t4", "kind": "reflection", "directions": "Think about what this changed about how you plan trips.", "prompts": [
+      { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one specific way thinking about the accessibility need changed how you'll plan any transportation route in the future, not just this one." }
+    ] }
+  ],
+  "remediation": "If a learner's backup plan is vague (such as 'find another way'), reteach by having them name the exact next real-world action they would take first (checking a specific schedule, asking a specific person, walking to a specific nearby point) before revising their own plan.",
+  "extension": "Have the learner plan a contingency for a second, different type of failure (such as a weather event instead of a missed connection) and compare how the backup plan differs between the two situations.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

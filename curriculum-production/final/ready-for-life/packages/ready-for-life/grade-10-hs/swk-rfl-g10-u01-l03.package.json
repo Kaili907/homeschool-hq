@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u01-l03",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Career Exploration and Pathway Mapping",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: entry requirements and training pathways"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners research the real entry requirements for the job they researched in the previous lesson and lay out one realistic pathway as an ordered sequence of steps, flagging any step whose exact requirement varies by location and must be verified rather than assumed.",
+  "scenario": "The learner researches what is actually required to start in the job (education level, certification, apprenticeship, or experience) and writes the pathway as a numbered sequence of steps in the order they would realistically happen, marking any step that depends on local rules.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Requirements such as minimum age, licensing, or certification rules vary by location; the task explicitly asks the learner to flag anything that needs local verification rather than presenting one source as universally true."
+  ],
+  "simulationAlternative": null,
+  "materials": ["research from the previous lesson", "access to one source describing entry requirements, or the provided reference profile", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before researching, list what you currently guess is required to start in this job.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List your current guesses about what's required (education, certification, experience, or anything else)." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Research the actual entry requirements and write them as a numbered sequence of steps in realistic order.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write the pathway as numbered steps, from where someone starts to their first day in this job." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "The steps are in a realistic order, not just a random list of requirements." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I marked at least one step that depends on local rules and needs to be verified rather than assumed." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Estimate how long the full pathway realistically takes, from the first step to the first day on the job.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Give your best estimate of the total time the pathway takes, and name which single step takes the longest." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare the real pathway to your warm-up guesses.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What is the biggest difference between your warm-up guesses and the real pathway you found?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner lists requirements out of order or as an unordered set (for example, listing a certification and an entry-level position without saying which comes first), reteach by having them physically arrange the steps on paper or cards and ask 'what has to happen before this can happen' for each one, then rewrite the numbered sequence.",
+  "extension": "Have the learner research a second, faster or slower alternative pathway to the same job (for example, a certificate program instead of a full degree, or the reverse) and compare the time and requirement trade-offs between the two pathways.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u01-l03",
+    "authoredBy": "manual"
+  }
+}

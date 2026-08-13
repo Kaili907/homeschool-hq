@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l06",
+  "lessonId": "ma-g4-ready-for-life-u01-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Standard-setting specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The written standard is vague or too general to check the result against."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The standard includes two or three specific, checkable statements written before the task starts."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the standard is written specifically enough that a different person could use it to check the same result."
+          }
+        ]
+      },
+      {
+        "dimension": "Self-correction quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No real gap is identified, or the gap named doesn't match anything in the written standard."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific gap between the first attempt and the standard is correctly identified and actually fixed."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection correctly explains why checking against a written standard catches things that 'looks done' would miss."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The standard was written before the first attempt was checked against it, not adjusted afterward to match what was already done.",
+      "The task chosen is real and was genuinely practiced earlier in the unit."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u03-l01",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Helper Safety",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: washing hands all the way"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 3 — kitchen helper safety and no-heat preparation"
+  ],
+  "objective": "Learners demonstrate and self-check a complete five-step handwashing sequence (wet hands, apply soap, scrub every surface including between fingers and under nails for twenty seconds, rinse until soap is gone, dry with a clean towel) at a real sink, then compare their own starting habits against the full sequence to identify which steps they already do and which steps they normally skip.",
+  "scenario": "At a bathroom or kitchen sink, before any new instruction, the learner washes their hands the way they normally would while a family member watches quietly without coaching, so both can see the learner's starting habits. The learner then learns the full five-step sequence and washes again, timing the twenty-second scrub by singing the alphabet song once through.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Use only a sink, soap, and a towel for this lesson; ask a trusted adult before touching anything else in the kitchen."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "a sink with running water",
+    "soap",
+    "a clean towel"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before learning the five-step sequence, wash your hands the way you normally do, without any new instructions.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List each thing you did, in order, when you washed your hands just now."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now learn and practice the full five-step sequence at the sink: wet your hands, add soap, scrub every surface for twenty seconds (backs of hands, between fingers, under nails), rinse until the soap is gone, and dry with a clean towel.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wet my hands with running water before adding soap."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I scrubbed the backs of my hands, between my fingers, and under my nails, not just my palms."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I scrubbed for the full twenty seconds, timed by singing the alphabet song once through."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I dried my hands completely with a clean towel before touching anything else."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Later today, without looking back at this sheet, wash your hands again from memory before you plan to touch any food.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write the five steps in order from memory. Circle the step you almost forgot."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your baseline wash from task one to your full five-step wash.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one specific step you skipped in your very first wash today that you now do every time, and explain why that step matters."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner rinses off the soap in under ten seconds because scrubbing without a timer feels long enough, reteach by having them scrub through one full round of the alphabet song sung out loud before rinsing, so they feel the actual twenty-second length instead of guessing at it.",
+  "extension": "Have the learner teach the five-step sequence to a stuffed animal or another household member willing to listen, narrating each step out loud in order, to test whether they can explain the sequence and not just perform it themselves.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

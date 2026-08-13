@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u01-l06",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Home Care Routines That Last",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: finishing the loop"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last"
+  ],
+  "objective": "Learners pick one real household routine task they have already practiced this unit, such as a space reset or a storage system, complete it once, check the result against a specific standard for what 'done' looks like, identify one specific gap between their result and that standard, then correct the gap and compare their first attempt to their corrected result.",
+  "scenario": "The learner selects one task they have practiced earlier in this unit, such as resetting a shared space or storing a group of items, and treats finishing as a two-part loop: first completing the task, then checking it against a clear standard and fixing whatever doesn't yet meet it, instead of stopping as soon as the task looks roughly done.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "one real household task the learner has already practiced this unit",
+    "paper or a notes app to write the standard and the gap"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pick one task from earlier this unit and write down what 'done' specifically looks like for it before you start.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the task you're redoing and write two or three specific things that must be true for it to count as fully done."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the task once, straight through, without stopping to fix anything along the way.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I completed the whole task in one pass before checking it against my standard."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I did not stop partway through to redo or fix anything."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I wrote down what my finished first attempt actually looked like."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Check your finished first attempt against the specific standard you wrote in the warm-up and find any gap between them.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Compare your first attempt to your written standard and name one specific thing that doesn't yet match, such as a spot still cluttered, an item not yet stored correctly, or a step skipped."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Fix that specific gap, then describe exactly what you changed to close it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your first attempt to your corrected result.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what your first attempt was missing that your standard caught, and why checking your own work against a specific standard is different from just deciding a task 'looks done.'"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's stated standard is too vague to check against, such as 'make it nice,' reteach by rewriting the standard as two or three yes-or-no checkable statements, for example 'every item has a specific spot' instead of 'organized,' then have the learner re-run the check against the rewritten standard.",
+  "extension": "Have the learner apply the same finish-and-check loop to a different task from earlier in the unit and compare how large the gap was between their first attempt and their standard on this new task versus the original one.",
+  "scoringRef": "scoring/swk-rfl-g4-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

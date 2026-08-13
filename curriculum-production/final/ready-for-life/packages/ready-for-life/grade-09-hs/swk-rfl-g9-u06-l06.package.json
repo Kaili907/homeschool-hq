@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u06-l06",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 9 Independence Capstone",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: reflection, risks, and backup plans"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners present their capstone week's outcomes and choices out loud to a trusted adult, naming one specific thing that worked, one specific thing that didn't, and one specific backup plan for a risk that could recur, with the adult confirming the presentation happened and asking at least one follow-up question.",
+  "scenario": "Drawing on their operations map, weekly grid, household and food contribution, and transportation plan from earlier this unit, the learner writes and then presents out loud to a trusted adult what worked during the capstone week, what didn't, and a specific backup plan for a risk that could come up again, and the adult confirms the presentation happened and asked at least one follow-up question.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["written plan", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This lesson never requires an audio or video recording of the presentation; a live presentation or the written, guardian-initialed script both count as complete.",
+    "Completing this task sheet never certifies the presentation by itself; a guardian confirmation is required before the task counts as complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If presenting out loud is not possible, the learner instead writes the complete presentation as a script, covering the same three parts (what worked, what didn't, and the backup plan), and a trusted adult reads the full script and initials it to confirm they read and understood it."
+  },
+  "materials": ["paper or a document for the presentation notes or script", "the learner's completed artifacts from Lessons 1 through 5 of this unit"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Review your artifacts from earlier in the capstone week and outline what worked and what didn't across the systems you used.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List at least two things that worked well and at least two things that didn't go as planned during the capstone week, across any of your systems." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Write the full content of your presentation: one thing that worked, one thing that didn't, and one specific backup plan for a risk that could recur.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My presentation names one specific thing that worked during the capstone week and why it worked." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My presentation names one specific thing that did not go as planned during the capstone week." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My presentation includes one specific backup plan for a risk that could recur, naming the exact trigger and the exact different action I would take." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Present your capstone week outcomes out loud to your trusted adult (or, if using the alternative, have them read and initial your script), and have them ask you at least one follow-up question.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "checklist-item", "text": "My trusted adult confirms I presented my capstone week outcomes out loud, or, if using the script alternative, read and initialed my script." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "My trusted adult confirms they asked at least one follow-up question during or after the presentation." },
+        { "ref": "t3-p3", "promptType": "short-response", "text": "What was the follow-up question your adult asked, and how did you answer it?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look back on the whole capstone week.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Of the five systems (planning, household, food, transportation, communication), which one do you most want to strengthen going forward, and what is your first specific step?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's backup plan is vague (for example, 'I'll try harder next time'), reteach by requiring the plan to name the specific trigger condition that would cause the risk to recur and the specific different action they would take in response.",
+  "extension": "Have the learner add a second backup plan for a different risk from a different system (for example, food or transportation) and present it using the same structure.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  }
+}

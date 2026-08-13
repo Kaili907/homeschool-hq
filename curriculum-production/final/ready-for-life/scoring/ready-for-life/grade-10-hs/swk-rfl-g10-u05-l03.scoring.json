@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l03",
+  "lessonId": "ma-g10-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Accuracy of what each record proves and who issues it",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Explanations are generic ('it's important') without naming what the record proves or who issues it." },
+          { "label": "Proficient", "descriptor": "Correctly names what at least two of three records prove and their issuing authority." },
+          { "label": "Advanced", "descriptor": "Correctly names what all three records prove and their issuing authority." }
+        ]
+      },
+      {
+        "dimension": "Real-life situation specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Situations named are vague ('sometimes you need it')." },
+          { "label": "Proficient", "descriptor": "Names a specific, plausible real situation for at least two records." },
+          { "label": "Advanced", "descriptor": "Names a specific, plausible real situation for all three records." }
+        ]
+      },
+      {
+        "dimension": "Reasoning about replaceability and preparedness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The hardest-to-replace judgment has no real reasoning." },
+          { "label": "Proficient", "descriptor": "Gives plausible reasoning for the hardest-to-replace judgment." },
+          { "label": "Advanced", "descriptor": "Gives specific reasoning and the reflection connects preparedness to a genuine, non-alarmist reason." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No entry describes the learner's own or any real person's actual document details or numbers.",
+      "Each of the three entries names a distinct issuing authority type, not the same one repeated.",
+      "The reflection explains a genuine reason for advance understanding, not a fear-based framing."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l06",
+  "lessonId": "ma-g4-ready-for-life-u06-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Stage-by-stage reflection specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the five earlier stages is skipped, or the notes are general statements like 'it went fine' instead of specific details."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All five earlier stages are covered, each with a specific strength and a specific thing the learner would do differently."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner's closing reflection accurately separates what they learned about their own process from how the contribution itself turned out."
+          }
+        ]
+      },
+      {
+        "dimension": "Next-step concreteness and connection to evidence",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The next step is vague, such as 'do better,' or does not connect to the weakest criterion from the previous lesson's check."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The next step is specific, connects directly to the weakest criterion or a specific stage note, and includes a rough timeframe."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the guardian confirms the next step is realistic and genuinely actionable in the household."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The next step does not require anything to be purchased or assume a specific household structure.",
+      "The reflection stays focused on the task and process rather than disclosing personal or family details."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

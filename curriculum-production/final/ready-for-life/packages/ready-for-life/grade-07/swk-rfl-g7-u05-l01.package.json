@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u05-l01",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Digital Life, Purchases, and Consumer Skills",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: account and password safety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners audit the password habits of three to five real accounts they use by checking each one against three safety measures (length, uniqueness across sites, and whether it is known only to them), without necessarily changing any real password.",
+  "scenario": "The learner lists several accounts they regularly use and evaluates each account's password habit against three safety checks, ranking the accounts from safest to riskiest, all without writing down or revealing any actual password.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Any account the learner does not personally manage should only be changed with permission from whoever manages it.",
+    "Do not write down or share any actual password anywhere in this task; describe each password's length and uniqueness only, never the password itself."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner has no accounts of their own to evaluate, they instead review a provided sample list of five password habits (for example, a password reused across several sites, a very short password, or a password containing a pet's name) and sort each as safe or unsafe with a specific reason."
+  },
+  "materials": [
+    "a list of accounts the learner regularly uses (without writing any actual passwords)",
+    "paper or a notes app to record habit evaluations"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List three to five accounts you use regularly, such as a school portal, an email, a game, or an app, without writing any actual passwords.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the accounts and note which one you use most often."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each account, evaluate its password habit against three safety checks: is it long enough, is it unique to that one account, and is it something only you would know.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I evaluated at least three accounts against all three safety checks: length, uniqueness, and whether it is known only to me."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I did not write down or reveal any actual password anywhere in this task."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Rank your evaluated accounts from safest to riskiest habit, then identify the single riskiest habit across all of them and explain specifically why reusing a password or using a very short password makes that account more vulnerable to a stranger guessing or cracking it.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Name the riskiest habit you found and explain in two or three sentences why that specific habit increases the chance of a stranger accessing that account."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your own password habits overall.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific change you could make to strengthen your weakest password habit, and why a longer passphrase would help even if you don't make the change right now."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot identify any risky habit, reteach with a live demonstration comparing the estimated crack time of a short reused password against a long unique passphrase, then have the learner re-evaluate their own list.",
+  "extension": "Have the learner design a memorable passphrase pattern (not an actual password) for one account and explain specifically why it would be harder for a stranger to guess than the original habit.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u05-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u05-l01",
+    "authoredBy": "manual"
+  }
+}

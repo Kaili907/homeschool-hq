@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u04-l04",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Fueling My Day",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: eating a variety of foods"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety"
+  ],
+  "objective": "With a trusted adult's help, learners build a plate or bowl using four items that are different colors or come from different food groups already available at a regular meal or snack, naming each item's color and food group out loud, so they practice recognizing variety as the goal rather than any single correct food.",
+  "scenario": "A trusted adult helps the learner look at what foods are already available at a regular meal or snack time, and together they choose four items that are different colors or come from different food groups, arranging them on one plate or in one bowl before eating.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "drawing",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This task is about trying variety and enjoyment, never about restricting, forcing, or rewarding a food choice.",
+    "No food item is labeled as good or bad; the only goal is naming colors and food groups.",
+    "If four differently colored items are not available that day, use the simulation alternative instead of pressuring the learner to eat a disliked item."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real plate cannot be built that day, the learner instead plans or draws a variety plate using four foods they already know are typically available in their household, labeling each item's color and food group on the drawing."
+  },
+  "materials": [
+    "a plate or bowl",
+    "four food items of different colors or food groups already on hand"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before looking at what is available, make a guess.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Guess two food colors you think you will be able to find today, before you look."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, look at what is available and choose four items that are different colors or food groups, then name each one out loud before eating.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I looked at what foods were already available with my adult before choosing any items."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I chose four items that were different colors or from different food groups, not four of the same type."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I said each item's color and food group out loud before eating it."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "If one item was not appealing, I swapped it for a different available color instead of skipping the task."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without looking at your plate again, recall what you chose.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List the four colors or food groups you included from memory, then check your list against what you actually chose."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Pick one of the four items on your plate to describe.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one of the four items on your plate: its color or food group, and one thing you noticed about it, such as texture, taste, or how it looked."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner picks four items that are technically different foods but all the same color as each other, reteach by requiring each item's color to be named out loud before it goes on the plate, with four different named colors required before the plate counts as complete.",
+  "extension": "Have the learner build a second variety plate at a different meal, choosing four food groups different from the first plate, and compare in writing which four groups were picked each time.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

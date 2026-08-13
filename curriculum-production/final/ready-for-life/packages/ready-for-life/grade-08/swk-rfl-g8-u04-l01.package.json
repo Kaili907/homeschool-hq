@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u04-l01",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Appointments, and Community Navigation",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: route and schedule planning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners use a provided fictional town map and bus schedule to plan a complete route and timing for a fictional Saturday errand, including which bus to catch, how long to allow for walking on both ends, and a buffer against a closing time.",
+  "scenario": "In the fictional town of Cedar Hollow, a community garden supply booth at Riverside Market closes at 11:00 a.m. on Saturdays. Using the Hollow Line bus schedule and neighborhood details printed on this task sheet, the learner works out which departure to catch from the Oak Street stop, how long the walk from the bus stop to the booth takes, and what time to leave home to arrive with time to spare.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper",
+    "pencil",
+    "the fictional Cedar Hollow map and Hollow Line bus schedule printed on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the fictional Hollow Line schedule below before planning anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "The Hollow Line Route 4 bus leaves the Oak Street stop at 9:10, 9:40, and 10:10 on Saturday mornings and takes 15 minutes to reach the Riverside Market stop. The walk from the Riverside Market stop to the garden supply booth takes 8 minutes, and the booth closes at 11:00 a.m. Which departure is the latest one that still gets the fictional errand-runner to the booth at least 15 minutes before closing, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Work out the walk on the home end of the trip before finalizing a leave-home time.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I identified the correct starting bus stop and the correct arrival bus stop for this fictional trip."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "Home is a 6-minute walk from the Oak Street stop. What time does the fictional errand-runner need to leave home to catch the departure you chose in Task 1?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write a complete step-by-step fictional trip plan a stranger could follow without asking any questions.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write out the full plan for this fictional Cedar Hollow errand in order: what time to leave home, which bus and departure time to catch, how long the ride and the walk take, what time you arrive at the booth, and how many minutes of buffer time you built in before the 11:00 a.m. closing. Explain why you chose that specific departure instead of an earlier or later one."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what could change your plan.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "If the 9:40 bus were 10 minutes late, would your plan from Task 3 still work? Explain what you would do differently."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner miscalculates the arrival buffer, work through one full example together on scratch paper, converting each schedule time to minutes-after-9:00 before adding travel time, then have the learner redo their own plan using the same conversion method.",
+  "extension": "Have the learner plan a second fictional route on the same Hollow Line schedule that arrives at Riverside Market by 9:30 instead of 11:00, using an earlier departure.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

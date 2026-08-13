@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u05-l04",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Planning, Belongings, and Communication",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: borrowing and returning responsibly"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 5: Planning, Belongings, and Communication"
+  ],
+  "objective": "Learners borrow one real item from another person in the household with permission, agree on a specific return time before taking it, use the item, and return it in the same condition by the agreed time, with an adult confirming both the condition and the timing of the return.",
+  "scenario": "The learner identifies something real they want or need to borrow from someone else in the household, such as a tool, a book, or a piece of equipment. Before taking it, the learner asks permission and agrees on exactly when it will come back, then follows through on that agreement.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Before borrowing, the learner asks the item's owner directly and states the specific return time out loud, rather than assuming it is fine to take.",
+    "The item is checked for its condition (clean, undamaged, all pieces present) both right before borrowing and right before returning, so any change is caught honestly.",
+    "If the agreed return time cannot be met, the correct move is to tell the item's owner before the deadline passes, not after."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real item is available to borrow, the learner instead writes a detailed borrowing plan for a specific item they could realistically borrow in the future: who they would ask, the exact condition they would note beforehand, the return time they would propose, and one specific thing they would do differently from a time they forgot to return something or returned it in worse condition."
+  },
+  "materials": [
+    "a real item belonging to someone else in the household",
+    "paper or a notes app to record the agreement and the condition check"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before asking to borrow anything, think about the item you have in mind.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the item, who it belongs to, and why you want to borrow it."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Ask the owner directly for permission, agree on a specific return time, and note the item's condition before you take it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I asked permission out loud instead of just taking the item."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I agreed on a specific return time (a day and roughly what time), not a vague 'later.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I wrote down the item's condition before borrowing it."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Use the item, then return it to the owner by the agreed time, checking its condition again before handing it back and comparing that condition to your before-notes.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Did you return the item by the exact time you agreed on?",
+          "choices": [
+            "Yes, on time",
+            "Late, but I told the owner before the deadline passed",
+            "Late, and I did not say anything until after"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Compare the item's condition when you returned it to the condition you noted before borrowing. Is it the same, or did something change?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the whole borrowing agreement from start to finish.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why agreeing on a specific return time and checking condition before you borrow, rather than after, makes it easier to return something responsibly."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner returns an item without having agreed on a specific time or without checking its condition beforehand, reteach by role-playing the borrowing conversation before the next real attempt: have the learner say out loud the exact item, the exact return time, and one detail of its current condition, with an adult confirming each of the three out loud before the item changes hands.",
+  "extension": "Have the learner track a second borrowing agreement where they are the lender instead of the borrower, noting the same before-and-after condition and timing details, and compare in writing what felt different about being on the lending side.",
+  "scoringRef": "scoring/swk-rfl-g4-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

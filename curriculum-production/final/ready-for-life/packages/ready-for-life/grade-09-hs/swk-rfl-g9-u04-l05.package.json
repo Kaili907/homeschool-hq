@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u04-l05",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Travel, and Community Logistics",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: personal safety and check-in plans"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "The learner and a trusted adult set up and agree on one real check-in protocol for a real time the learner will be away from home (for example, walking to a friend's house, biking to a store, or attending an activity), specifying exactly how and when the learner will check in.",
+  "scenario": "The learner identifies one real upcoming time they will be away from home without a trusted adult directly present, proposes a specific check-in plan (such as a message on arrival, a check-in at an agreed time, or checking in at each waypoint of a route), and the trusted adult reviews, adjusts if needed, and agrees to the plan before the outing.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "written plan", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner does not need to be away from home during the lesson itself; only setting up and agreeing on the plan with a trusted adult is required.",
+    "This task never requires the learner to travel anywhere alone as part of completing the lesson; if there is no real upcoming time away from home, the fictional-scenario alternative is used instead.",
+    "Completing this task sheet never certifies the agreement by itself; a guardian confirmation is required before the task counts as complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there is no real upcoming time the learner will be away from home, the learner instead designs a full check-in plan for a realistic fictional outing (such as walking to a friend's house across town or attending an evening activity) and presents the complete plan to a trusted adult for the same level of review and agreement, including the adult's feedback on what they would change."
+  },
+  "materials": [
+    "paper or a document to write the check-in plan",
+    "a phone or other communication method the household already uses, if applicable"
+  ],
+  "tasks": [
+    { "taskId": "t1", "kind": "warm-up", "directions": "Think about a real upcoming time you'll be away from home, or a realistic fictional outing if you don't have one.", "prompts": [
+      { "ref": "t1-p1", "promptType": "short-response", "text": "Describe the outing: where you're going, how you're getting there, and roughly how long you'll be gone." }
+    ] },
+    { "taskId": "t2", "kind": "guided", "directions": "Draft a specific check-in plan naming exactly when and how you will check in.", "prompts": [
+      { "ref": "t2-p1", "promptType": "checklist-item", "text": "My plan names a specific method of checking in (such as a text message, a phone call, or checking in in person at a specific point)." },
+      { "ref": "t2-p2", "promptType": "checklist-item", "text": "My plan names a specific time or trigger for each check-in (such as 'on arrival' or 'by 6:00 pm')." },
+      { "ref": "t2-p3", "promptType": "checklist-item", "text": "My plan includes what happens if I miss a check-in (who gets contacted and what they do next)." }
+    ] },
+    { "taskId": "t3", "kind": "performance-task", "directions": "Present your plan to a trusted adult and agree on a final version together.", "prompts": [
+      { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Did your trusted adult agree to your plan as written, or did they ask for a change?", "choices": ["They agreed to it as written", "They asked for a change"] },
+      { "ref": "t3-p2", "promptType": "short-response", "text": "Write the final, agreed-on version of your check-in plan, including any change your trusted adult asked for." }
+    ] },
+    { "taskId": "t4", "kind": "reflection", "directions": "Think about why check-in plans matter.", "prompts": [
+      { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain what could go wrong if you left for this outing without an agreed check-in plan, and how the plan you made would help." }
+    ] }
+  ],
+  "remediation": "If a learner's plan is missing a specific trigger (such as writing 'I'll check in sometime') or a missed-check-in step, reteach by having them rewrite the plan using exact times and a named first contact, comparing a vague version side-by-side with a specific version before finalizing the plan with their adult.",
+  "extension": "Have the learner design a second check-in plan for a longer or higher-stakes outing (such as an overnight activity) and explain what changes about the plan when the stakes are higher.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u04-l05",
+    "authoredBy": "manual"
+  }
+}

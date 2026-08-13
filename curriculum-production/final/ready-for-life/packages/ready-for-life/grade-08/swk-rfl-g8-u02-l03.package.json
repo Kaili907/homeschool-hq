@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u02-l03",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Operations and Basic Maintenance",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: basic tool identification"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners identify common household tools by sight and name across two rounds of guided practice, moving from a supported matching round to an independent naming round, and explain each tool's typical use and one basic safety consideration without operating any tool.",
+  "scenario": "The learner looks at, but does not pick up or use, a set of common household tools: a screwdriver, a hammer, pliers, a tape measure, an adjustable wrench, and a level, first matching names to tools with support, then naming the same tools without any word bank.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "The learner identifies tools by sight and description only in this lesson and does not pick up, hold, or operate any tool.",
+    "If real tools are used for identification, a trusted adult chooses which tools are safely accessible for handling versus which stay out of reach."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If none of the listed tools are available at home, match each tool to its use and safety note using only the descriptions and line-drawing labels on this sheet instead of handling a physical tool."
+  },
+  "materials": [
+    "real household tools if available (screwdriver, hammer, pliers, tape measure, adjustable wrench, or a level), or pictures/descriptions of these tools",
+    "paper or a notebook",
+    "a pen or pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before naming anything, look only (do not pick up) at whatever tools are visible in your household's tool storage area, or study these six tool descriptions if none are available: a screwdriver (long handle with a flat or cross-shaped metal tip), a hammer (weighted head on a handle for driving nails), pliers (two hinged jaws for gripping), a tape measure (a coiled metal ribbon marked with numbers), an adjustable wrench (a jaw that opens and closes to fit different bolt sizes), and a level (a straight bar with a liquid bubble to check flatness).",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which of these six tools did you already know by name before starting, and which were unfamiliar?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With the word bank of all six tool names in front of you, match each tool to its correct name and write one sentence about what it's typically used for. This round uses full support, so check your answer against the descriptions above if unsure.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I matched all six tools to their correct names using the word bank."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "A tool with two hinged jaws for gripping small objects is called a:",
+          "choices": ["hammer", "pliers", "tape measure", "level"]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now cover the word bank. Without any names to choose from, look at (or reread the plain descriptions of) the same six tools in a different order and write the correct name for each one from memory, along with its typical use and one basic safety consideration.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Without using the word bank, name all six tools from memory in a new order, and for each one write its typical use and one specific safety consideration a person should keep in mind before ever operating it, even though you are not operating any tool in this lesson."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your two rounds.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which tool was hardest to recall by name alone in round two, and what might make it easier to remember next time?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner mixes up similar-looking tools (pliers versus an adjustable wrench, for example), reteach by placing the two tools or descriptions side by side and naming the one distinguishing feature of each (pliers have two independently hinged jaws; a wrench has one jaw that slides to fit a size) before retesting recall separately.",
+  "extension": "Have the learner identify two additional tools not covered in this lesson (from their own household or from memory) and add them to their name-plus-use-plus-safety-note list, following the same three-part format.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

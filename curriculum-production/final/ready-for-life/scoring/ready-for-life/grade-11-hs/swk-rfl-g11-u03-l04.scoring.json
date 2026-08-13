@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l04",
+  "lessonId": "ma-g11-ready-for-life-u03-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Coverage of routine-care categories",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Conversation covered only one category or stayed superficial." },
+          { "label": "Proficient", "descriptor": "Conversation covered all three categories (sleep, preventive check-ins, renewal reminders) at a general level." },
+          { "label": "Advanced", "descriptor": "Conversation identified a specific overdue or upcoming item in at least one category." }
+        ]
+      },
+      {
+        "dimension": "Specificity and checkability of the agreed change",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Change is vague and has no way to verify it happened." },
+          { "label": "Proficient", "descriptor": "Change names a specific action and frequency." },
+          { "label": "Advanced", "descriptor": "Change also names a specific, concrete way to check whether it's happening." }
+        ]
+      },
+      {
+        "dimension": "Reasoning about why routine care slips",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection is generic ('I get busy') with no reasoning specific to routine care." },
+          { "label": "Proficient", "descriptor": "Names a specific reason routine care, versus urgent problems, tends to get deprioritized." },
+          { "label": "Advanced", "descriptor": "Connects that reasoning to a specific safeguard built into the agreed change." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real health metric, diagnosis, or medication name is recorded anywhere in the response.",
+      "The agreed change names a specific, checkable action and frequency, not a vague intention.",
+      "Guardian confirmation is present alongside the learner's own account."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

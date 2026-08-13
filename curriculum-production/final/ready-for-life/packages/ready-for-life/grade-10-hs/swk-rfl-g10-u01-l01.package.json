@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u01-l01",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Career Exploration and Pathway Mapping",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: identifying interests, strengths, and constraints"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners complete a three-part self-inventory of genuine interests, evidence-backed strengths, and real constraints (time, schedule, transportation options actually available to them) so the unit's career research starts from who the learner actually is rather than a generic list of popular jobs.",
+  "scenario": "The learner fills out a three-part inventory: activities they are genuinely curious about or enjoy, strengths they can back with a specific remembered moment rather than a guess, and real constraints on time and getting to a location that they can name honestly.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No household financial detail, income, or specific address information is requested; constraints are described in general terms (for example, 'limited to weekends' or 'depends on someone else's schedule') rather than exact personal or family circumstances."
+  ],
+  "simulationAlternative": null,
+  "materials": ["a notebook or document", "this task sheet's three-part inventory prompts"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List five activities you are genuinely curious about or enjoy, in or out of school.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List five activities, and for each one write a half-sentence on what specifically draws you to it." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Name three personal strengths, and for each one describe one specific remembered moment that shows it, not just a claim.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "For each of three strengths, describe a specific moment where the strength actually showed up, not a general claim like 'I'm a hard worker.'" },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "Each strength is backed by a specific remembered moment, not only a claim." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Name your real constraints honestly: how much time you realistically have per week, and what transportation options are actually available to you (walking, public transit, riding with someone else, or another way).",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "State a realistic number of hours per week you could commit to work or a related activity, and name the transportation options genuinely available to you." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what stands out from this inventory.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which constraint is the biggest open question for you right now, and why does it matter for the kind of work you'd realistically be able to start?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's strengths are unsupported claims with no specific moment (e.g., 'I'm good with people'), reteach by modeling one worked example: state a strength, then narrate a 20-second specific memory that demonstrates it, then have the learner revise one of their three strengths using that pattern before moving on.",
+  "extension": "Have the learner ask someone who knows them well (without naming a required relationship) to name one strength the learner didn't list, and add it to the inventory with the reason the other person gave.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

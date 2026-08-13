@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u04-l04",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Travel, and Community Logistics",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: appointment preparation and questions"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners prepare a real list of questions and information for one real upcoming appointment (such as a medical, dental, school, or counseling appointment) and review that list with a trusted adult before the appointment takes place.",
+  "scenario": "With a trusted adult, the learner identifies one real upcoming appointment, thinks through what information the appointment will likely require and what questions they want answered, writes a complete list, and reviews it with the trusted adult before the appointment happens; the adult confirms the review took place.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "written plan", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner does not attend or conduct the appointment as part of this lesson; only preparation and review with a trusted adult are required.",
+    "No real outside party (the appointment provider) is contacted as part of this task; only the learner's own list and a household review are required.",
+    "Completing this task sheet never certifies the review by itself; a guardian confirmation is required before the task counts as complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner has no real upcoming appointment, they instead choose a realistic fictional appointment scenario (such as a first dental visit or a school counselor meeting) and role-play the full preparation and question-review conversation with a trusted adult, with the adult asking follow-up questions the way an appointment provider might, for the same level of review and feedback."
+  },
+  "materials": [
+    "paper or a document to write the question list",
+    "information about the real upcoming appointment (date, type, provider) if one exists, or a chosen fictional scenario"
+  ],
+  "tasks": [
+    { "taskId": "t1", "kind": "warm-up", "directions": "Think about a real upcoming appointment you have, or if you don't have one, pick a realistic fictional scenario.", "prompts": [
+      { "ref": "t1-p1", "promptType": "short-response", "text": "Name the appointment type (real or fictional) and what you already know about what it's for." }
+    ] },
+    { "taskId": "t2", "kind": "guided", "directions": "Think through what information you'll likely need to provide and what questions you want to ask.", "prompts": [
+      { "ref": "t2-p1", "promptType": "checklist-item", "text": "I listed at least three pieces of information I might be asked to provide (such as my age, the reason for the visit, or relevant history)." },
+      { "ref": "t2-p2", "promptType": "checklist-item", "text": "I wrote at least three specific questions I want answered during the appointment." },
+      { "ref": "t2-p3", "promptType": "short-response", "text": "Write your full list of information and questions in the order you'd want to bring them up." }
+    ] },
+    { "taskId": "t3", "kind": "performance-task", "directions": "Review your full list with a trusted adult before the appointment, or for a fictional scenario, role-play the conversation together.", "prompts": [
+      { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Did you review your list with a trusted adult?", "choices": ["Yes, I reviewed it before a real appointment", "Yes, I role-played it for a fictional scenario"] },
+      { "ref": "t3-p2", "promptType": "short-response", "text": "Write down one thing your trusted adult added or changed on your list during the review." }
+    ] },
+    { "taskId": "t4", "kind": "reflection", "directions": "Think about how the review changed your list.", "prompts": [
+      { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one question or piece of information you hadn't thought of before your trusted adult reviewed your list, and why it matters." }
+    ] }
+  ],
+  "remediation": "If a learner's questions are too vague to get a useful answer at the appointment (such as 'is everything okay?'), reteach by having them rewrite each vague question into a specific one naming exactly what they want to know (for example, changing 'is everything okay?' to 'what should I do if this symptom comes back?'), before returning to the full review with their adult.",
+  "extension": "Have the learner prepare a second, shorter version of their list meant for a situation where they only have two minutes to ask their most important question, and explain which question they kept and why.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

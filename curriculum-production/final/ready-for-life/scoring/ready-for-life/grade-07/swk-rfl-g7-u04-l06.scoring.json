@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l06",
+  "lessonId": "ma-g7-ready-for-life-u04-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Offer specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The offer assumes what help is wanted or takes over the task without asking."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The offer asks what kind of help is wanted and includes at least two specific options."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the offer is phrased so it is genuinely easy for the other person to decline."
+          }
+        ]
+      },
+      {
+        "dimension": "Following the other person's lead",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner takes over or continues helping in their own way despite the other person's answer."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner reports what the person chose and followed that choice, even if it meant doing less than planned."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner identifies a specific signal that told them help was or wasn't wanted."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The moment described is real and happened this week, not invented.",
+      "The reflection ties its answer to what the other person actually said or chose, not an assumption about what they wanted.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

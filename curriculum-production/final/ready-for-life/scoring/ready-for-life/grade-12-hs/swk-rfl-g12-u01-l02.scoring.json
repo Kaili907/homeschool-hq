@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l02",
+  "lessonId": "ma-g12-ready-for-life-u01-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Ladder structure",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more items are missing a tier, or all three reminders fall on the same date or within a day of each other."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every item has three genuinely distinct, staggered reminder dates in the correct order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The spacing explanation shows a clear, reusable rule (such as 'advance at the halfway point') rather than dates chosen arbitrarily."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The reflection response does not name a specific tier or gives a generic 'I'd forget all of them' answer."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The reflection names a specific tier and gives a plausible reason it would be the one ignored."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection also names a concrete countermeasure for that specific weak point."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All three tiers are present and in the correct chronological order for every item.",
+      "The spacing logic is stated in words the learner could reapply to a real renewal later.",
+      "No real account, subscription, or document identifier appears anywhere."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u06-l03",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Independent-Living Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: food and transportation plan"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners add a weekly food plan and a transportation plan to their fictional persona's month, then check both new plans for consistency against the grocery and transportation figures already set in the persona's fictional budget from the previous lesson.",
+  "scenario": "Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "the persona's calendar and budget template from the previous two lessons",
+    "a blank weekly food-plan grid provided on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before planning a full week, list the persona's transportation options first.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List one or two ways your persona gets around during a typical week (for example, walking, a bicycle, public transit, a ride-share, or a vehicle the persona owns), and note which errands or work blocks each way is used for."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sketch a simple weekly food plan for the persona across seven days.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed at least one meal or grocery item for each of the seven days."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I kept the food plan realistic for someone living independently rather than listing restaurant meals every day."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Check both new plans against the budget figures from the previous lesson and adjust anything that does not fit.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Estimate a rough weekly grocery cost from your food plan, multiply it to a monthly figure, and compare it against the persona's $300 fictional grocery category; then do the same for transportation against the $150 fictional transportation category. For any plan that goes over its category, describe one specific change you would make to bring it back in line, and explain your reasoning."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Consider how the food and transportation plans changed your view of the persona's month.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Did adding the food and transportation plans make the persona's month feel more realistic, or did it reveal a problem you had not noticed before? Explain."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's cost estimates are wildly off (for example, guessing $50 total groceries for a month), work through one single day's estimate together using rough real-world grocery prices as a reference, then have the learner recalculate the rest of the week using that same per-day estimate.",
+  "extension": "Have the learner redesign the food plan for one week where the persona's fictional work schedule is unusually busy, explaining what changes (more prepared food, fewer cooked meals) and why.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

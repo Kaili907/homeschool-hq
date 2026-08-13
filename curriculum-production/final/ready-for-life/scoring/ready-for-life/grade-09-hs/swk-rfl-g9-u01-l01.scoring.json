@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l01",
+  "lessonId": "ma-g9-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Specificity of self-diagnosis",
+        "levels": [
+          { "label": "Emerging", "descriptor": "States only general feelings about planning (\"I'm bad at this\") without naming a specific method used or a specific instance where it failed." },
+          { "label": "Proficient", "descriptor": "Names the specific method currently used and describes at least one concrete instance from the last four weeks where it nearly failed or did fail." },
+          { "label": "Advanced", "descriptor": "Names the specific method, describes two distinct concrete instances with what was due and what happened, and identifies a specific structural gap the method has (not just an effort problem)." }
+        ]
+      },
+      {
+        "dimension": "Accuracy of gap identification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The named gap is vague (\"I need to be more organized\") or does not connect to either instance described." },
+          { "label": "Proficient", "descriptor": "The named gap is a real feature the current method lacks (such as no view of items due beyond one week) and reasonably connects to at least one instance described." },
+          { "label": "Advanced", "descriptor": "The named gap is specific, connects clearly to both instances described, and distinguishes a method limitation from a personal effort issue." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A named method that is an actual tool or habit (a specific app, a specific paper system, or explicitly 'no system'), not a vague phrase like 'I try to remember.'",
+      "Two instances that each name a specific deadline or commitment and what actually happened, not a general statement like 'I've forgotten things before.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

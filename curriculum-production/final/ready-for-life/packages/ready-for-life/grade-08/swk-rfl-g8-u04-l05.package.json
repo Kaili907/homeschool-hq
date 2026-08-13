@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u04-l05",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Appointments, and Community Navigation",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: personal safety and check-ins"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners identify one real trusted-contact category they could reach out to before going somewhere and draft an actual, reusable check-in message pattern they could genuinely send in real life.",
+  "scenario": "The learner names one category of trusted contact, such as a parent or guardian, another relative, or a family friend, without naming a specific real person, and writes a real, reusable check-in message following the pattern 'Leaving now, back by [time], will text if that changes,' something they could genuinely use before or after going somewhere on their own.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "This task does not require actually leaving the house or sending a real message to be complete; drafting the trusted-contact category and the message pattern in writing satisfies the task."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there isn't a trusted contact available to practice with right now, write out the exact check-in message you would send and when, instead of sending it."
+  },
+  "materials": [
+    "paper",
+    "pencil",
+    "a phone or note where the learner could save the message template (optional)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think broadly about who could count as a trusted contact before choosing just one.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List two or three categories of people who could count as a trusted contact for you (for example, a parent or guardian, another relative, a family friend), without writing any specific names yet."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Choose one trusted-contact category and build the check-in message pattern piece by piece.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I chose one trusted-contact category from my Task 1 list, described generally and not by name."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "Fill in this pattern with real, usable details: 'Leaving now, back by ___, will text if that changes.' What would you actually write in the blank for a normal outing?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the complete, reusable check-in message and explain when you would use it.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write out the complete check-in message you would actually send to your chosen trusted-contact category before going somewhere on your own, using the pattern from Task 2 as a starting point but adjusting the wording so it sounds like something you would really type. Then explain two specific real situations when sending a message like this would be a good habit, and describe what you would do if you did not get a reply back within a reasonable amount of time."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about which part of this task took the most thought.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Was it harder to pick the trusted-contact category or to write the actual wording of the message? Explain what made that part harder."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's message stays vague ('I'll be back later'), reteach by comparing it side by side with the modeled pattern and having the learner identify which specific piece (destination or timing, return time, or the change-of-plan clause) is missing before rewriting it.",
+  "extension": "Have the learner draft a second version of the check-in message for a situation where plans might change partway through, adding a line for what they would say if they decided to stay longer than planned.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u04-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u04-l05",
+    "authoredBy": "manual"
+  }
+}

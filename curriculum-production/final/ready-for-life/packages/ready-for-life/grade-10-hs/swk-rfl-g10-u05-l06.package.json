@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u05-l06",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Civic Participation and Public Systems",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: verifying rules locally rather than assuming"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners compile a guide to navigating three public systems relevant to them, each entry verified against a current local source rather than assumed, completing this unit's performance task.",
+  "scenario": "The learner assembles a guide covering three public systems from this unit (chosen from the service researched on day two, the record types from day three, and the office contacted on day five, or a fresh third system), each entry stating what it is, how to access it, and the source that verified it as current.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["research and notes from earlier lessons this unit", "a notebook or document for the compiled guide"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Choose three public systems from this unit to include in your guide.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the three systems you're including and why each is genuinely useful to you." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "For each of the three systems, write a guide entry stating what it is, how to access it, and the source that verified it.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write the guide entry for system one: what it is, how to access it, and your verifying source." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Write the guide entry for system two." },
+        { "ref": "t2-p3", "promptType": "extended-response", "text": "Write the guide entry for system three." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "Every entry names a specific, current source, not an assumption." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Re-verify one entry against a second source to confirm it wasn't outdated when first found.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "State which entry you re-verified, the second source, and whether it confirmed or changed your original finding." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the unit as a whole.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Looking at your finished guide, what is the single biggest difference between what you assumed about public systems before this unit and what you actually found?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's guide entries state information without naming a specific source, or the source is not genuinely current, reteach by requiring each entry to name the exact source and roughly when it was checked, using day one's two-source verification habit as the model to reapply here.",
+  "extension": "Have the learner add a fourth entry covering a public system relevant to a different life stage (such as one useful to an older adult) and compare what changes about how it's accessed.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

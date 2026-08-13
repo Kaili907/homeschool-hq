@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u05-l05",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Asking for Help",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: asking for help clearly"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 5 — time, belongings, and help-seeking"
+  ],
+  "objective": "Learners ask a trusted adult for help with one real, current question or problem using a three-part structure: naming the specific problem, saying what they already tried, and stating exactly what kind of help they need, so the adult can respond without having to guess.",
+  "scenario": "When a genuine question or stuck point comes up today, such as an instruction the learner does not understand or a job they cannot finish alone, the learner finds a trusted adult, uses the three-part structure out loud, and the adult confirms afterward whether the request was clear enough to act on right away.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult confirms that the help-asking moment actually happened as described, not only that the learner reports it happened."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real question or stuck point comes up today, the learner instead role-plays the three-part ask-for-help structure with a trusted adult, using a real, specific situation recalled from earlier in the week instead of a live one."
+  },
+  "materials": [
+    "a real, current question or stuck point",
+    "a trusted adult"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before asking anyone, think through the three parts of the structure on your own.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Write the specific problem you have right now, in one sentence."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Approach a trusted adult and use all three parts of the structure out loud, in order, before pausing for their response.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named the specific problem, not just a general 'I'm stuck.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I said what I already tried before asking for help."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I stated exactly what kind of help I needed, such as an explanation, a demonstration, or a decision."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I asked a trusted adult directly, out loud, instead of waiting to be noticed."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Later today or tomorrow, use the same three-part structure again with a second, different question, to check whether the structure holds up more than once.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe the second question you asked and name which of the three parts you remembered on your own, without checking a written reminder."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the help you actually received compared to the help you asked for.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe the specific kind of help your adult gave you, such as an explanation, a demonstration, or a decision, and whether it matched what you asked for."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner states the problem vaguely, such as 'I don't get it,' without saying what was already tried or what help is needed, causing the adult to have to ask follow-up questions, reteach with a fill-in-the-blank sentence frame practiced once on a low-stakes made-up question before using it on a real one.",
+  "extension": "Have the learner use the same three-part structure to ask a co-op teacher or another trusted adult outside the household for help with a different kind of question, showing the structure transfers beyond the household.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

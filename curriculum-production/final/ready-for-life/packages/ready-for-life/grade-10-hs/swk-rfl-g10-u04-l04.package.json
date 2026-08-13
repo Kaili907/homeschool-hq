@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u04-l04",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Consumer Tasks and Everyday Agreements",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: keeping records that make a dispute winnable"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "With a trusted adult, learners locate two real household records (a receipt, confirmation email, or similar document already kept) and build a documentation log recording what each proves and where it is stored, without ever recording an account number, card number, or password, so they practice real record-keeping habits safely.",
+  "scenario": "With a trusted adult's help, the learner finds two real documents already kept in the household (paper or digital) and logs, for each, what it proves, its date, and where it's stored, leaving out any account number, card number, or password entirely.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "planning page", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "No account number, card number, password, or full financial detail is ever written into the log; only what the document proves, its date, and its storage location are recorded.",
+    "A trusted adult identifies which real household documents are appropriate to use for this exercise before the learner handles them.",
+    "If no adult is available or no suitable document exists in the household right now, use the alternative below instead."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real document is available or supervision isn't possible right now, the learner instead uses the two fictional sample documents from an earlier lesson this unit and builds the same documentation log entries for those instead."
+  },
+  "materials": ["two real household documents identified by a trusted adult, or the fictional samples from an earlier lesson", "a notebook or document for the log"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "With your adult, choose two real documents already kept in the household that would be useful in a dispute.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Briefly describe, in general terms, what kind of documents you chose (for example, 'a repair confirmation' or 'a receipt'), without any account or card numbers." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each document, log what it proves, its date, and where it's stored.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My log entries name what each document proves and its date." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My log entries name where each document is stored, so it could be found again later." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "No account number, card number, or password appears anywhere in my log." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain how this log would actually help in a real dispute.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Pick one of your two log entries and explain specifically how having it recorded would help if a dispute came up." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on record-keeping as an ongoing habit.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What would make you actually keep a log like this going forward, rather than doing it once for this lesson?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's log entries are too vague to be useful later (missing a date, or not naming a findable storage location), reteach by modeling one complete entry with all three required fields filled in specifically, then have the learner revise their two entries against that model.",
+  "extension": "Have the learner set up one simple ongoing habit (a folder, a note, or a recurring reminder) for logging new documents like these as they come in, and describe exactly how it will work.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

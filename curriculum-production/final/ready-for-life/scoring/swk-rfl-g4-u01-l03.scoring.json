@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l03",
+  "lessonId": "ma-g4-ready-for-life-u01-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Comparison rigor",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Only one storage option is actually tested, or both are set up but not really tried."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both storage options are tested by actually retrieving and putting away the same items."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner ties their choice to a specific feature of the items themselves, such as how they're used, how many there are, or how they look."
+          }
+        ]
+      },
+      {
+        "dimension": "Justification of choice",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The chosen option is stated without a specific reason, such as 'I like it better.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific reason is given, connected to speed, visibility, or fit."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains why a storage spot has to match actual use, not just appearance."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The item group is real and actually lacked a working storage spot before this lesson.",
+      "Both storage options were physically set up and used, not just imagined."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

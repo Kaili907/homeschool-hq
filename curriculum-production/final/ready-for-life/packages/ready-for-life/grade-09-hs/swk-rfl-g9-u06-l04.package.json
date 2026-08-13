@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u06-l04",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 9 Independence Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: transportation and appointment plan"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners produce one complete, real-world-ready written transportation and appointment plan for a real or realistic near-future need, integrating a specific route, an estimated cost, a list of needed documents or items, and a check-in step, the same four elements built earlier in the year, so the finished plan is ready to use even though this lesson is the plan itself, not its execution.",
+  "scenario": "The learner names one real or realistic near-future need that requires getting somewhere at a specific time, such as a medical or dental appointment, a school event, or an activity, and writes a complete plan covering how they would get there, what it would cost, what they would need to bring, and what they would do when they arrive, without contacting or scheduling with any real outside person or office as part of this lesson.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This plan is prepared as a real-world-ready document; it does not require contacting, confirming, or scheduling with any real outside person or office as part of this lesson."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document for the written plan", "information about the transportation options actually available to the household (walking distance, a transit schedule, or a trusted adult's availability)", "the learner's Unit 4 notes"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Name one real or realistic near-future need that requires getting somewhere at a specific time.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe the need, including the type of appointment or event, and roughly when it would happen." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build your plan across all four elements: the route, the estimated cost, the needed documents or items, and the check-in step.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My plan names the specific transportation mode and the route steps in order, with approximate times." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My plan includes an estimated cost for the trip, based on a published fare or a typical cost, if any." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My plan lists every document or item I would need to bring." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "My plan describes exactly what I would do or say when I check in or arrive." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Review your plan for one realistic disruption and write a specific backup step.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "What is the most likely thing that could go wrong with this plan (for example, a missed bus or a delay), and what is your specific backup step?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Connect this plan back to what you've built across the whole year.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one specific way this transportation plan depends on a skill from a different system this year, such as a planning or communication skill." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's route is too vague to act on (for example, 'get a ride there' with no mode, steps, or times named), reteach by requiring the plan to be rewritten as a numbered list of specific actions, each with a mode and an approximate time.",
+  "extension": "Have the learner write a second plan for the same need using a different transportation mode, then compare the cost and time tradeoffs between the two plans in one paragraph.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

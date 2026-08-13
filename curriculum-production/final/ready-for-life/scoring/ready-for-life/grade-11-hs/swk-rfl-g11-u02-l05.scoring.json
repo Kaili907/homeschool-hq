@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l05",
+  "lessonId": "ma-g11-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Readiness check accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Readiness answer says the tracker is ready to submit despite the missing second reference." },
+          { "label": "Proficient", "descriptor": "Readiness answer correctly identifies the missing second reference as blocking submission." },
+          { "label": "Advanced", "descriptor": "Readiness answer also notes the 'waived' fee status was checked and confirmed, not just assumed fine." }
+        ]
+      },
+      {
+        "dimension": "Follow-up message quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Message is vague ('just checking on my application') without naming what was submitted or when." },
+          { "label": "Proficient", "descriptor": "Message names what was submitted, the submission date, and clearly requests confirmation." },
+          { "label": "Advanced", "descriptor": "Message is also appropriately polite and concise, the kind a recipient could act on quickly." }
+        ]
+      },
+      {
+        "dimension": "Transfer to real tracker",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names an item from the real tracker without connecting it to the readiness-check habit just practiced." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific real item and explains what readiness check it will need." },
+          { "label": "Advanced", "descriptor": "Reflection identifies a specific real item where the same kind of gap (like the missing reference in the practice tracker) is currently plausible." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real account, login, or actual submission occurs anywhere in this lesson.",
+      "The checklist is applied item-by-item against the practice tracker's actual contents, not answered from general impression.",
+      "The follow-up message is specific and actionable, not a generic status-check phrase."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

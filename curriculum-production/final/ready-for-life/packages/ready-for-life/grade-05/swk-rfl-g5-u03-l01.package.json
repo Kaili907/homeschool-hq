@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u03-l01",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Basic Food Safety",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: kitchen reset"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 07–09"
+  ],
+  "objective": "Learners identify the current state of three kitchen zones (counters, sink, table) and complete a first attempt at resetting all three without adult step-by-step direction, staying clear of the stove and any sharp tools.",
+  "scenario": "Before learning the kitchen-specific safe routine, the learner notices what \"reset\" would even mean in three kitchen zones — counters, sink, and table — and attempts a first pass at resetting all three on their own, leaving the stove and any knives or sharp tools for an adult to handle.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "The stove, oven, and any knives or sharp tools are adult-only for this lesson; the learner does not touch them.",
+    "Stop and ask for help with anything unfamiliar, broken glass, or a spill that smells unusual."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the household kitchen isn't available to reset (shared or restricted space), the learner instead describes, zone by zone, what a full counters/sink/table reset would involve for a kitchen shown in a printed or hand-drawn scene, naming the same stove-and-knife boundary."
+  },
+  "materials": [
+    "cleaning cloth",
+    "sink-safe cleaner (adult-provided)",
+    "timer (optional)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before resetting, look at the kitchen and predict which of the three zones (counters, sink, table) will take the most work, and why.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "State your prediction and reasoning."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Reset the three zones: clear and wipe the counters, load or clear the sink, and clear and wipe the table. Do not touch the stove, oven, or any knives — leave those for your adult.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I reset all three zones without touching the stove, oven, or sharp tools."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "Which zone took the longest, and did that match your prediction?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Compare kitchen resets to other shared-space resets.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "What is different about resetting a kitchen compared to resetting a space like your bedroom or the living room? Name one specific kitchen-only consideration."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner attempts to handle the stove or a knife despite instructions, stop and reteach the boundary explicitly with a clear adult-only zone marked (a sticky note or verbal rule), then retry the reset with that boundary reinforced.",
+  "extension": "Add a fourth kitchen zone (like the refrigerator door or a pantry shelf) to the reset routine and compare, in writing, how resetting that zone was different from the first three.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

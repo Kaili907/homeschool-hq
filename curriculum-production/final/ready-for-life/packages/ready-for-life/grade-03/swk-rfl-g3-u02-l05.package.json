@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u02-l05",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothes and Getting Ready",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: getting ready the night before"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 2 — clothing care and readiness routines"
+  ],
+  "objective": "The evening before a specific day such as a lesson day or planned outing, the learner independently checks the weather, chooses a complete weather-matched outfit that is already clean, sets the outfit and shoes on a chair or hook by the door, and packs one needed bag item, all without a reminder, so a trusted adult can confirm the next morning that nothing was missing or forgotten.",
+  "scenario": "On the night before a known day with a specific plan, the learner looks out the window or checks a simple weather note, chooses a full outfit that matches the temperature and any rain or snow, sets the outfit and shoes together on a chair or hook, and packs one bag item needed for the next day, all before going to bed and without being told to start.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "If checking the weather means looking outside after dark, the learner checks from a window rather than going outside alone.",
+    "If any needed item is on a shelf too high to reach safely, the learner asks a trusted adult to get it down rather than climbing on furniture.",
+    "A trusted adult confirms the finished setup only the next morning; the learner is not woken up or checked on overnight for this task."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there is no fixed next-day plan or the household schedule does not allow same-week testing, the learner instead plans and lays out a full outfit for a typical day on paper, listing the weather check, the outfit pieces, and the one bag item, and a trusted adult reviews the written plan instead of confirming it the next morning."
+  },
+  "materials": [
+    "a way to check the weather, such as a window view or a simple written forecast",
+    "a full set of clean clothing options",
+    "a chair or hook near the door",
+    "a bag, if one is used the next day"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before choosing anything, check the weather for the next day.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe what you noticed about the weather and name the one clothing layer it makes you add or leave out."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Put together the whole night-before routine in order: choose the outfit, check it is clean, set it out, then pack one bag item.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I chose a full outfit that matches tomorrow's temperature and weather."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I checked that every piece of the outfit is actually clean before setting it out."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I set the outfit and shoes together on a chair or hook, not left in a pile."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I packed one item I will need for the next day into my bag."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Complete the whole routine on your own, without being reminded, the night before the actual day.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Record which part of the routine you did first and which you did last, and describe whether anyone reminded you to start or you started on your own."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare this morning to a morning when the routine was not done the night before.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific way this morning felt less rushed than a morning when you had to find your outfit and pack your bag after waking up."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner picks a complete outfit but forgets a weather-driven layer, such as leaving out a jacket on a cold day, reteach with a simple two-question check to run before finalizing any outfit: what is the temperature, and is there rain or snow.",
+  "extension": "Have the learner prepare the whole routine for a two-day trip at once, laying out two full outfits and packing bag items for both days in a single night-before session.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l04",
+  "lessonId": "ma-g12-ready-for-life-u06-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Weak-point identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The identified weak point is not clearly the plan's most fragile step."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific, genuinely fragile step is identified with clear reasoning."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reasoning shows real comparison against the plan's other steps, not an arbitrary pick."
+          }
+        ]
+      },
+      {
+        "dimension": "Contingency specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The trigger for activating the contingency is vague."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The trigger is specific and recognizable in the moment."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The contingency itself is concrete enough to actually follow, not just a restated goal."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The identified weak point connects directly to the plan statement drafted earlier in the unit.",
+      "The trigger is specific enough that someone else reading it would recognize the moment to act.",
+      "The reflection response is honest about whether the prediction was right, not just confirming it was."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

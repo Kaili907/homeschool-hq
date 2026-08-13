@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u06-l01",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 9 Independence Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: personal operations map"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners map, on one page, the five recurring systems they have built this year, planning, household, food, transportation, and communication, naming one specific real task they actually do for each and rating their own confidence in running each system independently, producing a diagnostic baseline before the capstone week begins.",
+  "scenario": "Before the capstone week starts, the learner builds a one-page personal operations map: one row per system, a specific real task they actually did for that system in the past month, and a confidence rating, so they can see clearly which systems are strong and which need attention during the week ahead.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This is a private planning and self-assessment page; it is not shared outside the household as part of this lesson."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document for the one-page operations map", "the learner's task sheets or notes from Units 1 through 5"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List the five systems you have studied this year and write a one-line description of what each one actually manages.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List the five systems (planning, household, food, transportation, communication) with a one-line description of what each one manages in your real life." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each of the five systems, name one specific real task you actually did in the past month, not a general category.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I named one specific real task for the planning system (for example, building a weekly schedule or breaking a project into steps)." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I named one specific real task for the household system (for example, a cleaning, laundry, or supply-checking task)." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I named one specific real task for the food system (for example, planning a week of meals or checking a listed price)." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I named one specific real task for the transportation system (for example, planning a route or checking a schedule)." },
+        { "ref": "t2-p5", "promptType": "checklist-item", "text": "I named one specific real task for the communication system (for example, drafting a message with a clear request)." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Rate your confidence in running each system on your own, then identify the one you feel least confident about.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Rate your confidence from 1 (not confident) to 5 (very confident) for each of the five systems." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Name the system you rated lowest and explain the specific step or skill within it that you have not yet done for real." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look across your whole operations map before the capstone week begins.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain how two of your five systems connect to each other in your real life (for example, how a food task depends on a planning task), and what that connection means for how you'll approach the capstone week." }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot name a specific real task for a system and instead writes a vague category like 'chores' or 'school stuff,' reteach by pulling one concrete artifact from that unit's task sheet (such as the Unit 3 weekly meal plan or the Unit 1 task breakdown) and having them name the exact real action they took on it.",
+  "extension": "Have the learner identify one place where two systems overlap in practice (for example, a food task that also requires a transportation trip) and describe the overlap in one specific sentence.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

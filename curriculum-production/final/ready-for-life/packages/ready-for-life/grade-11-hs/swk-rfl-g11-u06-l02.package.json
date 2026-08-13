@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u06-l02",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 11 Transition-Planning Capstone",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: timeline with verified dates and requirements"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners practice distinguishing a date or requirement they have verified from a real, checkable source from one they are only assuming, then build a timeline for their leading pathway using verified information, with any remaining assumptions clearly flagged rather than treated as fact.",
+  "scenario": "Given a short model timeline where some entries are already labeled 'verified' (with a source noted) and others are labeled 'assumed,' the learner studies how each label was decided, then applies the same process to build a timeline for their own leading pathway.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No real account numbers, passwords, or legal identity details are needed to complete this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided model timeline example", "notes on the learner's leading pathway from earlier units", "paper or a document for the timeline"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before looking at the model, list dates or requirements you currently believe are true about your leading pathway.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name two dates or requirements you currently believe are true about your pathway, and be honest about whether you've actually checked them anywhere or are just assuming." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Study the model timeline and identify what makes an entry count as 'verified' versus 'assumed.'",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "In the model timeline, what specifically makes an entry 'verified' rather than 'assumed' — what counts as a real, checkable source?" },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I can name at least one source (such as an official program page, a published catalog, or a direct answer from someone at the institution or organization) that would count as verification, not just a guess or something a peer said." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Build a timeline of at least four dates or requirements for your own leading pathway, labeling each as verified (with the source) or assumed.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "List at least four dates or requirements for your leading pathway. For each, write whether it is verified or assumed, and if verified, name the source." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "Every entry in my timeline is labeled either 'verified' with a real source, or 'assumed.'" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what to do about the entries still marked assumed.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Pick one entry you marked 'assumed.' What specific, doable step would move it to 'verified,' and roughly when could you take that step?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner labels something 'verified' without naming a real, specific, checkable source (for example, writing 'verified' but citing only 'I think I heard'), reteach the distinction directly: model one clear verified example with its exact source named, one clear assumed example, and have the learner re-sort their own timeline entries into the correct category before moving forward.",
+  "extension": "Have the learner identify which single assumed entry, if wrong, would most disrupt the rest of the timeline, and write a short plan for verifying that one first.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}

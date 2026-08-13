@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u06-l03",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Community Contribution Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: planning and materials"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Building on the permission secured in the previous lesson, learners break their approved project into a concrete, ordered list of steps and check which real materials it requires are already available in the household versus which still need to be found.",
+  "scenario": "With real permission already granted for a specific project, the learner turns the approved scope into an ordered list of concrete steps and a matching list of the real materials each step needs, checking the household for what is already available.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If permission for the specific project has not yet been finalized, the learner instead plans the ordered steps and materials list for the example need chosen during the diagnostic lesson, treating it as a complete trial plan ready to use once permission is granted."
+  },
+  "materials": [
+    "the approved project scope from the previous lesson",
+    "paper or a notes app for the step-by-step plan",
+    "access to the household's existing supplies or tools relevant to the project"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before listing steps, picture doing the whole project from start to finish in your head.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the very first physical action you would take to start this project, and the very last action that would mean it's finished."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Write the project as an ordered list of at least five concrete steps, from first action to last, and note any step that depends on another step being finished first.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My list has at least five steps in a clear order, not a jumbled set of tasks."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I marked which steps must happen before others, if any."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each step in your plan, list the specific real materials, tools, or supplies it needs, then check your household for each one and mark it as already available or still needed.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "checklist-item",
+          "text": "I listed a specific material or tool for each step that requires one, not a general category."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "List which materials from your plan are already available in your household and which ones are still missing, and explain what you would do about any material that is still missing."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your planning process.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain which part of planning this project — the ordered steps or the materials check — revealed something you hadn't thought of when you first identified the need, and what it was."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's step list skips steps or lists them out of order, have them physically walk through the space where the project will happen, narrating each action out loud in order, and rewrite the list from that walk-through.",
+  "extension": "Have the learner estimate roughly how much total time the whole ordered list of steps will take and compare that estimate to the time estimate they gave a trusted adult during the permission conversation, noting any mismatch.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

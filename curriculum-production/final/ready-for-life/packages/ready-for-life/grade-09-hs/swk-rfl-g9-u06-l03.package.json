@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u06-l03",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 9 Independence Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: household and food contribution"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners perform one real household task and one real food-related task, each drawn from a specific skill practiced in Unit 2 or Unit 3, during the capstone week, planning each task's steps in advance and having a trusted adult confirm both were actually completed.",
+  "scenario": "During the capstone week, the learner chooses one household task and one food task that connect directly to skills they already practiced earlier in the year, writes a short step-by-step plan for each before starting, carries out both tasks for real, and has a trusted adult confirm afterward that both happened.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "written plan", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner does not use a stove, oven, or knife for the food task unless that is already a tool they safely use under their household's normal rules; if it is, the household's usual rules for adult presence still apply.",
+    "Completing this task sheet never certifies the tasks by itself; a guardian confirmation is required before the task counts as complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If performing the real household and food tasks during this specific week is not possible, the learner instead writes out, in full step order, exactly how each task would be carried out for a realistic sample week: the specific household task chosen and every step in the order it would be done, and the specific food task chosen and every step in the order it would be done, including what would be checked, gathered, or prepared beforehand, so the written plan carries the same level of specific, real detail as actually doing the tasks."
+  },
+  "materials": ["paper or a document for the step-by-step task plans", "access to the real household and its usual food supplies", "the learner's Unit 2 and Unit 3 task sheets for reference"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Choose one household task and one food task for this week, each connected to a specific skill you already practiced earlier this year.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the household task you will perform this week and the specific Unit 2 skill it connects to." },
+        { "ref": "t1-p2", "promptType": "short-response", "text": "Name the food task you will perform this week and the specific Unit 3 skill it connects to." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Before doing either task for real, write a short step-by-step plan for each, in order, and decide when during the week you'll do them.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My household task plan lists the specific steps in order." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My food task plan lists the specific steps in order, including anything I need to check or gather beforehand." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I identified the specific day this week I will do each task." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Carry out both real tasks this week following your plans, then have your trusted adult confirm both happened.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "checklist-item", "text": "My trusted adult confirms I completed the household task as planned." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "My trusted adult confirms I completed the food task as planned." },
+        { "ref": "t3-p3", "promptType": "short-response", "text": "Describe one specific thing that took longer, or went differently than planned, for either task." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about your planning process now that you've actually done both tasks.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Now that you've done both tasks for real, what specifically would you change about how you plan this kind of task next time?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's step-by-step plan for either task skips a necessary step (for example, not checking that needed items are on hand before starting the food task), reteach by naming the specific missing step and having them rewrite the full ordered list before attempting the real task.",
+  "extension": "Have the learner teach the step-by-step plan for one task, in writing, to a sibling or peer, explaining each step clearly enough for that person to follow it.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

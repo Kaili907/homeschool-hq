@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u06-l05",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 10 Work-Readiness Capstone",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: planning realistically around school"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners build a realistic weekly schedule showing how a first job at their stated available hours would actually fit around school, schoolwork time, and rest, using their real constraints from earlier this year, and identify the single point most likely to cause a conflict.",
+  "scenario": "The learner lays out a full week (school, schoolwork time, rest, and other regular commitments already in their life) and fits their stated available working hours from earlier this year into the real remaining time, honestly, rather than assuming time that isn't actually there.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["constraint notes from earlier this year", "a notebook, document, or calendar template for the weekly schedule"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List your real weekly commitments: school, schoolwork time, rest, and anything else regular in your week.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List your real weekly commitments and roughly how many hours each takes." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build a full weekly schedule and fit your stated available working hours into the real remaining time.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Lay out your weekly schedule with all commitments placed, then add your working hours into the genuinely open time." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My working hours fit into time that isn't already committed to something else." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Identify the single point in your schedule most likely to cause a real conflict.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name the single most likely conflict point and one realistic way you'd handle it if it came up." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the honesty of this exercise.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Was your original hours estimate from earlier this year realistic once you actually laid out the full week, or did it need to change?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's schedule overlaps working hours with school or double-books time already used elsewhere, reteach by having them build the schedule as fixed commitments first, filled in one at a time, before any working hours are placed, so conflicts become visually obvious before they're written down as a plan.",
+  "extension": "Have the learner build a second version of the schedule for a busier week (such as one with an extra regular commitment) and compare how much working time remains realistic.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u05-l04",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Communication",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: borrowing and returning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Learners plan and carry out one real instance of borrowing an item using an explicit ask, a stated return date, and follow-through on returning it in the condition it was borrowed in.",
+  "scenario": "The learner identifies something they'd like to borrow, makes an explicit spoken or written request naming what they want and when they'll return it, and then follows through on returning it by that date in good condition.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Borrowing partners can be a household member or, with adult coordination, someone outside the household; no unsupervised outside contact is required."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real borrowing opportunity is available right now, the learner instead role-plays the full three-part request (item, person, return date) with an adult playing the other person, including a return conversation, and reflects on how it went the same way as a real exchange."
+  },
+  "materials": [
+    "none required beyond the item being borrowed"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before asking, plan your request: what do you want to borrow, from whom, and what return date will you propose?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "State the item, person, and proposed date."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Make your borrowing request out loud or in writing, using all three parts: the item, the person, and the return date.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My request named the specific item, not a vague 'can I borrow something.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My request included a specific return date or timeframe, not 'later.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "short-response",
+          "text": "What did the person say — did they agree, propose a different date, or say no? How did you respond?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Reflect on the return.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Did you return the item by the date you proposed, in the condition you borrowed it in? If not, what happened, and what would you do differently next time you borrow something?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's request is too vague to act on (no specific item or date), reteach by having them write out the three required parts (item, person, date) before making the request out loud.",
+  "extension": "Practice the reverse situation: lend something of your own to someone else with the same explicit three-part agreement, and reflect on what it felt like to be the lender instead of the borrower.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

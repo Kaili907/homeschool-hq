@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u03-l06",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Food Safety",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: storage and final cleanup"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+  ],
+  "objective": "Learners read a short written scenario describing how a kitchen was left after a food task, find and name the three specific mistakes in food storage and final cleanup it contains, and rewrite the ending so each mistake is corrected with specific, concrete detail.",
+  "scenario": "The learner reads a short written description of how a kitchen was left after a food task: some items put away correctly, others left out, uncovered, or stored the wrong way. The learner has to find the specific mistakes and rewrite the ending so the kitchen is actually safe and clean.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a short written cleanup scenario (provided, or written together with an adult based on something that really happened in the household)",
+    "paper or a notes app",
+    "a pencil or pen"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reading the scenario, list what 'finished' should mean for kitchen cleanup.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name two specific things that should be true about a kitchen when cleanup is actually finished, not just started."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read the cleanup scenario carefully and find the three specific mistakes, marking each one where it appears.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I found and marked all three mistakes in the scenario, not just one or two."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For each mistake, I labeled whether it was a food-storage mistake or a surfaces-and-trash mistake."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Rewrite the ending of the scenario so all three mistakes are corrected, describing exactly what should have happened instead, including where each food item should have been placed and which cleanup step was skipped.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rewrite the corrected ending in full sentences, fixing all three mistakes with specific details about where food should go and what surface or item needed attention."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Pick your favorite one of the three corrections and explain why leaving that particular mistake uncorrected would have caused the biggest problem by the next day."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about which mistake you would be most likely to make yourself.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Of the three mistakes in the scenario, which one do you think you would be most likely to make without thinking, and what specific reminder would help you catch it next time?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner corrects a mistake vaguely, such as writing 'clean it up better,' instead of naming the specific food, location, or step, reteach by covering the scenario and asking the learner to describe from memory exactly what a truly finished kitchen looks like item by item (counters, dishes, trash, refrigerator), then apply that specific checklist back onto the scenario's three mistakes.",
+  "extension": "Have the learner write their own three-mistake scenario based on something real from their household, trade it with an adult in the household, and check whether the adult finds the same three mistakes the learner intended.",
+  "scoringRef": "scoring/swk-rfl-g4-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

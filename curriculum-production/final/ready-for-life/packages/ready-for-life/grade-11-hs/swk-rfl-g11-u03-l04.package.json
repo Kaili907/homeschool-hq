@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u03-l04",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Health and Wellness Self-Management",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: routine care, prevention, and sleep"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "With a guardian, learners review their current routine-care habits (sleep schedule, preventive check-ins, and recurring care reminders) and agree on one realistic change to try for the next month, building the habit of treating routine care as a scheduled responsibility rather than something that only happens once a problem shows up.",
+  "scenario": "With a guardian, the learner has a conversation covering three routine-care categories -- roughly how consistent the learner's sleep schedule is, which preventive check-ins (such as dental, vision, or a general check-up) are due or coming up, and what reminders exist for anything that needs renewing on a schedule -- then the two agree on one realistic change to try for the next month. No real health metric, diagnosis, or medication needs to be written down anywhere -- only the routine/habit itself and the one change agreed on.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["written plan", "guardian confirmation", "learner explanation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This lesson does not require writing down any real health condition, medication name, or medical detail -- only routine/habit categories and the one change agreed on.",
+    "The guardian conversation and the resulting plan happen entirely within the household; no outside professional needs to be contacted for this lesson."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian conversation cannot happen right now, the learner instead reads a provided fictional household's routine-care summary (a sleep pattern, one overdue preventive check-in, one recurring reminder) and writes the one realistic change that household should try next, using only the details given."
+  },
+  "materials": ["paper or notes app", "a few minutes of a guardian's time"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the conversation, think about which routine-care category you're least consistent about.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Which of these do you think you're least consistent about: keeping a steady sleep schedule, preventive check-ins (dental/vision/general), or renewal reminders (like refilling or renewing something on a schedule)? Why do you think that one is hardest?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Have the conversation with a guardian, covering all three routine-care categories.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "We discussed my current sleep schedule in general terms (roughly how much and how consistently, not exact nightly detail)." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "We discussed which preventive check-ins are due, coming up, or overdue." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "We discussed what reminders exist, or should exist, for anything that needs renewing on a schedule." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write the one realistic change you and your guardian agreed to try.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write the one specific change you and your guardian agreed to try for the next month (for example, a fixed bedtime on school nights, or scheduling a specific overdue check-in), and how you'll know whether it's happening." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why this category is often skipped.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Why do you think routine and preventive care is often the first thing to slip when life gets busy, and what does that suggest about how you should treat it going forward?" }
+      ]
+    }
+  ],
+  "remediation": "If the agreed change in task 3 is too vague to check on (e.g., 'sleep more'), reteach by having the learner and guardian rewrite it using a specific, checkable form: a specific action, a specific frequency, and a specific way to know it happened (for example, 'lights out by 10:30pm on school nights, checked with a shared reminder each week').",
+  "extension": "Have the learner and guardian set a specific date, roughly one month out, to check back on whether the agreed change stuck, and write what they'll do differently if it didn't.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u05-l05",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Digital Life, Purchases, and Consumer Skills",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: returns and warranties"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners examine one real receipt, product box, or warranty document already in the household, identify its exact return window and specific warranty terms, and apply those terms to a scenario where an item becomes defective just outside the window.",
+  "scenario": "The learner locates one real receipt, product box, or warranty document already present in the household and reads it closely to find the exact return window and what the warranty does and does not cover.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no receipt, box, or warranty document is available in the household, the learner instead reads a provided sample receipt and warranty document and answers the same questions using that sample."
+  },
+  "materials": [
+    "one real receipt, product box, or warranty document already in the household (or the provided sample document)",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Find one real receipt, product box, or warranty document already in the household.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the item and where you found the document: on a receipt, on the box, or on separate warranty paper."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read the document closely and find the exact return window (how many days) and the specific conditions the warranty covers or excludes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I found the exact number of days in the return window, not an estimate."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I found at least two specific things the warranty covers and at least one thing it excludes."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Imagine the item stopped working exactly ten days after its return window closed, and use the specific terms you found to explain step by step whether it would still be covered by the warranty, what evidence would be needed, and who in the household would need to be contacted about it.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Explain whether the item would still be covered and cite the specific warranty term that supports your answer."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "List the specific evidence or documents that would be needed to make that warranty claim."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on reading terms closely.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific detail in this document you would have missed if you had only skimmed it, and why reading the exact terms matters before assuming something is or is not covered."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot locate a specific return window or warranty term, reteach by pointing out where receipts and warranty documents typically place this information, such as a printed line near the bottom or a separate card in the box, and practicing on one guided example together.",
+  "extension": "Have the learner compare the warranty terms on two different real (or sample) products and identify which one offers stronger consumer protection and why.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

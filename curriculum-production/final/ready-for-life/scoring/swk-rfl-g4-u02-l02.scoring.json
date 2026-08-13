@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l02",
+  "lessonId": "ma-g4-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Symbol-to-meaning accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Symbols are matched to a general category (like 'washing') but not to the specific instruction the symbol actually gives."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All symbols checked across the three garments are matched to their specific, correct instruction using the reference guide."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly identifies which of the three garments carries the most restrictive combination of instructions."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about consequence",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The explanation names the symbol's meaning but does not explain what would actually happen to the garment if it were ignored."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The explanation describes a specific, accurate consequence, such as fabric damage, shrinking, or color change, tied to ignoring that specific symbol."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner connects the reasoning to a real decision they would make differently next time without being told."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The most-restrictive-symbol choice is backed by a real comparison across all three garments, not a guess.",
+      "The reflection names a specific symbol the learner can now read without help, not a general statement."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

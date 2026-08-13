@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l01",
+  "lessonId": "ma-g10-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Portfolio completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more of the four required pieces is missing from the master portfolio." },
+          { "label": "Proficient", "descriptor": "All four pieces are present." },
+          { "label": "Advanced", "descriptor": "All four pieces are present and organized so each is easy to find and read on its own." }
+        ]
+      },
+      {
+        "dimension": "Honesty and specificity of the self-audit",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Audit judgments are unsupported ('looks good') with no specific reasoning." },
+          { "label": "Proficient", "descriptor": "Most audit judgments include a specific reason." },
+          { "label": "Advanced", "descriptor": "Every audit judgment includes a specific reason, including for pieces judged already strong." }
+        ]
+      },
+      {
+        "dimension": "Prediction-versus-audit comparison",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No real comparison is made between the warm-up prediction and the audit findings." },
+          { "label": "Proficient", "descriptor": "States whether the prediction was accurate with a general reason." },
+          { "label": "Advanced", "descriptor": "States whether the prediction was accurate and names something specific the audit revealed that wasn't expected." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each of the four portfolio pieces is recognizable as the learner's own earlier work, not newly invented for this lesson.",
+      "The audit names a specific, concrete gap for at least one piece, not a uniformly positive self-assessment.",
+      "The reflection genuinely engages with the warm-up prediction rather than restating the audit."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

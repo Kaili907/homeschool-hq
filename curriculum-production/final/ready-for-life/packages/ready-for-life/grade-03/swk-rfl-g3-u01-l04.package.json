@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u01-l04",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Taking Care of My Own Space",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: spotting unsafe items"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 1 — personal and shared space care"
+  ],
+  "objective": "With a trusted adult, learners walk through their own space and one shared space to identify at least four specific unsafe conditions from a target list — a cord stretched across a walking path, an item blocking a doorway, small objects a younger child could choke on, an unlidded cleaning product or medicine left within reach, or a heat source such as a candle or lamp too close to fabric — then point out and help fix each one with the adult.",
+  "scenario": "A trusted adult walks the learner's own space and one shared space, such as a hallway or stairway, together with the learner. The learner points out anything that matches the target list of hazards, the adult confirms whether it counts, and together they fix it on the spot, such as moving a cord out of the walkway or putting a product out of reach.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "drawing",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner points out and describes each hazard but does not pick up, move, or open any cleaning product, medicine, or sharp item themselves; the trusted adult handles those.",
+    "If a hazard involves electricity, heat, or a chemical container, the adult resolves it while the learner watches and describes what was fixed.",
+    "If the learner is unsure whether something counts as a hazard, the correct move is to point it out and ask, and asking counts as success."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real walkthrough of two spaces is not possible, the learner instead looks at four printed or hand-drawn pictures of rooms containing planted hazards, circles each unsafe item, and writes the specific reason it is unsafe."
+  },
+  "materials": [
+    "a trusted adult",
+    "the learner's own space and one shared space in the home, such as a hallway or stairway"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before walking through with your adult, make a guess.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Guess one specific type of hazard from the target list you think you will find in your own space, and say why you think it will be there."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, walk through your own space and then one shared space, pointing out anything that matches the target list of hazards and letting your adult confirm and help fix each one.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I walked through my own space and pointed out any hazard I spotted from the target list."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I walked through one shared space, such as a hallway or stairway, with my adult and did the same."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I found and named at least four specific unsafe items or conditions total across both spaces."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I let my adult handle picking up, moving, or opening every hazard I pointed out."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without walking around again, work from memory.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List the four hazards you found today, and for each one write the single word that names the risk: trip, poison, shock, fire, or choke."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think of one hazard you and your adult fixed together.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific hazard you and your adult fixed together, exactly what you did to fix it, and how the space is different now that it is fixed."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner labels normal, harmless clutter as \"unsafe\" without naming a specific injury mechanism, reteach using the five risk words (trip, poison, shock, fire, choke) and require the learner to name the exact mechanism before an item is added to the hazard list.",
+  "extension": "Have the learner and adult repeat the hazard walk in a third space that specifically differs from the first two, such as a garage or basement, using the same five-word target list.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}

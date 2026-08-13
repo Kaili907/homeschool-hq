@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l03",
+  "lessonId": "ma-g4-ready-for-life-u03-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Risk identification accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Scenarios are sorted mostly by whether raw meat is mentioned at all, rather than whether contact or dripping actually occurred."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All six scenarios are sorted correctly, with the specific causing detail named for every scenario marked risky."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly explains the borderline case in the reflection response."
+          }
+        ]
+      },
+      {
+        "dimension": "Fix specificity and germ-pathway reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The rewritten fix is vague ('be more careful') and does not name the specific germ path it interrupts."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each rewritten scenario names a specific fix and correctly explains what path from raw to ready-to-eat food that fix blocks."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, across all three risky scenarios, with no restated or interchangeable fixes."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner distinguishes 'raw meat is present' from 'raw meat actually touched something ready-to-eat.'",
+      "The two new self-written scenarios in the extension are genuinely different situations from the original six, not reworded copies."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

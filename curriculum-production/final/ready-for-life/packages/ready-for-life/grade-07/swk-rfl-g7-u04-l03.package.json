@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u04-l03",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Communication, Boundaries, and Family Teamwork",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: giving and receiving feedback"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners give a household member one piece of specific feedback about a shared activity using a two-part structure (what worked, what to try differently), and also ask that person for one piece of feedback about their own part in it, then compare how giving and receiving each felt.",
+  "scenario": "The learner picks one real shared activity or task with someone in the household this week, such as a chore, a game, or a project done together, gives feedback on it using the what-worked/what-to-try structure, and asks for feedback in return about their own contribution.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no shared activity happens with a household member this week, the learner instead writes a short imagined exchange: a specific shared task, the what-worked/what-to-try feedback the learner would give about it, and the feedback the learner imagines receiving in return, including how they would respond to hearing it."
+  },
+  "materials": [
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Recall a recent time someone gave you feedback, or you gave someone feedback, that did not land well.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe what was said and why it didn't land well (too vague, felt like criticism, no specific detail, or something else)."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Practice the two-part feedback structure: one specific thing that worked, and one specific thing to try differently next time.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My practice feedback names one specific thing that worked, not a general compliment."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My practice feedback names one specific, doable thing to try differently, not a criticism of the person."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "This week, after doing something together with a household member, such as a chore, a game, or a shared project, give them one piece of feedback using the what-worked/what-to-try structure, then ask them for one piece of feedback about your own part in the activity.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write the specific feedback you gave and the specific feedback you received."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Describe how the other person reacted to receiving feedback from you."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on giving and receiving feedback.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain which was harder for you, giving the feedback or receiving it, and describe one specific change you would make to how you deliver feedback next time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's feedback stays vague ('good job' or 'it was fine'), reteach by having them describe the moment frame by frame (what exactly the person did, said, or made) until they can point to one specific action for each half of the structure.",
+  "extension": "Have the learner repeat the exchange with a different household member on a different shared task and compare how the two people responded to receiving the same feedback structure.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}

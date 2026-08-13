@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u06-l04",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: carrying out the contribution"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+  ],
+  "objective": "Learners carry out their planned household contribution step by step with a guardian's permission and supervision as specified in their safety plan, producing a completed contribution and a written record of what happened at each step compared to the original plan.",
+  "scenario": "Using the plan and supervision notes you built over the last two lessons, and with your household's permission, you carry out your chosen contribution today, whether that is organizing a shared space, building a routine chart, teaching a skill you know to someone else in the household, helping with a non-heat food-prep step, or setting up a checklist system, following your plan's order and your safety notes for any step that needs an adult.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Check with a trusted adult in your household before using any tool, appliance, or cleaning product your plan calls for.",
+    "Follow the supervision plan from the previous lesson exactly: if a step was marked adult-handles-directly, the adult does that part, not the learner.",
+    "Stop and ask your adult if you run into a step, material, or situation your plan did not cover."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the planned contribution genuinely cannot be carried out today, for example a needed adult is unavailable or a shared space is unexpectedly unavailable, the learner instead walks through the full plan step by step with an available trusted adult, narrating exactly what they would do and check at each step, including how each supervision-flagged step would be handled, and writes a detailed account of what would happen at each step, earning full credit for demonstrating the same sequencing and safety judgment."
+  },
+  "materials": [
+    "the plan and supervision notes from the previous two lessons",
+    "the materials or help identified as needed for the chosen contribution",
+    "a trusted adult available for any supervision-flagged step"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before starting, gather your plan and supervision notes and get your adult's go-ahead to begin.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Confirm that a trusted adult has said you can start today, and name the first step you will do."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Work through your plan in order, asking your adult to handle or stay nearby for every step your safety plan marked as needing supervision.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I followed my plan's step order rather than skipping ahead to an easier step first."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For every supervision-flagged step, my adult was directly involved exactly as my plan specified."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I checked in with my adult when I hit something my plan did not cover."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Carry out every remaining step of your plan until your contribution is finished, keeping a running note of anything that happened differently from what your plan expected, such as a material you did not have, a step that took longer, or a step your adult decided to change, so you have an accurate record to check against tomorrow.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe what you actually did to complete your contribution, step by step, in enough detail that someone who was not there could follow it."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one specific place where what actually happened differed from your written plan, and what you or your adult did about it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look at your finished contribution.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain how closely your finished contribution matches what you originally planned, and what surprised you most about actually doing it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner rushes past a supervision-flagged step without involving their adult, reteach by pausing the task, returning to that exact step in the plan, rereading the specific risk named in the previous lesson's safety notes together, and having the adult complete or directly oversee that step before the learner continues.",
+  "extension": "Have the learner note the actual time each major step took as they go, then compare the step that took the longest to the step they expected to take the longest when they built their plan, explaining what caused the gap.",
+  "scoringRef": "scoring/swk-rfl-g4-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

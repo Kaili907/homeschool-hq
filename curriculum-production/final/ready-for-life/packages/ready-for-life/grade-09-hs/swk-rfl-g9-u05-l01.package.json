@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u05-l01",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Professional and Personal Communication",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: audience, tone, and register"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read three short draft messages about the same scheduling situation, written for a friend, a coach, and a teacher, identify which register each uses and which one does not match its audience, then rewrite the mismatched message and name the specific wording changes that fixed the register.",
+  "scenario": "The learner is given three short messages already drafted on this task sheet, one addressed to a friend, one to a coach, and one to a teacher, all about asking to move a practice or turn in work late. One message uses a register that does not fit its audience. The learner finds it, rewrites it, and explains the shift.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["All three messages on this task sheet are provided examples for analysis; none are sent to a real coach, teacher, or friend as part of this lesson."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the three sample messages printed on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the three messages below, all about the same kind of situation. Message A: 'hey can we push practice to friday? sry for last min lol'. Message B: 'Hi Coach Diaz, would it be possible to move Thursday's practice to Friday? I have a scheduling conflict. Thank you.' Message C: 'hey mr thompson can i turn in the essay late lol my bad.' Decide which audience each message fits (a friend, a coach, or a teacher) based on its wording alone.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Which audience (friend, coach, or teacher) does each message's wording actually fit, and which one message is aimed at an audience its wording doesn't match?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Rewrite Message C so its register fits a teacher, using a greeting with the teacher's name and title, no slang, a plainly stated request, and a polite closing with your name.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My rewrite opens with the teacher's name and an appropriate title instead of slang." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My rewrite removes casual abbreviations like 'lol' and 'my bad' and states the request in plain language." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My rewrite closes with a polite line and my name." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare your rewrite of Message C to Message A, the friend message, even though both messages are making a similar kind of request.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name three specific words or phrases you changed between the casual version and your teacher-register rewrite, and explain what register each version signals." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about why register matters even when the underlying request is the same.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one real situation where using the wrong register with a teacher or coach could hurt you, even if your request itself was reasonable." }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot tell Message C is mismatched, have them circle every slang word or abbreviation in all three messages first, then sort messages by how many casual markers they contain before asking again which audience each fits — the mismatch becomes visible once the markers are counted.",
+  "extension": "Have the learner write a fourth message for the same scheduling situation addressed to a school administrator they've never met, adjusting the register to be more formal than the coach message and explaining what made it more formal.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u05-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u05-l01",
+    "authoredBy": "manual"
+  }
+}

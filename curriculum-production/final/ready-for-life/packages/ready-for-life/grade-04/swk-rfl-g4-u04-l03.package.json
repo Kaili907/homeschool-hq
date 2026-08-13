@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u04-l03",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals, Rest, and Fueling Meals",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: hydration across the day"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 4: Body Signals, Rest, and Fueling Meals"
+  ],
+  "objective": "Learners design their own three-check-in schedule for noticing thirst signals across one day based on their real routine, follow their own plan, then judge in writing whether the times they chose actually caught their real thirst signals or whether the plan needs adjusting.",
+  "scenario": "Different people get thirsty at different points in the day depending on their own schedule and activities. Instead of using a schedule someone else made, the learner picks three check-in times for today based on their actual daily routine, notices their thirst signal and water intake at each one, then judges whether their own chosen times worked.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app",
+    "a cup or container to notice water intake with",
+    "a way to check the time"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before picking your check-in times, think about your actual day today, not an ideal day.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List three points in your real schedule today, like right after you wake up, mid-morning, or after an activity, when you could realistically pause to notice thirst."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Choose your own three check-in times from your list and stick to them today. At each one, notice how thirsty you actually feel and roughly how much water you've had since your last check-in, then write both down.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I picked three specific times from my own real schedule, not times someone else chose for me."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I noticed and recorded a thirst level at all three of my chosen times."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I noticed and recorded roughly how much water I had between check-ins."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Once your three check-ins are done, judge your own schedule the way you'd judge any plan: did the times you picked actually catch your real thirst signals, or did you notice being thirsty at some other point your schedule missed?",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Overall, did your three chosen check-in times catch your real thirst signals well, catch them okay but miss some, or mostly miss them?",
+          "choices": [
+            "Caught them well",
+            "Caught them okay but missed some",
+            "Mostly missed them"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "If you noticed being thirsty at a time outside your three check-ins, when was it, and what would you change about your schedule tomorrow?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare planning your own check-in times today to just being told when to check.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one advantage of choosing your own hydration check-in times based on your real schedule instead of following a fixed schedule someone else set."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner picks three check-in times that are too close together, like all within one hour, instead of spread across the day, reteach by having them draw a simple timeline of their actual day from wake-up to bedtime and mark three times spaced at least two hours apart before restarting the log.",
+  "extension": "Have the learner run the same self-chosen-schedule approach on a day with a different routine, such as a day with an activity or outing versus a quiet day at home, and compare whether their best check-in times changed between the two kinds of days.",
+  "scoringRef": "scoring/swk-rfl-g4-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}

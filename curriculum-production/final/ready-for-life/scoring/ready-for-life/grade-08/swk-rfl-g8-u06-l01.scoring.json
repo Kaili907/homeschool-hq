@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l01",
+  "lessonId": "ma-g8-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Persona originality and completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Persona lacks a name, an explicit age of eighteen or older, or any invented circumstance."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Persona has an invented name, a stated age of eighteen or older, and at least one sentence of invented circumstance."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the invented circumstance includes a specific, plausible detail (type of home, job type) rather than a generic phrase."
+          }
+        ]
+      },
+      {
+        "dimension": "Monthly skeleton coverage and variation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more weeks are missing a block category, or every week is identical with no variation."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All weeks include all four block categories, and at least one week is noticeably varied from the others."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the written explanation for the varied week names a specific, plausible real-life cause."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real names, addresses, or the learner's own identifying details appear anywhere on the persona sheet.",
+      "The persona's age is stated explicitly as eighteen or older."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

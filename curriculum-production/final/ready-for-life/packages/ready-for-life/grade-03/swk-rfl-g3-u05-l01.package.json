@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u05-l01",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Asking for Help",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: reading a daily schedule"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 5 — time, belongings, and help-seeking"
+  ],
+  "objective": "Learners read a five-block daily schedule card labeled wake-up routine, lessons, lunch, outdoor time, and evening routine, then identify which block is happening right now and which block comes immediately after it, using the printed order of blocks rather than a clock.",
+  "scenario": "A schedule card is posted near the learner's usual workspace, showing five labeled blocks in order for a typical weekday. The learner checks the card at three different moments during the day, marks the block that matches each moment, and names the block coming up next before moving on.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a printed or hand-drawn five-block schedule card",
+    "a pencil or marker"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reading the whole schedule, look only at the very first labeled block.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first labeled block on the schedule card, in the exact words printed on it."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Check the schedule card at three different times today. Each time, find the block that matches what you are doing right now, mark it, and then name the block that comes right after it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I found and marked the block that matched what I was doing at the first check."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I named the block that comes right after the marked block, using the card's printed order."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I repeated both steps at a second time of day."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I repeated both steps a third time, at least one hour after the second check."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Cover the schedule card completely, then write all five block labels in their printed order purely from memory. Uncover the card only after you finish writing.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List the five block labels in order from memory, then uncover the card and mark which labels landed in the correct spot."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about one moment today when the schedule card told you something useful.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific moment today when checking the schedule told you something you would not have known otherwise, such as how much of outdoor time was left."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner names the block that just finished instead of the block coming next, reteach by covering every block except the current one and the one printed directly after it, having the learner point to each while saying 'now' and 'next' aloud before uncovering the rest of the card.",
+  "extension": "Have the learner design a six-block schedule card for a non-lesson day, such as a weekend, in the same now-and-next format, then check the card against what actually happens that day.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u05-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u05-l01",
+    "authoredBy": "manual"
+  }
+}

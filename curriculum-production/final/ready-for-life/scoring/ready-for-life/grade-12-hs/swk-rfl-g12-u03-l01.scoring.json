@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l01",
+  "lessonId": "ma-g12-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Professional tone",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The reply is overly casual or missing a clear acceptance statement."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The reply clearly accepts the offer in a professional tone."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reply also proactively addresses one logistical detail (like start date confirmation) without being asked."
+          }
+        ]
+      },
+      {
+        "dimension": "Question quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than five questions are listed, or most duplicate information already in the fictional offer email."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least five specific, non-duplicate questions are listed."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The questions cover a range of categories (logistics, expectations, people) rather than clustering on one type."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The reply contains an unambiguous acceptance statement.",
+      "At least five distinct first-day questions are listed, not repeats of the same idea reworded.",
+      "No real employer, real job posting, or real personal employment history is required."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u01-l03",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Planning Systems Under Real Load",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: competing priorities and deadlines"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Given four concrete competing obligations with real-style deadlines, learners triage and sequence them into a specific order, stating a reason grounded in deadline, consequence, or dependency for each placement rather than a vague sense of importance.",
+  "scenario": "The learner is given a fixed set of four competing obligations on this task sheet, a history project due Friday, a recurring chore commitment (trash and recycling out every Tuesday and Friday evening), a sports or club practice schedule (Monday/Wednesday/Friday 4-5:30pm), and a one-time Thursday evening family obligation (a relative's birthday dinner, 6-8pm), and must decide what to do first, second, third, and fourth this week and why.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["The four obligations are provided fixed scenarios on this task sheet for practice; the learner is not required to have or disclose their own real competing obligations."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "this task sheet's four provided obligations"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read all four obligations below before making any decisions. History project: due Friday. Chore commitment: trash and recycling out every Tuesday and Friday evening. Practice schedule: Monday, Wednesday, Friday 4:00-5:30pm. Family obligation: relative's birthday dinner, Thursday 6:00-8:00pm.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "For each of the four obligations, write down which day(s) it actually falls on and whether it is a fixed-time commitment or a flexible-timing one." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Identify which obligations have a hard, fixed time you cannot move and which have more flexibility.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I identified that practice (Mon/Wed/Fri 4-5:30pm) and the birthday dinner (Thu 6-8pm) both have fixed times that cannot be moved." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I identified that the trash/recycling chore and the history project both have flexibility in exactly when during their window they get done." },
+        { "ref": "t2-p3", "promptType": "short-response", "text": "Name the single obligation with the least flexibility this week and explain what makes it the least flexible." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Build a day-by-day plan for Monday through Friday that fits all four obligations, then explain your reasoning.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write a day-by-day plan (Monday through Friday) showing when you will handle each of the four obligations, including a specific time or window for the history project work and both trash/recycling days." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Explain your reasoning for when you scheduled history project work specifically: why that day or window, and how it avoids conflicting with the fixed-time commitments." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the triage reasoning you used.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain the general rule you used to decide what got scheduled first versus last this week (for example, fixed-time commitments first, or the obligation with the nearest deadline first), and give one real or plausible situation from your own life where that same rule would apply." }
+      ]
+    }
+  ],
+  "remediation": "If a learner schedules the history project into a slot that conflicts with a fixed-time obligation (such as during practice or the birthday dinner), reteach by having them first mark only the two fixed-time blocks on a blank weekly grid, then work only within what remains, so the conflict becomes visible before they place flexible tasks.",
+  "extension": "Add a fifth obligation to the scenario, a group project meeting the learner's teammate can only attend Tuesday after school, and have the learner revise their full week's plan to fit all five obligations, explaining what had to move and why.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u01-l03",
+    "authoredBy": "manual"
+  }
+}

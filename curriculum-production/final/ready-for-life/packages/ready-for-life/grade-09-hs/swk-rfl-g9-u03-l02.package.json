@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u03-l02",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Food Systems, Nutrition, and Cost",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: unit pricing and substitution"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners calculate unit price (price per ounce or per unit) for two similar provided products of different package sizes, compare the two unit prices to identify the lower-cost option, and reason through a substitution tradeoff when the lower-cost option differs in a relevant way, such as brand or quality.",
+  "scenario": "The task sheet provides two versions of the same kind of product, such as two sizes or brands of the same cereal, each with a listed total price and package size. The learner calculates the unit price for each, compares them, and decides which one is the better value, then works through a case where the cheaper option is a store-brand substitution with a different scenario.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This task uses only the prices and sizes printed on the task sheet; no real transaction happens as part of the lesson."],
+  "simulationAlternative": null,
+  "materials": ["the provided product price and size comparison sheet", "a calculator or the ability to divide decimals by hand"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before calculating, look at the two listed products and guess which one is the better value per unit.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-choice", "text": "Which product do you predict has the lower price per unit?", "choices": ["Product A", "Product B", "I think they are about the same"] },
+        { "ref": "t1-p2", "promptType": "short-response", "text": "Explain what made you guess that, based only on the total price and size listed for each." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Divide each product's total price by its size in ounces or units to find the unit price for both, showing your work.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "Show the division you used to find Product A's price per ounce or unit." },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "Show the division you used to find Product B's price per ounce or unit." },
+        { "ref": "t2-p3", "promptType": "fixed-choice", "text": "Based on your calculation, which product actually has the lower unit price?", "choices": ["Product A", "Product B", "They are equal"] }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read the substitution scenario on the task sheet, where the lower-unit-price option is a different brand or a smaller name-brand item than usual. Decide whether you would choose it and reason through the tradeoff.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Given the substitution scenario, which option would you choose?", "choices": ["The lower unit price option", "The higher unit price option", "It depends on a factor not given"] },
+        { "ref": "t3-p2", "promptType": "extended-response", "text": "Explain your reasoning, naming the specific unit price difference in dollars and at least one non-price factor from the scenario, such as taste preference or a specific ingredient difference, that affected your decision." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about how unit pricing changes decisions.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe one specific situation in your own household where comparing unit price instead of just total price could change which item makes more sense to add to a list." }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares the two total prices directly instead of dividing by size first, reteach by covering the total price column and having them calculate only the two unit prices side by side before any comparison is made, so total price cannot be used as a shortcut.",
+  "extension": "Give the learner a third product option at a different size and price and have them calculate its unit price, then rank all three options from lowest to highest unit price and justify which one they would recommend for a household on a tight budget.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}

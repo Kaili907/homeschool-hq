@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l04",
+  "lessonId": "ma-g12-ready-for-life-u03-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Structure and clarity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The report omits one or more of the three parts (what happened, what's being done, what's needed), or spends most of its time on excuses."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The report includes all three parts clearly."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The report is concise and owns the mistake directly, without over-apologizing or under-explaining."
+          }
+        ]
+      },
+      {
+        "dimension": "Responsiveness to feedback",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The revised version is nearly identical to the first attempt despite feedback being given."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The revised version reflects specific feedback that was given."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner can articulate why the revision is an improvement, not just that a change was made."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No audio or video recording exists anywhere for this task.",
+      "The report contains a clear, direct statement of what happened without excessive minimizing.",
+      "The revision demonstrably differs from the first attempt in a way tied to the feedback given."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

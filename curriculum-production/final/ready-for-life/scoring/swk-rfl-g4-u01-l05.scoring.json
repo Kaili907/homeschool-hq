@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l05",
+  "lessonId": "ma-g4-ready-for-life-u01-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Estimation reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Time estimates are given without a stated reason, or both tasks get the same estimate regardless of size."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each estimate is based on a stated reason connected to the task's size or number of steps."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner's estimates are reasonably close to the actual time for at least one task."
+          }
+        ]
+      },
+      {
+        "dimension": "Accuracy analysis",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The comparison between estimated and actual time is missing or does not identify which estimate was further off."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner accurately reports the actual time for each task and correctly identifies which estimate was further off."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner gives a specific, plausible reason the least accurate estimate missed, tied to a detail of the task."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Both tasks are real and were actually timed, not estimated after the fact.",
+      "The two chosen tasks are genuinely different in size, not two versions of the same task."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

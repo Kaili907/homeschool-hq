@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l01",
+  "lessonId": "ma-g7-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Observation quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than two real observations are recorded, or observations are vague rather than naming a specific person and task."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least two specific observations are recorded on two different days, each naming a person or group and a specific task."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and observations span a noticeably wider range of possible needs (household and beyond) before narrowing down."
+          }
+        ]
+      },
+      {
+        "dimension": "Need selection reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The chosen need is not clearly tied to any recorded observation, or no reason is given for ruling out the others."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The chosen need is one of the recorded observations, and the learner gives a specific reason it is smaller in scope and safer than the alternatives."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reasoning explicitly weighs safety, scope, and realism as separate factors."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The chosen need is genuinely small-scale and does not involve travel to unfamiliar places or unsupervised contact with strangers.",
+      "The reasoning in the reflection ties back to the specific observations recorded earlier in the week, not a generic statement.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

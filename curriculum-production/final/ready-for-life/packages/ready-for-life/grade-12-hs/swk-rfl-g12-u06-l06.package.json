@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u06-l06",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Transition-to-Adulthood Capstone",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: presenting the portfolio and answering challenge"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners present their complete transition portfolio to a guardian or another adult and respond to at least two follow-up challenge questions, so the capstone ends with the learner actually defending their plan out loud rather than only having written it down.",
+  "scenario": "The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "written notes",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "No audio or video recording is made of this presentation; a written transcript of the learner's own spoken content and the challenge questions is used instead.",
+    "The challenge questions test the plan's reasoning and completeness, not the learner's worth or character \u2014 a 'still deciding' or partially-formed answer to a challenge question is a legitimate outcome, not a failure."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a live audience isn't available today, the learner writes out the presentation as a full transcript of what they would say, including at least two anticipated challenge questions and their answers, and presents or reviews this transcript with an adult at the next available opportunity \u2014 this carries equal credit for completing today's lesson."
+  },
+  "materials": [
+    "the learner's complete assembled transition portfolio",
+    "the provided list of example challenge-question categories"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before presenting, predict the toughest challenge question you might get.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What's the toughest question you predict someone might ask about your plan, and do you already have an answer for it?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Present the complete portfolio to a guardian or another adult (or write the full transcript).",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I presented all seven portfolio sections, or wrote a complete transcript covering all seven."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I responded to at least two follow-up challenge questions."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Record the challenge questions and your actual answers.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write out the at least two challenge questions you were actually asked (or anticipated, if using the transcript alternative) and your actual answers to each."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on defending the plan out loud.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was there a moment in the presentation or transcript where explaining the plan out loud changed how you understood it yourself? What was it?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If fewer than two genuine challenge questions and answers are recorded, or the recorded answers simply restate the plan without engaging the question, reteach by modeling one example challenge question and a substantive answer, then have the learner redo their own question-and-answer pair.",
+  "extension": "Have the learner write one additional challenge question they wish had been asked, and answer it themselves.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  }
+}

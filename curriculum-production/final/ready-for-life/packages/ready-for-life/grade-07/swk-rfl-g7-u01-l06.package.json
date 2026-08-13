@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u01-l06",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Systems and Time Management",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: repairing missed commitments"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners analyze one real commitment they missed or fell short on in the past few weeks, identify the specific point where their plan actually broke down, and write a concrete three-part repair plan naming the impact, a specific repair action, and an exact date or time to complete it.",
+  "scenario": "The learner selects one real, specific commitment they missed or did not fully follow through on recently, such as a deadline, a chore, or a promise to someone in their household, traces back to the exact point where the plan broke down, and writes a repair plan they could actually carry out.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think of one real commitment you missed or fell short on in the past few weeks.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the specific commitment you missed and who or what was affected by it."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Identify the specific point where your plan actually broke down. Common breakdown points include: never started, misjudged how long it would take, forgot entirely, or got interrupted and never returned to it. Choose the one that matches what really happened.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I chose one specific breakdown point that actually matches what happened, not a general excuse."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I can describe the exact moment or decision where the breakdown point occurred, not just that it 'happened.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write a concrete repair plan for the commitment you identified, addressing three things directly: what impact the missed commitment actually had, one specific action you will take to make it right, and an exact date or time by which you will complete that action.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "State your three-part repair plan clearly: the impact, the specific repair action, and the target date or time, making sure the action is something you can actually do without needing anyone else's permission or involvement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Connect your repair plan back to the breakdown point you identified.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain specifically what you will change about how you plan or track commitments so this same breakdown point does not repeat, tying your answer directly to the breakdown point you named."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's chosen commitment is too vague to analyze, such as 'I've been bad at chores,' reteach by having them list three specific recent commitments with dates, then pick the one where they can name the exact moment the plan broke down.",
+  "extension": "Have the learner apply the same breakdown-point analysis to a second missed commitment and compare whether the two commitments broke down for the same reason or different reasons.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

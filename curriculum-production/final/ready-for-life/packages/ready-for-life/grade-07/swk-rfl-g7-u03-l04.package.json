@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u03-l04",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Skills and Flexible Meal Planning",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: measurement and timing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners follow a real recipe's measurements and timing exactly, using measuring cups and spoons correctly and a timer for each stage, then compare the finished result against the recipe's description to identify whether over- or under-measuring or timing changed the outcome.",
+  "scenario": "With a trusted adult present for any heat or knife steps, the learner selects one simple real recipe with at least three measured ingredients and two timed stages, gathers the correct measuring tools, and prepares the recipe following the measurements and timing exactly as written.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "drawing",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Any step involving the stove, oven, or a sharp knife is done by or directly alongside the adult; the learner does not use these unsupervised.",
+    "Use a timer for every timed stage rather than guessing, and check food temperature or doneness the way your adult shows you.",
+    "Stop and ask for help immediately for any burn, cut, spill of hot liquid, or unfamiliar hazard."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no kitchen access or ingredients are available, the learner instead reads a real recipe and, for three of its measured ingredients, converts each measurement to a different unit (for example 2 tablespoons to teaspoons) and explains what would happen to the finished dish if that ingredient's amount were doubled by mistake."
+  },
+  "materials": [
+    "one simple real recipe with at least three measured ingredients and two timed stages",
+    "measuring cups and spoons",
+    "a kitchen timer",
+    "the recipe's ingredients"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before cooking, read the whole recipe once and list its measured ingredients and timed stages.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List each measured ingredient with its exact amount, and each timed stage with its exact time."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult present for any heat or knife steps, measure and add each ingredient exactly as written, and time each stage with a timer rather than a guess.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I measured each ingredient using the correct tool (cup versus spoon) and leveled it rather than guessing a heaping amount."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I set a timer for each timed stage instead of estimating by eye."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I checked doneness the way my adult modeled before ending each timed stage."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare your finished result to the recipe's description of what it should look, smell, or taste like.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Did your result match the recipe's description closely, somewhat, or not really?",
+          "choices": [
+            "Closely",
+            "Somewhat",
+            "Not really"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "If it did not match closely, which specific measurement or timed stage do you think caused the difference?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on precision in cooking.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one real example from this attempt where being off by a small amount, in either measurement or time, would have changed the result, and why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner consistently over- or under-fills a measuring cup or spoon, reteach with a dry-ingredient leveling drill using rice or flour and a butter knife to level the top, practiced three times before returning to the real recipe.",
+  "extension": "Have the learner deliberately double one measurement (in a safe, edible test batch) and compare the result to the correctly measured version, describing the specific difference it caused.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

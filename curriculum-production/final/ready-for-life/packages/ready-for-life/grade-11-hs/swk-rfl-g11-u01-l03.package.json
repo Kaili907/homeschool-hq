@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u01-l03",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Postsecondary Pathways",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: cost and funding in outline, verified not assumed"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "For the same two pathways researched on day 2, learners outline the general categories of cost and the general categories of funding or aid that typically exist for each pathway, practicing the skill of researching what kinds of support exist in general before ever needing to know specific numbers.",
+  "scenario": "The learner researches, at the category level, what a pathway typically costs (tuition, fees, tools, licensing, lost income, and similar) and what kinds of funding or aid categories typically exist for it (scholarships, grants, employer-paid training, tuition assistance, and similar), without looking up or recording any real dollar figures tied to their own household.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson works at the level of general cost and funding categories only; the learner does not look up or record any real family income, savings, debt, or other household financial detail.",
+    "No account is created and no application or form is submitted anywhere for this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or notes app", "access to look up general program cost and aid information", "day-2 pathway research (if available)"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before researching, write down what cost and funding categories you currently assume exist for each of your two pathways.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "For your two pathways, what kinds of costs and what kinds of funding or aid do you currently assume exist, even if you're not sure they're accurate?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Research and list the general categories of cost that typically apply to each pathway.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "For each pathway, list the general categories of cost that typically apply (for example: tuition, fees, tools or equipment, licensing or testing fees, lost income while training)." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My cost categories are general categories, not real dollar amounts tied to my own household." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Research and list the general categories of funding or aid that typically exist for each pathway.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For each pathway, list the general categories of funding or aid that typically exist (for example: scholarships, grants, employer-paid training, tuition assistance, apprenticeship wages) and name a specific source where you found this." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on how this outline changes what questions you'd still need to ask.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Based on this outline, what is one specific question about cost or funding you would still need to research further before this pathway felt fully realistic?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner records real household dollar amounts instead of general categories (a sign the task is being read as a personal budget rather than a research outline), reteach by covering any numbers written and having the learner restate each entry as a category only, using the pattern 'this pathway typically has a cost category for ___' and 'this pathway typically has a funding category for ___.'",
+  "extension": "Have the learner pick one funding category they listed and research one specific, real eligibility rule for it (such as a deadline type or a qualifying condition), recording the category-level rule without needing any personal financial figures.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u01-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u01-l03",
+    "authoredBy": "manual"
+  }
+}

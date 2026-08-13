@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l01",
+  "lessonId": "ma-g9-ready-for-life-u04-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Route completeness and accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Route is missing a start point, end point, or a transfer/waypoint, or the timing recorded for one or more legs is missing or clearly inconsistent with the schedule used." },
+          { "label": "Proficient", "descriptor": "Route names a specific start point, end point, and at least one transfer or waypoint, with departure and arrival times for each leg that match the schedule or map used." },
+          { "label": "Advanced", "descriptor": "Route is fully specified with accurate timing for every leg and correctly names the exact transfer point and connecting time, including a visible buffer between the two." }
+        ]
+      },
+      {
+        "dimension": "Transfer and contingency reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Learner does not correctly identify whether the connection has buffer time, or proposes a change that would not actually add time." },
+          { "label": "Proficient", "descriptor": "Learner correctly identifies whether the connection has buffer time and, if it is tight, proposes one specific, workable change to the route." },
+          { "label": "Advanced", "descriptor": "Learner correctly identifies buffer time and proposes a specific change with a clear explanation of how it changes total travel time or reliability." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Route names an actual transfer point or waypoint by name, not just 'somewhere in the middle.'",
+      "Learner's proposed fix for a tight connection references a concrete schedule detail (an earlier departure, a different route) rather than a vague statement like 'leave earlier.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u02-l06",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Applications, Deadlines, and Documentation",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: recovering when a deadline is missed"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners run their tracker across a full cycle of deadlines (their own real ones plus provided simulated ones), then work through a realistic scenario where a deadline was missed or nearly missed, producing a documented recovery plan that is reviewed with a guardian, so learners build the system-level skill of catching and correcting a failure instead of just avoiding failure in the first place.",
+  "scenario": "The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["updated tracker", "recovery plan document", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The three additional stress-test deadlines are provided and simulated so the exercise works the same way regardless of how many real deadlines the learner currently has active.",
+    "The guardian review focuses on the tracker and recovery plan as documents; no real account, application, or contact with an unfamiliar adult is required to complete this lesson."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner has no real deadlines currently active to update, the tracker portion is completed entirely using a provided fully-simulated four-deadline set instead, and the recovery-plan scenario is built around one of those simulated deadlines."
+  },
+  "materials": ["the learner's own tracker from day 1 of this unit", "the three provided simulated deadlines", "the provided missed-deadline scenario"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Update your tracker from day 1 with the current real status of each item, then add the three provided simulated deadlines to it in the same format.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "extended-response", "text": "Show your updated tracker with current statuses for your real items, plus the three simulated deadlines added in the same format." },
+        { "ref": "t1-p2", "promptType": "checklist-item", "text": "The three simulated deadlines are recorded with the same level of detail (deadline date, required documents, status) as my real items." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "Which item did you choose, and what specifically went wrong (what was missed and why, based on your tracker)?" },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Write a specific recovery plan: what you would do first, in what order, including who you would contact and what you would say to explain the situation and ask for what you need." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My recovery plan includes a realistic first message to whoever needs to be contacted (an admissions office, a reference-writer, a program coordinator), not just a list of steps." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "guided",
+      "directions": "Review the recovery plan with your guardian and record what changed or was confirmed after that conversation.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "checklist-item", "text": "I reviewed my recovery plan with my guardian before finalizing it." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Did your guardian's review change anything about the plan? If so, what, and why?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what this unit's system (the tracker plus this recovery exercise) changes about how you'll handle deadlines going forward.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Looking back across this whole unit, what specific habit from your tracker system would have caught this problem earlier, before it became a three-day emergency?" }
+      ]
+    }
+  ],
+  "remediation": "If the recovery plan lists only vague next steps like 'talk to someone' or 'try to fix it' without a specific first message and specific order of actions (a sign the learner can build a tracker but hasn't yet practiced acting under time pressure), reteach by modeling one complete first-contact message together for the chosen scenario, then have the learner write the remaining steps in order, each with a named action and a named person.",
+  "extension": "Have the learner add a permanent 'early warning' column or rule to their real tracker (for example, flagging any document still not started with fewer than 14 days left) designed specifically to prevent the kind of near-miss they just worked through, and explain in a sentence how it would have caught this scenario earlier.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u02-l06",
+    "authoredBy": "manual"
+  }
+}

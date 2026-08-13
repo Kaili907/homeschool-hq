@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l03",
+  "lessonId": "ma-g8-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Tone consistency",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or both emails include slang, an unclear reason, or an abrupt closing that a club leader would find unprofessional."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both emails are polite, state a clear reason or request, and end with an appropriate closing line."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and both emails read as genuinely warm and specific rather than stiff or copied from a formula."
+          }
+        ]
+      },
+      {
+        "dimension": "Independence growth",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The round-two email is noticeably weaker than round one, missing required checklist elements once the starters are gone."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The round-two email meets all tone-checklist items without any sentence starters."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection names a specific skill the learner had to supply on their own once the scaffolding was removed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The round-two email suggests one genuinely specific alternative time, not a vague 'whenever works.'",
+      "The reflection names a specific missing support, not a general statement that round two was 'harder.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

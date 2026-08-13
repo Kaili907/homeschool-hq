@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u04-l01",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals, Rest, and Fueling Meals",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: hunger, thirst, and stress signals"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 4: Body Signals, Rest, and Fueling Meals"
+  ],
+  "objective": "Learners notice and record three different body signals (hunger, thirst, and stress) at three points during one real day using a simple signal log, then compare which two signals were hardest to tell apart and name the specific physical clue that finally helped them decide.",
+  "scenario": "Some body signals can feel similar at first, like a tight stomach that could mean hunger or worry. Across one regular day, the learner pauses three separate times, once in the morning, once around midday, and once in the afternoon or evening, to notice what signal their body is sending and write down the specific physical clue that helped them name it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app for a simple signal log",
+    "a way to check the time three times during the day"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before your first check-in, think about a time recently when you weren't sure if you were hungry, thirsty, or just stressed.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe that mixed-up moment: what were you doing, and what made it hard to tell which signal it was?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "At three different points today, morning, midday, and afternoon or evening, pause for a moment and notice your body. For each check-in, name which signal is strongest (hunger, thirst, or stress) and write the one specific physical clue that told you, for example a dry mouth, a rumbling stomach, or tight shoulders.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I completed a check-in in the morning and named a specific physical clue."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I completed a check-in around midday and named a specific physical clue."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I completed a check-in in the afternoon or evening and named a specific physical clue."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look back over your three check-ins from today and compare them side by side, thinking about which signals were clearest to read and which ones overlapped or felt confusing in the moment.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which of your three check-ins was easiest to name correctly, and which specific physical clue made it obvious?"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Which two signals were hardest to tell apart in any of your check-ins (for example hunger and stress), and what one clue finally helped you decide between them?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about your stress check-in specifically, since stress signals can be easy to miss compared to hunger and thirst.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why noticing a stress signal in your body might matter just as much as noticing hunger or thirst, using something from one of your three check-ins today as your example."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner writes vague labels like 'I felt weird' without a physical clue, reteach with a two-column matching page: list five physical clues (dry mouth, stomach rumble, tight shoulders, headache, restless legs) on one side and the three signal names on the other, and have the learner match each clue to a signal before returning to their own log.",
+  "extension": "Have the learner run a fourth check-in on a day when something stressful is actually happening (a test, a hard conversation, an activity change) and compare whether the stress signal was easier or harder to name accurately than during a calm day.",
+  "scoringRef": "scoring/swk-rfl-g4-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

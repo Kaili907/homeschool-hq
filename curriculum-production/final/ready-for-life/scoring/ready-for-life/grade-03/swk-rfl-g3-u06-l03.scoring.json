@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l03",
+  "lessonId": "ma-g3-ready-for-life-u06-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Hazard check accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are labeled without applying the three hazard checks, for example every step marked 'learner alone.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The heat, sharp tool, and chemical cleaner checks are applied consistently to label each step."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner catches a hazard that was not obvious at first glance."
+          }
+        ]
+      },
+      {
+        "dimension": "Supervision label defensibility",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "A step's label does not match the stated reason for it, or no reason is given."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each label matches the stated hazard reasoning for that step."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner independently changes an initial guess after applying the checks, showing the reasoning update in writing."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "When uncertain, the learner defaults to 'adult right there' rather than guessing 'learner alone.'",
+      "The guardian's first look at the marked-up list is documented, not skipped."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

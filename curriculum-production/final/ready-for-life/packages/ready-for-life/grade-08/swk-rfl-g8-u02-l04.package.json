@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u02-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Operations and Basic Maintenance",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: maintenance requests"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners draft, but never send, a polite, specific written maintenance request describing a fictional household repair problem to a fictional building manager, including the details a repair technician would actually need: what's wrong, where, since when, and how urgent it is.",
+  "scenario": "A fictional character named Jordan rents an apartment managed by a fictional company called Ridgeview Property Management. The bathroom exhaust fan has started making a loud grinding noise and has stopped pulling air, which Jordan first noticed four days ago and which has gotten louder since. The learner drafts, on Jordan's behalf, the maintenance request message Jordan would send, but the message is never actually sent anywhere.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document for drafting",
+    "a pen, pencil, or keyboard"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting, think about what makes a maintenance request easy or hard for a repair person to act on.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Think of a message that only says 'something's broken, please fix it.' What three pieces of information are missing that a repair person would need?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Reread the fictional scenario details above (the exhaust fan, when it started, how it's changed) and list the specific facts you'll need to include in the message.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I identified what is broken (the specific item and location)."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I identified when the problem started and how it has changed since."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I identified how urgent the problem seems and why."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Draft the full maintenance request message on Jordan's behalf, addressed to Ridgeview Property Management. The message must be polite, specific, and organized so a repair technician could act on it without asking follow-up questions. Do not send this message anywhere; it is a drafting exercise only.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write the complete maintenance request message, including a greeting, a clear description of the exhaust fan problem (what's wrong, its exact location, when it started, and how it has changed), a polite request for a repair timeline, and a closing. Use a respectful, professional tone throughout, and make sure someone who has never seen the bathroom could still picture the problem accurately from your description."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reread your draft with a critical eye.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "If you received this message as the building manager, is there anything unclear or missing that would make you have to ask a follow-up question? Revise one sentence to fix it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's draft stays vague ('the fan is broken, please fix'), reteach by having them answer three specific questions aloud first: what exactly is happening, where exactly, and since when, then require each answer to appear as a distinct sentence in the revised draft.",
+  "extension": "Have the learner draft a second, follow-up message from Jordan's perspective one week later, for a scenario where the fan still hasn't been fixed, adjusting the tone to be firmer while remaining polite.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u02-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u02-l04",
+    "authoredBy": "manual"
+  }
+}

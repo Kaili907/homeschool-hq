@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u05-l05",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Communication",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: asking for help"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Given a real or provided situation where the learner is stuck, learners independently choose the right person to ask, formulate a specific (not vague) help request, and carry it out.",
+  "scenario": "Without being told exactly what to do, the learner identifies a real (or provided) situation where they're genuinely stuck on something, decides who's the right person to ask, and makes a specific request for help rather than a vague complaint.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "The situation and the person asked stay within the learner's normal household or trusted circle; no disclosure of private family details is required."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real stuck situation comes up, the learner instead responds to a provided scenario describing someone who's stuck, choosing the right person to ask and writing the specific request they would make in that situation."
+  },
+  "materials": [
+    "none required"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Quickly recall: name one recent time you were stuck on something and didn't ask for help. What happened instead?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe that time."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Identify a real situation where you're stuck right now, choose the right person to ask, and make a specific help request.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Describe the situation, who you asked, and exactly what you asked for."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My request named the specific problem, not just 'I need help.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Rate your help-asking confidence and pick a next step.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rate your confidence in asking for help well (very / somewhat / not yet), cite today's specific request as evidence, and choose: ready to try a harder ask, ready to review this again, or need a different explanation."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's request is still vague ('I don't get it'), reteach with a sentence starter ('I'm stuck on ___ because ___, can you help me with ___ specifically?') and have them fill it in for their real situation.",
+  "extension": "Help someone else who's stuck on something, using the same specific-request skill in reverse — noticing what kind of help they actually need.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

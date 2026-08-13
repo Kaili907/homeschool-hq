@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u02-l02",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Operations and Basic Maintenance",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: inventory and restocking"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners take a modeled inventory of one real category of shared-space consumables in their household (pantry staples, toiletries, or cleaning supplies), recording current quantities and applying a simple restock decision rule to decide what needs replacing soon.",
+  "scenario": "Following a worked example, the learner picks one shared-space category, the pantry shelf, the bathroom toiletries, or the under-sink cleaning supplies, and physically checks what's actually there, comparing it against a simple low, adequate, or full rule to flag what needs restocking.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "If your inventory includes cleaning supplies, check labels without opening or mixing any containers — closed-container counting only.",
+    "If you notice any expired food or medicine while inventorying the pantry, tell a trusted adult rather than throwing it away yourself."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real shared space isn't available to inventory, use the sample pantry/toiletry list provided on this task sheet instead, applying the same low/adequate/full rule to the sample quantities given."
+  },
+  "materials": [
+    "paper or a notebook",
+    "a pen or pencil",
+    "access to one shared household storage area (pantry shelf, toiletries cabinet, or cleaning supply area) to look at directly"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before counting anything, decide which one category you will inventory: pantry staples, toiletries, or cleaning supplies. Write your choice and explain briefly why you picked that one.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which category did you choose (pantry staples, toiletries, or cleaning supplies), and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Walk through this modeled example first: a household checks its toiletry shelf and finds 1 bar of soap (low), 3 rolls of toilet paper (adequate), and 0 tubes of toothpaste (out). Using the rule 'zero or one of an everyday item counts as low, two to three counts as adequate, four or more counts as full,' the household flags soap and toothpaste for restocking but leaves the toilet paper alone. If a real shared space isn't available, use this sample list instead: canned soup (2 cans), rice (1 bag), pasta (0 boxes), cooking oil (1 bottle), paper towels (3 rolls) — apply the same rule to these five sample items.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I understand the rule: zero-to-one is low, two-to-three is adequate, four-or-more is full."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I applied the rule correctly to the modeled toiletry example above."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now inventory your own chosen category (or the sample list, if you're using the simulation alternative). List at least six real items with their current quantities, then apply the low/adequate/full rule to each and identify exactly which items should be restocked first and why.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "List at least six items from your chosen category with their current quantities, mark each as low, adequate, or full using the rule, and then explain which two items you would restock first if you could only choose two, including your reasoning for that order (which one runs out faster, which one is used by more people, or which one has no substitute in the house)."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the rule itself.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was the low/adequate/full rule easy to apply to every item, or did any item not fit neatly into one category? Explain."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner struggles to estimate quantities without an exact count (for example, guessing how much cooking oil is left in a bottle), reteach with a physical demonstration: hold up a partially full container together and practice describing fullness in fractions (about a quarter left, about half left) before assigning a low/adequate/full label.",
+  "extension": "Have the learner design a restock frequency for each flagged item, for example weekly, biweekly, or monthly, based on how quickly it seemed to run low, and explain the reasoning for at least two of those frequencies.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  }
+}

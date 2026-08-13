@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u06-l05",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Community Contribution Capstone",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: safe execution"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "With communication complete, learners carry out the planned project for real, following the agreed scope and materials plan while a trusted adult directly supervises any step that involves physical risk.",
+  "scenario": "With permission granted, materials ready, and communication complete, the learner carries out the project itself on a scheduled day, working through the ordered steps from the planning lesson while a trusted adult supervises directly for any step involving tools, physical strain, heat, chemicals, or unfamiliar surroundings.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Any step of the project that involves tools, lifting, heat, cleaning products, or being outdoors away from your household's immediate space is done by or directly alongside a trusted adult.",
+    "Stay within the exact scope that was agreed to in the permission conversation — do not add new tasks, people, or locations once the project is underway.",
+    "Stop and ask your trusted adult for help immediately if anything about the project feels unsafe, goes differently than planned, or you are unsure what to do next."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the project cannot be carried out for real this week, the learner instead completes a detailed walk-through of the execution plan: narrating each ordered step out loud or in writing, in the exact order from the planning lesson, including exactly what the trusted adult would be doing at each step, without carrying out the project for real yet."
+  },
+  "materials": [
+    "the ordered step list and materials from the planning lesson",
+    "the specific materials or tools each step requires",
+    "a trusted adult's direct availability for supervision"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before starting, review your ordered step list and confirm your trusted adult knows the plan and is available to supervise.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "checklist-item",
+          "text": "I reviewed my full ordered step list with a trusted adult immediately before starting."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Work through your ordered steps one at a time with your trusted adult directly supervising any step involving tools, heat, chemicals, lifting, or being outdoors away from home, checking off each step as you finish it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I completed each step in the order from my plan, checking it off as I finished."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "A trusted adult was directly present or supervising for every step that involved physical risk."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "After finishing, compare what actually happened during execution to your original ordered plan, noting any step that took longer, went differently, or required a trusted adult's help beyond what you expected.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe one specific step that went differently than planned, what actually happened, and how you and your trusted adult handled it in the moment."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Did you complete every step in your original plan, complete most of it, or need to stop partway through?",
+          "choices": [
+            "Completed every step",
+            "Completed most steps",
+            "Stopped partway through"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on carrying out the project.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain the moment during execution when your trusted adult's supervision mattered most, and what might have gone wrong without it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot clearly describe what actually happened during a step that went differently than planned, walk back through that specific step together with the trusted adult who supervised it, reconstructing the sequence of events before finishing the reflection.",
+  "extension": "Have the learner write a short list of what they would change about the execution plan itself, separate from the outcome, if they were to do this same project again.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

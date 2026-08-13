@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l03",
+  "lessonId": "ma-g11-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Table completeness and balance",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Table is filled in for only one option, or entries are one-sided in the favored option's direction." },
+          { "label": "Proficient", "descriptor": "All three criteria are filled in honestly for both options." },
+          { "label": "Advanced", "descriptor": "Entries include a genuine, specific downside for the option the learner ultimately recommends." }
+        ]
+      },
+      {
+        "dimension": "Justification grounded in the table",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Recommendation restates a general impression without referencing specific table rows." },
+          { "label": "Proficient", "descriptor": "Recommendation cites at least two specific rows from the table as reasoning." },
+          { "label": "Advanced", "descriptor": "Recommendation explains why one criterion mattered more than another in this specific case." }
+        ]
+      },
+      {
+        "dimension": "Reflective comparison",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection does not compare the final answer to the warm-up instinct." },
+          { "label": "Proficient", "descriptor": "Reflection states whether the answer changed and gives a reason." },
+          { "label": "Advanced", "descriptor": "Reflection names specifically what the tradeoff process added that gut instinct alone missed." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The tradeoff table has entries for both options on all three named criteria.",
+      "At least one entry favoring the non-chosen option is genuinely acknowledged, not dismissed.",
+      "The final justification quotes or clearly references specific table content, not a restated gut feeling."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

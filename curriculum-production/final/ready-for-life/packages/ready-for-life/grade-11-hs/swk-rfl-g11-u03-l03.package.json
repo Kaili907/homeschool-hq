@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u03-l03",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Health and Wellness Self-Management",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: describing a concern accurately to a professional"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Using a provided fictional scenario, learners practice describing a physical concern to a professional with the specific details (timeframe, change over time, what affects it) that let a professional act quickly, building a communication skill without disclosing any real concern of the learner's own.",
+  "scenario": "Read this fictional situation: Rowan has had a mild headache on and off for the past four days. It is worse in the afternoon, is helped a little by resting in a dark room, and has not gone away with rest alone. Using only these fictional details, the learner writes what they would say to describe this concern clearly to a professional, then practices the specific follow-up answers a professional would likely need.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The learner works entirely from the provided fictional scenario about Rowan; no real concern, symptom, or health detail of the learner's own is required or requested anywhere in this lesson.",
+    "If a learner has a real concern they want to discuss, they should raise it separately with a trusted adult -- it does not belong in this assignment."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or notes app", "the provided fictional scenario"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting, think about why vague descriptions slow a professional down.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Think of a time you (or someone you know) said something like 'I just don't feel good' to describe a problem. What information was missing that would have helped someone else understand it faster?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using the fictional scenario provided, write the specific opening description you would give.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Using only the fictional scenario given (Rowan's headache), write the exact sentence or two you would say to describe the concern, including when it started and how it has changed since then." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My description states a specific timeframe (when it started, how long) rather than a vague word like 'a while' or 'lately.'" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Practice the specific follow-up answers a professional would likely ask for.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Using the same fictional scenario, write your answers to these two follow-up questions a professional would likely ask: (1) What makes it better or worse? (2) Has anything like this happened before?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the difference precision makes.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Compare your description from task 2 to a vague version like 'I have a headache.' What specifically would a professional be able to do with your version that they couldn't do with the vague one?" }
+      ]
+    }
+  ],
+  "remediation": "If the description in task 2 stays vague after one attempt (no timeframe, no specific change over time named), reteach by giving the learner a fill-in-the-blank frame -- 'This started ___ days ago, it is ___ (better/worse/the same) than when it started, and ___ makes it better or worse' -- and have them complete that frame using the fictional scenario before rewriting their own sentence.",
+  "extension": "Have the learner rewrite the same description as if explaining it to a friend instead of a professional, then write one sentence identifying what changed in the wording and why that change was necessary.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u03-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u03-l03",
+    "authoredBy": "manual"
+  }
+}

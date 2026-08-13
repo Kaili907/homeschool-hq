@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u02-l01",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Household Independence and Living-Space Systems",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: cleaning and laundry systems that scale"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners design a written cleaning-and-laundry rotation system for their real household, assigning specific tasks, frequencies, and a fair rotation method across the people who live there, as a planning artifact they do not yet put into action.",
+  "scenario": "The learner thinks about their real household's current cleaning and laundry habits, identifies what tasks exist and how often each needs doing, then designs a rotation system on paper that assigns each task to a person or names a fair method for deciding who does it, without yet trying the system out.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This is a planning task only; the learner designs a rotation system on paper and does not need to run or announce it during this lesson.",
+    "No cleaning chemicals are used or handled as part of this task."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "a list of the rooms and laundry needs in your real household"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List every cleaning and laundry task your household currently needs, even ones nobody currently does regularly.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write down at least six specific tasks (for example, wiping kitchen counters, vacuuming a specific room, washing towels) and how often each one realistically needs doing." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort your task list into a simple table with three columns: task, frequency, and current person responsible (or 'nobody' if it's not currently assigned).",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My table includes at least six tasks with a specific frequency for each (daily, weekly, or a specific number of times per month)." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I marked which tasks currently have no assigned person." },
+        { "ref": "t2-p3", "promptType": "short-response", "text": "Name the two tasks that are least consistently done in your household right now, and explain why you think that is." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Design a rotation system that assigns every task to a specific person or a fair method (such as alternating weekly, drawing names, or splitting by age-appropriate difficulty).",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your full rotation system: which person or method is responsible for each task, and how often the assignment changes hands." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Explain why you chose that rotation method (alternating, fixed assignment, etc.) instead of a different one." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what could make your system fail in real life.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Name one specific way your rotation system could break down (for example, someone forgetting their week, an unfair task split) and one specific rule you added or would add to prevent it." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's rotation system lists tasks without ever naming who does them or how the assignment rotates, reteach by having them fill in a two-column table (task, person) for just three tasks first, then add the rotation rule only after every task has a name attached.",
+  "extension": "Have the learner add a backup plan to their rotation system for what happens when the assigned person is unavailable (for example, away or sick) for one cycle.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u05-l03",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Asking for Help",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: tracking borrowed things"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 5 — time, belongings, and help-seeking"
+  ],
+  "objective": "Learners create and fill in a borrowed-things log with four columns (the item's name, who it belongs to, the date it was borrowed, and the exact spot it must go back to) for every item currently in their space that belongs to someone else, so nothing borrowed gets lost or forgotten. A learner with nothing currently borrowed logs an item they have lent to someone else, or an item they expect to borrow soon, using the same four columns.",
+  "scenario": "The learner walks through their own space and collects every item that belongs to someone else right now, such as a game piece from a co-op classmate, a book from a neighbor, or a tool borrowed from another person in the household, then records each one in a borrowed-things log on an index card or in a small notebook. If nothing is currently borrowed, the learner instead logs an item they have lent out or one they expect to borrow soon, so the log-building skill still gets practiced.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "an index card or small notebook for the log",
+    "a pencil or pen",
+    "any items currently borrowed from or lent to someone else, if any"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before writing anything, walk through your space and spot borrowed items.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one item in your space right now that belongs to someone else. If nothing is currently borrowed, write 'none right now' and instead name one item you have lent to someone else, or one item you expect to borrow soon."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For every item you found in the warm-up (borrowed, lent out, or expected soon), fill in all four columns of the log before moving to the next item.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote the item's name for every borrowed item I found."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote who each item belongs to."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I wrote the date I borrowed each item, or my best guess if I do not remember exactly."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I wrote the exact spot each item needs to go back to, such as a specific room, shelf, or person."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without looking at your written log, try to recall every entry from memory, then check your memory against the real log.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List, from memory, each borrowed item and who it belongs to. Then check your list against your written log and name any item you missed."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about which borrowed item was easiest to lose track of.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one borrowed item that was easy to forget about and what specifically about it made it easy to forget, such as its size, where it was stored, or how long ago you borrowed it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner records an item's name but skips the return-location column, leaving them unsure how to return it later, reteach by requiring the return spot to be written down before the item's name is allowed to be written.",
+  "extension": "Have the learner also log one item that someone else has borrowed from them, tracking it with the same four columns, to build the tracking habit in both directions.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}

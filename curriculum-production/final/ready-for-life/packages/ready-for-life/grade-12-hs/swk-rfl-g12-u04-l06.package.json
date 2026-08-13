@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u04-l06",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Civic and Legal Adulthood",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: verifying every rule against a current local source"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners produce an adulthood checklist covering identification, records, registration, and responsibilities, verified with an adult against a current local or official source where a real check is possible, so the unit ends with a genuinely useful artifact rather than an assumed one.",
+  "scenario": "The learner assembles the week's category worksheets, process-reading notes, responsibility sorting, and notice-response practice into one checklist, then works with an adult to identify and check at least one item against a current, real, local or official source, explicitly marking any item not yet verified rather than guessing.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Verifying against a real local source is the goal where genuinely possible, but an honestly marked 'not yet verified' item is an acceptable and expected part of this checklist, not a failure.",
+    "This is not legal advice; the task is building and starting to verify a personal checklist, not delivering a definitive legal answer."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner cannot access or verify a real current local source right now (no adult available, no reliable source at hand, or the source is genuinely unclear), the checklist is completed using the week's general categories only, with every item explicitly marked 'not yet verified against a real source' \u2014 this earns full, equal credit, since the assessed skill is knowing what to verify and how, not proof of a completed real-world lookup."
+  },
+  "materials": [
+    "the week's earlier artifacts from this unit",
+    "paper or a notes document"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before assembling, predict which checklist item will be hardest to actually verify.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Looking back at this week's categories, which item do you predict will be hardest to actually verify against a real source, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Assemble the checklist from the week's artifacts.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My checklist covers identification, records, registration, and responsibilities categories from this week."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "With an adult, I identified at least one item to actually check against a current, real, local or official source, or marked items honestly as not yet verified."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Record what was verified and what remains unverified.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For each checklist item, state whether it was verified against a real current source (and which kind of source), or honestly marked as not yet verified."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the value of an honestly incomplete checklist.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Why is a checklist that honestly marks some items as 'not yet verified' more useful than one that guesses at everything to look complete?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If any checklist item is marked 'verified' without the learner being able to say what real source was actually checked, reteach the honesty standard explicitly and have them either complete a real check with the adult or correctly relabel the item as not yet verified.",
+  "extension": "Have the learner set a specific date to revisit and verify the remaining unverified items, and explain why that timing makes sense.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

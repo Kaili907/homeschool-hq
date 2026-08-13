@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l04",
+  "lessonId": "ma-g12-ready-for-life-u02-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Plan realism",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The plan assumes a transport mode not realistically available and does not name any backup."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The plan uses realistic modes and includes at least one backup for at least one leg."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The plan accounts for a specific likely disruption (weather, timing, availability) with a workable response."
+          }
+        ]
+      },
+      {
+        "dimension": "Review integration",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The revision does not reflect anything the review or self-check actually flagged."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The revision directly addresses something the review or self-check identified."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner names the most fragile leg of the plan honestly, even after revision."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The plan never assumes a personal vehicle as the only option.",
+      "At least one backup option is present for at least one leg of the trip.",
+      "No real ride-share account, payment method, or address is required or present."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

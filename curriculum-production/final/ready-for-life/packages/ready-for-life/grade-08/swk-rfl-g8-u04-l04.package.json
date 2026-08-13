@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u04-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Appointments, and Community Navigation",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: documents and questions"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners assemble a fictional 'ready folder' checklist naming the general types of documents a Clearview Vision Center eye appointment would require, described only generically, and write a list of original questions to ask during the visit.",
+  "scenario": "A fictional character has an upcoming eye exam at Clearview Vision Center. The learner builds a ready-folder checklist naming general categories of documents the front desk might ask for, such as an ID card and an insurance card, without inventing any real ID numbers or names, and separately drafts a list of questions the character could ask the eye doctor during the visit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper",
+    "pencil",
+    "a folder or envelope to hold the checklist (optional)",
+    "the fictional Clearview Vision Center scenario printed on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Brainstorm broadly before narrowing down to a checklist.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Without looking ahead, name three general categories of documents you think any medical-type appointment front desk might ask a visitor to have ready."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build the ready-folder checklist for the fictional Clearview Vision Center visit using only general document categories, never real numbers or names.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed an ID card as a general document category, without writing any real ID number."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I listed an insurance card as a general document category, without writing any real insurance number."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "short-response",
+          "text": "Name one more general document category, besides an ID card and an insurance card, that this fictional eye appointment folder should include, and explain briefly why."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write the questions half of the ready folder.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write at least four original questions the fictional character could ask the eye doctor or front-desk staff during this Clearview Vision Center visit, covering at least three different topics such as the exam process itself, cost or insurance coverage, follow-up care, and what to expect afterward. For each question, add one sentence explaining why that question matters to ask before or during this specific kind of appointment."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look back at the finished checklist.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which item on your ready-folder checklist would be easiest to forget the morning of a real appointment, and what could you do ahead of time to remember it?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner writes a real ID number, insurance number, or a specific real name anywhere on the checklist, stop and revise together immediately, replacing it with the general category label, then review the difference between a document type and a document number before continuing.",
+  "extension": "Have the learner build a second ready-folder checklist for a different fictional appointment type, such as a fictional orthodontist consult, and compare which document categories repeat and which are new.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u02-l04",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Independent Living Simulation",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: transport and logistics over time"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners review a full month's fictional transport-and-logistics plan with a trusted adult so a second, more experienced perspective checks its feasibility before the learner relies on a plan that only looks good on paper.",
+  "scenario": "The learner drafts a fictional month's plan for getting to a fictional job or set of appointments using realistic transport modes for their actual situation (which might include walking, public transit, rideshare, a ride from someone, or biking \u2014 not assuming a personal car), then reviews it with an adult who checks feasibility and suggests at least one backup option.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The plan does not assume the learner has, or will have, a personal vehicle; any realistic combination of transport modes is acceptable.",
+    "No real ride-share account, real payment method, or real trip is required \u2014 the plan and its review are entirely on paper."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available for a live review today, the learner self-checks the plan against a provided feasibility checklist (does every leg have a named mode, a backup for at least one leg, and a plan for bad weather or a missed connection) and notes any item the checklist flags."
+  },
+  "materials": [
+    "the fictional household plan from earlier lessons",
+    "the provided feasibility checklist",
+    "paper or a notes document"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting, list every transport mode that's realistically available to you, even ones you don't usually use.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List every transport mode that is realistically available to you or your fictional household (walking, transit, biking, rideshare, a ride from someone, etc.), even ones you wouldn't normally choose."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft the fictional month's transport plan, then review it with an adult for feasibility.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I drafted a transport plan covering the fictional month's regular trips."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I reviewed the plan with an adult, or self-checked it against the provided feasibility checklist."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "The plan includes at least one backup option for at least one leg of the trip."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Revise the plan based on the feedback or self-check.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "What did the review (adult or self-check) reveal that you hadn't considered, and how did you revise the plan?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on backups.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which single leg of your plan is most likely to fail on a bad day, and does your backup for it actually work?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the plan has no backup option anywhere (a single point of failure with no alternative), reteach by having the learner identify the one leg most exposed to disruption (weather, a missed connection, an unavailable ride) and add a specific backup for that leg before resubmitting.",
+  "extension": "Have the learner redraft the plan assuming their primary transport mode becomes unavailable for one full week, and show how the fictional month's plan adapts.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u02-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u02-l04",
+    "authoredBy": "manual"
+  }
+}

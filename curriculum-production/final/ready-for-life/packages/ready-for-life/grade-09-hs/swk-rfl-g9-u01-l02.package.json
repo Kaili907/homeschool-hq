@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u01-l02",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Planning Systems Under Real Load",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: task breakdown and sequencing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners take one real upcoming multi-step assignment or project and break it into at least five concrete, sequenced steps, each with an estimated day or date, so the whole task is visible as a plan rather than a single looming deadline.",
+  "scenario": "The learner selects one real assignment or project currently due within the next three weeks and produces a written, sequenced breakdown of the concrete steps needed to finish it, ordered from first to last with an estimated day for each.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This task produces a planning document only; it does not require the learner to complete or submit the actual assignment as part of this lesson."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "one real upcoming multi-step assignment or project with a known due date"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Name the real assignment or project you will break down and its actual due date.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the specific assignment or project and its due date, and describe in one sentence why it counts as multi-step rather than something you could finish in one sitting." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "List every concrete step needed to finish the assignment, from the very first action to turning it in, without worrying yet about order.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "List every concrete step you can think of that this assignment actually requires (examples: 'pick a topic,' 'find three sources,' 'write a rough draft of section two,' not vague steps like 'work on it')." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I listed at least five distinct concrete steps, not fewer." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "Each step names a specific action, not a vague phrase like 'work on it' or 'get started.'" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Put your steps in the order you will actually do them, and assign an estimated day or date to each one, counting backward from the due date.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your final sequenced list: each step in order, with an estimated day or date next to it, ending on or before the actual due date." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Identify which single step in your sequence would cause the most damage to your timeline if it took twice as long as expected, and why you chose that one." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare this sequenced plan to how you would normally have approached this assignment.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one specific way this sequenced breakdown changes what you will actually do differently this week, compared to how you would have approached this assignment without it." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's steps are too broad to sequence (such as a single step reading 'do the project'), reteach by having them describe out loud what they would physically do first, second, and third if they sat down to work on it right now, then convert each spoken action into its own written step before resequencing.",
+  "extension": "Have the learner apply the same five-step breakdown process to a second real upcoming assignment or project with a different due date, then compare the two sequenced lists to find one planning pattern that shows up in both.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

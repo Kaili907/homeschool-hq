@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l05",
+  "lessonId": "ma-g7-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Proposal specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The proposal is vague ('we should share it more') with no specific tasks or schedule."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The proposal names specific parts of the responsibility and a specific schedule for each part."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the proposal anticipates a likely point of disagreement before the conversation happens."
+          }
+        ]
+      },
+      {
+        "dimension": "Negotiated agreement",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No real negotiation happens, or the final agreement is not stated specifically."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner reports a specific final agreement reached with the household member, including who does what and how often."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner identifies a specific way to check whether the agreement is holding."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The shared responsibility and negotiation are real and happened this week, not invented.",
+      "The final agreement is stated specifically enough that someone else could check whether it's being followed.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

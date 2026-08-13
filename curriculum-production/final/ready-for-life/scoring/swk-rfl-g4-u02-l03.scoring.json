@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l03",
+  "lessonId": "ma-g4-ready-for-life-u02-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Setting decisions matched to the sorted group",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the temperature, cycle, or detergent-amount decisions does not match the sorted laundry group, or the adult's confirmation step is skipped."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Temperature, cycle, and detergent amount are all chosen correctly for the sorted group and confirmed by the adult before the cycle starts."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains the reasoning behind each of the three settings in their own words, not just naming them."
+          }
+        ]
+      },
+      {
+        "dimension": "Load-size reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The load-size explanation is vague ('it would be bad') or does not connect to fill lines or detergent measuring."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The explanation correctly identifies a specific problem, such as poor rinsing, an unbalanced machine, or an ineffective wash, that would result from doubling the load."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner connects the load-size reasoning to their own detergent-measuring decision from this specific load."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner did not load, start, or adjust the machine without the adult confirming each step first.",
+      "The three settings named in the independent task match what the adult actually observed during loading, not a different account."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

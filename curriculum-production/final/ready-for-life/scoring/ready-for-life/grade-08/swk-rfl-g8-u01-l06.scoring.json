@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l06",
+  "lessonId": "ma-g8-ready-for-life-u01-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Evidence-based revision",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The system change is generic or unrelated to the biggest problem named from the trial and interruption."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific, named element of the system is changed and clearly addresses the identified problem."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The change addresses the problem, and the learner explains why this change specifically would have prevented or reduced it."
+          }
+        ]
+      },
+      {
+        "dimension": "Support-seeking reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No specific moment is identified, or the response claims no help was ever needed without examining the evidence."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific moment is named along with who could have been, or was, asked, and what asking early would change."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The moment and person are specific, and the learner names a concrete plan for asking earlier in a similar future situation."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The named person to ask is a plausible, real option in the learner's household or peer group, not a vague 'someone.'",
+      "The final commitment names a specific situation type, not a generic promise to 'communicate more.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

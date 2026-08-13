@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l03",
+  "lessonId": "ma-g11-ready-for-life-u06-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Naming without justification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Statements still include a justification or self-judgment clause explaining why the need exists." },
+          { "label": "Proficient", "descriptor": "Statements name the need plainly in one sentence with no justification or self-judgment attached." },
+          { "label": "Advanced", "descriptor": "Statements are plain and also specific enough that another person would know exactly what kind of help is being asked for." }
+        ]
+      },
+      {
+        "dimension": "Relevance to the learner's actual plan",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Named needs are generic and don't clearly connect to the learner's own transition plan." },
+          { "label": "Proficient", "descriptor": "At least two named needs clearly connect to a specific part of the learner's own plan." },
+          { "label": "Advanced", "descriptor": "Named needs cover more than one type of support (for example, logistical and emotional), showing a realistic, varied picture of what the transition will require." }
+        ]
+      },
+      {
+        "dimension": "Understanding the skill",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection doesn't distinguish naming from justifying, or restates the question without an answer." },
+          { "label": "Proficient", "descriptor": "Reflection clearly explains the difference between naming and justifying a need." },
+          { "label": "Advanced", "descriptor": "Reflection connects that difference to a real effect on how others might respond to the request." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No specific private health, financial, or family detail is required or given — general categories are enough.",
+      "Statements read as neutral requests, not apologies or confessions.",
+      "The learner engages with the actual practice example rather than skipping straight to their own list."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

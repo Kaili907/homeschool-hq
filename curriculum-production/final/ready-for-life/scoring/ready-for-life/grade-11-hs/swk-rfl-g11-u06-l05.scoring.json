@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l05",
+  "lessonId": "ma-g11-ready-for-life-u06-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Map completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than four plan parts have a role assigned, or entries are missing." },
+          { "label": "Proficient", "descriptor": "At least four plan parts each have a specific role assigned." },
+          { "label": "Advanced", "descriptor": "All listed plan parts have a role assigned, with no obvious gaps." }
+        ]
+      },
+      {
+        "dimension": "Fit between role and need",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Most or all plan parts are assigned the same generic role regardless of fit." },
+          { "label": "Proficient", "descriptor": "Roles assigned show real thought about which kind of role fits which kind of need." },
+          { "label": "Advanced", "descriptor": "Learner's explanation of fit references something specific about that role's actual position (for example, what a school counselor has access to that a peer doesn't)." }
+        ]
+      },
+      {
+        "dimension": "Appropriate use of general vs. specific",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Response is incomplete because the learner treats naming a specific real person as required rather than optional." },
+          { "label": "Proficient", "descriptor": "Response is complete at whichever level (role-only or named) the learner chose, with no needless private disclosure." },
+          { "label": "Advanced", "descriptor": "Learner makes a deliberate, explained choice about which entries to keep general and which to name, rather than defaulting to one approach throughout." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner is not penalized in any way for keeping entries at the role level instead of naming real people.",
+      "No real full names, contact information, or private household detail is required to complete this task.",
+      "The map covers more than one type of support (logistical, financial, emotional), not just one repeated category."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

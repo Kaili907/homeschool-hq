@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u05-l03",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Professional and Personal Communication",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: requests, declines, and boundaries"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft one request message asking an adult outside their household for something specific, and one polite-decline message turning down a request from a peer, each following a three-part template (state the situation, state the request or decline clearly, offer or ask about an alternative), so they can state a boundary respectfully without over-explaining or apologizing excessively.",
+  "scenario": "The learner works from two short scenario prompts on this task sheet, one where they need to ask a coach or teacher for something specific, and one where a friend has asked them for something they need to turn down, and drafts both messages using the three-part template, without sending either message to anyone.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["Both messages drafted in this lesson are practice only; neither is sent to a real recipient, and no real contact information is needed to complete this task sheet."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the three-part request/decline template on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the two scenarios below. Scenario 1 (request): You want to ask a coach or teacher if you can retake a quiz you did poorly on. Scenario 2 (decline): A friend has asked to copy your homework answers before class and you don't want to say yes.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "For each scenario, write down what makes it uncomfortable to bring up, and what you actually want the outcome to be." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft your request message for Scenario 1 using the three-part template: state the situation in one sentence, state exactly what you're asking for, then ask one specific follow-up question (such as a possible time).",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My message states the situation in one sentence without over-explaining or apologizing more than once." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My message states exactly what I'm asking for in a single clear sentence." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My message ends with one specific follow-up question, such as offering a time or asking what would work." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Draft your decline message for Scenario 2 using the three-part template: acknowledge the request, state your decline clearly in one sentence, then offer one honest alternative if one exists.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "checklist-item", "text": "My decline states 'no' or an equivalent clear refusal in one sentence, not buried in apologies." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "My decline does not blame a rule or a third party for the refusal — it states it as my own decision." },
+        { "ref": "t3-p3", "promptType": "short-response", "text": "What honest alternative, if any, did you offer, and why is offering it different from changing your answer to yes?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare how it felt to draft the request versus the decline.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Which message was harder to keep clear and boundaried without over-apologizing, and what specific sentence did you have to revise to fix that?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's decline message apologizes more than once or hedges with phrases like 'maybe' or 'I guess,' reteach by having them state the refusal alone as a single flat sentence first ('I'm not going to do that'), then add exactly one sentence of context before or after it, so the boundary itself stays unambiguous.",
+  "extension": "Have the learner draft a third message declining a request from an adult outside their household, such as a coach asking them to take on an extra commitment, using the same three-part template and noting what changes when the recipient is an adult rather than a friend.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}

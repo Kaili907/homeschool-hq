@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u04-l02",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Appointments, and Community Navigation",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: transportation costs"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners compare the total fictional cost of two transportation options, the Crosstown Circuit bus and a QuickHop ride-share estimate, for the same multi-stop trip, and decide which option costs less for that specific plan.",
+  "scenario": "In the fictional town of Elm Crossing, a Saturday volunteer shift at the Elm Crossing Food Pantry is followed by a stop at the library on the way home. Using the fictional Crosstown Circuit fare table and the fictional QuickHop ride-share estimate printed on this task sheet, the learner models the total cost of each option across all three legs of the trip: home to pantry, pantry to library, and library to home.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper",
+    "pencil",
+    "a calculator (optional)",
+    "the fictional Crosstown Circuit fare table and QuickHop estimate printed on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compare the two fictional fares for a single ride before looking at the whole trip.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "A Crosstown Circuit single ride costs $1.75 and a day pass costs $4.00. A QuickHop ride costs a flat $6.25 no matter the distance within Elm Crossing. If the volunteer only needed one ride today, which option costs less, and by how much?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Count how many separate ride legs the full trip actually requires before comparing totals.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I counted three separate ride legs: home to pantry, pantry to library, and library to home."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "What is the total Crosstown Circuit cost if the volunteer buys three single rides instead of a day pass?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Model and compare the full trip cost of each option.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Using the fictional fare numbers, calculate the total cost of all three ride legs (home to pantry, pantry to library, library to home) three different ways: three Crosstown Circuit single rides, one Crosstown Circuit day pass, and three separate QuickHop rides. Show each total, then state which single option costs the least for this specific three-leg trip and explain your reasoning in at least two sentences."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about how the comparison would change with a different number of ride legs.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Would the day pass still be the cheapest choice if the volunteer only needed two ride legs instead of three? Explain your reasoning using the fare numbers."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats the day pass as always cheaper regardless of ride count, walk through the break-even point together: divide the day pass price by the single-ride price to find how many rides make the day pass worth it, then apply that number to this trip.",
+  "extension": "Have the learner add a fourth fictional ride leg to the plan and recalculate all three totals to see whether the cheapest option changes.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  }
+}

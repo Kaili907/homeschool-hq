@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u05-l06",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Professional and Personal Communication",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: self-advocacy and disclosure choices"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read a short scenario in which they need something from an adult outside their household, identify which personal details are actually necessary to share to get that need met and which are unrelated or too private, then draft a self-advocacy statement that gets the specific need met without oversharing.",
+  "scenario": "The learner reads a scenario on this task sheet (needing extra time on an assignment because of a difficult week at home) and separates the details that would actually help make the case from details that are unrelated or too private, then drafts a short statement asking for what they need.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This is a reflection and drafting exercise; the statement is never delivered to a real recipient as part of this task, and no real private details about the learner's own household are required to complete it."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the disclosure scenario printed on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read this scenario: You've had a hard week at home and it's affected your schoolwork. You want to ask a teacher for a short extension on an assignment. Below is a list of details you could mention: (1) 'I've had some things going on at home this week.' (2) the specific private argument or event that happened. (3) 'I'm behind and want to make sure I turn in solid work.' (4) how many hours of sleep you got each specific night. (5) 'Could I have two extra days?'",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Sort the five listed details into 'necessary to make the request' and 'private or unnecessary to share,' and explain your reasoning for one detail in each group." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft a self-advocacy statement for the teacher using only the details you marked necessary, following this order: brief context, the specific need, and a specific ask.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My statement gives context in one general sentence without naming specific private details." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My statement names the specific need (more time) rather than a vague 'I'm struggling.'" },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My statement ends with one specific, answerable ask, such as a number of days." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Reread your statement and check it against what you marked as private in the warm-up.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Does your statement include any detail you marked as private or unnecessary in the warm-up?", "choices": ["No, it only uses the necessary details", "Yes, I need to revise it"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "If you found a private detail, name what you removed and what you replaced it with." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the balance between explaining enough and oversharing.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one way sharing too much private detail could actually work against you when asking an adult outside your household for something, even if the detail is true." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's statement still includes a private or unrelated detail, reteach by having them cover the context sentence and ask only 'does the next sentence change whether the listener grants the request?' — any detail that doesn't change the answer gets cut.",
+  "extension": "Have the learner draft a second self-advocacy statement for a different scenario, such as asking a coach for a modified role because of a real physical limitation, and compare which categories of detail (medical specifics versus general impact) stayed necessary versus private across both scenarios.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

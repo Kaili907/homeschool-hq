@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u02-l03",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Care, Laundry, and Maintenance",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: minor maintenance checks"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners build and use a checklist to inspect at least four real minor-maintenance points around the household, such as a smoke detector's test button, an air or vacuum filter's condition, a cabinet hinge, or a faucet, and report their findings to the household without attempting any repair.",
+  "scenario": "The learner chooses four or five real check points in the household that commonly need periodic attention, writes what a normal condition versus a needs-attention condition looks like for each one, physically checks each point, and reports the findings to the household so an adult can decide what happens next.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Checking whether a smoke detector's test button works, a filter looks clean, or a faucet drips is different from repairing any of them; any actual repair, part replacement, or fix beyond a simple check is for the adults in your household, not the learner."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner cannot safely or physically access certain areas of the household, the learner instead reviews a provided written description of five common minor-maintenance items, decides for each one whether the described condition is normal, needs attention, or needs a trusted adult right away, and drafts the report they would give the household based on those descriptions."
+  },
+  "materials": [
+    "paper or a notes app for the checklist",
+    "a flashlight, if needed to see a check point clearly",
+    "access to the household areas being checked"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pick four or five real check points in the household that commonly need periodic attention.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List the check points you picked and name one of them you have never actually looked at closely before."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each check point, write what a normal condition looks like and what a needs-attention condition looks like, so you know what you are checking for before you start.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote a normal-condition description and a needs-attention description for at least four check points."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "At least one of my check points involves testing something, like pressing a smoke detector's test button, rather than only looking at it."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Physically check each point on your list against the normal and needs-attention descriptions you wrote, record the actual condition you find for each one, and flag any point that needs a trusted adult's attention.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "For each check point, record whether it matched the normal description or the needs-attention description, and describe specifically what you observed."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "checklist-item",
+          "text": "I did not attempt to fix or repair anything myself, even for a point that needed attention."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Report your findings to the household.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe how you reported your findings to the household, what the household's response was, and name the one check point you think most needs a trusted adult's attention soon."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot describe what 'normal' looks like for a check point, reteach by having them examine one working example closely first, such as a detector that is known to work or a clean filter, and write the description from that direct comparison before checking the point in question.",
+  "extension": "Have the learner add two more check points to their list, look into what a trusted household resource, such as an appliance manual or manufacturer's guidance, says about how often each item should be checked, and note that schedule next to each item.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

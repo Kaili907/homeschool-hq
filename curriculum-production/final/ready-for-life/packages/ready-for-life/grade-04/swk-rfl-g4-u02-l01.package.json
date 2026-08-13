@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u02-l01",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry Care",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: sorting by color and fabric"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 2: Clothing and Laundry Care"
+  ],
+  "objective": "Learners sort a real basket of clean laundry into color groups (light, dark, bright or patterned) and separately by fabric type (sturdy versus delicate), then compare the two groupings using their single trickiest item to decide which rule matters more for preventing damage.",
+  "scenario": "A basket of clean, unsorted laundry from your household is ready to be sorted before its next wash. You sort the same pile two different ways, once by color and once by fabric type, so you can see how the two rules group the same items differently.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a basket or pile of clean, unsorted laundry",
+    "a flat surface to sort on",
+    "paper or a notes app to record your groupings"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting, look through the whole pile once without moving anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one item in the pile that you think will be tricky to sort, and guess which group or groups it might belong to."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort the pile into three color groups: light, dark, and bright or patterned. Then, without mixing those groups back together, sort the same pile again into two fabric groups: sturdy (like jeans, towels, sweatshirts) and delicate (like thin knits, lace, or stretch mesh).",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted the whole pile into three color groups before starting the fabric sort."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I sorted the same items into sturdy and delicate fabric groups."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I kept notes on which items ended up in different-seeming groups between the two sorts."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Pick the one item in the pile that felt hardest to place, and use it to compare your two sorting rules head to head.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "For your trickiest item, which sorting rule matters more for keeping that item from getting damaged or discoloring other clothes in a wash?",
+          "choices": [
+            "Color",
+            "Fabric type",
+            "Both equally"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Explain your choice: what could go wrong for this specific item if you ignored the rule you picked and only sorted by the other one?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back to how you would have sorted laundry in earlier grades, usually just by color.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific reason a fabric-type sort catches a risk that a color-only sort would miss, using the tricky item from your pile as your example."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts by both color and fabric at the same time in one pass and loses track of which item went where, reteach by having them complete one grouping fully, physically separated into piles on the floor or table, before starting the second sort, using three practice items only until the one-system-at-a-time habit is automatic.",
+  "extension": "Have the learner add a third sorting pass by wash-temperature safety (items that can only go in cool water versus items that can handle warm water) and identify any item that lands in a different combination across all three groupings, explaining what that overlap means for how they'd actually run that load.",
+  "scoringRef": "scoring/swk-rfl-g4-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

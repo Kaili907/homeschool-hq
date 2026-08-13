@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u06-l01",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: choosing a contribution"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+  ],
+  "objective": "Learners brainstorm at least three possible household contribution projects, apply a set of criteria (helps the whole household, needs nothing bought, matches a skill they already have) to each option, and select and record the one contribution they will plan, safety-check, carry out, check, and reflect on across the rest of this unit.",
+  "scenario": "This is day one of a six-day project where the learner chooses, plans, safety-checks, carries out, checks, and reflects on one real way to contribute to their household. Today they generate several options, such as organizing a shared space, creating a chore or routine chart, teaching a skill from earlier in the course to someone else in the household, helping with a non-heat food-prep step, or setting up a simple labeling or checklist system, then commit to one for the rest of the unit.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app",
+    "a mental or written list of shared spaces and routines in the household"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think about your household this week before listing any ideas.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one thing about a shared space or routine in your household that feels harder than it needs to be right now."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "List at least three different contribution ideas, choosing from categories like organizing a shared space, building a routine chart, teaching a skill you already know, helping with a non-heat food-prep step, or setting up a labeling or checklist system.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed at least three different contribution ideas, not one idea restated three ways."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Each idea I listed genuinely helps the whole household, not just me."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "None of my ideas require buying anything or assume a specific room or tool my household doesn't have."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare your three ideas against three criteria: does it help the whole household, can it be done without buying anything, and does it match a skill you already have from earlier lessons. Then choose the one contribution you will plan and carry out for the rest of this unit.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which contribution did you choose, and which of the three criteria made it beat your other ideas?"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one household member besides yourself this contribution will help, and describe specifically how it helps them."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think ahead to the work still coming in this project.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why you chose this contribution over your other ideas, and which part of planning, carrying it out, or checking the result you expect to be hardest."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's three ideas are really one idea restated three ways (for example 'clean my room,' 'tidy my room,' 'pick up my room'), reteach by handing them the five example categories from the lesson and asking them to name one different idea drawn from three different categories before choosing.",
+  "extension": "Have the learner ask one household member about a second real need in the household, add that as a fourth option, and re-run the three-criteria comparison to see whether it changes which contribution they choose.",
+  "scoringRef": "scoring/swk-rfl-g4-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

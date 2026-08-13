@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l02",
+  "lessonId": "ma-g4-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Checklist specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Items listed are vague or fewer than three specific items are named."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least three specific, concrete items or decisions are listed and correctly marked as night-before-able or not."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "List is specific and the learner correctly identifies the single hardest item to prepare ahead, with a reason."
+          }
+        ]
+      },
+      {
+        "dimension": "Follow-through and comparison",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Reflection does not clearly compare the checklist morning to a typical morning."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Reflection names at least one specific difference the checklist made."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Reflection names a specific difference and gives a reasoned decision about whether to keep using the checklist."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The chosen responsibility is real and recurring, not invented for the assignment.",
+      "The warm-up names a specific recent instance of being rushed, not a general statement."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

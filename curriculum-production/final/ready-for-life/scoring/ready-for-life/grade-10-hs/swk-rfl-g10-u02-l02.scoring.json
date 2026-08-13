@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l02",
+  "lessonId": "ma-g10-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Specificity to the posting",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The message could be sent to any opportunity with no reference to this specific posting." },
+          { "label": "Proficient", "descriptor": "The message names the specific role and at least one detail unique to this posting." },
+          { "label": "Advanced", "descriptor": "The message is clearly written for this posting alone, referencing specific wording or details from it." }
+        ]
+      },
+      {
+        "dimension": "Avoidance of generic filler",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The message relies on generic filler phrases ('hard worker,' 'team player') with no specific backing." },
+          { "label": "Proficient", "descriptor": "Most filler phrases are replaced with specific, genuine reasons." },
+          { "label": "Advanced", "descriptor": "No generic filler remains; every claim is backed by something specific." }
+        ]
+      },
+      {
+        "dimension": "Clear next step",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The message does not ask for any next step." },
+          { "label": "Proficient", "descriptor": "The message asks for a clear next step." },
+          { "label": "Advanced", "descriptor": "The message asks for a clear, specific next step that fits naturally with the rest of the message." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The message length is roughly four to six sentences, not a full-page letter or a single line.",
+      "The revision task names a real sentence that was cut or changed, not a hypothetical one.",
+      "The reflection can point to a specific sentence in the learner's own message as evidence of specificity."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

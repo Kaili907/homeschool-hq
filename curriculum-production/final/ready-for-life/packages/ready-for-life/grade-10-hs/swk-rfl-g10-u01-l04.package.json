@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u01-l04",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Career Exploration and Pathway Mapping",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: informational conversations with adults"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners plan and conduct one informational conversation with an adult about a job or career path the learner is curious about, asking prepared questions and recording what they learn, so they can gather first-hand information beyond what a website or video can tell them.",
+  "scenario": "The learner identifies one adult who could speak knowledgeably about a career or job the learner wants to know more about, this can be a relative, a family friend, a neighbor, a coach, a community member, or anyone a trusted adult helps them contact, then has a short conversation (in person, by phone, or in writing) using prepared questions.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult helps identify and set up contact with the person the learner will talk to; the learner does not contact an unfamiliar adult on their own.",
+    "The conversation happens with a trusted adult aware of when and how it is happening (in the room, on a shared call, or reviewing a written exchange).",
+    "The learner shares only their first name and general questions about the job; no address, school schedule, or other identifying details are given out.",
+    "If the person cannot be reached or the learner does not have someone to ask, use the alternative below instead of contacting an unfamiliar adult to fill the gap."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available for a real conversation, the learner instead reads a provided first-person account of someone describing their job (a short written profile) and writes out answers to the same five prepared questions as if interviewing that person, using only details stated in the profile."
+  },
+  "materials": [
+    "a notebook or paper for planning and notes",
+    "a way to reach the adult that a trusted adult has already approved (in person, phone, or writing)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reaching out, write five questions you genuinely want answered about this job or path.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "extended-response", "text": "List your five prepared questions. At least one should ask about something a website would not tell you, such as a hard day at that job or how they got started." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your trusted adult, confirm who you will ask and how you will reach them, then have the conversation.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My trusted adult helped me identify and confirm the person I would talk to." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I only shared my first name and my questions, not other personal or identifying details." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I asked at least three of my five prepared questions." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Right after the conversation, while it is fresh, write down what you learned.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize the most useful or surprising thing this person told you, in your own words." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on how this changes your thinking about the pathway.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "After this conversation, are you more curious, less curious, or about the same toward this pathway, and what specifically caused that?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's questions are too generic to produce useful answers (for example, only 'is it fun'), reteach by contrasting a generic question with a specific one drawn from the same topic, such as replacing 'is it fun' with 'what part of a typical day takes the most time you didn't expect,' then have the learner revise two of their five questions before the conversation happens.",
+  "extension": "Have the learner conduct a second informational conversation with someone on a different pathway toward a similar goal (for example, one person who went to trade school and one who learned on the job) and write a short comparison of what each said about entry requirements and day-to-day work.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}

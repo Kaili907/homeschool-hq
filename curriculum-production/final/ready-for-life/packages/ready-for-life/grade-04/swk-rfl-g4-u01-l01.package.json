@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u01-l01",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Home Care Routines That Last",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: why shared spaces need care"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last"
+  ],
+  "objective": "Learners identify one real shared space in their household, compare what happens to that space and the people who use it when it is cared for versus left unattended for a few days, and write an explanation of why a space used by more than one person needs different care than a space used by only one person.",
+  "scenario": "Every household has at least one space more than one person uses regularly, such as a kitchen table, a bathroom, or an entryway. The learner studies one of these shared spaces as it exists right now and reasons about how its condition affects everyone who shares it, not just how it looks.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app",
+    "one real shared space to observe in the learner's household"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Walk through your household and pick one space that at least two people use regularly.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the shared space you picked and list every person who regularly uses it."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Look closely at the shared space as it is right now and think about a specific recent time it was cluttered, dirty, or hard to use.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named a specific recent moment the shared space was hard to use, not just a general feeling."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I identified at least one person besides myself who was affected by that moment."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I noted what specifically made the space hard to use, such as clutter, dirt, a missing item, or a blocked path."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare your shared space to a space only you use, like a personal drawer or a backpack.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why a space used by more than one person needs different care than a space used by only one person. Use your specific shared space and name at least one real way its condition affects someone other than you when nobody takes responsibility for keeping it usable."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about one small action you could take to help care for this shared space.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one specific thing you could do this week to help keep the shared space usable for everyone, and predict how at least one other person who shares that space would notice the difference."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner describes the shared space only in terms of how messy it looks rather than who is affected, reteach by having them list every person who uses the space by name and match one specific problem in the space to one specific person it affects, before writing the explanation.",
+  "extension": "Have the learner repeat the comparison for a second shared space used by a different group of people, such as a shared bathroom instead of a kitchen table, and explain which of the two spaces has a bigger effect on others when it is neglected, and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

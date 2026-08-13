@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u04-l03",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Civic and Legal Adulthood",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: responsibilities that begin at majority"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners practice distinguishing claims that vary by place from claims that hold broadly, using a provided example list, so they build healthy skepticism about civic and legal claims \u2014 including the ones in this very course \u2014 instead of treating any single source as automatically complete.",
+  "scenario": "Given a provided generic list of responsibility-type examples that begin at the age of majority (such as 'may be able to sign certain contracts' or 'certain protections change'), the learner sorts each into 'verify locally, this varies by place' versus 'broadly true in most places,' explicitly modeling skepticism toward any single source, including this lesson's own materials.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson does not assert which specific responsibilities apply in the learner's actual location \u2014 the sorting skill is the point, not memorizing a fixed answer key."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided list of responsibility-type examples"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting, name one 'fact' you've heard about turning 18 that you're not actually sure is true everywhere.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Have you ever heard a claim about what changes at 18 that you suspect might not be true everywhere? What was it?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort the provided list into 'verify locally' versus 'broadly true in most places.'",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted every item on the provided list into one of the two categories."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I did not leave any item unsorted or mark any item as 'definitely true everywhere' without qualification."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain your reasoning for the two hardest calls.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Pick the two sorting decisions you were least sure about, and explain what made them hard to categorize confidently."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on skepticism toward this very lesson.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "This lesson itself makes claims about what generally happens at majority. What would you want to check before fully trusting even this material?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner sorts every item into the same single category (suggesting they aren't actually discriminating between them), reteach by walking through one clearly place-varying example and one clearly broad example side by side, then have them re-sort with that contrast in mind.",
+  "extension": "Have the learner write one additional responsibility-type example of their own and sort it, explaining their reasoning.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}

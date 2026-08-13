@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u05-l05",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Work, Communication, and Career Readiness",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: workplace boundaries"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners read three short fictional workplace scenarios, each testing a boundary in a different way, and choose and justify a specific response for each one rather than falling back on a generic answer like 'tell an adult.'",
+  "scenario": "Three scenario cards describe a fictional grocery bagger asked to run a register alone without training, a fictional lawn-crew member asked by a coworker to cover a shift without telling the supervisor, and a fictional library shelver asked by a patron for their personal phone number. For each card, the learner picks one response option and writes a short justification tied to the specific boundary being tested.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Maple Ridge Market, GreenPath Lawn Crew, and Elm Street Public Library are fictional; no scenario describes or requires a real employer or real supervisor."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "the three scenario cards on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reading the scenario cards, think about what the phrase 'workplace boundary' means.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, explain what a workplace boundary is, and give one example of a boundary a first-time worker might have."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read the grocery-register scenario card: a fictional bagger at Maple Ridge Market is asked to run the register alone even though they have never been trained on it. Choose the best response and explain your reasoning.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "What should the fictional bagger do first?",
+          "choices": [
+            "Run the register alone since the supervisor seems busy",
+            "Say they haven't been trained on the register yet and ask for a trained teammate or the supervisor",
+            "Refuse to help with anything at all until they've been formally trained on every task",
+            "Quietly try the register and hope it goes fine without telling anyone"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "Explain why the option you chose respects both the bagger's actual training and the store's need to have the register covered safely."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read the lawn-crew and library scenario cards. For each one, choose a response option and write a justification that names the specific boundary at stake, whether it's honesty with a supervisor, personal safety, or personal information, and explain why your chosen response protects that boundary better than the other options would.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "A coworker asks the fictional GreenPath Lawn Crew member to clock them in and cover their shift without telling the supervisor. What should the learner do?",
+          "choices": [
+            "Cover the shift and clock the coworker in as asked, since it's just this once",
+            "Tell the coworker no, and let the supervisor know about the request",
+            "Ignore the request and say nothing to either the coworker or the supervisor",
+            "Cover the shift but only tell the supervisor about it afterward, once it's already done"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Explain why your chosen lawn-crew response protects honesty with the supervisor better than the other three options would."
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-choice",
+          "text": "A patron asks the fictional Elm Street Public Library teen shelver for their personal cell phone number. What should the learner do?",
+          "choices": [
+            "Give the patron their personal number since the patron was being friendly",
+            "Say personal contact information isn't something they share, and offer to have the patron ask a librarian for library contact information instead",
+            "Ignore the patron completely and walk away without responding at all",
+            "Give a fake number just to end the conversation quickly"
+          ]
+        },
+        {
+          "ref": "t3-p4",
+          "promptType": "extended-response",
+          "text": "Explain why your chosen library response protects the shelver's personal safety and privacy better than the other three options would."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare the three scenarios now that you've decided on a response for each.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which of the three scenarios was hardest to decide, and what specifically made choosing a response harder there than in the other two?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner picks a response but the justification only restates the choice without naming the actual boundary at risk (training, honesty, or privacy), reteach by naming the boundary out loud together for one scenario first, then have the learner rewrite that justification before finishing the rest.",
+  "extension": "Have the learner write a fourth original workplace-boundary scenario of their own, set at a different fictional business, along with two response options and an explanation of which one is better and why.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

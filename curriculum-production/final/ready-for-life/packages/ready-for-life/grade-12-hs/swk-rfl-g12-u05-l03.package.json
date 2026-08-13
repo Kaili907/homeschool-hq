@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u05-l03",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Support Networks and Contingency Planning",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: thresholds: when to escalate"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners sort provided fictional situations into wait-and-monitor, get-help-soon, and get-help-now tiers, so they build the judgment to recognize escalation thresholds quickly rather than freezing when a real decision is needed.",
+  "scenario": "Given a provided list of fictional situation examples spanning a range of urgency, the learner sorts each into one of three escalation tiers and explains the deciding factor for the two trickiest calls.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All scenarios are provided and fictional; sorting them requires no disclosure of any real personal situation.",
+    "Anything involving immediate danger to health or safety always sorts into 'get help now,' with no exception."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided list of fictional situation examples"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting, name what tips a situation from 'monitor' into 'act now' for you personally.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, what's the difference between a situation you'd just keep an eye on and one where you'd act immediately?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort all the provided scenarios into the three escalation tiers.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted every provided scenario into one of the three tiers."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Every scenario involving immediate danger to health or safety is in the 'get help now' tier."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain the deciding factor for your two trickiest sorting calls.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Pick the two scenarios that were hardest to sort, and explain what specifically made the decision hard and how you resolved it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on acting under uncertainty.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "If you genuinely couldn't tell which tier a real situation belonged in, which tier would you default to, and why is that the safer default?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If any immediate-danger scenario is sorted anywhere other than 'get help now,' this must be corrected before the lesson is considered complete \u2014 reteach the non-negotiable immediate-danger rule explicitly and have the learner re-sort those items only.",
+  "extension": "Have the learner write one additional scenario of their own for each of the three tiers, explaining why each belongs where they placed it.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}

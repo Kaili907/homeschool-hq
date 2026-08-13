@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u03-l04",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Professional Communication",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: reporting a problem or a mistake early"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners plan and deliver, out loud to a trusted adult playing a supervisor, a report of a fictional workplace mistake, stating what happened, the impact, and a proposed fix, before the adult gives specific feedback, so they can practice reporting problems early rather than hiding or minimizing them.",
+  "scenario": "A trusted adult plays a supervisor. Using one of two provided fictional mistake scenarios, the learner plans then delivers a spoken report covering what happened, the impact, and a proposed next step, and the adult gives brief, specific feedback on the delivery.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The mistake scenario is entirely fictional; no real error, workplace, or person is discussed.",
+    "No audio or video recording is made; the adult gives feedback live and the learner writes notes afterward.",
+    "The adult's role is supportive practice, not a real evaluation of the learner as a person; feedback should stay about the delivery, not the learner's character."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available to play supervisor at this time, the learner instead writes out the full spoken report as a script, then reads it aloud once to themselves and self-checks it against the same three required parts (what happened, the impact, and a proposed fix) a live listener would check for."
+  },
+  "materials": ["the two provided fictional mistake scenarios", "paper or notes app for planning and post-conversation notes"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Choose one of the two provided fictional mistake scenarios and plan your report before speaking it out loud.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "extended-response", "text": "Plan your report: what happened, the impact, and your proposed fix, in a few bullet points." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult playing supervisor, deliver your report out loud without reading it word for word.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I stated what happened clearly, without minimizing or over-explaining." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I stated the impact and a proposed fix, not just the problem." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My adult gave specific feedback on my delivery." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Right after, write down the feedback and one change you'd make next time.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize the feedback you received and one specific thing you'd do differently next time." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on reporting mistakes early.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Why does reporting a mistake early and directly, rather than waiting or hiding it, usually work out better, even though it feels harder in the moment?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's report spends most of the time on excuses or apology rather than the three required parts, reteach using the pattern 'here's what happened, here's the impact, here's what I'm doing about it' modeled once on the unused second scenario, then have the learner redeliver their original report using that pattern.",
+  "extension": "Have the learner deliver the report a second time for the other provided scenario, this time proactively suggesting two possible fixes instead of one and explaining the trade-off between them.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

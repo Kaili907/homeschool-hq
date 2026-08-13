@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l01",
+  "lessonId": "ma-g4-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Sequencing logic",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are numbered but the order ignores the food-and-trash rule, or the numbering skips or repeats a number."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All eight steps are numbered once each in an order consistent with the food-and-trash rule."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner's order also avoids doing a step twice (like wiping a surface before it is cleared)."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about consequences",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The written defense of a step placement is vague ('it just makes sense') rather than describing a specific consequence."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both defended placements name a specific, plausible problem (spills, smell, pests, clutter) that would result from doing the step out of order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection accurately compares the learner's logical order to their household's real habits with a specific, reasonable suggested change."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The first-placed step is something that has to happen before food or trash sits out longer than necessary.",
+      "The reflection response names an actual observed household pattern rather than a guess."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

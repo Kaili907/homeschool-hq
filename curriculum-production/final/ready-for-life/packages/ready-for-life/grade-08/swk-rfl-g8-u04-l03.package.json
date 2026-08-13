@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u04-l03",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Appointments, and Community Navigation",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: appointment preparation"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners build a preparation checklist and question list for a fictional dentist appointment in two rounds, first with modeled sentence starters and then with that support removed, covering what to bring and what to ask.",
+  "scenario": "A fictional character has a routine cleaning appointment at Willow Creek Dental next week. In Round 1, the learner completes a preparation checklist and a question list using sentence starters provided on this task sheet. In Round 2, the learner repeats both kinds of preparation for a second fictional appointment, a follow-up X-ray visit at the same office, this time without the sentence starters.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper",
+    "pencil",
+    "the two fictional appointment scenarios printed on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think broadly about appointment preparation before building a specific checklist.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name two things almost any medical or dental appointment might require a visitor to bring or know ahead of time, without listing anything specific to Willow Creek Dental yet."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the Round 1 checklist for the fictional routine cleaning appointment using the sentence starters below.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I completed the sentence starter 'I will bring my ___ card so the front desk can check me in.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I completed the sentence starter 'One question I want to ask the dentist is ___.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "short-response",
+          "text": "Using the sentence starter 'I should arrive ___ minutes early because ___,' explain how early you would plan to arrive for this fictional appointment and why."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Repeat the same two kinds of preparation for the second fictional appointment, the follow-up X-ray visit, this time without sentence starters.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For the fictional follow-up X-ray appointment at Willow Creek Dental, write your own preparation checklist from scratch: list at least three things to bring or confirm ahead of time, then write at least two original questions you would ask the dental staff about the X-ray visit, without reusing the sentence starters from Round 1."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare how Round 1 and Round 2 felt to complete.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which round felt more natural to complete, Round 1 with sentence starters or Round 2 without them, and what does that tell you about which parts of appointment preparation you already do automatically?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's Round 2 checklist stays generic ('bring stuff'), reteach by returning to the Round 1 sentence starters together and having the learner verbally restate each one in their own words before writing the Round 2 list independently.",
+  "extension": "Have the learner create a third preparation checklist for a fictional eye exam appointment, noting which items stay the same across all three appointment types and which are specific to each.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}

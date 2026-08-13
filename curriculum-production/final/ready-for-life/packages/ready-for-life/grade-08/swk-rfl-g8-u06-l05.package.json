@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u06-l05",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Independent-Living Capstone",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: communication and documents"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "As a mastery check, learners design an ongoing document-organization system for their fictional persona's entire independent-living setup - naming document categories, deciding where each category physically or digitally 'lives,' and building in a recurring monthly review habit - rather than organizing a single event's paperwork into one folder.",
+  "scenario": "Unlike sorting the paperwork for one appointment or one trip into a single folder, this task asks the learner to design a standing system the persona would keep running for as long as they live independently: a small set of ongoing document categories (such as housing, income and budget, health, and identification), a specific place each category lives (a drawer, a labeled folder, a digital folder), and a recurring habit, on a specific day each month, for reviewing and updating the whole system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "a blank document-system planning template provided on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before designing the system, distinguish it from a single-event folder.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, explain the difference between organizing paperwork for one single event (like one doctor visit) and building an ongoing system the persona keeps running every month."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Name the ongoing document categories the system will track and where each one lives.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named at least four ongoing document categories relevant to independent living (for example, housing, income and budget, health, identification)."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I assigned a specific storage location to every category, not a vague 'somewhere safe.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Design the recurring monthly review habit that keeps the whole system from going stale.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Pick a specific day each month for the persona's document review (for example, the first Sunday), and write a short checklist of exactly what the persona does during that review - which categories get checked, what happens to anything outdated or no longer needed, and how a new document gets filed into the correct category the same week it arrives rather than piling up."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Evaluate whether the system would actually hold up over a full year.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which document category is most likely to be forgotten during a busy month, and what about your system's design would catch that before it becomes a problem?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's system is really just one big 'important papers' pile with no categories or review habit, reteach by having them sort five sample document types (a lease, a pay stub, a doctor's note, an ID, a receipt) into named categories together, then build the monthly review habit around those same categories.",
+  "extension": "Have the learner design what happens to the system when one category outgrows its storage location (for example, income records piling up after a year), adding a specific rule for when and how the persona archives or discards old documents.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

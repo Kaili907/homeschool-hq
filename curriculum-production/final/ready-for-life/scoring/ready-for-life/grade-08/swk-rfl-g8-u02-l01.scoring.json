@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l01",
+  "lessonId": "ma-g8-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Audit thoroughness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Lists fewer than five cleaning or laundry tasks, or leaves frequency and who-did-it blank for most items."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Lists at least eight distinct tasks with frequency and who-did-it noted for each."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Lists eight or more tasks with frequency and who-did-it noted, and the tasks reflect genuine variety across daily, weekly, and occasional chores."
+          }
+        ]
+      },
+      {
+        "dimension": "Honest self-assessment",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The explanation of consistent versus inconsistent tasks is vague or generic ('I'm just lazy') without a specific reason."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names a specific, plausible reason (habit, time, skill, someone else usually does it) for each of the six identified tasks."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names specific reasons and identifies a pattern connecting several of them, such as a shared underlying cause."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The list reflects the learner's actual household, not a generic or idealized routine.",
+      "The six named tasks in the independent response match tasks that actually appear on the two-column list."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

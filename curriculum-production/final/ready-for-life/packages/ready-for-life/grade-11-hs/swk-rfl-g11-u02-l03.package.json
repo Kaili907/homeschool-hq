@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u02-l03",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Applications, Deadlines, and Documentation",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: writing a personal statement in the learner's own voice"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft a short personal statement responding to an open prompt about a challenge and what was learned from it, choosing either to write about themselves or to write as a provided fictional narrator, so every learner practices the genuine craft of the form without anyone being required to disclose real personal history to complete or be scored on the task.",
+  "scenario": "The learner responds to the open prompt 'Describe a time you faced a challenge and what you learned from handling it' by either drawing on their own real experience or by writing as the provided fictional narrator, Sam, who is preparing a personal statement for a program Sam is applying to.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The learner may write about a real experience only if they choose to, and only details they are comfortable sharing; using the provided fictional narrator, Sam, instead is a fully equal option and is never treated as a lesser response.",
+    "No one but the learner (and anyone the learner chooses to share it with) needs to read the finished statement; scoring looks only at craft, not at the truth or quality of the underlying life event."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or notes app", "the provided fictional narrator prompt (Sam) as an optional alternative"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting, decide whether you'll write about yourself or as the fictional narrator Sam, and jot the challenge you'll write about either way.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-choice", "text": "Which option are you choosing for this personal statement?", "choices": ["Writing about my own real experience", "Writing as the provided fictional narrator, Sam"] },
+        { "ref": "t1-p2", "promptType": "short-response", "text": "In one or two sentences, what challenge will the statement be about?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft an opening paragraph that pulls the reader into a specific moment, rather than starting with a general statement.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write an opening paragraph (3-5 sentences) that puts the reader inside one specific moment of the challenge, rather than summarizing the whole situation in general terms." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My opening paragraph starts with a specific moment or detail, not a general statement like 'Throughout my life I have faced many challenges.'" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Finish the statement by explaining what was learned and how it changed later choices or actions.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write the rest of the statement (roughly 200-350 words total including your opening), explaining specifically what was learned from the challenge and one concrete way it changed a later choice or action." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the choices you made as a writer while drafting this statement.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What is one sentence in your draft you're proudest of, and what makes it work better than a more generic version would have?" }
+      ]
+    }
+  ],
+  "remediation": "If the opening paragraph starts with a general statement instead of a specific moment (a common sign the learner is summarizing rather than showing a scene), reteach by having the learner circle the single most vivid detail anywhere in their full draft and rewrite the opening paragraph to start from that detail instead.",
+  "extension": "Have the learner write a second, contrasting opening paragraph for the same statement that starts with dialogue instead of action or description, then compare which version is more effective and explain why in two or three sentences.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

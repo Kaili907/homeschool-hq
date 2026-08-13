@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u03-l02",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Professional Communication",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: tone, register, and audience"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners write the same fictional message to three different audiences (a close friend, a classmate they don't know well, and a supervisor) and name the specific wording choices that changed for each, so they can recognize register as a deliberate choice rather than a fixed personal style.",
+  "scenario": "The learner takes one underlying message (asking to switch a shared task with someone) and writes three versions of it, one for a close friend, one for a classmate they don't know well, and one for a supervisor, then names what changed in each.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All three recipients are fictional or generic roles for this exercise; no real person's name or actual message needs to be used."
+  ],
+  "simulationAlternative": null,
+  "materials": ["a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Write the message as you would genuinely text a close friend.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write the friend version of the message, in your natural texting style." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Write the same message for a classmate you don't know well, and again for a supervisor.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write the classmate version." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Write the supervisor version." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "All three versions ask for the same underlying thing, just worded differently." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Name the specific wording choices that changed across the three versions.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Name at least three specific wording or structural choices that changed from the friend version to the supervisor version, and explain why each change fit that audience." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on register as a choice.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which version was hardest to write, and what made it harder than the others?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's three versions are nearly identical with only a greeting swapped, reteach by pointing to one sentence in the friend version and asking 'what specific word or detail here wouldn't work for a supervisor, and why,' then have them revise the supervisor version using that reasoning.",
+  "extension": "Have the learner write a fourth version aimed at a much younger sibling-aged reader, and explain what changes at that audience level that didn't change between the other three.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}
