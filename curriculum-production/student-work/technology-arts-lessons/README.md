@@ -99,6 +99,16 @@ written/no-audio alternative that scores identically. Any material the student
 did not create must be public domain, openly licensed, or a short cited
 excerpt.
 
+The 270 source-dependent Arts/Music lessons also contain the complete resource
+the learner is told to use in `sourceReference`, which the existing browser
+projection renders as **Source or reading**. The generated set contains 108
+Academy-original models, 108 Academy-created guided scaffolds, and 54
+Academy-original reference works. Each is CC BY 4.0, embeds no third-party
+work, has no external dependency, and includes a pencil/paper or equal-credit
+silent notation route. See `arts-music-content-repair-evidence.json` and verify
+all 1,296 Arts/Music production artifacts with
+`sha256sum -c arts-music-checksums.sha256` from this directory.
+
 **Both.** Every lesson states that the graded submission must be the student's
 own authorship, and that an adult or AI tool may explain, demonstrate, or give
 feedback but must not produce any scored part of the work.
@@ -108,6 +118,9 @@ feedback but must not produce any scored part of the work.
 ```bash
 node generate.mjs
 ```
+
+Generation also refreshes `arts-music-content-repair-evidence.json` and
+`arts-music-checksums.sha256`.
 
 ```bash
 node --experimental-strip-types tooling/run-ts.mjs run-gate.ts

@@ -81,8 +81,9 @@
   ],
   "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
   "source_integrity": {
-    "requires_review": false,
-    "status": "NOT_APPLICABLE"
+    "requires_review": true,
+    "status": "VERIFIED",
+    "note": "The complete required learner resource is attached in the task package as ma-resource:ma-g11-arts-and-music-u06-l03. It is Manuel Academy original, CC BY 4.0, contains no third-party content, and requires no external source, paid tool, specialized material, instrument, recording, or public presentation."
   },
   "safety_and_privacy": {
     "requires_review": true,

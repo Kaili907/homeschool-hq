@@ -10,7 +10,9 @@ export const ROOT = resolve(HERE, '../..')
 const OUTPUT_DIR = resolve(ROOT, 'docs/learner-audits/arts-music')
 const ADMITTED = resolve(ROOT, 'curriculum-release-admitted/family-pilot-r1')
 const BASE_SHA = 'c81ddb6e04bc1c3629212327d47817c1b5677477'
-const CLASSIFICATION = 'ARTS_MUSIC_LEARNER_AUDIT_COMPLETE'
+const AUDIT_CLASSIFICATION = 'ARTS_MUSIC_LEARNER_AUDIT_COMPLETE'
+const READY_CLASSIFICATION = 'ARTS_MUSIC_CONTENT_READY_FOR_CONVERGENCE'
+const BLOCKED_BEFORE = 270
 const EXPECTED_LESSONS = 648
 const EXPECTED_GRADES = [3, 4, 5, 7, 8, 9, 10, 11, 12]
 
@@ -167,6 +169,9 @@ export function compareProjection(pkg, material) {
   for (const key of ['task_brief', 'primary_task', 'deliverable']) {
     if (body(key) !== pkg[key].trim()) losses.push({ field: key, reason: 'body-not-preserved' })
   }
+  if (isText(pkg.sourceReference) && section(material, 'Source or reading')?.body !== pkg.sourceReference.trim()) {
+    losses.push({ field: 'sourceReference', reason: 'attached-resource-not-preserved' })
+  }
   for (const key of [
     'materials',
     'learning_objectives',
@@ -200,20 +205,18 @@ function packagePath(ref) {
 }
 
 function sourceArtifact(pkg) {
-  const candidates = [
-    pkg.sourceReference,
-    pkg.reference,
-    pkg.references,
-    pkg.example,
-    pkg.examples,
-    pkg.model_work,
-    pkg.model_works,
-    pkg.supplied_material,
-    pkg.supplied_materials,
-    pkg.source_excerpt,
-  ].filter((value) => value !== undefined && value !== null)
-  return candidates.some((value) => isText(value, 20) || textArray(value, 1, 20) ||
-    (typeof value === 'object' && isText(JSON.stringify(value), 20)))
+  const resource = pkg.learner_resource
+  return isText(pkg.sourceReference, 300) &&
+    /ATTACHED MANUEL ACADEMY LEARNER RESOURCE/.test(pkg.sourceReference) &&
+    /Manuel Academy original; licensed CC BY 4\.0/.test(pkg.sourceReference) &&
+    resource?.availability === 'ATTACHED_IN_PACKAGE' &&
+    resource?.academy_original === true &&
+    resource?.license === 'CC-BY-4.0' &&
+    resource?.third_party_content === false &&
+    resource?.household_accessible === true &&
+    resource?.silent_text_route_equal_credit === true &&
+    ['external_dependencies', 'required_paid_tools', 'required_specialized_materials']
+      .every((field) => Array.isArray(resource?.[field]) && resource[field].length === 0)
 }
 
 function mandatoryToolWithoutAlternative(pkg) {
@@ -418,6 +421,7 @@ function verifyPopulation(artsBindings, runtimeRows, browserCatalog) {
 
 function reportMarkdown(results) {
   const c = results.flagCounts
+  const classification = results.gradeResults.classification
   const gradeRows = results.gradeResults.grades.map((row) =>
     `| ${row.grade} | ${row.lessonsAudited} | ${row.flagCounts.MISSING_MATERIALS} | ${row.flagCounts.EMPTY_RUBRIC} | ${row.flagCounts.PROJECTION_LOSS} | ${row.safeToBeginMatrix ? 'YES' : 'NO'} |`,
   ).join('\n')
@@ -426,7 +430,7 @@ function reportMarkdown(results) {
   ).join('\n')
   return `# Arts / Music Learner Completeness Audit R1
 
-Classification: **${CLASSIFICATION}**
+Classification: **${classification}**
 
 Base: \`${BASE_SHA}\`
 
@@ -436,9 +440,9 @@ Scope: all final admitted Arts/Music learner lessons and their final browser pro
 
 The exact admitted population re-derives to **${results.lessonsAudited} lessons**: ${results.courses.length} courses across grades ${EXPECTED_GRADES.join(', ')}, with 72 lessons per course. Every lesson binding, task package, scoring guide, runtime row, and browser-catalog row was resolved and audited.
 
-The corpus is **not safe to begin the learner matrix**. ${c.MISSING_MATERIALS} lessons require a model work, reference/scaffold, or external work to inspect but supply no artifact, excerpt, locator, or self-contained example. This is a learner-content failure even though the scoring guides mark copyright/source-integrity policy as verified; that status does not make the needed source available.
+The baseline at \`${BASE_SHA}\` had **${BLOCKED_BEFORE} learner-content blockers**. The repaired corpus has **${c.MISSING_MATERIALS}**. All ${results.materialsResults.summary.referenceRequired} source-dependent lessons now carry an offline, learner-visible Academy-created resource in the existing \`Source or reading\` browser section: ${results.resourceCounts.models} models, ${results.resourceCounts.scaffolds} scaffolds, and ${results.resourceCounts.references} reference works.
 
-All other requested flag counts are zero. In particular, the tasks remain actionable project/performance/critique work; rubrics and critique criteria are populated; private and written/no-audio routes are equal-credit; no instrument, public-post, or media-proof requirement was found; and the final browser projection preserves task bodies, materials, task steps where authored, success criteria, and critique criteria.
+All requested flag counts are zero. The tasks remain actionable create/perform/respond/connect work; rubrics and success criteria are unchanged; private and written/no-audio routes are equal-credit; pencil/paper and silent notation routes are present; no instrument, public-post, or media-proof requirement was found; and the final browser projection preserves task bodies, resources, materials, task steps where authored, success criteria, and critique criteria.
 
 ## Flag counts
 
@@ -457,10 +461,14 @@ ${gradeRows}
 - Materials lists present: ${results.materialsResults.summary.materialsListsPresent}/${results.lessonsAudited}.
 - Reference-dependent lessons: ${results.materialsResults.summary.referenceRequired}.
 - Reference-dependent lessons with a supplied artifact/excerpt/locator/example: ${results.materialsResults.summary.referenceSupplied}.
+- Academy-original models supplied: ${results.resourceCounts.models}.
+- Academy-created scaffolds supplied: ${results.resourceCounts.scaffolds}.
+- Academy-original reference works supplied: ${results.resourceCounts.references}.
+- External dependencies after repair: ${results.resourceCounts.externalDependencies}.
 - Unavailable mandatory instruments or tools without an alternative: ${c.UNAVAILABLE_INSTRUMENT_OR_TOOL}.
 - Missing equal-credit private, written/no-audio, or accessible tool alternatives: ${c.MISSING_ALTERNATIVE}.
 
-The ${results.materialsResults.summary.referenceRequired} affected lessons are exactly the five source-dependent work modes in each of 54 units: MODEL_A, GUIDED_A, MODEL_B, GUIDED_B, and INVESTIGATE. Generic phrases such as “unit-specific source,” “reference,” “family-approved works,” or “supplied model” were not counted as supplied content.
+The ${results.materialsResults.summary.referenceRequired} affected lessons are exactly the five source-dependent work modes in each of 54 units: MODEL_A, GUIDED_A, MODEL_B, GUIDED_B, and INVESTIGATE. Each attached resource declares Academy-original authorship, CC BY 4.0 learner-use rights, zero third-party content, zero external dependencies, and zero required paid tools or specialized materials. Generic phrases such as “unit-specific source” still do not count as supplied content.
 
 ## Browser projection result
 
@@ -479,7 +487,7 @@ ${controls}
 - Browser authority: \`scripts/build-final-family-pilot-data.mjs\` and the final learner material renderer.
 - Secondary lessons use connected procedural prose rather than a \`task_steps\` array; they pass only when that prose contains a multi-action sequence. Elementary lessons require and preserve chunked \`task_steps\`.
 - Remaining standards-mapping review states are not learner-content failures unless they make a task unusable; none was counted here.
-- The audit is complete despite blocking findings, so its classification is \`${CLASSIFICATION}\`, not \`AUDIT_INCONCLUSIVE\`.
+- The original audit classification was \`${AUDIT_CLASSIFICATION}\`; this regenerated post-repair evidence is \`${classification}\` because every structural flag is zero.
 `
 }
 
@@ -554,6 +562,15 @@ export function runAudit() {
       materialsListPresent: classified.checks.materialsListPresent,
       referenceRequired: classified.checks.referenceRequired,
       referenceSupplied: classified.checks.referenceSupplied,
+      resourceId: pkg.learner_resource?.resource_id ?? null,
+      resourceKind: pkg.learner_resource?.kind ?? null,
+      resourceAvailability: pkg.learner_resource?.availability ?? null,
+      resourceLicense: pkg.learner_resource?.license ?? null,
+      academyOriginal: pkg.learner_resource?.academy_original ?? null,
+      thirdPartyContent: pkg.learner_resource?.third_party_content ?? null,
+      externalDependencies: pkg.learner_resource?.external_dependencies ?? null,
+      householdAccessible: pkg.learner_resource?.household_accessible ?? null,
+      silentTextRouteEqualCredit: pkg.learner_resource?.silent_text_route_equal_credit ?? null,
       unavailableInstrumentOrTool: !classified.checks.noUnavailableInstrumentOrTool,
       equalCreditAlternativePresent: classified.checks.equalCreditPrivateAlternative,
       flags: classified.flags.filter((flag) => ['MISSING_MATERIALS', 'UNAVAILABLE_INSTRUMENT_OR_TOOL', 'MISSING_ALTERNATIVE'].includes(flag)),
@@ -563,6 +580,12 @@ export function runAudit() {
   findings.sort((a, b) => a.grade - b.grade || a.courseDay - b.courseDay || a.lessonId.localeCompare(b.lessonId))
   materialRows.sort((a, b) => a.grade - b.grade || a.lessonId.localeCompare(b.lessonId))
   const flagCounts = countFlags(findings)
+  const resourceCounts = {
+    models: materialRows.filter((row) => row.resourceKind === 'ACADEMY_ORIGINAL_MODEL').length,
+    scaffolds: materialRows.filter((row) => row.resourceKind === 'ACADEMY_CREATED_SCAFFOLD').length,
+    references: materialRows.filter((row) => row.resourceKind === 'ACADEMY_ORIGINAL_REFERENCE_WORK').length,
+    externalDependencies: materialRows.reduce((sum, row) => sum + (row.externalDependencies?.length ?? 0), 0),
+  }
   const sampleFinding = findings.find((row) => row.grade === 3 && row.workMode === 'PROBE')
   const sampleBinding = artsBindings.find((binding) => binding.lessonRef === sampleFinding?.lessonId)
   if (!sampleBinding) throw new Error('No elementary Arts/Music sample exists for negative controls')
@@ -587,6 +610,8 @@ export function runAudit() {
     auditId: 'ARTS_MUSIC_LEARNER_AUDIT_R1',
     baseSha: BASE_SHA,
     summary: {
+      blockedBefore: BLOCKED_BEFORE,
+      blockedAfter: flagCounts.MISSING_MATERIALS,
       lessonsAudited: findings.length,
       materialsListsPresent: materialRows.filter((row) => row.materialsListPresent).length,
       referenceRequired: materialRows.filter((row) => row.referenceRequired).length,
@@ -594,6 +619,13 @@ export function runAudit() {
       missingMaterials: flagCounts.MISSING_MATERIALS,
       unavailableInstrumentOrTool: flagCounts.UNAVAILABLE_INSTRUMENT_OR_TOOL,
       missingAlternatives: flagCounts.MISSING_ALTERNATIVE,
+      ...resourceCounts,
+    },
+    copyrightProof: {
+      academyOriginal: materialRows.filter((row) => row.academyOriginal === true).length,
+      ccBy40: materialRows.filter((row) => row.resourceLicense === 'CC-BY-4.0').length,
+      thirdPartyContentLessons: materialRows.filter((row) => row.thirdPartyContent === true).length,
+      externalDependencies: resourceCounts.externalDependencies,
     },
     referenceRule: 'MODEL_A, GUIDED_A, MODEL_B, GUIDED_B, and INVESTIGATE require an attached artifact, excerpt, locator, or self-contained example. A generic category or the word supplied does not prove availability.',
     lessons: materialRows,
@@ -615,6 +647,7 @@ export function runAudit() {
       'critique_criteria',
       'accessibility_options',
       'task_accessibility_provisions',
+      'sourceReference when attached',
     ],
     summary: {
       lessonsProjected: findings.length,
@@ -627,8 +660,13 @@ export function runAudit() {
   }
   const gradeResults = {
     auditId: 'ARTS_MUSIC_LEARNER_AUDIT_R1',
-    classification: CLASSIFICATION,
+    classification: Object.values(flagCounts).every((count) => count === 0)
+      ? READY_CLASSIFICATION
+      : AUDIT_CLASSIFICATION,
     baseSha: BASE_SHA,
+    blockedBefore: BLOCKED_BEFORE,
+    blockedAfter: flagCounts.MISSING_MATERIALS,
+    resourceCounts,
     expectedFinalAdmittedCount: EXPECTED_LESSONS,
     rederivedFinalAdmittedCount: findings.length,
     exactCountMatch: findings.length === EXPECTED_LESSONS,
@@ -641,13 +679,13 @@ export function runAudit() {
     negativeControls,
     grades: gradeRows,
     safeToBeginMatrix: gradeRows.every((row) => row.safeToBeginMatrix),
-    topBlockers: [
-      {
-        flag: 'MISSING_MATERIALS',
-        lessons: flagCounts.MISSING_MATERIALS,
-        detail: 'Reference-dependent model, guided, and investigation lessons do not supply the model/reference/scaffold/work they direct the learner to use.',
-      },
-    ],
+    topBlockers: flagCounts.MISSING_MATERIALS > 0
+      ? [{
+          flag: 'MISSING_MATERIALS',
+          lessons: flagCounts.MISSING_MATERIALS,
+          detail: 'Reference-dependent model, guided, and investigation lessons do not supply the model/reference/scaffold/work they direct the learner to use.',
+        }]
+      : [],
   }
   return {
     lessonsAudited: findings.length,
@@ -655,21 +693,21 @@ export function runAudit() {
     findings,
     flagCounts,
     negativeControls,
+    resourceCounts,
     gradeResults,
     materialsResults,
     browserLoss,
   }
 }
 
-function currentHead() {
-  return execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim()
-}
-
 function main() {
   const mode = process.argv.includes('--check') ? 'check' : 'write'
-  const head = currentHead()
-  if (head !== BASE_SHA && mode === 'write') {
-    throw new Error(`Write mode must run at audit base ${BASE_SHA}; current HEAD is ${head}`)
+  if (mode === 'write') {
+    try {
+      execFileSync('git', ['merge-base', '--is-ancestor', BASE_SHA, 'HEAD'], { cwd: ROOT, stdio: 'ignore' })
+    } catch {
+      throw new Error(`Write mode requires audit base ${BASE_SHA} to be an ancestor of HEAD`)
+    }
   }
   const results = runAudit()
   const documents = outputs(results)
@@ -690,7 +728,7 @@ function main() {
     console.log(`MISSING_MATERIALS: ${results.flagCounts.MISSING_MATERIALS}`)
     console.log(`PROJECTION_RESULT: ${results.browserLoss.summary.projectionResult} (${results.browserLoss.summary.lessonsWithoutLoss}/${results.lessonsAudited})`)
     console.log(`NEGATIVE_CONTROLS: ${results.negativeControls.passed ? 'PASS' : 'FAIL'} (${results.negativeControls.controls.length}/5)`)
-    console.log(`CLASSIFICATION: ${CLASSIFICATION}`)
+    console.log(`CLASSIFICATION: ${results.gradeResults.classification}`)
   }
 }
 

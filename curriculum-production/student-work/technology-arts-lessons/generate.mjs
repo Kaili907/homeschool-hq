@@ -105,3 +105,7 @@ console.log('Work modes used:')
 for (const [mode, count] of [...modeCounts].sort((a, b) => b[1] - a[1])) {
   console.log(`  ${mode}: ${count}`)
 }
+
+// Arts/Music repair evidence and subject-only checksums are part of the
+// generated production surface, not a hand-maintained afterthought.
+await import('./tooling/build-arts-music-repair-evidence.mjs')

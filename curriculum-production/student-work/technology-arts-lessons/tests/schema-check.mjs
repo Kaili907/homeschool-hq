@@ -5,7 +5,8 @@
  * The repo has no JSON Schema library and this corpus does not justify adding
  * a dependency, so this implements exactly the draft-07 subset the two schemas
  * use — type, required, properties, additionalProperties, enum, const,
- * minLength, minItems, pattern, items, oneOf, allOf, if/then, not/required.
+ * minLength, minItems, maxItems, pattern, items, oneOf, allOf, if/then,
+ * not/required.
  * Anything outside that subset throws rather than silently passing, so the
  * schemas cannot quietly outgrow their own checker.
  */
@@ -21,7 +22,7 @@ const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'))
 
 const SUPPORTED = new Set([
   '$schema', '$id', 'title', 'description', 'type', 'required', 'properties',
-  'additionalProperties', 'enum', 'const', 'minLength', 'minItems', 'minimum',
+  'additionalProperties', 'enum', 'const', 'minLength', 'minItems', 'maxItems', 'minimum',
   'pattern', 'items', 'oneOf', 'allOf', 'if', 'then', 'not',
 ])
 
@@ -62,6 +63,9 @@ function validate(schema, value, path, errors) {
   }
   if (schema.minItems !== undefined && Array.isArray(value) && value.length < schema.minItems) {
     errors.push(`${path}: ${value.length} items < minItems ${schema.minItems}`)
+  }
+  if (schema.maxItems !== undefined && Array.isArray(value) && value.length > schema.maxItems) {
+    errors.push(`${path}: ${value.length} items > maxItems ${schema.maxItems}`)
   }
   if (schema.items && Array.isArray(value)) {
     value.forEach((item, i) => validate(schema.items, item, `${path}[${i}]`, errors))

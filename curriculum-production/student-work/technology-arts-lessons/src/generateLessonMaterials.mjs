@@ -33,6 +33,10 @@ import {
 import { buildAccessibilityProvisions } from './lessonAccessibility.mjs'
 import { buildLessonRubric } from './lessonRubrics.mjs'
 import { buildTechnologyActivitySetup } from './technologyActivitySetup.mjs'
+import {
+  buildArtsLearnerResource,
+  HOUSEHOLD_ARTS_MATERIAL_ROUTE,
+} from './artsLearnerResources.mjs'
 
 /**
  * The specificity heuristic in src/curriculum/production-quality rejects
@@ -317,7 +321,14 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     ? (isTech ? ELEM_TECH_DELIVERABLE : ELEM_ARTS_DELIVERABLE)
     : (isTech ? TECH_DELIVERABLE : ARTS_DELIVERABLE)
 
-  const taskBody = taskRegistry[mode](ctx)
+  const learnerResource = isTech ? null : buildArtsLearnerResource({
+    lesson,
+    unit,
+    mode,
+    taskType,
+    elementary,
+  })
+  const taskBody = `${taskRegistry[mode](ctx)}${learnerResource ? ` ${learnerResource.taskInstruction}` : ''}`
   const completeInputNote = isTech
     ? elementary
       ? ' Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app.'
@@ -424,7 +435,13 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     essential_question: lesson.essential_question,
     learning_objectives: lesson.learning_objectives,
     lesson_success_criteria: lesson.success_criteria,
-    materials: lesson.materials,
+    materials: isTech
+      ? lesson.materials
+      : [
+          ...lesson.materials,
+          ...(learnerResource ? [learnerResource.materialLine] : []),
+          HOUSEHOLD_ARTS_MATERIAL_ROUTE,
+        ],
     task_brief: taskBrief,
     primary_task: primaryTask,
     ...(taskSteps ? { task_steps: taskSteps } : {}),
@@ -432,6 +449,12 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     deliverable,
     ...(activitySetup ? { activity_setup: activitySetup } : {}),
     ...(scaffoldNote ? { guided_scaffold_note: scaffoldNote } : {}),
+    ...(learnerResource
+      ? {
+          sourceReference: learnerResource.sourceReference,
+          learner_resource: learnerResource.metadata,
+        }
+      : {}),
     [isTech ? 'test_or_check_criteria' : 'critique_criteria']: checks,
     presentation_and_privacy: isTech
       ? { sandbox_and_credentials_note: techPresentationAndPrivacy() }
@@ -455,7 +478,7 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
   }
 
   const needsSourceIntegrity =
-    SOURCE_DEPENDENT_MODES.has(mode) ||
+    Boolean(learnerResource) || SOURCE_DEPENDENT_MODES.has(mode) ||
     /public.domain|primary source|historical|transcribe|notation/.test(
       `${lesson.focus} ${unit.title} ${unit.performance_task}`.toLowerCase(),
     )
@@ -503,7 +526,9 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
       requires_review: needsSourceIntegrity,
       status: needsSourceIntegrity ? 'VERIFIED' : 'NOT_APPLICABLE',
       note: needsSourceIntegrity
-        ? 'This session works from a source, model, or artifact the student did not make. Only public-domain, openly licensed, or supplied material may be used; anything not the student\'s own must be cited, and excerpts must be no longer than the point requires.'
+        ? learnerResource
+          ? `The complete required learner resource is attached in the task package as ${learnerResource.metadata.resource_id}. It is Manuel Academy original, CC BY 4.0, contains no third-party content, and requires no external source, paid tool, specialized material, instrument, recording, or public presentation.`
+          : 'This session works from a source, model, or artifact the student did not make. Only public-domain, openly licensed, or supplied material may be used; anything not the student\'s own must be cited, and excerpts must be no longer than the point requires.'
         : undefined,
     },
     safety_and_privacy: {

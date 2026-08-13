@@ -17,6 +17,10 @@ const guidePath = resolve(ROOT, 'curriculum-production/student-work/technology-a
 const pkg = JSON.parse(readFileSync(packagePath, 'utf8'))
 const guide = JSON.parse(readFileSync(guidePath, 'utf8'))
 const binding = { lessonRef: pkg.lesson_id, subject: 'arts-and-music' }
+const resourcePackagePath = resolve(ROOT, 'curriculum-production/student-work/technology-arts-lessons/packages/arts-music/grade-03/ma-g3-arts-music-u01-l02.task-package.json')
+const resourceGuidePath = resolve(ROOT, 'curriculum-production/student-work/technology-arts-lessons/scoring-guides/arts-music/grade-03/ma-g3-arts-music-u01-l02.scoring-guide.json')
+const resourcePackage = JSON.parse(readFileSync(resourcePackagePath, 'utf8'))
+const resourceGuide = JSON.parse(readFileSync(resourceGuidePath, 'utf8'))
 
 test('the clean sample retains its task, materials, criteria, and steps in the browser projection', () => {
   const material = projectJsonMaterial(pkg, binding, pkg.lesson_title)
@@ -44,11 +48,25 @@ test('the full admitted population re-derives to 648 and every grade has 72 less
   assert.equal(result.gradeResults.exactCountMatch, true)
 })
 
-test('the audit exposes unattached references and confirms no real browser loss', () => {
+test('the audit proves every reference dependency is attached and confirms no browser loss', () => {
   const result = runAudit()
-  assert.equal(result.flagCounts.MISSING_MATERIALS, 270)
+  assert.equal(result.flagCounts.MISSING_MATERIALS, 0)
   assert.equal(result.materialsResults.summary.referenceRequired, 270)
-  assert.equal(result.materialsResults.summary.referenceSupplied, 0)
+  assert.equal(result.materialsResults.summary.referenceSupplied, 270)
+  assert.deepEqual(result.resourceCounts, {
+    models: 108,
+    scaffolds: 108,
+    references: 54,
+    externalDependencies: 0,
+  })
+  assert.equal(result.gradeResults.safeToBeginMatrix, true)
+  assert.equal(result.gradeResults.classification, 'ARTS_MUSIC_CONTENT_READY_FOR_CONVERGENCE')
   assert.equal(result.browserLoss.summary.projectionResult, 'PASS')
   assert.equal(result.browserLoss.summary.lessonsWithLoss, 0)
+})
+
+test('a rights label without the attached resource contract remains blocked', () => {
+  const broken = structuredClone(resourcePackage)
+  broken.learner_resource.external_dependencies = ['outside.example']
+  assert.equal(classifyLesson(broken, resourceGuide).flags.includes('MISSING_MATERIALS'), true)
 })
