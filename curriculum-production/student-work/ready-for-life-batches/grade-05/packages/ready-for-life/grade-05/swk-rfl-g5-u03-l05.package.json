@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u03-l05",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Basic Food Safety",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: simple no-heat preparation"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 07–09"
+  ],
+  "objective": "Given a short list of ingredients, learners independently plan and assemble one simple, no-heat food item (such as a sandwich, a fruit bowl, or a wrap) that meets three stated criteria, without adult step-by-step direction.",
+  "scenario": "Without being told the exact steps, the learner is given (or selects) a short list of no-heat ingredients and independently plans and assembles one finished food item that meets three criteria: uses at least three ingredients, is assembled in a logical order, and is served in a way that's ready to eat.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No heat source is used in this lesson by design; any knife used for soft, no-heat ingredients is adult-approved beforehand."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the specific ingredients aren't available at home, the learner instead plans the full sequence in writing for a no-heat food item using ingredients they do have or a provided list, describing each assembly step in the order they would do it, in place of physically assembling it."
+  },
+  "materials": [
+    "no-heat ingredients",
+    "a plate or container",
+    "a knife appropriate for the ingredients (adult-approved if needed)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Quickly recall: name two no-heat foods you already know how to put together without help.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the two foods."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Plan and assemble one no-heat food item using at least three ingredients, in a logical order, served ready to eat.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "List the ingredients you used and the order you assembled them in."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My finished item uses at least three ingredients."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My finished item is served in a way that's actually ready to eat (not still in pieces on the counter)."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Rate your no-heat-preparation confidence and pick what comes next.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rate your confidence in assembling a no-heat food item on your own (very / somewhat / not yet), cite one specific step from today as evidence, and choose: ready to try a food item with more steps, ready to review this again, or need a different explanation."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the assembly order is illogical (for example adding a topping before a base that needs to be prepared), reteach by having the learner narrate their planned order out loud before starting, catching sequencing problems before they touch any ingredients.",
+  "extension": "Plan and assemble a second no-heat food item that meets a new constraint (uses one ingredient the learner has never used before, or serves two people instead of one).",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

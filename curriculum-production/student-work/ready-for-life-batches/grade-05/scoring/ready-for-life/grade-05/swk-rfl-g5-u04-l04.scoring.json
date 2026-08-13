@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l04",
+  "lessonId": "ma-g5-ready-for-life-u04-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Thoroughness of the check",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Checks only some ingredients, missing an obvious gap."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Checks every ingredient on the draft plan."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Checks every ingredient and proactively names a backup for a likely-missing item."
+          }
+        ]
+      },
+      {
+        "dimension": "Quality of revision",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Revised plan still includes an unavailable ingredient."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Revised plan only uses available ingredients."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Revised plan uses available ingredients and the learner explains their substitution reasoning."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Every ingredient from the first draft appears in the check, addressed one way or another.",
+      "Final plan is realistic and usable, not aspirational.",
+      "Reflection names a specific planning habit, not a vague intention."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

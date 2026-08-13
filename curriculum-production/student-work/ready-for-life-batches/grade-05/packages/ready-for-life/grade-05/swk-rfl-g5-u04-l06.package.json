@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u04-l06",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Building a Fueling Meal",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: complete meal loop"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 10–12"
+  ],
+  "objective": "Using a specific instance where the full meal loop (notice signal, plan, check ingredients, build, serve, store) broke down at one step, learners diagnose that step with an adult and complete the loop correctly.",
+  "scenario": "The learner reflects on a real recent meal-related attempt where one step of the full loop (noticing a signal, planning, checking ingredients, building, serving, storing) got skipped or went wrong, and works with an adult to identify exactly which step broke before completing the loop properly.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No weight, size, or calorie language is used anywhere in this task."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there's no real recent meal loop to return to, the learner instead reviews a short written scenario of someone else's stalled meal loop, identifies the likely broken step, and writes the specific change that would fix it."
+  },
+  "materials": [
+    "whatever materials the meal loop requires (ingredients, containers)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Name the specific meal loop you're returning to and the exact step where something went wrong (skipped, rushed, or done out of order).",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the loop and the step."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, trace through the six-step loop (notice, plan, check ingredients, build, serve, store) and pinpoint exactly where it broke.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named the exact step where the loop broke, not just 'it didn't work.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My adult and I agreed on one specific reason that step was skipped or rushed."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "We named one small change that would make that step more reliable next time."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Complete the loop correctly this time, from the broken step through storage.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Confirm each remaining step is now done, and describe what's different this time."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the unit as a whole.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Across this whole unit, which step of the loop (notice, plan, check, build, serve, store) has been the hardest for you overall, and what is your plan for that step going forward?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner can identify that the meal 'didn't go well' but not the specific step, walk through the six-step loop out loud together, checking off each step as complete or not, until the exact break point is visible.",
+  "extension": "Complete one full meal loop start to finish with no step skipped, and write a short reflection naming which earlier lesson's skill helped most at each step.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

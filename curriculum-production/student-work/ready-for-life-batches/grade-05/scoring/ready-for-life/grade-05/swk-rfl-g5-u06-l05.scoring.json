@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l05",
+  "lessonId": "ma-g5-ready-for-life-u06-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Evidence specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Evidence is a general feeling, not observable."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least one piece of evidence is specific and observable."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Both pieces of evidence are specific and observable, and clearly tied to the original need."
+          }
+        ]
+      },
+      {
+        "dimension": "Honest self-assessment",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Confidence rating doesn't match the evidence provided."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Confidence rating is consistent with the evidence."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Confidence rating is consistent with the evidence and the learner names a specific next step if the need isn't fully addressed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Evidence is something a second person could also verify.",
+      "Original need statement is quoted or accurately restated, not reinvented.",
+      "Next-step choice matches the honest evidence, not wishful thinking."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

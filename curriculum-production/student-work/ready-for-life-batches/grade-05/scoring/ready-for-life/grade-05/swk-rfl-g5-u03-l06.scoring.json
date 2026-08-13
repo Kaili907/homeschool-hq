@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l06",
+  "lessonId": "ma-g5-ready-for-life-u03-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Diagnosing the sticking point",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Names only a vague cause."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names the specific step where the routine stopped."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names the step and a specific, plausible reason unique to that step."
+          }
+        ]
+      },
+      {
+        "dimension": "Correction and testing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fixes the immediate problem but proposes no lasting change."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Fixes the problem and proposes one specific change."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proposes a change tied to a concrete trigger and confirms it worked a second time."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Named step matches the actual described problem.",
+      "Proposed change is specific and testable.",
+      "No shame language toward whoever is responsible for the lapse."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u06-l06",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: reflecting without shame"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Learners reflect on the whole capstone process, naming one specific thing that didn't go as planned and reframing it as information rather than failure, without self-critical or shame-based language.",
+  "scenario": "The learner looks back across the entire capstone — choosing, planning, safety review, doing, and checking — and identifies one specific thing that didn't go as planned, then practices describing it factually, as information for next time, rather than as a personal failure.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No shame or self-critical language is used by the adult or the learner anywhere in this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "notes or plan from earlier lessons in this unit"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reflecting, notice: does your first instinct describe what didn't go as planned using shame language ('I'm bad at this') or fact language ('this step took longer than planned')? Write your first instinct down honestly.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Write your first-instinct sentence."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, take your warm-up sentence and rewrite it in fact language if it used shame language, then talk through why the fact version is more useful.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My rewritten sentence describes what happened, not who I am."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My adult and I discussed why fact language helps more than shame language for next time."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I did not use words like 'lazy,' 'bad at this,' or 'stupid' in my final version."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write a short summary of the whole capstone process using only fact language throughout, including at least one thing that went well and one thing that didn't go as planned.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your summary."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Carry one lesson forward.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "If you did a second capstone contribution, what's the one specific thing from this reflection you'd carry forward into planning it?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's rewritten sentences still carry shame language in a softer disguise ('I guess I'm just not good at planning'), reteach with a direct side-by-side: the same event described once in shame language and once in fact language, having the learner spot the difference before rewriting their own.",
+  "extension": "Help a family member reframe one of their own 'that didn't go as planned' moments from shame language into fact language, using the same method.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  }
+}

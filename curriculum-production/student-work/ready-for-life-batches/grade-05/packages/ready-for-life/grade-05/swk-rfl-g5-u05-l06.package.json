@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u05-l06",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Communication",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: repairing a missed responsibility"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Using a specific instance where the learner missed a real responsibility, learners name the impact, make amends appropriately, and identify one change that would prevent the same miss.",
+  "scenario": "The learner identifies a real, specific responsibility they recently missed (not hypothetical), works with an adult to understand who or what was affected, takes an appropriate step to repair it, and names one concrete change for next time.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No shame or blame language is used by the adult or the learner at any point in this lesson."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there's no real recent missed responsibility to work from, the learner instead responds to a provided scenario about a missed responsibility, naming the impact, an appropriate repair step, and a prevention change the same way as the real situation."
+  },
+  "materials": [
+    "none required beyond whatever the repair step needs"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Name the specific responsibility you missed — not 'I mess up sometimes' but exactly what and when.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the specific responsibility and when it was missed."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, talk through who or what was affected by the miss, without shame language on either side.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named specifically who or what was affected, not just 'it was bad.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My adult and I discussed the miss without blame language."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "We agreed on one appropriate repair step."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Carry out the repair step on your own.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe what you did to repair the miss and how it was received (if there was a response)."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Name a prevention change.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "What's the one specific change you'll make so this particular responsibility doesn't get missed the same way again?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner can't identify what was actually affected by the miss, walk through the chain of who relied on that responsibility being done, one link at a time, until the real impact is visible.",
+  "extension": "Check whether the same kind of miss (same root cause) shows up in a different responsibility, and apply the same prevention change there too.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

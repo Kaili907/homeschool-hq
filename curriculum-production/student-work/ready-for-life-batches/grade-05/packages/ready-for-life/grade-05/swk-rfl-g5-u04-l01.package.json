@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u04-l01",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Building a Fueling Meal",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: hunger thirst tiredness boredom and stress signals"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 10–12"
+  ],
+  "objective": "Learners take a first, unguided attempt at noticing and naming which of five body signals (hunger, thirst, tiredness, boredom, stress) they're experiencing at two separate moments in one day, using neutral language with no weight, size, or calorie references.",
+  "scenario": "Before any explicit instruction on noticing technique, the learner pauses twice during an ordinary day and tries, on their own, to name which of the five signals they're feeling and what physical clue told them so.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Notebook entries are private; a guardian may see the completion status but not the raw entries themselves.",
+    "No weight, size, calorie, or body-shape language is used anywhere in this task."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "private notebook or digital note",
+    "pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before today's noticing, which of the five signal words (hunger, thirst, tiredness, boredom, stress) do you think you already notice easily, and which do you think you mix up with another one?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the easy one and the confusable one."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "At two separate points today, pause and name the signal you're feeling and the physical clue that told you.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Record your two moments: the signal word and the clue for each, using neutral language only."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Reflect honestly on any mix-up.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Did you mix up two signals at any point today (like thirst feeling like hunger)? Describe what happened without judging yourself for it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner reports zero signals noticed across the whole day, reteach with a scheduled check-in (an alarm or verbal reminder from an adult at one set time) rather than relying on the learner to remember unprompted.",
+  "extension": "On a second day, notice the same two time-of-day moments and compare whether the signal or the clue changed from day one to day two.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

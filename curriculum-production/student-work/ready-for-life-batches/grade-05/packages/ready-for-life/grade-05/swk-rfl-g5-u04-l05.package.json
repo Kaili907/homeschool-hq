@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u04-l05",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Building a Fueling Meal",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: serving and storage"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 10–12"
+  ],
+  "objective": "Given a finished no-heat food item, learners independently decide the correct serving portion and storage method (refrigerate, cover, label) without adult step-by-step direction, and justify both decisions.",
+  "scenario": "Without being told the steps, the learner is given a finished (or previously assembled) no-heat food item and must decide, on their own, how much to serve now and how to properly store the rest.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No heat source or sharp tool is needed for serving or storage decisions in this lesson."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real finished food item isn't available to serve and store, the learner instead is given a written description of a finished food item and explains, in writing, the serving portion and storage decision they would make and why."
+  },
+  "materials": [
+    "a finished no-heat food item",
+    "storage containers",
+    "refrigerator access"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Quickly recall: name one food you already know needs to be refrigerated after serving, and one that doesn't.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the two foods."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Serve an appropriate portion of your food item and store the rest correctly (covered, labeled if needed, and refrigerated if the food requires it).",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Describe your serving portion and your storage method, and explain why you chose that storage method for this specific food."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Stored food is covered or sealed, not left open."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "Stored food is in the correct location for its type (refrigerator vs. counter-safe)."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Rate your serving-and-storage confidence and select a next step.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rate your confidence in making serving and storage decisions on your own (very / somewhat / not yet), cite the specific decision you made today as evidence, and choose: ready to try a trickier food item, ready to review this again, or need a different explanation."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner stores a perishable item at room temperature, reteach by sorting five example foods into 'needs the fridge' and 'doesn't' before returning to the real storage decision.",
+  "extension": "Repeat the task with a food item that has a less obvious storage answer (like a cut fruit or a dairy-based item) and explain the reasoning that made it trickier.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u04-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u04-l05",
+    "authoredBy": "manual"
+  }
+}

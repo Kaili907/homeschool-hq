@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u06-l05",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: checking the result"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Learners independently evaluate their completed contribution against the original need it was meant to address, using at least two specific, observable checks rather than a general judgment.",
+  "scenario": "Without being told exactly what to check, the learner is checking the result of their own completed contribution against the real need they identified in the first lesson of this unit, using specific observable evidence rather than a general impression.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This is an evaluation and reflection task; no new physical task execution happens in this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the learner's original need statement from the first lesson of this unit"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Quickly recall: what was the original need you named at the start of this unit, before you started planning?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Restate the original need."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Check your completed contribution against that original need using at least two specific, observable pieces of evidence.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "State your two pieces of evidence and what each one tells you about whether the need was addressed."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My evidence is specific and observable (something someone else could also check), not just a feeling."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Rate your result-checking confidence and choose what to do next.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rate your confidence that the need was genuinely addressed (very / somewhat / not yet), cite one of your two pieces of evidence, and choose: this contribution is done, it needs one more step, or I need to rethink part of the plan."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's evidence is vague ('it looks better'), reteach by returning to the original need statement and asking: what would someone who has that need actually notice is different now? Then have them find that specific noticeable difference.",
+  "extension": "Ask one other household member whether they've noticed the need being addressed, and compare their observation to the learner's own two pieces of evidence.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

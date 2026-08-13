@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l01",
+  "lessonId": "ma-g5-ready-for-life-u04-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Signal-word accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Uses a judgment word instead of one of the five neutral signal words."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both entries use one of the five neutral words correctly."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Both entries use a neutral word and the clue clearly supports it."
+          }
+        ]
+      },
+      {
+        "dimension": "Honest, non-judgmental noticing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Entry rates the signal as good or bad, or avoids describing a mix-up."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Entry is neutral and, if a mix-up happened, describes it factually."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Entry is neutral and the reflection names specifically what made the mix-up happen."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No weight, size, or calorie language appears anywhere.",
+      "Two distinct moments are recorded, not one moment written twice.",
+      "Clue described is a physical sensation, not a general statement."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l06",
+  "lessonId": "ma-g5-ready-for-life-u02-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Diagnosing the sticking point",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Names only a vague cause."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names the specific step where the system stopped."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names the step and a specific, plausible reason unique to that step."
+          }
+        ]
+      },
+      {
+        "dimension": "System adjustment and testing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No real change proposed or tested."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Proposes and tests one specific change."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proposes a change tied to a concrete trigger and confirms it worked on a second batch."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Named step matches the actual described pile.",
+      "Proposed change is specific and testable, not a vague resolution.",
+      "No shame language toward whoever the pile 'belongs' to."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

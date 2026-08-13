@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u04-l04",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Building a Fueling Meal",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: planning and ingredient checks"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 10–12"
+  ],
+  "objective": "Learners independently plan a simple no-heat meal for a specific day, checking real (or provided) ingredient availability against their plan, and revise the plan for any missing ingredient.",
+  "scenario": "The learner plans out one no-heat meal they intend to actually build later, checks the ingredients they planned against what's really available (in the kitchen or a provided inventory), and revises the plan for anything missing rather than assuming it'll be there.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "This is a planning-and-checking task, not food preparation; no heat or sharp tools are used."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If checking a real kitchen's ingredients isn't available, the learner instead checks their draft plan against a provided sample ingredient inventory list, revising for any 'missing' item the same way as the guided task."
+  },
+  "materials": [
+    "paper and pencil",
+    "access to the kitchen or a provided ingredient inventory"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking availability, write your first-draft meal plan: what ingredients would you use if everything were available?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List your first-draft ingredients."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Check your planned ingredients against what's actually available (in your kitchen or a provided list), with an adult confirming what's really on hand.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked every ingredient on my draft plan, not just the ones I assumed were there."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For each missing ingredient, I named a specific substitute or removed it from the plan."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My revised plan only uses ingredients that are actually available."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write your final, checked meal plan in a form ready to use later.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List your final ingredients and note which ones changed from your first draft, and why."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the planning process.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "What's one thing you learned from this check that you'll do differently the next time you plan a meal — checking earlier, planning backup ingredients, or something else?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's revised plan still assumes an unavailable ingredient, reteach by having them physically point to or list each ingredient's real location (or its absence) one at a time before finalizing the plan.",
+  "extension": "Plan a second meal for a different day using only ingredients that are currently available, without needing a first-draft revision step.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

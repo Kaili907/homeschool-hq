@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u06-l01",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: choosing a contribution"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Learners generate at least three candidate family-contribution ideas of varying scope, then choose one based on stated criteria (real need, learner's current skill level, and doable within a reasonable timeframe) before any planning begins.",
+  "scenario": "Before planning any specific steps, the learner brainstorms at least three possible contributions they could make to their household — things that would genuinely help, not just busywork — and picks one using three criteria: it addresses a real need, it fits their current skill level, and it's doable in a reasonable timeframe.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This is a brainstorming and decision task; no physical task execution happens in this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper and pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before brainstorming, name one thing you've noticed your household could use help with recently.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name that thing."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Generate at least three candidate contribution ideas, then evaluate each against the three criteria (real need, fits your skill level, doable soon).",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "List your three candidate ideas."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Each candidate idea is checked against all three criteria, not just picked by preference."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Explain your final choice.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Which candidate did you choose, and which criterion (real need, skill level, or timeframe) mattered most in that decision? Explain why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If all three candidates are things the learner already does easily (no real stretch or need), reteach by asking a household member directly what would actually help, then adding that idea to the candidate list.",
+  "extension": "Interview one household member about what they think the household's biggest current need is, and compare that answer to the learner's own three candidates.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

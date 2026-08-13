@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u01-l01",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Caring for Home and Shared Spaces",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: why shared-space care matters"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 01–03",
+    "Michigan Health/SEL connections"
+  ],
+  "objective": "Learners identify three spaces in their home that more than one person uses and explain, in their own words, why keeping each one cared for matters to the people who use it, establishing the reasoning that will anchor the unit's routines.",
+  "scenario": "Before learning any specific cleaning routine, the learner walks through their home noticing which spaces more than one person uses — a kitchen table, a bathroom, a living room, a shared hallway — and thinks about what happens for everyone when those spaces are cared for versus left messy.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Use respectful, non-shaming language about any space that is currently messy.",
+    "No identifiable photo of the home is required; a written description is enough."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the household doesn't have multiple clearly shared indoor spaces, the learner instead reflects on a shared space they visit regularly outside the home, such as a library, community room, or shared laundry area, using the same noticing-and-reasoning process."
+  },
+  "materials": [
+    "notebook or paper",
+    "pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List three spaces in your home that more than one person uses regularly.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name three shared spaces and, for each, name one person besides you who uses it."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Pick one shared space from your list and notice it closely for one day.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Describe what that space looked like today, and write one specific way it affected someone (including you) — for better or worse."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Reflect on why shared-space care matters.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Why does caring for a shared space matter more than caring for a space that's just yours? Use your own noticing from today as evidence, not just a general rule."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner can only describe personal spaces (their own room) rather than genuinely shared ones, walk through the home together and point to two or three spaces used by different family members on the same day, then retry the noticing task in one of those spots.",
+  "extension": "Have the learner interview one other household member about which shared space matters most to them and why, then compare that person's reasoning to their own.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

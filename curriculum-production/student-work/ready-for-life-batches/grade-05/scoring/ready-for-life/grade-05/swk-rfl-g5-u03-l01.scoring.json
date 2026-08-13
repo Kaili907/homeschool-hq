@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l01",
+  "lessonId": "ma-g5-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Zone completion",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more zones left unaddressed."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three zones visibly reset."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All three zones reset and the learner names a specific reason one zone needed a different approach."
+          }
+        ]
+      },
+      {
+        "dimension": "Boundary awareness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Learner is unsure of or attempts the stove/sharp-tool boundary."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Learner stays within the boundary without being reminded."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Learner stays within the boundary and can explain why that specific boundary exists."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Counters, sink, and table are all visibly addressed, not just one.",
+      "No attempt made on stove, oven, or knives.",
+      "Reflection names a kitchen-specific reason, not a copy of a general shared-space answer."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l01",
+  "lessonId": "ma-g5-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Candidate quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Candidates are vague or not real contributions."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least three specific, genuine candidate ideas."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Three specific candidates spanning different scopes or areas of the household."
+          }
+        ]
+      },
+      {
+        "dimension": "Criteria-based decision",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Final choice has no stated reasoning against the criteria."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Final choice is justified against at least one criterion."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Final choice is justified against all three criteria with specific reasoning for each."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Candidates are genuinely different from each other, not variations of the same idea.",
+      "Chosen contribution addresses a real, named need.",
+      "Reflection names which criterion mattered most, not a vague summary."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

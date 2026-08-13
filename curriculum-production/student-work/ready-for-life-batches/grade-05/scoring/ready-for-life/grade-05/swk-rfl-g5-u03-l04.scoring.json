@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l04",
+  "lessonId": "ma-g5-ready-for-life-u03-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Category accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Two or more tools sorted into the wrong category."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least five of six tools sorted correctly."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All six sorted correctly and the learner self-corrects an initial miscategorization."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Reasons are vague, for example 'it's dangerous.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Reasons name a specific hazard type for most tools."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Reasons name a specific hazard type for every tool and distinguish 'needs supervision' from 'adult-only' clearly."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Adult confirms each tool's category before moving on.",
+      "Reference list uses the learner's own words, not copied definitions.",
+      "No tool is left unsorted."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

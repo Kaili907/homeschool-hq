@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u03-l02",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Basic Food Safety",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: handwashing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 07–09"
+  ],
+  "objective": "Learners watch an adult model the full handwashing sequence (wet, soap, scrub 20 seconds, rinse, dry) with attention to when it matters most in a kitchen, then demonstrate the same sequence correctly on their own twice.",
+  "scenario": "An adult models proper handwashing at the kitchen sink, explaining not just the steps but when handwashing matters most in a kitchen — before touching food, after touching raw ingredients, after touching the trash. The learner then washes their hands the same way at two different points during a kitchen task.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Water temperature stays comfortable to the touch, never scalding."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If access to a kitchen sink isn't available, the learner instead demonstrates the five-step sequence at any available sink (bathroom, utility) and identifies, in writing, the same two kitchen moments when handwashing would matter most."
+  },
+  "materials": [
+    "sink",
+    "soap",
+    "clean towel"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the model, name one moment during cooking or kitchen cleanup when you think handwashing matters most, and why.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the moment and your reasoning."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Watch your adult model the five-step handwash (wet, soap, scrub 20 seconds, rinse, dry), then do it yourself right after while they check your timing.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wet my hands before adding soap, not after."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I scrubbed for about 20 seconds, not a quick rinse."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I dried my hands with a clean towel rather than leaving them wet or wiping on clothing."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "During a real kitchen task, wash your hands correctly at two separate moments on your own, without a reminder.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What were your two moments, and what happened right before each one that told you it was time to wash?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the 20-second scrub.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Twenty seconds can feel long when you're in a hurry. What's one trick you could use to actually scrub for the full 20 seconds instead of rushing it?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner rushes the scrub step, reteach by having them scrub while counting out loud or singing a 20-second song, then fade that support once their internal timing improves.",
+  "extension": "Teach the five-step handwash to a younger sibling or family member, narrating why each step matters, with an adult confirming the teaching is accurate.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}

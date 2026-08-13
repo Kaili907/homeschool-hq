@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l06",
+  "lessonId": "ma-g5-ready-for-life-u06-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Shame-to-fact reframing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Final summary still contains shame or self-critical language."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Final summary is entirely in fact language."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Final summary is in fact language and explicitly separates what happened from who the learner is."
+          }
+        ]
+      },
+      {
+        "dimension": "Forward-looking specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Forward plan is vague, for example 'do better.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Forward plan names one specific thing to carry forward."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Forward plan names a specific thing and ties it to the specific step or moment it came from."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No shame or self-critical words appear in the final written summary.",
+      "Summary includes both something that went well and something that didn't, not just one.",
+      "Forward-looking reflection is concrete enough to actually check next time."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

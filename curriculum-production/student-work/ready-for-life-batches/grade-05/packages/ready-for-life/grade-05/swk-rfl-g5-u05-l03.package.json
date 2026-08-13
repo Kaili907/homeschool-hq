@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u05-l03",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Communication",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: packing and unpacking"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "With an adult, learners practice packing a bag for a specific purpose using a checklist, then fully unpacking and returning items to their homes afterward, across two supported rounds with fading support.",
+  "scenario": "With an adult, the learner packs a bag for a real, specific purpose (school, an activity, an overnight) using a checklist, then afterward fully unpacks it and returns every item to its home rather than leaving the bag half-emptied.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No overnight travel is required for this lesson to be completed; a same-day activity bag works equally well."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there's no real upcoming purpose to pack a bag for, the learner instead writes a checklist for a described purpose (a provided scenario, like an overnight visit) and explains, item by item, what they would pack and why, plus what a complete unpack would look like."
+  },
+  "materials": [
+    "a bag",
+    "a packing checklist",
+    "the items needed for the specific purpose"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before packing, name the specific purpose of this bag and list what you think you'll need.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the purpose and your predicted list."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, pack the bag against a checklist, checking off each item as it goes in.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "Every checklist item is either packed or intentionally left out for a stated reason."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I packed the bag myself while my adult checked the list, not the other way around."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "Nothing extra went in that wasn't on the checklist or a clear need."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "After the bag's purpose is done, unpack it completely on your own and return every item to its home.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Confirm every item is unpacked and back in its home. Was there anything left in the bag you almost forgot?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare packing and unpacking.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Packing and unpacking are two separate habits. Which one is harder for you to remember to actually finish, and why do you think that is?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If unpacking stalls (bag left partially full for days), reteach by pairing the unpack step with an existing habit that already happens reliably (like right after taking off shoes), then retest for one more cycle.",
+  "extension": "Pack and unpack for a different purpose that needs a different checklist, and compare which purpose was easier to fully unpack from.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}
