@@ -125,11 +125,24 @@ const REQUIRED_GUIDE_FIELDS = [
 ]
 
 const RUBRIC_LEVELS = ['exceeds', 'meets', 'developing', 'beginning']
+const ARTS_RESOURCE_MODES = new Set(['MODEL_A', 'MODEL_B', 'GUIDED_A', 'GUIDED_B', 'INVESTIGATE'])
+const EXPECTED_RESOURCE_KIND = {
+  MODEL_A: 'ACADEMY_ORIGINAL_MODEL',
+  MODEL_B: 'ACADEMY_ORIGINAL_MODEL',
+  GUIDED_A: 'ACADEMY_CREATED_SCAFFOLD',
+  GUIDED_B: 'ACADEMY_CREATED_SCAFFOLD',
+  INVESTIGATE: 'ACADEMY_ORIGINAL_REFERENCE_WORK',
+}
 
 let packageCount = 0
 const seenLessonIds = new Set()
 const gradesSeen = new Set()
 const modesSeen = new Set()
+const artsResourceCounts = {
+  ACADEMY_ORIGINAL_MODEL: 0,
+  ACADEMY_CREATED_SCAFFOLD: 0,
+  ACADEMY_ORIGINAL_REFERENCE_WORK: 0,
+}
 
 for (const course of COURSES) {
   const sourceLessons = readJsonl(course.lessonsPath)
@@ -226,6 +239,30 @@ for (const course of COURSES) {
       if (!/written alternative is always available/i.test(alt)) fail(id, 'arts lesson lacks the written/no-audio alternative')
       if (!/public domain|openly licensed/i.test(pkg.copyright_and_authorship)) fail(id, 'arts lesson lacks copyright-safe sourcing language')
       if (pkg.test_or_check_criteria) fail(id, 'arts lesson unexpectedly carries technology check criteria')
+
+      const resourceRequired = ARTS_RESOURCE_MODES.has(pkg.work_mode)
+      const resource = pkg.learner_resource
+      if (resourceRequired) {
+        if (!resource || typeof resource !== 'object') fail(id, 'reference-dependent arts lesson has no attached learner_resource metadata')
+        if (typeof pkg.sourceReference !== 'string' || pkg.sourceReference.length < 300) fail(id, 'attached sourceReference is absent or too thin to use')
+        if (!pkg.sourceReference?.includes(pkg.focus)) fail(id, 'attached sourceReference does not identify the lesson focus')
+        if (!/ATTACHED MANUEL ACADEMY LEARNER RESOURCE/.test(pkg.sourceReference ?? '')) fail(id, 'learner resource is not identified as attached')
+        if (!/Manuel Academy original; licensed CC BY 4\.0/.test(pkg.sourceReference ?? '')) fail(id, 'learner resource lacks the Academy-original CC BY 4.0 rights statement')
+        if (!/no outside|Earlier-pass substitute|no instrument|scrap paper|pencil|silent/i.test(pkg.sourceReference ?? '')) fail(id, 'learner resource lacks a concrete offline or household-accessible use route')
+        if (resource?.kind !== EXPECTED_RESOURCE_KIND[pkg.work_mode]) fail(id, `resource kind ${resource?.kind} does not match ${pkg.work_mode}`)
+        if (resource?.availability !== 'ATTACHED_IN_PACKAGE' || resource?.academy_original !== true || resource?.license !== 'CC-BY-4.0') fail(id, 'learner resource availability or rights metadata is invalid')
+        if (resource?.third_party_content !== false) fail(id, 'learner resource contains or ambiguously claims third-party content')
+        for (const field of ['external_dependencies', 'required_paid_tools', 'required_specialized_materials']) {
+          if (!Array.isArray(resource?.[field]) || resource[field].length !== 0) fail(id, `learner resource ${field} is not an explicit empty list`)
+        }
+        if (resource?.household_accessible !== true || resource?.silent_text_route_equal_credit !== true) fail(id, 'learner resource lacks household or silent equal-credit access metadata')
+        if (resource?.kind in artsResourceCounts) artsResourceCounts[resource.kind] += 1
+      } else if (pkg.learner_resource || pkg.sourceReference) {
+        fail(id, 'non-reference-dependent arts lesson unexpectedly carries an attached learner resource')
+      }
+      if (!(pkg.materials ?? []).some((item) => /pencil or pen and scrap paper are enough/i.test(item))) {
+        fail(id, 'arts lesson lacks the household-accessible material route')
+      }
     }
 
     if (!/must be your own authorship/i.test(pkg.copyright_and_authorship)) fail(id, 'lesson lacks the student-authorship requirement')
@@ -266,6 +303,7 @@ for (const course of COURSES) {
       extension: pkg.extension,
       presentation: JSON.stringify(pkg.presentation_and_privacy),
       copyright: pkg.copyright_and_authorship,
+      sourceReference: pkg.sourceReference ?? '',
     }
     for (const [label, text] of Object.entries(studentFacing)) scanText(id, label, text)
   }
@@ -275,10 +313,14 @@ for (const course of COURSES) {
 const EXPECTED_GRADES = [3, 4, 5, 7, 8, 9, 10, 11, 12]
 for (const g of EXPECTED_GRADES) if (!gradesSeen.has(g)) fail('corpus', `no lessons generated for grade ${g}`)
 if (modesSeen.size < 16) fail('corpus', `only ${modesSeen.size} of 16 work modes appear in the corpus`)
+if (artsResourceCounts.ACADEMY_ORIGINAL_MODEL !== 108) fail('corpus', `Academy-original models ${artsResourceCounts.ACADEMY_ORIGINAL_MODEL} != 108`)
+if (artsResourceCounts.ACADEMY_CREATED_SCAFFOLD !== 108) fail('corpus', `Academy-created scaffolds ${artsResourceCounts.ACADEMY_CREATED_SCAFFOLD} != 108`)
+if (artsResourceCounts.ACADEMY_ORIGINAL_REFERENCE_WORK !== 54) fail('corpus', `Academy-original references ${artsResourceCounts.ACADEMY_ORIGINAL_REFERENCE_WORK} != 54`)
 
 console.log(`Validated ${packageCount} lesson packages + scoring guides.`)
 console.log(`Grades covered: ${[...gradesSeen].sort((a, b) => a - b).join(', ')}`)
 console.log(`Work modes present: ${modesSeen.size}`)
+console.log(`Arts resources: ${artsResourceCounts.ACADEMY_ORIGINAL_MODEL} models, ${artsResourceCounts.ACADEMY_CREATED_SCAFFOLD} scaffolds, ${artsResourceCounts.ACADEMY_ORIGINAL_REFERENCE_WORK} reference works`)
 if (failures.length > 0) {
   console.error(`\nVALIDATION FAILURES (${failures.length}):`)
   for (const f of failures.slice(0, 60)) console.error(`  - ${f}`)

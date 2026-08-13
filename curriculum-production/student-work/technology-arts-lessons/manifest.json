@@ -123,6 +123,20 @@
     "authorship": "Every lesson states that the graded submission must be the student's own authorship, and that a parent, tutor, or AI tool may explain, demonstrate, or give feedback but must not produce, write, debug, or make any scored part of the work.",
     "statusSemantics": "A VERIFIED status means the policy invariants for that lesson are enforced by tests/validate-corpus.mjs (credential-literal scan, risk-term-in-context scan, mandated-exposure scan, copyright and authorship assertions). It is not a record of individual human curriculum review."
   },
+  "artsMusicContentRepairR1": {
+    "baseSha": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+    "blockedBefore": 270,
+    "blockedAfter": 0,
+    "modelsSupplied": 108,
+    "scaffoldsSupplied": 108,
+    "referencesSupplied": 54,
+    "externalDependenciesAfter": 0,
+    "materialAlternative": "All 648 Arts/Music lessons state that pencil or pen and scrap paper are sufficient; sound/performance work has an equal-credit tapping, spoken-syllable, finger-movement, or silent-notation route.",
+    "rights": "All 270 attached resources are Manuel Academy original, licensed CC BY 4.0, and contain no third-party text, image, score, lyric, melody, recording, or performance.",
+    "evidence": "arts-music-content-repair-evidence.json",
+    "checksums": "arts-music-checksums.sha256",
+    "classification": "ARTS_MUSIC_CONTENT_READY_FOR_CONVERGENCE"
+  },
   "verification": {
     "productionQualityGate": "node --experimental-strip-types tooling/run-ts.mjs run-gate.ts",
     "duplicateContentCheck": "node tests/duplicate-check.mjs",

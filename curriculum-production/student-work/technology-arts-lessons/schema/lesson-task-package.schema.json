@@ -204,6 +204,51 @@
     "guided_scaffold_note": {
       "type": "string"
     },
+    "sourceReference": {
+      "description": "A complete learner-visible model, scaffold, or reference work attached to this package.",
+      "type": "string",
+      "minLength": 300
+    },
+    "learner_resource": {
+      "description": "Rights, availability, and access metadata for an attached Arts/Music learner resource.",
+      "type": "object",
+      "required": [
+        "resource_id",
+        "kind",
+        "profile",
+        "availability",
+        "academy_original",
+        "license",
+        "third_party_content",
+        "external_dependencies",
+        "required_paid_tools",
+        "required_specialized_materials",
+        "household_accessible",
+        "silent_text_route_equal_credit"
+      ],
+      "properties": {
+        "resource_id": { "type": "string", "minLength": 20 },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ACADEMY_ORIGINAL_MODEL",
+            "ACADEMY_CREATED_SCAFFOLD",
+            "ACADEMY_ORIGINAL_REFERENCE_WORK"
+          ]
+        },
+        "profile": { "type": "string" },
+        "availability": { "type": "string", "enum": ["ATTACHED_IN_PACKAGE"] },
+        "academy_original": { "type": "boolean" },
+        "license": { "type": "string", "enum": ["CC-BY-4.0"] },
+        "third_party_content": { "type": "boolean" },
+        "external_dependencies": { "type": "array", "maxItems": 0 },
+        "required_paid_tools": { "type": "array", "maxItems": 0 },
+        "required_specialized_materials": { "type": "array", "maxItems": 0 },
+        "household_accessible": { "type": "boolean" },
+        "silent_text_route_equal_credit": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
     "test_or_check_criteria": {
       "description": "Technology only: the explicit pass/fail checks the work is verified against.",
       "type": "array",

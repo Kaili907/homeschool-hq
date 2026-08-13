@@ -1,7 +1,15 @@
 {
   "auditId": "ARTS_MUSIC_LEARNER_AUDIT_R1",
-  "classification": "ARTS_MUSIC_LEARNER_AUDIT_COMPLETE",
+  "classification": "ARTS_MUSIC_CONTENT_READY_FOR_CONVERGENCE",
   "baseSha": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "blockedBefore": 270,
+  "blockedAfter": 0,
+  "resourceCounts": {
+    "models": 108,
+    "scaffolds": 108,
+    "references": 54,
+    "externalDependencies": 0
+  },
   "expectedFinalAdmittedCount": 648,
   "rederivedFinalAdmittedCount": 648,
   "exactCountMatch": true,
@@ -56,7 +64,7 @@
     "ZERO_ACTIONABLE_WORK": 0,
     "EMPTY_PROJECT": 0,
     "MISSING_TASK_STEPS": 0,
-    "MISSING_MATERIALS": 270,
+    "MISSING_MATERIALS": 0,
     "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
     "MISSING_ALTERNATIVE": 0,
     "EMPTY_CRITIQUE": 0,
@@ -136,7 +144,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -146,7 +154,7 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     },
     {
       "grade": 4,
@@ -158,7 +166,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -168,7 +176,7 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     },
     {
       "grade": 5,
@@ -180,7 +188,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -190,7 +198,7 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     },
     {
       "grade": 7,
@@ -202,7 +210,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -212,7 +220,7 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     },
     {
       "grade": 8,
@@ -224,7 +232,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -234,7 +242,7 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     },
     {
       "grade": 9,
@@ -246,7 +254,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -256,7 +264,7 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     },
     {
       "grade": 10,
@@ -268,7 +276,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -278,7 +286,7 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     },
     {
       "grade": 11,
@@ -290,7 +298,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -300,7 +308,7 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     },
     {
       "grade": 12,
@@ -312,7 +320,7 @@
         "ZERO_ACTIONABLE_WORK": 0,
         "EMPTY_PROJECT": 0,
         "MISSING_TASK_STEPS": 0,
-        "MISSING_MATERIALS": 30,
+        "MISSING_MATERIALS": 0,
         "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
         "MISSING_ALTERNATIVE": 0,
         "EMPTY_CRITIQUE": 0,
@@ -322,15 +330,9 @@
         "PROJECTION_LOSS": 0,
         "PLACEHOLDER": 0
       },
-      "safeToBeginMatrix": false
+      "safeToBeginMatrix": true
     }
   ],
-  "safeToBeginMatrix": false,
-  "topBlockers": [
-    {
-      "flag": "MISSING_MATERIALS",
-      "lessons": 270,
-      "detail": "Reference-dependent model, guided, and investigation lessons do not supply the model/reference/scaffold/work they direct the learner to use."
-    }
-  ]
+  "safeToBeginMatrix": true,
+  "topBlockers": []
 }
