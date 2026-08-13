@@ -72,7 +72,7 @@ Each unit runs a six-session arc: launch and diagnostic; explicit model; guided 
 
 ## Guardian safety review
 
-Units that involve equipment, an outdoor environment, food or allergens, or any movement hazard carry a `guardian_safety_review` block on both the unit and every lesson in it. Units 2, 4, 5, 6 require explicit guardian confirmation before the activity runs.
+Units that involve equipment, an outdoor environment, food or allergens, or any movement hazard carry a `guardian_safety_review` block on both the unit and every lesson in it. Units 1, 2, 4, 5, 6 require explicit guardian confirmation before the activity runs.
 
 ## Files
 

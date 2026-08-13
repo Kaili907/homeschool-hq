@@ -27,6 +27,8 @@ health/
   tools/
     course-data.mjs    the authored content: units, topics, tasks, adapted paths, guardian blocks
     build-health-g34.mjs  deterministic generator + validator
+    safety-scan.mjs    body-metric and learner-media rules, with negation scoping
+    safety-scan.test.mjs / build-invariants.test.mjs  regression tests and mutants
 ```
 
 Everything outside `tools/` is generated. Edit `tools/course-data.mjs`, then rebuild.
@@ -44,6 +46,7 @@ than landing in the correction slot.
 ```bash
 node tools/build-health-g34.mjs          # regenerate both grades
 node tools/build-health-g34.mjs --check  # validate only, no writes
+node --test tools/*.test.mjs             # scan regressions and validator mutants
 ```
 
 The generator is deterministic: IDs are positional, and nothing is randomized or
@@ -54,9 +57,11 @@ non-contiguous `course_day`, duplicate IDs, dangling unit-to-lesson or
 unit-to-assessment references, assessment point sums that do not match
 `total_points`, a missing Study field, a missing adapted alternative, a missing
 guardian safety review, fewer than four taught `key_points`, a missing
-`practice_scenario`, required media, a schedule that does not span exactly 36
-weeks or cover each lesson exactly once, and any unnegated body-metric term or
-media requirement.
+`practice_scenario`, required media, a home connection missing the optionality
+and privacy floor, a unit that asks a guardian to check materials against
+allergies without carrying `guardian_confirmation_required`, a schedule that
+does not span exactly 36 weeks or cover each lesson exactly once, and any
+unnegated body-metric term or media requirement.
 
 **Scan coverage.** The content scan runs over lesson bodies *and* over unit
 performance tasks, adapted alternatives, home connections, essential questions,
@@ -72,6 +77,20 @@ what the course refuses to do is the point. And media is a violation only when
 the learner is asked to produce it or when it depicts the learner, so teaching
 content may discuss an advertising video or a cyberbullying photo without
 tripping the check.
+
+**Negation scoping** (`tools/safety-scan.mjs`). The prohibition exemption is
+resolved lexically, not by testing a whole sentence for a negation substring. An
+earlier revision matched `no` as a bare prefix, so *now*, *note*, *nose*,
+*normal*, and *notebook* each read as a negation and silenced the entire
+sentence they appeared in; `nor` did the same for *normal*. Cues are now matched
+as whole words, and scope is forward-only and clause-bounded, so a negation in
+one clause cannot launder a requirement in a later one. Scope is deliberately
+*not* broken by a plain comma, because a prohibition normally distributes over
+the list it introduces ("no body measurement, calorie counting, or dieting"); it
+is broken by strong punctuation, contrastive and subordinating conjunctions, and
+a coordinated clause that opens a fresh collection demand. `node --test
+tools/*.test.mjs` covers both the exemption and the mutants that must not
+survive it.
 
 ## Standards basis
 
@@ -124,11 +143,26 @@ guardian confirmation flag so guardians can preview it.
 
 Every unit and every lesson carries a `guardian_safety_review` block with
 `equipment`, `environment`, `movement_hazards`, `food_or_allergy_note`, and
-`guardian_confirmation_required`. Units 2, 4, 5, and 6 in both grades require
-explicit guardian confirmation before the activity runs — unit 2 for food and
-allergens, unit 4 so guardians can preview the personal-safety content, unit 5
-for the home safety walk, and unit 6 for medicine containers and supervised
-internet use.
+`guardian_confirmation_required`. Units 1, 2, 4, 5, and 6 in both grades require
+explicit guardian confirmation before the activity runs — unit 1 for the soap,
+sanitizer, sunscreen, and dental products the hygiene routines put on skin,
+unit 2 for food and allergens, unit 4 so guardians can preview the
+personal-safety content, unit 5 for the home safety walk, and unit 6 for
+medicine containers and supervised internet use.
+
+The rule is one-directional and enforced by the validator: a unit whose
+`food_or_allergy_note` asks a guardian to *check* or *confirm* materials is
+asking for a guardian action, so it must carry the marker. Unit 1 previously
+carried a real allergy check with the marker off, which is the inconsistency
+this rule closes. The converse is not required — units 4 and 6 carry the marker
+for preview and supervision reasons with no allergy note at all.
+
+**Home connections.** The unit-level `home_connection` is guardian-facing on its
+own screen, so it carries the same optionality and privacy floor as the
+lesson-level copy verbatim rather than relying on a lesson the guardian may
+never open: the activity is optional, and no purchase, account creation,
+photograph, measurement, or private disclosure is required. The validator fails
+the build if either copy drops it.
 
 ## Study compatibility
 

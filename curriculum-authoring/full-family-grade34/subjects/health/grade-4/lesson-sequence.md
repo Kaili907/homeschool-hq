@@ -341,15 +341,15 @@
 
 **Exit ticket:** Explain online privacy and personal information to someone who has not learned it yet, using one example.
 
-### Session 30 (Unit day 6) — Correction and reflection: recognising unsafe requests and refusing
+### Session 30 (Unit day 6) — Correction and reflection: recognizing unsafe requests and refusing
 **Lesson ID:** `ma-g4-health-u05-l06`
 **Phase:** Correction and reflection
-**Focus:** recognising unsafe requests and refusing
-**Objective:** Teach and consolidate recognising unsafe requests and refusing, correct any errors from the unit, explain the corrections, and identify where the unit transfers.
+**Focus:** recognizing unsafe requests and refusing
+**Objective:** Teach and consolidate recognizing unsafe requests and refusing, correct any errors from the unit, explain the corrections, and identify where the unit transfers.
 
-**Student activity:** The learner applies what they learned about recognising unsafe requests and refusing to a new fictional situation and records the choice plus the reason behind it.
+**Student activity:** The learner applies what they learned about recognizing unsafe requests and refusing to a new fictional situation and records the choice plus the reason behind it.
 
-**Exit ticket:** Name one thing you corrected or would do differently, and one other place recognising unsafe requests and refusing would be useful.
+**Exit ticket:** Name one thing you corrected or would do differently, and one other place recognizing unsafe requests and refusing would be useful.
 
 **Unit assessment:** `ma-g4-health-u05-assessment`
 

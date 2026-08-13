@@ -218,7 +218,7 @@
 **Unit ID:** `ma-g3-health-u04`
 **Standards:** Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills; Michigan Health Practice 6: Advocacy and Health Promotion; Michigan Health Topic (Grades 3-5): Healthy Relationships
 **Essential question:** How do respectful words and clear boundaries keep me and my friendships safe?
-**Performance task:** Practise and write short scripts for asking permission, saying no, and getting help, using fictional situations only.
+**Performance task:** Practice and write short scripts for asking permission, saying no, and getting help, using fictional situations only.
 **Adapted alternative:** Scripts may be spoken, signed, typed, drawn as a comic, or acted with figures or puppets. Role-play is optional and may always be replaced by describing what a character should say.
 
 ### Session 19 (Unit day 1) — Launch and diagnostic: listening and taking turns

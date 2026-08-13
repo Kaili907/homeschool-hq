@@ -12,6 +12,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { COURSES, PRACTICE } from './course-data.mjs'
+import { scanText } from './safety-scan.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const SUBJECT_ROOT = join(HERE, '..')
@@ -78,6 +79,14 @@ const ACCESSIBILITY = [
 
 const MASTERY_RULE =
   'Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety planning, and applied evidence; require accurate independent evidence and successful transfer or retrieval on at least two separate occasions. Optional private reflection is never scored and never used as mastery evidence.'
+
+// Every home connection carries the same optionality and privacy floor. The
+// unit-level copy is guardian-facing on its own screen, so it states the floor
+// itself rather than relying on the lesson copy the guardian may never open.
+const HOME_CONNECTION_FLOOR =
+  'This is optional. No purchase, account creation, photograph, measurement, or private disclosure is required.'
+
+const homeConnection = (u) => `${u.homeConnection} ${HOME_CONNECTION_FLOOR}`
 
 const GUARDIAN_VISIBILITY =
   'Share the lesson target, completion state, evidence type, any guardian safety confirmation, and the next instructional step. Do not expose raw private reflections, raw answers, recordings, or any diagnosis language. Study records completion and progress metadata only; it does not persist raw health reflections.'
@@ -170,7 +179,7 @@ function buildCourse(course) {
           fallback: 'Provide the same information as readable steps, alt text, a transcript, a tactile model, or an adult demonstration.',
         },
         parent_or_guardian_visibility: GUARDIAN_VISIBILITY,
-        home_connection: `${u.homeConnection} This is optional. No purchase, account creation, photograph, measurement, or private disclosure is required.`,
+        home_connection: homeConnection(u),
       })
     }
 
@@ -186,7 +195,7 @@ function buildCourse(course) {
       essential_question: u.essentialQuestion,
       topics: u.topics.map((t) => t.name),
       topic_content: u.topics,
-      home_connection: u.homeConnection,
+      home_connection: homeConnection(u),
       performance_task: u.performanceTask,
       adapted_alternative: u.adapted,
       guardian_safety_review: u.guardian,
@@ -404,27 +413,9 @@ The 3-5 band includes reproductive and sexual-health content. Michigan law place
 
 function validate(built) {
   const errors = []
-  const BANNED = [
-    /\bBMI\b/i, /body[- ]fat/i, /\bcalorie count/i, /weigh-?in/i,
-    /\bdiet(ing)?\b/i, /weight[- ]loss/i, /body[- ]size (?:goal|target|scor)/i,
-  ]
-  // A term is a violation only when it is not inside an explicit prohibition:
-  // naming what the course refuses to do is the point.
-  const NEGATED = /\b(no|not|never|without|nor|neither|refus|exclud|prohibit|instead of|rather than|optional)/i
-  // Media is a violation only when the learner is asked to PRODUCE it, or when
-  // it depicts the learner. Teaching content may discuss an advert video or a
-  // cyberbullying photo without asking anyone to make one.
-  const MEDIA_PRODUCE = /\b(take|takes|taking|record|records|film|films|upload|uploads|submit|submits|post|posts|send|sends|capture|captures)\s+(?:a\s+|an\s+|the\s+|your\s+)?(photo|photograph|video|recording|image)/i
-  const MEDIA_OF_LEARNER = /(photo|photograph|video|recording|image)[^.]{0,40}\bof\s+(you|yourself|your|the learner)/i
-
-  const sentences = (text) => String(text).split(/(?<=[.!?])\s+|\n/)
-  const scan = (label, text) => {
-    for (const sentence of sentences(text)) {
-      if (NEGATED.test(sentence)) continue
-      for (const re of BANNED) if (re.test(sentence)) errors.push(`${label}: unnegated body-metric term ${re} -> ${sentence.slice(0, 90)}`)
-      if (MEDIA_PRODUCE.test(sentence) || MEDIA_OF_LEARNER.test(sentence)) errors.push(`${label}: media requirement -> ${sentence.slice(0, 90)}`)
-    }
-  }
+  // Body-metric and learner-media rules, plus their clause-aware negation
+  // scoping, live in safety-scan.mjs so they can be tested without a build.
+  const scan = (label, text) => errors.push(...scanText(label, text))
 
   const allIds = new Set()
 
@@ -444,6 +435,7 @@ function validate(built) {
         if (l[f] === undefined || l[f] === null) errors.push(`${l.lesson_id}: missing Study field ${f}`)
       if (!l.adapted_alternative) errors.push(`${l.lesson_id}: missing adapted_alternative`)
       if (!l.guardian_safety_review) errors.push(`${l.lesson_id}: missing guardian_safety_review`)
+      if (!l.home_connection.endsWith(HOME_CONNECTION_FLOOR)) errors.push(`${l.lesson_id}: home_connection missing optionality and privacy floor`)
       if (!Array.isArray(l.key_points) || l.key_points.length < 4) errors.push(`${l.lesson_id}: fewer than 4 taught key_points`)
       if (!l.practice_scenario) errors.push(`${l.lesson_id}: missing practice_scenario`)
       if (l.media.required !== false) errors.push(`${l.lesson_id}: media must never be required`)
@@ -461,6 +453,13 @@ function validate(built) {
       scan(`${u.unit_id} performance_task`, u.performance_task)
       scan(`${u.unit_id} adapted_alternative`, u.adapted_alternative)
       scan(`${u.unit_id} home_connection`, u.home_connection)
+      if (!u.home_connection.endsWith(HOME_CONNECTION_FLOOR)) errors.push(`${u.unit_id}: home_connection missing optionality and privacy floor`)
+      // A unit that asks a guardian to check materials against allergies is
+      // asking for a guardian action, so it must also carry the marker that
+      // surfaces that action. The reverse is not required: units 4 and 6 carry
+      // the marker for preview and supervision reasons with no allergy note.
+      if (/\bcheck\b|\bconfirms\b/i.test(u.guardian_safety_review.food_or_allergy_note || '') && u.guardian_safety_review.guardian_confirmation_required !== true)
+        errors.push(`${u.unit_id}: allergy or material check present without guardian_confirmation_required`)
       scan(`${u.unit_id} essential_question`, u.essential_question)
       for (const [k, v] of Object.entries(u.guardian_safety_review)) if (typeof v === 'string') scan(`${u.unit_id} guardian.${k}`, v)
       for (const t of u.topic_content) {
