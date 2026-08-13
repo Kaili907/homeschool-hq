@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-financial-literacy-u06-assessment",
+  "courseRef": "ma-g9-financial-literacy",
+  "grade": 9,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g9-financial-literacy-u06",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It",
+    "courseTitle": "Personal Finance",
+    "assessmentLessonRef": "ma-g9-financial-literacy-u06-l10"
+  },
+  "standards": [
+    "PF6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u06-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Policy 1: $46 a month, $500 deductible, $15,000 limit. Policy 2: $33 a month, $1,500 deductible, $15,000 limit. Policy 3: $25 a month, $2,500 deductible, $8,000 limit. The loss, if it happens, is $6,000 and the annual chance is 18%.",
+      "prompt": "What is Policy 1’s expected annual cost — premium plus the chance of paying the deductible?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "Policy 1: $46 a month, $500 deductible, $15,000 limit. Policy 2: $33 a month, $1,500 deductible, $15,000 limit. Policy 3: $25 a month, $2,500 deductible, $8,000 limit. The loss, if it happens, is $6,000 and the annual chance is 18%.",
+      "prompt": "What is Policy 2’s expected annual cost?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "Policy 1: $46 a month, $500 deductible, $15,000 limit. Policy 2: $33 a month, $1,500 deductible, $15,000 limit. Policy 3: $25 a month, $2,500 deductible, $8,000 limit. The loss, if it happens, is $6,000 and the annual chance is 18%.",
+      "prompt": "What is Policy 3’s expected annual cost?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now test each against the $2,000 reserve. On a $6,000 loss, the household pays the deductible, or more if the limit binds.",
+      "prompt": "On a $6,000 loss under Policy 3, how much does the household pay?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-choice",
+      "directions": "Now test each against the $2,000 reserve. On a $6,000 loss, the household pays the deductible, or more if the limit binds.",
+      "prompt": "Which policy leaves the household unable to cover its own share from the $2,000 reserve?"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now test each against the $2,000 reserve. On a $6,000 loss, the household pays the deductible, or more if the limit binds.",
+      "prompt": "How much short of Policy 3’s deductible is the reserve?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write the recommendation.",
+      "prompt": "Recommend one policy for this household. Use both the expected annual costs and the $2,000 reserve, and say explicitly what your recommendation would be if the reserve were $5,000 instead."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Write the recommendation.",
+      "prompt": "Policy 3 also has a lower coverage limit than the other two. Say when that would matter and why it did not matter in this comparison."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/financial-literacy/ma-g9-financial-literacy-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-financial-literacy-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u06-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

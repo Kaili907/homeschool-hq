@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g5-financial-literacy-u06-assessment",
+  "courseRef": "ma-g5-financial-literacy",
+  "grade": 5,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g5-financial-literacy-u06",
+    "unitNumber": 6,
+    "unitTitle": "Marketplace Capstone",
+    "courseTitle": "Grade 5 Financial Literacy",
+    "assessmentLessonRef": "ma-g5-financial-literacy-u06-l05"
+  },
+  "standards": [
+    "PF1-PF6 foundations"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/assessments.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain product or service idea in your own words and give or identify a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "representation or source",
+      "prompt": "Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of costs and pricing.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply budget in a new realistic situation. Show the process or cite evidence.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving customer communication; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect product or service idea with reflection and giving choices. Explain how the ideas support, constrain, contrast with, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit project: Operate a paper or simulated marketplace and produce a simple income, expense, and reflection report.",
+      "possiblePoints": 8
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-05/financial-literacy/ma-g5-financial-literacy-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g5-financial-literacy-u06-assessment",
+    "metadataRef": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/assessments.json",
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-05/swk-fl-g5-u06-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Marketplace Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -35,6 +35,11 @@ import {
   FinalFamilyPilotController,
   type FinalFamilyPilotControllerResult,
 } from './controller'
+import {
+  BrowserLearnerResponseStore,
+  LearnerResponseRuntime,
+  type LearnerResponsePresentation,
+} from './learner-response'
 import { digestLocalPin } from './state'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
@@ -611,6 +616,8 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
   const [message, setMessage] = useState('')
   const [tutorText, setTutorText] = useState('')
   const [focus, setFocus] = useState<FamilyPilotFocusSession | null>(null)
+  const [, setResponseRevision] = useState(0)
+  const responseStore = useMemo(() => new BrowserLearnerResponseStore(window.localStorage), [assignmentRef])
   const assignment = controller.coreSnapshot.state.students.find((item) => item.studentRef === studentRef)?.assignments.find((item) => item.assignmentRef === assignmentRef)
 
   const run = useCallback(async (action: () => Promise<FinalFamilyPilotControllerResult>) => {
@@ -648,7 +655,64 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
 
   const pending = result.completionStatus === 'PENDING_GUARDIAN_ATTESTATION'
   const certified = result.completionStatus === 'CERTIFIED' && result.study.assignmentState === 'completed'
-  const section = result.material.format === 'structured' ? result.material.sections[Math.max(0, (result.study.segmentOrdinal ?? 1) - 1) % Math.max(1, result.material.sections.length)] : null
+  const responseRuntime = new LearnerResponseRuntime(result.material, {
+    lessonRef: result.study.lessonRef,
+    studentRef: result.study.session.learnerRef,
+    assignmentRef,
+    // Study's stable session is the attempt identity in this completion-authority path.
+    attemptRef: result.study.session.sessionRef,
+  }, responseStore)
+  const responsePresentation: LearnerResponsePresentation = responseRuntime.open(result.study.segmentOrdinal, result.study.segmentRef)
+  const responseItem = responsePresentation.item
+  const segmentContent = responseItem ? {
+    lessonRef: responseItem.lessonRef,
+    sectionRef: responseItem.sectionRef,
+    itemRef: responseItem.itemRef,
+    title: responseItem.title,
+    instruction: responseItem.instruction,
+    prompt: responseItem.prompt,
+    example: responseItem.example,
+    responseKind: responseItem.responseType,
+    choices: responseItem.choices.map((choice) => ({ id: choice.choiceRef, label: choice.label })),
+    pendingAssessmentCount: responsePresentation.pendingAssessmentCount,
+  } as const : {
+    title: 'Responses saved',
+    prompt: 'All required responses for this Study step are saved on this device.',
+    responseKind: 'READ' as const,
+    pendingAssessmentCount: responsePresentation.pendingAssessmentCount,
+  }
+
+  const submitLearnerResponse = async (value: string) => {
+    if (!responseItem) {
+      setMessage('There is no active response item for this Study step.')
+      return
+    }
+    setBusy(true)
+    const saved = await responseRuntime.submit({
+      lessonRef: result.study.lessonRef,
+      sectionRef: responseItem.sectionRef,
+      itemRef: responseItem.itemRef,
+      segmentRef: responsePresentation.segmentRef,
+      value,
+    })
+    if (saved.status === 'rejected') setMessage(saved.message)
+    else {
+      setMessage(saved.assessmentStatus === 'PENDING_ASSESSMENT'
+        ? 'Response saved on this device. Assessment is pending.'
+        : 'Response saved and assessed by the trusted assessor.')
+      setResponseRevision((revision) => revision + 1)
+    }
+    setBusy(false)
+    refresh()
+  }
+
+  const completePresentedSegment = () => {
+    if (!responsePresentation.canCompleteSegment) {
+      setMessage('Save every required response before continuing.')
+      return
+    }
+    void run(() => controller.completeSegment(studentRef, assignmentRef))
+  }
   return (
     <main className="mx-auto grid max-w-6xl gap-5 px-4 py-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.7fr)]">
       <MaterialView material={result.material} />
@@ -664,15 +728,15 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
           <FamilyPilotLessonPlayer
             status={certified ? 'completed' : result.study.sessionStatus === 'paused' ? 'paused' : 'active'}
             snapshot={result.study}
-            segmentContent={{ title: section?.title, instruction: section?.body, prompt: section?.prompts[0], responseKind: 'none' }}
+            segmentContent={segmentContent}
             tutorHelpAvailable
             busy={busy}
             errorMessage={message}
-            onSubmitAction={() => undefined}
+            onSubmitAction={(value) => void submitLearnerResponse(value)}
             onPause={() => void run(() => controller.pause(studentRef, assignmentRef))}
             onResume={() => void run(() => controller.resume(studentRef, assignmentRef))}
-            onNext={() => void run(() => controller.completeSegment(studentRef, assignmentRef))}
-            onCompleteSegment={() => void run(() => controller.completeSegment(studentRef, assignmentRef))}
+            onNext={completePresentedSegment}
+            onCompleteSegment={completePresentedSegment}
             onOpenTutor={() => void controller.tutor(studentRef, assignmentRef).then((tutor) => setTutorText(tutor.status === 'ok' ? tutor.step.presentation.visibleText : tutor.message)).catch((error) => setTutorText(messageOf(error)))}
             onExit={() => void controller.checkpoint(studentRef, assignmentRef).then(() => onExit())}
           />

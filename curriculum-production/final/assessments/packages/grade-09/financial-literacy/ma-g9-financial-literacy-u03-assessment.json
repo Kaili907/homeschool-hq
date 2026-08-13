@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-financial-literacy-u03-assessment",
+  "courseRef": "ma-g9-financial-literacy",
+  "grade": 9,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g9-financial-literacy-u03",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Building a Budget That Survives a Surprise",
+    "courseTitle": "Personal Finance",
+    "assessmentLessonRef": "ma-g9-financial-literacy-u03-l10"
+  },
+  "standards": [
+    "PF3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u03-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The plan: deposit $150 a month for 12 months. The fictional account credits 3.2% a year on the average balance, which for level monthly deposits is about $975 across this year.",
+      "prompt": "What do the twelve deposits total?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The plan: deposit $150 a month for 12 months. The fictional account credits 3.2% a year on the average balance, which for level monthly deposits is about $975 across this year.",
+      "prompt": "How much interest does the year credit on an average balance of $975?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The plan: deposit $150 a month for 12 months. The fictional account credits 3.2% a year on the average balance, which for level monthly deposits is about $975 across this year.",
+      "prompt": "What does the plan finish with?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now the shock. In month 7, immediately after that month’s deposit, the saver must withdraw $400.",
+      "prompt": "What is the deposit balance after 7 months, before the withdrawal and ignoring interest?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now the shock. In month 7, immediately after that month’s deposit, the saver must withdraw $400.",
+      "prompt": "What is left immediately after the $400 withdrawal?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now the shock. In month 7, immediately after that month’s deposit, the saver must withdraw $400.",
+      "prompt": "To still reach a balance of $1,800 by month 12, what must each of the remaining 5 monthly deposits become?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write up the repaired plan.",
+      "prompt": "Present the repaired plan. State the new monthly deposit, say whether raising the deposit by $80 a month is the right repair or whether moving the goal date is better, and defend the choice."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Write up the repaired plan.",
+      "prompt": "The plan’s interest figure assumed an average balance of $975. Say why the $400 withdrawal makes that figure wrong, and in which direction."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/financial-literacy/ma-g9-financial-literacy-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-financial-literacy-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u03-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF3 — Budgeting and Saving: Building a Budget That Survives a Surprise?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

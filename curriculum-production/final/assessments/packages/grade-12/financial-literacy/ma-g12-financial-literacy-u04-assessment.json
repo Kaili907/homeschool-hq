@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-financial-literacy-u04-assessment",
+  "courseRef": "ma-g12-financial-literacy",
+  "grade": 12,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g12-financial-literacy-u04",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "courseTitle": "Financial Transition to Adulthood",
+    "assessmentLessonRef": "ma-g12-financial-literacy-u04-l11"
+  },
+  "standards": [
+    "PF4",
+    "PF4.1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u04-l11.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The fictional borrower has one card with a limit of $4,000 carrying a balance of $1,180, and has made payments on time in 34 of the last 36 months. A simulated credit report also lists an account the borrower did not open, with a balance of $2,350 against a limit of $3,000.",
+      "prompt": "What is utilisation on the borrower’s own card, to two decimal places?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The fictional borrower has one card with a limit of $4,000 carrying a balance of $1,180, and has made payments on time in 34 of the last 36 months. A simulated credit report also lists an account the borrower did not open, with a balance of $2,350 against a limit of $3,000.",
+      "prompt": "What proportion of the last 36 months carried an on-time payment, to two decimal places?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The fictional borrower has one card with a limit of $4,000 carrying a balance of $1,180, and has made payments on time in 34 of the last 36 months. A simulated credit report also lists an account the borrower did not open, with a balance of $2,350 against a limit of $3,000.",
+      "prompt": "What would utilisation be if the disputed account were counted, to two decimal places?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now size the damage and establish the right first move.",
+      "prompt": "By how many percentage points does the disputed account raise utilisation? Give two decimal places.",
+      "responseUnit": "percentage points"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-choice",
+      "directions": "Now size the damage and establish the right first move.",
+      "prompt": "What is the right first response to the $2,350 account the borrower did not open?"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now size the damage and establish the right first move.",
+      "prompt": "What balance on the borrower’s own $4,000 limit would sit at 25% utilisation?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write and defend the plan.",
+      "prompt": "Write a protection plan for this fictional borrower that covers both the disputed account and their own behaviour, and defend it. Explain why the two halves need different kinds of action, and say what you would tell the borrower to expect that the arithmetic here cannot promise."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/financial-literacy/ma-g12-financial-literacy-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-financial-literacy-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u04-l11.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF4 — Using Credit: Financing Adult Life and Postsecondary Costs?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-financial-literacy-u07-assessment",
+  "courseRef": "ma-g10-financial-literacy",
+  "grade": 10,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g10-financial-literacy-u07",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "courseTitle": "Consumer Economics and Credit",
+    "assessmentLessonRef": "ma-g10-financial-literacy-u07-l11"
+  },
+  "standards": [
+    "PF7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u07-l11.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "State R charges a 3.2% state income tax and a 1.4% local income tax, both on gross income, plus a 6.5% sales tax. State S charges no income tax at any level and an 8.75% sales tax, plus an annual property levy of $2,180 that is charged only to households that own the home they live in. Household A owns its home, has a gross income of $32,000, and makes $10,000 of taxable purchases a year.",
+      "prompt": "What does Household A pay in State R in income tax, state and local combined?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "State R charges a 3.2% state income tax and a 1.4% local income tax, both on gross income, plus a 6.5% sales tax. State S charges no income tax at any level and an 8.75% sales tax, plus an annual property levy of $2,180 that is charged only to households that own the home they live in. Household A owns its home, has a gross income of $32,000, and makes $10,000 of taxable purchases a year.",
+      "prompt": "What does Household A pay in State R in total?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "State R charges a 3.2% state income tax and a 1.4% local income tax, both on gross income, plus a 6.5% sales tax. State S charges no income tax at any level and an 8.75% sales tax, plus an annual property levy of $2,180 that is charged only to households that own the home they live in. Household A owns its home, has a gross income of $32,000, and makes $10,000 of taxable purchases a year.",
+      "prompt": "What does Household A pay in State S in total?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Household B rents, so the property levy does not reach it. It has a gross income of $55,000 and makes $14,000 of taxable purchases a year. Work out the same two totals for Household B, then measure the levy against Household A’s income.",
+      "prompt": "How much more does State S cost Household A than State R does?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Household B rents, so the property levy does not reach it. It has a gross income of $55,000 and makes $14,000 of taxable purchases a year. Work out the same two totals for Household B, then measure the levy against Household A’s income.",
+      "prompt": "What does Household B pay in State R in total?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Household B rents, so the property levy does not reach it. It has a gross income of $55,000 and makes $14,000 of taxable purchases a year. Work out the same two totals for Household B, then measure the levy against Household A’s income.",
+      "prompt": "What does Household B pay in State S in total?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Household B rents, so the property levy does not reach it. It has a gross income of $55,000 and makes $14,000 of taxable purchases a year. Work out the same two totals for Household B, then measure the levy against Household A’s income.",
+      "prompt": "How much less does State S cost Household B than State R does?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p5",
+      "kind": "fixed-numeric",
+      "directions": "Household B rents, so the property levy does not reach it. It has a gross income of $55,000 and makes $14,000 of taxable purchases a year. Work out the same two totals for Household B, then measure the levy against Household A’s income.",
+      "prompt": "The $2,180 levy is what percentage of Household A’s gross income?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t2-p6",
+      "kind": "fixed-choice",
+      "directions": "Household B rents, so the property levy does not reach it. It has a gross income of $55,000 and makes $14,000 of taxable purchases a year. Work out the same two totals for Household B, then measure the levy against Household A’s income.",
+      "prompt": "For which household is the claim \"State S is the cheaper state\" true?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Answer in a few sentences, using the figures you computed.",
+      "prompt": "A fictional advertisement says \"Move to State S and stop paying income tax.\" Say for whom that advice would have worked and for whom it would have backfired, explain which feature of State S produces the split, and state what makes a fixed annual charge fall differently from a percentage one."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/financial-literacy/ma-g10-financial-literacy-u07-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-financial-literacy-u07-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u07-l11.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF7 — Paying Taxes: Tax Structure, Withholding, and Filing?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-mathematics-u03-assessment",
+  "courseRef": "ma-g11-mathematics",
+  "grade": 11,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g11-mathematics-u03",
+    "unitNumber": 3,
+    "unitTitle": "Complex Numbers and Nonlinear Systems",
+    "courseTitle": "Algebra II",
+    "assessmentLessonRef": "ma-g11-mathematics-u03-l16"
+  },
+  "standards": [
+    "N-CN.1",
+    "N-CN.2",
+    "N-CN.7",
+    "A-REI.7",
+    "MP.2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u03-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Solve the system y = x² and y = -3x − 2. Give the x-coordinates of the intersection points in increasing order.",
+      "choices": [
+        "-1, 0",
+        "1, 2",
+        "-2, -1",
+        "-3, -2"
+      ],
+      "standardRef": "A-REI.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Simplify i^5.",
+      "choices": [
+        "1",
+        "−1",
+        "−i",
+        "i"
+      ],
+      "standardRef": "N-CN.1"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Multiply and write in the form a + bi: (5 + 2i)(-5 + i).",
+      "choices": [
+        "-25 + 2i",
+        "-27 − 5i",
+        "-23 − 5i",
+        "-27 + 15i"
+      ],
+      "standardRef": "N-CN.2"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Solve x^2 + 8x + 20 = 0 over the complex numbers.",
+      "choices": [
+        "x = -4 or x = 4",
+        "x = -4 + 2i only",
+        "x = 4 + 2i or x = 4 − 2i",
+        "x = -4 + 2i or x = -4 − 2i"
+      ],
+      "standardRef": "N-CN.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Solve the system y = x² and y = -4x − 3. Give the x-coordinates of the intersection points in increasing order.",
+      "choices": [
+        "-2, 0",
+        "-3, -1",
+        "-4, -3",
+        "1, 3"
+      ],
+      "standardRef": "A-REI.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Simplify i^13.",
+      "choices": [
+        "1",
+        "−i",
+        "−1",
+        "i"
+      ],
+      "standardRef": "N-CN.1"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Multiply and write in the form a + bi: (-1 + 7i)(5 − 4i).",
+      "choices": [
+        "-33 + 39i",
+        "23 − 31i",
+        "23 + 39i",
+        "-5 − 28i"
+      ],
+      "standardRef": "N-CN.2"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Solve x^2 - 6x + 13 = 0 over the complex numbers.",
+      "choices": [
+        "x = 3 + 2i only",
+        "x = -3 + 2i or x = -3 − 2i",
+        "x = 3 + 2i or x = 3 − 2i",
+        "x = 3 or x = -3"
+      ],
+      "standardRef": "N-CN.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Solve the system y = x² and y = 2x + 8. Give the x-coordinates of the intersection points in increasing order.",
+      "choices": [
+        "-4, 2",
+        "2, 8",
+        "-2, 4",
+        "-1, 5"
+      ],
+      "standardRef": "A-REI.7"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Simplify i^56.",
+      "choices": [
+        "−i",
+        "1",
+        "−1",
+        "i"
+      ],
+      "standardRef": "N-CN.1"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "Multiply and write in the form a + bi: (-4 − 2i)(-8 − i).",
+      "choices": [
+        "32 + 2i",
+        "30 − 12i",
+        "30 + 20i",
+        "34 + 20i"
+      ],
+      "standardRef": "N-CN.2"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u03-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Solve x^2 + 4x + 40 = 0 over the complex numbers.",
+      "choices": [
+        "x = -2 + 6i only",
+        "x = -2 or x = 2",
+        "x = 2 + 6i or x = 2 − 6i",
+        "x = -2 + 6i or x = -2 − 6i"
+      ],
+      "standardRef": "N-CN.7"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/mathematics/ma-g11-mathematics-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-mathematics-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u03-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Complex Numbers and Nonlinear Systems?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

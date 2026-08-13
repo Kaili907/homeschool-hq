@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-financial-literacy-u01-assessment",
+  "courseRef": "ma-g9-financial-literacy",
+  "grade": 9,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g9-financial-literacy-u01",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified",
+    "courseTitle": "Personal Finance",
+    "assessmentLessonRef": "ma-g9-financial-literacy-u01-l10"
+  },
+  "standards": [
+    "PF1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u01-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "All three fictional roles are full time at 2,080 hours a year. Role 1, warehouse operations associate: $19.10 an hour, benefits worth $4,100 a year, 3 weeks of on-the-job training at no cost. Role 2, pharmacy technician: $21.40 an hour, benefits worth $5,250, a 9-month program costing $3,900. Role 3, wind turbine technician: $27.65 an hour, benefits worth $6,800, a 24-month program costing $18,400.",
+      "prompt": "What is Role 1’s total annual compensation, counting wages and benefits?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "All three fictional roles are full time at 2,080 hours a year. Role 1, warehouse operations associate: $19.10 an hour, benefits worth $4,100 a year, 3 weeks of on-the-job training at no cost. Role 2, pharmacy technician: $21.40 an hour, benefits worth $5,250, a 9-month program costing $3,900. Role 3, wind turbine technician: $27.65 an hour, benefits worth $6,800, a 24-month program costing $18,400.",
+      "prompt": "What is Role 2’s total annual compensation?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "All three fictional roles are full time at 2,080 hours a year. Role 1, warehouse operations associate: $19.10 an hour, benefits worth $4,100 a year, 3 weeks of on-the-job training at no cost. Role 2, pharmacy technician: $21.40 an hour, benefits worth $5,250, a 9-month program costing $3,900. Role 3, wind turbine technician: $27.65 an hour, benefits worth $6,800, a 24-month program costing $18,400.",
+      "prompt": "What is Role 3’s total annual compensation?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Role 1 requires no paid training, so use it as the baseline. For each of the other two roles, find the annual gain over Role 1 and how many months of that gain repay the program cost.",
+      "prompt": "How many months does Role 2’s gain over Role 1 take to repay its $3,900 program cost? Round to the nearest month.",
+      "responseUnit": "months"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Role 1 requires no paid training, so use it as the baseline. For each of the other two roles, find the annual gain over Role 1 and how many months of that gain repay the program cost.",
+      "prompt": "How many months does Role 3’s gain over Role 1 take to repay its $18,400 program cost? Round to the nearest month.",
+      "responseUnit": "months"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Role 1 requires no paid training, so use it as the baseline. For each of the other two roles, find the annual gain over Role 1 and how many months of that gain repay the program cost.",
+      "prompt": "Counting the 24 months of Role 3’s program before any of that pay begins, how long from starting the program until the $18,400 is repaid?",
+      "responseUnit": "months"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write the recommendation. Use your three completed income profiles.",
+      "prompt": "Recommend one of the three fictional roles for someone who needs steady income within six months, and defend it against the role with the highest total compensation."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Write the recommendation. Use your three completed income profiles.",
+      "prompt": "State one figure in your three income profiles that you are least confident in, and say what would change your recommendation if it were wrong."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/financial-literacy/ma-g9-financial-literacy-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-financial-literacy-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u01-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

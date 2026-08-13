@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g7-english-language-arts-u08-assessment",
+  "courseRef": "ma-g7-english-language-arts",
+  "grade": 7,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g7-english-language-arts-u08",
+    "unitNumber": 8,
+    "unitTitle": "Grammar, Style, and Vocabulary Through Revision",
+    "courseTitle": "Grade 7 English Language Arts",
+    "assessmentLessonRef": "ma-g7-english-language-arts-u08-l16"
+  },
+  "standards": [
+    "7.L.1",
+    "7.L.2",
+    "7.L.3",
+    "7.L.4",
+    "7.L.5",
+    "7.L.6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/english-language-arts/assessments.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain phrase and clause structures in your own words and give or identify a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "representation or source",
+      "prompt": "Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of sentence variety.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply conventions and punctuation in a new realistic situation. Show the process or cite evidence.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving precise concise language; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect phrase and clause structures with register and style. Explain how the ideas support, constrain, contrast with, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit project: Revise a set of authentic drafts and produce an editor’s commentary explaining high-impact changes.",
+      "possiblePoints": 8
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-07/english-language-arts/ma-g7-english-language-arts-u08-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g7-english-language-arts-u08-assessment",
+    "metadataRef": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/english-language-arts/assessments.json",
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-07/ma-g7-english-language-arts-u08-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Grammar, Style, and Vocabulary Through Revision?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

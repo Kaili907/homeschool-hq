@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-financial-literacy-u02-assessment",
+  "courseRef": "ma-g10-financial-literacy",
+  "grade": 10,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g10-financial-literacy-u02",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "courseTitle": "Consumer Economics and Credit",
+    "assessmentLessonRef": "ma-g10-financial-literacy-u02-l10"
+  },
+  "standards": [
+    "PF2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u02-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The fictional dispute: an agreed price of $540 for a service, an invoice of $712 including $94 of charges not in the written agreement and $78 of a fee the agreement caps at $30. The consumer paid the invoice in full and now claims the excess back.",
+      "prompt": "How much of the fee charged exceeds the agreed cap?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The fictional dispute: an agreed price of $540 for a service, an invoice of $712 including $94 of charges not in the written agreement and $78 of a fee the agreement caps at $30. The consumer paid the invoice in full and now claims the excess back.",
+      "prompt": "What is the total amount the consumer can claim on the contract’s own terms?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The fictional dispute: an agreed price of $540 for a service, an invoice of $712 including $94 of charges not in the written agreement and $78 of a fee the agreement caps at $30. The consumer paid the invoice in full and now claims the excess back.",
+      "prompt": "What does the invoice total less the claim come to, and does it match the agreed price?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Check the arithmetic of the claim against the agreement.",
+      "prompt": "How much above the agreed price of $540 was the consumer invoiced?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Check the arithmetic of the claim against the agreement.",
+      "prompt": "How much of that excess is legitimately chargeable under the agreement?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-choice",
+      "directions": "Check the arithmetic of the claim against the agreement.",
+      "prompt": "Which figure should head the complaint?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Assemble the dossier.",
+      "prompt": "Write the dossier. State the amount claimed and its contractual basis line by line, the evidence you would attach, the escalation path if the seller refuses, and what you would accept as a reasonable settlement."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Assemble the dossier.",
+      "prompt": "A consumer protection agency publishes complaint data by seller. Say how that publication helps a consumer who has not yet bought anything, and what it cannot tell them."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/financial-literacy/ma-g10-financial-literacy-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-financial-literacy-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u02-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

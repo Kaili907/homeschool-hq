@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-financial-literacy-u04-assessment",
+  "courseRef": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g3-financial-literacy-u04",
+    "unitNumber": 4,
+    "unitTitle": "Saving for a Goal",
+    "courseTitle": "Grade 3 Financial Literacy",
+    "assessmentLessonRef": "ma-g3-financial-literacy-u04-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 4 — saving and goals"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u04-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Talk through Sofia's week four. The jar is more than half full, the goal has not moved, and the waiting feels harder now than it did in week one. Describe the feeling before deciding anything about it.",
+      "prompt": "Why does waiting feel harder for Sofia in week four than it did in week one?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "Sofia wants to keep going but needs something concrete to help. Write one strategy she could actually use this week, and say what makes it likely to work for her rather than just sounding good.",
+      "prompt": "What is one thing Sofia could do this week to make waiting easier, and why would it help?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Sofia's friend already has the game.",
+      "prompt": "What would you say to Sofia about her friend already having the game?"
+    }
+  ],
+  "responseMode": "calculation-and-decision-explanation",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/financial-literacy/ma-g3-financial-literacy-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Naming the difficulty honestly criterion.",
+    "Provide evidence that meets the stated Offering a usable strategy criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-financial-literacy-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u04-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Saving for a Goal?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

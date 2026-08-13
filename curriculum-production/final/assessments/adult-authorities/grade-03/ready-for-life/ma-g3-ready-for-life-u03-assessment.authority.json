@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g3-ready-for-life-u03-assessment",
+  "courseRef": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "authorityClass": "GUARDIAN_REQUIRED",
+  "rubricDimensions": [
+    "Tool boundary respected",
+    "Hygiene and separation",
+    "Process completion"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/ready-for-life/scoring/ready-for-life/grade-03/swk-rfl-g3-u03-l05.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "g34_normalization",
+    "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+    "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/ready-for-life/assessments.json"
+  },
+  "completionAuthority": {
+    "kind": "guardian",
+    "learnerAssertionCanCertify": false,
+    "adultAttestationRequired": true
+  },
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

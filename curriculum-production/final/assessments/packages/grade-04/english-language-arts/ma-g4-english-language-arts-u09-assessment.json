@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-english-language-arts-u09-assessment",
+  "courseRef": "ma-g4-english-language-arts",
+  "grade": 4,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g4-english-language-arts-u09",
+    "unitNumber": 9,
+    "unitTitle": "Research, Sources, and Honest Note-Taking",
+    "courseTitle": "Grade 4 English Language Arts",
+    "assessmentLessonRef": "ma-g4-english-language-arts-u09-l17"
+  },
+  "standards": [
+    "4.W.7",
+    "4.W.8",
+    "4.RI.9"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-04/ma-g4-english-language-arts-u09-l17.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: unit evidence: a research brief with source list and paraphrased notes. Essential question: How do I investigate a question across sources and record what I found in my own words? By the end of this lesson you should be able to: Produce independent evidence of the unit's targets. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Research, Sources, and Honest Note-Taking. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain this idea in your own words and give one valid example: investigating different aspects of a topic.\\n- (6 pts, text evidence) Answer a question about taking notes and categorizing them using an unfamiliar passage, and quote or precisely paraphrase the words that support your answer.\\n- (6 pts, application) Apply this to new material: providing a list of sources. Show the process or cite the evidence.\\n- (6 pts, error or claim analysis) A plausible but flawed response about integrating information from two texts is provided. Identify the error, correct it, and explain why the correction is better.\\n- (9 pts, constructed writing) Write an independent response connected to one question the sources raised but did not answer and to the unit performance task: Complete a research brief with the question, at least three categorized sources and a source list, paraphrased notes, an integrated answer drawing on two texts, and one question the sources raised that you did not answer.\\n- (4 pts, reflection and transfer) Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.\\n\\nThis assessment also includes 1 fixed-answer/selected-response item(s) delivered separately by your facilitator.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/english-language-arts/ma-g4-english-language-arts-u09-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-english-language-arts-u09-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-04/ma-g4-english-language-arts-u09-l17.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Research, Sources, and Honest Note-Taking?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

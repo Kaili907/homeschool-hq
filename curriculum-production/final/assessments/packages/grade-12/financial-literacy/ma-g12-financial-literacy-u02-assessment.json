@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-financial-literacy-u02-assessment",
+  "courseRef": "ma-g12-financial-literacy",
+  "grade": 12,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g12-financial-literacy-u02",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "courseTitle": "Financial Transition to Adulthood",
+    "assessmentLessonRef": "ma-g12-financial-literacy-u02-l10"
+  },
+  "standards": [
+    "PF2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u02-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household pays eight services monthly: s1 at $19.99, s2 at $12.50, s3 at $7.99, s4 at $24.00, s5 at $5.99, s6 at $16.49, s7 at $10.00, and s8 at $32.00. Two more are billed annually: s9 at $96.00 and s10 at $149.00. The household has not used s3, s5, or s7 all year. Service s8 has a lower tier at $14.00 a month that covers everything the household actually uses. Service s10 is also offered at $12.00 a month.",
+      "prompt": "What do the eight monthly services cost in one month?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household pays eight services monthly: s1 at $19.99, s2 at $12.50, s3 at $7.99, s4 at $24.00, s5 at $5.99, s6 at $16.49, s7 at $10.00, and s8 at $32.00. Two more are billed annually: s9 at $96.00 and s10 at $149.00. The household has not used s3, s5, or s7 all year. Service s8 has a lower tier at $14.00 a month that covers everything the household actually uses. Service s10 is also offered at $12.00 a month.",
+      "prompt": "What do those eight cost across a year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household pays eight services monthly: s1 at $19.99, s2 at $12.50, s3 at $7.99, s4 at $24.00, s5 at $5.99, s6 at $16.49, s7 at $10.00, and s8 at $32.00. Two more are billed annually: s9 at $96.00 and s10 at $149.00. The household has not used s3, s5, or s7 all year. Service s8 has a lower tier at $14.00 a month that covers everything the household actually uses. Service s10 is also offered at $12.00 a month.",
+      "prompt": "What is the household’s total annual outlay on all ten services?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Price each of the three kinds of change the audit makes available.",
+      "prompt": "What would cancelling the three unused services s3, s5, and s7 recover in a year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Price each of the three kinds of change the audit makes available.",
+      "prompt": "What would moving s8 to the $14.00 tier save in a year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Price each of the three kinds of change the audit makes available.",
+      "prompt": "What would moving s10 from the $149.00 annual price to the $12.00 monthly price save in a year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Price each of the three kinds of change the audit makes available.",
+      "prompt": "What does the whole audit recover in a year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Express the recovery in the two forms a household actually uses.",
+      "prompt": "What share of the annual outlay does the audit recover, to two decimal places?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "Express the recovery in the two forms a household actually uses.",
+      "prompt": "How much does the audit free up per month?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write the audit decision. Give a figure for every line of it.",
+      "prompt": "Write the household’s audit decision: what is cancelled, what is downgraded, what is left alone, and where the freed money goes. Justify each line with a figure, and say which of your three changes is the least certain to deliver what you claimed and why."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/financial-literacy/ma-g12-financial-literacy-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-financial-literacy-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u02-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF2 — Buying Goods and Services: Running a Household's Spending?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

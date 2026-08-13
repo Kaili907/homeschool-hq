@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-technology-u04-assessment",
+  "courseRef": "ma-g12-technology",
+  "grade": 12,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g12-technology-u04",
+    "unitNumber": 4,
+    "unitTitle": "Computing Ethics, Law, Policy, and Societal Impact",
+    "courseTitle": "Cybersecurity, AI Literacy, and Computing Capstone",
+    "assessmentLessonRef": "ma-g12-technology-u04-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Impacts of Computing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u04-l05.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Demonstrate computing ethics, law, policy, and societal impact independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen computing ethics, law, policy, and societal impact could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. Anchor today's work inside its unit: this session's evidence is about computing ethics, law, policy, and societal impact, and it belongs to \"Computing Ethics, Law, Policy, and Societal Impact\", which also covers separate topics such as intellectual property licensing and attribution. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Independent complete solution, a two-case verification with expected against actual, and a self-contained written explanation."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/technology/ma-g12-technology-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task on computing ethics, law, policy, and societal impact.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-technology-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u04-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Computing Ethics, Law, Policy, and Societal Impact?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

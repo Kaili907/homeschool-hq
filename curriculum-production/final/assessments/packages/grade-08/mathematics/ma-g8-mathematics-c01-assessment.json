@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g8-mathematics-c01-assessment",
+  "courseRef": "ma-g8-mathematics",
+  "grade": 8,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g8-mathematics-u01",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "courseTitle": "Grade 8 Mathematics",
+    "assessmentLessonRef": "ma-g8-mathematics-u01-l16"
+  },
+  "standards": [
+    "8.EE.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/evidence/grade8-integration/accepted-assessment.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "notation and exact solutions",
+      "prompt": "Write the exact solution or solutions of each equation using root notation: x² = 49, x² = 11, x³ = 27, x³ = 5. For each, state how many real solutions the equation has and why.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "evaluation of perfect squares and cubes",
+      "prompt": "Evaluate exactly, without a calculator: √121, √(16/49), ∛64, ∛(1/27). Verify two of your four answers using the inverse operation and show that verification.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "exact versus approximate",
+      "prompt": "For √45 and ∛50, state the two consecutive whole numbers each value lies between and explain how you know without a calculator. Then explain why neither can be written as an exact whole number.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "irrationality reasoning",
+      "prompt": "Explain why √2 is irrational but √49 is rational. Give a reason rather than an assertion; reference the decimal expansion, the ratio-of-integers definition, or the informal contradiction argument.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "error analysis",
+      "prompt": "A learner writes: “x² = 25, so x = 5,” and “∛(−27) has no real solution because you cannot take a root of a negative.” Identify what is wrong with each statement, correct it, and explain why the error is tempting.",
+      "possiblePoints": 4
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "application and transfer",
+      "prompt": "A square garden bed must enclose 20 square feet. Give the exact side length in root notation, classify it as rational or irrational with a reason, give an approximation appropriate for buying lumber, and explain why the exact and rounded forms are each correct for their own purpose.",
+      "possiblePoints": 4
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-08/mathematics/ma-g8-mathematics-c01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Correct use of √ and ∛ notation to name exact solutions criterion.",
+    "Provide evidence that meets the stated Accuracy of evaluation for small perfect squares and perfect cubes criterion.",
+    "Provide evidence that meets the stated Discrimination between exact values and approximations, with justification criterion.",
+    "Provide evidence that meets the stated Quality of reasoning about rationality and irrationality criterion.",
+    "Provide evidence that meets the stated Verification and self-correction criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g8-mathematics-c01-assessment",
+    "metadataRef": "repo:curriculum-production/final/mathematics/evidence/grade8-integration/accepted-assessment.json",
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-08/ma-g8-mathematics-u01-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Real Numbers and Irrational Numbers?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

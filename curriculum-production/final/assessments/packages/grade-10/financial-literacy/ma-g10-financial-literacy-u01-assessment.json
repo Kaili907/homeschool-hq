@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-financial-literacy-u01-assessment",
+  "courseRef": "ma-g10-financial-literacy",
+  "grade": 10,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g10-financial-literacy-u01",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "courseTitle": "Consumer Economics and Credit",
+    "assessmentLessonRef": "ma-g10-financial-literacy-u01-l10"
+  },
+  "standards": [
+    "PF1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u01-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Occupation M: median wage $53,700, 10th percentile $37,200, about 2,900 openings a year, growth 9%. Entry requires a 20-month programme costing $16,800, during which a learner earns $10,000 a year against a $32,000 baseline. Occupation N: median wage $71,400, 10th percentile $44,600, about 620 openings a year, growth 1%. Entry requires a 48-month programme costing $52,000, during which a learner earns $9,000 a year against the same baseline.",
+      "prompt": "What is the full cost of the pathway into Occupation M?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "Occupation M: median wage $53,700, 10th percentile $37,200, about 2,900 openings a year, growth 9%. Entry requires a 20-month programme costing $16,800, during which a learner earns $10,000 a year against a $32,000 baseline. Occupation N: median wage $71,400, 10th percentile $44,600, about 620 openings a year, growth 1%. Entry requires a 48-month programme costing $52,000, during which a learner earns $9,000 a year against the same baseline.",
+      "prompt": "What is the full cost of the pathway into Occupation N?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "Occupation M: median wage $53,700, 10th percentile $37,200, about 2,900 openings a year, growth 9%. Entry requires a 20-month programme costing $16,800, during which a learner earns $10,000 a year against a $32,000 baseline. Occupation N: median wage $71,400, 10th percentile $44,600, about 620 openings a year, growth 1%. Entry requires a 48-month programme costing $52,000, during which a learner earns $9,000 a year against the same baseline.",
+      "prompt": "Using the 10th percentile rather than the median as the realistic entry wage, how long does Occupation M take to repay its pathway cost? Round to two decimal places.",
+      "responseUnit": "years"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Do the same for Occupation N, and then compare at the median.",
+      "prompt": "At its 10th percentile wage, how long does Occupation N take to repay its pathway cost? Round to two decimal places.",
+      "responseUnit": "years"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Do the same for Occupation N, and then compare at the median.",
+      "prompt": "At its median wage, how long does Occupation M take to repay? Round to two decimal places.",
+      "responseUnit": "years"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Do the same for Occupation N, and then compare at the median.",
+      "prompt": "At its median wage, how long does Occupation N take to repay? Round to two decimal places.",
+      "responseUnit": "years"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write the recommendation.",
+      "prompt": "Recommend one pathway for a learner who can fund at most $20,000 of tuition and needs to be earning above the baseline within three years. Use the entry-wage figures, not the median figures, as your working assumption, and say what you are assuming and why."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Write the recommendation.",
+      "prompt": "Name the single figure in this lesson you would most want verified before giving this recommendation to a real person, and say how you would try to verify it."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/financial-literacy/ma-g10-financial-literacy-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-financial-literacy-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-10/swk-flhs-g10-u01-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF1 — Earning Income: Compensation Packages and Career Pathways?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

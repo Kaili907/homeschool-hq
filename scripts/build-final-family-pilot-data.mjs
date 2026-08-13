@@ -1,5 +1,14 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { extname } from 'node:path'
+import {
+  STRUCTURED_PROJECTION_VERSION,
+  assertLearnerSafeMaterial,
+  createProjectionStats,
+  isLearnerSafeResourceRef,
+  mergeProjectionStats,
+  projectJsonLearnerMaterial,
+  projectMarkdownLearnerMaterial,
+} from './learner-projection/structured-projection-r1.mjs'
 
 const ROOT = new URL('../', import.meta.url)
 const ADMITTED = new URL('../curriculum-release-admitted/family-pilot-r1/', import.meta.url)
@@ -9,130 +18,13 @@ const readJson = async (url) => JSON.parse(await readFile(url, 'utf8'))
 const runtimeManifest = await readJson(new URL('runtime/runtime-manifest.json', ADMITTED))
 const lessonRowsByCourse = await readJson(new URL('runtime/lesson-rows-by-course.json', ADMITTED))
 const releaseManifest = await readJson(new URL('MANIFEST.json', ADMITTED))
+const socialSourceRegistry = (await readJson(
+  new URL('../curriculum-production/final/social-studies/verified-static-sources.json', import.meta.url),
+)).sources
 const bindings = (await readFile(new URL('production-bindings.jsonl', ADMITTED), 'utf8'))
   .trim()
   .split('\n')
   .map((line) => JSON.parse(line))
-
-const scalarKeys = [
-  'objective',
-  'scenario',
-  'privacySafeScenario',
-  'studentTask',
-  'knowledgeCheck',
-  'adaptationChoices',
-  'extensionChallenge',
-  'trustedAdultNote',
-  'task_brief',
-  'primary_task',
-  'deliverable',
-  'essential_question',
-  'remediation',
-  'extension',
-  'copyright_and_authorship',
-]
-
-const arrayKeys = [
-  'materials',
-  'keyPoints',
-  'movementCues',
-  'completionCriteria',
-  'accessibilitySupports',
-  'neverRequires',
-  'safetyNotes',
-  'learning_objectives',
-  'lesson_success_criteria',
-  'task_steps',
-  'requirements',
-  'critique_criteria',
-  'test_or_check_criteria',
-  'safety_and_privacy_rules',
-  'accessibility_options',
-  'task_accessibility_provisions',
-]
-
-function asText(value) {
-  if (typeof value === 'string' && value.trim()) return value.trim()
-  if (value && typeof value === 'object' && typeof value.text === 'string' && value.text.trim()) {
-    return value.text.trim()
-  }
-  return null
-}
-
-function jsonTitle(value, fallback) {
-  return value.lessonRef?.title || value.title || value.lesson_title || fallback
-}
-
-function projectJsonMaterial(value, binding, fallbackTitle) {
-  const sections = []
-  const add = (title, body, prompts = []) => {
-    const text = asText(body)
-    const safePrompts = prompts.filter((item) => typeof item === 'string' && item.trim())
-    if (text || safePrompts.length) sections.push({ title, ...(text ? { body: text } : {}), prompts: safePrompts })
-  }
-
-  add('Lesson goal', value.objective)
-  add('Scenario', value.scenario)
-  for (const key of scalarKeys) {
-    if (key === 'objective' || key === 'scenario') continue
-    add(key.replaceAll('_', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()), value[key])
-  }
-  for (const key of arrayKeys) {
-    if (!Array.isArray(value[key])) continue
-    add(key.replaceAll('_', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase()), null, value[key].filter((item) => typeof item === 'string'))
-  }
-
-  if (Array.isArray(value.sections)) {
-    for (const section of value.sections) {
-      const prompts = []
-      for (const item of Array.isArray(section.items) ? section.items : []) {
-        if (typeof item.prompt === 'string') {
-          const choices = Array.isArray(item.choices) ? `\nChoices: ${item.choices.join(' · ')}` : ''
-          prompts.push(`${item.prompt}${choices}`)
-        }
-        if (Array.isArray(item.workedSolution?.steps)) prompts.push(...item.workedSolution.steps)
-      }
-      add(section.title || section.kind || 'Lesson work', section.directions, prompts)
-    }
-  }
-
-  if (Array.isArray(value.tasks)) {
-    for (const task of value.tasks) {
-      add(
-        String(task.kind || task.taskId || 'Task').replace(/\b\w/g, (letter) => letter.toUpperCase()),
-        task.directions,
-        (Array.isArray(task.prompts) ? task.prompts : []).map((prompt) => prompt.text).filter(Boolean),
-      )
-    }
-  }
-
-  add('Source or reading', value.sourceReference)
-  add('Guided support', value.guidedSupport)
-  add('Independent evidence', value.independentEvidenceTask)
-  add('Equal-credit alternative', value.simulationAlternative?.description)
-  add('Optional reflection', value.optionalReflection?.prompt)
-  add('Media fallback', value.media?.fallback)
-
-  return {
-    materialRef: `production-material:${binding.lessonRef}`,
-    lessonRef: binding.lessonRef,
-    title: jsonTitle(value, fallbackTitle),
-    subject: binding.subject,
-    format: 'structured',
-    sections,
-  }
-}
-
-function projectMarkdownMaterial(markdown, binding, fallbackTitle) {
-  return {
-    materialRef: `production-material:${binding.lessonRef}`,
-    lessonRef: binding.lessonRef,
-    title: markdown.match(/^#\s+(.+)$/m)?.[1]?.trim() || fallbackTitle,
-    subject: binding.subject,
-    format: 'markdown',
-    markdown,
-  }
-}
 
 function packagePath(ref) {
   const separator = ref.indexOf(':')
@@ -153,6 +45,7 @@ for (const binding of bindings) {
 
 await rm(OUTPUT, { recursive: true, force: true })
 await mkdir(new URL('courses/', OUTPUT), { recursive: true })
+const projectionStats = createProjectionStats()
 
 for (const course of runtimeManifest.courses) {
   const rows = lessonRowsByCourse[course.courseRef]
@@ -161,13 +54,16 @@ for (const course of runtimeManifest.courses) {
     throw new Error(`Incomplete admitted course ${course.courseRef}`)
   }
   const rowByLesson = new Map(rows.map((row) => [row.lessonRef, row]))
-  const safeRows = rows.map((row) => ({
-    ...row,
-    // Adult answer/scoring resource locators are not needed to render or start
-    // the learner lesson and therefore never enter its lazy browser payload.
-    resourceRefs: row.resourceRefs.filter((ref) =>
-      !/answer-keys|answer_key|scoring-guide|teacher-guide/i.test(ref)),
-  }))
+  const safeRows = rows.map((row) => {
+    const safeResourceRefs = row.resourceRefs.filter(isLearnerSafeResourceRef)
+    projectionStats.adultResourceLocatorsRemoved += row.resourceRefs.length - safeResourceRefs.length
+    return {
+      ...row,
+      // Adult answer/scoring resource locators are not needed to render or start
+      // the learner lesson and therefore never enter its lazy browser payload.
+      resourceRefs: [...new Set(safeResourceRefs)],
+    }
+  })
   const safeBindings = {}
   const materials = {}
   for (const binding of courseBindings) {
@@ -175,9 +71,14 @@ for (const course of runtimeManifest.courses) {
     if (!row) throw new Error(`Binding ${binding.lessonRef} is missing its admitted lesson row`)
     const file = packagePath(binding.productionPackageRef)
     const raw = await readFile(file, 'utf8')
-    const material = extname(file.pathname) === '.json'
-      ? projectJsonMaterial(JSON.parse(raw), binding, row.title)
-      : projectMarkdownMaterial(raw, binding, row.title)
+    const projected = extname(file.pathname) === '.json'
+      ? projectJsonLearnerMaterial(JSON.parse(raw), binding, row.title, { socialSourceRegistry })
+      : projectMarkdownLearnerMaterial(raw, binding, row.title, { socialSourceRegistry })
+    const material = projected.material
+    assertLearnerSafeMaterial(material)
+    mergeProjectionStats(projectionStats, projected.stats)
+    if (binding.scoringAuthorityRef) projectionStats.adultFieldsRemoved += 1
+    if (binding.scoringMetadata) projectionStats.adultFieldsRemoved += 1
     safeBindings[binding.lessonRef] = {
       lessonRef: binding.lessonRef,
       courseRef: binding.courseRef,
@@ -192,7 +93,7 @@ for (const course of runtimeManifest.courses) {
     materials[binding.lessonRef] = material
   }
   const payload = JSON.stringify({ courseRef: course.courseRef, lessons: safeRows, bindings: safeBindings, materials })
-  if (/answerKeyRef|scoringAuthorityRef|scoringRef|correctAnswer|answerIndex|answer-keys|scoring-guide|teacher-guide/i.test(payload)) {
+  if (/answerKeyRef|scoringAuthorityRef|scoringRef|correctAnswer|answerIndex|answer[-_]keys?|\/scoring\/|scoring[-_]guide|teacher[-_]guide/i.test(payload)) {
     throw new Error(`Learner payload for ${course.courseRef} contains an adult/scoring field`)
   }
   await writeFile(new URL(`courses/${course.courseRef}.json`, OUTPUT), payload)
@@ -207,8 +108,14 @@ await writeFile(
     counts: releaseManifest.counts,
     productionBindings: bindings.length,
     dynamicSocialSources: releaseManifest.dynamicSocialSources,
+    structuredProjection: projectionStats,
     runtime: runtimeManifest,
   }),
 )
 
-console.log(`Built final Family Pilot browser data: ${bindings.length} lessons across ${runtimeManifest.courses.length} lazy course payloads.`)
+console.log(JSON.stringify({
+  status: 'PASS',
+  projectionVersion: STRUCTURED_PROJECTION_VERSION,
+  courses: runtimeManifest.courses.length,
+  ...projectionStats,
+}, null, 2))

@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-financial-literacy-u05-assessment",
+  "courseRef": "ma-g11-financial-literacy",
+  "grade": 11,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g11-financial-literacy-u05",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "courseTitle": "Investing, Insurance, and Risk Management",
+    "assessmentLessonRef": "ma-g11-financial-literacy-u05-l10"
+  },
+  "standards": [
+    "PF5"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u05-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The policy targets 55% in a stock fund, 30% in a bond fund, and 15% in cash, and rebalances once a year. The portfolio began the year at $84,000 exactly on target. Over the year the stock fund returned 19.8%, the bond fund lost 1.4%, and cash returned 4.2%. Round to the cent.",
+      "prompt": "What was held in the stock fund at the start, at 55% of $84,000?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The policy targets 55% in a stock fund, 30% in a bond fund, and 15% in cash, and rebalances once a year. The portfolio began the year at $84,000 exactly on target. Over the year the stock fund returned 19.8%, the bond fund lost 1.4%, and cash returned 4.2%. Round to the cent.",
+      "prompt": "What is the stock fund worth after returning 19.8%?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The policy targets 55% in a stock fund, 30% in a bond fund, and 15% in cash, and rebalances once a year. The portfolio began the year at $84,000 exactly on target. Over the year the stock fund returned 19.8%, the bond fund lost 1.4%, and cash returned 4.2%. Round to the cent.",
+      "prompt": "What is the bond fund worth after losing 1.4%, having started at 30% of $84,000?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p4",
+      "kind": "fixed-numeric",
+      "directions": "The policy targets 55% in a stock fund, 30% in a bond fund, and 15% in cash, and rebalances once a year. The portfolio began the year at $84,000 exactly on target. Over the year the stock fund returned 19.8%, the bond fund lost 1.4%, and cash returned 4.2%. Round to the cent.",
+      "prompt": "What is the cash holding worth after returning 4.2%, having started at 15% of $84,000?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now apply the policy and compute every trade it requires.",
+      "prompt": "What is the portfolio worth at the end of the year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now apply the policy and compute every trade it requires.",
+      "prompt": "What share of the portfolio is now in the stock fund? Give two decimal places.",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now apply the policy and compute every trade it requires.",
+      "prompt": "How much of the stock fund must be sold to return it to 55%?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Now apply the policy and compute every trade it requires.",
+      "prompt": "How much must be added to the bond fund to return it to 30%?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p5",
+      "kind": "fixed-numeric",
+      "directions": "Now apply the policy and compute every trade it requires.",
+      "prompt": "How much must be added to cash to return it to 15%?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p6",
+      "kind": "fixed-numeric",
+      "directions": "Now apply the policy and compute every trade it requires.",
+      "prompt": "Check the trades balance: what do the two purchases come to together?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "One more figure before the defence.",
+      "prompt": "What did the portfolio return over the year as a whole? Give one decimal place.",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-choice",
+      "directions": "One more figure before the defence.",
+      "prompt": "Which figure shows the rebalance has been computed correctly?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write your defence of the policy. Answer both.",
+      "prompt": "A trustee objects that the policy sells $4,019.40 of the fund that returned 19.8% to buy more of one that lost money. Answer the objection, state what the policy is actually managing, and name the circumstance in which the objection would be right."
+    },
+    {
+      "taskRef": "t4-p2",
+      "kind": "short-response",
+      "directions": "Write your defence of the policy. Answer both.",
+      "prompt": "The policy rebalances once a year. Say what would change if it rebalanced monthly instead, and what would change if it rebalanced every five years."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/financial-literacy/ma-g11-financial-literacy-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion.",
+    "Provide evidence that meets the stated Transfer to the new case criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-financial-literacy-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u05-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

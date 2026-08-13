@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g4-arts-music-u06-assessment",
+  "courseRef": "ma-g4-arts-music",
+  "grade": 4,
+  "subject": "arts-and-music",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "independence",
+    "craft and intent"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/student-work/technology-arts-lessons/scoring-guides/arts-music/grade-04/ma-g4-arts-music-u06-l11.scoring-guide.json",
+  "scoringSourceAuthority": {
+    "input": "g34_normalization",
+    "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+    "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/arts-and-music/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

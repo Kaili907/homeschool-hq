@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-financial-literacy-u07-assessment",
+  "courseRef": "ma-g9-financial-literacy",
+  "grade": 9,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g9-financial-literacy-u07",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "courseTitle": "Personal Finance",
+    "assessmentLessonRef": "ma-g9-financial-literacy-u07-l11"
+  },
+  "standards": [
+    "PF7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u07-l11.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The fictional filer claimed $1,480 of deductions at a 12% marginal rate and could not support them. The disallowed deductions produce additional tax, plus a fictional accuracy penalty of 20% of that additional tax.",
+      "prompt": "What additional tax results from the disallowed deductions?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The fictional filer claimed $1,480 of deductions at a 12% marginal rate and could not support them. The disallowed deductions produce additional tax, plus a fictional accuracy penalty of 20% of that additional tax.",
+      "prompt": "What is the accuracy penalty at 20% of that additional tax?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The fictional filer claimed $1,480 of deductions at a 12% marginal rate and could not support them. The disallowed deductions produce additional tax, plus a fictional accuracy penalty of 20% of that additional tax.",
+      "prompt": "What is the total cost of the recordkeeping failure?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now price the plan that would have prevented it: 15 minutes a month filing receipts, valued at the filer’s $19.40 hourly rate.",
+      "prompt": "What is a year of that recordkeeping worth in the filer’s own time?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now price the plan that would have prevented it: 15 minutes a month filing receipts, valued at the filer’s $19.40 hourly rate.",
+      "prompt": "How much better off would the filer have been with the records?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-choice",
+      "directions": "Now price the plan that would have prevented it: 15 minutes a month filing receipts, valued at the filer’s $19.40 hourly rate.",
+      "prompt": "On these figures, was the recordkeeping worth doing?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write the defence.",
+      "prompt": "Defend a recordkeeping plan to someone who says it is not worth the effort. Use the figures, name what records the plan would actually keep, and answer the strongest version of their objection."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Write the defence.",
+      "prompt": "Records also protect deductions a filer might otherwise not claim. Explain how that second benefit changes the case, and why it is harder to put a number on than the $213.12."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/financial-literacy/ma-g9-financial-literacy-u07-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Reasoning from the figures criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-financial-literacy-u07-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-09/swk-flhs-g9-u07-l11.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

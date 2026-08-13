@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-health-u04-assessment",
+  "courseRef": "ma-g11-health",
+  "grade": 11,
+  "subject": "health",
+  "location": {
+    "unitRef": "ma-g11-health-u04",
+    "unitNumber": 4,
+    "unitTitle": "Navigating Health Systems, Coverage, and Confidentiality",
+    "courseTitle": "Health III: Consumer Health, Safety, and Emergency Response",
+    "assessmentLessonRef": "ma-g11-health-u04-l05"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-11/unit-assessments/ma-g11-health-u04-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the private-safe task without disclosing medical history, diagnosis, body measurements, or sexual history.",
+    "Use a fictional scenario when offered and identify a trusted adult or qualified professional where appropriate."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain levels of care: self-care, primary, urgent, emergency, and specialty in your own words and give a valid example."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of insurance vocabulary in plain language: premium, deductible, copay, network."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply what care costs without coverage, and where low-cost options exist in a new fictional situation. Show the decision process or cite the evidence used."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving preparing for an appointment and asking a clinician a real question; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect minor consent, confidentiality, and its limits in Michigan with medical records, portals, and who can see what. Explain how the two support, constrain, or build on one another."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Run three fictional cases through the system: choose the right level of care, estimate the cost path, prepare the questions, and identify the confidentiality rule that applies."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question."
+    }
+  ],
+  "responseMode": "private-safe-task-and-reflection",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/health/ma-g11-health-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy of health information criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated skill application criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-health-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/health/grade-11/unit-assessments/ma-g11-health-u04-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Navigating Health Systems, Coverage, and Confidentiality?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-financial-literacy-u06-assessment",
+  "courseRef": "ma-g12-financial-literacy",
+  "grade": 12,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g12-financial-literacy-u06",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "courseTitle": "Financial Transition to Adulthood",
+    "assessmentLessonRef": "ma-g12-financial-literacy-u06-l10"
+  },
+  "standards": [
+    "PF6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u06-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household earns $52,000 a year and is pricing four protections: a fire-resistant document box at $78 bought once and used for 5 years, a password manager at $36 a year, a monitoring service at $168 a year, and secure backup at $54 a year. A stated incident would bring $2,860 of fraudulent charges, $214 of document replacement, and about 18 hours of work, valued here at $24 an hour so the time is comparable with the fees.",
+      "prompt": "What does the whole protection set cost in a year, spreading the box across its 5 years?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household earns $52,000 a year and is pricing four protections: a fire-resistant document box at $78 bought once and used for 5 years, a password manager at $36 a year, a monitoring service at $168 a year, and secure backup at $54 a year. A stated incident would bring $2,860 of fraudulent charges, $214 of document replacement, and about 18 hours of work, valued here at $24 an hour so the time is comparable with the fees.",
+      "prompt": "What share of income is that, to two decimal places?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The fictional household earns $52,000 a year and is pricing four protections: a fire-resistant document box at $78 bought once and used for 5 years, a password manager at $36 a year, a monitoring service at $168 a year, and secure backup at $54 a year. A stated incident would bring $2,860 of fraudulent charges, $214 of document replacement, and about 18 hours of work, valued here at $24 an hour so the time is comparable with the fees.",
+      "prompt": "What does the stated incident cost in total?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now set the two against each other over a realistic period.",
+      "prompt": "How many years of protection does one incident cost? Give two decimal places."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now set the two against each other over a realistic period.",
+      "prompt": "What would the protection set cost across 5 years?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-choice",
+      "directions": "Now set the two against each other over a realistic period.",
+      "prompt": "Which of these protections reduces the chance of the incident happening at all, rather than helping the household recover afterwards?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Write the plan. Attach a figure to each part.",
+      "prompt": "Write the fictional household’s protection and security plan. Say what is bought and what is done, distinguish the parts that prevent an incident from the parts that limit one, state what the household should never do regardless of who asks, and name the part of your plan you would drop first if the budget required it."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/financial-literacy/ma-g12-financial-literacy-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-financial-literacy-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u06-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF6 — Protecting and Insuring: Protecting an Adult Household?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

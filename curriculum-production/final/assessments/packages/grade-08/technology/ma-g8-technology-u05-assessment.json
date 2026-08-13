@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g8-technology-u05-assessment",
+  "courseRef": "ma-g8-technology",
+  "grade": 8,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g8-technology-u05",
+    "unitNumber": 5,
+    "unitTitle": "Networks and Cybersecurity",
+    "courseTitle": "Grade 8 Technology and Computer Science",
+    "assessmentLessonRef": "ma-g8-technology-u05-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Networks and Internet",
+    "Cybersecurity"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/technology/assessments.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain internet routing concepts in your own words and give or identify a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "representation or source",
+      "prompt": "Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of encryption and certificates.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply authentication and authorization in a new realistic situation. Show the process or cite evidence.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving common attacks and social engineering; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect internet routing concepts with incident response and ethics. Explain how the ideas support, constrain, contrast with, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit project: Complete a sandboxed or paper cybersecurity design review; never probe real systems without explicit authorization.",
+      "possiblePoints": 8
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-08/technology/ma-g8-technology-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task about secure development habits.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g8-technology-u05-assessment",
+    "metadataRef": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/technology/assessments.json",
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-08/ma-g8-technology-u05-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Networks and Cybersecurity?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

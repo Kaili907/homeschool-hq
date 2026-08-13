@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-financial-literacy-u02-assessment",
+  "courseRef": "ma-g4-financial-literacy",
+  "grade": 4,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g4-financial-literacy-u02",
+    "unitNumber": 2,
+    "unitTitle": "Earning, Work, and Value",
+    "courseTitle": "Grade 4 Financial Literacy",
+    "assessmentLessonRef": "ma-g4-financial-literacy-u02-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 2 — earning, work, and enterprise"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u02-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Add up the invented volunteer hours: 3 people working 4 hours each.",
+      "prompt": "How many volunteer hours went into the clean-up?",
+      "responseUnit": "hours"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now put a pretend price on those hours at $6.00 each, and compare that with what the clean-up actually cost in money.",
+      "prompt": "What would 12 hours have cost at $6.00 an hour?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now put a pretend price on those hours at $6.00 each, and compare that with what the clean-up actually cost in money.",
+      "prompt": "The clean-up spent $0.00 on wages. How much value did the volunteers contribute?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "A fourth invented volunteer joins for 4 hours, and the group also spends $15.00 on bags and gloves.",
+      "prompt": "What would the four volunteers' hours be worth at $6.00 an hour?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "A fourth invented volunteer joins for 4 hours, and the group also spends $15.00 on bags and gloves.",
+      "prompt": "How much larger is the volunteer value than the $15.00 spent on supplies?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "None of that value appears on a receipt.",
+      "prompt": "Grace's clean-up cost $15.00 on paper. Why is that number a poor description of what the day was worth?"
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/financial-literacy/ma-g4-financial-literacy-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Valuing unpaid contribution criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-financial-literacy-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u02-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Earning, Work, and Value?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

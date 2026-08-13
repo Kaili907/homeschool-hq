@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-physical-education-u08-assessment",
+  "courseRef": "ma-g11-physical-education",
+  "grade": 11,
+  "subject": "physical-education",
+  "location": {
+    "unitRef": "ma-g11-physical-education-u08",
+    "unitNumber": 8,
+    "unitTitle": "Stress Management, Mental Skills, and Movement",
+    "courseTitle": "Strength, Conditioning, and Training Design",
+    "assessmentLessonRef": "ma-g11-physical-education-u08-l11"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-11/unit-assessments/ma-g11-physical-education-u08-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the safe activity or accessible equivalent and document the requested performance evidence.",
+    "Stop for pain, dizziness, breathing trouble, unsafe conditions, or missing adult supervision."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and cues",
+      "prompt": "Explain the critical features or key principle of movement as a regulation tool and its realistic limits in your own words."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "demonstration or description",
+      "prompt": "Demonstrate or fully describe attention, arousal, and performance under pressure using a version your body and setting allow. A described or adapted version earns full credit."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply routines, breathing, and refocusing techniques in a new situation and explain the decision or adjustment you made."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving motivation, discipline, and what to do when both are gone; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect the difference between healthy commitment and compulsive activity with when a difficulty needs support beyond movement and explain how one affects the other."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Build a movement-and-regulation toolkit with a routine for a good week, a routine for a hard week, and a written statement of when the learner would seek support beyond movement."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself."
+    }
+  ],
+  "responseMode": "performance-log-or-accessible-equivalent",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/physical-education/ma-g11-physical-education-u08-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated safe participation and self-management criterion.",
+    "Provide evidence that meets the stated skill cues or movement quality criterion.",
+    "Provide evidence that meets the stated tactical or training reasoning criterion.",
+    "Provide evidence that meets the stated self-assessment and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-physical-education-u08-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-11/unit-assessments/ma-g11-physical-education-u08-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Stress Management, Mental Skills, and Movement?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

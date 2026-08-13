@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-social-studies-u05-assessment",
+  "courseRef": "ma-g11-social-studies",
+  "grade": 11,
+  "subject": "social-studies",
+  "location": {
+    "unitRef": "ma-g11-social-studies-u05",
+    "unitNumber": 5,
+    "unitTitle": "The United States in World Affairs and Citizenship in Action",
+    "courseTitle": "Civics and Economics",
+    "assessmentLessonRef": "ma-g11-social-studies-u05-l11"
+  },
+  "standards": [
+    "Civics C5.1.1",
+    "Civics C5.1.2",
+    "Civics C5.1.3",
+    "Civics C5.2.1",
+    "Civics C5.2.2",
+    "Civics C5.2.3",
+    "Civics C5.2.4",
+    "Civics C6.1.1",
+    "Civics C6.1.2",
+    "Civics C6.1.3",
+    "Civics C6.2.1",
+    "Civics C6.3.1",
+    "Civics C6.3.2",
+    "Civics C6.4.1",
+    "Civics C6.4.2",
+    "Civics C6.4.3",
+    "Civics C6.4.4",
+    "P4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/social-studies/grade-11/ma-g11-social-studies/ma-g11-social-studies-u05-l11.md",
+  "instructions": [
+    "Use only the attached, real, dated sources. Identify each source and cite specific evidence for claims.",
+    "Explain source limits or perspective. If a required source is not attached, stop and request it."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "source-evidence-task",
+      "prompt": "**Task shape for this phase (Unit assessment):** work with the sources required by the unit assessment prompts.\n\nThis unit's named, real anchor sources (attach the actual text/map/data retrieved from the named repository -- do not quote from memory):\n- Charter of the United Nations, 1945 (United Nations Digital Library)\n- Immigration and Nationality Act and naturalization requirements (U.S. Citizenship and Immigration Services)\n- Federal Register rules and notices (federalregister.gov) and public rulemaking dockets (regulations.gov)\n\n**Primary vs. secondary:** Identify each source as primary or secondary, state who produced it and when, and note what perspective it represents and what it omits."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "map-data-document-analysis",
+      "prompt": "Using the Source Record below, log every source consulted for \"dispositions for civic participation\" (unit: The United States in World Affairs and Citizenship in Action).\n\n- Creator or organization\n- Title\n- Date\n- Where it was found\n- Original source or repost?\n- Evidence used\n- Reason to trust, question, or limit it\n- How it was quoted, paraphrased, or represented\n\nThen apply the Claim–Evidence–Reasoning frame: state a claim about dispositions for civic participation, cite the specific evidence from the logged source(s), explain the reasoning that connects them, and name one limit -- what the evidence does not show or where it might be biased or incomplete.\n\nTie the analysis back to the unit's essential question: \"How do citizens and institutions shape what the United States does at home and abroad?\""
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "independent-response",
+      "prompt": "Complete the unit assessment prompts independently, in the order given, showing sourced evidence for every prompt that asks for it:\n\n- **concept and vocabulary** (4 pts): Explain formation and implementation of United States foreign policy in your own words and give or identify a valid example.\n- **representation or source** (5 pts): Use a map, data display, timeline, document analysis, or worked process to show understanding of the United States role in international institutions and affairs.\n- **application** (6 pts): Apply citizenship, naturalization, and status in a new realistic situation. Show the reasoning and cite the evidence.\n- **error or claim analysis** (6 pts): Analyze a plausible error, unsupported claim, or misuse of a source involving rights and responsibilities in civic society; correct it and explain why.\n- **connection** (5 pts): Connect formation and implementation of United States foreign policy with civic inquiry, public policy, civic action, and public discourse. Explain how the ideas support, constrain, contrast with, or build on one another.\n- **source provenance and citation** (5 pts): For one source you used, identify it as primary or secondary, state who produced it and when, explain what perspective it represents, name one thing it does not show, and cite it so another reader could find it.\n- **performance evidence** (8 pts): Present the strongest evidence from the unit project: Complete the civics performance task: a public-issue analysis with a documented, lawful, and feasible civic action plan.\n- **reflection and transfer** (4 pts): Identify one skill you can now transfer, one check that improves accuracy or source reliability, and one next question.\n\nTotal: 43 points. Rubric dimensions: accuracy and historical or economic context, evidence, reasoning, and citation, source use, provenance, and perspective, application or performance, checking and revision.\n\nMastery interpretation -- Secure: At least 85% with accurate independent application, cited evidence, and fair treatment of perspectives. Developing: 70–84% or inconsistent explanation or citation; assign targeted review and a fresh transfer check. Not yet: Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "evidence-requirements",
+      "prompt": "- Cite the sources required by the unit assessment prompts, each logged with the Source Record fields above.\n- Every claim is backed by a specific, cited piece of evidence -- not an unsupported opinion.\n- Identify each source as primary or secondary, state who produced it and when, and note what perspective it represents and what it omits.\n- Every claim offered as evidence names its source with enough detail for another reader to locate it. Quotations must be transcribed by the learner from the retrieved source; this package supplies no quoted text."
+    }
+  ],
+  "responseMode": "source-based-claim-evidence-reasoning",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/social-studies/ma-g11-social-studies-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-social-studies-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/social-studies/grade-11/ma-g11-social-studies/ma-g11-social-studies-u05-l11.md",
+    "unitObjective": "How can the learner demonstrate the goals of The United States in World Affairs and Citizenship in Action?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

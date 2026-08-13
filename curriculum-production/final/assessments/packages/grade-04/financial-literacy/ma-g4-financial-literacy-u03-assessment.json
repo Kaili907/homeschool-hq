@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-financial-literacy-u03-assessment",
+  "courseRef": "ma-g4-financial-literacy",
+  "grade": 4,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g4-financial-literacy-u03",
+    "unitNumber": 3,
+    "unitTitle": "Spending Plans and Comparing",
+    "courseTitle": "Grade 4 Financial Literacy",
+    "assessmentLessonRef": "ma-g4-financial-literacy-u03-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 3 — spending plans and comparison"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u03-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Total Sena's four invented budget categories.",
+      "prompt": "What does Sena's planned week come to?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Check the plan against Sena's $45.00 of simulated income, and say what the leftover means for the week.",
+      "prompt": "How much of the $45.00 is unallocated?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-choice",
+      "directions": "Check the plan against Sena's $45.00 of simulated income, and say what the leftover means for the week.",
+      "prompt": "How does Sena's planned week compare with her income?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "An unplanned invented $8.00 school trip fee lands mid-week, and Sena refuses to cut her saving category.",
+      "prompt": "What does the week cost with the trip fee added?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "An unplanned invented $8.00 school trip fee lands mid-week, and Sena refuses to cut her saving category.",
+      "prompt": "How much must Sena cut from the other categories to stay inside $45.00?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "The unplanned fee was larger than the unallocated money.",
+      "prompt": "Sena kept her saving category untouched. Was that the right call here, and what would change your answer?"
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/financial-literacy/ma-g4-financial-literacy-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Defending a budget decision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-financial-literacy-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u03-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Spending Plans and Comparing?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}
