@@ -101,7 +101,7 @@
       ]
     }
   ],
-  "remediation": "If the liability comes out at $3,735.00, the charges are being treated as the exposure. Under the stated rules the holder is liable for at most $50 per account when reported inside the window, which is $150.00 across the 3 accounts. The $3,735.00 is what must be disputed, not what must be paid.",
+  "remediation": "If the liability comes out at $3,735.00, the charges are being treated as the exposure. Under the stated rules the holder is liable for at most $50 per account when reported inside the window, which is $150.00 across the 3 accounts. If the late figure comes out at $1,500.00, the $500 cap has been applied to an account that was only charged $380 — a cap limits liability, it does not create it. The $3,735.00 is what must be disputed, not what must be paid.",
   "extension": "Work out the liability if a fourth fictional account for $60 were found, reported late, and say whether the per-account cap or the charge decides that one.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l05.scoring.json",
   "financialSafety": {

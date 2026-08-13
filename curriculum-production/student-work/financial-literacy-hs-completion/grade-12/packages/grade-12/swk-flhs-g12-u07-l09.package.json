@@ -98,7 +98,7 @@
       ]
     }
   ],
-  "remediation": "If the unallocated figure comes out near $4,100, the retirement contribution or the health premium has been subtracted from take-home pay. Both were taken before tax and so are already outside the $38,095 of take-home. Subtract only the living costs, the loan payments, and the reserve transfer.",
+  "remediation": "If the unallocated figure comes out at $4,332.52, the $2,040 health premium has been subtracted from take-home pay; if it comes out at $3,642.52, the $2,730 retirement contribution has. Both were taken before tax and so are already outside the $38,095 of take-home. Subtract only the living costs, the loan payments, and the reserve transfer.",
   "extension": "Rebuild the annual summary with living costs 6% higher and everything else unchanged, and say what happens to the unallocated figure and to the plan that depends on it.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l09.scoring.json",
   "financialSafety": {

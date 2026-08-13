@@ -49,7 +49,7 @@
         {
           "ref": "t1-p2",
           "promptType": "fixed-numeric",
-          "text": "How much of the year never becomes spendable cash, counting tax and the pre-tax elections?",
+          "text": "How much of those total resources never arrives as spendable cash — tax, the pre-tax elections, and the employer contribution together?",
           "unit": "USD"
         },
         {
@@ -110,7 +110,7 @@
       ]
     }
   ],
-  "remediation": "If the total resources figure comes out at $54,600, the employer retirement contribution has been left out; if the share of resources that never becomes cash comes out near 21%, only the tax has been counted and the $4,770 of pre-tax elections has not. Build the numerator from both, then say in the plan how much of it is cost and how much is transfer.",
+  "remediation": "If the total resources figure comes out at $54,600, the employer retirement contribution has been left out. If the share that never arrives as spendable cash comes out near 21%, only the tax has been counted; if it comes out at 29.49%, the $1,365 employer contribution is in the denominator but not the numerator, which compares two different things. Build the numerator from all three, then say in the plan how much of it is cost and how much is transfer.",
   "extension": "Rewrite the plan for a fictional profile with the same pay but $520 a month of childcare costs, and say which of your three tradeoffs changes first.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l10.scoring.json",
   "financialSafety": {

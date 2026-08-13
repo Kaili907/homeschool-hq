@@ -26,18 +26,18 @@
       },
       {
         "ref": "t1-p2",
-        "answer": "$16,505.00",
+        "answer": "$17,870.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$11,735 of tax plus $4,770 of pre-tax elections. Only the tax is a cost; the elections buy cover and fund an account Case R still owns."
+          "reasoning": "$11,735 of tax, $4,770 of pre-tax elections, and the $1,365 employer contribution. All three are inside the $55,965.00 of total resources and none of them reaches the account, so all three belong in the numerator; leaving the employer contribution out would divide by a total that includes it. Only the $11,735 of tax is a cost — the elections buy cover and fund an account Case R still owns, and the employer contribution is money added on their behalf."
         }
       },
       {
         "ref": "t1-p3",
-        "answer": "29.49%",
+        "answer": "31.93%",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$16,505.00 measured against $55,965.00. Naming the share is useful provided the plan also says how much of it is cost and how much is transfer."
+          "reasoning": "$17,870.00 measured against $55,965.00, which is the same as the gap between total resources and the $38,095 of take-home pay. Naming the share is useful provided the plan also says how much of it is cost and how much is transfer."
         }
       },
       {
@@ -83,17 +83,17 @@
       },
       {
         "ref": "t1-p2",
-        "expression": "totalTax + preTaxElections",
-        "substituted": "11735 + 4770",
-        "result": "$16,505.00",
-        "why": "$11,735 of tax plus $4,770 of pre-tax elections. Only the tax is a cost; the elections buy cover and fund an account Case R still owns."
+        "expression": "totalTax + preTaxElections + employerContribution3",
+        "substituted": "11735 + 4770 + 1365",
+        "result": "$17,870.00",
+        "why": "$11,735 of tax, $4,770 of pre-tax elections, and the $1,365 employer contribution. All three are inside the $55,965.00 of total resources and none of them reaches the account, so all three belong in the numerator; leaving the employer contribution out would divide by a total that includes it. Only the $11,735 of tax is a cost — the elections buy cover and fund an account Case R still owns, and the employer contribution is money added on their behalf."
       },
       {
         "ref": "t1-p3",
         "expression": "round(#t1-p2 / #t1-p1 * 100, 2)",
         "substituted": "round(#t1-p2 / #t1-p1 * 100, 2)",
-        "result": "29.49%",
-        "why": "$16,505.00 measured against $55,965.00. Naming the share is useful provided the plan also says how much of it is cost and how much is transfer."
+        "result": "31.93%",
+        "why": "$17,870.00 measured against $55,965.00, which is the same as the gap between total resources and the $38,095 of take-home pay. Naming the share is useful provided the plan also says how much of it is cost and how much is transfer."
       },
       {
         "ref": "t2-p1",
@@ -238,8 +238,8 @@
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
-          "Reports the year accurately across strands, using at least the $55,965.00 of total resources, the $16,505.00 that never becomes cash, and the $11,172.48 allocated from surplus.",
-          "States what the plan builds with figures: a reserve of $6,400.00 covering 3.13 months of living costs, and $6,495.00 into retirement.",
+          "Reports the year accurately across strands, using at least the $55,965.00 of total resources, the $17,870.00 that never arrives as spendable cash, and the $11,172.48 allocated from surplus.",
+          "States what the year as given builds, with figures: a reserve of $6,400.00 covering 3.13 months of living costs, and $6,495.00 into retirement. Where the plan proposed differs from that allocation, it restates both figures under its own allocation instead.",
           "Names three genuine tradeoffs with costs attached — for example reserve against card repayment, extra retirement saving against liquidity, or the retirement election against monthly take-home — rather than listing three good things the plan does.",
           "Identifies the most sensitive assumption and says why, most defensibly the continuity of income, since the stress test showed a 3-month loss exceeding the reserve, or the stability of the $1,180 rent as the largest single cost.",
           "States what would have to be true for a different plan to be better, so the document presents its own conclusion as one defensible answer rather than the answer.",

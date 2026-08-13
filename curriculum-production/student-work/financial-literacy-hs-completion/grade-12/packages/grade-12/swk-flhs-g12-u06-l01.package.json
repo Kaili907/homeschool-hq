@@ -37,7 +37,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "The fictional adult earns $46,800 a year and holds four simulated policies: renters cover at $17 a month, auto at $118, the employee share of health at $186, and disability at $24. The renters policy covers personal property up to $25,000 after a deductible of $500.",
+      "directions": "The fictional adult earns $46,800 a year and holds four simulated policies: renters cover at $17 a month, auto at $118, the employee share of health at $186, and disability at $24. The renters policy covers personal property up to $25,000 after a deductible of $500, and the auto policy covers damage up to $50,000. The health and disability policies state no single coverage limit.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -79,11 +79,10 @@
         {
           "ref": "t2-p3",
           "promptType": "fixed-choice",
-          "text": "Which of the four policies protects the largest potential loss for the smallest premium?",
+          "text": "Of the two policies that state a coverage limit, which carries the larger limit for each dollar of annual premium?",
           "choices": [
             "Renters, at $17 a month",
-            "Auto, at $118 a month",
-            "Health, at $186 a month"
+            "Auto, at $118 a month"
           ]
         }
       ]

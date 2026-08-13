@@ -17,7 +17,7 @@
         "answer": "61",
         "verification": {
           "method": "recomputed",
-          "reasoning": "Day 79 when the new cover starts, less day 18 when the old cover ends. The gap arises from two dates neither of which the worker chose, which is why it has to be checked rather than assumed away."
+          "reasoning": "Day 19 through day 79 inclusive, which is 79 − 19 + 1 = 61 days. Counting inclusively matters: a gap stated as two dates is one day longer than the difference between them, and here that one day is what pushes the bridging cost past two 30-day periods into a third."
         }
       },
       {
@@ -56,10 +56,10 @@
     "workedSolution": [
       {
         "ref": "t1-p1",
-        "expression": "newStart - oldEnd",
-        "substituted": "79 - 18",
+        "expression": "lastUncovered - firstUncovered + 1",
+        "substituted": "79 - 19 + 1",
         "result": "61",
-        "why": "Day 79 when the new cover starts, less day 18 when the old cover ends. The gap arises from two dates neither of which the worker chose, which is why it has to be checked rather than assumed away."
+        "why": "Day 19 through day 79 inclusive, which is 79 − 19 + 1 = 61 days. Counting inclusively matters: a gap stated as two dates is one day longer than the difference between them, and here that one day is what pushes the bridging cost past two 30-day periods into a third."
       },
       {
         "ref": "t1-p2",
@@ -164,7 +164,7 @@
         "acceptableAnswerCriteria": [
           "Names what the comparison omits: it assumes exactly one event of exactly $4,850, whereas the gap could pass with nothing at all — in which case $1,836.00 buys nothing — or could bring a far larger cost that the comparison understates.",
           "Makes the case for going uncovered honestly: $1,836.00 is certain and the event is not, so a worker with reserves able to absorb a large bill may reasonably accept 61 days of exposure.",
-          "Names the fact to confirm: the two dates themselves — whether the old cover truly ends on day 18 and the new cover truly begins on day 79 — since a shorter gap might need fewer periods and a longer one more, and the whole calculation rests on them."
+          "Names the fact to confirm: the two dates themselves — whether the old cover truly runs through day 18 and the new cover truly starts on day 80 — since a gap one day shorter would fall inside two 30-day periods and cost $612 less, and the whole calculation rests on them."
         ],
         "evidenceRequirements": [
           "Uses the $1,836.00 bridging cost and the $3,680.00 extra exposure, and refers to the 61-day gap."

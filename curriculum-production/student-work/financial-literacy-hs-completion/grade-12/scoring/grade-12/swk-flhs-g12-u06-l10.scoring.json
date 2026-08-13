@@ -35,7 +35,7 @@
         "answer": "$3,506.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$2,860 of charges, $214 of replacements, and $432.00 of time. The time is nearly as large as the document replacement and is the component most often left out."
+          "reasoning": "$2,860 of charges, $214 of replacements, and $432.00 of time. The time costs more than twice the document replacement and is the component most often left out."
         }
       },
       {
@@ -83,7 +83,7 @@
         "expression": "charges + docReplace + hours * hourly",
         "substituted": "2860 + 214 + 18 * 24",
         "result": "$3,506.00",
-        "why": "$2,860 of charges, $214 of replacements, and $432.00 of time. The time is nearly as large as the document replacement and is the component most often left out."
+        "why": "$2,860 of charges, $214 of replacements, and $432.00 of time. The time costs more than twice the document replacement and is the component most often left out."
       },
       {
         "ref": "t2-p1",

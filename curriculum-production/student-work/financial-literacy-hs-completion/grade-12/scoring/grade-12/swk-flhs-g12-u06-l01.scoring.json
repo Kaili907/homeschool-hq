@@ -56,8 +56,8 @@
         "ref": "t2-p3",
         "answer": "Renters, at $17 a month",
         "verification": {
-          "method": "asserted-fixed-value",
-          "reasoning": "The renters policy covers up to $25,000 of property for $204.00 a year, the smallest premium of the four against a stated limit far larger than the premium. The comparison follows from the stated terms; it does not mean renters cover is the most important policy, only the one with the largest stated limit per dollar of premium."
+          "method": "derived-from-comparison",
+          "reasoning": "Renters covers $25,000 for $204.00 a year, about $123 of limit per dollar of premium; auto covers $50,000 for $1,416.00 a year, about $35. Only these two state a limit, so only these two can be compared this way. A larger limit per dollar of premium does not make a policy more important — it reflects how likely and how large the insurer expects claims to be."
         }
       }
     ],
@@ -96,6 +96,13 @@
         "substituted": "#t2-p1 - 17 * 12",
         "result": "$13,296.00",
         "why": "$13,500.00 paid out against $204.00 of premiums for the year. This is the arithmetic of a year in which the loss happens; in a year without one the household is $204.00 down, and both are ordinary outcomes for a policy."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "rentersLimit / (rentersPrem * 12) > autoLimit / (autoPrem * 12)",
+        "substituted": "25000 / (17 * 12) > 50000 / (118 * 12)",
+        "result": "Renters, at $17 a month",
+        "why": "Renters covers $25,000 for $204.00 a year, about $123 of limit per dollar of premium; auto covers $50,000 for $1,416.00 a year, about $35. Only these two state a limit, so only these two can be compared this way. A larger limit per dollar of premium does not make a policy more important — it reflects how likely and how large the insurer expects claims to be."
       }
     ],
     "criteria": [
@@ -197,8 +204,8 @@
     "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
     "failsClosed": true,
     "recomputedNumericAnswers": 5,
-    "comparisonDerivedChoices": 0,
-    "assertedChoices": 1,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
     "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
   }
 }

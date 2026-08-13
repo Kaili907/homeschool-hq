@@ -63,10 +63,10 @@
       },
       {
         "ref": "t2-p4",
-        "answer": "32.93%",
+        "answer": "$2,620.80",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$3,160.80 measured against $9,600 of independent income. Nearly a third of that income is committed before it is spent, which is the figure a person taking on such work needs before they take it on."
+          "reasoning": "The independent income sits entirely above the standard deduction and the 10% band, which the wages already used, so every dollar of it is taxed at 12% and carries the full 15.3% levy — together 27.30% of $9,600. The remaining $540.00 of the $3,160.80 is not caused by the side work at all: it is wage income tax the employer under-withheld, and it would be owed even if the independent work had never happened."
         }
       }
     ],
@@ -115,10 +115,10 @@
       },
       {
         "ref": "t2-p4",
-        "expression": "round(#t2-p2 / sideIncome3 * 100, 2)",
-        "substituted": "round(#t2-p2 / 9600 * 100, 2)",
-        "result": "32.93%",
-        "why": "$3,160.80 measured against $9,600 of independent income. Nearly a third of that income is committed before it is spent, which is the figure a person taking on such work needs before they take it on."
+        "expression": "sideIncome3 * (midRate3 + seLevy2)",
+        "substituted": "9600 * (0.12 + 0.153)",
+        "result": "$2,620.80",
+        "why": "The independent income sits entirely above the standard deduction and the 10% band, which the wages already used, so every dollar of it is taxed at 12% and carries the full 15.3% levy — together 27.30% of $9,600. The remaining $540.00 of the $3,160.80 is not caused by the side work at all: it is wage income tax the employer under-withheld, and it would be owed even if the independent work had never happened."
       }
     ],
     "criteria": [
@@ -193,12 +193,13 @@
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
-          "Explains the error: $3,160.80 of the $9,600 is already committed to tax, so treating the whole amount as available overstates spendable income by about a third and produces a bill with nothing set aside for it.",
+          "Explains the error: $2,620.80 of the $9,600 — 27.30% of it — is already committed to tax, so treating the whole amount as available overstates spendable income by more than a quarter and produces a bill with nothing set aside for it.",
           "Describes a workable practice: move a fixed proportion of every payment received into a separate account on receipt, rather than computing the liability once a year, and set aside $790.20 each quarter.",
-          "Explains what makes the percentage case-specific: it depends on the wage income already using the standard deduction and the 10% band, so the independent income sits entirely in the 12% band and carries the full 15.3% levy — a person with lower wages would face a lower share."
+          "Separates the two causes: $2,620.80 of the bill follows from the independent income at 12% plus the 15.3% levy, and the remaining $540.00 is wage income tax the employer under-withheld, which would have been owed regardless.",
+          "Explains what makes the 27.30% share case-specific: the wages already used the standard deduction and the 10% band, so every dollar of independent income falls in the 12% band — a person with lower wages would face a lower share."
         ],
         "evidenceRequirements": [
-          "Uses the $3,160.80 still owed and the $790.20 quarterly figure, and refers to the 32.93% share."
+          "Uses the $3,160.80 still owed, the $790.20 quarterly figure, and the $2,620.80 attributable to the independent income."
         ],
         "lookFors": [
           "The response explains why the share is not a general rule of thumb.",

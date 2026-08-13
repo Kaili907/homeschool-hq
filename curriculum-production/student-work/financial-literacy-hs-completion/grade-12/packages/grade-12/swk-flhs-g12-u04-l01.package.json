@@ -107,7 +107,7 @@
       ]
     }
   ],
-  "remediation": "If the unmet amount comes out at $16,000.00, the calculation has started from tuition of $11,400 rather than from the full cost of attendance. Books, transport, housing and food, and personal costs are all part of what the year costs, and the workflow computes need against the whole $24,500.00.",
+  "remediation": "If the unmet amount comes out at $16,000.00, the $4,200 contribution figure and the $2,400 work-study have not been applied — that figure is simply the $24,500.00 cost less the $8,500.00 of grants. If it comes out near $13,000, the calculation has started from tuition of $11,400 rather than from the full cost of attendance; books, transport, housing and food, and personal costs are all part of what the year costs.",
   "extension": "Recompute the unmet amount for a fictional applicant whose contribution figure is $1,500 instead, and say which single line in the calculation moves and by how much.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l01.scoring.json",
   "financialSafety": {

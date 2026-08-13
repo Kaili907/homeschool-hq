@@ -79,8 +79,19 @@ scenario — an internally consistent computation of the wrong thing still
 passes. That gap is carried by the per-item `reasoning` string (adult-only,
 checkable against the scenario prose), the parameter-visibility rule, and human
 review. The limit is stated in every emitted scoring record rather than left
-implicit. See [`REVIEW.md`](REVIEW.md) for the accuracy review this corpus
-carries.
+implicit.
+
+That review has been done. One senior high-school personal-finance accuracy
+reviewer read the corpus and independently recomputed roughly 120 items across
+all seven units, deriving the model from the prose rather than re-running the
+authored expression. It found **nine critical defects the oracle could not have
+caught** — including a per-account liability cap applied to an account charged
+less than the cap, a rubric criterion whose own stated mechanism produced a
+different figure from the key it scored, a look-for asserting a comparison that
+ran the wrong way, and fourteen learner-facing remediation diagnostics naming a
+wrong-answer figure their stated cause cannot produce. All are fixed and
+re-verified. The findings, the fixes, and the minor items left open are recorded
+in [`REVIEW.md`](REVIEW.md).
 
 ## What makes this grade 12 rather than grade 9 with larger numbers
 

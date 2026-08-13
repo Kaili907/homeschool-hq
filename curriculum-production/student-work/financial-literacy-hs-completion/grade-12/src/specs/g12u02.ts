@@ -109,7 +109,7 @@ export const g12u02: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the annual total comes out near $23,000, the auto insurance is probably being multiplied by 12. Read the billing cycle on each line before annualising: the $612 premium is charged twice a year, and everything else on the list is monthly. Convert each obligation to a yearly figure on its own cycle, then add.',
+    remediation: 'If the annual total comes out at $25,152.00, the auto insurance is being multiplied by 12. Read the billing cycle on each line before annualising: the $612 premium is charged twice a year, and everything else on the list is monthly. Convert each obligation to a yearly figure on its own cycle, then add.',
     extension: 'Work out what the household would have to cancel outright to absorb the $92.97 a month without touching rent, and say whether that is achievable from the list as given.',
   },
 
@@ -187,7 +187,7 @@ export const g12u02: readonly LessonSpec[] = [
             ref: 't3-p1', kind: 'judgment', length: 'extended',
             text: 'The cash route costs $148.00 less than the 12-month offer but leaves the reserve at $760.00. Make the strongest case for each route using the figures, and say what you would need to know about this fictional household to prefer one.',
             acceptableAnswerCriteria: [
-              'Makes the case for cash on the figures: it avoids $148.00 of added cost, and the $180 monthly surplus can rebuild the reserve from $760.00 back toward $2,100 in under eight months.',
+              'Makes the case for cash on the figures: it avoids $148.00 of added cost, and the $180 monthly surplus can rebuild the reserve from $760.00 back toward $2,100 in eight monthly transfers.',
               'Makes the case for financing on the figures: it keeps $1,340 of reserve intact against a second failure, and the $124 payment fits inside the $180 surplus with $56 to spare.',
               'Names what would decide it — how exposed the household is to another unplanned expense, how secure the income behind the $180 surplus is, or whether anything else is already claiming that surplus.',
             ],
@@ -298,7 +298,7 @@ export const g12u02: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the amount to pay comes out as $204.69, the $12.99 added service has been treated as disputed. Work line by line: the duplicate $148.20, the $39.00 late fee, and the $6.00 overcharge are wrong; the original $148.20 service charge, the $61.50 that was properly owed, and the $12.99 are right. Subtract only the first group from $415.89.',
+    remediation: 'If the amount to pay comes out as $209.70, the $12.99 added service has been treated as disputed; if it comes out as $204.69, the $18.00 already paid on earlier statements has been deducted here as well, when it is a refund claim rather than a reduction of this bill. Work line by line: the duplicate $148.20, the $39.00 late fee, and the $6.00 overcharge are wrong; the original $148.20 service charge, the $61.50 that was properly owed, and the $12.99 are right. Subtract only the first group from $415.89.',
     extension: 'Work out what the claim would grow to if the rate error ran for 9 more cycles before being corrected, and say what that implies about how quickly a recurring error should be raised.',
   },
 
@@ -385,7 +385,7 @@ export const g12u02: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the annual total comes out as $1,115.40, the $54.00 annual service has been left out; if it comes out near $14,032, the annual charge has been multiplied by 12 as well. Annualise each line on its own billing cycle: seven services at twelve charges each, and one service at a single charge.',
+    remediation: 'If the annual total comes out as $1,115.40, the $54.00 annual service has been left out; if it comes out at $1,763.40, the $54.00 annual charge has been multiplied by 12 as well. Annualise each line on its own billing cycle: seven services at twelve charges each, and one service at a single charge.',
     extension: 'Rank the eight services by annual cost rather than monthly price, and say which service the two orderings disagree about most.',
   },
 
@@ -755,7 +755,7 @@ export const g12u02: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'The simulated statement totals $1,247.83. It includes two charges the cardholder did not make and does not recognise, for $318.40 and $96.75. It also includes a charge of $54.00 from a merchant the cardholder did use, billed twice for one purchase. The rest of the statement is charges the cardholder made and accepts. Interest runs at 1.65% a month on any balance carried.',
+        directions: 'The simulated statement totals $1,247.83. It includes two charges the cardholder did not make and does not recognise, for $318.40 and $96.75. It also includes a charge of $54.00 from a merchant the cardholder did use, billed twice for one purchase. The rest of the statement is charges the cardholder made and accepts. Interest runs at 1.65% a month on any balance carried, except that while an amount is formally in dispute the fictional issuer charges no interest on it and does not treat it as late.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
@@ -945,7 +945,7 @@ export const g12u02: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the recovery comes out at $503.76, the s10 billing change has been left out; if it comes out near $719.76, s8 has been counted as cancelled rather than downgraded. Price each change for what it actually is: three cancellations recovering the full charge, one downgrade recovering only the $18.00 difference, and one billing change recovering $5.00.',
+    remediation: 'If the recovery comes out at $503.76, the s10 billing change has been left out; if it comes out at $676.76, s8 has been counted as cancelled at $32.00 rather than downgraded to $14.00. Price each change for what it actually is: three cancellations recovering the full charge, one downgrade recovering only the $18.00 difference, and one billing change recovering $5.00.',
     extension: 'Suppose the $14.00 tier of s8 turns out not to cover one feature the household uses monthly. Rework the audit total without that change, and say what share of the original recovery survives.',
   },
 ]

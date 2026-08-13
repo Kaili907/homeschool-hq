@@ -31,18 +31,18 @@
       },
       {
         "ref": "t1-p3",
-        "answer": "$1,500.00",
+        "answer": "$1,380.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$500 on each of the 3 accounts. The charges themselves have not changed; only the reporting date has."
+          "reasoning": "The cap is $500 per account, but liability on an account cannot exceed what that account was charged. Two accounts reach the $500 cap; the third was only charged $380, so that is the ceiling there. $500 + $380 + $500 = $1,380.00. Multiplying $500 by 3 would make the holder liable for more than an account was ever billed."
         }
       },
       {
         "ref": "t2-p1",
-        "answer": "$1,350.00",
+        "answer": "$1,230.00",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,500.00 against $150.00. The saving comes from acting on a date, not from anything else the person does."
+          "reasoning": "$1,380.00 against $150.00. The saving comes from acting on a date, not from anything else the person does."
         }
       },
       {
@@ -58,7 +58,7 @@
         "answer": "Report the accounts as not theirs and have the fraud recorded",
         "verification": {
           "method": "asserted-fixed-value",
-          "reasoning": "Reporting starts the process that limits liability under the stated window and creates the record every later step depends on. Paying a charge would concede a debt the person does not owe, and waiting risks passing the window, which the figures show costs $1,350.00."
+          "reasoning": "Reporting starts the process that limits liability under the stated window and creates the record every later step depends on. Paying a charge would concede a debt the person does not owe, and waiting risks passing the window, which the figures show costs $1,230.00."
         }
       }
     ],
@@ -79,17 +79,17 @@
       },
       {
         "ref": "t1-p3",
-        "expression": "lateCap * accounts2",
-        "substituted": "500 * 3",
-        "result": "$1,500.00",
-        "why": "$500 on each of the 3 accounts. The charges themselves have not changed; only the reporting date has."
+        "expression": "min(lateCap, c1b) + min(lateCap, c2b) + min(lateCap, c3b)",
+        "substituted": "min(500, 1240) + min(500, 380) + min(500, 2115)",
+        "result": "$1,380.00",
+        "why": "The cap is $500 per account, but liability on an account cannot exceed what that account was charged. Two accounts reach the $500 cap; the third was only charged $380, so that is the ceiling there. $500 + $380 + $500 = $1,380.00. Multiplying $500 by 3 would make the holder liable for more than an account was ever billed."
       },
       {
         "ref": "t2-p1",
         "expression": "#t1-p3 - #t1-p2",
         "substituted": "#t1-p3 - #t1-p2",
-        "result": "$1,350.00",
-        "why": "$1,500.00 against $150.00. The saving comes from acting on a date, not from anything else the person does."
+        "result": "$1,230.00",
+        "why": "$1,380.00 against $150.00. The saving comes from acting on a date, not from anything else the person does."
       },
       {
         "ref": "t2-p2",
@@ -172,19 +172,19 @@
         "exactKey": null,
         "acceptableAnswerCriteria": [
           "Gives an ordered response with reasons: report the accounts and have the fraud recorded first because the window governs liability, then have the accounts frozen or closed, then obtain and check the full record for anything further, then keep written copies of everything reported and when.",
-          "Explains the measure: liability is capped per account, so the exposure is $150.00 reported promptly or $1,500.00 reported late, not the $3,735.00 charged — although the $3,735.00 is what must be disputed and removed.",
+          "Explains the measure: liability is capped per account, so the exposure is $150.00 reported promptly or $1,380.00 reported late, not the $3,735.00 charged — although the $3,735.00 is what must be disputed and removed.",
           "Names what to refuse: no one contacting the person about the incident should be given account numbers, passwords, security answers, or identifying documents, since a call or message about fraud is itself a common way of obtaining exactly those details.",
           "Notes the continuing exposure and its cost, such as the $335.76 of monitoring, because the details used to open three accounts can be used again."
         ],
         "evidenceRequirements": [
-          "Uses the $150.00 and $1,500.00 liability figures and the $1,350.00 that promptness saves."
+          "Uses the $150.00 and $1,380.00 liability figures and the $1,230.00 that promptness saves."
         ],
         "lookFors": [
           "The order is justified by what each step makes possible, not by convenience.",
           "The response never suggests paying a fraudulent charge.",
           "The response treats unsolicited contact about the incident as a risk in itself."
         ],
-        "commonMisconception": "Reading the total fraudulent charges as the amount at stake, when a per-account liability cap and the reporting date are what actually determine the loss.",
+        "commonMisconception": "Reading the total fraudulent charges as the amount at stake, when a per-account liability cap, the amount each account was actually charged, and the reporting date are what determine the loss.",
         "dimensions": [
           "plan-coherence",
           "criteria-application",

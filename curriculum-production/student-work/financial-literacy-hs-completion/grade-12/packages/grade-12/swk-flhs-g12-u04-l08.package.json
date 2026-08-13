@@ -101,7 +101,7 @@
       ]
     }
   ],
-  "remediation": "If the ceiling looks close to $32,000, the ten-year factor is being used. This pathway’s loans run five years at $19.10 per $1,000, not $10.60. A shorter term costs more each month for the same balance, so the same $256.00 payment supports far less borrowing.",
+  "remediation": "If the ceiling comes out at $24,150.94, the ten-year factor of $10.60 is being used. This pathway’s loans run five years at $19.10 per $1,000, not $10.60. A shorter term costs more each month for the same balance, so the same $256.00 payment supports far less borrowing.",
   "extension": "Recompute the ceiling if the applicant could repay over ten years at $10.60 per $1,000, and say whether the longer term closes the gap and what it costs in total repaid.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l08.scoring.json",
   "financialSafety": {

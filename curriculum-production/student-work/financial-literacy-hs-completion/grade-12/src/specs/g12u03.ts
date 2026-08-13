@@ -110,7 +110,7 @@ export const g12u03: readonly LessonSpec[] = [
     lessonId: 'ma-g12-financial-literacy-u03-l02',
     grade: 12, unit: 3, day: 2,
     actor: 'a fictional worker whose income arrives irregularly against fixed monthly obligations',
-    objective: 'Establish that a fictional irregular income covers its obligations in total, find the month in which it does not, and size the buffer that timing alone requires.',
+    objective: 'Establish that a fictional irregular income covers its obligations in total, find the months in which it does not, and size the buffer that timing alone requires.',
     scenario: 'The simulated six-month income record below belongs to a fictional worker paid per project. Every figure is invented for this exercise.',
     materials: ['calculator', 'the fictional income record in these directions'],
     domains: ['income', 'budgeting', 'banking', 'multi-variable-decision'],
@@ -142,7 +142,7 @@ export const g12u03: readonly LessonSpec[] = [
       },
       {
         taskId: 't2', kind: 'independent',
-        directions: 'Now find the month the average conceals.',
+        directions: 'Now find the months the average conceals.',
         items: [
           {
             ref: 't2-p1', kind: 'numeric', unit: 'USD',
@@ -163,7 +163,13 @@ export const g12u03: readonly LessonSpec[] = [
             reasoning: 'The size of the shortfall, held in advance. This buffer is not saving toward anything; it exists solely because income and obligations are out of step.',
           },
           {
-            ref: 't2-p4', kind: 'choice',
+            ref: 't2-p4', kind: 'numeric', unit: 'USD',
+            text: 'Month 1 also fell short, on income of $1,850 against the same obligations. What was the position in month 1?',
+            given: { firstMonth: 1850, fixed3: 2470 }, expr: 'firstMonth - fixed3', format: 'usd', answer: '-$620.00',
+            reasoning: '$1,850 received against $2,470 due. Month 1 is the smaller of the two shortfalls but it arrives first, so it is the one that decides how much has to be in place before the period begins.',
+          },
+          {
+            ref: 't2-p5', kind: 'choice',
             text: 'Across the whole 6 months, is the income sufficient to meet the obligations?',
             choices: ['Yes — but only if the timing is bridged', 'No — the income falls short over the period'],
             decision: { left: '#t1-p1', cmp: '>', right: '#t1-p3', ifTrue: 'Yes — but only if the timing is bridged', ifFalse: 'No — the income falls short over the period' },
@@ -178,18 +184,20 @@ export const g12u03: readonly LessonSpec[] = [
         items: [
           {
             ref: 't3-p1', kind: 'judgment', length: 'extended',
-            text: 'This income is sufficient over 6 months and insufficient in month 3. Explain why an average of $2,933.33 is a misleading basis for planning here, and describe how you would run this budget so that month 3 is survivable — naming what your method requires the worker to do in a strong month.',
+            text: 'This income is sufficient over 6 months and insufficient in two of them. Explain why an average of $2,933.33 is a misleading basis for planning here, and describe how you would run this budget so that both short months are survivable — naming what your method requires the worker to do in a strong month, and what has to be in place before month 1.',
             acceptableAnswerCriteria: [
               'Explains the flaw in the average: it describes a month that never occurred, and obligations fall due monthly while income does not arrive monthly, so the gap is a timing problem the average cannot express.',
-              'Describes a method that holds back money in strong months — for example paying a fixed monthly amount to the household from a separate holding account and leaving the rest to accumulate — and names $1,570.00 as the minimum the buffer must reach before month 3.',
+              'Describes a method that holds back money in strong months — for example paying a fixed monthly amount to the household from a separate holding account and leaving the rest to accumulate.',
+              'Gets the timing right as well as the size: $1,570.00 must be available at the start of month 3, but months 1 and 2 together net only $1,230.00, so at least $620.00 has to be in place before month 1 — which is the month that fails first.',
               'States what the method requires in a strong month: treating the $4,320 or $4,110 as partly reserved rather than available, which is a discipline the arithmetic alone will not enforce.',
             ],
             evidenceRequirements: [
-              'Uses the $2,780.00 six-month surplus and the $1,570.00 month-3 shortfall, and refers to at least one strong month by amount.',
+              'Uses the $2,780.00 six-month surplus, the $1,570.00 month-3 shortfall, and the -$620.00 month-1 position, and refers to at least one strong month by amount.',
             ],
             dimensions: ['plan-coherence', 'reasoning-from-figures', 'assumption-identification'],
             lookFors: [
               'The response separates whether the income is enough from whether it arrives in time.',
+              'The response notices that the first month is short as well as the third, so a buffer built only from earnings cannot be ready in time.',
               'The response names where the buffer is held, rather than assuming it stays untouched in a general account.',
             ],
             commonMisconception: 'Planning irregular income from its average, which hides every month in which the money has not yet arrived.',
@@ -197,7 +205,7 @@ export const g12u03: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the conclusion is that this worker cannot afford their obligations, compare the totals: $17,600.00 received against $14,820.00 due. The income is adequate. Now compare month 3 alone: $900 against $2,470. Both statements are true, and the second one is about timing rather than adequacy.',
+    remediation: 'If the conclusion is that this worker cannot afford their obligations, compare the totals: $17,600.00 received against $14,820.00 due. The income is adequate. Now compare each month against $2,470 in turn: months 1 and 3 fall short, at -$620.00 and -$1,570.00, and the other four are in surplus. Both statements are true, and the second is about timing rather than adequacy.',
     extension: 'Work out the buffer needed if the two weakest months fell consecutively, and say how much larger the reserve would have to be than the $1,570.00 found here.',
   },
 
@@ -391,7 +399,7 @@ export const g12u03: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'The fictional household set out to save $3,600 across the year at $300 a month. It saved $300 in each of the first 4 months. In month 5 a simulated vehicle repair of $940 meant nothing was saved and $340 was taken from the reserve. That leaves 7 months of the year remaining.',
+        directions: 'The fictional household set out to save $3,600 across the year at $300 a month. It saved $300 in each of the first 4 months. In month 5 a simulated vehicle repair of $940 meant nothing was saved: the $300 that would have been saved went to the repair, $340 came from the reserve, and the remaining $300 came out of that month’s ordinary spending. That leaves 7 months of the year remaining.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
@@ -462,7 +470,7 @@ export const g12u03: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the required monthly figure comes out at $300, the recovery is being spread across 12 months rather than the 7 that remain. Only 7 months are left, and $2,400.00 of the target is outstanding. Divide by 7, then add the reserve replacement separately rather than folding it into the same figure.',
+    remediation: 'If the required monthly figure comes out at $200.00, the outstanding $2,400.00 is being spread across 12 months rather than the 7 that remain. Only 7 months are left, and $2,400.00 of the target is outstanding. Divide by 7, then add the reserve replacement separately rather than folding it into the same figure.',
     extension: 'Recompute the monthly commitment if the household decides to replace the reserve over 12 months instead of 7, and say what that choice costs in protection during the intervening months.',
   },
 
@@ -627,7 +635,7 @@ export const g12u03: readonly LessonSpec[] = [
             text: 'This budget is arithmetically correct and still wrong. Name the error precisely, explain why it would feel like it was working for most of the year, and describe the change that fixes it rather than merely detecting it.',
             acceptableAnswerCriteria: [
               'Names the error precisely: the budget covers a month rather than a year, so every expense that does not arrive monthly is invisible to it, and the $180 surplus is measured against an incomplete list of costs.',
-              'Explains the experience: in the 7 or 8 months with no irregular expense the budget appears to work exactly as written, and it only fails in the months when the $612, $900, $285, or $420 lands.',
+              'Explains the experience: in every month with no irregular expense the budget appears to work exactly as written, and it only fails in the months when the $612, $900, $285, or $420 lands.',
               'Describes the fix rather than the diagnosis: reserve $235.75 each month into a separate holding account so the irregular expenses are already funded when they arrive, and treat the resulting deficit as a spending problem to be solved rather than a rounding issue.',
             ],
             evidenceRequirements: [
@@ -644,7 +652,7 @@ export const g12u03: readonly LessonSpec[] = [
       },
     ],
     remediation: 'If the annual position comes out as $2,160.00, the four irregular expenses have not been brought in. Total them to $2,829.00 first — remembering the insurance is charged twice — and set that against the apparent annual surplus. The monthly equivalent, $235.75, is larger than the $180 surplus, which is why the year finishes negative.',
-    extension: 'List the months in which each irregular expense falls and work out the largest single-month shortfall the household would face, then say how that differs from the $55.75 monthly average correction.',
+    extension: 'Choose a month for each irregular expense, work out the largest single-month shortfall your schedule produces, and say how that differs from the $55.75 monthly average correction.',
   },
 
   {
@@ -734,7 +742,7 @@ export const g12u03: readonly LessonSpec[] = [
             dimensions: ['plan-coherence', 'reasoning-from-figures', 'assumption-identification'],
             lookFors: [
               'The response keeps the two reserves distinct rather than adding them into one target.',
-              'The response recognises that the annual surplus of $4,536.00 is barely larger than the two reserves together.',
+              'The response recognises that the annual surplus of $4,536.00 is only $1,456.00 more than the $3,080.00 off-season buffer — and does not compare it against the two reserves added together, since the $3,024.00 tax set-aside was already removed before the surplus was computed.',
             ],
             commonMisconception: 'Treating money that has arrived in an account as money the household owns, when part of it is a tax liability and part is next quarter’s living costs.',
           },
@@ -742,7 +750,7 @@ export const g12u03: readonly LessonSpec[] = [
       },
     ],
     remediation: 'If the household looks comfortable throughout, check the off-season months on their own. The annual surplus is $4,536.00, but in each of the 4 months without seasonal pay only $2,380 arrives against $3,150 of costs. Compute the monthly position first, then multiply by the number of months it persists.',
-    extension: 'Work out what happens to both reserves if the seasonal work shortens to 7 months at the same monthly rate, and say which of the two grows faster.',
+    extension: 'Work out what happens to both reserves if the seasonal work shortens to 7 months at the same monthly rate, and say which one rises and which one falls.',
   },
 
   {
@@ -827,7 +835,7 @@ export const g12u03: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the closing balance comes out at $5,570.00, contributions have been counted for all 12 months. The household contributed in only the 10 months without a withdrawal, so the year added $2,600.00 rather than $3,120.00. Apply the contributions and the two withdrawals to the $7,200 opening balance in turn.',
+    remediation: 'If the closing balance comes out at $5,830.00, contributions have been counted for all 12 months. The household contributed in only the 10 months without a withdrawal, so the year added $2,600.00 rather than $3,120.00. Apply the contributions and the two withdrawals to the $7,200 opening balance in turn.',
     extension: 'Work out what contribution rate would have held the reserve at $7,200 across this year, and say what else in the household budget would have to give to fund it.',
   },
 
@@ -941,7 +949,7 @@ export const g12u03: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the allocation treats the employer contribution as a 50% return to be compared with the 22.8% card rate, stop and check what each figure measures. The card rate is charged every year the balance is carried; the employer contribution is a single addition to whatever is put in during that year. Compute what each is worth in dollars over the coming twelve months — $1,080.00 against roughly $957 of interest on the current balance — before ranking them.',
+    remediation: 'If the allocation treats the employer contribution as a 50% return to be compared with the 22.8% card rate, stop and check what each figure measures. The card rate is charged every year the balance is carried; the employer contribution is a single addition to whatever is put in during that year. Compute what each is worth in dollars over the coming twelve months — $1,080.00 against roughly $457 of interest, which is what the $4,200 balance actually costs while it is being paid down at $460 a month — before ranking them.',
     extension: 'Rework the allocation for a fictional household with the same $640 surplus but no employer contribution available at all, and say which of the two remaining claims changes most.',
   },
 ]

@@ -188,13 +188,13 @@
     "judgment": [
       {
         "ref": "t3-p1",
-        "prompt": "Fees and returns are both quoted as percentages, but only one of them is known in advance. Explain what follows from that difference, and describe the one balance at which the flat $60 component would make account Y the more expensive of the two.",
+        "prompt": "Fees and returns are both quoted as percentages, but only one of them is known in advance. Explain what follows from that difference, and describe the balances at which the flat $60 component would make account Y the more expensive of the two.",
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
           "States the asymmetry: the 0.85% and 0.15% fees are charged with certainty whatever happens, while any return is not known in advance, so a fee difference is a firmer basis for a decision than an expected return is.",
           "Uses the figures to show the scale: $66.00 a year at $18,000 and $360.00 at $60,000, or at least $1,980.00 across 30 years on a flat balance.",
-          "Reasons about the crossover: account Y is dearer only when the flat $60 outweighs the saving from the lower percentage, which requires a balance small enough that 0.70% of it is less than $60 — under roughly $8,571."
+          "Reasons about the crossover: account Y is dearer for any balance small enough that 0.70% of it is less than $60 — that is, below roughly $8,571, where the two charge the same."
         ],
         "evidenceRequirements": [
           "Uses the $153.00 and $87.00 fees at $18,000 and the $510.00 and $150.00 fees at $60,000."

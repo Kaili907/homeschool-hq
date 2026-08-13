@@ -37,7 +37,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "The simulated statement totals $1,247.83. It includes two charges the cardholder did not make and does not recognise, for $318.40 and $96.75. It also includes a charge of $54.00 from a merchant the cardholder did use, billed twice for one purchase. The rest of the statement is charges the cardholder made and accepts. Interest runs at 1.65% a month on any balance carried.",
+      "directions": "The simulated statement totals $1,247.83. It includes two charges the cardholder did not make and does not recognise, for $318.40 and $96.75. It also includes a charge of $54.00 from a merchant the cardholder did use, billed twice for one purchase. The rest of the statement is charges the cardholder made and accepts. Interest runs at 1.65% a month on any balance carried, except that while an amount is formally in dispute the fictional issuer charges no interest on it and does not treat it as late.",
       "prompts": [
         {
           "ref": "t1-p1",

@@ -62,7 +62,7 @@
     {
       "taskId": "t2",
       "kind": "independent",
-      "directions": "Now size what is actually at stake and identify the warning signs.",
+      "directions": "Before deciding anything, note two things a saver can actually do: promoters and the products they sell are listed on a public register kept by the financial regulator, and the full terms of any offer can be requested in writing before any money moves. Now size what is actually at stake and identify the warning signs.",
       "prompts": [
         {
           "ref": "t2-p1",
@@ -101,7 +101,7 @@
       ]
     }
   ],
-  "remediation": "If the yearly figure comes out at $1,216.00, the 18% has been applied once rather than compounded monthly as the offer states. Multiply by 1.18 twelve times over — once for each month — and the claim resolves to $7,287.59, which is what makes it testable.",
+  "remediation": "If the yearly figure comes out at $1,180.00, the 18% has been applied once rather than compounded monthly as the offer states. Multiply by 1.18 twelve times over — once for each month — and the claim resolves to $7,287.59, which is what makes it testable.",
   "extension": "Work out what the fictional 3% account would return over 10 years on $1,000, and say what that comparison shows about the kind of growth a genuine long-horizon plan relies on.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l06.scoring.json",
   "financialSafety": {

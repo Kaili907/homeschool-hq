@@ -122,7 +122,7 @@
       ]
     }
   ],
-  "remediation": "If the recovery comes out at $503.76, the s10 billing change has been left out; if it comes out near $719.76, s8 has been counted as cancelled rather than downgraded. Price each change for what it actually is: three cancellations recovering the full charge, one downgrade recovering only the $18.00 difference, and one billing change recovering $5.00.",
+  "remediation": "If the recovery comes out at $503.76, the s10 billing change has been left out; if it comes out at $676.76, s8 has been counted as cancelled at $32.00 rather than downgraded to $14.00. Price each change for what it actually is: three cancellations recovering the full charge, one downgrade recovering only the $18.00 difference, and one billing change recovering $5.00.",
   "extension": "Suppose the $14.00 tier of s8 turns out not to cover one feature the household uses monthly. Rework the audit total without that change, and say what share of the original recovery survives.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l10.scoring.json",
   "financialSafety": {

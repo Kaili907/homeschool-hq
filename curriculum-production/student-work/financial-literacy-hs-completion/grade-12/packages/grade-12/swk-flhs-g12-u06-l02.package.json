@@ -37,7 +37,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "Counting days from the fictional worker’s last day, the old plan’s cover ends on day 18 and the new employer’s cover begins on day 79. Continuation cover is available at $612 for each 30-day period or part of one, and 3 such periods are needed to span the gap. Under the new plan a fictional emergency visit costing $4,850 would leave the member paying a $250 copay plus 20% of the rest; with no cover at all the member pays the whole amount.",
+      "directions": "Counting days from the fictional worker’s last day, the last day the old plan covers is day 18 and the first day the new plan covers is day 80, so the uncovered stretch runs from day 19 to day 79 inclusive. Continuation cover is available at $612 for each 30-day period or part of one, and 3 such periods are needed to span the gap. Under the new plan a fictional emergency visit costing $4,850 would leave the member paying a $250 copay plus 20% of the rest; with no cover at all the member pays the whole amount.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -95,7 +95,7 @@
     }
   ],
   "remediation": "If the bridging cost comes out at $1,224.00, the gap is being covered with 2 periods rather than 3. A 61-day gap runs past two full 30-day periods, and a part period is charged in full, so 3 periods are needed. Count the periods against the 61 days before multiplying by $612.",
-  "extension": "Work out the bridging cost if the new employer’s cover began on day 61 instead of day 79, and say whether the saving is proportional to the days removed.",
+  "extension": "Work out the bridging cost if the new plan’s cover began on day 79 instead of day 80, and say why removing a single day changes the cost by $612.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,

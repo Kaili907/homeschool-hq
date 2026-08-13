@@ -62,6 +62,14 @@
       },
       {
         "ref": "t2-p4",
+        "answer": "-$620.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,850 received against $2,470 due. Month 1 is the smaller of the two shortfalls but it arrives first, so it is the one that decides how much has to be in place before the period begins."
+        }
+      },
+      {
+        "ref": "t2-p5",
         "answer": "Yes — but only if the timing is bridged",
         "verification": {
           "method": "derived-from-comparison",
@@ -114,6 +122,13 @@
       },
       {
         "ref": "t2-p4",
+        "expression": "firstMonth - fixed3",
+        "substituted": "1850 - 2470",
+        "result": "-$620.00",
+        "why": "$1,850 received against $2,470 due. Month 1 is the smaller of the two shortfalls but it arrives first, so it is the one that decides how much has to be in place before the period begins."
+      },
+      {
+        "ref": "t2-p5",
         "expression": "#t1-p1 > #t1-p3",
         "substituted": "#t1-p1 > #t1-p3",
         "result": "Yes — but only if the timing is bridged",
@@ -188,19 +203,21 @@
     "judgment": [
       {
         "ref": "t3-p1",
-        "prompt": "This income is sufficient over 6 months and insufficient in month 3. Explain why an average of $2,933.33 is a misleading basis for planning here, and describe how you would run this budget so that month 3 is survivable — naming what your method requires the worker to do in a strong month.",
+        "prompt": "This income is sufficient over 6 months and insufficient in two of them. Explain why an average of $2,933.33 is a misleading basis for planning here, and describe how you would run this budget so that both short months are survivable — naming what your method requires the worker to do in a strong month, and what has to be in place before month 1.",
         "scoredBy": "rubric",
         "exactKey": null,
         "acceptableAnswerCriteria": [
           "Explains the flaw in the average: it describes a month that never occurred, and obligations fall due monthly while income does not arrive monthly, so the gap is a timing problem the average cannot express.",
-          "Describes a method that holds back money in strong months — for example paying a fixed monthly amount to the household from a separate holding account and leaving the rest to accumulate — and names $1,570.00 as the minimum the buffer must reach before month 3.",
+          "Describes a method that holds back money in strong months — for example paying a fixed monthly amount to the household from a separate holding account and leaving the rest to accumulate.",
+          "Gets the timing right as well as the size: $1,570.00 must be available at the start of month 3, but months 1 and 2 together net only $1,230.00, so at least $620.00 has to be in place before month 1 — which is the month that fails first.",
           "States what the method requires in a strong month: treating the $4,320 or $4,110 as partly reserved rather than available, which is a discipline the arithmetic alone will not enforce."
         ],
         "evidenceRequirements": [
-          "Uses the $2,780.00 six-month surplus and the $1,570.00 month-3 shortfall, and refers to at least one strong month by amount."
+          "Uses the $2,780.00 six-month surplus, the $1,570.00 month-3 shortfall, and the -$620.00 month-1 position, and refers to at least one strong month by amount."
         ],
         "lookFors": [
           "The response separates whether the income is enough from whether it arrives in time.",
+          "The response notices that the first month is short as well as the third, so a buffer built only from earnings cannot be ready in time.",
           "The response names where the buffer is held, rather than assuming it stays untouched in a general account."
         ],
         "commonMisconception": "Planning irregular income from its average, which hides every month in which the money has not yet arrived.",
@@ -218,7 +235,7 @@
     "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
     "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
     "failsClosed": true,
-    "recomputedNumericAnswers": 6,
+    "recomputedNumericAnswers": 7,
     "comparisonDerivedChoices": 1,
     "assertedChoices": 0,
     "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."

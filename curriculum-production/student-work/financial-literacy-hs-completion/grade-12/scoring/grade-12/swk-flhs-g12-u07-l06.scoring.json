@@ -43,7 +43,7 @@
         "answer": "2.7",
         "verification": {
           "method": "recomputed",
-          "reasoning": "$1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $110 of interest avoided at 21.6% on a falling balance."
+          "reasoning": "$1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $63 of interest avoided at 21.6% on a falling balance."
         }
       },
       {
@@ -98,7 +98,7 @@
         "expression": "round(cardBalance2 / plan2Card, 1)",
         "substituted": "round(1950 / 731.04, 1)",
         "result": "2.7",
-        "why": "$1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $110 of interest avoided at 21.6% on a falling balance."
+        "why": "$1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $63 of interest avoided at 21.6% on a falling balance."
       },
       {
         "ref": "t2-p2",

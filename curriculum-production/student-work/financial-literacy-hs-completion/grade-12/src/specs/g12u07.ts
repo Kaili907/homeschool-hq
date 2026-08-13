@@ -320,7 +320,7 @@ export const g12u07: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If take-home comes out at $42,865.00, only the tax has been subtracted and the pre-tax elections are still in the figure; if it comes out near $47,000, the levy, state, and city charges have been left out. Subtract in the stated order: the $4,770.00 of elections, then all four taxes totalling $11,735.00.',
+    remediation: 'If take-home comes out at $42,865.00, only the tax has been subtracted and the pre-tax elections are still in the figure; if it comes out at $45,138.40, the levy, state, and city charges have been left out. Subtract in the stated order: the $4,770.00 of elections, then all four taxes totalling $11,735.00.',
     extension: 'Recompute the whole spine for a fictional profile paid $61,000 with the same elections, and say whether the 22% band is reached and what that does to the monthly figure.',
   },
 
@@ -438,7 +438,7 @@ export const g12u07: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'Case R has living costs of $2,045 a month and a student loan payment of $198.54 that continues whatever happens to income. The reserve holds $1,600 at the start of the year and receives $400 a month. Shock A is 3 months with no income at all. Shock B is a single unplanned expense of $4,200.',
+        directions: 'Case R has living costs of $2,045 a month and a student loan payment of $198.54 that continues whatever happens to income. The reserve holds $1,600 at the start of the year and receives $400 a month. Shock A is 3 months with no income at all. Shock B is a single unplanned expense of $4,200. Note one thing the figures below leave out: the $2,040 health premium was deducted from pay, so with no pay there is no deduction, and keeping that cover through the shock would be a further cost this test does not include.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
@@ -499,8 +499,8 @@ export const g12u07: readonly LessonSpec[] = [
             text: 'Record what this stress test found. State plainly which shock the plan survives and which it does not, decide what to change in response, and say what your change costs elsewhere in the plan. Explain why leaving the plan as it is could also be defended.',
             acceptableAnswerCriteria: [
               'States the findings correctly: shock B is absorbed with $2,200.00 remaining, and shock A falls short by $330.62 even after a full year of untouched saving.',
-              'Notes what makes the shock A result worse than it looks: the $6,400.00 assumes nothing was withdrawn all year, and after shock B the reserve covers only 1.08 months.',
-              'Proposes a specific change with its cost — raising the monthly transfer above $400 and naming what loses that money, extending the loan term to reduce the $198.54, or reducing a living cost line and saying which.',
+              'Notes what makes the shock A result worse than it looks: the $6,400.00 assumes nothing was withdrawn all year, after shock B the reserve covers only 1.08 months, and the figures exclude the cost of keeping health cover once pay stops.',
+              'Either proposes a specific change with its cost — raising the monthly transfer above $400 and naming what loses that money, extending the loan term to reduce the $198.54, or reducing a living cost line and saying which — or decides explicitly to change nothing and states the $330.62 exposure that decision keeps.',
               'Explains why no change is also defensible: the shortfall is $330.62 on a 3-month total loss of income, which is a narrow miss against a severe scenario, and the surplus may have more valuable work to do against the card at 21.6%.',
             ],
             evidenceRequirements: [
@@ -568,7 +568,7 @@ export const g12u07: readonly LessonSpec[] = [
             ref: 't2-p1', kind: 'numeric',
             text: 'Ignoring interest, how many months would Plan 2 take to clear the card? Give one decimal place.',
             given: { cardBalance2: 1950, plan2Card: 731.04 }, expr: 'round(cardBalance2 / plan2Card, 1)', format: 'dec1', answer: '2.7',
-            reasoning: '$1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $110 of interest avoided at 21.6% on a falling balance.',
+            reasoning: '$1,950 at $731.04 a month — roughly 3.2 months sooner than Plan 1, which is about $63 of interest avoided at 21.6% on a falling balance.',
           },
           {
             ref: 't2-p2', kind: 'numeric', unit: 'USD',
@@ -778,10 +778,11 @@ export const g12u07: readonly LessonSpec[] = [
             reasoning: '$3,160.80 across 4 quarters. Setting money aside on the same rhythm the liability accrues is what keeps a filing deadline from arriving as a surprise.',
           },
           {
-            ref: 't2-p4', kind: 'numeric', unit: 'percent',
-            text: 'What proportion of the independent income does the amount still owed represent, to two decimal places?',
-            given: { sideIncome3: 9600 }, expr: 'round(#t2-p2 / sideIncome3 * 100, 2)', format: 'percent2', answer: '32.93%',
-            reasoning: '$3,160.80 measured against $9,600 of independent income. Nearly a third of that income is committed before it is spent, which is the figure a person taking on such work needs before they take it on.',
+            ref: 't2-p4', kind: 'numeric', unit: 'USD',
+            text: 'How much of the amount still owed is attributable to the independent income itself — income tax on it at the 12% band plus the 15.3% levy?',
+            given: { sideIncome3: 9600, midRate3: 0.12, seLevy2: 0.153 },
+            expr: 'sideIncome3 * (midRate3 + seLevy2)', format: 'usd', answer: '$2,620.80',
+            reasoning: 'The independent income sits entirely above the standard deduction and the 10% band, which the wages already used, so every dollar of it is taxed at 12% and carries the full 15.3% levy — together 27.30% of $9,600. The remaining $540.00 of the $3,160.80 is not caused by the side work at all: it is wage income tax the employer under-withheld, and it would be owed even if the independent work had never happened.',
           },
         ],
       },
@@ -793,12 +794,13 @@ export const g12u07: readonly LessonSpec[] = [
             ref: 't3-p1', kind: 'judgment', length: 'extended',
             text: 'Someone earning $9,600 from independent work might reasonably plan around having $9,600. Explain what is wrong with that, describe the practice you would recommend for a fictional person in this position, and say what makes the 32.93% figure specific to this case rather than a general rule.',
             acceptableAnswerCriteria: [
-              'Explains the error: $3,160.80 of the $9,600 is already committed to tax, so treating the whole amount as available overstates spendable income by about a third and produces a bill with nothing set aside for it.',
+              'Explains the error: $2,620.80 of the $9,600 — 27.30% of it — is already committed to tax, so treating the whole amount as available overstates spendable income by more than a quarter and produces a bill with nothing set aside for it.',
               'Describes a workable practice: move a fixed proportion of every payment received into a separate account on receipt, rather than computing the liability once a year, and set aside $790.20 each quarter.',
-              'Explains what makes the percentage case-specific: it depends on the wage income already using the standard deduction and the 10% band, so the independent income sits entirely in the 12% band and carries the full 15.3% levy — a person with lower wages would face a lower share.',
+              'Separates the two causes: $2,620.80 of the bill follows from the independent income at 12% plus the 15.3% levy, and the remaining $540.00 is wage income tax the employer under-withheld, which would have been owed regardless.',
+              'Explains what makes the 27.30% share case-specific: the wages already used the standard deduction and the 10% band, so every dollar of independent income falls in the 12% band — a person with lower wages would face a lower share.',
             ],
             evidenceRequirements: [
-              'Uses the $3,160.80 still owed and the $790.20 quarterly figure, and refers to the 32.93% share.',
+              'Uses the $3,160.80 still owed, the $790.20 quarterly figure, and the $2,620.80 attributable to the independent income.',
             ],
             dimensions: ['transfer', 'plan-coherence', 'assumption-identification'],
             lookFors: [
@@ -810,7 +812,7 @@ export const g12u07: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the amount owed comes out at $1,692.00, only the income tax has been counted and the self-employment levy has been left out; if it comes out at $5,940.80, the $2,780 already withheld has not been credited. Add both charges, then subtract what the employer already collected.',
+    remediation: 'If the amount owed comes out at $1,692.00, only the income tax has been counted and the self-employment levy has been left out; if it comes out at $5,940.80, the $2,780 already withheld has not been credited. Add both charges, then subtract what the employer already collected. Note that the whole $3,160.80 is not caused by the side work: $540.00 of it is wage tax the employer under-withheld.',
     extension: 'Recompute the quarterly set-aside for a fictional worker with the same $9,600 of independent income but only $16,000 of wages, and say why the share of the side income committed to tax falls.',
   },
 
@@ -907,7 +909,7 @@ export const g12u07: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the unallocated figure comes out near $4,100, the retirement contribution or the health premium has been subtracted from take-home pay. Both were taken before tax and so are already outside the $38,095 of take-home. Subtract only the living costs, the loan payments, and the reserve transfer.',
+    remediation: 'If the unallocated figure comes out at $4,332.52, the $2,040 health premium has been subtracted from take-home pay; if it comes out at $3,642.52, the $2,730 retirement contribution has. Both were taken before tax and so are already outside the $38,095 of take-home. Subtract only the living costs, the loan payments, and the reserve transfer.',
     extension: 'Rebuild the annual summary with living costs 6% higher and everything else unchanged, and say what happens to the unallocated figure and to the plan that depends on it.',
   },
 
@@ -933,15 +935,16 @@ export const g12u07: readonly LessonSpec[] = [
           },
           {
             ref: 't1-p2', kind: 'numeric', unit: 'USD',
-            text: 'How much of the year never becomes spendable cash, counting tax and the pre-tax elections?',
-            given: { totalTax: 11735, preTaxElections: 4770 }, expr: 'totalTax + preTaxElections', format: 'usd', answer: '$16,505.00',
-            reasoning: '$11,735 of tax plus $4,770 of pre-tax elections. Only the tax is a cost; the elections buy cover and fund an account Case R still owns.',
+            text: 'How much of those total resources never arrives as spendable cash — tax, the pre-tax elections, and the employer contribution together?',
+            given: { totalTax: 11735, preTaxElections: 4770, employerContribution3: 1365 },
+            expr: 'totalTax + preTaxElections + employerContribution3', format: 'usd', answer: '$17,870.00',
+            reasoning: '$11,735 of tax, $4,770 of pre-tax elections, and the $1,365 employer contribution. All three are inside the $55,965.00 of total resources and none of them reaches the account, so all three belong in the numerator; leaving the employer contribution out would divide by a total that includes it. Only the $11,735 of tax is a cost — the elections buy cover and fund an account Case R still owns, and the employer contribution is money added on their behalf.',
           },
           {
             ref: 't1-p3', kind: 'numeric', unit: 'percent',
             text: 'What share of the total resources is that, to two decimal places?',
-            given: {}, expr: 'round(#t1-p2 / #t1-p1 * 100, 2)', format: 'percent2', answer: '29.49%',
-            reasoning: '$16,505.00 measured against $55,965.00. Naming the share is useful provided the plan also says how much of it is cost and how much is transfer.',
+            given: {}, expr: 'round(#t1-p2 / #t1-p1 * 100, 2)', format: 'percent2', answer: '31.93%',
+            reasoning: '$17,870.00 measured against $55,965.00, which is the same as the gap between total resources and the $38,095 of take-home pay. Naming the share is useful provided the plan also says how much of it is cost and how much is transfer.',
           },
         ],
       },
@@ -991,8 +994,8 @@ export const g12u07: readonly LessonSpec[] = [
             ref: 't4-p1', kind: 'judgment', length: 'extended',
             text: 'Write the complete capstone plan for this fictional case. Cover what the year makes available, what it commits, what it builds, and how it is protected. State the three tradeoffs the plan makes and what each one costs, name the assumption the whole plan is most sensitive to, and say explicitly what a reader would have to believe for a different plan to be better than yours.',
             acceptableAnswerCriteria: [
-              'Reports the year accurately across strands, using at least the $55,965.00 of total resources, the $16,505.00 that never becomes cash, and the $11,172.48 allocated from surplus.',
-              'States what the plan builds with figures: a reserve of $6,400.00 covering 3.13 months of living costs, and $6,495.00 into retirement.',
+              'Reports the year accurately across strands, using at least the $55,965.00 of total resources, the $17,870.00 that never arrives as spendable cash, and the $11,172.48 allocated from surplus.',
+              'States what the year as given builds, with figures: a reserve of $6,400.00 covering 3.13 months of living costs, and $6,495.00 into retirement. Where the plan proposed differs from that allocation, it restates both figures under its own allocation instead.',
               'Names three genuine tradeoffs with costs attached — for example reserve against card repayment, extra retirement saving against liquidity, or the retirement election against monthly take-home — rather than listing three good things the plan does.',
               'Identifies the most sensitive assumption and says why, most defensibly the continuity of income, since the stress test showed a 3-month loss exceeding the reserve, or the stability of the $1,180 rent as the largest single cost.',
               'States what would have to be true for a different plan to be better, so the document presents its own conclusion as one defensible answer rather than the answer.',
@@ -1021,7 +1024,7 @@ export const g12u07: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the total resources figure comes out at $54,600, the employer retirement contribution has been left out; if the share of resources that never becomes cash comes out near 21%, only the tax has been counted and the $4,770 of pre-tax elections has not. Build the numerator from both, then say in the plan how much of it is cost and how much is transfer.',
+    remediation: 'If the total resources figure comes out at $54,600, the employer retirement contribution has been left out. If the share that never arrives as spendable cash comes out near 21%, only the tax has been counted; if it comes out at 29.49%, the $1,365 employer contribution is in the denominator but not the numerator, which compares two different things. Build the numerator from all three, then say in the plan how much of it is cost and how much is transfer.',
     extension: 'Rewrite the plan for a fictional profile with the same pay but $520 a month of childcare costs, and say which of your three tradeoffs changes first.',
   },
 
@@ -1037,7 +1040,7 @@ export const g12u07: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'Case R ends the year with a reserve of $6,400, living costs of $2,045 a month, and a student loan payment of $198.54 a month that continues regardless of income. Test the plan against a harder shock than before: 5 months with no income at all.',
+        directions: 'Case R ends the year with a reserve of $6,400, living costs of $2,045 a month, and a student loan payment of $198.54 a month that continues regardless of income. Test the plan against a harder shock than before: 5 months with no income at all. As in the earlier test, the figures exclude the cost of keeping health cover once pay stops, since the $2,040 premium was deducted from pay.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
@@ -1107,6 +1110,7 @@ export const g12u07: readonly LessonSpec[] = [
             dimensions: ['tradeoff-defense', 'plan-coherence', 'communication-of-uncertainty', 'evidence-use', 'assumption-identification'],
             lookFors: [
               'The defence concedes the failure plainly rather than arguing the shock is unrealistic.',
+              'The response notices that the $11,217.70 excludes the cost of keeping health cover once pay stops, so the true requirement is higher than the figure it defends against.',
               'Both a change-the-plan defence and a keep-the-plan defence earn full credit when the cost is priced and the objection is answered.',
               'The response recognises that cutting $285 a month buys only about 0.42 of a month, so cost-cutting alone is not an answer to a shock of this size.',
               'A defence that presents its own plan as the only reasonable one is marked down on uncertainty regardless of the arithmetic.',

@@ -37,7 +37,7 @@
     {
       "taskId": "t1",
       "kind": "guided",
-      "directions": "The fictional household set out to save $3,600 across the year at $300 a month. It saved $300 in each of the first 4 months. In month 5 a simulated vehicle repair of $940 meant nothing was saved and $340 was taken from the reserve. That leaves 7 months of the year remaining.",
+      "directions": "The fictional household set out to save $3,600 across the year at $300 a month. It saved $300 in each of the first 4 months. In month 5 a simulated vehicle repair of $940 meant nothing was saved: the $300 that would have been saved went to the repair, $340 came from the reserve, and the remaining $300 came out of that month’s ordinary spending. That leaves 7 months of the year remaining.",
       "prompts": [
         {
           "ref": "t1-p1",
@@ -97,7 +97,7 @@
       ]
     }
   ],
-  "remediation": "If the required monthly figure comes out at $300, the recovery is being spread across 12 months rather than the 7 that remain. Only 7 months are left, and $2,400.00 of the target is outstanding. Divide by 7, then add the reserve replacement separately rather than folding it into the same figure.",
+  "remediation": "If the required monthly figure comes out at $200.00, the outstanding $2,400.00 is being spread across 12 months rather than the 7 that remain. Only 7 months are left, and $2,400.00 of the target is outstanding. Divide by 7, then add the reserve replacement separately rather than folding it into the same figure.",
   "extension": "Recompute the monthly commitment if the household decides to replace the reserve over 12 months instead of 7, and say what that choice costs in protection during the intervening months.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l05.scoring.json",
   "financialSafety": {

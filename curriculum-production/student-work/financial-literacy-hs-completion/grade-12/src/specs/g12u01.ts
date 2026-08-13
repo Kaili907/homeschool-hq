@@ -926,7 +926,7 @@ export const g12u01: readonly LessonSpec[] = [
               'Sets a retirement contribution and justifies it against the $3,528.00 needed to earn the full $1,764.00 employer contribution, either by reaching it or by stating explicitly what competing use of the cash makes a lower rate defensible.',
               'Chooses a health plan and justifies it with the year totals — $4,632.00 for Plan A against $4,752.00 for Plan B — rather than with the premium alone.',
               'Addresses the deadline as a decision in its own right: missing the window leaves the hire with no health plan and no employer retirement contribution for a full year, so the cost of not choosing is the whole $1,764.00 plus uninsured exposure.',
-              'Names Plan B as the election to revisit under lower expected use, and gives the reason: Plan B is $1,440.00 cheaper in premiums, which wins whenever cost sharing stays small.',
+              'Identifies the health election as the one to revisit under lower expected use, and gives the reason: Plan B is $1,440.00 cheaper in premiums, which wins whenever cost sharing stays small — so a response that chose Plan A moves to Plan B, and one that already chose Plan B says why lower use confirms it.',
             ],
             evidenceRequirements: [
               'Uses the $1,764.00 employer contribution and both plan-year totals, $4,632.00 and $4,752.00.',

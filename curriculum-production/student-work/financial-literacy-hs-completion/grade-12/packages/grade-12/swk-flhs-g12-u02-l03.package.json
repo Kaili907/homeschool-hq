@@ -106,7 +106,7 @@
       ]
     }
   ],
-  "remediation": "If the amount to pay comes out as $204.69, the $12.99 added service has been treated as disputed. Work line by line: the duplicate $148.20, the $39.00 late fee, and the $6.00 overcharge are wrong; the original $148.20 service charge, the $61.50 that was properly owed, and the $12.99 are right. Subtract only the first group from $415.89.",
+  "remediation": "If the amount to pay comes out as $209.70, the $12.99 added service has been treated as disputed; if it comes out as $204.69, the $18.00 already paid on earlier statements has been deducted here as well, when it is a refund claim rather than a reduction of this bill. Work line by line: the duplicate $148.20, the $39.00 late fee, and the $6.00 overcharge are wrong; the original $148.20 service charge, the $61.50 that was properly owed, and the $12.99 are right. Subtract only the first group from $415.89.",
   "extension": "Work out what the claim would grow to if the rate error ran for 9 more cycles before being corrected, and say what that implies about how quickly a recurring error should be raised.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l03.scoring.json",
   "financialSafety": {

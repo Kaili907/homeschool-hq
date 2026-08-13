@@ -106,7 +106,7 @@ export const g12u04: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the unmet amount comes out at $16,000.00, the calculation has started from tuition of $11,400 rather than from the full cost of attendance. Books, transport, housing and food, and personal costs are all part of what the year costs, and the workflow computes need against the whole $24,500.00.',
+    remediation: 'If the unmet amount comes out at $16,000.00, the $4,200 contribution figure and the $2,400 work-study have not been applied — that figure is simply the $24,500.00 cost less the $8,500.00 of grants. If it comes out near $13,000, the calculation has started from tuition of $11,400 rather than from the full cost of attendance; books, transport, housing and food, and personal costs are all part of what the year costs.',
     extension: 'Recompute the unmet amount for a fictional applicant whose contribution figure is $1,500 instead, and say which single line in the calculation moves and by how much.',
   },
 
@@ -189,7 +189,7 @@ export const g12u04: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the ceiling comes out near $3,466.67, the monthly payment has been divided by the factor without scaling back to thousands. The factor is quoted per $1,000 borrowed, so dividing $346.67 by $10.60 gives the number of thousands, which must then be multiplied by 1000 to reach the balance.',
+    remediation: 'If the ceiling comes out at $32.70, the monthly payment has been divided by the factor without scaling back to thousands. The factor is quoted per $1,000 borrowed, so dividing $346.67 by $10.60 gives the number of thousands, which must then be multiplied by 1000 to reach the balance.',
     extension: 'Recompute the ceiling for the same student under a rule allowing 8% of gross rather than 10%, and say how much less programme cost that ceiling could absorb.',
   },
 
@@ -742,7 +742,7 @@ export const g12u04: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the ceiling looks close to $32,000, the ten-year factor is being used. This pathway’s loans run five years at $19.10 per $1,000, not $10.60. A shorter term costs more each month for the same balance, so the same $256.00 payment supports far less borrowing.',
+    remediation: 'If the ceiling comes out at $24,150.94, the ten-year factor of $10.60 is being used. This pathway’s loans run five years at $19.10 per $1,000, not $10.60. A shorter term costs more each month for the same balance, so the same $256.00 payment supports far less borrowing.',
     extension: 'Recompute the ceiling if the applicant could repay over ten years at $10.60 per $1,000, and say whether the longer term closes the gap and what it costs in total repaid.',
   },
 
@@ -750,7 +750,7 @@ export const g12u04: readonly LessonSpec[] = [
     lessonId: 'ma-g12-financial-literacy-u04-l09',
     grade: 12, unit: 4, day: 9,
     actor: 'a fictional applicant comparing two packages across more than one year',
-    objective: 'Project two fictional financing packages across two years with rising costs and fixed aid, and show how borrowing diverges from the first-year comparison.',
+    objective: 'Project two fictional financing packages across two years with rising costs and fixed aid, and show how the first-year borrowing comparison narrows once the second year is included.',
     scenario: 'The two simulated packages and the fictional cost increase below are invented for this exercise.',
     materials: ['calculator', 'the fictional package terms and cost increase in these directions'],
     domains: ['postsecondary-financing', 'debt', 'budgeting', 'multi-variable-decision'],
@@ -1045,7 +1045,7 @@ export const g12u04: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the combined utilisation comes out at 58.75%, the disputed balance has been added to the numerator without adding its $3,000 limit to the denominator. Both accounts contribute to both sides of the ratio: $3,530 of balance against $7,000 of limit. Compute each version of the ratio with its matching limit before comparing them.',
+    remediation: 'If the combined utilisation comes out at 88.25%, the disputed balance has been added to the numerator without adding its $3,000 limit to the denominator. Both accounts contribute to both sides of the ratio: $3,530 of balance against $7,000 of limit. Compute each version of the ratio with its matching limit before comparing them.',
     extension: 'Work out what utilisation would be if the disputed account were removed but the borrower had opened a third fictional card with a $2,500 limit and no balance, and say which of the two changes helps the ratio more.',
   },
 ]

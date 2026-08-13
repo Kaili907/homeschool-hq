@@ -95,7 +95,7 @@
       ]
     }
   ],
-  "remediation": "If the ceiling comes out near $3,466.67, the monthly payment has been divided by the factor without scaling back to thousands. The factor is quoted per $1,000 borrowed, so dividing $346.67 by $10.60 gives the number of thousands, which must then be multiplied by 1000 to reach the balance.",
+  "remediation": "If the ceiling comes out at $32.70, the monthly payment has been divided by the factor without scaling back to thousands. The factor is quoted per $1,000 borrowed, so dividing $346.67 by $10.60 gives the number of thousands, which must then be multiplied by 1000 to reach the balance.",
   "extension": "Recompute the ceiling for the same student under a rule allowing 8% of gross rather than 10%, and say how much less programme cost that ceiling could absorb.",
   "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l02.scoring.json",
   "financialSafety": {

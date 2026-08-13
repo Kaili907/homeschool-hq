@@ -184,7 +184,7 @@ export const g12u05: readonly LessonSpec[] = [
             text: 'A fictional colleague says raising the rate from 6% to 10% "costs $164 a month". Correct the figure, explain why the correction is not the whole answer, and state what the fictional worker needs to know about their budget before the difference between the two rates can be decided.',
             acceptableAnswerCriteria: [
               'Corrects the figure: take-home pay falls by $144.32, not $164.00, because $19.68 of the extra contribution is met by income tax that is no longer paid.',
-              'Explains why the correction is not the whole answer: $144.32 still has to be found every month from a budget that currently spends it, and the money is locked away rather than simply relabelled.',
+              'Explains why the correction is not the whole answer: $144.32 still has to be found every month from a budget that currently spends it, and the contribution is money the worker no longer has available to spend this month even though they still own it.',
               'Names what must be known: whether $144.32 a month exists in the budget without displacing something the worker cannot defer, such as an obligation or a reserve that is not yet built.',
             ],
             evidenceRequirements: [
@@ -296,7 +296,7 @@ export const g12u05: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If allocation A comes out near $91,000, a single blended rate has probably been applied to the whole $12,000. The two parts grow at different assumed rates and must be compounded separately: $9,600.00 at 7% for 30 years, plus $2,400.00 at 3% for 30 years, added at the end.',
+    remediation: 'If allocation A comes out at $91,347.06, the 7% growth rate has been applied to the whole $12,000 and the stable sleeve ignored; if it comes out at $72,931.77, a single blended rate of 6.2% has been applied to the whole balance instead. The two parts grow at different assumed rates and must be compounded separately: $9,600.00 at 7% for 30 years, plus $2,400.00 at 3% for 30 years, added at the end.',
     extension: 'Recompute both allocations over 10 years rather than 30, and say what proportion of the 30-year gap has appeared by then.',
   },
 
@@ -463,11 +463,11 @@ export const g12u05: readonly LessonSpec[] = [
         items: [
           {
             ref: 't3-p1', kind: 'judgment', length: 'extended',
-            text: 'Fees and returns are both quoted as percentages, but only one of them is known in advance. Explain what follows from that difference, and describe the one balance at which the flat $60 component would make account Y the more expensive of the two.',
+            text: 'Fees and returns are both quoted as percentages, but only one of them is known in advance. Explain what follows from that difference, and describe the balances at which the flat $60 component would make account Y the more expensive of the two.',
             acceptableAnswerCriteria: [
               'States the asymmetry: the 0.85% and 0.15% fees are charged with certainty whatever happens, while any return is not known in advance, so a fee difference is a firmer basis for a decision than an expected return is.',
               'Uses the figures to show the scale: $66.00 a year at $18,000 and $360.00 at $60,000, or at least $1,980.00 across 30 years on a flat balance.',
-              'Reasons about the crossover: account Y is dearer only when the flat $60 outweighs the saving from the lower percentage, which requires a balance small enough that 0.70% of it is less than $60 — under roughly $8,571.',
+              'Reasons about the crossover: account Y is dearer for any balance small enough that 0.70% of it is less than $60 — that is, below roughly $8,571, where the two charge the same.',
             ],
             evidenceRequirements: [
               'Uses the $153.00 and $87.00 fees at $18,000 and the $510.00 and $150.00 fees at $60,000.',
@@ -521,7 +521,7 @@ export const g12u05: readonly LessonSpec[] = [
       },
       {
         taskId: 't2', kind: 'independent',
-        directions: 'Now size what is actually at stake and identify the warning signs.',
+        directions: 'Before deciding anything, note two things a saver can actually do: promoters and the products they sell are listed on a public register kept by the financial regulator, and the full terms of any offer can be requested in writing before any money moves. Now size what is actually at stake and identify the warning signs.',
         items: [
           {
             ref: 't2-p1', kind: 'numeric', unit: 'USD',
@@ -571,7 +571,7 @@ export const g12u05: readonly LessonSpec[] = [
         ],
       },
     ],
-    remediation: 'If the yearly figure comes out at $1,216.00, the 18% has been applied once rather than compounded monthly as the offer states. Multiply by 1.18 twelve times over — once for each month — and the claim resolves to $7,287.59, which is what makes it testable.',
+    remediation: 'If the yearly figure comes out at $1,180.00, the 18% has been applied once rather than compounded monthly as the offer states. Multiply by 1.18 twelve times over — once for each month — and the claim resolves to $7,287.59, which is what makes it testable.',
     extension: 'Work out what the fictional 3% account would return over 10 years on $1,000, and say what that comparison shows about the kind of growth a genuine long-horizon plan relies on.',
   },
 
@@ -941,7 +941,7 @@ export const g12u05: readonly LessonSpec[] = [
               'States what happens to contributions during a decline and justifies it with a figure — for example continuing $340 a month, so that 18 months adds $6,120.00 regardless of the level.',
               'Separates reasons to sell from reactions to a fall: names a legitimate trigger such as needing the money at a known date or a change in circumstances, and states that a fall alone is not one.',
               'Addresses unsolicited contact during a decline: an offer arriving at the moment of a fall is a pressure situation, no account details or identifying information should be given to anyone who makes contact unprompted, and any offer should be verified independently before anything moves.',
-              'Uses the fee figures to show what continues regardless: 0.22% is charged whether the balance rises or falls, amounting to $49.90 at the reduced balance and 1.04% of the contributions made.',
+              'Uses the fee figures to show what continues regardless: 0.22% is charged whether the balance rises or falls, amounting to $49.90 at the reduced balance and $63.36 once contributions have rebuilt it — which is 1.04% of the 18 months of contributions.',
               'States the limit honestly: the policy cannot guarantee a recovery, and the 38.89% gain needed to restore $31,500 is what is required rather than what is expected.',
             ],
             evidenceRequirements: [

@@ -28,7 +28,7 @@ export const g12u06: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'The fictional adult earns $46,800 a year and holds four simulated policies: renters cover at $17 a month, auto at $118, the employee share of health at $186, and disability at $24. The renters policy covers personal property up to $25,000 after a deductible of $500.',
+        directions: 'The fictional adult earns $46,800 a year and holds four simulated policies: renters cover at $17 a month, auto at $118, the employee share of health at $186, and disability at $24. The renters policy covers personal property up to $25,000 after a deductible of $500, and the auto policy covers damage up to $50,000. The health and disability policies state no single coverage limit.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'USD',
@@ -69,10 +69,15 @@ export const g12u06: readonly LessonSpec[] = [
           },
           {
             ref: 't2-p3', kind: 'choice',
-            text: 'Which of the four policies protects the largest potential loss for the smallest premium?',
-            choices: ['Renters, at $17 a month', 'Auto, at $118 a month', 'Health, at $186 a month'],
+            text: 'Of the two policies that state a coverage limit, which carries the larger limit for each dollar of annual premium?',
+            choices: ['Renters, at $17 a month', 'Auto, at $118 a month'],
+            given: { rentersLimit: 25000, rentersPrem: 17, autoLimit: 50000, autoPrem: 118 },
+            decision: {
+              left: 'rentersLimit / (rentersPrem * 12)', cmp: '>', right: 'autoLimit / (autoPrem * 12)',
+              ifTrue: 'Renters, at $17 a month', ifFalse: 'Auto, at $118 a month',
+            },
             answer: 'Renters, at $17 a month',
-            reasoning: 'The renters policy covers up to $25,000 of property for $204.00 a year, the smallest premium of the four against a stated limit far larger than the premium. The comparison follows from the stated terms; it does not mean renters cover is the most important policy, only the one with the largest stated limit per dollar of premium.',
+            reasoning: 'Renters covers $25,000 for $204.00 a year, about $123 of limit per dollar of premium; auto covers $50,000 for $1,416.00 a year, about $35. Only these two state a limit, so only these two can be compared this way. A larger limit per dollar of premium does not make a policy more important — it reflects how likely and how large the insurer expects claims to be.',
           },
         ],
       },
@@ -116,13 +121,13 @@ export const g12u06: readonly LessonSpec[] = [
     tasks: [
       {
         taskId: 't1', kind: 'guided',
-        directions: 'Counting days from the fictional worker’s last day, the old plan’s cover ends on day 18 and the new employer’s cover begins on day 79. Continuation cover is available at $612 for each 30-day period or part of one, and 3 such periods are needed to span the gap. Under the new plan a fictional emergency visit costing $4,850 would leave the member paying a $250 copay plus 20% of the rest; with no cover at all the member pays the whole amount.',
+        directions: 'Counting days from the fictional worker’s last day, the last day the old plan covers is day 18 and the first day the new plan covers is day 80, so the uncovered stretch runs from day 19 to day 79 inclusive. Continuation cover is available at $612 for each 30-day period or part of one, and 3 such periods are needed to span the gap. Under the new plan a fictional emergency visit costing $4,850 would leave the member paying a $250 copay plus 20% of the rest; with no cover at all the member pays the whole amount.',
         items: [
           {
             ref: 't1-p1', kind: 'numeric', unit: 'days',
             text: 'How many days is the gap in cover?',
-            given: { newStart: 79, oldEnd: 18 }, expr: 'newStart - oldEnd', format: 'int', answer: '61',
-            reasoning: 'Day 79 when the new cover starts, less day 18 when the old cover ends. The gap arises from two dates neither of which the worker chose, which is why it has to be checked rather than assumed away.',
+            given: { firstUncovered: 19, lastUncovered: 79 }, expr: 'lastUncovered - firstUncovered + 1', format: 'int', answer: '61',
+            reasoning: 'Day 19 through day 79 inclusive, which is 79 − 19 + 1 = 61 days. Counting inclusively matters: a gap stated as two dates is one day longer than the difference between them, and here that one day is what pushes the bridging cost past two 30-day periods into a third.',
           },
           {
             ref: 't1-p2', kind: 'numeric', unit: 'USD',
@@ -168,7 +173,7 @@ export const g12u06: readonly LessonSpec[] = [
             acceptableAnswerCriteria: [
               'Names what the comparison omits: it assumes exactly one event of exactly $4,850, whereas the gap could pass with nothing at all — in which case $1,836.00 buys nothing — or could bring a far larger cost that the comparison understates.',
               'Makes the case for going uncovered honestly: $1,836.00 is certain and the event is not, so a worker with reserves able to absorb a large bill may reasonably accept 61 days of exposure.',
-              'Names the fact to confirm: the two dates themselves — whether the old cover truly ends on day 18 and the new cover truly begins on day 79 — since a shorter gap might need fewer periods and a longer one more, and the whole calculation rests on them.',
+              'Names the fact to confirm: the two dates themselves — whether the old cover truly runs through day 18 and the new cover truly starts on day 80 — since a gap one day shorter would fall inside two 30-day periods and cost $612 less, and the whole calculation rests on them.',
             ],
             evidenceRequirements: [
               'Uses the $1,836.00 bridging cost and the $3,680.00 extra exposure, and refers to the 61-day gap.',
@@ -184,7 +189,7 @@ export const g12u06: readonly LessonSpec[] = [
       },
     ],
     remediation: 'If the bridging cost comes out at $1,224.00, the gap is being covered with 2 periods rather than 3. A 61-day gap runs past two full 30-day periods, and a part period is charged in full, so 3 periods are needed. Count the periods against the 61 days before multiplying by $612.',
-    extension: 'Work out the bridging cost if the new employer’s cover began on day 61 instead of day 79, and say whether the saving is proportional to the days removed.',
+    extension: 'Work out the bridging cost if the new plan’s cover began on day 79 instead of day 80, and say why removing a single day changes the cost by $612.'
   },
 
   {
@@ -297,7 +302,7 @@ export const g12u06: readonly LessonSpec[] = [
             ref: 't1-p2', kind: 'numeric', unit: 'USD',
             text: 'What is the 14 hours worth at the stated rate?',
             given: { hours: 14, hourly: 22 }, expr: 'hours * hourly', format: 'usd', answer: '$308.00',
-            reasoning: '14 hours at $22. Putting a figure on the time is a device for comparison, not a claim that the household would otherwise have earned this; the point is that the time cost is roughly equal to the fees.',
+            reasoning: '14 hours at $22. Putting a figure on the time is a device for comparison, not a claim that the household would otherwise have earned this; the point is that the time cost is roughly equal to the $307.00 of fees.',
           },
           {
             ref: 't1-p3', kind: 'numeric', unit: 'USD',
@@ -389,8 +394,9 @@ export const g12u06: readonly LessonSpec[] = [
           {
             ref: 't1-p3', kind: 'numeric', unit: 'USD',
             text: 'What is the most they are liable for if all three are reported after the window?',
-            given: { lateCap: 500, accounts2: 3 }, expr: 'lateCap * accounts2', format: 'usd', answer: '$1,500.00',
-            reasoning: '$500 on each of the 3 accounts. The charges themselves have not changed; only the reporting date has.',
+            given: { lateCap: 500, c1b: 1240, c2b: 380, c3b: 2115 },
+            expr: 'min(lateCap, c1b) + min(lateCap, c2b) + min(lateCap, c3b)', format: 'usd', answer: '$1,380.00',
+            reasoning: 'The cap is $500 per account, but liability on an account cannot exceed what that account was charged. Two accounts reach the $500 cap; the third was only charged $380, so that is the ceiling there. $500 + $380 + $500 = $1,380.00. Multiplying $500 by 3 would make the holder liable for more than an account was ever billed.',
           },
         ],
       },
@@ -401,8 +407,8 @@ export const g12u06: readonly LessonSpec[] = [
           {
             ref: 't2-p1', kind: 'numeric', unit: 'USD',
             text: 'What does reporting inside the window save?',
-            given: {}, expr: '#t1-p3 - #t1-p2', format: 'usd', answer: '$1,350.00',
-            reasoning: '$1,500.00 against $150.00. The saving comes from acting on a date, not from anything else the person does.',
+            given: {}, expr: '#t1-p3 - #t1-p2', format: 'usd', answer: '$1,230.00',
+            reasoning: '$1,380.00 against $150.00. The saving comes from acting on a date, not from anything else the person does.',
           },
           {
             ref: 't2-p2', kind: 'numeric', unit: 'USD',
@@ -415,7 +421,7 @@ export const g12u06: readonly LessonSpec[] = [
             text: 'What should the person do first on discovering the accounts?',
             choices: ['Pay the smallest charge to stop it growing', 'Report the accounts as not theirs and have the fraud recorded', 'Wait to see whether more accounts appear'],
             answer: 'Report the accounts as not theirs and have the fraud recorded',
-            reasoning: 'Reporting starts the process that limits liability under the stated window and creates the record every later step depends on. Paying a charge would concede a debt the person does not owe, and waiting risks passing the window, which the figures show costs $1,350.00.',
+            reasoning: 'Reporting starts the process that limits liability under the stated window and creates the record every later step depends on. Paying a charge would concede a debt the person does not owe, and waiting risks passing the window, which the figures show costs $1,230.00.',
           },
         ],
       },
@@ -428,12 +434,12 @@ export const g12u06: readonly LessonSpec[] = [
             text: 'Set out the response to this incident in order, with a reason for the position of each step. Explain why the $3,735.00 is not the right measure of what the person stands to lose, and say what they should refuse to do even if someone contacting them about the incident asks.',
             acceptableAnswerCriteria: [
               'Gives an ordered response with reasons: report the accounts and have the fraud recorded first because the window governs liability, then have the accounts frozen or closed, then obtain and check the full record for anything further, then keep written copies of everything reported and when.',
-              'Explains the measure: liability is capped per account, so the exposure is $150.00 reported promptly or $1,500.00 reported late, not the $3,735.00 charged — although the $3,735.00 is what must be disputed and removed.',
+              'Explains the measure: liability is capped per account, so the exposure is $150.00 reported promptly or $1,380.00 reported late, not the $3,735.00 charged — although the $3,735.00 is what must be disputed and removed.',
               'Names what to refuse: no one contacting the person about the incident should be given account numbers, passwords, security answers, or identifying documents, since a call or message about fraud is itself a common way of obtaining exactly those details.',
               'Notes the continuing exposure and its cost, such as the $335.76 of monitoring, because the details used to open three accounts can be used again.',
             ],
             evidenceRequirements: [
-              'Uses the $150.00 and $1,500.00 liability figures and the $1,350.00 that promptness saves.',
+              'Uses the $150.00 and $1,380.00 liability figures and the $1,230.00 that promptness saves.',
             ],
             dimensions: ['plan-coherence', 'criteria-application', 'evidence-use'],
             lookFors: [
@@ -441,12 +447,12 @@ export const g12u06: readonly LessonSpec[] = [
               'The response never suggests paying a fraudulent charge.',
               'The response treats unsolicited contact about the incident as a risk in itself.',
             ],
-            commonMisconception: 'Reading the total fraudulent charges as the amount at stake, when a per-account liability cap and the reporting date are what actually determine the loss.',
+            commonMisconception: 'Reading the total fraudulent charges as the amount at stake, when a per-account liability cap, the amount each account was actually charged, and the reporting date are what determine the loss.',
           },
         ],
       },
     ],
-    remediation: 'If the liability comes out at $3,735.00, the charges are being treated as the exposure. Under the stated rules the holder is liable for at most $50 per account when reported inside the window, which is $150.00 across the 3 accounts. The $3,735.00 is what must be disputed, not what must be paid.',
+    remediation: 'If the liability comes out at $3,735.00, the charges are being treated as the exposure. Under the stated rules the holder is liable for at most $50 per account when reported inside the window, which is $150.00 across the 3 accounts. If the late figure comes out at $1,500.00, the $500 cap has been applied to an account that was only charged $380 — a cap limits liability, it does not create it. The $3,735.00 is what must be disputed, not what must be paid.',
     extension: 'Work out the liability if a fourth fictional account for $60 were found, reported late, and say whether the per-account cap or the charge decides that one.',
   },
 
@@ -787,7 +793,7 @@ export const g12u06: readonly LessonSpec[] = [
             acceptableAnswerCriteria: [
               'Explains the relationship: policies pay only after deductibles are met and, in the disability case, only after a waiting period, so a reserve is what carries the household through the periods and amounts the policies deliberately exclude.',
               'Uses the figures to show it: $4,350.00 of deductibles and $9,360.00 of waiting-period costs are both created by the structure of the cover, not by its absence.',
-              'Identifies the highest-impact change and prices it: shortening the 3-month waiting period would remove up to $9,360.00 from the target, more than any deductible change could, and would be paid for with a higher premium.',
+              'Identifies the highest-impact change and prices it: shortening the 3-month waiting period would remove $9,360.00 from the waiting-period component, though the $480.00 monthly shortfall would then run for longer, so the net reduction in the target is about $7,920.00 — still more than any deductible change could achieve, and paid for with a higher premium.',
             ],
             evidenceRequirements: [
               'Uses the $9,360.00 waiting-period figure, the $4,350.00 of deductibles, and the $16,590.00 total target.',
@@ -837,7 +843,7 @@ export const g12u06: readonly LessonSpec[] = [
             text: 'What does the stated incident cost in total?',
             given: { charges: 2860, docReplace: 214, hours: 18, hourly: 24 },
             expr: 'charges + docReplace + hours * hourly', format: 'usd', answer: '$3,506.00',
-            reasoning: '$2,860 of charges, $214 of replacements, and $432.00 of time. The time is nearly as large as the document replacement and is the component most often left out.',
+            reasoning: '$2,860 of charges, $214 of replacements, and $432.00 of time. The time costs more than twice the document replacement and is the component most often left out.',
           },
         ],
       },
