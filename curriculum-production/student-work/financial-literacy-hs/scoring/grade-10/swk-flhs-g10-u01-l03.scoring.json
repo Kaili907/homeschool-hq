@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l03",
+  "lessonId": "ma-g10-financial-literacy-u01-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$23,333.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,000 a year of forgone earnings over 14 months, a real cost even though nobody bills for it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$32,733.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,400 of tuition plus $23,333.33 of earnings given up."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$142,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$46,000 of tuition plus four years of giving up $24,000 a year against the baseline."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "2.73",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$32,733.33 of cost against a $12,000 annual gain over the baseline."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "0.46",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Pathway B costs only $12,000 of forgone earnings and gains $26,000 a year, so it repays in under six months of the higher wage."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "4.06",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$142,000 of cost against a $35,000 annual gain."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round((baseline - duringA) * monthsA / 12, 2)",
+        "substituted": "round((32000 - 12000) * 14 / 12, 2)",
+        "result": "$23,333.33",
+        "why": "$20,000 a year of forgone earnings over 14 months, a real cost even though nobody bills for it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "tuitionA + #t1-p1",
+        "substituted": "9400 + #t1-p1",
+        "result": "$32,733.33",
+        "why": "$9,400 of tuition plus $23,333.33 of earnings given up."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "tuitionC + (baseline2 - duringC) * monthsC / 12",
+        "substituted": "46000 + (32000 - 8000) * 48 / 12",
+        "result": "$142,000.00",
+        "why": "$46,000 of tuition plus four years of giving up $24,000 a year against the baseline."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p2 / (afterA - baseline3), 2)",
+        "substituted": "round(#t1-p2 / (44000 - 32000), 2)",
+        "result": "2.73",
+        "why": "$32,733.33 of cost against a $12,000 annual gain over the baseline."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round((baseline4 - duringB) * monthsB / 12 / (afterB - baseline4), 2)",
+        "substituted": "round((32000 - 28000) * 36 / 12 / (58000 - 32000), 2)",
+        "result": "0.46",
+        "why": "Pathway B costs only $12,000 of forgone earnings and gains $26,000 a year, so it repays in under six months of the higher wage."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p3 / (afterC - baseline5), 2)",
+        "substituted": "round(#t1-p3 / (67000 - 32000), 2)",
+        "result": "4.06",
+        "why": "$142,000 of cost against a $35,000 annual gain."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Pathway B repays fastest and Pathway C ends at the highest wage. Explain why the payback figures do not settle the choice on their own, and name what a 20-year view would add.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that payback measures how quickly a cost is recovered, not how large the eventual gain is, so it favours cheap pathways over valuable ones.",
+          "Notes that Pathway C ends $9,000 a year above Pathway B, which compounds over a career even though it repays 3.6 years later.",
+          "Says what a 20-year view adds: total earnings across the whole period rather than the moment the cost is cleared."
+        ],
+        "evidenceRequirements": [
+          "Uses at least two payback figures and the ending wages they come from."
+        ],
+        "lookFors": [
+          "The response notes the ending wages are assumptions about a future labour market, not guarantees.",
+          "The response does not treat the fastest payback as automatically the best pathway."
+        ],
+        "commonMisconception": "Ranking education and training pathways by payback period, which systematically favours the cheapest option.",
+        "dimensions": [
+          "tradeoff-defense",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

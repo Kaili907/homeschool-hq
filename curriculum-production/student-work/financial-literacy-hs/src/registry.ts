@@ -7,6 +7,7 @@ import { g09u04 } from './specs/g09u04.ts'
 import { g09u05 } from './specs/g09u05.ts'
 import { g09u06 } from './specs/g09u06.ts'
 import { g09u07 } from './specs/g09u07.ts'
+import { g10u01 } from './specs/g10u01.ts'
 
 export const ALL_SPECS: readonly LessonSpec[] = [
   ...g09u01,
@@ -16,4 +17,5 @@ export const ALL_SPECS: readonly LessonSpec[] = [
   ...g09u05,
   ...g09u06,
   ...g09u07,
+  ...g10u01,
 ]

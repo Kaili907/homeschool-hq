@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l06",
+  "lessonId": "ma-g10-financial-literacy-u01-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$33,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$41,000 invoiced less $7,400 of business expenses — the figure tax is charged on, not the invoiced total."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$5,140.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15.3% of $33,600 — roughly double an employee’s payroll tax, because the freelancer pays both halves."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$23,059.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$33,600 less $5,140.80 of tax and $5,400 of self-funded health cover, before any income tax."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$35,093.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$38,000 less $2,907.00 of payroll tax, before income tax, and with health cover already provided."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$12,033.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$35,093.00 against $23,059.20, on invoiced revenue $3,000 above the salary."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$18,933.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The employee’s $35,093.00 plus $6,900 of employer-funded health against the freelancer’s $23,059.20."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "revenue - expenses",
+        "substituted": "41000 - 7400",
+        "result": "$33,600.00",
+        "why": "$41,000 invoiced less $7,400 of business expenses — the figure tax is charged on, not the invoiced total."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * seRate, 2)",
+        "substituted": "round(#t1-p1 * 0.153, 2)",
+        "result": "$5,140.80",
+        "why": "15.3% of $33,600 — roughly double an employee’s payroll tax, because the freelancer pays both halves."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p1 - #t1-p2 - health, 2)",
+        "substituted": "round(#t1-p1 - #t1-p2 - 5400, 2)",
+        "result": "$23,059.20",
+        "why": "$33,600 less $5,140.80 of tax and $5,400 of self-funded health cover, before any income tax."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(salary - salary * employeeRate, 2)",
+        "substituted": "round(38000 - 38000 * 0.0765, 2)",
+        "result": "$35,093.00",
+        "why": "$38,000 less $2,907.00 of payroll tax, before income tax, and with health cover already provided."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p3",
+        "substituted": "#t2-p1 - #t1-p3",
+        "result": "$12,033.80",
+        "why": "$35,093.00 against $23,059.20, on invoiced revenue $3,000 above the salary."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 + healthBenefit - #t1-p3",
+        "substituted": "#t2-p1 + 6900 - #t1-p3",
+        "result": "$18,933.80",
+        "why": "The employee’s $35,093.00 plus $6,900 of employer-funded health against the freelancer’s $23,059.20."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The freelancer invoices $3,000 more than the employee earns and ends up far behind. Explain where the gap comes from, and name two things the freelancer gets that this comparison does not price.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Attributes the gap to three specific things: $7,400 of expenses, the doubled payroll tax at $5,140.80, and $5,400 of health cover the employer would otherwise fund.",
+          "Notes that invoiced revenue is not income, which is the error the comparison is built to expose.",
+          "Names two genuine unpriced advantages of self-employment — control over schedule and clients, the ability to scale revenue, deductibility of business costs — without claiming they close the $18,933.80 gap."
+        ],
+        "evidenceRequirements": [
+          "Uses the $41,000 invoiced, the $33,600 net, and at least one of the two deductions from it."
+        ],
+        "lookFors": [
+          "The response does not conclude that self-employment is simply worse; it identifies what has to be true for it to work.",
+          "The response recognises the freelancer also bears income tax, which neither figure includes."
+        ],
+        "commonMisconception": "Comparing self-employed revenue with an employee salary as though they were the same kind of number.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

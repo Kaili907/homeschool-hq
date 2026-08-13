@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l05",
+  "lessonId": "ma-g10-financial-literacy-u01-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$5,973.70",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "82 miles a day over 235 days is 19,270 miles, at $0.31 a mile."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,019.90",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "14 miles a day over 235 days is 3,290 miles, at $0.31 a mile."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$43,026.30",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$49,000 less $5,973.70 of driving."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$44,480.10",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$45,500 less $1,019.90 of driving."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Offer Q, at $45,500",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$44,480.10 against $43,026.30 — the $3,500 salary advantage of Offer P is more than consumed by $4,953.80 of extra driving."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,453.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$44,480.10 against $43,026.30."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(milesP * 2 * days * perMile, 2)",
+        "substituted": "round(41 * 2 * 235 * 0.31, 2)",
+        "result": "$5,973.70",
+        "why": "82 miles a day over 235 days is 19,270 miles, at $0.31 a mile."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(milesQ * 2 * days2 * perMile2, 2)",
+        "substituted": "round(7 * 2 * 235 * 0.31, 2)",
+        "result": "$1,019.90",
+        "why": "14 miles a day over 235 days is 3,290 miles, at $0.31 a mile."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(payP - #t1-p1, 2)",
+        "substituted": "round(49000 - #t1-p1, 2)",
+        "result": "$43,026.30",
+        "why": "$49,000 less $5,973.70 of driving."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(payQ - #t1-p2, 2)",
+        "substituted": "round(45500 - #t1-p2, 2)",
+        "result": "$44,480.10",
+        "why": "$45,500 less $1,019.90 of driving."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 > #t2-p1",
+        "substituted": "#t1-p3 > #t2-p1",
+        "result": "Offer Q, at $45,500",
+        "why": "$44,480.10 against $43,026.30 — the $3,500 salary advantage of Offer P is more than consumed by $4,953.80 of extra driving."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t1-p3",
+        "substituted": "#t2-p1 - #t1-p3",
+        "result": "$1,453.80",
+        "why": "$44,480.10 against $43,026.30."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Two differences between these offers have no dollar figure at all: rotating nights against fixed days, and a 1-year contract against a permanent position. Explain what each could cost, and say whether either could reverse the $1,453.80 result.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Describes a concrete cost of rotating night work — sleep, health, childcare, and the difficulty of holding other commitments — rather than calling it merely unpleasant.",
+          "Describes what a 1-year contract exposes the candidate to: a job search a year from now, and the income gap if the next role does not start immediately.",
+          "Reaches a defensible view on whether either could outweigh $1,453.80, and says what it would take to price them."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,453.80 adjusted difference as the amount the unpriced factors would have to outweigh."
+        ],
+        "lookFors": [
+          "The response notices the two unpriced factors both favour Offer Q, so they widen rather than close the gap.",
+          "The response does not treat \"unpriced\" as meaning \"unimportant\" or as meaning \"decisive\"."
+        ],
+        "commonMisconception": "Assuming that factors without a dollar figure can be set aside in a financial comparison.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

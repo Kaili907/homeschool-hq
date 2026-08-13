@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l04",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: labour market information and how to read it"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "labour market information and how to read it",
+  "objective": "Read a fictional labour market information table, compute wage spread and ratio measures from it, and say what the median alone conceals.",
+  "scenario": "The simulated occupational data below is invented for this exercise and does not describe any real occupation or published statistic.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional occupational data table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Occupation X: median wage $48,300; 10th percentile $33,100; 90th percentile $71,900; about 4,200 openings a year; projected growth 6%. Occupation Y: median wage $61,200; 10th percentile $39,800; 90th percentile $96,400; about 850 openings a year; projected growth -2%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the wage spread for Occupation X — the 90th percentile less the 10th?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the wage spread for Occupation Y?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the ratio of the 90th percentile to the 10th for Occupation Y? Round to two decimal places."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the two occupations on more than the median.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much higher is Occupation Y’s median?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much higher is Occupation X’s 10th percentile than nothing at all — that is, what does a worker at the bottom of Occupation X earn compared with the bottom of Occupation Y?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which occupation offers more realistic chances of entry in a given year?",
+          "choices": [
+            "Occupation X",
+            "Occupation Y",
+            "The data does not address entry chances"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Someone reading only the medians would prefer Occupation Y by $12,900. Say what the rest of the table adds to that picture, and what a person entering the field should probably expect to earn at first."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two occupations look interchangeable, put the four percentile figures on one line in order: $33,100, $39,800, $48,300, $61,200, $71,900, $96,400. The overlap between the two distributions is what the medians hide.",
+  "extension": "Compute the 90th-to-10th ratio for Occupation X, compare it with Y’s 2.42, and say what a higher ratio tells a person about how much outcomes within one occupation vary.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

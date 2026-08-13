@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l05",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: non-income factors: schedule, stability, location, fit"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "non-income factors: schedule, stability, location, fit",
+  "objective": "Adjust two fictional offers for commuting cost, then weigh schedule and contract stability that no dollar figure captures.",
+  "scenario": "A fictional candidate holds two simulated offers that differ in pay, shift pattern, contract type, and distance. All figures are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional offers in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Offer P: $49,000, rotating night shift, a 1-year contract, 41 miles each way. Offer Q: $45,500, fixed daytime hours, a permanent position, 7 miles each way. Assume 235 workdays and a driving cost of $0.31 a mile for both.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of commuting to Offer P cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of commuting to Offer Q cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Offer P worth after commuting cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Finish the adjustment and compare.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Offer Q worth after commuting cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "After adjusting for commuting cost alone, which offer is worth more?",
+          "choices": [
+            "Offer P, at $49,000",
+            "Offer Q, at $45,500"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much does Offer Q lead after the adjustment?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Two differences between these offers have no dollar figure at all: rotating nights against fixed days, and a 1-year contract against a permanent position. Explain what each could cost, and say whether either could reverse the $1,453.80 result."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two commuting figures come out close together, check the mileage: 41 miles each way is nearly six times 7 miles, and the return trip doubles both. Compute the daily cost for each before annualising.",
+  "extension": "Find the salary Offer P would need in order to lead by $2,000 after the commuting adjustment, and say whether that changes how the unpriced factors should be weighed.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

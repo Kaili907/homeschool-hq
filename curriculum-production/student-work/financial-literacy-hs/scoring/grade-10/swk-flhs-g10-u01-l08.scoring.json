@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l08",
+  "lessonId": "ma-g10-financial-literacy-u01-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$33,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$26 an hour for the 1,300 hours the work realistically supports, not for a full-time year."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$43,680.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The employed role pays $21 an hour across a full-time year of 2,080 hours."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$54,880.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$43,680 of wages plus $11,200 of employer-valued benefits."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$26.38",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$54,880 across 2,080 hours — slightly more per hour than the gig rate that looked $5 higher."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "The employed role, at $21 an hour",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$26.38 an hour of total compensation against $26.00, reversing a headline gap of $5 an hour."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$21,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$54,880 against $33,800, driven by both the benefits and the 780 extra paid hours."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "gigRate * gigHours",
+        "substituted": "26 * 1300",
+        "result": "$33,800.00",
+        "why": "$26 an hour for the 1,300 hours the work realistically supports, not for a full-time year."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "empRate * empHours",
+        "substituted": "21 * 2080",
+        "result": "$43,680.00",
+        "why": "The employed role pays $21 an hour across a full-time year of 2,080 hours."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 + benefits",
+        "substituted": "#t1-p2 + 11200",
+        "result": "$54,880.00",
+        "why": "$43,680 of wages plus $11,200 of employer-valued benefits."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 / empHours2, 2)",
+        "substituted": "round(#t1-p3 / 2080, 2)",
+        "result": "$26.38",
+        "why": "$54,880 across 2,080 hours — slightly more per hour than the gig rate that looked $5 higher."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "gigRate2 > #t2-p1",
+        "substituted": "26 > #t2-p1",
+        "result": "The employed role, at $21 an hour",
+        "why": "$26.38 an hour of total compensation against $26.00, reversing a headline gap of $5 an hour."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 - #t1-p1",
+        "substituted": "#t1-p3 - #t1-p1",
+        "result": "$21,080.00",
+        "why": "$54,880 against $33,800, driven by both the benefits and the 780 extra paid hours."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The per-hour comparison is nearly a tie and the annual comparison is not close at all. Explain why the two comparisons disagree, and say which one a person choosing between these should use.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the per-hour figures are close because the benefits roughly offset the rate difference, while the annual figures diverge because the gig supports only 1,300 hours against 2,080.",
+          "Identifies available hours as the variable the per-hour comparison hides.",
+          "Concludes that the annual comparison is the one that matters for a person who needs a year’s income, unless they have other paid uses for the remaining 780 hours."
+        ],
+        "evidenceRequirements": [
+          "Uses the $26.38 per-hour figure and both annual totals."
+        ],
+        "lookFors": [
+          "The response identifies the 780-hour difference as the thing that decides it.",
+          "The response allows that a worker who can fill those hours elsewhere faces a genuinely different comparison."
+        ],
+        "commonMisconception": "Comparing an hourly gig rate with an employed hourly rate without asking how many hours each arrangement actually provides.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

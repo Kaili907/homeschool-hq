@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l04",
+  "lessonId": "ma-g10-financial-literacy-u01-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$38,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$71,900 less $33,100, the range covering the middle four-fifths of workers in the occupation."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$56,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Occupation Y’s 90th percentile of $96,400 less its 10th percentile of $39,800."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "2.42",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A worker at the 90th percentile earns 2.42 times one at the 10th, which measures dispersion independently of the wage level."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$12,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Occupation Y’s median of $61,200 against Occupation X’s median of $48,300."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$6,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Occupation Y pays $6,700 more at the 10th percentile too, so its advantage is not confined to the top."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Occupation X",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "4,200 openings a year against 850, and Occupation X is growing 6% while Occupation Y is contracting 2%."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "p90X - p10X",
+        "substituted": "71900 - 33100",
+        "result": "$38,800.00",
+        "why": "$71,900 less $33,100, the range covering the middle four-fifths of workers in the occupation."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "p90Y - p10Y",
+        "substituted": "96400 - 39800",
+        "result": "$56,600.00",
+        "why": "Occupation Y’s 90th percentile of $96,400 less its 10th percentile of $39,800."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(p90Y2 / p10Y2, 2)",
+        "substituted": "round(96400 / 39800, 2)",
+        "result": "2.42",
+        "why": "A worker at the 90th percentile earns 2.42 times one at the 10th, which measures dispersion independently of the wage level."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "medY - medX",
+        "substituted": "61200 - 48300",
+        "result": "$12,900.00",
+        "why": "Occupation Y’s median of $61,200 against Occupation X’s median of $48,300."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "p10Y3 - p10X2",
+        "substituted": "39800 - 33100",
+        "result": "$6,700.00",
+        "why": "Occupation Y pays $6,700 more at the 10th percentile too, so its advantage is not confined to the top."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "openingsX > openingsY",
+        "substituted": "4200 > 850",
+        "result": "Occupation X",
+        "why": "4,200 openings a year against 850, and Occupation X is growing 6% while Occupation Y is contracting 2%."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Someone reading only the medians would prefer Occupation Y by $12,900. Say what the rest of the table adds to that picture, and what a person entering the field should probably expect to earn at first.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Notes that a new entrant is far more likely to start near the 10th percentile than the median, which is $33,100 in X and $39,800 in Y.",
+          "Brings in the openings and growth figures: 4,200 growing openings against 850 shrinking ones changes the chance of entering the occupation at all.",
+          "States that Occupation Y’s wider spread of $56,600 means the median is a weaker guide to any individual’s outcome there."
+        ],
+        "evidenceRequirements": [
+          "Uses at least one percentile figure, one openings figure, and one growth figure."
+        ],
+        "lookFors": [
+          "The response treats the median as the middle of a distribution rather than as the wage the occupation pays.",
+          "The response does not conclude that Occupation X is simply better; the wage advantage of Y is real at every percentile shown."
+        ],
+        "commonMisconception": "Reading a median wage as what someone entering an occupation will earn.",
+        "dimensions": [
+          "evidence-use",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

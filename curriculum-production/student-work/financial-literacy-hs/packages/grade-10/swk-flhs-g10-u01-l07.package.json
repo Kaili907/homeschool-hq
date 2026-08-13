@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l07",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: total compensation versus salary"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "total compensation versus salary",
+  "objective": "Find the error in a fictional offer comparison made on salary alone, rebuild it on cash the candidate would actually hold, and quantify how far wrong the original went.",
+  "scenario": "A fictional candidate wrote: \"Offer 1 pays $54,000 and Offer 2 pays $50,500, so Offer 1 is $3,500 better.\" The two simulated offers are set out in full below.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the two fictional offers in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Offer 1: salary $54,000, no retirement match, and the employee pays the whole $8,400 health premium. Offer 2: salary $50,500, a retirement match of 5% of salary, and the employer pays all but $1,300 of the health premium.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Offer 1 leave in cash after the health premium?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Offer 2’s retirement match worth?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now build Offer 2 on the same basis.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Offer 2 provide in cash after the health premium, plus the match?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "On this basis, how much better is Offer 2 than Offer 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The candidate said Offer 1 was $3,500 better. How far wrong was that, in dollars?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Name the error precisely.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "What did the candidate’s comparison leave out?",
+          "choices": [
+            "The salaries; the two figures are wrong",
+            "Two employer-funded items and one employee-paid item that differ sharply between the offers",
+            "Income tax, which differs between the two",
+            "Nothing; $3,500 is the correct difference"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the checklist you would run on any two offers to avoid this error, and explain why the health premium mattered more here than the retirement match."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two offers still look close, write four lines for each: salary, employer retirement contribution, employee premium share, and the total. The premium line is the one most often left blank, and here it is worth $7,100.",
+  "extension": "Find the Offer 1 salary that would make the two offers equal on this basis, and say whether an employer would plausibly pay it.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

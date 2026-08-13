@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l02",
+  "lessonId": "ma-g10-financial-literacy-u01-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $9,200 total premium less the $6,900 the employer contributes."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$52,000 spread across a 260-day work year."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "23 days at the $200.00 daily rate."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$13,580.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,900 health + $2,080 match + $4,600 of paid leave."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "26.1%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$13,580 of benefits on a $52,000 salary is 0.26115, or 26.1%."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$4,380.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,080 of retirement contribution to unlock the match plus $2,300 of health premium share."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "premium - employerShare",
+        "substituted": "9200 - 6900",
+        "result": "$2,300.00",
+        "why": "The $9,200 total premium less the $6,900 the employer contributes."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "salary / workYear",
+        "substituted": "52000 / 260",
+        "result": "$200.00",
+        "why": "$52,000 spread across a 260-day work year."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 * totalPaidDays",
+        "substituted": "#t1-p2 * 23",
+        "result": "$4,600.00",
+        "why": "23 days at the $200.00 daily rate."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "employerHealth + salary2 * matchRate + #t1-p3",
+        "substituted": "6900 + 52000 * 0.04 + #t1-p3",
+        "result": "$13,580.00",
+        "why": "$6,900 health + $2,080 match + $4,600 of paid leave."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / salary3 * 100, 1)",
+        "substituted": "round(#t2-p1 / 52000 * 100, 1)",
+        "result": "26.1%",
+        "why": "$13,580 of benefits on a $52,000 salary is 0.26115, or 26.1%."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "salary4 * matchRate2 + #t1-p1",
+        "substituted": "52000 * 0.04 + #t1-p1",
+        "result": "$4,380.00",
+        "why": "$2,080 of retirement contribution to unlock the match plus $2,300 of health premium share."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "An employee who cannot spare the $2,080 retirement contribution loses the $2,080 match. Explain what that means about how the benefit load figure should be read, and say what an employee in that position should weigh.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that the 26.1% benefit load assumes the employee takes up everything, and an employee who cannot contribute receives $11,500 rather than $13,580.",
+          "Identifies the match as a 100% return on the contribution in the year it is made, which is why it is usually the first call on available money.",
+          "Notes the constraint honestly: an employee who genuinely cannot spare $2,080 is not being irrational, and the alternative uses of that money have to be weighed."
+        ],
+        "evidenceRequirements": [
+          "Uses the $2,080 match, the $13,580 benefit total, and the 26.1% load figure."
+        ],
+        "lookFors": [
+          "The response treats the match as conditional rather than as part of the offer received automatically.",
+          "The response does not tell the employee what to do with their own money."
+        ],
+        "commonMisconception": "Reading a published benefit load as the value every employee actually receives.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "tradeoff-defense",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

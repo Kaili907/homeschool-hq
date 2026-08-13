@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l09",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: pathway cost: certificate, apprenticeship, or degree"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "pathway cost: certificate, apprenticeship, or degree",
+  "objective": "Recompute a fictional pathway’s value with the probability of not completing it, and state what the expected value does and does not capture.",
+  "scenario": "The fictional degree pathway from earlier in this unit is revisited with a completion rate attached. The costs, gains, and completion rate below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pathway figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional degree pathway costs $142,000 in full, including forgone earnings, and raises annual earnings by $35,000 over the baseline once complete. In this simulated cohort 62% complete it. Someone who does not complete still incurs about 60% of the cost and gains nothing.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the pathway gain over 10 years for someone who completes it, before subtracting cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the net 10-year result for someone who completes?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the net result for someone who does not complete, incurring 60% of the cost with no gain?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now combine the two outcomes by their probabilities.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected 10-year result across the cohort?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the expected result than the result for someone who completes?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "At what completion rate would the expected result fall to zero? Round to one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The expected result is still strongly positive at $96,584, and no individual ever receives that amount. Explain what the expected value is useful for and what it hides, and say what an individual should ask about their own situation instead."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the expected value comes out above $208,000, the loss branch has probably been added rather than subtracted. The non-completion outcome is negative, so weighting it by 38% must pull the average down.",
+  "extension": "Recompute the expected result if non-completers incur 100% of the cost rather than 60%, and say which of the two assumptions the conclusion is more sensitive to.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

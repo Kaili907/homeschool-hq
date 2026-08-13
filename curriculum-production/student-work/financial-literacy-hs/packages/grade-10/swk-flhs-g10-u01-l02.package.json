@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l02",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: health, retirement, and leave benefits valued"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "health, retirement, and leave benefits valued",
+  "objective": "Value the three main benefit categories of a fictional package separately, compute the benefit load as a percentage of salary, and identify what each benefit is conditional on.",
+  "scenario": "The simulated benefits package below belongs to a fictional employer. Every premium, match, and leave figure is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional benefits summary in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional package, on a $52,000 salary and a 260-day work year. Health: the total premium is $9,200 a year and the employer pays $6,900 of it. Retirement: the employer matches 4% of salary, but only if the employee also contributes 4%. Leave: 15 paid days off plus 8 paid holidays.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the health premium does the employee pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is one paid day worth at this salary?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What are the 23 paid days — 15 off plus 8 holidays — worth?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now total the employer-funded benefits and measure them against salary.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the employer-funded benefits total — health contribution, full retirement match, and paid leave?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the benefit load — employer-funded benefits as a percentage of salary? Round to one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the employee have to contribute in the year to receive the full match and their share of the premium?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "An employee who cannot spare the $2,080 retirement contribution loses the $2,080 match. Explain what that means about how the benefit load figure should be read, and say what an employee in that position should weigh."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the benefit load exceeds 100%, salary has probably been included in the numerator. The load measures employer-funded benefits against salary, so the $52,000 belongs only underneath.",
+  "extension": "Recompute the benefit load for an employee on the same package at a $78,000 salary, and say why the percentage moves even though the health contribution does not.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}
