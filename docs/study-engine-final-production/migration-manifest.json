@@ -503,6 +503,26 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-curriculum-performance-bounds-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260813170000",
+      "filename": "20260813170000_academy_study_actor_authority_convergence.sql",
+      "sha256": "b6ac6d91dc1d9e37335a44fa46f1533e623fff7a2a41f9df98fb3137605b1488",
+      "dependency": "20260810200000_academy_admin_curriculum_performance_bounds.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "actor_binding_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260813171000",
+      "filename": "20260813171000_academy_study_cross_device_authority.sql",
+      "sha256": "49dfe14657fcf48d8bc72c26f77f3c47e3ec610db7ed9d4151c1e295a975edc5",
+      "dependency": "20260813170000_academy_study_actor_authority_convergence.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "cross_device_authority_version:0->1",
+      "supersessionStatus": "current"
     }
   ]
 }
