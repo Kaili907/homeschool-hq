@@ -26,6 +26,7 @@
     "test:admin-browser": "playwright test --config playwright.admin.config.ts",
     "audit:family-pilot-launch": "npm run audit:learner-release && node scripts/audit-final-family-pilot-launch.mjs",
     "audit:learner-release": "node scripts/audit-learner-release/audit.mjs",
+    "audit:learner-web-bundle": "node scripts/audit-learner-web-bundle.mjs",
     "test:learner-release-gate": "node --test scripts/audit-learner-release/audit.test.mjs",
     "test:family-pilot-browser": "playwright test --config playwright.family-pilot.config.ts",
     "test:family-pilot-flag-default": "playwright test --config playwright.family-pilot-default.config.ts",

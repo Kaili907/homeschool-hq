@@ -16,10 +16,34 @@
   VITE_USE_PROXY = "true"
   NODE_VERSION = "22"
 
-# Controlled Family Pilot web release. The route stays default-off for
+# Controlled Family Pilot learner web release. The route stays default-off for
 # production, deploy previews, and every unrelated branch.
-[context."mac/family-pilot-web-release-r1".environment]
+[context."mac/learner-web-release-r2".environment]
   VITE_FAMILY_PILOT_ENABLED = "true"
+
+# The trusted production-item scorer resolves admitted bindings and adult-only
+# package/scoring authorities dynamically. Keep those authorities inside this
+# server-only function bundle; they must never be copied into the Vite publish
+# directory or exposed to the browser.
+[functions."production-item-assessment"]
+  node_bundler = "esbuild"
+  included_files = [
+    "curriculum-release-admitted/family-pilot-r1/MANIFEST.json",
+    "curriculum-release-admitted/family-pilot-r1/production-bindings.jsonl",
+    "curriculum-production/final/financial-literacy/packages/**",
+    "curriculum-production/final/financial-literacy/scoring/**",
+    "curriculum-production/final/health-physical-education/packages/**",
+    "curriculum-production/final/health-physical-education/scoring-guides/**",
+    "curriculum-production/final/mathematics/active/**",
+    "curriculum-production/final/ready-for-life/packages/**",
+    "curriculum-production/final/ready-for-life/scoring/**",
+    "curriculum-production/final/science/packages/**",
+    "curriculum-production/student-work/english-language-arts/packages/**",
+    "curriculum-production/student-work/english-language-arts/scoring-guides/**",
+    "curriculum-production/student-work/social-studies/**",
+    "curriculum-production/student-work/technology-arts-lessons/packages/**",
+    "curriculum-production/student-work/technology-arts-lessons/scoring-guides/**",
+  ]
 
 # ---- Browser/service-worker cache boundaries ----
 [[headers]]
