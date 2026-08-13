@@ -93,7 +93,7 @@
       },
       {
         "ref": "t3-p1",
-        "promptText": "Do the second plan's shares still add up to the whole profit?",
+        "promptText": "What do the three shares in Jamal's second plan add up to?",
         "answer": "$6.00",
         "verification": {
           "method": "independent-recompute",

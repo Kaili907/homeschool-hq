@@ -1,5 +1,5 @@
 import type { AuthoredLesson } from '../types.ts'
-import { crit, diff, div, m, most, pct, reach, scale, sel, sum } from './dsl.ts'
+import { crit, diff, div, least, m, most, pct, reach, scale, sel, sum } from './dsl.ts'
 
 /** Grade 8 Financial Literacy, units 6-7 (PF6 protecting and insuring, PF7 taxes and the plan capstone). */
 export const G8D: readonly AuthoredLesson[] = [
@@ -115,10 +115,10 @@ export const G8D: readonly AuthoredLesson[] = [
       {
         taskId: 't2',
         kind: 'guided',
-        directions: 'Work out what Brigid\'s insurer pays: the $5,000.00 limit applies, and the $1,000.00 deductible comes out of it first.',
+        directions: 'Work out what Brigid\'s insurer pays. The $1,000.00 deductible comes off the loss first, and the policy then pays what remains up to its $5,000.00 limit.',
         prompts: [
-          { ref: 't2-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'How much does the insurer pay on the claim?', fixed: { expected: '$4,000.00', compute: diff(m(5000.0), m(1000.0)) } },
-          { ref: 't2-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'How much of the $7,500.00 loss does Brigid bear?', fixed: { expected: '$3,500.00', compute: diff(m(7500.0), diff(m(5000.0), m(1000.0))) } },
+          { ref: 't2-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'How much does the insurer pay on the claim?', fixed: { expected: '$5,000.00', compute: least(diff(m(7500.0), m(1000.0)), m(5000.0)), note: 'The deductible reduces the loss to $6,500.00, which the $5,000.00 limit then caps.' } },
+          { ref: 't2-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'How much of the $7,500.00 loss does Brigid bear?', fixed: { expected: '$2,500.00', compute: diff(m(7500.0), least(diff(m(7500.0), m(1000.0)), m(5000.0))) } },
         ],
       },
       {
@@ -126,23 +126,23 @@ export const G8D: readonly AuthoredLesson[] = [
         kind: 'independent',
         directions: 'Total Brigid\'s cost for the year including premiums, and compare it with having no policy at all.',
         prompts: [
-          { ref: 't3-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'What is Brigid\'s total cost for the year with the policy?', fixed: { expected: '$4,640.00', compute: sum(scale(m(95.0), 12), diff(m(7500.0), diff(m(5000.0), m(1000.0)))) } },
-          { ref: 't3-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'How much better off is she than paying the whole loss unprotected?', fixed: { expected: '$2,860.00', compute: diff(m(7500.0), sum(scale(m(95.0), 12), diff(m(7500.0), diff(m(5000.0), m(1000.0))))) } },
+          { ref: 't3-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'What is Brigid\'s total cost for the year with the policy?', fixed: { expected: '$3,640.00', compute: sum(scale(m(95.0), 12), diff(m(7500.0), least(diff(m(7500.0), m(1000.0)), m(5000.0)))) } },
+          { ref: 't3-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'How much better off is she than paying the whole loss unprotected?', fixed: { expected: '$3,860.00', compute: diff(m(7500.0), sum(scale(m(95.0), 12), diff(m(7500.0), least(diff(m(7500.0), m(1000.0)), m(5000.0))))) } },
         ],
       },
-      { taskId: 't4', kind: 'reflection', directions: 'The policy paid out and Brigid still bore thousands.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'Explain how the deductible and the limit each reduced Brigid\'s payout, and what she should check before assuming a policy covers a loss.' }] },
+      { taskId: 't4', kind: 'reflection', directions: 'The policy paid its full limit and Brigid still bore thousands.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'Explain how the deductible and the limit each reduced Brigid\'s payout, in that order, and what she should check before assuming a policy covers a loss.' }] },
     ],
     rubric: [
       crit(
         'Reading policy structure',
         'The response assumes Brigid\'s policy covers the full loss.',
         'One of the deductible or limit is applied for Brigid but not the other.',
-        'The response explains both mechanisms in Brigid\'s policy, that the deductible is borne first and the limit caps the payout, and names both as things to check before relying on cover.',
+        'The response explains both mechanisms in Brigid\'s policy in the right order, that the deductible comes off the loss first and the limit then caps what remains, and names both as things to check before relying on cover.',
       ),
     ],
     remediation:
-      'If a learner applies the deductible after the limit incorrectly, write Brigid\'s claim as an ordered sequence of steps and work through them one line at a time.',
-    extension: 'Ask the learner what limit Brigid would have needed for the insurer to cover the whole loss above the deductible.',
+      'If a learner takes the deductible out of the limit rather than out of the loss, write Brigid\'s claim as an ordered sequence, loss then deductible then limit, and work through it one line at a time.',
+    extension: 'Ask the learner what limit Brigid would have needed for the insurer to cover the whole loss above the deductible, and to show why $6,500.00 is the answer.',
     safetyNotes: ['This policy is invented for the exercise and describes no real insurance product.'],
   },
   {
@@ -523,7 +523,7 @@ export const G8D: readonly AuthoredLesson[] = [
           { ref: 't3-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'If the whole cut fell on parks, what would remain of the parks allocation?', fixed: { expected: '$9,000.00', compute: diff(m(25000.0), pct(m(200000.0), 800)) } },
         ],
       },
-      { taskId: 't4', kind: 'reflection', directions: 'The cut is larger than most single categories can absorb.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'Recommend how Jolanta\'s community should distribute the $16,000.00 cut, and defend the distribution against those who lose most.' }] },
+      { taskId: 't4', kind: 'reflection', directions: 'The cut would take nearly two-thirds of the parks allocation if it fell there alone.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'Recommend how Jolanta\'s community should distribute the $16,000.00 cut, and defend the distribution against those who lose most.' }] },
     ],
     rubric: [
       crit(
@@ -570,14 +570,14 @@ export const G8D: readonly AuthoredLesson[] = [
           { ref: 't3-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'What do all four taxes come to for the month?', fixed: { expected: '$1,210.50', compute: sum(pct(m(5000.0), 765), pct(m(5000.0), 1200), div(m(2400.0), 12), pct(m(400.0), 700)) } },
         ],
       },
-      { taskId: 't4', kind: 'reflection', directions: 'Four taxes, four different bases.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'For each of Kester\'s four taxes, name what it is charged on, and explain why using several bases rather than one is a deliberate design.' }] },
+      { taskId: 't4', kind: 'reflection', directions: 'Four taxes, but fewer bases than there are taxes.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'For each of Kester\'s four taxes, name what it is charged on, and explain why using several bases rather than one is a deliberate design.' }] },
     ],
     rubric: [
       crit(
         'Distinguishing tax bases',
         'The response treats all of Kester\'s taxes as charged on income.',
-        'Some bases are identified for Kester but at least one is wrong or missing.',
-        'The response correctly names the base of each of Kester\'s four taxes and offers a reason for using several, such as spreading the burden or funding different levels of government.',
+        'Some bases are identified for Kester but at least one is wrong or missing, or the two wage-based taxes are counted as separate bases.',
+        'The response correctly names the base of each of Kester\'s four taxes, notices that the payroll and income taxes are both charged on the same wages, and offers a reason for using several bases, such as spreading the burden or funding different levels of government.',
       ),
     ],
     remediation:

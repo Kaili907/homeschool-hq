@@ -15,6 +15,9 @@ function words(text: string): string[] {
 
 const MIN_WORDS = 25
 
+/** Openings that ask for a name, an item, or a yes/no rather than a quantity. */
+const NON_NUMERIC_QUESTION = /^(which|who|whose|do|does|did|is|are|was|were|should|can|could|would|will)\b/i
+
 // ---------------------------------------------------------------------------
 // Structure — also what keeps the shared readiness gate's specificity
 // heuristic satisfied without ever tuning content to the heuristic.
@@ -56,6 +59,13 @@ export function checkStructure(entry: CorpusEntry): Issue[] {
       if (!prompt.ref.startsWith(`${task.taskId}-`)) out.push(issue('structure', id, `prompt ref ${prompt.ref} does not belong to task ${task.taskId}`))
       if (prompt.promptType === 'fixed-choice' && (prompt.choices ?? []).length < 2) {
         out.push(issue('structure', id, `fixed-choice prompt ${prompt.ref} offers fewer than two choices`))
+      }
+      // A numeric answer key attached to a question that asks "which" or
+      // "does" marks a correct answer wrong: the learner names the item or
+      // says yes, and the key holds a dollar amount. Caught in review of the
+      // first authored pass; asserted here so it cannot recur.
+      if (prompt.promptType === 'fixed-numeric' && NON_NUMERIC_QUESTION.test(prompt.text.trim())) {
+        out.push(issue('structure', id, `prompt ${prompt.ref} asks a non-numeric question but is keyed to a numeric answer: "${prompt.text}"`))
       }
     }
   }

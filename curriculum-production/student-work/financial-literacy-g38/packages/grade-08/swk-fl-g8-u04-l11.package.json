@@ -19,7 +19,7 @@
     "PF4.1"
   ],
   "objective": "Learners complete an invented education-funding assessment, computing the borrowing gap, annual interest, and the long-run repayment total.",
-  "scenario": "Orsolya is an invented eighth grader completing a pretend assessment: study costing $32,000.00, invented aid of $18,000.00, and the remainder borrowed at 5.5% simple interest, repaid over ten simulated years.",
+  "scenario": "Orsolya is an invented eighth grader completing a pretend assessment: study costing $32,000.00, invented aid of $18,000.00, and the remainder borrowed at 5.5% simple interest, repaid over ten simulated years. The simple-interest model keeps the arithmetic visible; real repayment schedules amortise, so a real total would differ.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
   "realWorldAction": false,

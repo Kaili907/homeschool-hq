@@ -10,7 +10,7 @@ export const G8C: readonly AuthoredLesson[] = [
     objective:
       'Learners separate principal, rate, and term in an invented loan and quantify how the term alone changes total repayment.',
     scenario:
-      'Emrys is a made-up eighth grader modelling a pretend $8,000.00 loan at 7.5% simple interest a year, comparing a three-year term with a five-year term. All figures are invented.',
+      'Emrys is a made-up eighth grader modelling a pretend $8,000.00 loan at 7.5% simple interest a year, comparing a three-year term with a five-year term. All figures are invented, and this model applies simple interest to the original amount; real loans of this size usually amortise, so a real total would differ.',
     tasks: [
       {
         taskId: 't1',
@@ -306,8 +306,8 @@ export const G8C: readonly AuthoredLesson[] = [
       {
         taskId: 't1',
         kind: 'warm-up',
-        directions: 'Express Kwabena\'s invented $180.00 fee as a share of the $1,200.00 borrowed for the four-week term.',
-        prompts: [{ ref: 't1-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'What does 15% of the $1,200.00 borrowed come to, confirming the fee?', fixed: { expected: '$180.00', compute: pct(m(1200.0), 1500) } }],
+        directions: 'The lender describes the charge as 15% of the amount borrowed for each four-week term. Check that this rate matches the $180.00 fee actually quoted on Kwabena\'s invented loan.',
+        prompts: [{ ref: 't1-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'What does 15% of the $1,200.00 borrowed come to?', fixed: { expected: '$180.00', compute: pct(m(1200.0), 1500) } }],
       },
       {
         taskId: 't2',
@@ -442,7 +442,7 @@ export const G8C: readonly AuthoredLesson[] = [
     objective:
       'Learners discover that different invented rate-and-term combinations can produce identical total interest, and reason about what still separates them.',
     scenario:
-      'Nerissa is a made-up eighth grader comparing two pretend $12,000.00 loans: 6% simple interest over three years, and 9% simple interest over two years. All figures are invented.',
+      'Nerissa is a made-up eighth grader comparing two pretend $12,000.00 loans: 6% simple interest over three years, and 9% simple interest over two years. All figures are invented, and both use simple interest rather than the amortising schedules real loans normally follow.',
     tasks: [
       {
         taskId: 't1',
@@ -489,7 +489,7 @@ export const G8C: readonly AuthoredLesson[] = [
     objective:
       'Learners complete an invented education-funding assessment, computing the borrowing gap, annual interest, and the long-run repayment total.',
     scenario:
-      'Orsolya is an invented eighth grader completing a pretend assessment: study costing $32,000.00, invented aid of $18,000.00, and the remainder borrowed at 5.5% simple interest, repaid over ten simulated years.',
+      'Orsolya is an invented eighth grader completing a pretend assessment: study costing $32,000.00, invented aid of $18,000.00, and the remainder borrowed at 5.5% simple interest, repaid over ten simulated years. The simple-interest model keeps the arithmetic visible; real repayment schedules amortise, so a real total would differ.',
     tasks: [
       {
         taskId: 't1',
@@ -993,7 +993,7 @@ export const G8C: readonly AuthoredLesson[] = [
         directions: 'Quantify the compounding advantage for Yaminah and compare it with a single year of interest.',
         prompts: [
           { ref: 't3-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'How much more does compounding produce over five years?', fixed: { expected: '$229.36', compute: diff(grow(m(6000.0), 600, 5), sum(m(6000.0), scale(pct(m(6000.0), 600), 5))) } },
-          { ref: 't3-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'How does that advantage compare with one year of simple interest?', fixed: { expected: '$130.64', compute: diff(pct(m(6000.0), 600), diff(grow(m(6000.0), 600, 5), sum(m(6000.0), scale(pct(m(6000.0), 600), 5)))) } },
+          { ref: 't3-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'How much less is that five-year advantage than a single year of simple interest?', fixed: { expected: '$130.64', compute: diff(pct(m(6000.0), 600), diff(grow(m(6000.0), 600, 5), sum(m(6000.0), scale(pct(m(6000.0), 600), 5)))) } },
         ],
       },
       { taskId: 't4', kind: 'reflection', directions: 'Five years of compounding added less than one year of interest.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'Explain why compounding looks unimpressive over Yaminah\'s five years, and what changes over twenty or thirty years.' }] },

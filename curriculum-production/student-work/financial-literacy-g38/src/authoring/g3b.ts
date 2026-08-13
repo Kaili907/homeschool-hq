@@ -650,7 +650,7 @@ export const G3B: readonly AuthoredLesson[] = [
         taskId: 't1',
         kind: 'warm-up',
         directions: 'Look across Kai\'s three invented supply costs.',
-        prompts: [{ ref: 't1-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'Which of Kai\'s three products costs the least to make one of?', fixed: { expected: '$1.25', compute: least(m(2.0), m(3.5), m(1.25)) } }],
+        prompts: [{ ref: 't1-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'What is the lowest supply cost among Kai\'s three products?', fixed: { expected: '$1.25', compute: least(m(2.0), m(3.5), m(1.25)) } }],
       },
       {
         taskId: 't2',
@@ -926,7 +926,7 @@ export const G3B: readonly AuthoredLesson[] = [
         kind: 'independent',
         directions: 'Jamal writes a second plan: $3.00 to the food drive, $2.00 saved, and $1.00 kept.',
         prompts: [
-          { ref: 't3-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'Do the second plan\'s shares still add up to the whole profit?', fixed: { expected: '$6.00', compute: sum(m(3.0), m(2.0), m(1.0)) } },
+          { ref: 't3-p1', promptType: 'fixed-numeric', unit: 'USD', text: 'What do the three shares in Jamal\'s second plan add up to?', fixed: { expected: '$6.00', compute: sum(m(3.0), m(2.0), m(1.0)) } },
           { ref: 't3-p2', promptType: 'fixed-numeric', unit: 'USD', text: 'How much more does Jamal give in the second plan than in the first?', fixed: { expected: '$1.00', compute: diff(m(3.0), m(2.0)) } },
         ],
       },

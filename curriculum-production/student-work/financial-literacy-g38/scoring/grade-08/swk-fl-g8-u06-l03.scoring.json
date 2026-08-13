@@ -40,31 +40,40 @@
       {
         "ref": "t2-p1",
         "promptText": "How much does the insurer pay on the claim?",
-        "answer": "$4,000.00",
+        "answer": "$5,000.00",
         "verification": {
           "method": "independent-recompute",
-          "reasoning": "(5,000.00 - 1,000.00) = 4,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "reasoning": "smaller of ((7,500.00 - 1,000.00), 5,000.00) = 5,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. The deductible reduces the loss to $6,500.00, which the $5,000.00 limit then caps.",
           "computation": {
-            "op": "diff",
-            "from": {
-              "op": "money",
-              "cents": 500000
-            },
-            "less": {
-              "op": "money",
-              "cents": 100000
-            }
+            "op": "min",
+            "of": [
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 750000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 100000
+                }
+              },
+              {
+                "op": "money",
+                "cents": 500000
+              }
+            ]
           },
-          "trace": "(5,000.00 - 1,000.00) = 4,000.00"
+          "trace": "smaller of ((7,500.00 - 1,000.00), 5,000.00) = 5,000.00"
         }
       },
       {
         "ref": "t2-p2",
         "promptText": "How much of the $7,500.00 loss does Brigid bear?",
-        "answer": "$3,500.00",
+        "answer": "$2,500.00",
         "verification": {
           "method": "independent-recompute",
-          "reasoning": "(7,500.00 - (5,000.00 - 1,000.00)) = 3,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "reasoning": "(7,500.00 - smaller of ((7,500.00 - 1,000.00), 5,000.00)) = 2,500.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
           "computation": {
             "op": "diff",
             "from": {
@@ -72,27 +81,36 @@
               "cents": 750000
             },
             "less": {
-              "op": "diff",
-              "from": {
-                "op": "money",
-                "cents": 500000
-              },
-              "less": {
-                "op": "money",
-                "cents": 100000
-              }
+              "op": "min",
+              "of": [
+                {
+                  "op": "diff",
+                  "from": {
+                    "op": "money",
+                    "cents": 750000
+                  },
+                  "less": {
+                    "op": "money",
+                    "cents": 100000
+                  }
+                },
+                {
+                  "op": "money",
+                  "cents": 500000
+                }
+              ]
             }
           },
-          "trace": "(7,500.00 - (5,000.00 - 1,000.00)) = 3,500.00"
+          "trace": "(7,500.00 - smaller of ((7,500.00 - 1,000.00), 5,000.00)) = 2,500.00"
         }
       },
       {
         "ref": "t3-p1",
         "promptText": "What is Brigid's total cost for the year with the policy?",
-        "answer": "$4,640.00",
+        "answer": "$3,640.00",
         "verification": {
           "method": "independent-recompute",
-          "reasoning": "((95.00 x 12) + (7,500.00 - (5,000.00 - 1,000.00))) = 4,640.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "reasoning": "((95.00 x 12) + (7,500.00 - smaller of ((7,500.00 - 1,000.00), 5,000.00))) = 3,640.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
           "computation": {
             "op": "sum",
             "of": [
@@ -111,29 +129,38 @@
                   "cents": 750000
                 },
                 "less": {
-                  "op": "diff",
-                  "from": {
-                    "op": "money",
-                    "cents": 500000
-                  },
-                  "less": {
-                    "op": "money",
-                    "cents": 100000
-                  }
+                  "op": "min",
+                  "of": [
+                    {
+                      "op": "diff",
+                      "from": {
+                        "op": "money",
+                        "cents": 750000
+                      },
+                      "less": {
+                        "op": "money",
+                        "cents": 100000
+                      }
+                    },
+                    {
+                      "op": "money",
+                      "cents": 500000
+                    }
+                  ]
                 }
               }
             ]
           },
-          "trace": "((95.00 x 12) + (7,500.00 - (5,000.00 - 1,000.00))) = 4,640.00"
+          "trace": "((95.00 x 12) + (7,500.00 - smaller of ((7,500.00 - 1,000.00), 5,000.00))) = 3,640.00"
         }
       },
       {
         "ref": "t3-p2",
         "promptText": "How much better off is she than paying the whole loss unprotected?",
-        "answer": "$2,860.00",
+        "answer": "$3,860.00",
         "verification": {
           "method": "independent-recompute",
-          "reasoning": "(7,500.00 - ((95.00 x 12) + (7,500.00 - (5,000.00 - 1,000.00)))) = 2,860.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "reasoning": "(7,500.00 - ((95.00 x 12) + (7,500.00 - smaller of ((7,500.00 - 1,000.00), 5,000.00)))) = 3,860.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
           "computation": {
             "op": "diff",
             "from": {
@@ -158,21 +185,30 @@
                     "cents": 750000
                   },
                   "less": {
-                    "op": "diff",
-                    "from": {
-                      "op": "money",
-                      "cents": 500000
-                    },
-                    "less": {
-                      "op": "money",
-                      "cents": 100000
-                    }
+                    "op": "min",
+                    "of": [
+                      {
+                        "op": "diff",
+                        "from": {
+                          "op": "money",
+                          "cents": 750000
+                        },
+                        "less": {
+                          "op": "money",
+                          "cents": 100000
+                        }
+                      },
+                      {
+                        "op": "money",
+                        "cents": 500000
+                      }
+                    ]
                   }
                 }
               ]
             }
           },
-          "trace": "(7,500.00 - ((95.00 x 12) + (7,500.00 - (5,000.00 - 1,000.00)))) = 2,860.00"
+          "trace": "(7,500.00 - ((95.00 x 12) + (7,500.00 - smaller of ((7,500.00 - 1,000.00), 5,000.00)))) = 3,860.00"
         }
       }
     ],
@@ -190,7 +226,7 @@
           },
           {
             "label": "Meets",
-            "descriptor": "The response explains both mechanisms in Brigid's policy, that the deductible is borne first and the limit caps the payout, and names both as things to check before relying on cover."
+            "descriptor": "The response explains both mechanisms in Brigid's policy in the right order, that the deductible comes off the loss first and the limit then caps what remains, and names both as things to check before relying on cover."
           }
         ]
       }

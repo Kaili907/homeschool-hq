@@ -230,14 +230,14 @@ export const G7A: readonly AuthoredLesson[] = [
           { ref: 't3-p2', promptType: 'fixed-numeric', unit: 'units', text: 'How many units must sell before the fixed costs are covered?', fixed: { expected: '16', compute: reach(m(150.0), diff(m(22.0), m(12.5))) } },
         ],
       },
-      { taskId: 't4', kind: 'reflection', directions: 'The first fifteen units earned nothing at all.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'Explain what break-even means using Dilan\'s figures, and why a venture with high fixed costs is riskier than one without them.' }] },
+      { taskId: 't4', kind: 'reflection', directions: 'The first fifteen units left the venture still short of covering its fixed costs.', prompts: [{ ref: 't4-p1', promptType: 'extended-response', text: 'Explain what break-even means using Dilan\'s figures, and why a venture with high fixed costs is riskier than one without them.' }] },
     ],
     rubric: [
       crit(
         'Explaining break-even and fixed-cost risk',
         'The response treats every one of Dilan\'s units as profitable from the first sale.',
         'Break-even is stated for Dilan but the risk of fixed costs is not addressed.',
-        'The response explains that Dilan\'s fixed costs are owed regardless of sales, so the first 16 units only repay them, and connects that to higher risk if demand disappoints.',
+        'The response explains that Dilan\'s fixed costs are owed regardless of sales, so the contribution from the first 16 units goes to covering them before any profit begins, and connects that to higher risk if demand disappoints.',
       ),
     ],
     remediation:

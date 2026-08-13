@@ -21,7 +21,7 @@
     "items": [
       {
         "ref": "t1-p1",
-        "promptText": "Which of Kai's three products costs the least to make one of?",
+        "promptText": "What is the lowest supply cost among Kai's three products?",
         "answer": "$1.25",
         "verification": {
           "method": "independent-recompute",

@@ -21,7 +21,7 @@
     "items": [
       {
         "ref": "t1-p1",
-        "promptText": "What does 15% of the $1,200.00 borrowed come to, confirming the fee?",
+        "promptText": "What does 15% of the $1,200.00 borrowed come to?",
         "answer": "$180.00",
         "verification": {
           "method": "independent-recompute",

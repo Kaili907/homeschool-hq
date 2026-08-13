@@ -37,12 +37,12 @@
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Express Kwabena's invented $180.00 fee as a share of the $1,200.00 borrowed for the four-week term.",
+      "directions": "The lender describes the charge as 15% of the amount borrowed for each four-week term. Check that this rate matches the $180.00 fee actually quoted on Kwabena's invented loan.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "fixed-numeric",
-          "text": "What does 15% of the $1,200.00 borrowed come to, confirming the fee?",
+          "text": "What does 15% of the $1,200.00 borrowed come to?",
           "unit": "USD"
         }
       ]

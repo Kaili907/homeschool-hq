@@ -163,6 +163,40 @@ Editing a lesson means editing `src/authoring/`, then rerunning
 `tooling/verify.ts --write`; `tests/corpus.test.ts` fails if the committed JSON
 ever drifts from what the authored source rebuilds.
 
+## Accuracy review
+
+A financial-literacy accuracy reviewer read ~80 lesson pairs across all five
+grades and all 31 units, plus corpus-wide scans, looking for what machines
+cannot check. It confirmed five defects, all fixed here:
+
+1. **Insurance deductible and limit were combined in the wrong order**
+   (`swk-fl-g8-u06-l03`). The lesson subtracted the deductible from the limit;
+   standard practice is `payout = min(loss − deductible, limit)`. Corrected,
+   which changes the payout from $4,000.00 to $5,000.00 and what the
+   policyholder bears from $3,500.00 to $2,500.00.
+2. **A "which product" question keyed to a dollar amount** (`swk-fl-g3-u06-l01`)
+   and **3.** a yes/no question keyed to a total (`swk-fl-g3-u06-l06`). Both
+   would have marked a correct answer wrong; both reworded to ask for the
+   quantity the key holds. `checks.ts` now rejects any `fixed-numeric` prompt
+   whose wording opens with "which", "does", "is", and similar, so this class
+   cannot recur.
+4. **A reflection line contradicted by its own lesson's figures**
+   (`swk-fl-g8-u07-l01`: an $16,000 cut described as larger than most
+   categories could absorb, when every category exceeded it).
+5. **"Four taxes, four different bases"** (`swk-fl-g8-u07-l02`) — the payroll
+   and income taxes share the wage base, so a correct student answer
+   contradicted the framing. Reworded, and the rubric now credits noticing it.
+
+Acted-on concerns: an ambiguous comparison prompt, a circular fee-derivation
+task, an off-by-one break-even framing, and a note added to the four
+multi-year loan lessons that they model simple interest while real loans of
+that kind amortise.
+
+The reviewer found no defects in compound-versus-simple interest, gross/net
+pay and deduction bases, withholding and refunds, diversification claims, unit
+pricing, tax bases, break-even, grade-appropriateness, or safety framing, and
+judged the 36 rubrics to discriminate genuinely across their three levels.
+
 ## Known limitations
 
 - **The 36 judgment lessons fail the shared gate** for lacking an answer key

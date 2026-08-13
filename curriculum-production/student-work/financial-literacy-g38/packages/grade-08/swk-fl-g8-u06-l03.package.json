@@ -50,7 +50,7 @@
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Work out what Brigid's insurer pays: the $5,000.00 limit applies, and the $1,000.00 deductible comes out of it first.",
+      "directions": "Work out what Brigid's insurer pays. The $1,000.00 deductible comes off the loss first, and the policy then pays what remains up to its $5,000.00 limit.",
       "prompts": [
         {
           "ref": "t2-p1",
@@ -88,18 +88,18 @@
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "The policy paid out and Brigid still bore thousands.",
+      "directions": "The policy paid its full limit and Brigid still bore thousands.",
       "prompts": [
         {
           "ref": "t4-p1",
           "promptType": "extended-response",
-          "text": "Explain how the deductible and the limit each reduced Brigid's payout, and what she should check before assuming a policy covers a loss."
+          "text": "Explain how the deductible and the limit each reduced Brigid's payout, in that order, and what she should check before assuming a policy covers a loss."
         }
       ]
     }
   ],
-  "remediation": "If a learner applies the deductible after the limit incorrectly, write Brigid's claim as an ordered sequence of steps and work through them one line at a time.",
-  "extension": "Ask the learner what limit Brigid would have needed for the insurer to cover the whole loss above the deductible.",
+  "remediation": "If a learner takes the deductible out of the limit rather than out of the loss, write Brigid's claim as an ordered sequence, loss then deductible then limit, and work through it one line at a time.",
+  "extension": "Ask the learner what limit Brigid would have needed for the insurer to cover the whole loss above the deductible, and to show why $6,500.00 is the answer.",
   "scoringRef": "scoring/grade-08/swk-fl-g8-u06-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
