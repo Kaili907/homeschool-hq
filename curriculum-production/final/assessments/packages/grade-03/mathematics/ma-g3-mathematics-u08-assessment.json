@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-mathematics-u08-assessment",
+  "courseRef": "ma-g3-mathematics",
+  "grade": 3,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g3-mathematics-u08",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "courseTitle": "Grade 3 Mathematics",
+    "assessmentLessonRef": "ma-g3-mathematics-u08-l16"
+  },
+  "standards": [
+    "3.MD.3",
+    "3.MD.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u08-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 1 per symbol. The bar for \"Bananas\" is worth 1 symbols. How many does \"Bananas\" represent?",
+      "choices": [
+        "1",
+        "2",
+        "0",
+        "4"
+      ],
+      "standardRef": "3.MD.3"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "On a scaled bar graph with 2 per symbol, \"Red\" has 3 symbols and \"Blue\" has 1 symbols. How many more does \"Red\" have than \"Blue\"?",
+      "choices": [
+        "4",
+        "8",
+        "2",
+        "6"
+      ],
+      "standardRef": "3.MD.3"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 4/4, 2/4, 2/4, 3/4, 3/4, 2/4, 4/4, 4/4. How many leaves measured exactly 2/4 inch?",
+      "choices": [
+        "2",
+        "4",
+        "8",
+        "3"
+      ],
+      "standardRef": "3.MD.4"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 2 per symbol. The bar for \"Dogs\" is worth 1 symbols. How many does \"Dogs\" represent?",
+      "choices": [
+        "4",
+        "1",
+        "2",
+        "0"
+      ],
+      "standardRef": "3.MD.3"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "On a scaled bar graph with 2 per symbol, \"Apples\" has 6 symbols and \"Bananas\" has 3 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+      "choices": [
+        "18",
+        "12",
+        "3",
+        "6"
+      ],
+      "standardRef": "3.MD.3"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/4 inch: 3/4, 3/4, 4/4, 1/4, 3/4, 3/4, 2/4, 3/4. How many leaves measured exactly 2/4 inch?",
+      "choices": [
+        "0",
+        "1",
+        "8",
+        "2"
+      ],
+      "standardRef": "3.MD.4"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 10 per symbol. The bar for \"Red\" is worth 8 symbols. How many does \"Red\" represent?",
+      "choices": [
+        "8",
+        "70",
+        "80",
+        "90"
+      ],
+      "standardRef": "3.MD.3"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "On a scaled bar graph with 10 per symbol, \"Red\" has 8 symbols and \"Blue\" has 4 symbols. How many more does \"Red\" have than \"Blue\"?",
+      "choices": [
+        "80",
+        "120",
+        "4",
+        "40"
+      ],
+      "standardRef": "3.MD.3"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "A line plot shows the lengths of 8 leaves, each measured to the nearest 1/8 inch: 3/8, 1/8, 3/8, 2/8, 1/8, 5/8, 3/8, 8/8. How many leaves measured exactly 5/8 inch?",
+      "choices": [
+        "8",
+        "0",
+        "2",
+        "1"
+      ],
+      "standardRef": "3.MD.4"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u08-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Yellow\" is worth 4 symbols. How many does \"Yellow\" represent?",
+      "choices": [
+        "25",
+        "15",
+        "20",
+        "4"
+      ],
+      "standardRef": "3.MD.3"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/mathematics/ma-g3-mathematics-u08-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-mathematics-u08-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u08-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Data: Scaled Graphs and Measurement Line Plots?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

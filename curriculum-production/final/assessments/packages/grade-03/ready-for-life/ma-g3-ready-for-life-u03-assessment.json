@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-ready-for-life-u03-assessment",
+  "courseRef": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g3-ready-for-life-u03",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Helper Safety",
+    "courseTitle": "Grade 3 Ready For Life",
+    "assessmentLessonRef": "ma-g3-ready-for-life-u03-l05"
+  },
+  "standards": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 3 — kitchen helper safety and no-heat preparation"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u03-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before touching any ingredient, look at the two or three snack options your adult offers and pick one.",
+      "prompt": "Name the snack you picked and list the ingredients it needs."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Before assembling, wash your hands, gather only the ingredients and tools your snack needs, and check that no sharp knife, stove, or appliance is part of your plan.",
+      "prompt": "I washed my hands before touching any ingredient."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Before assembling, wash your hands, gather only the ingredients and tools your snack needs, and check that no sharp knife, stove, or appliance is part of your plan.",
+      "prompt": "I used only cold or room-temperature ingredients and did not turn on the stove, oven, or any appliance."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Before assembling, wash your hands, gather only the ingredients and tools your snack needs, and check that no sharp knife, stove, or appliance is part of your plan.",
+      "prompt": "I used only a butter knife or a spoon, not a sharp chef's knife."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "checklist-item",
+      "directions": "Before assembling, wash your hands, gather only the ingredients and tools your snack needs, and check that no sharp knife, stove, or appliance is part of your plan.",
+      "prompt": "I kept any unwashed raw ingredient away from ingredients that were already ready to eat until it was washed."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "With your adult watching the whole time, assemble your chosen snack from start to finish on a clean plate, then wipe the counter when you are done.",
+      "prompt": "Describe the order you assembled your snack in, step by step, from the first ingredient to the last."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think about the whole process, not just the eating part.",
+      "prompt": "Name one specific step where you had to be extra careful and explain what you did to stay safe during that step."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/ready-for-life/ma-g3-ready-for-life-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Tool boundary respected criterion.",
+    "Provide evidence that meets the stated Hygiene and separation criterion.",
+    "Provide evidence that meets the stated Process completion criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-ready-for-life-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u03-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Kitchen Helper Safety?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

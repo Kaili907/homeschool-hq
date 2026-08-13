@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-english-language-arts-u06-assessment",
+  "courseRef": "ma-g12-english-language-arts",
+  "grade": 12,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g12-english-language-arts-u06",
+    "unitNumber": 6,
+    "unitTitle": "Rhetoric, Power, and Public Language",
+    "courseTitle": "English 12: Global Literature, Composition, and Portfolio Capstone",
+    "assessmentLessonRef": "ma-g12-english-language-arts-u06-l16"
+  },
+  "standards": [
+    "11-12.RI.6",
+    "11-12.RI.9",
+    "11-12.SL.3",
+    "11-12.RL.6",
+    "11-12.SL.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-12/ma-g12-english-language-arts-u06-l16.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: satire, irony, and understatement in public language. Essential question: How does close, evidence-governed attention to satire, irony, and understatement in public language change what a reader or writer is entitled to claim? By the end of this lesson you should be able to: Propose an approach to satire, irony, and understatement in public language on self-selected material and justify it before beginning. You'll need: course notebook or digital equivalent; the unit's assigned texts, in an accessible reading representation; citation reference or style manual appropriate to the course.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Rhetoric, Power, and Public Language. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain rhetoric in texts where it is particularly effective in your own words and identify a valid example in an assigned text.\\n- (5 pts, textual evidence) Cite the strongest available evidence for a claim about style and content contributing to power or beauty, and state what the evidence does not establish.\\n- (6 pts, application) Apply rhetorical features of foundational U.S. documents to a text you have not analyzed in this unit. Show the reasoning, not only the conclusion.\\n- (6 pts, error or claim analysis) Analyze a plausible misreading or unsupported claim involving satire, irony, and understatement in public language; correct it and explain what made it wrong.\\n- (5 pts, connection) Connect assessing points of emphasis and tone with conveying a clear and distinct perspective. Explain how one constrains, supports, or complicates the other.\\n- (8 pts, performance evidence) Present the strongest evidence from the unit performance task: Deliver a rhetorical analysis of a public text and defend a specific claim about how its language does its work.\\n- (4 pts, reflection and transfer) Identify one skill you can now transfer, one check that improves the quality of your reading or writing, and one open question.\\n- (5 pts, sufficiency and counter-evidence) Show that your evidence for style and content contributing to power or beauty is sufficient, not merely consistent with your claim. Identify the strongest piece of evidence that cuts against you.\\n- (5 pts, unaided transfer) Apply rhetoric in texts where it is particularly effective to a text supplied at assessment time, with no exemplar and no checklist. Explain the choice you made and why.\\n- (6 pts, uncertainty and limits) State precisely where the text or the sources leave the question unsettled, and what additional evidence would settle it.\\n- (8 pts, source trail audit) Supply a source trail a reader could re-walk: every claim traced to a source, every source assessed for strengths and limitations relative to this task.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/english-language-arts/ma-g12-english-language-arts-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-english-language-arts-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-12/ma-g12-english-language-arts-u06-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Rhetoric, Power, and Public Language?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

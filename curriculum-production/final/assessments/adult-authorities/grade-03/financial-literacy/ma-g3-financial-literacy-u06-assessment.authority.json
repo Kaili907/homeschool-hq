@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g3-financial-literacy-u06-assessment",
+  "courseRef": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "Separating sales from what is kept"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/financial-literacy/scoring/grade-03/swk-fl-g3-u06-l05.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "g34_normalization",
+    "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+    "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/financial-literacy/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

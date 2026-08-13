@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-financial-literacy-u05-assessment",
+  "courseRef": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g3-financial-literacy-u05",
+    "unitNumber": 5,
+    "unitTitle": "Money Tools and Ads",
+    "courseTitle": "Grade 3 Financial Literacy",
+    "assessmentLessonRef": "ma-g3-financial-literacy-u05-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 5 — money tools, privacy, and advertising"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u05-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Use the invented flyer's own two prices to find the real saving.",
+      "prompt": "What is the real saving on one puzzle?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Put the flyer's claimed $5.00 saving beside the saving you just computed for Rafi.",
+      "prompt": "How much bigger is the claimed saving than the real one?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-choice",
+      "directions": "Put the flyer's claimed $5.00 saving beside the saving you just computed for Rafi.",
+      "prompt": "How does the flyer's claim compare with what the prices show?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Rafi's pretend club wants 3 puzzles, and the flyer promises its $5.00 saving on every one.",
+      "prompt": "What saving would the flyer's claim add up to across 3 puzzles?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "Rafi's pretend club wants 3 puzzles, and the flyer promises its $5.00 saving on every one.",
+      "prompt": "What is the real saving across 3 puzzles?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "The flyer's own prices disagreed with the flyer's own headline.",
+      "prompt": "What question should Rafi ask before believing a number printed in big letters?"
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/financial-literacy/ma-g3-financial-literacy-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Asking a checking question criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-financial-literacy-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u05-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Money Tools and Ads?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

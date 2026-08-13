@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-financial-literacy-u03-assessment",
+  "courseRef": "ma-g11-financial-literacy",
+  "grade": 11,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g11-financial-literacy-u03",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "courseTitle": "Investing, Insurance, and Risk Management",
+    "assessmentLessonRef": "ma-g11-financial-literacy-u03-l10"
+  },
+  "standards": [
+    "PF3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u03-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The household takes home $58,400 a year and this does not change across the five years. Expenses are $44,200 in year 1 and rise 3.1% a year. Round to the cent.",
+      "prompt": "What is the surplus in year 1?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The household takes home $58,400 a year and this does not change across the five years. Expenses are $44,200 in year 1 and rise 3.1% a year. Round to the cent.",
+      "prompt": "What are the expenses in year 5, which is 4 years of inflation after year 1?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The household takes home $58,400 a year and this does not change across the five years. Expenses are $44,200 in year 1 and rise 3.1% a year. Round to the cent.",
+      "prompt": "What is the surplus in year 5?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p4",
+      "kind": "fixed-numeric",
+      "directions": "The household takes home $58,400 a year and this does not change across the five years. Expenses are $44,200 in year 1 and rise 3.1% a year. Round to the cent.",
+      "prompt": "How much of the surplus has been lost by year 5?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "In year 3 a one-off cost of $6,800 arrives. Expenses that year have had 2 years of inflation applied.",
+      "prompt": "What are the ordinary expenses in year 3?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "In year 3 a one-off cost of $6,800 arrives. Expenses that year have had 2 years of inflation applied.",
+      "prompt": "What is the year-3 surplus after the ordinary expenses and the $6,800 one-off?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "In year 3 a one-off cost of $6,800 arrives. Expenses that year have had 2 years of inflation applied.",
+      "prompt": "How much smaller is the year-3 surplus than the year-1 surplus?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "In year 3 a one-off cost of $6,800 arrives. Expenses that year have had 2 years of inflation applied.",
+      "prompt": "The plan commits $7,200 a year to a savings goal. By how much does the year-3 surplus fall short of that commitment?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p5",
+      "kind": "fixed-numeric",
+      "directions": "In year 3 a one-off cost of $6,800 arrives. Expenses that year have had 2 years of inflation applied.",
+      "prompt": "Does the year-5 surplus still cover the $7,200 commitment, and with how much to spare?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "One more figure for the recommendation.",
+      "prompt": "By year 5, what share of income do expenses take? Give one decimal place.",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-choice",
+      "directions": "One more figure for the recommendation.",
+      "prompt": "Which single change would most protect the plan across all five years?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write your plan. Answer both.",
+      "prompt": "Present a five-year plan for this household. Say what you protect and what you let go, name the year the plan is tightest and by how much, and state the assumption whose failure would do the most damage."
+    },
+    {
+      "taskRef": "t4-p2",
+      "kind": "short-response",
+      "directions": "Write your plan. Answer both.",
+      "prompt": "The income is held flat for five years while expenses rise 3.1% a year. Say whether that is a pessimistic or an optimistic assumption, and what the year-5 surplus would look like if income rose 2% a year instead."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/financial-literacy/ma-g11-financial-literacy-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion.",
+    "Provide evidence that meets the stated Transfer to the new case criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-financial-literacy-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u03-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

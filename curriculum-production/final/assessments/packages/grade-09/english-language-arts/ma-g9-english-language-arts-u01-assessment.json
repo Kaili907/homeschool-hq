@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-english-language-arts-u01-assessment",
+  "courseRef": "ma-g9-english-language-arts",
+  "grade": 9,
+  "subject": "english-language-arts",
+  "location": {
+    "unitRef": "ma-g9-english-language-arts-u01",
+    "unitNumber": 1,
+    "unitTitle": "Close Reading and Strong, Thorough Evidence",
+    "courseTitle": "English 9: Foundations of Literary Analysis and Argument",
+    "assessmentLessonRef": "ma-g9-english-language-arts-u01-l16"
+  },
+  "standards": [
+    "9-10.RL.1",
+    "9-10.RI.1",
+    "9-10.SL.1",
+    "9-10.W.9",
+    "9-10.L.6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/english-language-arts/packages/grade-09/ma-g9-english-language-arts-u01-l16.package.json",
+  "instructions": [
+    "Read the supplied text or source closely, then write an original analysis or composition.",
+    "Cite relevant evidence and revise for meaning, organization, and language before submitting."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "student-task",
+      "kind": "student-task",
+      "prompt": "{\"present\":true,\"text\":\"Today's focus: discussion preparation and evidence logs. Essential question: How does close, evidence-governed attention to discussion preparation and evidence logs change what a reader or writer is entitled to claim? By the end of this lesson you should be able to: Explain what discussion preparation and evidence logs means and name the textual signal that tells you it is in play. You'll need: course notebook or digital equivalent; the unit's assigned texts, in an accessible reading representation; citation reference or style manual appropriate to the course.\"}"
+    },
+    {
+      "taskRef": "independent-evidence",
+      "kind": "independent-evidence",
+      "prompt": "{\"present\":true,\"text\":\"Unit assessment for Close Reading and Strong, Thorough Evidence. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\\n- (4 pts, concept and vocabulary) Explain strong and thorough textual evidence in your own words and identify a valid example in an assigned text.\\n- (5 pts, textual evidence) Cite the strongest available evidence for a claim about explicit statement versus supported inference, and state what the evidence does not establish.\\n- (6 pts, application) Apply high-school annotation systems to a text you have not analyzed in this unit. Show the reasoning, not only the conclusion.\\n- (6 pts, error or claim analysis) Analyze a plausible misreading or unsupported claim involving discussion preparation and evidence logs; correct it and explain what made it wrong.\\n- (5 pts, connection) Connect academic vocabulary acquisition with evidence sufficiency review. Explain how one constrains, supports, or complicates the other.\\n- (8 pts, performance evidence) Present the strongest evidence from the unit performance task: Build an evidence-and-inference casebook on an unfamiliar text and defend two contested readings in seminar.\\n- (4 pts, reflection and transfer) Identify one skill you can now transfer, one check that improves the quality of your reading or writing, and one open question.\\n- (5 pts, sufficiency and counter-evidence) Show that your evidence for explicit statement versus supported inference is sufficient, not merely consistent with your claim. Identify the strongest piece of evidence that cuts against you.\"}"
+    }
+  ],
+  "responseMode": "written-analysis-or-composition",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/english-language-arts/ma-g9-english-language-arts-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-english-language-arts-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/english-language-arts/packages/grade-09/ma-g9-english-language-arts-u01-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Close Reading and Strong, Thorough Evidence?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-social-studies-u06-assessment",
+  "courseRef": "ma-g3-social-studies",
+  "grade": 3,
+  "subject": "social-studies",
+  "location": {
+    "unitRef": "ma-g3-social-studies-u06",
+    "unitNumber": 6,
+    "unitTitle": "Michigan Becomes a State",
+    "courseTitle": "Grade 3 Social Studies",
+    "assessmentLessonRef": "ma-g3-social-studies-u06-l11"
+  },
+  "standards": [
+    "3 – H3.0.3",
+    "3 – H3.0.9",
+    "3 – H3.0.10"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/social-studies/grade-3/ma-g3-social-studies/ma-g3-social-studies-u06-l11.md",
+  "instructions": [
+    "Use only the attached, real, dated sources. Identify each source and cite specific evidence for claims.",
+    "Explain source limits or perspective. If a required source is not attached, stop and request it."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "source-evidence-task",
+      "prompt": "**Task shape for this phase (Unit assessment):** work with the sources required by the unit assessment prompts.\n\nThis package names real repositories rather than a specific pre-selected document. Before this lesson is used with a student, a teacher/tutor attaches one or more real, dated, citable items from:\n- Library of Congress (loc.gov/collections)\n- Archives of Michigan / Library of Michigan (Michigan.gov)\n- National Archives DocsTeach (docsteach.org)\nIf no suitable item has been attached yet, the student notebook must say so plainly rather than substituting an imagined source.\n\n**Primary vs. secondary:** For every source used, the learner names whether it is primary (made at/near the time by someone present or directly involved) or secondary (created later, analyzing or describing the event), and gives one reason for the label."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "map-data-document-analysis",
+      "prompt": "Using the Source Record below, log every source consulted for \"change over time\" (unit: Michigan Becomes a State).\n\n- Creator or organization\n- Title\n- Date\n- Where it was found\n- Original source or repost?\n- Evidence used\n- Reason to trust, question, or limit it\n- How it was quoted, paraphrased, or represented\n\nThen apply the Claim–Evidence–Reasoning frame: state a claim about change over time, cite the specific evidence from the logged source(s), explain the reasoning that connects them, and name one limit -- what the evidence does not show or where it might be biased or incomplete.\n\nTie the analysis back to the unit's essential question: \"How can understanding Michigan becomes a state help us explain, decide, create, or solve something that matters?\""
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "independent-response",
+      "prompt": "Complete the unit assessment prompts independently, in the order given, showing sourced evidence for every prompt that asks for it:\n\n- **concept and vocabulary** (4 pts): Explain causal relationships in your own words and give or identify a valid example.\n- **representation or source** (5 pts): Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of the path to statehood.\n- **application** (6 pts): Apply major eras in early Michigan in a new realistic situation. Show the process or cite evidence.\n- **error or claim analysis** (6 pts): Analyze a plausible error, weak claim, unsafe choice, or design flaw involving sequencing a timeline; correct it and explain why.\n- **connection** (5 pts): Connect causal relationships with weighing evidence. Explain how the ideas support, constrain, contrast with, or build on one another. Also address: change over time.\n- **performance evidence** (8 pts): Present the strongest evidence from the unit project: Create a timeline of major eras and events in early Michigan history and explain the causal relationship among three of those events.\n- **reflection and transfer** (4 pts): Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.\n\nTotal: 38 points. Rubric dimensions: accuracy or fidelity, evidence and reasoning, application or performance, checking and revision.\n\nMastery interpretation -- Secure: At least 85% with accurate independent application and adequate evidence/reasoning. Developing: 70–84% or inconsistent explanation; assign targeted review and a fresh transfer check. Not yet: Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "evidence-requirements",
+      "prompt": "- Cite the sources required by the unit assessment prompts, each logged with the Source Record fields above.\n- Every claim is backed by a specific, cited piece of evidence -- not an unsupported opinion.\n- For every source used, the learner names whether it is primary (made at/near the time by someone present or directly involved) or secondary (created later, analyzing or describing the event), and gives one reason for the label.\n- Every claim used as evidence names its source (creator/organization, title, date, where found) in enough detail that another person could find it again. The learner transcribes any quotation directly from the retrieved source; nothing here is pre-written as though quoted."
+    }
+  ],
+  "responseMode": "source-based-claim-evidence-reasoning",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/social-studies/ma-g3-social-studies-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-social-studies-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/social-studies/grade-3/ma-g3-social-studies/ma-g3-social-studies-u06-l11.md",
+    "unitObjective": "How can the learner demonstrate the goals of Michigan Becomes a State?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

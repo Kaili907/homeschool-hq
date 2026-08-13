@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-ready-for-life-u01-assessment",
+  "courseRef": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g3-ready-for-life-u01",
+    "unitNumber": 1,
+    "unitTitle": "Taking Care of My Own Space",
+    "courseTitle": "Grade 3 Ready For Life",
+    "assessmentLessonRef": "ma-g3-ready-for-life-u01-l05"
+  },
+  "standards": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 1 — personal and shared space care"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u01-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Read all three job cards before choosing.",
+      "prompt": "After reading all three job cards, write down how much time and energy you realistically have right now."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Choose the job card that honestly matches your time and energy, tell your adult which one you picked and why, and gather what you need before starting.",
+      "prompt": "I read all three job-size options before choosing one."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Choose the job card that honestly matches your time and energy, tell your adult which one you picked and why, and gather what you need before starting.",
+      "prompt": "I chose the job size that honestly matches my time and energy today, not the biggest one to impress someone or the smallest one to avoid work."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Choose the job card that honestly matches your time and energy, tell your adult which one you picked and why, and gather what you need before starting.",
+      "prompt": "I told my adult which job I chose and why, before starting."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "checklist-item",
+      "directions": "Choose the job card that honestly matches your time and energy, tell your adult which one you picked and why, and gather what you need before starting.",
+      "prompt": "I gathered anything I needed, such as a donation bag or a paper tray, before starting the job."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Complete your chosen job fully, then show your adult the result.",
+      "prompt": "Complete your chosen job fully, start to finish. When you believe you are done, walk your adult through it and describe exactly what you did, step by step, and how you know it matches the 'done' standard written on your job card."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think back to a specific moment during the job.",
+      "prompt": "Describe one specific moment during the job when you were tempted to switch to a different-sized job instead, and what made you stick with the size you chose."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/ready-for-life/ma-g3-ready-for-life-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Right-sizing judgment criterion.",
+    "Provide evidence that meets the stated Full completion criterion.",
+    "Provide evidence that meets the stated Reflection specificity criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-ready-for-life-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u01-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Taking Care of My Own Space?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

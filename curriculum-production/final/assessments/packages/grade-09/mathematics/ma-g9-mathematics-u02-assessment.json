@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-mathematics-u02-assessment",
+  "courseRef": "ma-g9-mathematics",
+  "grade": 9,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g9-mathematics-u02",
+    "unitNumber": 2,
+    "unitTitle": "Expression Structure and Equivalence",
+    "courseTitle": "Algebra I",
+    "assessmentLessonRef": "ma-g9-mathematics-u02-l16"
+  },
+  "standards": [
+    "A-SSE.1",
+    "A-SSE.2",
+    "MP.7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u02-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "An investment is modelled by 9000(1 + 0.03)^t. In this expression, what does t represent?",
+      "choices": [
+        "the total interest earned over the whole period",
+        "the amount invested before any interest is added",
+        "the growth factor applied once per year",
+        "the number of years the investment grows"
+      ],
+      "standardRef": "A-SSE.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Factor completely: 25x² − 36.",
+      "choices": [
+        "(5x + 6)²",
+        "(5x − 6)(5x + 6)",
+        "(5x − 36)(5x + 1)",
+        "(5x − 6)²"
+      ],
+      "standardRef": "A-SSE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Factor completely: x^2 + 9x + 8.",
+      "choices": [
+        "(x − 8)(x − 1)",
+        "(x − 8)(x + 1)",
+        "(x − 8)(x − 9)",
+        "(x + 8)(x + 1)"
+      ],
+      "standardRef": "A-SSE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Factor out the greatest common factor: 25x^2 + 45x.",
+      "choices": [
+        "25x(x + 9)",
+        "5(5x² + 9x)",
+        "5x(5x + 9)",
+        "x(25x + 45)"
+      ],
+      "standardRef": "A-SSE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "A student claims that 4(x² + 4x − 1) expands to 4x² + 16x − 5. Is the claim correct?",
+      "choices": [
+        "Yes, the expansion is correct.",
+        "No; the constant term should be -4.",
+        "No; the x term should be 4x.",
+        "No; the leading term should be x²."
+      ],
+      "standardRef": "A-SSE.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "The expression (x + 3)^8 − 9 can be treated as a difference of squares. Which substitution makes that structure visible?",
+      "choices": [
+        "u = (x + 3)^8",
+        "u = (x + 3)^4",
+        "u = x^4",
+        "u = x + 3"
+      ],
+      "standardRef": "A-SSE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "An investment is modelled by 5500(1 + 0.03)^t. In this expression, what does (1 + 0.03) represent?",
+      "choices": [
+        "the amount invested before any interest is added",
+        "the number of years the investment grows",
+        "the growth factor applied once per year",
+        "the total interest earned over the whole period"
+      ],
+      "standardRef": "A-SSE.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Factor completely: 4x² − 49.",
+      "choices": [
+        "(2x + 7)²",
+        "(2x − 7)(2x + 7)",
+        "(2x − 49)(2x + 1)",
+        "(2x − 7)²"
+      ],
+      "standardRef": "A-SSE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Factor completely: x^2 - 13x + 22.",
+      "choices": [
+        "(x + 11)(x + 2)",
+        "(x + 11)(x − 2)",
+        "(x − 11)(x − 2)",
+        "(x − 22)(x + 13)"
+      ],
+      "standardRef": "A-SSE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Factor out the greatest common factor: 35x^2 + 40x.",
+      "choices": [
+        "5(7x² + 8x)",
+        "x(35x + 40)",
+        "5x(7x + 8)",
+        "35x(x + 8)"
+      ],
+      "standardRef": "A-SSE.2"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "A student claims that 9(x² + 4x + 4) expands to 9x² + 36x + 36. Is the claim correct?",
+      "choices": [
+        "No; the constant term should be 38.",
+        "No; the leading term should be x².",
+        "No; the x term should be 4x.",
+        "Yes, the expansion is correct."
+      ],
+      "standardRef": "A-SSE.1"
+    },
+    {
+      "taskRef": "ma-g9-mathematics-u02-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "The expression (x + 9)^6 − 81 can be treated as a difference of squares. Which substitution makes that structure visible?",
+      "choices": [
+        "u = x + 9",
+        "u = x^3",
+        "u = (x + 9)^6",
+        "u = (x + 9)^3"
+      ],
+      "standardRef": "A-SSE.2"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/mathematics/ma-g9-mathematics-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-mathematics-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-09/ma-g9-mathematics-u02-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Expression Structure and Equivalence?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

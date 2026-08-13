@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-ready-for-life-u02-assessment",
+  "courseRef": "ma-g4-ready-for-life",
+  "grade": 4,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g4-ready-for-life-u02",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry Care",
+    "courseTitle": "Grade 4 Ready For Life",
+    "assessmentLessonRef": "ma-g4-ready-for-life-u02-l05"
+  },
+  "standards": [
+    "Ready for Life v1, Grade 4 Unit 2: Clothing and Laundry Care"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u02-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before folding or hanging anything, sort the clean load into two piles: items that get folded and items that get hung.",
+      "prompt": "Name one item you are unsure about and explain what is making the fold-or-hang decision hard for that specific piece."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Fold each item in the fold pile using a consistent method for its type, hang each item in the hang pile, and match any paired items like socks before putting anything away.",
+      "prompt": "I folded every item in the fold pile using one consistent method per item type."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Fold each item in the fold pile using a consistent method for its type, hang each item in the hang pile, and match any paired items like socks before putting anything away.",
+      "prompt": "I hung every item in the hang pile so it would not slip off or stretch out of shape."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Fold each item in the fold pile using a consistent method for its type, hang each item in the hang pile, and match any paired items like socks before putting anything away.",
+      "prompt": "I matched every pair, like socks, before putting them away, with no unmatched singles left out unless truly missing a pair."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Put every folded and hung item into its real storage spot, then compare two items you treated differently to explain your fold-versus-hang reasoning.",
+      "prompt": "Name two items from today's load that are similar in size or fabric weight but that you treated differently, one folded and one hung."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "extended-response",
+      "directions": "Put every folded and hung item into its real storage spot, then compare two items you treated differently to explain your fold-versus-hang reasoning.",
+      "prompt": "Explain the specific reason those two similar items got different treatment: what about each one's fabric, shape, or garment type made folding right for one and hanging right for the other?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think back to the grade-3 five-minute tidy routine, where putting items away just meant finding any open spot.",
+      "prompt": "Explain one way today's task is more specific than 'put items back where they belong' from the five-minute tidy: what extra decision did folding, hanging, and matching add that a quick tidy skips?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/ready-for-life/ma-g4-ready-for-life-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Fold, hang, and match technique criterion.",
+    "Provide evidence that meets the stated Fold-versus-hang reasoning criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-ready-for-life-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u02-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Clothing and Laundry Care?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g8-physical-education-u06-assessment",
+  "courseRef": "ma-g8-physical-education",
+  "grade": 8,
+  "subject": "physical-education",
+  "location": {
+    "unitRef": "ma-g8-physical-education-u06",
+    "unitNumber": 6,
+    "unitTitle": "Outdoor, Aquatic, and Community Activity Planning",
+    "courseTitle": "Grade 8 Physical Education",
+    "assessmentLessonRef": "ma-g8-physical-education-u06-l11"
+  },
+  "standards": [
+    "Michigan PE Standards 1",
+    "3",
+    "5"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/physical-education/assessments.json",
+  "instructions": [
+    "Complete the safe activity or accessible equivalent and document the requested performance evidence.",
+    "Stop for pain, dizziness, breathing trouble, unsafe conditions, or missing adult supervision."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain route and risk planning in your own words and give or identify a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "representation or source",
+      "prompt": "Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of weather.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply water safety concepts in a new realistic situation. Show the process or cite evidence.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving cycling or trail etiquette; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect route and risk planning with community recreation access. Explain how the ideas support, constrain, contrast with, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit project: Plan a safe lifetime-activity experience including permissions, equipment, cost, transport, and contingency options.",
+      "possiblePoints": 8
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "responseMode": "performance-log-or-accessible-equivalent",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-08/physical-education/ma-g8-physical-education-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g8-physical-education-u06-assessment",
+    "metadataRef": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/physical-education/assessments.json",
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-08/unit-assessments/ma-g8-physical-education-u06-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Outdoor, Aquatic, and Community Activity Planning?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-financial-literacy-u01-assessment",
+  "courseRef": "ma-g12-financial-literacy",
+  "grade": 12,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g12-financial-literacy-u01",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "courseTitle": "Financial Transition to Adulthood",
+    "assessmentLessonRef": "ma-g12-financial-literacy-u01-l10"
+  },
+  "standards": [
+    "PF1"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u01-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The fictional hire is paid $58,800 a year over 24 periods. The employer contributes 50% of whatever the worker contributes to retirement, up to the first 6% of salary. Health Plan A costs $118 a period, with a deductible of $1,200, then the member pays 20%. Health Plan B costs $58 a period, with a deductible of $3,000, then the member pays 30%. Elections must be made before the enrolment window closes; a hire who misses it gets no health plan and no retirement contribution until the next window a year later.",
+      "prompt": "What is gross pay per period?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The fictional hire is paid $58,800 a year over 24 periods. The employer contributes 50% of whatever the worker contributes to retirement, up to the first 6% of salary. Health Plan A costs $118 a period, with a deductible of $1,200, then the member pays 20%. Health Plan B costs $58 a period, with a deductible of $3,000, then the member pays 30%. Elections must be made before the enrolment window closes; a hire who misses it gets no health plan and no retirement contribution until the next window a year later.",
+      "prompt": "What must the worker contribute over the year to earn the largest possible employer contribution?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The fictional hire is paid $58,800 a year over 24 periods. The employer contributes 50% of whatever the worker contributes to retirement, up to the first 6% of salary. Health Plan A costs $118 a period, with a deductible of $1,200, then the member pays 20%. Health Plan B costs $58 a period, with a deductible of $3,000, then the member pays 30%. Elections must be made before the enrolment window closes; a hire who misses it gets no health plan and no retirement contribution until the next window a year later.",
+      "prompt": "What is the largest employer retirement contribution available for the year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now price both health plans against a fictional year with $4,200 of covered charges.",
+      "prompt": "What does a year of Plan A premiums cost?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now price both health plans against a fictional year with $4,200 of covered charges.",
+      "prompt": "What does a year of Plan B premiums cost?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now price both health plans against a fictional year with $4,200 of covered charges.",
+      "prompt": "Under Plan A, what does the member pay toward $4,200 of covered charges?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Now price both health plans against a fictional year with $4,200 of covered charges.",
+      "prompt": "Under Plan B, what does the member pay toward the same charges?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Put the two plans on the same basis and settle the arithmetic before writing anything.",
+      "prompt": "What is the full cost of a Plan A year at this level of use?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "Put the two plans on the same basis and settle the arithmetic before writing anything.",
+      "prompt": "What is the full cost of a Plan B year at this level of use?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p3",
+      "kind": "fixed-choice",
+      "directions": "Put the two plans on the same basis and settle the arithmetic before writing anything.",
+      "prompt": "At $4,200 of covered charges, which plan costs less across the whole year?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write the election set. Give the figures behind each choice.",
+      "prompt": "Write the complete set of first-year elections you would defend for this fictional hire: a retirement contribution rate, a health plan, and what must happen before the enrolment window closes. Justify each with a figure, and name the one election you would change first if the hire told you their expected medical use was much lower."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/financial-literacy/ma-g12-financial-literacy-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-financial-literacy-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u01-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

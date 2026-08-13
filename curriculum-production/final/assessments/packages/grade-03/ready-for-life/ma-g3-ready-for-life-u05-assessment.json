@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-ready-for-life-u05-assessment",
+  "courseRef": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g3-ready-for-life-u05",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Asking for Help",
+    "courseTitle": "Grade 3 Ready For Life",
+    "assessmentLessonRef": "ma-g3-ready-for-life-u05-l05"
+  },
+  "standards": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 5 — time, belongings, and help-seeking"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u05-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before asking anyone, think through the three parts of the structure on your own.",
+      "prompt": "Write the specific problem you have right now, in one sentence."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Approach a trusted adult and use all three parts of the structure out loud, in order, before pausing for their response.",
+      "prompt": "I named the specific problem, not just a general 'I'm stuck.'"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Approach a trusted adult and use all three parts of the structure out loud, in order, before pausing for their response.",
+      "prompt": "I said what I already tried before asking for help."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Approach a trusted adult and use all three parts of the structure out loud, in order, before pausing for their response.",
+      "prompt": "I stated exactly what kind of help I needed, such as an explanation, a demonstration, or a decision."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "checklist-item",
+      "directions": "Approach a trusted adult and use all three parts of the structure out loud, in order, before pausing for their response.",
+      "prompt": "I asked a trusted adult directly, out loud, instead of waiting to be noticed."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Later today or tomorrow, use the same three-part structure again with a second, different question, to check whether the structure holds up more than once.",
+      "prompt": "Describe the second question you asked and name which of the three parts you remembered on your own, without checking a written reminder."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think about the help you actually received compared to the help you asked for.",
+      "prompt": "Describe the specific kind of help your adult gave you, such as an explanation, a demonstration, or a decision, and whether it matched what you asked for."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/ready-for-life/ma-g3-ready-for-life-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Clarity of the ask criterion.",
+    "Provide evidence that meets the stated Directness criterion.",
+    "Provide evidence that meets the stated Transfer to a second instance criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-ready-for-life-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u05-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Time, Belongings, and Asking for Help?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

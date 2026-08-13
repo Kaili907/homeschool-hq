@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-physical-education-u01-assessment",
+  "courseRef": "ma-g10-physical-education",
+  "grade": 10,
+  "subject": "physical-education",
+  "location": {
+    "unitRef": "ma-g10-physical-education-u01",
+    "unitNumber": 1,
+    "unitTitle": "Movement Analysis and Skill Refinement",
+    "courseTitle": "Team, Individual, and Dual Activities",
+    "assessmentLessonRef": "ma-g10-physical-education-u01-l11"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-10/unit-assessments/ma-g10-physical-education-u01-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the safe activity or accessible equivalent and document the requested performance evidence.",
+    "Stop for pain, dizziness, breathing trouble, unsafe conditions, or missing adult supervision."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and cues",
+      "prompt": "Explain the critical features or key principle of critical features of a movement and what each contributes in your own words."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "demonstration or description",
+      "prompt": "Demonstrate or fully describe self-observation by feel, mirror, shadow, and outcome pattern using a version your body and setting allow. A described or adapted version earns full credit."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply diagnosing from the result rather than from an image in a new situation and explain the decision or adjustment you made."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving targeted correction and the practice design that fixes it; correct it and explain why."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect transfer of a corrected pattern into an activity with plateaus and what to change when progress stops and explain how one affects the other."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Choose one skill, identify its critical features, diagnose the learner’s own limiting feature from outcome evidence, design and run the corrective practice, and document the change."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself."
+    }
+  ],
+  "responseMode": "performance-log-or-accessible-equivalent",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/physical-education/ma-g10-physical-education-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated safe participation and self-management criterion.",
+    "Provide evidence that meets the stated skill cues or movement quality criterion.",
+    "Provide evidence that meets the stated tactical or training reasoning criterion.",
+    "Provide evidence that meets the stated self-assessment and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-physical-education-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-10/unit-assessments/ma-g10-physical-education-u01-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Movement Analysis and Skill Refinement?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

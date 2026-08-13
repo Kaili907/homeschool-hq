@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-mathematics-u02-assessment",
+  "courseRef": "ma-g11-mathematics",
+  "grade": 11,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g11-mathematics-u02",
+    "unitNumber": 2,
+    "unitTitle": "Rational and Radical Expressions and Equations",
+    "courseTitle": "Algebra II",
+    "assessmentLessonRef": "ma-g11-mathematics-u02-l16"
+  },
+  "standards": [
+    "A-APR.6",
+    "A-REI.2",
+    "MP.6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u02-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Write as a single fraction: 1/(x − 2) + 4/(x − 3).",
+      "choices": [
+        "(4x − 11) / ((x − 2)(x − 3))",
+        "(5) / ((x − 2)(x − 3))",
+        "(5x − 11) / ((x − 2)(x − 3))",
+        "(5x + 11) / ((x − 2)(x − 3))"
+      ],
+      "standardRef": "A-APR.6"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Solving a rational equation with denominator (x − 2) yields the candidate solutions x = 2 and x = 3. Which are genuine solutions?",
+      "choices": [
+        "Neither is a solution, because the equation has a restricted domain.",
+        "Both x = 2 and x = 3 are solutions.",
+        "Only x = 3; x = 2 makes the original denominator zero, so it is extraneous.",
+        "Only x = 2; x = 3 must be rejected."
+      ],
+      "standardRef": "A-REI.2"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Simplify (x^2 - 8x + 15) / (x − 3), and state the restriction on x.",
+      "choices": [
+        "x + 5, x ≠ 3",
+        "x − 3, x ≠ 3",
+        "x − 5, x ≠ 3",
+        "x − 5, x ≠ 5"
+      ],
+      "standardRef": "A-APR.6"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Solve √(2x + 13) = 5, then verify the solution.",
+      "choices": [
+        "x = 25",
+        "x = 11",
+        "x = 5",
+        "x = 6"
+      ],
+      "standardRef": "A-REI.2"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Write as a single fraction: -3/(x + 1) + -1/(x + 3).",
+      "choices": [
+        "(-4) / ((x + 1)(x + 3))",
+        "(-4x − 10) / ((x + 1)(x + 3))",
+        "(3x − 10) / ((x + 1)(x + 3))",
+        "(-4x + 10) / ((x + 1)(x + 3))"
+      ],
+      "standardRef": "A-APR.6"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Solving a rational equation with denominator (x − 4) yields the candidate solutions x = 4 and x = 5. Which are genuine solutions?",
+      "choices": [
+        "Neither is a solution, because the equation has a restricted domain.",
+        "Both x = 4 and x = 5 are solutions.",
+        "Only x = 4; x = 5 must be rejected.",
+        "Only x = 5; x = 4 makes the original denominator zero, so it is extraneous."
+      ],
+      "standardRef": "A-REI.2"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Simplify (x^2 - 8x + 12) / (x − 2), and state the restriction on x.",
+      "choices": [
+        "x + 6, x ≠ 2",
+        "x − 2, x ≠ 2",
+        "x − 6, x ≠ 2",
+        "x − 6, x ≠ 6"
+      ],
+      "standardRef": "A-APR.6"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Solve √(2x + 26) = 6, then verify the solution.",
+      "choices": [
+        "x = 36",
+        "x = 4",
+        "x = 5",
+        "x = 11"
+      ],
+      "standardRef": "A-REI.2"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Write as a single fraction: -3/(x + 2) + -5/(x + 1).",
+      "choices": [
+        "(-8x − 13) / ((x + 2)(x + 1))",
+        "(-8x + 13) / ((x + 2)(x + 1))",
+        "(15x − 13) / ((x + 2)(x + 1))",
+        "(-8) / ((x + 2)(x + 1))"
+      ],
+      "standardRef": "A-APR.6"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Solving a rational equation with denominator (x − 9) yields the candidate solutions x = 9 and x = 5. Which are genuine solutions?",
+      "choices": [
+        "Only x = 9; x = 5 must be rejected.",
+        "Both x = 9 and x = 5 are solutions.",
+        "Neither is a solution, because the equation has a restricted domain.",
+        "Only x = 5; x = 9 makes the original denominator zero, so it is extraneous."
+      ],
+      "standardRef": "A-REI.2"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "Simplify (x^2 - 5x + 6) / (x − 3), and state the restriction on x.",
+      "choices": [
+        "x − 3, x ≠ 3",
+        "x + 2, x ≠ 3",
+        "x − 2, x ≠ 3",
+        "x − 2, x ≠ 2"
+      ],
+      "standardRef": "A-APR.6"
+    },
+    {
+      "taskRef": "ma-g11-mathematics-u02-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "Solve √(3x + 30) = 6, then verify the solution.",
+      "choices": [
+        "x = 2",
+        "x = 36",
+        "x = 1",
+        "x = 8"
+      ],
+      "standardRef": "A-REI.2"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/mathematics/ma-g11-mathematics-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-mathematics-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-11/ma-g11-mathematics-u02-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Rational and Radical Expressions and Equations?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

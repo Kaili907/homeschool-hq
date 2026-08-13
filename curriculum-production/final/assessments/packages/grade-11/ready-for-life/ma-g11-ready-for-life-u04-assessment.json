@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-ready-for-life-u04-assessment",
+  "courseRef": "ma-g11-ready-for-life",
+  "grade": 11,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g11-ready-for-life-u04",
+    "unitNumber": 4,
+    "unitTitle": "Housing and Living Arrangements",
+    "courseTitle": "Ready for Life 11: Postsecondary Planning and Portfolio",
+    "assessmentLessonRef": "ma-g11-ready-for-life-u04-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before researching, name a current assumption you're not fully sure is accurate.",
+      "prompt": "Before researching, what do you currently assume is true about tenant rights or landlord rules that you're not fully sure is accurate?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "Complete the full housing analysis using the provided options and sample lease: a comparison of the three housing options, a summary of the sample lease's key obligations, a move-in checklist, and a one-month move-in budget that includes rent, the deposit, and at least two setup costs.",
+      "prompt": "Summarize your comparison of the three housing options and which one you'd recommend and why."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "extended-response",
+      "directions": "Complete the full housing analysis using the provided options and sample lease: a comparison of the three housing options, a summary of the sample lease's key obligations, a move-in checklist, and a one-month move-in budget that includes rent, the deposit, and at least two setup costs.",
+      "prompt": "Summarize the sample lease's key obligations for the tenant and for the landlord."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Complete the full housing analysis using the provided options and sample lease: a comparison of the three housing options, a summary of the sample lease's key obligations, a move-in checklist, and a one-month move-in budget that includes rent, the deposit, and at least two setup costs.",
+      "prompt": "I built a move-in checklist with at least six specific items."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "extended-response",
+      "directions": "Complete the full housing analysis using the provided options and sample lease: a comparison of the three housing options, a summary of the sample lease's key obligations, a move-in checklist, and a one-month move-in budget that includes rent, the deposit, and at least two setup costs.",
+      "prompt": "List your one-month move-in budget, including rent, the deposit, and at least two setup costs, with a total."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Research, in general terms, how tenancy rules can vary by location and how to verify them.",
+      "prompt": "In general terms (not about one specific real address), explain two ways tenancy rules can differ depending on where someone lives, and name one general, reliable way a person could verify the specific rules that apply to a place they're considering."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect with your guardian on what you feel ready for.",
+      "prompt": "Now that you've completed the full analysis, what part of moving into a place of your own do you feel most prepared for, and what part would you still want a trusted adult's help with?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/ready-for-life/ma-g11-ready-for-life-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Analysis completeness and accuracy criterion.",
+    "Provide evidence that meets the stated Research quality on tenancy-rule variation criterion.",
+    "Provide evidence that meets the stated Guardian-reviewed self-assessment criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-ready-for-life-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Housing and Living Arrangements?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

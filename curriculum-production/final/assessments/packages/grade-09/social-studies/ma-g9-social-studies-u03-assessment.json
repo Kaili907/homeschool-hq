@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-social-studies-u03-assessment",
+  "courseRef": "ma-g9-social-studies",
+  "grade": 9,
+  "subject": "social-studies",
+  "location": {
+    "unitRef": "ma-g9-social-studies-u03",
+    "unitNumber": 3,
+    "unitTitle": "Becoming a World Power and World War I",
+    "courseTitle": "United States History and Geography (1870 to the Present)",
+    "assessmentLessonRef": "ma-g9-social-studies-u03-l11"
+  },
+  "standards": [
+    "USHG 6.2.1",
+    "USHG 6.2.2",
+    "USHG 6.2.3",
+    "USHG 6.2.4",
+    "P3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/social-studies/grade-9/ma-g9-social-studies/ma-g9-social-studies-u03-l11.md",
+  "instructions": [
+    "Use only the attached, real, dated sources. Identify each source and cite specific evidence for claims.",
+    "Explain source limits or perspective. If a required source is not attached, stop and request it."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "source-evidence-task",
+      "prompt": "**Task shape for this phase (Unit assessment):** work with the sources required by the unit assessment prompts.\n\nThis unit's named, real anchor sources (attach the actual text/map/data retrieved from the named repository -- do not quote from memory):\n- Treaty of Versailles, 1919 (Avalon Project)\n- Congressional Record, League of Nations ratification debate, 1919-1920 (U.S. Government Publishing Office, govinfo.gov, and HathiTrust)\n- Espionage Act of 1917 and Sedition Act of 1918 (National Archives)\n\n**Primary vs. secondary:** Identify each source as primary or secondary, state who produced it and when, and note what perspective it represents and what it omits."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "map-data-document-analysis",
+      "prompt": "Using the Source Record below, log every source consulted for \"the Fourteen Points and the peace settlement\" (unit: Becoming a World Power and World War I).\n\n- Creator or organization\n- Title\n- Date\n- Where it was found\n- Original source or repost?\n- Evidence used\n- Reason to trust, question, or limit it\n- How it was quoted, paraphrased, or represented\n\nThen apply the Claim–Evidence–Reasoning frame: state a claim about the Fourteen Points and the peace settlement, cite the specific evidence from the logged source(s), explain the reasoning that connects them, and name one limit -- what the evidence does not show or where it might be biased or incomplete.\n\nTie the analysis back to the unit's essential question: \"Why and how did the United States become a world power, and what did that shift cost?\""
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "independent-response",
+      "prompt": "Complete the unit assessment prompts independently, in the order given, showing sourced evidence for every prompt that asks for it:\n\n- **concept and vocabulary** (4 pts): Explain growth of United States global power in your own words and give or identify a valid example.\n- **representation or source** (5 pts): Use a map, data display, timeline, document analysis, or worked process to show understanding of causes of World War I and American entry.\n- **application** (6 pts): Apply the domestic impact of World War I in a new realistic situation. Show the reasoning and cite the evidence.\n- **error or claim analysis** (6 pts): Analyze a plausible error, unsupported claim, or misuse of a source involving wartime civil liberties and dissent; correct it and explain why.\n- **connection** (5 pts): Connect growth of United States global power with the League of Nations debate. Explain how the ideas support, constrain, contrast with, or build on one another.\n- **source provenance and citation** (5 pts): For one source you used, identify it as primary or secondary, state who produced it and when, explain what perspective it represents, name one thing it does not show, and cite it so another reader could find it.\n- **performance evidence** (8 pts): Present the strongest evidence from the unit project: Write an evidence-based position paper on the League of Nations debate that names and fairly represents at least two period positions.\n- **reflection and transfer** (4 pts): Identify one skill you can now transfer, one check that improves accuracy or source reliability, and one next question.\n\nTotal: 43 points. Rubric dimensions: accuracy and historical or economic context, evidence, reasoning, and citation, source use, provenance, and perspective, application or performance, checking and revision.\n\nMastery interpretation -- Secure: At least 85% with accurate independent application, cited evidence, and fair treatment of perspectives. Developing: 70–84% or inconsistent explanation or citation; assign targeted review and a fresh transfer check. Not yet: Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "evidence-requirements",
+      "prompt": "- Cite the sources required by the unit assessment prompts, each logged with the Source Record fields above.\n- Every claim is backed by a specific, cited piece of evidence -- not an unsupported opinion.\n- Identify each source as primary or secondary, state who produced it and when, and note what perspective it represents and what it omits.\n- Every claim offered as evidence names its source with enough detail for another reader to locate it. Quotations must be transcribed by the learner from the retrieved source; this package supplies no quoted text."
+    }
+  ],
+  "responseMode": "source-based-claim-evidence-reasoning",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/social-studies/ma-g9-social-studies-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-social-studies-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/social-studies/grade-9/ma-g9-social-studies/ma-g9-social-studies-u03-l11.md",
+    "unitObjective": "How can the learner demonstrate the goals of Becoming a World Power and World War I?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

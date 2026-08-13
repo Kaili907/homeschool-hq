@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-ready-for-life-u06-assessment",
+  "courseRef": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g3-ready-for-life-u06",
+    "unitNumber": 6,
+    "unitTitle": "Family Helper Capstone",
+    "courseTitle": "Grade 3 Ready For Life",
+    "assessmentLessonRef": "ma-g3-ready-for-life-u06-l05"
+  },
+  "standards": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 6 — family contribution capstone"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u06-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before checking anything, look at the space with fresh eyes, as if seeing it for the first time today.",
+      "prompt": "Name one thing about the space right now that looks the way you pictured it back on day one."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "With your guardian, go through the finished-loop checklist one item at a time and mark each one together.",
+      "prompt": "Every step on the original plan was actually completed, not just started."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "With your guardian, go through the finished-loop checklist one item at a time and mark each one together.",
+      "prompt": "Every material used is back in its original spot, not left out."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "With your guardian, go through the finished-loop checklist one item at a time and mark each one together.",
+      "prompt": "The space matches what was pictured on day one, or the difference is explained."
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "checklist-item",
+      "directions": "With your guardian, go through the finished-loop checklist one item at a time and mark each one together.",
+      "prompt": "Nothing about the job was left half-finished."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "For any checklist item that is not yet complete, finish that specific piece of the job right now, with your guardian present, before the check is finished.",
+      "prompt": "If you found an unfinished item, describe exactly what you did to finish it. If everything was already complete, describe how you and your guardian confirmed that together."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think about the checking process itself, separate from the job.",
+      "prompt": "Describe one checklist item that was easy to check and one that was harder to check, and explain what made the harder one more difficult to judge."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/ready-for-life/ma-g3-ready-for-life-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Checklist thoroughness criterion.",
+    "Provide evidence that meets the stated Completion accuracy criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-ready-for-life-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-03/swk-rfl-g3-u06-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Family Helper Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

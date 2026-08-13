@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g7-arts-and-music-u01-assessment",
+  "courseRef": "ma-g7-arts-and-music",
+  "grade": 7,
+  "subject": "arts-and-music",
+  "location": {
+    "unitRef": "ma-g7-arts-and-music-u01",
+    "unitNumber": 1,
+    "unitTitle": "Visual Storytelling and Composition",
+    "courseTitle": "Grade 7 Arts and Music",
+    "assessmentLessonRef": "ma-g7-arts-and-music-u01-l11"
+  },
+  "standards": [
+    "Michigan Arts: Visual Arts Create",
+    "Respond"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/arts-and-music/assessments.json",
+  "instructions": [
+    "Create, perform privately, analyze, or critique as directed. A written, no-audio alternative receives equal credit.",
+    "Submit original work plus process evidence and a specific revision or critique."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain composition and focal point in your own words and give or identify a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "representation or source",
+      "prompt": "Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of value color and mood.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply perspective and depth in a new realistic situation. Show the process or cite evidence.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving symbol and visual metaphor; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect composition and focal point with critique and revision. Explain how the ideas support, constrain, contrast with, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit project: Create a visual narrative or series with a process journal and artist statement.",
+      "possiblePoints": 8
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "responseMode": "project-performance-analysis-or-critique",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-07/arts-and-music/ma-g7-arts-and-music-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task about sequential art.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g7-arts-and-music-u01-assessment",
+    "metadataRef": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/arts-and-music/assessments.json",
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/arts-music/grade-07/ma-g7-arts-and-music-u01-l11.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Visual Storytelling and Composition?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

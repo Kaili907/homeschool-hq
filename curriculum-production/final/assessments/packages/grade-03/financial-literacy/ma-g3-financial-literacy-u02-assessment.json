@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-financial-literacy-u02-assessment",
+  "courseRef": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g3-financial-literacy-u02",
+    "unitNumber": 2,
+    "unitTitle": "Where Money Comes From",
+    "courseTitle": "Grade 3 Financial Literacy",
+    "assessmentLessonRef": "ma-g3-financial-literacy-u02-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 2 — earning and work"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u02-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Add everything that came into Ben's pretend record this week.",
+      "prompt": "How much pretend money does Ben have in total this week?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-choice",
+      "directions": "Not all of Ben's money arrived the same way. Set the $2.00 he earned beside the $5.00 he was given as a gift.",
+      "prompt": "Which is larger in Ben's record this week, the money he earned or the birthday gift?"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Not all of Ben's money arrived the same way. Set the $2.00 he earned beside the $5.00 he was given as a gift.",
+      "prompt": "How much larger is it?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "The following pretend week, no gift arrives, but Ben earns $4.00 more from washing bicycles on top of the $2.00 he already earned.",
+      "prompt": "How much has Ben now earned in total from washing bicycles?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-choice",
+      "directions": "The following pretend week, no gift arrives, but Ben earns $4.00 more from washing bicycles on top of the $2.00 he already earned.",
+      "prompt": "How does Ben's total earned money now compare with the $5.00 gift?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Gifts and earnings both spend the same, but they do not arrive the same way.",
+      "prompt": "What is the difference between the $5.00 Ben was given and the $6.00 he earned?"
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/financial-literacy/ma-g3-financial-literacy-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Distinguishing gifts from earnings criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-financial-literacy-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u02-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Where Money Comes From?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

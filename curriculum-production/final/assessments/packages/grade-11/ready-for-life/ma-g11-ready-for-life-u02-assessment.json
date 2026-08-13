@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-ready-for-life-u02-assessment",
+  "courseRef": "ma-g11-ready-for-life",
+  "grade": 11,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g11-ready-for-life-u02",
+    "unitNumber": 2,
+    "unitTitle": "Applications, Deadlines, and Documentation",
+    "courseTitle": "Ready for Life 11: Postsecondary Planning and Portfolio",
+    "assessmentLessonRef": "ma-g11-ready-for-life-u02-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "extended-response",
+      "directions": "Update your tracker from day 1 with the current real status of each item, then add the three provided simulated deadlines to it in the same format.",
+      "prompt": "Show your updated tracker with current statuses for your real items, plus the three simulated deadlines added in the same format."
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "checklist-item",
+      "directions": "Update your tracker from day 1 with the current real status of each item, then add the three provided simulated deadlines to it in the same format.",
+      "prompt": "The three simulated deadlines are recorded with the same level of detail (deadline date, required documents, status) as my real items."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "short-response",
+      "directions": "Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+      "prompt": "Which item did you choose, and what specifically went wrong (what was missed and why, based on your tracker)?"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "extended-response",
+      "directions": "Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+      "prompt": "Write a specific recovery plan: what you would do first, in what order, including who you would contact and what you would say to explain the situation and ask for what you need."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+      "prompt": "My recovery plan includes a realistic first message to whoever needs to be contacted (an admissions office, a reference-writer, a program coordinator), not just a list of steps."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "checklist-item",
+      "directions": "Review the recovery plan with your guardian and record what changed or was confirmed after that conversation.",
+      "prompt": "I reviewed my recovery plan with my guardian before finalizing it."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Review the recovery plan with your guardian and record what changed or was confirmed after that conversation.",
+      "prompt": "Did your guardian's review change anything about the plan? If so, what, and why?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Reflect on what this unit's system (the tracker plus this recovery exercise) changes about how you'll handle deadlines going forward.",
+      "prompt": "Looking back across this whole unit, what specific habit from your tracker system would have caught this problem earlier, before it became a three-day emergency?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/ready-for-life/ma-g11-ready-for-life-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Tracker integration criterion.",
+    "Provide evidence that meets the stated Recovery plan concreteness criterion.",
+    "Provide evidence that meets the stated System-level transfer criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-ready-for-life-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Applications, Deadlines, and Documentation?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

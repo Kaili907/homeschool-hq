@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-financial-literacy-u02-assessment",
+  "courseRef": "ma-g11-financial-literacy",
+  "grade": 11,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g11-financial-literacy-u02",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "courseTitle": "Investing, Insurance, and Risk Management",
+    "assessmentLessonRef": "ma-g11-financial-literacy-u02-l10"
+  },
+  "standards": [
+    "PF2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u02-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "The vehicle costs $21,750. Solveig would pay $3,500 down and finance the rest with 60 monthly payments of $342.60.",
+      "prompt": "How much is financed after the deposit?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "The vehicle costs $21,750. Solveig would pay $3,500 down and finance the rest with 60 monthly payments of $342.60.",
+      "prompt": "What is the total of the 60 payments?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "The vehicle costs $21,750. Solveig would pay $3,500 down and finance the rest with 60 monthly payments of $342.60.",
+      "prompt": "What is the finance charge on the loan?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Running costs are $1,420 a year for insurance, $760 a year for maintenance, and $1,690 a year for fuel. Solveig plans to keep the vehicle 5 years, over which it loses 15% of its value a year from the $21,750 price.",
+      "prompt": "What do the running costs come to in one year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Running costs are $1,420 a year for insurance, $760 a year for maintenance, and $1,690 a year for fuel. Solveig plans to keep the vehicle 5 years, over which it loses 15% of its value a year from the $21,750 price.",
+      "prompt": "What do they come to across the 5 years?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Running costs are $1,420 a year for insurance, $760 a year for maintenance, and $1,690 a year for fuel. Solveig plans to keep the vehicle 5 years, over which it loses 15% of its value a year from the $21,750 price.",
+      "prompt": "What is the vehicle worth after 5 years, losing 15% of its value a year?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Running costs are $1,420 a year for insurance, $760 a year for maintenance, and $1,690 a year for fuel. Solveig plans to keep the vehicle 5 years, over which it loses 15% of its value a year from the $21,750 price.",
+      "prompt": "What is the total cost of owning the vehicle for 5 years, counting the deposit, all the payments, and the running costs, less the resale value?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p5",
+      "kind": "fixed-numeric",
+      "directions": "Running costs are $1,420 a year for insurance, $760 a year for maintenance, and $1,690 a year for fuel. Solveig plans to keep the vehicle 5 years, over which it loses 15% of its value a year from the $21,750 price.",
+      "prompt": "What does that come to per month across the 60 months?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Set the true monthly cost against the figure the advertisement leads with, and against Solveig’s $3,180 monthly take-home pay.",
+      "prompt": "How much larger is the true monthly cost than the $342.60 payment?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "Set the true monthly cost against the figure the advertisement leads with, and against Solveig’s $3,180 monthly take-home pay.",
+      "prompt": "What share of the $3,180 monthly take-home does the true cost take? Give one decimal place.",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t3-p3",
+      "kind": "fixed-choice",
+      "directions": "Set the true monthly cost against the figure the advertisement leads with, and against Solveig’s $3,180 monthly take-home pay.",
+      "prompt": "Which single change would reduce the true monthly cost the most?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write your recommendation. Answer both.",
+      "prompt": "Recommend for or against this purchase for Solveig. State the monthly figure you are relying on, name the assumptions the analysis rests on, and identify the one figure whose failure would most damage the conclusion."
+    },
+    {
+      "taskRef": "t4-p2",
+      "kind": "short-response",
+      "directions": "Write your recommendation. Answer both.",
+      "prompt": "The resale value is the only figure in this analysis that reduces the cost. Explain what makes it different in kind from the others, and say what the true monthly cost would be if the vehicle turned out to be worth nothing at the end."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/financial-literacy/ma-g11-financial-literacy-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Identifying the assumption criterion.",
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-financial-literacy-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u02-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

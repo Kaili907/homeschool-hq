@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g7-ready-for-life-u06-assessment",
+  "courseRef": "ma-g7-ready-for-life",
+  "grade": 7,
+  "subject": "ready-for-life",
+  "authorityClass": "GUARDIAN_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/ready-for-life/scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l05.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "sealed_1_0_0",
+    "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+    "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/ready-for-life/assessments.json"
+  },
+  "completionAuthority": {
+    "kind": "guardian",
+    "learnerAssertionCanCertify": false,
+    "adultAttestationRequired": true
+  },
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}
