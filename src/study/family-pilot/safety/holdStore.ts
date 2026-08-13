@@ -20,11 +20,12 @@ export function dedupeKeyFor(input: { readonly studentRef: string; readonly sess
   return [input.studentRef, input.sessionRef, input.reasonCode].join('')
 }
 
-// Mirrors src/study/safety/localStopLedger.ts recordId(): identity is derived
-// from the input, uniqueness from a random suffix.
-function generateHoldRef(input: Pick<CreateSafetyHoldInputV1, 'studentRef' | 'sessionRef' | 'reasonCode'>): string {
+// Student/session identity already lives in dedicated, validated fields. Keep
+// the opaque reference bounded so production-length profile and Study refs
+// cannot exceed the final composition runtime's 192-character ref contract.
+function generateHoldRef(_input: Pick<CreateSafetyHoldInputV1, 'studentRef' | 'sessionRef' | 'reasonCode'>): string {
   const random = globalThis.crypto?.randomUUID?.() ?? `${Math.random()}-${Date.now()}`
-  return `family-pilot-safety-hold:${input.studentRef}:${input.sessionRef}:${input.reasonCode}:${random}`
+  return `family-pilot-safety-hold:${random}`
 }
 
 /** Anything other than the literal 'cleared' blocks resume — see SafetyHoldV1 status docs. */

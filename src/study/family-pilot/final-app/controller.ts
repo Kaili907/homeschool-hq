@@ -165,7 +165,12 @@ export class FinalFamilyPilotController {
     this.#catalog = options.catalog
     this.#coreStore = options.coreStore ?? {}
     this.#appStore = options.appStore ?? {}
-    this.#now = options.now ?? (() => new Date())
+    const sourceNow = options.now ?? (() => new Date())
+    // The accepted calendar runtime records active time in whole seconds and
+    // refuses fractional-second intervals. One normalized clock is shared with
+    // both Study and its IndexedDB ports below, so ordinary browser timing can
+    // never make a valid learner transition look like an unsafe write.
+    this.#now = () => new Date(Math.floor(sourceNow().getTime() / 1_000) * 1_000)
     this.#indexedDb = options.indexedDb ?? { safety: finalFamilyPilotSafetyPort }
     this.#createRuntime = options.createRuntime ?? createFinalFamilyPilotStudyRuntime
     this.#appSnapshot = loadFinalFamilyPilotAppState(this.#appStore)

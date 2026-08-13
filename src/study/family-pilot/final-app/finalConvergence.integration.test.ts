@@ -57,7 +57,11 @@ function clock() {
   return () => new Date((tick += 1000))
 }
 
-function makeController(storage = new MemoryStorage(), factory: FakeIndexedDb = createFakeIndexedDb()) {
+function makeController(
+  storage = new MemoryStorage(),
+  factory: FakeIndexedDb = createFakeIndexedDb(),
+  now: () => Date = clock(),
+) {
   return {
     storage,
     factory,
@@ -66,7 +70,7 @@ function makeController(storage = new MemoryStorage(), factory: FakeIndexedDb = 
       coreStore: { storage },
       appStore: { storage, householdRef: 'household:test' },
       indexedDb: { safety: finalFamilyPilotSafetyPort, factory: factory.factory, storageManager: factory.storageManager },
-      now: clock(),
+      now,
     }),
   }
 }
@@ -189,6 +193,22 @@ describe('final Family Pilot real convergence', () => {
     expect(completed.status).toBe('ok')
     if (completed.status === 'ok') expect(completed.completionStatus).toBe('CERTIFIED')
     expect(controller.coreSnapshot.state.students[0]?.assignments[0]?.state).toBe('completed')
+    controller.close()
+  }, 60_000)
+
+  it('normalizes ordinary millisecond browser timing for accepted calendar transitions', async () => {
+    let tick = Date.parse('2026-08-13T13:00:00.137Z')
+    const { controller } = makeController(
+      new MemoryStorage(),
+      createFakeIndexedDb(),
+      () => new Date((tick += 137)),
+    )
+    setupTwo(controller)
+    const lesson = await firstLesson('mathematics', 5)
+    const assignment = await controller.assignLesson('student:a', lesson.lessonRef)
+    const completed = await finish(controller, 'student:a', assignment.assignmentRef)
+    expect(completed.status).toBe('ok')
+    if (completed.status === 'ok') expect(completed.completionStatus).toBe('CERTIFIED')
     controller.close()
   }, 60_000)
 

@@ -36,6 +36,16 @@ describe('createSafetyHold', () => {
     expect(hold.createdAt).toBe('2026-08-12T12:00:00.000Z')
   })
 
+  it('keeps the opaque ref inside the runtime limit for production-length identities', () => {
+    const { hold } = createSafetyHold(createInitialSafetyState(), input({
+      studentRef: `family-setup-student:${'a'.repeat(96)}`,
+      sessionRef: `family-pilot-session:${'b'.repeat(128)}`,
+    }))
+
+    expect(hold.holdRef).toMatch(/^[A-Za-z0-9][A-Za-z0-9._:/-]{0,191}$/)
+    expect(hold.holdRef.length).toBeLessThanOrEqual(192)
+  })
+
   it('is idempotent for a repeated semantic hold while the existing one is still open (requirement 7)', () => {
     const first = createSafetyHold(createInitialSafetyState(), input())
     const second = createSafetyHold(first.state, input({ createdAt: '2026-08-12T12:05:00.000Z' }))
