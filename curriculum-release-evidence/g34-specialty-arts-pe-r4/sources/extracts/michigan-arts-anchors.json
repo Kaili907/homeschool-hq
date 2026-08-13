@@ -1,0 +1,1549 @@
+{
+ "disciplines": {
+  "D": "Dance",
+  "M": "Music",
+  "T": "Theatre",
+  "VA": "Visual Arts"
+ },
+ "doc_id": "mde-arts-glce",
+ "grade_3_4_by_discipline": {
+  "D": 53,
+  "M": 57,
+  "T": 32,
+  "VA": 44
+ },
+ "grade_3_4_by_standard": {
+  "I": 49,
+  "II": 40,
+  "III": 47,
+  "IV": 24,
+  "V": 26
+ },
+ "grade_3_4_expectation_count": 186,
+ "grade_3_4_expectations": {
+  "ART.D.I.3.1": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 5,
+   "standard_roman": "I",
+   "text": "Demonstr ate basic locomotor skills through moving forward, backward, and sidew ays in both straight and curved lines."
+  },
+  "ART.D.I.3.2": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 6,
+   "standard_roman": "I",
+   "text": "Explore non-locomotor/axial mo vements (in personal space) using different parts of the body. Use directional changes."
+  },
+  "ART.D.I.3.3": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 6,
+   "standard_roman": "I",
+   "text": "Explore making shapes at low, middle, and high levels by moving from one place to another."
+  },
+  "ART.D.I.3.4": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 6,
+   "standard_roman": "I",
+   "text": "Explore personal space along the body planes: forw ard, behind, sideward, upw ard. Change the base of support; change the size of the base of support."
+  },
+  "ART.D.I.3.5": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 6,
+   "standard_roman": "I",
+   "text": "R espond to drum beat at a moderate, slow, and fast tempo while moving in gener al space."
+  },
+  "ART.D.I.3.6": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 6,
+   "pdf_page_index": 6,
+   "standard_roman": "I",
+   "text": "Continue disco vering range of movement of selected body parts. Introduce isolation of body parts. Introduce single focus."
+  },
+  "ART.D.I.3.7": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 7,
+   "pdf_page_index": 6,
+   "standard_roman": "I",
+   "text": "Explore locomotor mo vements one can execute while holding one hand; two hands with a partner. Explore axial movements relating to partner."
+  },
+  "ART.D.I.3.8": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 8,
+   "pdf_page_index": 6,
+   "standard_roman": "I",
+   "text": "Cop y movements of a leader in pairs and small groups."
+  },
+  "ART.D.I.4.1": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 7,
+   "standard_roman": "I",
+   "text": "Demonstr ate basic locomotor skills through moving forward, backward, and sidew ays in both straight and curved lines to varied tempos."
+  },
+  "ART.D.I.4.2": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 7,
+   "standard_roman": "I",
+   "text": "Explore using different parts of the body to ex ecute the same non-locomotor/axial mo vements in personal space. Use directional changes: forw ard, backward, sideward, downward."
+  },
+  "ART.D.I.4.3": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 7,
+   "standard_roman": "I",
+   "text": "Demonstr ate the ability to make shapes at low, middle, and high levels using selected locomotor and non-locomotor/axial mo vements."
+  },
+  "ART.D.I.4.4": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 7,
+   "standard_roman": "I",
+   "text": "Define and demonstr ate an understanding of general space."
+  },
+  "ART.D.I.4.5": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 7,
+   "standard_roman": "I",
+   "text": "R espond in general space to tempo changes as dictated by a drum beat, changing direction as the tempo changes."
+  },
+  "ART.D.I.4.6": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 6,
+   "pdf_page_index": 7,
+   "standard_roman": "I",
+   "text": "Isolate body parts. Continue working with single focus. Introduce multi-focus."
+  },
+  "ART.D.I.4.7": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 7,
+   "pdf_page_index": 7,
+   "standard_roman": "I",
+   "text": "Using locomotor mo vements, demonstrate change of direction working with a partner holding one hand; two hands when the mo vement allows. Students demonstr ate the ability to work alone."
+  },
+  "ART.D.I.4.8": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 8,
+   "pdf_page_index": 7,
+   "standard_roman": "I",
+   "text": "Mirror mo vement of a partner."
+  },
+  "ART.D.II.3.1": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 6,
+   "standard_roman": "II",
+   "text": "Demonstr ate the ability to make a dance sentence within personal space using music with a beginning, middle, and end."
+  },
+  "ART.D.II.3.2": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 6,
+   "standard_roman": "II",
+   "text": "Create a dance study b y improvising movement using props, music, and poetry."
+  },
+  "ART.D.II.3.3": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 6,
+   "standard_roman": "II",
+   "text": "Use impro visation to explore time, force, and space using axial movements."
+  },
+  "ART.D.II.3.4": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 6,
+   "standard_roman": "II",
+   "text": "Demonstr ate the ability to make a movement sequence using the elements, time, space, and force."
+  },
+  "ART.D.II.3.5": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 6,
+   "standard_roman": "II",
+   "text": "Identif y and use those parts of the video camera to be used to record mo vement."
+  },
+  "ART.D.II.4.1": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 7,
+   "standard_roman": "II",
+   "text": "With musical accompaniment, demonstr ate the ability to make a dance sentence that has beginning, middle, and end in personal and gener al spaces using axial and locomotor mo vements."
+  },
+  "ART.D.II.4.2": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 7,
+   "standard_roman": "II",
+   "text": "Identif y a movement concept and create a dance study."
+  },
+  "ART.D.II.4.3": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 8,
+   "standard_roman": "II",
+   "text": "Explore, impro vise, discover, and invent movement to solve movement problems."
+  },
+  "ART.D.II.4.4": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 8,
+   "standard_roman": "II",
+   "text": "Demonstr ate the ability to design a movement sequence using factors of the elements of time, space, and force."
+  },
+  "ART.D.II.4.5": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 8,
+   "standard_roman": "II",
+   "text": "Students will be introduced to the use of a camer a to record movement and giv en an explanation of the use of tracking."
+  },
+  "ART.D.III.3.1": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 6,
+   "standard_roman": "III",
+   "text": "Demonstr ate the ability to describe the action of basic locomotor mo vements, varying them by changing time space and force."
+  },
+  "ART.D.III.3.2": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 6,
+   "standard_roman": "III",
+   "text": "Select a human mo vement associated with a favorite sport or familiar work, ex ecute the movement, and then change the movement so that it becomes dance-lik e."
+  },
+  "ART.D.III.3.4": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 6,
+   "standard_roman": "III",
+   "text": "Demonstr ate the ability to create a dance study for presentation to peers."
+  },
+  "ART.D.III.3.5": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 6,
+   "standard_roman": "III",
+   "text": "Demonstr ate the ability to vary non-locomotor movements in a number of w ays. Give reasons for choices made."
+  },
+  "ART.D.III.3.6": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 6,
+   "pdf_page_index": 6,
+   "standard_roman": "III",
+   "text": "Students are shown two div erse music films and discuss the similarities and differences in terms of one of the elements of dance."
+  },
+  "ART.D.III.4.1": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 8,
+   "standard_roman": "III",
+   "text": "Demonstr ate the ability to design a movement study of basic locomotor mo vements, and combinations of locomotor movements using mo vement elements."
+  },
+  "ART.D.III.4.2": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 8,
+   "standard_roman": "III",
+   "text": "Select a human mo vement associated with a favorite sport or familiar work, ex ecute the movement, and then change the movement so that it becomes dance-lik e."
+  },
+  "ART.D.III.4.3": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 8,
+   "standard_roman": "III",
+   "text": "Students attend a dance concert or are participants in a children’ s concert. Discuss the experience."
+  },
+  "ART.D.III.4.4": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 8,
+   "standard_roman": "III",
+   "text": "Demonstr ate the ability to create a dance study to present to peers, then analyz e and discuss the process used."
+  },
+  "ART.D.III.4.5": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 8,
+   "standard_roman": "III",
+   "text": "Demonstr ate the ability to create a movement sentence and change same using selected elements of dance. Give reasons for choices made."
+  },
+  "ART.D.III.4.6": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 6,
+   "pdf_page_index": 8,
+   "standard_roman": "III",
+   "text": "Students learn two social dances, such as the twist and the w altz, and discuss the similarities and differences in terms of one of the elements of dance."
+  },
+  "ART.D.IV.3.1": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 6,
+   "standard_roman": "IV",
+   "text": "Students explore mo vements of a selected sport and abstract the inherent mo vement(s). Discuss the differences in human movement and the selected sport."
+  },
+  "ART.D.IV.3.2": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 7,
+   "standard_roman": "IV",
+   "text": "Students learn and perform dances from two countries. Selections should not in volve dancing with a partner."
+  },
+  "ART.D.IV.3.3": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 7,
+   "standard_roman": "IV",
+   "text": "Ask parents or some other adult about dances done in their communit y. Ask if the person will teach y ou the dance and tell you about it. Share the information with classmates."
+  },
+  "ART.D.IV.3.4": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 7,
+   "standard_roman": "IV",
+   "text": "Students research information on a folk dance."
+  },
+  "ART.D.IV.4.1": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 8,
+   "standard_roman": "IV",
+   "text": "Students observ e dance movie to discover movements used in sports. Students will demonstr ate sport movements and abstract the inherent mo vement. Are able to discuss differences."
+  },
+  "ART.D.IV.4.2": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 8,
+   "standard_roman": "IV",
+   "text": "Students learn and perform dances from two countries."
+  },
+  "ART.D.IV.4.3": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 8,
+   "standard_roman": "IV",
+   "text": "Ask parents or some other adult about dances done in their communit y when they were y ounger. Ask if the person will teach you the dance and tell y ou about it. Share your findings with your classmates."
+  },
+  "ART.D.IV.4.4": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 8,
+   "standard_roman": "IV",
+   "text": "Students research information on a social dance of choice."
+  },
+  "ART.D.V.3.1": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 7,
+   "standard_roman": "V",
+   "text": "Students identif y three personal goals such as executing turns, performing dance steps correctly, and the self confidence to create simple dances."
+  },
+  "ART.D.V.3.2": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 7,
+   "standard_roman": "V",
+   "text": "Identif y safe/unsafe conditions, good health practices for the classroom, the school. Discuss how the findings affect their abilit y to create a dance."
+  },
+  "ART.D.V.3.3": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 7,
+   "standard_roman": "V",
+   "text": "Demonstr ate the ability to create a dance based on a favorite piece of music."
+  },
+  "ART.D.V.3.4": {
+   "discipline": "D",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 7,
+   "standard_roman": "V",
+   "text": "R espond to a dance film by demonstrating the ability to create in another art form, and explain the connections between the dance and their response to it."
+  },
+  "ART.D.V.4.1": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 8,
+   "standard_roman": "V",
+   "text": "Students define and discuss the importance of habits, identif y good health and safet y practices, and discuss how they affect the ability to dance well."
+  },
+  "ART.D.V.4.2": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 8,
+   "standard_roman": "V",
+   "text": "In vestigate and identify careers related to advertising."
+  },
+  "ART.D.V.4.3": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 8,
+   "standard_roman": "V",
+   "text": "Demonstr ate the ability to create a dance based on the life cycle of a plant or animal."
+  },
+  "ART.D.V.4.4": {
+   "discipline": "D",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 8,
+   "standard_roman": "V",
+   "text": "R espond to a dance film by demonstrating the ability to create using another art form, and explain the connections between the dance and their response to it."
+  },
+  "ART.M.I.3.1": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Use developmentally appropriate singing voice, sing melodies accurately, and physically demonstrate macro and micro beat."
+  },
+  "ART.M.I.3.10": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 10,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Use a system to read pitch notation for a major scale."
+  },
+  "ART.M.I.3.11": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 11,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Perform music with a variety of expressive qualities, articulation, and tempo."
+  },
+  "ART.M.I.3.2": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Continue to develop repertoire."
+  },
+  "ART.M.I.3.3": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Sing and play expressively utilizing a broader continuum of dynamics and interpretation."
+  },
+  "ART.M.I.3.4": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Sing melodies with confidence in a large group."
+  },
+  "ART.M.I.3.5": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Blend timbres and match dynamic levels in response to the cues of the conductor."
+  },
+  "ART.M.I.3.6": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 6,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Play rhythmic and chordal ostinati and melodies."
+  },
+  "ART.M.I.3.7": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 7,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Expand the complexity of patterns."
+  },
+  "ART.M.I.3.8": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 8,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Play instrumental parts independently while other students sing."
+  },
+  "ART.M.I.3.9": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 9,
+   "pdf_page_index": 23,
+   "standard_roman": "I",
+   "text": "Use a system to read quarter notes and rests, eighth notes, half notes, and whole notes."
+  },
+  "ART.M.I.4.1": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Sing and play in a small group with accurate pitch, intonation, rhythm, and technique within various music contexts."
+  },
+  "ART.M.I.4.10": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 10,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Use a system to read pitch notation for a minor scale."
+  },
+  "ART.M.I.4.11": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 11,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Recognize the basic expressive markings of music."
+  },
+  "ART.M.I.4.2": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Expand repertoire."
+  },
+  "ART.M.I.4.3": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Sing and play with understanding, expressively with appropriate dynamics, phrasing and interpretation."
+  },
+  "ART.M.I.4.5": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Blend timbres and match dynamic levels in the group in response to the cues of the conductor."
+  },
+  "ART.M.I.4.6": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 6,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Play rhythmic, melodic, and harmonic instruments."
+  },
+  "ART.M.I.4.7": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 7,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Perform with accuracy, rhythmic, and melodic patterns."
+  },
+  "ART.M.I.4.8": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 8,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Play instrumental parts independently while other students sing a contrasting part."
+  },
+  "ART.M.I.4.9": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 9,
+   "pdf_page_index": 25,
+   "standard_roman": "I",
+   "text": "Use a system to read quarter notes and rests, eighth notes and rests, half notes and rests, whole notes and rests."
+  },
+  "ART.M.II.3.1": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 24,
+   "standard_roman": "II",
+   "text": "Create through exploration, improvisation, and composition, rhythmic and melodic ostinati accompaniments."
+  },
+  "ART.M.II.3.2": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 24,
+   "standard_roman": "II",
+   "text": "Create through exploration, improvisation, and composition, answers that are rhythmic and melodic."
+  },
+  "ART.M.II.3.3": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 24,
+   "standard_roman": "II",
+   "text": "Create through exploration, improvisation, and composition, melodic embellishments for a familiar song."
+  },
+  "ART.M.II.3.4": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 24,
+   "standard_roman": "II",
+   "text": "Create an instrumental song with lyrics."
+  },
+  "ART.M.II.3.5": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 24,
+   "standard_roman": "II",
+   "text": "Use a variety of traditional and non-traditional sound sources and electronic media when composing, arranging, and improvising appropriate to 3rd grade."
+  },
+  "ART.M.II.3.6": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 6,
+   "pdf_page_index": 24,
+   "standard_roman": "II",
+   "text": "Add vocal, instrumental, and physical responses to a selection presented in 3rd grade."
+  },
+  "ART.M.II.4.1": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 25,
+   "standard_roman": "II",
+   "text": "Create through exploration, improvisation, and composition, rhythmic and melodic ostinati accompaniments."
+  },
+  "ART.M.II.4.2": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 25,
+   "standard_roman": "II",
+   "text": "Create through exploration, improvisation, and composition, answers that are rhythmic and melodic."
+  },
+  "ART.M.II.4.3": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 25,
+   "standard_roman": "II",
+   "text": "Create through exploration, improvisation, and composition, melodic embellishments on familiar melodies."
+  },
+  "ART.M.II.4.4": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 25,
+   "standard_roman": "II",
+   "text": "Arrange songs in various ways."
+  },
+  "ART.M.II.4.5": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 25,
+   "standard_roman": "II",
+   "text": "Use a variety of traditional and non-traditional sound sources and electronic media when composing, arranging, and improvising appropriate to 4th grade."
+  },
+  "ART.M.II.4.6": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 6,
+   "pdf_page_index": 25,
+   "standard_roman": "II",
+   "text": "Add vocal, instrumental, and physical responses to a selection presented in 4th grade."
+  },
+  "ART.M.III.3.1": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 24,
+   "standard_roman": "III",
+   "text": "Identify round and canon when presented aurally."
+  },
+  "ART.M.III.3.2": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 24,
+   "standard_roman": "III",
+   "text": "Use invented or standard notation to transcribe increasingly difficult rhythms and melodies."
+  },
+  "ART.M.III.3.4": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 24,
+   "standard_roman": "III",
+   "text": "With teacher guidance, use music vocabulary to analyze, describe, and evaluate music of various styles."
+  },
+  "ART.M.III.3.5": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 24,
+   "standard_roman": "III",
+   "text": "Identify the timbre of specific instruments in string, brass, woodwinds, and percussion families."
+  },
+  "ART.M.III.3.6": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 6,
+   "pdf_page_index": 24,
+   "standard_roman": "III",
+   "text": "Devise student-created criteria for objective evaluation of performances and compositions."
+  },
+  "ART.M.III.3.7": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 7,
+   "pdf_page_index": 24,
+   "standard_roman": "III",
+   "text": "Use music vocabulary to express personal reactions for musical works and styles."
+  },
+  "ART.M.III.4.1": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 26,
+   "standard_roman": "III",
+   "text": "Identify theme and variation, coda, D.S. (Del Segno), D.C. (Da Capo), and other forms when presented aurally."
+  },
+  "ART.M.III.4.2": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 26,
+   "standard_roman": "III",
+   "text": "Use invented or standard notation to transcribe increasingly difficult rhythms and melodies."
+  },
+  "ART.M.III.4.4": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 26,
+   "standard_roman": "III",
+   "text": "In small groups, use music vocabulary to analyze, describe, and evaluate music."
+  },
+  "ART.M.III.4.5": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 26,
+   "standard_roman": "III",
+   "text": "Identify the timbre of non-western instruments."
+  },
+  "ART.M.III.4.6": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 6,
+   "pdf_page_index": 26,
+   "standard_roman": "III",
+   "text": "Devise student-created criteria for objective evaluation of performances and compositions"
+  },
+  "ART.M.III.4.7": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 7,
+   "pdf_page_index": 26,
+   "standard_roman": "III",
+   "text": "Use music vocabulary and aesthetic vocabulary to describe personal response to music."
+  },
+  "ART.M.IV.3.1": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 24,
+   "standard_roman": "IV",
+   "text": "Identify and describe distinguishing characteristics of contrasting styles."
+  },
+  "ART.M.IV.3.2": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 24,
+   "standard_roman": "IV",
+   "text": "Describe how elements of music are used in examples from world cultures, using music performed and presented in 3rd grade."
+  },
+  "ART.M.IV.3.3": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 24,
+   "standard_roman": "IV",
+   "text": "Demonstrate audience appropriate behavior for the context and style of music presented and performed in 3rd grade."
+  },
+  "ART.M.IV.4.1": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 26,
+   "standard_roman": "IV",
+   "text": "Describe distinguishing instrumentation of music genres and styles from various cultures."
+  },
+  "ART.M.IV.4.2": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 26,
+   "standard_roman": "IV",
+   "text": "Describe how elements of music are used in examples from world cultures, using music performed and presented in 4th grade."
+  },
+  "ART.M.IV.4.3": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 26,
+   "standard_roman": "IV",
+   "text": "Demonstrate audience appropriate behavior for the context and style of music presented and performed in 4th grade."
+  },
+  "ART.M.V.3.1": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 24,
+   "standard_roman": "V",
+   "text": "Observe and identify similarities and differences in the meanings of common vocabulary used in the various 3rd grade arts."
+  },
+  "ART.M.V.3.2": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 25,
+   "standard_roman": "V",
+   "text": "Observe and identify cross-curricular connections within the 3rd grade curriculum."
+  },
+  "ART.M.V.3.3": {
+   "discipline": "M",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 25,
+   "standard_roman": "V",
+   "text": "Discuss the various rationales for using music in daily experiences."
+  },
+  "ART.M.V.4.1": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 26,
+   "standard_roman": "V",
+   "text": "Observe and identify similarities and differences in the meanings of common vocabulary used in the various 4th grade arts."
+  },
+  "ART.M.V.4.2": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 26,
+   "standard_roman": "V",
+   "text": "Observe and identify cross-curricular connections within the 4th grade curriculum."
+  },
+  "ART.M.V.4.3": {
+   "discipline": "M",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 26,
+   "standard_roman": "V",
+   "text": "Discuss the various rationales for using music in daily experiences."
+  },
+  "ART.T.I.3.1": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 38,
+   "standard_roman": "I",
+   "text": "Identify and describe different characters though vocal expression."
+  },
+  "ART.T.I.3.2": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 38,
+   "standard_roman": "I",
+   "text": "Dramatize real and non-real characters with prompting and side-coaching."
+  },
+  "ART.T.I.4.1": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 39,
+   "standard_roman": "I",
+   "text": "Create and demonstrate vocal expression to support the playing of a character."
+  },
+  "ART.T.I.4.2": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 39,
+   "standard_roman": "I",
+   "text": "Improvise real and non-real characters."
+  },
+  "ART.T.II.3.1": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 38,
+   "standard_roman": "II",
+   "text": "Illustrate characters, environments, and situations that support the creation of a classroom dramatization."
+  },
+  "ART.T.II.3.2": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 38,
+   "standard_roman": "II",
+   "text": "Paraphrase dialogue from a story to show different interpretations."
+  },
+  "ART.T.II.3.3": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 38,
+   "standard_roman": "II",
+   "text": "Manipulate simple scenery, costumes, sound, and props in the dramatic process."
+  },
+  "ART.T.II.4.1": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 39,
+   "standard_roman": "II",
+   "text": "Make artistic choices regarding character, environment, and situation that support the creation of a classroom dramatization."
+  },
+  "ART.T.II.4.2": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 39,
+   "standard_roman": "II",
+   "text": "Perform dialogue from a story to show different interpretations."
+  },
+  "ART.T.II.4.3": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 39,
+   "standard_roman": "II",
+   "text": "Create simple scenery, costumes, sound, and props in the dramatic process."
+  },
+  "ART.T.III.3.1": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 38,
+   "standard_roman": "III",
+   "text": "Infer from a text, characters and setting in stories."
+  },
+  "ART.T.III.3.2": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 38,
+   "standard_roman": "III",
+   "text": "Analyze elements of dramatic structure for successful classroom dramatization."
+  },
+  "ART.T.III.3.3": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 38,
+   "standard_roman": "III",
+   "text": "Respond to and build upon ideas of others’ personal preferences for stage design."
+  },
+  "ART.T.III.3.4": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 38,
+   "standard_roman": "III",
+   "text": "Collaborate to extend and add on to improvised stories."
+  },
+  "ART.T.III.3.5": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 38,
+   "standard_roman": "III",
+   "text": "Listen to constructive criticism and respond in a positive manner."
+  },
+  "ART.T.III.3.6": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 6,
+   "pdf_page_index": 38,
+   "standard_roman": "III",
+   "text": "Further describe the character’s wants and needs."
+  },
+  "ART.T.III.3.7": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 7,
+   "pdf_page_index": 38,
+   "standard_roman": "III",
+   "text": "Compare and contrast emotions and thoughts evoked by performances."
+  },
+  "ART.T.III.4.1": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 39,
+   "standard_roman": "III",
+   "text": "Analyze the characters and setting."
+  },
+  "ART.T.III.4.2": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 39,
+   "standard_roman": "III",
+   "text": "Outline standards that can be used to critique performances."
+  },
+  "ART.T.III.4.3": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 39,
+   "standard_roman": "III",
+   "text": "Compromise with peers in small group decision making about artistic design choices."
+  },
+  "ART.T.III.4.4": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 39,
+   "standard_roman": "III",
+   "text": "Unite random objects and situations to form a cohesive story."
+  },
+  "ART.T.III.4.5": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 39,
+   "standard_roman": "III",
+   "text": "Build skills to critique self and others in a respectful and constructive manner."
+  },
+  "ART.T.III.4.6": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 6,
+   "pdf_page_index": 39,
+   "standard_roman": "III",
+   "text": "Analyze the character’s wants and needs."
+  },
+  "ART.T.III.4.7": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 7,
+   "pdf_page_index": 39,
+   "standard_roman": "III",
+   "text": "Predict emotions and thoughts evoked by performances."
+  },
+  "ART.T.IV.3.1": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 38,
+   "standard_roman": "IV",
+   "text": "Infer lessons from multicultural stories, fairy tales, tall tales, fables, and legends."
+  },
+  "ART.T.IV.3.2": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 38,
+   "standard_roman": "IV",
+   "text": "Identify the similarities and differences between live and recorded"
+  },
+  "ART.T.IV.4.1": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 39,
+   "standard_roman": "IV",
+   "text": "Compare and contrast different presentations from the same time period or cultural context."
+  },
+  "ART.T.IV.4.2": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 39,
+   "standard_roman": "IV",
+   "text": "Discuss the similarities and differences between live and recorded theatrical events."
+  },
+  "ART.T.V.3.1": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 39,
+   "standard_roman": "V",
+   "text": "Share how varied multimedia forms illustrate performances in one family’s life."
+  },
+  "ART.T.V.3.2": {
+   "discipline": "T",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 39,
+   "standard_roman": "V",
+   "text": "Recognize that the arts are an expression and record of human life."
+  },
+  "ART.T.V.4.1": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 40,
+   "standard_roman": "V",
+   "text": "Compare and contrast performances in a variety of multimedia forms."
+  },
+  "ART.T.V.4.2": {
+   "discipline": "T",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 40,
+   "standard_roman": "V",
+   "text": "Create artistic projects that show how ideas and emotions are expressed in everyday life."
+  },
+  "ART.VA.I.3.1": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 51,
+   "standard_roman": "I",
+   "text": "Compare the use of various materials to communicate ideas and sensory experiences in an artwork."
+  },
+  "ART.VA.I.3.2": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 51,
+   "standard_roman": "I",
+   "text": "Demonstrate control and safe use of a variety of art tools with environmental awareness."
+  },
+  "ART.VA.I.3.3": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 51,
+   "standard_roman": "I",
+   "text": "Describe, discuss, and model the elements of art and principles of design to communicate ideas."
+  },
+  "ART.VA.I.3.4": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 51,
+   "standard_roman": "I",
+   "text": "Select, present, and evaluate personal artwork."
+  },
+  "ART.VA.I.4.1": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 52,
+   "standard_roman": "I",
+   "text": "Use technologies to communicate ideas and experiences."
+  },
+  "ART.VA.I.4.2": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 52,
+   "standard_roman": "I",
+   "text": "Demonstrate control and safe use of technologies with environmental awareness."
+  },
+  "ART.VA.I.4.3": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 52,
+   "standard_roman": "I",
+   "text": "Analyze and reflect on the elements of art and design to communicate ideas."
+  },
+  "ART.VA.I.4.4": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 52,
+   "standard_roman": "I",
+   "text": "Prepare, present, and collaboratively evaluate personal artwork."
+  },
+  "ART.VA.II.3.1": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 51,
+   "standard_roman": "II",
+   "text": "Apply materials and techniques to problem solve in the creation of art."
+  },
+  "ART.VA.II.3.2": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 51,
+   "standard_roman": "II",
+   "text": "Create a composition using the elements of art and principles of design to communicate ideas."
+  },
+  "ART.VA.II.3.3": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 52,
+   "standard_roman": "II",
+   "text": "Examine how artists turn ideas into visual solutions."
+  },
+  "ART.VA.II.3.4": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 52,
+   "standard_roman": "II",
+   "text": "Combine ideas, symbols, and experiences that express and communicate meaning."
+  },
+  "ART.VA.II.3.5": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 52,
+   "standard_roman": "II",
+   "text": "Create artwork that aesthetically and creatively conveys an idea."
+  },
+  "ART.VA.II.3.6": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 6,
+   "pdf_page_index": 52,
+   "standard_roman": "II",
+   "text": "Design artwork using computers and electronic media to create original works of art."
+  },
+  "ART.VA.II.4.1": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 53,
+   "standard_roman": "II",
+   "text": "Synthesize the use of a variety of materials, techniques, and processes to problem solve in the creation of art."
+  },
+  "ART.VA.II.4.2": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 53,
+   "standard_roman": "II",
+   "text": "Synthesize knowledge of elements of art and principles of design to creatively communicate ideas."
+  },
+  "ART.VA.II.4.3": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 53,
+   "standard_roman": "II",
+   "text": "Analyze and collaborate how artists express ideas through the use of visual culture, global perspective, and symbols in works of art."
+  },
+  "ART.VA.II.4.4": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 53,
+   "standard_roman": "II",
+   "text": "Analyze and reflect on the uses of subject matter, symbols, and ideas to express and communicate meaning in artwork."
+  },
+  "ART.VA.II.4.5": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 53,
+   "standard_roman": "II",
+   "text": "Discuss and debate how artists from various cultures convey ideas differently."
+  },
+  "ART.VA.II.4.6": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 6,
+   "pdf_page_index": 53,
+   "standard_roman": "II",
+   "text": "Incorporate the uses of different technologies to show artistic expression through an original artwork."
+  },
+  "ART.VA.III.3.1": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 52,
+   "standard_roman": "III",
+   "text": "Compare the elements of art used in personal artwork."
+  },
+  "ART.VA.III.3.2": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 52,
+   "standard_roman": "III",
+   "text": "Examine how art expresses cultural traditions."
+  },
+  "ART.VA.III.3.3": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 52,
+   "standard_roman": "III",
+   "text": "Highlight social trends that influence our emotional reactions to art."
+  },
+  "ART.VA.III.3.4": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 52,
+   "standard_roman": "III",
+   "text": "Select a piece of personal artwork, critique it using art terminology, and make revisions."
+  },
+  "ART.VA.III.3.5": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 5,
+   "pdf_page_index": 52,
+   "standard_roman": "III",
+   "text": "Discuss how personal experiences influence the creation of art."
+  },
+  "ART.VA.III.4.1": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 53,
+   "standard_roman": "III",
+   "text": "Reflect and discuss the visual structures and functions used in personal artwork."
+  },
+  "ART.VA.III.4.2": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 53,
+   "standard_roman": "III",
+   "text": "Recognize that artwork may serve functional purposes, be purely decorative, or serve multiple purposes."
+  },
+  "ART.VA.III.4.3": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 53,
+   "standard_roman": "III",
+   "text": "Compare how global and cultural diversity elicits differing responses."
+  },
+  "ART.VA.III.4.4": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 53,
+   "standard_roman": "III",
+   "text": "Compare and contrast two pieces of personal work."
+  },
+  "ART.VA.III.4.5": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 5,
+   "pdf_page_index": 53,
+   "standard_roman": "III",
+   "text": "Analyze how art can be a reflection of society and a response to real world experiences."
+  },
+  "ART.VA.IV.3.1": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 52,
+   "standard_roman": "IV",
+   "text": "Examine customs or traditions celebrated by different communities."
+  },
+  "ART.VA.IV.3.2": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 52,
+   "standard_roman": "IV",
+   "text": "Describe the materials and art forms used by particular cultures."
+  },
+  "ART.VA.IV.3.3": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 52,
+   "standard_roman": "IV",
+   "text": "Recognize how the available materials and processes in a particular time or place can influence the art that is created."
+  },
+  "ART.VA.IV.4.1": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 53,
+   "standard_roman": "IV",
+   "text": "Describe how artwork communicates facts and/or experiences of various cultures."
+  },
+  "ART.VA.IV.4.2": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 53,
+   "standard_roman": "IV",
+   "text": "Compare and contrast the visual elements contained in the artwork of particular cultures."
+  },
+  "ART.VA.IV.4.3": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 53,
+   "standard_roman": "IV",
+   "text": "Evaluate the interrelationship between design, trends, events, and the economics of a culture."
+  },
+  "ART.VA.V.3.1": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 1,
+   "pdf_page_index": 52,
+   "standard_roman": "V",
+   "text": "Describe how art can be found in various environments."
+  },
+  "ART.VA.V.3.2": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 2,
+   "pdf_page_index": 52,
+   "standard_roman": "V",
+   "text": "Investigate and identify careers related to artists who work in specific media."
+  },
+  "ART.VA.V.3.3": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 3,
+   "pdf_page_index": 52,
+   "standard_roman": "V",
+   "text": "Investigate collaboration across art disciplines."
+  },
+  "ART.VA.V.3.4": {
+   "discipline": "VA",
+   "grade": "3",
+   "index": 4,
+   "pdf_page_index": 52,
+   "standard_roman": "V",
+   "text": "Illustrate connections between the visual arts and other curriculum through student artwork."
+  },
+  "ART.VA.V.4.1": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 1,
+   "pdf_page_index": 54,
+   "standard_roman": "V",
+   "text": "Analyze various uses of art globally, in media, business, technology, and industry."
+  },
+  "ART.VA.V.4.2": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 2,
+   "pdf_page_index": 54,
+   "standard_roman": "V",
+   "text": "Investigate and identify careers related to advertising."
+  },
+  "ART.VA.V.4.3": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 3,
+   "pdf_page_index": 54,
+   "standard_roman": "V",
+   "text": "Identify connections between technology and the arts."
+  },
+  "ART.VA.V.4.4": {
+   "discipline": "VA",
+   "grade": "4",
+   "index": 4,
+   "pdf_page_index": 54,
+   "standard_roman": "V",
+   "text": "Demonstrate cross-curricular connections through a culminating event."
+  }
+ },
+ "ncas_capitalised_name_occurrences": {
+  "Connecting": 0,
+  "Creating": 0,
+  "Performing": 0,
+  "Presenting": 0,
+  "Producing": 0,
+  "Responding": 0
+ },
+ "sha256": "f52e0506e30a2277991ae4cebfe75ce157ca0cc3d6ba2b833e15ee8fd9113f2b",
+ "standards": {
+  "I": {
+   "name": "PERFORM",
+   "number": 1,
+   "statement": "Apply skills and knowledge to perform in the arts."
+  },
+  "II": {
+   "name": "CREATE",
+   "number": 2,
+   "statement": "Apply skills and knowledge to create in the arts."
+  },
+  "III": {
+   "name": "ANALYZE",
+   "number": 3,
+   "statement": "Analyze, describe, and evaluate works of art."
+  },
+  "IV": {
+   "name": "ANALYZE IN CONTEXT",
+   "number": 4,
+   "statement": "Understand, analyze, and describe the arts in their historical, social, and cultural contexts."
+  },
+  "V": {
+   "name": "ANALYZE AND MAKE CONNECTIONS",
+   "number": 5,
+   "statement": "Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+  }
+ }
+}

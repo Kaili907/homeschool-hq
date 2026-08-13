@@ -1,0 +1,79 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-arts-pe-standards-policy-r4",
+  "custody_model": "REFERENCE_NOT_COPY",
+  "custody_statement": "This package holds no PDF of its own. The three official documents it reasons over are the bytes already held by curriculum-release-evidence/g34-specialty-r3/sources/documents/, referenced read-only and pinned here by the same SHA256. Duplicating 1.8 MB of identical bytes would create a second copy that could drift from the first; a pin cannot drift.",
+  "verified_on": "2026-08-12",
+  "verification_performed": [
+    {
+      "check": "held-bytes-match-pin",
+      "how": "sha256 of each referenced file in g34-specialty-r3/sources/documents/ recomputed and compared against both this package's pin and r3's own custody record.",
+      "result": "3 of 3 match. tools/build_r4.py repeats this check before reading a byte and aborts on mismatch."
+    },
+    {
+      "check": "upstream-still-serves-the-same-bytes",
+      "how": "Each document re-fetched from its michigan.gov URL on 2026-08-12 with a desktop browser User-Agent and hashed.",
+      "result": "3 of 3 byte-identical to the held copies. r3's custody is not merely inherited here - it was re-confirmed against the live host. Reproduce with sources/refetch-verify.sh.",
+      "why_it_matters": "It rules out the case where a package verifies faithfully against a stale local copy of a document the state has since replaced."
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "mde-pe-2017",
+      "title": "K-12 Physical Education Standards",
+      "version_label": "May 2017",
+      "publisher": "Michigan Department of Education",
+      "authority": "Adopted by the Michigan State Board of Education, May 2017. The live MDE Physical Education page served this exact file on 2026-08-12.",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/2019/02/22/K_12_PE_Standards_Aug_17_ADA_compliance918.pdf",
+      "sha256": "88ab7e08a6611015674ebf97e67a7e8ba0aabb9138b9376bf70adecd9018d93c",
+      "bytes": 700543,
+      "pages": 45,
+      "referenced_at": "../g34-specialty-r3/sources/documents/mde-k12-physical-education-standards-2017.pdf",
+      "held_here": false,
+      "refetched_2026_08_12": {"http_status": 200, "bytes": 700543, "sha256_matches_pin": true},
+      "used_for": "The printed statement of PE Standards 1-5 in each grade band, and the (S<n>.<outcome>.<grade>) outcome codes for Grades 3 and 4."
+    },
+    {
+      "doc_id": "mde-arts-glce",
+      "title": "Michigan Merit Curriculum Standards, Benchmarks, and Grade Level Content Expectations: Visual Arts, Music, Dance, and Theatre",
+      "version_label": "v.06.2011, as served from the Academic Standards page on 2026-08-12",
+      "publisher": "Michigan Department of Education",
+      "authority": "The only arts standards document linked from the MDE Academic Standards index page.",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Academic-Standards/Arts_Standards_Benchmarks_GLCE.pdf",
+      "sha256": "f52e0506e30a2277991ae4cebfe75ce157ca0cc3d6ba2b833e15ee8fd9113f2b",
+      "bytes": 723672,
+      "pages": 64,
+      "referenced_at": "../g34-specialty-r3/sources/documents/mde-arts-standards-benchmarks-glce.pdf",
+      "held_here": false,
+      "refetched_2026_08_12": {"http_status": 200, "bytes": 723672, "sha256_matches_pin": true},
+      "used_for": "The five Michigan arts standards and their statements; the four discipline segments; all 186 Grade 3/4 expectation codes and their text, which are the warrant for every crosswalk in this package."
+    },
+    {
+      "doc_id": "mde-vpaa-2011",
+      "title": "Michigan Standards, Benchmarks, and Grade Level Content Expectations for Visual Arts, Music, Dance, and Theater",
+      "version_label": "v.06.2011",
+      "publisher": "Michigan Department of Education",
+      "authority": "The document the Michigan Merit Curriculum arts page links as 'Visual, Performing and Applied Arts Content Expectations'.",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Year/2014/06/06/Complete_VPAA_Expectations_June_2011_356110_7.pdf",
+      "sha256": "330ca531c64200c0ec5e7bc18083cb76e6eb2c57a21fbe3de25c2d29bcfe845c",
+      "bytes": 368220,
+      "pages": 111,
+      "referenced_at": "../g34-specialty-r3/sources/documents/mde-vpaa-expectations-june-2011.pdf",
+      "held_here": false,
+      "refetched_2026_08_12": {"http_status": 200, "bytes": 368220, "sha256_matches_pin": true},
+      "used_for": "The second half of the R4-ARTS-1 premise check. The NCAS process words must occur zero times as capitalised names across BOTH arts documents, not just the one the citations name."
+    }
+  ],
+  "framework_of_origin_note": {
+    "framework": "National Core Arts Standards (NCAS)",
+    "held": false,
+    "why_not_held": "No NCAS document is retrieved or pinned here, and none is needed. Every determination in this package is made against Michigan's bytes: what Michigan prints, and whether Michigan's Grade 3/4 expectations exercise a given process. The NCAS process definitions recorded in registry/crosswalk-registry.json are context for the reader, never evidence. Nothing is classified on their authority.",
+    "consequence": "A reader who disputes an NCAS definition recorded here can dispute it without disturbing a single classification, because no classification rests on it."
+  },
+  "extraction": {
+    "library": "pypdf",
+    "version": "6.6.2",
+    "note": "Same library and version as r3, so extraction differences cannot explain any divergence between the two packages. Text comparison is whitespace-normalized. The PDF bytes are the record; the extraction is a reading of them.",
+    "independent_reproduction": "This package re-derived r3's headline arts and PE counts from the bytes without consulting r3's extract: 186 Grade 3/4 arts expectations (D 53, M 57, T 32, VA 44) and 119 Grade 3/4 PE outcome codes. Both match r3 exactly, which is evidence that r3's extraction was sound and that this package's disagreements with it are disagreements about classification, not about what the documents say."
+  },
+  "locator_convention": "All page references are PDF page INDICES (0-based, as pypdf numbers them), not the documents' own printed page numbers. The two differ by a few pages in both arts documents and in the PE document."
+}

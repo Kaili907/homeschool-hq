@@ -1,0 +1,60 @@
+{
+ "evidence_id": "manuel-academy-g34-specialty-arts-pe-standards-policy-r4",
+ "index": {
+  "ART-STANDARD-1-PERFORM": [
+   "ARTS::ma-g3-arts-music::Michigan Arts: Music – Performing",
+   "ARTS::ma-g3-arts-music::Michigan Arts: Performing/Presenting",
+   "ARTS::ma-g3-arts-music::Michigan Arts: Visual Arts – Presenting",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Music – Performing",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Performing/Presenting",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Theatre – Performing",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Visual Arts – Presenting"
+  ],
+  "ART-STANDARD-2-CREATE": [
+   "ARTS::ma-g3-arts-music::Michigan Arts: Creating",
+   "ARTS::ma-g3-arts-music::Michigan Arts: Dance – Creating",
+   "ARTS::ma-g3-arts-music::Michigan Arts: Theatre – Creating",
+   "ARTS::ma-g3-arts-music::Michigan Arts: Visual Arts – Creating",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Creating",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Dance – Creating",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Theatre – Creating",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Visual Arts – Creating"
+  ],
+  "ART-STANDARD-3-ANALYZE": [
+   "ARTS::ma-g3-arts-music::Michigan Arts: Music – Responding",
+   "ARTS::ma-g3-arts-music::Michigan Arts: Responding",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Music – Responding",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Responding",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Visual Arts – Responding"
+  ],
+  "ART-STANDARD-4-ANALYZE IN CONTEXT": [
+   "ARTS::ma-g3-arts-music::Michigan Arts: Connecting",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Connecting"
+  ],
+  "ART-STANDARD-5-ANALYZE AND MAKE CONNECTIONS": [
+   "ARTS::ma-g3-arts-music::Michigan Arts: Connecting",
+   "ARTS::ma-g4-arts-music::Michigan Arts: Connecting"
+  ],
+  "PE-STANDARD-1": [
+   "PE::ma-g3-physical-education::Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns",
+   "PE::ma-g4-physical-education::Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns"
+  ],
+  "PE-STANDARD-2": [
+   "PE::ma-g3-physical-education::Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+   "PE::ma-g4-physical-education::Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities"
+  ],
+  "PE-STANDARD-3": [
+   "PE::ma-g3-physical-education::Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+   "PE::ma-g4-physical-education::Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness"
+  ],
+  "PE-STANDARD-4": [
+   "PE::ma-g3-physical-education::Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others",
+   "PE::ma-g4-physical-education::Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others"
+  ],
+  "PE-STANDARD-5": [
+   "PE::ma-g3-physical-education::Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+   "PE::ma-g4-physical-education::Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits"
+  ]
+ },
+ "note": "Michigan target -> the authored citations that map onto it. Not a bijection: many authored labels share a target. Reversibility means every mapping is recoverable from either direction, which tools/validate.py asserts."
+}

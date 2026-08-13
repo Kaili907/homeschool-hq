@@ -1,0 +1,930 @@
+{
+ "crosswalk_table": {
+  "Connecting": {
+   "ambiguous": true,
+   "michigan_standards": [
+    "IV",
+    "V"
+   ],
+   "name_similarity": "Connecting / ANALYZE AND MAKE CONNECTIONS share 'connect-'. Recorded, and deliberately NOT relied on: the shared root points at Standard 5 alone and would hide the Standard 4 half.",
+   "ncas_definition": "Relating artistic ideas and work with personal meaning and external context. NCAS carries two anchors under this process: synthesizing personal knowledge and experience to make art, and relating works to societal, cultural and historical context.",
+   "warrant": "The two halves of NCAS Connecting land on two different Michigan standards. ART.M.V.3.2 ('Observe and identify cross-curricular connections within the 3rd grade curriculum.') is Standard 5. ART.M.IV.3.2 ('Describe how elements of music are used in examples from world cultures, using music performed and presented in 3rd grade.') is Standard 4.",
+   "warrant_codes": [
+    "ART.M.V.3.2",
+    "ART.M.IV.3.2"
+   ]
+  },
+  "Creating": {
+   "michigan_standards": [
+    "II"
+   ],
+   "name_similarity": "Creating / CREATE share a root. Recorded, not relied on: the warrant is the expectation text.",
+   "ncas_definition": "Conceiving and developing new artistic ideas and work.",
+   "warrant": "Michigan Standard 2 is 'Apply skills and knowledge to create in the arts', and every Grade 3/4 expectation filed under it is generative.",
+   "warrant_codes": [
+    "ART.M.II.3.1",
+    "ART.D.II.3.2",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  "Performing": {
+   "michigan_standards": [
+    "I"
+   ],
+   "name_similarity": "Performing / PERFORM share a root. Recorded, not relied on.",
+   "ncas_definition": "Realizing artistic ideas and work through interpretation and presentation.",
+   "warrant": "Michigan Standard 1 is 'Apply skills and knowledge to perform in the arts', and its Grade 3/4 expectations are performance-realization outcomes.",
+   "warrant_codes": [
+    "ART.M.I.3.11",
+    "ART.T.I.3.2",
+    "ART.D.I.3.1"
+   ]
+  },
+  "Presenting": {
+   "michigan_standards": [
+    "I"
+   ],
+   "name_similarity": "None. Presenting and PERFORM do not share a root. This mapping rests entirely on Michigan's own expectation text, which is why it is the case that proves rule R4-ARTS-2.",
+   "ncas_definition": "Interpreting and sharing artistic work; in NCAS the visual-arts analogue of Performing.",
+   "warrant": "Michigan files visual-arts presentation under PERFORM, not under a separate standard: ART.VA.I.3.4 reads 'Select, present, and evaluate personal artwork.' and ART.VA.I.4.4 reads 'Prepare, present, and collaboratively evaluate personal artwork.'",
+   "warrant_codes": [
+    "ART.VA.I.3.4",
+    "ART.VA.I.4.4"
+   ]
+  },
+  "Responding": {
+   "caveat": "Michigan Standard 3 is not a pure analogue at the expectation level: ART.D.III.3.4 ('Demonstrate the ability to create a dance study for presentation to peers.') is a creation-and-presentation outcome filed under ANALYZE. The standard-level mapping holds; the expectation-level partition does not, which is one more reason rule R4-ARTS-4 refuses to assign a code.",
+   "michigan_standards": [
+    "III"
+   ],
+   "name_similarity": "None. Responding and ANALYZE do not share a root.",
+   "ncas_definition": "Understanding and evaluating how the arts convey meaning.",
+   "warrant": "Michigan Standard 3 is 'Analyze, describe, and evaluate works of art'; ART.M.III.3.4 reads 'With teacher guidance, use music vocabulary to analyze, describe, and evaluate music of various styles.'",
+   "warrant_codes": [
+    "ART.M.III.3.4",
+    "ART.VA.III.3.4"
+   ]
+  }
+ },
+ "evidence_id": "manuel-academy-g34-specialty-arts-pe-standards-policy-r4",
+ "mappings": [
+  {
+   "authored_citation": "Michigan Arts: Connecting",
+   "authored_discipline": null,
+   "authored_process": "Connecting",
+   "candidate_expectation_count": 25,
+   "citation_count": 24,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Connecting",
+   "mapping_kind": "CROSSWALK_ONE_TO_MANY_UNRESOLVED",
+   "michigan_target_names": [
+    "ANALYZE IN CONTEXT",
+    "ANALYZE AND MAKE CONNECTIONS"
+   ],
+   "michigan_targets": [
+    "IV",
+    "V"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.M.IV.3.2",
+    "ART.M.V.3.2"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Creating",
+   "authored_discipline": null,
+   "authored_process": "Creating",
+   "candidate_expectation_count": 20,
+   "citation_count": 12,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Creating",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "CREATE"
+   ],
+   "michigan_targets": [
+    "II"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.II.3.2",
+    "ART.M.II.3.1",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Dance – Creating",
+   "authored_discipline": "Dance",
+   "authored_process": "Creating",
+   "candidate_expectation_count": 5,
+   "citation_count": 12,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Dance – Creating",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "CREATE"
+   ],
+   "michigan_targets": [
+    "II"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.II.3.2",
+    "ART.M.II.3.1",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Music – Performing",
+   "authored_discipline": "Music",
+   "authored_process": "Performing",
+   "candidate_expectation_count": 11,
+   "citation_count": 12,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Music – Performing",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "PERFORM"
+   ],
+   "michigan_targets": [
+    "I"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.I.3.1",
+    "ART.M.I.3.11",
+    "ART.T.I.3.2"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Music – Responding",
+   "authored_discipline": "Music",
+   "authored_process": "Responding",
+   "candidate_expectation_count": 6,
+   "citation_count": 24,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Music – Responding",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "ANALYZE"
+   ],
+   "michigan_targets": [
+    "III"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.M.III.3.4",
+    "ART.VA.III.3.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Performing/Presenting",
+   "authored_discipline": null,
+   "authored_process": "Performing/Presenting",
+   "candidate_expectation_count": 25,
+   "citation_count": 12,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Performing/Presenting",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "PERFORM"
+   ],
+   "michigan_targets": [
+    "I"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.I.3.1",
+    "ART.M.I.3.11",
+    "ART.T.I.3.2",
+    "ART.VA.I.3.4",
+    "ART.VA.I.4.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Responding",
+   "authored_discipline": null,
+   "authored_process": "Responding",
+   "candidate_expectation_count": 23,
+   "citation_count": 24,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Responding",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "ANALYZE"
+   ],
+   "michigan_targets": [
+    "III"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.M.III.3.4",
+    "ART.VA.III.3.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Theatre – Creating",
+   "authored_discipline": "Theatre",
+   "authored_process": "Creating",
+   "candidate_expectation_count": 3,
+   "citation_count": 12,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Theatre – Creating",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "CREATE"
+   ],
+   "michigan_targets": [
+    "II"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.II.3.2",
+    "ART.M.II.3.1",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Visual Arts – Creating",
+   "authored_discipline": "Visual Arts",
+   "authored_process": "Creating",
+   "candidate_expectation_count": 6,
+   "citation_count": 24,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Visual Arts – Creating",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "CREATE"
+   ],
+   "michigan_targets": [
+    "II"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.II.3.2",
+    "ART.M.II.3.1",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Visual Arts – Presenting",
+   "authored_discipline": "Visual Arts",
+   "authored_process": "Presenting",
+   "candidate_expectation_count": 4,
+   "citation_count": 12,
+   "course_id": "ma-g3-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Visual Arts – Presenting",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "PERFORM"
+   ],
+   "michigan_targets": [
+    "I"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.VA.I.3.4",
+    "ART.VA.I.4.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Connecting",
+   "authored_discipline": null,
+   "authored_process": "Connecting",
+   "candidate_expectation_count": 25,
+   "citation_count": 24,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Connecting",
+   "mapping_kind": "CROSSWALK_ONE_TO_MANY_UNRESOLVED",
+   "michigan_target_names": [
+    "ANALYZE IN CONTEXT",
+    "ANALYZE AND MAKE CONNECTIONS"
+   ],
+   "michigan_targets": [
+    "IV",
+    "V"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.M.IV.3.2",
+    "ART.M.V.3.2"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Creating",
+   "authored_discipline": null,
+   "authored_process": "Creating",
+   "candidate_expectation_count": 20,
+   "citation_count": 12,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Creating",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "CREATE"
+   ],
+   "michigan_targets": [
+    "II"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.II.3.2",
+    "ART.M.II.3.1",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Dance – Creating",
+   "authored_discipline": "Dance",
+   "authored_process": "Creating",
+   "candidate_expectation_count": 5,
+   "citation_count": 12,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Dance – Creating",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "CREATE"
+   ],
+   "michigan_targets": [
+    "II"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.II.3.2",
+    "ART.M.II.3.1",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Music – Performing",
+   "authored_discipline": "Music",
+   "authored_process": "Performing",
+   "candidate_expectation_count": 10,
+   "citation_count": 24,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Music – Performing",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "PERFORM"
+   ],
+   "michigan_targets": [
+    "I"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.I.3.1",
+    "ART.M.I.3.11",
+    "ART.T.I.3.2"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Music – Responding",
+   "authored_discipline": "Music",
+   "authored_process": "Responding",
+   "candidate_expectation_count": 6,
+   "citation_count": 24,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Music – Responding",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "ANALYZE"
+   ],
+   "michigan_targets": [
+    "III"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.M.III.3.4",
+    "ART.VA.III.3.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Performing/Presenting",
+   "authored_discipline": null,
+   "authored_process": "Performing/Presenting",
+   "candidate_expectation_count": 24,
+   "citation_count": 12,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Performing/Presenting",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "PERFORM"
+   ],
+   "michigan_targets": [
+    "I"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.I.3.1",
+    "ART.M.I.3.11",
+    "ART.T.I.3.2",
+    "ART.VA.I.3.4",
+    "ART.VA.I.4.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Responding",
+   "authored_discipline": null,
+   "authored_process": "Responding",
+   "candidate_expectation_count": 24,
+   "citation_count": 24,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Responding",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "ANALYZE"
+   ],
+   "michigan_targets": [
+    "III"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.M.III.3.4",
+    "ART.VA.III.3.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Theatre – Creating",
+   "authored_discipline": "Theatre",
+   "authored_process": "Creating",
+   "candidate_expectation_count": 3,
+   "citation_count": 12,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Theatre – Creating",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "CREATE"
+   ],
+   "michigan_targets": [
+    "II"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.II.3.2",
+    "ART.M.II.3.1",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Theatre – Performing",
+   "authored_discipline": "Theatre",
+   "authored_process": "Performing",
+   "candidate_expectation_count": 2,
+   "citation_count": 12,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Theatre – Performing",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "PERFORM"
+   ],
+   "michigan_targets": [
+    "I"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.I.3.1",
+    "ART.M.I.3.11",
+    "ART.T.I.3.2"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Visual Arts – Creating",
+   "authored_discipline": "Visual Arts",
+   "authored_process": "Creating",
+   "candidate_expectation_count": 6,
+   "citation_count": 24,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Visual Arts – Creating",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "CREATE"
+   ],
+   "michigan_targets": [
+    "II"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.D.II.3.2",
+    "ART.M.II.3.1",
+    "ART.T.II.3.1",
+    "ART.VA.II.3.5"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Visual Arts – Presenting",
+   "authored_discipline": "Visual Arts",
+   "authored_process": "Presenting",
+   "candidate_expectation_count": 4,
+   "citation_count": 12,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Visual Arts – Presenting",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "PERFORM"
+   ],
+   "michigan_targets": [
+    "I"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.VA.I.3.4",
+    "ART.VA.I.4.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan Arts: Visual Arts – Responding",
+   "authored_discipline": "Visual Arts",
+   "authored_process": "Responding",
+   "candidate_expectation_count": 5,
+   "citation_count": 12,
+   "course_id": "ma-g4-arts-music",
+   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "exact_grade_expectation_assigned": false,
+   "framework_of_origin": "National Core Arts Standards (NCAS)",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": true,
+   "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Visual Arts – Responding",
+   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "michigan_target_names": [
+    "ANALYZE"
+   ],
+   "michigan_targets": [
+    "III"
+   ],
+   "reversible": true,
+   "warrant_codes": [
+    "ART.M.III.3.4",
+    "ART.VA.III.3.4"
+   ]
+  },
+  {
+   "authored_citation": "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns",
+   "citation_count": 84,
+   "course_id": "ma-g3-physical-education",
+   "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 3,
+   "is_alias": true,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g3-physical-education::Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns",
+   "mapping_kind": "ALIAS_HOUSE_PREFIX",
+   "michigan_targets": [
+    "PE-STANDARD-1"
+   ],
+   "proposed_correction": null,
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+   "citation_count": 96,
+   "course_id": "ma-g3-physical-education",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g3-physical-education::Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+   "mapping_kind": "MISQUOTATION_UNRESOLVED",
+   "michigan_targets": [
+    "PE-STANDARD-2"
+   ],
+   "proposed_correction": {
+    "applied": false,
+    "from": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+    "note": "Recorded under R4-PE-3, not applied. This package edits no lesson.",
+    "to": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and performance"
+   },
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+   "citation_count": 12,
+   "course_id": "ma-g3-physical-education",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g3-physical-education::Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+   "mapping_kind": "MISQUOTATION_UNRESOLVED",
+   "michigan_targets": [
+    "PE-STANDARD-3"
+   ],
+   "proposed_correction": {
+    "applied": false,
+    "from": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+    "note": "Recorded under R4-PE-3, not applied. This package edits no lesson.",
+    "to": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical activity and fitness"
+   },
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others",
+   "citation_count": 36,
+   "course_id": "ma-g3-physical-education",
+   "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 3,
+   "is_alias": true,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g3-physical-education::Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others",
+   "mapping_kind": "ALIAS_HOUSE_PREFIX",
+   "michigan_targets": [
+    "PE-STANDARD-4"
+   ],
+   "proposed_correction": null,
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+   "citation_count": 36,
+   "course_id": "ma-g3-physical-education",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 3,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g3-physical-education::Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+   "mapping_kind": "MISQUOTATION_UNRESOLVED",
+   "michigan_targets": [
+    "PE-STANDARD-5"
+   ],
+   "proposed_correction": {
+    "applied": false,
+    "from": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+    "note": "Recorded under R4-PE-3, not applied. This package edits no lesson.",
+    "to": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction"
+   },
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns",
+   "citation_count": 84,
+   "course_id": "ma-g4-physical-education",
+   "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 4,
+   "is_alias": true,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g4-physical-education::Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns",
+   "mapping_kind": "ALIAS_HOUSE_PREFIX",
+   "michigan_targets": [
+    "PE-STANDARD-1"
+   ],
+   "proposed_correction": null,
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+   "citation_count": 96,
+   "course_id": "ma-g4-physical-education",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g4-physical-education::Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+   "mapping_kind": "MISQUOTATION_UNRESOLVED",
+   "michigan_targets": [
+    "PE-STANDARD-2"
+   ],
+   "proposed_correction": {
+    "applied": false,
+    "from": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+    "note": "Recorded under R4-PE-3, not applied. This package edits no lesson.",
+    "to": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and performance"
+   },
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+   "citation_count": 12,
+   "course_id": "ma-g4-physical-education",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g4-physical-education::Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+   "mapping_kind": "MISQUOTATION_UNRESOLVED",
+   "michigan_targets": [
+    "PE-STANDARD-3"
+   ],
+   "proposed_correction": {
+    "applied": false,
+    "from": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+    "note": "Recorded under R4-PE-3, not applied. This package edits no lesson.",
+    "to": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical activity and fitness"
+   },
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others",
+   "citation_count": 48,
+   "course_id": "ma-g4-physical-education",
+   "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 4,
+   "is_alias": true,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g4-physical-education::Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others",
+   "mapping_kind": "ALIAS_HOUSE_PREFIX",
+   "michigan_targets": [
+    "PE-STANDARD-4"
+   ],
+   "proposed_correction": null,
+   "reversible": true
+  },
+  {
+   "authored_citation": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+   "citation_count": 36,
+   "course_id": "ma-g4-physical-education",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
+   "framework_of_origin": "Michigan K-12 Physical Education Standards (2017), quoted",
+   "grade": 4,
+   "is_alias": false,
+   "is_composite_of_official_elements": false,
+   "is_crosswalk_only": false,
+   "mapping_id": "PE::ma-g4-physical-education::Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+   "mapping_kind": "MISQUOTATION_UNRESOLVED",
+   "michigan_targets": [
+    "PE-STANDARD-5"
+   ],
+   "proposed_correction": {
+    "applied": false,
+    "from": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+    "note": "Recorded under R4-PE-3, not applied. This package edits no lesson.",
+    "to": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction"
+   },
+   "reversible": true
+  }
+ ],
+ "reversal": "Delete curriculum-release-evidence/g34-specialty-arts-pe-r4/. No lesson, no release file and no r3 byte was modified.",
+ "reversible": true
+}
