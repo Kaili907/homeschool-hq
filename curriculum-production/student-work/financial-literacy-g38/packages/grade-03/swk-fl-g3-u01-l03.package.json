@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u01-l03",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Needs, Wants, and Choosing",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: why we cannot have everything",
+    "focus": "why we cannot have everything"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 1 — needs, wants, and choosing"
+  ],
+  "objective": "Learners test every pair of invented items against a fixed pretend budget, find which pairs fit, and name the smallest total, building the idea that limited money forces a choice.",
+  "scenario": "Rosa is a made-up third grader with $6.00 in pretend craft-fair tokens. Three invented booths sell a kite for $4.00, a set of paints for $3.00, and a bouncy ball for $2.50. She may pick at most two. None of this is real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Try Rosa's first pair: the paints and the bouncy ball.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the paints and the bouncy ball cost together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Rosa holds that pair against her $6.00 in tokens. Then try a second pair, the kite and the bouncy ball, and compare that total to the same $6.00.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "If Rosa takes the paints and the ball, how many tokens are left over?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "How does the kite and ball pair compare with Rosa's $6.00?",
+          "choices": [
+            "Less than Rosa's tokens",
+            "Exactly Rosa's tokens",
+            "More than Rosa's tokens"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One pair is still untested: the kite and the paints. Work it out, then look across all three pair totals you have found.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the kite and the paints cost together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "Of Rosa's three possible pairs, what does the least expensive pair cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look at how many pairs actually fit inside the tokens Rosa has.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Only one of Rosa's three pairs fits inside $6.00. What does that show about having a set amount of money?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner declares a pair affordable without comparing it to the tokens, have them build each total in coins first and physically place it beside six pretend dollar coins, so fitting or not fitting is something they see before it is something they compute.",
+  "extension": "Ask the learner what price the kite would have to drop to before the kite-and-paints pair would fit inside Rosa's $6.00, and to show the subtraction behind the answer.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u01-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u01-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

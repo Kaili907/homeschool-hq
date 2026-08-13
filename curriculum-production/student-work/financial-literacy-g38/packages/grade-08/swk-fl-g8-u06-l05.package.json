@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u06-l05",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring",
+    "dayInUnit": 5,
+    "phase": "Concept model B",
+    "title": "Concept model B: identity theft and cybersecurity",
+    "focus": "identity theft and cybersecurity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "objective": "Learners design a household response to an invented identity-theft incident, sequencing actions and identifying what evidence to preserve.",
+  "scenario": "Damaris is an invented eighth grader studying a pretend incident: a credit alert reports a new account nobody opened, a password reset email arrives for an unrelated service, and a text asks the household to confirm a code. All of it is invented for study.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Never share a verification code or password with an incoming contact; this incident is invented for study."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Sort the three invented signals in Damaris's case into evidence of compromise and attempts to exploit it. Explain how each one is classified.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which signals in Damaris's case are evidence of a problem, which is an attack, and how can they be told apart?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Set out the household's actions in order, saying what should be preserved as evidence and what should never be shared with an incoming contact.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should the household do, in what order, what should be preserved, and what must never be shared?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Two unrelated services were affected.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why does a problem appearing across unrelated services point to a different cause than a single compromised account?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner responds to the text, ask what an attacker gains from the code in Damaris's case, and rebuild the sequence from that.",
+  "extension": "Ask the learner to write the three preventive measures the household should adopt after Damaris's incident.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u06-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u06-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u05-l03",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Investing, Risk, and Protection",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: diversification concept",
+    "focus": "diversification concept"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners compare the effect of an invented loss on a diversified holding against a concentrated one of the same total value.",
+  "scenario": "Marek is a made-up seventh grader modelling $3,600.00 of pretend holdings in two ways: split evenly across three invented holdings of $1,200.00 each, or placed entirely in one of them. One holding falls 40%. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "These holdings and movements are invented for the exercise and are not a recommendation about any real investment."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute the invented 40% fall on one of Marek's $1,200.00 holdings.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much value does the falling holding lose in the split portfolio?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Find what Marek's split portfolio is worth after the fall, with the other two holdings unchanged.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the split portfolio worth after the fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would the whole $3,600.00 lose if it were all in that one holding?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the two outcomes for Marek directly, holding the same 40% fall and the same $3,600.00 starting value in both versions of the portfolio.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the concentrated portfolio worth after the fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much better off is the split portfolio?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Splitting did not prevent the loss.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what diversification did and did not do in Marek's model, and describe a case where splitting would have been the worse choice."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies the fall to the whole portfolio in the split case, mark which holding falls and apply the percentage only to that line for Marek.",
+  "extension": "Ask the learner what fall in one of six equal holdings would produce the same loss as Marek's 40% fall in one of three.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u05-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u05-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

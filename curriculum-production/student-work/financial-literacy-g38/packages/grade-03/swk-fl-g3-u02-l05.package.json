@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u02-l05",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Where Money Comes From",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: gifts, allowance, and earning",
+    "focus": "gifts, allowance, and earning"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 2 — earning and work"
+  ],
+  "objective": "Learners separate invented money that was given from invented money that was earned, total both, and compare the two sources as they change over two pretend weeks.",
+  "scenario": "Ben is a made-up third grader keeping a pretend money record. This imaginary week he receives a $5.00 birthday gift, a $3.00 allowance for being part of the family, and $2.00 he earned washing a neighbour's pretend bicycle. None of these amounts are real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Add everything that came into Ben's pretend record this week.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much pretend money does Ben have in total this week?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Not all of Ben's money arrived the same way. Set the $2.00 he earned beside the $5.00 he was given as a gift.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "Which is larger in Ben's record this week, the money he earned or the birthday gift?",
+          "choices": [
+            "The money he earned is larger",
+            "They are equal",
+            "The gift is larger"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is it?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The following pretend week, no gift arrives, but Ben earns $4.00 more from washing bicycles on top of the $2.00 he already earned.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much has Ben now earned in total from washing bicycles?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "How does Ben's total earned money now compare with the $5.00 gift?",
+          "choices": [
+            "Earned money is smaller",
+            "They are equal",
+            "Earned money is larger"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Gifts and earnings both spend the same, but they do not arrive the same way.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What is the difference between the $5.00 Ben was given and the $6.00 he earned?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner blends the sources, split the record into two columns headed given and earned, re-enter each pretend amount under the right heading, and only then ask for any comparison between them.",
+  "extension": "Have the learner plan how many more pretend bicycle washes at $2.00 Ben needs before his earnings alone reach $10.00.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u02-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u02-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

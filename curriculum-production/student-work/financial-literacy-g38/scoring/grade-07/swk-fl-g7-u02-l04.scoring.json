@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u02-l04",
+  "lessonId": "ma-g7-financial-literacy-u02-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Reading terms for real obligations",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response summarises Rania's clauses in the contract's own reassuring language."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some clauses are restated plainly for Rania but at least one obligation is missed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response restates all three of Rania's clauses in plain terms and identifies the obligation each creates, including the notice period and the unilateral price change."
+          }
+        ]
+      },
+      {
+        "dimension": "Protecting against a signed term",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No protective step is proposed for Rania."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A step is proposed but it would not actually address the clause identified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response proposes concrete steps for Rania, such as diarising the cancellation date well before the notice window, that directly address the clause she flagged."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Restates the automatic conversion in plain language.",
+      "Identifies the 30-day postal notice as a practical barrier.",
+      "Notes that price changes can occur without renegotiation.",
+      "Proposes a step tied to the specific clause flagged."
+    ]
+  }
+}

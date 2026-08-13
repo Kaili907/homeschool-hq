@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u05-l03",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Ads, Scams, Borrowing, and Giving",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: borrowing and paying back",
+    "focus": "borrowing and paying back"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 5 — advertising, risk, borrowing, and giving"
+  ],
+  "objective": "Learners model an invented borrow-and-repay arrangement, track the balance owed over time, and find when the debt is cleared.",
+  "scenario": "Rina is an invented fourth grader who borrows $30.00 of simulated money from a pretend club fund and agrees to pay back $6.00 a week. No interest is charged in this arrangement. Everything is invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Work out how long Rina's repayment takes at $6.00 a week.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole weeks until Rina has repaid the $30.00?",
+          "unit": "weeks"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now stop partway through Rina's repayment, at the end of week 3, and work out both what she has paid and what she still owes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much has Rina paid back after 3 weeks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does Rina still owe after 3 weeks?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "In week 4 Rina can only pay $2.00 instead of $6.00, then returns to $6.00 a week afterwards.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Rina owe after the short week 4 payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many more whole weeks at $6.00 does it take to clear that?",
+          "unit": "weeks"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "One short payment changed the finishing date.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Rina paid less in one week and it added a week to her repayment. What should she tell the club fund, and when?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner loses track of the balance, keep a two-column ledger for Rina with paid and still owed, and update both columns for every week before answering anything.",
+  "extension": "Ask the learner what weekly payment would let Rina clear the $30.00 in exactly 4 weeks, and to show the reasoning.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u05-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u05-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u03-l04",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving",
+    "dayInUnit": 4,
+    "phase": "Independent application A",
+    "title": "Independent application A: short medium and long goals",
+    "focus": "short medium and long goals"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "objective": "Learners convert invented short, medium, and long goals into monthly requirements and test the combined plan against available funds.",
+  "scenario": "Xanthe is an invented eighth grader planning three pretend goals: $1,800.00 in 6 months, $9,000.00 in 36 months, and $24,000.00 in 120 months. She has $700.00 a month available. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Convert Xanthe's invented short goal, $1,800.00 in 6 months, into a monthly amount.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What monthly amount does the short goal require?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Convert Xanthe's medium and long goals the same way, keeping each requirement separate.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What monthly amount does the $9,000.00 goal require over 36 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What monthly amount does the $24,000.00 goal require over 120 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Total Xanthe's three monthly requirements and compare them with the $700.00 available.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the three goals require each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much short is the monthly amount available?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Only the short goal has a hard deadline.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Recommend which of Xanthe's timelines to extend to close the $50.00 gap, and explain why the horizon of a goal affects how much it can be stretched."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner divides in the wrong direction, restate each of Xanthe's goals as sharing the total across the months and check the units of the answer.",
+  "extension": "Ask the learner to extend exactly one of Xanthe's timelines so the plan fits $700.00, and to show the new figures.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u03-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u03-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

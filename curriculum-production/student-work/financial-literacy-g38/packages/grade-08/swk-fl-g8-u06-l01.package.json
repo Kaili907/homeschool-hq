@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u06-l01",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: risk management",
+    "focus": "risk management"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "objective": "Learners size a set of invented risks, compare them against an existing reserve, and identify which exposures remain uncovered.",
+  "scenario": "Zephyrine is a made-up eighth grader modelling four pretend risks with invented costs of $800.00, $2,500.00, $12,000.00, and $300.00, against a $5,000.00 simulated emergency reserve. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Zephyrine's four invented risk costs, assuming every one of them happened.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do all four risks cost together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Identify Zephyrine's largest single risk and compare it with the $5,000.00 reserve.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the largest single risk?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of that largest risk would the reserve fail to cover?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Work out what the three smaller risks come to together and whether the reserve covers them.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the three smaller risks cost together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much reserve would remain after all three?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The reserve handled three risks and failed on one.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Zephyrine's figures, explain which risks a reserve is suited to and which need insuring instead, and give the principle behind the split."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares the reserve with the combined total only, require each of Zephyrine's risks to be tested against the reserve individually before any conclusion.",
+  "extension": "Ask the learner what reserve size would cover Zephyrine's three smaller risks twice over, and whether that is a sensible target.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u06-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u06-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

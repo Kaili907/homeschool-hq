@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u04-l06",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit",
+    "dayInUnit": 6,
+    "phase": "Guided practice B",
+    "title": "Guided practice B: predatory lending debt collection and bankruptcy concepts",
+    "focus": "predatory lending debt collection and bankruptcy concepts"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "objective": "Learners identify predatory features in an invented lending arrangement and reason about debt collection and insolvency as consequences rather than moral failures.",
+  "scenario": "Jocasta is an invented eighth grader studying a pretend case: a borrower rolls over a short-term loan four times, fees now exceed the original amount, collection calls have begun, and a made-up advertisement offers to erase the debt for an upfront fee. All of it is invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Never pay an upfront fee to a service promising to erase debt; this case is invented for study."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Separate the strands of Jocasta's invented case: the loan structure, the collection activity, and the debt-relief advertisement. Say what each one is and who benefits.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What makes the rollover structure in Jocasta's case dangerous, and why is the debt-relief advertisement a separate problem?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Set out what the borrower should do now, in order, including how to handle collection contact and where legitimate help would come from.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should the borrower do, in what order, and what makes a source of help legitimate rather than another trap?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "The borrower is being told the situation is their own fault.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "How should someone in Jocasta's case think about blame, and why does that framing matter for what they do next?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner blames the borrower, work out what each rollover in Jocasta's case added and what it repaid, then revisit the question.",
+  "extension": "Ask the learner what single change to the loan terms would have prevented Jocasta's case from escalating.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u04-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u04-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

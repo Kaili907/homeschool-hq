@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u06-l05",
+  "lessonId": "ma-g8-financial-literacy-u06-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Distinguishing evidence from exploitation",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats the code request in Damaris's case as legitimate."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The signals are listed for Damaris but not sorted by what each one is."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response classifies Damaris's credit alert and reset email as evidence and the code request as an attack, and explains how each was classified."
+          }
+        ]
+      },
+      {
+        "dimension": "Sequencing and preserving",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "Actions are listed for Damaris without order or evidence handling."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An order is proposed for Damaris but nothing is preserved as evidence."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response orders Damaris's actions from securing accounts through to reporting, specifies preserving the alert and email, and states that codes are never shared."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies the code request as the attack.",
+      "Preserves the alert and reset email as evidence.",
+      "Contacts institutions through independently obtained channels.",
+      "Reasons about a shared cause across unrelated services."
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u01-l05",
+  "lessonId": "ma-g3-financial-literacy-u01-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Respect for different family choices",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response ranks one of Zuri's two invented families as better with money, or calls a family's choice foolish."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response accepts both of Zuri's plans but gives no reason grounded in what each family valued."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that each family in Zuri's activity protected something different with the same pretend $10.00, and treats both plans as reasonable rather than ranking the families."
+          }
+        ]
+      },
+      {
+        "dimension": "Handling private money information",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response suggests telling others what a friend of Zuri's said about family money."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says to keep it quiet without naming any trusted adult a worry could go to."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says that what Zuri's friend shared stays private, and that a worry about a friend can be brought to a trusted adult instead of to other children."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names at least one concrete thing each invented plan protects, such as food for the whole week or a sibling's birthday.",
+      "Does not rank either invented family as better, smarter, or poorer than the other.",
+      "States that a friend's family money information is kept private rather than repeated.",
+      "Sends any real worry to a trusted adult rather than to classmates."
+    ]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u03-l01",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Budgeting",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: unit prices",
+    "focus": "unit prices"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2 foundations",
+    "PF3 foundations"
+  ],
+  "objective": "Learners compute per-unit prices from invented bulk options, choose the better rate, and apply it to a required quantity.",
+  "scenario": "Aiko is a made-up fifth grader ordering supplies for a pretend art room. One invented option is 12 brushes for $9.60; another is 20 of the same brushes for $15.00. The art room needs 24 brushes.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Convert Aiko's 12-for-$9.60 option to a price per brush.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per brush in the 12-pack?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Convert the 20-for-$15.00 option the same way, then compare Aiko's two per-brush prices.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per brush in the 20-pack?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the better per-brush price?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Aiko orders all 24 brushes at each rate in turn to see what the difference is worth on a real order.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do 24 brushes cost at the better per-brush price?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the better rate save on 24 brushes?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "A five-cent difference produced a dollar-scale saving.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Aiko's per-brush gap was $0.05. Explain how a difference that small becomes worth checking."
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner compares pack totals, write both of Aiko's options as a price for a single brush before any comparison is allowed.",
+  "extension": "Ask the learner how large an order would have to be before Aiko's better rate saves $5.00, and to justify the count.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u03-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u03-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

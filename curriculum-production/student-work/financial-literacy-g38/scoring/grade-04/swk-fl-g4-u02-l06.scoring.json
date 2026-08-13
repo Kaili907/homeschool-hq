@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u02-l06",
+  "lessonId": "ma-g4-financial-literacy-u02-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Reasoning about workplace responsibility",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Ravi's missed shifts as unimportant because the books balanced."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The problem is named for Ravi but the cost to the covering teammate is not."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names the missed commitment and the load it moved onto the teammate who covered, treating the balanced books as beside the point."
+          }
+        ]
+      },
+      {
+        "dimension": "Raising an issue fairly",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "Ravi's response is an accusation or a demand for punishment."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Ravi says something but the wording would likely start an argument rather than a fix."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response gives Ravi wording that describes what happened, names the effect, and leaves room for the other person to explain or fix it."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Distinguishes the agreed responsibility from what was actually done.",
+      "Names the teammate who absorbed the extra work.",
+      "Proposes wording that is direct without being an accusation.",
+      "Explains why a balanced result does not settle the fairness question."
+    ]
+  }
+}

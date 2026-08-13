@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u04-l06",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Credit and Borrowing",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: predatory lending and scams",
+    "focus": "predatory lending and scams"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4 foundations"
+  ],
+  "objective": "Learners identify the features that make an invented lending offer predatory and decide how to respond to pressure to sign.",
+  "scenario": "Bram is an invented seventh grader studying a pretend offer: cash today, no credit check, fees described only in small print, an in-person signature required within 24 hours, and a clause allowing the lender to take repayment directly from a pay account. All terms are invented for study.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "This offer is invented for study; never share real account details or sign anything under time pressure."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Go through Bram's invented offer feature by feature. Some features are conveniences and some transfer risk to the borrower. Sort them before judging the offer as a whole.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which features of Bram's invented offer transfer risk to the borrower, and how does each one do it?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Write what someone facing Bram's offer should do, including what to ask for in writing and what the 24-hour deadline should tell them.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should the borrower do, what should they demand in writing, and what does the deadline signal?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "The offer is aimed at people who have been refused elsewhere.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why does an offer like this target people with few options, and what does that imply about the terms?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner is drawn to the speed of the offer, ask what the lender gains from each feature in Bram's list, and rebuild the judgement from those answers.",
+  "extension": "Ask the learner to write the three questions someone should ask before signing any offer like Bram's.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u04-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u04-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

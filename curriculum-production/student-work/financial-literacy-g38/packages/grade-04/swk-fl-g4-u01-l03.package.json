@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u01-l03",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Money Choices and Tradeoffs",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: what a choice costs us",
+    "focus": "what a choice costs us"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 1 — choices, scarcity, and tradeoffs"
+  ],
+  "objective": "Learners compare two competing invented plans of equal appeal, compute what each leaves behind, and attach a number to what was given up.",
+  "scenario": "Priyanka is a made-up fourth grader with $40.00 of pretend birthday money. Plan A is a $28.00 invented show ticket. Plan B is a $19.50 art book plus a $9.00 lunch with a friend. She can do only one plan.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Priyanka's Plan B, which has two invented parts.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Plan B cost in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Put Priyanka's two plans side by side, then work out what each one leaves from her $40.00.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Plan B cost than Plan A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $40.00 is left under Plan A?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Priyanka chooses Plan A and gives up Plan B entirely.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much would have been left under Plan B?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the value of the art book Priyanka gave up by choosing Plan A?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The plans cost almost the same but bought different things.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name what Priyanka gave up by choosing the show, and explain why the cost of a choice is more than the money she handed over."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner reports only the money spent, write both plans on cards, remove the unchosen card from the table, and ask the learner to read aloud everything that left with it before writing the cost sentence.",
+  "extension": "Ask the learner to design a Plan C under $40.00 that Priyanka would find harder to give up than either existing plan, and to justify it.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u01-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u01-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

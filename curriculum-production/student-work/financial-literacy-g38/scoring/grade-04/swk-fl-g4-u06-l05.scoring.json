@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u06-l05",
+  "lessonId": "ma-g4-financial-literacy-u06-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What were Zoya's actual total sales?",
+        "answer": "$36.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(4.50 x 8) = 36.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 450
+            },
+            "times": 8
+          },
+          "trace": "(4.50 x 8) = 36.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "By how much is Zoya's record off?",
+        "answer": "$0.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((4.50 x 8) - 35.50) = 0.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 450
+              },
+              "times": 8
+            },
+            "less": {
+              "op": "money",
+              "cents": 3550
+            }
+          },
+          "trace": "((4.50 x 8) - 35.50) = 0.50"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What does Zoya keep after costs, using the correct sales figure?",
+        "answer": "$14.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((4.50 x 8) - 22.00) = 14.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 450
+              },
+              "times": 8
+            },
+            "less": {
+              "op": "money",
+              "cents": 2200
+            }
+          },
+          "trace": "((4.50 x 8) - 22.00) = 14.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What are Zoya's total sales across both days?",
+        "answer": "$49.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(4.50 x 11) = 49.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 450
+            },
+            "times": 11
+          },
+          "trace": "(4.50 x 11) = 49.50"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What does she keep across both days after the $22.00 of costs?",
+        "answer": "$27.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((4.50 x 11) - 22.00) = 27.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 450
+              },
+              "times": 11
+            },
+            "less": {
+              "op": "money",
+              "cents": 2200
+            }
+          },
+          "trace": "((4.50 x 11) - 22.00) = 27.50"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Purpose of record keeping",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Zoya's records as unnecessary paperwork."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Records are called useful for Zoya but no specific use is named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names something Zoya's records make possible, such as catching an error, tracking which day sold better, or proving what was taken in."
+          }
+        ]
+      }
+    ]
+  }
+}

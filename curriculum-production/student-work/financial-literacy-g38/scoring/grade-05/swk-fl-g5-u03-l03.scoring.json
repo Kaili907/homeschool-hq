@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u03-l03",
+  "lessonId": "ma-g5-financial-literacy-u03-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much simulated tax is added?",
+        "answer": "$15.60",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6.5% of 240.00) = 15.60. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 24000
+            },
+            "bps": 650,
+            "round": "exact"
+          },
+          "trace": "(6.5% of 240.00) = 15.60"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the total due on the $240.00 subtotal?",
+        "answer": "$255.60",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(240.00 + (6.5% of 240.00)) = 255.60. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 24000
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 24000
+                },
+                "bps": 650,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "(240.00 + (6.5% of 240.00)) = 255.60"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the total due on an $80.00 subtotal?",
+        "answer": "$85.20",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(80.00 + (6.5% of 80.00)) = 85.20. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 8000
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 8000
+                },
+                "bps": 650,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "(80.00 + (6.5% of 80.00)) = 85.20"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the total due on a $282.00 subtotal?",
+        "answer": "$300.33",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(282.00 + (6.5% of 282.00)) = 300.33. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 28200
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 28200
+                },
+                "bps": 650,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "(282.00 + (6.5% of 282.00)) = 300.33"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "Can Lior cover that with $300.00?",
+        "answer": "No, the total is over",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare 300.00 with (282.00 + (6.5% of 282.00)) = No, the total is over. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "money",
+              "cents": 30000
+            },
+            "right": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 28200
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 28200
+                  },
+                  "bps": 650,
+                  "round": "exact"
+                }
+              ]
+            },
+            "whenLess": "No, the total is over",
+            "whenEqual": "It comes out exactly even",
+            "whenGreater": "Yes, with money left"
+          },
+          "trace": "compare 300.00 with (282.00 + (6.5% of 282.00)) = No, the total is over"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Planning for tax before the register",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Lior's shelf subtotal as the amount payable."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says to remember tax but offers no usable rule."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response gives Lior a workable rule, such as keeping the subtotal a set amount below the limit or adding roughly seven cents per dollar as a running estimate."
+          }
+        ]
+      }
+    ]
+  }
+}

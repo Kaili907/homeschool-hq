@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u02-l05",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Earning, Work, and Value",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: unpaid family and community work",
+    "focus": "unpaid family and community work"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 2 — earning, work, and enterprise"
+  ],
+  "objective": "Learners quantify invented unpaid volunteer time and translate it into what the same work would have cost at a stated pretend rate.",
+  "scenario": "Grace is a made-up fourth grader recording a pretend community clean-up. Three invented volunteers each work 4 hours. If the same work had been paid, the invented rate would have been $6.00 an hour. No one is actually paid.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Add up the invented volunteer hours: 3 people working 4 hours each.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many volunteer hours went into the clean-up?",
+          "unit": "hours"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now put a pretend price on those hours at $6.00 each, and compare that with what the clean-up actually cost in money.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would 12 hours have cost at $6.00 an hour?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "The clean-up spent $0.00 on wages. How much value did the volunteers contribute?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "A fourth invented volunteer joins for 4 hours, and the group also spends $15.00 on bags and gloves.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the four volunteers' hours be worth at $6.00 an hour?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is the volunteer value than the $15.00 spent on supplies?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "None of that value appears on a receipt.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Grace's clean-up cost $15.00 on paper. Why is that number a poor description of what the day was worth?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner multiplies by the number of people instead of the hours, build the hours total first as its own labelled figure for Grace, then apply the rate to that single number.",
+  "extension": "Ask the learner what other unpaid contributions a clean-up needs that even Grace's hour count would miss.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u02-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u02-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

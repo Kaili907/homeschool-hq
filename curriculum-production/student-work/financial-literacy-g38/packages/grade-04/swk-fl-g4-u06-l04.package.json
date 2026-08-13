@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u06-l04",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "Simulated Marketplace Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: telling customers the truth",
+    "focus": "telling customers the truth"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 6 — simulated marketplace capstone"
+  ],
+  "objective": "Learners judge whether invented product claims are honest, correct the ones that are not, and explain what a customer is owed.",
+  "scenario": "Wren is an invented fourth grader writing labels for a pretend market stall. The draft labels say the candles burn forever, the soap is approved by doctors, and the jam is made with fruit. Only the last claim is true, and none of the products is real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Take Wren's three invented labels one at a time. One is impossible, one claims an approval nobody gave, and one is plain fact. Sort them before rewriting anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which of Wren's three claims is honest, and what is wrong with each of the other two?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Rewrite Wren's two problem labels so a customer could rely on them. Keep them appealing; a true label can still sell.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Write honest versions of Wren's two problem labels and explain what you changed in each."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "One label claimed an approval that was never given.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why is inventing an approval worse than simply exaggerating how good something is?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner keeps a claim, ask what would happen if a customer tested it in front of Wren's stall, and revise from that answer.",
+  "extension": "Ask the learner to add one true detail to Wren's jam label that would genuinely help a customer choose.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u06-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u06-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

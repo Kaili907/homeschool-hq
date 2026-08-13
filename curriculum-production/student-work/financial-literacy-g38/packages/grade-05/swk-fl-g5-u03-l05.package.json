@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u03-l05",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Budgeting",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: simple budgets",
+    "focus": "simple budgets"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2 foundations",
+    "PF3 foundations"
+  ],
+  "objective": "Learners construct a simple simulated budget, verify it against invented income, and test the effect of an unplanned cost on the balance.",
+  "scenario": "Kenji is a made-up fifth grader building a pretend budget from $250.00 of simulated monthly income. His invented categories are $80.00 for food, $45.50 for transport, $32.25 for supplies, and $50.00 for saving.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Kenji's four invented budget categories.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Kenji's planned month come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Check Kenji's plan against the $250.00 of simulated income and state what the leftover represents.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $250.00 is unallocated?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "How does the planned month sit against Kenji's income?",
+          "choices": [
+            "Inside his income",
+            "Exactly at his income",
+            "Over his income"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "An unplanned invented $55.00 dental cost arrives, and Kenji wants to protect the $50.00 saving category.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the month cost with the dental cost added?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much must be cut from the other categories to stay inside $250.00?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The unallocated money absorbed most, but not all, of the shock.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Kenji had $42.25 unallocated and still had to cut. What does that suggest about how much a budget should leave unassigned?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner reworks every category, write Kenji's new total and his income on one line and let the subtraction give the required cut directly.",
+  "extension": "Ask the learner to rebuild Kenji's month with a dedicated unexpected-costs category, and to justify the amount they set aside.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u03-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u03-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

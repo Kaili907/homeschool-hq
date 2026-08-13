@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u04-l06",
+  "lessonId": "ma-g4-financial-literacy-u04-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Choosing a trusted adult",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response sends Esther to a classmate or to someone online."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An adult is chosen for Esther but no reason is given for that choice."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response chooses an adult with responsibility for Esther's club or household and explains that they can both act on the problem and keep her safe."
+          }
+        ]
+      },
+      {
+        "dimension": "Reporting what was observed",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "Esther's report names a culprit or invents details beyond what she saw."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Esther reports the problem but mixes observation with guessing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has Esther describe only what she observed about the record and the box, leaving the explanation to the adult."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names an adult with actual responsibility rather than a peer.",
+      "Keeps the report to observed facts about the invented money box.",
+      "Avoids accusing any named person.",
+      "Reassures Esther that reporting an observation is not an admission of fault."
+    ]
+  }
+}

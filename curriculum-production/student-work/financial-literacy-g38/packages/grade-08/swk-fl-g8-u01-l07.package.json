@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u01-l07",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income",
+    "dayInUnit": 7,
+    "phase": "Investigation or close reading",
+    "title": "Investigation or close reading: career and education pathways",
+    "focus": "career and education pathways"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "objective": "Learners evaluate the quality of invented sources about a career pathway and decide what evidence would justify a decision.",
+  "scenario": "Greta is an invented eighth grader researching a pretend pathway. Her three invented sources are a training provider's own brochure promising high placement, a public statistics table with no year given, and a single interview with one worker who loves the job. All sources are invented for study.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Assess each of Greta's three invented sources in turn: who produced it, what interest they have, and what it can and cannot establish. Keep the assessment separate from whether the claims sound plausible.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What is the main weakness of each of Greta's three sources, and who benefits from each being believed?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Specify what evidence Greta would need before committing to the pathway, and how she could obtain it from sources with different interests.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What evidence would justify Greta's decision, and where could each piece come from?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "One source was a single person's experience.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why is one worker's enthusiasm useful evidence about some questions and useless about others?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner accepts the brochure, ask what the provider gains from each claim in Greta's set, and rebuild the assessment from those answers.",
+  "extension": "Ask the learner to write three questions Greta should put to the training provider that the brochure does not answer.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u01-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u01-l07",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

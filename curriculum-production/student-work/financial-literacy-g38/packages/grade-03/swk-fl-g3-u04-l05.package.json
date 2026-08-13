@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u04-l05",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Saving for a Goal",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: waiting is hard and normal",
+    "focus": "waiting is hard and normal"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 4 — saving and goals"
+  ],
+  "objective": "Learners describe what waiting for a savings goal actually feels like and choose a strategy for staying with a goal, without treating the difficulty as a personal failing.",
+  "scenario": "Sofia is a made-up third grader four weeks into saving for an invented $9.00 board game. Her pretend jar is over halfway full, a friend just bought the same game, and she is tired of waiting. Everything here is invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Talk through Sofia's week four. The jar is more than half full, the goal has not moved, and the waiting feels harder now than it did in week one. Describe the feeling before deciding anything about it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Why does waiting feel harder for Sofia in week four than it did in week one?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Sofia wants to keep going but needs something concrete to help. Write one strategy she could actually use this week, and say what makes it likely to work for her rather than just sounding good.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What is one thing Sofia could do this week to make waiting easier, and why would it help?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Sofia's friend already has the game.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What would you say to Sofia about her friend already having the game?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner offers only \"be patient\", ask what would let Sofia see progress between now and the goal, and take one concrete idea before any advice is written down.",
+  "extension": "Ask the learner to design a checkpoint reward for Sofia that does not spend any of the jar, and explain why it does not slow the goal.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u04-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u04-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

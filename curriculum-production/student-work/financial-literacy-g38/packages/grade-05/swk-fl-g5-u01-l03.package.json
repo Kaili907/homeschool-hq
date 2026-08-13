@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u01-l03",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Money, Choices, and Values",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: money as a tool",
+    "focus": "money as a tool"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations",
+    "Grade 5 economics connections"
+  ],
+  "objective": "Learners use money as a common measure by converting invented bulk prices to per-item prices and applying the better rate to a larger order.",
+  "scenario": "Tomo is a made-up fifth grader ordering supplies for a pretend club. One invented option is 12 notebooks for $8.40; another is 20 of the same notebooks for $12.00. The club needs 24 notebooks.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Convert Tomo's 12-for-$8.40 option into a price for one notebook.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per notebook in the 12-pack?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Do the same with Tomo's 20-for-$12.00 option, then compare the two per-notebook prices instead of the pack prices.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per notebook in the 20-pack?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which option gives Tomo the lower price per notebook?",
+          "choices": [
+            "The 12-pack",
+            "The 20-pack",
+            "They are equal per notebook"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Tomo orders all 24 notebooks at whichever per-notebook price is better, then compares that with ordering all 24 at the worse rate.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do 24 notebooks cost at the better per-notebook price?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does that save against 24 at the higher per-notebook price?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Money made two different-sized packs comparable.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Tomo could not compare a 12-pack with a 20-pack directly. What job did money do here that counting notebooks could not?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner compares totals only, have them write both of Tomo's options as a price for exactly one notebook before any comparison is spoken aloud.",
+  "extension": "Ask the learner what a 15-notebook pack would need to cost to beat Tomo's best per-notebook price.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u01-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u01-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

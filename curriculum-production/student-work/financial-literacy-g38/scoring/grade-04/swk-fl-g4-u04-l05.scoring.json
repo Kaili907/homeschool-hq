@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u04-l05",
+  "lessonId": "ma-g4-financial-literacy-u04-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Sorting private from shareable information",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response would have Imani fill in the card number or password."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The right fields are left blank by Imani but no common feature is identified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response leaves Imani's card number and password blank and identifies that both unlock access to money or accounts, unlike a nickname or a goal."
+          }
+        ]
+      },
+      {
+        "dimension": "Acting on the decision",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "Imani is left with no way to raise the problem with anyone."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says Imani should refuse but offers nothing she could actually say."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response gives Imani wording she could use and routes the question to a guardian or trusted adult rather than to the club organiser alone."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies the card number and the password as the fields to leave blank.",
+      "Names access to money or accounts as what those fields have in common.",
+      "Supplies wording Imani could actually use.",
+      "Involves a guardian or trusted adult in the decision."
+    ]
+  }
+}

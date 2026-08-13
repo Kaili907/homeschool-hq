@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u02-l04",
+  "lessonId": "ma-g8-financial-literacy-u02-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Identifying behavioural mechanisms",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response judges Nikolai's products rather than naming any mechanism."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One mechanism is named for Nikolai but the others are described only as pushy."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names a distinct mechanism for each of Nikolai's techniques, such as manufactured urgency, default bias, and social proof, and explains how each operates."
+          }
+        ]
+      },
+      {
+        "dimension": "Distinguishing persuasion from removed choice",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats all three of Nikolai's techniques as equally fine or equally wrong."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A ranking is given for Nikolai but the justification does not turn on choice."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response ranks Nikolai's techniques with a justification grounded in whether the shopper retains a real decision, singling out the pre-selected default."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names urgency, default bias, and social proof as distinct mechanisms.",
+      "Explains why a default changes the outcome of inaction.",
+      "Produces a ranking with a stated principle behind it.",
+      "Separates the technique from the quality of the product."
+    ]
+  }
+}

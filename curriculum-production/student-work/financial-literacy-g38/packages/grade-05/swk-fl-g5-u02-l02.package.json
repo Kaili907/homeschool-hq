@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u02-l02",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Earning and Work",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: skills and education",
+    "focus": "skills and education"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1 foundations"
+  ],
+  "objective": "Learners quantify the return on an invented training cost by computing the pay difference it creates and the time needed to recover the outlay.",
+  "scenario": "Ngozi is an invented fifth grader studying a pretend training decision. An invented certificate costs $120.00 and raises a simulated rate from $15.00 to $18.00 an hour, with 10 hours of work a week. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Work out a 10-hour week at Ngozi's untrained invented rate of $15.00.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does a 10-hour week pay before training?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Work out the same 10-hour week at the trained rate of $18.00, then isolate the weekly gain the training produces.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does a 10-hour week pay after training?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the weekly gain from the training?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The invented $120.00 certificate has to be paid for out of that weekly gain.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole weeks of the gain repay the $120.00 certificate?",
+          "unit": "weeks"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much extra does the gain produce over 12 weeks, beyond the certificate cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The payback assumed the hours stay at 10 a week.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name two assumptions in this invented calculation that could fail, and say what each would do to the payback time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner divides the certificate cost by the hourly rate, restate the question as how many $30.00 weekly gains fit inside $120.00 and count the steps before dividing.",
+  "extension": "Ask the learner what the certificate could cost at most for Ngozi to recover it within 3 weeks, and to justify the figure.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u02-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u02-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

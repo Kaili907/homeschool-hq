@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u03-l01",
+  "lessonId": "ma-g8-financial-literacy-u03-l01",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the net cash flow in month one?",
+        "answer": "-$170.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(3,450.00 - 3,620.00) = -170.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. A negative result means outflows exceeded inflows and the gap had to be met from savings or credit.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 345000
+            },
+            "less": {
+              "op": "money",
+              "cents": 362000
+            }
+          },
+          "trace": "(3,450.00 - 3,620.00) = -170.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the net cash flow in month two?",
+        "answer": "$280.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(3,900.00 - 3,620.00) = 280.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 390000
+            },
+            "less": {
+              "op": "money",
+              "cents": 362000
+            }
+          },
+          "trace": "(3,900.00 - 3,620.00) = 280.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the combined position across both months?",
+        "answer": "$110.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((3,450.00 - 3,620.00) + (3,900.00 - 3,620.00)) = 110.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 345000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 362000
+                }
+              },
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 390000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 362000
+                }
+              }
+            ]
+          },
+          "trace": "((3,450.00 - 3,620.00) + (3,900.00 - 3,620.00)) = 110.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the net cash flow in month three?",
+        "answer": "-$320.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(3,300.00 - 3,620.00) = -320.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 330000
+            },
+            "less": {
+              "op": "money",
+              "cents": 362000
+            }
+          },
+          "trace": "(3,300.00 - 3,620.00) = -320.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What is the combined position across all three months?",
+        "answer": "-$210.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((3,450.00 - 3,620.00) + (3,900.00 - 3,620.00) + (3,300.00 - 3,620.00)) = -210.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 345000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 362000
+                }
+              },
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 390000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 362000
+                }
+              },
+              {
+                "op": "diff",
+                "from": {
+                  "op": "money",
+                  "cents": 330000
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 362000
+                }
+              }
+            ]
+          },
+          "trace": "((3,450.00 - 3,620.00) + (3,900.00 - 3,620.00) + (3,300.00 - 3,620.00)) = -210.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing a recurring deficit",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response blames a single weak month in Ulric's statement."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Variable inflows are noted for Ulric but the constant outflow level is not examined."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies Ulric's outflow level as fixed against variable inflows, and argues that adjusting outflows or building a buffer is more reliable than counting on strong months."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u07-l04",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes and Financial Plan Capstone",
+    "dayInUnit": 4,
+    "phase": "Independent application A",
+    "title": "Independent application A: public goods and policy tradeoffs",
+    "focus": "public goods and policy tradeoffs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7",
+    "PF1–PF7 synthesis"
+  ],
+  "objective": "Learners weigh a policy tradeoff over an invented public good, identifying who gains and who bears the cost.",
+  "scenario": "Malachy is an invented eighth grader studying a pretend proposal: fund a new community clinic by raising a local tax, by cutting an existing library service, or by charging users a fee. All options are invented for discussion.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Work through Malachy's three invented funding options. For each, identify who pays, who benefits, and who might be excluded.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "For each of Malachy's three options, who pays and who could end up excluded from the clinic?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Recommend one of Malachy's options and defend it against the strongest objection, taking seriously the interests of those who lose under your choice.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Which option should Malachy's community choose, and how does your answer address those who bear the cost?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "A user fee sounds like it charges only those who benefit.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why can a user fee for a clinic produce an outcome the community did not intend?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner lists options without deciding, ask which group they are willing to disadvantage in Malachy's case and why, then build the recommendation from that.",
+  "extension": "Ask the learner to design a fourth option for Malachy's community that spreads the cost differently, and to name its drawback.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u07-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u07-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

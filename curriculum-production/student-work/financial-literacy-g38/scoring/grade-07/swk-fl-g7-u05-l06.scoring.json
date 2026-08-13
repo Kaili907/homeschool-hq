@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u05-l06",
+  "lessonId": "ma-g7-financial-literacy-u05-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Distinguishing evidence from attack",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Yusra's verification-code text as a legitimate bank contact."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The text is doubted for Yusra but no distinguishing feature is named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies the code request in Yusra's case as the attack, and explains that a genuine institution does not ask an incoming contact to supply a verification code."
+          }
+        ]
+      },
+      {
+        "dimension": "Sequencing the response",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "Actions are listed for Yusra with no ordering or reasoning."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An order is given for Yusra but a key step, such as contacting the institution independently, is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response orders Yusra's actions sensibly, beginning with contacting the institution through an independently obtained number, and states that codes and passwords are never shared."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names the verification-code request as the attack.",
+      "Contacts the institution through an independently obtained channel.",
+      "States that codes and passwords are never shared with incoming contacts.",
+      "Involves a trusted adult and keeps a record of the unfamiliar charge."
+    ]
+  }
+}

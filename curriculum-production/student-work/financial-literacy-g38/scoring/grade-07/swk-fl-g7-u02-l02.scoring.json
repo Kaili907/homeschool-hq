@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u02-l02",
+  "lessonId": "ma-g7-financial-literacy-u02-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the price per 100 grams in the 900-gram package?",
+        "answer": "$0.60",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5.40 / 9) = 0.60. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "money",
+              "cents": 540
+            },
+            "by": 9,
+            "round": "exact"
+          },
+          "trace": "(5.40 / 9) = 0.60"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the price per 100 grams in the 1,500-gram package?",
+        "answer": "$0.55",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(8.25 / 15) = 0.55. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "money",
+              "cents": 825
+            },
+            "by": 15,
+            "round": "exact"
+          },
+          "trace": "(8.25 / 15) = 0.55"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "Which package is the better value per 100 grams?",
+        "answer": "The 1,500-gram package",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare (8.25 / 15) with (5.40 / 9) = The 1,500-gram package. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "divide",
+              "of": {
+                "op": "money",
+                "cents": 825
+              },
+              "by": 15,
+              "round": "exact"
+            },
+            "right": {
+              "op": "divide",
+              "of": {
+                "op": "money",
+                "cents": 540
+              },
+              "by": 9,
+              "round": "exact"
+            },
+            "whenLess": "The 1,500-gram package",
+            "whenEqual": "They are equal per 100 grams",
+            "whenGreater": "The 900-gram package"
+          },
+          "trace": "compare (8.25 / 15) with (5.40 / 9) = The 1,500-gram package"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What would 4,500 grams cost at the better rate?",
+        "answer": "$24.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((8.25 / 15) x 45) = 24.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "divide",
+              "of": {
+                "op": "money",
+                "cents": 825
+              },
+              "by": 15,
+              "round": "exact"
+            },
+            "times": 45
+          },
+          "trace": "((8.25 / 15) x 45) = 24.75"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much does the better rate save over 4,500 grams?",
+        "answer": "$2.25",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((5.40 / 9) x 45) - ((8.25 / 15) x 45)) = 2.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "divide",
+                "of": {
+                  "op": "money",
+                  "cents": 540
+                },
+                "by": 9,
+                "round": "exact"
+              },
+              "times": 45
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "divide",
+                "of": {
+                  "op": "money",
+                  "cents": 825
+                },
+                "by": 15,
+                "round": "exact"
+              },
+              "times": 45
+            }
+          },
+          "trace": "(((5.40 / 9) x 45) - ((8.25 / 15) x 45)) = 2.25"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying and limiting unit-price reasoning",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats the lower unit price as always correct for Hattie."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A limitation is gestured at for Hattie but not tied to waste, storage, or cash on hand."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names a concrete situation for Hattie, such as spoilage, limited storage, or not having $8.25 available, where the lower unit price is the wrong criterion."
+          }
+        ]
+      }
+    ]
+  }
+}

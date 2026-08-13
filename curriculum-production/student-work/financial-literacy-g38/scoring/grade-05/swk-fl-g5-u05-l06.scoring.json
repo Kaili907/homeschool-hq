@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u05-l06",
+  "lessonId": "ma-g5-financial-literacy-u05-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Analysing scam structure",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response judges only whether the delivery story sounds true."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One element is identified for Bilal but the role of the small amount is missed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Bilal's message pairs a plausible story with urgency and a deliberately small fee, because a small amount lowers resistance to entering card details."
+          }
+        ]
+      },
+      {
+        "dimension": "Verifying without engaging",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has Bilal use the link or reply to the message."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Bilal avoids the link but no independent way to check is offered."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has Bilal ignore the link entirely and verify through an independently found channel, with a trusted adult involved."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names urgency, plausibility, and the small amount as deliberate design.",
+      "Explains that card details, not the fee, are the actual target.",
+      "Verifies through a channel not supplied by the message.",
+      "Involves a trusted adult before any action."
+    ]
+  }
+}

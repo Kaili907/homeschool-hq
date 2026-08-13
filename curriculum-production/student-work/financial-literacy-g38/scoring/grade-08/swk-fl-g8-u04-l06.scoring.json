@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u04-l06",
+  "lessonId": "ma-g8-financial-literacy-u04-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Identifying a debt trap",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats the rollovers in Jocasta's case as ordinary borrowing."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The rollover cost is noted for Jocasta but the advertisement is not distinguished."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that each rollover in Jocasta's case adds fees without reducing principal, and identifies the upfront-fee advertisement as a second exploitation of the same distress."
+          }
+        ]
+      },
+      {
+        "dimension": "Finding legitimate help",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response sends the borrower to the advertised service or offers no route."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Help is suggested for Jocasta's borrower but no test of legitimacy is given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response routes Jocasta's borrower to help that does not demand payment upfront, and gives a test such as checking registration or seeking a non-profit adviser."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Explains that rollover fees do not reduce principal.",
+      "Flags the upfront-fee offer as a further predatory step.",
+      "Describes handling collection contact without ignoring it.",
+      "Frames the situation in terms of structure rather than personal failure."
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u06-l02",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "Marketplace Capstone",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: costs and pricing",
+    "focus": "costs and pricing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1-PF6 foundations"
+  ],
+  "objective": "Learners build a unit cost from invented components, set a price, and compute revenue, cost, and profit across a production run.",
+  "scenario": "Mateo is an invented fifth grader making pretend planters for a simulated market. Each invented planter uses $2.10 of clay, $1.75 of glaze, and $0.75 of packaging. He prices them at $8.00 and plans a run of 20.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Add Mateo's three invented component costs for one planter.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does one planter cost to make?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compare Mateo's $8.00 price with that unit cost, then scale the cost across the run of 20.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Mateo keep from one planter after materials?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the run of 20 cost in materials?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Work out the run's revenue and profit if everything sells, then rework the profit if only 14 sell.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the profit if all 20 planters sell?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the profit if only 14 sell?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Seventy percent of the units sold left under a third of the profit.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why Mateo's profit is so much more sensitive than his sales, and what that implies about how large a first run should be."
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner scales cost by units sold, label the two lines made and sold for Mateo and fill each from the correct count.",
+  "extension": "Ask the learner how many planters Mateo must sell to break even on a run of 20, and to show the reasoning.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u06-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u06-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

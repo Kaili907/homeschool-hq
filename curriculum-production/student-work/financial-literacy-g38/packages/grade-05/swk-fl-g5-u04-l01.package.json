@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u04-l01",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Saving and Banking Safety",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: short and long goals",
+    "focus": "short and long goals"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners convert invented goals into waiting times at a steady deposit and see how changing the deposit changes the horizon of a long goal.",
+  "scenario": "Zainab is a made-up fifth grader saving $15.00 of simulated money a week. Her invented near goal is a $90.00 telescope and her invented far goal is a $300.00 laptop. All amounts are invented for practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Work out how long Zainab's $90.00 telescope takes at $15.00 a week.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole weeks until the telescope?",
+          "unit": "weeks"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Do the same for Zainab's $300.00 laptop at the same weekly deposit, then compare the two waiting times.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole weeks until the laptop at $15.00 a week?",
+          "unit": "weeks"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many more weeks does the laptop take than the telescope?",
+          "unit": "weeks"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Zainab raises the weekly deposit to $25.00 and aims only at the laptop.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole weeks until the laptop at $25.00 a week?",
+          "unit": "weeks"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would Zainab have after 12 weeks at $25.00 a week?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Raising the deposit shortened the wait by a third.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Raising the deposit means giving up something now. How should Zainab decide whether the shorter wait is worth it?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner divides in the wrong direction, mark $15.00 jumps along a line to Zainab's goal and count the jumps before any division is written.",
+  "extension": "Ask the learner what weekly deposit would put Zainab's laptop within 10 weeks, and to justify the figure.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u04-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u04-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

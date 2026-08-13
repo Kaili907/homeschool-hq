@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u06-l06",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "Our Pretend Market Capstone",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: sharing, giving, and reflecting",
+    "focus": "sharing, giving, and reflecting"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 6 — simulated market capstone"
+  ],
+  "objective": "Learners split an invented market profit into giving, saving, and keeping shares, check that the shares add back to the whole, and compare two different splits.",
+  "scenario": "Jamal is an invented third grader deciding what to do with $6.00 of pretend profit from a classroom market. His first plan gives $2.00 to a made-up food drive, saves $2.00, and keeps $2.00 for himself.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Check Jamal's first plan by adding the three shares back together.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Jamal's three shares add up to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compare two of the shares in Jamal's first plan before he changes anything.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "In the first plan, how does Jamal's giving share compare with his keeping share?",
+          "choices": [
+            "He gives less than he keeps",
+            "They are the same",
+            "He gives more than he keeps"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $6.00 is not being kept for himself in the first plan?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Jamal writes a second plan: $3.00 to the food drive, $2.00 saved, and $1.00 kept.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "Do the second plan's shares still add up to the whole profit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Jamal give in the second plan than in the first?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Both of Jamal's plans use the whole $6.00.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Both plans add to $6.00, so neither is wrong. Which plan would you choose for Jamal, and what does your choice say about what you value?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's shares no longer add to the profit, have them lay six pretend dollar coins on the table and physically move each coin into a labelled pile, so the split is made from the actual whole.",
+  "extension": "Ask the learner to write a third split for Jamal that adds to $6.00 and gives the largest share to saving, then explain when that plan would make sense.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u06-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u06-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u03-l03",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving",
+    "dayInUnit": 3,
+    "phase": "Guided practice A",
+    "title": "Guided practice A: emergency funds",
+    "focus": "emergency funds"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "objective": "Learners size invented emergency funds at different coverage levels and compute the time each takes to build.",
+  "scenario": "Wilhelmina is a made-up eighth grader modelling a pretend emergency fund. Invented essential monthly costs are $2,750.00 and $450.00 a month can be set aside. She compares three-month and six-month coverage.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Size Wilhelmina's invented three-month emergency fund.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the three-month target?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Size the six-month target as well, then compute how long the three-month target takes at $450.00 a month.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the six-month target?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many whole months to reach the three-month target?",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compute how long the six-month target takes at the same rate, and what a raised set-aside of $700.00 would do to the three-month target.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole months to reach the six-month target at $450.00?",
+          "unit": "months"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many whole months to reach the three-month target at $700.00?",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The six-month target took over three years at the original rate.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Recommend a coverage target for Wilhelmina using the month counts, and explain what circumstances would justify aiming higher or lower."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner divides in the wrong direction, restate the question as how many $450.00 steps fit inside Wilhelmina's target and count before dividing.",
+  "extension": "Ask the learner what monthly set-aside would build Wilhelmina's six-month target inside two years, and to show the reasoning.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u03-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u03-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

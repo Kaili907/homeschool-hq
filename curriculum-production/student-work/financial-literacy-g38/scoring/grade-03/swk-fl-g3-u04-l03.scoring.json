@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u04-l03",
+  "lessonId": "ma-g3-financial-literacy-u04-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much has Nadia saved after week two?",
+        "answer": "$3.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.00 + 1.50) = 3.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 200
+              },
+              {
+                "op": "money",
+                "cents": 150
+              }
+            ]
+          },
+          "trace": "(2.00 + 1.50) = 3.50"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the total across all four weeks?",
+        "answer": "$9.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.00 + 1.50 + 2.50 + 3.00) = 9.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 200
+              },
+              {
+                "op": "money",
+                "cents": 150
+              },
+              {
+                "op": "money",
+                "cents": 250
+              },
+              {
+                "op": "money",
+                "cents": 300
+              }
+            ]
+          },
+          "trace": "(2.00 + 1.50 + 2.50 + 3.00) = 9.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What was Nadia's largest single week?",
+        "answer": "$3.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "larger of (2.00, 1.50, 2.50, 3.00) = 3.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "max",
+            "of": [
+              {
+                "op": "money",
+                "cents": 200
+              },
+              {
+                "op": "money",
+                "cents": 150
+              },
+              {
+                "op": "money",
+                "cents": 250
+              },
+              {
+                "op": "money",
+                "cents": 300
+              }
+            ]
+          },
+          "trace": "larger of (2.00, 1.50, 2.50, 3.00) = 3.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "After four weeks, how far is Nadia from the $10.00 art set?",
+        "answer": "$1.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(10.00 - (2.00 + 1.50 + 2.50 + 3.00)) = 1.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 1000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 200
+                },
+                {
+                  "op": "money",
+                  "cents": 150
+                },
+                {
+                  "op": "money",
+                  "cents": 250
+                },
+                {
+                  "op": "money",
+                  "cents": 300
+                }
+              ]
+            }
+          },
+          "trace": "(10.00 - (2.00 + 1.50 + 2.50 + 3.00)) = 1.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "After the fifth week of $2.00, how much is she past the $10.00 goal?",
+        "answer": "$1.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.00 + 1.50 + 2.50 + 3.00 + 2.00) - 10.00) = 1.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 200
+                },
+                {
+                  "op": "money",
+                  "cents": 150
+                },
+                {
+                  "op": "money",
+                  "cents": 250
+                },
+                {
+                  "op": "money",
+                  "cents": 300
+                },
+                {
+                  "op": "money",
+                  "cents": 200
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 1000
+            }
+          },
+          "trace": "((2.00 + 1.50 + 2.50 + 3.00 + 2.00) - 10.00) = 1.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reading a savings record",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response describes Nadia's chart without naming anything it lets her see."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The chart is called helpful for Nadia but no specific piece of information is named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names something Nadia can read straight off the chart, such as which week was strongest or how far the running total is from $10.00."
+          }
+        ]
+      }
+    ]
+  }
+}

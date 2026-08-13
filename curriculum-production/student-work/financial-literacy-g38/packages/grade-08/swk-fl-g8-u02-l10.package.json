@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u02-l10",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u02-l10",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services",
+    "dayInUnit": 10,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: advertising and behavioral influence",
+    "focus": "advertising and behavioral influence"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "objective": "Learners quantify the cumulative cost of invented unplanned purchases and evaluate what a partial reduction would be worth.",
+  "scenario": "Thandiwe is an invented eighth grader tracking a pretend pattern: 3 unplanned purchases a month averaging $42.50 each, prompted by targeted advertising. All figures are invented for practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute Thandiwe's invented monthly total from 3 purchases at $42.50 each.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the unplanned purchases cost each month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Project the pattern across a simulated year, then compute what halving the number of purchases would save.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the pattern cost across 12 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would the annual cost be at 1 such purchase a month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Quantify the annual saving from the reduction and express it as a share of a monthly figure.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much would the reduction save across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is that saving per month on average?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "No single purchase looked significant.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why Thandiwe's pattern is invisible at the level of one purchase, and design a practical check that would surface it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner scales incorrectly, compute Thandiwe's monthly figure first and box it before any annual projection is attempted.",
+  "extension": "Ask the learner what the pattern would have to fall to for Thandiwe to save $1,200.00 a year, and to show the reasoning.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u02-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u02-l10",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

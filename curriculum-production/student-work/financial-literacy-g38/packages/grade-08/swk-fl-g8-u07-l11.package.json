@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u07-l11",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes and Financial Plan Capstone",
+    "dayInUnit": 11,
+    "phase": "Unit assessment",
+    "title": "Unit assessment: record keeping and deadlines",
+    "focus": "record keeping and deadlines"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7",
+    "PF1–PF7 synthesis"
+  ],
+  "objective": "Learners quantify the financial cost of missing records by computing the tax effect of claimable and unclaimable expenses.",
+  "scenario": "Tullia is an invented eighth grader completing a pretend assessment: $3,600.00 of invented deductible expenses across a simulated year, of which $900.00 has no supporting record. The invented tax rate is 22%. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute how much of Tullia's invented expenses can actually be supported by records.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the expenses is documented?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute the invented 22% tax effect of the documented expenses and of the full amount, keeping both figures.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax effect of the documented expenses?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would the tax effect have been with full records?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Quantify what Tullia's missing records cost, and project the same failure across three simulated years.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the missing records cost this year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would the same failure cost across three years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The lost benefit was smaller than the expenses themselves.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why Tullia's missing records cost $198.00 rather than $900.00, and design the minimum record-keeping habit that would prevent it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner reports the full expense as the loss, compute Tullia's two tax effects side by side and subtract before drawing any conclusion.",
+  "extension": "Ask the learner what level of missing records would cost Tullia over $300.00 in a year, and to show the reasoning.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u07-l11.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u07-l11",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u01-l06",
+  "lessonId": "ma-g4-financial-literacy-u01-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Explaining different priorities",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response ranks one of Nour's families as better with money."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Both of Nour's plans are accepted but no priority difference is identified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies what each of Nour's families put first and explains that different circumstances make different orderings reasonable."
+          }
+        ]
+      },
+      {
+        "dimension": "Speaking about money with dignity",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response suggests wording that shames or pities a family."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says to be nice without naming anything concrete to avoid."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names something specific to avoid saying, and offers a respectful alternative Nour could use in the classroom."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names a concrete priority in each of the two invented plans.",
+      "Attributes the difference to circumstances or values, not to skill or worth.",
+      "Identifies at least one specific comment to avoid.",
+      "Keeps the discussion on the invented families rather than on real classmates."
+    ]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u05-l01",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Borrowing, Giving, and Risk",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: borrowing and repayment",
+    "focus": "borrowing and repayment"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners model an invented repayment schedule, track the outstanding balance, and recompute the timeline after a missed payment.",
+  "scenario": "Rasheed is a made-up fifth grader modelling a pretend loan from an invented community fund: $240.00 borrowed, repaid at $20.00 a week, with no interest charged. Everything is invented for practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Work out how long Rasheed's repayment takes at $20.00 a week.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole weeks until the $240.00 is repaid?",
+          "unit": "weeks"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Stop partway, at the end of week 5, and work out both what Rasheed has paid and what he still owes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much has Rasheed repaid after 5 weeks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does he still owe after 5 weeks?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Rasheed misses week 6 entirely, paying nothing, then resumes $20.00 a week.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many more whole weeks at $20.00 clear the remaining balance?",
+          "unit": "weeks"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would Rasheed need to pay each week to finish in 5 weeks instead of 7?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "A missed week moved the finishing date but not the amount owed.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What should Rasheed tell the fund about the missed week, and when should he tell them?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner loses track of the balance, keep a two-column ledger of repaid and still owed for Rasheed, updating both after every week.",
+  "extension": "Ask the learner what steady weekly payment would have cleared Rasheed's loan in 10 weeks, and to justify it.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u05-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u05-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

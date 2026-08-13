@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u03-l03",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending Plans and Comparing",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: a simple simulated tax add-on",
+    "focus": "a simple simulated tax add-on"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 3 — spending plans and comparison"
+  ],
+  "objective": "Learners apply a stated simulated sales-tax percentage to an invented subtotal, find the total due, and see how the tax amount changes with the size of the purchase.",
+  "scenario": "Anjali is a made-up fourth grader at a pretend checkout in an invented town where the simulated sales tax is 6%. Her first invented subtotal is $40.00. The tax rate and the prices are made up for this practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Apply the invented 6% simulated tax to Anjali's $40.00 subtotal.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much simulated tax is added to the $40.00?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Add that tax to Anjali's subtotal to get the amount due, then run the same 6% on a smaller invented subtotal of $25.00.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total due on the $40.00 subtotal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much simulated tax is added to a $25.00 subtotal?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Anjali has $45.00 to spend, tax included, and is looking at a $43.00 invented subtotal.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total due on a $43.00 subtotal with 6% simulated tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Can Anjali cover that total with $45.00?",
+          "choices": [
+            "Yes, with money left",
+            "It comes out exactly even",
+            "No, she is short"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The shelf price was inside her budget; the total was not.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Anjali's $43.00 subtotal fitted her $45.00 but the checkout total did not. What should she do differently before choosing items?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner adds the tax rate as dollars, work the percentage on a $100.00 example for Anjali first, so six percent is anchored to six dollars per hundred before smaller subtotals are attempted.",
+  "extension": "Ask the learner what the largest subtotal is that Anjali could cover with $45.00 once 6% simulated tax is added, and how they narrowed it down.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u03-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u03-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

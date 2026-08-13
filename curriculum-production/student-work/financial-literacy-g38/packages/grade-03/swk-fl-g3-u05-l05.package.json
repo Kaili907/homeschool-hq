@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u05-l05",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Money Tools and Ads",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: asking a question before believing",
+    "focus": "asking a question before believing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 5 — money tools, privacy, and advertising"
+  ],
+  "objective": "Learners test an advertised savings claim against the actual invented prices, measure the gap between claim and reality, and scale that gap across several purchases.",
+  "scenario": "Rafi is a made-up third grader reading an invented flyer that promises: save $5.00 on every puzzle. The flyer's own small print shows the puzzles were $4.00 and are now $3.00. All figures are invented for this check.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Use the invented flyer's own two prices to find the real saving.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the real saving on one puzzle?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Put the flyer's claimed $5.00 saving beside the saving you just computed for Rafi.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much bigger is the claimed saving than the real one?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "How does the flyer's claim compare with what the prices show?",
+          "choices": [
+            "The claim is smaller than the real saving",
+            "The claim matches the real saving",
+            "The claim is bigger than the real saving"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Rafi's pretend club wants 3 puzzles, and the flyer promises its $5.00 saving on every one.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What saving would the flyer's claim add up to across 3 puzzles?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the real saving across 3 puzzles?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The flyer's own prices disagreed with the flyer's own headline.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What question should Rafi ask before believing a number printed in big letters?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner trusts the headline, cover the big print entirely and have the learner compute the saving from the small print first, then uncover the claim for comparison.",
+  "extension": "Ask the learner to write an honest headline for Rafi's flyer using the real numbers, and to say why the honest version is less exciting.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u05-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u05-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

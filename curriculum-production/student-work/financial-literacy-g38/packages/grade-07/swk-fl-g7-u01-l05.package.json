@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u01-l05",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Income, Skills, and Work Choices",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: entrepreneurship",
+    "focus": "entrepreneurship"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1 foundations"
+  ],
+  "objective": "Learners model an invented venture including fixed costs, computing contribution per unit, total profit, and the break-even volume.",
+  "scenario": "Dilan is a made-up seventh grader planning a pretend venture. Each invented unit costs $12.50 to make and sells for $22.00, with $150.00 of invented fixed costs for a stall and equipment hire. He plans to sell 40 units.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute what one of Dilan's invented units contributes after its own materials.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does one unit contribute after materials?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Scale revenue and material cost across the 40-unit plan, keeping them as separate figures.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the 40-unit run bring in?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do materials for 40 units cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Bring in the $150.00 of invented fixed costs, then find how many units are needed just to cover them.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Dilan's profit after materials and fixed costs?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many units must sell before the fixed costs are covered?",
+          "unit": "units"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The first fifteen units earned nothing at all.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what break-even means using Dilan's figures, and why a venture with high fixed costs is riskier than one without them."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner subtracts fixed costs per unit, keep Dilan's fixed costs as a single lump on its own line and subtract it once, after the run is totalled.",
+  "extension": "Ask the learner what price Dilan would need for break-even to fall to 10 units, and to show the reasoning.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u01-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u01-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

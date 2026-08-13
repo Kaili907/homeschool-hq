@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u03-l05",
+  "lessonId": "ma-g7-financial-literacy-u03-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much interest does the savings balance earn in a year?",
+        "answer": "$25.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1.25% of 2,000.00) = 25.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 200000
+            },
+            "bps": 125,
+            "round": "exact"
+          },
+          "trace": "(1.25% of 2,000.00) = 25.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What do 3 overdraft fees come to?",
+        "answer": "$102.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(34.00 x 3) = 102.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 3400
+            },
+            "times": 3
+          },
+          "trace": "(34.00 x 3) = 102.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What does a year of the unwaived monthly fee come to?",
+        "answer": "$60.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5.00 x 12) = 60.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 500
+            },
+            "times": 12
+          },
+          "trace": "(5.00 x 12) = 60.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What do the overdraft fees and monthly fees come to together?",
+        "answer": "$162.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((34.00 x 3) + (5.00 x 12)) = 162.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 3400
+                },
+                "times": 3
+              },
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 500
+                },
+                "times": 12
+              }
+            ]
+          },
+          "trace": "((34.00 x 3) + (5.00 x 12)) = 162.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much do those fees exceed the interest earned?",
+        "answer": "$137.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((34.00 x 3) + (5.00 x 12)) - (1.25% of 2,000.00)) = 137.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 3400
+                  },
+                  "times": 3
+                },
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 500
+                  },
+                  "times": 12
+                }
+              ]
+            },
+            "less": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 200000
+              },
+              "bps": 125,
+              "round": "exact"
+            }
+          },
+          "trace": "(((34.00 x 3) + (5.00 x 12)) - (1.25% of 2,000.00)) = 137.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Comparing fees against returns",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response focuses only on the interest rate in Wes's comparison."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Both fees and interest are computed for Wes but not compared as a decision."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response uses Wes's $137.00 gap to argue that avoidable fees outweigh the interest, and identifies which fee depends on behaviour and which on balance."
+          }
+        ]
+      }
+    ]
+  }
+}

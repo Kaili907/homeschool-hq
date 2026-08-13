@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u07-l01",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes and Financial Plan Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: purposes and types of taxes",
+    "focus": "purposes and types of taxes"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7",
+    "PF1–PF7 synthesis"
+  ],
+  "objective": "Learners analyse an invented public budget by category, verify the allocations, and reason about what taxes fund.",
+  "scenario": "Jolanta is a made-up eighth grader studying a pretend community budget of $200,000.00 in simulated funds: $90,000.00 for education, $45,000.00 for roads, $40,000.00 for safety, and $25,000.00 for parks. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Check that Jolanta's four invented allocations account for the entire budget.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the four allocations add up to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Identify Jolanta's largest allocation and compare it with the smallest.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the largest allocation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is it than the parks allocation?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "A proposed invented 8% budget cut applies to the whole budget, and Jolanta must find where it lands.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much would an 8% cut remove?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the whole cut fell on parks, what would remain of the parks allocation?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The cut is larger than most single categories can absorb.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Recommend how Jolanta's community should distribute the $16,000.00 cut, and defend the distribution against those who lose most."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner computes the cut from a single category, mark that the percentage applies to Jolanta's whole budget before any figure is written.",
+  "extension": "Ask the learner to distribute Jolanta's cut proportionally across all four categories and to state each new allocation.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u07-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u07-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u05-l03",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing",
+    "dayInUnit": 3,
+    "phase": "Guided practice A",
+    "title": "Guided practice A: diversification",
+    "focus": "diversification"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "objective": "Learners quantify how an invented loss affects a diversified holding compared with a concentrated one of equal value.",
+  "scenario": "Rasmus is a made-up eighth grader modelling $24,000.00 two ways: split evenly across four invented holdings of $6,000.00, or entirely in one of them. That holding falls 50%. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "These holdings and movements are invented and are not a recommendation about any real investment."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute the invented 50% fall on one of Rasmus's $6,000.00 holdings.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the falling holding lose in the split portfolio?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute what Rasmus's split portfolio is worth after the fall, and what the whole amount would lose if concentrated.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the split portfolio worth after the fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would the whole $24,000.00 lose if concentrated in that holding?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the two outcomes for Rasmus, using the same fall and the same starting value in both versions.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the concentrated portfolio worth after the fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much better off is the split portfolio?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Splitting reduced the damage without removing it.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain precisely what diversification protected against in Rasmus's model, and name a risk it cannot protect against."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies the fall to the whole portfolio in the split case, mark which single holding falls before applying any percentage for Rasmus.",
+  "extension": "Ask the learner what fall across all four of Rasmus's holdings would produce the same loss as the concentrated case.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u05-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u05-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

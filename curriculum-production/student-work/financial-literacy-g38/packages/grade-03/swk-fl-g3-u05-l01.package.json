@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u05-l01",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Money Tools and Ads",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: pretend cash, coins, and cards",
+    "focus": "pretend cash, coins, and cards"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 5 — money tools, privacy, and advertising"
+  ],
+  "objective": "Learners work out change from a pretend bill, then assemble a payment from mixed play coins and test whether the assembled payment covers the price.",
+  "scenario": "Yusuf is a made-up third grader at a pretend school store where a notebook set costs $4.35. He has one play $5.00 bill, three play $1.00 bills, and a handful of toy coins. Nothing here is real money.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Yusuf pays for the $4.35 notebook set with the play $5.00 bill.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much change should Yusuf get back?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now Yusuf tries to pay without the big bill, using three play $1.00 bills and five play quarters at $0.25 each. Build the payment before comparing it to the price.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Yusuf's coin-and-bill payment worth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Does that payment cover the $4.35 price?",
+          "choices": [
+            "Not enough",
+            "Exactly enough",
+            "More than enough"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Yusuf adds two play dimes at $0.10 each to the payment he already built.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the payment worth now?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much change comes back from that payment?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Yusuf paid the same price two different ways.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Yusuf paid $4.35 with a bill and with coins. What stayed the same about the two payments, and what changed?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner counts mixed coins by number rather than value, sort Yusuf's payment into piles of one coin type and count each pile in its own skip-count before combining the piles.",
+  "extension": "Ask the learner to build a third payment for Yusuf that covers $4.35 with the fewest play coins possible, and to explain the choice.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u05-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u05-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

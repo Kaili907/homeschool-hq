@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l07",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u07-l07",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes and Financial Plan Capstone",
+    "dayInUnit": 7,
+    "phase": "Investigation or close reading",
+    "title": "Investigation or close reading: purposes and types of taxes",
+    "focus": "purposes and types of taxes"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7",
+    "PF1–PF7 synthesis"
+  ],
+  "objective": "Learners compute tax under an invented flat structure and an invented graduated structure and compare the burden at two income levels.",
+  "scenario": "Perpetua is a made-up eighth grader comparing two pretend tax designs on monthly income. The flat design charges 10% of all income. The graduated design charges 5% on the first $3,000.00 and 20% on anything above. She tests incomes of $3,000.00 and $6,000.00. All rates are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute Perpetua's invented flat tax at both income levels.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the flat design charge on $6,000.00?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute Perpetua's graduated design on the $3,000.00 income, where only the lower band applies.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the graduated design charge on $3,000.00?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the flat design charge on $3,000.00?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compute the graduated design on $6,000.00, applying 5% to the first $3,000.00 and 20% to the rest.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the graduated design charge on $6,000.00?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more is that than the flat design at the same income?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The two designs swapped which earner they favoured.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Perpetua's four figures, describe how each design distributes the burden and argue for the one you find more defensible."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies the higher band rate to all income, mark the band boundary in Perpetua's design and compute each band separately.",
+  "extension": "Ask the learner at what income Perpetua's two designs would charge exactly the same, and to show the method.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u07-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u07-l07",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

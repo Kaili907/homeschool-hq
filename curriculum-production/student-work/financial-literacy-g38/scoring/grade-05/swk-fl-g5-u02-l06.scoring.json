@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u02-l06",
+  "lessonId": "ma-g5-financial-literacy-u02-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Taking responsibility for a noticed problem",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has Otis stay silent because the error was not his."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Otis reports the problem but no reason is given for why it is his to raise."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has Otis report the mismatch promptly and explains that noticing a problem creates a responsibility to raise it, independent of who caused it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about fairness to customers",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response ignores the undercharged customers entirely."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The customers are mentioned but no position is taken on what is owed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response takes a reasoned position on Otis's undercharged customers, weighing fairness to the shop against what customers were told at the point of sale."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "States the mismatch between the invented sign and the till.",
+      "Has Otis raise the issue with someone responsible for the shop.",
+      "Explains responsibility as following from noticing, not from causing.",
+      "Takes a defensible position on the undercharged customers."
+    ]
+  }
+}

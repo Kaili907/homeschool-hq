@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u05-l02",
+  "lessonId": "ma-g4-financial-literacy-u05-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Identifying persuasion techniques",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response judges Jonas's products rather than naming any technique."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One technique is named across Jonas's three advertisements but the others are not."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names a distinct technique for each of Jonas's advertisements, such as belonging, scarcity, and celebrity endorsement, and links each to a feeling."
+          }
+        ]
+      },
+      {
+        "dimension": "Separating technique from product quality",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats an effective advertisement as evidence of a good product."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The two are separated for Jonas but without explaining why they are independent."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response states that Jonas's advertisements say nothing about product quality, and offers a question that asks for facts instead."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names three distinct techniques across the invented advertisements.",
+      "Connects each technique to a feeling it targets.",
+      "Keeps effectiveness separate from product quality.",
+      "Offers a question that seeks checkable facts."
+    ]
+  }
+}

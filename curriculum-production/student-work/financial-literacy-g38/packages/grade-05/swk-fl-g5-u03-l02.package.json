@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u03-l02",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Budgeting",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: comparison shopping",
+    "focus": "comparison shopping"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2 foundations",
+    "PF3 foundations"
+  ],
+  "objective": "Learners total identical invented baskets at two pretend suppliers, find the overall difference, and locate which lines drive it.",
+  "scenario": "Neel is an invented fifth grader pricing the same pretend order at two made-up suppliers. The first quotes $24.75, $18.40, and $31.05. The second quotes $26.10, $16.95, and $30.20 for the identical items.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Neel's order at the first invented supplier.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the order cost at the first supplier?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Total the identical order at the second supplier, then compare the two totals rather than any single line.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the order cost at the second supplier?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much cheaper is the better total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Find where the difference actually comes from, line by line, in Neel's two quotes.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "On the first item, how much more does the second supplier charge?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "On the second and third items combined, how much less does the second supplier charge?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The cheaper supplier was dearer on one line.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Neel could split the order between suppliers. Work out whether that is worth doing and name a cost it would add that the quotes do not show."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares line by line and loses the thread, require both of Neel's column totals to be written and boxed before any line-level analysis.",
+  "extension": "Ask the learner what the second supplier would need to charge for the first item to make the two quotes identical.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u03-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u03-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

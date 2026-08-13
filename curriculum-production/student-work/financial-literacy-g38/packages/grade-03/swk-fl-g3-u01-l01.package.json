@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u01-l01",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Needs, Wants, and Choosing",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: what a need is",
+    "focus": "what a need is"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 1 — needs, wants, and choosing"
+  ],
+  "objective": "Learners sort a short list of invented items into needs and wants, add each group separately, and compare the two totals to see which group takes more of the pretend money.",
+  "scenario": "Nia is a made-up third grader packing for a pretend school week. Her invented list has four items with pretend prices: a school lunch for $3.00, warm socks for $4.00, a sticker sheet for $1.00, and a toy car for $2.00. Nothing on this sheet is a real purchase.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Two items on Nia's pretend list are needs: the school lunch at $3.00 and the warm socks at $4.00.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Nia's two needs cost together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "The other two items are wants: the sticker sheet at $1.00 and the toy car at $2.00. Add the wants the same way you added the needs, then put the two totals side by side.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Nia's two wants cost together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which group takes more of Nia's pretend money?",
+          "choices": [
+            "The needs cost more",
+            "The wants cost more",
+            "They cost the same"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The pretend weather report says rain all week, so Nia adds a raincoat for $6.00 to her needs. Her wants do not change.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Nia's three needs cost together now?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more do Nia's needs cost than her wants now?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about why the raincoat moved into the needs group.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Why is the raincoat a need for Nia during a rainy pretend week, when a sticker sheet is not?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner adds the needs and wants into one pile, put two labelled index cards on the table and physically place each pretend price card on the matching card before any addition happens, so the two totals are built separately and can be seen side by side.",
+  "extension": "Ask the learner to invent one more item for Nia priced under $5.00, place it in a group, and defend the placement with a reason about what happens without it.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u01-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u01-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

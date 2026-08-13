@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u02-l02",
+  "lessonId": "ma-g3-financial-literacy-u02-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the largest pretend day rate on Marisol's poster?",
+        "answer": "$9.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "larger of (8.00, 9.00, 7.00) = 9.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "max",
+            "of": [
+              {
+                "op": "money",
+                "cents": 800
+              },
+              {
+                "op": "money",
+                "cents": 900
+              },
+              {
+                "op": "money",
+                "cents": 700
+              }
+            ]
+          },
+          "trace": "larger of (8.00, 9.00, 7.00) = 9.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much more is the largest day rate than the smallest one?",
+        "answer": "$2.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(larger of (8.00, 9.00, 7.00) - smaller of (8.00, 9.00, 7.00)) = 2.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "max",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 800
+                },
+                {
+                  "op": "money",
+                  "cents": 900
+                },
+                {
+                  "op": "money",
+                  "cents": 700
+                }
+              ]
+            },
+            "less": {
+              "op": "min",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 800
+                },
+                {
+                  "op": "money",
+                  "cents": 900
+                },
+                {
+                  "op": "money",
+                  "cents": 700
+                }
+              ]
+            }
+          },
+          "trace": "(larger of (8.00, 9.00, 7.00) - smaller of (8.00, 9.00, 7.00)) = 2.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "Between the baker and the bus driver, who earns more in a pretend day?",
+        "answer": "The baker earns more",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare 8.00 with 7.00 = The baker earns more. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "money",
+              "cents": 800
+            },
+            "right": {
+              "op": "money",
+              "cents": 700
+            },
+            "whenLess": "The bus driver earns more",
+            "whenEqual": "They earn the same",
+            "whenGreater": "The baker earns more"
+          },
+          "trace": "compare 8.00 with 7.00 = The baker earns more"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What does the baker earn across two pretend days?",
+        "answer": "$16.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(8.00 x 2) = 16.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 800
+            },
+            "times": 2
+          },
+          "trace": "(8.00 x 2) = 16.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much more is that than the librarian's one pretend day?",
+        "answer": "$7.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((8.00 x 2) - 9.00) = 7.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 800
+              },
+              "times": 2
+            },
+            "less": {
+              "op": "money",
+              "cents": 900
+            }
+          },
+          "trace": "((8.00 x 2) - 9.00) = 7.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasons beyond pay",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response repeats a pay amount from Marisol's poster instead of naming another reason."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A non-pay reason is named for Marisol's town but stated so generally that it fits any job at all."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names a specific non-pay reason tied to one of Marisol's three jobs, such as enjoying baking or helping readers find books."
+          }
+        ]
+      }
+    ]
+  }
+}

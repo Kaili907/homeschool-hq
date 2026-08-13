@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l05",
+  "lessonId": "ma-g8-financial-literacy-u07-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Diagnosing record-keeping failures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats all three problems in Nadege's case as the same failure."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The problems are listed for Nadege but not differentiated by cost or reversibility."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response distinguishes Nadege's three problems by what each costs and identifies the lost evidence as the hardest to remedy afterwards."
+          }
+        ]
+      },
+      {
+        "dimension": "Designing a preventive system",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No system is designed for Nadege, or the design would not prevent any of the problems."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A system is proposed for Nadege but it addresses only one problem."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response designs a system for Nadege in which each part maps to one of the three problems, specifying what is kept, where, and for how long."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Separates the deadline failure from the evidence failures.",
+      "Identifies the single-copy document as the most fragile.",
+      "Specifies retention location and duration.",
+      "Maps each part of the system to a problem it prevents."
+    ]
+  }
+}

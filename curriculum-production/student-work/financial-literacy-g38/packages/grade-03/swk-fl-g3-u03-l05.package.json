@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u03-l05",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Comparing",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: checking the pretend total",
+    "focus": "checking the pretend total"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 3 — spending and comparing"
+  ],
+  "objective": "Learners re-add an invented total that was recorded incorrectly, measure the size of the recording error, and re-test the corrected plan when one more item is added.",
+  "scenario": "Talia is a made-up third grader who wrote down a pretend supply total of $9.30 for three invented items: paper $3.45, markers $2.85, and tape $2.90. She has $10.00 in pretend money. The error in her record is the point of this task.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Add Talia's three pretend prices yourself before comparing with what she recorded.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the correct total of Talia's three items?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Talia recorded $9.30. Put your total beside hers and measure the gap, then check the corrected total against her $10.00.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much is Talia's recorded total off?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Does the corrected total fit inside Talia's $10.00?",
+          "choices": [
+            "It fits",
+            "It comes out exactly even",
+            "It does not fit"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Talia adds an $0.85 glue stick to the corrected list, not to her old recorded total.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Talia's new corrected total with the glue stick?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far past her $10.00 does that go?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "A ten-cent error looked harmless at first.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Talia's error was only $0.10. Explain why checking a total still matters when the mistake is small."
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner cannot find where the ten cents went, re-add Talia's three prices in the reverse order and compare the two runs, so the disagreeing step is located rather than the whole sum being redone under the same habit.",
+  "extension": "Ask the learner to change exactly one of Talia's prices so the glue stick fits inside $10.00, and show both totals.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u03-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u03-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

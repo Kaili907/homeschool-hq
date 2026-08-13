@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u05-l04",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Borrowing, Giving, and Risk",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: giving and community support",
+    "focus": "giving and community support"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners apply a percentage allocation to an invented fundraising total and divide the remainder equally across invented recipients.",
+  "scenario": "Tiwa is an invented fifth grader whose pretend class raised $480.00 in simulated funds. The class agreed to send 15% to a made-up emergency reserve and split the rest equally among 4 invented local projects.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Take the agreed 15% out of Tiwa's invented $480.00 for the reserve.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much goes to the reserve?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Find what remains after the reserve, then split that remainder equally among Tiwa's 4 invented projects.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is left after the reserve?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does each project receive?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "A late invented donation lifts the total to $500.00, with the same two rules applied.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much now goes to the reserve?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does each project now receive?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The rule was written before the total was known.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Tiwa's class chose a percentage-and-split rule instead of fixed amounts. Give one advantage and one disadvantage of that choice."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner divides before taking the percentage, number Tiwa's two rules on the page and require the first result to be boxed before the second is begun.",
+  "extension": "Ask the learner what total Tiwa's class would need for each project to receive exactly $120.00, and to show the reasoning.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u05-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u05-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

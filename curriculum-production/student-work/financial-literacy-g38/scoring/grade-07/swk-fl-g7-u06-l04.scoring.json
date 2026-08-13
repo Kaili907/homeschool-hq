@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u06-l04",
+  "lessonId": "ma-g7-financial-literacy-u06-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much is given each month before any match?",
+        "answer": "$60.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(3% of 2,000.00) = 60.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 200000
+            },
+            "bps": 300,
+            "round": "exact"
+          },
+          "trace": "(3% of 2,000.00) = 60.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What reaches the cause each month with the match?",
+        "answer": "$120.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((3% of 2,000.00) x 2) = 120.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 200000
+              },
+              "bps": 300,
+              "round": "exact"
+            },
+            "times": 2
+          },
+          "trace": "((3% of 2,000.00) x 2) = 120.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What does Rosalind personally give across 12 months?",
+        "answer": "$720.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((3% of 2,000.00) x 12) = 720.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 200000
+              },
+              "bps": 300,
+              "round": "exact"
+            },
+            "times": 12
+          },
+          "trace": "((3% of 2,000.00) x 12) = 720.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What reaches the cause across the year with the match?",
+        "answer": "$1,440.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((3% of 2,000.00) x 2) x 12) = 1,440.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "scale",
+              "of": {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 200000
+                },
+                "bps": 300,
+                "round": "exact"
+              },
+              "times": 2
+            },
+            "times": 12
+          },
+          "trace": "(((3% of 2,000.00) x 2) x 12) = 1,440.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "At a 5% commitment, what would reach the cause each month with the match?",
+        "answer": "$200.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((5% of 2,000.00) x 2) = 200.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 200000
+              },
+              "bps": 500,
+              "round": "exact"
+            },
+            "times": 2
+          },
+          "trace": "((5% of 2,000.00) x 2) = 200.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning about matched giving",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Rosalind's match as a reason to give beyond what she can afford."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The match is described for Rosalind but no limit on its influence is stated."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response uses Rosalind's figures to show the match raises impact per dollar, while noting it should not change what she can genuinely afford or which causes she values."
+          }
+        ]
+      }
+    ]
+  }
+}

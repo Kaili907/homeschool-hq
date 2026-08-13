@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u05-l06",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Money Tools and Ads",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: who to tell about tricks",
+    "focus": "who to tell about tricks"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 5 — money tools, privacy, and advertising"
+  ],
+  "objective": "Learners decide who to tell when something about money feels like a trick, and practise reporting without blaming themselves.",
+  "scenario": "Ines is an invented third grader who nearly typed a family number into a made-up website that promised free game coins. She stopped, but she is embarrassed and thinking about saying nothing. No real number was ever entered.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Walk through what happened to Ines in order: an offer arrived, it asked for something private, and she stopped before answering. Separate what she did from how she feels about it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What did Ines actually do right in this story?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Ines is deciding whether to tell anyone. Write who she should tell and what she should say, keeping it short enough that she could actually say it out loud.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Who should Ines tell, and what words could she use?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Ines feels embarrassed even though she stopped in time.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What would you say to Ines about feeling embarrassed?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner focuses on punishment, retell the story stopping at the moment Ines closed the page, and ask what a trusted adult would most want to know about that moment.",
+  "extension": "Have the learner list two different trusted adults Ines could tell if the first one is not available, and explain why having two matters.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u05-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u05-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

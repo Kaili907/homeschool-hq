@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u01-l06",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income",
+    "dayInUnit": 6,
+    "phase": "Guided practice B",
+    "title": "Guided practice B: entrepreneurship and irregular income",
+    "focus": "entrepreneurship and irregular income"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "objective": "Learners analyse invented irregular self-employment income across several months, compute an average, and identify the planning risk in the weakest month.",
+  "scenario": "Fabio is an invented eighth grader modelling three pretend months of self-employment: revenue of $6,200.00, $2,800.00, and $4,500.00, with invented costs of $1,900.00 every month. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Fabio's three invented months of revenue.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the three-month revenue total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Take three months of costs out of that revenue, then find the average monthly net.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the three-month net after costs?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the average monthly net?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compute the weakest and strongest single months for Fabio, so the average can be tested against reality.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the net in the weakest month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far below the average is that weakest month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The average month never actually happened.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why Fabio should not build fixed monthly commitments on the average, and describe a rule that would make the irregular income safe to plan around."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner averages revenue instead of net, require costs to be subtracted for each of Fabio's months before any average is computed.",
+  "extension": "Ask the learner what buffer Fabio would need to smooth all three months to the average, and to show the reasoning.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u01-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u01-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

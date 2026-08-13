@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u03-l08",
+  "lessonId": "ma-g8-financial-literacy-u03-l08",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the monthly equivalent of the $900.00 annual bill?",
+        "answer": "$75.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(900.00 / 12) = 75.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "money",
+              "cents": 90000
+            },
+            "by": 12,
+            "round": "exact"
+          },
+          "trace": "(900.00 / 12) = 75.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the full monthly cost?",
+        "answer": "$1,755.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,200.00 + 480.00 + (900.00 / 12)) = 1,755.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 120000
+              },
+              {
+                "op": "money",
+                "cents": 48000
+              },
+              {
+                "op": "divide",
+                "of": {
+                  "op": "money",
+                  "cents": 90000
+                },
+                "by": 12,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "(1,200.00 + 480.00 + (900.00 / 12)) = 1,755.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much of the $1,900.00 income is left?",
+        "answer": "$145.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,900.00 - (1,200.00 + 480.00 + (900.00 / 12))) = 145.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 190000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 120000
+                },
+                {
+                  "op": "money",
+                  "cents": 48000
+                },
+                {
+                  "op": "divide",
+                  "of": {
+                    "op": "money",
+                    "cents": 90000
+                  },
+                  "by": 12,
+                  "round": "exact"
+                }
+              ]
+            }
+          },
+          "trace": "(1,900.00 - (1,200.00 + 480.00 + (900.00 / 12))) = 145.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the position in the bill month with nothing set aside?",
+        "answer": "-$680.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,900.00 - (1,200.00 + 480.00 + 900.00)) = -680.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 190000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 120000
+                },
+                {
+                  "op": "money",
+                  "cents": 48000
+                },
+                {
+                  "op": "money",
+                  "cents": 90000
+                }
+              ]
+            }
+          },
+          "trace": "(1,900.00 - (1,200.00 + 480.00 + 900.00)) = -680.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "With the periodic cost spread and variable costs at $560.00, how much is left?",
+        "answer": "$65.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,900.00 - (1,200.00 + 560.00 + (900.00 / 12))) = 65.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 190000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 120000
+                },
+                {
+                  "op": "money",
+                  "cents": 56000
+                },
+                {
+                  "op": "divide",
+                  "of": {
+                    "op": "money",
+                    "cents": 90000
+                  },
+                  "by": 12,
+                  "round": "exact"
+                }
+              ]
+            }
+          },
+          "trace": "(1,900.00 - (1,200.00 + 560.00 + (900.00 / 12))) = 65.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Assessing budget resilience",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response reports Beatrix's surplus without testing it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The thin margin is noticed for Beatrix but not quantified against a shock."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response tests Beatrix's surplus against a specific shock, shows it would be exceeded, and draws a conclusion about the need for a buffer."
+          }
+        ]
+      }
+    ]
+  }
+}

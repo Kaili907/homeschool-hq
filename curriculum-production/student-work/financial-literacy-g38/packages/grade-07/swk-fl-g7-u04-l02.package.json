@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u04-l02",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Credit and Borrowing",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: credit reports and scores concepts",
+    "focus": "credit reports and scores concepts"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4 foundations"
+  ],
+  "objective": "Learners quantify what an invented difference in credit standing costs by comparing interest on the same borrowed amount at two rates.",
+  "scenario": "Marguerite is an invented seventh grader studying a pretend lending table. On a $2,000.00 invented loan, one borrower is offered 9% and another 15% for the simulated year, purely because of a difference in recorded repayment history. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute one simulated year of interest at Marguerite's lower invented rate of 9%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the 9% rate cost in a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute the same year at 15%, then find what the difference in standing is worth.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the 15% rate cost in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the annual cost of the higher rate?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Extend the comparison across three simulated years on the same simple-interest basis.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does three years at 15% cost in interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more is that than three years at 9%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The two borrowers received identical amounts.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Marguerite's figures, explain what a record of repayment history is actually being used to predict, and name one thing such a record cannot tell a lender."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares percentages without computing, convert both of Marguerite's rates into dollar amounts on the same $2,000.00 before any comparison.",
+  "extension": "Ask the learner how many years of the 9% rate cost the same as one year at 15%, and to show the reasoning.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u04-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u04-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

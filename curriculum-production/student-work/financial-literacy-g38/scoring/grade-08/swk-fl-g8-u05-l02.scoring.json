@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u05-l02",
+  "lessonId": "ma-g8-financial-literacy-u05-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does the bond pay in a year?",
+        "answer": "$200.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(4% of 5,000.00) = 200.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 500000
+            },
+            "bps": 400,
+            "round": "exact"
+          },
+          "trace": "(4% of 5,000.00) = 200.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What does the 2.5% dividend pay?",
+        "answer": "$125.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.5% of 5,000.00) = 125.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 500000
+            },
+            "bps": 250,
+            "round": "exact"
+          },
+          "trace": "(2.5% of 5,000.00) = 125.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the 8% price gain worth?",
+        "answer": "$400.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(8% of 5,000.00) = 400.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 500000
+            },
+            "bps": 800,
+            "round": "exact"
+          },
+          "trace": "(8% of 5,000.00) = 400.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the holding's total return for the year?",
+        "answer": "$525.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.5% of 5,000.00) + (8% of 5,000.00)) = 525.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 500000
+                },
+                "bps": 250,
+                "round": "exact"
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 500000
+                },
+                "bps": 800,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "((2.5% of 5,000.00) + (8% of 5,000.00)) = 525.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What does the 0.6% annual fund fee cost?",
+        "answer": "$30.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(0.6% of 5,000.00) = 30.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 500000
+            },
+            "bps": 60,
+            "round": "exact"
+          },
+          "trace": "(0.6% of 5,000.00) = 30.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Distinguishing kinds of return",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats all of Quillon's returns as equally reliable."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The price gain is called uncertain for Quillon but the reason is not given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response ranks Quillon's returns by certainty, noting the bond payment is contractual, the dividend is declared, and the price gain depends on what others will pay."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u04-l01",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Credit and Borrowing",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: principal interest and term",
+    "focus": "principal interest and term"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4 foundations"
+  ],
+  "objective": "Learners separate principal, interest, and term in an invented loan, and see how extending the term changes the total cost without changing the principal.",
+  "scenario": "Ronan is a made-up seventh grader modelling a pretend loan: $1,500.00 of principal at 12% simple interest a year. He compares a one-year term with a two-year term. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute one simulated year of interest on Ronan's invented $1,500.00 principal at 12%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest accrues in one year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Add that interest to the principal for the one-year term, then work out the two-year term on the same simple basis.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is repaid in total over one year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is repaid in total over two years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the two terms, then compute what the same two-year loan would cost at 8% instead of 12%.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the two-year term cost than the one-year term?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is repaid in total over two years at 8%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Principal never moved; total cost did.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Ronan's figures, explain how rate and term each affect what a borrower repays, and why a longer term with smaller payments can still cost more."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner adds interest to interest, write the simple-interest rule for Ronan at the top and mark the principal as the base for each year.",
+  "extension": "Ask the learner what rate would make Ronan's two-year loan cost the same as the one-year loan at 12%, and to show the method.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u04-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u04-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

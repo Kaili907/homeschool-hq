@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u06-l02",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "Taxes, Giving, and Financial Plan Capstone",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: paycheck and sales tax concepts",
+    "focus": "paycheck and sales tax concepts"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7 foundations",
+    "PF1-PF6 review"
+  ],
+  "objective": "Learners trace invented money through payroll deductions and a purchase with sales tax, distinguishing where each kind of tax applies.",
+  "scenario": "Constance is an invented seventh grader tracing a pretend $1,800.00 gross monthly pay through 7.75% payroll tax and 12% income tax withholding, then through a $250.00 purchase carrying 6.5% simulated sales tax. All rates are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Apply the invented 7.75% payroll deduction to Constance's $1,800.00 gross.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld for simulated payroll tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Apply the 12% income tax withholding to the same gross figure, then compute Constance's net pay.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld for simulated income tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the net pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Constance spends $250.00 of the net pay on a purchase carrying 6.5% simulated sales tax.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total due on the $250.00 purchase?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is left of the net pay after that purchase?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The same money was taxed on the way in and again on the way out.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain the difference between what Constance's payroll taxes and sales tax are charged on, and why the two are calculated at different points."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies sales tax to the gross pay, draw the flow as three boxes for Constance and mark which figure each rate applies to.",
+  "extension": "Ask the learner what purchase amount Constance could make with exactly $500.00 of net pay including 6.5% sales tax, and to show the method.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u06-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u06-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

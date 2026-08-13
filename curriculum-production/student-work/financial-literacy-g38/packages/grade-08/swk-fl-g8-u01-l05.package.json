@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u01-l05",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income",
+    "dayInUnit": 5,
+    "phase": "Concept model B",
+    "title": "Concept model B: labor-market information",
+    "focus": "labor-market information"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "objective": "Learners read invented labour-market data, compare typical pay across occupations, and convert monthly figures to an annual basis.",
+  "scenario": "Eleni is a made-up eighth grader studying a pretend labour-market table with three invented occupations paying typical monthly amounts of $3,200.00, $4,500.00, and $5,800.00. The table is invented for practice and describes no real occupation.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Identify the highest typical monthly figure in Eleni's invented table.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the highest typical monthly pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Find the spread across Eleni's table, then convert the top figure to an annual basis.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the gap between the highest and lowest typical pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the highest-paying occupation pay across 12 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the annual figures for the lowest and middle occupations in Eleni's table.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the lowest-paying occupation pay across 12 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the middle occupation pay annually than the lowest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "A typical figure is not a promise.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what a typical pay figure in Eleni's table does and does not tell someone entering that occupation, and name two things the table omits."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats the annual conversion as optional, require every comparison in Eleni's table to be stated on the same time basis before it is written down.",
+  "extension": "Ask the learner what additional column would most improve Eleni's table for someone choosing a pathway, and why.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u01-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u01-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

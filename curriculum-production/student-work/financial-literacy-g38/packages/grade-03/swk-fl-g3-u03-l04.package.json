@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u03-l04",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Comparing",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: making a pretend shopping list",
+    "focus": "making a pretend shopping list"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 3 — spending and comparing"
+  ],
+  "objective": "Learners build the total of an invented shopping list, check it against pretend money on hand, and test what one more item does to a plan that had room in it.",
+  "scenario": "Jonah is an imaginary third grader writing a pretend grocery list for a made-up family dinner: bread $2.50, apples $3.25, rice $4.00, and milk $2.75. He has $15.00 in pretend money. Nothing is being bought for real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Add every item on Jonah's pretend list.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Jonah's whole list cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Hold Jonah's list total against the $15.00 he brought, and say how much room the plan still has.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of Jonah's $15.00 is left after the list?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Does Jonah's list fit inside his $15.00?",
+          "choices": [
+            "It fits with money to spare",
+            "It comes out exactly even",
+            "It does not fit"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "At the pretend counter Jonah adds a $3.00 block of cheese to the same list.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Jonah's list cost with the cheese added?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far past his $15.00 does that put Jonah?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Jonah had $2.50 of room and the cheese cost $3.00.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Jonah had room left over but still went over. Explain how both of those can be true at the same time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats any leftover as enough for anything, mark the $2.50 of room as a physical gap on a number line and slide a $3.00 strip into it, so the overhang is seen before it is calculated.",
+  "extension": "Have the learner remove exactly one item from Jonah's list so the cheese fits, and show the two totals that prove it works.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u03-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u03-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

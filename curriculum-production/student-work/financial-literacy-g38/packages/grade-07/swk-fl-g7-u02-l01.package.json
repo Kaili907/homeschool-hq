@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u02-l01",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Consumer Decisions and Contracts",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: needs priorities and opportunity cost",
+    "focus": "needs priorities and opportunity cost"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners compare two invented uses of the same simulated funds, compute what each leaves, and attach a value to what is given up.",
+  "scenario": "Ezra is a made-up seventh grader with $1,200.00 of simulated savings. Option A is an invented $850.00 laptop. Option B is a $400.00 course plus a $380.00 tablet. Only one option is possible.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Ezra's Option B, which has two invented parts.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Option B cost in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute what each of Ezra's options leaves from the $1,200.00 of simulated savings.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What remains after Option A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What remains after Option B?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Ezra chooses Option A, and a classmate argues that Option B was strictly better because it leaves more.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Option B leave than Option A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the value of the course Ezra gave up by choosing Option A?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The leftover is only part of what changed.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why the $70.00 difference in leftover money is a poor basis for calling Option B better, using the idea of opportunity cost."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares only leftovers, have them write what Ezra receives under each option in words alongside the amounts before any comparison.",
+  "extension": "Ask the learner to design a third option under $1,200.00 that Ezra would find hardest to give up, and to defend the design.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u02-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u02-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u06-l04",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "Our Pretend Market Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: making an honest sign",
+    "focus": "making an honest sign"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 6 — simulated market capstone"
+  ],
+  "objective": "Learners judge whether an invented market sign tells customers the truth and rewrite a claim that overstates what a product does.",
+  "scenario": "Ruby is an invented third grader making a sign for her pretend market stall. Her draft sign says her bookmarks are unbreakable and the best in the whole school. The bookmarks are made of paper. This is a practice stall.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Read Ruby's draft sign line by line. One claim is about what the bookmark is made to do, and one is about how it compares with everyone else's. Decide which parts a customer could check.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which claim on Ruby's sign could a customer check, and which one could not be checked?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Rewrite Ruby's sign so every line is something she could stand behind if a customer asked. Keep it appealing; honest signs still sell.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Write an honest version of Ruby's sign and explain what you changed and why."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "A customer buys a paper bookmark believing it cannot break.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What happens to that customer's trust in Ruby's stall the next week?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner keeps the exaggeration, hand them a paper bookmark and ask them to test the claim, then ask what the sign should say about what actually happened.",
+  "extension": "Ask the learner to add one honest sentence to Ruby's sign that would genuinely help a customer decide, such as what the bookmark is good for.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u06-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u06-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

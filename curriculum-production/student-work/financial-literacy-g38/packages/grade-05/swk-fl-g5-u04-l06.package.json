@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u04-l06",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Saving and Banking Safety",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: fraud and password safety",
+    "focus": "fraud and password safety"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners evaluate invented password and account-security practices and choose the ones that actually reduce risk.",
+  "scenario": "Levi is an invented fifth grader reviewing a pretend list of habits for a family simulation: one password reused everywhere, a password written on a note taped to a screen, a long unique passphrase kept in a locked manager, and a habit of clicking links inside account emails. Nothing here describes a real account.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Never write any real password on this sheet; discuss only the invented habits listed here."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Go through Levi's four invented habits one at a time. Two make an attacker's job easier and two make it harder. Say what each habit does before ranking anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which of Levi's four habits reduce risk, and what does each of the risky ones actually make possible?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Levi has to recommend a short set of practices someone would actually follow. Write the recommendation and defend it against the objection that strong passwords are too hard to remember.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should Levi recommend, and how does the recommendation answer the objection that it is too hard to remember?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "One habit was about links rather than passwords.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why is how someone reaches a login page as important as the strength of the password?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner ranks habits without reasons, ask for each one what an attacker would gain, and rebuild the ranking from those answers.",
+  "extension": "Ask the learner to write the one sentence Levi could say to a family member who insists on reusing one password.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u04-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u04-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

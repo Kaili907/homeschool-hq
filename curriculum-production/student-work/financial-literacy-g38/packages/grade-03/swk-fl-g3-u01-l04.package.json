@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u01-l04",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Needs, Wants, and Choosing",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: naming what we gave up",
+    "focus": "naming what we gave up"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 1 — needs, wants, and choosing"
+  ],
+  "objective": "Learners compute the change left by two competing invented choices, compare the two prices, and name the specific item given up so opportunity cost is attached to a number.",
+  "scenario": "Milo is an imaginary third grader holding $5.00 in pretend book-fair money. He is deciding between a made-up adventure book priced at $4.00 and a made-up puzzle priced at $3.50, and he can take only one. No real purchase happens here.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Suppose Milo picks the $4.00 adventure book.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of Milo's $5.00 is left after the book?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now set the two pretend prices side by side before deciding anything. The book is $4.00 and the puzzle is $3.50.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the book cost than the puzzle?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which of Milo's two choices costs more?",
+          "choices": [
+            "The adventure book",
+            "The puzzle",
+            "They cost the same"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now run the other choice all the way through. Suppose Milo picks the $3.50 puzzle instead of the book.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of Milo's $5.00 is left after the puzzle?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more money is left over in the puzzle plan than in the book plan?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Milo finally takes the adventure book.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name exactly what Milo gave up by choosing the book, and say what he got in return for giving it up."
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner treats the change as the thing given up, place both pretend items on the table, remove the unchosen one, and say aloud what left the table, before asking the learner to write the sentence that names it.",
+  "extension": "Have the learner invent a third pretend book-fair item under $5.00 and explain which of the three they would give up last and why.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u01-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u01-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

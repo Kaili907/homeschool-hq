@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u02-l07",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u02-l07",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services",
+    "dayInUnit": 7,
+    "phase": "Investigation or close reading",
+    "title": "Investigation or close reading: opportunity cost and priorities",
+    "focus": "opportunity cost and priorities"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "objective": "Learners quantify the earnings from an invented part-time commitment and the hours it consumes, in order to price a non-money tradeoff.",
+  "scenario": "Quentin is a made-up eighth grader investigating a pretend part-time job: 4 hours a week at $15.00 an hour, over 30 simulated weeks of the school year. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute Quentin's invented weekly earnings from 4 hours at $15.00 an hour.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the job pay each week?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Project the earnings and the hours across the 30 invented weeks, keeping money and time as separate quantities.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the job pay across 30 weeks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many hours does the job consume across 30 weeks?",
+          "unit": "hours"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Model a second invented offer of 6 hours a week at $13.00 an hour over the same 30 weeks.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the second offer pay across 30 weeks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many more hours would the second offer consume across 30 weeks?",
+          "unit": "hours"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The better-paying offer cost more of something that cannot be bought back.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Quentin's figures, explain how to weigh $540.00 of extra earnings against 60 extra hours, and what information would settle it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner merges hours and money, keep two labelled columns for Quentin and require both to be filled before any comparison.",
+  "extension": "Ask the learner what hourly rate would make Quentin's two offers equally attractive per hour worked, and to show the method.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u02-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u02-l07",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

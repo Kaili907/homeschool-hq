@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u04-l05",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Credit and Borrowing",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: student-aid introduction",
+    "focus": "student-aid introduction"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4 foundations"
+  ],
+  "objective": "Learners compute the gap between invented education costs and non-repayable aid, and quantify what borrowing the remainder costs.",
+  "scenario": "Zeynep is a made-up seventh grader modelling a pretend year of study costing $9,000.00. Invented aid comprises a $3,500.00 grant and a $1,200.00 scholarship, neither repayable. Any remainder is borrowed at 5% for the simulated year. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Zeynep's invented non-repayable aid.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the grant and scholarship come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Find the gap Zeynep must cover after the aid, then compute the invented 5% interest on borrowing that gap for a year.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much must be covered after the aid?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does one year of interest on that borrowing cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Work out the total Zeynep would repay after one year, then see what an extra $800.00 scholarship would change.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is repaid in total after one year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "With an extra $800.00 scholarship, how much would need to be borrowed?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "An $800.00 scholarship removed more than $800.00 of eventual cost.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why non-repayable aid is worth more than the same amount of borrowing, using Zeynep's figures to show the difference."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies the interest to the full cost, mark only the borrowed remainder as the base for the rate before any interest is computed for Zeynep.",
+  "extension": "Ask the learner how much additional non-repayable aid would remove Zeynep's borrowing entirely, and what that saves in interest.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u04-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u04-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

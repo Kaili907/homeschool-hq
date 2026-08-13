@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u01-l02",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Needs, Wants, and Choosing",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: what a want is",
+    "focus": "what a want is"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 1 — needs, wants, and choosing"
+  ],
+  "objective": "Learners add a short list of invented want prices, compare the total against the pretend money on hand, and find the gap between what a plan costs and what a character can pay.",
+  "scenario": "Theo is an invented third grader at a pretend comic fair with $5.00 of play money. Three made-up items catch his eye: a comic for $2.25, a marble set for $1.50, and a poster for $3.00. All of it is imaginary; no real money changes hands.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Start by finding the cost of wanting everything at once. Add all three pretend prices from Theo's fair.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would all three items cost Theo together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Theo brought exactly $5.00 of play money to the pretend fair. Hold your total next to that amount and decide what it tells you before doing any more arithmetic.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "How does the cost of all three items compare with Theo's $5.00?",
+          "choices": [
+            "Less than Theo has",
+            "Exactly what Theo has",
+            "More than Theo has"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much short of all three items is Theo?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Theo decides to leave the $3.00 poster behind and take only the comic and the marble set.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the comic and the marble set cost together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of Theo's $5.00 is left after that choice?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the difference between wanting something and needing it.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "The comic is a want, not a need. What makes it a want, even though Theo really would like to have it?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner writes the shortfall as the whole price of the missing item, rebuild the comparison with a paper strip cut to $5.00 and a second strip cut to $6.75, then lay them end to end so the overhanging piece is visibly the gap rather than any single item.",
+  "extension": "Have the learner find a different pair from Theo's three items that also fits inside $5.00 and show the subtraction that proves it fits.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u01-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u01-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

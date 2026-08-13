@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u06-l08",
+  "lessonId": "ma-g8-financial-literacy-u06-l08",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does the policy cost in a year?",
+        "answer": "$264.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(22.00 x 12) = 264.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 2200
+            },
+            "times": 12
+          },
+          "trace": "(22.00 x 12) = 264.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What do ten years of premiums come to?",
+        "answer": "$2,640.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((22.00 x 12) x 10) = 2,640.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 2200
+              },
+              "times": 12
+            },
+            "times": 10
+          },
+          "trace": "((22.00 x 12) x 10) = 2,640.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much less is that than the $15,000.00 protected?",
+        "answer": "$12,360.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(15,000.00 - ((22.00 x 12) x 10)) = 12,360.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 1500000
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 2200
+                },
+                "times": 12
+              },
+              "times": 10
+            }
+          },
+          "trace": "(15,000.00 - ((22.00 x 12) x 10)) = 12,360.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What have premiums cost by the end of year three?",
+        "answer": "$792.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((22.00 x 12) x 3) = 792.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 2200
+              },
+              "times": 12
+            },
+            "times": 3
+          },
+          "trace": "((22.00 x 12) x 3) = 792.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much better off is Gulliver than bearing the whole $15,000.00 loss?",
+        "answer": "$14,208.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(15,000.00 - ((22.00 x 12) x 3)) = 14,208.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 1500000
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 2200
+                },
+                "times": 12
+              },
+              "times": 3
+            }
+          },
+          "trace": "(15,000.00 - ((22.00 x 12) x 3)) = 14,208.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Explaining the premium-to-cover ratio",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Gulliver's low premium as evidence of poor cover."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The ratio is computed for Gulliver but not explained."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that a total loss is rare and costs are shared across many policyholders, so Gulliver's premium reflects probability rather than the full value protected."
+          }
+        ]
+      }
+    ]
+  }
+}

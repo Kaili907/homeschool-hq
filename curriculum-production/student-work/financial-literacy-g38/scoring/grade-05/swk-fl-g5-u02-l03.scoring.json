@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u02-l03",
+  "lessonId": "ma-g5-financial-literacy-u02-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much is deducted for simulated taxes?",
+        "answer": "$48.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(12% of 400.00) = 48.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 40000
+            },
+            "bps": 1200,
+            "round": "exact"
+          },
+          "trace": "(12% of 400.00) = 48.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much goes to the retirement set-aside?",
+        "answer": "$20.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5% of 400.00) = 20.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 40000
+            },
+            "bps": 500,
+            "round": "exact"
+          },
+          "trace": "(5% of 400.00) = 20.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the take-home pay after both deductions?",
+        "answer": "$332.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(400.00 - ((12% of 400.00) + (5% of 400.00))) = 332.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 40000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 40000
+                  },
+                  "bps": 1200,
+                  "round": "exact"
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 40000
+                  },
+                  "bps": 500,
+                  "round": "exact"
+                }
+              ]
+            }
+          },
+          "trace": "(400.00 - ((12% of 400.00) + (5% of 400.00))) = 332.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What do both deductions come to on a $500.00 gross?",
+        "answer": "$85.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((12% of 500.00) + (5% of 500.00)) = 85.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 50000
+                },
+                "bps": 1200,
+                "round": "exact"
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 50000
+                },
+                "bps": 500,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "((12% of 500.00) + (5% of 500.00)) = 85.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What is the take-home pay on the $500.00 gross?",
+        "answer": "$415.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(500.00 - ((12% of 500.00) + (5% of 500.00))) = 415.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 50000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 50000
+                  },
+                  "bps": 1200,
+                  "round": "exact"
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 50000
+                  },
+                  "bps": 500,
+                  "round": "exact"
+                }
+              ]
+            }
+          },
+          "trace": "(500.00 - ((12% of 500.00) + (5% of 500.00))) = 415.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Distinguishing gross from take-home",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Salma's gross figure as the money available to spend."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The difference is noticed for Salma but no consequence for budgeting is drawn."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Salma's deductions leave before any spending happens, so a budget built on gross pay would commit money that never arrives."
+          }
+        ]
+      }
+    ]
+  }
+}

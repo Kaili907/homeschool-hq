@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u03-l06",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving",
+    "dayInUnit": 6,
+    "phase": "Guided practice B",
+    "title": "Guided practice B: compound interest and inflation concepts",
+    "focus": "compound interest and inflation concepts"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "objective": "Learners compute invented compound growth of savings alongside invented inflation of costs, and compare the two to find the real gain.",
+  "scenario": "Zola is an invented eighth grader modelling $5,000.00 over ten simulated years: savings growing at 4% a year, while the cost of the same basket of goods rises at 3% a year. All rates are invented for the exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Grow Zola's invented $5,000.00 at 4% a year for ten years, compounding annually.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the savings balance after ten years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now grow the cost of the same $5,000.00 basket at the invented 3% inflation rate for the same ten years, and compare the two.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the basket cost after ten years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the balance exceed the basket cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Model the same ten years if the savings had earned only 2% while inflation stayed at 3%.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the balance be after ten years at 2%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far short of the basket cost would that leave Zola?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "A growing balance can still lose ground.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what Zola's second model shows about a balance that grows more slowly than prices, and why the headline balance can be misleading."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies the rate to the original amount each year, write out the first three of Zola's years explicitly with their opening balances.",
+  "extension": "Ask the learner what savings rate would exactly keep pace with Zola's 3% inflation, and what that implies about a real return.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u03-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u03-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

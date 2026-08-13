@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "status": "AUTHORED",
+  "subject": "financial-literacy",
+  "purpose": "Student work and adult-only scoring authority for every Financial Literacy lesson in grades 3, 4, 5, 7, and 8. Fixed answers are recomputed independently of the authored literal and of the source corpus guidance; judgment work carries a rubric and acceptable-answer criteria instead of a fabricated exact answer.",
+  "totals": {
+    "lessons": 216,
+    "packages": 216,
+    "scoringRecords": 216,
+    "fixedAnswerLessons": 180,
+    "rubricJudgmentLessons": 36,
+    "independentlyRecomputedItems": 900
+  },
+  "verification": {
+    "oracleId": "finlit-g38-oracle@1",
+    "method": "authored answer literal, TypeScript integer-cent oracle, and an independent Python decimal cross-check must all agree",
+    "failClosed": "src/build.ts refuses to emit any lesson whose authored answer and recomputation disagree",
+    "crossCheck": "tooling/crosscheck.py",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "generatedFrom": {
+    "grade-03": {
+      "lessons": 36,
+      "fixedAnswerLessons": 30,
+      "rubricJudgmentLessons": 6,
+      "recomputedItems": 150,
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl"
+    },
+    "grade-04": {
+      "lessons": 36,
+      "fixedAnswerLessons": 29,
+      "rubricJudgmentLessons": 7,
+      "recomputedItems": 145,
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl"
+    },
+    "grade-05": {
+      "lessons": 36,
+      "fixedAnswerLessons": 30,
+      "rubricJudgmentLessons": 6,
+      "recomputedItems": 150,
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl"
+    },
+    "grade-07": {
+      "lessons": 36,
+      "fixedAnswerLessons": 30,
+      "rubricJudgmentLessons": 6,
+      "recomputedItems": 150,
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl"
+    },
+    "grade-08": {
+      "lessons": 72,
+      "fixedAnswerLessons": 61,
+      "rubricJudgmentLessons": 11,
+      "recomputedItems": 305,
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl"
+    }
+  },
+  "safety": {
+    "everyScenarioFictional": true,
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true,
+    "completionAuthority": "learner",
+    "scoringRecordsAdultOnly": true
+  }
+}

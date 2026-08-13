@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u01-l02",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: wages salary commissions and self-employment",
+    "focus": "wages salary commissions and self-employment"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "objective": "Learners compute monthly earnings under invented salary, commission, and self-employment structures and compare what each depends on.",
+  "scenario": "Bastien is an invented eighth grader modelling three pretend pay structures for the same month: a $3,600.00 salary; a commission role paying a $2,000.00 base plus 8% of $25,000.00 in sales; and self-employment with $5,000.00 of revenue and $1,400.00 of costs.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute the commission portion of Bastien's invented commission role: 8% of $25,000.00 in sales.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much commission is earned?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete the commission role by adding the base, then compute the self-employed net for the same invented month.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the commission role pay in total for the month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does self-employment net for the month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the three structures for Bastien, then model a weak month where sales fall to $8,000.00 and revenue falls to $2,600.00.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the commission role pay in the weak month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does self-employment net in the weak month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "All three structures paid similarly in a good month.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Bastien's two months, rank the three structures by how much risk each transfers to the earner, and justify the ranking."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats revenue as income, write Bastien's revenue and costs as separate lines and require both before any net figure is recorded.",
+  "extension": "Ask the learner what sales level would make Bastien's commission role match the salary exactly, and to show the method.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u01-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u01-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

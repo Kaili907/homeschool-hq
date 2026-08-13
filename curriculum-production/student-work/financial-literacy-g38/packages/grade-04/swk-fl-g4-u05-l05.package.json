@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u05-l05",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Ads, Scams, Borrowing, and Giving",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: recognizing scams and pressure",
+    "focus": "recognizing scams and pressure"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 5 — advertising, risk, borrowing, and giving"
+  ],
+  "objective": "Learners recognise the pressure signals in an invented scam message and choose a response that does not engage with it.",
+  "scenario": "Selin is an invented fourth grader who receives a made-up message on a pretend game account: her prize expires in 10 minutes, she must not tell anyone, and she should send a code from a guardian's phone. The message is invented for practice, and no real code exists.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Never send a code, password, or card number in response to any message; this scenario is invented for practice."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Read the invented message with Selin and pull out its parts: a deadline, a secrecy instruction, and a request for something private. Treat each as a signal rather than as an inconvenience.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What are the three warning signals in the message Selin received, and why is each one a signal?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Selin has 10 minutes according to the message. Write exactly what she should do in that time, including what she should not do.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should Selin do about the message, and why does the deadline make no difference to the answer?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "The message told her to keep it to herself.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why is being told to keep something secret from a guardian, by itself, a reason to tell one?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner tries to verify the offer, ask what the message would gain from a real prize needing secrecy, and let the contradiction settle the question before any response is written.",
+  "extension": "Ask the learner to rewrite Selin's message as it would look without the pressure, and to say why it would no longer work.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u05-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u05-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

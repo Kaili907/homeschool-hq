@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u03-l03",
+  "lessonId": "ma-g4-financial-literacy-u03-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much simulated tax is added to the $40.00?",
+        "answer": "$2.40",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6% of 40.00) = 2.40. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 4000
+            },
+            "bps": 600,
+            "round": "exact"
+          },
+          "trace": "(6% of 40.00) = 2.40"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the total due on the $40.00 subtotal?",
+        "answer": "$42.40",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(40.00 + (6% of 40.00)) = 42.40. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 4000
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 4000
+                },
+                "bps": 600,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "(40.00 + (6% of 40.00)) = 42.40"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much simulated tax is added to a $25.00 subtotal?",
+        "answer": "$1.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6% of 25.00) = 1.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 2500
+            },
+            "bps": 600,
+            "round": "exact"
+          },
+          "trace": "(6% of 25.00) = 1.50"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the total due on a $43.00 subtotal with 6% simulated tax?",
+        "answer": "$45.58",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(43.00 + (6% of 43.00)) = 45.58. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 4300
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 4300
+                },
+                "bps": 600,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "(43.00 + (6% of 43.00)) = 45.58"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "Can Anjali cover that total with $45.00?",
+        "answer": "No, she is short",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare 45.00 with (43.00 + (6% of 43.00)) = No, she is short. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "money",
+              "cents": 4500
+            },
+            "right": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 4300
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 4300
+                  },
+                  "bps": 600,
+                  "round": "exact"
+                }
+              ]
+            },
+            "whenLess": "No, she is short",
+            "whenEqual": "It comes out exactly even",
+            "whenGreater": "Yes, with money left"
+          },
+          "trace": "compare 45.00 with (43.00 + (6% of 43.00)) = No, she is short"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Planning for added tax",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Anjali's shelf prices as the amount she will pay."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Tax is mentioned for Anjali but not built into the plan before shopping."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says Anjali should leave room for the simulated tax before filling the basket, and refers to the size of the tax at 6%."
+          }
+        ]
+      }
+    ]
+  }
+}

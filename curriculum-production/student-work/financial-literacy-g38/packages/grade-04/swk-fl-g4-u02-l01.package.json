@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u02-l01",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Earning, Work, and Value",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: ways people earn income",
+    "focus": "ways people earn income"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 2 — earning, work, and enterprise"
+  ],
+  "objective": "Learners combine an invented hourly wage with a second income source, compute a simulated week of earnings, and compare income that is predictable with income that is not.",
+  "scenario": "Tariq is a made-up fourth grader learning how a pretend job pays. In an invented week his older cousin works 6 hours at $12.00 an hour and also receives $8.50 in tips. All wages here are invented for practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Work out the hourly part of the invented week: 6 hours at $12.00 an hour.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the 6 hours pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Add the $8.50 of invented tips to the hourly pay, then compare the two sources against each other.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total for the invented week?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is the hourly pay than the tips?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "In a slower invented week the hours drop to 4 and the tips fall to $3.00.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total for the slow week?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much less is that than the first invented week?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "One part of the pay was steadier than the other.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which part of Tariq's cousin's income is easier to plan around, and why does that matter for building a budget?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner adds hours to the wage, write hours and rate in separate labelled boxes for Tariq and read the phrase \"twelve dollars for each hour\" aloud before the multiplication is set up.",
+  "extension": "Ask the learner how many hours at $12.00 would be needed to match the first invented week with no tips at all, and how they know.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u02-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u02-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

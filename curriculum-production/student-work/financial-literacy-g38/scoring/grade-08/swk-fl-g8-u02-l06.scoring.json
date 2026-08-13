@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u02-l06",
+  "lessonId": "ma-g8-financial-literacy-u02-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Analysing a staged scam",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats each stage of Pascale's sequence as unrelated."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The sequence is noticed for Pascale but the purpose of the email is not identified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that the email in Pascale's case primes alarm so the call is expected, and identifies the whole sequence as a single designed chain."
+          }
+        ]
+      },
+      {
+        "dimension": "Stopping the chain",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has the household comply or negotiate with the caller."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The call is doubted for Pascale but no independent verification step is given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has the household end the call and verify through an independently obtained number, treating the safe-account request as decisive."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies the email as priming for the call.",
+      "Treats the safe-account request as conclusive on its own.",
+      "Verifies through a channel not supplied by the contact.",
+      "States that accurate details do not authenticate a caller."
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u06-l02",
+  "lessonId": "ma-g8-financial-literacy-u06-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What do the three premiums come to each month?",
+        "answer": "$483.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(18.00 + 145.00 + 320.00) = 483.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 1800
+              },
+              {
+                "op": "money",
+                "cents": 14500
+              },
+              {
+                "op": "money",
+                "cents": 32000
+              }
+            ]
+          },
+          "trace": "(18.00 + 145.00 + 320.00) = 483.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What does the renters policy cost in a year?",
+        "answer": "$216.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(18.00 x 12) = 216.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 1800
+            },
+            "times": 12
+          },
+          "trace": "(18.00 x 12) = 216.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What does the auto policy cost in a year?",
+        "answer": "$1,740.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(145.00 x 12) = 1,740.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 14500
+            },
+            "times": 12
+          },
+          "trace": "(145.00 x 12) = 1,740.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What does all the cover cost in a year?",
+        "answer": "$5,796.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((18.00 + 145.00 + 320.00) x 12) = 5,796.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 1800
+                },
+                {
+                  "op": "money",
+                  "cents": 14500
+                },
+                {
+                  "op": "money",
+                  "cents": 32000
+                }
+              ]
+            },
+            "times": 12
+          },
+          "trace": "((18.00 + 145.00 + 320.00) x 12) = 5,796.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much more does health cover cost annually than renters cover?",
+        "answer": "$3,624.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((320.00 x 12) - (18.00 x 12)) = 3,624.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 32000
+              },
+              "times": 12
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 1800
+              },
+              "times": 12
+            }
+          },
+          "trace": "((320.00 x 12) - (18.00 x 12)) = 3,624.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Relating premium to covered risk",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Aurelio's premium differences as arbitrary."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A difference is noted for Aurelio but not linked to the risk covered."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response connects each of Aurelio's premiums to the scale and likelihood of the loss it covers, explaining why health cover costs far more than renters cover."
+          }
+        ]
+      }
+    ]
+  }
+}

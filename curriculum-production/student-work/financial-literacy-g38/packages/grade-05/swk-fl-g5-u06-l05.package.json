@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u06-l05",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "Marketplace Capstone",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: record keeping",
+    "focus": "record keeping"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1-PF6 foundations"
+  ],
+  "objective": "Learners reconstruct sales from invented unit records, quantify a recording discrepancy, and separate revenue from what remains after costs.",
+  "scenario": "Idris is a made-up fifth grader keeping records for a pretend market stall. He sold 18 invented items at $8.00 each, recorded sales as $142.50, and had $92.00 of simulated costs.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Rebuild Idris's sales from the invented unit record: 18 items at $8.00.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What were the actual total sales?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compare that with the $142.50 recorded, then use the correct figure against Idris's $92.00 of costs.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much is the record off?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What remains after costs, using the correct sales figure?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "A second invented market day adds 9 more sales at the same price with $30.00 of extra costs.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What are total sales across both days?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What remains after all costs across both days?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The record and the reality drifted by a dollar and a half.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Design a record-keeping routine for Idris that would catch this kind of drift on the day, and explain why it works."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner reports sales as what is kept, physically separate the cost amount from the sales figure for Idris before the remaining amount is written.",
+  "extension": "Ask the learner how many items at $8.00 Idris must sell across both days to keep $120.00, and to show the reasoning.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u06-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u06-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

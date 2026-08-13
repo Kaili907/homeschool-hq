@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u07-l02",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes and Financial Plan Capstone",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: payroll income sales property and excise tax concepts",
+    "focus": "payroll income sales property and excise tax concepts"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7",
+    "PF1–PF7 synthesis"
+  ],
+  "objective": "Learners compute several invented tax types in a single month and see that each is charged on a different base.",
+  "scenario": "Kester is an invented eighth grader tracing a pretend month: $5,000.00 gross pay with 7.65% payroll tax and 12% income tax withholding, an invented $2,400.00 annual property tax, and a $400.00 purchase carrying 7% simulated sales tax.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute the invented payroll and income tax on Kester's $5,000.00 gross.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld for simulated payroll tax at 7.65%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute Kester's income tax withholding and the monthly share of the invented annual property tax.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld for simulated income tax at 12%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly share of the $2,400.00 annual property tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compute the sales tax on Kester's $400.00 purchase and total all the taxes falling in the month.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much simulated sales tax does the purchase carry at 7%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do all four taxes come to for the month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Four taxes, four different bases.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "For each of Kester's four taxes, name what it is charged on, and explain why using several bases rather than one is a deliberate design."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies the sales tax rate to gross pay, draw Kester's month as separate boxes and label which figure each rate applies to.",
+  "extension": "Ask the learner what share of Kester's gross pay the month's taxes represent, and how that share would change if the purchase were larger.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u07-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u07-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

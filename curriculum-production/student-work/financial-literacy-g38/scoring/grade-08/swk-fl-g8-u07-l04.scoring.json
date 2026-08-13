@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l04",
+  "lessonId": "ma-g8-financial-literacy-u07-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Analysing who pays and who benefits",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response evaluates Malachy's options without identifying who bears each cost."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One option is analysed for Malachy but the others are not."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies payers, beneficiaries, and potentially excluded groups for each of Malachy's three options."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending a policy choice",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is made for Malachy with no engagement with objections."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An objection is acknowledged for Malachy but not answered."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response recommends an option for Malachy and answers the strongest objection, addressing the interests of those who bear the cost."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies who pays under each invented option.",
+      "Names a group that could be excluded by a user fee.",
+      "Takes a position rather than listing options neutrally.",
+      "Engages with the losing side's interests."
+    ]
+  }
+}

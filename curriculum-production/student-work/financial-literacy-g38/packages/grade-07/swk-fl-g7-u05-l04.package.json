@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u05-l04",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Investing, Risk, and Protection",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: compound growth",
+    "focus": "compound growth"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners compute invented compound growth over five periods and quantify the gap against simple interest at the same rate.",
+  "scenario": "Sana is an invented seventh grader modelling $500.00 over five simulated years at an invented 8% a year, compounding annually, and comparing it with 8% simple interest. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Grow Sana's invented $500.00 at 8% a year for five years, compounding on the new balance each year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after five years of compounding?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute five years of simple interest at the same rate on Sana's original $500.00, then compare the two balances.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What balance would five years of simple interest give?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does compounding produce over five years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare a single year against the fifth year of Sana's compounding to see how the yearly gain changes.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does year one alone add?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the fifth year alone add?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The fifth year added more than the first without any change in rate.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why Sana's yearly gain grows even though the rate never changes, and what that implies about starting early."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner computes five identical yearly gains, write out each of Sana's years with its own opening balance before any total is taken.",
+  "extension": "Ask the learner to estimate Sana's balance after ten years and to explain the reasoning behind the estimate.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u05-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u05-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

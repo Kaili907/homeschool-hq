@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u05-l01",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: risk return liquidity and time horizon",
+    "focus": "risk return liquidity and time horizon"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "objective": "Learners compare invented returns on saving and investing and weigh them against the liquidity a near-term need requires.",
+  "scenario": "Perrine is a made-up eighth grader comparing two pretend homes for $10,000.00: an invented savings account paying 1% a year and an invented investment averaging 7% a year but able to fall. She may need the money in six months.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "These rates are invented for the exercise and are not a recommendation about any real product."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute one simulated year on Perrine's invented savings account at 1%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the savings account pay in a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute a year at the invented 7% average and find the difference for Perrine.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would a year at 7% produce?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is the invested return in a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Model the case where Perrine must withdraw after a year in which the investment falls 12%.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the $10,000.00 be worth after a 12% fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much worse off is that than the savings account after a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The money may be needed in six months.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Perrine's figures, explain why a near-term need changes the answer even though the investment has the higher average return."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats the average return as guaranteed, require the fall scenario to be computed in full for Perrine, written beside the average-return figure, before any recommendation is stated, so the range of outcomes is visible rather than a single expected number.",
+  "extension": "Ask the learner what horizon would change the recommendation for Perrine, and to justify it.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u05-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u05-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

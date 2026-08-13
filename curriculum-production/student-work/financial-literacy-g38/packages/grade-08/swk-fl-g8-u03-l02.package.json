@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u03-l02",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: fixed variable and periodic expenses",
+    "focus": "fixed variable and periodic expenses"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "objective": "Learners classify invented expenses, convert a periodic cost to a monthly equivalent, and test the resulting budget against income.",
+  "scenario": "Vashti is an invented eighth grader modelling a pretend month: $1,850.00 of fixed housing, variable costs of $620.00 and $310.00, and an invented $1,440.00 annual insurance bill. Monthly income is $3,200.00.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Convert Vashti's invented annual insurance bill into a monthly equivalent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly equivalent of the $1,440.00 annual bill?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Total Vashti's variable costs, then build a full monthly figure including fixed, variable, and the periodic equivalent.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the variable costs come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the full monthly cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare that with Vashti's $3,200.00 income, then model the month in which the annual bill actually lands with nothing set aside.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is left each month with the periodic cost spread?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the net position in the bill month with nothing set aside?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The same year produced both results.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain, using Vashti's two figures, why spreading a periodic cost changes the experience of the year without changing the total paid."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner omits the periodic line, require every expense in Vashti's model to be labelled fixed, variable, or periodic before totalling.",
+  "extension": "Ask the learner what monthly set-aside would leave Vashti exactly break-even in the bill month, and to justify it.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u03-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u03-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

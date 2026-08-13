@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u06-l07",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u06-l07",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring",
+    "dayInUnit": 7,
+    "phase": "Investigation or close reading",
+    "title": "Investigation or close reading: risk management",
+    "focus": "risk management"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "objective": "Learners compare invented deductible-and-premium combinations across claim and no-claim years to see which structure suits which situation.",
+  "scenario": "Fenella is a made-up eighth grader comparing two pretend policies: Option A with a $500.00 deductible and $1,320.00 of annual premiums, and Option B with a $1,500.00 deductible and $960.00 of annual premiums. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute the annual premium saving Option B offers Fenella over Option A.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much less does Option B cost in premiums each year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compute each option's total cost for Fenella in a year with exactly one claim large enough to exceed both deductibles.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Option A cost in a one-claim year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Option B cost in a one-claim year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare Fenella's two options in a claim year and in a year with no claim at all.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much better is Option A in a one-claim year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much better is Option B in a year with no claim?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Each option won a different year.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Recommend one of Fenella's options and explain what beliefs about claim frequency and available cash would justify the other."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares only premiums, require both a claim-year and a no-claim-year total for each of Fenella's options before any recommendation.",
+  "extension": "Ask the learner how many claim-free years would be needed for Option B to come out ahead of Option A over the whole period.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u06-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u06-l07",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

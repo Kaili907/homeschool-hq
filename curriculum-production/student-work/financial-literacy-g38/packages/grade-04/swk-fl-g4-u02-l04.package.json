@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u02-l04",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Earning, Work, and Value",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: small business ideas",
+    "focus": "small business ideas"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 2 — earning, work, and enterprise"
+  ],
+  "objective": "Learners cost out an invented small-business run, compute revenue and profit, and test what a change in price does to the outcome.",
+  "scenario": "Camila is an invented fourth grader planning a pretend lemonade stand for a simulated fair. Each invented cup costs her $0.35 in supplies, she plans to sell 12 cups, and she sets a price of $1.00 a cup. All money here is imaginary.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Work out what supplies for Camila's 12 invented cups cost at $0.35 each.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do supplies for 12 cups cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now find the money coming in from 12 cups at $1.00 each, and take the supply cost back out of it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much comes in from selling all 12 cups?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Camila's profit on the 12 cups?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Camila considers dropping the price to $0.75 a cup, still selling 12 cups with the same supply cost.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the profit be at $0.75 a cup?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much profit does the lower price give up?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The lower price only makes sense under one condition.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Under what condition would the $0.75 price leave Camila better off than the $1.00 price? Be specific about what would have to happen."
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner reports revenue as profit, use two columns headed money in and money out for Camila, and require both to be filled before the profit line is written.",
+  "extension": "Ask the learner how many cups at $0.75 Camila would need to match the profit from 12 cups at $1.00, and to show the reasoning.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u02-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u02-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

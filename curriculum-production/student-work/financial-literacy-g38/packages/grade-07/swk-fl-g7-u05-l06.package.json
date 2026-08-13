@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u05-l06",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Investing, Risk, and Protection",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: identity theft protection",
+    "focus": "identity theft protection"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners evaluate an invented identity-theft situation, decide the order of response, and identify what evidence and notifications matter.",
+  "scenario": "Yusra is an invented seventh grader studying a pretend case: an unfamiliar charge appears on a household statement, a text claims to be the bank asking for a verification code, and a new account notification arrives by email. All of this is invented for study.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Never share a verification code, password, or account number with anyone who contacts you; this case is invented for study."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Sort the three invented signals in Yusra's case: which are evidence of a problem, and which is itself an attempt to exploit the situation. Explain how you can tell.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which of the three signals in Yusra's case is itself an attack, and what marks it out?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Write the order of actions the household should take, and say for each why it comes where it does. Include what should never be sent to anyone.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should the household do, in what order, and what should never be shared with an incoming caller or text?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "The text arrived at exactly the right moment to seem helpful.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why is a message that arrives just when you are worried especially dangerous?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner would reply to the text, ask what an attacker would gain from the code in Yusra's case, and rebuild the sequence from that answer.",
+  "extension": "Ask the learner to write the three checks a household could set up in advance to notice this kind of problem sooner.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u05-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u05-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

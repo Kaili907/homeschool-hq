@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u07-l06",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes and Financial Plan Capstone",
+    "dayInUnit": 6,
+    "phase": "Guided practice B",
+    "title": "Guided practice B: integrated financial planning",
+    "focus": "integrated financial planning"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7",
+    "PF1–PF7 synthesis"
+  ],
+  "objective": "Learners assemble an invented integrated financial plan from several commitments, verify it against income, and evaluate the remaining margin.",
+  "scenario": "Oisin is an invented eighth grader building a pretend monthly plan on $4,200.00 of income: $1,300.00 housing, $600.00 food, $350.00 transport, $260.00 insurance, a 15% saving commitment, and $400.00 of debt repayment.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute Oisin's invented 15% saving commitment from the $4,200.00 income.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the saving commitment come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Total Oisin's fixed living commitments before saving and debt, then add those two in.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do housing, food, transport, and insurance come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the whole plan come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Check Oisin's plan against income and test what a $250.00 rent increase would do.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $4,200.00 income remains unallocated?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would remain after a $250.00 rent increase?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The plan absorbed the increase without breaking.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Assess the resilience of Oisin's plan, naming which commitment you would adjust first if income fell by 10% and why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies the saving percentage to the remainder, mark Oisin's income as the base for the commitment before any total is formed.",
+  "extension": "Ask the learner to rebuild Oisin's plan at $3,780.00 of income while keeping the saving commitment intact, and to show each line.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u07-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u07-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

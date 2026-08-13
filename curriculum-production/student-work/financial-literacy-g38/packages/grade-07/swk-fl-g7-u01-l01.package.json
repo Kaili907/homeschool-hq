@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u01-l01",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Income, Skills, and Work Choices",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: income sources",
+    "focus": "income sources"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1 foundations"
+  ],
+  "objective": "Learners combine invented income from an hourly job and irregular freelance work, compute a simulated monthly total, and compare the stability of each source.",
+  "scenario": "Naveen is a made-up seventh grader analysing a pretend household budget. In an invented month, one earner works 32 hours at $16.50 an hour and takes in $240.00 of irregular freelance income. All figures are invented for practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute the hourly portion of the invented month: 32 hours at $16.50 an hour.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the hourly work pay for the month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Add the $240.00 of invented freelance income, then compare the two sources against each other before drawing any conclusion about the month.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total invented income for the month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is the hourly income than the freelance income?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "In a leaner invented month the hours fall to 24 and the freelance work brings in $60.00.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total income in the lean month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much less is that than the first invented month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Both sources fell, but not by the same proportion.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which invented income source should a monthly budget be planned around, and what should the other be used for? Support your answer with the two months' figures."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats total income as a reliable planning figure, have them write the lowest plausible month for Naveen's household first and build the plan against that floor.",
+  "extension": "Ask the learner what a household with this pattern should hold in reserve to survive one lean month, using the figures computed here.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u01-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u01-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}

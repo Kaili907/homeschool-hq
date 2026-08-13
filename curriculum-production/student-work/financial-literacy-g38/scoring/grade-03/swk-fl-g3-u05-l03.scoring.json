@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u05-l03",
+  "lessonId": "ma-g3-financial-literacy-u05-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much lower is the sale price than the regular price?",
+        "answer": "$2.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5.00 - 3.00) = 2.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 500
+            },
+            "less": {
+              "op": "money",
+              "cents": 300
+            }
+          },
+          "trace": "(5.00 - 3.00) = 2.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What would two sale toys cost Tomas?",
+        "answer": "$6.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(3.00 x 2) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 300
+            },
+            "times": 2
+          },
+          "trace": "(3.00 x 2) = 6.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How does that compare with the $5.00 Tomas has?",
+        "answer": "More than Tomas has",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare (3.00 x 2) with 5.00 = More than Tomas has. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 300
+              },
+              "times": 2
+            },
+            "right": {
+              "op": "money",
+              "cents": 500
+            },
+            "whenLess": "Less than Tomas has",
+            "whenEqual": "Exactly what Tomas has",
+            "whenGreater": "More than Tomas has"
+          },
+          "trace": "compare (3.00 x 2) with 5.00 = More than Tomas has"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much would Tomas have left after buying one sale toy?",
+        "answer": "$2.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5.00 - 3.00) = 2.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 500
+            },
+            "less": {
+              "op": "money",
+              "cents": 300
+            }
+          },
+          "trace": "(5.00 - 3.00) = 2.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much more would he have left by walking past instead?",
+        "answer": "$3.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5.00 - (5.00 - 3.00)) = 3.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 500
+            },
+            "less": {
+              "op": "diff",
+              "from": {
+                "op": "money",
+                "cents": 500
+              },
+              "less": {
+                "op": "money",
+                "cents": 300
+              }
+            }
+          },
+          "trace": "(5.00 - (5.00 - 3.00)) = 3.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Seeing what an advertisement does",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response says the sale proves Tomas should buy the toy."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the ad is persuading Tomas but does not name the feeling it aims at."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names a feeling the poster aims at Tomas, such as hurry or fear of missing out, and separates that from whether he wanted a toy at all."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u02-l03",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Earning and Work",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: gross and take-home concepts",
+    "focus": "gross and take-home concepts"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1 foundations"
+  ],
+  "objective": "Learners take stated percentage deductions from an invented gross figure to reach take-home pay, and see how each deduction changes the amount available.",
+  "scenario": "Salma is a made-up fifth grader reading a pretend pay statement. The invented gross pay is $400.00. Simulated deductions take 12% for taxes and a further 5% for a retirement set-aside. This is a teaching example, not a real pay statement.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Apply the invented 12% tax deduction to Salma's $400.00 gross.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is deducted for simulated taxes?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Apply the 5% retirement set-aside to the same gross figure, then take both deductions off to reach take-home pay.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much goes to the retirement set-aside?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the take-home pay after both deductions?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "A busier invented period lifts the gross to $500.00 with the same two percentages applied.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do both deductions come to on a $500.00 gross?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the take-home pay on the $500.00 gross?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The number on the offer was not the number that arrived.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Why should a budget be built on take-home pay rather than gross pay?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies the second percentage to the reduced amount, mark Salma's gross figure as the base for both deductions and recompute each from that marked figure.",
+  "extension": "Ask the learner what gross pay Salma would need for take-home to reach exactly $415.00 under a single 17% deduction, and to justify the approach.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u02-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u02-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  }
+}
