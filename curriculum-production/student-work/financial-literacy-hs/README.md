@@ -16,7 +16,8 @@ The answer here is not to assert harder. It is to make the corpus fail closed.
 
 ## Status
 
-**Partial. Grade 9 complete (72/72); grades 10, 11, and 12 not yet authored.**
+**Partial: 82 of 288 lessons authored.** Grade 9 is complete (72/72) and
+grade 10 stands at 10/72; grades 11 and 12 are not started.
 `tests/corpus.test.ts` fails until every source lesson is authored, and reports
 the exact count outstanding. Run `node --experimental-strip-types src/report.ts`
 for the current position.
@@ -143,8 +144,10 @@ pinned SHA, so they require the repository but not a checkout of the source bran
 
 ## Outstanding
 
-- Grades 10, 11, and 12 — 216 lessons — are not authored. The coverage test fails
-  closed until they are.
+- 206 lessons remain unauthored: grade 10 units 2-7 (62 lessons), grade 11
+  (72), and grade 12 (72), including the grade 12 unit 7 simulated adult-finance
+  capstone. The coverage test fails closed until they are authored, and names the
+  first missing lesson ids in its failure output.
 - Promotion of `curriculum-authoring/full-family-highschool-9-12` into a
   `curriculum-content` release is unresolved, and `lesson.schema.json` in the
   frozen release still pins `grade` to `[5,7,8]`. Both are release-owned changes
