@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l07",
+  "lessonId": "ma-g9-financial-literacy-u01-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "The claim that $2,150 is what he has to work with",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The $2,150 gross figure and the $1,495 spending total are both arithmetically correct as written; the first false statement is treating gross pay as available money, and the $655 leftover is only wrong because it inherits that error."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$460.10",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "21.4% of $2,150 is exactly $460.10."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,689.90",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,150 gross less $460.10 withheld."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,495.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The five planned lines do add to $1,495, so this part of Jaylen’s work is correct."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$194.90",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,689.90 of take-home less $1,495 planned."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$460.10",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$655 claimed less $194.90 actual, which equals the withholding he never subtracted."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t2-p1",
+        "expression": "round(grossMonthly * withholdingRate, 2)",
+        "substituted": "round(2150 * 0.214, 2)",
+        "result": "$460.10",
+        "why": "21.4% of $2,150 is exactly $460.10."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "gross - #t2-p1",
+        "substituted": "2150 - #t2-p1",
+        "result": "$1,689.90",
+        "why": "$2,150 gross less $460.10 withheld."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "rent + phone + car + food + savings",
+        "substituted": "700 + 55 + 240 + 300 + 200",
+        "result": "$1,495.00",
+        "why": "The five planned lines do add to $1,495, so this part of Jaylen’s work is correct."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t2-p2 - #t2-p3",
+        "substituted": "#t2-p2 - #t2-p3",
+        "result": "$194.90",
+        "why": "$1,689.90 of take-home less $1,495 planned."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "claimedLeftover - #t3-p1",
+        "substituted": "655 - #t3-p1",
+        "result": "$460.10",
+        "why": "$655 claimed less $194.90 actual, which equals the withholding he never subtracted."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Name the misconception behind Jaylen’s error, and give a check he could run on any future budget in under a minute that would catch this same mistake.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names the misconception as treating gross pay as spendable money, rather than describing the error only as \"he forgot taxes\".",
+          "Notes that the overstatement, $460.10, is exactly the withholding — the error propagated one-for-one into the leftover line.",
+          "Gives a check that is actually runnable and would catch it, such as starting every budget from the deposit amount on the pay stub rather than the top line."
+        ],
+        "evidenceRequirements": [
+          "Refers to the correct take-home figure of $1,689.90 or the $460.10 overstatement."
+        ],
+        "lookFors": [
+          "The check is specific enough to perform, not \"be more careful\".",
+          "The response recognises the spending total was not itself wrong."
+        ],
+        "commonMisconception": "Reading the largest number on a pay stub as the amount of money received.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

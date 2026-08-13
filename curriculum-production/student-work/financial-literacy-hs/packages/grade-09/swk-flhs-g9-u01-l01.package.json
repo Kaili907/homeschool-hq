@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u01-l01",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: gross pay versus take-home pay"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "gross pay versus take-home pay",
+  "objective": "Compute a fictional worker’s gross pay from an hourly rate and hours worked, subtract each stated payroll deduction to reach take-home pay, and state how much a budget built on gross pay would overstate.",
+  "scenario": "Dario Villanueva is a fictional grocery stocker in a simulated town. Every figure on his made-up pay stub below exists only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pay stub figures printed in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Dario’s fictional pay stub covers one week. He is paid $15.80 per hour and worked 34 hours.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Dario’s gross pay for the week, before any deduction is taken out?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "The stub lists three deductions: FICA at 7.65% of gross pay, state income tax at 4.25% of gross pay, and federal income tax withheld of $42.15. Percentage deductions are rounded to the nearest cent.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld for FICA, at 7.65% of gross pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld for state income tax, at 4.25% of gross pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Dario’s take-home pay after all three deductions?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Work these two without help. Round a percentage to one decimal place.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of Dario’s gross pay does he actually take home?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "If Dario planned his week’s spending as though the whole gross amount were available, by how many dollars would his plan overstate what he can spend?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why a weekly plan built on Dario’s gross pay would fail, and say which single figure on the stub a person should plan from instead."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the running deductions drift, rebuild the stub as a four-row subtraction table (gross, minus FICA, minus state, minus federal) and check each row against the previous row before moving on. If the percentage deductions are the problem, compute 1% of $537.20 first ($5.372) and scale it, so the learner can see that 7.65% must land near $41 and not near $4 or $410.",
+  "extension": "Recompute the whole stub with Dario at 29 hours instead of 34 and state which of the four figures changes proportionally and which does not.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u01-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

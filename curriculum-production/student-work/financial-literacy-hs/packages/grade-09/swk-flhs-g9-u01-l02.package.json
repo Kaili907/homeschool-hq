@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u01-l02",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: employee benefit packages as compensation"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "employee benefit packages as compensation",
+  "objective": "Add employer-paid benefits to salary to compute the total compensation of two fictional job offers, and decide which offer is worth more than its salary line suggests.",
+  "scenario": "Nadia Okonjo, a fictional veterinary assistant, has two made-up offers in front of her. Neither clinic is real and neither offer is a real job.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional offer summaries in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Offer A, from the fictional Brightleaf Animal Clinic: salary $34,000 per year, employer health contribution $3,600 per year, retirement match of 3% of salary, and 10 paid days off. Assume a 260-day work year throughout.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is Brightleaf’s retirement match worth in a year, at 3% of salary?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total annual compensation of Offer A, counting salary, the health contribution, and the retirement match?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Offer B, from the fictional Riverbend Pet Hospital: salary $36,500 per year, no employer health contribution, retirement match of 1% of salary, and 5 paid days off.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total annual compensation of Offer B?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which offer provides more total annual compensation?",
+          "choices": [
+            "Offer A, from Brightleaf",
+            "Offer B, from Riverbend",
+            "They are equal"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Paid days off are also compensation: they are days the employer pays for without work. Value a paid day at the daily rate of the salary, using the 260-day work year.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What are Brightleaf’s 10 paid days off worth in a year, valued at Offer A’s daily rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much does Offer A’s total compensation exceed Offer B’s, before counting paid days off?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "A friend of Nadia’s says Riverbend is obviously the better offer because it pays $2,500 more. Say what that comparison leaves out and what it would take for Riverbend to actually be worth more."
+        }
+      ]
+    }
+  ],
+  "remediation": "If total compensation is being read as a bigger salary, separate the two columns explicitly: cash the worker receives and money the employer spends on the worker’s behalf. Rebuild Offer A as a four-line list ($34,000 cash, $3,600 health, $1,020 retirement, $1,307.69 paid days) and ask which lines would appear in a bank account and which would not.",
+  "extension": "Find the salary Riverbend would have to offer to match Offer A’s total compensation, given that its match stays at 1%.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u01-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

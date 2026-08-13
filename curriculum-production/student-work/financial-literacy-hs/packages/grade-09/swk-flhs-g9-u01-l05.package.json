@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u01-l05",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: non-income factors in career choice"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "non-income factors in career choice",
+  "objective": "Adjust two fictional job offers for commuting cost, commuting time, and a tuition benefit, and show that the higher-salary offer is not automatically the better one.",
+  "scenario": "Tobias Krause is a fictional graduate holding two invented offers. Both employers, both salaries, and the mileage cost below are simulated for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional offer details in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Offer 1 pays $41,000 and is 34 miles each way. Offer 2 pays $38,200, is 6 miles each way, and reimburses $2,500 of tuition each year. Assume 232 workdays and a driving cost of $0.28 per mile for both.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of commuting to Offer 1 cost in driving expense?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of commuting to Offer 2 cost in driving expense?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Adjust each salary: subtract that offer’s commuting cost, then add any tuition reimbursement.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Offer 1 worth after adjusting for commuting cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Offer 2 worth after adjusting for commuting cost and adding the tuition reimbursement?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "After both adjustments, which offer is worth more per year?",
+          "choices": [
+            "Offer 1, at $41,000",
+            "Offer 2, at $38,200",
+            "They are equal"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Time is the non-income factor money does not capture. Offer 1’s drive takes 45 minutes each way; Offer 2’s takes 12 minutes each way.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many more hours a year would Tobias spend commuting under Offer 1 than under Offer 2? Round to one decimal place.",
+          "unit": "hours"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "performance-task",
+      "directions": "Write your recommendation.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Recommend one offer for Tobias. Use the adjusted dollar figures and the commuting-hours figure, and name one non-income factor the numbers above do not capture at all."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the mileage cost is coming out roughly half of what it should, check whether the return trip was counted. Walk one day at a time: 34 miles out, 34 miles back, 68 miles at $0.28 is $19.04 a day, and 232 of those days is $4,417.28.",
+  "extension": "Find the salary Offer 1 would need in order to beat Offer 2 after both adjustments, and say whether the 255.2 extra commuting hours would still make it a close call.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u01-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

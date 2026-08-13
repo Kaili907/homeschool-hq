@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l09",
+  "lessonId": "ma-g9-financial-literacy-u01-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$333.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "With no pre-tax deduction, taxable wages equal gross: 18% of $1,850 is $333.00."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,517.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,850 less $333.00 of tax, with nothing else withheld."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$92.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The contribution is a percentage of gross pay, so 5% of $1,850 is $92.50."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,757.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A pre-tax contribution reduces the wages tax is charged on: $1,850 - $92.50."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$316.35",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "18% of the reduced taxable wages of $1,757.50."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,441.15",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,850 less the $92.50 contribution and the $316.35 of tax."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$75.85",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Period 1 take-home of $1,517.00 less period 2 take-home of $1,441.15."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$16.65",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$333.00 less $316.35, the tax saved by reducing taxable wages."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "$92.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$75.85 + $16.65 = $92.50, exactly the retirement contribution: every dollar is accounted for as either less cash in hand or less tax."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(gross * taxRate, 2)",
+        "substituted": "round(1850 * 0.18, 2)",
+        "result": "$333.00",
+        "why": "With no pre-tax deduction, taxable wages equal gross: 18% of $1,850 is $333.00."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "gross2 - #t1-p1",
+        "substituted": "1850 - #t1-p1",
+        "result": "$1,517.00",
+        "why": "$1,850 less $333.00 of tax, with nothing else withheld."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "gross3 * contribRate",
+        "substituted": "1850 * 0.05",
+        "result": "$92.50",
+        "why": "The contribution is a percentage of gross pay, so 5% of $1,850 is $92.50."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "gross4 - #t2-p1",
+        "substituted": "1850 - #t2-p1",
+        "result": "$1,757.50",
+        "why": "A pre-tax contribution reduces the wages tax is charged on: $1,850 - $92.50."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 * taxRate2, 2)",
+        "substituted": "round(#t2-p2 * 0.18, 2)",
+        "result": "$316.35",
+        "why": "18% of the reduced taxable wages of $1,757.50."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "gross5 - #t2-p1 - #t2-p3",
+        "substituted": "1850 - #t2-p1 - #t2-p3",
+        "result": "$1,441.15",
+        "why": "$1,850 less the $92.50 contribution and the $316.35 of tax."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t1-p2 - #t2-p4",
+        "substituted": "#t1-p2 - #t2-p4",
+        "result": "$75.85",
+        "why": "Period 1 take-home of $1,517.00 less period 2 take-home of $1,441.15."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t1-p1 - #t2-p3",
+        "substituted": "#t1-p1 - #t2-p3",
+        "result": "$16.65",
+        "why": "$333.00 less $316.35, the tax saved by reducing taxable wages."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "#t3-p1 + #t3-p2",
+        "substituted": "#t3-p1 + #t3-p2",
+        "result": "$92.50",
+        "why": "$75.85 + $16.65 = $92.50, exactly the retirement contribution: every dollar is accounted for as either less cash in hand or less tax."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Amara set aside $92.50 but her take-home pay fell by less than that. Explain where the rest came from, and state one thing the $92.50 costs her that the arithmetic above does not show.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that $16.65 of the contribution was funded by the reduction in tax, because the pre-tax contribution lowered taxable wages from $1,850 to $1,757.50.",
+          "States that the money is not gone but moved into a retirement account, so this is a shift between uses rather than a loss.",
+          "Names a real cost the arithmetic omits, most directly that the $92.50 is not available to spend now and is generally not withdrawable without conditions."
+        ],
+        "evidenceRequirements": [
+          "Uses the three period-2 figures — the $92.50 contribution, the $75.85 fall in take-home, and the $16.65 tax saving — and shows they reconcile."
+        ],
+        "lookFors": [
+          "The response says the tax saving depends on the contribution being pre-tax; a post-tax contribution would have cut take-home by the full $92.50.",
+          "The response does not present the tax saving as free money."
+        ],
+        "commonMisconception": "Expecting take-home pay to fall by the full contribution amount, or treating the tax saving as a gain rather than as part of the money already set aside.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l05",
+  "lessonId": "ma-g9-financial-literacy-u01-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,417.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "34 miles each way is 68 miles a day; 68 x 232 days is 15,776 miles; at $0.28 per mile that is $4,417.28."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$779.52",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6 miles each way is 12 miles a day; 12 x 232 days is 2,784 miles; at $0.28 per mile that is $779.52."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$36,582.72",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$41,000 less the $4,417.28 it costs to get there."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$39,920.48",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$38,200 less $779.52 of driving, plus the $2,500 of tuition the employer covers."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Offer 2, at $38,200",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Adjusted, Offer 1 is worth $36,582.72 and Offer 2 is worth $39,920.48, so the lower salary wins by $3,337.76."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "255.2",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Offer 1 costs 90 minutes a day and Offer 2 costs 24; the 66-minute daily difference over 232 days is 15,312 minutes, or 255.2 hours."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "miles1 * 2 * days * perMile",
+        "substituted": "34 * 2 * 232 * 0.28",
+        "result": "$4,417.28",
+        "why": "34 miles each way is 68 miles a day; 68 x 232 days is 15,776 miles; at $0.28 per mile that is $4,417.28."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "miles2 * 2 * days2 * perMile2",
+        "substituted": "6 * 2 * 232 * 0.28",
+        "result": "$779.52",
+        "why": "6 miles each way is 12 miles a day; 12 x 232 days is 2,784 miles; at $0.28 per mile that is $779.52."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "salary1 - #t1-p1",
+        "substituted": "41000 - #t1-p1",
+        "result": "$36,582.72",
+        "why": "$41,000 less the $4,417.28 it costs to get there."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "salary2 - #t1-p2 + tuitionBenefit",
+        "substituted": "38200 - #t1-p2 + 2500",
+        "result": "$39,920.48",
+        "why": "$38,200 less $779.52 of driving, plus the $2,500 of tuition the employer covers."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "s1 - #t1-p1 > s2 - #t1-p2 + tb",
+        "substituted": "41000 - #t1-p1 > 38200 - #t1-p2 + 2500",
+        "result": "Offer 2, at $38,200",
+        "why": "Adjusted, Offer 1 is worth $36,582.72 and Offer 2 is worth $39,920.48, so the lower salary wins by $3,337.76."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round((min1 * 2 * days3 - min2 * 2 * days3) / 60, 1)",
+        "substituted": "round((45 * 2 * 232 - 12 * 2 * 232) / 60, 1)",
+        "result": "255.2",
+        "why": "Offer 1 costs 90 minutes a day and Offer 2 costs 24; the 66-minute daily difference over 232 days is 15,312 minutes, or 255.2 hours."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Recommend one offer for Tobias. Use the adjusted dollar figures and the commuting-hours figure, and name one non-income factor the numbers above do not capture at all.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Recommends an offer and supports it with the adjusted figures ($36,582.72 against $39,920.48), not the headline salaries.",
+          "Uses the 255.2-hour commuting difference as a cost of Offer 1 rather than mentioning it in passing.",
+          "Names a factor the calculation cannot price — such as schedule control, the work itself, coworkers, job security, or what the tuition benefit lets him study — and says why it could matter."
+        ],
+        "evidenceRequirements": [
+          "Cites at least two computed figures from this lesson, one dollar figure and the hours figure."
+        ],
+        "lookFors": [
+          "A recommendation for Offer 1 can still meet the criteria if it argues the unpriced factors outweigh $3,337.76 and 255.2 hours; what is scored is whether the tradeoff is faced.",
+          "The response does not claim the adjusted figures settle the question by themselves."
+        ],
+        "commonMisconception": "Ranking offers by salary alone when the cost of holding the job differs between them.",
+        "dimensions": [
+          "tradeoff-defense",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}
