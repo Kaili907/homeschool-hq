@@ -1,0 +1,92 @@
+{
+  "integration_id": "g8-math-8ee2-integration-2026-08-12",
+  "title": "Grade 8 Mathematics — 8.EE.2 correction, 180-day integration",
+  "created_on": "2026-08-12",
+  "integrates_correction": "g8-math-8ee2-2026-08-12",
+  "integrates_commit": "e9ead0c",
+  "targets_release": "manuel-academy-grades-5-7-8-curriculum-v1 1.0.0",
+  "produces_release": "1.0.1 (proposed; 1.0.0 is not edited)",
+  "target_course_id": "ma-g8-mathematics",
+  "status": "planned-not-applied",
+  "sealed_release_modified": false,
+  "decision": {
+    "chosen": "A-prime — insertion at the topical point, funded by withdrawal of four redundant Unit 10 recycle days",
+    "schedule_length_days": 180,
+    "extension_option_rejected": "184 days (not 183: the accepted overlay carries an assessment that needs its own delivery day). Rejected — the sealed lesson schema caps course_day at 180.",
+    "overlay_option_a_amended": "The overlay recommended substituting Unit 1 days u01-l08/l13/l14. Amended: Unit 1's 8.NS.1 and 8.NS.2 are unique to Unit 1, whereas every Unit 10 standard is instructed and assessed in an earlier dedicated unit. Funding the days from Unit 10 costs strictly less coverage."
+  },
+  "insertion": {
+    "after_lesson_id": "ma-g8-mathematics-u01-l18",
+    "days": [
+      19,
+      20,
+      21,
+      22
+    ],
+    "lesson_ids": [
+      "ma-g8-mathematics-u01-l19",
+      "ma-g8-mathematics-u01-l20",
+      "ma-g8-mathematics-u01-l21",
+      "ma-g8-mathematics-u01-l22"
+    ],
+    "course_day_matches_overlay_as_authored": true
+  },
+  "withdrawn": [
+    {
+      "lesson_id": "ma-g8-mathematics-u10-l10",
+      "sealed_course_day": 172,
+      "phase": "Discussion or problem seminar",
+      "recycles": "focus 'geometry and measurement', instructed at u10-l04",
+      "absorbed_by": "ma-g8-mathematics-u10-l11",
+      "absorption": "seminar protocol opens the performance-task planning session"
+    },
+    {
+      "lesson_id": "ma-g8-mathematics-u10-l13",
+      "sealed_course_day": 175,
+      "phase": "Skill consolidation",
+      "recycles": "focus 'defining variables and assumptions', instructed at u10-l01 and u10-l07",
+      "absorbed_by": "ma-g8-mathematics-u10-l15",
+      "absorption": "consolidation set runs as the fluency half of assessment preparation"
+    },
+    {
+      "lesson_id": "ma-g8-mathematics-u10-l14",
+      "sealed_course_day": 176,
+      "phase": "Transfer challenge",
+      "recycles": "focus 'selecting linear or nonlinear models', instructed at u10-l02 and reworked at u10-l08",
+      "absorbed_by": "ma-g8-mathematics-u10-l15",
+      "absorption": "transfer set runs as the unfamiliar-context half of assessment preparation"
+    },
+    {
+      "lesson_id": "ma-g8-mathematics-u10-l17",
+      "sealed_course_day": 179,
+      "phase": "Targeted correction",
+      "recycles": "focus 'data trends and uncertainty', instructed at u10-l05 and u10-l11",
+      "absorbed_by": "ma-g8-mathematics-u10-l18",
+      "absorption": "post-assessment correction folded into the revision step of publication"
+    }
+  ],
+  "counts": {
+    "required_scheduled_days": 180,
+    "authored_math_lesson_records": 184,
+    "required_lesson_records": 180,
+    "reserve_lesson_records": 4,
+    "unit_day_counts": {
+      "1": 22,
+      "2": 18,
+      "3": 18,
+      "4": 18,
+      "5": 18,
+      "6": 18,
+      "7": 18,
+      "8": 18,
+      "9": 18,
+      "10": 14
+    }
+  },
+  "shift_summary": {
+    "days_1_to_18": "unchanged",
+    "days_19_to_22": "new 8.EE.2 correction block",
+    "units_2_to_9": "+4 days",
+    "unit_10": "starts at day 167; 14 required days"
+  }
+}
