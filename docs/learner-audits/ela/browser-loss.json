@@ -1,0 +1,223 @@
+{
+  "status": "FAIL",
+  "projectionResult": "TASK_STRUCTURE_NOT_PRESERVED",
+  "responseResult": "UNSUPPORTED",
+  "totals": {
+    "lessons": 1620,
+    "structuredSourceReferencesLost": 1040,
+    "browserPromptArraysEmpty": 1620,
+    "taskTextFlattenedIntoBodyProse": 1620,
+    "responseKindNone": 1620,
+    "responsePersisted": 0,
+    "learnerSuccessCriteriaProjected": 0,
+    "adultScoringLeaks": 0,
+    "crossGradeCopiedTaskLessons": 830
+  },
+  "mountedPlayerEvidence": {
+    "playerHardCodesNoResponse": true,
+    "playerDropsSubmit": true,
+    "playerOnlyUsesFirstPrompt": true,
+    "builderProjectsSourceViaAsText": true
+  },
+  "copiedTaskGroups": [
+    {
+      "taskSha256": "f2cd8c4d50fe2a3b7d9d46b32ff2eed3a5578dc2a74f3a6ca7e59290ea76de74",
+      "lessonCount": 480,
+      "grades": [
+        5,
+        7,
+        8
+      ],
+      "sampleLessonRefs": [
+        "ma-g5-english-language-arts-u01-l01",
+        "ma-g5-english-language-arts-u01-l02",
+        "ma-g5-english-language-arts-u01-l03",
+        "ma-g5-english-language-arts-u01-l04",
+        "ma-g5-english-language-arts-u01-l05",
+        "ma-g5-english-language-arts-u01-l06"
+      ],
+      "task": "Learner completes a new application of today's lesson and records both the result and the reasoning, evidence, process, or design choice that produced it. When finished: In one concise response, show or explain the most important idea about today's lesson; then identify one check that would catch an error or weak claim."
+    },
+    {
+      "taskSha256": "0c3d38cc6260ef07f29101d5c0325f25a7ce04fa021194d828ce41aeacd5c514",
+      "lessonCount": 40,
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sampleLessonRefs": [
+        "ma-g9-english-language-arts-u01-l18",
+        "ma-g9-english-language-arts-u02-l18",
+        "ma-g9-english-language-arts-u03-l18",
+        "ma-g9-english-language-arts-u04-l18",
+        "ma-g9-english-language-arts-u05-l18",
+        "ma-g9-english-language-arts-u06-l18"
+      ],
+      "task": "Publish or present the unit's work in a chosen format, then evidence the growth it shows. When finished: Point to one concrete difference between this piece and your earlier work, and name what caused it."
+    },
+    {
+      "taskSha256": "2fcd8917db5fe57cdd05aea1bc173abef124ad0446bc48471a76634656ddd6bd",
+      "lessonCount": 40,
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sampleLessonRefs": [
+        "ma-g9-english-language-arts-u01-l07",
+        "ma-g9-english-language-arts-u02-l07",
+        "ma-g9-english-language-arts-u03-l07",
+        "ma-g9-english-language-arts-u04-l07",
+        "ma-g9-english-language-arts-u05-l07",
+        "ma-g9-english-language-arts-u06-l07"
+      ],
+      "task": "Read the assigned text sustained and uninterrupted, then harvest and justify the evidence bearing on today's lesson. When finished: Quote the single passage that most changes your reading of today's lesson, and say what it changes."
+    },
+    {
+      "taskSha256": "30ddc29bf276955b7c00e4867fd92c1b37e4cf1474c971a0a63301bdf46a1865",
+      "lessonCount": 40,
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sampleLessonRefs": [
+        "ma-g9-english-language-arts-u01-l13",
+        "ma-g9-english-language-arts-u02-l13",
+        "ma-g9-english-language-arts-u03-l13",
+        "ma-g9-english-language-arts-u04-l13",
+        "ma-g9-english-language-arts-u05-l13",
+        "ma-g9-english-language-arts-u06-l13"
+      ],
+      "task": "Interleaved practice across the unit's topics, deciding which move applies before applying it. When finished: Given two similar cases, say which move each needs and why they differ."
+    },
+    {
+      "taskSha256": "84926392ed9d62ed5fa3bb60482155ac2a0db6ec805419def5dc38df52ede55f",
+      "lessonCount": 40,
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sampleLessonRefs": [
+        "ma-g9-english-language-arts-u01-l15",
+        "ma-g9-english-language-arts-u02-l15",
+        "ma-g9-english-language-arts-u03-l15",
+        "ma-g9-english-language-arts-u04-l15",
+        "ma-g9-english-language-arts-u05-l15",
+        "ma-g9-english-language-arts-u06-l15"
+      ],
+      "task": "Self-audit the unit's topics, then practise only the flagged gaps. When finished: Name the topic you are least secure in and the specific practice that would close it."
+    },
+    {
+      "taskSha256": "a053e274bc5acf0ab1cd9f5ab0e52706df15b2beccd6fb142f7d6b2254b861d3",
+      "lessonCount": 40,
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sampleLessonRefs": [
+        "ma-g9-english-language-arts-u01-l08",
+        "ma-g9-english-language-arts-u02-l08",
+        "ma-g9-english-language-arts-u03-l08",
+        "ma-g9-english-language-arts-u04-l08",
+        "ma-g9-english-language-arts-u05-l08",
+        "ma-g9-english-language-arts-u06-l08"
+      ],
+      "task": "Re-attempt today's lesson after targeted reteaching, in three varied forms plus one unsupported check. When finished: Explain what you were doing wrong about today's lesson before, and what you are doing differently now."
+    },
+    {
+      "taskSha256": "a518d7804a834bd977f33346a1c92293b9a0f1de07736920090287cb57e76a94",
+      "lessonCount": 40,
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sampleLessonRefs": [
+        "ma-g9-english-language-arts-u01-l17",
+        "ma-g9-english-language-arts-u02-l17",
+        "ma-g9-english-language-arts-u03-l17",
+        "ma-g9-english-language-arts-u04-l17",
+        "ma-g9-english-language-arts-u05-l17",
+        "ma-g9-english-language-arts-u06-l17"
+      ],
+      "task": "Categorise your own errors, then re-learn the largest genuine gap. When finished: For one error, say whether it was not-known, misapplied, or careless, and what that implies about the fix."
+    },
+    {
+      "taskSha256": "e57a906a3d5d1b6fa9e89ebf1b5ca9052cd915ec5793d7fe2915a1dc0aa7dd5e",
+      "lessonCount": 40,
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sampleLessonRefs": [
+        "ma-g9-english-language-arts-u01-l10",
+        "ma-g9-english-language-arts-u02-l10",
+        "ma-g9-english-language-arts-u03-l10",
+        "ma-g9-english-language-arts-u04-l10",
+        "ma-g9-english-language-arts-u05-l10",
+        "ma-g9-english-language-arts-u06-l10"
+      ],
+      "task": "Participate in or write out a seminar on today's lesson with prepared, located evidence. When finished: State the strongest point made against your position and your best answer to it."
+    },
+    {
+      "taskSha256": "ec017b4ad6a7a8789f67126bb740d35b9694de65ac8af05da69df09f860da21c",
+      "lessonCount": 40,
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "sampleLessonRefs": [
+        "ma-g9-english-language-arts-u01-l01",
+        "ma-g9-english-language-arts-u02-l01",
+        "ma-g9-english-language-arts-u03-l01",
+        "ma-g9-english-language-arts-u04-l01",
+        "ma-g9-english-language-arts-u05-l01",
+        "ma-g9-english-language-arts-u06-l01"
+      ],
+      "task": "Attempt today's lesson without instruction, then record a personal goal for the unit. When finished: Name one thing about today's lesson you can already do and one you cannot do yet."
+    },
+    {
+      "taskSha256": "21961b480e43feaa5684f17f0cc295c3dbf36cce5979f2de6b733b23bc7cce03",
+      "lessonCount": 30,
+      "grades": [
+        5,
+        7,
+        8
+      ],
+      "sampleLessonRefs": [
+        "ma-g5-english-language-arts-u01-l15",
+        "ma-g5-english-language-arts-u02-l15",
+        "ma-g5-english-language-arts-u03-l15",
+        "ma-g5-english-language-arts-u04-l15",
+        "ma-g5-english-language-arts-u05-l15",
+        "ma-g5-english-language-arts-u06-l15"
+      ],
+      "task": "Complete the unit assessment evidence for today's lesson independently. Supports may preserve access but may not supply the answer, interpretation, or final product. When finished: Rate confidence in today's lesson, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation."
+    }
+  ],
+  "negativeControls": {
+    "status": "PASS",
+    "controls": {
+      "missingReading": true,
+      "emptyWritingPrompt": true,
+      "missingRubric": true,
+      "answerLeak": true,
+      "sourceBrowserPromptLoss": true,
+      "copiedCrossGradeTask": true
+    }
+  }
+}

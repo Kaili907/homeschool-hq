@@ -1,0 +1,145 @@
+{
+  "status": "FAIL",
+  "reason": "All 1,620 bindings claim STATIC_READY/READY, but the browser receives no passage or attached selected source for any ELA lesson.",
+  "sourceWorktrees": {
+    "g34": {
+      "path": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-g34-ela-r1",
+      "commit": "ef81511c2b582d003e397bb79daa8a26a41e3b10"
+    },
+    "canonical": {
+      "path": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-ela-production-r1",
+      "commit": "00374a8dc26eddfac2cf52aec5661deff760ddbb"
+    },
+    "hs912": {
+      "path": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-hs912-ela-r1",
+      "commit": "42f2505bb04d831c4aefc195a7ce03edb2d7b1d9"
+    }
+  },
+  "totals": {
+    "lessons": 1620,
+    "bindingClaimsStaticReady": 1620,
+    "actualReadingInBrowser": 0,
+    "sourceSectionVisibleInBrowser": 540,
+    "structuredSourceReferencesLostByBrowserProjection": 1040,
+    "missingSourceReferenceAtProduction": 40,
+    "facilitatorSelectedContractsWithoutAttachmentGate": 540,
+    "authoringFullBodyPresentButNotDelivered": 320,
+    "originalAvailabilityClaimWithoutBrowserDelivery": 752,
+    "sourceReferences": 1868,
+    "originalReferences": 914,
+    "publicDomainReferences": 954,
+    "rightsRequiredReferences": 0,
+    "unresolvedReferences": 0
+  },
+  "grades": [
+    {
+      "grade": 3,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 0,
+      "referencedSourceContractInProduction": 160,
+      "facilitatorSelectedContractInProduction": 0,
+      "absentSourceReference": 20,
+      "authoringFullBodyPresentButNotDelivered": 160,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 160
+    },
+    {
+      "grade": 4,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 0,
+      "referencedSourceContractInProduction": 160,
+      "facilitatorSelectedContractInProduction": 0,
+      "absentSourceReference": 20,
+      "authoringFullBodyPresentButNotDelivered": 160,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 160
+    },
+    {
+      "grade": 5,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 180,
+      "referencedSourceContractInProduction": 0,
+      "facilitatorSelectedContractInProduction": 180,
+      "absentSourceReference": 0,
+      "authoringFullBodyPresentButNotDelivered": 0,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 0
+    },
+    {
+      "grade": 7,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 180,
+      "referencedSourceContractInProduction": 0,
+      "facilitatorSelectedContractInProduction": 180,
+      "absentSourceReference": 0,
+      "authoringFullBodyPresentButNotDelivered": 0,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 0
+    },
+    {
+      "grade": 8,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 180,
+      "referencedSourceContractInProduction": 0,
+      "facilitatorSelectedContractInProduction": 180,
+      "absentSourceReference": 0,
+      "authoringFullBodyPresentButNotDelivered": 0,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 0
+    },
+    {
+      "grade": 9,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 0,
+      "referencedSourceContractInProduction": 180,
+      "facilitatorSelectedContractInProduction": 0,
+      "absentSourceReference": 0,
+      "authoringFullBodyPresentButNotDelivered": 0,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 108
+    },
+    {
+      "grade": 10,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 0,
+      "referencedSourceContractInProduction": 180,
+      "facilitatorSelectedContractInProduction": 0,
+      "absentSourceReference": 0,
+      "authoringFullBodyPresentButNotDelivered": 0,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 108
+    },
+    {
+      "grade": 11,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 0,
+      "referencedSourceContractInProduction": 180,
+      "facilitatorSelectedContractInProduction": 0,
+      "absentSourceReference": 0,
+      "authoringFullBodyPresentButNotDelivered": 0,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 90
+    },
+    {
+      "grade": 12,
+      "lessons": 180,
+      "bindingClaimsStaticReady": 180,
+      "actualReadingInBrowser": 0,
+      "sourceSectionVisibleInBrowser": 0,
+      "referencedSourceContractInProduction": 180,
+      "facilitatorSelectedContractInProduction": 0,
+      "absentSourceReference": 0,
+      "authoringFullBodyPresentButNotDelivered": 0,
+      "originalAvailabilityClaimWithoutBrowserDelivery": 126
+    }
+  ],
+  "bindingSourceCommit": "00374a8dc26eddfac2cf52aec5661deff760ddbb"
+}

@@ -1,0 +1,968 @@
+{
+  "classification": "ELA_LEARNER_AUDIT_COMPLETE",
+  "overallRuling": "DO_NOT_BEGIN_YET",
+  "lessonsAudited": 1620,
+  "grades": [
+    {
+      "grade": 3,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 0,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 10,
+        "COPYRIGHT_SOURCE_PROBLEM": 160,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 0
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    },
+    {
+      "grade": 4,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 0,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 10,
+        "COPYRIGHT_SOURCE_PROBLEM": 160,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 0
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    },
+    {
+      "grade": 5,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 30,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 170,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 170,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 170
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    },
+    {
+      "grade": 7,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 30,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 170,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 170,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 170
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    },
+    {
+      "grade": 8,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 30,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 170,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 170,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 170
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    },
+    {
+      "grade": 9,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 0,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 0,
+        "COPYRIGHT_SOURCE_PROBLEM": 108,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 80
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    },
+    {
+      "grade": 10,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 0,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 0,
+        "COPYRIGHT_SOURCE_PROBLEM": 108,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 80
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    },
+    {
+      "grade": 11,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 0,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 0,
+        "COPYRIGHT_SOURCE_PROBLEM": 90,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 80
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    },
+    {
+      "grade": 12,
+      "lessonsAudited": 180,
+      "classification": "DO_NOT_BEGIN_YET",
+      "blockerLessons": 180,
+      "flagCounts": {
+        "MISSING_READING": 180,
+        "MISSING_SOURCE": 180,
+        "EMPTY_QUESTIONS": 0,
+        "EMPTY_WRITING_TASK": 0,
+        "EMPTY_RUBRIC": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "FLATTENED_QUESTION_STRUCTURE": 180,
+        "UNSUPPORTED_WRITING_RESPONSE": 180,
+        "PLACEHOLDER": 0,
+        "COPYRIGHT_SOURCE_PROBLEM": 126,
+        "ANSWER_OR_SCORING_LEAK": 0,
+        "CROSS_GRADE_TEMPLATE_COLLAPSE": 80
+      },
+      "rationale": "Every lesson requires an assigned passage/source but the admitted browser payload attaches none; the mounted Lesson Player collects and persists no learner response."
+    }
+  ],
+  "flagCounts": {
+    "MISSING_READING": 1620,
+    "MISSING_SOURCE": 1620,
+    "EMPTY_QUESTIONS": 0,
+    "EMPTY_WRITING_TASK": 90,
+    "EMPTY_RUBRIC": 0,
+    "ZERO_ACTIONABLE_WORK": 510,
+    "FLATTENED_QUESTION_STRUCTURE": 1620,
+    "UNSUPPORTED_WRITING_RESPONSE": 1620,
+    "PLACEHOLDER": 530,
+    "COPYRIGHT_SOURCE_PROBLEM": 752,
+    "ANSWER_OR_SCORING_LEAK": 0,
+    "CROSS_GRADE_TEMPLATE_COLLAPSE": 830
+  },
+  "manualInspections": [
+    {
+      "grade": 3,
+      "stratum": "first",
+      "lessonId": "ma-g3-english-language-arts-u01-l01",
+      "phase": "Launch and baseline",
+      "focus": "what strong readers and writers do, and a no-penalty baseline",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 3,
+      "stratum": "concept-build",
+      "lessonId": "ma-g3-english-language-arts-u01-l02",
+      "phase": "Word work and decoding focus",
+      "focus": "hearing syllables and finding known parts inside longer words",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 3,
+      "stratum": "analysis",
+      "lessonId": "ma-g3-english-language-arts-u01-l09",
+      "phase": "Shared close reading",
+      "focus": "reading one original passage together for who, what, where, and when",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 3,
+      "stratum": "writing",
+      "lessonId": "ma-g3-english-language-arts-u01-l12",
+      "phase": "Writing plan and draft",
+      "focus": "planning three sentences about one reading habit that helps you",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 3,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g3-english-language-arts-u01-l17",
+      "phase": "Unit assessment",
+      "focus": "unit evidence: text-based answers written in complete sentences",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 3,
+      "stratum": "final",
+      "lessonId": "ma-g3-english-language-arts-u10-l18",
+      "phase": "Correction, publication, and reflection",
+      "focus": "correcting one section and publishing the year-end portfolio",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 4,
+      "stratum": "first",
+      "lessonId": "ma-g4-english-language-arts-u01-l01",
+      "phase": "Launch and diagnostic",
+      "focus": "what evidence is, and a no-penalty diagnostic across both text types",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 4,
+      "stratum": "concept-build",
+      "lessonId": "ma-g4-english-language-arts-u01-l02",
+      "phase": "Word study and morphology",
+      "focus": "attacking an unfamiliar multisyllabic word with sound, syllables, and parts",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 4,
+      "stratum": "analysis",
+      "lessonId": "ma-g4-english-language-arts-u01-l10",
+      "phase": "Craft or structure analysis",
+      "focus": "how quoting and paraphrasing differ, and when each is honest",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 4,
+      "stratum": "writing",
+      "lessonId": "ma-g4-english-language-arts-u01-l12",
+      "phase": "Writing plan and draft",
+      "focus": "planning a written response for a named audience",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 4,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g4-english-language-arts-u01-l17",
+      "phase": "Unit assessment",
+      "focus": "unit evidence: cited literary and informational responses",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 4,
+      "stratum": "final",
+      "lessonId": "ma-g4-english-language-arts-u10-l18",
+      "phase": "Targeted correction, publication, and reflection",
+      "focus": "correcting one section and publishing the portfolio with its two-text comparison",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 5,
+      "stratum": "first",
+      "lessonId": "ma-g5-english-language-arts-u01-l01",
+      "phase": "Launch and diagnostic",
+      "focus": "active reading habits",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 5,
+      "stratum": "concept-build",
+      "lessonId": "ma-g5-english-language-arts-u01-l02",
+      "phase": "Concept model A",
+      "focus": "asking and answering text-dependent questions",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 5,
+      "stratum": "analysis",
+      "lessonId": "ma-g5-english-language-arts-u01-l07",
+      "phase": "Investigation or close reading",
+      "focus": "active reading habits",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 5,
+      "stratum": "writing",
+      "lessonId": "ma-g5-english-language-arts-u01-l12",
+      "phase": "Performance task build",
+      "focus": "baseline reading and writing evidence",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "writing/performance deliverable unspecified",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 5,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g5-english-language-arts-u01-l16",
+      "phase": "Unit assessment",
+      "focus": "notebook routines",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 5,
+      "stratum": "final",
+      "lessonId": "ma-g5-english-language-arts-u10-l18",
+      "phase": "Publication, presentation, or reflection",
+      "focus": "reflection and goal setting",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "writing/performance deliverable unspecified",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 7,
+      "stratum": "first",
+      "lessonId": "ma-g7-english-language-arts-u01-l01",
+      "phase": "Launch and diagnostic",
+      "focus": "close reading routines",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 7,
+      "stratum": "concept-build",
+      "lessonId": "ma-g7-english-language-arts-u01-l02",
+      "phase": "Concept model A",
+      "focus": "citing several pieces of evidence",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 7,
+      "stratum": "analysis",
+      "lessonId": "ma-g7-english-language-arts-u01-l07",
+      "phase": "Investigation or close reading",
+      "focus": "close reading routines",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 7,
+      "stratum": "writing",
+      "lessonId": "ma-g7-english-language-arts-u01-l12",
+      "phase": "Performance task build",
+      "focus": "reading volume and selection",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "writing/performance deliverable unspecified",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 7,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g7-english-language-arts-u01-l16",
+      "phase": "Unit assessment",
+      "focus": "annotation choices",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 7,
+      "stratum": "final",
+      "lessonId": "ma-g7-english-language-arts-u10-l18",
+      "phase": "Publication, presentation, or reflection",
+      "focus": "reflection and goal setting",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "writing/performance deliverable unspecified",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 8,
+      "stratum": "first",
+      "lessonId": "ma-g8-english-language-arts-u01-l01",
+      "phase": "Launch and diagnostic",
+      "focus": "strongest textual evidence",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 8,
+      "stratum": "concept-build",
+      "lessonId": "ma-g8-english-language-arts-u01-l02",
+      "phase": "Concept model A",
+      "focus": "inference and ambiguity",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 8,
+      "stratum": "analysis",
+      "lessonId": "ma-g8-english-language-arts-u01-l07",
+      "phase": "Investigation or close reading",
+      "focus": "strongest textual evidence",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 8,
+      "stratum": "writing",
+      "lessonId": "ma-g8-english-language-arts-u01-l12",
+      "phase": "Performance task build",
+      "focus": "independent reading planning",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "writing/performance deliverable unspecified",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 8,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g8-english-language-arts-u01-l16",
+      "phase": "Unit assessment",
+      "focus": "annotation and note systems",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 8,
+      "stratum": "final",
+      "lessonId": "ma-g8-english-language-arts-u10-l18",
+      "phase": "Publication, presentation, or reflection",
+      "focus": "high-school readiness reflection",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "central application/item unspecified",
+        "writing/performance deliverable unspecified",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 9,
+      "stratum": "first",
+      "lessonId": "ma-g9-english-language-arts-u01-l01",
+      "phase": "Launch and diagnostic",
+      "focus": "strong and thorough textual evidence",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 9,
+      "stratum": "concept-build",
+      "lessonId": "ma-g9-english-language-arts-u01-l02",
+      "phase": "Concept model A",
+      "focus": "explicit statement versus supported inference",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 9,
+      "stratum": "analysis",
+      "lessonId": "ma-g9-english-language-arts-u01-l07",
+      "phase": "Investigation or close reading",
+      "focus": "strong and thorough textual evidence",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 9,
+      "stratum": "writing",
+      "lessonId": "ma-g9-english-language-arts-u01-l12",
+      "phase": "Performance task build",
+      "focus": "evidence sufficiency review",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 9,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g9-english-language-arts-u01-l16",
+      "phase": "Unit assessment",
+      "focus": "discussion preparation and evidence logs",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 9,
+      "stratum": "final",
+      "lessonId": "ma-g9-english-language-arts-u10-l18",
+      "phase": "Publication, presentation, or reflection",
+      "focus": "strategic and accessible digital media",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 10,
+      "stratum": "first",
+      "lessonId": "ma-g10-english-language-arts-u01-l01",
+      "phase": "Launch and diagnostic",
+      "focus": "unaided selection of strong and thorough evidence",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 10,
+      "stratum": "concept-build",
+      "lessonId": "ma-g10-english-language-arts-u01-l02",
+      "phase": "Concept model A",
+      "focus": "competing defensible readings",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 10,
+      "stratum": "analysis",
+      "lessonId": "ma-g10-english-language-arts-u01-l07",
+      "phase": "Investigation or close reading",
+      "focus": "unaided selection of strong and thorough evidence",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 10,
+      "stratum": "writing",
+      "lessonId": "ma-g10-english-language-arts-u01-l12",
+      "phase": "Performance task build",
+      "focus": "seminar leadership and collegial rules",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 10,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g10-english-language-arts-u01-l16",
+      "phase": "Unit assessment",
+      "focus": "evidence sufficiency without prompting",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 10,
+      "stratum": "final",
+      "lessonId": "ma-g10-english-language-arts-u10-l18",
+      "phase": "Publication, presentation, or reflection",
+      "focus": "accessible media with captions and transcripts",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 11,
+      "stratum": "first",
+      "lessonId": "ma-g11-english-language-arts-u01-l01",
+      "phase": "Launch and diagnostic",
+      "focus": "determining where a text leaves matters uncertain",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 11,
+      "stratum": "concept-build",
+      "lessonId": "ma-g11-english-language-arts-u01-l02",
+      "phase": "Concept model A",
+      "focus": "two or more themes interacting and building",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 11,
+      "stratum": "analysis",
+      "lessonId": "ma-g11-english-language-arts-u01-l07",
+      "phase": "Investigation or close reading",
+      "focus": "determining where a text leaves matters uncertain",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 11,
+      "stratum": "writing",
+      "lessonId": "ma-g11-english-language-arts-u01-l12",
+      "phase": "Performance task build",
+      "focus": "preparation and research before seminar",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 11,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g11-english-language-arts-u01-l16",
+      "phase": "Unit assessment",
+      "focus": "interpretive restraint under ambiguity",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 11,
+      "stratum": "final",
+      "lessonId": "ma-g11-english-language-arts-u10-l18",
+      "phase": "Publication, presentation, or reflection",
+      "focus": "addressing alternative or opposing perspectives",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 12,
+      "stratum": "first",
+      "lessonId": "ma-g12-english-language-arts-u01-l01",
+      "phase": "Launch and diagnostic",
+      "focus": "independence at the high end of the 11-CCR band",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 12,
+      "stratum": "concept-build",
+      "lessonId": "ma-g12-english-language-arts-u01-l02",
+      "phase": "Concept model A",
+      "focus": "protocols for dense and unfamiliar text",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 12,
+      "stratum": "analysis",
+      "lessonId": "ma-g12-english-language-arts-u01-l07",
+      "phase": "Investigation or close reading",
+      "focus": "independence at the high end of the 11-CCR band",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 12,
+      "stratum": "writing",
+      "lessonId": "ma-g12-english-language-arts-u01-l12",
+      "phase": "Performance task build",
+      "focus": "self-monitoring and repairing comprehension",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 12,
+      "stratum": "assessment/performance",
+      "lessonId": "ma-g12-english-language-arts-u01-l16",
+      "phase": "Unit assessment",
+      "focus": "academic vocabulary met without instruction",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    },
+    {
+      "grade": 12,
+      "stratum": "final",
+      "lessonId": "ma-g12-english-language-arts-u10-l18",
+      "phase": "Publication, presentation, or reflection",
+      "focus": "postsecondary reading and writing transition",
+      "result": "BLOCKER",
+      "observed": [
+        "assigned source absent from browser",
+        "task prose present",
+        "deliverable stated or not a writing-build day",
+        "player response disabled"
+      ]
+    }
+  ]
+}
