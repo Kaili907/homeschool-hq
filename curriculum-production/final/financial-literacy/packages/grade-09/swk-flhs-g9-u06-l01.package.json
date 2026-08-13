@@ -113,9 +113,8 @@
       ]
     }
   ],
-  "remediation": "If expected loss is being read as the amount the household will lose, work one risk aloud: in 100 simulated years the phone breaks in about 22 of them at $180 each, which averages $39.60 a year — an amount that is never actually lost in any single year.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Add a fifth fictional risk with a 1% chance and a $30,000 loss, compute its expected loss, and say where it belongs in the ranking and why that placement is uncomfortable.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

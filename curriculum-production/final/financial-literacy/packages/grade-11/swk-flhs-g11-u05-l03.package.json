@@ -120,9 +120,8 @@
       ]
     }
   ],
-  "remediation": "If the real value comes out above the nominal one, the price factor is being multiplied rather than divided. Converting a future amount into today’s dollars makes it smaller, because prices have risen in between. Check the direction on the twelve-year figures: $78,684.29 divided by the price growth gives $53,917.74, which must be the smaller of the two.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the nominal return that would be needed to produce a real return of 4% a year at 3.2% inflation, and say whether it is more or less than 7.2%.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

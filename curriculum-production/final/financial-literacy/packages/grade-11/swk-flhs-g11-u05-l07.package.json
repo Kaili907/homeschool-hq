@@ -130,9 +130,8 @@
       ]
     }
   ],
-  "remediation": "If the holding comes back to $10,000 after the second year, the 50% loss is being taken from the original $10,000 rather than from the $15,000.00 the holding had actually reached. Each return applies to whatever the holding is worth at the start of that year. Write the two years as separate rows with the opening balance shown in each.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what percentage gain would be needed to recover from a 20% loss, a 40% loss, and a 60% loss, and describe the pattern the three answers make.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

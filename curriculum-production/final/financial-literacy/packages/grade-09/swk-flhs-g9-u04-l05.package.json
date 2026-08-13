@@ -95,9 +95,8 @@
       ]
     }
   ],
-  "remediation": "If the cost per borrowed dollar comes out near $0.30, the interest has been divided by the amount borrowed rather than the total repaid. The question asks what each dollar costs in the end, so divide the $4,558.80 repaid, not the $1,058.80 of interest.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the cost per borrowed dollar if the same $3,500 were repaid over 20 years at a disclosed $24.08 a month, and say what doubling the term does to that figure.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -112,7 +112,6 @@
   ],
   "remediation": "If total interest comes out as $12,000 times 6.6% times the number of years, the balance is being treated as though it never falls. This loan is repaid every month, so the balance that interest is charged on shrinks throughout. Use the level payment, multiply it by the number of payments, and subtract the $12,000 borrowed.",
   "extension": "Work out the total interest on a 48-month term at the same rate, and say whether the extra interest per additional year of term is constant as the term lengthens.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

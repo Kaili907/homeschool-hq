@@ -99,7 +99,6 @@
   ],
   "remediation": "If the refund and the bill both appear to change the tax owed, write $4,900 at the top of the page and leave it there through both calculations. Withholding is a series of payments toward that one figure, and the settling-up at filing is the difference.",
   "extension": "Find the withholding rate that would produce neither a refund nor a bill on this income, and say why hitting it exactly is difficult in practice.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

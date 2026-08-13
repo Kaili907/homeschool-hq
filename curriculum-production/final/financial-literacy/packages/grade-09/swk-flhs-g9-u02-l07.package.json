@@ -111,7 +111,6 @@
   ],
   "remediation": "If the counterexample is hard to spot, sort the four models by price and read the ratings down the column: 3.8, 4.4, 3.1, 4.5. A rule that price predicts rating would need that column to rise every time, and it falls once.",
   "extension": "Add a fictional Model V at $95 rated 4.8 and say whether it changes the reviewer’s claim, the cost-per-point ranking, or both.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

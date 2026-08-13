@@ -110,8 +110,7 @@
     }
   ],
   "remediation": "If the annual total comes out at $25,152.00, the auto insurance is being multiplied by 12. Read the billing cycle on each line before annualising: the $612 premium is charged twice a year, and everything else on the list is monthly. Convert each obligation to a yearly figure on its own cycle, then add.",
-  "extension": "Work out what the household would have to cancel outright to absorb the $92.97 a month without touching rent, and say whether that is achievable from the list as given.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l01.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

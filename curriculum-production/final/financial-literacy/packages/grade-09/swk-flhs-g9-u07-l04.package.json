@@ -98,7 +98,6 @@
   ],
   "remediation": "If the deduction is being valued at $1,200, ask what it actually removes. It takes $1,200 out of the income figure, and the filer then does not pay tax on that $1,200 — at 12%, that is $144 not paid, not $1,200.",
   "extension": "Find the marginal rate at which a $1,200 deduction would be worth as much as a $400 credit, and say whether such a rate exists in practice.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

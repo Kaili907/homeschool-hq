@@ -108,7 +108,6 @@
   ],
   "remediation": "If the average comes out near $52 — halfway between the two rates — the months are being averaged instead of the payments. Only 6 months are at the low rate and 18 at the high one, so the average must sit much closer to $79.99.",
   "extension": "Find the promotional length that would make the true average exactly $60 a month, holding both rates fixed, and say whether a provider would offer it.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

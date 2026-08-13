@@ -74,7 +74,6 @@
   ],
   "remediation": "If a learner ranks habits without reasons, ask for each one what an attacker would gain, and rebuild the ranking from those answers.",
   "extension": "Ask the learner to write the one sentence Levi could say to a family member who insists on reusing one password.",
-  "scoringRef": "scoring/grade-05/swk-fl-g5-u04-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

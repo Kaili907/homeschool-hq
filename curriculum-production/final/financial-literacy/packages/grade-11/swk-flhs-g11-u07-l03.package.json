@@ -124,9 +124,8 @@
       ]
     }
   ],
-  "remediation": "If the deduction appears to save $2,000, it is being treated as though it came off the tax. A deduction reduces taxable income from $34,900.00 to $32,900, and the tax then falls by 14% of that $2,000, which is $280.00. Recompute the tax from the reduced taxable income rather than subtracting the relief from the tax.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the marginal rate at which a $2,000 deduction and a $2,000 credit would be worth the same, and say whether any band in this fictional schedule reaches it.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

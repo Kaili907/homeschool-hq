@@ -108,7 +108,6 @@
   ],
   "remediation": "If taxable income comes out at $38,300.00, the $186 of interest has been left out or the pre-tax contribution has been subtracted twice. Work in the stated order: wages less the pre-tax contribution, plus interest, less the $9,000 deduction. The interest is added because nothing excludes it.",
   "extension": "Recompute the return for a fictional filer with the same wages but $1,900 of interest income, and say which of the two figures — income tax or payroll levy — changes and why the other does not.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

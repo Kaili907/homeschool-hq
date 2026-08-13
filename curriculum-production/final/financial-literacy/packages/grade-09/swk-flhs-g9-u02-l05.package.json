@@ -97,7 +97,6 @@
   ],
   "remediation": "If the average discount comes out at 35% — halfway between 10 and 60 — the two rates are being averaged rather than the twelve items. Write out all twelve values, eleven 10s and one 60, and add them before dividing.",
   "extension": "Find how many of the 12 items would have to be discounted 60% for the average to reach 30%, and say whether the headline would then be a fair summary.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

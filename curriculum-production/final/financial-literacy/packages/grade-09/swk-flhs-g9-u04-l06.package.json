@@ -126,7 +126,6 @@
   ],
   "remediation": "If the closing balance is falling by the full payment each month, the interest step is being skipped. Work strictly in the stated order: add the interest to the balance, take 2.5% of that new total as the minimum, then subtract it, and record all three numbers for each month before moving on.",
   "extension": "Continue the table until the minimum payment first hits the $25 floor, and say how many months that takes and what the balance is then.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

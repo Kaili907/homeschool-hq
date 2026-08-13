@@ -104,7 +104,6 @@
   ],
   "remediation": "If variances come out with the wrong sign, fix the convention before computing: actual minus planned, so spending more than planned is a positive number. Check against eating out, where $128 against $60 must give a positive $68.",
   "extension": "Rewrite the plan for the following month using this month’s actuals, keeping the $150 savings line intact, and state which line you cut to make it balance.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

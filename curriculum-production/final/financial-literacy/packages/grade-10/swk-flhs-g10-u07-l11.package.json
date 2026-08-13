@@ -120,9 +120,8 @@
       ]
     }
   ],
-  "remediation": "If State S looks cheaper for both households, check which one the $2,180 levy reaches. It is charged only on a home the household owns, so it lands on Household A and not on Household B. Add it to Household A’s State S bill and the ranking for that household turns over: $3,055.00 against $2,122.00.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what Household A’s gross income would have to be for State S to become the cheaper option for them while they still own their home, and say what that figure shows about which households a fixed levy is hardest on.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l11.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

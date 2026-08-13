@@ -104,9 +104,8 @@
       ]
     }
   ],
-  "remediation": "If the corrected gap comes out at $6,800.00, the $5,500 loan is still being counted against the cost. Sort the offer first: $10,900.00 is given, $2,600 must be earned, and $5,500 must be repaid. Only the first two reduce what has to be found; the loan is one way of finding it.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out the gap if the fictional applicant also loses one $1,800 grant in the second year, and say what that does to four-year borrowing at this institution.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

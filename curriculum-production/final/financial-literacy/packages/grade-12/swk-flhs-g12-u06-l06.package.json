@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If the increase attributable to the dependent comes out at $216.00, the new life cover has been left out. The dependent produced two changes: health rising from $186 to $402, which is $216.00, and $28 of life cover that did not exist before. Together they are $244.00 of the $284.00 total.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what the household would pay if it raised renters cover to $38,000 at a premium of $34 a month, and say whether that changes which life event drove most of the increase.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

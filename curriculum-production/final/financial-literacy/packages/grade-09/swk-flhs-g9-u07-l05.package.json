@@ -99,7 +99,6 @@
   ],
   "remediation": "If the two penalties come out equal, check the rates: 5% a month and 0.5% a month differ by a factor of ten. Compute 1% of $1,340 first ($13.40) and scale from there to keep the decimal places straight.",
   "extension": "Under these fictional rules, work out the number of months at which the failure-to-file penalty would exceed the tax owed, and say why a real system would cap it.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

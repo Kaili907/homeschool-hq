@@ -124,9 +124,8 @@
       ]
     }
   ],
-  "remediation": "If the pre-tax account comes out ahead, check whether the 24% withdrawal tax has been applied to the whole $25,751.22 balance rather than only to the growth. Under the stated structure the entire balance is taxed on the way out, because none of it was taxed on the way in. Apply each account’s tax exactly once, at the point the outline names for it.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the withdrawal tax rate at which the pre-tax account would leave $1,000 more than the post-tax one, and say whether that rate is above or below today’s 22%.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

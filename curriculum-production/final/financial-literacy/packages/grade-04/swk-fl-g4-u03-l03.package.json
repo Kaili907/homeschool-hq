@@ -106,7 +106,6 @@
   ],
   "remediation": "When a learner adds the tax rate as dollars, work the percentage on a $100.00 example for Anjali first, so six percent is anchored to six dollars per hundred before smaller subtotals are attempted.",
   "extension": "Ask the learner what the largest subtotal is that Anjali could cover with $45.00 once 6% simulated tax is added, and how they narrowed it down.",
-  "scoringRef": "scoring/grade-04/swk-fl-g4-u03-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

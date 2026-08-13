@@ -103,7 +103,6 @@
   ],
   "remediation": "If the monthly payment comes out at $10.79 or at $345,280, the balance has not been converted into thousands before the factor is applied. The factor prices each $1,000 borrowed, so $32,000 is 32 units of the factor: 32 times $10.79.",
   "extension": "Recompute the payment, the total repaid, and the share of gross for the same balance over 180 payments at a factor of $8.15 per $1,000, and say what the longer term buys and what it costs.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

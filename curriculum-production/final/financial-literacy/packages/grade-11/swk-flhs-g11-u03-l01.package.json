@@ -137,9 +137,8 @@
       ]
     }
   ],
-  "remediation": "If every goal appears to meet its deadline, the goals are being funded in parallel rather than in sequence. The scenario funds one at a time out of a single $415, so the certification cannot start until month 15.4. Draw a 48-month line and mark three consecutive blocks of 15.4, 8.7, and 23.6 months on it before checking any deadline.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out the smallest monthly capacity that would meet all three deadlines in the given order, and say how much more than $415 that is.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

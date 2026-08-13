@@ -111,7 +111,6 @@
   ],
   "remediation": "If the two loans appear to cost the same because the rate is the same, compute the total of payments for each before anything else and put the two figures side by side. The rate describes the price per year of borrowing; the term decides how many years it is paid.",
   "extension": "Find the total interest on the same $6,000 at 5.9% over 24 months at a disclosed payment of $265.44, and describe the pattern across the three terms.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

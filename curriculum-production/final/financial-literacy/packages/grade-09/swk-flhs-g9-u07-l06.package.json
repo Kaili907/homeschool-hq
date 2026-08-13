@@ -98,9 +98,8 @@
       ]
     }
   ],
-  "remediation": "If take-home comes out near $40,000, only the federal tax has been subtracted. Total the four taxes first — $3,992.00, $3,366.00, $1,870.00, and $440.00 — and take the whole $9,668.00 off gross before any allocation. Note that only the federal line gets the $9,000 deduction.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Rebuild the plan on $39,600 of gross income, keeping the reserve and insurance lines intact, and state which two lines absorbed the fall.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

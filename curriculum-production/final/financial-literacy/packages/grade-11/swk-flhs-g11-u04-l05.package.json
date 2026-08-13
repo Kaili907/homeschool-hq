@@ -125,9 +125,8 @@
       ]
     }
   ],
-  "remediation": "If the available housing payment comes out at $1,330.00, the existing $695.00 of debt payments has not been deducted. The 28% housing rule and the 36% total rule both have to be satisfied, and the total rule counts the study loan, the vehicle loan, and the card. Compute both ceilings, subtract existing payments from the total one, and take whichever result is smaller.",
-  "extension": "Find the gross income at which the 28% housing rule would become the binding constraint instead, holding her existing $695.00 of payments constant.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l05.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

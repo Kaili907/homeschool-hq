@@ -103,7 +103,6 @@
   ],
   "remediation": "If the insurer’s payment on the large claim comes out as $18,250, the limit has been skipped. Compute the uncapped figure first, then compare it with $12,000 and take the smaller — that comparison is what a coverage limit does.",
   "extension": "Find the claim size at which the coverage limit first begins to bind, and state it as a rule in terms of the deductible and the limit.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

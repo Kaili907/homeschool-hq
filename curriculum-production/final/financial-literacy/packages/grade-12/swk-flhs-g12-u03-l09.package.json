@@ -95,9 +95,8 @@
       ]
     }
   ],
-  "remediation": "If the closing balance comes out at $5,830.00, contributions have been counted for all 12 months. The household contributed in only the 10 months without a withdrawal, so the year added $2,600.00 rather than $3,120.00. Apply the contributions and the two withdrawals to the $7,200 opening balance in turn.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what contribution rate would have held the reserve at $7,200 across this year, and say what else in the household budget would have to give to fund it.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -110,9 +110,8 @@
       ]
     }
   ],
-  "remediation": "If both packages show the same borrowing in year two as in year one, the 3% cost increase has not been applied, or it has been applied to the aid as well. The aid stays at $12,400 and $5,200; only the costs move, to $26,986.00 and $21,630.00. The whole increase therefore lands on the amount borrowed.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Extend both packages to four years at the same 3% annual increase and fixed aid, and say whether the gap between them widens or narrows.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

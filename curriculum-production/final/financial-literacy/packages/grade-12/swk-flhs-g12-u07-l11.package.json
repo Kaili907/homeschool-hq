@@ -96,9 +96,8 @@
       ]
     }
   ],
-  "remediation": "If the shock requirement comes out at $10,225.00, the loan payment has been left out of the 5 months. Income stopping does not stop the $198.54 payment, so each month costs $2,243.54 rather than $2,045. If the additional transfer comes out near $940, the whole requirement is being spread across the year rather than only the $4,817.70 shortfall.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out the reserve target and the monthly transfer that would let this fictional case withstand 5 months on reduced costs of $1,760 a month, and say how much of the $931.04 surplus that leaves for everything else.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l11.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

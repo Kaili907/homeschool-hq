@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If the amount owed comes out at $1,692.00, only the income tax has been counted and the self-employment levy has been left out; if it comes out at $5,940.80, the $2,780 already withheld has not been credited. Add both charges, then subtract what the employer already collected. Note that the whole $3,160.80 is not caused by the side work: $540.00 of it is wage tax the employer under-withheld.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the quarterly set-aside for a fictional worker with the same $9,600 of independent income but only $16,000 of wages, and say why the share of the side income committed to tax falls.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

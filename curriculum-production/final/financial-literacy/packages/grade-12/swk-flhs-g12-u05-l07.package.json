@@ -102,9 +102,8 @@
       ]
     }
   ],
-  "remediation": "If the loss comes out as zero, the employer contribution is being treated as an annual calculation. The stated rule calculates it in each month separately, with nothing carried forward, so months 9 to 12 produce nothing. Count $125.00 for each month in which the worker actually contributed, and compare that with $125.00 for all 12.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what the loss would be if the worker had elected 20% instead of 12%, and say whether the loss grows in proportion to the rate.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

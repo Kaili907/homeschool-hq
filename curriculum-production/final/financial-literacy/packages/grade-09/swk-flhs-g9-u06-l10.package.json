@@ -110,7 +110,6 @@
   ],
   "remediation": "If all three policies look affordable, check the deductible against the reserve rather than against the premium. The premium is a monthly commitment; the deductible is a single amount that must be available on the day of the loss.",
   "extension": "Add a fourth fictional policy at $38 a month with a $1,000 deductible and a $15,000 limit, place it in both rankings, and say whether it changes the recommendation.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

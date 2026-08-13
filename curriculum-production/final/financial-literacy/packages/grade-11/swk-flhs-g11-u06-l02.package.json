@@ -128,7 +128,6 @@
   ],
   "remediation": "If a policy appears to remove the whole expected loss, the deductible is being ignored. A policy pays only what the loss exceeds the deductible by, so Policy A removes 4% of $13,500 and not 4% of $14,500. Write the loss, the deductible, and the difference as three columns before multiplying by the chance.",
   "extension": "Find the premium at which Policy B would be worth buying ahead of Policy A on the per-dollar measure, and say whether the household could then afford all four.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

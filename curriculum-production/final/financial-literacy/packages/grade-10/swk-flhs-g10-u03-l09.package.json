@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If the real gain comes out near $853.88, inflation has not been applied. Divide the $7,353.88 ending balance by 1.031 three times — once for each year of price rises — before comparing it with the original $6,500.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the real gain if prices rose 3.1% in the first year and then 5% in each of the next two, and say whether an average inflation rate would have given you the same answer.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

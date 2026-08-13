@@ -99,7 +99,6 @@
   ],
   "remediation": "If the weighted scores come out above 5, the weights are being added to the ratings rather than multiplied. Compute one line at a time — weight times rating — and check that the three weights sum to 1 before summing the products.",
   "extension": "Find a set of three weights, still summing to 1, under which Otsego wins, and say what that set of weights implies about the buyer’s priorities.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

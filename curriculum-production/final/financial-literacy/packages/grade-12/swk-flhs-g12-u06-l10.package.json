@@ -102,7 +102,6 @@
   ],
   "remediation": "If the annual protection cost comes out at $336.00, the $78 box has been charged in full to the first year rather than spread across the 5 years it is used for. Divide it by 5 to get $15.60, then add the three annual services of $36, $168, and $54.",
   "extension": "Recompute the annual protection cost and the years-per-incident figure without the monitoring service, and say how much protection the household gives up for the $168 saved.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

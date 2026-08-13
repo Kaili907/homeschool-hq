@@ -116,7 +116,6 @@
   ],
   "remediation": "If the reserve appears to keep pace, the same rate is probably being applied to both sides. Two different rates are at work: spending compounds at 3.2% and the reserve at 0.8%. Compute the year-5 target and the year-5 reserve in separate columns, each with its own rate, and only then subtract.",
   "extension": "Find the deposit rate at which the reserve would exactly keep its six-month coverage, and say what that rate has to equal for coverage to hold in general.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -99,7 +99,6 @@
   ],
   "remediation": "If the expected loss per household comes out as $9,000 or as $72,000, work the pool total first and divide only at the end. The chain is 400 households, 2% of them claiming, $9,000 each, then divided back across all 400.",
   "extension": "Recompute the pool if only 40 households join instead of 400, and say what happens to how predictable the insurer’s total claims are.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

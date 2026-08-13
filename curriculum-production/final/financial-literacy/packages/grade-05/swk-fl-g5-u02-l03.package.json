@@ -98,8 +98,7 @@
     }
   ],
   "remediation": "If a learner applies the second percentage to the reduced amount, mark Salma's gross figure as the base for both deductions and recompute each from that marked figure.",
-  "extension": "Ask the learner what gross pay Salma would need for take-home to reach exactly $415.00 under a single 17% deduction, and to justify the approach.",
-  "scoringRef": "scoring/grade-05/swk-fl-g5-u02-l03.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

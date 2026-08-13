@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If one platform looks cheaper in every case, compute both fees at both balances. At $12,000 the percentage fee is $54.00 against $95; at $30,000 it is $135.00 against the same $95. A structure that wins at one balance and loses at another has a crossover, and here it is $21,111.11.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out which platform is cheaper over 10 years for an account that starts at $12,000 and grows by $3,000 every year, and say roughly when the ranking flips.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

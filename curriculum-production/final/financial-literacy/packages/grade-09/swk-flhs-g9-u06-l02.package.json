@@ -103,7 +103,6 @@
   ],
   "remediation": "If the reduce option comes out cheapest, check whether the $70 lock was included. The lock is paid whether or not the bicycle is stolen, so it is added in full, not multiplied by any probability.",
   "extension": "Find the lock price at which reducing becomes the cheapest option in expectation, and say whether that changes the worst-case argument.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

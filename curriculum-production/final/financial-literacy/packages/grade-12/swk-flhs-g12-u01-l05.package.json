@@ -93,7 +93,6 @@
   ],
   "remediation": "If the five-raise salary comes out at $52,900.00, each raise is being taken as 3% of the original $46,000 and added five times. A raise applies to the salary as it then stands. Multiply by 1.03 once for each year in turn and compare the running figures — the gap between the two methods is what compounding is.",
   "extension": "Recompute the ten-year cost with the gap growing by 3% a year instead of staying flat, and say how much the flat-gap simplification understated.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

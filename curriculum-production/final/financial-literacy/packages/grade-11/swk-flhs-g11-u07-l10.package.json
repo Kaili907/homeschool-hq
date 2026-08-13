@@ -149,9 +149,8 @@
       ]
     }
   ],
-  "remediation": "If the balance owed comes out at $10,192.50, the $4,180 already withheld has not been credited. Withholding is a payment on account against the same liability, so it comes off the total. If instead the balance comes out near $3,279.00, the self-employment contribution has been left out of the total tax. Build the estimate as four rows — income tax, contribution, total, less withheld — before dividing by 4.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the whole estimate if Octavia’s business revenue fell to $22,000 with expenses unchanged, and say whether the quarterly instalment falls by more or less than the fall in profit.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

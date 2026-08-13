@@ -116,9 +116,8 @@
       ]
     }
   ],
-  "remediation": "If the repayment-start balance comes out as $11,000.00, the in-school accrual has been left out. The subsidised $7,000 accrues nothing, but the unsubsidised $4,000 accrues 5.5% for 1.5 years and that $330.00 capitalises onto the balance before the first payment is due.",
-  "extension": "Recompute the monthly payment and total repaid if the applicant pays the unsubsidised interest during school instead of letting it capitalise, and say how much of the saving comes from the $330.00 itself and how much from the interest it would have earned.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l10.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

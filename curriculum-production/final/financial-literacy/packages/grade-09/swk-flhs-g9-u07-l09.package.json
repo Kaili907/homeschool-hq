@@ -103,7 +103,6 @@
   ],
   "remediation": "If the 1098-E amount is being added to income, read what it reports: interest the filer paid, not received. Sort the four forms into money in and money out before adding anything.",
   "extension": "Add a fictional 1099-G reporting $1,150 of unemployment compensation, decide which pile it belongs in, and recompute the income total.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

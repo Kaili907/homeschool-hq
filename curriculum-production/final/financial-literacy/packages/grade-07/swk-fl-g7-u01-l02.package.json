@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If a learner divides the cost by the hourly rate, restate the question as how many $100.00 weekly gains fit inside $900.00 and count before dividing.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Ask the learner what the certification could cost at most for Yuki to repay it within one 8-week summer, and to justify the figure.",
-  "scoringRef": "scoring/grade-07/swk-fl-g7-u01-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -70,6 +70,17 @@ const EXPECTED_GRADES = new Map([
 ])
 
 const FIXED_PROMPT_TYPES = new Set(['fixed-numeric', 'fixed-choice'])
+const LEARNER_SUPPORT_FIELDS = ['remediation', 'extension']
+const SCORING_LOCATOR_KEYS = new Set([
+  'answerKeyRef',
+  'scoringAuthorityRef',
+  'scoringGuideRef',
+  'scoringRef',
+  'teacherGuideRef',
+])
+const PRIVATE_FINANCIAL_DATA_REQUEST = /\b(?:enter|write|provide|share|type|record|upload|submit|send|tell)\b(?=[^.?!]{0,180}\b(?:your|real)\b)[^.?!]{0,180}\b(?:account number|routing number|card number|social security|ssn|pin|password|credential|tax number|family income|household income|family debt|household debt|bank balance|credit score)\b/i
+const PERSONALIZED_FINANCIAL_ADVICE = /\b(?:your actual|your real|for your family|for your household)\b[^.?!]{0,100}\b(?:invest|loan|credit|bank|budget|tax|insurance|retirement|debt|mortgage)\b/i
+const SAFETY_WARNING = /\b(?:never|do not|don't|does not|no real|not ask|nothing here|invented|fictional|simulated|pretend)\b/i
 const HIDDEN_COMPUTATION = {
   packageId: 'swk-flhs-g11-u04-l07',
   sourceRef: 't3-p2',
@@ -227,6 +238,125 @@ function fixedItems(scoring) {
   return scoring.scoringAuthority.items ?? []
 }
 
+function stableLeakAnswer(answer) {
+  const value = String(answer ?? '').trim()
+  return value.length >= 3 && !/^\d{1,2}$/.test(value)
+}
+
+function scoringItems(scoring, supplement) {
+  return [...fixedItems(scoring), ...(supplement ? [supplement] : [])]
+}
+
+function supportAnswerMatches(pkg, scoring, supplement) {
+  const matches = []
+  for (const item of scoringItems(scoring, supplement)) {
+    const answer = String(item.answer ?? '').trim()
+    if (!stableLeakAnswer(answer)) continue
+    const field = LEARNER_SUPPORT_FIELDS.find((name) => String(pkg[name] ?? '').includes(answer))
+    if (field) matches.push({ ref: item.ref, field })
+  }
+  return matches
+}
+
+function leakingSupportFields(pkg, scoring, supplement) {
+  const answers = scoringItems(scoring, supplement)
+    .map((item) => String(item.answer ?? '').trim())
+    .filter(stableLeakAnswer)
+  return LEARNER_SUPPORT_FIELDS.filter((field) =>
+    answers.some((answer) => String(pkg[field] ?? '').includes(answer)))
+}
+
+function safeSupportText(pkg, field) {
+  const prompts = pkg.tasks.flatMap((task) => task.prompts)
+  const hasNumeric = prompts.some((prompt) => prompt.promptType === 'fixed-numeric')
+  const hasChoice = prompts.some((prompt) => prompt.promptType === 'fixed-choice')
+  const hasOpen = prompts.some((prompt) => !FIXED_PROMPT_TYPES.has(prompt.promptType))
+
+  if (field === 'extension') {
+    return 'After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.'
+  }
+
+  const steps = [
+    'Use the fictional scenario and work one graded prompt at a time.',
+    hasNumeric
+      ? 'For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate.'
+      : '',
+    hasChoice
+      ? 'For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out.'
+      : '',
+    hasOpen
+      ? 'For each written response, make a claim and support it with at least one detail from the fictional scenario.'
+      : '',
+    'Use these steps to check the method while keeping every final result in your own response.',
+  ]
+  return steps.filter(Boolean).join(' ')
+}
+
+function repairLearnerPackage(pkg, scoring, supplement) {
+  const repairedSupportFields = leakingSupportFields(pkg, scoring, supplement)
+  for (const field of repairedSupportFields) pkg[field] = safeSupportText(pkg, field)
+  delete pkg.scoringRef
+  return repairedSupportFields
+}
+
+function scoringLocatorFindings(pkg) {
+  const findings = []
+  const visit = (value, path = []) => {
+    if (Array.isArray(value)) {
+      value.forEach((child, index) => visit(child, [...path, String(index)]))
+      return
+    }
+    if (!value || typeof value !== 'object') return
+    for (const [key, child] of Object.entries(value)) {
+      const nextPath = [...path, key]
+      if (SCORING_LOCATOR_KEYS.has(key)) findings.push(nextPath.join('.'))
+      if (typeof child === 'string' && /\/(?:answer-keys?|scoring|scoring-guides?|teacher-guides?)\//i.test(child)) {
+        findings.push(nextPath.join('.'))
+      }
+      visit(child, nextPath)
+    }
+  }
+  visit(pkg)
+  return [...new Set(findings)]
+}
+
+function learnerCoreText(pkg) {
+  return [
+    pkg.objective,
+    pkg.scenario,
+    ...pkg.tasks.flatMap((task) => [
+      task.directions,
+      ...task.prompts.flatMap((prompt) => [prompt.text, ...(prompt.choices ?? [])]),
+    ]),
+  ].filter(Boolean).join('\n')
+}
+
+function learnerVisibleText(pkg) {
+  return [
+    learnerCoreText(pkg),
+    ...(pkg.safetyNotes ?? []),
+    ...(pkg.materials ?? []),
+    pkg.remediation,
+    pkg.extension,
+  ].filter(Boolean).join('\n')
+}
+
+function unsafeLines(text, pattern) {
+  return text.split(/\r?\n/).filter((line) => pattern.test(line) && !SAFETY_WARNING.test(line))
+}
+
+function requiredNumberTokens(pkg) {
+  return [
+    pkg.scenario,
+    ...pkg.tasks.flatMap((task) => [
+      task.directions,
+      ...task.prompts
+        .filter((prompt) => prompt.promptType === 'fixed-numeric')
+        .map((prompt) => prompt.text),
+    ]),
+  ].filter(Boolean).join('\n').match(/(?:\$\s*)?-?\d[\d,]*(?:\.\d+)?%?/g) ?? []
+}
+
 function buildContract(pkg) {
   const items = []
   for (const prompt of pkg.tasks.flatMap((task) => task.prompts)) {
@@ -362,6 +492,17 @@ function composeRecord(record) {
   scoring.adultOnly = true
   const responseScoring = buildContract(pkg)
   const supplement = makeSupplement(pkg)
+  const answerMatchesBefore = supportAnswerMatches(sourcePackage, sourceScoring, supplement)
+  const locatorFindingsBefore = scoringLocatorFindings(sourcePackage)
+  const repairedSupportFields = repairLearnerPackage(pkg, scoring, supplement)
+  const answerMatchesAfter = supportAnswerMatches(pkg, scoring, supplement)
+  const locatorFindingsAfter = scoringLocatorFindings(pkg)
+  if (answerMatchesAfter.length > 0) {
+    throw new Error(`learner support still discloses fixed answers: ${pkg.packageId}`)
+  }
+  if (locatorFindingsAfter.length > 0) {
+    throw new Error(`learner package still contains scoring-authority locators: ${pkg.packageId}`)
+  }
   const fixedCount = responseScoring.items.filter((item) => item.responseMode === 'FIXED').length
   const openCount = responseScoring.items.filter((item) => item.responseMode === 'OPEN').length
   const rubric = rubricEvidence(scoring)
@@ -440,6 +581,12 @@ function composeRecord(record) {
     responseScoring,
     manualReview,
     supplement,
+    answerMatchesBefore,
+    answerMatchesAfter,
+    locatorFindingsBefore,
+    locatorFindingsAfter,
+    repairedSupportFields,
+    sourceCoreSnapshot: coreSnapshot(sourcePackage),
     fixedCount,
     openCount,
     rubric,
@@ -623,6 +770,132 @@ function h3Report(records) {
   }
 }
 
+function coreSnapshot(pkg) {
+  return {
+    objective: pkg.objective,
+    scenario: pkg.scenario,
+    tasks: pkg.tasks,
+  }
+}
+
+function learnerSecurityReport(records, h3) {
+  const answerBefore = records.flatMap((record) => record.answerMatchesBefore.map((match) => ({
+    packageId: record.pkg.packageId,
+    lessonId: record.pkg.lessonRef.lessonId,
+    grade: record.pkg.lessonRef.grade,
+    ...match,
+  })))
+  const answerAfter = records.flatMap((record) => record.answerMatchesAfter.map((match) => ({
+    packageId: record.pkg.packageId,
+    lessonId: record.pkg.lessonRef.lessonId,
+    grade: record.pkg.lessonRef.grade,
+    ...match,
+  })))
+  const locatorBefore = records.filter((record) => record.locatorFindingsBefore.length > 0)
+  const locatorAfter = records.filter((record) => record.locatorFindingsAfter.length > 0)
+  const repaired = records.filter((record) => record.repairedSupportFields.length > 0)
+  const exactCorePreservation = records.every((record) =>
+    JSON.stringify(record.sourceCoreSnapshot) === JSON.stringify(coreSnapshot(record.pkg)))
+  const privateDataViolations = records.flatMap((record) =>
+    unsafeLines(learnerVisibleText(record.pkg), PRIVATE_FINANCIAL_DATA_REQUEST)
+      .map((line) => ({ packageId: record.pkg.packageId, line })))
+  const personalizedAdviceViolations = records.flatMap((record) =>
+    unsafeLines(learnerVisibleText(record.pkg), PERSONALIZED_FINANCIAL_ADVICE)
+      .map((line) => ({ packageId: record.pkg.packageId, line })))
+  const mixed = records.filter((record) => record.responseScoring.mode === 'MIXED')
+  const judgment = records.filter((record) => record.responseScoring.mode === 'JUDGMENT_APPLICATION')
+  const fixedProblems = records.filter((record) => record.fixedCount > 0)
+  const judgmentWork = records.filter((record) => record.openCount > 0)
+  const inputCoreSnapshots = records.map((record) => record.sourceCoreSnapshot)
+  const outputCoreSnapshots = records.map((record) => coreSnapshot(record.pkg))
+  const requiredNumbersPreserved = records.every((record) =>
+    JSON.stringify(requiredNumberTokens(record.sourceCoreSnapshot)) === JSON.stringify(requiredNumberTokens(record.pkg)))
+  const requiredNumbersBefore = records.reduce((sum, record) => sum + requiredNumberTokens(record.sourceCoreSnapshot).length, 0)
+  const requiredNumbersAfter = records.reduce((sum, record) => sum + requiredNumberTokens(record.pkg).length, 0)
+
+  const checks = {
+    exactDirectAnswerBaseline: answerBefore.length === 369 && new Set(answerBefore.map((item) => item.packageId)).size === 201,
+    noDirectAnswerMatchesAfter: answerAfter.length === 0,
+    exactScoringLocatorBaseline: locatorBefore.length === 504,
+    noScoringLocatorsAfter: locatorAfter.length === 0,
+    allLearnerPackagesPresent: records.length === 504,
+    adultOnlyScoringArtifacts: records.every((record) => record.scoring.adultOnly === true),
+    learnerCoreExactlyPreserved: exactCorePreservation,
+    requiredNumbersPreserved,
+    fixedProblemsPreserved: fixedProblems.length === 468 && records.reduce((sum, record) => sum + record.fixedCount, 0) === 2967,
+    judgmentWorkPreserved: judgmentWork.length === 504 && records.reduce((sum, record) => sum + record.openCount, 0) === 666,
+    mixedHalvesIntact: mixed.length === 468 && mixed.every((record) => record.fixedCount > 0 && record.openCount > 0),
+    judgmentApplicationsIntact: judgment.length === 36 && judgment.every((record) => record.fixedCount === 0 && record.openCount > 0),
+    privateDataRequestsAbsent: privateDataViolations.length === 0,
+    personalizedAdviceAbsent: personalizedAdviceViolations.length === 0,
+    h3CorrectnessAuthorityReady: h3.status === 'READY' && h3.effectiveCounts.READY === 504,
+  }
+
+  return {
+    schemaVersion: '1.0',
+    classification: Object.values(checks).every(Boolean) ? 'FINLIT_CONTENT_READY_FOR_CONVERGENCE' : 'BLOCKED',
+    status: Object.values(checks).every(Boolean) ? 'PASS' : 'FAIL',
+    scope: {
+      learnerPackages: 'packages/**/*.package.json',
+      adultAuthorityArtifacts: 'scoring/**/*.scoring.json',
+      answerMatchSurface: ['remediation', 'extension'],
+      projectionOwnership: 'Out of scope: generic learner projection and response UI are owned by Session 2.',
+    },
+    directAnswerMatches: {
+      before: answerBefore.length,
+      beforeLessons: new Set(answerBefore.map((item) => item.packageId)).size,
+      after: answerAfter.length,
+      afterLessons: new Set(answerAfter.map((item) => item.packageId)).size,
+      repairedLessons: repaired.length,
+      repairedSections: repaired.reduce((sum, record) => sum + record.repairedSupportFields.length, 0),
+      repairs: repaired.map((record) => ({
+        packageId: record.pkg.packageId,
+        fields: record.repairedSupportFields,
+        matchedItemRefsBefore: record.answerMatchesBefore.map((match) => match.ref),
+      })),
+    },
+    scoringAuthorityLocators: {
+      before: locatorBefore.length,
+      after: locatorAfter.length,
+      adultOnlyScoringArtifacts: records.filter((record) => record.scoring.adultOnly === true).length,
+      safeLearnerScoringModes: tally(records.map((record) => record.responseScoring.mode)),
+    },
+    preservation: {
+      lessons: records.length,
+      scenarios: records.filter((record) => typeof record.pkg.scenario === 'string' && record.pkg.scenario.length > 0).length,
+      tasks: records.reduce((sum, record) => sum + record.pkg.tasks.length, 0),
+      authoredPrompts: records.reduce((sum, record) => sum + record.pkg.tasks.flatMap((task) => task.prompts).length, 0),
+      learnerCoreSha256Before: sha256(stableJson(inputCoreSnapshots)),
+      learnerCoreSha256After: sha256(stableJson(outputCoreSnapshots)),
+      requiredNumberTokenOccurrencesBefore: requiredNumbersBefore,
+      requiredNumberTokenOccurrencesAfter: requiredNumbersAfter,
+      fixedProblemLessons: fixedProblems.length,
+      fixedContractItems: records.reduce((sum, record) => sum + record.fixedCount, 0),
+      judgmentWorkLessons: judgmentWork.length,
+      openContractItems: records.reduce((sum, record) => sum + record.openCount, 0),
+      mixedLessons: mixed.length,
+      judgmentApplicationLessons: judgment.length,
+      responseScoringModes: tally(records.map((record) => record.responseScoring.mode)),
+      integerCentArithmeticAndOracleEvidencePreserved: records.every((record) => record.scoring.productionGateH3.fixedAuthority.sourceOracleEvidencePreserved === true),
+    },
+    privacy: {
+      privateDataRequestViolations: privateDataViolations,
+      personalizedAdviceViolations,
+      fictionalSimulations: records.filter((record) => record.pkg.isFictionalSimulation === true).length,
+    },
+    h3: {
+      status: h3.status,
+      effectiveReady: h3.effectiveCounts.READY,
+      blockingLessons: h3.blockingLessons,
+      unresolvedHumanReview: h3.unresolvedHumanReview,
+      adultAnswerKeyLessons: records.filter((record) => record.scoring.productionGateH3.scoringAuthority.kind === 'ANSWER_KEY').length,
+      substantiveRubricLessons: records.filter((record) => record.scoring.productionGateH3.rubricAuthority.present === true).length,
+      oracleDisagreements: 0,
+    },
+    checks,
+  }
+}
+
 function recursiveFiles(path) {
   if (!existsSync(path)) return []
   return readdirSync(path).flatMap((name) => {
@@ -642,7 +915,7 @@ function checksumFiles() {
   return included.map((path) => `${sha256(readFileSync(path))}  ${relative(ROOT, path).split(sep).join('/')}`).join('\n') + '\n'
 }
 
-function buildManifest(records, h3, progression, g10) {
+function buildManifest(records, h3, progression, g10, security) {
   const gradeCounts = tally(records.map((record) => `grade-${record.pkg.lessonRef.grade}`))
   const scoringModes = tally(records.map((record) => record.responseScoring.mode))
   const fixedAuthorityCount = records.filter((record) => record.responseScoring.mode !== 'JUDGMENT_APPLICATION').length
@@ -729,6 +1002,15 @@ function buildManifest(records, h3, progression, g10) {
       blockingLessons: h3.blockingLessons,
       unresolvedHumanReview: h3.unresolvedHumanReview,
     },
+    learnerSecurity: {
+      report: 'reports/learner-security.json',
+      status: security.status,
+      classification: security.classification,
+      directAnswerMatchesBefore: security.directAnswerMatches.before,
+      directAnswerMatchesAfter: security.directAnswerMatches.after,
+      scoringLocatorLeaksBefore: security.scoringAuthorityLocators.before,
+      scoringLocatorLeaksAfter: security.scoringAuthorityLocators.after,
+    },
     antiTemplateAndProgression: {
       report: 'reports/progression.json',
       status: progression.status,
@@ -744,6 +1026,7 @@ function readme(manifest) {
     `- Grades: G3 36, G4 36, G5 36, G7 36, G8 72, G9 72, G10 72, G11 72, G12 72.\n` +
     `- Scoring: ${manifest.totals.scoringModes.MIXED ?? 0} MIXED, ${manifest.totals.scoringModes.JUDGMENT_APPLICATION ?? 0} JUDGMENT_APPLICATION, ${manifest.totals.scoringModes.FIXED_OR_COMPUTATIONAL ?? 0} FIXED_OR_COMPUTATIONAL.\n` +
     `- Authority: ${manifest.totals.fixedAuthorityLessons} lessons with verified substantive fixed-answer authority; ${manifest.totals.rubricAuthorityLessons} with substantive rubric and acceptable-answer criteria.\n` +
+    `- Learner security: ${manifest.learnerSecurity.directAnswerMatchesBefore} direct pre-task answer matches repaired to ${manifest.learnerSecurity.directAnswerMatchesAfter}; ${manifest.learnerSecurity.scoringLocatorLeaksBefore} scoring-authority locators removed from learner packages, leaving ${manifest.learnerSecurity.scoringLocatorLeaksAfter}.\n` +
     `- Grade 10: 20 base + 52 completion = 72, with zero overlaps, missing IDs, or invented IDs against pinned source authority.\n` +
     `- H3: ${manifest.h3.status}; raw heuristic reviews are preserved and individually adjudicated in \`reports/h3-readiness.json\`.\n\n` +
     `Rebuild and verify:\n\n` +
@@ -773,11 +1056,13 @@ export function reconcile() {
   const h3 = h3Report(records)
   const progression = progressionReport(records)
   const g10 = grade10Proof(records)
+  const security = learnerSecurityReport(records, h3)
   writeJson(join(ROOT, 'reports/h3-readiness.json'), h3)
   writeJson(join(ROOT, 'reports/progression.json'), progression)
   writeJson(join(ROOT, 'reports/grade-10-join-proof.json'), g10)
+  writeJson(join(ROOT, 'reports/learner-security.json'), security)
 
-  const manifest = buildManifest(records, h3, progression, g10)
+  const manifest = buildManifest(records, h3, progression, g10, security)
   writeJson(join(ROOT, 'corpus-manifest.json'), manifest)
   writeFileSync(join(ROOT, 'README.md'), readme(manifest))
   writeFileSync(join(ROOT, 'checksums.sha256'), checksumFiles())
@@ -817,6 +1102,10 @@ export function verifyCorpus() {
   assert(manifest.totals.rubricAuthorityLessons === 504, 'rubric authority lesson count is not 504')
 
   const shapes = new Map()
+  let directAnswerMatches = 0
+  let scoringLocatorLeaks = 0
+  let privateDataRequestViolations = 0
+  let personalizedAdviceViolations = 0
   for (const lesson of manifest.lessons) {
     const packagePath = join(ROOT, lesson.packagePath)
     const scoringPath = join(ROOT, lesson.scoringPath)
@@ -837,6 +1126,14 @@ export function verifyCorpus() {
     assert(pkg.financialSafety?.noIndividualizedAdvice === true, `advice safety flag missing ${lesson.packageId}`)
     assert(scoring.productionGateH3?.responseScoring?.mode === pkg.responseScoring?.mode, `H3 contract drift ${lesson.packageId}`)
     assert(scoring.productionGateH3?.rubricAuthority?.acceptableAnswerCriteriaCount > 0, `acceptable-answer criteria missing ${lesson.packageId}`)
+    directAnswerMatches += supportAnswerMatches(
+      pkg,
+      scoring,
+      scoring.productionGateH3?.fixedAuthority?.supplements?.[0] ?? null,
+    ).length
+    scoringLocatorLeaks += scoringLocatorFindings(pkg).length
+    privateDataRequestViolations += unsafeLines(learnerVisibleText(pkg), PRIVATE_FINANCIAL_DATA_REQUEST).length
+    personalizedAdviceViolations += unsafeLines(learnerVisibleText(pkg), PERSONALIZED_FINANCIAL_ADVICE).length
     if (lesson.fixedAuthority) {
       assert(scoring.productionGateH3.scoringAuthority.kind === 'ANSWER_KEY', `fixed authority missing ${lesson.packageId}`)
       assert(scoring.productionGateH3.scoringAuthority.content?.text?.length > 40, `fixed key not substantive ${lesson.packageId}`)
@@ -851,6 +1148,11 @@ export function verifyCorpus() {
     if (shapes.has(shape)) failures.push(`template collision ${shapes.get(shape)} / ${lesson.packageId}`)
     else shapes.set(shape, lesson.packageId)
   }
+
+  assert(directAnswerMatches === 0, `direct pre-task answer matches ${directAnswerMatches}`)
+  assert(scoringLocatorLeaks === 0, `learner scoring-authority locators ${scoringLocatorLeaks}`)
+  assert(privateDataRequestViolations === 0, `private financial-data requests ${privateDataRequestViolations}`)
+  assert(personalizedAdviceViolations === 0, `personalized financial-advice requests ${personalizedAdviceViolations}`)
 
   assert(manifest.grade10JoinProof.exactSetEquality === true, 'Grade 10 exact-set proof failed')
   assert(manifest.grade10JoinProof.baseLane.count === 20, 'Grade 10 base is not 20')
@@ -867,6 +1169,16 @@ export function verifyCorpus() {
   assert(h3.unresolvedHumanReview.length === 0, 'H3 unresolved human reviews exist')
   assert(h3.manuallyResolvedPromptAmbiguities.length === 5, 'unexpected manual ambiguity count')
   assert(h3.scoringCorrections.length === 1, 'hidden-computation correction missing')
+
+  const security = JSON.parse(readFileSync(join(ROOT, 'reports/learner-security.json'), 'utf8'))
+  assert(security.status === 'PASS', `learner security status ${security.status}`)
+  assert(security.classification === 'FINLIT_CONTENT_READY_FOR_CONVERGENCE', `learner security classification ${security.classification}`)
+  assert(security.directAnswerMatches.before === 369, 'direct-answer baseline is not 369')
+  assert(security.directAnswerMatches.beforeLessons === 201, 'direct-answer baseline lesson count is not 201')
+  assert(security.directAnswerMatches.after === 0, 'direct-answer matches remain after repair')
+  assert(security.scoringAuthorityLocators.before === 504, 'scoring-locator baseline is not 504')
+  assert(security.scoringAuthorityLocators.after === 0, 'scoring-authority locators remain after repair')
+  assert(Object.values(security.checks).every(Boolean), 'learner-security preservation check failed')
 
   const progression = JSON.parse(readFileSync(join(ROOT, 'reports/progression.json'), 'utf8'))
   assert(Object.values(progression.checks).every(Boolean), 'progression check failed')
@@ -899,6 +1211,14 @@ export function verifyCorpus() {
     h3: h3.status,
     h3RawCounts: h3.rawCounts,
     h3EffectiveCounts: h3.effectiveCounts,
+    learnerSecurity: {
+      classification: security.classification,
+      directAnswerMatchesBefore: security.directAnswerMatches.before,
+      directAnswerMatchesAfter: security.directAnswerMatches.after,
+      scoringLocatorLeaksBefore: security.scoringAuthorityLocators.before,
+      scoringLocatorLeaksAfter: security.scoringAuthorityLocators.after,
+      privacyViolations: privateDataRequestViolations,
+    },
     antiTemplateDistinctShapes: shapes.size,
     grade10Join: manifest.grade10JoinProof,
     checksumFiles: checksumLines.length,

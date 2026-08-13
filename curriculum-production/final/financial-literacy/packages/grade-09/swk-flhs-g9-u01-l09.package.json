@@ -122,9 +122,8 @@
       ]
     }
   ],
-  "remediation": "If period 2 is coming out with income tax on the full $1,850, mark the order of operations on the stub: contribution first, then income tax on what is left. Compute the two income-taxable figures side by side, $1,850 and $1,757.50, before any tax is applied — and note that the payroll-tax base stays at $1,850 in both periods.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute period 2 with the contribution taken after tax instead of before, and state exactly how much the pre-tax treatment was worth.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

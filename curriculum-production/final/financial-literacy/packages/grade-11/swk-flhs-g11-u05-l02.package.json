@@ -128,7 +128,6 @@
   ],
   "remediation": "If the net gain comes out at $1,551.25, the tax is being charged on the gross gain and the fee has not been deducted first. The scenario charges the fee on the balance, and the 15% tax applies to what remains. Build the calculation as a ladder — gross gain, minus fee, minus tax — and check each line against the base the scenario names for it.",
   "extension": "Find the gross return that would be needed for a fund charging 1.15% to leave the same net gain as one charging 0.35%, and say what that says about how much extra performance a fee has to justify.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

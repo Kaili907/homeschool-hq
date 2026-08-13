@@ -1,0 +1,2081 @@
+{
+  "schemaVersion": "1.0",
+  "classification": "FINLIT_CONTENT_READY_FOR_CONVERGENCE",
+  "status": "PASS",
+  "scope": {
+    "learnerPackages": "packages/**/*.package.json",
+    "adultAuthorityArtifacts": "scoring/**/*.scoring.json",
+    "answerMatchSurface": [
+      "remediation",
+      "extension"
+    ],
+    "projectionOwnership": "Out of scope: generic learner projection and response UI are owned by Session 2."
+  },
+  "directAnswerMatches": {
+    "before": 369,
+    "beforeLessons": 201,
+    "after": 0,
+    "afterLessons": 0,
+    "repairedLessons": 201,
+    "repairedSections": 220,
+    "repairs": [
+      {
+        "packageId": "swk-fl-g3-u01-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u02-l02",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t3-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u02-l05",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u03-l01",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t3-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u03-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u04-l01",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u04-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u04-l06",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t3-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u06-l03",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g3-u06-l06",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t3-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g4-u02-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g4-u02-l03",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g4-u06-l06",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t3-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g5-u02-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g5-u02-l03",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t3-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g5-u06-l06",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t3-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g7-u01-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g7-u01-l04",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t3-p2"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g7-u06-l01",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t3-p1"
+        ]
+      },
+      {
+        "packageId": "swk-fl-g8-u05-l04",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u01-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u01-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u01-l05",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t3-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u01-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u02-l01",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u02-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u03-l03",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3",
+          "t3-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u03-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u04-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u04-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u04-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u04-l11",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u05-l07",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u06-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g9-u07-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u01-l04",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u02-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u02-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u02-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u02-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u02-l09",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l06",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u03-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u04-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u04-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u04-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u04-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u04-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u04-l07",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u04-l08",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u04-l10",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u05-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u05-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u05-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u05-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u05-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u05-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u05-l09",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u05-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p3",
+          "t2-p6"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l07",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u06-l10",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3",
+          "t2-p2",
+          "t2-p5"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p5"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t2-p2",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3",
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g10-u07-l11",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u01-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u01-l06",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u01-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u01-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u01-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t2-p1",
+          "t2-p2",
+          "t3-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u02-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t2-p2",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u03-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u03-l02",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u03-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u03-l05",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u03-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u03-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t2-p1",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u03-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t1-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l05",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l08",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u04-l11",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t2-p1",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l06",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3",
+          "t1-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p4",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u05-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u06-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t1-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u06-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u06-l06",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u06-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u06-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u06-l09",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u06-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u07-l02",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3",
+          "t2-p1",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u07-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u07-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u07-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u07-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p4",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u07-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3",
+          "t1-p4",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u07-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g11-u07-l11",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u01-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u01-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u01-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p3",
+          "t2-p5"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u01-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u01-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u01-l08",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p5"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u01-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u01-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3",
+          "t2-p3",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u02-l01",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p5"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u02-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u02-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u02-l06",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u02-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u02-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u02-l09",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u02-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p1",
+          "t2-p2",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l02",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3",
+          "t2-p2",
+          "t2-p3",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l03",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p2",
+          "t2-p3",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l07",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t2-p1",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u03-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l05",
+        "fields": [
+          "remediation",
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u04-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t2-p1",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l01",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t2-p1",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2",
+          "t2-p2",
+          "t2-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3",
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u05-l10",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u06-l04",
+        "fields": [
+          "extension"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u06-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u06-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u06-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u06-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u06-l09",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u07-l02",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u07-l03",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u07-l04",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u07-l05",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p1",
+          "t1-p2",
+          "t1-p3",
+          "t2-p1"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u07-l06",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p3",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u07-l07",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p2",
+          "t2-p3",
+          "t2-p4"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u07-l08",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t2-p1",
+          "t2-p2"
+        ]
+      },
+      {
+        "packageId": "swk-flhs-g12-u07-l11",
+        "fields": [
+          "remediation"
+        ],
+        "matchedItemRefsBefore": [
+          "t1-p2"
+        ]
+      }
+    ]
+  },
+  "scoringAuthorityLocators": {
+    "before": 504,
+    "after": 0,
+    "adultOnlyScoringArtifacts": 504,
+    "safeLearnerScoringModes": {
+      "MIXED": 468,
+      "JUDGMENT_APPLICATION": 36
+    }
+  },
+  "preservation": {
+    "lessons": 504,
+    "scenarios": 504,
+    "tasks": 1740,
+    "authoredPrompts": 3632,
+    "learnerCoreSha256Before": "3e3587c0f74525f9204152beefc6232504976f70d44e6c906f9c541fefa71d6f",
+    "learnerCoreSha256After": "3e3587c0f74525f9204152beefc6232504976f70d44e6c906f9c541fefa71d6f",
+    "requiredNumberTokenOccurrencesBefore": 4942,
+    "requiredNumberTokenOccurrencesAfter": 4942,
+    "fixedProblemLessons": 468,
+    "fixedContractItems": 2967,
+    "judgmentWorkLessons": 504,
+    "openContractItems": 666,
+    "mixedLessons": 468,
+    "judgmentApplicationLessons": 36,
+    "responseScoringModes": {
+      "MIXED": 468,
+      "JUDGMENT_APPLICATION": 36
+    },
+    "integerCentArithmeticAndOracleEvidencePreserved": true
+  },
+  "privacy": {
+    "privateDataRequestViolations": [],
+    "personalizedAdviceViolations": [],
+    "fictionalSimulations": 504
+  },
+  "h3": {
+    "status": "READY",
+    "effectiveReady": 504,
+    "blockingLessons": [],
+    "unresolvedHumanReview": [],
+    "adultAnswerKeyLessons": 468,
+    "substantiveRubricLessons": 504,
+    "oracleDisagreements": 0
+  },
+  "checks": {
+    "exactDirectAnswerBaseline": true,
+    "noDirectAnswerMatchesAfter": true,
+    "exactScoringLocatorBaseline": true,
+    "noScoringLocatorsAfter": true,
+    "allLearnerPackagesPresent": true,
+    "adultOnlyScoringArtifacts": true,
+    "learnerCoreExactlyPreserved": true,
+    "requiredNumbersPreserved": true,
+    "fixedProblemsPreserved": true,
+    "judgmentWorkPreserved": true,
+    "mixedHalvesIntact": true,
+    "judgmentApplicationsIntact": true,
+    "privateDataRequestsAbsent": true,
+    "personalizedAdviceAbsent": true,
+    "h3CorrectnessAuthorityReady": true
+  }
+}

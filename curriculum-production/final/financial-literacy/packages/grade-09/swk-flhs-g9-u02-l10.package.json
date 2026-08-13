@@ -109,7 +109,6 @@
   ],
   "remediation": "If the Vantis Air is coming out best, check whether the $110 drive was added. The requirement is 256 GB; a 64 GB machine does not meet it as sold, so its shelf price of $479 is not a price for something that does the job.",
   "extension": "Add the assumption that the student keeps the laptop 4 years and that an out-of-warranty repair costs $215. Rebuild the three totals with one expected repair after coverage ends and say whether the recommendation holds.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

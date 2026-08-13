@@ -114,9 +114,8 @@
       ]
     }
   ],
-  "remediation": "If the total comes out near $13,920, the 24% rate is being applied to the whole $58,000. Two things happen before any rate is applied: $11,200 comes off as the standard deduction, and the taxable income that remains is then split across the three bands. Only the $4,800 above $42,000 is charged at 24%.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute all three rates for a fictional worker with a gross income of $30,000 under the same schedule, and say which of the three moves most between the two workers.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

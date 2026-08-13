@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If the take-home change comes out as $150.00, no line below gross has been accounted for. Work down the statement: gross rose $150.00, the retirement deduction rose $52.50, the levy rose $11.48, and income tax rose $10.20. Subtract the last three from the first, and keep them separate so you can say which are costs.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what the take-home change would have been had the worker left the retirement election at 5%, and say what that comparison shows about who decided the size of the raise the worker felt.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

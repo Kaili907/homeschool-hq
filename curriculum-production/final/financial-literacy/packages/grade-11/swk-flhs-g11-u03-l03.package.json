@@ -117,9 +117,8 @@
       ]
     }
   ],
-  "remediation": "If the rebuild comes out at 7 months, the reserve is being replaced at the rate it was drained. It drained at $740.00 a month because income fell, but it refills at $590.00 a month because that is all the household saves. Write the two rates side by side and label which applies to which phase before dividing.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the reserve that would cover a 12-month shock of this size, and say how many months of ordinary saving it would take to build it from zero.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

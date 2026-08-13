@@ -98,7 +98,6 @@
   ],
   "remediation": "If the break-even comes out near 1, the whole $1,500 deductible is being divided by the premium saving rather than the $1,000 difference between the two deductibles. Only the extra deductible is the price of the cheaper premium.",
   "extension": "Recompute the break-even if Policy H’s premium were $22 a month, and say how much that changes the claim frequency a buyer would have to believe in.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

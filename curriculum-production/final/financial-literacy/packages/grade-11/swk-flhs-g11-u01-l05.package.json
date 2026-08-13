@@ -120,7 +120,6 @@
   ],
   "remediation": "If the expected salary comes out at $46,650.00, the two outcomes are being averaged evenly instead of weighted 68% and 32%. Write the two products separately — 0.68 x $58,400 and 0.32 x $34,900 — confirm the weights add to 1, and then add. A useful check: the expectation must land between $34,900 and $58,400, and closer to $58,400 because that outcome carries the larger weight.",
   "extension": "Find the completion rate at which the expected annual advantage falls to zero, and say what that rate implies about how sensitive this decision is to the completion figure.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

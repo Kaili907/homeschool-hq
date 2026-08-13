@@ -110,7 +110,6 @@
   ],
   "remediation": "If the two orders come out equal, the in-school accrual is being skipped. The same $6,000 is borrowed either way, but Order A shelters $3,500 of it from accrual entirely and charges 5.5% on the rest, while Order B charges 10.9% on all of it for the full 4.5 years.",
   "extension": "Work out how much Order B would owe if the private lender required interest to be paid during school rather than capitalised, and say whether that changes which order you would defend.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l11.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

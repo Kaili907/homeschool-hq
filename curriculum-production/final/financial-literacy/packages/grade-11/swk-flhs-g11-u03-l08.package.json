@@ -114,7 +114,6 @@
   ],
   "remediation": "If the amount needed today comes out below $3,900, the target is being discounted at the fee’s own 5.8% rather than at the 3.1% the savings earn. Two different rates are in play: 5.8% grows the fee and 3.1% grows the money set aside. Label each rate with what it applies to before using either.",
   "extension": "Find the savings return that would let $3,900 set aside today exactly meet the year-6 fee, and say whether that return is closer to the 3.1% available or to the 5.8% the fee is rising at.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

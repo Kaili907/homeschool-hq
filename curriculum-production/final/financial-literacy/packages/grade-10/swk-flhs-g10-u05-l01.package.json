@@ -120,9 +120,8 @@
       ]
     }
   ],
-  "remediation": "If the total return comes out as $130.00, the dividends have been left out. A share position returns both what the price does and what the company pays out. Add the $16.80 of dividends to the $130.00 of price change before dividing by the $1,140.00 cost.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what the share position would have returned if the price had ended at $26.00 and the same dividend had been paid, and say whether the dividend made the year positive.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

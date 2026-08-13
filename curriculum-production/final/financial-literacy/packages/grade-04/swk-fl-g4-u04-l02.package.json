@@ -102,7 +102,6 @@
   ],
   "remediation": "If a learner recalculates from zero, keep the running total on a single line for Dario and apply the withdrawal to that line, so saving resumes from the reduced amount.",
   "extension": "Ask the learner what weekly deposit would put Dario back on his original finishing week despite the repair.",
-  "scoringRef": "scoring/grade-04/swk-fl-g4-u04-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

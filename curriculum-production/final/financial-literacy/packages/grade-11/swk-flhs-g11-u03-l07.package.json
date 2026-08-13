@@ -137,9 +137,8 @@
       ]
     }
   ],
-  "remediation": "If both deadlines appear to be met under the original order, the goals are being checked against their own durations rather than their completion dates. The roof takes 10.0 months but does not start until month 6.0, so it completes at month 16.0. Write each goal as a start month and an end month before comparing anything to a deadline.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find whether any ordering of the three goals meets both deadlines with margin to spare, and say what that tells you about how tight this plan is.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

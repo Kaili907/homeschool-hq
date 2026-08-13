@@ -109,9 +109,8 @@
       ]
     }
   ],
-  "remediation": "If the weighted expense ratio comes out as 0.39%, the four ratios are being added without their weights. The international fund’s 0.24% applies to only a quarter of the money and the cash reserve’s 0.00% applies to a twentieth. Multiply each ratio by its share before adding, which gives 0.11%.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the weighted expense ratio if the international share rises to 40% and the broad domestic share falls to 25%, and say whether the change in cost is large enough to matter against the reason for making it.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

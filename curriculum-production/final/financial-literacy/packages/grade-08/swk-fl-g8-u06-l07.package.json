@@ -99,7 +99,6 @@
   ],
   "remediation": "If a learner compares only premiums, require both a claim-year and a no-claim-year total for each of Fenella's options before any recommendation.",
   "extension": "Ask the learner how many claim-free years would be needed for Option B to come out ahead of Option A over the whole period.",
-  "scoringRef": "scoring/grade-08/swk-fl-g8-u06-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

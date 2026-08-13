@@ -118,9 +118,8 @@
       ]
     }
   ],
-  "remediation": "If the leftover comes out at $576.00, only the $389 payment is in the plan and the insurance and fuel are missing. The vehicle costs $639.00 a month, not $389.00. Rebuild the month as a single column — take-home at the top, then every commitment including all three vehicle lines — and check the column has as many rows as the scenario has commitments.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the largest monthly payment Malik could take on and still meet the $450 savings goal, holding insurance and fuel unchanged, and say how much less vehicle that implies.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

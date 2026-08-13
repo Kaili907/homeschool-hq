@@ -108,7 +108,6 @@
   ],
   "remediation": "If the match is being computed as 50% of the final balance rather than of deposits, restate the rule in the programme’s own words: the match is on everything deposited, and the deposits total $300. Compute the deposits first and hold that figure before applying the match.",
   "extension": "Work out what annual interest rate a plain savings account would need in order to add $150 to a $450 balance in one year, and say whether such a rate is plausible.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

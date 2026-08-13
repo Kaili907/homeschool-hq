@@ -102,7 +102,6 @@
   ],
   "remediation": "When a learner loses track of the balance, keep a two-column ledger for Rina with paid and still owed, and update both columns for every week before answering anything.",
   "extension": "Ask the learner what weekly payment would let Rina clear the $30.00 in exactly 4 weeks, and to show the reasoning.",
-  "scoringRef": "scoring/grade-04/swk-fl-g4-u05-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

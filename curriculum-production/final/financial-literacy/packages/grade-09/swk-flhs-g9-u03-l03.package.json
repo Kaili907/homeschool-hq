@@ -110,9 +110,8 @@
       ]
     }
   ],
-  "remediation": "If the compound balance is coming out identical to the simple one, check that the multiplication is being applied to the new balance each year rather than to $1,400 three times. Write the three balances in a column — $1,463.00, then that times 1.045, then that times 1.045 — before rounding anything.",
-  "extension": "Extend both accounts to 10 years and state how the $8.63 gap changes, then say what that implies about the term over which compounding matters.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l03.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

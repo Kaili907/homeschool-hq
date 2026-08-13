@@ -112,9 +112,8 @@
       ]
     }
   ],
-  "remediation": "If the fifteen-year value of the negotiation comes out as $51,000, the gap is being held flat at $3,400 for 15 years and the compounding is being dropped. Write the first three gaps by hand — $3,400.00, then 3% more, then 3% more again — to see the column is not constant, and then use the running-total formula on the whole stream.",
-  "extension": "Find what the opening offer would have had to be, with no negotiation, for the fifteen-year total to match the negotiated path, and say why that figure is not $52,000 plus $63,236.31.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l06.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

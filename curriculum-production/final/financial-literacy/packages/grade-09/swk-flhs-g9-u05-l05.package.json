@@ -101,7 +101,6 @@
   ],
   "remediation": "If the split still shows an uninsured amount, reread how the limit applies: it is per depositor per bank, so two banks give two separate $250,000 limits. Compare $156,000 with $250,000, not with half of it.",
   "extension": "Work out the largest total this household could hold fully insured across three banks under the same rule, and say what practical costs that structure carries.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

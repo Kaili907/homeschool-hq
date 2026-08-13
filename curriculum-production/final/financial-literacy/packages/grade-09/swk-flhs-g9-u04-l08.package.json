@@ -100,7 +100,6 @@
   ],
   "remediation": "If the saving is coming out in the thousands, the 12 payments already made are probably being dropped from one side of the comparison. Both paths include them; only what happens after month 12 differs.",
   "extension": "Recompute the saving if the refinance ran 36 months at a disclosed $314.61 a month, and say what that shows about which term the borrower should ask for.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -120,9 +120,8 @@
       ]
     }
   ],
-  "remediation": "If the self-employment contribution comes out at $3,095.60, it is being charged on the $21,800 of revenue rather than on the $15,400.00 of net income. Expenses come off before either charge applies. Compute net self-employment income first, and use that same figure for both the contribution and the income going into total income.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the total tax if Lachlan’s allowable expenses were $9,700 instead of $6,400, and say how much of the difference comes from each of the two charges.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

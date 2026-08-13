@@ -126,9 +126,8 @@
       ]
     }
   ],
-  "remediation": "If the real gain comes out near $3,034.50, the inflation step has been skipped. The $63,034.50 the holding reaches is in year-end dollars, and prices have risen 3.4% since the start, so it has to be divided by 1.034 to be compared with the $60,000. Lay the chain out as four rows — gross, after fee, after tax, in today’s dollars — and check that each row is smaller than the one above it.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the quoted return that would have been needed to leave a real return of 3% after the same fee, tax, and inflation, and say how much higher that is than 6.9%.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

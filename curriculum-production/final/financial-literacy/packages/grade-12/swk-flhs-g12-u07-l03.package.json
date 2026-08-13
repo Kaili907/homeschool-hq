@@ -104,9 +104,8 @@
       ]
     }
   ],
-  "remediation": "If take-home comes out at $42,865.00, only the tax has been subtracted and the pre-tax elections are still in the figure; if it comes out at $45,138.40, the levy, state, and city charges have been left out. Subtract in the stated order: the $4,770.00 of elections, then all four taxes totalling $11,735.00.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the whole spine for a fictional profile paid $61,000 with the same elections, and say whether the 22% band is reached and what that does to the monthly figure.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

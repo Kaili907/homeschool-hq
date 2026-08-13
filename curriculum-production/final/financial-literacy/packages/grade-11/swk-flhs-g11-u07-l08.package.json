@@ -124,9 +124,8 @@
       ]
     }
   ],
-  "remediation": "If the saving comes out at $880.00, the 22% rate is being applied to a filer whose taxable income never reaches $38,400. Alistair’s taxable income is $22,200.00, so his marginal rate is 14% and the $4,000 contribution saves $560.00. Identify which band the taxable income sits in before choosing any rate.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the contribution at which part of Alistair’s reduction would drop into the 10% band, and say what the saving on that last portion would be.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

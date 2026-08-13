@@ -99,7 +99,6 @@
   ],
   "remediation": "If Option 1’s saving is coming out as $3,000, the contribution is being treated as a credit. It reduces the income that tax is charged on, so its value is the marginal rate times the contribution — $360, not $3,000.",
   "extension": "Extend the comparison to five years, assuming Option 1 grows 6% a year untouched and Option 2 keeps earning 3.5% taxed annually, and say what the comparison looks like then.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

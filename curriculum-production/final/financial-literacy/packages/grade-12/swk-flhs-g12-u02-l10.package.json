@@ -122,9 +122,8 @@
       ]
     }
   ],
-  "remediation": "If the recovery comes out at $503.76, the s10 billing change has been left out; if it comes out at $676.76, s8 has been counted as cancelled at $32.00 rather than downgraded to $14.00. Price each change for what it actually is: three cancellations recovering the full charge, one downgrade recovering only the $18.00 difference, and one billing change recovering $5.00.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Suppose the $14.00 tier of s8 turns out not to cover one feature the household uses monthly. Rework the audit total without that change, and say what share of the original recovery survives.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

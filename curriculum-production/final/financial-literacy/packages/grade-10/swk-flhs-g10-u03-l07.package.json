@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If the annual interest still looks like $648, read the rate name again: an annual percentage yield is what a year pays, not what a month pays. Multiply $1,500 by 3.6% once for a year, and notice that a single month of overdrafts on this same account cost $132.00.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Rewrite the fictional student’s three sentences so each one is correct, then say which of the three terms — the yield, the overdraft schedule, or the waiver condition — a person opening an account would be least likely to read.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

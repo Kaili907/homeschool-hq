@@ -100,7 +100,6 @@
   ],
   "remediation": "If a learner restarts the count from zero, keep Iker's running balance on one line and apply the withdrawal to that line before computing the remaining weeks.",
   "extension": "Ask the learner what weekly deposit would return Iker to his original finishing week despite the withdrawal.",
-  "scoringRef": "scoring/grade-05/swk-fl-g5-u04-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

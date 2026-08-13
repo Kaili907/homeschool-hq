@@ -101,9 +101,8 @@
       ]
     }
   ],
-  "remediation": "If the amount owed after a next-day report comes out as $1,653.72, the cap has not been applied. The schedule limits what the holder owes to $50 in that tier, so the answer is the smaller of the two figures. Compare the total against each tier’s cap and take the lower.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what the holder would owe if only the $1,204.00 charge had been unauthorised and it was reported on day 30, and say whether the size of the charge changes which tier applies.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

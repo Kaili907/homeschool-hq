@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If the required monthly figure comes out at $200.00, the outstanding $2,400.00 is being spread across 12 months rather than the 7 that remain. Only 7 months are left, and $2,400.00 of the target is outstanding. Divide by 7, then add the reserve replacement separately rather than folding it into the same figure.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the monthly commitment if the household decides to replace the reserve over 12 months instead of 7, and say what that choice costs in protection during the intervening months.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

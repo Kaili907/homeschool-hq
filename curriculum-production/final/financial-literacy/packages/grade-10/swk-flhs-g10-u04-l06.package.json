@@ -108,9 +108,8 @@
       ]
     }
   ],
-  "remediation": "If the annualised rate comes out near 15%, the 14-day term has not been accounted for. A 15.00% charge every 14 days is not a 15% annual charge: there are about 26 such periods in a 365-day year. Multiply the 15.00% by 365 divided by 14.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out how many renewals it would take for the accumulated fees to exceed the $400 originally advanced, and say what that says about the relationship between the fee and the principal.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

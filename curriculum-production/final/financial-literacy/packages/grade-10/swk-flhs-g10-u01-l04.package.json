@@ -101,8 +101,7 @@
     }
   ],
   "remediation": "If the two occupations look interchangeable, put the four percentile figures on one line in order: $33,100, $39,800, $48,300, $61,200, $71,900, $96,400. The overlap between the two distributions is what the medians hide.",
-  "extension": "Compute the 90th-to-10th ratio for Occupation X, compare it with Y’s 2.42, and say what a higher ratio tells a person about how much outcomes within one occupation vary.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l04.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

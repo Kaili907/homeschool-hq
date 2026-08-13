@@ -110,7 +110,6 @@
   ],
   "remediation": "If Message 2 seems less serious because $395 is smaller than $1,500, note what is received in each case: nothing. Both are total losses, and the smaller one is often the opening move rather than the whole of it.",
   "extension": "Write a third fictional message that carries none of the four markers and would still be fraudulent, then say which check would still catch it.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

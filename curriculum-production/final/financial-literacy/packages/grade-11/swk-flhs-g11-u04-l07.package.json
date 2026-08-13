@@ -121,9 +121,8 @@
       ]
     }
   ],
-  "remediation": "If the 72-month interest comes out at $4,199.20, the claim is being used as the calculation rather than being tested by it. Compute each offer’s interest from its own payment and term: 72 payments of $261.37 total $18,818.64, and the interest is what that exceeds $14,500. Only then compare the result with what the claim predicted.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out the ratio of interest between a 24-month and a 48-month version of the same loan, and say whether the more-than-doubling effect gets stronger or weaker at shorter terms.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

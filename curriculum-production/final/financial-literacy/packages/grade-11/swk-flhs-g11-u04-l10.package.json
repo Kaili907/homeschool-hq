@@ -150,9 +150,8 @@
       ]
     }
   ],
-  "remediation": "If the extra available comes out at $820, the minimum payments are not being deducted. The $574.00 of minimums has to be paid on all three debts before anything can be directed, so only $246.00 is actually a choice. Write the capacity as one row, the minimums as three rows, and the remainder as the directable figure before choosing any ordering.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what Perpetua could direct each month once both the card and the vehicle loan are cleared, and say what that does to the time the study loan takes.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -110,9 +110,8 @@
       ]
     }
   ],
-  "remediation": "If deduction lines are being combined or skipped, print the stub as five labelled rows and have the learner compute one row per pass, checking each against 1% of gross ($6.12) as a scale reference before summing.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Marcus picks up a second fictional shift and his gross rises to $748.00. Recompute all four percentage deductions and state which stub line stays fixed.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

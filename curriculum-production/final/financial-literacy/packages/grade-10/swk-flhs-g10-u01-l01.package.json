@@ -99,7 +99,6 @@
   ],
   "remediation": "If total compensation comes out near $52,000, only the salary has been counted. List the five components in a column and tick each as it is added, checking that the bonus and match are both computed from salary rather than from the running total.",
   "extension": "Recompute total compensation if the bonus pays out at half its target and the match requires a 4% employee contribution the candidate cannot afford, and state the realistic figure.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true
