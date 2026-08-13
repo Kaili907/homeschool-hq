@@ -1,0 +1,50 @@
+{
+  "note": "Editorial decisions for the two Social Studies units the upstream registry left unresolved. Repository fact lives in era1-raw-captures.json and is carried into era1-verified-sources.json verbatim; the judgements about what those records can carry live here and in era1-candidates.json -- including the culture-to-Era-1 mapping, which is this lane's judgement and not the repository's.",
+  "upstreamRegistry": "curriculum-production/source-resolution/social-studies/source-registry.json",
+  "units": [
+    {
+      "unitRef": "ma-g3-social-studies-u09",
+      "unitTitle": "Capstone: Taking Informed Action on a Michigan Public Issue",
+      "courseId": "ma-g3-social-studies",
+      "grade": 3,
+      "lessonCount": 12,
+      "sourceClass": "DYNAMIC_SOURCE_REQUIRED",
+      "contractId": "DYNAMIC_SOURCE_REQUIREMENT",
+      "rationale": "The capstone argues about a public issue the learner picks at teaching time. Evidence about that issue does not exist until the issue exists, so no anchor fixed in advance is evidence about it. A static registry entry here would be a source check nobody performed. The contract states what the tutor must attach instead, and holds the unit pending until they do.",
+      "staticSourcesConsidered": "The upstream registry's Michigan maps, constitutional documents, and economic photographs remain available as background for the unit's concept lessons. None of them is evidence about a present-day issue, so none is registered as an anchor here.",
+      "anchorSourceKeys": []
+    },
+    {
+      "unitRef": "ma-g7-social-studies-u02",
+      "unitTitle": "Era 1: Beginnings of Human Society",
+      "courseId": "ma-g7-social-studies",
+      "grade": 7,
+      "lessonCount": 12,
+      "sourceClass": "STATIC_VERIFIED_SOURCE",
+      "contractId": null,
+      "rationale": "The upstream lane searched four repositories that hold almost nothing inside Era 1 and correctly refused to pad the unit. Searching a fifth -- the Smithsonian's National Museum of Natural History anthropology collection, through the Smithsonian Open Access API -- returns excavated material the repository assigns to Paleolithic and Protoneolithic cultures at named sites. Four records anchor the unit: Paleoliths (Coup De Poings) from Nsongezi, Uganda; a Mousterian type point from Shanidar Cave, Iraq; an obsidian bladelet from Shanidar Cave and querns from Zawi Chemi Shanidar.",
+      "anchorSourceKeys": [
+        "si-nmnhanthro-8197795",
+        "si-nmnhanthro-8179176",
+        "si-nmnhanthro-14944765",
+        "si-nmnhanthro-8177415"
+      ],
+      "supportingSourceKeys": [
+        "si-nmnhanthro-8177446",
+        "si-nmnhanthro-8177447"
+      ],
+      "disclosures": [
+        "These records carry no absolute date for the object. The repository's date fields are accession and collection events -- when the museum received the object and when it was excavated -- and are recorded as such.",
+        "The Era 1 claim rests on two things: the repository's own culture value for each record, and this lane's reading of those culture names as falling inside Era 1. The second is a judgement, not a repository fact. It is declared in era1-candidates.json under era1CultureMapping, read from there by the build tool rather than hardcoded, and it is the right place to argue with this resolution.",
+        "Two anchors are typologically assigned (Acheulian, Mousterian): the label is read off the way the object was made, so it travels with the object. Two are site-assigned (Protoneolithic): the label is the excavation's assignment for the layer or lot.",
+        "The site assignment is not an independent date for an individual object. The same Protoneolithic label sits on an iron spearpoint and on a copper coin or medallion from Zawi Chemi Shanidar -- objects that cannot be Era 1. Both are registered as counter-examples, si-nmnhanthro-8177446 and si-nmnhanthro-8177447: they are the unit's honest material for the lesson on the limits of archaeological evidence, and they count toward nothing.",
+        "The unit's two-source minimum is met by the two typologically assigned anchors alone, so the resolution does not depend on the site-assigned pair.",
+        "Metadata for all six records is released CC0 by the Smithsonian; the metadata_usage value is captured per record as returned. No object image and no source text is reproduced in this lane."
+      ],
+      "handlingNotes": [
+        "The records place both sites in Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq. The two Shanidar Cave anchors name Ralph and Rose Solecki as collectors and carry the collections' movement between institutions in their own notes; the Zawi Chemi Shanidar records name Columbia University as donor and no collector at all. That difference, and that custody trail, are themselves usable evidence for the lesson on the limits of archaeological evidence.",
+        "Era 1 material is human-remains-adjacent. The six registered records are stone tools, a ground-stone assemblage, and two later metal finds -- no human remains are registered here. A tutor searching this collection further should expect to encounter human skeletal records and should handle that decision deliberately."
+      ]
+    }
+  ]
+}

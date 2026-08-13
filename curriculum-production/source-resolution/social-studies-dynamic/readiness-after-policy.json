@@ -1,0 +1,153 @@
+{
+  "generatedBy": "tools/reevaluate-readiness.mjs",
+  "gateInput": "curriculum-production/student-work/social-studies/_gate/production-input.json",
+  "projection": "curriculum-production/source-resolution/social-studies-dynamic/source-projection.json",
+  "sourceIntegrityOverridesApplied": 528,
+  "lessonsHeldPending": 12,
+  "lessonsCarriedThroughUnchecked": 432,
+  "readySplit": {
+    "readyOnACheckedSource": 528,
+    "readyOnTheGateInputsOwnUncheckedAssertion": 432,
+    "statement": "This lane checked the source integrity of the first group only. The second group -- grades 9-12 -- ships READY on the sourceIntegrityStatus the gate input already asserted, which no registry in this lane verified. Do not read this READY count as one lane's verification of all of it."
+  },
+  "totalLessons": 972,
+  "totalReady": 960,
+  "totalNeedsReview": 12,
+  "totalNotReady": 0,
+  "codeCounts": {
+    "READY": 960,
+    "MISSING_INSTRUCTION": 0,
+    "MISSING_STUDENT_WORK": 0,
+    "MISSING_GUIDED_PRACTICE": 0,
+    "MISSING_INDEPENDENT_WORK": 0,
+    "MISSING_SCORING_AUTHORITY": 0,
+    "MISSING_ANSWER_KEY": 0,
+    "MISSING_RUBRIC": 0,
+    "MISSING_REMEDIATION": 0,
+    "MISSING_EXTENSION": 0,
+    "ASSESSMENT_NOT_ALIGNED": 0,
+    "SOURCE_INTEGRITY_GAP": 0,
+    "SAFETY_OR_PRIVACY_GAP": 0,
+    "NEEDS_HUMAN_REVIEW": 12
+  },
+  "courses": [
+    {
+      "courseId": "ma-g3-social-studies",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "ready": 96,
+      "needsHumanReview": 12,
+      "notReady": 0,
+      "remainingReviewLessons": [
+        {
+          "lessonId": "ma-g3-social-studies-u09-l01",
+          "codes": [
+            "NEEDS_HUMAN_REVIEW"
+          ],
+          "notes": [
+            "source integrity requires verification but has not been checked"
+          ]
+        },
+        {
+          "lessonId": "ma-g3-social-studies-u09-l02",
+          "codes": [
+            "NEEDS_HUMAN_REVIEW"
+          ],
+          "notes": [
+            "source integrity requires verification but has not been checked"
+          ]
+        },
+        {
+          "lessonId": "ma-g3-social-studies-u09-l03",
+          "codes": [
+            "NEEDS_HUMAN_REVIEW"
+          ],
+          "notes": [
+            "source integrity requires verification but has not been checked"
+          ]
+        },
+        {
+          "lessonId": "ma-g3-social-studies-u09-l04",
+          "codes": [
+            "NEEDS_HUMAN_REVIEW"
+          ],
+          "notes": [
+            "source integrity requires verification but has not been checked"
+          ]
+        },
+        {
+          "lessonId": "ma-g3-social-studies-u09-l05",
+          "codes": [
+            "NEEDS_HUMAN_REVIEW"
+          ],
+          "notes": [
+            "source integrity requires verification but has not been checked"
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": "ma-g4-social-studies",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0,
+      "remainingReviewLessons": []
+    },
+    {
+      "courseId": "ma-g5-social-studies",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0,
+      "remainingReviewLessons": []
+    },
+    {
+      "courseId": "ma-g7-social-studies",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0,
+      "remainingReviewLessons": []
+    },
+    {
+      "courseId": "ma-g8-social-studies",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0,
+      "remainingReviewLessons": []
+    },
+    {
+      "courseId": "ma-g9-social-studies",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0,
+      "remainingReviewLessons": []
+    },
+    {
+      "courseId": "ma-g10-social-studies",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0,
+      "remainingReviewLessons": []
+    },
+    {
+      "courseId": "ma-g11-social-studies",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0,
+      "remainingReviewLessons": []
+    },
+    {
+      "courseId": "ma-g12-social-studies",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0,
+      "remainingReviewLessons": []
+    }
+  ]
+}

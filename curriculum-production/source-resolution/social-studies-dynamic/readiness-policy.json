@@ -1,0 +1,44 @@
+{
+  "policyId": "SOCIAL_STUDIES_SOURCE_ADMISSION",
+  "policyVersion": 1,
+  "appliesTo": "Release admission for Social Studies lessons, read from source-projection.json.",
+  "rules": [
+    {
+      "sourceClass": "STATIC_VERIFIED_SOURCE",
+      "admit": true,
+      "condition": "The lesson's unit has a verified anchor set that still passes tools/build-projection.py's checks: every anchor VERIFIED, every anchor's link resolving, and the unit's anchor minimums met.",
+      "onFailure": "The projection reclassifies the lesson UNRESOLVED. Admission must follow the projection, not a remembered earlier result."
+    },
+    {
+      "sourceClass": "DYNAMIC_SOURCE_REQUIRED",
+      "admit": "only when dynamicState is ATTACHED_SATISFIED",
+      "condition": "An attachment record in attachments.json satisfies every clause of DYNAMIC_SOURCE_REQUIREMENT for this lesson and its unit.",
+      "onFailure": "The lesson is PENDING_SOURCE_ATTACHMENT or ATTACHED_INCOMPLETE. It is reported as pending and is not admitted. It is never reported READY on the strength of the contract existing."
+    },
+    {
+      "sourceClass": "UNRESOLVED",
+      "admit": false,
+      "condition": "None. No verified static source set and no dynamic contract.",
+      "onFailure": "Held back."
+    },
+    {
+      "sourceClass": "NOT_ASSESSED_BY_SOURCE_REGISTRY",
+      "admit": null,
+      "condition": "Outside both source registries -- grades 9-12. The gate input's own sourceIntegrityStatus assertion stands unchanged and unchecked by this lane. The readiness report splits its READY count so this group is never presented as verified here.",
+      "onFailure": "This lane makes no claim. `admissible` is null -- a release must not read null as true."
+    }
+  ],
+  "invariants": [
+    "A pending lesson is reported as pending. No lane in this directory may write READY, VERIFIED, or an anchor key for a lesson whose source was not actually checked.",
+    "The readiness report is generated from the projection by tools/reevaluate-readiness.mjs, so the two cannot disagree, and it states how much of its READY count rests on a source this lane checked.",
+    "Machine-checked at build time: anchor status, anchor link resolution (a missing link check fails closed), the anchor minimums, and every structural clause of a dynamic attachment.",
+    "Not machine-checked, and therefore a human obligation before release: whether a repository record has changed since capture (run tools/verify-era1.py and act on any DRIFT or FAILED), and whether an attached dynamic source really says what the attesting adult says it says.",
+    "A dynamic attachment decays faster than a static one. The 180-day window in DYNAMIC_SOURCE_REQUIREMENT.revalidation is enforced at build time against retrievedOn and selectedOn."
+  ],
+  "currentState": {
+    "asOf": "2026-08-12",
+    "dynamicSourceRequiredLessons": 12,
+    "dynamicSatisfiedLessons": 0,
+    "statement": "No attachment has been recorded, so all 12 contract-governed lessons are PENDING_SOURCE_ATTACHMENT and none is admitted."
+  }
+}

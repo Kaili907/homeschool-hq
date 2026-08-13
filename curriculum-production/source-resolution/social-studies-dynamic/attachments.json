@@ -1,0 +1,7 @@
+{
+  "note": "The ledger of dynamic-source attachments recorded by tutors at teaching time. It is empty because no attachment has been made. An empty ledger is the correct state for a shipped release: it means every governed lesson is PENDING_SOURCE_ATTACHMENT, which is what the projection reports.",
+  "contractId": "DYNAMIC_SOURCE_REQUIREMENT",
+  "contractVersion": 1,
+  "recordShape": "Each entry carries every field in dynamic-source-contract.json -> evidenceMetadata.required. tools/build-projection.py validates entries against that list and against sourceAuthority.rules before a governed lesson is treated as satisfied.",
+  "attachments": []
+}

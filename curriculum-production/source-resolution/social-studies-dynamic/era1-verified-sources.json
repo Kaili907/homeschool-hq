@@ -1,0 +1,547 @@
+{
+  "generatedBy": "tools/build-era1-sources.py",
+  "capturedOn": "2026-08-12",
+  "era1CultureMapping": {
+    "judgementBy": "this lane, not the repository",
+    "statement": "The repository assigns a culture to a record. It does not say whether that culture falls inside Era 1 (beginnings to 4000 BCE). Reading these culture names as Era 1 is a judgement this lane makes, and it is the second premise behind every in-period claim in era1-verified-sources.json. It is declared here so it can be argued with. tools/build-era1-sources.py reads this list; the set is not hardcoded in the tool.",
+    "era1Cultures": [
+      "Acheulian",
+      "Middle Paleolithic, Mousterian",
+      "Upper Paleolithic, Baradostian",
+      "Protoneolithic"
+    ],
+    "caveat": "A culture name inside Era 1 is not a date for an individual object. See each record's periodClaim.basis, and the two counter-examples."
+  },
+  "sourceCount": 6,
+  "era1AnchorCount": 4,
+  "era1AnchorKeys": [
+    "si-nmnhanthro-14944765",
+    "si-nmnhanthro-8177415",
+    "si-nmnhanthro-8179176",
+    "si-nmnhanthro-8197795"
+  ],
+  "sources": {
+    "si-nmnhanthro-8197795": {
+      "sourceKey": "si-nmnhanthro-8197795",
+      "repository": "Smithsonian Institution, National Museum of Natural History -- Department of Anthropology",
+      "kind": "museum object record",
+      "title": "Paleoliths, Coup De Poings",
+      "recordId": "nmnhanthropology_8197795",
+      "guid": "http://n2t.net/ark:/65665/3055f24e2-5ddf-41ac-981f-745fcfb2bb59",
+      "publicUrl": "http://n2t.net/ark:/65665/3055f24e2-5ddf-41ac-981f-745fcfb2bb59",
+      "metadataAccess": "CC0",
+      "dataSource": "NMNH - Anthropology Dept.",
+      "objectType": [
+        "Paleolith"
+      ],
+      "cultureReported": [
+        "Acheulian"
+      ],
+      "siteName": [
+        "Nsongezi"
+      ],
+      "place": [
+        "Ankole, Uganda, Africa"
+      ],
+      "collectors": [
+        "Dr. G. H. Cole"
+      ],
+      "donor": [
+        "Uganda Museum"
+      ],
+      "identifiers": [
+        {
+          "label": "Accession Number",
+          "content": "259009"
+        },
+        {
+          "label": "USNM Number",
+          "content": "A443863-0"
+        }
+      ],
+      "physicalDescription": [],
+      "specimenCount": "8",
+      "recordLastModified": "14 Jan 2015",
+      "repositoryNotes": [],
+      "repositoryReportedDates": {
+        "labels": [
+          {
+            "label": "Accession Date",
+            "content": "1965"
+          }
+        ],
+        "objectAgeReported": false,
+        "statement": "The repository reports accession and collection events, not the object's age. No absolute date for the object is claimed anywhere in this lane."
+      },
+      "periodClaim": {
+        "labelInEra1": true,
+        "usableAsEra1Evidence": true,
+        "role": "ERA1_ANCHOR",
+        "basis": "TYPOLOGICAL",
+        "basisStatement": "The period label names a stone-tool industry that is read off the way the object itself was made, so it travels with the object rather than with the excavation lot.",
+        "era1MappingIsALaneJudgement": "The repository assigns a culture to a record. It does not say whether that culture falls inside Era 1 (beginnings to 4000 BCE). Reading these culture names as Era 1 is a judgement this lane makes, and it is the second premise behind every in-period claim in era1-verified-sources.json. It is declared here so it can be argued with. tools/build-era1-sources.py reads this list; the set is not hardcoded in the tool.",
+        "restsOn": "the repository's own culture value(s): Acheulian",
+        "contradiction": null,
+        "countsTowardAnchorMinimum": true
+      },
+      "verification": {
+        "status": "VERIFIED",
+        "checkedOn": "2026-08-12",
+        "method": "Smithsonian Open Access API",
+        "query": "paleolithic AND unit_code:NMNHANTHRO",
+        "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+        "recordEndpointRecheck": null
+      },
+      "quotation": "None. No source text is reproduced in this lane.",
+      "linkCheck": {
+        "checkedOn": "2026-08-12",
+        "status": "RESOLVED",
+        "httpStatus": 200,
+        "resolvedTo": "https://collections.nmnh.si.edu/search/anth/?ark=ark:/65665/3055f24e25ddf41ac981f745fcfb2bb59"
+      }
+    },
+    "si-nmnhanthro-8179176": {
+      "sourceKey": "si-nmnhanthro-8179176",
+      "repository": "Smithsonian Institution, National Museum of Natural History -- Department of Anthropology",
+      "kind": "museum object record",
+      "title": "Mousterian Type Point, Broken",
+      "recordId": "nmnhanthropology_8179176",
+      "guid": "http://n2t.net/ark:/65665/3785b46bf-a853-4889-9319-2beaebf11e1d",
+      "publicUrl": "http://n2t.net/ark:/65665/3785b46bf-a853-4889-9319-2beaebf11e1d",
+      "metadataAccess": "CC0",
+      "dataSource": "NMNH - Anthropology Dept.",
+      "objectType": [
+        "Point"
+      ],
+      "cultureReported": [
+        "Upper Paleolithic, Baradostian",
+        "Middle Paleolithic, Mousterian"
+      ],
+      "siteName": [
+        "Shanidar Cave"
+      ],
+      "place": [
+        "Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+      ],
+      "collectors": [
+        "Dr. Ralph S. Solecki",
+        "Rose Solecki"
+      ],
+      "donor": [
+        "Columbia University"
+      ],
+      "identifiers": [
+        {
+          "label": "Accession Number",
+          "content": "220078"
+        },
+        {
+          "label": "USNM Number",
+          "content": "A426375-0"
+        }
+      ],
+      "physicalDescription": [
+        {
+          "label": "Length",
+          "content": "3.8 cm"
+        },
+        {
+          "label": "Width",
+          "content": "2.5 cm"
+        },
+        {
+          "label": "Height",
+          "content": "1.4 cm"
+        }
+      ],
+      "specimenCount": "1",
+      "recordLastModified": "14 Feb 2019",
+      "repositoryNotes": [
+        "Specimen(s) removed by Ralph and Rose Solecki in the 1950s-1960s and taken to Columbia University. In 1990, the specimen(s) were then moved by the Soleckis to Texas A&M University and returned to Columbia University around 2000. The specimen(s) returned to the Smithsonian in 2016 and were recataloged as part of the Ralph S. and Rose L. Solecki Papers and Artifacts Project (2018-2019)."
+      ],
+      "repositoryReportedDates": {
+        "labels": [
+          {
+            "label": "Accession Date",
+            "content": "9 May 1958"
+          },
+          {
+            "label": "Collection Date",
+            "content": "1956 to 1957"
+          }
+        ],
+        "objectAgeReported": false,
+        "statement": "The repository reports accession and collection events, not the object's age. No absolute date for the object is claimed anywhere in this lane."
+      },
+      "periodClaim": {
+        "labelInEra1": true,
+        "usableAsEra1Evidence": true,
+        "role": "ERA1_ANCHOR",
+        "basis": "TYPOLOGICAL",
+        "basisStatement": "The period label names a stone-tool industry that is read off the way the object itself was made, so it travels with the object rather than with the excavation lot.",
+        "era1MappingIsALaneJudgement": "The repository assigns a culture to a record. It does not say whether that culture falls inside Era 1 (beginnings to 4000 BCE). Reading these culture names as Era 1 is a judgement this lane makes, and it is the second premise behind every in-period claim in era1-verified-sources.json. It is declared here so it can be argued with. tools/build-era1-sources.py reads this list; the set is not hardcoded in the tool.",
+        "restsOn": "the repository's own culture value(s): Upper Paleolithic, Baradostian; Middle Paleolithic, Mousterian",
+        "contradiction": null,
+        "countsTowardAnchorMinimum": true
+      },
+      "verification": {
+        "status": "VERIFIED",
+        "checkedOn": "2026-08-12",
+        "method": "Smithsonian Open Access API",
+        "query": "paleolithic AND unit_code:NMNHANTHRO",
+        "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+        "recordEndpointRecheck": {
+          "endpoint": "https://api.si.edu/openaccess/api/v1.0/content/ld1-1643406903964-1643406923902-0",
+          "capturedOn": "2026-08-12",
+          "httpStatus": 200,
+          "titleReturned": "Mousterian Type Point, Broken",
+          "recordIdReturned": "nmnhanthropology_8179176"
+        }
+      },
+      "quotation": "None. No source text is reproduced in this lane.",
+      "linkCheck": {
+        "checkedOn": "2026-08-12",
+        "status": "RESOLVED",
+        "httpStatus": 200,
+        "resolvedTo": "https://collections.nmnh.si.edu/search/anth/?ark=ark:/65665/3785b46bfa853488993192beaebf11e1d"
+      }
+    },
+    "si-nmnhanthro-14944765": {
+      "sourceKey": "si-nmnhanthro-14944765",
+      "repository": "Smithsonian Institution, National Museum of Natural History -- Department of Anthropology",
+      "kind": "museum object record",
+      "title": "Obsidian Bladelet",
+      "recordId": "nmnhanthropology_14944765",
+      "guid": "http://n2t.net/ark:/65665/39d98b348-777c-4d7a-b311-a4910b8f6c66",
+      "publicUrl": "http://n2t.net/ark:/65665/39d98b348-777c-4d7a-b311-a4910b8f6c66",
+      "metadataAccess": "CC0",
+      "dataSource": "NMNH - Anthropology Dept.",
+      "objectType": [
+        "Blade"
+      ],
+      "cultureReported": [
+        "Protoneolithic"
+      ],
+      "siteName": [
+        "Shanidar Cave"
+      ],
+      "place": [
+        "Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+      ],
+      "collectors": [
+        "Dr. Ralph S. Solecki",
+        "Rose Solecki"
+      ],
+      "donor": [
+        "Columbia University"
+      ],
+      "identifiers": [
+        {
+          "label": "Accession Number",
+          "content": "220078"
+        },
+        {
+          "label": "USNM Number",
+          "content": "A610116-0"
+        }
+      ],
+      "physicalDescription": [
+        {
+          "label": "Length",
+          "content": "3.1 cm"
+        },
+        {
+          "label": "Width",
+          "content": "0.7 cm"
+        },
+        {
+          "label": "Height",
+          "content": "0.2 cm"
+        }
+      ],
+      "specimenCount": "2",
+      "recordLastModified": "9 Aug 2019",
+      "repositoryNotes": [
+        "Piece number does not have an accompanying notecard from \"Artifact Notes Shanidar Cave Season IV Mainly Layer B, circa 1960\" Ralph S. and Rose L. Solecki papers, National Anthropological Archives, Smithsonian Institution."
+      ],
+      "repositoryReportedDates": {
+        "labels": [
+          {
+            "label": "Accession Date",
+            "content": "9 May 1958"
+          },
+          {
+            "label": "Collection Date",
+            "content": "1960"
+          }
+        ],
+        "objectAgeReported": false,
+        "statement": "The repository reports accession and collection events, not the object's age. No absolute date for the object is claimed anywhere in this lane."
+      },
+      "periodClaim": {
+        "labelInEra1": true,
+        "usableAsEra1Evidence": true,
+        "role": "ERA1_ANCHOR",
+        "basis": "SITE_ASSIGNED",
+        "basisStatement": "The period label is the excavation's assignment for the site or lot. It is not an independent date for this object -- the same label sits on demonstrably later intrusive finds from the same site.",
+        "era1MappingIsALaneJudgement": "The repository assigns a culture to a record. It does not say whether that culture falls inside Era 1 (beginnings to 4000 BCE). Reading these culture names as Era 1 is a judgement this lane makes, and it is the second premise behind every in-period claim in era1-verified-sources.json. It is declared here so it can be argued with. tools/build-era1-sources.py reads this list; the set is not hardcoded in the tool.",
+        "restsOn": "the repository's own culture value(s): Protoneolithic",
+        "contradiction": null,
+        "countsTowardAnchorMinimum": true
+      },
+      "verification": {
+        "status": "VERIFIED",
+        "checkedOn": "2026-08-12",
+        "method": "Smithsonian Open Access API",
+        "query": "\"Shanidar Cave\" AND unit_code:NMNHANTHRO",
+        "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+        "recordEndpointRecheck": null
+      },
+      "quotation": "None. No source text is reproduced in this lane.",
+      "linkCheck": {
+        "checkedOn": "2026-08-12",
+        "status": "RESOLVED",
+        "httpStatus": 200,
+        "resolvedTo": "https://collections.nmnh.si.edu/search/anth/?ark=ark:/65665/39d98b348777c4d7ab311a4910b8f6c66"
+      }
+    },
+    "si-nmnhanthro-8177415": {
+      "sourceKey": "si-nmnhanthro-8177415",
+      "repository": "Smithsonian Institution, National Museum of Natural History -- Department of Anthropology",
+      "kind": "museum object record",
+      "title": "Querns",
+      "recordId": "nmnhanthropology_8177415",
+      "guid": "http://n2t.net/ark:/65665/382b2583c-3ea5-42ab-9c15-15f186589d40",
+      "publicUrl": "http://n2t.net/ark:/65665/382b2583c-3ea5-42ab-9c15-15f186589d40",
+      "metadataAccess": "CC0",
+      "dataSource": "NMNH - Anthropology Dept.",
+      "objectType": [
+        "Quern"
+      ],
+      "cultureReported": [
+        "Protoneolithic"
+      ],
+      "siteName": [
+        "Zawi Chemi Shanidar"
+      ],
+      "place": [
+        "Zawi Chemi Shanidar, Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+      ],
+      "collectors": [],
+      "donor": [
+        "Columbia University"
+      ],
+      "identifiers": [
+        {
+          "label": "Accession Number",
+          "content": "220078"
+        },
+        {
+          "label": "USNM Number",
+          "content": "A424824-0"
+        }
+      ],
+      "physicalDescription": [],
+      "specimenCount": "7",
+      "recordLastModified": "12 Mar 2018",
+      "repositoryNotes": [],
+      "repositoryReportedDates": {
+        "labels": [
+          {
+            "label": "Accession Date",
+            "content": "9 May 1958"
+          }
+        ],
+        "objectAgeReported": false,
+        "statement": "The repository reports accession and collection events, not the object's age. No absolute date for the object is claimed anywhere in this lane."
+      },
+      "periodClaim": {
+        "labelInEra1": true,
+        "usableAsEra1Evidence": true,
+        "role": "ERA1_ANCHOR",
+        "basis": "SITE_ASSIGNED",
+        "basisStatement": "The period label is the excavation's assignment for the site or lot. It is not an independent date for this object -- the same label sits on demonstrably later intrusive finds from the same site.",
+        "era1MappingIsALaneJudgement": "The repository assigns a culture to a record. It does not say whether that culture falls inside Era 1 (beginnings to 4000 BCE). Reading these culture names as Era 1 is a judgement this lane makes, and it is the second premise behind every in-period claim in era1-verified-sources.json. It is declared here so it can be argued with. tools/build-era1-sources.py reads this list; the set is not hardcoded in the tool.",
+        "restsOn": "the repository's own culture value(s): Protoneolithic",
+        "contradiction": null,
+        "countsTowardAnchorMinimum": true
+      },
+      "verification": {
+        "status": "VERIFIED",
+        "checkedOn": "2026-08-12",
+        "method": "Smithsonian Open Access API",
+        "query": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+        "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+        "recordEndpointRecheck": null
+      },
+      "quotation": "None. No source text is reproduced in this lane.",
+      "linkCheck": {
+        "checkedOn": "2026-08-12",
+        "status": "RESOLVED",
+        "httpStatus": 200,
+        "resolvedTo": "https://collections.nmnh.si.edu/search/anth/?ark=ark:/65665/382b2583c3ea542ab9c1515f186589d40"
+      }
+    },
+    "si-nmnhanthro-8177446": {
+      "sourceKey": "si-nmnhanthro-8177446",
+      "repository": "Smithsonian Institution, National Museum of Natural History -- Department of Anthropology",
+      "kind": "museum object record",
+      "title": "Iron Spearpoint",
+      "recordId": "nmnhanthropology_8177446",
+      "guid": "http://n2t.net/ark:/65665/374201d50-7021-4db7-af92-6665d0552db1",
+      "publicUrl": "http://n2t.net/ark:/65665/374201d50-7021-4db7-af92-6665d0552db1",
+      "metadataAccess": "CC0",
+      "dataSource": "NMNH - Anthropology Dept.",
+      "objectType": [
+        "Point"
+      ],
+      "cultureReported": [
+        "Protoneolithic"
+      ],
+      "siteName": [
+        "Zawi Chemi Shanidar"
+      ],
+      "place": [
+        "Zawi Chemi Shanidar, Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+      ],
+      "collectors": [],
+      "donor": [
+        "Columbia University"
+      ],
+      "identifiers": [
+        {
+          "label": "Accession Number",
+          "content": "220078"
+        },
+        {
+          "label": "USNM Number",
+          "content": "A424844-0"
+        }
+      ],
+      "physicalDescription": [],
+      "specimenCount": "1",
+      "recordLastModified": "30 Jul 2020",
+      "repositoryNotes": [],
+      "repositoryReportedDates": {
+        "labels": [
+          {
+            "label": "Accession Date",
+            "content": "9 May 1958"
+          }
+        ],
+        "objectAgeReported": false,
+        "statement": "The repository reports accession and collection events, not the object's age. No absolute date for the object is claimed anywhere in this lane."
+      },
+      "periodClaim": {
+        "labelInEra1": true,
+        "usableAsEra1Evidence": false,
+        "role": "METHOD_COUNTEREXAMPLE",
+        "basis": "SITE_ASSIGNED",
+        "basisStatement": "Registered because the repository's period label and the record's own object type contradict each other. It is the evidence that a site assignment is not a date, and it anchors nothing.",
+        "era1MappingIsALaneJudgement": "The repository assigns a culture to a record. It does not say whether that culture falls inside Era 1 (beginnings to 4000 BCE). Reading these culture names as Era 1 is a judgement this lane makes, and it is the second premise behind every in-period claim in era1-verified-sources.json. It is declared here so it can be argued with. tools/build-era1-sources.py reads this list; the set is not hardcoded in the tool.",
+        "restsOn": "the repository's own culture value(s): Protoneolithic",
+        "contradiction": "The repository's culture value for this record is Protoneolithic, but the record's own title and object type say iron. Iron working postdates Era 1 by millennia, so the label cannot be an age for this object. Registered only as evidence about how catalogue labels work; it is not Era 1 evidence and does not count toward the anchor minimum.",
+        "countsTowardAnchorMinimum": false
+      },
+      "verification": {
+        "status": "VERIFIED",
+        "checkedOn": "2026-08-12",
+        "method": "Smithsonian Open Access API",
+        "query": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+        "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+        "recordEndpointRecheck": null
+      },
+      "quotation": "None. No source text is reproduced in this lane.",
+      "linkCheck": {
+        "checkedOn": "2026-08-12",
+        "status": "RESOLVED",
+        "httpStatus": 200,
+        "resolvedTo": "https://collections.nmnh.si.edu/search/anth/?ark=ark:/65665/374201d5070214db7af926665d0552db1"
+      }
+    },
+    "si-nmnhanthro-8177447": {
+      "sourceKey": "si-nmnhanthro-8177447",
+      "repository": "Smithsonian Institution, National Museum of Natural History -- Department of Anthropology",
+      "kind": "museum object record",
+      "title": "Copper Coin Or Medallion",
+      "recordId": "nmnhanthropology_8177447",
+      "guid": "http://n2t.net/ark:/65665/3f54608f1-562a-40f5-8e53-a065ea49e30f",
+      "publicUrl": "http://n2t.net/ark:/65665/3f54608f1-562a-40f5-8e53-a065ea49e30f",
+      "metadataAccess": "CC0",
+      "dataSource": "NMNH - Anthropology Dept.",
+      "objectType": [
+        "Coin"
+      ],
+      "cultureReported": [
+        "Protoneolithic"
+      ],
+      "siteName": [
+        "Zawi Chemi Shanidar"
+      ],
+      "place": [
+        "Zawi Chemi Shanidar, Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+      ],
+      "collectors": [],
+      "donor": [
+        "Columbia University"
+      ],
+      "identifiers": [
+        {
+          "label": "Accession Number",
+          "content": "220078"
+        },
+        {
+          "label": "USNM Number",
+          "content": "A424845-0"
+        }
+      ],
+      "physicalDescription": [],
+      "specimenCount": "1",
+      "recordLastModified": "30 Jul 2020",
+      "repositoryNotes": [
+        "Fragmentary."
+      ],
+      "repositoryReportedDates": {
+        "labels": [
+          {
+            "label": "Accession Date",
+            "content": "9 May 1958"
+          }
+        ],
+        "objectAgeReported": false,
+        "statement": "The repository reports accession and collection events, not the object's age. No absolute date for the object is claimed anywhere in this lane."
+      },
+      "periodClaim": {
+        "labelInEra1": true,
+        "usableAsEra1Evidence": false,
+        "role": "METHOD_COUNTEREXAMPLE",
+        "basis": "SITE_ASSIGNED",
+        "basisStatement": "Registered because the repository's period label and the record's own object type contradict each other. It is the evidence that a site assignment is not a date, and it anchors nothing.",
+        "era1MappingIsALaneJudgement": "The repository assigns a culture to a record. It does not say whether that culture falls inside Era 1 (beginnings to 4000 BCE). Reading these culture names as Era 1 is a judgement this lane makes, and it is the second premise behind every in-period claim in era1-verified-sources.json. It is declared here so it can be argued with. tools/build-era1-sources.py reads this list; the set is not hardcoded in the tool.",
+        "restsOn": "the repository's own culture value(s): Protoneolithic",
+        "contradiction": "The repository's culture value for this record is Protoneolithic, but the record's own title and object type say coin. Coinage postdates Era 1 by millennia, so the label cannot be an age for this object. Registered only as evidence about how catalogue labels work; it is not Era 1 evidence and does not count toward the anchor minimum.",
+        "countsTowardAnchorMinimum": false
+      },
+      "verification": {
+        "status": "VERIFIED",
+        "checkedOn": "2026-08-12",
+        "method": "Smithsonian Open Access API",
+        "query": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+        "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+        "recordEndpointRecheck": null
+      },
+      "quotation": "None. No source text is reproduced in this lane.",
+      "linkCheck": {
+        "checkedOn": "2026-08-12",
+        "status": "RESOLVED",
+        "httpStatus": 200,
+        "resolvedTo": "https://collections.nmnh.si.edu/search/anth/?ark=ark:/65665/3f54608f1562a40f58e53a065ea49e30f"
+      }
+    }
+  },
+  "linkCheck": {
+    "checkedOn": "2026-08-12",
+    "resolved": 6,
+    "failed": 0
+  }
+}

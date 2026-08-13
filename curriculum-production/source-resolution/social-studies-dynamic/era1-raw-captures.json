@@ -1,0 +1,1025 @@
+{
+  "generatedBy": "tools/capture-era1.py",
+  "note": "Verbatim rows as the Smithsonian Open Access API returned them. Nothing in this file is authored, edited, or recalled.",
+  "capturedOn": "2026-08-12",
+  "recordCount": 6,
+  "records": {
+    "si-nmnhanthro-8197795": {
+      "capturedOn": "2026-08-12",
+      "capturedBy": "Smithsonian Open Access API search response",
+      "query": "paleolithic AND unit_code:NMNHANTHRO",
+      "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+      "record": {
+        "id": "ld1-1643406903964-1643406931384-2",
+        "title": "Paleoliths, Coup De Poings",
+        "unitCode": "NMNHANTHRO",
+        "type": "edanmdm",
+        "url": "edanmdm:nmnhanthropology_8197795",
+        "content": {
+          "freetext": {
+            "date": [
+              {
+                "label": "Accession Date",
+                "content": "1965"
+              }
+            ],
+            "name": [
+              {
+                "label": "Collector",
+                "content": "Dr. G. H. Cole"
+              },
+              {
+                "label": "Donor Name",
+                "content": "Uganda Museum"
+              },
+              {
+                "label": "Site Name",
+                "content": "Nsongezi"
+              }
+            ],
+            "notes": [
+              {
+                "label": "Record Last Modified",
+                "content": "14 Jan 2015"
+              },
+              {
+                "label": "Specimen Count",
+                "content": "8"
+              }
+            ],
+            "place": [
+              {
+                "label": "Place",
+                "content": "Ankole, Uganda, Africa"
+              }
+            ],
+            "topic": [
+              {
+                "label": "Topic",
+                "content": "Archaeology"
+              }
+            ],
+            "culture": [
+              {
+                "label": "Culture",
+                "content": "Acheulian"
+              }
+            ],
+            "setName": [
+              {
+                "label": "See more items in",
+                "content": "Anthropology"
+              }
+            ],
+            "dataSource": [
+              {
+                "label": "Data Source",
+                "content": "NMNH - Anthropology Dept."
+              }
+            ],
+            "identifier": [
+              {
+                "label": "Accession Number",
+                "content": "259009"
+              },
+              {
+                "label": "USNM Number",
+                "content": "A443863-0"
+              }
+            ],
+            "objectType": [
+              {
+                "label": "Object Type",
+                "content": "Paleolith"
+              }
+            ]
+          },
+          "indexedStructured": {
+            "date": [
+              "1960s"
+            ],
+            "name": [
+              "Dr. G. H. Cole",
+              "Uganda Museum"
+            ],
+            "place": [
+              "Ankole",
+              "Africa",
+              "Uganda"
+            ],
+            "topic": [
+              "Archaeology",
+              "Anthropology"
+            ],
+            "culture": [
+              "Acheulian culture"
+            ],
+            "geoLocation": [
+              {
+                "L1": {
+                  "type": "Continent",
+                  "content": "Africa"
+                },
+                "L2": {
+                  "type": "Country",
+                  "content": "Uganda"
+                },
+                "L4": {
+                  "type": "County",
+                  "content": "Ankole"
+                }
+              }
+            ],
+            "object_type": [
+              "Paleolith"
+            ]
+          },
+          "descriptiveNonRepeating": {
+            "guid": "http://n2t.net/ark:/65665/3055f24e2-5ddf-41ac-981f-745fcfb2bb59",
+            "title": {
+              "label": "title",
+              "content": "Paleoliths, Coup De Poings"
+            },
+            "record_ID": "nmnhanthropology_8197795",
+            "unit_code": "NMNHANTHRO",
+            "title_sort": "PALEOLITHS COUP DE POINGS",
+            "data_source": "NMNH - Anthropology Dept.",
+            "record_link": "http://n2t.net/ark:/65665/3055f24e2-5ddf-41ac-981f-745fcfb2bb59",
+            "metadata_usage": {
+              "access": "CC0"
+            }
+          }
+        },
+        "hash": "f19d156e086aaca01b0e326f619df2e0bb28b1b1",
+        "docSignature": "1064a966eb5a17ad75e40b66b4851531",
+        "timestamp": "1663781672",
+        "lastTimeUpdated": "1666716255",
+        "version": "1666714629"
+      }
+    },
+    "si-nmnhanthro-8179176": {
+      "capturedOn": "2026-08-12",
+      "capturedBy": "Smithsonian Open Access API search response",
+      "query": "paleolithic AND unit_code:NMNHANTHRO",
+      "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+      "record": {
+        "id": "ld1-1643406903964-1643406923902-0",
+        "title": "Mousterian Type Point, Broken",
+        "unitCode": "NMNHANTHRO",
+        "type": "edanmdm",
+        "url": "edanmdm:nmnhanthropology_8179176",
+        "content": {
+          "freetext": {
+            "date": [
+              {
+                "label": "Accession Date",
+                "content": "9 May 1958"
+              },
+              {
+                "label": "Collection Date",
+                "content": "1956 to 1957"
+              }
+            ],
+            "name": [
+              {
+                "label": "Collector",
+                "content": "Dr. Ralph S. Solecki"
+              },
+              {
+                "label": "Collector",
+                "content": "Rose Solecki"
+              },
+              {
+                "label": "Donor Name",
+                "content": "Columbia University"
+              },
+              {
+                "label": "Site Name",
+                "content": "Shanidar Cave"
+              }
+            ],
+            "notes": [
+              {
+                "label": "Notes",
+                "content": "Specimen(s) removed by Ralph and Rose Solecki in the 1950s-1960s and taken to Columbia University. In 1990, the specimen(s) were then moved by the Soleckis to Texas A&M University and returned to Columbia University around 2000. The specimen(s) returned to the Smithsonian in 2016 and were recataloged as part of the Ralph S. and Rose L. Solecki Papers and Artifacts Project (2018-2019)."
+              },
+              {
+                "label": "Record Last Modified",
+                "content": "14 Feb 2019"
+              },
+              {
+                "label": "Specimen Count",
+                "content": "1"
+              }
+            ],
+            "place": [
+              {
+                "label": "Place",
+                "content": "Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+              }
+            ],
+            "topic": [
+              {
+                "label": "Topic",
+                "content": "Archaeology"
+              }
+            ],
+            "culture": [
+              {
+                "label": "Culture",
+                "content": "Upper Paleolithic, Baradostian"
+              },
+              {
+                "label": "Culture",
+                "content": "Middle Paleolithic, Mousterian"
+              }
+            ],
+            "setName": [
+              {
+                "label": "See more items in",
+                "content": "Anthropology"
+              }
+            ],
+            "dataSource": [
+              {
+                "label": "Data Source",
+                "content": "NMNH - Anthropology Dept."
+              }
+            ],
+            "identifier": [
+              {
+                "label": "Accession Number",
+                "content": "220078"
+              },
+              {
+                "label": "USNM Number",
+                "content": "A426375-0"
+              }
+            ],
+            "objectType": [
+              {
+                "label": "Object Type",
+                "content": "Point"
+              }
+            ],
+            "physicalDescription": [
+              {
+                "label": "Length",
+                "content": "3.8 cm"
+              },
+              {
+                "label": "Width",
+                "content": "2.5 cm"
+              },
+              {
+                "label": "Height",
+                "content": "1.4 cm"
+              }
+            ]
+          },
+          "indexedStructured": {
+            "date": [
+              "1950s"
+            ],
+            "name": [
+              "Dr. Ralph S. Solecki",
+              "Columbia University",
+              "Rose Solecki"
+            ],
+            "place": [
+              "Rowanduz Qadha",
+              "Asia",
+              "Erbil Governorate / Erbil Liwa",
+              "Iraq"
+            ],
+            "topic": [
+              "Archaeology",
+              "Anthropology"
+            ],
+            "culture": [
+              "Middle Paleolithic, Mousterian",
+              "Upper Paleolithic, Baradostian"
+            ],
+            "geoLocation": [
+              {
+                "L1": {
+                  "type": "Continent",
+                  "content": "Asia"
+                },
+                "L2": {
+                  "type": "Country",
+                  "content": "Iraq"
+                },
+                "L3": {
+                  "type": "State",
+                  "content": "Erbil Governorate / Erbil Liwa"
+                },
+                "L4": {
+                  "type": "County",
+                  "content": "Rowanduz Qadha"
+                }
+              }
+            ],
+            "object_type": [
+              "Projectile points"
+            ]
+          },
+          "descriptiveNonRepeating": {
+            "guid": "http://n2t.net/ark:/65665/3785b46bf-a853-4889-9319-2beaebf11e1d",
+            "title": {
+              "label": "title",
+              "content": "Mousterian Type Point, Broken"
+            },
+            "record_ID": "nmnhanthropology_8179176",
+            "unit_code": "NMNHANTHRO",
+            "title_sort": "MOUSTERIAN TYPE POINT BROKEN",
+            "data_source": "NMNH - Anthropology Dept.",
+            "record_link": "http://n2t.net/ark:/65665/3785b46bf-a853-4889-9319-2beaebf11e1d",
+            "metadata_usage": {
+              "access": "CC0"
+            }
+          }
+        },
+        "hash": "0fe4e85d807230e13221b0d3b0de11bdd29c27f5",
+        "docSignature": "e9c06e757ffcb36b3783423effa59db8",
+        "timestamp": "1663781636",
+        "lastTimeUpdated": "1666715835",
+        "version": "1666714606"
+      },
+      "recordEndpointRecheck": {
+        "endpoint": "https://api.si.edu/openaccess/api/v1.0/content/ld1-1643406903964-1643406923902-0",
+        "capturedOn": "2026-08-12",
+        "httpStatus": 200,
+        "titleReturned": "Mousterian Type Point, Broken",
+        "recordIdReturned": "nmnhanthropology_8179176"
+      }
+    },
+    "si-nmnhanthro-14944765": {
+      "capturedOn": "2026-08-12",
+      "capturedBy": "Smithsonian Open Access API search response",
+      "query": "\"Shanidar Cave\" AND unit_code:NMNHANTHRO",
+      "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+      "record": {
+        "id": "ld1-1643406967081-1643407001837-1",
+        "title": "Obsidian Bladelet",
+        "unitCode": "NMNHANTHRO",
+        "type": "edanmdm",
+        "url": "edanmdm:nmnhanthropology_14944765",
+        "content": {
+          "freetext": {
+            "date": [
+              {
+                "label": "Accession Date",
+                "content": "9 May 1958"
+              },
+              {
+                "label": "Collection Date",
+                "content": "1960"
+              }
+            ],
+            "name": [
+              {
+                "label": "Collector",
+                "content": "Dr. Ralph S. Solecki"
+              },
+              {
+                "label": "Collector",
+                "content": "Rose Solecki"
+              },
+              {
+                "label": "Donor Name",
+                "content": "Columbia University"
+              },
+              {
+                "label": "Site Name",
+                "content": "Shanidar Cave"
+              }
+            ],
+            "notes": [
+              {
+                "label": "Notes",
+                "content": "Piece number does not have an accompanying notecard from \"Artifact Notes Shanidar Cave Season IV Mainly Layer B, circa 1960\" Ralph S. and Rose L. Solecki papers, National Anthropological Archives, Smithsonian Institution."
+              },
+              {
+                "label": "Record Last Modified",
+                "content": "9 Aug 2019"
+              },
+              {
+                "label": "Specimen Count",
+                "content": "2"
+              }
+            ],
+            "place": [
+              {
+                "label": "Place",
+                "content": "Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+              }
+            ],
+            "topic": [
+              {
+                "label": "Topic",
+                "content": "Archaeology"
+              }
+            ],
+            "culture": [
+              {
+                "label": "Culture",
+                "content": "Protoneolithic"
+              }
+            ],
+            "setName": [
+              {
+                "label": "See more items in",
+                "content": "Anthropology"
+              }
+            ],
+            "dataSource": [
+              {
+                "label": "Data Source",
+                "content": "NMNH - Anthropology Dept."
+              }
+            ],
+            "identifier": [
+              {
+                "label": "Accession Number",
+                "content": "220078"
+              },
+              {
+                "label": "USNM Number",
+                "content": "A610116-0"
+              }
+            ],
+            "objectType": [
+              {
+                "label": "Object Type",
+                "content": "Blade"
+              }
+            ],
+            "physicalDescription": [
+              {
+                "label": "Length",
+                "content": "3.1 cm"
+              },
+              {
+                "label": "Width",
+                "content": "0.7 cm"
+              },
+              {
+                "label": "Height",
+                "content": "0.2 cm"
+              }
+            ]
+          },
+          "indexedStructured": {
+            "date": [
+              "1960s",
+              "1950s"
+            ],
+            "name": [
+              "Dr. Ralph S. Solecki",
+              "Columbia University",
+              "Rose Solecki"
+            ],
+            "place": [
+              "Rowanduz Qadha",
+              "Asia",
+              "Erbil Governorate / Erbil Liwa",
+              "Iraq"
+            ],
+            "topic": [
+              "Archaeology",
+              "Anthropology"
+            ],
+            "culture": [
+              "Protoneolithic"
+            ],
+            "geoLocation": [
+              {
+                "L1": {
+                  "type": "Continent",
+                  "content": "Asia"
+                },
+                "L2": {
+                  "type": "Country",
+                  "content": "Iraq"
+                },
+                "L3": {
+                  "type": "State",
+                  "content": "Erbil Governorate / Erbil Liwa"
+                },
+                "L4": {
+                  "type": "County",
+                  "content": "Rowanduz Qadha"
+                }
+              }
+            ],
+            "object_type": [
+              "Blades (tool and equipment components)"
+            ]
+          },
+          "descriptiveNonRepeating": {
+            "guid": "http://n2t.net/ark:/65665/39d98b348-777c-4d7a-b311-a4910b8f6c66",
+            "title": {
+              "label": "title",
+              "content": "Obsidian Bladelet"
+            },
+            "record_ID": "nmnhanthropology_14944765",
+            "unit_code": "NMNHANTHRO",
+            "title_sort": "OBSIDIAN BLADELET",
+            "data_source": "NMNH - Anthropology Dept.",
+            "record_link": "http://n2t.net/ark:/65665/39d98b348-777c-4d7a-b311-a4910b8f6c66",
+            "metadata_usage": {
+              "access": "CC0"
+            }
+          }
+        },
+        "hash": "56a59ce7b2d54e569360569698f05f5419fed7f8",
+        "docSignature": "fd0146cebbfb3d7c65dc8bdb6a0b3999",
+        "timestamp": "1663781496",
+        "lastTimeUpdated": "1666715848",
+        "version": "1666714577"
+      }
+    },
+    "si-nmnhanthro-8177415": {
+      "capturedOn": "2026-08-12",
+      "capturedBy": "Smithsonian Open Access API search response",
+      "query": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+      "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+      "record": {
+        "id": "ld1-1643406903964-1643406923422-1",
+        "title": "Querns",
+        "unitCode": "NMNHANTHRO",
+        "type": "edanmdm",
+        "url": "edanmdm:nmnhanthropology_8177415",
+        "content": {
+          "freetext": {
+            "date": [
+              {
+                "label": "Accession Date",
+                "content": "9 May 1958"
+              }
+            ],
+            "name": [
+              {
+                "label": "Donor Name",
+                "content": "Columbia University"
+              },
+              {
+                "label": "Site Name",
+                "content": "Zawi Chemi Shanidar"
+              }
+            ],
+            "notes": [
+              {
+                "label": "Record Last Modified",
+                "content": "12 Mar 2018"
+              },
+              {
+                "label": "Specimen Count",
+                "content": "7"
+              }
+            ],
+            "place": [
+              {
+                "label": "Place",
+                "content": "Zawi Chemi Shanidar, Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+              }
+            ],
+            "topic": [
+              {
+                "label": "Topic",
+                "content": "Archaeology"
+              }
+            ],
+            "culture": [
+              {
+                "label": "Culture",
+                "content": "Protoneolithic"
+              }
+            ],
+            "setName": [
+              {
+                "label": "See more items in",
+                "content": "Anthropology"
+              }
+            ],
+            "dataSource": [
+              {
+                "label": "Data Source",
+                "content": "NMNH - Anthropology Dept."
+              }
+            ],
+            "identifier": [
+              {
+                "label": "Accession Number",
+                "content": "220078"
+              },
+              {
+                "label": "USNM Number",
+                "content": "A424824-0"
+              }
+            ],
+            "objectType": [
+              {
+                "label": "Object Type",
+                "content": "Quern"
+              }
+            ]
+          },
+          "indexedStructured": {
+            "date": [
+              "1950s"
+            ],
+            "name": [
+              "Columbia University"
+            ],
+            "place": [
+              "Rowanduz Qadha",
+              "Zawi Chemi Shanidar",
+              "Asia",
+              "Erbil Governorate / Erbil Liwa",
+              "Iraq"
+            ],
+            "topic": [
+              "Archaeology",
+              "Anthropology"
+            ],
+            "culture": [
+              "Protoneolithic"
+            ],
+            "geoLocation": [
+              {
+                "L1": {
+                  "type": "Continent",
+                  "content": "Asia"
+                },
+                "L2": {
+                  "type": "Country",
+                  "content": "Iraq"
+                },
+                "L3": {
+                  "type": "State",
+                  "content": "Erbil Governorate / Erbil Liwa"
+                },
+                "L4": {
+                  "type": "County",
+                  "content": "Rowanduz Qadha"
+                },
+                "L5": {
+                  "type": "City",
+                  "content": "Zawi Chemi Shanidar"
+                }
+              }
+            ],
+            "object_type": [
+              "Querns"
+            ],
+            "online_media_type": [
+              "Images"
+            ]
+          },
+          "descriptiveNonRepeating": {
+            "guid": "http://n2t.net/ark:/65665/382b2583c-3ea5-42ab-9c15-15f186589d40",
+            "title": {
+              "label": "title",
+              "content": "Querns"
+            },
+            "record_ID": "nmnhanthropology_8177415",
+            "unit_code": "NMNHANTHRO",
+            "title_sort": "QUERNS",
+            "data_source": "NMNH - Anthropology Dept.",
+            "record_link": "http://n2t.net/ark:/65665/382b2583c-3ea5-42ab-9c15-15f186589d40",
+            "metadata_usage": {
+              "access": "CC0"
+            }
+          }
+        },
+        "hash": "af6a083f13c306650a9325703e7b366acdb17812",
+        "docSignature": "751003525d295bb64cce5c0490d7e539",
+        "timestamp": "1663781636",
+        "lastTimeUpdated": "1734464736",
+        "version": "1734438627"
+      }
+    },
+    "si-nmnhanthro-8177446": {
+      "capturedOn": "2026-08-12",
+      "capturedBy": "Smithsonian Open Access API search response",
+      "query": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+      "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+      "record": {
+        "id": "ld1-1643406903964-1643406923386-1",
+        "title": "Iron Spearpoint",
+        "unitCode": "NMNHANTHRO",
+        "type": "edanmdm",
+        "url": "edanmdm:nmnhanthropology_8177446",
+        "content": {
+          "freetext": {
+            "date": [
+              {
+                "label": "Accession Date",
+                "content": "9 May 1958"
+              }
+            ],
+            "name": [
+              {
+                "label": "Donor Name",
+                "content": "Columbia University"
+              },
+              {
+                "label": "Site Name",
+                "content": "Zawi Chemi Shanidar"
+              }
+            ],
+            "notes": [
+              {
+                "label": "Record Last Modified",
+                "content": "30 Jul 2020"
+              },
+              {
+                "label": "Specimen Count",
+                "content": "1"
+              }
+            ],
+            "place": [
+              {
+                "label": "Place",
+                "content": "Zawi Chemi Shanidar, Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+              }
+            ],
+            "topic": [
+              {
+                "label": "Topic",
+                "content": "Archaeology"
+              }
+            ],
+            "culture": [
+              {
+                "label": "Culture",
+                "content": "Protoneolithic"
+              }
+            ],
+            "setName": [
+              {
+                "label": "See more items in",
+                "content": "Anthropology"
+              }
+            ],
+            "dataSource": [
+              {
+                "label": "Data Source",
+                "content": "NMNH - Anthropology Dept."
+              }
+            ],
+            "identifier": [
+              {
+                "label": "Accession Number",
+                "content": "220078"
+              },
+              {
+                "label": "USNM Number",
+                "content": "A424844-0"
+              }
+            ],
+            "objectType": [
+              {
+                "label": "Object Type",
+                "content": "Point"
+              }
+            ]
+          },
+          "indexedStructured": {
+            "date": [
+              "1950s"
+            ],
+            "name": [
+              "Columbia University"
+            ],
+            "place": [
+              "Rowanduz Qadha",
+              "Zawi Chemi Shanidar",
+              "Asia",
+              "Erbil Governorate / Erbil Liwa",
+              "Iraq"
+            ],
+            "topic": [
+              "Archaeology",
+              "Anthropology"
+            ],
+            "culture": [
+              "Protoneolithic"
+            ],
+            "geoLocation": [
+              {
+                "L1": {
+                  "type": "Continent",
+                  "content": "Asia"
+                },
+                "L2": {
+                  "type": "Country",
+                  "content": "Iraq"
+                },
+                "L3": {
+                  "type": "State",
+                  "content": "Erbil Governorate / Erbil Liwa"
+                },
+                "L4": {
+                  "type": "County",
+                  "content": "Rowanduz Qadha"
+                },
+                "L5": {
+                  "type": "City",
+                  "content": "Zawi Chemi Shanidar"
+                }
+              }
+            ],
+            "object_type": [
+              "Projectile points"
+            ]
+          },
+          "descriptiveNonRepeating": {
+            "guid": "http://n2t.net/ark:/65665/374201d50-7021-4db7-af92-6665d0552db1",
+            "title": {
+              "label": "title",
+              "content": "Iron Spearpoint"
+            },
+            "record_ID": "nmnhanthropology_8177446",
+            "unit_code": "NMNHANTHRO",
+            "title_sort": "IRON SPEARPOINT",
+            "data_source": "NMNH - Anthropology Dept.",
+            "record_link": "http://n2t.net/ark:/65665/374201d50-7021-4db7-af92-6665d0552db1",
+            "metadata_usage": {
+              "access": "CC0"
+            }
+          }
+        },
+        "hash": "a0b90e1d57e1e4dd0992c3540e569c9bef40ce4e",
+        "docSignature": "0c06d7aad154f13a102bfba246417963",
+        "timestamp": "1663781636",
+        "lastTimeUpdated": "1666715835",
+        "version": "1666714606"
+      }
+    },
+    "si-nmnhanthro-8177447": {
+      "capturedOn": "2026-08-12",
+      "capturedBy": "Smithsonian Open Access API search response",
+      "query": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+      "endpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+      "record": {
+        "id": "ld1-1643406903964-1643406923824-1",
+        "title": "Copper Coin Or Medallion",
+        "unitCode": "NMNHANTHRO",
+        "type": "edanmdm",
+        "url": "edanmdm:nmnhanthropology_8177447",
+        "content": {
+          "freetext": {
+            "date": [
+              {
+                "label": "Accession Date",
+                "content": "9 May 1958"
+              }
+            ],
+            "name": [
+              {
+                "label": "Donor Name",
+                "content": "Columbia University"
+              },
+              {
+                "label": "Site Name",
+                "content": "Zawi Chemi Shanidar"
+              }
+            ],
+            "notes": [
+              {
+                "label": "Notes",
+                "content": "Fragmentary."
+              },
+              {
+                "label": "Record Last Modified",
+                "content": "30 Jul 2020"
+              },
+              {
+                "label": "Specimen Count",
+                "content": "1"
+              }
+            ],
+            "place": [
+              {
+                "label": "Place",
+                "content": "Zawi Chemi Shanidar, Rowanduz Qadha, Erbil Governorate / Erbil Liwa, Iraq, Asia"
+              }
+            ],
+            "topic": [
+              {
+                "label": "Topic",
+                "content": "Archaeology"
+              }
+            ],
+            "culture": [
+              {
+                "label": "Culture",
+                "content": "Protoneolithic"
+              }
+            ],
+            "setName": [
+              {
+                "label": "See more items in",
+                "content": "Anthropology"
+              }
+            ],
+            "dataSource": [
+              {
+                "label": "Data Source",
+                "content": "NMNH - Anthropology Dept."
+              }
+            ],
+            "identifier": [
+              {
+                "label": "Accession Number",
+                "content": "220078"
+              },
+              {
+                "label": "USNM Number",
+                "content": "A424845-0"
+              }
+            ],
+            "objectType": [
+              {
+                "label": "Object Type",
+                "content": "Coin"
+              }
+            ]
+          },
+          "indexedStructured": {
+            "date": [
+              "1950s"
+            ],
+            "name": [
+              "Columbia University"
+            ],
+            "place": [
+              "Rowanduz Qadha",
+              "Zawi Chemi Shanidar",
+              "Asia",
+              "Erbil Governorate / Erbil Liwa",
+              "Iraq"
+            ],
+            "topic": [
+              "Archaeology",
+              "Anthropology"
+            ],
+            "culture": [
+              "Protoneolithic"
+            ],
+            "geoLocation": [
+              {
+                "L1": {
+                  "type": "Continent",
+                  "content": "Asia"
+                },
+                "L2": {
+                  "type": "Country",
+                  "content": "Iraq"
+                },
+                "L3": {
+                  "type": "State",
+                  "content": "Erbil Governorate / Erbil Liwa"
+                },
+                "L4": {
+                  "type": "County",
+                  "content": "Rowanduz Qadha"
+                },
+                "L5": {
+                  "type": "City",
+                  "content": "Zawi Chemi Shanidar"
+                }
+              }
+            ],
+            "object_type": [
+              "Coins (money)"
+            ]
+          },
+          "descriptiveNonRepeating": {
+            "guid": "http://n2t.net/ark:/65665/3f54608f1-562a-40f5-8e53-a065ea49e30f",
+            "title": {
+              "label": "title",
+              "content": "Copper Coin Or Medallion"
+            },
+            "record_ID": "nmnhanthropology_8177447",
+            "unit_code": "NMNHANTHRO",
+            "title_sort": "COPPER COIN OR MEDALLION",
+            "data_source": "NMNH - Anthropology Dept.",
+            "record_link": "http://n2t.net/ark:/65665/3f54608f1-562a-40f5-8e53-a065ea49e30f",
+            "metadata_usage": {
+              "access": "CC0"
+            }
+          }
+        },
+        "hash": "a7c6d311ab892f63823034bc79167bce7fdd7b7e",
+        "docSignature": "0604a699261303508550dccb1fff4d1a",
+        "timestamp": "1663781636",
+        "lastTimeUpdated": "1666715835",
+        "version": "1666714606"
+      }
+    }
+  }
+}

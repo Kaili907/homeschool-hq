@@ -1,0 +1,94 @@
+{
+  "note": "Selection input only. Repository + record reference per source key. No title, date, creator, or URL is authored here -- those are captured from the repository by tools/capture-era1.py and recorded in era1-raw-captures.json.",
+  "unitRef": "ma-g7-social-studies-u02",
+  "unitTitle": "Era 1: Beginnings of Human Society",
+  "periodBound": "Michigan Grade 7 W1 -- Era 1, beginnings to 4000 BCE",
+  "repositories": {
+    "si-nmnhanthro": {
+      "name": "Smithsonian Institution, National Museum of Natural History -- Department of Anthropology",
+      "accessedThrough": "Smithsonian Open Access API (api.si.edu/openaccess/api/v1.0)",
+      "searchEndpoint": "https://api.si.edu/openaccess/api/v1.0/search",
+      "recordEndpoint": "https://api.si.edu/openaccess/api/v1.0/content/{rowId}",
+      "unitCode": "NMNHANTHRO",
+      "metadataRightsPosture": "Record metadata is released CC0 by the Smithsonian; the metadata_usage.access value is captured per record as returned.",
+      "publicUrlSource": "The record's own descriptiveNonRepeating.record_link (an ARK at n2t.net). No public URL is constructed here."
+    }
+  },
+  "discoveryQueries": {
+    "note": "Queries run against the repository's own search API at discovery time. Only the queries listed under each source's discoveredBy produced a registered record; the others returned nothing this lane could use inside Era 1. Negative results are not captured -- re-run them to reproduce the search rather than trusting this list.",
+    "producedRegisteredRecords": [
+      "paleolithic AND unit_code:NMNHANTHRO",
+      "\"Shanidar Cave\" AND unit_code:NMNHANTHRO",
+      "\"Zawi Chemi\" AND unit_code:NMNHANTHRO"
+    ],
+    "runWithoutRegisteredResult": [
+      "paleolithic",
+      "neolithic AND unit_code:NMNHANTHRO",
+      "Acheulean AND unit_code:NMNHANTHRO",
+      "Olduvai AND unit_code:NMNHANTHRO"
+    ]
+  },
+  "sources": {
+    "si-nmnhanthro-8197795": {
+      "repo": "si-nmnhanthro",
+      "rowId": "ld1-1643406903964-1643406931384-2",
+      "recordId": "nmnhanthropology_8197795",
+      "discoveredBy": "paleolithic AND unit_code:NMNHANTHRO",
+      "role": "ERA1_ANCHOR",
+      "periodBasis": "TYPOLOGICAL"
+    },
+    "si-nmnhanthro-8179176": {
+      "repo": "si-nmnhanthro",
+      "rowId": "ld1-1643406903964-1643406923902-0",
+      "recordId": "nmnhanthropology_8179176",
+      "discoveredBy": "paleolithic AND unit_code:NMNHANTHRO",
+      "role": "ERA1_ANCHOR",
+      "periodBasis": "TYPOLOGICAL"
+    },
+    "si-nmnhanthro-14944765": {
+      "repo": "si-nmnhanthro",
+      "rowId": "ld1-1643406967081-1643407001837-1",
+      "recordId": "nmnhanthropology_14944765",
+      "discoveredBy": "\"Shanidar Cave\" AND unit_code:NMNHANTHRO",
+      "role": "ERA1_ANCHOR",
+      "periodBasis": "SITE_ASSIGNED"
+    },
+    "si-nmnhanthro-8177415": {
+      "repo": "si-nmnhanthro",
+      "rowId": "ld1-1643406903964-1643406923422-1",
+      "recordId": "nmnhanthropology_8177415",
+      "discoveredBy": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+      "role": "ERA1_ANCHOR",
+      "periodBasis": "SITE_ASSIGNED"
+    },
+    "si-nmnhanthro-8177446": {
+      "repo": "si-nmnhanthro",
+      "rowId": "ld1-1643406903964-1643406923386-1",
+      "recordId": "nmnhanthropology_8177446",
+      "discoveredBy": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+      "role": "METHOD_COUNTEREXAMPLE",
+      "periodBasis": "SITE_ASSIGNED",
+      "contradiction": "The repository's culture value for this record is Protoneolithic, but the record's own title and object type say iron. Iron working postdates Era 1 by millennia, so the label cannot be an age for this object. Registered only as evidence about how catalogue labels work; it is not Era 1 evidence and does not count toward the anchor minimum."
+    },
+    "si-nmnhanthro-8177447": {
+      "repo": "si-nmnhanthro",
+      "rowId": "ld1-1643406903964-1643406923824-1",
+      "recordId": "nmnhanthropology_8177447",
+      "discoveredBy": "\"Zawi Chemi\" AND unit_code:NMNHANTHRO",
+      "role": "METHOD_COUNTEREXAMPLE",
+      "periodBasis": "SITE_ASSIGNED",
+      "contradiction": "The repository's culture value for this record is Protoneolithic, but the record's own title and object type say coin. Coinage postdates Era 1 by millennia, so the label cannot be an age for this object. Registered only as evidence about how catalogue labels work; it is not Era 1 evidence and does not count toward the anchor minimum."
+    }
+  },
+  "era1CultureMapping": {
+    "judgementBy": "this lane, not the repository",
+    "statement": "The repository assigns a culture to a record. It does not say whether that culture falls inside Era 1 (beginnings to 4000 BCE). Reading these culture names as Era 1 is a judgement this lane makes, and it is the second premise behind every in-period claim in era1-verified-sources.json. It is declared here so it can be argued with. tools/build-era1-sources.py reads this list; the set is not hardcoded in the tool.",
+    "era1Cultures": [
+      "Acheulian",
+      "Middle Paleolithic, Mousterian",
+      "Upper Paleolithic, Baradostian",
+      "Protoneolithic"
+    ],
+    "caveat": "A culture name inside Era 1 is not a date for an individual object. See each record's periodClaim.basis, and the two counter-examples."
+  }
+}
