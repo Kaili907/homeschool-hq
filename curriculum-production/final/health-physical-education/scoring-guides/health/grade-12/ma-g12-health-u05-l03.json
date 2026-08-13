@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g12-health-u05-l03",
+  "courseId": "ma-g12-health",
+  "grade": 12,
+  "subject": "health",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "The learner completes the central task about reading a bill, an explanation of benefits, and a denial without being asked for any private disclosure.",
+    "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "scoringGuidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never score body size, appearance, personal circumstances, or willingness to disclose. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "masteryRule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or representation.",
+  "remediation": "Return to the smallest prerequisite needed for reading a bill, an explanation of benefits, and a denial, model it with a concrete or text-only representation, then retry one fresh scenario.",
+  "adaptiveRoutes": [
+    {
+      "signal": "prerequisite gap",
+      "action": "Return to the smallest prerequisite needed for reading a bill, an explanation of benefits, and a denial, model it with a concrete or text-only representation, then retry one fresh scenario."
+    },
+    {
+      "signal": "procedure without understanding",
+      "action": "Ask the learner to explain why the approach to reading a bill, an explanation of benefits, and a denial works before continuing."
+    },
+    {
+      "signal": "correct but low confidence",
+      "action": "Confirm the reasoning specifically, offer one varied scenario about reading a bill, an explanation of benefits, and a denial, and avoid unnecessary remediation."
+    },
+    {
+      "signal": "repeated error pattern",
+      "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short later review."
+    },
+    {
+      "signal": "learner discloses something private",
+      "action": "Do not record it, do not treat it as assessment evidence, and route the learner to a trusted adult or qualified professional. Continue the lesson with the fictional scenario."
+    },
+    {
+      "signal": "mastery evidence",
+      "action": "Require accurate independent application plus explanation on a later or different occasion before marking reading a bill, an explanation of benefits, and a denial mastered."
+    }
+  ],
+  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw reflections, raw answers, recordings, body data, or diagnosis language. For safety-critical or sensitive-content units, record only the guardian confirmation that was required.",
+  "guardianSafetyReview": {
+    "equipment": "None. No real account or payment information is used.",
+    "environment": "Indoor study space.",
+    "movement_hazards": "None expected.",
+    "sensitive_content_note": "Course content is general consumer education, not individualized insurance, legal, or medical advice.",
+    "guardian_confirmation_required": true
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
+    "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
+    "Do not require weight, BMI, body-fat, body measurement, calorie counts, diet goals, medical history, mental-health diagnosis, or sexual history at any point.",
+    "Do not require a photograph, video, or voice recording of the learner as evidence; every task has a text, spoken-to-an-adult, or demonstrated alternative.",
+    "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+    "No real bill, benefit statement, policy number, member ID, portal login, payment method, or family financial detail is used or recorded. Every document is a course-supplied fiction."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceLessonId": "ma-g12-health-u05-l03"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "manifestType": "manuel-academy-final-production-corpus",
+  "corpusVersion": "1.0.0",
+  "subject": "health-physical-education",
+  "generatedFrom": {
+    "productionBasis": "mac/health-pe-production-r1@e738cc244789f9c8f3e8e83c580e97e3e6479e85",
+    "grade3Health": "mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
+    "grade3PeAndGrade4": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
+    "canonical578": "shared base@656efba (curriculum-content/manuel-academy/1.0.0, grades 5, 7, 8)",
+    "hs912": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "productionGate": "mac/curriculum-production-gate-h3@49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "excluded": "grade 6 — no curriculum authored for it yet (see src/curriculum/grade-authority)"
+  },
+  "totals": {
+    "lessons": 1296,
+    "unitAssessments": 135,
+    "items": 1431,
+    "studentPackages": 1431,
+    "scoringGuides": 1431
+  },
+  "productionGate": {
+    "readyCount": 1431,
+    "needsHumanReviewCount": 0,
+    "notReadyCount": 0,
+    "notReadyItems": []
+  },
+  "privacyScan": {
+    "violationCount": 0,
+    "violations": []
+  },
+  "scoringPolicy": {
+    "gateSemantics": "H3",
+    "judgmentWorkAuthority": "RUBRIC",
+    "fixedAnswerKeys": 0
+  },
+  "checksums": {
+    "algorithm": "SHA-256",
+    "file": "SHA256SUMS.txt",
+    "scope": "every corpus file except SHA256SUMS.txt itself",
+    "entries": 2874
+  },
+  "byGrade": [
+    {
+      "grade": 3,
+      "subject": "health",
+      "courseId": "ma-g3-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 3,
+      "subject": "physical-education",
+      "courseId": "ma-g3-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    },
+    {
+      "grade": 4,
+      "subject": "health",
+      "courseId": "ma-g4-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 4,
+      "subject": "physical-education",
+      "courseId": "ma-g4-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    },
+    {
+      "grade": 5,
+      "subject": "health",
+      "courseId": "ma-g5-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 5,
+      "subject": "physical-education",
+      "courseId": "ma-g5-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    },
+    {
+      "grade": 7,
+      "subject": "health",
+      "courseId": "ma-g7-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 7,
+      "subject": "physical-education",
+      "courseId": "ma-g7-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    },
+    {
+      "grade": 8,
+      "subject": "health",
+      "courseId": "ma-g8-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 8,
+      "subject": "physical-education",
+      "courseId": "ma-g8-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    },
+    {
+      "grade": 9,
+      "subject": "health",
+      "courseId": "ma-g9-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 9,
+      "subject": "physical-education",
+      "courseId": "ma-g9-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    },
+    {
+      "grade": 10,
+      "subject": "health",
+      "courseId": "ma-g10-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 10,
+      "subject": "physical-education",
+      "courseId": "ma-g10-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    },
+    {
+      "grade": 11,
+      "subject": "health",
+      "courseId": "ma-g11-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 11,
+      "subject": "physical-education",
+      "courseId": "ma-g11-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    },
+    {
+      "grade": 12,
+      "subject": "health",
+      "courseId": "ma-g12-health",
+      "lessons": 36,
+      "unitAssessments": 6
+    },
+    {
+      "grade": 12,
+      "subject": "physical-education",
+      "courseId": "ma-g12-physical-education",
+      "lessons": 108,
+      "unitAssessments": 9
+    }
+  ]
+}

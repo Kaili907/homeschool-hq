@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g9-physical-education-u08-l02",
+  "courseId": "ma-g9-physical-education",
+  "grade": 9,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "The learner completes or fully describes the rules, officiating basics, and honest self-calling task using a version their body and setting allow.",
+    "The learner gives a cue, principle, tactic, or documented process rather than an unexplained result.",
+    "The learner self-assesses against the stated criteria and identifies one next adjustment."
+  ],
+  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person.",
+  "masteryRule": "Do not mark mastery from one session. Use safe participation, skill cues, tactical decisions, self-management, personal progress against the learner’s own stated task, and self-assessment — without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or setting.",
+  "remediation": "Return to the simplest version of rules, officiating basics, and honest self-calling — slower, smaller range, closer target, or seated — then rebuild.",
+  "adaptiveRoutes": [
+    {
+      "signal": "prerequisite gap",
+      "action": "Return to the simplest version of rules, officiating basics, and honest self-calling — slower, smaller range, closer target, or seated — then rebuild."
+    },
+    {
+      "signal": "procedure without understanding",
+      "action": "Ask the learner to explain the cue or tactic behind rules, officiating basics, and honest self-calling before adding intensity or complexity."
+    },
+    {
+      "signal": "correct but low confidence",
+      "action": "Confirm the specific cue that worked, offer one varied application of rules, officiating basics, and honest self-calling, and avoid unnecessary remediation."
+    },
+    {
+      "signal": "repeated error pattern",
+      "action": "Name the observable movement pattern neutrally, contrast it with the critical features, and schedule varied practice."
+    },
+    {
+      "signal": "pain, dizziness, breathlessness, or head impact",
+      "action": "Stop immediately, tell an adult, and do not resume in this session. This is never recorded as a failed attempt."
+    },
+    {
+      "signal": "learner declines a task",
+      "action": "Offer the adapted, seated, solo, or described version of rules, officiating basics, and honest self-calling; the alternate route is full credit and is not logged as a refusal."
+    },
+    {
+      "signal": "mastery evidence",
+      "action": "Require accurate independent performance or description plus explanation on a later occasion or in a different setting before marking rules, officiating basics, and honest self-calling mastered."
+    }
+  ],
+  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose body data, fitness scores, photographs, video, recordings, or comparisons with other learners. For safety-critical units, record only the guardian confirmation that was required.",
+  "guardianSafetyReview": {
+    "equipment": "Reuses equipment from earlier units.",
+    "environment": "Indoor study space; practical trial optional.",
+    "movement_hazards": "None required.",
+    "supervision_note": "No additional supervision needed for the written redesign.",
+    "guardian_confirmation_required": false
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, non-shaming language about bodies, ability, and effort.",
+    "Allow a pause, rest, break, or alternate response mode without treating it as failure.",
+    "Check space, footwear, surface, weather, and equipment before movement.",
+    "Stop for pain, dizziness, breathing difficulty, head impact, or unsafe conditions and tell an adult.",
+    "Score skill, strategy, self-management, consistency, and reflection — never body size, weight, weight change, body composition, appearance, or comparison with another person.",
+    "Do not require weight, BMI, body-fat, body measurement, fitness-test norms, percentile ranks, calorie counts, or diet goals at any point.",
+    "Do not require a photograph, video, or voice recording of the learner as evidence; described, written, and demonstrated-to-one-adult evidence is the intended route.",
+    "Do not require performance in front of an audience, a group, or spectators.",
+    "This unit makes inclusive design an assessed competency in its own right rather than an accommodation applied to someone else."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceLessonId": "ma-g9-physical-education-u08-l02"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

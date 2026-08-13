@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g8-physical-education-u03-l10",
+  "courseId": "ma-g8-physical-education",
+  "grade": 8,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "The learner completes the central task about decision speed.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "scoringGuidance": "Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "masteryRule": "Do not mark mastery from one answer. Use safe participation, skill cues, personal progress, strategy use, and self-assessment without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
+  "remediation": "Return to the smallest prerequisite needed for decision speed, model it with a concrete or text-only representation, then retry one fresh item.",
+  "adaptiveRoutes": [
+    {
+      "signal": "prerequisite gap",
+      "action": "Return to the smallest prerequisite needed for decision speed, model it with a concrete or text-only representation, then retry one fresh item."
+    },
+    {
+      "signal": "procedure without understanding",
+      "action": "Ask the learner to explain or represent why the process for decision speed works before continuing."
+    },
+    {
+      "signal": "correct but low confidence",
+      "action": "Confirm the reasoning specifically, offer one varied example of decision speed, and avoid unnecessary remediation."
+    },
+    {
+      "signal": "repeated error pattern",
+      "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review."
+    },
+    {
+      "signal": "mastery evidence",
+      "action": "Require accurate independent application plus explanation on a later or different occasion before marking decision speed mastered."
+    }
+  ],
+  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, voice recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
+  "guardianSafetyReview": null,
+  "safetyAndPrivacyNotes": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Check space, footwear, surface, weather, and equipment before movement.",
+    "Stop for pain, dizziness, breathing difficulty, head impact, or unsafe conditions and tell an adult.",
+    "Score skill, strategy, consistency, and reflection—not body size, weight, speed alone, or comparison with others."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "shared base@656efba (canonical 5/7/8)",
+    "sourceLessonId": "ma-g8-physical-education-u03-l10"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

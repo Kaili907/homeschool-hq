@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g11-health-u06-assessment",
+  "courseId": "ma-g11-health",
+  "grade": 11,
+  "subject": "health",
+  "unitNumber": 6,
+  "unitTitle": "Advocacy: Designing a Health Promotion Project",
+  "essentialQuestion": "What is the smallest change I could actually cause, and how would I know it worked?",
+  "prompts": [
+    {
+      "type": "concept and vocabulary",
+      "prompt": "Explain choosing a scoped, achievable health promotion goal in your own words and give a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of audience analysis and message framing without fear appeals.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply accuracy, citation, and avoiding overclaim in advocacy in a new fictional situation. Show the decision process or cite the evidence used.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving partners, permissions, and realistic constraints; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect defining a measurable outcome before starting with presenting a proposal and taking critique. Explain how the two support, constrain, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Design a complete health promotion project proposal — goal, audience, message, partners, constraints, and measurable outcome — for a setting the learner can actually reach. Execution is optional and guardian-approved; the proposal is what is assessed.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "The proposal may be written, presented as a slide outline, spoken to an adult, or built on a supplied planning template. No public presentation or published material is required.",
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "trustedAdultNote": "Direct any urgent safety, health, or mental-health concern to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceAssessmentId": "ma-g11-health-u06-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

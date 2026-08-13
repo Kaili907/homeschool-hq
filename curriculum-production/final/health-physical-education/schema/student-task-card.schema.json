@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://manuel-academy/curriculum-production/final/health-physical-education/student-task-card.schema.json",
+  "title": "Health/PE student task card",
+  "description": "Student-facing lesson or unit-assessment task card. Never contains scoring guidance, mastery rules, or adaptive-tutor routing — those live only in the paired scoring-guides/ file.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "grade", "subject", "neverRequires", "sourceProvenance", "productionReadiness"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "kind": { "enum": ["lesson-task-card", "unit-assessment-task-card"] },
+    "lessonId": { "type": "string" },
+    "assessmentId": { "type": "string" },
+    "courseId": { "type": "string" },
+    "grade": { "type": "integer", "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12] },
+    "subject": { "enum": ["health", "physical-education"] },
+    "unitNumber": { "type": "integer" },
+    "unitTitle": { "type": "string" },
+    "title": { "type": "string" },
+    "focus": { "type": "string" },
+    "essentialQuestion": { "type": ["string", "null"] },
+    "estimatedMinutes": { "type": ["string", "null"] },
+    "materials": { "type": "array", "items": { "type": "string" } },
+    "movementCues": { "type": ["array", "null"], "items": { "type": "string" } },
+    "commonErrorToWatchFor": { "type": ["string", "null"] },
+    "keyPoints": { "type": "array", "items": { "type": "string" } },
+    "privacySafeScenario": {
+      "type": ["string", "null"],
+      "description": "A fictional scenario the learner responds to. The learner may always answer about the fictional character instead of themselves."
+    },
+    "studentTask": { "type": ["string", "null"] },
+    "knowledgeCheck": { "type": ["string", "null"] },
+    "completionCriteria": { "type": "array", "items": { "type": "string" } },
+    "adaptationChoices": {
+      "type": ["string", "null"],
+      "description": "The adapted / equal-status alternative path for this task (Health: trusted-adult and private-response alternatives; PE: seated, supported, reduced-range, or solo alternatives)."
+    },
+    "extensionChallenge": { "type": ["string", "null"] },
+    "accessibilitySupports": { "type": "array", "items": { "type": "string" } },
+    "trustedAdultNote": {
+      "type": "string",
+      "description": "Health only: directs urgent safety/health/mental-health concerns to a trusted adult or qualified professional."
+    },
+    "optionalReflection": {
+      "type": ["object", "null"],
+      "required": ["prompt", "private", "graded", "optional"],
+      "properties": {
+        "prompt": { "type": "string" },
+        "private": { "const": true },
+        "graded": { "const": false },
+        "optional": { "const": true }
+      }
+    },
+    "prompts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "prompt"],
+        "properties": {
+          "type": { "type": "string" },
+          "prompt": { "type": "string" },
+          "possiblePoints": { "type": ["number", "null"] }
+        }
+      }
+    },
+    "totalPossiblePoints": { "type": ["number", "null"] },
+    "accommodationNote": { "type": ["string", "null"] },
+    "neverRequires": {
+      "type": "array",
+      "minItems": 5,
+      "items": { "type": "string" },
+      "description": "Static, always-present list of what this task never requires: body weight/BMI/body-fat, calorie counting or diet goals, medical or sexual-history disclosure, photo/video/voice proof, public performance."
+    },
+    "sourceProvenance": {
+      "type": "object",
+      "required": ["sourceBranch"],
+      "properties": {
+        "sourceBranch": { "type": "string" },
+        "sourceLessonId": { "type": "string" },
+        "sourceAssessmentId": { "type": "string" }
+      }
+    },
+    "productionReadiness": {
+      "type": "object",
+      "required": ["status", "codes"],
+      "properties": {
+        "status": { "enum": ["READY", "NEEDS_HUMAN_REVIEW", "NOT_READY"] },
+        "codes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "not": {
+    "anyOf": [
+      { "required": ["answer_or_scoring_guidance"] },
+      { "required": ["mastery_rule"] },
+      { "required": ["adaptive_tutor_routes"] },
+      { "required": ["masteryInterpretation"] },
+      { "required": ["rubricDimensions"] },
+      { "required": ["scoringGuidance"] }
+    ]
+  }
+}

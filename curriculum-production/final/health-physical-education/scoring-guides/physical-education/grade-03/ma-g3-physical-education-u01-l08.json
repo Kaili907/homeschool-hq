@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g3-physical-education-u01-l08",
+  "courseId": "ma-g3-physical-education",
+  "grade": 3,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "The learner takes part in the task about starting, stopping, and dodging at a self-selected challenge level.",
+    "The learner uses or names the movement cues for starting, stopping, and dodging.",
+    "The learner identifies one adjustment or next step. No score, time, count, or measurement is required."
+  ],
+  "scoringGuidance": "Score cue use, control, decision-making, and explanation. Never score speed, distance, repetitions, body measurement, or comparison with another learner. Choosing the adapted path, a rest, or an opt-out is never scored as a deficit. Never infer effort, character, or ability from a movement outcome.",
+  "masteryRule": "Do not mark mastery from one attempt. Use observed control, cue use, decision-making, explanation, and applied performance; require accurate independent evidence and successful transfer on at least two separate occasions. Mastery is never determined by speed, distance, repetition count, body measurement, or comparison with another learner.",
+  "remediation": "Return to the simplest version of starting, stopping, and dodging — slower, closer, larger, or supported — then retry one fresh attempt.",
+  "adaptiveRoutes": [
+    {
+      "signal": "prerequisite gap",
+      "action": "Return to the simplest version of starting, stopping, and dodging — slower, closer, larger, or supported — then retry one fresh attempt."
+    },
+    {
+      "signal": "procedure without understanding",
+      "action": "Ask the learner to name the cue for starting, stopping, and dodging and say why it works before continuing."
+    },
+    {
+      "signal": "correct but low confidence",
+      "action": "Confirm the specific cue the learner executed well for starting, stopping, and dodging, offer one varied condition, and avoid unnecessary remediation."
+    },
+    {
+      "signal": "repeated error pattern",
+      "action": "Name the observable movement pattern neutrally, never as a comment on the learner body, effort, or character, contrast it with a demonstration, and schedule short varied practice."
+    },
+    {
+      "signal": "mastery evidence",
+      "action": "Require controlled independent performance of starting, stopping, and dodging plus an explanation on a later or different occasion before marking it mastered."
+    }
+  ],
+  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, the guardian safety confirmation for equipment and environment, and the next instructional step. Do not expose recordings, images, body data, or health information. Study records completion and progress metadata only; it does not perform or persist physical measurement or fitness tracking.",
+  "guardianSafetyReview": {
+    "equipment": "Open floor space clear of furniture and trip hazards; non-slip footwear or bare feet on a safe surface.",
+    "environment": "Indoor open space, gym, or a cleared room. An outdoor lawn may be substituted.",
+    "movement_hazards": "Running and stopping in shared space. Guardian confirms the area is clear, the floor is not slippery, and boundaries are marked before the session.",
+    "food_or_allergy_note": null,
+    "guardian_confirmation_required": true
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, non-shaming language about bodies, ability, size, speed, and coordination.",
+    "Never require or record body weight, height, BMI, body-fat percentage, or any body measurement.",
+    "Never require a fitness test, a timed trial, a repetition count, a distance score, or any ranking of one learner against another.",
+    "Never require a photograph, video, or any recording of the learner as proof of participation or performance.",
+    "Never require a public performance, an audience, or a demonstration in front of peers; sharing is always the learner choice.",
+    "Progress is compared only against the learner own earlier work, and only when the learner chooses to track it.",
+    "Allow rest, a break, an adapted path, or an opt-out at any point without treating it as failure.",
+    "Stop activity and seek a trusted adult or qualified professional for pain, dizziness, breathing difficulty, or injury; this course is not medical advice."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
+    "sourceLessonId": "ma-g3-physical-education-u01-l08"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}
