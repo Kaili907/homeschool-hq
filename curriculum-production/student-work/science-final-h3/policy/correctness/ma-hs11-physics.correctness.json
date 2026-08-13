@@ -1,0 +1,1037 @@
+{
+  "course_id": "ma-hs11-physics",
+  "source_commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+  "repinned_from": "265ea3a75740ccbeea0dfa02c723514779def052",
+  "repin_basis": "Repinned from H2 to H3 without re-authoring. Every field these keys are keyed on and authored against - unit_ref, focus, phase, title, essential_question, learning_objectives, success_criteria - is byte-identical across all 108 lessons of this course between 265ea3a and e7551b9; H3 changed only materials, lesson_flow, safety_privacy, extensions, and guardian_visibility_note. The check 'correctness-keys-repinned-on-identical-topic-basis' re-derives that comparison from both pinned commits and fails if it ever stops holding.",
+  "authored_against": "High School Physics, Grade 11. Keys state established science at this course level; they are not extracted from the source, which states a focus and generic objectives.",
+  "topics": [
+    {
+      "unit": 1,
+      "focus": "position, displacement, and reference frames",
+      "fixed_facts": [
+        "Displacement is a vector from start point to end point; distance is the scalar path length travelled."
+      ],
+      "relationships": [
+        "Position is stated relative to a chosen origin and reference frame, and the choice must be stated before positions mean anything.",
+        "Displacement depends only on start and end points; distance depends on the whole path, so the two differ whenever the path is not straight.",
+        "Motion described in one reference frame may be described quite differently in another, and neither description is wrong."
+      ],
+      "accepted_alternative_framings": [
+        "Any consistent sign convention and origin are acceptable, provided they are stated and used consistently."
+      ],
+      "disqualifying_errors": [
+        "Reporting displacement as equal to distance for a path that is not straight and one-directional.",
+        "Describing a position or a motion with no reference frame or origin stated.",
+        "Claiming displacement can exceed the distance travelled."
+      ],
+      "out_of_scope": "Relativistic reference frames and non-inertial frame corrections are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "velocity and acceleration",
+      "fixed_facts": [
+        "Velocity is the rate of change of position; acceleration is the rate of change of velocity.",
+        "Acceleration is non-zero whenever speed changes, direction changes, or both."
+      ],
+      "relationships": [
+        "Velocity is a vector: it has magnitude and direction, and speed is its magnitude.",
+        "An object moving at constant speed around a curve is accelerating, because its direction, and therefore its velocity, is changing.",
+        "Acceleration and velocity are independent in direction: an object can be moving one way and accelerating the other, which is what slowing down is."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming acceleration is always in the direction of motion.",
+        "Claiming an object moving at constant speed is never accelerating.",
+        "Using speed and velocity interchangeably where direction matters."
+      ],
+      "out_of_scope": "Calculus definitions of instantaneous rate are acceptable but not required."
+    },
+    {
+      "unit": 1,
+      "focus": "motion graphs and their slopes",
+      "fixed_facts": [
+        "On a position-time graph the slope is velocity; on a velocity-time graph the slope is acceleration and the area under the curve is displacement."
+      ],
+      "relationships": [
+        "The slope of a position-time graph gives velocity, including its sign, which carries direction.",
+        "The slope of a velocity-time graph gives acceleration, and the area between the curve and the time axis gives displacement.",
+        "A graph represents the motion; it is not a picture of the path the object took through space."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Reading a position-time graph as a map of the object's path.",
+        "Claiming the slope of a velocity-time graph gives velocity, or that its area gives acceleration.",
+        "Claiming a horizontal line on a position-time graph shows motion at a constant non-zero speed rather than rest."
+      ],
+      "out_of_scope": "Curve fitting and numerical differentiation of experimental data are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "uniform acceleration relationships",
+      "fixed_facts": [
+        "The kinematic relationships for uniform acceleration apply only while the acceleration is constant."
+      ],
+      "relationships": [
+        "For constant acceleration, final velocity, displacement, and time are related by the standard kinematic relationships.",
+        "Near Earth's surface, an object in free fall with negligible air resistance accelerates downward at approximately nine point eight metres per second squared, independently of its mass.",
+        "Applying the relationships requires the acceleration to be constant over the whole interval considered."
+      ],
+      "accepted_alternative_framings": [
+        "Any of the standard kinematic equations, or graphical reasoning giving the same result, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Applying the constant-acceleration relationships across an interval where the acceleration changes.",
+        "Claiming heavier objects fall with greater acceleration when air resistance is negligible.",
+        "Claiming an object at the top of its flight has zero acceleration because its velocity is momentarily zero."
+      ],
+      "out_of_scope": "Air resistance modelling and terminal velocity calculation are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "measurement uncertainty in motion",
+      "fixed_facts": [],
+      "relationships": [
+        "Every timing and distance measurement carries uncertainty, and that uncertainty propagates into any derived velocity or acceleration.",
+        "Repeated trials estimate random uncertainty but do not reveal systematic error such as a mis-set timing gate.",
+        "A reported result states its uncertainty, or a reader cannot judge whether two values differ meaningfully."
+      ],
+      "accepted_alternative_framings": [
+        "Reporting a range, a mean with spread, or an explicit uncertainty are all acceptable at this level."
+      ],
+      "disqualifying_errors": [
+        "Claiming two measured values differ when the difference is smaller than the uncertainty.",
+        "Claiming repeated trials remove systematic error.",
+        "Reporting a derived quantity to more significant figures than the input measurements support."
+      ],
+      "out_of_scope": "Formal error propagation formulas and statistical hypothesis testing are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "vectors and components",
+      "fixed_facts": [
+        "Vectors add by components or head-to-tail; they do not add by simple arithmetic unless they are along the same line."
+      ],
+      "relationships": [
+        "A vector is fully specified by magnitude and direction and can be resolved into perpendicular components.",
+        "Perpendicular components are independent: motion or force in one direction does not affect the other.",
+        "The magnitude of a vector sum is generally less than the sum of the magnitudes, and equals it only when the vectors are parallel."
+      ],
+      "accepted_alternative_framings": [
+        "Component method and scale diagram method give the same result and are both acceptable."
+      ],
+      "disqualifying_errors": [
+        "Adding vector magnitudes arithmetically when the vectors are not along the same line.",
+        "Claiming horizontal and vertical components of projectile motion affect one another.",
+        "Reporting a vector result with magnitude only where direction is required."
+      ],
+      "out_of_scope": "Three-dimensional vector algebra, dot and cross products are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "free-body diagrams",
+      "fixed_facts": [
+        "A free-body diagram shows only the forces acting on the chosen object, not the forces that object exerts on others."
+      ],
+      "relationships": [
+        "Each force on the diagram has an identified source: another object that is in contact with, or interacting at a distance with, the chosen body.",
+        "The two forces of an interaction pair act on different objects and therefore never appear on the same free-body diagram.",
+        "Motion itself is not a force, so no arrow is drawn for the object's own movement."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Drawing a force of motion, a force of inertia, or a force the object carries with it.",
+        "Including on one diagram both members of an action-reaction pair.",
+        "Drawing a force with no identifiable source object."
+      ],
+      "out_of_scope": "Fictitious forces in rotating frames are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "net force",
+      "fixed_facts": [
+        "Net force is the vector sum of all forces acting on an object, and zero net force means zero acceleration."
+      ],
+      "relationships": [
+        "An object with zero net force is either at rest or moving with constant velocity; both are equilibrium states.",
+        "Net force determines acceleration, not velocity: a large net force on a slow object is entirely possible.",
+        "Forces are summed as vectors, so perpendicular components are treated independently."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an object moving at constant velocity must have a net force acting on it.",
+        "Claiming net force determines the direction of motion rather than the direction of acceleration.",
+        "Adding force magnitudes arithmetically when the forces are not collinear."
+      ],
+      "out_of_scope": "Torque, rotational equilibrium, and extended-body statics are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "Newton's second law as a mathematical relationship",
+      "fixed_facts": [
+        "Acceleration is proportional to net force and inversely proportional to mass, and it is in the direction of the net force."
+      ],
+      "relationships": [
+        "For a given mass, doubling the net force doubles the acceleration; for a given net force, doubling the mass halves it.",
+        "The relationship applies to the net force, not to any single force acting on the object.",
+        "Acceleration is always in the direction of the net force, whatever the direction of motion."
+      ],
+      "accepted_alternative_framings": [
+        "Expressing the relationship as an equation, as a proportionality, or in words are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Applying the relationship to one individual force rather than the net force.",
+        "Claiming acceleration is in the direction of motion rather than of net force.",
+        "Claiming force is proportional to velocity rather than to acceleration."
+      ],
+      "out_of_scope": "Variable-mass systems and the momentum form of the second law are acceptable but not required."
+    },
+    {
+      "unit": 2,
+      "focus": "mass versus weight",
+      "fixed_facts": [
+        "Mass is a property of the object and does not change with location; weight is the gravitational force on it and does."
+      ],
+      "relationships": [
+        "Mass measures how strongly an object resists a change in motion and is measured in kilograms.",
+        "Weight is a force, measured in newtons, equal to mass times the local gravitational field strength.",
+        "An object in free fall or in orbit still has weight; what it lacks is a supporting normal force, which is why it feels weightless."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating mass and weight as the same quantity or reporting one in the other's units.",
+        "Claiming an object's mass changes on the Moon.",
+        "Claiming orbiting astronauts are weightless because there is no gravity at that altitude."
+      ],
+      "out_of_scope": "Gravitational versus inertial mass equivalence is beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "friction and normal forces",
+      "fixed_facts": [
+        "The normal force is perpendicular to the contact surface and is not always equal to the object's weight."
+      ],
+      "relationships": [
+        "Friction acts parallel to the contact surface and opposes relative sliding or the tendency to slide.",
+        "Frictional force depends on the normal force and on the surfaces, and to a good approximation not on the contact area.",
+        "Static friction adjusts up to a maximum to prevent sliding; kinetic friction acts once sliding has begun and is generally smaller."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the normal force always equals the object's weight, including on an incline or when another vertical force acts.",
+        "Claiming friction depends principally on contact area.",
+        "Claiming friction always opposes motion rather than relative sliding; friction is what propels a walking person forward."
+      ],
+      "out_of_scope": "Rolling resistance, lubrication regimes, and surface physics are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "analysing force data",
+      "fixed_facts": [],
+      "relationships": [
+        "Force data is interpreted against a stated model, and the model predicts the shape of the relationship as well as its values.",
+        "A linear relationship between net force and acceleration supports the second law; departures indicate an unaccounted force such as friction.",
+        "The intercept and the scatter of a fitted line carry information about systematic and random error."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Fitting a line through force-acceleration data and ignoring a substantial non-zero intercept.",
+        "Attributing a departure from the expected relationship to error without identifying a candidate cause.",
+        "Claiming agreement with the model from data whose scatter is too large to distinguish the alternatives."
+      ],
+      "out_of_scope": "Regression statistics and residual analysis are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "momentum as mass times velocity",
+      "fixed_facts": [
+        "Momentum is mass times velocity, and it is a vector with the same direction as the velocity."
+      ],
+      "relationships": [
+        "Momentum depends on both mass and velocity, so a slow heavy object and a fast light one can carry the same momentum.",
+        "Momentum is a vector, so its direction matters and momenta in opposite directions partly cancel.",
+        "Momentum and kinetic energy are different quantities and are not interchangeable."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating momentum as a scalar and adding magnitudes regardless of direction.",
+        "Using momentum and kinetic energy as though they were the same quantity.",
+        "Claiming momentum depends on speed alone."
+      ],
+      "out_of_scope": "Relativistic momentum and angular momentum are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "conservation of momentum",
+      "fixed_facts": [
+        "In the absence of a net external force, the total momentum of a system is unchanged by interactions within it."
+      ],
+      "relationships": [
+        "Total momentum before an interaction equals total momentum after it, provided no net external force acts.",
+        "Momentum conservation holds for every collision type, including those where kinetic energy is not conserved.",
+        "Defining the system is part of applying the principle: a force is external or internal only with respect to a stated system."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming momentum is conserved only in elastic collisions.",
+        "Applying momentum conservation to a system with a substantial unaccounted external force.",
+        "Adding momenta as scalars and concluding momentum was not conserved."
+      ],
+      "out_of_scope": "Centre-of-mass frame analysis and two-dimensional collision algebra are acceptable but not required."
+    },
+    {
+      "unit": 3,
+      "focus": "impulse and contact time",
+      "fixed_facts": [
+        "Impulse is force multiplied by the time it acts, and it equals the change in momentum."
+      ],
+      "relationships": [
+        "For a given change in momentum, extending the contact time reduces the average force.",
+        "This is why crumple zones, airbags, helmets, and catching techniques reduce peak force, without reducing the momentum change.",
+        "Impulse is a vector in the direction of the average force."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a protective device reduces the change in momentum rather than the peak force.",
+        "Claiming impulse and force are the same quantity.",
+        "Claiming a longer contact time increases the force for the same momentum change."
+      ],
+      "out_of_scope": "Force-time curve integration for non-constant forces is acceptable but not required."
+    },
+    {
+      "unit": 3,
+      "focus": "elastic and inelastic collisions",
+      "fixed_facts": [
+        "Momentum is conserved in all collisions; kinetic energy is conserved only in elastic ones."
+      ],
+      "relationships": [
+        "In an elastic collision total kinetic energy is unchanged; in an inelastic collision some is transferred to deformation, sound, and thermal energy.",
+        "In a perfectly inelastic collision the objects move off together, and kinetic energy loss is at its maximum for that momentum.",
+        "Real macroscopic collisions are never perfectly elastic, though some are close enough to model that way."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming kinetic energy is conserved in every collision.",
+        "Claiming momentum is not conserved in an inelastic collision.",
+        "Claiming energy is destroyed in an inelastic collision rather than transferred to other forms."
+      ],
+      "out_of_scope": "Coefficient of restitution and elastic collision algebra in two dimensions are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "collision analysis from data",
+      "fixed_facts": [],
+      "relationships": [
+        "Analysing a collision requires masses and velocities before and after, with directions, and each carries measurement uncertainty.",
+        "A momentum total that does not balance within uncertainty indicates an unaccounted external force or a measurement problem, and both are investigated rather than assumed.",
+        "Comparing kinetic energy before and after classifies the collision, and any energy shortfall is accounted for physically."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Concluding momentum was not conserved without checking uncertainty or external forces.",
+        "Omitting direction from velocities in a momentum calculation.",
+        "Reporting a kinetic energy loss without identifying where the energy went."
+      ],
+      "out_of_scope": "Video tracking analysis methods and statistical treatment of trial sets are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "engineering a protective device",
+      "fixed_facts": [],
+      "relationships": [
+        "A protective device works by extending the time or the distance over which momentum changes, thereby reducing peak force.",
+        "It can also spread the force over a larger area, reducing pressure, which is a distinct mechanism from reducing the force.",
+        "The device is evaluated against measured peak force or deceleration under stated test conditions, not against how sturdy it appears."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a protective device removes the momentum change rather than extending the time over which it occurs.",
+        "Confusing spreading force over area with reducing the total force.",
+        "Declaring a design effective without a measurement against the stated criterion."
+      ],
+      "out_of_scope": "Materials testing standards and biomechanical injury criteria are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "Newton's law of gravitation",
+      "fixed_facts": [
+        "Gravitational attraction between two masses is proportional to the product of the masses and inversely proportional to the square of the distance between their centres.",
+        "Gravity is always attractive."
+      ],
+      "relationships": [
+        "Every pair of masses attracts, with a force that grows with either mass and falls off with the square of separation.",
+        "The two objects exert equal and opposite forces on each other regardless of how different their masses are.",
+        "The distance in the relationship is between centres, not between surfaces, for spherically symmetric bodies."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming gravity can be repulsive.",
+        "Claiming the more massive body exerts the larger gravitational force in a pair.",
+        "Using surface separation rather than centre separation for spherical bodies."
+      ],
+      "out_of_scope": "General relativity and gravitational field mapping are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "Coulomb's law",
+      "fixed_facts": [
+        "The electrostatic force between two point charges is proportional to the product of the charges and inversely proportional to the square of the distance between them.",
+        "Like charges repel and unlike charges attract."
+      ],
+      "relationships": [
+        "Coulomb's law has the same inverse-square form as the gravitational law, but electric charge comes in two signs, so the force can attract or repel.",
+        "The two charges exert equal and opposite forces on each other regardless of their relative magnitudes.",
+        "The presence of intervening material changes the force, unlike the gravitational case."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the larger charge exerts the greater force in a pair.",
+        "Claiming electrostatic force is always attractive.",
+        "Claiming the force falls off in direct proportion to distance rather than to its square."
+      ],
+      "out_of_scope": "Dielectric theory, continuous charge distributions, and Gauss's law are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "inverse-square relationships",
+      "fixed_facts": [
+        "In an inverse-square relationship, doubling the distance reduces the quantity to one quarter."
+      ],
+      "relationships": [
+        "An inverse-square dependence arises whenever an influence spreads outward over a spherical surface whose area grows with the square of the radius.",
+        "Doubling the distance quarters the quantity; tripling it reduces the quantity to one ninth.",
+        "The relationship never reaches zero at finite distance, so the influence has no sharp boundary."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming doubling the distance halves an inverse-square quantity.",
+        "Claiming an inverse-square force becomes exactly zero beyond some distance.",
+        "Applying an inverse-square relationship to a quantity that does not spread over a spherical surface without justification."
+      ],
+      "out_of_scope": "Solid angle formalism and flux integration are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "comparing gravitational and electrostatic strength",
+      "fixed_facts": [
+        "The electrostatic force between two charged subatomic particles is enormously stronger than the gravitational force between them."
+      ],
+      "relationships": [
+        "Both forces obey an inverse-square law, but the electrostatic force is vastly stronger for elementary particles.",
+        "Gravity nonetheless dominates at astronomical scale because bulk matter is very nearly electrically neutral, so positive and negative contributions cancel.",
+        "Gravity has no cancellation mechanism, because mass has only one sign."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming gravity is intrinsically the stronger of the two forces.",
+        "Claiming electrostatic forces are irrelevant at atomic scale.",
+        "Explaining gravity's astronomical dominance by strength rather than by the absence of cancellation."
+      ],
+      "out_of_scope": "The full hierarchy of fundamental forces and coupling constants is beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "field lines as representations",
+      "fixed_facts": [
+        "Field lines are a representation of a field's direction and relative strength; they are not physical objects."
+      ],
+      "relationships": [
+        "The direction of a field line at a point gives the direction of the force on a positive test charge, or on a test mass, placed there.",
+        "Closer spacing of field lines represents a stronger field.",
+        "Field lines never cross, because the field has one direction at each point."
+      ],
+      "accepted_alternative_framings": [
+        "Field vector diagrams and field line diagrams convey the same information and are both acceptable."
+      ],
+      "disqualifying_errors": [
+        "Claiming field lines are physically present in space.",
+        "Drawing field lines that cross one another.",
+        "Claiming the field exists only along the drawn lines and not between them."
+      ],
+      "out_of_scope": "Field potential surfaces and quantitative field mapping are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "predicting forces mathematically",
+      "fixed_facts": [],
+      "relationships": [
+        "A predicted force follows from the stated relationship, the measured quantities, and their units, and it carries the uncertainty of those measurements.",
+        "A prediction states the assumptions it rests on, such as treating a body as a point mass or ignoring intervening material.",
+        "The prediction is then compared against measurement, and disagreement is investigated rather than explained away."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Reporting a calculated force with more precision than the inputs support.",
+        "Applying a point-mass or point-charge relationship to extended bodies at close range without saying so.",
+        "Attributing a disagreement between prediction and measurement to error with no candidate cause identified."
+      ],
+      "out_of_scope": "Numerical modelling of multi-body force systems is beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "kinetic and potential energy",
+      "fixed_facts": [
+        "Kinetic energy depends on mass and on the square of the speed; gravitational potential energy near Earth's surface depends on mass, gravitational field strength, and height above a chosen reference."
+      ],
+      "relationships": [
+        "Doubling an object's speed quadruples its kinetic energy, which is why stopping distance grows so steeply with speed.",
+        "Potential energy is defined relative to a chosen reference level, and only differences in it are physically meaningful.",
+        "Potential energy belongs to a system of interacting objects, such as an object and Earth, not to one object alone."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming kinetic energy is proportional to speed rather than to its square.",
+        "Reporting a potential energy without stating the reference level.",
+        "Claiming potential energy is stored inside a single object independently of any interaction."
+      ],
+      "out_of_scope": "Elastic potential energy formulas and relativistic kinetic energy are acceptable but not required."
+    },
+    {
+      "unit": 5,
+      "focus": "energy as a system-level account",
+      "fixed_facts": [
+        "Energy is conserved: the total energy of a closed system is constant, and energy transfers or transforms rather than being created or destroyed."
+      ],
+      "relationships": [
+        "An energy account requires a defined system and boundary, since what counts as a transfer depends on where the boundary lies.",
+        "Energy changes form within the system and is transferred across the boundary by work, by heating, or by radiation.",
+        "An account that does not balance indicates an unidentified transfer, not a failure of conservation."
+      ],
+      "accepted_alternative_framings": [
+        "Energy bar charts, tables, and equations are all acceptable forms for an energy account."
+      ],
+      "disqualifying_errors": [
+        "Presenting an energy account in which energy is created or destroyed.",
+        "Claiming energy is lost rather than transferred out of the system.",
+        "Reporting an energy account with no system boundary stated."
+      ],
+      "out_of_scope": "Mass-energy equivalence in nuclear processes and thermodynamic potentials are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "computational energy models",
+      "fixed_facts": [],
+      "relationships": [
+        "A computational energy model steps a system forward using stated relationships, and its output depends on the assumptions and inputs supplied.",
+        "The model must conserve energy unless a transfer out of the system is explicitly represented.",
+        "Model output is a prediction to be compared with measurement, not a substitute for it."
+      ],
+      "accepted_alternative_framings": [
+        "Spreadsheet, code, and hand-iterated models are equally acceptable forms."
+      ],
+      "disqualifying_errors": [
+        "Presenting model output as though it were measured data.",
+        "Building a model in which energy is created or destroyed with no stated transfer.",
+        "Reporting model results without stating the assumptions and inputs used."
+      ],
+      "out_of_scope": "Numerical integration error analysis and simulation validation methods are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "energy at macroscopic and particle scales",
+      "fixed_facts": [
+        "The thermal energy of an object is the energy associated with the random motion of its particles."
+      ],
+      "relationships": [
+        "Macroscopic kinetic energy is associated with the ordered motion of an object as a whole; thermal energy is associated with the random motion of its particles.",
+        "Friction and inelastic collisions convert ordered macroscopic energy into random particle energy, which is why they raise temperature.",
+        "Energy is conserved across the two scales, so an apparent macroscopic loss appears as a particle-scale gain."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming energy is destroyed by friction rather than converted to thermal energy.",
+        "Claiming a moving object's macroscopic kinetic energy is the same thing as its thermal energy.",
+        "Claiming temperature measures the total energy of an object."
+      ],
+      "out_of_scope": "Statistical mechanics and equipartition are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "energy transfer and dissipation",
+      "fixed_facts": [],
+      "relationships": [
+        "Energy transferred to the surroundings as thermal energy is dispersed and becomes far harder to use for work.",
+        "Dissipation reduces the useful energy available; it does not reduce the total energy.",
+        "Every real transfer dissipates some energy, which is why no device is completely efficient."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming dissipated energy has been destroyed.",
+        "Claiming a device can transfer all of its input energy to useful output.",
+        "Confusing conservation of total energy with conservation of useful energy."
+      ],
+      "out_of_scope": "Quantitative entropy and exergy analysis are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "building and checking an energy budget",
+      "fixed_facts": [],
+      "relationships": [
+        "An energy budget lists the energy in the system at the start, the transfers in and out, and the energy at the end, and the two sides must agree within uncertainty.",
+        "A shortfall in the budget points to an unaccounted transfer, most often dissipation, and it is identified rather than absorbed into a residual.",
+        "Every term in the budget carries the uncertainty of the measurements it came from."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Balancing a budget by inserting an unexplained term.",
+        "Claiming a budget balances when the discrepancy exceeds the measurement uncertainty.",
+        "Omitting dissipation from a budget for a system with friction or inelastic interaction."
+      ],
+      "out_of_scope": "Formal uncertainty propagation through multi-term budgets is beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "temperature versus thermal energy",
+      "fixed_facts": [
+        "Temperature measures the average kinetic energy of particles; thermal energy is the total energy of that random motion and also depends on how much material there is."
+      ],
+      "relationships": [
+        "Two objects at the same temperature can hold very different amounts of thermal energy, because thermal energy depends on mass and material as well.",
+        "Adding thermal energy to a substance raises its temperature, except during a change of state, when it changes particle arrangement instead.",
+        "Temperature determines the direction of spontaneous thermal transfer; total thermal energy does not."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating temperature and thermal energy as the same quantity.",
+        "Claiming the object with more thermal energy is necessarily at the higher temperature.",
+        "Claiming temperature rises steadily while a substance is melting or boiling."
+      ],
+      "out_of_scope": "Absolute temperature scales beyond conversion, and kinetic theory derivations, are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "conduction, convection, and radiation",
+      "fixed_facts": [
+        "Conduction transfers energy through particle interaction, convection through bulk fluid movement, and radiation by electromagnetic waves requiring no medium."
+      ],
+      "relationships": [
+        "Conduction requires matter in contact and is fastest in materials with mobile electrons, which is why metals conduct thermally as well as electrically.",
+        "Convection requires a fluid free to move, so it does not occur within a solid.",
+        "Radiation occurs across a vacuum and is how energy reaches Earth from the Sun."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming convection occurs within a solid.",
+        "Claiming thermal radiation requires a medium.",
+        "Claiming an insulator produces cold rather than slowing transfer."
+      ],
+      "out_of_scope": "Quantitative transfer coefficients, Stefan-Boltzmann calculations, and emissivity are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "thermal equilibrium",
+      "fixed_facts": [
+        "Objects in thermal contact exchange energy until they reach the same temperature; net transfer is then zero."
+      ],
+      "relationships": [
+        "Net thermal energy flows from higher to lower temperature, and the flow stops when the temperatures are equal.",
+        "At equilibrium, exchange continues in both directions at equal rates, so equilibrium is dynamic rather than static.",
+        "Energy is conserved during equilibration: what one body loses, the other and the surroundings gain."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming cold flows from the cooler body to the warmer one.",
+        "Claiming all exchange ceases at thermal equilibrium.",
+        "Claiming equilibrium means equal thermal energy rather than equal temperature."
+      ],
+      "out_of_scope": "The zeroth law stated formally and quantitative equilibration timescales are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "specific heat capacity",
+      "fixed_facts": [
+        "Specific heat capacity is the energy required to raise the temperature of one kilogram of a substance by one kelvin, and it differs between substances."
+      ],
+      "relationships": [
+        "For the same energy input and the same mass, a substance with higher specific heat capacity shows a smaller temperature rise.",
+        "Water has an unusually high specific heat capacity, which is why large bodies of water moderate nearby climates.",
+        "The energy transferred is the product of mass, specific heat capacity, and temperature change."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming equal energy input produces equal temperature change regardless of substance or mass.",
+        "Confusing specific heat capacity with thermal conductivity.",
+        "Applying the specific heat relationship across a change of state."
+      ],
+      "out_of_scope": "Latent heat calculations and calorimetry error analysis are acceptable but not required."
+    },
+    {
+      "unit": 6,
+      "focus": "the second law of thermodynamics",
+      "fixed_facts": [
+        "Thermal energy does not flow spontaneously from a cooler body to a warmer one, and no cyclic device converts thermal energy entirely into work."
+      ],
+      "relationships": [
+        "Energy spontaneously disperses, so the total disorder of a system and its surroundings does not decrease.",
+        "A refrigerator or heat pump moves energy from cooler to warmer only because work is supplied, so the overall dispersal still increases.",
+        "This sets an upper limit on the efficiency of any heat engine that is strictly below one hundred per cent."
+      ],
+      "accepted_alternative_framings": [
+        "Formulations in terms of entropy, of energy dispersal, or of the impossibility of a perfect engine are equivalent."
+      ],
+      "disqualifying_errors": [
+        "Claiming a heat engine can be one hundred per cent efficient.",
+        "Claiming a local decrease in disorder violates the second law without accounting for the surroundings.",
+        "Confusing the first law's conservation of energy with a claim that energy stays equally useful."
+      ],
+      "out_of_scope": "Carnot efficiency calculation and statistical entropy are acceptable but not required."
+    },
+    {
+      "unit": 6,
+      "focus": "investigating energy distribution",
+      "fixed_facts": [],
+      "relationships": [
+        "Investigating thermal behaviour requires stating the system, its boundary, and the transfers that cross it.",
+        "Measured temperature changes are evidence about energy transfer only when mass and material are also known.",
+        "Thermal transfer to the environment is present in every real setup, so it belongs in the account rather than being assumed negligible without checking."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Concluding energy was not conserved from an incomplete account of transfers to the surroundings.",
+        "Comparing temperature changes for different masses or materials as though they showed equal energy transfers.",
+        "Assuming a container is perfectly insulating with no evidence."
+      ],
+      "out_of_scope": "Calorimeter constant determination and formal uncertainty budgets are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "electric and magnetic fields",
+      "fixed_facts": [
+        "Electric fields exert forces on charges whether or not they are moving; magnetic fields exert forces only on moving charges and on magnetic materials."
+      ],
+      "relationships": [
+        "A field is a model in which one object modifies the space around it, and a second object responds to the field at its own location.",
+        "The electric field direction is defined as the direction of the force on a positive test charge.",
+        "Magnetic field lines form closed loops; isolated magnetic poles have never been observed."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a magnetic field exerts a force on a stationary charge.",
+        "Claiming isolated magnetic north or south poles can be produced by cutting a magnet.",
+        "Treating field lines as physical objects rather than a representation."
+      ],
+      "out_of_scope": "Maxwell's equations, field energy density, and relativistic field transformation are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "current and magnetic field production",
+      "fixed_facts": [
+        "An electric current produces a magnetic field around it."
+      ],
+      "relationships": [
+        "A current-carrying wire produces a magnetic field encircling it, and the field strength increases with the current.",
+        "Coiling the wire concentrates the field, and adding an iron core strengthens it further, which is how electromagnets work.",
+        "A current-carrying conductor in an external magnetic field experiences a force, which is the basis of the electric motor."
+      ],
+      "accepted_alternative_framings": [
+        "Right-hand rule conventions in any consistent form are acceptable."
+      ],
+      "disqualifying_errors": [
+        "Claiming a stationary charge produces a magnetic field.",
+        "Claiming an electromagnet's field persists unchanged when the current is switched off, with no ferromagnetic retention involved.",
+        "Claiming the magnetic field of a straight wire points along the wire."
+      ],
+      "out_of_scope": "Ampere's law and quantitative field calculation are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "electromagnetic induction",
+      "fixed_facts": [
+        "A voltage is induced in a circuit only when the magnetic flux through it is changing."
+      ],
+      "relationships": [
+        "Relative motion between a conductor and a magnetic field, or a changing field strength, changes the flux and induces a voltage.",
+        "A steady magnetic field with no relative motion induces nothing, however strong it is.",
+        "The induced effect opposes the change that produced it, which is why generators require work to turn."
+      ],
+      "accepted_alternative_framings": [
+        "Faraday's and Lenz's descriptions, whether named or described in plain terms, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming a stationary magnet held near a stationary coil induces a steady voltage.",
+        "Claiming induction produces energy rather than converting mechanical work into electrical energy.",
+        "Claiming the induced effect reinforces the change that produced it."
+      ],
+      "out_of_scope": "Quantitative flux calculation and transformer design equations are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "field models of interaction at a distance",
+      "fixed_facts": [],
+      "relationships": [
+        "The field model replaces action at a distance with a local interaction: the source establishes a field, and the field acts on whatever is present at a point.",
+        "Changes in a field propagate at finite speed, not instantaneously.",
+        "The field model applies to gravitational, electric, and magnetic interactions, with important differences in sign and in what responds."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming field changes propagate instantaneously across any distance.",
+        "Claiming a field exists only where a second object is present to feel it.",
+        "Treating gravitational and electric fields as identical in behaviour, ignoring that mass has one sign and charge has two."
+      ],
+      "out_of_scope": "Field quantisation and retarded potentials are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "energy changes in field interactions",
+      "fixed_facts": [],
+      "relationships": [
+        "Work is done when a charge or a mass moves through a field along the direction of the force, and energy is transferred as a result.",
+        "Moving a charge or mass against the field force increases the system's potential energy; moving with it decreases it.",
+        "Energy is conserved throughout: a generator supplies electrical energy only because mechanical work is supplied to it."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a generator or an induction device produces energy.",
+        "Claiming potential energy belongs to the moving object alone rather than to the interacting system.",
+        "Claiming work is done when motion is perpendicular to the field force."
+      ],
+      "out_of_scope": "Potential difference formalism and field energy density are acceptable but not required."
+    },
+    {
+      "unit": 7,
+      "focus": "investigating induction",
+      "fixed_facts": [],
+      "relationships": [
+        "An induction investigation varies one factor at a time: relative speed, field strength, number of turns, or orientation.",
+        "Detecting no induced effect when nothing is changing is a positive result confirming the model, not a failed trial.",
+        "Measurements state the instrument, its sensitivity, and the conditions, since induced voltages are often small."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Reporting an induced voltage under static conditions with no changing flux and attributing it to induction.",
+        "Varying several factors at once and attributing the effect to one.",
+        "Treating an instrument's limit of detection as evidence that no effect exists."
+      ],
+      "out_of_scope": "Instrumentation design and signal conditioning are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "wave properties and terminology",
+      "fixed_facts": [
+        "A wave transfers energy without net transport of the medium.",
+        "Amplitude is maximum displacement from equilibrium; wavelength is the distance between matching points on successive cycles; frequency is cycles per second; period is the time for one cycle."
+      ],
+      "relationships": [
+        "Particles of a medium oscillate about fixed positions while the wave and its energy travel through.",
+        "Frequency and period are reciprocals of one another.",
+        "In a transverse wave the oscillation is perpendicular to the direction of travel; in a longitudinal wave it is along it."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a wave carries the medium along with it.",
+        "Confusing amplitude with wavelength, or frequency with wave speed.",
+        "Claiming sound is a transverse wave in air."
+      ],
+      "out_of_scope": "Wave equation derivation and polarisation are acceptable but not required."
+    },
+    {
+      "unit": 8,
+      "focus": "the frequency-wavelength-speed relationship",
+      "fixed_facts": [
+        "Wave speed equals frequency multiplied by wavelength."
+      ],
+      "relationships": [
+        "In a given medium the wave speed is fixed by the medium, so frequency and wavelength vary inversely with each other.",
+        "When a wave crosses into a new medium its frequency is unchanged, set by the source, while its speed and wavelength both change.",
+        "The relationship holds for all waves, mechanical and electromagnetic alike."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a wave's frequency changes when it enters a new medium.",
+        "Claiming increasing the frequency of a wave in a fixed medium increases its speed.",
+        "Claiming wavelength and frequency vary in direct proportion."
+      ],
+      "out_of_scope": "Dispersion relations and group versus phase velocity are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "waves in different media",
+      "fixed_facts": [
+        "Mechanical waves require a medium; electromagnetic waves do not.",
+        "Sound travels faster in solids than in liquids and faster in liquids than in gases."
+      ],
+      "relationships": [
+        "The speed of a mechanical wave is set by properties of the medium, principally its stiffness and its density.",
+        "Light slows on entering a denser transparent medium and returns to its vacuum speed on leaving.",
+        "The wave's frequency is a property of the source and does not change with the medium."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming sound travels faster in air than in water or steel.",
+        "Claiming sound can travel through a vacuum.",
+        "Claiming light travels faster in glass or water than in vacuum."
+      ],
+      "out_of_scope": "Acoustic impedance and refractive index calculation are acceptable but not required."
+    },
+    {
+      "unit": 8,
+      "focus": "reflection, refraction, and diffraction",
+      "fixed_facts": [
+        "Reflection returns a wave from a boundary, refraction is the change of direction on entering a medium where the speed differs, and diffraction is the spreading of a wave past an edge or through a gap."
+      ],
+      "relationships": [
+        "In reflection from a smooth surface the angle of reflection equals the angle of incidence, both measured from the normal.",
+        "Refraction occurs because the wave speed changes at the boundary; a wave entering along the normal changes speed without changing direction.",
+        "Diffraction is most pronounced when the gap or obstacle is comparable in size to the wavelength."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming refraction occurs because the wave's frequency changes at the boundary.",
+        "Claiming diffraction is significant regardless of the ratio of wavelength to gap size.",
+        "Measuring angles of incidence and reflection from the surface rather than from the normal."
+      ],
+      "out_of_scope": "Snell's law calculation, total internal reflection, and interference are acceptable but not required."
+    },
+    {
+      "unit": 8,
+      "focus": "wave and particle models of light",
+      "fixed_facts": [
+        "Light shows wave behaviour such as diffraction and interference, and particle behaviour such as the photoelectric effect; neither model alone accounts for all observations."
+      ],
+      "relationships": [
+        "The wave model explains interference, diffraction, and refraction; the particle model explains the photoelectric effect and the discreteness of light emission and absorption.",
+        "Which model applies depends on the experiment; the two are not competing claims about which is really true.",
+        "Photon energy increases with frequency, which is why the effect of light on matter depends on frequency rather than on brightness alone."
+      ],
+      "accepted_alternative_framings": [
+        "Describing this as wave-particle duality, or as complementary models each with a domain, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming one of the two models has been shown to be the correct one and the other abandoned.",
+        "Claiming photon energy depends on the brightness of the light rather than on its frequency.",
+        "Claiming light requires a medium to travel through."
+      ],
+      "out_of_scope": "Quantum mechanics, the photoelectric equation, and de Broglie wavelength are acceptable to reference but not required."
+    },
+    {
+      "unit": 8,
+      "focus": "evaluating competing models",
+      "fixed_facts": [],
+      "relationships": [
+        "Competing models are evaluated on the range of observations each accounts for and on the predictions that distinguish them.",
+        "A decisive test is one where the models predict different outcomes, so an observation consistent with both settles nothing.",
+        "A model retained for a limited domain is not thereby wrong; its domain is part of the model."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Selecting between models on evidence consistent with both.",
+        "Claiming a model with a limited domain has been refuted.",
+        "Choosing a model on simplicity or familiarity alone with no evidential comparison."
+      ],
+      "out_of_scope": "Formal model selection criteria and philosophy of science are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "the electromagnetic spectrum",
+      "fixed_facts": [
+        "In order of increasing frequency and decreasing wavelength the spectrum runs radio, microwave, infrared, visible, ultraviolet, X-ray, gamma.",
+        "All electromagnetic waves travel at the same speed in vacuum, approximately three times ten to the eighth metres per second."
+      ],
+      "relationships": [
+        "The regions of the spectrum differ in frequency and wavelength, not in their fundamental nature.",
+        "Photon energy increases with frequency, so gamma rays carry far more energy per photon than radio waves.",
+        "Only the higher-frequency regions, from roughly ultraviolet upward, carry enough energy per photon to ionise atoms."
+      ],
+      "accepted_alternative_framings": [
+        "Ordering the spectrum by wavelength or by frequency are equally correct, provided the direction is stated."
+      ],
+      "disqualifying_errors": [
+        "Placing the spectrum regions out of order, such as putting ultraviolet below visible in frequency.",
+        "Claiming different regions of the spectrum travel at different speeds in vacuum.",
+        "Claiming radio waves or microwaves are ionising radiation."
+      ],
+      "out_of_scope": "Quantitative photon energy calculation is acceptable but not required."
+    },
+    {
+      "unit": 9,
+      "focus": "absorption of radiation by matter",
+      "fixed_facts": [
+        "Whether radiation is absorbed, transmitted, or reflected depends on both the material and the frequency of the radiation."
+      ],
+      "relationships": [
+        "Absorption transfers energy from the radiation to the material, commonly raising its temperature or exciting its electrons.",
+        "A material transparent to one part of the spectrum can be opaque to another, which is why glass passes visible light but blocks much ultraviolet.",
+        "Ionising radiation damages matter by removing electrons from atoms, which non-ionising radiation cannot do however intense it is."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a material behaves the same way toward all frequencies of radiation.",
+        "Claiming non-ionising radiation causes ionisation if it is intense enough.",
+        "Claiming absorbed radiation energy disappears rather than being transferred to the material."
+      ],
+      "out_of_scope": "Attenuation coefficients, dosimetry, and spectroscopy are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "digital versus analog information",
+      "fixed_facts": [
+        "Digital signals encode information in discrete values; analog signals vary continuously."
+      ],
+      "relationships": [
+        "Noise added to an analog signal becomes part of it, while a digital signal can be restored by rounding each value to the nearest allowed level.",
+        "That restorability is why digital signals survive repeated transmission and copying far better than analog ones.",
+        "Digitising a continuous signal involves sampling and rounding, so it loses some information; how much depends on the sampling and the levels used."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming digital signals are unaffected by noise or loss.",
+        "Claiming digitisation preserves the original signal exactly.",
+        "Claiming an analog signal can be cleaned of accumulated noise as a digital one can."
+      ],
+      "out_of_scope": "Sampling theorem, quantisation error analysis, and coding theory are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "evaluating published claims about radiation",
+      "fixed_facts": [
+        "The distinction between ionising and non-ionising radiation is set by photon energy, which depends on frequency, not by the power of the source."
+      ],
+      "relationships": [
+        "Evaluating a claim about radiation means identifying which part of the spectrum is involved, at what intensity, and over what exposure.",
+        "A claim's strength depends on the study design and on whether independent work agrees, not on the confidence of the presentation.",
+        "The word radiation covers everything from radio waves to gamma rays, so a claim about radiation that does not specify which is not evaluable."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating all radiation as equivalent in its effects on matter or on people.",
+        "Claiming a non-ionising source becomes ionising at high power.",
+        "Accepting or rejecting a published claim without reference to the evidence or the study design behind it."
+      ],
+      "out_of_scope": "Epidemiological methods, exposure standards, and health physics are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "wave-based technologies",
+      "fixed_facts": [],
+      "relationships": [
+        "Wave-based technologies work by encoding information onto a wave, transmitting it, and decoding it, and each stage constrains performance.",
+        "The choice of frequency band is set by how the wave interacts with the environment: penetration, range, and available bandwidth all depend on it.",
+        "Every link has limits on range, rate, and reliability set by physics as well as by equipment."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a communication technology has no physical limit on range or data rate.",
+        "Claiming frequency band choice is arbitrary rather than driven by propagation behaviour.",
+        "Claiming information travels without any physical carrier."
+      ],
+      "out_of_scope": "Modulation schemes, antenna theory, and link budget calculation are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "energy conversion device design",
+      "fixed_facts": [],
+      "relationships": [
+        "An energy conversion device is evaluated on measured input, measured useful output, and the difference between them.",
+        "No device converts all input to useful output, so an efficiency claim of one hundred per cent indicates a measurement or accounting error.",
+        "Design improvements are tested one change at a time against the stated criteria."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a device produces more energy than it receives.",
+        "Reporting an efficiency without stating what was measured as input and as useful output.",
+        "Changing several design features at once and attributing the improvement to one."
+      ],
+      "out_of_scope": "Thermodynamic efficiency limits for specific cycles and formal design optimisation are beyond this course."
+    }
+  ]
+}

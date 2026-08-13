@@ -1,0 +1,279 @@
+{
+  "courses": [
+    {
+      "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-g3-science",
+      "grade": 3,
+      "hazard_bearing": 0,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "g34-committed",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "Grade 3 Science",
+      "units": 9
+    },
+    {
+      "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-g4-science",
+      "grade": 4,
+      "hazard_bearing": 0,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "g34-committed",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "Grade 4 Science",
+      "units": 9
+    },
+    {
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-g5-science",
+      "grade": 5,
+      "hazard_bearing": 0,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "canonical-1.0.0",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "Grade 5 Science",
+      "units": 9
+    },
+    {
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-g7-science",
+      "grade": 7,
+      "hazard_bearing": 0,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "canonical-1.0.0",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "Grade 7 Science",
+      "units": 9
+    },
+    {
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-g8-science",
+      "grade": 8,
+      "hazard_bearing": 0,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "canonical-1.0.0",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "Grade 8 Science",
+      "units": 9
+    },
+    {
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-hs9-biology",
+      "grade": 9,
+      "hazard_bearing": 108,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "hs912-science-h3",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "High School Biology (Grade 9)",
+      "units": 9
+    },
+    {
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-hs10-chemistry",
+      "grade": 10,
+      "hazard_bearing": 108,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "hs912-science-h3",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "High School Chemistry (Grade 10)",
+      "units": 9
+    },
+    {
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-hs11-physics",
+      "grade": 11,
+      "hazard_bearing": 108,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "hs912-science-h3",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "High School Physics (Grade 11)",
+      "units": 9
+    },
+    {
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "correctness_authority_lessons": 108,
+      "correctness_topics": 54,
+      "course_id": "ma-hs12-earth-space-environmental",
+      "grade": 12,
+      "hazard_bearing": 108,
+      "investigation_data_sheets": 18,
+      "lessons": 108,
+      "lineage": "hs912-science-h3",
+      "safety_verified": 108,
+      "student_work_sheets": 90,
+      "title": "High School Earth, Space, and Environmental Science (Grade 12)",
+      "units": 9
+    }
+  ],
+  "high_school_safety_lineage": {
+    "branch": "mac/hs912-science-h3",
+    "note": "High School student sheets are derived from H3. No blob from the superseded H2 fix or the failed base candidate is read by this build.",
+    "rejected_base_candidate": "f58f7f1eec0a0f93801df4978c00511ec98cc95e",
+    "supersedes": "265ea3a75740ccbeea0dfa02c723514779def052",
+    "used": "e7551b959112fcd9e6868d614799028cf22acf5d"
+  },
+  "invariants": [
+    "No observation, measurement, result, or expected value is supplied by this package.",
+    "Every recording field ships blank.",
+    "Every lesson carries a student-visible safety brief and an equal-credit safe alternative.",
+    "High School safety content comes from the H3 package only; H2 is superseded.",
+    "Every lesson carries a scientific correctness authority for its topic, adult-facing only.",
+    "No correctness key states an expected measurement or any observation."
+  ],
+  "manifest_version": "1.0.0",
+  "package_version": "1.0.0",
+  "sources_read": [
+    {
+      "bytes": 712388,
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "lineage": "canonical-1.0.0",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/science/lessons.jsonl",
+      "sha256": "567944af5f917019150539902a35761f824d9814994063774df44435ebcaa584"
+    },
+    {
+      "bytes": 10817,
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "lineage": "canonical-1.0.0",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/science/units.json",
+      "sha256": "2fa1068fb2c6af7ea9e15de86df064bb9a7002430c58db64b81e6cd523d14c22"
+    },
+    {
+      "bytes": 719080,
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "lineage": "canonical-1.0.0",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/science/lessons.jsonl",
+      "sha256": "fd83577e27aa0726d4c69427f8b9e8e23d00c2a69ebf9b072ed04d85e62650f6"
+    },
+    {
+      "bytes": 11093,
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "lineage": "canonical-1.0.0",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/science/units.json",
+      "sha256": "ca44f76964c172093903f024a49e230e1e4387e0c64cdc95897505f7654da660"
+    },
+    {
+      "bytes": 720788,
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "lineage": "canonical-1.0.0",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/science/lessons.jsonl",
+      "sha256": "4741c9b997b222e549e681f2d4b447ba64f8248867e79afa772b3c50c8a7ec7d"
+    },
+    {
+      "bytes": 11327,
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "lineage": "canonical-1.0.0",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/science/units.json",
+      "sha256": "a52918e73afbd0c30113bbda65b10028e202000557704f75c828d798f686d886"
+    },
+    {
+      "bytes": 848616,
+      "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+      "lineage": "g34-committed",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/lessons.jsonl",
+      "sha256": "89e0895283ee3c9981bac698492e8c5720d8a12646fa95cde62ae41fae562215"
+    },
+    {
+      "bytes": 11291,
+      "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+      "lineage": "g34-committed",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/science/units.json",
+      "sha256": "d0ea5aa7f84e6a702a31da2c5c94c2c7472017649927e6bae3ac294471813d7e"
+    },
+    {
+      "bytes": 840534,
+      "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+      "lineage": "g34-committed",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/science/lessons.jsonl",
+      "sha256": "d399c61afbeda306ca9995ae5ef99bacb056eab9dcd4d9821d6f5b76c783b25c"
+    },
+    {
+      "bytes": 11128,
+      "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+      "lineage": "g34-committed",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/science/units.json",
+      "sha256": "998132e52fc1efe810a05f6ce108700c1649374472774a4e230b35b498c5a985"
+    },
+    {
+      "bytes": 1270160,
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "lineage": "hs912-science-h3",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/lessons/ma-hs10-chemistry.lessons.jsonl",
+      "sha256": "1c06e8fbf859b634fb49e90013fa7aad6014ca808bcf6f2be9073a3d311f7b76"
+    },
+    {
+      "bytes": 1221602,
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "lineage": "hs912-science-h3",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/lessons/ma-hs11-physics.lessons.jsonl",
+      "sha256": "73dc985da28d0359228c09372ac591c8387dc4d691dacec8f275f3c85aa66b6b"
+    },
+    {
+      "bytes": 1225091,
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "lineage": "hs912-science-h3",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/lessons/ma-hs12-earth-space-environmental.lessons.jsonl",
+      "sha256": "5505688ec91447126f4b8c750db5629afce9e547a40946c40b61d3e4eef9b6ec"
+    },
+    {
+      "bytes": 1244909,
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "lineage": "hs912-science-h3",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/lessons/ma-hs9-biology.lessons.jsonl",
+      "sha256": "b8492f05d5b69aa3cd1c44663e4997d9a98ed4b572954431c997bcbeceefb0a2"
+    },
+    {
+      "bytes": 2979,
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "lineage": "hs912-science-h3",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/policy-set.json",
+      "sha256": "7e9a2b334787f2caeceb00886f170fba1129efe40086599d40c1656a6bbfeffb"
+    },
+    {
+      "bytes": 5525,
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "lineage": "hs912-science-h3",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/resources.json",
+      "sha256": "1dcc7b3e92fc013a6869fb0f1579f991e27147a2aa225f47ea08bcf504eb425f"
+    },
+    {
+      "bytes": 126522,
+      "commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+      "lineage": "hs912-science-h3",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/units.json",
+      "sha256": "d8eaf594f2109c471211b09d405e8b1f1515f4575b231767999b96a9972ad6d3"
+    }
+  ],
+  "subject": "science",
+  "total_lessons": 972
+}

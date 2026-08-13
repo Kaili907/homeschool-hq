@@ -1,0 +1,234 @@
+# Guided practice A: comparing parents and offspring
+
+**Grade 3 Science** · Unit 5: Inherited Traits and Variation · Day 3 of the unit (course day 51) · about 40–55 minutes
+
+**Today's focus:** comparing parents and offspring
+
+**Unit question:** How can understanding inherited traits and variation help us explain, decide, create, or solve something that matters?
+
+**What you are aiming at:**
+
+- Practice comparing parents and offspring with prompts, feedback, and gradually reduced support.
+- Use subject-appropriate evidence or representation to communicate understanding of comparing parents and offspring.
+- Check, revise, or improve work about comparing parents and offspring using stated success criteria.
+
+**Materials:**
+
+- course notebook or digital equivalent
+- pencil or accessible response tool
+- unit-specific source, model, manipulatives, safe materials, or approved digital tool
+
+## Safety — read this before you touch anything
+
+Read this before you start. If anything here does not match what is in front of you, stop and ask the adult who is helping you.
+
+**Who has to be with you.** You may work on this on your own. An adult should know you are doing it.
+
+**Protective equipment.** No protective equipment is needed for desk work. Eye and hand protection are required the moment heat, sharp tools, or an unknown substance is involved — and this lesson's alternative path avoids all three.
+
+### Hazards
+
+The curriculum source for this lesson declares no typed hazard list, because the hands-on option is family-chosen rather than prescribed. That is exactly why the adult approves the plan and the materials before anything is touched, and why the prohibitions below are not negotiable.
+
+### Order of work
+
+This lesson's curriculum source prescribes no fixed procedure, so this package states no invented one. Write your plan on the data sheet, have the adult approve it, then follow your own written order and change one thing at a time.
+
+### This lesson's safety rules
+
+- Use respectful, non-shaming language.
+- Allow a pause, break, or alternate response mode without treating it as failure.
+- A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised.
+- Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+- Heat sources, sharp tools, and cutting require direct adult supervision and are optional in every lesson; the text-only path avoids them entirely.
+- Wear appropriate eye/hand protection and stop for heat, sharp tools, unknown substances, fumes, spills, or allergic reactions.
+- No photograph, video, or camera use is required at any point; a written or spoken description is always accepted.
+
+### Stop at once if any of these happens
+
+- Stop and tell your adult straight away if anyone is hurt or burned, if something spills, if you smell something strong, or if someone comes out in a rash.
+- Stop if anything in front of you is not what the lesson says to use.
+- A burn: hold it under cool running water for 20 minutes and tell your adult. No ice, no butter, no cream.
+- Something in your eye: rinse it under running water for 15 minutes, keeping the eye open, and call your adult while you rinse. Do this before anything else.
+- A strong smell: leave the room and tell your adult. Do not go back in to tidy up.
+- A fire: get everyone out, shut the door behind you, and call the emergency number. Never try to put a fire out yourself, and never throw water on one.
+- If anyone swallows a magnet, a battery, or anything from a lesson, tell an adult at once and get medical help straight away. Do not wait to see if they feel ill.
+- Stopping, taking a break, or swapping to the other path is never failing.
+
+### Never, in any lesson
+
+- Never mix cleaning products together, and never use them in a lesson at all. Cleaning products are not science materials.
+- Never plug anything into a wall socket for a lesson. Small batteries only, and only the ones the lesson names.
+- Never put a lid, a cap, or a knot on anything that is bubbling, fizzing, rising, or warm. It has to stay open.
+- If a bottle says flammable, it stays shut and you tell an adult. No lesson asks you to open one.
+- No lesson ever uses fire. If a step looks like it needs a flame, stop and tell an adult, because it is the wrong step.
+- You never light anything for a lesson - no match, no lighter, no candle, no camping stove - and you never turn on the cooker, the oven, or a burner for one either, even with an adult there. If a step looks like it needs fire or heat from a flame, stop and tell an adult, because it is the wrong step.
+- Never cut or break open a sealed packet - a cold pack, a hand warmer, a glow stick, or a smoke alarm. What is inside can hurt you.
+- Never look at the sun. Not with your eyes, and not through glass, a lens, a mirror, or a camera. Not even for a second.
+- You never have to send a photo, a video, or a recording of your voice to finish a lesson. Writing it or saying it is always enough.
+- No lesson asks for your weight, your height, your heartbeat, or anything about your health.
+- Never write down a number you did not really measure. If you did not do it, say so - that is always the right answer.
+
+**Clearing up.** Put everything back where it came from, wash your hands, and throw away only ordinary household waste. Nothing in this lesson may be poured into a drain unless it is plain water, and nothing is left sealed, warm, connected, or unaccounted for.
+
+**Stopping is allowed.** A pause, a break, or a switch to the alternative path is never treated as failure and never lowers your score. The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
+### What is recorded about you
+
+- Records the learning target, completion state, evidence type, and next step only.
+- Stores no raw reflection text, no free-text answers, no photograph, no video, and no voice recording.
+- Requires no camera or video proof of any activity.
+- Collects no learner body measurement, health measurement, or medical information.
+- Requires no account creation, purchase, or disclosure of the family's location.
+
+### For the adult, before the session
+
+Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
+
+## Your data sheet
+
+_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+
+**The task.** Learner completes a new application of comparing parents and offspring and records both the result and the reasoning, evidence, process, or design choice that produced it.
+
+**Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
+
+> 
+
+### Record as you go
+
+_Fill these in as you go, not from memory afterwards. A trial that went wrong is written down and explained, never erased._
+
+| Step | My work | The evidence or reasoning behind it |
+| --- | --- | --- |
+|   |   |   |
+|   |   |   |
+|   |   |   |
+
+### Where each value came from
+
+_One line for every value you did not measure yourself. Origin is measured, calculated, or SUPPLIED. A supplied value with no source line earns no credit._
+
+| Quantity | Origin (measured / calculated / SUPPLIED) | Source name | Publisher | Date retrieved | Where found |
+| --- | --- | --- | --- | --- | --- |
+|   |   |   |   |   |   |
+|   |   |   |   |   |   |
+
+**What can this work not show, even done perfectly? Write it as something about the method, not about you.**
+
+> 
+
+
+**What did you check, what did you change, and what is your next step? In one concise response, show or explain the most important idea about comparing parents and offspring; then identify one check that would catch an error or weak claim.**
+
+> 
+
+
+## If you are not doing the hands-on activity
+
+### Path A — the alternative activity (same credit)
+
+Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
+_About the supplied or provided material named above: this package prints none of it. Supplied means a published table, data set, diagram, sequence, case study, observation log, or reference image that an adult retrieves and that you name on the provenance line. Nothing printed here is a record of an observation, so nothing here can be mistaken for yours._
+
+**Do this instead — the whole lesson on paper:** On paper, plan the whole investigation about comparing parents and offspring without doing it: write your question, the one thing you would change, what you would keep the same, and what you would measure or watch for. Then write what you think would happen and why you think that. Answer every analysis question below from your plan and your reasoning. If an adult can find you a book, a table, or a chart about comparing parents and offspring, use it and write down where it came from on the provenance line. Leave the record table empty — you did not measure anything, and saying so is the right answer.
+
+_The curriculum source for these grades names one text-only path for every lesson rather than a lesson-specific activity, so the concrete task above is built from this lesson's own question, focus, and success criteria. A named, lesson-specific alternative for each elementary and middle-grade investigation is an open curriculum-authoring gap, recorded in reports/open-gaps.md._
+
+- No special equipment, no purchase, and no account.
+- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
+- No camera, photograph, video, or voice recording is required as evidence.
+- No private disclosure about the learner, the family, the home, or its location.
+
+The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
+
+### Path B — work from supplied data (same credit)
+
+You can complete this lesson's analysis without performing the activity, for the same credit.
+
+Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
+
+_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
+
+For every supplied value, record all of this:
+
+- Source name
+- Publisher or author
+- Date you retrieved it
+- Where in the source the value appears
+
+Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
+## Analysis questions
+
+Answer every question. Write in the space under each one.
+
+**Q1.** Work the practice items on comparing parents and offspring. On the first one you may use the steps in front of you. On the last one, cover the steps and do it from memory. Then say what was different about doing it without help.
+
+> 
+
+**Q2.** Show what you found about comparing parents and offspring in the clearest way for this task — a labelled drawing, a table, a written explanation, or the steps you followed. Then say why you picked that way instead of just writing one sentence.
+
+> 
+
+**Q3.** Find one place where you checked your work about comparing parents and offspring and changed something. Write what you changed, what made you notice it, and why the new version is better — not just different.
+
+> 
+
+**Q4.** Answer the big question for this unit in two or three sentences, using comparing parents and offspring as your example: How can understanding inherited traits and variation help us explain, decide, create, or solve something that matters?
+
+> 
+
+**Q5.** Which one piece of evidence in your record best supports what you decided about comparing parents and offspring? Say what makes it good evidence, and name one thing that would make it even stronger.
+
+> 
+
+**Q6.** Name one thing your work on comparing parents and offspring cannot tell you, even if you did everything carefully. Then say what someone would have to do differently to find that out.
+
+> 
+
+**Q7.** Go through every number and observation in your record. For each one, write where it came from: you measured it, you worked it out, or it was given to you. Anything given to you is marked SUPPLIED with the name of the source and the date you looked it up.
+
+> 
+
+## How this is scored
+
+| Criterion | Not yet | Approaching | Meets | Exceeds |
+| --- | --- | --- | --- | --- |
+| Scientific correctness | A factual statement contradicts an established relationship or a fixed fact in this lesson's topic content key, or restates one of that key's disqualifying errors as established science. | Consistent with the topic content key overall, but one statement is wrong, or is claimed more strongly than the evidence allows. | Every factual statement is consistent with the topic content key, in whatever wording the learner chose, including any of the key's accepted alternative framings. | Correct, and the learner separates what this lesson establishes from what it only suggests. |
+| Task completion and internal consistency | The central task is unfinished, or the reported result contradicts the learner's own record. | The task is finished but part of the result is unsupported or inconsistent. | The central task is complete and the result follows from the learner's own record. | Complete and accurate, and the learner anticipates a case the task did not ask about. |
+| Evidence and reasoning | Claims appear with no evidence, or evidence appears with no claim attached. | Some claims are tied to evidence; others are asserted. | Every claim is tied to a named measurement, model feature, documented step, or source. | Evidence is weighed as well as cited — the learner says which evidence is stronger and why. |
+| Data honesty and provenance | Values appear that the learner did not measure and did not attribute, or a result is reported for work that was not done. | Most values are attributed; at least one origin is unclear. | Every value is labelled measured, calculated, or SUPPLIED, and every supplied value names its source and retrieval date. | Provenance is complete and the learner comments on how the source's own limits affect the conclusion. |
+| Checking and revision | No check is recorded, or the check is asserted without saying what it would catch. | A check is recorded but the revision is not explained. | A specific check, a specific change, and a reason the change is an improvement are all recorded. | The learner names the next check they would run and what result would make them change their mind. |
+
+A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
+**You have met the target when:**
+
+- The learner completes the central task about comparing parents and offspring.
+- The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.
+- The learner checks or revises the work and can identify a next step.
+
+## If you get stuck
+
+- Go back to the one thing you already know that this builds on, and say it out loud before you try again.
+- Redo one supported example with the steps in front of you, then try a fresh one with the steps covered.
+- If the hands-on path is the sticking point, switch to the alternative path. It is the same credit and it is not a retreat.
+- Say which step you are stuck on, not just that you are stuck. The step is the thing that gets reteaching.
+
+## Going further (optional)
+
+- Apply comparing parents and offspring under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work.
+- Connect comparing parents and offspring to inherited traits from this unit: state one thing that must be true of both, and one case where treating them the same would mislead you.
+- Take the unit's performance task — Analyze a provided trait data set, then explain with evidence which traits are inherited and which are influenced by the environment. — and write the one measurement or piece of evidence that would most change its outcome, then say why.
+
+_Extension never means completing another learner's graded work, and never means attempting anything the safety brief excludes._
+
+---
+
+_Package `swp-ma-g3-science-u05-l03` · lesson `ma-g3-science-u05-l03` · built from `g34-committed` at `4c6ca4e`. No observation, measurement, or expected result is supplied anywhere in this sheet._

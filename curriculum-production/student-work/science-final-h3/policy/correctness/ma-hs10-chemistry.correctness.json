@@ -1,0 +1,1062 @@
+{
+  "course_id": "ma-hs10-chemistry",
+  "source_commit": "e7551b959112fcd9e6868d614799028cf22acf5d",
+  "repinned_from": "265ea3a75740ccbeea0dfa02c723514779def052",
+  "repin_basis": "Repinned from H2 to H3 without re-authoring. Every field these keys are keyed on and authored against - unit_ref, focus, phase, title, essential_question, learning_objectives, success_criteria - is byte-identical across all 108 lessons of this course between 265ea3a and e7551b9; H3 changed only materials, lesson_flow, safety_privacy, extensions, and guardian_visibility_note. The check 'correctness-keys-repinned-on-identical-topic-basis' re-derives that comparison from both pinned commits and fails if it ever stops holding.",
+  "authored_against": "High School Chemistry, Grade 10. Keys state established science at this course level; they are not extracted from the source, which states a focus and generic objectives.",
+  "topics": [
+    {
+      "unit": 1,
+      "focus": "physical and chemical properties",
+      "fixed_facts": [
+        "A physical property can be measured without changing the substance's identity; a chemical property describes how it changes into a different substance."
+      ],
+      "relationships": [
+        "Physical properties include colour, state, melting and boiling point, density, hardness, and solubility; chemical properties include flammability, reactivity with acid, and resistance to corrosion.",
+        "Intensive properties do not depend on the amount of sample and can therefore identify a substance; extensive properties such as mass and volume cannot.",
+        "Observing a chemical property necessarily changes the sample, which is why chemical tests are destructive."
+      ],
+      "accepted_alternative_framings": [
+        "Intensive and extensive, or amount-independent and amount-dependent, are equivalent framings."
+      ],
+      "disqualifying_errors": [
+        "Using mass or volume as an identifying property of a substance.",
+        "Claiming flammability can be assessed without any change occurring.",
+        "Claiming a change of state produces a chemically different substance."
+      ],
+      "out_of_scope": "Spectroscopic identification and thermodynamic property tables are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "measurement, precision, and significant figures",
+      "fixed_facts": [
+        "The number of significant figures reported must reflect the precision of the instrument used."
+      ],
+      "relationships": [
+        "A measurement is recorded to the smallest division of the instrument plus one estimated digit.",
+        "Precision describes how closely repeated measurements agree; accuracy describes how close they are to the accepted value, and the two are independent.",
+        "Calculations cannot create precision: a result is reported to no more significant figures than the least precise input allows."
+      ],
+      "accepted_alternative_framings": [
+        "Reporting a value with an explicit uncertainty, or with significant figures alone, are both acceptable provided the precision claimed is real."
+      ],
+      "disqualifying_errors": [
+        "Reporting a calculated result to more significant figures than the measurements support.",
+        "Treating precision and accuracy as the same property.",
+        "Claiming a measurement is accurate because repeated trials agreed closely."
+      ],
+      "out_of_scope": "Formal error propagation and statistical uncertainty analysis are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "uncertainty and repeated trials",
+      "fixed_facts": [],
+      "relationships": [
+        "Repeated trials estimate random uncertainty; they do not detect or remove systematic error.",
+        "A systematic error shifts every trial in the same direction, so tightly agreeing results can still all be wrong.",
+        "A reported result states the number of trials and the spread among them, or a reader cannot judge it."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the two error types as random and systematic, or as scatter and bias, are equivalent."
+      ],
+      "disqualifying_errors": [
+        "Claiming repeated trials eliminate systematic error.",
+        "Discarding an outlying trial without recording that it was discarded and why.",
+        "Reporting a mean with no indication of spread or number of trials."
+      ],
+      "out_of_scope": "Standard deviation, confidence intervals, and outlier tests are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "density and derived quantities",
+      "fixed_facts": [
+        "Density is mass divided by volume, and it is an intensive property: it does not change with the size of the sample."
+      ],
+      "relationships": [
+        "Density is a derived quantity, calculated from two measurements, so its uncertainty depends on both.",
+        "Because density is intensive, a small piece and a large piece of the same pure substance have the same density.",
+        "Density varies with temperature, because volume does, so a density value is quoted with the temperature it applies at."
+      ],
+      "accepted_alternative_framings": [
+        "Any consistent unit set is acceptable, provided mass and volume units are stated."
+      ],
+      "disqualifying_errors": [
+        "Claiming a larger sample of the same substance has a greater density.",
+        "Confusing density with mass, or treating a heavier object as necessarily denser.",
+        "Reporting a density with no units, or with units that are not mass over volume."
+      ],
+      "out_of_scope": "Thermal expansion coefficients and buoyancy calculations are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "separation of mixtures",
+      "fixed_facts": [
+        "Mixtures are separated by physical means that exploit differences in properties; the components of a compound are separated only by chemical change."
+      ],
+      "relationships": [
+        "Filtration exploits particle size, distillation exploits boiling point, chromatography exploits differing affinity, and evaporation exploits volatility.",
+        "Because a mixture's components keep their own properties, separation does not change the substances involved.",
+        "The choice of technique follows from which property differs most between the components."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a compound can be separated into its elements by filtration or distillation.",
+        "Claiming a homogeneous mixture is a pure substance because it looks uniform.",
+        "Claiming dissolving destroys the solute."
+      ],
+      "out_of_scope": "Chromatographic theory, fractional distillation column design, and separation efficiency are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "chemical safety and hazard reading",
+      "fixed_facts": [
+        "A safety data sheet states hazards, handling, storage, first aid, and disposal for a specific substance."
+      ],
+      "relationships": [
+        "Hazard information is specific to the substance and to its concentration and form; a dilute solution and a concentrated one are not interchangeable.",
+        "Hazard pictograms and hazard statements identify the type of hazard; the handling instructions state what to do about it.",
+        "Reading hazard information happens before the substance is handled, not after something goes wrong."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a household or naturally occurring substance is safe by virtue of being household or natural.",
+        "Applying hazard information for a concentrated substance to a dilute one, or the reverse, without saying so.",
+        "Claiming personal protective equipment removes a hazard rather than reducing exposure to it."
+      ],
+      "out_of_scope": "Regulatory classification systems and industrial exposure limits are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "subatomic structure and isotopes",
+      "fixed_facts": [
+        "The number of protons in the nucleus defines the element.",
+        "Isotopes of an element have the same number of protons and different numbers of neutrons."
+      ],
+      "relationships": [
+        "An atom has protons and neutrons in the nucleus and electrons outside it; protons are positive, electrons negative, neutrons uncharged.",
+        "Changing the neutron number gives a different isotope of the same element; changing the proton number gives a different element.",
+        "Nearly all of an atom's mass is in the nucleus, while nearly all of its volume is the region occupied by electrons."
+      ],
+      "accepted_alternative_framings": [
+        "Isotope notation by mass number, or by name and mass number, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming isotopes of an element differ in proton number.",
+        "Claiming an atom's identity is set by its electron count.",
+        "Claiming the mass of an atom is distributed evenly through its volume."
+      ],
+      "out_of_scope": "Nuclear binding energy calculations and quantum mechanical atomic models are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "electron arrangement and energy levels",
+      "fixed_facts": [
+        "Electrons occupy discrete energy levels; they do not have arbitrary intermediate energies."
+      ],
+      "relationships": [
+        "Electrons occupy energy levels around the nucleus, with lower levels filled before higher ones in the ground state.",
+        "An electron moves between levels only by absorbing or emitting exactly the energy difference between them, which is why atomic spectra consist of discrete lines.",
+        "The arrangement of electrons, particularly in the outermost level, determines how an atom bonds."
+      ],
+      "accepted_alternative_framings": [
+        "Shell diagrams, electron configuration notation, and orbital descriptions are all acceptable representations at this level."
+      ],
+      "disqualifying_errors": [
+        "Claiming electrons orbit the nucleus in fixed planetary paths at any energy.",
+        "Claiming an electron can absorb any amount of energy to move between levels.",
+        "Claiming inner electrons determine an atom's ordinary chemical bonding."
+      ],
+      "out_of_scope": "Quantum numbers, orbital shapes in detail, and spectroscopic term symbols are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "valence electrons",
+      "fixed_facts": [
+        "Valence electrons are the electrons in the outermost energy level, and they are the electrons involved in bonding."
+      ],
+      "relationships": [
+        "The number of valence electrons largely determines an element's chemical behaviour, which is why elements in the same main group behave similarly.",
+        "Atoms tend toward outer-electron arrangements resembling those of the noble gases, by transferring, sharing, or delocalising electrons.",
+        "For main-group elements the valence electron count follows from the group: groups 1 and 2 have one and two, and groups 13 to 18 have the group number minus ten, with helium the exception at two."
+      ],
+      "accepted_alternative_framings": [
+        "The octet rule and the noble-gas configuration description are equivalent framings; both have known exceptions."
+      ],
+      "disqualifying_errors": [
+        "Counting all of an atom's electrons as valence electrons.",
+        "Claiming the octet rule holds without exception.",
+        "Claiming atoms bond in order to satisfy a preference or a need of their own."
+      ],
+      "out_of_scope": "Transition metal electron configurations and hypervalency are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "periodic trends in atomic radius and ionization",
+      "fixed_facts": [
+        "Atomic radius generally decreases across a period from left to right and increases down a group.",
+        "First ionisation energy generally increases across a period from left to right and decreases down a group."
+      ],
+      "relationships": [
+        "Across a period, nuclear charge rises while electrons are added to the same energy level, so the outer electrons are pulled in more strongly.",
+        "Down a group, outer electrons occupy higher energy levels and are shielded by more inner electrons, so they are held less tightly.",
+        "The trends in radius and ionisation energy run in opposite directions because both follow from the same effective nuclear attraction."
+      ],
+      "accepted_alternative_framings": [
+        "Explaining the trends through effective nuclear charge, or through nuclear charge together with shielding and energy level, are equivalent."
+      ],
+      "disqualifying_errors": [
+        "Claiming atomic radius increases across a period from left to right.",
+        "Claiming ionisation energy increases down a group.",
+        "Claiming atoms get larger across a period because more electrons are added."
+      ],
+      "out_of_scope": "Slater's rules, quantitative effective nuclear charge, and irregularities in specific trends are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "reactivity patterns by group",
+      "fixed_facts": [
+        "Reactivity increases down group 1 and decreases down group 17.",
+        "Noble gases are very unreactive because their outer energy level is already full."
+      ],
+      "relationships": [
+        "Group 1 metals lose their single valence electron more readily further down the group, because that electron is held less tightly, so reactivity increases downward.",
+        "Group 17 elements gain an electron less readily further down the group, for the same reason, so reactivity decreases downward.",
+        "Similar valence electron arrangements are what make the elements of a group behave similarly."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the groups alkali metals, halogens, and noble gases, or by number, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming group 1 reactivity decreases down the group.",
+        "Claiming halogen reactivity increases down the group.",
+        "Claiming noble gases are unreactive because they have no electrons available."
+      ],
+      "out_of_scope": "Standard electrode potentials and transition metal reactivity series are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "the periodic table as a predictive model",
+      "fixed_facts": [
+        "The periodic table is arranged by increasing atomic number, and elements with similar properties fall in the same group."
+      ],
+      "relationships": [
+        "Because properties repeat with atomic number, the table predicts the behaviour of an element from its position.",
+        "The table's predictive power was demonstrated historically by successful predictions about elements not yet discovered.",
+        "The table is a model built on periodicity, and its predictions are approximate, with known exceptions."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the table is ordered by atomic mass rather than atomic number.",
+        "Claiming the table's predictions hold exactly with no exceptions.",
+        "Claiming position in the table causes an element's properties rather than reflecting its electron arrangement."
+      ],
+      "out_of_scope": "Relativistic effects on heavy element properties and superheavy element chemistry are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "ionic, covalent, and metallic bonding",
+      "fixed_facts": [
+        "Ionic bonding involves the transfer of electrons from one atom to another, producing oppositely charged ions held together by electrostatic attraction.",
+        "Covalent bonding involves the sharing of electron pairs between atoms.",
+        "Metallic bonding involves positive metal ions in a shared, delocalised sea of electrons."
+      ],
+      "relationships": [
+        "Ionic bonds typically form between a metal and a non-metal, where the difference in attraction for electrons is large enough for transfer.",
+        "Covalent bonds typically form between non-metals, and the sharing is equal only when the two atoms attract electrons equally; otherwise the bond is polar.",
+        "Metallic bonding leaves electrons free to move through the structure, which is what makes metals conduct and deform without shattering."
+      ],
+      "accepted_alternative_framings": [
+        "Describing bond character as a continuum from pure covalent through polar covalent to ionic is more accurate than three discrete boxes, and is fully acceptable."
+      ],
+      "disqualifying_errors": [
+        "Claiming ionic bonds form when atoms share electrons, equally or otherwise.",
+        "Claiming covalent bonds form by the transfer of electrons.",
+        "Claiming all covalent bonds share electrons equally, or that polar covalent bonds are ionic."
+      ],
+      "out_of_scope": "Molecular orbital theory, formal electronegativity cutoffs, and band theory are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "intermolecular forces",
+      "fixed_facts": [
+        "Intermolecular forces are attractions between molecules and are much weaker than the covalent bonds within a molecule."
+      ],
+      "relationships": [
+        "Intermolecular attractions include dispersion forces, which act between all molecules, dipole-dipole attractions between polar molecules, and hydrogen bonding where hydrogen is bonded to nitrogen, oxygen, or fluorine.",
+        "Boiling a molecular substance overcomes the forces between molecules, not the bonds within them.",
+        "Stronger intermolecular forces raise boiling point, raise viscosity, and lower vapour pressure."
+      ],
+      "accepted_alternative_framings": [
+        "London dispersion, van der Waals, and induced-dipole forces are acceptable names for the same interaction at this level."
+      ],
+      "disqualifying_errors": [
+        "Claiming boiling water breaks the covalent bonds within water molecules.",
+        "Claiming hydrogen bonds are covalent bonds involving hydrogen.",
+        "Claiming non-polar molecules experience no intermolecular attraction at all."
+      ],
+      "out_of_scope": "Quantitative interaction energies and polarisability calculations are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "bulk properties as evidence of particle forces",
+      "fixed_facts": [],
+      "relationships": [
+        "Bulk properties such as melting point, hardness, and volatility are evidence about the type and strength of the forces between particles.",
+        "Substances with strong three-dimensional networks of bonds, whether ionic or covalent network, have high melting points; molecular substances generally have low ones.",
+        "Reasoning runs from measured bulk property to inferred particle-level structure, and the inference is checked against other properties."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Inferring bonding type from a single bulk property and stating it as established.",
+        "Claiming a high melting point on its own establishes ionic bonding, when covalent network solids also have high melting points.",
+        "Attributing a bulk property such as ductility to an individual particle."
+      ],
+      "out_of_scope": "Crystallography and lattice energy calculations are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "conductivity, melting point, and solubility",
+      "fixed_facts": [
+        "Ionic compounds do not conduct as solids but do when molten or dissolved, because the ions become free to move.",
+        "Metals conduct in the solid state because their electrons are delocalised."
+      ],
+      "relationships": [
+        "Electrical conduction requires charged particles free to move: delocalised electrons in metals, mobile ions in molten or dissolved ionic compounds.",
+        "Melting point reflects the energy needed to overcome the forces holding particles in the solid structure.",
+        "Solubility reflects whether the attractions formed with the solvent compensate for the attractions broken in the solute and the solvent."
+      ],
+      "accepted_alternative_framings": [
+        "The heuristic that like dissolves like is acceptable, provided it is explained in terms of the attractions involved."
+      ],
+      "disqualifying_errors": [
+        "Claiming solid ionic compounds conduct electricity.",
+        "Claiming a substance that dissolves must therefore conduct.",
+        "Claiming molecular covalent substances conduct because they contain electrons."
+      ],
+      "out_of_scope": "Conductivity measurement theory, solubility product constants, and lattice enthalpy cycles are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "polymers and designed materials",
+      "fixed_facts": [
+        "A polymer is a large molecule built from many repeating monomer units joined by covalent bonds."
+      ],
+      "relationships": [
+        "A polymer's bulk properties follow from its monomer, its chain length, its branching, and the forces between chains.",
+        "Cross-linking between chains increases rigidity and reduces the ability to melt and flow.",
+        "Materials are designed by choosing structure to obtain properties, which is why structure-property reasoning is the core of materials design."
+      ],
+      "accepted_alternative_framings": [
+        "Addition and condensation polymerisation are both correct classifications where the lesson calls for them."
+      ],
+      "disqualifying_errors": [
+        "Claiming a polymer is a mixture of its monomers rather than a molecule built from them.",
+        "Claiming a polymer's properties depend only on which monomer it is made from.",
+        "Claiming synthetic materials are not chemically related to the natural resources they are made from."
+      ],
+      "out_of_scope": "Polymerisation kinetics, molecular weight distributions, and copolymer theory are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "communicating technical information",
+      "fixed_facts": [],
+      "relationships": [
+        "A technical explanation states the claim, the evidence, and the particle-level reasoning that connects them.",
+        "Chemical notation, diagrams, and prose each carry different information, and the choice is made for what needs to be shown.",
+        "An explanation states the limits of the evidence rather than presenting an inference as a measurement."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting an inferred structure as though it had been directly observed.",
+        "Using chemical notation that does not match the substance being described.",
+        "Stating a conclusion with more certainty than the evidence supports."
+      ],
+      "out_of_scope": "Formal technical writing standards and publication conventions are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "evidence of chemical change",
+      "fixed_facts": [],
+      "relationships": [
+        "A chemical change produces substances with different properties from the starting materials.",
+        "Indicators include gas evolution, unexplained temperature change, colour change, precipitate formation, light emission, and odour, each of which has non-chemical explanations too.",
+        "The strongest evidence is a measured change in an identifying property before and after."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating bubbling alone as proof of reaction, when boiling and dissolved gas release also produce bubbles.",
+        "Claiming dissolving is a chemical change.",
+        "Concluding a reaction occurred from one ambiguous observation with no control."
+      ],
+      "out_of_scope": "Instrumental analysis and reaction monitoring techniques are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "reaction types and patterns",
+      "fixed_facts": [
+        "Common reaction patterns include synthesis, decomposition, single replacement, double replacement, and combustion."
+      ],
+      "relationships": [
+        "Classifying a reaction by pattern supports predicting its products, because each pattern has a characteristic rearrangement.",
+        "The classification describes what happens to the atoms, not why the reaction is favourable.",
+        "Some reactions fit more than one pattern, and some fit none; the categories are a useful model rather than an exhaustive partition."
+      ],
+      "accepted_alternative_framings": [
+        "Combination and synthesis are the same category; single and double displacement and replacement are the same categories."
+      ],
+      "disqualifying_errors": [
+        "Predicting products by pattern while producing an equation in which atoms are not conserved.",
+        "Claiming classification by pattern establishes that a reaction will occur.",
+        "Claiming every reaction fits exactly one of the standard categories."
+      ],
+      "out_of_scope": "Reaction mechanisms, activity series in quantitative form, and organic reaction classification are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "outermost electron states in reactions",
+      "fixed_facts": [
+        "Chemical reactions involve rearrangement of outer electrons; nuclei are unchanged."
+      ],
+      "relationships": [
+        "In a chemical reaction, valence electrons are transferred, shared, or redistributed, and the nuclei retain their identity.",
+        "This is why elements are conserved in chemical reactions: no atom becomes an atom of a different element.",
+        "The stability of the resulting outer-electron arrangements is part of why some rearrangements are favourable."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming atoms of one element are converted into another element by a chemical reaction.",
+        "Claiming nuclear particles are rearranged during ordinary chemical reactions.",
+        "Claiming inner-shell electrons participate in ordinary chemical bonding."
+      ],
+      "out_of_scope": "Nuclear reactions belong to unit 9; orbital hybridisation is beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "oxidation and reduction basics",
+      "fixed_facts": [
+        "Oxidation is loss of electrons; reduction is gain of electrons.",
+        "Oxidation and reduction always occur together: electrons lost by one species are gained by another."
+      ],
+      "relationships": [
+        "In a redox reaction, the species oxidised is the reducing agent and the species reduced is the oxidising agent.",
+        "Because electrons are conserved, the electrons lost in the oxidation equal the electrons gained in the reduction.",
+        "Combustion, corrosion, and electrochemical cells are all redox processes."
+      ],
+      "accepted_alternative_framings": [
+        "The mnemonics for loss and gain of electrons, and descriptions in terms of oxidation number changes, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming oxidation is gain of electrons or reduction is loss of electrons.",
+        "Claiming oxidation can occur without a corresponding reduction.",
+        "Claiming oxidation requires the presence of oxygen."
+      ],
+      "out_of_scope": "Standard electrode potentials, Nernst equation, and balancing redox in acidic or basic solution are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "predicting products from periodic trends",
+      "fixed_facts": [],
+      "relationships": [
+        "Position in the periodic table indicates likely charges for main-group ions, and therefore likely formulas for the compounds formed.",
+        "A predicted product is a hypothesis to be checked against conservation of atoms, charge balance, and experimental evidence.",
+        "Trends give likely outcomes, not guarantees; exceptions exist and are part of the chemistry."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Predicting a compound whose formula does not balance charge.",
+        "Presenting a trend-based prediction as an established result with no verification.",
+        "Claiming a reaction must occur because the products would be reasonable."
+      ],
+      "out_of_scope": "Thermodynamic prediction of spontaneity and quantitative equilibrium prediction are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "writing and revising explanations",
+      "fixed_facts": [],
+      "relationships": [
+        "A chemical explanation connects observation to particle-level behaviour by explicit reasoning.",
+        "Revising an explanation means saying what evidence prompted the change and what the earlier version got wrong.",
+        "An explanation that accounts for the confirming evidence but not the disconfirming evidence is incomplete."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Revising an explanation to fit new evidence without saying what the earlier version failed to account for.",
+        "Presenting an explanation that ignores an observation that contradicts it.",
+        "Describing what was observed and calling it an explanation."
+      ],
+      "out_of_scope": "Philosophy of scientific explanation and formal model selection are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "conservation of atoms and mass",
+      "fixed_facts": [
+        "The number of atoms of each element is identical before and after a chemical reaction, so mass is conserved."
+      ],
+      "relationships": [
+        "Atoms are neither created nor destroyed in chemical reactions; they are rearranged among substances.",
+        "Conservation of atoms is the reason chemical equations must balance and the reason mass calculations work.",
+        "An apparent mass change in an open system means matter crossed the system boundary, most often as a gas."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming mass is lost during combustion without accounting for oxygen consumed and gases released.",
+        "Claiming atoms are created or destroyed in a chemical reaction.",
+        "Concluding that mass is not conserved from an open-container measurement."
+      ],
+      "out_of_scope": "Mass-energy equivalence, which does apply to nuclear reactions, is unit 9 work."
+    },
+    {
+      "unit": 5,
+      "focus": "balancing equations as bookkeeping",
+      "fixed_facts": [
+        "Balancing an equation is done by changing coefficients only; subscripts in a formula are never changed to make an equation balance."
+      ],
+      "relationships": [
+        "A balanced equation has the same number of atoms of each element on both sides, and the same total charge.",
+        "Coefficients represent relative numbers of particles or moles, and they scale the whole formula unit they precede.",
+        "Changing a subscript changes the substance, which is why balancing never alters subscripts."
+      ],
+      "accepted_alternative_framings": [
+        "Any set of coefficients in the correct ratio balances the equation; the lowest whole-number set is conventional but not the only correct answer."
+      ],
+      "disqualifying_errors": [
+        "Altering a subscript in a chemical formula in order to balance an equation.",
+        "Presenting an equation as balanced when the atom counts differ between sides.",
+        "Claiming coefficients represent masses rather than numbers of particles or moles."
+      ],
+      "out_of_scope": "Balancing redox half-reactions in solution and matrix methods are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "the mole as a counting unit",
+      "fixed_facts": [
+        "One mole contains Avogadro's number of particles, approximately 6.022 times ten to the twenty-third."
+      ],
+      "relationships": [
+        "The mole is a counting unit for particles, in the same way that a dozen is, chosen so that molar mass in grams matches atomic and formula mass.",
+        "A mole of any substance contains the same number of particles, but moles of different substances have different masses.",
+        "The particle counted must be specified, since a mole of oxygen atoms and a mole of oxygen molecules are different quantities."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a mole is a unit of mass.",
+        "Claiming a mole of every substance has the same mass.",
+        "Using a mole quantity without specifying whether atoms, molecules, or formula units are counted."
+      ],
+      "out_of_scope": "The current SI definition of the mole in terms of a fixed Avogadro constant is acceptable to state but not required."
+    },
+    {
+      "unit": 5,
+      "focus": "molar mass and formula mass",
+      "fixed_facts": [
+        "The molar mass of a substance in grams per mole is numerically equal to its formula or molecular mass in atomic mass units."
+      ],
+      "relationships": [
+        "Molar mass is calculated by summing the molar masses of the atoms in the formula, each multiplied by its subscript.",
+        "Molar mass converts between mass, which is measurable, and moles, which is what stoichiometry needs.",
+        "The molar mass of an element as listed on the periodic table is a weighted average across its natural isotopes."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Summing atomic masses without applying the subscripts in the formula.",
+        "Claiming the periodic table mass is the mass of a single specified isotope.",
+        "Reporting a molar mass without units, or with units other than mass per mole."
+      ],
+      "out_of_scope": "Mass spectrometry and precise isotopic abundance determination are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "limiting reactants",
+      "fixed_facts": [
+        "The limiting reactant is the one that runs out first and therefore determines how much product can form."
+      ],
+      "relationships": [
+        "The limiting reactant is identified by comparing available amounts in moles against the ratio the balanced equation requires, not by comparing masses.",
+        "Reactant left over when the reaction stops is in excess, and it does not increase the yield.",
+        "Theoretical yield follows from the limiting reactant; actual yield is measured and is normally lower."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Identifying the limiting reactant as the one present in the smallest mass without converting to moles.",
+        "Claiming adding more of the excess reactant increases the product yield.",
+        "Calculating theoretical yield from the excess reactant."
+      ],
+      "out_of_scope": "Percent yield error analysis and multi-step yield propagation are acceptable but not required."
+    },
+    {
+      "unit": 5,
+      "focus": "mathematical representations of reactions",
+      "fixed_facts": [],
+      "relationships": [
+        "A balanced equation is a mathematical statement about relative numbers of particles, and mole ratios are read directly from its coefficients.",
+        "Mass, moles, and particle count are related through molar mass and Avogadro's number, and calculations move between them in a stated order.",
+        "A calculated result carries the units and the precision of the measurements it came from."
+      ],
+      "accepted_alternative_framings": [
+        "Dimensional analysis and proportional reasoning both yield correct results and are equally acceptable."
+      ],
+      "disqualifying_errors": [
+        "Reading mole ratios from an unbalanced equation.",
+        "Applying coefficients as mass ratios rather than mole ratios.",
+        "Reporting a calculated result with more significant figures than the input measurements support."
+      ],
+      "out_of_scope": "Solution stoichiometry with concentration and gas law stoichiometry are acceptable but not required here."
+    },
+    {
+      "unit": 6,
+      "focus": "bond breaking and bond making",
+      "fixed_facts": [
+        "Breaking a chemical bond requires an input of energy; forming a chemical bond releases energy."
+      ],
+      "relationships": [
+        "Energy must be supplied to separate bonded atoms, because the bond exists precisely because the bonded state is lower in energy.",
+        "Energy is released when atoms come together to form a bond.",
+        "The overall energy change of a reaction is the difference between the energy required to break bonds and the energy released in forming them."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming breaking bonds releases energy.",
+        "Claiming forming bonds requires a net energy input.",
+        "Claiming a molecule such as ATP or glucose releases energy by having its bonds broken alone, with no account of the bonds formed."
+      ],
+      "out_of_scope": "Bond enthalpy tables and quantitative enthalpy calculations are acceptable but not required."
+    },
+    {
+      "unit": 6,
+      "focus": "exothermic and endothermic processes",
+      "fixed_facts": [
+        "An exothermic process releases energy to the surroundings; an endothermic process absorbs energy from them."
+      ],
+      "relationships": [
+        "In an exothermic reaction the products are lower in chemical energy than the reactants, and the difference is released to the surroundings.",
+        "In an endothermic reaction the products are higher in chemical energy, and the difference is absorbed from the surroundings.",
+        "The surroundings warming or cooling is the evidence; the reaction system itself is what is being classified."
+      ],
+      "accepted_alternative_framings": [
+        "Energy diagrams, enthalpy sign conventions, and plain descriptions of energy released or absorbed are all correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming an endothermic reaction produces cold rather than absorbing energy.",
+        "Claiming an exothermic reaction creates energy.",
+        "Confusing the reaction being exothermic with the reaction being fast or spontaneous."
+      ],
+      "out_of_scope": "Gibbs free energy and spontaneity criteria are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "total bond energy changes",
+      "fixed_facts": [],
+      "relationships": [
+        "The net energy change is the total energy needed to break all bonds in the reactants minus the total released in forming all bonds in the products.",
+        "If more energy is released in forming bonds than was required to break them, the reaction is exothermic; otherwise it is endothermic.",
+        "Bond energy values are averages across compounds, so calculations from them give estimates rather than exact results."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Computing an energy change from bond breaking alone, ignoring bond formation.",
+        "Reversing the sign convention so that bond breaking is treated as releasing energy.",
+        "Presenting an estimate from average bond energies as an exact measured value."
+      ],
+      "out_of_scope": "Hess's law cycles and calorimetric enthalpy determination are acceptable but not required."
+    },
+    {
+      "unit": 6,
+      "focus": "thermal energy transfer and equilibration",
+      "fixed_facts": [
+        "Thermal energy transfers spontaneously from the higher-temperature body to the lower-temperature one until they reach the same temperature."
+      ],
+      "relationships": [
+        "Two bodies in thermal contact exchange energy until their temperatures are equal, which is thermal equilibrium.",
+        "Temperature is a measure of average particle kinetic energy; total thermal energy also depends on the amount and the material.",
+        "The energy lost by one body equals the energy gained by the other and its surroundings; energy is conserved."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming cold flows from the cooler body into the warmer one.",
+        "Treating temperature and total thermal energy as the same quantity.",
+        "Claiming thermal energy moves spontaneously from a cooler body to a warmer one."
+      ],
+      "out_of_scope": "Specific heat calculations are acceptable but not required; entropy is treated qualitatively in this unit."
+    },
+    {
+      "unit": 6,
+      "focus": "computational energy models",
+      "fixed_facts": [],
+      "relationships": [
+        "A computational energy model represents the system's energy inputs, outputs, and stores, and it must balance.",
+        "The model's output depends on the assumptions and parameters entered, and both are stated with the result.",
+        "A model result is a prediction, and it is compared against measurement rather than substituted for it."
+      ],
+      "accepted_alternative_framings": [
+        "Spreadsheet, diagram, and equation-based models are all acceptable forms here."
+      ],
+      "disqualifying_errors": [
+        "Presenting model output as though it were experimental data.",
+        "Building an energy model whose inputs and outputs do not balance.",
+        "Reporting a model result without stating its assumptions."
+      ],
+      "out_of_scope": "Numerical methods and molecular simulation are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "the second law in everyday systems",
+      "fixed_facts": [
+        "Energy spontaneously disperses; concentrating it in a system requires energy input from elsewhere."
+      ],
+      "relationships": [
+        "Energy is conserved in every process, but its usefulness decreases as it disperses into the surroundings.",
+        "A refrigerator or heat pump moves thermal energy from cooler to warmer only because work is done on it, so the overall dispersal still increases.",
+        "This is why no device converts all energy input into useful output, and why perpetual motion machines are impossible."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the principle through entropy, through energy dispersal, or through the impossibility of a perfect engine are all correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming a device can be one hundred per cent efficient in converting energy to useful work.",
+        "Claiming the second law is violated by any local decrease in disorder, without accounting for the surroundings.",
+        "Confusing conservation of energy with conservation of useful energy."
+      ],
+      "out_of_scope": "Quantitative entropy calculation and statistical thermodynamics are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "collision model of reactions",
+      "fixed_facts": [
+        "For a reaction to occur, particles must collide with sufficient energy and in a suitable orientation."
+      ],
+      "relationships": [
+        "Reaction rate depends on how often effective collisions occur, where effective means both energetic enough and correctly oriented.",
+        "Activation energy is the minimum energy a collision must have to lead to reaction.",
+        "Anything that raises the frequency or the effectiveness of collisions raises the rate."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming every collision between reactant particles produces a reaction.",
+        "Claiming orientation is irrelevant provided the collision is energetic enough.",
+        "Confusing activation energy with the overall energy change of the reaction."
+      ],
+      "out_of_scope": "Rate laws, rate constants, and the Arrhenius equation are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "temperature and reaction rate",
+      "fixed_facts": [
+        "Raising the temperature increases reaction rate."
+      ],
+      "relationships": [
+        "Higher temperature increases the average kinetic energy of particles, so collisions are both more frequent and more often energetic enough to react.",
+        "The increase in the fraction of sufficiently energetic collisions is the larger of the two effects.",
+        "Temperature affects rate; it does not change whether a reaction is exothermic or endothermic."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming higher temperature works only by making collisions more frequent.",
+        "Claiming raising the temperature changes a reaction from endothermic to exothermic.",
+        "Claiming temperature has no effect on the rate of an exothermic reaction."
+      ],
+      "out_of_scope": "Arrhenius plots and quantitative temperature coefficients are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "concentration and reaction rate",
+      "fixed_facts": [
+        "Increasing the concentration of a reactant generally increases the reaction rate."
+      ],
+      "relationships": [
+        "Higher concentration means more reactant particles in a given volume, so collisions between them are more frequent.",
+        "Concentration affects collision frequency but not the energy of individual collisions.",
+        "For gases, increasing pressure by reducing volume has the same effect as increasing concentration."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming higher concentration increases the energy of each collision.",
+        "Claiming concentration changes the activation energy.",
+        "Claiming rate depends on the total amount of reactant rather than on its concentration."
+      ],
+      "out_of_scope": "Reaction order and rate law determination are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "surface area and mixing",
+      "fixed_facts": [
+        "Increasing the surface area of a solid reactant increases the reaction rate."
+      ],
+      "relationships": [
+        "A reaction involving a solid occurs at its surface, so subdividing the solid exposes more particles to collision.",
+        "Mixing brings reactants into contact and prevents local depletion, which is why stirring can raise the rate in solution.",
+        "Surface area and mixing affect how often reactant particles meet, not the energy of the collisions."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the mass of a solid, rather than its exposed surface area, sets the rate for a surface reaction.",
+        "Claiming subdividing a solid changes its chemical properties.",
+        "Claiming stirring changes the activation energy."
+      ],
+      "out_of_scope": "Diffusion-limited kinetics and surface chemistry are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "catalysts",
+      "fixed_facts": [
+        "A catalyst increases reaction rate by providing a pathway with lower activation energy, and it is not consumed by the reaction."
+      ],
+      "relationships": [
+        "A catalyst lowers the activation energy, so a larger fraction of collisions is effective at any given temperature.",
+        "A catalyst does not change the overall energy change of the reaction or the position of equilibrium; it speeds the forward and reverse directions equally.",
+        "Enzymes are biological catalysts and follow the same principles."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a catalyst is consumed by the reaction it catalyses.",
+        "Claiming a catalyst increases the yield or shifts the equilibrium position.",
+        "Claiming a catalyst supplies the activation energy rather than lowering it."
+      ],
+      "out_of_scope": "Catalytic mechanisms, turnover number, and heterogeneous catalysis theory are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "explaining rate with scientific principles",
+      "fixed_facts": [],
+      "relationships": [
+        "A rate explanation identifies which factor was changed and connects it to collision frequency, collision energy, or activation energy.",
+        "Naming the factor is description; connecting it to the collision model is explanation.",
+        "An explanation is tested by whether it also predicts what happens when the factor is changed the other way."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Attributing a rate change to a factor without identifying the mechanism it acts through.",
+        "Attributing a rate increase to lowered activation energy when the factor changed was temperature or concentration.",
+        "Claiming a factor speeds a reaction because it makes the reaction more favourable energetically."
+      ],
+      "out_of_scope": "Quantitative kinetics and mechanism determination are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "reversible reactions",
+      "fixed_facts": [
+        "A reversible reaction proceeds in both directions, and reactants are never completely converted to products in a closed system."
+      ],
+      "relationships": [
+        "In a reversible reaction the products re-form the reactants as well as the reverse, so both are present at all times.",
+        "The double arrow notation states that both directions occur under the same conditions.",
+        "Reversibility is a property of the reaction under the stated conditions, not a claim that it can be undone by any means."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a reversible reaction goes to completion in a closed system.",
+        "Claiming the reverse reaction begins only after the forward reaction has finished.",
+        "Claiming reversibility means the reaction produces no net change ever."
+      ],
+      "out_of_scope": "Equilibrium constant expressions and quantitative equilibrium calculation are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "dynamic equilibrium",
+      "fixed_facts": [
+        "At equilibrium the forward and reverse reaction rates are equal, so concentrations remain constant while both reactions continue."
+      ],
+      "relationships": [
+        "Equilibrium is dynamic: both reactions continue at equal rates, and the system is not static.",
+        "Equal rates do not mean equal concentrations; the concentrations at equilibrium depend on the reaction.",
+        "Equilibrium is reached only in a closed system, since an open one loses products or reactants."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming reactions stop at equilibrium.",
+        "Claiming equilibrium means equal concentrations of reactants and products.",
+        "Claiming an open system with material escaping can reach equilibrium."
+      ],
+      "out_of_scope": "Equilibrium constants, reaction quotients, and equilibrium calculations are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "stress and system response",
+      "fixed_facts": [
+        "A system at equilibrium responds to a change in conditions by shifting in the direction that partially counteracts that change."
+      ],
+      "relationships": [
+        "Changing concentration, pressure, or temperature disturbs the balance of forward and reverse rates, and the system shifts until they are equal again.",
+        "The shift partially offsets the change; it does not restore the original conditions.",
+        "Temperature is the only one of these changes that alters the equilibrium position by changing the balance of the reaction's own energetics rather than by changing amounts."
+      ],
+      "accepted_alternative_framings": [
+        "Naming this Le Chatelier's principle, or describing the response without the name, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming the system returns exactly to its original conditions after a disturbance.",
+        "Claiming a catalyst shifts the position of equilibrium.",
+        "Claiming adding an inert gas at constant volume shifts a gas-phase equilibrium."
+      ],
+      "out_of_scope": "Quantitative prediction of the new equilibrium position is beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "shifting equilibrium by changing conditions",
+      "fixed_facts": [
+        "Increasing the concentration of a reactant shifts the equilibrium toward products; increasing pressure on a gas-phase equilibrium shifts it toward the side with fewer gas particles."
+      ],
+      "relationships": [
+        "Adding a substance shifts the system away from that substance; removing one shifts it toward that substance.",
+        "For gas-phase equilibria, raising pressure by reducing volume favours the side with fewer moles of gas.",
+        "Raising temperature favours the endothermic direction; lowering it favours the exothermic direction."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming raising temperature always increases product yield regardless of the reaction's energetics.",
+        "Claiming pressure changes shift an equilibrium with equal moles of gas on both sides.",
+        "Claiming a catalyst changes the yield at equilibrium."
+      ],
+      "out_of_scope": "Van't Hoff analysis and quantitative yield prediction are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "yield and industrial trade-offs",
+      "fixed_facts": [],
+      "relationships": [
+        "Industrial conditions balance equilibrium yield against reaction rate, energy cost, equipment limits, and safety.",
+        "Conditions that maximise yield often reduce rate, and the chosen compromise is not the maximum of either.",
+        "Recycling unreacted material raises overall conversion without changing the equilibrium position."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming industrial conditions are chosen to maximise equilibrium yield alone.",
+        "Claiming a catalyst is used to increase the yield rather than the rate.",
+        "Presenting a set of conditions as optimal with no criteria or constraints stated."
+      ],
+      "out_of_scope": "Process engineering economics and reactor design are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "refining a chemical system design",
+      "fixed_facts": [],
+      "relationships": [
+        "Refining a chemical system means changing one condition at a time and measuring the effect against stated criteria.",
+        "A change that improves one criterion commonly worsens another, and the trade-off is reported.",
+        "Safety and waste constraints bound the design space and are not traded for yield or rate."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Changing several conditions at once and attributing the improvement to one.",
+        "Reporting a design as improved without measuring against the stated criteria.",
+        "Trading a safety or waste constraint for better yield."
+      ],
+      "out_of_scope": "Formal process optimisation and life-cycle assessment are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "nuclear composition and isotopes",
+      "fixed_facts": [
+        "The atomic number is the number of protons and identifies the element; the mass number is the total number of protons and neutrons."
+      ],
+      "relationships": [
+        "Isotopes of an element share the proton number and differ in neutron number, and therefore in mass number.",
+        "Isotopes of an element have essentially identical chemical behaviour, because chemistry depends on electrons, while their nuclear stability can differ greatly.",
+        "The mass listed on the periodic table is a weighted average over an element's naturally occurring isotopes."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming isotopes of an element differ chemically in a substantial way.",
+        "Claiming the mass number is the mass in grams.",
+        "Claiming an element's isotopes have different proton numbers."
+      ],
+      "out_of_scope": "Nuclear shell models and binding energy per nucleon curves are acceptable to reference but not required."
+    },
+    {
+      "unit": 9,
+      "focus": "radioactive decay and half-life",
+      "fixed_facts": [
+        "Half-life is the time for half of the nuclei in a sample to decay, and it is unaffected by temperature, pressure, or chemical combination.",
+        "Alpha decay reduces the atomic number by two and the mass number by four; beta-minus decay increases the atomic number by one and leaves the mass number unchanged."
+      ],
+      "relationships": [
+        "Radioactive decay is a nuclear process, so it changes the element, unlike chemical reactions.",
+        "Decay of an individual nucleus is random, while the behaviour of a large sample follows a predictable exponential pattern.",
+        "Half-life is a constant for a given nuclide and does not depend on how much of the sample remains."
+      ],
+      "accepted_alternative_framings": [
+        "Decay described by half-life, or by fraction remaining after a number of half-lives, are equivalent."
+      ],
+      "disqualifying_errors": [
+        "Claiming half-life can be changed by heating, cooling, or chemically combining the substance.",
+        "Claiming a sample is completely gone after two half-lives.",
+        "Claiming radioactive decay is a chemical reaction involving electrons."
+      ],
+      "out_of_scope": "Decay constants, activity units, and dosimetry are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "fission",
+      "fixed_facts": [
+        "Fission is the splitting of a heavy nucleus into lighter nuclei, releasing energy and typically neutrons."
+      ],
+      "relationships": [
+        "Fission of a heavy nucleus releases energy because the products are more tightly bound per nucleon than the original nucleus.",
+        "Released neutrons can induce further fissions, which is the basis of a chain reaction.",
+        "Control of a fission reactor works by controlling the number of neutrons available to induce further fission."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming fission is the combining of nuclei.",
+        "Claiming fission energy comes from breaking chemical bonds.",
+        "Claiming a reactor's fuel can undergo a nuclear explosion in the manner of a weapon."
+      ],
+      "out_of_scope": "Reactor engineering, cross sections, and criticality calculations are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "fusion",
+      "fixed_facts": [
+        "Fusion is the combining of light nuclei into a heavier nucleus, releasing energy.",
+        "Fusion powers the Sun and other stars."
+      ],
+      "relationships": [
+        "Fusion releases energy because the product nucleus is more tightly bound per nucleon than the light nuclei that formed it.",
+        "Fusion requires extremely high temperature and pressure, because positively charged nuclei repel each other strongly at short range.",
+        "That requirement is why sustained controlled fusion for power generation remains an engineering problem."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming fusion is the splitting of nuclei.",
+        "Claiming fusion occurs readily at ordinary temperatures.",
+        "Claiming the Sun is powered by chemical combustion."
+      ],
+      "out_of_scope": "Plasma physics and confinement approaches are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "mass-energy and nuclear energy scale",
+      "fixed_facts": [
+        "In nuclear reactions a small amount of mass is converted to energy, following the mass-energy relationship, which is why nuclear energy release is millions of times larger per event than chemical energy release."
+      ],
+      "relationships": [
+        "The energy released in a nuclear reaction corresponds to the mass difference between the initial and final nuclei.",
+        "Chemical reactions rearrange electrons and involve mass changes far too small to measure; nuclear reactions do not.",
+        "This difference in scale is why a small mass of nuclear fuel yields energy comparable to a very large mass of chemical fuel."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming mass is conserved exactly in nuclear reactions in the same way it is in chemical ones.",
+        "Claiming chemical and nuclear energy releases are of comparable magnitude per reaction.",
+        "Claiming nuclear energy comes from breaking bonds between atoms."
+      ],
+      "out_of_scope": "Relativistic mechanics and binding energy computation are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "criteria, constraints, and trade-offs in chemical engineering",
+      "fixed_facts": [],
+      "relationships": [
+        "A chemical engineering design is evaluated against stated criteria such as yield, rate, cost, and energy demand, within constraints of safety, waste, and regulation.",
+        "Improving one criterion usually costs something on another, and the design states which trade-off was accepted and why.",
+        "Waste streams and end-of-life handling are part of the design, not a consequence to be addressed afterwards."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a design as optimal on every criterion simultaneously.",
+        "Omitting waste or safety from the evaluation.",
+        "Declaring a design successful with no criteria stated to judge it against."
+      ],
+      "out_of_scope": "Process economics, regulatory compliance procedure, and formal life-cycle assessment are beyond this course."
+    }
+  ]
+}
