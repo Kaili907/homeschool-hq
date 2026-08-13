@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u04-l01",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Housing and Living Arrangements",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: comparing housing options on total cost and fit"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners compare three provided fictional housing options on total monthly cost and personal fit, so they practice the actual mechanics of a housing decision (adding up every cost that recurs, not just the sticker rent number) before ever making one for real.",
+  "scenario": "Three fictional housing options are provided for a person about to live independently for the first time. Riverside Studio: a studio apartment, rent $850 per month, water included, tenant covers electricity and internet (roughly $95 combined), no roommates, a 25-minute bus ride from most jobs and services. Maple House Share: a room in a shared house with two housemates, rent $520 per month plus a $60 per month share of house utilities, common areas furnished, a 10-minute walk from most jobs and services, but shared kitchen and bathroom schedules. Campus Suites: a shared two-person suite in an on-campus-style residence, $780 per month covering rent, utilities, and wifi, a 5-minute walk from most jobs and services, but the roommate is assigned rather than chosen. The learner works out the true total monthly cost of each option and weighs that against personal fit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All three housing options and their costs are fictional and provided for this lesson; the learner does not need to research or disclose any real housing situation to complete it."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the three provided fictional housing options", "paper or notes app for the comparison table"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before looking at the numbers, name what would matter most to you.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Before looking at the numbers, what single feature of a living situation (cost, privacy, location, or who you live with) would matter most to you right now, and why?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each of the three options, add up every recurring monthly cost listed (not just the rent number) to find its true total monthly cost.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I calculated Riverside Studio's total monthly cost, including electricity and internet." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I calculated Maple House Share's total monthly cost, including the shared utilities amount." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I calculated Campus Suites' total monthly cost." },
+        { "ref": "t2-p4", "promptType": "extended-response", "text": "Write all three total monthly costs and show how you got each number." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Use your comparison to recommend one option and justify it with specifics.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Recommend one of the three options and justify your recommendation using at least two specific numbers or features from the comparison, not just a general impression." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your final recommendation to your warm-up priority.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Did your final recommendation match the priority you named in the warm-up? If not, what changed your mind?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's total monthly cost only restates the listed rent figure and ignores utilities or shared costs, reteach by modeling one option's total step by step on paper (rent, then each additional recurring cost, then the sum), then have the learner redo the other two totals using that same three-step method.",
+  "extension": "Add a fourth fictional option with a cost the other three don't have (for example, a mandatory parking fee or a utility cap that triggers an extra charge above a certain usage) and have the learner redo the comparison with all four options.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

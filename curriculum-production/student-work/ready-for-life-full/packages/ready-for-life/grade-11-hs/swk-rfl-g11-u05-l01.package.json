@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u05-l01",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Problem Solving Under Constraint",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: defining the actual problem before solving it"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read a fictional scenario where the stated problem is not the actual underlying problem, use provided evidence to identify the difference between symptom and root problem, and write a root-problem statement before proposing any solution, so they practice slowing down before jumping to a fix.",
+  "scenario": "The learner reads a provided fictional scenario in which a character in charge of a shared resource is told 'the problem' is that people are careless or don't care, and works through a short set of clues to determine what is actually causing the pattern, before any solution is suggested.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The scenario is fictional and does not require the learner to name or diagnose any real person or group they know."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional scenario and clue list", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before looking at the clues, write down what the stated problem is pushing you toward.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Based only on the stated problem ('people keep losing tools'), what is the first fix you would reach for?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read each clue in the provided evidence list and sort it as either supporting the stated problem (carelessness) or pointing to a different cause.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I sorted each clue as either supporting carelessness or pointing to a different cause." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I can name at least one clue that does not fit the carelessness explanation." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write a root-problem statement that is different from the stated problem, and that could account for the clues you sorted.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write one to two sentences describing the actual root problem, and explain why the original stated problem ('carelessness') does not fully explain the clues." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Consider why the character's first instinct was to solve the stated problem instead of the real one.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What made the stated problem ('carelessness') easy to believe, even though it wasn't the whole picture? What question would have caught this sooner?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's root-problem statement simply restates the stated problem in different words (e.g. 'people need to be more careful'), reteach by having the learner circle the two clues that most contradict the carelessness explanation and requiring a root-problem statement that explicitly accounts for both circled clues.",
+  "extension": "Have the learner list one additional clue that, if it turned up, would make them doubt their own root-problem statement, and explain what they would do to check it.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u05-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u05-l01",
+    "authoredBy": "manual"
+  }
+}

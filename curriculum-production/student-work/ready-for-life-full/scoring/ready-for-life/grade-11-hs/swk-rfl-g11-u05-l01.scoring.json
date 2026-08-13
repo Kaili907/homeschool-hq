@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l01",
+  "lessonId": "ma-g11-ready-for-life-u05-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Evidence sorting accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Clues are sorted without clear reasoning, or all clues are forced to fit the stated problem." },
+          { "label": "Proficient", "descriptor": "Clues are sorted correctly into supporting vs. not-supporting the stated problem, with reasoning given." },
+          { "label": "Advanced", "descriptor": "Sorting explicitly notes which clues would be hard to explain if the stated problem were fully true." }
+        ]
+      },
+      {
+        "dimension": "Root-problem statement quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Statement restates the stated problem in different words." },
+          { "label": "Proficient", "descriptor": "Statement names a distinct root problem that accounts for the clues." },
+          { "label": "Advanced", "descriptor": "Statement explains why the original stated problem doesn't fully explain the clues, referencing specific evidence." }
+        ]
+      },
+      {
+        "dimension": "Reflection on jumping to solutions",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection doesn't explain why the stated problem was easy to believe." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific reason the stated problem seemed believable." },
+          { "label": "Advanced", "descriptor": "Reflection proposes a specific question that would have caught the real problem sooner." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The root-problem statement is different from the stated problem, not a rewording of it.",
+      "Reasoning references specific clues from the evidence list, not general impressions.",
+      "The reflection names a concrete question or check, not just 'be more careful next time.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

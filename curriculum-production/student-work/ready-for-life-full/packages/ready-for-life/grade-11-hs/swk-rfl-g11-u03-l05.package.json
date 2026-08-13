@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u03-l05",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Health and Wellness Self-Management",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: recognising when to seek help urgently"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Given a set of fictional situations, learners practice sorting each one into the right urgency category and stating the correct next step, building the judgment skill of triage using specific signs rather than general impressions, without ever needing a real emergency to practice on.",
+  "scenario": "The learner is given five fictional situations, each describing a different physical concern with different severity and timing. For each, the learner decides which urgency category it belongs in and writes the specific next step a person in that situation should take, practicing the decision-making pattern on situations that are not the learner's own.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All five situations are fictional and provided in this lesson; no real personal concern of the learner's own is required or requested anywhere in this task.",
+    "If a learner has a real concern while completing this lesson, they should raise it separately with a trusted adult rather than substituting it into this assignment."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or notes app", "the five provided fictional situations"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before working through the situations below, write down what you currently use to decide whether something needs attention right away versus can wait.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What rule or gut feeling do you currently use to decide whether something needs attention right away versus can wait -- even if you're not fully confident in it?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each fictional situation below, choose the urgency category that fits best.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-choice", "text": "Situation A: A person suddenly can't lift one arm all the way and the corner of their mouth is drooping on one side; it started a few minutes ago.", "choices": ["Seek urgent care right away", "Contact a professional soon, within a day or two", "Manage at home and monitor for now"] },
+        { "ref": "t2-p2", "promptType": "fixed-choice", "text": "Situation B: A person has had a mild, dull headache for a few hours after a long day of screen time, with no other symptoms.", "choices": ["Seek urgent care right away", "Contact a professional soon, within a day or two", "Manage at home and monitor for now"] },
+        { "ref": "t2-p3", "promptType": "fixed-choice", "text": "Situation C: A person cut their hand on a kitchen knife and the bleeding hasn't slowed after ten minutes of firm, direct pressure.", "choices": ["Seek urgent care right away", "Contact a professional soon, within a day or two", "Manage at home and monitor for now"] },
+        { "ref": "t2-p4", "promptType": "fixed-choice", "text": "Situation D: A person has had a cough for two weeks that isn't getting better and is starting to interrupt their sleep, with no fever.", "choices": ["Seek urgent care right away", "Contact a professional soon, within a day or two", "Manage at home and monitor for now"] },
+        { "ref": "t2-p5", "promptType": "fixed-choice", "text": "Situation E: A person twisted their ankle yesterday; it's swollen and uncomfortable to walk on, but they can move their toes and there's no visible deformity.", "choices": ["Seek urgent care right away", "Contact a professional soon, within a day or two", "Manage at home and monitor for now"] }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose the situation you found hardest to classify and explain your reasoning in detail.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Choose one of the five situations above that was hardest to classify. Write out the specific sign in that situation that pointed you toward the category you chose, and one sign that might have pointed toward a different category." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on a general rule you can carry forward.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What is one general rule (not tied to any single situation above) that you'll use to decide how urgently to act, going forward?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner classifies situations mainly by how dramatic they sound rather than by specific signs (for example, treating any mention of pain as automatically urgent), reteach by having the learner re-sort the five situations while writing, for each one, the specific named detail that drove the classification -- not a feeling.",
+  "extension": "Have the learner write one additional fictional situation of their own for a category not already well-represented above, classify it, and explain the specific signs that justify that classification.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

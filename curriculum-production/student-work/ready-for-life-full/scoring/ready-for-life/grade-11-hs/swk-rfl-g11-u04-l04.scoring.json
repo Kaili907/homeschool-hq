@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l04",
+  "lessonId": "ma-g11-ready-for-life-u04-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Topic coverage",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Conversation covered fewer than three of the four listed topics, per the checklist and the task 3 list." },
+          { "label": "Proficient", "descriptor": "All four topics were discussed and appear, in some form, in the task 3 list." },
+          { "label": "Advanced", "descriptor": "All four topics are covered with an item that reflects an actual point made in the conversation, not a generic restatement of the topic." }
+        ]
+      },
+      {
+        "dimension": "Concreteness of agreement items",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Items are vague fairness statements with no specific mechanism, such as 'split evenly.'" },
+          { "label": "Proficient", "descriptor": "At least four of the five to six items name a specific, workable mechanism." },
+          { "label": "Advanced", "descriptor": "All items name a specific mechanism, and at least one anticipates a likely disagreement, like an early move-out, with a concrete plan." }
+        ]
+      },
+      {
+        "dimension": "Reflection on the value of practicing",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection is generic ('it was helpful') with no specific part named." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific part that would have been skipped and a plausible reason why." },
+          { "label": "Advanced", "descriptor": "Reflection explains a concrete consequence of skipping that specific part in a real shared-living situation." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The four checklist items and the task 3 list correspond to an actual conversation, not items copied verbatim from the topic list.",
+      "No specific real household income or real address is disclosed anywhere in the response.",
+      "The disagreement noted in task 3, if any, is described respectfully and specifically."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

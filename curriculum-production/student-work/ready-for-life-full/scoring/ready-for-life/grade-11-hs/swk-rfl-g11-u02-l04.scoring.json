@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l04",
+  "lessonId": "ma-g11-ready-for-life-u02-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Question specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Warm-up questions are generic ('is it good?', 'any feedback?') rather than aimed at a specific aspect of the draft." },
+          { "label": "Proficient", "descriptor": "Both warm-up questions target a specific aspect of the draft (e.g., clarity of the opening, whether the ending lands)." },
+          { "label": "Advanced", "descriptor": "Questions are specific enough that the summarized feedback in t2 clearly answers each one directly." }
+        ]
+      },
+      {
+        "dimension": "Feedback uptake",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Revision described in t3 does not clearly trace back to feedback recorded in t2." },
+          { "label": "Proficient", "descriptor": "Revision clearly traces back to specific feedback received." },
+          { "label": "Advanced", "descriptor": "Revision meaningfully improves the draft beyond a surface word swap, addressing the substance of the feedback." }
+        ]
+      },
+      {
+        "dimension": "Reflective honesty",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection states feedback was easy or fine with no reasoning." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific reaction to the feedback and explains the reasoning behind accepting or not accepting a piece of it." },
+          { "label": "Advanced", "descriptor": "Reflection shows genuine weighing of the feedback against the learner's own intent for the piece." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The two prepared questions were actually asked, per the t2 checklist item.",
+      "Feedback summarized in t2 is attributable to a real conversation, not invented after the fact.",
+      "Only the document and the two questions were shared with the trusted adult, per the safety notes."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l06",
+  "lessonId": "ma-g11-ready-for-life-u01-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Shortlist completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Shortlist is missing one or more of the four required elements (requirements/timeline, cost/funding categories, fit notes, deadline) for at least one pathway." },
+          { "label": "Proficient", "descriptor": "Shortlist includes all four required elements for both pathways, pulled from the unit's earlier research." },
+          { "label": "Advanced", "descriptor": "Shortlist includes all four required elements for both pathways and clearly identifies the single nearest deadline across both, with what must happen before it." }
+        ]
+      },
+      {
+        "dimension": "Genuine comparison, not parallel lists",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The two pathways are described separately with no direct comparison between them." },
+          { "label": "Proficient", "descriptor": "The shortlist directly compares the two pathways on at least two of the four elements." },
+          { "label": "Advanced", "descriptor": "The shortlist directly compares the two pathways on all four elements and the day-1 warm-up explains why this specific pair is the most useful comparison." }
+        ]
+      },
+      {
+        "dimension": "Guardian scrutiny incorporated",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Guardian review is reported as a formality with no specific question or concern named." },
+          { "label": "Proficient", "descriptor": "A specific guardian question or concern is named along with the learner's response to it." },
+          { "label": "Advanced", "descriptor": "The learner describes a specific change made to the shortlist as a direct result of the guardian's review." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The two pathways compared are genuinely different from each other, not two close variants of the same pathway.",
+      "Information in the shortlist traces back to the learner's own research from earlier in the unit rather than being invented fresh.",
+      "No real household financial figures appear in the shortlist, only the general categories established on day 3."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

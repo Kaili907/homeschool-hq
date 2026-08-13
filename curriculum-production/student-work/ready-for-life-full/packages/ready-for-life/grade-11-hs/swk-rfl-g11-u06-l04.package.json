@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u06-l04",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 11 Transition-Planning Capstone",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: contingency planning for the primary pathway"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "With a guardian, the learner has and documents a genuine conversation about what would happen if their primary pathway doesn't go as planned, naming at least one realistic way the plan could be disrupted and a concrete first step for responding to it.",
+  "scenario": "The learner sets up a conversation with a guardian specifically to discuss what would happen if the primary pathway doesn't work out, identifies together at least one realistic way it could be disrupted (a requirement not met, a timeline slipping, a change in circumstances), and documents the contingency and the first response step that came out of the conversation.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A guardian is present for and participates directly in this conversation before it counts as complete.",
+    "The conversation stays at the level of the plan itself — what would happen and what the first step would be — not a detailed accounting of household finances or private health information."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian is not available for this conversation right now, the learner instead reads a provided short scenario describing a pathway disruption and drafts a contingency response to that scenario alone, to be reviewed with a guardian as soon as the conversation is possible."
+  },
+  "materials": ["the learner's current transition plan skeleton from earlier in this unit", "paper or a document for notes during the conversation"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the conversation, name one realistic way your primary pathway could be disrupted.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What is one realistic way your primary pathway could not go as planned (a requirement not met, a deadline missed, a change in circumstances), independent of what you and your guardian go on to discuss?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Have the conversation with your guardian, focusing on one specific disruption and what the first response step would be.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "A guardian was present for this conversation." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "We named at least one specific, realistic way the primary pathway could be disrupted." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "We agreed on a concrete first step to take if that disruption happened." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write up the contingency and the first step exactly as discussed.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Describe the contingency you and your guardian discussed and the specific first step you agreed on for responding to it." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on how having this conversation affected your confidence in the plan.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Now that this contingency is documented, does your overall confidence in your transition plan feel different, and why?" }
+      ]
+    }
+  ],
+  "remediation": "If the documented contingency and first step are too vague to act on (for example, 'we'll figure it out'), reteach by having the learner and guardian revisit the conversation and name one specific, concrete action (a person to contact, a form to look up, an alternative option to research) rather than a general intention.",
+  "extension": "Have the learner and guardian identify a second, different contingency (affecting a different part of the plan, such as timing or a support need rather than the requirement itself) and document a first step for that one as well.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

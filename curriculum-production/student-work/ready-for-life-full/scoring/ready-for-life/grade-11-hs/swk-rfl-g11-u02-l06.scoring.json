@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l06",
+  "lessonId": "ma-g11-ready-for-life-u02-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Tracker integration",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The three simulated deadlines are recorded with less detail than the learner's real items, or statuses are not actually updated from day 1." },
+          { "label": "Proficient", "descriptor": "Real items are updated with current status and simulated deadlines are recorded in the same format and detail." },
+          { "label": "Advanced", "descriptor": "The combined tracker is organized in a way (e.g., sorted by urgency) that makes the near-miss scenario's item visibly one of the more time-sensitive on the list." }
+        ]
+      },
+      {
+        "dimension": "Recovery plan concreteness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Recovery plan lists vague steps ('talk to someone,' 'fix it') without a specific first message or specific order of actions." },
+          { "label": "Proficient", "descriptor": "Recovery plan includes an ordered list of specific actions and a realistic first-contact message." },
+          { "label": "Advanced", "descriptor": "Recovery plan's first-contact message is honest and specific about what went wrong while still being professional, and anticipates a likely response." }
+        ]
+      },
+      {
+        "dimension": "System-level transfer",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Final reflection restates that deadlines are important without naming a specific tracker habit that would have caught the problem earlier." },
+          { "label": "Proficient", "descriptor": "Reflection names one specific tracker habit or feature that would have caught the problem earlier." },
+          { "label": "Advanced", "descriptor": "Reflection's named habit is concrete enough that it matches or resembles the extension's early-warning rule, showing genuine systems thinking rather than a restated wish to 'be more careful.'" }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The guardian review in t3 happened before the plan was finalized, not after, per the checklist item.",
+      "The chosen missed-deadline item and its recovery plan are internally consistent with what the tracker shows for that item.",
+      "No real account, application, or contact with an unfamiliar adult was required to complete the recovery plan itself."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

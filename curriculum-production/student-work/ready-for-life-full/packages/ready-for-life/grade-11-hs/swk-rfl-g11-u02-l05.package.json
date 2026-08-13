@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u02-l05",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Applications, Deadlines, and Documentation",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: submitting and confirming receipt"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners complete a submission-readiness checklist for a provided practice tracker and draft the exact follow-up message they would send to confirm an application was received, so they build the habit of verifying receipt rather than assuming silence means success.",
+  "scenario": "Using a provided practice tracker for a fictional application (not a real account or real submission), the learner works through a submission-readiness checklist to confirm every required document is actually attached and complete, then drafts the message they would send afterward to confirm the application was received.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No real application is submitted anywhere for this lesson and no real account or login is created; the deliverable is a completed checklist and a drafted follow-up message only.",
+    "The provided practice tracker uses a fictional applicant so the learner does not need to enter real personal or document details to complete the checklist."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided practice tracker for a fictional application", "paper or notes app for the drafted follow-up message"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking readiness, think about why 'I sent it' is different from 'I confirmed it arrived.'",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Why might an application seem sent but not actually count as received or complete on the other end?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Review the provided practice tracker (a fictional applicant's tracker showing: transcript attached, one of two references attached, personal statement attached, application fee status shown as 'waived'). Work through the submission-readiness checklist against it.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I checked that every required document type is present and marked complete, not just started." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I checked that document names/versions match what the application actually asks for (no placeholder or draft-labeled files)." },
+        { "ref": "t2-p3", "promptType": "short-response", "text": "Based on the practice tracker, is this fictional application actually ready to submit? If not, what specifically is missing?" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Draft the follow-up message you would send a few days after submitting, to confirm the application was received.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write the exact message you would send to confirm receipt, including what was submitted, the date it was submitted, and a clear, polite request for confirmation." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "My message states specifically what was submitted and when, not just 'checking on my application.'" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on how this checklist habit applies to your own real tracker from day 1.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Looking at your own tracker from earlier in this unit, which real item on it will need this same readiness check before you consider it truly submitted?" }
+      ]
+    }
+  ],
+  "remediation": "If the readiness check in t2 says the fictional application is ready despite the still-missing second reference (a sign the learner is scanning for 'mostly done' rather than checking each required item individually), reteach by having the learner go line by line down the practice tracker, marking each required item as either fully complete or not, before answering the readiness question again.",
+  "extension": "Have the learner draft a second, different follow-up message for a scenario where two weeks have passed with no response at all, including how the tone and urgency should change from the first message.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u04-l06",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Housing and Living Arrangements",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: verifying tenancy rules locally"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "As the unit performance task, learners complete a full simulated housing analysis -- comparing housing options, naming a sample lease's obligations, and building a move-in checklist and budget -- and research, in general terms, how tenancy rules can differ by location and how someone would verify the specific rules that apply where they plan to live, reviewing the finished analysis with a guardian.",
+  "scenario": "This performance task pulls together the whole unit. Three fictional housing options are provided again for reference: Riverside Studio ($850/month rent plus about $95 combined for electricity and internet), Maple House Share ($520/month rent plus a $60/month shared-utilities amount), and Campus Suites ($780/month covering rent, utilities, and wifi). A sample lease excerpt is also provided: rent $900/month due on the 1st with a $40 late fee after the 5th, a $900 deposit refundable within 21 days of move-out absent damage beyond normal wear, tenant responsible for renter's insurance and routine upkeep, landlord responsible for major repairs, and 60 days written notice required to end the lease. Using these, the learner builds a comparison, a lease-obligations summary, a move-in checklist, and a one-month move-in budget. Separately, the learner researches -- in general terms, not about one specific real address -- how tenancy rules like notice periods, deposit limits and return timelines, and habitability requirements can differ depending on where someone lives, and identifies one general, reliable way to verify the specific rules for a place someone is considering. The finished analysis is reviewed with a guardian.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["comparison table", "lease obligations summary", "move-in checklist", "move-in budget", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The housing options and sample lease used for the analysis portion are fictional; the learner does not need to disclose any real housing situation.",
+    "Research on tenancy rules should stay general (how rules can vary and how to verify them) and should not require entering personal information into any website to complete.",
+    "A guardian reviews the finished analysis and research before this lesson is marked complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If reliable local research sources aren't accessible when this lesson is done, the learner instead works from a provided general list of ways tenancy rules commonly vary (notice periods, deposit limits and return timelines, habitability requirements, and rent-increase rules) and explains, using only that provided list, how someone would go about verifying which specific rules apply to a place they're considering, discussing that reasoning with a guardian instead of completing live research."
+  },
+  "materials": ["the provided fictional housing options and sample lease excerpt", "the provided general list of ways tenancy rules commonly vary", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before researching, name a current assumption you're not fully sure is accurate.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Before researching, what do you currently assume is true about tenant rights or landlord rules that you're not fully sure is accurate?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Complete the full housing analysis using the provided options and sample lease: a comparison of the three housing options, a summary of the sample lease's key obligations, a move-in checklist, and a one-month move-in budget that includes rent, the deposit, and at least two setup costs.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Summarize your comparison of the three housing options and which one you'd recommend and why." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Summarize the sample lease's key obligations for the tenant and for the landlord." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I built a move-in checklist with at least six specific items." },
+        { "ref": "t2-p4", "promptType": "extended-response", "text": "List your one-month move-in budget, including rent, the deposit, and at least two setup costs, with a total." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Research, in general terms, how tenancy rules can vary by location and how to verify them.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "In general terms (not about one specific real address), explain two ways tenancy rules can differ depending on where someone lives, and name one general, reliable way a person could verify the specific rules that apply to a place they're considering." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect with your guardian on what you feel ready for.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Now that you've completed the full analysis, what part of moving into a place of your own do you feel most prepared for, and what part would you still want a trusted adult's help with?" }
+      ]
+    }
+  ],
+  "remediation": "If the move-in budget in task 2 only lists rent and the deposit without any setup costs, reteach by modeling one full budget line by line (rent, deposit, then each individual setup cost named separately with its own line and amount) using a different fictional option, then have the learner rebuild their budget using that same line-by-line structure.",
+  "extension": "Have the learner research one additional way tenancy rules can differ (beyond the two already covered) and add it, with its own verification method, to their task 3 answer.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

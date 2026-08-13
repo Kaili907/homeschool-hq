@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u06-l01",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 11 Transition-Planning Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: assembling the year's work into one plan"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners gather the artifacts and decisions they have produced across units 1 through 5 (pathway shortlist, application system, health self-management plan, housing analysis, and decision-making practice) and organize them into the skeleton of one unified transition plan document, with a clearly labeled section for each required part.",
+  "scenario": "Working from their own record of the year's work, in whatever form they kept it, the learner builds a single outline with a section for each major part of the transition plan and pulls forward what they already know into each section, rather than starting from a blank page.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No new private information needs to be disclosed for this lesson beyond what the learner already produced in earlier units; specifics can stay general or undecided where the learner prefers."
+  ],
+  "simulationAlternative": null,
+  "materials": ["notes or task sheets from units 1-5, in whatever form the learner kept them", "paper or a document for the plan skeleton"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before assembling anything, predict which part of your plan will be hardest to fill in using only what you already know.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Which section of a transition plan (pathway, requirements, timeline, funding, support needs, or contingencies) do you expect to be hardest to fill in right now, and why?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build the skeleton of your plan by writing one section header for each of the six required parts, in whatever order makes sense to you.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My skeleton has a labeled section for each of: pathway, requirements, timeline, funding outline, support needs, and contingencies." },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "Which earlier unit's work maps most directly onto which section (for example, which section will your Unit 1 pathway shortlist feed into)?" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Go through your notes and decisions from units 1 through 5 and pull the specific content that belongs in each section into the skeleton.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For at least three of the six sections, write the specific piece of earlier work you are pulling forward and where it originally came from (which unit or task)." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "Every section of my skeleton now has at least one real piece of content in it, even if some sections are still incomplete." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what assembling the plan revealed.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Now that you've assembled it, which section turned out to have the least real content behind it, and what does that tell you about what this unit still needs to cover?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner leaves multiple sections blank or writes only vague placeholders (such as 'figure this out later') instead of pulling forward real content, reteach by having the learner locate one specific prior artifact for each empty section (a specific note, worksheet, or decision from units 1-5) and copy the actual detail across before moving to the next section.",
+  "extension": "Have the learner write a short paragraph, in their own words, that could be shared with someone unfamiliar with the plan, summarizing the pathway and naming the single biggest thing still unresolved.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

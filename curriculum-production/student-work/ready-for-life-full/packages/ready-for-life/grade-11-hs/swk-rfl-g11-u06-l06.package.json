@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u06-l06",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 11 Transition-Planning Capstone",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: presenting the plan and revising it"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "This is the culminating performance task for the Grade 11 year: the learner presents their completed transition plan — pathway, requirements, timeline, funding outline in general categories, support needs, and contingencies — to a guardian, drawing together the pathway work from Unit 1, the application system from Unit 2, the health self-management practices from Unit 3, the housing analysis from Unit 4, and the decision-making practice from Unit 5, and then revises the plan based on the guardian's feedback.",
+  "scenario": "With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation", "revised plan document"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A guardian participates directly in the presentation and feedback conversation before this task counts as complete.",
+    "The funding outline discussed stays at the level of general categories and approach, not real dollar figures tied to household finances.",
+    "No real account numbers, passwords, or legal identity documents are required or shared during this task."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian cannot take part in a live presentation right now, the learner instead writes out their explanation of each section as if presenting it aloud, and a guardian reviews and responds to the written version as soon as possible, with revisions still required afterward."
+  },
+  "materials": ["the learner's completed transition plan from this unit", "notes from units 1-5 as needed for reference", "paper or a document for capturing guardian feedback and revisions"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before presenting, identify the part of your plan you feel least confident explaining.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Which section of your plan do you feel least confident explaining out loud, and what's one thing you could clarify for yourself before the presentation?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "A guardian was present for the full presentation." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I explained the pathway, requirements, timeline, funding outline, support needs, and contingencies sections, in whatever order made sense." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I explained at least one specific connection between this plan and earlier work from units 1 through 5 (for example, how the housing analysis shaped the plan's logistics, or how the decision-making practice shaped how a contingency was chosen)." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "guided",
+      "directions": "Capture the guardian's questions and feedback during and after the presentation.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize the specific questions or feedback your guardian gave on the plan, including anything they thought was missing, unclear, or worth reconsidering." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Revise the plan based on the feedback and reflect on the year's work.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe at least one real change you made to the plan based on your guardian's feedback, and why that change makes the plan stronger." },
+        { "ref": "t4-p2", "promptType": "short-response", "text": "Looking back across the whole year, what is the single most useful thing you learned that shaped this final plan?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's presentation or write-up treats sections as separate and unconnected (no reference to earlier units, or feedback captured only as 'no changes needed'), reteach by walking through the plan with the learner one section at a time and asking directly which specific unit 1-5 artifact shaped it, then having the guardian ask at least one clarifying question live before the write-up is finalized.",
+  "extension": "Have the learner write a short closing statement, to keep with the plan, describing what would make them feel the plan needs to be revisited again (a specific event, deadline, or change in circumstances), turning the plan into something they will actually return to rather than a one-time document.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  }
+}

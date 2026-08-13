@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l02",
+  "lessonId": "ma-g11-ready-for-life-u03-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Category structure and coverage",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Categories are vague, overlapping, or too few to be useful (e.g., a single catch-all category)." },
+          { "label": "Proficient", "descriptor": "Categories are distinct and cover the record types most people would need to track." },
+          { "label": "Advanced", "descriptor": "Categories also anticipate a specific need named in the learner's own warm-up response." }
+        ]
+      },
+      {
+        "dimension": "Storage-location reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Location is named with no reasoning for why it's appropriate." },
+          { "label": "Proficient", "descriptor": "Location is named with a specific reason it is both reachable and appropriately private." },
+          { "label": "Advanced", "descriptor": "Reasoning weighs a specific tradeoff (e.g., convenience versus privacy) and explains the choice." }
+        ]
+      },
+      {
+        "dimension": "Access-rule specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Access rule is generic ('just me' or 'private') with no named person, role, or circumstance." },
+          { "label": "Proficient", "descriptor": "Access rule names a specific person or role and a specific circumstance for sharing it." },
+          { "label": "Advanced", "descriptor": "Access rule also distinguishes what would and would not be shared in that circumstance." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real health condition, medication, or provider name appears anywhere in the response.",
+      "The category list is specific enough that a stranger could tell what belongs in each category.",
+      "The access rule names a specific person or role and a specific circumstance, not just 'private.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

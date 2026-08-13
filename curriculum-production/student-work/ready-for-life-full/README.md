@@ -60,22 +60,35 @@ structurally unverifiable the way a fabricated FinLit answer key would be.
 
 ## What this delivery actually contains
 
-**21 of 324 lessons are genuinely authored** — a real, non-templated sample,
-not a placeholder for the full corpus:
+**54 of 324 lessons are genuinely authored** — a real, non-templated corpus,
+not a placeholder for the full inventory:
 
 - **12 lessons** (grades 3, 4, 5, 7, 8, 9 — 2 each) ported from the
   already-authored, already-reviewed 24-lesson slice at
   `../ready-for-life-financial-literacy/packages/ready-for-life/`, with the
   `integrity` block rewritten to this schema and to honest provenance (fixing
   one instance of the `1.1.0` citation defect along the way).
-- **9 new lessons** (grades 10, 11, 12 — 3 each), authored from scratch for
-  this delivery. Grades 10-12 previously had **zero** Ready for Life student-work
-  exemplars anywhere in this fleet; this is the first coverage at those grades.
+- **9 lessons** (grades 10, 11, 12 — 3 each), authored from scratch for the
+  original delivery of this corpus. Grades 10-12 previously had **zero** Ready
+  for Life student-work exemplars anywhere in this fleet; this was the first
+  coverage at those grades.
+- **33 new lessons — all of Grade 11**, authored for the Grade 11 production
+  task (`mac/rfl-production-g11-r4`), completing the 3 grade-11 lessons from
+  the original delivery to the full **36 of 36**. **Grade 11 is the first
+  grade in this fleet with 100% Ready for Life student-work coverage.** Source
+  for all 36: `curriculum-authoring/full-family-highschool-9-12` via branch
+  `mac/hs912-rfl-finlit-r1` (`ready-for-life-11/lessons.jsonl`,
+  `course-guide.md`) — same authoring-stage source as the original 3, read
+  read-only, no checkout.
 
-All 9 grades are represented at least once, demonstrating the full grade
-range end to end, but **303 lessons remain unauthored**. No lesson beyond
-these 21 was mass-generated, templated, or stubbed — there is no fake
-"complete" corpus behind this README.
+All 9 grades are represented at least once and grade 11 is fully covered, but
+**270 lessons remain unauthored** across the other 8 grades. No lesson in this
+corpus was mass-generated, templated, or stubbed — there is no fake "complete"
+corpus behind this README. The 33 new grade-11 lessons were authored by 6
+parallel authoring passes (one per unit, each given the same schema, safety
+lints, and completion-authority rule but no visibility into the others' output),
+then checked for cross-unit consistency by a single reviewer pass (see
+Developmental/safety review below) before being counted as delivered.
 
 ## Infrastructure delivered (reusable for the remaining 303 lessons)
 
@@ -88,21 +101,29 @@ these 21 was mass-generated, templated, or stubbed — there is no fake
 
 ## Quality gate results — mandatory H2 re-check required
 
-Two independent checks were run against all 21 authored lessons, per this
-task's instruction to run the real gate plus stronger local checks because
-Production Gate H2 is moving in parallel:
+Two independent checks were run against all 54 authored lessons (the original
+21 plus the 33 new grade-11 lessons), per this task's instruction to run the
+real gate plus stronger local checks because Production Gate H2 is moving in
+parallel. (Note: the grade-11 production task's own instructions referred to
+this as a "Gate H3" re-check; no gate named H3 exists anywhere in this repo or
+its sibling branches, so that result is recorded here as what actually exists
+— a mandatory re-check against the real, documented Production Gate H2.)
 
 1. **The real production-readiness gate**
    (`src/curriculum/production-quality`, imported read-only, not modified) —
-   `tests/gate.test.ts`. Result: **READY**, zero `NOT_READY`, zero
-   `NEEDS_HUMAN_REVIEW`, zero `MISSING_RUBRIC`.
+   `tests/gate.test.ts`, re-run against the full 54-lesson corpus. Result:
+   **READY**, zero `NOT_READY`, zero `NEEDS_HUMAN_REVIEW`, zero
+   `MISSING_RUBRIC`.
 2. **Stronger local checks** beyond the gate's scope —
    `tests/validate.test.ts`: no answer-bearing key leaks into any
    student-facing package; every `guardian`-authority package has correctly
    shaped sign-off; every `realWorldAction: true` package has a non-empty
    simulation/equal-credit alternative; no package requires an identifiable
    photo; no package matches a photo/video/voice-capture, required-purchase,
-   or assumed-household-access pattern.
+   or assumed-household-access pattern. All 17 tests across
+   `tests/{loadCorpus,gate,validate,attestation,inventory}.test.ts` pass
+   (`npx vitest run --config tooling/vitest.config.mts`); `npx tsc --noEmit -p
+   tooling/tsconfig.json` is clean.
 
 **This result is explicitly marked for mandatory re-check against
 Production Gate H2 during convergence**, per this task's instructions — H2 is
@@ -110,39 +131,58 @@ moving in parallel and has not evaluated this corpus.
 
 ## Attestation
 
-10 of the 21 lessons are `completionAuthority: "guardian"` (a genuine
-real-world, adult-observed component); all 10 correctly reject a bare learner
+22 of the 54 lessons are `completionAuthority: "guardian"` (a genuine
+real-world, adult-observed component); all 22 correctly reject a bare learner
 click (`computeCompletionStatus` returns
 `RECORDED_PENDING_GUARDIAN_ATTESTATION`, never `CERTIFIED`, without a real
-`AdultAttestation`), tested in `tests/attestation.test.ts`. The other 11 are
+`AdultAttestation`), tested in `tests/attestation.test.ts`. The other 32 are
 `completionAuthority: "learner"` — cognitive, planning, or fictional-scenario
 work with no real-world safety-sensitive component, so no guardian
 attestation is attached (attestation is reserved for lessons that genuinely
-need it, not applied uniformly).
+need it, not applied uniformly). Within grade 11 specifically: 13 of 36 are
+guardian-authority (the 12 lessons at day-4/day-6 of every unit, required by
+the course's own attestation policy, plus 1 day-5 lesson escalated to
+guardian authority because its task genuinely requires contacting an
+unfamiliar adult) and 23 of 36 are learner-authority.
 
 ## Developmental/safety review
 
-One subagent (the task's cap) reviewed all 21 authored lessons against
-developmental appropriateness, purchase/photo/video/voice prohibitions,
-sensitive-disclosure and shame-language avoidance, household/transportation/
-resource-difference neutrality, and — for every `realWorldAction: true`
-lesson — whether the safety framing and `simulationAlternative` are genuinely
-adequate rather than a token afterthought.
+One subagent (the task's cap) reviewed all 21 originally-authored lessons
+against developmental appropriateness, purchase/photo/video/voice
+prohibitions, sensitive-disclosure and shame-language avoidance,
+household/transportation/resource-difference neutrality, and — for every
+`realWorldAction: true` lesson — whether the safety framing and
+`simulationAlternative` are genuinely adequate rather than a token
+afterthought. **Result: 21/21 PASS, 0 CONCERN.**
 
-**Result: 21/21 PASS, 0 CONCERN.** Full per-file verdicts are in the session
-record; not duplicated here to keep this README from rotting as the corpus
-grows. The reviewer's one flag for scaling: this is a hand-picked 21-lesson
-sample, and the two hardest-to-template elements —
-safety-note specificity and `simulationAlternative` equal-credit quality for
-`realWorldAction: true` lessons — are exactly where quality could drift at
-324-lesson scale, since they require genuine per-lesson judgment rather than
-schema-driven scaffolding. Recommend a spot-check pass on those two fields
-specifically (flagging short, generic, or copy-adjusted
-`simulationAlternative` text) before any future production release.
+For the 33 new grade-11 lessons, a second, separate single reviewer pass (one
+reviewer, per this task's "one reviewer max" instruction) re-ran the same
+schema/lint/attestation checks against all 36 grade-11 lessons plus a
+cross-unit consistency and progression pass the 6 parallel authoring agents
+could not perform on themselves (checking for repeated scenarios, generic
+boilerplate, and whether grade 11 reads as more independent/postsecondary-
+oriented than a middle-grades RFL course rather than templated filler).
+**Result: READY**, no schema/lint/attestation defects, no forced-disclosure or
+forced-third-party-contact defects, no assumed-adult-resource assumptions
+(job, car, bank account, submitted college application, or legal adult
+authority) anywhere in the 36 lessons, no copy-pasted remediation/extension
+text, and a coherent day-1-through-day-6 progression in every unit. One
+cosmetic-only finding: two generic fictional first names ("Sam", "Jordan")
+are each reused across two unrelated lessons in different units (u02-l03 vs
+u04-l03; u02-l02 vs u04-l05) — a visible seam from independent parallel
+authoring, not a defect, left as-is.
+
+Full per-file verdicts for both review passes are in their respective session
+records; not duplicated here to keep this README from rotting as the corpus
+grows. The original reviewer's scaling flag stands: safety-note specificity
+and `simulationAlternative` equal-credit quality for `realWorldAction: true`
+lessons are exactly where quality could drift at 324-lesson scale, since they
+require genuine per-lesson judgment rather than schema-driven scaffolding.
 
 ## What remains
 
-303 lessons across all 9 grades still need genuine, lesson-specific
-authoring at this same bar. The infrastructure, schema, inventory, and gate
-harness in this directory are built to scale to them; the authoring itself
-is the remaining, substantial work.
+270 lessons across the other 8 grades (3, 4, 5, 7, 8, 9, 10, 12) still need
+genuine, lesson-specific authoring at this same bar. Grade 11 is complete.
+The infrastructure, schema, inventory, and gate harness in this directory are
+built to scale to them; the authoring itself is the remaining, substantial
+work.

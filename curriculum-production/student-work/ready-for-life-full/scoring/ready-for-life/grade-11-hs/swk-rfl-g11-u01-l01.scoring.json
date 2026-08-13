@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l01",
+  "lessonId": "ma-g11-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Fit-based reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Sorting reasons reference prestige, expectation, or general reputation rather than the learner's own interests or strengths." },
+          { "label": "Proficient", "descriptor": "Most sorting reasons name a specific interest or strength of the learner's own, for both categories." },
+          { "label": "Advanced", "descriptor": "Every sorting reason names a specific, concrete interest or strength, including for pathways set aside." }
+        ]
+      },
+      {
+        "dimension": "Completeness of the sort",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more of the five pathways is left unsorted or given no reasoning at all." },
+          { "label": "Proficient", "descriptor": "All five pathways are sorted with at least brief reasoning for each." },
+          { "label": "Advanced", "descriptor": "All five pathways are sorted with reasoning specific enough that a reader could tell the pathways apart without seeing their names." }
+        ]
+      },
+      {
+        "dimension": "Self-awareness in reflection",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection states nothing changed, with no reasoning given either way." },
+          { "label": "Proficient", "descriptor": "Reflection names a specific pathway that moved categories and what caused the change." },
+          { "label": "Advanced", "descriptor": "Reflection distinguishes between an outside opinion and the learner's own reasoning, and explains which one won out and why." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The warm-up guess about the least-familiar pathway is a genuine attempt, not a placeholder like 'I don't know.'",
+      "Reasoning throughout is grounded in the learner's own stated interests and strengths, not in comparisons to peers or family expectations.",
+      "No pathway is dismissed solely because it is unfamiliar, without at least naming what is unfamiliar about it."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

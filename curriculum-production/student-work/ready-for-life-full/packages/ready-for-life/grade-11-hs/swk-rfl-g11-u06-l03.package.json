@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u06-l03",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 11 Transition-Planning Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: naming support needs without shame"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners practice the specific skill of naming, in plain neutral language, the kinds of support they expect to need during their transition, without being asked to justify, explain, or disclose the private reasons behind that need.",
+  "scenario": "Working from a provided list of neutral support categories (help with paperwork and deadlines, help with transportation logistics, someone to check in regularly, help thinking through a budget, someone to talk through stress with, and others), the learner identifies which categories apply to their own plan and writes a plain, one-line statement of each need, practicing 'naming a need' as its own complete skill, separate from justifying it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No specific private health, financial, or family reason needs to be given for any support need named in this lesson; general categories are a complete and acceptable answer."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided list of neutral support categories", "the provided example statement for practice", "paper or a document for the learner's own statements"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before practicing, think about what makes stating a need out loud feel uncomfortable.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What's one reason stating a need for help out loud can feel uncomfortable, even when the need is completely reasonable?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Practice turning a justification-heavy statement into a plain, neutral one, using the example provided.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "Given the example statement 'I probably need help with the paperwork because I'm bad at staying organized and I always mess things up,' rewrite it as a plain, neutral statement of the need alone, with no self-judgment attached." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My rewritten statement names the need in one clear sentence without explaining or justifying why the need exists." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Using the provided list of support categories, name two or three support needs for your own transition plan in plain, neutral language.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Choose two or three categories from the provided list that apply to your own plan, and write a plain one-line statement of each need, following the same neutral pattern you just practiced." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "Each need I named is stated plainly, without justifying it or explaining a private reason behind it." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the difference between naming and justifying a need.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What's the difference between naming a need and justifying one, and why might naming it plainly actually make it easier for someone to help?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's statements still include self-judgment or a justification clause (for example, 'because I'm not good at...' or 'sorry, but I need...'), reteach by isolating the need itself: have the learner cross out everything in their sentence except the actual request, then rebuild the sentence starting from that isolated need alone.",
+  "extension": "Have the learner write a short plain statement they could realistically say to the specific role who would provide that support (for example, a school counselor, a guardian, or a mentor), practicing the tone as well as the wording.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

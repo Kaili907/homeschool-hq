@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l04",
+  "lessonId": "ma-g11-ready-for-life-u06-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Specificity of the contingency",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Named disruption is vague or generic (for example, 'something could go wrong') rather than a specific realistic scenario." },
+          { "label": "Proficient", "descriptor": "Named disruption is specific and realistic to the learner's actual pathway." },
+          { "label": "Advanced", "descriptor": "Named disruption reflects genuine engagement with the guardian's perspective, not just the learner's warm-up idea restated." }
+        ]
+      },
+      {
+        "dimension": "Actionability of the first step",
+        "levels": [
+          { "label": "Emerging", "descriptor": "First step is vague ('figure it out,' 'deal with it then') with no concrete action named." },
+          { "label": "Proficient", "descriptor": "First step names a concrete, doable action (a person to contact, information to look up, an option to research)." },
+          { "label": "Advanced", "descriptor": "First step is specific enough that the learner could take it immediately if the contingency actually occurred." }
+        ]
+      },
+      {
+        "dimension": "Genuine guardian engagement",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Write-up reads as though the learner completed it alone, with no clear sign of guardian input." },
+          { "label": "Proficient", "descriptor": "Write-up reflects an actual back-and-forth with the guardian, not just the learner's own prior thinking." },
+          { "label": "Advanced", "descriptor": "Write-up captures a specific point where the guardian's input changed or sharpened the learner's original idea." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The conversation happened with a guardian actually present, not reconstructed afterward alone.",
+      "The contingency and first step stay at the level of the plan, without requiring disclosure of specific household financial figures or private health detail.",
+      "The documented first step is something the learner could actually do, not just a hope or intention."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

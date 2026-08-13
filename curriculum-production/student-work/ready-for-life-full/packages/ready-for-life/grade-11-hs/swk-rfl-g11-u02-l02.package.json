@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u02-l02",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Applications, Deadlines, and Documentation",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: assembling transcripts, records, and references"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners practice the process of identifying which documents an application typically requires and drafting the specific request each one needs (who to ask, what to say, how much lead time to give), using a provided fictional applicant so no real academic or personal record has to be disclosed.",
+  "scenario": "Working from a provided fictional applicant's partially-completed document checklist, the learner figures out what is still missing, decides who that fictional applicant would need to contact for each item, and drafts the actual request message for two of the missing documents.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All names, schools, and records in this lesson are fictional and provided; the learner does not enter or reference their own real transcript, grades, or personal records to complete it."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional applicant profile and checklist", "paper or notes app for drafting requests"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the fictional applicant's profile: Jordan Ellis is applying to a program with a deadline in six weeks. Jordan's checklist currently shows: transcript (requested), one reference (received), personal statement (not started). The program requires: an official transcript, two references, and a personal statement.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Based on Jordan's checklist, what is missing or incomplete right now?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each missing or incomplete item, decide who Jordan would realistically need to contact to get it moving, and how much lead time that item typically needs.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "For the missing second reference, who would Jordan most likely ask (by role, e.g. a teacher, a supervisor, a coach), and how many weeks of lead time should Jordan give that person before the deadline?" },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My answer explains why that role is a reasonable person to ask, not just names a role." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Draft the actual request messages Jordan would send for two of the missing items: the second reference, and getting started on the personal statement (for the statement, this means a message to whoever helps Jordan plan, not the statement itself).",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write the exact message Jordan would send to ask for the second reference, including the deadline and one specific detail that would help the person write a strong reference." },
+        { "ref": "t3-p2", "promptType": "extended-response", "text": "Write the exact message Jordan would send to a trusted adult asking for help getting started on the personal statement, including a realistic target date to have a first draft." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what this practice taught you about your own document requests.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which part of drafting Jordan's requests (deciding who to ask, giving enough lead time, or including a helpful detail) do you think will be hardest for you to do for your own applications, and why?" }
+      ]
+    }
+  ],
+  "remediation": "If the drafted request messages are missing a deadline or specific detail (a sign the learner is treating the request as a formality rather than information the recipient actually needs), reteach by showing a two-part template — 'what I need and by when' plus 'one detail that helps you help me' — and have the learner revise both messages to fit that template explicitly.",
+  "extension": "Have the learner add a third missing item to Jordan's checklist (something not mentioned in the original profile, like standardized test scores or a portfolio) and draft the request message for it, including how it would change the lead-time plan.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  }
+}

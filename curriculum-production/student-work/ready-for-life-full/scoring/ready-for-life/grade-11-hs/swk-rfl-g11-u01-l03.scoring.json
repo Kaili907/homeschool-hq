@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l03",
+  "lessonId": "ma-g11-ready-for-life-u01-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Category accuracy for cost",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Cost categories are generic or missing (for example, just 'it costs money') with no pathway-specific categories named." },
+          { "label": "Proficient", "descriptor": "At least three specific, pathway-appropriate cost categories are named for each pathway." },
+          { "label": "Advanced", "descriptor": "Cost categories are specific to the pathway's actual structure (for example, lost income during an apprenticeship versus tuition for college) and show the two pathways cost differently in kind, not just in amount." }
+        ]
+      },
+      {
+        "dimension": "Category accuracy for funding",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Funding categories are vague or unsourced." },
+          { "label": "Proficient", "descriptor": "At least two specific funding or aid categories are named per pathway, each with a source." },
+          { "label": "Advanced", "descriptor": "Funding categories are matched to the specific cost categories they would offset, showing the learner understands what each type of aid actually covers." }
+        ]
+      },
+      {
+        "dimension": "Staying at the category level",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Response includes real household dollar amounts, income, or other personal financial detail." },
+          { "label": "Proficient", "descriptor": "Response stays entirely at the general category level with no real personal financial detail." },
+          { "label": "Advanced", "descriptor": "Response stays at the category level and the reflection identifies a specific next research question rather than a vague 'find out more.'" }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real dollar figures, income, savings, or debt tied to the learner's own household appear anywhere in the response.",
+      "Categories named are specific enough to be pathway-appropriate, not a generic list that would apply to any pathway equally.",
+      "Sources for funding categories are named and checkable."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

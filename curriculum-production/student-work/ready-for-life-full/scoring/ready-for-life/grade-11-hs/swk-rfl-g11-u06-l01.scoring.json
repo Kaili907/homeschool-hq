@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l01",
+  "lessonId": "ma-g11-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Section completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Skeleton is missing one or more of the six required sections, or sections contain only placeholders with no real content." },
+          { "label": "Proficient", "descriptor": "All six required sections are present and each contains at least one specific piece of real content pulled from earlier units." },
+          { "label": "Advanced", "descriptor": "All six sections are present with specific content, and the learner has flagged which sections still need more work later in this unit." }
+        ]
+      },
+      {
+        "dimension": "Accuracy of linking prior work",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Content pulled forward is vague or doesn't clearly trace back to a specific unit 1-5 artifact or decision." },
+          { "label": "Proficient", "descriptor": "At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison')." },
+          { "label": "Advanced", "descriptor": "Learner accurately identifies where earlier work conflicts or needs updating rather than just copying it forward unchanged." }
+        ]
+      },
+      {
+        "dimension": "Self-assessment of gaps",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names a section as unfinished with no reasoning given." },
+          { "label": "Proficient", "descriptor": "Reflection identifies a specific section with the least real content and explains why." },
+          { "label": "Advanced", "descriptor": "Reflection connects the identified gap to a concrete next step planned for later in the unit." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The skeleton has a clearly labeled section for each of the six required plan parts.",
+      "Content pulled forward is specific and traceable to real unit 1-5 work, not invented on the spot.",
+      "No real household financial figures or private health or legal detail appear in the sections."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

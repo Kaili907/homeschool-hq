@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u04-l05",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Housing and Living Arrangements",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: inspection, documentation, and moving out"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Given a fictional move-out scenario, the learner builds a room-by-room documentation checklist and explains why documenting a unit's condition at move-out (not just move-in) matters for getting a deposit back, so they can apply this protective habit to any place they move out of later.",
+  "scenario": "In a fictional scenario, a person named Jordan is moving out of a fictional apartment at the end of the month. Jordan's lease states the $900 deposit is refundable within 21 days of move-out if the unit shows no damage beyond normal wear and tear. Before returning the keys, Jordan wants to document the unit's condition in writing, room by room, so there's a clear record of what condition it was in when Jordan left. The learner builds that documentation checklist for Jordan.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Jordan and the apartment are entirely fictional; the learner does not need to plan or document a real move to complete this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["Jordan's provided fictional move-out scenario", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before making the checklist, write your current understanding of a key distinction.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Before making the checklist, what do you think 'normal wear and tear' means, as opposed to damage a tenant would be charged for?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build a room-by-room documentation checklist for Jordan's move-out.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "For each of four areas -- kitchen, bathroom, bedroom, and the main living space -- write two or three specific things Jordan should check and note the condition of in writing before moving out." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain why the documentation matters and what Jordan should do with it.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Using Jordan's situation, explain why documenting the unit's condition at move-out (not only at move-in) matters for getting the deposit back, and what Jordan should do with the finished written documentation before handing back the keys." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what's easy to forget under packing pressure.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What is one item on your checklist that would be easy to forget while packing under time pressure, and what would help make sure it doesn't get skipped?" }
+      ]
+    }
+  ],
+  "remediation": "If checklist items in task 2 are vague ('check if it's clean') rather than specific and verifiable, reteach by modeling one specific item per room (for example, 'note whether the oven interior has any burn marks or residue') and have the learner rewrite every item on the checklist to that same standard of specificity.",
+  "extension": "Have the learner write a short note Jordan could send along with the written documentation when returning the keys, referencing at least two specific checklist items.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u04-l05",
+    "authoredBy": "manual"
+  }
+}
