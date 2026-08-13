@@ -12,7 +12,15 @@ export function aggregateSourceIntegrity(textRefs) {
 }
 
 export function projectToLessonProductionInput(ir, pkg, guide) {
-  const requiresSourceIntegrity = ir.textRefs.length > 0
+  const deliveredRef = pkg.sourceReference?.refs?.[0]
+  const requiresSourceIntegrity = true
+  const deliveredSourceVerified = pkg.sourceReference?.mode === 'academy-original-inline' &&
+    deliveredRef?.rightsCategory === 'original' &&
+    deliveredRef?.deliveryMode === 'inline_full_text' &&
+    deliveredRef?.learnerAvailable === true &&
+    deliveredRef?.fullTextIncluded === true &&
+    typeof pkg.sourceReference?.text === 'string' &&
+    pkg.sourceReference.text.trim().split(/\s+/).length >= 80
 
   return {
     lessonId: ir.lessonId,
@@ -47,7 +55,7 @@ export function projectToLessonProductionInput(ir, pkg, guide) {
     assessmentAlignment: ir.standards.length > 0 ? 'ALIGNED' : 'UNKNOWN',
 
     requiresSourceIntegrity,
-    sourceIntegrityStatus: requiresSourceIntegrity ? aggregateSourceIntegrity(ir.textRefs) : undefined,
+    sourceIntegrityStatus: deliveredSourceVerified ? 'VERIFIED' : 'GAP',
 
     // Safety/privacy review is a gate concern this generator does not
     // evaluate per lesson (the gate's own comments scope it to science labs,

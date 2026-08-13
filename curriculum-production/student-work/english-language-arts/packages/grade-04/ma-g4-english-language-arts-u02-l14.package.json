@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g4-english-language-arts-u02-l14",
   "lessonRef": {
     "lessonId": "ma-g4-english-language-arts-u02-l14",
@@ -20,34 +20,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: presenting a theme claim and reviewing the key ideas others raised. Essential question: How is a summary different from a retelling, and how do I state a theme the text supports? By the end of this lesson you should be able to: Present or discuss ideas about presenting a theme claim and reviewing the key ideas others raised in an organized way, with a private alternative available. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 4 lesson develops presenting a theme claim and reviewing the key ideas others raised within the unit “Summary and Theme: Saying What a Story Means.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's discussion or presentation practice work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "In a village at the edge of a wide field there lived a boy named Corin, who was known for one thing: he counted the crows.\n\nEvery morning he sat on the stone wall and counted them as they crossed from the woods to the field. Thirty-one. Twenty-eight. Thirty-three. The villagers laughed at him, kindly at first and then less kindly, because a boy of his age might have been mending nets or carrying water.\n\n\"What good is the number of crows?\" the miller asked.\n\n\"I do not know yet,\" Corin said. \"I only know it.\"\n\nOne autumn the count began to fall. Twenty-two. Nineteen. Fourteen. Corin told the miller, who told him crows were crows. He told the baker, who told him to carry water.\n\nOn the ninth day he counted four, and the four did not land in the field at all. They circled once and flew on toward the hills.\n\nCorin walked to the field himself. He knelt and dug into the soil with his hands, and what he found there were grubs, thick and pale, more than he could hold, chewing at the roots of the winter wheat.\n\nThe crows had not abandoned the field. They had eaten what they could and gone looking for a field that still had something left in it.\n\nCorin ran back to the village. This time the miller listened, because the number four is a hard thing to argue with when you have been told about thirty-one for two years.\n\nThe villagers turned the soil and saved most of the crop.\n\nAfterward the baker asked Corin how he had known.\n\n\"I did not know,\" Corin said. \"I counted. Knowing came later, and it could only come because I had been counting all along, back when it meant nothing at all.\"",
     "refs": [
       {
         "textId": "g4-text-04",
         "title": "The Boy Who Counted Crows",
+        "author": "Manuel Academy",
         "form": "folktale-style original",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 300,
+        "sha256": "4f010c89ee2ad51ad8d26b1e3024d220ae47e685abc3216dfa69497a9a34a62b",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word study and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Model a prepared turn: claim, evidence, and a question for the group. Model formal and informal register.\n- Guided practice: Hold a short structured discussion on today's lesson with assigned roles. Any participant may pass; written turns count.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “The Boy Who Counted Crows”:\n1. Preview the title and paragraph structure; write what presenting a theme claim and reviewing the key ideas others raised asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner delivers one prepared contribution about today's lesson, spoken, written, typed, or recorded, entirely by choice. When finished: Identify one reason and one piece of evidence someone else provided."
+    "text": "Read “The Boy Who Counted Crows,” then answer: What is the most defensible claim about presenting a theme claim and reviewing the key ideas others raised that a careful reader could debate after reading this source?\n\nDeliverable: Grade 4: a discussion brief with a claim, evidence, and a fair response to another view; write one organized paragraph.\n\nEvidence requirement: Use two exact details. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 4: a discussion brief with a claim, evidence, and a fair response to another view; write one organized paragraph.",
+  "learning_objectives": [
+    "Use the delivered reading to apply presenting a theme claim and reviewing the key ideas others raised.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about presenting a theme claim and reviewing the key ideas others raised and complete the named deliverable.",
+    "I use two exact details from “The Boy Who Counted Crows” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about presenting a theme claim and reviewing the key ideas others raised and complete the named deliverable.",
+    "I use two exact details from “The Boy Who Counted Crows” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “The Boy Who Counted Crows” in full and mark evidence connected to presenting a theme claim and reviewing the key ideas others raised.",
+    "Answer the lesson question using two exact details; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": false,
+    "prompt": "What is the most defensible claim about presenting a theme claim and reviewing the key ideas others raised that a careful reader could debate after reading this source?",
+    "deliverable": "Grade 4: a discussion brief with a claim, evidence, and a fair response to another view; write one organized paragraph."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (presenting a theme claim and reviewing the key ideas others raised):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If presenting a theme claim and reviewing the key ideas others raised is not yet secure, return to “The Boy Who Counted Crows” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply presenting a theme claim and reviewing the key ideas others raised to a different paragraph or a defensible alternative interpretation of “The Boy Who Counted Crows.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

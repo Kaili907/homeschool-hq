@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g3-english-language-arts-u06-l13",
   "lessonRef": {
     "lessonId": "ma-g3-english-language-arts-u06-l13",
@@ -22,25 +22,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: revising for clarity, then editing subject-verb agreement and spelling. Essential question: How do I write a paragraph that teaches one idea clearly? By the end of this lesson you should be able to: Revise the draft for meaning and then edit it for conventions. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 3 lesson develops revising for clarity, then editing subject-verb agreement and spelling within the unit “Paragraph Power: Informative and Explanatory Writing.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's writing revise and edit work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
-    "present": false
+    "present": true,
+    "mode": "academy-original-inline",
+    "text": "[1] During the “Paragraph Power: Informative and Explanatory Writing” inquiry at the youth council meeting, Amara found three source cards that disagree about one detail. The documents described a four-week trial in which a reading room stayed open one hour later on Tuesdays. Attendance rose from 18 visits in week one to 31 in week four, but the records did not show whether the same people returned or new people arrived.\n\n[2] One summary called the trial “a clear success.” It cited the increase in visits and three positive comments. A second summary was more cautious. It noted that a nearby program had closed during weeks three and four, possibly sending visitors to the reading room. It also observed that no comparison was made with other weekdays.\n\n[3] Mateo checked the original log and found a useful detail: most late visits lasted fewer than fifteen minutes. That fact could mean visitors only needed a quick pickup, or it could mean the room did not support longer work. The log recorded duration but not purpose, so either explanation required a qualification.\n\n[4] The inquiry team used revising for clarity, then editing subject-verb agreement and spelling to decide what the evidence established and what it did not. They could describe the attendance pattern precisely. They could not yet prove why it happened or whether the change should become permanent. Their next question therefore mattered as much as their current conclusion.",
+    "refs": [
+      {
+        "textId": "ma-original-ma-g3-english-language-arts-u06-l13",
+        "title": "Reading Lab 103: revising for clarity, then editing subject-verb agreement and spelling",
+        "author": "Manuel Academy",
+        "form": "information case",
+        "rightsCategory": "original",
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 238,
+        "sha256": "c68572d9c4f3422df36ca10af4b3ad1aec18e499bbeb84245a89735075cae880",
+        "origin": "academy_original_generated"
+      }
+    ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word work and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Show revision and editing as two separate passes and demonstrate one of each on a sample, never on the learner's assessed draft.\n- Guided practice: Read the learner's draft aloud together and mark the one place a reader would get lost.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “Reading Lab 103: revising for clarity, then editing subject-verb agreement and spelling”:\n1. Preview the title and paragraph structure; write what revising for clarity, then editing subject-verb agreement and spelling asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner revises that place, then makes one editing pass for capitals, end marks, and spelling. When finished: Name the one change you made for meaning and the one you made for correctness."
+    "text": "Read “Reading Lab 103: revising for clarity, then editing subject-verb agreement and spelling,” then answer: Revisit your work on revising for clarity, then editing subject-verb agreement and spelling. Which revision improves meaning, organization, or evidence most, and why?\n\nDeliverable: Grade 3: a revised passage plus a revision note that identifies the change and its effect; write one organized paragraph.\n\nEvidence requirement: Use one exact detail. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 3: a revised passage plus a revision note that identifies the change and its effect; write one organized paragraph.",
+  "learning_objectives": [
+    "Use the delivered reading to apply revising for clarity, then editing subject-verb agreement and spelling.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about revising for clarity, then editing subject-verb agreement and spelling and complete the named deliverable.",
+    "I use one exact detail from “Reading Lab 103: revising for clarity, then editing subject-verb agreement and spelling” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about revising for clarity, then editing subject-verb agreement and spelling and complete the named deliverable.",
+    "I use one exact detail from “Reading Lab 103: revising for clarity, then editing subject-verb agreement and spelling” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “Reading Lab 103: revising for clarity, then editing subject-verb agreement and spelling” in full and mark evidence connected to revising for clarity, then editing subject-verb agreement and spelling.",
+    "Answer the lesson question using one exact detail; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": true,
+    "prompt": "Revisit your work on revising for clarity, then editing subject-verb agreement and spelling. Which revision improves meaning, organization, or evidence most, and why?",
+    "deliverable": "Grade 3: a revised passage plus a revision note that identifies the change and its effect; write one organized paragraph."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (revising for clarity, then editing subject-verb agreement and spelling):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If revising for clarity, then editing subject-verb agreement and spelling is not yet secure, return to “Reading Lab 103: revising for clarity, then editing subject-verb agreement and spelling” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply revising for clarity, then editing subject-verb agreement and spelling to a different paragraph or a defensible alternative interpretation of “Reading Lab 103: revising for clarity, then editing subject-verb agreement and spelling.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

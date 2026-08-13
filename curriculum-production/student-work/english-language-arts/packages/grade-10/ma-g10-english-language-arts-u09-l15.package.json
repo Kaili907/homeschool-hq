@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g10-english-language-arts-u09-l15",
   "lessonRef": {
     "lessonId": "ma-g10-english-language-arts-u09-l15",
@@ -24,45 +24,70 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: theme development across adaptations. Essential question: How does close, evidence-governed attention to theme development across adaptations change what a reader or writer is entitled to claim? By the end of this lesson you should be able to: Explain what theme development across adaptations means and reconstruct, unprompted, the criteria a strong response must meet. You'll need: course notebook or digital equivalent; the unit's assigned texts, in an accessible reading representation; citation reference or style manual appropriate to the course."
+    "text": "This English 10 lesson develops theme development across adaptations within the unit “Source Transformation and Literary Lineage.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's assessment preparation work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "[1] During the “Source Transformation and Literary Lineage” inquiry at the museum reading room, Leena found a draft whose final paragraph changes its purpose. The documents described a four-week trial in which a reading room stayed open one hour later on Tuesdays. Attendance rose from 18 visits in week one to 31 in week four, but the records did not show whether the same people returned or new people arrived.\n\n[2] One summary called the trial “a clear success.” It cited the increase in visits and three positive comments. A second summary was more cautious. It noted that a nearby program had closed during weeks three and four, possibly sending visitors to the reading room. It also observed that no comparison was made with other weekdays.\n\n[3] Owen checked the original log and found a useful detail: most late visits lasted fewer than fifteen minutes. That fact could mean visitors only needed a quick pickup, or it could mean the room did not support longer work. The log recorded duration but not purpose, so either explanation required a qualification.\n\n[4] The inquiry team used theme development across adaptations to decide what the evidence established and what it did not. They could describe the attendance pattern precisely. They could not yet prove why it happened or whether the change should become permanent. Their next question therefore mattered as much as their current conclusion.\n\n[5] Before revising, the group tested the source against the workshop goal: theme development across adaptations. They highlighted language that supported the goal, circled a detail that complicated it, and drew an arrow where the relationship between two ideas needed to be made explicit. The marks produced different possible readings, so the group had to defend priorities rather than copy a single approved answer.\n\n[6] A later reader complicated the discussion by asking about audience and purpose. A concise public notice, a literary interpretation, and a research explanation may use evidence differently even when all three are responsible. The group therefore recorded not only what the source said, but also what situation would make each interpretation effective, insufficient, or misleading.",
     "refs": [
       {
-        "textId": "ma-hs-ela-t-1012",
-        "title": "The Fall of Icarus (Ovid, Metamorphoses VIII, Golding translation)",
-        "author": "Ovid, tr. Arthur Golding",
-        "form": "narrative poetry",
-        "rightsCategory": "public_domain",
-        "obtainNote": "Public-domain work. Obtain the text from a public-domain repository, a library, or a printed edition. It is not reproduced here.",
-        "accessibleRepresentation": "Digital reflowable text, enlarged print, or audio, learner's choice."
-      },
-      {
-        "textId": "ma-hs-ela-t-1007",
-        "title": "The Declaration of Independence",
-        "author": "Second Continental Congress",
-        "form": "public document",
-        "rightsCategory": "public_domain",
-        "obtainNote": "Public-domain work. Obtain the text from a public-domain repository, a library, or a printed edition. It is not reproduced here.",
-        "accessibleRepresentation": "Digital reflowable text, enlarged print, or audio, learner's choice."
+        "textId": "ma-original-ma-g10-english-language-arts-u09-l15",
+        "title": "Reading Lab 159: theme development across adaptations",
+        "author": "Manuel Academy",
+        "form": "information case",
+        "rightsCategory": "original",
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 352,
+        "sha256": "2605dcdc3106a9f3dc9fbe992ad778a7568b14f152a27cd358d307593492d7b9",
+        "origin": "academy_original_generated"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Criteria walkthrough: Walk the assessment's rubric dimensions and what each one is looking for. No new content is introduced today.\n- Gap self-audit: The learner identifies which of the unit's topics they are least secure in, including whether today's lesson is among them.\n- Targeted closing practice: Practice only on the topics the self-audit flagged. Time is not spent on what is already secure.\n- Conditions briefing: State plainly what support will and will not be available during the assessment, and confirm access accommodations, which are never withdrawn.\n- Readiness statement: The learner records, in one sentence, what they expect to find hardest tomorrow. This is not scored and is not shared beyond the facilitator.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite needed for today's lesson, re-teach it on a short passage, then retry one fresh item. Do not write the learner's response.\n- If repeated error pattern: Describe the observable pattern neutrally, contrast it with a correct case, and schedule a short later review of today's lesson.\n- If procedure without understanding: Ask the learner to explain why the move for today's lesson works on this text before continuing. Accept explanation in any modality."
+    "text": "Use this source-specific routine for “Reading Lab 159: theme development across adaptations”:\n1. Preview the title and paragraph structure; write what theme development across adaptations asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "Self-audit the unit's topics, then practise only the flagged gaps. When finished: Name the topic you are least secure in and the specific practice that would close it."
+    "text": "Read “Reading Lab 159: theme development across adaptations,” then answer: Audit your readiness on theme development across adaptations. Which criterion is secure, which needs practice, and what source-based practice will close the gap?\n\nDeliverable: English 10: a readiness audit with one completed practice item drawn from the reading; write a structured response of 650–900 words.\n\nEvidence requirement: Use three precise quotations or paraphrases with paragraph numbers. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "English 10: a readiness audit with one completed practice item drawn from the reading; write a structured response of 650–900 words.",
+  "learning_objectives": [
+    "Use the delivered reading to apply theme development across adaptations.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about theme development across adaptations and complete the named deliverable.",
+    "I use three precise quotations or paraphrases with paragraph numbers from “Reading Lab 159: theme development across adaptations” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting.",
+    "I address a meaningful complication, alternative interpretation, counterclaim, or limitation when the evidence calls for one."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about theme development across adaptations and complete the named deliverable.",
+    "I use three precise quotations or paraphrases with paragraph numbers from “Reading Lab 159: theme development across adaptations” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting.",
+    "I address a meaningful complication, alternative interpretation, counterclaim, or limitation when the evidence calls for one."
+  ],
+  "task_steps": [
+    "Read “Reading Lab 159: theme development across adaptations” in full and mark evidence connected to theme development across adaptations.",
+    "Answer the lesson question using three precise quotations or paraphrases with paragraph numbers; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": true,
+    "prompt": "Audit your readiness on theme development across adaptations. Which criterion is secure, which needs practice, and what source-based practice will close the gap?",
+    "deliverable": "English 10: a readiness audit with one completed practice item drawn from the reading; write a structured response of 650–900 words."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (theme development across adaptations):\n- prerequisite gap: Return to the smallest prerequisite needed for today's lesson, re-teach it on a short passage, then retry one fresh item. Do not write the learner's response.\n- repeated error pattern: Describe the observable pattern neutrally, contrast it with a correct case, and schedule a short later review of today's lesson.\n- procedure without understanding: Ask the learner to explain why the move for today's lesson works on this text before continuing. Accept explanation in any modality."
+    "text": "If theme development across adaptations is not yet secure, return to “Reading Lab 159: theme development across adaptations” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply the move to an unfamiliar text at the high end of the band with no exemplar and no checklist."
+    "text": "Apply theme development across adaptations to a different paragraph or a defensible alternative interpretation of “Reading Lab 159: theme development across adaptations.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

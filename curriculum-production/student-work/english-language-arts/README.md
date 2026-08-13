@@ -1,174 +1,91 @@
-# Manuel Academy — English Language Arts Student Work
+# Manuel Academy — English Language Arts canonical learner corpus
 
-Student-facing ELA work materials and a separately-stored teacher/parent
-scoring guide, generated for every lesson in Grades 3, 4, 5, 7, 8, 9, 10, 11,
-and 12 — 9 courses, 180 lessons each, 1,620 lessons total.
+This directory contains the canonical learner-content projection and separate
+adult scoring guides for English Language Arts in Grades 3, 4, 5, 7, 8, 9,
+10, 11, and 12: 9 courses, 180 lessons per course, 1,620 lessons total.
 
-Sources (read-only; nothing here modifies them):
-- Grades 5, 7, 8 — the canonical `curriculum-content/manuel-academy/1.0.0`
-  course package in this repo.
-- Grades 3, 4 — the `mac/g34-ela-r1` branch's authoring package.
-- Grades 9, 10, 11, 12 — the `mac/hs912-ela-r1` branch's authoring package.
+## Reading source model
 
-## What is here
+Every learner package uses `academy-original-inline` source delivery. The
+complete reading body is in `sourceReference.text`, and its only reference
+record declares:
 
-```
-curriculum-production/student-work/english-language-arts/
-  README.md
-  corpus-manifest.json          per-course lesson counts and source-integrity totals
-  packages/grade-XX/            student projection, one file per lesson — no rubric/answers
-  scoring-guides/grade-XX/      rubric, acceptable-answer criteria, mastery/authorship notes
-  src/                          adapters, package/guide builders, gate projection
-  tools/generate.mjs            regenerates the whole corpus from the three sources
-  tests/                        vitest suite (unit tests + the production-quality gate)
-  tooling/vitest.config.mjs     standalone vitest project (see "Running tests" below)
-  validation/                   gate-report.json / gate-report.md (written by the tests)
-```
+- `rightsCategory: original`
+- `deliveryMode: inline_full_text`
+- `learnerAvailable: true`
+- `fullTextIncluded: true`
+- the reading's word count and SHA-256 digest
 
-Every lesson emits two files:
+The generator reuses 320 complete Manuel Academy originals from the pinned
+Grades 3–4 original text banks. It creates and delivers 1,300 additional
+Academy-original reading-lab texts for lessons whose prior source was absent,
+facilitator-selected, public-domain/reference-only, or only an opening passage.
+It copies no modern copyrighted work, rights-required work, or third-party
+text. `source-ledger.jsonl` records the mode, provenance, rights category,
+delivery state, word count, and body digest for every lesson.
 
-- `packages/grade-XX/{lesson_id}.package.json` — the student projection:
-  `studentTask`, `sourceReference`, `guidedSupport`, `independentEvidenceTask`,
-  `remediation`, `extension`.
-- `scoring-guides/grade-XX/{lesson_id}.scoring.json` — the paired teacher/
-  parent-only scoring guide: a rubric built from the lesson's own
-  `success_criteria`, qualitative acceptable-answer criteria, mastery
-  criteria, the authorship (no-ghostwriting) policy, and a `doNotUse`
-  guardrail list.
+This is source/content repair only. It does not modify the browser projector,
+response UI, persistence, scoring implementation, release admission, course
+counts, or schedules.
 
-These are separate files on purpose, the same reason
-`curriculum-production/student-work/mathematics` keeps `packages/` and
-`answer-keys/` apart: a learner-facing renderer that only ever loads
-`packages/…` cannot expose scoring information even by accident.
-`tools/generate.mjs` asserts this on every write — it throws if a package
-JSON ever contains the string `"scoringAuthority"`, `"rubric"`,
-`"acceptableAnswerCriteria"`, `"masteryCriteria"`, or `"doNotUse"` — and
-`tests/lib.test.ts` re-checks it independently.
+## Learner package contract
 
-## No fixed answer keys, no ghostwritten essays
+Each `packages/grade-XX/*.package.json` contains:
 
-ELA scoring authority is `RUBRIC` for every one of the 1,620 lessons — never
-`ANSWER_KEY`. Nothing here manufactures a single "correct" essay, response, or
-short answer for open writing. `acceptableAnswerCriteria` describes what a
-qualifying response contains (evidence tied to the text, the stated success
-criteria, the lesson's mastery rule) — it is never itself a model answer, and
-every scoring guide restates the no-ghostwriting authorship policy already
-authored into the source lessons (falling back to a standard policy statement
-on the canonical grade-5/7/8 lessons, which don't carry a per-lesson
-`student_authorship` field of their own).
+- substantive skill instruction and context;
+- a complete inline reading;
+- a source-specific, actionable question;
+- an explicit deliverable and evidence requirement;
+- three or more task steps;
+- learner-visible success and completion criteria;
+- source-specific guided support, remediation, and extension; and
+- a writing-task record that identifies required writing phases.
 
-The one place a lesson legitimately has a closed/objective component is a
-`fixed_answer: true` prompt on a unit-assessment day. The source assessment
-records (`assessments.json`) don't yet ship the actual item text, options, or
-key for these — only a placeholder noting a key exists and is scorer-only.
-This generator does not invent one. The scoring guide instead states plainly
-that the objective item bank for that prompt isn't authored yet, and the
-independent-evidence task tells the student it will be delivered separately.
-Inventing a plausible-looking key here would be worse than leaving the gap
-visible.
+Demands progress by grade: evidence quantity and precision, response length,
+qualification, counterclaim/alternative interpretation, and limitation work
+increase from Grade 3 through English 12. Task text includes its own source,
+focus, phase, deliverable, and grade demand, so no independent task is copied
+unchanged across grades.
 
-## Copyright: source/text references are pointers, never reproductions
+Learner packages contain no model answers, answer keys, rubric objects,
+acceptable-answer criteria, mastery criteria, or scorer-only guardrails.
 
-`sourceReference` never contains the body of a text. It's always an id,
-title, author/creator, form, a normalized rights category
-(`original` / `public_domain` / `rights_required` / `unknown`), and a note on
-how to obtain the actual text — mirroring the policy already stated in the
-source branches' own text banks (`original-text-bank.json`,
-`public-domain-register.json`, `text-bank.json`): originals ship inside the
-gated course package and nowhere else; public-domain and rights-required
-works are referenced, never copied in.
+## Adult scoring separation
 
-Grades 5, 7, and 8 (the canonical package) don't yet ship a concrete anchor
-text or text bank for any lesson. Rather than inventing a title, those 40
-lesson-days across grades 3-4 that also lack a `text_reference` (and every
-lesson in grades 5/7/8) get a `sourceReference` that names the standards and
-topic and asks the facilitator to select a grade-appropriate text — exactly
-the substitution path the g34/hs912 lesson records already describe.
+Every `scoring-guides/grade-XX/*.scoring.json` is paired by lesson ID and stays
+outside the learner package tree. ELA scoring authority remains qualitative
+`RUBRIC`; acceptable-answer criteria describe evidence and reasoning features
+without supplying a response. Generator and test gates reject adult scoring
+keys or model-answer fields in learner packages.
 
-## Source integrity
+## Pinned canonical inputs
 
-For every lesson that does ship a concrete text (grades 3, 4, 9, 10, 11, 12),
-its `text_id` is cross-checked against that grade's own text bank
-(`original-text-bank.json` + `public-domain-register.json` for grades 3-4,
-`text-bank.json` per course for grades 9-12). `corpus-manifest.json` records
-the result per course. Current corpus: 0 `GAP`s — every shipped text
-reference resolves to a real bank entry. Grades 5/7/8 correctly show
-`NOT_APPLICABLE` counts (no bank exists to check against, not a fabricated
-pass).
+The generator refuses to run if any input worktree has drifted from its pinned
+commit:
 
-## The production readiness gate
+- Grades 3–4: `ef81511c2b582d003e397bb79daa8a26a41e3b10`
+- Grades 5/7/8 canonical production input: `00374a8dc26eddfac2cf52aec5661deff760ddbb`
+- Grades 9–12: `42f2505bb04d831c4aefc195a7ce03edb2d7b1d9`
 
-`tests/gate.test.ts` projects the generated corpus (not the raw source
-lessons) through the existing, curriculum-branch-agnostic gate at
-`src/curriculum/production-quality` (`evaluateCourseProductionReadiness`),
-using `subjectFamily: 'ELA_SOCIAL_STUDIES'` — the family that requires a
-rubric (with optional acceptable-answer criteria) rather than a fixed answer
-key, and that is not held to Math/FinLit's guided-practice or worked-example
-bar. It also writes `validation/gate-report.json` and `gate-report.md` as a
-side effect of running.
+The generator preserves all source lesson IDs, course days, unit/day positions,
+course counts, and schedule identities.
 
-Current result: **1,620 / 1,620 READY**, 0 `NEEDS_HUMAN_REVIEW`,
-0 `NOT_READY`. Zero `NEEDS_HUMAN_REVIEW` from this automated heuristic gate is
-not the same claim as "no human should look at this" — see the review note
-below.
-
-## Human review
-
-A single ELA scoring/source reviewer (subagent) sampled 27+ lesson pairs
-spread across all nine grades, including unit-assessment days, and checked
-the generated JSON directly (not just the generator code) against the three
-policies above.
-
-**Result: all three PASS at both full-corpus (automated grep across all
-1,620 packages) and close-read (sampled) level.** No fabricated answer key,
-no ghostwritten response, no reproduced text body, and no scoring-guide key
-was found in any student package.
-
-**One quality defect was found and fixed before this commit.** The g34
-source branch (grades 3-4) authors its `lesson_flow`/`adaptive_tutor_routes`
-prose from templates like `"the vocabulary {focus} requires"` and
-`"the smallest prerequisite {focus} depends on"`. Those read fine when
-`focus` is a short noun phrase, but every grade 3-4 lesson's `focus` field is
-actually a clause (median 9 words — e.g. `"what strong readers and writers
-do, and a no-penalty baseline"`), so the source's own authored sentences read
-as broken English (`"the vocabulary what strong readers and writers do, and
-a no-penalty baseline requires"`). This is a source-branch authoring defect
-this package does not own the fix for. It was present in 100% of grade 3 and
-grade 4 lessons (360/360). Since the broken text contains an exact, known
-literal substring — the source's own `focus` field — `repairFocusSubstitution`
-in `src/lib.mjs` swaps that literal occurrence for `"today's lesson"`, which
-fits the same grammatical slot in every observed template. `tests/lib.test.ts`
-has a regression test locking this in. Verified zero remaining instances of
-the broken construction across all 1,620 generated lessons after the fix.
-
-## Regenerating
+## Regenerate and verify
 
 From the repository root:
 
 ```bash
 node curriculum-production/student-work/english-language-arts/tools/generate.mjs
-```
-
-Deterministic: the same three source branches at the same commits produce
-byte-identical output (no randomness, no timestamps, no network calls).
-
-## Running tests
-
-The repository's root `vite.config.ts` only includes `src/`, `tests/`,
-`scripts/`, `supabase/`, and `netlify/` in its vitest projects, so this
-directory ships its own standalone vitest config rather than editing shared
-config this branch does not own (same approach as
-`curriculum-production/student-work/mathematics/tooling`):
-
-```bash
 npx vitest run --config curriculum-production/student-work/english-language-arts/tooling/vitest.config.mjs
+(cd curriculum-production/student-work/english-language-arts && shasum -a 256 -c SHA256SUMS.txt)
 ```
 
-## Known limitation
+Generation is deterministic. It rewrites all 1,620 learner packages, all 1,620
+adult guides, `corpus-manifest.json`, `source-ledger.jsonl`, the content-quality
+evidence, and `SHA256SUMS.txt`.
 
-The `fixed_answer: true` selected-response items referenced on unit-assessment
-days across all 9 courses have no underlying item bank yet in any of the
-three source branches (no options, no key — see "No fixed answer keys"
-above). Authoring that item bank is source-curriculum work this branch does
-not own; it's called out per-lesson in the scoring guide rather than
-papered over.
+`validation/content-quality-report.json` is the acceptance evidence. Its gate
+requires zero actionless tasks, empty required writing tasks, placeholder
+shells, cross-grade exact task copies, missing/unresolvable readings, false
+source claims, learner adult leaks, learner model answers, and guide-pairing
+mismatches.

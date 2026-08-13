@@ -1,12 +1,19 @@
 {
-  "generatedFrom": "generate.mjs",
+  "schemaVersion": "2.0",
+  "generatedFrom": "tools/generate.mjs",
+  "sourceCommits": {
+    "g34": "ef81511c2b582d003e397bb79daa8a26a41e3b10",
+    "canonical": "00374a8dc26eddfac2cf52aec5661deff760ddbb",
+    "hs912": "42f2505bb04d831c4aefc195a7ce03edb2d7b1d9"
+  },
+  "readingSourceModel": "academy-original-inline",
   "courses": [
     {
       "grade": 3,
       "courseId": "ma-g3-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 160,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -17,7 +24,7 @@
       "courseId": "ma-g4-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 160,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -28,7 +35,7 @@
       "courseId": "ma-g5-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 0,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -39,7 +46,7 @@
       "courseId": "ma-g7-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 0,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -50,7 +57,7 @@
       "courseId": "ma-g8-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 0,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -61,7 +68,7 @@
       "courseId": "ma-g9-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 360,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -72,7 +79,7 @@
       "courseId": "ma-g10-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 396,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -83,7 +90,7 @@
       "courseId": "ma-g11-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 414,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -94,7 +101,7 @@
       "courseId": "ma-g12-english-language-arts",
       "lessonCount": 180,
       "sourceIntegrityCounts": {
-        "VERIFIED": 378,
+        "VERIFIED": 180,
         "GAP": 0,
         "NOT_APPLICABLE": 0,
         "UNKNOWN": 0
@@ -105,5 +112,21 @@
     "lessons": 1620,
     "packages": 1620,
     "scoringGuides": 1620
+  },
+  "sourceCounts": {
+    "academy_original_bank": 320,
+    "academy_original_generated": 1300
+  },
+  "qualityFindings": {
+    "zeroActionable": 0,
+    "emptyRequiredWriting": 0,
+    "placeholders": 0,
+    "crossGradeDuplicatedTasks": 0,
+    "crossGradeDuplicatedReadings": 0,
+    "missingOrUnresolvableReading": 0,
+    "falseSourceClaims": 0,
+    "learnerAdultLeaks": 0,
+    "learnerModelAnswers": 0,
+    "scoringGuideCountMismatch": 0
   }
 }

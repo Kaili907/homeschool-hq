@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g3-english-language-arts-u03-l04",
   "lessonRef": {
     "lessonId": "ma-g3-english-language-arts-u03-l04",
@@ -21,34 +21,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: naming a trait and proving it with one action from the text. Essential question: How do a character's actions lead to the lesson a story teaches? By the end of this lesson you should be able to: Practice naming a trait and proving it with one action from the text with support that fades between the first and second try. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 3 lesson develops naming a trait and proving it with one action from the text within the unit “Story Elements: Characters, Problems, and Lessons.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's guided practice a work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "The gate behind the community garden had not opened properly in two years. It scraped, caught, and then stopped, leaving a gap too narrow for a wheelbarrow. Most people lifted their tools over the fence instead.\n\nNadia did not like lifting things over fences. She liked knowing why something was broken.\n\nShe crouched and looked at the bottom of the gate, then at the ground beneath it. The dirt there was worn into a shallow curve, as though the gate had been sanding the earth for years. She pushed the gate slowly and watched. The lowest corner dragged.\n\nHer neighbor Mr. Adeyemi told her the gate needed replacing and that this was that. He had said the same thing about the hose, the bench, and the shed door.\n\nNadia measured the drag with her hand: about two fingers of sag. Then she found the top hinge and saw three screws where there should have been four. The empty hole was stripped and round.\n\nIt took her four afternoons. She filled the stripped hole with wooden matchsticks and glue, waited a day, drilled a new pilot hole, and drove in a longer screw. The gate lifted almost a full inch.\n\nIt still scraped a little. Nadia decided that a gate that scraped a little and opened all the way was a good enough gate.\n\nWhen Mr. Adeyemi wheeled the first barrow through, he did not say anything about replacing it. He only asked whether she had any of those matchsticks left, because his shed door was worse.",
     "refs": [
       {
         "textId": "g3-text-05",
         "title": "Nadia and the Stubborn Gate",
+        "author": "Manuel Academy",
         "form": "realistic fiction",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 256,
+        "sha256": "aa20c9c3d2fbf3b4dbba849fd6ed15db705d938412e1e0e82adc8f09bb16a4a6",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word work and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Restate the steps for today's lesson in one sentence and post them where the learner can see them.\n- Guided practice: Work two items on today's lesson. Prompt fully on the first; on the second, prompt only when the learner stalls.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “Nadia and the Stubborn Gate”:\n1. Preview the title and paragraph structure; write what naming a trait and proving it with one action from the text asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner finishes one item on today's lesson with the step list visible but no verbal prompting. When finished: Do one item of today's lesson and circle the step you needed most."
+    "text": "Read “Nadia and the Stubborn Gate,” then answer: Apply naming a trait and proving it with one action from the text to paragraph 2, then check your decision against paragraph 4. What survives the check?\n\nDeliverable: Grade 3: a checked application with an initial decision, evidence, and a revision if needed; write 3–5 complete sentences.\n\nEvidence requirement: Use one exact detail. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 3: a checked application with an initial decision, evidence, and a revision if needed; write 3–5 complete sentences.",
+  "learning_objectives": [
+    "Use the delivered reading to apply naming a trait and proving it with one action from the text.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about naming a trait and proving it with one action from the text and complete the named deliverable.",
+    "I use one exact detail from “Nadia and the Stubborn Gate” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about naming a trait and proving it with one action from the text and complete the named deliverable.",
+    "I use one exact detail from “Nadia and the Stubborn Gate” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “Nadia and the Stubborn Gate” in full and mark evidence connected to naming a trait and proving it with one action from the text.",
+    "Answer the lesson question using one exact detail; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": false,
+    "prompt": "Apply naming a trait and proving it with one action from the text to paragraph 2, then check your decision against paragraph 4. What survives the check?",
+    "deliverable": "Grade 3: a checked application with an initial decision, evidence, and a revision if needed; write 3–5 complete sentences."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (naming a trait and proving it with one action from the text):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If naming a trait and proving it with one action from the text is not yet secure, return to “Nadia and the Stubborn Gate” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply naming a trait and proving it with one action from the text to a different paragraph or a defensible alternative interpretation of “Nadia and the Stubborn Gate.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g4-english-language-arts-u10-l07",
   "lessonRef": {
     "lessonId": "ma-g4-english-language-arts-u10-l07",
@@ -20,34 +20,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: dialogue and description that develop a character's response. Essential question: How do I write a narrative a reader can follow, and show a year of growth across genres? By the end of this lesson you should be able to: Extend dialogue and description that develop a character's response to a case the first model did not handle. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 4 lesson develops dialogue and description that develop a character's response within the unit “Narrative Craft, Comparison, and the Year-End Portfolio.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's concept model b work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "The maple sap bucket held four gallons when it was full, which was thirty-two pounds, which was more than Dev could carry level.\n\nHe had asked for the job. That was the part he kept returning to as he shuffled down the slope with the bucket banging against his shin and sap slopping over the rim in bright cold splashes.\n\nHis older sister Anita carried two buckets and did not slop.\n\n\"You are fighting it,\" she said, without turning around.\n\n\"I am carrying it.\"\n\n\"You are fighting it. Watch.\" She stopped and set both buckets down in the snow. \"Hold it away from your leg. Let your arm hang straight. Do not try to keep it still.\"\n\n\"If I do not keep it still it will spill.\"\n\n\"It spills because you keep stopping it.\"\n\nThat made no sense at all, so Dev tried it out of irritation. He let his arm go loose. The bucket swung forward, back, forward, in time with his steps, and the sap inside rocked and rode the swing instead of climbing the sides.\n\nHe walked forty feet without spilling a drop.\n\n\"Huh,\" he said.\n\nAnita picked up her buckets. \"Dad taught me that. Grandpa taught him. Nobody figured it out. Somebody just says it to you and then you know it.\"\n\nThey emptied into the collection tank at the bottom of the hill, and Dev's arms were shaking, and the sap ran out of the bucket in a long amber rope that steamed slightly in the cold.\n\nOn the walk back up he thought about the fact that the trick was three sentences long. Three sentences, and a hundred years of people saying them to each other on this hill, and without them he would have carried buckets badly for the rest of his life and called it being tired.\n\nHe was still tired. But he was not fighting it anymore.",
     "refs": [
       {
         "textId": "g4-text-15",
         "title": "The Weight of the Bucket",
+        "author": "Manuel Academy",
         "form": "narrative model",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 316,
+        "sha256": "d25362feb7b653b6589c44a05461307c6fa2b9cf67987268d842f8fbec380b07",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word study and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Demonstrate today's lesson on a harder or contrasting case and name precisely what changed.\n- Guided practice: Compare the two cases and articulate the rule that covers both.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “The Weight of the Bucket”:\n1. Preview the title and paragraph structure; write what dialogue and description that develop a character's response asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner handles one harder case and states the rule that covers both cases. When finished: What rule covers both versions of today's lesson you have now seen?"
+    "text": "Read “The Weight of the Bucket,” then answer: Compare the two perspectives or versions in the reading. Which contrast best clarifies dialogue and description that develop a character's response, and why?\n\nDeliverable: Grade 4: a comparison organized around one meaningful contrast; write one organized paragraph.\n\nEvidence requirement: Use two exact details. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 4: a comparison organized around one meaningful contrast; write one organized paragraph.",
+  "learning_objectives": [
+    "Use the delivered reading to apply dialogue and description that develop a character's response.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about dialogue and description that develop a character's response and complete the named deliverable.",
+    "I use two exact details from “The Weight of the Bucket” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about dialogue and description that develop a character's response and complete the named deliverable.",
+    "I use two exact details from “The Weight of the Bucket” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “The Weight of the Bucket” in full and mark evidence connected to dialogue and description that develop a character's response.",
+    "Answer the lesson question using two exact details; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": false,
+    "prompt": "Compare the two perspectives or versions in the reading. Which contrast best clarifies dialogue and description that develop a character's response, and why?",
+    "deliverable": "Grade 4: a comparison organized around one meaningful contrast; write one organized paragraph."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (dialogue and description that develop a character's response):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If dialogue and description that develop a character's response is not yet secure, return to “The Weight of the Bucket” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply dialogue and description that develop a character's response to a different paragraph or a defensible alternative interpretation of “The Weight of the Bucket.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }
