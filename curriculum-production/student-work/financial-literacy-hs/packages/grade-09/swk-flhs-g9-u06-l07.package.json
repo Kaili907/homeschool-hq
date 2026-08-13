@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u06-l07",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: financial risk to income, assets, health, or identity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "financial risk to income, assets, health, or identity",
+  "objective": "Find the error in a fictional judgement that possessions are not worth insuring, build the inventory that corrects it, and compare the corrected figure with a premium.",
+  "scenario": "A fictional renter wrote: \"I do not need renters insurance — my stuff is not worth much, maybe $900 all in.\" The simulated inventory below is what the possessions actually come to.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional inventory in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional inventory, at replacement cost: laptop $640, phone $410, bicycle $285, clothes $700, kitchen items $240, textbooks $320, furniture $480. The renter estimated the total at $900. A fictional policy costs $13 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total replacement cost of the inventory?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much did the renter’s estimate of $900 understate the total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the fictional policy cost for a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Locate the error and test the judgement.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "What was wrong with the renter’s reasoning?",
+          "choices": [
+            "The premium; $13 a month is more than they said",
+            "The estimate; an unlisted guess at total value was far below the itemised total",
+            "The arithmetic; the items do not add to $3,075",
+            "Nothing; $900 of possessions is not worth insuring"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many years of premiums would it take to equal the replacement cost of the inventory? Round to one decimal place."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why estimating a total without listing the items produced such a large error, and say what the corrected figures do and do not settle about whether to buy the policy."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total feels too high, read the list back and ask what each item would cost to buy again today. Replacement cost is the relevant figure for insurance, and it is usually well above what the owner remembers paying.",
+  "extension": "Add a $750 deductible to the fictional policy and recompute what the renter would actually receive after a total loss, then revisit the judgement.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u06-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

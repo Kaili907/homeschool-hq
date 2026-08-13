@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l03",
+  "lessonId": "ma-g9-financial-literacy-u07-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,557.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6.2% of $41,250, which a filer can check against the printed box rather than take on trust."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$598.13",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1.45% of $41,250 is $598.125, which rounds to $598.13."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$7,045.63",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,890 of federal income tax plus $2,557.50 of Social Security plus $598.13 of Medicare."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$428.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15.3% of $2,800, an amount nobody withheld on the filer’s behalf."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Tax was withheld on the W-2 income and no tax was withheld on the 1099-NEC income",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Both forms report income to the filer and to the tax authority; only the W-2 shows amounts already paid in, which is why the 1099-NEC income can produce an unexpected bill."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$44,050.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$41,250 of wages plus $2,800 of self-employed income."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(wages * ssRate, 2)",
+        "substituted": "round(41250 * 0.062, 2)",
+        "result": "$2,557.50",
+        "why": "6.2% of $41,250, which a filer can check against the printed box rather than take on trust."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(wages2 * medRate, 2)",
+        "substituted": "round(41250 * 0.0145, 2)",
+        "result": "$598.13",
+        "why": "1.45% of $41,250 is $598.125, which rounds to $598.13."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "federalWithheld + #t1-p1 + #t1-p2",
+        "substituted": "3890 + #t1-p1 + #t1-p2",
+        "result": "$7,045.63",
+        "why": "$3,890 of federal income tax plus $2,557.50 of Social Security plus $598.13 of Medicare."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(selfEmployed * seRate, 2)",
+        "substituted": "round(2800 * 0.153, 2)",
+        "result": "$428.40",
+        "why": "15.3% of $2,800, an amount nobody withheld on the filer’s behalf."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "wages3 + selfEmployed2",
+        "substituted": "41250 + 2800",
+        "result": "$44,050.00",
+        "why": "$41,250 of wages plus $2,800 of self-employed income."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A filer with only W-2 income and a filer with 1099-NEC income face the same tax rules but very different experiences at filing time. Explain why, and describe what the second filer should do during the year that the first need not.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that W-2 income arrives with tax already paid in — $7,045.63 here — while the $2,800 of 1099-NEC income arrives with nothing withheld.",
+          "States that the second filer owes at least the $428.40 of self-employment tax plus income tax on the same amount, all due at filing unless paid in advance.",
+          "Names the practical step: setting money aside during the year, or making estimated payments, rather than discovering the amount at filing."
+        ],
+        "evidenceRequirements": [
+          "Uses the $7,045.63 total withheld and the $428.40 self-employment tax."
+        ],
+        "lookFors": [
+          "The response does not suggest the 1099-NEC income escapes tax.",
+          "The response identifies the absence of withholding as the difference, not a difference in the rules."
+        ],
+        "commonMisconception": "Assuming income arrives with tax already handled because that is how a first job worked.",
+        "dimensions": [
+          "criteria-application",
+          "plan-coherence",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

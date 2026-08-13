@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u06-l01",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: financial risk to income, assets, health, or identity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "financial risk to income, assets, health, or identity",
+  "objective": "Compute the expected annual loss for four fictional risks from their stated probability and size, and rank them by expected loss rather than by how alarming each sounds.",
+  "scenario": "The four risks below belong to a fictional household in a simulated year. Every probability and loss amount is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional risk table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional risks, each with a chance of happening in a year and the loss it would cause. A cracked phone screen: 22% chance, $180 loss. Three months out of work: 6% chance, $4,440 loss. A major dental bill: 11% chance, $1,250 loss. Cleaning up after identity theft: 4% chance, $890 loss. Expected loss is the chance multiplied by the loss.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss from the cracked phone screen?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss from three months out of work?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss from the major dental bill?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss from identity theft cleanup?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now rank and total.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the household’s total expected loss across all four risks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which risk has the highest expected annual loss?",
+          "choices": [
+            "The cracked phone screen",
+            "Three months out of work",
+            "The major dental bill",
+            "Identity theft cleanup"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which risk is most likely to happen in a given year?",
+          "choices": [
+            "The cracked phone screen",
+            "Three months out of work",
+            "The major dental bill",
+            "Identity theft cleanup"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The most likely risk and the most costly risk are different ones. Explain what that means for which risk the household should plan for first, and say why expected loss alone is not enough to decide."
+        }
+      ]
+    }
+  ],
+  "remediation": "If expected loss is being read as the amount the household will lose, work one risk aloud: in 100 simulated years the phone breaks in about 22 of them at $180 each, which averages $39.60 a year — an amount that is never actually lost in any single year.",
+  "extension": "Add a fifth fictional risk with a 1% chance and a $30,000 loss, compute its expected loss, and say where it belongs in the ranking and why that placement is uncomfortable.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u06-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

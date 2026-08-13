@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l05",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: filing responsibilities and recordkeeping"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "filing responsibilities and recordkeeping",
+  "objective": "Compute the penalties a fictional late filing produces under a stated simplified rule, and separate the cost of filing late from the cost of paying late.",
+  "scenario": "A fictional filer owes $1,340 and files three months after the deadline. The penalty rules below are simplified and invented for this exercise; they are not the real penalty schedule.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional penalty rules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the simplified fictional rules: a failure-to-file penalty of 5% of the tax owed for each month late, and a separate failure-to-pay penalty of 0.5% of the tax owed for each month late. The filer is 3 months late on both.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the failure-to-file penalty?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the failure-to-pay penalty?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do the two penalties total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Compare the two penalties and the total due.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the filer owe in total, tax and penalties?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the filer had filed on time but still could not pay for 3 months, what would the penalties have been?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much did filing late, as opposed to paying late, cost this filer?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Filing late cost ten times what paying late cost. Explain what that ratio signals about what the rules are trying to encourage, and describe what a filer who cannot pay should do."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two penalties come out equal, check the rates: 5% a month and 0.5% a month differ by a factor of ten. Compute 1% of $1,340 first ($13.40) and scale from there to keep the decimal places straight.",
+  "extension": "Under these fictional rules, work out the number of months at which the failure-to-file penalty would exceed the tax owed, and say why a real system would cap it.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

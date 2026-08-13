@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u06-l10",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: premium, deductible, and coverage limit"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "premium, deductible, and coverage limit",
+  "objective": "Compute expected annual cost and worst-case exposure for three fictional policies, test each against a stated reserve, and defend a recommendation.",
+  "scenario": "A fictional household with $2,000 in reserve is choosing among three simulated policies against a $6,000 loss with an 18% annual chance. All figures are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the three fictional policy summaries in these directions",
+    "a blank comparison table"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Policy 1: $46 a month, $500 deductible, $15,000 limit. Policy 2: $33 a month, $1,500 deductible, $15,000 limit. Policy 3: $25 a month, $2,500 deductible, $8,000 limit. The loss, if it happens, is $6,000 and the annual chance is 18%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Policy 1’s expected annual cost — premium plus the chance of paying the deductible?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Policy 2’s expected annual cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Policy 3’s expected annual cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test each against the $2,000 reserve. On a $6,000 loss, the household pays the deductible, or more if the limit binds.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "On a $6,000 loss under Policy 3, how much does the household pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which policy leaves the household unable to cover its own share from the $2,000 reserve?",
+          "choices": [
+            "Policy 1",
+            "Policy 2",
+            "Policy 3",
+            "None of them"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much short of Policy 3’s deductible is the reserve?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the recommendation.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Recommend one policy for this household. Use both the expected annual costs and the $2,000 reserve, and say explicitly what your recommendation would be if the reserve were $5,000 instead."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Policy 3 also has a lower coverage limit than the other two. Say when that would matter and why it did not matter in this comparison."
+        }
+      ]
+    }
+  ],
+  "remediation": "If all three policies look affordable, check the deductible against the reserve rather than against the premium. The premium is a monthly commitment; the deductible is a single amount that must be available on the day of the loss.",
+  "extension": "Add a fourth fictional policy at $38 a month with a $1,000 deductible and a $15,000 limit, place it in both rankings, and say whether it changes the recommendation.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u06-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

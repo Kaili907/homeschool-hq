@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l11",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 11,
+    "phase": "Defense and extension",
+    "title": "Defense and extension: filing responsibilities and recordkeeping"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "filing responsibilities and recordkeeping",
+  "objective": "Price the consequence of a fictional recordkeeping failure, design a records plan that would have prevented it, and defend the plan against the effort it costs.",
+  "scenario": "A fictional filer could not support $1,480 of deductions at a simulated review because no records were kept. Every figure below is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional review summary in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional filer claimed $1,480 of deductions at a 12% marginal rate and could not support them. The disallowed deductions produce additional tax, plus a fictional accuracy penalty of 20% of that additional tax.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What additional tax results from the disallowed deductions?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the accuracy penalty at 20% of that additional tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total cost of the recordkeeping failure?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price the plan that would have prevented it: 15 minutes a month filing receipts, valued at the filer’s $19.40 hourly rate.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is a year of that recordkeeping worth in the filer’s own time?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much better off would the filer have been with the records?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "On these figures, was the recordkeeping worth doing?",
+          "choices": [
+            "Yes, it costs less than the failure it prevents",
+            "No, the time is worth more than the tax at stake"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the defence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Defend a recordkeeping plan to someone who says it is not worth the effort. Use the figures, name what records the plan would actually keep, and answer the strongest version of their objection."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Records also protect deductions a filer might otherwise not claim. Explain how that second benefit changes the case, and why it is harder to put a number on than the $213.12."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the additional tax comes out as $1,480, the disallowed deduction is being treated as tax rather than as income that becomes taxable again. Apply the 12% marginal rate to the $1,480 before anything else.",
+  "extension": "Recompute the whole comparison at a 24% marginal rate and say whether the case for recordkeeping strengthens or weakens as income rises.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l11.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l11",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

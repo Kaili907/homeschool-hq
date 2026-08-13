@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l10",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: tax benefits and drawbacks in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "tax benefits and drawbacks in outline",
+  "objective": "Outline the tax benefits and drawbacks of two fictional choices, compute the after-tax effect of each, and recommend one with the drawback stated.",
+  "scenario": "A fictional worker with a 12% marginal rate has $3,000 available and two simulated options. Both options and all rates are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional options in these directions",
+    "a blank two-column outline"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Option 1: contribute the $3,000 to a pre-tax retirement account, which reduces taxable income by $3,000 but locks the money away until retirement. Option 2: keep the $3,000 in a savings account paying 3.5%, fully available, with the interest taxed at the 12% rate.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much tax does Option 1 save this year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What interest does Option 2 earn in a year, before tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Option 2 leave after tax on the interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Compare the first-year positions.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much better off is Option 1 in the first year, counting only the tax saved against the after-tax interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $3,000 does Option 2 leave available to spend if an emergency arises?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the outline.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Outline the tax benefit and the drawback of each option, then recommend one for a worker with no emergency reserve at all — and defend that recommendation against the $267.60 first-year advantage the other option shows."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Option 1’s $360 saving assumes a 12% marginal rate. Say what happens to that figure if the worker’s marginal rate is 22% instead, and whether that changes the recommendation for a worker with no reserve."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Option 1’s saving is coming out as $3,000, the contribution is being treated as a credit. It reduces the income that tax is charged on, so its value is the marginal rate times the contribution — $360, not $3,000.",
+  "extension": "Extend the comparison to five years, assuming Option 1 grows 6% a year untouched and Option 2 keeps earning 3.5% taxed annually, and say what the comparison looks like then.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

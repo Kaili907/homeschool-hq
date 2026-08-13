@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l08",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: how withholding changes take-home pay"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "how withholding changes take-home pay",
+  "objective": "Apply the withholding method to a fictional worker with two employers, and show why withholding set correctly at each job can still fall short overall.",
+  "scenario": "A fictional worker holds two simulated jobs. Each employer withholds as though it were the only source of income. The schedule below is the simplified fictional one used in this unit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional job figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Job A pays $22,000 a year and Job B pays $16,000. Each employer withholds 10% of the pay it issues, because at that pay level alone 10% would be about right. The fictional federal schedule charges 10% on the first $11,600 of total income and 12% above that.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Job A withhold over the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld across both jobs?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax actually owed on the combined income of $38,000?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Compare what was withheld with what is owed.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the shortfall at filing?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much extra would need to be withheld each month across the year to close the gap? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Why did correct-looking withholding at each job still fall short?",
+          "choices": [
+            "Each employer used the wrong rate for the pay it issued",
+            "Neither employer knew about the other income, so both applied the low-rate band",
+            "The combined income was taxed at a higher rate on every dollar",
+            "The worker earned more than either employer reported"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "This is the same withholding method used on a single job, applied to a case it was not designed for. Explain what changed, and name the step a two-job worker has to take that a one-job worker does not."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "A worker discovers the $528 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the tax owed comes out as the sum of two separate calculations, one per job, reread the schedule: it applies to total income. Add the two salaries first, then apply the bands once to the combined $38,000.",
+  "extension": "Recompute the shortfall if Job B paid $9,000 instead of $16,000, and say whether the problem gets better or worse as the second job gets smaller.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

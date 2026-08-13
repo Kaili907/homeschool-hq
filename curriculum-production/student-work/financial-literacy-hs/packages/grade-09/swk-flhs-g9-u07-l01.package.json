@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l01",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: federal, state, and local taxes a person is likely to pay"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "federal, state, and local taxes a person is likely to pay",
+  "objective": "Compute five different taxes a fictional worker pays in one simulated year and express the total as a share of income.",
+  "scenario": "A fictional worker earns $38,400 in a simulated year. Every tax rate below belongs to this invented example and is not a real published rate.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional federal schedule charges 10% on the first $11,600 of income and 12% on everything above that. Payroll tax is 7.65% of all income. State income tax is 4.25% and city income tax is 1%. The worker also pays 6% sales tax on $14,000 of taxable purchases.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the federal income tax under this fictional schedule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the payroll tax at 7.65% of all income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What are the state and city income taxes together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the sales tax on $14,000 of taxable purchases at 6%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now total them and measure against income.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of all five taxes?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of income does the total represent? Round to one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which single tax is the largest for this fictional worker?",
+          "choices": [
+            "Federal income tax",
+            "Payroll tax",
+            "State income tax",
+            "Sales tax"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Only two of these five taxes appear on a pay stub as a deduction. Name which ones do not, and explain why a worker asking \"how much tax do I pay?\" would understate the answer by reading their stub alone."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the federal tax comes out near $4,608, the 12% rate is being applied to the whole $38,400. Under this fictional schedule the first $11,600 is taxed at 10% no matter how much is earned above it; compute the two pieces separately before adding.",
+  "extension": "Recompute all five taxes for a fictional worker earning $19,000 with $8,000 of taxable purchases, and say which tax becomes the largest.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l07",
+  "lessonId": "ma-g9-financial-literacy-u07-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,480 paid in against $4,380 owed, so the refund figure in the filer’s claim is correct."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,380.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The tax paid is the amount owed and kept by the tax authority, not the amount temporarily withheld."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$280.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,380 owed against $4,100 withheld leaves $280 to pay."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "They paid the same amount of tax",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Both owed $4,380; the two experienced opposite outcomes at filing purely because of how much had been withheld along the way."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "The refund with the tax paid",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The $2,100 refund is the return of over-withholding; the $4,380 owed is what the filer actually paid, and the two are entirely different quantities."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$4,380.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The filer claimed to have paid nothing, so the whole $4,380 is the understatement."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "withheld - owed",
+        "substituted": "6480 - 4380",
+        "result": "$2,100.00",
+        "why": "$6,480 paid in against $4,380 owed, so the refund figure in the filer’s claim is correct."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "owed2",
+        "substituted": "4380",
+        "result": "$4,380.00",
+        "why": "The tax paid is the amount owed and kept by the tax authority, not the amount temporarily withheld."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "owed3 - withheld2",
+        "substituted": "4380 - 4100",
+        "result": "$280.00",
+        "why": "$4,380 owed against $4,100 withheld leaves $280 to pay."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "owedA == owedB",
+        "substituted": "4380 == 4380",
+        "result": "They paid the same amount of tax",
+        "why": "Both owed $4,380; the two experienced opposite outcomes at filing purely because of how much had been withheld along the way."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t1-p2",
+        "substituted": "#t1-p2",
+        "result": "$4,380.00",
+        "why": "The filer claimed to have paid nothing, so the whole $4,380 is the understatement."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Explain what a refund measures, and describe how you would check whether your own withholding is set sensibly — without using any real figures, describe the two numbers you would compare.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that a refund measures the gap between what was withheld and what was owed, and says nothing about the size of the tax.",
+          "Names the two numbers to compare: total withheld for the year against total tax owed for the year, both of which appear on a completed return.",
+          "Explains that a withholding setting is sensible when those two are close, so neither a large refund nor a large bill arises."
+        ],
+        "evidenceRequirements": [
+          "Uses the $6,480 withheld, the $4,380 owed, and the $2,100 refund from the fictional summary."
+        ],
+        "lookFors": [
+          "The response describes the check in general terms without asking anyone to state their own real tax figures.",
+          "The response recognises that a large refund is not a mistake, only an interest-free loan to the government."
+        ],
+        "commonMisconception": "Reading the refund line as the year’s tax result rather than as a settling-up.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l11",
+  "lessonId": "ma-g9-financial-literacy-u07-l11",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$177.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12% of the $1,480 that can no longer reduce taxable income."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$35.52",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The fictional accuracy penalty is 20% of the additional tax of $177.60."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$213.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$177.60 of tax plus $35.52 of penalty."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$58.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15 minutes a month is 3 hours a year, valued at $19.40 an hour."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$154.92",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$213.12 avoided against $58.20 of time spent."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Yes, it costs less than the failure it prevents",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$58.20 of time against $213.12 of avoidable cost, and the records also protect deductions the filer might otherwise not claim at all."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "disallowed * marginalRate",
+        "substituted": "1480 * 0.12",
+        "result": "$177.60",
+        "why": "12% of the $1,480 that can no longer reduce taxable income."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * penaltyRate, 2)",
+        "substituted": "round(#t1-p1 * 0.2, 2)",
+        "result": "$35.52",
+        "why": "The fictional accuracy penalty is 20% of the additional tax of $177.60."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$213.12",
+        "why": "$177.60 of tax plus $35.52 of penalty."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(minutesPerMonth * 12 / 60 * hourlyRate, 2)",
+        "substituted": "round(15 * 12 / 60 * 19.4, 2)",
+        "result": "$58.20",
+        "why": "15 minutes a month is 3 hours a year, valued at $19.40 an hour."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t2-p1",
+        "substituted": "#t1-p3 - #t2-p1",
+        "result": "$154.92",
+        "why": "$213.12 avoided against $58.20 of time spent."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 < #t1-p3",
+        "substituted": "#t2-p1 < #t1-p3",
+        "result": "Yes, it costs less than the failure it prevents",
+        "why": "$58.20 of time against $213.12 of avoidable cost, and the records also protect deductions the filer might otherwise not claim at all."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Defend a recordkeeping plan to someone who says it is not worth the effort. Use the figures, name what records the plan would actually keep, and answer the strongest version of their objection.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Uses the $58.20 of time against the $213.12 of avoidable cost, and does not overstate the margin.",
+          "Names specific records the plan keeps — dated receipts, a log of self-employed expenses, the annual forms — rather than recommending record-keeping in general.",
+          "Answers the strongest objection honestly: in a year with no review the effort produces no visible return, so the plan is insurance against a possibility rather than a certain saving."
+        ],
+        "evidenceRequirements": [
+          "Uses at least three computed figures from this lesson."
+        ],
+        "lookFors": [
+          "The response acknowledges the calculation assumed the review happened, and that its expected value depends on how likely that is.",
+          "The plan described is specific enough that someone could follow it."
+        ],
+        "commonMisconception": "Judging recordkeeping by whether it produced a visible benefit this year.",
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Records also protect deductions a filer might otherwise not claim. Explain how that second benefit changes the case, and why it is harder to put a number on than the $213.12.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that unrecorded expenses are often simply not claimed, so the records raise the deductions taken as well as defending them.",
+          "States why the size of that benefit is unknown: it depends on expenses the filer never recorded and therefore cannot count."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $1,480 of deductions at issue as the documented side of the case."
+        ],
+        "lookFors": [
+          "The response does not invent a figure for the unclaimed deductions."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

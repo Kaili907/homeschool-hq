@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l09",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l09",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: common IRS tax forms and what each is for"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "common IRS tax forms and what each is for",
+  "objective": "Assemble total income from four fictional information forms, state what each form is for, and identify which figures on a return come from forms and which the filer supplies.",
+  "scenario": "The four simulated forms below arrived for one fictional filer. Every amount is invented for this exercise and no real form or filer is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional form summaries in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional forms: a W-2 reporting wages of $41,250; a 1099-NEC reporting $2,800 of self-employed work; a 1099-INT reporting $86 of interest; and a 1098-E reporting $340 of student loan interest paid.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is total income across the three forms that report income received?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-choice",
+          "text": "Which of the four forms does not report income to the filer?",
+          "choices": [
+            "The W-2",
+            "The 1099-NEC",
+            "The 1099-INT",
+            "The 1098-E"
+          ]
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the $340 of student loan interest is fully deductible, what income figure does the return start from?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Not every figure on a return arrives on a form.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "Which of these figures would the filer normally have to supply from their own records rather than read off a form?",
+          "choices": [
+            "Wages from an employer",
+            "Interest paid by a bank",
+            "Expenses against the self-employed income",
+            "Federal income tax withheld by an employer"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the filer’s own records show $610 of allowable expenses against the self-employed work, what is the net self-employed income?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Three of these forms are also sent to the tax authority and one figure — the $610 of expenses — is not documented anywhere but the filer’s own records. Explain what that asymmetry means for how a filer should keep records during the year."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the 1098-E amount is being added to income, read what it reports: interest the filer paid, not received. Sort the four forms into money in and money out before adding anything.",
+  "extension": "Add a fictional 1099-G reporting $1,150 of unemployment compensation, decide which pile it belongs in, and recompute the income total.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

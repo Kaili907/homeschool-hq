@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l04",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: tax benefits and drawbacks in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "tax benefits and drawbacks in outline",
+  "objective": "Compute the value of a fictional tax credit against a fictional deduction of the same face amount, and state the rule that explains the gap.",
+  "scenario": "A fictional filer with a 12% marginal rate is told they qualify for either a $1,200 credit or a $1,200 deduction, but not both. Both are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional credit and deduction terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A credit reduces the tax owed dollar for dollar. A deduction reduces the income the tax is charged on. The filer’s marginal rate is 12%, and the fictional credit is not refundable but the filer owes more than $1,200 in tax.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the $1,200 credit reduce the tax owed?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the $1,200 deduction reduce the tax owed?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more is the credit worth than the deduction?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Test how the comparison moves with the marginal rate.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the same deduction be worth to a filer with a 24% marginal rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Whose value depends on the filer’s marginal rate?",
+          "choices": [
+            "The credit only",
+            "The deduction only",
+            "Both",
+            "Neither"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "State the rule that distinguishes a credit from a deduction in one sentence, then explain why the same $1,200 deduction is worth more to a higher-rate filer while the same credit is not."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the deduction is being valued at $1,200, ask what it actually removes. It takes $1,200 out of the income figure, and the filer then does not pay tax on that $1,200 — at 12%, that is $144 not paid, not $1,200.",
+  "extension": "Find the marginal rate at which a $1,200 deduction would be worth as much as a $400 credit, and say whether such a rate exists in practice.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

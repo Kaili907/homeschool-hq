@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l08",
+  "lessonId": "ma-g9-financial-literacy-u07-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10% of $22,000, computed as though Job A were the worker’s only income."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,200.00 from Job A plus $1,600.00 from Job B."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,328.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,160 on the first $11,600 plus 12% of the remaining $26,400, because the schedule applies to total income and not to each job separately."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$528.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,328.00 owed against $3,800.00 withheld."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$44.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$528.00 spread over twelve months."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Neither employer knew about the other income, so both applied the low-rate band",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The 10% band applies once to the first $11,600 of total income, but each employer effectively treated its own pay as starting from zero, so the low band was applied twice."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "payA * rate",
+        "substituted": "22000 * 0.1",
+        "result": "$2,200.00",
+        "why": "10% of $22,000, computed as though Job A were the worker’s only income."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 + payB * rate2",
+        "substituted": "#t1-p1 + 16000 * 0.1",
+        "result": "$3,800.00",
+        "why": "$2,200.00 from Job A plus $1,600.00 from Job B."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "bracket * lowRate + (combined - bracket) * highRate",
+        "substituted": "11600 * 0.1 + (38000 - 11600) * 0.12",
+        "result": "$4,328.00",
+        "why": "$1,160 on the first $11,600 plus 12% of the remaining $26,400, because the schedule applies to total income and not to each job separately."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$528.00",
+        "why": "$4,328.00 owed against $3,800.00 withheld."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / 12, 2)",
+        "substituted": "round(#t2-p1 / 12, 2)",
+        "result": "$44.00",
+        "why": "$528.00 spread over twelve months."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This is the same withholding method used on a single job, applied to a case it was not designed for. Explain what changed, and name the step a two-job worker has to take that a one-job worker does not.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the method assumes the employer sees all of the worker’s income, which is true with one job and false with two.",
+          "Names the step: telling one employer to withhold extra, or making a separate payment, so the total matches the $4,328.00 owed."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,800.00 withheld and the $4,328.00 owed."
+        ],
+        "lookFors": [
+          "The response does not blame either employer, both of which applied the rule correctly to what they could see."
+        ],
+        "commonMisconception": "Assuming that withholding handled correctly at each job adds up to the right total.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "A worker discovers the $528 shortfall in March, after filing. Say what they should change for the current year and why acting in March is better than acting in December.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Recommends raising withholding at one job now, and notes the amount needed spreads across the remaining months rather than the whole year.",
+          "Explains that acting early spreads the same total over more paychecks, so each one is affected less than a December correction would be."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $528.00 shortfall or the $44.00 monthly figure."
+        ],
+        "lookFors": [
+          "The response recognises the correction must be larger per month if started later."
+        ],
+        "dimensions": [
+          "plan-coherence",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

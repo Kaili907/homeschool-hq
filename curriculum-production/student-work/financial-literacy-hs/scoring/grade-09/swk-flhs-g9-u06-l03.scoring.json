@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l03",
+  "lessonId": "ma-g9-financial-literacy-u06-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$72,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "400 households, each with a 2% chance of a $9,000 loss, which is about 8 claims a year."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$180.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$72,000 of expected claims spread over 400 households."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$90,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Premium income across the pool: 400 households at $225 each."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$18,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$90,000 collected against $72,000 of expected claims."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "20.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$18,000 of $90,000 collected, which covers administration, the risk that claims exceed expectation, and profit."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$45.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$225 paid against $180 of expected loss."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "households * p * loss",
+        "substituted": "400 * 0.02 * 9000",
+        "result": "$72,000.00",
+        "why": "400 households, each with a 2% chance of a $9,000 loss, which is about 8 claims a year."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 / households2",
+        "substituted": "#t1-p1 / 400",
+        "result": "$180.00",
+        "why": "$72,000 of expected claims spread over 400 households."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "households3 * premium",
+        "substituted": "400 * 225",
+        "result": "$90,000.00",
+        "why": "Premium income across the pool: 400 households at $225 each."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - #t1-p1",
+        "substituted": "#t1-p3 - #t1-p1",
+        "result": "$18,000.00",
+        "why": "$90,000 collected against $72,000 of expected claims."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / #t1-p3 * 100, 1)",
+        "substituted": "round(#t2-p1 / #t1-p3 * 100, 1)",
+        "result": "20.0%",
+        "why": "$18,000 of $90,000 collected, which covers administration, the risk that claims exceed expectation, and profit."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "premium2 - #t1-p2",
+        "substituted": "225 - #t1-p2",
+        "result": "$45.00",
+        "why": "$225 paid against $180 of expected loss."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Every household pays $45 a year more than its own expected loss, and buying the policy is still rational for most of them. Explain why, and say what kind of household it would not be rational for.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the $45 buys the removal of a $9,000 possibility, which most households could not absorb in one year.",
+          "States that the insurer can carry the risk because 400 pooled households produce a predictable total, while one household faces an unpredictable single outcome.",
+          "Identifies the household for whom it is not rational: one wealthy enough that a $9,000 loss is absorbable, for whom the $45 buys nothing it needs."
+        ],
+        "evidenceRequirements": [
+          "Uses the $180 expected loss, the $225 premium, and the $9,000 loss amount."
+        ],
+        "lookFors": [
+          "The response identifies pooling as the mechanism that makes the total predictable.",
+          "The response does not describe the $18,000 margin as the insurer cheating the pool."
+        ],
+        "commonMisconception": "Concluding that insurance is a bad deal because the premium exceeds the expected loss, which it must for the insurer to exist.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}
