@@ -1,0 +1,36 @@
+{
+  "auditId": "ARTS_MUSIC_LEARNER_AUDIT_R1",
+  "baseSha": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "projectionAuthority": "scripts/build-final-family-pilot-data.mjs projectJsonMaterial -> final lazy course payload",
+  "renderAuthority": "src/study/family-pilot/final-app/FinalFamilyPilotApp.tsx MaterialView",
+  "comparedFields": [
+    "task_brief",
+    "primary_task",
+    "deliverable",
+    "materials",
+    "learning_objectives",
+    "lesson_success_criteria",
+    "task_steps when authored",
+    "requirements",
+    "critique_criteria",
+    "accessibility_options",
+    "task_accessibility_provisions"
+  ],
+  "summary": {
+    "lessonsProjected": 648,
+    "lessonsWithoutLoss": 648,
+    "lessonsWithLoss": 0,
+    "projectionResult": "PASS"
+  },
+  "losses": [],
+  "negativeControl": {
+    "name": "browser drops steps",
+    "expected": [
+      "PROJECTION_LOSS"
+    ],
+    "actual": [
+      "PROJECTION_LOSS"
+    ],
+    "detected": true
+  }
+}
