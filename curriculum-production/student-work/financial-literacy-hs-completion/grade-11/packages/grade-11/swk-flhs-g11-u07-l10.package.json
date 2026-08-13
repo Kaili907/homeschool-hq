@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l10",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: self-employment and multiple-income tax obligations"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "self-employment and multiple-income tax obligations",
+  "objective": "Build a complete fictional tax estimate across employment and self-employment income, reconcile it against what has already been withheld, and convert the balance into instalments.",
+  "scenario": "Octavia Mbamalu-Ferrand is preparing a fictional annual estimate in a simulated tax system. The schedule, the self-employment rate, and all income figures below were chosen for this performance task and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional income and tax figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional schedule, taxable income is total income less a standard deduction of $11,400, and tax is 10% on the first $9,800 of taxable income, 14% between $9,800 and $38,400, and 22% between $38,400 and $85,400. A fictional self-employment contribution of 14.2% is charged on net self-employment income only. Octavia earns $41,800 from employment with $4,180 already withheld, and runs a fictional business with revenue of $28,600 and allowable expenses of $9,350.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Octavia’s net self-employment income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is her total income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is her taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is her income tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Now add the self-employment contribution and reconcile against what has already been paid.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the 14.2% self-employment contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is her total tax for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is still owed, after the $4,180 already withheld from her employment income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Paid in 4 equal quarterly instalments, how much is each?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What is her effective rate against total income? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total tax is still outstanding after the withholding? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One check before the recommendation.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What share of her net self-employment income would need to be set aside to cover the $6,012.50 balance? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Why is more than half the year’s tax still outstanding when Octavia has been paying tax all year?",
+          "choices": [
+            "Because the withholding was computed against the employment income alone",
+            "Because self-employment income is taxed at a higher rate in every band",
+            "Because the standard deduction only applies to employment income"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write your recommendation. Answer both.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Recommend how Octavia should handle her tax across the coming year. State what she should set aside and from what, name the figure that would change your recommendation most if it were wrong, and say what she should do differently from a filer with employment income alone."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "Octavia’s effective rate is 16.7% and her marginal income-tax rate is 22%. Say what each would tell her about a decision to take on $3,000 more of business work, and which she should use."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the balance owed comes out at $10,192.50, the $4,180 already withheld has not been credited. Withholding is a payment on account against the same liability, so it comes off the total. If instead the balance comes out near $3,279.00, the self-employment contribution has been left out of the total tax. Build the estimate as four rows — income tax, contribution, total, less withheld — before dividing by 4.",
+  "extension": "Recompute the whole estimate if Octavia’s business revenue fell to $22,000 with expenses unchanged, and say whether the quarterly instalment falls by more or less than the fall in profit.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

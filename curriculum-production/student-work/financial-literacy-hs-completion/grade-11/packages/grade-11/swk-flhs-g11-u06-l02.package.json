@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u06-l02",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: allocating a limited protection budget"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "allocating a limited protection budget",
+  "objective": "Rank four fictional policies by the expected loss each removes per premium dollar, allocate a fixed budget accordingly, and state what the ranking measure leaves out.",
+  "scenario": "Lucien Batbold-Renaudin is allocating a fictional household’s protection budget. The four policies, their premiums, deductibles, and limits below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The budget is $1,850 a year. Policy A costs $640, covers roof damage with a $1,000 deductible, and the risk is a 4% chance of a $14,500 loss. Policy D costs $410, covers a long illness with a $2,500 deductible, and the risk is a 2% chance of a $38,000 loss. A policy removes the expected value of what it would pay, which is the chance multiplied by the loss less the deductible.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What expected annual loss does Policy A remove?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What expected annual loss does Policy D remove?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much expected loss does Policy A remove per premium dollar? Give two decimal places.",
+          "unit": "ratio"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much expected loss does Policy D remove per premium dollar? Give two decimal places.",
+          "unit": "ratio"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Policy C costs $190, covers a phone with a $100 deductible, and the risk is a 22% chance of a $940 loss. Policy B costs $780, covers a collision with a $500 deductible, and the risk is a 9% chance of a $6,800 loss.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What expected annual loss does Policy C remove?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What expected annual loss does Policy B remove?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much expected loss does Policy C remove per premium dollar? Give two decimal places.",
+          "unit": "ratio"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Buying Policy D, then Policy C, then Policy A in that order, what do the three premiums come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $1,850 budget is left after those three?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "What total expected annual loss do the three purchased policies remove?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The ranking measure is expected loss removed per premium dollar. Say what it captures well, name one thing it ignores entirely, and explain how that omission could lead to the wrong purchase."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Policy B is the one that goes unbought, leaving $610.00 of budget unspent. Say what the household could do with that $610.00, and what it would be giving up by leaving the collision risk uncovered."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a policy appears to remove the whole expected loss, the deductible is being ignored. A policy pays only what the loss exceeds the deductible by, so Policy A removes 4% of $13,500 and not 4% of $14,500. Write the loss, the deductible, and the difference as three columns before multiplying by the chance.",
+  "extension": "Find the premium at which Policy B would be worth buying ahead of Policy A on the per-dollar measure, and say whether the household could then afford all four.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u06-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

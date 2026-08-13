@@ -1,0 +1,328 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l08",
+  "lessonId": "ma-g11-financial-literacy-u05-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "9.4% of $50,000 — the amount both fee structures are measured against."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$425.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.85% of $50,000, charged on the holding regardless of how the year went."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.2% of $50,000 — much lower than Fund A’s asset charge, which is the part the advertisement would lead with."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$564.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12% of the $4,700.00 gain — on its own already larger than Fund A’s entire fee."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$664.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$100.00 on the assets and $564.00 on the gain."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$239.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$664.00 against $425.00 — the fund with the higher headline percentage is the cheaper one in a strong year."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$4,275.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,700.00 of gain less the $425.00 fee."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$425.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Unchanged here: the fee is charged on the $50,000 held rather than on any gain, so it is owed in full even in a year with no gain at all."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$325.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$425.00 against Fund B’s $100.00, because there is no gain for the 12% charge to apply to — the ranking has reversed."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "It depends on how the year went",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Fund A is $239.00 cheaper in the 9.4% year and $325.00 dearer in the losing year, so neither structure is cheaper in general and the comparison cannot be made without specifying the year."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(holding * gainRate, 2)",
+        "substituted": "round(50000 * 0.094, 2)",
+        "result": "$4,700.00",
+        "why": "9.4% of $50,000 — the amount both fee structures are measured against."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(holding2 * feeA, 2)",
+        "substituted": "round(50000 * 0.0085, 2)",
+        "result": "$425.00",
+        "why": "0.85% of $50,000, charged on the holding regardless of how the year went."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(holding3 * feeB, 2)",
+        "substituted": "round(50000 * 0.002, 2)",
+        "result": "$100.00",
+        "why": "0.2% of $50,000 — much lower than Fund A’s asset charge, which is the part the advertisement would lead with."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(#t1-p1 * performanceRate, 2)",
+        "substituted": "round(#t1-p1 * 0.12, 2)",
+        "result": "$564.00",
+        "why": "12% of the $4,700.00 gain — on its own already larger than Fund A’s entire fee."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 + #t1-p4",
+        "substituted": "#t1-p3 + #t1-p4",
+        "result": "$664.00",
+        "why": "$100.00 on the assets and $564.00 on the gain."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "$239.00",
+        "why": "$664.00 against $425.00 — the fund with the higher headline percentage is the cheaper one in a strong year."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$4,275.00",
+        "why": "$4,700.00 of gain less the $425.00 fee."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(holding4 * feeA2, 2)",
+        "substituted": "round(50000 * 0.0085, 2)",
+        "result": "$425.00",
+        "why": "Unchanged here: the fee is charged on the $50,000 held rather than on any gain, so it is owed in full even in a year with no gain at all."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 - #t1-p3",
+        "substituted": "#t2-p4 - #t1-p3",
+        "result": "$325.00",
+        "why": "$425.00 against Fund B’s $100.00, because there is no gain for the 12% charge to apply to — the ranking has reversed."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t2-p5 > 0",
+        "substituted": "#t2-p5 > 0",
+        "result": "It depends on how the year went",
+        "why": "Fund A is $239.00 cheaper in the 9.4% year and $325.00 dearer in the losing year, so neither structure is cheaper in general and the comparison cannot be made without specifying the year."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Earlier in the unit a fee was compared on a single percentage. Say why that method fails here, what has to be specified before these two funds can be compared, and which structure a holder facing several uncertain years would find easier to plan around.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the two fees are charged on different bases, so a single percentage does not describe either comparison — Fund B’s cost depends on a gain that is not known in advance.",
+          "States what must be specified: the return for the year, or a distribution of returns across the years being compared.",
+          "Argues that Fund A’s fee is easier to plan around because it is knowable in advance at $425.00, while acknowledging that this is a different question from which is cheaper."
+        ],
+        "evidenceRequirements": [
+          "Cites the $239.00 gap in the gaining year and the $325.00 gap in the losing year."
+        ],
+        "lookFors": [
+          "The response identifies the differing fee bases as what breaks the earlier method.",
+          "The response separates predictability from cheapness.",
+          "A response noting that Fund B’s structure means the manager is paid more when the holder does well is a legitimate additional observation."
+        ],
+        "commonMisconception": "Comparing fee structures on their headline percentages when they are charged on different bases.",
+        "dimensions": [
+          "transfer",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Fund B charges nothing on gains in a losing year. Say whether that makes it the safer structure for a holder, and name one thing about the arrangement you would want to see specified.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Gives a considered answer, noting that the $100.00 charge in a losing year is genuinely lower, while the 12% charge in gaining years may cost more over a run of mixed years.",
+          "Names something that should be specified, such as whether past losses must be recovered before the performance fee applies again, or what the gain is measured against."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $100.00 losing-year charge and the $564.00 performance fee from the gaining year."
+        ],
+        "lookFors": [
+          "The response reasons across a run of years rather than one.",
+          "The specification named is one a real fee schedule would settle."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

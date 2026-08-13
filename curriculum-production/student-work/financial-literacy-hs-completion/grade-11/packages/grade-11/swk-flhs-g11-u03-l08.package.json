@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l08",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l08",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: inflation compounding across a decade"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "inflation compounding across a decade",
+  "objective": "Transfer the inflation method to a fictional cost rising faster than general prices, separate the excess from ordinary inflation, and compute what must be set aside today to meet it.",
+  "scenario": "Lorenzo Chukwuemeka-Salvesen is saving for a fictional certification course for a family member. The fee, its inflation rate, and the savings rate below are invented figures for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional fee and rate figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The course fee is $3,900 a year today and has been rising 5.8% a year. General prices are rising 2.6% a year. Money Lorenzo sets aside earns 3.1% a year. Use a 6-year horizon and round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What will the fee be in 6 years at 5.8% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would the fee be in 6 years if it had only tracked general prices at 2.6% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of the increase is above what general inflation would have produced?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now work out what Lorenzo needs today. Money set aside grows at 3.1% a year, which is slower than the fee is rising.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much must be set aside today, at 3.1% a year, to meet the year-6 fee?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more is that than today’s $3,900 fee?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The amount needed today is what percentage of today’s fee? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Why is more than today’s fee needed today, even though the money earns interest?",
+          "choices": [
+            "Because the fee rises faster than the savings grow",
+            "Because interest is only paid at the end of the six years",
+            "Because general inflation of 2.6% is subtracted from the 3.1% return"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This lesson applies the same compounding method used earlier in the unit for a general basket of goods. Say what had to change for this case, and explain why saving \"the current price\" of something is a reliable plan for some goals and not for others."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The fee has risen 5.8% a year \"and has been rising\" at that rate. Explain what that phrasing does and does not establish about the next six years, and say how you would state the $5,469.89 figure honestly."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the amount needed today comes out below $3,900, the target is being discounted at the fee’s own 5.8% rather than at the 3.1% the savings earn. Two different rates are in play: 5.8% grows the fee and 3.1% grows the money set aside. Label each rate with what it applies to before using either.",
+  "extension": "Find the savings return that would let $3,900 set aside today exactly meet the year-6 fee, and say whether that return is closer to the 3.1% available or to the 5.8% the fee is rising at.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

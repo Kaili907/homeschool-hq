@@ -1,0 +1,313 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l05",
+  "lessonId": "ma-g11-financial-literacy-u06-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,490.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60% of $4,150. The policy replaces part of the income, not all of it, which is the first source of the shortfall."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$58,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "14 months at $4,150 — what Seraphina would have earned had the interruption not happened."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$12,450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three months at $4,150 with no benefit at all — the second source of the shortfall, and the one that arrives first."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$27,390.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "11 months of $2,490.00. The 24-month maximum is not reached, so it plays no part in this claim."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$30,710.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58,100.00 of lost income against $27,390.00 of benefit."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "47.1%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$27,390.00 of $58,100.00 — well under the 60% the policy quotes, because the waiting period pays nothing."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$12,450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three unpaid months. This portion would exist even if the policy replaced 100% of income afterwards."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$18,260.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$30,710.00 of shortfall less the $12,450.00 from the waiting period — the remainder is the 40% of income the policy never replaces across the 11 paid months."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "5.0",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$12,450.00 against a monthly benefit of $2,490.00 — a three-month wait costs five months of benefit, which is why a reserve has to cover the waiting period rather than the policy."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(income * benefitRate, 2)",
+        "substituted": "round(4150 * 0.6, 2)",
+        "result": "$2,490.00",
+        "why": "60% of $4,150. The policy replaces part of the income, not all of it, which is the first source of the shortfall."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "income2 * months",
+        "substituted": "4150 * 14",
+        "result": "$58,100.00",
+        "why": "14 months at $4,150 — what Seraphina would have earned had the interruption not happened."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "income3 * 3",
+        "substituted": "4150 * 3",
+        "result": "$12,450.00",
+        "why": "Three months at $4,150 with no benefit at all — the second source of the shortfall, and the one that arrives first."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "#t1-p1 * 11",
+        "substituted": "#t1-p1 * 11",
+        "result": "$27,390.00",
+        "why": "11 months of $2,490.00. The 24-month maximum is not reached, so it plays no part in this claim."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - #t1-p4",
+        "substituted": "#t1-p2 - #t1-p4",
+        "result": "$30,710.00",
+        "why": "$58,100.00 of lost income against $27,390.00 of benefit."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p4 / #t1-p2 * 100, 1)",
+        "substituted": "round(#t1-p4 / #t1-p2 * 100, 1)",
+        "result": "47.1%",
+        "why": "$27,390.00 of $58,100.00 — well under the 60% the policy quotes, because the waiting period pays nothing."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3",
+        "substituted": "#t1-p3",
+        "result": "$12,450.00",
+        "why": "The three unpaid months. This portion would exist even if the policy replaced 100% of income afterwards."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p1 - #t2-p3",
+        "substituted": "#t2-p1 - #t2-p3",
+        "result": "$18,260.00",
+        "why": "$30,710.00 of shortfall less the $12,450.00 from the waiting period — the remainder is the 40% of income the policy never replaces across the 11 paid months."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t1-p3 / #t1-p1, 1)",
+        "substituted": "round(#t1-p3 / #t1-p1, 1)",
+        "result": "5.0",
+        "why": "$12,450.00 against a monthly benefit of $2,490.00 — a three-month wait costs five months of benefit, which is why a reserve has to cover the waiting period rather than the policy."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The policy quotes 60% replacement and delivers 47.1%. Explain why the two figures differ, say which of the policy’s terms a household should size its reserve against, and how large that reserve would need to be.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the 60% applies only to the months after the waiting period, so three unpaid months at $4,150 pull the realised replacement down to 47.1%.",
+          "Identifies the waiting period as the term the reserve must cover, since the policy pays nothing during it whatever the interruption turns out to be.",
+          "States the reserve size as at least $12,450.00, the full three months of income."
+        ],
+        "evidenceRequirements": [
+          "Cites the 47.1% realised replacement against the 60% quoted, and the $12,450.00 waiting-period loss."
+        ],
+        "lookFors": [
+          "The response explains the gap between quoted and realised replacement, not just that a gap exists.",
+          "The reserve figure is derived from the waiting period rather than picked.",
+          "A response noting that a longer interruption would push the realised share closer to 60% is reading the mechanism correctly."
+        ],
+        "commonMisconception": "Reading a quoted replacement percentage as the share of a whole interruption that will be replaced.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "A shorter waiting period would cost a higher premium. Using the figures, say what a household would be buying and how it should decide whether the shorter wait is worth it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States what is bought: each month removed from the waiting period is worth $2,490.00 of benefit in a claim of this length.",
+          "Describes the decision method: compare the extra annual premium against that benefit weighted by how likely a claim is, and against whether the household has a reserve able to cover the wait."
+        ],
+        "evidenceRequirements": [
+          "Uses the $2,490.00 monthly benefit or the $12,450.00 waiting-period loss when valuing the shorter wait."
+        ],
+        "lookFors": [
+          "The response weights the benefit by the chance of claiming rather than comparing it to the premium directly.",
+          "The response connects the decision to whether a reserve already covers the wait."
+        ],
+        "dimensions": [
+          "tradeoff-defense",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

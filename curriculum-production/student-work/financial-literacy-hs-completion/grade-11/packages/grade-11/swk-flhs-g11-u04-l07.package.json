@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l07",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: amortisation schedules and total interest"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "amortisation schedules and total interest",
+  "objective": "Test a fictional claim that doubling a loan term doubles its interest, compute the real ratio, and explain what makes the relationship more than proportional.",
+  "scenario": "Marguerite Hollins-Bergman is checking the simulated claim below. The loan, both offers, and the claim itself are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional loan offers in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The claim reads: \"Doubling the term doubles the interest, so the 72-month offer costs twice what the 36-month one does.\" The loan is $14,500. The 36-month offer charges $461.10 a month; the 72-month offer charges $261.37 a month. Both are at 0.75% a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of payments under the 36-month offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of payments under the 72-month offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the interest on the 36-month offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the interest on the 72-month offer?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the claim directly. Work these without help.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the ratio of the 72-month interest to the 36-month interest? Give two decimal places.",
+          "unit": "ratio"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much extra interest does the 72-month offer cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the 72-month interest have been if the claim were true?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the claim understate the 72-month interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the monthly payment on the 72-month offer?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The claim is close but wrong, and its direction of error matters. Explain why doubling the term more than doubles the interest, using the amortisation idea from earlier in the unit, and say who is harmed by an error in this direction."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The extra interest is $2,219.04 and the monthly relief is $199.73. Work out how many months of relief the extra interest is worth, and say what that comparison does and does not settle."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the 72-month interest comes out at $4,199.20, the claim is being used as the calculation rather than being tested by it. Compute each offer’s interest from its own payment and term: 72 payments of $261.37 total $18,818.64, and the interest is what that exceeds $14,500. Only then compare the result with what the claim predicted.",
+  "extension": "Work out the ratio of interest between a 24-month and a 48-month version of the same loan, and say whether the more-than-doubling effect gets stronger or weaker at shorter terms.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

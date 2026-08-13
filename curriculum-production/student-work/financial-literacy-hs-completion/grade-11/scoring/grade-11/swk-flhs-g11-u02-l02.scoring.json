@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l02",
+  "lessonId": "ma-g11-financial-literacy-u02-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$20,880.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60 payments of $348. This is the part of the finance route a monthly figure hides."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$23,780.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,900 down payment plus the $20,880.00 of payments."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,180.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$23,780.00 against the $19,600 cash price — the price of spreading the payments over five years."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$10,094.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,850 at signing plus 36 payments of $229. It is the smallest total on the page and the only one that leaves Thaddeus owning nothing."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$4,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Two years at $2,150. Delay is not free: the repairs are the price of waiting."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$21,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,300.00 of repairs plus the $17,200 the vehicle costs in two years’ time."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,400 the vehicle has fallen in price is less than the $4,300.00 spent keeping the old one running, so waiting costs more here rather than less."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$4,180.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three ownership routes total $23,780.00, $21,500.00, and $19,600 — a spread of $4,180.00 between financing and paying outright, with delay in between."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "Because it covers 36 months and leaves no vehicle, while the others cover 60 months and end in ownership",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The scenario states the vehicle is returned at the end of the 36 months, so the lease buys a different thing over a different period; the $1,850 signing amount is in fact smaller than the $2,900 finance deposit, so the third option contradicts the scenario."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "payment * 60",
+        "substituted": "348 * 60",
+        "result": "$20,880.00",
+        "why": "60 payments of $348. This is the part of the finance route a monthly figure hides."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 + down",
+        "substituted": "#t1-p1 + 2900",
+        "result": "$23,780.00",
+        "why": "The $2,900 down payment plus the $20,880.00 of payments."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - cash",
+        "substituted": "#t1-p2 - 19600",
+        "result": "$4,180.00",
+        "why": "$23,780.00 against the $19,600 cash price — the price of spreading the payments over five years."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "signing + leasePayment * 36",
+        "substituted": "1850 + 229 * 36",
+        "result": "$10,094.00",
+        "why": "$1,850 at signing plus 36 payments of $229. It is the smallest total on the page and the only one that leaves Thaddeus owning nothing."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "repairs * 2",
+        "substituted": "2150 * 2",
+        "result": "$4,300.00",
+        "why": "Two years at $2,150. Delay is not free: the repairs are the price of waiting."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 + laterPrice",
+        "substituted": "#t2-p1 + 17200",
+        "result": "$21,500.00",
+        "why": "$4,300.00 of repairs plus the $17,200 the vehicle costs in two years’ time."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - cash2",
+        "substituted": "#t2-p2 - 19600",
+        "result": "$1,900.00",
+        "why": "The $2,400 the vehicle has fallen in price is less than the $4,300.00 spent keeping the old one running, so waiting costs more here rather than less."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "max(#t1-p2, #t2-p2, cash3) - min(#t1-p2, #t2-p2, cash3)",
+        "substituted": "max(#t1-p2, #t2-p2, 19600) - min(#t1-p2, #t2-p2, 19600)",
+        "result": "$4,180.00",
+        "why": "The three ownership routes total $23,780.00, $21,500.00, and $19,600 — a spread of $4,180.00 between financing and paying outright, with delay in between."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Rank the four routes for Thaddeus and defend the ranking. State explicitly what you are holding constant to make the comparison, and what your ranking would change to if he could only find $1,000 today.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Produces a ranking that puts buying outright at $19,600 ahead of delay at $21,500.00 and financing at $23,780.00 on total outlay, and handles the lease separately rather than slotting it in on total alone.",
+          "Names what is being held constant, such as a five-year holding period, or the assumption that the $17,200 future price is known.",
+          "Revises the ranking under the $1,000 constraint, recognising that buying outright, the $2,900 finance deposit, and the $1,850 due at lease signing are all out of reach, which leaves delay as the only available route."
+        ],
+        "evidenceRequirements": [
+          "Cites at least three of the four route totals when defending the ranking."
+        ],
+        "lookFors": [
+          "The response says why the lease cannot be ranked on total outlay rather than ignoring it.",
+          "The revised ranking follows from the cash constraint rather than being asserted.",
+          "Any ranking is acceptable if the criterion behind it is stated and applied consistently."
+        ],
+        "commonMisconception": "Ranking options with different terms and different end states on total outlay alone.",
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The delay route assumes the vehicle will cost $17,200 in two years. Explain what makes that figure different in kind from the other figures in this comparison, and say what would happen to the ranking if it turned out to be $19,900.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the other figures are quoted terms Thaddeus could hold someone to, while the future price is a forecast nobody has committed to.",
+          "States that at $19,900 the delay route would total $24,200, making it the most expensive of the three ownership routes rather than the middle one."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $21,500.00 delay total and to at least one quoted figure, such as the $348 monthly payment or the $19,600 cash price."
+        ],
+        "lookFors": [
+          "The response distinguishes a quoted term from a projected one.",
+          "The revised total is computed rather than described as \"higher\"."
+        ],
+        "commonMisconception": "Treating every number in a comparison as equally solid because they all appear on the same page.",
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

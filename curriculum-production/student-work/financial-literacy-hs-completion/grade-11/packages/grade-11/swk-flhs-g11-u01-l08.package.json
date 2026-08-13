@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l08",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l08",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: opportunity cost of years not earning"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "opportunity cost of years not earning",
+  "objective": "Transfer the opportunity-cost method to a case where one pathway pays during training, compute both ten-year positions, and find how long the crossover actually takes.",
+  "scenario": "Hafsa Lindqvist-Bello is a fictional school-leaver with two invented options. Neither the apprenticeship nor the programme below is real, and the wages attached to them are simulated.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional pathway summaries in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional apprenticeship pays $27,400 a year for 3 training years and $52,300 a year for the remaining 7 years, with no tuition. The fictional full-time programme charges $16,800 a year for 3 years with no earnings during them, and pays $61,700 a year for the remaining 7 years. Use a 10-year horizon and hold each wage flat.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the apprenticeship earn across the whole 10 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the programme’s net position across the whole 10 years, after its tuition?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "At the end of 10 years, how far ahead is the apprenticeship?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Find where the two paths actually cross. Work these without help.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "At the end of year 3, how far apart are the two pathways?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "From year 4 onwards, how much more does the programme pathway earn each year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many further years after year 3 does it take for the programme to close the gap? Give one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Counting from the start, in which year does the programme pathway overtake the apprenticeship? Give one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Over a 10-year horizon, which pathway is ahead, and over a 25-year horizon?",
+          "choices": [
+            "The apprenticeship at 10 years and the apprenticeship at 25 years",
+            "The apprenticeship at 10 years and the programme at 25 years",
+            "The programme at both horizons"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "In an earlier lesson the pathway that paid throughout also led at the shorter horizon. Say what is the same about the mechanism here, and name the one feature of this case that the earlier method had to be adjusted for."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The crossover falls at 17.1 years. Name two things about Hafsa’s situation that would make that either decisive or almost irrelevant, and say which figure each one would move."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the crossover comes out at 14.1 years, the 3 training years have been left out of the count. The catching-up only starts once both pathways are working, so the answer is 3 years of gap-building plus 14.1 years of closing it. Draw a timeline with year 3 marked and start the closing count there.",
+  "extension": "Recompute the crossover if the apprenticeship’s qualified wage rises to $55,000 while the programme’s stays at $61,700, and say what that does to the size of the decision.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

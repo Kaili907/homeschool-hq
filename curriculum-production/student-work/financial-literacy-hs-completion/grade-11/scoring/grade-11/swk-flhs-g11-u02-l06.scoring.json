@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l06",
+  "lessonId": "ma-g11-financial-literacy-u02-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$24,235.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "66 payments of $367.20. The disclosure requires this figure precisely because a monthly amount alone does not produce it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$5,785.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$24,235.20 of payments against $18,450 borrowed. The finance charge is the cost of the credit itself, separate from the price of the vehicle."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "31.4%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,785.20 against $18,450. This is not an annual rate — it is the total cost of the credit across all 66 months, which is why a rate and a total are both disclosed."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$25,116.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "84 payments of $299 — the smaller monthly figure over the longer term."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$6,666.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$25,116.00 of payments against the same $18,450 financed."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$880.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,666.00 against $5,785.20 — the price of the lower monthly figure, invisible unless both totals are computed."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$68.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$367.20 against $299 — the only figure the advertisement actually invites a buyer to compare."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "The number of payments and the total they come to",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The advertisement does state $299 and the two offers finance the same $18,450, so neither of those is the omission; what it buries is that 84 payments rather than 66 turn a $68.20 monthly saving into $880.80 of extra finance charges."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(payment * count, 2)",
+        "substituted": "round(367.2 * 66, 2)",
+        "result": "$24,235.20",
+        "why": "66 payments of $367.20. The disclosure requires this figure precisely because a monthly amount alone does not produce it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - financed",
+        "substituted": "#t1-p1 - 18450",
+        "result": "$5,785.20",
+        "why": "$24,235.20 of payments against $18,450 borrowed. The finance charge is the cost of the credit itself, separate from the price of the vehicle."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p2 / financed2 * 100, 1)",
+        "substituted": "round(#t1-p2 / 18450 * 100, 1)",
+        "result": "31.4%",
+        "why": "$5,785.20 against $18,450. This is not an annual rate — it is the total cost of the credit across all 66 months, which is why a rate and a total are both disclosed."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(adPayment * adCount, 2)",
+        "substituted": "round(299 * 84, 2)",
+        "result": "$25,116.00",
+        "why": "84 payments of $299 — the smaller monthly figure over the longer term."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - financed3",
+        "substituted": "#t2-p1 - 18450",
+        "result": "$6,666.00",
+        "why": "$25,116.00 of payments against the same $18,450 financed."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - #t1-p2",
+        "substituted": "#t2-p2 - #t1-p2",
+        "result": "$880.80",
+        "why": "$6,666.00 against $5,785.20 — the price of the lower monthly figure, invisible unless both totals are computed."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "payment2 - adPayment2",
+        "substituted": "367.2 - 299",
+        "result": "$68.20",
+        "why": "$367.20 against $299 — the only figure the advertisement actually invites a buyer to compare."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain what a standardised disclosure box is for, using the two offers as the example, and say why requiring the total of payments does more work than requiring the monthly payment to be accurate.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that standardising which figures must be shown makes two offers comparable on the same terms, rather than on whichever figure each seller finds flattering.",
+          "Points out that the advertised $299 is perfectly accurate and still misleading about cost, so accuracy of the monthly figure is not the protection that matters.",
+          "Identifies the total of payments, or the finance charge, as the figure that exposes the $880.80 difference."
+        ],
+        "evidenceRequirements": [
+          "Cites both finance charges, $5,785.20 and $6,666.00, and the $68.20 monthly difference that pulls the other way."
+        ],
+        "lookFors": [
+          "The response distinguishes a true statement from a complete one.",
+          "The response explains comparability as the purpose, not merely honesty.",
+          "A response noting that a longer term can still be the right choice for someone with a tight monthly constraint is showing good judgement, provided it names the $880.80 cost."
+        ],
+        "commonMisconception": "Assuming that an advertisement stating only true figures cannot mislead.",
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures",
+          "evidence-use"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The finance charge is 31.4% of the amount financed over 66 months. Explain why that figure is not the interest rate, and say which additional piece of information from the disclosure would let a buyer compare two loans of different lengths.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that 31.4% is a total across five and a half years, while a rate is charged per year on a balance that falls as the loan is repaid.",
+          "Identifies an annualised rate as the figure that makes different-length loans comparable, and notes it is disclosed alongside the totals for that reason."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 66-payment term alongside the 31.4% figure when explaining why the two are not the same thing."
+        ],
+        "lookFors": [
+          "The response mentions that the balance falls over the term, so the charge is not levied on the full amount throughout.",
+          "The response names annualisation as the mechanism that makes terms comparable."
+        ],
+        "commonMisconception": "Reading a total finance charge as a percentage rate.",
+        "dimensions": [
+          "criteria-application",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

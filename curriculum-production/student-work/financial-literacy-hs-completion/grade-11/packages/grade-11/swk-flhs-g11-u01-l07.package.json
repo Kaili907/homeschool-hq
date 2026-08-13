@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l07",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: return on a pathway: cost, time, debt, and earnings"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "return on a pathway: cost, time, debt, and earnings",
+  "objective": "Locate the first wrong step in a fictional payback worksheet, recompute the payback period with forgone earnings included, and show what applying tax to the salary advantage does to the result.",
+  "scenario": "Wren Kaczmarek-Oyelaran is a fictional student who has been handed the simulated worksheet below. The programme, the figures, and the worksheet’s conclusion are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional worksheet reproduced in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The worksheet reads: \"Programme: 3 years at $15,900 a year. Total cost $47,700. Salary advantage after finishing: $13,250 a year. Payback: 3.6 years. Conclusion: the programme pays for itself before the fourth year of work.\" During the 3 years of study the student would otherwise have been earning $33,600 a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "Confirm the worksheet’s own cost line: what is 3 years of tuition at $15,900 a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Confirm the worksheet’s payback line: $47,700 divided by the $13,250 advantage, to one decimal place.",
+          "unit": "years"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now rebuild the cost line properly. The 3 study years are years in which $33,600 of earnings does not arrive.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What are the total earnings given up across the 3 study years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the true cost of the programme, counting tuition and forgone earnings together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the corrected payback period against the same $13,250 advantage? Give one decimal place.",
+          "unit": "years"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One further correction. The tuition was paid out of money that had already been taxed, while the salary advantage in the worksheet is a gross figure. Apply a simplified flat 22% tax to the advantage. This flat rate is a deliberate simplification of a real tax calculation, invented for this lesson.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the salary advantage after the simplified 22% tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the payback period using the true cost and the after-tax advantage? Give one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many years separate the worksheet’s answer from the fully corrected one? Give one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t3-p4",
+          "promptType": "fixed-choice",
+          "text": "Which line of the worksheet is the first one that is actually wrong?",
+          "choices": [
+            "The tuition line, \"3 years at $15,900 a year\"",
+            "The total cost line, \"$47,700\"",
+            "The division that produced \"3.6 years\""
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Every arithmetic step in the original worksheet is correct, and its conclusion is still wrong by more than ten years. Explain how that happens, and give one check that would have caught it before the conclusion was written."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The tax correction moved the answer from 11.2 years to 14.4 years. Explain why applying tax to the advantage but not to the tuition is the right way round, and name one figure in the corrected model you would still want to check."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the corrected payback still comes out near 3.6 years, the forgone earnings are being left out of the numerator. The question the payback period answers is how long the advantage takes to repay everything the choice cost, and three years without a wage cost $100,800.00. Rebuild the numerator as a two-line sum before dividing anything.",
+  "extension": "Recompute the corrected payback if the student worked part time during the programme and earned $11,200 a year, and say which of the three corrections in this lesson that change partly undoes.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

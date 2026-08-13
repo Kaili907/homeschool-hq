@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l08",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l08",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: after-fee and after-tax return"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "after-fee and after-tax return",
+  "objective": "Transfer the fee analysis to two fictional fee structures charged on different bases, and show that which is cheaper depends on the year rather than on the structure.",
+  "scenario": "Fyodor Achterberg-Nwankwo is comparing two simulated fee structures for a fictional holding. The funds, fees, and returns below are invented and describe no real product.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional fee structures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional holding of $50,000 gains 9.4% in a year. Fund A charges 0.85% of the amount held. Fund B charges 0.2% of the amount held plus 12% of any gain. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the gain at 9.4%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Fund A charge, at 0.85% of the amount held?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Fund B charge on the amount held, at 0.2%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does Fund B charge on the gain, at 12%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the two, in this year and in a losing one.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Fund B charge in total this year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much cheaper is Fund A in this year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is left of the gain after Fund A’s fee?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Suppose instead the holding lost 6.2% in the year. What would Fund A charge?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "In that losing year, how much cheaper is Fund B than Fund A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-choice",
+          "text": "Which fund charges less?",
+          "choices": [
+            "Fund A, in every year",
+            "Fund B, in every year",
+            "It depends on how the year went"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Earlier in the unit a fee was compared on a single percentage. Say why that method fails here, what has to be specified before these two funds can be compared, and which structure a holder facing several uncertain years would find easier to plan around."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Fund B charges nothing on gains in a losing year. Say whether that makes it the safer structure for a holder, and name one thing about the arrangement you would want to see specified."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Fund B looks cheaper in the 9.4% year, only its 0.2% asset charge is being counted. Its fee has two parts, and the 12% of the $4,700.00 gain adds $564.00 on top of the $100.00. Write each fund’s fee as a list of its parts before totalling, and check that Fund B’s list has two lines and Fund A’s has one.",
+  "extension": "Find the annual return at which the two fee structures would charge exactly the same amount, and say what that figure tells you about which kind of year favours each fund.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

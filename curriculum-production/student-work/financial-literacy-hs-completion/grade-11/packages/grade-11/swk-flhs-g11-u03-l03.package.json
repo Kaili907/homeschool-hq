@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l03",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: income shocks and recovery planning"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "income shocks and recovery planning",
+  "objective": "Model a fictional seven-month income shock against a reserve, compute the recovery period, and measure the total time the plan is disrupted.",
+  "scenario": "Saoirse Yamamoto-Kalu runs a fictional household with the simulated monthly figures below. No real income, employer, or account is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional household figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The household takes home $4,280 a month and spends $3,690 a month. It holds a reserve of $6,400. A shock cuts income to $2,950 a month for 7 months, and spending cannot be reduced during that time.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the household save each month before the shock?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "During the shock, how much does the household fall short each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much is drawn from the reserve across the 7 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is left in the $6,400 reserve at the end of the shock?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Income returns to $4,280 after the seventh month and spending is unchanged. Give the month figures to one decimal place.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months does it take to rebuild the reserve to $6,400 at the pre-shock saving rate?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How long is the household’s plan disrupted in total, counting the shock and the rebuild?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many months of the shock could the full $6,400 reserve have covered?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Would the reserve have survived a 10-month shock of the same size?",
+          "choices": [
+            "Yes, with something left over",
+            "No, it would have run out"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The shock lasted 7 months and the plan was disrupted for 15.8. Explain why recovery took longer than the shock, and say what that implies about how a household should size a reserve."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The scenario says spending cannot be reduced during the shock. Name two spending lines a real household might in fact reduce, and say how a $200 monthly reduction would change the 8.6-month coverage figure."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the rebuild comes out at 7 months, the reserve is being replaced at the rate it was drained. It drained at $740.00 a month because income fell, but it refills at $590.00 a month because that is all the household saves. Write the two rates side by side and label which applies to which phase before dividing.",
+  "extension": "Find the reserve that would cover a 12-month shock of this size, and say how many months of ordinary saving it would take to build it from zero.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

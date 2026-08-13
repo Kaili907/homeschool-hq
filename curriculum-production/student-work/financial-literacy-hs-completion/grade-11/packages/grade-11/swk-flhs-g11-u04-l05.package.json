@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l05",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: debt-to-income and borrowing capacity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "debt-to-income and borrowing capacity",
+  "objective": "Compute a fictional borrower’s debt-to-income ratio, apply two lender ceilings, and identify which ceiling binds and what it leaves available.",
+  "scenario": "Vivienne Duarte-Sokolov is testing a fictional lender’s published rules against her own simulated figures. No real lender, income, or account is involved.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional income, debt, and lending rules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Vivienne’s gross income is $4,750 a month. She pays $268 on a study loan, $342 on a vehicle loan, and $85 as a card minimum. The fictional lender applies two ceilings: all debt payments together may not exceed 36% of gross income, and a housing payment alone may not exceed 28%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Vivienne’s existing debt payments come to each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is her debt-to-income ratio? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the 36% ceiling on all debt payments together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the 28% ceiling on a housing payment alone?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find what is actually available, and which of the two rules is the binding one.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under the 36% total rule, how much room is left for a new housing payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the total-rule allowance than the 28% housing ceiling?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If Vivienne took a housing payment at the full $1,015.00, what would her debt-to-income ratio become? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "If Vivienne cleared the card and its $85 payment, how much housing payment would the total rule then allow?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which of the two lender rules limits Vivienne?",
+          "choices": [
+            "The 28% housing rule",
+            "The 36% total-debt rule",
+            "Neither; both allow the same amount"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A lender approving Vivienne at $1,015.00 a month has answered one question. Say what question that is, what question it does not answer, and why the two can give different answers."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Clearing the $85 card payment releases $85 of borrowing capacity. Say what that tells you about how lenders read small debts, and whether clearing the card is the best use of Vivienne’s money."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the available housing payment comes out at $1,330.00, the existing $695.00 of debt payments has not been deducted. The 28% housing rule and the 36% total rule both have to be satisfied, and the total rule counts the study loan, the vehicle loan, and the card. Compute both ceilings, subtract existing payments from the total one, and take whichever result is smaller.",
+  "extension": "Find the gross income at which the 28% housing rule would become the binding constraint instead, holding her existing $695.00 of payments constant.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

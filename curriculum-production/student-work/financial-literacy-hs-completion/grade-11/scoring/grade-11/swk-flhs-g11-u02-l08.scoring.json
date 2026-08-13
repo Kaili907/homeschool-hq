@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l08",
+  "lessonId": "ma-g11-financial-literacy-u02-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$118,155.17",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve months of $1,285 in the first year, then six further years each 3% above the last, totalled by the closed form."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,826.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The loan payment is only part of what a house costs each month; the tax and insurance are as unavoidable as the loan."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$153,384.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,826.00 a month for 84 months, held flat because the loan payment is fixed and the tax and insurance are assumed steady."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$15,960.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1% of $228,000 is $2,280 a year, for each of 7 years. Maintenance has no landlord to fall to."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$176,144.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$153,384.00 of monthly outlay, $15,960.00 of maintenance, and the $6,800 paid once at purchase."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$271,020.35",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Seven years of compounding at 2.5% on the $228,000 purchase price."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$43,020.35",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$271,020.35 against the $228,000 paid — the part of ownership that renting has no equivalent for."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$14,968.48",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$176,144.00 of ownership cost less $43,020.35 of appreciation, compared against $118,155.17 of rent — owning still costs more at this horizon, though by less than a single year of rent."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(rent * 12 * (pow(1 + growth, 7) - 1) / growth, 2)",
+        "substituted": "round(1285 * 12 * (pow(1 + 0.03, 7) - 1) / 0.03, 2)",
+        "result": "$118,155.17",
+        "why": "Twelve months of $1,285 in the first year, then six further years each 3% above the last, totalled by the closed form."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "loan + tax + insurance",
+        "substituted": "1412 + 296 + 118",
+        "result": "$1,826.00",
+        "why": "The loan payment is only part of what a house costs each month; the tax and insurance are as unavoidable as the loan."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 * 12 * 7",
+        "substituted": "#t1-p2 * 12 * 7",
+        "result": "$153,384.00",
+        "why": "$1,826.00 a month for 84 months, held flat because the loan payment is fixed and the tax and insurance are assumed steady."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(price * maintRate * 7, 2)",
+        "substituted": "round(228000 * 0.01 * 7, 2)",
+        "result": "$15,960.00",
+        "why": "1% of $228,000 is $2,280 a year, for each of 7 years. Maintenance has no landlord to fall to."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 + #t2-p1 + closing",
+        "substituted": "#t1-p3 + #t2-p1 + 6800",
+        "result": "$176,144.00",
+        "why": "$153,384.00 of monthly outlay, $15,960.00 of maintenance, and the $6,800 paid once at purchase."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(price2 * pow(1 + appreciation, 7), 2)",
+        "substituted": "round(228000 * pow(1 + 0.025, 7), 2)",
+        "result": "$271,020.35",
+        "why": "Seven years of compounding at 2.5% on the $228,000 purchase price."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - price3",
+        "substituted": "#t2-p3 - 228000",
+        "result": "$43,020.35",
+        "why": "$271,020.35 against the $228,000 paid — the part of ownership that renting has no equivalent for."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p2 - #t2-p4 - #t1-p1",
+        "substituted": "#t2-p2 - #t2-p4 - #t1-p1",
+        "result": "$14,968.48",
+        "why": "$176,144.00 of ownership cost less $43,020.35 of appreciation, compared against $118,155.17 of rent — owning still costs more at this horizon, though by less than a single year of rent."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This comparison uses the same method as the vehicle analysis earlier in the unit. Name the one term that had to be added for housing, explain why the vehicle case did not need it, and state one important cost this comparison still leaves out.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies appreciation as the added term, and explains that the vehicle case only ever had depreciation because vehicles lose value while the house is assumed to gain it.",
+          "Names a genuine omission with a reason — most strongly that the $1,412 payment includes principal repayment, which builds equity recovered on sale, so counting the whole payment as cost while counting only appreciation as a return understates ownership; the deposit tied up in the house, the cost of selling, and the rent scenario having no equivalent to the $6,800 closing cost are also acceptable.",
+          "Keeps the conclusion attached to the 7-year horizon rather than generalising it."
+        ],
+        "evidenceRequirements": [
+          "Cites the $43,020.35 of appreciation and the $14,968.48 net difference when describing what the added term did to the comparison."
+        ],
+        "lookFors": [
+          "The response describes the method as transferable and says precisely where it needed adjusting.",
+          "The omission named is one that would actually move the $14,968.48 figure; naming the principal repaid inside the payment is the strongest available answer and should be credited as such.",
+          "A response noting that the appreciation is unrealised until the house is sold is showing exactly the right caution."
+        ],
+        "commonMisconception": "Treating a gain in an asset’s value as though it were money already received.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Rent grows at 3% a year while the loan payment stays at $1,412. Say what that difference does to the comparison at a 20-year horizon, and name the assumption that would have to hold for your answer to be right.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that a growing rent against a fixed payment closes and eventually reverses the $14,968.48 gap, so owning wins at long enough horizons.",
+          "Names the assumption the argument depends on, such as the 3% rent growth continuing, or the loan payment genuinely staying fixed for twenty years."
+        ],
+        "evidenceRequirements": [
+          "Refers to the fixed $1,412 payment and the 3% rent growth as the two things moving in opposite directions."
+        ],
+        "lookFors": [
+          "The response identifies the mechanism as one figure growing while the other does not.",
+          "The assumption named is one that could actually fail, not a generic caveat."
+        ],
+        "dimensions": [
+          "transfer",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l09",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l09",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: credits versus deductions in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "credits versus deductions in outline",
+  "objective": "Compute what a fictional non-refundable credit is worth when it exceeds the tax due, contrast it with a refundable one, and express the wasted portion.",
+  "scenario": "Philippa Onyekachi-Stavros is examining a fictional credit in a simulated tax system. The schedule and the credit rules below were chosen for this course and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule and credit rules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional schedule, taxable income is gross income less a standard deduction of $11,400, and tax is 10% on the first $9,800 of taxable income and 14% between $9,800 and $38,400. Philippa earns $24,300. A fictional credit of $1,800 is available. A non-refundable credit can reduce tax to zero but no further; a refundable one pays out any excess.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Philippa’s taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is her tax before any credit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $1,800 credit can a non-refundable version actually be used against?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much of the credit is wasted if it is non-refundable?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the two versions of the credit.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Philippa’s tax after a non-refundable $1,800 credit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is she better off by if the credit is refundable instead?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the $1,800 credit is lost under the non-refundable version? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How large a deduction would have produced the same saving as the usable part of the credit, at Philippa’s 14% marginal rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Who is affected by whether a credit is refundable?",
+          "choices": [
+            "Filers whose tax is smaller than the credit",
+            "Filers whose tax is larger than the credit",
+            "All filers equally"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A $1,800 credit delivers $1,414.00 to Philippa and would deliver the full $1,800 to someone with a larger tax bill. Explain the mechanism, and say what that pattern means for who a non-refundable credit reaches."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "A deduction of $10,100.00 would have matched the usable credit. Say what that comparison shows about relief at low incomes, and which form of relief you would design for a filer in Philippa’s position."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the credit appears to save the full $1,800, the cap is being ignored. A non-refundable credit cannot reduce tax below zero, and Philippa’s tax is only $1,414.00, so $386.00 has nothing to offset. Compute the tax first, then take the smaller of the tax and the credit.",
+  "extension": "Find the income at which Philippa could use the whole $1,800 credit under the non-refundable rule, and say how far above her current $24,300 that is.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

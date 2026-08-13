@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l05",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: behavioural pressures on a savings plan"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "behavioural pressures on a savings plan",
+  "objective": "Quantify the gap between a fictional intended savings rate and the amount actually saved, add a recurring leak, and express the five-year cost of the difference between a plan and a habit.",
+  "scenario": "Freya Okoro-Villalobos is a fictional saver whose simulated records are summarised below. The intended amounts, the actual amounts, and the subscriptions are invented figures.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional savings record in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Freya intends to save $400 a month by moving money manually at the end of each month. Over the past year she has actually saved an average of $215 a month. Separately she pays $87 a month across 6 subscriptions, of which 3 worth $41 a month have gone unused for the whole year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly gap between what Freya intends to save and what she actually saves?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Across 5 years, or 60 months, what does that monthly gap come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Across the same 60 months, what do the unused subscriptions come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What do the two together cost across the 5 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now look at what fixing each would be worth.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "The unused subscriptions are what percentage of the $87 subscription bill? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If Freya automated the transfer and cancelled the unused subscriptions, how much more would she have each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of her $400 target would the recovered amount represent? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which change would do more over the 5 years?",
+          "choices": [
+            "Automating the transfer so the intended $400 is actually saved",
+            "Cancelling the 3 unused subscriptions",
+            "They are worth the same amount"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Freya’s plan is arithmetically sound and she is $13,560.00 behind it over five years. Explain what kind of failure that is, and describe one change to the design of the plan — not to her willpower — that would close most of the gap."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Cancelling the subscriptions is worth $2,460.00 and takes an afternoon; automating the transfer is worth $11,100.00 and takes minutes. Say why someone might still do the first and not the second, and what that suggests about ordering changes to a plan."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the recovered monthly amount comes out at $185.00, the subscriptions have been left out; if it comes out at $272.00, the whole $87 subscription bill is being counted rather than the $41 that goes unused. Freya still uses three of the six services, so only $41 is recoverable. Write the two recoverable lines separately and check each against the scenario before adding.",
+  "extension": "Work out how many months of the automated $400 it would take to reach $13,560.00, and say what that period represents in terms of the plan Freya already has.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l06",
+  "lessonId": "ma-g11-financial-literacy-u01-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The difference between the two starting salaries, which is the only thing the negotiation changed directly."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$5,142.81",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Because the 3% raise is applied to whichever salary Idris is on, the original $3,400.00 gap compounds at the same rate as the salary itself for 14 years."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$63,236.31",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Adding the 15 compounding gaps at once. The formula is the closed form of writing out $3,400.00, then $3,502.00, and so on for 15 years and totalling the column."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$967,143.52",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same closed form applied to the whole salary rather than to the gap: $52,000 growing at 3% for 15 years."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "6.54%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$63,236.31 against $967,143.52. The starting salary was raised by about 6.54%, and because every later raise is a percentage of it, the share holds across the whole period."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$59,836.31",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$63,236.31 against the $3,400.00 that was actually negotiated — the rest is produced by carrying that increase through 15 years of compounding raises."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Because the increase is carried in every later year and each 3% raise is calculated on the higher salary",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The scenario states the 3% raise is applied to whichever salary Idris is on, so the higher base is present in all 15 years and grows with the same percentage; nothing in the scenario adds a repeated bonus, and inflation is not mentioned anywhere in it."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "negotiated - offered",
+        "substituted": "55400 - 52000",
+        "result": "$3,400.00",
+        "why": "The difference between the two starting salaries, which is the only thing the negotiation changed directly."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * pow(1 + rate, 14), 2)",
+        "substituted": "round(#t1-p1 * pow(1 + 0.03, 14), 2)",
+        "result": "$5,142.81",
+        "why": "Because the 3% raise is applied to whichever salary Idris is on, the original $3,400.00 gap compounds at the same rate as the salary itself for 14 years."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p1 * (pow(1 + rate2, 15) - 1) / rate2, 2)",
+        "substituted": "round(#t1-p1 * (pow(1 + 0.03, 15) - 1) / 0.03, 2)",
+        "result": "$63,236.31",
+        "why": "Adding the 15 compounding gaps at once. The formula is the closed form of writing out $3,400.00, then $3,502.00, and so on for 15 years and totalling the column."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(offered2 * (pow(1 + rate3, 15) - 1) / rate3, 2)",
+        "substituted": "round(52000 * (pow(1 + 0.03, 15) - 1) / 0.03, 2)",
+        "result": "$967,143.52",
+        "why": "The same closed form applied to the whole salary rather than to the gap: $52,000 growing at 3% for 15 years."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p3 / #t2-p1 * 100, 2)",
+        "substituted": "round(#t1-p3 / #t2-p1 * 100, 2)",
+        "result": "6.54%",
+        "why": "$63,236.31 against $967,143.52. The starting salary was raised by about 6.54%, and because every later raise is a percentage of it, the share holds across the whole period."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 - #t1-p1",
+        "substituted": "#t1-p3 - #t1-p1",
+        "result": "$59,836.31",
+        "why": "$63,236.31 against the $3,400.00 that was actually negotiated — the rest is produced by carrying that increase through 15 years of compounding raises."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A colleague tells Idris that negotiating \"was worth about three and a half thousand\". Explain what that description gets wrong, and say what has to be true about the job for the $63,236.31 figure to be the right one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that $3,400.00 is the one-year effect and that the increase persists in the base for all 15 years, compounding with the annual raise.",
+          "States the conditions the larger figure depends on: staying 15 years, the 3% raise pattern continuing, and later raises being percentages of the base rather than flat amounts.",
+          "Recognises that if raises were flat dollar amounts instead of percentages, the negotiated gap would stay near $3,400 rather than reaching $5,142.81."
+        ],
+        "evidenceRequirements": [
+          "Cites the year-15 gap of $5,142.81 or the $63,236.31 total when contrasting the two ways of valuing the negotiation."
+        ],
+        "lookFors": [
+          "The response identifies the base effect — the raise is a percentage of a number the negotiation moved.",
+          "The response names the tenure assumption explicitly rather than accepting 15 years without comment.",
+          "A response noting that leaving after three years makes the colleague nearer to right is showing exactly the reasoning wanted."
+        ],
+        "commonMisconception": "Valuing a change to a recurring amount as though it happened only once.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Suppose the firm switched to flat raises of $1,600 a year for everyone instead of 3%. Say what happens to the value of the negotiation, and explain why the two raise designs treat it differently.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that under flat raises the gap stays at $3,400 every year, so the fifteen-year value falls to $51,000 rather than $63,236.31.",
+          "Explains that a percentage raise multiplies the base the negotiation changed, while a flat raise adds the same amount regardless of the base."
+        ],
+        "evidenceRequirements": [
+          "Contrasts the compounding year-15 gap of $5,142.81 with the constant gap a flat raise would preserve."
+        ],
+        "lookFors": [
+          "The response applies the same fifteen-year frame to the new raise design rather than answering only about one year.",
+          "The response explains the mechanism rather than asserting that flat raises are worth less."
+        ],
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

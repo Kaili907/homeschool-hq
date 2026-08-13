@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l07",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: marginal rate effects on a decision"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "marginal rate effects on a decision",
+  "objective": "Test the fictional claim that a raise crossing a band boundary can reduce take-home pay, compute both cases, and state what the claim confuses.",
+  "scenario": "Cressida Nwabueze-Lagerfeld is checking the simulated claim below. The schedule is invented: its deduction, thresholds, and rates were chosen for this course and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule and the claim in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The claim reads: \"Turn down a raise that pushes you into the next band — you take home less.\" Under the fictional schedule, taxable income is gross income less a standard deduction of $11,400, and tax is 10% on the first $9,800 of taxable income, 14% between $9,800 and $38,400, and 22% between $38,400 and $85,400. The rate charged on the highest band a person’s taxable income reaches is their marginal rate. Test the claim first on a raise that stays inside one band: from $37,900 to $40,400.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax on a gross income of $37,900?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax on a gross income of $40,400?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much extra tax does the $2,500 raise attract?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the worker take home after the raise?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the claim on a raise that actually crosses the $38,400 boundary: from $49,500 to $51,000.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax on a gross income of $49,500?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax on a gross income of $51,000?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much extra tax does the $1,500 raise attract?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the worker take home after crossing the boundary?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Is the claim correct under this schedule?",
+          "choices": [
+            "Yes, crossing the boundary reduces take-home pay",
+            "No, take-home pay rises even when the boundary is crossed"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain exactly what the claim confuses, using the second case, and say what would have to be true of a tax system for the claim to be right."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Some real situations genuinely do reduce a household’s position when income rises slightly, even though tax bands do not. Name one such mechanism, and say how it differs from the band structure tested here."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the tax at $51,000 comes out at $8,712.00, the 22% rate is being applied to the whole taxable income. Only the $1,200 above $38,400 reaches 22%; the first $9,800 is still taxed at 10% and the next $28,600 at 14%. Write the three band pieces separately for both incomes before subtracting one total from the other.",
+  "extension": "Find the marginal rate that would have to apply above $38,400 for the $1,500 raise to leave the worker exactly no better off, and say whether any real income tax band comes close to it.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l11",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l11",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 11,
+    "phase": "Defense and extension",
+    "title": "Defense and extension: debt-to-income and borrowing capacity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "debt-to-income and borrowing capacity",
+  "objective": "Defend a fictional borrowing decision against a lender’s ratio test, compute what would have to change for a proposed payment to fit, and separate what the ratio measures from what it does not.",
+  "scenario": "Anselm Bracamonte-Danylenko is preparing to defend a fictional borrowing proposal against a simulated lender’s rules. All income, payment, and rule figures below are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional proposal and lending rules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Anselm’s gross income is $6,240 a month and his existing debt payments total $1,142 a month. The fictional lender caps all debt payments at 36% of gross income. The housing payment he is proposing is $1,380 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Anselm’s current debt-to-income ratio? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the 36% ceiling on total debt payments?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much room does that leave for the new housing payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What would the ratio become if the proposed $1,380 payment were added? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now work out exactly what would have to change for the proposal to fit.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the proposed payment exceed what the rule allows?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of his existing $1,142 of payments would Anselm have to clear for the $1,380 payment to fit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Alternatively, what gross income would make the $1,380 payment fit under the 36% rule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much more gross income a month is that than Anselm has now?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is the monthly income increase the rule would need than the monthly debt reduction it would need?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-choice",
+          "text": "Which route to fitting the rule is more within Anselm’s control?",
+          "choices": [
+            "Raising gross income by $765.56 a month",
+            "Clearing $275.60 a month of existing debt payments",
+            "Neither route changes the ratio"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Anselm wants to argue that the rule is wrong in his case. Construct the strongest version of that argument using figures from this lesson, then give the strongest response a lender could make to it."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Suppose Anselm clears the $275.60 of payments by taking a longer term on the same debt rather than by repaying it. Say whether that satisfies the rule, and whether it improves his position."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the available housing payment comes out at $2,246.40, the existing $1,142 of payments has not been subtracted from the ceiling. The 36% cap covers all debt payments together, so the existing commitments come out of it first, leaving $1,104.40. Write the ceiling, the existing payments, and the remainder as three separate lines before comparing anything to the $1,380 proposal.",
+  "extension": "Find the housing payment at which Anselm’s ratio would sit at 30% rather than 36%, and say what that margin would be worth if his income fell by 10%.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l11.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l11",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

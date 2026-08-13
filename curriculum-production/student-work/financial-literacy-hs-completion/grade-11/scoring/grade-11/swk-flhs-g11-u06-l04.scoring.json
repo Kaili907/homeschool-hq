@@ -1,0 +1,286 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l04",
+  "lessonId": "ma-g11-financial-literacy-u06-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$16,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The deductible comes off the loss before any limit is applied — this is the amount Policy 1 is being asked to pay."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$12,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$16,900.00 is above the $12,000 limit, so the limit caps the payment. Applying the limit before the deductible would have given the same figure here, but not in general."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$6,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$18,400 less the $12,000.00 paid — made up of the $1,500 deductible and the $4,900 that sat above Policy 1’s limit."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$5,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $6,400.00 remaining exceeds the $5,000 limit, so Policy 2 pays its maximum."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$18,400 less $12,000.00 from Policy 1 and $5,000.00 from Policy 2."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$17,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$12,000.00 and $5,000.00 — the second policy closed most but not all of the first policy’s gap."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "92.4%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$17,000.00 of $18,400 — two policies with a combined limit of $17,000 could never have covered more than this."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$4,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$16,900.00 that Policy 1 was asked to pay against its $12,000 limit — this excess, not the deductible, is what Policy 2 mostly absorbed."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "Raising Policy 2’s limit from $5,000 to $6,400",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Policy 2 was asked for $6,400.00 and capped at $5,000, so lifting its limit to $6,400 covers the whole remainder; removing the $1,500 deductible would only shift $1,500 of loss into Policy 1, which is already at its limit, and raising Policy 1’s limit only to $12,700 still leaves $700.00 outstanding, because Policy 2 remains capped at $5,000."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "loss - deductible1",
+        "substituted": "18400 - 1500",
+        "result": "$16,900.00",
+        "why": "The deductible comes off the loss before any limit is applied — this is the amount Policy 1 is being asked to pay."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "min(max(loss2 - deductible2, 0), limit1)",
+        "substituted": "min(max(18400 - 1500, 0), 12000)",
+        "result": "$12,000.00",
+        "why": "$16,900.00 is above the $12,000 limit, so the limit caps the payment. Applying the limit before the deductible would have given the same figure here, but not in general."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "loss3 - #t1-p2",
+        "substituted": "18400 - #t1-p2",
+        "result": "$6,400.00",
+        "why": "$18,400 less the $12,000.00 paid — made up of the $1,500 deductible and the $4,900 that sat above Policy 1’s limit."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "min(#t1-p3, limit2)",
+        "substituted": "min(#t1-p3, 5000)",
+        "result": "$5,000.00",
+        "why": "The $6,400.00 remaining exceeds the $5,000 limit, so Policy 2 pays its maximum."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "loss4 - #t1-p2 - #t1-p4",
+        "substituted": "18400 - #t1-p2 - #t1-p4",
+        "result": "$1,400.00",
+        "why": "$18,400 less $12,000.00 from Policy 1 and $5,000.00 from Policy 2."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 + #t1-p4",
+        "substituted": "#t1-p2 + #t1-p4",
+        "result": "$17,000.00",
+        "why": "$12,000.00 and $5,000.00 — the second policy closed most but not all of the first policy’s gap."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / loss5 * 100, 1)",
+        "substituted": "round(#t2-p2 / 18400 * 100, 1)",
+        "result": "92.4%",
+        "why": "$17,000.00 of $18,400 — two policies with a combined limit of $17,000 could never have covered more than this."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p1 - limit1b",
+        "substituted": "#t1-p1 - 12000",
+        "result": "$4,900.00",
+        "why": "$16,900.00 that Policy 1 was asked to pay against its $12,000 limit — this excess, not the deductible, is what Policy 2 mostly absorbed."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Nikolai holds two policies covering the same loss and still pays $1,400.00. Explain how holding more than one policy can still leave a gap, and identify which of the two terms — the deductible or the limit — did more damage here.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that deductibles and limits work at opposite ends: a deductible removes the bottom of a loss and a limit caps the top, so two policies can overlap in the middle and still leave both ends exposed.",
+          "Identifies the limits as the greater problem here, since the two limits together cap payment at $17,000.00 against an $18,400 loss regardless of anything else.",
+          "Notes that the $1,500 deductible was in fact fully absorbed by Policy 2, so it contributed nothing to the final gap."
+        ],
+        "evidenceRequirements": [
+          "Cites the $4,900.00 that sat above Policy 1’s limit and the $17,000.00 combined payment."
+        ],
+        "lookFors": [
+          "The response traces which term produced which part of the gap rather than blaming both.",
+          "The response notices that the combined limits are the binding constraint.",
+          "A response observing that a larger loss would have widened the gap dollar for dollar is generalising correctly."
+        ],
+        "commonMisconception": "Assuming that holding two policies on the same loss means the loss is fully covered.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application",
+          "error-diagnosis"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The order matters: deductible first, then limit. Construct a loss for which applying the limit first would give a different answer under Policy 1, and say which order a policy actually uses.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Constructs a case where the order changes the result — any loss between $12,000 and $13,500, such as $13,000, where deductible-first gives $11,500 and limit-first would give $10,500.",
+          "States that a policy applies the deductible to the loss first and caps the remainder at the limit, which is the order used throughout this lesson."
+        ],
+        "evidenceRequirements": [
+          "Gives a specific loss figure and both results, rather than describing the difference in general terms."
+        ],
+        "lookFors": [
+          "The constructed case genuinely distinguishes the two orders.",
+          "The response states the correct order rather than leaving it open."
+        ],
+        "commonMisconception": "Assuming the deductible and the limit can be applied in either order.",
+        "dimensions": [
+          "transfer",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

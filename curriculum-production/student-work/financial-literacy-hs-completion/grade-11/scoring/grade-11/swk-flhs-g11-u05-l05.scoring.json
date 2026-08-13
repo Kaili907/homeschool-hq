@@ -1,0 +1,292 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l05",
+  "lessonId": "ma-g11-financial-literacy-u05-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$25,751.22",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The full $6,000 compounds for 25 years, because nothing was taken out of it on the way in."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$19,570.93",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$25,751.22 less 24%. The tax is charged on the whole balance, including everything the account earned."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,680.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,000 less 22% — a smaller amount starts compounding, which is the cost of paying the tax first."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$20,085.95",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,680.00 compounding for 25 years, all of which is available at the end."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$515.02",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,085.95 against $19,570.93. The post-tax account wins here even though less money started compounding."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$20,085.95",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Exactly the post-tax figure. When the two rates match, the order in which the tax is applied makes no difference at all."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$0.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The two structures are identical when the rate now equals the rate later, which is what identifies the rate difference as the only thing deciding between them."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "2.63%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$515.02 against $19,570.93 — a two percentage point difference in tax rates produces a 2.63% difference in the final amount."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "Whether the tax rate at withdrawal is higher or lower than the rate today",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "When the two rates were set equal the accounts came out identical to the cent, so neither the 25-year period nor the 6% return can be what separates them; only the difference between 22% and 24% does."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(contribution * pow(1 + growth, 25), 2)",
+        "substituted": "round(6000 * pow(1 + 0.06, 25), 2)",
+        "result": "$25,751.22",
+        "why": "The full $6,000 compounds for 25 years, because nothing was taken out of it on the way in."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * (1 - laterRate), 2)",
+        "substituted": "round(#t1-p1 * (1 - 0.24), 2)",
+        "result": "$19,570.93",
+        "why": "$25,751.22 less 24%. The tax is charged on the whole balance, including everything the account earned."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(contribution2 * (1 - todayRate), 2)",
+        "substituted": "round(6000 * (1 - 0.22), 2)",
+        "result": "$4,680.00",
+        "why": "$6,000 less 22% — a smaller amount starts compounding, which is the cost of paying the tax first."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(#t1-p3 * pow(1 + growth2, 25), 2)",
+        "substituted": "round(#t1-p3 * pow(1 + 0.06, 25), 2)",
+        "result": "$20,085.95",
+        "why": "$4,680.00 compounding for 25 years, all of which is available at the end."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p4 - #t1-p2",
+        "substituted": "#t1-p4 - #t1-p2",
+        "result": "$515.02",
+        "why": "$20,085.95 against $19,570.93. The post-tax account wins here even though less money started compounding."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 * (1 - matchedRate), 2)",
+        "substituted": "round(#t1-p1 * (1 - 0.22), 2)",
+        "result": "$20,085.95",
+        "why": "Exactly the post-tax figure. When the two rates match, the order in which the tax is applied makes no difference at all."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - #t1-p4",
+        "substituted": "#t2-p2 - #t1-p4",
+        "result": "$0.00",
+        "why": "The two structures are identical when the rate now equals the rate later, which is what identifies the rate difference as the only thing deciding between them."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p1 / #t1-p2 * 100, 2)",
+        "substituted": "round(#t2-p1 / #t1-p2 * 100, 2)",
+        "result": "2.63%",
+        "why": "$515.02 against $19,570.93 — a two percentage point difference in tax rates produces a 2.63% difference in the final amount."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p3 == #t2-p3",
+        "substituted": "#t2-p3 == #t2-p3",
+        "result": "Whether the tax rate at withdrawal is higher or lower than the rate today",
+        "why": "When the two rates were set equal the accounts came out identical to the cent, so neither the 25-year period nor the 6% return can be what separates them; only the difference between 22% and 24% does."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The post-tax account wins by $515.02 even though $1,320 less started compounding. Explain why the smaller starting amount does not decide the outcome, and say what a saver would need to believe for the pre-tax structure to be better.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that both accounts multiply by the same 25-year growth factor, so the comparison reduces to whether 78% of the amount is taken at the start or 76% is left at the end.",
+          "Uses the matched-rate result of $0.00 difference to show the growth factor cancels out entirely.",
+          "States what would favour pre-tax: expecting a lower tax rate at withdrawal than today, for example on a lower income later."
+        ],
+        "evidenceRequirements": [
+          "Cites the $20,085.95 figure appearing on both sides when the rates match."
+        ],
+        "lookFors": [
+          "The response identifies the growth factor as common to both, so it cannot decide the comparison.",
+          "The belief named is about future tax rates, which is genuinely uncertain, rather than about returns.",
+          "A response noting that nobody can know their withdrawal rate 25 years ahead is identifying the real difficulty."
+        ],
+        "commonMisconception": "Assuming the account that starts with more invested must end with more available.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "assumption-identification",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "These outlines are simplified inventions with flat rates and no other rules. Name two things a real account structure would specify that these do not, and say which computed figure each would affect.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names two genuine specifications, such as contribution limits, rules on withdrawing early, whether tax bands rather than a flat rate apply, or employer contributions.",
+          "Ties each to a figure — most defensibly the $19,570.93 or $20,085.95 final amounts — and says how it would move."
+        ],
+        "evidenceRequirements": [
+          "Refers to at least one of the two final figures when describing what the missing rules would change."
+        ],
+        "lookFors": [
+          "The specifications named are ones a real account document would contain.",
+          "Each is tied to a figure rather than listed as a general caveat."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

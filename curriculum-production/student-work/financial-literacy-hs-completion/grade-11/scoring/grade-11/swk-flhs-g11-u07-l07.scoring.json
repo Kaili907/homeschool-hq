@@ -1,0 +1,292 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l07",
+  "lessonId": "ma-g11-financial-literacy-u07-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,318.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Taxable income is $26,500, so $980.00 in the 10% band and 14% of the $16,700 above it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,668.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Taxable income is $29,000, still inside the 14% band, so $980.00 plus 14% of $19,200."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,668.00 against $3,318.00 — exactly 14% of $2,500, the marginal rate throughout."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$2,150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,500 less $350.00 of extra tax. Take-home pay rises, as it must when the marginal rate is below 100%."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$4,942.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Taxable income is $38,100, just under the boundary, so nothing reaches the 22% band."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$5,248.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Taxable income is $39,600, so $980.00 and $4,004.00 in the lower bands and 22% of the $1,200 above $38,400."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$306.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$300 of the raise is still taxed at 14% and $1,200 at 22%, giving $42.00 plus $264.00 — not 22% of the whole $1,500."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,194.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,500 less $306.00 — take-home pay still rises, which is what disproves the claim."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "No, take-home pay rises even when the boundary is crossed",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The $1,500 raise leaves $1,194.00 more in hand, because only the $1,200 above the boundary is taxed at 22% and the rate is well under 100%."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(band1 * rate1 + (incomeA - deduction - band1) * rate2, 2)",
+        "substituted": "round(9800 * 0.1 + (37900 - 11400 - 9800) * 0.14, 2)",
+        "result": "$3,318.00",
+        "why": "Taxable income is $26,500, so $980.00 in the 10% band and 14% of the $16,700 above it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(band1b * rate1b + (incomeB - deduction2 - band1b) * rate2b, 2)",
+        "substituted": "round(9800 * 0.1 + (40400 - 11400 - 9800) * 0.14, 2)",
+        "result": "$3,668.00",
+        "why": "Taxable income is $29,000, still inside the 14% band, so $980.00 plus 14% of $19,200."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - #t1-p1",
+        "substituted": "#t1-p2 - #t1-p1",
+        "result": "$350.00",
+        "why": "$3,668.00 against $3,318.00 — exactly 14% of $2,500, the marginal rate throughout."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "raise - #t1-p3",
+        "substituted": "2500 - #t1-p3",
+        "result": "$2,150.00",
+        "why": "$2,500 less $350.00 of extra tax. Take-home pay rises, as it must when the marginal rate is below 100%."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(band1c * rate1c + (incomeC - deduction3 - band1c) * rate2c, 2)",
+        "substituted": "round(9800 * 0.1 + (49500 - 11400 - 9800) * 0.14, 2)",
+        "result": "$4,942.00",
+        "why": "Taxable income is $38,100, just under the boundary, so nothing reaches the 22% band."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(band1d * rate1d + (band2d - band1d) * rate2d + (incomeD - deduction4 - band2d) * rate3d, 2)",
+        "substituted": "round(9800 * 0.1 + (38400 - 9800) * 0.14 + (51000 - 11400 - 38400) * 0.22, 2)",
+        "result": "$5,248.00",
+        "why": "Taxable income is $39,600, so $980.00 and $4,004.00 in the lower bands and 22% of the $1,200 above $38,400."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - #t2-p1",
+        "substituted": "#t2-p2 - #t2-p1",
+        "result": "$306.00",
+        "why": "$300 of the raise is still taxed at 14% and $1,200 at 22%, giving $42.00 plus $264.00 — not 22% of the whole $1,500."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "raise2 - #t2-p3",
+        "substituted": "1500 - #t2-p3",
+        "result": "$1,194.00",
+        "why": "$1,500 less $306.00 — take-home pay still rises, which is what disproves the claim."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 > 0",
+        "substituted": "#t2-p4 > 0",
+        "result": "No, take-home pay rises even when the boundary is crossed",
+        "why": "The $1,500 raise leaves $1,194.00 more in hand, because only the $1,200 above the boundary is taxed at 22% and the rate is well under 100%."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain exactly what the claim confuses, using the second case, and say what would have to be true of a tax system for the claim to be right.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the confusion: the claim treats a band rate as applying to all income once the boundary is crossed, when it applies only to the portion above it — $1,200 of the $1,500 here.",
+          "States that take-home pay can only fall if the marginal rate on the extra income exceeds 100%, which no band in this schedule approaches.",
+          "Uses the split of the raise, $42.00 at 14% and $264.00 at 22%, to show how the boundary is actually handled."
+        ],
+        "evidenceRequirements": [
+          "Cites the $306.00 of extra tax against the $1,500 raise, and the $1,194.00 retained."
+        ],
+        "lookFors": [
+          "The response names the \"whole income moves to the new rate\" belief explicitly.",
+          "The condition for the claim to be true is stated in terms of a rate above 100%.",
+          "The response does not simply assert the claim is a myth; it shows the arithmetic."
+        ],
+        "commonMisconception": "Believing that entering a higher band applies its rate to all of a person’s income.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Some real situations genuinely do reduce a household’s position when income rises slightly, even though tax bands do not. Name one such mechanism, and say how it differs from the band structure tested here.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names a genuine mechanism, such as a benefit, subsidy, or credit that is withdrawn entirely once income passes a threshold rather than tapering.",
+          "Explains the difference: a band applies its rate only to income above the boundary, while an abrupt withdrawal removes a fixed amount the moment the threshold is crossed."
+        ],
+        "evidenceRequirements": [
+          "Contrasts the mechanism with the $1,200 taxed at 22% in the case just computed."
+        ],
+        "lookFors": [
+          "The mechanism named genuinely creates a cliff rather than a higher rate.",
+          "The response keeps the tax-band point correct while conceding the general possibility."
+        ],
+        "dimensions": [
+          "transfer",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

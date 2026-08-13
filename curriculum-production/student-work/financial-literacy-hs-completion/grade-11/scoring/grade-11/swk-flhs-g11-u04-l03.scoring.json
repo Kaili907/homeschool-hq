@@ -1,0 +1,314 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l03",
+  "lessonId": "ma-g11-financial-literacy-u04-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$14,208.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "40 remaining payments of $355.20."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$6,913.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "28 remaining payments of $246.90 — the shorter of the two loans."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$21,121.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$14,208.00 and $6,913.20 together — the figure the consolidation offer has to be compared against."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$23,919.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$23,469.00 of payments plus the $450 charged at the start."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,797.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$23,919.00 against $21,121.20 — the offer is more expensive over its life, despite lowering the monthly payment."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$210.95",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$602.10 of current payments against a single $391.15 — a genuine and immediate reduction in what leaves the account each month."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$5,906.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$210.95 a month for the 28 months until Loan 2 would have ended. After that the relief shrinks, because only Loan 1 would still be running."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "13.2%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,797.80 against $21,121.20 — the price of the lower payment, expressed against the debt it restructures."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "A lower monthly payment and a longer time in debt",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The consolidation totals $23,919.00 against $21,121.20, so it costs more rather than less, and the term runs 60 months against 40; what changes in Ingrid’s favour is the $210.95 a month, not the amount owed."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(payment1 * 40, 2)",
+        "substituted": "round(355.2 * 40, 2)",
+        "result": "$14,208.00",
+        "why": "40 remaining payments of $355.20."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(payment2 * 28, 2)",
+        "substituted": "round(246.9 * 28, 2)",
+        "result": "$6,913.20",
+        "why": "28 remaining payments of $246.90 — the shorter of the two loans."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$21,121.20",
+        "why": "$14,208.00 and $6,913.20 together — the figure the consolidation offer has to be compared against."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(newPayment * 60 + fee, 2)",
+        "substituted": "round(391.15 * 60 + 450, 2)",
+        "result": "$23,919.00",
+        "why": "$23,469.00 of payments plus the $450 charged at the start."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p4 - #t1-p3",
+        "substituted": "#t1-p4 - #t1-p3",
+        "result": "$2,797.80",
+        "why": "$23,919.00 against $21,121.20 — the offer is more expensive over its life, despite lowering the monthly payment."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(payment1b + payment2b - newPayment2, 2)",
+        "substituted": "round(355.2 + 246.9 - 391.15, 2)",
+        "result": "$210.95",
+        "why": "$602.10 of current payments against a single $391.15 — a genuine and immediate reduction in what leaves the account each month."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 * 28",
+        "substituted": "#t2-p2 * 28",
+        "result": "$5,906.60",
+        "why": "$210.95 a month for the 28 months until Loan 2 would have ended. After that the relief shrinks, because only Loan 1 would still be running."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p1 / #t1-p3 * 100, 1)",
+        "substituted": "round(#t2-p1 / #t1-p3 * 100, 1)",
+        "result": "13.2%",
+        "why": "$2,797.80 against $21,121.20 — the price of the lower payment, expressed against the debt it restructures."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t1-p4 < #t1-p3",
+        "substituted": "#t1-p4 < #t1-p3",
+        "result": "A lower monthly payment and a longer time in debt",
+        "why": "The consolidation totals $23,919.00 against $21,121.20, so it costs more rather than less, and the term runs 60 months against 40; what changes in Ingrid’s favour is the $210.95 a month, not the amount owed."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Describe a situation in which Ingrid should accept this offer and one in which she should refuse it. For each, name the figure that decides it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Gives an accept case grounded in the $210.95 monthly relief — a budget that cannot currently sustain $602.10 a month without missing a payment or borrowing elsewhere.",
+          "Gives a refuse case grounded in the $2,797.80 extra cost — a budget that can carry the current payments, where the offer buys relief she does not need.",
+          "Attaches the deciding figure to each case rather than describing the two situations in general terms."
+        ],
+        "evidenceRequirements": [
+          "Cites both the $210.95 monthly relief and the $2,797.80 extra total cost."
+        ],
+        "lookFors": [
+          "The accept case rests on cash flow, not on the offer being cheaper, which it is not.",
+          "The response does not treat consolidation as inherently good or inherently a trap.",
+          "A response noting that missing payments on the current loans would cost more than $2,797.80 is reasoning well about the accept case."
+        ],
+        "commonMisconception": "Reading a lower monthly payment as a lower cost of borrowing.",
+        "dimensions": [
+          "tradeoff-defense",
+          "criteria-application",
+          "plan-coherence"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The relief is $210.95 a month only while both current loans would still be running. Explain what happens to the comparison after month 28, and why that matters for judging the offer.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that Loan 2 would have ended at month 28, so from then on the comparison is $391.15 against $355.20 and the consolidation is actually the more expensive monthly option.",
+          "Draws the consequence: the relief is temporary, and the offer costs more every month from month 29 to month 60."
+        ],
+        "evidenceRequirements": [
+          "Uses the 28-payment and 40-payment remaining terms alongside the $391.15 consolidated payment."
+        ],
+        "lookFors": [
+          "The response tracks what happens after the shorter loan ends rather than treating the relief as constant.",
+          "The response computes or clearly states the reversed monthly comparison."
+        ],
+        "commonMisconception": "Assuming a monthly saving computed at the start of a restructure holds for its whole term.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

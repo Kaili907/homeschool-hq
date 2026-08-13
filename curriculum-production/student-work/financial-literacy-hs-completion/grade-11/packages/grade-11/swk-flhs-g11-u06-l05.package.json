@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u06-l05",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: disability and income-loss protection"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "disability and income-loss protection",
+  "objective": "Compute what a fictional disability policy pays across an interruption to earnings, measure the share of lost income it replaces, and identify the two terms that create the shortfall.",
+  "scenario": "Seraphina Duncan-Mwangi is examining a fictional income-protection policy. The income, benefit percentage, waiting period, and interruption below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Seraphina earns $4,150 a month. The fictional policy pays 60% of monthly income, begins only after a waiting period of 3 months with no benefit, and pays for up to 24 months. The interruption to her earnings lasts 14 months.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly benefit at 60% of income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much income is lost across the whole 14 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much income is lost during the 3-month waiting period, when nothing is paid?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much does the policy pay in total, across the 11 months of the interruption that fall after the waiting period?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure the shortfall and attribute it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total shortfall between the income lost and the benefit paid?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What share of the lost income does the policy replace? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of the shortfall is caused by the waiting period alone?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much of the shortfall is caused by the benefit replacing only 60% rather than all of the income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How many months of the $2,490.00 benefit would be needed to cover the waiting-period loss? Give one decimal place.",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The policy quotes 60% replacement and delivers 47.1%. Explain why the two figures differ, say which of the policy’s terms a household should size its reserve against, and how large that reserve would need to be."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "A shorter waiting period would cost a higher premium. Using the figures, say what a household would be buying and how it should decide whether the shorter wait is worth it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total benefit comes out at $34,860.00, the waiting period is being paid. The policy pays nothing for the first 3 months, so only 11 of the 14 months attract a benefit. Draw the 14 months as a row of boxes, cross out the first three, and count the boxes that remain before multiplying.",
+  "extension": "Recompute the realised replacement share for an interruption lasting 30 months, and say why the 24-month maximum now matters when it did not before.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u06-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

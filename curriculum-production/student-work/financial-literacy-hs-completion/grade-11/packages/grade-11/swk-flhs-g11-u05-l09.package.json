@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l09",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l09",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: real return net of inflation"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "real return net of inflation",
+  "objective": "Carry a fictional quoted return through fee, tax, and inflation in a single chain, and express what share of the original figure survives.",
+  "scenario": "Clementine Vasilyeva-Boateng is preparing a summary of a fictional holding for a simulated case study. The return, fee, tax rate, and inflation rate below are invented, and the flat tax is a deliberate simplification.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional return and cost figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional holding of $60,000 is quoted as returning 6.9% over one year. The fund charges 0.95% of the amount held. A simplified flat tax of 15% applies to the gain after the fee. Prices rise 3.4% over the year. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the gross gain at the quoted 6.9%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the fee at 0.95% of the amount held?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the gain after the fee?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the gain after the fee and the simplified 15% tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now convert the result into what it can actually buy.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the holding worth at the end of the year in nominal terms?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is that worth in today’s dollars, after 3.4% inflation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the real gain?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the real return after fee, tax, and inflation? Give two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What share of the quoted 6.9% survives to the end of the chain? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "Of the $4,140.00 that did not survive, how much was taken by the fee and the tax together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Only 23.2% of the quoted return survived. Rank the three reductions by size, say which is easiest for a holder to influence, and explain why the largest one is the one least often mentioned."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The order of this chain was fee, then tax, then inflation. Say whether changing the order would change the final figure, and explain why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the real gain comes out near $3,034.50, the inflation step has been skipped. The $63,034.50 the holding reaches is in year-end dollars, and prices have risen 3.4% since the start, so it has to be divided by 1.034 to be compared with the $60,000. Lay the chain out as four rows — gross, after fee, after tax, in today’s dollars — and check that each row is smaller than the one above it.",
+  "extension": "Find the quoted return that would have been needed to leave a real return of 3% after the same fee, tax, and inflation, and say how much higher that is than 6.9%.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

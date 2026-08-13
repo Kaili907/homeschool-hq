@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u06-l01",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: quantifying exposure: likelihood times severity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "quantifying exposure: likelihood times severity",
+  "objective": "Compute the expected annual loss of four fictional risks from likelihood and severity, rank them, and show why likelihood alone gives a different ranking.",
+  "scenario": "Persephone Adeoye-Ravensworth is quantifying the exposure of a fictional household. The four risks, their likelihoods, and their severities below are invented figures for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional risk table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household faces four risks in a year. Roof damage has a 4% chance and would cost $14,500. A vehicle collision has a 9% chance and would cost $6,800. Losing a phone has a 22% chance and would cost $940. A long illness has a 2% chance and would cost $38,000. Expected loss is the chance multiplied by the cost.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss from roof damage?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss from a vehicle collision?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss from losing a phone?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss from a long illness?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now combine them and compare the two ways of ranking.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total expected annual loss across all four risks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total expected loss comes from the illness risk? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many times larger is the illness expected loss than the phone expected loss? Give two decimal places.",
+          "unit": "ratio"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "The household holds a reserve of $9,000. By how much would the illness loss exceed it?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which risk carries the largest expected annual loss?",
+          "choices": [
+            "Roof damage",
+            "Vehicle collision",
+            "Losing a phone",
+            "A long illness"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Ranking by likelihood puts the phone first and ranking by expected loss puts the illness first. Explain why the two disagree, and say which ranking should guide how the household spends money on protection."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The total expected annual loss is $2,158.80. Say what that figure would and would not tell the household about any particular year."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the phone risk comes out as the largest exposure, likelihood is being read as the answer on its own. Expected loss is the chance multiplied by the cost: 22% of $940 is $206.80, while 2% of $38,000 is $760.00. Write the four products in a column and rank the column, not the percentages.",
+  "extension": "Recompute the four expected losses if every severity doubled but every likelihood halved, and say what happens to the ranking and to the total.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u06-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

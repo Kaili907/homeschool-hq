@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l05",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: negotiating position and information asymmetry"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "negotiating position and information asymmetry",
+  "objective": "Quantify what independent information is worth in a fictional negotiation by separating the price move from the trade-in move, and identify which side holds which information.",
+  "scenario": "Cordelia Nakamura-Obi is a fictional buyer at a simulated dealership. The asking price, the comparable sales, and the trade-in offers below are invented and describe no real dealer or market.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional price and trade-in figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The dealer is asking $16,900. Cordelia has found two recent comparable sales of the same fictional model, at $15,800 and $16,300.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the midpoint of the two comparable sales at $15,800 and $16,300?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far above that midpoint is the asking price?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Cordelia also has a vehicle to dispose of. The dealer offers $4,200 as a trade-in. A private sale would bring $5,650 but would take several weeks and carries the risk of no sale at all.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the private sale bring than the trade-in offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If Cordelia wins both the price argument and the private sale, how much better off is she than accepting both of the dealer’s figures?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "That combined amount is what percentage of the $16,900 asking price? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Suppose the dealer agrees to the midpoint price but only if Cordelia takes the $4,200 trade-in. What is her net position compared with paying the asking price and selling privately?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One more comparison, on the information itself.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the private sale fails and Cordelia ends up taking the trade-in after all, having still won the price argument, what has the negotiation been worth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Which piece of information in this scenario does the dealer have that Cordelia does not?",
+          "choices": [
+            "What the dealer paid for the vehicle and what it can resell her trade-in for",
+            "The two comparable sale prices",
+            "The condition of Cordelia’s current vehicle"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "A dealer offers Cordelia \"the best out-the-door price\" as a single figure covering both the purchase and the trade-in. Explain why a single figure is harder to evaluate than two, using the $600.00 result, and say what Cordelia should ask for instead."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The private sale is worth $1,450.00 more but takes weeks and might not happen. Say what would have to be true about Cordelia’s situation for the trade-in to be the better choice despite the gap."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the bundled deal comes out as a $2,300.00 gain, the trade-in concession is being added instead of subtracted. In that deal Cordelia wins $850.00 on the price and gives up $1,450.00 on the trade-in, so the two move in opposite directions. Write each transaction on its own line with a sign, and total the signed column.",
+  "extension": "Find the trade-in figure at which the bundled deal would leave Cordelia exactly even, and say what she would need to know about the dealer to judge whether that figure is achievable.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l09",
+  "lessonId": "ma-g11-financial-literacy-u05-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,140.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6.9% of $60,000 — the only figure in this chain that would appear in an advertisement."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$570.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.95% of the $60,000 held, charged on the balance rather than on the gain."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,570.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,140.00 less the $570.00 fee."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$3,034.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,570.00 less 15% of itself. Two costs have now been taken and the price level has not yet been considered."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$63,034.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $60,000 held plus the $3,034.50 that survived the fee and the tax."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$60,961.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Dividing by 1.034 converts the year-end amount into money of today’s purchasing power."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$961.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$60,961.80 of purchasing power against the $60,000 started with — under a quarter of the $4,140.00 that was quoted."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "1.60%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$961.80 against $60,000 — the figure that describes what the year actually did for the holder."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "23.2%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$961.80 of the original $4,140.00. Three costs, each of which sounds modest, together consume more than three-quarters of the quoted return."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "$1,105.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$570.00 of fee and $535.50 of tax. The remaining reduction — over $2,000 — is the price level, which nobody charges and which is the largest of the three."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(holding * quoted, 2)",
+        "substituted": "round(60000 * 0.069, 2)",
+        "result": "$4,140.00",
+        "why": "6.9% of $60,000 — the only figure in this chain that would appear in an advertisement."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(holding2 * feeRate, 2)",
+        "substituted": "round(60000 * 0.0095, 2)",
+        "result": "$570.00",
+        "why": "0.95% of the $60,000 held, charged on the balance rather than on the gain."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$3,570.00",
+        "why": "$4,140.00 less the $570.00 fee."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(#t1-p3 * (1 - taxRate), 2)",
+        "substituted": "round(#t1-p3 * (1 - 0.15), 2)",
+        "result": "$3,034.50",
+        "why": "$3,570.00 less 15% of itself. Two costs have now been taken and the price level has not yet been considered."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "holding3 + #t1-p4",
+        "substituted": "60000 + #t1-p4",
+        "result": "$63,034.50",
+        "why": "The $60,000 held plus the $3,034.50 that survived the fee and the tax."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / (1 + inflation), 2)",
+        "substituted": "round(#t2-p1 / (1 + 0.034), 2)",
+        "result": "$60,961.80",
+        "why": "Dividing by 1.034 converts the year-end amount into money of today’s purchasing power."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - holding4",
+        "substituted": "#t2-p2 - 60000",
+        "result": "$961.80",
+        "why": "$60,961.80 of purchasing power against the $60,000 started with — under a quarter of the $4,140.00 that was quoted."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p3 / holding5 * 100, 2)",
+        "substituted": "round(#t2-p3 / 60000 * 100, 2)",
+        "result": "1.60%",
+        "why": "$961.80 against $60,000 — the figure that describes what the year actually did for the holder."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p3 / #t1-p1 * 100, 1)",
+        "substituted": "round(#t2-p3 / #t1-p1 * 100, 1)",
+        "result": "23.2%",
+        "why": "$961.80 of the original $4,140.00. Three costs, each of which sounds modest, together consume more than three-quarters of the quoted return."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t1-p2 + (#t1-p3 - #t1-p4)",
+        "substituted": "#t1-p2 + (#t1-p3 - #t1-p4)",
+        "result": "$1,105.50",
+        "why": "$570.00 of fee and $535.50 of tax. The remaining reduction — over $2,000 — is the price level, which nobody charges and which is the largest of the three."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Only 23.2% of the quoted return survived. Rank the three reductions by size, say which is easiest for a holder to influence, and explain why the largest one is the one least often mentioned.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Ranks the three correctly: inflation removes the most, then the $570.00 fee, then the $535.50 tax.",
+          "Identifies the fee as the most influenceable, since it is set by the choice of fund and known in advance, while inflation is not controllable and the tax follows from rules.",
+          "Explains that inflation is rarely mentioned because it is not a charge anyone levies and does not appear on any statement, so it has to be applied deliberately."
+        ],
+        "evidenceRequirements": [
+          "Cites the $570.00 fee, the $535.50 tax, and the difference between the $63,034.50 nominal and $60,961.80 real values."
+        ],
+        "lookFors": [
+          "The ranking is derived from the figures rather than assumed.",
+          "The response explains why inflation is invisible rather than saying it is ignored.",
+          "A response noting that the tax is charged on a nominal gain that inflation has partly erased is making a sophisticated and correct point."
+        ],
+        "commonMisconception": "Assuming the costs that appear on a statement are the largest costs.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The order of this chain was fee, then tax, then inflation. Say whether changing the order would change the final figure, and explain why.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that the fee must come before the tax because the scenario taxes the gain after the fee, so swapping those two would change the answer.",
+          "Explains that inflation is applied to the final amount and would give the same result wherever it were applied, since it divides the whole figure rather than a component."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $3,570.00 after-fee gain as the base the 15% tax was applied to."
+        ],
+        "lookFors": [
+          "The response checks the order against what each step is applied to.",
+          "The response distinguishes the two costs charged on components from the one applied to the whole."
+        ],
+        "dimensions": [
+          "criteria-application",
+          "error-diagnosis"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 10,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

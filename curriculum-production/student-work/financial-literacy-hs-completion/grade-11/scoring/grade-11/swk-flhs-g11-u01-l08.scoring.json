@@ -1,0 +1,298 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l08",
+  "lessonId": "ma-g11-financial-literacy-u01-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$448,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three training years at $27,400 plus 7 qualified years at $52,300. Unlike the other pathway, none of its years are unpaid."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$381,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Seven years at $61,700 less three years of $16,800 tuition. The first three years contribute nothing but cost."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$66,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$448,300.00 against $381,500.00 — the higher-paying qualification has not yet made up the three years it spent paying instead of earning."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$132,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The apprentice has earned $82,200 while the student has paid out $50,400, so the gap at the end of the training period is the sum of the two."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$9,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$61,700 against $52,300 once both are working — this is the only force closing the gap."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "14.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$132,600.00 of accumulated gap divided by the $9,400.00 a year that closes it."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "17.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The 14.1 years of catching up begin only after the 3 training years have already passed."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "The apprenticeship at 10 years and the programme at 25 years",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The crossover falls at 17.1 years, which is after the 10-year horizon and before the 25-year one, so the two horizons genuinely disagree."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "training * 3 + qualified * after",
+        "substituted": "27400 * 3 + 52300 * 7",
+        "result": "$448,300.00",
+        "why": "Three training years at $27,400 plus 7 qualified years at $52,300. Unlike the other pathway, none of its years are unpaid."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "gradPay * after2 - tuition * 3",
+        "substituted": "61700 * 7 - 16800 * 3",
+        "result": "$381,500.00",
+        "why": "Seven years at $61,700 less three years of $16,800 tuition. The first three years contribute nothing but cost."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$66,800.00",
+        "why": "$448,300.00 against $381,500.00 — the higher-paying qualification has not yet made up the three years it spent paying instead of earning."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "training2 * 3 + tuition2 * 3",
+        "substituted": "27400 * 3 + 16800 * 3",
+        "result": "$132,600.00",
+        "why": "The apprentice has earned $82,200 while the student has paid out $50,400, so the gap at the end of the training period is the sum of the two."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "gradPay2 - qualified2",
+        "substituted": "61700 - 52300",
+        "result": "$9,400.00",
+        "why": "$61,700 against $52,300 once both are working — this is the only force closing the gap."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / #t2-p2, 1)",
+        "substituted": "round(#t2-p1 / #t2-p2, 1)",
+        "result": "14.1",
+        "why": "$132,600.00 of accumulated gap divided by the $9,400.00 a year that closes it."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 + trainingYears",
+        "substituted": "#t2-p3 + 3",
+        "result": "17.1",
+        "why": "The 14.1 years of catching up begin only after the 3 training years have already passed."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 < longHorizon",
+        "substituted": "#t2-p4 < 25",
+        "result": "The apprenticeship at 10 years and the programme at 25 years",
+        "why": "The crossover falls at 17.1 years, which is after the 10-year horizon and before the 25-year one, so the two horizons genuinely disagree."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "In an earlier lesson the pathway that paid throughout also led at the shorter horizon. Say what is the same about the mechanism here, and name the one feature of this case that the earlier method had to be adjusted for.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the shared mechanism: a pathway that pays during training accumulates a lead that the higher later wage can only close at the rate of the annual difference.",
+          "Names the adjustment: here the training years earn $27,400 rather than nothing, so the gap at year 3 is the apprentice’s earnings plus the student’s tuition rather than tuition alone.",
+          "States the limit of the transfer, such as the conclusion depending on the crossover at 17.1 years sitting inside a working life."
+        ],
+        "evidenceRequirements": [
+          "Cites the $132,600.00 year-3 gap and the $9,400.00 annual closing rate as the two quantities the crossover depends on."
+        ],
+        "lookFors": [
+          "The response describes the method, not just the answer, and says where it needed changing.",
+          "The response treats the paid training years as the distinguishing feature rather than the wage levels.",
+          "The response states a limit on the transfer rather than presenting the method as universal."
+        ],
+        "commonMisconception": "Assuming an unpaid training period and a paid one differ only in the size of the cost.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The crossover falls at 17.1 years. Name two things about Hafsa’s situation that would make that either decisive or almost irrelevant, and say which figure each one would move.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names a factor that makes the crossover decisive, such as intending a long career in the field, and ties it to the horizon being compared rather than to the wages.",
+          "Names a factor that makes it nearly irrelevant, such as expecting to change fields within a decade, or the $9,400.00 annual advantage not holding for seventeen years."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 17.1-year crossover and to at least one computed figure that the named factor would move."
+        ],
+        "lookFors": [
+          "Each factor is tied to a specific figure rather than offered as a general consideration.",
+          "The response distinguishes factors that move the crossover from factors that change which horizon matters."
+        ],
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

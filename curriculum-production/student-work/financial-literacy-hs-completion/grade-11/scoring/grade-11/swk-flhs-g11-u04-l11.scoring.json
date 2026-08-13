@@ -1,0 +1,308 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l11",
+  "lessonId": "ma-g11-financial-literacy-u04-l11",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "18.3%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,142 of payments against $6,240 of gross income — comfortably inside the cap before the new payment is considered."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,246.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "36% of $6,240 — the most the lender will allow across all debt payments together."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,104.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,246.40 ceiling less the $1,142 already committed."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "40.4%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,522 of total payments against $6,240 of gross income — above the 36% cap, so the proposal fails the test as it stands."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$275.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,380 against the $1,104.40 available — the size of the gap that has to be closed one way or another."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$275.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Every dollar of existing payment cleared releases exactly one dollar of the ceiling, so the amount to clear equals the gap of $275.60."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$7,005.56",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,522 of total payments divided by the 36% cap gives the income at which they sit exactly on the ceiling."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$765.56",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,005.56 needed against $6,240 — a 12% rise in income, against $275.60 of debt to clear, which is why clearing debt is usually the faster route."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$489.96",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$765.56 of extra income against $275.60 of debt payments to clear — the two routes to the same ratio are not the same size, because income has to cover the whole payment while cleared debt releases the ceiling dollar for dollar."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "Clearing $275.60 a month of existing debt payments",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The debt route requires removing $275.60 of monthly payments while the income route requires $765.56 more a month, nearly three times as much, and the ratio plainly responds to both."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(existing / gross * 100, 1)",
+        "substituted": "round(1142 / 6240 * 100, 1)",
+        "result": "18.3%",
+        "why": "$1,142 of payments against $6,240 of gross income — comfortably inside the cap before the new payment is considered."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(gross2 * rule, 2)",
+        "substituted": "round(6240 * 0.36, 2)",
+        "result": "$2,246.40",
+        "why": "36% of $6,240 — the most the lender will allow across all debt payments together."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - existing2",
+        "substituted": "#t1-p2 - 1142",
+        "result": "$1,104.40",
+        "why": "The $2,246.40 ceiling less the $1,142 already committed."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round((existing3 + proposed) / gross3 * 100, 1)",
+        "substituted": "round((1142 + 1380) / 6240 * 100, 1)",
+        "result": "40.4%",
+        "why": "$2,522 of total payments against $6,240 of gross income — above the 36% cap, so the proposal fails the test as it stands."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "proposed2 - #t1-p3",
+        "substituted": "1380 - #t1-p3",
+        "result": "$275.60",
+        "why": "$1,380 against the $1,104.40 available — the size of the gap that has to be closed one way or another."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1",
+        "substituted": "#t2-p1",
+        "result": "$275.60",
+        "why": "Every dollar of existing payment cleared releases exactly one dollar of the ceiling, so the amount to clear equals the gap of $275.60."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round((existing4 + proposed3) / rule2, 2)",
+        "substituted": "round((1142 + 1380) / 0.36, 2)",
+        "result": "$7,005.56",
+        "why": "The $2,522 of total payments divided by the 36% cap gives the income at which they sit exactly on the ceiling."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - gross4",
+        "substituted": "#t2-p3 - 6240",
+        "result": "$765.56",
+        "why": "$7,005.56 needed against $6,240 — a 12% rise in income, against $275.60 of debt to clear, which is why clearing debt is usually the faster route."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 - #t2-p2",
+        "substituted": "#t2-p4 - #t2-p2",
+        "result": "$489.96",
+        "why": "$765.56 of extra income against $275.60 of debt payments to clear — the two routes to the same ratio are not the same size, because income has to cover the whole payment while cleared debt releases the ceiling dollar for dollar."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t2-p2 < #t2-p4",
+        "substituted": "#t2-p2 < #t2-p4",
+        "result": "Clearing $275.60 a month of existing debt payments",
+        "why": "The debt route requires removing $275.60 of monthly payments while the income route requires $765.56 more a month, nearly three times as much, and the ratio plainly responds to both."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Anselm wants to argue that the rule is wrong in his case. Construct the strongest version of that argument using figures from this lesson, then give the strongest response a lender could make to it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Builds a real argument: the ratio uses gross income and counts required payments regardless of how soon a debt ends, so a borrower whose $1,142 includes a loan ending shortly is treated as though it will run forever.",
+          "Gives the lender’s response: the rule is a standard applied across many borrowers without individual investigation, and the 40.4% figure leaves no margin for a fall in income.",
+          "Reaches a position on the exchange rather than presenting both sides without comment."
+        ],
+        "evidenceRequirements": [
+          "Cites the 40.4% ratio and the $1,104.40 allowance in the argument."
+        ],
+        "lookFors": [
+          "The argument names a specific defect in what the ratio measures, not a general complaint.",
+          "The lender’s response is given its strongest form rather than a weak one.",
+          "Either conclusion is acceptable if it engages with both the borrower’s case and the lender’s."
+        ],
+        "commonMisconception": "Treating a lending rule as either infallible or arbitrary, rather than as a standard with known limits.",
+        "dimensions": [
+          "tradeoff-defense",
+          "criteria-application",
+          "evidence-use"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Suppose Anselm clears the $275.60 of payments by taking a longer term on the same debt rather than by repaying it. Say whether that satisfies the rule, and whether it improves his position.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that it does satisfy the rule, because the rule counts the required monthly payment and a longer term reduces that payment.",
+          "Argues that it does not necessarily improve his position, since the same debt is still owed and a longer term generally increases the total interest paid."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $275.60 reduction and to the fact that the ratio counts payments rather than balances."
+        ],
+        "lookFors": [
+          "The response separates satisfying the test from being better off.",
+          "The response identifies that the rule can be met without the underlying debt changing."
+        ],
+        "commonMisconception": "Assuming that any change which satisfies a lending rule has improved the borrower’s finances.",
+        "dimensions": [
+          "criteria-application",
+          "error-diagnosis"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

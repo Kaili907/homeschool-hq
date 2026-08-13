@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u06-l04",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: coverage gaps and overlapping policies"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "coverage gaps and overlapping policies",
+  "objective": "Compute what two fictional overlapping policies pay on a single loss in the correct order — deductible, then limit, then the remainder — and locate exactly where the coverage gap sits.",
+  "scenario": "Nikolai Ferreiro-Adichie is working through a fictional claim against two simulated policies. The loss, deductibles, and limits below are invented, and no real insurer or claim is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A single covered loss of $18,400 has occurred. Policy 1 has a $1,500 deductible and a coverage limit of $12,000. Policy 2 covers whatever Policy 1 leaves, has no deductible, and has a coverage limit of $5,000. Apply the deductible to the loss first, then cap what remains at the limit.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $18,400 loss is left after Policy 1’s $1,500 deductible?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does Policy 1 actually pay, given its $12,000 limit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of the loss remains after Policy 1 has paid?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much does Policy 2 pay, given its $5,000 limit and no deductible?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find where the gap sits and how large it is.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the loss does Nikolai pay out of pocket?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the loss did the two policies pay between them?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the loss was covered? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much of the loss sat above Policy 1’s $12,000 limit, after its deductible?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "What would have closed Nikolai’s $1,400.00 gap entirely?",
+          "choices": [
+            "Raising Policy 2’s limit from $5,000 to $6,400",
+            "Removing Policy 1’s $1,500 deductible",
+            "Raising Policy 1’s limit from $12,000 to $12,700"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Nikolai holds two policies covering the same loss and still pays $1,400.00. Explain how holding more than one policy can still leave a gap, and identify which of the two terms — the deductible or the limit — did more damage here."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The order matters: deductible first, then limit. Construct a loss for which applying the limit first would give a different answer under Policy 1, and say which order a policy actually uses."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Policy 1 comes out paying $10,500.00, the deductible is being subtracted after the limit rather than before. The order is: take the $1,500 deductible off the $18,400 loss to get $16,900.00, then cap that at the $12,000 limit. Write the three steps — loss, less deductible, capped at limit — as separate lines every time.",
+  "extension": "Recompute all the payments for a loss of $9,000 instead, and say why the two policies cover the whole of it even though their limits are unchanged.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u06-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

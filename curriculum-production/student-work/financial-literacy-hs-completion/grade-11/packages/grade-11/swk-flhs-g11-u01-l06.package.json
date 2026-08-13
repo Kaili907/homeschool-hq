@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l06",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: negotiation, advancement, and long-run wage growth"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "negotiation, advancement, and long-run wage growth",
+  "objective": "Compute what a one-time fictional negotiated increase is worth across fifteen years once it compounds with annual raises, and express it as a share of total career earnings over that period.",
+  "scenario": "Idris Vanterpool is a fictional new hire at an invented engineering firm. The offer, the negotiated increase, and the raise pattern below are simulated and describe no real employer.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional offer and raise figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The opening offer is $52,000. After negotiating, Idris starts at $55,400 instead. Under either starting salary, the firm’s pattern gives a 3% raise at the start of each following year, and Idris stays 15 years. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much did the negotiation add to the starting salary?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "By year 15, which is 14 raises after the start, how large is the annual gap between the two salary paths?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of the 15 annual gaps across the whole period? Use the running-total formula for a stream that grows 3% a year: the first year’s amount times ((1 + 0.03) raised to the 15th, less 1) divided by 0.03.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put that total against the size of the career it sits inside.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Using the same running-total formula, what would Idris earn across the 15 years on the original $52,000 offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "The fifteen-year value of the negotiation is what percentage of that total? Give two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more than the original $3,400 increase is the fifteen-year total worth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "The negotiation happened once, at the start. Why is its fifteen-year value so much larger than $3,400?",
+          "choices": [
+            "Because the firm repeats the negotiated increase every year as a separate bonus",
+            "Because the increase is carried in every later year and each 3% raise is calculated on the higher salary",
+            "Because inflation increases the value of the original $3,400 over time"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A colleague tells Idris that negotiating \"was worth about three and a half thousand\". Explain what that description gets wrong, and say what has to be true about the job for the $63,236.31 figure to be the right one."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Suppose the firm switched to flat raises of $1,600 a year for everyone instead of 3%. Say what happens to the value of the negotiation, and explain why the two raise designs treat it differently."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the fifteen-year value of the negotiation comes out as $51,000, the gap is being held flat at $3,400 for 15 years and the compounding is being dropped. Write the first three gaps by hand — $3,400.00, then 3% more, then 3% more again — to see the column is not constant, and then use the running-total formula on the whole stream.",
+  "extension": "Find what the opening offer would have had to be, with no negotiation, for the fifteen-year total to match the negotiated path, and say why that figure is not $52,000 plus $63,236.31.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

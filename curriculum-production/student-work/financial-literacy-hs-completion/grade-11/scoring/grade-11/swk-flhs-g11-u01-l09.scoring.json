@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l09",
+  "lessonId": "ma-g11-financial-literacy-u01-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$612,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve years at the $54,200 median less the $38,400 pathway cost, which is paid once."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$575,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same calculation for Field B: twelve years at $49,800 less its cheaper $21,900 pathway."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$36,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$612,000.00 against $575,700.00 — Field A’s higher wage more than covers its more expensive pathway at this percentile."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$478,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve years at $43,100 less the same $38,400 pathway cost. The cost does not fall when the wage does."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$525,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve years at $45,600 less $21,900. Field B’s narrower spread means its lower percentile is close to its median."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$46,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$525,300.00 against $478,800.00 — the ranking from the median comparison has reversed."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$82,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$36,300.00 one way and $46,500.00 the other. The choice of percentile moves the comparison by more than either lead on its own."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "Field B, which leads at the 25th percentile",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Safety here means the worse outcomes are better, and at the 25th percentile Field B is $46,500.00 ahead — its narrower spread and cheaper pathway both protect the downside."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "medA * 12 - costA",
+        "substituted": "54200 * 12 - 38400",
+        "result": "$612,000.00",
+        "why": "Twelve years at the $54,200 median less the $38,400 pathway cost, which is paid once."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "medB * 12 - costB",
+        "substituted": "49800 * 12 - 21900",
+        "result": "$575,700.00",
+        "why": "The same calculation for Field B: twelve years at $49,800 less its cheaper $21,900 pathway."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$36,300.00",
+        "why": "$612,000.00 against $575,700.00 — Field A’s higher wage more than covers its more expensive pathway at this percentile."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "lowA * 12 - costA2",
+        "substituted": "43100 * 12 - 38400",
+        "result": "$478,800.00",
+        "why": "Twelve years at $43,100 less the same $38,400 pathway cost. The cost does not fall when the wage does."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "lowB * 12 - costB2",
+        "substituted": "45600 * 12 - 21900",
+        "result": "$525,300.00",
+        "why": "Twelve years at $45,600 less $21,900. Field B’s narrower spread means its lower percentile is close to its median."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - #t2-p1",
+        "substituted": "#t2-p2 - #t2-p1",
+        "result": "$46,500.00",
+        "why": "$525,300.00 against $478,800.00 — the ranking from the median comparison has reversed."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 + #t2-p3",
+        "substituted": "#t1-p3 + #t2-p3",
+        "result": "$82,800.00",
+        "why": "$36,300.00 one way and $46,500.00 the other. The choice of percentile moves the comparison by more than either lead on its own."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p2 > #t2-p1",
+        "substituted": "#t2-p2 > #t2-p1",
+        "result": "Field B, which leads at the 25th percentile",
+        "why": "Safety here means the worse outcomes are better, and at the 25th percentile Field B is $46,500.00 ahead — its narrower spread and cheaper pathway both protect the downside."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The two comparisons disagree. Explain what causes the reversal, and say what a person would need to know about themselves — not about the fields — to decide which comparison to act on.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that Field A has the wider spread, so its 25th percentile falls $11,100 below its median while Field B’s falls only $4,200, and its higher fixed pathway cost is unchanged by the lower wage.",
+          "Identifies that the deciding personal fact is capacity to absorb a poor outcome — whether a result near the 25th percentile would be survivable or ruinous.",
+          "Avoids declaring one field better outright, and instead ties the answer to which comparison applies."
+        ],
+        "evidenceRequirements": [
+          "Cites Field A’s $36,300.00 median lead and Field B’s $46,500.00 lead at the 25th percentile."
+        ],
+        "lookFors": [
+          "The response names both causes of the reversal — the wider spread and the higher fixed cost.",
+          "The personal factor named is about downside capacity, not about preference or interest alone.",
+          "The response does not resolve the disagreement by averaging the two comparisons."
+        ],
+        "commonMisconception": "Assuming the field that leads on typical pay leads on every outcome.",
+        "dimensions": [
+          "tradeoff-defense",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Field A’s pathway costs $16,500 more than Field B’s. Say how much of the reversal that cost difference is responsible for, and what would happen to the ranking if the two pathways cost the same.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies that $16,500 of the $46,500.00 gap at the 25th percentile comes from the cost difference and the rest from the $2,500 annual wage gap over 12 years.",
+          "States that equalising the pathway costs would narrow Field B’s lead at the 25th percentile to $30,000 but would not reverse it, because Field B still pays more at that percentile."
+        ],
+        "evidenceRequirements": [
+          "Separates the one-off cost difference from the twelve-year wage difference when accounting for the gap."
+        ],
+        "lookFors": [
+          "The response decomposes the gap into its two sources rather than attributing it to one.",
+          "The response checks whether the ranking would actually flip rather than assuming it would."
+        ],
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

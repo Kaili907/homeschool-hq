@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l01",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: total cost of ownership over a holding period"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "total cost of ownership over a holding period",
+  "objective": "Build the total cost of owning a fictional used vehicle across a five-year holding period, including resale, and convert it into a cost per year and a cost per mile.",
+  "scenario": "Ines Kowalczyk-Amadi is a fictional buyer in a simulated town. The vehicle, its running costs, and its resale value below are invented figures and describe no real car or dealer.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional vehicle cost figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The fictional vehicle costs $14,800 to buy. Ines expects to drive 11,000 miles a year for 5 years, a total of 55,000 miles. It averages 25 miles per gallon and fuel costs $3.45 a gallon throughout.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many gallons of fuel does Ines use in one year, driving 11,000 miles at 25 miles per gallon?",
+          "unit": "gallons"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of fuel cost at $3.45 a gallon?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does fuel cost across the whole 5 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "The other running costs are insurance at $1,340 a year, maintenance at $620 a year, and registration at $148 a year, all held flat across the 5 years.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does insurance cost across the 5 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do maintenance and registration cost together across the 5 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total running cost across the 5 years, before the purchase price or resale are counted?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "At the end of the 5 years Ines expects to sell the vehicle for $5,900. Work these without help.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total cost of owning the vehicle for 5 years, counting the purchase price and the running costs and subtracting the resale?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the vehicle cost per year across the holding period?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the vehicle cost per mile across the 55,000 miles?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p4",
+          "promptType": "fixed-choice",
+          "text": "Ignoring the purchase price itself, which single running cost is the largest across the 5 years?",
+          "choices": [
+            "Fuel",
+            "Insurance",
+            "Maintenance and registration together"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "The vehicle’s price is $14,800 and owning it for five years costs $27,030.00. Explain where the extra cost comes from, and say which of the figures in the calculation you would least trust to hold for five years."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "Ines is offered a similar vehicle at $12,900 that averages 19 miles per gallon. Say which figure in your calculation that change moves, and roughly how much of the $1,900 price saving it would consume."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the five-year total comes out at $32,930.00, the resale value is being added instead of subtracted. The $5,900 is money coming back to Ines at the end, so it reduces what the five years cost. Lay the calculation out as three lines — money out for the purchase, money out for running costs, money back at the end — and check the sign on each line before totalling.",
+  "extension": "Recompute the cost per mile if Ines drives 6,000 miles a year instead of 11,000, and say why the cost per mile rises even though the total cost falls.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

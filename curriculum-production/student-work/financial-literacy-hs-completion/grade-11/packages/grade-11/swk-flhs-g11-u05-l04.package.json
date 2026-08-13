@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l04",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: rebalancing rules and why they are written in advance"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "rebalancing rules and why they are written in advance",
+  "objective": "Apply a fictional written rebalancing rule to a portfolio that has drifted, compute the trade it requires, and explain why the rule is written before the drift rather than after.",
+  "scenario": "Konstantin Vasquez-Lindeberg administers a fictional portfolio under a simulated written policy. The holdings, returns, and target weights below are invented and describe no real fund.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional portfolio and policy in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The written policy sets a target of 60% in a stock fund and 40% in a bond fund, and requires rebalancing whenever the stock share moves outside the band from 57% to 63%, which is 3 percentage points either side of its target. The portfolio started the year at $30,000 on target. Over the year the stock fund returned 21.4% and the bond fund returned 2.6%. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What was held in the stock fund at the start, at 60% of $30,000?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What was held in the bond fund at the start, at 40%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the stock fund worth after returning 21.4%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the bond fund worth after returning 2.6%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now check the policy and compute the trade it requires.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the portfolio worth at the end of the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What share of the portfolio is now in the stock fund? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Does the written policy require a rebalance?",
+          "choices": [
+            "Yes, the drift exceeds the 3 percentage point trigger",
+            "No, the drift is within the trigger"
+          ]
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What should the stock fund hold to be back on its 60% target?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much of the stock fund must be sold and moved into bonds?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "What did the portfolio return over the year as a whole? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The rule requires selling $1,353.60 of the fund that returned 21.4% to buy more of the one that returned 2.6%. Explain what the rule is protecting against, and say why writing it in advance is part of how it works."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The target is 60% of $34,164.00, not the original $18,000.00. Explain why the target moves with the portfolio, and what would go wrong if it did not."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the trade comes out at $3,852.00, the stock fund is being returned to its original $18,000.00 rather than to 60% of the new total. The policy sets a share, so the target is 60% of $34,164.00, which is $20,498.40. Compute the new total first, take the target share of it, and only then subtract.",
+  "extension": "Work out what the stock fund would have to return, with bonds flat at 2.6%, for the drift to stop exactly at the 3 percentage point trigger without crossing it.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l08",
+  "lessonId": "ma-g11-financial-literacy-u03-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$5,469.89",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Six years of compounding at 5.8% on the $3,900 fee."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,549.34",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same six years at the general rate — the counterfactual that separates ordinary inflation from this cost’s own behaviour."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$920.55",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,469.89 against $4,549.34 — the excess is what makes this cost a planning problem rather than a general one."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$4,554.35",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Discounting the $5,469.89 target back six years at the 3.1% the savings actually earn."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$654.35",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,554.35 needed today against a fee that currently costs $3,900 — saving the current price is not enough, because the fee outruns the savings."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "116.8%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,554.35 against $3,900 — the gap between a 5.8% cost and a 3.1% return, compounded over six years, is about 17% of the starting price."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Because the fee rises faster than the savings grow",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The fee reaches $5,469.89 while the same period grows savings by only 3.1% a year, so the $4,554.35 needed today reflects a 5.8% target outrunning a 3.1% return; the scenario says nothing about interest timing and does not subtract general inflation from the return."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(fee * pow(1 + feeInflation, 6), 2)",
+        "substituted": "round(3900 * pow(1 + 0.058, 6), 2)",
+        "result": "$5,469.89",
+        "why": "Six years of compounding at 5.8% on the $3,900 fee."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(fee2 * pow(1 + generalInflation, 6), 2)",
+        "substituted": "round(3900 * pow(1 + 0.026, 6), 2)",
+        "result": "$4,549.34",
+        "why": "The same six years at the general rate — the counterfactual that separates ordinary inflation from this cost’s own behaviour."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$920.55",
+        "why": "$5,469.89 against $4,549.34 — the excess is what makes this cost a planning problem rather than a general one."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p1 / pow(1 + savingsRate, 6), 2)",
+        "substituted": "round(#t1-p1 / pow(1 + 0.031, 6), 2)",
+        "result": "$4,554.35",
+        "why": "Discounting the $5,469.89 target back six years at the 3.1% the savings actually earn."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - fee3",
+        "substituted": "#t2-p1 - 3900",
+        "result": "$654.35",
+        "why": "$4,554.35 needed today against a fee that currently costs $3,900 — saving the current price is not enough, because the fee outruns the savings."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / fee4 * 100, 1)",
+        "substituted": "round(#t2-p1 / 3900 * 100, 1)",
+        "result": "116.8%",
+        "why": "$4,554.35 against $3,900 — the gap between a 5.8% cost and a 3.1% return, compounded over six years, is about 17% of the starting price."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p1 > #t2-p1",
+        "substituted": "#t1-p1 > #t2-p1",
+        "result": "Because the fee rises faster than the savings grow",
+        "why": "The fee reaches $5,469.89 while the same period grows savings by only 3.1% a year, so the $4,554.35 needed today reflects a 5.8% target outrunning a 3.1% return; the scenario says nothing about interest timing and does not subtract general inflation from the return."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This lesson applies the same compounding method used earlier in the unit for a general basket of goods. Say what had to change for this case, and explain why saving \"the current price\" of something is a reliable plan for some goals and not for others.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names the change: two different rates now apply — one to the cost and one to the savings — where the earlier case compared a cost rate against an income rate.",
+          "Explains that saving the current price works when the savings return at least matches the cost’s inflation, and fails when the cost rises faster, as 5.8% against 3.1% does here.",
+          "Uses the $654.35 gap to show the size of the failure rather than describing it qualitatively."
+        ],
+        "evidenceRequirements": [
+          "Cites the 5.8% fee inflation and the 3.1% savings rate as the two figures that decide whether the plan works."
+        ],
+        "lookFors": [
+          "The response states the general condition — cost rate against return rate — not just this case’s answer.",
+          "The response identifies which rate belongs to which side of the plan.",
+          "A response noting that the 2.6% general rate plays no part in the funding calculation is reading carefully."
+        ],
+        "commonMisconception": "Assuming a savings target can be set at what something costs today.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "plan-coherence"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The fee has risen 5.8% a year \"and has been rising\" at that rate. Explain what that phrasing does and does not establish about the next six years, and say how you would state the $5,469.89 figure honestly.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a past rate is evidence about the future but not a commitment, and that nothing in the scenario obliges the fee to continue at 5.8%.",
+          "Restates the figure conditionally — $5,469.89 is what the fee reaches if the past rate continues for six more years — rather than as a prediction."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $5,469.89 projection and the 5.8% rate it depends on."
+        ],
+        "lookFors": [
+          "The restatement carries the condition inside the claim.",
+          "The response neither dismisses the past rate as useless nor treats it as settled."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

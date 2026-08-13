@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l04",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: self-employment and multiple-income tax obligations"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "self-employment and multiple-income tax obligations",
+  "objective": "Compute a fictional total tax across employment and self-employment income, including a self-employment contribution the employment income does not attract, and convert it into quarterly instalments.",
+  "scenario": "Lachlan Ozturk-Bamidele has two fictional sources of income in a simulated tax system. The schedule and the self-employment rate below were chosen for this course and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional income and tax figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional schedule, taxable income is total income less a standard deduction of $11,400, and tax is 10% on the first $9,800 and 14% between $9,800 and $38,400. Lachlan earns $34,200 from employment, with tax already withheld. He also runs a fictional side business with revenue of $21,800 and allowable expenses of $6,400. A fictional self-employment contribution of 14.2% is charged on the net self-employment income only.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Lachlan’s net self-employment income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is his total income from both sources?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is his taxable income after the standard deduction?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is his income tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now add the self-employment contribution and work out what has to be paid separately.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the 14.2% self-employment contribution on the net self-employment income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is his total tax, counting income tax and the self-employment contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is his effective rate against total income? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Nothing is withheld from the self-employment income, so the $2,186.80 must be paid in 4 quarterly instalments. How much is each?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "The self-employment contribution is what share of the net self-employment income it is charged on? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Lachlan’s side business brought in $21,800 and his tax rose by more than the income tax on it alone. Explain what the self-employment contribution adds, and say what a person starting a side business should set aside from each payment received."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Taxable income came to $38,200.00, just under the $38,400 threshold. Say what would happen to the tax on the next $1,000 of self-employment profit, and why the answer is not simply 14%."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the self-employment contribution comes out at $3,095.60, it is being charged on the $21,800 of revenue rather than on the $15,400.00 of net income. Expenses come off before either charge applies. Compute net self-employment income first, and use that same figure for both the contribution and the income going into total income.",
+  "extension": "Recompute the total tax if Lachlan’s allowable expenses were $9,700 instead of $6,400, and say how much of the difference comes from each of the two charges.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

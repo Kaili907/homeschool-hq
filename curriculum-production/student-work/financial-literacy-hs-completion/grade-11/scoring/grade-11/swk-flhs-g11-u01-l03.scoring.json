@@ -1,0 +1,278 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l03",
+  "lessonId": "ma-g11-financial-literacy-u01-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$22,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The interquartile spread is the distance between the two outer figures: $61,300 less $38,900. It is the size of the variation the median hides."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "47.1%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Expressing the spread against the median makes the variation comparable across fields: $22,400.00 against $47,600."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$48,850.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each outcome is weighted by its stated chance: 25% of $38,900 plus 50% of $47,600 plus 25% of $61,300. The expectation sits above the median because the upper tail is further from the middle than the lower tail."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,250.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$48,850.00 against the $47,600 median. The gap is a direct consequence of the distribution being lopsided, not an error."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$476,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Ten flat years at the $47,600 median."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$389,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same ten years at the $38,900 lower-percentile wage."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "$87,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$476,000.00 against $389,000.00. A single year’s $8,700 gap becomes this once it is carried for ten years."
+        }
+      },
+      {
+        "ref": "t3-p4",
+        "answer": "18.3%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$87,000.00 measured against the $476,000.00 the median plan assumed — the share of the plan that rests on landing at or above the middle of the field."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "p75 - p25",
+        "substituted": "61300 - 38900",
+        "result": "$22,400.00",
+        "why": "The interquartile spread is the distance between the two outer figures: $61,300 less $38,900. It is the size of the variation the median hides."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 / median * 100, 1)",
+        "substituted": "round(#t1-p1 / 47600 * 100, 1)",
+        "result": "47.1%",
+        "why": "Expressing the spread against the median makes the variation comparable across fields: $22,400.00 against $47,600."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "pLow * low + pMid * mid + pHigh * high",
+        "substituted": "0.25 * 38900 + 0.5 * 47600 + 0.25 * 61300",
+        "result": "$48,850.00",
+        "why": "Each outcome is weighted by its stated chance: 25% of $38,900 plus 50% of $47,600 plus 25% of $61,300. The expectation sits above the median because the upper tail is further from the middle than the lower tail."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - median2",
+        "substituted": "#t2-p1 - 47600",
+        "result": "$1,250.00",
+        "why": "$48,850.00 against the $47,600 median. The gap is a direct consequence of the distribution being lopsided, not an error."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "median3 * years",
+        "substituted": "47600 * 10",
+        "result": "$476,000.00",
+        "why": "Ten flat years at the $47,600 median."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "p25b * years2",
+        "substituted": "38900 * 10",
+        "result": "$389,000.00",
+        "why": "The same ten years at the $38,900 lower-percentile wage."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "#t3-p1 - #t3-p2",
+        "substituted": "#t3-p1 - #t3-p2",
+        "result": "$87,000.00",
+        "why": "$476,000.00 against $389,000.00. A single year’s $8,700 gap becomes this once it is carried for ten years."
+      },
+      {
+        "ref": "t3-p4",
+        "expression": "round(#t3-p3 / #t3-p1 * 100, 1)",
+        "substituted": "round(#t3-p3 / #t3-p1 * 100, 1)",
+        "result": "18.3%",
+        "why": "$87,000.00 measured against the $476,000.00 the median plan assumed — the share of the plan that rests on landing at or above the middle of the field."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Odalys writes that \"planning on the median is planning on a coin flip\". Using the figures you computed, say what is right about that description and what is misleading about it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Accepts that roughly half of the field earns below the median, so a median plan has a substantial chance of being too optimistic.",
+          "Corrects the description by pointing out that falling below the median is not a single outcome: the shortfall at the 25th percentile is $87,000.00 across the decade, and someone just below the median is barely affected.",
+          "Distinguishes the chance of missing the target from the size of the miss."
+        ],
+        "evidenceRequirements": [
+          "Cites the $87,000.00 decade shortfall or the 18.3% figure when describing how large a miss can be."
+        ],
+        "lookFors": [
+          "The response separates likelihood from magnitude rather than treating \"below median\" as one event.",
+          "The response does not conclude that the median is useless; it says what it is and is not good for.",
+          "A response arguing the phrase is fair as shorthand is acceptable if it names the magnitude point it is glossing over."
+        ],
+        "commonMisconception": "Reading a median as a typical guaranteed outcome rather than as the middle of a spread.",
+        "dimensions": [
+          "communication-of-uncertainty",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "The expected wage of $48,850.00 came out above the median of $47,600. Explain what feature of the fictional distribution produces that, and say whether the expected wage or the median is the better figure to build a minimum plan on.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the 75th percentile sits $13,700 above the median while the 25th sits $8,700 below it, so the weighted average is pulled upward.",
+          "Argues for a figure at or below the median for a minimum plan, on the ground that a plan should survive the outcomes it is most exposed to rather than the average of all of them."
+        ],
+        "evidenceRequirements": [
+          "Uses the distances from the median to the 25th and 75th percentiles, not just the three wage figures on their own."
+        ],
+        "lookFors": [
+          "The response identifies the asymmetry of the distances, not merely that the high figure is large.",
+          "The response gives a reason for its choice of planning figure rather than picking one."
+        ],
+        "commonMisconception": "Assuming an average and a median must coincide.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

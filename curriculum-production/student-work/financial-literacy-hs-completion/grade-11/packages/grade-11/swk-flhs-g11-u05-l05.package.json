@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l05",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: retirement account structures in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "retirement account structures in outline",
+  "objective": "Compare two fictional retirement account structures on the amount finally available, and identify the single fact that decides between them.",
+  "scenario": "Rosalie Nwosu-Hartmann is comparing two simulated account structures for a fictional case. The accounts, rates, and tax figures below are invented outlines rather than descriptions of any real programme, and the flat tax rates are a deliberate simplification.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional account outlines in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional saver has $6,000 of income to set aside for 25 years, and both accounts grow at 6% a year. In the pre-tax account the whole $6,000 goes in and the final balance is taxed at the rate applying then. In the post-tax account the money is taxed at today’s rate before going in and nothing is taxed on the way out. Today’s rate is 22%; the rate applying at withdrawal is 24%. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the pre-tax account hold after 25 years at 6% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is left from the pre-tax account after the 24% tax on withdrawal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much goes into the post-tax account after today’s 22% tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does the post-tax account hold after 25 years, with nothing taxed on withdrawal?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the two, and test what happens when the rates match.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the post-tax account leave available?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would the pre-tax account leave if the withdrawal rate were 22% rather than 24%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much do the two accounts differ when the rates match?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "The post-tax advantage is what percentage of the pre-tax result? Give two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Under these simplified structures, what decides which account leaves more?",
+          "choices": [
+            "Whether the tax rate at withdrawal is higher or lower than the rate today",
+            "How long the money is invested for",
+            "The rate of return the account earns"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The post-tax account wins by $515.02 even though $1,320 less started compounding. Explain why the smaller starting amount does not decide the outcome, and say what a saver would need to believe for the pre-tax structure to be better."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "These outlines are simplified inventions with flat rates and no other rules. Name two things a real account structure would specify that these do not, and say which computed figure each would affect."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the pre-tax account comes out ahead, check whether the 24% withdrawal tax has been applied to the whole $25,751.22 balance rather than only to the growth. Under the stated structure the entire balance is taxed on the way out, because none of it was taxed on the way in. Apply each account’s tax exactly once, at the point the outline names for it.",
+  "extension": "Find the withdrawal tax rate at which the pre-tax account would leave $1,000 more than the post-tax one, and say whether that rate is above or below today’s 22%.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

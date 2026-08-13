@@ -1,0 +1,292 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l02",
+  "lessonId": "ma-g11-financial-literacy-u04-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$12.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "8.2% a year on $1,850 is $151.70 a year, or $12.64 in a month. It is the smallest balance and the cheapest rate."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$88.15",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "24.6% a year on $4,300 — the highest rate in the set, on a middling balance."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$72.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12.1% a year on $7,200 — the largest balance, at a middling rate."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$173.39",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$12.64, $88.15, and $72.60 together — the amount that has to be paid every month before any balance falls at all."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "6.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,850 at $305 a month. Clearing a debt entirely in about six months is what this strategy buys."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "12.5",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,300 at $345 a month — twice as long before any debt disappears from the list."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$3.42",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $250 is removed from a balance charging 16.4 percentage points more, so the saving is that rate difference applied to $250 for one month."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$41.04",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3.42 a month for a year. The real figure compounds as each strategy clears different debts at different times, so this is an approximate floor rather than an exact total."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "Debt B, at 24.6%",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$88.15 from Debt B against $72.60 from Debt C — the highest rate wins here, but only just, because Debt C carries a balance two-thirds larger."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(balanceA * rateA / 12, 2)",
+        "substituted": "round(1850 * 0.082 / 12, 2)",
+        "result": "$12.64",
+        "why": "8.2% a year on $1,850 is $151.70 a year, or $12.64 in a month. It is the smallest balance and the cheapest rate."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(balanceB * rateB / 12, 2)",
+        "substituted": "round(4300 * 0.246 / 12, 2)",
+        "result": "$88.15",
+        "why": "24.6% a year on $4,300 — the highest rate in the set, on a middling balance."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(balanceC * rateC / 12, 2)",
+        "substituted": "round(7200 * 0.121 / 12, 2)",
+        "result": "$72.60",
+        "why": "12.1% a year on $7,200 — the largest balance, at a middling rate."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "#t1-p1 + #t1-p2 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p2 + #t1-p3",
+        "result": "$173.39",
+        "why": "$12.64, $88.15, and $72.60 together — the amount that has to be paid every month before any balance falls at all."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(balanceA2 / (minA + extra), 1)",
+        "substituted": "round(1850 / (55 + 250), 1)",
+        "result": "6.1",
+        "why": "$1,850 at $305 a month. Clearing a debt entirely in about six months is what this strategy buys."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(balanceB2 / (minB + extra2), 1)",
+        "substituted": "round(4300 / (95 + 250), 1)",
+        "result": "12.5",
+        "why": "$4,300 at $345 a month — twice as long before any debt disappears from the list."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(extra3 * (rateB3 - rateA3) / 12, 2)",
+        "substituted": "round(250 * (0.246 - 0.082) / 12, 2)",
+        "result": "$3.42",
+        "why": "The $250 is removed from a balance charging 16.4 percentage points more, so the saving is that rate difference applied to $250 for one month."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 * 12",
+        "substituted": "#t2-p3 * 12",
+        "result": "$41.04",
+        "why": "$3.42 a month for a year. The real figure compounds as each strategy clears different debts at different times, so this is an approximate floor rather than an exact total."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t1-p2 > #t1-p3",
+        "substituted": "#t1-p2 > #t1-p3",
+        "result": "Debt B, at 24.6%",
+        "why": "$88.15 from Debt B against $72.60 from Debt C — the highest rate wins here, but only just, because Debt C carries a balance two-thirds larger."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Name what each of the two orderings optimises, say which one you would recommend to Ambrose, and state what you would need to know about him before the recommendation could be final.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that highest-rate-first minimises interest paid while smallest-balance-first minimises the time until a debt disappears, and attaches figures to both — around $41.04 a year against clearing a debt in 6.1 months instead of 12.5.",
+          "Makes a recommendation and justifies it against those two objectives rather than asserting one is correct.",
+          "Names what would settle it, such as whether Ambrose has abandoned repayment plans before, or whether the $250 is secure enough to sustain a twelve-month effort."
+        ],
+        "evidenceRequirements": [
+          "Cites the 6.1-month and 12.5-month clearing times, and the interest difference of about $3.42 a month."
+        ],
+        "lookFors": [
+          "The response treats the interest difference as small in this particular debt set, which it is.",
+          "Either recommendation is acceptable; what is scored is whether both objectives are named and priced.",
+          "The response does not present the smallest-balance strategy as irrational."
+        ],
+        "commonMisconception": "Assuming the strategy that minimises interest is automatically the strategy that gets the debt repaid.",
+        "dimensions": [
+          "tradeoff-defense",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Debt C has the largest balance and generates $72.60 of interest a month while never being targeted by either strategy. Explain what happens to it in the meantime, and why neither strategy starts there.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that Debt C receives only its $140 minimum, so it falls slowly while continuing to charge around $72.60 a month.",
+          "Explains why neither strategy targets it first: it is neither the smallest balance nor the highest rate, so it fails both selection rules despite being the largest debt."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $72.60 monthly interest and the $140 minimum payment when describing what happens to Debt C."
+        ],
+        "lookFors": [
+          "The response notices that a large minimum payment against a large interest charge makes slow progress.",
+          "The response explains the selection rules rather than criticising them."
+        ],
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

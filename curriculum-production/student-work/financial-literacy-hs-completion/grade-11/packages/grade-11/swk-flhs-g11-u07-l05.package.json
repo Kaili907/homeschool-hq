@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l05",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: tax consequences of investing decisions"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "tax consequences of investing decisions",
+  "objective": "Compute the tax on a fictional gain under two holding-period rules, express what waiting is worth, and identify the risk that waiting introduces.",
+  "scenario": "Evangeline Sorokin-Quenneville is analysing a fictional disposal for a simulated case study. The holding-period rule and the rates below were chosen for this course and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional gain and tax rules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional rules, a gain on a holding sold within 18 months is taxed at the holder’s marginal rate, and a gain on a holding sold after 18 months or more is taxed at a flat 15%. The gain is $8,400 and the marginal rate is 22%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax if the holding is sold within 18 months, at the 22% marginal rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax if the holding is sold after 18 months, at the flat 12%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does waiting past the 18-month point save in tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure what is kept, and what waiting risks.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is kept from the gain if sold within 18 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is kept if sold after 18 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the gain is kept under the longer-holding rule? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How far could the holding’s value fall before waiting stopped being worth it? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "What does the 11.4% figure describe?",
+          "choices": [
+            "The tax rate saved by waiting",
+            "The price fall that would cancel the tax saving from waiting",
+            "The share of the gain kept under the longer-holding rule"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Waiting past 18 months saves $840.00 and introduces a risk. Explain the tradeoff precisely, and say what would make waiting clearly the right decision and what would make it clearly the wrong one."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The tax difference here comes from the date of a sale, not from anything about the holding. Say what that implies about when a disposal decision should be reviewed, and name one thing the fictional rules leave out."
+        }
+      ]
+    }
+  ],
+  "remediation": "If waiting appears to save $840.00 on the sale price rather than on the tax, check what each figure applies to. Both rates are charged on the $8,400 gain, and the saving is the difference between $1,848.00 and $1,008.00. The 11.4% figure is then that saving expressed against the gain, not a rate charged on anything.",
+  "extension": "Recompute the saving from waiting for a holder whose marginal rate is 14% rather than 22%, and say what that shows about who the holding-period rule benefits most.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

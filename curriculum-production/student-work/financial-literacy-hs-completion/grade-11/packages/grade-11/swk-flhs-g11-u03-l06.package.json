@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l06",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: revising a plan without abandoning it"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "revising a plan without abandoning it",
+  "objective": "Revise a fictional savings plan after a fall in capacity by computing three defensible revisions, and compare what each preserves and gives up.",
+  "scenario": "Kwame Steensen-Marchetti is a fictional saver whose simulated plan has run into a change of circumstances. Every target, deadline, and monthly figure below is invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan and revision options in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The original plan was to save $12,000 in 30 months at $400 a month. Kwame has completed 11 months on plan. From now on he can only save $265 a month. Give month figures to one decimal place.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much has Kwame saved in the first 11 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is still needed to reach the $12,000 target?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What monthly amount would keep the original month-30 deadline, given 19 months remain?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Three revisions are on the table. Revision A extends the deadline and keeps the target. Revision B keeps the deadline and cuts the target. Revision C extends the deadline by 6 months only.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under Revision A, how many further months at $265 does the target take?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Under Revision A, in which month is the target reached in total?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under Revision B, how much is saved by month 30, with 19 months at $265?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Under Revision B, how far short of the $12,000 target does that fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "Under Revision C, which allows 25 further months at $265, how much is saved in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "Under Revision C, how far short of the $12,000 target does Kwame end?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p7",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Revision C deliver than Revision B?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Choose one of the three revisions for Kwame and defend it. State what your choice preserves, what it gives up in figures, and one thing you would need to know about the goal before the choice could be final."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Kwame’s original plan needed $400 a month and he had no margin. Say what a plan built with margin would have looked like here, and what it would have cost him in the first 11 months."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Revision A comes out at 28.7 months in total rather than 39.7, the 11 months already completed are being dropped. The revision changes only what happens from now on: the plan is 11 months old before the new rate applies. Mark month 11 on a timeline and start the 28.7 months from there.",
+  "extension": "Find the monthly amount that would reach the full $12,000 by month 36, and say whether it is closer to the $265 Kwame can manage or to the $400 he originally committed.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l01",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: expected return, volatility, and horizon interacting"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "expected return, volatility, and horizon interacting",
+  "objective": "Compute the probability-weighted expected value of a fictional portfolio across three outcomes, express it as a return, and contrast the one-year range with a long-horizon projection.",
+  "scenario": "Leocadia Winterbourne-Adeyeye is describing a fictional portfolio for a simulated case study. The outcomes, their probabilities, and the amounts below are invented and describe no real fund or market.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional outcome table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional portfolio holds $12,000. Over one year it has a 30% chance of a good outcome returning 18.2%, a 45% chance of a flat outcome returning 4.1%, and a 25% chance of a poor outcome losing 9.6%. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the portfolio worth after a good year returning 18.2%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is it worth after a flat year returning 4.1%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is it worth after a poor year losing 9.6%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the probability-weighted expected value after one year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now express the expectation as a return, and measure the spread around it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected return for the year? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the range between the good outcome and the poor one?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How far below the expected value does the poor outcome fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "If the portfolio returned its expected 4.9% every year for 10 years, what would it be worth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which statement about the expected value of $12,588.60 is accurate?",
+          "choices": [
+            "It is the most likely value after one year",
+            "It is a weighted average of outcomes and is not itself one of them",
+            "It is the value the portfolio reaches if nothing unusual happens"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The expected return is 4.9% and the outcomes span $3,336.00. Explain what a single expected-return figure hides, and say how the horizon changes how much that hidden spread matters."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The ten-year projection assumes 4.9% every single year. Say what is wrong with that as a description of the future, and what it is nonetheless useful for."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the expected value comes out at $12,508.00, the three outcomes are being averaged as equals rather than weighted 30%, 45%, and 25%. Write the three products in a column, check the weights sum to 1, then add. A useful check: the expectation must fall between $10,848.00 and $14,184.00, and nearer the middle outcome because it carries the largest weight.",
+  "extension": "Recompute the expected value if the poor outcome’s probability rises to 40% and the good outcome’s falls to 15%, and say what happens to the expected return.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

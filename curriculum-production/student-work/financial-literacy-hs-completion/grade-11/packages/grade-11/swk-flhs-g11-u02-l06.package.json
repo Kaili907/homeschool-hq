@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l06",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: government consumer-information roles in large purchases"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "government consumer-information roles in large purchases",
+  "objective": "Read a fictional standardised credit disclosure, recompute its figures independently, and show what a monthly-payment advertisement leaves out that the disclosure is designed to expose.",
+  "scenario": "Rafael Bergström-Osei is a fictional buyer looking at the simulated disclosure box below. The lender, the figures, and the advertisement are invented; the general idea that governments require standardised cost disclosure on credit is the real point of the lesson.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional disclosure box and advertisement in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional disclosure box reads: \"Amount financed $18,450. Monthly payment $367.20. Number of payments 66.\" The advertisement beside it says only: \"Drive away from $299 a month\" and, in small print, \"84 monthly payments\".",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of payments under the disclosure box?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the finance charge — the amount paid above the $18,450 financed?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "The finance charge is what percentage of the amount financed? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same arithmetic for the advertised offer. It finances the same $18,450 over 84 monthly payments of $299.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of payments under the advertised offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the finance charge on the advertised offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the advertised offer cost in finance charges than the one in the disclosure box?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the advertised monthly payment than the one in the disclosure box?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which figure does the advertisement omit that changes the comparison most?",
+          "choices": [
+            "The number of payments and the total they come to",
+            "The amount financed, which is $18,450 in both offers",
+            "The monthly payment, which is stated as $299"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain what a standardised disclosure box is for, using the two offers as the example, and say why requiring the total of payments does more work than requiring the monthly payment to be accurate."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The finance charge is 31.4% of the amount financed over 66 months. Explain why that figure is not the interest rate, and say which additional piece of information from the disclosure would let a buyer compare two loans of different lengths."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the finance charge comes out as $24,235.20, the amount financed has not been subtracted — that figure is everything Rafael pays, not the extra he pays for the credit. The finance charge is the difference between what is paid in total and what was borrowed. Write the two figures one above the other and subtract before doing anything else with them.",
+  "extension": "Work out what monthly payment over 84 months would give the same total of payments as the disclosure box, and say how close that is to the advertised $299.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

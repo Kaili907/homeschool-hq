@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l02",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: after-fee and after-tax return"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "after-fee and after-tax return",
+  "objective": "Carry a fictional gross return through an annual fee and a tax on the gain to reach a net return, and show what the fee alone does across a twenty-year horizon.",
+  "scenario": "Gideon Praskovya-Halloran is analysing a fictional holding for a simulated case study. The return, fee, and tax rate below are invented, and the flat tax on gains is a deliberate simplification of a real tax calculation.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional return, fee, and tax figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional holding of $25,000 returns 7.3% over one year before costs. The fund charges an annual fee of 1.15% of the amount held. A simplified flat tax of 15% is then charged on the gain after the fee. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the gross gain at 7.3%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the annual fee at 1.15% of the amount held?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the gain after the fee?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the simplified 15% tax on the gain after the fee?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put the net figure against the number that was quoted.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the gain after both the fee and the tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the net return on the $25,000? Give two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the gross gain survives the fee and the tax? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Ignoring tax, what would $25,000 grow to over 20 years at the full 7.3% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What would it grow to over the same 20 years if the 1.15% fee were deducted from the return each year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "How much does the fee cost across the 20 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A fee of 1.15% a year removes $19,835.50 over twenty years from a $25,000 holding. Explain how a figure that small produces an effect that large, and say what that implies about which number matters most when comparing two funds with similar strategies."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The fee is charged on the amount held and the tax is charged on the gain. Explain why that difference matters, and describe a year in which one is paid and the other is not."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the net gain comes out at $1,551.25, the tax is being charged on the gross gain and the fee has not been deducted first. The scenario charges the fee on the balance, and the 15% tax applies to what remains. Build the calculation as a ladder — gross gain, minus fee, minus tax — and check each line against the base the scenario names for it.",
+  "extension": "Find the gross return that would be needed for a fund charging 1.15% to leave the same net gain as one charging 0.35%, and say what that says about how much extra performance a fee has to justify.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

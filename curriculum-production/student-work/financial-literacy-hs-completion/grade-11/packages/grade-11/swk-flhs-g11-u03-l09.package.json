@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l09",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l09",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: income shocks and recovery planning"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "income shocks and recovery planning",
+  "objective": "Combine inflation and a low savings return to show that a fictional reserve sized against an income shock loses coverage over five years, and quantify the months of protection it gives up.",
+  "scenario": "Aisha Berglund-Ogundipe is sizing the reserve a fictional household would live on if its income stopped, which is the shock this unit modelled earlier. The expense figures, the inflation rate, and the deposit rate below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional reserve figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The household spends $3,240 a month today and wants a reserve covering 6 months of spending, so that an interruption to its income does not force it to borrow. Spending rises 3.2% a year. The reserve sits in a deposit account earning 0.8% a year. Use a 5-year horizon and round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What reserve covers 6 months of today’s spending?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What will monthly spending be in 5 years at 3.2% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What reserve will cover 6 months of spending in 5 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now follow what happens to the reserve itself if Aisha funds it fully today and adds nothing further.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the $19,440.00 reserve worth in 5 years at 0.8% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the reserve fall short of the year-5 target?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The shortfall is what percentage of the year-5 target? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How many months of year-5 spending does the reserve actually cover? Give one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much would need to be added each year over the 5 years to close the shortfall, ignoring interest on the additions?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Aisha’s reserve was fully funded, nothing was withdrawn, and it is short. Explain the mechanism, and say what it means to describe a reserve as \"six months\" rather than as a dollar amount."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "A reserve has to be available at short notice, which is why it earns only 0.8%. Say what that constraint costs Aisha over the five years, and whether a higher-earning account would be a good place for this money."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the reserve appears to keep pace, the same rate is probably being applied to both sides. Two different rates are at work: spending compounds at 3.2% and the reserve at 0.8%. Compute the year-5 target and the year-5 reserve in separate columns, each with its own rate, and only then subtract.",
+  "extension": "Find the deposit rate at which the reserve would exactly keep its six-month coverage, and say what that rate has to equal for coverage to hold in general.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

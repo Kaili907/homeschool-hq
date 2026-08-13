@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l09",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l09",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: earnings variation within a field, not just the median"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "earnings variation within a field, not just the median",
+  "objective": "Rank two fictional fields on a twelve-year net position at the median and again at the 25th percentile, and identify the conditions under which the ranking reverses.",
+  "scenario": "Ezekiel Montalvo-Achebe is a fictional adviser comparing two invented fields. All wages, percentiles, and pathway costs below are simulated figures for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional field comparison in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Fictional Field A pays a median of $54,200 and a 25th percentile of $43,100, and its pathway costs $38,400 in total. Fictional Field B pays a median of $49,800 and a 25th percentile of $45,600, and its pathway costs $21,900 in total. Compare a 12-year net position with wages held flat.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Field A’s twelve-year net position at its median wage?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Field B’s twelve-year net position at its median wage?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "At the median, how far ahead is Field A?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now repeat the whole comparison at the 25th percentile of each field, with everything else unchanged.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Field A’s twelve-year net position at its 25th-percentile wage?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Field B’s twelve-year net position at its 25th-percentile wage?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "At the 25th percentile, how far ahead is Field B?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How large is the swing between the two comparisons, counting Field A’s lead at the median and Field B’s lead at the 25th percentile together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which field is the safer choice for someone who cannot absorb a poor outcome?",
+          "choices": [
+            "Field A, which leads at the median",
+            "Field B, which leads at the 25th percentile",
+            "Neither is safer; they are equivalent"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The two comparisons disagree. Explain what causes the reversal, and say what a person would need to know about themselves — not about the fields — to decide which comparison to act on."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Field A’s pathway costs $16,500 more than Field B’s. Say how much of the reversal that cost difference is responsible for, and what would happen to the ranking if the two pathways cost the same."
+        }
+      ]
+    }
+  ],
+  "remediation": "If both comparisons rank the fields the same way, the pathway cost is probably being scaled with the wage. The cost is a single figure paid once — $38,400 for Field A and $21,900 for Field B — and it stays the same whether the wage lands at the median or the 25th percentile. Rebuild each column as twelve identical wage rows and one cost row, and check that only the wage rows changed between the two comparisons.",
+  "extension": "Find the 25th-percentile wage Field A would need for the ranking to hold at both percentiles, and say how far that is from the $43,100 it actually pays.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

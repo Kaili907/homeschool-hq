@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l05",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: risk of non-completion and how to model it"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "risk of non-completion and how to model it",
+  "objective": "Model the risk of not completing a fictional programme as a probability-weighted outcome, compare it with an alternative, and identify what the debt does in the outcome where the qualification does not arrive.",
+  "scenario": "Simone Batbayar-Cruz is a fictional applicant to an invented three-year programme. The completion rate, salaries, and costs below are simulated figures chosen for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional programme figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional programme runs 3 years at $14,200 a year, all borrowed. Of the invented cohort, 68% finish and 32% do not. A graduate earns $58,400 a year. Someone who leaves without finishing earns $34,900. Without the programme at all, Simone would earn $39,800.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total borrowed across the 3 years of the programme?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the probability-weighted expected annual salary after the programme, using the 68% and 32% figures?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual advantage over the $39,800 Simone would earn without the programme?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now separate the two outcomes and look at each on its own.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "At the expected annual advantage, how many years of work does it take to repay the amount borrowed? Give one decimal place. Ignore interest for this step.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "In the outcome where Simone does not finish, what is her annual position relative to the $39,800 she would have earned without the programme?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "In the completing outcome, what is the annual advantage over the same alternative?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Across the first 5 years after the programme, how much larger is the completing outcome than the non-completing one?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "In the outcome where the programme is not finished, what has happened to the $42,600 borrowed?",
+          "choices": [
+            "It is cancelled, because the qualification was not awarded",
+            "It is still owed in full, with no qualification to show for it",
+            "It is reduced in proportion to the years completed"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The expected annual advantage is positive at $11,080.00, but one of the two outcomes leaves Simone worse off than not enrolling. Explain how both of those can be true, and say what the expected figure is and is not useful for."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one thing Simone could find out before enrolling that would change the 68% figure for her specifically, and say how a higher or lower figure would move the expected advantage."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the expected salary comes out at $46,650.00, the two outcomes are being averaged evenly instead of weighted 68% and 32%. Write the two products separately — 0.68 x $58,400 and 0.32 x $34,900 — confirm the weights add to 1, and then add. A useful check: the expectation must land between $34,900 and $58,400, and closer to $58,400 because that outcome carries the larger weight.",
+  "extension": "Find the completion rate at which the expected annual advantage falls to zero, and say what that rate implies about how sensitive this decision is to the completion figure.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

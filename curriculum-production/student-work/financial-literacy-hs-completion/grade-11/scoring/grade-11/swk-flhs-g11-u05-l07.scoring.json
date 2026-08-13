@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l07",
+  "lessonId": "ma-g11-financial-literacy-u05-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$15,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,000 grown by 50%. The gain is applied to $10,000."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$7,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The loss is applied to $15,000.00, not to $10,000 — half of a larger number is a larger amount than half of the original."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$2,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,000 against the $7,500.00 remaining — a quarter of the holding, from two returns the claim says cancel."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "25.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,500.00 of $10,000 — the claim predicted 0% and the answer is a quarter of the holding."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$13,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,000 grown by 30% — the same starting amount as the first case, so the two are directly comparable."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$10,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "20% off $13,000.00. The loss is bigger in dollars than 20% of the original would have been."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "4.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,400.00 against $10,000 — the money is 4% ahead."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$11,025.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Two years of steady 5% growth — the figure the average predicts."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$625.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,025.00 against the actual $10,400.00 — the same kind of overstatement as the first case, smaller because the swings are smaller."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "The arithmetic mean of yearly returns overstates what actually happened whenever the returns vary",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The mean overstated both cases, by $2,500.00 in the first and $625.00 in the second, and the overstatement is larger where the swing is larger; the individual yearly returns were applied correctly in both."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(start * (1 + gain), 2)",
+        "substituted": "round(10000 * (1 + 0.5), 2)",
+        "result": "$15,000.00",
+        "why": "$10,000 grown by 50%. The gain is applied to $10,000."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * (1 - loss), 2)",
+        "substituted": "round(#t1-p1 * (1 - 0.5), 2)",
+        "result": "$7,500.00",
+        "why": "The loss is applied to $15,000.00, not to $10,000 — half of a larger number is a larger amount than half of the original."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "start2 - #t1-p2",
+        "substituted": "10000 - #t1-p2",
+        "result": "$2,500.00",
+        "why": "$10,000 against the $7,500.00 remaining — a quarter of the holding, from two returns the claim says cancel."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(#t1-p3 / start3 * 100, 1)",
+        "substituted": "round(#t1-p3 / 10000 * 100, 1)",
+        "result": "25.0%",
+        "why": "$2,500.00 of $10,000 — the claim predicted 0% and the answer is a quarter of the holding."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(start4 * (1 + gain2), 2)",
+        "substituted": "round(10000 * (1 + 0.3), 2)",
+        "result": "$13,000.00",
+        "why": "$10,000 grown by 30% — the same starting amount as the first case, so the two are directly comparable."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 * (1 - loss2), 2)",
+        "substituted": "round(#t2-p1 * (1 - 0.2), 2)",
+        "result": "$10,400.00",
+        "why": "20% off $13,000.00. The loss is bigger in dollars than 20% of the original would have been."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round((#t2-p2 - start5) / start5 * 100, 1)",
+        "substituted": "round((#t2-p2 - 10000) / 10000 * 100, 1)",
+        "result": "4.0%",
+        "why": "$10,400.00 against $10,000 — the money is 4% ahead."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(start6 * pow(1 + meanRate, 2), 2)",
+        "substituted": "round(10000 * pow(1 + 0.05, 2), 2)",
+        "result": "$11,025.00",
+        "why": "Two years of steady 5% growth — the figure the average predicts."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 - #t2-p2",
+        "substituted": "#t2-p4 - #t2-p2",
+        "result": "$625.00",
+        "why": "$11,025.00 against the actual $10,400.00 — the same kind of overstatement as the first case, smaller because the swings are smaller."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t2-p4 > #t2-p2",
+        "substituted": "#t2-p4 > #t2-p2",
+        "result": "The arithmetic mean of yearly returns overstates what actually happened whenever the returns vary",
+        "why": "The mean overstated both cases, by $2,500.00 in the first and $625.00 in the second, and the overstatement is larger where the swing is larger; the individual yearly returns were applied correctly in both."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain in your own words why a 50% gain and a 50% loss do not cancel, and say what percentage gain would be needed to recover from the 50% loss.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that each return is applied to the balance at the time, so the 50% loss is taken from $15,000.00 while the 50% gain was taken from $10,000.",
+          "Computes the recovery correctly: from $7,500.00 back to $10,000 requires a gain of $2,500.00, which is a 33.3% gain rather than 50%.",
+          "Draws the general point that recovering from a loss always requires a larger percentage gain than the loss itself."
+        ],
+        "evidenceRequirements": [
+          "Cites the $15,000.00 and $7,500.00 balances when explaining what each percentage was applied to."
+        ],
+        "lookFors": [
+          "The recovery percentage is computed rather than guessed.",
+          "The response identifies the changing base as the mechanism.",
+          "A response noting that the asymmetry grows with the size of the loss is generalising correctly."
+        ],
+        "commonMisconception": "Treating percentage gains and losses as though they were applied to the same base.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "transfer"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The overstatement was $2,500.00 in the first case and $625.00 in the second. Say what explains the difference in size, and what that means for how a fund with volatile returns should be described.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the size of the swings as the cause: the first case moved 50% each way and the second only 30% and 20%, so the gap between the average and the outcome is larger.",
+          "Concludes that a volatile fund’s average yearly return is a poorer description of its result than a stable one’s, so the actual multi-year outcome should be quoted for volatile funds."
+        ],
+        "evidenceRequirements": [
+          "Compares the two overstatements, $2,500.00 and $625.00, against the size of the returns in each case."
+        ],
+        "lookFors": [
+          "The response links volatility to the size of the gap rather than to the direction of the returns.",
+          "The recommendation about description follows from that link."
+        ],
+        "dimensions": [
+          "transfer",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

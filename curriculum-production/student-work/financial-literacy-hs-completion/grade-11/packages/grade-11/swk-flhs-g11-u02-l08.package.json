@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l08",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l08",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: buy, finance, lease, or delay compared"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "buy, finance, lease, or delay compared",
+  "objective": "Transfer the total-cost-of-ownership method to a fictional housing decision, carry rent growth and property appreciation across seven years, and identify what the comparison still omits.",
+  "scenario": "Dmitri Ferrante-Oyelowo is a fictional tenant in a simulated city. Every rent, price, rate, and cost below is invented, and no real property, lender, or market is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional rent and ownership figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Renting costs $1,285 a month now and rises 3% at the start of each following year. Use the running-total formula for a stream that grows 3% a year: the first year’s total times ((1 + 0.03) raised to the 7th, less 1) divided by 0.03. Use a 7-year comparison throughout.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does renting cost across the 7 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Owning costs $1,412 a month in loan payments, $296 a month in property tax, and $118 a month in insurance. What is the monthly ownership outlay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does that monthly outlay come to across the 7 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The house costs $228,000. Maintenance runs at 1% of that price each year, closing costs were $6,800 at purchase, and the house appreciates 2.5% a year.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does maintenance cost across the 7 years at 1% of the price each year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total cost of owning across the 7 years, counting the outlay, the maintenance, and the closing costs?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the house worth after 7 years at 2.5% appreciation a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much has the house gained in value across the 7 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "Netting the appreciation against the cost of owning, how much more does owning cost than renting across the 7 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This comparison uses the same method as the vehicle analysis earlier in the unit. Name the one term that had to be added for housing, explain why the vehicle case did not need it, and state one important cost this comparison still leaves out."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Rent grows at 3% a year while the loan payment stays at $1,412. Say what that difference does to the comparison at a 20-year horizon, and name the assumption that would have to hold for your answer to be right."
+        }
+      ]
+    }
+  ],
+  "remediation": "If owning comes out cheaper than renting, the appreciation is probably being counted twice — once as a gain and again as a reduction in cost. It enters the comparison once, as a subtraction from the $176,144.00 of ownership cost. Lay the comparison out as two columns, put every ownership figure in one and the rent total in the other, and check that $43,020.35 appears exactly once.",
+  "extension": "Find the annual appreciation rate at which owning and renting would cost the same across the 7 years, and say how far that is from the 2.5% the scenario assumes.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

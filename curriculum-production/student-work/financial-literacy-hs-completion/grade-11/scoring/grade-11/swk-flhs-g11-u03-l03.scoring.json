@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l03",
+  "lessonId": "ma-g11-financial-literacy-u03-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$590.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,280 in and $3,690 out. This same figure is what will have to rebuild the reserve afterwards."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$740.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,690 of spending against only $2,950 of income. The gap is larger than the $590.00 the household used to save, which is what makes a shock more than the loss of saving."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$5,180.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Seven months of a $740.00 gap, all of it coming out of the reserve."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$1,220.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,400 less the $5,180.00 drawn — the reserve survived, but only just."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "8.8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,180.00 to replace at $590.00 a month. Recovery takes longer than the shock because the gap was larger than the saving."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "15.8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7 months of shock and 8.8 months of rebuilding — during all of which no progress is made on any other goal."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "8.6",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,400 against a $740.00 monthly gap — the real measure of a reserve is how many months of a specific shortfall it covers, not its dollar size."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "No, it would have run out",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The reserve covers 8.6 months of a $740.00 gap, so a 10-month shock exhausts it with about 1.4 months still to run."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "income - spending",
+        "substituted": "4280 - 3690",
+        "result": "$590.00",
+        "why": "$4,280 in and $3,690 out. This same figure is what will have to rebuild the reserve afterwards."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "spending2 - reduced",
+        "substituted": "3690 - 2950",
+        "result": "$740.00",
+        "why": "$3,690 of spending against only $2,950 of income. The gap is larger than the $590.00 the household used to save, which is what makes a shock more than the loss of saving."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 * 7",
+        "substituted": "#t1-p2 * 7",
+        "result": "$5,180.00",
+        "why": "Seven months of a $740.00 gap, all of it coming out of the reserve."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "reserve - #t1-p3",
+        "substituted": "6400 - #t1-p3",
+        "result": "$1,220.00",
+        "why": "$6,400 less the $5,180.00 drawn — the reserve survived, but only just."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 / #t1-p1, 1)",
+        "substituted": "round(#t1-p3 / #t1-p1, 1)",
+        "result": "8.8",
+        "why": "$5,180.00 to replace at $590.00 a month. Recovery takes longer than the shock because the gap was larger than the saving."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "7 + #t2-p1",
+        "substituted": "7 + #t2-p1",
+        "result": "15.8",
+        "why": "7 months of shock and 8.8 months of rebuilding — during all of which no progress is made on any other goal."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(reserve2 / #t1-p2, 1)",
+        "substituted": "round(6400 / #t1-p2, 1)",
+        "result": "8.6",
+        "why": "$6,400 against a $740.00 monthly gap — the real measure of a reserve is how many months of a specific shortfall it covers, not its dollar size."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 >= longShock",
+        "substituted": "#t2-p3 >= 10",
+        "result": "No, it would have run out",
+        "why": "The reserve covers 8.6 months of a $740.00 gap, so a 10-month shock exhausts it with about 1.4 months still to run."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The shock lasted 7 months and the plan was disrupted for 15.8. Explain why recovery took longer than the shock, and say what that implies about how a household should size a reserve.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the monthly gap of $740.00 is larger than the $590.00 monthly saving, so each month of shock takes more out than a month of recovery puts back.",
+          "Draws the implication that a reserve should be sized against the monthly gap a shock produces, not against income or against a round number of months of spending.",
+          "Notes that no other goal advances during the whole 15.8 months, so the true cost of the shock is longer than the shock itself."
+        ],
+        "evidenceRequirements": [
+          "Cites the $740.00 gap and the $590.00 saving rate as the two figures that set the ratio."
+        ],
+        "lookFors": [
+          "The response compares the two rates rather than describing recovery as generally slow.",
+          "The implication drawn is about sizing a reserve against a gap, which is the transferable point.",
+          "A response observing that the 8.6-month coverage figure is the useful one is reading the arithmetic correctly."
+        ],
+        "commonMisconception": "Assuming a reserve that survives a shock means the household has recovered from it.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The scenario says spending cannot be reduced during the shock. Name two spending lines a real household might in fact reduce, and say how a $200 monthly reduction would change the 8.6-month coverage figure.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names two plausible reducible lines with a reason they are reducible, such as discretionary categories or a temporarily paused subscription or savings contribution.",
+          "Computes or closely estimates the effect: a $200 cut takes the gap to $540.00 and lifts coverage from 8.6 months to about 11.9 months."
+        ],
+        "evidenceRequirements": [
+          "Uses the $740.00 gap and the $6,400 reserve when recomputing the coverage."
+        ],
+        "lookFors": [
+          "The recomputation is attempted with figures rather than described as \"longer\".",
+          "The lines named are genuinely discretionary rather than fixed obligations."
+        ],
+        "dimensions": [
+          "transfer",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

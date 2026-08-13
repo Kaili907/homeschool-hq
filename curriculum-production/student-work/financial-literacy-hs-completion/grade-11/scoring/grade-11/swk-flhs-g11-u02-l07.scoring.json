@@ -1,0 +1,322 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l07",
+  "lessonId": "ma-g11-financial-literacy-u02-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$73.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$421 against $348. The worksheet’s only computed figure is correct, which is why the conclusion feels safe."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$20,208.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "48 payments of $421, the figure the worksheet never computed for either offer."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$25,056.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "72 payments of $348 — 24 more payments than Offer 1, each of them smaller."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,808.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,208.00 paid against $17,400 borrowed."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$7,656.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$25,056.00 paid against the same $17,400 borrowed."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$4,848.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,656.00 against $2,808.00 — more than two and a half times as much interest, on the offer the worksheet selected."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,504.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$73.00 a month for the 48 months of Offer 1’s term. Even counting every month of relief, it does not reach the $4,848.00 of extra interest."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$8,352.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The 24 payments of $348 that fall after Offer 1 has been fully repaid — the part of the deal the monthly comparison never reaches."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "It compared two offers on a per-month figure without holding the number of months constant",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The $73.00 saving is arithmetically right and both offers finance the same $17,400, so neither of the other statements holds; the defect is comparing a rate per month across terms of 48 and 72 months as though the terms were the same."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "Offer 1, at 48 months",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$20,208.00 against $25,056.00 — the offer with the higher monthly payment is the cheaper one, because it is repaid in two fewer years."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "pay1 - pay2",
+        "substituted": "421 - 348",
+        "result": "$73.00",
+        "why": "$421 against $348. The worksheet’s only computed figure is correct, which is why the conclusion feels safe."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "pay1b * 48",
+        "substituted": "421 * 48",
+        "result": "$20,208.00",
+        "why": "48 payments of $421, the figure the worksheet never computed for either offer."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "pay2b * 72",
+        "substituted": "348 * 72",
+        "result": "$25,056.00",
+        "why": "72 payments of $348 — 24 more payments than Offer 1, each of them smaller."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - financed",
+        "substituted": "#t1-p2 - 17400",
+        "result": "$2,808.00",
+        "why": "$20,208.00 paid against $17,400 borrowed."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - financed2",
+        "substituted": "#t1-p3 - 17400",
+        "result": "$7,656.00",
+        "why": "$25,056.00 paid against the same $17,400 borrowed."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - #t2-p1",
+        "substituted": "#t2-p2 - #t2-p1",
+        "result": "$4,848.00",
+        "why": "$7,656.00 against $2,808.00 — more than two and a half times as much interest, on the offer the worksheet selected."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p1 * 48",
+        "substituted": "#t1-p1 * 48",
+        "result": "$3,504.00",
+        "why": "$73.00 a month for the 48 months of Offer 1’s term. Even counting every month of relief, it does not reach the $4,848.00 of extra interest."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "pay2c * 24",
+        "substituted": "348 * 24",
+        "result": "$8,352.00",
+        "why": "The 24 payments of $348 that fall after Offer 1 has been fully repaid — the part of the deal the monthly comparison never reaches."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "#t1-p2 < #t1-p3",
+        "substituted": "#t1-p2 < #t1-p3",
+        "result": "Offer 1, at 48 months",
+        "why": "$20,208.00 against $25,056.00 — the offer with the higher monthly payment is the cheaper one, because it is repaid in two fewer years."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "The worksheet’s arithmetic is correct and its conclusion costs $4,848.00. Explain how a correct figure produced a wrong decision, and give the one additional line the worksheet needed.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a per-month figure is only comparable when the number of months is held constant, and that 48 against 72 months breaks that condition.",
+          "Names the missing line as the total of payments, or the interest cost, for each offer.",
+          "Notes that the $73.00 saving is real but bounded, reaching only $3,504.00 across the shared 48 months against $4,848.00 of extra interest."
+        ],
+        "evidenceRequirements": [
+          "Cites both totals of payments, $20,208.00 and $25,056.00, when showing the decision reversed."
+        ],
+        "lookFors": [
+          "The response names the comparability condition rather than saying the worksheet \"forgot\" something.",
+          "The additional line proposed would actually have caught the error.",
+          "The response does not claim the $73.00 figure was miscalculated."
+        ],
+        "commonMisconception": "Comparing per-period costs across arrangements of different length.",
+        "dimensions": [
+          "error-diagnosis",
+          "criteria-application",
+          "reasoning-from-figures"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "Describe a situation in which choosing Offer 2 would be defensible despite costing $4,848.00 more, and say what the buyer would have to accept for that choice to make sense.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Describes a genuine monthly constraint — an income that cannot support $421 a month without displacing something essential — under which the $73.00 of relief is what makes the purchase possible at all.",
+          "States what must be accepted: that the extra $4,848.00 is the price of that relief, and that the debt persists for 24 months longer."
+        ],
+        "evidenceRequirements": [
+          "Uses the $73.00 monthly figure and the $4,848.00 total when framing the tradeoff."
+        ],
+        "lookFors": [
+          "The response treats the longer term as a priced choice rather than as a mistake.",
+          "The response names what is given up, not only what is gained."
+        ],
+        "commonMisconception": "Concluding that the cheapest total is always the right choice regardless of monthly capacity.",
+        "dimensions": [
+          "tradeoff-defense",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

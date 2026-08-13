@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l09",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l09",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: refinancing, consolidation, and their tradeoffs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "refinancing, consolidation, and their tradeoffs",
+  "objective": "Evaluate a fictional refinance offer by computing its break-even point and its net saving, and identify the condition under which the offer fails despite the lower rate.",
+  "scenario": "Cornelius Iyengar-Mbatha has been offered the simulated refinance below. The lender, balance, rates, and fees are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional refinance terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The current loan has a $16,800 balance at 11.2% a year, with 42 payments of $485.35 left. The refinance offer keeps the same 42-month term and the same balance at 7.6% a year, with payments of $456.81, and charges $625 in fees at the start. Monthly interest is the annual rate divided by 12.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the current loan charge in its first month, at 11.2% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much interest would the refinanced loan charge in its first month, at 7.6% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the monthly payment under the refinance?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test whether the offer is worth its fees.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months of the monthly saving does it take to recover the $625 in fees? Give one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of payments under the current loan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of payments under the refinance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the net saving from refinancing across the full 42 months, after the $625 in fees?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Cornelius expects to repay the loan early, in about 18 months. Do the $625 of fees get recovered out of the monthly payment saving by then?",
+          "choices": [
+            "Yes, the payment saving covers the fees by month 18",
+            "No, the payment saving has not covered the fees by month 18"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The refinance cuts the rate from 11.2% to 7.6% and can still be the wrong choice. Explain the mechanism, state the condition that decides it, and say what Cornelius should establish about his own plans before accepting."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The first month’s interest falls by $50.40 but the payment falls by only $28.54. Explain where the other $21.86 goes, and why that is not a loss to Cornelius."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the refinance looks like a clear win, check whether the $625 of fees has been included. The gross saving is $1,198.68 across 42 months, but the fees are paid at the start and come off that, leaving $573.68. Compute the break-even in months first, then compare it against how long the loan is actually expected to run.",
+  "extension": "Find the largest fee at which the refinance would still break even by month 18, and say how far that is from the $625 charged.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

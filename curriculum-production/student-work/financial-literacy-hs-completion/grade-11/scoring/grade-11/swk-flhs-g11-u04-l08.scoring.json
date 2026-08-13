@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l08",
+  "lessonId": "ma-g11-financial-literacy-u04-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$20.62",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "26.9% a year on $920 — much the highest rate in the set, on much the smallest balance."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$21.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7.4% a year on $3,450 — the lowest rate, yet it charges slightly more than the card does."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$80.32",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15.8% a year on $6,100 — a middling rate on the largest balance, producing by far the largest charge."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$122.22",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20.62, $21.28, and $80.32 together — nearly two-thirds of it from a single debt."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "1.9",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$920 at $490 a month. When one debt is both the smallest and the dearest, the two strategies agree and the choice does not arise."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2.17",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$310 moved across a gap of 8.4 percentage points for one month."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "65.7%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$80.32 of the $122.22 total — the debt that is neither the smallest nor the dearest is where almost two-thirds of the cost sits."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The credit-union loan, at 7.4%",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$21.28 against $20.62 — a rate less than a third as high produces more interest, because the balance behind it is nearly four times larger."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(cardBalance * cardRate / 12, 2)",
+        "substituted": "round(920 * 0.269 / 12, 2)",
+        "result": "$20.62",
+        "why": "26.9% a year on $920 — much the highest rate in the set, on much the smallest balance."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(unionBalance * unionRate / 12, 2)",
+        "substituted": "round(3450 * 0.074 / 12, 2)",
+        "result": "$21.28",
+        "why": "7.4% a year on $3,450 — the lowest rate, yet it charges slightly more than the card does."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(storeBalance * storeRate / 12, 2)",
+        "substituted": "round(6100 * 0.158 / 12, 2)",
+        "result": "$80.32",
+        "why": "15.8% a year on $6,100 — a middling rate on the largest balance, producing by far the largest charge."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "#t1-p1 + #t1-p2 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p2 + #t1-p3",
+        "result": "$122.22",
+        "why": "$20.62, $21.28, and $80.32 together — nearly two-thirds of it from a single debt."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(cardBalance2 / (cardMin + extra), 1)",
+        "substituted": "round(920 / (180 + 310), 1)",
+        "result": "1.9",
+        "why": "$920 at $490 a month. When one debt is both the smallest and the dearest, the two strategies agree and the choice does not arise."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(extra2 * (storeRate2 - unionRate2) / 12, 2)",
+        "substituted": "round(310 * (0.158 - 0.074) / 12, 2)",
+        "result": "$2.17",
+        "why": "$310 moved across a gap of 8.4 percentage points for one month."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p3 / #t1-p4 * 100, 1)",
+        "substituted": "round(#t1-p3 / #t1-p4 * 100, 1)",
+        "result": "65.7%",
+        "why": "$80.32 of the $122.22 total — the debt that is neither the smallest nor the dearest is where almost two-thirds of the cost sits."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p1 > #t1-p2",
+        "substituted": "#t1-p1 > #t1-p2",
+        "result": "The credit-union loan, at 7.4%",
+        "why": "$21.28 against $20.62 — a rate less than a third as high produces more interest, because the balance behind it is nearly four times larger."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "In the earlier debt set the highest rate also produced the largest interest charge, and here it does not. Say what changed, what still transfers from the earlier method, and what a borrower should look at rather than the rate alone.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the change: the balances here are far more unequal, so the $920 card at 26.9% charges less than the $3,450 loan at 7.4%.",
+          "States what still transfers: the ordering rules are unchanged, and directing spare money at the higher rate still saves interest, here $2.17 a month.",
+          "Names the interest charge itself — rate multiplied by balance — as what a borrower should compare, not the rate alone."
+        ],
+        "evidenceRequirements": [
+          "Cites the $20.62 card charge against the $21.28 credit-union charge as the instance where rate and cost disagree."
+        ],
+        "lookFors": [
+          "The response identifies balance inequality as what changed between the two cases.",
+          "The response does not conclude that ordering by rate is wrong — it still minimises interest per dollar directed.",
+          "A response noting that the card clears in 1.9 months regardless is reading the situation accurately."
+        ],
+        "commonMisconception": "Reading the highest interest rate as the largest interest cost.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The store plan generates 65.7% of the monthly interest and neither strategy targets it first. Say whether that is a flaw in the strategies, and what Zephyrine should do about it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Argues that it is not a flaw in the rules themselves, since both target the card first and the card clears in 1.9 months, after which the store plan does become the highest-rate remaining target.",
+          "Concludes that the store plan is next under highest-rate ordering, or the credit-union loan under smallest-balance ordering, and says which rule the choice follows."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 1.9-month card clearing time and the $80.32 monthly store-plan charge."
+        ],
+        "lookFors": [
+          "The response reasons about what happens after the first debt clears rather than only about the starting position.",
+          "The response distinguishes a badly chosen rule from a rule applied at one moment in time."
+        ],
+        "dimensions": [
+          "criteria-application",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

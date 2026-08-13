@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l10",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: student loan repayment plan structures in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "student loan repayment plan structures in outline",
+  "objective": "Build a complete fictional repayment plan across three debts, quantify what the current position costs each year, and defend an ordering against a stated objective.",
+  "scenario": "Perpetua Olufemi-Strand holds the three fictional debts below and is building a repayment plan. All balances, rates, payments, and income figures are invented for this performance task.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional debt and income figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The study loan holds $19,400 at 5.9% a year with a $214 minimum. The card holds $3,150 at 23.4% a year with a $95 minimum. The vehicle loan holds $8,700 at 6.4% a year with a $265 minimum. Monthly interest is the annual rate divided by 12. Perpetua takes home $3,960 a month and can put $820 a month towards debt. Her gross income is $5,100 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the study loan charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the card charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the vehicle loan charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the total interest charged across all three debts in the first month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Now build the plan from her capacity.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the three minimum payments come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does she have above the minimums, from her $820 debt capacity?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If nothing changed, what would the first month’s interest come to over a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Directing the extra $246.00 at the card, how many months does it take to clear? Ignore interest for this step and give one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What is Perpetua’s debt-to-income ratio, using the minimums against her $5,100 gross income? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "What share of her $3,960 take-home pay does the $820 debt capacity represent? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One comparison before the recommendation.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "Directing the $246.00 at the card rather than the study loan moves it from 5.9% to 23.4%. How much interest does that save in a month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Which debt should receive the extra $246.00 first if the objective is to minimise interest paid?",
+          "choices": [
+            "The study loan, at 5.9%",
+            "The card, at 23.4%",
+            "The vehicle loan, at 6.4%"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write your plan. Answer both.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Present a repayment plan for Perpetua. State the ordering and the objective it serves, say what happens to the freed-up payment when the card clears, and name the assumption whose failure would most damage the plan."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "Perpetua’s debt-to-income ratio is 11.3% and her debt capacity is 20.7% of take-home pay. Explain why the two figures differ so much, and say which one describes her situation better."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the extra available comes out at $820, the minimum payments are not being deducted. The $574.00 of minimums has to be paid on all three debts before anything can be directed, so only $246.00 is actually a choice. Write the capacity as one row, the minimums as three rows, and the remainder as the directable figure before choosing any ordering.",
+  "extension": "Work out what Perpetua could direct each month once both the card and the vehicle loan are cleared, and say what that does to the time the study loan takes.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

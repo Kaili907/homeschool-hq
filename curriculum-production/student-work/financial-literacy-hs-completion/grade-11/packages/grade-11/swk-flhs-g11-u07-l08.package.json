@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l08",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l08",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: tax-advantaged accounts as a planning tool"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "tax-advantaged accounts as a planning tool",
+  "objective": "Transfer the pre-tax contribution analysis to a fictional filer in a lower band, and quantify how the value of the same contribution depends on the rate.",
+  "scenario": "Alistair Bergamo-Diarra is considering a contribution to a fictional pre-tax account. His income places him in a lower band than the saver examined earlier in this unit, and testing what that does to the same contribution is the point of the lesson. The schedule below is invented: its deduction, thresholds, and rates were chosen for this course and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule and contribution figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional schedule, taxable income is gross income less a standard deduction of $11,400, and tax is 10% on the first $9,800 of taxable income and 14% between $9,800 and $38,400. Alistair earns $33,600 and is considering a $4,000 contribution.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Alistair’s taxable income before the contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is his tax before the contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is his tax after a $4,000 contribution reduces taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much tax does the contribution save?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare with the same contribution made by a filer whose marginal rate is 22%.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the net cost to Alistair of putting $4,000 into the account?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "The saving is what percentage of the contribution? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the same $4,000 contribution save a filer whose marginal rate is 22%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much less is the same contribution worth to Alistair?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Alistair expects his income to rise into the 22% band within a few years. What does that suggest about the timing of pre-tax contributions?",
+          "choices": [
+            "They are worth more once the marginal rate is higher, so deferring them raises their tax value",
+            "They are worth more now, because the account has longer to grow",
+            "The marginal rate makes no difference to what a contribution saves"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The same contribution saves $560.00 for Alistair and $880.00 at the higher rate. Say what carries over unchanged from the earlier lesson, what the difference in rate does, and why the deferral argument is not decisive."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Alistair’s taxable income after the contribution is $18,200, still above the $9,800 boundary. Say what would happen to the saving if he contributed $10,000 instead, and why the answer is not simply 14% of $10,000."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the saving comes out at $880.00, the 22% rate is being applied to a filer whose taxable income never reaches $38,400. Alistair’s taxable income is $22,200.00, so his marginal rate is 14% and the $4,000 contribution saves $560.00. Identify which band the taxable income sits in before choosing any rate.",
+  "extension": "Find the contribution at which part of Alistair’s reduction would drop into the 10% band, and say what the saving on that last portion would be.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

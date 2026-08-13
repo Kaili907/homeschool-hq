@@ -1,0 +1,313 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l09",
+  "lessonId": "ma-g11-financial-literacy-u02-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$15,706.66",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three years of losing 16% of a shrinking value on the $26,500 purchase price."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$6,568.71",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Eight years of the same proportional loss. Most of the fall has already happened by year 3."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$10,793.34",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$26,500 against $15,706.66 — over $10,000 gone in three years, which is the cost of the early years of ownership."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$19,931.29",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$26,500 against $6,568.71. The extra five years add only about $9,100 more of depreciation than the first three did."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$8,880.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three years at the lower early-ownership rate."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$27,730.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$14,800 across the first five years and $12,930 across the last three — the later years cost nearly as much as the earlier five."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$6,557.78",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$10,793.34 of depreciation plus $8,880.00 of running costs, spread over 3 years."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$5,957.66",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$19,931.29 of depreciation plus $27,730.00 of running costs, spread over 8 years."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$600.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,557.78 against $5,957.66 — the front-loaded depreciation is spread thinner, and that gain survives the rising repair bills, but only just."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(price * pow(1 - rate, 3), 2)",
+        "substituted": "round(26500 * pow(1 - 0.16, 3), 2)",
+        "result": "$15,706.66",
+        "why": "Three years of losing 16% of a shrinking value on the $26,500 purchase price."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(price2 * pow(1 - rate2, 8), 2)",
+        "substituted": "round(26500 * pow(1 - 0.16, 8), 2)",
+        "result": "$6,568.71",
+        "why": "Eight years of the same proportional loss. Most of the fall has already happened by year 3."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "price3 - #t1-p1",
+        "substituted": "26500 - #t1-p1",
+        "result": "$10,793.34",
+        "why": "$26,500 against $15,706.66 — over $10,000 gone in three years, which is the cost of the early years of ownership."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "price4 - #t1-p2",
+        "substituted": "26500 - #t1-p2",
+        "result": "$19,931.29",
+        "why": "$26,500 against $6,568.71. The extra five years add only about $9,100 more of depreciation than the first three did."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "early * 3",
+        "substituted": "2960 * 3",
+        "result": "$8,880.00",
+        "why": "Three years at the lower early-ownership rate."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "early2 * 5 + late * 3",
+        "substituted": "2960 * 5 + 4310 * 3",
+        "result": "$27,730.00",
+        "why": "$14,800 across the first five years and $12,930 across the last three — the later years cost nearly as much as the earlier five."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round((#t1-p3 + #t2-p1) / 3, 2)",
+        "substituted": "round((#t1-p3 + #t2-p1) / 3, 2)",
+        "result": "$6,557.78",
+        "why": "$10,793.34 of depreciation plus $8,880.00 of running costs, spread over 3 years."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round((#t1-p4 + #t2-p2) / 8, 2)",
+        "substituted": "round((#t1-p4 + #t2-p2) / 8, 2)",
+        "result": "$5,957.66",
+        "why": "$19,931.29 of depreciation plus $27,730.00 of running costs, spread over 8 years."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p3 - #t2-p4",
+        "substituted": "#t2-p3 - #t2-p4",
+        "result": "$600.12",
+        "why": "$6,557.78 against $5,957.66 — the front-loaded depreciation is spread thinner, and that gain survives the rising repair bills, but only just."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Two forces pull in opposite directions as a vehicle is held longer. Name both, say which one is winning at eight years and by how much, and describe what would have to happen for the answer to flip.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names depreciation per year falling as the holding period lengthens, and running costs per year rising as the vehicle ages, as the two opposing forces.",
+          "States that at eight years the depreciation effect still wins, by $600.12 a year, and identifies that as a narrow margin.",
+          "Describes a flip condition in figures — repairs rising further, or an unreliable year adding a large one-off cost — rather than as a general possibility."
+        ],
+        "evidenceRequirements": [
+          "Cites the two cost-per-year figures, $6,557.78 and $5,957.66, and at least one of the running-cost totals behind them."
+        ],
+        "lookFors": [
+          "The response names both forces and attaches each to the right figure.",
+          "The response treats $600.12 a year as a narrow margin rather than as a decisive result.",
+          "A response observing that the running-cost step from $2,960 to $4,310 is itself an assumption is going beyond the question well."
+        ],
+        "commonMisconception": "Assuming that keeping a vehicle longer always lowers the cost of owning it.",
+        "dimensions": [
+          "tradeoff-defense",
+          "reasoning-from-figures",
+          "plan-coherence"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Yolanda says she will decide by the vehicle’s condition rather than by the cost per year. Say what the cost-per-year figures are still useful for in that case, and what they cannot tell her.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the figures set the price of the choice — around $600.12 a year — so she can judge whether the condition problem is worth that much to avoid.",
+          "States what the figures cannot supply, such as the chance of a breakdown, the value of reliability for her, or a repair large enough to break the $2,960 and $4,310 assumptions."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $600.12 annual difference when describing what the figures do supply."
+        ],
+        "lookFors": [
+          "The response treats the figures as pricing a decision rather than as making it.",
+          "What the figures cannot say is stated specifically, not as a general limit of arithmetic."
+        ],
+        "dimensions": [
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}
