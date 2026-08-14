@@ -1,0 +1,1931 @@
+{
+  "auditVersion": "elementary-math-depth-audit-r1",
+  "auditDate": "2026-08-14",
+  "authoritativeBase": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+  "scope": {
+    "subject": "mathematics",
+    "grades": [
+      3,
+      4,
+      5
+    ],
+    "activeOnly": true,
+    "reserveExcluded": true
+  },
+  "status": "COMPLETE",
+  "lessonsAudited": 540,
+  "inventoryReconciled": true,
+  "byGrade": {
+    "3": {
+      "lessons": 180,
+      "inventory": {
+        "scheduleRows": 180,
+        "packageFiles": 180,
+        "uniqueLessonIds": 180,
+        "answerKeys": 180,
+        "reconciled": true
+      },
+      "lessonTypes": {
+        "assessment-like": 10,
+        "diagnostic": 10,
+        "mastery": 20,
+        "normal concept": 50,
+        "other": 50,
+        "remediation": 20,
+        "review": 20
+      },
+      "depthClassifications": {
+        "LANGUAGE_TOO_ADVANCED": 10,
+        "MULTIPLE_DEFECTS": 163,
+        "NEEDS_GUIDED_PRACTICE": 7
+      },
+      "distributions": {
+        "teachingExplanationBlocks": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 1,
+          "median": 1,
+          "p75": 1,
+          "p90": 1,
+          "max": 1,
+          "mean": 0.78
+        },
+        "workedExamples": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 1,
+          "median": 1,
+          "p75": 1,
+          "p90": 2,
+          "max": 2,
+          "mean": 0.91
+        },
+        "guidedItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 2,
+          "p75": 3,
+          "p90": 4,
+          "max": 5,
+          "mean": 1.83
+        },
+        "independentItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 3,
+          "median": 4,
+          "p75": 5,
+          "p90": 7,
+          "max": 7,
+          "mean": 3.61
+        },
+        "masteryItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 2,
+          "p75": 2,
+          "p90": 3,
+          "max": 10,
+          "mean": 1.89
+        },
+        "remediationItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 0,
+          "p90": 0,
+          "max": 0,
+          "mean": 0
+        },
+        "remediationProfileItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 0,
+          "p90": 6,
+          "max": 7,
+          "mean": 0.72
+        },
+        "challengeExtensionItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 2,
+          "p90": 2,
+          "max": 2,
+          "mean": 0.56
+        }
+      },
+      "histograms": {
+        "teachingExplanationBlocks": {
+          "0": 40,
+          "1": 140
+        },
+        "workedExamples": {
+          "0": 40,
+          "1": 117,
+          "2": 23
+        },
+        "guidedItems": {
+          "0": 70,
+          "2": 40,
+          "3": 40,
+          "4": 20,
+          "5": 10
+        },
+        "independentItems": {
+          "0": 30,
+          "2": 10,
+          "3": 40,
+          "4": 50,
+          "5": 10,
+          "6": 20,
+          "7": 20
+        },
+        "masteryItems": {
+          "0": 60,
+          "2": 90,
+          "3": 20,
+          "10": 10
+        },
+        "remediationItems": {
+          "0": 180
+        },
+        "remediationProfileItems": {
+          "0": 160,
+          "6": 10,
+          "7": 10
+        },
+        "challengeExtensionItems": {
+          "0": 130,
+          "2": 50
+        }
+      },
+      "questionVariety": {
+        "distinctItemTypesPerLesson": {
+          "n": 180,
+          "min": 1,
+          "p10": 1,
+          "p25": 1,
+          "median": 2,
+          "p75": 3,
+          "p90": 3,
+          "max": 6,
+          "mean": 1.97
+        },
+        "distinctStandardsPerLesson": {
+          "n": 180,
+          "min": 1,
+          "p10": 1,
+          "p25": 1,
+          "median": 1,
+          "p75": 2,
+          "p90": 2.1,
+          "max": 5,
+          "mean": 1.57
+        },
+        "promptTemplatesPerLesson": {
+          "n": 180,
+          "min": 1,
+          "p10": 1,
+          "p25": 2,
+          "median": 4,
+          "p75": 5,
+          "p90": 7,
+          "max": 9,
+          "mean": 3.72
+        },
+        "constructedResponseItemsPerLesson": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 2,
+          "p90": 2,
+          "max": 2,
+          "mean": 0.56
+        },
+        "lessonsWithOnePromptTemplate": 24
+      },
+      "tooThin": 170,
+      "languageAffectedLessons": 173
+    },
+    "4": {
+      "lessons": 180,
+      "inventory": {
+        "scheduleRows": 180,
+        "packageFiles": 180,
+        "uniqueLessonIds": 180,
+        "answerKeys": 180,
+        "reconciled": true
+      },
+      "lessonTypes": {
+        "assessment-like": 10,
+        "diagnostic": 10,
+        "mastery": 20,
+        "normal concept": 50,
+        "other": 50,
+        "remediation": 20,
+        "review": 20
+      },
+      "depthClassifications": {
+        "LANGUAGE_TOO_ADVANCED": 10,
+        "MULTIPLE_DEFECTS": 162,
+        "NEEDS_GUIDED_PRACTICE": 8
+      },
+      "distributions": {
+        "teachingExplanationBlocks": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 1,
+          "median": 1,
+          "p75": 1,
+          "p90": 1,
+          "max": 1,
+          "mean": 0.78
+        },
+        "workedExamples": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 1,
+          "median": 1,
+          "p75": 1,
+          "p90": 2,
+          "max": 2,
+          "mean": 0.89
+        },
+        "guidedItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 2,
+          "p75": 3,
+          "p90": 4,
+          "max": 5,
+          "mean": 1.83
+        },
+        "independentItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 3,
+          "median": 4,
+          "p75": 5,
+          "p90": 7,
+          "max": 7,
+          "mean": 3.61
+        },
+        "masteryItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 2,
+          "p75": 2,
+          "p90": 3,
+          "max": 10,
+          "mean": 1.88
+        },
+        "remediationItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 0,
+          "p90": 0,
+          "max": 0,
+          "mean": 0
+        },
+        "remediationProfileItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 0,
+          "p90": 6,
+          "max": 7,
+          "mean": 0.72
+        },
+        "challengeExtensionItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 2,
+          "p90": 2,
+          "max": 2,
+          "mean": 0.56
+        }
+      },
+      "histograms": {
+        "teachingExplanationBlocks": {
+          "0": 40,
+          "1": 140
+        },
+        "workedExamples": {
+          "0": 40,
+          "1": 119,
+          "2": 21
+        },
+        "guidedItems": {
+          "0": 70,
+          "2": 40,
+          "3": 40,
+          "4": 20,
+          "5": 10
+        },
+        "independentItems": {
+          "0": 30,
+          "2": 10,
+          "3": 40,
+          "4": 50,
+          "5": 10,
+          "6": 20,
+          "7": 20
+        },
+        "masteryItems": {
+          "0": 60,
+          "1": 2,
+          "2": 88,
+          "3": 20,
+          "10": 10
+        },
+        "remediationItems": {
+          "0": 180
+        },
+        "remediationProfileItems": {
+          "0": 160,
+          "6": 10,
+          "7": 10
+        },
+        "challengeExtensionItems": {
+          "0": 130,
+          "2": 50
+        }
+      },
+      "questionVariety": {
+        "distinctItemTypesPerLesson": {
+          "n": 180,
+          "min": 1,
+          "p10": 1,
+          "p25": 1,
+          "median": 2,
+          "p75": 2,
+          "p90": 3,
+          "max": 6,
+          "mean": 1.83
+        },
+        "distinctStandardsPerLesson": {
+          "n": 180,
+          "min": 1,
+          "p10": 1,
+          "p25": 1,
+          "median": 1,
+          "p75": 2,
+          "p90": 3,
+          "max": 6,
+          "mean": 1.53
+        },
+        "promptTemplatesPerLesson": {
+          "n": 180,
+          "min": 1,
+          "p10": 1,
+          "p25": 1,
+          "median": 2,
+          "p75": 4,
+          "p90": 5,
+          "max": 9,
+          "mean": 2.71
+        },
+        "constructedResponseItemsPerLesson": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 2,
+          "p90": 2,
+          "max": 2,
+          "mean": 0.56
+        },
+        "lessonsWithOnePromptTemplate": 57
+      },
+      "tooThin": 170,
+      "languageAffectedLessons": 172
+    },
+    "5": {
+      "lessons": 180,
+      "inventory": {
+        "scheduleRows": 180,
+        "packageFiles": 180,
+        "uniqueLessonIds": 180,
+        "answerKeys": 180,
+        "reconciled": true
+      },
+      "lessonTypes": {
+        "assessment-like": 10,
+        "diagnostic": 10,
+        "mastery": 10,
+        "normal concept": 50,
+        "other": 60,
+        "remediation": 20,
+        "review": 20
+      },
+      "depthClassifications": {
+        "LANGUAGE_TOO_ADVANCED": 29,
+        "MULTIPLE_DEFECTS": 144,
+        "NEEDS_GUIDED_PRACTICE": 7
+      },
+      "distributions": {
+        "teachingExplanationBlocks": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 1,
+          "median": 1,
+          "p75": 1,
+          "p90": 1,
+          "max": 1,
+          "mean": 0.78
+        },
+        "workedExamples": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 1,
+          "median": 1,
+          "p75": 1,
+          "p90": 2,
+          "max": 2,
+          "mean": 1
+        },
+        "guidedItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 2.5,
+          "p75": 3,
+          "p90": 4,
+          "max": 5,
+          "mean": 2
+        },
+        "independentItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 4,
+          "median": 4,
+          "p75": 5,
+          "p90": 8,
+          "max": 9,
+          "mean": 4.5
+        },
+        "masteryItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 2,
+          "p75": 2,
+          "p90": 4,
+          "max": 12,
+          "mean": 1.89
+        },
+        "remediationItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 0,
+          "p90": 0,
+          "max": 0,
+          "mean": 0
+        },
+        "remediationProfileItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 0,
+          "p90": 8,
+          "max": 9,
+          "mean": 0.94
+        },
+        "challengeExtensionItems": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 2,
+          "p90": 3,
+          "max": 3,
+          "mean": 0.78
+        }
+      },
+      "histograms": {
+        "teachingExplanationBlocks": {
+          "0": 40,
+          "1": 140
+        },
+        "workedExamples": {
+          "0": 40,
+          "1": 100,
+          "2": 40
+        },
+        "guidedItems": {
+          "0": 70,
+          "2": 20,
+          "3": 50,
+          "4": 30,
+          "5": 10
+        },
+        "independentItems": {
+          "0": 20,
+          "3": 20,
+          "4": 60,
+          "5": 40,
+          "6": 10,
+          "8": 20,
+          "9": 10
+        },
+        "masteryItems": {
+          "0": 80,
+          "2": 60,
+          "3": 20,
+          "4": 10,
+          "12": 10
+        },
+        "remediationItems": {
+          "0": 180
+        },
+        "remediationProfileItems": {
+          "0": 160,
+          "8": 10,
+          "9": 10
+        },
+        "challengeExtensionItems": {
+          "0": 120,
+          "2": 40,
+          "3": 20
+        }
+      },
+      "questionVariety": {
+        "distinctItemTypesPerLesson": {
+          "n": 180,
+          "min": 6,
+          "p10": 6,
+          "p25": 6,
+          "median": 7.5,
+          "p75": 9,
+          "p90": 10,
+          "max": 12,
+          "mean": 7.82
+        },
+        "distinctStandardsPerLesson": {
+          "n": 180,
+          "min": 2,
+          "p10": 2,
+          "p25": 3,
+          "median": 4,
+          "p75": 5,
+          "p90": 6,
+          "max": 9,
+          "mean": 4.22
+        },
+        "promptTemplatesPerLesson": {
+          "n": 180,
+          "min": 6,
+          "p10": 6,
+          "p25": 6,
+          "median": 8,
+          "p75": 9,
+          "p90": 11,
+          "max": 12,
+          "mean": 8.06
+        },
+        "constructedResponseItemsPerLesson": {
+          "n": 180,
+          "min": 0,
+          "p10": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 2,
+          "p90": 3,
+          "max": 3,
+          "mean": 0.78
+        },
+        "lessonsWithOnePromptTemplate": 0
+      },
+      "tooThin": 151,
+      "languageAffectedLessons": 173
+    }
+  },
+  "lessonTypes": {
+    "normal concept": 150,
+    "diagnostic": 30,
+    "review": 60,
+    "remediation": 60,
+    "mastery": 50,
+    "assessment-like": 30,
+    "other": 160
+  },
+  "returnTypeRollup": {
+    "normalLessons": 150,
+    "diagnostics": 30,
+    "reviews": 60,
+    "otherTypes": 300
+  },
+  "depthClassifications": {
+    "DEEP_ENOUGH": 0,
+    "NEEDS_MORE_EXPLANATION": 0,
+    "NEEDS_MORE_WORKED_EXAMPLES": 0,
+    "NEEDS_GUIDED_PRACTICE": 22,
+    "NEEDS_INDEPENDENT_DEPTH": 0,
+    "NEEDS_MASTERY_DEPTH": 0,
+    "NEEDS_REMEDIATION": 0,
+    "LANGUAGE_TOO_ADVANCED": 49,
+    "MULTIPLE_DEFECTS": 469
+  },
+  "totals": {
+    "teachingExplanationBlocks": 420,
+    "workedExamples": 504,
+    "guidedItems": 1020,
+    "independentItems": 2110,
+    "masteryItems": 1018,
+    "remediationItems": 0,
+    "remediationProfileItems": 430,
+    "challengeExtensionItems": 340
+  },
+  "overallDistributions": {
+    "workedExamples": {
+      "n": 540,
+      "min": 0,
+      "p10": 0,
+      "p25": 1,
+      "median": 1,
+      "p75": 1,
+      "p90": 2,
+      "max": 2,
+      "mean": 0.93
+    },
+    "guidedItems": {
+      "n": 540,
+      "min": 0,
+      "p10": 0,
+      "p25": 0,
+      "median": 2,
+      "p75": 3,
+      "p90": 4,
+      "max": 5,
+      "mean": 1.89
+    },
+    "independentItems": {
+      "n": 540,
+      "min": 0,
+      "p10": 0,
+      "p25": 3,
+      "median": 4,
+      "p75": 5,
+      "p90": 7,
+      "max": 9,
+      "mean": 3.91
+    },
+    "masteryItems": {
+      "n": 540,
+      "min": 0,
+      "p10": 0,
+      "p25": 0,
+      "median": 2,
+      "p75": 2,
+      "p90": 3,
+      "max": 12,
+      "mean": 1.89
+    },
+    "remediationItems": {
+      "n": 540,
+      "min": 0,
+      "p10": 0,
+      "p25": 0,
+      "median": 0,
+      "p75": 0,
+      "p90": 0,
+      "max": 0,
+      "mean": 0
+    }
+  },
+  "workedExampleStepDistribution": {
+    "n": 504,
+    "min": 1,
+    "p10": 1,
+    "p25": 2,
+    "median": 3,
+    "p75": 3,
+    "p90": 3,
+    "max": 5,
+    "mean": 2.47
+  },
+  "workedExamples": {
+    "answerOnly": 59,
+    "weak": 96,
+    "adequate": 295,
+    "strong": 113
+  },
+  "tooThin": {
+    "lessons": 491,
+    "byGrade": {
+      "3": 170,
+      "4": 170,
+      "5": 151
+    },
+    "byDefect": {
+      "NEEDS_GUIDED_PRACTICE": 160,
+      "NEEDS_INDEPENDENT_DEPTH": 230,
+      "NEEDS_MASTERY_DEPTH": 270,
+      "NEEDS_MORE_EXPLANATION": 92,
+      "NEEDS_MORE_WORKED_EXAMPLES": 256,
+      "NEEDS_REMEDIATION": 60
+    },
+    "lessonIds": [
+      "ma-g3-mathematics-u01-l01",
+      "ma-g3-mathematics-u01-l02",
+      "ma-g3-mathematics-u01-l03",
+      "ma-g3-mathematics-u01-l04",
+      "ma-g3-mathematics-u01-l05",
+      "ma-g3-mathematics-u01-l06",
+      "ma-g3-mathematics-u01-l07",
+      "ma-g3-mathematics-u01-l08",
+      "ma-g3-mathematics-u01-l09",
+      "ma-g3-mathematics-u01-l10",
+      "ma-g3-mathematics-u01-l11",
+      "ma-g3-mathematics-u01-l12",
+      "ma-g3-mathematics-u01-l13",
+      "ma-g3-mathematics-u01-l14",
+      "ma-g3-mathematics-u01-l15",
+      "ma-g3-mathematics-u01-l17",
+      "ma-g3-mathematics-u01-l18",
+      "ma-g3-mathematics-u02-l01",
+      "ma-g3-mathematics-u02-l02",
+      "ma-g3-mathematics-u02-l03",
+      "ma-g3-mathematics-u02-l04",
+      "ma-g3-mathematics-u02-l05",
+      "ma-g3-mathematics-u02-l06",
+      "ma-g3-mathematics-u02-l07",
+      "ma-g3-mathematics-u02-l08",
+      "ma-g3-mathematics-u02-l09",
+      "ma-g3-mathematics-u02-l10",
+      "ma-g3-mathematics-u02-l11",
+      "ma-g3-mathematics-u02-l12",
+      "ma-g3-mathematics-u02-l13",
+      "ma-g3-mathematics-u02-l14",
+      "ma-g3-mathematics-u02-l15",
+      "ma-g3-mathematics-u02-l17",
+      "ma-g3-mathematics-u02-l18",
+      "ma-g3-mathematics-u03-l01",
+      "ma-g3-mathematics-u03-l02",
+      "ma-g3-mathematics-u03-l03",
+      "ma-g3-mathematics-u03-l04",
+      "ma-g3-mathematics-u03-l05",
+      "ma-g3-mathematics-u03-l06",
+      "ma-g3-mathematics-u03-l07",
+      "ma-g3-mathematics-u03-l08",
+      "ma-g3-mathematics-u03-l09",
+      "ma-g3-mathematics-u03-l10",
+      "ma-g3-mathematics-u03-l11",
+      "ma-g3-mathematics-u03-l12",
+      "ma-g3-mathematics-u03-l13",
+      "ma-g3-mathematics-u03-l14",
+      "ma-g3-mathematics-u03-l15",
+      "ma-g3-mathematics-u03-l17",
+      "ma-g3-mathematics-u03-l18",
+      "ma-g3-mathematics-u04-l01",
+      "ma-g3-mathematics-u04-l02",
+      "ma-g3-mathematics-u04-l03",
+      "ma-g3-mathematics-u04-l04",
+      "ma-g3-mathematics-u04-l05",
+      "ma-g3-mathematics-u04-l06",
+      "ma-g3-mathematics-u04-l07",
+      "ma-g3-mathematics-u04-l08",
+      "ma-g3-mathematics-u04-l09",
+      "ma-g3-mathematics-u04-l10",
+      "ma-g3-mathematics-u04-l11",
+      "ma-g3-mathematics-u04-l12",
+      "ma-g3-mathematics-u04-l13",
+      "ma-g3-mathematics-u04-l14",
+      "ma-g3-mathematics-u04-l15",
+      "ma-g3-mathematics-u04-l17",
+      "ma-g3-mathematics-u04-l18",
+      "ma-g3-mathematics-u05-l01",
+      "ma-g3-mathematics-u05-l02",
+      "ma-g3-mathematics-u05-l03",
+      "ma-g3-mathematics-u05-l04",
+      "ma-g3-mathematics-u05-l05",
+      "ma-g3-mathematics-u05-l06",
+      "ma-g3-mathematics-u05-l07",
+      "ma-g3-mathematics-u05-l08",
+      "ma-g3-mathematics-u05-l09",
+      "ma-g3-mathematics-u05-l10",
+      "ma-g3-mathematics-u05-l11",
+      "ma-g3-mathematics-u05-l12",
+      "ma-g3-mathematics-u05-l13",
+      "ma-g3-mathematics-u05-l14",
+      "ma-g3-mathematics-u05-l15",
+      "ma-g3-mathematics-u05-l17",
+      "ma-g3-mathematics-u05-l18",
+      "ma-g3-mathematics-u06-l01",
+      "ma-g3-mathematics-u06-l02",
+      "ma-g3-mathematics-u06-l03",
+      "ma-g3-mathematics-u06-l04",
+      "ma-g3-mathematics-u06-l05",
+      "ma-g3-mathematics-u06-l06",
+      "ma-g3-mathematics-u06-l07",
+      "ma-g3-mathematics-u06-l08",
+      "ma-g3-mathematics-u06-l09",
+      "ma-g3-mathematics-u06-l10",
+      "ma-g3-mathematics-u06-l11",
+      "ma-g3-mathematics-u06-l12",
+      "ma-g3-mathematics-u06-l13",
+      "ma-g3-mathematics-u06-l14",
+      "ma-g3-mathematics-u06-l15",
+      "ma-g3-mathematics-u06-l17",
+      "ma-g3-mathematics-u06-l18",
+      "ma-g3-mathematics-u07-l01",
+      "ma-g3-mathematics-u07-l02",
+      "ma-g3-mathematics-u07-l03",
+      "ma-g3-mathematics-u07-l04",
+      "ma-g3-mathematics-u07-l05",
+      "ma-g3-mathematics-u07-l06",
+      "ma-g3-mathematics-u07-l07",
+      "ma-g3-mathematics-u07-l08",
+      "ma-g3-mathematics-u07-l09",
+      "ma-g3-mathematics-u07-l10",
+      "ma-g3-mathematics-u07-l11",
+      "ma-g3-mathematics-u07-l12",
+      "ma-g3-mathematics-u07-l13",
+      "ma-g3-mathematics-u07-l14",
+      "ma-g3-mathematics-u07-l15",
+      "ma-g3-mathematics-u07-l17",
+      "ma-g3-mathematics-u07-l18",
+      "ma-g3-mathematics-u08-l01",
+      "ma-g3-mathematics-u08-l02",
+      "ma-g3-mathematics-u08-l03",
+      "ma-g3-mathematics-u08-l04",
+      "ma-g3-mathematics-u08-l05",
+      "ma-g3-mathematics-u08-l06",
+      "ma-g3-mathematics-u08-l07",
+      "ma-g3-mathematics-u08-l08",
+      "ma-g3-mathematics-u08-l09",
+      "ma-g3-mathematics-u08-l10",
+      "ma-g3-mathematics-u08-l11",
+      "ma-g3-mathematics-u08-l12",
+      "ma-g3-mathematics-u08-l13",
+      "ma-g3-mathematics-u08-l14",
+      "ma-g3-mathematics-u08-l15",
+      "ma-g3-mathematics-u08-l17",
+      "ma-g3-mathematics-u08-l18",
+      "ma-g3-mathematics-u09-l01",
+      "ma-g3-mathematics-u09-l02",
+      "ma-g3-mathematics-u09-l03",
+      "ma-g3-mathematics-u09-l04",
+      "ma-g3-mathematics-u09-l05",
+      "ma-g3-mathematics-u09-l06",
+      "ma-g3-mathematics-u09-l07",
+      "ma-g3-mathematics-u09-l08",
+      "ma-g3-mathematics-u09-l09",
+      "ma-g3-mathematics-u09-l10",
+      "ma-g3-mathematics-u09-l11",
+      "ma-g3-mathematics-u09-l12",
+      "ma-g3-mathematics-u09-l13",
+      "ma-g3-mathematics-u09-l14",
+      "ma-g3-mathematics-u09-l15",
+      "ma-g3-mathematics-u09-l17",
+      "ma-g3-mathematics-u09-l18",
+      "ma-g3-mathematics-u10-l01",
+      "ma-g3-mathematics-u10-l02",
+      "ma-g3-mathematics-u10-l03",
+      "ma-g3-mathematics-u10-l04",
+      "ma-g3-mathematics-u10-l05",
+      "ma-g3-mathematics-u10-l06",
+      "ma-g3-mathematics-u10-l07",
+      "ma-g3-mathematics-u10-l08",
+      "ma-g3-mathematics-u10-l09",
+      "ma-g3-mathematics-u10-l10",
+      "ma-g3-mathematics-u10-l11",
+      "ma-g3-mathematics-u10-l12",
+      "ma-g3-mathematics-u10-l13",
+      "ma-g3-mathematics-u10-l14",
+      "ma-g3-mathematics-u10-l15",
+      "ma-g3-mathematics-u10-l17",
+      "ma-g3-mathematics-u10-l18",
+      "ma-g4-mathematics-u01-l01",
+      "ma-g4-mathematics-u01-l02",
+      "ma-g4-mathematics-u01-l03",
+      "ma-g4-mathematics-u01-l04",
+      "ma-g4-mathematics-u01-l05",
+      "ma-g4-mathematics-u01-l06",
+      "ma-g4-mathematics-u01-l07",
+      "ma-g4-mathematics-u01-l08",
+      "ma-g4-mathematics-u01-l09",
+      "ma-g4-mathematics-u01-l10",
+      "ma-g4-mathematics-u01-l11",
+      "ma-g4-mathematics-u01-l12",
+      "ma-g4-mathematics-u01-l13",
+      "ma-g4-mathematics-u01-l14",
+      "ma-g4-mathematics-u01-l15",
+      "ma-g4-mathematics-u01-l17",
+      "ma-g4-mathematics-u01-l18",
+      "ma-g4-mathematics-u02-l01",
+      "ma-g4-mathematics-u02-l02",
+      "ma-g4-mathematics-u02-l03",
+      "ma-g4-mathematics-u02-l04",
+      "ma-g4-mathematics-u02-l05",
+      "ma-g4-mathematics-u02-l06",
+      "ma-g4-mathematics-u02-l07",
+      "ma-g4-mathematics-u02-l08",
+      "ma-g4-mathematics-u02-l09",
+      "ma-g4-mathematics-u02-l10",
+      "ma-g4-mathematics-u02-l11",
+      "ma-g4-mathematics-u02-l12",
+      "ma-g4-mathematics-u02-l13",
+      "ma-g4-mathematics-u02-l14",
+      "ma-g4-mathematics-u02-l15",
+      "ma-g4-mathematics-u02-l17",
+      "ma-g4-mathematics-u02-l18",
+      "ma-g4-mathematics-u03-l01",
+      "ma-g4-mathematics-u03-l02",
+      "ma-g4-mathematics-u03-l03",
+      "ma-g4-mathematics-u03-l04",
+      "ma-g4-mathematics-u03-l05",
+      "ma-g4-mathematics-u03-l06",
+      "ma-g4-mathematics-u03-l07",
+      "ma-g4-mathematics-u03-l08",
+      "ma-g4-mathematics-u03-l09",
+      "ma-g4-mathematics-u03-l10",
+      "ma-g4-mathematics-u03-l11",
+      "ma-g4-mathematics-u03-l12",
+      "ma-g4-mathematics-u03-l13",
+      "ma-g4-mathematics-u03-l14",
+      "ma-g4-mathematics-u03-l15",
+      "ma-g4-mathematics-u03-l17",
+      "ma-g4-mathematics-u03-l18",
+      "ma-g4-mathematics-u04-l01",
+      "ma-g4-mathematics-u04-l02",
+      "ma-g4-mathematics-u04-l03",
+      "ma-g4-mathematics-u04-l04",
+      "ma-g4-mathematics-u04-l05",
+      "ma-g4-mathematics-u04-l06",
+      "ma-g4-mathematics-u04-l07",
+      "ma-g4-mathematics-u04-l08",
+      "ma-g4-mathematics-u04-l09",
+      "ma-g4-mathematics-u04-l10",
+      "ma-g4-mathematics-u04-l11",
+      "ma-g4-mathematics-u04-l12",
+      "ma-g4-mathematics-u04-l13",
+      "ma-g4-mathematics-u04-l14",
+      "ma-g4-mathematics-u04-l15",
+      "ma-g4-mathematics-u04-l17",
+      "ma-g4-mathematics-u04-l18",
+      "ma-g4-mathematics-u05-l01",
+      "ma-g4-mathematics-u05-l02",
+      "ma-g4-mathematics-u05-l03",
+      "ma-g4-mathematics-u05-l04",
+      "ma-g4-mathematics-u05-l05",
+      "ma-g4-mathematics-u05-l06",
+      "ma-g4-mathematics-u05-l07",
+      "ma-g4-mathematics-u05-l08",
+      "ma-g4-mathematics-u05-l09",
+      "ma-g4-mathematics-u05-l10",
+      "ma-g4-mathematics-u05-l11",
+      "ma-g4-mathematics-u05-l12",
+      "ma-g4-mathematics-u05-l13",
+      "ma-g4-mathematics-u05-l14",
+      "ma-g4-mathematics-u05-l15",
+      "ma-g4-mathematics-u05-l17",
+      "ma-g4-mathematics-u05-l18",
+      "ma-g4-mathematics-u06-l01",
+      "ma-g4-mathematics-u06-l02",
+      "ma-g4-mathematics-u06-l03",
+      "ma-g4-mathematics-u06-l04",
+      "ma-g4-mathematics-u06-l05",
+      "ma-g4-mathematics-u06-l06",
+      "ma-g4-mathematics-u06-l07",
+      "ma-g4-mathematics-u06-l08",
+      "ma-g4-mathematics-u06-l09",
+      "ma-g4-mathematics-u06-l10",
+      "ma-g4-mathematics-u06-l11",
+      "ma-g4-mathematics-u06-l12",
+      "ma-g4-mathematics-u06-l13",
+      "ma-g4-mathematics-u06-l14",
+      "ma-g4-mathematics-u06-l15",
+      "ma-g4-mathematics-u06-l17",
+      "ma-g4-mathematics-u06-l18",
+      "ma-g4-mathematics-u07-l01",
+      "ma-g4-mathematics-u07-l02",
+      "ma-g4-mathematics-u07-l03",
+      "ma-g4-mathematics-u07-l04",
+      "ma-g4-mathematics-u07-l05",
+      "ma-g4-mathematics-u07-l06",
+      "ma-g4-mathematics-u07-l07",
+      "ma-g4-mathematics-u07-l08",
+      "ma-g4-mathematics-u07-l09",
+      "ma-g4-mathematics-u07-l10",
+      "ma-g4-mathematics-u07-l11",
+      "ma-g4-mathematics-u07-l12",
+      "ma-g4-mathematics-u07-l13",
+      "ma-g4-mathematics-u07-l14",
+      "ma-g4-mathematics-u07-l15",
+      "ma-g4-mathematics-u07-l17",
+      "ma-g4-mathematics-u07-l18",
+      "ma-g4-mathematics-u08-l01",
+      "ma-g4-mathematics-u08-l02",
+      "ma-g4-mathematics-u08-l03",
+      "ma-g4-mathematics-u08-l04",
+      "ma-g4-mathematics-u08-l05",
+      "ma-g4-mathematics-u08-l06",
+      "ma-g4-mathematics-u08-l07",
+      "ma-g4-mathematics-u08-l08",
+      "ma-g4-mathematics-u08-l09",
+      "ma-g4-mathematics-u08-l10",
+      "ma-g4-mathematics-u08-l11",
+      "ma-g4-mathematics-u08-l12",
+      "ma-g4-mathematics-u08-l13",
+      "ma-g4-mathematics-u08-l14",
+      "ma-g4-mathematics-u08-l15",
+      "ma-g4-mathematics-u08-l17",
+      "ma-g4-mathematics-u08-l18",
+      "ma-g4-mathematics-u09-l01",
+      "ma-g4-mathematics-u09-l02",
+      "ma-g4-mathematics-u09-l03",
+      "ma-g4-mathematics-u09-l04",
+      "ma-g4-mathematics-u09-l05",
+      "ma-g4-mathematics-u09-l06",
+      "ma-g4-mathematics-u09-l07",
+      "ma-g4-mathematics-u09-l08",
+      "ma-g4-mathematics-u09-l09",
+      "ma-g4-mathematics-u09-l10",
+      "ma-g4-mathematics-u09-l11",
+      "ma-g4-mathematics-u09-l12",
+      "ma-g4-mathematics-u09-l13",
+      "ma-g4-mathematics-u09-l14",
+      "ma-g4-mathematics-u09-l15",
+      "ma-g4-mathematics-u09-l17",
+      "ma-g4-mathematics-u09-l18",
+      "ma-g4-mathematics-u10-l01",
+      "ma-g4-mathematics-u10-l02",
+      "ma-g4-mathematics-u10-l03",
+      "ma-g4-mathematics-u10-l04",
+      "ma-g4-mathematics-u10-l05",
+      "ma-g4-mathematics-u10-l06",
+      "ma-g4-mathematics-u10-l07",
+      "ma-g4-mathematics-u10-l08",
+      "ma-g4-mathematics-u10-l09",
+      "ma-g4-mathematics-u10-l10",
+      "ma-g4-mathematics-u10-l11",
+      "ma-g4-mathematics-u10-l12",
+      "ma-g4-mathematics-u10-l13",
+      "ma-g4-mathematics-u10-l14",
+      "ma-g4-mathematics-u10-l15",
+      "ma-g4-mathematics-u10-l17",
+      "ma-g4-mathematics-u10-l18",
+      "ma-g5-mathematics-u01-l01",
+      "ma-g5-mathematics-u01-l02",
+      "ma-g5-mathematics-u01-l03",
+      "ma-g5-mathematics-u01-l05",
+      "ma-g5-mathematics-u01-l06",
+      "ma-g5-mathematics-u01-l07",
+      "ma-g5-mathematics-u01-l08",
+      "ma-g5-mathematics-u01-l09",
+      "ma-g5-mathematics-u01-l10",
+      "ma-g5-mathematics-u01-l11",
+      "ma-g5-mathematics-u01-l12",
+      "ma-g5-mathematics-u01-l13",
+      "ma-g5-mathematics-u01-l14",
+      "ma-g5-mathematics-u01-l17",
+      "ma-g5-mathematics-u01-l18",
+      "ma-g5-mathematics-u02-l01",
+      "ma-g5-mathematics-u02-l02",
+      "ma-g5-mathematics-u02-l03",
+      "ma-g5-mathematics-u02-l05",
+      "ma-g5-mathematics-u02-l06",
+      "ma-g5-mathematics-u02-l07",
+      "ma-g5-mathematics-u02-l08",
+      "ma-g5-mathematics-u02-l09",
+      "ma-g5-mathematics-u02-l10",
+      "ma-g5-mathematics-u02-l11",
+      "ma-g5-mathematics-u02-l12",
+      "ma-g5-mathematics-u02-l13",
+      "ma-g5-mathematics-u02-l14",
+      "ma-g5-mathematics-u02-l17",
+      "ma-g5-mathematics-u02-l18",
+      "ma-g5-mathematics-u03-l01",
+      "ma-g5-mathematics-u03-l02",
+      "ma-g5-mathematics-u03-l03",
+      "ma-g5-mathematics-u03-l05",
+      "ma-g5-mathematics-u03-l06",
+      "ma-g5-mathematics-u03-l07",
+      "ma-g5-mathematics-u03-l08",
+      "ma-g5-mathematics-u03-l09",
+      "ma-g5-mathematics-u03-l10",
+      "ma-g5-mathematics-u03-l11",
+      "ma-g5-mathematics-u03-l12",
+      "ma-g5-mathematics-u03-l13",
+      "ma-g5-mathematics-u03-l14",
+      "ma-g5-mathematics-u03-l17",
+      "ma-g5-mathematics-u03-l18",
+      "ma-g5-mathematics-u04-l01",
+      "ma-g5-mathematics-u04-l02",
+      "ma-g5-mathematics-u04-l03",
+      "ma-g5-mathematics-u04-l05",
+      "ma-g5-mathematics-u04-l06",
+      "ma-g5-mathematics-u04-l07",
+      "ma-g5-mathematics-u04-l08",
+      "ma-g5-mathematics-u04-l09",
+      "ma-g5-mathematics-u04-l10",
+      "ma-g5-mathematics-u04-l11",
+      "ma-g5-mathematics-u04-l12",
+      "ma-g5-mathematics-u04-l13",
+      "ma-g5-mathematics-u04-l14",
+      "ma-g5-mathematics-u04-l17",
+      "ma-g5-mathematics-u04-l18",
+      "ma-g5-mathematics-u05-l01",
+      "ma-g5-mathematics-u05-l02",
+      "ma-g5-mathematics-u05-l03",
+      "ma-g5-mathematics-u05-l05",
+      "ma-g5-mathematics-u05-l06",
+      "ma-g5-mathematics-u05-l07",
+      "ma-g5-mathematics-u05-l08",
+      "ma-g5-mathematics-u05-l09",
+      "ma-g5-mathematics-u05-l10",
+      "ma-g5-mathematics-u05-l11",
+      "ma-g5-mathematics-u05-l12",
+      "ma-g5-mathematics-u05-l13",
+      "ma-g5-mathematics-u05-l14",
+      "ma-g5-mathematics-u05-l17",
+      "ma-g5-mathematics-u05-l18",
+      "ma-g5-mathematics-u06-l01",
+      "ma-g5-mathematics-u06-l02",
+      "ma-g5-mathematics-u06-l03",
+      "ma-g5-mathematics-u06-l05",
+      "ma-g5-mathematics-u06-l06",
+      "ma-g5-mathematics-u06-l07",
+      "ma-g5-mathematics-u06-l08",
+      "ma-g5-mathematics-u06-l09",
+      "ma-g5-mathematics-u06-l10",
+      "ma-g5-mathematics-u06-l11",
+      "ma-g5-mathematics-u06-l12",
+      "ma-g5-mathematics-u06-l13",
+      "ma-g5-mathematics-u06-l14",
+      "ma-g5-mathematics-u06-l17",
+      "ma-g5-mathematics-u06-l18",
+      "ma-g5-mathematics-u07-l01",
+      "ma-g5-mathematics-u07-l02",
+      "ma-g5-mathematics-u07-l03",
+      "ma-g5-mathematics-u07-l05",
+      "ma-g5-mathematics-u07-l06",
+      "ma-g5-mathematics-u07-l07",
+      "ma-g5-mathematics-u07-l08",
+      "ma-g5-mathematics-u07-l09",
+      "ma-g5-mathematics-u07-l10",
+      "ma-g5-mathematics-u07-l11",
+      "ma-g5-mathematics-u07-l12",
+      "ma-g5-mathematics-u07-l13",
+      "ma-g5-mathematics-u07-l14",
+      "ma-g5-mathematics-u07-l17",
+      "ma-g5-mathematics-u07-l18",
+      "ma-g5-mathematics-u08-l01",
+      "ma-g5-mathematics-u08-l02",
+      "ma-g5-mathematics-u08-l03",
+      "ma-g5-mathematics-u08-l05",
+      "ma-g5-mathematics-u08-l06",
+      "ma-g5-mathematics-u08-l07",
+      "ma-g5-mathematics-u08-l08",
+      "ma-g5-mathematics-u08-l09",
+      "ma-g5-mathematics-u08-l10",
+      "ma-g5-mathematics-u08-l11",
+      "ma-g5-mathematics-u08-l12",
+      "ma-g5-mathematics-u08-l13",
+      "ma-g5-mathematics-u08-l14",
+      "ma-g5-mathematics-u08-l17",
+      "ma-g5-mathematics-u08-l18",
+      "ma-g5-mathematics-u09-l01",
+      "ma-g5-mathematics-u09-l02",
+      "ma-g5-mathematics-u09-l03",
+      "ma-g5-mathematics-u09-l04",
+      "ma-g5-mathematics-u09-l05",
+      "ma-g5-mathematics-u09-l06",
+      "ma-g5-mathematics-u09-l07",
+      "ma-g5-mathematics-u09-l08",
+      "ma-g5-mathematics-u09-l09",
+      "ma-g5-mathematics-u09-l10",
+      "ma-g5-mathematics-u09-l11",
+      "ma-g5-mathematics-u09-l12",
+      "ma-g5-mathematics-u09-l13",
+      "ma-g5-mathematics-u09-l14",
+      "ma-g5-mathematics-u09-l17",
+      "ma-g5-mathematics-u09-l18",
+      "ma-g5-mathematics-u10-l01",
+      "ma-g5-mathematics-u10-l02",
+      "ma-g5-mathematics-u10-l03",
+      "ma-g5-mathematics-u10-l05",
+      "ma-g5-mathematics-u10-l06",
+      "ma-g5-mathematics-u10-l07",
+      "ma-g5-mathematics-u10-l08",
+      "ma-g5-mathematics-u10-l09",
+      "ma-g5-mathematics-u10-l10",
+      "ma-g5-mathematics-u10-l11",
+      "ma-g5-mathematics-u10-l12",
+      "ma-g5-mathematics-u10-l13",
+      "ma-g5-mathematics-u10-l14",
+      "ma-g5-mathematics-u10-l17",
+      "ma-g5-mathematics-u10-l18"
+    ]
+  },
+  "negativeControls": {
+    "oneWorkedExampleOnly": 336,
+    "answerOnlyExample": 58,
+    "twoIndependentQuestions": 20,
+    "emptyMastery": 200,
+    "noExplicitRemediation": 540,
+    "engineeringLanguageDirection": 420,
+    "duplicateQuestionBankWithinLesson": 416,
+    "adultAnswerLeak": 0
+  },
+  "duplication": {
+    "lessonsWithExactWithinLesson": 0,
+    "lessonsWithNearWithinLesson": 416,
+    "duplicateBankClusters": 54,
+    "lessonsInDuplicateBankClusters": 130,
+    "lessonsWithCrossLessonExactPromptReuse": 310,
+    "crossLessonExactPromptGroups": 361,
+    "duplicateBankClusterMembers": [
+      {
+        "signature": "4d8407df2fce507e0d8f66f8c9255b87d241c193d0c484c847d48b68e0587389",
+        "lessonIds": [
+          "ma-g3-mathematics-u01-l02",
+          "ma-g3-mathematics-u01-l05"
+        ]
+      },
+      {
+        "signature": "c2272bdb861849336b746d86fe6cbd6d4a9891b3f5b3fc8ee29ac2c01fcc4c55",
+        "lessonIds": [
+          "ma-g3-mathematics-u01-l03",
+          "ma-g3-mathematics-u01-l04"
+        ]
+      },
+      {
+        "signature": "35939ffef9f34ec24dc7cfac03d56847a2b75f18040e6085dee0a378a16b69fd",
+        "lessonIds": [
+          "ma-g3-mathematics-u03-l01",
+          "ma-g3-mathematics-u03-l18"
+        ]
+      },
+      {
+        "signature": "b343c53ccd89f0034ce9d1890712064f93f50f4a486511f79a661a9579239b3e",
+        "lessonIds": [
+          "ma-g3-mathematics-u03-l03",
+          "ma-g3-mathematics-u03-l14"
+        ]
+      },
+      {
+        "signature": "df504e921cc8cc4f9d953b58b1c2fa47e5eaa4b56e0aee77066c20a25f5a266a",
+        "lessonIds": [
+          "ma-g3-mathematics-u04-l03",
+          "ma-g3-mathematics-u04-l07"
+        ]
+      },
+      {
+        "signature": "c2c425c743798b9d3f777c10b0911bb13e8dedc0f4624496f5f11d786dbd9237",
+        "lessonIds": [
+          "ma-g3-mathematics-u05-l03",
+          "ma-g3-mathematics-u05-l04",
+          "ma-g3-mathematics-u05-l09"
+        ]
+      },
+      {
+        "signature": "4318e78e5713cb3112b605bbecb74f380bc2c9bffd5a66d2ea7d77b1fcbbe88b",
+        "lessonIds": [
+          "ma-g3-mathematics-u05-l06",
+          "ma-g3-mathematics-u05-l07",
+          "ma-g3-mathematics-u05-l10"
+        ]
+      },
+      {
+        "signature": "fe8c15d7816e19ae90eac6f2242c82dc1cb88f204f3b27f437fe87edd432ac58",
+        "lessonIds": [
+          "ma-g3-mathematics-u05-l14",
+          "ma-g3-mathematics-u05-l15"
+        ]
+      },
+      {
+        "signature": "067572117897a63d90c0f862d8aab848b86ec17f4a43d736ec7af471b840966a",
+        "lessonIds": [
+          "ma-g3-mathematics-u06-l01",
+          "ma-g3-mathematics-u06-l17",
+          "ma-g3-mathematics-u06-l18"
+        ]
+      },
+      {
+        "signature": "ff4922550512e3b7c1a3f223d52a976bb1389bc6579e2a3e843e2b93aca5e21a",
+        "lessonIds": [
+          "ma-g3-mathematics-u06-l04",
+          "ma-g3-mathematics-u06-l06",
+          "ma-g3-mathematics-u06-l07",
+          "ma-g3-mathematics-u06-l10"
+        ]
+      },
+      {
+        "signature": "b4c1629f465f7991ccecbe50230933a0a11c99898bfdef62edc1cb432e53b268",
+        "lessonIds": [
+          "ma-g3-mathematics-u06-l05",
+          "ma-g3-mathematics-u06-l11"
+        ]
+      },
+      {
+        "signature": "f26e2c0bfcfa6bcc1638fdbbdab02d43dd1a3f52dcae419cebd211805095fa20",
+        "lessonIds": [
+          "ma-g3-mathematics-u06-l09",
+          "ma-g3-mathematics-u06-l15"
+        ]
+      },
+      {
+        "signature": "a5849e491c0ee044f05adbfac6c1e449e9647c314a14f147c96cf29b323a6fe3",
+        "lessonIds": [
+          "ma-g3-mathematics-u07-l02",
+          "ma-g3-mathematics-u07-l05"
+        ]
+      },
+      {
+        "signature": "72992c6536f3b80c61d07892e9fb334bdc4b5296d02c9bbe5a6e1cba293ca066",
+        "lessonIds": [
+          "ma-g3-mathematics-u07-l03",
+          "ma-g3-mathematics-u07-l04"
+        ]
+      },
+      {
+        "signature": "ddbeeef01d3aa745376144538dde95591abbcea712d8053b03cd74388db4f2cb",
+        "lessonIds": [
+          "ma-g3-mathematics-u08-l06",
+          "ma-g3-mathematics-u08-l10"
+        ]
+      },
+      {
+        "signature": "73e21f88d12b6bbadf60e56c6990beaa4392382ff078364bb6c078e4cc611533",
+        "lessonIds": [
+          "ma-g3-mathematics-u09-l03",
+          "ma-g3-mathematics-u09-l04"
+        ]
+      },
+      {
+        "signature": "4199cf3c6cfac8a8df694b36bd743a919bf096c6bda19e2c7c5295228bbddf6e",
+        "lessonIds": [
+          "ma-g3-mathematics-u10-l06",
+          "ma-g3-mathematics-u10-l07"
+        ]
+      },
+      {
+        "signature": "ce07f85c3d25f3aa2927dcab15aa1a6cc2d29f7ff2c6dfaf5b3f41423690efb0",
+        "lessonIds": [
+          "ma-g4-mathematics-u01-l04",
+          "ma-g4-mathematics-u01-l06",
+          "ma-g4-mathematics-u01-l07",
+          "ma-g4-mathematics-u01-l10"
+        ]
+      },
+      {
+        "signature": "817c186740f148a5e466d84636a7522d7c69360cda5f3f30708cb20785839511",
+        "lessonIds": [
+          "ma-g4-mathematics-u03-l01",
+          "ma-g4-mathematics-u03-l18"
+        ]
+      },
+      {
+        "signature": "be198202e7f3c8a6a78c46758848e417c07512557951173a91180070426727b7",
+        "lessonIds": [
+          "ma-g4-mathematics-u03-l06",
+          "ma-g4-mathematics-u03-l10"
+        ]
+      },
+      {
+        "signature": "6c14bbce55e44ff5956ba50e15c3d96f1f7e88d9291f8197a54722857c7bc370",
+        "lessonIds": [
+          "ma-g4-mathematics-u04-l01",
+          "ma-g4-mathematics-u04-l18"
+        ]
+      },
+      {
+        "signature": "16b5da0f9fb4839968d80fda172b65924f2eb89403cdb897068bdf7ca69c20f2",
+        "lessonIds": [
+          "ma-g4-mathematics-u04-l03",
+          "ma-g4-mathematics-u04-l09"
+        ]
+      },
+      {
+        "signature": "e0cf10cdfec7b0176f2112ad8af13f9e7f5f1b67b04120e18c43b2caa954b53d",
+        "lessonIds": [
+          "ma-g4-mathematics-u04-l04",
+          "ma-g4-mathematics-u04-l06",
+          "ma-g4-mathematics-u04-l07"
+        ]
+      },
+      {
+        "signature": "9ffce0383d348e8f71dd73931baec2dd2b52c3ffe4759bcdfa3211bd05b1d585",
+        "lessonIds": [
+          "ma-g4-mathematics-u05-l02",
+          "ma-g4-mathematics-u05-l05",
+          "ma-g4-mathematics-u05-l11"
+        ]
+      },
+      {
+        "signature": "786545de49f8204e295b984a4495ca22d36ba72902bdb6b9fbe56184044f0cc3",
+        "lessonIds": [
+          "ma-g4-mathematics-u05-l03",
+          "ma-g4-mathematics-u05-l04",
+          "ma-g4-mathematics-u05-l09"
+        ]
+      },
+      {
+        "signature": "2d2281bb78fbcf7092a5079be21727b0c101ecc3b8bce62f537bff19c7221a3c",
+        "lessonIds": [
+          "ma-g4-mathematics-u05-l07",
+          "ma-g4-mathematics-u05-l10"
+        ]
+      },
+      {
+        "signature": "657e24c0c8e77100a12679c9d472a1843d2a8bffa7ba88159e6b9419b8a90163",
+        "lessonIds": [
+          "ma-g4-mathematics-u06-l02",
+          "ma-g4-mathematics-u06-l05"
+        ]
+      },
+      {
+        "signature": "4e24b5b1327ef1968d5195cc027315b5747673adba0ea805df6492584802483c",
+        "lessonIds": [
+          "ma-g4-mathematics-u06-l03",
+          "ma-g4-mathematics-u06-l04",
+          "ma-g4-mathematics-u06-l06"
+        ]
+      },
+      {
+        "signature": "628bb1a77380febd8576f20bbc9a90e6e8912e9eec10311e6df8c0fd8a729717",
+        "lessonIds": [
+          "ma-g4-mathematics-u06-l07",
+          "ma-g4-mathematics-u06-l10"
+        ]
+      },
+      {
+        "signature": "6e5b6bd891b90ce1795beb9da7c67b3dea1de11da9336c1b40a7b654ffe23cd4",
+        "lessonIds": [
+          "ma-g4-mathematics-u06-l09",
+          "ma-g4-mathematics-u06-l14",
+          "ma-g4-mathematics-u06-l15"
+        ]
+      },
+      {
+        "signature": "5968f79f2cb5dfa569ad54d6b851c04619c9ad876b7bac55339d6e8e612f5acc",
+        "lessonIds": [
+          "ma-g4-mathematics-u07-l02",
+          "ma-g4-mathematics-u07-l05"
+        ]
+      },
+      {
+        "signature": "885b1d8e116761d4d7d218a1e287c2d956da889bbc0713ef497edaa2940c809e",
+        "lessonIds": [
+          "ma-g4-mathematics-u07-l03",
+          "ma-g4-mathematics-u07-l09"
+        ]
+      },
+      {
+        "signature": "e239b5f191d878b005117d2dc6e8800d61f6d25cc2c45518d1a2a6cbdd6b88d4",
+        "lessonIds": [
+          "ma-g4-mathematics-u07-l04",
+          "ma-g4-mathematics-u07-l06"
+        ]
+      },
+      {
+        "signature": "59480d4b091e514fa9ede96228c72b2d85eacc12fdcaaab91b6f34b971b8aa8b",
+        "lessonIds": [
+          "ma-g4-mathematics-u07-l07",
+          "ma-g4-mathematics-u07-l10"
+        ]
+      },
+      {
+        "signature": "ac22636869e9f50abe084270bf4b321940633a62ded00d7764bd044cd312690b",
+        "lessonIds": [
+          "ma-g4-mathematics-u07-l14",
+          "ma-g4-mathematics-u07-l15"
+        ]
+      },
+      {
+        "signature": "51d059caaad93dd2fb1311e51b6c73fa7fc9aee290b65381ba5cce0050681ad5",
+        "lessonIds": [
+          "ma-g4-mathematics-u08-l01",
+          "ma-g4-mathematics-u08-l18"
+        ]
+      },
+      {
+        "signature": "f79d6a333bbb7a43f66489ce3a0abcccd611e832336266fb2cf05f7673e4af31",
+        "lessonIds": [
+          "ma-g4-mathematics-u08-l04",
+          "ma-g4-mathematics-u08-l09"
+        ]
+      },
+      {
+        "signature": "dd49bd1b974d4626188a24479bd640319dfe1f5b49e61f4c45b24df7c2e7ef27",
+        "lessonIds": [
+          "ma-g4-mathematics-u08-l07",
+          "ma-g4-mathematics-u08-l10"
+        ]
+      },
+      {
+        "signature": "1ccb32becebeecf94eca9cf7db99e1f835a070c5a8987bffe09f82cff2eef04c",
+        "lessonIds": [
+          "ma-g4-mathematics-u08-l14",
+          "ma-g4-mathematics-u08-l15"
+        ]
+      },
+      {
+        "signature": "1bb55564a5899c790187265b449d8b7f34cf49757bb2aacb1d238004ff3fed4c",
+        "lessonIds": [
+          "ma-g4-mathematics-u09-l06",
+          "ma-g4-mathematics-u09-l10"
+        ]
+      },
+      {
+        "signature": "8de1bd5d5d3b0e22e12ca6be5da16a5900cb81baee0fea9e6e757d240adff5fa",
+        "lessonIds": [
+          "ma-g4-mathematics-u10-l06",
+          "ma-g4-mathematics-u10-l07",
+          "ma-g4-mathematics-u10-l10"
+        ]
+      },
+      {
+        "signature": "170a0c4e574ea9802f392e99898366ccb14eebd4c417ca72a378eb517f5edd66",
+        "lessonIds": [
+          "ma-g5-mathematics-u06-l02",
+          "ma-g5-mathematics-u06-l05",
+          "ma-g5-mathematics-u06-l08"
+        ]
+      },
+      {
+        "signature": "95ab6105c89812ae944c3973f622c3542d4b9745b73cca83a286994db40626c9",
+        "lessonIds": [
+          "ma-g5-mathematics-u06-l03",
+          "ma-g5-mathematics-u06-l06",
+          "ma-g5-mathematics-u06-l09"
+        ]
+      },
+      {
+        "signature": "b6657f7c9289c839adab7d71553dac60303ebb757881b7922339e8f281d80d04",
+        "lessonIds": [
+          "ma-g5-mathematics-u06-l07",
+          "ma-g5-mathematics-u06-l10"
+        ]
+      },
+      {
+        "signature": "7a224be8161b23160274631866c8414213bcd4f9fdc20ad0f071ab5d4c6267e8",
+        "lessonIds": [
+          "ma-g5-mathematics-u06-l11",
+          "ma-g5-mathematics-u06-l18"
+        ]
+      },
+      {
+        "signature": "e55af0851cef499b3f8cb30534de82a2bb7904183905d10de7f0d6e01f19d328",
+        "lessonIds": [
+          "ma-g5-mathematics-u06-l13",
+          "ma-g5-mathematics-u06-l15",
+          "ma-g5-mathematics-u06-l16"
+        ]
+      },
+      {
+        "signature": "46427a769623430746dd3b960bac483e757bddee2d4712323e821fd2217b33a1",
+        "lessonIds": [
+          "ma-g5-mathematics-u07-l02",
+          "ma-g5-mathematics-u07-l05",
+          "ma-g5-mathematics-u07-l08"
+        ]
+      },
+      {
+        "signature": "48839806b03f41bf4492674274f505baec4ac2c499bf235d8645ad69cee1d660",
+        "lessonIds": [
+          "ma-g5-mathematics-u07-l03",
+          "ma-g5-mathematics-u07-l06",
+          "ma-g5-mathematics-u07-l09"
+        ]
+      },
+      {
+        "signature": "7d381ef40c0c47b57ad1b7962c1aa1fdcbaa58014024d1a3973b66721f23734d",
+        "lessonIds": [
+          "ma-g5-mathematics-u07-l07",
+          "ma-g5-mathematics-u07-l10"
+        ]
+      },
+      {
+        "signature": "31b402b17c0508fba9d3ecea4a7840ec9f083bb84a0dccc919096f493614005a",
+        "lessonIds": [
+          "ma-g5-mathematics-u07-l11",
+          "ma-g5-mathematics-u07-l18"
+        ]
+      },
+      {
+        "signature": "27193e97af59fde2be68cbc3751842bf9306dfe2d4874255954b5634ac5f239f",
+        "lessonIds": [
+          "ma-g5-mathematics-u07-l13",
+          "ma-g5-mathematics-u07-l15",
+          "ma-g5-mathematics-u07-l16"
+        ]
+      },
+      {
+        "signature": "1e58ac634e352b8ef4348d36b91f1e895f8d3e74b1a23114c90c71fb19eb648f",
+        "lessonIds": [
+          "ma-g5-mathematics-u08-l02",
+          "ma-g5-mathematics-u08-l05",
+          "ma-g5-mathematics-u08-l08"
+        ]
+      },
+      {
+        "signature": "ab9f8ff858213f78e2f8c6239e0a38a40ee663f251315293943e23917ef7b2ca",
+        "lessonIds": [
+          "ma-g5-mathematics-u08-l03",
+          "ma-g5-mathematics-u08-l06",
+          "ma-g5-mathematics-u08-l09"
+        ]
+      },
+      {
+        "signature": "ee2bff47b310417af3372ab7bef45f51f2dfa2a6055c28ad18169189155a39b7",
+        "lessonIds": [
+          "ma-g5-mathematics-u10-l02",
+          "ma-g5-mathematics-u10-l05",
+          "ma-g5-mathematics-u10-l08"
+        ]
+      }
+    ]
+  },
+  "passiveQuestionListLessons": 90,
+  "questionVariety": {
+    "distinctItemTypesPerLesson": {
+      "n": 540,
+      "min": 1,
+      "p10": 1,
+      "p25": 1,
+      "median": 2,
+      "p75": 6,
+      "p90": 9,
+      "max": 12,
+      "mean": 3.88
+    },
+    "distinctStandardsPerLesson": {
+      "n": 540,
+      "min": 1,
+      "p10": 1,
+      "p25": 1,
+      "median": 2,
+      "p75": 3,
+      "p90": 5,
+      "max": 9,
+      "mean": 2.44
+    },
+    "promptTemplatesPerLesson": {
+      "n": 540,
+      "min": 1,
+      "p10": 1,
+      "p25": 2,
+      "median": 4,
+      "p75": 7,
+      "p90": 9,
+      "max": 12,
+      "mean": 4.83
+    },
+    "constructedResponseItemsPerLesson": {
+      "n": 540,
+      "min": 0,
+      "p10": 0,
+      "p25": 0,
+      "median": 0,
+      "p75": 2,
+      "p90": 2,
+      "max": 3,
+      "mean": 0.63
+    },
+    "lessonsWithOnePromptTemplate": 81
+  },
+  "answerLeakage": {
+    "forbiddenFieldLessons": 0,
+    "verbalLeakLessons": 0,
+    "shownAnswerReuseLessons": 0,
+    "adultAnswerLeakLessons": []
+  },
+  "readability": {
+    "totalFindings": 3680,
+    "lessonsAffected": 518,
+    "byCode": {
+      "ENGINEERING_LANGUAGE": 420,
+      "LONG_SENTENCE": 366,
+      "MULTI_CLAUSE_DIRECTIONS": 520,
+      "TEACHER_FACING_LANGUAGE": 1192,
+      "UNEXPLAINED_NON_MATH_VOCABULARY": 1182
+    }
+  },
+  "targetStandard": {
+    "baseTargets": {
+      "diagnostic": {
+        "teaching": 1,
+        "worked": 1,
+        "guided": 0,
+        "independent": 5,
+        "mastery": 3,
+        "remediation": 0,
+        "challenge": 0
+      },
+      "normal": {
+        "teaching": 1,
+        "worked": 2,
+        "guided": 4,
+        "independent": 5,
+        "mastery": 3,
+        "remediation": 0,
+        "challenge": 0
+      },
+      "review": {
+        "teaching": 0,
+        "worked": 0,
+        "guided": 0,
+        "independent": 8,
+        "mastery": 4,
+        "remediation": 0,
+        "challenge": 0
+      },
+      "remediation": {
+        "teaching": 1,
+        "worked": 2,
+        "guided": 4,
+        "independent": 3,
+        "mastery": 0,
+        "remediation": 3,
+        "challenge": 0
+      },
+      "mastery": {
+        "teaching": 0,
+        "worked": 0,
+        "guided": 0,
+        "independent": 6,
+        "mastery": 3,
+        "remediation": 0,
+        "challenge": 0
+      },
+      "assessment": {
+        "teaching": 0,
+        "worked": 0,
+        "guided": 0,
+        "independent": 0,
+        "mastery": 8,
+        "remediation": 0,
+        "challenge": 0
+      },
+      "other": {
+        "teaching": 1,
+        "worked": 2,
+        "guided": 2,
+        "independent": 4,
+        "mastery": 0,
+        "remediation": 0,
+        "challenge": 2
+      }
+    },
+    "profileOverrides": {
+      "error-analysis-and-repair": {
+        "mastery": 0
+      },
+      "reteach": {
+        "mastery": 0
+      },
+      "targeted-correction": {
+        "mastery": 0
+      },
+      "targeted-correction-and-reassessment": {
+        "independent": 0,
+        "mastery": 3
+      },
+      "performance-planning": {
+        "independent": 0,
+        "mastery": 0,
+        "worked": 2,
+        "guided": 3,
+        "challenge": 2
+      },
+      "performance-build": {
+        "teaching": 0,
+        "worked": 0,
+        "guided": 3,
+        "independent": 5,
+        "mastery": 0,
+        "challenge": 2
+      },
+      "transfer-reflection-publication": {
+        "guided": 0,
+        "independent": 4
+      },
+      "publication-reflection": {
+        "guided": 0,
+        "independent": 4
+      },
+      "transfer": {
+        "guided": 0,
+        "independent": 5
+      },
+      "concept-extension": {
+        "mastery": 0,
+        "challenge": 2
+      }
+    }
+  },
+  "tutorReadiness": {
+    "conceptIds": {
+      "status": "PARTIAL_DERIVATION_ONLY",
+      "coverage": {
+        "scoredItems": 4488,
+        "withItemType": 4488,
+        "withStandard": 4488,
+        "explicitConceptId": 0
+      },
+      "gap": "itemType plus standard can form a provisional concept key, but no stable canonical conceptId or concept-version field exists."
+    },
+    "prerequisites": {
+      "status": "GAP",
+      "coverage": {
+        "lessons": 540,
+        "explicitPrerequisiteLists": 0
+      },
+      "gap": "Course order can suggest earlier material, but no prerequisite edge, required concept, or minimum mastery threshold is encoded."
+    },
+    "misconceptionMetadata": {
+      "status": "PARTIAL_ADULT_KEY_ONLY",
+      "coverage": {
+        "keyedAnswers": 4488,
+        "answersWithCommonErrors": 4488,
+        "answersWhoseErrorsAllHaveRemediation": 4488,
+        "explicitMisconceptionIds": 0
+      },
+      "gap": "Adult keys carry observed/likelyCause/remediation prose, but there are no stable misconception IDs, trigger signatures, severities, or cross-item mappings."
+    },
+    "phaseInformation": {
+      "status": "DERIVABLE",
+      "coverage": {
+        "lessons": 540,
+        "withLessonPhase": 540,
+        "withBlueprintProfile": 540,
+        "withSectionKinds": 540
+      },
+      "gap": "Phase and section order are present, but no Tutor V2 state transition or retry policy is encoded."
+    },
+    "answerPolicy": {
+      "status": "PARTIAL_ADULT_KEY_ONLY",
+      "coverage": {
+        "scoredItems": 4488,
+        "keyedAnswers": 4488,
+        "withAnswerType": 4488,
+        "withVerificationMethod": 4488,
+        "explicitLearnerHintPolicy": 0
+      },
+      "gap": "Separate answer authority is strong, but hint timing, reveal rules, attempt limits, acceptable equivalent forms, and adult-only access policy are not a complete runtime contract."
+    },
+    "agePolicy": {
+      "status": "GAP",
+      "coverage": {
+        "lessons": 540,
+        "withGrade": 540,
+        "explicitAgePolicy": 0,
+        "explicitReadabilityBand": 0
+      },
+      "gap": "Grade is present, but no age band, vocabulary policy, sentence/direction limits, or child/adult visibility tag exists."
+    }
+  },
+  "finalClassification": "ELEMENTARY_MATH_DEPTH_AUDIT_COMPLETE",
+  "auditBlockers": [],
+  "repairPrerequisites": [
+    "Restore the Grade 3/4 canonical generator source from mac/g34-math-production-r1@c3b24f047b8aebd5e08f9b8022eef20ea187e190 before repair.",
+    "Restore the shared Grade 5-12 composition source from mac/math-production-materials-r1@314f517f98a5d4a10415676f49576f526cd1f1d9 before composition repair."
+  ]
+}
