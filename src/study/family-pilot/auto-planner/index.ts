@@ -18,8 +18,11 @@ export {
   FAMILY_AUTO_PLANNER_RECORD_PREFIX,
   familyAutoPlannerRecordKey,
   openFamilyAutoPlannerIndexedDbStore,
+  parseFamilyAutoPlannerDocument,
+  parseFamilyAutoPlannerRecord,
   type FamilyAutoPlannerIndexedDbStore,
   type FamilyAutoPlannerIndexedDbStoreOptions,
+  type FamilyAutoPlannerRecordV1,
 } from './indexedDbStore'
 export {
   autoPlannerMaterializationRef,

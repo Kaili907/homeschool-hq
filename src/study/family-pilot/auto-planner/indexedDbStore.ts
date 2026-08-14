@@ -24,7 +24,7 @@ const ENVELOPE_VERSION = 1 as const
 const MAX_MATERIALIZATIONS = 10_000
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,191}$/
 
-interface PlannerEnvelopeV1 {
+export interface FamilyAutoPlannerRecordV1 {
   readonly envelopeVersion: typeof ENVELOPE_VERSION
   readonly key: string
   readonly document: FamilyAutoPlannerDocumentV1
@@ -72,7 +72,7 @@ function parseMaterialization(value: unknown): FamilyAutoPlannerMaterializationV
   return Object.freeze(value as unknown as FamilyAutoPlannerMaterializationV1)
 }
 
-function parseDocument(value: unknown, scope: FamilyAutoPlannerScope): FamilyAutoPlannerDocumentV1 | null {
+export function parseFamilyAutoPlannerDocument(value: unknown, scope: FamilyAutoPlannerScope): FamilyAutoPlannerDocumentV1 | null {
   if (!isRecord(value) || value.schemaVersion !== FAMILY_AUTO_PLANNER_SCHEMA_VERSION || !isRecord(value.scope)) return null
   if (value.scope.householdRef !== scope.householdRef || value.scope.learnerRef !== scope.learnerRef) return null
   if (!Number.isSafeInteger(value.revision) || Number(value.revision) < 0 || !isInstant(value.updatedAt)) return null
@@ -92,6 +92,13 @@ function parseDocument(value: unknown, scope: FamilyAutoPlannerScope): FamilyAut
   })
 }
 
+export function parseFamilyAutoPlannerRecord(raw: unknown, scope: FamilyAutoPlannerScope): FamilyAutoPlannerRecordV1 | null {
+  const key = recordKey(scope)
+  if (!isRecord(raw) || raw.envelopeVersion !== ENVELOPE_VERSION || raw.key !== key) return null
+  const document = parseFamilyAutoPlannerDocument(raw.document, scope)
+  return document ? Object.freeze({ envelopeVersion: ENVELOPE_VERSION, key, document }) : null
+}
+
 function parseEnvelope(raw: unknown, key: string, scope: FamilyAutoPlannerScope): FamilyAutoPlannerStoreLoad | null {
   if (!isRecord(raw)) return null
   if (typeof raw.envelopeVersion === 'number' && raw.envelopeVersion > ENVELOPE_VERSION) {
@@ -101,7 +108,7 @@ function parseEnvelope(raw: unknown, key: string, scope: FamilyAutoPlannerScope)
   if (isRecord(raw.document) && typeof raw.document.schemaVersion === 'number' && raw.document.schemaVersion > FAMILY_AUTO_PLANNER_SCHEMA_VERSION) {
     return { status: 'read-only', reason: 'schema-version-ahead' }
   }
-  const document = parseDocument(raw.document, scope)
+  const document = parseFamilyAutoPlannerDocument(raw.document, scope)
   return document ? { status: 'ready', document } : { status: 'read-only', reason: 'record-unreadable' }
 }
 
@@ -132,11 +139,11 @@ export async function openFamilyAutoPlannerIndexedDbStore(
       expectedRevision: number,
     ): Promise<FamilyAutoPlannerStoreSave> {
       const key = recordKey(scope)
-      const parsed = parseDocument(document, scope)
+      const parsed = parseFamilyAutoPlannerDocument(document, scope)
       if (!parsed || parsed.revision !== expectedRevision + 1) {
         return { status: 'read-only', reason: 'Candidate planner document is invalid.' }
       }
-      const envelope: PlannerEnvelopeV1 = Object.freeze({ envelopeVersion: ENVELOPE_VERSION, key, document: parsed })
+      const envelope: FamilyAutoPlannerRecordV1 = Object.freeze({ envelopeVersion: ENVELOPE_VERSION, key, document: parsed })
       try {
         await records.write(key, envelope, (current) => {
           if (current === undefined) return expectedRevision === 0

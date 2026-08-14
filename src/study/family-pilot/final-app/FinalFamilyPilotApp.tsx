@@ -5,7 +5,13 @@ import {
 } from '../../../curriculum/final-app-data'
 import type { AcademySubject } from '../../../types'
 import { FamilyPilotStudentLogin } from '../auth'
-import { exportFinalFamilyPilotBackup, downloadFinalFamilyPilotBackup, restoreFinalFamilyPilotBackup } from './backup'
+import {
+  downloadFinalFamilyPilotBackup,
+  exportFinalFamilyPilotBackup,
+  parentBackupMessage,
+  previewFinalFamilyPilotRestore,
+  restoreFinalFamilyPilotBackup,
+} from './backup'
 import {
   buildFamilyPilotStudentDashboardModel,
   type FamilyPilotStudentDashboardModel,
@@ -153,9 +159,54 @@ function MountedFinalFamilyPilot({
 
   const doRestore = async (file: File | undefined) => {
     if (!file) return
-    const restored = await restoreFinalFamilyPilotBackup(await file.text())
-    if (restored.status === 'rejected') window.alert(`Backup was not restored: ${restored.reasonCode}`)
-    else refresh()
+    const text = await file.text()
+    const preview = await previewFinalFamilyPilotRestore(text)
+    if (preview.status === 'rejected') {
+      window.alert(`Backup was not restored. ${parentBackupMessage(preview.reasonCode)}`)
+      return
+    }
+    const counts = preview.backup.recordCounts
+    const learnerNames = preview.learners.map((learner) => learner.displayName).join(', ')
+    const confirmed = window.confirm([
+      'Review this backup before restoring',
+      '',
+      `Backup date: ${new Date(preview.backup.createdAt).toLocaleString()}`,
+      `Format version: ${preview.backup.backupSchemaVersion}`,
+      `Learners: ${learnerNames || 'None'}`,
+      `Assignments: ${counts.assignments}`,
+      `Study sessions: ${counts.studySessions}`,
+      `Assessment states: ${counts.assessmentStates}`,
+      `School Plans: ${counts.schoolPlans}`,
+      '',
+      `Change: ${preview.changes.mode.replaceAll('-', ' ')}`,
+      'A local safety snapshot will be created first. Continue?',
+    ].join('\n'))
+    if (!confirmed) return
+    const parentPin = !parentAuthorized && !preview.requiresNewParentPin
+      ? window.prompt(
+        'Enter the current Parent PIN to authorize restore.') ?? undefined
+      : undefined
+    const newParentPin = preview.requiresNewParentPin
+      ? window.prompt('Set a new 4-digit Parent PIN for this device after restore.') ?? undefined
+      : undefined
+    if (preview.requiresNewParentPin) {
+      const confirmation = window.prompt('Enter the new Parent PIN again to confirm.') ?? undefined
+      if (!newParentPin || newParentPin !== confirmation) {
+        window.alert('Backup was not restored. The new Parent PIN entries did not match.')
+        return
+      }
+    }
+    const restored = await restoreFinalFamilyPilotBackup(text, {
+      preview,
+      authority: preview.requiresNewParentPin
+        ? { newParentPin }
+        : parentAuthorized ? { parentAuthorized: true } : { parentPin },
+    })
+    if (restored.status === 'rejected') window.alert(`Backup was not restored. ${parentBackupMessage(restored.reasonCode)}`)
+    else {
+      window.alert('Backup restored. A pre-restore safety snapshot was saved on this device.')
+      refresh()
+    }
   }
 
   if (app.status !== 'ready') {
@@ -498,12 +549,16 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
       ) : (
         <section className="mt-6 rounded-2xl border bg-white p-5">
           <h3 className="text-xl font-extrabold">Backup and recovery</h3>
-          <p className="mt-2 text-slate-600">Exports minimized roster, assignment progress, exact segment references, source metadata, attestations, preferences, and safety state. It never includes learner answers or Tutor conversations.</p>
-          <div className="mt-4 flex gap-3">
+          <p className="mt-2 text-slate-600">Exports learner profiles and working levels, course and assignment progress, exact Study segment references, assessment states, School Plans, source metadata, attestations, preferences, and safety state. It never includes PINs, network secrets, learner answers, answer authority, or Tutor conversations.</p>
+          <p className="mt-2 text-sm font-semibold text-slate-700">Restore always verifies the checksum, shows a preview, requires Parent authorization, and creates a local safety snapshot before replacing data.</p>
+          <div className="mt-4 flex flex-wrap gap-3">
             <button type="button" className="rounded-lg bg-cyan-700 px-4 py-2 font-bold text-white" onClick={() => { void exportFinalFamilyPilotBackup()
               .then(downloadFinalFamilyPilotBackup)
-              .catch((error: unknown) => window.alert(messageOf(error))) }}>Download backup</button>
-            <button type="button" className="rounded-lg border px-4 py-2 font-bold" onClick={() => restoreInput.current?.click()}>Restore validated backup</button>
+              .catch((error: unknown) => window.alert(messageOf(error))) }}>Download family backup</button>
+            <button type="button" className="rounded-lg border border-cyan-700 px-4 py-2 font-bold text-cyan-900" onClick={() => { void exportFinalFamilyPilotBackup({ learnerRef: selected.studentRef })
+              .then(downloadFinalFamilyPilotBackup)
+              .catch((error: unknown) => window.alert(messageOf(error))) }}>Download {selected.displayName}&apos;s backup</button>
+            <button type="button" className="rounded-lg border px-4 py-2 font-bold" onClick={() => restoreInput.current?.click()}>Preview backup to restore</button>
           </div>
           <input ref={restoreInput} className="hidden" type="file" accept="application/json" onChange={(event) => void onRestore(event.target.files?.[0])} />
         </section>
