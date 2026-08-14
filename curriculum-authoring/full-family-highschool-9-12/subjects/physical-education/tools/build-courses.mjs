@@ -13,7 +13,7 @@ import { mkdir, writeFile, rm } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { COURSES, STANDARD, LEVEL, anchor } from './course-data.mjs'
-import { buildTransferAuthorityRecord } from './transfer-authority.mjs'
+import { bindSourceSemanticFields, buildTransferAuthorityRecord } from './transfer-authority.mjs'
 
 const TOOLS_DIR = path.dirname(fileURLToPath(import.meta.url))
 const DEFAULT_OUT = path.join(path.dirname(TOOLS_DIR), 'build')
@@ -177,7 +177,7 @@ function buildLesson(course, unit, unitNumber, dayInUnit, courseDay) {
           },
         ]
 
-  return {
+  const lesson = {
     schema_version: '1.0',
     lesson_id: lessonId,
     course_id: course.courseId,
@@ -252,6 +252,8 @@ function buildLesson(course, unit, unitNumber, dayInUnit, courseDay) {
         ? `Invite the learner to notice or try one safe, optional example of ${focus} in daily life. No purchase, account creation, photograph, recording, or public performance is required.`
         : `Invite the learner to notice where ${focus} shows up outside the session under real conditions. No purchase, account creation, photograph, recording, or public performance is required.`,
   }
+  if (lesson.transfer_authority) lesson.transfer_authority = bindSourceSemanticFields(lesson.transfer_authority, lesson)
+  return lesson
 }
 
 function buildAssessment(course, unit, unitNumber) {

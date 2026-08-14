@@ -5,84 +5,6 @@
   "courseId": "ma-g11-physical-education",
   "grade": 11,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g11-physical-education-u04-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g11-physical-education-u04-l11:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g11-physical-education-u04:in-activity adjustment and its limits",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "CONSTRAINT_PRACTICE",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g11-physical-education-u04-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u04-l11:focus-action",
-        "ma-g11-physical-education-u04-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "CONSTRAINT_PRACTICE",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u04-l11:focus-action",
-        "ma-g11-physical-education-u04-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u04-l11:focus-action",
-        "ma-g11-physical-education-u04-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 4,
   "unitTitle": "Advanced Tactics and Game Sense",
   "title": "Unit assessment: in-activity adjustment and its limits under transfer",
@@ -176,6 +98,79 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g11-physical-education-u04-l11"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g11-physical-education-u04-transfer-v3",
+    "task": {
+      "actionKey": "ma-g11-physical-education-u04-l11:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g11-physical-education-u04:in-activity adjustment and its limits",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "CONSTRAINT_PRACTICE",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g11-physical-education-u04-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u04-l11:focus-action",
+        "ma-g11-physical-education-u04-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "CONSTRAINT_PRACTICE",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u04-l11:focus-action",
+        "ma-g11-physical-education-u04-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "cb75d6a3c7779dae4768160a4e1f3451156b0b44d99362d3b33fa55db0ab2ca9",
+        "completionCriteria": "615a99ae28175e045a4535e443751b8cc1efdf458c76bc62ef74804a71a456c1",
+        "activitySteps": "f6dbae204ed26456f3756a7df536eb2419823fa1d4997647cc5c51f3629dbc6e",
+        "safetyRules": "928a38e242b4530fee1cba0d25eb0711ab4b810fcdd3019f25e3a8104df7200a",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "3cc22f46f853e1fad98c0f1e5fe8a992d16651167346f76f4d23f1385207ef68",
+        "accessibleAdaptation": "3cc22f46f853e1fad98c0f1e5fe8a992d16651167346f76f4d23f1385207ef68",
+        "lowSpaceNoEquipmentAlternative": "e0dfd4a47aa96b942b9f454cd42ff3fb71ede19e9585981b3b182fcb459a418f",
+        "equipmentRequirements": "ee3f5a33e5e485534493bd013d6b57de1b71576989cd3fd04297330d6e87ce49"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

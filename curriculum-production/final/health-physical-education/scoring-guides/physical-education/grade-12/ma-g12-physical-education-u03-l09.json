@@ -5,81 +5,6 @@
   "courseId": "ma-g12-physical-education",
   "grade": 12,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g12-physical-education-u03-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g12-physical-education-u03-l09:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g12-physical-education-u03:contracts, memberships, and cancellation terms",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "BUDGET_SCENARIO",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g12-physical-education-u03-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u03-l09:focus-action",
-        "ma-g12-physical-education-u03-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "BUDGET_SCENARIO",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u03-l09:focus-action",
-        "ma-g12-physical-education-u03-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u03-l09:focus-action",
-        "ma-g12-physical-education-u03-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
     "The learner holds contracts, memberships, and cancellation terms costed against a real budget the learner sets, building an activity life at the lowest workable spend, in whatever version their body and setting allow.",
@@ -145,6 +70,91 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g12-physical-education-u03-l09"
+  },
+  "transferRubric": {
+    "schemaVersion": "manuel-academy.pe-adult-transfer-semantics.v1",
+    "authorityRef": "ma-g12-physical-education-u03-transfer-v3",
+    "judgedTask": {
+      "actionKey": "ma-g12-physical-education-u03-l09:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g12-physical-education-u03:contracts, memberships, and cancellation terms",
+      "executionRequired": false
+    },
+    "requiredSpan": {
+      "spanUnit": "BUDGET_SCENARIO",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restCredit": {
+      "restAllowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g12-physical-education-u03-transfer-v3:condition"
+    },
+    "completionJudgment": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u03-l09:focus-action",
+        "ma-g12-physical-education-u03-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "BUDGET_SCENARIO",
+        "maximumCount": 1
+      }
+    },
+    "equalCreditJudgment": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u03-l09:focus-action",
+        "ma-g12-physical-education-u03-transfer-v3:condition"
+      ]
+    },
+    "rubricEvidence": {
+      "scoringAuthority": "RUBRIC",
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u03-l09:focus-action",
+        "ma-g12-physical-education-u03-transfer-v3:condition"
+      ],
+      "bodyMetricsScored": false,
+      "participantCountScored": false
+    },
+    "adaptiveJudgment": {
+      "safeReductionPreservesParticipationCredit": true,
+      "alternateRouteCanEarnTransferCredit": true,
+      "alternateRouteMustPreserveEvidence": true,
+      "guardianBoundaryRetained": true
+    },
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "successCriteria": "621f87c78b22d3e0d9404ffc2a9bc35b9da8a5207d1dda27862365ba06e2c400",
+        "scoringGuidance": "d1b2cd87b26a6f0a74f0b83974807ea51ff55fe6ba9544bb5abae845b24b4567",
+        "masteryRule": "5981c33bce67b19f5cbd151a856acb54b25b05923d533c39cd4212cbcbf1b488",
+        "adaptiveRoutes": "e32d4ec138ecf75fc81999c9f1bfb55ff0e1e578de79649f47d6486b11ee1e17",
+        "guardianOrParentVisibility": "f89219e873a0c7e40d32daac2a2746694a1bd895525aa12eaf42a9c1665ff9c8",
+        "guardianSafetyReview": "ccb96e8ec163ba44396b9c197f1a1a82c168eefe527fe74ebdc5e663eb770f29",
+        "safetyAndPrivacyNotes": "66239631ea1c69f9947fb85f1b2004a19b93a281b169b000e751fcfd2b70c027"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

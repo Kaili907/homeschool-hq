@@ -8,7 +8,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { validateTransferAuthorityRecord } from './transfer-authority.mjs'
+import { validateSourceSemanticBindings, validateTransferAuthorityRecord } from './transfer-authority.mjs'
 
 const TOOLS_DIR = path.dirname(fileURLToPath(import.meta.url))
 const DEFAULT_BUILD = path.join(path.dirname(TOOLS_DIR), 'build')
@@ -309,9 +309,9 @@ export function checkMultiOccasionEvidence({ courses }) {
   return findings.length ? fail('multi-occasion-evidence', 'single-occasion mastery found', findings) : ok('multi-occasion-evidence', 'every lesson and assessment requires evidence across more than one occasion or setting')
 }
 
-// Gate 10 — every second-pass lesson carries a prose-independent structured
-// authority record. The 96 R1 repairs additionally identify their authored
-// unit evidence in that record; no phrase matching is part of this gate.
+// Gate 10 — every second-pass lesson carries strict structured authority and
+// binds its actual learner/adult authored fields. The 96 R1 repairs additionally
+// identify their authored unit evidence; no phrase matching is part of this gate.
 export function checkTransferEvidenceAuthority({ courses }) {
   const findings = []
   let repairedLessons = 0
@@ -327,6 +327,7 @@ export function checkTransferEvidenceAuthority({ courses }) {
       structuredLessons += 1
       if (!l.transfer_condition) findings.push({ source: l.lesson_id, text: 'second-pass transfer condition is missing' })
       for (const error of validateTransferAuthorityRecord(l.transfer_authority)) findings.push({ source: l.lesson_id, text: error })
+      for (const error of validateSourceSemanticBindings(l.transfer_authority, l)) findings.push({ source: l.lesson_id, text: error })
       if (l.transfer_authority?.learnerTask?.actionId !== `${l.lesson_id}:focus-action`) findings.push({ source: l.lesson_id, text: 'structured learner action is not bound to this lesson' })
       if (evidence) repairedLessons += 1
       if (Boolean(evidence) !== l.transfer_authority?.completionEvidence?.requiredEvidenceIds?.includes('AUTHORED_UNIT_EVIDENCE')) findings.push({ source: l.lesson_id, text: 'authored unit-evidence marker does not match the canonical repair boundary' })

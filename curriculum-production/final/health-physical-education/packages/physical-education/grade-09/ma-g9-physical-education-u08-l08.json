@@ -5,84 +5,6 @@
   "courseId": "ma-g9-physical-education",
   "grade": 9,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g9-physical-education-u08-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g9-physical-education-u08-l08:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g9-physical-education-u08:rules, officiating basics, and honest self-calling",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "INCLUSION_SCENARIO",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g9-physical-education-u08-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u08-l08:focus-action",
-        "ma-g9-physical-education-u08-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "INCLUSION_SCENARIO",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u08-l08:focus-action",
-        "ma-g9-physical-education-u08-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u08-l08:focus-action",
-        "ma-g9-physical-education-u08-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 8,
   "unitTitle": "Responsible Participation, Inclusion, and Etiquette",
   "title": "Reteach and varied practice: rules, officiating basics, and honest self-calling under transfer",
@@ -177,6 +99,79 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g9-physical-education-u08-l08"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g9-physical-education-u08-transfer-v3",
+    "task": {
+      "actionKey": "ma-g9-physical-education-u08-l08:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g9-physical-education-u08:rules, officiating basics, and honest self-calling",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "INCLUSION_SCENARIO",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g9-physical-education-u08-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g9-physical-education-u08-l08:focus-action",
+        "ma-g9-physical-education-u08-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "INCLUSION_SCENARIO",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g9-physical-education-u08-l08:focus-action",
+        "ma-g9-physical-education-u08-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "144984882b5d1472b5ded8d57d34f54650c12ac96237905a9d1f70f7a4414e10",
+        "completionCriteria": "be6aae8788afceb1ab62c5ccbc08afd3b6cd629151a9f28f2c273f7dc2e23e27",
+        "activitySteps": "57e70d2357b7e7d765e522e9dd84cb32c18df6cf819a63a83942ee8d845a4860",
+        "safetyRules": "1c615c4b4b156e90b05580fe6521c0ce630c031c36c6dfcc062a4991ee6ed365",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "5af08195f5c7ae1e1b781ba193a24c4caf4380f1459d0b52b081a9402b9c9781",
+        "accessibleAdaptation": "5af08195f5c7ae1e1b781ba193a24c4caf4380f1459d0b52b081a9402b9c9781",
+        "lowSpaceNoEquipmentAlternative": "7a8cc10db2e45231acba167fcb31b635b7698dbe94cf1046ea7f8ab1269f81ca",
+        "equipmentRequirements": "8face72ca54abb49c1f47344b71780440077d48c3197dcf1b9fd5cf3d2fd8f9b"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

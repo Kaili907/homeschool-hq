@@ -5,81 +5,6 @@
   "courseId": "ma-g10-physical-education",
   "grade": 10,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g10-physical-education-u06-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g10-physical-education-u06-l12:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g10-physical-education-u06:trying an activity form that is unfamiliar and reflecting honestly",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "ACCESS_REDESIGN",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g10-physical-education-u06-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u06-l12:focus-action",
-        "ma-g10-physical-education-u06-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "ACCESS_REDESIGN",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u06-l12:focus-action",
-        "ma-g10-physical-education-u06-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u06-l12:focus-action",
-        "ma-g10-physical-education-u06-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
     "The learner holds trying an activity form that is unfamiliar and reflecting honestly by taking an activity the learner already does and redesigning it for a body or an access situation that is not their own, in whatever version their body and setting allow.",
@@ -145,6 +70,91 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g10-physical-education-u06-l12"
+  },
+  "transferRubric": {
+    "schemaVersion": "manuel-academy.pe-adult-transfer-semantics.v1",
+    "authorityRef": "ma-g10-physical-education-u06-transfer-v3",
+    "judgedTask": {
+      "actionKey": "ma-g10-physical-education-u06-l12:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g10-physical-education-u06:trying an activity form that is unfamiliar and reflecting honestly",
+      "executionRequired": false
+    },
+    "requiredSpan": {
+      "spanUnit": "ACCESS_REDESIGN",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restCredit": {
+      "restAllowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g10-physical-education-u06-transfer-v3:condition"
+    },
+    "completionJudgment": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u06-l12:focus-action",
+        "ma-g10-physical-education-u06-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "ACCESS_REDESIGN",
+        "maximumCount": 1
+      }
+    },
+    "equalCreditJudgment": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u06-l12:focus-action",
+        "ma-g10-physical-education-u06-transfer-v3:condition"
+      ]
+    },
+    "rubricEvidence": {
+      "scoringAuthority": "RUBRIC",
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u06-l12:focus-action",
+        "ma-g10-physical-education-u06-transfer-v3:condition"
+      ],
+      "bodyMetricsScored": false,
+      "participantCountScored": false
+    },
+    "adaptiveJudgment": {
+      "safeReductionPreservesParticipationCredit": true,
+      "alternateRouteCanEarnTransferCredit": true,
+      "alternateRouteMustPreserveEvidence": true,
+      "guardianBoundaryRetained": true
+    },
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "successCriteria": "7490a20055aef3e014b070beb1761e9cd81891dafbff9a091a139b256b787462",
+        "scoringGuidance": "d1b2cd87b26a6f0a74f0b83974807ea51ff55fe6ba9544bb5abae845b24b4567",
+        "masteryRule": "5981c33bce67b19f5cbd151a856acb54b25b05923d533c39cd4212cbcbf1b488",
+        "adaptiveRoutes": "1fcada5e3b4fd60da45e1d1494c67a9c9b9ad577ad2e4a74de2eaeeb30794da8",
+        "guardianOrParentVisibility": "f89219e873a0c7e40d32daac2a2746694a1bd895525aa12eaf42a9c1665ff9c8",
+        "guardianSafetyReview": "2c8ff10efe5161b1aa79d5ecaaeb2cffab26a5eead84bce671aa6567b7c3bab0",
+        "safetyAndPrivacyNotes": "22dcc8fcd0900e47175bd13ff62aa9c45c2f8ac69e451ed6114354cbafbd873a"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

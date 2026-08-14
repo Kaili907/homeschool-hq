@@ -5,84 +5,6 @@
   "courseId": "ma-g12-physical-education",
   "grade": 12,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g12-physical-education-u07-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g12-physical-education-u07-l08:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g12-physical-education-u07:safety planning and organizer responsibility",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "INCLUSIVE_SESSION",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g12-physical-education-u07-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u07-l08:focus-action",
-        "ma-g12-physical-education-u07-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "INCLUSIVE_SESSION",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u07-l08:focus-action",
-        "ma-g12-physical-education-u07-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u07-l08:focus-action",
-        "ma-g12-physical-education-u07-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
     "The learner holds safety planning and organizer responsibility facilitated for one or more safely available participants or rehearsed as a complete facilitation plan, adapted in the moment when the plan meets a realistic access need, and evaluated on inclusion, in whatever version their body and setting allow. Full transfer credit requires the setup, directions, access choices, an in-the-moment adaptation, feedback, stop signal, and inclusion evaluation. Live facilitation or a complete rehearsed plan earns equal credit when it preserves each facilitation decision; group size is not scored.",
@@ -148,6 +70,94 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g12-physical-education-u07-l08"
+  },
+  "transferRubric": {
+    "schemaVersion": "manuel-academy.pe-adult-transfer-semantics.v1",
+    "authorityRef": "ma-g12-physical-education-u07-transfer-v3",
+    "judgedTask": {
+      "actionKey": "ma-g12-physical-education-u07-l08:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g12-physical-education-u07:safety planning and organizer responsibility",
+      "executionRequired": false
+    },
+    "requiredSpan": {
+      "spanUnit": "INCLUSIVE_SESSION",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restCredit": {
+      "restAllowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g12-physical-education-u07-transfer-v3:condition"
+    },
+    "completionJudgment": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u07-l08:focus-action",
+        "ma-g12-physical-education-u07-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "INCLUSIVE_SESSION",
+        "maximumCount": 1
+      }
+    },
+    "equalCreditJudgment": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u07-l08:focus-action",
+        "ma-g12-physical-education-u07-transfer-v3:condition"
+      ]
+    },
+    "rubricEvidence": {
+      "scoringAuthority": "RUBRIC",
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u07-l08:focus-action",
+        "ma-g12-physical-education-u07-transfer-v3:condition"
+      ],
+      "bodyMetricsScored": false,
+      "participantCountScored": false
+    },
+    "adaptiveJudgment": {
+      "safeReductionPreservesParticipationCredit": true,
+      "alternateRouteCanEarnTransferCredit": true,
+      "alternateRouteMustPreserveEvidence": true,
+      "guardianBoundaryRetained": true
+    },
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "successCriteria": "0ddd9d43fe3a0e16bc652507c0fdd6a2f023d59579d7cdbd461ee6289d67c20d",
+        "scoringGuidance": "c9e5efb1363256582e2b21817891feb0e3d534726c5b6b11f7e21cda090dd66e",
+        "masteryRule": "5981c33bce67b19f5cbd151a856acb54b25b05923d533c39cd4212cbcbf1b488",
+        "adaptiveRoutes": "3f2bcdd449efc134966d12cc1dfff79c956130c834b3cc3c9e49ca5982e85dd6",
+        "guardianOrParentVisibility": "f89219e873a0c7e40d32daac2a2746694a1bd895525aa12eaf42a9c1665ff9c8",
+        "guardianSafetyReview": "edb0002ff4401d2b5520fdaa87ded77ee5d6ab5787dabc951fd22af8bd624106",
+        "safetyAndPrivacyNotes": "f85dc2e9543c2593d092d6dfcede9e2d5c445fc4a516245fe3b817e00e756857"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

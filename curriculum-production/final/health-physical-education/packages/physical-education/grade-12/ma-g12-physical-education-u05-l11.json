@@ -5,81 +5,6 @@
   "courseId": "ma-g12-physical-education",
   "grade": 12,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g12-physical-education-u05-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g12-physical-education-u05-l11:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g12-physical-education-u05:compulsive activity, overtraining, and warning signs",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "SESSION",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g12-physical-education-u05-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u05-l11:focus-action",
-        "ma-g12-physical-education-u05-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "SESSION",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u05-l11:focus-action",
-        "ma-g12-physical-education-u05-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u05-l11:focus-action",
-        "ma-g12-physical-education-u05-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 5,
   "unitTitle": "Movement for Mental Health and Sustainable Routine",
   "title": "Unit assessment: compulsive activity, overtraining, and warning signs under transfer",
@@ -174,6 +99,77 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g12-physical-education-u05-l11"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g12-physical-education-u05-transfer-v3",
+    "task": {
+      "actionKey": "ma-g12-physical-education-u05-l11:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g12-physical-education-u05:compulsive activity, overtraining, and warning signs",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "SESSION",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g12-physical-education-u05-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u05-l11:focus-action",
+        "ma-g12-physical-education-u05-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "SESSION",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u05-l11:focus-action",
+        "ma-g12-physical-education-u05-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "cfcbba6e80cd704ab794d42f274b9a226c38f98dcfd5b5c83b4e2acd618aa661",
+        "completionCriteria": "0e43512f5e74f94bd6a2efc616887428a33c06dfe8d4d642e6b27c72e84b760b",
+        "activitySteps": "486d47869963b6cd93f1a404e4d0ad3cc90ecc70f85f0a4f4362635c974521b3",
+        "safetyRules": "7f749de747eb45141b56c9e6c4daee7089a0df5e20325178f32f3c81deb34639",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "accessibleAdaptation": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "lowSpaceNoEquipmentAlternative": "e376ca2e86d49cc06664bac133b6a5d087cea587c201f2168cb5d7917e76f954",
+        "equipmentRequirements": "2a5db65c7207b3d108efa6607fdcf3ed219507a90ad8c5dd64b44bed15fe7fc9"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

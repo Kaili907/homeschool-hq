@@ -229,6 +229,37 @@ describe('each gate catches its defect', () => {
     assert.equal(checkTransferEvidenceAuthority(b).pass, false)
   })
 
+  test('transfer-evidence-authority catches learner-visible prose drift with unchanged authority', () => {
+    const b = clone()
+    const l = b.courses[0].lessons.find((lesson) => lesson.transfer_evidence_requirement)
+    l.student_activity = 'A novel paraphrase now reverses the authored duration and completion meaning.'
+    assert.equal(checkTransferEvidenceAuthority(b).pass, false)
+  })
+
+  test('transfer-evidence-authority catches adult-visible prose drift with unchanged authority', () => {
+    const b = clone()
+    const l = b.courses[0].lessons.find((lesson) => lesson.transfer_evidence_requirement)
+    l.answer_or_scoring_guidance = 'A novel rubric paraphrase now awards credit for contradictory evidence.'
+    assert.equal(checkTransferEvidenceAuthority(b).pass, false)
+  })
+
+  for (const path of [
+    ['learnerTask', 'focusId'],
+    ['durationContinuity', 'span', 'coverage'],
+    ['completionEvidence', 'completionKind'],
+    ['equalCreditPath', 'requiredEvidenceIds'],
+    ['adultRubric', 'requiredEvidenceIds'],
+  ]) {
+    test(`transfer-evidence-authority fails closed when ${path.join('.')} is missing`, () => {
+      const b = clone()
+      const l = b.courses[0].lessons.find((lesson) => lesson.transfer_evidence_requirement)
+      let target = l.transfer_authority
+      for (const segment of path.slice(0, -1)) target = target[segment]
+      delete target[path.at(-1)]
+      assert.equal(checkTransferEvidenceAuthority(b).pass, false)
+    })
+  }
+
   test('distinct-lessons catches a second-pass lesson that only relabels the first', () => {
     const b = clone()
     const u = b.courses[0].lessons.filter((l) => l.unit_number === 1)

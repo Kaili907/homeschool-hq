@@ -5,81 +5,6 @@
   "courseId": "ma-g12-physical-education",
   "grade": 12,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g12-physical-education-u06-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g12-physical-education-u06-l10:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g12-physical-education-u06:designing activity for a group with mixed ages and abilities",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "LIFE_STAGE_SCENARIO",
-        "minimum": 3,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g12-physical-education-u06-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u06-l10:focus-action",
-        "ma-g12-physical-education-u06-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "LIFE_STAGE_SCENARIO",
-        "maximum": 3
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u06-l10:focus-action",
-        "ma-g12-physical-education-u06-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g12-physical-education-u06-l10:focus-action",
-        "ma-g12-physical-education-u06-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 6,
   "unitTitle": "Adapted and Lifelong Inclusive Activity Design",
   "title": "Synthesis and review: designing activity for a group with mixed ages and abilities under transfer",
@@ -174,6 +99,77 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g12-physical-education-u06-l10"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g12-physical-education-u06-transfer-v3",
+    "task": {
+      "actionKey": "ma-g12-physical-education-u06-l10:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g12-physical-education-u06:designing activity for a group with mixed ages and abilities",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "LIFE_STAGE_SCENARIO",
+      "minimumCount": 3,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g12-physical-education-u06-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u06-l10:focus-action",
+        "ma-g12-physical-education-u06-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "LIFE_STAGE_SCENARIO",
+        "maximumCount": 3
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u06-l10:focus-action",
+        "ma-g12-physical-education-u06-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "86265629a4637dc5d5d7255669207d5dfc0edc986a4dbdf69514be42cb9187de",
+        "completionCriteria": "e8e4afc9cd660447e7be736fa7b49060134e5aec36ae4c5632cf6063007b6aef",
+        "activitySteps": "402d0b52d99c983d8957e461b3e752a426e4aa0516afcae1a69743aa646c7152",
+        "safetyRules": "1c615c4b4b156e90b05580fe6521c0ce630c031c36c6dfcc062a4991ee6ed365",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "accessibleAdaptation": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "lowSpaceNoEquipmentAlternative": "6749a1de5b1b9553df88e6ba23e78ba6e1ed8befc5d2b39a5d1608c9d6da4d1a",
+        "equipmentRequirements": "53b4eb0baa72a7260ff433a123e4fdafb08004d4af858a996e4e25d700e69d0a"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

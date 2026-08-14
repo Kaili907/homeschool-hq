@@ -5,81 +5,6 @@
   "courseId": "ma-g10-physical-education",
   "grade": 10,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g10-physical-education-u07-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g10-physical-education-u07-l12:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g10-physical-education-u07:movement as expression, stress relief, and social activity",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "SESSION",
-        "minimum": 2,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g10-physical-education-u07-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u07-l12:focus-action",
-        "ma-g10-physical-education-u07-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "SESSION",
-        "maximum": 2
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u07-l12:focus-action",
-        "ma-g10-physical-education-u07-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u07-l12:focus-action",
-        "ma-g10-physical-education-u07-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
     "The learner holds movement as expression, stress relief, and social activity in a longer sequence built across several sessions and refined from the learner’s own review rather than from instruction, in whatever version their body and setting allow.",
@@ -145,6 +70,91 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g10-physical-education-u07-l12"
+  },
+  "transferRubric": {
+    "schemaVersion": "manuel-academy.pe-adult-transfer-semantics.v1",
+    "authorityRef": "ma-g10-physical-education-u07-transfer-v3",
+    "judgedTask": {
+      "actionKey": "ma-g10-physical-education-u07-l12:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g10-physical-education-u07:movement as expression, stress relief, and social activity",
+      "executionRequired": false
+    },
+    "requiredSpan": {
+      "spanUnit": "SESSION",
+      "minimumCount": 2,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restCredit": {
+      "restAllowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g10-physical-education-u07-transfer-v3:condition"
+    },
+    "completionJudgment": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u07-l12:focus-action",
+        "ma-g10-physical-education-u07-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "SESSION",
+        "maximumCount": 2
+      }
+    },
+    "equalCreditJudgment": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u07-l12:focus-action",
+        "ma-g10-physical-education-u07-transfer-v3:condition"
+      ]
+    },
+    "rubricEvidence": {
+      "scoringAuthority": "RUBRIC",
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u07-l12:focus-action",
+        "ma-g10-physical-education-u07-transfer-v3:condition"
+      ],
+      "bodyMetricsScored": false,
+      "participantCountScored": false
+    },
+    "adaptiveJudgment": {
+      "safeReductionPreservesParticipationCredit": true,
+      "alternateRouteCanEarnTransferCredit": true,
+      "alternateRouteMustPreserveEvidence": true,
+      "guardianBoundaryRetained": true
+    },
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "successCriteria": "394afc7993600dfc2b64d3d57a091a8769d24d54fc682e7c6c870932f34ba1f5",
+        "scoringGuidance": "d1b2cd87b26a6f0a74f0b83974807ea51ff55fe6ba9544bb5abae845b24b4567",
+        "masteryRule": "5981c33bce67b19f5cbd151a856acb54b25b05923d533c39cd4212cbcbf1b488",
+        "adaptiveRoutes": "73ee4d66265b3b253c7af3356185f44f3d54013ebc02e684ac29e5c3221a87f0",
+        "guardianOrParentVisibility": "f89219e873a0c7e40d32daac2a2746694a1bd895525aa12eaf42a9c1665ff9c8",
+        "guardianSafetyReview": "604f92c1fdc07b79b9e1499efca4d5bd45e4bddf2ff3d65acbcce10fd3bc8749",
+        "safetyAndPrivacyNotes": "fff43afb0d51173579bdf4003278cfbe8b99183e9390bbf78a1417dc743eff4f"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

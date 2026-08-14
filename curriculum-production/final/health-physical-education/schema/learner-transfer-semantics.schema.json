@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://manuel-academy/curriculum-production/final/health-physical-education/learner-transfer-semantics.schema.json",
+  "title": "Learner-visible PE transfer task semantics",
+  "type": "object",
+  "required": ["schemaVersion", "authorityRef", "task", "spanRequirement", "restRule", "transferCondition", "completion", "equalCredit", "guardianBoundaryRetained", "fieldBindings"],
+  "properties": {
+    "schemaVersion": { "const": "manuel-academy.pe-learner-transfer-semantics.v1" },
+    "authorityRef": { "type": "string", "minLength": 1 },
+    "task": {
+      "type": "object",
+      "required": ["actionKey", "actionType", "focusKey", "executionRequired"],
+      "properties": {
+        "actionKey": { "type": "string", "minLength": 1 },
+        "actionType": { "const": "APPLY_OR_FULLY_MODEL" },
+        "focusKey": { "type": "string", "minLength": 1 },
+        "executionRequired": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "spanRequirement": {
+      "type": "object",
+      "required": ["spanUnit", "minimumCount", "completeCoverageRequired", "uninterruptedRequired", "interruptionRecoveryRequired"],
+      "properties": {
+        "spanUnit": { "type": "string", "minLength": 1 },
+        "minimumCount": { "type": "integer", "minimum": 1 },
+        "completeCoverageRequired": { "const": true },
+        "uninterruptedRequired": { "type": "boolean" },
+        "interruptionRecoveryRequired": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "restRule": {
+      "type": "object",
+      "required": ["allowed", "participationCreditPreserved", "transferCreditRule"],
+      "properties": {
+        "allowed": { "type": "boolean" },
+        "participationCreditPreserved": { "type": "boolean" },
+        "transferCreditRule": { "const": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET" }
+      },
+      "additionalProperties": false
+    },
+    "transferCondition": {
+      "type": "object",
+      "required": ["required", "conditionKey"],
+      "properties": {
+        "required": { "const": true },
+        "conditionKey": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "completion": {
+      "type": "object",
+      "required": ["completionType", "hypotheticalAllowed", "evidenceKeys", "creditableSpan"],
+      "properties": {
+        "completionType": { "const": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN" },
+        "hypotheticalAllowed": { "type": "boolean" },
+        "evidenceKeys": { "$ref": "#/definitions/nonemptyStrings" },
+        "creditableSpan": {
+          "type": "object",
+          "required": ["spanUnit", "maximumCount"],
+          "properties": {
+            "spanUnit": { "type": "string", "minLength": 1 },
+            "maximumCount": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "equalCredit": {
+      "type": "object",
+      "required": ["paths", "sameEvidenceRequired", "evidenceKeys"],
+      "properties": {
+        "paths": { "$ref": "#/definitions/nonemptyStrings" },
+        "sameEvidenceRequired": { "const": true },
+        "evidenceKeys": { "$ref": "#/definitions/nonemptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "guardianBoundaryRetained": { "const": true },
+    "fieldBindings": {
+      "type": "object",
+      "required": ["algorithm", "fields"],
+      "properties": {
+        "algorithm": { "const": "SHA-256" },
+        "fields": {
+          "type": "object",
+          "required": ["studentTask", "completionCriteria", "activitySteps", "safetyRules", "stoppingRules", "adaptationChoices", "accessibleAdaptation", "lowSpaceNoEquipmentAlternative", "equipmentRequirements"],
+          "properties": {
+            "studentTask": { "$ref": "#/definitions/sha256" },
+            "completionCriteria": { "$ref": "#/definitions/sha256" },
+            "activitySteps": { "$ref": "#/definitions/sha256" },
+            "safetyRules": { "$ref": "#/definitions/sha256" },
+            "stoppingRules": { "$ref": "#/definitions/sha256" },
+            "adaptationChoices": { "$ref": "#/definitions/sha256" },
+            "accessibleAdaptation": { "$ref": "#/definitions/sha256" },
+            "lowSpaceNoEquipmentAlternative": { "$ref": "#/definitions/sha256" },
+            "equipmentRequirements": { "$ref": "#/definitions/sha256" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "nonemptyStrings": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  },
+  "additionalProperties": false
+}

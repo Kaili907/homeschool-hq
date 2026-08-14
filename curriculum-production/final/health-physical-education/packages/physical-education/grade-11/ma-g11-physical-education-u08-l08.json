@@ -5,81 +5,6 @@
   "courseId": "ma-g11-physical-education",
   "grade": 11,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g11-physical-education-u08-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g11-physical-education-u08-l08:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g11-physical-education-u08:attention, arousal, and performance under pressure",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "TERM_STRETCH",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g11-physical-education-u08-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u08-l08:focus-action",
-        "ma-g11-physical-education-u08-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "TERM_STRETCH",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u08-l08:focus-action",
-        "ma-g11-physical-education-u08-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u08-l08:focus-action",
-        "ma-g11-physical-education-u08-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 8,
   "unitTitle": "Stress Management, Mental Skills, and Movement",
   "title": "Reteach and varied practice: attention, arousal, and performance under pressure under transfer",
@@ -174,6 +99,77 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g11-physical-education-u08-l08"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g11-physical-education-u08-transfer-v3",
+    "task": {
+      "actionKey": "ma-g11-physical-education-u08-l08:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g11-physical-education-u08:attention, arousal, and performance under pressure",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "TERM_STRETCH",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g11-physical-education-u08-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u08-l08:focus-action",
+        "ma-g11-physical-education-u08-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "TERM_STRETCH",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u08-l08:focus-action",
+        "ma-g11-physical-education-u08-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "0854e1f4f5e771a1a514ce84e4b9c71e64971f035c856e15671cfca27f203b1e",
+        "completionCriteria": "3cd6088653494c8099fb6620170fedbdaad9eabe2583444b200bc3ac5542b75d",
+        "activitySteps": "c4e4a0a39f7503d1ef2d53135865a02aacad4623cb93a2c4e4032cc558b3fec6",
+        "safetyRules": "49974162cd117abf7dc8b05d978cb58a4c38c6c7f548d671768cb2e19d8f8c9d",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "accessibleAdaptation": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "lowSpaceNoEquipmentAlternative": "985d12acc04dd2645b6b92cd2f925e05ec13e8792ac127ef6e0c3f7699ced729",
+        "equipmentRequirements": "d97ff23546f5cab898ac81f54c9fecfcdfe4d1d89f9c2186814d5725219e867f"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

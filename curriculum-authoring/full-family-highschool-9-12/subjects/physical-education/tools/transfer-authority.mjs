@@ -1,11 +1,44 @@
+import { createHash } from 'node:crypto'
+
 /**
- * Canonical, prose-independent authority for every high-school PE transfer
- * lesson. Human-facing wording may change without changing this record. A
- * semantic change must update this record deliberately and will then be
- * checked against every learner and adult projection.
+ * Canonical authority for every high-school PE transfer lesson. The normalized
+ * requirements are prose-independent, while sourceFieldBindings bind the
+ * actual learner/adult authored fields so wording cannot contradict them.
  */
 
-export const TRANSFER_AUTHORITY_SCHEMA = 'manuel-academy.pe-transfer-authority.v2'
+export const TRANSFER_AUTHORITY_SCHEMA = 'manuel-academy.pe-transfer-authority.v3'
+
+export const SOURCE_LEARNER_SEMANTIC_FIELDS = [
+  'focus',
+  'transfer_condition',
+  'transfer_evidence_requirement',
+  'student_activity',
+  'formative_check',
+]
+
+export const SOURCE_ADULT_SEMANTIC_FIELDS = [
+  'success_criteria',
+  'answer_or_scoring_guidance',
+  'adaptive_tutor_routes',
+  'guardian_safety',
+  'safety_and_privacy',
+]
+
+export function semanticDigest(value) {
+  const serialized = JSON.stringify(value)
+  return createHash('sha256').update(serialized === undefined ? 'undefined' : serialized).digest('hex')
+}
+
+export function bindSourceSemanticFields(record, lesson) {
+  return {
+    ...record,
+    sourceFieldBindings: {
+      algorithm: 'SHA-256',
+      learnerFields: Object.fromEntries(SOURCE_LEARNER_SEMANTIC_FIELDS.map((field) => [field, semanticDigest(lesson[field])])),
+      adultFields: Object.fromEntries(SOURCE_ADULT_SEMANTIC_FIELDS.map((field) => [field, semanticDigest(lesson[field])])),
+    },
+  }
+}
 
 const SPAN_BY_UNIT = {
   '9:1': ['SESSION', 1],
@@ -60,7 +93,7 @@ function uniqueSorted(values) {
 
 export function buildTransferAuthorityRecord(course, unit, unitNumber, lessonId, focus) {
   const [spanUnit, minimum] = SPAN_BY_UNIT[`${course.grade}:${unitNumber}`]
-  const authorityId = `${course.courseId}-u${String(unitNumber).padStart(2, '0')}-transfer-v2`
+  const authorityId = `${course.courseId}-u${String(unitNumber).padStart(2, '0')}-transfer-v3`
   const evidenceIds = uniqueSorted([
     `${authorityId}:condition`,
     `${lessonId}:focus-action`,
@@ -116,6 +149,7 @@ export function buildTransferAuthorityRecord(course, unit, unitNumber, lessonId,
       alternateRouteMustPreserveEvidence: true,
       guardianSafetyBoundaryRetained: true,
     },
+    sourceFieldBindings: null,
   }
 }
 
@@ -123,17 +157,32 @@ export function validateTransferAuthorityRecord(record) {
   const errors = []
   if (!record || typeof record !== 'object') return ['structured transfer authority is missing']
   if (record.schemaVersion !== TRANSFER_AUTHORITY_SCHEMA) errors.push('unsupported transfer-authority schema')
-  if (!record.authorityId) errors.push('authorityId is missing')
-  if (!record.learnerTask?.actionId || record.learnerTask?.actionKind !== 'APPLY_OR_FULLY_MODEL' || typeof record.learnerTask?.executionRequired !== 'boolean') errors.push('learner task/action is invalid')
-  if (!record.durationContinuity?.span?.unit || !Number.isInteger(record.durationContinuity?.span?.minimum) || record.durationContinuity.span.minimum < 1 || typeof record.durationContinuity?.uninterruptedPerformanceRequired !== 'boolean' || typeof record.durationContinuity?.interruptionRecoveryRequired !== 'boolean') errors.push('duration/span requirement is invalid')
+  if (typeof record.authorityId !== 'string' || !record.authorityId) errors.push('authorityId is missing')
+  if (!record.learnerTask?.actionId || record.learnerTask?.actionKind !== 'APPLY_OR_FULLY_MODEL' || !record.learnerTask?.focusId || typeof record.learnerTask?.executionRequired !== 'boolean') errors.push('learner task/action is invalid')
+  if (!record.durationContinuity?.span?.unit || !Number.isInteger(record.durationContinuity?.span?.minimum) || record.durationContinuity.span.minimum < 1 || record.durationContinuity?.span?.coverage !== 'COMPLETE_REQUIRED_SPAN' || typeof record.durationContinuity?.uninterruptedPerformanceRequired !== 'boolean' || typeof record.durationContinuity?.interruptionRecoveryRequired !== 'boolean') errors.push('duration/span requirement is invalid')
   if (record.durationContinuity?.uninterruptedPerformanceRequired && record.restInterruptionAllowance?.restPreservesParticipationCredit) errors.push('uninterrupted performance contradicts rest-credit authority')
   if (record.restInterruptionAllowance?.restAllowed !== true || typeof record.restInterruptionAllowance?.restPreservesParticipationCredit !== 'boolean' || !record.restInterruptionAllowance?.transferCreditAfterRest) errors.push('stop/rest authority is not retained')
   if (record.transferRequirement?.required !== true || !record.transferRequirement?.conditionId) errors.push('transfer requirement is invalid')
-  if (!Array.isArray(record.completionEvidence?.requiredEvidenceIds) || record.completionEvidence.requiredEvidenceIds.length < 3 || typeof record.completionEvidence?.hypotheticalCompletionAllowed !== 'boolean') errors.push('completion evidence is incomplete')
+  if (record.completionEvidence?.completionKind !== 'PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN' || !Array.isArray(record.completionEvidence?.requiredEvidenceIds) || record.completionEvidence.requiredEvidenceIds.length < 3 || typeof record.completionEvidence?.hypotheticalCompletionAllowed !== 'boolean') errors.push('completion evidence is incomplete')
   if (record.completionEvidence?.maximumCreditableSpan?.unit !== record.durationContinuity?.span?.unit || record.completionEvidence?.maximumCreditableSpan?.maximum < record.durationContinuity?.span?.minimum) errors.push('completion path does not cover the required duration/span')
-  if (record.equalCreditPath?.sameEvidenceRequired !== true || JSON.stringify(record.equalCreditPath?.requiredEvidenceIds) !== JSON.stringify(record.completionEvidence?.requiredEvidenceIds)) errors.push('equal-credit evidence differs from completion evidence')
-  if (record.adultRubric?.scoringAuthority !== 'RUBRIC' || JSON.stringify(record.adultRubric?.requiredEvidenceIds) !== JSON.stringify(record.completionEvidence?.requiredEvidenceIds)) errors.push('adult rubric evidence differs from completion evidence')
+  if (!Array.isArray(record.equalCreditPath?.routes) || record.equalCreditPath.routes.length === 0 || !Array.isArray(record.equalCreditPath?.requiredEvidenceIds) || record.equalCreditPath.requiredEvidenceIds.length === 0 || record.equalCreditPath?.sameEvidenceRequired !== true || JSON.stringify(record.equalCreditPath?.requiredEvidenceIds) !== JSON.stringify(record.completionEvidence?.requiredEvidenceIds)) errors.push('equal-credit evidence differs from completion evidence')
+  if (record.adultRubric?.scoringAuthority !== 'RUBRIC' || !Array.isArray(record.adultRubric?.requiredEvidenceIds) || record.adultRubric.requiredEvidenceIds.length === 0 || JSON.stringify(record.adultRubric?.requiredEvidenceIds) !== JSON.stringify(record.completionEvidence?.requiredEvidenceIds)) errors.push('adult rubric evidence differs from completion evidence')
   if (record.adultRubric?.bodyMetricsScored !== false || record.adultRubric?.participantCountScored !== false) errors.push('body metrics and participant count may not be scored')
   if (typeof record.adaptiveRouteExpectations?.safeReductionPreservesParticipationCredit !== 'boolean' || typeof record.adaptiveRouteExpectations?.alternateRouteCanEarnTransferCredit !== 'boolean' || record.adaptiveRouteExpectations?.alternateRouteMustPreserveEvidence !== true || record.adaptiveRouteExpectations?.guardianSafetyBoundaryRetained !== true) errors.push('adaptive-route authority is incomplete')
+  if (record.sourceFieldBindings?.algorithm !== 'SHA-256') errors.push('source semantic field binding algorithm is invalid')
+  for (const [channel, fields] of [['learnerFields', SOURCE_LEARNER_SEMANTIC_FIELDS], ['adultFields', SOURCE_ADULT_SEMANTIC_FIELDS]]) {
+    const bindings = record.sourceFieldBindings?.[channel]
+    if (!bindings || typeof bindings !== 'object' || Array.isArray(bindings) || Object.keys(bindings).sort().join('|') !== [...fields].sort().join('|') || Object.values(bindings).some((digest) => !/^[a-f0-9]{64}$/.test(digest))) errors.push(`source ${channel} semantic field bindings are invalid`)
+  }
+  return errors
+}
+
+export function validateSourceSemanticBindings(record, lesson) {
+  const errors = []
+  for (const [channel, fields] of [['learnerFields', SOURCE_LEARNER_SEMANTIC_FIELDS], ['adultFields', SOURCE_ADULT_SEMANTIC_FIELDS]]) {
+    for (const field of fields) {
+      if (record?.sourceFieldBindings?.[channel]?.[field] !== semanticDigest(lesson?.[field])) errors.push(`${channel}.${field} is not bound to the canonical authored field`)
+    }
+  }
   return errors
 }

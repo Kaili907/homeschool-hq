@@ -52,7 +52,7 @@ evaluates it. There is no single correct answer to key against.
 | 3 PE and all Grade 4 | `mac/g34-health-pe-r1` (commit `d0ebaa0`) | Original Grade 3/4 Health + PE source, excluding the Grade 3 Health repin |
 | 5, 7, 8 | shared base (commit `656efba` onward) | Canonical Health + PE, already in every worktree |
 | 9, 10, 11, 12 Health | `mac/hs912-health-pe-r1` (commit `e39e2b3`) | HS Health, four years |
-| 9, 10, 11, 12 PE | `mac/pe-transfer-authority-fix-r2` | Canonical HS PE with structured transfer/equal-credit authority |
+| 9, 10, 11, 12 PE | `mac/pe-transfer-authority-fix-r3` | Canonical HS PE with independently bound learner/adult transfer semantics |
 
 The Grade 3 Health, G3/4, and HS Health branches have not merged into this branch, so this
 generator reads them from sibling git worktrees at generation time
@@ -101,18 +101,26 @@ classification.
 
 ## PE transfer-authority gate
 
-All 216 high-school second-pass PE lessons carry a
-`manuel-academy.pe-transfer-authority.v2` record. The canonical record and its
-learner/adult projections explicitly represent the learner action, required
-span and continuity, stop/rest authority, transfer condition, completion
-evidence, equal-credit routes, adult rubric, and adaptive/guardian boundaries.
-`src/lib/transferConsistency.mjs` compares those normalized fields and fails
-closed when any record is absent. It does not infer meaning from lesson number,
-wording, regexes, or phrase/synonym lists.
+All 216 high-school second-pass PE lessons carry canonical
+`manuel-academy.pe-transfer-authority.v3` authority. Learner packages do not
+copy that object: they carry a distinct
+`manuel-academy.pe-learner-transfer-semantics.v1` task record derived from the
+actual learner task/completion/evidence fields. Adult guides similarly carry a
+distinct `manuel-academy.pe-adult-transfer-semantics.v1` record derived from
+the actual rubric/success/evidence fields. The gate normalizes and compares all
+three records.
 
-Permanent controls cover genuine scoring and content mismatches, three wording
-variants of uninterrupted-performance versus rest-credit authority, three
-wording variants of seven-day execution versus one-day hypothetical completion,
+Every semantic-bearing learner and adult visible field is independently bound
+with SHA-256. A wording-only mutation therefore fails even when it is a novel
+paraphrase and the structured records are untouched; no phrase or synonym list
+is involved. `src/lib/transferConsistency.mjs` directly loads and executes all
+three committed JSON Schemas, failing on missing nested fields, wrong types,
+unknown enums, additional properties, missing derivations, semantic drift, or
+visible-field drift.
+
+Permanent controls cover all four directionally distinct visible
+contradictions, every bound prose field, canonical and derived required-field
+removals, duration/continuity/rest/evidence/completion/equal-credit mutations,
 valid equal-credit and transfer cases, the reviewed false-positive pattern, and
 a lesson-location mutation.
 
@@ -170,8 +178,9 @@ no answer-bearing key leaked into a package, exact lesson/assessment counts,
 paired artifacts, exact per-item source provenance, H2 repin coverage, H3
 rubric-only scoring, private/ungraded optional reflection, PE adaptations,
 Health fictional/private scenarios and trusted-adult language, the complete PE
-learner execution contract and repair evidence, all 216 structured PE transfer
-records and paired projections, a fresh privacy scan, and every entry in
+learner execution contract and repair evidence, all 216 canonical PE transfer
+records and independently derived learner/adult semantic records, their visible
+field bindings, a fresh privacy scan, and every entry in
 `SHA256SUMS.txt`.
 
 ## Production readiness gate

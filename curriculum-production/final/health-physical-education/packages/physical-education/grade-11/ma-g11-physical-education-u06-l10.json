@@ -5,84 +5,6 @@
   "courseId": "ma-g11-physical-education",
   "grade": 11,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g11-physical-education-u06-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g11-physical-education-u06-l10:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g11-physical-education-u06:group planning and shared responsibility",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "OUTING_SCENARIO",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g11-physical-education-u06-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u06-l10:focus-action",
-        "ma-g11-physical-education-u06-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "OUTING_SCENARIO",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u06-l10:focus-action",
-        "ma-g11-physical-education-u06-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g11-physical-education-u06-l10:focus-action",
-        "ma-g11-physical-education-u06-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 6,
   "unitTitle": "Outdoor, Adventure, and Community Recreation Planning",
   "title": "Synthesis and review: group planning and shared responsibility under transfer",
@@ -177,6 +99,79 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g11-physical-education-u06-l10"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g11-physical-education-u06-transfer-v3",
+    "task": {
+      "actionKey": "ma-g11-physical-education-u06-l10:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g11-physical-education-u06:group planning and shared responsibility",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "OUTING_SCENARIO",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g11-physical-education-u06-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u06-l10:focus-action",
+        "ma-g11-physical-education-u06-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "OUTING_SCENARIO",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u06-l10:focus-action",
+        "ma-g11-physical-education-u06-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "fbc301f29e5f571948bba118ac5a708233ab2fea3f4c82ffc2f1f6e2dddf76f7",
+        "completionCriteria": "5a52595b83bfe059fcea4a3d98ddaa0640412a5ac31d3bcde2e3e894e171283e",
+        "activitySteps": "43c0c8270adabf87c237a530f699d06d3695d2f13f4b7272788eea7f90c102a1",
+        "safetyRules": "7f749de747eb45141b56c9e6c4daee7089a0df5e20325178f32f3c81deb34639",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "8b8af8dfd5f6dff793133f856671f147e942e4b2ee58e9f49f6705d3e15a2d20",
+        "accessibleAdaptation": "8b8af8dfd5f6dff793133f856671f147e942e4b2ee58e9f49f6705d3e15a2d20",
+        "lowSpaceNoEquipmentAlternative": "86726dfebefb44a45758ca678277e119cd08e15818619d33220b3a7c9386e3d9",
+        "equipmentRequirements": "c982683b2e75eadde62b6c53233a15ea730a93fa476e9075b62f595ef9bcd01a"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

@@ -13,7 +13,7 @@
     "courseId": { "type": "string" },
     "grade": { "type": "integer", "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12] },
     "subject": { "enum": ["health", "physical-education"] },
-    "transferAuthority": { "$ref": "./transfer-authority.schema.json" },
+    "transferTask": { "$ref": "./learner-transfer-semantics.schema.json" },
     "unitNumber": { "type": "integer" },
     "unitTitle": { "type": "string" },
     "title": { "type": "string" },
@@ -130,17 +130,6 @@
           "completionCriteria"
         ]
       }
-    },
-    {
-      "if": {
-        "properties": {
-          "kind": { "const": "lesson-task-card" },
-          "subject": { "const": "physical-education" },
-          "grade": { "enum": [9, 10, 11, 12] }
-        },
-        "required": ["kind", "subject", "grade"]
-      },
-      "then": { "required": ["transferAuthority"] }
     }
   ],
   "not": {

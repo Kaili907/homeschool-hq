@@ -24,7 +24,7 @@ The progression is deliberate: Grade 9 broadens so that later specialization is 
 
 ## How a 12-day unit is built
 
-Each unit carries **six topics across twelve days, in two passes**. Days 1-6 acquire each topic. Days 7-12 return to the same six under the unit's own **transfer condition**. Every second-pass lesson also carries a prose-independent `manuel-academy.pe-transfer-authority.v2` record for its action, duration/continuity, stop/rest authority, transfer requirement, completion evidence, equal-credit routes, rubric, and adaptive/guardian expectations.
+Each unit carries **six topics across twelve days, in two passes**. Days 1-6 acquire each topic. Days 7-12 return to the same six under the unit's own **transfer condition**. Every second-pass lesson also carries a strict `manuel-academy.pe-transfer-authority.v3` record for its action, duration/continuity, stop/rest authority, transfer requirement, completion evidence, equal-credit routes, rubric, and adaptive/guardian expectations. The record binds each learner and adult semantic-bearing source field with a deterministic SHA-256 digest, so a prose-only contradiction fails the authoring gate even when it is a novel paraphrase.
 
 The second pass is a separate mastery occasion, not a repeat, so it carries its own objectives, success criteria, lesson flow, activity, formative check, and extension, plus a tutor route for a learner for whom the added demand is too much that day — dropping back to the first-pass version is scored as full participation. This is what makes the multi-occasion mastery rule real rather than a formality: the two occasions are separated by time *and* by demand. The `distinct-lessons` gate fails the build if any lesson is a relabelled copy of another.
 

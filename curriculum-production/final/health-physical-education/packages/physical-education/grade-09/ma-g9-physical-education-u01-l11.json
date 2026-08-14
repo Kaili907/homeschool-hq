@@ -5,81 +5,6 @@
   "courseId": "ma-g9-physical-education",
   "grade": 9,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g9-physical-education-u01-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g9-physical-education-u01-l11:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g9-physical-education-u01:hydration and recovery around activity",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "SESSION",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g9-physical-education-u01-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u01-l11:focus-action",
-        "ma-g9-physical-education-u01-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "SESSION",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u01-l11:focus-action",
-        "ma-g9-physical-education-u01-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u01-l11:focus-action",
-        "ma-g9-physical-education-u01-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 1,
   "unitTitle": "Safe Start: Personal Movement Readiness and Self-Management",
   "title": "Unit assessment: hydration and recovery around activity under transfer",
@@ -174,6 +99,77 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g9-physical-education-u01-l11"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g9-physical-education-u01-transfer-v3",
+    "task": {
+      "actionKey": "ma-g9-physical-education-u01-l11:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g9-physical-education-u01:hydration and recovery around activity",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "SESSION",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g9-physical-education-u01-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g9-physical-education-u01-l11:focus-action",
+        "ma-g9-physical-education-u01-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "SESSION",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g9-physical-education-u01-l11:focus-action",
+        "ma-g9-physical-education-u01-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "4bd7891a512199d4aa32a48f78f63d8788a11301f4318734c72bd9a33d0dc5a0",
+        "completionCriteria": "1c052528d0ce3520f57361f66f6abd56d6da907928f0c60df5a1b237080cce88",
+        "activitySteps": "64a97bdf2fbbc979d48ab9049d239d5ebf0a92e521a331ecdee37aa87070c9fb",
+        "safetyRules": "7f749de747eb45141b56c9e6c4daee7089a0df5e20325178f32f3c81deb34639",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "accessibleAdaptation": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "lowSpaceNoEquipmentAlternative": "e376ca2e86d49cc06664bac133b6a5d087cea587c201f2168cb5d7917e76f954",
+        "equipmentRequirements": "2a5db65c7207b3d108efa6607fdcf3ed219507a90ad8c5dd64b44bed15fe7fc9"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

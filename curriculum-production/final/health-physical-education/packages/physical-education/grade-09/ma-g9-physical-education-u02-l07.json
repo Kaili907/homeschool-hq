@@ -5,84 +5,6 @@
   "courseId": "ma-g9-physical-education",
   "grade": 9,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g9-physical-education-u02-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g9-physical-education-u02-l07:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g9-physical-education-u02:sending, receiving, and carrying an object under light pressure",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "DECISION_SEQUENCE",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g9-physical-education-u02-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u02-l07:focus-action",
-        "ma-g9-physical-education-u02-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "DECISION_SEQUENCE",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u02-l07:focus-action",
-        "ma-g9-physical-education-u02-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u02-l07:focus-action",
-        "ma-g9-physical-education-u02-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 2,
   "unitTitle": "Movement Competence: Invasion Activity Category",
   "title": "Investigation or close reading: sending, receiving, and carrying an object under light pressure under transfer",
@@ -177,6 +99,79 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g9-physical-education-u02-l07"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g9-physical-education-u02-transfer-v3",
+    "task": {
+      "actionKey": "ma-g9-physical-education-u02-l07:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g9-physical-education-u02:sending, receiving, and carrying an object under light pressure",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "DECISION_SEQUENCE",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g9-physical-education-u02-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g9-physical-education-u02-l07:focus-action",
+        "ma-g9-physical-education-u02-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "DECISION_SEQUENCE",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g9-physical-education-u02-l07:focus-action",
+        "ma-g9-physical-education-u02-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "4a4b38173081c1ec0ff83dfc337fa6b2da7f4317a2e55b43ac776ee48e6a4e78",
+        "completionCriteria": "cff97726e3e53100301f849a98cadbbbadae4322cd5d9ad9f2bfcaa70934ec53",
+        "activitySteps": "593df0fdf35b1d10d8882c8bb5aeb6cd9338d56e6bc850ee4cf3fd8ad94c3923",
+        "safetyRules": "3c16e3cab7a65299bf21737ff837b1d3e6dbbed3179ff54d7e4d4fd57c3495fd",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "b6f4511f56fd3e3e8ab7ec0fb37192a073630735f0912ec231f2f68fa9bf8be9",
+        "accessibleAdaptation": "b6f4511f56fd3e3e8ab7ec0fb37192a073630735f0912ec231f2f68fa9bf8be9",
+        "lowSpaceNoEquipmentAlternative": "3944b8778d705a2c5ad3be50357b3cd7918a627a06da4f3842e0f4500ea4a7ae",
+        "equipmentRequirements": "07b5580153798ec163046fca0031a0764f8340bf2cae93442959d3b7e2514c35"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

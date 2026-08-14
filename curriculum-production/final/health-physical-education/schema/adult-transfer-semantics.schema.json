@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://manuel-academy/curriculum-production/final/health-physical-education/adult-transfer-semantics.schema.json",
+  "title": "Adult PE transfer rubric semantics",
+  "type": "object",
+  "required": ["schemaVersion", "authorityRef", "judgedTask", "requiredSpan", "restCredit", "transferCondition", "completionJudgment", "equalCreditJudgment", "rubricEvidence", "adaptiveJudgment", "fieldBindings"],
+  "properties": {
+    "schemaVersion": { "const": "manuel-academy.pe-adult-transfer-semantics.v1" },
+    "authorityRef": { "type": "string", "minLength": 1 },
+    "judgedTask": {
+      "type": "object",
+      "required": ["actionKey", "actionType", "focusKey", "executionRequired"],
+      "properties": {
+        "actionKey": { "type": "string", "minLength": 1 },
+        "actionType": { "const": "APPLY_OR_FULLY_MODEL" },
+        "focusKey": { "type": "string", "minLength": 1 },
+        "executionRequired": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "requiredSpan": {
+      "type": "object",
+      "required": ["spanUnit", "minimumCount", "completeCoverageRequired", "uninterruptedRequired", "interruptionRecoveryRequired"],
+      "properties": {
+        "spanUnit": { "type": "string", "minLength": 1 },
+        "minimumCount": { "type": "integer", "minimum": 1 },
+        "completeCoverageRequired": { "const": true },
+        "uninterruptedRequired": { "type": "boolean" },
+        "interruptionRecoveryRequired": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "restCredit": {
+      "type": "object",
+      "required": ["restAllowed", "participationCreditPreserved", "transferCreditRule"],
+      "properties": {
+        "restAllowed": { "type": "boolean" },
+        "participationCreditPreserved": { "type": "boolean" },
+        "transferCreditRule": { "const": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET" }
+      },
+      "additionalProperties": false
+    },
+    "transferCondition": {
+      "type": "object",
+      "required": ["required", "conditionKey"],
+      "properties": {
+        "required": { "const": true },
+        "conditionKey": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "completionJudgment": {
+      "type": "object",
+      "required": ["completionType", "hypotheticalAllowed", "evidenceKeys", "creditableSpan"],
+      "properties": {
+        "completionType": { "const": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN" },
+        "hypotheticalAllowed": { "type": "boolean" },
+        "evidenceKeys": { "$ref": "#/definitions/nonemptyStrings" },
+        "creditableSpan": {
+          "type": "object",
+          "required": ["spanUnit", "maximumCount"],
+          "properties": {
+            "spanUnit": { "type": "string", "minLength": 1 },
+            "maximumCount": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "equalCreditJudgment": {
+      "type": "object",
+      "required": ["paths", "sameEvidenceRequired", "evidenceKeys"],
+      "properties": {
+        "paths": { "$ref": "#/definitions/nonemptyStrings" },
+        "sameEvidenceRequired": { "const": true },
+        "evidenceKeys": { "$ref": "#/definitions/nonemptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "rubricEvidence": {
+      "type": "object",
+      "required": ["scoringAuthority", "evidenceKeys", "bodyMetricsScored", "participantCountScored"],
+      "properties": {
+        "scoringAuthority": { "const": "RUBRIC" },
+        "evidenceKeys": { "$ref": "#/definitions/nonemptyStrings" },
+        "bodyMetricsScored": { "const": false },
+        "participantCountScored": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "adaptiveJudgment": {
+      "type": "object",
+      "required": ["safeReductionPreservesParticipationCredit", "alternateRouteCanEarnTransferCredit", "alternateRouteMustPreserveEvidence", "guardianBoundaryRetained"],
+      "properties": {
+        "safeReductionPreservesParticipationCredit": { "type": "boolean" },
+        "alternateRouteCanEarnTransferCredit": { "type": "boolean" },
+        "alternateRouteMustPreserveEvidence": { "const": true },
+        "guardianBoundaryRetained": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "fieldBindings": {
+      "type": "object",
+      "required": ["algorithm", "fields"],
+      "properties": {
+        "algorithm": { "const": "SHA-256" },
+        "fields": {
+          "type": "object",
+          "required": ["successCriteria", "scoringGuidance", "masteryRule", "adaptiveRoutes", "guardianOrParentVisibility", "guardianSafetyReview", "safetyAndPrivacyNotes"],
+          "properties": {
+            "successCriteria": { "$ref": "#/definitions/sha256" },
+            "scoringGuidance": { "$ref": "#/definitions/sha256" },
+            "masteryRule": { "$ref": "#/definitions/sha256" },
+            "adaptiveRoutes": { "$ref": "#/definitions/sha256" },
+            "guardianOrParentVisibility": { "$ref": "#/definitions/sha256" },
+            "guardianSafetyReview": { "$ref": "#/definitions/sha256" },
+            "safetyAndPrivacyNotes": { "$ref": "#/definitions/sha256" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "nonemptyStrings": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  },
+  "additionalProperties": false
+}

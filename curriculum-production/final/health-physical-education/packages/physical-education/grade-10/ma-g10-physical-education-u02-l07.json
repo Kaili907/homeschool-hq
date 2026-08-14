@@ -5,81 +5,6 @@
   "courseId": "ma-g10-physical-education",
   "grade": 10,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g10-physical-education-u02-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g10-physical-education-u02-l07:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g10-physical-education-u02:principles of attack: penetration, support, width, mobility",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "ADAPTIVE_ACTIVITY",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g10-physical-education-u02-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u02-l07:focus-action",
-        "ma-g10-physical-education-u02-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "ADAPTIVE_ACTIVITY",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u02-l07:focus-action",
-        "ma-g10-physical-education-u02-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u02-l07:focus-action",
-        "ma-g10-physical-education-u02-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 2,
   "unitTitle": "Tactics and Strategy in Invasion Activities",
   "title": "Investigation or close reading: principles of attack: penetration, support, width, mobility under transfer",
@@ -174,6 +99,77 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g10-physical-education-u02-l07"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g10-physical-education-u02-transfer-v3",
+    "task": {
+      "actionKey": "ma-g10-physical-education-u02-l07:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g10-physical-education-u02:principles of attack: penetration, support, width, mobility",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "ADAPTIVE_ACTIVITY",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g10-physical-education-u02-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u02-l07:focus-action",
+        "ma-g10-physical-education-u02-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "ADAPTIVE_ACTIVITY",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u02-l07:focus-action",
+        "ma-g10-physical-education-u02-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "4b72f6e09c924d626861eb0fbf0226575df2573e47784f548686dc1039139fa6",
+        "completionCriteria": "36b39cc316e8a8890349cd22b372b6107a28b7752f7f52390de03e09299c9944",
+        "activitySteps": "7203f13f7fe5aba149940bc753463d08b6a679860c75023f568b3a63d98c348d",
+        "safetyRules": "63956fc7d1c2a47bd88a71baa912de66e7858931fed638aea6d07056b3497c65",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "accessibleAdaptation": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "lowSpaceNoEquipmentAlternative": "ea93460f317c441110e9159cbb1f56beaf1f365f9030f5c206b10449348e5e74",
+        "equipmentRequirements": "46100dc5be5bf0d551bfeabbe8d29d8c4e4cbd74291cf8e52f3f43b19c442217"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

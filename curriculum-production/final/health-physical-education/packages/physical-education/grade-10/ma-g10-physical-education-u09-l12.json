@@ -5,81 +5,6 @@
   "courseId": "ma-g10-physical-education",
   "grade": 10,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g10-physical-education-u09-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g10-physical-education-u09-l12:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g10-physical-education-u09:setting the safety and self-management rules that carry forward",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "PORTFOLIO_DEFENSE",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g10-physical-education-u09-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u09-l12:focus-action",
-        "ma-g10-physical-education-u09-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "PORTFOLIO_DEFENSE",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u09-l12:focus-action",
-        "ma-g10-physical-education-u09-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g10-physical-education-u09-l12:focus-action",
-        "ma-g10-physical-education-u09-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 9,
   "unitTitle": "Grade 10 Capstone: Personal Activity Plan and LEVEL 1 Transition",
   "title": "Correction and reflection: setting the safety and self-management rules that carry forward under transfer",
@@ -174,6 +99,77 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g10-physical-education-u09-l12"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g10-physical-education-u09-transfer-v3",
+    "task": {
+      "actionKey": "ma-g10-physical-education-u09-l12:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g10-physical-education-u09:setting the safety and self-management rules that carry forward",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "PORTFOLIO_DEFENSE",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g10-physical-education-u09-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u09-l12:focus-action",
+        "ma-g10-physical-education-u09-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "PORTFOLIO_DEFENSE",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g10-physical-education-u09-l12:focus-action",
+        "ma-g10-physical-education-u09-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "9409ebe51bc83d8de054a7ed430e8fe2ac03ae3ba3837cd5b73665c724fad733",
+        "completionCriteria": "081b5963e86ed3bb9940f7018b8c88d341afd888972474df02f417dc62b9e32a",
+        "activitySteps": "9a2f8f9c7c58e139bfe7c154ba7adb5945ff86cda65ada377cf1bff89c507bb5",
+        "safetyRules": "3c16e3cab7a65299bf21737ff837b1d3e6dbbed3179ff54d7e4d4fd57c3495fd",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "accessibleAdaptation": "ba3940fce8be8c944edcaa3218e1bfd3e1e1909a9d61f3ef41fc86cb5dc27eb8",
+        "lowSpaceNoEquipmentAlternative": "118c385244950799c50886bd0d74ebceecb55098113e71d15ce0fa609502a217",
+        "equipmentRequirements": "3fc9a3197c731b414fc28e0869fe554da317fcbd7d96f4b289c3776c238d0e18"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

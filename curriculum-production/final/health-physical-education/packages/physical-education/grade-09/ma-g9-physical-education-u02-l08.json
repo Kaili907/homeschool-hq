@@ -5,84 +5,6 @@
   "courseId": "ma-g9-physical-education",
   "grade": 9,
   "subject": "physical-education",
-  "transferAuthority": {
-    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
-    "authorityId": "ma-g9-physical-education-u02-transfer-v2",
-    "learnerTask": {
-      "actionId": "ma-g9-physical-education-u02-l08:focus-action",
-      "actionKind": "APPLY_OR_FULLY_MODEL",
-      "focusId": "ma-g9-physical-education-u02:creating and denying space",
-      "executionRequired": false
-    },
-    "durationContinuity": {
-      "span": {
-        "unit": "DECISION_SEQUENCE",
-        "minimum": 1,
-        "coverage": "COMPLETE_REQUIRED_SPAN"
-      },
-      "uninterruptedPerformanceRequired": false,
-      "interruptionRecoveryRequired": false
-    },
-    "restInterruptionAllowance": {
-      "restAllowed": true,
-      "restPreservesParticipationCredit": true,
-      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
-    },
-    "transferRequirement": {
-      "required": true,
-      "conditionId": "ma-g9-physical-education-u02-transfer-v2:condition"
-    },
-    "completionEvidence": {
-      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
-      "hypotheticalCompletionAllowed": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u02-l08:focus-action",
-        "ma-g9-physical-education-u02-transfer-v2:condition"
-      ],
-      "maximumCreditableSpan": {
-        "unit": "DECISION_SEQUENCE",
-        "maximum": 1
-      }
-    },
-    "equalCreditPath": {
-      "routes": [
-        "PERFORMED",
-        "ADAPTED_PERFORMANCE",
-        "SOLO_SIMULATION",
-        "DIAGRAMMED_MODEL",
-        "WRITTEN_OR_DESCRIBED_MODEL"
-      ],
-      "sameEvidenceRequired": true,
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u02-l08:focus-action",
-        "ma-g9-physical-education-u02-transfer-v2:condition"
-      ]
-    },
-    "adultRubric": {
-      "scoringAuthority": "RUBRIC",
-      "requiredEvidenceIds": [
-        "AUTHORED_UNIT_EVIDENCE",
-        "BREAKDOWN_ANALYSIS",
-        "EARLIER_OCCASION_COMPARISON",
-        "ma-g9-physical-education-u02-l08:focus-action",
-        "ma-g9-physical-education-u02-transfer-v2:condition"
-      ],
-      "bodyMetricsScored": false,
-      "participantCountScored": false
-    },
-    "adaptiveRouteExpectations": {
-      "safeReductionPreservesParticipationCredit": true,
-      "alternateRouteCanEarnTransferCredit": true,
-      "alternateRouteMustPreserveEvidence": true,
-      "guardianSafetyBoundaryRetained": true
-    }
-  },
   "unitNumber": 2,
   "unitTitle": "Movement Competence: Invasion Activity Category",
   "title": "Reteach and varied practice: creating and denying space under transfer",
@@ -177,6 +99,79 @@
   "sourceProvenance": {
     "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g9-physical-education-u02-l08"
+  },
+  "transferTask": {
+    "schemaVersion": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "authorityRef": "ma-g9-physical-education-u02-transfer-v3",
+    "task": {
+      "actionKey": "ma-g9-physical-education-u02-l08:focus-action",
+      "actionType": "APPLY_OR_FULLY_MODEL",
+      "focusKey": "ma-g9-physical-education-u02:creating and denying space",
+      "executionRequired": false
+    },
+    "spanRequirement": {
+      "spanUnit": "DECISION_SEQUENCE",
+      "minimumCount": 1,
+      "completeCoverageRequired": true,
+      "uninterruptedRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restRule": {
+      "allowed": true,
+      "participationCreditPreserved": true,
+      "transferCreditRule": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferCondition": {
+      "required": true,
+      "conditionKey": "ma-g9-physical-education-u02-transfer-v3:condition"
+    },
+    "completion": {
+      "completionType": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalAllowed": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g9-physical-education-u02-l08:focus-action",
+        "ma-g9-physical-education-u02-transfer-v3:condition"
+      ],
+      "creditableSpan": {
+        "spanUnit": "DECISION_SEQUENCE",
+        "maximumCount": 1
+      }
+    },
+    "equalCredit": {
+      "paths": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "evidenceKeys": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g9-physical-education-u02-l08:focus-action",
+        "ma-g9-physical-education-u02-transfer-v3:condition"
+      ]
+    },
+    "guardianBoundaryRetained": true,
+    "fieldBindings": {
+      "algorithm": "SHA-256",
+      "fields": {
+        "studentTask": "c51e7a817d9a1f724d89d6c39313412847940abbd56e1bd8e500117dc69365ea",
+        "completionCriteria": "4bf3171a08552fc36e62073ff31dfb84d4a924626b452c55d084cd34095a88f5",
+        "activitySteps": "d5cd06dd7507aff892804fadff7bba8d127ec3b0d968a1dc8616877eb0e77db0",
+        "safetyRules": "4303bcfa81022e21c004cb2bb1ff9a5b110328156b9943038e8d359ef21c6eb8",
+        "stoppingRules": "9d99909d82001bb01b640366e804003692a26a58630902d4954d86cafb6ebd53",
+        "adaptationChoices": "b6f4511f56fd3e3e8ab7ec0fb37192a073630735f0912ec231f2f68fa9bf8be9",
+        "accessibleAdaptation": "b6f4511f56fd3e3e8ab7ec0fb37192a073630735f0912ec231f2f68fa9bf8be9",
+        "lowSpaceNoEquipmentAlternative": "07eeb5362c51f3346a1a4fb0e7bf8511cd571ba1c5f7954151dced77f9a6669b",
+        "equipmentRequirements": "4d40149aeed630831f8afe051037fcc724e7001a3f497c17f6216c1306f3918f"
+      }
+    }
   },
   "productionReadiness": {
     "status": "READY",

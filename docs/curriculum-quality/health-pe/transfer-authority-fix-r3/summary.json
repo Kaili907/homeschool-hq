@@ -1,0 +1,50 @@
+{
+  "validation": "HIGH-SCHOOL PE TRANSFER AUTHORITY SEMANTIC BINDING R3",
+  "status": "PE_TRANSFER_AUTHORITY_R3_READY_FOR_ACCEPTANCE",
+  "r2Base": "f0fa12cfc3da33c12033c950f9b0949a8892950b",
+  "branch": "mac/pe-transfer-authority-fix-r3",
+  "reviewedCases": 216,
+  "historical": {
+    "scoringAuthorityConflicts": 60,
+    "contentTransferConflicts": 36,
+    "falsePositives": 120
+  },
+  "final": {
+    "scoringAuthorityConflicts": 0,
+    "contentTransferConflicts": 0,
+    "totalConflicts": 0,
+    "falsePositivesPreserved": 120,
+    "unexplainedCases": 0
+  },
+  "semanticBinding": {
+    "canonicalSchema": "manuel-academy.pe-transfer-authority.v3",
+    "learnerSchema": "manuel-academy.pe-learner-transfer-semantics.v1",
+    "adultSchema": "manuel-academy.pe-adult-transfer-semantics.v1",
+    "canonicalRecords": 216,
+    "learnerDerivations": 216,
+    "adultDerivations": 216,
+    "copiedAuthorityObjectsInLearnerArtifacts": 0,
+    "copiedAuthorityObjectsInAdultArtifacts": 0,
+    "phrasePatternsUsedByGate": 0,
+    "visibleFieldBinding": "SHA-256 over each authoritative learner/adult field; any wording mutation fails without a metadata mutation"
+  },
+  "boundaries": {
+    "learnerCurriculumSemanticsChanged": false,
+    "safetyPreserved": 216,
+    "learnerAuthorityBindingsPreserved": 216
+  },
+  "controls": {
+    "visibleContradictionAttacks": 4,
+    "paraphraseFieldAttacks": 16,
+    "canonicalRequiredFieldRemovals": 5,
+    "derivedRequiredFieldRemovals": 6,
+    "structuredSemanticMutations": 7,
+    "wrongTypeUnknownEnumAndExtraField": "FAIL",
+    "validEqualCredit": "PASS",
+    "validTransfer": "PASS",
+    "historicalFalsePositivePattern": "PASS",
+    "lessonLocationMutation": "UNCHANGED"
+  },
+  "studyBoundary": "No Study Engine, scorer, or Tutor V2 change; all reviewed production bindings remain LEARNER_AUTHORITY.",
+  "safety": "Stop/rest rules, adaptations, guardian boundaries, privacy, and no-body-scoring are unchanged and field-bound."
+}

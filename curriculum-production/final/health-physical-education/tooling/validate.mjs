@@ -110,23 +110,34 @@ function main() {
   const peAudit = auditPeLessonExecutability(peLessonPackages)
   const hsSourceLessons = new Map([9, 10, 11, 12].flatMap((grade) => readJsonl(resolve(courseDir(grade, 'physical-education'), 'lessons.jsonl'))).map((lesson) => [lesson.lesson_id, lesson]))
   let transferLessons = 0
+  let learnerTransferDerivations = 0
+  let adultTransferDerivations = 0
   let scoringAuthorityConflicts = 0
   let contentTransferConflicts = 0
   for (const pkg of peLessonPackages) {
     const sourceLesson = hsSourceLessons.get(pkg.lessonId)
-    if (!sourceLesson?.transfer_condition) continue
-    transferLessons += 1
     const guide = peGuides.get(pkg.lessonId)
+    if (Object.hasOwn(pkg, 'transferAuthority')) errors.push(`${pkg.lessonId}: copied canonical transferAuthority is forbidden in learner artifacts`)
+    if (Object.hasOwn(guide ?? {}, 'transferAuthority')) errors.push(`${pkg.lessonId}: copied canonical transferAuthority is forbidden in adult artifacts`)
+    if (!sourceLesson?.transfer_condition) {
+      if (pkg.transferTask) errors.push(`${pkg.lessonId}: non-transfer learner artifact carries transferTask`)
+      if (guide?.transferRubric) errors.push(`${pkg.lessonId}: non-transfer adult artifact carries transferRubric`)
+      continue
+    }
+    transferLessons += 1
+    if (pkg.transferTask) learnerTransferDerivations += 1
+    if (guide?.transferRubric) adultTransferDerivations += 1
     const result = evaluatePeTransferConsistency({
       sourceLesson,
-      learnerTransferAuthority: pkg.transferAuthority,
-      adultTransferAuthority: guide?.transferAuthority,
+      learnerPackage: pkg,
+      adultGuide: guide,
     })
     if (result.classifications.includes('SCORING_AUTHORITY_CONFLICT')) scoringAuthorityConflicts += 1
     if (result.classifications.includes('CONTENT_TRANSFER_CONFLICT')) contentTransferConflicts += 1
     for (const finding of result.findings) errors.push(`${pkg.lessonId}: ${finding.classification} ${finding.code}: ${finding.message}`)
   }
   if (transferLessons !== 216) errors.push(`HS PE transfer semantic cohort mismatch: ${transferLessons}, expected 216`)
+  if (learnerTransferDerivations !== 216 || adultTransferDerivations !== 216) errors.push(`HS PE semantic derivation mismatch: learner=${learnerTransferDerivations}, adult=${adultTransferDerivations}, expected 216 each`)
   if (scoringAuthorityConflicts !== 0) errors.push(`HS PE scoring-authority conflicts: ${scoringAuthorityConflicts}, expected 0`)
   if (contentTransferConflicts !== 0) errors.push(`HS PE content-transfer conflicts: ${contentTransferConflicts}, expected 0`)
   if (manifest.manifestType !== 'manuel-academy-final-production-corpus') errors.push('manifest is not canonical final-production type')
@@ -163,7 +174,7 @@ function main() {
   console.log(`Counts: ${lessons} lessons + ${assessments} assessments = ${packageFiles.length} items.`)
   console.log(`Grade 3 Health H2 provenance: ${g3HealthRepinPackages} packages + ${g3HealthRepinGuides} guides.`)
   console.log(`PE content: ${peAudit.lessonsAudited} executable lessons; ${Object.values(peIssueGroups).reduce((sum, ids) => sum + ids.length, 0)} learner-content issue(s).`)
-  console.log(`HS PE transfer semantics: ${transferLessons} reviewed; ${scoringAuthorityConflicts} scoring-authority conflict(s), ${contentTransferConflicts} content-transfer conflict(s).`)
+  console.log(`HS PE transfer semantics: ${transferLessons} reviewed; ${learnerTransferDerivations} learner derivations; ${adultTransferDerivations} adult derivations; ${scoringAuthorityConflicts} scoring-authority conflict(s), ${contentTransferConflicts} content-transfer conflict(s).`)
   if (errors.length) {
     console.error(`\n${errors.length} VALIDATION FAILURE(S):`)
     for (const error of errors) console.error(` - ${error}`)

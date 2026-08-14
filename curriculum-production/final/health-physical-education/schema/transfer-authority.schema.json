@@ -13,10 +13,11 @@
     "completionEvidence",
     "equalCreditPath",
     "adultRubric",
-    "adaptiveRouteExpectations"
+    "adaptiveRouteExpectations",
+    "sourceFieldBindings"
   ],
   "properties": {
-    "schemaVersion": { "const": "manuel-academy.pe-transfer-authority.v2" },
+    "schemaVersion": { "const": "manuel-academy.pe-transfer-authority.v3" },
     "authorityId": { "type": "string", "minLength": 1 },
     "learnerTask": {
       "type": "object",
@@ -37,7 +38,7 @@
           "type": "object",
           "required": ["unit", "minimum", "coverage"],
           "properties": {
-            "unit": { "type": "string", "minLength": 1 },
+            "unit": { "enum": ["SESSION", "DECISION_SEQUENCE", "SCORE_STATE_SEQUENCE", "DAY", "COMPLETE_SEQUENCE", "TRIAL", "ROUTE_SCENARIO", "INCLUSION_SCENARIO", "PORTFOLIO_DEFENSE", "ADAPTIVE_ACTIVITY", "COMPLETE_CONTEST", "PROGRAM_CYCLE", "ACCESS_REDESIGN", "LEADERSHIP_SEGMENT", "PRACTICE_BLOCK", "CONCURRENT_PRACTICE_BLOCK", "CONSTRAINT_PRACTICE", "OUTING_SCENARIO", "INCLUSIVE_SESSION", "TERM_STRETCH", "TRANSITION_SCENARIO", "TRAINING_CYCLE", "BUDGET_SCENARIO", "CHALLENGE_ATTEMPT", "LIFE_STAGE_SCENARIO", "TRAINING_BLOCK", "PLAN_DEFENSE_AND_REVISION"] },
             "minimum": { "type": "integer", "minimum": 1 },
             "coverage": { "const": "COMPLETE_REQUIRED_SPAN" }
           },
@@ -54,7 +55,7 @@
       "properties": {
         "restAllowed": { "type": "boolean" },
         "restPreservesParticipationCredit": { "type": "boolean" },
-        "transferCreditAfterRest": { "type": "string", "minLength": 1 }
+        "transferCreditAfterRest": { "const": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET" }
       },
       "additionalProperties": false
     },
@@ -71,7 +72,7 @@
       "type": "object",
       "required": ["completionKind", "hypotheticalCompletionAllowed", "requiredEvidenceIds", "maximumCreditableSpan"],
       "properties": {
-        "completionKind": { "type": "string", "minLength": 1 },
+        "completionKind": { "const": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN" },
         "hypotheticalCompletionAllowed": { "type": "boolean" },
         "requiredEvidenceIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
         "maximumCreditableSpan": {
@@ -90,7 +91,7 @@
       "type": "object",
       "required": ["routes", "sameEvidenceRequired", "requiredEvidenceIds"],
       "properties": {
-        "routes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "routes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["PERFORMED", "ADAPTED_PERFORMANCE", "SOLO_SIMULATION", "DIAGRAMMED_MODEL", "WRITTEN_OR_DESCRIBED_MODEL"] } },
         "sameEvidenceRequired": { "const": true },
         "requiredEvidenceIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
       },
@@ -117,7 +118,42 @@
         "guardianSafetyBoundaryRetained": { "const": true }
       },
       "additionalProperties": false
+    },
+    "sourceFieldBindings": {
+      "type": "object",
+      "required": ["algorithm", "learnerFields", "adultFields"],
+      "properties": {
+        "algorithm": { "const": "SHA-256" },
+        "learnerFields": {
+          "type": "object",
+          "required": ["focus", "transfer_condition", "transfer_evidence_requirement", "student_activity", "formative_check"],
+          "properties": {
+            "focus": { "$ref": "#/definitions/sha256" },
+            "transfer_condition": { "$ref": "#/definitions/sha256" },
+            "transfer_evidence_requirement": { "$ref": "#/definitions/sha256" },
+            "student_activity": { "$ref": "#/definitions/sha256" },
+            "formative_check": { "$ref": "#/definitions/sha256" }
+          },
+          "additionalProperties": false
+        },
+        "adultFields": {
+          "type": "object",
+          "required": ["success_criteria", "answer_or_scoring_guidance", "adaptive_tutor_routes", "guardian_safety", "safety_and_privacy"],
+          "properties": {
+            "success_criteria": { "$ref": "#/definitions/sha256" },
+            "answer_or_scoring_guidance": { "$ref": "#/definitions/sha256" },
+            "adaptive_tutor_routes": { "$ref": "#/definitions/sha256" },
+            "guardian_safety": { "$ref": "#/definitions/sha256" },
+            "safety_and_privacy": { "$ref": "#/definitions/sha256" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
+  },
+  "definitions": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
   },
   "additionalProperties": false
 }

@@ -34,7 +34,7 @@ import {
 import { evaluateLessonProductionReadiness } from './lib/productionGate.mjs'
 import { scanDocument } from './lib/privacyScan.mjs'
 import { auditPeLessonExecutability, buildPeExecution } from './lib/peExecution.mjs'
-import { evaluatePeTransferConsistency } from './lib/transferConsistency.mjs'
+import { buildAdultTransferSemantics, buildLearnerTransferSemantics, evaluatePeTransferConsistency } from './lib/transferConsistency.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(HERE, '..')
@@ -125,7 +125,6 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     courseId: lesson.course_id,
     grade,
     subject,
-    ...(!isHealth && lesson.transfer_authority ? { transferAuthority: structuredClone(lesson.transfer_authority) } : {}),
     unitNumber: lesson.unit_number,
     unitTitle: lesson.unit_title,
     title: lesson.title,
@@ -183,7 +182,6 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     courseId: lesson.course_id,
     grade,
     subject,
-    ...(!isHealth && lesson.transfer_authority ? { transferAuthority: structuredClone(lesson.transfer_authority) } : {}),
     scoringAuthority: 'RUBRIC',
     successCriteria: lesson.success_criteria ?? [],
     scoringGuidance: lesson.answer_or_scoring_guidance ?? null,
@@ -196,12 +194,17 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     sourceProvenance: { sourceBranch: sourceBranchLabel(grade, subject), sourceLessonId: lesson.lesson_id },
   }
 
+  if (!isHealth && lesson.transfer_authority) {
+    pkg.transferTask = buildLearnerTransferSemantics(lesson.transfer_authority, pkg)
+    scoringGuide.transferRubric = buildAdultTransferSemantics(lesson.transfer_authority, scoringGuide)
+  }
+
   const transferConsistency = isHealth
     ? null
-    : evaluatePeTransferConsistency({
+      : evaluatePeTransferConsistency({
         sourceLesson: lesson,
-        learnerTransferAuthority: pkg.transferAuthority,
-        adultTransferAuthority: scoringGuide.transferAuthority,
+        learnerPackage: pkg,
+        adultGuide: scoringGuide,
       })
 
   const gateInput = {
