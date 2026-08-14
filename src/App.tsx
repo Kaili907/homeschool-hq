@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
 import { isArtsMusicDirectorPreviewPath } from './study/family-pilot/arts-music-director-preview/route'
+import { isHealthDirectorReviewPath } from './study/family-pilot/health-director-preview/route'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
@@ -20,6 +21,12 @@ const ArtsMusicDirectorPreview = import.meta.env.DEV
     })))
   : null
 
+const HealthDirectorPreview = import.meta.env.DEV
+  ? lazy(() => import('./study/family-pilot/health-director-preview/HealthDirectorPreview').then((module) => ({
+      default: module.HealthDirectorPreview,
+    })))
+  : null
+
 function familyPilotSelectedAtBoot(): boolean {
   return isFamilyPilotEnabledFromHost() && isFamilyPilotPath(window.location.pathname)
 }
@@ -32,6 +39,14 @@ export default function App() {
     return (
       <Suspense fallback={<main aria-busy="true">Loading the Arts/Music Director preview.</main>}>
         <ArtsMusicDirectorPreview />
+      </Suspense>
+    )
+  }
+
+  if (HealthDirectorPreview && isHealthDirectorReviewPath(window.location.pathname)) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Opening the Health Director preview.</main>}>
+        <HealthDirectorPreview />
       </Suspense>
     )
   }

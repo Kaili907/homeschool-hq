@@ -1,0 +1,658 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/physical-education-lesson-advisory-contract-r1.schema.json",
+  "title": "Manuel Academy Physical Education Lesson Advisory Contract R1",
+  "description": "Draft curriculum-only metadata envelope for PE lesson-quality review. It defines no Tutor V2, motion observation, physical-completion, guardian, scoring, mastery, or learner-state runtime behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "status",
+    "subject",
+    "lessonId",
+    "gradeBand",
+    "primaryLessonType",
+    "secondaryLessonTypes",
+    "conceptOrSkillIds",
+    "prerequisiteIds",
+    "cueIds",
+    "misconceptionOrErrorPatternIds",
+    "ageLanguagePolicyRef",
+    "activitySupply",
+    "warmUpAndFinishPolicy",
+    "adaptationPolicy",
+    "stopRestPolicy",
+    "evidencePlan",
+    "retryPlan",
+    "masteryPlan",
+    "reflectionPolicy",
+    "adultAuthority",
+    "bodyDignityPolicy",
+    "tutorPolicy"
+  ],
+  "properties": {
+    "contractVersion": {
+      "const": "physical-education-lesson-advisory-r1"
+    },
+    "status": {
+      "const": "DRAFT_ADVISORY"
+    },
+    "subject": {
+      "const": "physical-education"
+    },
+    "lessonId": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "gradeBand": {
+      "enum": [
+        "GRADES_3_5",
+        "GRADES_7_8",
+        "GRADES_9_12"
+      ]
+    },
+    "primaryLessonType": {
+      "$ref": "#/$defs/lessonType"
+    },
+    "secondaryLessonTypes": {
+      "type": "array",
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/lessonType"
+      }
+    },
+    "conceptOrSkillIds": {
+      "$ref": "#/$defs/nonEmptyUniqueStringArray"
+    },
+    "prerequisiteIds": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "cueIds": {
+      "$ref": "#/$defs/nonEmptyUniqueStringArray"
+    },
+    "misconceptionOrErrorPatternIds": {
+      "description": "Stable neutral IDs for observable cue, sequence, tactic, decision, or safety patterns; never diagnoses, disability labels, or learner traits.",
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "ageLanguagePolicyRef": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "activitySupply": {
+      "$ref": "#/$defs/activitySupply"
+    },
+    "warmUpAndFinishPolicy": {
+      "$ref": "#/$defs/warmUpAndFinishPolicy"
+    },
+    "adaptationPolicy": {
+      "$ref": "#/$defs/adaptationPolicy"
+    },
+    "stopRestPolicy": {
+      "$ref": "#/$defs/stopRestPolicy"
+    },
+    "evidencePlan": {
+      "$ref": "#/$defs/evidencePlan"
+    },
+    "retryPlan": {
+      "$ref": "#/$defs/retryPlan"
+    },
+    "masteryPlan": {
+      "$ref": "#/$defs/masteryPlan"
+    },
+    "reflectionPolicy": {
+      "$ref": "#/$defs/reflectionPolicy"
+    },
+    "adultAuthority": {
+      "$ref": "#/$defs/adultAuthority"
+    },
+    "bodyDignityPolicy": {
+      "$ref": "#/$defs/bodyDignityPolicy"
+    },
+    "tutorPolicy": {
+      "$ref": "#/$defs/tutorPolicy"
+    },
+    "applicabilityNotes": {
+      "description": "Human-readable reasons for type-aware omissions or non-movement applicability decisions.",
+      "$ref": "#/$defs/uniqueStringArray"
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nullableNonEmptyString": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "uniqueStringArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "nonEmptyUniqueStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "lessonType": {
+      "enum": [
+        "MOVEMENT_CONCEPT_CUES",
+        "SKILL_DEVELOPMENT",
+        "TACTICS_DECISION_MAKING",
+        "FITNESS_SELF_MANAGEMENT",
+        "SAFETY_STOP_DECISION",
+        "COOPERATIVE_CREATIVE_ACTIVITY",
+        "REVIEW_RETRIEVAL",
+        "REMEDIATION_RETRY",
+        "MASTERY_PERFORMANCE",
+        "PROJECT_LIFETIME_ACTIVITY"
+      ]
+    },
+    "activitySupply": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activityGoalRef",
+        "entryCheckRef",
+        "movementOrDecisionModelRefs",
+        "commonErrorOrContrastRefs",
+        "equipmentRef",
+        "spaceEnvironmentRef",
+        "oneActionSequenceRef",
+        "practiceProgressionRef",
+        "independentActivityRef"
+      ],
+      "properties": {
+        "activityGoalRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "entryCheckRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "movementOrDecisionModelRefs": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "commonErrorOrContrastRefs": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "equipmentRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "spaceEnvironmentRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "oneActionSequenceRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "practiceProgressionRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "independentActivityRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "warmUpAndFinishPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicability",
+        "warmUpRef",
+        "finishRef",
+        "rationale"
+      ],
+      "properties": {
+        "applicability": {
+          "enum": [
+            "REQUIRED_FOR_MOVEMENT",
+            "NOT_APPLICABLE_NON_MOVEMENT"
+          ]
+        },
+        "warmUpRef": {
+          "$ref": "#/$defs/nullableNonEmptyString"
+        },
+        "finishRef": {
+          "$ref": "#/$defs/nullableNonEmptyString"
+        },
+        "rationale": {
+          "$ref": "#/$defs/nullableNonEmptyString"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "applicability": {
+                "const": "REQUIRED_FOR_MOVEMENT"
+              }
+            },
+            "required": [
+              "applicability"
+            ]
+          },
+          "then": {
+            "properties": {
+              "warmUpRef": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "finishRef": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "rationale": {
+                "const": null
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "applicability": {
+                "const": "NOT_APPLICABLE_NON_MOVEMENT"
+              }
+            },
+            "required": [
+              "applicability"
+            ]
+          },
+          "then": {
+            "properties": {
+              "warmUpRef": {
+                "const": null
+              },
+              "finishRef": {
+                "const": null
+              },
+              "rationale": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "adaptationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adaptationRefs",
+        "equalCreditCriteriaRef",
+        "standardRouteNotRequired",
+        "reasonDisclosureRequired",
+        "adaptationMayBePenalized"
+      ],
+      "properties": {
+        "adaptationRefs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "seated",
+            "supported",
+            "reducedRange",
+            "reducedPaceOrDemand",
+            "mobilityAidCompatible",
+            "solo",
+            "lowSpace",
+            "noEquipment",
+            "describedOrDecisionRoute"
+          ],
+          "properties": {
+            "seated": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "supported": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "reducedRange": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "reducedPaceOrDemand": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "mobilityAidCompatible": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "solo": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "lowSpace": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "noEquipment": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "describedOrDecisionRoute": {
+              "$ref": "#/$defs/nonEmptyString"
+            }
+          }
+        },
+        "equalCreditCriteriaRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "standardRouteNotRequired": {
+          "const": true
+        },
+        "reasonDisclosureRequired": {
+          "const": false
+        },
+        "adaptationMayBePenalized": {
+          "const": false
+        }
+      }
+    },
+    "stopRestPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "learnerControlledRestRef",
+        "stopAndTellRef",
+        "doNotResumeRef",
+        "adultEscalationRef",
+        "safetyStopCountsAsFailure"
+      ],
+      "properties": {
+        "learnerControlledRestRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "stopAndTellRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "doNotResumeRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "adultEscalationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "safetyStopCountsAsFailure": {
+          "const": false
+        }
+      }
+    },
+    "evidencePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceForms",
+        "freshApplicationRef",
+        "successCriteriaRef",
+        "protectedAuthorityRef",
+        "adaptationEquivalenceRef",
+        "permittedSupportRefs",
+        "supportsThatInvalidateIndependence",
+        "physicalCompletionCertification"
+      ],
+      "properties": {
+        "evidenceForms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "AUTHORIZED_OBSERVED_PERFORMANCE",
+              "ACCESSIBLE_MOVEMENT_DEMONSTRATION",
+              "CUE_OR_DECISION_EXPLANATION",
+              "TACTICAL_RESPONSE",
+              "SAFE_SETUP",
+              "ERROR_ANALYSIS",
+              "DESCRIBED_GESTURED_DRAWN_OR_OBJECT_MODEL",
+              "FICTIONAL_PLAN_OR_PROTOCOL"
+            ]
+          }
+        },
+        "freshApplicationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "successCriteriaRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "protectedAuthorityRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "adaptationEquivalenceRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "permittedSupportRefs": {
+          "$ref": "#/$defs/uniqueStringArray"
+        },
+        "supportsThatInvalidateIndependence": {
+          "$ref": "#/$defs/uniqueStringArray"
+        },
+        "physicalCompletionCertification": {
+          "enum": [
+            "NOT_CLAIMED",
+            "AUTHORIZED_ADULT_REQUIRED"
+          ]
+        }
+      }
+    },
+    "retryPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "triggerRefs",
+        "simplerSafeVersionRef",
+        "alternateModelOrCueRefs",
+        "boundedPracticeRef",
+        "freshRetryRef",
+        "exitCriterionRef"
+      ],
+      "properties": {
+        "triggerRefs": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "simplerSafeVersionRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "alternateModelOrCueRefs": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "boundedPracticeRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "freshRetryRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "exitCriterionRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "masteryPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumEvidenceOccasions",
+        "laterRetrievalOrTransferRef",
+        "decisionAuthorityRef",
+        "standardMovementRouteRequired",
+        "bodyOrNormEvidenceAllowed",
+        "subjectiveReflectionSufficient"
+      ],
+      "properties": {
+        "minimumEvidenceOccasions": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "laterRetrievalOrTransferRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "decisionAuthorityRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "standardMovementRouteRequired": {
+          "const": false
+        },
+        "bodyOrNormEvidenceAllowed": {
+          "const": false
+        },
+        "subjectiveReflectionSufficient": {
+          "const": false
+        }
+      }
+    },
+    "reflectionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "promptRef",
+        "allowedFocus",
+        "subjectiveJudgmentPolicy",
+        "bodyComparisonAllowed",
+        "adaptationJustificationRequired"
+      ],
+      "properties": {
+        "promptRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "allowedFocus": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "CUE",
+              "DECISION",
+              "SAFETY_CHECK",
+              "ADAPTATION",
+              "TACTIC",
+              "REST_OR_STOP",
+              "NEXT_STEP",
+              "QUESTION_OR_UNCERTAINTY"
+            ]
+          }
+        },
+        "subjectiveJudgmentPolicy": {
+          "const": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG"
+        },
+        "bodyComparisonAllowed": {
+          "const": false
+        },
+        "adaptationJustificationRequired": {
+          "const": false
+        }
+      }
+    },
+    "adultAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "authorityRuleRef",
+        "confirmationBoundaryRef",
+        "equalCreditAlternativeRef",
+        "tutorOrLearnerMaySubstitute"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "NONE",
+            "GUARDIAN_PERMISSION",
+            "ADULT_OBSERVATION",
+            "DIRECT_ADULT_SUPERVISION",
+            "QUALIFIED_INSTRUCTOR_OR_PROFESSIONAL"
+          ]
+        },
+        "authorityRuleRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "confirmationBoundaryRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "equalCreditAlternativeRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "tutorOrLearnerMaySubstitute": {
+          "const": false
+        }
+      }
+    },
+    "bodyDignityPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bodyScoringAllowed",
+        "dietingOrBodyValueLanguageAllowed",
+        "disabilityOrAdaptationPenaltyAllowed",
+        "exerciseAsPunishmentAllowed",
+        "privateHealthDisclosureRequired"
+      ],
+      "properties": {
+        "bodyScoringAllowed": {
+          "const": false
+        },
+        "dietingOrBodyValueLanguageAllowed": {
+          "const": false
+        },
+        "disabilityOrAdaptationPenaltyAllowed": {
+          "const": false
+        },
+        "exerciseAsPunishmentAllowed": {
+          "const": false
+        },
+        "privateHealthDisclosureRequired": {
+          "const": false
+        }
+      }
+    },
+    "tutorPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "mayExplainApprovedContent",
+        "mayCueApprovedModel",
+        "mayAdaptInstructionalPresentation",
+        "mayCoachLearnerDecision",
+        "mayDiagnoseOrPrescribe",
+        "mayClaimUnapprovedObservation",
+        "mayCertifyPhysicalCompletion",
+        "mayOverrideGuardianOrSafetyAuthority",
+        "missingSupplyState",
+        "authorityConflictState"
+      ],
+      "properties": {
+        "scope": {
+          "const": "CURRICULUM_METADATA_ONLY"
+        },
+        "mayExplainApprovedContent": {
+          "const": true
+        },
+        "mayCueApprovedModel": {
+          "const": true
+        },
+        "mayAdaptInstructionalPresentation": {
+          "const": true
+        },
+        "mayCoachLearnerDecision": {
+          "const": true
+        },
+        "mayDiagnoseOrPrescribe": {
+          "const": false
+        },
+        "mayClaimUnapprovedObservation": {
+          "const": false
+        },
+        "mayCertifyPhysicalCompletion": {
+          "const": false
+        },
+        "mayOverrideGuardianOrSafetyAuthority": {
+          "const": false
+        },
+        "missingSupplyState": {
+          "const": "BLOCKED_MISSING_CURRICULUM"
+        },
+        "authorityConflictState": {
+          "const": "BLOCKED_AUTHORITY_CONFLICT"
+        }
+      }
+    }
+  }
+}
