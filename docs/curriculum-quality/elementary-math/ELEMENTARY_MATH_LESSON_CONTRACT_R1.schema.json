@@ -1,0 +1,1006 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/elementary-math-lesson-contract-r1-draft.json",
+  "title": "Manuel Academy Elementary Math Lesson Contract R1 Draft",
+  "description": "Draft curriculum-supply contract for Grades 3-5. This schema is not a runtime or global release gate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "lesson_id",
+    "grade",
+    "subject",
+    "lesson_kind",
+    "learning_goal",
+    "standard_refs",
+    "learner_content",
+    "protected_content",
+    "tutor_manifest"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "elementary-math-lesson-standard-r1-draft"
+    },
+    "lesson_id": {
+      "$ref": "#/$defs/id"
+    },
+    "grade": {
+      "enum": [3, 4, 5]
+    },
+    "subject": {
+      "const": "mathematics"
+    },
+    "lesson_kind": {
+      "$ref": "#/$defs/lesson_kind"
+    },
+    "learning_goal": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "standard_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/standard_ref"
+      }
+    },
+    "learner_content": {
+      "$ref": "#/$defs/learner_content"
+    },
+    "protected_content": {
+      "$ref": "#/$defs/protected_content"
+    },
+    "tutor_manifest": {
+      "$ref": "#/$defs/tutor_manifest"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lesson_kind": {
+            "const": "NORMAL_CONCEPT_LESSON"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "learner_content": {
+            "allOf": [
+              {
+                "properties": {
+                  "teaching_blocks": {
+                    "minItems": 2,
+                    "maxItems": 3
+                  },
+                  "worked_examples": {
+                    "minItems": 3
+                  },
+                  "banks": {
+                    "properties": {
+                      "diagnostic_item_refs": {
+                        "maxItems": 0
+                      },
+                      "guided_item_refs": {
+                        "minItems": 4,
+                        "maxItems": 6
+                      },
+                      "independent_item_refs": {
+                        "minItems": 10,
+                        "maxItems": 12
+                      },
+                      "mastery_item_refs": {
+                        "minItems": 4,
+                        "maxItems": 5
+                      },
+                      "remediation_item_refs": {
+                        "minItems": 4,
+                        "maxItems": 6
+                      },
+                      "assessment_item_refs": {
+                        "maxItems": 0
+                      },
+                      "challenge_item_refs": {
+                        "minItems": 1,
+                        "maxItems": 2
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "worked_examples": {
+                    "contains": {
+                      "properties": {
+                        "role": {
+                          "const": "basic"
+                        }
+                      },
+                      "required": ["role"]
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "worked_examples": {
+                    "contains": {
+                      "properties": {
+                        "role": {
+                          "const": "grade-level"
+                        }
+                      },
+                      "required": ["role"]
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "worked_examples": {
+                    "contains": {
+                      "properties": {
+                        "role": {
+                          "enum": ["application", "contrasting-case"]
+                        }
+                      },
+                      "required": ["role"]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_kind": {
+            "const": "DIAGNOSTIC"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {
+                "maxItems": 0
+              },
+              "worked_examples": {
+                "maxItems": 0
+              },
+              "banks": {
+                "properties": {
+                  "diagnostic_item_refs": {
+                    "minItems": 5,
+                    "maxItems": 8
+                  },
+                  "guided_item_refs": {
+                    "maxItems": 0
+                  },
+                  "independent_item_refs": {
+                    "maxItems": 0
+                  },
+                  "mastery_item_refs": {
+                    "maxItems": 0
+                  },
+                  "remediation_item_refs": {
+                    "maxItems": 0
+                  },
+                  "assessment_item_refs": {
+                    "maxItems": 0
+                  },
+                  "challenge_item_refs": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_kind": {
+            "const": "REVIEW"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {
+                "minItems": 1,
+                "maxItems": 2
+              },
+              "worked_examples": {
+                "minItems": 1,
+                "maxItems": 2
+              },
+              "banks": {
+                "properties": {
+                  "diagnostic_item_refs": {
+                    "maxItems": 0
+                  },
+                  "guided_item_refs": {
+                    "minItems": 3,
+                    "maxItems": 5
+                  },
+                  "independent_item_refs": {
+                    "minItems": 6,
+                    "maxItems": 10
+                  },
+                  "mastery_item_refs": {
+                    "minItems": 3,
+                    "maxItems": 5
+                  },
+                  "remediation_item_refs": {
+                    "minItems": 2,
+                    "maxItems": 4
+                  },
+                  "assessment_item_refs": {
+                    "maxItems": 0
+                  },
+                  "challenge_item_refs": {
+                    "maxItems": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_kind": {
+            "const": "REMEDIATION"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {
+                "minItems": 2,
+                "maxItems": 3
+              },
+              "worked_examples": {
+                "minItems": 2,
+                "maxItems": 3
+              },
+              "banks": {
+                "properties": {
+                  "diagnostic_item_refs": {
+                    "maxItems": 0
+                  },
+                  "guided_item_refs": {
+                    "maxItems": 0
+                  },
+                  "independent_item_refs": {
+                    "minItems": 4,
+                    "maxItems": 6
+                  },
+                  "mastery_item_refs": {
+                    "minItems": 3,
+                    "maxItems": 4
+                  },
+                  "remediation_item_refs": {
+                    "minItems": 4,
+                    "maxItems": 6
+                  },
+                  "assessment_item_refs": {
+                    "maxItems": 0
+                  },
+                  "challenge_item_refs": {
+                    "maxItems": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_kind": {
+            "const": "MASTERY"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {
+                "maxItems": 0
+              },
+              "worked_examples": {
+                "maxItems": 0
+              },
+              "banks": {
+                "properties": {
+                  "diagnostic_item_refs": {
+                    "maxItems": 0
+                  },
+                  "guided_item_refs": {
+                    "maxItems": 0
+                  },
+                  "independent_item_refs": {
+                    "maxItems": 0
+                  },
+                  "mastery_item_refs": {
+                    "minItems": 4,
+                    "maxItems": 5
+                  },
+                  "remediation_item_refs": {
+                    "maxItems": 0
+                  },
+                  "assessment_item_refs": {
+                    "maxItems": 0
+                  },
+                  "challenge_item_refs": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_kind": {
+            "const": "ASSESSMENT"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {
+                "maxItems": 0
+              },
+              "worked_examples": {
+                "maxItems": 0
+              },
+              "banks": {
+                "properties": {
+                  "diagnostic_item_refs": {
+                    "maxItems": 0
+                  },
+                  "guided_item_refs": {
+                    "maxItems": 0
+                  },
+                  "independent_item_refs": {
+                    "maxItems": 0
+                  },
+                  "mastery_item_refs": {
+                    "maxItems": 0
+                  },
+                  "remediation_item_refs": {
+                    "maxItems": 0
+                  },
+                  "assessment_item_refs": {
+                    "minItems": 8,
+                    "maxItems": 30
+                  },
+                  "challenge_item_refs": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9:-]*$"
+    },
+    "lesson_kind": {
+      "enum": [
+        "NORMAL_CONCEPT_LESSON",
+        "DIAGNOSTIC",
+        "REVIEW",
+        "REMEDIATION",
+        "MASTERY",
+        "ASSESSMENT"
+      ]
+    },
+    "standard_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["framework_ref", "mapping_status"],
+      "properties": {
+        "framework_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "standard_id": {
+          "$ref": "#/$defs/id"
+        },
+        "legacy_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "mapping_status": {
+          "enum": ["canonical", "unverified", "human-review"]
+        }
+      },
+      "anyOf": [
+        {
+          "required": ["standard_id"]
+        },
+        {
+          "required": ["legacy_label"]
+        }
+      ]
+    },
+    "teaching_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["block_id", "child_heading", "title", "explanation_steps"],
+      "properties": {
+        "block_id": {
+          "$ref": "#/$defs/id"
+        },
+        "child_heading": {
+          "const": "Learn"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "explanation_steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 320
+          }
+        },
+        "representation": {
+          "$ref": "#/$defs/representation"
+        }
+      }
+    },
+    "worked_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["work", "why"],
+      "properties": {
+        "work": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 320
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 320
+        }
+      }
+    },
+    "worked_example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "example_id",
+        "child_heading",
+        "role",
+        "problem",
+        "concept_notice",
+        "steps",
+        "final_answer"
+      ],
+      "properties": {
+        "example_id": {
+          "$ref": "#/$defs/id"
+        },
+        "child_heading": {
+          "const": "Example"
+        },
+        "role": {
+          "enum": ["basic", "grade-level", "application", "contrasting-case"]
+        },
+        "problem": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "concept_notice": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 320
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/worked_step"
+          }
+        },
+        "final_answer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 320
+        },
+        "reasonableness_check": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 320
+        },
+        "representation": {
+          "$ref": "#/$defs/representation"
+        }
+      }
+    },
+    "representation": {
+      "enum": [
+        "text",
+        "visual",
+        "concrete",
+        "number-line",
+        "place-value-chart",
+        "base-ten-blocks",
+        "decomposition",
+        "diagram",
+        "table",
+        "array",
+        "equal-groups",
+        "area-model",
+        "fraction-bar",
+        "equation",
+        "word-context",
+        "mixed"
+      ]
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "item_kind",
+        "prompt",
+        "response_kind",
+        "support_level",
+        "concept_ids",
+        "misconception_ids",
+        "allowed_instructional_supports"
+      ],
+      "properties": {
+        "item_id": {
+          "$ref": "#/$defs/id"
+        },
+        "item_kind": {
+          "enum": [
+            "direct-skill",
+            "word-application",
+            "reasoning",
+            "error-analysis",
+            "mixed-review",
+            "representation",
+            "explain-thinking"
+          ]
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "response_kind": {
+          "enum": [
+            "CHOICE",
+            "TEXT",
+            "NUMERIC",
+            "CONSTRUCTED_RESPONSE",
+            "ACTIVITY_EVIDENCE"
+          ]
+        },
+        "support_level": {
+          "description": "Authored support available in this item. Semantic validation requires independent for diagnostic, mastery, and assessment evidence and checks fading across guided practice.",
+          "enum": ["full", "partial", "independent"]
+        },
+        "choices": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 320
+          }
+        },
+        "representation": {
+          "$ref": "#/$defs/representation"
+        },
+        "concept_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "misconception_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "allowed_instructional_supports": {
+          "$ref": "#/$defs/support_array"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "response_kind": {
+                "const": "CHOICE"
+              }
+            }
+          },
+          "then": {
+            "required": ["choices"]
+          }
+        }
+      ]
+    },
+    "banks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "diagnostic_item_refs",
+        "guided_item_refs",
+        "independent_item_refs",
+        "mastery_item_refs",
+        "remediation_item_refs",
+        "assessment_item_refs",
+        "challenge_item_refs"
+      ],
+      "properties": {
+        "diagnostic_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "guided_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "independent_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "mastery_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "remediation_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "assessment_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "challenge_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        }
+      }
+    },
+    "learner_content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "teaching_blocks",
+        "worked_examples",
+        "items",
+        "banks",
+        "presentation_order"
+      ],
+      "properties": {
+        "teaching_blocks": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/teaching_block"
+          }
+        },
+        "worked_examples": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/worked_example"
+          }
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        },
+        "banks": {
+          "$ref": "#/$defs/banks"
+        },
+        "presentation_order": {
+          "description": "Ordered learner-facing stages. Semantic validation enforces the phase-specific required stages and their order.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/presentation_stage"
+          }
+        }
+      }
+    },
+    "presentation_stage": {
+      "enum": [
+        "goal",
+        "teaching",
+        "worked-examples",
+        "diagnostic",
+        "guided-practice",
+        "independent-practice",
+        "mastery-check",
+        "remediation",
+        "assessment",
+        "challenge"
+      ]
+    },
+    "adult_key_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item_ref", "acceptable_answers", "reasoning", "misconception_ids"],
+      "properties": {
+        "item_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "acceptable_answers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "reasoning": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "scoring_guidance": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "misconception_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        }
+      }
+    },
+    "protected_content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adult_key"],
+      "properties": {
+        "adult_key": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/adult_key_entry"
+          }
+        }
+      }
+    },
+    "support": {
+      "enum": [
+        "text",
+        "visual",
+        "concrete",
+        "worked-example",
+        "read-aloud",
+        "step-chunking",
+        "reduced-copying",
+        "alternate-response-mode",
+        "number-line",
+        "place-value-chart",
+        "base-ten-blocks",
+        "decomposition",
+        "diagram",
+        "table",
+        "array",
+        "equal-groups",
+        "area-model",
+        "fraction-bar"
+      ]
+    },
+    "support_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/support"
+      }
+    },
+    "tutor_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signal", "strategy", "parameters"],
+      "properties": {
+        "signal": {
+          "enum": [
+            "prerequisite-gap",
+            "procedure-without-understanding",
+            "correct-low-confidence",
+            "repeated-error-pattern",
+            "mastery-evidence"
+          ]
+        },
+        "strategy": {
+          "enum": [
+            "prerequisite-reteach",
+            "conceptual-explanation",
+            "confidence-calibration",
+            "error-pattern-contrast",
+            "mastery-evidence-collection"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "representation": {
+              "enum": ["text", "visual", "concrete", "worked-example"]
+            },
+            "retry_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "review_timing": {
+              "enum": ["same-session", "same-day", "next-session"]
+            },
+            "require_explanation": {
+              "type": "boolean"
+            },
+            "evidence_type": {
+              "enum": [
+                "worked-example",
+                "explanation",
+                "error-analysis",
+                "application",
+                "retrieval",
+                "performance"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "tutor_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lesson_id",
+        "lesson_kind",
+        "standard_refs",
+        "concept_ids",
+        "prerequisite_concept_ids",
+        "misconception_ids",
+        "worked_example_refs",
+        "diagnostic_item_refs",
+        "guided_item_refs",
+        "independent_item_refs",
+        "mastery_item_refs",
+        "remediation_item_refs",
+        "assessment_item_refs",
+        "challenge_item_refs",
+        "hint_policy_ref",
+        "answer_policy_ref",
+        "age_policy_ref",
+        "allowed_instructional_supports",
+        "tutor_routes"
+      ],
+      "properties": {
+        "lesson_id": {
+          "$ref": "#/$defs/id"
+        },
+        "lesson_kind": {
+          "$ref": "#/$defs/lesson_kind"
+        },
+        "standard_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/standard_ref"
+          }
+        },
+        "concept_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "prerequisite_concept_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "misconception_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "worked_example_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "diagnostic_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "guided_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "independent_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "mastery_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "remediation_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "assessment_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "challenge_item_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "hint_policy_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "answer_policy_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "age_policy_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "allowed_instructional_supports": {
+          "$ref": "#/$defs/support_array"
+        },
+        "tutor_routes": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/tutor_route"
+          }
+        }
+      }
+    },
+    "id_array": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "id_array_allow_empty": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    }
+  }
+}
