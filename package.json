@@ -23,6 +23,7 @@
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts",
     "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts",
     "test:hosted-sync-db-rpc-r2": "vitest run supabase/academy-study-sync-lossless-v2.db.test.ts supabase/academy-study-cross-device-authority.db.test.ts supabase/study-engine-migration-manifest.test.ts",
+    "test:hosted-sync-r2": "vitest run --config tests/hosted-sync-r2/vitest.config.mjs",
     "test:admin-auth": "vitest run src/admin/authorization.test.ts netlify/functions/_shared/admin-authorization.test.js netlify/functions/admin-authorization.test.js supabase/academy-admin-authorization.db.test.ts",
     "test:admin-browser": "playwright test --config playwright.admin.config.ts",
     "audit:family-pilot-launch": "npm run audit:learner-release && node scripts/audit-final-family-pilot-launch.mjs",
