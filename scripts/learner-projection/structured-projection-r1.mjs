@@ -493,10 +493,10 @@ function extractRubric(markdown) {
 }
 
 function attachMarkdownResponseItems(sections, markdown, lessonRef, subject) {
-  const questions = [...markdown.matchAll(/^\*\*Q(\d+)\.\*\*\s*([^\n]+)/gm)]
-  if (questions.length) {
-    const target = sections.find((section) => /analysis-question/i.test(section.sectionKind)) ?? sections.at(-1)
-    target.items = questions.map((match) => ({
+  for (const section of sections) {
+    const questions = [...(section.body || '').matchAll(/^\*\*Q(\d+)\.\*\*\s*([^\n]+)/gm)]
+    if (!questions.length) continue
+    section.items = questions.map((match) => ({
       itemRef: `${lessonRef}#Q${match[1]}`,
       sourceItemRef: `Q${match[1]}`,
       itemKind: 'question',

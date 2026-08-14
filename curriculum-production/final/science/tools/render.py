@@ -13,6 +13,8 @@ contains an expected answer or a filled-in value.
 
 from __future__ import annotations
 
+import director_sample_r1
+
 from safety_brief import resolve
 
 BLANK_CELL = " "
@@ -330,6 +332,12 @@ def _rubric_section(package: dict, shared: dict) -> str:
 
 def student_sheet(package: dict, shared: dict, floor: dict) -> str:
     brief = resolve(package["safety_brief"], floor, package["band"])
+    if package.get("director_sample_r1"):
+        return director_sample_r1.student_sheet(
+            package,
+            _safety_section(brief),
+            shared["text"][package["equal_credit_safe_alternative"]["equal_credit_rule_ref"]],
+        )
     text = shared["text"]
     lines = [
         f"# {package['title']}",

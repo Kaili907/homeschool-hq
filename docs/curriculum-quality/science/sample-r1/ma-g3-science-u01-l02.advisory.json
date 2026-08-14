@@ -1,0 +1,76 @@
+{
+  "contractVersion": "science-lesson-advisory-r1",
+  "status": "DRAFT_ADVISORY",
+  "lessonId": "ma-g3-science-u01-l02",
+  "primaryLessonType": "CONCEPT_BUILD",
+  "instructionalModes": [
+    "PHENOMENON_OBSERVATION",
+    "GUIDED_PRACTICE",
+    "MODEL_BUILDING",
+    "CLAIM_EVIDENCE_REASONING",
+    "MASTERY",
+    "REMEDIATION"
+  ],
+  "phase": "TEACH",
+  "conceptIds": [
+    "SCI-G3-SEP-TESTABLE-QUESTION",
+    "SCI-G3-SEP-EVIDENCE-PLAN",
+    "SCI-G3-SEP-CER-LINK"
+  ],
+  "prerequisiteConceptIds": [
+    "SCI-G3-SEP-OBSERVATION-VS-OPINION"
+  ],
+  "misconceptionIds": [
+    "SCI-MISCONCEPTION-TESTABLE-MEANS-ALREADY-TESTED",
+    "SCI-MISCONCEPTION-ANY-SCIENCE-QUESTION-IS-TESTABLE"
+  ],
+  "phenomenonSourceRefs": [
+    "ma-g3-science-u01-l02#phenomenon-described-puddles",
+    "ma-g3-science-u01-l02#fresh-bird-feeder-card"
+  ],
+  "representationRefs": [
+    "ma-g3-science-u01-l02#question-plan-record-decide-model",
+    "ma-g3-science-u01-l02#evidence-door-remediation-contrast"
+  ],
+  "allowedSupport": [
+    "READ_ALOUD",
+    "TERM_DEFINITION",
+    "VOCABULARY_GLOSSARY",
+    "REPRESENTATION_DESCRIPTION",
+    "PARTIALLY_WORKED_MODEL",
+    "PROCEDURE_CHUNKING",
+    "QUESTION_REPHRASE",
+    "EVIDENCE_LOCATION_PROMPT",
+    "SELF_CHECK_CRITERIA",
+    "ALTERNATE_RESPONSE_MODE"
+  ],
+  "answerPolicy": "TEACHING_VISIBLE",
+  "safetyPolicyRef": "curriculum-production/final/science/policy/safety-floor.json",
+  "ageLanguagePolicyRef": "SCIENCE_LESSON_STANDARD_R1#grades-3-5",
+  "metadataApplicabilityNotes": [],
+  "teachingEvidence": {
+    "priorKnowledgeActivationRef": "ma-g3-science-u01-l02#phenomenon-described-puddles",
+    "conceptExplanationRef": "ma-g3-science-u01-l02#learn-testable-question",
+    "vocabularyRef": "ma-g3-science-u01-l02#words-scientists-use",
+    "workedTeachingObjectRefs": [
+      "ma-g3-science-u01-l02#question-plan-record-decide-model",
+      "ma-g3-science-u01-l02#worked-cer"
+    ],
+    "observationExplanationBridgeRef": "ma-g3-science-u01-l02#notice-record-explain",
+    "misconceptionHandlingRefs": [
+      "ma-g3-science-u01-l02#evidence-door-remediation-contrast"
+    ]
+  },
+  "evidencePlan": {
+    "evidenceForms": [
+      "APPLICATION",
+      "DIAGRAM_MODEL",
+      "SCIENTIFIC_EXPLANATION",
+      "CLAIM_EVIDENCE_REASONING"
+    ],
+    "freshInputRef": "ma-g3-science-u01-l02#fresh-bird-feeder-card",
+    "successCriteriaRef": "ma-g3-science-u01-l02#check-your-work",
+    "correctnessAuthorityRef": "curriculum-production/final/science/packages/ma-g3-science/scoring/ma-g3-science-u01-l02.md"
+  },
+  "adultAuthorityRef": "curriculum-production/final/science/packages/ma-g3-science/scoring/ma-g3-science-u01-l02.md"
+}

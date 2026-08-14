@@ -153,7 +153,7 @@ test('all 8,292 production packages build into the audited lazy structured proje
     taskGroupsProjected: 3023,
     taskStepsProjected: 8100,
     instructionalWorkedSolutions: 1574,
-    adultFieldsRemoved: 25848,
+    adultFieldsRemoved: 25847,
     adultResourceLocatorsRemoved: 7320,
   })
   assert.doesNotMatch(JSON.stringify(manifest), /ma-g12-financial-literacy-u07-l72|Which group takes more/)

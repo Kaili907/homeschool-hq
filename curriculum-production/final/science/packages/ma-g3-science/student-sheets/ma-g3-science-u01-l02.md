@@ -1,24 +1,184 @@
 # Concept model A: testable questions
 
-**Grade 3 Science** · Unit 1: Science and Engineering Practices · Day 2 of the unit (course day 2) · about 40–55 minutes
+**Grade 3 Science** · Unit 1: Science and Engineering Practices · Day 2 · about 40–50 minutes
 
-**Today's focus:** testable questions
+**Science Director sample R1** · exact lesson `ma-g3-science-u01-l02`
 
 **Unit question:** How can understanding science and engineering practices help us explain, decide, create, or solve something that matters?
 
-**What you are aiming at:**
+**Today’s goal:** Turn a notice into a testable question, show the evidence plan in a model, and explain the reasoning without inventing a result.
 
-- Build a clear mental model of testable questions through an explicit worked example, demonstration, text, or phenomenon.
-- Use subject-appropriate evidence or representation to communicate understanding of testable questions.
-- Check, revise, or improve work about testable questions using stated success criteria.
+**Materials:** this learner sheet; course notebook or response space; pencil or accessible response tool.
 
-**Materials:**
+**Today’s safety:** This is a desk lesson. Do not collect puddle, ramp, bridge, towel, or bird-feeder data. No protective equipment is needed. If you want to carry out any investigation later, stop and use a separately approved lesson with its own materials, adult role, safety steps, and equal-credit alternative.
 
-- this complete learner sheet
-- course notebook or response space
-- accessible response tool
+You may read, listen, speak, type, draw, handwrite, or use a tactile model. The scientific target and scoring ceiling stay the same.
 
-## Safety — read this before you touch anything
+## The science information and exact work for this lesson
+
+Everything needed for this desk lesson is printed here. No outside source or physical result is required.
+
+**How can Ari turn a notice about sunny and shady puddles into a question that observations could answer?**
+
+**Bound question:** What makes a question answerable with scientific evidence, and how can a model show the evidence needed?
+
+**Observation honesty:** DESCRIBED OBSERVATION, PROPOSED PLAN, and PROPOSED RECORD are not learner results. Leave results unknown unless they are actually collected in an approved investigation.
+
+## 1. Start with a phenomenon
+
+**Origin: DESCRIBED OBSERVATION.** After a rain, Ari notices puddles in sunny places and puddles in shady places. Ari did not measure their starting sizes or how long they lasted. This description is something to think about; it is not a result from an experiment you did.
+
+**Today’s question:** How can Ari turn that notice into a question that observations could answer?
+
+First separate noticing from explaining:
+
+| Move | What Ari can honestly say now |
+| --- | --- |
+| Notice | There are puddles in sunny and shady places. |
+| Record | No sizes or times were recorded yet. |
+| Explain | It is too soon to say why one puddle lasts longer. |
+
+Science begins with careful questions. It does not begin by pretending a result is already known.
+
+## 2. Learn what makes a question testable
+
+A **testable question** is a question that could be answered with observations or measurements. You do not have to run the test today. You do need to be able to describe what someone could compare and what someone could notice or measure.
+
+A strong testable question usually names two parts:
+
+1. **What will differ or be compared?** For the puddles, that could be sun and shade.
+2. **What will be observed or measured?** That could be the number of minutes until the water is gone.
+
+Evidence can help answer, challenge, or leave a testable question undecided. Evidence cannot decide a personal preference such as “Which puddle is prettiest?” A preference may matter, but it is not settled by a measurement alone.
+
+### Words scientists use
+
+| Word | Meaning here | Example |
+| --- | --- | --- |
+| phenomenon | something that happens and can be noticed | puddles changing after rain |
+| observation | information noticed and recorded | the puddle is in shade |
+| measure | to compare with a unit or count | record minutes |
+| evidence | recorded information used to answer a question | the time record for each puddle |
+| testable question | a question a possible observation or measurement could answer | Does sun or shade affect how long equal puddles last? |
+
+**Boundary:** Testable does not automatically mean safe, fair, or worth doing. A real investigation also needs a safe plan and a fair comparison.
+
+## 3. Worked model: question to evidence
+
+**Goal:** Decide whether this question is testable: “Does being in sun or shade affect how long equal amounts of water last?”
+
+**Input:** The described puddle phenomenon and a plan—not experimental results.
+
+`QUESTION -> PLAN -> RECORD -> DECIDE`
+
+| Model part | Scientist’s think-aloud |
+| --- | --- |
+| Question | It names the comparison: sun or shade. |
+| Plan | Put equal amounts of water in the same kind of shallow container. Place one in sun and one in shade. An adult would approve any real setup. |
+| Record | Record the number of minutes until each container is empty. Leave the result blank until it is actually observed. |
+| Decide | Compare the recorded times. The evidence may support a difference, show no difference, or be too limited to decide. |
+
+### Worked scientific reasoning
+
+**Claim:** The sun-or-shade question is testable.
+
+**Evidence:** A possible plan names what to compare and a time measurement that could be recorded for both conditions.
+
+**Reasoning:** Because the time record could change the answer, observations could help decide the question.
+
+**Check and limitation:** The plan must start with equal amounts of water in similar containers. One trial in one place would not prove what always happens everywhere.
+
+The completed model represents how a question connects to evidence. It does not predict which water will disappear first and it does not report a learner result.
+
+## 4. Guided practice: use the model with less help
+
+**New context:** Jordan asks, “Does the height of a toy-car ramp change how far the car rolls?” Today you are planning only. Do not build or test a ramp for this lesson.
+
+The first model part is filled in. Complete the rest with the prompts below.
+
+| Model part | Guided start |
+| --- | --- |
+| Question | Compare two ramp heights. |
+| Plan | Keep the car and starting place the same. ___ |
+| Record | Measure ___ in ___ units. |
+| Decide | Compare ___ to answer the question. |
+
+Support fades across Q1–Q3. Q1 points to a choice, Q2 asks you to complete the plan, and Q3 asks you to connect claim, evidence, and reasoning.
+
+**Q1.** Which record could help answer Jordan’s question: the car’s color, the distance it rolls from each ramp height, or which ramp looks best? Explain your choice.
+
+>
+
+**Q2.** Complete the Plan, Record, and Decide rows. Name what must stay the same so the comparison is fair.
+
+>
+
+**Q3.** Write a short CER: claim whether Jordan’s question is testable, give one feature of the plan as evidence, and explain why that feature lets observations bear on the claim. Add one limitation.
+
+>
+
+## 5. Independent evidence: a fresh case
+
+**Fresh case:** A library club can make paper bridges from one sheet of paper. The club wants a question that could be answered by a record, not by opinion. You are designing the question and evidence plan only. No building or testing is required.
+
+The worked puddle model is no longer filled in for you. Use the four labels **Question, Plan, Record, Decide** only if they help you organize your own thinking.
+
+**Q4.** Write one testable question about two paper-bridge designs. Name what would be compared, what would be counted or measured, one thing to keep the same, and what record could decide the answer.
+
+>
+
+**Q5.** State one conclusion that the planned record could support and one conclusion it could not support, even if the plan were followed perfectly.
+
+>
+
+## 6. Fresh mastery: keep the teaching page closed
+
+Complete this card without reopening the worked example. Definitions and the completed model are intentionally absent here.
+
+**Fresh phenomenon card — SUPPLIED DESCRIPTION:** A school garden has two identical bird feeders. The class is deciding whether changing the kind of seed changes how many bird visits are recorded during the same morning time. No visit counts are supplied, and none should be invented.
+
+**Q6.** Write the class’s testable question. Then make a small evidence-plan model that shows what would be compared, what would be recorded, and how that record could help decide the question without predicting or inventing any bird visits.
+
+>
+
+**Q7.** Explain why your question is testable. Use a claim, a relevant feature of your evidence plan, reasoning that links the feature to your claim, and one limit of the planned evidence.
+
+>
+
+## 7. If the idea is still unclear: use a different picture
+
+**Use the evidence-door test.** Imagine every observation is a key. Ask: “Could a careful record open this question by changing which answer is supported?”
+
+| Question | Can a record open the evidence door? | Why? |
+| --- | --- | --- |
+| Which paper color is prettiest? | No | A measurement cannot settle everyone’s preference. |
+| Which paper color reaches the higher temperature under the same lamp? | Yes | A temperature record could support one answer. |
+
+This explanation uses a deciding-evidence contrast instead of the earlier Question–Plan–Record–Decide model.
+
+**Fresh retry:** “Which towel is best?” is too unclear and may be only an opinion. Rewrite it so a record of water absorbed under the same conditions could help decide it. Name the record you would need. Planning only—do not run a towel test in this lesson.
+
+## Check your work
+
+| Success criterion | Ready when… |
+| --- | --- |
+| Question and evidence | You name what would be compared and what would be observed or measured. |
+| Model and honesty | Your model connects the question to a possible record without predicting or inventing a result. |
+| Scientific reasoning | Your explanation links evidence to the claim and states one limitation. |
+
+**Freshness rule:** Q6–Q7 use a new phenomenon card. The card does not repeat the definition, completed model, or worked reasoning. Use it on a different occasion before any mastery decision when feasible.
+
+### Equal-credit route — complete and delivered here
+
+Use the same phenomenon cards and Question–Plan–Record–Decide target. Respond by speaking, typing, drawing, handwriting, or using a tactile representation. No camera, account, purchase, physical investigation, or private disclosure is required.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
+## Science safety policy reference — not part of today’s desk task
+
+The complete course safety floor remains available below for later planning. Today’s route uses no materials beyond paper and an accessible response tool.
+
+### Full course safety floor
 
 Read this before you start. If anything here does not match what is in front of you, stop and ask the adult who is helping you.
 
@@ -85,168 +245,7 @@ This lesson's curriculum source prescribes no fixed procedure, so this package s
 
 Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
 
-## The science information and exact work for this lesson
-
-Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
-
-### Science brief
-
-- Science brief: a testable question is one that could be answered by observing something or by doing something and seeing what happens.
-- Science brief: a testable question names something to change or look at and something to notice or measure.
-- Science brief: questions about what is best, prettiest, or fairest are not settled by a test on their own, because no observation decides them.
-
-### Evidence check: testable questions
-
-**Candidate claim:** A case report presents this as acceptable science: “calling a question testable when no possible observation could answer it.”
-
-_candidate claim; the learner decides from the supplied record._
-
-### Complete reference-evidence record for this lesson
-
-| Evidence ID | Type | Information |
-| --- | --- | --- |
-| E1 | established science reference | Science brief: a testable question is one that could be answered by observing something or by doing something and seeing what happens. |
-| E2 | established science reference | Science brief: a testable question names something to change or look at and something to notice or measure. |
-| E3 | established science reference | Science brief: questions about what is best, prettiest, or fairest are not settled by a test on their own, because no observation decides them. |
-
-**Input provenance:** Manuel Academy Science learner brief for topic ma-g3-science-u01::testable questions, derived from the reviewed correctness source policy/correctness/ma-g3-science.correctness.json.
-
-**Supplied unit connections:** careful observations; testable questions; models and drawings; fair tests; measuring and recording data; criteria and constraints
-
-**Supplied unit performance task:** Define a simple design problem from home or class life, list its criteria and constraints, and plan a fair test.
-
-### Bound task
-
-**Question:** What does evidence E1 through E3 justify about testable questions, and does it support the candidate claim?
-
-1. Read the science brief and the candidate claim.
-2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
-3. Build a labelled model that includes every accepted relationship in the science brief and test it against the case claim.
-4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
-5. Check the response against today's success criteria and revise one part.
-
-### Equal-credit route — complete and delivered here
-
-**Route type:** ACCESSIBLE_RESPONSE_ROUTE
-
-**Materials:**
-
-- the supplied evidence record
-- a spoken, typed, drawn, or tactile response mode
-
-**Do this:**
-
-1. Use the same E1-E3 record and answer the same bound question.
-2. Respond in an accessible mode without changing the evidence or success criteria.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
-## Your data sheet
-
-_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
-
-**The task.** What does evidence E1 through E3 justify about testable questions, and does it support the candidate claim? Follow the five bound steps printed above and cite the supplied evidence IDs.
-
-**Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
-
->
-
-### Record as you go
-
-_Fill these in as you go, not from memory afterwards. A trial that went wrong is written down and explained, never erased._
-
-| Step | My work | The evidence or reasoning behind it |
-| --- | --- | --- |
-|   |   |   |
-|   |   |   |
-|   |   |   |
-
-### Where each value came from
-
-_One line for every value you did not measure yourself. Origin is measured, calculated, or SUPPLIED. A supplied value with no source line earns no credit._
-
-| Quantity | Origin (measured / calculated / SUPPLIED) | Source name | Publisher | Date retrieved | Where found |
-| --- | --- | --- | --- | --- | --- |
-|   |   |   |   |   |   |
-|   |   |   |   |   |   |
-
-**What can this work not show, even done perfectly? Write it as something about the method, not about you.**
-
->
-
-
-**What did you check, what did you change, and what is your next step? In one concise response, show or explain the most important idea about testable questions; then identify one check that would catch an error or weak claim.**
-
->
-
-
-## Analysis questions
-
-Answer every question. Write in the space under each one.
-
-**Q1.** Build a labelled model of testable questions that represents every supplied row in E1-E3. Annotate each model feature with its evidence ID, then show where the candidate claim fails or remains uncertain.
-
->
-
-**Q2.** Communicate what the supplied record establishes about testable questions in a labelled diagram, table, or paragraph. Include citations to at least two rows from E1-E3 and mark where the representation stops being supported.
-
->
-
-**Q3.** Check your response about testable questions against each success criterion. Revise one sentence by adding or changing a citation to E1-E3; state exactly what the revision fixes.
-
->
-
-**Q4.** Answer the printed unit question using testable questions as the example. Cite one row from E1-E3, connect it to the answer, and state what the supplied record cannot decide.
-
->
-
-**Q5.** Which one row in E1-E3 is strongest for evaluating the candidate claim about testable questions? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
-
->
-
-**Q6.** Using the supplied case and E1-E3, state one conclusion about testable questions that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
-
->
-
-**Q7.** Audit the inputs used in your response about testable questions. Label E1-E3 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
-
->
-
-## How this is scored
-
-| Criterion | Not yet | Approaching | Meets | Exceeds |
-| --- | --- | --- | --- | --- |
-| Scientific correctness | A factual statement contradicts an established relationship or a fixed fact in this lesson's topic content key, or restates one of that key's disqualifying errors as established science. | Consistent with the topic content key overall, but one statement is wrong, or is claimed more strongly than the evidence allows. | Every factual statement is consistent with the topic content key, in whatever wording the learner chose, including any of the key's accepted alternative framings. | Correct, and the learner separates what this lesson establishes from what it only suggests. |
-| Task completion and internal consistency | The central task is unfinished, or the reported result contradicts the learner's own record. | The task is finished but part of the result is unsupported or inconsistent. | The central task is complete and the result follows from the learner's own record. | Complete and accurate, and the learner anticipates a case the task did not ask about. |
-| Evidence and reasoning | Claims appear with no evidence, or evidence appears with no claim attached. | Some claims are tied to evidence; others are asserted. | Every claim is tied to a named measurement, model feature, documented step, or source. | Evidence is weighed as well as cited — the learner says which evidence is stronger and why. |
-| Data honesty and provenance | Values appear that the learner did not measure and did not attribute, or a result is reported for work that was not done. | Most values are attributed; at least one origin is unclear. | Every value is labelled measured, calculated, or SUPPLIED, and every supplied value names its source and retrieval date. | Provenance is complete and the learner comments on how the source's own limits affect the conclusion. |
-| Checking and revision | No check is recorded, or the check is asserted without saying what it would catch. | A check is recorded but the revision is not explained. | A specific check, a specific change, and a reason the change is an improvement are all recorded. | The learner names the next check they would run and what result would make them change their mind. |
-
-A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
-**You have met the target when:**
-
-- The learner completes the central task about testable questions.
-- The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.
-- The learner checks or revises the work and can identify a next step.
-
-## If you get stuck
-
-- Go back to the one thing you already know that this builds on, and say it out loud before you try again.
-- Redo one supported example with the steps in front of you, then try a fresh one with the steps covered.
-- If the hands-on path is the sticking point, switch to the alternative path. It is the same credit and it is not a retreat.
-- Say which step you are stuck on, not just that you are stuck. The step is the thing that gets reteaching.
-
-## Going further (optional)
-
-- Apply testable questions under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work.
-- Connect testable questions to careful observations from this unit: state one thing that must be true of both, and one case where treating them the same would mislead you.
-- Take the unit's performance task — Define a simple design problem from home or class life, list its criteria and constraints, and plan a fair test. — and write the one measurement or piece of evidence that would most change its outcome, then say why.
-
-_Extension never means completing another learner's graded work, and never means attempting anything the safety brief excludes._
 
 ---
 
-_Package `swp-ma-g3-science-u01-l02` · lesson `ma-g3-science-u01-l02` · built from `g34-committed` at `4c6ca4e`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._
+_Package `swp-ma-g3-science-u01-l02` · sample `science-director-sample-r1` · exact lesson `ma-g3-science-u01-l02`. No learner experimental result is supplied or implied. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

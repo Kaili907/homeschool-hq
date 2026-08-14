@@ -1,0 +1,113 @@
+:root {
+  --science-ink: #16312a;
+  --science-muted: #60746c;
+  --science-green: #176b4c;
+  --science-green-soft: #e8f4ed;
+  --science-gold: #d69b36;
+  --science-paper: #fffef9;
+  --science-line: #dce5df;
+}
+
+* { box-sizing: border-box; }
+
+.science-preview {
+  min-height: 100vh;
+  background: #f1f5f2;
+  color: var(--science-ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.science-preview__topbar {
+  display: flex;
+  min-height: 4.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #cddbd3;
+  padding: .8rem clamp(1rem, 3vw, 2.75rem);
+  background: #153e31;
+  color: white;
+}
+
+.science-preview__topbar p { margin: 0 0 .2rem; color: #bdd8ca; font-size: .72rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.science-preview__topbar strong { font-family: Georgia, "Times New Roman", serif; font-size: 1.4rem; font-weight: 500; }
+.science-preview__topbar p span { margin: 0 .4rem; }
+.science-preview__data-badge { border: 1px solid #689682; border-radius: 999px; padding: .42rem .72rem; color: #eaf6ef; font-size: .68rem; font-weight: 800; }
+
+.science-preview__shell { display: grid; max-width: 82rem; min-height: calc(100vh - 4.5rem); grid-template-columns: 17rem minmax(0, 1fr); margin: 0 auto; }
+.science-preview__rail { border-right: 1px solid var(--science-line); padding: 2rem 1.25rem; background: #f8faf8; }
+.science-preview__rail-title { margin: 0 0 1rem; color: var(--science-muted); font-size: .68rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+.science-preview__rail ol { margin: 0; padding: 0; list-style: none; }
+.science-preview__rail li { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr); gap: .7rem; margin: 0 0 .25rem; border-radius: .65rem; padding: .68rem; color: #788a82; }
+.science-preview__rail li > span { display: grid; width: 1.7rem; height: 1.7rem; place-items: center; border: 1px solid #c6d2cb; border-radius: 50%; font-size: .67rem; font-weight: 850; }
+.science-preview__rail li strong, .science-preview__rail li small { display: block; }
+.science-preview__rail li strong { font-size: .76rem; }
+.science-preview__rail li small { margin-top: .15rem; font-size: .61rem; line-height: 1.25; }
+.science-preview__rail li.is-current { background: var(--science-green-soft); color: #16583f; }
+.science-preview__rail li.is-current > span { border-color: var(--science-green); background: var(--science-green); color: white; }
+.science-preview__rail li.is-complete { color: #3f6958; }
+.science-preview__rail li.is-complete > span { border-color: #82a997; color: var(--science-green); }
+.science-preview__honesty-note { margin-top: 1.5rem; border-left: 3px solid var(--science-gold); padding: .7rem .8rem; background: #fff8e8; }
+.science-preview__honesty-note strong { font-size: .68rem; text-transform: uppercase; }
+.science-preview__honesty-note p { margin: .35rem 0 0; color: #655431; font-size: .68rem; line-height: 1.5; }
+
+.science-preview__lesson { width: min(100%, 58rem); align-self: start; margin: 2rem auto; border: 1px solid var(--science-line); border-radius: 1rem; padding: clamp(1.25rem, 3vw, 2.5rem); background: var(--science-paper); box-shadow: 0 18px 50px rgba(25, 59, 46, .08); }
+.science-preview__stage-meta { display: flex; justify-content: space-between; gap: 1rem; color: var(--science-green); font-size: .68rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+.science-preview__lesson h1 { margin: .6rem 0 1.35rem; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.05; }
+.science-preview__lesson h1:focus { outline: none; }
+.science-preview__markdown { color: #263d35; font-size: .98rem; line-height: 1.72; }
+.science-preview__markdown p { margin: 0 0 1rem; }
+.science-preview__markdown h3 { margin: 1.7rem 0 .65rem; color: #194d3b; font-family: Georgia, "Times New Roman", serif; font-size: 1.25rem; font-weight: 600; }
+.science-preview__markdown ul, .science-preview__markdown ol { margin: .35rem 0 1.1rem; padding-left: 1.45rem; }
+.science-preview__markdown li + li { margin-top: .4rem; }
+.science-preview__markdown code { border-radius: .28rem; padding: .15rem .35rem; background: #eaf2ed; color: #15553d; font-size: .88em; }
+.science-preview__table-wrap { margin: 1rem 0 1.35rem; overflow-x: auto; border: 1px solid var(--science-line); border-radius: .65rem; }
+.science-preview__table-wrap table { width: 100%; border-collapse: collapse; font-size: .82rem; line-height: 1.45; }
+.science-preview__table-wrap th, .science-preview__table-wrap td { min-width: 8rem; border-bottom: 1px solid var(--science-line); padding: .7rem .8rem; text-align: left; vertical-align: top; }
+.science-preview__table-wrap th { background: #edf5f0; color: #285644; font-size: .7rem; text-transform: uppercase; }
+.science-preview__table-wrap tr:last-child td { border-bottom: 0; }
+.science-preview__protected { margin: 0 0 1.25rem; border-left: 3px solid var(--science-gold); padding: .7rem .85rem; background: #fff6de; color: #654916; font-size: .78rem; font-weight: 750; }
+
+.science-preview__responses { display: grid; gap: 1rem; margin-top: 1.8rem; border-top: 1px solid var(--science-line); padding-top: 1.5rem; }
+.science-preview__responses label { display: grid; gap: .55rem; }
+.science-preview__responses label > span { color: #193d31; font-size: .9rem; font-weight: 750; line-height: 1.5; }
+.science-preview__responses textarea { width: 100%; resize: vertical; border: 1px solid #aebfb6; border-radius: .65rem; padding: .85rem; background: white; color: var(--science-ink); font: inherit; line-height: 1.5; }
+.science-preview__responses textarea:focus { outline: 3px solid #97cdb5; outline-offset: 2px; border-color: var(--science-green); }
+.science-preview__response-note { margin: -.2rem 0 0; color: var(--science-muted); font-size: .7rem; }
+.science-preview__saved { display: grid; gap: .15rem; border-radius: .6rem; padding: .75rem .9rem; background: var(--science-green-soft); color: #215c45; font-size: .73rem; }
+
+.science-preview__actions { display: flex; justify-content: flex-end; gap: .7rem; margin-top: 1.5rem; }
+.science-preview__actions button { min-height: 3rem; border: 1px solid var(--science-green); border-radius: .6rem; padding: .65rem 1.2rem; background: var(--science-green); color: white; font: inherit; font-size: .78rem; font-weight: 850; cursor: pointer; }
+.science-preview__actions button.is-secondary { background: transparent; color: var(--science-green); }
+.science-preview__actions button:disabled { border-color: #aab8b1; background: #aab8b1; cursor: not-allowed; }
+.science-preview__actions button:focus-visible, .science-preview__policy summary:focus-visible { outline: 3px solid #e9bd72; outline-offset: 2px; }
+
+.science-preview__policy { margin-top: 2rem; border-top: 1px solid var(--science-line); padding-top: 1rem; }
+.science-preview__policy summary { color: var(--science-muted); font-size: .72rem; font-weight: 800; cursor: pointer; }
+.science-preview__policy[open] summary { margin-bottom: 1rem; color: var(--science-green); }
+.science-preview__policy .science-preview__markdown { max-height: 30rem; overflow: auto; border-left: 3px solid #bfd0c6; padding: .5rem 1rem; font-size: .76rem; }
+.science-preview--state { display: grid; place-items: center; padding: 2rem; }
+
+@media (max-width: 820px) {
+  .science-preview__shell { grid-template-columns: minmax(0, 1fr); }
+  .science-preview__rail { border-right: 0; border-bottom: 1px solid var(--science-line); padding: 1rem; overflow-x: auto; }
+  .science-preview__rail-title, .science-preview__honesty-note { display: none; }
+  .science-preview__rail ol { display: flex; min-width: 42rem; }
+  .science-preview__rail li { min-width: 6rem; grid-template-columns: 1.55rem minmax(0, 1fr); padding: .5rem; }
+  .science-preview__rail li > span { width: 1.45rem; height: 1.45rem; }
+  .science-preview__rail li small { display: none; }
+  .science-preview__lesson { width: calc(100% - 1.5rem); margin: .75rem; border-radius: .8rem; }
+}
+
+@media (max-width: 520px) {
+  .science-preview__topbar { align-items: flex-start; }
+  .science-preview__topbar p { max-width: 12rem; }
+  .science-preview__data-badge { white-space: nowrap; }
+  .science-preview__stage-meta { align-items: flex-start; flex-direction: column; gap: .2rem; }
+  .science-preview__actions { flex-direction: column-reverse; }
+  .science-preview__actions button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .science-preview *, .science-preview *::before, .science-preview *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

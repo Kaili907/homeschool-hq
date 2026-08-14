@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import blocks  # noqa: E402
 import correctness  # noqa: E402
+import director_sample_r1  # noqa: E402
 import executable_content  # noqa: E402
 import render  # noqa: E402
 from blocks import ELEMENTARY_SAFETY_VARIANTS  # noqa: E402
@@ -727,6 +728,7 @@ def main() -> int:
             package = build_package(
                 lesson, course, floor, resource_ids, topics, topic_provenance
             )
+            package = director_sample_r1.apply_sample(package)
             used_topic_keys.add(package["scientific_correctness_authority"]["topic_key"])
             records.append(package)
             (course_dir / "student-sheets" / f"{package['lesson_id']}.md").write_text(

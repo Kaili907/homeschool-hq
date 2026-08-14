@@ -39,33 +39,33 @@ _Topic `ma-g3-science-u01::testable questions` · forms in force: `ACCEPTED_RELA
 
 ## What a complete response contains, question by question
 
-**Q1 — model build.** _Serves objective 1:_ Build a clear mental model of testable questions through an explicit worked example, demonstration, text, or phenomenon.
+**Q1 — guided practice.** _Serves objective 1:_ Explain what makes a scientific question testable by naming a possible observation or measurement.
+
+A complete response shows the supported item and the unsupported item, and names the specific step the learner had to reconstruct once the prompt was gone. 'It was harder' without naming the step is incomplete. Errors on the unsupported item are diagnostic, not penalised twice.
+
+**Q2 — model build.** _Serves objective 2:_ Build and use a Question–Plan–Record–Decide model for a new context.
 
 A complete response produces a labelled model whose labels are each traced to the worked example, text, or phenomenon they came from, and states one deliberate simplification with its cost. Score whether the model carries the mechanism, not its neatness. A model that omits nothing has not been thought about.
 
-**Q2 — communicate representation.** _Serves objective 2:_ Use subject-appropriate evidence or representation to communicate understanding of testable questions.
+**Q3 — explain with evidence.** _Serves objective 3:_ Use claim, evidence, and reasoning to justify whether a question is testable and state a limitation.
 
-A complete response uses a representation that actually carries the evidence — labelled, scaled, or captioned as that representation requires — and justifies the choice against a plain sentence. Score the fit between representation and evidence, not artistic quality.
+A complete response states the idea in the learner's own words and attaches each claim to a named item in the record. Accept any wording and any valid route, but an explanation that contradicts the lesson's stated learning target is not made acceptable by being well evidenced — score it correct or not on the Scientific correctness criterion, and well-evidenced or not on the others.
 
-**Q3 — check revise.** _Serves objective 3:_ Check, revise, or improve work about testable questions using stated success criteria.
+**Q4 — apply independent.** _Serves objective 2:_ Build and use a Question–Plan–Record–Decide model for a new context.
 
-A complete response identifies a specific change, what triggered it, and why the revised version is better against the stated success criteria. 'I checked it and it was fine' is incomplete unless the learner names what the check would have caught.
+A complete response works a genuinely new representation or constraint with no template in front of the learner, and separates what carried over unchanged from what had to be adapted. The adaptation is the evidence; a response that only reports the answer has not shown independence.
 
-**Q4 — essential question.** _Serves objective 1:_ Build a clear mental model of testable questions through an explicit worked example, demonstration, text, or phenomenon.
-
-A complete response answers the unit question directly, uses this lesson's focus as the worked example, and cites at least one piece of the learner's own evidence. A restatement of the question is not an answer.
-
-**Q5 — evidence quality.** _Serves objective 2:_ Use subject-appropriate evidence or representation to communicate understanding of testable questions.
-
-A complete response names one specific item, gives a property that makes it strong (precision, repetition, independence, directness), and proposes a concrete improvement. 'All of it' or 'my whole table' is not a selection.
-
-**Q6 — limitation.** _Serves objective 1:_ Build a clear mental model of testable questions through an explicit worked example, demonstration, text, or phenomenon.
+**Q5 — limitation.** _Serves objective 3:_ Use claim, evidence, and reasoning to justify whether a question is testable and state a limitation.
 
 A complete response names a limitation of the method or the data, not a limitation of the learner's effort, and states what a different design or source would need to do. 'I could have tried harder' is not a limitation.
 
-**Q7 — provenance.** _Serves objective 2:_ Use subject-appropriate evidence or representation to communicate understanding of testable questions.
+**Q6 — mastery fresh task.** _Serves objective 1:_ Explain what makes a scientific question testable by naming a possible observation or measurement.
 
-A complete response labels every quantity measured, calculated, or supplied, and every supplied quantity carries source, publisher, and retrieval date. An unlabelled quantity earns no credit for this item. Do not award credit for any numerical result the learner did not measure, calculate, or cite to a named source.
+A complete response works an unfamiliar task independently and shows the reasoning. An unexplained correct answer does not evidence mastery here, and by the course mastery rule one occasion never establishes it regardless of quality.
+
+**Q7 — demonstrate mastery.** _Serves objective 3:_ Use claim, evidence, and reasoning to justify whether a question is testable and state a limitation.
+
+A complete response supplies all three evidence types and, where they disagree, says which is trusted and why. Treat a strong selected response beside a weak constructed response as a real signal about depth, not as noise to be explained away.
 
 ## Non-negotiables
 
@@ -79,20 +79,19 @@ A complete response labels every quantity measured, calculated, or supplied, and
 
 The full four-level rubric is in `policy/scoring-and-safety-policy.md` and is printed in full on the learner's own sheet. It is scored against this lesson's success criteria:
 
-- The learner completes the central task about testable questions.
-- The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.
-- The learner checks or revises the work and can identify a next step.
+- I name what would be compared and what would be observed or measured.
+- My model connects a question to a possible record without inventing a result.
+- My explanation links evidence to my claim and names one limit.
 
 A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
 
 ## Reteach routes
 
-- **prerequisite gap** — Return to the smallest prerequisite needed for testable questions, model it with a concrete or text-only representation, then retry one fresh item.
-- **procedure without understanding** — Ask the learner to explain or represent why the process for testable questions works before continuing.
-- **correct but low confidence** — Confirm the reasoning specifically, offer one varied example of testable questions, and avoid unnecessary remediation.
-- **repeated error pattern** — Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review.
-- **mastery evidence** — Require accurate independent application plus explanation on a later or different occasion before marking testable questions mastered.
-- **requests an experiment** — Explain the science and the safety rule for testable questions; do not invent an investigation, procedure, result, or observation. Direct the learner to the adult-approved investigation in the lesson.
+- **SCI-PREREQ-OBSERVATION-VS-OPINION** — Sort one observable statement and one preference statement before returning to testable questions.
+- **SCI-MISCONCEPTION-TESTABLE-MEANS-ALREADY-TESTED** — Use the evidence-door contrast: a question is testable when a possible record could decide it; no result needs to exist yet.
+- **SCI-MISCONCEPTION-ANY-SCIENCE-QUESTION-IS-TESTABLE** — Contrast a preference question with a measurement question, then ask for a fresh towel-absorption rewrite.
+- **SCI-REASONING-CLAIM-WITHOUT-LINK** — Ask which possible record could change the answer, then have the learner state why that record bears on the claim.
+- **SCI-MASTERY-FRESH-EVIDENCE** — Use the protected bird-feeder card on a different occasion; do not reopen the worked model or mark mastery from one response.
 
 _Reteaching never re-scores the alternative path lower, never requires the hands-on path, and never infers effort, motivation, diagnosis, or character from an error._
 
