@@ -122,6 +122,20 @@ describe('Family Pilot dashboard presentation convergence', () => {
     expect(course).toMatchObject({ completionPercent: null, progressLabel: 'No assigned work yet' })
   })
 
+  it('uses the learner state Ready to continue for a completed assessment', () => {
+    const source = dashboardModel()
+    const completed = {
+      ...source.today.items[1],
+      status: 'COMPLETED' as const,
+      blocked: null,
+    }
+    const model = toStudentDashboardPresentation({
+      ...source,
+      today: { ...source.today, items: [completed], completedAcademicCount: 1 },
+    })
+    expect(model.todayItems[0]).toMatchObject({ state: 'complete', stateLabel: 'Ready to continue' })
+  })
+
   it('projects only the supplied learner identity, courses, schedule, and tools', () => {
     const serialized = JSON.stringify(toStudentDashboardPresentation(dashboardModel()))
     expect(serialized).toContain('Authorized Learner')

@@ -69,6 +69,12 @@ function actionLabel(item: FamilyPilotDashboardWorkItem): string | undefined {
   return undefined
 }
 
+function learnerStateLabel(item: FamilyPilotDashboardWorkItem): string {
+  if (item.blocked) return item.blocked.message
+  if (item.kind === 'ASSESSMENT' && item.status === 'COMPLETED') return 'Ready to continue'
+  return STATUS_LABEL[item.status]
+}
+
 function missionFor(model: FamilyPilotStudentDashboardModel): StudentDashboardMission {
   const next = model.today.items.find((item) =>
     item.action?.type === 'CONTINUE' && (item.status === 'IN_PROGRESS' || item.status === 'PAUSED'))
@@ -98,7 +104,7 @@ function missionFor(model: FamilyPilotStudentDashboardModel): StudentDashboardMi
       : next.status === 'WAITING'
         ? 'assessment-pending'
         : 'lesson-ready'
-  const statusLabel = next.blocked?.message ?? STATUS_LABEL[next.status]
+  const statusLabel = learnerStateLabel(next)
 
   return {
     state,
@@ -138,7 +144,7 @@ export function toStudentDashboardPresentation(
       title: item.title,
       context: contextFor(item),
       state: itemState(item),
-      stateLabel: item.blocked?.message ?? STATUS_LABEL[item.status],
+      stateLabel: learnerStateLabel(item),
       actionable: Boolean(item.action && (item.action.type === 'START' || item.action.type === 'CONTINUE')),
       actionLabel: actionLabel(item),
     })),
@@ -163,7 +169,7 @@ export function toStudentDashboardPresentation(
       upcomingRef: item.scheduleItemRef,
       when: formatDate(item.date, { weekday: 'short', month: 'short', day: 'numeric' }),
       title: item.title,
-      detail: `${contextFor(item)} · ${item.blocked?.message ?? STATUS_LABEL[item.status]}`,
+      detail: `${contextFor(item)} · ${learnerStateLabel(item)}`,
     })),
     upcomingEmptyLabel: model.upcoming.length === 0 ? 'No upcoming schedule items are available yet.' : undefined,
     quickTools: model.tools.map((tool) => ({

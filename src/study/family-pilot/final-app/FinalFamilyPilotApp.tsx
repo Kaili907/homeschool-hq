@@ -56,6 +56,7 @@ import { toStudentDashboardPresentation } from './dashboardPresentation'
 import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
 import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
 import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
+import { ParentReviewCenter } from './review-center'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -71,10 +72,17 @@ const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
 })
 
 type Mode = 'parent' | 'student'
-type ParentView = 'school-plan' | 'assign' | 'reports' | 'preferences' | 'backup'
+type ParentView = 'review' | 'school-plan' | 'assign' | 'reports' | 'preferences' | 'backup'
 
 function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : 'That action could not be completed.'
+}
+
+function learnerAssessmentState(status: FinalAssessmentAttemptV1['status']): string {
+  if (status === 'PENDING_ASSESSMENT') return 'Waiting for grading'
+  if (status === 'ADULT_REVIEW_REQUIRED') return 'Waiting for review'
+  if (status === 'PENDING_GUARDIAN_ATTESTATION') return 'Ask your parent'
+  return 'Ready to continue'
 }
 
 export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void }) {
@@ -145,7 +153,7 @@ function MountedFinalFamilyPilot({
 }) {
   const [mode, setMode] = useState<Mode>('student')
   const [parentAuthorized, setParentAuthorized] = useState(false)
-  const [parentView, setParentView] = useState<ParentView>('assign')
+  const [parentView, setParentView] = useState<ParentView>('review')
   const [openAssignmentRef, setOpenAssignmentRef] = useState<string | null>(null)
   const restoreInput = useRef<HTMLInputElement>(null)
   const autoPlannerHost = useMemo(() => new FinalFamilyAutoPlannerHost(controller), [controller])
@@ -218,6 +226,7 @@ function MountedFinalFamilyPilot({
   if (mode === 'student' && openStudentRef) {
     const closeLearner = () => {
       controller.selectStudent(null)
+      controller.lockParentSession()
       setParentAuthorized(false)
       setMode('student')
       refresh()
@@ -232,6 +241,7 @@ function MountedFinalFamilyPilot({
         onSignOut={() => { closeLearner(); onExit() }}
         onOpenParentView={(view) => {
           controller.selectStudent(null)
+          controller.lockParentSession()
           setParentAuthorized(false)
           setParentView(view)
           setMode('parent')
@@ -251,8 +261,8 @@ function MountedFinalFamilyPilot({
             Admitted release · 90 courses · 8,292 production-bound lessons
           </p>
           <div className="flex gap-2" role="group" aria-label="Family Pilot role">
-            <button type="button" className={`rounded-lg px-4 py-2 font-bold ${mode === 'parent' ? 'bg-slate-900 text-white' : 'border'}`} onClick={() => { controller.selectStudent(null); setMode('parent'); refresh() }}>Parent</button>
-            <button type="button" className={`rounded-lg px-4 py-2 font-bold ${mode === 'student' ? 'bg-cyan-700 text-white' : 'border'}`} onClick={() => { controller.selectStudent(null); setMode('student'); refresh() }}>Student</button>
+            <button type="button" className={`rounded-lg px-4 py-2 font-bold ${mode === 'parent' ? 'bg-slate-900 text-white' : 'border'}`} onClick={() => { controller.selectStudent(null); controller.lockParentSession(); setParentAuthorized(false); setMode('parent'); refresh() }}>Parent</button>
+            <button type="button" className={`rounded-lg px-4 py-2 font-bold ${mode === 'student' ? 'bg-cyan-700 text-white' : 'border'}`} onClick={() => { controller.selectStudent(null); controller.lockParentSession(); setParentAuthorized(false); setMode('student'); refresh() }}>Student</button>
           </div>
         </div>
       </div>
@@ -264,7 +274,7 @@ function MountedFinalFamilyPilot({
           onLock={() => { controller.selectStudent(null); refresh() }}
           onSwitchLearner={() => { controller.selectStudent(null); refresh() }}
           onSignOut={() => { controller.selectStudent(null); refresh(); onExit() }}
-          onOpenParentView={(view) => { setParentAuthorized(false); setParentView(view); setMode('parent'); refresh() }}
+          onOpenParentView={(view) => { controller.lockParentSession(); setParentAuthorized(false); setParentView(view); setMode('parent'); refresh() }}
           refresh={refresh}
           revision={revision}
         />
@@ -516,9 +526,11 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         </select>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
-        {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
+        {(['review', 'school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'review' ? 'Review Center' : item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
       </nav>
-      {!selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
+      {!selected ? <p className="mt-6">No configured students.</p> : view === 'review' ? (
+        <ParentReviewCenter controller={controller} student={selected} refresh={refresh} />
+      ) : view === 'school-plan' ? (
         <FamilySchoolPlanPanel controller={controller} host={autoPlannerHost} student={selected} />
       ) : view === 'assign' ? (
         <ParentAssignments controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
@@ -575,9 +587,6 @@ function ParentAssignments({ controller, student, onOpen, refresh }: {
 
   const studySubject = selectedCourse ? academySubjectToStudySubject(selectedCourse.subject) : 'other'
   const workingGrade = selectedCourse?.grade ?? Number(student.nominalGrade)
-  const pending = controller.pendingAttestations(student.studentRef)
-  const holds = controller.openSafetyHolds(student.studentRef)
-
   return (
     <div className="mt-6 space-y-5">
       <section className="rounded-2xl border bg-white p-5">
@@ -620,34 +629,9 @@ function ParentAssignments({ controller, student, onOpen, refresh }: {
           </li>
         })}</ul>
       </section> : null}
-      {assessmentAssignments.filter((item) => ['ADULT_REVIEW_REQUIRED', 'PENDING_GUARDIAN_ATTESTATION'].includes(item.status)).map((assessment) => <section key={assessment.assignmentRef} className="rounded-2xl border border-amber-300 bg-amber-50 p-5">
-        <h3 className="font-extrabold">Assessment authority pending</h3>
-        <p className="mt-1">{assessment.title} · {assessment.status.replaceAll('_', ' ')}</p>
-        <button type="button" className="mt-3 rounded-lg bg-emerald-700 px-4 py-2 font-bold text-white" onClick={() => { controller.updateAssessmentStatus(student.studentRef, assessment.assignmentRef, 'CERTIFIED'); refresh() }}>{assessment.status === 'ADULT_REVIEW_REQUIRED' ? 'Record rubric review complete' : 'Guardian attest and certify'}</button>
-      </section>)}
       {assignments.filter((assignment) => bindingByAssignment[assignment.assignmentRef]?.sourceReadinessKind === 'DYNAMIC_SOURCE_REQUIRED').map((assignment) => (
         <DynamicSourceCard key={assignment.assignmentRef} controller={controller} student={student} assignment={assignment} attached={controller.appSnapshot.state.sourceAttachments.some((item) => item.studentRef === student.studentRef && item.assignmentRef === assignment.assignmentRef)} refresh={refresh} />
       ))}
-      {pending.map((item) => (
-        <section key={`${item.studentRef}:${item.assignmentRef}:${item.sessionRef}`} className="rounded-2xl border border-amber-300 bg-amber-50 p-5">
-          <h3 className="font-extrabold">Guardian attestation pending</h3>
-          <p className="mt-1">{assignments.find((assignment) => assignment.assignmentRef === item.assignmentRef)?.title ?? item.lessonRef} is not certified or completed yet.</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <button type="button" className="rounded-lg bg-emerald-700 px-4 py-2 font-bold text-white" onClick={async () => { const result = await controller.attest(student.studentRef, item.assignmentRef, 'adult-observed'); if (result.status === 'ok') refresh(); else setError(result.message) }}>Attest: adult observed</button>
-            <button type="button" className="rounded-lg border border-emerald-700 bg-white px-4 py-2 font-bold" onClick={async () => { const result = await controller.attest(student.studentRef, item.assignmentRef, 'simulated-alternative'); if (result.status === 'ok') refresh(); else setError(result.message) }}>Equal-credit simulated alternative</button>
-          </div>
-        </section>
-      ))}
-      {holds.map((hold) => {
-        const assignment = assignments.find((item) => controller.appSnapshot.state.sessions.some((session) => session.studentRef === student.studentRef && session.assignmentRef === item.assignmentRef && session.session.sessionRef === hold.sessionRef))
-        return (
-          <section key={hold.holdRef} className="rounded-2xl border border-red-300 bg-red-50 p-5">
-            <h3 className="font-extrabold">Safety check-in</h3>
-            <p className="mt-1">Held only for {student.displayName}’s exact Study session. Siblings remain available.</p>
-            {assignment ? <button type="button" className="mt-3 rounded-lg bg-slate-900 px-4 py-2 font-bold text-white" onClick={async () => { try { await controller.clearHold(student.studentRef, assignment.assignmentRef, hold.holdRef); refresh() } catch (cause) { setError(messageOf(cause)) } }}>Parent checked in — clear hold</button> : null}
-          </section>
-        )
-      })}
       {error ? <p className="rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
     </div>
   )
@@ -838,12 +822,12 @@ function AssessmentSurface({ controller, studentRef, assignmentRef, onExit, refr
       setAttempt(saved)
       controller.updateAssessmentStatus(studentRef, assignmentRef, status)
       setMessage(status === 'PENDING_ASSESSMENT'
-        ? 'Submitted. Trusted scoring is unavailable offline, so this remains PENDING_ASSESSMENT; no correctness was fabricated.'
+        ? 'Submitted. Your work is waiting for trusted grading.'
         : status === 'ADULT_REVIEW_REQUIRED'
-          ? 'Submitted for adult rubric review.'
+          ? 'Submitted. Your work is waiting for review.'
           : status === 'PENDING_GUARDIAN_ATTESTATION'
-            ? 'Submitted. Guardian attestation is required before certification.'
-            : 'Completion evidence submitted and certified.')
+            ? 'Submitted. Ask your parent to review this completion.'
+            : 'Submitted. You are ready to continue.')
       refresh()
     } catch (error) { setMessage(messageOf(error)) }
     setBusyTask(null)
@@ -866,12 +850,12 @@ function AssessmentSurface({ controller, studentRef, assignmentRef, onExit, refr
           {task.directions ? <p className="mt-1 text-sm text-slate-600">{task.directions}</p> : null}
           <p className="mt-2 whitespace-pre-wrap">{task.prompt}</p>
           {task.choices?.length ? <fieldset className="mt-3 space-y-2"><legend className="sr-only">Choose one response</legend>{task.choices.map((choice) => <label key={choice} className="flex gap-2"><input type="radio" name={task.taskRef} value={choice} checked={drafts[task.taskRef] === choice} onChange={(event) => setDrafts((held) => ({ ...held, [task.taskRef]: event.target.value }))} />{choice}</label>)}</fieldset> : <textarea aria-label={`Response for task ${index + 1}`} className="mt-3 min-h-28 w-full rounded-lg border bg-white p-3" value={drafts[task.taskRef] ?? ''} onChange={(event) => setDrafts((held) => ({ ...held, [task.taskRef]: event.target.value }))} />}
-          <button type="button" className="mt-3 rounded-lg bg-cyan-700 px-3 py-2 font-bold text-white disabled:opacity-50" disabled={busyTask !== null} onClick={() => void saveTask(task.taskRef)}>{saved ? 'Save updated response' : 'Save response'}</button>
+          <button type="button" className="mt-3 rounded-lg bg-cyan-700 px-3 py-2 font-bold text-white disabled:opacity-50" disabled={busyTask !== null || attempt.status !== 'ACTIVE'} onClick={() => void saveTask(task.taskRef)}>{saved ? 'Save updated response' : 'Save response'}</button>
           {saved ? <span className="ml-3 text-sm font-bold text-emerald-700">Saved in IndexedDB</span> : null}
         </section>
       })}</div>
-      <button type="button" className="mt-6 rounded-lg bg-emerald-700 px-5 py-3 font-extrabold text-white disabled:opacity-50" disabled={busyTask !== null || attempt.status === 'CERTIFIED'} onClick={() => void submitAssessment()}>{attempt.status === 'CERTIFIED' ? 'Certified' : 'Submit assessment'}</button>
-      <p className="mt-3 font-semibold" role="status">Status: {attempt.status.replaceAll('_', ' ')}</p>
+      <button type="button" className="mt-6 rounded-lg bg-emerald-700 px-5 py-3 font-extrabold text-white disabled:opacity-50" disabled={busyTask !== null || attempt.status !== 'ACTIVE'} onClick={() => void submitAssessment()}>{attempt.status === 'ACTIVE' ? 'Submit assessment' : learnerAssessmentState(attempt.status)}</button>
+      <p className="mt-3 font-semibold" role="status">{learnerAssessmentState(attempt.status)}</p>
       {message ? <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-3 font-semibold" role="alert">{message}</p> : null}
     </section>
   </main>

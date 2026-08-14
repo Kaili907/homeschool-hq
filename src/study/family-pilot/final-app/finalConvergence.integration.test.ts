@@ -90,6 +90,7 @@ function setupTwo(controller: FinalFamilyPilotController) {
   const finished = completeSetup(working.state, '2026-08-13T12:00:03.000Z')
   if (finished.status !== 'ok') throw new Error('fixture setup')
   controller.saveSetup(finished.state)
+  controller.setParentPin('2468')
   return finished.state
 }
 
@@ -301,6 +302,43 @@ describe('final Family Pilot real convergence', () => {
     const persisted = JSON.stringify([...Array.from({ length: storage.length }, (_, index) => storage.getItem(storage.key(index) ?? ''))])
     if (help.status === 'ok') expect(persisted).not.toContain(help.step.presentation.visibleText)
     expect(persisted).not.toContain('"transcript":')
+    controller.close()
+  }, 60_000)
+
+  it('keeps trusted scoring pending and requires a live parent PIN session for valid adult assessment actions', async () => {
+    const { controller } = makeController()
+    setupTwo(controller)
+    const autoBinding = catalog.listAssessments().find((item) => item.grade === 5 && item.authorityClass === 'AUTO_SCOREABLE')
+    const manualBinding = catalog.listAssessments().find((item) => item.grade === 5 && item.authorityClass === 'RUBRIC_REQUIRED')
+    const guardianBinding = catalog.listAssessments().find((item) => item.grade === 7 && item.authorityClass === 'GUARDIAN_REQUIRED')
+    if (!autoBinding || !manualBinding || !guardianBinding) throw new Error('assessment authority fixtures unavailable')
+
+    const auto = await controller.assignAssessment('student:a', autoBinding.assessmentRef)
+    controller.updateAssessmentStatus('student:a', auto.assignmentRef, 'ACTIVE')
+    controller.updateAssessmentStatus('student:a', auto.assignmentRef, 'PENDING_ASSESSMENT')
+    expect(() => controller.updateAssessmentStatus('student:a', auto.assignmentRef, 'CERTIFIED')).toThrow(/trusted scoring authority/i)
+    expect(controller.assessmentAssignments('student:a').find((item) => item.assignmentRef === auto.assignmentRef)?.status).toBe('PENDING_ASSESSMENT')
+
+    const siblingLesson = await controller.assignLesson('student:b', (await firstLesson('science', 7)).lessonRef)
+    expect((await controller.start('student:b', siblingLesson.assignmentRef)).status).toBe('ok')
+
+    const manual = await controller.assignAssessment('student:a', manualBinding.assessmentRef)
+    controller.updateAssessmentStatus('student:a', manual.assignmentRef, 'ACTIVE')
+    controller.updateAssessmentStatus('student:a', manual.assignmentRef, 'ADULT_REVIEW_REQUIRED')
+    controller.lockParentSession()
+    expect(() => controller.completeAssessmentReview('student:a', manual.assignmentRef, 'manual-review')).toThrow(/parent pin/i)
+    expect(controller.verifyParentPin('0000')).toBe(false)
+    expect(controller.verifyParentPin('2468')).toBe(true)
+    controller.completeAssessmentReview('student:a', manual.assignmentRef, 'manual-review')
+    expect(controller.assessmentAssignments('student:a').find((item) => item.assignmentRef === manual.assignmentRef)?.status).toBe('CERTIFIED')
+
+    const guardian = await controller.assignAssessment('student:b', guardianBinding.assessmentRef)
+    controller.updateAssessmentStatus('student:b', guardian.assignmentRef, 'ACTIVE')
+    controller.updateAssessmentStatus('student:b', guardian.assignmentRef, 'PENDING_GUARDIAN_ATTESTATION')
+    expect(() => controller.completeAssessmentReview('student:b', guardian.assignmentRef, 'manual-review')).toThrow(/does not match/i)
+    controller.completeAssessmentReview('student:b', guardian.assignmentRef, 'guardian-certification')
+    expect(controller.assessmentAssignments('student:b')).toMatchObject([{ status: 'CERTIFIED' }])
+    expect(controller.assessmentAssignments('student:a').some((item) => item.assignmentRef === guardian.assignmentRef)).toBe(false)
     controller.close()
   }, 60_000)
 
