@@ -1,0 +1,109 @@
+{
+  "auditVersion": "ela-depth-audit-r1",
+  "authoritativeBase": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+  "sharedFamilies": [
+    {
+      "familyId": "ela-content-repair-v2",
+      "lessonCount": 1620,
+      "sources": [
+        "curriculum-production/student-work/english-language-arts/src/contentRepair.mjs",
+        "curriculum-production/student-work/english-language-arts/src/lib.mjs"
+      ],
+      "responsibility": [
+        "one orientation paragraph for teaching",
+        "18 phase-task prompt templates",
+        "one guided routine after title/focus normalization",
+        "one remediation routine after title/focus normalization",
+        "writing-required inference",
+        "learner-package and adult-guide projection"
+      ],
+      "defectCodes": [
+        "SHALLOW_TEACHING_EXPLANATION",
+        "NO_MODELED_READING_OR_WRITING_EXAMPLE",
+        "GENERIC_GUIDED_ROUTINE",
+        "GENERIC_REMEDIATION",
+        "QUESTION_VARIETY_TEMPLATE_BOUND",
+        "LEARNER_FACING_ENGINEERING_LANGUAGE",
+        "TUTOR_READINESS_METADATA_MISSING"
+      ]
+    },
+    {
+      "familyId": "academy-original-generated-five-shells",
+      "lessonCount": 1300,
+      "source": "curriculum-production/student-work/english-language-arts/src/contentRepair.mjs",
+      "subfamilies": {
+        "contentRepair:argument case": 236,
+        "contentRepair:editorial case": 242,
+        "contentRepair:information case": 286,
+        "contentRepair:literary case": 442,
+        "contentRepair:reflection case": 94
+      },
+      "defectCodes": [
+        "GENERATED_PASSAGE_NOT_AUTHENTICALLY_GRADE_DIFFERENTIATED",
+        "SOURCE_QUALITY_TEMPLATE_OR_REUSE",
+        "NEAR_DUPLICATE_STRUCTURE",
+        "SOURCE_TELEGRAPHS_TARGET_REASONING"
+      ]
+    },
+    {
+      "familyId": "academy-original-bank-reuse",
+      "lessonCount": 320,
+      "uniqueBodies": 33,
+      "exactDuplicateBodyGroups": 33,
+      "maximumLessonsSharingOneBody": 24,
+      "defectCodes": [
+        "SOURCE_QUALITY_TEMPLATE_OR_REUSE",
+        "NEAR_DUPLICATE_STRUCTURE"
+      ]
+    }
+  ],
+  "sourceAdapters": [
+    {
+      "familyId": "g34-adapter",
+      "grades": [
+        3,
+        4
+      ],
+      "lessonCount": 360
+    },
+    {
+      "familyId": "canonical-g578-adapter",
+      "grades": [
+        5,
+        7,
+        8
+      ],
+      "lessonCount": 540
+    },
+    {
+      "familyId": "hs912-adapter",
+      "grades": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "lessonCount": 720
+    }
+  ],
+  "questionFamilies": {
+    "apply-and-check": 90,
+    "baseline-observation-and-question": 90,
+    "compare-perspectives-or-versions": 90,
+    "craft-choice-and-effect": 90,
+    "debatable-claim": 90,
+    "detail-changes-interpretation": 90,
+    "error-analysis-and-correction": 90,
+    "independent-annotation-and-inference": 90,
+    "independent-assessment-claim": 90,
+    "misunderstanding-correction": 90,
+    "publication-and-reflection": 90,
+    "readiness-audit": 90,
+    "revision-and-effect": 90,
+    "source-developed-draft": 90,
+    "trace-example-and-prioritize-step": 90,
+    "transfer-and-adjustment": 90,
+    "word-and-meaning-annotation": 90,
+    "writing-plan": 90
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "auditVersion": "ela-depth-audit-r1",
+  "authoritativeBase": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+  "repairPerformed": false,
+  "productionCurriculumEdited": false,
+  "lessonUniverse": 1620,
+  "representativeStephenReviewSample": {
+    "lessonId": "ma-g7-english-language-arts-u05-l03",
+    "rationale": "A middle-grade guided-practice argument lesson that should make teaching, modeling, guided reasoning, independent evidence use, vocabulary, remediation, adult scoring, and Tutor metadata visible in one reviewable sample."
+  },
+  "principles": [
+    "Use ELA-specific quality criteria; do not copy Mathematics item-count thresholds.",
+    "Preserve the 180-day ELA schedules and admitted lesson identities unless curriculum leadership separately authorizes a schedule change.",
+    "Repair canonical generators and source banks, then regenerate packages and adult guides; do not hand-edit emitted package snapshots.",
+    "Keep learner content and adult scoring authority separate while adding source-anchored scoring evidence.",
+    "Do not scale bulk repair until the representative lesson is approved by Stephen."
+  ],
+  "stages": [
+    {
+      "stage": 0,
+      "mode": "serialized-human-standard",
+      "objective": "Build and Stephen-review one complete ELA lesson before bulk work.",
+      "lessonIds": [
+        "ma-g7-english-language-arts-u05-l03"
+      ],
+      "acceptance": [
+        "lesson-specific explanation of reasoning and warrants",
+        "a worked annotation/claim-evidence-warrant model on a separate example",
+        "guided try with checkpoint and feedback moves",
+        "independent argument-source task without answer leakage",
+        "vocabulary and writing scaffolds appropriate to Grade 7",
+        "source-specific adult rubric and Tutor-ready metadata"
+      ]
+    },
+    {
+      "stage": 1,
+      "mode": "serialized-shared-contract",
+      "objective": "Replace the shared repair composer contract that causes corpus-wide shallowness.",
+      "owns": [
+        "curriculum-production/student-work/english-language-arts/src/contentRepair.mjs",
+        "curriculum-production/student-work/english-language-arts/src/lib.mjs"
+      ],
+      "lessonCount": 1620,
+      "defectCodes": [
+        "SHALLOW_TEACHING_EXPLANATION",
+        "NO_MODELED_READING_OR_WRITING_EXAMPLE",
+        "GENERIC_GUIDED_ROUTINE",
+        "GENERIC_REMEDIATION",
+        "QUESTION_VARIETY_TEMPLATE_BOUND",
+        "LEARNER_FACING_ENGINEERING_LANGUAGE",
+        "TUTOR_READINESS_METADATA_MISSING"
+      ],
+      "requiredChanges": [
+        "type-aware ELA lesson schemas for diagnostic, concept/skill, reading, writing, grammar/language, review, remediation, mastery, assessment, and project lessons",
+        "explicit fields for explanation, model, guided checkpoint, independent task, comprehension checks, vocabulary, writing scaffold, reteach route, and mastery evidence",
+        "stable Tutor concept/prerequisite/misconception/route/hint/retry/evidence metadata",
+        "learner-language lint and semantic validation for writingRequired, transfer text, model, guided, and assessment labels"
+      ]
+    },
+    {
+      "stage": 2,
+      "mode": "parallel-nonoverlapping-source-families",
+      "objective": "Replace source shells and repeated bank assignments with lesson-worthy text sets and source-specific questions.",
+      "builders": [
+        {
+          "builderId": "ELA_G34_SOURCE_AND_PEDAGOGY",
+          "sourceAdapterFamily": "g34-adapter",
+          "grades": [
+            3,
+            4
+          ],
+          "lessonCount": 360,
+          "primaryRisk": "320 bank-backed assignments collapse to 33 unique bodies; 40 more use generated shells."
+        },
+        {
+          "builderId": "ELA_G578_SOURCE_AND_PEDAGOGY",
+          "sourceAdapterFamily": "canonical-g578-adapter",
+          "grades": [
+            5,
+            7,
+            8
+          ],
+          "lessonCount": 540,
+          "primaryRisk": "All 540 readings use generated case shells rather than grade-authentic text sequences."
+        },
+        {
+          "builderId": "ELA_HS912_SOURCE_AND_PEDAGOGY",
+          "sourceAdapterFamily": "hs912-adapter",
+          "grades": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "lessonCount": 720,
+          "primaryRisk": "All 720 readings use generated case shells with length added by repeated rigor paragraphs rather than authentic complexity."
+        }
+      ],
+      "sharedAcceptance": [
+        "documented grade-band complexity and human appropriateness review",
+        "genre/source variety appropriate to the unit",
+        "question variety beyond the 18 day-position templates",
+        "no prompt-answer telegraphing inside the source",
+        "true new-text transfer and assessment prompt projection"
+      ]
+    },
+    {
+      "stage": 3,
+      "mode": "serialized-authority-and-tutor-integration",
+      "objective": "Regenerate learner packages, adult guides, Tutor metadata, bindings, and audit gates from approved canonical sources.",
+      "lessonCount": 1620,
+      "acceptance": [
+        "1,620 unique lesson IDs, packages, adult guides, and admitted bindings reconcile",
+        "learner answer/adult-key leakage remains zero",
+        "adult rubrics contain source/task-specific anchors without supplying learner prose",
+        "Tutor routes can record guided versus independent evidence and enact reteach without revealing answers",
+        "depth audit rerun has no unresolved blocking codes"
+      ]
+    }
+  ]
+}

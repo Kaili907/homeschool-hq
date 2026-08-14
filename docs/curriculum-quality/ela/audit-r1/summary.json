@@ -1,0 +1,502 @@
+{
+  "auditVersion": "ela-depth-audit-r1",
+  "auditDate": "2026-08-14",
+  "authoritativeBase": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+  "status": "COMPLETE",
+  "scope": {
+    "activeRelease": "family-pilot-r1",
+    "subject": "english-language-arts",
+    "supportedGrades": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "excludedGrade": 6,
+    "reserveExcluded": true,
+    "assessmentsCountedOnlyWhenTheyAreScheduledLessonRows": true,
+    "mathLessonCountAssumptionsUsed": false
+  },
+  "inventory": {
+    "expectedLessons": 1620,
+    "lessonsAudited": 1620,
+    "uniqueLessonIds": 1620,
+    "packageFiles": 1620,
+    "adultGuides": 1620,
+    "admittedProductionBindings": 1620,
+    "exactProductionBindings": 1620,
+    "releaseManifestElaBindings": 1620,
+    "exactReconciliation": true
+  },
+  "primaryLessonTypes": {
+    "assessment": 90,
+    "concept/skill": 178,
+    "diagnostic": 90,
+    "grammar/language": 159,
+    "mastery": 90,
+    "project": 220,
+    "reading": 413,
+    "remediation": 180,
+    "review": 160,
+    "writing": 40
+  },
+  "defectCounts": {
+    "ADULT_AUTHORITY_NOT_SOURCE_ANCHORED": 1620,
+    "GENERATED_PASSAGE_NOT_AUTHENTICALLY_GRADE_DIFFERENTIATED": 1300,
+    "GENERIC_GUIDED_ROUTINE": 970,
+    "GENERIC_REMEDIATION": 1620,
+    "GUIDED_LABELED_LESSON_HAS_NO_GUIDED_TRY_FEEDBACK_LOOP": 180,
+    "LEARNER_FACING_ENGINEERING_LANGUAGE": 1620,
+    "MASTERY_EVIDENCE_NOT_RUNTIME_ADDRESSABLE": 1620,
+    "MODEL_LABELED_LESSON_HAS_NO_MODEL": 250,
+    "NEAR_DUPLICATE_STRUCTURE": 1620,
+    "NO_EMBEDDED_COMPREHENSION_CHECKS": 1440,
+    "NO_EXPLICIT_VOCABULARY_SUPPORT": 970,
+    "NO_MODELED_READING_OR_WRITING_EXAMPLE": 970,
+    "QUESTION_VARIETY_TEMPLATE_BOUND": 1620,
+    "READING_LEVEL_EVIDENCE_MISSING": 1620,
+    "SHALLOW_TEACHING_EXPLANATION": 970,
+    "SOURCE_QUALITY_TEMPLATE_OR_REUSE": 1620,
+    "SOURCE_TELEGRAPHS_TARGET_REASONING": 1300,
+    "TRANSFER_LABELED_LESSON_HAS_NO_NEW_TEXT": 90,
+    "TUTOR_READINESS_METADATA_MISSING": 1620,
+    "UNIT_ASSESSMENT_PROMPTS_NOT_PROJECTED": 90,
+    "WRITING_REQUIRED_FLAG_CONTRADICTS_WRITTEN_DELIVERABLE": 1110,
+    "WRITING_SCAFFOLD_NOT_PHASE_SPECIFIC": 510
+  },
+  "depthClassifications": {
+    "NOT_DEPTH_READY": 1620
+  },
+  "corpusMechanics": {
+    "sourceOrigins": {
+      "academy_original_bank": 320,
+      "academy_original_generated": 1300
+    },
+    "uniqueSourceBodies": 1333,
+    "exactDuplicateSourceBodyGroups": 33,
+    "lessonsAffectedByExactSourceBodyReuse": 320,
+    "generatedPassageTemplateFamilies": 5,
+    "generatedPassageTemplateFamilyCounts": {
+      "contentRepair:argument case": 236,
+      "contentRepair:editorial case": 242,
+      "contentRepair:information case": 286,
+      "contentRepair:literary case": 442,
+      "contentRepair:reflection case": 94
+    },
+    "lessonsAffectedByGeneratedPassageTemplates": 1300,
+    "normalizedQuestionFamilies": 18,
+    "normalizedQuestionFamilyCounts": {
+      "apply-and-check": 90,
+      "baseline-observation-and-question": 90,
+      "compare-perspectives-or-versions": 90,
+      "craft-choice-and-effect": 90,
+      "debatable-claim": 90,
+      "detail-changes-interpretation": 90,
+      "error-analysis-and-correction": 90,
+      "independent-annotation-and-inference": 90,
+      "independent-assessment-claim": 90,
+      "misunderstanding-correction": 90,
+      "publication-and-reflection": 90,
+      "readiness-audit": 90,
+      "revision-and-effect": 90,
+      "source-developed-draft": 90,
+      "trace-example-and-prioritize-step": 90,
+      "transfer-and-adjustment": 90,
+      "word-and-meaning-annotation": 90,
+      "writing-plan": 90
+    },
+    "normalizedGuidedRoutines": 1,
+    "normalizedRemediationRoutines": 1,
+    "writingRequiredTrue": 510,
+    "writingRequiredFalseDespiteWrittenDeliverable": 1110
+  },
+  "authority": {
+    "adultGuidesPresent": 1620,
+    "learnerAdultLeaks": 0,
+    "sourceTelegraphsTargetReasoning": 1300,
+    "sourceAnchoredScoringExamples": 0
+  },
+  "byGrade": {
+    "3": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 21,
+        "diagnostic": 10,
+        "grammar/language": 44,
+        "mastery": 10,
+        "reading": 35,
+        "remediation": 20,
+        "review": 10,
+        "writing": 20
+      },
+      "sourceOrigins": {
+        "academy_original_bank": 160,
+        "academy_original_generated": 20
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 101,
+        "p25": 216,
+        "median": 234,
+        "p75": 242,
+        "max": 292,
+        "mean": 227.14
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 1.48,
+        "p25": 3.82,
+        "median": 5.08,
+        "p75": 5.98,
+        "max": 10.38,
+        "mean": 5.33
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    },
+    "4": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 5,
+        "diagnostic": 10,
+        "grammar/language": 19,
+        "mastery": 10,
+        "project": 10,
+        "reading": 66,
+        "remediation": 20,
+        "review": 10,
+        "writing": 20
+      },
+      "sourceOrigins": {
+        "academy_original_bank": 160,
+        "academy_original_generated": 20
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 131,
+        "p25": 279,
+        "median": 303,
+        "p75": 312,
+        "max": 341,
+        "mean": 289.06
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 2.87,
+        "p25": 4.3,
+        "median": 6.88,
+        "p75": 8.36,
+        "max": 11.12,
+        "mean": 6.58
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    },
+    "5": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 19,
+        "diagnostic": 10,
+        "grammar/language": 19,
+        "mastery": 10,
+        "project": 30,
+        "reading": 42,
+        "remediation": 20,
+        "review": 20
+      },
+      "sourceOrigins": {
+        "academy_original_generated": 180
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 254,
+        "p25": 264,
+        "median": 279,
+        "p75": 294,
+        "max": 304,
+        "mean": 279.93
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 9.05,
+        "p25": 9.7,
+        "median": 10.02,
+        "p75": 10.27,
+        "max": 10.8,
+        "mean": 9.94
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    },
+    "7": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 17,
+        "diagnostic": 10,
+        "grammar/language": 16,
+        "mastery": 10,
+        "project": 30,
+        "reading": 47,
+        "remediation": 20,
+        "review": 20
+      },
+      "sourceOrigins": {
+        "academy_original_generated": 180
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 255,
+        "p25": 263,
+        "median": 290,
+        "p75": 293,
+        "max": 301,
+        "mean": 280.47
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 9.08,
+        "p25": 9.64,
+        "median": 9.99,
+        "p75": 10.47,
+        "max": 10.93,
+        "mean": 10.03
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    },
+    "8": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 24,
+        "diagnostic": 10,
+        "grammar/language": 16,
+        "mastery": 10,
+        "project": 30,
+        "reading": 40,
+        "remediation": 20,
+        "review": 20
+      },
+      "sourceOrigins": {
+        "academy_original_generated": 180
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 257,
+        "p25": 264,
+        "median": 278,
+        "p75": 294,
+        "max": 301,
+        "mean": 279.57
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 9.05,
+        "p25": 9.86,
+        "median": 10.16,
+        "p75": 10.53,
+        "max": 11.01,
+        "mean": 10.14
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    },
+    "9": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 26,
+        "diagnostic": 10,
+        "grammar/language": 4,
+        "mastery": 10,
+        "project": 30,
+        "reading": 50,
+        "remediation": 20,
+        "review": 20
+      },
+      "sourceOrigins": {
+        "academy_original_generated": 180
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 313,
+        "p25": 326,
+        "median": 341,
+        "p75": 353,
+        "max": 363,
+        "mean": 339.97
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 9.99,
+        "p25": 10.53,
+        "median": 10.92,
+        "p75": 11.24,
+        "max": 11.73,
+        "mean": 10.88
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    },
+    "10": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 24,
+        "diagnostic": 10,
+        "grammar/language": 10,
+        "mastery": 10,
+        "project": 30,
+        "reading": 46,
+        "remediation": 20,
+        "review": 20
+      },
+      "sourceOrigins": {
+        "academy_original_generated": 180
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 317,
+        "p25": 330,
+        "median": 352,
+        "p75": 356,
+        "max": 366,
+        "mean": 344.83
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 10.01,
+        "p25": 10.34,
+        "median": 10.8,
+        "p75": 11.06,
+        "max": 11.89,
+        "mean": 10.75
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    },
+    "11": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 28,
+        "diagnostic": 10,
+        "grammar/language": 14,
+        "mastery": 10,
+        "project": 30,
+        "reading": 38,
+        "remediation": 20,
+        "review": 20
+      },
+      "sourceOrigins": {
+        "academy_original_generated": 180
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 367,
+        "p25": 380,
+        "median": 407,
+        "p75": 411,
+        "max": 420,
+        "mean": 398.07
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 9.76,
+        "p25": 10.42,
+        "median": 10.59,
+        "p75": 10.8,
+        "max": 11.2,
+        "mean": 10.57
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    },
+    "12": {
+      "lessons": 180,
+      "packages": 180,
+      "adultGuides": 180,
+      "productionBindings": 180,
+      "uniqueLessonIds": 180,
+      "primaryLessonTypes": {
+        "assessment": 10,
+        "concept/skill": 14,
+        "diagnostic": 10,
+        "grammar/language": 17,
+        "mastery": 10,
+        "project": 30,
+        "reading": 49,
+        "remediation": 20,
+        "review": 20
+      },
+      "sourceOrigins": {
+        "academy_original_generated": 180
+      },
+      "sourceWordCounts": {
+        "n": 180,
+        "min": 374,
+        "p25": 381,
+        "median": 407,
+        "p75": 410,
+        "max": 418,
+        "mean": 397.87
+      },
+      "advisoryFleschKincaid": {
+        "n": 180,
+        "min": 9.81,
+        "p25": 10.12,
+        "median": 10.48,
+        "p75": 10.86,
+        "max": 11.25,
+        "mean": 10.5
+      },
+      "lessonsWithDefects": 180,
+      "depthReady": 0
+    }
+  },
+  "representativeSampleRecommendation": {
+    "lessonId": "ma-g7-english-language-arts-u05-l03",
+    "rationale": "A middle-grade guided-practice argument lesson that should make teaching, modeling, guided reasoning, independent evidence use, vocabulary, remediation, adult scoring, and Tutor metadata visible in one reviewable sample."
+  }
+}
