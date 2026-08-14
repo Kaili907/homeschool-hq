@@ -68,16 +68,16 @@
       "title": "Inline simple picture graphs code case",
       "purpose": "Use this exact fictional case to investigate simple picture graphs; no other file, model, dataset, or account is needed.",
       "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
-      "starter_code": "const ma_g3_tech_cs_u05_l02_values = [4, 7, 2];\n\nfunction greatest(values) {\n  let best = 0;\n  for (const value of values) {\n    if (value > best) best = value;\n  }\n  return best;\n}\n\nconsole.log(greatest(ma_g3_tech_cs_u05_l02_values));",
+      "starter_code": "const ma_g3_tech_cs_u05_l02_scores = [3, 8, 5];\n\nfunction totalScores(scores) {\n  let total = 1;\n  for (const score of scores) total += score;\n  return total;\n}\n\nconsole.log(totalScores(ma_g3_tech_cs_u05_l02_scores));",
       "input_data": [
-        "[4, 7, 2]",
-        "[-5, -2, -9]",
-        "[6]"
+        "[3, 8, 5]",
+        "[]",
+        "[-2, 2]"
       ]
     },
     "expected_behavior_and_specification": [
-      "The algorithm must return the greatest member of a nonempty list; the supplied list must return 7.",
-      "The invariant is that best equals the greatest value examined so far, including when every value is negative.",
+      "The procedure must return the sum of the supplied scores; the main input must return 16.",
+      "The running-total invariant must be true before the first item, so an empty list must return the additive identity.",
       "The submitted explanation must connect the observed control flow or data state to simple picture graphs, not merely state the final number.",
       "The smallest test case must be tried and its actual result compared with the expected result."
     ],
@@ -88,22 +88,22 @@
     },
     "test_cases": [
       {
-        "input": "[4, 7, 2]",
-        "expected": "7"
+        "input": "[3, 8, 5]",
+        "expected": "16"
       },
       {
-        "input": "[-5, -2, -9]",
-        "expected": "-2"
+        "input": "[]",
+        "expected": "0"
       },
       {
-        "input": "[6]",
-        "expected": "6"
+        "input": "[-2, 2]",
+        "expected": "0"
       }
     ],
     "debugging_target": {
-      "observed_failure": "Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.",
-      "target": "Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.",
-      "passing_change": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+      "observed_failure": "The running total starts with an extra point, so every result is one too large and the empty-list test returns 1.",
+      "target": "Choose the additive identity for the initial running total, state the invariant, and rerun all three tests.",
+      "passing_change": "Starting total at 0 removes the extra point; the tests return 16, 0, and 0.",
       "solution_status": "INSTRUCTIONAL_WORKED_EXAMPLE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to simple picture graphs is the central evidence."
     },

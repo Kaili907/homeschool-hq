@@ -1,0 +1,1601 @@
+{
+  "schema_version": "technology-solution-exposure-fix-r2.0",
+  "parent_repair": "7de7b9ad0e9af396937270079f4db0e0d4118990",
+  "authoritative_review_commit": "15633ad5677dd5a966adf0fc83b22dca93e6bf1e",
+  "independent_acceptance_inventory": {
+    "non_summative": 45,
+    "summative": 11,
+    "total": 56
+  },
+  "mappings": [
+    {
+      "mapping_number": 1,
+      "protected_lesson_id": "ma-g10-technology-u01-l03",
+      "course_ref": "ma-g10-technology",
+      "generator_family_before": "DATA_AGGREGATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g10-technology-u01-l02",
+        "ma-g10-technology-u03-l02",
+        "ma-g10-technology-u06-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g10-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g10-technology-u03-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g10-technology-u06-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u01-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u01-l03.scoring-guide.json",
+      "after_package_sha256": "e2de40d0c27f7f86df96f1e5394b2bbd11de6e159f1753a94c0307c25297cfe1",
+      "after_scoring_guide_sha256": "4e4a3da2586c3d2468262e81d64f5259d2fdd169138e5afb98d409b5dedec7ff"
+    },
+    {
+      "mapping_number": 2,
+      "protected_lesson_id": "ma-g10-technology-u02-l01",
+      "course_ref": "ma-g10-technology",
+      "generator_family_before": "ALGORITHM_INITIALIZATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g10-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g10-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u02-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l01.scoring-guide.json",
+      "after_package_sha256": "dd0f1c5feea2ce614c1c8e81ecb14148c61e0059640ae413296d54155a085f6a",
+      "after_scoring_guide_sha256": "d63ec0e4074b7e5931c1a23146ecdb7576476d00a45150d67427f4a607ad153b"
+    },
+    {
+      "mapping_number": 3,
+      "protected_lesson_id": "ma-g10-technology-u02-l03",
+      "course_ref": "ma-g10-technology",
+      "generator_family_before": "ALGORITHM_INITIALIZATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g10-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g10-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u02-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l03.scoring-guide.json",
+      "after_package_sha256": "3f79af982b4653eed1265840d62cb743c5bce079039bd0b22d230d2a0f2141d9",
+      "after_scoring_guide_sha256": "7be12bcfcb56569760ade66a6330a6a9da402abe148db354694a8f852b34d42c"
+    },
+    {
+      "mapping_number": 4,
+      "protected_lesson_id": "ma-g10-technology-u02-l04",
+      "course_ref": "ma-g10-technology",
+      "generator_family_before": "ALGORITHM_INITIALIZATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g10-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g10-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u02-l04.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l04.scoring-guide.json",
+      "after_package_sha256": "4afd1aacc191a557747e117c43ef5fbd509932a7d7e5fb515ba3be15aca30577",
+      "after_scoring_guide_sha256": "0778b6829f9469da61adcb3b30a8a61024680c404e55e3425611c25f67487a54"
+    },
+    {
+      "mapping_number": 5,
+      "protected_lesson_id": "ma-g10-technology-u02-l05",
+      "course_ref": "ma-g10-technology",
+      "generator_family_before": "ALGORITHM_INITIALIZATION",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g10-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g10-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u02-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l05.scoring-guide.json",
+      "after_package_sha256": "4fefda57ae939fe2c05ee3f3a125350f67a88cacba39b92495493141a7a4adc3",
+      "after_scoring_guide_sha256": "b903045fa6430dc2ba58f8bb8849a8dd15f1d1df4c02f031ee58519bcb6b503c"
+    },
+    {
+      "mapping_number": 6,
+      "protected_lesson_id": "ma-g10-technology-u02-l06",
+      "course_ref": "ma-g10-technology",
+      "generator_family_before": "ALGORITHM_INITIALIZATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g10-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g10-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u02-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l06.scoring-guide.json",
+      "after_package_sha256": "24a5f2c4d0d90e0b2d60149ab7c26461c284588233fa80155ca41459ab4a1401",
+      "after_scoring_guide_sha256": "207b0038eba7d3154b717ec547835caf0922e7ad0d7c776c45227b394ef4aebe"
+    },
+    {
+      "mapping_number": 7,
+      "protected_lesson_id": "ma-g10-technology-u03-l03",
+      "course_ref": "ma-g10-technology",
+      "generator_family_before": "DATA_AGGREGATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g10-technology-u01-l02",
+        "ma-g10-technology-u03-l02",
+        "ma-g10-technology-u06-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g10-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g10-technology-u03-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g10-technology-u06-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u03-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u03-l03.scoring-guide.json",
+      "after_package_sha256": "ee894e119cb1a77781a6043119723d998d59a7754ffebc6d3da68cc5eb13576e",
+      "after_scoring_guide_sha256": "f0a40d668861f6d7307d3c317652a881dace3348381ac6d25187e6c295b64996"
+    },
+    {
+      "mapping_number": 8,
+      "protected_lesson_id": "ma-g11-technology-u01-l03",
+      "course_ref": "ma-g11-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g11-technology-u01-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g11-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-11/ma-g11-technology-u01-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-11/ma-g11-technology-u01-l03.scoring-guide.json",
+      "after_package_sha256": "73450a94f1314e7718389038277aedffd8559b750e9c4a163f5bdbcaba7d42b8",
+      "after_scoring_guide_sha256": "2b493a2e3a4bf9282fe70cef63e80068db5d2265c0f1db7a03e426b7a9706dad"
+    },
+    {
+      "mapping_number": 9,
+      "protected_lesson_id": "ma-g11-technology-u02-l01",
+      "course_ref": "ma-g11-technology",
+      "generator_family_before": "OBJECT_STATE_UPDATE",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g11-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g11-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-11/ma-g11-technology-u02-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-11/ma-g11-technology-u02-l01.scoring-guide.json",
+      "after_package_sha256": "24bea209687b4b8a76d4ec1872e104cda27ab2002829792c7d91139b6a83c8c7",
+      "after_scoring_guide_sha256": "04f5a9b6a12a9581fb0832fc8df954850a49d280cf3b837f1e609cd72f861082"
+    },
+    {
+      "mapping_number": 10,
+      "protected_lesson_id": "ma-g11-technology-u02-l03",
+      "course_ref": "ma-g11-technology",
+      "generator_family_before": "OBJECT_STATE_UPDATE",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g11-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g11-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-11/ma-g11-technology-u02-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-11/ma-g11-technology-u02-l03.scoring-guide.json",
+      "after_package_sha256": "2033ad3330f81e8d2df27423cbed428da96499b853c08a95e33f5e060008765b",
+      "after_scoring_guide_sha256": "a2a2c91764bd4df0e295b806ce8b07219aed74903a84aaa6b7c04f756feaff45"
+    },
+    {
+      "mapping_number": 11,
+      "protected_lesson_id": "ma-g11-technology-u02-l05",
+      "course_ref": "ma-g11-technology",
+      "generator_family_before": "OBJECT_STATE_UPDATE",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g11-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g11-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-11/ma-g11-technology-u02-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-11/ma-g11-technology-u02-l05.scoring-guide.json",
+      "after_package_sha256": "27b8f46ad3c068bff1ac75f42bb78741c0c76ae89617a6663bd0a197f42b9493",
+      "after_scoring_guide_sha256": "4d70bbd4096f80ab0fed71460ad64d3c327c3cf4aa08af599a174754ffaca3a8"
+    },
+    {
+      "mapping_number": 12,
+      "protected_lesson_id": "ma-g11-technology-u02-l06",
+      "course_ref": "ma-g11-technology",
+      "generator_family_before": "OBJECT_STATE_UPDATE",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g11-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g11-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-11/ma-g11-technology-u02-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-11/ma-g11-technology-u02-l06.scoring-guide.json",
+      "after_package_sha256": "0455815612e04ee90d13af9f6d1cddf9c95ca7455979c0f778e8f109ff2ac97c",
+      "after_scoring_guide_sha256": "cce1d7b7d2f1b0be36d598595c660d079f9676a67c499378cb7fba360bf5c580"
+    },
+    {
+      "mapping_number": 13,
+      "protected_lesson_id": "ma-g11-technology-u06-l03",
+      "course_ref": "ma-g11-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g11-technology-u01-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g11-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-11/ma-g11-technology-u06-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-11/ma-g11-technology-u06-l03.scoring-guide.json",
+      "after_package_sha256": "6007d40110de3f433ccd553046219b714e5f44c973271698daa1dcb8f10e2699",
+      "after_scoring_guide_sha256": "4efc3ddd6a6208cb4548378cb3cc5c826e4a9ccbae838485a68c897302eb07ba"
+    },
+    {
+      "mapping_number": 14,
+      "protected_lesson_id": "ma-g12-technology-u01-l01",
+      "course_ref": "ma-g12-technology",
+      "generator_family_before": "ALGORITHM_INITIALIZATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g12-technology-u01-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g12-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u01-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-12/ma-g12-technology-u01-l01.scoring-guide.json",
+      "after_package_sha256": "20f521f6579c5ee482a0e34980bd0bb0610c109fff6f3144fba6bb3b09dc756e",
+      "after_scoring_guide_sha256": "8c23e628242106190524680c48f7e42883bd2d8a0228a5593b9d72204c5ffb1c"
+    },
+    {
+      "mapping_number": 15,
+      "protected_lesson_id": "ma-g12-technology-u01-l03",
+      "course_ref": "ma-g12-technology",
+      "generator_family_before": "ALGORITHM_INITIALIZATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g12-technology-u01-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g12-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u01-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-12/ma-g12-technology-u01-l03.scoring-guide.json",
+      "after_package_sha256": "6fd0a130f3a72c0b16aff0c421c50d2e912cf4d477aa9a72551e13698e2e59d3",
+      "after_scoring_guide_sha256": "24275aaf26859efacbd1c336b95e673ede45a3801a67f40289ae7e10645fa63a"
+    },
+    {
+      "mapping_number": 16,
+      "protected_lesson_id": "ma-g12-technology-u01-l04",
+      "course_ref": "ma-g12-technology",
+      "generator_family_before": "ALGORITHM_INITIALIZATION",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g12-technology-u01-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g12-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u01-l04.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-12/ma-g12-technology-u01-l04.scoring-guide.json",
+      "after_package_sha256": "0226d896a9061ce8b04ac452c33fa8ca19343fc69e31fcc571f877a99d58c885",
+      "after_scoring_guide_sha256": "b423b65ad83fa14011e7e6f10cd4f69d284b42bc65f04fc255bc791a603eceb6"
+    },
+    {
+      "mapping_number": 17,
+      "protected_lesson_id": "ma-g12-technology-u02-l01",
+      "course_ref": "ma-g12-technology",
+      "generator_family_before": "STALE_STATE_UPDATE",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g12-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g12-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u02-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-12/ma-g12-technology-u02-l01.scoring-guide.json",
+      "after_package_sha256": "e4dcad133faf19f99723160d6ee9155effe27eb4cedbfe66bdcdfe1997dc639b",
+      "after_scoring_guide_sha256": "e48e5f3008a3715e882facc2c97d6dce497fc2cb897a9257ce81dad84871d21b"
+    },
+    {
+      "mapping_number": 18,
+      "protected_lesson_id": "ma-g12-technology-u02-l03",
+      "course_ref": "ma-g12-technology",
+      "generator_family_before": "STALE_STATE_UPDATE",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g12-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g12-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u02-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-12/ma-g12-technology-u02-l03.scoring-guide.json",
+      "after_package_sha256": "a7998669ec607196ab425a14fcef3f96b3b6f36f3dc78868e4ceb06e3e97d6c8",
+      "after_scoring_guide_sha256": "55ba681b145c285c9cb73af2a597892bd33b6f21997413c65e4f37b0f6b22318"
+    },
+    {
+      "mapping_number": 19,
+      "protected_lesson_id": "ma-g12-technology-u02-l05",
+      "course_ref": "ma-g12-technology",
+      "generator_family_before": "STALE_STATE_UPDATE",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g12-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g12-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u02-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-12/ma-g12-technology-u02-l05.scoring-guide.json",
+      "after_package_sha256": "861f2452fd2c4cf5b3627c5ad8247ea217e4a6ceae699c6fcf4696a214990b32",
+      "after_scoring_guide_sha256": "2502f5ddd4f8082679da41c38e2db3382dcabbabd05bc56eb3af7a2a43420e06"
+    },
+    {
+      "mapping_number": 20,
+      "protected_lesson_id": "ma-g12-technology-u02-l06",
+      "course_ref": "ma-g12-technology",
+      "generator_family_before": "STALE_STATE_UPDATE",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g12-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g12-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-12/ma-g12-technology-u02-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-12/ma-g12-technology-u02-l06.scoring-guide.json",
+      "after_package_sha256": "8a857328b51c62ee05fd94398b18c173869a331d6eeee7ec0a20402117b1b58c",
+      "after_scoring_guide_sha256": "188737269994e431f1c2da3bd44ac69f17d2ec8b7fd6fae91abe2f00391abebf"
+    },
+    {
+      "mapping_number": 21,
+      "protected_lesson_id": "ma-g3-tech-cs-u04-l01",
+      "course_ref": "ma-g3-tech-cs",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g3-tech-cs-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g3-tech-cs-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-03/ma-g3-tech-cs-u04-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-03/ma-g3-tech-cs-u04-l01.scoring-guide.json",
+      "after_package_sha256": "947520553b8598cc159fbb02112120764d942c79cae816d89addf15eb5468ed4",
+      "after_scoring_guide_sha256": "586880e5733d3150936f8363ad7b9a89681680fa007444c8d08e70cc89baecd6"
+    },
+    {
+      "mapping_number": 22,
+      "protected_lesson_id": "ma-g4-tech-cs-u04-l01",
+      "course_ref": "ma-g4-tech-cs",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g4-tech-cs-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g4-tech-cs-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u04-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-04/ma-g4-tech-cs-u04-l01.scoring-guide.json",
+      "after_package_sha256": "f27e57945d28eef3a38b5f58868884b62d23c5439cfaa1792df965d99aad4ee8",
+      "after_scoring_guide_sha256": "5db00f19d69d2ed849c8154cd13fda15bea72966983e3740a4364dd85f4c72eb"
+    },
+    {
+      "mapping_number": 23,
+      "protected_lesson_id": "ma-g4-tech-cs-u04-l03",
+      "course_ref": "ma-g4-tech-cs",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g4-tech-cs-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g4-tech-cs-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u04-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-04/ma-g4-tech-cs-u04-l03.scoring-guide.json",
+      "after_package_sha256": "dff7bcc7e92ed9d1b057179c864c47af59f7b50a128f66b7abbc2faa4300ac0c",
+      "after_scoring_guide_sha256": "2ee7848712ae13834da52a37826ec1204e18e789cea7c298c07bae96fdbdd42b"
+    },
+    {
+      "mapping_number": 24,
+      "protected_lesson_id": "ma-g4-tech-cs-u04-l04",
+      "course_ref": "ma-g4-tech-cs",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g4-tech-cs-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g4-tech-cs-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u04-l04.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-04/ma-g4-tech-cs-u04-l04.scoring-guide.json",
+      "after_package_sha256": "457a449546451de8714108b9fb21004e4bfc83a66c8015ec19cd4528c060a672",
+      "after_scoring_guide_sha256": "cc21425faf1115817a5a43169a65e40992ba8f32cc283f9d72f964b187caa5fe"
+    },
+    {
+      "mapping_number": 25,
+      "protected_lesson_id": "ma-g4-tech-cs-u04-l05",
+      "course_ref": "ma-g4-tech-cs",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g4-tech-cs-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g4-tech-cs-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u04-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-04/ma-g4-tech-cs-u04-l05.scoring-guide.json",
+      "after_package_sha256": "620197f868ca41388b0cd9e8626a99e962352d85f3727671fcc60e18f0525976",
+      "after_scoring_guide_sha256": "881492217d1f0b449eca12240e42828d113ad3f7ecca9b9a17311c71a9c5cea1"
+    },
+    {
+      "mapping_number": 26,
+      "protected_lesson_id": "ma-g4-tech-cs-u04-l06",
+      "course_ref": "ma-g4-tech-cs",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g4-tech-cs-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g4-tech-cs-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-04/ma-g4-tech-cs-u04-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-04/ma-g4-tech-cs-u04-l06.scoring-guide.json",
+      "after_package_sha256": "dc706f07cbeb7686fe026f4f1f9b145f37cba97e31db03d8be232854d3f07312",
+      "after_scoring_guide_sha256": "b78d9ac615fa4935cac85f6c379ba2a3e691cfc922b3aa387e0fb55052715f93"
+    },
+    {
+      "mapping_number": 27,
+      "protected_lesson_id": "ma-g5-technology-u04-l01",
+      "course_ref": "ma-g5-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g5-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g5-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-05/ma-g5-technology-u04-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-05/ma-g5-technology-u04-l01.scoring-guide.json",
+      "after_package_sha256": "3a70a4fb72e54a7f86909fe35b850806a4c6bc7fcd71db135a8ffcc4afbae5e5",
+      "after_scoring_guide_sha256": "f082af0b213b0c2093d7b5dee355a841e753877c04ff685473251b10ac757279"
+    },
+    {
+      "mapping_number": 28,
+      "protected_lesson_id": "ma-g5-technology-u04-l03",
+      "course_ref": "ma-g5-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g5-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g5-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-05/ma-g5-technology-u04-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-05/ma-g5-technology-u04-l03.scoring-guide.json",
+      "after_package_sha256": "1c781784ab9de473e85f2516e970172f481898187101a51e468a1e3766b4a612",
+      "after_scoring_guide_sha256": "7539d0ab47932535a59475c12101d4fdd8dd238800bc99a40d8ab35591276d0e"
+    },
+    {
+      "mapping_number": 29,
+      "protected_lesson_id": "ma-g5-technology-u04-l04",
+      "course_ref": "ma-g5-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g5-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g5-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-05/ma-g5-technology-u04-l04.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-05/ma-g5-technology-u04-l04.scoring-guide.json",
+      "after_package_sha256": "766d0ac730c630aeb13acd9a34c7cba8e1296846b913cf6704b1979919cd28cc",
+      "after_scoring_guide_sha256": "ec437fdcd2cd645782228c9386a4538a57801fa7353849843aaadc8041c7202a"
+    },
+    {
+      "mapping_number": 30,
+      "protected_lesson_id": "ma-g5-technology-u04-l05",
+      "course_ref": "ma-g5-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g5-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g5-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-05/ma-g5-technology-u04-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-05/ma-g5-technology-u04-l05.scoring-guide.json",
+      "after_package_sha256": "681a52c46f2134fac58a147b4cce7ad34ff927b3a6d83c73f53c5fb3c06bdbe5",
+      "after_scoring_guide_sha256": "0386a063246c7fa5d79eda9d558b52afea4931027152f0ba3d5db51721b0b4fc"
+    },
+    {
+      "mapping_number": 31,
+      "protected_lesson_id": "ma-g5-technology-u04-l06",
+      "course_ref": "ma-g5-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g5-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g5-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-05/ma-g5-technology-u04-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-05/ma-g5-technology-u04-l06.scoring-guide.json",
+      "after_package_sha256": "b8484931b1db4850286129d907778094a0a5451d9d3dd98d693865a94d5d3775",
+      "after_scoring_guide_sha256": "303431ea76e3f33ef4cebdf76e76c7906b857488193d06e0fe952a0ac3bfdb8d"
+    },
+    {
+      "mapping_number": 32,
+      "protected_lesson_id": "ma-g5-technology-u06-l05",
+      "course_ref": "ma-g5-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g5-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g5-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-05/ma-g5-technology-u06-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-05/ma-g5-technology-u06-l05.scoring-guide.json",
+      "after_package_sha256": "6dc4f34d8593b14d5205c4f538d24ecd791b17a075f0a1dbdb5614471cbaadcc",
+      "after_scoring_guide_sha256": "b6cd1580801b983243d7a633902378554673072d1bb9b3e41cf0d3ac1f976068"
+    },
+    {
+      "mapping_number": 33,
+      "protected_lesson_id": "ma-g7-technology-u02-l01",
+      "course_ref": "ma-g7-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g7-technology-u02-l02",
+        "ma-g7-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g7-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g7-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-07/ma-g7-technology-u02-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-07/ma-g7-technology-u02-l01.scoring-guide.json",
+      "after_package_sha256": "6be64e4384bc486eefc5415276094b8b427667aadd4ecc637020d43642781f45",
+      "after_scoring_guide_sha256": "1cd2a57bb8329967780846ddf9e501de9cbd01d005dc95ce0181a4337d5be8e3"
+    },
+    {
+      "mapping_number": 34,
+      "protected_lesson_id": "ma-g7-technology-u02-l04",
+      "course_ref": "ma-g7-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g7-technology-u02-l02",
+        "ma-g7-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g7-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g7-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-07/ma-g7-technology-u02-l04.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-07/ma-g7-technology-u02-l04.scoring-guide.json",
+      "after_package_sha256": "b3a4c464328fcde32fb6d89d7ae16b1dba4663946c39c12c73d88382728902a3",
+      "after_scoring_guide_sha256": "fbd431fe6d87f698f8263c8675a092b9e808397633fca29451b95afbf1e99ce6"
+    },
+    {
+      "mapping_number": 35,
+      "protected_lesson_id": "ma-g7-technology-u02-l05",
+      "course_ref": "ma-g7-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g7-technology-u02-l02",
+        "ma-g7-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g7-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g7-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-07/ma-g7-technology-u02-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-07/ma-g7-technology-u02-l05.scoring-guide.json",
+      "after_package_sha256": "145213696d9b7609566bc1fceaeff87ab963b000dd145b9ffc86193a646ba9fe",
+      "after_scoring_guide_sha256": "67b3c7ac060945c829fa2c57b060bb3a61e94f91c7b91c0c65ac8b9e6130bf37"
+    },
+    {
+      "mapping_number": 36,
+      "protected_lesson_id": "ma-g7-technology-u02-l06",
+      "course_ref": "ma-g7-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g7-technology-u02-l02",
+        "ma-g7-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g7-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g7-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-07/ma-g7-technology-u02-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-07/ma-g7-technology-u02-l06.scoring-guide.json",
+      "after_package_sha256": "2533d731f25c3183da62872e572b664c491148eaf6caa24f9ea3431137dddbd3",
+      "after_scoring_guide_sha256": "45717aa1dcb6cff4853d496b1f27ac4d74b8e336ca9db4515429291da5c4ab0a"
+    },
+    {
+      "mapping_number": 37,
+      "protected_lesson_id": "ma-g7-technology-u06-l06",
+      "course_ref": "ma-g7-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g7-technology-u02-l02",
+        "ma-g7-technology-u04-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g7-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g7-technology-u04-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-07/ma-g7-technology-u06-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-07/ma-g7-technology-u06-l06.scoring-guide.json",
+      "after_package_sha256": "fff138a4f7edfe3d0fc80721c389e11b6a2dba07f53accce640434204e0fc76c",
+      "after_scoring_guide_sha256": "c034c8a82cd3fe344d9e31ba8b0f2da94f36c7b329f8c36cd6eb077877d0c10d"
+    },
+    {
+      "mapping_number": 38,
+      "protected_lesson_id": "ma-g8-technology-u01-l03",
+      "course_ref": "ma-g8-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g8-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g8-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-08/ma-g8-technology-u01-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-08/ma-g8-technology-u01-l03.scoring-guide.json",
+      "after_package_sha256": "864835ae8256af56ae7b7424194a83718646ba3f451a5dd063055ff8b0a5dc4f",
+      "after_scoring_guide_sha256": "ead8689d4096e1dc0e8713b1a577e57b34e8078c82e11c385ed2fdb8ec9697aa"
+    },
+    {
+      "mapping_number": 39,
+      "protected_lesson_id": "ma-g8-technology-u02-l01",
+      "course_ref": "ma-g8-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g8-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g8-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-08/ma-g8-technology-u02-l01.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-08/ma-g8-technology-u02-l01.scoring-guide.json",
+      "after_package_sha256": "67bcbc2f26342fafd533da168736a96c04df49cceefc0c4c56900ef157d60e7d",
+      "after_scoring_guide_sha256": "3eb42483f81e823765e026e012f1a49b03d5b906ff15df43cfadc1fde7bc9558"
+    },
+    {
+      "mapping_number": 40,
+      "protected_lesson_id": "ma-g8-technology-u02-l03",
+      "course_ref": "ma-g8-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g8-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g8-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-08/ma-g8-technology-u02-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-08/ma-g8-technology-u02-l03.scoring-guide.json",
+      "after_package_sha256": "9fd1835b84a3ab1087b80d42ded3ddd0a848fc63428094131fb422ad22cef30f",
+      "after_scoring_guide_sha256": "b7b8630e4dd23feef86935920a96fdf2257edfa10593b59a2e821f83653017b9"
+    },
+    {
+      "mapping_number": 41,
+      "protected_lesson_id": "ma-g8-technology-u02-l04",
+      "course_ref": "ma-g8-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g8-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g8-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-08/ma-g8-technology-u02-l04.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-08/ma-g8-technology-u02-l04.scoring-guide.json",
+      "after_package_sha256": "cab9ef74828bec02190d73e43c38581769ed8f851c88fb916efdaaafa9d726fc",
+      "after_scoring_guide_sha256": "667c281328cbb9fc9379346c53aec18fa8153dc4a121c3bb0f25b00a96b76c40"
+    },
+    {
+      "mapping_number": 42,
+      "protected_lesson_id": "ma-g8-technology-u02-l05",
+      "course_ref": "ma-g8-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g8-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g8-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-08/ma-g8-technology-u02-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-08/ma-g8-technology-u02-l05.scoring-guide.json",
+      "after_package_sha256": "775b655e0066ae575acd82600b4d7c291f05ecf84c5ad741b8d3430b56a28162",
+      "after_scoring_guide_sha256": "a915bb86a59333b680c9a833ee40f9b9664b62af821965a9b4f3c849e8814d9a"
+    },
+    {
+      "mapping_number": 43,
+      "protected_lesson_id": "ma-g8-technology-u03-l06",
+      "course_ref": "ma-g8-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g8-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g8-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-08/ma-g8-technology-u03-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-08/ma-g8-technology-u03-l06.scoring-guide.json",
+      "after_package_sha256": "c41049faf25430dcee0815afe7aa1549ffe616688d9656472ecf4e6fd97824cb",
+      "after_scoring_guide_sha256": "793736a848ae8aa4eb446e33956125d6d0baa488a2413c6f46f1a84ecd2610ce"
+    },
+    {
+      "mapping_number": 44,
+      "protected_lesson_id": "ma-g8-technology-u04-l03",
+      "course_ref": "ma-g8-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g8-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g8-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-08/ma-g8-technology-u04-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-08/ma-g8-technology-u04-l03.scoring-guide.json",
+      "after_package_sha256": "abac5c321663a402567381cc4ca8bddb77e9fc930d01806da031fa28c5a31302",
+      "after_scoring_guide_sha256": "50b7738c3f92b73564a5a019ded146943883897a06b4dd95bb73523817ca6b48"
+    },
+    {
+      "mapping_number": 45,
+      "protected_lesson_id": "ma-g9-technology-u01-l03",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u01-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u01-l03.scoring-guide.json",
+      "after_package_sha256": "eb8d4adc25b26804069328984522b2b8b1bb56dbff3735fba8a777f26c6f59bb",
+      "after_scoring_guide_sha256": "8df8dee5754994ca7e88efeafe9496bd1e836edb7d9d68092ca528d872a0c189"
+    },
+    {
+      "mapping_number": 46,
+      "protected_lesson_id": "ma-g9-technology-u01-l04",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "STALE_STATE_UPDATE",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u03-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u03-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u01-l04.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u01-l04.scoring-guide.json",
+      "after_package_sha256": "7e62ecc56a4f687e8021f726c72f980fc6e437cdee0e6f8992ace747d9cca600",
+      "after_scoring_guide_sha256": "260484b625115b8719e694cfcde31376fc1071a64ed238b95f070da26b2b8e74"
+    },
+    {
+      "mapping_number": 47,
+      "protected_lesson_id": "ma-g9-technology-u01-l05",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u01-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u01-l05.scoring-guide.json",
+      "after_package_sha256": "a9dfdde87b775fbcdf67bab6120e5fd3506531bf2fe878688c1d8e618e344286",
+      "after_scoring_guide_sha256": "482916176e3069e5bf7f97d9f1730d6fec32fc9d8fb2e978bda75c60436aeac8"
+    },
+    {
+      "mapping_number": 48,
+      "protected_lesson_id": "ma-g9-technology-u01-l06",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u01-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u01-l06.scoring-guide.json",
+      "after_package_sha256": "41ede9024232984f3f56f4d3358b195a30f34f60468a7b1519475883e808e1bd",
+      "after_scoring_guide_sha256": "36bdb96796f7cc4a35f6ab9d4d8952387fb7e3e12cb06acfe244d1e5e5e03bb6"
+    },
+    {
+      "mapping_number": 49,
+      "protected_lesson_id": "ma-g9-technology-u02-l03",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u02-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u02-l03.scoring-guide.json",
+      "after_package_sha256": "298eec18d841eb7e2ef8bd2371b72454ee2ffbc9d373e01c140aa3f4ae39fcf7",
+      "after_scoring_guide_sha256": "e56e432fb01845be1a0d40750d3e7016a8033f0503c935af4b79502d725035c0"
+    },
+    {
+      "mapping_number": 50,
+      "protected_lesson_id": "ma-g9-technology-u02-l04",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u02-l04.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u02-l04.scoring-guide.json",
+      "after_package_sha256": "e7b336f3d5a4dd8d50e97222a7d930e771f8a97c6ac24f52fabb464a5c7efa71",
+      "after_scoring_guide_sha256": "a8c3423490aeb044b1aeb8a5ee2f4bd8bea6262266f0f07b0fa38c7f32a20148"
+    },
+    {
+      "mapping_number": 51,
+      "protected_lesson_id": "ma-g9-technology-u02-l05",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u02-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u02-l05.scoring-guide.json",
+      "after_package_sha256": "c8a844c4c1a1b36defa537d249b3a2e52f07a8f078a7d18c1d758e0d8284d242",
+      "after_scoring_guide_sha256": "0ee43be325efbcdc27d7354d96429284a1dad324ba45143c553292a543f09c53"
+    },
+    {
+      "mapping_number": 52,
+      "protected_lesson_id": "ma-g9-technology-u02-l06",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u02-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u02-l06.scoring-guide.json",
+      "after_package_sha256": "22a6010e1852bec47c006d56d10dcf32db91b450b7fde8b57d65a0a224724d09",
+      "after_scoring_guide_sha256": "8cdca2e72674fef2662ecdc62cdfaf08a32362f8714f3db7f2ec8bdfe84296a9"
+    },
+    {
+      "mapping_number": 53,
+      "protected_lesson_id": "ma-g9-technology-u03-l03",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u03-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u03-l03.scoring-guide.json",
+      "after_package_sha256": "80172dce0dea7b6b4608f2d54f033514d3db6f36b005abc0603249780459c8fe",
+      "after_scoring_guide_sha256": "866091cb5cb7452c0808ee2c20828c66ababeac91dd4264e10a8dab8b3cde899"
+    },
+    {
+      "mapping_number": 54,
+      "protected_lesson_id": "ma-g9-technology-u03-l05",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "SUMMATIVE_SOLUTION_EXPOSURE",
+      "summative": true,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u03-l05.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u03-l05.scoring-guide.json",
+      "after_package_sha256": "f121226ccaaba9a88127aa0e210fe44f50f1dfd2bbbabe414c5a1fd9874b9db7",
+      "after_scoring_guide_sha256": "e5b113079cf42c2bb8f1319c6153f2abe6eede6a528e841986e67d3c83e20a24"
+    },
+    {
+      "mapping_number": 55,
+      "protected_lesson_id": "ma-g9-technology-u03-l06",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "GENERIC_SEQUENCE_INDEX",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u01-l02",
+        "ma-g9-technology-u02-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u01-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        },
+        {
+          "source_lesson_id": "ma-g9-technology-u02-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u03-l06.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u03-l06.scoring-guide.json",
+      "after_package_sha256": "401228b7128ee345d04612bb7e39443468ce3ef8493d19eccafd1e67497f3c54",
+      "after_scoring_guide_sha256": "2888e9e0b01734b91e3626230d94cb46110fce28a14012beb8efb5230fc109a9"
+    },
+    {
+      "mapping_number": 56,
+      "protected_lesson_id": "ma-g9-technology-u04-l03",
+      "course_ref": "ma-g9-technology",
+      "generator_family_before": "STALE_STATE_UPDATE",
+      "protected_classification": "FULL_SOLUTION_BEFORE_ATTEMPT",
+      "summative": false,
+      "exposing_worked_examples_before": [
+        "ma-g9-technology-u03-l02"
+      ],
+      "before_equivalence": "MATERIAL_EQUIVALENT_STARTER_DEFECT_REPAIR",
+      "after_equivalence": "ANALOGOUS_CONCEPT_MATERIALLY_DISTINCT_FIXTURE",
+      "exposed_after": false,
+      "comparisons": [
+        {
+          "source_lesson_id": "ma-g9-technology-u03-l02",
+          "exposed_after": false,
+          "fixture_equivalence_after": "PROGRAM_STRUCTURE_DISTINCT",
+          "repair_equivalence_after": "NOT_COMPARED_FIXTURE_DISTINCT"
+        }
+      ],
+      "generated_learner_package": "curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-09/ma-g9-technology-u04-l03.task-package.json",
+      "adult_scoring_guide": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-09/ma-g9-technology-u04-l03.scoring-guide.json",
+      "after_package_sha256": "4528ce3991a3ffc5417736e2eda7ddfbc5907519a7f38a3411bb5e0b99c1932c",
+      "after_scoring_guide_sha256": "670ec84ef1b4f3cd090112e3a4d92b4e862a4aa62cf55b707dcad0b9c33856d8"
+    }
+  ]
+}

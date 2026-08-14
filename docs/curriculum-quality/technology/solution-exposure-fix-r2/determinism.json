@@ -1,0 +1,9 @@
+{
+  "schema_version": "technology-canonical-regeneration-determinism-r2.0",
+  "command": "node generate.mjs",
+  "scope": "all files under packages/ and scoring-guides/ after a complete 984-lesson regeneration",
+  "algorithm": "sha256(sorted per-file sha256 stream)",
+  "run_1_sha256": "56d8c3194e6e48b0d518bb4f73ad0fe28a1a29acd37eec25ef3f42e9b5db8571",
+  "run_2_sha256": "56d8c3194e6e48b0d518bb4f73ad0fe28a1a29acd37eec25ef3f42e9b5db8571",
+  "identical": true
+}

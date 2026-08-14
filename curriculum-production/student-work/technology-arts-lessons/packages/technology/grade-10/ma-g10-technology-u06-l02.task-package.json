@@ -55,16 +55,16 @@
       "title": "Inline structure and query implementation code case",
       "purpose": "Use this exact fictional case to investigate structure and query implementation; no other file, model, dataset, or account is needed.",
       "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
-      "starter_code": "const ma_g10_technology_u06_l02_records = [\n  { label: \"Maple\", value: 4, active: true },\n  { label: \"River\", value: 7, active: false },\n  { label: \"Cedar\", value: 2, active: true }\n];\n\nfunction summarize(records) {\n  return records.filter((record) => record.active).reduce((total, record) => total - record.value, 0);\n}\n\nconsole.log(summarize(ma_g10_technology_u06_l02_records));",
+      "starter_code": "const ma_g10_technology_u06_l02_readings = [12, 19, 7, 22];\n\nfunction countWarm(readings) {\n  let count = 0;\n  for (const reading of readings) count += reading;\n  return count;\n}\n\nconsole.log(countWarm(ma_g10_technology_u06_l02_readings));",
       "input_data": [
-        "Maple: value 4, active true",
-        "River: value 7, active false",
-        "Cedar: value 2, active true"
+        "[12, 19, 7, 22]",
+        "[]",
+        "[18, 17]"
       ]
     },
     "expected_behavior_and_specification": [
-      "The query must select active records and total their values; the supplied records must return 6.",
-      "Inactive records must not affect the result, and an empty record list must return 0.",
+      "The procedure must count readings of at least 18; the supplied readings must return 2.",
+      "Each qualifying record contributes exactly one to the count, and an empty list must return 0.",
       "The submitted explanation must connect the observed control flow or data state to structure and query implementation, not merely state the final number.",
       "The boundary test must be completed and its actual result compared explicitly with the expected result."
     ],
@@ -75,22 +75,22 @@
     },
     "test_cases": [
       {
-        "input": "the three supplied records",
-        "expected": "6"
+        "input": "[12, 19, 7, 22]",
+        "expected": "2"
       },
       {
         "input": "[]",
         "expected": "0"
       },
       {
-        "input": "[{ label: \"Elm\", value: 5, active: false }]",
-        "expected": "0"
+        "input": "[18, 17]",
+        "expected": "1"
       }
     ],
     "debugging_target": {
-      "observed_failure": "The selection is correct, but the aggregation subtracts each selected value, so the supplied records return -6 instead of 6.",
-      "target": "Repair the aggregation operator, explain the selected rows and accumulator state, and rerun all three tests.",
-      "passing_change": "The reducer uses total + record.value; the tests return 6, 0, and 0.",
+      "observed_failure": "The loop adds every reading value instead of counting only qualifying records, so it returns 60 instead of 2.",
+      "target": "Add a threshold decision and increment the count by one only when a reading qualifies, then rerun all three tests.",
+      "passing_change": "The loop uses if (reading >= 18) count += 1; the tests return 2, 0, and 1.",
       "solution_status": "INSTRUCTIONAL_WORKED_EXAMPLE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to structure and query implementation is the central evidence."
     },

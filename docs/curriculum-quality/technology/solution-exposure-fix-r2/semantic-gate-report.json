@@ -1,0 +1,54 @@
+{
+  "schema_version": "technology-course-payload-semantic-gate-r2.0",
+  "status": "PASS",
+  "parent_repair": "7de7b9ad0e9af396937270079f4db0e0d4118990",
+  "authoritative_review_commit": "15633ad5677dd5a966adf0fc83b22dca93e6bf1e",
+  "scope": {
+    "technology_lessons": 336,
+    "reviewed_code_or_debug_cases": 87,
+    "browser_course_payloads": 9,
+    "browser_bound_technology_lessons": 336
+  },
+  "results": {
+    "legitimate_worked_examples": 19,
+    "legitimate_worked_examples_preserved": 19,
+    "non_summative_remaining_before": 45,
+    "non_summative_remaining_after": 0,
+    "summative_remaining_before": 11,
+    "summative_remaining_after": 0,
+    "total_remaining_before": 56,
+    "total_remaining_after": 0,
+    "cross_lesson_exposure_pairs_after": 0,
+    "adult_trusted_authorities_complete": 87,
+    "formal_adult_key_leaks": 0
+  },
+  "equivalence": {
+    "scope": "complete admitted course payload, not package or unit",
+    "starter": "JavaScript tokens normalized for whitespace, comments, and consistent identifier renaming; a structure fingerprint also ignores cosmetic literal substitutions.",
+    "fixture": "Starter structure and normalized test fixture must both match, retaining operators and control flow so same-concept/different-defect cases do not collide.",
+    "repair": "Normalized repair tokens, controlled wording synonyms, edit signatures, and bounded token similarity detect cosmetic restatement of the same effective change.",
+    "decision": "A protected task fails only when both its material fixture and effective repair match a learner-visible solution in another lesson of the same course payload."
+  },
+  "negative_controls": {
+    "command": "node --test tests/course-payload-solution-equivalence.test.mjs",
+    "count": 7,
+    "required_outcomes": [
+      "FAIL",
+      "FAIL",
+      "FAIL",
+      "PASS",
+      "PASS",
+      "FAIL",
+      "FAIL_COMPLETE_PAYLOAD"
+    ]
+  },
+  "evidence": {
+    "case_mapping_json": "docs/curriculum-quality/technology/solution-exposure-fix-r2/case-mapping.json",
+    "case_mapping_csv": "docs/curriculum-quality/technology/solution-exposure-fix-r2/case-mapping.csv",
+    "browser_payload_proof": "docs/curriculum-quality/technology/solution-exposure-fix-r2/browser-payload-proof.json",
+    "technology_package_corpus_sha256": "643b7e462f3cf56fb572f3b2f64fa077ab00d169878e100bb8f091bff2cf85d7",
+    "technology_scoring_corpus_sha256": "d6fad8f402e7f5bc9d636896630bc50a9b4f2206de03b438c45511add9b3dc87",
+    "browser_projection_corpus_sha256": "62cd7032ff971acfa4c7073945dfc84cf24d5acf7440b6de0a91814f51bb2a9c"
+  },
+  "failures": []
+}

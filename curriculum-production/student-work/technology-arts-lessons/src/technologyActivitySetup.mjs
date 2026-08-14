@@ -15,7 +15,7 @@ function identifierFor(lessonId) {
   return lessonId.replace(/[^a-z0-9]+/gi, '_')
 }
 
-function buildCodeCase(lesson) {
+function buildProtectedCodeCase(lesson) {
   const id = identifierFor(lesson.lesson_id)
   const focus = lesson.focus.toLowerCase()
   if (/html|semantic structure|layout|responsive|forms? and validation/.test(focus)) {
@@ -120,6 +120,118 @@ function buildCodeCase(lesson) {
   }
 }
 
+/**
+ * MODEL lessons are complete worked examples, so their fixtures must remain
+ * instructional without becoming answer keys for protected work elsewhere in
+ * the same course payload. These cases teach the same underlying ideas as the
+ * protected families above, but deliberately change the program structure,
+ * data, defect, repair, and expected output.
+ */
+function buildWorkedCodeCase(lesson) {
+  const id = identifierFor(lesson.lesson_id)
+  const focus = lesson.focus.toLowerCase()
+  if (/html|semantic structure|layout|responsive|forms? and validation/.test(focus)) {
+    return {
+      starterCode: `const ${id}_images = [\n  { file: "map.png", alternateText: "" },\n  { file: "logo.png", alternateText: "School logo" }\n];\n\nfunction filesNeedingDescriptions(images) {\n  const missing = [];\n  for (const image of images) {\n    if (image.file.trim().length === 0) missing.push(image.file);\n  }\n  return missing;\n}\n\nconsole.log(filesNeedingDescriptions(${id}_images));`,
+      inputs: ['map.png with an empty alternateText value', 'logo.png with alternateText "School logo"', '[]'],
+      expectedSummary: 'The procedure must return the file names of images with missing alternate text; the supplied images must return map.png.',
+      safetyCheck: 'The procedure must read alternateText without changing either image record, and an empty list must return an empty list.',
+      tests: [
+        { input: 'the two supplied image records', expected: '["map.png"]' },
+        { input: '[]', expected: '[]' },
+        { input: '[{ file: "icon.png", alternateText: "Menu" }]', expected: '[]' },
+      ],
+      observed: 'The condition inspects the file name, so an image with a missing description is not added to the result.',
+      symptom: 'The supplied image records should return map.png, but the unchanged program returns an empty list.',
+      target: 'Change the condition to inspect the description field, explain why a file name is not alternative text, and rerun all three tests.',
+      passing: 'The loop tests image.alternateText before adding image.file; the three tests return ["map.png"], [], and [].',
+    }
+  }
+  if (/object|class|encapsulation|inheritance|module|interface|state and data flow/.test(focus)) {
+    return {
+      starterCode: `class ${id}_Inventory {\n  constructor(stock) { this.stock = stock; }\n  remove(quantity) { this.stock = quantity; }\n}\n\nconst inventory = new ${id}_Inventory(12);\ninventory.remove(4);\nconsole.log(inventory.stock);`,
+      inputs: ['starting stock 12', 'remove(4)', 'remove(0)'],
+      expectedSummary: 'Removing 4 items from a stock of 12 must leave exactly 8 items.',
+      safetyCheck: 'Removing 0 must preserve the stock, and each call may change only this inventory instance.',
+      tests: [
+        { input: 'start 12; remove(4)', expected: '8' },
+        { input: 'start 9; remove(0)', expected: '9' },
+        { input: 'start 7; remove(2); remove(1)', expected: '4' },
+      ],
+      observed: 'The method replaces the stock with the requested quantity, so removing 4 from 12 leaves 4 instead of 8.',
+      symptom: 'Removing 4 from 12 should leave 8, but the unchanged program leaves 4.',
+      target: 'Rewrite remove so it subtracts the requested quantity from stored stock, explain the state transition, and rerun all three tests.',
+      passing: 'The remove method assigns this.stock - quantity back to this.stock; the tests return 8, 9, and 4.',
+    }
+  }
+  if (/graph|traversal|search|sort|recursion|complexity|correctness|invariant|greedy|dynamic programming|heuristic/.test(focus)) {
+    return {
+      starterCode: `const ${id}_scores = [3, 8, 5];\n\nfunction totalScores(scores) {\n  let total = 1;\n  for (const score of scores) total += score;\n  return total;\n}\n\nconsole.log(totalScores(${id}_scores));`,
+      inputs: ['[3, 8, 5]', '[]', '[-2, 2]'],
+      expectedSummary: 'The procedure must return the sum of the supplied scores; the main input must return 16.',
+      safetyCheck: 'The running-total invariant must be true before the first item, so an empty list must return the additive identity.',
+      tests: [
+        { input: '[3, 8, 5]', expected: '16' },
+        { input: '[]', expected: '0' },
+        { input: '[-2, 2]', expected: '0' },
+      ],
+      observed: 'The running total starts with an extra point, so every result is one too large and the empty-list test returns 1.',
+      symptom: 'The supplied scores should total 16, but the unchanged program returns 17.',
+      target: 'Choose the additive identity for the initial running total, state the invariant, and rerun all three tests.',
+      passing: 'Starting total at 0 removes the extra point; the tests return 16, 0, and 0.',
+    }
+  }
+  if (/concurr|race|thread|process|cache|profil|performance|memory model|resource limit|reliability|failure/.test(focus)) {
+    return {
+      starterCode: `const ${id}_jobs = [\n  { name: "A", seconds: 3 },\n  { name: "B", seconds: 2 },\n  { name: "C", seconds: 4 }\n];\n\nfunction elapsedTimes(jobs) {\n  const times = [];\n  for (const job of jobs) times.push(job.seconds);\n  return times;\n}\n\nconsole.log(elapsedTimes(${id}_jobs));`,
+      inputs: ['jobs A:3, B:2, C:4', '[]', 'jobs D:5'],
+      expectedSummary: 'The result must show cumulative elapsed time after each job; the supplied jobs must return [3, 5, 9].',
+      safetyCheck: 'Each elapsed value must include all earlier jobs, while an empty queue must return an empty list.',
+      tests: [
+        { input: 'jobs A:3, B:2, C:4', expected: '[3, 5, 9]' },
+        { input: '[]', expected: '[]' },
+        { input: 'job D:5', expected: '[5]' },
+      ],
+      observed: 'The loop records each job duration by itself, so earlier work is discarded and the result is [3, 2, 4].',
+      symptom: 'The supplied queue should return [3, 5, 9], but the unchanged program returns [3, 2, 4].',
+      target: 'Introduce an elapsed accumulator, update it for each job, and record that accumulated value after every update.',
+      passing: 'An elapsed variable starts at 0, adds each job.seconds, and is pushed after each addition; the tests return [3, 5, 9], [], and [5].',
+    }
+  }
+  if (/query|schema|database|array|list\b|dictionar|stack|queue|record|data type|type conversion/.test(focus)) {
+    return {
+      starterCode: `const ${id}_readings = [12, 19, 7, 22];\n\nfunction countWarm(readings) {\n  let count = 0;\n  for (const reading of readings) count += reading;\n  return count;\n}\n\nconsole.log(countWarm(${id}_readings));`,
+      inputs: ['[12, 19, 7, 22]', '[]', '[18, 17]'],
+      expectedSummary: 'The procedure must count readings of at least 18; the supplied readings must return 2.',
+      safetyCheck: 'Each qualifying record contributes exactly one to the count, and an empty list must return 0.',
+      tests: [
+        { input: '[12, 19, 7, 22]', expected: '2' },
+        { input: '[]', expected: '0' },
+        { input: '[18, 17]', expected: '1' },
+      ],
+      observed: 'The loop adds every reading value instead of counting only qualifying records, so it returns 60 instead of 2.',
+      symptom: 'The supplied readings should produce a count of 2, but the unchanged program produces 60.',
+      target: 'Add a threshold decision and increment the count by one only when a reading qualifies, then rerun all three tests.',
+      passing: 'The loop uses if (reading >= 18) count += 1; the tests return 2, 0, and 1.',
+    }
+  }
+  return {
+    starterCode: `const ${id}_words = ["red", "green", "blue"];\n\nfunction reverseWords(words) {\n  const reversed = [];\n  for (let position = words.length - 1; position > 0; position -= 1) {\n    reversed.push(words[position]);\n  }\n  return reversed.join(" / ");\n}\n\nconsole.log(reverseWords(${id}_words));`,
+    inputs: ['["red", "green", "blue"]', '[]', '["solo"]'],
+    expectedSummary: 'The procedure must return every word in reverse order; the main input must return blue / green / red.',
+    safetyCheck: 'An empty list must return an empty string, and a one-word list must retain its word.',
+    tests: [
+      { input: '["red", "green", "blue"]', expected: 'blue / green / red' },
+      { input: '[]', expected: 'empty string' },
+      { input: '["solo"]', expected: 'solo' },
+    ],
+    observed: 'The loop stops while position is still 0, so the first word is omitted and the main input returns blue / green.',
+    symptom: 'The main input should retain all three words in reverse order, but the unchanged program omits red.',
+    target: 'Repair the loop boundary so position 0 is processed, explain the inclusive lower bound, and rerun all three tests.',
+    passing: 'The loop continues while position >= 0; all three tests retain every word in reverse order.',
+  }
+}
+
 const PRE_ATTEMPT_SUPPORT_BY_MODE = Object.freeze({
   PROBE: 'Before editing, record the unchanged output and identify which stated rule is first contradicted. Do not look for or request a finished repair.',
   GUIDED: 'Trace the value that controls the failing behavior and mark the first step where actual and expected state diverge. Use that location to propose your own smallest edit.',
@@ -130,8 +242,10 @@ const PRE_ATTEMPT_SUPPORT_BY_MODE = Object.freeze({
 })
 
 function codeFixture(lesson, grade, mode) {
-  const codeCase = buildCodeCase(lesson)
   const isInstructionalModel = mode === 'MODEL'
+  const codeCase = isInstructionalModel
+    ? buildWorkedCodeCase(lesson)
+    : buildProtectedCodeCase(lesson)
   const preAttemptSupport = PRE_ATTEMPT_SUPPORT_BY_MODE[mode]
   if (!isInstructionalModel && !preAttemptSupport) {
     throw new Error(`${lesson.lesson_id}: CODE_OR_DEBUG activity has no attempt-safe support policy for ${mode}`)

@@ -54,16 +54,16 @@
       "title": "Inline branching merging and conflict resolution code case",
       "purpose": "Use this exact fictional case to investigate branching merging and conflict resolution; no other file, model, dataset, or account is needed.",
       "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
-      "starter_code": "const ma_g11_technology_u01_l02_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g11_technology_u01_l02_steps));",
+      "starter_code": "const ma_g11_technology_u01_l02_words = [\"red\", \"green\", \"blue\"];\n\nfunction reverseWords(words) {\n  const reversed = [];\n  for (let position = words.length - 1; position > 0; position -= 1) {\n    reversed.push(words[position]);\n  }\n  return reversed.join(\" / \");\n}\n\nconsole.log(reverseWords(ma_g11_technology_u01_l02_words));",
       "input_data": [
-        "[\"open\", \"check\", \"save\"]",
+        "[\"red\", \"green\", \"blue\"]",
         "[]",
-        "[\"start\"]"
+        "[\"solo\"]"
       ]
     },
     "expected_behavior_and_specification": [
-      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
-      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The procedure must return every word in reverse order; the main input must return blue / green / red.",
+      "An empty list must return an empty string, and a one-word list must retain its word.",
       "The submitted explanation must connect the observed control flow or data state to branching merging and conflict resolution, not merely state the final number.",
       "The boundary test must be completed and its actual result compared explicitly with the expected result."
     ],
@@ -74,22 +74,22 @@
     },
     "test_cases": [
       {
-        "input": "[\"open\", \"check\", \"save\"]",
-        "expected": "open > check > save"
+        "input": "[\"red\", \"green\", \"blue\"]",
+        "expected": "blue / green / red"
       },
       {
         "input": "[]",
         "expected": "empty string"
       },
       {
-        "input": "[\"start\"]",
-        "expected": "start"
+        "input": "[\"solo\"]",
+        "expected": "solo"
       }
     ],
     "debugging_target": {
-      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
-      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
-      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "observed_failure": "The loop stops while position is still 0, so the first word is omitted and the main input returns blue / green.",
+      "target": "Repair the loop boundary so position 0 is processed, explain the inclusive lower bound, and rerun all three tests.",
+      "passing_change": "The loop continues while position >= 0; all three tests retain every word in reverse order.",
       "solution_status": "INSTRUCTIONAL_WORKED_EXAMPLE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to branching merging and conflict resolution is the central evidence."
     },

@@ -48,19 +48,19 @@
     "authority": "ADULT_TRUSTED_AUTHORITY",
     "learner_visibility": "ALSO_SHOWN_AS_NON_PENALTY_INSTRUCTIONAL_EXAMPLE",
     "review_timing": "DURING_INSTRUCTIONAL_MODEL",
-    "exact_repair": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+    "exact_repair": "Starting total at 0 removes the extra point; the tests return 16, 0, and 0.",
     "validation_tests": [
       {
-        "input": "[4, 7, 2]",
-        "expected": "7"
+        "input": "[3, 8, 5]",
+        "expected": "16"
       },
       {
-        "input": "[-5, -2, -9]",
-        "expected": "-2"
+        "input": "[]",
+        "expected": "0"
       },
       {
-        "input": "[6]",
-        "expected": "6"
+        "input": "[-2, 2]",
+        "expected": "0"
       }
     ]
   },

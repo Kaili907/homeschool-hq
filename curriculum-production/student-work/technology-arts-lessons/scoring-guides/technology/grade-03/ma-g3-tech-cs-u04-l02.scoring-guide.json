@@ -48,19 +48,19 @@
     "authority": "ADULT_TRUSTED_AUTHORITY",
     "learner_visibility": "ALSO_SHOWN_AS_NON_PENALTY_INSTRUCTIONAL_EXAMPLE",
     "review_timing": "DURING_INSTRUCTIONAL_MODEL",
-    "exact_repair": "Iteration begins at index 0; all three tests retain every step in order.",
+    "exact_repair": "The loop continues while position >= 0; all three tests retain every word in reverse order.",
     "validation_tests": [
       {
-        "input": "[\"open\", \"check\", \"save\"]",
-        "expected": "open > check > save"
+        "input": "[\"red\", \"green\", \"blue\"]",
+        "expected": "blue / green / red"
       },
       {
         "input": "[]",
         "expected": "empty string"
       },
       {
-        "input": "[\"start\"]",
-        "expected": "start"
+        "input": "[\"solo\"]",
+        "expected": "solo"
       }
     ]
   },

@@ -179,13 +179,18 @@ input, unrunnable tool path, incomplete starter code/input/specification/test,
 missing debugging target, unequal fallback, placeholder shell, paid/account
 dependency, credential-shaped literal, or privacy/security gap.
 
-`tests/solution-exposure-audit.mjs` is the semantic answer-authority gate. It
-locks the authoritative 87-case review inventory, preserves all 19 legitimate
-instructional examples, rejects `passing_change` and six known exact-repair
-signatures in the other 68 learner packages, checks all 336 Technology learner
-projections for formal adult-key leaks, and proves the adult solution authority
-is complete. Its deterministic before/after evidence is under
-`docs/curriculum-quality/technology/solution-exposure-fix-r1/`.
+`tests/solution-exposure-audit.mjs` is the course-payload semantic
+answer-authority gate. It locks the authoritative 87-case review inventory,
+preserves all 19 legitimate instructional examples, checks all 336 Technology
+learner projections for formal adult-key leaks, and proves the adult solution
+authority is complete. It also uses the admitted browser bindings to compare
+every learner-visible solution with every protected code/debug fixture that
+coexists in the same one of nine Technology course payloads. Program tokens,
+identifier renames, cosmetic fixture changes, repair wording, edit signatures,
+and test fixtures are normalized without treating every lesson on the same
+concept as equivalent. The required negative and positive controls live in
+`tests/course-payload-solution-equivalence.test.mjs`; deterministic R2 evidence
+is under `docs/curriculum-quality/technology/solution-exposure-fix-r2/`.
 
 ## Reading register
 

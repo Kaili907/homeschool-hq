@@ -7,16 +7,17 @@ import test from 'node:test'
 const HERE = dirname(fileURLToPath(import.meta.url))
 const CORPUS = resolve(HERE, '..')
 
-test('Technology learner materials preserve worked examples without exposing independent solutions', () => {
+test('Technology browser course payloads preserve worked examples without exposing protected solutions', () => {
   const output = execFileSync(process.execPath, ['tests/solution-exposure-audit.mjs'], {
     cwd: CORPUS,
     encoding: 'utf8',
   })
 
-  assert.match(output, /Reviewed inventory: 87\/87/)
+  assert.match(output, /Full Technology corpus: 336\/336 across 9\/9 browser course payloads/)
   assert.match(output, /Worked examples preserved: 19\/19/)
-  assert.match(output, /Non-summative exposures: 56 -> 0/)
-  assert.match(output, /Summative exposures: 12 -> 0/)
+  assert.match(output, /Non-summative remaining exposures: 45 -> 0/)
+  assert.match(output, /Summative remaining exposures: 11 -> 0/)
+  assert.match(output, /Total remaining exposures: 56 -> 0/)
   assert.match(output, /Adult trusted authorities: 87\/87/)
   assert.match(output, /Formal adult-key leaks: 0/)
 })

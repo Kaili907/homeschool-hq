@@ -55,16 +55,16 @@
       "title": "Inline processes threads and concurrency code case",
       "purpose": "Use this exact fictional case to investigate processes threads and concurrency; no other file, model, dataset, or account is needed.",
       "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
-      "starter_code": "const ma_g12_technology_u02_l02_deltas = [3, -1, 2];\n\nfunction applyUpdates(start, deltas) {\n  let current = start;\n  for (const delta of deltas) {\n    current = start + delta;\n  }\n  return current;\n}\n\nconsole.log(applyUpdates(0, ma_g12_technology_u02_l02_deltas));",
+      "starter_code": "const ma_g12_technology_u02_l02_jobs = [\n  { name: \"A\", seconds: 3 },\n  { name: \"B\", seconds: 2 },\n  { name: \"C\", seconds: 4 }\n];\n\nfunction elapsedTimes(jobs) {\n  const times = [];\n  for (const job of jobs) times.push(job.seconds);\n  return times;\n}\n\nconsole.log(elapsedTimes(ma_g12_technology_u02_l02_jobs));",
       "input_data": [
-        "start 0 with deltas [3, -1, 2]",
-        "start 5 with deltas []",
-        "start 1 with deltas [2, 2]"
+        "jobs A:3, B:2, C:4",
+        "[]",
+        "jobs D:5"
       ]
     },
     "expected_behavior_and_specification": [
-      "Updates must compose in order from the latest state; start 0 with deltas 3, -1, and 2 must finish at 4.",
-      "An empty update list must preserve the start value, and no update may recompute from stale start state.",
+      "The result must show cumulative elapsed time after each job; the supplied jobs must return [3, 5, 9].",
+      "Each elapsed value must include all earlier jobs, while an empty queue must return an empty list.",
       "The submitted explanation must connect the observed control flow or data state to processes threads and concurrency, not merely state the final number.",
       "The boundary test must be completed and its actual result compared explicitly with the expected result."
     ],
@@ -75,22 +75,22 @@
     },
     "test_cases": [
       {
-        "input": "applyUpdates(0, [3, -1, 2])",
-        "expected": "4"
+        "input": "jobs A:3, B:2, C:4",
+        "expected": "[3, 5, 9]"
       },
       {
-        "input": "applyUpdates(5, [])",
-        "expected": "5"
+        "input": "[]",
+        "expected": "[]"
       },
       {
-        "input": "applyUpdates(1, [2, 2])",
-        "expected": "5"
+        "input": "job D:5",
+        "expected": "[5]"
       }
     ],
     "debugging_target": {
-      "observed_failure": "Each update recomputes from the original start value, discarding earlier updates, so the supplied case returns 2 instead of 4.",
-      "target": "Replace the stale-state dependency with the current state, explain the update order, and rerun all three tests.",
-      "passing_change": "Each assignment uses current + delta; the tests return 4, 5, and 5.",
+      "observed_failure": "The loop records each job duration by itself, so earlier work is discarded and the result is [3, 2, 4].",
+      "target": "Introduce an elapsed accumulator, update it for each job, and record that accumulated value after every update.",
+      "passing_change": "An elapsed variable starts at 0, adds each job.seconds, and is pushed after each addition; the tests return [3, 5, 9], [], and [5].",
       "solution_status": "INSTRUCTIONAL_WORKED_EXAMPLE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to processes threads and concurrency is the central evidence."
     },

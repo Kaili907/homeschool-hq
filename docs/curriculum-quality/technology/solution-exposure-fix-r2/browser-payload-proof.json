@@ -1,0 +1,65 @@
+{
+  "schema_version": "technology-browser-payload-proof-r2.0",
+  "projection_authority": "scripts/build-final-family-pilot-data.mjs projectJsonLearnerMaterial -> one lazy JSON payload per admitted courseRef",
+  "binding_authority": "curriculum-release-admitted/family-pilot-r1/production-bindings.jsonl",
+  "visibility_semantics": "Selecting a course loads one payload containing every lesson material in that course; lesson order does not hide later material.",
+  "technology_courses": 9,
+  "technology_lessons": 336,
+  "projected_materials": 336,
+  "all_course_payload_roles_compared": [
+    "MODEL",
+    "GUIDED",
+    "GUIDED_B",
+    "PROBE",
+    "BUILD",
+    "CORRECT",
+    "DEMONSTRATE"
+  ],
+  "courses": [
+    {
+      "course_ref": "ma-g10-technology",
+      "lessons": 36,
+      "learner_materials_sha256": "5ba26ded07738fe6a3d3c9ce61b4ce463dcb6a29fbf1f7235dd66c5f27420936"
+    },
+    {
+      "course_ref": "ma-g11-technology",
+      "lessons": 36,
+      "learner_materials_sha256": "92600bad83254c4f8eb888957c474f5d135d58b7346aab88a9c707ca8072ab31"
+    },
+    {
+      "course_ref": "ma-g12-technology",
+      "lessons": 48,
+      "learner_materials_sha256": "18bbdf96efae2e101632f1c0dc4598d1525e5616de9bba6436053d3b493fd656"
+    },
+    {
+      "course_ref": "ma-g3-tech-cs",
+      "lessons": 36,
+      "learner_materials_sha256": "4da6cdb39bbb79d30f931323e8c37b3fb16a0206175a3067a301cbc9b4d7d610"
+    },
+    {
+      "course_ref": "ma-g4-tech-cs",
+      "lessons": 36,
+      "learner_materials_sha256": "c8526175016a0f17d01ec96703d23a27f4edf29cfaa142601d7bb53dc1eacda2"
+    },
+    {
+      "course_ref": "ma-g5-technology",
+      "lessons": 36,
+      "learner_materials_sha256": "fe25a7882373b26d412d3909db3b607a0b623020e9f8862f892e7b92fc5bc6ac"
+    },
+    {
+      "course_ref": "ma-g7-technology",
+      "lessons": 36,
+      "learner_materials_sha256": "46470abe9f3f09e667edf362a47e696f54e57f2f0680d12b2387e9c07b6bf538"
+    },
+    {
+      "course_ref": "ma-g8-technology",
+      "lessons": 36,
+      "learner_materials_sha256": "23dff2591179e2451fa74031a274e13acf8ba0befb0ce06890f9d671c9bbcf3b"
+    },
+    {
+      "course_ref": "ma-g9-technology",
+      "lessons": 36,
+      "learner_materials_sha256": "0235403a467e6794457fe138d55058995878486a6cdf997730a4a8e3c7bbb920"
+    }
+  ]
+}
