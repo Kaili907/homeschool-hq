@@ -1,0 +1,125 @@
+{
+  "review": "PE TRANSFER-AUTHORITY ROOT-CAUSE REVIEW R1",
+  "outcome": "PE_TRANSFER_AUTHORITY_REVIEW_COMPLETE",
+  "base": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+  "branch": "mac/pe-transfer-authority-review-r1",
+  "sourceFindingCount": 216,
+  "reviewedCount": 216,
+  "definition": "“Transfer-authority conflict” is not a repository contract term. In the source depth audit it is a positional flag applied to every Grade 9–12 PE lesson numbered 7–12. In the actual architecture, RUBRIC is the only scoring-authority kind; genuine conflicts are prose contradictions either inside that guide or between the learner task and generated equal-credit completion path.",
+  "classifications": {
+    "FALSE_POSITIVE": 120,
+    "METADATA_CONFLICT_ONLY": 0,
+    "CONTENT_TRANSFER_CONFLICT": 36,
+    "SCORING_AUTHORITY_CONFLICT": 60,
+    "PROGRESSION_RISK": 0,
+    "UNKNOWN": 0
+  },
+  "severity": {
+    "HIGH": 60,
+    "INFORMATIONAL": 120,
+    "MODERATE": 36
+  },
+  "byGrade": {
+    "9": {
+      "total": 54,
+      "classifications": {
+        "FALSE_POSITIVE": 12,
+        "METADATA_CONFLICT_ONLY": 0,
+        "CONTENT_TRANSFER_CONFLICT": 18,
+        "SCORING_AUTHORITY_CONFLICT": 24,
+        "PROGRESSION_RISK": 0,
+        "UNKNOWN": 0
+      }
+    },
+    "10": {
+      "total": 54,
+      "classifications": {
+        "FALSE_POSITIVE": 42,
+        "METADATA_CONFLICT_ONLY": 0,
+        "CONTENT_TRANSFER_CONFLICT": 6,
+        "SCORING_AUTHORITY_CONFLICT": 6,
+        "PROGRESSION_RISK": 0,
+        "UNKNOWN": 0
+      }
+    },
+    "11": {
+      "total": 54,
+      "classifications": {
+        "FALSE_POSITIVE": 36,
+        "METADATA_CONFLICT_ONLY": 0,
+        "CONTENT_TRANSFER_CONFLICT": 0,
+        "SCORING_AUTHORITY_CONFLICT": 18,
+        "PROGRESSION_RISK": 0,
+        "UNKNOWN": 0
+      }
+    },
+    "12": {
+      "total": 54,
+      "classifications": {
+        "FALSE_POSITIVE": 30,
+        "METADATA_CONFLICT_ONLY": 0,
+        "CONTENT_TRANSFER_CONFLICT": 12,
+        "SCORING_AUTHORITY_CONFLICT": 12,
+        "PROGRESSION_RISK": 0,
+        "UNKNOWN": 0
+      }
+    }
+  },
+  "impacts": {
+    "canAffectLearnerScoring": 60,
+    "canAffectLearnerProgression": 0,
+    "metadataOnly": 0,
+    "falsePositive": 120,
+    "learnerVisibleContentAffected": 96,
+    "adultAuthorityAmbiguous": 60,
+    "studyCouldReceiveContradictoryEvidence": 0
+  },
+  "conflictUnitFamilies": {
+    "scoringAuthority": [
+      "9:2",
+      "9:5",
+      "9:7",
+      "9:8",
+      "10:8",
+      "11:4",
+      "11:6",
+      "11:7",
+      "12:7",
+      "12:8"
+    ],
+    "contentTransfer": [
+      "9:3",
+      "9:4",
+      "9:6",
+      "10:3",
+      "12:2",
+      "12:4"
+    ]
+  },
+  "smallestSafeRepairBoundary": {
+    "source": "Repair the 16 adjudicated high-school unit second-pass families at the canonical HS PE source generator/data boundary, then regenerate source lessons and the final Health/PE corpus. Do not hand-edit 96 emitted lesson/scoring pairs.",
+    "sourceFiles": [
+      "e39e2b343c41a1a800825651159e0e962d5288d7:curriculum-authoring/full-family-highschool-9-12/subjects/physical-education/tools/course-data.mjs",
+      "e39e2b343c41a1a800825651159e0e962d5288d7:curriculum-authoring/full-family-highschool-9-12/subjects/physical-education/tools/build-courses.mjs"
+    ],
+    "projectionGuard": "Add a semantic transfer-versus-equal-credit consistency validator at curriculum-production/final/health-physical-education before readiness can be READY.",
+    "affectedUnitFamilies": 16,
+    "affectedLessons": 96
+  },
+  "noSecurityFinding": true,
+  "sourceAuditEvidence": {
+    "statusAtReview": "uncommitted evidence in sibling mac/health-pe-depth-audit-r1 worktree",
+    "runAuditSha256": "b06a4f5cffa0bbd6fb10e03ea38f75f16846edfb846047296a6b9e92b73cf1c9",
+    "lessonFindingsSha256": "97c1620b6b94ec739a5f1aadf67120bd8c43390631690f1c09e78eae4a8b8939",
+    "metricsSha256": "cc76c9a5a3efb60883c73dca808b655f68f467a037e99035152a80b67efaa834"
+  },
+  "inputHashes": {
+    "hsSourceGeneratorAtE39e2b3": "c3d06da4b32600f66b7e5b1dd35c4afd72df2d72ad1502f5b1fa8738ff161de8",
+    "hsSourceUnitDataAtE39e2b3": "e33f95959432fca5422624b09158117638aa3e6a182e98d94431500a113630f9",
+    "finalGenerator": "b0289561b63f6651920f2021645ce88d8730fbbb70ed039f87005dea73f938d2",
+    "peExecutionProjection": "60c4f8b5ca947b09f98412f986ea5298a2eada191114113bacc86639277c539c",
+    "scoringSchema": "60b8946f307046cb419fe45b8b35b674eb28b0f16f28290a0ae62d923dcce8c6",
+    "taskCardSchema": "22c4ddb5db2ba09bba554e898f17b6fc76e12f90e4e9e4df13e53181a4bb8544",
+    "admittedBindings": "b86414758ced9c67d9ef332732ec0877d91c80f9ed4d9b999405254a8e205d84"
+  }
+}
