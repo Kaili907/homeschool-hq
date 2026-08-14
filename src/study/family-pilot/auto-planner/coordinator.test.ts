@@ -92,6 +92,7 @@ function harness() {
     store,
     learners: { read: async ({ learnerRef }) => learners.get(learnerRef) ?? null },
     catalog: {
+      listGrades: () => ['5'],
       listCourses: () => {
         if (offline) throw new Error('offline')
         return [math.course]

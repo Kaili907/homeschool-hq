@@ -17,6 +17,9 @@ export interface FamilyAutoPlannerLearnerPort {
 
 /** Browser-safe final curriculum catalog in release order. */
 export interface FamilyAutoPlannerCatalogPort {
+  /** Grades actually present in the admitted release. This is the planner's
+   * curriculum-admission authority; callers must not substitute a pilot roster. */
+  listGrades(): readonly AcademyGrade[]
   listCourses(grade: AcademyGrade): readonly FinalCatalogCourse[]
   listUnits(courseRef: string): readonly FinalCatalogUnit[]
   listLessons(courseRef: string): Promise<readonly FinalCatalogLesson[]>
