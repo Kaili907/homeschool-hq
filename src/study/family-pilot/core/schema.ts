@@ -35,6 +35,34 @@ export interface FamilyPilotProgressV1 {
   readonly totalSegments: number
   readonly lastSegmentRef: string | null
   readonly activeSeconds: number
+  /**
+   * Minimized UTC-day aggregates used by factual today/week reporting. Older
+   * v1 records may omit this additive field; in that case period time is
+   * reported as unavailable rather than guessed from the lifetime total.
+   */
+  readonly activeSecondsByDate?: readonly FamilyPilotActiveTimeDayV1[]
+}
+
+export interface FamilyPilotActiveTimeDayV1 {
+  readonly date: string
+  readonly activeSeconds: number
+}
+
+export type FamilyPilotInstructionalSessionState = 'active' | 'paused' | 'hidden' | 'ended'
+
+/**
+ * One aggregate lifecycle record for the assignment's Study session. It is
+ * deliberately not an event log: no keystrokes, pointer events, answers,
+ * Tutor text, inferred idleness, or behavioral labels are stored.
+ */
+export interface FamilyPilotInstructionalSessionV1 {
+  readonly sessionRef: string
+  readonly startedAt: string
+  readonly activeSince: string | null
+  /** Most recent explicit pause/hidden/end boundary; not a behavioral event log. */
+  readonly inactiveAt: string | null
+  readonly endedAt: string | null
+  readonly state: FamilyPilotInstructionalSessionState
 }
 
 /** Pause/resume metadata. `resumeSegmentRef` is where the learner returns to. */
@@ -59,6 +87,8 @@ export interface FamilyPilotAssignmentRecordV1 {
    */
   readonly sessionRef: string | null
   readonly progress: FamilyPilotProgressV1
+  /** Additive for backward-readable v1 state; absent means timing was not recorded. */
+  readonly instructionalSession?: FamilyPilotInstructionalSessionV1
   readonly pause: FamilyPilotPauseV1
   readonly completedAt: string | null
   readonly createdAt: string
@@ -89,7 +119,9 @@ const IDENTIFIER = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
 const MAX_STUDENTS = 24
 const MAX_ASSIGNMENTS_PER_STUDENT = 500
 const MAX_SEGMENTS = 512
+const MAX_ACTIVE_DAYS = 730
 const MAX_TEXT = 160
+const LOCAL_DATE = /^\d{4}-\d{2}-\d{2}$/
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
@@ -132,11 +164,51 @@ function parseProgress(value: unknown): FamilyPilotProgressV1 | null {
     !isNullableRef(value.lastSegmentRef) ||
     !isCount(value.activeSeconds, Number.MAX_SAFE_INTEGER)
   ) return null
+  let activeSecondsByDate: readonly FamilyPilotActiveTimeDayV1[] | undefined
+  if (value.activeSecondsByDate !== undefined) {
+    if (!Array.isArray(value.activeSecondsByDate) || value.activeSecondsByDate.length > MAX_ACTIVE_DAYS) return null
+    const days: FamilyPilotActiveTimeDayV1[] = []
+    for (const candidate of value.activeSecondsByDate) {
+      if (
+        !isRecord(candidate) || typeof candidate.date !== 'string' || !LOCAL_DATE.test(candidate.date) ||
+        !isCount(candidate.activeSeconds, Number.MAX_SAFE_INTEGER) ||
+        days.some((day) => day.date === candidate.date)
+      ) return null
+      days.push(Object.freeze({ date: candidate.date, activeSeconds: candidate.activeSeconds }))
+    }
+    activeSecondsByDate = Object.freeze(days.sort((a, b) => a.date.localeCompare(b.date)))
+    if (activeSecondsByDate.reduce((sum, day) => sum + day.activeSeconds, 0) > value.activeSeconds) return null
+  }
   return Object.freeze({
     completedSegmentRefs,
     totalSegments: value.totalSegments,
     lastSegmentRef: value.lastSegmentRef,
     activeSeconds: value.activeSeconds,
+    ...(activeSecondsByDate ? { activeSecondsByDate } : {}),
+  })
+}
+
+function parseInstructionalSession(value: unknown): FamilyPilotInstructionalSessionV1 | null {
+  if (!isRecord(value)) return null
+  if (
+    !isRef(value.sessionRef) || !isInstant(value.startedAt) ||
+    !(value.activeSince === null || isInstant(value.activeSince)) ||
+    !(value.inactiveAt === null || isInstant(value.inactiveAt)) ||
+    !(value.endedAt === null || isInstant(value.endedAt)) ||
+    !['active', 'paused', 'hidden', 'ended'].includes(value.state as string)
+  ) return null
+  const state = value.state as FamilyPilotInstructionalSessionState
+  if ((state === 'active') !== (value.activeSince !== null)) return null
+  if ((state === 'active') !== (value.inactiveAt === null)) return null
+  if ((state === 'ended') !== (value.endedAt !== null)) return null
+  if (Date.parse(value.startedAt) > Date.parse((value.endedAt ?? value.activeSince ?? value.inactiveAt ?? value.startedAt) as string)) return null
+  return Object.freeze({
+    sessionRef: value.sessionRef,
+    startedAt: value.startedAt,
+    activeSince: value.activeSince as string | null,
+    inactiveAt: value.inactiveAt as string | null,
+    endedAt: value.endedAt as string | null,
+    state,
   })
 }
 
@@ -160,8 +232,12 @@ export function parseFamilyPilotAssignment(value: unknown): FamilyPilotAssignmen
   if (!isRecord(value)) return null
   const progress = parseProgress(value.progress)
   const pause = parsePause(value.pause)
+  const instructionalSession = value.instructionalSession === undefined
+    ? undefined
+    : parseInstructionalSession(value.instructionalSession)
   if (
     !progress || !pause ||
+    (value.instructionalSession !== undefined && !instructionalSession) ||
     !isRef(value.assignmentRef) || !isRef(value.lessonRef) ||
     !isDisplayText(value.subject) || !isDisplayText(value.title) ||
     !FAMILY_PILOT_ASSIGNMENT_STATES.includes(value.state as FamilyPilotAssignmentState) ||
@@ -179,6 +255,7 @@ export function parseFamilyPilotAssignment(value: unknown): FamilyPilotAssignmen
     state: value.state as FamilyPilotAssignmentState,
     sessionRef: value.sessionRef,
     progress,
+    ...(instructionalSession ? { instructionalSession } : {}),
     pause,
     completedAt: value.completedAt as string | null,
     createdAt: value.createdAt,

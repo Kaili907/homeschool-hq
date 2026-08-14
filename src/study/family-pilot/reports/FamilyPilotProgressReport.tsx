@@ -31,7 +31,7 @@ export function FamilyPilotProgressReport({ report }: { readonly report: Student
           <SummaryTile label="Assignments completed" value={report.assignmentsCompleted} />
           <SummaryTile label="Open work" value={report.openWorkCount} />
           <SummaryTile
-            label="Completion"
+            label="Scheduled work complete"
             value={report.completionPercent !== null ? `${report.completionPercent}%` : 'No work scheduled'}
           />
         </div>

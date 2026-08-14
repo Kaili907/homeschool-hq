@@ -1,9 +1,28 @@
 import {
   FAMILY_PILOT_SCHEMA_VERSION,
+  type FamilyPilotActiveTimeDayV1,
   type FamilyPilotAssignmentRecordV1,
+  type FamilyPilotInstructionalSessionState,
   type FamilyPilotStateV1,
   type FamilyPilotStudentRecordV1,
 } from './schema'
+
+/**
+ * A visible Study surface confirms activity once per minute. Allowing a small
+ * scheduling margin means a throttled/background tab can never turn a long
+ * unobserved wall-clock gap into instructional time.
+ */
+export const FAMILY_PILOT_ACTIVE_HEARTBEAT_SECONDS = 60 as const
+export const FAMILY_PILOT_MAX_CONFIRMED_ACTIVE_INTERVAL_SECONDS = 75 as const
+export const FAMILY_PILOT_INSTRUCTIONAL_TIME_POLICY = Object.freeze({
+  idleDetection: 'none',
+  countsOnlyVisibleActiveStudy: true,
+  pausedAndHiddenExcluded: true,
+  heartbeatSeconds: FAMILY_PILOT_ACTIVE_HEARTBEAT_SECONDS,
+  maxConfirmedIntervalSeconds: FAMILY_PILOT_MAX_CONFIRMED_ACTIVE_INTERVAL_SECONDS,
+  inputTelemetryStored: false,
+} as const)
+const MAX_REPORTED_ACTIVE_DAYS = 730
 
 // FAMILY-PILOT-CORE: pure state transitions. No storage, no clock, no randomness
 // — every operation takes `now` explicitly so the same inputs always produce the
@@ -53,6 +72,76 @@ function withAssignment(
     })
     if (!changed) return student
     return Object.freeze({ ...student, updatedAt: now, assignments: Object.freeze(assignments) })
+  })
+}
+
+function addActiveSecondsByDate(
+  days: readonly FamilyPilotActiveTimeDayV1[],
+  fromMs: number,
+  toMs: number,
+): readonly FamilyPilotActiveTimeDayV1[] {
+  const totals = new Map(days.map((day) => [day.date, day.activeSeconds]))
+  let cursor = fromMs
+  while (cursor < toMs) {
+    const date = new Date(cursor).toISOString().slice(0, 10)
+    const nextMidnight = Date.parse(`${date}T00:00:00.000Z`) + 86_400_000
+    const end = Math.min(toMs, nextMidnight)
+    const seconds = Math.floor((end - cursor) / 1_000)
+    if (seconds > 0) totals.set(date, (totals.get(date) ?? 0) + seconds)
+    cursor = end
+  }
+  return Object.freeze(Array.from(totals, ([date, activeSeconds]) => Object.freeze({ date, activeSeconds }))
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(-MAX_REPORTED_ACTIVE_DAYS))
+}
+
+function closeInstructionalInterval(
+  assignment: FamilyPilotAssignmentRecordV1,
+  at: string,
+  state: FamilyPilotInstructionalSessionState,
+): FamilyPilotAssignmentRecordV1 {
+  const timing = assignment.instructionalSession
+  if (!timing || timing.state !== 'active' || timing.activeSince === null) {
+    if (!timing || timing.state === state) return assignment
+    // Only an explicit show/resume operation can restart an inactive timer.
+    if (state === 'active') return assignment
+    return Object.freeze({
+      ...assignment,
+      instructionalSession: Object.freeze({
+        ...timing,
+        activeSince: null,
+        inactiveAt: at,
+        endedAt: state === 'ended' ? at : null,
+        state,
+      }),
+    })
+  }
+  const toMs = Date.parse(at)
+  const fromMs = Date.parse(timing.activeSince)
+  const elapsedSeconds = Number.isFinite(fromMs) && Number.isFinite(toMs)
+    ? Math.max(0, Math.floor((toMs - fromMs) / 1_000))
+    : 0
+  const confirmedSeconds = Math.min(elapsedSeconds, FAMILY_PILOT_MAX_CONFIRMED_ACTIVE_INTERVAL_SECONDS)
+  const effectiveFromMs = toMs - confirmedSeconds * 1_000
+  const activeSecondsByDate = addActiveSecondsByDate(
+    assignment.progress.activeSecondsByDate ?? Object.freeze([]),
+    effectiveFromMs,
+    toMs,
+  )
+  return Object.freeze({
+    ...assignment,
+    progress: Object.freeze({
+      ...assignment.progress,
+      activeSeconds: assignment.progress.activeSeconds + confirmedSeconds,
+      activeSecondsByDate,
+    }),
+    instructionalSession: Object.freeze({
+      ...timing,
+      activeSince: state === 'active' ? at : null,
+      inactiveAt: state === 'active' ? null : at,
+      endedAt: state === 'ended' ? at : null,
+      state,
+    }),
   })
 }
 
@@ -130,6 +219,7 @@ export function addFamilyPilotAssignment(
         totalSegments: input.totalSegments,
         lastSegmentRef: null,
         activeSeconds: 0,
+        activeSecondsByDate: Object.freeze([]),
       }),
       pause: Object.freeze({
         pausedAt: null,
@@ -159,10 +249,22 @@ export function startFamilyPilotAssignment(
   sessionRef: string,
   now: string,
 ): FamilyPilotStateV1 {
-  const started = withAssignment(state, studentRef, assignmentRef, now, (assignment) =>
-    assignment.state === 'completed'
-      ? assignment
-      : Object.freeze({ ...assignment, state: 'active', sessionRef }))
+  const started = withAssignment(state, studentRef, assignmentRef, now, (assignment) => {
+    if (assignment.state === 'completed') return assignment
+    const existing = assignment.instructionalSession
+    const instructionalSession = existing?.sessionRef === sessionRef && existing.state !== 'ended'
+      ? Object.freeze({ ...existing, activeSince: existing.activeSince ?? now, inactiveAt: null, endedAt: null, state: 'active' as const })
+      : Object.freeze({ sessionRef, startedAt: now, activeSince: now, inactiveAt: null, endedAt: null, state: 'active' as const })
+    return Object.freeze({
+      ...assignment,
+      state: 'active',
+      sessionRef,
+      progress: assignment.progress.activeSecondsByDate
+        ? assignment.progress
+        : Object.freeze({ ...assignment.progress, activeSecondsByDate: Object.freeze([]) }),
+      instructionalSession,
+    })
+  })
   return withStudent(started, studentRef, (student) =>
     student.assignments.some(
       (item) => item.assignmentRef === assignmentRef && item.state === 'active',
@@ -177,20 +279,21 @@ export function pauseFamilyPilotAssignment(
   assignmentRef: string,
   now: string,
 ): FamilyPilotStateV1 {
-  return withAssignment(state, studentRef, assignmentRef, now, (assignment) =>
-    assignment.state !== 'active'
-      ? assignment
-      : Object.freeze({
-          ...assignment,
+  return withAssignment(state, studentRef, assignmentRef, now, (assignment) => {
+    if (assignment.state !== 'active') return assignment
+    const timed = closeInstructionalInterval(assignment, now, 'paused')
+    return Object.freeze({
+          ...timed,
           state: 'paused',
           pause: Object.freeze({
-            ...assignment.pause,
+            ...timed.pause,
             pausedAt: now,
             resumedAt: null,
             // Where to come back to. Falls back to the last segment worked on.
-            resumeSegmentRef: assignment.progress.lastSegmentRef,
+            resumeSegmentRef: timed.progress.lastSegmentRef,
           }),
-        }))
+        })
+  })
 }
 
 /**
@@ -210,10 +313,16 @@ export function resumeFamilyPilotAssignment(
     const elapsed = pausedAt === null
       ? 0
       : Math.max(0, Math.floor((Date.parse(now) - Date.parse(pausedAt)) / 1000))
+    const instructionalSession = assignment.instructionalSession?.state === 'ended'
+      ? assignment.instructionalSession
+      : assignment.instructionalSession
+        ? Object.freeze({ ...assignment.instructionalSession, activeSince: now, inactiveAt: null, endedAt: null, state: 'active' as const })
+        : Object.freeze({ sessionRef, startedAt: now, activeSince: now, inactiveAt: null, endedAt: null, state: 'active' as const })
     return Object.freeze({
       ...assignment,
       state: 'active',
       sessionRef,
+      instructionalSession,
       pause: Object.freeze({
         ...assignment.pause,
         pausedAt: null,
@@ -222,6 +331,78 @@ export function resumeFamilyPilotAssignment(
       }),
     })
   })
+}
+
+/** Records one bounded visible-Study heartbeat; it never consumes input events. */
+export function recordFamilyPilotInstructionalHeartbeat(
+  state: FamilyPilotStateV1,
+  studentRef: string,
+  assignmentRef: string,
+  now: string,
+): FamilyPilotStateV1 {
+  return withAssignment(state, studentRef, assignmentRef, now, (assignment) =>
+    assignment.state === 'active'
+      ? closeInstructionalInterval(assignment, now, 'active')
+      : assignment)
+}
+
+/** Stops active accumulation when the instructional surface is not visible. */
+export function hideFamilyPilotInstructionalSession(
+  state: FamilyPilotStateV1,
+  studentRef: string,
+  assignmentRef: string,
+  now: string,
+): FamilyPilotStateV1 {
+  return withAssignment(state, studentRef, assignmentRef, now, (assignment) =>
+    assignment.state === 'active'
+      ? closeInstructionalInterval(assignment, now, 'hidden')
+      : assignment)
+}
+
+/** Restarts accumulation only for an authoritative active Study assignment. */
+export function showFamilyPilotInstructionalSession(
+  state: FamilyPilotStateV1,
+  studentRef: string,
+  assignmentRef: string,
+  now: string,
+): FamilyPilotStateV1 {
+  return withAssignment(state, studentRef, assignmentRef, now, (assignment) => {
+    const timing = assignment.instructionalSession
+    if (assignment.state !== 'active') return assignment
+    if (!timing && assignment.sessionRef) {
+      return Object.freeze({
+        ...assignment,
+        progress: assignment.progress.activeSecondsByDate
+          ? assignment.progress
+          : Object.freeze({ ...assignment.progress, activeSecondsByDate: Object.freeze([]) }),
+        instructionalSession: Object.freeze({
+          sessionRef: assignment.sessionRef,
+          startedAt: now,
+          activeSince: now,
+          inactiveAt: null,
+          endedAt: null,
+          state: 'active',
+        }),
+      })
+    }
+    if (!timing || timing.state !== 'hidden') return assignment
+    return Object.freeze({
+      ...assignment,
+      instructionalSession: Object.freeze({ ...timing, activeSince: now, inactiveAt: null, endedAt: null, state: 'active' }),
+    })
+  })
+}
+
+export function endFamilyPilotInstructionalSession(
+  state: FamilyPilotStateV1,
+  studentRef: string,
+  assignmentRef: string,
+  now: string,
+): FamilyPilotStateV1 {
+  return withAssignment(state, studentRef, assignmentRef, now, (assignment) =>
+    assignment.instructionalSession?.state === 'ended'
+      ? assignment
+      : closeInstructionalInterval(assignment, now, 'ended'))
 }
 
 /** Records checkpoint/progress metadata. Segment refs are a set, never a log. */
@@ -257,17 +438,18 @@ export function completeFamilyPilotAssignment(
   assignmentRef: string,
   now: string,
 ): FamilyPilotStateV1 {
-  const completed = withAssignment(state, studentRef, assignmentRef, now, (assignment) =>
-    assignment.state === 'completed'
-      ? assignment
-      : Object.freeze({
-          ...assignment,
+  const completed = withAssignment(state, studentRef, assignmentRef, now, (assignment) => {
+    if (assignment.state === 'completed') return assignment
+    const timed = closeInstructionalInterval(assignment, now, 'ended')
+    return Object.freeze({
+          ...timed,
           state: 'completed',
           sessionRef: null,
           // First completion wins, mirroring AcademyLessonState.completedAt.
-          completedAt: assignment.completedAt ?? now,
-          pause: Object.freeze({ ...assignment.pause, pausedAt: null }),
-        }))
+          completedAt: timed.completedAt ?? now,
+          pause: Object.freeze({ ...timed.pause, pausedAt: null }),
+        })
+  })
   return withStudent(completed, studentRef, (student) =>
     student.activeAssignmentRef === assignmentRef
       ? Object.freeze({ ...student, activeAssignmentRef: null })
@@ -283,7 +465,7 @@ export function abandonFamilyPilotAssignment(
   const abandoned = withAssignment(state, studentRef, assignmentRef, now, (assignment) =>
     assignment.state === 'completed'
       ? assignment
-      : Object.freeze({ ...assignment, state: 'abandoned', sessionRef: null }))
+      : Object.freeze({ ...closeInstructionalInterval(assignment, now, 'ended'), state: 'abandoned', sessionRef: null }))
   return withStudent(abandoned, studentRef, (student) =>
     student.activeAssignmentRef === assignmentRef
       ? Object.freeze({ ...student, activeAssignmentRef: null })
