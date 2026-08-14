@@ -299,11 +299,33 @@ describe('Family Pilot student dashboard data adapter', () => {
       ['LESSON', 'IN_PROGRESS', 'CONTINUE'],
       ['ASSESSMENT', 'WAITING', undefined],
     ])
-    expect(model?.today.items[2].blocked?.kind).toBe('ASSESSMENT_SCORING_PENDING')
+    expect(model?.today.items[2].blocked).toEqual({
+      kind: 'ASSESSMENT_SCORING_PENDING',
+      message: 'Waiting for grading',
+    })
     expect(model?.progressSummary).toMatchObject({
       lessonsAssigned: 2, lessonsCompleted: 1, assessmentsAssigned: 1, assessmentsCertified: 0,
     })
     expect(model?.courses.map((item) => item.subject)).toEqual(['mathematics', 'english-language-arts'])
+  })
+
+  it.each([
+    ['PENDING_ASSESSMENT', 'Waiting for grading'],
+    ['ADULT_REVIEW_REQUIRED', 'Waiting for review'],
+    ['PENDING_GUARDIAN_ATTESTATION', 'Ask your parent'],
+  ] as const)('uses plain learner copy for assessment state %s', async (status, message) => {
+    const held = assessment('student:ada', 'mathematics', 3, status)
+    const math = course('mathematics', 3)
+    const model = await buildFamilyPilotStudentDashboardModel(input({
+      assessments: [held],
+      schedule: [scheduled('student:ada', held.assignmentRef, 0)],
+      catalog: catalog([math], [lesson(math)], [held]),
+    }))
+    expect(model?.today.items[0]).toMatchObject({
+      status: 'WAITING',
+      action: null,
+      blocked: { message },
+    })
   })
 
   it('never assumes nominal grade is the working level', async () => {
@@ -359,6 +381,9 @@ describe('Family Pilot student dashboard data adapter', () => {
     source = { ...source, coreState: withAssignments(source, { 'student:ada': [work] }) }
     const model = await buildFamilyPilotStudentDashboardModel(source)
     expect(model?.today.items[0]).toMatchObject({ status: 'WAITING', action: null, blocked: { kind: expected } })
+    if (scenario === 'guardian attestation' || scenario === 'safety hold' || scenario === 'safety recovery') {
+      expect(model?.today.items[0].blocked?.message).toBe('Ask your parent')
+    }
   })
 
   it('accepts an attached source only for the exact learner and lesson assignment', async () => {

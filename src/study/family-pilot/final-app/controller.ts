@@ -172,6 +172,7 @@ export class FinalFamilyPilotController {
     readonly assignmentRef: string
     readonly runtime: FinalFamilyPilotStudyRuntimeApi
   } | null = null
+  #parentSessionAuthorized = false
 
   constructor(options: FinalFamilyPilotControllerOptions) {
     this.#catalog = options.catalog
@@ -233,11 +234,18 @@ export class FinalFamilyPilotController {
   setParentPin(pin: string): void {
     if (!/^\d{4}$/.test(pin)) throw new Error('A local parent PIN must contain exactly four digits.')
     this.#commitApp((state) => ({ ...state, parentAccessVerifier: digestLocalPin(pin) }))
+    this.#parentSessionAuthorized = true
   }
 
   verifyParentPin(pin: string): boolean {
     const verifier = this.#appSnapshot.state.parentAccessVerifier
-    return Boolean(verifier && /^\d{4}$/.test(pin) && verifier === digestLocalPin(pin))
+    const authorized = Boolean(verifier && /^\d{4}$/.test(pin) && verifier === digestLocalPin(pin))
+    this.#parentSessionAuthorized = authorized
+    return authorized
+  }
+
+  lockParentSession(): void {
+    this.#parentSessionAuthorized = false
   }
 
   coursesFor(student: FamilySetupStudent, subject?: AcademySubject) {
@@ -356,9 +364,40 @@ export class FinalFamilyPilotController {
   updateAssessmentStatus(studentRef: string, assignmentRef: string, status: FinalAssessmentAssignmentStatus): void {
     const current = this.#appSnapshot.state.assessmentAssignments.find((item) => item.studentRef === studentRef && item.assignmentRef === assignmentRef)
     if (!current) throw new Error('That assessment assignment is unavailable.')
-    if (status === 'CERTIFIED' && current.authorityClass === 'AUTO_SCOREABLE' && current.status !== 'PENDING_ASSESSMENT') {
-      throw new Error('Trusted scoring must complete before certification.')
+    if (status === current.status) return
+    const allowed = current.status === 'PLANNED' && status === 'ACTIVE'
+      || current.status === 'ACTIVE' && (
+        current.authorityClass === 'AUTO_SCOREABLE' && status === 'PENDING_ASSESSMENT'
+        || current.authorityClass === 'RUBRIC_REQUIRED' && status === 'ADULT_REVIEW_REQUIRED'
+        || current.authorityClass === 'GUARDIAN_REQUIRED' && status === 'PENDING_GUARDIAN_ATTESTATION'
+        || current.authorityClass === 'COMPLETION_ONLY' && status === 'CERTIFIED'
+      )
+    if (!allowed) {
+      if (current.authorityClass === 'AUTO_SCOREABLE' && status === 'CERTIFIED') {
+        throw new Error('Only the trusted scoring authority can certify this assessment.')
+      }
+      throw new Error('That assessment status change requires its existing adult authority.')
     }
+    this.#setAssessmentStatus(studentRef, assignmentRef, status)
+  }
+
+  completeAssessmentReview(
+    studentRef: string,
+    assignmentRef: string,
+    action: 'manual-review' | 'guardian-certification',
+  ): void {
+    this.#assertParentSession()
+    const current = this.#appSnapshot.state.assessmentAssignments.find((item) =>
+      item.studentRef === studentRef && item.assignmentRef === assignmentRef)
+    if (!current) throw new Error('That assessment assignment is unavailable.')
+    const allowed = action === 'manual-review'
+      ? current.authorityClass === 'RUBRIC_REQUIRED' && current.status === 'ADULT_REVIEW_REQUIRED'
+      : current.authorityClass === 'GUARDIAN_REQUIRED' && current.status === 'PENDING_GUARDIAN_ATTESTATION'
+    if (!allowed) throw new Error('That adult review action does not match this assessment authority.')
+    this.#setAssessmentStatus(studentRef, assignmentRef, 'CERTIFIED')
+  }
+
+  #setAssessmentStatus(studentRef: string, assignmentRef: string, status: FinalAssessmentAssignmentStatus): void {
     const now = this.#at()
     this.#commitApp((state) => ({
       ...state,
@@ -535,6 +574,7 @@ export class FinalFamilyPilotController {
   }
 
   async clearHold(studentRef: string, assignmentRef: string, holdRef: string): Promise<void> {
+    this.#assertParentSession()
     const prepared = await this.#prepare(studentRef, assignmentRef)
     const runtime = await this.#runtime(studentRef, assignmentRef, prepared.lesson)
     const session = this.#savedSession(studentRef, assignmentRef)
@@ -556,6 +596,7 @@ export class FinalFamilyPilotController {
     readonly sources: readonly unknown[]
     readonly adultAttested: boolean
   }): FinalFamilyPilotSourceAttachment {
+    this.#assertParentSession()
     const assignment = this.#assignment(input.studentRef, input.assignmentRef)
     if (!assignment) throw new Error('That assignment is unavailable.')
     const metadata = validateDynamicSocialSourceBundle({ lessonRef: assignment.lessonRef, sources: input.sources, adultAttested: input.adultAttested })
@@ -595,6 +636,7 @@ export class FinalFamilyPilotController {
     evidenceMode: 'adult-observed' | 'simulated-alternative',
   ): Promise<FinalFamilyPilotControllerResult> {
     try {
+      this.#assertParentSession()
       const prepared = await this.#prepare(studentRef, assignmentRef)
       const runtime = await this.#runtime(studentRef, assignmentRef, prepared.lesson)
       const session = this.#savedSession(studentRef, assignmentRef)
@@ -624,6 +666,10 @@ export class FinalFamilyPilotController {
   }
 
   #at(): string { return this.#now().toISOString() }
+
+  #assertParentSession(): void {
+    if (!this.#parentSessionAuthorized) throw new Error('Unlock the Parent Hub with the parent PIN before this action.')
+  }
 
   #studentSetup(studentRef: string): FamilySetupStudent | null {
     return this.#appSnapshot.state.setup.students.find((item) => item.studentRef === studentRef) ?? null

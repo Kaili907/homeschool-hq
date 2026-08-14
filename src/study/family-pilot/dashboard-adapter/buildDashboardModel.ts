@@ -35,11 +35,11 @@ import {
 
 const BLOCKED_COPY: Readonly<Record<FamilyPilotDashboardBlockedKind, string>> = Object.freeze({
   STORAGE_UNAVAILABLE: 'This work cannot open until progress storage is available again.',
-  SAFETY_HOLD: 'This work is paused until a grown-up clears the safety check.',
-  GUARDIAN_PENDING: 'A grown-up needs to confirm this work before it can continue.',
+  SAFETY_HOLD: 'Ask your parent',
+  GUARDIAN_PENDING: 'Ask your parent',
   SOCIAL_SOURCE_REQUIRED: 'A grown-up needs to attach today’s approved source before this can open.',
-  ASSESSMENT_SCORING_PENDING: 'This assessment is waiting for trusted scoring.',
-  ADULT_REVIEW_REQUIRED: 'This assessment is waiting for a grown-up to review it.',
+  ASSESSMENT_SCORING_PENDING: 'Waiting for grading',
+  ADULT_REVIEW_REQUIRED: 'Waiting for review',
   ASSIGNMENT_UNAVAILABLE: 'This scheduled item is not available to open right now.',
 })
 
