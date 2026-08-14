@@ -1,160 +1,135 @@
-import type { DurableStudyDocumentV1 } from '../../../family-pilot/durable-ports/schema'
-
 export const HOSTED_SYNC_CLIENT_PROTOCOL_VERSION = 2 as const
 
+/** Exact functions installed by 20260813172000_academy_study_sync_lossless_v2.sql. */
 export const HOSTED_SYNC_RPC = Object.freeze({
-  firstLinkImport: 'academy_study_sync_first_link_import_v2',
+  firstLink: 'academy_study_sync_first_link_v2',
+  resolveMapping: 'academy_study_sync_resolve_mapping_v2',
   hydrate: 'academy_study_sync_hydrate_v2',
-  revisionedWrite: 'academy_study_sync_revisioned_write_v2',
-  acknowledge: 'academy_study_sync_acknowledge_v2',
+  write: 'academy_study_sync_write_v2',
 } as const)
 
 export type HostedSyncRpcName = typeof HOSTED_SYNC_RPC[keyof typeof HOSTED_SYNC_RPC]
 
 export type HostedSyncOutcomeCode =
-  | 'SUCCESS'
-  | 'OFFLINE'
-  | 'NETWORK_UNAVAILABLE'
-  | 'TIMEOUT'
-  | 'AUTH_REQUIRED'
-  | 'SESSION_EXPIRED'
-  | 'RATE_LIMITED'
-  | 'STALE_REVISION'
-  | 'SERVER_UNAVAILABLE'
-  | 'MALFORMED_RESPONSE'
-  | 'PERMANENT_REFUSAL'
+  | 'SUCCESS' | 'OFFLINE' | 'NETWORK_UNAVAILABLE' | 'TIMEOUT'
+  | 'AUTH_REQUIRED' | 'SESSION_EXPIRED' | 'RATE_LIMITED'
+  | 'SERVER_UNAVAILABLE' | 'MALFORMED_RESPONSE' | 'PERMANENT_REFUSAL'
   | 'ABORTED'
 
 export const HOSTED_SYNC_OUTCOME_CODES = Object.freeze([
-  'SUCCESS',
-  'OFFLINE',
-  'NETWORK_UNAVAILABLE',
-  'TIMEOUT',
-  'AUTH_REQUIRED',
-  'SESSION_EXPIRED',
-  'RATE_LIMITED',
-  'STALE_REVISION',
-  'SERVER_UNAVAILABLE',
-  'MALFORMED_RESPONSE',
-  'PERMANENT_REFUSAL',
-  'ABORTED',
+  'SUCCESS', 'OFFLINE', 'NETWORK_UNAVAILABLE', 'TIMEOUT', 'AUTH_REQUIRED',
+  'SESSION_EXPIRED', 'RATE_LIMITED', 'SERVER_UNAVAILABLE',
+  'MALFORMED_RESPONSE', 'PERMANENT_REFUSAL', 'ABORTED',
 ] as const satisfies readonly HostedSyncOutcomeCode[])
-
-export interface HostedSyncSuccess<T> {
-  readonly code: 'SUCCESS'
-  readonly value: T
-}
 
 export interface HostedSyncFailure {
   readonly code: Exclude<HostedSyncOutcomeCode, 'SUCCESS'>
   readonly httpStatus: number | null
   readonly retryAfterMs: number | null
-  /** Present only when a valid CAS refusal disclosed the current revision. */
-  readonly serverRevision: number | null
   readonly reasonCode: string | null
 }
 
-export type HostedSyncOutcome<T> = HostedSyncSuccess<T> | HostedSyncFailure
+export type HostedSyncOutcome<T> =
+  | Readonly<{ code: 'SUCCESS'; value: T }>
+  | HostedSyncFailure
 
-export interface HostedSyncIdentity {
+export interface HostedSyncLocalScope {
   readonly householdRef: string
-  readonly learnerRef: string
-  readonly documentRef: string
+  readonly studentRef: string
+  readonly assignmentRef: string
+  readonly sessionRef: string
 }
 
-/**
- * The hosted payload is the exact locally accepted minimized authority document.
- * No projection is allowed at this boundary because it would make hydrate lossy.
- */
-export interface HostedSyncSnapshot {
-  readonly documentSchemaVersion: 1
-  readonly document: DurableStudyDocumentV1
+export interface HostedSyncHostedScope {
+  readonly assignmentRef: string
+  readonly sessionRef: string
 }
 
-export interface HostedSyncFirstLinkImportInput {
-  readonly identity: HostedSyncIdentity
-  readonly operationId: string
-  readonly baseRevision: 0
-  readonly adultConfirmation: 'EXPLICIT_ADULT_CONFIRMED'
-  readonly confirmedAt: string
-  readonly snapshot: HostedSyncSnapshot
+export interface HostedSyncFirstLinkImport {
+  readonly localScope: HostedSyncLocalScope
+  readonly hostedScope: HostedSyncHostedScope
+  readonly session: Readonly<Record<string, unknown>>
+  readonly checkpoint: Readonly<Record<string, unknown>> | null
+  readonly socialSource: Readonly<Record<string, unknown>> | null
+  readonly guardianAttestation: Readonly<Record<string, unknown>> | null
+  readonly safetyState: Readonly<{ schemaVersion: 1; holds: readonly Readonly<Record<string, unknown>>[] }>
+  readonly assessment: Readonly<Record<string, unknown>> | null
+}
+
+export interface HostedSyncFirstLinkInput {
+  readonly tokenDigest: string
+  readonly studentId: string
+  readonly clientOperationId: string
+  readonly import: HostedSyncFirstLinkImport
+}
+
+export interface HostedSyncResolveMappingInput {
+  readonly tokenDigest: string
+  readonly studentId: string
+  readonly localScope: HostedSyncLocalScope
 }
 
 export interface HostedSyncHydrateInput {
-  readonly identity: HostedSyncIdentity
+  readonly tokenDigest: string
+  readonly studentId: string
+  readonly assignmentRef: string
+  readonly sessionId: string
 }
 
-export interface HostedSyncRevisionedWriteInput {
-  readonly identity: HostedSyncIdentity
-  readonly operationId: string
-  readonly baseRevision: number
-  readonly snapshot: HostedSyncSnapshot
+export const HOSTED_SYNC_WRITE_OPERATIONS = Object.freeze([
+  'checkpoint:compare-and-swap', 'session:complete', 'social-source:attach',
+  'rfl:assert', 'rfl:attest', 'safety:hold', 'safety:clear',
+  'assessment:set-state',
+] as const)
+
+export type HostedSyncWriteOperation = typeof HOSTED_SYNC_WRITE_OPERATIONS[number]
+
+export interface HostedSyncWriteInput extends HostedSyncHydrateInput {
+  readonly expectedRevision: number
+  readonly clientOperationId: string
+  readonly operation: HostedSyncWriteOperation
+  readonly payload: Readonly<Record<string, unknown>>
 }
 
-export interface HostedSyncAcknowledgeInput {
-  readonly identity: HostedSyncIdentity
-  /** Stable UUID for this acknowledgement, retained across every retry. */
-  readonly operationId: string
-  readonly acknowledgedOperationId: string
-  readonly serverRevision: number
+export interface HostedSyncMapping {
+  readonly localHouseholdRef: string
+  readonly localStudentRef: string
+  readonly localAssignmentRef: string
+  readonly localSessionRef: string
+  readonly hostedHouseholdId: string
+  readonly hostedStudentId: string
+  readonly hostedAssignmentRef: string
+  readonly hostedSessionRef: string
 }
 
-export interface HostedSyncStoredResult {
-  readonly operationId: string
-  readonly serverRevision: number
-  readonly acceptedAt: string
-  readonly duplicate: boolean
-}
+export type HostedSyncFirstLinkResult =
+  | Readonly<{ schemaVersion: 2; status: 'imported' | 'linked-existing'; mapping: HostedSyncMapping; revisions: Readonly<{ authority: number; session: number; checkpoint: number }> }>
+  | Readonly<{ schemaVersion: 2; status: 'mapping-conflict' | 'idempotency-collision' }>
+  | Readonly<{ schemaVersion: 2; status: 'denied'; code: string }>
+
+export type HostedSyncResolveMappingResult =
+  | Readonly<{ schemaVersion: 2; status: 'mapped'; mapping: HostedSyncMapping }>
+  | Readonly<{ schemaVersion: 2; status: 'unavailable' }>
 
 export type HostedSyncHydrateResult =
-  | Readonly<{ status: 'UNAVAILABLE' }>
-  | Readonly<{
-      status: 'READY'
-      serverRevision: number
-      lastOperationId: string
-      snapshot: HostedSyncSnapshot
-    }>
+  | Readonly<{ schemaVersion: 2; status: 'ready'; mapping: HostedSyncMapping; document: Readonly<Record<string, unknown>> }>
+  | Readonly<{ schemaVersion: 2; status: 'unavailable' }>
 
-export interface HostedSyncAcknowledgedResult {
-  readonly operationId: string
-  readonly acknowledgedOperationId: string
-  readonly serverRevision: number
-  readonly acknowledgedAt: string
-  readonly duplicate: boolean
-}
+export type HostedSyncWriteResult =
+  | Readonly<{ schemaVersion: 2; status: 'stored'; operation: HostedSyncWriteOperation; revisionDomain: 'authority' | 'session' | 'checkpoint'; serverRevision: number; readonly [key: string]: unknown }>
+  | Readonly<{ schemaVersion: 2; status: 'revision-conflict'; operation: HostedSyncWriteOperation; revisionDomain: 'authority' | 'session' | 'checkpoint'; serverRevision: number }>
+  | Readonly<{ schemaVersion: 2; status: 'invalid-write'; operation: HostedSyncWriteOperation; reasonCode: string }>
+  | Readonly<{ schemaVersion: 2; status: 'denied'; code: string }>
+  | Readonly<{ schemaVersion: 2; status: 'idempotency-collision'; operation: HostedSyncWriteOperation }>
 
-/** Narrow Supabase/PostgREST-shaped result, injected by the authenticated client. */
 export type HostedSyncRpcProviderResult =
   | Readonly<{ data: unknown; error: null }>
-  | Readonly<{
-      data: null
-      error: Readonly<{
-        code:
-          | 'NETWORK_UNAVAILABLE'
-          | 'TIMEOUT'
-          | 'SESSION_EXPIRED'
-          | 'RATE_LIMITED'
-          | 'SERVER_UNAVAILABLE'
-          | 'PERMANENT_REFUSAL'
-          | 'ABORTED'
-        httpStatus?: number | null
-        retryAfterMs?: number | null
-        reasonCode?: string | null
-      }>
-    }>
+  | Readonly<{ data: null; error: Readonly<{ code: Exclude<HostedSyncOutcomeCode, 'SUCCESS' | 'OFFLINE' | 'AUTH_REQUIRED' | 'MALFORMED_RESPONSE'>; httpStatus?: number | null; retryAfterMs?: number | null; reasonCode?: string | null }> }>
 
 export interface HostedSyncAuthenticatedRpcProvider {
-  rpc(
-    name: HostedSyncRpcName,
-    args: Readonly<Record<string, unknown>>,
-    signal?: AbortSignal,
-  ): Promise<HostedSyncRpcProviderResult>
+  rpc(name: HostedSyncRpcName, args: Readonly<Record<string, unknown>>, signal?: AbortSignal): Promise<HostedSyncRpcProviderResult>
 }
 
-/**
- * An authorization lease is memory-only and scoped to one RPC attempt. The
- * adapter never receives a bearer, refresh token, PIN, cookie, or service key.
- */
 export interface HostedSyncEphemeralAuthorizationLease {
   readonly clientKind: 'AUTHENTICATED_USER'
   readonly expiresAt: string
@@ -171,22 +146,10 @@ export interface HostedSyncEphemeralAuthorization {
 }
 
 export interface HostedSyncRpcAdapter {
-  firstLinkImport(
-    input: HostedSyncFirstLinkImportInput,
-    signal?: AbortSignal,
-  ): Promise<HostedSyncOutcome<HostedSyncStoredResult>>
-  hydrate(
-    input: HostedSyncHydrateInput,
-    signal?: AbortSignal,
-  ): Promise<HostedSyncOutcome<HostedSyncHydrateResult>>
-  revisionedWrite(
-    input: HostedSyncRevisionedWriteInput,
-    signal?: AbortSignal,
-  ): Promise<HostedSyncOutcome<HostedSyncStoredResult>>
-  acknowledge(
-    input: HostedSyncAcknowledgeInput,
-    signal?: AbortSignal,
-  ): Promise<HostedSyncOutcome<HostedSyncAcknowledgedResult>>
+  firstLink(input: HostedSyncFirstLinkInput, signal?: AbortSignal): Promise<HostedSyncOutcome<HostedSyncFirstLinkResult>>
+  resolveMapping(input: HostedSyncResolveMappingInput, signal?: AbortSignal): Promise<HostedSyncOutcome<HostedSyncResolveMappingResult>>
+  hydrate(input: HostedSyncHydrateInput, signal?: AbortSignal): Promise<HostedSyncOutcome<HostedSyncHydrateResult>>
+  write(input: HostedSyncWriteInput, signal?: AbortSignal): Promise<HostedSyncOutcome<HostedSyncWriteResult>>
 }
 
 export interface CreateHostedSyncRpcAdapterOptions {
@@ -195,82 +158,3 @@ export interface CreateHostedSyncRpcAdapterOptions {
   readonly timeoutMs?: number
   readonly now?: () => Date
 }
-
-export type HostedSyncFirstLinkImportRpcArgs = Readonly<{
-  p_schema_version: 2
-  p_household_ref: string
-  p_learner_ref: string
-  p_document_ref: string
-  p_operation_id: string
-  p_base_revision: 0
-  p_adult_confirmation: 'EXPLICIT_ADULT_CONFIRMED'
-  p_confirmed_at: string
-  p_snapshot: HostedSyncSnapshot
-}>
-
-export type HostedSyncHydrateRpcArgs = Readonly<{
-  p_schema_version: 2
-  p_household_ref: string
-  p_learner_ref: string
-  p_document_ref: string
-}>
-
-export type HostedSyncRevisionedWriteRpcArgs = Readonly<{
-  p_schema_version: 2
-  p_household_ref: string
-  p_learner_ref: string
-  p_document_ref: string
-  p_operation_id: string
-  p_base_revision: number
-  p_snapshot: HostedSyncSnapshot
-}>
-
-export type HostedSyncAcknowledgeRpcArgs = Readonly<{
-  p_schema_version: 2
-  p_household_ref: string
-  p_learner_ref: string
-  p_document_ref: string
-  p_operation_id: string
-  p_acknowledged_operation_id: string
-  p_server_revision: number
-}>
-
-export type HostedSyncStoredRpcResponse = Readonly<{
-  schema_version: 2
-  status: 'stored' | 'duplicate'
-  operation_id: string
-  server_revision: number
-  accepted_at: string
-}>
-
-export type HostedSyncStaleRpcResponse = Readonly<{
-  schema_version: 2
-  status: 'stale_revision'
-  operation_id: string
-  server_revision: number
-}>
-
-export type HostedSyncRefusedRpcResponse = Readonly<{
-  schema_version: 2
-  status: 'refused'
-  reason_code: string
-}>
-
-export type HostedSyncHydrateRpcResponse =
-  | Readonly<{ schema_version: 2; status: 'unavailable' }>
-  | Readonly<{
-      schema_version: 2
-      status: 'ready'
-      server_revision: number
-      last_operation_id: string
-      snapshot: HostedSyncSnapshot
-    }>
-
-export type HostedSyncAcknowledgeRpcResponse = Readonly<{
-  schema_version: 2
-  status: 'acknowledged' | 'duplicate'
-  operation_id: string
-  acknowledged_operation_id: string
-  server_revision: number
-  acknowledged_at: string
-}>

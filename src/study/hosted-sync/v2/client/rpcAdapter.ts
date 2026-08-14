@@ -1,258 +1,103 @@
 import {
-  buildAcknowledgeArgs,
-  buildFirstLinkImportArgs,
-  buildHydrateArgs,
-  buildRevisionedWriteArgs,
-  parseAcknowledgeResponse,
-  parseHydrateResponse,
-  parseRefusalResponse,
-  parseWriteResponse,
-  type ParsedWriteResponse,
+  buildFirstLinkArgs, buildHydrateArgs, buildResolveMappingArgs, buildWriteArgs,
+  parseFirstLinkResult, parseHydrateResult, parseResolveMappingResult, parseWriteResult,
 } from './contracts'
 import {
-  HOSTED_SYNC_OUTCOME_CODES,
-  HOSTED_SYNC_RPC,
-  type CreateHostedSyncRpcAdapterOptions,
-  type HostedSyncAcknowledgedResult,
-  type HostedSyncAcknowledgeInput,
-  type HostedSyncFailure,
-  type HostedSyncFirstLinkImportInput,
-  type HostedSyncHydrateInput,
-  type HostedSyncHydrateResult,
-  type HostedSyncOutcome,
-  type HostedSyncOutcomeCode,
-  type HostedSyncRevisionedWriteInput,
-  type HostedSyncRpcName,
-  type HostedSyncRpcProviderResult,
-  type HostedSyncStoredResult,
+  HOSTED_SYNC_OUTCOME_CODES, HOSTED_SYNC_RPC,
+  type CreateHostedSyncRpcAdapterOptions, type HostedSyncFailure,
+  type HostedSyncFirstLinkInput, type HostedSyncHydrateInput,
+  type HostedSyncOutcome, type HostedSyncOutcomeCode, type HostedSyncResolveMappingInput,
+  type HostedSyncRpcAdapter, type HostedSyncRpcName, type HostedSyncRpcProviderResult,
+  type HostedSyncWriteInput,
 } from './types'
 
 const DEFAULT_TIMEOUT_MS = 15_000
 const MAX_TIMEOUT_MS = 120_000
-const RPC_TIMEOUT = Symbol('HOSTED_SYNC_RPC_TIMEOUT')
-const RPC_ABORTED = Symbol('HOSTED_SYNC_RPC_ABORTED')
+const TIMEOUT = Symbol('timeout')
+const ABORTED = Symbol('aborted')
 
-function failure(
-  code: Exclude<HostedSyncOutcomeCode, 'SUCCESS'>,
-  input: Partial<Omit<HostedSyncFailure, 'code'>> = {},
-): HostedSyncFailure {
+function failure(code: Exclude<HostedSyncOutcomeCode, 'SUCCESS'>, values: Partial<HostedSyncFailure> = {}): HostedSyncFailure {
   return Object.freeze({
-    code,
-    httpStatus: input.httpStatus ?? null,
-    retryAfterMs: input.retryAfterMs ?? null,
-    serverRevision: input.serverRevision ?? null,
-    reasonCode: input.reasonCode ?? null,
+    code, httpStatus: values.httpStatus ?? null, retryAfterMs: values.retryAfterMs ?? null,
+    reasonCode: values.reasonCode ?? null,
   })
 }
 
-function success<T>(value: T): HostedSyncOutcome<T> {
-  return Object.freeze({ code: 'SUCCESS' as const, value })
+function record(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
 
 function browserOnline(): boolean {
   try { return typeof navigator === 'undefined' || navigator.onLine !== false } catch { return true }
 }
 
-function validExpiry(value: unknown): value is string {
-  return typeof value === 'string' && value.length <= 40 && Number.isFinite(Date.parse(value))
-}
-
-function safelyRelease(lease: { readonly release?: () => void } | null | undefined): void {
-  try { lease?.release?.() } catch { /* Lease cleanup cannot change the closed RPC outcome. */ }
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === 'object' && !Array.isArray(value)
-}
-
-function exactAllowedKeys(value: Record<string, unknown>, allowed: readonly string[]): boolean {
-  return Object.keys(value).every((key) => allowed.includes(key))
-}
-
-function providerFailure(result: unknown): HostedSyncFailure | null {
-  if (!isRecord(result) || result.data !== null || !isRecord(result.error) ||
-      !exactAllowedKeys(result, ['data', 'error']) || Object.keys(result).length !== 2 ||
-      !exactAllowedKeys(result.error, ['code', 'httpStatus', 'retryAfterMs', 'reasonCode'])) return null
-  const code = result.error.code
-  if (typeof code !== 'string' || code === 'SUCCESS' || code === 'OFFLINE' ||
-      code === 'AUTH_REQUIRED' || code === 'STALE_REVISION' || code === 'MALFORMED_RESPONSE' ||
-      !HOSTED_SYNC_OUTCOME_CODES.includes(code as HostedSyncOutcomeCode)) return null
-  const httpStatus = result.error.httpStatus ?? null
-  const retryAfterMs = result.error.retryAfterMs ?? null
-  const reasonCode = result.error.reasonCode ?? null
-  if (!(httpStatus === null || (Number.isSafeInteger(httpStatus) && (httpStatus as number) >= 100 && (httpStatus as number) <= 599)) ||
-      !(retryAfterMs === null || (Number.isSafeInteger(retryAfterMs) && (retryAfterMs as number) >= 0)) ||
-      !(reasonCode === null || (typeof reasonCode === 'string' && reasonCode.length <= 96))) return null
+function providerFailure(value: unknown): HostedSyncFailure | null {
+  if (!record(value) || value.data !== null || !record(value.error) || Object.keys(value).length !== 2) return null
+  const code = value.error.code
+  if (typeof code !== 'string' || !HOSTED_SYNC_OUTCOME_CODES.includes(code as HostedSyncOutcomeCode) ||
+      ['SUCCESS', 'OFFLINE', 'AUTH_REQUIRED', 'MALFORMED_RESPONSE'].includes(code)) return null
+  const httpStatus = value.error.httpStatus ?? null
+  const retryAfterMs = value.error.retryAfterMs ?? null
+  const reasonCode = value.error.reasonCode ?? null
+  if (!(httpStatus === null || (Number.isSafeInteger(httpStatus) && Number(httpStatus) >= 100 && Number(httpStatus) <= 599)) ||
+      !(retryAfterMs === null || (Number.isSafeInteger(retryAfterMs) && Number(retryAfterMs) >= 0)) ||
+      !(reasonCode === null || typeof reasonCode === 'string')) return null
   return failure(code as Exclude<HostedSyncOutcomeCode, 'SUCCESS'>, {
-    httpStatus: httpStatus as number | null,
-    retryAfterMs: retryAfterMs as number | null,
+    httpStatus: httpStatus as number | null, retryAfterMs: retryAfterMs as number | null,
     reasonCode: reasonCode as string | null,
   })
 }
 
-type ExecuteParser<T> = (value: unknown) =>
-  | Readonly<{ status: 'SUCCESS'; value: T }>
-  | Readonly<{ status: 'STALE_REVISION'; serverRevision: number }>
-  | Readonly<{ status: 'PERMANENT_REFUSAL'; reasonCode: string }>
-  | null
-
-export function createHostedSyncRpcAdapter(
-  options: CreateHostedSyncRpcAdapterOptions,
-): import('./types').HostedSyncRpcAdapter {
+export function createHostedSyncRpcAdapter(options: CreateHostedSyncRpcAdapterOptions): HostedSyncRpcAdapter {
   const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS
   const isOnline = options.isOnline ?? browserOnline
   const now = options.now ?? (() => new Date())
-  if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > MAX_TIMEOUT_MS) {
-    throw new Error('Hosted sync RPC timeout must be bounded between 1 and 120000 milliseconds.')
-  }
+  if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > MAX_TIMEOUT_MS) throw new Error('Hosted sync timeout is out of range.')
 
-  async function execute<T>(input: {
-    readonly rpc: HostedSyncRpcName
-    readonly args: Readonly<Record<string, unknown>> | null
-    readonly parse: ExecuteParser<T>
-    readonly signal?: AbortSignal
-  }): Promise<HostedSyncOutcome<T>> {
-    if (!input.args) return failure('PERMANENT_REFUSAL', { reasonCode: 'INVALID_CLIENT_INPUT' })
-    if (input.signal?.aborted) return failure('ABORTED')
-    try {
-      if (!isOnline()) return failure('OFFLINE')
-    } catch {
-      return failure('NETWORK_UNAVAILABLE')
-    }
+  async function execute<T>(rpc: HostedSyncRpcName, args: Readonly<Record<string, unknown>> | null, parse: (value: unknown) => T | null, signal?: AbortSignal): Promise<HostedSyncOutcome<T>> {
+    if (!args) return failure('PERMANENT_REFUSAL', { reasonCode: 'INVALID_CLIENT_INPUT' })
+    if (signal?.aborted) return failure('ABORTED')
+    try { if (!isOnline()) return failure('OFFLINE') } catch { return failure('NETWORK_UNAVAILABLE') }
 
     let authorized: Awaited<ReturnType<typeof options.authorization.acquire>>
-    try {
-      authorized = await options.authorization.acquire(input.signal)
-    } catch {
-      return input.signal?.aborted ? failure('ABORTED') : failure('AUTH_REQUIRED')
-    }
-    if (!authorized || typeof authorized !== 'object' || !('status' in authorized)) return failure('AUTH_REQUIRED')
-    if (authorized.status !== 'AUTHORIZED') {
-      return authorized.status === 'SESSION_EXPIRED' ? failure('SESSION_EXPIRED') : failure('AUTH_REQUIRED')
-    }
+    try { authorized = await options.authorization.acquire(signal) } catch { return signal?.aborted ? failure('ABORTED') : failure('AUTH_REQUIRED') }
+    if (authorized.status !== 'AUTHORIZED') return failure(authorized.status)
     const lease = authorized.lease
-    if (!lease || lease.clientKind !== 'AUTHENTICATED_USER') {
-      safelyRelease(lease)
-      return failure('AUTH_REQUIRED', { reasonCode: 'AUTHENTICATED_USER_CLIENT_REQUIRED' })
-    }
-    if (input.signal?.aborted) {
-      safelyRelease(lease)
-      return failure('ABORTED')
-    }
-    if (!validExpiry(lease.expiresAt) || Date.parse(lease.expiresAt) <= now().getTime()) {
-      safelyRelease(lease)
-      return failure('SESSION_EXPIRED')
-    }
+    const release = () => { try { lease.release?.() } catch { /* outcome is already closed */ } }
+    if (lease.clientKind !== 'AUTHENTICATED_USER') { release(); return failure('AUTH_REQUIRED', { reasonCode: 'AUTHENTICATED_USER_CLIENT_REQUIRED' }) }
+    if (!Number.isFinite(Date.parse(lease.expiresAt)) || Date.parse(lease.expiresAt) <= now().getTime()) { release(); return failure('SESSION_EXPIRED') }
 
     const controller = new AbortController()
-    let timedOut = false
-    let resolveAbort!: (value: typeof RPC_ABORTED) => void
-    const aborted = new Promise<typeof RPC_ABORTED>((resolve) => { resolveAbort = resolve })
-    const abortFromCaller = () => {
-      controller.abort(input.signal?.reason)
-      resolveAbort(RPC_ABORTED)
-    }
-    input.signal?.addEventListener('abort', abortFromCaller, { once: true })
-    let resolveTimeout!: (value: typeof RPC_TIMEOUT) => void
-    const timeout = new Promise<typeof RPC_TIMEOUT>((resolve) => { resolveTimeout = resolve })
-    const timer = setTimeout(() => {
-      timedOut = true
-      controller.abort(new DOMException('Hosted sync RPC timed out.', 'TimeoutError'))
-      resolveTimeout(RPC_TIMEOUT)
-    }, timeoutMs)
+    let timeoutHandle: ReturnType<typeof setTimeout> | undefined
+    let abortListener: (() => void) | undefined
+    const timeout = new Promise<typeof TIMEOUT>((resolve) => {
+      timeoutHandle = setTimeout(() => { controller.abort(); resolve(TIMEOUT) }, timeoutMs)
+    })
+    const aborted = new Promise<typeof ABORTED>((resolve) => {
+      abortListener = () => { controller.abort(signal?.reason); resolve(ABORTED) }
+      signal?.addEventListener('abort', abortListener, { once: true })
+    })
     try {
-      let result: HostedSyncRpcProviderResult
-      try {
-        const raced = await Promise.race([
-          lease.provider.rpc(input.rpc, input.args, controller.signal),
-          timeout,
-          aborted,
-        ])
-        if (raced === RPC_TIMEOUT) return failure('TIMEOUT')
-        if (raced === RPC_ABORTED) return failure('ABORTED')
-        result = raced
-      } catch {
-        if (input.signal?.aborted) return failure('ABORTED')
-        return failure(timedOut ? 'TIMEOUT' : 'NETWORK_UNAVAILABLE')
-      }
-      if (timedOut) return failure('TIMEOUT')
-      if (input.signal?.aborted) return failure('ABORTED')
-      if (!isRecord(result) || !exactAllowedKeys(result, ['data', 'error']) || Object.keys(result).length !== 2 ||
-          !('error' in result) || !('data' in result)) {
-        return failure('MALFORMED_RESPONSE')
-      }
+      let result: HostedSyncRpcProviderResult | typeof TIMEOUT | typeof ABORTED
+      try { result = await Promise.race([lease.provider.rpc(rpc, args, controller.signal), timeout, aborted]) }
+      catch { return signal?.aborted ? failure('ABORTED') : failure('NETWORK_UNAVAILABLE') }
+      if (result === TIMEOUT) return failure('TIMEOUT')
+      if (result === ABORTED) return failure('ABORTED')
+      if (!record(result) || !('data' in result) || !('error' in result) || Object.keys(result).length !== 2) return failure('MALFORMED_RESPONSE')
       if (result.error !== null) return providerFailure(result) ?? failure('MALFORMED_RESPONSE')
-      const parsed = input.parse(result.data)
-      if (!parsed) return failure('MALFORMED_RESPONSE')
-      if (parsed.status === 'STALE_REVISION') {
-        return failure('STALE_REVISION', {
-          serverRevision: parsed.serverRevision,
-          reasonCode: 'CAS_BASE_REVISION_STALE',
-        })
-      }
-      if (parsed.status === 'PERMANENT_REFUSAL') {
-        return failure('PERMANENT_REFUSAL', { reasonCode: parsed.reasonCode })
-      }
-      return success(parsed.value)
+      const parsed = parse(result.data)
+      return parsed === null ? failure('MALFORMED_RESPONSE') : Object.freeze({ code: 'SUCCESS' as const, value: parsed })
     } finally {
-      clearTimeout(timer)
-      input.signal?.removeEventListener('abort', abortFromCaller)
-      safelyRelease(lease)
+      if (timeoutHandle) clearTimeout(timeoutHandle)
+      if (abortListener) signal?.removeEventListener('abort', abortListener)
+      release()
     }
-  }
-
-  function writeParser(operationId: string, baseRevision: number): ExecuteParser<HostedSyncStoredResult> {
-    return (value) => parseWriteResponse(value, operationId, baseRevision)
   }
 
   return Object.freeze({
-    firstLinkImport(input: HostedSyncFirstLinkImportInput, signal?: AbortSignal) {
-      return execute<HostedSyncStoredResult>({
-        rpc: HOSTED_SYNC_RPC.firstLinkImport,
-        args: buildFirstLinkImportArgs(input),
-        parse: writeParser(input.operationId, input.baseRevision),
-        signal,
-      })
-    },
-
-    hydrate(input: HostedSyncHydrateInput, signal?: AbortSignal) {
-      const identity = input.identity
-      return execute<HostedSyncHydrateResult>({
-        rpc: HOSTED_SYNC_RPC.hydrate,
-        args: buildHydrateArgs(input),
-        parse: (value) => {
-          const parsed = parseHydrateResponse(value, identity)
-          return parsed
-            ? Object.freeze({ status: 'SUCCESS' as const, value: parsed })
-            : parseRefusalResponse(value)
-        },
-        signal,
-      })
-    },
-
-    revisionedWrite(input: HostedSyncRevisionedWriteInput, signal?: AbortSignal) {
-      return execute<HostedSyncStoredResult>({
-        rpc: HOSTED_SYNC_RPC.revisionedWrite,
-        args: buildRevisionedWriteArgs(input),
-        parse: writeParser(input.operationId, input.baseRevision),
-        signal,
-      })
-    },
-
-    acknowledge(input: HostedSyncAcknowledgeInput, signal?: AbortSignal) {
-      return execute<HostedSyncAcknowledgedResult>({
-        rpc: HOSTED_SYNC_RPC.acknowledge,
-        args: buildAcknowledgeArgs(input),
-        parse: (value) => {
-          const parsed = parseAcknowledgeResponse(value, input)
-          return parsed
-            ? Object.freeze({ status: 'SUCCESS' as const, value: parsed })
-            : parseRefusalResponse(value)
-        },
-        signal,
-      })
-    },
+    firstLink(input: HostedSyncFirstLinkInput, signal?: AbortSignal) { return execute(HOSTED_SYNC_RPC.firstLink, buildFirstLinkArgs(input), parseFirstLinkResult, signal) },
+    resolveMapping(input: HostedSyncResolveMappingInput, signal?: AbortSignal) { return execute(HOSTED_SYNC_RPC.resolveMapping, buildResolveMappingArgs(input), parseResolveMappingResult, signal) },
+    hydrate(input: HostedSyncHydrateInput, signal?: AbortSignal) { return execute(HOSTED_SYNC_RPC.hydrate, buildHydrateArgs(input), parseHydrateResult, signal) },
+    write(input: HostedSyncWriteInput, signal?: AbortSignal) { return execute(HOSTED_SYNC_RPC.write, buildWriteArgs(input), (value) => parseWriteResult(value, input), signal) },
   })
 }
-
-export type { ParsedWriteResponse }
