@@ -54,6 +54,8 @@ export interface HostedSyncFirstLinkImport {
   readonly guardianAttestation: Readonly<Record<string, unknown>> | null
   readonly safetyState: Readonly<{ schemaVersion: 1; holds: readonly Readonly<Record<string, unknown>>[] }>
   readonly assessment: Readonly<Record<string, unknown>> | null
+  /** Exact minimized R2 authority checkpoint; legacy callers may omit it. */
+  readonly authorityCheckpoint?: Readonly<Record<string, unknown>>
 }
 
 export interface HostedSyncFirstLinkInput {
@@ -79,7 +81,7 @@ export interface HostedSyncHydrateInput {
 export const HOSTED_SYNC_WRITE_OPERATIONS = Object.freeze([
   'checkpoint:compare-and-swap', 'session:complete', 'social-source:attach',
   'rfl:assert', 'rfl:attest', 'safety:hold', 'safety:clear',
-  'assessment:set-state',
+  'assessment:set-state', 'authority-checkpoint:compare-and-swap',
 ] as const)
 
 export type HostedSyncWriteOperation = typeof HOSTED_SYNC_WRITE_OPERATIONS[number]
@@ -103,7 +105,7 @@ export interface HostedSyncMapping {
 }
 
 export type HostedSyncFirstLinkResult =
-  | Readonly<{ schemaVersion: 2; status: 'imported' | 'linked-existing'; mapping: HostedSyncMapping; revisions: Readonly<{ authority: number; session: number; checkpoint: number }> }>
+  | Readonly<{ schemaVersion: 2; status: 'imported' | 'linked-existing'; mapping: HostedSyncMapping; revisions: Readonly<{ authority: number; session: number; checkpoint: number; authorityCheckpoint?: number }> }>
   | Readonly<{ schemaVersion: 2; status: 'mapping-conflict' | 'idempotency-collision' }>
   | Readonly<{ schemaVersion: 2; status: 'denied'; code: string }>
 
@@ -112,12 +114,12 @@ export type HostedSyncResolveMappingResult =
   | Readonly<{ schemaVersion: 2; status: 'unavailable' }>
 
 export type HostedSyncHydrateResult =
-  | Readonly<{ schemaVersion: 2; status: 'ready'; mapping: HostedSyncMapping; document: Readonly<Record<string, unknown>> }>
+  | Readonly<{ schemaVersion: 2; status: 'ready'; mapping: HostedSyncMapping; document: Readonly<Record<string, unknown>>; authorityCheckpoint?: Readonly<Record<string, unknown>>; authorityCheckpointRevision?: number }>
   | Readonly<{ schemaVersion: 2; status: 'unavailable' }>
 
 export type HostedSyncWriteResult =
-  | Readonly<{ schemaVersion: 2; status: 'stored'; operation: HostedSyncWriteOperation; revisionDomain: 'authority' | 'session' | 'checkpoint'; serverRevision: number; readonly [key: string]: unknown }>
-  | Readonly<{ schemaVersion: 2; status: 'revision-conflict'; operation: HostedSyncWriteOperation; revisionDomain: 'authority' | 'session' | 'checkpoint'; serverRevision: number }>
+  | Readonly<{ schemaVersion: 2; status: 'stored'; operation: HostedSyncWriteOperation; revisionDomain: 'authority' | 'session' | 'checkpoint' | 'authority-checkpoint'; serverRevision: number; readonly [key: string]: unknown }>
+  | Readonly<{ schemaVersion: 2; status: 'revision-conflict'; operation: HostedSyncWriteOperation; revisionDomain: 'authority' | 'session' | 'checkpoint' | 'authority-checkpoint'; serverRevision: number }>
   | Readonly<{ schemaVersion: 2; status: 'invalid-write'; operation: HostedSyncWriteOperation; reasonCode: string }>
   | Readonly<{ schemaVersion: 2; status: 'denied'; code: string }>
   | Readonly<{ schemaVersion: 2; status: 'idempotency-collision'; operation: HostedSyncWriteOperation }>
