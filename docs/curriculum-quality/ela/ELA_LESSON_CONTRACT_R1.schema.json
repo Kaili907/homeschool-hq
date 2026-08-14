@@ -1,0 +1,1314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/ela-lesson-contract-r1-draft.json",
+  "title": "Manuel Academy ELA Lesson Contract R1 Draft",
+  "description": "Advisory curriculum-side contract for Manuel Academy ELA lessons. This schema does not implement Tutor V2 or act as a release gate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "lesson_id",
+    "grade",
+    "subject",
+    "lesson_profile",
+    "learning_goal",
+    "standard_refs",
+    "skill_ids",
+    "profile_details",
+    "text_set",
+    "language_and_complexity",
+    "reading_burden",
+    "learner_content",
+    "protected_content",
+    "tutor_manifest"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ela-lesson-standard-r1-draft"
+    },
+    "lesson_id": {
+      "$ref": "#/$defs/id"
+    },
+    "grade": {
+      "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12]
+    },
+    "subject": {
+      "const": "english-language-arts"
+    },
+    "lesson_profile": {
+      "$ref": "#/$defs/lesson_profile"
+    },
+    "learning_goal": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 320
+    },
+    "standard_refs": {
+      "$ref": "#/$defs/nonempty_id_array"
+    },
+    "skill_ids": {
+      "$ref": "#/$defs/nonempty_id_array"
+    },
+    "profile_details": {
+      "$ref": "#/$defs/profile_details"
+    },
+    "text_set": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text_record"
+      },
+      "uniqueItems": true
+    },
+    "language_and_complexity": {
+      "$ref": "#/$defs/language_and_complexity"
+    },
+    "reading_burden": {
+      "$ref": "#/$defs/reading_burden"
+    },
+    "learner_content": {
+      "$ref": "#/$defs/learner_content"
+    },
+    "protected_content": {
+      "$ref": "#/$defs/protected_content"
+    },
+    "tutor_manifest": {
+      "$ref": "#/$defs/tutor_manifest"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lesson_profile": {
+            "enum": [
+              "READING_COMPREHENSION",
+              "LITERATURE",
+              "INFORMATIONAL_TEXT"
+            ]
+          }
+        },
+        "required": ["lesson_profile"]
+      },
+      "then": {
+        "properties": {
+          "text_set": {
+            "minItems": 2,
+            "contains": {
+              "properties": {
+                "role": {
+                  "const": "independent"
+                }
+              },
+              "required": ["role"]
+            }
+          },
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {"minItems": 1},
+              "models": {"minItems": 1},
+              "comprehension_checks": {"minItems": 1},
+              "guided_tasks": {"minItems": 1},
+              "independent_tasks": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_profile": {
+            "enum": [
+              "VOCABULARY",
+              "GRAMMAR_LANGUAGE",
+              "WRITING",
+              "RESEARCH_SOURCE_USE"
+            ]
+          }
+        },
+        "required": ["lesson_profile"]
+      },
+      "then": {
+        "properties": {
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {"minItems": 1},
+              "models": {"minItems": 1},
+              "guided_tasks": {"minItems": 1},
+              "independent_tasks": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_profile": {
+            "const": "WRITING"
+          }
+        },
+        "required": ["lesson_profile"]
+      },
+      "then": {
+        "properties": {
+          "profile_details": {
+            "required": [
+              "genre",
+              "audience",
+              "purpose",
+              "writing_process_stages"
+            ]
+          },
+          "learner_content": {
+            "properties": {
+              "writing_scaffolds": {"minItems": 1},
+              "rubric_refs": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_profile": {
+            "const": "RESEARCH_SOURCE_USE"
+          }
+        },
+        "required": ["lesson_profile"]
+      },
+      "then": {
+        "properties": {
+          "profile_details": {
+            "required": ["inquiry_purpose"]
+          },
+          "text_set": {
+            "minItems": 1,
+            "contains": {
+              "properties": {
+                "role": {
+                  "const": "research_source"
+                }
+              },
+              "required": ["role"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_profile": {
+            "const": "REVIEW"
+          }
+        },
+        "required": ["lesson_profile"]
+      },
+      "then": {
+        "properties": {
+          "profile_details": {
+            "required": ["review_skill_ids"]
+          },
+          "learner_content": {
+            "properties": {
+              "independent_tasks": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_profile": {
+            "const": "REMEDIATION"
+          }
+        },
+        "required": ["lesson_profile"]
+      },
+      "then": {
+        "properties": {
+          "profile_details": {
+            "required": [
+              "diagnosed_gap_ids",
+              "grade_level_return_task_ref"
+            ]
+          },
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {"minItems": 1},
+              "models": {"minItems": 1},
+              "guided_tasks": {"minItems": 1},
+              "independent_tasks": {"minItems": 1},
+              "remediation_routes": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_profile": {
+            "const": "MASTERY"
+          }
+        },
+        "required": ["lesson_profile"]
+      },
+      "then": {
+        "properties": {
+          "profile_details": {
+            "required": [
+              "evidence_occasion_ids",
+              "freshness_statement"
+            ]
+          },
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {"maxItems": 0},
+              "models": {"maxItems": 0},
+              "guided_tasks": {"maxItems": 0},
+              "independent_tasks": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_profile": {
+            "const": "ASSESSMENT"
+          }
+        },
+        "required": ["lesson_profile"]
+      },
+      "then": {
+        "properties": {
+          "profile_details": {
+            "required": [
+              "assessment_purpose",
+              "blueprint_ref",
+              "reported_claim_ids"
+            ]
+          },
+          "learner_content": {
+            "properties": {
+              "teaching_blocks": {"maxItems": 0},
+              "models": {"maxItems": 0},
+              "guided_tasks": {"maxItems": 0},
+              "independent_tasks": {"minItems": 1}
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "id_array": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/id"},
+      "uniqueItems": true
+    },
+    "nonempty_id_array": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/id"},
+      "uniqueItems": true
+    },
+    "nonempty_string_array": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "lesson_profile": {
+      "enum": [
+        "READING_COMPREHENSION",
+        "LITERATURE",
+        "INFORMATIONAL_TEXT",
+        "VOCABULARY",
+        "GRAMMAR_LANGUAGE",
+        "WRITING",
+        "RESEARCH_SOURCE_USE",
+        "REVIEW",
+        "REMEDIATION",
+        "MASTERY",
+        "ASSESSMENT"
+      ]
+    },
+    "profile_details": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary_outcome", "evidence_purpose"],
+      "properties": {
+        "primary_outcome": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "evidence_purpose": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "genre": {"type": "string", "minLength": 1},
+        "audience": {"type": "string", "minLength": 1},
+        "purpose": {"type": "string", "minLength": 1},
+        "writing_process_stages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "planning",
+              "drafting",
+              "revising",
+              "editing",
+              "publishing",
+              "reflection"
+            ]
+          }
+        },
+        "inquiry_purpose": {"type": "string", "minLength": 1},
+        "review_skill_ids": {"$ref": "#/$defs/nonempty_id_array"},
+        "diagnosed_gap_ids": {"$ref": "#/$defs/nonempty_id_array"},
+        "grade_level_return_task_ref": {"$ref": "#/$defs/id"},
+        "evidence_occasion_ids": {"$ref": "#/$defs/nonempty_id_array"},
+        "freshness_statement": {"type": "string", "minLength": 1},
+        "assessment_purpose": {
+          "enum": ["diagnostic", "interim", "unit", "summative"]
+        },
+        "blueprint_ref": {"$ref": "#/$defs/id"},
+        "reported_claim_ids": {"$ref": "#/$defs/nonempty_id_array"},
+        "performance_task_exception_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "text_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text_ref",
+        "role",
+        "form",
+        "title",
+        "creator",
+        "body_or_source_ref",
+        "delivery_mode",
+        "learner_available",
+        "provenance",
+        "complexity_review",
+        "access"
+      ],
+      "properties": {
+        "text_ref": {"$ref": "#/$defs/id"},
+        "role": {
+          "enum": [
+            "model",
+            "guided",
+            "independent",
+            "transfer",
+            "research_source",
+            "assessment"
+          ]
+        },
+        "form": {
+          "enum": [
+            "literary_prose",
+            "poetry",
+            "drama",
+            "informational",
+            "argument",
+            "functional",
+            "sentence_set",
+            "visual",
+            "audio",
+            "video",
+            "multimodal"
+          ]
+        },
+        "title": {"type": "string", "minLength": 1},
+        "creator": {"type": "string", "minLength": 1},
+        "body_or_source_ref": {"type": "string", "minLength": 1},
+        "delivery_mode": {
+          "enum": [
+            "inline_full_text",
+            "licensed_resource",
+            "public_domain_resource",
+            "approved_external_resource"
+          ]
+        },
+        "learner_available": {"const": true},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "complexity_review": {"$ref": "#/$defs/complexity_review"},
+        "access": {"$ref": "#/$defs/text_access"},
+        "sensitivity_note": {"type": "string"},
+        "reuse_purpose": {"type": "string"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "rights_category", "rights_statement", "integrity_review_ref"],
+      "properties": {
+        "origin": {
+          "enum": [
+            "academy_original",
+            "licensed",
+            "public_domain",
+            "approved_external"
+          ]
+        },
+        "rights_category": {"type": "string", "minLength": 1},
+        "rights_statement": {"type": "string", "minLength": 1},
+        "source_url_or_catalog_ref": {"type": "string", "minLength": 1},
+        "integrity_review_ref": {"$ref": "#/$defs/id"},
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "complexity_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quantitative",
+        "qualitative",
+        "reader_task_considerations",
+        "grade_level_judgment",
+        "human_review_ref"
+      ],
+      "properties": {
+        "quantitative": {"$ref": "#/$defs/quantitative_complexity"},
+        "qualitative": {"$ref": "#/$defs/qualitative_complexity"},
+        "reader_task_considerations": {"$ref": "#/$defs/nonempty_string_array"},
+        "grade_level_judgment": {
+          "enum": [
+            "on_grade_level",
+            "above_grade_with_approved_scaffolds",
+            "companion_access_text",
+            "adapted_below_target_not_grade_level_evidence",
+            "not_applicable_to_text_form"
+          ]
+        },
+        "human_review_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "quantitative_complexity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["word_count", "metrics_are_advisory"],
+      "properties": {
+        "word_count": {"type": "integer", "minimum": 0},
+        "metrics_are_advisory": {"const": true},
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "value"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "value": {"type": ["number", "string"]}
+            }
+          }
+        }
+      }
+    },
+    "qualitative_complexity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "meaning_or_purpose",
+        "structure",
+        "language",
+        "knowledge_demands"
+      ],
+      "properties": {
+        "meaning_or_purpose": {"type": "string", "minLength": 1},
+        "structure": {"type": "string", "minLength": 1},
+        "language": {"type": "string", "minLength": 1},
+        "knowledge_demands": {"type": "string", "minLength": 1},
+        "visual_or_multimodal_demands": {"type": "string"}
+      }
+    },
+    "text_access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available_modes", "construct_preserving_modes", "location_markers"],
+      "properties": {
+        "available_modes": {"$ref": "#/$defs/nonempty_string_array"},
+        "construct_preserving_modes": {"$ref": "#/$defs/nonempty_string_array"},
+        "location_markers": {"type": "string", "minLength": 1},
+        "text_only_fallback_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "language_and_complexity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "student_reading_level_runtime_owned",
+        "student_reading_level_stored_in_curriculum",
+        "grade_level_text_refs",
+        "grade_level_complexity_basis",
+        "explanation_language_expectation",
+        "essential_ela_terms_preserved",
+        "scaffolding_plan"
+      ],
+      "properties": {
+        "student_reading_level_runtime_owned": {"const": true},
+        "student_reading_level_stored_in_curriculum": {"const": false},
+        "grade_level_text_refs": {"$ref": "#/$defs/id_array"},
+        "grade_level_complexity_basis": {"type": "string", "minLength": 1},
+        "explanation_language_expectation": {"type": "string", "minLength": 1},
+        "essential_ela_terms_preserved": {"$ref": "#/$defs/id_array"},
+        "scaffolding_plan": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["support_ref", "support_type", "construct_effect"],
+            "properties": {
+              "support_ref": {"$ref": "#/$defs/id"},
+              "support_type": {
+                "enum": [
+                  "direction_clarification",
+                  "nonassessed_vocabulary_preview",
+                  "background_knowledge",
+                  "meaningful_chunking",
+                  "navigation_markers",
+                  "audio_or_read_aloud",
+                  "display_or_format_access",
+                  "separate_strategy_model",
+                  "separate_guided_example",
+                  "bounded_reread_prompt",
+                  "alternate_complexity_adaptation"
+                ]
+              },
+              "construct_effect": {
+                "enum": [
+                  "preserves_construct",
+                  "changes_construct_and_limits_grade_level_claim"
+                ]
+              },
+              "policy_ref": {"$ref": "#/$defs/id"}
+            }
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "reading_burden": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "estimated_first_read_minutes",
+        "estimated_reread_minutes",
+        "planned_rereads",
+        "text_count",
+        "source_switching_demand",
+        "combined_writing_demand",
+        "chunk_plan",
+        "human_feasibility_review_ref"
+      ],
+      "properties": {
+        "estimated_first_read_minutes": {"type": "number", "minimum": 0},
+        "estimated_reread_minutes": {"type": "number", "minimum": 0},
+        "planned_rereads": {"type": "integer", "minimum": 0},
+        "text_count": {"type": "integer", "minimum": 0},
+        "source_switching_demand": {
+          "enum": ["none", "low", "moderate", "high"]
+        },
+        "combined_writing_demand": {"type": "string", "minLength": 1},
+        "chunk_plan": {"type": "string", "minLength": 1},
+        "navigation_demands": {"$ref": "#/$defs/id_array"},
+        "human_feasibility_review_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "learner_content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "directions",
+        "teaching_blocks",
+        "models",
+        "vocabulary_support",
+        "comprehension_checks",
+        "guided_tasks",
+        "independent_tasks",
+        "writing_scaffolds",
+        "rubric_refs",
+        "revision_tasks",
+        "remediation_routes",
+        "presentation_order"
+      ],
+      "properties": {
+        "directions": {"$ref": "#/$defs/nonempty_string_array"},
+        "teaching_blocks": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/teaching_block"},
+          "uniqueItems": true
+        },
+        "models": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/model"},
+          "uniqueItems": true
+        },
+        "vocabulary_support": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/vocabulary_entry"},
+          "uniqueItems": true
+        },
+        "comprehension_checks": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/comprehension_check"},
+          "uniqueItems": true
+        },
+        "guided_tasks": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/guided_task"},
+          "uniqueItems": true
+        },
+        "independent_tasks": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/independent_task"},
+          "uniqueItems": true
+        },
+        "writing_scaffolds": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/writing_scaffold"},
+          "uniqueItems": true
+        },
+        "rubric_refs": {"$ref": "#/$defs/id_array"},
+        "revision_tasks": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/revision_task"},
+          "uniqueItems": true
+        },
+        "remediation_routes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/remediation_route"},
+          "uniqueItems": true
+        },
+        "presentation_order": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/presentation_stage"}
+        }
+      }
+    },
+    "teaching_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "teaching_block_ref",
+        "title",
+        "explanation",
+        "why_it_matters",
+        "confusion_contrast",
+        "learner_decision"
+      ],
+      "properties": {
+        "teaching_block_ref": {"$ref": "#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "explanation": {"type": "string", "minLength": 1},
+        "why_it_matters": {"type": "string", "minLength": 1},
+        "confusion_contrast": {"type": "string", "minLength": 1},
+        "learner_decision": {"type": "string", "minLength": 1},
+        "text_refs": {"$ref": "#/$defs/id_array"}
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_ref",
+        "model_type",
+        "text_refs",
+        "separate_from_protected_attempt",
+        "prompt",
+        "think_aloud_steps"
+      ],
+      "properties": {
+        "model_ref": {"$ref": "#/$defs/id"},
+        "model_type": {
+          "enum": [
+            "reading_think_aloud",
+            "writing_process",
+            "language_analysis",
+            "research_source_use",
+            "worked_contrast"
+          ]
+        },
+        "text_refs": {"$ref": "#/$defs/nonempty_id_array"},
+        "separate_from_protected_attempt": {"const": true},
+        "prompt": {"type": "string", "minLength": 1},
+        "think_aloud_steps": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"$ref": "#/$defs/think_aloud_step"}
+        },
+        "completed_model_response": {"type": "string"}
+      }
+    },
+    "think_aloud_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["notice", "possibilities", "decision", "reason"],
+      "properties": {
+        "notice": {"type": "string", "minLength": 1},
+        "possibilities": {"type": "string", "minLength": 1},
+        "decision": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "vocabulary_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vocabulary_ref",
+        "term",
+        "support_reason",
+        "assessed_target",
+        "support_types",
+        "learner_support"
+      ],
+      "properties": {
+        "vocabulary_ref": {"$ref": "#/$defs/id"},
+        "term": {"type": "string", "minLength": 1},
+        "support_reason": {"type": "string", "minLength": 1},
+        "assessed_target": {"type": "boolean"},
+        "support_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "learner_friendly_meaning",
+              "context",
+              "morphology",
+              "pronunciation_decoding",
+              "cognate",
+              "syntax",
+              "multiple_meanings",
+              "example_nonexample",
+              "meaning_or_use_check"
+            ]
+          }
+        },
+        "learner_support": {"type": "string", "minLength": 1},
+        "independent_check_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "comprehension_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "check_ref",
+        "timing",
+        "text_refs",
+        "prompt",
+        "response_mode",
+        "feedback_move",
+        "answer_protection"
+      ],
+      "properties": {
+        "check_ref": {"$ref": "#/$defs/id"},
+        "timing": {
+          "enum": [
+            "after_directions",
+            "during_text",
+            "after_text",
+            "after_model",
+            "before_extended_response"
+          ]
+        },
+        "text_refs": {"$ref": "#/$defs/id_array"},
+        "prompt": {"type": "string", "minLength": 1},
+        "response_mode": {"type": "string", "minLength": 1},
+        "feedback_move": {"type": "string", "minLength": 1},
+        "answer_protection": {"type": "string", "minLength": 1}
+      }
+    },
+    "question_families": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "locate_recall",
+          "sequence_paraphrase_summarize",
+          "inference_interpretation",
+          "central_idea_theme_development",
+          "character_setting_viewpoint_purpose",
+          "structure_genre_craft_syntax",
+          "word_phrase_morphology_context",
+          "evidence_selection_comparison_reasoning",
+          "cross_text_media_perspective",
+          "argument_source_claim_evaluation",
+          "synthesis",
+          "transfer"
+        ]
+      }
+    },
+    "guided_task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_ref",
+        "text_refs",
+        "prompt",
+        "attempt_required",
+        "support_before_attempt",
+        "support_after_attempt",
+        "feedback_move",
+        "fade_level",
+        "question_families"
+      ],
+      "properties": {
+        "task_ref": {"$ref": "#/$defs/id"},
+        "text_refs": {"$ref": "#/$defs/id_array"},
+        "prompt": {"type": "string", "minLength": 1},
+        "attempt_required": {"const": true},
+        "support_before_attempt": {"$ref": "#/$defs/nonempty_string_array"},
+        "support_after_attempt": {"$ref": "#/$defs/nonempty_string_array"},
+        "feedback_move": {"type": "string", "minLength": 1},
+        "fade_level": {"enum": ["full", "partial", "minimal"]},
+        "question_families": {"$ref": "#/$defs/question_families"}
+      }
+    },
+    "independent_task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_ref",
+        "text_refs",
+        "prompt",
+        "evidence_type",
+        "writing_requirement",
+        "response_modes",
+        "permitted_support_refs",
+        "independence_boundary",
+        "question_families"
+      ],
+      "properties": {
+        "task_ref": {"$ref": "#/$defs/id"},
+        "text_refs": {"$ref": "#/$defs/id_array"},
+        "prompt": {"type": "string", "minLength": 1},
+        "evidence_type": {
+          "enum": [
+            "reading_response",
+            "annotation",
+            "discussion_response",
+            "language_application",
+            "writing_artifact",
+            "research_artifact",
+            "revision_artifact",
+            "selected_response"
+          ]
+        },
+        "writing_requirement": {
+          "enum": [
+            "none",
+            "short_constructed_response",
+            "extended_composition",
+            "process_artifact",
+            "revision_artifact"
+          ]
+        },
+        "response_modes": {"$ref": "#/$defs/nonempty_string_array"},
+        "permitted_support_refs": {"$ref": "#/$defs/id_array"},
+        "independence_boundary": {"type": "string", "minLength": 1},
+        "question_families": {"$ref": "#/$defs/question_families"},
+        "protected_question_ref": {"$ref": "#/$defs/id"},
+        "rubric_ref": {"$ref": "#/$defs/id"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "evidence_type": {
+                "enum": ["writing_artifact", "revision_artifact"]
+              }
+            },
+            "required": ["evidence_type"]
+          },
+          "then": {
+            "properties": {
+              "writing_requirement": {
+                "enum": [
+                  "short_constructed_response",
+                  "extended_composition",
+                  "process_artifact",
+                  "revision_artifact"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "writing_scaffold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scaffold_ref",
+        "stage",
+        "genre_or_task",
+        "support",
+        "content_neutral",
+        "authorship_boundary"
+      ],
+      "properties": {
+        "scaffold_ref": {"$ref": "#/$defs/id"},
+        "stage": {
+          "enum": [
+            "planning",
+            "drafting",
+            "revising",
+            "editing",
+            "publishing",
+            "reflection"
+          ]
+        },
+        "genre_or_task": {"type": "string", "minLength": 1},
+        "support": {"type": "string", "minLength": 1},
+        "content_neutral": {"const": true},
+        "authorship_boundary": {"type": "string", "minLength": 1},
+        "model_ref": {"$ref": "#/$defs/id"},
+        "rubric_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "revision_task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision_task_ref",
+        "revision_lenses",
+        "prompt",
+        "substantive_change_required",
+        "before_after_evidence_required"
+      ],
+      "properties": {
+        "revision_task_ref": {"$ref": "#/$defs/id"},
+        "revision_lenses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "idea",
+              "organization",
+              "evidence",
+              "reasoning",
+              "elaboration",
+              "voice",
+              "sentence_effectiveness",
+              "conventions"
+            ]
+          }
+        },
+        "prompt": {"type": "string", "minLength": 1},
+        "substantive_change_required": {"type": "boolean"},
+        "before_after_evidence_required": {"const": true},
+        "rubric_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "remediation_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "remediation_route_ref",
+        "diagnosed_gap_ids",
+        "different_instruction_statement",
+        "teaching_block_refs",
+        "model_refs",
+        "guided_task_refs",
+        "independent_recheck_ref",
+        "grade_level_transfer_ref"
+      ],
+      "properties": {
+        "remediation_route_ref": {"$ref": "#/$defs/id"},
+        "diagnosed_gap_ids": {"$ref": "#/$defs/nonempty_id_array"},
+        "different_instruction_statement": {"type": "string", "minLength": 1},
+        "teaching_block_refs": {"$ref": "#/$defs/nonempty_id_array"},
+        "model_refs": {"$ref": "#/$defs/nonempty_id_array"},
+        "guided_task_refs": {"$ref": "#/$defs/nonempty_id_array"},
+        "independent_recheck_ref": {"$ref": "#/$defs/id"},
+        "grade_level_transfer_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "presentation_stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ref"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "directions",
+            "text",
+            "teaching",
+            "model",
+            "vocabulary",
+            "check",
+            "guided_task",
+            "independent_task",
+            "writing_scaffold",
+            "rubric",
+            "revision",
+            "remediation"
+          ]
+        },
+        "ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "protected_content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question_keys",
+        "rubrics",
+        "answer_leakage_review_ref",
+        "writing_authorship_boundary"
+      ],
+      "properties": {
+        "question_keys": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/question_key"},
+          "uniqueItems": true
+        },
+        "rubrics": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/protected_rubric"},
+          "uniqueItems": true
+        },
+        "answer_leakage_review_ref": {"$ref": "#/$defs/id"},
+        "writing_authorship_boundary": {"type": "string", "minLength": 1}
+      }
+    },
+    "source_anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text_ref", "location", "relevance"],
+      "properties": {
+        "text_ref": {"$ref": "#/$defs/id"},
+        "location": {"type": "string", "minLength": 1},
+        "relevance": {"type": "string", "minLength": 1}
+      }
+    },
+    "question_key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question_ref",
+        "skill_ids",
+        "standard_refs",
+        "scoring_basis",
+        "reasoning",
+        "source_anchors",
+        "acceptable_variations",
+        "response_boundaries",
+        "misconception_ids"
+      ],
+      "properties": {
+        "question_ref": {"$ref": "#/$defs/id"},
+        "skill_ids": {"$ref": "#/$defs/nonempty_id_array"},
+        "standard_refs": {"$ref": "#/$defs/nonempty_id_array"},
+        "scoring_basis": {"type": "string", "minLength": 1},
+        "reasoning": {"type": "string", "minLength": 1},
+        "source_anchors": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/source_anchor"},
+          "uniqueItems": true
+        },
+        "acceptable_variations": {"$ref": "#/$defs/nonempty_string_array"},
+        "response_boundaries": {"type": "string", "minLength": 1},
+        "misconception_ids": {"$ref": "#/$defs/id_array"},
+        "rubric_ref": {"$ref": "#/$defs/id"}
+      }
+    },
+    "protected_rubric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rubric_ref", "learner_visible_ref", "criteria", "task_anchor_notes"],
+      "properties": {
+        "rubric_ref": {"$ref": "#/$defs/id"},
+        "learner_visible_ref": {"$ref": "#/$defs/id"},
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/rubric_criterion"}
+        },
+        "task_anchor_notes": {"$ref": "#/$defs/nonempty_string_array"}
+      }
+    },
+    "rubric_criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criterion_id", "description", "performance_distinctions"],
+      "properties": {
+        "criterion_id": {"$ref": "#/$defs/id"},
+        "description": {"type": "string", "minLength": 1},
+        "performance_distinctions": {"$ref": "#/$defs/nonempty_string_array"}
+      }
+    },
+    "tutor_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_version",
+        "lesson_id",
+        "lesson_profile",
+        "skill_ids",
+        "prerequisite_skill_ids",
+        "misconception_ids",
+        "text_refs_by_role",
+        "teaching_block_refs",
+        "model_refs",
+        "check_refs",
+        "guided_task_refs",
+        "independent_task_refs",
+        "remediation_route_refs",
+        "rubric_refs",
+        "hint_ladder_refs",
+        "evidence_definitions",
+        "reading_access_policy_ref",
+        "answer_policy_ref",
+        "writing_authorship_policy_ref",
+        "tutor_routes",
+        "data_only"
+      ],
+      "properties": {
+        "manifest_version": {"const": "ela-tutor-manifest-r1-draft"},
+        "lesson_id": {"$ref": "#/$defs/id"},
+        "lesson_profile": {"$ref": "#/$defs/lesson_profile"},
+        "skill_ids": {"$ref": "#/$defs/nonempty_id_array"},
+        "prerequisite_skill_ids": {"$ref": "#/$defs/id_array"},
+        "misconception_ids": {"$ref": "#/$defs/id_array"},
+        "text_refs_by_role": {"$ref": "#/$defs/text_refs_by_role"},
+        "teaching_block_refs": {"$ref": "#/$defs/id_array"},
+        "model_refs": {"$ref": "#/$defs/id_array"},
+        "check_refs": {"$ref": "#/$defs/id_array"},
+        "guided_task_refs": {"$ref": "#/$defs/id_array"},
+        "independent_task_refs": {"$ref": "#/$defs/id_array"},
+        "remediation_route_refs": {"$ref": "#/$defs/id_array"},
+        "rubric_refs": {"$ref": "#/$defs/id_array"},
+        "hint_ladder_refs": {"$ref": "#/$defs/id_array"},
+        "evidence_definitions": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_definition"},
+          "uniqueItems": true
+        },
+        "reading_access_policy_ref": {"$ref": "#/$defs/id"},
+        "answer_policy_ref": {"$ref": "#/$defs/id"},
+        "writing_authorship_policy_ref": {"$ref": "#/$defs/id"},
+        "tutor_routes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/tutor_route"},
+          "uniqueItems": true
+        },
+        "data_only": {"const": true}
+      }
+    },
+    "text_refs_by_role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "guided",
+        "independent",
+        "transfer",
+        "research_source",
+        "assessment"
+      ],
+      "properties": {
+        "model": {"$ref": "#/$defs/id_array"},
+        "guided": {"$ref": "#/$defs/id_array"},
+        "independent": {"$ref": "#/$defs/id_array"},
+        "transfer": {"$ref": "#/$defs/id_array"},
+        "research_source": {"$ref": "#/$defs/id_array"},
+        "assessment": {"$ref": "#/$defs/id_array"}
+      }
+    },
+    "evidence_definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "task_ref",
+        "skill_ids",
+        "text_refs",
+        "condition",
+        "independence_required",
+        "allowed_support_refs",
+        "fresh_transfer",
+        "occasion_id"
+      ],
+      "properties": {
+        "evidence_id": {"$ref": "#/$defs/id"},
+        "task_ref": {"$ref": "#/$defs/id"},
+        "skill_ids": {"$ref": "#/$defs/nonempty_id_array"},
+        "text_refs": {"$ref": "#/$defs/id_array"},
+        "condition": {
+          "enum": ["modeled", "guided", "independent", "assessment"]
+        },
+        "independence_required": {"type": "boolean"},
+        "allowed_support_refs": {"$ref": "#/$defs/id_array"},
+        "fresh_transfer": {"type": "boolean"},
+        "occasion_id": {"$ref": "#/$defs/id"}
+      }
+    },
+    "tutor_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route_ref", "signal", "strategy", "content_refs", "parameters"],
+      "properties": {
+        "route_ref": {"$ref": "#/$defs/id"},
+        "signal": {
+          "enum": [
+            "prerequisite_gap",
+            "misconception_pattern",
+            "incomplete_comprehension",
+            "weak_or_missing_evidence",
+            "writing_revision_needed",
+            "ready_for_fresh_transfer"
+          ]
+        },
+        "strategy": {
+          "enum": [
+            "clarify_directions",
+            "use_approved_access_support",
+            "present_model_ref",
+            "present_guided_task_ref",
+            "present_remediation_route_ref",
+            "request_reread_or_revision",
+            "present_transfer_task_ref"
+          ]
+        },
+        "content_refs": {"$ref": "#/$defs/nonempty_id_array"},
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "misconception_id": {"$ref": "#/$defs/id"},
+            "prerequisite_skill_id": {"$ref": "#/$defs/id"},
+            "text_ref": {"$ref": "#/$defs/id"},
+            "task_ref": {"$ref": "#/$defs/id"},
+            "policy_ref": {"$ref": "#/$defs/id"}
+          }
+        }
+      }
+    }
+  }
+}
