@@ -1,7 +1,7 @@
 8cf5004837e18e6ee17d2b6a5e55da276b7193aff11c14eb17048c6bd3e0fb8e  .gitattributes
 aa7497db7bfc0843b6a50f1d823d94d637da189a8ef8896c3571da343bb58ba5  README.md
 53b1e7956b8fb8193b1fd1208a44a5759825c5866b46e1cfb20f708d05f77cc8  active/answer-keys/grade-03/ma-g3-mathematics-u01-l01.key.json
-121224f556cc92f023a1687f28f83ab09933736aa51edf3e8b480f57f9641a9c  active/answer-keys/grade-03/ma-g3-mathematics-u01-l02.key.json
+2dbfbccd7092fc9886086b1dfaee330ef8162d3cd0a263482ed5736f47b21c25  active/answer-keys/grade-03/ma-g3-mathematics-u01-l02.key.json
 368e9c57f53f248f30eeb5d42c2fb455f174a1045b313b53aefda8562d19389a  active/answer-keys/grade-03/ma-g3-mathematics-u01-l03.key.json
 f2b422d575ea8fa58b30da5b36546dbe96c8305aa856eb472a6d422d28a357a2  active/answer-keys/grade-03/ma-g3-mathematics-u01-l04.key.json
 aa88a75a25f0f1afb7f3501435ee52ec46b24b581e92df5524c70705f227390d  active/answer-keys/grade-03/ma-g3-mathematics-u01-l05.key.json
@@ -1621,7 +1621,7 @@ bc54edbc7b377d3aeeff239b961dddde4b4c545e4be28f07c75b17ad1f989fd8  active/answer-
 92e9ddb8f25066cc80a379928a2e3457b3a781d95adf775346492a5f9a08fa03  active/answer-keys/grade-12/ma-g12-mathematics-u10-l17.key.json
 86ff564af6ae49ee91e53a3836610f608e7c1d11ecea027fb98b3c446d054537  active/answer-keys/grade-12/ma-g12-mathematics-u10-l18.key.json
 cce9bd7d8164e98276f99d1b18fbe955c47492d421658ade97c9f661b3fd93e9  active/packages/grade-03/ma-g3-mathematics-u01-l01.package.json
-62c572d9707a5e61c137aa3d2bcc42c97bc494a7afd7e5aac336daf878a31557  active/packages/grade-03/ma-g3-mathematics-u01-l02.package.json
+0011c9dcedfd099f236e0b4fd6145b68118b1f30eb21b57d1284b8a0f4e449e2  active/packages/grade-03/ma-g3-mathematics-u01-l02.package.json
 3eb0199d7b85a261142dea6db2f466a4420a764e9ff0eb79551db844e0200424  active/packages/grade-03/ma-g3-mathematics-u01-l03.package.json
 b949dc9eb295a15a0bb2787c01a8bab7a97365337598c26e3b97ae0b9b520f9d  active/packages/grade-03/ma-g3-mathematics-u01-l04.package.json
 beb20719041ab80209b243f3795903f3d58bf54bfc55cf8ab608c420596707c3  active/packages/grade-03/ma-g3-mathematics-u01-l05.package.json
@@ -3240,7 +3240,7 @@ ee4c6ff470338eccf7e8a8c5a14167020f12356998fd39987415f3fc127d8452  active/package
 eb48ed56487f91bfdf1d1dfcde140327e418ae1e3961674596000d0a79f650a1  active/packages/grade-12/ma-g12-mathematics-u10-l16.package.json
 a7637be4d5ceaca178a85f525b93e89605b25d4960811e93263c84d42cf5fdb3  active/packages/grade-12/ma-g12-mathematics-u10-l17.package.json
 7074b5596c90e74af9d441e79cbfc3e581eda68b0a92367792ac6a542d10c6be  active/packages/grade-12/ma-g12-mathematics-u10-l18.package.json
-a223ad241ad9c3075d0bf00750472f0bac0f6c068a0662f69ea3b76ce6d3f491  build.py
+eb8a8fc7c2659130027c444b4aaf9badcb3056ed88990b1da465f3200e9d818e  build.py
 39a5b29dc7fb13cb4a309ba49939d101463b96105fdd1770dbbca2ccb402bf7c  evidence/content-repair-r2.json
 955a455573388d562d78e7185a36c4b0b9897995363bd799b719bfbf842b0e75  evidence/grade8-integration/INTEGRATION-PLAN.md
 11c550aaddefa7952175557421b57dfca9972d0758808b358b7facf16e28bc50  evidence/grade8-integration/README.md
@@ -3260,8 +3260,9 @@ d1c1550ee513b580f1b298959421146f07366ea41f233fae5ab8ce674304fac9  evidence/grade
 28f0be1bfbd4434ddfd12f5c01eb3558872aab0701d093fd82b6d6c3fc9c927f  evidence/oracle-evidence.json
 055da5124b2d371ee514c3595362672288f15c0cb00a8cb849d88c9e19b7d002  evidence/oracle-sources/grades-03-04/src/blueprint.ts
 bc6e14129c627454963e9db2a1fffd683ac7715efcb930e062643428ae3cf086  evidence/oracle-sources/grades-03-04/src/commonErrors.ts
-4b4df71d70b683d405f66e66ee4f4e70bc34779a1a85550042373a0f58e74942  evidence/oracle-sources/grades-03-04/src/emit.ts
+c27e3b3f751b9e0d26ce569a078978c0f6aa0a3422ad158cc999e3a1c9d828f3  evidence/oracle-sources/grades-03-04/src/emit.ts
 7f50f80c6fc758fdabd302582a79bd1b058b8304430546f35e5eb95ce955ac42  evidence/oracle-sources/grades-03-04/src/g34/core.ts
+3058be6598c681d1b750b6ddc2a754b7453b9f937053732ea16c23af58d9aa02  evidence/oracle-sources/grades-03-04/src/g34/grade3RoundingSampleR1.ts
 7446d51cb73d4d949fa686499aa92a533062fca5c34cc90d122f3a5ffff8a0c4  evidence/oracle-sources/grades-03-04/src/g34/grade3Unit1.ts
 5bade0ae500dbd2477186bbf571c5279095493517d541c84abb5b44dc05df126  evidence/oracle-sources/grades-03-04/src/g34/grade3Unit10.ts
 511f08a2cc051f5fb1bc15bbaedd825e2fd9820e18ccc0d1fe3b4f3f0058aea8  evidence/oracle-sources/grades-03-04/src/g34/grade3Unit2.ts
@@ -3295,10 +3296,13 @@ a1a864a2117b3f1bd98ec6331bd59b4f8858393572014117e73dbccc7f13203f  evidence/oracl
 36b1e8412b8f64b78c422016e6dd801f90f1c8c263120d224f04d208ffbebd6d  evidence/oracle-sources/grades-03-04/src/types.ts
 7fbee24d4969356ccb7edb17024a13f14558cf024e4c5e73ee9cc319b6acc6db  evidence/oracle-sources/grades-03-04/src/validate.ts
 5c086aabf5fdbb1047029368c230ee0c541b9691816e83f1f65d78e59a071cfc  evidence/oracle-sources/grades-03-04/tests/corpus.test.ts
+a4ab29dbeff4a4fb7dc3450dd1eaa6131c8060f64d6c1031405834de16dd6658  evidence/oracle-sources/grades-03-04/tests/grade3RoundingSampleR1.test.ts
+709ae9a92bf772d21374787a1bc610b528927235305173ab5d2abcb0a119ff47  evidence/oracle-sources/grades-03-04/tooling/generateGrade3RoundingSampleR1.ts
 247b45a955abadc296b2546127e108c70d978f220551ad29135588d949af481e  evidence/oracle-sources/grades-03-04/tooling/run.mjs
 d0021769b2a1cdb51e4545f3e6623ba84af62e7e045bf04680dcefb97815e44f  evidence/oracle-sources/grades-03-04/tooling/tsconfig.json
+88995f0855c5d7ce1eb21683fc2cb82a5c9442be0cf88ca503b5173bd354b36f  evidence/oracle-sources/grades-03-04/tooling/validateGrade3RoundingSampleR1.py
 9eaa2da4bca3d194d68a76b931e63d13a51a751435bfcfc68265819c9df84b96  evidence/oracle-sources/grades-03-04/tooling/vitest.config.mts
-0c51d291248281001cb0042d7060a26701c50eb16f7bf3c5334d66449c2fcd2d  evidence/oracle-sources/grades-03-04/upstream-corpus-manifest.json
+5e74f61ce4ed98ac5aa92fa1c7004b62e8b4144c18ccbac5c873ad8d9b9793b2  evidence/oracle-sources/grades-03-04/upstream-corpus-manifest.json
 3cafe6c10ff98b640a73cd7b0323b44ad902226d7ebfefd985fccd5b75442286  evidence/oracle-sources/grades-05-12/src/blueprint.ts
 b5dd656d52963efe3e1de69851ed0d63b257d44176d17cd7e62cf662ea2ed534  evidence/oracle-sources/grades-05-12/src/canonicalItemBank.ts
 f091145059cd9687b0f1c4d2ac70aff92e511b74faf24ed87713c56479041706  evidence/oracle-sources/grades-05-12/src/commonErrors.ts
@@ -3363,7 +3367,7 @@ d0021769b2a1cdb51e4545f3e6623ba84af62e7e045bf04680dcefb97815e44f  evidence/oracl
 ebe30e1979a6824a1d4ef434c759da06c57d5c3ff42cbc775f313f636366d64e  evidence/oracle-sources/grades-05-12/tooling/vitest.config.mts
 f0e7fd183898cf270a32147537894c7ac07ab8c77d1efc16377825570d94c806  evidence/oracle-sources/grades-05-12/upstream-corpus-manifest.json
 cf08b933223efec12c45babf80f9bde96c69fc247db8836e5a57fcb9812dca3b  grade8-standards-proof.json
-67b25a52aa98838930f53a9938c7f03085d2d6c2129aeaad85cf3b04f1f776dd  manifest.json
+7dfe6ac58d3f3709bb2c87f9ba5db521d8c232b67c0f1918f353e73504be48fd  manifest.json
 572bc7c5e98b08d3989880949767fd2949efeb1d94db0452b39fe9400037a6aa  reserve/answer-keys/grade-08/ma-g8-mathematics-u10-l10.key.json
 f17667fbc525c98270c220a773b6fae5ddaf329322018f2763199bdbd9e35514  reserve/answer-keys/grade-08/ma-g8-mathematics-u10-l13.key.json
 1d8391bba155dbbe19ed910aa90b80870bfd2198d52f1a3a6f840d3c5abab909  reserve/answer-keys/grade-08/ma-g8-mathematics-u10-l14.key.json
@@ -3386,4 +3390,4 @@ d744faa324050af15b24ed055090c9274f89434881e56222c9c9a0da220b8799  schedules/grad
 099bd72e9ed4201da5868bfa65314880fb65988842ad79ffc54f8b17b19867de  schemas/grades-03-04/student-work-package.schema.json
 d6bbe074d08468752e3b8e270b0fd798c15a0e69abcd9f1bb36063c278131c38  schemas/grades-05-12/answer-key.schema.json
 d39314a01b1fe4272f881487065e9a1ce9d3493a0404e6c64ac85e629354729f  schemas/grades-05-12/student-work-package.schema.json
-a8f6336fc5194da7e4a18f3b029be1b05f4ea74d1cb7a4905ab39ea3426f116b  validate.py
+8f213a547259bb9ce2e49dd117518bad9989a4cd56315b90cc5cbf25e8f7d1c3  validate.py

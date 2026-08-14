@@ -34,6 +34,7 @@ CONTENT_REPAIR_LESSONS = {
     "ma-g4-mathematics-u10-l02",
     "ma-g4-mathematics-u10-l03",
 }
+GRADE3_ROUNDING_SAMPLE_R1_LESSONS = {"ma-g3-mathematics-u01-l02"}
 WITHDRAWN = {
     "ma-g8-mathematics-u10-l10",
     "ma-g8-mathematics-u10-l13",
@@ -218,14 +219,15 @@ changed_active = {
     if path.startswith("curriculum-production/final/mathematics/active/")
 }
 scope_errors = []
-if changed_active != CONTENT_REPAIR_LESSONS:
-    scope_errors.append(f"active lesson diff {sorted(changed_active ^ CONTENT_REPAIR_LESSONS)}")
+expected_active_changes = CONTENT_REPAIR_LESSONS | GRADE3_ROUNDING_SAMPLE_R1_LESSONS
+if changed_active != expected_active_changes:
+    scope_errors.append(f"active lesson diff {sorted(changed_active ^ expected_active_changes)}")
 if any("/grade-05/" in path or "/grade-07/" in path or "/grade-08/" in path
        or "/grade-09/" in path or "/grade-10/" in path or "/grade-11/" in path
        or "/grade-12/" in path for path in changed_paths):
     scope_errors.append("a Grade 5-12 learner package or key changed")
-check("content-repair-scope", not scope_errors,
-      scope_errors[:3] or "exactly 9 active G3/G4 lessons; G5-12 Math content unchanged")
+check("content-repair-and-sample-scope", not scope_errors,
+      scope_errors[:3] or "exactly 9 repair lessons + 1 isolated G3 sample; G5-12 Math content unchanged")
 
 standard_errors = []
 for lesson_id in sorted(CONTENT_REPAIR_LESSONS):
@@ -321,6 +323,12 @@ check("content-repair-evidence", manifest.get("contentRepairR2", {}).get("affect
       and repair_evidence["sectionEvidence"]["emptyMasteryAfter"] == 0
       and repair_evidence["sectionEvidence"]["emptyIndependentPracticeAfter"] == 0,
       "9 affected lessons bound to zero-empty post-repair evidence")
+sample_manifest = manifest.get("grade3RoundingSampleR1", {})
+check("grade3-rounding-sample-r1-evidence",
+      sample_manifest.get("lessonId") == "ma-g3-mathematics-u01-l02"
+      and sample_manifest.get("scope") == "one active Grade 3 lesson"
+      and sample_manifest.get("admissionChanged") is False,
+      "one canonical active lesson; admission contracts unchanged")
 
 width = max(len(name) for name, _, _ in RESULTS)
 for name, ok, detail in RESULTS:

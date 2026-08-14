@@ -16,27 +16,27 @@
   "activeSchedulePolicy": "180 lessons per grade; reserve material is never a school-day lesson",
   "totals": {
     "activeLessons": 1620,
-    "items": 15973,
-    "gradedItems": 14399,
-    "workedExamples": 1574,
-    "keyedAnswers": 14399
+    "items": 15993,
+    "gradedItems": 14417,
+    "workedExamples": 1576,
+    "keyedAnswers": 14417
   },
   "reserveLessons": 4,
   "answerAuthority": {
     "generator-authority": 4914,
-    "recomputed": 9485
+    "recomputed": 9503
   },
   "byGrade": [
     {
       "grade": 3,
       "courseId": "ma-g3-mathematics",
       "activeLessons": 180,
-      "items": 1583,
-      "gradedItems": 1420,
-      "workedExamples": 163,
-      "keyedAnswers": 1420,
+      "items": 1603,
+      "gradedItems": 1438,
+      "workedExamples": 165,
+      "keyedAnswers": 1438,
       "answerAuthority": {
-        "recomputed": 1420
+        "recomputed": 1438
       }
     },
     {
@@ -160,6 +160,14 @@
     "evidence": "evidence/content-repair-r2.json",
     "emptyMasteryAfter": 0,
     "emptyIndependentPracticeAfter": 0
+  },
+  "grade3RoundingSampleR1": {
+    "lessonId": "ma-g3-mathematics-u01-l02",
+    "scope": "one active Grade 3 lesson",
+    "source": "evidence/oracle-sources/grades-03-04/src/g34/grade3RoundingSampleR1.ts",
+    "generator": "evidence/oracle-sources/grades-03-04/tooling/generateGrade3RoundingSampleR1.ts",
+    "directorEvidence": "docs/curriculum-quality/elementary-math/sample-r1/G3_ROUNDING_SAMPLE_R1.md",
+    "admissionChanged": false
   },
   "inputs": {
     "mac/g34-math-production-r1": "c3b24f047b8aebd5e08f9b8022eef20ea187e190",
