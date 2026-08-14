@@ -24,30 +24,91 @@
     "profile": "concept-build-introduction",
     "sectionKinds": [
       "instructional-example",
+      "instructional-example",
+      "instructional-example",
+      "instructional-example",
       "guided-practice",
       "independent-practice",
-      "mastery-check"
+      "mastery-check",
+      "guided-practice",
+      "extension"
     ]
   },
   "sections": [
     {
+      "sectionId": "learn-01",
+      "kind": "instructional-example",
+      "title": "Learn: Find the Nearby Hundreds",
+      "directions": "Today you will learn how to round a number to the nearest hundred. Rounding finds a nearby hundred that is easier to use. First, find the two hundreds around the number. For 327, the nearby hundreds are 300 and 400. Picture a number line: 300 — 327 — 400.",
+      "items": []
+    },
+    {
+      "sectionId": "learn-02",
+      "kind": "instructional-example",
+      "title": "Learn: Let the Tens Digit Help",
+      "directions": "The tens digit tells which hundred is nearer. A tens digit from 0 through 4 means the number is closer to the lower hundred. A tens digit from 5 through 9 means the number is halfway or closer to the higher hundred. The ones digit does not make this choice.",
+      "items": []
+    },
+    {
+      "sectionId": "learn-03",
+      "kind": "instructional-example",
+      "title": "Learn: What Happens Halfway?",
+      "directions": "A number ending in 50 is exactly halfway between two hundreds. It is the same distance from both. Our rounding rule says to choose the higher hundred when the tens digit is 5. So halfway numbers round up.",
+      "items": []
+    },
+    {
       "sectionId": "ex",
       "kind": "instructional-example",
-      "title": "Instructional examples",
-      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "title": "Examples",
+      "directions": "Read each example. Notice the nearby hundreds, the tens digit, and why the answer is nearer.",
       "items": [
         {
           "ref": "ma-g3-mathematics-u01-l02#ex-01",
           "kind": "worked-example",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "itemType": "round-to-nearest-hundred-sample-r1",
           "standard": "3.NBT.1",
           "difficulty": 1,
-          "prompt": "Round 647 to the nearest 100.",
+          "prompt": "Example 1 — Round 243 to the nearest hundred.",
           "workedSolution": {
             "steps": [
-              "The nearest multiples of 100 are 600 and 700.",
-              "647 is 47 away from 600 and 53 away from 700.",
-              "600 is nearer, so 647 rounds to 600."
+              "Step 1: 243 is between 200 and 300.",
+              "Step 2: The tens digit is 4.",
+              "Step 3: 4 is less than 5, so choose 200.",
+              "Why: 243 is 43 away from 200 and 57 away from 300. It is closer to 200."
+            ],
+            "answer": "200"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "round-to-nearest-hundred-sample-r1",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Example 2 — Round 678 to the nearest hundred.",
+          "workedSolution": {
+            "steps": [
+              "Step 1: 678 is between 600 and 700.",
+              "Step 2: The tens digit is 7.",
+              "Step 3: 7 is 5 or more, so choose 700.",
+              "Why: 678 is 78 away from 600 and only 22 away from 700. It is closer to 700."
+            ],
+            "answer": "700"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ex-03",
+          "kind": "worked-example",
+          "itemType": "round-to-nearest-hundred-sample-r1",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Example 3 — Round 550 to the nearest hundred.",
+          "workedSolution": {
+            "steps": [
+              "Step 1: 550 is between 500 and 600.",
+              "Step 2: The tens digit is 5.",
+              "Step 3: A 5 means the number is halfway, so choose the higher hundred, 600.",
+              "Why: 550 is 50 away from both hundreds. When a number is halfway, we round up."
             ],
             "answer": "600"
           }
@@ -57,99 +118,175 @@
     {
       "sectionId": "gp",
       "kind": "guided-practice",
-      "title": "Guided practice",
-      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "title": "Let's Try One",
+      "directions": "Work with your teaching adult. The clues get smaller as you go.",
       "items": [
         {
           "ref": "ma-g3-mathematics-u01-l02#gp-01",
-          "kind": "multiple-choice",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "itemType": "identify-bounding-hundreds",
           "standard": "3.NBT.1",
           "difficulty": 1,
-          "prompt": "Round 89 to the nearest 10.",
+          "prompt": "234 is between which two hundreds?",
+          "kind": "multiple-choice",
           "choices": [
-            "80",
-            "89",
-            "90",
-            "91"
+            "100 and 200",
+            "200 and 300",
+            "300 and 400",
+            "230 and 240"
           ]
         },
         {
           "ref": "ma-g3-mathematics-u01-l02#gp-02",
-          "kind": "multiple-choice",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "itemType": "identify-tens-digit",
           "standard": "3.NBT.1",
           "difficulty": 1,
-          "prompt": "Round 45 to the nearest 10.",
+          "prompt": "Look at 681. Which digit is in the tens place?",
+          "kind": "multiple-choice",
           "choices": [
-            "40",
-            "45",
-            "50",
-            "51"
+            "6",
+            "8",
+            "1",
+            "0"
           ]
         },
         {
           "ref": "ma-g3-mathematics-u01-l02#gp-03",
+          "itemType": "choose-rounding-direction",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "762 is between 700 and 800. Should you round down or up?",
           "kind": "multiple-choice",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "choices": [
+            "down to 700",
+            "up to 800",
+            "stay at 762",
+            "down to 760"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#gp-04",
+          "itemType": "round-to-nearest-hundred-sample-r1",
           "standard": "3.NBT.1",
           "difficulty": 2,
-          "prompt": "Round 424 to the nearest 10.",
-          "choices": [
-            "424",
-            "421",
-            "420",
-            "430"
-          ]
+          "prompt": "419 is between 400 and 500. Round 419 to the nearest hundred.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#gp-05",
+          "itemType": "round-and-explain",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 853 to the nearest hundred. Tell how the tens digit helped you decide.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
         }
       ]
     },
     {
       "sectionId": "ip",
       "kind": "independent-practice",
-      "title": "Independent practice",
-      "directions": "Work on your own. Show the steps that produced each answer.",
+      "title": "Your Turn",
+      "directions": "Work on your own. Show a number line, place-value thinking, or words when a question asks you to explain.",
       "items": [
         {
           "ref": "ma-g3-mathematics-u01-l02#ip-01",
-          "kind": "multiple-choice",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "itemType": "round-to-nearest-hundred-sample-r1",
           "standard": "3.NBT.1",
           "difficulty": 1,
-          "prompt": "Round 57 to the nearest 10.",
-          "choices": [
-            "61",
-            "50",
-            "60",
-            "57"
-          ]
+          "prompt": "Round 142 to the nearest hundred.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
         },
         {
           "ref": "ma-g3-mathematics-u01-l02#ip-02",
-          "kind": "multiple-choice",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "itemType": "round-to-nearest-hundred-sample-r1",
           "standard": "3.NBT.1",
-          "difficulty": 2,
-          "prompt": "Round 953 to the nearest 10.",
-          "choices": [
-            "950",
-            "960",
-            "951",
-            "953"
-          ]
+          "difficulty": 1,
+          "prompt": "Round 684 to the nearest hundred.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
         },
         {
           "ref": "ma-g3-mathematics-u01-l02#ip-03",
-          "kind": "multiple-choice",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "itemType": "round-halfway",
           "standard": "3.NBT.1",
           "difficulty": 2,
-          "prompt": "Round 653 to the nearest 10.",
+          "prompt": "Round 450 to the nearest hundred.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-04",
+          "itemType": "round-to-nearest-hundred-sample-r1",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "Which is 326 rounded to the nearest hundred?",
+          "kind": "multiple-choice",
           "choices": [
-            "650",
-            "651",
-            "660",
-            "653"
+            "300",
+            "320",
+            "330",
+            "400"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-05",
+          "itemType": "rounding-application",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "A museum had 781 visitors. About how many visitors is that, rounded to the nearest hundred?",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-06",
+          "itemType": "rounding-error-analysis",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "A student says 249 rounds to 300 because 9 is more than 5. Is the student correct? Explain the mistake.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-07",
+          "itemType": "round-and-explain",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 615 to the nearest hundred. Explain why your answer is nearer than the other hundred.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-08",
+          "itemType": "round-to-nearest-hundred-sample-r1",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 999 to the nearest hundred.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-09",
+          "itemType": "rounding-application",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "A food drive collected 352 cans. About how many cans is that, rounded to the nearest hundred?",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#ip-10",
+          "itemType": "round-to-nearest-hundred-sample-r1",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Which hundred is closest to 574?",
+          "kind": "multiple-choice",
+          "choices": [
+            "500",
+            "570",
+            "600",
+            "700"
           ]
         }
       ]
@@ -157,36 +294,143 @@
     {
       "sectionId": "mc",
       "kind": "mastery-check",
-      "title": "Mastery check",
-      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "title": "Check What You Know",
+      "directions": "Try these fresh problems without help. Show or tell your thinking when asked.",
       "items": [
         {
           "ref": "ma-g3-mathematics-u01-l02#mc-01",
-          "kind": "multiple-choice",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "itemType": "round-to-nearest-hundred-sample-r1",
           "standard": "3.NBT.1",
           "difficulty": 1,
-          "prompt": "Round 11 to the nearest 10.",
-          "choices": [
-            "11",
-            "20",
-            "9",
-            "10"
-          ]
+          "prompt": "Round 214 to the nearest hundred.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
         },
         {
           "ref": "ma-g3-mathematics-u01-l02#mc-02",
-          "kind": "multiple-choice",
-          "itemType": "round-to-nearest-ten-or-hundred",
+          "itemType": "round-to-nearest-hundred-sample-r1",
           "standard": "3.NBT.1",
           "difficulty": 2,
-          "prompt": "Round 192 to the nearest 10.",
+          "prompt": "Which is 863 rounded to the nearest hundred?",
+          "kind": "multiple-choice",
           "choices": [
-            "191",
-            "192",
-            "200",
-            "190"
+            "800",
+            "860",
+            "900",
+            "1,000"
           ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#mc-03",
+          "itemType": "rounding-application",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "A school used 547 sheets of paper. About how many sheets is that, rounded to the nearest hundred?",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#mc-04",
+          "itemType": "round-and-explain",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "Round 650 to the nearest hundred. Explain what happens because the tens digit is 5.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#mc-05",
+          "itemType": "rounding-error-analysis",
+          "standard": "3.NBT.1",
+          "difficulty": 2,
+          "prompt": "A student says 392 rounds to 300. Is the student correct? Explain how you know.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        }
+      ]
+    },
+    {
+      "sectionId": "rm",
+      "kind": "guided-practice",
+      "title": "Need Help?",
+      "directions": "Remember: find the two hundreds around the number. Then look at the tens digit. 0–4 means choose the lower hundred. 5–9 means choose the higher hundred.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l02#rm-01",
+          "itemType": "identify-bounding-hundreds",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "371 is between which two hundreds?",
+          "kind": "multiple-choice",
+          "choices": [
+            "200 and 300",
+            "300 and 400",
+            "370 and 380",
+            "400 and 500"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#rm-02",
+          "itemType": "identify-tens-digit",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "Look at 526. Which digit helps you round to the nearest hundred?",
+          "kind": "multiple-choice",
+          "choices": [
+            "5",
+            "2",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#rm-03",
+          "itemType": "choose-rounding-direction",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "487 is between 400 and 500. Should you round down or up?",
+          "kind": "multiple-choice",
+          "choices": [
+            "down to 400",
+            "up to 500",
+            "stay at 487",
+            "down to 480"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#rm-04",
+          "itemType": "round-to-nearest-hundred-sample-r1",
+          "standard": "3.NBT.1",
+          "difficulty": 1,
+          "prompt": "Now put the steps together. Round 438 to the nearest hundred.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Challenge",
+      "directions": "These two problems are optional. Use what you know about halfway points and groups of numbers.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u01-l02#xt-01",
+          "itemType": "rounding-boundary-challenge",
+          "standard": "3.NBT.1",
+          "difficulty": 3,
+          "prompt": "What is the least whole number that rounds to 800 when rounding to the nearest hundred? Explain why.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
+        },
+        {
+          "ref": "ma-g3-mathematics-u01-l02#xt-02",
+          "itemType": "rounding-range-challenge",
+          "standard": "3.NBT.1",
+          "difficulty": 3,
+          "prompt": "Maya says every whole number from 600 through 699 rounds to 600. Is she right? Explain.",
+          "kind": "constructed-response",
+          "responseExpectation": "Write your answer. Show or tell how you know."
         }
       ]
     }
@@ -194,7 +438,7 @@
   "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u01-l02.key.json",
   "integrity": {
     "corpusVersion": "1.0.0",
-    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
-    "seed": "1.0.0|ma-g3-mathematics-u01-l02"
+    "itemSource": "curriculum-production/final/mathematics/evidence/oracle-sources/grades-03-04/src/g34/grade3RoundingSampleR1.ts#emitGrade3RoundingSampleR1",
+    "seed": "1.0.0|ma-g3-mathematics-u01-l02|sample-r1"
   }
 }
