@@ -263,7 +263,11 @@ export default function App() {
 
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
   // Local writes above already persisted; this pushes async + pulls on open/reconnect.
-  const sync = useSync(state, setState)
+  // Family Pilot has a separate strict hosted-sync boundary. Until its future
+  // convergence is activated, this route is fully isolated from legacy
+  // whole-Profile auth, reads, and writes.
+  const legacyProfileSyncEnabled = !(screen.kind === 'familyPilot' && familyPilotEnabled)
+  const sync = useSync(state, setState, legacyProfileSyncEnabled)
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
 
   useEffect(() => {

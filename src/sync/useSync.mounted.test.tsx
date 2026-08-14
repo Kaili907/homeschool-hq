@@ -397,7 +397,7 @@ describe('mounted useSync lifecycle and import safety', () => {
     return state
   }
 
-  async function mount(initialState: AppState) {
+  async function mount(initialState: AppState, legacyProfileSyncEnabled = true) {
     const { useSync } = await import('./useSync')
     const { createRoot } = await import('react-dom/client')
 
@@ -407,7 +407,7 @@ describe('mounted useSync lifecycle and import safety', () => {
       useEffect(() => {
         void saveAppState(state)
       }, [state])
-      latestApi = useSync(state, setState)
+      latestApi = useSync(state, setState, legacyProfileSyncEnabled)
       updateHostState = setState
       return null
     }
@@ -493,6 +493,26 @@ describe('mounted useSync lifecycle and import safety', () => {
     expect(latestApi?.status.decision).toBeNull()
     expect(latestApi?.status.error).toBeNull()
   }
+
+  it('does not restore auth, pull, or push when legacy Profile sync is route-disabled', async () => {
+    const state = defaultAppState()
+    transport.sessionUser = {
+      id: 'household-a',
+      email: 'household-a@example.com',
+    }
+    await prepareState('household-a', state, true)
+    await mount(state, false)
+    await settle()
+
+    expect(latestApi?.status).toMatchObject({
+      configured: false,
+      user: null,
+      binding: 'signed-out',
+    })
+    expect(transport.authListeners.size).toBe(0)
+    expect(transport.pull).not.toHaveBeenCalled()
+    expect(transport.push).not.toHaveBeenCalled()
+  })
 
   it('successfully finalizes an ordinary use-cloud replacement', async () => {
     const local = defaultAppState()

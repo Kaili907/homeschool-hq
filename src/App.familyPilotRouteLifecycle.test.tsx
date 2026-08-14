@@ -7,10 +7,14 @@ import type { AppState } from './types'
 
 const harness = vi.hoisted(() => ({
   picker: null as null | { onPick: (id: string) => void; onGrownUps: () => void },
+  legacySyncEnabled: null as boolean | null,
 }))
 
 vi.mock('./sync/useSync', () => ({
-  useSync: () => ({ status: { user: null, binding: 'none', provenance: 'unverified' } }),
+  useSync: (_state: unknown, _setState: unknown, legacySyncEnabled: boolean) => {
+    harness.legacySyncEnabled = legacySyncEnabled
+    return { status: { user: null, binding: 'none', provenance: 'unverified' } }
+  },
 }))
 vi.mock('./components/Picker', () => ({
   Picker: (props: { onPick: (id: string) => void; onGrownUps: () => void }) => {
@@ -114,6 +118,7 @@ describe('App final Family Pilot route lifecycle', () => {
 
   beforeEach(() => {
     harness.picker = null
+    harness.legacySyncEnabled = null
     root = null
     pathname = '/family-pilot'
     storage = new MemStorage()
@@ -196,6 +201,7 @@ describe('App final Family Pilot route lifecycle', () => {
     await mountApp(seeded('p1'))
     expect(hasText(container, 'Final Family Pilot')).toBe(false)
     expect(hasText(container, "Who's learning today?")).toBe(true)
+    expect(harness.legacySyncEnabled).toBe(true)
   })
 
   it.each(['false', 'TRUE', '1', 'yes'])(
@@ -214,6 +220,7 @@ describe('App final Family Pilot route lifecycle', () => {
       await mountApp(seeded(active))
       await waitForText('Final Family Pilot')
       expect(harness.picker).toBeNull()
+      expect(harness.legacySyncEnabled).toBe(false)
       expect(pathname).toBe('/family-pilot')
     },
   )
@@ -224,5 +231,6 @@ describe('App final Family Pilot route lifecycle', () => {
     await waitForText('Final Family Pilot')
     await press(findButton('Back home'))
     expect(pathname).toBe('/')
+    expect(harness.legacySyncEnabled).toBe(true)
   })
 })

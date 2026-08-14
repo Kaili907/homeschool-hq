@@ -154,8 +154,12 @@ function profilesFromRows(rows: RemoteProfileRow[]): Record<string, Profile> {
 export function useSync(
   state: AppState,
   setState: Dispatch<SetStateAction<AppState>>,
+  legacyProfileSyncEnabled = true,
 ): SyncApi {
-  const configured = supabaseConfigured()
+  // Family Pilot owns a separate, deny-by-default hosted-sync contract. Its
+  // route must never restore auth, pull, or push through this whole-Profile
+  // legacy transport.
+  const configured = legacyProfileSyncEnabled && supabaseConfigured()
   const [online, setOnline] = useState(
     typeof navigator === 'undefined' ? true : navigator.onLine,
   )
@@ -1174,13 +1178,21 @@ export function useSync(
   const signIn = useCallback(
     async (email: string, password: string) => {
       safeSetError(null)
+      if (!configured) {
+        return {
+          ok: false,
+          error: legacyProfileSyncEnabled
+            ? 'Cloud sync is not configured.'
+            : 'Legacy Profile sync is unavailable in Family Pilot.',
+        }
+      }
       const result = await signInWithPassword(email, password)
       if (!result.ok) return { ok: false, error: result.error }
       userRef.current = result.user
       if (mountedRef.current) setUser(result.user)
       return { ok: true }
     },
-    [safeSetError],
+    [configured, legacyProfileSyncEnabled, safeSetError],
   )
 
   const signOut = useCallback(async () => {
@@ -1196,8 +1208,8 @@ export function useSync(
       setError(null)
     }
     await purgeVoiceCache()
-    await signOutRemote()
-  }, [abortOperation])
+    if (configured) await signOutRemote()
+  }, [abortOperation, configured])
 
   const verifyDecisionCloud = useCallback(
     async (
