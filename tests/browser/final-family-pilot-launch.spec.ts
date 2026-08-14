@@ -110,6 +110,20 @@ async function assign(page: Page, name: string, lesson: Lesson) {
   await expect(page.getByRole('heading', { name: 'Current work' }).locator('..').getByText(lesson.title)).toBeVisible()
 }
 
+async function configureSchoolPlan(page: Page, name: string) {
+  await parentStudent(page, name)
+  await page.getByRole('button', { name: 'School Plan' }).click()
+  await expect(page.getByRole('heading', { name: `${name}’s automatic daily plan` })).toBeVisible()
+  await page.getByLabel('School year starts').fill('2026-01-01')
+  await page.getByLabel('School year ends').fill('2027-12-31')
+  for (const day of ['Saturday', 'Sunday']) {
+    const checkbox = page.getByLabel(day, { exact: true })
+    if (!await checkbox.isChecked()) await checkbox.check()
+  }
+  await page.getByRole('button', { name: 'Save School Plan' }).click()
+  await expect(page.getByRole('status')).toContainText('School Plan saved')
+}
+
 async function openStudent(page: Page, name: string, pin?: string) {
   const learner = page.getByRole('listitem', { name: `Continue as ${name}` })
   const studentMode = page.getByRole('button', { name: 'Student', exact: true })
@@ -474,6 +488,32 @@ test('dashboard sign out clears learner custody before leaving Family Pilot', as
   await page.goto(APP_URL)
   await expect(page.getByRole('heading', { name: 'Who’s studying?' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Hello, Sign' })).toHaveCount(0)
+})
+
+test('Parent School Plan produces idempotent automatic Today work without learner authority', async ({ page }) => {
+  await setupFamily(page, [{ name: 'Automatic Student', grade: '5' }])
+  await page.getByRole('button', { name: 'Student', exact: true }).click()
+  await openStudent(page, 'Automatic Student')
+  await expect(page.getByRole('heading', { name: 'Today’s schoolwork isn’t ready yet.' })).toBeVisible()
+  await page.getByRole('button', { name: /^All assignments/ }).click()
+  await expect(page.getByLabel('Unlock parent PIN')).toBeVisible()
+  await expect(page.getByLabel('School Plan timezone')).toHaveCount(0)
+
+  await configureSchoolPlan(page, 'Automatic Student')
+  await page.getByRole('button', { name: 'Student', exact: true }).click()
+  await openStudent(page, 'Automatic Student')
+  await expect(page.getByRole('button', { name: `Start ${LESSON.a.title}` })).toBeVisible()
+  const first = await supportState(page)
+  const studentRef = first.app.setup.students.find((student: any) => student.displayName === 'Automatic Student').studentRef
+  expect(first.core.students.find((student: any) => student.studentRef === studentRef).assignments).toHaveLength(10)
+
+  await page.reload()
+  await openStudent(page, 'Automatic Student')
+  const repeated = await supportState(page)
+  expect(repeated.core.students.find((student: any) => student.studentRef === studentRef).assignments).toHaveLength(10)
+  const plannerRecords = (await idbRecords(page)).filter((record) => record.key.startsWith('manuel-academy.study.family-auto-planner.v1'))
+  expect(plannerRecords).toHaveLength(1)
+  expect(JSON.stringify(plannerRecords[0]?.value).match(/materializationRef/g)).toHaveLength(10)
 })
 
 test('all 90 grade-subject cells load in Chromium and every subject launches lesson and assessment UI', async ({ page }) => {

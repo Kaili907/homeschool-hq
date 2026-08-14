@@ -17,8 +17,6 @@ import { FamilyPilotParentAssignPanel } from '../parent-assign'
 import { FamilyPreferences } from '../preferences'
 import { FamilyPilotRecoveryScreen } from '../recovery'
 import { buildStudentWeeklyReport, FamilyPilotProgressReport } from '../reports'
-import { buildDailySchedule } from '../schedule'
-import type { ScheduleItemV1 } from '../schedule'
 import { StudentDashboard } from '../student-dashboard'
 import {
   completeSetup,
@@ -55,6 +53,9 @@ import {
   type FinalAssessmentAttemptV1,
 } from './assessment'
 import { toStudentDashboardPresentation } from './dashboardPresentation'
+import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
+import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
+import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -70,7 +71,7 @@ const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
 })
 
 type Mode = 'parent' | 'student'
-type ParentView = 'assign' | 'reports' | 'preferences' | 'backup'
+type ParentView = 'school-plan' | 'assign' | 'reports' | 'preferences' | 'backup'
 
 function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : 'That action could not be completed.'
@@ -147,6 +148,8 @@ function MountedFinalFamilyPilot({
   const [parentView, setParentView] = useState<ParentView>('assign')
   const [openAssignmentRef, setOpenAssignmentRef] = useState<string | null>(null)
   const restoreInput = useRef<HTMLInputElement>(null)
+  const autoPlannerHost = useMemo(() => new FinalFamilyAutoPlannerHost(controller), [controller])
+  useEffect(() => () => autoPlannerHost.close(), [autoPlannerHost])
   const app = controller.appSnapshot
   const core = controller.coreSnapshot
 
@@ -222,6 +225,7 @@ function MountedFinalFamilyPilot({
     return (
       <StudentSurface
         controller={controller}
+        autoPlannerHost={autoPlannerHost}
         onOpen={setOpenAssignmentRef}
         onLock={closeLearner}
         onSwitchLearner={closeLearner}
@@ -255,6 +259,7 @@ function MountedFinalFamilyPilot({
       {mode === 'student' ? (
         <StudentSurface
           controller={controller}
+          autoPlannerHost={autoPlannerHost}
           onOpen={setOpenAssignmentRef}
           onLock={() => { controller.selectStudent(null); refresh() }}
           onSwitchLearner={() => { controller.selectStudent(null); refresh() }}
@@ -268,6 +273,7 @@ function MountedFinalFamilyPilot({
       ) : (
         <ParentSurface
           controller={controller}
+          autoPlannerHost={autoPlannerHost}
           view={parentView}
           setView={setParentView}
           onOpen={(studentRef, assignmentRef) => { controller.selectStudent(studentRef); setOpenAssignmentRef(assignmentRef); refresh() }}
@@ -355,13 +361,14 @@ function ParentPinGate({ controller, onAuthorized }: { readonly controller: Fina
   </main>
 }
 
-function StudentSurface({ controller, onOpen, onLock, onSwitchLearner, onSignOut, onOpenParentView, refresh, revision }: {
+function StudentSurface({ controller, autoPlannerHost, onOpen, onLock, onSwitchLearner, onSignOut, onOpenParentView, refresh, revision }: {
   readonly controller: FinalFamilyPilotController
+  readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly onOpen: (assignmentRef: string) => void
   readonly onLock: () => void
   readonly onSwitchLearner: () => void
   readonly onSignOut: () => void
-  readonly onOpenParentView: (view: 'assign' | 'reports') => void
+  readonly onOpenParentView: (view: 'school-plan' | 'assign' | 'reports') => void
   readonly refresh: () => void
   readonly revision: number
 }) {
@@ -386,6 +393,7 @@ function StudentSurface({ controller, onOpen, onLock, onSwitchLearner, onSignOut
       key={active}
       activeStudentRef={active}
       controller={controller}
+      autoPlannerHost={autoPlannerHost}
       onOpen={onOpen}
       onLock={onLock}
       onSwitchLearner={onSwitchLearner}
@@ -396,82 +404,55 @@ function StudentSurface({ controller, onOpen, onLock, onSwitchLearner, onSignOut
   )
 }
 
-function currentSchedule(
-  studentRef: string,
-  today: string,
-  controller: FinalFamilyPilotController,
-): readonly ScheduleItemV1[] {
-  const assignments = controller.coreSnapshot.state.students
-    .find((item) => item.studentRef === studentRef)?.assignments ?? []
-  const lessonItems = buildDailySchedule({
-    studentRef,
-    date: today,
-    items: assignments.map((item) => ({
-      kind: 'assignment' as const,
-      assignmentRef: item.assignmentRef,
-      lessonRef: item.lessonRef,
-      title: item.title,
-      state: item.state,
-    })),
-  })
-  const assessmentItems: readonly ScheduleItemV1[] = controller.assessmentAssignments(studentRef).map((item, index) => Object.freeze({
-    scheduleItemRef: `schedule|${studentRef}|${today}|${item.assignmentRef}`,
-    studentRef,
-    date: today,
-    title: item.title,
-    kind: 'assignment' as const,
-    order: lessonItems.length + index,
-    status: item.status === 'CERTIFIED' ? 'completed' as const : item.status === 'PLANNED' ? 'pending' as const : 'in-progress' as const,
-    assignmentRef: item.assignmentRef,
-    lessonRef: null,
-  }))
-  return Object.freeze([...lessonItems, ...assessmentItems])
-}
-
-function ActiveStudentDashboard({ controller, activeStudentRef, onOpen, onLock, onSwitchLearner, onSignOut, onOpenParentView, revision }: {
+function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef, onOpen, onLock, onSwitchLearner, onSignOut, onOpenParentView, revision }: {
   readonly controller: FinalFamilyPilotController
+  readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly activeStudentRef: string
   readonly onOpen: (assignmentRef: string) => void
   readonly onLock: () => void
   readonly onSwitchLearner: () => void
   readonly onSignOut: () => void
-  readonly onOpenParentView: (view: 'assign' | 'reports') => void
+  readonly onOpenParentView: (view: 'school-plan' | 'assign' | 'reports') => void
   readonly revision: number
 }) {
   const [model, setModel] = useState<FamilyPilotStudentDashboardModel | null>(null)
+  const [planning, setPlanning] = useState<Awaited<ReturnType<FinalFamilyAutoPlannerHost['dashboardFor']>>['plan'] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     let live = true
-    const app = controller.appSnapshot
-    const today = new Date().toISOString().slice(0, 10)
-    void buildFamilyPilotStudentDashboardModel({
-      today,
-      activeStudentRef,
-      setup: app.state.setup,
-      coreState: controller.coreSnapshot.state,
-      schedule: currentSchedule(activeStudentRef, today, controller),
-      assessments: app.state.assessmentAssignments,
-      attestations: app.state.attestations,
-      sourceAttachments: app.state.sourceAttachments,
-      safetyHolds: app.state.safety.holds,
-      safetyRecovery: app.safetyRecovery,
-      appStoreStatus: app.status,
-      catalog: controller.catalog,
-    }).then((next) => {
+    setModel(null)
+    setPlanning(null)
+    void autoPlannerHost.dashboardFor(activeStudentRef).then(async ({ plan, schedule }) => {
+      const app = controller.appSnapshot
+      const next = await buildFamilyPilotStudentDashboardModel({
+        today: plan.localDate,
+        activeStudentRef,
+        setup: app.state.setup,
+        coreState: controller.coreSnapshot.state,
+        schedule,
+        assessments: app.state.assessmentAssignments,
+        attestations: app.state.attestations,
+        sourceAttachments: app.state.sourceAttachments,
+        safetyHolds: app.state.safety.holds,
+        safetyRecovery: app.safetyRecovery,
+        appStoreStatus: app.status,
+        catalog: controller.catalog,
+      })
       if (!live) return
+      setPlanning(plan)
       setModel(next)
       setError(next ? null : 'The authorized learner dashboard is unavailable.')
     }).catch((cause: unknown) => {
       if (live) setError(messageOf(cause))
     })
     return () => { live = false }
-  }, [activeStudentRef, controller, revision])
+  }, [activeStudentRef, autoPlannerHost, controller, revision])
 
   if (error) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="alert">{error}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onLock}>Lock</button></main>
-  if (!model) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="status">Opening your dashboard…</p></main>
+  if (!model || !planning) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="status">Preparing today’s schoolwork…</p></main>
 
-  const presentation = toStudentDashboardPresentation(model)
+  const presentation = applyAutoPlannerPresentation(toStudentDashboardPresentation(model), planning)
   const commandForWork = (assignmentRef: string) => model.today.items
     .map((item) => item.action)
     .find((action) => action && (action.type === 'START' || action.type === 'CONTINUE') && action.studentRef === activeStudentRef && action.assignmentRef === assignmentRef)
@@ -488,7 +469,7 @@ function ActiveStudentDashboard({ controller, activeStudentRef, onOpen, onLock, 
   const openTool = (toolRef: string) => {
     const command = model.tools.find((tool) => tool.action.type === toolRef && tool.action.studentRef === activeStudentRef)?.action
     if (command?.type === 'OPEN_REPORTS') onOpenParentView('reports')
-    else if (command?.type === 'OPEN_ASSIGNMENTS') onOpenParentView('assign')
+    else if (command?.type === 'OPEN_ASSIGNMENTS') onOpenParentView(planning.status === 'NEEDS_PLAN_SETUP' && model.today.items.length === 0 ? 'school-plan' : 'assign')
     else if (command?.type === 'OPEN_SCHEDULE') openSchedule()
   }
   const signOut = () => {
@@ -510,8 +491,9 @@ function ActiveStudentDashboard({ controller, activeStudentRef, onOpen, onLock, 
   )
 }
 
-function ParentSurface({ controller, view, setView, onOpen, refresh, restoreInput, onRestore }: {
+function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore }: {
   readonly controller: FinalFamilyPilotController
+  readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly view: ParentView
   readonly setView: (view: ParentView) => void
   readonly onOpen: (studentRef: string, assignmentRef: string) => void
@@ -534,9 +516,11 @@ function ParentSurface({ controller, view, setView, onOpen, refresh, restoreInpu
         </select>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
-        {(['assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
+        {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
       </nav>
-      {!selected ? <p className="mt-6">No configured students.</p> : view === 'assign' ? (
+      {!selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
+        <FamilySchoolPlanPanel controller={controller} host={autoPlannerHost} student={selected} />
+      ) : view === 'assign' ? (
         <ParentAssignments controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
       ) : view === 'reports' ? (
         <ParentReports controller={controller} student={selected} refresh={refresh} />
