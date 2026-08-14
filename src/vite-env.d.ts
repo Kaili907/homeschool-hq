@@ -29,6 +29,8 @@ interface ImportMetaEnv {
   readonly VITE_FAMILY_PILOT_ENABLED?: string
   /** FAMILY-PILOT: development-only diagnostics panel; the pilot gate alone never selects it. */
   readonly VITE_FAMILY_PILOT_DIAGNOSTICS?: string
+  /** Exact opt-in; also requires an injected non-production scorer composition. */
+  readonly VITE_FAMILY_PILOT_TRUSTED_SCORER_ENABLED?: string
 }
 
 interface ImportMeta {

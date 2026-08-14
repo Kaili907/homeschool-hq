@@ -3,6 +3,7 @@ import type { ProductionItemAssessmentRequest } from './contracts'
 import {
   createProductionItemFetchTransport,
   ProductionAssessmentServerError,
+  ProductionAssessmentTimeoutError,
 } from './client'
 import { ProductionAssessmentOfflineError } from './offline'
 
@@ -52,5 +53,20 @@ describe('production item browser transport', () => {
       constructor: ProductionAssessmentServerError,
       status: 401,
     }))
+  })
+
+  it('fails closed on timeout and aborts the interrupted request', async () => {
+    let signal: AbortSignal | undefined
+    const transport = createProductionItemFetchTransport(
+      vi.fn(async (_input, init) => {
+        signal = init?.signal ?? undefined
+        return await new Promise<Response>(() => undefined)
+      }),
+      () => 'opaque-study-session',
+      '/api/study/production-item-assessment',
+      { timeoutMs: 5 },
+    )
+    await expect(transport.assess(request)).rejects.toBeInstanceOf(ProductionAssessmentTimeoutError)
+    expect(signal?.aborted).toBe(true)
   })
 })

@@ -45,6 +45,7 @@ import {
 import {
   BrowserLearnerResponseStore,
   LearnerResponseRuntime,
+  type LearnerResponseAssessor,
   type LearnerResponsePresentation,
 } from './learner-response'
 import { digestLocalPin } from './state'
@@ -57,6 +58,10 @@ import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
 import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
 import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
 import { ParentSyncStatusR1 } from '../../hosted-sync/v2/familyPilot/status'
+import {
+  resolveFamilyPilotTrustedScorer,
+  type FamilyPilotTrustedScorerPilotConfiguration,
+} from '../trusted-scorer'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -78,7 +83,13 @@ function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : 'That action could not be completed.'
 }
 
-export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void }) {
+export interface FinalFamilyPilotAppProps {
+  readonly onExit: () => void
+  /** Injected only by an explicitly flagged non-production composition. */
+  readonly trustedScorerPilot?: FamilyPilotTrustedScorerPilotConfiguration
+}
+
+export function FinalFamilyPilotApp({ onExit, trustedScorerPilot }: FinalFamilyPilotAppProps) {
   const [catalog, setCatalog] = useState<Awaited<ReturnType<typeof loadFinalFamilyPilotCatalog>> | null>(null)
   const [catalogError, setCatalogError] = useState<string | null>(null)
   const [revision, setRevision] = useState(0)
@@ -94,6 +105,10 @@ export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void })
   }, [])
 
   const controller = useMemo(() => catalog ? new FinalFamilyPilotController({ catalog }) : null, [catalog])
+  const trustedScorer = resolveFamilyPilotTrustedScorer({
+    featureFlagValue: import.meta.env.VITE_FAMILY_PILOT_TRUSTED_SCORER_ENABLED,
+    configuration: trustedScorerPilot,
+  })
   useEffect(() => () => controller?.close(), [controller])
   const refresh = useCallback(() => {
     controller?.refresh()
@@ -107,7 +122,7 @@ export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void })
     return <FinalShell onExit={onExit}><p className="rounded-xl border border-red-300 bg-red-50 p-6 font-semibold" role="alert">{catalogError ?? 'The final curriculum could not be loaded.'}</p></FinalShell>
   }
 
-  return <MountedFinalFamilyPilot controller={controller} onExit={onExit} refresh={refresh} revision={revision} />
+  return <MountedFinalFamilyPilot controller={controller} onExit={onExit} refresh={refresh} revision={revision} trustedScorer={trustedScorer} />
 }
 
 function FinalShell({ onExit, children }: { readonly onExit: () => void; readonly children: React.ReactNode }) {
@@ -137,12 +152,14 @@ function MountedFinalFamilyPilot({
   onExit,
   refresh,
   revision,
+  trustedScorer,
 }: {
   readonly controller: FinalFamilyPilotController
   readonly onExit: () => void
   readonly refresh: () => void
   /** Forces a projection refresh without remounting an open Study session. */
   readonly revision: number
+  readonly trustedScorer?: LearnerResponseAssessor
 }) {
   const [mode, setMode] = useState<Mode>('student')
   const [parentAuthorized, setParentAuthorized] = useState(false)
@@ -210,6 +227,7 @@ function MountedFinalFamilyPilot({
             assignmentRef={openAssignmentRef}
             onExit={() => { setOpenAssignmentRef(null); refresh() }}
             refresh={refresh}
+            trustedScorer={trustedScorer}
           />
         )}
       </FinalShell>
@@ -928,12 +946,13 @@ function MaterialView({ material }: { readonly material: FinalLearnerProductionM
   )
 }
 
-function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh }: {
+function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh, trustedScorer }: {
   readonly controller: FinalFamilyPilotController
   readonly studentRef: string
   readonly assignmentRef: string
   readonly onExit: () => void
   readonly refresh: () => void
+  readonly trustedScorer?: LearnerResponseAssessor
 }) {
   const [result, setResult] = useState<FinalFamilyPilotControllerResult | null>(null)
   const [busy, setBusy] = useState(true)
@@ -985,7 +1004,7 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
       studentRef: result.study.session.learnerRef,
       assignmentRef,
       attemptRef: result.study.session.sessionRef,
-    }, responseStore)
+    }, responseStore, trustedScorer)
     void runtime.open(result.study.segmentOrdinal, result.study.segmentRef).then((presentation) => {
       if (!live) return
       setResponseView({ key: responseKey, presentation })
@@ -994,7 +1013,7 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
       if (live) setResponseLoadError({ key: responseKey, message: messageOf(error) })
     })
     return () => { live = false }
-  }, [assignmentRef, responseKey, responseStore, result])
+  }, [assignmentRef, responseKey, responseStore, result, trustedScorer])
 
   if (!assignment) return <main className="mx-auto max-w-4xl p-6"><p role="alert">That assignment is unavailable for this student.</p><button onClick={onExit}>Back</button></main>
   if (!result || busy && !result) return <main className="mx-auto max-w-4xl p-6"><p role="status">Opening durable Study and production materials…</p></main>
@@ -1011,7 +1030,7 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     assignmentRef,
     // Study's stable session is the attempt identity in this completion-authority path.
     attemptRef: result.study.session.sessionRef,
-  }, responseStore)
+  }, responseStore, trustedScorer)
   const responseItem = responsePresentation.item
   const segmentContent = responseItem ? {
     lessonRef: responseItem.lessonRef,

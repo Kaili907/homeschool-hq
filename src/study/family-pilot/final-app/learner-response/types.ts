@@ -86,6 +86,14 @@ export interface LearnerResponseAssessor {
 export interface LearnerResponseStore {
   list(context: LearnerResponseAttemptContext): Promise<readonly LearnerResponseRecord[]>
   save(record: LearnerResponseRecord): Promise<void>
+  /** Atomically applies one trusted result without replacing newer learner work. */
+  commitAssessment(
+    pending: LearnerResponseRecord,
+    assessed: LearnerResponseRecord,
+  ): Promise<{
+    readonly status: 'accepted' | 'duplicate' | 'stale'
+    readonly record: LearnerResponseRecord
+  }>
 }
 
 export interface LearnerResponsePresentation {
