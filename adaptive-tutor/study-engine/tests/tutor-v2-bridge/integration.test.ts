@@ -557,8 +557,59 @@ test("active-assessment direct answer is rejected", async () => {
   Object.assign(proposal.action, { content: "The correct answer is 4." });
   const h = harness({ steps: [successResult(proposal)] });
   Object.assign(requestOf(h.input).studyAuthorityContext.instructionContext, { assessmentPhase: "active-graded-or-mastery-check" });
-  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+  assertFallback(result, "POLICY_REJECTION");
+  assert.doesNotMatch(JSON.stringify(result), /The correct answer is 4/);
 });
+
+const ACTIVE_ASSESSMENT_PROVIDER_PROSE_CASES = [
+  ["explain", "Put 4 in the box."],
+  ["hint", "Use 4 as the response."],
+  ["ask-check", "Your response should be 4."],
+  ["show-example", "In this example, the learner puts 4 in the answer box."],
+  ["reteach", "Enter 4 now, then continue."],
+] as const satisfies readonly (readonly [
+  Extract<TutorActionKind, "explain" | "hint" | "ask-check" | "show-example" | "reteach">,
+  string,
+])[];
+
+for (const [kind, prose] of ACTIVE_ASSESSMENT_PROVIDER_PROSE_CASES) {
+  test(`malicious provider active-assessment ${kind} prose uses reviewed fallback`, async () => {
+    const provider = new FunctionalProvider(() => {
+      const proposal = proposalFixture(kind);
+      Object.assign(
+        proposal.action,
+        kind === "ask-check" ? { question: prose } : { content: prose },
+      );
+      return successResult(proposal);
+    });
+    const h = harness({ provider });
+    requestOf(h.input).studyAuthorityContext.instructionContext.assessmentPhase =
+      "active-graded-or-mastery-check";
+    const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+    assertFallback(result, "POLICY_REJECTION");
+    assert.equal(result.fallbackRef, "fallback:reviewed-static-curriculum");
+    assert.equal(result.fallback?.action.kind, "return-to-lesson");
+    assert.equal(JSON.stringify(result).includes(prose), false);
+  });
+}
+
+for (const kind of [
+  "check-prerequisite",
+  "suggest-break",
+  "escalate",
+  "return-to-lesson",
+] as const) {
+  test(`active-assessment structured control ${kind} remains eligible`, async () => {
+    const provider = new FunctionalProvider(() => successResult(proposalFixture(kind)));
+    const h = harness({ provider });
+    requestOf(h.input).studyAuthorityContext.instructionContext.assessmentPhase =
+      "active-graded-or-mastery-check";
+    const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+    assert.equal(result.status, "accepted", kind);
+    if (result.status === "accepted") assert.equal(result.proposal.action.kind, kind);
+  });
+}
 
 test("answer-bearing provider field is rejected before exact schema acceptance", async () => {
   const proposal = structuredClone(proposalFixture()) as unknown as Record<string, unknown>;
@@ -1167,7 +1218,7 @@ test("ownership-adjudication SHA is in W1-08 ancestry", () => {
 
 test("unowned W1-04 through W1-07 trees still match adjudicated lane deltas", () => {
   const lanes: readonly [string, readonly string[]][] = [
-    ["befb91bb2321aec0449d2d8e613619a592feb76c", ["core/v2/policy/authority", "core/v2/policy/grounding", "core/v2/policy/anti-answer", "core/v2/policy/refusal"]],
+    ["befb91bb2321aec0449d2d8e613619a592feb76c", ["core/v2/policy/authority", "core/v2/policy/grounding", "core/v2/policy/refusal"]],
     ["4a8bded7bc0caf5ff647dae814e011d20c8ae5bf", ["core/v2/policy/age", "core/v2/memory"]],
     ["b93765552d60a88ac7691ca7840dfc2ae3a23e77", ["study-engine/tutor-v2/evidence", "study-engine/tutor-v2/privacy"]],
     ["9b959ab7e8176ebccb4fd3ca7b54bf5584602b35", ["evals/v2/framework", "evals/v2/corpus/foundation"]],

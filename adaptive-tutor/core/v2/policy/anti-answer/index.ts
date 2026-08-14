@@ -1,6 +1,7 @@
 import type {
   AssessmentPhase,
   HintLevel,
+  TutorActionKind,
   TutorActionProposal,
   TutorInstructionContext,
 } from "../../contracts/index.js";
@@ -15,6 +16,7 @@ export interface CanonicalAssessmentPolicyContext {
 export interface AnswerPolicyIssue {
   readonly path: string;
   readonly code:
+    | "active-assessment-free-form-action"
     | "active-assessment-answer-disclosure"
     | "answer-bearing-field"
     | "completed-review-not-authorized"
@@ -56,6 +58,20 @@ const OBVIOUS_ANSWER_DISCLOSURES: readonly RegExp[] = [
   /\b(?:enter|respond\s+with|write)\s+["']?[^.?!\n]{1,80}["']?\s+(?:as\s+)?(?:the\s+)?answer\b/i,
   /\b(?:the\s+)?solution\s*(?:is|=|:)\s*\S+/i,
 ];
+
+/**
+ * Provider-authored academic prose is not learner-facing during an active
+ * graded/mastery check. These action kinds all contain an unrestricted prose
+ * field, so no lexical vocabulary can prove them answer-safe.
+ */
+const ACTIVE_ASSESSMENT_FREE_FORM_ACTION_KINDS: ReadonlySet<TutorActionKind> =
+  new Set([
+    "explain",
+    "hint",
+    "ask-check",
+    "show-example",
+    "reteach",
+  ]);
 
 const HINT_ORDER: Readonly<Record<HintLevel, number>> = {
   none: 0,
@@ -148,7 +164,7 @@ function phaseRequiresAnswerProtection(phase: AssessmentPhase): boolean {
 
 /**
  * Enforces phase and hint boundaries without receiving or storing an answer key.
- * Lexical disclosure checks are intentionally only a conservative first gate.
+ * Active-assessment safety is structural; lexical checks are defense in depth.
  */
 export function evaluateAnswerPolicy(
   proposal: TutorActionProposal,
@@ -165,6 +181,9 @@ export function evaluateAnswerPolicy(
   }
 
   if (phaseRequiresAnswerProtection(instructionContext.assessmentPhase)) {
+    if (ACTIVE_ASSESSMENT_FREE_FORM_ACTION_KINDS.has(proposal.action.kind)) {
+      issues.push({ path: "$/action", code: "active-assessment-free-form-action" });
+    }
     issues.push(...obviousDisclosureIssues(proposal));
   }
 
@@ -181,8 +200,9 @@ export function evaluateAnswerPolicy(
 }
 
 export const ANTI_ANSWER_POLICY_LIMITATIONS = [
-  "Lexical checks catch explicit answer fields and obvious disclosures, not semantic equivalence.",
-  "Paraphrased, encoded, multilingual, or multi-turn disclosures require adversarial evaluation.",
-  "Grounding membership does not prove that generated prose is non-isomorphic to the protected item.",
+  "During active graded or mastery checks, unrestricted provider-authored academic prose is rejected by action shape regardless of wording.",
+  "Lexical checks remain defense in depth and do not establish semantic equivalence.",
+  "Assessment-time help is limited to eligible structured control actions or Study-reviewed deterministic fallback.",
+  "Richer assessment-time tutoring requires a separately reviewed structured mechanism.",
   "The policy intentionally receives no protected answer key; server-side answer authority remains separate.",
 ] as const;
