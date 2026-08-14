@@ -1,0 +1,1767 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/social-studies-lesson-contract-r1-draft.json",
+  "title": "Manuel Academy Social Studies Lesson Contract R1 Draft",
+  "description": "Advisory curriculum-supply contract for the active Social Studies lesson population. This schema is not a runtime or global release gate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "lesson_id",
+    "grade",
+    "subject",
+    "lesson_type",
+    "authored_phase",
+    "learning_goal",
+    "standard_refs",
+    "topic_ids",
+    "skill_ids",
+    "prerequisite_knowledge",
+    "background_knowledge",
+    "vocabulary",
+    "context_framework",
+    "reading_burden",
+    "source_uses",
+    "instructional_blocks",
+    "model_analyses",
+    "tasks",
+    "task_collections",
+    "mastery_evidence",
+    "remediation_paths",
+    "protected_content",
+    "tutor_manifest"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "social-studies-lesson-standard-r1-draft"
+    },
+    "lesson_id": {
+      "$ref": "#/$defs/id"
+    },
+    "grade": {
+      "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12]
+    },
+    "subject": {
+      "const": "social-studies"
+    },
+    "lesson_type": {
+      "$ref": "#/$defs/lesson_type"
+    },
+    "authored_phase": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "learning_goal": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "standard_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/standard_ref"
+      }
+    },
+    "topic_ids": {
+      "$ref": "#/$defs/id_array"
+    },
+    "skill_ids": {
+      "$ref": "#/$defs/id_array"
+    },
+    "prerequisite_knowledge": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "$ref": "#/$defs/prerequisite_knowledge"
+      }
+    },
+    "background_knowledge": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "$ref": "#/$defs/background_record"
+      }
+    },
+    "vocabulary": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/$defs/vocabulary_record"
+      }
+    },
+    "context_framework": {
+      "$ref": "#/$defs/context_framework"
+    },
+    "reading_burden": {
+      "$ref": "#/$defs/reading_burden"
+    },
+    "source_uses": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {
+        "$ref": "#/$defs/source_use"
+      }
+    },
+    "instructional_blocks": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "$ref": "#/$defs/instructional_block"
+      }
+    },
+    "model_analyses": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/model_analysis"
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/task"
+      }
+    },
+    "task_collections": {
+      "$ref": "#/$defs/task_collections"
+    },
+    "mastery_evidence": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "$ref": "#/$defs/mastery_evidence"
+      }
+    },
+    "remediation_paths": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "$ref": "#/$defs/remediation_path"
+      }
+    },
+    "protected_content": {
+      "$ref": "#/$defs/protected_content"
+    },
+    "tutor_manifest": {
+      "$ref": "#/$defs/tutor_manifest"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "DIAGNOSTIC"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "instructional_blocks": {
+            "maxItems": 0
+          },
+          "model_analyses": {
+            "maxItems": 0
+          },
+          "mastery_evidence": {
+            "maxItems": 0
+          },
+          "remediation_paths": {
+            "maxItems": 0
+          },
+          "task_collections": {
+            "properties": {
+              "diagnostic_task_refs": {
+                "minItems": 2
+              },
+              "guided_task_refs": {
+                "maxItems": 0
+              },
+              "independent_task_refs": {
+                "maxItems": 0
+              },
+              "review_task_refs": {
+                "maxItems": 0
+              },
+              "mastery_task_refs": {
+                "maxItems": 0
+              },
+              "assessment_task_refs": {
+                "maxItems": 0
+              },
+              "project_checkpoint_refs": {
+                "maxItems": 0
+              },
+              "fresh_retry_task_refs": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "BACKGROUND_CONTENT_BUILD"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "background_knowledge": {
+            "minItems": 1
+          },
+          "instructional_blocks": {
+            "minItems": 1
+          },
+          "model_analyses": {
+            "minItems": 1
+          },
+          "mastery_evidence": {
+            "minItems": 2
+          },
+          "remediation_paths": {
+            "minItems": 1
+          },
+          "task_collections": {
+            "properties": {
+              "guided_task_refs": {
+                "minItems": 1
+              },
+              "independent_task_refs": {
+                "minItems": 2
+              },
+              "mastery_task_refs": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "GUIDED_PRACTICE"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "instructional_blocks": {
+            "minItems": 1
+          },
+          "model_analyses": {
+            "minItems": 1
+          },
+          "mastery_evidence": {
+            "minItems": 2
+          },
+          "remediation_paths": {
+            "minItems": 1
+          },
+          "task_collections": {
+            "properties": {
+              "guided_task_refs": {
+                "minItems": 2
+              },
+              "independent_task_refs": {
+                "minItems": 1
+              },
+              "mastery_task_refs": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "INDEPENDENT_APPLICATION"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "mastery_evidence": {
+            "minItems": 2
+          },
+          "remediation_paths": {
+            "minItems": 1
+          },
+          "task_collections": {
+            "properties": {
+              "independent_task_refs": {
+                "minItems": 2
+              },
+              "mastery_task_refs": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "REVIEW"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "instructional_blocks": {
+            "minItems": 1
+          },
+          "mastery_evidence": {
+            "minItems": 2
+          },
+          "remediation_paths": {
+            "minItems": 1
+          },
+          "task_collections": {
+            "properties": {
+              "review_task_refs": {
+                "minItems": 2
+              },
+              "independent_task_refs": {
+                "minItems": 2
+              },
+              "mastery_task_refs": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "REMEDIATION"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "instructional_blocks": {
+            "minItems": 1
+          },
+          "model_analyses": {
+            "minItems": 1
+          },
+          "mastery_evidence": {
+            "minItems": 2
+          },
+          "remediation_paths": {
+            "minItems": 1
+          },
+          "task_collections": {
+            "properties": {
+              "guided_task_refs": {
+                "minItems": 1
+              },
+              "fresh_retry_task_refs": {
+                "minItems": 1
+              },
+              "mastery_task_refs": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "MASTERY"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "instructional_blocks": {
+            "maxItems": 0
+          },
+          "model_analyses": {
+            "maxItems": 0
+          },
+          "mastery_evidence": {
+            "minItems": 2
+          },
+          "remediation_paths": {
+            "minItems": 1
+          },
+          "task_collections": {
+            "properties": {
+              "diagnostic_task_refs": {
+                "maxItems": 0
+              },
+              "guided_task_refs": {
+                "maxItems": 0
+              },
+              "independent_task_refs": {
+                "maxItems": 0
+              },
+              "review_task_refs": {
+                "maxItems": 0
+              },
+              "mastery_task_refs": {
+                "minItems": 2
+              },
+              "assessment_task_refs": {
+                "maxItems": 0
+              },
+              "project_checkpoint_refs": {
+                "maxItems": 0
+              },
+              "fresh_retry_task_refs": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "ASSESSMENT"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "instructional_blocks": {
+            "maxItems": 0
+          },
+          "model_analyses": {
+            "maxItems": 0
+          },
+          "mastery_evidence": {
+            "maxItems": 0
+          },
+          "remediation_paths": {
+            "maxItems": 0
+          },
+          "task_collections": {
+            "properties": {
+              "diagnostic_task_refs": {
+                "maxItems": 0
+              },
+              "guided_task_refs": {
+                "maxItems": 0
+              },
+              "independent_task_refs": {
+                "maxItems": 0
+              },
+              "review_task_refs": {
+                "maxItems": 0
+              },
+              "mastery_task_refs": {
+                "maxItems": 0
+              },
+              "assessment_task_refs": {
+                "minItems": 1
+              },
+              "project_checkpoint_refs": {
+                "maxItems": 0
+              },
+              "fresh_retry_task_refs": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "instructional_purpose": {
+                "const": "PROJECT_INQUIRY"
+              }
+            },
+            "required": ["instructional_purpose"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "instructional_blocks": {
+            "minItems": 1
+          },
+          "model_analyses": {
+            "minItems": 1
+          },
+          "mastery_evidence": {
+            "minItems": 1
+          },
+          "remediation_paths": {
+            "minItems": 1
+          },
+          "task_collections": {
+            "properties": {
+              "independent_task_refs": {
+                "minItems": 1
+              },
+              "mastery_task_refs": {
+                "minItems": 1
+              },
+              "project_checkpoint_refs": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "disciplinary_modes": {
+                "contains": {
+                  "const": "GEOGRAPHY_MAP_SKILL"
+                }
+              }
+            },
+            "required": ["disciplinary_modes"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "context_framework": {
+            "properties": {
+              "geography": {
+                "properties": {
+                  "applicability": {
+                    "enum": ["REQUIRED", "HELPFUL"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "disciplinary_modes": {
+                "contains": {
+                  "const": "HISTORY_CHRONOLOGY"
+                }
+              }
+            },
+            "required": ["disciplinary_modes"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "context_framework": {
+            "properties": {
+              "chronology": {
+                "properties": {
+                  "applicability": {
+                    "enum": ["REQUIRED", "HELPFUL"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "disciplinary_modes": {
+                "contains": {
+                  "const": "PRIMARY_SOURCE_ANALYSIS"
+                }
+              }
+            },
+            "required": ["disciplinary_modes"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source_uses": {
+            "contains": {
+              "properties": {
+                "relationship_to_inquiry": {
+                  "enum": ["PRIMARY", "BOTH_DEPENDS_ON_INQUIRY"]
+                }
+              },
+              "required": ["relationship_to_inquiry"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lesson_type": {
+            "properties": {
+              "disciplinary_modes": {
+                "contains": {
+                  "const": "SECONDARY_SOURCE_ANALYSIS"
+                }
+              }
+            },
+            "required": ["disciplinary_modes"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source_uses": {
+            "contains": {
+              "properties": {
+                "relationship_to_inquiry": {
+                  "enum": ["SECONDARY", "BOTH_DEPENDS_ON_INQUIRY"]
+                }
+              },
+              "required": ["relationship_to_inquiry"]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160,
+      "pattern": "^[a-z0-9][a-z0-9:-]*$"
+    },
+    "id_array": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "id_array_allow_empty": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "instructional_purpose": {
+      "enum": [
+        "DIAGNOSTIC",
+        "BACKGROUND_CONTENT_BUILD",
+        "GUIDED_PRACTICE",
+        "INDEPENDENT_APPLICATION",
+        "REVIEW",
+        "REMEDIATION",
+        "MASTERY",
+        "ASSESSMENT",
+        "PROJECT_INQUIRY"
+      ]
+    },
+    "disciplinary_mode": {
+      "enum": [
+        "GEOGRAPHY_MAP_SKILL",
+        "HISTORY_CHRONOLOGY",
+        "CIVICS_GOVERNMENT",
+        "ECONOMICS",
+        "PRIMARY_SOURCE_ANALYSIS",
+        "SECONDARY_SOURCE_ANALYSIS",
+        "COMPARE_PERSPECTIVE",
+        "CLAIM_EVIDENCE_REASONING",
+        "QUANTITATIVE_DATA_ANALYSIS",
+        "RESEARCH_SOURCE_CRITICISM",
+        "DELIBERATION_CIVIC_ACTION"
+      ]
+    },
+    "lesson_type": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "instructional_purpose",
+        "disciplinary_modes",
+        "secondary_purposes"
+      ],
+      "properties": {
+        "instructional_purpose": {
+          "$ref": "#/$defs/instructional_purpose"
+        },
+        "disciplinary_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/disciplinary_mode"
+          }
+        },
+        "secondary_purposes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/instructional_purpose"
+          }
+        }
+      }
+    },
+    "standard_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["framework_ref", "mapping_status"],
+      "properties": {
+        "framework_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "standard_id": {
+          "$ref": "#/$defs/id"
+        },
+        "legacy_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "mapping_status": {
+          "enum": ["canonical", "unverified", "human-review"]
+        }
+      },
+      "anyOf": [
+        {
+          "required": ["standard_id"]
+        },
+        {
+          "required": ["legacy_label"]
+        }
+      ]
+    },
+    "prerequisite_knowledge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["knowledge_id", "learner_need", "source_refs"],
+      "properties": {
+        "knowledge_id": {
+          "$ref": "#/$defs/id"
+        },
+        "learner_need": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "source_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        }
+      }
+    },
+    "background_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "background_id",
+        "delivery",
+        "learner_explanation",
+        "why_needed",
+        "source_refs"
+      ],
+      "properties": {
+        "background_id": {
+          "$ref": "#/$defs/id"
+        },
+        "delivery": {
+          "enum": [
+            "TEACH_BEFORE_TASK",
+            "RETRIEVE_BEFORE_TASK",
+            "REFERENCE_DURING_TASK",
+            "WITHHOLD_UNTIL_AFTER_EVIDENCE"
+          ]
+        },
+        "learner_explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 6000
+        },
+        "why_needed": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "source_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        }
+      }
+    },
+    "vocabulary_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vocabulary_id",
+        "term",
+        "learner_definition",
+        "first_use_ref"
+      ],
+      "properties": {
+        "vocabulary_id": {
+          "$ref": "#/$defs/id"
+        },
+        "term": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "learner_definition": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "first_use_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "example": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "non_example": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "pronunciation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "context_dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicability", "learner_explanation", "resource_refs", "review_rationale"],
+      "properties": {
+        "applicability": {
+          "enum": ["REQUIRED", "HELPFUL", "NOT_APPLICABLE"]
+        },
+        "learner_explanation": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "resource_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "review_rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "context_framework": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "people_and_groups",
+        "place",
+        "time",
+        "conditions",
+        "why_it_matters",
+        "chronology",
+        "geography"
+      ],
+      "properties": {
+        "people_and_groups": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 3000
+        },
+        "place": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "time": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "conditions": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "why_it_matters": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "chronology": {
+          "$ref": "#/$defs/context_dimension"
+        },
+        "geography": {
+          "$ref": "#/$defs/context_dimension"
+        }
+      }
+    },
+    "reading_burden": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_text_load",
+        "academy_explanation_load",
+        "response_load",
+        "chunking_plan",
+        "supports",
+        "target_alignment_rationale"
+      ],
+      "properties": {
+        "source_text_load": {
+          "enum": ["NONE", "LIGHT", "MODERATE", "SUSTAINED", "AUTHENTIC_COMPLEX"]
+        },
+        "academy_explanation_load": {
+          "enum": ["LIGHT", "MODERATE", "SUSTAINED"]
+        },
+        "response_load": {
+          "enum": ["BRIEF", "MULTI_PART", "SUSTAINED", "PROJECT"]
+        },
+        "chunking_plan": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "supports": {
+          "$ref": "#/$defs/support_array"
+        },
+        "target_alignment_rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      }
+    },
+    "source_use": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ref",
+        "instructional_roles",
+        "relationship_to_inquiry",
+        "classification_rationale",
+        "label_visibility",
+        "context_before_analysis",
+        "excerpt_treatment",
+        "original_or_repost",
+        "evidence_locator",
+        "rights_access_ref"
+      ],
+      "properties": {
+        "source_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "instructional_roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "BACKGROUND",
+              "MODELED_ANALYSIS",
+              "GUIDED_PRACTICE",
+              "INDEPENDENT_EVIDENCE",
+              "MASTERY_EVIDENCE",
+              "ASSESSMENT_EVIDENCE",
+              "PROJECT_EVIDENCE",
+              "MAP_OR_GEOGRAPHY",
+              "TIMELINE_OR_CHRONOLOGY",
+              "QUANTITATIVE_DATA"
+            ]
+          }
+        },
+        "relationship_to_inquiry": {
+          "enum": [
+            "PRIMARY",
+            "SECONDARY",
+            "BOTH_DEPENDS_ON_INQUIRY",
+            "NON_DOCUMENTARY",
+            "CONTEXT_ONLY"
+          ]
+        },
+        "classification_rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "label_visibility": {
+          "enum": [
+            "SHOWN_BEFORE_ANALYSIS",
+            "WITHHELD_AS_MEASURED_TARGET",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "context_before_analysis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "excerpt_treatment": {
+          "enum": [
+            "FULL_SOURCE",
+            "VERBATIM_EXCERPT",
+            "TRANSLATION",
+            "MODERNIZED_SPELLING",
+            "ADAPTED_EXCERPT",
+            "ACADEMY_SUMMARY",
+            "NO_EXCERPT"
+          ]
+        },
+        "original_or_repost": {
+          "enum": [
+            "ORIGINAL_OR_OFFICIAL",
+            "VERIFIED_TRANSCRIPT",
+            "VERIFIED_REPOST_WITH_ORIGINAL",
+            "ACADEMY_AUTHORED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "evidence_locator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "rights_access_ref": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "instructional_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "block_id",
+        "child_heading",
+        "purpose",
+        "learner_explanation",
+        "source_refs",
+        "vocabulary_refs"
+      ],
+      "properties": {
+        "block_id": {
+          "$ref": "#/$defs/id"
+        },
+        "child_heading": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "purpose": {
+          "enum": [
+            "BACKGROUND",
+            "VOCABULARY",
+            "CONTENT_EXPLANATION",
+            "CONTEXT",
+            "CHRONOLOGY",
+            "GEOGRAPHY",
+            "CIVICS",
+            "ECONOMICS",
+            "SOURCE_PREPARATION",
+            "SKILL_EXPLANATION",
+            "REVIEW_REFRESH",
+            "RETEACH"
+          ]
+        },
+        "learner_explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8000
+        },
+        "source_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "vocabulary_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "accessible_representation_ref": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "reasoning_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "notice_or_evidence", "thinking"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "FACT",
+            "OBSERVATION",
+            "SOURCE_DETAIL",
+            "INFERENCE",
+            "INTERPRETATION",
+            "COMPARISON",
+            "REASONING_LINK",
+            "LIMIT_OR_CHECK"
+          ]
+        },
+        "notice_or_evidence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1500
+        },
+        "thinking": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "source_ref": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "model_analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_id",
+        "mode",
+        "question",
+        "reasoning_steps",
+        "conclusion",
+        "limitation_or_check",
+        "transfer_cue",
+        "source_refs",
+        "uses_protected_evidence"
+      ],
+      "properties": {
+        "model_id": {
+          "$ref": "#/$defs/id"
+        },
+        "mode": {
+          "$ref": "#/$defs/disciplinary_mode"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "reasoning_steps": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/reasoning_step"
+          }
+        },
+        "conclusion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "limitation_or_check": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "transfer_cue": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "source_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "uses_protected_evidence": {
+          "const": false
+        }
+      }
+    },
+    "task_kind": {
+      "enum": [
+        "RECALL_VOCABULARY",
+        "SEQUENCE_CHRONOLOGY",
+        "MAP_SPATIAL_INTERPRETATION",
+        "SOURCE_EVIDENCE",
+        "CAUSE_EFFECT_CONTINUITY_CHANGE",
+        "COMPARE_CONTRAST",
+        "PERSPECTIVE_LIMITATION",
+        "CLAIM_EVIDENCE_REASONING",
+        "QUANTITATIVE_DATA",
+        "SHORT_CONSTRUCTED_RESPONSE",
+        "INQUIRY_PRODUCT",
+        "CIVIC_DELIBERATION_ACTION",
+        "SOURCE_CLASSIFICATION",
+        "RESEARCH_DESIGN"
+      ]
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "task_kind",
+        "prompt",
+        "response_kind",
+        "support_level",
+        "topic_ids",
+        "skill_ids",
+        "source_refs",
+        "evidence_locator_expectation",
+        "allowed_instructional_supports",
+        "scored"
+      ],
+      "properties": {
+        "task_id": {
+          "$ref": "#/$defs/id"
+        },
+        "task_kind": {
+          "$ref": "#/$defs/task_kind"
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 6000
+        },
+        "response_kind": {
+          "enum": [
+            "CHOICE",
+            "SHORT_TEXT",
+            "CONSTRUCTED_RESPONSE",
+            "MAP_OR_TIMELINE_RESPONSE",
+            "SOURCE_ANNOTATION",
+            "DATA_DISPLAY",
+            "DISCUSSION_EVIDENCE",
+            "ACTIVITY_EVIDENCE",
+            "PROJECT_ARTIFACT"
+          ]
+        },
+        "support_level": {
+          "enum": ["FULL", "PARTIAL", "FADED", "INDEPENDENT"]
+        },
+        "topic_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "skill_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "evidence_locator_expectation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "allowed_instructional_supports": {
+          "$ref": "#/$defs/support_array"
+        },
+        "scored": {
+          "type": "boolean"
+        },
+        "choices": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "response_kind": {
+                "const": "CHOICE"
+              }
+            },
+            "required": ["response_kind"]
+          },
+          "then": {
+            "required": ["choices"]
+          }
+        }
+      ]
+    },
+    "task_collections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "diagnostic_task_refs",
+        "guided_task_refs",
+        "independent_task_refs",
+        "review_task_refs",
+        "mastery_task_refs",
+        "assessment_task_refs",
+        "project_checkpoint_refs",
+        "fresh_retry_task_refs"
+      ],
+      "properties": {
+        "diagnostic_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "guided_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "independent_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "review_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "mastery_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "assessment_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "project_checkpoint_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "fresh_retry_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        }
+      }
+    },
+    "mastery_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_ref",
+        "evidence_form",
+        "measured_skill_ids",
+        "freshness_basis",
+        "independence_required",
+        "allowed_instructional_supports"
+      ],
+      "properties": {
+        "task_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "evidence_form": {
+          "$ref": "#/$defs/task_kind"
+        },
+        "measured_skill_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "freshness_basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "independence_required": {
+          "const": true
+        },
+        "allowed_instructional_supports": {
+          "$ref": "#/$defs/support_array"
+        }
+      }
+    },
+    "remediation_path": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path_id",
+        "signal_ids",
+        "misconception_ids",
+        "error_ids",
+        "prerequisite_knowledge_ids",
+        "alternate_explanation",
+        "model_ref",
+        "guided_task_refs",
+        "fresh_retry_task_refs",
+        "mastery_task_refs",
+        "difference_from_failed_instruction",
+        "repeats_failed_task_only"
+      ],
+      "properties": {
+        "path_id": {
+          "$ref": "#/$defs/id"
+        },
+        "signal_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "misconception_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "error_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "prerequisite_knowledge_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "alternate_explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 6000
+        },
+        "model_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "guided_task_refs": {
+          "$ref": "#/$defs/id_array"
+        },
+        "fresh_retry_task_refs": {
+          "$ref": "#/$defs/id_array"
+        },
+        "mastery_task_refs": {
+          "$ref": "#/$defs/id_array"
+        },
+        "difference_from_failed_instruction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "repeats_failed_task_only": {
+          "const": false
+        }
+      }
+    },
+    "adult_authority_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_ref",
+        "target_skill_ids",
+        "acceptable_evidence",
+        "required_source_refs",
+        "reasoning_or_rationale",
+        "scoring_guidance",
+        "misconception_ids",
+        "error_ids",
+        "independence_disqualifiers"
+      ],
+      "properties": {
+        "task_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "target_skill_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "acceptable_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3000
+          }
+        },
+        "required_source_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "reasoning_or_rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 6000
+        },
+        "scoring_guidance": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 6000
+        },
+        "misconception_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "error_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "independence_disqualifiers": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "protected_content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adult_authority"],
+      "properties": {
+        "adult_authority": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/adult_authority_entry"
+          }
+        }
+      }
+    },
+    "support": {
+      "enum": [
+        "READ_ALOUD",
+        "VOCABULARY_REMINDER",
+        "CONTEXT_RECAP",
+        "SOURCE_CHUNKING",
+        "MAP_ORIENTATION",
+        "TIMELINE_ORIENTATION",
+        "EVIDENCE_LOCATION_PROMPT",
+        "QUESTION_DECOMPOSITION",
+        "GRAPHIC_ORGANIZER",
+        "NEUTRAL_SENTENCE_FRAME",
+        "WORKED_EXAMPLE_REFERENCE",
+        "ALT_OR_LONG_DESCRIPTION",
+        "CAPTION_OR_TRANSCRIPT",
+        "REDUCED_COPYING",
+        "EXTENDED_TIME",
+        "HIDDEN_TIMER",
+        "MOVEMENT_BREAK",
+        "LOW_DISTRACTION",
+        "ALTERNATE_RESPONSE_MODE"
+      ]
+    },
+    "support_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/support"
+      }
+    },
+    "phase_content_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "teach_refs",
+        "model_refs",
+        "guided_refs",
+        "independent_refs",
+        "mastery_refs",
+        "remediation_refs",
+        "assessment_refs",
+        "project_refs"
+      ],
+      "properties": {
+        "teach_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "model_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "guided_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "independent_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "mastery_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "remediation_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "assessment_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "project_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        }
+      }
+    },
+    "tutor_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lesson_id",
+        "instructional_purpose",
+        "disciplinary_modes",
+        "authored_phase",
+        "topic_ids",
+        "skill_ids",
+        "prerequisite_knowledge_ids",
+        "source_refs",
+        "misconception_ids",
+        "error_ids",
+        "model_refs",
+        "guided_task_refs",
+        "independent_task_refs",
+        "mastery_task_refs",
+        "remediation_path_refs",
+        "assessment_task_refs",
+        "project_checkpoint_refs",
+        "allowed_instructional_supports",
+        "help_policy_ref",
+        "answer_policy_ref",
+        "grade_language_policy_ref",
+        "phase_content_refs",
+        "grounding_in_accepted_material_required",
+        "may_invent_historical_facts",
+        "may_invent_sources",
+        "may_write_or_rewrite_graded_work",
+        "may_reveal_protected_final_answer",
+        "controls_runtime_mastery_state"
+      ],
+      "properties": {
+        "lesson_id": {
+          "$ref": "#/$defs/id"
+        },
+        "instructional_purpose": {
+          "$ref": "#/$defs/instructional_purpose"
+        },
+        "disciplinary_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/disciplinary_mode"
+          }
+        },
+        "authored_phase": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "topic_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "skill_ids": {
+          "$ref": "#/$defs/id_array"
+        },
+        "prerequisite_knowledge_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "misconception_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "error_ids": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "model_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "guided_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "independent_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "mastery_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "remediation_path_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "assessment_task_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "project_checkpoint_refs": {
+          "$ref": "#/$defs/id_array_allow_empty"
+        },
+        "allowed_instructional_supports": {
+          "$ref": "#/$defs/support_array"
+        },
+        "help_policy_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "answer_policy_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "grade_language_policy_ref": {
+          "$ref": "#/$defs/id"
+        },
+        "phase_content_refs": {
+          "$ref": "#/$defs/phase_content_refs"
+        },
+        "grounding_in_accepted_material_required": {
+          "const": true
+        },
+        "may_invent_historical_facts": {
+          "const": false
+        },
+        "may_invent_sources": {
+          "const": false
+        },
+        "may_write_or_rewrite_graded_work": {
+          "const": false
+        },
+        "may_reveal_protected_final_answer": {
+          "const": false
+        },
+        "controls_runtime_mastery_state": {
+          "const": false
+        }
+      }
+    }
+  }
+}
