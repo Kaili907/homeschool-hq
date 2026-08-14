@@ -1,5 +1,5 @@
 {
-  "corpusVersion": "1.0.1",
+  "corpusVersion": "1.0.2",
   "granularity": "lesson",
   "subjects": [
     "technology",
@@ -128,11 +128,24 @@
     "checksums": "TECHNOLOGY_SHA256SUMS.txt",
     "validator": "tests/technology-actionability-audit.mjs"
   },
+  "technologySolutionExposureRepairR1": {
+    "authoritativeReviewCommit": "15633ad5677dd5a966adf0fc83b22dca93e6bf1e",
+    "casesReviewed": 87,
+    "legitimateWorkedExamplesPreserved": 19,
+    "nonSummativeExposuresBefore": 56,
+    "nonSummativeExposuresAfter": 0,
+    "summativeExposuresBefore": 12,
+    "summativeExposuresAfter": 0,
+    "formalAdultKeyLeaksAfter": 0,
+    "adultTrustedAuthoritiesComplete": 87,
+    "semanticGate": "tests/solution-exposure-audit.mjs",
+    "evidence": "docs/curriculum-quality/technology/solution-exposure-fix-r1"
+  },
   "duplicateContentCheck": {
     "method": "5-gram word-shingle Jaccard over student-facing task text",
     "exactDuplicateTaskTexts": 0,
-    "maxSiblingSimilarityWithinUnit": 0.4232,
-    "meanSiblingSimilarityWithinUnit": 0.3047,
+    "maxSiblingSimilarityWithinUnit": 0.4211,
+    "meanSiblingSimilarityWithinUnit": 0.3005,
     "siblingCeiling": 0.6,
     "maxSimilarityToOwnUnitLevelTask": 0.0761,
     "unitEchoCeiling": 0.6,
@@ -165,6 +178,7 @@
     "structuralAndPolicyValidator": "node tests/validate-corpus.mjs",
     "schemaConformance": "node tests/schema-check.mjs",
     "technologyActionability": "node tests/technology-actionability-audit.mjs",
+    "technologySolutionExposure": "node tests/solution-exposure-audit.mjs",
     "technologyChecksums": "node tests/write-technology-checksums.mjs",
     "regenerate": "node generate.mjs"
   },

@@ -88,9 +88,10 @@
       }
     ],
     "debugging_target": {
-      "observed_failure": "Each update recomputes from the original start value, discarding earlier updates, so the supplied case returns 2 instead of 4.",
-      "target": "Replace the stale-state dependency with the current state, explain the update order, and rerun all three tests.",
-      "passing_change": "Each assignment uses current + delta; the tests return 4, 5, and 5.",
+      "observed_failure": "The supplied update sequence should finish at 4, but the unchanged program finishes at 2.",
+      "target": "Use the specification, unchanged run, and test table to locate the first divergent state or control-flow decision; explain the evidence before choosing an edit.",
+      "pre_attempt_support": "Run and record the unchanged program, then diagnose and repair it independently from the specification and tests. No solution or worked repair is included in learner material.",
+      "solution_status": "WITHHELD_UNTIL_PROTECTED_EVIDENCE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to systems, concurrency, and performance is the central evidence."
     },
     "equal_credit_alternative": {

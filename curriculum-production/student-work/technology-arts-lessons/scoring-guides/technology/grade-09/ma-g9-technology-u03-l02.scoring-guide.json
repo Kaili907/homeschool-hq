@@ -44,6 +44,26 @@
   ],
   "formative_check": "Explain the modelled approach to reading traces and diagnostic output in your own words and name the step most likely to go wrong.",
   "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "ALSO_SHOWN_AS_NON_PENALTY_INSTRUCTIONAL_EXAMPLE",
+    "review_timing": "DURING_INSTRUCTIONAL_MODEL",
+    "exact_repair": "Each assignment uses current + delta; the tests return 4, 5, and 5.",
+    "validation_tests": [
+      {
+        "input": "applyUpdates(0, [3, -1, 2])",
+        "expected": "4"
+      },
+      {
+        "input": "applyUpdates(5, [])",
+        "expected": "5"
+      },
+      {
+        "input": "applyUpdates(1, [2, 2])",
+        "expected": "5"
+      }
+    ]
+  },
   "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, commit or test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g9-technology-u03-assessment",

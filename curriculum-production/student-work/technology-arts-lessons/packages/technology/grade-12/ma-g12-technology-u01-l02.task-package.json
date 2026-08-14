@@ -90,6 +90,7 @@
       "observed_failure": "Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.",
       "target": "Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.",
       "passing_change": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+      "solution_status": "INSTRUCTIONAL_WORKED_EXAMPLE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to greedy and dynamic programming strategies is the central evidence."
     },
     "equal_credit_alternative": {

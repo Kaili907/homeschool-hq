@@ -87,9 +87,10 @@
       }
     ],
     "debugging_target": {
-      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
-      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
-      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "observed_failure": "The main input should retain all three steps, but the unchanged program returns check > save.",
+      "target": "Use the specification, unchanged run, and test table to locate the first divergent state or control-flow decision; explain the evidence before choosing an edit.",
+      "pre_attempt_support": "Trace the value that controls the failing behavior and mark the first step where actual and expected state diverge. Use that location to propose your own smallest edit.",
+      "solution_status": "WITHHELD_UNTIL_PROTECTED_EVIDENCE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to systematic debugging strategy and version control commits and history is the central evidence."
     },
     "equal_credit_alternative": {

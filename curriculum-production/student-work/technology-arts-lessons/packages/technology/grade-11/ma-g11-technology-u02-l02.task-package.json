@@ -90,6 +90,7 @@
       "observed_failure": "The add method replaces the stored state instead of composing the new amount with the prior state, so the supplied calls end at 3 instead of 5.",
       "target": "Repair the state update inside add, explain the role of the existing instance value, and rerun all three tests.",
       "passing_change": "The update combines this.value with amount; the three tests return 5, 0, and 3.",
+      "solution_status": "INSTRUCTIONAL_WORKED_EXAMPLE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to encapsulation and interfaces is the central evidence."
     },
     "equal_credit_alternative": {

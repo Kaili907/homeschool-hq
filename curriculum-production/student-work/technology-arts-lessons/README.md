@@ -14,7 +14,7 @@ re-cut six or twelve ways — see [Why each lesson differs](#why-each-lesson-dif
 | Units covered | 108 |
 | Courses | 18 (2 subjects × 9 grades) |
 | Production Quality Gate | **984 READY**, 0 needs-review, 0 not-ready |
-| Duplicate content check | **PASS** — 0 exact duplicates, max sibling similarity 0.4232 |
+| Duplicate content check | **PASS** — 0 exact duplicates, max sibling similarity 0.4211 |
 | Overlap with own unit task | 0.0761 max (5-gram Jaccard) |
 
 ## Layout
@@ -77,7 +77,12 @@ method, three test cases, a concrete debugging target, and an equal-credit
 paper/manual alternative. None waits for a teacher-supplied model, dataset,
 starter file, account, or external service. All 87 code/debug activities carry
 complete parseable JavaScript starter code and inline inputs; the same task can
-be completed by hand-tracing for identical credit. Every
+be completed by hand-tracing for identical credit. The 19 non-penalty `MODEL`
+fixtures retain a labelled instructional worked repair. The other 68 fixtures
+contain attempt-safe debugging support but no exact `passing_change` or
+equivalent full repair before evidence collection. Their exact repairs and
+validation tests are held only in each adult scoring guide's
+`trusted_solution_reference`. Every
 lesson prohibits real passwords, passphrases, API keys, credentials, access
 tokens, precise locations, and real personal data, and prohibits signing into,
 probing, scanning, or accessing any live, production, school, or third-party
@@ -143,6 +148,10 @@ node tests/technology-actionability-audit.mjs
 ```
 
 ```bash
+node tests/solution-exposure-audit.mjs
+```
+
+```bash
 node tests/write-technology-checksums.mjs
 ```
 
@@ -169,6 +178,14 @@ generated Technology packages as delivered to learners. It writes
 input, unrunnable tool path, incomplete starter code/input/specification/test,
 missing debugging target, unequal fallback, placeholder shell, paid/account
 dependency, credential-shaped literal, or privacy/security gap.
+
+`tests/solution-exposure-audit.mjs` is the semantic answer-authority gate. It
+locks the authoritative 87-case review inventory, preserves all 19 legitimate
+instructional examples, rejects `passing_change` and six known exact-repair
+signatures in the other 68 learner packages, checks all 336 Technology learner
+projections for formal adult-key leaks, and proves the adult solution authority
+is complete. Its deterministic before/after evidence is under
+`docs/curriculum-quality/technology/solution-exposure-fix-r1/`.
 
 ## Reading register
 

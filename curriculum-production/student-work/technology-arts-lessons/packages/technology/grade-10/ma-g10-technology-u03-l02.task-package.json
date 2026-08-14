@@ -90,6 +90,7 @@
       "observed_failure": "The selection is correct, but the aggregation subtracts each selected value, so the supplied records return -6 instead of 6.",
       "target": "Repair the aggregation operator, explain the selected rows and accumulator state, and rerun all three tests.",
       "passing_change": "The reducer uses total + record.value; the tests return 6, 0, and 0.",
+      "solution_status": "INSTRUCTIONAL_WORKED_EXAMPLE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to schema design and normalization is the central evidence."
     },
     "equal_credit_alternative": {

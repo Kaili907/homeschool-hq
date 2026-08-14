@@ -44,6 +44,26 @@
   ],
   "formative_check": "In one concise response, show or explain the most important idea about functions and debugging; then identify one check that would catch an error or weak claim.",
   "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER_BEFORE_PROTECTED_EVIDENCE",
+    "review_timing": "AFTER_PROTECTED_EVIDENCE_OR_ADULT_REVIEW_ONLY",
+    "exact_repair": "Iteration begins at index 0; all three tests retain every step in order.",
+    "validation_tests": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ]
+  },
   "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g7-technology-u02-assessment",

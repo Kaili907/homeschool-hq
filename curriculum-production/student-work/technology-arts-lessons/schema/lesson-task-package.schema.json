@@ -410,7 +410,32 @@
           }
         },
         "debugging_target": {
-          "type": "object"
+          "type": "object",
+          "required": [
+            "observed_failure",
+            "target"
+          ],
+          "properties": {
+            "observed_failure": { "type": "string", "minLength": 20 },
+            "target": { "type": "string", "minLength": 20 },
+            "passing_change": {
+              "description": "Exact passing repair. Permitted for explicitly labelled non-penalty instructional MODEL fixtures and non-code analysis checks only; corpus validators enforce that custody rule.",
+              "type": "string",
+              "minLength": 20
+            },
+            "pre_attempt_support": {
+              "description": "Attempt-safe concept guidance or partial debugging scaffold that does not disclose the exact repair.",
+              "type": "string",
+              "minLength": 20
+            },
+            "solution_status": {
+              "enum": [
+                "INSTRUCTIONAL_WORKED_EXAMPLE",
+                "WITHHELD_UNTIL_PROTECTED_EVIDENCE"
+              ]
+            },
+            "scope_note": { "type": "string", "minLength": 20 }
+          }
         },
         "equal_credit_alternative": {
           "type": "object"

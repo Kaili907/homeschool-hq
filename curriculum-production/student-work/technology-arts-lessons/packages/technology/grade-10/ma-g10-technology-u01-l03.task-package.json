@@ -88,9 +88,10 @@
       }
     ],
     "debugging_target": {
-      "observed_failure": "The selection is correct, but the aggregation subtracts each selected value, so the supplied records return -6 instead of 6.",
-      "target": "Repair the aggregation operator, explain the selected rows and accumulator state, and rerun all three tests.",
-      "passing_change": "The reducer uses total + record.value; the tests return 6, 0, and 0.",
+      "observed_failure": "The supplied records should produce 6, but the unchanged program produces -6.",
+      "target": "Use the specification, unchanged run, and test table to locate the first divergent state or control-flow decision; explain the evidence before choosing an edit.",
+      "pre_attempt_support": "Trace the value that controls the failing behavior and mark the first step where actual and expected state diverge. Use that location to propose your own smallest edit.",
+      "solution_status": "WITHHELD_UNTIL_PROTECTED_EVIDENCE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to dictionaries and records and stacks and queues is the central evidence."
     },
     "equal_credit_alternative": {

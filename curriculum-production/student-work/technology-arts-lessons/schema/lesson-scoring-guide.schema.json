@@ -171,6 +171,39 @@
     "answer_or_scoring_guidance": {
       "type": "string"
     },
+    "trusted_solution_reference": {
+      "description": "Adult/trusted solution authority for a code/debug fixture. This object is never projected into learner material.",
+      "type": "object",
+      "required": [
+        "authority",
+        "learner_visibility",
+        "review_timing",
+        "exact_repair",
+        "validation_tests"
+      ],
+      "properties": {
+        "authority": { "const": "ADULT_TRUSTED_AUTHORITY" },
+        "learner_visibility": {
+          "enum": [
+            "ALSO_SHOWN_AS_NON_PENALTY_INSTRUCTIONAL_EXAMPLE",
+            "NEVER_BEFORE_PROTECTED_EVIDENCE"
+          ]
+        },
+        "review_timing": {
+          "enum": [
+            "DURING_INSTRUCTIONAL_MODEL",
+            "AFTER_PROTECTED_EVIDENCE_OR_ADULT_REVIEW_ONLY"
+          ]
+        },
+        "exact_repair": { "type": "string", "minLength": 20 },
+        "validation_tests": {
+          "type": "array",
+          "minItems": 3,
+          "items": { "type": "object" }
+        }
+      },
+      "additionalProperties": false
+    },
     "mastery_rule": {
       "type": "string"
     },

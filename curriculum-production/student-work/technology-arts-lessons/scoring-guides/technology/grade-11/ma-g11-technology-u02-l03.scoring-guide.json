@@ -44,6 +44,26 @@
   ],
   "formative_check": "Show your reasoning on the faded example of composition and inheritance tradeoffs and modules and dependencies and identify the check that confirms it.",
   "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER_BEFORE_PROTECTED_EVIDENCE",
+    "review_timing": "AFTER_PROTECTED_EVIDENCE_OR_ADULT_REVIEW_ONLY",
+    "exact_repair": "The update combines this.value with amount; the three tests return 5, 0, and 3.",
+    "validation_tests": [
+      {
+        "input": "start 0; add(2); add(3)",
+        "expected": "5"
+      },
+      {
+        "input": "start 0; add(0)",
+        "expected": "0"
+      },
+      {
+        "input": "start 0; add(-1); add(4)",
+        "expected": "3"
+      }
+    ]
+  },
   "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, commit or test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g11-technology-u02-assessment",

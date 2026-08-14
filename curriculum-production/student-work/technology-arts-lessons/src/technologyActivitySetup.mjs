@@ -30,6 +30,7 @@ function buildCodeCase(lesson) {
         { input: '[{ text: "Go", label: "Go" }]', expected: '0' },
       ],
       observed: 'The code checks visible text instead of the label field, so it reports 0 missing labels when one label is missing.',
+      symptom: 'The supplied two-control case should report 1 missing label, but the unchanged program reports 0.',
       target: 'Change the field used by the filter, explain why visible text and an accessible label are separate data, and rerun all three tests.',
       passing: 'The filter checks control.label; the three tests return 1, 0, and 0.',
     }
@@ -46,6 +47,7 @@ function buildCodeCase(lesson) {
         { input: 'start 0; add(-1); add(4)', expected: '3' },
       ],
       observed: 'The add method replaces the stored state instead of composing the new amount with the prior state, so the supplied calls end at 3 instead of 5.',
+      symptom: 'The supplied calls should finish at 5, but the unchanged program finishes at 3.',
       target: 'Repair the state update inside add, explain the role of the existing instance value, and rerun all three tests.',
       passing: 'The update combines this.value with amount; the three tests return 5, 0, and 3.',
     }
@@ -62,6 +64,7 @@ function buildCodeCase(lesson) {
         { input: '[6]', expected: '6' },
       ],
       observed: 'Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.',
+      symptom: 'The all-negative test should return -2, but the unchanged program returns 0.',
       target: 'Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.',
       passing: 'Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.',
     }
@@ -78,6 +81,7 @@ function buildCodeCase(lesson) {
         { input: 'applyUpdates(1, [2, 2])', expected: '5' },
       ],
       observed: 'Each update recomputes from the original start value, discarding earlier updates, so the supplied case returns 2 instead of 4.',
+      symptom: 'The supplied update sequence should finish at 4, but the unchanged program finishes at 2.',
       target: 'Replace the stale-state dependency with the current state, explain the update order, and rerun all three tests.',
       passing: 'Each assignment uses current + delta; the tests return 4, 5, and 5.',
     }
@@ -94,6 +98,7 @@ function buildCodeCase(lesson) {
         { input: '[{ label: "Elm", value: 5, active: false }]', expected: '0' },
       ],
       observed: 'The selection is correct, but the aggregation subtracts each selected value, so the supplied records return -6 instead of 6.',
+      symptom: 'The supplied records should produce 6, but the unchanged program produces -6.',
       target: 'Repair the aggregation operator, explain the selected rows and accumulator state, and rerun all three tests.',
       passing: 'The reducer uses total + record.value; the tests return 6, 0, and 0.',
     }
@@ -109,15 +114,30 @@ function buildCodeCase(lesson) {
       { input: '["start"]', expected: 'start' },
     ],
     observed: 'Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.',
+    symptom: 'The main input should retain all three steps, but the unchanged program returns check > save.',
     target: 'Repair the initial index, explain the sequence invariant, and rerun all three tests.',
     passing: 'Iteration begins at index 0; all three tests retain every step in order.',
   }
 }
 
-function codeFixture(lesson, grade) {
-  const codeCase = buildCodeCase(lesson)
+const PRE_ATTEMPT_SUPPORT_BY_MODE = Object.freeze({
+  PROBE: 'Before editing, record the unchanged output and identify which stated rule is first contradicted. Do not look for or request a finished repair.',
+  GUIDED: 'Trace the value that controls the failing behavior and mark the first step where actual and expected state diverge. Use that location to propose your own smallest edit.',
+  GUIDED_B: 'Trace the value that controls the failing behavior and mark the first step where actual and expected state diverge. Use that location to propose your own smallest edit.',
+  BUILD: 'Use the three tests to isolate one defect region, then choose and justify the smallest edit that satisfies the specification without weakening a boundary test.',
+  CORRECT: 'Preserve the original run and repair attempt in the defect log. Compare the earliest divergent state with the specification before proposing a revised repair.',
+  DEMONSTRATE: 'Run and record the unchanged program, then diagnose and repair it independently from the specification and tests. No solution or worked repair is included in learner material.',
+})
 
-  return {
+function codeFixture(lesson, grade, mode) {
+  const codeCase = buildCodeCase(lesson)
+  const isInstructionalModel = mode === 'MODEL'
+  const preAttemptSupport = PRE_ATTEMPT_SUPPORT_BY_MODE[mode]
+  if (!isInstructionalModel && !preAttemptSupport) {
+    throw new Error(`${lesson.lesson_id}: CODE_OR_DEBUG activity has no attempt-safe support policy for ${mode}`)
+  }
+
+  const activitySetup = {
     activity_kind: 'CODE_OR_DEBUG',
     central_input: {
       title: `Inline ${lesson.focus} code case`,
@@ -141,9 +161,19 @@ function codeFixture(lesson, grade) {
     },
     test_cases: codeCase.tests,
     debugging_target: {
-      observed_failure: codeCase.observed,
-      target: codeCase.target,
-      passing_change: codeCase.passing,
+      observed_failure: isInstructionalModel ? codeCase.observed : codeCase.symptom,
+      target: isInstructionalModel
+        ? codeCase.target
+        : 'Use the specification, unchanged run, and test table to locate the first divergent state or control-flow decision; explain the evidence before choosing an edit.',
+      ...(isInstructionalModel
+        ? {
+            passing_change: codeCase.passing,
+            solution_status: 'INSTRUCTIONAL_WORKED_EXAMPLE',
+          }
+        : {
+            pre_attempt_support: preAttemptSupport,
+            solution_status: 'WITHHELD_UNTIL_PROTECTED_EVIDENCE',
+          }),
       scope_note: `Diagnosing the state, control-flow, or data defect and connecting the repair to ${lesson.focus} is the central evidence.`,
     },
     equal_credit_alternative: {
@@ -155,6 +185,21 @@ function codeFixture(lesson, grade) {
         'Apply the one repair named in your explanation and trace all three tests again.',
       ],
       evidence_to_submit: 'The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests.',
+    },
+  }
+
+  return {
+    activitySetup,
+    trustedSolutionReference: {
+      authority: 'ADULT_TRUSTED_AUTHORITY',
+      learner_visibility: isInstructionalModel
+        ? 'ALSO_SHOWN_AS_NON_PENALTY_INSTRUCTIONAL_EXAMPLE'
+        : 'NEVER_BEFORE_PROTECTED_EVIDENCE',
+      review_timing: isInstructionalModel
+        ? 'DURING_INSTRUCTIONAL_MODEL'
+        : 'AFTER_PROTECTED_EVIDENCE_OR_ADULT_REVIEW_ONLY',
+      exact_repair: codeCase.passing,
+      validation_tests: codeCase.tests,
     },
   }
 }
@@ -281,10 +326,10 @@ function artifactSetup(lesson, taskType, grade) {
   }
 }
 
-export function buildTechnologyActivitySetup({ lesson, taskType, grade }) {
+export function buildTechnologyActivityMaterials({ lesson, taskType, grade, mode }) {
   return CODE_OR_DEBUG.test(`${lesson.focus} ${lesson.title}`)
-    ? codeFixture(lesson, grade)
-    : artifactSetup(lesson, taskType, grade)
+    ? codeFixture(lesson, grade, mode)
+    : { activitySetup: artifactSetup(lesson, taskType, grade), trustedSolutionReference: null }
 }
 
 export const technologyActivityRequiresCode = (lesson) => CODE_OR_DEBUG.test(`${lesson.focus} ${lesson.title}`)

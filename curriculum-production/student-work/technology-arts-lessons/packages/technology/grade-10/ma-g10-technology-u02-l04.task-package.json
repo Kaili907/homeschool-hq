@@ -87,9 +87,10 @@
       }
     ],
     "debugging_target": {
-      "observed_failure": "Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.",
-      "target": "Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.",
-      "passing_change": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+      "observed_failure": "The all-negative test should return -2, but the unchanged program returns 0.",
+      "target": "Use the specification, unchanged run, and test table to locate the first divergent state or control-flow decision; explain the evidence before choosing an edit.",
+      "pre_attempt_support": "Use the three tests to isolate one defect region, then choose and justify the smallest edit that satisfies the specification without weakening a boundary test.",
+      "solution_status": "WITHHELD_UNTIL_PROTECTED_EVIDENCE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to correctness arguments and invariants and empirical timing and measurement is the central evidence."
     },
     "equal_credit_alternative": {

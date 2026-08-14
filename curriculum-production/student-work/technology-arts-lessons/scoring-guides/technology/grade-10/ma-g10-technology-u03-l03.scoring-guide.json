@@ -44,6 +44,26 @@
   ],
   "formative_check": "Show your reasoning on the faded example of query logic and filtering and aggregation and grouping and identify the check that confirms it.",
   "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER_BEFORE_PROTECTED_EVIDENCE",
+    "review_timing": "AFTER_PROTECTED_EVIDENCE_OR_ADULT_REVIEW_ONLY",
+    "exact_repair": "The reducer uses total + record.value; the tests return 6, 0, and 0.",
+    "validation_tests": [
+      {
+        "input": "the three supplied records",
+        "expected": "6"
+      },
+      {
+        "input": "[]",
+        "expected": "0"
+      },
+      {
+        "input": "[{ label: \"Elm\", value: 5, active: false }]",
+        "expected": "0"
+      }
+    ]
+  },
   "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, commit or test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g10-technology-u03-assessment",

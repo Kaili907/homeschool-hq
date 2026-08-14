@@ -32,7 +32,7 @@ import {
 } from './lessonPhasesElementary.mjs'
 import { buildAccessibilityProvisions } from './lessonAccessibility.mjs'
 import { buildLessonRubric } from './lessonRubrics.mjs'
-import { buildTechnologyActivitySetup } from './technologyActivitySetup.mjs'
+import { buildTechnologyActivityMaterials } from './technologyActivitySetup.mjs'
 import {
   buildArtsLearnerResource,
   HOUSEHOLD_ARTS_MATERIAL_ROUTE,
@@ -254,7 +254,10 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
   const taskType = classifyLesson(lesson, unit, subjectKey)
 
   const taskFocus = taskFacingFocus(lesson.focus, subjectKey)
-  const activitySetup = isTech ? buildTechnologyActivitySetup({ lesson, taskType, grade }) : undefined
+  const technologyActivity = isTech
+    ? buildTechnologyActivityMaterials({ lesson, taskType, grade, mode })
+    : undefined
+  const activitySetup = technologyActivity?.activitySetup
 
   /**
    * Authored strings (objectives, success criteria, formative checks, tutor
@@ -508,6 +511,9 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     lesson_success_criteria: lesson.success_criteria,
     formative_check: reframe(lesson.formative_check),
     answer_or_scoring_guidance: lesson.answer_or_scoring_guidance,
+    ...(technologyActivity?.trustedSolutionReference
+      ? { trusted_solution_reference: technologyActivity.trustedSolutionReference }
+      : {}),
     mastery_rule: lesson.mastery_rule,
     unit_assessment_reference: {
       assessment_id: assessment.assessment_id,

@@ -88,9 +88,10 @@
       }
     ],
     "debugging_target": {
-      "observed_failure": "The code checks visible text instead of the label field, so it reports 0 missing labels when one label is missing.",
-      "target": "Change the field used by the filter, explain why visible text and an accessible label are separate data, and rerun all three tests.",
-      "passing_change": "The filter checks control.label; the three tests return 1, 0, and 0.",
+      "observed_failure": "The supplied two-control case should report 1 missing label, but the unchanged program reports 0.",
+      "target": "Use the specification, unchanged run, and test table to locate the first divergent state or control-flow decision; explain the evidence before choosing an edit.",
+      "pre_attempt_support": "Before editing, record the unchanged output and identify which stated rule is first contradicted. Do not look for or request a finished repair.",
+      "solution_status": "WITHHELD_UNTIL_PROTECTED_EVIDENCE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to HTML or block-based page structure is the central evidence."
     },
     "equal_credit_alternative": {

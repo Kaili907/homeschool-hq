@@ -1,0 +1,44 @@
+{
+  "schema_version": "technology-solution-exposure-semantic-gate-r1.1",
+  "status": "PASS",
+  "authoritative_review_commit": "15633ad5677dd5a966adf0fc83b22dca93e6bf1e",
+  "base_commit": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+  "scope": {
+    "technology_lessons": 336,
+    "reviewed_code_or_debug_cases": 87
+  },
+  "results": {
+    "cases_reviewed": 87,
+    "legitimate_worked_examples_preserved": 19,
+    "non_summative_exposures_before": 56,
+    "non_summative_exposures_after": 0,
+    "summative_exposures_before": 12,
+    "summative_exposures_after": 0,
+    "total_violations_before": 68,
+    "total_violations_after": 0,
+    "adult_trusted_authorities_complete": 87,
+    "formal_adult_key_leaks": 0,
+    "other_technology_lessons_with_new_solution_exposure": 0
+  },
+  "detection": {
+    "passing_change_key_checked": true,
+    "semantic_exact_repair_signatures_checked": [
+      "HTML_ACCESSIBLE_LABEL",
+      "OBJECT_STATE_UPDATE",
+      "ALGORITHM_INITIALIZATION",
+      "STALE_STATE_UPDATE",
+      "DATA_AGGREGATION",
+      "GENERIC_SEQUENCE_INDEX"
+    ],
+    "complete_learner_projection_checked": true,
+    "all_336_technology_packages_checked": true
+  },
+  "evidence": {
+    "case_mapping_json": "docs/curriculum-quality/technology/solution-exposure-fix-r1/case-mapping.json",
+    "case_mapping_csv": "docs/curriculum-quality/technology/solution-exposure-fix-r1/case-mapping.csv",
+    "authoritative_review_sha256": "582c469957c6a61926d78b3034987ad6de19832a99711329c8bff8a9d1eca0fc",
+    "repaired_package_corpus_sha256": "6b1467330d5fe9ce48ebf884860b2260021c0ce7afaabc8134488c44bda76408",
+    "adult_authority_corpus_sha256": "ac371af724152543e7a9b6d8094f9559f32896318a4237cb54dc1cbc9fe4ce90"
+  },
+  "failures": []
+}

@@ -234,13 +234,32 @@ for (const course of COURSES) {
       if (!setup?.execution_method || !/(paper|hand-trace|notes app|browser)/i.test(JSON.stringify(setup.execution_method))) {
         fail(id, 'technology lesson lacks a no-install browser/manual execution method')
       }
-      if (!setup?.debugging_target?.target || !setup?.debugging_target?.passing_change) fail(id, 'technology lesson lacks a concrete debugging target')
+      if (!setup?.debugging_target?.observed_failure || !setup?.debugging_target?.target) fail(id, 'technology lesson lacks a concrete debugging target')
       if (!/(same score|identical credit|exactly the same score)/i.test(JSON.stringify(setup?.equal_credit_alternative ?? {}))) {
         fail(id, 'technology lesson lacks an explicitly equal-credit manual alternative')
       }
       if (setup?.activity_kind === 'CODE_OR_DEBUG') {
         if (!setup.central_input?.starter_code || !setup.central_input?.starter_code_language) fail(id, 'code/debug activity lacks starter code or language')
         if (!Array.isArray(setup.central_input?.input_data) || setup.central_input.input_data.length < 3) fail(id, 'code/debug activity lacks supplied input data')
+        if (pkg.work_mode === 'MODEL') {
+          if (!setup.debugging_target?.passing_change || setup.debugging_target?.solution_status !== 'INSTRUCTIONAL_WORKED_EXAMPLE') {
+            fail(id, 'MODEL code/debug activity lacks its labelled instructional worked repair')
+          }
+        } else if (
+          setup.debugging_target?.passing_change !== undefined ||
+          !setup.debugging_target?.pre_attempt_support ||
+          setup.debugging_target?.solution_status !== 'WITHHELD_UNTIL_PROTECTED_EVIDENCE'
+        ) {
+          fail(id, 'independent code/debug activity exposes a passing change or lacks attempt-safe support')
+        }
+        if (
+          guide.trusted_solution_reference?.authority !== 'ADULT_TRUSTED_AUTHORITY' ||
+          !guide.trusted_solution_reference?.exact_repair ||
+          !Array.isArray(guide.trusted_solution_reference?.validation_tests) ||
+          guide.trusted_solution_reference.validation_tests.length < 3
+        ) {
+          fail(id, 'code/debug scoring guide lacks complete trusted solution authority')
+        }
       }
       const note = pkg.presentation_and_privacy?.sandbox_and_credentials_note ?? ''
       if (!/never use a real password/i.test(note)) fail(id, 'technology lesson lacks the no-real-credentials prohibition')

@@ -77,8 +77,8 @@ for (const pkg of packages) {
     noInstallOrPaperMethods += 1
   }
   const debug = setup?.debugging_target
-  if (!debug?.observed_failure || !debug?.target || !debug?.passing_change) {
-    fail(id, 'MISSING_DEBUGGING_TARGET', 'observed failure, target, and passing change are all required')
+  if (!debug?.observed_failure || !debug?.target) {
+    fail(id, 'MISSING_DEBUGGING_TARGET', 'observed failure and debugging target are required')
     unrunnable = true
   }
   const alternativeText = JSON.stringify(setup?.equal_credit_alternative ?? {})
@@ -91,6 +91,20 @@ for (const pkg of packages) {
 
   if (setup?.activity_kind === 'CODE_OR_DEBUG') {
     codeOrDebugActivities += 1
+    const instructionalModel = pkg.work_mode === 'MODEL'
+    if (instructionalModel) {
+      if (!debug?.passing_change || debug.solution_status !== 'INSTRUCTIONAL_WORKED_EXAMPLE') {
+        fail(id, 'MISSING_INSTRUCTIONAL_MODEL_SOLUTION', 'MODEL code activity must preserve its labelled non-penalty worked repair')
+        unrunnable = true
+      }
+    } else if (
+      debug?.passing_change !== undefined ||
+      !debug?.pre_attempt_support ||
+      debug?.solution_status !== 'WITHHELD_UNTIL_PROTECTED_EVIDENCE'
+    ) {
+      fail(id, 'UNSAFE_OR_MISSING_PRE_ATTEMPT_SUPPORT', 'independent code activity must withhold passing_change and provide attempt-safe support')
+      unrunnable = true
+    }
     const central = setup.central_input ?? {}
     if (!central.starter_code || !central.starter_code_language || !Array.isArray(central.input_data) || central.input_data.length < 3) {
       fail(id, 'INCOMPLETE_STARTER_CODE', 'language, complete code, and three inline inputs are required')

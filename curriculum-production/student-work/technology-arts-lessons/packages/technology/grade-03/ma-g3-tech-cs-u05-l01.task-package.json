@@ -99,9 +99,10 @@
       }
     ],
     "debugging_target": {
-      "observed_failure": "The add method replaces the stored state instead of composing the new amount with the prior state, so the supplied calls end at 3 instead of 5.",
-      "target": "Repair the state update inside add, explain the role of the existing instance value, and rerun all three tests.",
-      "passing_change": "The update combines this.value with amount; the three tests return 5, 0, and 3.",
+      "observed_failure": "The supplied calls should finish at 5, but the unchanged program finishes at 3.",
+      "target": "Use the specification, unchanged run, and test table to locate the first divergent state or control-flow decision; explain the evidence before choosing an edit.",
+      "pre_attempt_support": "Before editing, record the unchanged output and identify which stated rule is first contradicted. Do not look for or request a finished repair.",
+      "solution_status": "WITHHELD_UNTIL_PROTECTED_EVIDENCE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to sorting and counting objects is the central evidence."
     },
     "equal_credit_alternative": {

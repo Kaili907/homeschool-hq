@@ -91,6 +91,7 @@
       "observed_failure": "Each update recomputes from the original start value, discarding earlier updates, so the supplied case returns 2 instead of 4.",
       "target": "Replace the stale-state dependency with the current state, explain the update order, and rerun all three tests.",
       "passing_change": "Each assignment uses current + delta; the tests return 4, 5, and 5.",
+      "solution_status": "INSTRUCTIONAL_WORKED_EXAMPLE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to processes threads and concurrency is the central evidence."
     },
     "equal_credit_alternative": {
