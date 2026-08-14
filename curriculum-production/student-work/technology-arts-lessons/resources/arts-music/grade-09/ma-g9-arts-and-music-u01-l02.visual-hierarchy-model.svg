@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="model-title model-description">
+  <title id="model-title">Three Stops: an annotated visual hierarchy model in three stages</title>
+  <desc id="model-description">Three panels show the same circle, striped rectangle, and triangle. The first panel gives them similar visual weight. The second isolates a small dark circle at upper left, keeps a striped rectangle near the centre, and places a large pale triangle at lower right. The third adds a curved directional line and numbers an intended eye path from circle to rectangle to triangle. A fourth small panel shows a valid alternate composition with the triangle as the first stop.</desc>
+  <defs>
+    <pattern id="stripe" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <rect width="12" height="12" fill="#d8c9a9"/>
+      <rect width="4" height="12" fill="#4e5962"/>
+    </pattern>
+    <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#f3ead5"/>
+      <circle cx="4" cy="4" r="2.3" fill="#25323a"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9d3c2e"/>
+    </marker>
+    <filter id="paper-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#18232a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" fill="#e8e1d2"/>
+  <text x="70" y="64" font-family="Georgia, serif" font-size="35" font-weight="700" fill="#18232a">Three Stops</text>
+  <text x="70" y="96" font-family="Arial, sans-serif" font-size="17" fill="#4b565d">Watch the same forms change from equal competition to an intentional visual path.</text>
+
+  <!-- Stage 1 -->
+  <g filter="url(#paper-shadow)">
+    <rect x="70" y="132" width="320" height="360" rx="6" fill="#fffdf7"/>
+  </g>
+  <text x="92" y="166" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1" fill="#9d3c2e">STAGE 1 · FLAT START</text>
+  <text x="92" y="190" font-family="Arial, sans-serif" font-size="14" fill="#4b565d">Similar weight + even spacing</text>
+  <circle cx="176" cy="292" r="46" fill="#67727a"/>
+  <rect x="224" y="246" width="94" height="92" fill="url(#stripe)" stroke="#3f4a52" stroke-width="3"/>
+  <path d="M120 426 L206 352 L289 426 Z" fill="#8d969c" stroke="#3f4a52" stroke-width="3"/>
+  <path d="M108 220 H342" stroke="#b8aa8c" stroke-width="2" stroke-dasharray="5 6"/>
+  <path d="M108 366 H342" stroke="#b8aa8c" stroke-width="2" stroke-dasharray="5 6"/>
+  <text x="92" y="465" font-family="Arial, sans-serif" font-size="14" fill="#25323a">Question: where do you look first?</text>
+  <text x="92" y="484" font-family="Arial, sans-serif" font-size="13" fill="#6a7378">No single relationship clearly leads.</text>
+
+  <!-- Stage 2 -->
+  <g filter="url(#paper-shadow)">
+    <rect x="440" y="132" width="320" height="360" rx="6" fill="#fffdf7"/>
+  </g>
+  <text x="462" y="166" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1" fill="#9d3c2e">STAGE 2 · BUILD HIERARCHY</text>
+  <text x="462" y="190" font-family="Arial, sans-serif" font-size="14" fill="#4b565d">Placement + value + scale</text>
+  <circle cx="506" cy="244" r="26" fill="#18232a"/>
+  <rect x="566" y="282" width="94" height="76" fill="url(#stripe)" stroke="#3f4a52" stroke-width="3"/>
+  <path d="M550 468 L652 344 L738 468 Z" fill="#e9dfc8" stroke="#7b725f" stroke-width="3"/>
+  <path d="M480 210 C530 184 574 190 606 214" fill="none" stroke="#9d3c2e" stroke-width="2" stroke-dasharray="5 5"/>
+  <text x="612" y="214" font-family="Arial, sans-serif" font-size="13" fill="#9d3c2e">open space isolates</text>
+  <path d="M524 253 L556 273" stroke="#9d3c2e" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="462" y="465" font-family="Arial, sans-serif" font-size="14" fill="#25323a">Small can outweigh large.</text>
+  <text x="462" y="484" font-family="Arial, sans-serif" font-size="13" fill="#6a7378">The strongest nearby value jump arrives first.</text>
+
+  <!-- Stage 3 -->
+  <g filter="url(#paper-shadow)">
+    <rect x="810" y="132" width="320" height="360" rx="6" fill="#fffdf7"/>
+  </g>
+  <text x="832" y="166" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1" fill="#9d3c2e">STAGE 3 · GUIDE THE PATH</text>
+  <text x="832" y="190" font-family="Arial, sans-serif" font-size="14" fill="#4b565d">Direction + repetition</text>
+  <circle cx="876" cy="244" r="26" fill="#18232a"/>
+  <rect x="936" y="282" width="94" height="76" fill="url(#stripe)" stroke="#3f4a52" stroke-width="3"/>
+  <path d="M920 468 L1022 344 L1108 468 Z" fill="#e9dfc8" stroke="#7b725f" stroke-width="3"/>
+  <path d="M898 254 C924 265 927 286 944 299 C988 334 1025 360 1042 397" fill="none" stroke="#9d3c2e" stroke-width="4" marker-end="url(#arrow)"/>
+  <circle cx="838" cy="229" r="16" fill="#fffdf7" stroke="#9d3c2e" stroke-width="2"/>
+  <circle cx="920" cy="317" r="16" fill="#fffdf7" stroke="#9d3c2e" stroke-width="2"/>
+  <circle cx="1090" cy="420" r="16" fill="#fffdf7" stroke="#9d3c2e" stroke-width="2"/>
+  <text x="833" y="235" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#9d3c2e">1</text>
+  <text x="915" y="323" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#9d3c2e">2</text>
+  <text x="1085" y="426" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#9d3c2e">3</text>
+  <text x="832" y="465" font-family="Arial, sans-serif" font-size="14" fill="#25323a">Intended route: circle → rectangle → triangle.</text>
+  <text x="832" y="484" font-family="Arial, sans-serif" font-size="13" fill="#6a7378">Test the order before calling it successful.</text>
+
+  <!-- Alternative / choice protection -->
+  <rect x="70" y="540" width="1060" height="150" rx="8" fill="#25323a"/>
+  <text x="94" y="575" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1" fill="#f0c486">VALID VARIATION · A DIFFERENT INTENT NEEDS DIFFERENT CHOICES</text>
+  <g transform="translate(94 594)">
+    <rect width="235" height="72" rx="4" fill="#fffdf7"/>
+    <circle cx="40" cy="50" r="12" fill="#e9dfc8" stroke="#7b725f" stroke-width="2"/>
+    <rect x="78" y="31" width="50" height="27" fill="url(#dots)" stroke="#3f4a52" stroke-width="2"/>
+    <path d="M150 17 L190 62 L218 17 Z" fill="#18232a"/>
+    <path d="M193 24 C171 33 150 40 128 43" fill="none" stroke="#9d3c2e" stroke-width="3" marker-end="url(#arrow)"/>
+  </g>
+  <text x="360" y="617" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#fffdf7">Triangle first. Rectangle second. Circle last.</text>
+  <text x="360" y="645" font-family="Arial, sans-serif" font-size="15" fill="#e8e1d2">The forms did not become “correct.” Their relationships changed to serve a new route.</text>
+  <text x="360" y="668" font-family="Arial, sans-serif" font-size="15" fill="#e8e1d2">Your subject, arrangement, style, palette, and path can differ from both examples.</text>
+
+  <text x="70" y="726" font-family="Arial, sans-serif" font-size="13" fill="#5a646a">Manuel Academy original · CC BY 4.0 · Designed to remain legible in grayscale; pattern and position do not rely on colour alone.</text>
+</svg>
