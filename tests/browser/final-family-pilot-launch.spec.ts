@@ -113,13 +113,18 @@ async function assign(page: Page, name: string, lesson: Lesson) {
 async function configureSchoolPlan(page: Page, name: string) {
   await parentStudent(page, name)
   await page.getByRole('button', { name: 'School Plan' }).click()
-  await expect(page.getByRole('heading', { name: `${name}’s automatic daily plan` })).toBeVisible()
+  await expect(page.getByRole('heading', { name: `${name}’s School Plan` })).toBeVisible()
   await page.getByLabel('School year starts').fill('2026-01-01')
   await page.getByLabel('School year ends').fill('2027-12-31')
+  await page.getByRole('button', { name: 'Continue' }).click()
   for (const day of ['Saturday', 'Sunday']) {
     const checkbox = page.getByLabel(day, { exact: true })
     if (!await checkbox.isChecked()) await checkbox.check()
   }
+  await page.getByRole('button', { name: 'Continue' }).click()
+  await page.getByRole('button', { name: 'Continue' }).click()
+  await page.getByRole('button', { name: 'Continue' }).click()
+  await page.getByRole('button', { name: 'Continue' }).click()
   await page.getByRole('button', { name: 'Save School Plan' }).click()
   await expect(page.getByRole('status')).toContainText('School Plan saved')
 }
@@ -514,6 +519,38 @@ test('Parent School Plan produces idempotent automatic Today work without learne
   const plannerRecords = (await idbRecords(page)).filter((record) => record.key.startsWith('manuel-academy.study.family-auto-planner.v1'))
   expect(plannerRecords).toHaveLength(1)
   expect(JSON.stringify(plannerRecords[0]?.value).match(/materializationRef/g)).toHaveLength(10)
+})
+
+test('School Plan is phone-safe, editable, and independent for each child', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 })
+  await setupFamily(page, [
+    { name: 'Emma Plan', grade: '5' },
+    { name: 'Noah Plan', grade: '7' },
+  ])
+  await configureSchoolPlan(page, 'Emma Plan')
+
+  for (const step of ['School year', 'School days', 'Subjects', 'Subject levels', 'Weekly schedule', 'Review plan']) {
+    await page.getByRole('button', { name: new RegExp(`Step \\d+\\s*${step}`) }).click()
+    if (step === 'Weekly schedule') await page.getByLabel('Math lessons per day').selectOption('2')
+    await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true)
+  }
+  await expect(page.getByRole('button', { name: 'Save changes' })).toBeVisible()
+  await page.getByRole('button', { name: 'Save changes' }).click()
+  await expect(page.getByRole('status')).toContainText('School Plan saved for Emma Plan')
+
+  await parentStudent(page, 'Noah Plan')
+  await page.getByRole('button', { name: 'School Plan' }).click()
+  await expect(page.getByRole('heading', { name: 'Noah Plan’s School Plan' })).toBeVisible()
+  await expect(page.getByText('Finish these steps once before daily lessons can be prepared automatically.')).toBeVisible()
+
+  await parentStudent(page, 'Emma Plan')
+  await page.getByRole('button', { name: 'School Plan' }).click()
+  await expect(page.getByRole('heading', { name: 'Emma Plan’s School Plan' })).toBeVisible()
+  await page.getByRole('button', { name: /Step 5\s*Weekly schedule/ }).click()
+  await expect(page.getByLabel('Math lessons per day')).toHaveValue('2')
+  await page.getByRole('button', { name: /Step 6\s*Review plan/ }).click()
+  await expect(page.getByRole('button', { name: 'Save changes' })).toBeVisible()
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true)
 })
 
 test('all 90 grade-subject cells load in Chromium and every subject launches lesson and assessment UI', async ({ page }) => {

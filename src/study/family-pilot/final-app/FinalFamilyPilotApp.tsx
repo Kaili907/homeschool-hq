@@ -506,15 +506,18 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
   const selected = students.find((item) => item.studentRef === selectedRef) ?? students[0]
   return (
     <main className="mx-auto max-w-6xl px-4 py-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="font-bold text-cyan-700">Parent Hub</p>
           <h2 className="text-2xl font-extrabold">Household learning</h2>
         </div>
-        <select aria-label="Parent student" className="rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
-          {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
-        </select>
+        <label className="min-w-0 font-bold">Plan for child
+          <select aria-label="Parent student" className="mt-1 min-h-11 w-full min-w-0 rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
+            {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
+          </select>
+        </label>
       </div>
+      {students.length > 1 ? <p className="mt-2 text-sm font-semibold text-slate-600">Each child has a separate School Plan. Choose a child here before making changes.</p> : null}
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
         {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
       </nav>
