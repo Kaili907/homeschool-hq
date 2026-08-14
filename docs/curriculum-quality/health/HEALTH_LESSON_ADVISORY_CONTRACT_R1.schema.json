@@ -1,0 +1,478 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/health-lesson-advisory-contract-r1.schema.json",
+  "title": "Manuel Academy Health Lesson Advisory Contract R1",
+  "description": "Draft curriculum-only metadata envelope for Health lesson-quality review. It defines no Tutor V2, Study Engine, scoring, mastery, guardian, or learner-state runtime behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "status",
+    "subject",
+    "lessonId",
+    "gradeBand",
+    "primaryLessonType",
+    "secondaryLessonTypes",
+    "conceptIds",
+    "prerequisiteConceptIds",
+    "misconceptionIds",
+    "ageLanguagePolicyRef",
+    "teachingSupply",
+    "evidencePlan",
+    "remediationPlan",
+    "masteryPlan",
+    "reflectionPolicy",
+    "safetyPrivacyPolicy",
+    "tutorPolicy"
+  ],
+  "properties": {
+    "contractVersion": {
+      "const": "health-lesson-advisory-r1"
+    },
+    "status": {
+      "const": "DRAFT_ADVISORY"
+    },
+    "subject": {
+      "const": "health"
+    },
+    "lessonId": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "gradeBand": {
+      "enum": [
+        "GRADES_3_5",
+        "GRADES_7_8",
+        "GRADES_9_12"
+      ]
+    },
+    "primaryLessonType": {
+      "$ref": "#/$defs/lessonType"
+    },
+    "secondaryLessonTypes": {
+      "type": "array",
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/lessonType"
+      }
+    },
+    "conceptIds": {
+      "$ref": "#/$defs/nonEmptyUniqueStringArray"
+    },
+    "prerequisiteConceptIds": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "misconceptionIds": {
+      "description": "Stable neutral IDs for observable factual, vocabulary, reasoning, or process patterns; never diagnoses or learner labels.",
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "ageLanguagePolicyRef": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "teachingSupply": {
+      "$ref": "#/$defs/teachingSupply"
+    },
+    "evidencePlan": {
+      "$ref": "#/$defs/evidencePlan"
+    },
+    "remediationPlan": {
+      "$ref": "#/$defs/remediationPlan"
+    },
+    "masteryPlan": {
+      "$ref": "#/$defs/masteryPlan"
+    },
+    "reflectionPolicy": {
+      "$ref": "#/$defs/reflectionPolicy"
+    },
+    "safetyPrivacyPolicy": {
+      "$ref": "#/$defs/safetyPrivacyPolicy"
+    },
+    "tutorPolicy": {
+      "$ref": "#/$defs/tutorPolicy"
+    },
+    "applicabilityNotes": {
+      "description": "Human-readable reasons for type-aware omissions or empty reference lists.",
+      "$ref": "#/$defs/uniqueStringArray"
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uniqueStringArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "nonEmptyUniqueStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "lessonType": {
+      "enum": [
+        "CONCEPT_VOCABULARY",
+        "INFORMATION_EVALUATION",
+        "DECISION_REASONING",
+        "COMMUNICATION_HELP_SEEKING",
+        "HEALTH_SKILL_PROCEDURE",
+        "REVIEW_RETRIEVAL",
+        "REMEDIATION_RETRY",
+        "MASTERY_EVIDENCE",
+        "PROJECT_CAPSTONE"
+      ]
+    },
+    "teachingSupply": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goalRef",
+        "entryCheckRef",
+        "explanationRef",
+        "vocabularyRef",
+        "vocabularyCheckRef",
+        "modelExampleRefs",
+        "decisionScenarioRefs",
+        "guidedReasoningRef",
+        "independentEvidenceRef"
+      ],
+      "properties": {
+        "goalRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "entryCheckRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "explanationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "vocabularyRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "vocabularyCheckRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "modelExampleRefs": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "decisionScenarioRefs": {
+          "$ref": "#/$defs/uniqueStringArray"
+        },
+        "guidedReasoningRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "independentEvidenceRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "evidencePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceForms",
+        "freshInputRef",
+        "successCriteriaRef",
+        "answerAuthorityRef",
+        "acceptableVariationRef",
+        "misconceptionBoundaryRef",
+        "supportsThatInvalidateIndependence"
+      ],
+      "properties": {
+        "evidenceForms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "CONCEPT_EXPLANATION",
+              "VOCABULARY_USE",
+              "FICTIONAL_DECISION",
+              "SOURCE_EVALUATION",
+              "COMMUNICATION_SCRIPT",
+              "ORDERED_PROCEDURE",
+              "ERROR_ANALYSIS",
+              "PROJECT_ARTIFACT"
+            ]
+          }
+        },
+        "freshInputRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "successCriteriaRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "answerAuthorityRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "acceptableVariationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "misconceptionBoundaryRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "supportsThatInvalidateIndependence": {
+          "$ref": "#/$defs/uniqueStringArray"
+        }
+      }
+    },
+    "remediationPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "triggerRefs",
+        "prerequisiteRef",
+        "alternateExplanationOrModelRefs",
+        "guidedCorrectionRef",
+        "freshRetryRef",
+        "exitCriterionRef"
+      ],
+      "properties": {
+        "triggerRefs": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "prerequisiteRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "alternateExplanationOrModelRefs": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "guidedCorrectionRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "freshRetryRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "exitCriterionRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "masteryPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumEvidenceOccasions",
+        "laterRetrievalOrTransferRef",
+        "decisionAuthorityRef",
+        "privateReflectionContributes"
+      ],
+      "properties": {
+        "minimumEvidenceOccasions": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "laterRetrievalOrTransferRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "decisionAuthorityRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "privateReflectionContributes": {
+          "const": false
+        }
+      }
+    },
+    "reflectionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "promptRef",
+        "visibleTo",
+        "scored",
+        "contributesToCompletion",
+        "contributesToMastery",
+        "subjectiveJudgmentPolicy"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "PRIVATE_OPTIONAL",
+            "SHAREABLE_OPTIONAL",
+            "BOUNDED_LEARNING_EVIDENCE",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "promptRef": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "visibleTo": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "LEARNER",
+              "AUTHORIZED_ADULT",
+              "AUTHORIZED_SCORER"
+            ]
+          }
+        },
+        "scored": {
+          "type": "boolean"
+        },
+        "contributesToCompletion": {
+          "type": "boolean"
+        },
+        "contributesToMastery": {
+          "const": false
+        },
+        "subjectiveJudgmentPolicy": {
+          "const": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "PRIVATE_OPTIONAL"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "visibleTo": {
+                "maxItems": 1,
+                "contains": {
+                  "const": "LEARNER"
+                }
+              },
+              "scored": {
+                "const": false
+              },
+              "contributesToCompletion": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "NOT_APPLICABLE"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "promptRef": {
+                "const": null
+              },
+              "visibleTo": {
+                "maxItems": 0
+              },
+              "scored": {
+                "const": false
+              },
+              "contributesToCompletion": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "safetyPrivacyPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "privacyPolicyRef",
+        "safetyEscalationRef",
+        "adultAuthorityRef",
+        "diagnosisBoundary",
+        "disclosureBoundary",
+        "bodyDignityBoundary",
+        "individualizedAdviceBoundary"
+      ],
+      "properties": {
+        "privacyPolicyRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "safetyEscalationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "adultAuthorityRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "diagnosisBoundary": {
+          "const": "NO_DIAGNOSIS_OR_DIAGNOSTIC_INFERENCE"
+        },
+        "disclosureBoundary": {
+          "const": "NO_SENSITIVE_PERSONAL_DISCLOSURE_REQUIRED"
+        },
+        "bodyDignityBoundary": {
+          "const": "NO_SHAME_DIETING_BODY_VALUE_OR_BODY_SCORING"
+        },
+        "individualizedAdviceBoundary": {
+          "const": "NO_INDIVIDUALIZED_TREATMENT_MEDICATION_DIET_SUPPLEMENT_OR_EXERCISE_ADVICE"
+        }
+      }
+    },
+    "tutorPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "mayExplainApprovedContent",
+        "mayCue",
+        "mayAdaptInstructionalPresentation",
+        "mayCoachLearnerReasoning",
+        "mayDiagnose",
+        "mayCertifyPhysicalCompletion",
+        "mayOverrideGuardianOrSafetyAuthority",
+        "missingSupplyState",
+        "authorityConflictState"
+      ],
+      "properties": {
+        "scope": {
+          "const": "CURRICULUM_METADATA_ONLY"
+        },
+        "mayExplainApprovedContent": {
+          "const": true
+        },
+        "mayCue": {
+          "const": true
+        },
+        "mayAdaptInstructionalPresentation": {
+          "const": true
+        },
+        "mayCoachLearnerReasoning": {
+          "const": true
+        },
+        "mayDiagnose": {
+          "const": false
+        },
+        "mayCertifyPhysicalCompletion": {
+          "const": false
+        },
+        "mayOverrideGuardianOrSafetyAuthority": {
+          "const": false
+        },
+        "missingSupplyState": {
+          "const": "BLOCKED_MISSING_CURRICULUM"
+        },
+        "authorityConflictState": {
+          "const": "BLOCKED_AUTHORITY_CONFLICT"
+        }
+      }
+    }
+  }
+}
