@@ -111,7 +111,8 @@ export interface UpdateFamilySetupStudentPatch {
   readonly enabledSubjects?: readonly AcademySubject[]
 }
 
-/** Edits profile metadata only. studentRef, pinRequired, and workingGradeBySubject are untouched. */
+/** Edits profile metadata. studentRef and pinRequired are untouched; disabling a
+ * subject also removes its now-inapplicable working-grade override. */
 export function updateStudent(
   state: FamilySetupState,
   studentRef: FamilySetupStudentRef,
@@ -156,6 +157,13 @@ export function updateStudent(
     displayName,
     nominalGrade,
     enabledSubjects,
+    workingGradeBySubject: Object.freeze(
+      Object.fromEntries(
+        Object.entries(existing.workingGradeBySubject).filter(([subject]) =>
+          enabledSubjects.includes(subject as AcademySubject),
+        ),
+      ),
+    ),
     updatedAt: now,
   })
 
@@ -209,6 +217,9 @@ export function setWorkingGrade(
   if (grade !== null && !isValidAcademyGrade(grade)) {
     return { status: 'blocked', reason: 'invalid-working-grade', studentRef }
   }
+  if (grade === null && existing.nominalGrade === '6') {
+    return { status: 'blocked', reason: 'invalid-working-grade', studentRef }
+  }
 
   const workingGradeBySubject = { ...existing.workingGradeBySubject }
   if (grade === null) {
@@ -258,6 +269,12 @@ export function validateFamilySetup(state: FamilySetupState): FamilySetupValidat
     }
     if (student.enabledSubjects.length === 0) {
       issues.push({ studentRef: student.studentRef, reason: 'no-enabled-subjects' })
+    }
+    if (
+      student.nominalGrade === '6' &&
+      student.enabledSubjects.some((subject) => student.workingGradeBySubject[subject] === undefined)
+    ) {
+      issues.push({ studentRef: student.studentRef, reason: 'invalid-working-grade' })
     }
     for (const subject of Object.keys(student.workingGradeBySubject)) {
       if (!student.enabledSubjects.includes(subject as AcademySubject)) {

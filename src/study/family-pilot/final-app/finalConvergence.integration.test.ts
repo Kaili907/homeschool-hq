@@ -160,17 +160,15 @@ describe('final Family Pilot real convergence', () => {
 
   it('keeps nominal Grade 6 unsupported until a per-subject supported working grade is configured', () => {
     const { controller } = makeController()
-    let setup = createStudent(EMPTY_FAMILY_SETUP_STATE, {
+    const setup = createStudent(EMPTY_FAMILY_SETUP_STATE, {
       studentRef: 'student:six', displayName: 'Six', nominalGrade: '6', enabledSubjects: ['mathematics'],
     }, '2026-08-13T12:00:00.000Z')
     if (setup.status !== 'ok') throw new Error('fixture setup')
-    let finished = completeSetup(setup.state, '2026-08-13T12:00:01.000Z')
-    if (finished.status !== 'ok') throw new Error('fixture setup')
-    controller.saveSetup(finished.state)
-    expect(controller.coursesFor(finished.state.students[0]!)).toEqual([])
-    const working = setWorkingGrade(finished.state, 'student:six', 'mathematics', '5', '2026-08-13T12:00:02.000Z')
+    const refused = completeSetup(setup.state, '2026-08-13T12:00:01.000Z')
+    expect(refused.status).toBe('blocked')
+    const working = setWorkingGrade(setup.state, 'student:six', 'mathematics', '5', '2026-08-13T12:00:02.000Z')
     if (working.status !== 'ok') throw new Error('fixture setup')
-    finished = completeSetup(working.state, '2026-08-13T12:00:03.000Z')
+    const finished = completeSetup(working.state, '2026-08-13T12:00:03.000Z')
     if (finished.status !== 'ok') throw new Error('fixture setup')
     controller.saveSetup(finished.state)
     expect(controller.coursesFor(finished.state.students[0]!, 'mathematics').map((course) => course.grade)).toEqual([5])

@@ -1,7 +1,7 @@
 import { expect, test, chromium, type BrowserContext, type Page } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 
-const APP_URL = 'http://127.0.0.1:4181/family-pilot'
+const APP_URL = process.env.FAMILY_PILOT_APP_URL ?? 'http://127.0.0.1:4181/family-pilot'
 const DB = 'manuel-academy.study.family-pilot-durable'
 const STORE = 'records'
 const CORE_KEY = 'manuel-academy.study.family-pilot-state.v1'
@@ -69,16 +69,25 @@ function dynamicSourceBundle(lessonRef: string) {
 
 async function setupFamily(page: Page, students: Array<{ name: string; grade: string }>) {
   await page.goto(APP_URL)
-  await expect(page.getByRole('heading', { name: 'Set up your learners' })).toBeVisible()
-  for (const student of students) {
-    await page.getByLabel('Student display name').fill(student.name)
+  await expect(page.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
+  for (const [index, student] of students.entries()) {
+    if (index > 0) await page.getByRole('button', { name: 'Add another learner' }).first().click()
+    await page.getByLabel('Display name').fill(student.name)
     await page.getByLabel('Nominal grade').selectOption(student.grade)
-    await page.getByRole('button', { name: 'Add student' }).click()
-    await expect(page.getByText(new RegExp(`^${student.name} · Nominal Grade ${student.grade}`))).toBeVisible()
+    if (student.grade === '6') {
+      await page.getByRole('checkbox', { name: 'Mathematics' }).check()
+      await page.getByLabel('Working grade for Mathematics').selectOption('5')
+    } else {
+      for (const subject of ['Mathematics', 'English Language Arts', 'Science', 'Social Studies', 'Health', 'Physical Education', 'Ready for Life', 'Technology & Computer Science', 'Arts & Music', 'Financial Literacy']) {
+        await page.getByRole('checkbox', { name: subject, exact: true }).check()
+      }
+    }
+    await page.getByRole('button', { name: 'Save learner', exact: true }).click()
+    await expect(page.getByRole('button', { name: new RegExp(`^${student.name}.*Grade ${student.grade}`) })).toBeVisible()
   }
   await page.getByLabel('Parent PIN', { exact: true }).fill(PARENT_PIN)
-  await page.getByLabel('Confirm parent PIN', { exact: true }).fill(PARENT_PIN)
-  await page.getByRole('button', { name: 'Finish family setup' }).click()
+  await page.getByLabel('Confirm Parent PIN', { exact: true }).fill(PARENT_PIN)
+  await page.getByRole('button', { name: 'Continue to School Plan' }).click()
   await expect(page.getByRole('heading', { name: 'Household learning' })).toBeVisible()
 }
 
@@ -234,6 +243,22 @@ function assignmentFor(core: any, studentRef: string, lessonRef: string) {
   return core.students.find((student: any) => student.studentRef === studentRef)?.assignments.find((assignment: any) => assignment.lessonRef === lessonRef)
 }
 
+test('mobile first-run exposes labeled catalog controls and hands off to School Plan', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto(APP_URL)
+  await expect(page.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
+  await page.getByLabel('Display name').fill('Mobile Learner')
+  await page.getByLabel('Nominal grade').selectOption('3')
+  await page.getByRole('checkbox', { name: 'English Language Arts', exact: true }).check()
+  await expect(page.getByText('Grade 3 English Language Arts', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Save learner', exact: true }).click()
+  await page.getByLabel('Parent PIN', { exact: true }).fill(PARENT_PIN)
+  await page.getByLabel('Confirm Parent PIN', { exact: true }).fill(PARENT_PIN)
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+  await page.getByRole('button', { name: 'Continue to School Plan' }).click()
+  await expect(page.getByRole('heading', { name: 'Mobile Learner’s automatic daily plan' })).toBeVisible()
+})
+
 test('complete family workflow survives a real browser-process reopen and stays isolated', async ({}, testInfo) => {
   const profile = testInfo.outputPath('family-profile')
   let context: BrowserContext | null = await chromium.launchPersistentContext(profile, { headless: true, acceptDownloads: true })
@@ -250,14 +275,19 @@ test('complete family workflow survives a real browser-process reopen and stays 
     ])
 
     await parentStudent(page, 'Avery Synthetic')
-    await page.getByRole('button', { name: 'Preferences' }).click()
-    await page.getByLabel('Working grade for Mathematics').selectOption('5')
+    await page.getByRole('button', { name: 'Family setup' }).click()
+    await page.getByRole('checkbox', { name: 'Science', exact: true }).check()
+    await page.getByRole('checkbox', { name: 'Social Studies', exact: true }).check()
+    await page.getByRole('checkbox', { name: 'Ready for Life', exact: true }).check()
     await page.getByLabel('Working grade for Science').selectOption('7')
     await page.getByLabel('Working grade for Social Studies').selectOption('3')
     await page.getByLabel('Working grade for Ready for Life').selectOption('5')
-    page.once('dialog', (dialog) => dialog.accept('1357'))
-    await page.getByLabel('PIN required').check()
-    await page.getByRole('button', { name: 'Close' }).click()
+    await page.getByRole('radio', { name: 'Require a 4-digit PIN' }).check()
+    await page.getByLabel('Learner PIN', { exact: true }).fill('1357')
+    await page.getByLabel('Confirm learner PIN', { exact: true }).fill('1357')
+    await page.getByRole('button', { name: 'Save learner changes' }).click()
+    await page.getByRole('button', { name: 'Back to School Plan' }).click()
+    await page.getByRole('button', { name: 'Assignments & readiness' }).click()
     const courseOptions = await page.getByLabel('Admitted course').locator('option').evaluateAll((options) => options.map((option) => (option as HTMLOptionElement).value))
     expect(courseOptions).toEqual([
       'ma-g5-mathematics',
@@ -428,10 +458,10 @@ test('complete family workflow survives a real browser-process reopen and stays 
     expect(backup.appState.sourceAttachments[0]).toMatchObject({ title: 'Local government budget update', publisher: 'County public information office' })
     expect(backup.studyDocuments.filter((item: any) => item.record)).toHaveLength(2)
 
-    await page.getByRole('button', { name: 'Preferences' }).click()
+    await page.getByRole('button', { name: 'Family setup' }).click()
     await page.getByLabel('Display name').fill('Changed Name')
-    await page.getByLabel('Display name').blur()
-    await expect(page.getByRole('heading', { name: 'Preferences — Changed Name' })).toBeVisible()
+    await page.getByRole('button', { name: 'Save learner changes' }).click()
+    await expect(page.getByRole('heading', { name: 'Edit Changed Name' })).toBeVisible()
     await page.getByRole('button', { name: 'Backup' }).click()
     const chooserPromise = page.waitForEvent('filechooser')
     await page.getByRole('button', { name: 'Restore validated backup' }).click()
@@ -596,6 +626,7 @@ test('an incorrect auto-scoreable response stays pending without answer disclosu
   page.on('request', (request) => requests.push(request.url()))
   await setupFamily(page, [{ name: 'Negative Control Student', grade: '9' }])
   await parentStudent(page, 'Negative Control Student')
+  await page.getByRole('button', { name: 'Assignments & readiness' }).click()
   await page.getByLabel('Admitted course').selectOption('ma-g9-mathematics')
   const assessmentRow = page.getByTestId('family-pilot-assessment-assignment').getByRole('listitem').first()
   await expect(assessmentRow).toContainText('AUTO SCOREABLE')
@@ -628,6 +659,7 @@ test('an incorrect auto-scoreable response stays pending without answer disclosu
 test('rubric-review and guardian assessment authority paths require the authorized parent', async ({ page }) => {
   await setupFamily(page, [{ name: 'Authority Path Student', grade: '10' }])
   await parentStudent(page, 'Authority Path Student')
+  await page.getByRole('button', { name: 'Assignments & readiness' }).click()
 
   const submitAssessment = async (courseRef: string, assessmentRef: string, expectedStatus: RegExp) => {
     await page.getByLabel('Admitted course').selectOption(courseRef)
@@ -741,7 +773,7 @@ test('a second fresh browser is independent until a Parent Download Backup is re
     contextB = await chromium.launchPersistentContext(profileB, { headless: true, acceptDownloads: true })
     const pageB = contextB.pages()[0] ?? await contextB.newPage()
     await pageB.goto(APP_URL)
-    await expect(pageB.getByRole('heading', { name: 'Set up your learners' })).toBeVisible()
+    await expect(pageB.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
     await expect(pageB.getByText('Transfer Student', { exact: true })).toHaveCount(0)
     expect((await supportState(pageB)).app?.setup.students ?? []).toEqual([])
 
