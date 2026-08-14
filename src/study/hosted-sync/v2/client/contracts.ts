@@ -1,71 +1,46 @@
 import {
-  parseDurableStudyDocument,
-  type DurableStudyDocumentV1,
-} from '../../../family-pilot/durable-ports/schema'
-import {
-  HOSTED_SYNC_CLIENT_PROTOCOL_VERSION,
-  type HostedSyncAcknowledgeInput,
-  type HostedSyncAcknowledgeRpcArgs,
-  type HostedSyncAcknowledgedResult,
-  type HostedSyncFirstLinkImportInput,
-  type HostedSyncFirstLinkImportRpcArgs,
+  HOSTED_SYNC_WRITE_OPERATIONS,
+  type HostedSyncFirstLinkInput,
+  type HostedSyncFirstLinkResult,
   type HostedSyncHydrateInput,
   type HostedSyncHydrateResult,
-  type HostedSyncHydrateRpcArgs,
-  type HostedSyncIdentity,
-  type HostedSyncRevisionedWriteInput,
-  type HostedSyncRevisionedWriteRpcArgs,
-  type HostedSyncSnapshot,
-  type HostedSyncStoredResult,
+  type HostedSyncLocalScope,
+  type HostedSyncMapping,
+  type HostedSyncResolveMappingInput,
+  type HostedSyncResolveMappingResult,
+  type HostedSyncWriteInput,
+  type HostedSyncWriteResult,
 } from './types'
 
-export const HOSTED_SYNC_MAX_RPC_BYTES = 5 * 1024 * 1024
+export const HOSTED_SYNC_MAX_RPC_BYTES = 96 * 1024
+export const HOSTED_SYNC_OPERATION_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
-const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,511}$/
-export const HOSTED_SYNC_OPERATION_UUID =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-const REASON = /^[A-Z][A-Z0-9_]{0,95}$/
-const FORBIDDEN_KEY = /^(?:rawanswer|rawresponse|privateanswer|answertext|responsetext|transcript|transcripttext|rawtranscript|rawtutortranscript|tutortranscript|tutormessage|tutorprompt|pin|pincode|pinhash|pinsalt|password|credential|credentials|apikey|providerapikey|accesstoken|refreshtoken|bearertoken|servicerole|servicerolekey|sessiongrant|studysessiongrant|cookie)$/i
-const CREDENTIAL_TEXT = /(?:\bbearer\s+[A-Za-z0-9._~-]+|\b(?:access|refresh|service[-_ ]?role|api)[-_ ]?(?:token|key)\b)/i
+const UUID = HOSTED_SYNC_OPERATION_UUID
+const DIGEST = /^[0-9a-f]{64}$/
+const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,191}$/
+const FORBIDDEN_KEY = /^(?:rawanswer|rawresponse|rawlearnerresponse|privateanswer|answer|answerindex|answertext|answerkey|answerkeyref|correctanswer|response|responsetext|scoringlocator|rubric|transcript|transcripttext|rawtranscript|tutormessage|tutorprompt|privatenotes|audio|emotion|emotionallabel|personality|personalityinference|diagnosis|diagnosticinference|pin|pincode|pinhash|pinsalt|password|credential|credentials|apikey|providerapikey|accesstoken|refreshtoken|bearertoken|servicerole|servicerolekey|sessiongrant|cookie)$/i
+const SECRET_TEXT = /(?:\bbearer\s+[A-Za-z0-9._~-]+|\b(?:access|refresh|service[-_ ]?role|api)[-_ ]?(?:token|key)\b)/i
 
-export type ParsedWriteResponse =
-  | Readonly<{ status: 'SUCCESS'; value: HostedSyncStoredResult }>
-  | Readonly<{ status: 'STALE_REVISION'; serverRevision: number }>
-  | Readonly<{ status: 'PERMANENT_REFUSAL'; reasonCode: string }>
-
-function isRecord(value: unknown): value is Record<string, unknown> {
+function record(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
 
-function exactKeys(value: Record<string, unknown>, keys: readonly string[]): boolean {
+function exact(value: unknown, keys: readonly string[]): Record<string, unknown> | null {
+  if (!record(value)) return null
   const held = Object.keys(value)
-  return held.length === keys.length && held.every((key) => keys.includes(key))
+  return held.length === keys.length && held.every((key) => keys.includes(key)) ? value : null
 }
 
-export function isHostedSyncRef(value: unknown): value is string {
-  return typeof value === 'string' && REF.test(value)
+function boundedJson(value: unknown): boolean {
+  try {
+    const serialized = JSON.stringify(value)
+    return serialized !== undefined && new TextEncoder().encode(serialized).byteLength <= HOSTED_SYNC_MAX_RPC_BYTES
+  } catch { return false }
 }
 
-export function isHostedSyncOperationId(value: unknown): value is string {
-  return typeof value === 'string' && HOSTED_SYNC_OPERATION_UUID.test(value)
-}
-
-export function isHostedSyncRevision(value: unknown): value is number {
-  return Number.isSafeInteger(value) && (value as number) >= 0
-}
-
-export function isHostedSyncInstant(value: unknown): value is string {
-  return typeof value === 'string' && value.length <= 40 && Number.isFinite(Date.parse(value))
-}
-
-function normalizedKey(value: string): string {
-  return value.replace(/[^a-z0-9]/gi, '').toLowerCase()
-}
-
-/** Throws on credential-like or forbidden authority content; callers fail closed. */
 export function assertHostedSyncPrivate(value: unknown, path = 'payload', seen = new Set<object>()): void {
   if (typeof value === 'string') {
-    if (CREDENTIAL_TEXT.test(value)) throw new Error(`Hosted sync privacy refusal at ${path}.`)
+    if (SECRET_TEXT.test(value)) throw new Error(`Hosted sync privacy refusal at ${path}.`)
     return
   }
   if (value === null || typeof value === 'number' || typeof value === 'boolean') return
@@ -73,243 +48,138 @@ export function assertHostedSyncPrivate(value: unknown, path = 'payload', seen =
   if (seen.has(value)) throw new Error(`Hosted sync payload is cyclic at ${path}.`)
   seen.add(value)
   if (Array.isArray(value)) {
-    value.forEach((entry, index) => assertHostedSyncPrivate(entry, `${path}[${index}]`, seen))
+    value.forEach((item, index) => assertHostedSyncPrivate(item, `${path}[${index}]`, seen))
   } else {
-    for (const [key, entry] of Object.entries(value)) {
-      const normalized = normalizedKey(key)
-      const minimizedMarker =
-        (normalized === 'rawanswerincluded' || normalized === 'transcriptincluded') && entry === false
-      if (FORBIDDEN_KEY.test(normalized) && !minimizedMarker && entry !== null && entry !== false) {
-        throw new Error(`Hosted sync privacy refusal at ${path}.${key}.`)
-      }
-      assertHostedSyncPrivate(entry, `${path}.${key}`, seen)
+    for (const [key, item] of Object.entries(value)) {
+      if (FORBIDDEN_KEY.test(key.replace(/[^a-z0-9]/gi, ''))) throw new Error(`Hosted sync privacy refusal at ${path}.${key}.`)
+      assertHostedSyncPrivate(item, `${path}.${key}`, seen)
     }
   }
   seen.delete(value)
 }
 
-function deepFreeze<T>(value: T, seen = new Set<object>()): T {
-  if (value && typeof value === 'object' && !seen.has(value)) {
-    seen.add(value)
-    Object.values(value as Record<string, unknown>).forEach((entry) => deepFreeze(entry, seen))
-    Object.freeze(value)
-  }
-  return value
+function validScope(value: HostedSyncLocalScope): boolean {
+  return REF.test(value.householdRef) && REF.test(value.studentRef) &&
+    REF.test(value.assignmentRef) && REF.test(value.sessionRef)
 }
 
-function cloneJson<T>(value: T): T | null {
-  try {
-    const serialized = JSON.stringify(value)
-    if (serialized === undefined || new TextEncoder().encode(serialized).byteLength > HOSTED_SYNC_MAX_RPC_BYTES) return null
-    return JSON.parse(serialized) as T
-  } catch {
-    return null
-  }
+function validCommon(input: { tokenDigest: string; studentId: string }): boolean {
+  return DIGEST.test(input.tokenDigest) && UUID.test(input.studentId)
 }
 
-function canonicalJson(value: unknown): string {
-  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`
-  if (isRecord(value)) {
-    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`).join(',')}}`
-  }
-  return JSON.stringify(value)
+function safe<T extends Readonly<Record<string, unknown>>>(value: T): T | null {
+  try { assertHostedSyncPrivate(value) } catch { return null }
+  return boundedJson(value) ? Object.freeze(value) : null
 }
 
-export function parseHostedSyncIdentity(value: unknown): HostedSyncIdentity | null {
-  if (!isRecord(value) || !exactKeys(value, ['householdRef', 'learnerRef', 'documentRef']) ||
-      !isHostedSyncRef(value.householdRef) || !isHostedSyncRef(value.learnerRef) ||
-      !isHostedSyncRef(value.documentRef)) return null
-  return Object.freeze({
-    householdRef: value.householdRef,
-    learnerRef: value.learnerRef,
-    documentRef: value.documentRef,
+export function buildFirstLinkArgs(input: HostedSyncFirstLinkInput): Readonly<Record<string, unknown>> | null {
+  if (!validCommon(input) || !UUID.test(input.clientOperationId) || !validScope(input.import.localScope) ||
+      !REF.test(input.import.hostedScope.assignmentRef) || !REF.test(input.import.hostedScope.sessionRef)) return null
+  return safe({
+    p_token_digest: input.tokenDigest,
+    p_student_id: input.studentId,
+    p_client_operation_id: input.clientOperationId,
+    p_import: input.import,
   })
 }
 
-export function parseHostedSyncSnapshot(value: unknown, identity: HostedSyncIdentity): HostedSyncSnapshot | null {
-  if (!isRecord(value) || !exactKeys(value, ['documentSchemaVersion', 'document']) ||
-      value.documentSchemaVersion !== 1) return null
-  const cloned = cloneJson(value.document)
-  if (!cloned) return null
-  try { assertHostedSyncPrivate(cloned) } catch { return null }
-  const parsed = parseDurableStudyDocument(cloned, {
-    householdRef: identity.householdRef,
-    learnerRef: identity.learnerRef,
-  })
-  if (parsed.status !== 'current') return null
-  // The local parser is allowed to normalize device reads. Hosted sync is not:
-  // silently dropping an unknown field here would make cross-device state lossy.
-  if (canonicalJson(cloned) !== canonicalJson(parsed.document)) return null
-  const snapshot = { documentSchemaVersion: 1 as const, document: parsed.document }
-  try { assertHostedSyncPrivate(snapshot) } catch { return null }
-  return deepFreeze(snapshot)
+export function buildResolveMappingArgs(input: HostedSyncResolveMappingInput): Readonly<Record<string, unknown>> | null {
+  if (!validCommon(input) || !validScope(input.localScope)) return null
+  return safe({ p_token_digest: input.tokenDigest, p_student_id: input.studentId, p_local_scope: input.localScope })
 }
 
-function argsIdentity(identity: HostedSyncIdentity) {
-  return {
-    p_household_ref: identity.householdRef,
-    p_learner_ref: identity.learnerRef,
-    p_document_ref: identity.documentRef,
-  }
-}
-
-export function buildFirstLinkImportArgs(
-  input: HostedSyncFirstLinkImportInput,
-): HostedSyncFirstLinkImportRpcArgs | null {
-  const identity = parseHostedSyncIdentity(input.identity)
-  const snapshot = identity ? parseHostedSyncSnapshot(input.snapshot, identity) : null
-  if (!identity || !snapshot || !isHostedSyncOperationId(input.operationId) || input.baseRevision !== 0 ||
-      input.adultConfirmation !== 'EXPLICIT_ADULT_CONFIRMED' || !isHostedSyncInstant(input.confirmedAt)) return null
-  const args = {
-    p_schema_version: HOSTED_SYNC_CLIENT_PROTOCOL_VERSION,
-    ...argsIdentity(identity),
-    p_operation_id: input.operationId,
-    p_base_revision: 0 as const,
-    p_adult_confirmation: input.adultConfirmation,
-    p_confirmed_at: input.confirmedAt,
-    p_snapshot: snapshot,
-  }
-  try { assertHostedSyncPrivate(args) } catch { return null }
-  return deepFreeze(args)
-}
-
-export function buildHydrateArgs(input: HostedSyncHydrateInput): HostedSyncHydrateRpcArgs | null {
-  const identity = parseHostedSyncIdentity(input.identity)
-  if (!identity) return null
-  return Object.freeze({
-    p_schema_version: HOSTED_SYNC_CLIENT_PROTOCOL_VERSION,
-    ...argsIdentity(identity),
+export function buildHydrateArgs(input: HostedSyncHydrateInput): Readonly<Record<string, unknown>> | null {
+  if (!validCommon(input) || !REF.test(input.assignmentRef) || !REF.test(input.sessionId)) return null
+  return safe({
+    p_token_digest: input.tokenDigest,
+    p_student_id: input.studentId,
+    p_assignment_ref: input.assignmentRef,
+    p_session_id: input.sessionId,
   })
 }
 
-export function buildRevisionedWriteArgs(
-  input: HostedSyncRevisionedWriteInput,
-): HostedSyncRevisionedWriteRpcArgs | null {
-  const identity = parseHostedSyncIdentity(input.identity)
-  const snapshot = identity ? parseHostedSyncSnapshot(input.snapshot, identity) : null
-  if (!identity || !snapshot || !isHostedSyncOperationId(input.operationId) ||
-      !isHostedSyncRevision(input.baseRevision)) return null
-  const args = {
-    p_schema_version: HOSTED_SYNC_CLIENT_PROTOCOL_VERSION,
-    ...argsIdentity(identity),
-    p_operation_id: input.operationId,
-    p_base_revision: input.baseRevision,
-    p_snapshot: snapshot,
-  }
-  try { assertHostedSyncPrivate(args) } catch { return null }
-  return deepFreeze(args)
-}
-
-export function buildAcknowledgeArgs(
-  input: HostedSyncAcknowledgeInput,
-): HostedSyncAcknowledgeRpcArgs | null {
-  const identity = parseHostedSyncIdentity(input.identity)
-  if (!identity || !isHostedSyncOperationId(input.operationId) ||
-      !isHostedSyncOperationId(input.acknowledgedOperationId) ||
-      !isHostedSyncRevision(input.serverRevision)) return null
-  return Object.freeze({
-    p_schema_version: HOSTED_SYNC_CLIENT_PROTOCOL_VERSION,
-    ...argsIdentity(identity),
-    p_operation_id: input.operationId,
-    p_acknowledged_operation_id: input.acknowledgedOperationId,
-    p_server_revision: input.serverRevision,
+export function buildWriteArgs(input: HostedSyncWriteInput): Readonly<Record<string, unknown>> | null {
+  if (!buildHydrateArgs(input) || !Number.isSafeInteger(input.expectedRevision) || input.expectedRevision < 0 ||
+      !UUID.test(input.clientOperationId) || !HOSTED_SYNC_WRITE_OPERATIONS.includes(input.operation)) return null
+  return safe({
+    p_token_digest: input.tokenDigest,
+    p_student_id: input.studentId,
+    p_assignment_ref: input.assignmentRef,
+    p_session_id: input.sessionId,
+    p_expected_revision: input.expectedRevision,
+    p_client_operation_id: input.clientOperationId,
+    p_operation: input.operation,
+    p_payload: input.payload,
   })
 }
 
-function stored(value: Record<string, unknown>, operationId: string): ParsedWriteResponse | null {
-  if (!exactKeys(value, ['schema_version', 'status', 'operation_id', 'server_revision', 'accepted_at']) ||
-      value.schema_version !== 2 || (value.status !== 'stored' && value.status !== 'duplicate') ||
-      value.operation_id !== operationId || !isHostedSyncRevision(value.server_revision) ||
-      value.server_revision < 1 || !isHostedSyncInstant(value.accepted_at)) return null
-  return Object.freeze({
-    status: 'SUCCESS' as const,
-    value: Object.freeze({
-      operationId,
-      serverRevision: value.server_revision,
-      acceptedAt: value.accepted_at,
-      duplicate: value.status === 'duplicate',
-    }),
-  })
+function revision(value: unknown): value is number {
+  return Number.isSafeInteger(value) && (value as number) >= 0
 }
 
-export function parseWriteResponse(
-  value: unknown,
-  operationId: string,
-  baseRevision: number,
-): ParsedWriteResponse | null {
-  if (!isRecord(value) || value.schema_version !== 2 || typeof value.status !== 'string') return null
-  if (value.status === 'stored' || value.status === 'duplicate') {
-    const parsed = stored(value, operationId)
-    return parsed?.status === 'SUCCESS' && parsed.value.serverRevision > baseRevision ? parsed : null
+function mapping(value: unknown): HostedSyncMapping | null {
+  const held = exact(value, [
+    'localHouseholdRef', 'localStudentRef', 'localAssignmentRef', 'localSessionRef',
+    'hostedHouseholdId', 'hostedStudentId', 'hostedAssignmentRef', 'hostedSessionRef',
+  ])
+  if (!held || !Object.values(held).every((item) => typeof item === 'string' && item.length > 0)) return null
+  return Object.freeze(held) as unknown as HostedSyncMapping
+}
+
+export function parseFirstLinkResult(value: unknown): HostedSyncFirstLinkResult | null {
+  if (!record(value) || value.schemaVersion !== 2) return null
+  if (value.status === 'mapping-conflict' || value.status === 'idempotency-collision') {
+    return exact(value, ['schemaVersion', 'status']) ? Object.freeze(value) as unknown as HostedSyncFirstLinkResult : null
   }
-  if (value.status === 'stale_revision') {
-    if (!exactKeys(value, ['schema_version', 'status', 'operation_id', 'server_revision']) ||
-        value.operation_id !== operationId || !isHostedSyncRevision(value.server_revision) ||
-        value.server_revision < baseRevision) return null
-    return Object.freeze({ status: 'STALE_REVISION' as const, serverRevision: value.server_revision })
+  if (value.status === 'denied') {
+    return exact(value, ['schemaVersion', 'status', 'code']) && typeof value.code === 'string'
+      ? Object.freeze(value) as unknown as HostedSyncFirstLinkResult : null
   }
-  if (value.status === 'refused') {
-    return parseRefusalResponse(value)
+  if (value.status !== 'imported' && value.status !== 'linked-existing') return null
+  const held = exact(value, ['schemaVersion', 'status', 'mapping', 'revisions'])
+  const mapped = mapping(value.mapping)
+  const revisions = exact(value.revisions, ['authority', 'session', 'checkpoint'])
+  if (!held || !mapped || !revisions || !Object.values(revisions).every(revision)) return null
+  return Object.freeze({ ...held, mapping: mapped, revisions: Object.freeze(revisions) }) as unknown as HostedSyncFirstLinkResult
+}
+
+export function parseResolveMappingResult(value: unknown): HostedSyncResolveMappingResult | null {
+  if (!record(value) || value.schemaVersion !== 2) return null
+  if (value.status === 'unavailable') return exact(value, ['schemaVersion', 'status']) ? Object.freeze(value) as unknown as HostedSyncResolveMappingResult : null
+  const held = exact(value, ['schemaVersion', 'status', 'mapping'])
+  const mapped = mapping(value.mapping)
+  return held && value.status === 'mapped' && mapped
+    ? Object.freeze({ ...held, mapping: mapped }) as unknown as HostedSyncResolveMappingResult : null
+}
+
+export function parseHydrateResult(value: unknown): HostedSyncHydrateResult | null {
+  if (!record(value) || value.schemaVersion !== 2) return null
+  if (value.status === 'unavailable') return exact(value, ['schemaVersion', 'status']) ? Object.freeze(value) as unknown as HostedSyncHydrateResult : null
+  const held = exact(value, ['schemaVersion', 'status', 'mapping', 'document'])
+  const mapped = mapping(value.mapping)
+  if (!held || value.status !== 'ready' || !mapped || !record(value.document)) return null
+  try { assertHostedSyncPrivate(value.document) } catch { return null }
+  return Object.freeze({ ...held, mapping: mapped, document: Object.freeze(value.document) }) as unknown as HostedSyncHydrateResult
+}
+
+export function parseWriteResult(value: unknown, input: HostedSyncWriteInput): HostedSyncWriteResult | null {
+  if (!record(value) || value.schemaVersion !== 2) return null
+  if (value.status === 'denied') {
+    return exact(value, ['schemaVersion', 'status', 'code']) && typeof value.code === 'string'
+      ? Object.freeze(value) as unknown as HostedSyncWriteResult : null
   }
-  return null
-}
-
-export function parseRefusalResponse(
-  value: unknown,
-): Readonly<{ status: 'PERMANENT_REFUSAL'; reasonCode: string }> | null {
-  if (!isRecord(value) || !exactKeys(value, ['schema_version', 'status', 'reason_code']) ||
-      value.schema_version !== 2 || value.status !== 'refused' ||
-      typeof value.reason_code !== 'string' || !REASON.test(value.reason_code)) return null
-  return Object.freeze({ status: 'PERMANENT_REFUSAL' as const, reasonCode: value.reason_code })
-}
-
-export function parseHydrateResponse(
-  value: unknown,
-  identity: HostedSyncIdentity,
-): HostedSyncHydrateResult | null {
-  if (!isRecord(value) || value.schema_version !== 2) return null
-  if (value.status === 'unavailable') {
-    return exactKeys(value, ['schema_version', 'status']) ? Object.freeze({ status: 'UNAVAILABLE' as const }) : null
+  if (value.status === 'idempotency-collision') {
+    return exact(value, ['schemaVersion', 'status', 'operation']) && value.operation === input.operation
+      ? Object.freeze(value) as unknown as HostedSyncWriteResult : null
   }
-  if (value.status !== 'ready' ||
-      !exactKeys(value, ['schema_version', 'status', 'server_revision', 'last_operation_id', 'snapshot']) ||
-      !isHostedSyncRevision(value.server_revision) || value.server_revision < 1 ||
-      !isHostedSyncOperationId(value.last_operation_id)) return null
-  const snapshot = parseHostedSyncSnapshot(value.snapshot, identity)
-  if (!snapshot) return null
-  return deepFreeze({
-    status: 'READY' as const,
-    serverRevision: value.server_revision,
-    lastOperationId: value.last_operation_id,
-    snapshot,
-  })
-}
-
-export function parseAcknowledgeResponse(
-  value: unknown,
-  input: HostedSyncAcknowledgeInput,
-): HostedSyncAcknowledgedResult | null {
-  if (!isRecord(value) ||
-      !exactKeys(value, [
-        'schema_version', 'status', 'operation_id', 'acknowledged_operation_id',
-        'server_revision', 'acknowledged_at',
-      ]) || value.schema_version !== 2 ||
-      (value.status !== 'acknowledged' && value.status !== 'duplicate') ||
-      value.operation_id !== input.operationId ||
-      value.acknowledged_operation_id !== input.acknowledgedOperationId ||
-      value.server_revision !== input.serverRevision || !isHostedSyncInstant(value.acknowledged_at)) return null
-  return Object.freeze({
-    operationId: input.operationId,
-    acknowledgedOperationId: input.acknowledgedOperationId,
-    serverRevision: input.serverRevision,
-    acknowledgedAt: value.acknowledged_at,
-    duplicate: value.status === 'duplicate',
-  })
-}
-
-/** Used by the fake provider to retain a lossless, isolated document copy. */
-export function cloneHostedSyncDocument(document: DurableStudyDocumentV1): DurableStudyDocumentV1 {
-  const cloned = cloneJson(document)
-  if (!cloned) throw new Error('Hosted sync document is not bounded JSON.')
-  return cloned
+  if (value.status === 'invalid-write') {
+    return exact(value, ['schemaVersion', 'status', 'operation', 'reasonCode']) && value.operation === input.operation && typeof value.reasonCode === 'string'
+      ? Object.freeze(value) as unknown as HostedSyncWriteResult : null
+  }
+  if (value.status !== 'stored' && value.status !== 'revision-conflict') return null
+  if (value.operation !== input.operation || !['authority', 'session', 'checkpoint'].includes(String(value.revisionDomain)) || !revision(value.serverRevision)) return null
+  const required = ['schemaVersion', 'status', 'operation', 'revisionDomain', 'serverRevision']
+  if (value.status === 'revision-conflict' && !exact(value, required)) return null
+  try { assertHostedSyncPrivate(value) } catch { return null }
+  return Object.freeze({ ...value }) as unknown as HostedSyncWriteResult
 }

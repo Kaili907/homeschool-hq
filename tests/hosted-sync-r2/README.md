@@ -1,65 +1,22 @@
-# Hosted Family Pilot sync E2E R2 harness
+# Hosted Study sync R2 convergence harness
 
-This is a local acceptance harness only. It does not import a hosted SDK, open a
-network connection, apply a migration, or change production code.
+The catalog contains exactly 36 numbered scenarios. Every numbered scenario
+invokes `createHostedSyncRpcAdapter`; the injected local provider accepts only
+the four DB/RPC R2 function names and exact PostgREST argument keys.
 
-The harness exercises the current learner-ready Family Pilot persistence model
-as one synchronized learner aggregate:
+Coverage includes A→B, B→A, full production recovery-checkpoint equality,
+normal completion, assessment transitions, Ready-for-Life assertion and Parent
+attestation, Social source metadata, Safety hold/clear enforcement, offline and
+reconnect behavior, revision CAS, idempotent retry, response loss after commit,
+the four explicit first-link states, the privacy activation gate, and exclusion
+of legacy Profile sync.
 
-- `FamilyPilotStudentRecordV1` / `FamilyPilotAssignmentRecordV1` for assignment
-  state, progress, resume, and completion.
-- `FinalFamilyPilotAppStateV1` child records for setup, saved sessions, Social
-  source metadata, assessment assignment status, Ready-for-Life attestations,
-  and safety holds.
-- `DurableStudyDocumentV1` for the current IndexedDB Study session and
-  checkpoint records.
-- `FinalAssessmentAttemptV1` for the current IndexedDB assessment responses and
-  lifecycle.
-- `LearnerResponseRecord` for question-response custody and trusted assessment
-  receipts.
+Run locally:
 
-Every server snapshot is passed through the current production parsers for core,
-final-app, and durable Study state. The assessment/response records are checked
-against their current closed status and identity contracts.
-
-## Device model
-
-Each `HostedSyncDeviceR2` has an `IndependentDeviceStore`, its own authorization
-session, independent pending queue, and independent clock offset. The device
-stores PIN digests locally because that is the current application shape, but
-the sync aggregate has no PIN field. Tutor transcript state is ephemeral and is
-also absent from every RPC.
-
-An aliased device store is rejected immediately with
-`shared-device-storage-detected`.
-
-## Server model
-
-`InMemoryR2Server` is the sole authority for this harness. It implements three
-local R2 RPCs:
-
-- `family_pilot_sync_first_link_r2`
-- `family_pilot_sync_pull_r2`
-- `family_pilot_sync_push_r2`
-
-It scopes every call to the authenticated household and student grants, uses a
-per-learner server revision, assigns server receipt timestamps, deduplicates by
-idempotency key, and returns a current household cursor. A stale mutation is
-rebased as a semantic operation over the authoritative document. Device time is
-diagnostic evidence only and whole-document last-write-wins is not used.
-
-## Privacy canaries
-
-The server rejects a push containing a PIN digest, bearer token, Tutor
-transcript, restricted adult scoring authority, answer key, correct answer, or
-rubric. Learner response values are expected to synchronize within the
-authorized household; restricted scoring authority is not.
-
-## Run
-
-```sh
-npm test -- --project root-app tests/hosted-sync-r2/acceptance.test.js
+```text
+npm run test:hosted-sync-r2
 ```
 
-The test file contains 32 cataloged acceptance scenarios (the prior 28 plus four
-R2 first-link/assessment scenarios) and four harness/negative-control tests.
+The emulator is test-only and does not make the candidate activatable. Local
+PGlite tests separately replay the real migration and exercise the real SQL
+functions.
