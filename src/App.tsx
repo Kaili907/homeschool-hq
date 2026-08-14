@@ -1,8 +1,13 @@
 import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
+import { isElaDirectorPreviewEnabledFromHost } from './dev/elaDirectorPreviewRoute'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
+
+const ElaDirectorPreview = import.meta.env.DEV
+  ? lazy(() => import('./dev/ela-director-preview/ElaDirectorPreview'))
+  : null
 
 // Family Pilot is a separate root composition. Keeping both roots behind dynamic
 // imports means selecting this route cannot evaluate legacy sync, scoring, Tutor
@@ -20,6 +25,14 @@ function familyPilotSelectedAtBoot(): boolean {
 export default function App() {
   const [familyPilotSelected, setFamilyPilotSelected] = useState(familyPilotSelectedAtBoot)
   const [returnToLegacyHome, setReturnToLegacyHome] = useState(false)
+
+  if (ElaDirectorPreview && isElaDirectorPreviewEnabledFromHost()) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the ELA Director sample.</main>}>
+        <ElaDirectorPreview />
+      </Suspense>
+    )
+  }
 
   if (familyPilotSelected) {
     return (

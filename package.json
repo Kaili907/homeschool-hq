@@ -4,9 +4,11 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run curriculum:build && vite",
+    "dev": "npm run curriculum:build && npm run ela:director-preview:build && vite",
     "build": "npm run curriculum:build && vite build && node scripts/audit-browser-answer-authority.mjs && node scripts/stamp-sw.mjs",
     "curriculum:build": "node scripts/build-curriculum.mjs && node scripts/build-final-family-pilot-data.mjs",
+    "ela:director-preview:build": "node scripts/ela-director-sample.mjs",
+    "ela:director-preview:check": "node scripts/ela-director-sample.mjs --check",
     "migration:check": "node scripts/check-migration-collisions.mjs",
     "migration:replay:admin": "node scripts/replay-admin-migration-union.mjs",
     "db:security:audit": "node scripts/audit-database-security.mjs",

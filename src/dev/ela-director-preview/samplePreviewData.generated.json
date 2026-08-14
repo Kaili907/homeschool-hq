@@ -1,0 +1,915 @@
+{
+  "previewContract": "ela-director-preview-r1",
+  "reviewStatus": "PENDING_DIRECTOR_REVIEW",
+  "lesson": {
+    "lessonId": "ma-g7-english-language-arts-u05-l03",
+    "grade": 7,
+    "profile": "INFORMATIONAL_TEXT",
+    "title": "Guided practice A: reasoning and warrants",
+    "unit": "Argument, Claims, and Reasoning",
+    "estimatedMinutes": "50–70",
+    "learningGoal": "I can evaluate whether evidence supports an argument by explaining the warrant, testing the reasoning against limits or counterclaims, and revising a conclusion when the evidence requires it.",
+    "standards": [
+      "7.RI.8",
+      "7.W.1",
+      "7.W.9",
+      "7.L.6"
+    ]
+  },
+  "accessibility": {
+    "explanationExpectation": "Directions use one or two connected actions, define each essential argument term, and point to paragraph markers without paraphrasing the protected inference or selecting evidence.",
+    "gradeLevelBasis": "The independent article preserves sustained Grade 7 argument complexity: multiple evidence types, sampling limits, competing definitions of benefit, cost, counterclaims, and qualified conclusions. Shorter model and guided texts reduce instructional—not assessed—burden, and the fresh transfer returns to a multi-factor grade-level argument.",
+    "supports": [
+      {
+        "supportRef": "support.direction-chunks",
+        "supportType": "direction_clarification",
+        "constructEffect": "preserves_construct"
+      },
+      {
+        "supportRef": "support.vocabulary-preview",
+        "supportType": "nonassessed_vocabulary_preview",
+        "constructEffect": "preserves_construct"
+      },
+      {
+        "supportRef": "support.paragraph-markers",
+        "supportType": "navigation_markers",
+        "constructEffect": "preserves_construct"
+      },
+      {
+        "supportRef": "support.optional-audio",
+        "supportType": "audio_or_read_aloud",
+        "constructEffect": "preserves_construct"
+      },
+      {
+        "supportRef": "support.separate-model",
+        "supportType": "separate_strategy_model",
+        "constructEffect": "preserves_construct"
+      },
+      {
+        "supportRef": "support.guided-fade",
+        "supportType": "separate_guided_example",
+        "constructEffect": "preserves_construct"
+      },
+      {
+        "supportRef": "support.bounded-reread",
+        "supportType": "bounded_reread_prompt",
+        "constructEffect": "preserves_construct"
+      }
+    ],
+    "burden": {
+      "estimated_first_read_minutes": 14,
+      "estimated_reread_minutes": 8,
+      "planned_rereads": 3,
+      "text_count": 4,
+      "source_switching_demand": "moderate",
+      "combined_writing_demand": "Core path: brief retrieval, two guided reasoning notes, a two-to-three-paragraph independent analysis, a substantive revision note, and a four-to-six-sentence fresh transfer check. Conditional remediation adds one short recheck before returning to grade-level transfer.",
+      "chunk_plan": "Model M1-M2; guided G1-G2 then G3-G4; independent I1-I4 then I5-I8; transfer T1-T2 then T3-T4. Reteach texts appear only when the diagnosed route is used.",
+      "navigation_demands": [
+        "paragraph-markers",
+        "two-source-switches-core",
+        "learner-rubric-check"
+      ],
+      "human_feasibility_review_ref": "review.pending.ela-director-r1"
+    }
+  },
+  "directions": [
+    "Goal: Evaluate how well evidence supports a claim by explaining the missing bridge—the warrant—and by testing the reasoning against a limitation or counterclaim.",
+    "First, learn the claim-evidence-warrant routine with a separate model. Then make two guided attempts. Finally, read a new article and write your own analysis before completing a fresh transfer check.",
+    "You may use paragraph markers, the vocabulary notes, optional audio, and the learner checklist. No person or tool may choose your claim, evidence, warrant, organization, sentences, or revision for the independent response."
+  ],
+  "contextAndTeaching": [
+    {
+      "teaching_block_ref": "teach.argument-bridge",
+      "title": "Background: the bridge between a fact and a claim",
+      "explanation": "A claim is the point an argument asks a reader to accept. Evidence is information offered in support. A warrant explains why that evidence makes the claim more reasonable. The warrant may depend on a value, definition, cause-and-effect relationship, or assumption that the writer has not stated directly.",
+      "why_it_matters": "Two writers can cite the same fact and reach different conclusions because they use different warrants. Naming the bridge lets a reader judge the reasoning instead of being impressed by a number or quotation alone.",
+      "confusion_contrast": "Restating evidence tells what the source says; a warrant explains why the evidence counts for this claim. A warrant is not a new unsupported fact, and one relevant detail is not automatically enough evidence.",
+      "learner_decision": "Ask: If this evidence is true, why should the claim follow—and what would still make that bridge weak?"
+    },
+    {
+      "teaching_block_ref": "teach.relevance-sufficiency-limits",
+      "title": "Test three parts of the reasoning",
+      "explanation": "First test relevance: does the evidence bear on the claim? Next test sufficiency: is there enough trustworthy evidence for the size of the claim? Then test limits: does a counterclaim, missing group, short time period, cost, or alternate explanation require a narrower conclusion?",
+      "why_it_matters": "A responsible reader can agree with a goal while judging that the evidence supports only a trial, a qualified claim, or more investigation.",
+      "confusion_contrast": "A limitation does not automatically destroy an argument. It changes how strongly or broadly the reader can conclude.",
+      "learner_decision": "Choose the strongest conclusion the evidence can carry, not the strongest-sounding conclusion available."
+    }
+  ],
+  "vocabulary": [
+    {
+      "vocabulary_ref": "vocab.claim",
+      "term": "claim",
+      "support_reason": "The learner must distinguish the argument’s conclusion from its supporting material.",
+      "assessed_target": false,
+      "support_types": [
+        "learner_friendly_meaning",
+        "example_nonexample",
+        "meaning_or_use_check"
+      ],
+      "learner_support": "A claim is a point the writer wants a reader to accept. Quick check: In ‘The trail needs a bench because walkers pause there,’ which part asks for a decision?"
+    },
+    {
+      "vocabulary_ref": "vocab.evidence",
+      "term": "evidence",
+      "support_reason": "The lesson evaluates the relevance and sufficiency of information offered in support.",
+      "assessed_target": false,
+      "support_types": [
+        "learner_friendly_meaning",
+        "context",
+        "meaning_or_use_check"
+      ],
+      "learner_support": "Evidence is information used to support or challenge a claim. Ask whether it can be located in the source and whether it bears on the claim."
+    },
+    {
+      "vocabulary_ref": "vocab.warrant",
+      "term": "warrant",
+      "support_reason": "This essential ELA term names the usually unstated bridge the lesson teaches learners to make visible.",
+      "assessed_target": false,
+      "support_types": [
+        "learner_friendly_meaning",
+        "multiple_meanings",
+        "example_nonexample",
+        "meaning_or_use_check"
+      ],
+      "learner_support": "In argument, a warrant is the reason the evidence counts for the claim—not a legal paper and not the evidence repeated. Quick check: complete ‘This detail matters because …’ without copying the detail."
+    },
+    {
+      "vocabulary_ref": "vocab.sufficient",
+      "term": "sufficient",
+      "support_reason": "Learners must decide whether the amount and quality of evidence can carry the size of the claim.",
+      "assessed_target": false,
+      "support_types": [
+        "learner_friendly_meaning",
+        "morphology",
+        "example_nonexample"
+      ],
+      "learner_support": "Sufficient means enough for the purpose. The Latin root satis means enough. One day’s count may be relevant but not sufficient for a claim about every day."
+    },
+    {
+      "vocabulary_ref": "vocab.qualify",
+      "term": "qualify",
+      "support_reason": "The independent response asks learners to narrow or condition a conclusion after testing a limitation.",
+      "assessed_target": false,
+      "support_types": [
+        "multiple_meanings",
+        "context",
+        "meaning_or_use_check"
+      ],
+      "learner_support": "In argument, qualify means limit a statement so it says exactly what the evidence supports. It does not mean ‘be eligible.’ Words such as may, under these conditions, and for a trial can qualify a claim."
+    },
+    {
+      "vocabulary_ref": "vocab.counterclaim",
+      "term": "counterclaim",
+      "support_reason": "The source presents positions that challenge an argument’s assumptions or priorities.",
+      "assessed_target": false,
+      "support_types": [
+        "learner_friendly_meaning",
+        "morphology",
+        "context"
+      ],
+      "learner_support": "A counterclaim is a competing claim that challenges the original claim. Counter- means against or in response; a counterclaim needs evaluation, not automatic agreement or dismissal."
+    }
+  ],
+  "model": {
+    "text": {
+      "text_ref": "text.model.water-station",
+      "role": "model",
+      "form": "argument",
+      "title": "A Second Water Station?",
+      "creator": "Manuel Academy",
+      "body_or_source_ref": "[M1] The recreation center should add a bottle-filling station beside the playing field. On one warm Tuesday, a staff member counted forty-six people waiting at the building’s only fountain during the ten minutes after practice. Several players left the line before filling a bottle. A station near the field would shorten the distance between practice and water.\n\n[M2] The count does not show what happens every day, and a new station would cost money to install and maintain. Before making a permanent purchase, the center could record fountain use on several warm and cool days and compare the price of a station with less expensive options, such as adding a water cooler during crowded practices.",
+      "delivery_mode": "inline_full_text",
+      "learner_available": true,
+      "provenance": {
+        "origin": "academy_original",
+        "rights_category": "academy-owned-original",
+        "rights_statement": "Original Manuel Academy instructional text; cleared for full-text learner and Director-review use.",
+        "integrity_review_ref": "review.pending.ela-director-r1"
+      },
+      "complexity_review": {
+        "quantitative": {
+          "word_count": 113,
+          "metrics_are_advisory": true,
+          "metrics": [
+            {
+              "name": "Flesch-Kincaid grade estimate (automated heuristic; advisory)",
+              "value": 10.1
+            }
+          ]
+        },
+        "qualitative": {
+          "meaning_or_purpose": "A direct proposal is complicated by sampling limits, cost, and a temporary alternative.",
+          "structure": "Two-paragraph claim-and-qualification structure with evidence followed by limitations and next steps.",
+          "language": "Mostly familiar language with embedded clauses and argument terms supplied by the lesson rather than the passage.",
+          "knowledge_demands": "Everyday recreation-center context; no specialized knowledge is required."
+        },
+        "reader_task_considerations": [
+          "The text is a brief, separate model used to expose reasoning, not to measure independent reading.",
+          "The think-aloud compares relevant evidence with an overclaim and a more defensible conclusion."
+        ],
+        "grade_level_judgment": "on_grade_level",
+        "human_review_ref": "review.pending.ela-director-r1"
+      },
+      "access": {
+        "available_modes": [
+          "readable_text",
+          "facilitator_read_aloud"
+        ],
+        "construct_preserving_modes": [
+          "readable_text",
+          "facilitator_read_aloud"
+        ],
+        "location_markers": "Paragraph markers M1-M2"
+      }
+    },
+    "prompt": "How strongly does the evidence support adding a permanent bottle-filling station?",
+    "thinkAloudSteps": [
+      {
+        "notice": "The claim asks for a permanent station, but the count comes from one warm Tuesday.",
+        "possibilities": "The count could show a real crowded-time problem, or it could be an unusual day.",
+        "decision": "I will use the count as relevant evidence but not treat it as sufficient by itself.",
+        "reason": "It directly describes fountain demand, yet its short time period cannot establish the usual pattern."
+      },
+      {
+        "notice": "The distance from the field to the fountain gives a possible cause for delay.",
+        "possibilities": "A closer station might shorten the trip, but another water option might do the same thing for less money.",
+        "decision": "My warrant will connect location to reduced travel and waiting, not claim that only a permanent station can help.",
+        "reason": "That bridge follows from the source while leaving room for the cheaper alternative."
+      },
+      {
+        "notice": "The second paragraph proposes collecting records across warm and cool days.",
+        "possibilities": "I could reject the station, approve it now, or support gathering more evidence before a permanent purchase.",
+        "decision": "I will qualify the conclusion: the evidence supports testing demand and options more strongly than immediate permanent installation.",
+        "reason": "The narrower conclusion matches both the relevant count and its limitation."
+      }
+    ],
+    "completedModelResponse": "The evidence shows a water-access problem worth investigating, but it does not yet justify a permanent station. Forty-six people waited after one practice, which matters because a crowded fountain can delay access to water. However, one warm Tuesday cannot show the usual demand, and the passage names a less expensive option. The center should collect the wider set of records described in M2 and compare solutions before it makes a permanent purchase."
+  },
+  "guidedPractice": {
+    "text": {
+      "text_ref": "text.guided.trail-bench",
+      "role": "guided",
+      "form": "argument",
+      "title": "Where Should the Next Bench Go?",
+      "creator": "Manuel Academy",
+      "body_or_source_ref": "[G1] A neighborhood trail committee has enough money to add one bench. Its first proposal places the bench at the hilltop overlook because that spot has the widest view. During two Saturday counts, volunteers saw more walkers pause at the overlook than at any other single point on the trail. The committee argues that a bench there would serve the greatest number of visitors.\n\n[G2] The count records where people stopped, but not why they stopped or how long they stayed. Some may have paused to enjoy the view; others may simply have needed rest after the steep climb. Both reasons could support a hilltop bench, although they do not prove that the overlook is the only useful location.\n\n[G3] A resident who uses a cane recommends the lower junction instead. It is where the longest loop begins, and it has no nearby place to rest. The Saturday counts show fewer pauses there, but the resident explains that people who need a seat may avoid a route that has none. If so, low use would not necessarily mean low need.\n\n[G4] The committee must decide what “serve the greatest number” means. It could reward the place already used most often, or it could remove a barrier that keeps some visitors from using part of the trail. A sound recommendation should state which meaning it uses and what the available evidence can—and cannot—show.",
+      "delivery_mode": "inline_full_text",
+      "learner_available": true,
+      "provenance": {
+        "origin": "academy_original",
+        "rights_category": "academy-owned-original",
+        "rights_statement": "Original Manuel Academy instructional text; cleared for full-text learner and Director-review use.",
+        "integrity_review_ref": "review.pending.ela-director-r1"
+      },
+      "complexity_review": {
+        "quantitative": {
+          "word_count": 230,
+          "metrics_are_advisory": true,
+          "metrics": [
+            {
+              "name": "Flesch-Kincaid grade estimate (automated heuristic; advisory)",
+              "value": 7.8
+            }
+          ]
+        },
+        "qualitative": {
+          "meaning_or_purpose": "The apparent conflict turns on two defensible meanings of service and on whether usage counts measure need.",
+          "structure": "A proposal, limitation, counterproposal, and conceptual reframing unfold across four marked paragraphs.",
+          "language": "Conditional reasoning, contrast transitions, and the abstract distinction between use and need create moderate demand.",
+          "knowledge_demands": "Familiar trail setting; the text briefly supplies the mobility and sampling context needed for analysis."
+        },
+        "reader_task_considerations": [
+          "Guided prompts require the learner to choose evidence and state a warrant rather than copy a sentence.",
+          "A second attempt fades the organizer and asks the learner to test the first interpretation against a counterpoint."
+        ],
+        "grade_level_judgment": "on_grade_level",
+        "human_review_ref": "review.pending.ela-director-r1"
+      },
+      "access": {
+        "available_modes": [
+          "readable_text",
+          "optional_audio",
+          "enlarged_or_reflowed_text"
+        ],
+        "construct_preserving_modes": [
+          "readable_text",
+          "optional_audio",
+          "enlarged_or_reflowed_text"
+        ],
+        "location_markers": "Paragraph markers G1-G4"
+      }
+    },
+    "comprehensionCheck": {
+      "check_ref": "check.guided-viewpoints",
+      "timing": "during_text",
+      "text_refs": [
+        "text.guided.trail-bench"
+      ],
+      "prompt": "After G3, paraphrase the two different ideas about what the use counts mean. Do not decide yet which bench location is better.",
+      "response_mode": "two brief notes or a spoken paraphrase",
+      "feedback_move": "If both notes state the same idea, direct a reread of G1 and G3 and ask what each speaker thinks low or high use can show.",
+      "answer_protection": "The check monitors viewpoint comprehension without selecting evidence or making the guided recommendation."
+    },
+    "tasks": [
+      {
+        "task_ref": "task.guided.trail-claim-bridge",
+        "text_refs": [
+          "text.guided.trail-bench"
+        ],
+        "prompt": "Choose either the hilltop overlook or the lower junction. State a claim about where the bench should go, select one relevant detail, and explain the warrant that connects that detail to your claim.",
+        "attempt_required": true,
+        "support_before_attempt": [
+          "Use three blank labels only: Claim / Evidence and paragraph / Warrant.",
+          "You may reread G1-G3; no location or detail is preselected."
+        ],
+        "support_after_attempt": [
+          "Underline the evidence and bracket the warrant. If the same words do both jobs, ask ‘Why does this detail make that location a reasonable choice?’",
+          "Check whether the warrant depends on a definition of service, use, access, or need, and name the definition you chose."
+        ],
+        "feedback_move": "Respond to the learner’s observable selection: confirm a traceable detail, question an unrelated detail, or request the missing bridge without replacing it. Ask the learner to revise one part before continuing.",
+        "fade_level": "partial",
+        "question_families": [
+          "inference_interpretation",
+          "evidence_selection_comparison_reasoning",
+          "argument_source_claim_evaluation"
+        ]
+      },
+      {
+        "task_ref": "task.guided.trail-limit",
+        "text_refs": [
+          "text.guided.trail-bench"
+        ],
+        "prompt": "Now test your first recommendation against G4 and the strongest competing idea in the article. Keep, narrow, or change your claim, and explain what the test did to your reasoning.",
+        "attempt_required": true,
+        "support_before_attempt": [
+          "Reread G4 and your own first attempt.",
+          "No organizer or sentence frame is supplied."
+        ],
+        "support_after_attempt": [
+          "If the claim did not change, ask whether the response explains why it survived the counterpoint.",
+          "If it changed, ask the learner to identify the exact assumption or limitation that required the change."
+        ],
+        "feedback_move": "Name whether the response kept, narrowed, or changed the claim, then ask for the learner’s reason. Do not judge one bench location as the approved answer.",
+        "fade_level": "minimal",
+        "question_families": [
+          "cross_text_media_perspective",
+          "argument_source_claim_evaluation",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "independentPractice": {
+    "text": {
+      "text_ref": "text.independent.after-four",
+      "role": "independent",
+      "form": "argument",
+      "title": "After Four O’Clock",
+      "creator": "Mara Ellison for Manuel Academy",
+      "body_or_source_ref": "[I1] At 3:55 on a recent Saturday, the last scheduled hour at the East Ward Workshop was ending, but several projects were not. A pair of middle-school students were still testing a cardboard bridge. An adult learner had just begun replacing a broken zipper. Near the door, three people compared the repair notes they had made that afternoon. The public workshop, which offers tools and tables for making and mending, closes at four. A member proposal asks it to remain open until six on Saturdays.\n\n[I2] Supporters point first to a four-week sign-out log. On the four Saturdays examined, between eighteen and twenty-seven visitors left during the final half hour. Those numbers are higher than at any other half-hour closing period in the same month. The log shows that the room is active near closing time. It does not reveal how many visitors would have stayed longer, whether the same people attended each week, or whether a different season would produce the same pattern.\n\n[I3] A volunteer survey offers another view. Forty-three of sixty-one respondents selected “likely” or “very likely” when asked whether they would use later Saturday hours at least once a month. Twelve selected “unlikely,” and six were unsure. The survey was announced inside the workshop and through its email list, so nearly all respondents were already users. Their answers matter when estimating demand from current members, but they say little about residents who do not yet visit.\n\n[I4] The proposal also names a cost. Keeping the building open for two additional hours would require a trained supervisor, utilities, and an adjustment to the cleaning schedule. The coordinator estimates a cost of about $310 each Saturday. That estimate uses current hourly rates and a recent utility bill, but it does not include an emergency repair or a future price increase. A local makers’ group has offered to cover half the supervisor cost for eight weeks. Its offer is written, although it would end before a permanent schedule completed its first season.\n\n[I5] Not everyone agrees that later closing solves the most important access problem. The Number 8 bus leaves the nearest stop at 4:20 and then does not return for ninety minutes. A caregiver who attended the public meeting said that a six o’clock closing would not help learners who must be home before evening. Another speaker asked whether the workshop should instead open earlier. Neither comment proves that later hours would fail, but both challenge the assumption that time inside the building is the only barrier.\n\n[I6] There is also a question of purpose. The workshop was created to give residents access to shared tools, not merely to keep every table occupied. One board member argues that a moderate number of people finishing repairs may justify the added time because unfinished work is difficult to carry home safely. Another responds that the same money could fund replacement blades, needles, and safety gear used throughout the week. Each position connects the budget to the workshop’s mission, but each emphasizes a different benefit.\n\n[I7] A committee member proposes an eight-week trial instead of an immediate permanent change. During the trial, the workshop would stay open until six. Staff would record how many visitors remain after four, what kinds of work they complete, how many first-time visitors arrive, and what transportation problems occur. The makers’ group donation would reduce—but not erase—the trial cost. At the end, the board would compare the new records with the sign-out log, total expense, and other possible uses of the money.\n\n[I8] A trial would postpone a permanent decision, and it would not remove every uncertainty. Eight Saturdays cannot represent every season or predict whether interest will last. Still, a temporary schedule could test several assumptions behind the proposal under real conditions. The board must decide whether the information it could gain is worth the remaining cost and whether that evidence would be strong enough to guide the next decision.",
+      "delivery_mode": "inline_full_text",
+      "learner_available": true,
+      "provenance": {
+        "origin": "academy_original",
+        "rights_category": "academy-owned-original",
+        "rights_statement": "Original Manuel Academy instructional article; cleared for full-text learner and Director-review use.",
+        "integrity_review_ref": "review.pending.ela-director-r1"
+      },
+      "complexity_review": {
+        "quantitative": {
+          "word_count": 645,
+          "metrics_are_advisory": true,
+          "metrics": [
+            {
+              "name": "Flesch-Kincaid grade estimate (automated heuristic; advisory)",
+              "value": 10
+            }
+          ]
+        },
+        "qualitative": {
+          "meaning_or_purpose": "The text weighs demand, sampling limits, cost, transportation, mission, and the value of a reversible trial without announcing one required judgment.",
+          "structure": "A concrete opening leads into several evidence types, counterclaims, competing definitions of benefit, and a qualified proposal.",
+          "language": "Longer sentences, embedded qualifications, abstract nouns, and contrastive transitions require careful rereading while remaining accessible to Grade 7 readers.",
+          "knowledge_demands": "The workshop, budget, survey, and transit contexts are explained in the text; readers must integrate rather than supply specialized outside knowledge."
+        },
+        "reader_task_considerations": [
+          "The task requires evaluation of relevance and sufficiency, two warrant explanations, a limitation or counterclaim, and a substantive revision check.",
+          "Paragraph markers bound rereading without selecting the evidence.",
+          "Optional audio preserves argument-analysis and evidence-writing claims because decoding fluency is not assessed."
+        ],
+        "grade_level_judgment": "on_grade_level",
+        "human_review_ref": "review.pending.ela-director-r1"
+      },
+      "access": {
+        "available_modes": [
+          "readable_text",
+          "optional_audio",
+          "enlarged_or_reflowed_text",
+          "keyboard_navigation"
+        ],
+        "construct_preserving_modes": [
+          "readable_text",
+          "optional_audio",
+          "enlarged_or_reflowed_text",
+          "keyboard_navigation"
+        ],
+        "location_markers": "Paragraph markers I1-I8"
+      },
+      "sensitivity_note": "No personal disclosure is required; all response work is analytical."
+    },
+    "navigationCheck": {
+      "check_ref": "check.independent-navigation",
+      "timing": "during_text",
+      "text_refs": [
+        "text.independent.after-four"
+      ],
+      "prompt": "After I4, list the kinds of information the article has presented so far (for example, observation, survey, or cost). Do not judge which detail is strongest.",
+      "response_mode": "brief list",
+      "feedback_move": "If a category is missing, name the paragraph marker to reread but do not identify a detail or its value to the argument.",
+      "answer_protection": "The check reduces navigation burden while leaving evidence selection and evaluation entirely independent."
+    },
+    "task": {
+      "task_ref": "task.independent.workshop-analysis",
+      "text_refs": [
+        "text.independent.after-four"
+      ],
+      "prompt": "Evaluate how well the article supports trying later Saturday workshop hours before making a permanent schedule change. Write a two-to-three-paragraph analysis that makes a defensible judgment, uses at least two precise details, explains the warrant for each, and addresses one important limitation or counterclaim. After checking the limitation, keep, narrow, or change your judgment and explain that revision decision.",
+      "evidence_type": "writing_artifact",
+      "writing_requirement": "short_constructed_response",
+      "response_modes": [
+        "typed",
+        "handwritten",
+        "speech-to-text_when_approved"
+      ],
+      "permitted_support_refs": [
+        "support.paragraph-markers",
+        "support.optional-audio",
+        "scaffold.evidence-reasoning-organizer",
+        "scaffold.analysis-functions",
+        "rubric.learner.argument-analysis-r1"
+      ],
+      "independence_boundary": "The learner chooses the judgment, evidence, warrants, limitation or counterclaim, organization, language, and substantive revision. Support may clarify directions or rubric terms and ask diagnostic questions; it may not select content, outline the response, or supply paste-ready language.",
+      "question_families": [
+        "inference_interpretation",
+        "evidence_selection_comparison_reasoning",
+        "argument_source_claim_evaluation",
+        "structure_genre_craft_syntax"
+      ],
+      "protected_question_ref": "question.workshop-analysis",
+      "rubric_ref": "rubric.protected.workshop-analysis-r1"
+    },
+    "scaffolds": [
+      {
+        "scaffold_ref": "scaffold.evidence-reasoning-organizer",
+        "stage": "planning",
+        "genre_or_task": "evidence-based argument analysis",
+        "support": "Use blank planning rows with these functions: Judgment to test | Evidence location | What the evidence shows | Why it supports or challenges the judgment | Limitation/counterclaim | Keep, narrow, or change. The learner fills every content field.",
+        "content_neutral": true,
+        "authorship_boundary": "The organizer names reasoning functions only. It supplies no claim, evidence location, warrant, limitation, order, or sentence starter for the protected response.",
+        "model_ref": "model.water-station-think-aloud",
+        "rubric_ref": "rubric.learner.argument-analysis-r1"
+      },
+      {
+        "scaffold_ref": "scaffold.analysis-functions",
+        "stage": "drafting",
+        "genre_or_task": "two-to-three-paragraph argument analysis",
+        "support": "Organize by function: establish the judgment and its scope; develop evidence-and-warrant units; test a limitation or counterclaim; end with the resulting qualified judgment. Combine or reorder functions when the reasoning remains clear.",
+        "content_neutral": true,
+        "authorship_boundary": "This describes paragraph jobs, not an outline of what to say. The learner determines content, sequence, transitions, and wording.",
+        "model_ref": "model.water-station-think-aloud",
+        "rubric_ref": "rubric.learner.argument-analysis-r1"
+      },
+      {
+        "scaffold_ref": "scaffold.revision-check",
+        "stage": "revising",
+        "genre_or_task": "substantive reasoning revision",
+        "support": "Use four checks: Is each detail precise and relevant? Does each warrant explain why the detail counts? Does the response face a real limit? Is the final judgment no broader than the evidence? Mark one before/after change and explain which check required it.",
+        "content_neutral": true,
+        "authorship_boundary": "The checklist identifies dimensions only. It does not diagnose the protected response, propose a change, or provide revised wording.",
+        "rubric_ref": "rubric.learner.argument-analysis-r1"
+      }
+    ],
+    "revision": {
+      "revision_task_ref": "revision.workshop-reasoning",
+      "revision_lenses": [
+        "evidence",
+        "reasoning",
+        "organization",
+        "elaboration"
+      ],
+      "prompt": "Compare your first judgment with the evidence, warrants, and limitation in your draft. Make one meaning-level change that strengthens the accuracy or reasoning. Preserve both versions, then explain which checklist item required the change and why.",
+      "substantive_change_required": true,
+      "before_after_evidence_required": true,
+      "rubric_ref": "rubric.protected.workshop-analysis-r1"
+    }
+  },
+  "freshMastery": {
+    "text": {
+      "text_ref": "text.transfer.creek-lights",
+      "role": "transfer",
+      "form": "argument",
+      "title": "Lights Along the Creek?",
+      "creator": "Noah Reed for Manuel Academy",
+      "body_or_source_ref": "[T1] The creek path connects the western bus stop with two apartment blocks. In winter, sunset comes before many after-school activities end. A neighborhood petition asks the parks department to install low pathway lights along the entire half-mile route. The petition describes the path as an important walking connection and argues that lighting would make evening travel more practical.\n\n[T2] A transportation volunteer counted path users from 4:30 to 6:30 on six weekdays in January. The count ranged from nine to twenty-two people per evening. On four of those evenings, more than half of the people entered or left near the bus stop. The observations establish that the path is used after sunset, although six days cannot show use throughout the year or explain why some residents choose another route.\n\n[T3] The parks department estimates that fixtures, wiring, and installation would cost $48,000. Shielded lights could direct most of their glow downward, but an environmental group notes that the creek edge is habitat for insects, bats, and migrating birds. The group does not oppose every light. It recommends first testing a shorter section away from the wetland and measuring both path use and spill light.\n\n[T4] One resident argues that a short test would ignore people who walk the unlit eastern section. Another says a test could reveal whether lighting changes use before the town commits to the full cost and ecological effect. A thirty-day trial cannot settle every seasonal question, but it could replace some predictions with observations. Any recommendation must weigh what the current evidence shows, what it leaves uncertain, and which next step fits that uncertainty.",
+      "delivery_mode": "inline_full_text",
+      "learner_available": true,
+      "provenance": {
+        "origin": "academy_original",
+        "rights_category": "academy-owned-original",
+        "rights_statement": "Original Manuel Academy transfer article; cleared for full-text learner and Director-review use.",
+        "integrity_review_ref": "review.pending.ela-director-r1"
+      },
+      "complexity_review": {
+        "quantitative": {
+          "word_count": 262,
+          "metrics_are_advisory": true,
+          "metrics": [
+            {
+              "name": "Flesch-Kincaid grade estimate (automated heuristic; advisory)",
+              "value": 10
+            }
+          ]
+        },
+        "qualitative": {
+          "meaning_or_purpose": "The text weighs actual use, limited observation, public cost, ecological effects, and the value and limits of a trial.",
+          "structure": "Proposal, observational evidence, technical counterconsideration, and competing views of a trial.",
+          "language": "Domain terms are supported; qualifications and cause-effect reasoning require sustained attention.",
+          "knowledge_demands": "Bus access, public spending, and habitat effects are explained sufficiently for analysis without outside research."
+        },
+        "reader_task_considerations": [
+          "This fresh text is withheld until the transfer check and receives no answer-bearing support before submission.",
+          "The response requires two evidence points and a limitation, allowing the skill to transfer beyond the workshop context."
+        ],
+        "grade_level_judgment": "on_grade_level",
+        "human_review_ref": "review.pending.ela-director-r1"
+      },
+      "access": {
+        "available_modes": [
+          "readable_text",
+          "optional_audio",
+          "enlarged_or_reflowed_text"
+        ],
+        "construct_preserving_modes": [
+          "readable_text",
+          "optional_audio",
+          "enlarged_or_reflowed_text"
+        ],
+        "location_markers": "Paragraph markers T1-T4"
+      }
+    },
+    "task": {
+      "task_ref": "task.transfer.creek-mastery",
+      "text_refs": [
+        "text.transfer.creek-lights"
+      ],
+      "prompt": "Fresh transfer: Is a thirty-day lighting trial a reasonable next step based on this article? Make a qualified judgment. Use two details from different paragraphs, explain the warrant connecting each detail to your judgment, and identify one uncertainty the trial would not settle.",
+      "evidence_type": "reading_response",
+      "writing_requirement": "short_constructed_response",
+      "response_modes": [
+        "typed",
+        "handwritten",
+        "speech-to-text_when_approved"
+      ],
+      "permitted_support_refs": [
+        "support.paragraph-markers",
+        "support.optional-audio"
+      ],
+      "independence_boundary": "The text and prompt are fresh. Before submission, support is limited to access modes and direction clarification; no evidence selection, warrant, judgment, response frame, rubric coaching, or correctness feedback is permitted.",
+      "question_families": [
+        "evidence_selection_comparison_reasoning",
+        "argument_source_claim_evaluation",
+        "transfer"
+      ],
+      "protected_question_ref": "question.creek-mastery",
+      "rubric_ref": "rubric.protected.transfer-r1"
+    },
+    "evidenceDefinition": {
+      "evidence_id": "evidence.transfer.creek",
+      "task_ref": "task.transfer.creek-mastery",
+      "skill_ids": [
+        "ela.argument.evidence",
+        "ela.argument.warrant",
+        "ela.argument.counterclaim"
+      ],
+      "text_refs": [
+        "text.transfer.creek-lights"
+      ],
+      "condition": "independent",
+      "independence_required": true,
+      "allowed_support_refs": [
+        "support.paragraph-markers",
+        "support.optional-audio"
+      ],
+      "fresh_transfer": true,
+      "occasion_id": "occasion.transfer.2"
+    }
+  },
+  "remediation": {
+    "trigger": "Use only after an observable evidence-without-warrant or limited-sample overclaim pattern.",
+    "teaching": {
+      "teaching_block_ref": "teach.bridge-test-reteach",
+      "title": "Reteach: run the because test",
+      "explanation": "Place the word because between the claim and the evidence: ‘This claim is reasonable because this evidence shows ___.’ Fill the blank with the relationship, not with the evidence repeated. Then ask whether the relationship adds an assumption the source cannot support.",
+      "why_it_matters": "This isolates the reasoning move when a response lists facts but leaves their importance unexplained.",
+      "confusion_contrast": "‘Twenty paintings crossed the room’ repeats evidence. ‘A shorter wet-painting route would reduce opportunities for spills and collisions’ explains why the location matters.",
+      "learner_decision": "Keep a warrant only if it connects this evidence to this claim without inventing a missing fact.",
+      "text_refs": [
+        "text.model.bridge-contrast"
+      ]
+    },
+    "modelText": {
+      "text_ref": "text.model.bridge-contrast",
+      "role": "model",
+      "form": "sentence_set",
+      "title": "The Bridge Test",
+      "creator": "Manuel Academy",
+      "body_or_source_ref": "Claim: The art room should place a drying rack near the sink. Evidence: In last week’s class, students carried twenty wet paintings across the room from the sink to the rack. Possible warrant A: Wet paintings are artwork. Possible warrant B: Shortening the route for wet paintings would reduce the chances of drips, collisions, and damaged work. Limitation: The count came from one class, so it supports testing the location more strongly than it supports claiming every class has the same problem.",
+      "delivery_mode": "inline_full_text",
+      "learner_available": true,
+      "provenance": {
+        "origin": "academy_original",
+        "rights_category": "academy-owned-original",
+        "rights_statement": "Original Manuel Academy reteach example; cleared for full-text learner use.",
+        "integrity_review_ref": "review.pending.ela-director-r1"
+      },
+      "complexity_review": {
+        "quantitative": {
+          "word_count": 82,
+          "metrics_are_advisory": true,
+          "metrics": [
+            {
+              "name": "Flesch-Kincaid grade estimate (automated heuristic; advisory)",
+              "value": 7.9
+            }
+          ]
+        },
+        "qualitative": {
+          "meaning_or_purpose": "A compact contrast isolates the difference between repeating a fact and explaining why it supports a claim.",
+          "structure": "Labeled sentence set used only after a diagnosed reasoning gap.",
+          "language": "Short labels reduce navigation burden while preserving the terms claim, evidence, warrant, and limitation.",
+          "knowledge_demands": "Familiar classroom context."
+        },
+        "reader_task_considerations": [
+          "This companion model isolates a prerequisite; it is not used as grade-level mastery evidence.",
+          "The learner still completes a fresh recheck and returns to the grade-level transfer text."
+        ],
+        "grade_level_judgment": "companion_access_text",
+        "human_review_ref": "review.pending.ela-director-r1"
+      },
+      "access": {
+        "available_modes": [
+          "readable_text",
+          "facilitator_read_aloud"
+        ],
+        "construct_preserving_modes": [
+          "readable_text",
+          "facilitator_read_aloud"
+        ],
+        "location_markers": "Claim, Evidence, Possible warrant A, Possible warrant B, Limitation labels"
+      }
+    },
+    "model": {
+      "model_ref": "model.bridge-contrast-reteach",
+      "model_type": "worked_contrast",
+      "text_refs": [
+        "text.model.bridge-contrast"
+      ],
+      "separate_from_protected_attempt": true,
+      "prompt": "Which possible warrant builds a defensible bridge, and why?",
+      "think_aloud_steps": [
+        {
+          "notice": "Possible warrant A only renames the wet paintings as artwork.",
+          "possibilities": "It is true, but it does not explain why the rack’s location matters.",
+          "decision": "Reject A as a warrant for this claim.",
+          "reason": "A true statement can still be irrelevant to the connection the argument needs."
+        },
+        {
+          "notice": "Possible warrant B links a shorter route to fewer opportunities for drips, collisions, and damage.",
+          "possibilities": "The link is plausible, but the one-class count does not prove every class has the problem.",
+          "decision": "Keep B and narrow the conclusion to testing or improving the location.",
+          "reason": "B explains the relationship while the limitation controls how broad the claim can be."
+        }
+      ]
+    },
+    "guidedTask": {
+      "task_ref": "task.guided.bridge-repair",
+      "text_refs": [
+        "text.model.bridge-contrast"
+      ],
+      "prompt": "Explain why Possible warrant A fails and revise it into a different warrant that connects the evidence to the claim. Then state one limit the one-class count places on the conclusion.",
+      "attempt_required": true,
+      "support_before_attempt": [
+        "Use the because test from the reteach block.",
+        "The completed model identifies the problem but does not supply your revised wording."
+      ],
+      "support_after_attempt": [
+        "Ask whether the new warrant explains location rather than merely describing paintings.",
+        "Ask whether the limit changes relevance, sufficiency, or both."
+      ],
+      "feedback_move": "Compare the learner’s warrant with the function of warrant B, not its wording; request a new attempt if the relationship remains unstated.",
+      "fade_level": "full",
+      "question_families": [
+        "evidence_selection_comparison_reasoning",
+        "argument_source_claim_evaluation"
+      ]
+    },
+    "recheckText": {
+      "text_ref": "text.transfer.courtyard-recheck",
+      "role": "transfer",
+      "form": "argument",
+      "title": "A Courtyard Cart",
+      "creator": "Manuel Academy",
+      "body_or_source_ref": "[R1] The school should test a mobile supply cart in the courtyard during lunch. In three observation periods, students made thirty-seven trips from courtyard tables back into the building for pencils, paper, tape, or rulers. A cart could reduce those interruptions.\n\n[R2] The observations did not track whether the same students made several trips, and the cart would need an adult to check supplies in and out. A two-lunch trial could show whether students actually borrow the materials and whether the supervision takes more time than the saved trips justify.",
+      "delivery_mode": "inline_full_text",
+      "learner_available": true,
+      "provenance": {
+        "origin": "academy_original",
+        "rights_category": "academy-owned-original",
+        "rights_statement": "Original Manuel Academy independent reteach recheck; cleared for full-text learner use.",
+        "integrity_review_ref": "review.pending.ela-director-r1"
+      },
+      "complexity_review": {
+        "quantitative": {
+          "word_count": 88,
+          "metrics_are_advisory": true,
+          "metrics": [
+            {
+              "name": "Flesch-Kincaid grade estimate (automated heuristic; advisory)",
+              "value": 9.6
+            }
+          ]
+        },
+        "qualitative": {
+          "meaning_or_purpose": "The argument supports a limited trial while preserving uncertainty about repeated users and supervision cost.",
+          "structure": "Claim and evidence followed by limitations and a testable next step.",
+          "language": "Conditional reasoning and a cost-benefit comparison create the main demand.",
+          "knowledge_demands": "Familiar school context."
+        },
+        "reader_task_considerations": [
+          "Used as a fresh, unsupported recheck after the bridge-test reteach.",
+          "Success here does not replace the later return to the full grade-level transfer text."
+        ],
+        "grade_level_judgment": "companion_access_text",
+        "human_review_ref": "review.pending.ela-director-r1"
+      },
+      "access": {
+        "available_modes": [
+          "readable_text",
+          "optional_audio"
+        ],
+        "construct_preserving_modes": [
+          "readable_text",
+          "optional_audio"
+        ],
+        "location_markers": "Paragraph markers R1-R2"
+      }
+    },
+    "recheckTask": {
+      "task_ref": "task.recheck.courtyard-bridge",
+      "text_refs": [
+        "text.transfer.courtyard-recheck"
+      ],
+      "prompt": "Without a sentence frame, state one warrant that connects a detail in R1 to the two-lunch trial in R2. Then identify one reason the evidence does not yet support a permanent cart.",
+      "evidence_type": "reading_response",
+      "writing_requirement": "short_constructed_response",
+      "response_modes": [
+        "typed",
+        "handwritten",
+        "spoken"
+      ],
+      "permitted_support_refs": [
+        "support.paragraph-markers"
+      ],
+      "independence_boundary": "This is a fresh recheck after reteach. The learner receives no model, evidence choice, warrant, or corrective feedback until the attempt is submitted.",
+      "question_families": [
+        "evidence_selection_comparison_reasoning",
+        "argument_source_claim_evaluation",
+        "transfer"
+      ],
+      "protected_question_ref": "question.courtyard-recheck",
+      "rubric_ref": "rubric.protected.bridge-recheck-r1"
+    },
+    "returnTaskRef": "task.transfer.creek-mastery"
+  },
+  "tutorReadiness": {
+    "dataOnly": true,
+    "skillIds": [
+      "ela.argument.claim",
+      "ela.argument.evidence",
+      "ela.argument.warrant",
+      "ela.argument.counterclaim",
+      "ela.writing.evidence-integration",
+      "ela.revision.reasoning"
+    ],
+    "prerequisiteSkillIds": [
+      "ela.reading.locate-evidence",
+      "ela.reading.paraphrase",
+      "ela.argument.claim-evidence-distinction"
+    ],
+    "misconceptionIds": [
+      "misconception.evidence-restated-as-warrant",
+      "misconception.overclaim-from-limited-sample",
+      "misconception.counterclaim-ignored",
+      "misconception.relevant-treated-as-sufficient"
+    ],
+    "evidenceDefinitions": [
+      {
+        "evidence_id": "evidence.guided.trail-claim",
+        "task_ref": "task.guided.trail-claim-bridge",
+        "skill_ids": [
+          "ela.argument.evidence",
+          "ela.argument.warrant"
+        ],
+        "text_refs": [
+          "text.guided.trail-bench"
+        ],
+        "condition": "guided",
+        "independence_required": false,
+        "allowed_support_refs": [
+          "support.paragraph-markers",
+          "support.guided-fade"
+        ],
+        "fresh_transfer": false,
+        "occasion_id": "occasion.guided.1"
+      },
+      {
+        "evidence_id": "evidence.independent.workshop",
+        "task_ref": "task.independent.workshop-analysis",
+        "skill_ids": [
+          "ela.argument.evidence",
+          "ela.argument.warrant",
+          "ela.argument.counterclaim",
+          "ela.revision.reasoning"
+        ],
+        "text_refs": [
+          "text.independent.after-four"
+        ],
+        "condition": "independent",
+        "independence_required": true,
+        "allowed_support_refs": [
+          "support.paragraph-markers",
+          "support.optional-audio",
+          "scaffold.evidence-reasoning-organizer",
+          "scaffold.analysis-functions",
+          "rubric.learner.argument-analysis-r1"
+        ],
+        "fresh_transfer": false,
+        "occasion_id": "occasion.independent.1"
+      },
+      {
+        "evidence_id": "evidence.recheck.courtyard",
+        "task_ref": "task.recheck.courtyard-bridge",
+        "skill_ids": [
+          "ela.argument.evidence",
+          "ela.argument.warrant"
+        ],
+        "text_refs": [
+          "text.transfer.courtyard-recheck"
+        ],
+        "condition": "independent",
+        "independence_required": true,
+        "allowed_support_refs": [
+          "support.paragraph-markers"
+        ],
+        "fresh_transfer": true,
+        "occasion_id": "occasion.recheck.1"
+      },
+      {
+        "evidence_id": "evidence.transfer.creek",
+        "task_ref": "task.transfer.creek-mastery",
+        "skill_ids": [
+          "ela.argument.evidence",
+          "ela.argument.warrant",
+          "ela.argument.counterclaim"
+        ],
+        "text_refs": [
+          "text.transfer.creek-lights"
+        ],
+        "condition": "independent",
+        "independence_required": true,
+        "allowed_support_refs": [
+          "support.paragraph-markers",
+          "support.optional-audio"
+        ],
+        "fresh_transfer": true,
+        "occasion_id": "occasion.transfer.2"
+      }
+    ],
+    "contentInventory": {
+      "texts": 6,
+      "teachingBlocks": 3,
+      "models": 2,
+      "checks": 5,
+      "guidedTasks": 3,
+      "independentTasks": 3,
+      "remediationRoutes": 1
+    }
+  },
+  "review": {
+    "contractSchema": "docs/curriculum-quality/ela/ELA_LESSON_CONTRACT_R1.schema.json",
+    "canonicalSample": "docs/curriculum-quality/ela/samples/director-r1/ma-g7-english-language-arts-u05-l03.lesson.json",
+    "humanReviewRef": "review.pending.ela-director-r1",
+    "protectedAuthorityExcluded": true,
+    "protectedAuthorityNote": "Protected source anchors, scoring reasoning, and adult rubrics are intentionally excluded from this browser projection. Review them in the canonical lesson file."
+  }
+}
