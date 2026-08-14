@@ -1,0 +1,122 @@
+{
+  "contractVersion": "health-lesson-advisory-r1",
+  "status": "DRAFT_ADVISORY",
+  "subject": "health",
+  "lessonId": "ma-g5-health-u01-l01",
+  "gradeBand": "GRADES_3_5",
+  "primaryLessonType": "CONCEPT_VOCABULARY",
+  "secondaryLessonTypes": [
+    "DECISION_REASONING"
+  ],
+  "conceptIds": [
+    "HLTH-G5-WELLBEING-DIMENSIONS",
+    "HLTH-G5-DIMENSIONS-CONNECTIONS",
+    "HLTH-G5-FACT-VS-ASSUMPTION"
+  ],
+  "prerequisiteConceptIds": [
+    "HLTH-G5-OBSERVABLE-FACT",
+    "HLTH-G5-TRUSTED-ADULT-SUPPORT"
+  ],
+  "misconceptionIds": [
+    "HLTH-G5-DIMENSIONS-SINGLE-FACT-WHOLE-PERSON",
+    "HLTH-G5-DIMENSIONS-ASSUMPTION-AS-FACT",
+    "HLTH-G5-DIMENSIONS-NAME-WITHOUT-CONNECTION",
+    "HLTH-G5-DIMENSIONS-UNSUPPORTED-ACTION"
+  ],
+  "ageLanguagePolicyRef": "HEALTH_LESSON_STANDARD_R1#section-13-grades-3-5",
+  "teachingSupply": {
+    "goalRef": "ma-g5-health-u01-l01#learningGoal",
+    "entryCheckRef": "ma-g5-health-u01-l01#entry-check",
+    "explanationRef": "ma-g5-health-u01-l01#clear-explanation",
+    "vocabularyRef": "ma-g5-health-u01-l01#vocabulary",
+    "vocabularyCheckRef": "ma-g5-health-u01-l01#vocabulary-check",
+    "modelExampleRefs": [
+      "ma-g5-health-u01-l01#model-kai-library"
+    ],
+    "decisionScenarioRefs": [
+      "ma-g5-health-u01-l01#guided-maya-club",
+      "ma-g5-health-u01-l01#independent-leah-center",
+      "ma-g5-health-u01-l01#fresh-check-omar-park"
+    ],
+    "guidedReasoningRef": "ma-g5-health-u01-l01#guided-maya-club",
+    "independentEvidenceRef": "ma-g5-health-u01-l01#independent-leah-center"
+  },
+  "evidencePlan": {
+    "evidenceForms": [
+      "CONCEPT_EXPLANATION",
+      "VOCABULARY_USE",
+      "FICTIONAL_DECISION"
+    ],
+    "freshInputRef": "ma-g5-health-u01-l01#independent-leah-center",
+    "successCriteriaRef": "ma-g5-health-u01-l01#independent-leah-center.successCriteria",
+    "answerAuthorityRef": "curriculum-production/final/health-physical-education/scoring-guides/health/grade-05/ma-g5-health-u01-l01.json#protectedAuthority",
+    "acceptableVariationRef": "curriculum-production/final/health-physical-education/scoring-guides/health/grade-05/ma-g5-health-u01-l01.json#protectedAuthority.acceptableVariation",
+    "misconceptionBoundaryRef": "curriculum-production/final/health-physical-education/scoring-guides/health/grade-05/ma-g5-health-u01-l01.json#protectedAuthority.misconceptionBoundaries",
+    "supportsThatInvalidateIndependence": [
+      "SUPPLIES_DIMENSION_SELECTION",
+      "SUPPLIES_CASE_FACTS",
+      "SUPPLIES_ACTION_CHOICE",
+      "SUPPLIES_DECISIVE_REASON",
+      "SUPPLIES_SAFETY_JUDGMENT"
+    ]
+  },
+  "remediationPlan": {
+    "triggerRefs": [
+      "HLTH-G5-DIMENSIONS-SINGLE-FACT-WHOLE-PERSON",
+      "HLTH-G5-DIMENSIONS-ASSUMPTION-AS-FACT",
+      "HLTH-G5-DIMENSIONS-NAME-WITHOUT-CONNECTION",
+      "HLTH-G5-DIMENSIONS-UNSUPPORTED-ACTION"
+    ],
+    "prerequisiteRef": "ma-g5-health-u01-l01#entry-check",
+    "alternateExplanationOrModelRefs": [
+      "ma-g5-health-u01-l01#remediation-five-windows",
+      "ma-g5-health-u01-l01#remediation-camera-test"
+    ],
+    "guidedCorrectionRef": "ma-g5-health-u01-l01#remediation-wet-floor-correction",
+    "freshRetryRef": "ma-g5-health-u01-l01#remediation-water-fountain-retry",
+    "exitCriterionRef": "ma-g5-health-u01-l01#remediation-five-windows.exitCriterion"
+  },
+  "masteryPlan": {
+    "minimumEvidenceOccasions": 2,
+    "laterRetrievalOrTransferRef": "ma-g5-health-u01-l01#later-transfer",
+    "decisionAuthorityRef": "curriculum-production/final/health-physical-education/scoring-guides/health/grade-05/ma-g5-health-u01-l01.json#masteryPlan.decisionAuthority",
+    "privateReflectionContributes": false
+  },
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "promptRef": "ma-g5-health-u01-l01#optionalReflection.prompt",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "subjectiveJudgmentPolicy": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG"
+  },
+  "safetyPrivacyPolicy": {
+    "privacyPolicyRef": "ma-g5-health-u01-l01#privacySafeScenario",
+    "safetyEscalationRef": "ma-g5-health-u01-l01#trustedAdultNote",
+    "adultAuthorityRef": "curriculum-production/final/health-physical-education/scoring-guides/health/grade-05/ma-g5-health-u01-l01.json#guardianSafetyReview.authority",
+    "diagnosisBoundary": "NO_DIAGNOSIS_OR_DIAGNOSTIC_INFERENCE",
+    "disclosureBoundary": "NO_SENSITIVE_PERSONAL_DISCLOSURE_REQUIRED",
+    "bodyDignityBoundary": "NO_SHAME_DIETING_BODY_VALUE_OR_BODY_SCORING",
+    "individualizedAdviceBoundary": "NO_INDIVIDUALIZED_TREATMENT_MEDICATION_DIET_SUPPLEMENT_OR_EXERCISE_ADVICE"
+  },
+  "tutorPolicy": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "mayExplainApprovedContent": true,
+    "mayCue": true,
+    "mayAdaptInstructionalPresentation": true,
+    "mayCoachLearnerReasoning": true,
+    "mayDiagnose": false,
+    "mayCertifyPhysicalCompletion": false,
+    "mayOverrideGuardianOrSafetyAuthority": false,
+    "missingSupplyState": "BLOCKED_MISSING_CURRICULUM",
+    "authorityConflictState": "BLOCKED_AUTHORITY_CONFLICT"
+  },
+  "applicabilityNotes": [
+    "The lesson is primarily concept and vocabulary instruction. Decision reasoning is secondary and provides a concrete application of the five-dimension concept.",
+    "Private reflection is optional, learner-kept, unscored, and excluded from completion and mastery.",
+    "The manifest is curriculum metadata only and creates no Tutor V2 runtime behavior."
+  ]
+}

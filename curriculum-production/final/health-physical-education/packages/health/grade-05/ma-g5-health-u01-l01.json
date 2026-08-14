@@ -9,49 +9,281 @@
   "unitTitle": "Whole-Person Wellbeing and Trusted Support",
   "title": "Launch and diagnostic: dimensions of health",
   "focus": "dimensions of health",
-  "essentialQuestion": "How can understanding whole-person wellbeing and trusted support help us explain, decide, create, or solve something that matters?",
-  "estimatedMinutes": "35–50",
+  "standards": [
+    "Michigan Health: Core Concepts",
+    "Accessing Information"
+  ],
+  "primaryLessonType": "CONCEPT_VOCABULARY",
+  "secondaryLessonTypes": [
+    "DECISION_REASONING"
+  ],
+  "essentialQuestion": "How can the dimensions of health help us understand a situation and choose a safe next step?",
+  "estimatedMinutes": "40–50",
   "materials": [
-    "course notebook or digital equivalent",
-    "pencil or accessible response tool",
-    "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
+    "paper and pencil or an accessible response tool",
+    "the lesson cards included on this page"
   ],
+  "learningGoal": "I can name five dimensions of health, explain how they can affect one another, and use facts to choose a safe next step in a fictional situation.",
   "keyPoints": [
-    "Health includes physical, mental, emotional, social, and environmental wellbeing; one dimension can affect another, so a whole-person view is more useful than judging one behavior.",
-    "Use observable facts, reliable information, and the appropriate support route; do not infer a person’s health, motives, or character from one detail.",
-    "For dimensions of health, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support."
+    "Health has connected dimensions. Physical, mental, emotional, social, and environmental health are five useful ways to notice what may affect wellbeing.",
+    "A dimension is a category for thinking. It is not a score or a label for a person.",
+    "Use facts from the situation. Do not guess a person's health, feelings, motives, or character from one detail.",
+    "A safe next step may include asking a parent, guardian, teacher, school staff member, or another trusted adult for help. A health professional gives medical advice."
   ],
-  "privacySafeScenario": "Create a private-safe support map and a reliable-information checklist.",
-  "studentTask": "Apply the lesson facts to a supplied fictional case about dimensions of health. Produce a three-part response that identifies the key concept, chooses a safe and feasible action, and explains the choice with two details from the instruction plus an appropriate support route.",
-  "knowledgeCheck": "In two or three sentences, explain the most important distinction in dimensions of health; use one lesson fact and name the evidence, safety check, or support route that makes the explanation dependable.",
+  "privacySafeScenario": "All required work uses short fictional situations. The learner never has to describe personal health, body information, feelings, treatment, or family life.",
+  "studentTask": "Read a fresh fictional situation. Name the dimensions that connect to the facts. Choose a safe next step. Explain the choice with two facts and name an adult who could help if help is needed.",
+  "knowledgeCheck": "Explain why one fact cannot show a person's whole health. Then apply the five-dimension idea to a new fictional situation.",
   "completionCriteria": [
-    "The response completes every named part of the dimensions of health task using the supplied fictional or public case.",
-    "The response uses at least two accurate details from the lesson instruction and distinguishes evidence from assumption.",
-    "The response gives a safe, feasible next step or support route and does not depend on private disclosure, body comparison, or recorded media proof."
+    "I name at least two dimensions that fit the facts in the fresh situation.",
+    "I use two facts from the situation and do not turn a guess into a fact.",
+    "I choose a safe, respectful next step and explain why it fits.",
+    "I name a trusted adult or qualified professional when the situation needs help."
   ],
-  "adaptationChoices": "Provide readable text plus optional audio or read-aloud support; no voice feature is required. Chunk directions into one action at a time and show a worked example or model. Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits. Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options. Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media. Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
-  "extensionChallenge": "Apply dimensions of health under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work.",
+  "lessonExperience": {
+    "experienceVersion": "health-director-sample-r1",
+    "learnerTitle": "How the dimensions of health work together",
+    "privacyNotice": "You will only write about fictional people. Keep private health and family information private.",
+    "entryCheck": {
+      "ref": "ma-g5-health-u01-l01#entry-check",
+      "heading": "Start with what you notice",
+      "directions": "Choose the sentence that uses a fact instead of a guess.",
+      "choices": [
+        "The community room is noisy today.",
+        "Jordan does not care about the group.",
+        "Jordan is unhealthy."
+      ],
+      "support": "A fact is something the situation tells you or something you can observe. A guess adds an idea that the situation did not give you.",
+      "treatment": "This warm-up is not scored. Use the support before you continue if you need it."
+    },
+    "explanation": {
+      "ref": "ma-g5-health-u01-l01#clear-explanation",
+      "heading": "Health is a connected picture",
+      "paragraphs": [
+        "Health means wellbeing. Wellbeing is how a person is doing in different parts of life. No single moment tells us a person's whole health.",
+        "We can use five dimensions to study a situation: physical, mental, emotional, social, and environmental. The dimensions can affect one another.",
+        "A dimension is a thinking category. It is not a grade, a body score, or a label for a person. People also have different needs, supports, and surroundings.",
+        "Use facts before you choose an action. If a situation may be unsafe or needs expert help, pause and ask a trusted adult. A qualified health professional gives medical advice."
+      ],
+      "importantDistinction": "A situation can affect a dimension of health without proving anything about a person's complete health or a medical condition.",
+      "decisionRule": "FACTS: Name what the situation tells you. CONNECT: Link the facts to one or more dimensions. CHOOSE: Pick a safe and respectful action. ASK: Name an adult or professional who can help when needed."
+    },
+    "vocabulary": {
+      "ref": "ma-g5-health-u01-l01#vocabulary",
+      "heading": "Five dimensions of health",
+      "terms": [
+        {
+          "term": "physical health",
+          "meaning": "how the body works and is cared for",
+          "example": "getting help for an injury",
+          "boundary": "It is not a judgment about body size or appearance."
+        },
+        {
+          "term": "mental health",
+          "meaning": "wellbeing connected to thinking, learning, and handling challenges",
+          "example": "using a quiet place to focus on a task",
+          "boundary": "One hard moment does not tell us that a person has a condition."
+        },
+        {
+          "term": "emotional health",
+          "meaning": "noticing, naming, and expressing feelings in safe ways",
+          "example": "telling a trusted adult that a situation feels upsetting",
+          "boundary": "Feelings are not right or wrong."
+        },
+        {
+          "term": "social health",
+          "meaning": "wellbeing connected to relationships, communication, and support",
+          "example": "listening and asking a group member what help is useful",
+          "boundary": "One disagreement does not define a person or a relationship."
+        },
+        {
+          "term": "environmental health",
+          "meaning": "how surroundings can affect safety and wellbeing",
+          "example": "moving away from heavy smoke with an adult's help",
+          "boundary": "It describes surroundings, not a person's worth."
+        }
+      ]
+    },
+    "vocabularyCheck": {
+      "ref": "ma-g5-health-u01-l01#vocabulary-check",
+      "heading": "Check the words",
+      "directions": "Match each fact to the dimension it most clearly shows. More than one dimension may connect, but choose the closest one for this quick check.",
+      "items": [
+        {
+          "prompt": "A library opens a quiet room for students to work.",
+          "choices": [
+            "mental health",
+            "physical health",
+            "social health"
+          ]
+        },
+        {
+          "prompt": "A friend listens and helps another person find a trusted adult.",
+          "choices": [
+            "social health",
+            "environmental health",
+            "physical health"
+          ]
+        },
+        {
+          "prompt": "A park closes a path because storm damage made it unsafe.",
+          "choices": [
+            "environmental health",
+            "emotional health",
+            "mental health"
+          ]
+        }
+      ],
+      "selfCheck": "Say the meaning of the dimension in your own words. Then point to the fact that matches that meaning."
+    },
+    "modelExample": {
+      "ref": "ma-g5-health-u01-l01#model-kai-library",
+      "heading": "Watch the thinking: Kai's library plan",
+      "situation": "Kai's class plans to finish a group poster in the library. Construction makes the library very noisy. The teacher says the group may use a quieter classroom. Kai cannot hear the group's ideas in the library.",
+      "possibleActions": [
+        "Assume Kai has a health condition.",
+        "Ask the teacher to move the group to the quieter classroom.",
+        "Tell Kai to work alone without asking what would help."
+      ],
+      "thinkingSteps": [
+        {
+          "label": "1. Name the facts",
+          "text": "The library is noisy. Kai cannot hear the group. The teacher offered a quieter room. I do not add a guess about Kai."
+        },
+        {
+          "label": "2. Connect the dimensions",
+          "text": "The noise is an environmental fact. Hearing and sharing ideas connect to mental and social health."
+        },
+        {
+          "label": "3. Compare safe options",
+          "text": "Moving uses an option the teacher already approved. It helps the whole group hear without labeling Kai or leaving Kai out."
+        },
+        {
+          "label": "4. Choose and ask",
+          "text": "I would ask the teacher to move the group. The teacher is the right adult because the teacher controls the class spaces."
+        }
+      ],
+      "successCheck": "The response uses facts, names connected dimensions, gives a reason, and uses the right adult support. It does not guess about Kai's health."
+    },
+    "guidedReasoning": {
+      "ref": "ma-g5-health-u01-l01#guided-maya-club",
+      "heading": "Try it with support",
+      "situation": "Maya's science club is meeting outside. A strong wind starts blowing loose papers and small branches. The club leader says everyone may move into the community room.",
+      "turnOne": [
+        "Name two facts from the situation.",
+        "Choose the dimension that most clearly connects to the changing surroundings.",
+        "Choose a safe next step."
+      ],
+      "cue": "Look for what changed, what choices are available, and which adult has responsibility for the meeting.",
+      "feedbackMoves": [
+        "If you wrote a guess, replace it with words the situation gives you.",
+        "If you named a dimension, explain how one fact connects to its meaning.",
+        "If your action is safe, add the adult or help source that makes it possible."
+      ],
+      "turnTwo": "Revise one sentence so it includes a fact, a dimension, and a safe action.",
+      "releaseCondition": "Continue when your revised sentence uses a stated fact and does not label Maya."
+    },
+    "independentEvidence": {
+      "ref": "ma-g5-health-u01-l01#independent-leah-center",
+      "heading": "Show what you know",
+      "situation": "Leah's group is making a poster at a community center. A large event starts in the same room. The group cannot hear one another. A center leader offers them an open table in a quieter room.",
+      "directions": [
+        "Write two facts from the situation.",
+        "Name at least two dimensions that connect to those facts.",
+        "Choose a safe and respectful next step.",
+        "Explain your choice with the facts.",
+        "Name an adult who can help if help is needed."
+      ],
+      "permittedSupports": [
+        "the five vocabulary meanings",
+        "read-aloud or plain-language directions",
+        "typing, handwriting, drawing with labels, signing, or telling an adult who is helping with the lesson",
+        "a break, extra time, or a low-distraction space"
+      ],
+      "independenceBoundary": "For this check, another person may restate the directions but may not choose the dimensions, action, facts, or reason for you.",
+      "successCriteria": [
+        "I use at least two facts.",
+        "I connect at least two dimensions to the facts.",
+        "I choose a safe, respectful action and give a reason.",
+        "I name the right kind of adult support when help is needed."
+      ]
+    },
+    "freshConceptCheck": {
+      "ref": "ma-g5-health-u01-l01#fresh-check-omar-park",
+      "heading": "Check what you know",
+      "situation": "Omar's class reaches a park for a cleanup. A sign says one path is closed because a storm damaged it. The teacher points to a different open path.",
+      "directions": [
+        "Explain why the closed path is an environmental health fact, not a judgment about Omar.",
+        "Choose a safe next step and support it with one fact.",
+        "Name who has authority to guide the class."
+      ],
+      "freshnessNote": "This is a new situation. Do not copy the library model."
+    },
+    "remediation": {
+      "ref": "ma-g5-health-u01-l01#remediation-five-windows",
+      "alternateExplanationRefs": [
+        "ma-g5-health-u01-l01#remediation-five-windows",
+        "ma-g5-health-u01-l01#remediation-camera-test"
+      ],
+      "heading": "Try a different way",
+      "trigger": "Use this section if you mixed up a dimension and a judgment, used a guess as a fact, or left out a safe support route.",
+      "alternateExplanation": "Picture five clear windows looking at one fictional situation. Each window helps you notice a different kind of fact. A window shows part of the picture. It does not score or label the person. First use the camera test: Could a camera or the written situation show this fact? Then use the window test: Which dimension helps explain why the fact matters?",
+      "contrast": [
+        "Fact: The hallway lights are off. Guess: Everyone in the hallway is careless.",
+        "Dimension: The dark hallway is an environmental health concern. Label: A person in the hallway is unhealthy."
+      ],
+      "guidedCorrection": "Change this guess into a fact: 'The students do not care about safety.' Use only this information: A spill sign is beside a wet floor.",
+      "guidedCorrectionRef": "ma-g5-health-u01-l01#remediation-wet-floor-correction",
+      "freshRetry": {
+        "ref": "ma-g5-health-u01-l01#remediation-water-fountain-retry",
+        "situation": "A youth center's water fountain is closed for repair. A staff member points to a working fountain in the next room.",
+        "directions": [
+          "Name one fact.",
+          "Connect the fact to one dimension.",
+          "Choose a safe next step and name the adult support."
+        ]
+      },
+      "exitCriterion": "Return to the lesson check when you can write a fact, connect a dimension, and choose a safe action without labeling a person."
+    },
+    "laterTransfer": {
+      "ref": "ma-g5-health-u01-l01#later-transfer",
+      "timing": "Use in a later lesson or another session.",
+      "prompt": "In a new fictional case, identify two connected dimensions, separate facts from guesses, and explain a safe action plus the right support route.",
+      "masteryBoundary": "This lesson's independent response is one evidence occasion. Mastery needs accurate independent evidence on this lesson and on the later transfer."
+    }
+  },
+  "adaptationChoices": "Keep the health idea the same while changing how the learner reads or responds. Offer read-aloud, shorter chunks, vocabulary cards, text-to-speech, speech-to-text, typing, handwriting, drawing with labels, signing, or telling an adult who is helping with the lesson. A support may restate a direction but may not supply the dimension, fact, safe choice, or reason during independent work.",
+  "extensionChallenge": "Write a new fictional case in which one environmental fact connects to two other dimensions. Include enough facts, choices, and adult support for another learner to reason safely. Do not use a real person's private information.",
   "accessibilitySupports": [
-    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
-    "Chunk directions into one action at a time and show a worked example or model.",
-    "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
-    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
-    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
-    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+    "Read each short section aloud or use text-to-speech.",
+    "Show one direction at a time and allow extra time or a break.",
+    "Use a five-part labeled diagram for the dimensions.",
+    "Accept typing, handwriting, drawing with labels, signing, or telling an adult who is helping with the lesson for equal credit.",
+    "Do not lower credit because the learner uses an adaptation, translator, communication support, or trusted adult."
   ],
-  "trustedAdultNote": "Direct urgent safety or health concerns to a trusted adult or qualified professional.",
+  "trustedAdultNote": "If a real situation feels unsafe or raises a health concern, pause the lesson and tell a parent, guardian, teacher, school staff member, or another trusted adult. A qualified health professional gives medical advice. In an emergency, get an adult and use the local emergency service.",
   "optionalReflection": {
-    "prompt": "Invite the learner to notice one safe, optional example of dimensions of health in daily life. No purchase, account creation, photograph, or private disclosure is required.",
+    "prompt": "Optional and private: Draw five empty circles for the dimensions. Add one made-up example to any circle. Keep the page for yourself. You do not need to tell anyone that you did this.",
     "private": true,
     "graded": false,
     "optional": true
   },
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "retention": "LEARNER_KEPT_ONLY"
+  },
   "neverRequires": [
-    "This task never requires body weight, height, BMI, or body-fat percentage.",
-    "This task never requires calorie counting or a diet or weight-loss goal.",
-    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires body weight, height, BMI, body-fat percentage, body comparison, or appearance scoring.",
+    "This task never requires calorie counting, dieting, or a diet or weight-loss goal.",
+    "This task never requires sharing medical history, a diagnosis, treatment, medication, feelings, family conflict, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires advice about an individual learner's treatment, medication, food, supplement, or exercise plan."
   ],
   "sourceProvenance": {
     "sourceBranch": "shared base@656efba (canonical 5/7/8)",
@@ -59,7 +291,10 @@
   },
   "contentProvenance": {
     "repairLane": "mac/health-content-repair-r1",
-    "objective": "Activate prior knowledge about dimensions of health, surface initial thinking without penalty, and establish the unit question."
+    "directorSampleLane": "mac/health-director-sample-r1",
+    "objective": "Teach the five connected dimensions of health before collecting fresh, privacy-safe concept and decision evidence.",
+    "standardRef": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+    "sampleVersion": "health-director-sample-r1"
   },
   "productionReadiness": {
     "status": "READY",
