@@ -1,7 +1,7 @@
 import type { TutorActionProposal } from "../../contracts/index.js";
 import {
   TransportBackedTutorProvider,
-  type ClosedStructuredTutorRequest,
+  type ProviderExecutionRequest,
   type ProviderExecutionResult,
   type ProviderTransportMetrics,
   type ProviderTransportPort,
@@ -110,7 +110,7 @@ export class DeterministicLocalTutorProvider implements TutorProviderPort {
     });
   }
 
-  execute(request: ClosedStructuredTutorRequest): Promise<ProviderExecutionResult> {
+  execute(request: ProviderExecutionRequest): Promise<ProviderExecutionResult> {
     return this.#adapter.execute(request);
   }
 }

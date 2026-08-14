@@ -3,15 +3,13 @@ import {
   TUTOR_V2_ACTION_SCHEMA_VERSION,
   TUTOR_V2_COMPATIBILITY_ID,
   TUTOR_V2_CONTRACT_VERSION,
-  TutorRequestSchema,
   validateExact,
-  type ProviderContext,
   type TutorFailureCode,
-  type TutorRequest,
   type TutorTelemetryEnvelope,
 } from "../../contracts/index.js";
 import {
-  type ClosedStructuredTutorRequest,
+  ProviderExecutionRequestSchema,
+  type ProviderExecutionRequest,
   type ProviderExecutionResult,
   type ProviderFailureReason,
   type ProviderFailureStatus,
@@ -42,7 +40,7 @@ export interface TransportBackedTutorProviderOptions {
 }
 
 interface NormalizationContext {
-  readonly request: TutorRequest;
+  readonly request: ProviderExecutionRequest;
   readonly metrics: ProviderTransportMetrics;
 }
 
@@ -53,12 +51,22 @@ const ZERO_METRICS: ProviderTransportMetrics = {
   costUnits: 0,
 };
 
+function deepFreeze<T>(value: T): T {
+  if (value === null || typeof value !== "object" || Object.isFrozen(value)) return value;
+  for (const child of Object.values(value as Record<string, unknown>)) deepFreeze(child);
+  return Object.freeze(value);
+}
+
+function immutableSnapshot<T>(value: T): T {
+  return deepFreeze(structuredClone(value));
+}
+
 function boundedMetric(value: number): number {
   return Number.isSafeInteger(value) && value >= 0 ? value : 0;
 }
 
 function telemetry(
-  request: TutorRequest,
+  request: ProviderExecutionRequest,
   metrics: ProviderTransportMetrics,
   outcomeCode: TutorTelemetryEnvelope["outcomeCode"],
   action: TutorTelemetryEnvelope["action"],
@@ -69,7 +77,7 @@ function telemetry(
     compatibilityId: request.compatibilityId,
     actionCompatibilityId: request.actionCompatibilityId,
     telemetryKind: "minimized-operation",
-    interactionRef: request.studyAuthorityContext.interactionRef,
+    interactionRef: request.context.interactionRef,
     action,
     providerRef: request.budgetRoutingContext.route.providerRef,
     modelRef: request.budgetRoutingContext.route.modelRef,
@@ -114,7 +122,7 @@ function failure(
       compatibilityId: context.request.compatibilityId,
       actionCompatibilityId: context.request.actionCompatibilityId,
       envelope: "tutor-static-fallback-required",
-      interactionRef: context.request.studyAuthorityContext.interactionRef,
+      interactionRef: context.request.context.interactionRef,
       code: "STATIC_FALLBACK_REQUIRED",
       fallbackRef: STATIC_FALLBACK_REF,
       reasonCode: code,
@@ -123,63 +131,24 @@ function failure(
   };
 }
 
-function projectProviderContext(request: TutorRequest): ProviderContext {
-  const authority = request.studyAuthorityContext;
-  const instruction = authority.instructionContext;
-  return {
-    contractVersion: request.contractVersion,
-    actionSchemaVersion: request.actionSchemaVersion,
-    compatibilityId: request.compatibilityId,
-    actionCompatibilityId: request.actionCompatibilityId,
-    contextKind: "provider",
-    interactionRef: authority.interactionRef,
-    instruction: {
-      subjectRef: instruction.subjectRef,
-      conceptRef: instruction.conceptRef,
-      learnerStageRef: instruction.learnerStageRef,
-      learnerSafeItem: instruction.learnerSafeItem,
-      assessmentPhase: instruction.assessmentPhase,
-      approvedEvidenceSummary: instruction.approvedEvidenceSummary,
-      allowedActions: instruction.allowedActions,
-      hintCeiling: instruction.hintCeiling,
-      safetyConstraints: instruction.safetyConstraints,
-      groundingReferences: instruction.groundingReferences,
-    },
-  };
-}
-
-function invalidRequestShell(): TutorRequest {
+function invalidRequestShell(): ProviderExecutionRequest {
   return {
     contractVersion: TUTOR_V2_CONTRACT_VERSION,
     actionSchemaVersion: TUTOR_V2_ACTION_SCHEMA_VERSION,
     compatibilityId: TUTOR_V2_COMPATIBILITY_ID,
     actionCompatibilityId: TUTOR_V2_ACTION_COMPATIBILITY_ID,
-    envelope: "tutor-request",
+    envelope: "provider-execution-request",
     requestRef: "request:invalid-closed-request",
-    requestIntent: "propose-next-teaching-action",
-    studyAuthorityContext: {
+    context: {
       contractVersion: TUTOR_V2_CONTRACT_VERSION,
       actionSchemaVersion: TUTOR_V2_ACTION_SCHEMA_VERSION,
       compatibilityId: TUTOR_V2_COMPATIBILITY_ID,
       actionCompatibilityId: TUTOR_V2_ACTION_COMPATIBILITY_ID,
-      contextKind: "study-authority",
+      contextKind: "provider",
       interactionRef: "interaction:invalid-provider-request",
-      invocationBindingRef: "invocation:invalid-provider-request",
-      authorizationRef: "authorization:invalid-provider-request",
-      authorizationRevision: 1,
-      safetyClearanceRef: "safety:invalid-provider-request",
-      policyRefs: {
-        authorityPolicyRef: "policy:invalid-authority",
-        assessmentPolicyRef: "policy:invalid-assessment",
-        answerPolicyRef: "policy:invalid-answer",
-        safetyPolicyRef: "policy:invalid-safety",
-        privacyPolicyRef: "policy:invalid-privacy",
-      },
-      instructionContext: {
-        contextKind: "tutor-instruction",
+      instruction: {
         subjectRef: "subject:invalid",
         conceptRef: "concept:invalid",
-        workingLevelInstructionRef: "working-level:invalid",
         learnerStageRef: "learner-stage:invalid",
         learnerSafeItem: null,
         assessmentPhase: "instruction-or-practice",
@@ -205,8 +174,6 @@ function invalidRequestShell(): TutorRequest {
           learnerSafeContent: null,
         }],
       },
-      issuedAt: "1970-01-01T00:00:00.000Z",
-      expiresAt: "1970-01-01T00:00:00.000Z",
     },
     budgetRoutingContext: {
       actionBudget: { remainingActions: 0 },
@@ -254,8 +221,8 @@ export class TransportBackedTutorProvider implements TutorProviderPort {
     this.#maximumOutputTokens = options.maximumOutputTokens ?? DEFAULT_MAXIMUM_OUTPUT_TOKENS;
   }
 
-  async execute(request: ClosedStructuredTutorRequest): Promise<ProviderExecutionResult> {
-    const validation = validateExact(TutorRequestSchema, request);
+  async execute(request: ProviderExecutionRequest): Promise<ProviderExecutionResult> {
+    const validation = validateExact(ProviderExecutionRequestSchema, request);
     if (validation.status === "rejected") {
       return failure(
         { request: invalidRequestShell(), metrics: ZERO_METRICS },
@@ -263,8 +230,11 @@ export class TransportBackedTutorProvider implements TutorProviderPort {
         "INVALID_CLOSED_REQUEST",
       );
     }
-    const closedRequest = validation.value;
+    const closedRequest = immutableSnapshot(validation.value);
     const context = { request: closedRequest, metrics: ZERO_METRICS };
+    if (closedRequest.context.interactionRef !== closedRequest.shortTermState.interactionRef) {
+      return failure(context, "permanent-failure", "INVALID_CLOSED_REQUEST");
+    }
     if (closedRequest.budgetRoutingContext.actionBudget.remainingActions === 0) {
       return failure(context, "over-budget", "NO_ACTION_BUDGET");
     }
@@ -272,9 +242,9 @@ export class TransportBackedTutorProvider implements TutorProviderPort {
       return failure(context, "over-budget", "COST_BUDGET_EXCEEDED");
     }
 
-    const transportRequest: ProviderTransportRequest = {
+    const transportRequest: ProviderTransportRequest = immutableSnapshot({
       requestRef: closedRequest.requestRef,
-      context: projectProviderContext(closedRequest),
+      context: closedRequest.context,
       shortTermState: closedRequest.shortTermState,
       route: {
         ...closedRequest.budgetRoutingContext.route,
@@ -294,7 +264,7 @@ export class TransportBackedTutorProvider implements TutorProviderPort {
         compatibilityId: closedRequest.compatibilityId,
         actionCompatibilityId: closedRequest.actionCompatibilityId,
       },
-    };
+    });
 
     let transported;
     try {

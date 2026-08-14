@@ -1,6 +1,6 @@
 import {
   TransportBackedTutorProvider,
-  type ClosedStructuredTutorRequest,
+  type ProviderExecutionRequest,
   type ProviderExecutionResult,
   type ProviderTransportPort,
   type ProviderTransportRequest,
@@ -83,7 +83,7 @@ export class DeterministicTestTutorProvider implements TutorProviderPort {
     });
   }
 
-  execute(request: ClosedStructuredTutorRequest): Promise<ProviderExecutionResult> {
+  execute(request: ProviderExecutionRequest): Promise<ProviderExecutionResult> {
     return this.#adapter.execute(request);
   }
 }

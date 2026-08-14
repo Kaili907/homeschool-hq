@@ -22,6 +22,7 @@ import {
   evaluateTutorProposalPolicy,
 } from "../../../core/v2/policy/refusal/index.js";
 import type {
+  ProviderExecutionRequest,
   ProviderExecutionResult,
   ProviderFailureReason,
   ProviderFailureStatus,
@@ -107,6 +108,16 @@ function exactKeys(value: Record<string, unknown>, keys: readonly string[]): boo
   const actual = Object.keys(value).sort();
   const expected = [...keys].sort();
   return actual.length === expected.length && actual.every((key, index) => key === expected[index]);
+}
+
+function deepFreeze<T>(value: T): T {
+  if (value === null || typeof value !== "object" || Object.isFrozen(value)) return value;
+  for (const child of Object.values(value as Record<string, unknown>)) deepFreeze(child);
+  return Object.freeze(value);
+}
+
+function immutableSnapshot<T>(value: T): T {
+  return deepFreeze(structuredClone(value));
 }
 
 function canonicalFailureReason(
@@ -327,6 +338,7 @@ function nextHint(current: HintLevel, proposed: HintLevel): HintLevel {
 function updateMemory(
   dependencies: TutorV2BridgeDependencies,
   invocation: TutorV2BridgeInvocation,
+  request: TutorRequest,
   memory: TutorSessionMemoryState,
   proposal: TutorActionProposal,
 ): boolean {
@@ -335,13 +347,7 @@ function updateMemory(
     scope: invocation.memoryAccess.scope,
     patch: {
       hintLevelUsed: nextHint(memory.hintLevelUsed, proposal.hintLevel),
-      currentConceptRef: invocation.request &&
-        isPlainRecord(invocation.request) &&
-        isPlainRecord(invocation.request.studyAuthorityContext) &&
-        isPlainRecord(invocation.request.studyAuthorityContext.instructionContext) &&
-        typeof invocation.request.studyAuthorityContext.instructionContext.conceptRef === "string"
-          ? invocation.request.studyAuthorityContext.instructionContext.conceptRef
-          : memory.currentConceptRef,
+      currentConceptRef: request.studyAuthorityContext.instructionContext.conceptRef,
       lastTutorAction: proposal.action.kind,
       interventionCount: memory.interventionCount + 1,
     },
@@ -362,6 +368,7 @@ function validateProviderResult(
       ? value.proposal.action.kind
       : undefined;
     if (
+      value.proposal.interactionRef !== request.studyAuthorityContext.interactionRef ||
       telemetry.value.interactionRef !== request.studyAuthorityContext.interactionRef ||
       telemetry.value.providerRef !== request.budgetRoutingContext.route.providerRef ||
       telemetry.value.modelRef !== request.budgetRoutingContext.route.modelRef ||
@@ -516,7 +523,7 @@ async function fallbackResult(
     context.providerCallCount,
   );
   if (claim !== "appended") return claim;
-  if (!updateMemory(dependencies, invocation, memory, proposal)) {
+  if (!updateMemory(dependencies, invocation, request, memory, proposal)) {
     return {
       status: "quarantined",
       requestRef: request.requestRef,
@@ -709,12 +716,27 @@ async function resolveInvocation(
   }
 
   return {
-    invocation,
-    request,
-    memory: memory.state,
-    ageProfile: age.profile,
-    providerContext: minimized.value,
+    invocation: immutableSnapshot(invocation),
+    request: immutableSnapshot(request),
+    memory: immutableSnapshot(memory.state),
+    ageProfile: immutableSnapshot(age.profile),
+    providerContext: immutableSnapshot(minimized.value),
   };
+}
+
+function providerExecutionRequest(resolved: ResolvedInvocation): ProviderExecutionRequest {
+  const { request, providerContext } = resolved;
+  return immutableSnapshot({
+    contractVersion: request.contractVersion,
+    actionSchemaVersion: request.actionSchemaVersion,
+    compatibilityId: request.compatibilityId,
+    actionCompatibilityId: request.actionCompatibilityId,
+    envelope: "provider-execution-request",
+    requestRef: request.requestRef,
+    context: providerContext,
+    shortTermState: request.shortTermState,
+    budgetRoutingContext: request.budgetRoutingContext,
+  });
 }
 
 /**
@@ -729,10 +751,11 @@ export async function orchestrateTutorV2Bridge(
   const resolved = await resolveInvocation(input, dependencies);
   if (!("providerContext" in resolved)) return resolved;
   const { invocation, request, memory, ageProfile } = resolved;
+  const providerRequest = providerExecutionRequest(resolved);
 
   let rawProviderResult: unknown;
   try {
-    rawProviderResult = await dependencies.provider.execute(request);
+    rawProviderResult = immutableSnapshot(await dependencies.provider.execute(providerRequest));
   } catch {
     return fallbackResult(
       {
@@ -829,7 +852,7 @@ export async function orchestrateTutorV2Bridge(
     1,
   );
   if (claim !== "appended") return claim;
-  if (!updateMemory(dependencies, invocation, memory, policy.proposal)) {
+  if (!updateMemory(dependencies, invocation, request, memory, policy.proposal)) {
     return {
       status: "quarantined",
       requestRef: request.requestRef,

@@ -1,15 +1,108 @@
-import type {
-  TutorActionProposal,
-  TutorRequest,
-  TutorStaticFallbackOutcome,
-  TutorTelemetryEnvelope,
+import { Type, type Static } from "../../../schema/typebox.js";
+import {
+  AllowedGroundingReferenceSchema,
+  ApprovedEvidenceSummarySchema,
+  AssessmentPhaseSchema,
+  HintLevelSchema,
+  LearnerSafeItemSchema,
+  OpaqueReferenceSchema,
+  PolicyCodeSchema,
+  TutorActionKindSchema,
+  TutorBudgetRoutingContextSchema,
+  TutorSafetyConstraintsSchema,
+  TutorShortTermStateSchema,
+  TutorV2VersionHeaderSchema,
+  type TutorActionProposal,
+  type TutorStaticFallbackOutcome,
+  type TutorTelemetryEnvelope,
 } from "../../contracts/index.js";
 
-/** The only request accepted by a production Tutor provider boundary. */
-export type ClosedStructuredTutorRequest = TutorRequest;
+const ProviderEphemeralLearnerAttemptSchema = Type.Object(
+  {
+    itemRef: OpaqueReferenceSchema,
+    responseFormat: PolicyCodeSchema,
+    learnerResponse: Type.String({ minLength: 1, maxLength: 4000 }),
+    policyPermissionRef: OpaqueReferenceSchema,
+    persistenceAllowed: Type.Literal(false),
+  },
+  { additionalProperties: false },
+);
+
+const ProviderAgePolicyParametersSchema = Type.Object(
+  {
+    agePolicyRef: OpaqueReferenceSchema,
+    learnerStageRef: OpaqueReferenceSchema,
+    responseStyleCode: PolicyCodeSchema,
+    maximumResponseWords: Type.Integer({ minimum: 1, maximum: 1000 }),
+  },
+  { additionalProperties: false },
+);
+
+export const ProviderExecutionInstructionSchema = Type.Object(
+  {
+    subjectRef: OpaqueReferenceSchema,
+    conceptRef: OpaqueReferenceSchema,
+    workingLevelInstructionRef: Type.Optional(Type.Union([OpaqueReferenceSchema])),
+    learnerStageRef: OpaqueReferenceSchema,
+    learnerSafeItem: Type.Union([LearnerSafeItemSchema, Type.Null()]),
+    currentLearnerAttempt: Type.Optional(Type.Union([ProviderEphemeralLearnerAttemptSchema])),
+    assessmentPhase: AssessmentPhaseSchema,
+    approvedEvidenceSummary: ApprovedEvidenceSummarySchema,
+    allowedActions: Type.Array(TutorActionKindSchema, { minItems: 1, maxItems: 9 }),
+    hintCeiling: HintLevelSchema,
+    agePolicyParameters: Type.Optional(Type.Union([ProviderAgePolicyParametersSchema])),
+    safetyConstraints: TutorSafetyConstraintsSchema,
+    groundingReferences: Type.Array(AllowedGroundingReferenceSchema, {
+      minItems: 1,
+      maxItems: 12,
+    }),
+  },
+  { additionalProperties: false },
+);
+
+export const ProviderExecutionContextSchema = Type.Composite(
+  [
+    TutorV2VersionHeaderSchema,
+    Type.Object(
+      {
+        contextKind: Type.Literal("provider"),
+        interactionRef: OpaqueReferenceSchema,
+        instruction: ProviderExecutionInstructionSchema,
+      },
+      { additionalProperties: false },
+    ),
+  ],
+  { additionalProperties: false, $id: "TutorV2ProviderExecutionContext" },
+);
+export type ProviderExecutionContext = Static<typeof ProviderExecutionContextSchema>;
+
+/**
+ * The only input accepted by a Tutor provider implementation. Study authority
+ * is structurally absent; the bridge must adapt its minimized projection into
+ * this closed execution envelope.
+ */
+export const ProviderExecutionRequestSchema = Type.Composite(
+  [
+    TutorV2VersionHeaderSchema,
+    Type.Object(
+      {
+        envelope: Type.Literal("provider-execution-request"),
+        requestRef: OpaqueReferenceSchema,
+        context: ProviderExecutionContextSchema,
+        shortTermState: TutorShortTermStateSchema,
+        budgetRoutingContext: TutorBudgetRoutingContextSchema,
+      },
+      { additionalProperties: false },
+    ),
+  ],
+  { additionalProperties: false, $id: "TutorV2ProviderExecutionRequest" },
+);
+export type ProviderExecutionRequest = Static<typeof ProviderExecutionRequestSchema>;
+/** @deprecated Use ProviderExecutionRequest. This alias no longer denotes TutorRequest. */
+export type ClosedStructuredTutorRequest = ProviderExecutionRequest;
 
 export interface TutorProviderPort {
-  execute(request: ClosedStructuredTutorRequest): Promise<ProviderExecutionResult>;
+  execute(request: ProviderExecutionRequest): Promise<ProviderExecutionResult>;
 }
 
 export type ProviderFailureStatus =

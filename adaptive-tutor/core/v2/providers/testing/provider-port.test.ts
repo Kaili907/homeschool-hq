@@ -10,13 +10,13 @@ import {
   TutorTelemetryEnvelopeSchema,
   validateExact,
   type TutorActionProposal,
-  type TutorRequest,
 } from "../../contracts/index.js";
 import {
   DeterministicLocalTutorProvider,
 } from "../local/index.js";
 import {
   TransportBackedTutorProvider,
+  type ProviderExecutionRequest,
   type ProviderExecutionResult,
   type ProviderFailureResult,
   type ProviderTransportPort,
@@ -34,38 +34,24 @@ const metrics = {
   costUnits: 1,
 } as const;
 
-function requestFixture(): TutorRequest {
+function requestFixture(): ProviderExecutionRequest {
   return {
     contractVersion: TUTOR_V2_CONTRACT_VERSION,
     actionSchemaVersion: TUTOR_V2_ACTION_SCHEMA_VERSION,
     compatibilityId: TUTOR_V2_COMPATIBILITY_ID,
     actionCompatibilityId: TUTOR_V2_ACTION_COMPATIBILITY_ID,
-    envelope: "tutor-request",
+    envelope: "provider-execution-request",
     requestRef: "request:provider-port-test",
-    requestIntent: "propose-next-teaching-action",
-    studyAuthorityContext: {
+    context: {
       contractVersion: TUTOR_V2_CONTRACT_VERSION,
       actionSchemaVersion: TUTOR_V2_ACTION_SCHEMA_VERSION,
       compatibilityId: TUTOR_V2_COMPATIBILITY_ID,
       actionCompatibilityId: TUTOR_V2_ACTION_COMPATIBILITY_ID,
-      contextKind: "study-authority",
+      contextKind: "provider",
       interactionRef: "interaction:provider-port-test",
-      invocationBindingRef: "invocation:provider-port-test",
-      authorizationRef: "authorization:provider-port-test",
-      authorizationRevision: 1,
-      safetyClearanceRef: "safety:provider-port-test",
-      policyRefs: {
-        authorityPolicyRef: "policy:authority-test",
-        assessmentPolicyRef: "policy:assessment-test",
-        answerPolicyRef: "policy:answer-test",
-        safetyPolicyRef: "policy:safety-test",
-        privacyPolicyRef: "policy:privacy-test",
-      },
-      instructionContext: {
-        contextKind: "tutor-instruction",
+      instruction: {
         subjectRef: "subject:mathematics",
         conceptRef: "concept:fractions",
-        workingLevelInstructionRef: "working-level:fraction-foundations",
         learnerStageRef: "learner-stage:middle-childhood",
         learnerSafeItem: {
           itemRef: "item:fraction-parts",
@@ -95,8 +81,6 @@ function requestFixture(): TutorRequest {
           learnerSafeContent: "A fraction names equal parts of a whole.",
         }],
       },
-      issuedAt: "2026-08-13T20:00:00.000Z",
-      expiresAt: "2026-08-13T20:05:00.000Z",
     },
     budgetRoutingContext: {
       actionBudget: { remainingActions: 2 },
@@ -172,7 +156,7 @@ test("valid provider port returns a canonical proposal without applying policy",
   if (result.status !== "success") return;
   assert.equal(validateExact(TutorActionProposalSchema, result.proposal).status, "accepted");
   assert.equal(result.proposal.action.kind, "explain");
-  assert.deepEqual(requestFixture().studyAuthorityContext.instructionContext.allowedActions, ["hint"]);
+  assert.deepEqual(requestFixture().context.instruction.allowedActions, ["hint"]);
   assert.equal(result.proposal.requiresStudyValidation, true);
 });
 
@@ -300,7 +284,7 @@ test("provider execute has no arbitrary mutation callback", async () => {
   const provider = new DeterministicLocalTutorProvider();
   const state = { mutated: false };
   const executeWithExtraArgument = provider.execute.bind(provider) as unknown as (
-    request: TutorRequest,
+    request: ProviderExecutionRequest,
     callback: () => void,
   ) => Promise<ProviderExecutionResult>;
   await executeWithExtraArgument(requestFixture(), () => {

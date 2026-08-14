@@ -23,6 +23,7 @@ import {
 } from "../../../core/v2/policy/age/index.js";
 import {
   TransportBackedTutorProvider,
+  type ProviderExecutionRequest,
   type ProviderExecutionResult,
   type ProviderTransportPort,
   type ProviderTransportRequest,
@@ -363,6 +364,38 @@ class QueueProvider implements TutorProviderPort {
   }
 }
 
+class FunctionalProvider implements TutorProviderPort {
+  readonly #behavior: (
+    request: ProviderExecutionRequest,
+  ) => unknown | Promise<unknown>;
+
+  constructor(
+    behavior: (request: ProviderExecutionRequest) => unknown | Promise<unknown>,
+  ) {
+    this.#behavior = behavior;
+  }
+
+  async execute(request: ProviderExecutionRequest): Promise<ProviderExecutionResult> {
+    return await this.#behavior(request) as ProviderExecutionResult;
+  }
+}
+
+function ignoreMutationFailure(mutation: () => void): void {
+  try {
+    mutation();
+  } catch {
+    // Provider inputs are intentionally frozen; an adversary may catch this
+    // and still return an untrusted proposal for downstream validation.
+  }
+}
+
+function recursiveKeys(value: unknown): string[] {
+  if (value === null || typeof value !== "object") return [];
+  if (Array.isArray(value)) return value.flatMap((entry) => recursiveKeys(entry));
+  const record = value as Record<string, unknown>;
+  return Object.keys(record).flatMap((key) => [key, ...recursiveKeys(record[key])]);
+}
+
 class AtomicLedger {
   readonly entries = new Map<string, string>();
 
@@ -561,6 +594,255 @@ test("provider context excludes protected answer authority", async () => {
   assert.notEqual(captured, null);
   const text = JSON.stringify(captured);
   assert.equal(/answerKey|correctAnswer|protectedAnswer|authorizationRef|answerPolicyRef/.test(text), false);
+});
+
+test("W1-10 adversarial 01: provider cannot see Study authority", async () => {
+  let received: ProviderExecutionRequest | null = null;
+  const provider = new FunctionalProvider((request) => {
+    received = request;
+    return successResult(proposalFixture());
+  });
+  const h = harness({ provider });
+  assert.equal((await orchestrateTutorV2Bridge(h.input, h.dependencies)).status, "accepted");
+  assert.notEqual(received, null);
+  const envelope = received as ProviderExecutionRequest | null;
+  assert.ok(envelope);
+  const keys = recursiveKeys(envelope).map((key) => key.toLowerCase());
+  for (const forbidden of [
+    "studyauthoritycontext",
+    "authorizationref",
+    "authorizationrevision",
+    "invocationbindingref",
+    "safetyclearanceref",
+    "authoritypolicyref",
+    "assessmentpolicyref",
+    "answerpolicyref",
+    "guardianauthority",
+    "guardian",
+    "credentials",
+  ]) {
+    assert.equal(keys.includes(forbidden), false, forbidden);
+  }
+  assert.deepEqual(Object.keys(envelope), [
+    "contractVersion",
+    "actionSchemaVersion",
+    "compatibilityId",
+    "actionCompatibilityId",
+    "envelope",
+    "requestRef",
+    "context",
+    "shortTermState",
+    "budgetRoutingContext",
+  ]);
+});
+
+test("W1-10 adversarial 02: allowed-action replacement cannot authorize explain", async () => {
+  const provider = new FunctionalProvider((request) => {
+    ignoreMutationFailure(() => {
+      request.context.instruction.allowedActions = ["explain"];
+    });
+    return successResult(proposalFixture("explain"));
+  });
+  const h = harness({ provider });
+  requestOf(h.input).studyAuthorityContext.instructionContext.allowedActions = ["return-to-lesson"];
+  h.input.invocationPermission.allowedActions = ["return-to-lesson"];
+  assertFallback(
+    await orchestrateTutorV2Bridge(h.input, h.dependencies),
+    "UNSUPPORTED_ACTION",
+  );
+  assert.deepEqual(
+    requestOf(h.input).studyAuthorityContext.instructionContext.allowedActions,
+    ["return-to-lesson"],
+  );
+});
+
+test("W1-10 adversarial 03: in-place allowed-action mutation is detached", async () => {
+  const provider = new FunctionalProvider((request) => {
+    ignoreMutationFailure(() => request.context.instruction.allowedActions.push("explain"));
+    return successResult(proposalFixture("explain"));
+  });
+  const h = harness({ provider });
+  requestOf(h.input).studyAuthorityContext.instructionContext.allowedActions = ["return-to-lesson"];
+  h.input.invocationPermission.allowedActions = ["return-to-lesson"];
+  assertFallback(
+    await orchestrateTutorV2Bridge(h.input, h.dependencies),
+    "UNSUPPORTED_ACTION",
+  );
+  assert.deepEqual(
+    requestOf(h.input).studyAuthorityContext.instructionContext.allowedActions,
+    ["return-to-lesson"],
+  );
+});
+
+test("W1-10 adversarial 04: grounding replacement cannot invent authority", async () => {
+  const provider = new FunctionalProvider((request) => {
+    ignoreMutationFailure(() => {
+      request.context.instruction.groundingReferences = [{
+        groundingRef: "grounding:invented-b",
+        kind: "curriculum-excerpt",
+        contentDigest: OTHER_DIGEST,
+        learnerSafeContent: "Invented provider grounding.",
+      }];
+    });
+    const proposal = proposalFixture();
+    proposal.action = {
+      kind: "explain",
+      content: "Use invented provider grounding.",
+      groundingRefs: ["grounding:invented-b"],
+    };
+    proposal.groundingClaims = [{
+      groundingRef: "grounding:invented-b",
+      contentDigest: OTHER_DIGEST,
+      claimKind: "direct-support",
+    }];
+    return successResult(proposal);
+  });
+  const h = harness({ provider });
+  assertFallback(
+    await orchestrateTutorV2Bridge(h.input, h.dependencies),
+    "INSUFFICIENT_GROUNDED_CONTEXT",
+  );
+});
+
+test("W1-10 adversarial 05: nested grounding mutation is detached", async () => {
+  const provider = new FunctionalProvider((request) => {
+    ignoreMutationFailure(() => {
+      const grounding = request.context.instruction.groundingReferences[0];
+      if (grounding) {
+        grounding.groundingRef = "grounding:invented-b";
+        grounding.contentDigest = OTHER_DIGEST;
+      }
+    });
+    const proposal = proposalFixture();
+    proposal.action = {
+      kind: "explain",
+      content: "Use invented nested grounding.",
+      groundingRefs: ["grounding:invented-b"],
+    };
+    proposal.groundingClaims = [{
+      groundingRef: "grounding:invented-b",
+      contentDigest: OTHER_DIGEST,
+      claimKind: "direct-support",
+    }];
+    return successResult(proposal);
+  });
+  const h = harness({ provider });
+  assertFallback(
+    await orchestrateTutorV2Bridge(h.input, h.dependencies),
+    "INSUFFICIENT_GROUNDED_CONTEXT",
+  );
+  assert.equal(
+    requestOf(h.input).studyAuthorityContext.instructionContext.groundingReferences[0]?.groundingRef,
+    "grounding:fraction-model",
+  );
+});
+
+test("W1-10 adversarial 06: assessment-phase downgrade cannot bypass anti-answer policy", async () => {
+  const provider = new FunctionalProvider((request) => {
+    ignoreMutationFailure(() => {
+      request.context.instruction.assessmentPhase = "instruction-or-practice";
+    });
+    const proposal = proposalFixture();
+    Object.assign(proposal.action, { content: "The correct answer is four." });
+    return successResult(proposal);
+  });
+  const h = harness({ provider });
+  requestOf(h.input).studyAuthorityContext.instructionContext.assessmentPhase =
+    "active-graded-or-mastery-check";
+  assertFallback(
+    await orchestrateTutorV2Bridge(h.input, h.dependencies),
+    "POLICY_REJECTION",
+  );
+});
+
+test("W1-10 adversarial 07: exact direct-answer exploit is never accepted", async () => {
+  const provider = new FunctionalProvider((request) => {
+    ignoreMutationFailure(() => {
+      request.context.instruction.assessmentPhase = "instruction-or-practice";
+    });
+    const proposal = proposalFixture();
+    Object.assign(proposal.action, { content: "The correct answer is 4." });
+    return successResult(proposal);
+  });
+  const h = harness({ provider });
+  requestOf(h.input).studyAuthorityContext.instructionContext.assessmentPhase =
+    "active-graded-or-mastery-check";
+  const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+  assertFallback(result, "POLICY_REJECTION");
+  assert.doesNotMatch(JSON.stringify(result), /The correct answer is 4/);
+});
+
+test("W1-10 adversarial 08: hint-ceiling mutation cannot raise Study ceiling", async () => {
+  const provider = new FunctionalProvider((request) => {
+    ignoreMutationFailure(() => {
+      request.context.instruction.hintCeiling = "guided-step";
+    });
+    const proposal = proposalFixture("hint", { hintLevel: "guided-step" });
+    Object.assign(proposal.action, { hintLevel: "guided-step" });
+    return successResult(proposal);
+  });
+  const h = harness({ provider });
+  requestOf(h.input).studyAuthorityContext.instructionContext.hintCeiling = "none";
+  assertFallback(
+    await orchestrateTutorV2Bridge(h.input, h.dependencies),
+    "POLICY_REJECTION",
+  );
+  assert.equal(requestOf(h.input).studyAuthorityContext.instructionContext.hintCeiling, "none");
+});
+
+test("W1-10 adversarial 09: Study request remains byte-for-byte immutable", async () => {
+  const provider = new FunctionalProvider((request) => {
+    ignoreMutationFailure(() => request.context.instruction.allowedActions.splice(0, 9, "explain"));
+    ignoreMutationFailure(() => request.context.instruction.groundingReferences.splice(0));
+    ignoreMutationFailure(() => {
+      request.context.instruction.learnerSafeItem = null;
+      request.context.instruction.hintCeiling = "guided-step";
+      request.context.instruction.assessmentPhase = "instruction-or-practice";
+      Object.assign(request, { studyAuthorityContext: { authorizationRef: "provider:forged" } });
+    });
+    return successResult(proposalFixture());
+  });
+  const h = harness({ provider });
+  const before = JSON.stringify(h.input);
+  await orchestrateTutorV2Bridge(h.input, h.dependencies);
+  assert.equal(JSON.stringify(h.input), before);
+});
+
+test("W1-10 adversarial 10: provider throw during frozen mutation fails safely", async () => {
+  const provider = new FunctionalProvider((request) => {
+    request.context.instruction.allowedActions.push("explain");
+    return successResult(proposalFixture());
+  });
+  const h = harness({ provider });
+  const before = structuredClone(h.input);
+  const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+  assertFallback(result, "PROVIDER_UNAVAILABLE");
+  assert.equal(result.providerDetail?.reason, "TRANSPORT_EXCEPTION");
+  assert.equal(result.fallback?.action.kind, "return-to-lesson");
+  assert.deepEqual(h.input, before);
+});
+
+test("W1-10 adversarial 11: response interaction binding mismatch fails safely", async () => {
+  const provider = new FunctionalProvider(() => {
+    const proposal = proposalFixture();
+    proposal.interactionRef = "interaction:provider-forged";
+    return successResult(proposal);
+  });
+  const h = harness({ provider });
+  assertFallback(
+    await orchestrateTutorV2Bridge(h.input, h.dependencies),
+    "MALFORMED_RESPONSE",
+  );
+});
+
+test("W1-10 adversarial 12: legitimate provider actions remain available", async () => {
+  for (const kind of TUTOR_ACTION_KINDS) {
+    const provider = new FunctionalProvider(() => successResult(proposalFixture(kind)));
+    const h = harness({ provider });
+    const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+    assert.equal(result.status, "accepted", kind);
+    if (result.status === "accepted") assert.equal(result.proposal.action.kind, kind);
+  }
 });
 
 test("valid grounding is accepted", async () => {
@@ -883,9 +1165,8 @@ test("ownership-adjudication SHA is in W1-08 ancestry", () => {
   assert.equal(result.status, 0);
 });
 
-test("accepted W1-03 through W1-07 trees still match adjudicated lane deltas", () => {
+test("unowned W1-04 through W1-07 trees still match adjudicated lane deltas", () => {
   const lanes: readonly [string, readonly string[]][] = [
-    ["ee6cc83fdaa43fe733d05abefdaedffe3d0febf9", ["core/v2/providers"]],
     ["befb91bb2321aec0449d2d8e613619a592feb76c", ["core/v2/policy/authority", "core/v2/policy/grounding", "core/v2/policy/anti-answer", "core/v2/policy/refusal"]],
     ["4a8bded7bc0caf5ff647dae814e011d20c8ae5bf", ["core/v2/policy/age", "core/v2/memory"]],
     ["b93765552d60a88ac7691ca7840dfc2ae3a23e77", ["study-engine/tutor-v2/evidence", "study-engine/tutor-v2/privacy"]],

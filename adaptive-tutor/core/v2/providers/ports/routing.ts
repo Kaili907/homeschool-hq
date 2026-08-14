@@ -1,4 +1,4 @@
-import type { ClosedStructuredTutorRequest } from "./contracts.js";
+import type { ProviderExecutionRequest } from "./contracts.js";
 
 export type ProviderModelClass = "fast" | "balanced" | "reasoning";
 export type ProviderCostClass = "low" | "standard" | "premium";
@@ -27,5 +27,5 @@ export interface ProviderRoutePlan {
 
 /** Future routing seam. Wave 1 intentionally supplies no commercial implementation. */
 export interface TutorProviderRoutePort {
-  selectRoute(request: ClosedStructuredTutorRequest): Promise<ProviderRoutePlan>;
+  selectRoute(request: ProviderExecutionRequest): Promise<ProviderRoutePlan>;
 }

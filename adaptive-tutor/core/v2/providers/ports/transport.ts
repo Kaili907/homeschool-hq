@@ -1,12 +1,12 @@
 import type {
-  ProviderContext,
   TutorShortTermState,
 } from "../../contracts/index.js";
+import type { ProviderExecutionContext } from "./contracts.js";
 import type { ProviderCostClass, ProviderModelClass } from "./routing.js";
 
 export interface ProviderTransportRequest {
   readonly requestRef: string;
-  readonly context: ProviderContext;
+  readonly context: ProviderExecutionContext;
   readonly shortTermState: TutorShortTermState;
   readonly route: {
     readonly routeRef: string;
