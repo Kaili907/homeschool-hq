@@ -490,9 +490,13 @@ export class FinalFamilyPilotController {
     }
   }
 
-  async pause(studentRef: string, assignmentRef: string): Promise<FinalFamilyPilotControllerResult> {
+  async pause(
+    studentRef: string,
+    assignmentRef: string,
+    presentationProgressRef: string | null = null,
+  ): Promise<FinalFamilyPilotControllerResult> {
     return this.#sessionOperation(studentRef, assignmentRef, async (runtime, session) => {
-      const result = await runtime.pause(assignmentRef, session)
+      const result = await runtime.pause(assignmentRef, session, presentationProgressRef)
       if (result.status === 'ok') this.#writeCore((state) => pauseFamilyPilotAssignment(state, studentRef, assignmentRef, this.#at()))
       return result
     })
@@ -506,9 +510,13 @@ export class FinalFamilyPilotController {
     })
   }
 
-  async checkpoint(studentRef: string, assignmentRef: string): Promise<FinalFamilyPilotControllerResult> {
+  async checkpoint(
+    studentRef: string,
+    assignmentRef: string,
+    presentationProgressRef: string | null = null,
+  ): Promise<FinalFamilyPilotControllerResult> {
     return this.#sessionOperation(studentRef, assignmentRef, (runtime, session) =>
-      runtime.checkpoint(assignmentRef, session))
+      runtime.checkpoint(assignmentRef, session, presentationProgressRef))
   }
 
   /** Visible Study heartbeat only; no input or behavior events are accepted. */

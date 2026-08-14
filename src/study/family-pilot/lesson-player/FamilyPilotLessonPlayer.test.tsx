@@ -2,7 +2,9 @@ import { act, type ReactElement } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { FamilyPilotStudySnapshot } from '../study'
+import { RICH_MATH_LESSON_FIXTURE } from '../final-app/learner-response'
 import { FamilyPilotLessonPlayer } from './FamilyPilotLessonPlayer'
+import { createRichLessonRenderModel } from './renderModel'
 import type { FamilyPilotLessonPlayerProps } from './types'
 
 // DOM harness adapted from Grade5MathPractice.test.tsx / AcademyLevelsPanel.test.tsx —
@@ -472,5 +474,78 @@ describe('FamilyPilotLessonPlayer', () => {
     await rerender(<FamilyPilotLessonPlayer {...baseProps({ ...handlers, busy: true })} />)
     await press(findButton('Submit'))
     expect(handlers.onSubmitAction).not.toHaveBeenCalled()
+  })
+
+  it('renders exactly one rich practice question at a time and advances only after its response is saved', async () => {
+    const handlers = noopHandlers()
+    const model = createRichLessonRenderModel(RICH_MATH_LESSON_FIXTURE)
+    const guided = model.pages.find((page) => page.item?.itemRef.endsWith(':guided:1'))!.item!
+    const independent = model.pages.find((page) => page.item?.itemRef.endsWith(':independent:1'))!.item!
+    const snapshot = baseSnapshot({ segmentRef: 'segment-2', segmentOrdinal: 2, completedSegmentRefs: ['segment-1'], remainingSegmentRefs: ['segment-2', 'segment-3'] })
+    await render(<FamilyPilotLessonPlayer {...baseProps({
+      ...handlers, snapshot, renderModel: model,
+      segmentContent: {
+        lessonRef: guided.lessonRef, sectionRef: guided.sectionRef, itemRef: guided.itemRef,
+        responseKind: guided.responseType, prompt: guided.prompt,
+        answeredItemRefs: [], requiredItemRefs: [guided.itemRef, independent.itemRef], canCompleteSegment: false,
+      },
+    })} />)
+    expect(hasText(container, 'Round 62 to the nearest ten.')).toBe(true)
+    expect(hasText(container, 'Round 184 to the nearest hundred.')).toBe(false)
+    expect(findAll(container, 'PROGRESS')).toHaveLength(1)
+    expect(findAll(container, 'FORM')).toHaveLength(1)
+
+    await typeInto(findInput('text'), '60')
+    await press(findButton('Save response'))
+    expect(handlers.onSubmitAction).toHaveBeenCalledWith('60')
+
+    await rerender(<FamilyPilotLessonPlayer {...baseProps({
+      ...handlers, snapshot, renderModel: model,
+      segmentContent: {
+        lessonRef: independent.lessonRef, sectionRef: independent.sectionRef, itemRef: independent.itemRef,
+        responseKind: independent.responseType, prompt: independent.prompt,
+        answeredItemRefs: [guided.itemRef], requiredItemRefs: [guided.itemRef, independent.itemRef], canCompleteSegment: false,
+      },
+    })} />)
+    expect(hasText(container, 'Response saved. No browser correctness decision was made.')).toBe(true)
+    await press(findButton('Continue'))
+    expect(hasText(container, 'Round 184 to the nearest hundred.')).toBe(true)
+    expect(hasText(container, 'Round 62 to the nearest ten.')).toBe(false)
+  })
+
+  it('passes an opaque exact-page cursor through rich Save and Exit and Take a Break actions', async () => {
+    const handlers = noopHandlers()
+    const model = createRichLessonRenderModel(RICH_MATH_LESSON_FIXTURE)
+    const independentPage = model.pages.find((page) => page.item?.itemRef.endsWith(':independent:1'))!
+    const guided = model.pages.find((page) => page.item?.itemRef.endsWith(':guided:1'))!.item!
+    const independent = independentPage.item!
+    const snapshot = baseSnapshot({
+      segmentRef: 'segment-2', segmentOrdinal: 2, completedSegmentRefs: ['segment-1'], remainingSegmentRefs: ['segment-2', 'segment-3'],
+      presentationProgressRef: independentPage.progressRef,
+    })
+    await render(<FamilyPilotLessonPlayer {...baseProps({
+      ...handlers, snapshot, renderModel: model,
+      segmentContent: {
+        itemRef: independent.itemRef, responseKind: independent.responseType,
+        answeredItemRefs: [guided.itemRef], requiredItemRefs: [guided.itemRef, independent.itemRef], canCompleteSegment: false,
+      },
+    })} />)
+    expect(hasText(container, 'Round 184 to the nearest hundred.')).toBe(true)
+    await press(findButton('Save and exit'))
+    await press(findButton('Take a break'))
+    expect(handlers.onExit).toHaveBeenCalledWith(independentPage.progressRef)
+    expect(handlers.onPause).toHaveBeenCalledWith(independentPage.progressRef)
+  })
+
+  it('exposes only the narrow rich Tutor callback context', async () => {
+    const handlers = noopHandlers()
+    const model = createRichLessonRenderModel(RICH_MATH_LESSON_FIXTURE)
+    await render(<FamilyPilotLessonPlayer {...baseProps({ ...handlers, renderModel: model, tutorHelpAvailable: true })} />)
+    await press(findButton('Ask the Tutor for help'))
+    expect(handlers.onOpenTutor).toHaveBeenCalledWith({
+      lessonRef: model.lessonRef,
+      sectionRef: model.pages[0]!.sectionRef,
+      itemRef: null,
+    })
   })
 })

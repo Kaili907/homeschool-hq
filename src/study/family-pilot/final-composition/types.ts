@@ -217,7 +217,11 @@ export interface FinalFamilyPilotStudyRuntimeApi {
   start(assignmentRef: string): Promise<FinalFamilyPilotResult>
   reopen(assignmentRef: string, session: FamilyPilotStudySession): Promise<FinalFamilyPilotResult>
   snapshot(assignmentRef: string, session: FamilyPilotStudySession): Promise<FinalFamilyPilotResult>
-  pause(assignmentRef: string, session: FamilyPilotStudySession): Promise<FinalFamilyPilotResult>
+  pause(
+    assignmentRef: string,
+    session: FamilyPilotStudySession,
+    presentationProgressRef?: string | null,
+  ): Promise<FinalFamilyPilotResult>
   resume(assignmentRef: string, session: FamilyPilotStudySession): Promise<FinalFamilyPilotResult>
   checkpoint(
     assignmentRef: string,

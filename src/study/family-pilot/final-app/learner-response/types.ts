@@ -126,20 +126,49 @@ export interface LearnerResponseSubmission {
 export interface LearnerMaterialDto {
   readonly lessonRef: string
   readonly title: string
+  readonly subject?: string
   readonly format: 'structured' | 'markdown'
   readonly markdown?: string
   readonly sections?: readonly LearnerMaterialSectionDto[]
+  readonly essentialQuestion?: string
+  readonly lessonGoal?: string
+  readonly keyPoints?: readonly string[]
+  readonly vocabulary?: readonly (string | { readonly term: string; readonly definition?: string })[]
+  readonly materials?: readonly string[]
+  readonly safetyRules?: readonly string[]
+  readonly stoppingRules?: readonly string[]
+  readonly successCriteria?: readonly string[]
+  readonly movementCues?: readonly string[]
+  readonly activitySteps?: readonly string[]
+  readonly technique?: string
+  readonly spaceSetup?: string
+  readonly accessibleAdaptation?: string
+  readonly noEquipmentAlternative?: string
+  readonly commonErrorToWatchFor?: string
+  readonly equipmentRequirements?: unknown
+  readonly simulationAlternative?: unknown
+  readonly activitySetup?: unknown
+  readonly learnerResource?: unknown
+  readonly sourceMetadata?: unknown
+  readonly rubricCriteria?: readonly unknown[]
 }
 
 export interface LearnerMaterialSectionDto {
   readonly sectionRef?: string
   readonly sectionId?: string
   readonly kind?: string
+  readonly sectionKind?: string
   readonly title: string
   readonly body?: string
   readonly directions?: string
   readonly prompts?: readonly string[]
   readonly items?: readonly LearnerMaterialItemDto[]
+  readonly vocabulary?: readonly (string | { readonly term: string; readonly definition?: string })[]
+  readonly source?: unknown
+  readonly data?: unknown
+  readonly map?: unknown
+  readonly image?: unknown
+  readonly reference?: unknown
 }
 
 export interface LearnerMaterialItemDto {
@@ -153,4 +182,10 @@ export interface LearnerMaterialItemDto {
   readonly responseKind?: LearnerResponseType
   readonly choices?: readonly (string | { readonly id?: string; readonly ref?: string; readonly label: string })[]
   readonly workedSolution?: { readonly steps?: readonly string[] }
+  readonly explanation?: string
+  readonly source?: unknown
+  readonly data?: unknown
+  readonly map?: unknown
+  readonly image?: unknown
+  readonly reference?: unknown
 }
