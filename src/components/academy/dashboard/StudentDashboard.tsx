@@ -79,7 +79,7 @@ const STATUS_COPY: Record<DashboardLessonStatus, string> = {
 
 const STATUS_MARK: Record<DashboardLessonStatus, string> = {
   complete: '✓',
-  'in-progress': '↗',
+  'in-progress': '↗︎',
   'not-started': '○',
   'ready-to-retry': '↺',
 }
@@ -169,7 +169,7 @@ function UpNextCard({
       <p className="up-next-card__context">{context}</p>
       <p className="up-next-card__status"><span aria-hidden="true">{lessonStatusMark(lesson)}</span> {statusCopy}</p>
       {route ? (
-        <button className={isReference ? 'button-secondary' : 'button-primary'} onClick={() => onNavigate(route)} aria-label={`${buttonLabel}: ${lesson.title}, ${context}, ${statusCopy}`}>
+        <button type="button" className={isReference ? 'button-secondary' : 'button-primary'} onClick={() => onNavigate(route)} aria-label={`${buttonLabel}: ${lesson.title}, ${context}, ${statusCopy}`}>
           {buttonLabel}<span aria-hidden="true">→</span>
         </button>
       ) : (
@@ -201,7 +201,7 @@ function MissionUpNextCard({
       <h2 id="up-next-heading">{item.label}</h2>
       <p className="up-next-card__context">Today&apos;s Mission</p>
       <p className="up-next-card__status">
-        <span aria-hidden="true">{isLaunch ? '↗' : '○'}</span>{' '}
+        <span aria-hidden="true">{isLaunch ? '↗︎' : '○'}</span>{' '}
         {isLaunch ? 'Complete this in its learning activity' : legacyMissionActionCopy(displayItem)}
       </p>
       <button
@@ -275,7 +275,7 @@ function RestartRequiredCard({
       <p className="up-next-card__status"><span aria-hidden="true">↻</span> {statusCopy}</p>
       <p className="up-next-card__explanation">This lesson was started with a different curriculum version.</p>
       {route ? (
-        <button className={isReference ? 'button-secondary' : 'button-primary'} onClick={() => onNavigate(route)} aria-label={`Open lesson: ${lesson.title}, ${context}${isReference ? `, ${statusCopy}` : ''}`}>
+        <button type="button" className={isReference ? 'button-secondary' : 'button-primary'} onClick={() => onNavigate(route)} aria-label={`Open lesson: ${lesson.title}, ${context}${isReference ? `, ${statusCopy}` : ''}`}>
           Open lesson<span aria-hidden="true">→</span>
         </button>
       ) : (
@@ -323,7 +323,7 @@ function TodayTimeline({ lessons, calendarState, onNavigate }: { lessons: readon
             <li key={lesson.lessonId} className="timeline-item">
               <span className="timeline-item__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               {route ? (
-                <button onClick={() => onNavigate(route)} aria-label={`${lesson.title}, ${lessonContext(lesson)}, ${statusCopy}`}>{contents}</button>
+                <button type="button" onClick={() => onNavigate(route)} aria-label={`${lesson.title}, ${lessonContext(lesson)}, ${statusCopy}`}>{contents}</button>
               ) : <div>{contents}</div>}
             </li>
           )
@@ -390,7 +390,7 @@ function NoWorkState({ calendarState, week, onNavigate }: Pick<StudentDashboardP
         <h2 id="no-work-heading">{copy.heading}</h2>
         <p>{copy.body}</p>
       </div>
-      <button className="button-secondary" onClick={() => onNavigate({ kind: 'schedule' })}>View year schedule</button>
+      <button type="button" className="button-secondary" onClick={() => onNavigate({ kind: 'schedule' })}>View year schedule</button>
     </section>
   )
 }
@@ -459,7 +459,7 @@ function CourseProgressGrid({ profile, catalog, levelOf, onNavigate, academyStat
           const percent = course.lessonCount > 0 ? Math.round((completed / course.lessonCount) * 100) : 0
           return (
             <li key={course.courseId}>
-              <button onClick={() => onNavigate({ kind: 'course', courseId: course.courseId })}>
+              <button type="button" onClick={() => onNavigate({ kind: 'course', courseId: course.courseId })}>
                 <span className="course-card__topline"><span>Course</span><span>{percent}% complete</span></span>
                 <strong>{courseLevelLabel(course, levelOf)}</strong>
                 <span className="course-card__meter" aria-hidden="true">
@@ -576,36 +576,51 @@ export function StudentDashboard({
             <span className="student-topbar__mark" aria-hidden="true">M</span>
             <div><p>Manuel Academy</p><h1 ref={headingRef} tabIndex={-1}>Hello, {firstName}</h1></div>
           </div>
-          <nav className="student-topbar__nav" aria-label="Student dashboard navigation">
-            {dashboard?.rewards && (
-              <button
-                className="student-topbar__reward"
-                onClick={dashboard.rewards.onOpenShop}
-                aria-label={`Open Prize Shop, ${dashboard.rewards.stars} stars`}
-              >
-                <span aria-hidden="true">★</span> {dashboard.rewards.stars} <span>Prize Shop</span>
-              </button>
+          <div className="student-topbar__controls">
+            {(dashboard?.rewards || hasAcademyCourses) && (
+              <nav className="student-topbar__nav" aria-label="Student dashboard navigation">
+                {dashboard?.rewards && (
+                  <button
+                    type="button"
+                    className="student-topbar__reward"
+                    onClick={dashboard.rewards.onOpenShop}
+                    aria-label={`Open Prize Shop, ${dashboard.rewards.stars} stars`}
+                  >
+                    <span aria-hidden="true">★</span> {dashboard.rewards.stars} <span>Prize Shop</span>
+                  </button>
+                )}
+                {hasAcademyCourses && <button type="button" onClick={() => onNavigate({ kind: 'schedule' })}>Year schedule</button>}
+              </nav>
             )}
-            {hasAcademyCourses && <button type="button" onClick={() => onNavigate({ kind: 'schedule' })}>Year schedule</button>}
-            {dashboard && (
-              <>
-                <button type="button" disabled={dashboard.learnerExitPending} onClick={dashboard.onLock}>
-                  Lock
-                </button>
-                <button type="button" disabled={dashboard.learnerExitPending} onClick={dashboard.onSwitchLearner}>
-                  Switch learner
-                </button>
-              </>
-            )}
-            <button
-              type="button"
-              className="student-topbar__exit"
-              disabled={dashboard?.learnerExitPending}
-              onClick={dashboard?.onSignOut ?? onExit}
+            <div
+              className="student-topbar__session-actions"
+              role="group"
+              aria-label="Learner session"
+              aria-busy={dashboard?.learnerExitPending || undefined}
             >
-              Sign out
-            </button>
-          </nav>
+              {dashboard && (
+                <>
+                  <button type="button" disabled={dashboard.learnerExitPending} onClick={dashboard.onLock}>
+                    Lock
+                  </button>
+                  <button type="button" disabled={dashboard.learnerExitPending} onClick={dashboard.onSwitchLearner}>
+                    Switch learner
+                  </button>
+                </>
+              )}
+              <button
+                type="button"
+                className="student-topbar__exit"
+                disabled={dashboard?.learnerExitPending}
+                onClick={dashboard?.onSignOut ?? onExit}
+              >
+                Sign out
+              </button>
+              {dashboard?.learnerExitPending && (
+                <span className="student-dashboard__sr-only" role="status">Learner session action in progress.</span>
+              )}
+            </div>
+          </div>
         </header>
 
         <div className="student-dashboard__intro">
@@ -637,7 +652,7 @@ export function StudentDashboard({
             )}
 
             <div className="student-dashboard__today-heading">
-              <p className="eyebrow">Today</p>
+              <p className="eyebrow">Learning plan</p>
               <h2>Today&apos;s learning</h2>
             </div>
             {!hasAcademyCourses ? (

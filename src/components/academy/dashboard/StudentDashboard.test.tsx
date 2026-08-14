@@ -752,6 +752,10 @@ describe('StudentDashboard', () => {
     for (const label of ['Lock', 'Switch learner', 'Sign out']) {
       expect(html).toMatch(new RegExp(`<button[^>]*disabled=""[^>]*>${label}</button>|<button[^>]*disabled=""[^>]*>\\s*${label}\\s*</button>`))
     }
+    expect(html).toContain('role="group"')
+    expect(html).toContain('aria-label="Learner session"')
+    expect(html).toContain('aria-busy="true"')
+    expect(html).toContain('Learner session action in progress.')
   })
 
   it('keeps dashboard security controls native, keyboard-operable, and mobile-sized', () => {
@@ -759,9 +763,9 @@ describe('StudentDashboard', () => {
     for (const label of ['Lock', 'Switch learner', 'Sign out']) {
       expect(html).toMatch(new RegExp(`<button[^>]*type="button"[^>]*>\\s*${label}\\s*</button>`))
     }
-    expect(dashboardStyles).toMatch(/\.student-topbar__nav button\s*\{[^}]*min-height:\s*44px;/)
-    const mobileRules = dashboardStyles.slice(dashboardStyles.indexOf('@media (max-width: 540px)'))
-    expect(mobileRules).toMatch(/\.student-topbar__nav\s*\{[^}]*grid-template-columns:\s*1fr 1fr;/)
+    expect(dashboardStyles).toMatch(/\.student-topbar__controls button\s*\{[^}]*min-height:\s*44px;/)
+    const mobileRules = dashboardStyles.slice(dashboardStyles.indexOf('@media (max-width: 800px)'))
+    expect(mobileRules).toMatch(/\.student-topbar__session-actions\s*\{[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/)
   })
 
   it.each([
