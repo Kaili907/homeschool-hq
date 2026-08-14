@@ -1,0 +1,810 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/science-lesson-advisory-contract-r1.schema.json",
+  "title": "Manuel Academy Science Lesson Advisory Contract R1",
+  "description": "Draft curriculum-side metadata envelope for Science lesson depth review. This schema is advisory and defines no Tutor V2, Study Engine, Dashboard, scoring, or learner-state runtime behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "status",
+    "lessonId",
+    "primaryLessonType",
+    "instructionalModes",
+    "phase",
+    "conceptIds",
+    "prerequisiteConceptIds",
+    "misconceptionIds",
+    "phenomenonSourceRefs",
+    "representationRefs",
+    "allowedSupport",
+    "answerPolicy",
+    "safetyPolicyRef",
+    "ageLanguagePolicyRef",
+    "metadataApplicabilityNotes"
+  ],
+  "properties": {
+    "contractVersion": {
+      "const": "science-lesson-advisory-r1"
+    },
+    "status": {
+      "const": "DRAFT_ADVISORY"
+    },
+    "lessonId": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "primaryLessonType": {
+      "$ref": "#/$defs/lessonType"
+    },
+    "instructionalModes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/lessonType"
+      },
+      "uniqueItems": true
+    },
+    "phase": {
+      "enum": [
+        "TEACH",
+        "GUIDED",
+        "INDEPENDENT",
+        "REMEDIATE",
+        "REVIEW",
+        "ASSESS",
+        "PROJECT"
+      ]
+    },
+    "conceptIds": {
+      "$ref": "#/$defs/nonEmptyUniqueStringArray"
+    },
+    "prerequisiteConceptIds": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "misconceptionIds": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "phenomenonSourceRefs": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "representationRefs": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "allowedSupport": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "READ_ALOUD",
+          "TERM_DEFINITION",
+          "VOCABULARY_GLOSSARY",
+          "REPRESENTATION_DESCRIPTION",
+          "PARTIALLY_WORKED_MODEL",
+          "PROCEDURE_CHUNKING",
+          "QUESTION_REPHRASE",
+          "EVIDENCE_LOCATION_PROMPT",
+          "SELF_CHECK_CRITERIA",
+          "ALTERNATE_RESPONSE_MODE"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "answerPolicy": {
+      "enum": [
+        "TEACHING_VISIBLE",
+        "GUIDED_PARTIAL",
+        "INDEPENDENT_WITHHOLD",
+        "ASSESSMENT_PROTECTED"
+      ]
+    },
+    "safetyPolicyRef": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "ageLanguagePolicyRef": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "metadataApplicabilityNotes": {
+      "description": "Required explanation for any empty prerequisite, misconception, phenomenon/source, or representation reference list.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/applicabilityNote"
+      },
+      "uniqueItems": true
+    },
+    "teachingEvidence": {
+      "$ref": "#/$defs/teachingEvidence"
+    },
+    "evidencePlan": {
+      "$ref": "#/$defs/evidencePlan"
+    },
+    "investigationContract": {
+      "$ref": "#/$defs/investigationContract"
+    },
+    "adultAuthorityRef": {
+      "$ref": "#/$defs/nonEmptyString"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "enum": [
+              "TEACH",
+              "GUIDED",
+              "REMEDIATE"
+            ]
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "required": [
+          "teachingEvidence"
+        ]
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": {
+              "primaryLessonType": {
+                "enum": [
+                  "INVESTIGATION",
+                  "LAB_HANDS_ON"
+                ]
+              }
+            },
+            "required": [
+              "primaryLessonType"
+            ]
+          },
+          {
+            "properties": {
+              "instructionalModes": {
+                "contains": {
+                  "enum": [
+                    "INVESTIGATION",
+                    "LAB_HANDS_ON"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "instructionalModes"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "required": [
+          "investigationContract"
+        ]
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": {
+              "primaryLessonType": {
+                "const": "LAB_HANDS_ON"
+              }
+            },
+            "required": [
+              "primaryLessonType"
+            ]
+          },
+          {
+            "properties": {
+              "instructionalModes": {
+                "contains": {
+                  "const": "LAB_HANDS_ON"
+                }
+              }
+            },
+            "required": [
+              "instructionalModes"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "required": [
+          "adultAuthorityRef"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "enum": [
+              "INDEPENDENT",
+              "ASSESS"
+            ]
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "required": [
+          "evidencePlan",
+          "adultAuthorityRef"
+        ],
+        "properties": {
+          "answerPolicy": {
+            "enum": [
+              "INDEPENDENT_WITHHOLD",
+              "ASSESSMENT_PROTECTED"
+            ]
+          },
+          "allowedSupport": {
+            "not": {
+              "contains": {
+                "enum": [
+                  "PARTIALLY_WORKED_MODEL",
+                  "EVIDENCE_LOCATION_PROMPT"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "const": "ASSESS"
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "properties": {
+          "answerPolicy": {
+            "const": "ASSESSMENT_PROTECTED"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "MASTERY"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "INDEPENDENT"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "ASSESSMENT"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "ASSESS"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "REMEDIATION"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "REMEDIATE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "REVIEW"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "REVIEW"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "PROJECT"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "PROJECT"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": {
+              "primaryLessonType": {
+                "const": "PHENOMENON_OBSERVATION"
+              }
+            },
+            "required": [
+              "primaryLessonType"
+            ]
+          },
+          {
+            "properties": {
+              "instructionalModes": {
+                "contains": {
+                  "const": "PHENOMENON_OBSERVATION"
+                }
+              }
+            },
+            "required": [
+              "instructionalModes"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "properties": {
+          "phenomenonSourceRefs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": {
+              "primaryLessonType": {
+                "const": "MODEL_BUILDING"
+              }
+            },
+            "required": [
+              "primaryLessonType"
+            ]
+          },
+          {
+            "properties": {
+              "instructionalModes": {
+                "contains": {
+                  "const": "MODEL_BUILDING"
+                }
+              }
+            },
+            "required": [
+              "instructionalModes"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "properties": {
+          "representationRefs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "prerequisiteConceptIds": {
+            "maxItems": 0
+          }
+        },
+        "required": [
+          "prerequisiteConceptIds"
+        ]
+      },
+      "then": {
+        "properties": {
+          "metadataApplicabilityNotes": {
+            "contains": {
+              "properties": {
+                "field": {
+                  "const": "prerequisiteConceptIds"
+                }
+              },
+              "required": [
+                "field"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "misconceptionIds": {
+            "maxItems": 0
+          }
+        },
+        "required": [
+          "misconceptionIds"
+        ]
+      },
+      "then": {
+        "properties": {
+          "metadataApplicabilityNotes": {
+            "contains": {
+              "properties": {
+                "field": {
+                  "const": "misconceptionIds"
+                }
+              },
+              "required": [
+                "field"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phenomenonSourceRefs": {
+            "maxItems": 0
+          }
+        },
+        "required": [
+          "phenomenonSourceRefs"
+        ]
+      },
+      "then": {
+        "properties": {
+          "metadataApplicabilityNotes": {
+            "contains": {
+              "properties": {
+                "field": {
+                  "const": "phenomenonSourceRefs"
+                }
+              },
+              "required": [
+                "field"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "representationRefs": {
+            "maxItems": 0
+          }
+        },
+        "required": [
+          "representationRefs"
+        ]
+      },
+      "then": {
+        "properties": {
+          "metadataApplicabilityNotes": {
+            "contains": {
+              "properties": {
+                "field": {
+                  "const": "representationRefs"
+                }
+              },
+              "required": [
+                "field"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uniqueStringArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      },
+      "uniqueItems": true
+    },
+    "nonEmptyUniqueStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      },
+      "uniqueItems": true
+    },
+    "lessonType": {
+      "enum": [
+        "CONCEPT_BUILD",
+        "PHENOMENON_OBSERVATION",
+        "GUIDED_PRACTICE",
+        "INVESTIGATION",
+        "LAB_HANDS_ON",
+        "DATA_ANALYSIS",
+        "MODEL_BUILDING",
+        "CLAIM_EVIDENCE_REASONING",
+        "ENGINEERING_DESIGN",
+        "REVIEW",
+        "REMEDIATION",
+        "MASTERY",
+        "ASSESSMENT",
+        "PROJECT"
+      ]
+    },
+    "applicabilityNote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "rationale"
+      ],
+      "properties": {
+        "field": {
+          "enum": [
+            "prerequisiteConceptIds",
+            "misconceptionIds",
+            "phenomenonSourceRefs",
+            "representationRefs"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "teachingEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "priorKnowledgeActivationRef",
+        "conceptExplanationRef",
+        "vocabularyRef",
+        "observationExplanationBridgeRef",
+        "misconceptionHandlingRefs"
+      ],
+      "properties": {
+        "priorKnowledgeActivationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "conceptExplanationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "vocabularyRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "workedTeachingObjectRefs": {
+          "$ref": "#/$defs/uniqueStringArray"
+        },
+        "observationExplanationBridgeRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "misconceptionHandlingRefs": {
+          "$ref": "#/$defs/uniqueStringArray"
+        }
+      }
+    },
+    "evidencePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceForms",
+        "freshInputRef",
+        "successCriteriaRef",
+        "correctnessAuthorityRef"
+      ],
+      "properties": {
+        "evidenceForms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "CONCEPT_RECALL",
+              "APPLICATION",
+              "DIAGRAM_MODEL",
+              "DATA_INTERPRETATION",
+              "PREDICTION",
+              "SCIENTIFIC_EXPLANATION",
+              "CLAIM_EVIDENCE_REASONING",
+              "ERROR_ANALYSIS",
+              "INVESTIGATION_PERFORMANCE",
+              "ENGINEERING_DESIGN_PERFORMANCE"
+            ]
+          }
+        },
+        "freshInputRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "successCriteriaRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "correctnessAuthorityRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "investigationContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "routeKind",
+        "questionRef",
+        "materialsRef",
+        "setupRef",
+        "procedureRef",
+        "recordingRef",
+        "analysisRef",
+        "safetyDetailsRef",
+        "cleanupApplicability",
+        "alternativeRouteRef",
+        "observationOrigins"
+      ],
+      "properties": {
+        "routeKind": {
+          "enum": [
+            "PHYSICAL_INVESTIGATION",
+            "DOCUMENT_INVESTIGATION",
+            "FIELD_OBSERVATION",
+            "SIMULATION_INVESTIGATION",
+            "SUPPLIED_DATA_INVESTIGATION"
+          ]
+        },
+        "questionRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "materialsRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "setupRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "procedureRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "recordingRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "analysisRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "safetyDetailsRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "cleanupApplicability": {
+          "enum": [
+            "REQUIRED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "cleanupRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "alternativeRouteRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "observationOrigins": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "LEARNER_OBSERVED",
+              "LEARNER_MEASURED",
+              "LEARNER_CALCULATED",
+              "SUPPLIED_SOURCE_DATA",
+              "MODEL_OUTPUT",
+              "SIMULATION_OUTPUT",
+              "DESCRIBED_DEMONSTRATION",
+              "PREDICTION",
+              "EXPECTED_RANGE_ADULT_ONLY"
+            ]
+          }
+        },
+        "adultAuthorityLevel": {
+          "enum": [
+            "NONE",
+            "ADULT_APPROVAL",
+            "ADULT_PRESENT",
+            "DIRECT_ADULT_SUPERVISION",
+            "QUALIFIED_INSTRUCTOR"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "cleanupApplicability": {
+                "const": "REQUIRED"
+              }
+            },
+            "required": [
+              "cleanupApplicability"
+            ]
+          },
+          "then": {
+            "required": [
+              "cleanupRef"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "routeKind": {
+                "const": "PHYSICAL_INVESTIGATION"
+              }
+            },
+            "required": [
+              "routeKind"
+            ]
+          },
+          "then": {
+            "required": [
+              "adultAuthorityLevel"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
