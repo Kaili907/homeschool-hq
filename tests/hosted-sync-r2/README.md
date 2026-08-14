@@ -1,6 +1,6 @@
 # Hosted Study sync R2 convergence harness
 
-The catalog contains exactly 36 numbered scenarios. Every numbered scenario
+The catalog contains exactly 37 numbered scenarios. Every numbered scenario
 invokes `createHostedSyncRpcAdapter`; the injected local provider accepts only
 the four DB/RPC R2 function names and exact PostgREST argument keys.
 
@@ -9,7 +9,7 @@ normal completion, assessment transitions, Ready-for-Life assertion and Parent
 attestation, Social source metadata, Safety hold/clear enforcement, offline and
 reconnect behavior, revision CAS, idempotent retry, response loss after commit,
 the four explicit first-link states, the privacy activation gate, and exclusion
-of legacy Profile sync.
+of legacy Profile sync, and pre-provider refusal of unknown mutation fields.
 
 Run locally:
 

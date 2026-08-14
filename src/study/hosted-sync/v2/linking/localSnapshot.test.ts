@@ -3,6 +3,7 @@ import type { FamilyPilotStateV1 } from '../../../family-pilot/core'
 import type { DurableStudyDocumentV1 } from '../../../family-pilot/durable-ports'
 import type { FinalFamilyPilotAppStateV1 } from '../../../family-pilot/final-app/state'
 import { extractLocalFamilyPilotHousehold } from './localSnapshot'
+import { HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, hostedSyncDynamicSourceMetadataFixture } from '../testing/dynamicSourceFixture'
 
 const UPDATED = '2026-08-02T00:00:00.000Z'
 
@@ -11,7 +12,7 @@ const core: FamilyPilotStateV1 = {
   students: [{
     studentRef: 'student:local', displayName: 'Ada', createdAt: UPDATED, updatedAt: UPDATED,
     activeAssignmentRef: 'assignment:local', assignments: [{
-      assignmentRef: 'assignment:local', lessonRef: 'lesson:math', subject: 'Math', title: 'Math', state: 'active',
+      assignmentRef: 'assignment:local', lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, subject: 'Math', title: 'Math', state: 'active',
       sessionRef: 'block:local',
       progress: { completedSegmentRefs: ['segment:1'], totalSegments: 2, lastSegmentRef: 'segment:2', activeSeconds: 50 },
       pause: { pausedAt: null, resumedAt: null, pausedSeconds: 0, resumeSegmentRef: null },
@@ -39,13 +40,14 @@ const app: FinalFamilyPilotAppStateV1 = {
     },
   }],
   sourceAttachments: [{
-    studentRef: 'student:local', assignmentRef: 'assignment:local', lessonRef: 'lesson:math',
+    studentRef: 'student:local', assignmentRef: 'assignment:local', lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF,
     sourceRef: 'source:local', title: 'Source', publisher: 'Publisher', publishedAt: UPDATED,
+    metadata: hostedSyncDynamicSourceMetadataFixture(), adultAttestedAt: UPDATED,
     attachedAt: UPDATED, status: 'ATTACHED_SATISFIED',
   }],
   assessmentAssignments: [],
   attestations: [{
-    studentRef: 'student:local', assignmentRef: 'assignment:local', lessonRef: 'lesson:math', sessionRef: 'session:local',
+    studentRef: 'student:local', assignmentRef: 'assignment:local', lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, sessionRef: 'session:local',
     authority: 'GUARDIAN_ATTESTATION_REQUIRED', status: 'CERTIFIED', learnerAssertedAt: UPDATED,
     attestedAt: UPDATED, attestedByRef: 'adult:local', evidenceMode: 'adult-observed',
   }],
@@ -56,7 +58,8 @@ const app: FinalFamilyPilotAppStateV1 = {
       dedupeKey: 'private-dedupe-key', clearedAt: UPDATED, clearedBy: 'adult:local',
     }],
   },
-  pinDigests: { 'student:local': 'deadbeef' },
+  studentAccessVerifiers: { 'student:local': 'deadbeef' },
+  parentAccessVerifier: null,
 }
 
 const document: DurableStudyDocumentV1 = {
@@ -65,12 +68,12 @@ const document: DurableStudyDocumentV1 = {
   preferences: null, parentSettings: null, calendar: [],
   sessions: [{
     scope: { householdRef: 'household:local', learnerRef: 'student:local', sessionRef: 'session:local' },
-    lessonRef: 'lesson:math', segmentRef: 'segment:2', status: 'active', updatedAt: UPDATED,
+    lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, segmentRef: 'segment:2', status: 'active', updatedAt: UPDATED,
     lastAcceptedEventRef: 'event:local', rawAnswerIncluded: false, transcriptIncluded: false,
   }],
   checkpoints: [{
     checkpointRef: 'checkpoint:local', householdRef: 'household:local', learnerRef: 'student:local',
-    sessionRef: 'session:local', lessonRef: 'lesson:math', segmentRef: 'segment:2', revision: 3,
+    sessionRef: 'session:local', lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, segmentRef: 'segment:2', revision: 3,
     capturedAt: UPDATED, completedSegmentRefs: ['segment:1'], elapsedActiveSecondsInSegment: 12,
     responseDraftRef: 'opaque:draft-ref', rawAnswerIncluded: false, transcriptIncluded: false,
   }],
@@ -94,7 +97,7 @@ describe('local Family Pilot first-link extraction', () => {
     })
     const bytes = JSON.stringify(snapshot)
     expect(bytes).not.toContain('deadbeef')
-    expect(bytes).not.toContain('pinDigests')
+    expect(bytes).not.toContain('studentAccessVerifiers')
     expect(bytes).not.toContain('adult:local')
     expect(bytes).not.toContain('private-dedupe-key')
     expect(bytes).not.toContain('opaque:draft-ref')

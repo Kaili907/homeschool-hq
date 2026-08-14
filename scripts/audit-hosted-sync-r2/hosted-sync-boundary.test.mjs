@@ -92,7 +92,7 @@ test('cloud boundary rejects entire local/backup documents instead of stripping 
   const portableBackupSource = await readFile(new URL('src/study/family-pilot/final-app/backup.ts', root), 'utf8')
   const durableSource = await readFile(new URL('src/study/family-pilot/durable-ports/schema.ts', root), 'utf8')
 
-  assert.match(finalStateSource, /readonly pinDigests:/)
+  assert.match(finalStateSource, /readonly studentAccessVerifiers:/)
   assert.match(portableBackupSource, /readonly appState: FinalFamilyPilotAppStateV1/)
   assert.match(portableBackupSource, /readonly studyDocuments:/)
   assert.doesNotMatch(portableBackupSource, /FAMILY_PILOT_LEARNER_RESPONSES_KEY|BrowserLearnerResponseStore/)
@@ -100,7 +100,7 @@ test('cloud boundary rejects entire local/backup documents instead of stripping 
   assert.match(durableSource, /readonly events:/)
 
   for (const localShape of [
-    { schemaVersion: 1, pinDigests: { avery: 'deadbeef' } },
+    { schemaVersion: 1, studentAccessVerifiers: { avery: 'deadbeef' } },
     { backupSchemaVersion: 1, appState: {}, studyDocuments: [] },
     { schemaVersion: 1, parentSettings: {}, events: [] },
   ]) {
@@ -122,16 +122,19 @@ test('audit detects that legacy Profile/AppState cloud sync is forbidden for Fam
   assert.match(provenanceSource, /optional\(value\.assistant, validateAssistant\)/)
   assert.match(appTypesSource, /parentPin: string/)
   assert.match(appTypesSource, /the exact problem, correct answer, and her answer/)
-  assert.ok(appSource.indexOf('const sync = useSync(state, setState)') < appSource.indexOf("screen.kind === 'familyPilot'"))
+  assert.match(appSource, /const LegacyApp = lazy\(\(\) => import\('\.\/LegacyApp'\)\)/)
+  assert.match(appSource, /if \(familyPilotSelected\)/)
+  assert.doesNotMatch(appSource, /useSync|Profile/)
 })
 
 test('local response bodies are durable but absent from portable backup and cloud allowlist', async () => {
   const responseStore = await readFile(new URL('src/study/family-pilot/final-app/learner-response/store.ts', root), 'utf8')
   const portableBackup = await readFile(new URL('src/study/family-pilot/final-app/backup.ts', root), 'utf8')
   const finalApp = await readFile(new URL('src/study/family-pilot/final-app/FinalFamilyPilotApp.tsx', root), 'utf8')
-  assert.match(responseStore, /this\.storage\.setItem\(FAMILY_PILOT_LEARNER_RESPONSES_KEY, JSON\.stringify\(next\)\)/)
+  assert.match(responseStore, /openIndexedDbRecordStore\(this\.#options\)/)
+  assert.match(responseStore, /await writeVerified\(store, key, next, current\)/)
   assert.doesNotMatch(portableBackup, /learner-response|FAMILY_PILOT_LEARNER_RESPONSES_KEY/)
-  assert.match(finalApp, /new BrowserLearnerResponseStore\(window\.localStorage\)/)
+  assert.match(finalApp, /new BrowserLearnerResponseStore\(\)/)
   assert.match(finalApp, /Saved in IndexedDB/)
   assert.equal(HOSTED_STUDY_SYNC_FIELD_ALLOWLIST_V1.some((path) => /response|transcript|audio|pin/i.test(path)), false)
 })

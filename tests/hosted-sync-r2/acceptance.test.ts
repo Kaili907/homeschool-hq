@@ -31,8 +31,8 @@ function firstLinkFixture(identityValue = 'student:ada', remoteIdentityValues: r
   return { local, inspection }
 }
 
-describe('hosted Study sync R2 — 36 scenarios through the converged adapter', () => {
-  it('catalogs exactly 36 scenarios', () => expect(HOSTED_SYNC_R2_SCENARIOS).toHaveLength(36))
+describe('hosted Study sync R2 — 37 scenarios through the converged adapter', () => {
+  it('catalogs exactly 37 scenarios', () => expect(HOSTED_SYNC_R2_SCENARIOS).toHaveLength(37))
 
   it('1. uses the exact four-RPC client surface', async () => {
     const h = await linked(); await h.resolve(); await h.hydrate(); await h.write(h.a, { revision: 1, id: 101, operation: 'session:complete', payload: { completedAt: NOW } })
@@ -71,6 +71,7 @@ describe('hosted Study sync R2 — 36 scenarios through the converged adapter', 
   it('32. returns the exact stored receipt for an idempotent write retry', async () => { const h = await linked(); const values = { revision: 1, id: 136, operation: 'checkpoint:compare-and-swap' as const, payload: { checkpoint: checkpoint(2) } }; const first = await h.write(h.a, values); expect(await h.write(h.a, values)).toEqual(first) })
   it('33. recovers a write acknowledgement lost after commit', async () => { const h = await linked(); h.provider.dropNextCommittedResponse(HOSTED_SYNC_RPC.write); const values = { revision: 1, id: 137, operation: 'checkpoint:compare-and-swap' as const, payload: { checkpoint: checkpoint(2) } }; expect(await h.write(h.a, values)).toMatchObject({ code: 'NETWORK_UNAVAILABLE' }); expect(await h.write(h.a, values)).toMatchObject({ code: 'SUCCESS', value: { status: 'stored', serverRevision: 2 } }) })
   it('34. implements the four first-link states without name matching', async () => { const h = await linked(); await h.resolve(); const exact = firstLinkFixture(); expect(buildFirstLinkPlan(exact.local, exact.inspection).students[0].state).toBe('EXACT_MATCH'); const explicit = firstLinkFixture('local-only', ['remote-only']); expect(buildFirstLinkPlan(explicit.local, explicit.inspection).students[0].state).toBe('EXPLICIT_MAP_REQUIRED'); expect(buildFirstLinkPlan(explicit.local, { ...explicit.inspection, remoteStudents: [] }).students[0].state).toBe('NEW_REMOTE_STUDENT'); const conflict = firstLinkFixture('same', ['same', 'same']); expect(buildFirstLinkPlan(conflict.local, conflict.inspection).students[0].state).toBe('CONFLICT'); expect(exact.local.students[0].displayName).not.toBe(exact.inspection.remoteStudents[0].displayName) })
-  it('35. keeps production activation impossible without the privacy serializer', async () => { const h = await linked(); await h.hydrate(); expect(HOSTED_SYNC_PRODUCTION_ACTIVATION).toEqual({ enabled: false, reason: 'PRODUCTION_PRIVACY_SERIALIZER_REQUIRED' }); expect(requireHostedSyncProductionPrivacySerializer).toThrow('PRODUCTION_PRIVACY_SERIALIZER_REQUIRED') })
+  it('35. keeps production activation off after installing the privacy serializer', async () => { const h = await linked(); await h.hydrate(); expect(HOSTED_SYNC_PRODUCTION_ACTIVATION).toEqual({ enabled: false, reason: 'HOSTED_SYNC_R2_INACTIVE_PENDING_STAGING' }); expect(requireHostedSyncProductionPrivacySerializer()).toBe(true) })
   it('36. never hydrates legacy Profile sync fields', async () => { const h = await linked(); const serialized = JSON.stringify(readyDocument(await h.hydrate(h.b))); expect(serialized).not.toMatch(/legacyProfile|profileId|pinDigest|pinHash/i); expect(await h.hydrate(h.b, OTHER_STUDENT_ID)).toMatchObject({ code: 'SUCCESS', value: { status: 'unavailable' } }) })
+  it('37. refuses an unknown mutation field before provider contact', async () => { const h = await linked(); const calls = h.provider.calls.length; expect(await h.write(h.a, { revision: 1, id: 138, operation: 'session:complete', payload: { completedAt: NOW, futurePrivateField: true } })).toMatchObject({ code: 'PERMANENT_REFUSAL' }); expect(h.provider.calls).toHaveLength(calls) })
 })

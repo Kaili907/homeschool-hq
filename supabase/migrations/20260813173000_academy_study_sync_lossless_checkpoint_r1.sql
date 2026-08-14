@@ -132,10 +132,35 @@ begin
   for item in select value from jsonb_array_elements(candidate -> 'socialSources') loop
     if not public.academy_study_json_has_exact_keys(item, array[
       'studentRef','assignmentRef','lessonRef','readiness','sourceRef','kind','title','publisher',
-      'publishedAt','attachedAt','sourceRevision']::text[])
+      'publishedAt','metadata','adultAttestedAt','attachedAt','sourceRevision']::text[])
        or item ->> 'studentRef' <> candidate #>> '{identity,studentRef}'
        or item ->> 'readiness' <> 'ATTACHED_SATISFIED'
+       or jsonb_typeof(item -> 'metadata') <> 'array'
+       or jsonb_array_length(item -> 'metadata') < 2
+       or not academy_private.study_sync_instant_valid_v2(item ->> 'adultAttestedAt')
        or (item ->> 'sourceRevision')::bigint < 0 then return false; end if;
+    for nested in select value from jsonb_array_elements(item -> 'metadata') loop
+      if not academy_private.study_sync_keys_allowed_r1(nested, array[
+        'attachmentId','lessonRef','unitRef','issueStatement','sourceIdentifier','sourceTitle','responsibleParty',
+        'sourceDate','sourceVersionOrEdition','retrievalLocation','retrievedOn','retrievedByRole','retrievalStatus',
+        'mediaType','language','sourceKind','authorityTier','authorityVerified','primaryOrSecondary',
+        'primaryOrSecondaryReason','interestDisclosure','relevanceToIssue','limitsNoted','rightsCategory',
+        'rightsStatement','publicAccess','selectedByRole','selectedOn','readInFull','contentSafetyReviewedByRole',
+        'readingLevelReviewedByRole','previewedForSafetyAndLevel','containsLearnerPersonalData',
+        'containsOtherMinorPersonalData','quotedTextStored','contentDigestSha256']::text[], array[
+        'attachmentId','lessonRef','unitRef','issueStatement','sourceIdentifier','sourceTitle','responsibleParty',
+        'sourceDate','sourceVersionOrEdition','retrievalLocation','retrievedOn','retrievedByRole','retrievalStatus',
+        'mediaType','language','sourceKind','authorityTier','authorityVerified','primaryOrSecondary',
+        'primaryOrSecondaryReason','interestDisclosure','relevanceToIssue','limitsNoted','rightsCategory',
+        'rightsStatement','publicAccess','selectedByRole','selectedOn','readInFull','contentSafetyReviewedByRole',
+        'readingLevelReviewedByRole','previewedForSafetyAndLevel','containsLearnerPersonalData',
+        'containsOtherMinorPersonalData','quotedTextStored','contentDigestSha256','participantRole','consentRecorded']::text[])
+         or nested ->> 'lessonRef' <> item ->> 'lessonRef'
+         or nested -> 'quotedTextStored' <> 'false'::jsonb
+         or nested -> 'containsLearnerPersonalData' <> 'false'::jsonb
+         or nested -> 'containsOtherMinorPersonalData' <> 'false'::jsonb
+      then return false; end if;
+    end loop;
   end loop;
   for item in select value from jsonb_array_elements(candidate -> 'safetyHolds') loop
     if not public.academy_study_json_has_exact_keys(item, array[

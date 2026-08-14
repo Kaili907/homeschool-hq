@@ -19,7 +19,7 @@ This matrix was completed before implementation. A row is one schema path family
 | 13 | `assessmentStates[].{assignmentRef,assessmentRef,studentRef,courseRef,subject,grade,title,authorityClass,status,createdAt,updatedAt,completedAt,evidenceRefs[],authorityRevision}` | exact | selected assessment metadata; no evidence refs, scored state, or authority revision | `EXACTLY_REPRESENTED` |
 | 14 | `assessmentStates[].outcome.{assessmentRecordRef,decision,assessedAt,assessorRef}` | exact | absent | `EXACTLY_REPRESENTED` |
 | 15 | `rflStates[].{studentRef,assignmentRef,lessonRef,sessionRef,learnerAssertionState,learnerAssertedAt,guardianState,certifiedAt,attesterRef,evidenceMode,authorityRevision}` | exact | selected attestation except canonical revision | `EXACTLY_REPRESENTED`; certified guardian state is absorbing |
-| 16 | `socialSources[].{studentRef,assignmentRef,lessonRef,readiness,sourceRef,kind,title,publisher,publishedAt,attachedAt,sourceRevision}` | exact | selected source without canonical kind/revision | `EXACTLY_REPRESENTED`; accepted sources are create-only/absorbing |
+| 16 | `socialSources[].{studentRef,assignmentRef,lessonRef,readiness,sourceRef,kind,title,publisher,publishedAt,metadata[],adultAttestedAt,attachedAt,sourceRevision}` | exact | selected source without canonical kind/revision or Web R3 dynamic-source metadata authority | `EXACTLY_REPRESENTED`; metadata is validated as body-free, adult-attested source metadata and accepted sources are create-only/absorbing |
 | 17 | `safetyHolds[].{holdRef,studentRef,sessionRef,reasonCode,category,source,dedupeKey,createdAt,status,acknowledgedAt,clearedAt,clearAuthority,clearerRef,logicalRevision}` | exact | selected local hold shape without category/clear authority/logical revision | `EXACTLY_REPRESENTED`; cleared holds cannot reopen |
 | 18 | `privacy.{pinIncluded,bearerIncluded,rawLearnerResponseIncluded,rawTutorConversationIncluded,rawAudioIncluded,inferenceIncluded,adultAnswerAuthorityIncluded,answerMaterialIncluded}` | literal false | implicit filters | `DERIVABLE_FROM_CANONICAL_AUTHORITY`; also stored and revalidated as literal false |
 | 19 | `indexedDbDocument.{schemaVersion,updatedAt,scope.householdRef,scope.learnerRef}` | exact | absent | `EXACTLY_REPRESENTED` |
@@ -41,7 +41,7 @@ This matrix was completed before implementation. A row is one schema path family
 
 | Field/state family | Classification | Reason |
 |---|---|---|
-| PIN plaintext, `pinDigests`, PIN verifier/digest, `pinRequired` enrollment | `DEVICE_LOCAL_ONLY` | Local access control; receiving device reenrolls locally |
+| PIN plaintext, `studentAccessVerifiers`, `parentAccessVerifier`, legacy `pinDigests`, PIN verifier/digest, `pinRequired` enrollment | `DEVICE_LOCAL_ONLY` | Local access control; receiving device reenrolls locally |
 | Bearer/access/refresh token, authorization header, session/launch grant | `DEVICE_LOCAL_ONLY` | Ephemeral authentication, never state |
 | Raw learner response bodies and response drafts | `DEVICE_LOCAL_ONLY` | Only opaque evidence/draft references may cross the boundary |
 | Tutor conversation, prompts, provider output, transient transcript | `DEVICE_LOCAL_ONLY` | Not continuation authority |

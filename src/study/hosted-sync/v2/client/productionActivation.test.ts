@@ -3,7 +3,7 @@ import { HOSTED_SYNC_PRODUCTION_ACTIVATION, requireHostedSyncProductionPrivacySe
 
 describe('hosted sync production activation gate', () => {
   it('cannot be enabled in the convergence branch', () => {
-    expect(HOSTED_SYNC_PRODUCTION_ACTIVATION).toEqual({ enabled: false, reason: 'PRODUCTION_PRIVACY_SERIALIZER_REQUIRED' })
-    expect(requireHostedSyncProductionPrivacySerializer).toThrow('PRODUCTION_PRIVACY_SERIALIZER_REQUIRED')
+    expect(HOSTED_SYNC_PRODUCTION_ACTIVATION).toEqual({ enabled: false, reason: 'HOSTED_SYNC_R2_INACTIVE_PENDING_STAGING' })
+    expect(requireHostedSyncProductionPrivacySerializer()).toBe(true)
   })
 })
