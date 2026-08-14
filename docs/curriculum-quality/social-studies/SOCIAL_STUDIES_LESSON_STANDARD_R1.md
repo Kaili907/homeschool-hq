@@ -827,6 +827,11 @@ cannot prove historical accuracy, sufficient context, a trustworthy
 perspective set, genuine task variety, or learner comprehension. Those require
 semantic checks and human review.
 
+Canonical repository identifiers may contain underscores (for example,
+`avalon-stamp_act`). The contract identifier pattern accepts underscores so an
+author must preserve a canonical source key rather than rename it to satisfy
+the draft schema.
+
 ## 16. Advisory quality gate draft
 
 Gate mode for R1 is `ADVISORY_DRAFT`. Findings belong in a lesson review report

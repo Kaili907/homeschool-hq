@@ -1,0 +1,558 @@
+{
+  "schema_version": "social-studies-lesson-standard-r1-draft",
+  "lesson_id": "ma-g5-social-studies-u08-l03",
+  "grade": 5,
+  "subject": "social-studies",
+  "lesson_type": {
+    "instructional_purpose": "GUIDED_PRACTICE",
+    "disciplinary_modes": [
+      "HISTORY_CHRONOLOGY",
+      "PRIMARY_SOURCE_ANALYSIS",
+      "COMPARE_PERSPECTIVE",
+      "CLAIM_EVIDENCE_REASONING"
+    ],
+    "secondary_purposes": []
+  },
+  "authored_phase": "Guided practice A",
+  "learning_goal": "Compare what two verified primary sources show and do not show about disagreement over British rule, then make a careful claim using identifiable evidence and a stated limitation.",
+  "standard_refs": [
+    {
+      "framework_ref": "michigan-grade-5-social-studies",
+      "legacy_label": "Michigan Grade 5 U3.1",
+      "mapping_status": "unverified"
+    },
+    {
+      "framework_ref": "michigan-grade-5-social-studies",
+      "legacy_label": "U3.2",
+      "mapping_status": "unverified"
+    }
+  ],
+  "topic_ids": [
+    "topic:protest-and-loyalism",
+    "topic:road-to-revolution"
+  ],
+  "skill_ids": [
+    "skill:source-detail",
+    "skill:perspective-comparison",
+    "skill:claim-evidence-reasoning",
+    "skill:source-limitation",
+    "skill:cause-effect-inference"
+  ],
+  "prerequisite_knowledge": [
+    {
+      "knowledge_id": "knowledge:britain-colonies-relationship",
+      "learner_need": "Know that Parliament in Great Britain issued laws for Britain's American colonies before the Revolutionary War.",
+      "source_refs": ["avalon-stamp_act"]
+    },
+    {
+      "knowledge_id": "knowledge:sources-have-creators",
+      "learner_need": "Know that a historical source was made by a creator for a purpose and may show only part of an event or viewpoint.",
+      "source_refs": ["avalon-stamp_act", "loc-2008661777"]
+    }
+  ],
+  "background_knowledge": [
+    {
+      "background_id": "background:disagreement-not-one-colonial-view",
+      "delivery": "TEACH_BEFORE_TASK",
+      "learner_explanation": "Parliament issued rules for Britain's American colonies. People in the colonies did not respond as one group. Protest showed disagreement with British decisions; loyalism meant continued support for British rule during the conflict. This lesson uses an official law and a Boston print, then names the Loyalist-colonist viewpoint evidence that is still missing.",
+      "why_needed": "The learner must not treat Parliament, protesting colonists, and Loyalist colonists as one voice or infer an unrepresented perspective.",
+      "source_refs": ["avalon-stamp_act", "loc-2008661777"]
+    },
+    {
+      "background_id": "background:sequence-does-not-prove-cause",
+      "delivery": "TEACH_BEFORE_TASK",
+      "learner_explanation": "The Stamp Act source comes from 1765, the Revere print from 1770, independence records from 1776, and the peace treaty from 1783. This sequence helps historians ask cause-and-effect questions, but the order of events alone does not prove that one event caused another.",
+      "why_needed": "The lesson requires a cause-and-effect inference while protecting the distinction between chronology and causation.",
+      "source_refs": ["avalon-stamp_act", "loc-2008661777", "nara-lee-resolution", "nara-treaty-of-paris"]
+    }
+  ],
+  "vocabulary": [
+    {
+      "vocabulary_id": "vocabulary:protest",
+      "term": "protest",
+      "learner_definition": "An action or statement that shows disagreement with a rule, decision, or condition.",
+      "first_use_ref": "block:background"
+    },
+    {
+      "vocabulary_id": "vocabulary:loyalism",
+      "term": "loyalism",
+      "learner_definition": "Continued support for British rule during the conflict.",
+      "first_use_ref": "block:background"
+    },
+    {
+      "vocabulary_id": "vocabulary:perspective",
+      "term": "perspective",
+      "learner_definition": "A viewpoint shaped by a person's position, experience, purpose, and information.",
+      "first_use_ref": "block:source-preparation"
+    },
+    {
+      "vocabulary_id": "vocabulary:primary-source",
+      "term": "primary source",
+      "learner_definition": "Evidence made during the time being studied or by someone directly involved.",
+      "first_use_ref": "block:source-preparation"
+    },
+    {
+      "vocabulary_id": "vocabulary:corroborate",
+      "term": "corroborate",
+      "learner_definition": "To compare sources and check where their evidence agrees, differs, or leaves a gap.",
+      "first_use_ref": "block:comparison-skill"
+    }
+  ],
+  "context_framework": {
+    "people_and_groups": "Parliament of Great Britain is represented by the Stamp Act. Paul Revere is represented by the print he engraved, printed, and sold. British soldiers and Boston civilians appear in the print. Loyalist colonists are part of the lesson topic but are not directly represented by either central source.",
+    "place": "The institutional decision came from Great Britain across the Atlantic Ocean from Britain's American colonies. The print depicts an event in Boston, Massachusetts.",
+    "time": "The central sources date to 1765 and 1770, before the 1776 independence documents and the 1783 peace treaty used for modeling and remediation.",
+    "conditions": "Parliament imposed stamp duties and stated that revenue would help cover colonial defense expenses. Revere later created a persuasive portrayal of British soldiers firing toward Boston civilians. The sources come from different creators, forms, and purposes.",
+    "why_it_matters": "Comparing unlike sources helps a historian make a limited claim without turning an official institution's position into every person's view or treating a persuasive image as a complete event record.",
+    "chronology": {
+      "applicability": "REQUIRED",
+      "learner_explanation": "1765 Stamp Act; 1770 Revere print; 1776 independence records; 1783 Treaty of Paris. Use the order to ask about change and possible effects, while remembering that sequence alone is not proof of cause.",
+      "resource_refs": ["block:timeline"],
+      "review_rationale": "Time is material because the lesson traces rising disagreement and requires the learner to distinguish sequence from cause-and-effect inference."
+    },
+    "geography": {
+      "applicability": "HELPFUL",
+      "learner_explanation": "Text orientation: Great Britain, across the Atlantic Ocean, to the American colonies, then Boston within Massachusetts.",
+      "resource_refs": ["block:spatial-orientation"],
+      "review_rationale": "Place supports context, but map interpretation is not the target. A text spatial orientation preserves the needed relationship without adding an unverified map."
+    }
+  },
+  "reading_burden": {
+    "source_text_load": "AUTHENTIC_COMPLEX",
+    "academy_explanation_load": "MODERATE",
+    "response_load": "MULTI_PART",
+    "chunking_plan": "Present one short, repository-verified source excerpt or one image at a time. Separate creator/date/form/context from observation. Use a visible detail-support-limit organizer. Show no more than one response task at a time.",
+    "supports": [
+      "READ_ALOUD",
+      "VOCABULARY_REMINDER",
+      "CONTEXT_RECAP",
+      "SOURCE_CHUNKING",
+      "TIMELINE_ORIENTATION",
+      "EVIDENCE_LOCATION_PROMPT",
+      "QUESTION_DECOMPOSITION",
+      "GRAPHIC_ORGANIZER",
+      "NEUTRAL_SENTENCE_FRAME",
+      "ALT_OR_LONG_DESCRIPTION",
+      "REDUCED_COPYING",
+      "EXTENDED_TIME",
+      "ALTERNATE_RESPONSE_MODE"
+    ],
+    "target_alignment_rationale": "The target is historical source reasoning, not unaided decoding of eighteenth-century prose. Short verbatim excerpts retain the evidence while Academy context and optional read-aloud reduce construct-irrelevant reading load."
+  },
+  "source_uses": [
+    {
+      "source_ref": "avalon-stamp_act",
+      "instructional_roles": ["BACKGROUND", "GUIDED_PRACTICE", "INDEPENDENT_EVIDENCE", "MASTERY_EVIDENCE", "TIMELINE_OR_CHRONOLOGY"],
+      "relationship_to_inquiry": "PRIMARY",
+      "classification_rationale": "The law was enacted during the period under study and is analyzed as Parliament's official record of duties and stated purpose.",
+      "label_visibility": "SHOWN_BEFORE_ANALYSIS",
+      "context_before_analysis": "Great Britain: Parliament — The Stamp Act, March 22, 1765. The Avalon Project hosts a verified transcript and must be cited as the transcription host, not as the law's author.",
+      "excerpt_treatment": "VERBATIM_EXCERPT",
+      "original_or_repost": "VERIFIED_TRANSCRIPT",
+      "evidence_locator": "Avalon transcript, opening title/preamble and the later pamphlet/newspaper duty clause; canonical URL https://avalon.law.yale.edu/18th_century/stamp_act_1765.asp",
+      "rights_access_ref": "rights:avalon-stamp-act"
+    },
+    {
+      "source_ref": "loc-2008661777",
+      "instructional_roles": ["BACKGROUND", "GUIDED_PRACTICE", "INDEPENDENT_EVIDENCE", "MASTERY_EVIDENCE", "TIMELINE_OR_CHRONOLOGY"],
+      "relationship_to_inquiry": "PRIMARY",
+      "classification_rationale": "The 1770 print was made during the period under study and is analyzed as evidence of Revere's chosen portrayal, not as a complete event record.",
+      "label_visibility": "SHOWN_BEFORE_ANALYSIS",
+      "context_before_analysis": "Paul Revere engraved, printed, and sold the 1770 Boston print. The Library of Congress item record identifies it as a sensationalized portrayal and provides a digital image from the original.",
+      "excerpt_treatment": "FULL_SOURCE",
+      "original_or_repost": "VERIFIED_REPOST_WITH_ORIGINAL",
+      "evidence_locator": "Library of Congress item 2008661777 and digital file from original, resource ppmsca.01657",
+      "rights_access_ref": "rights:loc-2008661777"
+    },
+    {
+      "source_ref": "nara-lee-resolution",
+      "instructional_roles": ["MODELED_ANALYSIS", "TIMELINE_OR_CHRONOLOGY"],
+      "relationship_to_inquiry": "PRIMARY",
+      "classification_rationale": "The congressional resolution record was created in 1776 and is used to model how a source phrase supports a bounded claim.",
+      "label_visibility": "SHOWN_BEFORE_ANALYSIS",
+      "context_before_analysis": "The resolution records a proposal for political independence. It is deliberately separate from the central scored source comparison.",
+      "excerpt_treatment": "VERBATIM_EXCERPT",
+      "original_or_repost": "ORIGINAL_OR_OFFICIAL",
+      "evidence_locator": "National Archives Milestone Document, Lee Resolution (1776), transcript phrase 'free and independent States'",
+      "rights_access_ref": "rights:nara-federal-record"
+    },
+    {
+      "source_ref": "nara-treaty-of-paris",
+      "instructional_roles": ["TIMELINE_OR_CHRONOLOGY", "MODELED_ANALYSIS", "GUIDED_PRACTICE"],
+      "relationship_to_inquiry": "PRIMARY",
+      "classification_rationale": "The 1783 treaty was created as part of the peace settlement and is used only in remediation to model claim boundaries with a different source and time.",
+      "label_visibility": "SHOWN_BEFORE_ANALYSIS",
+      "context_before_analysis": "The treaty comes after the Revolutionary War and records a political outcome. It cannot prove earlier personal motives.",
+      "excerpt_treatment": "VERBATIM_EXCERPT",
+      "original_or_repost": "ORIGINAL_OR_OFFICIAL",
+      "evidence_locator": "National Archives Milestone Document, Treaty of Paris (1783), Article 1 phrase 'free sovereign and independent states'",
+      "rights_access_ref": "rights:nara-federal-record"
+    },
+    {
+      "source_ref": "nara-declaration-of-independence",
+      "instructional_roles": ["INDEPENDENT_EVIDENCE", "MASTERY_EVIDENCE"],
+      "relationship_to_inquiry": "PRIMARY",
+      "classification_rationale": "The 1776 congressional record is used as fresh retry evidence for an argument about government and consent.",
+      "label_visibility": "SHOWN_BEFORE_ANALYSIS",
+      "context_before_analysis": "The declaration states an argument for changing government. The retry asks what its language supports and what it cannot show about all colonists.",
+      "excerpt_treatment": "VERBATIM_EXCERPT",
+      "original_or_repost": "ORIGINAL_OR_OFFICIAL",
+      "evidence_locator": "National Archives Milestone Document, Declaration of Independence (1776), transcript phrase 'deriving their just powers from the consent of the governed'",
+      "rights_access_ref": "rights:nara-federal-record"
+    }
+  ],
+  "instructional_blocks": [
+    {
+      "block_id": "block:background",
+      "child_heading": "Two sources can show different positions—and different limits",
+      "purpose": "BACKGROUND",
+      "learner_explanation": "Parliament issued rules for Britain's American colonies. People in the colonies did not respond as one group. Protest shows disagreement with a decision; loyalism means continued support for British rule during the conflict. Analyze evidence without inventing a person's thoughts.",
+      "source_refs": ["avalon-stamp_act", "loc-2008661777"],
+      "vocabulary_refs": ["vocabulary:protest", "vocabulary:loyalism"]
+    },
+    {
+      "block_id": "block:spatial-orientation",
+      "child_heading": "Where the sources point",
+      "purpose": "GEOGRAPHY",
+      "learner_explanation": "Text orientation: Great Britain, across the Atlantic Ocean, to the American colonies, then Boston within Massachusetts. The orientation comes from the canonical source titles and repository place record; map reading is not measured.",
+      "source_refs": ["avalon-stamp_act", "loc-2008661777"],
+      "vocabulary_refs": [],
+      "accessible_representation_ref": "representation:text-spatial-orientation"
+    },
+    {
+      "block_id": "block:timeline",
+      "child_heading": "Use the timeline as evidence, not decoration",
+      "purpose": "CHRONOLOGY",
+      "learner_explanation": "1765 Stamp Act; 1770 Revere print; 1776 independence records; 1783 Treaty of Paris. Sequence helps us ask about change and possible effects. Sequence alone does not prove cause.",
+      "source_refs": ["avalon-stamp_act", "loc-2008661777", "nara-lee-resolution", "nara-treaty-of-paris"],
+      "vocabulary_refs": [],
+      "accessible_representation_ref": "representation:text-timeline"
+    },
+    {
+      "block_id": "block:source-preparation",
+      "child_heading": "Read creator, form, purpose, and limit before interpretation",
+      "purpose": "SOURCE_PREPARATION",
+      "learner_explanation": "A primary source is evidence made during the time being studied or by someone directly involved. Identify who made it, when, what form it takes, what details it contains, what message or requirement it communicates, and what it cannot show alone.",
+      "source_refs": ["avalon-stamp_act", "loc-2008661777"],
+      "vocabulary_refs": ["vocabulary:primary-source", "vocabulary:perspective"]
+    },
+    {
+      "block_id": "block:comparison-skill",
+      "child_heading": "Keep perspectives in separate evidence lanes",
+      "purpose": "SKILL_EXPLANATION",
+      "learner_explanation": "Compare both sources using the same questions: creator, form, supported message, and limit. Parliament's law is an institutional voice, not a Loyalist colonist's personal voice. Revere's print is evidence of his portrayal, not a complete neutral record. Corroborate by naming agreement, difference, or a missing perspective.",
+      "source_refs": ["avalon-stamp_act", "loc-2008661777"],
+      "vocabulary_refs": ["vocabulary:perspective", "vocabulary:corroborate"]
+    },
+    {
+      "block_id": "block:remediation-boundary",
+      "child_heading": "A source detail sets the boundary of a claim",
+      "purpose": "RETEACH",
+      "learner_explanation": "Sort a claim through three questions: What exact detail do I have? What claim does that detail support? What larger claim would go beyond the detail? Use a different treaty source before retrying with the Declaration.",
+      "source_refs": ["nara-treaty-of-paris", "nara-declaration-of-independence"],
+      "vocabulary_refs": []
+    }
+  ],
+  "model_analyses": [
+    {
+      "model_id": "model:detail-support-limit",
+      "mode": "CLAIM_EVIDENCE_REASONING",
+      "question": "What political change does the Lee Resolution propose, and what can one phrase support?",
+      "reasoning_steps": [
+        {
+          "kind": "SOURCE_DETAIL",
+          "notice_or_evidence": "The resolution uses the words 'free and independent States.'",
+          "thinking": "These are exact political-status words from the source, not a summary from memory.",
+          "source_ref": "nara-lee-resolution"
+        },
+        {
+          "kind": "REASONING_LINK",
+          "notice_or_evidence": "The phrase changes the described status from colonies to independent states.",
+          "thinking": "That direct naming makes the phrase relevant evidence for the proposed political change.",
+          "source_ref": "nara-lee-resolution"
+        },
+        {
+          "kind": "LIMIT_OR_CHECK",
+          "notice_or_evidence": "The resolution does not record every person's reason for supporting or opposing independence.",
+          "thinking": "A proposal from Congress cannot stand in for every colonist's perspective.",
+          "source_ref": "nara-lee-resolution"
+        }
+      ],
+      "conclusion": "The phrase supports a claim that the resolution proposed independent political status for the colonies.",
+      "limitation_or_check": "It does not explain every person's motive and does not answer the scored comparison of the Stamp Act and Revere print.",
+      "transfer_cue": "Use the same move: exact detail, supported idea, because, limit.",
+      "source_refs": ["nara-lee-resolution"],
+      "uses_protected_evidence": false
+    },
+    {
+      "model_id": "model:remediation-claim-boundary",
+      "mode": "CLAIM_EVIDENCE_REASONING",
+      "question": "Which claim fits inside the evidence boundary of the Treaty of Paris phrase?",
+      "reasoning_steps": [
+        {
+          "kind": "SOURCE_DETAIL",
+          "notice_or_evidence": "The treaty calls the states 'free sovereign and independent states.'",
+          "thinking": "This is an exact detail about political status in the peace agreement.",
+          "source_ref": "nara-treaty-of-paris"
+        },
+        {
+          "kind": "REASONING_LINK",
+          "notice_or_evidence": "The phrase supports a claim that the treaty recognizes independent status.",
+          "thinking": "The evidence and claim use the same political-status idea.",
+          "source_ref": "nara-treaty-of-paris"
+        },
+        {
+          "kind": "LIMIT_OR_CHECK",
+          "notice_or_evidence": "The phrase cannot prove why every person protested or stayed loyal years earlier.",
+          "thinking": "That claim concerns earlier motives that this later treaty does not report.",
+          "source_ref": "nara-treaty-of-paris"
+        }
+      ],
+      "conclusion": "The treaty phrase supports a claim about the recognized political outcome, not a claim about all earlier motives.",
+      "limitation_or_check": "Date, source form, and purpose keep the claim inside the evidence boundary.",
+      "transfer_cue": "On the retry, name one supported claim and one claim the fresh Declaration phrase cannot support.",
+      "source_refs": ["nara-treaty-of-paris"],
+      "uses_protected_evidence": false
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "task:guided-stamp-purpose",
+      "task_kind": "SOURCE_EVIDENCE",
+      "prompt": "Copy the short phrase that tells Parliament's stated purpose. Then explain what that phrase supports and one thing it does not prove.",
+      "response_kind": "SOURCE_ANNOTATION",
+      "support_level": "FULL",
+      "topic_ids": ["topic:protest-and-loyalism"],
+      "skill_ids": ["skill:source-detail", "skill:source-limitation"],
+      "source_refs": ["avalon-stamp_act"],
+      "evidence_locator_expectation": "Quote the displayed Stamp Act preamble phrase and identify Source A by title or source label.",
+      "allowed_instructional_supports": ["READ_ALOUD", "SOURCE_CHUNKING", "EVIDENCE_LOCATION_PROMPT", "QUESTION_DECOMPOSITION", "NEUTRAL_SENTENCE_FRAME"],
+      "scored": false
+    },
+    {
+      "task_id": "task:guided-revere-detail-message-limit",
+      "task_kind": "PERSPECTIVE_LIMITATION",
+      "prompt": "Name one detail in the print. What message might that detail send a viewer? Why should a historian check another source?",
+      "response_kind": "SOURCE_ANNOTATION",
+      "support_level": "FADED",
+      "topic_ids": ["topic:protest-and-loyalism"],
+      "skill_ids": ["skill:source-detail", "skill:perspective-comparison", "skill:source-limitation"],
+      "source_refs": ["loc-2008661777"],
+      "evidence_locator_expectation": "Identify one visible feature or a word from the source title and name Source B or the Revere print.",
+      "allowed_instructional_supports": ["READ_ALOUD", "SOURCE_CHUNKING", "ALT_OR_LONG_DESCRIPTION", "QUESTION_DECOMPOSITION"],
+      "scored": false
+    },
+    {
+      "task_id": "task:independent-two-source-claim",
+      "task_kind": "CLAIM_EVIDENCE_REASONING",
+      "prompt": "Make a careful claim about why viewpoints toward British rule could differ. Use one identifiable detail from Source A and one from Source B. Explain how each detail supports or limits the claim. End by naming the missing Loyalist-colonist evidence.",
+      "response_kind": "CONSTRUCTED_RESPONSE",
+      "support_level": "INDEPENDENT",
+      "topic_ids": ["topic:protest-and-loyalism", "topic:road-to-revolution"],
+      "skill_ids": ["skill:perspective-comparison", "skill:claim-evidence-reasoning", "skill:source-limitation"],
+      "source_refs": ["avalon-stamp_act", "loc-2008661777"],
+      "evidence_locator_expectation": "Name Source A/Stamp Act and Source B/Revere print; identify one exact phrase or clause from A and one visible/title detail from B.",
+      "allowed_instructional_supports": ["READ_ALOUD", "VOCABULARY_REMINDER", "CONTEXT_RECAP", "SOURCE_CHUNKING", "ALTERNATE_RESPONSE_MODE"],
+      "scored": true
+    },
+    {
+      "task_id": "task:mastery-print-duty-cause-effect",
+      "task_kind": "CAUSE_EFFECT_CONTINUITY_CHANGE",
+      "prompt": "A different Stamp Act clause placed duties on pamphlets and newspapers. Explain one possible cause-and-effect connection between a tax on printed material and protest. Label any step that is an inference, not a fact stated by the law.",
+      "response_kind": "SHORT_TEXT",
+      "support_level": "INDEPENDENT",
+      "topic_ids": ["topic:protest-and-loyalism", "topic:road-to-revolution"],
+      "skill_ids": ["skill:cause-effect-inference", "skill:source-detail", "skill:source-limitation"],
+      "source_refs": ["avalon-stamp_act"],
+      "evidence_locator_expectation": "Use the fresh displayed clause 'upon every pamphlet and paper' and distinguish the source fact from the learner's possible effect inference.",
+      "allowed_instructional_supports": ["READ_ALOUD", "VOCABULARY_REMINDER", "SOURCE_CHUNKING", "ALTERNATE_RESPONSE_MODE"],
+      "scored": true
+    },
+    {
+      "task_id": "task:mastery-missing-perspective-source-design",
+      "task_kind": "RESEARCH_DESIGN",
+      "prompt": "A learner uses only Revere's print to explain both protest and loyalism. What kind of verified source should the learner add, and what question should it help answer? Explain why.",
+      "response_kind": "SHORT_TEXT",
+      "support_level": "INDEPENDENT",
+      "topic_ids": ["topic:protest-and-loyalism"],
+      "skill_ids": ["skill:perspective-comparison", "skill:source-limitation"],
+      "source_refs": ["loc-2008661777"],
+      "evidence_locator_expectation": "Identify the Revere print's missing Loyalist-colonist perspective and propose a verified, attributable source that directly represents or documents it.",
+      "allowed_instructional_supports": ["READ_ALOUD", "VOCABULARY_REMINDER", "ALTERNATE_RESPONSE_MODE"],
+      "scored": true
+    },
+    {
+      "task_id": "task:remediation-boundary-sort",
+      "task_kind": "SOURCE_EVIDENCE",
+      "prompt": "Sort two statements: one claim supported by the Treaty of Paris phrase and one claim that goes beyond it. Point to the words that set the boundary.",
+      "response_kind": "SHORT_TEXT",
+      "support_level": "FULL",
+      "topic_ids": ["topic:road-to-revolution"],
+      "skill_ids": ["skill:source-detail", "skill:source-limitation"],
+      "source_refs": ["nara-treaty-of-paris"],
+      "evidence_locator_expectation": "Use the displayed Article 1 phrase and name which claim stays inside its evidence boundary.",
+      "allowed_instructional_supports": ["READ_ALOUD", "SOURCE_CHUNKING", "QUESTION_DECOMPOSITION", "GRAPHIC_ORGANIZER", "WORKED_EXAMPLE_REFERENCE"],
+      "scored": false
+    },
+    {
+      "task_id": "task:fresh-retry-declaration-boundary",
+      "task_kind": "CLAIM_EVIDENCE_REASONING",
+      "prompt": "Use the Declaration phrase. Write one claim it supports about an argument for changing government, then state one claim it cannot support about all colonists.",
+      "response_kind": "SHORT_TEXT",
+      "support_level": "INDEPENDENT",
+      "topic_ids": ["topic:protest-and-loyalism", "topic:road-to-revolution"],
+      "skill_ids": ["skill:claim-evidence-reasoning", "skill:source-limitation"],
+      "source_refs": ["nara-declaration-of-independence"],
+      "evidence_locator_expectation": "Use the displayed consent phrase and identify the Declaration as the source.",
+      "allowed_instructional_supports": ["READ_ALOUD", "SOURCE_CHUNKING", "ALTERNATE_RESPONSE_MODE"],
+      "scored": true
+    }
+  ],
+  "task_collections": {
+    "diagnostic_task_refs": [],
+    "guided_task_refs": ["task:guided-stamp-purpose", "task:guided-revere-detail-message-limit"],
+    "independent_task_refs": ["task:independent-two-source-claim"],
+    "review_task_refs": [],
+    "mastery_task_refs": ["task:mastery-print-duty-cause-effect", "task:mastery-missing-perspective-source-design"],
+    "assessment_task_refs": [],
+    "project_checkpoint_refs": [],
+    "fresh_retry_task_refs": ["task:fresh-retry-declaration-boundary"]
+  },
+  "mastery_evidence": [
+    {
+      "task_ref": "task:mastery-print-duty-cause-effect",
+      "evidence_form": "CAUSE_EFFECT_CONTINUITY_CHANGE",
+      "measured_skill_ids": ["skill:cause-effect-inference", "skill:source-detail", "skill:source-limitation"],
+      "freshness_basis": "Uses a different, previously unused Stamp Act clause and requires the learner to separate source fact from a possible cause-and-effect inference without a writing frame.",
+      "independence_required": true,
+      "allowed_instructional_supports": ["READ_ALOUD", "VOCABULARY_REMINDER", "SOURCE_CHUNKING", "ALTERNATE_RESPONSE_MODE"]
+    },
+    {
+      "task_ref": "task:mastery-missing-perspective-source-design",
+      "evidence_form": "RESEARCH_DESIGN",
+      "measured_skill_ids": ["skill:perspective-comparison", "skill:source-limitation"],
+      "freshness_basis": "Changes the reasoning demand from observing the print to designing corroboration for the missing Loyalist-colonist perspective.",
+      "independence_required": true,
+      "allowed_instructional_supports": ["READ_ALOUD", "VOCABULARY_REMINDER", "ALTERNATE_RESPONSE_MODE"]
+    }
+  ],
+  "remediation_paths": [
+    {
+      "path_id": "remediation:evidence-boundary",
+      "signal_ids": ["signal:claim-without-exact-detail", "signal:claim-beyond-source"],
+      "misconception_ids": ["misconception:source-proves-whole-story"],
+      "error_ids": ["error:no-identifiable-evidence", "error:unsupported-generalization"],
+      "prerequisite_knowledge_ids": ["knowledge:sources-have-creators"],
+      "alternate_explanation": "Treat a source detail as a boundary marker. First point to the exact phrase. Next name a claim that uses the same idea as the phrase. Finally name a larger claim the phrase cannot answer. The alternate model uses a later treaty source, not the failed Stamp Act/Revere comparison.",
+      "model_ref": "model:remediation-claim-boundary",
+      "guided_task_refs": ["task:remediation-boundary-sort"],
+      "fresh_retry_task_refs": ["task:fresh-retry-declaration-boundary"],
+      "mastery_task_refs": ["task:mastery-print-duty-cause-effect", "task:mastery-missing-perspective-source-design"],
+      "difference_from_failed_instruction": "The original path compared two source perspectives. The repair temporarily removes comparison, uses a three-part claim-boundary sort with a different source, and then retries on a fresh Declaration excerpt.",
+      "repeats_failed_task_only": false
+    }
+  ],
+  "protected_content": {
+    "adult_authority": [
+      {
+        "task_ref": "task:independent-two-source-claim",
+        "target_skill_ids": ["skill:perspective-comparison", "skill:claim-evidence-reasoning", "skill:source-limitation"],
+        "acceptable_evidence": [
+          "Identifies Parliament's stated defense/protection rationale from Source A without treating it as a Loyalist colonist's personal view.",
+          "Identifies a specific visual or title detail from Source B and treats it as Revere's portrayal rather than a complete neutral record.",
+          "Connects both source details to a defensible claim about differing positions toward British rule.",
+          "Explicitly states that neither central source directly supplies a Loyalist colonist's explanation and that another verified source is needed."
+        ],
+        "required_source_refs": ["avalon-stamp_act", "loc-2008661777"],
+        "reasoning_or_rationale": "A strong response keeps the creators and source forms separate, uses each detail only for a claim it can support, and treats missing Loyalist-colonist evidence as a limitation rather than filling the gap with an imagined view.",
+        "scoring_guidance": "Secure evidence requires an identifiable detail from each source, an explicit reasoning link, and a source limitation. Accept different defensible claims. Do not require the model's wording or a single political conclusion.",
+        "misconception_ids": ["misconception:parliament-equals-loyalist-colonist", "misconception:source-proves-whole-story"],
+        "error_ids": ["error:blended-perspectives", "error:no-identifiable-evidence", "error:unsupported-generalization"],
+        "independence_disqualifiers": ["An adult or Tutor writes, dictates, or rewrites the learner's claim or reasoning.", "The response uses invented source text or an unverified quotation."]
+      },
+      {
+        "task_ref": "task:mastery-print-duty-cause-effect",
+        "target_skill_ids": ["skill:cause-effect-inference", "skill:source-detail", "skill:source-limitation"],
+        "acceptable_evidence": [
+          "Uses the fresh pamphlet/paper duty detail as the stated source fact.",
+          "Proposes a plausible effect related to communication, publishing, cost, or protest and labels that step as an inference.",
+          "Does not claim the law itself states the proposed effect or that all colonists responded the same way."
+        ],
+        "required_source_refs": ["avalon-stamp_act"],
+        "reasoning_or_rationale": "The learner must distinguish the law's content from a historically plausible cause-and-effect inference. The exact inference may vary if it is logically connected and bounded.",
+        "scoring_guidance": "Accept more than one plausible effect. Require a visible distinction between source fact and learner inference; do not reward a merely chronological statement as causation.",
+        "misconception_ids": ["misconception:sequence-equals-cause", "misconception:source-proves-whole-story"],
+        "error_ids": ["error:unlabeled-inference", "error:unsupported-cause"],
+        "independence_disqualifiers": ["An adult or Tutor supplies the causal chain.", "The response copies a cause-and-effect answer from an answer source."]
+      },
+      {
+        "task_ref": "task:mastery-missing-perspective-source-design",
+        "target_skill_ids": ["skill:perspective-comparison", "skill:source-limitation"],
+        "acceptable_evidence": [
+          "Names a real source type capable of representing a Loyalist colonist or documenting a Loyalist-colonist position, such as a verified letter, petition, diary, newspaper item, or official testimony.",
+          "Poses a relevant question about reasons, audience, conditions, or the limits of that person's position.",
+          "Explains that Revere's print cannot supply both the protest-oriented portrayal and the missing Loyalist-colonist perspective."
+        ],
+        "required_source_refs": ["loc-2008661777"],
+        "reasoning_or_rationale": "The task measures source-design judgment, not recall of a particular archive item. A source type and question are acceptable only when they could directly address the missing perspective and remain verifiable.",
+        "scoring_guidance": "Accept multiple credible source types and questions. Reject invented titles, quotations, authors, or unsupported claims that Source A already represents a Loyalist colonist.",
+        "misconception_ids": ["misconception:parliament-equals-loyalist-colonist", "misconception:one-source-all-perspectives"],
+        "error_ids": ["error:invented-source", "error:missing-perspective-unnoticed"],
+        "independence_disqualifiers": ["An adult or Tutor selects and explains the source design for the learner.", "The learner presents an invented source as real."]
+      },
+      {
+        "task_ref": "task:fresh-retry-declaration-boundary",
+        "target_skill_ids": ["skill:claim-evidence-reasoning", "skill:source-limitation"],
+        "acceptable_evidence": [
+          "Uses the consent phrase to support a claim about the Declaration's argument for legitimate governmental power.",
+          "States that the phrase cannot show that all colonists agreed, cannot provide every motive, or cannot directly represent a Loyalist colonist's view."
+        ],
+        "required_source_refs": ["nara-declaration-of-independence"],
+        "reasoning_or_rationale": "The retry succeeds when the learner keeps one claim inside the exact phrase's evidence boundary and one unsupported generalization outside it.",
+        "scoring_guidance": "Use this as fresh evidence after the alternate treaty model. Do not count a copied repair-model sentence as independent retry evidence.",
+        "misconception_ids": ["misconception:source-proves-whole-story"],
+        "error_ids": ["error:unsupported-generalization"],
+        "independence_disqualifiers": ["An adult or Tutor writes either claim.", "The learner repeats the treaty model without applying the Declaration phrase."]
+      }
+    ]
+  },
+  "tutor_manifest": {
+    "lesson_id": "ma-g5-social-studies-u08-l03",
+    "instructional_purpose": "GUIDED_PRACTICE",
+    "disciplinary_modes": ["HISTORY_CHRONOLOGY", "PRIMARY_SOURCE_ANALYSIS", "COMPARE_PERSPECTIVE", "CLAIM_EVIDENCE_REASONING"],
+    "authored_phase": "Guided practice A",
+    "topic_ids": ["topic:protest-and-loyalism", "topic:road-to-revolution"],
+    "skill_ids": ["skill:source-detail", "skill:perspective-comparison", "skill:claim-evidence-reasoning", "skill:source-limitation", "skill:cause-effect-inference"],
+    "prerequisite_knowledge_ids": ["knowledge:britain-colonies-relationship", "knowledge:sources-have-creators"],
+    "source_refs": ["avalon-stamp_act", "loc-2008661777", "nara-lee-resolution", "nara-treaty-of-paris", "nara-declaration-of-independence"],
+    "misconception_ids": ["misconception:parliament-equals-loyalist-colonist", "misconception:source-proves-whole-story", "misconception:sequence-equals-cause", "misconception:one-source-all-perspectives"],
+    "error_ids": ["error:blended-perspectives", "error:no-identifiable-evidence", "error:unsupported-generalization", "error:unlabeled-inference", "error:unsupported-cause", "error:invented-source", "error:missing-perspective-unnoticed"],
+    "model_refs": ["model:detail-support-limit", "model:remediation-claim-boundary"],
+    "guided_task_refs": ["task:guided-stamp-purpose", "task:guided-revere-detail-message-limit"],
+    "independent_task_refs": ["task:independent-two-source-claim"],
+    "mastery_task_refs": ["task:mastery-print-duty-cause-effect", "task:mastery-missing-perspective-source-design"],
+    "remediation_path_refs": ["remediation:evidence-boundary"],
+    "assessment_task_refs": [],
+    "project_checkpoint_refs": [],
+    "allowed_instructional_supports": ["READ_ALOUD", "VOCABULARY_REMINDER", "CONTEXT_RECAP", "SOURCE_CHUNKING", "TIMELINE_ORIENTATION", "EVIDENCE_LOCATION_PROMPT", "QUESTION_DECOMPOSITION", "GRAPHIC_ORGANIZER", "NEUTRAL_SENTENCE_FRAME", "WORKED_EXAMPLE_REFERENCE", "ALT_OR_LONG_DESCRIPTION", "REDUCED_COPYING", "EXTENDED_TIME", "ALTERNATE_RESPONSE_MODE"],
+    "help_policy_ref": "policy:social-studies-r1-help",
+    "answer_policy_ref": "policy:social-studies-r1-answer-boundary",
+    "grade_language_policy_ref": "policy:grade-5-learner-language",
+    "phase_content_refs": {
+      "teach_refs": ["block:background", "block:spatial-orientation", "block:timeline", "block:source-preparation", "block:comparison-skill"],
+      "model_refs": ["model:detail-support-limit"],
+      "guided_refs": ["task:guided-stamp-purpose", "task:guided-revere-detail-message-limit"],
+      "independent_refs": ["task:independent-two-source-claim"],
+      "mastery_refs": ["task:mastery-print-duty-cause-effect", "task:mastery-missing-perspective-source-design"],
+      "remediation_refs": ["block:remediation-boundary", "model:remediation-claim-boundary", "task:remediation-boundary-sort", "task:fresh-retry-declaration-boundary"],
+      "assessment_refs": [],
+      "project_refs": []
+    },
+    "grounding_in_accepted_material_required": true,
+    "may_invent_historical_facts": false,
+    "may_invent_sources": false,
+    "may_write_or_rewrite_graded_work": false,
+    "may_reveal_protected_final_answer": false,
+    "controls_runtime_mastery_state": false
+  }
+}
