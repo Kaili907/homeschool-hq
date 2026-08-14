@@ -15,6 +15,7 @@ import {
   evaluateStudyDeploymentPreflight,
   EXPECTED_FAMILY_PILOT_CONTEXT,
   EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS,
+  EXPECTED_NETLIFY_REDIRECTS,
 } from './study-deployment-env-preflight.mjs'
 import { EXPECTED_STUDY_PROJECT_REF } from './study-migration-preflight.mjs'
 
@@ -115,6 +116,12 @@ function readyEnvironment(): Record<string, string> {
 }
 
 function validNetlifyConfig() {
+  const redirects = EXPECTED_NETLIFY_REDIRECTS.map((redirect) => `
+[[redirects]]
+  from = "${redirect.from}"
+  to = "${redirect.to}"
+  status = ${redirect.status}
+`).join('')
   return `
 [build]
   command = "npm run build"
@@ -130,16 +137,7 @@ function validNetlifyConfig() {
 
 [functions."study-adult-review-scheduled-worker"]
   schedule = "*/5 * * * *"
-
-[[redirects]]
-  from = "/api/study/adult-review/worker"
-  to = "/.netlify/functions/study-adult-review-worker"
-  status = 200
-
-[[redirects]]
-  from = "/api/study/safety/*"
-  to = "/.netlify/functions/study-safety-classify"
-  status = 200
+${redirects}
 `
 }
 

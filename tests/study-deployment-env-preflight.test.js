@@ -1,8 +1,13 @@
+import { cp, copyFile, mkdir, mkdtemp, rm, symlink, unlink } from 'node:fs/promises'
+import { execFileSync } from 'node:child_process'
+import { tmpdir } from 'node:os'
+import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import {
   evaluateStudyDeploymentPreflight,
   EXPECTED_FAMILY_PILOT_CONTEXT,
   EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS,
+  EXPECTED_NETLIFY_REDIRECTS,
   formatStudyDeploymentPreflight,
   parseStudyScheduledFunctionContract,
   runLocalStudyDeploymentPreflight,
@@ -40,6 +45,12 @@ function readyEnvironment() {
 }
 
 function validNetlifyConfig() {
+  const redirects = EXPECTED_NETLIFY_REDIRECTS.map((redirect) => `
+[[redirects]]
+  from = "${redirect.from}"
+  to = "${redirect.to}"
+  status = ${redirect.status}
+`).join('')
   return `
 [build]
   command = "npm run build"
@@ -55,17 +66,24 @@ function validNetlifyConfig() {
 
 [functions."study-adult-review-scheduled-worker"]
   schedule = "*/5 * * * *"
-
-[[redirects]]
-  from = "/api/study/adult-review/worker"
-  to = "/.netlify/functions/study-adult-review-worker"
-  status = 200
-
-[[redirects]]
-  from = "/api/study/safety/*"
-  to = "/.netlify/functions/study-safety-classify"
-  status = 200
+${redirects}
 `
+}
+
+async function temporaryRepository() {
+  const root = await mkdtemp(join(tmpdir(), 'deployment-preflight-r2-'))
+  await copyFile('netlify.toml', join(root, 'netlify.toml'))
+  await mkdir(join(root, 'netlify/functions/_shared/study-adult-review-operations'), { recursive: true })
+  await cp('netlify/function-entrypoints', join(root, 'netlify/function-entrypoints'), { recursive: true })
+  await copyFile(
+    'netlify/functions/study-adult-review-scheduled-worker.js',
+    join(root, 'netlify/functions/study-adult-review-scheduled-worker.js'),
+  )
+  await copyFile(
+    'netlify/functions/_shared/study-adult-review-operations/schedule.js',
+    join(root, 'netlify/functions/_shared/study-adult-review-operations/schedule.js'),
+  )
+  return { root, close: () => rm(root, { recursive: true, force: true }) }
 }
 
 function allFunctionFiles() {
@@ -216,6 +234,75 @@ describe('Study production deployment environment preflight', () => {
     })
   })
 
+  it('blocks when all redirects are removed', () => {
+    const source = validNetlifyConfig().replace(/\n\[\[redirects\]\][\s\S]*$/u, '\n')
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.redirect_contract')).toMatchObject({
+      status: 'missing', reasonCode: 'REDIRECT_CONTRACT_MISSING', configuredCount: 0,
+    })
+    expect(byId(result, 'netlify.spa_fallback')).toMatchObject({ status: 'missing' })
+  })
+
+  it('blocks when the Anthropic redirect is routed to TTS', () => {
+    const source = validNetlifyConfig().replace(
+      'to = "/.netlify/functions/anthropic/:splat"',
+      'to = "/.netlify/functions/tts/:splat"',
+    )
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.redirect_contract')).toMatchObject({
+      status: 'malformed', reasonCode: 'REDIRECT_CONTRACT_WRONG',
+    })
+  })
+
+  it('blocks a required redirect with the wrong status', () => {
+    const source = validNetlifyConfig().replace(
+      'from = "/api/study/session/issue"\n  to = "/.netlify/functions/study-session-issue"\n  status = 200',
+      'from = "/api/study/session/issue"\n  to = "/.netlify/functions/study-session-issue"\n  status = 302',
+    )
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.redirect_contract')).toMatchObject({ status: 'malformed' })
+  })
+
+  it('blocks when the SPA fallback is removed', () => {
+    const fallback = '\n[[redirects]]\n  from = "/*"\n  to = "/index.html"\n  status = 200\n'
+    const result = evaluate({ netlifyToml: validNetlifyConfig().replace(fallback, '') })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.spa_fallback')).toMatchObject({
+      status: 'missing', reasonCode: 'SPA_FALLBACK_MISSING_OR_WRONG',
+    })
+  })
+
+  it('blocks precedence changes and a non-final SPA fallback', () => {
+    const source = validNetlifyConfig()
+    const first = '\n[[redirects]]\n  from = "/api/anthropic/*"\n  to = "/.netlify/functions/anthropic/:splat"\n  status = 200\n'
+    const fallback = '\n[[redirects]]\n  from = "/*"\n  to = "/index.html"\n  status = 200\n'
+    const reordered = source.replace(first, '').replace(fallback, `${fallback}${first}`)
+    const result = evaluate({ netlifyToml: reordered })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.redirect_contract')).toMatchObject({ status: 'present' })
+    expect(byId(result, 'netlify.redirect_ordering')).toMatchObject({
+      status: 'malformed', reasonCode: 'REDIRECT_ORDER_UNSAFE',
+    })
+    expect(byId(result, 'netlify.spa_fallback')).toMatchObject({
+      status: 'malformed', reasonCode: 'SPA_FALLBACK_MISORDERED',
+    })
+  })
+
+  it('blocks an unexpected redirect that adds routing authority', () => {
+    const source = validNetlifyConfig().replace(
+      '\n[[redirects]]\n  from = "/*"',
+      '\n[[redirects]]\n  from = "/api/debug"\n  to = "/.netlify/functions/admin-health"\n  status = 200\n\n[[redirects]]\n  from = "/*"',
+    )
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.redirect_contract')).toMatchObject({
+      status: 'malformed', configuredCount: EXPECTED_NETLIFY_REDIRECTS.length + 1,
+    })
+  })
+
   it('blocks a wrong scheduled function target', () => {
     const source = validNetlifyConfig().replace(
       '[functions."study-adult-review-scheduled-worker"]',
@@ -348,6 +435,73 @@ describe('Study production deployment environment preflight', () => {
     expect(output).toContain('Passing does not prove that Study migrations are applied')
   })
 
+  it('blocks a surprise symlink without following it as a callable regular handler', async () => {
+    const fixture = await temporaryRepository()
+    try {
+      await symlink(
+        resolve('netlify/functions/anthropic.js'),
+        join(fixture.root, 'netlify/function-entrypoints/surprise.js'),
+      )
+      const result = await runLocalStudyDeploymentPreflight({
+        rootDirectory: fixture.root,
+        env: readyEnvironment(),
+      })
+      expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+      expect(byId(result, 'netlify.function_surface')).toMatchObject({
+        status: 'malformed',
+        forbiddenFilesystemEntries: [expect.objectContaining({
+          file: 'surprise.js', kind: 'symbolic-link', callable: false,
+        })],
+      })
+    } finally {
+      await fixture.close()
+    }
+  })
+
+  it('blocks an expected handler name replaced by a symlink', async () => {
+    const fixture = await temporaryRepository()
+    try {
+      const entrypoint = join(fixture.root, 'netlify/function-entrypoints/anthropic.js')
+      await unlink(entrypoint)
+      await symlink(resolve('netlify/functions/anthropic.js'), entrypoint)
+      const result = await runLocalStudyDeploymentPreflight({
+        rootDirectory: fixture.root,
+        env: readyEnvironment(),
+      })
+      expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+      expect(byId(result, 'netlify.function_surface')).toMatchObject({
+        status: 'malformed',
+        missingSubjects: ['anthropic'],
+        forbiddenFilesystemEntries: [expect.objectContaining({
+          file: 'anthropic.js', kind: 'symbolic-link', callable: false,
+        })],
+      })
+    } finally {
+      await fixture.close()
+    }
+  })
+
+  it('blocks a FIFO or other non-regular callable-directory entry', async () => {
+    const fixture = await temporaryRepository()
+    try {
+      const fifo = join(fixture.root, 'netlify/function-entrypoints/surprise.js')
+      execFileSync('mkfifo', [fifo])
+      const result = await runLocalStudyDeploymentPreflight({
+        rootDirectory: fixture.root,
+        env: readyEnvironment(),
+      })
+      expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+      expect(byId(result, 'netlify.function_surface')).toMatchObject({
+        status: 'malformed',
+        forbiddenFilesystemEntries: [expect.objectContaining({
+          file: 'surprise.js', kind: 'fifo', callable: false,
+        })],
+      })
+    } finally {
+      await fixture.close()
+    }
+  })
+
   it('reports the integrated repository schedule as ready with a complete fixture environment', async () => {
     const result = await runLocalStudyDeploymentPreflight({ env: readyEnvironment() })
     expect(result.overall).toBe('READY_FOR_DEPLOYMENT_ENVIRONMENT')
@@ -356,6 +510,11 @@ describe('Study production deployment environment preflight', () => {
     expect(byId(result, 'netlify.scheduled_function_file')).toMatchObject({ status: 'present' })
     expect(byId(result, 'netlify.function_surface')).toMatchObject({ status: 'present' })
     expect(byId(result, 'netlify.entrypoint_delegates')).toMatchObject({ status: 'present' })
+    expect(byId(result, 'netlify.redirect_contract')).toMatchObject({
+      status: 'present', expectedCount: 37, configuredCount: 37,
+    })
+    expect(byId(result, 'netlify.redirect_ordering')).toMatchObject({ status: 'present' })
+    expect(byId(result, 'netlify.spa_fallback')).toMatchObject({ status: 'present' })
     expect(byId(result, 'netlify.family_pilot_branch_context')).toMatchObject({ status: 'present' })
   })
 })

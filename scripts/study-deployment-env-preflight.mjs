@@ -1,8 +1,8 @@
-import { readFile, readdir } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { ANTHROPIC_MODELS } from '../netlify/functions/_shared/anthropic-policy.js'
-import { ALLOWED_NETLIFY_FUNCTIONS } from './audit-web-release/lib.mjs'
+import { ALLOWED_NETLIFY_FUNCTIONS, inspectNetlifyFunctionSurface } from './audit-web-release/lib.mjs'
 
 export const STUDY_DEPLOYMENT_PREFLIGHT_SCHEMA_VERSION = 1
 export const STUDY_DEPLOYMENT_OUTCOMES = Object.freeze([
@@ -31,6 +31,52 @@ export const EXPECTED_NETLIFY_PUBLISH_DIRECTORY = 'dist'
 export const EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY = 'netlify/function-entrypoints'
 export const EXPECTED_FAMILY_PILOT_CONTEXT = 'mac/web-release-r3-convergence-r1'
 export const EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS = Object.freeze([...ALLOWED_NETLIFY_FUNCTIONS])
+
+function canonicalRedirect(from, to) {
+  return Object.freeze({ from, to, status: 200 })
+}
+
+// Reviewed Web R3 routing authority, in Netlify precedence order. The SPA
+// fallback is intentionally final and every API route is exact and fail-closed.
+export const EXPECTED_NETLIFY_REDIRECTS = Object.freeze([
+  canonicalRedirect('/api/anthropic/*', '/.netlify/functions/anthropic/:splat'),
+  canonicalRedirect('/api/tts/*', '/.netlify/functions/tts/:splat'),
+  canonicalRedirect('/api/admin/v1/authorization', '/.netlify/functions/admin-authorization'),
+  canonicalRedirect('/api/admin/v1/access/*', '/.netlify/functions/admin-access'),
+  canonicalRedirect('/api/admin/v1/access', '/.netlify/functions/admin-access'),
+  canonicalRedirect('/api/admin/v1/overview', '/.netlify/functions/admin-overview'),
+  canonicalRedirect('/api/admin/v1/engine-performance', '/.netlify/functions/admin-engine-performance'),
+  canonicalRedirect('/api/admin/v1/learners/*', '/.netlify/functions/admin-learners/:splat'),
+  canonicalRedirect('/api/admin/v1/learners', '/.netlify/functions/admin-learners'),
+  canonicalRedirect('/api/admin/v1/costs', '/.netlify/functions/admin-costs'),
+  canonicalRedirect('/api/admin/v1/health', '/.netlify/functions/admin-health'),
+  canonicalRedirect('/api/admin/v1/study-operations', '/.netlify/functions/admin-study-operations'),
+  canonicalRedirect('/api/admin/v1/study-telemetry-delivery', '/.netlify/functions/study-session-telemetry-deliver'),
+  canonicalRedirect('/api/admin/v1/safety-operations', '/.netlify/functions/admin-safety-operations'),
+  canonicalRedirect('/api/admin/v1/audit', '/.netlify/functions/admin-audit'),
+  canonicalRedirect('/api/admin/v1/correlations', '/.netlify/functions/admin-correlations'),
+  canonicalRedirect('/api/admin/v1/configuration', '/.netlify/functions/admin-configuration'),
+  canonicalRedirect('/api/admin/v1/configuration/preview', '/.netlify/functions/admin-configuration'),
+  canonicalRedirect('/api/admin/v1/configuration/commit', '/.netlify/functions/admin-configuration'),
+  canonicalRedirect('/api/admin/v1/production-readiness', '/.netlify/functions/admin-production-readiness'),
+  canonicalRedirect('/api/admin/v1/provider-pricing-terms/*', '/.netlify/functions/admin-provider-pricing-terms/:splat'),
+  canonicalRedirect('/api/admin/v1/provider-pricing-terms', '/.netlify/functions/admin-provider-pricing-terms'),
+  canonicalRedirect('/api/admin/curriculum/*', '/.netlify/functions/admin-curriculum/:splat'),
+  canonicalRedirect('/api/study/safety/*', '/.netlify/functions/study-safety-classify'),
+  canonicalRedirect('/api/study/parent-notifications', '/.netlify/functions/study-parent-notifications'),
+  canonicalRedirect('/api/study/adult-review/health', '/.netlify/functions/study-adult-review-health'),
+  canonicalRedirect('/api/study/adult-review/deliver', '/.netlify/functions/study-adult-review-deliver'),
+  canonicalRedirect('/api/study/adult-review/worker', '/.netlify/functions/study-adult-review-worker'),
+  canonicalRedirect('/api/study/adult-review/*', '/.netlify/functions/study-adult-review'),
+  canonicalRedirect('/api/study/production/readiness', '/.netlify/functions/study-production-readiness'),
+  canonicalRedirect('/api/study/session/issue', '/.netlify/functions/study-session-issue'),
+  canonicalRedirect('/api/study/session/verify', '/.netlify/functions/study-session-verify'),
+  canonicalRedirect('/api/study/session/revoke', '/.netlify/functions/study-session-verify'),
+  canonicalRedirect('/api/study/session/readiness', '/.netlify/functions/study-session-verify'),
+  canonicalRedirect('/api/study/academic-runtime', '/.netlify/functions/study-academic-runtime'),
+  canonicalRedirect('/api/study/bound-content', '/.netlify/functions/study-bound-content'),
+  canonicalRedirect('/*', '/index.html'),
+])
 
 const STUDY_SCHEDULE_CONTRACT_MODULE = './_shared/study-adult-review-operations/schedule.js'
 const STUDY_SCHEDULE_CONTRACT_PATH = 'netlify/functions/_shared/study-adult-review-operations/schedule.js'
@@ -226,7 +272,7 @@ function boundedSecretGate(env, name, role) {
 }
 
 /**
- * Parse only the checked-in Netlify string settings this preflight consumes.
+ * Parse only the checked-in Netlify string and integer settings this preflight consumes.
  * Unknown TOML remains outside the result and is never echoed.
  */
 export function parseNetlifyDeploymentConfig(source) {
@@ -272,8 +318,13 @@ export function parseNetlifyDeploymentConfig(source) {
       target = null
       continue
     }
-    const setting = /^([A-Za-z0-9_.-]+)\s*=\s*"([^"]*)"$/u.exec(line)
-    if (target && setting) target[setting[1]] = setting[2]
+    const stringSetting = /^([A-Za-z0-9_.-]+)\s*=\s*"([^"]*)"$/u.exec(line)
+    if (target && stringSetting) {
+      target[stringSetting[1]] = stringSetting[2]
+      continue
+    }
+    const integerSetting = /^([A-Za-z0-9_.-]+)\s*=\s*(\d+)$/u.exec(line)
+    if (target && integerSetting) target[integerSetting[1]] = Number(integerSetting[2])
   }
   return Object.freeze({
     build,
@@ -281,6 +332,51 @@ export function parseNetlifyDeploymentConfig(source) {
     contextEnvironments,
     functions,
     redirects: Object.freeze(redirects),
+  })
+}
+
+function redirectSignature(redirect) {
+  return JSON.stringify([redirect?.from, redirect?.to, redirect?.status])
+}
+
+function redirectContract(configured) {
+  const expectedSignatures = EXPECTED_NETLIFY_REDIRECTS.map(redirectSignature)
+  const configuredSignatures = configured.map(redirectSignature)
+  const expectedCounts = new Map()
+  const configuredCounts = new Map()
+  for (const signature of expectedSignatures) {
+    expectedCounts.set(signature, (expectedCounts.get(signature) ?? 0) + 1)
+  }
+  for (const signature of configuredSignatures) {
+    configuredCounts.set(signature, (configuredCounts.get(signature) ?? 0) + 1)
+  }
+  const missing = EXPECTED_NETLIFY_REDIRECTS.filter((redirect) => {
+    const signature = redirectSignature(redirect)
+    const remaining = configuredCounts.get(signature) ?? 0
+    if (remaining === 0) return true
+    configuredCounts.set(signature, remaining - 1)
+    return false
+  })
+  const unexpected = configured.filter((redirect) => {
+    const signature = redirectSignature(redirect)
+    const remaining = expectedCounts.get(signature) ?? 0
+    if (remaining === 0) return true
+    expectedCounts.set(signature, remaining - 1)
+    return false
+  })
+  const ordered = configuredSignatures.length === expectedSignatures.length &&
+    configuredSignatures.every((signature, index) => signature === expectedSignatures[index])
+  const fallbackIndexes = configured.flatMap((redirect, index) => redirect.from === '/*' ? [index] : [])
+  const spaFallback = fallbackIndexes.length === 1 &&
+    redirectSignature(configured[fallbackIndexes[0]]) === redirectSignature(EXPECTED_NETLIFY_REDIRECTS.at(-1))
+  const spaFallbackLast = spaFallback && fallbackIndexes[0] === configured.length - 1
+  return Object.freeze({
+    missing: Object.freeze(missing),
+    unexpected: Object.freeze(unexpected),
+    exactRoutes: missing.length === 0 && unexpected.length === 0,
+    ordered,
+    spaFallback,
+    spaFallbackLast,
   })
 }
 
@@ -307,9 +403,11 @@ function netlifyGates(
   functionFiles,
   functionEntrypointSources,
   functionDirectoryPresent,
+  functionInventoryForbiddenEntries,
   scheduledFunctionContract,
 ) {
   const config = parseNetlifyDeploymentConfig(netlifyToml)
+  const redirects = redirectContract(config.redirects)
   const scheduled = [...config.functions.entries()].filter(([, settings]) => typeof settings.schedule === 'string')
   const expected = config.functions.get(EXPECTED_STUDY_SCHEDULED_FUNCTION)
   const scheduledNames = scheduled.map(([name]) => name)
@@ -333,8 +431,11 @@ function netlifyGates(
   const expectedFunctionFiles = new Set(EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS)
   const missingEntrypoints = EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS.filter((name) => !functionFiles.has(name))
   const unexpectedEntrypoints = [...functionFiles].filter((name) => !expectedFunctionFiles.has(name)).sort()
-  const forbiddenEntrypoints = unexpectedEntrypoints.filter(forbiddenEntrypointName)
-  const functionSurfaceStatus = unexpectedEntrypoints.length > 0
+  const forbiddenEntrypoints = [
+    ...unexpectedEntrypoints.filter(forbiddenEntrypointName),
+    ...functionInventoryForbiddenEntries.map((entry) => entry.file),
+  ].filter((name, index, values) => values.indexOf(name) === index).sort()
+  const functionSurfaceStatus = unexpectedEntrypoints.length > 0 || functionInventoryForbiddenEntries.length > 0
     ? 'malformed'
     : missingEntrypoints.length > 0
       ? 'missing'
@@ -402,6 +503,7 @@ function netlifyGates(
       missingSubjects: Object.freeze(missingEntrypoints),
       unexpectedSubjects: Object.freeze(unexpectedEntrypoints),
       forbiddenSubjects: Object.freeze(forbiddenEntrypoints),
+      forbiddenFilesystemEntries: Object.freeze(functionInventoryForbiddenEntries),
     }),
     gate({
       id: 'netlify.entrypoint_delegates', category: 'netlify', subject: 'handler-only Netlify entrypoint delegates',
@@ -416,6 +518,46 @@ function netlifyGates(
         : 'Restore each reviewed entrypoint as an exact handler-only delegate to its matching production module.',
       missingSubjects: Object.freeze([...missingEntrypoints, ...unreadableEntrypoints]),
       invalidSubjects: Object.freeze(invalidDelegates),
+    }),
+    gate({
+      id: 'netlify.redirect_contract', category: 'netlify', subject: 'canonical Web R3 redirect table',
+      status: redirects.exactRoutes ? 'present' : config.redirects.length === 0 ? 'missing' : 'malformed',
+      reasonCode: redirects.exactRoutes
+        ? 'REDIRECT_CONTRACT_EXACT'
+        : config.redirects.length === 0
+          ? 'REDIRECT_CONTRACT_MISSING'
+          : 'REDIRECT_CONTRACT_WRONG',
+      remediation: redirects.exactRoutes
+        ? 'No action required.'
+        : 'Restore the exact reviewed source, destination, and status for every Web R3 redirect; do not add routing authority.',
+      expectedCount: EXPECTED_NETLIFY_REDIRECTS.length,
+      configuredCount: config.redirects.length,
+      missingSubjects: Object.freeze(redirects.missing.map((redirect) => redirect.from)),
+      unexpectedSubjects: Object.freeze(redirects.unexpected.map((redirect) => redirect.from ?? '<missing-from>')),
+    }),
+    gate({
+      id: 'netlify.redirect_ordering', category: 'netlify', subject: 'canonical Web R3 redirect precedence',
+      status: redirects.ordered ? 'present' : config.redirects.length === 0 ? 'missing' : 'malformed',
+      reasonCode: redirects.ordered
+        ? 'REDIRECT_ORDER_EXACT'
+        : config.redirects.length === 0
+          ? 'REDIRECT_ORDER_MISSING'
+          : 'REDIRECT_ORDER_UNSAFE',
+      remediation: redirects.ordered
+        ? 'No action required.'
+        : 'Restore the reviewed redirect order, including specific routes before wildcard routes and the SPA fallback last.',
+    }),
+    gate({
+      id: 'netlify.spa_fallback', category: 'netlify', subject: 'final /* SPA fallback',
+      status: redirects.spaFallbackLast ? 'present' : redirects.spaFallback ? 'malformed' : 'missing',
+      reasonCode: redirects.spaFallbackLast
+        ? 'SPA_FALLBACK_EXACT_AND_LAST'
+        : redirects.spaFallback
+          ? 'SPA_FALLBACK_MISORDERED'
+          : 'SPA_FALLBACK_MISSING_OR_WRONG',
+      remediation: redirects.spaFallbackLast
+        ? 'No action required.'
+        : 'Restore the exact final /* redirect to /index.html with status 200.',
     }),
     gate({
       id: 'netlify.scheduled_target', category: 'netlify', subject: EXPECTED_STUDY_SCHEDULED_FUNCTION,
@@ -647,6 +789,7 @@ export function evaluateStudyDeploymentPreflight({
   functionFiles = new Set(),
   functionEntrypointSources = new Map(),
   functionDirectoryPresent,
+  functionInventoryForbiddenEntries = [],
   scheduledFunctionContract = EXPECTED_STUDY_SCHEDULE_CONTRACT,
 } = {}) {
   const files = functionFiles instanceof Set ? functionFiles : new Set(functionFiles)
@@ -657,7 +800,14 @@ export function evaluateStudyDeploymentPreflight({
   const gates = Object.freeze([
     ...environmentGates(env),
     ...exposureGates(env),
-    ...netlifyGates(netlifyToml, files, sources, directoryPresent, scheduledFunctionContract),
+    ...netlifyGates(
+      netlifyToml,
+      files,
+      sources,
+      directoryPresent,
+      functionInventoryForbiddenEntries,
+      scheduledFunctionContract,
+    ),
     ...contractGates(),
   ])
   const overall = overallFor(gates)
@@ -704,8 +854,6 @@ export function parseStudyScheduledFunctionContract(source) {
 
 export async function runLocalStudyDeploymentPreflight({ rootDirectory = process.cwd(), env = process.env } = {}) {
   let netlifyToml = ''
-  let entries = []
-  let functionDirectoryPresent = false
   const functionEntrypointSources = new Map()
   let scheduledFunctionContract = null
   try {
@@ -713,38 +861,17 @@ export async function runLocalStudyDeploymentPreflight({ rootDirectory = process
   } catch {
     // Missing configuration is represented by deterministic missing gates.
   }
-  try {
-    entries = await readdir(resolve(rootDirectory, EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY), { withFileTypes: true })
-    functionDirectoryPresent = true
-  } catch {
-    // Missing function directory is represented by deterministic missing gates.
-  }
-  await Promise.all(entries.map(async (entry) => {
-    let relativePath = null
-    let name = null
-    if (entry.isFile()) {
-      const match = /^(.+)\.(?:cjs|js|mjs|ts)$/u.exec(entry.name)
-      if (match) {
-        name = match[1]
-        relativePath = entry.name
-      }
-    } else if (entry.isDirectory()) {
-      for (const candidate of ['index.js', 'index.mjs', 'index.ts']) {
-        try {
-          const source = await readFile(resolve(rootDirectory, EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY, entry.name, candidate), 'utf8')
-          functionEntrypointSources.set(entry.name, source)
-          return
-        } catch {
-          // Continue until a supported directory entrypoint is found.
-        }
-      }
-    }
-    if (!name || !relativePath) return
+  const functionSurface = inspectNetlifyFunctionSurface(resolve(
+    rootDirectory,
+    EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY,
+  ))
+  await Promise.all(functionSurface.entries.map(async (entry) => {
+    if (!entry.callable || !entry.permitted || !entry.name) return
     try {
-      functionEntrypointSources.set(name, await readFile(resolve(
+      functionEntrypointSources.set(entry.name, await readFile(resolve(
         rootDirectory,
         EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY,
-        relativePath,
+        entry.file,
       ), 'utf8'))
     } catch {
       // An unreadable entrypoint is represented by deterministic missing gates.
@@ -767,13 +894,14 @@ export async function runLocalStudyDeploymentPreflight({ rootDirectory = process
   } catch {
     // Missing or unreadable source is represented by deterministic configuration gates.
   }
-  const functionFiles = new Set(functionEntrypointSources.keys())
+  const functionFiles = new Set(functionSurface.callable)
   return evaluateStudyDeploymentPreflight({
     env,
     netlifyToml,
     functionFiles,
     functionEntrypointSources,
-    functionDirectoryPresent,
+    functionDirectoryPresent: functionSurface.directoryPresent,
+    functionInventoryForbiddenEntries: functionSurface.forbiddenEntries,
     scheduledFunctionContract,
   })
 }

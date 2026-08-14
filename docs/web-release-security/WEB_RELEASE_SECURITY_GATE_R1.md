@@ -52,12 +52,13 @@ prose is not treated as a required production dependency.
 
 ### Netlify function surface
 
-Every top-level function source (and non-private directory entrypoint) under the
-functions directory actually configured in `netlify.toml` is a callable-output
-candidate. The gate compares that complete inventory with the closed allowlist
-in `scripts/audit-web-release/lib.mjs`. Tests, specs, fixtures, helpers,
-resolvers, and every unknown entrypoint fail. Adding a legitimate handler
-therefore requires an explicit allowlist review.
+The configured callable directory is a closed filesystem inventory: exactly 31
+regular `.js` entrypoints plus the regular `README.md`. Inspection uses
+non-following metadata. Symbolic links (including expected-name links), FIFOs,
+sockets, devices, directories, tests, specs, fixtures, helpers, resolvers, and
+every unknown entry fail. Only regular supported source files are classified as
+callable, and the same inspector feeds deployment preflight. Adding a legitimate
+handler therefore requires an explicit allowlist review.
 
 ### Quality and default-off integration
 
@@ -83,9 +84,11 @@ or multiple assignments fail.
 3. a raw Tutor transcript;
 4. a service-role field and credential-shaped JWT;
 5. a required localhost grading endpoint;
-6. callable Netlify test/helper/unknown functions;
-7. a failed integrated quality command;
-8. global flag enablement and truthy flag semantics.
+6. callable Netlify test/helper/unknown functions and unexpected directories;
+7. surprise and expected-name symbolic links;
+8. a FIFO/non-regular callable-directory entry;
+9. a failed integrated quality command;
+10. global flag enablement and truthy flag semantics.
 
 Positive controls prove that generic protected-field identifiers in deny lists,
 guard regexes, UI prose, and explicit false minimization metadata do not create

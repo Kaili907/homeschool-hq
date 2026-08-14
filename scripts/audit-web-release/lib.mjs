@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, lstatSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { extname, join, relative } from 'node:path'
 import { spawnSync } from 'node:child_process'
 
@@ -81,6 +81,7 @@ const SERVICE_ROLE_FIELDS = new Set([
 ])
 const TEXT_EXTENSIONS = new Set(['.css', '.html', '.js', '.json', '.mjs', '.svg', '.webmanifest'])
 const FUNCTION_EXTENSIONS = new Set(['.cjs', '.js', '.mjs', '.ts'])
+const ALLOWED_FUNCTION_DIRECTORY_METADATA = new Set(['README.md'])
 const LOCAL_URL = /\bhttps?:\/\/(?:localhost|127(?:\.\d{1,3}){3}|\[::1\])(?::\d+)?(?:\/[^\s'"`]*)?/i
 const ANSWER_LOCATOR = /(?:^|[/\\])(?:answer[-_ ]?keys?|scoring[-_ ]?(?:authority|guides?))(?:[/\\]|$)|^restricted:(?:adult|scoring)/i
 
@@ -375,32 +376,70 @@ export function scanBrowserOutput(root) {
   }
 }
 
-function callableFunctionCandidates(functionsRoot) {
-  if (!existsSync(functionsRoot)) return []
-  const candidates = []
-  for (const name of readdirSync(functionsRoot).sort()) {
-    if (name.startsWith('_') || name.startsWith('.')) continue
-    const absolute = join(functionsRoot, name)
-    const stat = statSync(absolute)
-    if (stat.isFile() && FUNCTION_EXTENSIONS.has(extname(name))) {
-      candidates.push({ name: name.slice(0, -extname(name).length), file: name })
-    } else if (stat.isDirectory()) {
-      for (const entry of ['index.js', 'index.mjs', 'index.ts']) {
-        if (existsSync(join(absolute, entry))) candidates.push({ name, file: `${name}/${entry}` })
-      }
-    }
-  }
-  return candidates
+function filesystemEntryKind(stat) {
+  if (stat.isSymbolicLink()) return 'symbolic-link'
+  if (stat.isFile()) return 'regular-file'
+  if (stat.isDirectory()) return 'directory'
+  if (stat.isFIFO()) return 'fifo'
+  if (stat.isSocket()) return 'socket'
+  if (stat.isBlockDevice()) return 'block-device'
+  if (stat.isCharacterDevice()) return 'character-device'
+  return 'other'
 }
 
 export function inspectNetlifyFunctionSurface(functionsRoot, allowlist = ALLOWED_NETLIFY_FUNCTIONS) {
   const findings = []
-  const candidates = callableFunctionCandidates(functionsRoot)
+  const candidates = []
+  const entries = []
+  const forbiddenEntries = []
   const allowed = new Set(allowlist)
+  const allowedFiles = new Set(allowlist.map((name) => `${name}.js`))
+  let rootKind = 'missing'
+  try {
+    rootKind = filesystemEntryKind(lstatSync(functionsRoot))
+  } catch {
+    // Missing/unreadable roots remain a closed missing inventory.
+  }
+  const directoryPresent = rootKind === 'directory'
+
+  if (rootKind !== 'missing' && !directoryPresent) {
+    forbiddenEntries.push(Object.freeze({
+      file: '.', kind: rootKind, callable: false, permitted: false, name: null,
+    }))
+  }
+
+  if (directoryPresent) {
+    for (const file of readdirSync(functionsRoot).sort()) {
+      const stat = lstatSync(join(functionsRoot, file))
+      const kind = filesystemEntryKind(stat)
+      const extension = extname(file)
+      const callable = kind === 'regular-file' && FUNCTION_EXTENSIONS.has(extension)
+      const name = callable ? file.slice(0, -extension.length) : null
+      const permitted = kind === 'regular-file' &&
+        (allowedFiles.has(file) || ALLOWED_FUNCTION_DIRECTORY_METADATA.has(file))
+      const entry = Object.freeze({ file, kind, callable, permitted, name })
+      entries.push(entry)
+      if (callable) candidates.push({ name, file })
+      if (!permitted) forbiddenEntries.push(entry)
+    }
+  }
+
+  for (const entry of forbiddenEntries) {
+    add(
+      findings,
+      RULES.functionSurface,
+      entry.file,
+      entry.kind === 'regular-file'
+        ? 'The callable directory contains an unexpected regular entry.'
+        : `The callable directory contains a forbidden ${entry.kind} entry.`,
+      `${entry.kind}:${entry.file}`,
+    )
+  }
   for (const candidate of candidates) {
     const helperOrTest = /(?:^|[._-])(?:test|spec|fixture|helper)(?:[._-]|$)/i.test(candidate.name) ||
       /(?:resolver|helper)$/i.test(candidate.name)
-    if (helperOrTest || !allowed.has(candidate.name)) {
+    if ((helperOrTest || !allowed.has(candidate.name)) &&
+      !forbiddenEntries.some((entry) => entry.file === candidate.file)) {
       add(
         findings,
         RULES.functionSurface,
@@ -418,8 +457,11 @@ export function inspectNetlifyFunctionSurface(functionsRoot, allowlist = ALLOWED
     }
   }
   return {
-    callable: candidates.map((candidate) => candidate.name),
+    directoryPresent,
+    entries,
+    callable: candidates.map((candidate) => candidate.name).sort(),
     allowlisted: [...allowlist],
+    forbiddenEntries,
     findings: findings.map(({ key: _key, ...finding }) => finding),
   }
 }

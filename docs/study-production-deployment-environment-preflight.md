@@ -81,9 +81,13 @@ The checked-in configuration must:
 - run `npm run build` and publish only `dist`;
 - use `netlify/function-entrypoints` as the dedicated callable function directory;
 - expose exactly the reviewed 31-function allowlist, with no tests, fixtures,
-  helpers, debug handlers, resolvers, or unreviewed entrypoints;
+  helpers, debug handlers, resolvers, unreviewed entrypoints, symlinks, FIFOs,
+  sockets, devices, or other non-regular entries;
 - keep every callable entrypoint as a handler-only delegate to its matching
   production module under `netlify/functions`;
+- preserve the exact ordered 37-row Web R3 redirect contract: every reviewed
+  source, destination, and status `200`, with all API routes before the final
+  `/*` to `/index.html` SPA fallback;
 - schedule only the dedicated `study-adult-review-scheduled-worker` Study target;
 - use the exact `*/5 * * * *` cadence in both configuration and entrypoint contract;
 - keep `study-adult-review-worker` manual/public and unscheduled;
@@ -93,6 +97,17 @@ The checked-in configuration must:
 - leave the Family Pilot globally default-off and enable it with the exact
   literal `true` only in the named `mac/web-release-r3-convergence-r1` branch
   context.
+
+The callable inventory uses non-following filesystem metadata. The canonical
+directory contains only 31 regular `.js` delegates and the regular `README.md`;
+no callable subdirectory is permitted. A symlink is forbidden even when it uses
+an expected handler name or resolves to a reviewed production module. The Study
+preflight and permanent web-release surface inspector share this inventory
+implementation, so they classify the same entry as callable or forbidden.
+
+The redirect comparison is closed and ordered. Removing the table or fallback,
+changing a source, target, function target, or status, reordering precedence, or
+adding an unreviewed route produces `BLOCKED_BY_DEPLOYMENT_CONFIG`.
 
 The scheduled entrypoint contract is inspected as local source text. This keeps
 the preflight executable even when the entrypoint is absent and makes that

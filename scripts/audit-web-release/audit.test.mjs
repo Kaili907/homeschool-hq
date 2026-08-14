@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
-import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
@@ -19,6 +20,18 @@ function fixture() {
       const file = join(root, relative)
       mkdirSync(join(file, '..'), { recursive: true })
       writeFileSync(file, contents)
+      return file
+    },
+    symlink(relative, target) {
+      const file = join(root, relative)
+      mkdirSync(join(file, '..'), { recursive: true })
+      symlinkSync(target, file)
+      return file
+    },
+    fifo(relative) {
+      const file = join(root, relative)
+      mkdirSync(join(file, '..'), { recursive: true })
+      execFileSync('mkfifo', [file])
       return file
     },
     close() { rmSync(root, { recursive: true, force: true }) },
@@ -110,8 +123,41 @@ test('negative control: callable Netlify tests, helpers, and unknown handlers fa
     fx.write('surprise.js', 'export const handler=()=>({statusCode:200})')
     fx.write('_shared/helper.js', 'export function helper(){}')
     const result = inspectNetlifyFunctionSurface(fx.root, ['good'])
-    assert.equal(result.findings.length, 3)
+    assert.equal(result.findings.length, 4)
     assert.deepEqual(result.callable, ['good', 'good.test', 'production-item-resolver', 'surprise'])
+  } finally { fx.close() }
+})
+
+test('negative control: lstat inventory rejects surprise and expected-name symlinks', () => {
+  const fx = fixture()
+  try {
+    const target = fx.write('target.js', 'export const handler=()=>({statusCode:200})')
+    fx.symlink('surprise.js', target)
+    fx.symlink('expected.js', target)
+    const result = inspectNetlifyFunctionSurface(fx.root, ['expected'])
+    assert.deepEqual(result.callable, ['target'])
+    assert.deepEqual(
+      result.forbiddenEntries.map(({ file, kind, callable }) => ({ file, kind, callable })),
+      [
+        { file: 'expected.js', kind: 'symbolic-link', callable: false },
+        { file: 'surprise.js', kind: 'symbolic-link', callable: false },
+        { file: 'target.js', kind: 'regular-file', callable: true },
+      ],
+    )
+    assert.ok(result.findings.some((finding) => finding.evidence === 'expected'))
+  } finally { fx.close() }
+})
+
+test('negative control: lstat inventory rejects FIFO entries without opening them', () => {
+  const fx = fixture()
+  try {
+    fx.write('expected.js', 'export const handler=()=>({statusCode:200})')
+    fx.fifo('surprise.js')
+    const result = inspectNetlifyFunctionSurface(fx.root, ['expected'])
+    assert.deepEqual(result.callable, ['expected'])
+    assert.deepEqual(result.forbiddenEntries.map(({ file, kind }) => ({ file, kind })), [
+      { file: 'surprise.js', kind: 'fifo' },
+    ])
   } finally { fx.close() }
 })
 
