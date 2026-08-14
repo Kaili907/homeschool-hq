@@ -115,6 +115,11 @@ export function createLearnerSecurityRouteMock(
                   : event.type === 'household-switch'
                     ? 'household-switch'
                     : String(event.source ?? 'provenance-loss')
+        if (typeof localStorage !== 'undefined') {
+          const key = 'test:learner-security-events'
+          const previous = JSON.parse(localStorage.getItem(key) ?? '[]') as string[]
+          localStorage.setItem(key, JSON.stringify([...previous, lifecycleType]))
+        }
         liveSession = null
         access = { status: 'locked', reason: String(event.type) }
         await onLifecycleEvent({ type: lifecycleType, occurredAt })

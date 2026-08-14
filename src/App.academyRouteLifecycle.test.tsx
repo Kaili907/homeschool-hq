@@ -566,4 +566,47 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
     expect(persisted.activeProfileId).toBeNull()
   })
+
+  it('locks once through the reviewed lifecycle, returns to the current learner PIN, and cannot restore on refresh', async () => {
+    pathname = '/academy'
+    await mountApp(seeded('p2'))
+
+    await act(async () => {
+      harness.academy!.dashboard!.onLock()
+      harness.academy!.dashboard!.onLock()
+    })
+    await settle()
+
+    expect(JSON.parse(localStorage.getItem('test:learner-security-events')!)).toEqual(['learner-lock'])
+    expect(harness.pin?.title).toBe('Hi, Riley!')
+    const locked = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(locked.activeProfileId).toBeNull()
+
+    await resetMountedApp()
+    pathname = '/academy'
+    await mountApp(locked)
+    expect(harness.academy).toBeNull()
+    expect(harness.picker).not.toBeNull()
+  })
+
+  it('switches once, settles at the chooser, and still requires the selected learner PIN', async () => {
+    pathname = '/academy'
+    await mountApp(seeded('p2'))
+
+    await act(async () => {
+      harness.academy!.dashboard!.onSwitchLearner()
+      harness.academy!.dashboard!.onSwitchLearner()
+    })
+    await settle()
+
+    expect(JSON.parse(localStorage.getItem('test:learner-security-events')!)).toEqual(['learner-switch-start'])
+    expect(harness.picker).not.toBeNull()
+    expect(harness.pin).toBeNull()
+    const switched = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(switched.activeProfileId).toBeNull()
+
+    await act(async () => harness.picker!.onPick('p3'))
+    expect(harness.pin?.title).toBe('Hi, Morgan!')
+    expect(harness.academy?.profile.id).toBe('p2')
+  })
 })

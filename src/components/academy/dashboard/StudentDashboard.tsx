@@ -35,6 +35,9 @@ export interface StudentDashboardTool {
 
 export interface StudentDashboardComposition {
   onSignOut: () => void
+  onLock: () => void
+  onSwitchLearner: () => void
+  learnerExitPending?: boolean
   mission?: {
     day: MissionDay | undefined
     launchableKinds: readonly AutoKind[]
@@ -583,8 +586,25 @@ export function StudentDashboard({
                 <span aria-hidden="true">★</span> {dashboard.rewards.stars} <span>Prize Shop</span>
               </button>
             )}
-            {hasAcademyCourses && <button onClick={() => onNavigate({ kind: 'schedule' })}>Year schedule</button>}
-            <button className="student-topbar__exit" onClick={dashboard?.onSignOut ?? onExit}>Sign out</button>
+            {hasAcademyCourses && <button type="button" onClick={() => onNavigate({ kind: 'schedule' })}>Year schedule</button>}
+            {dashboard && (
+              <>
+                <button type="button" disabled={dashboard.learnerExitPending} onClick={dashboard.onLock}>
+                  Lock
+                </button>
+                <button type="button" disabled={dashboard.learnerExitPending} onClick={dashboard.onSwitchLearner}>
+                  Switch learner
+                </button>
+              </>
+            )}
+            <button
+              type="button"
+              className="student-topbar__exit"
+              disabled={dashboard?.learnerExitPending}
+              onClick={dashboard?.onSignOut ?? onExit}
+            >
+              Sign out
+            </button>
           </nav>
         </header>
 

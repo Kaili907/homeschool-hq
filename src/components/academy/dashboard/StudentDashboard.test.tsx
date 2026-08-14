@@ -148,6 +148,8 @@ function legacyDashboard(
 ): StudentDashboardComposition {
   return {
     onSignOut: vi.fn(),
+    onLock: vi.fn(),
+    onSwitchLearner: vi.fn(),
     mission: {
       day: { items },
       launchableKinds: ['typing'],
@@ -708,18 +710,24 @@ describe('StudentDashboard', () => {
     }
   })
 
-  it('uses the existing sign-out, Prize Shop, and learning-tool callbacks', async () => {
+  it('exposes distinct learner security actions while preserving sign-out and other callbacks', async () => {
     const onSignOut = vi.fn()
+    const onLock = vi.fn()
+    const onSwitchLearner = vi.fn()
     const onOpenShop = vi.fn()
     const onOpenTool = vi.fn()
     const dashboard = legacyDashboard(undefined, {
       onSignOut,
+      onLock,
+      onSwitchLearner,
       rewards: { stars: 42, onOpenShop },
       tools: [{ id: 'reading', title: 'Reading', description: 'Read today', onOpen: onOpenTool }],
     })
     const mounted = await mountDashboard({ dashboard })
     try {
       for (const [label, callback] of [
+        ['Lock', onLock],
+        ['Switch learner', onSwitchLearner],
         ['Sign out', onSignOut],
         ['Prize Shop', onOpenShop],
         ['Read today', onOpenTool],
@@ -735,6 +743,25 @@ describe('StudentDashboard', () => {
     } finally {
       await act(async () => mounted.root.unmount())
     }
+  })
+
+  it('disables every authority-changing control while a learner exit is pending', () => {
+    const html = renderDashboard({
+      dashboard: legacyDashboard(undefined, { learnerExitPending: true }),
+    })
+    for (const label of ['Lock', 'Switch learner', 'Sign out']) {
+      expect(html).toMatch(new RegExp(`<button[^>]*disabled=""[^>]*>${label}</button>|<button[^>]*disabled=""[^>]*>\\s*${label}\\s*</button>`))
+    }
+  })
+
+  it('keeps dashboard security controls native, keyboard-operable, and mobile-sized', () => {
+    const html = renderDashboard({ dashboard: legacyDashboard() })
+    for (const label of ['Lock', 'Switch learner', 'Sign out']) {
+      expect(html).toMatch(new RegExp(`<button[^>]*type="button"[^>]*>\\s*${label}\\s*</button>`))
+    }
+    expect(dashboardStyles).toMatch(/\.student-topbar__nav button\s*\{[^}]*min-height:\s*44px;/)
+    const mobileRules = dashboardStyles.slice(dashboardStyles.indexOf('@media (max-width: 540px)'))
+    expect(mobileRules).toMatch(/\.student-topbar__nav\s*\{[^}]*grid-template-columns:\s*1fr 1fr;/)
   })
 
   it.each([

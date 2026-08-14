@@ -29,6 +29,7 @@
 .student-topbar__nav { display: flex; align-items: center; gap: 8px; }
 .student-topbar__nav button { min-height: 44px; border: 1px solid transparent; border-radius: 10px; padding: 0 13px; color: var(--dash-muted-strong); background: transparent; font-size: .88rem; font-weight: 700; cursor: pointer; }
 .student-topbar__nav button:hover { color: white; background: rgba(255,255,255,.05); }
+.student-topbar__nav button:disabled { opacity: .55; cursor: wait; }
 .student-topbar__nav .student-topbar__exit { border-color: var(--dash-border); background: rgba(255,255,255,.035); }
 .student-topbar__nav .student-topbar__reward { border-color: rgba(255,190,105,.28); color: #ffd18c; background: rgba(218,119,31,.1); }
 .student-topbar__reward span:last-child { color: var(--dash-muted-strong); }

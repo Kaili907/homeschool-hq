@@ -159,6 +159,7 @@ const Grade5MathPractice = lazy(() =>
 type Screen =
   | { kind: 'securityBoot' }
   | { kind: 'securityError'; message: string }
+  | { kind: 'learnerTransition'; action: 'lock' | 'switch' }
   | { kind: 'picker' }
   | { kind: 'kidPin'; profileId: string }
   | { kind: 'kidPinCreate'; profileId: string; firstEntry?: string }
@@ -218,6 +219,8 @@ export default function App() {
   const stateRef = useRef(state)
   stateRef.current = state
   const securityRef = useRef<LearnerSecurityApplication | null>(null)
+  const learnerExitRef = useRef<'lock' | 'switch' | null>(null)
+  const [learnerExitPending, setLearnerExitPending] = useState(false)
   const activityRef = useRef<LearnerActivityController | null>(null)
   const bootQueueRef = useRef<Promise<void>>(Promise.resolve())
   const [securityReady, setSecurityReady] = useState(false)
@@ -344,7 +347,7 @@ export default function App() {
           securityRef.current?.observeAuthorityLoss(reason)
           studySelectedProfileRef.current = null
           setState((current) => ({ ...current, activeProfileId: null }))
-          if (hadPublishedLearner) setScreen({ kind: 'picker' })
+          if (hadPublishedLearner && learnerExitRef.current === null) setScreen({ kind: 'picker' })
           await purgeVoiceCache().catch(() => undefined)
         }
         await cancelStudyForSecurityLifecycleEvent(event, {
@@ -648,6 +651,51 @@ export default function App() {
       }).catch(() => undefined)
     })()
   }
+  const endLearnerAuthority = (action: 'lock' | 'switch') => {
+    if (learnerExitRef.current !== null) return
+    const security = securityRef.current
+    const publishedProfileId = stateRef.current.activeProfileId
+    if (!security || !publishedProfileId || security.access.status !== 'active') return
+    const profileId = security.access.profileId
+    if (profileId !== publishedProfileId) return
+
+    learnerExitRef.current = action
+    setLearnerExitPending(true)
+    setScreen({ kind: 'learnerTransition', action })
+    leaveStudyEnginePath()
+    leaveAcademyPath()
+    leaveGrade5MathPracticePath()
+    studyReadinessClientRef.current?.invalidate()
+    studySelectedProfileRef.current = null
+    setParentStudyAuthorization(null)
+
+    void (async () => {
+      try {
+        if (action === 'lock') {
+          await security.end({ type: 'lock', occurredAt: new Date().toISOString() })
+          setScreen({ kind: 'kidPin', profileId })
+        } else {
+          // The reviewed switch transition requires a target before it can begin.
+          // The current profile is a non-authorizing placeholder; the settled
+          // callback opens the chooser, whose selection still requires a PIN.
+          await security.end(
+            { type: 'learner-switch', targetProfileId: profileId, occurredAt: new Date().toISOString() },
+            () => setScreen({ kind: 'picker' }),
+          )
+        }
+      } catch (cause: unknown) {
+        setScreen({
+          kind: 'securityError',
+          message: cause instanceof Error
+            ? cause.message
+            : 'Learner security cleanup could not be completed.',
+        })
+      } finally {
+        learnerExitRef.current = null
+        setLearnerExitPending(false)
+      }
+    })()
+  }
   // Begin a practice run and stamp the session start (MT-1 escalation window).
   const startPractice = (p: Profile) => {
     sessionStartRef.current = Date.now()
@@ -700,6 +748,9 @@ export default function App() {
   const dashboardComposition: StudentDashboardComposition | undefined = active
     ? {
         onSignOut: signOut,
+        onLock: () => endLearnerAuthority('lock'),
+        onSwitchLearner: () => endLearnerAuthority('switch'),
+        learnerExitPending,
         mission: {
           day: activeMissionDay,
           launchableKinds: launchableMissionKinds,
@@ -830,6 +881,16 @@ export default function App() {
           <h1 className="text-xl font-extrabold text-rose-700">Learner sign-in is locked</h1>
           <p className="mt-2 text-sm font-semibold text-slate-600">{screen.message}</p>
         </div>
+      </main>
+    )
+  }
+
+  if (screen.kind === 'learnerTransition') {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-slate-100 px-4">
+        <p role="status" aria-live="polite" className="rounded-2xl bg-white p-6 font-bold text-slate-700 shadow">
+          {screen.action === 'lock' ? 'Locking learner session…' : 'Preparing learner chooser…'}
+        </p>
       </main>
     )
   }
