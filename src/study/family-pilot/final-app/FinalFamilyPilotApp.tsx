@@ -7,14 +7,19 @@ import {
 import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
 import { FamilyPilotStudentLogin } from '../auth'
 import { exportFinalFamilyPilotBackup, downloadFinalFamilyPilotBackup, restoreFinalFamilyPilotBackup } from './backup'
-import { FamilyPilotHome } from '../home'
+import {
+  buildFamilyPilotStudentDashboardModel,
+  type FamilyPilotStudentDashboardModel,
+} from '../dashboard-adapter'
 import { fromStudentSelector, toStudentSelector } from '../integration/identity'
 import { FamilyPilotLessonPlayer } from '../lesson-player'
 import { FamilyPilotParentAssignPanel } from '../parent-assign'
 import { FamilyPreferences } from '../preferences'
 import { FamilyPilotRecoveryScreen } from '../recovery'
 import { buildStudentWeeklyReport, FamilyPilotProgressReport } from '../reports'
-import { buildDailySchedule, FamilyPilotDailySchedule } from '../schedule'
+import { buildDailySchedule } from '../schedule'
+import type { ScheduleItemV1 } from '../schedule'
+import { StudentDashboard } from '../student-dashboard'
 import {
   completeSetup,
   createStudent,
@@ -49,6 +54,7 @@ import {
   BrowserAssessmentRuntime,
   type FinalAssessmentAttemptV1,
 } from './assessment'
+import { toStudentDashboardPresentation } from './dashboardPresentation'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -128,7 +134,7 @@ function MountedFinalFamilyPilot({
   controller,
   onExit,
   refresh,
-  revision: _revision,
+  revision,
 }: {
   readonly controller: FinalFamilyPilotController
   readonly onExit: () => void
@@ -206,6 +212,33 @@ function MountedFinalFamilyPilot({
     )
   }
 
+  if (mode === 'student' && openStudentRef) {
+    const closeLearner = () => {
+      controller.selectStudent(null)
+      setParentAuthorized(false)
+      setMode('student')
+      refresh()
+    }
+    return (
+      <StudentSurface
+        controller={controller}
+        onOpen={setOpenAssignmentRef}
+        onLock={closeLearner}
+        onSwitchLearner={closeLearner}
+        onSignOut={() => { closeLearner(); onExit() }}
+        onOpenParentView={(view) => {
+          controller.selectStudent(null)
+          setParentAuthorized(false)
+          setParentView(view)
+          setMode('parent')
+          refresh()
+        }}
+        refresh={refresh}
+        revision={revision}
+      />
+    )
+  }
+
   return (
     <FinalShell onExit={onExit}>
       <div className="border-b border-slate-200 bg-white">
@@ -220,7 +253,16 @@ function MountedFinalFamilyPilot({
         </div>
       </div>
       {mode === 'student' ? (
-        <StudentSurface controller={controller} onOpen={setOpenAssignmentRef} refresh={refresh} />
+        <StudentSurface
+          controller={controller}
+          onOpen={setOpenAssignmentRef}
+          onLock={() => { controller.selectStudent(null); refresh() }}
+          onSwitchLearner={() => { controller.selectStudent(null); refresh() }}
+          onSignOut={() => { controller.selectStudent(null); refresh(); onExit() }}
+          onOpenParentView={(view) => { setParentAuthorized(false); setParentView(view); setMode('parent'); refresh() }}
+          refresh={refresh}
+          revision={revision}
+        />
       ) : !parentAuthorized ? (
         <ParentPinGate controller={controller} onAuthorized={() => setParentAuthorized(true)} />
       ) : (
@@ -313,10 +355,15 @@ function ParentPinGate({ controller, onAuthorized }: { readonly controller: Fina
   </main>
 }
 
-function StudentSurface({ controller, onOpen, refresh }: {
+function StudentSurface({ controller, onOpen, onLock, onSwitchLearner, onSignOut, onOpenParentView, refresh, revision }: {
   readonly controller: FinalFamilyPilotController
   readonly onOpen: (assignmentRef: string) => void
+  readonly onLock: () => void
+  readonly onSwitchLearner: () => void
+  readonly onSignOut: () => void
+  readonly onOpenParentView: (view: 'assign' | 'reports') => void
   readonly refresh: () => void
+  readonly revision: number
 }) {
   const app = controller.appSnapshot.state
   const active = app.activeStudentRef
@@ -334,55 +381,132 @@ function StudentSurface({ controller, onOpen, refresh }: {
       />
     )
   }
-  const student = students.find((item) => item.studentRef === active)
-  const record = controller.coreSnapshot.state.students.find((item) => item.studentRef === active)
-  if (!student || !record) return <p className="p-6" role="alert">Student state is unavailable.</p>
-  const assignments = record.assignments.filter((item) => item.state !== 'abandoned')
-  const assessmentAssignments = controller.assessmentAssignments(active)
-  const homeAssignments = assignments.map((item) => ({
-    assignmentRef: item.assignmentRef,
-    title: item.title,
-    subject: SUBJECT_LABEL[item.subject as AcademySubject] ?? item.subject,
-    status: item.state === 'planned' ? 'not-started' as const : item.state === 'completed' ? 'completed' as const : 'in-progress' as const,
-  })).concat(assessmentAssignments.map((item) => ({
-    assignmentRef: item.assignmentRef,
-    title: item.title,
-    subject: `${SUBJECT_LABEL[item.subject]} assessment`,
-    status: item.status === 'PLANNED' ? 'not-started' as const : item.status === 'CERTIFIED' ? 'completed' as const : 'in-progress' as const,
-  })))
-  const inProgress = homeAssignments.find((item) => item.status === 'in-progress') ?? null
-  const holds = controller.openSafetyHolds(active)
-  const schedule = buildDailySchedule({
-    studentRef: active,
-    date: new Date().toISOString().slice(0, 10),
-    items: assignments.map((item) => ({ kind: 'assignment' as const, assignmentRef: item.assignmentRef, lessonRef: item.lessonRef, title: item.title, state: item.state })),
-  })
   return (
-    <div>
-      <FamilyPilotHome
-        student={{ displayName: student.displayName, avatarInitial: student.displayName.charAt(0) }}
-        todayAssignments={homeAssignments}
-        inProgressAssignment={inProgress}
-        completedTodayCount={assignments.filter((item) => item.state === 'completed' && item.completedAt?.slice(0, 10) === new Date().toISOString().slice(0, 10)).length}
-        tutorAvailability={{ available: true, reason: 'Static curriculum help remains available if Tutor Core is offline.' }}
-        hold={holds.length ? { active: true, reason: 'A parent must clear the safety check-in for the held session.' } : null}
-        onStartAssignment={onOpen}
-        onResumeAssignment={onOpen}
-        onOpenTutor={() => inProgress && onOpen(inProgress.assignmentRef)}
-        onOpenAssignments={() => document.getElementById('family-pilot-student-schedule')?.scrollIntoView()}
-        onSwitchStudent={() => { controller.selectStudent(null); refresh() }}
-      />
-      <div id="family-pilot-student-schedule" className="mx-auto max-w-3xl px-4 pb-8">
-        <FamilyPilotDailySchedule studentRef={active} items={schedule} onStartItem={(ref) => {
-          const item = schedule.find((held) => held.scheduleItemRef === ref)
-          if (item?.assignmentRef) onOpen(item.assignmentRef)
-        }} />
-        {assessmentAssignments.length ? <section className="mt-5 rounded-2xl border bg-white p-5" data-testid="family-pilot-assessment-schedule">
-          <h2 className="text-xl font-extrabold">Assessment schedule</h2>
-          <ul className="mt-3 space-y-2">{assessmentAssignments.map((assessment) => <li key={assessment.assignmentRef} className="flex items-center justify-between gap-3 rounded-lg bg-slate-100 p-3"><span><strong>{assessment.title}</strong><br /><span className="text-sm">{assessment.status.replaceAll('_', ' ')}</span></span><button type="button" className="rounded-lg bg-cyan-700 px-3 py-2 font-bold text-white" onClick={() => onOpen(assessment.assignmentRef)}>{assessment.status === 'PLANNED' ? 'Start assessment' : 'Open assessment'}</button></li>)}</ul>
-        </section> : null}
-      </div>
-    </div>
+    <ActiveStudentDashboard
+      key={active}
+      activeStudentRef={active}
+      controller={controller}
+      onOpen={onOpen}
+      onLock={onLock}
+      onSwitchLearner={onSwitchLearner}
+      onSignOut={onSignOut}
+      onOpenParentView={onOpenParentView}
+      revision={revision}
+    />
+  )
+}
+
+function currentSchedule(
+  studentRef: string,
+  today: string,
+  controller: FinalFamilyPilotController,
+): readonly ScheduleItemV1[] {
+  const assignments = controller.coreSnapshot.state.students
+    .find((item) => item.studentRef === studentRef)?.assignments ?? []
+  const lessonItems = buildDailySchedule({
+    studentRef,
+    date: today,
+    items: assignments.map((item) => ({
+      kind: 'assignment' as const,
+      assignmentRef: item.assignmentRef,
+      lessonRef: item.lessonRef,
+      title: item.title,
+      state: item.state,
+    })),
+  })
+  const assessmentItems: readonly ScheduleItemV1[] = controller.assessmentAssignments(studentRef).map((item, index) => Object.freeze({
+    scheduleItemRef: `schedule|${studentRef}|${today}|${item.assignmentRef}`,
+    studentRef,
+    date: today,
+    title: item.title,
+    kind: 'assignment' as const,
+    order: lessonItems.length + index,
+    status: item.status === 'CERTIFIED' ? 'completed' as const : item.status === 'PLANNED' ? 'pending' as const : 'in-progress' as const,
+    assignmentRef: item.assignmentRef,
+    lessonRef: null,
+  }))
+  return Object.freeze([...lessonItems, ...assessmentItems])
+}
+
+function ActiveStudentDashboard({ controller, activeStudentRef, onOpen, onLock, onSwitchLearner, onSignOut, onOpenParentView, revision }: {
+  readonly controller: FinalFamilyPilotController
+  readonly activeStudentRef: string
+  readonly onOpen: (assignmentRef: string) => void
+  readonly onLock: () => void
+  readonly onSwitchLearner: () => void
+  readonly onSignOut: () => void
+  readonly onOpenParentView: (view: 'assign' | 'reports') => void
+  readonly revision: number
+}) {
+  const [model, setModel] = useState<FamilyPilotStudentDashboardModel | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let live = true
+    const app = controller.appSnapshot
+    const today = new Date().toISOString().slice(0, 10)
+    void buildFamilyPilotStudentDashboardModel({
+      today,
+      activeStudentRef,
+      setup: app.state.setup,
+      coreState: controller.coreSnapshot.state,
+      schedule: currentSchedule(activeStudentRef, today, controller),
+      assessments: app.state.assessmentAssignments,
+      attestations: app.state.attestations,
+      sourceAttachments: app.state.sourceAttachments,
+      safetyHolds: app.state.safety.holds,
+      safetyRecovery: app.safetyRecovery,
+      appStoreStatus: app.status,
+      catalog: controller.catalog,
+    }).then((next) => {
+      if (!live) return
+      setModel(next)
+      setError(next ? null : 'The authorized learner dashboard is unavailable.')
+    }).catch((cause: unknown) => {
+      if (live) setError(messageOf(cause))
+    })
+    return () => { live = false }
+  }, [activeStudentRef, controller, revision])
+
+  if (error) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="alert">{error}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onLock}>Lock</button></main>
+  if (!model) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="status">Opening your dashboard…</p></main>
+
+  const presentation = toStudentDashboardPresentation(model)
+  const commandForWork = (assignmentRef: string) => model.today.items
+    .map((item) => item.action)
+    .find((action) => action && (action.type === 'START' || action.type === 'CONTINUE') && action.studentRef === activeStudentRef && action.assignmentRef === assignmentRef)
+  const openWork = (assignmentRef: string) => {
+    const command = commandForWork(assignmentRef)
+    if (command && (command.type === 'START' || command.type === 'CONTINUE')) onOpen(command.assignmentRef)
+  }
+  const openCourse = (courseRef: string) => {
+    const command = model.courses.find((course) => course.action?.type === 'OPEN_COURSE' && course.action.studentRef === activeStudentRef && course.action.courseRef === courseRef)?.action
+    if (!command) return
+    document.getElementById('family-dashboard-today-heading')?.scrollIntoView({ block: 'start' })
+  }
+  const openSchedule = () => document.getElementById('family-dashboard-today-heading')?.scrollIntoView({ block: 'start' })
+  const openTool = (toolRef: string) => {
+    const command = model.tools.find((tool) => tool.action.type === toolRef && tool.action.studentRef === activeStudentRef)?.action
+    if (command?.type === 'OPEN_REPORTS') onOpenParentView('reports')
+    else if (command?.type === 'OPEN_ASSIGNMENTS') onOpenParentView('assign')
+    else if (command?.type === 'OPEN_SCHEDULE') openSchedule()
+  }
+  const signOut = () => {
+    if (model.actions.signOut.studentRef === activeStudentRef) onSignOut()
+  }
+
+  return (
+    <StudentDashboard
+      model={presentation}
+      jarvis={{ mode: 'visual-only', status: 'Jarvis is visual only. Tutor V2 is not connected in this release.' }}
+      onOpenWork={openWork}
+      onOpenCourse={openCourse}
+      onOpenSchedule={openSchedule}
+      onOpenTool={openTool}
+      onLock={onLock}
+      onSwitchLearner={onSwitchLearner}
+      onSignOut={signOut}
+    />
   )
 }
 

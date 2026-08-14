@@ -20,8 +20,10 @@ function firstName(displayName: string): string {
   return displayName.trim().split(/\s+/)[0] || 'Learner'
 }
 
-function progressPercent(course: StudentDashboardCourse): number {
-  if (course.total <= 0) return 0
+function progressPercent(course: StudentDashboardCourse): number | null {
+  if (course.completionPercent === null) return null
+  if (typeof course.completionPercent === 'number') return Math.min(100, Math.max(0, course.completionPercent))
+  if (course.total <= 0) return null
   return Math.round((Math.min(Math.max(course.completed, 0), course.total) / course.total) * 100)
 }
 
@@ -43,7 +45,7 @@ function TodayItem({ item, onOpenWork }: { readonly item: StudentDashboardWorkIt
   return (
     <li className="family-dashboard__timeline-item">
       {item.actionable ? (
-        <button type="button" onClick={() => onOpenWork(item.workRef)} aria-label={`${item.title}, ${item.context}, ${item.stateLabel}`}>
+        <button type="button" onClick={() => onOpenWork(item.workRef)} aria-label={item.actionLabel ? `${item.actionLabel} ${item.title}` : `${item.title}, ${item.context}, ${item.stateLabel}`}>
           {contents}
         </button>
       ) : <div>{contents}</div>}
@@ -53,17 +55,29 @@ function TodayItem({ item, onOpenWork }: { readonly item: StudentDashboardWorkIt
 
 function CourseCard({ course, onOpenCourse }: { readonly course: StudentDashboardCourse; readonly onOpenCourse: StudentDashboardProps['onOpenCourse'] }) {
   const percent = progressPercent(course)
-  return (
-    <li>
-      <button type="button" onClick={() => onOpenCourse(course.courseRef)} aria-label={`Open ${course.title}, ${course.context}, ${percent}% complete`}>
-        <span className="family-dashboard__course-topline"><span>Course</span><span>{percent}% complete</span></span>
-        <strong>{course.title}</strong>
-        <span className="family-dashboard__course-context">{course.context}</span>
+  const progressLabel = course.progressLabel ?? (percent === null
+    ? 'No assigned work yet'
+    : `${course.completed} of ${course.total} lessons complete`)
+  const contents = (
+    <>
+      <span className="family-dashboard__course-topline"><span>Course</span><span>{percent === null ? 'Progress starts with assigned work' : `${percent}% complete`}</span></span>
+      <strong>{course.title}</strong>
+      <span className="family-dashboard__course-context">{course.context}</span>
+      {percent === null ? null : (
         <span className="family-dashboard__course-meter" role="progressbar" aria-label={`${course.title} progress`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent}>
           <span style={{ width: `${percent}%`, minWidth: percent === 0 ? 0 : undefined }} />
         </span>
-        <span className="family-dashboard__course-progress">{course.completed} of {course.total} lessons complete</span>
-      </button>
+      )}
+      <span className="family-dashboard__course-progress">{progressLabel}</span>
+    </>
+  )
+  return (
+    <li data-dashboard-course-ref={course.courseRef}>
+      {course.actionable === false ? <div className="family-dashboard__course-card family-dashboard__course-card--unavailable">{contents}</div> : (
+        <button type="button" onClick={() => onOpenCourse(course.courseRef)} aria-label={`Open ${course.title}, ${course.context}, ${percent === null ? progressLabel : `${percent}% complete`}`}>
+          {contents}
+        </button>
+      )}
     </li>
   )
 }
@@ -75,6 +89,8 @@ export function StudentDashboard({
   onOpenCourse,
   onOpenSchedule,
   onOpenTool,
+  onLock,
+  onSwitchLearner,
   onSignOut,
 }: StudentDashboardProps) {
   const mission = model.mission
@@ -97,6 +113,8 @@ export function StudentDashboard({
           </div>
           <nav className="family-dashboard__nav" aria-label="Student dashboard navigation">
             <button type="button" onClick={onOpenSchedule}>Schedule</button>
+            {onLock ? <button type="button" onClick={onLock}>Lock</button> : null}
+            {onSwitchLearner ? <button type="button" onClick={onSwitchLearner}>Switch learner</button> : null}
             <button type="button" className="family-dashboard__sign-out" onClick={onSignOut}>Sign out</button>
           </nav>
         </header>

@@ -142,10 +142,13 @@
 .family-dashboard__secondary-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.55fr); gap: 18px; margin-top: 30px; }
 .family-dashboard__course-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 16px 0 0; padding: 0; list-style: none; }
 .family-dashboard__course-grid button { display: flex; width: 100%; min-height: 166px; flex-direction: column; border: 1px solid var(--family-dashboard-border); border-radius: 15px; padding: 17px; color: var(--family-dashboard-text); background: linear-gradient(145deg, rgba(26, 39, 58, 0.85), rgba(15, 23, 35, 0.9)); text-align: left; cursor: pointer; }
+.family-dashboard__course-card { display: flex; width: 100%; min-height: 166px; flex-direction: column; border: 1px solid var(--family-dashboard-border); border-radius: 15px; padding: 17px; color: var(--family-dashboard-text); background: linear-gradient(145deg, rgba(26, 39, 58, 0.85), rgba(15, 23, 35, 0.9)); text-align: left; }
+.family-dashboard__course-card--unavailable { opacity: 0.76; }
 .family-dashboard__course-grid button:hover { border-color: rgba(255, 185, 104, 0.42); transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18); }
 .family-dashboard__course-topline { display: flex; justify-content: space-between; gap: 8px; color: var(--family-dashboard-muted); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
 .family-dashboard__course-topline span:last-child { color: #efc58d; }
 .family-dashboard__course-grid strong { margin: 15px 0 2px; font-size: 1rem; line-height: 1.22; }
+.family-dashboard__course-card strong { margin: 15px 0 2px; font-size: 1rem; line-height: 1.22; }
 .family-dashboard__course-context { margin-bottom: auto; color: var(--family-dashboard-muted); font-size: 0.82rem; font-weight: 600; }
 .family-dashboard__course-meter { display: block; height: 5px; overflow: hidden; border-radius: 999px; background: #273448; }
 .family-dashboard__course-meter > span { display: block; height: 100%; min-width: 2px; border-radius: inherit; background: linear-gradient(90deg, #e77422, #ffbf66); }

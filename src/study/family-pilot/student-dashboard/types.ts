@@ -35,6 +35,8 @@ export interface StudentDashboardWorkItem {
   readonly state: StudentDashboardItemState
   readonly stateLabel: string
   readonly actionable?: boolean
+  /** Host-supplied action vocabulary; presentation never infers start/resume authority. */
+  readonly actionLabel?: string
 }
 
 export interface StudentDashboardCourse {
@@ -43,6 +45,10 @@ export interface StudentDashboardCourse {
   readonly context: string
   readonly completed: number
   readonly total: number
+  /** Null means there is no truthful denominator yet. */
+  readonly completionPercent?: number | null
+  readonly progressLabel?: string
+  readonly actionable?: boolean
 }
 
 export interface StudentDashboardUpcomingItem {
@@ -92,5 +98,7 @@ export interface StudentDashboardProps {
   readonly onOpenCourse: (courseRef: string) => void
   readonly onOpenSchedule: () => void
   readonly onOpenTool: (toolRef: string) => void
+  readonly onLock?: () => void
+  readonly onSwitchLearner?: () => void
   readonly onSignOut: () => void
 }

@@ -83,14 +83,21 @@ async function setupFamily(page: Page, students: Array<{ name: string; grade: st
 }
 
 async function parentStudent(page: Page, name: string) {
-  await page.getByRole('button', { name: 'Parent', exact: true }).click()
+  const parent = page.getByRole('button', { name: 'Parent', exact: true })
+  const assignments = page.getByRole('button', { name: /^All assignments/ })
+  const parentStudentSelect = page.getByLabel('Parent student')
+  if (!await parentStudentSelect.isVisible().catch(() => false)) {
+    await expect(parent.or(assignments)).toBeVisible()
+    if (await parent.isVisible()) await parent.click()
+    else await assignments.click()
+  }
   const unlock = page.getByLabel('Unlock parent PIN')
   if (await unlock.isVisible().catch(() => false)) {
     await unlock.fill(PARENT_PIN)
     await page.getByRole('button', { name: 'Unlock Parent Hub' }).click()
   }
-  await page.getByLabel('Parent student').selectOption({ label: name })
-  await expect(page.getByLabel('Parent student').locator('option:checked')).toHaveText(name)
+  await parentStudentSelect.selectOption({ label: name })
+  await expect(parentStudentSelect.locator('option:checked')).toHaveText(name)
 }
 
 async function assign(page: Page, name: string, lesson: Lesson) {
@@ -104,14 +111,21 @@ async function assign(page: Page, name: string, lesson: Lesson) {
 }
 
 async function openStudent(page: Page, name: string, pin?: string) {
-  await page.getByRole('button', { name: 'Student', exact: true }).click()
-  await page.getByRole('listitem', { name: `Continue as ${name}` }).click()
+  const learner = page.getByRole('listitem', { name: `Continue as ${name}` })
+  const studentMode = page.getByRole('button', { name: 'Student', exact: true })
+  const switchLearner = page.getByRole('button', { name: 'Switch learner', exact: true })
+  if (!await learner.isVisible().catch(() => false)) {
+    await expect(studentMode.or(switchLearner)).toBeVisible()
+    if (await studentMode.isVisible()) await studentMode.click()
+    else await switchLearner.click()
+  }
+  await learner.click()
   if (pin) {
     for (const digit of pin) await page.getByRole('button', { name: `digit ${digit}` }).click()
   } else {
     await page.getByRole('button', { name: 'Continue', exact: true }).click()
   }
-  await expect(page.getByRole('heading', { name: `Hi, ${name}` })).toBeVisible()
+  await expect(page.getByRole('heading', { name: `Hello, ${name.trim().split(/\s+/)[0]}` })).toBeVisible()
 }
 
 async function startFromHome(page: Page, lesson: Lesson) {
@@ -119,7 +133,7 @@ async function startFromHome(page: Page, lesson: Lesson) {
 }
 
 async function resumeFromHome(page: Page, lesson: Lesson) {
-  await page.getByRole('button', { name: `Resume ${lesson.title}` }).click()
+  await page.getByRole('button', { name: `Continue ${lesson.title}` }).click()
 }
 
 async function continueStep(page: Page) {
@@ -256,9 +270,15 @@ test('complete family workflow survives a real browser-process reopen and stays 
     for (const digit of '0000') await page.getByRole('button', { name: `digit ${digit}` }).click()
     await expect(page.getByRole('alert')).toContainText('That PIN is not right')
     for (const digit of '1357') await page.getByRole('button', { name: `digit ${digit}` }).click()
-    await expect(page.getByRole('heading', { name: 'Hi, Avery Synthetic' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Hello, Avery' })).toBeVisible()
     await expect(page.getByText(LESSON.a.title, { exact: true }).first()).toBeVisible()
     await expect(page.getByText(LESSON.b.title, { exact: true })).toHaveCount(0)
+    await page.getByRole('button', { name: 'Lock' }).click()
+    await expect(page.getByRole('heading', { name: 'Who’s studying?' })).toBeVisible()
+    await expect(page.getByText(LESSON.a.title, { exact: true })).toHaveCount(0)
+    await page.getByRole('listitem', { name: 'Continue as Avery Synthetic' }).click()
+    for (const digit of '1357') await page.getByRole('button', { name: `digit ${digit}` }).click()
+    await expect(page.getByRole('heading', { name: 'Hello, Avery' })).toBeVisible()
     await startFromHome(page, LESSON.a)
     await expect(page.locator(`[data-material-ref]`)).toContainText(LESSON.a.title)
     await expect(page.locator(`[data-material-ref]`)).not.toContainText(/answer key|teacher guide|scoring guide/i)
@@ -270,7 +290,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await continueStep(page)
     await expect(page.getByText('Step 3 of 3', { exact: true })).toBeVisible()
     await page.getByRole('button', { name: 'Save and exit' }).click()
-    await expect(page.getByRole('heading', { name: 'Hi, Avery Synthetic' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Hello, Avery' })).toBeVisible()
 
     const beforeReopenRecords = await idbRecords(page)
     expect(JSON.stringify(beforeReopenRecords)).not.toMatch(/1357|8642|"tutorTranscript"\s*:|rawTutorConversation/i)
@@ -300,10 +320,10 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await page.getByRole('button', { name: 'I need an adult check-in' }).click()
     await expect(page.getByText('A parent check-in is now required')).toBeVisible()
     await page.getByRole('button', { name: 'Save and exit' }).click()
-    await expect(page.getByRole('heading', { name: 'Study is on hold' })).toBeVisible()
-    await expect(page.getByRole('button', { name: `Resume ${LESSON.a.title}` })).toBeDisabled()
+    await expect(page.getByText('This work is paused until a grown-up clears the safety check.', { exact: true }).first()).toBeVisible()
+    await expect(page.getByRole('button', { name: `Continue ${LESSON.a.title}` })).toHaveCount(0)
 
-    await page.getByRole('button', { name: 'Switch student' }).click()
+    await page.getByRole('button', { name: 'Switch learner' }).click()
     await page.getByRole('listitem', { name: 'Continue as Blake Synthetic' }).click()
     await page.getByRole('button', { name: 'Continue', exact: true }).click()
     await expect(page.getByText(LESSON.a.title, { exact: true })).toHaveCount(0)
@@ -316,7 +336,6 @@ test('complete family workflow survives a real browser-process reopen and stays 
     expect(responseDocuments(siblingRecords, bRef).length).toBeGreaterThan(0)
     expect(responseDocuments(siblingRecords, cRef)).toEqual([])
 
-    await page.getByRole('button', { name: 'Parent', exact: true }).click()
     await parentStudent(page, 'Avery Synthetic')
     await expect(page.getByRole('heading', { name: 'Safety check-in' })).toBeVisible()
     await page.getByRole('button', { name: 'Parent checked in — clear hold' }).click()
@@ -334,7 +353,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await finishThreeStepLesson(page)
     await expect(page.getByRole('heading', { name: 'Work finished — parent sign-off pending' })).toBeVisible()
     await page.reload()
-    await page.getByRole('button', { name: 'Parent', exact: true }).click()
+    await page.getByRole('button', { name: /^All assignments/ }).click()
     await page.getByLabel('Unlock parent PIN').fill('0000')
     await page.getByRole('button', { name: 'Unlock Parent Hub' }).click()
     await expect(page.getByRole('alert')).toContainText('authorization failed')
@@ -349,11 +368,8 @@ test('complete family workflow survives a real browser-process reopen and stays 
 
     await assign(page, 'Avery Synthetic', LESSON.dynamic)
     await openStudent(page, 'Avery Synthetic', '1357')
-    await startFromHome(page, LESSON.dynamic)
-    await expect(page.getByRole('heading', { name: 'Lesson not ready' })).toBeVisible()
-    await expect(page.getByRole('alert')).toContainText('source')
-    await page.getByRole('button', { name: 'Back to Home' }).click()
-    await page.getByRole('button', { name: 'Parent', exact: true }).click()
+    await expect(page.getByText('A grown-up needs to attach today’s approved source before this can open.', { exact: true }).first()).toBeVisible()
+    await expect(page.getByRole('button', { name: `Start ${LESSON.dynamic.title}` })).toHaveCount(0)
     await parentStudent(page, 'Avery Synthetic')
     await page.getByLabel('Complete source metadata JSON').fill(JSON.stringify([{ sourceTitle: 'Trivial title-only record' }]))
     await page.getByLabel(/I am an authorized adult/).check()
@@ -371,7 +387,6 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await continueStep(page)
     await page.getByRole('button', { name: 'Save and exit' }).click()
 
-    await page.getByRole('button', { name: 'Parent', exact: true }).click()
     await parentStudent(page, 'Avery Synthetic')
     await page.getByRole('button', { name: 'Reports' }).click()
     await expect(page.getByRole('heading', { name: 'Subject and grade progress' })).toBeVisible()
@@ -450,6 +465,17 @@ test('complete family workflow survives a real browser-process reopen and stays 
   }
 })
 
+test('dashboard sign out clears learner custody before leaving Family Pilot', async ({ page }) => {
+  await setupFamily(page, [{ name: 'Sign Out Student', grade: '5' }])
+  await openStudent(page, 'Sign Out Student')
+  await page.getByRole('button', { name: 'Sign out' }).click()
+  await expect.poll(async () => (await supportState(page)).app.activeStudentRef).toBeNull()
+  await expect(page).not.toHaveURL(/\/family-pilot(?:\/|$)/)
+  await page.goto(APP_URL)
+  await expect(page.getByRole('heading', { name: 'Who’s studying?' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Hello, Sign' })).toHaveCount(0)
+})
+
 test('all 90 grade-subject cells load in Chromium and every subject launches lesson and assessment UI', async ({ page }) => {
   await page.goto(APP_URL)
   const proof = await page.evaluate(async () => {
@@ -521,7 +547,7 @@ test('all 90 grade-subject cells load in Chromium and every subject launches les
     await expect(material).toBeVisible()
     await expect(material).toContainText(requiredVisible[cell.subject])
     await page.getByRole('button', { name: 'Save and exit' }).click()
-    await expect(page.getByRole('heading', { name: 'Hi, Matrix Student' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Hello, Matrix' })).toBeVisible()
   }
 })
 

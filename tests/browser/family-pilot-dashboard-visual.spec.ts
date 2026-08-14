@@ -87,6 +87,12 @@ for (const viewport of [
     expect(core!.x).toBeGreaterThanOrEqual(0)
     expect(core!.x + core!.width).toBeLessThanOrEqual(viewport.width)
     await expect(page.locator('#family-dashboard-mission')).toBeVisible()
-    await expect(page).toHaveScreenshot(`family-dashboard-${viewport.name}.png`, { fullPage: true, animations: 'disabled' })
+    await expect(page).toHaveScreenshot(`family-dashboard-${viewport.name}.png`, {
+      fullPage: true,
+      animations: 'disabled',
+      // Font antialiasing can vary by a handful of edge pixels across otherwise
+      // identical Darwin Chromium captures; layout and clipping are asserted above.
+      maxDiffPixels: 10,
+    })
   })
 }
