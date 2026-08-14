@@ -159,4 +159,32 @@ describe('BrowserLearnerResponseStore IndexedDB authority', () => {
       learnerResponseDocumentKey(ADA), learnerResponseDocumentKey(BEA), learnerResponseDocumentKey(adaSecondAttempt),
     ]).size).toBe(3)
   })
+
+  it('commits one trusted result atomically, deduplicates it, and rejects a stale result', async () => {
+    const fake = createFakeIndexedDb()
+    const store = new BrowserLearnerResponseStore({ factory: fake.factory, legacyStorage: legacyStorage(new Map()) })
+    const pending = response(ADA, 'item:trusted', 'first response')
+    const assessed: LearnerResponseRecord = Object.freeze({
+      ...pending,
+      status: 'ASSESSED',
+      assessment: Object.freeze({
+        assessmentRef: 'receipt:trusted:1',
+        assessorRef: 'trusted:production-item:r1',
+        assessedAt: '2026-08-13T15:01:00.000Z',
+        decision: 'CORRECT',
+      }),
+    })
+    await store.save(pending)
+    await expect(store.commitAssessment(pending, assessed)).resolves.toMatchObject({ status: 'accepted' })
+    await expect(store.commitAssessment(pending, assessed)).resolves.toMatchObject({ status: 'duplicate' })
+
+    const newer = response(ADA, 'item:trusted', 'newer response', '2026-08-13T15:02:00.000Z')
+    await store.save(newer)
+    await expect(store.commitAssessment(pending, assessed)).resolves.toMatchObject({
+      status: 'stale', record: { response: { text: 'newer response' }, status: 'PENDING_ASSESSMENT' },
+    })
+    expect(await store.list(ADA)).toMatchObject([{
+      response: { text: 'newer response' }, status: 'PENDING_ASSESSMENT', assessment: null,
+    }])
+  })
 })
