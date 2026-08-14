@@ -32,6 +32,7 @@ import {
 } from "../../../core/v2/providers/ports/index.js";
 import {
   TUTOR_V2_BRIDGE_VERSION,
+  authorizeReviewedProviderContext,
   createInMemoryReviewedTutorContentAuthority,
   orchestrateTutorV2Bridge,
   reviewedTutorContentDigest,
@@ -42,6 +43,7 @@ import {
   type TutorV2BridgeInvocation,
   type TutorV2BridgeResult,
 } from "../../bridges/tutor-v2/index.js";
+import { minimizeProviderContext } from "../../tutor-v2/privacy/index.js";
 
 const NOW = Date.parse("2026-08-13T20:01:00.000Z");
 const ITEM_DIGEST = "sha256:967915d7999db7ed7c588118bbfc964674b2941e6909c816b743f6a588231ffb" as const;
@@ -657,6 +659,99 @@ function assertFallback(result: TutorV2BridgeResult, reason?: string): asserts r
   assert.equal(result.studyMutationAllowed, false);
 }
 
+function exactApprovedDecision(): unknown {
+  return { status: "approved", approvalRef: "approval:authority-decision" };
+}
+
+function exactRejectedDecision(): unknown {
+  return { status: "rejected", code: "CONTENT_NOT_APPROVED" };
+}
+
+function authorityReturning(
+  decision: () => unknown | Promise<unknown>,
+): ReviewedTutorContentAuthorityPort {
+  return { review: decision };
+}
+
+function authorityTargeting(
+  purpose: ReviewedTutorContentApprovalRequest["purpose"],
+  decision: () => unknown,
+): ReviewedTutorContentAuthorityPort {
+  return {
+    review(request) {
+      return request.purpose === purpose ? decision() : exactApprovedDecision();
+    },
+  };
+}
+
+function getterApproval(options: {
+  readonly status?: boolean;
+  readonly approvalRef?: boolean;
+  readonly onGet?: () => void;
+  readonly throwOnGet?: boolean;
+}): object {
+  const candidate: Record<string, unknown> = {};
+  const getter = (value: string) => () => {
+    options.onGet?.();
+    if (options.throwOnGet === true) throw new Error("authority getter must not run");
+    return value;
+  };
+  Object.defineProperty(candidate, "status", options.status === true
+    ? { enumerable: true, configurable: true, get: getter("approved") }
+    : { enumerable: true, configurable: true, writable: true, value: "approved" });
+  Object.defineProperty(candidate, "approvalRef", options.approvalRef === true
+    ? { enumerable: true, configurable: true, get: getter("approval:getter") }
+    : { enumerable: true, configurable: true, writable: true, value: "approval:getter" });
+  return candidate;
+}
+
+function customPrototypeApproval(): object {
+  return Object.assign(Object.create({ authorityKind: "custom" }) as object, {
+    status: "approved",
+    approvalRef: "approval:custom-prototype",
+  });
+}
+
+async function firstProviderInputPrivacyDecision(
+  authority: ReviewedTutorContentAuthorityPort,
+) {
+  const invocation = invocationFixture();
+  const request = requestOf(invocation);
+  const minimized = minimizeProviderContext({
+    studyAuthorityContext: request.studyAuthorityContext,
+    disclosurePolicy: invocation.disclosurePolicy,
+  });
+  assert.equal(minimized.status, "accepted");
+  if (minimized.status !== "accepted") throw new Error("fixture minimization failed");
+  return authorizeReviewedProviderContext(
+    minimized.value,
+    invocation.memoryAccess,
+    authority,
+  );
+}
+
+async function assertAuthorityFailureDecision(decision: () => unknown): Promise<void> {
+  const result = await firstProviderInputPrivacyDecision(authorityReturning(decision));
+  assert.deepEqual(result, {
+    status: "rejected",
+    code: "APPROVAL_AUTHORITY_FAILURE",
+    purpose: "provider-input-learner-safe-item",
+    sourceRef: "item:fraction-parts",
+    contentDigest: ITEM_DIGEST,
+    actionKind: null,
+  });
+}
+
+function assertNoNovelContentStored(
+  h: Harness,
+  result: TutorV2BridgeResult,
+  content: string,
+): void {
+  assert.equal(JSON.stringify(result).includes(content), false);
+  assert.equal(JSON.stringify(h.memory.read(h.input.memoryAccess)).includes(content), false);
+  assert.equal(JSON.stringify([...h.ledger.entries]).includes(content), false);
+}
+
 for (const kind of TUTOR_ACTION_KINDS) {
   test(`valid action ${kind} returns a non-authoritative Study proposal`, async () => {
     const h = harness({ steps: [successResult(proposalFixture(kind))] });
@@ -1214,6 +1309,241 @@ test("raw learner free-form attempt disclosure is disabled for Wave 1", async ()
   assertFallback(result, "POLICY_REJECTION");
   assert.equal(h.provider.callCount, 0);
   assert.equal(JSON.stringify(result).includes(raw), false);
+});
+
+test("raw approval status getter fails closed without invocation", async () => {
+  let getterCalls = 0;
+  await assertAuthorityFailureDecision(() => getterApproval({
+    status: true,
+    onGet: () => { getterCalls += 1; },
+  }));
+  assert.equal(getterCalls, 0);
+});
+
+test("raw approvalRef getter fails closed without invocation", async () => {
+  let getterCalls = 0;
+  await assertAuthorityFailureDecision(() => getterApproval({
+    approvalRef: true,
+    onGet: () => { getterCalls += 1; },
+  }));
+  assert.equal(getterCalls, 0);
+});
+
+test("raw status and approvalRef getters fail closed without invocation", async () => {
+  let getterCalls = 0;
+  await assertAuthorityFailureDecision(() => getterApproval({
+    status: true,
+    approvalRef: true,
+    onGet: () => { getterCalls += 1; },
+  }));
+  assert.equal(getterCalls, 0);
+});
+
+test("throwing approval getter fails closed and is never invoked", async () => {
+  let getterCalls = 0;
+  const h = harness({
+    reviewedContent: authorityReturning(() => getterApproval({
+      status: true,
+      onGet: () => { getterCalls += 1; },
+      throwOnGet: true,
+    })),
+  });
+  const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+  assertFallback(result, "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+  assert.equal(getterCalls, 0);
+});
+
+test("custom-prototype approval fails closed", async () => {
+  await assertAuthorityFailureDecision(customPrototypeApproval);
+});
+
+test("class-instance approval fails closed", async () => {
+  class ApprovalDecision {
+    readonly status = "approved";
+    readonly approvalRef = "approval:class-instance";
+  }
+  await assertAuthorityFailureDecision(() => new ApprovalDecision());
+});
+
+test("null-prototype approval fails closed", async () => {
+  await assertAuthorityFailureDecision(() => Object.assign(Object.create(null) as object, {
+    status: "approved",
+    approvalRef: "approval:null-prototype",
+  }));
+});
+
+test("inherited approval fields fail closed", async () => {
+  await assertAuthorityFailureDecision(() => Object.create({
+    status: "approved",
+    approvalRef: "approval:inherited",
+  }) as object);
+});
+
+test("custom prototype supplying inherited approved state fails closed", async () => {
+  const prototype = { status: "approved", approvalRef: "approval:inherited-state" };
+  await assertAuthorityFailureDecision(() => Object.assign(Object.create(prototype) as object, {
+    localAuthorityMarker: "not-an-approval",
+  }));
+});
+
+test("non-enumerable extra key on approval fails closed", async () => {
+  await assertAuthorityFailureDecision(() => {
+    const decision = exactApprovedDecision() as object;
+    Object.defineProperty(decision, "hidden", { value: "authority-private" });
+    return decision;
+  });
+});
+
+test("symbol key on approval fails closed", async () => {
+  await assertAuthorityFailureDecision(() => Object.assign(
+    exactApprovedDecision() as object,
+    { [Symbol("hidden-authority")]: true },
+  ));
+});
+
+test("non-enumerable approval metadata fails closed", async () => {
+  await assertAuthorityFailureDecision(() => {
+    const decision = exactApprovedDecision() as object;
+    Object.defineProperty(decision, "approvalMetadata", {
+      value: { source: "unvalidated" },
+      enumerable: false,
+    });
+    return decision;
+  });
+});
+
+test("hidden extra key on rejection is an authority failure", async () => {
+  const decision = exactRejectedDecision() as object;
+  Object.defineProperty(decision, "hidden", { value: "unvalidated" });
+  await assertAuthorityFailureDecision(() => decision);
+});
+
+for (const [name, malformed] of [
+  ["null", null],
+  ["undefined", undefined],
+  ["string", "approved"],
+  ["number", 1],
+  ["boolean", true],
+  ["function", () => exactApprovedDecision()],
+  ["array", ["approved"]],
+  ["date", new Date(0)],
+  ["map", new Map([["status", "approved"]])],
+  ["set", new Set(["approved"])],
+  ["boxed primitive", new String("approved")],
+] as const) {
+  test(`primitive or container authority decision ${name} fails closed`, async () => {
+    await assertAuthorityFailureDecision(() => malformed);
+  });
+}
+
+for (const [name, hostile] of [
+  ["getPrototypeOf", new Proxy({}, {
+    getPrototypeOf() { throw new Error("getPrototypeOf trap"); },
+  })],
+  ["ownKeys", new Proxy({}, {
+    ownKeys() { throw new Error("ownKeys trap"); },
+  })],
+  ["getOwnPropertyDescriptor", new Proxy(
+    { status: "approved", approvalRef: "approval:proxy" },
+    { getOwnPropertyDescriptor() { throw new Error("descriptor trap"); } },
+  )],
+] as const) {
+  test(`hostile authority decision ${name} inspection exception fails closed`, async () => {
+    await assertAuthorityFailureDecision(() => hostile);
+  });
+}
+
+test("exact synchronous approved decision remains accepted", async () => {
+  const result = await firstProviderInputPrivacyDecision(
+    authorityReturning(exactApprovedDecision),
+  );
+  assert.deepEqual(result, { status: "accepted" });
+});
+
+test("exact synchronous rejected decision remains CONTENT_NOT_APPROVED", async () => {
+  const result = await firstProviderInputPrivacyDecision(
+    authorityReturning(exactRejectedDecision),
+  );
+  assert.equal(result.status, "rejected");
+  if (result.status === "rejected") assert.equal(result.code, "CONTENT_NOT_APPROVED");
+});
+
+test("exact asynchronous approved decision remains accepted", async () => {
+  const result = await firstProviderInputPrivacyDecision(
+    authorityReturning(async () => exactApprovedDecision()),
+  );
+  assert.deepEqual(result, { status: "accepted" });
+});
+
+test("exact asynchronous rejected decision remains CONTENT_NOT_APPROVED", async () => {
+  const result = await firstProviderInputPrivacyDecision(
+    authorityReturning(async () => exactRejectedDecision()),
+  );
+  assert.equal(result.status, "rejected");
+  if (result.status === "rejected") assert.equal(result.code, "CONTENT_NOT_APPROVED");
+});
+
+test("frozen exact plain approval remains accepted", async () => {
+  const frozen = Object.freeze({
+    status: "approved",
+    approvalRef: "approval:frozen-decision",
+  });
+  const result = await firstProviderInputPrivacyDecision(
+    authorityReturning(() => frozen),
+  );
+  assert.deepEqual(result, { status: "accepted" });
+});
+
+for (const [name, purpose, decision] of [
+  ["getter learner-safe item", "provider-input-learner-safe-item", () => getterApproval({ status: true })],
+  ["custom-prototype learner-safe item", "provider-input-learner-safe-item", customPrototypeApproval],
+  ["getter grounding content", "provider-input-grounding-content", () => getterApproval({ approvalRef: true })],
+  ["custom-prototype grounding content", "provider-input-grounding-content", customPrototypeApproval],
+] as const) {
+  test(`${name} approval fails closed before provider execution`, async () => {
+    const h = harness({ reviewedContent: authorityTargeting(purpose, decision) });
+    const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+    assertFallback(result, "POLICY_REJECTION");
+    assert.equal(h.provider.callCount, 0);
+  });
+}
+
+for (const [name, decision] of [
+  ["getter-backed", () => getterApproval({ status: true })],
+  ["custom-prototype", customPrototypeApproval],
+  ["hidden-extra-key", () => {
+    const candidate = exactApprovedDecision() as object;
+    Object.defineProperty(candidate, "hidden", { value: "unreviewed-output-marker" });
+    return candidate;
+  }],
+] as const) {
+  test(`${name} learner-output approval uses reviewed fallback without storing provider prose`, async () => {
+    const content = `Novel unreviewed provider prose for ${name}.`;
+    const proposal = proposalFixture("explain");
+    Object.assign(proposal.action, { content });
+    const h = harness({
+      steps: [successResult(proposal)],
+      reviewedContent: authorityTargeting("learner-facing-action-content", decision),
+    });
+    const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+    assertFallback(result, "POLICY_REJECTION");
+    assert.equal(result.providerCallCount, 1);
+    assert.equal(result.fallback?.action.kind, "return-to-lesson");
+    assertNoNovelContentStored(h, result, content);
+  });
+}
+
+test("malformed approval failure data is minimized", async () => {
+  const secret = "credential:raw-authority-secret";
+  const decision = getterApproval({ status: true, throwOnGet: true }) as object;
+  Object.defineProperty(decision, "authoritySecret", { value: secret, enumerable: false });
+  const result = await firstProviderInputPrivacyDecision(
+    authorityReturning(() => decision),
+  );
+  assert.equal(result.status, "rejected");
+  assert.equal(JSON.stringify(result).includes(secret), false);
+  assert.equal(Reflect.ownKeys(result).includes("rawDecision"), false);
 });
 
 for (const [name, authority] of [

@@ -101,22 +101,68 @@ function canonicalApprovalKey(
   ]);
 }
 
-function isPlainRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null &&
-    typeof value === "object" &&
-    !Array.isArray(value) &&
-    Object.getPrototypeOf(value) === Object.prototype;
-}
-
-function exactKeys(value: Record<string, unknown>, keys: readonly string[]): boolean {
-  const actual = Object.keys(value).sort();
+function exactOwnKeys(actual: readonly PropertyKey[], keys: readonly string[]): boolean {
+  if (actual.some((key) => typeof key !== "string")) return false;
   const expected = [...keys].sort();
   return actual.length === expected.length &&
-    actual.every((key, index) => key === expected[index]);
+    [...actual].sort().every((key, index) => key === expected[index]);
 }
 
 function isOpaqueRef(value: unknown): value is string {
   return validateExact(OpaqueReferenceSchema, value).status === "accepted";
+}
+
+function isDataDescriptor(
+  descriptor: PropertyDescriptor | undefined,
+): descriptor is PropertyDescriptor & { readonly value: unknown } {
+  return descriptor !== undefined &&
+    Object.hasOwn(descriptor, "value") &&
+    !Object.hasOwn(descriptor, "get") &&
+    !Object.hasOwn(descriptor, "set");
+}
+
+/**
+ * Parse an untrusted authority result without normalizing it or reading any of
+ * its properties. Reflection may execute Proxy traps, so every inspection is
+ * contained by the caller's fail-closed exception boundary.
+ */
+function parseRawApprovalDecision(
+  candidate: unknown,
+): ReviewedTutorContentApprovalDecision | null {
+  if (candidate === null || typeof candidate !== "object" || Array.isArray(candidate)) {
+    return null;
+  }
+  if (Object.getPrototypeOf(candidate) !== Object.prototype) return null;
+
+  const ownKeys = Reflect.ownKeys(candidate);
+  const approvedShape = exactOwnKeys(ownKeys, ["status", "approvalRef"]);
+  const rejectedShape = exactOwnKeys(ownKeys, ["status", "code"]);
+  if (!approvedShape && !rejectedShape) return null;
+
+  const descriptors = Object.getOwnPropertyDescriptors(candidate);
+  const expectedKeys = approvedShape
+    ? ["status", "approvalRef"] as const
+    : ["status", "code"] as const;
+  if (!exactOwnKeys(Reflect.ownKeys(descriptors), expectedKeys)) return null;
+
+  const statusDescriptor = descriptors.status;
+  const valueDescriptor = approvedShape
+    ? descriptors.approvalRef
+    : descriptors.code;
+  if (!isDataDescriptor(statusDescriptor) || !isDataDescriptor(valueDescriptor)) {
+    return null;
+  }
+
+  const status = statusDescriptor.value;
+  const value = valueDescriptor.value;
+  if (approvedShape) {
+    return status === "approved" && typeof value === "string" && isOpaqueRef(value)
+      ? Object.freeze({ status: "approved", approvalRef: value })
+      : null;
+  }
+  return status === "rejected" && value === "CONTENT_NOT_APPROVED"
+    ? Object.freeze({ status: "rejected", code: "CONTENT_NOT_APPROVED" })
+    : null;
 }
 
 function toHex(bytes: Uint8Array): string {
@@ -162,21 +208,8 @@ async function isApproved(
 ): Promise<"approved" | "rejected" | "failure"> {
   try {
     const rawDecision = await authority.review(structuredClone(request));
-    const decision = structuredClone(rawDecision);
-    if (!isPlainRecord(decision)) return "failure";
-    if (decision.status === "approved") {
-      return exactKeys(decision, ["status", "approvalRef"]) &&
-        isOpaqueRef(decision.approvalRef)
-        ? "approved"
-        : "failure";
-    }
-    if (decision.status === "rejected") {
-      return exactKeys(decision, ["status", "code"]) &&
-        decision.code === "CONTENT_NOT_APPROVED"
-        ? "rejected"
-        : "failure";
-    }
-    return "failure";
+    const decision = parseRawApprovalDecision(rawDecision);
+    return decision?.status ?? "failure";
   } catch {
     return "failure";
   }
