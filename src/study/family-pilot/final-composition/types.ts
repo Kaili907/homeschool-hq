@@ -7,7 +7,6 @@ import type {
   FamilyPilotStudySnapshot,
 } from '../study'
 import type {
-  FamilyPilotHelpProblem,
   FamilyPilotHelpSession,
   FamilyPilotHelpStep,
   FamilyPilotHelpSummary,
@@ -47,8 +46,6 @@ export interface FinalFamilyPilotProductionMaterial {
   /** Opaque release/material identity; never learner-authored text. */
   readonly materialRef: string
   readonly mediaAvailable: boolean
-  /** Transient Tutor input. This composition never persists it. */
-  readonly helpProblem?: FamilyPilotHelpProblem
 }
 
 export type FinalFamilyPilotMaterialResolution =
@@ -232,7 +229,6 @@ export interface FinalFamilyPilotStudyRuntimeApi {
     readonly assignmentRef: string
     readonly session: FamilyPilotStudySession
     readonly transientLearnerText: string
-    readonly expectedAnswer?: string
   }): Promise<FinalFamilyPilotAction>
   complete(assignmentRef: string, session: FamilyPilotStudySession): Promise<FinalFamilyPilotResult>
   attest(input: {

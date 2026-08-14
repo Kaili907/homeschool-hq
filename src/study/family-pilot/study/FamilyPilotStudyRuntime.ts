@@ -324,7 +324,7 @@ export class FamilyPilotStudyRuntime {
       const segmentRef = this.#currentSegment(entry)
       if (!segmentRef) return reject('no-active-segment')
 
-      if (!familyPilotTutorBridgeAvailable(entry)) {
+      if (import.meta.env.PROD || !familyPilotTutorBridgeAvailable(entry)) {
         return {
           status: 'recorded',
           snapshot: await this.#project(token, input.session, entry),
