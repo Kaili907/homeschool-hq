@@ -201,7 +201,7 @@ export function FamilySchoolPlanPanel({
     }
     setStored(true)
     setDraft(draftFor(student, controller, result.document.schoolPlan))
-    setMessage('School Plan saved. Today’s Work will now be prepared automatically when this learner opens the dashboard.')
+    setMessage('School Plan saved. Today’s Work will now be prepared automatically in the family overview or when this learner opens the dashboard.')
   }
 
   return (
