@@ -1,0 +1,403 @@
+{
+  "audit": {
+    "base": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+    "branch": "mac/science-depth-audit-r1",
+    "curriculum_modified": false,
+    "scope": "all admitted active Science lesson bindings plus linked bound Science assessments"
+  },
+  "course_summary": [
+    {
+      "analysis_section_words_mean": 258.0,
+      "concept_model_lessons": 18,
+      "course_id": "ma-g3-science",
+      "courses": 1,
+      "document_inquiry_routes": 18,
+      "engineering_focus_lessons": 8,
+      "engineering_language_lessons": 24,
+      "graph_requests": 3,
+      "learner_sheet_words_mean": 2944.4,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 0,
+      "physical_lab_routes": 0,
+      "safety_section_words_mean": 1007.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 253.6,
+      "concept_model_lessons": 18,
+      "course_id": "ma-g4-science",
+      "courses": 1,
+      "document_inquiry_routes": 18,
+      "engineering_focus_lessons": 12,
+      "engineering_language_lessons": 48,
+      "graph_requests": 0,
+      "learner_sheet_words_mean": 2931.8,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 0,
+      "physical_lab_routes": 0,
+      "safety_section_words_mean": 1007.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 255.0,
+      "concept_model_lessons": 18,
+      "course_id": "ma-g5-science",
+      "courses": 1,
+      "document_inquiry_routes": 18,
+      "engineering_focus_lessons": 6,
+      "engineering_language_lessons": 26,
+      "graph_requests": 1,
+      "learner_sheet_words_mean": 2953.2,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 0,
+      "physical_lab_routes": 0,
+      "safety_section_words_mean": 1027.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 255.7,
+      "concept_model_lessons": 18,
+      "course_id": "ma-g7-science",
+      "courses": 1,
+      "document_inquiry_routes": 18,
+      "engineering_focus_lessons": 8,
+      "engineering_language_lessons": 36,
+      "graph_requests": 0,
+      "learner_sheet_words_mean": 2790.5,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 0,
+      "physical_lab_routes": 0,
+      "safety_section_words_mean": 862.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 254.9,
+      "concept_model_lessons": 18,
+      "course_id": "ma-g8-science",
+      "courses": 1,
+      "document_inquiry_routes": 18,
+      "engineering_focus_lessons": 8,
+      "engineering_language_lessons": 36,
+      "graph_requests": 3,
+      "learner_sheet_words_mean": 2798.9,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 0,
+      "physical_lab_routes": 0,
+      "safety_section_words_mean": 862.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 275.3,
+      "concept_model_lessons": 18,
+      "course_id": "ma-hs10-chemistry",
+      "courses": 1,
+      "document_inquiry_routes": 0,
+      "engineering_focus_lessons": 6,
+      "engineering_language_lessons": 60,
+      "graph_requests": 4,
+      "learner_sheet_words_mean": 2895.5,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 18,
+      "physical_lab_routes": 18,
+      "safety_section_words_mean": 753.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 273.3,
+      "concept_model_lessons": 18,
+      "course_id": "ma-hs11-physics",
+      "courses": 1,
+      "document_inquiry_routes": 0,
+      "engineering_focus_lessons": 4,
+      "engineering_language_lessons": 24,
+      "graph_requests": 6,
+      "learner_sheet_words_mean": 2822.7,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 18,
+      "physical_lab_routes": 18,
+      "safety_section_words_mean": 730.0,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 276.9,
+      "concept_model_lessons": 18,
+      "course_id": "ma-hs12-earth-space-environmental",
+      "courses": 1,
+      "document_inquiry_routes": 0,
+      "engineering_focus_lessons": 6,
+      "engineering_language_lessons": 12,
+      "graph_requests": 6,
+      "learner_sheet_words_mean": 2818.9,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 18,
+      "physical_lab_routes": 18,
+      "safety_section_words_mean": 719.1,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 273.6,
+      "concept_model_lessons": 18,
+      "course_id": "ma-hs9-biology",
+      "courses": 1,
+      "document_inquiry_routes": 0,
+      "engineering_focus_lessons": 2,
+      "engineering_language_lessons": 12,
+      "graph_requests": 8,
+      "learner_sheet_words_mean": 2818.0,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 18,
+      "physical_lab_routes": 18,
+      "safety_section_words_mean": 734.4,
+      "worked_example_payloads": 0
+    }
+  ],
+  "depth": {
+    "all_lessons_with_worked_example_payload": 0,
+    "brief_exactly_duplicates_evidence_table": 972,
+    "concept_model_lessons": 162,
+    "concept_model_lessons_with_worked_example_payload": 0,
+    "data_bearing_lessons": 162,
+    "distinct_phase_directions": 13,
+    "distinct_question_kind_shapes": 14,
+    "document_inquiry_routes": 90,
+    "engineering_focus_lessons": 60,
+    "engineering_language_lessons": 278,
+    "evidence_reasoning_metadata": 972,
+    "graph_interpretation_requests": 31,
+    "mastery_rules": 972,
+    "numeric_or_categorical_model_tables": 72,
+    "phase_direction_counts": {
+      "Build a labelled model that includes every accepted relationship in the science brief and test it against the case claim.": 81,
+      "Build a second representation of the same evidence and identify one feature the first model hid.": 81,
+      "Carry out the document investigation in the stated order and record the evidence tally before writing a conclusion.": 45,
+      "Choose the H4 physical route or the supplied model-data route, complete that route, and answer from the evidence you actually collected or calculated.": 36,
+      "Connect at least three evidence items, state the boundary of the conclusion, and answer the unit question.": 81,
+      "Correct the candidate claim, explain the exact evidence that makes the correction necessary, and create one fresh example.": 81,
+      "Evaluate the case claim independently using at least two evidence codes and one stated limitation.": 81,
+      "Locate one weakness in an earlier response, revise it with a named evidence code, and state what the revision fixes.": 81,
+      "Sort all evidence as supports, challenges, or does not decide, and justify every placement.": 81,
+      "Use E1 with E2 first; then add E3 and revise any conclusion that no longer fits.": 81,
+      "Use the supplied record to build a claim-evidence-reasoning product that another reader can check line by line.": 81,
+      "Without copying the brief, evaluate the candidate claim, interpret the evidence table, and apply the idea to a new example you create.": 81,
+      "Write an initial explanation, then mark which evidence item would most strongly change it.": 81
+    },
+    "physical_lab_routes": 72,
+    "question_count_distribution": {
+      "7": 828,
+      "8": 144
+    },
+    "question_kind_shapes": {
+      "ACTIVATE_PRIOR|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 45,
+      "ANALYZE_EVIDENCE|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 45,
+      "APPLY_INDEPENDENT|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 45,
+      "BUILD_PRODUCT|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 45,
+      "CONNECT_UNIT|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 45,
+      "DEMONSTRATE_MASTERY|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 45,
+      "ERROR_ANALYSIS|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 90,
+      "EXPLAIN_WITH_EVIDENCE|APPLY_NEW_TASK|CHECK_REVISE_NEXT_STEP|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 288,
+      "GUIDED_PRACTICE|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 90,
+      "INVESTIGATE|EXPLAIN_WITH_EVIDENCE|APPLY_NEW_TASK|CHECK_REVISE_NEXT_STEP|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 36,
+      "MASTERY_FRESH_TASK|EXPLAIN_WITH_EVIDENCE|APPLY_NEW_TASK|CHECK_REVISE_NEXT_STEP|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 36,
+      "MODEL_BUILD|COMMUNICATE_REPRESENTATION|CHECK_REVISE|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 90,
+      "PERFORMANCE_EVIDENCE|EXPLAIN_WITH_EVIDENCE|APPLY_NEW_TASK|CHECK_REVISE_NEXT_STEP|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 36,
+      "PHENOMENON_QUESTION|EXPLAIN_WITH_EVIDENCE|APPLY_NEW_TASK|CHECK_REVISE_NEXT_STEP|ESSENTIAL_QUESTION|EVIDENCE_QUALITY|LIMITATION|PROVENANCE": 36
+    },
+    "remediation_route_count_distribution": {
+      "5": 756,
+      "6": 216
+    },
+    "remediation_routes_present": 972,
+    "science_brief_present": 972,
+    "science_brief_row_distribution": {
+      "3": 452,
+      "4": 520
+    },
+    "structured_vocabulary_fields": 0,
+    "universal_cross_cutting_question_instances": 3888
+  },
+  "duplication": {
+    "distinct_hs_model_payloads": 36,
+    "distinct_science_case_payloads": 486,
+    "hs_model_payload_group_sizes": {
+      "2": 36
+    },
+    "science_case_payload_group_sizes": {
+      "2": 486
+    }
+  },
+  "generator_family_summary": [
+    {
+      "analysis_section_words_mean": 255.0,
+      "concept_model_lessons": 18,
+      "courses": 1,
+      "document_inquiry_routes": 18,
+      "engineering_focus_lessons": 6,
+      "engineering_language_lessons": 26,
+      "generator_family": "canonical-k8-elementary",
+      "graph_requests": 1,
+      "learner_sheet_words_mean": 2953.2,
+      "lessons": 108,
+      "numeric_or_categorical_model_tables": 0,
+      "physical_lab_routes": 0,
+      "safety_section_words_mean": 1027.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 255.3,
+      "concept_model_lessons": 36,
+      "courses": 2,
+      "document_inquiry_routes": 36,
+      "engineering_focus_lessons": 16,
+      "engineering_language_lessons": 72,
+      "generator_family": "canonical-k8-middle",
+      "graph_requests": 3,
+      "learner_sheet_words_mean": 2794.7,
+      "lessons": 216,
+      "numeric_or_categorical_model_tables": 0,
+      "physical_lab_routes": 0,
+      "safety_section_words_mean": 862.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 255.8,
+      "concept_model_lessons": 36,
+      "courses": 2,
+      "document_inquiry_routes": 36,
+      "engineering_focus_lessons": 20,
+      "engineering_language_lessons": 72,
+      "generator_family": "g34-k8-elementary",
+      "graph_requests": 3,
+      "learner_sheet_words_mean": 2938.1,
+      "lessons": 216,
+      "numeric_or_categorical_model_tables": 0,
+      "physical_lab_routes": 0,
+      "safety_section_words_mean": 1007.7,
+      "worked_example_payloads": 0
+    },
+    {
+      "analysis_section_words_mean": 274.8,
+      "concept_model_lessons": 72,
+      "courses": 4,
+      "document_inquiry_routes": 0,
+      "engineering_focus_lessons": 18,
+      "engineering_language_lessons": 108,
+      "generator_family": "h4-high-school",
+      "graph_requests": 24,
+      "learner_sheet_words_mean": 2838.8,
+      "lessons": 432,
+      "numeric_or_categorical_model_tables": 72,
+      "physical_lab_routes": 72,
+      "safety_section_words_mean": 734.3,
+      "worked_example_payloads": 0
+    }
+  ],
+  "language": {
+    "analysis_section_words": {
+      "max": 341,
+      "mean": 264.0,
+      "median": 259.0,
+      "min": 234
+    },
+    "learner_sheet_words": {
+      "max": 4091,
+      "mean": 2863.8,
+      "median": 2772.5,
+      "min": 2548
+    },
+    "safety_section_words": {
+      "max": 1299,
+      "mean": 856.2,
+      "median": 863.0,
+      "min": 696
+    }
+  },
+  "linked_assessments": {
+    "adult_completion_authority_present": 0,
+    "answer_material_included": 0,
+    "bound": 81,
+    "count": 81,
+    "embedded_science_brief_or_bound_data": 0,
+    "metadata_ref_present": 27,
+    "ready": 81,
+    "task_shape_counts": {
+      "concept and vocabulary|representation or source|application|error or claim analysis|connection|performance evidence|reflection and transfer": 27,
+      "safety-read-this-before-you-touch-anything|your-data-sheet|if-you-are-not-doing-the-hands-on-activity|analysis-questions|how-this-is-scored|if-you-get-stuck": 54
+    }
+  },
+  "safety_and_authority": {
+    "adult_key_heading_on_learner_sheet": 0,
+    "correctness_authority_present": 972,
+    "correctness_marked_adult_only": 972,
+    "safe_order_present": 70,
+    "student_visible_safety": 972
+  },
+  "tutor_metadata": {
+    "expected_reasoning_present": 972,
+    "mastery_rules_present": 972,
+    "named_structured_fields_checked": [
+      "tutor_metadata",
+      "prerequisite_ids",
+      "misconception_codes",
+      "response_schema",
+      "attempt_history_contract",
+      "next_lesson_routes"
+    ],
+    "packages_with_any_named_structured_tutor_field": 0,
+    "remediation_routes_present": 972
+  },
+  "universe": {
+    "active_binding_set_equals_package_set": true,
+    "active_lessons": 972,
+    "audit_types": {
+      "assessment/project": 162,
+      "concept": 405,
+      "inquiry/investigation": 45,
+      "lab/activity": 36,
+      "mastery": 81,
+      "remediation": 162,
+      "review": 81
+    },
+    "courses": 9,
+    "generator_families": {
+      "canonical-k8-elementary": 108,
+      "canonical-k8-middle": 216,
+      "g34-k8-elementary": 216,
+      "h4-high-school": 432
+    },
+    "grades": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "phases": {
+      "Concept model A": 81,
+      "Concept model B": 81,
+      "Correction and reflection": 81,
+      "Guided practice A": 81,
+      "Guided practice B": 81,
+      "Independent application A": 81,
+      "Investigation": 36,
+      "Investigation or close reading": 45,
+      "Launch and diagnostic": 81,
+      "Performance task build": 81,
+      "Reteach and varied practice": 81,
+      "Synthesis and review": 81,
+      "Unit assessment": 81
+    },
+    "source_lineages": {
+      "canonical-1.0.0": 324,
+      "g34-committed": 216,
+      "hs912-science-h4": 432
+    },
+    "work_types": {
+      "INVESTIGATION_DATA_SHEET": 162,
+      "STUDENT_WORK_SHEET": 810
+    }
+  }
+}
