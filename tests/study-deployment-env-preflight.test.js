@@ -40,7 +40,7 @@ function readyEnvironment() {
 function validNetlifyConfig() {
   return `
 [build]
-  functions = "netlify/functions"
+  functions = "netlify/function-entrypoints"
 
 [build.environment]
   VITE_USE_PROXY = "true"

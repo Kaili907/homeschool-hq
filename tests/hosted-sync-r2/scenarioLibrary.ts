@@ -1,0 +1,15 @@
+export const HOSTED_SYNC_R2_SCENARIOS = Object.freeze([
+  'exact four-RPC client surface', 'first link import', 'first link retry idempotency',
+  'exact explicit mapping', 'unknown mapping unavailable', 'initial hydrate',
+  'Device A checkpoint write', 'A to B checkpoint hydrate', 'Device B checkpoint write',
+  'B to A checkpoint hydrate', 'checkpoint fields survive exactly', 'normal completion write',
+  'normal completion hydrate', 'assessment active', 'assessment certified',
+  'assessment authority CAS', 'RFL learner assertion', 'RFL assertion hydrate',
+  'RFL guardian certification', 'RFL student certification denied', 'Social source attach',
+  'Social source hydrate', 'Social create-only conflict', 'Safety hold write',
+  'Safety hold hydrate', 'Safety blocks completion', 'Safety guardian clear',
+  'Safety student clear denied', 'offline refusal retains local intent', 'reconnect succeeds',
+  'stale checkpoint CAS refusal', 'exact write retry idempotency', 'lost acknowledgement retry',
+  'first-link state taxonomy and name blindness', 'production privacy gate stays closed',
+  'no legacy Profile sync fields', 'unknown mutation field refused before provider contact',
+] as const)

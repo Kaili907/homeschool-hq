@@ -169,7 +169,8 @@ describe('full-chain Admin database security red team', () => {
         and relation.relkind in ('r', 'p')
       order by namespace.nspname, relation.relname
     `)
-    expect(relations.rows).toHaveLength(87)
+    // Hosted Sync R2 contributes its private canonical checkpoint relation.
+    expect(relations.rows).toHaveLength(90)
     expect(relations.rows.every((relation) => relation.rls_enabled)).toBe(true)
     expect(relations.rows.filter((relation) => !relation.rls_forced)
       .map((relation) => `${relation.schema_name}.${relation.table_name}`)).toEqual([
@@ -258,7 +259,9 @@ describe('full-chain Admin database security red team', () => {
         and routine.prosecdef
       order by namespace.nspname, routine.proname, identity_arguments
     `)
-    expect(routines.rows).toHaveLength(219)
+    // R2 adds the checkpoint shape, transition, and helper SECURITY DEFINER
+    // routines to the current full migration chain.
+    expect(routines.rows).toHaveLength(233)
     expect(routines.rows.every(({ owner_name: owner }) => owner === 'postgres')).toBe(true)
     expect(routines.rows.every(({ configuration }) => (
       configuration?.length === 1
@@ -470,7 +473,7 @@ describe('full-chain Admin database security red team', () => {
     })
   })
 
-  it('has no public routine overload and leaves the sole private overload ungranted', async () => {
+  it('tracks only intentional routine overloads and their application ACLs', async () => {
     const database = databases[0]
     const overloads = await database.query<{
       schema_name: string
@@ -493,11 +496,40 @@ describe('full-chain Admin database security red team', () => {
       having count(*) > 1
       order by namespace.nspname, routine.proname
     `)
-    expect(overloads.rows).toEqual([{
-      schema_name: 'academy_private',
-      routine_name: 'admin_audit_value_is_safe',
-      signatures: ['candidate jsonb', 'candidate_action text, candidate jsonb'],
-      executable_by_application: false,
-    }])
+    expect(overloads.rows).toEqual([
+      {
+        schema_name: 'academy_private',
+        routine_name: 'admin_audit_value_is_safe',
+        signatures: ['candidate jsonb', 'candidate_action text, candidate jsonb'],
+        executable_by_application: false,
+      },
+      {
+        schema_name: 'public',
+        routine_name: 'academy_study_execute_session_lifecycle_v2',
+        signatures: [
+          'p_token_digest text, p_required_capability text, p_operation text, p_request jsonb',
+          'p_token_digest text, p_required_capability text, p_operation text, p_request jsonb, p_actor_user_id uuid',
+        ],
+        executable_by_application: true,
+      },
+      {
+        schema_name: 'public',
+        routine_name: 'academy_study_execute_verified_runtime_v1',
+        signatures: [
+          'p_token_digest text, p_required_capability text, p_operation text, p_request jsonb',
+          'p_token_digest text, p_required_capability text, p_operation text, p_request jsonb, p_actor_user_id uuid',
+        ],
+        executable_by_application: true,
+      },
+      {
+        schema_name: 'public',
+        routine_name: 'academy_study_verify_session_v1',
+        signatures: [
+          'p_token_digest text, p_required_capability text',
+          'p_token_digest text, p_required_capability text, p_actor_user_id uuid',
+        ],
+        executable_by_application: true,
+      },
+    ])
   })
 })

@@ -56,6 +56,7 @@ import { toStudentDashboardPresentation } from './dashboardPresentation'
 import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
 import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
 import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
+import { ParentSyncStatusR1 } from '../../hosted-sync/v2/familyPilot/status'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -511,9 +512,12 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           <p className="font-bold text-cyan-700">Parent Hub</p>
           <h2 className="text-2xl font-extrabold">Household learning</h2>
         </div>
-        <select aria-label="Parent student" className="rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
-          {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
-        </select>
+        <div className="flex items-center gap-3">
+          <ParentSyncStatusR1 />
+          <select aria-label="Parent student" className="rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
+            {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
+          </select>
+        </div>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
         {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
