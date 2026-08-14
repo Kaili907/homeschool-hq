@@ -1,6 +1,6 @@
-import type { LearnerResponseItem, LearnerResponseRuntime } from '../final-app/learner-response'
+import type { LearnerMaterialDto, LearnerResponseItem, LearnerResponseRuntime } from '../final-app/learner-response'
 
-export type ElementaryMathStage = 'LEARN' | 'EXAMPLE' | 'GUIDED' | 'INDEPENDENT' | 'MASTERY'
+export type ElementaryMathStage = 'LEARN' | 'EXAMPLE' | 'GUIDED' | 'INDEPENDENT' | 'MASTERY' | 'REMEDIATION' | 'CHALLENGE'
 
 export interface ElementaryMathPresentationStep {
   readonly stage: ElementaryMathStage
@@ -17,6 +17,10 @@ export interface ElementaryMathSavedPlace {
 export interface ElementaryMathSamplePlayerProps {
   /** The current learner-response runtime; this component creates no store. */
   readonly runtime: LearnerResponseRuntime
+  /** Learner-safe lesson material used by the supplied runtime. */
+  readonly material?: LearnerMaterialDto
+  /** Learner-facing title; canonical curriculum title remains unchanged in material. */
+  readonly displayTitle?: string
   /** Optional presentation-preview entry point. It is not saved as learner progress. */
   readonly initialItemRef?: string
   readonly onNeedHelp?: (itemRef: string) => void

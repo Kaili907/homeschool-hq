@@ -37,7 +37,7 @@ function classify(section: LearnerMaterialSectionDto): {
   readonly role: LearnerStudySegmentRole
   readonly mode: 'READ' | 'GUIDED' | 'INDEPENDENT' | 'MASTERY' | 'ACTIVITY' | 'RUBRIC' | 'GUARDIAN'
 } {
-  const value = `${section.kind ?? ''} ${section.title}`
+  const value = `${section.kind ?? section.sectionKind ?? ''} ${section.title}`
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     .replace(/[_-]+/g, ' ')
     .toLowerCase()
@@ -112,7 +112,9 @@ function mappedItem(input: {
   const responseType = inferredResponseType(classification, input.item, choices)
   const instructionalExample = responseType === 'READ' || input.item?.kind === 'worked-example' || input.item?.itemKind === 'worked-example' || Boolean(input.item?.workedSolution)
   const segmentRole = classification.role === 'LEARN' && !instructionalExample ? 'PRACTICE' : classification.role
-  const example = input.item?.workedSolution?.steps?.join('\n')
+  const workedSteps = input.item?.workedSolution?.steps ?? []
+  const workedAnswer = input.item?.workedSolution?.answer?.trim()
+  const example = [...workedSteps, ...(workedAnswer ? [`Answer: ${workedAnswer}`] : [])].join('\n')
   return Object.freeze({
     lessonRef: input.lessonRef,
     sectionRef: input.sectionRef,

@@ -21,6 +21,10 @@ export interface FinalLearnerMaterialSection {
     readonly responseType?: string
     readonly responseKind?: 'NONE' | 'READ' | 'CHOICE' | 'TEXT' | 'NUMERIC' | 'CONSTRUCTED_RESPONSE' | 'ACTIVITY_EVIDENCE' | 'RUBRIC_REVIEW_PENDING' | 'GUARDIAN_ATTESTATION'
     readonly choices?: readonly string[]
+    readonly workedSolution?: {
+      readonly steps?: readonly string[]
+      readonly answer?: string
+    }
   }[]
 }
 

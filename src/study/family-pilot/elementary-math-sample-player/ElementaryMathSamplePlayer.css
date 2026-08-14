@@ -263,6 +263,16 @@
   gap: 0.75rem;
 }
 
+.elementary-player__branch-actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.elementary-player__branch-actions .elementary-player__primary-button {
+  margin-top: 0;
+}
+
 .elementary-player__support {
   display: grid;
   grid-template-columns: 1fr;
@@ -298,7 +308,8 @@
   }
 
   .elementary-player__support,
-  .elementary-player__feedback-actions {
+  .elementary-player__feedback-actions,
+  .elementary-player__branch-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

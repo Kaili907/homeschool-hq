@@ -135,6 +135,7 @@ export interface LearnerMaterialSectionDto {
   readonly sectionRef?: string
   readonly sectionId?: string
   readonly kind?: string
+  readonly sectionKind?: string
   readonly title: string
   readonly body?: string
   readonly directions?: string
@@ -152,5 +153,5 @@ export interface LearnerMaterialItemDto {
   readonly responseType?: string
   readonly responseKind?: LearnerResponseType
   readonly choices?: readonly (string | { readonly id?: string; readonly ref?: string; readonly label: string })[]
-  readonly workedSolution?: { readonly steps?: readonly string[] }
+  readonly workedSolution?: { readonly steps?: readonly string[]; readonly answer?: string }
 }
