@@ -13,6 +13,15 @@ import {
   type HostedSyncStateIdentityR2,
   type HostedSyncStateMetadataR2,
 } from '.'
+import {
+  authorityCheckpointFromHydrateR1,
+  AuthorityCheckpointPreNetworkGateR1,
+  authorityCheckpointWritePayloadR1,
+  createHostedSyncRpcAdapter,
+  serializeAuthorityCheckpointPrivacyGateR1,
+  withAuthorityCheckpointR1,
+} from '../client'
+import { createLocalDbRpcEmulator } from '../client/testing/localDbRpcEmulator'
 
 const NOW = '2026-08-13T16:00:00.000Z'
 const IDENTITY: HostedSyncStateIdentityR2 = Object.freeze({
@@ -87,7 +96,7 @@ function calendar(fixture: AssignmentFixture): DurableCalendarRecordV1 {
       }),
       title: fixture.lessonRef,
       blockType: 'new_instruction',
-      canonicalTask: 'learn_new',
+      canonicalTask: Object.freeze({ taskType: 'direct-instruction' }),
       householdTimeZone: 'America/Detroit',
       scheduledLocalStart: '2026-08-13T12:00',
       scheduledStartInstant: NOW,
@@ -101,7 +110,7 @@ function calendar(fixture: AssignmentFixture): DurableCalendarRecordV1 {
         segmentId,
         planOrdinal: index + 1,
         title: `Segment ${index + 1}`,
-        canonicalTaskType: 'learn_new',
+        canonicalTaskType: 'retrieval-practice',
         estimatedMinutes: 10,
         required: true,
         actualActiveSeconds: fixture.completed.includes(segmentId) ? 90 : 0,
@@ -162,7 +171,8 @@ function localFixture(): HostedSyncLocalBundleR2 {
     parentSettings: null,
     calendar: Object.freeze(FIXTURES.map(calendar)),
     sessions: Object.freeze(FIXTURES.map((fixture) => Object.freeze({
-      scope: Object.freeze({ ...IDENTITY, sessionRef: `session:${fixture.assignmentRef}` }),
+      scope: Object.freeze({ householdRef: IDENTITY.householdRef, learnerRef: IDENTITY.learnerRef,
+        sessionRef: `session:${fixture.assignmentRef}` }),
       lessonRef: fixture.lessonRef,
       segmentRef: fixture.current ?? fixture.completed.at(-1)!,
       status: fixture.state === 'completed' || fixture.current === null ? 'completed' : 'active',
@@ -319,6 +329,80 @@ describe('Hosted sync lossless state contract R2', () => {
     expect(imported.app.pinDigests).toEqual({})
   })
 
+  it('round-trips A→RPC checkpoint→empty B and B progress→RPC checkpoint→A without invention', async () => {
+    const localA = localFixture()
+    const snapshotA = exportLocalBundleToHostedSyncStateR2({
+      identity: IDENTITY, sync: SYNC, local: localA, authorityRevisions: REVISIONS,
+    })
+    const provider = createLocalDbRpcEmulator({ now: () => new Date(NOW) })
+    provider.setRole('a'.repeat(64), 'guardian')
+    const authorization = { acquire: async () => ({ status: 'AUTHORIZED' as const, lease: {
+      clientKind: 'AUTHENTICATED_USER' as const, expiresAt: '2027-08-13T00:00:00.000Z', provider,
+    } }) }
+    const deviceA = createHostedSyncRpcAdapter({ authorization, now: () => new Date(NOW) })
+    const deviceB = createHostedSyncRpcAdapter({ authorization, now: () => new Date(NOW) })
+    const firstAssignment = snapshotA.assignments[0]!
+    const sessionIdentity = firstAssignment.sessionIdentity!
+    const legacyImport = {
+      localScope: { householdRef: IDENTITY.householdRef, studentRef: IDENTITY.studentRef,
+        assignmentRef: firstAssignment.record.assignmentRef, sessionRef: sessionIdentity.sessionRef },
+      hostedScope: { assignmentRef: 'hosted:assignment:math', sessionRef: 'hosted:session:math' },
+      session: { lessonRef: firstAssignment.record.lessonRef, subjectRef: 'mathematics', state: 'active',
+        startedAt: NOW, completedAt: null, intendedLocalDate: '2026-08-13' },
+      checkpoint: null, socialSource: null, guardianAttestation: null,
+      safetyState: { schemaVersion: 1 as const, holds: [] }, assessment: null,
+    }
+    const first = await deviceA.firstLink({ tokenDigest: 'a'.repeat(64),
+      studentId: '00000000-0000-4000-8000-000000000101', clientOperationId: SYNC.operationId,
+      import: withAuthorityCheckpointR1(legacyImport, snapshotA) })
+    expect(first).toMatchObject({ code: 'SUCCESS', value: { revisions: { authorityCheckpoint: 18 } } })
+    const hydratedB = await deviceB.hydrate({ tokenDigest: 'a'.repeat(64),
+      studentId: '00000000-0000-4000-8000-000000000101',
+      assignmentRef: 'hosted:assignment:math', sessionId: 'hosted:session:math' })
+    if (hydratedB.code !== 'SUCCESS') throw new Error('Device B hydrate failed.')
+    const receivedA = authorityCheckpointFromHydrateR1(hydratedB.value, IDENTITY)
+    expect(receivedA).toEqual(snapshotA)
+    const localB = importHostedSyncStateToLocalBundleR2({ snapshot: receivedA,
+      target: emptyTarget(localA), expectedIdentity: IDENTITY })
+    expect(exportLocalBundleToHostedSyncStateR2({ identity: IDENTITY, sync: SYNC,
+      local: localB, authorityRevisions: REVISIONS })).toEqual(snapshotA)
+
+    const writeId = '22222222-2222-4222-8222-222222222222'
+    const advanced = structuredClone(snapshotA) as any
+    advanced.sync = { ...advanced.sync, serverRevision: 19, baseRevision: 18,
+      operationId: writeId, idempotencyKey: writeId, operationKind: 'CHECKPOINT',
+      localSequence: 20, createdAt: '2026-08-13T16:01:00.000Z' }
+    const record = { ...advanced.student.assignments[0],
+      progress: { ...advanced.student.assignments[0].progress,
+        activeSeconds: advanced.student.assignments[0].progress.activeSeconds + 14 },
+      updatedAt: '2026-08-13T16:01:00.000Z' }
+    advanced.student = { ...advanced.student, updatedAt: '2026-08-13T16:01:00.000Z',
+      assignments: [record, ...advanced.student.assignments.slice(1)] }
+    advanced.assignments = [{ ...advanced.assignments[0], record }, ...advanced.assignments.slice(1)]
+    advanced.appUpdatedAt = '2026-08-13T16:01:00.000Z'
+    const checkpoint = advanced.indexedDbDocument.checkpoints[0]
+    advanced.indexedDbDocument = { ...advanced.indexedDbDocument,
+      updatedAt: '2026-08-13T16:01:00.000Z', checkpoints: [{ ...checkpoint,
+        revision: checkpoint.revision + 1,
+        elapsedActiveSecondsInSegment: checkpoint.elapsedActiveSecondsInSegment + 14,
+        capturedAt: '2026-08-13T16:01:00.000Z' }, ...advanced.indexedDbDocument.checkpoints.slice(1)] }
+    const parsedAdvanced = parseHostedSyncStateSnapshotR2(advanced, IDENTITY)
+    expect(parsedAdvanced.status).toBe('ready')
+    if (parsedAdvanced.status !== 'ready') throw new Error(parsedAdvanced.reason)
+    const stored = await deviceB.write({ tokenDigest: 'a'.repeat(64),
+      studentId: '00000000-0000-4000-8000-000000000101',
+      assignmentRef: 'hosted:assignment:math', sessionId: 'hosted:session:math', expectedRevision: 18,
+      clientOperationId: writeId, operation: 'authority-checkpoint:compare-and-swap',
+      payload: authorityCheckpointWritePayloadR1({ checkpoint: parsedAdvanced.snapshot,
+        expectedRevision: 18, clientOperationId: writeId }) })
+    expect(stored).toMatchObject({ code: 'SUCCESS', value: { serverRevision: 19 } })
+    const hydratedA = await deviceA.hydrate({ tokenDigest: 'a'.repeat(64),
+      studentId: '00000000-0000-4000-8000-000000000101',
+      assignmentRef: 'hosted:assignment:math', sessionId: 'hosted:session:math' })
+    if (hydratedA.code !== 'SUCCESS') throw new Error('Device A hydrate failed.')
+    expect(authorityCheckpointFromHydrateR1(hydratedA.value, IDENTITY)).toEqual(parsedAdvanced.snapshot)
+  })
+
   it('supports a scored assessment outcome without learner response content', () => {
     const original = structuredClone(exportLocalBundleToHostedSyncStateR2({ identity: IDENTITY, sync: SYNC, local: localFixture(), authorityRevisions: REVISIONS }))
     const snapshot = {
@@ -391,5 +475,27 @@ describe('Hosted sync lossless state contract R2', () => {
       expect(parseHostedSyncStateSnapshotR2({ ...snapshot, ...canary }, IDENTITY))
         .toEqual({ status: 'refused', reason: 'PRIVACY_VIOLATION' })
     }
+  })
+
+  it('passes only sealed, allowlisted authority bytes through the strict pre-network privacy semantics', async () => {
+    const snapshot = exportLocalBundleToHostedSyncStateR2({ identity: IDENTITY, sync: SYNC,
+      local: localFixture(), authorityRevisions: REVISIONS })
+    const bodies: string[] = []
+    const gate = new AuthorityCheckpointPreNetworkGateR1({ send: async (request) => {
+      bodies.push(request.body)
+      return request.schemaId
+    } })
+    const serialized = serializeAuthorityCheckpointPrivacyGateR1(snapshot)
+    await expect(gate.send(serialized)).resolves.toBe('hosted-study-sync-authority-checkpoint.r1')
+    expect(JSON.parse(bodies[0]!)).toEqual(snapshot)
+    expect(bodies[0]).not.toContain('deadbeef')
+    expect(() => gate.send({ schemaId: serialized.schemaId, byteLength: serialized.byteLength } as any))
+      .toThrow('UNSERIALIZED_PAYLOAD')
+    expect(() => serializeAuthorityCheckpointPrivacyGateR1({
+      ...snapshot, indexedDbDocument: { ...snapshot.indexedDbDocument,
+        checkpoints: [{ ...snapshot.indexedDbDocument.checkpoints[0]!, unknownAuthority: true }] },
+    })).toThrow('UNALLOWLISTED_FIELD')
+    expect(() => serializeAuthorityCheckpointPrivacyGateR1({ ...snapshot, pinDigest: 'forbidden' }))
+      .toThrow('FORBIDDEN_FIELD')
   })
 })
