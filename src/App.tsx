@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
+import { isG3RoundingDirectorPreviewPath } from './study/family-pilot/elementary-math-director-preview/route'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
@@ -13,6 +14,12 @@ const FinalFamilyPilotApp = lazy(() =>
   })),
 )
 
+const G3RoundingDirectorPreview = import.meta.env.DEV
+  ? lazy(() => import('./study/family-pilot/elementary-math-director-preview/G3RoundingDirectorPreview').then((module) => ({
+      default: module.G3RoundingDirectorPreview,
+    })))
+  : null
+
 function familyPilotSelectedAtBoot(): boolean {
   return isFamilyPilotEnabledFromHost() && isFamilyPilotPath(window.location.pathname)
 }
@@ -20,6 +27,14 @@ function familyPilotSelectedAtBoot(): boolean {
 export default function App() {
   const [familyPilotSelected, setFamilyPilotSelected] = useState(familyPilotSelectedAtBoot)
   const [returnToLegacyHome, setReturnToLegacyHome] = useState(false)
+
+  if (G3RoundingDirectorPreview && isG3RoundingDirectorPreviewPath(window.location.pathname)) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Director preview.</main>}>
+        <G3RoundingDirectorPreview />
+      </Suspense>
+    )
+  }
 
   if (familyPilotSelected) {
     return (

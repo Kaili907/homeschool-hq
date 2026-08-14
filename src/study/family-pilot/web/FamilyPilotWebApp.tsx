@@ -1,11 +1,18 @@
 import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from '../core/route'
+import { isG3RoundingDirectorPreviewPath } from '../elementary-math-director-preview/route'
 
 const FinalFamilyPilotApp = lazy(() =>
   import('../final-app/FinalFamilyPilotApp').then((module) => ({
     default: module.FinalFamilyPilotApp,
   })),
 )
+
+const G3RoundingDirectorPreview = import.meta.env.DEV
+  ? lazy(() => import('../elementary-math-director-preview/G3RoundingDirectorPreview').then((module) => ({
+      default: module.G3RoundingDirectorPreview,
+    })))
+  : null
 
 /**
  * Dedicated entry for the enabled web pilot. The legacy Homeschool HQ trainer
@@ -14,6 +21,10 @@ const FinalFamilyPilotApp = lazy(() =>
  */
 export default function FamilyPilotWebApp() {
   const [onPilotRoute, setOnPilotRoute] = useState(() => isFamilyPilotPath(window.location.pathname))
+
+  if (G3RoundingDirectorPreview && isG3RoundingDirectorPreviewPath(window.location.pathname)) {
+    return <Suspense fallback={<main aria-busy="true">Loading the Director preview.</main>}><G3RoundingDirectorPreview /></Suspense>
+  }
 
   if (!onPilotRoute) {
     return (

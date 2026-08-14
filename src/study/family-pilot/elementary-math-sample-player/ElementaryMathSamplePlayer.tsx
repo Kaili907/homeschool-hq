@@ -11,6 +11,8 @@ const STAGE_LABELS: Readonly<Record<ElementaryMathStage, string>> = Object.freez
   GUIDED: "Let's Try One",
   INDEPENDENT: 'Your Turn',
   MASTERY: 'Check What You Know',
+  REMEDIATION: 'More Practice',
+  CHALLENGE: 'Challenge',
 })
 
 type Feedback = Readonly<{
@@ -33,29 +35,34 @@ function segmentRefFor(step: ElementaryMathPresentationStep): string {
   return `${step.item.lessonRef}:segment:${role}`
 }
 
-function nextButtonLabel(step: ElementaryMathPresentationStep, hasNext: boolean): string {
-  if (!hasNext) return 'Finish Lesson'
+function nextButtonLabel(step: ElementaryMathPresentationStep, nextStep: ElementaryMathPresentationStep | undefined): string {
+  if (!nextStep) return 'Finish Lesson'
+  if (step.stage === 'LEARN') return nextStep.stage === 'LEARN' ? 'Keep Learning' : 'Show Me an Example'
   if (step.stage === 'EXAMPLE') return step.position === step.total ? "Let's Try One" : 'Next Example'
   if (step.stage === 'GUIDED' && step.position === step.total) return 'Start Your Turn'
   if (step.stage === 'INDEPENDENT' && step.position === step.total) return 'Check What You Know'
+  if (step.position === step.total && (step.stage === 'MASTERY' || step.stage === 'REMEDIATION')) return "Choose What's Next"
   return 'Next Question'
 }
 
 function Progress({ step }: { readonly step: ElementaryMathPresentationStep }) {
   const label = STAGE_LABELS[step.stage]
-  if (step.stage === 'LEARN') return <p className="elementary-player__progress">{label}</p>
+  if (step.stage === 'LEARN' && step.total === 1) return <p className="elementary-player__progress">{label}</p>
   return <p className="elementary-player__progress" aria-label={`${label}, ${step.position} of ${step.total}`}>{label} <span aria-hidden="true">•</span> {step.position} of {step.total}</p>
 }
 
 export function ElementaryMathSamplePlayer({
   runtime,
+  material = ELEMENTARY_MATH_SAMPLE_MATERIAL,
+  displayTitle,
   initialItemRef,
   onNeedHelp,
   onTakeBreak,
   onSaveForLater,
   onComplete,
+  onExit,
 }: ElementaryMathSamplePlayerProps) {
-  const flow = useMemo(() => createElementaryMathPresentation(ELEMENTARY_MATH_SAMPLE_MATERIAL), [])
+  const flow = useMemo(() => createElementaryMathPresentation(material), [material])
   const requestedStart = initialItemRef ? flow.findIndex((candidate) => candidate.item.itemRef === initialItemRef) : 0
   const [stepIndex, setStepIndex] = useState(requestedStart >= 0 ? requestedStart : 0)
   const [revealedExampleSteps, setRevealedExampleSteps] = useState(1)
@@ -64,19 +71,20 @@ export function ElementaryMathSamplePlayer({
   const [feedback, setFeedback] = useState<Feedback | null>(null)
   const [busy, setBusy] = useState(false)
   const [complete, setComplete] = useState(false)
+  const [branchPrompt, setBranchPrompt] = useState<'MASTERY' | 'REMEDIATION' | null>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const feedbackRef = useRef<HTMLDivElement>(null)
   const step = flow[stepIndex]!
 
   useEffect(() => {
     headingRef.current?.focus()
-  }, [stepIndex, complete])
+  }, [stepIndex, complete, branchPrompt])
 
   useEffect(() => {
     if (feedback) feedbackRef.current?.focus()
   }, [feedback])
 
-  if (runtime.context.lessonRef !== ELEMENTARY_MATH_SAMPLE_MATERIAL.lessonRef) {
+  if (runtime.context.lessonRef !== material.lessonRef) {
     throw new Error('The elementary math sample player requires its matching sample lesson runtime.')
   }
 
@@ -89,6 +97,14 @@ export function ElementaryMathSamplePlayer({
 
   const moveNext = () => {
     resetQuestion()
+    const hasOptionalBranch = flow.some((candidate) =>
+      step.stage === 'MASTERY'
+        ? candidate.stage === 'REMEDIATION' || candidate.stage === 'CHALLENGE'
+        : candidate.stage === 'CHALLENGE')
+    if ((step.stage === 'MASTERY' || step.stage === 'REMEDIATION') && step.position === step.total && hasOptionalBranch) {
+      setBranchPrompt(step.stage)
+      return
+    }
     if (stepIndex >= flow.length - 1) {
       setComplete(true)
       onComplete?.()
@@ -97,14 +113,28 @@ export function ElementaryMathSamplePlayer({
     setStepIndex((current) => current + 1)
   }
 
+  const openBranch = (stage: 'REMEDIATION' | 'CHALLENGE') => {
+    const branchIndex = flow.findIndex((candidate) => candidate.stage === stage)
+    if (branchIndex < 0) return
+    resetQuestion()
+    setBranchPrompt(null)
+    setStepIndex(branchIndex)
+  }
+
+  const finishLesson = () => {
+    setBranchPrompt(null)
+    setComplete(true)
+    onComplete?.()
+  }
+
   const savePlace = (callback: ElementaryMathSamplePlayerProps['onSaveForLater'], unavailableMessage: string) => {
     if (callback) callback({ stepIndex, itemRef: step.item.itemRef })
     else setFeedback({ kind: 'INFO', message: unavailableMessage })
   }
 
   const askJarvis = () => {
-    if (onNeedHelp) onNeedHelp(step.item.itemRef)
-    else setFeedback({ kind: 'INFO', message: 'Tutor help is not connected in this sample yet.' })
+    onNeedHelp?.(step.item.itemRef)
+    setFeedback({ kind: 'INFO', message: 'Jarvis help is not connected yet.' })
   }
 
   const answerValue = step.item.responseType === 'CHOICE' ? selectedChoice : draft
@@ -134,13 +164,33 @@ export function ElementaryMathSamplePlayer({
           <p className="elementary-player__eyebrow">Math mission complete</p>
           <h1 ref={headingRef} tabIndex={-1}>Great work!</h1>
           <p>You learned, practiced, and checked what you know about rounding.</p>
+          {onExit ? <button type="button" className="elementary-player__primary-button" onClick={onExit}>Back to Home</button> : null}
+        </section>
+      </main>
+    )
+  }
+
+  if (branchPrompt) {
+    const canPractice = branchPrompt === 'MASTERY' && flow.some((candidate) => candidate.stage === 'REMEDIATION')
+    const canChallenge = flow.some((candidate) => candidate.stage === 'CHALLENGE')
+    return (
+      <main className="elementary-player elementary-player--complete">
+        <section className="elementary-player__card" aria-labelledby="elementary-player-heading">
+          <p className="elementary-player__eyebrow">{displayTitle ?? material.title}</p>
+          <h1 id="elementary-player-heading" ref={headingRef} tabIndex={-1}>Choose what’s next</h1>
+          <p>Your answers are saved. You can keep practicing, try a challenge, or finish for now.</p>
+          <div className="elementary-player__branch-actions">
+            {canPractice ? <button type="button" className="elementary-player__primary-button" onClick={() => openBranch('REMEDIATION')}>More Practice</button> : null}
+            {canChallenge ? <button type="button" className="elementary-player__secondary-button" onClick={() => openBranch('CHALLENGE')}>Try a Challenge</button> : null}
+            <button type="button" className="elementary-player__quiet-button" onClick={finishLesson}>Finish for Now</button>
+          </div>
         </section>
       </main>
     )
   }
 
   const isQuestion = !['READ', 'NONE'].includes(step.item.responseType)
-  const hasNext = stepIndex < flow.length - 1
+  const nextStep = flow[stepIndex + 1]
   const exampleSteps = step.item.example?.split('\n').filter(Boolean) ?? []
   const showingAllExampleSteps = revealedExampleSteps >= exampleSteps.length
   const stageLabel = STAGE_LABELS[step.stage]
@@ -150,7 +200,7 @@ export function ElementaryMathSamplePlayer({
       <header className="elementary-player__topbar">
         <div>
           <p className="elementary-player__eyebrow">Grade 3 Math</p>
-          <p className="elementary-player__lesson-title">{ELEMENTARY_MATH_SAMPLE_MATERIAL.title}</p>
+          <p className="elementary-player__lesson-title">{displayTitle ?? material.title}</p>
         </div>
         <button
           type="button"
@@ -167,11 +217,11 @@ export function ElementaryMathSamplePlayer({
 
         {step.stage === 'LEARN' ? (
           <div className="elementary-player__learn">
-            <h2>What does rounding mean?</h2>
+            <h2>{step.item.title}</h2>
             {(step.item.instruction ?? '').split('\n').filter(Boolean).map((line, index) => (
               index === 0 ? <p key={line} className="elementary-player__lead">{line}</p> : <p key={line} className="elementary-player__rule"><span aria-hidden="true">✓</span>{line}</p>
             ))}
-            <button type="button" className="elementary-player__primary-button" onClick={moveNext}>Show Me an Example</button>
+            <button type="button" className="elementary-player__primary-button" onClick={moveNext}>{nextButtonLabel(step, nextStep)}</button>
           </div>
         ) : step.stage === 'EXAMPLE' ? (
           <div className="elementary-player__example">
@@ -184,7 +234,7 @@ export function ElementaryMathSamplePlayer({
             {!showingAllExampleSteps ? (
               <button type="button" className="elementary-player__primary-button" onClick={() => setRevealedExampleSteps((count) => count + 1)}>Show Next Step</button>
             ) : (
-              <button type="button" className="elementary-player__primary-button" onClick={moveNext}>{nextButtonLabel(step, hasNext)}</button>
+              <button type="button" className="elementary-player__primary-button" onClick={moveNext}>{nextButtonLabel(step, nextStep)}</button>
             )}
           </div>
         ) : (
@@ -260,7 +310,7 @@ export function ElementaryMathSamplePlayer({
             {isQuestion && !['ERROR', 'INFO'].includes(feedback.kind) ? (
               <div className="elementary-player__feedback-actions">
                 {feedback.kind === 'INCORRECT' ? <button type="button" className="elementary-player__secondary-button" onClick={() => { setDraft(''); setSelectedChoice(''); setFeedback(null) }}>Try Again</button> : null}
-                <button type="button" className="elementary-player__primary-button" onClick={moveNext}>{nextButtonLabel(step, hasNext)}</button>
+                <button type="button" className="elementary-player__primary-button" onClick={moveNext}>{nextButtonLabel(step, nextStep)}</button>
               </div>
             ) : null}
           </div>
@@ -268,10 +318,10 @@ export function ElementaryMathSamplePlayer({
       </section>
 
       <nav className="elementary-player__support" aria-label="Lesson help and break controls">
-        <button type="button" className="elementary-player__support-button" onClick={askJarvis} aria-describedby={!onNeedHelp ? 'elementary-player-tutor-note' : undefined}>Need Help? Ask Jarvis</button>
+        <button type="button" className="elementary-player__support-button" onClick={askJarvis} aria-describedby="elementary-player-tutor-note">Need Help? Ask Jarvis</button>
         <button type="button" className="elementary-player__support-button" onClick={() => savePlace(onTakeBreak, 'Break controls are not connected in this sample yet.')}>Take a Break</button>
       </nav>
-      {!onNeedHelp ? <p id="elementary-player-tutor-note" className="elementary-player__sr-only">Tutor help is not connected in this sample yet.</p> : null}
+      <p id="elementary-player-tutor-note" className="elementary-player__sr-only">Jarvis is a future callback placeholder. No tutor is connected.</p>
     </main>
   )
 }

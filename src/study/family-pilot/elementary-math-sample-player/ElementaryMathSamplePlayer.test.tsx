@@ -341,7 +341,7 @@ describe('ElementaryMathSamplePlayer', () => {
   it('provides honest Jarvis fallback behavior and delegates help, break, and save controls when injected', async () => {
     await renderPlayer()
     await press(findButton('Need Help? Ask Jarvis'))
-    expect(hasText(container, 'Tutor help is not connected in this sample yet.')).toBe(true)
+    expect(hasText(container, 'Jarvis help is not connected yet.')).toBe(true)
 
     await act(async () => root?.unmount())
     root = null

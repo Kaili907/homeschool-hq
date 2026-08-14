@@ -13,6 +13,11 @@ import {
 } from '../dashboard-adapter'
 import { fromStudentSelector, toStudentSelector } from '../integration/identity'
 import { FamilyPilotLessonPlayer } from '../lesson-player'
+import {
+  ElementaryMathSamplePlayer,
+  G3_ROUNDING_CHILD_TITLE,
+  isG3RoundingProductionSample,
+} from '../elementary-math-sample-player'
 import { FamilyPilotParentAssignPanel } from '../parent-assign'
 import { FamilyPreferences } from '../preferences'
 import { FamilyPilotRecoveryScreen } from '../recovery'
@@ -1008,6 +1013,32 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     // Study's stable session is the attempt identity in this completion-authority path.
     attemptRef: result.study.session.sessionRef,
   }, responseStore)
+  const completeProductionSample = async () => {
+    setBusy(true)
+    let next: FinalFamilyPilotControllerResult = result
+    for (let segment = 0; next.status === 'ok' && next.study.assignmentState !== 'completed' && segment < 3; segment += 1) {
+      next = await controller.completeSegment(studentRef, assignmentRef)
+    }
+    setResult(next)
+    setMessage(next.status === 'rejected' ? next.message : next.study.assignmentState === 'completed' ? 'Lesson complete.' : 'Your place is saved.')
+    setBusy(false)
+    refresh()
+  }
+
+  if (isG3RoundingProductionSample(result.study.lessonRef)) {
+    return (
+      <ElementaryMathSamplePlayer
+        runtime={responseRuntime}
+        material={result.material}
+        displayTitle={G3_ROUNDING_CHILD_TITLE}
+        onNeedHelp={() => { /* Future Jarvis callback placeholder. */ }}
+        onTakeBreak={() => { void controller.pause(studentRef, assignmentRef).then(() => onExit()) }}
+        onSaveForLater={() => { void controller.checkpoint(studentRef, assignmentRef).then(() => onExit()) }}
+        onComplete={() => { void completeProductionSample() }}
+        onExit={onExit}
+      />
+    )
+  }
   const responseItem = responsePresentation.item
   const segmentContent = responseItem ? {
     lessonRef: responseItem.lessonRef,

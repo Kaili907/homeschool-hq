@@ -19,6 +19,11 @@ import {
   FINAL_FAMILY_PILOT_APP_STATE_KEY,
   loadFinalFamilyPilotAppState,
 } from './state'
+import {
+  createElementaryMathPresentation,
+  G3_ROUNDING_CHILD_TITLE,
+  G3_ROUNDING_PRODUCTION_LESSON_REF,
+} from '../elementary-math-sample-player'
 
 class MemoryStorage implements Storage {
   readonly #values = new Map<string, string>()
@@ -143,6 +148,30 @@ async function finish(controller: FinalFamilyPilotController, studentRef: string
 }
 
 describe('final Family Pilot real convergence', () => {
+  it('assigns and starts the Grade 3 production sample through the current Family Pilot controller', async () => {
+    const { controller } = makeController()
+    let setup = createStudent(EMPTY_FAMILY_SETUP_STATE, {
+      studentRef: 'student:g3', displayName: 'Grade 3 Preview', nominalGrade: '3', enabledSubjects: ['mathematics'],
+    }, '2026-08-13T12:00:00.000Z')
+    if (setup.status !== 'ok') throw new Error('fixture setup')
+    const finished = completeSetup(setup.state, '2026-08-13T12:00:01.000Z')
+    if (finished.status !== 'ok') throw new Error('fixture setup')
+    controller.saveSetup(finished.state)
+
+    const assignment = await controller.assignLesson('student:g3', G3_ROUNDING_PRODUCTION_LESSON_REF)
+    expect(assignment.lessonRef).toBe(G3_ROUNDING_PRODUCTION_LESSON_REF)
+    const started = await controller.start('student:g3', assignment.assignmentRef)
+    expect(started.status).toBe('ok')
+    if (started.status === 'ok') {
+      expect(started.study.lessonRef).toBe(G3_ROUNDING_PRODUCTION_LESSON_REF)
+      expect(G3_ROUNDING_CHILD_TITLE).toBe('Round Numbers to the Nearest 100')
+      const flow = createElementaryMathPresentation(started.material)
+      expect(flow.map((step) => step.stage)).toContain('CHALLENGE')
+      expect(flow).toHaveLength(32)
+    }
+    controller.close()
+  }, 60_000)
+
   it('opens exactly the admitted final release and lazily resolves every production binding', async () => {
     expect(catalog.manifest.counts).toEqual({ grades: 9, courses: 90, units: 698, lessons: 8292, assessments: 699 })
     expect(catalog.runtime.listGrades()).toEqual([3, 4, 5, 7, 8, 9, 10, 11, 12])
