@@ -3,6 +3,7 @@ import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
 import { isArtsMusicDirectorPreviewPath } from './study/family-pilot/arts-music-director-preview/route'
 import { isHealthDirectorReviewPath } from './study/family-pilot/health-director-preview/route'
+import { isPhysicalEducationDirectorPreviewPath } from './study/family-pilot/physical-education-director-preview/route'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
@@ -27,6 +28,12 @@ const HealthDirectorPreview = import.meta.env.DEV
     })))
   : null
 
+const PhysicalEducationDirectorPreview = import.meta.env.DEV
+  ? lazy(() => import('./study/family-pilot/physical-education-director-preview/PhysicalEducationDirectorPreview').then((module) => ({
+      default: module.PhysicalEducationDirectorPreview,
+    })))
+  : null
+
 function familyPilotSelectedAtBoot(): boolean {
   return isFamilyPilotEnabledFromHost() && isFamilyPilotPath(window.location.pathname)
 }
@@ -47,6 +54,14 @@ export default function App() {
     return (
       <Suspense fallback={<main aria-busy="true">Opening the Health Director preview.</main>}>
         <HealthDirectorPreview />
+      </Suspense>
+    )
+  }
+
+  if (PhysicalEducationDirectorPreview && isPhysicalEducationDirectorPreviewPath(window.location.pathname)) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Physical Education Director preview.</main>}>
+        <PhysicalEducationDirectorPreview />
       </Suspense>
     )
   }
