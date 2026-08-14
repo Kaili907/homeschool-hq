@@ -28,6 +28,11 @@ const LESSON = {
     lessonRef: 'ma-hs12-earth-space-environmental-u01-l01',
     title: 'Launch and diagnostic: systems and system models',
   },
+  autoGrade3: {
+    courseRef: 'ma-g3-mathematics',
+    lessonRef: 'ma-g3-mathematics-u01-l01',
+    title: 'Launch and diagnostic: making sense of unfamiliar problems',
+  },
   guardian: {
     courseRef: 'ma-g5-ready-for-life',
     lessonRef: 'ma-g5-ready-for-life-u01-l04',
@@ -514,6 +519,84 @@ test('Parent School Plan produces idempotent automatic Today work without learne
   const plannerRecords = (await idbRecords(page)).filter((record) => record.key.startsWith('manuel-academy.study.family-auto-planner.v1'))
   expect(plannerRecords).toHaveLength(1)
   expect(JSON.stringify(plannerRecords[0]?.value).match(/materializationRef/g)).toHaveLength(10)
+})
+
+test('auto-planned mission launches through its visible center and keyboard resume', async ({ page }) => {
+  await page.setViewportSize({ width: 1594, height: 920 })
+  await setupFamily(page, [{ name: 'Mission Pointer Student', grade: '3' }])
+  await configureSchoolPlan(page, 'Mission Pointer Student')
+  await page.getByRole('button', { name: 'Student', exact: true }).click()
+  await openStudent(page, 'Mission Pointer Student')
+
+  const stateBefore = await supportState(page)
+  const studentRef = stateBefore.app.activeStudentRef
+  const assignment = assignmentFor(stateBefore.core, studentRef, LESSON.autoGrade3.lessonRef)
+  expect(assignment).toMatchObject({
+    lessonRef: LESSON.autoGrade3.lessonRef,
+    title: LESSON.autoGrade3.title,
+    state: 'planned',
+  })
+
+  const missionAction = page.getByRole('button', { name: 'Start lesson', exact: true })
+  await expect(missionAction).toBeVisible()
+  await expect(missionAction).toBeEnabled()
+  const hitTest = await missionAction.evaluate((button) => {
+    const rect = button.getBoundingClientRect()
+    const x = rect.x + rect.width / 2
+    const y = rect.y + rect.height / 2
+    const top = document.elementFromPoint(x, y)
+    return {
+      x,
+      y,
+      topTag: top?.tagName ?? null,
+      topClass: top?.className ?? null,
+      intendedButton: top === button || Boolean(top && button.contains(top)),
+      overlaps: document.elementsFromPoint(x, y).map((element) => ({
+        tag: element.tagName,
+        className: element.className,
+        pointerEvents: getComputedStyle(element).pointerEvents,
+      })),
+    }
+  })
+  expect(hitTest).toMatchObject({
+    topTag: 'BUTTON',
+    topClass: 'family-dashboard__button-primary',
+    intendedButton: true,
+  })
+  expect(hitTest.overlaps[0]).toMatchObject({
+    tag: 'BUTTON',
+    className: 'family-dashboard__button-primary',
+    pointerEvents: 'auto',
+  })
+
+  await page.mouse.click(hitTest.x, hitTest.y)
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const started = assignmentFor((await supportState(page)).core, studentRef, LESSON.autoGrade3.lessonRef)
+  expect(started).toMatchObject({ assignmentRef: assignment.assignmentRef, state: 'active' })
+  expect(started.sessionRef).toBeTruthy()
+
+  await page.getByRole('button', { name: 'Save and exit' }).click()
+  await expect(page.getByRole('heading', { name: 'Hello, Mission' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Continue lesson', exact: true })).toBeVisible()
+
+  await page.reload()
+  await expect(page.getByRole('heading', { name: 'Hello, Mission' })).toBeVisible()
+  await page.keyboard.press('Tab')
+  const skip = page.getByRole('link', { name: 'Skip to today’s work' })
+  await expect(skip).toBeFocused()
+  await page.keyboard.press('Enter')
+  await page.keyboard.press('Tab')
+  const continueAction = page.getByRole('button', { name: 'Continue lesson', exact: true })
+  await expect(continueAction).toBeFocused()
+  await page.keyboard.press('Space')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const resumed = assignmentFor((await supportState(page)).core, studentRef, LESSON.autoGrade3.lessonRef)
+  expect(resumed).toMatchObject({
+    assignmentRef: assignment.assignmentRef,
+    lessonRef: LESSON.autoGrade3.lessonRef,
+    state: 'active',
+    sessionRef: started.sessionRef,
+  })
 })
 
 test('all 90 grade-subject cells load in Chromium and every subject launches lesson and assessment UI', async ({ page }) => {
