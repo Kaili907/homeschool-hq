@@ -86,6 +86,7 @@ describe('LearnerResponseRuntime', () => {
     const held = runtime({
       list: async () => Object.freeze([]),
       save: async () => { throw new Error('storage unavailable') },
+      commitAssessment: async () => { throw new Error('storage unavailable') },
     })
     const view = await held.open(2, 'segment:practice')
     const result = await held.submit({ lessonRef: context.lessonRef, sectionRef: view.item!.sectionRef, itemRef: view.item!.itemRef, segmentRef: view.segmentRef, value: view.item!.choices[0]!.choiceRef })

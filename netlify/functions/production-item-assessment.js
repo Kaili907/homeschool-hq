@@ -20,11 +20,16 @@ function ref(value) {
   return typeof value === 'string' && REF.test(value)
 }
 
+export function familyPilotTrustedScorerEnabled(env) {
+  return env?.ACADEMY_FAMILY_PILOT_TRUSTED_SCORER_ENABLED === 'true' &&
+    ['local', 'test', 'staging'].includes(env?.ACADEMY_DEPLOYMENT_ENV ?? '')
+}
+
 function parseIdentityRequest(value) {
   const request = assertExactObject(value, [
-    'releaseId', 'assignmentRef', 'lessonRef', 'sectionRef', 'itemRef',
+    'schemaVersion', 'releaseId', 'assignmentRef', 'lessonRef', 'sectionRef', 'itemRef',
   ], ['attemptRef', 'response'])
-  if (![request.releaseId, request.assignmentRef, request.lessonRef,
+  if (request.schemaVersion !== 1 || ![request.releaseId, request.assignmentRef, request.lessonRef,
     request.sectionRef, request.itemRef].every(ref)) throw new Error('invalid_request')
   return request
 }
@@ -67,6 +72,7 @@ export function createProductionItemAssessmentHandler(overrides = {}) {
   const service = overrides.service ?? createProductionItemAssessmentService(overrides)
   return async (event) => {
     if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
+    if (!familyPilotTrustedScorerEnabled(env)) return errorResponse(503, 'gateway_disabled')
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (event?.httpMethod !== 'POST') return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')

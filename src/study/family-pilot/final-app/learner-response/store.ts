@@ -187,6 +187,42 @@ export class BrowserLearnerResponseStore implements LearnerResponseStore {
     }
   }
 
+  async commitAssessment(pending: LearnerResponseRecord, assessed: LearnerResponseRecord): Promise<{
+    readonly status: 'accepted' | 'duplicate' | 'stale'
+    readonly record: LearnerResponseRecord
+  }> {
+    if (!isRecord(pending) || pending.status !== 'PENDING_ASSESSMENT' ||
+      !isRecord(assessed) || assessed.status !== 'ASSESSED' ||
+      exact({ ...assessed, status: pending.status, assessment: pending.assessment }) !== exact(pending)) {
+      throw new Error('Invalid trusted assessment transition rejected.')
+    }
+    await this.#ensureMigration()
+    const key = learnerResponseDocumentKey(pending)
+    const store = await openIndexedDbRecordStore(this.#options)
+    try {
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        const current = (await store.read([key])).get(key)
+        if (!isDocument(current, pending)) throw new Error('Saved learner responses cannot be safely read.')
+        const held = current.records.find((record) => record.itemRef === pending.itemRef)
+        if (exact(held) === exact(assessed)) return { status: 'duplicate', record: assessed }
+        if (exact(held) !== exact(pending)) return { status: 'stale', record: held ?? pending }
+        const next = document(pending, [
+          ...current.records.filter((record) => record.itemRef !== pending.itemRef),
+          assessed,
+        ])
+        try {
+          await writeVerified(store, key, next, current)
+          return { status: 'accepted', record: assessed }
+        } catch (error) {
+          if (!(error instanceof IndexedDbRecordError) || error.kind !== 'conflict' || attempt === 2) throw error
+        }
+      }
+      return { status: 'stale', record: pending }
+    } finally {
+      store.close()
+    }
+  }
+
   async #ensureMigration(): Promise<void> {
     this.#migration ??= this.#migrateLegacy()
     return this.#migration
@@ -278,5 +314,17 @@ export class MemoryLearnerResponseStore implements LearnerResponseStore {
 
   async save(record: LearnerResponseRecord): Promise<void> {
     this.#records.set(`${record.studentRef}|${record.assignmentRef}|${record.attemptRef}|${record.itemRef}`, record)
+  }
+
+  async commitAssessment(pending: LearnerResponseRecord, assessed: LearnerResponseRecord): Promise<{
+    readonly status: 'accepted' | 'duplicate' | 'stale'
+    readonly record: LearnerResponseRecord
+  }> {
+    const key = `${pending.studentRef}|${pending.assignmentRef}|${pending.attemptRef}|${pending.itemRef}`
+    const current = this.#records.get(key)
+    if (exact(current) === exact(assessed)) return { status: 'duplicate', record: assessed }
+    if (exact(current) !== exact(pending)) return { status: 'stale', record: current ?? pending }
+    this.#records.set(key, assessed)
+    return { status: 'accepted', record: assessed }
   }
 }

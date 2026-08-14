@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createProductionItemAssessmentHandler } from './production-item-assessment.js'
+import {
+  createProductionItemAssessmentHandler,
+  familyPilotTrustedScorerEnabled,
+} from './production-item-assessment.js'
 import {
   createFilesystemProductionItemResolver,
   createProductionItemAuthority,
@@ -20,7 +23,7 @@ function event(operation, request, overrides = {}) {
       authorization: `Bearer ${TOKEN}`,
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ schemaVersion: 1, operation, request }),
+    body: JSON.stringify({ schemaVersion: 1, operation, request: { schemaVersion: 1, ...request } }),
     ...overrides,
   }
 }
@@ -57,7 +60,11 @@ function harness() {
     },
   })
   const handler = createProductionItemAssessmentHandler({
-    env: { ACADEMY_STUDY_ENABLED: 'true' },
+    env: {
+      ACADEMY_STUDY_ENABLED: 'true',
+      ACADEMY_FAMILY_PILOT_TRUSTED_SCORER_ENABLED: 'true',
+      ACADEMY_DEPLOYMENT_ENV: 'test',
+    },
     service,
   })
   return { resolver, authority, service, handler, evidence, reviews }
@@ -72,6 +79,39 @@ const mathIdentity = {
 }
 
 describe('production item trusted resolver and gateway', () => {
+  it('requires an explicit non-production pilot flag', () => {
+    expect(familyPilotTrustedScorerEnabled({})).toBe(false)
+    expect(familyPilotTrustedScorerEnabled({
+      ACADEMY_FAMILY_PILOT_TRUSTED_SCORER_ENABLED: 'true',
+      ACADEMY_DEPLOYMENT_ENV: 'production',
+    })).toBe(false)
+    expect(familyPilotTrustedScorerEnabled({
+      ACADEMY_FAMILY_PILOT_TRUSTED_SCORER_ENABLED: 'true',
+      ACADEMY_DEPLOYMENT_ENV: 'staging',
+    })).toBe(true)
+  })
+
+  it('keeps the real handler disabled when the scorer pilot lock is absent or production-scoped', async () => {
+    const service = { isReady: () => true }
+    const absent = createProductionItemAssessmentHandler({
+      env: { ACADEMY_STUDY_ENABLED: 'true' }, service,
+    })
+    const production = createProductionItemAssessmentHandler({
+      env: {
+        ACADEMY_STUDY_ENABLED: 'true',
+        ACADEMY_FAMILY_PILOT_TRUSTED_SCORER_ENABLED: 'true',
+        ACADEMY_DEPLOYMENT_ENV: 'production',
+      },
+      service,
+    })
+    await expect(absent(event('project', mathIdentity))).resolves.toMatchObject({
+      statusCode: 503, body: JSON.stringify({ error: { code: 'gateway_disabled' } }),
+    })
+    await expect(production(event('project', mathIdentity))).resolves.toMatchObject({
+      statusCode: 503, body: JSON.stringify({ error: { code: 'gateway_disabled' } }),
+    })
+  })
+
   it('projects G5 Math U1 L1 without answer authority leakage', async () => {
     const { handler } = harness()
     const response = await handler(event('project', mathIdentity))

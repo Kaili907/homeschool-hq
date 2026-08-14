@@ -99,8 +99,11 @@ export class LearnerResponseRuntime {
       const receipt = await this.assessor.assess(pending)
       if (receipt.assessorRef !== this.assessor.assessorRef) return { status: 'saved', record: pending, assessmentStatus: 'PENDING_ASSESSMENT' }
       const assessed: LearnerResponseRecord = Object.freeze({ ...pending, status: 'ASSESSED', assessment: Object.freeze({ ...receipt }) })
-      await this.store.save(assessed)
-      return { status: 'saved', record: assessed, assessmentStatus: 'ASSESSED' }
+      const committed = await this.store.commitAssessment(pending, assessed)
+      if (committed.status === 'stale' || committed.record.status !== 'ASSESSED') {
+        return { status: 'saved', record: committed.record, assessmentStatus: 'PENDING_ASSESSMENT' }
+      }
+      return { status: 'saved', record: committed.record, assessmentStatus: 'ASSESSED' }
     } catch {
       // Offline/unavailable assessment never changes the locally durable pending response.
       return { status: 'saved', record: pending, assessmentStatus: 'PENDING_ASSESSMENT' }
