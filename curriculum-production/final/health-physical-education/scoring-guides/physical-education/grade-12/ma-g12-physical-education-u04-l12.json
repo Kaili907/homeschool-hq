@@ -5,6 +5,84 @@
   "courseId": "ma-g12-physical-education",
   "grade": 12,
   "subject": "physical-education",
+  "transferAuthority": {
+    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
+    "authorityId": "ma-g12-physical-education-u04-transfer-v2",
+    "learnerTask": {
+      "actionId": "ma-g12-physical-education-u04-l12:focus-action",
+      "actionKind": "APPLY_OR_FULLY_MODEL",
+      "focusId": "ma-g12-physical-education-u04:deciding whether to continue, adjust, or change direction",
+      "executionRequired": false
+    },
+    "durationContinuity": {
+      "span": {
+        "unit": "CHALLENGE_ATTEMPT",
+        "minimum": 1,
+        "coverage": "COMPLETE_REQUIRED_SPAN"
+      },
+      "uninterruptedPerformanceRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restInterruptionAllowance": {
+      "restAllowed": true,
+      "restPreservesParticipationCredit": true,
+      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferRequirement": {
+      "required": true,
+      "conditionId": "ma-g12-physical-education-u04-transfer-v2:condition"
+    },
+    "completionEvidence": {
+      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalCompletionAllowed": true,
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u04-l12:focus-action",
+        "ma-g12-physical-education-u04-transfer-v2:condition"
+      ],
+      "maximumCreditableSpan": {
+        "unit": "CHALLENGE_ATTEMPT",
+        "maximum": 1
+      }
+    },
+    "equalCreditPath": {
+      "routes": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u04-l12:focus-action",
+        "ma-g12-physical-education-u04-transfer-v2:condition"
+      ]
+    },
+    "adultRubric": {
+      "scoringAuthority": "RUBRIC",
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g12-physical-education-u04-l12:focus-action",
+        "ma-g12-physical-education-u04-transfer-v2:condition"
+      ],
+      "bodyMetricsScored": false,
+      "participantCountScored": false
+    },
+    "adaptiveRouteExpectations": {
+      "safeReductionPreservesParticipationCredit": true,
+      "alternateRouteCanEarnTransferCredit": true,
+      "alternateRouteMustPreserveEvidence": true,
+      "guardianSafetyBoundaryRetained": true
+    }
+  },
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
     "The learner holds deciding whether to continue, adjust, or change direction carried through a safe attempt when available or a detailed simulation of the attempt, including a realistic setback and an honest evaluation afterwards, in whatever version their body and setting allow. Full transfer credit requires the goal, attempt plan, realistic setback, response, and evidence-based evaluation. A safe attempt or detailed simulation earns equal credit when it preserves every part of that challenge-and-revision evidence.",

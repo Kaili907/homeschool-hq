@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://manuel-academy/curriculum-production/final/health-physical-education/transfer-authority.schema.json",
+  "title": "High-school PE structured transfer authority",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "authorityId",
+    "learnerTask",
+    "durationContinuity",
+    "restInterruptionAllowance",
+    "transferRequirement",
+    "completionEvidence",
+    "equalCreditPath",
+    "adultRubric",
+    "adaptiveRouteExpectations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "manuel-academy.pe-transfer-authority.v2" },
+    "authorityId": { "type": "string", "minLength": 1 },
+    "learnerTask": {
+      "type": "object",
+      "required": ["actionId", "actionKind", "focusId", "executionRequired"],
+      "properties": {
+        "actionId": { "type": "string", "minLength": 1 },
+        "actionKind": { "const": "APPLY_OR_FULLY_MODEL" },
+        "focusId": { "type": "string", "minLength": 1 },
+        "executionRequired": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "durationContinuity": {
+      "type": "object",
+      "required": ["span", "uninterruptedPerformanceRequired", "interruptionRecoveryRequired"],
+      "properties": {
+        "span": {
+          "type": "object",
+          "required": ["unit", "minimum", "coverage"],
+          "properties": {
+            "unit": { "type": "string", "minLength": 1 },
+            "minimum": { "type": "integer", "minimum": 1 },
+            "coverage": { "const": "COMPLETE_REQUIRED_SPAN" }
+          },
+          "additionalProperties": false
+        },
+        "uninterruptedPerformanceRequired": { "type": "boolean" },
+        "interruptionRecoveryRequired": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "restInterruptionAllowance": {
+      "type": "object",
+      "required": ["restAllowed", "restPreservesParticipationCredit", "transferCreditAfterRest"],
+      "properties": {
+        "restAllowed": { "type": "boolean" },
+        "restPreservesParticipationCredit": { "type": "boolean" },
+        "transferCreditAfterRest": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "transferRequirement": {
+      "type": "object",
+      "required": ["required", "conditionId"],
+      "properties": {
+        "required": { "const": true },
+        "conditionId": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "completionEvidence": {
+      "type": "object",
+      "required": ["completionKind", "hypotheticalCompletionAllowed", "requiredEvidenceIds", "maximumCreditableSpan"],
+      "properties": {
+        "completionKind": { "type": "string", "minLength": 1 },
+        "hypotheticalCompletionAllowed": { "type": "boolean" },
+        "requiredEvidenceIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "maximumCreditableSpan": {
+          "type": "object",
+          "required": ["unit", "maximum"],
+          "properties": {
+            "unit": { "type": "string", "minLength": 1 },
+            "maximum": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "equalCreditPath": {
+      "type": "object",
+      "required": ["routes", "sameEvidenceRequired", "requiredEvidenceIds"],
+      "properties": {
+        "routes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "sameEvidenceRequired": { "const": true },
+        "requiredEvidenceIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": false
+    },
+    "adultRubric": {
+      "type": "object",
+      "required": ["scoringAuthority", "requiredEvidenceIds", "bodyMetricsScored", "participantCountScored"],
+      "properties": {
+        "scoringAuthority": { "const": "RUBRIC" },
+        "requiredEvidenceIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "bodyMetricsScored": { "const": false },
+        "participantCountScored": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "adaptiveRouteExpectations": {
+      "type": "object",
+      "required": ["safeReductionPreservesParticipationCredit", "alternateRouteCanEarnTransferCredit", "alternateRouteMustPreserveEvidence", "guardianSafetyBoundaryRetained"],
+      "properties": {
+        "safeReductionPreservesParticipationCredit": { "type": "boolean" },
+        "alternateRouteCanEarnTransferCredit": { "type": "boolean" },
+        "alternateRouteMustPreserveEvidence": { "const": true },
+        "guardianSafetyBoundaryRetained": { "const": true }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

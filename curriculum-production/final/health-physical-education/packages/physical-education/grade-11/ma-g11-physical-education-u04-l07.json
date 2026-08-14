@@ -5,6 +5,84 @@
   "courseId": "ma-g11-physical-education",
   "grade": 11,
   "subject": "physical-education",
+  "transferAuthority": {
+    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
+    "authorityId": "ma-g11-physical-education-u04-transfer-v2",
+    "learnerTask": {
+      "actionId": "ma-g11-physical-education-u04-l07:focus-action",
+      "actionKind": "APPLY_OR_FULLY_MODEL",
+      "focusId": "ma-g11-physical-education-u04:pattern recognition and anticipation",
+      "executionRequired": false
+    },
+    "durationContinuity": {
+      "span": {
+        "unit": "CONSTRAINT_PRACTICE",
+        "minimum": 1,
+        "coverage": "COMPLETE_REQUIRED_SPAN"
+      },
+      "uninterruptedPerformanceRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restInterruptionAllowance": {
+      "restAllowed": true,
+      "restPreservesParticipationCredit": true,
+      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferRequirement": {
+      "required": true,
+      "conditionId": "ma-g11-physical-education-u04-transfer-v2:condition"
+    },
+    "completionEvidence": {
+      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalCompletionAllowed": true,
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u04-l07:focus-action",
+        "ma-g11-physical-education-u04-transfer-v2:condition"
+      ],
+      "maximumCreditableSpan": {
+        "unit": "CONSTRAINT_PRACTICE",
+        "maximum": 1
+      }
+    },
+    "equalCreditPath": {
+      "routes": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u04-l07:focus-action",
+        "ma-g11-physical-education-u04-transfer-v2:condition"
+      ]
+    },
+    "adultRubric": {
+      "scoringAuthority": "RUBRIC",
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u04-l07:focus-action",
+        "ma-g11-physical-education-u04-transfer-v2:condition"
+      ],
+      "bodyMetricsScored": false,
+      "participantCountScored": false
+    },
+    "adaptiveRouteExpectations": {
+      "safeReductionPreservesParticipationCredit": true,
+      "alternateRouteCanEarnTransferCredit": true,
+      "alternateRouteMustPreserveEvidence": true,
+      "guardianSafetyBoundaryRetained": true
+    }
+  },
   "unitNumber": 4,
   "unitTitle": "Advanced Tactics and Game Sense",
   "title": "Investigation or close reading: pattern recognition and anticipation under transfer",

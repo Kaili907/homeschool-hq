@@ -119,16 +119,8 @@ function main() {
     const guide = peGuides.get(pkg.lessonId)
     const result = evaluatePeTransferConsistency({
       sourceLesson,
-      learnerTask: pkg.studentTask,
-      completionCriteria: pkg.completionCriteria,
-      equipmentAlternative: pkg.equipmentRequirements?.equalCreditNoEquipment,
-      accessibleAdaptation: pkg.accessibleAdaptation,
-      activitySteps: pkg.activitySteps,
-      adultSuccessCriteria: guide?.successCriteria,
-      adultScoringGuidance: guide?.scoringGuidance,
-      adultAdaptiveRoutes: guide?.adaptiveRoutes,
-      adultSafetyAndPrivacy: guide?.safetyAndPrivacyNotes,
-      guardianSafetyReview: guide?.guardianSafetyReview,
+      learnerTransferAuthority: pkg.transferAuthority,
+      adultTransferAuthority: guide?.transferAuthority,
     })
     if (result.classifications.includes('SCORING_AUTHORITY_CONFLICT')) scoringAuthorityConflicts += 1
     if (result.classifications.includes('CONTENT_TRANSFER_CONFLICT')) contentTransferConflicts += 1

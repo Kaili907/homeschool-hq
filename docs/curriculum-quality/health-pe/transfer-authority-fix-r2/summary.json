@@ -1,0 +1,43 @@
+{
+  "validation": "HIGH-SCHOOL PE TRANSFER AUTHORITY PERMANENT GATE R2",
+  "status": "PE_TRANSFER_AUTHORITY_R2_VALIDATED",
+  "r1Base": "98ca7a3a4bcd32742308933d479ff146e71a1b19",
+  "branch": "mac/pe-transfer-authority-fix-r2",
+  "reviewedCases": 216,
+  "historical": {
+    "scoringAuthorityConflicts": 60,
+    "contentTransferConflicts": 36,
+    "falsePositives": 120
+  },
+  "final": {
+    "scoringAuthorityConflicts": 0,
+    "contentTransferConflicts": 0,
+    "totalConflicts": 0,
+    "falsePositivesPreserved": 120,
+    "unexplainedCases": 0
+  },
+  "structuredAuthority": {
+    "schema": "manuel-academy.pe-transfer-authority.v2",
+    "sourceRecords": 216,
+    "learnerRecords": 216,
+    "adultRecords": 216,
+    "phrasePatternsUsedByGate": 0
+  },
+  "boundaries": {
+    "curriculumSemanticsChanged": false,
+    "safetyPreserved": 216,
+    "learnerAuthorityBindingsPreserved": 216
+  },
+  "controls": {
+    "trueScoringMismatch": "FAILS",
+    "trueTransferMismatch": "FAILS",
+    "paraphrasedScoringVariants": 3,
+    "paraphrasedTransferVariants": 3,
+    "validEqualCredit": "PASSES",
+    "validTransfer": "PASSES",
+    "historicalFalsePositivePattern": "PASSES",
+    "lessonLocationMutation": "UNCHANGED"
+  },
+  "studyBoundary": "Completion-based Study progression and LEARNER_AUTHORITY bindings are unchanged; no Study scoring engine was added.",
+  "safety": "Stop/rest authority, adaptations, guardian boundaries, privacy, and no-body-scoring remain explicit in both prose and structured authority."
+}

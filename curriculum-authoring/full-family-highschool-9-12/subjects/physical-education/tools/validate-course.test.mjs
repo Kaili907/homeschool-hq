@@ -215,17 +215,17 @@ describe('each gate catches its defect', () => {
     assert.equal(checkMultiOccasionEvidence(b).pass, false)
   })
 
-  test('transfer-evidence-authority catches learner work that drops the authored evidence rule', () => {
+  test('transfer-evidence-authority catches an incomplete structured learner action', () => {
     const b = clone()
     const l = b.courses[0].lessons.find((lesson) => lesson.transfer_evidence_requirement)
-    l.student_activity = l.student_activity.replace(l.transfer_evidence_requirement, '')
+    l.transfer_authority.learnerTask.actionId = null
     assert.equal(checkTransferEvidenceAuthority(b).pass, false)
   })
 
-  test('transfer-evidence-authority catches adult authority that grants generic equal credit', () => {
+  test('transfer-evidence-authority catches structured equal-credit evidence drift', () => {
     const b = clone()
     const l = b.courses[0].lessons.find((lesson) => lesson.transfer_evidence_requirement)
-    l.answer_or_scoring_guidance = 'Every alternate route receives full credit without further evidence.'
+    l.transfer_authority.equalCreditPath.requiredEvidenceIds = ['GENERIC_COMPLETION']
     assert.equal(checkTransferEvidenceAuthority(b).pass, false)
   })
 

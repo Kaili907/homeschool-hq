@@ -9,7 +9,7 @@ Four continuous high-school physical-education courses (Grades 9, 10, 11, 12) ex
 | Lessons | 432 (108 per course) |
 | Unit assessments | 36 |
 | Michigan PE levels | LEVEL 1 in grades 9-10, LEVEL 2 in grades 11-12 |
-| Validation | 11 gates, all passing; 32 tests |
+| Validation | 12 gates, all passing; 34 tests |
 
 ## The four-year arc
 
@@ -24,7 +24,7 @@ The progression is deliberate: Grade 9 broadens so that later specialization is 
 
 ## How a 12-day unit is built
 
-Each unit carries **six topics across twelve days, in two passes**. Days 1-6 acquire each topic. Days 7-12 return to the same six under the unit's own **transfer condition** — the Grade 9 invasion unit revisits its topics *at activity speed against an opponent who is genuinely competing*, the Grade 12 independent-cycle unit revisits its topics *run unsupervised across a full cycle, with the pre-committed rules honoured rather than renegotiated mid-cycle*.
+Each unit carries **six topics across twelve days, in two passes**. Days 1-6 acquire each topic. Days 7-12 return to the same six under the unit's own **transfer condition**. Every second-pass lesson also carries a prose-independent `manuel-academy.pe-transfer-authority.v2` record for its action, duration/continuity, stop/rest authority, transfer requirement, completion evidence, equal-credit routes, rubric, and adaptive/guardian expectations.
 
 The second pass is a separate mastery occasion, not a repeat, so it carries its own objectives, success criteria, lesson flow, activity, formative check, and extension, plus a tutor route for a learner for whom the added demand is too much that day — dropping back to the first-pass version is scored as full participation. This is what makes the multi-occasion mastery rule real rather than a formality: the two occasions are separated by time *and* by demand. The `distinct-lessons` gate fails the build if any lesson is a relabelled copy of another.
 
@@ -47,8 +47,9 @@ physical-education/
   authoring-boundaries.md       what this lane owns, what it did not touch, handoff notes
   tools/
     course-data.mjs             the authored content — units, topics, tasks, adaptations, guardian notices
+    transfer-authority.mjs      normalized second-pass semantic authority and source validation
     build-courses.mjs           expands course-data into the canonical Study-compatible shape
-    validate-course.mjs         the eleven gates
+    validate-course.mjs         the twelve gates
     validate-course.test.mjs    proves each gate can fail
   build/                        generated; not imported into curriculum-content by this lane
 ```

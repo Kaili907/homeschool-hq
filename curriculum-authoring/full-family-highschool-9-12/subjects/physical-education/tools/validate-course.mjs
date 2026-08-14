@@ -8,6 +8,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { validateTransferAuthorityRecord } from './transfer-authority.mjs'
 
 const TOOLS_DIR = path.dirname(fileURLToPath(import.meta.url))
 const DEFAULT_BUILD = path.join(path.dirname(TOOLS_DIR), 'build')
@@ -308,51 +309,36 @@ export function checkMultiOccasionEvidence({ courses }) {
   return findings.length ? fail('multi-occasion-evidence', 'single-occasion mastery found', findings) : ok('multi-occasion-evidence', 'every lesson and assessment requires evidence across more than one occasion or setting')
 }
 
-// Gate 10 — repaired second-pass families must carry the same substantive
-// transfer-evidence requirement through learner work and adult authority.
-// The final projection performs the cross-artifact semantic comparison; this
-// source gate prevents the canonical generator from dropping the authored
-// requirement before projection.
+// Gate 10 — every second-pass lesson carries a prose-independent structured
+// authority record. The 96 R1 repairs additionally identify their authored
+// unit evidence in that record; no phrase matching is part of this gate.
 export function checkTransferEvidenceAuthority({ courses }) {
   const findings = []
   let repairedLessons = 0
+  let structuredLessons = 0
   for (const c of courses) {
     for (const l of c.lessons) {
       const evidence = l.transfer_evidence_requirement
-      if (!evidence) {
-        if (l.cycle === 1 && l.transfer_condition !== null) {
-          findings.push({ source: l.lesson_id, text: 'first-pass lesson carries a transfer condition' })
-        }
+      if (l.cycle === 1) {
+        if (l.transfer_condition !== null) findings.push({ source: l.lesson_id, text: 'first-pass lesson carries a transfer condition' })
+        if (l.transfer_authority !== null) findings.push({ source: l.lesson_id, text: 'first-pass lesson carries transfer authority' })
         continue
       }
-      repairedLessons += 1
-      const learnerDecline = l.adaptive_tutor_routes.find((route) => route.signal === 'learner declines a task')?.action ?? ''
-      const requiredFields = [
-        ['transfer condition', l.transfer_condition],
-        ['learning objective', l.learning_objectives?.[0]],
-        ['success criterion', l.success_criteria?.[0]],
-        ['student activity', l.student_activity],
-        ['scoring guidance', l.answer_or_scoring_guidance],
-        ['decline-route authority', learnerDecline],
-      ]
-      if (l.cycle !== 2) findings.push({ source: l.lesson_id, text: 'transfer evidence appears outside the second pass' })
-      for (const [field, text] of requiredFields) {
-        if (!text) findings.push({ source: l.lesson_id, text: `${field} is missing` })
-        else if (field !== 'transfer condition' && !text.includes(evidence)) {
-          findings.push({ source: l.lesson_id, text: `${field} does not preserve the authored transfer-evidence requirement` })
-        }
-      }
-      if (!/full transfer credit/i.test(evidence) || !/equal credit/i.test(evidence)) {
-        findings.push({ source: l.lesson_id, text: 'transfer-evidence requirement does not define the equal-credit evidence rule' })
-      }
+      structuredLessons += 1
+      if (!l.transfer_condition) findings.push({ source: l.lesson_id, text: 'second-pass transfer condition is missing' })
+      for (const error of validateTransferAuthorityRecord(l.transfer_authority)) findings.push({ source: l.lesson_id, text: error })
+      if (l.transfer_authority?.learnerTask?.actionId !== `${l.lesson_id}:focus-action`) findings.push({ source: l.lesson_id, text: 'structured learner action is not bound to this lesson' })
+      if (evidence) repairedLessons += 1
+      if (Boolean(evidence) !== l.transfer_authority?.completionEvidence?.requiredEvidenceIds?.includes('AUTHORED_UNIT_EVIDENCE')) findings.push({ source: l.lesson_id, text: 'authored unit-evidence marker does not match the canonical repair boundary' })
     }
   }
+  if (structuredLessons !== 216) findings.push({ source: 'structured-authority-boundary', text: `${structuredLessons} second-pass lessons carry structured authority; expected exactly 216` })
   if (repairedLessons !== 96) {
     findings.push({ source: 'canonical-repair-boundary', text: `${repairedLessons} lessons carry repaired transfer evidence; expected exactly 96` })
   }
   return findings.length
-    ? fail('transfer-evidence-authority', 'transfer evidence is not consistent across learner and scoring authority fields', findings)
-    : ok('transfer-evidence-authority', 'exactly 96 repaired lessons preserve one authored transfer/equal-credit evidence requirement across learner work and adult authority')
+    ? fail('transfer-evidence-authority', 'structured transfer authority is incomplete or internally inconsistent', findings)
+    : ok('transfer-evidence-authority', 'all 216 transfer lessons carry valid structured authority; exactly 96 retain the R1 authored unit-evidence marker')
 }
 
 // Gate 11 — a lesson must be distinct work, not a relabelled earlier lesson.

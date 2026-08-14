@@ -5,6 +5,81 @@
   "courseId": "ma-g11-physical-education",
   "grade": 11,
   "subject": "physical-education",
+  "transferAuthority": {
+    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
+    "authorityId": "ma-g11-physical-education-u08-transfer-v2",
+    "learnerTask": {
+      "actionId": "ma-g11-physical-education-u08-l12:focus-action",
+      "actionKind": "APPLY_OR_FULLY_MODEL",
+      "focusId": "ma-g11-physical-education-u08:when a difficulty needs support beyond movement",
+      "executionRequired": false
+    },
+    "durationContinuity": {
+      "span": {
+        "unit": "TERM_STRETCH",
+        "minimum": 1,
+        "coverage": "COMPLETE_REQUIRED_SPAN"
+      },
+      "uninterruptedPerformanceRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restInterruptionAllowance": {
+      "restAllowed": true,
+      "restPreservesParticipationCredit": true,
+      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferRequirement": {
+      "required": true,
+      "conditionId": "ma-g11-physical-education-u08-transfer-v2:condition"
+    },
+    "completionEvidence": {
+      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalCompletionAllowed": true,
+      "requiredEvidenceIds": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u08-l12:focus-action",
+        "ma-g11-physical-education-u08-transfer-v2:condition"
+      ],
+      "maximumCreditableSpan": {
+        "unit": "TERM_STRETCH",
+        "maximum": 1
+      }
+    },
+    "equalCreditPath": {
+      "routes": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "requiredEvidenceIds": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u08-l12:focus-action",
+        "ma-g11-physical-education-u08-transfer-v2:condition"
+      ]
+    },
+    "adultRubric": {
+      "scoringAuthority": "RUBRIC",
+      "requiredEvidenceIds": [
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u08-l12:focus-action",
+        "ma-g11-physical-education-u08-transfer-v2:condition"
+      ],
+      "bodyMetricsScored": false,
+      "participantCountScored": false
+    },
+    "adaptiveRouteExpectations": {
+      "safeReductionPreservesParticipationCredit": true,
+      "alternateRouteCanEarnTransferCredit": true,
+      "alternateRouteMustPreserveEvidence": true,
+      "guardianSafetyBoundaryRetained": true
+    }
+  },
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
     "The learner holds when a difficulty needs support beyond movement applied across a genuinely demanding stretch of the learner’s own term, evaluated honestly including where it did not help, in whatever version their body and setting allow.",

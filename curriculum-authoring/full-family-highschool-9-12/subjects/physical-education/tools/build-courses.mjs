@@ -13,6 +13,7 @@ import { mkdir, writeFile, rm } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { COURSES, STANDARD, LEVEL, anchor } from './course-data.mjs'
+import { buildTransferAuthorityRecord } from './transfer-authority.mjs'
 
 const TOOLS_DIR = path.dirname(fileURLToPath(import.meta.url))
 const DEFAULT_OUT = path.join(path.dirname(TOOLS_DIR), 'build')
@@ -88,6 +89,10 @@ function buildLesson(course, unit, unitNumber, dayInUnit, courseDay) {
   const cycle = dayInUnit <= unit.topics.length ? 1 : 2
   const transfer = unit.secondPass
   const transferEvidence = cycle === 2 ? (unit.secondPassEvidence ?? null) : null
+  const lessonId = `${course.courseId}-u${pad(unitNumber)}-l${pad(dayInUnit)}`
+  const transferAuthority = cycle === 2
+    ? buildTransferAuthorityRecord(course, unit, unitNumber, lessonId, focus)
+    : null
 
   const objectives =
     cycle === 1
@@ -174,7 +179,7 @@ function buildLesson(course, unit, unitNumber, dayInUnit, courseDay) {
 
   return {
     schema_version: '1.0',
-    lesson_id: `${course.courseId}-u${pad(unitNumber)}-l${pad(dayInUnit)}`,
+    lesson_id: lessonId,
     course_id: course.courseId,
     grade: course.grade,
     subject: 'physical-education',
@@ -185,6 +190,7 @@ function buildLesson(course, unit, unitNumber, dayInUnit, courseDay) {
     cycle,
     transfer_condition: cycle === 2 ? transfer : null,
     transfer_evidence_requirement: transferEvidence,
+    transfer_authority: transferAuthority,
     title: cycle === 1 ? `${phase}: ${focus}` : `${phase}: ${focus} under transfer`,
     phase,
     focus,

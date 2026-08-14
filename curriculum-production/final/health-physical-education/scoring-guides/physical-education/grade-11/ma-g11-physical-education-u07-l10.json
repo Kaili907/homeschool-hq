@@ -5,6 +5,84 @@
   "courseId": "ma-g11-physical-education",
   "grade": 11,
   "subject": "physical-education",
+  "transferAuthority": {
+    "schemaVersion": "manuel-academy.pe-transfer-authority.v2",
+    "authorityId": "ma-g11-physical-education-u07-transfer-v2",
+    "learnerTask": {
+      "actionId": "ma-g11-physical-education-u07-l10:focus-action",
+      "actionKind": "APPLY_OR_FULLY_MODEL",
+      "focusId": "ma-g11-physical-education-u07:inclusive language, format, and scoring choices",
+      "executionRequired": false
+    },
+    "durationContinuity": {
+      "span": {
+        "unit": "INCLUSIVE_SESSION",
+        "minimum": 1,
+        "coverage": "COMPLETE_REQUIRED_SPAN"
+      },
+      "uninterruptedPerformanceRequired": false,
+      "interruptionRecoveryRequired": false
+    },
+    "restInterruptionAllowance": {
+      "restAllowed": true,
+      "restPreservesParticipationCredit": true,
+      "transferCreditAfterRest": "PRESERVED_WHEN_REQUIRED_EVIDENCE_IS_MET"
+    },
+    "transferRequirement": {
+      "required": true,
+      "conditionId": "ma-g11-physical-education-u07-transfer-v2:condition"
+    },
+    "completionEvidence": {
+      "completionKind": "PERFORM_OR_FULLY_MODEL_COMPLETE_SPAN",
+      "hypotheticalCompletionAllowed": true,
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u07-l10:focus-action",
+        "ma-g11-physical-education-u07-transfer-v2:condition"
+      ],
+      "maximumCreditableSpan": {
+        "unit": "INCLUSIVE_SESSION",
+        "maximum": 1
+      }
+    },
+    "equalCreditPath": {
+      "routes": [
+        "PERFORMED",
+        "ADAPTED_PERFORMANCE",
+        "SOLO_SIMULATION",
+        "DIAGRAMMED_MODEL",
+        "WRITTEN_OR_DESCRIBED_MODEL"
+      ],
+      "sameEvidenceRequired": true,
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u07-l10:focus-action",
+        "ma-g11-physical-education-u07-transfer-v2:condition"
+      ]
+    },
+    "adultRubric": {
+      "scoringAuthority": "RUBRIC",
+      "requiredEvidenceIds": [
+        "AUTHORED_UNIT_EVIDENCE",
+        "BREAKDOWN_ANALYSIS",
+        "EARLIER_OCCASION_COMPARISON",
+        "ma-g11-physical-education-u07-l10:focus-action",
+        "ma-g11-physical-education-u07-transfer-v2:condition"
+      ],
+      "bodyMetricsScored": false,
+      "participantCountScored": false
+    },
+    "adaptiveRouteExpectations": {
+      "safeReductionPreservesParticipationCredit": true,
+      "alternateRouteCanEarnTransferCredit": true,
+      "alternateRouteMustPreserveEvidence": true,
+      "guardianSafetyBoundaryRetained": true
+    }
+  },
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
     "The learner holds inclusive language, format, and scoring choices through a live session for safely available participants or a complete plan with a rehearsed walk-through, evaluated against the same inclusion and enjoyment criteria, in whatever version their body and setting allow. Full transfer credit requires the session plan, access choices, feedback language, an in-session adaptation, and evaluation against the least-confident participant profile. A live session or complete rehearsed walk-through earns equal credit when it preserves all of that event-design evidence.",

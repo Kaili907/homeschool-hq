@@ -52,7 +52,7 @@ evaluates it. There is no single correct answer to key against.
 | 3 PE and all Grade 4 | `mac/g34-health-pe-r1` (commit `d0ebaa0`) | Original Grade 3/4 Health + PE source, excluding the Grade 3 Health repin |
 | 5, 7, 8 | shared base (commit `656efba` onward) | Canonical Health + PE, already in every worktree |
 | 9, 10, 11, 12 Health | `mac/hs912-health-pe-r1` (commit `e39e2b3`) | HS Health, four years |
-| 9, 10, 11, 12 PE | `mac/pe-transfer-authority-fix-r1` | Canonical HS PE with transfer/equal-credit authority correction |
+| 9, 10, 11, 12 PE | `mac/pe-transfer-authority-fix-r2` | Canonical HS PE with structured transfer/equal-credit authority |
 
 The Grade 3 Health, G3/4, and HS Health branches have not merged into this branch, so this
 generator reads them from sibling git worktrees at generation time
@@ -98,6 +98,23 @@ validator re-audits the emitted PE lessons and fails if any required block is
 missing. `pe-content-repair-evidence.json` records the confirmed baseline,
 repair counts, post-repair zeroes, category coverage, and convergence
 classification.
+
+## PE transfer-authority gate
+
+All 216 high-school second-pass PE lessons carry a
+`manuel-academy.pe-transfer-authority.v2` record. The canonical record and its
+learner/adult projections explicitly represent the learner action, required
+span and continuity, stop/rest authority, transfer condition, completion
+evidence, equal-credit routes, adult rubric, and adaptive/guardian boundaries.
+`src/lib/transferConsistency.mjs` compares those normalized fields and fails
+closed when any record is absent. It does not infer meaning from lesson number,
+wording, regexes, or phrase/synonym lists.
+
+Permanent controls cover genuine scoring and content mismatches, three wording
+variants of uninterrupted-performance versus rest-credit authority, three
+wording variants of seven-day execution versus one-day hypothetical completion,
+valid equal-credit and transfer cases, the reviewed false-positive pattern, and
+a lesson-location mutation.
 
 ## Never requires
 
@@ -153,8 +170,9 @@ no answer-bearing key leaked into a package, exact lesson/assessment counts,
 paired artifacts, exact per-item source provenance, H2 repin coverage, H3
 rubric-only scoring, private/ungraded optional reflection, PE adaptations,
 Health fictional/private scenarios and trusted-adult language, the complete PE
-learner execution contract and repair evidence, a fresh privacy scan, and every
-entry in `SHA256SUMS.txt`.
+learner execution contract and repair evidence, all 216 structured PE transfer
+records and paired projections, a fresh privacy scan, and every entry in
+`SHA256SUMS.txt`.
 
 ## Production readiness gate
 

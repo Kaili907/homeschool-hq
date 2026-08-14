@@ -125,6 +125,7 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     courseId: lesson.course_id,
     grade,
     subject,
+    ...(!isHealth && lesson.transfer_authority ? { transferAuthority: structuredClone(lesson.transfer_authority) } : {}),
     unitNumber: lesson.unit_number,
     unitTitle: lesson.unit_title,
     title: lesson.title,
@@ -182,6 +183,7 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     courseId: lesson.course_id,
     grade,
     subject,
+    ...(!isHealth && lesson.transfer_authority ? { transferAuthority: structuredClone(lesson.transfer_authority) } : {}),
     scoringAuthority: 'RUBRIC',
     successCriteria: lesson.success_criteria ?? [],
     scoringGuidance: lesson.answer_or_scoring_guidance ?? null,
@@ -198,16 +200,8 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     ? null
     : evaluatePeTransferConsistency({
         sourceLesson: lesson,
-        learnerTask: pkg.studentTask,
-        completionCriteria: pkg.completionCriteria,
-        equipmentAlternative: pkg.equipmentRequirements?.equalCreditNoEquipment,
-        accessibleAdaptation: pkg.accessibleAdaptation,
-        activitySteps: pkg.activitySteps,
-        adultSuccessCriteria: scoringGuide.successCriteria,
-        adultScoringGuidance: scoringGuide.scoringGuidance,
-        adultAdaptiveRoutes: scoringGuide.adaptiveRoutes,
-        adultSafetyAndPrivacy: scoringGuide.safetyAndPrivacyNotes,
-        guardianSafetyReview: scoringGuide.guardianSafetyReview,
+        learnerTransferAuthority: pkg.transferAuthority,
+        adultTransferAuthority: scoringGuide.transferAuthority,
       })
 
   const gateInput = {

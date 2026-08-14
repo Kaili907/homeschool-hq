@@ -1,126 +1,163 @@
 /**
- * Semantic consistency guard for PE transfer lessons.
+ * Deterministic structured consistency gate for high-school PE transfer work.
  *
- * The former depth audit inferred conflict from Grade 9-12 lesson position.
- * This guard ignores grade, unit, and lesson number. It compares the actual
- * learner transfer demand with equal-credit completion text and the paired
- * adult RUBRIC authority. Canonical repaired families also carry one authored
- * evidence rule that must survive every learner/adult projection channel.
+ * Prose is deliberately not inspected. Canonical authoring emits a normalized
+ * authority record and the final generator projects that record into both the
+ * learner task card and adult scoring guide. This gate compares the actual task
+ * schema: action, required span and continuity, stop/rest authority, transfer
+ * requirement, completion evidence, equal-credit routes, adult rubric, and
+ * adaptive-route expectations. Missing structure fails closed.
  */
 
-function text(value) {
-  if (value === null || value === undefined) return ''
-  if (typeof value === 'string') return value
-  if (Array.isArray(value)) return value.map(text).join(' ')
-  if (typeof value === 'object') return Object.values(value).map(text).join(' ')
-  return String(value)
-}
+export const TRANSFER_AUTHORITY_SCHEMA = 'manuel-academy.pe-transfer-authority.v2'
 
 function finding(classification, code, message) {
   return { classification, code, message }
 }
 
-const CONTRADICTIONS = [
-  {
-    classification: 'SCORING_AUTHORITY_CONFLICT',
-    code: 'LIVE_OPPONENT_VS_SOLO_AUTHORITY',
-    demand: /against an opponent who is genuinely competing/i,
-    authority: /solo learner|without another participant|game size.*not.*assessed|tactical understanding.*not the game size/i,
-    message: 'learner/rubric demand requires a genuinely competing opponent while adult authority grants full solo evidence',
-  },
-  {
-    classification: 'SCORING_AUTHORITY_CONFLICT',
-    code: 'UNINTERRUPTED_VS_STOP_REST_AUTHORITY',
-    demand: /complete sequence run without stopping/i,
-    authority: /pause or rest|stopping or resting.*counts|rest.*without (losing|loss of) credit/i,
-    message: 'learner/rubric demand requires uninterrupted performance while safety authority requires equal-status stop/rest handling',
-  },
-  {
-    classification: 'SCORING_AUTHORITY_CONFLICT',
-    code: 'REQUIRED_OUTING_VS_INDOOR_AUTHORITY',
-    demand: /on an outing .*where (?:the )?(?:weather|terrain|timing)|on a planned outing with a real contingency/i,
-    authority: /no outdoor trip.*required|full indoor|indoor (?:or home-(?:yard|area) )?equivalent|not approved|fully describes one controlled|describing\/gesturing/i,
-    message: 'learner/rubric demand requires a real outing condition while adult authority grants a full indoor or non-execution route',
-  },
-  {
-    classification: 'SCORING_AUTHORITY_CONFLICT',
-    code: 'LIVE_PARTICIPANTS_VS_PLAN_AUTHORITY',
-    demand: /inside a real activity with other people present|actually leading a segment for other people|coached to another person who has to succeed|running the event for real|facilitated live for a real group/i,
-    authority: /written plan|diagrammed|practical trial is optional|solo learner completes|no participants are available|group size is never a requirement|leading a group is never required|one person.*meets the standard|fully describes one controlled|describing\/gesturing|described version/i,
-    message: 'learner/rubric demand requires live participants while adult authority grants full plan, solo, or smaller-participant evidence',
-  },
-  {
-    classification: 'SCORING_AUTHORITY_CONFLICT',
-    code: 'UNSUPERVISED_BLOCK_VS_MODEL_GUARDIAN_AUTHORITY',
-    demand: /unsupervised habit across a full training block, including one real stop decision/i,
-    authority: /may be written, tabled, or described|guardian input|guardian.*review|supervision/i,
-    message: 'learner/rubric demand requires unsupervised execution while adult authority grants modelled evidence and retains guardian boundaries',
-  },
-  {
-    classification: 'CONTENT_TRANSFER_CONFLICT',
-    code: 'SCORED_CONTEST_VS_NO_SCORE_COMPLETION',
-    demand: /in a scored rally, round, or innings|across a full scored contest|score itself is the pressure/i,
-    authority: /no score.*needed|one controlled practice-and-application sequence/i,
-    message: 'learner transfer demand requires a scored contest while learner completion grants generic no-score evidence',
-  },
-  {
-    classification: 'CONTENT_TRANSFER_CONFLICT',
-    code: 'EXTENDED_EXECUTION_VS_ONE_SEQUENCE_COMPLETION',
-    demand: /learner[’']s own real training week|genuine trial session|run unsupervised across a full cycle|actual attempt at the goal, including a setback/i,
-    authority: /one controlled practice-and-application sequence|fully describes one controlled|describing\/gesturing the movement when movement is not appropriate/i,
-    message: 'learner transfer demand requires extended or actual execution while learner completion grants one generic described sequence',
-  },
-]
+function sortedStrings(value) {
+  return Array.isArray(value) ? [...new Set(value.filter((item) => typeof item === 'string'))].sort() : []
+}
 
-export function evaluatePeTransferConsistency({ sourceLesson, learnerTask, completionCriteria, equipmentAlternative, accessibleAdaptation, activitySteps, adultSuccessCriteria, adultScoringGuidance, adultAdaptiveRoutes, adultSafetyAndPrivacy, guardianSafetyReview }) {
-  const transferRequirement = text(sourceLesson?.transfer_condition).trim()
-  if (!transferRequirement) return { status: 'CONSISTENT', classifications: [], findings: [] }
+function booleanOrNull(value) {
+  return typeof value === 'boolean' ? value : null
+}
 
-  const authoredEvidence = text(sourceLesson?.transfer_evidence_requirement).trim()
-  const learnerDemand = `${transferRequirement} ${text(learnerTask)}`
-  const learnerCredit = text([completionCriteria, equipmentAlternative, accessibleAdaptation, activitySteps])
-  const adultAuthority = text([adultSuccessCriteria, adultScoringGuidance, adultAdaptiveRoutes, adultSafetyAndPrivacy, guardianSafetyReview])
-  const combinedAuthority = `${learnerCredit} ${adultAuthority}`
-  const findings = []
-
-  for (const rule of CONTRADICTIONS) {
-    if (rule.demand.test(learnerDemand) && rule.authority.test(combinedAuthority)) {
-      findings.push(finding(rule.classification, rule.code, rule.message))
-    }
-  }
-
-  if (authoredEvidence) {
-    const channels = [
-      ['learner task', learnerTask],
-      ['learner completion/evidence expectation', completionCriteria],
-      ['equal-credit equipment expectation', equipmentAlternative],
-      ['equal-credit adaptation expectation', accessibleAdaptation],
-      ['adult success criteria', adultSuccessCriteria],
-      ['adult scoring guidance', adultScoringGuidance],
-      ['adult alternate-route authority', adultAdaptiveRoutes],
-    ]
-    for (const [label, value] of channels) {
-      if (!text(value).includes(authoredEvidence)) {
-        findings.push(finding(
-          label.startsWith('adult') ? 'SCORING_AUTHORITY_CONFLICT' : 'CONTENT_TRANSFER_CONFLICT',
-          'AUTHORED_TRANSFER_EVIDENCE_DROPPED',
-          `${label} does not preserve the canonical transfer/equal-credit evidence requirement`,
-        ))
-      }
-    }
-    if (!text(learnerTask).includes(transferRequirement) || !text(adultSuccessCriteria).includes(transferRequirement)) {
-      findings.push(finding(
-        'SCORING_AUTHORITY_CONFLICT',
-        'TRANSFER_REQUIREMENT_DROPPED',
-        'learner task and adult success criteria do not preserve the same authored transfer requirement',
-      ))
-    }
-  }
-
-  const classifications = [...new Set(findings.map((item) => item.classification))]
+function normalized(record) {
+  if (!record || typeof record !== 'object') return null
   return {
-    status: findings.length === 0 ? 'CONSISTENT' : 'CONFLICT',
-    classifications,
-    findings,
+    schemaVersion: record.schemaVersion ?? null,
+    authorityId: record.authorityId ?? null,
+    learnerTask: {
+      actionId: record.learnerTask?.actionId ?? null,
+      actionKind: record.learnerTask?.actionKind ?? null,
+      focusId: record.learnerTask?.focusId ?? null,
+      executionRequired: booleanOrNull(record.learnerTask?.executionRequired),
+    },
+    durationContinuity: {
+      span: {
+        unit: record.durationContinuity?.span?.unit ?? null,
+        minimum: record.durationContinuity?.span?.minimum ?? null,
+        coverage: record.durationContinuity?.span?.coverage ?? null,
+      },
+      uninterruptedPerformanceRequired: booleanOrNull(record.durationContinuity?.uninterruptedPerformanceRequired),
+      interruptionRecoveryRequired: booleanOrNull(record.durationContinuity?.interruptionRecoveryRequired),
+    },
+    restInterruptionAllowance: {
+      restAllowed: booleanOrNull(record.restInterruptionAllowance?.restAllowed),
+      restPreservesParticipationCredit: booleanOrNull(record.restInterruptionAllowance?.restPreservesParticipationCredit),
+      transferCreditAfterRest: record.restInterruptionAllowance?.transferCreditAfterRest ?? null,
+    },
+    transferRequirement: {
+      required: booleanOrNull(record.transferRequirement?.required),
+      conditionId: record.transferRequirement?.conditionId ?? null,
+    },
+    completionEvidence: {
+      completionKind: record.completionEvidence?.completionKind ?? null,
+      hypotheticalCompletionAllowed: booleanOrNull(record.completionEvidence?.hypotheticalCompletionAllowed),
+      requiredEvidenceIds: sortedStrings(record.completionEvidence?.requiredEvidenceIds),
+      maximumCreditableSpan: {
+        unit: record.completionEvidence?.maximumCreditableSpan?.unit ?? null,
+        maximum: record.completionEvidence?.maximumCreditableSpan?.maximum ?? null,
+      },
+    },
+    equalCreditPath: {
+      routes: sortedStrings(record.equalCreditPath?.routes),
+      sameEvidenceRequired: booleanOrNull(record.equalCreditPath?.sameEvidenceRequired),
+      requiredEvidenceIds: sortedStrings(record.equalCreditPath?.requiredEvidenceIds),
+    },
+    adultRubric: {
+      scoringAuthority: record.adultRubric?.scoringAuthority ?? null,
+      requiredEvidenceIds: sortedStrings(record.adultRubric?.requiredEvidenceIds),
+      bodyMetricsScored: booleanOrNull(record.adultRubric?.bodyMetricsScored),
+      participantCountScored: booleanOrNull(record.adultRubric?.participantCountScored),
+    },
+    adaptiveRouteExpectations: {
+      safeReductionPreservesParticipationCredit: booleanOrNull(record.adaptiveRouteExpectations?.safeReductionPreservesParticipationCredit),
+      alternateRouteCanEarnTransferCredit: booleanOrNull(record.adaptiveRouteExpectations?.alternateRouteCanEarnTransferCredit),
+      alternateRouteMustPreserveEvidence: booleanOrNull(record.adaptiveRouteExpectations?.alternateRouteMustPreserveEvidence),
+      guardianSafetyBoundaryRetained: booleanOrNull(record.adaptiveRouteExpectations?.guardianSafetyBoundaryRetained),
+    },
+  }
+}
+
+function same(left, right) {
+  return JSON.stringify(left) === JSON.stringify(right)
+}
+
+function schemaFindings(record, classification, channel) {
+  const out = []
+  if (!record) return [finding(classification, 'STRUCTURED_AUTHORITY_MISSING', `${channel} structured transfer authority is missing`)]
+  if (record.schemaVersion !== TRANSFER_AUTHORITY_SCHEMA) out.push(finding(classification, 'STRUCTURED_AUTHORITY_SCHEMA_INVALID', `${channel} transfer-authority schema is unsupported`))
+  if (!record.authorityId || !record.learnerTask.actionId || !record.learnerTask.actionKind || typeof record.learnerTask.executionRequired !== 'boolean') out.push(finding(classification, 'STRUCTURED_TASK_INVALID', `${channel} learner task/action identity is incomplete`))
+  const span = record.durationContinuity.span
+  if (!span.unit || !Number.isInteger(span.minimum) || span.minimum < 1 || typeof record.durationContinuity.uninterruptedPerformanceRequired !== 'boolean' || typeof record.durationContinuity.interruptionRecoveryRequired !== 'boolean') out.push(finding(classification, 'STRUCTURED_DURATION_INVALID', `${channel} duration/continuity requirement is incomplete`))
+  if (record.restInterruptionAllowance.restAllowed !== true || typeof record.restInterruptionAllowance.restPreservesParticipationCredit !== 'boolean' || !record.restInterruptionAllowance.transferCreditAfterRest) out.push(finding(classification, 'STRUCTURED_REST_AUTHORITY_INVALID', `${channel} stop/rest authority is incomplete`))
+  if (!record.transferRequirement.required || !record.transferRequirement.conditionId) out.push(finding(classification, 'STRUCTURED_TRANSFER_INVALID', `${channel} transfer requirement is incomplete`))
+  if (record.completionEvidence.requiredEvidenceIds.length === 0 || typeof record.completionEvidence.hypotheticalCompletionAllowed !== 'boolean' || !Number.isInteger(record.completionEvidence.maximumCreditableSpan.maximum)) out.push(finding(classification, 'STRUCTURED_EVIDENCE_INVALID', `${channel} completion/evidence condition is incomplete`))
+  if (record.equalCreditPath.routes.length === 0 || !record.equalCreditPath.sameEvidenceRequired) out.push(finding(classification, 'STRUCTURED_EQUAL_CREDIT_INVALID', `${channel} equal-credit path is incomplete`))
+  if (record.adultRubric.scoringAuthority !== 'RUBRIC' || record.adultRubric.bodyMetricsScored !== false || record.adultRubric.participantCountScored !== false) out.push(finding(classification, 'STRUCTURED_RUBRIC_INVALID', `${channel} adult rubric authority is invalid`))
+  if (typeof record.adaptiveRouteExpectations.safeReductionPreservesParticipationCredit !== 'boolean' || typeof record.adaptiveRouteExpectations.alternateRouteCanEarnTransferCredit !== 'boolean' || record.adaptiveRouteExpectations.alternateRouteMustPreserveEvidence !== true || record.adaptiveRouteExpectations.guardianSafetyBoundaryRetained !== true) out.push(finding(classification, 'STRUCTURED_ADAPTIVE_ROUTE_INVALID', `${channel} adaptive-route expectations are incomplete`))
+  return out
+}
+
+function contradictionFindings(source, learner, adult) {
+  const out = []
+  if (source.durationContinuity.uninterruptedPerformanceRequired
+    && adult.restInterruptionAllowance.restPreservesParticipationCredit) {
+    out.push(finding('SCORING_AUTHORITY_CONFLICT', 'UNINTERRUPTED_VS_REST_CREDIT_AUTHORITY', 'uninterrupted performance is required while adult authority preserves credit for stopping or resting'))
+  }
+
+  const requiredSpan = source.durationContinuity.span
+  const creditedSpan = learner.completionEvidence.maximumCreditableSpan
+  if (requiredSpan.unit !== creditedSpan.unit || creditedSpan.maximum < requiredSpan.minimum) {
+    out.push(finding('CONTENT_TRANSFER_CONFLICT', 'REQUIRED_SPAN_NOT_COVERED', 'learner completion does not cover the full required transfer span'))
+  }
+  if (source.learnerTask.executionRequired && learner.completionEvidence.hypotheticalCompletionAllowed) {
+    out.push(finding('CONTENT_TRANSFER_CONFLICT', 'EXECUTION_VS_HYPOTHETICAL_COMPLETION', 'required execution cannot be completed by a hypothetical-only path'))
+  }
+  return out
+}
+
+function compareProjection(source, projected, classification, channel) {
+  if (!source || !projected) return []
+  const out = []
+  const fields = [
+    ['learnerTask', 'TASK_ACTION_MISMATCH'],
+    ['durationContinuity', 'DURATION_CONTINUITY_MISMATCH'],
+    ['restInterruptionAllowance', 'REST_INTERRUPTION_AUTHORITY_MISMATCH'],
+    ['transferRequirement', 'TRANSFER_REQUIREMENT_MISMATCH'],
+    ['completionEvidence', 'COMPLETION_EVIDENCE_MISMATCH'],
+    ['equalCreditPath', 'EQUAL_CREDIT_PATH_MISMATCH'],
+    ['adultRubric', 'ADULT_RUBRIC_MISMATCH'],
+    ['adaptiveRouteExpectations', 'ADAPTIVE_ROUTE_MISMATCH'],
+  ]
+  if (source.authorityId !== projected.authorityId) out.push(finding(classification, 'AUTHORITY_ID_MISMATCH', `${channel} is not bound to the canonical transfer authority`))
+  for (const [field, code] of fields) {
+    if (!same(source[field], projected[field])) out.push(finding(classification, code, `${channel} ${field} meaning differs from canonical authority`))
+  }
+  return out
+}
+
+export function evaluatePeTransferConsistency({ sourceLesson, learnerTransferAuthority, adultTransferAuthority }) {
+  if (!sourceLesson?.transfer_condition) return { status: 'CONSISTENT', classifications: [], findings: [] }
+
+  const source = normalized(sourceLesson.transfer_authority)
+  const learner = normalized(learnerTransferAuthority)
+  const adult = normalized(adultTransferAuthority)
+  const findings = [
+    ...schemaFindings(source, 'CONTENT_TRANSFER_CONFLICT', 'canonical source'),
+    ...schemaFindings(learner, 'CONTENT_TRANSFER_CONFLICT', 'learner task/completion'),
+    ...schemaFindings(adult, 'SCORING_AUTHORITY_CONFLICT', 'adult rubric/adaptive authority'),
+    ...compareProjection(source, learner, 'CONTENT_TRANSFER_CONFLICT', 'learner projection'),
+    ...compareProjection(source, adult, 'SCORING_AUTHORITY_CONFLICT', 'adult projection'),
+    ...(source && learner && adult ? contradictionFindings(source, learner, adult) : []),
+  ]
+
+  const deduplicated = [...new Map(findings.map((item) => [`${item.classification}:${item.code}:${item.message}`, item])).values()]
+  return {
+    status: deduplicated.length === 0 ? 'CONSISTENT' : 'CONFLICT',
+    classifications: [...new Set(deduplicated.map((item) => item.classification))],
+    findings: deduplicated,
   }
 }
