@@ -11,5 +11,5 @@ export const HOSTED_SYNC_R2_SCENARIOS = Object.freeze([
   'Safety student clear denied', 'offline refusal retains local intent', 'reconnect succeeds',
   'stale checkpoint CAS refusal', 'exact write retry idempotency', 'lost acknowledgement retry',
   'first-link state taxonomy and name blindness', 'production privacy gate stays closed',
-  'no legacy Profile sync fields',
+  'no legacy Profile sync fields', 'unknown mutation field refused before provider contact',
 ] as const)

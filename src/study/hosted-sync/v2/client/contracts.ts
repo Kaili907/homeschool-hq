@@ -11,6 +11,7 @@ import {
   type HostedSyncWriteInput,
   type HostedSyncWriteResult,
 } from './types'
+import { assertHostedSyncPrivacyAllowlistR1, serializeAuthorityCheckpointPrivacyGateR1 } from './privacyGate'
 
 export const HOSTED_SYNC_MAX_RPC_BYTES = 96 * 1024
 /** Explicit ceiling for one school-year minimized authority checkpoint. */
@@ -71,12 +72,28 @@ function validCommon(input: { tokenDigest: string; studentId: string }): boolean
 
 function safe<T extends Readonly<Record<string, unknown>>>(value: T, maximumBytes = HOSTED_SYNC_MAX_RPC_BYTES): T | null {
   try { assertHostedSyncPrivate(value) } catch { return null }
-  return boundedJson(value, maximumBytes) ? Object.freeze(value) : null
+  if (!boundedJson(value, maximumBytes)) return null
+  // Force the exact object through JSON serialization before it can become a
+  // provider argument. This removes prototypes/accessors and prevents callers
+  // from changing a nested value after validation but before dispatch.
+  try { return deepFreeze(JSON.parse(JSON.stringify(value))) as T } catch { return null }
+}
+
+function deepFreeze(value: unknown): unknown {
+  if (value !== null && typeof value === 'object') {
+    Object.values(value as Record<string, unknown>).forEach(deepFreeze)
+    Object.freeze(value)
+  }
+  return value
 }
 
 export function buildFirstLinkArgs(input: HostedSyncFirstLinkInput): Readonly<Record<string, unknown>> | null {
   if (!validCommon(input) || !UUID.test(input.clientOperationId) || !validScope(input.import.localScope) ||
       !REF.test(input.import.hostedScope.assignmentRef) || !REF.test(input.import.hostedScope.sessionRef)) return null
+  try {
+    assertHostedSyncPrivacyAllowlistR1(input.import)
+    if (input.import.authorityCheckpoint) serializeAuthorityCheckpointPrivacyGateR1(input.import.authorityCheckpoint)
+  } catch { return null }
   return safe({
     p_token_digest: input.tokenDigest,
     p_student_id: input.studentId,
@@ -105,6 +122,14 @@ export function buildHydrateArgs(input: HostedSyncHydrateInput): Readonly<Record
 export function buildWriteArgs(input: HostedSyncWriteInput): Readonly<Record<string, unknown>> | null {
   if (!buildHydrateArgs(input) || !Number.isSafeInteger(input.expectedRevision) || input.expectedRevision < 0 ||
       !UUID.test(input.clientOperationId) || !HOSTED_SYNC_WRITE_OPERATIONS.includes(input.operation)) return null
+  try {
+    assertHostedSyncPrivacyAllowlistR1(input.payload)
+    if (input.operation === 'authority-checkpoint:compare-and-swap') {
+      const held = exact(input.payload, ['authorityCheckpoint'])
+      if (!held) return null
+      serializeAuthorityCheckpointPrivacyGateR1(held.authorityCheckpoint)
+    }
+  } catch { return null }
   return safe({
     p_token_digest: input.tokenDigest,
     p_student_id: input.studentId,

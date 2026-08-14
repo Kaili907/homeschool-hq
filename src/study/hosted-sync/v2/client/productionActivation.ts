@@ -1,13 +1,12 @@
 /**
- * R2 convergence is deliberately non-activatable. The parallel production
- * privacy-gate work is not an input to this isolated branch, so no runtime
- * configuration can turn hosted Study sync on here.
+ * R2 remains deliberately inactive. The production serializer is now present,
+ * but this module exposes no network client, environment switch, or App wiring.
  */
 export const HOSTED_SYNC_PRODUCTION_ACTIVATION = Object.freeze({
   enabled: false as const,
-  reason: 'PRODUCTION_PRIVACY_SERIALIZER_REQUIRED' as const,
+  reason: 'HOSTED_SYNC_R2_INACTIVE_PENDING_STAGING' as const,
 })
 
-export function requireHostedSyncProductionPrivacySerializer(): never {
-  throw new Error(HOSTED_SYNC_PRODUCTION_ACTIVATION.reason)
+export function requireHostedSyncProductionPrivacySerializer(): true {
+  return true
 }

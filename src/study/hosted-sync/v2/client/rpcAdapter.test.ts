@@ -61,4 +61,22 @@ describe('hosted sync R2 exact DB RPC adapter', () => {
     expect(await adapter(malformed).hydrate({ tokenDigest: DIGEST, studentId: STUDENT, assignmentRef: 'assignment-math', sessionId: 'session-math' })).toMatchObject({ code: 'MALFORMED_RESPONSE' })
     expect(await adapter(provider).write({ tokenDigest: DIGEST, studentId: STUDENT, assignmentRef: 'assignment-math', sessionId: 'session-math', expectedRevision: 0, clientOperationId: OP, operation: 'assessment:set-state', payload: { rawAnswer: '42' } })).toMatchObject({ code: 'PERMANENT_REFUSAL', reasonCode: 'INVALID_CLIENT_INPUT' })
   })
+
+  it('refuses unknown and forbidden mutation fields before authorization or provider contact', async () => {
+    const provider = createLocalDbRpcEmulator()
+    let authorizationCalls = 0
+    const client = createHostedSyncRpcAdapter({
+      authorization: { acquire: async () => {
+        authorizationCalls += 1
+        return { status: 'AUTHORIZED', lease: { clientKind: 'AUTHENTICATED_USER', expiresAt: EXPIRES, provider } }
+      } },
+      isOnline: () => true,
+      now: () => new Date(NOW),
+    })
+    const base = { tokenDigest: DIGEST, studentId: STUDENT, assignmentRef: 'assignment-math', sessionId: 'session-math', expectedRevision: 0, clientOperationId: OP }
+    expect(await client.write({ ...base, operation: 'session:complete', payload: { completedAt: NOW, futureField: true } })).toMatchObject({ code: 'PERMANENT_REFUSAL' })
+    expect(await client.write({ ...base, operation: 'session:complete', payload: { completedAt: NOW, assistantTranscript: 'private' } })).toMatchObject({ code: 'PERMANENT_REFUSAL' })
+    expect(authorizationCalls).toBe(0)
+    expect(provider.calls).toHaveLength(0)
+  })
 })

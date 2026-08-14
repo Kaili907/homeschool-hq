@@ -1,5 +1,9 @@
 # Hosted Study sync R2 convergence R1
 
+> Historical checkpoint only. Its blockers were closed by the lossless
+> checkpoint repair and the final production privacy-gate convergence. The
+> current ruling is in `../r2-final-convergence/README.md`.
+
 ## Classification
 
 `BLOCKED`

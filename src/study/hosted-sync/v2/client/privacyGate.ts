@@ -40,6 +40,25 @@ const ALLOWED_KEYS = new Set<string>([
   'rawLearnerResponseIncluded','rawTutorConversationIncluded','rawAudioIncluded','inferenceIncluded',
   'adultAnswerAuthorityIncluded','answerMaterialIncluded','pausedAt','resumedAt','pausedSeconds','resumeSegmentRef',
   'totalSegments','lastSegmentRef','activeSeconds','progress','pause',
+  // Exact legacy R2 RPC import/write vocabulary. These fields remain only so
+  // the lossless authority checkpoint can travel through the already-installed
+  // four-RPC surface; the canonical checkpoint parser still supplies the
+  // path-specific contract for authorityCheckpoint.
+  'localScope','hostedScope','session','checkpoint','socialSource','guardianAttestation','safetyState','assessment','authorityCheckpoint',
+  'lessonRef','subjectRef','startedAt','intendedLocalDate','contract','checkpointId','lessonId',
+  'sessionId',
+  'safeInstructionalCursor','tutorPhase','cycleNumber','currentItemId','currentItemIndex','teachingTurnIndex',
+  'perSegmentActiveTime','pausedSeconds','breakSeconds','protectedDraftRef','protectedTutorStateRef',
+  'lastAcceptedEventId','eventVersion','tutorInteractionRef','technicalInterruption','interruptionId','holds',
+  'studentRef','source','attestation','hold','clearedByRef','completedAt','createdAt','title','status','authority',
+  'attestedAt','attestedByRef',
+  'metadata','adultAttestedAt','attachmentId','unitRef','issueStatement','sourceIdentifier','sourceTitle',
+  'responsibleParty','sourceDate','sourceVersionOrEdition','retrievalLocation','retrievedOn','retrievedByRole',
+  'retrievalStatus','mediaType','language','sourceKind','authorityTier','authorityVerified','primaryOrSecondary',
+  'primaryOrSecondaryReason','interestDisclosure','relevanceToIssue','limitsNoted','rightsCategory','rightsStatement',
+  'publicAccess','selectedByRole','selectedOn','readInFull','contentSafetyReviewedByRole','readingLevelReviewedByRole',
+  'previewedForSafetyAndLevel','containsLearnerPersonalData','containsOtherMinorPersonalData','quotedTextStored',
+  'contentDigestSha256','participantRole','consentRecorded',
   ...ACADEMY_SUBJECTS,
   ...Object.values(EVENT_ALLOWED_KEYS).flat(),
 ])
@@ -54,7 +73,8 @@ const SECRET = /(?:\bbearer\s+[A-Za-z0-9._~-]+|\b(?:access|refresh|service[-_ ]?
 
 function normalized(key: string): string { return key.replace(/[^a-z0-9]/gi, '').toLowerCase() }
 
-function scan(value: unknown, path = '$', seen = new Set<object>()): void {
+/** Mandatory deny-by-default scan used immediately before every mutation RPC. */
+export function assertHostedSyncPrivacyAllowlistR1(value: unknown, path = '$', seen = new Set<object>()): void {
   if (typeof value === 'string') {
     if (SECRET.test(value)) throw new Error(`SENSITIVE_VALUE:${path}`)
     return
@@ -62,7 +82,7 @@ function scan(value: unknown, path = '$', seen = new Set<object>()): void {
   if (value === null || typeof value === 'number' || typeof value === 'boolean') return
   if (typeof value !== 'object' || seen.has(value)) throw new Error(`INVALID_TYPE:${path}`)
   seen.add(value)
-  if (Array.isArray(value)) value.forEach((item, index) => scan(item, `${path}[${index}]`, seen))
+  if (Array.isArray(value)) value.forEach((item, index) => assertHostedSyncPrivacyAllowlistR1(item, `${path}[${index}]`, seen))
   else {
     if (Object.getPrototypeOf(value) !== Object.prototype && Object.getPrototypeOf(value) !== null) {
       throw new Error(`INVALID_TYPE:${path}`)
@@ -70,7 +90,7 @@ function scan(value: unknown, path = '$', seen = new Set<object>()): void {
     for (const [key, item] of Object.entries(value)) {
       if (FORBIDDEN.has(normalized(key))) throw new Error(`FORBIDDEN_FIELD:${path}.${key}`)
       if (!ALLOWED_KEYS.has(key)) throw new Error(`UNALLOWLISTED_FIELD:${path}.${key}`)
-      scan(item, `${path}.${key}`, seen)
+      assertHostedSyncPrivacyAllowlistR1(item, `${path}.${key}`, seen)
     }
   }
   seen.delete(value)
@@ -85,7 +105,7 @@ export interface SerializedAuthorityCheckpointR1 {
 const SEALED = new WeakMap<object, string>()
 
 export function serializeAuthorityCheckpointPrivacyGateR1(value: unknown): SerializedAuthorityCheckpointR1 {
-  scan(value)
+  assertHostedSyncPrivacyAllowlistR1(value)
   const parsed = parseHostedSyncStateSnapshotR2(value)
   if (parsed.status !== 'ready') throw new Error(`MALFORMED_STATE:${parsed.reason}`)
   const body = JSON.stringify(parsed.snapshot)

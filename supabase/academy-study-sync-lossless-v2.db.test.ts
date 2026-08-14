@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { PGlite } from '@electric-sql/pglite'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+import { HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, hostedSyncDynamicSourceMetadataFixture } from '../src/study/hosted-sync/v2/testing/dynamicSourceFixture'
 
 const files = [
   './schema.sql',
@@ -236,7 +237,7 @@ function importDocument(overrides: Record<string, unknown> = {}) {
 
 function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevision = serverRevision) {
   const assignmentRecord = {
-    assignmentRef: localScope.assignmentRef, lessonRef: 'lesson-import-a', subject: 'mathematics',
+    assignmentRef: localScope.assignmentRef, lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, subject: 'mathematics',
     title: 'Math lesson', state: 'active', sessionRef: localScope.sessionRef,
     progress: { completedSegmentRefs: ['segment-before-import-a'], totalSegments: 2,
       lastSegmentRef: 'segment-import-a', activeSeconds: 49 },
@@ -262,7 +263,7 @@ function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevisi
       createdAt: '2026-08-01T13:00:00.000Z', updatedAt: '2026-08-01T14:05:00.000Z' },
     appUpdatedAt: '2026-08-01T14:05:00.000Z', setupCompletedAt: '2026-08-01T13:00:00.000Z',
     assignments: [{ record: assignmentRecord, authorityRevision: 1,
-      sessionIdentity: { assignmentRef: localScope.assignmentRef, lessonRef: 'lesson-import-a',
+      sessionIdentity: { assignmentRef: localScope.assignmentRef, lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF,
         blockRef: 'block-import-a', sessionRef: localScope.sessionRef,
         lineageRootRef: 'block-import-a', continuationKey: 'root' },
       completion: { kind: 'INCOMPLETE', completedAt: null } }],
@@ -274,13 +275,14 @@ function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevisi
         decision: 'PARTIAL', assessedAt: '2026-08-01T14:04:00.000Z', assessorRef: 'assessor:math' },
       authorityRevision: 2 }],
     rflStates: [{ studentRef: localScope.studentRef, assignmentRef: localScope.assignmentRef,
-      lessonRef: 'lesson-import-a', sessionRef: localScope.sessionRef, learnerAssertionState: 'ASSERTED',
+      lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, sessionRef: localScope.sessionRef, learnerAssertionState: 'ASSERTED',
       learnerAssertedAt: '2026-08-01T14:04:00.000Z', guardianState: 'PENDING', certifiedAt: null,
       attesterRef: null, evidenceMode: null, authorityRevision: 1 }],
     socialSources: [{ studentRef: localScope.studentRef, assignmentRef: localScope.assignmentRef,
-      lessonRef: 'lesson-import-a', readiness: 'ATTACHED_SATISFIED', sourceRef: 'source:math:a',
+      lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, readiness: 'ATTACHED_SATISFIED', sourceRef: 'source:math:a',
       kind: 'reference', title: 'Math reference', publisher: 'Manuel Academy',
-      publishedAt: '2026-07-01T00:00:00.000Z', attachedAt: '2026-08-01T14:02:00.000Z', sourceRevision: 1 }],
+      publishedAt: '2026-07-01T00:00:00.000Z', metadata: hostedSyncDynamicSourceMetadataFixture(),
+      adultAttestedAt: '2026-08-01T14:02:00.000Z', attachedAt: '2026-08-01T14:02:00.000Z', sourceRevision: 1 }],
     safetyHolds: [
       { holdRef: 'hold:open:a', studentRef: localScope.studentRef, sessionRef: localScope.sessionRef,
         reasonCode: 'study-safety-uncertain', category: 'UNCERTAIN', source: 'study-safety',
@@ -299,7 +301,7 @@ function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevisi
       calendar: [{
         block: { schemaVersion: 'calendar-parent-runtime.v1', internalBlockId: 'block-import-a',
           learnerRef: localScope.studentRef,
-          sourceIdentity: { source: 'manuel_academy', externalItemId: 'lesson-import-a' },
+          sourceIdentity: { source: 'manuel_academy', externalItemId: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF },
           lineage: { rootInternalBlockId: 'block-import-a', continuationKey: 'root',
             completedBeforeOccurrence: [] }, title: 'Math lesson', blockType: 'new_instruction',
           canonicalTask: { taskType: 'direct-instruction' }, householdTimeZone: 'America/Detroit',
@@ -316,18 +318,18 @@ function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevisi
               actualActiveSeconds: 17, elapsedActiveSecondsBeforeBlock: 0 },
           ], resumePoint: resume, interruptionHistory: [], revision: 3,
           lastEventAt: '2026-08-01T14:05:00.000Z', events: [] },
-        plan: { lessonRef: 'lesson-import-a', title: 'Math lesson', subject: 'math',
+        plan: { lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, title: 'Math lesson', subject: 'math',
           skillRefs: ['skill-import-a'], segments: [
             { segmentRef: 'segment-before-import-a', title: 'Warm up', taskType: 'retrieval-practice', estimatedMinutes: 5, required: true },
             { segmentRef: 'segment-import-a', title: 'Practice', taskType: 'guided-practice', estimatedMinutes: 15, required: true },
           ], masteryAuthority: 'completion-only', source: 'manuel-academy' },
       }],
       sessions: [{ scope: { householdRef: localScope.householdRef, learnerRef: localScope.studentRef,
-        sessionRef: localScope.sessionRef }, lessonRef: 'lesson-import-a', segmentRef: 'segment-import-a',
+        sessionRef: localScope.sessionRef }, lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, segmentRef: 'segment-import-a',
         status: 'active', updatedAt: '2026-08-01T14:05:00.000Z', lastAcceptedEventRef: null,
         rawAnswerIncluded: false, transcriptIncluded: false }],
       checkpoints: [{ checkpointRef: 'durable-checkpoint-import-a', householdRef: localScope.householdRef,
-        learnerRef: localScope.studentRef, sessionRef: localScope.sessionRef, lessonRef: 'lesson-import-a',
+        learnerRef: localScope.studentRef, sessionRef: localScope.sessionRef, lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF,
         segmentRef: 'segment-import-a', revision: 3, capturedAt: '2026-08-01T14:05:00.000Z',
         completedSegmentRefs: ['segment-before-import-a'], elapsedActiveSecondsInSegment: 17,
         responseDraftRef: null, rawAnswerIncluded: false, transcriptIncluded: false }],

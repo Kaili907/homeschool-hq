@@ -1,5 +1,9 @@
 # Hosted Study Sync Security and Privacy Boundary R2
 
+> Historical audit against the learner-release base. Web R3 route isolation,
+> IndexedDB response authority, and the canonical R2 pre-network serializer
+> close this report's blockers; see `../r2-final-convergence/`.
+
 ## Decision
 
 Classification: `BLOCKED`.

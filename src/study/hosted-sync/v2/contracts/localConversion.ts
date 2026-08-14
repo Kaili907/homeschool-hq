@@ -8,6 +8,7 @@ import type {
   FinalFamilyPilotSavedSession,
   FinalFamilyPilotSourceAttachment,
 } from '../../../family-pilot/final-app/state'
+import { parseFinalFamilyPilotAppState } from '../../../family-pilot/final-app/state'
 import type { FinalFamilyPilotAttestationRecord } from '../../../family-pilot/final-composition/types'
 import type { SafetyHoldV1 } from '../../../family-pilot/safety/types'
 import { parseHostedSyncStateSnapshotR2 } from './parser'
@@ -127,6 +128,8 @@ function socialState(value: FinalFamilyPilotSourceAttachment, revisions: HostedS
     title: value.title,
     publisher: value.publisher,
     publishedAt: value.publishedAt,
+    metadata: Object.freeze(value.metadata.map((item) => Object.freeze({ ...item }))),
+    adultAttestedAt: value.adultAttestedAt,
     attachedAt: value.attachedAt,
     sourceRevision: revision(revisions.socialSources, value.sourceRef),
   })
@@ -282,6 +285,8 @@ export function importHostedSyncStateToLocalBundleR2(input: {
     title: item.title,
     publisher: item.publisher,
     publishedAt: item.publishedAt,
+    metadata: Object.freeze(item.metadata.map((entry) => Object.freeze({ ...entry }))),
+    adultAttestedAt: item.adultAttestedAt,
     attachedAt: item.attachedAt,
     status: 'ATTACHED_SATISFIED',
   }))
@@ -313,8 +318,6 @@ export function importHostedSyncStateToLocalBundleR2(input: {
     ...(item.clearedAt ? { clearedAt: item.clearedAt } : {}),
     ...(item.clearerRef ? { clearedBy: item.clearerRef } : {}),
   }))
-  const pinDigests = { ...input.target.app.pinDigests }
-  delete pinDigests[state.identity.studentRef]
   const other = (key: 'sessions' | 'sourceAttachments' | 'assessmentAssignments' | 'attestations') =>
     input.target.app[key].filter((item) => item.studentRef !== state.identity.studentRef)
   const app: FinalFamilyPilotAppStateV1 = Object.freeze({
@@ -337,13 +340,14 @@ export function importHostedSyncStateToLocalBundleR2(input: {
       schemaVersion: 1,
       holds: Object.freeze([...input.target.app.safety.holds.filter((item) => item.studentRef !== state.identity.studentRef), ...holds]),
     }),
-    pinDigests: Object.freeze(pinDigests),
   })
+  const validatedApp = parseFinalFamilyPilotAppState(app)
+  if (!validatedApp.state) throw new Error('Imported final Family Pilot app state was invalid.')
 
   const durable = parseDurableStudyDocument(state.indexedDbDocument, {
     householdRef: state.identity.householdRef,
     learnerRef: state.identity.learnerRef,
   })
   if (durable.status !== 'current') throw new Error(`Imported IndexedDB state was invalid: ${durable.reasonCode}`)
-  return Object.freeze({ core, app, indexedDb: durable.document })
+  return Object.freeze({ core, app: validatedApp.state, indexedDb: durable.document })
 }

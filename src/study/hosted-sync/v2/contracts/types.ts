@@ -130,6 +130,9 @@ export interface HostedSyncSocialSourceStateR2 {
   readonly title: string
   readonly publisher: string
   readonly publishedAt: string
+  /** Approved dynamic-source metadata only; source bodies/quotations are forbidden. */
+  readonly metadata: readonly Readonly<Record<string, unknown>>[]
+  readonly adultAttestedAt: string
   readonly attachedAt: string
   readonly sourceRevision: number
 }

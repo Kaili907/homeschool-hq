@@ -22,6 +22,7 @@ import {
   withAuthorityCheckpointR1,
 } from '../client'
 import { createLocalDbRpcEmulator } from '../client/testing/localDbRpcEmulator'
+import { HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, hostedSyncDynamicSourceMetadataFixture } from '../testing/dynamicSourceFixture'
 
 const NOW = '2026-08-13T16:00:00.000Z'
 const IDENTITY: HostedSyncStateIdentityR2 = Object.freeze({
@@ -55,7 +56,7 @@ const FIXTURES: readonly AssignmentFixture[] = Object.freeze([
   { assignmentRef: 'assignment:math-complete', lessonRef: 'lesson:math-complete', state: 'completed', completed: ['lesson:math-complete:segment:1', 'lesson:math-complete:segment:2'], current: null, checkpointRevision: 2, completedAt: NOW },
   { assignmentRef: 'assignment:rfl-pending', lessonRef: 'lesson:rfl-pending', state: 'active', completed: ['lesson:rfl-pending:segment:1', 'lesson:rfl-pending:segment:2'], current: null, checkpointRevision: 1, completedAt: null },
   { assignmentRef: 'assignment:rfl-certified', lessonRef: 'lesson:rfl-certified', state: 'completed', completed: ['lesson:rfl-certified:segment:1', 'lesson:rfl-certified:segment:2'], current: null, checkpointRevision: 1, completedAt: NOW },
-  { assignmentRef: 'assignment:social-source', lessonRef: 'lesson:social-source', state: 'active', completed: [], current: 'lesson:social-source:segment:1', checkpointRevision: 0, completedAt: null },
+  { assignmentRef: 'assignment:social-source', lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, state: 'active', completed: [], current: `${HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF}:segment:1`, checkpointRevision: 0, completedAt: null },
 ])
 
 function assignment(fixture: AssignmentFixture): FamilyPilotAssignmentRecordV1 {
@@ -232,11 +233,13 @@ function localFixture(): HostedSyncLocalBundleR2 {
     sourceAttachments: Object.freeze([Object.freeze({
       studentRef: IDENTITY.studentRef,
       assignmentRef: 'assignment:social-source',
-      lessonRef: 'lesson:social-source',
+      lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF,
       sourceRef: 'source:detroit-history',
       title: 'Detroit history archive',
       publisher: 'Detroit Historical Society',
       publishedAt: '2024-02-01T00:00:00.000Z',
+      metadata: hostedSyncDynamicSourceMetadataFixture(),
+      adultAttestedAt: NOW,
       attachedAt: NOW,
       status: 'ATTACHED_SATISFIED',
     })]),
@@ -281,7 +284,8 @@ function localFixture(): HostedSyncLocalBundleR2 {
         }),
       ]),
     }),
-    pinDigests: Object.freeze({ [IDENTITY.studentRef]: 'deadbeef' }),
+    studentAccessVerifiers: Object.freeze({ [IDENTITY.studentRef]: 'deadbeef' }),
+    parentAccessVerifier: null,
   }) as unknown as FinalFamilyPilotAppStateV1
   return Object.freeze({ core, app, indexedDb })
 }
@@ -302,7 +306,8 @@ function emptyTarget(local: HostedSyncLocalBundleR2): HostedSyncLocalBundleR2 {
       setup: Object.freeze({ students: Object.freeze([]), completedAt: null }),
       activeStudentRef: null,
       sessions: Object.freeze([]), sourceAttachments: Object.freeze([]), assessmentAssignments: Object.freeze([]),
-      attestations: Object.freeze([]), safety: Object.freeze({ schemaVersion: 1, holds: Object.freeze([]) }), pinDigests: Object.freeze({}),
+      attestations: Object.freeze([]), safety: Object.freeze({ schemaVersion: 1, holds: Object.freeze([]) }),
+      studentAccessVerifiers: Object.freeze({}), parentAccessVerifier: null,
     }),
     indexedDb: Object.freeze({ ...local.indexedDb, calendar: Object.freeze([]), sessions: Object.freeze([]), checkpoints: Object.freeze([]) }),
   })
@@ -326,7 +331,7 @@ describe('Hosted sync lossless state contract R2', () => {
     expect(exported.rflStates.map((item) => item.guardianState)).toEqual(['PENDING', 'CERTIFIED'])
     expect(exported.socialSources[0]).toMatchObject({ readiness: 'ATTACHED_SATISFIED', sourceRevision: 5 })
     expect(exported.safetyHolds.map((item) => item.status)).toEqual(['OPEN', 'CLEARED'])
-    expect(imported.app.pinDigests).toEqual({})
+    expect(imported.app.studentAccessVerifiers).toEqual({})
   })
 
   it('round-trips A→RPC checkpoint→empty B and B progress→RPC checkpoint→A without invention', async () => {

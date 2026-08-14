@@ -1,6 +1,7 @@
 import { ACADEMY_SUBJECTS } from '../../../../types'
 import { parseFamilyPilotStudent } from '../../../family-pilot/core/schema'
 import { parseDurableStudyDocument } from '../../../family-pilot/durable-ports/schema'
+import { validateDynamicSocialSourceBundle } from '../../../family-pilot/final-app/dynamicSource'
 import {
   HOSTED_SYNC_STATE_CONTRACT_VERSION,
   HOSTED_SYNC_STATE_OPERATION_KINDS,
@@ -206,13 +207,17 @@ function parseRfl(value: unknown, studentRef: string): HostedSyncRflStateR2 | nu
 }
 
 function parseSocial(value: unknown, studentRef: string): HostedSyncSocialSourceStateR2 | null {
-  const keys = ['studentRef', 'assignmentRef', 'lessonRef', 'readiness', 'sourceRef', 'kind', 'title', 'publisher', 'publishedAt', 'attachedAt', 'sourceRevision']
+  const keys = ['studentRef', 'assignmentRef', 'lessonRef', 'readiness', 'sourceRef', 'kind', 'title', 'publisher', 'publishedAt', 'metadata', 'adultAttestedAt', 'attachedAt', 'sourceRevision']
   if (!isRecord(value) || !exactKeys(value, keys) || value.studentRef !== studentRef) return null
   if (!isRef(value.assignmentRef) || !isRef(value.lessonRef) || !isRef(value.sourceRef) || value.readiness !== 'ATTACHED_SATISFIED' ||
     !['article', 'primary-source', 'reference', 'unspecified'].includes(String(value.kind)) ||
     typeof value.title !== 'string' || !value.title.trim() || value.title.length > 160 ||
     typeof value.publisher !== 'string' || !value.publisher.trim() || value.publisher.length > 160 ||
-    !isInstant(value.publishedAt) || !isInstant(value.attachedAt) || !isRevision(value.sourceRevision)) return null
+    !isInstant(value.publishedAt) || !Array.isArray(value.metadata) || !isInstant(value.adultAttestedAt) ||
+    !isInstant(value.attachedAt) || !isRevision(value.sourceRevision)) return null
+  try {
+    validateDynamicSocialSourceBundle({ lessonRef: value.lessonRef, sources: value.metadata, adultAttested: true })
+  } catch { return null }
   return value as unknown as HostedSyncSocialSourceStateR2
 }
 

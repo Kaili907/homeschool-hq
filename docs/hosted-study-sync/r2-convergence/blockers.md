@@ -1,5 +1,8 @@
 # Blocking evidence
 
+> Historical blocker record. Both blockers below are closed in
+> `../r2-final-convergence/`; they are retained to preserve the decision trail.
+
 ## Production privacy gate absent
 
 Security R2 reports `PROPOSED_R2_SERIALIZER_IS_TEST_ONLY_AND_NOT_YET_THE_PRODUCTION_PRE_NETWORK_GATE` together with existing legacy Profile-route privacy
