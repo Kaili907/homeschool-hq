@@ -359,8 +359,12 @@ export async function createFinalFamilyPilotStudyRuntime(
     async snapshot(assignmentRef, session) {
       return run(assignmentRef, session, () => study.snapshot({ context: options.context.study, session }))
     },
-    async pause(assignmentRef, session) {
-      return run(assignmentRef, session, () => study.pause({ context: options.context.study, session }))
+    async pause(assignmentRef, session, presentationProgressRef = null) {
+      return run(assignmentRef, session, () => study.pause({
+        context: options.context.study,
+        session,
+        presentationProgressRef,
+      }))
     },
     async resume(assignmentRef, session) {
       return run(assignmentRef, session, () => study.resume({ context: options.context.study, session }))

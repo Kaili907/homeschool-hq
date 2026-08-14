@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { RichLessonPresentation } from './RichLessonPresentation'
 import type { FamilyPilotLessonPlayerProps } from './types'
 
 /**
@@ -11,6 +12,7 @@ export function FamilyPilotLessonPlayer({
   status,
   snapshot,
   segmentContent,
+  renderModel,
   errorMessage,
   tutorHelpAvailable,
   busy,
@@ -55,7 +57,7 @@ export function FamilyPilotLessonPlayer({
     : null
 
   const tutorButton = tutorAvailable ? (
-    <button type="button" onClick={onOpenTutor}>Ask the Tutor for help</button>
+    <button type="button" onClick={() => onOpenTutor()}>Ask the Tutor for help</button>
   ) : null
 
   if (status === 'loading') {
@@ -63,7 +65,7 @@ export function FamilyPilotLessonPlayer({
       <main aria-busy="true">
         <h1 ref={headingRef} tabIndex={-1}>Loading lesson…</h1>
         <p role="status">Preparing your Study session…</p>
-        <button type="button" onClick={onExit}>Cancel</button>
+        <button type="button" onClick={() => onExit()}>Cancel</button>
       </main>
     )
   }
@@ -73,7 +75,7 @@ export function FamilyPilotLessonPlayer({
       <main>
         <h1 ref={headingRef} tabIndex={-1}>Lesson unavailable</h1>
         <p role="alert">{errorMessage ?? 'This lesson could not be loaded.'}</p>
-        <button type="button" onClick={onExit}>Back</button>
+        <button type="button" onClick={() => onExit()}>Back</button>
       </main>
     )
   }
@@ -83,7 +85,7 @@ export function FamilyPilotLessonPlayer({
       <main>
         <h1 ref={headingRef} tabIndex={-1}>{title}: lesson complete</h1>
         <p role="status">Great work — this lesson is finished.</p>
-        <button type="button" onClick={onExit}>Done</button>
+        <button type="button" onClick={() => onExit()}>Done</button>
       </main>
     )
   }
@@ -94,9 +96,26 @@ export function FamilyPilotLessonPlayer({
         <h1 ref={headingRef} tabIndex={-1}>{title}: paused</h1>
         <p role="status">Study is paused. Current status: {snapshot?.sessionStatus ?? 'paused'}.</p>
         <button type="button" disabled={isBusy} onClick={onResume}>Resume</button>
-        <button type="button" onClick={onExit}>Exit</button>
+        <button type="button" onClick={() => onExit()}>Exit</button>
         {tutorButton}
       </main>
+    )
+  }
+
+  if (renderModel?.mode === 'rich' && snapshot) {
+    return (
+      <RichLessonPresentation
+        snapshot={snapshot}
+        segmentContent={segmentContent}
+        renderModel={renderModel}
+        tutorHelpAvailable={tutorHelpAvailable}
+        busy={busy}
+        onSubmitAction={onSubmitAction}
+        onPause={onPause}
+        onNext={onNext}
+        onOpenTutor={onOpenTutor}
+        onExit={onExit}
+      />
     )
   }
 
@@ -129,7 +148,7 @@ export function FamilyPilotLessonPlayer({
     <main>
       <header>
         <p>{title}</p>
-        <button type="button" onClick={onExit}>Save and exit</button>
+        <button type="button" onClick={() => onExit()}>Save and exit</button>
       </header>
       <h1 ref={headingRef} tabIndex={-1}>{segmentTitle ?? 'Current step'}</h1>
       {stepText ? <p role="status">{stepText}</p> : null}
@@ -224,7 +243,7 @@ export function FamilyPilotLessonPlayer({
       )}
 
       <div>
-        <button type="button" disabled={isBusy} onClick={onPause}>Pause</button>
+        <button type="button" disabled={isBusy} onClick={() => onPause()}>Pause</button>
         {tutorButton}
       </div>
     </main>

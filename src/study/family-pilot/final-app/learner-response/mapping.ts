@@ -37,7 +37,7 @@ function classify(section: LearnerMaterialSectionDto): {
   readonly role: LearnerStudySegmentRole
   readonly mode: 'READ' | 'GUIDED' | 'INDEPENDENT' | 'MASTERY' | 'ACTIVITY' | 'RUBRIC' | 'GUARDIAN'
 } {
-  const value = `${section.kind ?? ''} ${section.title}`
+  const value = `${section.kind ?? section.sectionKind ?? ''} ${section.title}`
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     .replace(/[_-]+/g, ' ')
     .toLowerCase()
@@ -46,6 +46,9 @@ function classify(section: LearnerMaterialSectionDto): {
   if (/mastery|assessment|exit.ticket|knowledge.check/.test(value)) return { role: 'REFLECT', mode: 'MASTERY' }
   if (/independent|application|essential.question/.test(value)) return { role: 'PRACTICE', mode: 'INDEPENDENT' }
   if (/guided|supported.practice/.test(value)) return { role: 'PRACTICE', mode: 'GUIDED' }
+  if (/remediation|reteach|try.again/.test(value)) return { role: 'PRACTICE', mode: 'READ' }
+  if (/challenge|extension|enrichment/.test(value)) return { role: 'PRACTICE', mode: 'INDEPENDENT' }
+  if (/reflection|self.check|wrap.up/.test(value)) return { role: 'REFLECT', mode: 'READ' }
   if (/student.task|primary.task|deliverable|activity|project|performance.task/.test(value)) return { role: 'PRACTICE', mode: 'ACTIVITY' }
   return { role: 'LEARN', mode: 'READ' }
 }
@@ -77,7 +80,7 @@ function inferredResponseType(
   if (item?.responseKind && LEARNER_RESPONSE_TYPES.includes(item.responseKind)) return item.responseKind
   if (classification.mode === 'RUBRIC') return 'RUBRIC_REVIEW_PENDING'
   if (classification.mode === 'GUARDIAN') return 'GUARDIAN_ATTESTATION'
-  if (item?.kind === 'worked-example' || item?.workedSolution) return 'READ'
+  if (item?.kind === 'worked-example' || item?.itemKind === 'worked-example' || item?.workedSolution) return 'READ'
   if (choices.length) return 'CHOICE'
   if (item?.responseType && LEARNER_RESPONSE_TYPES.includes(item.responseType as LearnerResponseType) && item.responseType !== 'NONE') return item.responseType as LearnerResponseType
   if (classification.mode === 'READ') return 'READ'
@@ -112,7 +115,7 @@ function mappedItem(input: {
   const responseType = inferredResponseType(classification, input.item, choices)
   const instructionalExample = responseType === 'READ' || input.item?.kind === 'worked-example' || input.item?.itemKind === 'worked-example' || Boolean(input.item?.workedSolution)
   const segmentRole = classification.role === 'LEARN' && !instructionalExample ? 'PRACTICE' : classification.role
-  const example = input.item?.workedSolution?.steps?.join('\n')
+  const example = input.item?.workedSolution?.steps?.join('\n') ?? input.item?.explanation
   return Object.freeze({
     lessonRef: input.lessonRef,
     sectionRef: input.sectionRef,

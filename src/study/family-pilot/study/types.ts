@@ -55,6 +55,8 @@ export interface FamilyPilotStudySnapshot {
   readonly elapsedActiveSecondsInSegment: number
   readonly checkpointRef: string | null
   readonly checkpointRevision: number
+  /** Opaque presentation cursor restored from the existing Study checkpoint contract. */
+  readonly presentationProgressRef?: string | null
   readonly lastAcceptedEventRef: string | null
   readonly masteryAuthority: StudyCalendarEntry['masteryAuthority']
   readonly tutorBridgeAvailable: boolean

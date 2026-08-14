@@ -18,4 +18,12 @@ describe('final Lesson Player learner-response integration guards', () => {
     expect(store).toContain('openIndexedDbRecordStore')
     expect(store).not.toMatch(/legacyStorage\.setItem|localStorage\.setItem/)
   })
+
+  it('uses the rich projection without a parallel Study engine or legacy Tutor API', async () => {
+    const app = await readFile(new URL('../FinalFamilyPilotApp.tsx', import.meta.url), 'utf8')
+    expect(app).toContain('createRichLessonRenderModel(result.material)')
+    expect(app).not.toContain('<MaterialView material={result.material}')
+    expect(app).not.toMatch(/controller\.tutor\(/)
+    expect(app).toContain('Tutor help is reserved for a future trusted callback')
+  })
 })

@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   loadFinalFamilyPilotCatalog,
   type FinalLearnerAssessmentMaterial,
-  type FinalLearnerProductionMaterial,
 } from '../../../curriculum/final-app-data'
 import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
 import { FamilyPilotStudentLogin } from '../auth'
@@ -12,7 +11,7 @@ import {
   type FamilyPilotStudentDashboardModel,
 } from '../dashboard-adapter'
 import { fromStudentSelector, toStudentSelector } from '../integration/identity'
-import { FamilyPilotLessonPlayer } from '../lesson-player'
+import { createRichLessonRenderModel, FamilyPilotLessonPlayer } from '../lesson-player'
 import { FamilyPilotParentAssignPanel } from '../parent-assign'
 import { FamilyPreferences } from '../preferences'
 import { FamilyPilotRecoveryScreen } from '../recovery'
@@ -877,53 +876,6 @@ function AssessmentSurface({ controller, studentRef, assignmentRef, onExit, refr
   </main>
 }
 
-function materialLabel(value: string): string {
-  return value.replaceAll('_', ' ').replaceAll(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (letter) => letter.toUpperCase())
-}
-
-function MaterialValue({ value }: { readonly value: unknown }) {
-  if (value === null || value === undefined || value === '') return null
-  if (typeof value === 'string' || typeof value === 'number') return <p className="mt-2 whitespace-pre-wrap">{String(value)}</p>
-  if (typeof value === 'boolean') return <p className="mt-2">{value ? 'Yes' : 'No'}</p>
-  if (Array.isArray(value)) return <ul className="mt-2 list-disc space-y-1 pl-5">{value.map((item, index) => <li key={index}><MaterialValue value={item} /></li>)}</ul>
-  if (typeof value === 'object') return <dl className="mt-2 space-y-2">{Object.entries(value).map(([key, item]) => item === null || item === undefined || item === '' || Array.isArray(item) && item.length === 0 ? null : <div key={key}><dt className="font-bold">{materialLabel(key)}</dt><dd className="ml-3"><MaterialValue value={item} /></dd></div>)}</dl>
-  return null
-}
-
-function MaterialView({ material }: { readonly material: FinalLearnerProductionMaterial }) {
-  const supplemental = [
-    ['Essential question', material.essentialQuestion],
-    ['Key points', material.keyPoints],
-    ['Materials', material.materials],
-    ['Movement cues', material.movementCues],
-    ['Technique', material.technique],
-    ['Space setup', material.spaceSetup],
-    ['Equipment and no-equipment route', material.equipmentRequirements],
-    ['Accessible adaptation', material.accessibleAdaptation],
-    ['No-equipment alternative', material.noEquipmentAlternative],
-    ['Safety rules', material.safetyRules],
-    ['Stopping rules', material.stoppingRules],
-    ['Activity steps', material.activitySteps],
-    ['Completion and success criteria', material.successCriteria],
-    ['Rubric-facing criteria', material.rubricCriteria],
-    ['Simulation or model-data alternative', material.simulationAlternative],
-    ['Technology activity setup', material.activitySetup],
-    ['Attached learner resource', material.learnerResource],
-    ['Source metadata and context', material.sourceMetadata],
-    ['Common error to watch for', material.commonErrorToWatchFor],
-  ].filter(([, value]) => value !== undefined && value !== null && value !== '' && (!Array.isArray(value) || value.length > 0))
-  return (
-    <section className="rounded-2xl border border-cyan-200 bg-white p-5" data-material-ref={material.materialRef}>
-      <p className="text-xs font-bold uppercase tracking-wide text-cyan-700">Admitted learner material · {material.subject}</p>
-      <h2 className="mt-1 text-2xl font-extrabold">{material.title}</h2>
-      {supplemental.length ? <div className="mt-4 space-y-4" data-testid="learner-material-contract">{supplemental.map(([title, value]) => <section key={String(title)} className="rounded-xl border border-slate-200 bg-white p-4"><h3 className="font-extrabold">{String(title)}</h3><MaterialValue value={value} /></section>)}</div> : null}
-      {material.format === 'markdown' ? <div className="mt-4 whitespace-pre-wrap font-serif leading-7">{material.markdown}</div> : (
-        <div className="mt-4 space-y-4">{material.sections.map((section, index) => <section key={`${section.title}:${index}`} className="rounded-xl bg-slate-50 p-4"><h3 className="font-extrabold">{section.title}</h3>{section.body ? <p className="mt-2 whitespace-pre-wrap">{section.body}</p> : null}{section.prompts.length ? <ul className="mt-2 list-disc space-y-1 pl-5">{section.prompts.map((prompt, promptIndex) => <li key={`${promptIndex}:${prompt}`}>{prompt}</li>)}</ul> : null}</section>)}</div>
-      )}
-    </section>
-  )
-}
-
 function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh }: {
   readonly controller: FinalFamilyPilotController
   readonly studentRef: string
@@ -940,6 +892,10 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
   const [responseLoadError, setResponseLoadError] = useState<{ readonly key: string; readonly message: string } | null>(null)
   const responseStore = useMemo(() => new BrowserLearnerResponseStore(), [assignmentRef, studentRef])
   const assignment = controller.coreSnapshot.state.students.find((item) => item.studentRef === studentRef)?.assignments.find((item) => item.assignmentRef === assignmentRef)
+  const richRenderModel = useMemo(
+    () => result?.status === 'ok' ? createRichLessonRenderModel(result.material) : null,
+    [result],
+  )
 
   const run = useCallback(async (action: () => Promise<FinalFamilyPilotControllerResult>) => {
     setBusy(true)
@@ -1020,11 +976,17 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     responseKind: responseItem.responseType,
     choices: responseItem.choices.map((choice) => ({ id: choice.choiceRef, label: choice.label })),
     pendingAssessmentCount: responsePresentation.pendingAssessmentCount,
+    answeredItemRefs: responsePresentation.answeredItemRefs,
+    requiredItemRefs: responsePresentation.requiredItemRefs,
+    canCompleteSegment: responsePresentation.canCompleteSegment,
   } as const : {
     title: 'Responses saved',
     prompt: 'All required responses for this Study step are saved on this device.',
     responseKind: 'READ' as const,
     pendingAssessmentCount: responsePresentation.pendingAssessmentCount,
+    answeredItemRefs: responsePresentation.answeredItemRefs,
+    requiredItemRefs: responsePresentation.requiredItemRefs,
+    canCompleteSegment: responsePresentation.canCompleteSegment,
   }
 
   const submitLearnerResponse = async (value: string) => {
@@ -1064,9 +1026,8 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     void run(() => controller.completeSegment(studentRef, assignmentRef))
   }
   return (
-    <main className="mx-auto grid max-w-6xl gap-5 px-4 py-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.7fr)]">
-      <MaterialView material={result.material} />
-      <section className="rounded-2xl border bg-white p-5">
+    <main className="mx-auto max-w-4xl px-4 py-6">
+      <section data-material-ref={result.material.materialRef}>
         {focus?.breakSuggested ? <p className="mb-4 rounded-lg border border-blue-300 bg-blue-50 p-3 font-semibold" role="status">Break guidance: this is a good time for a short break. This is advisory only.</p> : null}
         {pending ? (
           <div>
@@ -1079,20 +1040,21 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
             status={certified ? 'completed' : result.study.sessionStatus === 'paused' ? 'paused' : 'active'}
             snapshot={result.study}
             segmentContent={segmentContent}
+            renderModel={richRenderModel?.mode === 'rich' ? richRenderModel : undefined}
             tutorHelpAvailable
             busy={busy}
             errorMessage={message}
             onSubmitAction={(value) => void submitLearnerResponse(value)}
-            onPause={() => void run(() => controller.pause(studentRef, assignmentRef))}
+            onPause={(progressRef) => void run(() => controller.pause(studentRef, assignmentRef, progressRef ?? null))}
             onResume={() => void run(() => controller.resume(studentRef, assignmentRef))}
             onNext={completePresentedSegment}
             onCompleteSegment={completePresentedSegment}
-            onOpenTutor={() => void controller.tutor(studentRef, assignmentRef).then((tutor) => setTutorText(tutor.status === 'ok' ? tutor.step.presentation.visibleText : tutor.message)).catch((error) => setTutorText(messageOf(error)))}
-            onExit={() => void controller.checkpoint(studentRef, assignmentRef).then(() => onExit())}
+            onOpenTutor={() => setTutorText('Tutor help is reserved for a future trusted callback. Your lesson and response progress are unchanged.')}
+            onExit={(progressRef) => void controller.checkpoint(studentRef, assignmentRef, progressRef ?? null).then(() => onExit())}
           />
         )}
         {!pending && !certified ? <button type="button" className="mt-4 rounded-lg border border-amber-500 px-4 py-2 font-bold" onClick={() => void controller.requestAdultHelp(studentRef, assignmentRef).then(() => { setMessage('A parent check-in is now required for this exact session.'); refresh() }).catch((error) => setMessage(messageOf(error)))}>I need an adult check-in</button> : null}
-        {tutorText ? <div className="mt-4 rounded-lg border border-cyan-200 bg-cyan-50 p-3"><p className="font-bold">Tutor help</p><p className="mt-1">{tutorText}</p><p className="mt-2 text-sm text-slate-600">If Tutor Core is unavailable, this is the accepted static curriculum fallback. No conversation is persisted.</p></div> : null}
+        {tutorText ? <div className="mt-4 rounded-lg border border-cyan-200 bg-cyan-50 p-3"><p className="font-bold">Tutor help</p><p className="mt-1">{tutorText}</p><p className="mt-2 text-sm text-slate-600">No Tutor runtime is mounted here. This callback carries lesson references only, and no conversation is persisted.</p></div> : null}
         {message ? <p className="mt-3 font-semibold text-amber-800" role="alert">{message}</p> : null}
       </section>
     </main>

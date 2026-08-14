@@ -11,7 +11,14 @@ export interface FinalLearnerMaterialSection {
   readonly sectionKind?: string
   readonly title: string
   readonly body?: string
+  readonly directions?: string
   readonly prompts: readonly string[]
+  readonly vocabulary?: readonly (string | { readonly term: string; readonly definition?: string })[]
+  readonly source?: unknown
+  readonly data?: unknown
+  readonly map?: unknown
+  readonly image?: unknown
+  readonly reference?: unknown
   readonly items?: readonly {
     readonly itemRef: string
     readonly sourceItemRef?: string
@@ -20,7 +27,14 @@ export interface FinalLearnerMaterialSection {
     readonly prompt?: string
     readonly responseType?: string
     readonly responseKind?: 'NONE' | 'READ' | 'CHOICE' | 'TEXT' | 'NUMERIC' | 'CONSTRUCTED_RESPONSE' | 'ACTIVITY_EVIDENCE' | 'RUBRIC_REVIEW_PENDING' | 'GUARDIAN_ATTESTATION'
-    readonly choices?: readonly string[]
+    readonly choices?: readonly (string | { readonly id?: string; readonly ref?: string; readonly label: string })[]
+    readonly workedSolution?: { readonly steps?: readonly string[] }
+    readonly explanation?: string
+    readonly source?: unknown
+    readonly data?: unknown
+    readonly map?: unknown
+    readonly image?: unknown
+    readonly reference?: unknown
   }[]
 }
 
@@ -29,7 +43,9 @@ export type FinalLearnerProductionMaterial = {
   readonly lessonRef: string
   readonly title: string
   readonly subject: SupportedSubject
+  readonly lessonGoal?: string
   readonly essentialQuestion?: string
+  readonly vocabulary?: readonly (string | { readonly term: string; readonly definition?: string })[]
   readonly materials?: readonly string[]
   readonly successCriteria?: readonly string[]
   readonly rubricCriteria?: readonly unknown[]

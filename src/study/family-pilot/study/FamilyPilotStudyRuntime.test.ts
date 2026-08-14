@@ -155,6 +155,34 @@ describe('Family Pilot Study runtime', () => {
     expect(resumed.snapshot.segmentOrdinal).toBe(1)
   })
 
+  it('restores an opaque rich-presentation page through the existing Study checkpoint', async () => {
+    const device = pilotDevice()
+    const context = studentContext('one')
+    const { runtime, session } = await startMath(device, context, 'rich-page-resume')
+    const progressRef = 'lesson-cursor:learn:4'
+    const paused = await runtime.pause({ context, session, presentationProgressRef: progressRef })
+    if (paused.status !== 'ok') throw new Error(paused.reason)
+    expect(paused.snapshot.presentationProgressRef).toBe(progressRef)
+
+    const reloaded = device.reload()
+    const restored = await reloaded.resumeAssignment({ context, session: storedHandle(session) })
+    if (restored.status !== 'ok') throw new Error(restored.reason)
+    expect(restored.snapshot.presentationProgressRef).toBe(progressRef)
+    expect(restored.snapshot.segmentRef).toBe(paused.snapshot.segmentRef)
+    expect(await reloaded.resume({ context, session })).toMatchObject({
+      status: 'ok', snapshot: { presentationProgressRef: progressRef },
+    })
+  })
+
+  it('rejects learner text masquerading as a presentation cursor before pausing', async () => {
+    const device = pilotDevice()
+    const context = studentContext('one')
+    const { runtime, session } = await startMath(device, context, 'bad-rich-page')
+    expect(await runtime.pause({ context, session, presentationProgressRef: 'I think the answer is forty two' }))
+      .toMatchObject({ status: 'rejected', reason: 'response-draft-not-opaque' })
+    expect(await runtime.snapshot({ context, session })).toMatchObject({ status: 'ok', snapshot: { assignmentState: 'active' } })
+  })
+
   it('advances to the next segment on completion and refuses out-of-state work', async () => {
     const device = pilotDevice()
     const context = studentContext('one')

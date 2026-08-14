@@ -396,9 +396,13 @@ export class FamilyPilotStudyRuntime {
     readonly context: HostStudyLaunchContext
     readonly session: FamilyPilotStudySession
     readonly category?: 'planned_break' | 'requested_break' | 'outside_interruption' | 'technical_interruption'
+    /** Opaque page cursor only; learner text is rejected by the checkpoint boundary. */
+    readonly presentationProgressRef?: string | null
   }): Promise<FamilyPilotStudyResult> {
     return this.#write(input, async (ports, token, entry, session) => {
       if (entry.state !== 'active') return reject('assignment-not-pausable')
+      if (input.presentationProgressRef !== null && input.presentationProgressRef !== undefined &&
+        !OPAQUE_REF.test(input.presentationProgressRef)) return reject('response-draft-not-opaque')
       const learnerScope: StudyLearnerScope = { householdRef: session.householdRef, learnerRef: session.learnerRef }
       const scope: StudyScope = { ...learnerScope, sessionRef: session.sessionRef }
       const at = this.#at()
@@ -408,7 +412,7 @@ export class FamilyPilotStudyRuntime {
         at,
         input.category ?? 'planned_break',
       ))
-      const checkpoint = await this.#saveCheckpoint(token, session, paused, at, null)
+      const checkpoint = await this.#saveCheckpoint(token, session, paused, at, input.presentationProgressRef ?? null)
       const persisted = await runCurrentStudyWork(token, () => ports.persistence.loadSession(scope))
       await runCurrentStudyWork(token, () => ports.persistence.saveSession({
         scope,
@@ -685,6 +689,7 @@ export class FamilyPilotStudyRuntime {
         (checkpoint && checkpoint.segmentRef === segmentRef ? checkpoint.elapsedActiveSecondsInSegment : 0),
       checkpointRef: checkpoint?.checkpointRef ?? null,
       checkpointRevision: checkpoint?.revision ?? 0,
+      presentationProgressRef: checkpoint?.responseDraftRef ?? null,
       lastAcceptedEventRef: persisted?.lastAcceptedEventRef ?? null,
       masteryAuthority: entry.masteryAuthority,
       tutorBridgeAvailable: familyPilotTutorBridgeAvailable(entry),
