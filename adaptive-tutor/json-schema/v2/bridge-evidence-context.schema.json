@@ -1,0 +1,126 @@
+{
+  "$id": "StudyTutorV2BridgeEvidenceContext",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "currentSkillRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "evidenceRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "learnerResponseOutcome": {
+      "anyOf": [
+        {
+          "const": "correct",
+          "type": "string"
+        },
+        {
+          "const": "partial",
+          "type": "string"
+        },
+        {
+          "const": "incorrect",
+          "type": "string"
+        },
+        {
+          "const": "not-evaluated",
+          "type": "string"
+        }
+      ]
+    },
+    "observedAt": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+      "type": "string"
+    },
+    "prerequisiteReview": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "const": "not-recommended",
+              "type": "string"
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "prerequisiteConceptRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 12,
+              "minItems": 1,
+              "type": "array"
+            },
+            "status": {
+              "const": "recommended",
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "prerequisiteConceptRefs"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "assignmentRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "prerequisiteConceptRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 12,
+              "minItems": 1,
+              "type": "array"
+            },
+            "status": {
+              "const": "assigned",
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "prerequisiteConceptRefs",
+            "assignmentRef"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "required": [
+    "evidenceRef",
+    "observedAt",
+    "currentSkillRef",
+    "learnerResponseOutcome",
+    "prerequisiteReview"
+  ],
+  "title": "Study Tutor V2 Bridge Evidence Context",
+  "type": "object"
+}

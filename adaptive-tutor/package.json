@@ -11,7 +11,15 @@
     "build": "node scripts/build.mjs",
     "validate": "node scripts/run-validation.mjs",
     "check": "npm run typecheck && npm run test && npm run build && npm run smoke && npm run validate",
-    "smoke": "node scripts/smoke-prototype.mjs"
+    "smoke": "node scripts/smoke-prototype.mjs",
+    "tutor-v2:typecheck": "tsc -p scripts/tutor-v2/tsconfig.json --noEmit",
+    "tutor-v2:test": "node scripts/tutor-v2/run-compiled.mjs test",
+    "tutor-v2:schema": "node scripts/tutor-v2/run-compiled.mjs schema",
+    "tutor-v2:schema-check": "node scripts/tutor-v2/run-compiled.mjs schema --check",
+    "tutor-v2:release": "node scripts/tutor-v2/run-compiled.mjs release",
+    "tutor-v2:release-check": "node scripts/tutor-v2/run-compiled.mjs release --check",
+    "tutor-v2:evaluate": "npm --prefix evals/v2/framework run evaluate",
+    "tutor-v2:wave1-gate": "node scripts/tutor-v2/wave1-gate.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",

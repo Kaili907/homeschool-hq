@@ -1,0 +1,762 @@
+{
+  "$id": "TutorV2Request",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actionCompatibilityId": {
+      "const": "manuel-academy.study-tutor-v2.action.v1",
+      "type": "string"
+    },
+    "actionSchemaVersion": {
+      "const": 1,
+      "type": "number"
+    },
+    "budgetRoutingContext": {
+      "$id": "TutorV2BudgetRoutingContext",
+      "additionalProperties": false,
+      "properties": {
+        "actionBudget": {
+          "additionalProperties": false,
+          "properties": {
+            "remainingActions": {
+              "maximum": 20,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "remainingActions"
+          ],
+          "type": "object"
+        },
+        "costBudget": {
+          "additionalProperties": false,
+          "properties": {
+            "maximumCostUnits": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "unit": {
+              "const": "integer-cost-unit",
+              "type": "string"
+            }
+          },
+          "required": [
+            "unit",
+            "maximumCostUnits"
+          ],
+          "type": "object"
+        },
+        "retryBudget": {
+          "additionalProperties": false,
+          "properties": {
+            "remainingRetries": {
+              "maximum": 3,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "remainingRetries"
+          ],
+          "type": "object"
+        },
+        "route": {
+          "additionalProperties": false,
+          "properties": {
+            "modelRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "providerRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "routeRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "routeRef",
+            "providerRef",
+            "modelRef"
+          ],
+          "type": "object"
+        },
+        "timeoutBudgetMs": {
+          "maximum": 120000,
+          "minimum": 50,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "actionBudget",
+        "timeoutBudgetMs",
+        "retryBudget",
+        "route",
+        "costBudget"
+      ],
+      "type": "object"
+    },
+    "compatibilityId": {
+      "const": "manuel-academy.study-tutor-v2.contracts.v2",
+      "type": "string"
+    },
+    "contractVersion": {
+      "const": "2.0.0",
+      "type": "string"
+    },
+    "envelope": {
+      "const": "tutor-request",
+      "type": "string"
+    },
+    "requestIntent": {
+      "const": "propose-next-teaching-action",
+      "type": "string"
+    },
+    "requestRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "shortTermState": {
+      "$id": "TutorV2ShortTermState",
+      "additionalProperties": false,
+      "properties": {
+        "actionCompatibilityId": {
+          "const": "manuel-academy.study-tutor-v2.action.v1",
+          "type": "string"
+        },
+        "actionSchemaVersion": {
+          "const": 1,
+          "type": "number"
+        },
+        "assistanceLevel": {
+          "anyOf": [
+            {
+              "const": "independent",
+              "type": "string"
+            },
+            {
+              "const": "light-hint",
+              "type": "string"
+            },
+            {
+              "const": "guided",
+              "type": "string"
+            },
+            {
+              "const": "reteach-required",
+              "type": "string"
+            }
+          ]
+        },
+        "compatibilityId": {
+          "const": "manuel-academy.study-tutor-v2.contracts.v2",
+          "type": "string"
+        },
+        "contractVersion": {
+          "const": "2.0.0",
+          "type": "string"
+        },
+        "expiresAt": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+          "type": "string"
+        },
+        "highestHintUsed": {
+          "anyOf": [
+            {
+              "const": "none",
+              "type": "string"
+            },
+            {
+              "const": "nudge",
+              "type": "string"
+            },
+            {
+              "const": "concept-cue",
+              "type": "string"
+            },
+            {
+              "const": "guided-step",
+              "type": "string"
+            }
+          ]
+        },
+        "interactionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "lastAction": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "const": "explain",
+                  "type": "string"
+                },
+                {
+                  "const": "hint",
+                  "type": "string"
+                },
+                {
+                  "const": "ask-check",
+                  "type": "string"
+                },
+                {
+                  "const": "show-example",
+                  "type": "string"
+                },
+                {
+                  "const": "reteach",
+                  "type": "string"
+                },
+                {
+                  "const": "check-prerequisite",
+                  "type": "string"
+                },
+                {
+                  "const": "suggest-break",
+                  "type": "string"
+                },
+                {
+                  "const": "escalate",
+                  "type": "string"
+                },
+                {
+                  "const": "return-to-lesson",
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "persistenceAllowed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "stateKind": {
+          "const": "ephemeral-interaction-state",
+          "type": "string"
+        },
+        "turnCount": {
+          "maximum": 24,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "usedGroundingRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 24,
+          "type": "array"
+        }
+      },
+      "required": [
+        "contractVersion",
+        "actionSchemaVersion",
+        "compatibilityId",
+        "actionCompatibilityId",
+        "stateKind",
+        "interactionRef",
+        "turnCount",
+        "assistanceLevel",
+        "highestHintUsed",
+        "lastAction",
+        "usedGroundingRefs",
+        "expiresAt",
+        "persistenceAllowed"
+      ],
+      "type": "object"
+    },
+    "studyAuthorityContext": {
+      "$id": "TutorV2StudyAuthorityContext",
+      "additionalProperties": false,
+      "properties": {
+        "actionCompatibilityId": {
+          "const": "manuel-academy.study-tutor-v2.action.v1",
+          "type": "string"
+        },
+        "actionSchemaVersion": {
+          "const": 1,
+          "type": "number"
+        },
+        "authorizationRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "authorizationRevision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "compatibilityId": {
+          "const": "manuel-academy.study-tutor-v2.contracts.v2",
+          "type": "string"
+        },
+        "contextKind": {
+          "const": "study-authority",
+          "type": "string"
+        },
+        "contractVersion": {
+          "const": "2.0.0",
+          "type": "string"
+        },
+        "expiresAt": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+          "type": "string"
+        },
+        "instructionContext": {
+          "$id": "TutorV2InstructionContext",
+          "additionalProperties": false,
+          "properties": {
+            "allowedActions": {
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "explain",
+                    "type": "string"
+                  },
+                  {
+                    "const": "hint",
+                    "type": "string"
+                  },
+                  {
+                    "const": "ask-check",
+                    "type": "string"
+                  },
+                  {
+                    "const": "show-example",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reteach",
+                    "type": "string"
+                  },
+                  {
+                    "const": "check-prerequisite",
+                    "type": "string"
+                  },
+                  {
+                    "const": "suggest-break",
+                    "type": "string"
+                  },
+                  {
+                    "const": "escalate",
+                    "type": "string"
+                  },
+                  {
+                    "const": "return-to-lesson",
+                    "type": "string"
+                  }
+                ]
+              },
+              "maxItems": 9,
+              "minItems": 1,
+              "type": "array"
+            },
+            "approvedEvidenceSummary": {
+              "$id": "TutorV2ApprovedEvidenceSummary",
+              "additionalProperties": false,
+              "properties": {
+                "assistanceLevel": {
+                  "anyOf": [
+                    {
+                      "const": "independent",
+                      "type": "string"
+                    },
+                    {
+                      "const": "light-hint",
+                      "type": "string"
+                    },
+                    {
+                      "const": "guided",
+                      "type": "string"
+                    },
+                    {
+                      "const": "reteach-required",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "attemptCount": {
+                  "maximum": 100,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "evidenceCode": {
+                  "maxLength": 96,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "observationRefs": {
+                  "items": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "maxItems": 12,
+                  "type": "array"
+                },
+                "summaryRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "summaryRef",
+                "evidenceCode",
+                "attemptCount",
+                "assistanceLevel",
+                "observationRefs"
+              ],
+              "type": "object"
+            },
+            "assessmentPhase": {
+              "anyOf": [
+                {
+                  "const": "instruction-or-practice",
+                  "type": "string"
+                },
+                {
+                  "const": "active-graded-or-mastery-check",
+                  "type": "string"
+                },
+                {
+                  "const": "completed-assessment-review",
+                  "type": "string"
+                },
+                {
+                  "const": "non-graded-review",
+                  "type": "string"
+                }
+              ]
+            },
+            "conceptRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "contextKind": {
+              "const": "tutor-instruction",
+              "type": "string"
+            },
+            "groundingReferences": {
+              "items": {
+                "$id": "TutorV2AllowedGroundingReference",
+                "additionalProperties": false,
+                "properties": {
+                  "contentDigest": {
+                    "pattern": "^sha256:[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  "groundingRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "kind": {
+                    "anyOf": [
+                      {
+                        "const": "curriculum-excerpt",
+                        "type": "string"
+                      },
+                      {
+                        "const": "concept-definition",
+                        "type": "string"
+                      },
+                      {
+                        "const": "worked-example",
+                        "type": "string"
+                      },
+                      {
+                        "const": "source-citation",
+                        "type": "string"
+                      },
+                      {
+                        "const": "static-fallback",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "learnerSafeContent": {
+                    "anyOf": [
+                      {
+                        "maxLength": 4000,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "groundingRef",
+                  "kind",
+                  "contentDigest",
+                  "learnerSafeContent"
+                ],
+                "type": "object"
+              },
+              "maxItems": 12,
+              "minItems": 1,
+              "type": "array"
+            },
+            "hintCeiling": {
+              "anyOf": [
+                {
+                  "const": "none",
+                  "type": "string"
+                },
+                {
+                  "const": "nudge",
+                  "type": "string"
+                },
+                {
+                  "const": "concept-cue",
+                  "type": "string"
+                },
+                {
+                  "const": "guided-step",
+                  "type": "string"
+                }
+              ]
+            },
+            "learnerSafeItem": {
+              "anyOf": [
+                {
+                  "$id": "TutorV2LearnerSafeItem",
+                  "additionalProperties": false,
+                  "properties": {
+                    "itemKind": {
+                      "maxLength": 96,
+                      "minLength": 3,
+                      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                      "type": "string"
+                    },
+                    "itemRef": {
+                      "maxLength": 160,
+                      "minLength": 3,
+                      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                      "type": "string"
+                    },
+                    "learnerSafeContent": {
+                      "maxLength": 4000,
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "itemRef",
+                    "itemKind",
+                    "learnerSafeContent"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "learnerStageRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "safetyConstraints": {
+              "$id": "TutorV2SafetyConstraints",
+              "additionalProperties": false,
+              "properties": {
+                "disallowedContentCodes": {
+                  "items": {
+                    "maxLength": 96,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                    "type": "string"
+                  },
+                  "maxItems": 24,
+                  "type": "array"
+                },
+                "learnerSafeLanguageRequired": {
+                  "const": true,
+                  "type": "boolean"
+                },
+                "mayContinueAcademicFlow": {
+                  "type": "boolean"
+                },
+                "safetyMode": {
+                  "anyOf": [
+                    {
+                      "const": "standard",
+                      "type": "string"
+                    },
+                    {
+                      "const": "restricted",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "safetyMode",
+                "mayContinueAcademicFlow",
+                "learnerSafeLanguageRequired",
+                "disallowedContentCodes"
+              ],
+              "type": "object"
+            },
+            "subjectRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "workingLevelInstructionRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "contextKind",
+            "subjectRef",
+            "conceptRef",
+            "workingLevelInstructionRef",
+            "learnerStageRef",
+            "learnerSafeItem",
+            "assessmentPhase",
+            "approvedEvidenceSummary",
+            "allowedActions",
+            "hintCeiling",
+            "safetyConstraints",
+            "groundingReferences"
+          ],
+          "type": "object"
+        },
+        "interactionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "invocationBindingRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "issuedAt": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+          "type": "string"
+        },
+        "policyRefs": {
+          "additionalProperties": false,
+          "properties": {
+            "answerPolicyRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "assessmentPolicyRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "authorityPolicyRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "privacyPolicyRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "safetyPolicyRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "authorityPolicyRef",
+            "assessmentPolicyRef",
+            "answerPolicyRef",
+            "safetyPolicyRef",
+            "privacyPolicyRef"
+          ],
+          "type": "object"
+        },
+        "safetyClearanceRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contractVersion",
+        "actionSchemaVersion",
+        "compatibilityId",
+        "actionCompatibilityId",
+        "contextKind",
+        "interactionRef",
+        "invocationBindingRef",
+        "authorizationRef",
+        "authorizationRevision",
+        "safetyClearanceRef",
+        "policyRefs",
+        "instructionContext",
+        "issuedAt",
+        "expiresAt"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "actionSchemaVersion",
+    "compatibilityId",
+    "actionCompatibilityId",
+    "envelope",
+    "requestRef",
+    "requestIntent",
+    "studyAuthorityContext",
+    "budgetRoutingContext",
+    "shortTermState"
+  ],
+  "title": "Tutor V2 Request",
+  "type": "object"
+}

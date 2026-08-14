@@ -1,0 +1,154 @@
+{
+  "resultVersion": 1,
+  "product": "Manuel Academy Study Tutor V2",
+  "wave": "Wave 1 Foundation",
+  "foundationGate": "PASS",
+  "finalClassification": "WAVE1_CANDIDATE_READY_FOR_INDEPENDENT_REVIEW_WITH_INHERITED_FINDINGS",
+  "releaseReady": false,
+  "checks": [
+    {
+      "name": "node-22",
+      "status": "PASS",
+      "detail": "Node 22.23.2",
+      "command": "node --version"
+    },
+    {
+      "name": "canonical-provenance",
+      "status": "PASS",
+      "detail": "9/9 pinned remote tips exact",
+      "command": "git rev-parse origin/mac/tutor-v2-w1-*"
+    },
+    {
+      "name": "accepted-lane-tree-equivalence",
+      "status": "PASS",
+      "detail": "W1-03 through W1-07 exact",
+      "command": "git diff --quiet <accepted-sha> HEAD -- <lane-paths>"
+    },
+    {
+      "name": "v2-typecheck",
+      "status": "PASS",
+      "detail": "strict TypeScript",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-convergence-r1/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
+    },
+    {
+      "name": "v2-compile",
+      "status": "PASS",
+      "detail": "convergence compilation",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-convergence-r1/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
+    },
+    {
+      "name": "schema-runtime-parity-artifacts",
+      "status": "PASS",
+      "detail": "22 schemas + inventory exact",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/.dist/scripts/tutor-v2/generate-schemas.js --check"
+    },
+    {
+      "name": "release-evidence-artifacts",
+      "status": "PASS",
+      "detail": "6 release artifacts exact",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js --check"
+    },
+    {
+      "name": "accepted-v2-slice-tests",
+      "status": "PASS",
+      "detail": "112/112 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/contracts/contracts.test.js scripts/tutor-v2/.dist/core/v2/providers/testing/provider-port.test.js scripts/tutor-v2/.dist/core/v2/policy/authority/authority.test.js scripts/tutor-v2/.dist/core/v2/policy/grounding/grounding.test.js scripts/tutor-v2/.dist/core/v2/policy/anti-answer/anti-answer.test.js scripts/tutor-v2/.dist/core/v2/policy/refusal/refusal.test.js scripts/tutor-v2/.dist/core/v2/policy/age/profile.test.js scripts/tutor-v2/.dist/core/v2/memory/session-memory.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/evidence/tutor-evidence.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/privacy/provider-context.test.js"
+    },
+    {
+      "name": "cross-slice-convergence-tests",
+      "status": "PASS",
+      "detail": "39/39 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js"
+    },
+    {
+      "name": "bridge-typecheck",
+      "status": "PASS",
+      "detail": "W1-08 bridge compilation",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-convergence-r1/adaptive-tutor/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
+    },
+    {
+      "name": "w1-08-bridge-regression",
+      "status": "PASS",
+      "detail": "75/75 pass; 0 fail; 0 skipped",
+      "command": "node --test study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
+      "name": "evaluation-harness-build-test",
+      "status": "PASS",
+      "detail": "8/8 harness self-tests",
+      "command": "npm --prefix evals/v2/framework test"
+    },
+    {
+      "name": "foundation-evaluation",
+      "status": "PASS",
+      "detail": "128/128; FOUNDATION_GATE_PASS; releaseReady=false",
+      "command": "node evals/v2/framework/.dist/framework/src/cli.js --format=json"
+    },
+    {
+      "name": "tutor-core-v0.2-typecheck",
+      "status": "PASS",
+      "detail": "frozen Core typecheck",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-convergence-r1/adaptive-tutor/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
+    },
+    {
+      "name": "tutor-core-v0.2-tests",
+      "status": "PASS",
+      "detail": "21/21 tests",
+      "command": "npm test"
+    },
+    {
+      "name": "tutor-core-v0.2-build",
+      "status": "PASS",
+      "detail": "isolated build PASS",
+      "command": "npm run build"
+    },
+    {
+      "name": "tutor-core-v0.2-smoke",
+      "status": "PASS",
+      "detail": "isolated smoke PASS",
+      "command": "npm run smoke"
+    },
+    {
+      "name": "w1-05-broad-validator",
+      "status": "INHERITED_FINDING",
+      "detail": "18/19; obsolete substring/platform scope flags accepted authority paths and generated test output",
+      "command": "npm run validate (isolated copy)"
+    },
+    {
+      "name": "frozen-core-live-tree-build",
+      "status": "PASS",
+      "detail": "reconstructed frozen v0.2 source build",
+      "command": "npm run build"
+    },
+    {
+      "name": "study-core-bridge-regression",
+      "status": "PASS",
+      "detail": "35/36 pass; 1 skipped",
+      "command": "SESSION6_SOURCE_ROOT=<reconstructed> node --test adaptive-tutor/study-engine/tests/tutor-core-bridge/*.test.mjs"
+    },
+    {
+      "name": "frozen-archive-checksums",
+      "status": "NOT_AVAILABLE",
+      "detail": "four external SESSION6 archives not mounted; one exact-checksum test skipped",
+      "command": "SESSION6_*_ZIP exact checksum test"
+    },
+    {
+      "name": "dependency-advisories",
+      "status": "INHERITED_FINDING",
+      "detail": "3 existing high advisories: @playwright/test, nanoid, playwright; manifests unchanged from immutable baseline",
+      "command": "npm audit --json (study-engine/runtime)"
+    },
+    {
+      "name": "w1-09-path-ownership",
+      "status": "PASS",
+      "detail": "43 changed files all convergence-owned",
+      "command": "git status --porcelain=v1 --untracked-files=all"
+    },
+    {
+      "name": "git-diff-check",
+      "status": "PASS",
+      "detail": "no whitespace errors",
+      "command": "git diff --check"
+    }
+  ]
+}

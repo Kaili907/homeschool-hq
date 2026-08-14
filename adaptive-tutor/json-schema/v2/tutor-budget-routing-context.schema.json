@@ -1,0 +1,96 @@
+{
+  "$id": "TutorV2BudgetRoutingContext",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actionBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "remainingActions": {
+          "maximum": 20,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "remainingActions"
+      ],
+      "type": "object"
+    },
+    "costBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "maximumCostUnits": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "unit": {
+          "const": "integer-cost-unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "maximumCostUnits"
+      ],
+      "type": "object"
+    },
+    "retryBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "remainingRetries": {
+          "maximum": 3,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "remainingRetries"
+      ],
+      "type": "object"
+    },
+    "route": {
+      "additionalProperties": false,
+      "properties": {
+        "modelRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "providerRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "routeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "routeRef",
+        "providerRef",
+        "modelRef"
+      ],
+      "type": "object"
+    },
+    "timeoutBudgetMs": {
+      "maximum": 120000,
+      "minimum": 50,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "actionBudget",
+    "timeoutBudgetMs",
+    "retryBudget",
+    "route",
+    "costBudget"
+  ],
+  "title": "Tutor V2 Budget Routing Context",
+  "type": "object"
+}

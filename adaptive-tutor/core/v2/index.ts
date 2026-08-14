@@ -1,0 +1,19 @@
+export * from "./contracts/index.js";
+export * from "./memory/index.js";
+export * from "./policy/age/index.js";
+export * from "./policy/anti-answer/index.js";
+export * from "./policy/authority/index.js";
+export * from "./policy/grounding/index.js";
+export * from "./policy/refusal/index.js";
+
+// The shared V2 surface exposes the provider-neutral port contract only. Raw
+// transports, vendor adapters, routes, and test providers remain internal.
+export type {
+  ClosedStructuredTutorRequest,
+  ProviderExecutionResult,
+  ProviderFailureReason,
+  ProviderFailureResult,
+  ProviderFailureStatus,
+  ProviderSuccessResult,
+  TutorProviderPort,
+} from "./providers/ports/contracts.js";

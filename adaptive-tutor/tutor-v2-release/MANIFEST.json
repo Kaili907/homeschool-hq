@@ -1,0 +1,198 @@
+{
+  "authority": "Study Engine is the sole authoritative state owner. Tutor output is proposal-only and requires Study validation.",
+  "checksums": "CHECKSUMS.json",
+  "COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE": true,
+  "contractVersions": {
+    "actionCompatibilityId": "manuel-academy.study-tutor-v2.action.v1",
+    "actionSchemaVersion": 1,
+    "bridgeEventVersion": 1,
+    "bridgeVersion": "1.0.0",
+    "compatibilityId": "manuel-academy.study-tutor-v2.contracts.v2",
+    "contractVersion": "2.0.0"
+  },
+  "evaluationResult": {
+    "classification": "FOUNDATION_GATE_PASS",
+    "failed": 0,
+    "passed": 128,
+    "releaseReady": false
+  },
+  "gate": {
+    "finalClassification": "WAVE1_CANDIDATE_READY_FOR_INDEPENDENT_REVIEW_WITH_INHERITED_FINDINGS",
+    "foundationGate": "PASS",
+    "releaseReady": false
+  },
+  "generatedSchemaInventory": {
+    "count": 22,
+    "inventory": "../json-schema/v2/SCHEMA-INVENTORY.json",
+    "schemas": [
+      {
+        "file": "tutor-action.schema.json",
+        "source": "core/v2/contracts/actions.ts#TutorActionSchema"
+      },
+      {
+        "file": "study-authority-context.schema.json",
+        "source": "core/v2/contracts/context.ts#StudyAuthorityContextSchema"
+      },
+      {
+        "file": "provider-context.schema.json",
+        "source": "core/v2/contracts/context.ts#ProviderContextSchema"
+      },
+      {
+        "file": "tutor-budget-routing-context.schema.json",
+        "source": "core/v2/contracts/operations.ts#TutorBudgetRoutingContextSchema"
+      },
+      {
+        "file": "tutor-short-term-state.schema.json",
+        "source": "core/v2/contracts/operations.ts#TutorShortTermStateSchema"
+      },
+      {
+        "file": "tutor-telemetry-envelope.schema.json",
+        "source": "core/v2/contracts/operations.ts#TutorTelemetryEnvelopeSchema"
+      },
+      {
+        "file": "grounding-assessment.schema.json",
+        "source": "core/v2/contracts/grounding.ts#GroundingAssessmentSchema"
+      },
+      {
+        "file": "tutor-request.schema.json",
+        "source": "core/v2/contracts/request-response.ts#TutorRequestSchema"
+      },
+      {
+        "file": "tutor-action-proposal.schema.json",
+        "source": "core/v2/contracts/request-response.ts#TutorActionProposalSchema"
+      },
+      {
+        "file": "tutor-failure-outcome.schema.json",
+        "source": "core/v2/contracts/request-response.ts#TutorFailureOutcomeSchema"
+      },
+      {
+        "file": "tutor-refusal-outcome.schema.json",
+        "source": "core/v2/contracts/request-response.ts#TutorRefusalOutcomeSchema"
+      },
+      {
+        "file": "tutor-static-fallback-outcome.schema.json",
+        "source": "core/v2/contracts/request-response.ts#TutorStaticFallbackOutcomeSchema"
+      },
+      {
+        "file": "tutor-safety-stop-outcome.schema.json",
+        "source": "core/v2/contracts/request-response.ts#TutorSafetyStopOutcomeSchema"
+      },
+      {
+        "file": "tutor-response-envelope.schema.json",
+        "source": "core/v2/contracts/request-response.ts#TutorResponseEnvelopeSchema"
+      },
+      {
+        "file": "tutor-validation-result.schema.json",
+        "source": "core/v2/contracts/request-response.ts#TutorValidationResultSchema"
+      },
+      {
+        "file": "minimized-provider-context.schema.json",
+        "source": "study-engine/tutor-v2/privacy/provider-context.ts#MinimizedProviderContextSchema"
+      },
+      {
+        "file": "durable-tutor-evidence.schema.json",
+        "source": "study-engine/tutor-v2/evidence/tutor-evidence.ts#DurableTutorEvidenceSchema"
+      },
+      {
+        "file": "bridge-invocation-permission.schema.json",
+        "source": "study-engine/bridges/tutor-v2/contracts.ts#TutorInvocationPermissionSchema"
+      },
+      {
+        "file": "bridge-memory-access.schema.json",
+        "source": "study-engine/bridges/tutor-v2/contracts.ts#TutorV2BridgeMemoryAccessSchema"
+      },
+      {
+        "file": "bridge-evidence-context.schema.json",
+        "source": "study-engine/bridges/tutor-v2/contracts.ts#TutorV2BridgeEvidenceContextSchema"
+      },
+      {
+        "file": "reviewed-static-fallback.schema.json",
+        "source": "study-engine/bridges/tutor-v2/contracts.ts#ReviewedStaticFallbackSchema"
+      },
+      {
+        "file": "tutor-v2-bridge-invocation.schema.json",
+        "source": "study-engine/bridges/tutor-v2/contracts.ts#TutorV2BridgeInvocationSchema"
+      }
+    ]
+  },
+  "hardGateCategories": [
+    "study_authority",
+    "working_level_authority",
+    "guardian_authority",
+    "safety_authority",
+    "action_validity",
+    "answer_policy",
+    "grounding",
+    "provider_context_privacy",
+    "cross_student_isolation",
+    "malformed_output_behavior",
+    "provider_outage_fallback",
+    "transcript_non_persistence"
+  ],
+  "HOSTED_SUPABASE_CONTACTED_BY_WAVE1": false,
+  "immutableLearnerBaseline": "7baf8dfbc27168708ed4cf504285a1838d7345f6",
+  "knownInheritedFindings": [
+    "INHERITED_BASELINE_FINDING: Tutor Core v0.2 broad platform-boundary validator reports 18/19 because its substring/scope scan includes accepted authority paths, inherited authority documentation, and generated test output.",
+    "INHERITED_DEPENDENCY_ADVISORY: three existing high advisories affect @playwright/test, playwright, and nanoid in unchanged Study runtime manifests.",
+    "FROZEN_ARCHIVE_VERIFICATION_UNAVAILABLE: four historical external archives are not mounted; exact archive checksum test remains skipped while current frozen manifest/live regressions pass."
+  ],
+  "LIVE_MODEL_COMMERCIAL_CERTIFICATION": false,
+  "LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED": true,
+  "manifestVersion": 1,
+  "MASTER_MERGE_AUTHORIZED": false,
+  "NOT_AUTHORIZED_FOR_BROWSER_AI_WIRING": true,
+  "NOT_AUTHORIZED_FOR_HOSTED_SUPABASE": true,
+  "NOT_AUTHORIZED_FOR_MASTER_MERGE": true,
+  "NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT": true,
+  "product": "Manuel Academy Study Tutor V2",
+  "PRODUCTION_DEPLOY_AUTHORIZED": false,
+  "PRODUCTION_WIRING_ENABLED": false,
+  "productionStatus": {
+    "COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE": true,
+    "HOSTED_SUPABASE_CONTACTED_BY_WAVE1": false,
+    "LIVE_MODEL_COMMERCIAL_CERTIFICATION": false,
+    "LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED": true,
+    "MASTER_MERGE_AUTHORIZED": false,
+    "NOT_AUTHORIZED_FOR_BROWSER_AI_WIRING": true,
+    "NOT_AUTHORIZED_FOR_HOSTED_SUPABASE": true,
+    "NOT_AUTHORIZED_FOR_MASTER_MERGE": true,
+    "NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT": true,
+    "PRODUCTION_DEPLOY_AUTHORIZED": false,
+    "PRODUCTION_WIRING_ENABLED": false,
+    "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
+    "statusVersion": 1,
+    "STUDY_ENGINE_REMAINS_AUTHORITY": true,
+    "WAVE1_FOUNDATION_ONLY": true
+  },
+  "provenance": {
+    "OWNERSHIP_ADJUDICATION": "f79271ac2cc57e9128ee61774a4f082c35c6fa77",
+    "W1_01": "9e30d59f64184e89db493a004e738e859b06a686",
+    "W1_02": "660de6a445ca66b8de5136a6ee388804346dce4b",
+    "W1_03": "ee6cc83fdaa43fe733d05abefdaedffe3d0febf9",
+    "W1_04": "befb91bb2321aec0449d2d8e613619a592feb76c",
+    "W1_05": "4a8bded7bc0caf5ff647dae814e011d20c8ae5bf",
+    "W1_06": "b93765552d60a88ac7691ca7840dfc2ae3a23e77",
+    "W1_07": "9b959ab7e8176ebccb4fd3ca7b54bf5584602b35",
+    "W1_08": "31d5609527f75a11d9d3017ce0f07b3ec1c99b88"
+  },
+  "rootManifestRuling": "ROOT_MANIFEST_PRESERVED_FOR_FROZEN_V0_2_PROVENANCE",
+  "scenarioCount": 128,
+  "selfReferencePolicy": "MANIFEST.json and CHECKSUMS.json do not checksum themselves; the final W1-09 Git SHA is reported after commit.",
+  "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
+  "staticFallback": "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",
+  "statusVersion": 1,
+  "STUDY_ENGINE_REMAINS_AUTHORITY": true,
+  "tutorActionVocabulary": [
+    "explain",
+    "hint",
+    "ask-check",
+    "show-example",
+    "reteach",
+    "check-prerequisite",
+    "suggest-break",
+    "escalate",
+    "return-to-lesson"
+  ],
+  "wave": "Wave 1 Foundation",
+  "WAVE1_FOUNDATION_ONLY": true
+}

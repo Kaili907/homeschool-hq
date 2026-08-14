@@ -1,0 +1,98 @@
+{
+  "$id": "StudyTutorV2InvocationPermission",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowedActions": {
+      "items": {
+        "anyOf": [
+          {
+            "const": "explain",
+            "type": "string"
+          },
+          {
+            "const": "hint",
+            "type": "string"
+          },
+          {
+            "const": "ask-check",
+            "type": "string"
+          },
+          {
+            "const": "show-example",
+            "type": "string"
+          },
+          {
+            "const": "reteach",
+            "type": "string"
+          },
+          {
+            "const": "check-prerequisite",
+            "type": "string"
+          },
+          {
+            "const": "suggest-break",
+            "type": "string"
+          },
+          {
+            "const": "escalate",
+            "type": "string"
+          },
+          {
+            "const": "return-to-lesson",
+            "type": "string"
+          }
+        ]
+      },
+      "maxItems": 9,
+      "minItems": 1,
+      "type": "array"
+    },
+    "authorizationRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "authorizationRevision": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "expiresAt": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+      "type": "string"
+    },
+    "invocationBindingRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    },
+    "issuedAt": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+      "type": "string"
+    },
+    "permissionKind": {
+      "const": "study-issued-tutor-invocation",
+      "type": "string"
+    },
+    "permitRef": {
+      "maxLength": 160,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "permissionKind",
+    "permitRef",
+    "invocationBindingRef",
+    "authorizationRef",
+    "authorizationRevision",
+    "allowedActions",
+    "issuedAt",
+    "expiresAt"
+  ],
+  "title": "Study Tutor V2 Invocation Permission",
+  "type": "object"
+}

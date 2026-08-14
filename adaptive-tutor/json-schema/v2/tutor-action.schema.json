@@ -1,0 +1,335 @@
+{
+  "$id": "TutorV2Action",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "maxLength": 2400,
+          "minLength": 1,
+          "type": "string"
+        },
+        "groundingRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "explain",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "content",
+        "groundingRefs"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "maxLength": 2400,
+          "minLength": 1,
+          "type": "string"
+        },
+        "groundingRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "hintLevel": {
+          "anyOf": [
+            {
+              "const": "nudge",
+              "type": "string"
+            },
+            {
+              "const": "concept-cue",
+              "type": "string"
+            },
+            {
+              "const": "guided-step",
+              "type": "string"
+            }
+          ]
+        },
+        "kind": {
+          "const": "hint",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "content",
+        "hintLevel",
+        "groundingRefs"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "checkKind": {
+          "anyOf": [
+            {
+              "const": "comprehension",
+              "type": "string"
+            },
+            {
+              "const": "reflection",
+              "type": "string"
+            },
+            {
+              "const": "next-step",
+              "type": "string"
+            }
+          ]
+        },
+        "groundingRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "ask-check",
+          "type": "string"
+        },
+        "question": {
+          "maxLength": 1200,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "question",
+        "checkKind",
+        "groundingRefs"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "maxLength": 2400,
+          "minLength": 1,
+          "type": "string"
+        },
+        "exampleRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "groundingRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "show-example",
+          "type": "string"
+        },
+        "nonIsomorphicToActiveItem": {
+          "const": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "content",
+        "exampleRef",
+        "groundingRefs",
+        "nonIsomorphicToActiveItem"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "conceptRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "content": {
+          "maxLength": 2400,
+          "minLength": 1,
+          "type": "string"
+        },
+        "groundingRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "reteach",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "content",
+        "conceptRef",
+        "groundingRefs"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "groundingRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "kind": {
+          "const": "check-prerequisite",
+          "type": "string"
+        },
+        "prerequisiteConceptRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "reasonCode": {
+          "maxLength": 96,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "prerequisiteConceptRef",
+        "reasonCode",
+        "groundingRefs"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "suggest-break",
+          "type": "string"
+        },
+        "proposedDurationMinutes": {
+          "maximum": 30,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "reasonCode": {
+          "maxLength": 96,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "reasonCode",
+        "proposedDurationMinutes"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "claimsDelivery": {
+          "const": false,
+          "type": "boolean"
+        },
+        "escalationTarget": {
+          "const": "study-adult-review-policy",
+          "type": "string"
+        },
+        "kind": {
+          "const": "escalate",
+          "type": "string"
+        },
+        "reasonCode": {
+          "maxLength": 96,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "reasonCode",
+        "escalationTarget",
+        "claimsDelivery"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "return-to-lesson",
+          "type": "string"
+        },
+        "reasonCode": {
+          "maxLength": 96,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "resumeTarget": {
+          "const": "study-selected-position",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "reasonCode",
+        "resumeTarget"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "Tutor V2 Action"
+}

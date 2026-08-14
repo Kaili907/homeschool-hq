@@ -1,0 +1,37 @@
+{
+  "accepted": {
+    "OWNERSHIP_ADJUDICATION": "f79271ac2cc57e9128ee61774a4f082c35c6fa77",
+    "W1_01": "9e30d59f64184e89db493a004e738e859b06a686",
+    "W1_02": "660de6a445ca66b8de5136a6ee388804346dce4b",
+    "W1_03": "ee6cc83fdaa43fe733d05abefdaedffe3d0febf9",
+    "W1_04": "befb91bb2321aec0449d2d8e613619a592feb76c",
+    "W1_05": "4a8bded7bc0caf5ff647dae814e011d20c8ae5bf",
+    "W1_06": "b93765552d60a88ac7691ca7840dfc2ae3a23e77",
+    "W1_07": "9b959ab7e8176ebccb4fd3ca7b54bf5584602b35",
+    "W1_08": "31d5609527f75a11d9d3017ce0f07b3ec1c99b88"
+  },
+  "immutableLearnerBaseline": "7baf8dfbc27168708ed4cf504285a1838d7345f6",
+  "product": "Manuel Academy Study Tutor V2",
+  "provenanceVersion": 1,
+  "recordedW1_08IntegrationCommits": {
+    "W1_03": "4cf4bda1c99d0490136f3e53d9c412050166b9ff",
+    "W1_04": "7a1a12cfe36d6c19657977a07d05f8ecfbff9c5e",
+    "W1_05": "c7156bc34baccb06dd911519fc29c45bd5782223",
+    "W1_06": "42c91482102842d3c22cde489dbbf8f73124c17e",
+    "W1_07": "5a6a191c922c42c5320faf49e2c97f89ada8093e"
+  },
+  "stablePatchIds": {
+    "W1_03": "ea279d423d6e36928ed4bb03946c6839aa283bd2",
+    "W1_04": "df59c210e417c3d14fa0c63d841f7750e1d6be14",
+    "W1_05": "8e389743994665e5608b8c5b3c2cb5665f7005b5",
+    "W1_06": "2a7d297c95cb4521fc0b75ade8648bc3f37dec09",
+    "W1_07": "c3c29d0d4a4482d666112c8952ffa26499fa9923"
+  },
+  "verification": {
+    "acceptedLaneTreesEquivalent": true,
+    "canonicalRemoteTipsExact": true,
+    "ownershipAdjudicationPresent": true,
+    "releaseSecurityOwnershipCrossed": false
+  },
+  "wave": "Wave 1 Foundation"
+}

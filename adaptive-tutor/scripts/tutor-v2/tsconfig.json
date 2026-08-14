@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "../..",
+    "outDir": ".dist",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"],
+    "declaration": false,
+    "sourceMap": false
+  },
+  "include": [
+    "../../core/schema/**/*.ts",
+    "../../core/v2/**/*.ts",
+    "../../study-engine/tutor-v2/**/*.ts",
+    "../../study-engine/bridges/tutor-v2/**/*.ts",
+    "../../tests/tutor-v2-convergence/**/*.ts",
+    "./**/*.ts"
+  ]
+}

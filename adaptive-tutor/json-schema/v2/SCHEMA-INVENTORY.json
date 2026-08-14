@@ -1,0 +1,135 @@
+{
+  "actionCompatibilityId": "manuel-academy.study-tutor-v2.action.v1",
+  "actionSchemaVersion": 1,
+  "bridgeEventVersion": 1,
+  "bridgeVersion": "1.0.0",
+  "compatibilityId": "manuel-academy.study-tutor-v2.contracts.v2",
+  "contractVersion": "2.0.0",
+  "generatedSchemaCount": 22,
+  "product": "Manuel Academy Study Tutor V2",
+  "schemaInventoryVersion": 1,
+  "schemas": [
+    {
+      "file": "tutor-action.schema.json",
+      "sha256": "75724068d5f6d2ef81c2e9dffdcd9d57e731253fcacaf2b2b68837dfea63231e",
+      "source": "core/v2/contracts/actions.ts#TutorActionSchema"
+    },
+    {
+      "file": "study-authority-context.schema.json",
+      "sha256": "045239c40b617b25360b40d386e61499d671a9856368a21106ff5e3eb7fb086f",
+      "source": "core/v2/contracts/context.ts#StudyAuthorityContextSchema"
+    },
+    {
+      "file": "provider-context.schema.json",
+      "sha256": "65797edcd0014eca44d633ccd43e0132ed5bbf7e09428720e04278f3fa41e4ac",
+      "source": "core/v2/contracts/context.ts#ProviderContextSchema"
+    },
+    {
+      "file": "tutor-budget-routing-context.schema.json",
+      "sha256": "77911ee20a6fa29f6bbd890348309fb8cd11a0213d2772157f890be00ec85e44",
+      "source": "core/v2/contracts/operations.ts#TutorBudgetRoutingContextSchema"
+    },
+    {
+      "file": "tutor-short-term-state.schema.json",
+      "sha256": "8bb0c826f52cb0346d377d503367b0d4fae1bd7b23e7cb1224f97c4248b7ef70",
+      "source": "core/v2/contracts/operations.ts#TutorShortTermStateSchema"
+    },
+    {
+      "file": "tutor-telemetry-envelope.schema.json",
+      "sha256": "178ac4624103efa5429d854f5e94adbefa0b36099e8c5fceaa197ea3e0bedf06",
+      "source": "core/v2/contracts/operations.ts#TutorTelemetryEnvelopeSchema"
+    },
+    {
+      "file": "grounding-assessment.schema.json",
+      "sha256": "31b9df5a77a34d04b7565edb0284ef346ee034825fe03b72a2dff0a09e670942",
+      "source": "core/v2/contracts/grounding.ts#GroundingAssessmentSchema"
+    },
+    {
+      "file": "tutor-request.schema.json",
+      "sha256": "c59495583f729facde7e74d7d5f6ad1ba31ebe6d81277e8352feca099c9521b5",
+      "source": "core/v2/contracts/request-response.ts#TutorRequestSchema"
+    },
+    {
+      "file": "tutor-action-proposal.schema.json",
+      "sha256": "526fcfc362f77b3e7f1041f30f067db00d8932cd4a8dc8648e4eac0282c049c0",
+      "source": "core/v2/contracts/request-response.ts#TutorActionProposalSchema"
+    },
+    {
+      "file": "tutor-failure-outcome.schema.json",
+      "sha256": "130aa0ad571d8fac5da591c64c31b43cf3f4637ec1de93112479ddc3bcc0bfdb",
+      "source": "core/v2/contracts/request-response.ts#TutorFailureOutcomeSchema"
+    },
+    {
+      "file": "tutor-refusal-outcome.schema.json",
+      "sha256": "29d89fbcb63f3db5bb6979a73552a06fe633c5494b99f22b7679e7aad32b25cd",
+      "source": "core/v2/contracts/request-response.ts#TutorRefusalOutcomeSchema"
+    },
+    {
+      "file": "tutor-static-fallback-outcome.schema.json",
+      "sha256": "fa6b04c5cab7f9306883bc20bb50e69bfa5ac6c53dbe2450506faf3840f733ed",
+      "source": "core/v2/contracts/request-response.ts#TutorStaticFallbackOutcomeSchema"
+    },
+    {
+      "file": "tutor-safety-stop-outcome.schema.json",
+      "sha256": "da2a2d623b6d1d6d7935d02068a67897fad23aa2d33c6c0d20ddc585982017e8",
+      "source": "core/v2/contracts/request-response.ts#TutorSafetyStopOutcomeSchema"
+    },
+    {
+      "file": "tutor-response-envelope.schema.json",
+      "sha256": "60ff5ccc3b3c005ae3eeeabd6b3295552ab289d6ddb535407309d38b4587948a",
+      "source": "core/v2/contracts/request-response.ts#TutorResponseEnvelopeSchema"
+    },
+    {
+      "file": "tutor-validation-result.schema.json",
+      "sha256": "1ecff9ebc2c55867a21b779d453d4a15aaf4f118f4c86d3553c3a607cab6a7c0",
+      "source": "core/v2/contracts/request-response.ts#TutorValidationResultSchema"
+    },
+    {
+      "file": "minimized-provider-context.schema.json",
+      "sha256": "a5d5cbd8a4ed90d54a2a2890854e864913f0d9b5aeb715a3767c3d5c09ce3455",
+      "source": "study-engine/tutor-v2/privacy/provider-context.ts#MinimizedProviderContextSchema"
+    },
+    {
+      "file": "durable-tutor-evidence.schema.json",
+      "sha256": "7cd22cf55ba066c79d6d96f7cd9bb1f63db89986f7b1b43cef07979e344ecda0",
+      "source": "study-engine/tutor-v2/evidence/tutor-evidence.ts#DurableTutorEvidenceSchema"
+    },
+    {
+      "file": "bridge-invocation-permission.schema.json",
+      "sha256": "e0963fd8524dbd4e4909e553311c49bea570147e79a1a1eff2c177e73b4603ca",
+      "source": "study-engine/bridges/tutor-v2/contracts.ts#TutorInvocationPermissionSchema"
+    },
+    {
+      "file": "bridge-memory-access.schema.json",
+      "sha256": "7af94562c63de58e078d3bfafe2d463fe6c9682983671e008c1c7c1f33701cbf",
+      "source": "study-engine/bridges/tutor-v2/contracts.ts#TutorV2BridgeMemoryAccessSchema"
+    },
+    {
+      "file": "bridge-evidence-context.schema.json",
+      "sha256": "44cc98deca06918e13123e2e112471cb54a224d97148b9e0eece44150218c45e",
+      "source": "study-engine/bridges/tutor-v2/contracts.ts#TutorV2BridgeEvidenceContextSchema"
+    },
+    {
+      "file": "reviewed-static-fallback.schema.json",
+      "sha256": "9120f25065c4ea5f8f3d10a7b07af487ad1acad844ce4080e8d62f0eabd8322e",
+      "source": "study-engine/bridges/tutor-v2/contracts.ts#ReviewedStaticFallbackSchema"
+    },
+    {
+      "file": "tutor-v2-bridge-invocation.schema.json",
+      "sha256": "a0f4144c9f0b966fa97351b7f0c0c6e8079126dbb5108a04cd5ce172e8590173",
+      "source": "study-engine/bridges/tutor-v2/contracts.ts#TutorV2BridgeInvocationSchema"
+    }
+  ],
+  "tutorActions": [
+    "explain",
+    "hint",
+    "ask-check",
+    "show-example",
+    "reteach",
+    "check-prerequisite",
+    "suggest-break",
+    "escalate",
+    "return-to-lesson"
+  ],
+  "wave": "Wave 1 Foundation"
+}
