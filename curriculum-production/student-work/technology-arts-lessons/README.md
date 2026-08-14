@@ -184,19 +184,21 @@ answer-authority gate. It locks the authoritative 87-case review inventory,
 preserves all 19 legitimate instructional examples, checks all 336 Technology
 learner projections for formal adult-key leaks, and proves the adult solution
 authority is complete. It emits an explicit semantic record for every lesson:
-87 dependency-sliced JavaScript structural records and 249 task/deliverable
-records for open-ended analysis/design work, with zero unexplained skips.
+87 scope/binding-aware JavaScript AST records and 249 authority-first
+task/deliverable records, with zero unexplained skips.
 Using the admitted browser bindings, it compares every learner-visible source
 with every protected task that coexists in the same one of nine complete
 Technology course payloads. The JavaScript analyzer normalizes identifier,
-function, story, test-vocabulary, comment, and whitespace changes; ignores a
-moved declaration only after proving it pure and irrelevant to execution/test
-roots; and retains control flow, data flow, effects, and repair operations.
-The 13 permanent negative/positive controls live in
+function, story, comment, whitespace, and semantically empty brace changes;
+ignores a moved declaration only after proving it pure and irrelevant to
+execution/test roots; and retains lexical scope, binding/provider identity,
+numeric boundaries, test roots, control flow, data flow, effects, TDZ order,
+and repair location. Non-code protection is decided only after learner and
+adult authority inspection. The 20 permanent negative/positive controls live in
 `tests/course-payload-solution-equivalence.test.mjs`; external-copy mutation
-tests live in `tests/solution-authority-mutations.test.mjs`; deterministic R3
+tests live in `tests/solution-authority-mutations.test.mjs`; deterministic R4
 evidence and the 336-row ledger are under
-`docs/curriculum-quality/technology/solution-exposure-fix-r3/`.
+`docs/curriculum-quality/technology/solution-exposure-fix-r4/`.
 
 ## Reading register
 

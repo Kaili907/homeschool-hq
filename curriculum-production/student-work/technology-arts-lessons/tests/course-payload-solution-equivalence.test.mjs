@@ -4,8 +4,10 @@ import test from 'node:test'
 import {
   compareNonCodeSolutionExposure,
   compareSolutionExposure,
+  fixtureEquivalent,
   findCoursePayloadExposures,
   nonCodeSignatures,
+  programFingerprints,
 } from './course-payload-solution-equivalence.mjs'
 
 const protectedStarter = `const lesson_steps = ["open", "check", "save"];
@@ -29,7 +31,7 @@ function fixture(overrides = {}) {
     workMode: 'DEMONSTRATE',
     scoringStance: 'SUMMATIVE',
     protected: true,
-    analyzer: 'JAVASCRIPT_DEPENDENCY_SLICED_STRUCTURE_R3',
+    analyzer: 'JAVASCRIPT_SCOPE_BINDING_AST_R4',
     starterCode: protectedStarter,
     tests: protectedTests,
     exactRepair: 'Iteration begins at index 0; all three tests retain every step in order.',
@@ -115,6 +117,66 @@ console.log(walkRoute(route_cards));`,
   assert.equal(compareSolutionExposure(source, fixture()).exposed, true)
 })
 
+test('required control: braced and braceless single-statement control flow is equivalent and exposes the same repair', () => {
+  const braced = fixture({
+    starterCode: protectedStarter.replace(
+      'for (let index = 1; index < steps.length; index += 1) completed.push(steps[index]);',
+      'for (let index = 1; index < steps.length; index += 1) { completed.push(steps[index]); }',
+    ),
+    visibleSolutions: [fixture().exactRepair],
+    protected: false,
+  })
+  assert.equal(compareSolutionExposure(braced, fixture()).exposed, true)
+})
+
+test('required control: different numeric loop boundaries remain distinct', () => {
+  const lowerBoundary = fixture({ starterCode: protectedStarter.replace('index < steps.length', 'index < 3') })
+  const upperBoundary = fixture({ starterCode: protectedStarter.replace('index < steps.length', 'index < 10') })
+  assert.equal(fixtureEquivalent(lowerBoundary, upperBoundary).equivalent, false)
+})
+
+test('required control: different test roots remain distinct even when function bodies match', () => {
+  const program = `function firstRoute() { return 1; }\nfunction secondRoute() { return 1; }`
+  const first = fixture({ starterCode: program, tests: [{ input: 'firstRoute()', expected: '1' }] })
+  const second = fixture({ starterCode: program, tests: [{ input: 'secondRoute()', expected: '1' }] })
+  assert.equal(fixtureEquivalent(first, second).equivalent, false)
+})
+
+test('required control: different top-level data providers remain distinct', () => {
+  const program = `const primary = [1];\nconst backup = [2];\nfunction read(values) { return values[0]; }\nconsole.log(read(PROVIDER));`
+  const primary = fixture({ starterCode: program.replace('PROVIDER', 'primary'), tests: [] })
+  const backup = fixture({ starterCode: program.replace('PROVIDER', 'backup'), tests: [] })
+  assert.equal(fixtureEquivalent(primary, backup).equivalent, false)
+})
+
+test('required control: reordered unknown side effects remain distinct', () => {
+  const first = fixture({ starterCode: 'saveDraft();\npublishDraft();', tests: [] })
+  const second = fixture({ starterCode: 'publishDraft();\nsaveDraft();', tests: [] })
+  assert.equal(fixtureEquivalent(first, second).equivalent, false)
+})
+
+test('required control: TDZ-invalid and valid declaration order remain distinct', () => {
+  const invalid = fixture({ starterCode: 'console.log(score);\nconst score = 3;', tests: [] })
+  const valid = fixture({ starterCode: 'const score = 3;\nconsole.log(score);', tests: [] })
+  assert.equal(fixtureEquivalent(invalid, valid).equivalent, false)
+})
+
+test('required control: the same repair in different function locations remains distinct', () => {
+  const first = fixture({
+    starterCode: 'function alpha() { for (let i = 1; i < 3; i += 1) console.log(i); }\nfunction beta() { for (let i = 0; i < 3; i += 1) console.log(i); }',
+    tests: [{ input: 'alpha(); beta();', expected: '0 1 2 twice' }],
+  })
+  const second = fixture({
+    starterCode: 'function alpha() { for (let i = 0; i < 3; i += 1) console.log(i); }\nfunction beta() { for (let i = 1; i < 3; i += 1) console.log(i); }',
+    tests: [{ input: 'alpha(); beta();', expected: '0 1 2 twice' }],
+  })
+  assert.equal(fixtureEquivalent(first, second).equivalent, false)
+  assert.notDeepEqual(
+    programFingerprints(first.starterCode, first.tests).repairLocations,
+    programFingerprints(second.starterCode, second.tests).repairLocations,
+  )
+})
+
 test('negative control 7: moving a proven-irrelevant declaration cannot hide the same fix', () => {
   const source = fixture({
     lessonId: 'reordered-model',
@@ -193,7 +255,7 @@ function nonCodeFixture(overrides = {}) {
     workMode: 'DEMONSTRATE',
     scoringStance: 'SUMMATIVE',
     protected: true,
-    analyzer: 'NON_CODE_DELIVERABLE_SEMANTICS_R3',
+    analyzer: 'NON_CODE_AUTHORITY_DELIVERABLE_R4',
     taskType: 'interface_and_accessibility',
     focus: 'keyboard accessible reading tracker',
     centralInput: {

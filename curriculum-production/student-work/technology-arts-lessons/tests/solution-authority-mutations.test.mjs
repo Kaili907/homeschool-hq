@@ -6,10 +6,12 @@ import { basename, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
 
+import { projectJsonLearnerMaterial } from '../../../../scripts/learner-projection/structured-projection-r1.mjs'
 import {
-  compareNonCodeSolutionExposure,
+  classifySolutionAuthority,
   compareSolutionExposure,
-  nonCodeSignatures,
+  findCoursePayloadExposures,
+  recordFromMaterial,
 } from './course-payload-solution-equivalence.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -19,11 +21,12 @@ const sha256 = (value) => createHash('sha256').update(value).digest('hex')
 
 const CODE_FIXTURE = resolve(PACKAGE_ROOT, 'grade-03/ma-g3-tech-cs-u04-l01.task-package.json')
 const NON_CODE_FIXTURE = resolve(PACKAGE_ROOT, 'grade-03/ma-g3-tech-cs-u01-l05.task-package.json')
+const NON_CODE_GUIDE = resolve(CORPUS, 'scoring-guides/technology/grade-03/ma-g3-tech-cs-u01-l05.scoring-guide.json')
 
 function withExternalCopy(sourcePath, callback) {
   const originalRaw = readFileSync(sourcePath, 'utf8')
   const originalHash = sha256(originalRaw)
-  const directory = mkdtempSync(resolve(tmpdir(), 'technology-solution-authority-r3-'))
+  const directory = mkdtempSync(resolve(tmpdir(), 'technology-solution-authority-r4-'))
   const copyPath = resolve(directory, basename(sourcePath))
   copyFileSync(sourcePath, copyPath)
   try {
@@ -42,34 +45,13 @@ function codeRecord(pkg, overrides = {}) {
     workMode: pkg.work_mode,
     scoringStance: pkg.scoring_stance,
     protected: true,
-    analyzer: 'JAVASCRIPT_DEPENDENCY_SLICED_STRUCTURE_R3',
+    analyzer: 'JAVASCRIPT_SCOPE_BINDING_AST_R4',
     starterCode: setup.central_input.starter_code,
     tests: setup.test_cases,
     exactRepair: 'Iteration begins at index 0; all tests retain every step in order.',
     visibleSolutions: [],
     ...overrides,
   }
-}
-
-function nonCodeRecord(pkg, overrides = {}) {
-  const record = {
-    lessonId: pkg.lesson_id,
-    courseRef: pkg.source_course_id,
-    workMode: pkg.work_mode,
-    scoringStance: pkg.scoring_stance,
-    protected: true,
-    analyzer: 'NON_CODE_DELIVERABLE_SEMANTICS_R3',
-    taskType: pkg.task_type,
-    focus: pkg.focus,
-    centralInput: pkg.activity_setup.central_input,
-    deliverable: pkg.deliverable,
-    specification: pkg.activity_setup.expected_behavior_and_specification,
-    expectedResponse: 'Choose option B, cite the unexplained address and contact requests, preserve no personal information, and ask a trusted adult.',
-    visibleSolutions: [],
-    ...overrides,
-  }
-  record.nonCodeSignatures = nonCodeSignatures(record)
-  return record
 }
 
 test('external mutation: changed story and test vocabulary with the same executable repair is caught', () => {
@@ -115,18 +97,64 @@ test('external mutation: moving an irrelevant declaration cannot conceal the sam
   })
 })
 
-test('external mutation: injected non-code model response that solves a fixed protected deliverable is caught', () => {
+test('external mutation: authority-first full gate catches a non-code fixed response and direct learner exemplar', () => {
   withExternalCopy(NON_CODE_FIXTURE, (copyPath, cleanPackage) => {
-    const protectedTask = nonCodeRecord(cleanPackage)
     const mutated = structuredClone(cleanPackage)
-    mutated.lesson_id = 'external-non-code-model'
-    mutated.work_mode = 'MODEL'
-    mutated.activity_setup.worked_example = protectedTask.expectedResponse
+    const fixedResponse = 'Choose option B, cite the unexplained address and contact requests, preserve no personal information, and ask a trusted adult.'
+    mutated.activity_setup.worked_example = fixedResponse
     writeFileSync(copyPath, `${JSON.stringify(mutated, null, 2)}\n`)
-    const source = nonCodeRecord(mutated, {
-      protected: false,
-      visibleSolutions: [mutated.activity_setup.worked_example],
+    const guide = JSON.parse(readFileSync(NON_CODE_GUIDE, 'utf8'))
+    guide.fixed_response_authority = {
+      authority_kind: 'FIXED_RESPONSE',
+      expected_response: fixedResponse,
+    }
+    const material = projectJsonLearnerMaterial(
+      mutated,
+      { lessonRef: mutated.lesson_id, subject: 'technology' },
+      mutated.lesson_title,
+    ).material
+    const authorityClassification = classifySolutionAuthority({ material, guide, packageData: mutated })
+    const record = recordFromMaterial({
+      material,
+      courseRef: mutated.source_course_id,
+      authorityClassification,
+      scoringStance: mutated.scoring_stance,
+      taskType: mutated.task_type,
+      focus: mutated.focus,
+      deliverable: mutated.deliverable,
     })
-    assert.equal(compareNonCodeSolutionExposure(source, protectedTask).exposed, true)
+    assert.equal(authorityClassification.protected, true)
+    assert.equal(findCoursePayloadExposures([record]).length, 1)
+  })
+})
+
+test('external mutation: authority-first full gate passes an analogous non-code exemplar requiring independent reasoning', () => {
+  withExternalCopy(NON_CODE_FIXTURE, (copyPath, cleanPackage) => {
+    const mutated = structuredClone(cleanPackage)
+    const fixedResponse = 'Choose option B, cite the unexplained address and contact requests, preserve no personal information, and ask a trusted adult.'
+    mutated.activity_setup.worked_example = 'For a fictional weather siren, compare an audio-only alert with a captioned alert and justify a new design using the printed constraints.'
+    writeFileSync(copyPath, `${JSON.stringify(mutated, null, 2)}\n`)
+    const guide = JSON.parse(readFileSync(NON_CODE_GUIDE, 'utf8'))
+    guide.fixed_response_authority = {
+      authority_kind: 'FIXED_RESPONSE',
+      expected_response: fixedResponse,
+    }
+    const material = projectJsonLearnerMaterial(
+      mutated,
+      { lessonRef: mutated.lesson_id, subject: 'technology' },
+      mutated.lesson_title,
+    ).material
+    const authorityClassification = classifySolutionAuthority({ material, guide, packageData: mutated })
+    const record = recordFromMaterial({
+      material,
+      courseRef: mutated.source_course_id,
+      authorityClassification,
+      scoringStance: mutated.scoring_stance,
+      taskType: mutated.task_type,
+      focus: mutated.focus,
+      deliverable: mutated.deliverable,
+    })
+    assert.equal(authorityClassification.protected, true)
+    assert.equal(findCoursePayloadExposures([record]).length, 0)
   })
 })

@@ -1,0 +1,34 @@
+{
+  "schema_version": "technology-solution-authority-determinism-r4.0",
+  "command": "node curriculum-production/student-work/technology-arts-lessons/tests/solution-exposure-audit.mjs --write",
+  "runs": 2,
+  "generated_evidence_files": [
+    "browser-payload-proof.json",
+    "case-mapping.csv",
+    "case-mapping.json",
+    "full-corpus-coverage-ledger.csv",
+    "full-corpus-coverage-ledger.json",
+    "semantic-gate-report.json"
+  ],
+  "aggregate_sha256_run_1": "f2d71b1af6aa0657832860b5b79e79ae05357eb2e747129b05576939bb43acbd",
+  "aggregate_sha256_run_2": "f2d71b1af6aa0657832860b5b79e79ae05357eb2e747129b05576939bb43acbd",
+  "byte_identical": true,
+  "learner_curriculum_changed": false,
+  "verification": {
+    "r4_semantic_gate": "PASS",
+    "permanent_controls": "20/20 PASS",
+    "external_copy_mutations": "4/4 expected outcomes",
+    "legitimate_model_positives": "19/19 PASS",
+    "technology_actionability": "336/336",
+    "production_quality_gate": "984/984 READY",
+    "duplicate_content": "PASS",
+    "corpus_validation": "PASS",
+    "schema_validation": "1968/1968",
+    "technology_checksums": "695/695",
+    "learner_projection": "8292/8292",
+    "learner_release": "PASS",
+    "web_release": "PASS",
+    "default_build": "PASS",
+    "family_pilot_enabled_build": "PASS"
+  }
+}
