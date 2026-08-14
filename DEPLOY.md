@@ -63,7 +63,7 @@ that the code and the **Tags** list are both there.
 2. Netlify reads `netlify.toml`, so the build settings are pre-filled:
    - Build command: `npm run build`
    - Publish directory: `dist`
-   - Functions directory: `netlify/functions`
+   - Functions directory: `netlify/function-entrypoints`
    Leave them as detected.
 3. **Don't deploy yet** — set the keys first (Step 4). If it auto-deploys, that's
    fine; just redeploy after Step 4.

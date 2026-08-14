@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import {
   evaluateStudyDeploymentPreflight,
+  EXPECTED_FAMILY_PILOT_CONTEXT,
+  EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS,
   formatStudyDeploymentPreflight,
   parseStudyScheduledFunctionContract,
   runLocalStudyDeploymentPreflight,
@@ -40,11 +42,16 @@ function readyEnvironment() {
 function validNetlifyConfig() {
   return `
 [build]
-  functions = "netlify/functions"
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/function-entrypoints"
 
 [build.environment]
   VITE_USE_PROXY = "true"
   NODE_VERSION = "22"
+
+[context."${EXPECTED_FAMILY_PILOT_CONTEXT}".environment]
+  VITE_FAMILY_PILOT_ENABLED = "true"
 
 [functions."study-adult-review-scheduled-worker"]
   schedule = "*/5 * * * *"
@@ -62,11 +69,14 @@ function validNetlifyConfig() {
 }
 
 function allFunctionFiles() {
-  return new Set([
-    'study-adult-review-scheduled-worker',
-    'study-adult-review-worker',
-    'study-safety-classify',
-  ])
+  return new Set(EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS)
+}
+
+function allFunctionEntrypointSources() {
+  return new Map(EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS.map((name) => [
+    name,
+    `export { handler } from '../functions/${name}.js'`,
+  ]))
 }
 
 function evaluate(overrides = {}) {
@@ -74,6 +84,7 @@ function evaluate(overrides = {}) {
     env: readyEnvironment(),
     netlifyToml: validNetlifyConfig(),
     functionFiles: allFunctionFiles(),
+    functionEntrypointSources: allFunctionEntrypointSources(),
     ...overrides,
   })
 }
@@ -137,6 +148,74 @@ describe('Study production deployment environment preflight', () => {
     expect(byId(result, 'netlify.scheduled_function_file')).toMatchObject({ status: 'missing' })
   })
 
+  it('blocks when the reviewed function entrypoint directory is missing', () => {
+    const result = evaluate({
+      functionFiles: new Set(),
+      functionEntrypointSources: new Map(),
+      functionDirectoryPresent: false,
+    })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.entrypoint_directory')).toMatchObject({
+      status: 'missing', reasonCode: 'FUNCTION_ENTRYPOINT_DIRECTORY_MISSING',
+    })
+  })
+
+  it('blocks the old broad production-module function path', () => {
+    const source = validNetlifyConfig().replace(
+      'functions = "netlify/function-entrypoints"',
+      'functions = "netlify/functions"',
+    )
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.functions_directory')).toMatchObject({
+      status: 'malformed', reasonCode: 'FUNCTIONS_DIRECTORY_UNSAFE_OR_MISSING',
+    })
+  })
+
+  it('blocks a callable test or helper outside the reviewed allowlist', () => {
+    const files = allFunctionFiles().add('release-test-helper')
+    const sources = allFunctionEntrypointSources().set(
+      'release-test-helper',
+      "export { handler } from '../functions/release-test-helper.js'",
+    )
+    const result = evaluate({ functionFiles: files, functionEntrypointSources: sources })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.function_surface')).toMatchObject({
+      status: 'malformed',
+      reasonCode: 'CALLABLE_FUNCTION_SURFACE_FORBIDDEN',
+      forbiddenSubjects: ['release-test-helper'],
+    })
+  })
+
+  it('blocks a resolver exposed as a callable function', () => {
+    const files = allFunctionFiles().add('production-item-resolver')
+    const sources = allFunctionEntrypointSources().set(
+      'production-item-resolver',
+      "export { handler } from '../functions/production-item-resolver.js'",
+    )
+    const result = evaluate({ functionFiles: files, functionEntrypointSources: sources })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.function_surface')).toMatchObject({
+      status: 'malformed',
+      forbiddenSubjects: ['production-item-resolver'],
+    })
+  })
+
+  it('blocks an entrypoint redirected to a broad resolver implementation', () => {
+    const sources = allFunctionEntrypointSources()
+    sources.set(
+      'production-item-assessment',
+      "export { handler } from '../functions/production-item-resolver.js'",
+    )
+    const result = evaluate({ functionEntrypointSources: sources })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.entrypoint_delegates')).toMatchObject({
+      status: 'malformed',
+      reasonCode: 'FUNCTION_ENTRYPOINT_DELEGATE_UNSAFE',
+      invalidSubjects: ['production-item-assessment'],
+    })
+  })
+
   it('blocks a wrong scheduled function target', () => {
     const source = validNetlifyConfig().replace(
       '[functions."study-adult-review-scheduled-worker"]',
@@ -194,6 +273,48 @@ describe('Study production deployment environment preflight', () => {
     })
   })
 
+  it('blocks missing required deployment build configuration', () => {
+    const source = validNetlifyConfig().replace('  command = "npm run build"\n', '')
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.build_command')).toMatchObject({
+      status: 'missing', reasonCode: 'BUILD_COMMAND_WRONG_OR_MISSING',
+    })
+  })
+
+  it('blocks the wrong publish path', () => {
+    const source = validNetlifyConfig().replace('publish = "dist"', 'publish = "public"')
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.publish_directory')).toMatchObject({
+      status: 'malformed', reasonCode: 'PUBLISH_DIRECTORY_WRONG_OR_MISSING',
+    })
+  })
+
+  it('blocks a missing controlled Family Pilot branch assignment', () => {
+    const source = validNetlifyConfig().replace(
+      `[context."${EXPECTED_FAMILY_PILOT_CONTEXT}".environment]\n  VITE_FAMILY_PILOT_ENABLED = "true"\n`,
+      '',
+    )
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.family_pilot_branch_context')).toMatchObject({
+      status: 'missing', reasonCode: 'FAMILY_PILOT_BRANCH_CONTEXT_MISSING',
+    })
+  })
+
+  it('blocks global Family Pilot enablement even when the named branch remains configured', () => {
+    const source = validNetlifyConfig().replace(
+      '  NODE_VERSION = "22"',
+      '  NODE_VERSION = "22"\n  VITE_FAMILY_PILOT_ENABLED = "true"',
+    )
+    const result = evaluate({ netlifyToml: source })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.family_pilot_global_default_off')).toMatchObject({
+      status: 'malformed', reasonCode: 'FAMILY_PILOT_GLOBALLY_CONFIGURED',
+    })
+  })
+
   it('redacts every secret value from the machine and operator results', () => {
     const env = {
       ...readyEnvironment(),
@@ -233,5 +354,8 @@ describe('Study production deployment environment preflight', () => {
     expect(result.ready).toBe(true)
     expect(byId(result, 'netlify.scheduled_target')).toMatchObject({ status: 'present' })
     expect(byId(result, 'netlify.scheduled_function_file')).toMatchObject({ status: 'present' })
+    expect(byId(result, 'netlify.function_surface')).toMatchObject({ status: 'present' })
+    expect(byId(result, 'netlify.entrypoint_delegates')).toMatchObject({ status: 'present' })
+    expect(byId(result, 'netlify.family_pilot_branch_context')).toMatchObject({ status: 'present' })
   })
 })

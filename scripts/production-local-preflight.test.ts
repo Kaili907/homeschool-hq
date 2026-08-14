@@ -11,7 +11,11 @@ import {
   serializeUnifiedLocalProductionPreflight,
   UNIFIED_LOCAL_PREFLIGHT_PRECEDENCE,
 } from './production-local-preflight.mjs'
-import { evaluateStudyDeploymentPreflight } from './study-deployment-env-preflight.mjs'
+import {
+  evaluateStudyDeploymentPreflight,
+  EXPECTED_FAMILY_PILOT_CONTEXT,
+  EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS,
+} from './study-deployment-env-preflight.mjs'
 import { EXPECTED_STUDY_PROJECT_REF } from './study-migration-preflight.mjs'
 
 const scenariosUrl = new URL('./fixtures/production-local-preflight/scenarios.json', import.meta.url)
@@ -113,11 +117,16 @@ function readyEnvironment(): Record<string, string> {
 function validNetlifyConfig() {
   return `
 [build]
-  functions = "netlify/functions"
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/function-entrypoints"
 
 [build.environment]
   VITE_USE_PROXY = "true"
   NODE_VERSION = "22"
+
+[context."${EXPECTED_FAMILY_PILOT_CONTEXT}".environment]
+  VITE_FAMILY_PILOT_ENABLED = "true"
 
 [functions."study-adult-review-scheduled-worker"]
   schedule = "*/5 * * * *"
@@ -138,11 +147,11 @@ function studyResult(env = readyEnvironment()) {
   return evaluateStudyDeploymentPreflight({
     env,
     netlifyToml: validNetlifyConfig(),
-    functionFiles: new Set([
-      'study-adult-review-scheduled-worker',
-      'study-adult-review-worker',
-      'study-safety-classify',
-    ]),
+    functionFiles: new Set(EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS),
+    functionEntrypointSources: new Map(EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS.map((name) => [
+      name,
+      `export { handler } from '../functions/${name}.js'`,
+    ])),
   })
 }
 

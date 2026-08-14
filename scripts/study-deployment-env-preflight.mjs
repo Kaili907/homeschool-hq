@@ -2,6 +2,7 @@ import { readFile, readdir } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { ANTHROPIC_MODELS } from '../netlify/functions/_shared/anthropic-policy.js'
+import { ALLOWED_NETLIFY_FUNCTIONS } from './audit-web-release/lib.mjs'
 
 export const STUDY_DEPLOYMENT_PREFLIGHT_SCHEMA_VERSION = 1
 export const STUDY_DEPLOYMENT_OUTCOMES = Object.freeze([
@@ -25,6 +26,11 @@ export const STUDY_MANUAL_WORKER_FUNCTION = 'study-adult-review-worker'
 export const EXPECTED_STUDY_SCHEDULE = '*/5 * * * *'
 export const EXPECTED_NODE_VERSION = '22'
 export const EXPECTED_STUDY_SAFETY_MODEL = 'claude-haiku-4-5'
+export const EXPECTED_NETLIFY_BUILD_COMMAND = 'npm run build'
+export const EXPECTED_NETLIFY_PUBLISH_DIRECTORY = 'dist'
+export const EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY = 'netlify/function-entrypoints'
+export const EXPECTED_FAMILY_PILOT_CONTEXT = 'mac/web-release-r3-convergence-r1'
+export const EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS = Object.freeze([...ALLOWED_NETLIFY_FUNCTIONS])
 
 const STUDY_SCHEDULE_CONTRACT_MODULE = './_shared/study-adult-review-operations/schedule.js'
 const STUDY_SCHEDULE_CONTRACT_PATH = 'netlify/functions/_shared/study-adult-review-operations/schedule.js'
@@ -226,6 +232,7 @@ function boundedSecretGate(env, name, role) {
 export function parseNetlifyDeploymentConfig(source) {
   const build = {}
   const buildEnvironment = {}
+  const contextEnvironments = new Map()
   const functions = new Map()
   const redirects = []
   let target = null
@@ -239,6 +246,13 @@ export function parseNetlifyDeploymentConfig(source) {
     }
     if (line === '[build.environment]') {
       target = buildEnvironment
+      continue
+    }
+    const contextEnvironmentSection = /^\[context\."([^"]+)"\.environment\]$/u.exec(line)
+    if (contextEnvironmentSection) {
+      const settings = {}
+      contextEnvironments.set(contextEnvironmentSection[1], settings)
+      target = settings
       continue
     }
     const functionSection = /^\[functions\."([A-Za-z0-9_-]+)"\]$/u.exec(line)
@@ -261,7 +275,13 @@ export function parseNetlifyDeploymentConfig(source) {
     const setting = /^([A-Za-z0-9_.-]+)\s*=\s*"([^"]*)"$/u.exec(line)
     if (target && setting) target[setting[1]] = setting[2]
   }
-  return Object.freeze({ build, buildEnvironment, functions, redirects: Object.freeze(redirects) })
+  return Object.freeze({
+    build,
+    buildEnvironment,
+    contextEnvironments,
+    functions,
+    redirects: Object.freeze(redirects),
+  })
 }
 
 function referencedFunctionNames(config) {
@@ -273,7 +293,22 @@ function referencedFunctionNames(config) {
   return [...names].sort()
 }
 
-function netlifyGates(netlifyToml, functionFiles, scheduledFunctionContract) {
+function forbiddenEntrypointName(name) {
+  return /(?:^|[._-])(?:test|spec|fixture|helper|debug)(?:[._-]|$)/iu.test(name) ||
+    /(?:resolver|helper)$/iu.test(name)
+}
+
+function expectedEntrypointSource(name) {
+  return `export { handler } from '../functions/${name}.js'`
+}
+
+function netlifyGates(
+  netlifyToml,
+  functionFiles,
+  functionEntrypointSources,
+  functionDirectoryPresent,
+  scheduledFunctionContract,
+) {
   const config = parseNetlifyDeploymentConfig(netlifyToml)
   const scheduled = [...config.functions.entries()].filter(([, settings]) => typeof settings.schedule === 'string')
   const expected = config.functions.get(EXPECTED_STUDY_SCHEDULED_FUNCTION)
@@ -295,13 +330,92 @@ function netlifyGates(netlifyToml, functionFiles, scheduledFunctionContract) {
   const proxyValue = config.buildEnvironment.VITE_USE_PROXY
   const nodeVersion = config.buildEnvironment.NODE_VERSION
   const functionsDirectory = config.build.functions
+  const expectedFunctionFiles = new Set(EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS)
+  const missingEntrypoints = EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS.filter((name) => !functionFiles.has(name))
+  const unexpectedEntrypoints = [...functionFiles].filter((name) => !expectedFunctionFiles.has(name)).sort()
+  const forbiddenEntrypoints = unexpectedEntrypoints.filter(forbiddenEntrypointName)
+  const functionSurfaceStatus = unexpectedEntrypoints.length > 0
+    ? 'malformed'
+    : missingEntrypoints.length > 0
+      ? 'missing'
+      : 'present'
+  const unreadableEntrypoints = EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS
+    .filter((name) => functionFiles.has(name) && !functionEntrypointSources.has(name))
+  const invalidDelegates = EXPECTED_NETLIFY_FUNCTION_ENTRYPOINTS.filter((name) => {
+    const source = functionEntrypointSources.get(name)
+    return typeof source === 'string' && source.trim() !== expectedEntrypointSource(name)
+  })
+  const delegateStatus = invalidDelegates.length > 0
+    ? 'malformed'
+    : missingEntrypoints.length > 0 || unreadableEntrypoints.length > 0
+      ? 'missing'
+      : 'present'
+  const pilotAssignments = [...config.contextEnvironments.entries()]
+    .filter(([, settings]) => settings.VITE_FAMILY_PILOT_ENABLED !== undefined)
+  const expectedPilotValue = config.contextEnvironments
+    .get(EXPECTED_FAMILY_PILOT_CONTEXT)?.VITE_FAMILY_PILOT_ENABLED
+  const pilotContextExact = pilotAssignments.length === 1 && expectedPilotValue === 'true'
+  const globalPilotValue = config.buildEnvironment.VITE_FAMILY_PILOT_ENABLED
 
   return [
     gate({
+      id: 'netlify.build_command', category: 'netlify', subject: 'build.command',
+      status: config.build.command === EXPECTED_NETLIFY_BUILD_COMMAND ? 'present' : config.build.command ? 'malformed' : 'missing',
+      reasonCode: config.build.command === EXPECTED_NETLIFY_BUILD_COMMAND ? 'BUILD_COMMAND_EXACT' : 'BUILD_COMMAND_WRONG_OR_MISSING',
+      remediation: config.build.command === EXPECTED_NETLIFY_BUILD_COMMAND
+        ? 'No action required.'
+        : `Set build.command to ${EXPECTED_NETLIFY_BUILD_COMMAND}.`,
+    }),
+    gate({
+      id: 'netlify.publish_directory', category: 'netlify', subject: 'build.publish',
+      status: config.build.publish === EXPECTED_NETLIFY_PUBLISH_DIRECTORY ? 'present' : config.build.publish ? 'malformed' : 'missing',
+      reasonCode: config.build.publish === EXPECTED_NETLIFY_PUBLISH_DIRECTORY ? 'PUBLISH_DIRECTORY_EXACT' : 'PUBLISH_DIRECTORY_WRONG_OR_MISSING',
+      remediation: config.build.publish === EXPECTED_NETLIFY_PUBLISH_DIRECTORY
+        ? 'No action required.'
+        : `Set build.publish to ${EXPECTED_NETLIFY_PUBLISH_DIRECTORY}.`,
+    }),
+    gate({
       id: 'netlify.functions_directory', category: 'netlify', subject: 'build.functions',
-      status: functionsDirectory === 'netlify/functions' ? 'present' : functionsDirectory ? 'malformed' : 'missing',
-      reasonCode: functionsDirectory === 'netlify/functions' ? 'FUNCTIONS_DIRECTORY_CONFIGURED' : 'FUNCTIONS_DIRECTORY_INVALID',
-      remediation: functionsDirectory === 'netlify/functions' ? 'No action required.' : 'Set build.functions to netlify/functions.',
+      status: functionsDirectory === EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY ? 'present' : functionsDirectory ? 'malformed' : 'missing',
+      reasonCode: functionsDirectory === EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY ? 'FUNCTION_ENTRYPOINT_DIRECTORY_CONFIGURED' : 'FUNCTIONS_DIRECTORY_UNSAFE_OR_MISSING',
+      remediation: functionsDirectory === EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY
+        ? 'No action required.'
+        : `Set build.functions to the reviewed ${EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY} allowlist.`,
+    }),
+    gate({
+      id: 'netlify.entrypoint_directory', category: 'netlify', subject: EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY,
+      status: functionDirectoryPresent ? 'present' : 'missing',
+      reasonCode: functionDirectoryPresent ? 'FUNCTION_ENTRYPOINT_DIRECTORY_PRESENT' : 'FUNCTION_ENTRYPOINT_DIRECTORY_MISSING',
+      remediation: functionDirectoryPresent ? 'No action required.' : 'Restore the reviewed Netlify function entrypoint directory.',
+    }),
+    gate({
+      id: 'netlify.function_surface', category: 'netlify', subject: 'callable Netlify function allowlist',
+      status: functionSurfaceStatus,
+      reasonCode: functionSurfaceStatus === 'present'
+        ? 'CALLABLE_FUNCTION_ALLOWLIST_EXACT'
+        : functionSurfaceStatus === 'missing'
+          ? 'CALLABLE_FUNCTION_ENTRYPOINT_MISSING'
+          : 'CALLABLE_FUNCTION_SURFACE_FORBIDDEN',
+      remediation: functionSurfaceStatus === 'present'
+        ? 'No action required.'
+        : 'Restore the exact reviewed callable function allowlist; do not expose tests, helpers, resolvers, or unreviewed handlers.',
+      missingSubjects: Object.freeze(missingEntrypoints),
+      unexpectedSubjects: Object.freeze(unexpectedEntrypoints),
+      forbiddenSubjects: Object.freeze(forbiddenEntrypoints),
+    }),
+    gate({
+      id: 'netlify.entrypoint_delegates', category: 'netlify', subject: 'handler-only Netlify entrypoint delegates',
+      status: delegateStatus,
+      reasonCode: delegateStatus === 'present'
+        ? 'FUNCTION_ENTRYPOINT_DELEGATES_EXACT'
+        : delegateStatus === 'missing'
+          ? 'FUNCTION_ENTRYPOINT_DELEGATE_MISSING'
+          : 'FUNCTION_ENTRYPOINT_DELEGATE_UNSAFE',
+      remediation: delegateStatus === 'present'
+        ? 'No action required.'
+        : 'Restore each reviewed entrypoint as an exact handler-only delegate to its matching production module.',
+      missingSubjects: Object.freeze([...missingEntrypoints, ...unreadableEntrypoints]),
+      invalidSubjects: Object.freeze(invalidDelegates),
     }),
     gate({
       id: 'netlify.scheduled_target', category: 'netlify', subject: EXPECTED_STUDY_SCHEDULED_FUNCTION,
@@ -360,6 +474,27 @@ function netlifyGates(netlifyToml, functionFiles, scheduledFunctionContract) {
       reasonCode: nodeVersion === EXPECTED_NODE_VERSION ? 'NODE_VERSION_EXACT' : 'NODE_VERSION_WRONG_OR_MISSING',
       remediation: nodeVersion === EXPECTED_NODE_VERSION ? 'No action required.' : `Pin build.environment.NODE_VERSION to ${EXPECTED_NODE_VERSION}.`,
       expectedVersion: EXPECTED_NODE_VERSION,
+    }),
+    gate({
+      id: 'netlify.family_pilot_global_default_off', category: 'netlify', subject: 'build.environment.VITE_FAMILY_PILOT_ENABLED',
+      status: globalPilotValue === undefined ? 'present' : 'malformed',
+      reasonCode: globalPilotValue === undefined ? 'FAMILY_PILOT_GLOBAL_DEFAULT_OFF' : 'FAMILY_PILOT_GLOBALLY_CONFIGURED',
+      remediation: globalPilotValue === undefined
+        ? 'No action required.'
+        : 'Remove VITE_FAMILY_PILOT_ENABLED from the global build environment.',
+    }),
+    gate({
+      id: 'netlify.family_pilot_branch_context', category: 'netlify', subject: EXPECTED_FAMILY_PILOT_CONTEXT,
+      status: pilotContextExact ? 'present' : pilotAssignments.length === 0 ? 'missing' : 'malformed',
+      reasonCode: pilotContextExact
+        ? 'FAMILY_PILOT_NAMED_BRANCH_EXACT'
+        : pilotAssignments.length === 0
+          ? 'FAMILY_PILOT_BRANCH_CONTEXT_MISSING'
+          : 'FAMILY_PILOT_BRANCH_CONTEXT_UNSAFE',
+      remediation: pilotContextExact
+        ? 'No action required.'
+        : `Configure the exact literal true only under the ${EXPECTED_FAMILY_PILOT_CONTEXT} named branch context.`,
+      configuredContexts: Object.freeze(pilotAssignments.map(([name]) => name).sort()),
     }),
   ]
 }
@@ -510,13 +645,19 @@ export function evaluateStudyDeploymentPreflight({
   env = {},
   netlifyToml = '',
   functionFiles = new Set(),
+  functionEntrypointSources = new Map(),
+  functionDirectoryPresent,
   scheduledFunctionContract = EXPECTED_STUDY_SCHEDULE_CONTRACT,
 } = {}) {
   const files = functionFiles instanceof Set ? functionFiles : new Set(functionFiles)
+  const sources = functionEntrypointSources instanceof Map
+    ? functionEntrypointSources
+    : new Map(Object.entries(functionEntrypointSources ?? {}))
+  const directoryPresent = functionDirectoryPresent ?? files.size > 0
   const gates = Object.freeze([
     ...environmentGates(env),
     ...exposureGates(env),
-    ...netlifyGates(netlifyToml, files, scheduledFunctionContract),
+    ...netlifyGates(netlifyToml, files, sources, directoryPresent, scheduledFunctionContract),
     ...contractGates(),
   ])
   const overall = overallFor(gates)
@@ -564,6 +705,8 @@ export function parseStudyScheduledFunctionContract(source) {
 export async function runLocalStudyDeploymentPreflight({ rootDirectory = process.cwd(), env = process.env } = {}) {
   let netlifyToml = ''
   let entries = []
+  let functionDirectoryPresent = false
+  const functionEntrypointSources = new Map()
   let scheduledFunctionContract = null
   try {
     netlifyToml = await readFile(resolve(rootDirectory, 'netlify.toml'), 'utf8')
@@ -571,20 +714,52 @@ export async function runLocalStudyDeploymentPreflight({ rootDirectory = process
     // Missing configuration is represented by deterministic missing gates.
   }
   try {
-    entries = await readdir(resolve(rootDirectory, 'netlify/functions'), { withFileTypes: true })
+    entries = await readdir(resolve(rootDirectory, EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY), { withFileTypes: true })
+    functionDirectoryPresent = true
   } catch {
     // Missing function directory is represented by deterministic missing gates.
   }
+  await Promise.all(entries.map(async (entry) => {
+    let relativePath = null
+    let name = null
+    if (entry.isFile()) {
+      const match = /^(.+)\.(?:cjs|js|mjs|ts)$/u.exec(entry.name)
+      if (match) {
+        name = match[1]
+        relativePath = entry.name
+      }
+    } else if (entry.isDirectory()) {
+      for (const candidate of ['index.js', 'index.mjs', 'index.ts']) {
+        try {
+          const source = await readFile(resolve(rootDirectory, EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY, entry.name, candidate), 'utf8')
+          functionEntrypointSources.set(entry.name, source)
+          return
+        } catch {
+          // Continue until a supported directory entrypoint is found.
+        }
+      }
+    }
+    if (!name || !relativePath) return
+    try {
+      functionEntrypointSources.set(name, await readFile(resolve(
+        rootDirectory,
+        EXPECTED_NETLIFY_FUNCTIONS_DIRECTORY,
+        relativePath,
+      ), 'utf8'))
+    } catch {
+      // An unreadable entrypoint is represented by deterministic missing gates.
+    }
+  }))
   try {
-    const entrypointSource = await readFile(resolve(
+    const implementationSource = await readFile(resolve(
       rootDirectory,
       `netlify/functions/${EXPECTED_STUDY_SCHEDULED_FUNCTION}.js`,
     ), 'utf8')
-    scheduledFunctionContract = parseStudyScheduledFunctionContract(entrypointSource)
+    scheduledFunctionContract = parseStudyScheduledFunctionContract(implementationSource)
     const exactSharedContractReexport = new RegExp(
       `export\\s*\\{\\s*STUDY_ADULT_REVIEW_SCHEDULE\\s*\\}\\s*from\\s*['"]${STUDY_SCHEDULE_CONTRACT_MODULE.replaceAll('.', '\\.')}['"]`,
       'u',
-    ).test(entrypointSource)
+    ).test(implementationSource)
     if (!scheduledFunctionContract && exactSharedContractReexport) {
       const sharedContractSource = await readFile(resolve(rootDirectory, STUDY_SCHEDULE_CONTRACT_PATH), 'utf8')
       scheduledFunctionContract = parseStudyScheduledFunctionContract(sharedContractSource)
@@ -592,15 +767,13 @@ export async function runLocalStudyDeploymentPreflight({ rootDirectory = process
   } catch {
     // Missing or unreadable source is represented by deterministic configuration gates.
   }
-  const functionFiles = new Set(entries.flatMap((entry) => {
-    if (entry.isDirectory()) return [entry.name]
-    const match = /^(.+)\.(?:js|mjs|ts)$/u.exec(entry.name)
-    return match ? [match[1]] : []
-  }))
+  const functionFiles = new Set(functionEntrypointSources.keys())
   return evaluateStudyDeploymentPreflight({
     env,
     netlifyToml,
     functionFiles,
+    functionEntrypointSources,
+    functionDirectoryPresent,
     scheduledFunctionContract,
   })
 }

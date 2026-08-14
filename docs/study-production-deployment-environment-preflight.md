@@ -78,13 +78,21 @@ are not treated as secret exposure.
 
 The checked-in configuration must:
 
-- use `netlify/functions` as the function directory;
+- run `npm run build` and publish only `dist`;
+- use `netlify/function-entrypoints` as the dedicated callable function directory;
+- expose exactly the reviewed 31-function allowlist, with no tests, fixtures,
+  helpers, debug handlers, resolvers, or unreviewed entrypoints;
+- keep every callable entrypoint as a handler-only delegate to its matching
+  production module under `netlify/functions`;
 - schedule only the dedicated `study-adult-review-scheduled-worker` Study target;
 - use the exact `*/5 * * * *` cadence in both configuration and entrypoint contract;
 - keep `study-adult-review-worker` manual/public and unscheduled;
 - keep the scheduled entrypoint out of public redirects;
 - contain the scheduled function file and every function file referenced by a redirect;
-- set `VITE_USE_PROXY` to `true` and pin `NODE_VERSION` to `22`.
+- set `VITE_USE_PROXY` to `true` and pin `NODE_VERSION` to `22`;
+- leave the Family Pilot globally default-off and enable it with the exact
+  literal `true` only in the named `mac/web-release-r3-convergence-r1` branch
+  context.
 
 The scheduled entrypoint contract is inspected as local source text. This keeps
 the preflight executable even when the entrypoint is absent and makes that
