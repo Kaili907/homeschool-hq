@@ -20,11 +20,22 @@ import {
 import {
   demandsComputation,
 } from '../../../../src/curriculum/production-quality/responseScoringContract.ts'
+import {
+  buildFinancialLiteracyDirectorSampleR1Scoring,
+  FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_PACKAGE_ID,
+  FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_REVISION,
+} from '../samples/grade-08/financial-literacy-director-sample-r1-authority.mjs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const REPO = resolve(ROOT, '../../..')
 const H3_SHA = '49b3c4b86cc7764627bd4cfbd752222849831abf'
 const HS_SOURCE_SHA = '481296a9e794770348881b43bd0d1fa4f794db29'
+const DIRECTOR_SAMPLE_PACKAGE_PATH = join(
+  ROOT,
+  'samples/grade-08/swk-fl-g8-u04-l03.sample.package.json',
+)
+const EXPECTED_FIXED_CONTRACT_ITEMS = 2979
+const EXPECTED_OPEN_CONTRACT_ITEMS = 668
 
 const LANES = [
   {
@@ -334,11 +345,25 @@ function learnerCoreText(pkg) {
 function learnerVisibleText(pkg) {
   return [
     learnerCoreText(pkg),
+    ...stringsIn(pkg.conceptExplanation),
+    ...stringsIn(pkg.calculationPolicy),
+    ...stringsIn(pkg.workedExamples),
+    ...stringsIn(pkg.remediationRoutes),
+    ...stringsIn(pkg.masteryRule),
+    ...stringsIn(pkg.futureTutorManifest),
     ...(pkg.safetyNotes ?? []),
     ...(pkg.materials ?? []),
+    ...(pkg.accessibilitySupports ?? []),
     pkg.remediation,
     pkg.extension,
   ].filter(Boolean).join('\n')
+}
+
+function stringsIn(value) {
+  if (typeof value === 'string') return [value]
+  if (Array.isArray(value)) return value.flatMap(stringsIn)
+  if (!value || typeof value !== 'object') return []
+  return Object.values(value).flatMap(stringsIn)
 }
 
 function unsafeLines(text, pattern) {
@@ -425,6 +450,12 @@ function makeSupplement(pkg) {
 }
 
 function verificationEvidence(lane, scoring, fixedCount, supplement) {
+  if (scoring.sampleRevision === FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_REVISION) {
+    return {
+      method: 'INDEPENDENT_ORACLE',
+      evidence: `All ${fixedCount} fixed answers are independently recomputed from integer cents and basis points by finlit-director-sample-r1-oracle@1. Interest is rounded once to cents, half up, before payment allocation; binary floating-point output is not final authority.`,
+    }
+  }
   if (lane.id === 'g38') {
     return {
       method: 'INDEPENDENT_ORACLE',
@@ -487,8 +518,13 @@ function listInputRecords() {
 
 function composeRecord(record) {
   const { lane, pkg: sourcePackage, scoring: sourceScoring } = record
-  const pkg = structuredClone(sourcePackage)
-  const scoring = structuredClone(sourceScoring)
+  const isDirectorSample = sourcePackage.packageId === FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_PACKAGE_ID
+  const pkg = isDirectorSample
+    ? JSON.parse(readFileSync(DIRECTOR_SAMPLE_PACKAGE_PATH, 'utf8'))
+    : structuredClone(sourcePackage)
+  const scoring = isDirectorSample
+    ? buildFinancialLiteracyDirectorSampleR1Scoring(pkg)
+    : structuredClone(sourceScoring)
   scoring.adultOnly = true
   const responseScoring = buildContract(pkg)
   const supplement = makeSupplement(pkg)
@@ -540,8 +576,16 @@ function composeRecord(record) {
     inputCommit: lane.sha,
     sourcePackagePath: record.sourcePackagePath,
     sourcePackageSha256: record.sourcePackageSha256,
-    sourceCurriculum: structuredClone(pkg.integrity),
+    sourceCurriculum: structuredClone(sourcePackage.integrity),
     sourceCurriculumUntouched: true,
+    ...(isDirectorSample ? {
+      sourcePackageCorePreserved: false,
+      directorSampleOverlay: {
+        revision: FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_REVISION,
+        packagePath: relative(REPO, DIRECTOR_SAMPLE_PACKAGE_PATH).split(sep).join('/'),
+        standardRef: 'docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md',
+      },
+    } : {}),
     familyPilotFirst: true,
   }
 
@@ -556,7 +600,8 @@ function composeRecord(record) {
       sourceFixedItemCount: fixed.length,
       contractFixedItemCount: fixedCount,
       supplements: supplement ? [supplement] : [],
-      sourceOracleEvidencePreserved: true,
+      sourceOracleEvidencePreserved: !isDirectorSample,
+      ...(isDirectorSample ? { directorSampleOracleVerified: true } : {}),
     },
     rubricAuthority: {
       present: openCount > 0,
@@ -571,7 +616,14 @@ function composeRecord(record) {
     sourceScoringPath: record.sourceScoringPath,
     sourceScoringSha256: record.sourceScoringSha256,
     sourceAuthorityKind: sourceScoring.scoringAuthority.kind,
-    sourceAuthorityPreserved: true,
+    sourceAuthorityPreserved: !isDirectorSample,
+    ...(isDirectorSample ? {
+      directorSampleAuthority: {
+        revision: FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_REVISION,
+        authorityPath: 'curriculum-production/final/financial-literacy/samples/grade-08/financial-literacy-director-sample-r1-authority.mjs',
+        oracleId: scoring.authorityTag.oracleId,
+      },
+    } : {}),
   }
 
   return {
@@ -587,6 +639,7 @@ function composeRecord(record) {
     locatorFindingsAfter,
     repairedSupportFields,
     sourceCoreSnapshot: coreSnapshot(sourcePackage),
+    isDirectorSample,
     fixedCount,
     openCount,
     rubric,
@@ -595,6 +648,8 @@ function composeRecord(record) {
 
 function projectForH3(record) {
   const { pkg, scoring } = record
+  const conceptTeaching = stringsIn(pkg.conceptExplanation).join(' ')
+  const workedExamples = stringsIn(pkg.workedExamples).join(' ')
   return {
     lessonId: pkg.lessonRef.lessonId,
     title: pkg.lessonRef.title,
@@ -602,13 +657,20 @@ function projectForH3(record) {
     unitId: `unit-${pkg.lessonRef.unitNumber}`,
     subjectFamily: 'MATH_STRUCTURED_FINLIT',
     structuredDiscipline: 'FINANCIAL_LITERACY',
-    instruction: block(`${pkg.objective} ${pkg.scenario}`),
-    workedExample: block(textOfTasks(pkg, ['warm-up', 'guided'])),
-    guidedPractice: block(textOfTasks(pkg, ['warm-up', 'guided'])),
-    independentWork: block(textOfTasks(pkg, ['independent', 'performance-task', 'reflection'])),
+    instruction: block(`${pkg.objective} ${pkg.scenario} ${conceptTeaching}`),
+    workedExample: block(workedExamples || textOfTasks(pkg, ['warm-up', 'guided'])),
+    guidedPractice: block(textOfTasks(pkg, ['warm-up', 'guided', 'comprehension-check'])),
+    independentWork: block(textOfTasks(pkg, [
+      'independent',
+      'independent-decision',
+      'mastery',
+      'performance-task',
+      'reflection',
+      'remediation-retry',
+    ])),
     responseScoring: scoring.productionGateH3.responseScoring,
     scoringAuthority: scoring.productionGateH3.scoringAuthority,
-    remediation: block(pkg.remediation),
+    remediation: block(`${pkg.remediation ?? ''} ${stringsIn(pkg.remediationRoutes).join(' ')}`),
     extension: block(pkg.extension),
     assessmentAlignment: 'ALIGNED',
     requiresSourceIntegrity: false,
@@ -774,7 +836,13 @@ function coreSnapshot(pkg) {
   return {
     objective: pkg.objective,
     scenario: pkg.scenario,
+    conceptExplanation: pkg.conceptExplanation,
+    calculationPolicy: pkg.calculationPolicy,
+    workedExamples: pkg.workedExamples,
     tasks: pkg.tasks,
+    remediationRoutes: pkg.remediationRoutes,
+    masteryRule: pkg.masteryRule,
+    futureTutorManifest: pkg.futureTutorManifest,
   }
 }
 
@@ -794,8 +862,9 @@ function learnerSecurityReport(records, h3) {
   const locatorBefore = records.filter((record) => record.locatorFindingsBefore.length > 0)
   const locatorAfter = records.filter((record) => record.locatorFindingsAfter.length > 0)
   const repaired = records.filter((record) => record.repairedSupportFields.length > 0)
-  const exactCorePreservation = records.every((record) =>
-    JSON.stringify(record.sourceCoreSnapshot) === JSON.stringify(coreSnapshot(record.pkg)))
+  const declaredSampleOverlays = records.filter((record) => record.isDirectorSample)
+  const exactCorePreservationExceptDirectorSample = records.every((record) =>
+    record.isDirectorSample || JSON.stringify(record.sourceCoreSnapshot) === JSON.stringify(coreSnapshot(record.pkg)))
   const privateDataViolations = records.flatMap((record) =>
     unsafeLines(learnerVisibleText(record.pkg), PRIVATE_FINANCIAL_DATA_REQUEST)
       .map((line) => ({ packageId: record.pkg.packageId, line })))
@@ -808,8 +877,8 @@ function learnerSecurityReport(records, h3) {
   const judgmentWork = records.filter((record) => record.openCount > 0)
   const inputCoreSnapshots = records.map((record) => record.sourceCoreSnapshot)
   const outputCoreSnapshots = records.map((record) => coreSnapshot(record.pkg))
-  const requiredNumbersPreserved = records.every((record) =>
-    JSON.stringify(requiredNumberTokens(record.sourceCoreSnapshot)) === JSON.stringify(requiredNumberTokens(record.pkg)))
+  const requiredNumbersPreservedExceptDirectorSample = records.every((record) =>
+    record.isDirectorSample || JSON.stringify(requiredNumberTokens(record.sourceCoreSnapshot)) === JSON.stringify(requiredNumberTokens(record.pkg)))
   const requiredNumbersBefore = records.reduce((sum, record) => sum + requiredNumberTokens(record.sourceCoreSnapshot).length, 0)
   const requiredNumbersAfter = records.reduce((sum, record) => sum + requiredNumberTokens(record.pkg).length, 0)
 
@@ -820,10 +889,11 @@ function learnerSecurityReport(records, h3) {
     noScoringLocatorsAfter: locatorAfter.length === 0,
     allLearnerPackagesPresent: records.length === 504,
     adultOnlyScoringArtifacts: records.every((record) => record.scoring.adultOnly === true),
-    learnerCoreExactlyPreserved: exactCorePreservation,
-    requiredNumbersPreserved,
-    fixedProblemsPreserved: fixedProblems.length === 468 && records.reduce((sum, record) => sum + record.fixedCount, 0) === 2967,
-    judgmentWorkPreserved: judgmentWork.length === 504 && records.reduce((sum, record) => sum + record.openCount, 0) === 666,
+    exactlyOneDeclaredDirectorSampleOverlay: declaredSampleOverlays.length === 1 && declaredSampleOverlays[0].pkg.sampleRevision === FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_REVISION,
+    learnerCorePreservedExceptDeclaredDirectorSample: exactCorePreservationExceptDirectorSample,
+    requiredNumbersPreservedExceptDeclaredDirectorSample: requiredNumbersPreservedExceptDirectorSample,
+    fixedProblemsPreserved: fixedProblems.length === 468 && records.reduce((sum, record) => sum + record.fixedCount, 0) === EXPECTED_FIXED_CONTRACT_ITEMS,
+    judgmentWorkPreserved: judgmentWork.length === 504 && records.reduce((sum, record) => sum + record.openCount, 0) === EXPECTED_OPEN_CONTRACT_ITEMS,
     mixedHalvesIntact: mixed.length === 468 && mixed.every((record) => record.fixedCount > 0 && record.openCount > 0),
     judgmentApplicationsIntact: judgment.length === 36 && judgment.every((record) => record.fixedCount === 0 && record.openCount > 0),
     privateDataRequestsAbsent: privateDataViolations.length === 0,
@@ -869,6 +939,11 @@ function learnerSecurityReport(records, h3) {
       learnerCoreSha256After: sha256(stableJson(outputCoreSnapshots)),
       requiredNumberTokenOccurrencesBefore: requiredNumbersBefore,
       requiredNumberTokenOccurrencesAfter: requiredNumbersAfter,
+      declaredDirectorSampleOverlays: declaredSampleOverlays.map((record) => ({
+        packageId: record.pkg.packageId,
+        lessonId: record.pkg.lessonRef.lessonId,
+        revision: record.pkg.sampleRevision,
+      })),
       fixedProblemLessons: fixedProblems.length,
       fixedContractItems: records.reduce((sum, record) => sum + record.fixedCount, 0),
       judgmentWorkLessons: judgmentWork.length,
@@ -876,7 +951,10 @@ function learnerSecurityReport(records, h3) {
       mixedLessons: mixed.length,
       judgmentApplicationLessons: judgment.length,
       responseScoringModes: tally(records.map((record) => record.responseScoring.mode)),
-      integerCentArithmeticAndOracleEvidencePreserved: records.every((record) => record.scoring.productionGateH3.fixedAuthority.sourceOracleEvidencePreserved === true),
+      integerCentArithmeticAndApplicableOracleEvidenceVerified: records.every((record) =>
+        record.isDirectorSample
+          ? record.scoring.productionGateH3.fixedAuthority.directorSampleOracleVerified === true
+          : record.scoring.productionGateH3.fixedAuthority.sourceOracleEvidencePreserved === true),
     },
     privacy: {
       privateDataRequestViolations: privateDataViolations,
@@ -947,6 +1025,7 @@ function buildManifest(records, h3, progression, g10, security) {
       inputLane: record.lane.ref,
       inputCommit: record.lane.sha,
       sourceLessonAuthority: record.pkg.integrity,
+      ...(record.pkg.sampleRevision ? { sampleRevision: record.pkg.sampleRevision } : {}),
     }
   })
 
@@ -962,6 +1041,7 @@ function buildManifest(records, h3, progression, g10, security) {
       noRealFinancialData: true,
       noPersonalizedFinancialAdvice: true,
       adultOnlyScoring: true,
+      directorSampleOverlays: 1,
     },
     deterministicBuild: {
       command: 'node --experimental-strip-types --import ./curriculum-production/final/financial-literacy/tooling/register.mjs curriculum-production/final/financial-literacy/tooling/reconcile.mjs',
@@ -991,7 +1071,10 @@ function buildManifest(records, h3, progression, g10, security) {
       sourceAssertedFactChoicesWithPerItemAuthority: sourceAssertedChoices,
       reconciliationIndependentSupplements: records.filter((record) => record.supplement).length,
       disagreements: 0,
-      sourceEvidencePreserved: true,
+      sourceEvidencePreserved: false,
+      sourceAuthorityPreservedLessons: records.filter((record) => !record.isDirectorSample).length,
+      directorSampleIndependentAuthorityLessons: records.filter((record) => record.isDirectorSample).length,
+      allFinalFixedAuthorityVerified: true,
     },
     grade10JoinProof: g10,
     h3: {
@@ -1026,6 +1109,7 @@ function readme(manifest) {
     `- Grades: G3 36, G4 36, G5 36, G7 36, G8 72, G9 72, G10 72, G11 72, G12 72.\n` +
     `- Scoring: ${manifest.totals.scoringModes.MIXED ?? 0} MIXED, ${manifest.totals.scoringModes.JUDGMENT_APPLICATION ?? 0} JUDGMENT_APPLICATION, ${manifest.totals.scoringModes.FIXED_OR_COMPUTATIONAL ?? 0} FIXED_OR_COMPUTATIONAL.\n` +
     `- Authority: ${manifest.totals.fixedAuthorityLessons} lessons with verified substantive fixed-answer authority; ${manifest.totals.rubricAuthorityLessons} with substantive rubric and acceptable-answer criteria.\n` +
+    `- Director sample: one declared deep overlay for \`ma-g8-financial-literacy-u04-l03\`; the other 503 learner cores remain unchanged.\n` +
     `- Learner security: ${manifest.learnerSecurity.directAnswerMatchesBefore} direct pre-task answer matches repaired to ${manifest.learnerSecurity.directAnswerMatchesAfter}; ${manifest.learnerSecurity.scoringLocatorLeaksBefore} scoring-authority locators removed from learner packages, leaving ${manifest.learnerSecurity.scoringLocatorLeaksAfter}.\n` +
     `- Grade 10: 20 base + 52 completion = 72, with zero overlaps, missing IDs, or invented IDs against pinned source authority.\n` +
     `- H3: ${manifest.h3.status}; raw heuristic reviews are preserved and individually adjudicated in \`reports/h3-readiness.json\`.\n\n` +
@@ -1100,6 +1184,9 @@ export function verifyCorpus() {
   assert((manifest.totals.scoringModes.FIXED_OR_COMPUTATIONAL ?? 0) === 0, 'unexpected fixed-only lesson')
   assert(manifest.totals.fixedAuthorityLessons === 468, 'fixed authority lesson count is not 468')
   assert(manifest.totals.rubricAuthorityLessons === 504, 'rubric authority lesson count is not 504')
+  assert(manifest.totals.fixedContractItems === EXPECTED_FIXED_CONTRACT_ITEMS, `fixed contract item count is not ${EXPECTED_FIXED_CONTRACT_ITEMS}`)
+  assert(manifest.totals.openContractItems === EXPECTED_OPEN_CONTRACT_ITEMS, `open contract item count is not ${EXPECTED_OPEN_CONTRACT_ITEMS}`)
+  assert(manifest.policy.directorSampleOverlays === 1, 'Director sample overlay count is not 1')
 
   const shapes = new Map()
   let directAnswerMatches = 0

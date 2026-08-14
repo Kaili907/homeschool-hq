@@ -1,5 +1,5 @@
-8a3a068a7c854ff2017b96e83301de8e7bbbd02f194627198a554745df2a260c  README.md
-2d8d6c2a3c544acc5fd60232389539ad24a63122d73f83a5bd4dc0e708dd87b0  corpus-manifest.json
+064a72540539f62f8e83ad0b1a643cbbd90701c6865b32b38e9de8bf886adc82  README.md
+f68ecea7affc25b09392c7f1596e206a5c4757903a7f4cf558723c98119f3c0f  corpus-manifest.json
 fde896bb30edb68f80de7b00bb6991efe6543ef071ad639da13b408755aba28e  packages/grade-03/swk-fl-g3-u01-l01.package.json
 5f94ea68770dc51f6e27d352c67885749ebbe74b50fdd6d38ff7e933f51d230c  packages/grade-03/swk-fl-g3-u01-l02.package.json
 ea20859bc96918f60c0f24055bdffe2d206782fc88e81fa0d212582b24a4e3b6  packages/grade-03/swk-fl-g3-u01-l03.package.json
@@ -176,7 +176,7 @@ c2aefc93c38ed05f886fc79a5c238d4ade4e889fa39892b383fce219da806856  packages/grade
 30ec9b2ab2ecf410021dfa020711c0ba4a7e2575daa76a5b7237a42abb95b408  packages/grade-08/swk-fl-g8-u03-l10.package.json
 87796f2c20f7a6d5e80e50d9eee5b07a3933092eeaabd832e9370d32e32b0ed1  packages/grade-08/swk-fl-g8-u04-l01.package.json
 dc856fcec4f4fcfb4486faf9ee2b947c69e62fdc737c478dde141670070171b6  packages/grade-08/swk-fl-g8-u04-l02.package.json
-98f8d0bbcbcea45543fe270fa2c4345b1111f863557c221c9a9229fd133945fe  packages/grade-08/swk-fl-g8-u04-l03.package.json
+5f9e95fde97059cc81c4eb64040a56d0bdb76294ef0560c5052ef26aef48e279  packages/grade-08/swk-fl-g8-u04-l03.package.json
 0ea35c36fc7a378eb369dc58e82635e3bd825298ad02f074446dd7ff354a81e9  packages/grade-08/swk-fl-g8-u04-l04.package.json
 454f05ac4943ecdbf00b7ed8b475d959aec16310afecc94190675367817c7db4  packages/grade-08/swk-fl-g8-u04-l05.package.json
 8d173fd617b574608a032b9b0dfa5c193013decfbd45d46165b5c1e2bdebcc97  packages/grade-08/swk-fl-g8-u04-l06.package.json
@@ -506,8 +506,8 @@ cf00147d0383f165a06c53639e6ef0b5e8bf31f6d37b0afa19f42256f4009fc2  packages/grade
 f3c795be040c87188af3a0d1c23326fa5cb6050ac4592262e5468823659b71d5  packages/grade-12/swk-flhs-g12-u07-l11.package.json
 97897e0672de9b51f89c1cf44c89fdd9586f29213495b384cab4c0afa04f5c5e  reports/grade-10-join-proof.json
 af25e8fdc21bfd4725c1a16d022a9a4ebefc5eddc7770f075c3f98fdc08bf32e  reports/h3-readiness.json
-340d5264a5cc1b6a46a634ff9df0d562af06387723e42f19a61d0eeced03b190  reports/learner-security.json
-7285d6558220cb92e32801c185ff237bb26e5144474404c941d853c1f8464bf8  reports/progression.json
+2f2b807469d0f8b88067b88f5f02c09cf419830aa9327cfe5961e379b77a9b34  reports/learner-security.json
+1f8999e663e408ce1e6fe0bf9cdc20f734ffc6acfcad61a6a9e02a44a7b4f55a  reports/progression.json
 36d865ef1bf399d6b9a9fd819100bb479f1a927a55f78355ea8d44997f756a4a  scoring/grade-03/swk-fl-g3-u01-l01.scoring.json
 eb7f7db83e08524a14eb1a6e04cb37b3a364a5c33b937c6417e28812caee9eeb  scoring/grade-03/swk-fl-g3-u01-l02.scoring.json
 c88aed1e557e4f8cbbd5bcc86348682b57585b123cbfb521c335c22dd34d22eb  scoring/grade-03/swk-fl-g3-u01-l03.scoring.json
@@ -684,7 +684,7 @@ b35c5397a3df75a4d4185061fd05feeadfa17e534706f0fd0be66c9ad0d3063d  scoring/grade-
 6d8a426b4edf25917f7d2f751ab3ff90d39a275d446265a540bee983be94ea8b  scoring/grade-08/swk-fl-g8-u03-l10.scoring.json
 5995a656d958084e636ee1056de820aa0d5173960716c1fe45e12777514e8faf  scoring/grade-08/swk-fl-g8-u04-l01.scoring.json
 f2efeaf316851b5deb28f83489085ac0a6ef732c44479222ba8a4cbd2f0fcac0  scoring/grade-08/swk-fl-g8-u04-l02.scoring.json
-977376175faefea30f817843a1651d8e050486f2c578c4c5464d8158553a5103  scoring/grade-08/swk-fl-g8-u04-l03.scoring.json
+a77fbaa65d944674152ee3fe05fcc2aa0595c4dda8d2ecf98138e2d3af0b4bc6  scoring/grade-08/swk-fl-g8-u04-l03.scoring.json
 a4a2e6192a8d1187d4ba781aff2708c9ed6eb82b881d607368bd47d7fd2af0db  scoring/grade-08/swk-fl-g8-u04-l04.scoring.json
 4381f11c5ca850a22250da8535786f5563ded0187c8657029867c46775a42928  scoring/grade-08/swk-fl-g8-u04-l05.scoring.json
 6966b04a550ab900ccbd54c494a75c5c754c9ade0f357c1a2f923c13416ebb73  scoring/grade-08/swk-fl-g8-u04-l06.scoring.json
