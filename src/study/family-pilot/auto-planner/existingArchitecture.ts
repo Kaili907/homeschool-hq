@@ -111,9 +111,10 @@ export function holdFactsFromFamilyPilotSafety(
 
 /** Direct read adapter over the admitted final curriculum runtime. */
 export function autoPlannerCatalogFromFinalRuntime(
-  runtime: Pick<FinalCurriculumRuntime<unknown>, 'listCourses' | 'listUnits' | 'listLessons'>,
+  runtime: Pick<FinalCurriculumRuntime<unknown>, 'listGrades' | 'listCourses' | 'listUnits' | 'listLessons'>,
 ): FamilyAutoPlannerCatalogPort {
   return Object.freeze({
+    listGrades: () => Object.freeze(runtime.listGrades().map((grade) => String(grade) as AcademyGrade)),
     listCourses: (grade: AcademyGrade) => runtime.listCourses(Number(grade) as FinalCurriculumGrade),
     listUnits: (courseRef: string) => runtime.listUnits(courseRef),
     listLessons: (courseRef: string) => runtime.listLessons(courseRef),

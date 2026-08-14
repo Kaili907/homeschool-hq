@@ -1,4 +1,4 @@
-import { ACADEMY_GRADES, type AcademyGrade } from '../../../types'
+import type { AcademyGrade } from '../../../types'
 import { autoPlannerMaterializationRef, computeFamilyAutoPlanner, emptyFamilyAutoPlannerDocument, validateFamilyAutoPlannerSchoolPlan } from './plan'
 import type { FamilyAutoPlannerPorts } from './ports'
 import type {
@@ -170,10 +170,11 @@ export class FamilyAutoPlanner {
     let catalog: readonly FamilyAutoPlannerCourseBundle[] | null = null
     if (document.schoolPlan && learner) {
       try {
+        const admittedGrades = new Set(this.#ports.catalog.listGrades())
         const grades = new Set<AcademyGrade>()
         for (const subject of learner.enabledSubjects) {
           const grade = learner.workingGradeBySubject[subject] ?? learner.nominalGrade
-          if (ACADEMY_GRADES.includes(grade as AcademyGrade)) grades.add(grade as AcademyGrade)
+          if (admittedGrades.has(grade as AcademyGrade)) grades.add(grade as AcademyGrade)
         }
         const courses = [...grades].flatMap((grade) => this.#ports.catalog.listCourses(grade))
         catalog = Object.freeze(await Promise.all(courses.map(async (course): Promise<FamilyAutoPlannerCourseBundle> => Object.freeze({

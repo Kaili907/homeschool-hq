@@ -2,11 +2,16 @@
 
 Status: production architecture, ready for Dashboard convergence after this branch is admitted.
 
+> R2 correction: this document originally reported only Grades 5, 7, and 8.
+> That was a stale pilot-catalog scope, not the admitted Family Pilot release.
+> The canonical admitted grades are 3, 4, 5, 7, 8, 9, 10, 11, and 12. See
+> `FAMILY_AUTO_PLANNER_R2_FULL_GRADE_CORRECTION.md` for the root cause and proof.
+
 ## Scope and ownership
 
 R1 lives entirely under `src/study/family-pilot/auto-planner/**`. It does not modify `App.tsx`, Student Dashboard, the final Family Pilot UI/controller, Study Engine, assessment scoring, working-level authority, or Tutor.
 
-The planner is one grade/subject-neutral algorithm. It reads catalog course/unit/lesson order and works for every admitted combination: Grades 5, 7, and 8 across mathematics, English language arts, science, social studies, health, physical education, ready for life, technology, arts and music, and financial literacy. Grade 6 is deliberately absent from the admitted catalog. A Grade 6 learner must have an existing explicit supported working level per enabled subject; otherwise the result is `NEEDS_PLAN_SETUP` rather than an invented course or silent skip.
+The planner is one grade/subject-neutral algorithm. It reads catalog course/unit/lesson order and works for every admitted combination: Grades 3, 4, 5, 7, 8, 9, 10, 11, and 12 across mathematics, English language arts, science, social studies, health, physical education, ready for life, technology, arts and music, and financial literacy. Grade 6 is deliberately absent from the admitted catalog. A Grade 6 learner must have an existing explicit supported working level per enabled subject; otherwise the result is `NEEDS_PLAN_SETUP` rather than an invented course or silent skip.
 
 ## Existing architecture reused
 
@@ -134,7 +139,7 @@ The focused suite covers:
 - exact-session safety holds and paused subjects;
 - assessment materialization, review wait, certification, and next-unit advancement;
 - completed-lesson no-repeat and abandoned-auto no-skip behavior;
-- all 30 admitted grade/subject combinations;
+- all 90 admitted grade/subject combinations;
 - explicit Grade 6 absence and supported working-level routing;
 - multiple learner isolation;
 - offline use of already-materialized work;
