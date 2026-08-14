@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { projectJsonLearnerMaterial } from '../learner-projection/structured-projection-r1.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 export const ROOT = resolve(HERE, '../..')
@@ -124,52 +125,27 @@ function asText(value) {
 }
 
 export function projectJsonMaterial(value, binding, fallbackTitle) {
-  const sections = []
-  const add = (title, body, prompts = []) => {
-    const text = asText(body)
-    const safePrompts = prompts.filter((item) => isText(item)).map((item) => item.trim())
-    if (text || safePrompts.length) sections.push({ title, ...(text ? { body: text } : {}), prompts: safePrompts })
-  }
-
-  add('Lesson goal', value.objective)
-  add('Scenario', value.scenario)
-  for (const key of BROWSER_SCALAR_KEYS) {
-    if (key === 'objective' || key === 'scenario') continue
-    add(titleFor(key), value[key])
-  }
-  for (const key of BROWSER_ARRAY_KEYS) {
-    if (!Array.isArray(value[key])) continue
-    add(titleFor(key), null, value[key].filter((item) => typeof item === 'string'))
-  }
-  add('Source or reading', value.sourceReference)
-  add('Guided support', value.guidedSupport)
-  add('Independent evidence', value.independentEvidenceTask)
-  add('Equal-credit alternative', value.simulationAlternative?.description)
-  add('Optional reflection', value.optionalReflection?.prompt)
-  add('Media fallback', value.media?.fallback)
-
-  return {
-    materialRef: `production-material:${binding.lessonRef}`,
-    lessonRef: binding.lessonRef,
-    title: value.lessonRef?.title || value.title || value.lesson_title || fallbackTitle,
-    subject: binding.subject,
-    format: 'structured',
-    sections,
-  }
+  return projectJsonLearnerMaterial(value, binding, fallbackTitle).material
 }
 
-function section(material, title) {
-  return material.sections.find((candidate) => candidate.title === title)
+function section(material, kind) {
+  return material.sections.find((candidate) => candidate.sectionKind === kind)
 }
 
 export function compareProjection(pkg, material) {
   const losses = []
-  const body = (key) => section(material, titleFor(key))?.body ?? null
-  const prompts = (key) => section(material, titleFor(key))?.prompts ?? []
+  const sectionKind = (key) => key.replaceAll('_', '-')
+  const body = (key) => section(material, sectionKind(key))?.body ?? null
+  const prompts = (key) => {
+    if (key === 'materials') return material.materials ?? []
+    if (key === 'lesson_success_criteria') return material.successCriteria ?? []
+    if (key === 'critique_criteria') return material.rubricCriteria ?? []
+    return section(material, sectionKind(key))?.prompts ?? []
+  }
   for (const key of ['task_brief', 'primary_task', 'deliverable']) {
     if (body(key) !== pkg[key].trim()) losses.push({ field: key, reason: 'body-not-preserved' })
   }
-  if (isText(pkg.sourceReference) && section(material, 'Source or reading')?.body !== pkg.sourceReference.trim()) {
+  if (isText(pkg.sourceReference) && section(material, 'source-reading')?.body !== pkg.sourceReference.trim()) {
     losses.push({ field: 'sourceReference', reason: 'attached-resource-not-preserved' })
   }
   for (const key of [
@@ -353,7 +329,7 @@ export function buildNegativeControls(samplePackage, sampleGuide, sampleBinding)
   const missingRubric = mutate(sampleGuide, { rubric: [] })
   const normalProjection = projectJsonMaterial(samplePackage, sampleBinding, samplePackage.lesson_title)
   const stepDroppingProjection = structuredClone(normalProjection)
-  stepDroppingProjection.sections = stepDroppingProjection.sections.filter((item) => item.title !== 'Task Steps')
+  stepDroppingProjection.sections = stepDroppingProjection.sections.filter((item) => item.sectionKind !== 'task-steps')
 
   const controls = [
     {
@@ -391,16 +367,8 @@ export function buildNegativeControls(samplePackage, sampleGuide, sampleBinding)
 function assertBrowserPipelineContract() {
   const builder = readFileSync(resolve(ROOT, 'scripts/build-final-family-pilot-data.mjs'), 'utf8')
   const view = readFileSync(resolve(ROOT, 'src/study/family-pilot/final-app/FinalFamilyPilotApp.tsx'), 'utf8')
-  const readArray = (name) => {
-    const match = builder.match(new RegExp(`const ${name} = \\[([\\s\\S]*?)\\n\\]`))
-    if (!match) throw new Error(`Cannot locate ${name} in final browser builder`)
-    return [...match[1].matchAll(/'([^']+)'/g)].map((item) => item[1])
-  }
-  if (JSON.stringify(readArray('scalarKeys')) !== JSON.stringify(BROWSER_SCALAR_KEYS)) {
-    throw new Error('Audit browser scalar projection contract drifted from the final browser builder')
-  }
-  if (JSON.stringify(readArray('arrayKeys')) !== JSON.stringify(BROWSER_ARRAY_KEYS)) {
-    throw new Error('Audit browser array projection contract drifted from the final browser builder')
+  if (!builder.includes('projectJsonLearnerMaterial')) {
+    throw new Error('Final browser builder no longer uses the audited structured projection')
   }
   if (!view.includes('material.sections.map')) throw new Error('Final learner UI no longer renders all projected material sections')
 }

@@ -136,7 +136,8 @@ function MountedFinalFamilyPilot({
   /** Forces a projection refresh without remounting an open Study session. */
   readonly revision: number
 }) {
-  const [mode, setMode] = useState<Mode>('parent')
+  const [mode, setMode] = useState<Mode>('student')
+  const [parentAuthorized, setParentAuthorized] = useState(false)
   const [parentView, setParentView] = useState<ParentView>('assign')
   const [openAssignmentRef, setOpenAssignmentRef] = useState<string | null>(null)
   const restoreInput = useRef<HTMLInputElement>(null)
@@ -175,7 +176,7 @@ function MountedFinalFamilyPilot({
   }
 
   if (!app.state.setup.completedAt) {
-    return <FinalShell onExit={onExit}><SetupScreen controller={controller} refresh={refresh} restoreInput={restoreInput} onRestore={doRestore} /></FinalShell>
+    return <FinalShell onExit={onExit}><SetupScreen controller={controller} refresh={refresh} restoreInput={restoreInput} onRestore={doRestore} onParentAuthorized={() => { setParentAuthorized(true); setMode('parent') }} /></FinalShell>
   }
 
   const openStudentRef = app.state.activeStudentRef
@@ -220,6 +221,8 @@ function MountedFinalFamilyPilot({
       </div>
       {mode === 'student' ? (
         <StudentSurface controller={controller} onOpen={setOpenAssignmentRef} refresh={refresh} />
+      ) : !parentAuthorized ? (
+        <ParentPinGate controller={controller} onAuthorized={() => setParentAuthorized(true)} />
       ) : (
         <ParentSurface
           controller={controller}
@@ -235,15 +238,18 @@ function MountedFinalFamilyPilot({
   )
 }
 
-function SetupScreen({ controller, refresh, restoreInput, onRestore }: {
+function SetupScreen({ controller, refresh, restoreInput, onRestore, onParentAuthorized }: {
   readonly controller: FinalFamilyPilotController
   readonly refresh: () => void
   readonly restoreInput: React.RefObject<HTMLInputElement | null>
   readonly onRestore: (file: File | undefined) => Promise<void>
+  readonly onParentAuthorized: () => void
 }) {
   const [setup, setSetup] = useState<FamilySetupState>(controller.appSnapshot.state.setup)
   const [name, setName] = useState('')
   const [grade, setGrade] = useState<Grade>('5')
+  const [parentPin, setParentPin] = useState('')
+  const [confirmParentPin, setConfirmParentPin] = useState('')
   const [error, setError] = useState('')
 
   const add = () => {
@@ -254,9 +260,10 @@ function SetupScreen({ controller, refresh, restoreInput, onRestore }: {
     setError('')
   }
   const finish = () => {
+    if (!/^\d{4}$/.test(parentPin) || parentPin !== confirmParentPin) { setError('Set and confirm a matching 4-digit parent PIN.'); return }
     const result = completeSetup(setup, new Date().toISOString())
     if (result.status !== 'ok') { setError(result.reason); return }
-    try { controller.saveSetup(result.state); refresh() } catch (cause) { setError(messageOf(cause)) }
+    try { controller.setParentPin(parentPin); controller.saveSetup(result.state); onParentAuthorized(); setParentPin(''); setConfirmParentPin(''); refresh() } catch (cause) { setError(messageOf(cause)) }
   }
 
   return (
@@ -276,6 +283,12 @@ function SetupScreen({ controller, refresh, restoreInput, onRestore }: {
       <ul className="mt-4 space-y-2">
         {setup.students.map((student) => <li key={student.studentRef} className="rounded-xl border bg-white p-4 font-semibold">{student.displayName} · Nominal Grade {student.nominalGrade} · {student.enabledSubjects.length} subjects enabled</li>)}
       </ul>
+      <section className="mt-6 rounded-2xl border bg-white p-5">
+        <h3 className="font-extrabold">Protect the Parent Hub</h3>
+        <p className="mt-1 text-sm text-slate-600">This local PIN authorizes guardian attestations, rubric review, source approval, preferences, and backups. Only a one-way verifier is stored.</p>
+        <label className="mt-3 block font-bold">Parent PIN<input aria-label="Parent PIN" inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" value={parentPin} onChange={(event) => setParentPin(event.target.value.replace(/\D/g, '').slice(0, 4))} /></label>
+        <label className="mt-3 block font-bold">Confirm parent PIN<input aria-label="Confirm parent PIN" inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" value={confirmParentPin} onChange={(event) => setConfirmParentPin(event.target.value.replace(/\D/g, '').slice(0, 4))} /></label>
+      </section>
       {error ? <p className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
       <button type="button" className="mt-6 rounded-lg bg-emerald-700 px-5 py-3 font-extrabold text-white disabled:opacity-50" disabled={setup.students.length === 0} onClick={finish}>Finish family setup</button>
       <section className="mt-8 rounded-2xl border border-cyan-200 bg-cyan-50 p-5">
@@ -286,6 +299,18 @@ function SetupScreen({ controller, refresh, restoreInput, onRestore }: {
       </section>
     </main>
   )
+}
+
+function ParentPinGate({ controller, onAuthorized }: { readonly controller: FinalFamilyPilotController; readonly onAuthorized: () => void }) {
+  const [pin, setPin] = useState('')
+  const [error, setError] = useState('')
+  return <main className="mx-auto max-w-md px-4 py-10">
+    <p className="font-bold text-cyan-700">Authorized adult only</p>
+    <h2 className="mt-1 text-3xl font-extrabold">Unlock the Parent Hub</h2>
+    <label className="mt-6 block font-bold">Parent PIN<input aria-label="Unlock parent PIN" autoFocus inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" value={pin} onChange={(event) => setPin(event.target.value.replace(/\D/g, '').slice(0, 4))} /></label>
+    <button type="button" className="mt-4 rounded-lg bg-slate-900 px-5 py-3 font-extrabold text-white" onClick={() => { if (controller.verifyParentPin(pin)) { setError(''); setPin(''); onAuthorized() } else setError('Parent authorization failed.') }}>Unlock Parent Hub</button>
+    {error ? <p className="mt-3 rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
+  </main>
 }
 
 function StudentSurface({ controller, onOpen, refresh }: {
@@ -303,7 +328,7 @@ function StudentSurface({ controller, onOpen, refresh }: {
         activeStudentRef={null}
         onSelectStudent={() => undefined}
         onAuthenticated={(selector) => { controller.selectStudent(fromStudentSelector(selector)); refresh() }}
-        onVerifyPin={(selector, pin) => controller.appSnapshot.state.pinDigests[fromStudentSelector(selector)] === digestLocalPin(pin)}
+        onVerifyPin={(selector, pin) => controller.appSnapshot.state.studentAccessVerifiers[fromStudentSelector(selector)] === digestLocalPin(pin)}
         onLogout={() => undefined}
         onSwitchStudent={() => undefined}
       />
@@ -527,23 +552,29 @@ function DynamicSourceCard({ controller, student, assignment, attached, refresh 
   readonly attached: boolean
   readonly refresh: () => void
 }) {
-  const [title, setTitle] = useState('')
-  const [publisher, setPublisher] = useState('')
-  const [publishedAt, setPublishedAt] = useState(new Date().toISOString().slice(0, 10))
+  const [metadataJson, setMetadataJson] = useState('')
+  const [adultAttested, setAdultAttested] = useState(false)
   const [error, setError] = useState('')
   return (
     <section className="rounded-2xl border border-blue-300 bg-blue-50 p-5">
       <h3 className="font-extrabold">Dynamic Social Studies source</h3>
       <p className="mt-1 font-semibold">{assignment.title}: {attached ? 'ATTACHED_SATISFIED — start is unlocked.' : 'PENDING_SOURCE_ATTACHMENT — only this assignment is blocked.'}</p>
-      {!attached ? <div className="mt-3 grid gap-3 sm:grid-cols-3">
-        <label className="font-semibold">Source title<input className="mt-1 w-full rounded-lg border bg-white px-3 py-2" value={title} onChange={(event) => setTitle(event.target.value)} /></label>
-        <label className="font-semibold">Publisher<input className="mt-1 w-full rounded-lg border bg-white px-3 py-2" value={publisher} onChange={(event) => setPublisher(event.target.value)} /></label>
-        <label className="font-semibold">Publication date<input type="date" className="mt-1 w-full rounded-lg border bg-white px-3 py-2" value={publishedAt} onChange={(event) => setPublishedAt(event.target.value)} /></label>
-        <button type="button" className="rounded-lg bg-blue-800 px-4 py-2 font-bold text-white sm:col-span-3" onClick={() => {
-          try { controller.attachDynamicSource({ studentRef: student.studentRef, assignmentRef: assignment.assignmentRef, title, publisher, publishedAt }); refresh() } catch (cause) { setError(messageOf(cause)) }
+      {!attached ? <div className="mt-3 grid gap-3">
+        <label className="font-semibold">Complete source metadata JSON
+          <textarea className="mt-1 min-h-44 w-full rounded-lg border bg-white px-3 py-2 font-mono text-sm" value={metadataJson} onChange={(event) => setMetadataJson(event.target.value)} placeholder="Paste a JSON array containing at least two metadata-only source records." />
+        </label>
+        <label className="flex items-start gap-2 font-semibold"><input type="checkbox" checked={adultAttested} onChange={(event) => setAdultAttested(event.target.checked)} />I am an authorized adult and attest that I opened, read, and reviewed these sources for authority, rights, safety, reading level, privacy, and unit sufficiency.</label>
+        <button type="button" className="rounded-lg bg-blue-800 px-4 py-2 font-bold text-white" onClick={() => {
+          try {
+            const parsed = JSON.parse(metadataJson) as unknown
+            if (!Array.isArray(parsed)) throw new Error('Source metadata must be a JSON array.')
+            controller.attachDynamicSource({ studentRef: student.studentRef, assignmentRef: assignment.assignmentRef, sources: parsed, adultAttested })
+            setError('')
+            refresh()
+          } catch (cause) { setError(messageOf(cause)) }
         }}>Attach qualifying metadata</button>
       </div> : null}
-      <p className="mt-2 text-sm text-slate-600">Metadata only; Family Pilot does not fetch arbitrary websites or store full copyrighted source text.</p>
+      <p className="mt-2 text-sm text-slate-600">All 36 contract fields, two-source unit sufficiency, and adult attestation are required. Metadata only: Family Pilot does not fetch arbitrary websites or store source bodies or quotations.</p>
       {error ? <p className="mt-2 font-semibold text-red-700" role="alert">{error}</p> : null}
     </section>
   )
@@ -738,11 +769,46 @@ function AssessmentSurface({ controller, studentRef, assignmentRef, onExit, refr
   </main>
 }
 
+function materialLabel(value: string): string {
+  return value.replaceAll('_', ' ').replaceAll(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (letter) => letter.toUpperCase())
+}
+
+function MaterialValue({ value }: { readonly value: unknown }) {
+  if (value === null || value === undefined || value === '') return null
+  if (typeof value === 'string' || typeof value === 'number') return <p className="mt-2 whitespace-pre-wrap">{String(value)}</p>
+  if (typeof value === 'boolean') return <p className="mt-2">{value ? 'Yes' : 'No'}</p>
+  if (Array.isArray(value)) return <ul className="mt-2 list-disc space-y-1 pl-5">{value.map((item, index) => <li key={index}><MaterialValue value={item} /></li>)}</ul>
+  if (typeof value === 'object') return <dl className="mt-2 space-y-2">{Object.entries(value).map(([key, item]) => item === null || item === undefined || item === '' || Array.isArray(item) && item.length === 0 ? null : <div key={key}><dt className="font-bold">{materialLabel(key)}</dt><dd className="ml-3"><MaterialValue value={item} /></dd></div>)}</dl>
+  return null
+}
+
 function MaterialView({ material }: { readonly material: FinalLearnerProductionMaterial }) {
+  const supplemental = [
+    ['Essential question', material.essentialQuestion],
+    ['Key points', material.keyPoints],
+    ['Materials', material.materials],
+    ['Movement cues', material.movementCues],
+    ['Technique', material.technique],
+    ['Space setup', material.spaceSetup],
+    ['Equipment and no-equipment route', material.equipmentRequirements],
+    ['Accessible adaptation', material.accessibleAdaptation],
+    ['No-equipment alternative', material.noEquipmentAlternative],
+    ['Safety rules', material.safetyRules],
+    ['Stopping rules', material.stoppingRules],
+    ['Activity steps', material.activitySteps],
+    ['Completion and success criteria', material.successCriteria],
+    ['Rubric-facing criteria', material.rubricCriteria],
+    ['Simulation or model-data alternative', material.simulationAlternative],
+    ['Technology activity setup', material.activitySetup],
+    ['Attached learner resource', material.learnerResource],
+    ['Source metadata and context', material.sourceMetadata],
+    ['Common error to watch for', material.commonErrorToWatchFor],
+  ].filter(([, value]) => value !== undefined && value !== null && value !== '' && (!Array.isArray(value) || value.length > 0))
   return (
     <section className="rounded-2xl border border-cyan-200 bg-white p-5" data-material-ref={material.materialRef}>
       <p className="text-xs font-bold uppercase tracking-wide text-cyan-700">Admitted learner material · {material.subject}</p>
       <h2 className="mt-1 text-2xl font-extrabold">{material.title}</h2>
+      {supplemental.length ? <div className="mt-4 space-y-4" data-testid="learner-material-contract">{supplemental.map(([title, value]) => <section key={String(title)} className="rounded-xl border border-slate-200 bg-white p-4"><h3 className="font-extrabold">{String(title)}</h3><MaterialValue value={value} /></section>)}</div> : null}
       {material.format === 'markdown' ? <div className="mt-4 whitespace-pre-wrap font-serif leading-7">{material.markdown}</div> : (
         <div className="mt-4 space-y-4">{material.sections.map((section, index) => <section key={`${section.title}:${index}`} className="rounded-xl bg-slate-50 p-4"><h3 className="font-extrabold">{section.title}</h3>{section.body ? <p className="mt-2 whitespace-pre-wrap">{section.body}</p> : null}{section.prompts.length ? <ul className="mt-2 list-disc space-y-1 pl-5">{section.prompts.map((prompt, promptIndex) => <li key={`${promptIndex}:${prompt}`}>{prompt}</li>)}</ul> : null}</section>)}</div>
       )}
@@ -762,8 +828,9 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
   const [message, setMessage] = useState('')
   const [tutorText, setTutorText] = useState('')
   const [focus, setFocus] = useState<FamilyPilotFocusSession | null>(null)
-  const [, setResponseRevision] = useState(0)
-  const responseStore = useMemo(() => new BrowserLearnerResponseStore(window.localStorage), [assignmentRef])
+  const [responseView, setResponseView] = useState<{ readonly key: string; readonly presentation: LearnerResponsePresentation } | null>(null)
+  const [responseLoadError, setResponseLoadError] = useState<{ readonly key: string; readonly message: string } | null>(null)
+  const responseStore = useMemo(() => new BrowserLearnerResponseStore(), [assignmentRef, studentRef])
   const assignment = controller.coreSnapshot.state.students.find((item) => item.studentRef === studentRef)?.assignments.find((item) => item.assignmentRef === assignmentRef)
 
   const run = useCallback(async (action: () => Promise<FinalFamilyPilotControllerResult>) => {
@@ -795,9 +862,34 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     return () => window.clearInterval(timer)
   }, [focus?.sessionRef, result?.status === 'ok' ? result.study.sessionStatus : null])
 
+  const responseKey = result?.status === 'ok'
+    ? `${result.study.lessonRef}|${result.study.session.sessionRef}|${result.study.segmentOrdinal ?? ''}|${result.study.segmentRef ?? ''}`
+    : null
+  useEffect(() => {
+    if (result?.status !== 'ok' || !responseKey) return
+    let live = true
+    const runtime = new LearnerResponseRuntime(result.material, {
+      lessonRef: result.study.lessonRef,
+      studentRef: result.study.session.learnerRef,
+      assignmentRef,
+      attemptRef: result.study.session.sessionRef,
+    }, responseStore)
+    void runtime.open(result.study.segmentOrdinal, result.study.segmentRef).then((presentation) => {
+      if (!live) return
+      setResponseView({ key: responseKey, presentation })
+      setResponseLoadError(null)
+    }).catch((error: unknown) => {
+      if (live) setResponseLoadError({ key: responseKey, message: messageOf(error) })
+    })
+    return () => { live = false }
+  }, [assignmentRef, responseKey, responseStore, result])
+
   if (!assignment) return <main className="mx-auto max-w-4xl p-6"><p role="alert">That assignment is unavailable for this student.</p><button onClick={onExit}>Back</button></main>
   if (!result || busy && !result) return <main className="mx-auto max-w-4xl p-6"><p role="status">Opening durable Study and production materials…</p></main>
   if (result.status === 'rejected') return <main className="mx-auto max-w-4xl p-6"><h2 className="text-2xl font-extrabold">Lesson not ready</h2><p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-4 font-semibold" role="alert">{result.message}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back to Home</button></main>
+  if (responseLoadError?.key === responseKey) return <main className="mx-auto max-w-4xl p-6"><h2 className="text-2xl font-extrabold">Responses not available</h2><p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-4 font-semibold" role="alert">{responseLoadError.message}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back to Home</button></main>
+  const responsePresentation = responseView?.key === responseKey ? responseView.presentation : null
+  if (!responsePresentation) return <main className="mx-auto max-w-4xl p-6"><p role="status">Opening durable learner responses…</p></main>
 
   const pending = result.completionStatus === 'PENDING_GUARDIAN_ATTESTATION'
   const certified = result.completionStatus === 'CERTIFIED' && result.study.assignmentState === 'completed'
@@ -808,7 +900,6 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     // Study's stable session is the attempt identity in this completion-authority path.
     attemptRef: result.study.session.sessionRef,
   }, responseStore)
-  const responsePresentation: LearnerResponsePresentation = responseRuntime.open(result.study.segmentOrdinal, result.study.segmentRef)
   const responseItem = responsePresentation.item
   const segmentContent = responseItem ? {
     lessonRef: responseItem.lessonRef,
@@ -844,9 +935,14 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     if (saved.status === 'rejected') setMessage(saved.message)
     else {
       setMessage(saved.assessmentStatus === 'PENDING_ASSESSMENT'
-        ? 'Response saved on this device. Assessment is pending.'
-        : 'Response saved and assessed by the trusted assessor.')
-      setResponseRevision((revision) => revision + 1)
+        ? 'Response saved and verified in IndexedDB. Assessment is pending.'
+        : 'Response saved and verified in IndexedDB, then assessed by the trusted assessor.')
+      try {
+        const presentation = await responseRuntime.open(result.study.segmentOrdinal, result.study.segmentRef)
+        setResponseView({ key: responseKey as string, presentation })
+      } catch (error) {
+        setMessage(`The response was saved, but could not be reopened: ${messageOf(error)}`)
+      }
     }
     setBusy(false)
     refresh()

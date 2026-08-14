@@ -108,6 +108,31 @@ async function lessonWithBinding(predicate: (binding: NonNullable<Awaited<Return
   throw new Error('required production binding fixture not found')
 }
 
+function dynamicSourceBundle(lessonRef: string) {
+  const source = (suffix: string, sourceKind: string, authorityTier: string, responsibleParty: string) => ({
+    attachmentId: `attachment-${suffix}`, lessonRef, unitRef: 'ma-g3-social-studies-u09',
+    issueStatement: 'How does a local budget choice affect families?', sourceIdentifier: `record-${suffix}`,
+    sourceTitle: suffix === 'official' ? 'Local government budget update' : 'Independent local budget analysis',
+    responsibleParty, sourceDate: '2026-08-12', sourceVersionOrEdition: null,
+    retrievalLocation: `local-library:${suffix}`, retrievedOn: '2026-08-13', retrievedByRole: 'PARENT',
+    retrievalStatus: 'OPENED_AND_READABLE', mediaType: 'text/html', language: 'English', sourceKind,
+    authorityTier, authorityVerified: true, primaryOrSecondary: suffix === 'official' ? 'PRIMARY' : 'SECONDARY',
+    primaryOrSecondaryReason: 'The learner classified this source from its relationship to the event.',
+    interestDisclosure: 'The responsible party and potential interests are identified.',
+    relevanceToIssue: 'The source directly addresses the learner-selected local budget issue.',
+    limitsNoted: 'The source covers one jurisdiction and one reporting period.', rightsCategory: 'GOVERNMENT_RECORD',
+    rightsStatement: 'Publicly accessible government record or linked analysis used as metadata only.', publicAccess: true,
+    selectedByRole: 'PARENT', selectedOn: '2026-08-13', readInFull: true,
+    contentSafetyReviewedByRole: 'PARENT', readingLevelReviewedByRole: 'PARENT', previewedForSafetyAndLevel: true,
+    containsLearnerPersonalData: false, containsOtherMinorPersonalData: false, quotedTextStored: false,
+    contentDigestSha256: null,
+  })
+  return [
+    source('official', 'OFFICIAL_RECORD', 'TIER_1_OFFICIAL_RECORD', 'County public information office'),
+    source('independent', 'INDEPENDENT_REPORTING', 'TIER_3_INDEPENDENT_REPORTING', 'Local civic newsroom'),
+  ]
+}
+
 async function finish(controller: FinalFamilyPilotController, studentRef: string, assignmentRef: string) {
   let latest = await controller.start(studentRef, assignmentRef)
   expect(latest.status).toBe('ok')
@@ -239,10 +264,13 @@ describe('final Family Pilot real convergence', () => {
     expect(blocked.status).toBe('rejected')
     if (blocked.status === 'rejected') expect(blocked.message).toContain('source metadata')
     expect((await controller.start('student:b', ordinary.assignmentRef)).status).toBe('ok')
-    controller.attachDynamicSource({
+    expect(() => controller.attachDynamicSource({
       studentRef: 'student:a', assignmentRef: dynamic.assignmentRef,
-      title: 'Local government budget update', publisher: 'County public information office', publishedAt: '2026-08-12',
-    })
+      sources: [{ sourceTitle: 'Trivial title-only record' }], adultAttested: true,
+    })).toThrow(/two qualifying|incomplete/i)
+    expect((await controller.start('student:a', dynamic.assignmentRef)).status).toBe('rejected')
+    controller.attachDynamicSource({ studentRef: 'student:a', assignmentRef: dynamic.assignmentRef,
+      sources: dynamicSourceBundle(dynamicLesson.lessonRef), adultAttested: true })
     expect((await controller.start('student:a', dynamic.assignmentRef)).status).toBe('ok')
     controller.close()
   }, 60_000)

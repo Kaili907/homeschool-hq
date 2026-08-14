@@ -1,5 +1,20 @@
 # Deploying Homeschool HQ (D1)
 
+## Controlled learner pilot branch (R3 convergence)
+
+The Family Pilot learner route is enabled only for the Netlify custom branch
+context `mac/web-release-r3-convergence-r1`. The global build environment does
+not set `VITE_FAMILY_PILOT_ENABLED`, so production, Deploy Previews, and
+unrelated branch deploys remain off. In Netlify, allow only this exact branch
+under **Project configuration → Build & deploy → Continuous Deployment →
+Branches and deploy contexts → Configure → Let me add individual branches**.
+Do not make this branch the production branch and do not promote its deploy.
+
+The `production-item-assessment` function explicitly bundles the admitted
+release manifest/bindings plus its trusted production package and scoring
+files. Those server-only authorities are outside `dist` and are never browser
+assets.
+
 A step-by-step for putting Homeschool HQ on the web with **Netlify**, with the AI
 tutor and premium voice keys kept **server-side** (never in the browser bundle).
 You do the GitHub + Netlify account steps yourself; everything in the code is ready.

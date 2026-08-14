@@ -7,6 +7,10 @@ const STORE = 'records'
 const CORE_KEY = 'manuel-academy.study.family-pilot-state.v1'
 const APP_KEY = 'manuel-academy.study.final-family-pilot-app.v1'
 const DURABLE_PREFIX = 'manuel-academy.study.family-pilot-durable-ports.v1'
+const PARENT_PIN = '8642'
+const LEGACY_RESPONSE_KEY = 'manuel-academy:family-pilot:learner-responses:v1'
+const RESPONSE_PREFIX = 'family-pilot:learner-response-attempt:v1'
+const RESPONSE_MIGRATION_KEY = `${RESPONSE_PREFIX}:migration:localstorage-v1`
 
 const LESSON = {
   a: {
@@ -38,6 +42,31 @@ const LESSON = {
 
 type Lesson = (typeof LESSON)[keyof typeof LESSON]
 
+function dynamicSourceBundle(lessonRef: string) {
+  const source = (suffix: string, sourceKind: string, authorityTier: string, responsibleParty: string) => ({
+    attachmentId: `attachment-${suffix}`, lessonRef, unitRef: 'ma-g3-social-studies-u09',
+    issueStatement: 'How does a local budget choice affect families?', sourceIdentifier: `record-${suffix}`,
+    sourceTitle: suffix === 'official' ? 'Local government budget update' : 'Independent local budget analysis',
+    responsibleParty, sourceDate: '2026-08-12', sourceVersionOrEdition: null,
+    retrievalLocation: `local-library:${suffix}`, retrievedOn: '2026-08-13', retrievedByRole: 'PARENT',
+    retrievalStatus: 'OPENED_AND_READABLE', mediaType: 'text/html', language: 'English', sourceKind,
+    authorityTier, authorityVerified: true, primaryOrSecondary: suffix === 'official' ? 'PRIMARY' : 'SECONDARY',
+    primaryOrSecondaryReason: 'The learner classified this source from its relationship to the event.',
+    interestDisclosure: 'The responsible party and potential interests are identified.',
+    relevanceToIssue: 'The source directly addresses the learner-selected local budget issue.',
+    limitsNoted: 'The source covers one jurisdiction and one reporting period.', rightsCategory: 'GOVERNMENT_RECORD',
+    rightsStatement: 'Publicly accessible government record or linked analysis used as metadata only.', publicAccess: true,
+    selectedByRole: 'PARENT', selectedOn: '2026-08-13', readInFull: true,
+    contentSafetyReviewedByRole: 'PARENT', readingLevelReviewedByRole: 'PARENT', previewedForSafetyAndLevel: true,
+    containsLearnerPersonalData: false, containsOtherMinorPersonalData: false, quotedTextStored: false,
+    contentDigestSha256: null,
+  })
+  return [
+    source('official', 'OFFICIAL_RECORD', 'TIER_1_OFFICIAL_RECORD', 'County public information office'),
+    source('independent', 'INDEPENDENT_REPORTING', 'TIER_3_INDEPENDENT_REPORTING', 'Local civic newsroom'),
+  ]
+}
+
 async function setupFamily(page: Page, students: Array<{ name: string; grade: string }>) {
   await page.goto(APP_URL)
   await expect(page.getByRole('heading', { name: 'Set up your learners' })).toBeVisible()
@@ -47,12 +76,19 @@ async function setupFamily(page: Page, students: Array<{ name: string; grade: st
     await page.getByRole('button', { name: 'Add student' }).click()
     await expect(page.getByText(new RegExp(`^${student.name} · Nominal Grade ${student.grade}`))).toBeVisible()
   }
+  await page.getByLabel('Parent PIN', { exact: true }).fill(PARENT_PIN)
+  await page.getByLabel('Confirm parent PIN', { exact: true }).fill(PARENT_PIN)
   await page.getByRole('button', { name: 'Finish family setup' }).click()
   await expect(page.getByRole('heading', { name: 'Household learning' })).toBeVisible()
 }
 
 async function parentStudent(page: Page, name: string) {
   await page.getByRole('button', { name: 'Parent', exact: true }).click()
+  const unlock = page.getByLabel('Unlock parent PIN')
+  if (await unlock.isVisible().catch(() => false)) {
+    await unlock.fill(PARENT_PIN)
+    await page.getByRole('button', { name: 'Unlock Parent Hub' }).click()
+  }
   await page.getByLabel('Parent student').selectOption({ label: name })
   await expect(page.getByLabel('Parent student').locator('option:checked')).toHaveText(name)
 }
@@ -135,9 +171,19 @@ async function idbRecords(page: Page): Promise<Array<{ key: string; value: unkno
       request.onerror = () => reject(request.error)
     })
     const values = await new Promise<Array<{ key: string; value: unknown }>>((resolve, reject) => {
-      const request = db.transaction(storeName).objectStore(storeName).getAll()
-      request.onsuccess = () => resolve(request.result as Array<{ key: string; value: unknown }>)
-      request.onerror = () => reject(request.error)
+      const store = db.transaction(storeName).objectStore(storeName)
+      const keysRequest = store.getAllKeys()
+      const valuesRequest = store.getAll()
+      let keys: IDBValidKey[] | null = null
+      let records: unknown[] | null = null
+      const complete = () => {
+        if (!keys || !records) return
+        resolve(records.map((value, index) => ({ key: String(keys[index]), value })))
+      }
+      keysRequest.onsuccess = () => { keys = keysRequest.result; complete() }
+      valuesRequest.onsuccess = () => { records = valuesRequest.result; complete() }
+      keysRequest.onerror = () => reject(keysRequest.error)
+      valuesRequest.onerror = () => reject(valuesRequest.error)
     })
     db.close()
     return values
@@ -145,9 +191,15 @@ async function idbRecords(page: Page): Promise<Array<{ key: string; value: unkno
 }
 
 function studyDocument(records: Array<{ key: string; value: unknown }>, studentRef: string) {
-  const envelope = records.find((record) => record.key.includes(`:learner:${encodeURIComponent(studentRef)}`)) as { value?: string } | undefined
+  const held = records.find((record) => record.key.includes(`:learner:${encodeURIComponent(studentRef)}`))
+  const envelope = held?.value as { value?: string } | undefined
   if (!envelope || typeof envelope.value !== 'string') throw new Error(`No durable Study document for ${studentRef}`)
   return JSON.parse(envelope.value)
+}
+
+function responseDocuments(records: Array<{ key: string; value: unknown }>, studentRef?: string) {
+  return records.filter((record) => record.key.startsWith(`${RESPONSE_PREFIX}:student:`) &&
+    (!studentRef || record.key.includes(`:student:${encodeURIComponent(studentRef)}:`)))
 }
 
 function assignmentFor(core: any, studentRef: string, lessonRef: string) {
@@ -195,8 +247,9 @@ test('complete family workflow survives a real browser-process reopen and stays 
     const aRef = initial.app.setup.students.find((student: any) => student.displayName === 'Avery Synthetic').studentRef
     const bRef = initial.app.setup.students.find((student: any) => student.displayName === 'Blake Synthetic').studentRef
     const cRef = initial.app.setup.students.find((student: any) => student.displayName === 'Casey Synthetic').studentRef
-    expect(initial.app.pinDigests[aRef]).toBeTruthy()
-    expect(JSON.stringify(initial)).not.toContain('1357')
+    expect(initial.app.studentAccessVerifiers[aRef]).toBeTruthy()
+    expect(initial.app.parentAccessVerifier).toBeTruthy()
+    expect(JSON.stringify(initial)).not.toMatch(/1357|8642/)
 
     await page.getByRole('button', { name: 'Student', exact: true }).click()
     await page.getByRole('listitem', { name: 'Continue as Avery Synthetic' }).click()
@@ -220,11 +273,16 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await expect(page.getByRole('heading', { name: 'Hi, Avery Synthetic' })).toBeVisible()
 
     const beforeReopenRecords = await idbRecords(page)
+    expect(JSON.stringify(beforeReopenRecords)).not.toMatch(/1357|8642|"tutorTranscript"\s*:|rawTutorConversation/i)
     const beforeReopenDocument = studyDocument(beforeReopenRecords, aRef)
+    const beforeReopenResponses = responseDocuments(beforeReopenRecords, aRef)
     expect(JSON.stringify(beforeReopenDocument)).toContain(LESSON.a.lessonRef)
     expect(JSON.stringify(beforeReopenDocument).match(/completed/g)?.length ?? 0).toBeGreaterThan(1)
+    expect(beforeReopenResponses.length).toBeGreaterThan(0)
+    expect(JSON.stringify(beforeReopenResponses)).toContain('"status":"PENDING_ASSESSMENT"')
     const storageBefore = await supportState(page)
     expect(storageBefore.keys.some((key) => key.startsWith(DURABLE_PREFIX))).toBe(false)
+    expect(storageBefore.keys).not.toContain(LEGACY_RESPONSE_KEY)
     expect(JSON.stringify(storageBefore.core)).not.toContain('calendarState')
 
     await context.close()
@@ -235,7 +293,9 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await openStudent(page, 'Avery Synthetic', '1357')
     await resumeFromHome(page, LESSON.a)
     await expect(page.getByText('Step 3 of 3', { exact: true })).toBeVisible()
-    expect(studyDocument(await idbRecords(page), aRef)).toEqual(beforeReopenDocument)
+    const reopenedRecords = await idbRecords(page)
+    expect(studyDocument(reopenedRecords, aRef)).toEqual(beforeReopenDocument)
+    expect(responseDocuments(reopenedRecords, aRef)).toEqual(beforeReopenResponses)
 
     await page.getByRole('button', { name: 'I need an adult check-in' }).click()
     await expect(page.getByText('A parent check-in is now required')).toBeVisible()
@@ -251,6 +311,10 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await finishThreeStepLesson(page)
     await expect(page.getByRole('heading', { name: `${LESSON.b.title}: lesson complete` })).toBeVisible()
     await page.getByRole('button', { name: 'Done' }).click()
+    const siblingRecords = await idbRecords(page)
+    expect(responseDocuments(siblingRecords, aRef).length).toBeGreaterThan(0)
+    expect(responseDocuments(siblingRecords, bRef).length).toBeGreaterThan(0)
+    expect(responseDocuments(siblingRecords, cRef)).toEqual([])
 
     await page.getByRole('button', { name: 'Parent', exact: true }).click()
     await parentStudent(page, 'Avery Synthetic')
@@ -271,7 +335,14 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await expect(page.getByRole('heading', { name: 'Work finished — parent sign-off pending' })).toBeVisible()
     await page.reload()
     await page.getByRole('button', { name: 'Parent', exact: true }).click()
+    await page.getByLabel('Unlock parent PIN').fill('0000')
+    await page.getByRole('button', { name: 'Unlock Parent Hub' }).click()
+    await expect(page.getByRole('alert')).toContainText('authorization failed')
+    await expect(page.getByRole('heading', { name: 'Guardian attestation pending' })).toHaveCount(0)
     await parentStudent(page, 'Avery Synthetic')
+    await page.getByLabel('Parent student').selectOption({ label: 'Blake Synthetic' })
+    await expect(page.getByRole('heading', { name: 'Guardian attestation pending' })).toHaveCount(0)
+    await page.getByLabel('Parent student').selectOption({ label: 'Avery Synthetic' })
     await expect(page.getByRole('heading', { name: 'Guardian attestation pending' })).toBeVisible()
     await page.getByRole('button', { name: 'Attest: adult observed' }).click()
     await expect(page.getByRole('heading', { name: 'Guardian attestation pending' })).toHaveCount(0)
@@ -284,12 +355,16 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await page.getByRole('button', { name: 'Back to Home' }).click()
     await page.getByRole('button', { name: 'Parent', exact: true }).click()
     await parentStudent(page, 'Avery Synthetic')
-    await page.getByLabel('Source title').fill('Local economics packet')
-    await page.getByLabel('Publisher').fill('Manuel Academy family library')
-    await page.getByLabel('Publication date').fill('2026-08-13')
+    await page.getByLabel('Complete source metadata JSON').fill(JSON.stringify([{ sourceTitle: 'Trivial title-only record' }]))
+    await page.getByLabel(/I am an authorized adult/).check()
+    await page.getByRole('button', { name: 'Attach qualifying metadata' }).click()
+    await expect(page.getByRole('alert')).toContainText(/two qualifying|incomplete/i)
+    await expect(page.getByText(/PENDING_SOURCE_ATTACHMENT/)).toBeVisible()
+    await page.getByLabel('Complete source metadata JSON').fill(JSON.stringify(dynamicSourceBundle(LESSON.dynamic.lessonRef)))
     await page.getByRole('button', { name: 'Attach qualifying metadata' }).click()
     await expect(page.getByText(/ATTACHED_SATISFIED/)).toBeVisible()
     await page.reload()
+    await parentStudent(page, 'Avery Synthetic')
     await expect(page.getByText(/ATTACHED_SATISFIED/)).toBeVisible()
     await openStudent(page, 'Avery Synthetic', '1357')
     await startFromHome(page, LESSON.dynamic)
@@ -315,12 +390,13 @@ test('complete family workflow survives a real browser-process reopen and stays 
     const backupPath = testInfo.outputPath('family-pilot-backup.json')
     await download.saveAs(backupPath)
     const backupText = readFileSync(backupPath, 'utf8')
+    expect(backupText).not.toMatch(/1357|8642|"tutorTranscript"\s*:|rawTutorConversation|"rawAnswer"\s*:/i)
     const backup = JSON.parse(backupText)
     expect(backup.appState.setup.students).toHaveLength(3)
     expect(backup.learnerTextIncluded).toBe(false)
     expect(backup.tutorTranscriptIncluded).toBe(false)
     expect(backup.appState.attestations.some((item: any) => item.status === 'CERTIFIED')).toBe(true)
-    expect(backup.appState.sourceAttachments[0]).toMatchObject({ title: 'Local economics packet', publisher: 'Manuel Academy family library' })
+    expect(backup.appState.sourceAttachments[0]).toMatchObject({ title: 'Local government budget update', publisher: 'County public information office' })
     expect(backup.studyDocuments.filter((item: any) => item.record)).toHaveLength(2)
 
     await page.getByRole('button', { name: 'Preferences' }).click()
@@ -374,6 +450,199 @@ test('complete family workflow survives a real browser-process reopen and stays 
   }
 })
 
+test('all 90 grade-subject cells load in Chromium and every subject launches lesson and assessment UI', async ({ page }) => {
+  await page.goto(APP_URL)
+  const proof = await page.evaluate(async () => {
+    const supported = new Set(['NONE', 'READ', 'CHOICE', 'TEXT', 'NUMERIC', 'CONSTRUCTED_RESPONSE', 'ACTIVITY_EVIDENCE', 'RUBRIC_REVIEW_PENDING', 'GUARDIAN_ATTESTATION'])
+    const manifest = await (await fetch('/family-pilot-final/2.0.0/manifest.json')).json()
+    const cells: Array<{ courseRef: string; grade: number; subject: string; lessonRef: string; title: string; assessmentRef: string }> = []
+    let lessons = 0
+    let assessments = 0
+    for (const course of manifest.runtime.courses) {
+      const payload = await (await fetch(`/family-pilot-final/2.0.0/courses/${encodeURIComponent(course.courseRef)}.json`)).json()
+      if (payload.lessons.length !== course.lessonCount || Object.keys(payload.materials).length !== course.lessonCount) throw new Error(`Incomplete browser course ${course.courseRef}`)
+      lessons += payload.lessons.length
+      assessments += Object.keys(payload.assessments).length
+      const lesson = payload.lessons[course.subject === 'arts-and-music' ? 1 : 0]
+      const material = payload.materials[lesson.lessonRef]
+      if (!material || !(material.sections?.length || material.markdown)) throw new Error(`No learner UI material ${lesson.lessonRef}`)
+      const serialized = JSON.stringify(payload)
+      if (/answerKeyRef|correctAnswer|answerIndex|expectedAnswer|\/scoring\/|scoring[-_]guide|teacher[-_]guide/i.test(serialized)) throw new Error(`Answer authority leaked in ${course.courseRef}`)
+      for (const section of material.sections ?? []) for (const item of section.items ?? []) {
+        if (!supported.has(item.responseKind)) throw new Error(`Unsupported response kind ${item.responseKind} in ${lesson.lessonRef}`)
+      }
+      const assessmentRef = Object.keys(payload.assessments)[0]
+      const assessment = payload.assessments[assessmentRef]
+      if (!assessment || !assessment.learnerTasks?.length) throw new Error(`No runnable assessment ${course.courseRef}`)
+      cells.push({ courseRef: course.courseRef, grade: Number(course.grade), subject: course.subject, lessonRef: lesson.lessonRef, title: lesson.title, assessmentRef })
+    }
+    return { courses: manifest.runtime.courses.length, lessons, assessments, cells }
+  })
+  expect(proof).toMatchObject({ courses: 90, lessons: 8292, assessments: 699 })
+  expect(new Set(proof.cells.map((cell) => `${cell.grade}:${cell.subject}`)).size).toBe(90)
+
+  await setupFamily(page, [{ name: 'Matrix Student', grade: '9' }])
+  const gradeNine = proof.cells.filter((cell) => cell.grade === 9)
+  expect(gradeNine).toHaveLength(10)
+
+  for (const cell of gradeNine) {
+    await parentStudent(page, 'Matrix Student')
+    await page.getByRole('button', { name: 'Assignments & readiness' }).click()
+    await page.getByLabel('Admitted course').selectOption(cell.courseRef)
+    const lessonRow = page.getByRole('listitem').filter({ hasText: cell.title }).last()
+    await expect(lessonRow).toBeVisible()
+    await lessonRow.getByRole('button', { name: 'Assign to Matrix Student' }).click()
+
+    const assessmentSection = page.getByTestId('family-pilot-assessment-assignment')
+    const assessmentRow = assessmentSection.getByRole('listitem').filter({ hasText: cell.assessmentRef })
+    await assessmentRow.getByRole('button', { name: 'Assign assessment' }).click()
+    await assessmentRow.getByRole('button', { name: 'Open' }).click()
+    await expect(page.locator(`[data-assessment-ref="${cell.assessmentRef}"]`)).toBeVisible()
+    await expect(page.locator('[data-assessment-task-ref]').first()).toBeVisible()
+    await page.getByRole('button', { name: 'Back to Home' }).click()
+  }
+
+  await openStudent(page, 'Matrix Student')
+  const requiredVisible: Readonly<Record<string, RegExp>> = {
+    'english-language-arts': /Source or reading/i,
+    health: /Key points/i,
+    'physical-education': /Movement cues/i,
+    technology: /Technology activity setup/i,
+    'arts-and-music': /ATTACHED MANUEL ACADEMY LEARNER RESOURCE/i,
+    science: /Materials|investigation|model/i,
+    'social-studies': /Source metadata and context|Source provenance/i,
+    'ready-for-life': /Warm Up|Guided|Independent/i,
+    'financial-literacy': /Warm Up|Guided|Independent/i,
+    mathematics: /Practice|Diagnostic|Lesson work|Launch/i,
+  }
+  for (const cell of gradeNine) {
+    await page.getByRole('button', { name: `Start ${cell.title}` }).click()
+    const material = page.locator('[data-material-ref]')
+    await expect(material).toBeVisible()
+    await expect(material).toContainText(requiredVisible[cell.subject])
+    await page.getByRole('button', { name: 'Save and exit' }).click()
+    await expect(page.getByRole('heading', { name: 'Hi, Matrix Student' })).toBeVisible()
+  }
+})
+
+test('an incorrect auto-scoreable response stays pending without answer disclosure', async ({ page }) => {
+  const requests: string[] = []
+  page.on('request', (request) => requests.push(request.url()))
+  await setupFamily(page, [{ name: 'Negative Control Student', grade: '9' }])
+  await parentStudent(page, 'Negative Control Student')
+  await page.getByLabel('Admitted course').selectOption('ma-g9-mathematics')
+  const assessmentRow = page.getByTestId('family-pilot-assessment-assignment').getByRole('listitem').first()
+  await expect(assessmentRow).toContainText('AUTO SCOREABLE')
+  await assessmentRow.getByRole('button', { name: 'Assign assessment' }).click()
+  await assessmentRow.getByRole('button', { name: 'Open' }).click()
+  await expect(page.locator('[data-assessment-ref]')).toBeVisible()
+  const tasks = page.locator('[data-assessment-task-ref]')
+  await expect(tasks.first()).toBeVisible()
+  expect(await tasks.count()).toBeGreaterThan(0)
+  for (let index = 0; index < await tasks.count(); index += 1) {
+    const task = tasks.nth(index)
+    const radios = task.getByRole('radio')
+    if (await radios.count()) await radios.first().check()
+    else await task.getByRole('textbox').fill('definitely-wrong-negative-control')
+    await task.getByRole('button', { name: 'Save response' }).click()
+    await expect(task.getByText('Saved in IndexedDB')).toBeVisible()
+  }
+  // The first displayed choice is intentionally wrong for the first task (67.0 m² vs 435.8 m²).
+  await page.getByRole('button', { name: 'Submit assessment' }).click()
+  await expect(page.getByRole('status')).toContainText('PENDING ASSESSMENT')
+  await expect(page.getByRole('alert')).toContainText(/no correctness was fabricated/i)
+  await expect(page.locator('body')).not.toContainText(/correct answer|solution reasoning|answer key/i)
+  const records = await idbRecords(page)
+  const serialized = JSON.stringify(records)
+  expect(serialized).toContain('PENDING_ASSESSMENT')
+  expect(serialized).not.toMatch(/correctAnswer|answerIndex|expectedAnswer|answerKey|solution/i)
+  expect(requests.some((url) => /scoring|assessment-score|localhost/i.test(new URL(url).pathname))).toBe(false)
+})
+
+test('rubric-review and guardian assessment authority paths require the authorized parent', async ({ page }) => {
+  await setupFamily(page, [{ name: 'Authority Path Student', grade: '10' }])
+  await parentStudent(page, 'Authority Path Student')
+
+  const submitAssessment = async (courseRef: string, assessmentRef: string, expectedStatus: RegExp) => {
+    await page.getByLabel('Admitted course').selectOption(courseRef)
+    const row = page.getByTestId('family-pilot-assessment-assignment').getByRole('listitem').filter({ hasText: assessmentRef })
+    await row.getByRole('button', { name: 'Assign assessment' }).click()
+    await row.getByRole('button', { name: 'Open' }).click()
+    const tasks = page.locator('[data-assessment-task-ref]')
+    await expect(tasks.first()).toBeVisible()
+    for (let index = 0; index < await tasks.count(); index += 1) {
+      const task = tasks.nth(index)
+      const radios = task.getByRole('radio')
+      if (await radios.count()) await radios.first().check()
+      else await task.getByRole('textbox').fill(`Durable learner evidence for ${assessmentRef}, task ${index + 1}.`)
+      await task.getByRole('button', { name: 'Save response' }).click()
+      await expect(task.getByText('Saved in IndexedDB')).toBeVisible()
+    }
+    await page.getByRole('button', { name: 'Submit assessment' }).click()
+    await expect(page.getByRole('status')).toContainText(expectedStatus)
+    await page.getByRole('button', { name: 'Back to Home' }).click()
+  }
+
+  await submitAssessment('ma-g10-arts-and-music', 'ma-g10-arts-and-music-u01-assessment', /ADULT REVIEW REQUIRED/)
+  await expect(page.getByRole('heading', { name: 'Assessment authority pending' })).toBeVisible()
+  await page.getByRole('button', { name: 'Record rubric review complete' }).click()
+  await expect(page.getByRole('heading', { name: 'Assessment authority pending' })).toHaveCount(0)
+
+  await submitAssessment('ma-g10-ready-for-life', 'ma-g10-ready-for-life-u06-assessment', /PENDING GUARDIAN ATTESTATION/)
+  await expect(page.getByRole('heading', { name: 'Assessment authority pending' })).toBeVisible()
+  await page.getByRole('button', { name: 'Guardian attest and certify' }).click()
+  await expect(page.getByRole('heading', { name: 'Assessment authority pending' })).toHaveCount(0)
+
+  await page.getByRole('button', { name: 'Reports' }).click()
+  await expect(page.getByText(/Assessments: 2\/2 certified/)).toBeVisible()
+})
+
+test('targeted repaired Math, ELA, and physical Science paths render in the learner UI', async ({ page }) => {
+  await page.goto(APP_URL)
+  const targets = await page.evaluate(async () => {
+    const requested = [
+      ['ma-g3-mathematics', 'ma-g3-mathematics-u01-l01', 'Math Three'],
+      ['ma-g3-english-language-arts', 'ma-g3-english-language-arts-u01-l01', 'Math Three'],
+      ['ma-g7-english-language-arts', 'ma-g7-english-language-arts-u01-l01', 'ELA Seven'],
+      ['ma-g10-science', 'ma-hs10-chemistry-u01-l07', 'Science Ten'],
+      ['ma-g12-mathematics', 'ma-g12-mathematics-u01-l01', 'Math Twelve'],
+      ['ma-g12-english-language-arts', 'ma-g12-english-language-arts-u01-l01', 'Math Twelve'],
+    ]
+    return Promise.all(requested.map(async ([courseRef, lessonRef, student]) => {
+      const payload = await (await fetch(`/family-pilot-final/2.0.0/courses/${courseRef}.json`)).json()
+      const lesson = payload.lessons.find((item: any) => item.lessonRef === lessonRef)
+      if (!lesson) throw new Error(`Missing target ${lessonRef}`)
+      return { courseRef, lessonRef, title: lesson.title, student }
+    }))
+  })
+  await setupFamily(page, [
+    { name: 'Math Three', grade: '3' },
+    { name: 'ELA Seven', grade: '7' },
+    { name: 'Science Ten', grade: '10' },
+    { name: 'Math Twelve', grade: '12' },
+  ])
+  for (const target of targets) await assign(page, target.student, target)
+
+  for (const student of ['Math Three', 'ELA Seven', 'Science Ten', 'Math Twelve']) {
+    await openStudent(page, student)
+    for (const target of targets.filter((item) => item.student === student)) {
+      await page.getByRole('button', { name: `Start ${target.title}` }).click()
+      const material = page.locator('[data-material-ref]')
+      await expect(material).toBeVisible()
+      if (target.courseRef.includes('english-language-arts')) {
+        await expect(material).toContainText('Source or reading')
+        await expect(material).toContainText(/Completion and success criteria|Success criteria/i)
+      } else if (target.courseRef === 'ma-g10-science') {
+        await expect(material).toContainText(/physical and chemical properties/i)
+        await expect(material).toContainText(/alternative path|alternative activity|same credit/i)
+      } else {
+        await expect(material).toContainText(/Launch and diagnostic|Independent practice|Mastery check/i)
+      }
+      await page.getByRole('button', { name: 'Save and exit' }).click()
+    }
+  }
+})
+
 test('a second fresh browser is independent until a Parent Download Backup is restored', async ({}, testInfo) => {
   const profileA = testInfo.outputPath('transfer-browser-a')
   const profileB = testInfo.outputPath('transfer-browser-b')
@@ -413,6 +682,7 @@ test('a second fresh browser is independent until a Parent Download Backup is re
     const chooserPromise = pageB.waitForEvent('filechooser')
     await pageB.getByRole('button', { name: 'Restore a Family Pilot backup' }).click()
     await (await chooserPromise).setFiles(backupPath)
+    await parentStudent(pageB, 'Transfer Student')
     await expect(pageB.getByRole('heading', { name: 'Household learning' })).toBeVisible()
     await expect(pageB.getByLabel('Parent student')).toContainText('Transfer Student')
     expect(studyDocument(await idbRecords(pageB), studentRef)).toEqual(browserAStudy)
@@ -452,7 +722,102 @@ test('a refused real IndexedDB write does not advance visible or supporting stat
   await expect(page.getByText('Step 2 of 3', { exact: true })).toHaveCount(0)
   expect(studyDocument(await idbRecords(page), studentRef)).toEqual(beforeDocument)
   expect((await supportState(page)).core).toEqual(beforeCore)
-  expect((await idbRecords(page)).some((record) => record.key === `${DURABLE_PREFIX}:health` && record.value === 'write-failed')).toBe(true)
+  expect((await idbRecords(page)).some((record) => record.key === `${DURABLE_PREFIX}:health` &&
+    (record.value as { value?: unknown })?.value === 'write-failed')).toBe(true)
+})
+
+test('legacy learner responses migrate once and are removed only after verified IndexedDB readback', async ({ page }) => {
+  await setupFamily(page, [{ name: 'Migration Student', grade: '5' }])
+  await assign(page, 'Migration Student', LESSON.a)
+  const before = await supportState(page)
+  const studentRef = before.app.setup.students[0].studentRef
+  const assignment = assignmentFor(before.core, studentRef, LESSON.a.lessonRef)
+  const legacy = [{
+    schemaVersion: 1,
+    lessonRef: LESSON.a.lessonRef,
+    studentRef,
+    assignmentRef: assignment.assignmentRef,
+    attemptRef: `${assignment.assignmentRef}:session`,
+    sectionRef: 'legacy:section',
+    itemRef: 'legacy:item',
+    segmentRef: `${LESSON.a.lessonRef}:segment:learn`,
+    responseType: 'TEXT',
+    evidenceMode: 'INDEPENDENT',
+    response: { kind: 'TEXT', text: 'Existing browser response preserved by migration.' },
+    status: 'PENDING_ASSESSMENT',
+    savedAt: '2026-08-13T12:00:00.000Z',
+    assessment: null,
+  }]
+  const raw = JSON.stringify(legacy)
+  await page.evaluate(({ key, value }) => localStorage.setItem(key, value), { key: LEGACY_RESPONSE_KEY, value: raw })
+
+  await openStudent(page, 'Migration Student')
+  await startFromHome(page, LESSON.a)
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const records = await idbRecords(page)
+  expect(responseDocuments(records, studentRef)).toHaveLength(1)
+  expect(JSON.stringify(responseDocuments(records, studentRef))).toContain('Existing browser response preserved by migration.')
+  expect(records.find((record) => record.key === RESPONSE_MIGRATION_KEY)?.value).toMatchObject({ status: 'complete', recordCount: 1 })
+  expect(await page.evaluate((key) => localStorage.getItem(key), LEGACY_RESPONSE_KEY)).toBeNull()
+
+  await page.reload()
+  await openStudent(page, 'Migration Student')
+  await resumeFromHome(page, LESSON.a)
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  expect(responseDocuments(await idbRecords(page), studentRef)).toEqual(responseDocuments(records, studentRef))
+  expect(await page.evaluate((key) => localStorage.getItem(key), LEGACY_RESPONSE_KEY)).toBeNull()
+})
+
+test('an unavailable learner-response IndexedDB transaction is not reported as saved', async ({ page }) => {
+  await page.addInitScript(() => {
+    const original = IDBDatabase.prototype.transaction
+    IDBDatabase.prototype.transaction = function (storeNames: string | Iterable<string>, mode?: IDBTransactionMode, options?: IDBTransactionOptions) {
+      if (sessionStorage.getItem('family-pilot-refuse-response-idb') === '1') {
+        throw new DOMException('Injected learner-response storage unavailability', 'InvalidStateError')
+      }
+      return original.call(this, storeNames, mode, options)
+    }
+  })
+  await setupFamily(page, [{ name: 'Response Refusal Student', grade: '5' }])
+  await assign(page, 'Response Refusal Student', LESSON.a)
+  const state = await supportState(page)
+  const studentRef = state.app.setup.students[0].studentRef
+  await openStudent(page, 'Response Refusal Student')
+  await startFromHome(page, LESSON.a)
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Continue', exact: true }).click()
+  await expect(page.getByText('Step 2 of 3', { exact: true })).toBeVisible()
+  await page.evaluate(() => sessionStorage.setItem('family-pilot-refuse-response-idb', '1'))
+  const choice = page.getByRole('radio').first()
+  if (await choice.isVisible().catch(() => false)) {
+    await choice.check()
+    await page.getByRole('button', { name: 'Submit answer', exact: true }).click()
+  } else {
+    await page.getByLabel(/Your response|Describe what you completed/).fill('This write must be refused.')
+    const completion = page.getByRole('checkbox', { name: 'I completed the action described above.' })
+    if (await completion.isVisible().catch(() => false)) await completion.check()
+    await page.getByRole('button', { name: 'Submit', exact: true }).click()
+  }
+  await expect(page.getByRole('alert')).toContainText('Nothing advanced')
+  await expect(page.getByText('Step 2 of 3', { exact: true })).toBeVisible()
+  await page.evaluate(() => sessionStorage.removeItem('family-pilot-refuse-response-idb'))
+  expect(responseDocuments(await idbRecords(page), studentRef)).toEqual([])
+  expect((await supportState(page)).keys).not.toContain(LEGACY_RESPONSE_KEY)
+})
+
+test('corrupt legacy learner responses fail closed and remain untouched', async ({ page }) => {
+  await setupFamily(page, [{ name: 'Corrupt Legacy Student', grade: '5' }])
+  await assign(page, 'Corrupt Legacy Student', LESSON.a)
+  await page.evaluate((key) => localStorage.setItem(key, '{not-json'), LEGACY_RESPONSE_KEY)
+  await openStudent(page, 'Corrupt Legacy Student')
+  await startFromHome(page, LESSON.a)
+
+  await expect(page.getByRole('heading', { name: 'Responses not available' })).toBeVisible()
+  await expect(page.getByRole('alert')).toContainText('cannot be safely migrated')
+  expect(await page.evaluate((key) => localStorage.getItem(key), LEGACY_RESPONSE_KEY)).toBe('{not-json')
+  const records = await idbRecords(page)
+  expect(records.some((record) => record.key === RESPONSE_MIGRATION_KEY)).toBe(false)
+  expect(responseDocuments(records)).toEqual([])
 })
 
 test('a corrupt durable Study document fails closed and preserves quarantine evidence', async ({}, testInfo) => {

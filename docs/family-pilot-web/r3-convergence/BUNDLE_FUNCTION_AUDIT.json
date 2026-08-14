@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-08-13T21:26:46-04:00",
+  "branch": "mac/web-release-r3-convergence-r1",
+  "context": "mac/web-release-r3-convergence-r1",
+  "toolchain": {
+    "node": "22.23.2",
+    "vite": "6.4.3",
+    "netlifyCli": "27.1.1",
+    "netlifyBuild": "36.3.4"
+  },
+  "browser": {
+    "fileCount": 338,
+    "treeSha256": "2463560537341004cd932ab05c442f21002528fdcc0f7c6a408b2abfbff6239f",
+    "javascript": [
+      { "path": "assets/FamilyPilotWebApp-n4ywNEez.js", "bytes": 1164, "sha256": "fd8cec299520cdbc1e79f38962087d51894a89591c29011f070da871bb6ca2aa" },
+      { "path": "assets/FinalFamilyPilotApp-DPlcH-CA.js", "bytes": 304032, "sha256": "d0bcf62e6300c026b6e9c77803cf93e2bad62c7969c6dac5a1f1603f012fd32d" },
+      { "path": "assets/index-pjOm68F6.js", "bytes": 195994, "sha256": "eeb4baa9b084f3453a0112622f5bc2867160481d10d89645862147a689433b1b" },
+      { "path": "sw.js", "bytes": 4928, "sha256": "3165981a4e7c808fdcef891e9e20a79679f4477b22bbe45f1af09ba00db71e7a" }
+    ],
+    "coursePayloadCount": 322,
+    "sourceMapCount": 0,
+    "workerCount": 0,
+    "authorityNameOccurrences": {
+      "answerIndex": 0,
+      "correctAnswer": 0,
+      "expectedAnswer": 0,
+      "acceptedAnswers": 0,
+      "solutionKey": 0,
+      "answerKey": 0,
+      "answerKeyMap": 0,
+      "correctChoice": 0,
+      "correctOption": 0
+    },
+    "admittedAnswerAuthority": 0,
+    "pinMaterialFindings": 0,
+    "rawTutorConversationFindings": 0,
+    "serviceRoleCredentialFindings": 0,
+    "localhostRuntimeEndpointFindings": 0,
+    "totalWebSecurityFindings": 0
+  },
+  "netlify": {
+    "manifestVersion": 1,
+    "zipCount": 31,
+    "treeSha256": "0e0445966e849ab4ce5f29b614efb038c96b64b982f9e6e5dd5f3e430ac8a902",
+    "forbiddenCallableNames": [],
+    "functions": [
+      { "name": "admin-access", "bundler": "nft", "bytes": 636562, "sha256": "1b7ceb8178fb3e8009c389fedc73a8c46699786da8c2dcdf81337c5578220df3" },
+      { "name": "admin-audit", "bundler": "nft", "bytes": 636448, "sha256": "47cd0e90e562aff3c0e2f17120be2940efb6f173b0e69ab9b4a8ad9bee129a74" },
+      { "name": "admin-authorization", "bundler": "nft", "bytes": 631400, "sha256": "43b3977c8e60cca22e00aa42e714c7cdece2e79f5562109e84b66ddcc49813e6" },
+      { "name": "admin-configuration", "bundler": "nft", "bytes": 659812, "sha256": "2358ecbc46b86c9e8f48bf03e86dfa833eb615ce1506734e00318a800e8967a2" },
+      { "name": "admin-correlations", "bundler": "nft", "bytes": 640161, "sha256": "ac7fdd3cb0af7522b0ed9d8a1f9541b09749b669605535ab36cfef0dbe8f4804" },
+      { "name": "admin-costs", "bundler": "nft", "bytes": 671548, "sha256": "77235f9ce304c019e40af5bcd4387ae63eff1b31c34f8e8155676aa10d9032d1" },
+      { "name": "admin-curriculum", "bundler": "nft", "bytes": 2609020, "sha256": "315998a51e40189076ac0a0d1cf2b332badde2a8803aac121c20f6cf05d65d44" },
+      { "name": "admin-engine-performance", "bundler": "nft", "bytes": 649138, "sha256": "d904daed498a0f4b07dd54088689a7836b1922d7b736c57a284ea7e420c05ac9" },
+      { "name": "admin-health", "bundler": "nft", "bytes": 670335, "sha256": "c86a7a741a192ddb8ca9d0cebee31ba855e6686eeed8edcfd6df580ca9612c3d" },
+      { "name": "admin-learners", "bundler": "nft", "bytes": 2574143, "sha256": "b4221a06c0d7b6f3b8239c8a799d3fdc25cd2968bfacfecd71c50d9047a3a4cc" },
+      { "name": "admin-overview", "bundler": "nft", "bytes": 2660816, "sha256": "cf3b2db84558ebad0697d5178c682eb535d43ebd499d029e8673bd2e8b69939a" },
+      { "name": "admin-production-readiness", "bundler": "nft", "bytes": 2614074, "sha256": "92ed6c3b0e313dfd20a7591ccf06a4f3ea001eb195cdd0f83c6a1d74bfd74b3f" },
+      { "name": "admin-provider-pricing-terms", "bundler": "nft", "bytes": 638815, "sha256": "b73e354dcce320441ddb016b2b5c526b9df39a3806abf5d913f7e38426109724" },
+      { "name": "admin-safety-operations", "bundler": "nft", "bytes": 638632, "sha256": "37e8c34f845b27f9194d83e1db2cc7ad80ad43a2b92e2f39d770f8a8d0777bfe" },
+      { "name": "admin-study-operations", "bundler": "nft", "bytes": 697196, "sha256": "07ef1ec83b92758530834f3ce7a5fa8892f7d91e9d1e4a05f5e7ce48343465ef" },
+      { "name": "anthropic", "bundler": "nft", "bytes": 670204, "sha256": "f97bbd4e2f0e72a395a1eacf9c90985a8a728c4de07bff03aee7e388bed19df5" },
+      { "name": "production-item-assessment", "bundler": "esbuild", "bytes": 62866852, "sha256": "92f3c7774d3dd66b66a648b5883bf3c383233742cdda4483dacfd51f69761ad9" },
+      { "name": "study-academic-runtime", "bundler": "nft", "bytes": 309232, "sha256": "b8ad25a568043bca4dce2c4885f896a3bf5be17892eb378d3694b212207ba46d" },
+      { "name": "study-adult-review", "bundler": "nft", "bytes": 297819, "sha256": "b570d29111ccb69922c04b9432b7fc4644b8228a364c38fb187c6268bd1be213" },
+      { "name": "study-adult-review-deliver", "bundler": "nft", "bytes": 295898, "sha256": "537c86e203084becf98d22233f827f0606906e286a2520672b55746c079c0afe" },
+      { "name": "study-adult-review-health", "bundler": "nft", "bytes": 295506, "sha256": "1b2b2bd38f123bdd24c8e1a11d394e5f3b95da6e5766c844f076fe36bb06a442" },
+      { "name": "study-adult-review-scheduled-worker", "bundler": "nft", "bytes": 340585, "sha256": "2758761ea533ce37a67a31909fac74ecc89d17ab565d9db596e06027f10516a7" },
+      { "name": "study-adult-review-worker", "bundler": "nft", "bytes": 340116, "sha256": "82f2bb3a5df0e026d0fb950875d3dffa0bd28b73fb4cc5feb74a6cbc2562061e" },
+      { "name": "study-bound-content", "bundler": "nft", "bytes": 2175362, "sha256": "339b85f0bbbbc700bc171d2d1cc9c0f3643acdc2384d18bd298bd46cb3943dfb" },
+      { "name": "study-parent-notifications", "bundler": "nft", "bytes": 300514, "sha256": "d9f19727f56ade87e1c8addc5229f91f067a15b39b399783f9f868cc2f347728" },
+      { "name": "study-production-readiness", "bundler": "nft", "bytes": 333761, "sha256": "da226c9ad38dac9949e337408bf189ef032e3b712be7a672db215c077bd36220" },
+      { "name": "study-safety-classify", "bundler": "nft", "bytes": 682374, "sha256": "59af7301a848328c083a4452103cc582f80f2abe62af7884fcee22afd68e6caa" },
+      { "name": "study-session-issue", "bundler": "nft", "bytes": 302793, "sha256": "b67b1d20278f65d1fe50c379120d1171ccfd9bee78681febc4cdf9039701b156" },
+      { "name": "study-session-telemetry-deliver", "bundler": "nft", "bytes": 651515, "sha256": "ba14f8dbdcd6f424fe83231cd72fbc94c7a2c35366c2d273d30d6177a6c109b3" },
+      { "name": "study-session-verify", "bundler": "nft", "bytes": 300951, "sha256": "f6f56e9af099d6064dc895e7fb2a20fe4df9706ca2e5587f8c7b11567ebd083a" },
+      { "name": "tts", "bundler": "nft", "bytes": 668857, "sha256": "dd358e1b2310b93a6c8d71da3b4515bb37d1bcf454362a19b8a5accdd0747a46" }
+    ],
+    "trustedScorer": {
+      "name": "production-item-assessment",
+      "entryCount": 15918,
+      "curriculumAuthorityEntryCount": 15913,
+      "admittedReleaseEntryCount": 2,
+      "containsReleaseManifest": true,
+      "containsProductionBindings": true,
+      "resolverCallable": false
+    }
+  }
+}

@@ -7,12 +7,16 @@ const here = dirname(fileURLToPath(import.meta.url))
 const sourceRoot = resolve(here, '..', '..')
 
 describe('production Study import boundary', () => {
-  it('does not statically import preview ports or the sentinel runtime from App', () => {
+  it('does not statically import preview ports or the sentinel runtime from either root boundary', () => {
     const app = readFileSync(join(sourceRoot, 'App.tsx'), 'utf8')
+    const legacyApp = readFileSync(join(sourceRoot, 'LegacyApp.tsx'), 'utf8')
     expect(app).not.toMatch(/from ['"]\.\/study\/(?:localDevelopmentPorts|mountedPorts)['"]/)
     expect(app).not.toMatch(/from ['"]\.\/components\/study\/StudySessionRoute['"]/)
-    expect(app).toContain('import.meta.env.DEV')
-    expect(app).toContain("import('./study/mountedPorts')")
+    expect(app).toContain("import('./LegacyApp')")
+    expect(legacyApp).not.toMatch(/from ['"]\.\/study\/(?:localDevelopmentPorts|mountedPorts)['"]/)
+    expect(legacyApp).not.toMatch(/from ['"]\.\/components\/study\/StudySessionRoute['"]/)
+    expect(legacyApp).toContain('import.meta.env.DEV')
+    expect(legacyApp).toContain("import('./study/mountedPorts')")
   })
 
   it('keeps local, memory, test, preview, synthetic and sentinel identifiers out of the production root', () => {

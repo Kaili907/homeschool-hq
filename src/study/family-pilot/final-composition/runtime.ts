@@ -12,12 +12,7 @@ import {
   type FamilyPilotStudyResult,
   type FamilyPilotStudySession,
 } from '../study'
-import {
-  closeHelp,
-  startHelp,
-  submitTurn,
-  type FamilyPilotTutorDeps,
-} from '../tutor'
+import { closeStaticHelp, continueStaticHelp, startStaticHelp } from '../tutor/staticSession'
 import type {
   FinalFamilyPilotAssignmentBinding,
   FinalFamilyPilotAssignmentStatePort,
@@ -54,7 +49,6 @@ export interface CreateFinalFamilyPilotStudyRuntimeOptions {
   readonly completionAuthority: FinalFamilyPilotCompletionAuthorityPort
   readonly guardianAttestation?: FinalFamilyPilotGuardianAttestationPort
   readonly safetyHolds?: FinalFamilyPilotSafetyHoldPort
-  readonly tutorDeps?: FamilyPilotTutorDeps
   readonly now?: () => Date
   readonly lifecycle?: StudyLifecycleBoundary
   readonly safetyStopStorage?: Pick<Storage, 'getItem' | 'setItem'>
@@ -388,7 +382,6 @@ export async function createFinalFamilyPilotStudyRuntime(
         context: options.context.study,
         session: input.session,
         transientLearnerText: input.transientLearnerText,
-        ...(input.expectedAnswer ? { expectedAnswer: input.expectedAnswer } : {}),
       })
       if (action.status === 'rejected') return runtimeFailure(action)
       return Object.freeze({ status: 'ok' as const, action, material: prepared.material })
@@ -516,7 +509,7 @@ export async function createFinalFamilyPilotStudyRuntime(
       const subject = options.context.study.subject
       return Object.freeze({
         status: 'ok',
-        step: startHelp({
+        step: startStaticHelp({
           scope: {
             householdRef: session.householdRef,
             learnerRef: session.learnerRef,
@@ -526,15 +519,14 @@ export async function createFinalFamilyPilotStudyRuntime(
           grade: options.context.study.grade,
           noAudio: options.context.study.accessibility.noAudio,
           mediaAvailable: prepared.material.mediaAvailable,
-          ...(prepared.material.helpProblem ? { problem: prepared.material.helpProblem } : {}),
         }),
       })
     },
     submitTutorTurn(session, transientMessage) {
-      return submitTurn(session, transientMessage, options.tutorDeps)
+      return Promise.resolve(continueStaticHelp(session, transientMessage))
     },
     closeTutor(session) {
-      return closeHelp(session)
+      return closeStaticHelp(session)
     },
     storageHealth() {
       return storage.health()

@@ -1,4 +1,4 @@
-import { getCurrentSession } from '../sync/supabase'
+import { getCurrentSession } from '../auth/supabaseSession'
 
 /**
  * Return a current Supabase access token for same-origin AI gateways.

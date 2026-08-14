@@ -7,11 +7,10 @@ import type {
   FamilyPilotStudySnapshot,
 } from '../study'
 import type {
-  FamilyPilotHelpProblem,
-  FamilyPilotHelpSession,
-  FamilyPilotHelpStep,
-  FamilyPilotHelpSummary,
-} from '../tutor'
+  FamilyPilotStaticHelpSession,
+  FamilyPilotStaticHelpStep,
+  FamilyPilotStaticHelpSummary,
+} from '../tutor/staticSession'
 
 export type FinalFamilyPilotCompletionAuthority =
   | 'LEARNER_AUTHORITY'
@@ -47,8 +46,6 @@ export interface FinalFamilyPilotProductionMaterial {
   /** Opaque release/material identity; never learner-authored text. */
   readonly materialRef: string
   readonly mediaAvailable: boolean
-  /** Transient Tutor input. This composition never persists it. */
-  readonly helpProblem?: FamilyPilotHelpProblem
 }
 
 export type FinalFamilyPilotMaterialResolution =
@@ -201,7 +198,7 @@ export type FinalFamilyPilotAction =
   | FinalFamilyPilotRejected
 
 export type FinalFamilyPilotTutorResult =
-  | { readonly status: 'ok'; readonly step: FamilyPilotHelpStep }
+  | { readonly status: 'ok'; readonly step: FamilyPilotStaticHelpStep }
   | FinalFamilyPilotRejected
 
 export type FinalFamilyPilotAttestationResult =
@@ -232,7 +229,6 @@ export interface FinalFamilyPilotStudyRuntimeApi {
     readonly assignmentRef: string
     readonly session: FamilyPilotStudySession
     readonly transientLearnerText: string
-    readonly expectedAnswer?: string
   }): Promise<FinalFamilyPilotAction>
   complete(assignmentRef: string, session: FamilyPilotStudySession): Promise<FinalFamilyPilotResult>
   attest(input: {
@@ -252,11 +248,11 @@ export interface FinalFamilyPilotStudyRuntimeApi {
     readonly clearedByRef: string
   }): Promise<{ readonly status: 'cleared' } | FinalFamilyPilotRejected>
   startTutor(assignmentRef: string, session: FamilyPilotStudySession): Promise<FinalFamilyPilotTutorResult>
-  submitTutorTurn(session: FamilyPilotHelpSession, transientMessage: string): Promise<FamilyPilotHelpStep>
-  closeTutor(session: FamilyPilotHelpSession): {
-    readonly session: FamilyPilotHelpSession
-    readonly summary: FamilyPilotHelpSummary
-    readonly presentation: FamilyPilotHelpStep['presentation']
+  submitTutorTurn(session: FamilyPilotStaticHelpSession, transientMessage: string): Promise<FamilyPilotStaticHelpStep>
+  closeTutor(session: FamilyPilotStaticHelpSession): {
+    readonly session: FamilyPilotStaticHelpSession
+    readonly summary: FamilyPilotStaticHelpSummary
+    readonly presentation: FamilyPilotStaticHelpStep['presentation']
   }
   storageHealth(): Promise<FinalFamilyPilotStorageHealth>
   close(): void

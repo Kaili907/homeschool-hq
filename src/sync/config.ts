@@ -23,21 +23,11 @@ import {
   type SignedInUser,
 } from './types'
 
-/**
- * Supabase is optional. The anon key is public by design and RLS protects rows.
- * A service-role key must never be referenced by browser code.
- */
-export function supabaseUrl(): string {
-  return (import.meta.env.VITE_SUPABASE_URL ?? '').replace(/\/+$/, '')
-}
-
-export function supabaseAnonKey(): string {
-  return import.meta.env.VITE_SUPABASE_ANON_KEY ?? ''
-}
-
-export function supabaseConfigured(): boolean {
-  return supabaseUrl() !== '' && supabaseAnonKey() !== ''
-}
+export {
+  supabaseAnonKey,
+  supabaseConfigured,
+  supabaseUrl,
+} from '../auth/supabaseSession'
 
 const META_PREFIX = 'homeschool-hq:sync:household:'
 const SYNC_BACKUP_PREFIX = 'homeschool-hq:backup:sync:'

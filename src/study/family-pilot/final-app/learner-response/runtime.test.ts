@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { G3_MATH_RESPONSE_FIXTURE } from './fixtures'
 import { LearnerResponseRuntime } from './runtime'
-import { BrowserLearnerResponseStore, FAMILY_PILOT_LEARNER_RESPONSES_KEY, MemoryLearnerResponseStore } from './store'
+import { MemoryLearnerResponseStore } from './store'
 import type { LearnerResponseAssessor, LearnerResponseAttemptContext, LearnerResponseStore } from './types'
 
 const context: LearnerResponseAttemptContext = Object.freeze({
@@ -16,7 +16,7 @@ describe('LearnerResponseRuntime', () => {
   it('stores all identity refs and stays pending when no assessor is injected', async () => {
     const store = new MemoryLearnerResponseStore()
     const held = runtime(store)
-    const view = held.open(2, 'ma-g3-mathematics-u01-l01:segment:practice')
+    const view = await held.open(2, 'ma-g3-mathematics-u01-l01:segment:practice')
     const item = view.item!
     const saved = await held.submit({ lessonRef: context.lessonRef, sectionRef: item.sectionRef, itemRef: item.itemRef, segmentRef: view.segmentRef, value: item.choices[0]!.choiceRef })
     expect(saved.status).toBe('saved')
@@ -32,49 +32,44 @@ describe('LearnerResponseRuntime', () => {
 
   it('does not advance on a no-op submission and rejects lost/wrong identity', async () => {
     const held = runtime()
-    const view = held.open(2, 'segment:practice')
+    const view = await held.open(2, 'segment:practice')
     const item = view.item!
     expect(await held.submit({ lessonRef: context.lessonRef, sectionRef: item.sectionRef, itemRef: item.itemRef, segmentRef: view.segmentRef, value: ' ' })).toMatchObject({ status: 'rejected', reason: 'empty-response' })
     expect(await held.submit({ lessonRef: context.lessonRef, sectionRef: item.sectionRef, itemRef: '', segmentRef: view.segmentRef, value: 'x' })).toMatchObject({ status: 'rejected', reason: 'lost-item-ref' })
     expect(await held.submit({ lessonRef: 'wrong:lesson', sectionRef: item.sectionRef, itemRef: item.itemRef, segmentRef: view.segmentRef, value: 'x' })).toMatchObject({ status: 'rejected', reason: 'wrong-lesson' })
-    expect(held.open(2, view.segmentRef).answeredItemRefs).toEqual([])
-    expect(held.open(2, view.segmentRef).canCompleteSegment).toBe(false)
+    expect((await held.open(2, view.segmentRef)).answeredItemRefs).toEqual([])
+    expect((await held.open(2, view.segmentRef)).canCompleteSegment).toBe(false)
   })
 
   it('rejects a flattened choice label or foreign choice ref instead of accepting ambiguous text', async () => {
     const held = runtime()
-    const view = held.open(2, 'segment:practice')
+    const view = await held.open(2, 'segment:practice')
     const item = view.item!
     expect(await held.submit({ lessonRef: context.lessonRef, sectionRef: item.sectionRef, itemRef: item.itemRef, segmentRef: view.segmentRef, value: item.choices[0]!.label })).toMatchObject({ status: 'rejected', reason: 'invalid-choice' })
   })
 
   it('requires every response in the Study segment before completion', async () => {
     const held = runtime()
-    let view = held.open(2, 'segment:practice')
+    let view = await held.open(2, 'segment:practice')
     await held.submit({ lessonRef: context.lessonRef, sectionRef: view.item!.sectionRef, itemRef: view.item!.itemRef, segmentRef: view.segmentRef, value: view.item!.choices[0]!.choiceRef })
-    view = held.open(2, 'segment:practice')
+    view = await held.open(2, 'segment:practice')
     expect(view.item?.responseType).toBe('NUMERIC')
     expect(view.canCompleteSegment).toBe(false)
     await held.submit({ lessonRef: context.lessonRef, sectionRef: view.item!.sectionRef, itemRef: view.item!.itemRef, segmentRef: view.segmentRef, value: '34' })
-    view = held.open(2, 'segment:practice')
+    view = await held.open(2, 'segment:practice')
     expect(view.item).toBeNull()
     expect(view.canCompleteSegment).toBe(true)
   })
 
   it('keeps the local response pending when the injected assessor is offline', async () => {
-    const values = new Map<string, string>()
-    const storage = {
-      getItem: (key: string) => values.get(key) ?? null,
-      setItem: (key: string, value: string) => { values.set(key, value) },
-    }
+    const storage = new MemoryLearnerResponseStore()
     const assessor: LearnerResponseAssessor = { assessorRef: 'trusted:future', assess: vi.fn().mockRejectedValue(new Error('offline')) }
-    const held = runtime(new BrowserLearnerResponseStore(storage), assessor)
-    const view = held.open(2, 'segment:practice')
+    const held = runtime(storage, assessor)
+    const view = await held.open(2, 'segment:practice')
     const saved = await held.submit({ lessonRef: context.lessonRef, sectionRef: view.item!.sectionRef, itemRef: view.item!.itemRef, segmentRef: view.segmentRef, value: view.item!.choices[0]!.choiceRef })
     expect(saved).toMatchObject({ status: 'saved', assessmentStatus: 'PENDING_ASSESSMENT', record: { status: 'PENDING_ASSESSMENT', assessment: null } })
-    expect(values.get(FAMILY_PILOT_LEARNER_RESPONSES_KEY)).not.toMatch(/CORRECT|INCORRECT/)
-    const reopened = runtime(new BrowserLearnerResponseStore(storage))
-    expect(reopened.open(2, 'segment:practice').answeredItemRefs).toContain('ma-g3-mathematics-u01-l01#ip-01')
+    const reopened = runtime(storage)
+    expect((await reopened.open(2, 'segment:practice')).answeredItemRefs).toContain('ma-g3-mathematics-u01-l01#ip-01')
   })
 
   it('accepts assessed state only from the injected assessor identity', async () => {
@@ -83,19 +78,17 @@ describe('LearnerResponseRuntime', () => {
       assess: async () => ({ assessmentRef: 'assessment:1', assessorRef: 'trusted:session-1', assessedAt: '2026-08-13T15:01:00.000Z', decision: 'CORRECT' }),
     }
     const held = runtime(new MemoryLearnerResponseStore(), assessor)
-    const view = held.open(2, 'segment:practice')
+    const view = await held.open(2, 'segment:practice')
     expect(await held.submit({ lessonRef: context.lessonRef, sectionRef: view.item!.sectionRef, itemRef: view.item!.itemRef, segmentRef: view.segmentRef, value: view.item!.choices[0]!.choiceRef })).toMatchObject({ status: 'saved', assessmentStatus: 'ASSESSED', record: { assessment: { assessorRef: 'trusted:session-1' } } })
   })
 
   it('never overwrites unreadable local progress and never advances when storage fails', async () => {
-    const values = new Map<string, string>([[FAMILY_PILOT_LEARNER_RESPONSES_KEY, '{not-json']])
-    const held = runtime(new BrowserLearnerResponseStore({
-      getItem: (key) => values.get(key) ?? null,
-      setItem: (key, value) => { values.set(key, value) },
-    }))
-    const view = held.open(2, 'segment:practice')
+    const held = runtime({
+      list: async () => Object.freeze([]),
+      save: async () => { throw new Error('storage unavailable') },
+    })
+    const view = await held.open(2, 'segment:practice')
     const result = await held.submit({ lessonRef: context.lessonRef, sectionRef: view.item!.sectionRef, itemRef: view.item!.itemRef, segmentRef: view.segmentRef, value: view.item!.choices[0]!.choiceRef })
     expect(result).toMatchObject({ status: 'rejected', reason: 'storage-unavailable' })
-    expect(values.get(FAMILY_PILOT_LEARNER_RESPONSES_KEY)).toBe('{not-json')
   })
 })

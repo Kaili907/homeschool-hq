@@ -204,14 +204,26 @@ describe('App academy route lifecycle (CURR-1)', () => {
     root = createRoot(container as unknown as Element)
     await act(async () => root?.render(<App />))
     await settle()
+    await waitFor(() => harness.picker !== null || harness.academy !== null || harness.admin)
   }
 
   async function settle() {
-    await act(async () => {
-      await Promise.resolve()
-      await new Promise<void>((resolve) => setTimeout(resolve, 0))
-      await Promise.resolve()
-    })
+    for (let tick = 0; tick < 3; tick += 1) {
+      await act(async () => {
+        await Promise.resolve()
+        await new Promise<void>((resolve) => setTimeout(resolve, 0))
+        await Promise.resolve()
+      })
+    }
+  }
+
+  async function waitFor(check: () => boolean) {
+    const deadline = Date.now() + 5_000
+    while (Date.now() < deadline) {
+      if (check()) return
+      await settle()
+    }
+    throw new Error(`Legacy route did not resolve; rendered ${renderedText(container)}`)
   }
 
   function findButton(label: string, node: FakeElement = container): FakeElement | null {

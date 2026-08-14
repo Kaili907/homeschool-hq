@@ -89,7 +89,7 @@ function genuineGuardianAuthority(): StudyProductionAuthority {
 
 describe('Session 16 adversarial production regression boundary', () => {
   it('requires the host to invoke the opaque verified runtime, not deserialize server authority', () => {
-    const app = readFileSync(join(sourceRoot, 'App.tsx'), 'utf8')
+    const app = readFileSync(join(sourceRoot, 'LegacyApp.tsx'), 'utf8')
     expect(app.match(/\bcreateVerifiedStudyRuntimeAdapter\s*\(/g)).toHaveLength(1)
     expect(app).not.toMatch(/\bcreateStudyProductionComposition\s*\(/)
     expect(app).not.toMatch(/parseVerified.*Authority|JSON\.parse\([^)]*authority/i)

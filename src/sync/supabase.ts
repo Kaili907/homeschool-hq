@@ -4,12 +4,16 @@ import {
   type Session,
   type SupabaseClient,
 } from '@supabase/supabase-js'
+import { cleanupLegacySyncStorage } from './config'
 import {
-  cleanupLegacySyncStorage,
+  createSupabaseBrowserClient,
+  getCurrentSession,
+  getSupabaseClient,
+  resetSupabaseClientForTests,
   supabaseAnonKey,
   supabaseConfigured,
   supabaseUrl,
-} from './config'
+} from '../auth/supabaseSession'
 import { validateRemoteProfileRows } from './provenance'
 import type {
   CloudPullResult,
@@ -20,30 +24,11 @@ import type {
 
 export const AUTH_VERIFICATION_TIMEOUT_MS = 8_000
 
-/**
- * Official Supabase browser client. Its supported auth layer owns session
- * persistence, refresh-token rotation, and TOKEN_REFRESHED storage updates.
- */
-let singleton: SupabaseClient | null | undefined
-
-export function createSupabaseBrowserClient(
-  url = supabaseUrl(),
-  anonKey = supabaseAnonKey(),
-): SupabaseClient {
-  return createClient(url, anonKey, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true,
-      flowType: 'pkce',
-    },
-  })
-}
-
-export function getSupabaseClient(): SupabaseClient | null {
-  if (!supabaseConfigured()) return null
-  if (singleton === undefined) singleton = createSupabaseBrowserClient()
-  return singleton
+export {
+  createSupabaseBrowserClient,
+  getCurrentSession,
+  getSupabaseClient,
+  resetSupabaseClientForTests,
 }
 
 export function userFromSession(session: Session | null): SignedInUser | null {
@@ -73,14 +58,6 @@ export async function signInWithPassword(
         ok: false,
         error: 'Supabase did not return a verified household session.',
       }
-}
-
-export async function getCurrentSession(
-  client = getSupabaseClient(),
-): Promise<Session | null> {
-  if (!client) return null
-  const { data, error } = await client.auth.getSession()
-  return error ? null : data.session
 }
 
 /** Server-verified user identity for the final cloud mutation boundary. */
@@ -529,8 +506,4 @@ export async function signOutRemote(
   } finally {
     cleanupLegacySyncStorage()
   }
-}
-
-export function resetSupabaseClientForTests(): void {
-  singleton = undefined
 }

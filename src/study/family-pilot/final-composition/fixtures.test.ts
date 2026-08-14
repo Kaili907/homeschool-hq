@@ -17,7 +17,6 @@ import {
 const HOUSEHOLD = 'household:final-pilot'
 const START = Date.parse('2026-08-13T14:00:00.000Z')
 const RAW_ANSWER = 'RAW-ANSWER-CANARY-DO-NOT-STORE'
-const EXPECTED_ANSWER = 'EXPECTED-ANSWER-CANARY-DO-NOT-STORE'
 const TRANSCRIPT = 'TUTOR-TRANSCRIPT-CANARY-DO-NOT-STORE'
 const PRIVATE_REFLECTION = 'PRIVATE-REFLECTION-CANARY-DO-NOT-STORE'
 
@@ -224,7 +223,6 @@ async function finishSegments(
       assignmentRef,
       session,
       transientLearnerText: 'fixture-ready',
-      expectedAnswer: 'fixture-ready',
     })
     if (action.status !== 'ok') throw new Error(action.reason)
     const next = await runtime.completeSegment(assignmentRef, session)
@@ -403,18 +401,16 @@ describe('final Family Pilot Study composition fixtures', () => {
       assignmentRef: 'assignment:privacy',
       session,
       transientLearnerText: `${RAW_ANSWER} ${PRIVATE_REFLECTION}`,
-      expectedAnswer: EXPECTED_ANSWER,
     })).toMatchObject({ status: 'ok' })
     const tutor = await runtime.startTutor('assignment:privacy', session)
     if (tutor.status !== 'ok') throw new Error(tutor.reason)
     const turn = await runtime.submitTutorTurn(tutor.step.session, TRANSCRIPT)
     const closed = runtime.closeTutor(turn.session)
     expect(closed.summary.rawConversationIncluded).toBe(false)
-    expect(closed.session.transcript).toEqual([])
+    expect(closed.session).not.toHaveProperty('transcript')
 
     const stored = JSON.stringify([...device.fake.records().values()])
     expect(stored).not.toContain(RAW_ANSWER)
-    expect(stored).not.toContain(EXPECTED_ANSWER)
     expect(stored).not.toContain(TRANSCRIPT)
     expect(stored).not.toContain(PRIVATE_REFLECTION)
 

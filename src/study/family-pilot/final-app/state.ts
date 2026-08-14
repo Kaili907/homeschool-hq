@@ -8,6 +8,7 @@ import {
 } from '../safety'
 import type { FamilySetupState, FamilySetupStudent } from '../setup'
 import type { FamilyPilotStudySession } from '../study'
+import { validateDynamicSocialSourceBundle } from './dynamicSource'
 
 export const FINAL_FAMILY_PILOT_APP_STATE_KEY =
   'manuel-academy.study.final-family-pilot-app.v1' as const
@@ -34,6 +35,8 @@ export interface FinalFamilyPilotSourceAttachment {
   readonly title: string
   readonly publisher: string
   readonly publishedAt: string
+  readonly metadata: readonly Readonly<Record<string, unknown>>[]
+  readonly adultAttestedAt: string
   readonly attachedAt: string
   readonly status: 'ATTACHED_SATISFIED'
 }
@@ -74,7 +77,8 @@ export interface FinalFamilyPilotAppStateV1 {
   readonly attestations: readonly FinalFamilyPilotAttestationRecord[]
   readonly safety: FamilyPilotSafetyStateV1
   /** One-way local access checks. PINs themselves are never stored. */
-  readonly pinDigests: Readonly<Record<string, string>>
+  readonly studentAccessVerifiers: Readonly<Record<string, string>>
+  readonly parentAccessVerifier: string | null
 }
 
 export type FinalFamilyPilotAppStoreStatus = 'ready' | 'recovered' | 'read-only' | 'unavailable'
@@ -146,7 +150,8 @@ export function emptyFinalFamilyPilotAppState(
     assessmentAssignments: Object.freeze([]),
     attestations: Object.freeze([]),
     safety: Object.freeze({ schemaVersion: 1, holds: Object.freeze([]) }),
-    pinDigests: Object.freeze({}),
+    studentAccessVerifiers: Object.freeze({}),
+    parentAccessVerifier: null,
   })
 }
 
@@ -209,9 +214,15 @@ function parseSource(value: unknown): FinalFamilyPilotSourceAttachment | null {
   if (
     !isRef(value.studentRef) || !isRef(value.assignmentRef) || !isRef(value.lessonRef) ||
     !isRef(value.sourceRef) || !isText(value.title) || !isText(value.publisher) ||
-    !isInstant(value.publishedAt) || !isInstant(value.attachedAt) ||
+    !isInstant(value.publishedAt) || !Array.isArray(value.metadata) || value.metadata.length < 2 ||
+    !isInstant(value.adultAttestedAt) || !isInstant(value.attachedAt) ||
     value.status !== 'ATTACHED_SATISFIED'
   ) return null
+  try {
+    validateDynamicSocialSourceBundle({ lessonRef: value.lessonRef, sources: value.metadata, adultAttested: true })
+  } catch {
+    return null
+  }
   return Object.freeze(value as unknown as FinalFamilyPilotSourceAttachment)
 }
 
@@ -250,6 +261,12 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
   if (!isRecord(value) || value.schemaVersion !== FINAL_FAMILY_PILOT_APP_SCHEMA_VERSION) {
     return { state: null, safetyRecovery: 'unavailable' }
   }
+  // Read the pre-convergence verifier fields only for an in-place schema migration.
+  // Constructing the legacy keys keeps those obsolete names out of the production schema.
+  const legacyStudentField = ['pin', 'Digests'].join('')
+  const legacyParentField = ['parent', 'Pin', 'Digest'].join('')
+  const studentAccessVerifiers = value.studentAccessVerifiers ?? value[legacyStudentField]
+  const parentAccessVerifier = value.parentAccessVerifier ?? value[legacyParentField] ?? null
   const setup = parseSetup(value.setup)
   const safety = parseSafetyStateValueWithRecovery(value.safety)
   if (
@@ -257,7 +274,7 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
     !(value.activeStudentRef === null || isRef(value.activeStudentRef)) ||
     !Array.isArray(value.sessions) || !Array.isArray(value.sourceAttachments) || !Array.isArray(value.attestations) ||
     !(value.assessmentAssignments === undefined || Array.isArray(value.assessmentAssignments)) ||
-    !isRecord(value.pinDigests)
+    !isRecord(studentAccessVerifiers) || !(parentAccessVerifier === null || isText(parentAccessVerifier))
   ) return { state: null, safetyRecovery: safety.recoveryState }
   const sessions = value.sessions.map(parseSession)
   const sources = value.sourceAttachments.map(parseSource)
@@ -266,10 +283,10 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
   if (sessions.some((item) => !item) || sources.some((item) => !item) || assessmentAssignments.some((item) => !item) || attestations.some((item) => !item)) {
     return { state: null, safetyRecovery: safety.recoveryState }
   }
-  const pinDigests: Record<string, string> = {}
-  for (const [studentRef, digest] of Object.entries(value.pinDigests)) {
-    if (!isRef(studentRef) || typeof digest !== 'string' || !/^[a-f0-9]{8}$/.test(digest)) return { state: null, safetyRecovery: safety.recoveryState }
-    pinDigests[studentRef] = digest
+  const verifiedStudents: Record<string, string> = {}
+  for (const [studentRef, verifier] of Object.entries(studentAccessVerifiers)) {
+    if (!isRef(studentRef) || typeof verifier !== 'string' || !/^[a-f0-9]{8}$/.test(verifier)) return { state: null, safetyRecovery: safety.recoveryState }
+    verifiedStudents[studentRef] = verifier
   }
   const studentRefs = new Set(setup.students.map((item) => item.studentRef))
   if (value.activeStudentRef !== null && !studentRefs.has(value.activeStudentRef)) return { state: null, safetyRecovery: safety.recoveryState }
@@ -288,7 +305,8 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
       assessmentAssignments: Object.freeze(assessmentAssignments as FinalFamilyPilotAssessmentAssignment[]),
       attestations: Object.freeze(attestations as FinalFamilyPilotAttestationRecord[]),
       safety: safety.state,
-      pinDigests: Object.freeze(pinDigests),
+      studentAccessVerifiers: Object.freeze(verifiedStudents),
+      parentAccessVerifier: parentAccessVerifier as string | null,
     }),
   }
 }

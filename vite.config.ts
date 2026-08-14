@@ -4,9 +4,14 @@ import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { browserAnswerAuthorityBoundary } from './scripts/browser-answer-authority-boundary'
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    browserAnswerAuthorityBoundary(process.env.VITE_FAMILY_PILOT_ENABLED === 'true'),
+  ],
   resolve: {
     alias: {
       // Frozen Math R1 subject package, consumed through the study runtime's
