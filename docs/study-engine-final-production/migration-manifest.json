@@ -503,6 +503,46 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-curriculum-performance-bounds-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260813170000",
+      "filename": "20260813170000_academy_study_actor_authority_convergence.sql",
+      "sha256": "b6ac6d91dc1d9e37335a44fa46f1533e623fff7a2a41f9df98fb3137605b1488",
+      "dependency": "20260810200000_academy_admin_curriculum_performance_bounds.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "actor_binding_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260813171000",
+      "filename": "20260813171000_academy_study_cross_device_authority.sql",
+      "sha256": "49dfe14657fcf48d8bc72c26f77f3c47e3ec610db7ed9d4151c1e295a975edc5",
+      "dependency": "20260813170000_academy_study_actor_authority_convergence.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "cross_device_authority_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260813172000",
+      "filename": "20260813172000_academy_study_sync_lossless_v2.sql",
+      "sha256": "003bc5adbc7148f32ae15c477fb093f420b69873e85b0d53a8fde147ad42a3e1",
+      "dependency": "20260813171000_academy_study_cross_device_authority.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "lossless_sync_version:0->2",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260813173000",
+      "filename": "20260813173000_academy_study_sync_lossless_checkpoint_r1.sql",
+      "sha256": "f464ff93d412b3dbcde2d6206b1c1492ae0479e4b26647228a0bc9a269591404",
+      "dependency": "20260813172000_academy_study_sync_lossless_v2.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "lossless_checkpoint_repair:absent->r1",
+      "supersessionStatus": "current"
     }
   ]
 }

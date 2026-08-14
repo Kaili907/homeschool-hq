@@ -25,9 +25,11 @@ export const STUDY_MANUAL_WORKER_FUNCTION = 'study-adult-review-worker'
 export const EXPECTED_STUDY_SCHEDULE = '*/5 * * * *'
 export const EXPECTED_NODE_VERSION = '22'
 export const EXPECTED_STUDY_SAFETY_MODEL = 'claude-haiku-4-5'
+export const EXPECTED_FUNCTIONS_DIRECTORY = 'netlify/function-entrypoints'
 
 const STUDY_SCHEDULE_CONTRACT_MODULE = './_shared/study-adult-review-operations/schedule.js'
 const STUDY_SCHEDULE_CONTRACT_PATH = 'netlify/functions/_shared/study-adult-review-operations/schedule.js'
+const STUDY_SCHEDULE_IMPLEMENTATION_PATH = 'netlify/functions/study-adult-review-scheduled-worker.js'
 
 const EXPECTED_STUDY_SCHEDULE_CONTRACT = Object.freeze({
   scheduled: 'configured',
@@ -299,9 +301,11 @@ function netlifyGates(netlifyToml, functionFiles, scheduledFunctionContract) {
   return [
     gate({
       id: 'netlify.functions_directory', category: 'netlify', subject: 'build.functions',
-      status: functionsDirectory === 'netlify/functions' ? 'present' : functionsDirectory ? 'malformed' : 'missing',
-      reasonCode: functionsDirectory === 'netlify/functions' ? 'FUNCTIONS_DIRECTORY_CONFIGURED' : 'FUNCTIONS_DIRECTORY_INVALID',
-      remediation: functionsDirectory === 'netlify/functions' ? 'No action required.' : 'Set build.functions to netlify/functions.',
+      status: functionsDirectory === EXPECTED_FUNCTIONS_DIRECTORY ? 'present' : functionsDirectory ? 'malformed' : 'missing',
+      reasonCode: functionsDirectory === EXPECTED_FUNCTIONS_DIRECTORY ? 'FUNCTIONS_DIRECTORY_CONFIGURED' : 'FUNCTIONS_DIRECTORY_INVALID',
+      remediation: functionsDirectory === EXPECTED_FUNCTIONS_DIRECTORY
+        ? 'No action required.'
+        : `Set build.functions to ${EXPECTED_FUNCTIONS_DIRECTORY}.`,
     }),
     gate({
       id: 'netlify.scheduled_target', category: 'netlify', subject: EXPECTED_STUDY_SCHEDULED_FUNCTION,
@@ -571,20 +575,30 @@ export async function runLocalStudyDeploymentPreflight({ rootDirectory = process
     // Missing configuration is represented by deterministic missing gates.
   }
   try {
-    entries = await readdir(resolve(rootDirectory, 'netlify/functions'), { withFileTypes: true })
+    entries = await readdir(resolve(rootDirectory, EXPECTED_FUNCTIONS_DIRECTORY), { withFileTypes: true })
   } catch {
     // Missing function directory is represented by deterministic missing gates.
   }
   try {
     const entrypointSource = await readFile(resolve(
       rootDirectory,
-      `netlify/functions/${EXPECTED_STUDY_SCHEDULED_FUNCTION}.js`,
+      `${EXPECTED_FUNCTIONS_DIRECTORY}/${EXPECTED_STUDY_SCHEDULED_FUNCTION}.js`,
     ), 'utf8')
     scheduledFunctionContract = parseStudyScheduledFunctionContract(entrypointSource)
+    const exactImplementationReexport = new RegExp(
+      `export\\s*\\{\\s*handler\\s*\\}\\s*from\\s*['"]\\.\\./functions/${EXPECTED_STUDY_SCHEDULED_FUNCTION}\\.js['"]`,
+      'u',
+    ).test(entrypointSource)
+    const implementationSource = exactImplementationReexport
+      ? await readFile(resolve(rootDirectory, STUDY_SCHEDULE_IMPLEMENTATION_PATH), 'utf8')
+      : entrypointSource
+    if (!scheduledFunctionContract) {
+      scheduledFunctionContract = parseStudyScheduledFunctionContract(implementationSource)
+    }
     const exactSharedContractReexport = new RegExp(
       `export\\s*\\{\\s*STUDY_ADULT_REVIEW_SCHEDULE\\s*\\}\\s*from\\s*['"]${STUDY_SCHEDULE_CONTRACT_MODULE.replaceAll('.', '\\.')}['"]`,
       'u',
-    ).test(entrypointSource)
+    ).test(implementationSource)
     if (!scheduledFunctionContract && exactSharedContractReexport) {
       const sharedContractSource = await readFile(resolve(rootDirectory, STUDY_SCHEDULE_CONTRACT_PATH), 'utf8')
       scheduledFunctionContract = parseStudyScheduledFunctionContract(sharedContractSource)
