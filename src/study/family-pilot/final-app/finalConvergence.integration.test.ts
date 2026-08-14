@@ -12,6 +12,7 @@ import {
 } from './controller'
 import {
   exportFinalFamilyPilotBackup,
+  previewFinalFamilyPilotRestore,
   restoreFinalFamilyPilotBackup,
   validateFinalFamilyPilotBackup,
 } from './backup'
@@ -89,6 +90,7 @@ function setupTwo(controller: FinalFamilyPilotController) {
   if (working.status !== 'ok') throw new Error('fixture setup')
   const finished = completeSetup(working.state, '2026-08-13T12:00:03.000Z')
   if (finished.status !== 'ok') throw new Error('fixture setup')
+  controller.setParentPin('2468')
   controller.saveSetup(finished.state)
   return finished.state
 }
@@ -316,10 +318,15 @@ describe('final Family Pilot real convergence', () => {
     controller.close()
     const indexedDb = { factory: factory.factory, storageManager: factory.storageManager }
     const backup = await exportFinalFamilyPilotBackup({ coreStore: { storage }, appStore: { storage }, indexedDb, now: () => '2026-08-13T14:00:00.000Z' })
-    expect(validateFinalFamilyPilotBackup(backup).status).toBe('valid')
+    expect((await validateFinalFamilyPilotBackup(backup)).status).toBe('valid')
     expect(backup.studyDocuments.find((item) => item.studentRef === 'student:a')?.record).not.toBeNull()
     storage.clear()
-    expect(await restoreFinalFamilyPilotBackup(JSON.stringify(backup), { coreStore: { storage }, appStore: { storage }, indexedDb })).toEqual({ status: 'restored', studentCount: 2 })
+    const preview = await previewFinalFamilyPilotRestore(JSON.stringify(backup), { coreStore: { storage }, appStore: { storage }, indexedDb })
+    expect(preview.status).toBe('ready')
+    if (preview.status !== 'ready') throw new Error('backup preview fixture')
+    expect(await restoreFinalFamilyPilotBackup(JSON.stringify(backup), {
+      coreStore: { storage }, appStore: { storage }, indexedDb, preview, authority: { newParentPin: '8642' },
+    })).toMatchObject({ status: 'restored', studentCount: 2 })
     expect(loadFinalFamilyPilotAppState({ storage }).state.setup.students).toHaveLength(2)
     const restoredController = makeController(storage, factory).controller
     const reopened = await restoredController.reopen('student:a', assignment.assignmentRef)
@@ -329,6 +336,6 @@ describe('final Family Pilot real convergence', () => {
     storage.setItem(FINAL_FAMILY_PILOT_APP_STATE_KEY, JSON.stringify({ schemaVersion: 99 }))
     expect(loadFinalFamilyPilotAppState({ storage }).status).toBe('read-only')
     const corrupt = { ...backup, appState: { ...backup.appState, safety: '{bad' } }
-    expect(validateFinalFamilyPilotBackup(corrupt)).toEqual({ status: 'invalid', reasonCode: 'safety-state-incomplete' })
+    expect(await validateFinalFamilyPilotBackup(corrupt)).toEqual({ status: 'invalid', reasonCode: 'integrity-mismatch' })
   })
 })
