@@ -1,0 +1,763 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/technology-lesson-advisory-contract-r1.schema.json",
+  "title": "Manuel Academy Technology Lesson Advisory Contract R1",
+  "description": "Draft curriculum-side metadata envelope for Technology/Computing depth review. Advisory only: defines no Tutor V2, Study Engine, Dashboard, scoring, learner-state, or answer-release runtime behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "status",
+    "lessonId",
+    "primaryLessonType",
+    "instructionalModes",
+    "activityKind",
+    "taskType",
+    "sourcePhase",
+    "phase",
+    "scoringStance",
+    "conceptIds",
+    "skillIds",
+    "prerequisiteConceptIds",
+    "prerequisiteSkillIds",
+    "errorMisconceptionIds",
+    "languageToolRefs",
+    "exampleRefs",
+    "taskRefs",
+    "hintCeiling",
+    "answerPolicy",
+    "ageLanguagePolicyRef",
+    "safetyPolicyRef",
+    "remediationRoutes",
+    "metadataApplicabilityNotes"
+  ],
+  "properties": {
+    "contractVersion": {
+      "const": "technology-lesson-advisory-r1"
+    },
+    "status": {
+      "const": "DRAFT_ADVISORY"
+    },
+    "lessonId": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "primaryLessonType": {
+      "$ref": "#/$defs/lessonType"
+    },
+    "instructionalModes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/lessonType"
+      },
+      "uniqueItems": true
+    },
+    "activityKind": {
+      "enum": [
+        "CODE_OR_DEBUG",
+        "ANALYSIS_OR_DESIGN"
+      ]
+    },
+    "taskType": {
+      "enum": [
+        "programming_and_logic",
+        "debugging_and_testing",
+        "interface_and_accessibility",
+        "data_and_evidence",
+        "digital_citizenship_and_safety",
+        "systems_and_hardware",
+        "design_and_prototyping",
+        "applied_project"
+      ]
+    },
+    "sourcePhase": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "phase": {
+      "enum": [
+        "DIAGNOSTIC",
+        "TEACH",
+        "GUIDED",
+        "INDEPENDENT",
+        "REMEDIATE",
+        "REVIEW",
+        "PROJECT",
+        "ASSESS"
+      ]
+    },
+    "scoringStance": {
+      "enum": [
+        "FORMATIVE_NO_PENALTY",
+        "PROGRESS_EVIDENCE",
+        "SUMMATIVE"
+      ]
+    },
+    "conceptIds": {
+      "$ref": "#/$defs/nonEmptyUniqueStringArray"
+    },
+    "skillIds": {
+      "$ref": "#/$defs/nonEmptyUniqueStringArray"
+    },
+    "prerequisiteConceptIds": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "prerequisiteSkillIds": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "errorMisconceptionIds": {
+      "$ref": "#/$defs/uniqueStringArray"
+    },
+    "languageToolRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/languageToolRef"
+      },
+      "uniqueItems": true
+    },
+    "exampleRefs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/exampleRef"
+      }
+    },
+    "taskRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/taskRef"
+      }
+    },
+    "hintCeiling": {
+      "enum": [
+        "NONE",
+        "TERM_OR_INSTRUCTION_CLARIFICATION",
+        "CONCEPT_CUE",
+        "LOCATION_OR_EVIDENCE_CUE",
+        "PARTIAL_PROCESS",
+        "WORKED_ANALOGUE",
+        "FULL_WORKED_EXAMPLE"
+      ]
+    },
+    "answerPolicy": {
+      "enum": [
+        "TEACHING_VISIBLE",
+        "GUIDED_PARTIAL",
+        "INDEPENDENT_WITHHOLD",
+        "POST_EVIDENCE_REVIEW",
+        "ASSESSMENT_PROTECTED"
+      ]
+    },
+    "ageLanguagePolicyRef": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "safetyPolicyRef": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "adultAuthorityRef": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "teachingEvidence": {
+      "$ref": "#/$defs/teachingEvidence"
+    },
+    "debuggingCycle": {
+      "$ref": "#/$defs/debuggingCycle"
+    },
+    "evidencePlan": {
+      "$ref": "#/$defs/evidencePlan"
+    },
+    "remediationRoutes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/remediationRoute"
+      }
+    },
+    "metadataApplicabilityNotes": {
+      "description": "Required explanation for empty prerequisite, error/misconception, language/tool, or example-reference fields when the field is not applicable.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/applicabilityNote"
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "enum": [
+              "TEACH",
+              "GUIDED",
+              "REMEDIATE"
+            ]
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "required": [
+          "teachingEvidence"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "const": "GUIDED"
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "properties": {
+          "teachingEvidence": {
+            "type": "object",
+            "required": [
+              "guidedTaskRefs",
+              "supportFadeDescription"
+            ],
+            "properties": {
+              "guidedTaskRefs": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": {
+              "primaryLessonType": {
+                "const": "DEBUGGING"
+              }
+            },
+            "required": [
+              "primaryLessonType"
+            ]
+          },
+          {
+            "properties": {
+              "instructionalModes": {
+                "contains": {
+                  "const": "DEBUGGING"
+                }
+              }
+            },
+            "required": [
+              "instructionalModes"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "required": [
+          "debuggingCycle"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "enum": [
+              "INDEPENDENT",
+              "ASSESS"
+            ]
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "required": [
+          "evidencePlan",
+          "adultAuthorityRef"
+        ],
+        "properties": {
+          "answerPolicy": {
+            "enum": [
+              "INDEPENDENT_WITHHOLD",
+              "POST_EVIDENCE_REVIEW",
+              "ASSESSMENT_PROTECTED"
+            ]
+          },
+          "hintCeiling": {
+            "enum": [
+              "NONE",
+              "TERM_OR_INSTRUCTION_CLARIFICATION",
+              "CONCEPT_CUE",
+              "LOCATION_OR_EVIDENCE_CUE",
+              "PARTIAL_PROCESS",
+              "WORKED_ANALOGUE"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "const": "ASSESS"
+          }
+        },
+        "required": [
+          "phase"
+        ]
+      },
+      "then": {
+        "properties": {
+          "answerPolicy": {
+            "const": "ASSESSMENT_PROTECTED"
+          },
+          "scoringStance": {
+            "const": "SUMMATIVE"
+          },
+          "hintCeiling": {
+            "enum": [
+              "NONE",
+              "TERM_OR_INSTRUCTION_CLARIFICATION"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "MASTERY"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "INDEPENDENT"
+          }
+        },
+        "required": [
+          "evidencePlan",
+          "adultAuthorityRef"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "ASSESSMENT"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "ASSESS"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "REMEDIATION"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "REMEDIATE"
+          }
+        },
+        "required": [
+          "remediationRoutes"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "REVIEW"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "REVIEW"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primaryLessonType": {
+            "const": "PROJECT"
+          }
+        },
+        "required": [
+          "primaryLessonType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "phase": {
+            "const": "PROJECT"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "taskType": {
+            "const": "digital_citizenship_and_safety"
+          }
+        },
+        "required": [
+          "taskType"
+        ]
+      },
+      "then": {
+        "required": [
+          "adultAuthorityRef"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uniqueStringArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      },
+      "uniqueItems": true
+    },
+    "nonEmptyUniqueStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      },
+      "uniqueItems": true
+    },
+    "lessonType": {
+      "enum": [
+        "COMPUTING_CONCEPT",
+        "CODE_READING",
+        "CODE_WRITING",
+        "DEBUGGING",
+        "ALGORITHM_LOGIC",
+        "DATA_REPRESENTATION",
+        "CYBER_DIGITAL_SAFETY",
+        "DESIGN",
+        "PRODUCTIVITY_DIGITAL_TOOL",
+        "ANALYSIS",
+        "PROJECT",
+        "REVIEW",
+        "REMEDIATION",
+        "MASTERY",
+        "ASSESSMENT"
+      ]
+    },
+    "languageToolRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref",
+        "kind",
+        "requiredForTarget",
+        "fallbackRef"
+      ],
+      "properties": {
+        "ref": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "kind": {
+          "enum": [
+            "LANGUAGE",
+            "EDITOR_OR_RUNTIME",
+            "DIGITAL_TOOL",
+            "FILE_OR_DATA_FORMAT",
+            "PLATFORM",
+            "TOOL_NEUTRAL_WORKFLOW"
+          ]
+        },
+        "versionOrCompatibility": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "requiredForTarget": {
+          "type": "boolean"
+        },
+        "fallbackRef": {
+          "description": "A deterministic complete fallback, or NOT_APPLICABLE with rationale in metadataApplicabilityNotes.",
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "exampleRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref",
+        "kind",
+        "relationshipToProtectedTask",
+        "evidenceEligible"
+      ],
+      "properties": {
+        "ref": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "kind": {
+          "enum": [
+            "WORKED_EXAMPLE_CODE",
+            "ANNOTATED_CODE",
+            "WORKED_TRACE",
+            "TOOL_DEMONSTRATION",
+            "DEBUGGING_THINK_ALOUD",
+            "DATA_REPRESENTATION_EXAMPLE",
+            "DESIGN_EXAMPLE",
+            "ANALYSIS_EXAMPLE",
+            "SAFETY_SCENARIO_MODEL"
+          ]
+        },
+        "relationshipToProtectedTask": {
+          "enum": [
+            "NO_PROTECTED_TASK",
+            "ANALOGOUS_NON_TARGET",
+            "TARGET_TEACHING_FIXTURE_RETIRED_FROM_EVIDENCE"
+          ]
+        },
+        "evidenceEligible": {
+          "const": false
+        }
+      }
+    },
+    "taskRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref",
+        "role",
+        "freshness",
+        "protectedSolutionRef"
+      ],
+      "properties": {
+        "ref": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "role": {
+          "enum": [
+            "DIAGNOSTIC_NO_PENALTY",
+            "GUIDED_PRACTICE",
+            "INDEPENDENT_PRACTICE",
+            "PROJECT_EVIDENCE",
+            "REMEDIATION_CHECK",
+            "MASTERY_EVIDENCE",
+            "ASSESSMENT_EVIDENCE",
+            "POST_EVIDENCE_REVIEW"
+          ]
+        },
+        "freshness": {
+          "enum": [
+            "NOT_EVIDENCE",
+            "FRESH_ANALOGOUS",
+            "FRESH_TRANSFER",
+            "REUSES_PRIOR_INPUT_RETIRED_FROM_EVIDENCE"
+          ]
+        },
+        "protectedSolutionRef": {
+          "description": "Restricted locator for evidence tasks, or NOT_APPLICABLE for non-protected tasks. Never an inline solution.",
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "teachingEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conceptExplanationRef",
+        "demonstrationRefs",
+        "guidedTaskRefs"
+      ],
+      "properties": {
+        "conceptExplanationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "demonstrationRefs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "guidedTaskRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "supportFadeDescription": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "debuggingCycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "symptomRef",
+        "hypothesisPromptRef",
+        "inspectionMethodRefs",
+        "changeTestRef",
+        "interpretationPromptRef",
+        "iterationOrVerificationRef"
+      ],
+      "properties": {
+        "symptomRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "hypothesisPromptRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "inspectionMethodRefs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "changeTestRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "interpretationPromptRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "iterationOrVerificationRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "evidencePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskRef",
+        "evidenceConceptIds",
+        "evidenceSkillIds",
+        "commitBoundary",
+        "postEvidenceReviewPolicy"
+      ],
+      "properties": {
+        "taskRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidenceConceptIds": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "evidenceSkillIds": {
+          "$ref": "#/$defs/nonEmptyUniqueStringArray"
+        },
+        "commitBoundary": {
+          "enum": [
+            "RESPONSE_DURABLY_SAVED",
+            "ALL_REQUIRED_PARTS_DURABLY_SAVED",
+            "ASSESSMENT_SUBMITTED_AND_LOCKED"
+          ]
+        },
+        "postEvidenceReviewPolicy": {
+          "enum": [
+            "NO_EXACT_REVIEW",
+            "ANALOGOUS_REVIEW_ONLY",
+            "EXACT_REVIEW_AFTER_COMMIT",
+            "EXACT_REVIEW_AFTER_ASSESSMENT_CLOSE"
+          ]
+        }
+      }
+    },
+    "remediationRoute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "triggerId",
+        "alternateTeachingRef",
+        "analogueTaskRef",
+        "freshCheckTaskRef",
+        "originalProtectedSolutionExposed"
+      ],
+      "properties": {
+        "triggerId": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "alternateTeachingRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "analogueTaskRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "freshCheckTaskRef": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "originalProtectedSolutionExposed": {
+          "const": false
+        }
+      }
+    },
+    "applicabilityNote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "reason"
+      ],
+      "properties": {
+        "field": {
+          "enum": [
+            "prerequisiteConceptIds",
+            "prerequisiteSkillIds",
+            "errorMisconceptionIds",
+            "languageToolRefs",
+            "exampleRefs"
+          ]
+        },
+        "reason": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    }
+  }
+}
