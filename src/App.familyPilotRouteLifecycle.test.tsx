@@ -7,11 +7,34 @@ import type { AppState } from './types'
 
 const harness = vi.hoisted(() => ({
   picker: null as null | { onPick: (id: string) => void; onGrownUps: () => void },
+  syncModuleLoads: 0,
+  syncHookCalls: 0,
+  scoringModuleLoads: 0,
+  tutorStateModuleLoads: 0,
+  tutorTranscriptModuleLoads: 0,
 }))
 
-vi.mock('./sync/useSync', () => ({
-  useSync: () => ({ status: { user: null, binding: 'none', provenance: 'unverified' } }),
-}))
+vi.mock('./sync/useSync', () => {
+  harness.syncModuleLoads += 1
+  return {
+    useSync: () => {
+      harness.syncHookCalls += 1
+      return { status: { user: null, binding: 'none', provenance: 'unverified' } }
+    },
+  }
+})
+vi.mock('./engine', async (importOriginal) => {
+  harness.scoringModuleLoads += 1
+  return importOriginal<typeof import('./engine')>()
+})
+vi.mock('./tutor/tutorState', async (importOriginal) => {
+  harness.tutorStateModuleLoads += 1
+  return importOriginal<typeof import('./tutor/tutorState')>()
+})
+vi.mock('./components/tutor/TutorChat', async (importOriginal) => {
+  harness.tutorTranscriptModuleLoads += 1
+  return importOriginal<typeof import('./components/tutor/TutorChat')>()
+})
 vi.mock('./components/Picker', () => ({
   Picker: (props: { onPick: (id: string) => void; onGrownUps: () => void }) => {
     harness.picker = props
@@ -114,6 +137,11 @@ describe('App final Family Pilot route lifecycle', () => {
 
   beforeEach(() => {
     harness.picker = null
+    harness.syncModuleLoads = 0
+    harness.syncHookCalls = 0
+    harness.scoringModuleLoads = 0
+    harness.tutorStateModuleLoads = 0
+    harness.tutorTranscriptModuleLoads = 0
     root = null
     pathname = '/family-pilot'
     storage = new MemStorage()
@@ -150,11 +178,13 @@ describe('App final Family Pilot route lifecycle', () => {
   })
 
   async function settle() {
-    await act(async () => {
-      await Promise.resolve()
-      await new Promise<void>((resolve) => setTimeout(resolve, 0))
-      await Promise.resolve()
-    })
+    for (let tick = 0; tick < 3; tick += 1) {
+      await act(async () => {
+        await Promise.resolve()
+        await new Promise<void>((resolve) => setTimeout(resolve, 0))
+        await Promise.resolve()
+      })
+    }
   }
 
   async function mountApp(state: AppState) {
@@ -192,8 +222,21 @@ describe('App final Family Pilot route lifecycle', () => {
     await settle()
   }
 
+  it('selects Family Pilot before legacy modules or hooks initialize', async () => {
+    vi.stubEnv('VITE_FAMILY_PILOT_ENABLED', 'true')
+    await mountApp(seeded(null))
+    await waitForText('Final Family Pilot')
+
+    expect(harness.syncModuleLoads).toBe(0)
+    expect(harness.syncHookCalls).toBe(0)
+    expect(harness.scoringModuleLoads).toBe(0)
+    expect(harness.tutorStateModuleLoads).toBe(0)
+    expect(harness.tutorTranscriptModuleLoads).toBe(0)
+  })
+
   it('keeps the production route unreachable when the exact flag is absent', async () => {
     await mountApp(seeded('p1'))
+    await waitForText("Who's learning today?")
     expect(hasText(container, 'Final Family Pilot')).toBe(false)
     expect(hasText(container, "Who's learning today?")).toBe(true)
   })
@@ -224,5 +267,15 @@ describe('App final Family Pilot route lifecycle', () => {
     await waitForText('Final Family Pilot')
     await press(findButton('Back home'))
     expect(pathname).toBe('/')
+  })
+
+  it('returns a persisted legacy learner to home after pilot exit', async () => {
+    vi.stubEnv('VITE_FAMILY_PILOT_ENABLED', 'true')
+    await mountApp(seeded('p1'))
+    await waitForText('Final Family Pilot')
+    await press(findButton('Back home'))
+    await waitForText('Hi, Sam!')
+    expect(pathname).toBe('/')
+    expect(harness.picker).toBeNull()
   })
 })
