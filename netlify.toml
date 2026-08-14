@@ -6,7 +6,9 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  functions = "netlify/functions"
+  # Only files in this directory are callable functions. Production modules,
+  # tests, fixtures, and helpers live outside this explicit entrypoint allowlist.
+  functions = "netlify/function-entrypoints"
 
 [build.environment]
   # Route the tutor + voice calls through the serverless proxies in the DEPLOYED
