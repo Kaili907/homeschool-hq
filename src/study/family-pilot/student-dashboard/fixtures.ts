@@ -14,11 +14,12 @@ const BASE_MODEL: StudentDashboardModel = {
     description: 'Your next scheduled lesson is ready.',
     workRef: 'work:math-fractions',
     actionLabel: 'Start lesson',
+    workKind: 'lesson',
   },
   todayItems: [
     { workRef: 'work:ela-evidence', title: 'Evidence in a text', context: 'English Language Arts · Grade 7', state: 'complete', stateLabel: 'Complete' },
-    { workRef: 'work:math-fractions', title: 'Fractions in real-world situations', context: 'Mathematics · Grade 5', state: 'ready', stateLabel: 'Ready', actionable: true },
-    { workRef: 'work:science-motion', title: 'Forces and motion', context: 'Science · Grade 8', state: 'ready', stateLabel: 'Not started', actionable: true },
+    { workRef: 'work:math-fractions', title: 'Fractions in real-world situations', context: 'Mathematics · Grade 5', state: 'ready', stateLabel: 'Ready', actionable: true, actionLabel: 'Start', workKind: 'lesson' },
+    { workRef: 'work:science-motion', title: 'Forces and motion', context: 'Science · Grade 8', state: 'ready', stateLabel: 'Not started', actionable: true, actionLabel: 'Start', workKind: 'lesson' },
   ],
   courses: [
     { courseRef: 'course:math', title: 'Mathematics', context: 'Working Grade 5', completed: 18, total: 36 },
@@ -44,11 +45,11 @@ const MISSION_BY_STATE: Readonly<Record<StudentDashboardMissionState, StudentDas
   'lesson-ready': BASE_MODEL.mission,
   'continue-lesson': {
     state: 'continue-lesson', eyebrow: 'Continue your mission', title: 'Evidence in a text', context: 'English Language Arts · Grade 7',
-    statusLabel: 'In progress', description: 'Continue from your saved place.', workRef: 'work:ela-evidence', actionLabel: 'Continue lesson',
+    statusLabel: 'In progress', description: 'Continue from your saved place.', workRef: 'work:ela-evidence', actionLabel: 'Continue lesson', workKind: 'lesson',
   },
   'assessment-pending': {
     state: 'assessment-pending', eyebrow: 'Assessment', title: 'Mathematics unit assessment', context: 'Mathematics · Grade 5',
-    statusLabel: 'Assessment pending', description: 'This assessment is waiting for its next supplied step.', workRef: 'assessment:math-1', actionLabel: 'Open assessment',
+    statusLabel: 'Assessment pending', description: 'This assessment is waiting for its next supplied step.', workRef: 'assessment:math-1', actionLabel: 'Start assessment', workKind: 'assessment',
   },
   'guardian-pending': {
     state: 'guardian-pending', eyebrow: 'Waiting for review', title: 'Application or project: hazard recognition', context: 'Ready for Life · Grade 5',

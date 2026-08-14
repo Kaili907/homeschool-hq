@@ -1,4 +1,4 @@
-import { expect, test, chromium, type BrowserContext, type Page } from '@playwright/test'
+import { expect, test, chromium, type BrowserContext, type Locator, type Page } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 
 const APP_URL = 'http://127.0.0.1:4181/family-pilot'
@@ -11,6 +11,7 @@ const PARENT_PIN = '8642'
 const LEGACY_RESPONSE_KEY = 'manuel-academy:family-pilot:learner-responses:v1'
 const RESPONSE_PREFIX = 'family-pilot:learner-response-attempt:v1'
 const RESPONSE_MIGRATION_KEY = `${RESPONSE_PREFIX}:migration:localstorage-v1`
+const ASSESSMENT_REF = 'ma-g5-mathematics-u01-assessment'
 
 const LESSON = {
   a: {
@@ -148,6 +149,30 @@ async function startFromHome(page: Page, lesson: Lesson) {
 
 async function resumeFromHome(page: Page, lesson: Lesson) {
   await page.getByRole('button', { name: `Continue ${lesson.title}` }).click()
+}
+
+async function watchLaunchFeedback(page: Page) {
+  await page.evaluate(() => {
+    ;(window as Window & { __dashboardLaunchNotices?: string[] }).__dashboardLaunchNotices = []
+    new MutationObserver(() => {
+      const notice = document.querySelector('.family-dashboard__launch-notice')?.textContent?.trim()
+      const notices = (window as Window & { __dashboardLaunchNotices?: string[] }).__dashboardLaunchNotices
+      if (notice && notices && !notices.includes(notice)) notices.push(notice)
+    }).observe(document.body, { childList: true, subtree: true, characterData: true })
+  })
+}
+
+async function clickVisibleLaunchTarget(page: Page, target: Locator, expectedLabel: string) {
+  await expect(target).toBeVisible()
+  await target.scrollIntoViewIfNeeded()
+  const box = await target.boundingBox()
+  expect(box).not.toBeNull()
+  const point = { x: box!.x + box!.width / 2, y: box!.y + box!.height / 2 }
+  expect(await page.evaluate(({ x, y, label }) => {
+    const hit = document.elementFromPoint(x, y)
+    return hit?.tagName === 'BUTTON' && hit.getAttribute('aria-label') === label
+  }, { ...point, label: expectedLabel })).toBe(true)
+  await page.mouse.click(point.x, point.y)
 }
 
 async function continueStep(page: Page) {
@@ -514,6 +539,121 @@ test('Parent School Plan produces idempotent automatic Today work without learne
   const plannerRecords = (await idbRecords(page)).filter((record) => record.key.startsWith('manuel-academy.study.family-auto-planner.v1'))
   expect(plannerRecords).toHaveLength(1)
   expect(JSON.stringify(plannerRecords[0]?.value).match(/materializationRef/g)).toHaveLength(10)
+})
+
+test('manual Parent assignment starts from the whole primary card and resumes by keyboard', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 })
+  await setupFamily(page, [{ name: 'Manual Pointer Student', grade: '5' }])
+  await assign(page, 'Manual Pointer Student', LESSON.a)
+  await openStudent(page, 'Manual Pointer Student')
+
+  await expect(page.getByRole('button', { name: 'Start lesson', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: `Start ${LESSON.a.title}`, exact: true })).toBeVisible()
+  await watchLaunchFeedback(page)
+  await clickVisibleLaunchTarget(page, page.locator('#family-dashboard-mission-heading'), 'Start lesson')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  expect(await page.evaluate(() => (window as Window & { __dashboardLaunchNotices?: string[] }).__dashboardLaunchNotices)).toContain('Opening lesson…')
+
+  const beforeExit = await supportState(page)
+  const studentRef = beforeExit.app.activeStudentRef
+  const started = assignmentFor(beforeExit.core, studentRef, LESSON.a.lessonRef)
+  expect(started).toMatchObject({ state: 'active' })
+  expect(started.sessionRef).toBeTruthy()
+  await page.getByRole('button', { name: 'Save and exit' }).click()
+  await expect(page.getByRole('button', { name: 'Continue lesson', exact: true })).toBeVisible()
+
+  await page.reload()
+  await expect(page.getByRole('heading', { name: 'Hello, Manual' })).toBeVisible()
+  await page.keyboard.press('Tab')
+  await page.keyboard.press('Enter')
+  await page.keyboard.press('Tab')
+  const continueAction = page.getByRole('button', { name: 'Continue lesson', exact: true })
+  await expect(continueAction).toBeFocused()
+  await page.keyboard.press('Space')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const resumed = assignmentFor((await supportState(page)).core, studentRef, LESSON.a.lessonRef)
+  expect(resumed).toMatchObject({ assignmentRef: started.assignmentRef, state: 'active', sessionRef: started.sessionRef })
+})
+
+test('Auto Planner assignment starts through the same primary card pointer path', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 })
+  await setupFamily(page, [{ name: 'Automatic Pointer Student', grade: '5' }])
+  await configureSchoolPlan(page, 'Automatic Pointer Student')
+  await page.getByRole('button', { name: 'Student', exact: true }).click()
+  await openStudent(page, 'Automatic Pointer Student')
+  const before = await supportState(page)
+  const studentRef = before.app.activeStudentRef
+  const assignment = assignmentFor(before.core, studentRef, LESSON.a.lessonRef)
+  expect(assignment).toMatchObject({ state: 'planned' })
+  expect((await idbRecords(page)).filter((record) => record.key.startsWith('manuel-academy.study.family-auto-planner.v1'))).toHaveLength(1)
+
+  await clickVisibleLaunchTarget(page, page.locator('#family-dashboard-mission-heading'), 'Start lesson')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  expect(assignmentFor((await supportState(page)).core, studentRef, LESSON.a.lessonRef)).toMatchObject({
+    assignmentRef: assignment.assignmentRef,
+    state: 'active',
+  })
+})
+
+test('carried assignment preserves its exact Study session and Continue launch path', async ({ page }) => {
+  await page.clock.install({ time: new Date('2026-08-14T13:00:00.000Z') })
+  await setupFamily(page, [{ name: 'Carry Pointer Student', grade: '5' }])
+  await configureSchoolPlan(page, 'Carry Pointer Student')
+  await page.getByRole('button', { name: 'Student', exact: true }).click()
+  await openStudent(page, 'Carry Pointer Student')
+  await clickVisibleLaunchTarget(page, page.locator('#family-dashboard-mission-heading'), 'Start lesson')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const friday = await supportState(page)
+  const studentRef = friday.app.activeStudentRef
+  const started = assignmentFor(friday.core, studentRef, LESSON.a.lessonRef)
+  await page.getByRole('button', { name: 'Save and exit' }).click()
+
+  await page.clock.setFixedTime(new Date('2026-08-17T13:00:00.000Z'))
+  await page.reload()
+  await expect(page.getByRole('heading', { name: 'Hello, Carry' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Continue lesson', exact: true })).toBeVisible()
+  await clickVisibleLaunchTarget(page, page.locator('#family-dashboard-mission-heading'), 'Continue lesson')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const carried = assignmentFor((await supportState(page)).core, studentRef, LESSON.a.lessonRef)
+  expect(carried).toMatchObject({ assignmentRef: started.assignmentRef, state: 'active', sessionRef: started.sessionRef })
+})
+
+test('actionable assessment launches from Dashboard into the existing assessment surface', async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 1024 })
+  await setupFamily(page, [{ name: 'Assessment Touch Student', grade: '5' }])
+  await parentStudent(page, 'Assessment Touch Student')
+  await page.getByRole('button', { name: 'Assignments & readiness' }).click()
+  await page.getByLabel('Admitted course').selectOption(LESSON.a.courseRef)
+  const assessmentRow = page.getByTestId('family-pilot-assessment-assignment').getByRole('listitem').filter({ hasText: ASSESSMENT_REF })
+  await assessmentRow.getByRole('button', { name: 'Assign assessment' }).click()
+  await openStudent(page, 'Assessment Touch Student')
+
+  await expect(page.getByRole('button', { name: 'Start assessment', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: /Start .* assessment/i }).last()).toBeVisible()
+  await clickVisibleLaunchTarget(page, page.locator('#family-dashboard-mission-heading'), 'Start assessment')
+  await expect(page.locator(`[data-assessment-ref="${ASSESSMENT_REF}"]`)).toBeVisible()
+  await expect(page.locator('[data-assessment-task-ref]').first()).toBeVisible()
+})
+
+test('a stale displayed assignment recomposes authoritatively and fails visibly without routing', async ({ page }) => {
+  await setupFamily(page, [{ name: 'Stale Model Student', grade: '5' }])
+  await assign(page, 'Stale Model Student', LESSON.a)
+  await openStudent(page, 'Stale Model Student')
+  await expect(page.getByRole('button', { name: 'Start lesson', exact: true })).toBeVisible()
+
+  await page.evaluate((coreKey) => {
+    const state = JSON.parse(localStorage.getItem(coreKey) ?? 'null')
+    const active = state.activeStudentRef
+    state.students = state.students.map((student: any) => student.studentRef === active
+      ? { ...student, assignments: [] }
+      : student)
+    localStorage.setItem(coreKey, JSON.stringify(state))
+  }, CORE_KEY)
+
+  await clickVisibleLaunchTarget(page, page.locator('#family-dashboard-mission-heading'), 'Start lesson')
+  await expect(page.getByRole('alert')).toContainText('We couldn’t open this lesson. Please try again or ask a parent for help.')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toHaveCount(0)
+  await expect(page.locator('body')).not.toContainText(/assignment:|TECHNICAL|NOT_READY/)
 })
 
 test('all 90 grade-subject cells load in Chromium and every subject launches lesson and assessment UI', async ({ page }) => {

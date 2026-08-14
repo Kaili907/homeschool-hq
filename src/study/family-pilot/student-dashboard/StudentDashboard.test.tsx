@@ -43,10 +43,20 @@ describe('StudentDashboard presentation', () => {
 
   it('uses semantic buttons and complete accessible names for route intents', () => {
     const markup = renderDashboard()
-    expect(markup).toContain('aria-label="Fractions in real-world situations, Mathematics · Grade 5, Ready"')
+    expect(markup).toContain('aria-label="Start lesson"')
+    expect(markup).toContain('aria-label="Start Fractions in real-world situations"')
+    expect(markup).toContain('class="family-dashboard__timeline-action"')
     expect(markup).toContain('aria-label="Open Mathematics, Working Grade 5, 50% complete"')
     expect(markup).toContain('aria-label="Mathematics progress"')
     expect(markup).not.toMatch(/<div[^>]+onclick=/i)
+    let buttonDepth = 0
+    let maxButtonDepth = 0
+    for (const tag of markup.match(/<\/?button\b[^>]*>/g) ?? []) {
+      buttonDepth += tag.startsWith('</') ? -1 : 1
+      maxButtonDepth = Math.max(maxButtonDepth, buttonDepth)
+    }
+    expect(buttonDepth).toBe(0)
+    expect(maxButtonDepth).toBe(1)
   })
 
   it('does not synthesize empty-state explanations when none are provided', () => {

@@ -104,11 +104,13 @@ describe('Family Pilot dashboard presentation convergence', () => {
       state: 'continue-lesson',
       workRef: 'assignment:continue-exact',
       actionLabel: 'Continue lesson',
+      workKind: 'lesson',
     })
     expect(model.todayItems[0]).toMatchObject({
       workRef: 'assignment:continue-exact',
       actionLabel: 'Continue',
       actionable: true,
+      workKind: 'lesson',
     })
     expect(model.todayItems[1]).toMatchObject({
       workRef: 'assessment:waiting-exact',

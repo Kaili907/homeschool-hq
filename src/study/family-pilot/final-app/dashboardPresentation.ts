@@ -114,6 +114,7 @@ function missionFor(model: FamilyPilotStudentDashboardModel): StudentDashboardMi
     ...(next.assignmentRef && action ? {
       workRef: next.assignmentRef,
       actionLabel: `${action} ${isAssessment ? 'assessment' : 'lesson'}`,
+      workKind: isAssessment ? 'assessment' as const : 'lesson' as const,
     } : {}),
   }
 }
@@ -141,6 +142,7 @@ export function toStudentDashboardPresentation(
       stateLabel: item.blocked?.message ?? STATUS_LABEL[item.status],
       actionable: Boolean(item.action && (item.action.type === 'START' || item.action.type === 'CONTINUE')),
       actionLabel: actionLabel(item),
+      workKind: item.kind === 'ASSESSMENT' ? 'assessment' : item.kind === 'LESSON' ? 'lesson' : undefined,
     })),
     todayEmptyLabel: model.today.state === 'EMPTY'
       ? 'No assignments or study blocks are scheduled for this learner today.'

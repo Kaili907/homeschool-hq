@@ -26,6 +26,7 @@ export interface StudentDashboardMission {
   readonly description?: string
   readonly workRef?: string
   readonly actionLabel?: string
+  readonly workKind?: 'lesson' | 'assessment'
 }
 
 export interface StudentDashboardWorkItem {
@@ -37,6 +38,7 @@ export interface StudentDashboardWorkItem {
   readonly actionable?: boolean
   /** Host-supplied action vocabulary; presentation never infers start/resume authority. */
   readonly actionLabel?: string
+  readonly workKind?: 'lesson' | 'assessment'
 }
 
 export interface StudentDashboardCourse {
@@ -94,7 +96,8 @@ export interface JarvisDashboardProps {
 export interface StudentDashboardProps {
   readonly model: StudentDashboardModel
   readonly jarvis?: JarvisDashboardProps
-  readonly onOpenWork: (workRef: string) => void
+  /** Reject to report a launch failure; the presentation keeps error details learner-safe. */
+  readonly onOpenWork: (workRef: string) => void | Promise<void>
   readonly onOpenCourse: (courseRef: string) => void
   readonly onOpenSchedule: () => void
   readonly onOpenTool: (toolRef: string) => void

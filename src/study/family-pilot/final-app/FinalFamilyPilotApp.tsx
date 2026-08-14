@@ -56,6 +56,7 @@ import { toStudentDashboardPresentation } from './dashboardPresentation'
 import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
 import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
 import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
+import { findExactDashboardLaunchCommand } from './dashboardLaunch'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -75,6 +76,13 @@ type ParentView = 'school-plan' | 'assign' | 'reports' | 'preferences' | 'backup
 
 function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : 'That action could not be completed.'
+}
+
+function learnerLaunchFailure(kind: 'lesson' | 'assessment', detail?: string): string {
+  const learnerSafeDetail = detail?.trim()
+  const exposesCode = Boolean(learnerSafeDetail && /\b(?:[A-Z][A-Z0-9]*(?:[_-][A-Z0-9]+)+|[a-z]+(?:-[a-z0-9]+){2,})\b/u.test(learnerSafeDetail))
+  if (learnerSafeDetail && !exposesCode) return learnerSafeDetail
+  return `We couldn’t open this ${kind}. Please return to the dashboard and try again, or ask a parent for help.`
 }
 
 export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void }) {
@@ -419,26 +427,37 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   const [planning, setPlanning] = useState<Awaited<ReturnType<FinalFamilyAutoPlannerHost['dashboardFor']>>['plan'] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
+  const composeDashboard = useCallback(async () => {
+    if (controller.appSnapshot.state.activeStudentRef !== activeStudentRef) {
+      return { plan: null, model: null }
+    }
+    const { plan, schedule } = await autoPlannerHost.dashboardFor(activeStudentRef)
+    const app = controller.appSnapshot
+    if (app.state.activeStudentRef !== activeStudentRef) {
+      return { plan, model: null }
+    }
+    const next = await buildFamilyPilotStudentDashboardModel({
+      today: plan.localDate,
+      activeStudentRef,
+      setup: app.state.setup,
+      coreState: controller.coreSnapshot.state,
+      schedule,
+      assessments: app.state.assessmentAssignments,
+      attestations: app.state.attestations,
+      sourceAttachments: app.state.sourceAttachments,
+      safetyHolds: app.state.safety.holds,
+      safetyRecovery: app.safetyRecovery,
+      appStoreStatus: app.status,
+      catalog: controller.catalog,
+    })
+    return { plan, model: next }
+  }, [activeStudentRef, autoPlannerHost, controller])
+
   useEffect(() => {
     let live = true
     setModel(null)
     setPlanning(null)
-    void autoPlannerHost.dashboardFor(activeStudentRef).then(async ({ plan, schedule }) => {
-      const app = controller.appSnapshot
-      const next = await buildFamilyPilotStudentDashboardModel({
-        today: plan.localDate,
-        activeStudentRef,
-        setup: app.state.setup,
-        coreState: controller.coreSnapshot.state,
-        schedule,
-        assessments: app.state.assessmentAssignments,
-        attestations: app.state.attestations,
-        sourceAttachments: app.state.sourceAttachments,
-        safetyHolds: app.state.safety.holds,
-        safetyRecovery: app.safetyRecovery,
-        appStoreStatus: app.status,
-        catalog: controller.catalog,
-      })
+    void composeDashboard().then(({ plan, model: next }) => {
       if (!live) return
       setPlanning(plan)
       setModel(next)
@@ -447,18 +466,27 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
       if (live) setError(messageOf(cause))
     })
     return () => { live = false }
-  }, [activeStudentRef, autoPlannerHost, controller, revision])
+  }, [composeDashboard, revision])
 
   if (error) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="alert">{error}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onLock}>Lock</button></main>
   if (!model || !planning) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="status">Preparing today’s schoolwork…</p></main>
 
   const presentation = applyAutoPlannerPresentation(toStudentDashboardPresentation(model), planning)
-  const commandForWork = (assignmentRef: string) => model.today.items
-    .map((item) => item.action)
-    .find((action) => action && (action.type === 'START' || action.type === 'CONTINUE') && action.studentRef === activeStudentRef && action.assignmentRef === assignmentRef)
-  const openWork = (assignmentRef: string) => {
-    const command = commandForWork(assignmentRef)
-    if (command && (command.type === 'START' || command.type === 'CONTINUE')) onOpen(command.assignmentRef)
+  const openWork = async (assignmentRef: string) => {
+    if (!findExactDashboardLaunchCommand(model, activeStudentRef, assignmentRef)) {
+      throw new Error('Displayed work no longer has an exact launch command.')
+    }
+    // Recompose once from current planner/controller authority. Only the same
+    // learner and assignment may proceed; no arbitrary command is retried.
+    const fresh = await composeDashboard()
+    if (!fresh.model || !fresh.plan) throw new Error('The current learner dashboard is unavailable.')
+    setModel(fresh.model)
+    setPlanning(fresh.plan)
+    const command = findExactDashboardLaunchCommand(fresh.model, activeStudentRef, assignmentRef)
+    if (!command || controller.appSnapshot.state.activeStudentRef !== activeStudentRef) {
+      throw new Error('Displayed work is no longer available to this learner.')
+    }
+    onOpen(command.assignmentRef)
   }
   const openCourse = (courseRef: string) => {
     const command = model.courses.find((course) => course.action?.type === 'OPEN_COURSE' && course.action.studentRef === activeStudentRef && course.action.courseRef === courseRef)?.action
@@ -804,7 +832,7 @@ function AssessmentSurface({ controller, studentRef, assignmentRef, onExit, refr
       setDrafts(Object.fromEntries(Object.entries(stored.responses).map(([taskRef, response]) => [taskRef, String(response.value)])))
       setBusyTask(null)
       refresh()
-    }).catch((error: unknown) => { if (live) { setMessage(messageOf(error)); setBusyTask(null) } })
+    }).catch(() => { if (live) { setMessage(learnerLaunchFailure('assessment')); setBusyTask(null) } })
     return () => { live = false }
   }, [assignmentRef, controller, refresh, runtime, studentRef])
 
@@ -994,7 +1022,7 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
 
   if (!assignment) return <main className="mx-auto max-w-4xl p-6"><p role="alert">That assignment is unavailable for this student.</p><button onClick={onExit}>Back</button></main>
   if (!result || busy && !result) return <main className="mx-auto max-w-4xl p-6"><p role="status">Opening durable Study and production materials…</p></main>
-  if (result.status === 'rejected') return <main className="mx-auto max-w-4xl p-6"><h2 className="text-2xl font-extrabold">Lesson not ready</h2><p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-4 font-semibold" role="alert">{result.message}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back to Home</button></main>
+  if (result.status === 'rejected') return <main className="mx-auto max-w-4xl p-6"><h2 className="text-2xl font-extrabold">Lesson not ready</h2><p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-4 font-semibold" role="alert">{learnerLaunchFailure('lesson', result.message)}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back to Home</button></main>
   if (responseLoadError?.key === responseKey) return <main className="mx-auto max-w-4xl p-6"><h2 className="text-2xl font-extrabold">Responses not available</h2><p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-4 font-semibold" role="alert">{responseLoadError.message}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back to Home</button></main>
   const responsePresentation = responseView?.key === responseKey ? responseView.presentation : null
   if (!responsePresentation) return <main className="mx-auto max-w-4xl p-6"><p role="status">Opening durable learner responses…</p></main>

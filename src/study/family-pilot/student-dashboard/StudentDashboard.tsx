@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { JarvisDashboard } from './JarvisDashboard'
 import type {
   StudentDashboardCourse,
@@ -27,7 +28,19 @@ function progressPercent(course: StudentDashboardCourse): number | null {
   return Math.round((Math.min(Math.max(course.completed, 0), course.total) / course.total) * 100)
 }
 
-function TodayItem({ item, onOpenWork }: { readonly item: StudentDashboardWorkItem; readonly onOpenWork: StudentDashboardProps['onOpenWork'] }) {
+interface DashboardLaunchState {
+  readonly phase: 'opening' | 'failed'
+  readonly workRef: string
+  readonly message: string
+}
+
+function TodayItem({ item, onActivate, launchState }: {
+  readonly item: StudentDashboardWorkItem
+  readonly onActivate: (workRef: string, workKind: 'lesson' | 'assessment') => void
+  readonly launchState: DashboardLaunchState | null
+}) {
+  const isOpening = launchState?.phase === 'opening' && launchState.workRef === item.workRef
+  const actionLabel = item.actionLabel ?? 'Open'
   const contents = (
     <>
       <span className={`family-dashboard__timeline-status family-dashboard__timeline-status--${item.state}`} aria-hidden="true">
@@ -38,14 +51,19 @@ function TodayItem({ item, onOpenWork }: { readonly item: StudentDashboardWorkIt
         <span>{item.context}</span>
       </span>
       <span className="family-dashboard__timeline-state">{item.stateLabel}</span>
-      {item.actionable ? <span className="family-dashboard__timeline-arrow" aria-hidden="true">→</span> : null}
+      {item.actionable ? <span className="family-dashboard__timeline-action" aria-hidden="true">{isOpening ? 'Opening…' : actionLabel}<span>→</span></span> : null}
     </>
   )
 
   return (
     <li className="family-dashboard__timeline-item">
       {item.actionable ? (
-        <button type="button" onClick={() => onOpenWork(item.workRef)} aria-label={item.actionLabel ? `${item.actionLabel} ${item.title}` : `${item.title}, ${item.context}, ${item.stateLabel}`}>
+        <button
+          type="button"
+          disabled={launchState?.phase === 'opening'}
+          onClick={() => onActivate(item.workRef, item.workKind ?? 'lesson')}
+          aria-label={`${actionLabel} ${item.title}`}
+        >
           {contents}
         </button>
       ) : <div>{contents}</div>}
@@ -93,9 +111,36 @@ export function StudentDashboard({
   onSwitchLearner,
   onSignOut,
 }: StudentDashboardProps) {
+  const [launchState, setLaunchState] = useState<DashboardLaunchState | null>(null)
+  const launchPending = useRef(false)
+  const launchNotice = useRef<HTMLParagraphElement>(null)
   const mission = model.mission
   const canOpenMission = Boolean(mission.workRef && mission.actionLabel)
   const initial = (model.student.avatarInitial || model.student.displayName.charAt(0) || '?').toUpperCase()
+  const activateWork = (workRef: string, workKind: 'lesson' | 'assessment') => {
+    if (launchPending.current) return
+    launchPending.current = true
+    setLaunchState({ phase: 'opening', workRef, message: `Opening ${workKind}…` })
+    // Allow the immediate status update to paint before the host replaces this
+    // dashboard with Study. One shared pending flag blocks pointer/key repeats.
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+      void Promise.resolve().then(() => onOpenWork(workRef)).then(() => {
+        launchPending.current = false
+        setLaunchState((held) => held?.workRef === workRef ? null : held)
+      }).catch(() => {
+        launchPending.current = false
+        setLaunchState({
+          phase: 'failed',
+          workRef,
+          message: `We couldn’t open this ${workKind}. Please try again or ask a parent for help.`,
+        })
+      })
+    }))
+  }
+  const missionOpening = launchState?.phase === 'opening' && launchState.workRef === mission.workRef
+  useEffect(() => {
+    if (launchState?.phase === 'failed') launchNotice.current?.focus()
+  }, [launchState])
 
   return (
     <div className="family-dashboard">
@@ -129,7 +174,7 @@ export function StudentDashboard({
 
         <div className="family-dashboard__primary-grid">
           <div className="family-dashboard__daily-area">
-            <section id="family-dashboard-mission" className={`family-dashboard__mission family-dashboard__mission--${mission.state}`} aria-labelledby="family-dashboard-mission-heading">
+            <section id="family-dashboard-mission" className={`family-dashboard__mission family-dashboard__mission--${mission.state}${canOpenMission ? ' family-dashboard__mission--actionable' : ''}`} aria-labelledby="family-dashboard-mission-heading">
               <div className="family-dashboard__mission-glow" aria-hidden="true" />
               <p className="family-dashboard__eyebrow">{mission.eyebrow}</p>
               <h2 id="family-dashboard-mission-heading">{mission.title}</h2>
@@ -137,11 +182,31 @@ export function StudentDashboard({
               <p className="family-dashboard__mission-status">{mission.statusLabel}</p>
               {mission.description ? <p className="family-dashboard__mission-description">{mission.description}</p> : null}
               {canOpenMission ? (
-                <button type="button" className="family-dashboard__button-primary" onClick={() => onOpenWork(mission.workRef!)}>
-                  {mission.actionLabel}<span aria-hidden="true">→</span>
+                <button
+                  type="button"
+                  className="family-dashboard__mission-control"
+                  disabled={launchState?.phase === 'opening'}
+                  aria-label={mission.actionLabel}
+                  onClick={() => activateWork(mission.workRef!, mission.workKind ?? 'lesson')}
+                >
+                  <span className="family-dashboard__button-primary" aria-hidden="true">
+                    <span>{missionOpening ? 'Opening…' : mission.actionLabel}</span><span>→</span>
+                  </span>
                 </button>
               ) : null}
             </section>
+
+            {launchState ? (
+              <p
+                ref={launchNotice}
+                className={`family-dashboard__launch-notice family-dashboard__launch-notice--${launchState.phase}`}
+                role={launchState.phase === 'failed' ? 'alert' : 'status'}
+                aria-live={launchState.phase === 'failed' ? 'assertive' : 'polite'}
+                tabIndex={launchState.phase === 'failed' ? -1 : undefined}
+              >
+                {launchState.message}
+              </p>
+            ) : null}
 
             <section className="family-dashboard__today family-dashboard__panel" aria-labelledby="family-dashboard-today-heading">
               <div className="family-dashboard__section-heading">
@@ -150,7 +215,7 @@ export function StudentDashboard({
               </div>
               {model.todayItems.length ? (
                 <ol className="family-dashboard__timeline">
-                  {model.todayItems.map((item) => <TodayItem key={item.workRef} item={item} onOpenWork={onOpenWork} />)}
+                  {model.todayItems.map((item) => <TodayItem key={item.workRef} item={item} onActivate={activateWork} launchState={launchState} />)}
                 </ol>
               ) : model.todayEmptyLabel ? <p className="family-dashboard__empty-copy">{model.todayEmptyLabel}</p> : null}
             </section>
