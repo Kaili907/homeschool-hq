@@ -15,7 +15,7 @@ import { fromStudentSelector, toStudentSelector } from '../integration/identity'
 import { FamilyPilotLessonPlayer } from '../lesson-player'
 import { FamilyPilotParentAssignPanel } from '../parent-assign'
 import { FamilyPilotRecoveryScreen } from '../recovery'
-import { buildStudentWeeklyReport, FamilyPilotProgressReport } from '../reports'
+import { buildFamilyFactualProgress, FamilyFactualProgress, LearnerFactualProgress } from '../reports'
 import { StudentDashboard } from '../student-dashboard'
 import type { FamilySetupStudent } from '../setup'
 import {
@@ -25,8 +25,7 @@ import {
   DEFAULT_FAMILY_PILOT_BREAK_GUIDANCE,
   type FamilyPilotFocusSession,
 } from '../focus'
-import type { FamilyPilotAssignmentRecordV1, FamilyPilotSnapshot } from '../core'
-import type { FamilyPilotStudentSnapshot } from '../parent'
+import { FAMILY_PILOT_ACTIVE_HEARTBEAT_SECONDS, type FamilyPilotAssignmentRecordV1, type FamilyPilotSnapshot } from '../core'
 import type { FamilyPilotStudySnapshot } from '../study'
 import {
   academySubjectToStudySubject,
@@ -423,19 +422,30 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   const signOut = () => {
     if (model.actions.signOut.studentRef === activeStudentRef) onSignOut()
   }
+  const student = controller.appSnapshot.state.setup.students.find((item) => item.studentRef === activeStudentRef)
+  const learnerProgress = student ? buildFamilyFactualProgress({
+    student,
+    coreState: controller.coreSnapshot.state,
+    assessments: controller.assessmentAssignments(activeStudentRef),
+    catalog: controller.catalog.runtime,
+    today: model.today.date,
+  }) : null
 
   return (
-    <StudentDashboard
-      model={presentation}
-      jarvis={{ mode: 'visual-only', status: 'Jarvis is visual only. Tutor V2 is not connected in this release.' }}
-      onOpenWork={openWork}
-      onOpenCourse={openCourse}
-      onOpenSchedule={openSchedule}
-      onOpenTool={openTool}
-      onLock={onLock}
-      onSwitchLearner={onSwitchLearner}
-      onSignOut={signOut}
-    />
+    <>
+      <StudentDashboard
+        model={presentation}
+        jarvis={{ mode: 'visual-only', status: 'Jarvis is visual only. Tutor V2 is not connected in this release.' }}
+        onOpenWork={openWork}
+        onOpenCourse={openCourse}
+        onOpenSchedule={openSchedule}
+        onOpenTool={openTool}
+        onLock={onLock}
+        onSwitchLearner={onSwitchLearner}
+        onSignOut={signOut}
+      />
+      {learnerProgress ? <div className="mx-auto max-w-6xl bg-slate-50 px-4 py-6"><LearnerFactualProgress model={learnerProgress} /></div> : null}
+    </>
   )
 }
 
@@ -643,47 +653,19 @@ function ParentReports({ controller, student, refresh }: {
 }) {
   const coreStudent = controller.coreSnapshot.state.students.find((item) => item.studentRef === student.studentRef)
   if (!coreStudent) return <p className="mt-6">No report data.</p>
-  const workItems = coreStudent.assignments.filter((item) => item.state !== 'abandoned').map((item) => ({
-    blockRef: item.sessionRef ?? item.assignmentRef,
-    title: item.title,
-    status: item.state === 'planned' ? 'not-started' as const : item.state === 'active' ? 'in-progress' as const : item.state === 'paused' ? 'paused' as const : 'completed' as const,
-    scheduledLocalDate: item.createdAt.slice(0, 10),
-    requiredWorkCompletionPercent: item.progress.totalSegments > 0 ? Math.round(item.progress.completedSegmentRefs.length / item.progress.totalSegments * 100) : 0,
-    currentSegmentTitle: item.pause.resumeSegmentRef,
-    currentSegmentOrdinal: null,
-    totalSegments: item.progress.totalSegments,
-    completedSegmentCount: item.progress.completedSegmentRefs.length,
-    timeOnTaskSeconds: item.progress.activeSeconds,
-    pauseState: item.state === 'paused' ? { blockRef: item.sessionRef ?? item.assignmentRef, category: 'unspecified' as const } : null,
-  }))
-  const snapshot: FamilyPilotStudentSnapshot = {
-    learner: { hostProfileRef: student.studentRef, learnerRef: student.studentRef, displayName: student.displayName },
-    workItems,
-    reviewItems: [],
-    safety: { hasActiveStop: controller.openSafetyHolds(student.studentRef).length > 0, mostRecentStopAt: controller.openSafetyHolds(student.studentRef)[0]?.createdAt ?? null, historyState: controller.appSnapshot.safetyRecovery },
-    counts: {
-      notStarted: workItems.filter((item) => item.status === 'not-started').length,
-      inProgress: workItems.filter((item) => item.status === 'in-progress').length,
-      paused: workItems.filter((item) => item.status === 'paused').length,
-      completed: workItems.filter((item) => item.status === 'completed').length,
-    },
-  }
-  const report = buildStudentWeeklyReport(snapshot, { startDate: '2000-01-01', endDate: '2100-12-31' })
-  const assessmentAssignments = controller.assessmentAssignments(student.studentRef)
-  const subjectRows = Object.entries(coreStudent.assignments
-    .filter((item) => item.state !== 'abandoned')
-    .reduce<Record<string, FamilyPilotAssignmentRecordV1[]>>((groups, item) => {
-      ;(groups[item.subject] ??= []).push(item)
-      return groups
-    }, {}))
+  const report = buildFamilyFactualProgress({
+    student,
+    coreState: controller.coreSnapshot.state,
+    assessments: controller.assessmentAssignments(student.studentRef),
+    catalog: controller.catalog.runtime,
+    today: new Date().toISOString().slice(0, 10),
+  })
   return (
     <div className="mt-6 space-y-5">
-      <FamilyPilotProgressReport report={report} />
+      <FamilyFactualProgress model={report} />
       <section className="rounded-2xl border bg-white p-5">
-        <h3 className="text-xl font-extrabold">Subject and grade progress</h3>
-        <ul className="mt-3 space-y-2">{subjectRows.map(([subject, assignments]) => <li key={subject} className="rounded-lg bg-slate-100 p-3 font-semibold">{SUBJECT_LABEL[subject as AcademySubject] ?? subject} · Working Grade {student.workingGradeBySubject[subject as AcademySubject] ?? student.nominalGrade} · {assignments?.filter((item) => item.state === 'completed').length ?? 0}/{assignments?.length ?? 0} completed</li>)}</ul>
+        <h3 className="text-xl font-extrabold">Pending records</h3>
         <p className="mt-3 font-semibold">Pending guardian attestations: {controller.pendingAttestations(student.studentRef).length}</p>
-        <p className="font-semibold">Assessments: {assessmentAssignments.filter((item) => item.status === 'CERTIFIED').length}/{assessmentAssignments.length} certified · {assessmentAssignments.filter((item) => item.status === 'PENDING_ASSESSMENT').length} trusted-scoring pending · {assessmentAssignments.filter((item) => item.status === 'ADULT_REVIEW_REQUIRED').length} rubric review pending</p>
         <p className="font-semibold">Open safety holds: {controller.openSafetyHolds(student.studentRef).length}</p>
         <button type="button" className="mt-3 rounded-lg border px-3 py-2 font-bold" onClick={refresh}>Refresh report</button>
       </section>
@@ -873,13 +855,46 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
   }, [focus, result, studentRef])
   useEffect(() => {
     if (!focus || result?.status !== 'ok' || result.study.sessionStatus !== 'active') return
-    const timer = window.setInterval(() => setFocus((held) => {
-      if (!held?.activeSince) return held
-      const now = new Date().toISOString()
-      return suggestBreak(recordActiveInterval(held, { from: held.activeSince, to: now }), DEFAULT_FAMILY_PILOT_BREAK_GUIDANCE)
-    }), 60_000)
+    const timer = window.setInterval(() => {
+      try {
+        controller.recordInstructionalHeartbeat(studentRef, assignmentRef)
+      } catch (error) {
+        setMessage(messageOf(error))
+      }
+      setFocus((held) => {
+        if (!held?.activeSince) return held
+        const now = new Date().toISOString()
+        return suggestBreak(recordActiveInterval(held, { from: held.activeSince, to: now }), DEFAULT_FAMILY_PILOT_BREAK_GUIDANCE)
+      })
+    }, FAMILY_PILOT_ACTIVE_HEARTBEAT_SECONDS * 1_000)
     return () => window.clearInterval(timer)
-  }, [focus?.sessionRef, result?.status === 'ok' ? result.study.sessionStatus : null])
+  }, [assignmentRef, controller, focus?.sessionRef, result?.status === 'ok' ? result.study.sessionStatus : null, studentRef])
+
+  useEffect(() => {
+    if (result?.status !== 'ok') return
+    if (result.study.sessionStatus === 'completed') {
+      try { controller.endInstructionalSession(studentRef, assignmentRef) } catch (error) { setMessage(messageOf(error)) }
+      return
+    }
+    if (result.study.sessionStatus !== 'active') return
+    try {
+      if (document.visibilityState === 'hidden') controller.hideInstructionalSession(studentRef, assignmentRef)
+      else controller.showInstructionalSession(studentRef, assignmentRef)
+    } catch (error) { setMessage(messageOf(error)) }
+    const onVisibilityChange = () => {
+      try {
+        if (document.visibilityState === 'hidden') controller.hideInstructionalSession(studentRef, assignmentRef)
+        else controller.showInstructionalSession(studentRef, assignmentRef)
+      } catch (error) {
+        setMessage(messageOf(error))
+      }
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+      try { controller.hideInstructionalSession(studentRef, assignmentRef) } catch { /* surfaced by the next storage health read */ }
+    }
+  }, [assignmentRef, controller, result?.status === 'ok' ? result.study.sessionStatus : null, studentRef])
 
   const responseKey = result?.status === 'ok'
     ? `${result.study.lessonRef}|${result.study.session.sessionRef}|${result.study.segmentOrdinal ?? ''}|${result.study.segmentRef ?? ''}`
@@ -999,7 +1014,10 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
             onNext={completePresentedSegment}
             onCompleteSegment={completePresentedSegment}
             onOpenTutor={() => void controller.tutor(studentRef, assignmentRef).then((tutor) => setTutorText(tutor.status === 'ok' ? tutor.step.presentation.visibleText : tutor.message)).catch((error) => setTutorText(messageOf(error)))}
-            onExit={() => void controller.checkpoint(studentRef, assignmentRef).then(() => onExit())}
+            onExit={() => {
+              try { controller.hideInstructionalSession(studentRef, assignmentRef) } catch (error) { setMessage(messageOf(error)); return }
+              void controller.checkpoint(studentRef, assignmentRef).then(() => onExit())
+            }}
           />
         )}
         {!pending && !certified ? <button type="button" className="mt-4 rounded-lg border border-amber-500 px-4 py-2 font-bold" onClick={() => void controller.requestAdultHelp(studentRef, assignmentRef).then(() => { setMessage('A parent check-in is now required for this exact session.'); refresh() }).catch((error) => setMessage(messageOf(error)))}>I need an adult check-in</button> : null}

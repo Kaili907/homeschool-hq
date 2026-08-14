@@ -14,13 +14,17 @@ import {
   addFamilyPilotAssignment,
   completeFamilyPilotAssignment,
   createFamilyPilotStudent,
+  endFamilyPilotInstructionalSession,
   findFamilyPilotStudent,
+  hideFamilyPilotInstructionalSession,
   loadFamilyPilotState,
   pauseFamilyPilotAssignment,
+  recordFamilyPilotInstructionalHeartbeat,
   recordFamilyPilotProgress,
   resumeFamilyPilotAssignment,
   saveFamilyPilotState,
   setActiveFamilyPilotStudent,
+  showFamilyPilotInstructionalSession,
   startFamilyPilotAssignment,
   updateFamilyPilotState,
   type FamilyPilotAssignmentRecordV1,
@@ -466,6 +470,31 @@ export class FinalFamilyPilotController {
   async checkpoint(studentRef: string, assignmentRef: string): Promise<FinalFamilyPilotControllerResult> {
     return this.#sessionOperation(studentRef, assignmentRef, (runtime, session) =>
       runtime.checkpoint(assignmentRef, session))
+  }
+
+  /** Visible Study heartbeat only; no input or behavior events are accepted. */
+  recordInstructionalHeartbeat(studentRef: string, assignmentRef: string): void {
+    this.#writeCore((state) => recordFamilyPilotInstructionalHeartbeat(
+      state, studentRef, assignmentRef, this.#at(),
+    ))
+  }
+
+  hideInstructionalSession(studentRef: string, assignmentRef: string): void {
+    this.#writeCore((state) => hideFamilyPilotInstructionalSession(
+      state, studentRef, assignmentRef, this.#at(),
+    ))
+  }
+
+  showInstructionalSession(studentRef: string, assignmentRef: string): void {
+    this.#writeCore((state) => showFamilyPilotInstructionalSession(
+      state, studentRef, assignmentRef, this.#at(),
+    ))
+  }
+
+  endInstructionalSession(studentRef: string, assignmentRef: string): void {
+    this.#writeCore((state) => endFamilyPilotInstructionalSession(
+      state, studentRef, assignmentRef, this.#at(),
+    ))
   }
 
   async completeSegment(studentRef: string, assignmentRef: string): Promise<FinalFamilyPilotControllerResult> {

@@ -155,7 +155,7 @@ describe('buildStudentDailyReport — no completed work', () => {
 })
 
 describe('buildStudentDailyReport — partial progress', () => {
-  it('averages requiredWorkCompletionPercent across in-scope items', () => {
+  it('does not turn unlike segment percentages into a fabricated completion average', () => {
     const report = buildStudentDailyReport(
       snapshot({
         workItems: [
@@ -165,7 +165,7 @@ describe('buildStudentDailyReport — partial progress', () => {
       }),
       '2026-08-10',
     )
-    expect(report.completionPercent).toBe(50)
+    expect(report.completionPercent).toBe(0)
   })
 })
 

@@ -32,8 +32,10 @@ function totalsFor(items: readonly FamilyPilotWorkItem[], reviews: readonly Fami
     timeOnTaskSeconds: timeValues.length > 0 ? timeValues.reduce((sum, value) => sum + value, 0) : null,
     openWorkCount: items.filter((item) => item.status === 'in-progress' || item.status === 'paused').length,
     pausedWorkCount: items.filter((item) => item.status === 'paused').length,
+    // Scheduled-work completion only. Do not average segment percentages from
+    // unlike lessons or present that average as course/subject completion.
     completionPercent:
-      items.length > 0 ? Math.round(items.reduce((sum, item) => sum + item.requiredWorkCompletionPercent, 0) / items.length) : null,
+      items.length > 0 ? Math.round(assignmentsCompleted / items.length * 100) : null,
     itemsNeedingParentAttention: [
       ...items.filter((item) => item.status === 'paused').map(attentionFromPausedItem),
       ...reviews.map(attentionFromReview),
