@@ -1,0 +1,170 @@
+{
+  "contractVersion": "physical-education-lesson-advisory-r1",
+  "status": "DRAFT_ADVISORY",
+  "subject": "physical-education",
+  "lessonId": "ma-g12-physical-education-u08-l07",
+  "gradeBand": "GRADES_9_12",
+  "primaryLessonType": "SAFETY_STOP_DECISION",
+  "secondaryLessonTypes": [
+    "FITNESS_SELF_MANAGEMENT"
+  ],
+  "conceptOrSkillIds": [
+    "pe.stop-rule.three-lanes.r1",
+    "pe.stop-rule.notice-pause-act-hold.r1",
+    "pe.stop-rule.return-authority.r1"
+  ],
+  "prerequisiteIds": [
+    "pe.safety.observable-condition-not-diagnosis.r1",
+    "pe.self-management.learner-controlled-rest.r1"
+  ],
+  "cueIds": [
+    "pe.cue.notice.r1",
+    "pe.cue.pause.r1",
+    "pe.cue.act.r1",
+    "pe.cue.hold.r1"
+  ],
+  "misconceptionOrErrorPatternIds": [
+    "pe.error.rest-equals-warning-stop.r1",
+    "pe.error.continue-to-test-concern.r1",
+    "pe.error.missing-adult-handoff.r1",
+    "pe.error.unauthorized-return-clearance.r1"
+  ],
+  "ageLanguagePolicyRef": "PHYSICAL_EDUCATION_LESSON_STANDARD_R1.md#14-age-and-language-policy:older-learners",
+  "activitySupply": {
+    "activityGoalRef": "lesson:ma-g12-physical-education-u08-l07#/goal",
+    "entryCheckRef": "lesson:ma-g12-physical-education-u08-l07#/readinessCheck",
+    "movementOrDecisionModelRefs": [
+      "lesson:ma-g12-physical-education-u08-l07#/decisionLanes",
+      "lesson:ma-g12-physical-education-u08-l07#/decisionModel"
+    ],
+    "commonErrorOrContrastRefs": [
+      "lesson:ma-g12-physical-education-u08-l07#/decisionLanes/0/commonError",
+      "lesson:ma-g12-physical-education-u08-l07#/decisionLanes/1/commonError",
+      "lesson:ma-g12-physical-education-u08-l07#/decisionLanes/2/commonError",
+      "lesson:ma-g12-physical-education-u08-l07#/retryPlan/alternateModel"
+    ],
+    "equipmentRef": "lesson:ma-g12-physical-education-u08-l07#/equipmentRequirements",
+    "spaceEnvironmentRef": "lesson:ma-g12-physical-education-u08-l07#/spaceSetup",
+    "oneActionSequenceRef": "lesson:ma-g12-physical-education-u08-l07#/activitySteps",
+    "practiceProgressionRef": "lesson:ma-g12-physical-education-u08-l07#/practiceProgression",
+    "independentActivityRef": "lesson:ma-g12-physical-education-u08-l07#/independentActivity"
+  },
+  "warmUpAndFinishPolicy": {
+    "applicability": "NOT_APPLICABLE_NON_MOVEMENT",
+    "warmUpRef": null,
+    "finishRef": null,
+    "rationale": "The assessed work is fictional decision analysis and a written, spoken, signed, drawn, sorted-card, or object-modeled protocol. No movement, induced symptom, injury, collision, equipment failure, or real stop event is required."
+  },
+  "adaptationPolicy": {
+    "adaptationRefs": {
+      "seated": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/seated",
+      "supported": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/supported",
+      "reducedRange": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/reducedRange",
+      "reducedPaceOrDemand": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/reducedPaceOrDemand",
+      "mobilityAidCompatible": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/mobilityAidCompatible",
+      "solo": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/solo",
+      "lowSpace": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/lowSpace",
+      "noEquipment": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/noEquipment",
+      "describedOrDecisionRoute": "lesson:ma-g12-physical-education-u08-l07#/adaptationRoutes/describedOrDecisionRoute"
+    },
+    "equalCreditCriteriaRef": "lesson:ma-g12-physical-education-u08-l07#/accessibleAdaptation",
+    "standardRouteNotRequired": true,
+    "reasonDisclosureRequired": false,
+    "adaptationMayBePenalized": false
+  },
+  "stopRestPolicy": {
+    "learnerControlledRestRef": "lesson:ma-g12-physical-education-u08-l07#/stoppingRules/0",
+    "stopAndTellRef": "lesson:ma-g12-physical-education-u08-l07#/stoppingRules/1",
+    "doNotResumeRef": "lesson:ma-g12-physical-education-u08-l07#/stoppingRules/2",
+    "adultEscalationRef": "lesson:ma-g12-physical-education-u08-l07#/guardianAuthority",
+    "safetyStopCountsAsFailure": false
+  },
+  "evidencePlan": {
+    "evidenceForms": [
+      "CUE_OR_DECISION_EXPLANATION",
+      "ERROR_ANALYSIS",
+      "DESCRIBED_GESTURED_DRAWN_OR_OBJECT_MODEL",
+      "FICTIONAL_PLAN_OR_PROTOCOL"
+    ],
+    "freshApplicationRef": "lesson:ma-g12-physical-education-u08-l07#/independentActivity/scenarios",
+    "successCriteriaRef": "lesson:ma-g12-physical-education-u08-l07#/completionCriteria",
+    "protectedAuthorityRef": "scoring:ma-g12-physical-education-u08-l07#/protectedDecisionAuthority",
+    "adaptationEquivalenceRef": "lesson:ma-g12-physical-education-u08-l07#/accessibleAdaptation",
+    "permittedSupportRefs": [
+      "lesson:ma-g12-physical-education-u08-l07#/accessibilitySupports",
+      "lesson:ma-g12-physical-education-u08-l07#/independentActivity/independenceBoundary"
+    ],
+    "supportsThatInvalidateIndependence": [
+      "another person or Tutor selects the lane for a fresh card",
+      "another person or Tutor supplies the controlling fact or next safe action",
+      "another person or Tutor claims physical observation, guardian permission, or return clearance"
+    ],
+    "physicalCompletionCertification": "NOT_CLAIMED"
+  },
+  "retryPlan": {
+    "triggerRefs": [
+      "lesson:ma-g12-physical-education-u08-l07#/retryPlan/trigger",
+      "scoring:ma-g12-physical-education-u08-l07#/adaptiveRoutes"
+    ],
+    "simplerSafeVersionRef": "lesson:ma-g12-physical-education-u08-l07#/retryPlan/simplerSetup",
+    "alternateModelOrCueRefs": [
+      "lesson:ma-g12-physical-education-u08-l07#/retryPlan/differentCue",
+      "lesson:ma-g12-physical-education-u08-l07#/retryPlan/alternateModel"
+    ],
+    "boundedPracticeRef": "lesson:ma-g12-physical-education-u08-l07#/retryPlan/boundedPractice",
+    "freshRetryRef": "lesson:ma-g12-physical-education-u08-l07#/retryPlan/freshRetry",
+    "exitCriterionRef": "lesson:ma-g12-physical-education-u08-l07#/retryPlan/exitCriterion"
+  },
+  "masteryPlan": {
+    "minimumEvidenceOccasions": 2,
+    "laterRetrievalOrTransferRef": "scoring:ma-g12-physical-education-u08-l07#/masteryRule",
+    "decisionAuthorityRef": "scoring:ma-g12-physical-education-u08-l07#/protectedDecisionAuthority",
+    "standardMovementRouteRequired": false,
+    "bodyOrNormEvidenceAllowed": false,
+    "subjectiveReflectionSufficient": false
+  },
+  "reflectionPolicy": {
+    "promptRef": "lesson:ma-g12-physical-education-u08-l07#/optionalReflection/prompt",
+    "allowedFocus": [
+      "CUE",
+      "DECISION",
+      "REST_OR_STOP",
+      "NEXT_STEP"
+    ],
+    "subjectiveJudgmentPolicy": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG",
+    "bodyComparisonAllowed": false,
+    "adaptationJustificationRequired": false
+  },
+  "adultAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "authorityRuleRef": "lesson:ma-g12-physical-education-u08-l07#/guardianAuthority/requiredAction",
+    "confirmationBoundaryRef": "lesson:ma-g12-physical-education-u08-l07#/guardianAuthority/confirmationBoundary",
+    "equalCreditAlternativeRef": "lesson:ma-g12-physical-education-u08-l07#/guardianAuthority/equalCreditAlternative",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "bodyDignityPolicy": {
+    "bodyScoringAllowed": false,
+    "dietingOrBodyValueLanguageAllowed": false,
+    "disabilityOrAdaptationPenaltyAllowed": false,
+    "exerciseAsPunishmentAllowed": false,
+    "privateHealthDisclosureRequired": false
+  },
+  "tutorPolicy": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "mayExplainApprovedContent": true,
+    "mayCueApprovedModel": true,
+    "mayAdaptInstructionalPresentation": true,
+    "mayCoachLearnerDecision": true,
+    "mayDiagnoseOrPrescribe": false,
+    "mayClaimUnapprovedObservation": false,
+    "mayCertifyPhysicalCompletion": false,
+    "mayOverrideGuardianOrSafetyAuthority": false,
+    "missingSupplyState": "BLOCKED_MISSING_CURRICULUM",
+    "authorityConflictState": "BLOCKED_AUTHORITY_CONFLICT"
+  },
+  "applicabilityNotes": [
+    "A safety-decision model replaces the baseline's mismatched locomotor cue shell.",
+    "Warm-up and cool-down are not applicable because all required evidence is non-movement fictional decision work.",
+    "The fictional route is the complete lesson; real activity and a real stop decision are not transfer requirements."
+  ]
+}

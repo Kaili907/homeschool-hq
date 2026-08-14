@@ -5,71 +5,93 @@
   "courseId": "ma-g12-physical-education",
   "grade": 12,
   "subject": "physical-education",
+  "standards": [
+    "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]",
+    "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]"
+  ],
+  "primaryLessonType": "SAFETY_STOP_DECISION",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner holds the stop rule as an adult habit rather than a class instruction practised as an unsupervised habit across a full training block, including one real stop decision, in whatever version their body and setting allow.",
-    "The learner names what degraded first and why, rather than reporting only whether it worked.",
-    "The learner compares this occasion with the earlier one and says what actually changed."
+    "For each of four fresh fictional scenarios, the learner selects REST/ADJUST, STOP AND TELL, or DO NOT RESUME and cites one supplied fact that controls the decision.",
+    "The learner states a next safe action without proposing symptom testing, unsafe continuation, diagnosis, treatment, or self-clearance.",
+    "The learner names the trusted-adult handoff and return authority when the supplied scenario requires it.",
+    "The five-line protocol accurately distinguishes learner-controlled rest from warning-sign stops and no-resume conditions.",
+    "Any approved response or access route earns equal credit when it supplies the same decision evidence."
   ],
-  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person.",
-  "masteryRule": "Do not mark mastery from one session. Use safe participation, skill cues, tactical decisions, self-management, personal progress against the learner’s own stated task, and self-assessment — without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or setting.",
-  "remediation": "Return to the simplest version of the stop rule as an adult habit rather than a class instruction — slower, smaller range, closer target, or seated — then rebuild.",
+  "rubricDimensions": [
+    "Decision accuracy: uses the supplied condition to select the applicable safety lane.",
+    "Safety action: states the immediate safe action and never continues to test a warning sign.",
+    "Authority: identifies trusted-adult notification and authorized return control when required.",
+    "Transfer protocol: applies NOTICE–PAUSE–ACT–HOLD to a fresh fictional plan.",
+    "Evidence completeness: finishes four cards and the five-line protocol in any approved equal-credit mode."
+  ],
+  "scoringGuidance": "Score decision accuracy, use of supplied facts, safe next action, authority boundary, protocol quality, revision, and completion. Do not score body size, weight, appearance, calories, body composition, speed, fitness norms, athletic talent, symptom tolerance, use of a standard body position, or comparison with another person. Do not reduce credit for rest, stopping, adaptation, assistive technology, guardian restriction, or a described route.",
+  "protectedDecisionAuthority": [
+    "A chosen comfort break with no supplied warning sign or unsafe condition supports REST/ADJUST.",
+    "Pain, dizziness, unusual breathing difficulty, head impact, injury concern, damaged equipment, or unsafe environment supports STOP AND TELL.",
+    "Head impact, injury concern, or a persistent or worsening symptom also supports DO NOT RESUME until the authorized guardian or qualified professional says it is safe.",
+    "A learner, self-report, browser, or Tutor never supplies diagnosis, physical-completion certification, guardian permission, or return clearance."
+  ],
+  "sufficientEvidence": "Sufficient evidence is four independently completed fresh scenario decisions plus the five-line protocol. A human reviewer may ask the learner to clarify which supplied fact controlled a decision. Reflection is optional and cannot establish mastery by itself.",
+  "masteryRule": "Do not mark mastery from this lesson alone. Require accurate independent evidence on at least two occasions separated by time, setting, or meaningful scenario variation. One occasion may be this four-card fictional set; the later occasion must use fresh supplied situations or an authorized real-world planning review. Physical occurrence, learner self-report, Tutor confidence, attendance, standard-route use, speed, body data, and subjective reflection are not mastery evidence.",
+  "remediation": "Name the exact observable gap without judging the learner. Return to three visible lane labels and a two-sentence fictional card. Underline the controlling fact. Re-model with the two questions 'Warning sign or unsafe event?' and 'Impact, injury, or not settling?' Contrast a comfortable chosen break with a warning-sign stop. Practice one card, offer rest or another response mode, then use the fresh loose-equipment retry card. Return to independent work after the learner stops use, cites the unsafe equipment, and hands the condition to a trusted adult.",
   "adaptiveRoutes": [
     {
-      "signal": "prerequisite gap",
-      "action": "Return to the simplest version of the stop rule as an adult habit rather than a class instruction — slower, smaller range, closer target, or seated — then rebuild."
+      "signal": "rest and stop are treated as the same lane",
+      "action": "Contrast a comfortable learner choosing water with a dizzy learner considering one more round. Ask which single supplied fact changes the lane."
     },
     {
-      "signal": "procedure without understanding",
-      "action": "Ask the learner to explain the cue or tactic behind the stop rule as an adult habit rather than a class instruction before adding intensity or complexity."
+      "signal": "adult handoff is missing",
+      "action": "Use the cue 'Stop first; tell next,' then retry with one fresh unsafe-environment card."
     },
     {
-      "signal": "correct but low confidence",
-      "action": "Confirm the specific cue that worked, offer one varied application of the stop rule as an adult habit rather than a class instruction, and avoid unnecessary remediation."
+      "signal": "continued activity is proposed as a test",
+      "action": "State that warning signs are never tested by continuing. Switch to the decision-only route and retry with a new fictional card."
     },
     {
-      "signal": "repeated error pattern",
-      "action": "Name the observable movement pattern neutrally, contrast it with the critical features, and schedule varied practice."
+      "signal": "return clearance is assigned to the learner, browser, or Tutor",
+      "action": "Re-model HOLD: after head impact, injury concern, or a persistent or worsening symptom, only the authorized guardian or qualified professional controls return."
     },
     {
-      "signal": "pain, dizziness, breathlessness, or head impact",
-      "action": "Stop immediately, tell an adult, and do not resume in this session. This is never recorded as a failed attempt."
+      "signal": "pain, dizziness, unusual breathing difficulty, head impact, injury concern, or a real unsafe condition occurs",
+      "action": "Stop the lesson immediately and tell a trusted adult. Do not resume to finish evidence. Use a described retry later only when appropriate; the safety stop is never failure."
     },
     {
-      "signal": "learner declines a task",
-      "action": "Offer the adapted, seated, solo, or described version of the stop rule as an adult habit rather than a class instruction; the alternate route is full credit and is not logged as a refusal."
+      "signal": "learner chooses rest, support, reduced demand, or another approved route",
+      "action": "Honor the choice without asking for a reason. Score the same lane, fact, next-action, and authority evidence for equal credit."
     },
     {
-      "signal": "transfer condition is too much today",
-      "action": "Drop back to the first-pass version of the stop rule as an adult habit rather than a class instruction for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation."
+      "signal": "fresh retry is needed",
+      "action": "Use the loose-equipment card in the learner package, not a repeated independent card. Exit retry when the learner identifies the unsafe equipment, stops use, and tells a trusted adult."
     },
     {
-      "signal": "mastery evidence",
-      "action": "Require accurate independent performance or description plus explanation on a later occasion or in a different setting before marking the stop rule as an adult habit rather than a class instruction mastered."
+      "signal": "mastery evidence is being considered",
+      "action": "Require a later fresh occasion or meaningful variation. Do not infer mastery from physical occurrence, reflection alone, standard-route use, or Tutor confidence."
     }
   ],
-  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose body data, fitness scores, photographs, video, recordings, or comparisons with other learners. For safety-critical units, record only the guardian confirmation that was required.",
+  "guardianOrParentVisibility": "Share only the lesson target, selected evidence mode, academic completion state, guardian-review status for any later household plan, and next instructional step. Do not expose body data, fitness scores, symptoms, diagnoses, disability reasons, photographs, video, recordings, locations, or peer comparisons.",
   "guardianSafetyReview": {
-    "equipment": "None.",
-    "environment": "Indoor study space.",
-    "movement_hazards": "None expected.",
-    "supervision_note": "Guardian reviews the protocol and confirms the household escalation path to a clinician. The course does not diagnose.",
-    "guardian_confirmation_required": true
+    "equipment": "No equipment is required for the fictional lesson. A guardian approves any equipment before later real-world use.",
+    "environment": "The lesson uses a comfortable desk or communication space. A guardian reviews any later personal activity location or household escalation plan.",
+    "movement_hazards": "No movement or induced event is required. If a real warning sign or unsafe condition occurs, the learner stops and tells a trusted adult.",
+    "supervision_note": "Guardian review is required before a personal activity, household contact path, location, equipment, partner, or progression is used later. The guardian confirms only permission and the household escalation path, not mastery, diagnosis, effort, body status, or physical completion.",
+    "guardian_confirmation_required": true,
+    "equal_credit_when_unavailable": "The supplied fictional decision set and generic trusted-adult handoff are the complete equal-credit lesson when guardian review or real activity is unavailable."
   },
   "safetyAndPrivacyNotes": [
-    "Use respectful, non-shaming language about bodies, ability, and effort.",
-    "Allow a pause, rest, break, or alternate response mode without treating it as failure.",
-    "Check space, footwear, surface, weather, and equipment before movement.",
-    "Stop for pain, dizziness, breathing difficulty, head impact, or unsafe conditions and tell an adult.",
-    "Score skill, strategy, self-management, consistency, and reflection — never body size, weight, weight change, body composition, appearance, or comparison with another person.",
-    "Do not require weight, BMI, body-fat, body measurement, fitness-test norms, percentile ranks, calorie counts, or diet goals at any point.",
-    "Do not require a photograph, video, or voice recording of the learner as evidence; described, written, and demonstrated-to-one-adult evidence is the intended route.",
-    "Do not require performance in front of an audience, a group, or spectators.",
-    "No body measurement, wearable export, sleep log, or health data is requested or recorded. The protocol is written in the learner’s own descriptive language."
+    "Use respectful, non-shaming language about bodies, ability, rest, adaptation, and effort.",
+    "Allow a pause, rest, break, support, reduced demand, or alternate response mode without treating it as failure.",
+    "Use supplied fictional scenarios; never induce a symptom, injury, impact, collision, equipment failure, or real stop event.",
+    "Stop for pain, dizziness, unusual breathing difficulty, head impact, injury concern, damaged equipment, or unsafe conditions and tell a trusted adult.",
+    "After head impact, injury concern, or a persistent or worsening symptom, do not resume until the authorized guardian or qualified professional says it is safe.",
+    "Score decisions, safety actions, authority, protocol quality, revision, and completion—never body size, weight, appearance, body composition, calories, fitness norms, speed, athletic talent, or comparison.",
+    "Do not require diagnosis, symptom history, disability reason, medical disclosure, photograph, video, voice recording, wearable export, location proof, or exercise log.",
+    "A Tutor may explain and cue approved curriculum but cannot observe, diagnose, prescribe, certify completion, approve return, or override learner or guardian safety authority."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
-    "sourceLessonId": "ma-g12-physical-education-u08-l07"
+    "sourceLessonId": "ma-g12-physical-education-u08-l07",
+    "directorSampleRevision": "physical-education-director-sample-r1"
   },
   "productionReadiness": {
     "status": "READY",

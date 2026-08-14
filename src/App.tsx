@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
+import { isPhysicalEducationDirectorPreviewPath } from './study/family-pilot/physical-education-director-preview/route'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
@@ -13,6 +14,12 @@ const FinalFamilyPilotApp = lazy(() =>
   })),
 )
 
+const PhysicalEducationDirectorPreview = import.meta.env.DEV
+  ? lazy(() => import('./study/family-pilot/physical-education-director-preview/PhysicalEducationDirectorPreview').then((module) => ({
+      default: module.PhysicalEducationDirectorPreview,
+    })))
+  : null
+
 function familyPilotSelectedAtBoot(): boolean {
   return isFamilyPilotEnabledFromHost() && isFamilyPilotPath(window.location.pathname)
 }
@@ -20,6 +27,14 @@ function familyPilotSelectedAtBoot(): boolean {
 export default function App() {
   const [familyPilotSelected, setFamilyPilotSelected] = useState(familyPilotSelectedAtBoot)
   const [returnToLegacyHome, setReturnToLegacyHome] = useState(false)
+
+  if (PhysicalEducationDirectorPreview && isPhysicalEducationDirectorPreviewPath(window.location.pathname)) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Physical Education Director preview.</main>}>
+        <PhysicalEducationDirectorPreview />
+      </Suspense>
+    )
+  }
 
   if (familyPilotSelected) {
     return (

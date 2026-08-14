@@ -1,0 +1,249 @@
+:root {
+  --pe-ink: #16231d;
+  --pe-muted: #5d6e65;
+  --pe-cream: #f7f4eb;
+  --pe-paper: #fffdf8;
+  --pe-line: #dbe2db;
+  --pe-green: #176b4d;
+  --pe-green-soft: #e6f3ed;
+  --pe-blue: #245c83;
+  --pe-blue-soft: #e9f2f8;
+  --pe-amber: #9a5b14;
+  --pe-amber-soft: #fff1d8;
+  --pe-red: #9c3e33;
+  --pe-red-soft: #fbe9e5;
+}
+
+html { scroll-behavior: smooth; }
+
+.pe-review {
+  min-height: 100vh;
+  color: var(--pe-ink);
+  background:
+    radial-gradient(circle at 90% -10%, rgb(42 124 88 / 12%), transparent 31rem),
+    var(--pe-cream);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+.pe-review *, .pe-review *::before, .pe-review *::after { box-sizing: border-box; }
+.pe-review h1, .pe-review h2, .pe-review h3, .pe-review p { margin-top: 0; }
+.pe-review h1, .pe-review h2, .pe-review h3 { font-family: ui-rounded, "Avenir Next", Inter, system-ui, sans-serif; line-height: 1.15; }
+.pe-review a { color: inherit; }
+
+.pe-review__topbar {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px clamp(18px, 4vw, 56px);
+  border-bottom: 1px solid rgb(22 35 29 / 10%);
+  background: rgb(255 253 248 / 92%);
+  backdrop-filter: blur(18px);
+}
+
+.pe-review__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.pe-review__brand > span { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 13px; color: white; background: var(--pe-green); font-family: ui-rounded, "Avenir Next", sans-serif; font-weight: 800; letter-spacing: -.04em; }
+.pe-review__brand div, .pe-review__dev-badge { display: flex; flex-direction: column; }
+.pe-review__brand strong { font: 700 15px/1.2 ui-rounded, "Avenir Next", sans-serif; }
+.pe-review__brand small, .pe-review__dev-badge small { color: var(--pe-muted); font-size: 12px; }
+.pe-review__dev-badge { align-items: flex-end; }
+.pe-review__dev-badge span { color: var(--pe-green); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
+.pe-review__shell { display: grid; grid-template-columns: 260px minmax(0, 880px); gap: clamp(30px, 5vw, 74px); width: min(1280px, calc(100% - 48px)); margin: 0 auto; align-items: start; }
+.pe-review__rail { position: sticky; top: 100px; margin: 42px 0; }
+.pe-review__identity { display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--pe-line); border-radius: 18px; background: rgb(255 253 248 / 72%); }
+.pe-review__identity span, .pe-review__section-heading > span, .pe-review__worked-model > span, .pe-review__retry > span, .pe-review__tutor span { color: var(--pe-green); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.pe-review__identity strong { margin: 6px 0 2px; font-size: 13px; overflow-wrap: anywhere; }
+.pe-review__identity small { color: var(--pe-muted); }
+.pe-review__rail nav { display: grid; margin: 18px 0; }
+.pe-review__rail nav a { display: flex; align-items: center; gap: 11px; padding: 9px 6px; color: var(--pe-muted); font-size: 13px; font-weight: 600; text-decoration: none; }
+.pe-review__rail nav a:hover, .pe-review__rail nav a:focus-visible { color: var(--pe-green); }
+.pe-review__rail nav a span { display: grid; width: 25px; height: 25px; place-items: center; border: 1px solid var(--pe-line); border-radius: 50%; background: var(--pe-paper); font-size: 11px; }
+.pe-review__rail-note { padding: 18px; border-radius: 18px; color: white; background: #183b2e; }
+.pe-review__rail-note strong, .pe-review__rail-note span { display: block; }
+.pe-review__rail-note strong { color: #a9d7c3; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.pe-review__rail-note span { margin: 6px 0 9px; font: 700 13px/1.35 ui-rounded, "Avenir Next", sans-serif; }
+.pe-review__rail-note p { margin: 0; color: #d9e8e1; font-size: 12px; }
+
+.pe-review__lesson { min-width: 0; padding-bottom: 100px; }
+.pe-review__hero { padding: 88px 0 66px; }
+.pe-review__hero-kicker { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.pe-review__hero-kicker span { padding: 6px 10px; border: 1px solid #c8dbd0; border-radius: 999px; color: var(--pe-green); background: var(--pe-green-soft); font-size: 12px; font-weight: 700; }
+.pe-review__hero h1 { max-width: 780px; margin-bottom: 18px; font-size: clamp(42px, 6vw, 72px); letter-spacing: -.055em; }
+.pe-review__essential { max-width: 700px; margin-bottom: 36px; color: var(--pe-muted); font-size: clamp(18px, 2.3vw, 24px); }
+.pe-review__goal-card { position: relative; padding: 28px 30px 28px 34px; overflow: hidden; border: 1px solid #cce0d5; border-radius: 22px; background: var(--pe-green-soft); }
+.pe-review__goal-card::before { position: absolute; inset: 0 auto 0 0; width: 5px; content: ''; background: var(--pe-green); }
+.pe-review__goal-card span { color: var(--pe-green); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.pe-review__goal-card p { max-width: 740px; margin: 8px 0 0; font: 700 clamp(17px, 2vw, 21px)/1.45 ui-rounded, "Avenir Next", sans-serif; }
+.pe-review__standards { margin-top: 16px; padding: 14px 18px; border: 1px solid var(--pe-line); border-radius: 14px; background: rgb(255 253 248 / 70%); font-size: 13px; }
+.pe-review__standards summary, .pe-review__guided-list summary { cursor: pointer; font-weight: 700; }
+.pe-review__standards p { margin: 14px 0 6px; }
+.pe-review__standards ul { margin-bottom: 2px; padding-left: 20px; }
+
+.pe-review__section { scroll-margin-top: 94px; padding: 72px 0; border-top: 1px solid var(--pe-line); }
+.pe-review__section-heading { max-width: 720px; margin-bottom: 30px; }
+.pe-review__section-heading h2 { margin: 8px 0 10px; font-size: clamp(30px, 4vw, 46px); letter-spacing: -.045em; }
+.pe-review__section-heading p, .pe-review__lead { color: var(--pe-muted); font-size: 17px; }
+
+.pe-review__readiness { display: grid; gap: 10px; }
+.pe-review__readiness article { display: flex; gap: 14px; padding: 16px 18px; border: 1px solid var(--pe-line); border-radius: 14px; background: var(--pe-paper); }
+.pe-review__readiness article span { display: grid; flex: 0 0 28px; height: 28px; place-items: center; border-radius: 9px; color: white; background: var(--pe-green); font-weight: 700; }
+.pe-review__readiness article p { margin: 2px 0 0; }
+.pe-review__two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.pe-review__panel { padding: 24px; border: 1px solid var(--pe-line); border-radius: 18px; background: var(--pe-paper); }
+.pe-review__panel h3 { margin-bottom: 12px; }
+.pe-review__panel p:last-child, .pe-review__panel ul:last-child { margin-bottom: 0; }
+.pe-review__panel ul { padding-left: 19px; }
+.pe-review__panel li + li { margin-top: 8px; }
+.pe-review__na { margin-top: 16px; padding: 18px 20px; border: 1px dashed #caaa78; border-radius: 15px; background: #fff9ea; }
+.pe-review__na strong { color: var(--pe-amber); }
+.pe-review__na p { margin: 4px 0 0; color: #675642; }
+
+.pe-review__cue-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 22px; }
+.pe-review__cue-strip div { min-height: 128px; padding: 18px; border-radius: 16px; color: white; background: #1c4938; }
+.pe-review__cue-strip div:nth-child(2) { background: #245c56; }
+.pe-review__cue-strip div:nth-child(3) { background: #285f79; }
+.pe-review__cue-strip div:nth-child(4) { background: #714a4a; }
+.pe-review__cue-strip strong, .pe-review__cue-strip span { display: block; }
+.pe-review__cue-strip strong { margin-bottom: 8px; font: 800 15px/1 ui-rounded, "Avenir Next", sans-serif; letter-spacing: .08em; }
+.pe-review__cue-strip span { color: rgb(255 255 255 / 82%); font-size: 12px; }
+.pe-review__lane-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.pe-review__lane { padding: 22px; border: 1px solid var(--pe-line); border-radius: 18px; background: var(--pe-paper); }
+.pe-review__lane-title { display: flex; align-items: center; gap: 10px; }
+.pe-review__lane-title > span { width: 12px; height: 12px; border-radius: 50%; background: var(--pe-blue); }
+.pe-review__lane--stop-tell .pe-review__lane-title > span { background: var(--pe-amber); }
+.pe-review__lane--do-not-resume .pe-review__lane-title > span { background: var(--pe-red); }
+.pe-review__lane-title h3 { margin: 0; font-size: 16px; }
+.pe-review__lane dl { margin-bottom: 0; }
+.pe-review__lane dl div { padding-top: 13px; border-top: 1px solid var(--pe-line); margin-top: 13px; }
+.pe-review__lane dt, .pe-review__progression dt { color: var(--pe-muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.pe-review__lane dd, .pe-review__progression dd { margin: 4px 0 0; font-size: 13px; }
+.pe-review__worked-model { margin-top: 18px; padding: clamp(24px, 4vw, 40px); border-radius: 24px; color: white; background: #172f26; }
+.pe-review__worked-model h3 { margin: 8px 0 10px; font-size: 25px; }
+.pe-review__scenario { font-size: 16px; font-weight: 600; }
+.pe-review__worked-model > .pe-review__scenario { color: #d5e5dd; }
+.pe-review__worked-model ol { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0; list-style: none; counter-reset: model; }
+.pe-review__worked-model li { padding: 18px; border: 1px solid rgb(255 255 255 / 12%); border-radius: 14px; background: rgb(255 255 255 / 5%); counter-increment: model; }
+.pe-review__worked-model li strong::before { content: counter(model) '. '; color: #91d3b7; }
+.pe-review__worked-model li p { margin: 6px 0 0; color: #d5e5dd; font-size: 13px; }
+.pe-review__model-check { padding: 18px; border-radius: 14px; color: var(--pe-ink); background: #dcefe6; }
+.pe-review__model-check p { margin: 5px 0; }
+.pe-review__model-check small { color: var(--pe-muted); }
+
+.pe-review__guided-list { display: grid; gap: 14px; }
+.pe-review__guided-list > article { padding: 24px; border: 1px solid var(--pe-line); border-radius: 18px; background: var(--pe-paper); }
+.pe-review__guided-list > article > div { display: flex; align-items: center; gap: 12px; }
+.pe-review__guided-list > article > div span { color: var(--pe-green); font-weight: 800; }
+.pe-review__guided-list h3 { margin: 0; font-size: 18px; }
+.pe-review__guided-list .pe-review__scenario { margin: 16px 0; }
+.pe-review__guided-list details { padding: 14px 16px; border-radius: 12px; background: var(--pe-blue-soft); }
+.pe-review__guided-list details p { margin: 10px 0 0; font-size: 13px; }
+
+.pe-review__progression { position: relative; display: grid; gap: 14px; }
+.pe-review__progression::before { position: absolute; top: 32px; bottom: 32px; left: 22px; width: 2px; content: ''; background: #b9d5c8; }
+.pe-review__progression > article { position: relative; display: grid; grid-template-columns: 46px 1fr; gap: 18px; }
+.pe-review__progression > article > span { z-index: 1; display: grid; width: 46px; height: 46px; place-items: center; border: 5px solid var(--pe-cream); border-radius: 50%; color: white; background: var(--pe-green); font-weight: 800; }
+.pe-review__progression > article > div { padding: 22px; border: 1px solid var(--pe-line); border-radius: 18px; background: var(--pe-paper); }
+.pe-review__progression h3 { margin-bottom: 6px; }
+.pe-review__progression dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 0; }
+
+.pe-review__directions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 28px; padding: 22px 22px 22px 48px; border-radius: 18px; background: var(--pe-green-soft); }
+.pe-review__directions li { padding: 3px; }
+.pe-review__scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.pe-review__scenario-grid article { display: flex; min-height: 225px; flex-direction: column; padding: 24px; border: 1px solid var(--pe-line); border-radius: 18px; background: var(--pe-paper); }
+.pe-review__scenario-grid article > span { color: var(--pe-green); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.pe-review__scenario-grid article > p { margin: 10px 0 22px; font-weight: 600; }
+.pe-review__scenario-grid article > div { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: auto; }
+.pe-review__scenario-grid small { padding: 8px; border: 1px dashed #b7c7be; border-radius: 8px; color: var(--pe-muted); background: #fafaf6; }
+.pe-review__protocol { margin-top: 16px; padding: 22px; border-radius: 18px; color: white; background: var(--pe-green); }
+.pe-review__protocol p { margin: 6px 0 0; }
+.pe-review__boundary { margin: 16px 0 0; padding: 16px 18px; border-left: 4px solid var(--pe-blue); color: #334a5c; background: var(--pe-blue-soft); }
+
+.pe-review__adaptation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.pe-review__adaptation-grid article { padding: 18px; border: 1px solid var(--pe-line); border-radius: 15px; background: var(--pe-paper); }
+.pe-review__adaptation-grid h3 { margin-bottom: 8px; font-size: 14px; }
+.pe-review__adaptation-grid p { margin: 0; color: var(--pe-muted); font-size: 13px; }
+
+.pe-review__safety-stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.pe-review__safety-stack article { padding: 22px; border-radius: 18px; }
+.pe-review__safety-stack article[data-rule='0'] { border: 1px solid #cddfe8; background: var(--pe-blue-soft); }
+.pe-review__safety-stack article[data-rule='1'] { border: 1px solid #ead09d; background: var(--pe-amber-soft); }
+.pe-review__safety-stack article[data-rule='2'] { border: 1px solid #e5bdb6; background: var(--pe-red-soft); }
+.pe-review__safety-stack strong { font: 800 14px/1.2 ui-rounded, "Avenir Next", sans-serif; }
+.pe-review__safety-stack p { margin: 8px 0 0; font-size: 13px; }
+.pe-review__guardian { margin-top: 16px; padding: 28px; border-radius: 20px; color: white; background: #243d56; }
+.pe-review__guardian > span { display: inline-block; padding: 5px 8px; border-radius: 6px; color: #cce9fa; background: rgb(255 255 255 / 10%); font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+.pe-review__guardian h3 { margin: 12px 0; font-size: 22px; }
+.pe-review__guardian p { color: #dae5ef; }
+.pe-review__guardian p:last-child { margin-bottom: 0; }
+
+.pe-review__retry { margin-top: 18px; padding: 30px; border: 1px solid #c9ded4; border-radius: 22px; background: var(--pe-green-soft); }
+.pe-review__retry h3 { margin: 8px 0 18px; font-size: 25px; }
+.pe-review__retry ol { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; padding-left: 24px; }
+.pe-review__retry li { padding-left: 4px; }
+.pe-review__retry li::marker { color: var(--pe-green); font-weight: 800; }
+.pe-review__retry li p { margin: 4px 0 0; color: var(--pe-muted); font-size: 13px; }
+.pe-review__tutor { display: flex; gap: 18px; margin-top: 18px; padding: 28px; border-radius: 22px; color: white; background: #172f26; }
+.pe-review__tutor > div:first-child { display: grid; flex: 0 0 46px; height: 46px; place-items: center; border: 1px solid #6da78e; border-radius: 14px; color: #b7e1cf; font: 800 22px/1 ui-rounded, "Avenir Next", sans-serif; }
+.pe-review__tutor h3 { margin: 7px 0 12px; }
+.pe-review__tutor p { margin: 6px 0; color: #d5e5dd; font-size: 13px; }
+
+.pe-review a:focus-visible, .pe-review summary:focus-visible { outline: 3px solid #efb45e; outline-offset: 3px; }
+
+@media (max-width: 980px) {
+  .pe-review__shell { display: block; width: min(880px, calc(100% - 36px)); }
+  .pe-review__rail { position: sticky; z-index: 10; top: 76px; margin: 0 -18px; padding: 10px 18px; overflow-x: auto; border-bottom: 1px solid var(--pe-line); background: rgb(247 244 235 / 95%); backdrop-filter: blur(12px); }
+  .pe-review__identity, .pe-review__rail-note { display: none; }
+  .pe-review__rail nav { display: flex; width: max-content; margin: 0; }
+  .pe-review__rail nav a { padding: 7px 12px 7px 4px; white-space: nowrap; }
+  .pe-review__hero { padding-top: 62px; }
+}
+
+@media (max-width: 720px) {
+  .pe-review__topbar { min-height: 68px; padding-inline: 16px; }
+  .pe-review__brand small, .pe-review__dev-badge small { display: none; }
+  .pe-review__brand > span { width: 38px; height: 38px; }
+  .pe-review__dev-badge span { font-size: 10px; }
+  .pe-review__rail { top: 68px; }
+  .pe-review__hero h1 { font-size: clamp(38px, 12vw, 56px); }
+  .pe-review__section { padding: 58px 0; }
+  .pe-review__two-column, .pe-review__scenario-grid, .pe-review__worked-model ol, .pe-review__directions, .pe-review__retry ol { grid-template-columns: 1fr; }
+  .pe-review__cue-strip, .pe-review__lane-grid, .pe-review__safety-stack { grid-template-columns: 1fr 1fr; }
+  .pe-review__cue-strip div { min-height: auto; }
+  .pe-review__lane:last-child, .pe-review__safety-stack article:last-child { grid-column: 1 / -1; }
+  .pe-review__adaptation-grid { grid-template-columns: 1fr 1fr; }
+  .pe-review__progression dl { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .pe-review__shell { width: calc(100% - 28px); }
+  .pe-review__topbar { gap: 8px; }
+  .pe-review__brand { min-width: 0; gap: 8px; }
+  .pe-review__brand strong { font-size: 13px; white-space: nowrap; }
+  .pe-review__brand > span { flex: 0 0 36px; width: 36px; height: 36px; }
+  .pe-review__dev-badge { flex: 0 0 auto; }
+  .pe-review__dev-badge span { font-size: 9px; white-space: nowrap; }
+  .pe-review__rail { margin-inline: -14px; padding-inline: 14px; }
+  .pe-review__hero { padding: 46px 0 54px; }
+  .pe-review__hero-kicker span { font-size: 10px; }
+  .pe-review__goal-card, .pe-review__panel, .pe-review__guided-list > article, .pe-review__scenario-grid article { padding: 19px; }
+  .pe-review__cue-strip, .pe-review__lane-grid, .pe-review__safety-stack, .pe-review__adaptation-grid { grid-template-columns: 1fr; }
+  .pe-review__lane:last-child, .pe-review__safety-stack article:last-child { grid-column: auto; }
+  .pe-review__worked-model, .pe-review__retry, .pe-review__tutor, .pe-review__guardian { padding: 22px; }
+  .pe-review__tutor { display: block; }
+  .pe-review__tutor > div:first-child { margin-bottom: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pe-review *, .pe-review *::before, .pe-review *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+
+@media (prefers-contrast: more) {
+  .pe-review { --pe-line: #6f7c75; }
+  .pe-review__topbar { background: var(--pe-paper); }
+}

@@ -7,98 +7,315 @@
   "subject": "physical-education",
   "unitNumber": 8,
   "unitTitle": "Safety, Self-Care, and Knowing When to Stop",
-  "title": "Investigation or close reading: the stop rule as an adult habit rather than a class instruction under transfer",
-  "focus": "the stop rule as an adult habit rather than a class instruction",
-  "essentialQuestion": "What does taking care of myself look like when no one is telling me to?",
-  "estimatedMinutes": "35–60",
+  "title": "The Stop Rule: Act Without Waiting for a Coach",
+  "sourceTitle": "Investigation or close reading: the stop rule as an adult habit rather than a class instruction under transfer",
+  "focus": "using rest, stop-and-tell, and do-not-resume rules without waiting for a coach",
+  "essentialQuestion": "How can I choose the safe response when no one is giving me directions?",
+  "estimatedMinutes": "40–50",
+  "standards": [
+    "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]",
+    "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]"
+  ],
+  "primaryLessonType": "SAFETY_STOP_DECISION",
+  "secondaryLessonTypes": [
+    "FITNESS_SELF_MANAGEMENT"
+  ],
+  "goal": "I can sort an activity situation into REST/ADJUST, STOP AND TELL, or DO NOT RESUME; name the next safe action; and use the same rule in a fresh fictional plan without waiting for a coach.",
+  "successOverview": "Success means the learner notices the supplied condition, chooses the correct safety lane, names the next safe action and adult handoff when required, and never proposes continuing to test a symptom. A written, spoken, signed, drawn, sorted-card, or object-modeled response earns equal credit.",
+  "readinessCheck": [
+    "Choose a response mode: write, speak to a trusted human, sign, draw, sort three labeled cards, or point to objects that stand for the three safety lanes.",
+    "This lesson asks you to reason about invented situations. Do not create a symptom, injury, collision, or unsafe condition to test the rule.",
+    "Guardian review is required only before you later use a personal household activity or escalation plan. The complete fictional lesson can be finished now for equal credit."
+  ],
   "materials": [
-    "No specialized equipment is required.",
-    "Optional: two soft household objects may mark a path. Floor tape, cones, a track, and a gym are not required.",
-    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    "Required: the three decision-lane descriptions and supplied fictional scenarios in this lesson.",
+    "Optional: paper and pencil, or three scrap-paper labels reading REST/ADJUST, STOP AND TELL, and DO NOT RESUME.",
+    "No exercise equipment, gym, wearable, timer, camera, recording, partner, or purchase is required."
   ],
   "movementCues": [
-    "Begin in a ready position with a balanced base, soft knees, eyes up, and the travel path clear.",
-    "Move with quiet, controlled steps or wheel pushes and keep enough room to stop without crossing the boundary.",
-    "Change direction by slowing first, lowering the center of control, and pushing smoothly into the new path.",
-    "Finish under control inside the space; smooth starts, stops, and spacing matter more than speed.",
-    "Self-manage the task by rehearsing at low intensity, changing one variable at a time, and choosing control and repeatable technique over a maximal result."
+    "NOTICE — name only the condition the scenario supplies; do not diagnose it.",
+    "PAUSE — choose the safer lane before deciding whether activity may continue.",
+    "ACT — rest or adjust when comfortable, or stop and tell a trusted adult when a warning sign or unsafe event appears.",
+    "HOLD — after a head impact, injury concern, or a persistent or worsening symptom, do not resume until the authorized guardian or qualified professional says it is safe."
   ],
-  "ageAppropriateTechnique": "Self-manage the task by rehearsing at low intensity, changing one variable at a time, and choosing control and repeatable technique over a maximal result.",
-  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "ageAppropriateTechnique": "Use NOTICE–PAUSE–ACT–HOLD as a decision routine. The target is a safe choice and clear handoff, not locomotor form, exercise volume, speed, fitness, or symptom tolerance.",
+  "decisionLanes": [
+    {
+      "id": "rest-adjust",
+      "label": "REST / ADJUST",
+      "startingPosition": "The environment is safe, and the learner has no warning sign or injury concern. The learner simply wants a break or lower demand.",
+      "action": "Pause, rest, reduce pace or range, use support, or switch to an approved alternative.",
+      "keyCue": "Comfortable and safe? Adjust is your choice.",
+      "commonError": "Treating a chosen break as failure or assuming a planned round must be finished.",
+      "correction": "Rest is part of self-management. Resume only when comfortable and the environment is still safe; credit does not change."
+    },
+    {
+      "id": "stop-tell",
+      "label": "STOP AND TELL",
+      "startingPosition": "Pain, dizziness, unusual breathing difficulty, a head impact, an injury concern, unsafe equipment, or an unsafe environment appears.",
+      "action": "Stop immediately and tell a trusted adult. Move away from an environmental hazard only when that can be done safely.",
+      "keyCue": "Warning sign or unsafe event? Stop first; tell next.",
+      "commonError": "Continuing for one more round to see whether the concern goes away.",
+      "correction": "Do not test a warning sign by continuing. Stop and hand the decision to the authorized adult."
+    },
+    {
+      "id": "do-not-resume",
+      "label": "DO NOT RESUME",
+      "startingPosition": "There was a head impact, an injury concern, or a symptom that persists or worsens after stopping.",
+      "action": "Remain out of the activity and follow the authorized adult or qualified professional's direction.",
+      "keyCue": "Impact, injury, or not settling? Hold until cleared.",
+      "commonError": "Using a short rest or Tutor reassurance as permission to return.",
+      "correction": "A learner, browser, or Tutor cannot give clearance. Wait for the authorized guardian or qualified professional."
+    }
+  ],
+  "decisionModel": {
+    "title": "Model: make the decision before the next action",
+    "scenario": "Invented situation: Jordan is doing a comfortable indoor activity. Jordan feels fine, but a pet walks into the activity area and a water bottle rolls across the path.",
+    "startingPosition": "Jordan stops in place before reaching the changed area and does not step, run, or wheel around the obstacle.",
+    "notice": "The environment changed: a pet and bottle are now in the path. No body symptom is supplied.",
+    "decision": "STOP AND TELL applies because the activity area is unsafe. This is not a fitness or effort judgment.",
+    "action": "Jordan tells the nearby adult and waits while the area is reset. Jordan may later resume only if the area is safe and Jordan is comfortable.",
+    "keyCue": "Environment changed? Stop before solving.",
+    "commonError": "Dodging around the pet or moving through the blocked path to keep the activity going.",
+    "correction": "Stop outside the hazard. Reset first; continuation is optional.",
+    "whatToNotice": "The same observable decision works in seated, standing, mobility-aid, no-movement, and described routes: identify the change, stop the unsafe path, tell when needed, and wait for safety authority.",
+    "safetyBoundary": "This model does not ask the learner to recreate the obstacle, perform movement, or cause a real stop event."
+  },
+  "guidedPractice": [
+    {
+      "id": "guided-1",
+      "scenario": "Invented situation: Sam feels comfortable and the area is safe. Sam wants water and a quieter two-minute break before deciding what to do next.",
+      "prompt": "Choose a lane, then name Sam's next action.",
+      "support": "Ask: Is there a warning sign, injury concern, head impact, or unsafe environment in the supplied facts?",
+      "feedback": "If none is supplied, REST/ADJUST is available. Sam may rest, reduce demand, change routes, or finish for the day without losing credit."
+    },
+    {
+      "id": "guided-2",
+      "scenario": "Invented situation: During an activity, Lee becomes dizzy. Lee thinks one more easy round might show whether it passes.",
+      "prompt": "Choose a lane, name the next action, and reject one unsafe action.",
+      "support": "Ask: Is dizziness a chosen comfort break or a named warning sign?",
+      "feedback": "Dizziness uses STOP AND TELL. Lee stops, tells a trusted adult, and does not continue to test the symptom."
+    },
+    {
+      "id": "guided-3",
+      "scenario": "Invented situation: A ball struck Ari's head. Ari says they feel ready to return after sitting briefly.",
+      "prompt": "Choose the first lane and then state the return boundary.",
+      "support": "Ask: Which condition makes clearance an adult or qualified-professional decision?",
+      "feedback": "A head impact requires STOP AND TELL and DO NOT RESUME until the authorized guardian or qualified professional says it is safe. Feeling ready, self-report, or Tutor reassurance is not clearance."
+    }
+  ],
+  "practiceProgression": [
+    {
+      "round": 1,
+      "name": "See the difference",
+      "task": "Compare the modeled environmental stop with guided scenario 1.",
+      "changedVariable": "Only the reason for pausing changes: unsafe environment versus learner-chosen comfort break.",
+      "successCheck": "Name the lane and point to one supplied fact that supports it.",
+      "learnerChoice": "Use text, speech, sign, drawing, cards, or objects. Stay with this round, rest, or repeat the model at any time."
+    },
+    {
+      "round": 2,
+      "name": "Add the handoff",
+      "task": "Classify guided scenarios 2 and 3, then name who owns the next decision.",
+      "changedVariable": "Adult notification and return authority are added.",
+      "successCheck": "Distinguish STOP AND TELL from DO NOT RESUME and never use continued activity as a test.",
+      "learnerChoice": "Use the three lane labels or replay one worked example before continuing. No movement is required."
+    },
+    {
+      "round": 3,
+      "name": "Remove the coaching",
+      "task": "Complete the four fresh independent scenario cards without the worked feedback beside them.",
+      "changedVariable": "The lane and action are no longer cued.",
+      "successCheck": "For every card, give a lane, one scenario fact, the next safe action, and the adult/return boundary when it applies.",
+      "learnerChoice": "Complete one card at a time, take breaks, or switch response mode without penalty."
+    }
+  ],
+  "independentActivity": {
+    "title": "Fresh decision set: run the rule, not the risk",
+    "directions": [
+      "Read one fictional scenario.",
+      "Select REST/ADJUST, STOP AND TELL, or DO NOT RESUME.",
+      "Copy one fact from the scenario that controls the decision.",
+      "State the next safe action.",
+      "Name who decides whether activity may resume.",
+      "Repeat for the next scenario."
+    ],
+    "scenarios": [
+      {
+        "id": "fresh-a",
+        "text": "Morgan feels comfortable in a clear area. Morgan chooses to lower the pace and use a stable support because that route gives better control."
+      },
+      {
+        "id": "fresh-b",
+        "text": "Casey notices sharp pain during an activity and considers finishing the current interval before saying anything."
+      },
+      {
+        "id": "fresh-c",
+        "text": "Taylor slipped. There may be an injury, and the discomfort is getting worse after stopping."
+      },
+      {
+        "id": "fresh-d",
+        "text": "Riley feels comfortable, but an exercise band has a visible tear. A trusted adult is nearby."
+      }
+    ],
+    "protocolPrompt": "Finish with a five-line adult-habit protocol: NOTICE ___; PAUSE ___; REST/ADJUST when ___; STOP AND TELL when ___; DO NOT RESUME when ___. Use only the supplied lesson rules, not private medical information.",
+    "independenceBoundary": "A person or future Tutor may read directions, define a lane, or help choose an approved response mode. They may not choose the lane or next action for a fresh card, claim to observe activity, certify completion, or give medical or return-to-activity clearance."
+  },
+  "warmUpAndFinishPolicy": {
+    "applicability": "NOT_APPLICABLE_NON_MOVEMENT",
+    "warmUp": null,
+    "coolDown": null,
+    "rationale": "The assessed work is fictional decision analysis and a written, spoken, signed, drawn, sorted-card, or object-modeled protocol. The learner must not induce a symptom, injury, collision, equipment failure, or real stop event."
+  },
+  "spaceSetup": "Low-space setup: use any safe, comfortable desk, table, floor, or supported seated space where the scenario text can be read or heard. Keep a mobility aid and communication supports positioned as the learner normally uses them. This lesson needs no movement area; if the immediate space is unsafe, stop setup and tell a trusted adult rather than fixing a hazard for the lesson.",
   "equipmentRequirements": {
     "required": [
-      "No specialized equipment is required."
+      "The supplied scenario text and decision-lane descriptions."
     ],
     "optional": [
-      "Optional: two soft household objects may mark a path. Floor tape, cones, a track, and a gym are not required."
+      "Paper, pencil, three scrap-paper labels, or three familiar objects used as lane markers."
     ],
     "householdSubstitutes": [
-      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+      "Speak, sign, point, draw, or use imaginary labels instead of writing or handling objects."
     ],
-    "equalCreditNoEquipment": "Equal-credit low-space option: travel in place or use seated arm patterns to show start, pathway change, controlled stop, and spacing decisions, then name the cue that kept the movement controlled."
+    "equalCreditNoEquipment": "Equal-credit no-equipment route: read or hear each scenario, say or sign the lane and next action, and complete the five-line protocol aloud to a trusted human. No equipment and no physical demonstration are required."
   },
   "safetyRules": [
-    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
-    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
-    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit.",
-    "Keep the pace below running indoors unless a trusted adult has approved a larger clear area. Use no jumping when the surface, ceiling, footwear, or balance support is uncertain."
+    "Use only the supplied fictional situations. Do not create a symptom, head impact, injury, collision, damaged equipment, blocked path, or other unsafe event.",
+    "Do not diagnose a fictional or real person. Name the observable condition in the scenario and apply the lesson's decision rule.",
+    "A learner may pause, rest, change pace, use support, switch response mode, or end the lesson at any time without losing credit.",
+    "If a real warning sign or unsafe condition occurs while completing the lesson, stop the lesson and follow the STOP AND TELL rule."
   ],
   "stoppingRules": [
-    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
-    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
-    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+    "REST / ADJUST: when no warning sign, injury concern, head impact, or unsafe condition is present, the learner may rest, reduce demand, use support, switch routes, resume when comfortable and safe, or finish for the day.",
+    "STOP AND TELL: stop immediately for pain, dizziness, unusual breathing difficulty, head impact, injury concern, damaged equipment, or an unsafe environment; tell a trusted adult and do not continue to test the concern.",
+    "DO NOT RESUME: after a head impact, injury concern, or a symptom that persists or worsens, remain out until the authorized guardian or qualified professional says it is safe. A learner, browser, or Tutor cannot provide clearance."
   ],
-  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
-  "lowSpaceNoEquipmentAlternative": "Equal-credit low-space option: travel in place or use seated arm patterns to show start, pathway change, controlled stop, and spacing decisions, then name the cue that kept the movement controlled.",
+  "adaptationRoutes": {
+    "seated": "Complete every scenario from a stable seated position. Point to, say, sign, draw, or place one lane marker for each decision.",
+    "supported": "Use the learner's usual stable support and communication support. No unsupported posture or reach is part of the target.",
+    "reducedRange": "Use a smaller point, gesture, eye-gaze choice, or verbal response. Physical range is not scored.",
+    "reducedPaceOrDemand": "Complete one card at a time with learner-chosen breaks or across two short sittings. The four decisions and protocol remain the evidence.",
+    "mobilityAidCompatible": "Keep the mobility aid positioned and used as approved. The learner may respond without moving the aid; safe aid use is not assessed.",
+    "solo": "The complete fictional path is solo. A trusted human may read text or receive a spoken response but is not a partner or opponent.",
+    "lowSpace": "All work fits at one safe seat, desk, or communication station.",
+    "noEquipment": "Speak, sign, point, or imagine the three labels; no cards or writing tool are needed.",
+    "describedOrDecisionRoute": "Describe each lane choice, supporting fact, next action, and authority boundary. This is the lesson's primary route and earns full credit."
+  },
+  "accessibleAdaptation": "Choose any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described response route before or during the lesson without explaining why. Every route earns equal credit for the same decision evidence: lane, supplied fact, next safe action, and adult/return boundary when applicable. The standard body position, movement range, pace, equipment, and physical performance are never required and never affect credit.",
+  "lowSpaceNoEquipmentAlternative": "From one safe position, hear or read each fictional scenario and speak, sign, point, or imagine the lane and next action. Complete the five-line protocol the same way. This route is the full lesson and earns equal credit.",
   "activitySteps": [
-    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
-    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
-    "Practice: apply the movement cues for the stop rule as an adult habit rather than a class instruction at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
-    "Apply: show, describe, draw, sign, or write one controlled example of the stop rule as an adult habit rather than a class instruction, including the cue or decision that made it work.",
-    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+    "Choose one response mode.",
+    "Read the no-induced-event safety rule.",
+    "Learn the three decision lanes.",
+    "Trace NOTICE–PAUSE–ACT–HOLD through the worked model.",
+    "Classify guided scenario 1.",
+    "Classify guided scenario 2.",
+    "State the return boundary for guided scenario 3.",
+    "Complete each fresh scenario one at a time.",
+    "Build the five-line adult-habit protocol.",
+    "Answer the evidence reflection.",
+    "Route the optional household plan to guardian review before real use."
   ],
-  "executionCategory": "locomotor-space",
-  "commonErrorToWatchFor": null,
-  "keyPoints": [],
-  "privacySafeScenario": "Write the self-care and stop-rule protocol the learner will actually run as an adult, including the specific conditions under which they will stop, rest, or seek professional care.",
-  "studentTask": "Learner works the stop rule as an adult habit rather than a class instruction practised as an unsupervised habit across a full training block, including one real stop decision at a self-set intensity, then records what held, what degraded first, and how this occasion differed from the earlier one.",
-  "knowledgeCheck": "In one concise response, say which feature of the stop rule as an adult habit rather than a class instruction degraded first under the added demand, why, and what you would change before the next attempt.",
+  "executionCategory": "safety-stop-decision",
+  "commonErrorToWatchFor": "Treating a warning sign as a learner-controlled rest choice, testing it by continuing, or letting a learner, browser, or Tutor provide return clearance.",
+  "keyPoints": [
+    "Rest and adaptation are learner-controlled choices and never lower credit.",
+    "Named warning signs and unsafe events require an immediate stop and trusted-adult handoff.",
+    "Head impact, injury concern, and persistent or worsening symptoms require a no-resume boundary until authorized clearance.",
+    "The lesson applies a safety rule to supplied facts; it never diagnoses or prescribes."
+  ],
+  "privacySafeScenario": "All practice uses supplied fictional characters and invented activity conditions. The learner does not report a personal diagnosis, symptom history, body data, household location, or real event.",
+  "studentTask": "Complete the four fresh fictional decision cards and the five-line NOTICE–PAUSE–ACT–HOLD protocol. For each card, select a safety lane, cite one supplied fact, state the next safe action, and name who controls return when that question applies. Do not perform activity or create a real stop event.",
+  "knowledgeCheck": "Explain the difference between a learner-controlled REST/ADJUST choice and a STOP AND TELL condition. Then name one situation that also requires DO NOT RESUME. Use only the lesson's supplied examples.",
   "completionCriteria": [
-    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for the stop rule as an adult habit rather than a class instruction.",
-    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
-    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
-    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
+    "The learner completes all four fresh fictional cards in an approved response mode.",
+    "Each response includes a lane, one controlling fact from the card, and a next safe action.",
+    "Responses include the trusted-adult handoff and no-resume authority whenever the supplied condition requires them.",
+    "The five-line protocol keeps rest, stop-and-tell, and do-not-resume distinct and never uses continued activity to test a concern.",
+    "Any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route earns the same credit for the same decision evidence."
   ],
-  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
-  "extensionChallenge": "Design the next progression of the stop rule as an adult habit rather than a class instruction yourself, or coach the transfer condition to someone else so that they succeed with it — without completing another learner's graded work.",
+  "evidenceExpectations": {
+    "learnerEvidence": [
+      "Four fresh scenario responses containing lane, controlling fact, next safe action, and authority boundary when applicable.",
+      "One five-line NOTICE–PAUSE–ACT–HOLD protocol.",
+      "One short reflection: Which cue prevented an unsafe continuation decision, and how did it help?"
+    ],
+    "physicalCompletion": "NOT_CLAIMED",
+    "observer": "A trusted human reviews decision quality. No learner, Tutor, browser, camera, wearable, or self-report certifies physical performance because physical performance is not required.",
+    "doNotCollect": [
+      "body size, weight, appearance, body composition, calories, fitness norms, speed, or comparison",
+      "diagnosis, symptom history, disability reason, or private medical information",
+      "photo, video, audio, wearable data, location proof, or exercise log"
+    ]
+  },
+  "retryPlan": {
+    "trigger": "Retry when a fresh response mixes up the three lanes, omits the adult handoff, proposes continuing to test a concern, or lets an unauthorized person clear return.",
+    "simplerSetup": "Use three visible lane labels and one two-sentence fictional card. Underline the controlling fact before choosing a lane.",
+    "differentCue": "Replace NOTICE–PAUSE–ACT–HOLD with two questions: 'Warning sign or unsafe event?' and 'Impact, injury, or not settling?'",
+    "alternateModel": "Contrast two cards: a comfortable learner chooses water and a break; a dizzy learner considers one more round. Name the single fact that changes the lane.",
+    "boundedPractice": "Correct one contrast card, then take a break or switch response mode if desired.",
+    "freshRetry": "Use a new card: Devon feels comfortable, but a wheel on the activity equipment is loose. Choose the lane, fact, next action, and authority boundary.",
+    "exitCriterion": "Return to the next independent card after the fresh retry identifies the unsafe equipment, stops use, and hands the condition to a trusted adult. A safety stop is never recorded as failure."
+  },
+  "adaptationChoices": "Use seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, spoken, signed, drawn, sorted-card, object-modeled, or described responses. Choose or change a route without explaining why. Every route earns equal credit for the same decision evidence and is never logged as refusal or low effort.",
+  "extensionChallenge": "Write one additional fictional card that includes only one controlling safety fact. Do not use a real person or event. Exchange it with a trusted human, explain the correct lane and authority boundary after they answer, and revise the card if it is ambiguous.",
   "accessibilitySupports": [
-    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
-    "Chunk directions into one action at a time and show a worked example or model.",
-    "Allow typed, handwritten, spoken, drawn, demonstrated, or described responses when the standard permits.",
-    "Offer reduced-copying, extended-time, hidden-timer, rest-break, and low-distraction options.",
-    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
-    "Preserve the learning target while adjusting quantity, pacing, intensity, range, equipment, or response mode.",
-    "Every movement task has a seated, supported, reduced-range, reduced-pace, and solo version that reaches the same standard.",
-    "The protocol may be written, tabled, or described; a learner managing an ongoing condition builds it with guardian input around constraints they already have."
+    "Provide readable text plus optional read-aloud or signed presentation; no voice feature is required.",
+    "Present one scenario and one decision at a time.",
+    "Offer the three lane labels as text, high-contrast cards, symbols with text, objects, or spoken choices; meaning never depends on color alone.",
+    "Allow typed, handwritten, spoken, signed, drawn, eye-gaze, pointed, sorted-card, or object-modeled evidence.",
+    "Allow extended time, learner-controlled breaks, reduced copying, hidden timers, and a low-distraction setting.",
+    "Repeat or define NOTICE, PAUSE, ACT, HOLD, warning sign, trusted adult, and resume without choosing an answer for a fresh card.",
+    "The primary described decision route is already seated, solo, low-space, no-equipment, and mobility-aid compatible.",
+    "No learner must disclose a disability, diagnosis, symptom history, or reason for an adaptation."
   ],
   "optionalReflection": {
-    "prompt": "Invite the learner to notice where the stop rule as an adult habit rather than a class instruction shows up outside the session under real conditions. No purchase, account creation, photograph, recording, or public performance is required.",
+    "prompt": "Which cue prevented an unsafe continuation decision, and how did it help? Answer with a supplied fictional scenario; do not share a personal symptom, diagnosis, body measure, or real event.",
     "private": true,
     "graded": false,
     "optional": true
   },
+  "guardianAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "requiredAction": "Before the learner later uses a personal activity plan, household contact path, location, equipment, partner, or progression, a household-authorized guardian reviews and approves that real-world plan.",
+    "when": "After the complete fictional lesson and before any later real-world use; no guardian is required to finish the fictional scenario evidence.",
+    "minimumRecord": "Guardian reviewed the household escalation path and any real-world limits. Record only yes/no and date if the family chooses to retain it.",
+    "confirmationBoundary": "The guardian confirms only permission and the household escalation path. The guardian does not certify academic mastery, body status, effort, diagnosis, or a physical event in this lesson.",
+    "equalCreditAlternative": "When guardian review or a real activity is unavailable, the supplied fictional decision set and generic trusted-adult handoff remain the complete equal-credit lesson.",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "tutorMetadata": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "may": [
+      "explain the three approved safety lanes",
+      "cue NOTICE–PAUSE–ACT–HOLD",
+      "help select an approved presentation or response adaptation",
+      "coach how to present a lane, controlling fact, next action, and authority boundary"
+    ],
+    "mustNot": [
+      "never diagnose, prescribe, rehabilitate, or give medical clearance",
+      "claim to see movement or infer health, disability, effort, motivation, or body value",
+      "certify physical completion, guardian permission, adult observation, mastery, or safe return",
+      "override learner rest/stop decisions, no-resume rules, guardian authority, or professional restrictions",
+      "choose the answer for a fresh independent scenario or reveal protected scoring guidance"
+    ],
+    "missingSupplyState": "BLOCKED_MISSING_CURRICULUM",
+    "authorityConflictState": "BLOCKED_AUTHORITY_CONFLICT"
+  },
   "neverRequires": [
-    "This task never requires body weight, height, BMI, or body-fat percentage.",
-    "This task never requires calorie counting or a diet or weight-loss goal.",
-    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
-    "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience.",
-    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
-    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
+    "This task never requires body weight, height, BMI, body-fat percentage, appearance, or body change.",
+    "This task never requires calorie counting, fitness norms, speed, repetitions, distance, or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, symptoms, a diagnosis, disability, or a reason for adaptation.",
+    "This task never requires a photograph, video, voice recording, wearable export, location proof, or exercise log.",
+    "This task never requires a public performance, audience, partner, opponent, group, gym, purchase, or specialized equipment.",
+    "This task never requires maximal effort, exercise as punishment, movement through pain, symptom induction, or a real stop event.",
+    "This task never requires the standard body position or movement route; every approved route earns equal credit."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
-    "sourceLessonId": "ma-g12-physical-education-u08-l07"
+    "sourceLessonId": "ma-g12-physical-education-u08-l07",
+    "directorSampleRevision": "physical-education-director-sample-r1"
   },
   "productionReadiness": {
     "status": "READY",
