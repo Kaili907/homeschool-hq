@@ -56,6 +56,7 @@ import { toStudentDashboardPresentation } from './dashboardPresentation'
 import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
 import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
 import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
+import { FamilyOverview } from './FamilyOverview'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -71,7 +72,7 @@ const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
 })
 
 type Mode = 'parent' | 'student'
-type ParentView = 'school-plan' | 'assign' | 'reports' | 'preferences' | 'backup'
+type ParentView = 'overview' | 'school-plan' | 'assign' | 'reports' | 'preferences' | 'backup'
 
 function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : 'That action could not be completed.'
@@ -145,7 +146,7 @@ function MountedFinalFamilyPilot({
 }) {
   const [mode, setMode] = useState<Mode>('student')
   const [parentAuthorized, setParentAuthorized] = useState(false)
-  const [parentView, setParentView] = useState<ParentView>('assign')
+  const [parentView, setParentView] = useState<ParentView>('overview')
   const [openAssignmentRef, setOpenAssignmentRef] = useState<string | null>(null)
   const restoreInput = useRef<HTMLInputElement>(null)
   const autoPlannerHost = useMemo(() => new FinalFamilyAutoPlannerHost(controller), [controller])
@@ -280,6 +281,7 @@ function MountedFinalFamilyPilot({
           refresh={refresh}
           restoreInput={restoreInput}
           onRestore={doRestore}
+          revision={revision}
         />
       )}
     </FinalShell>
@@ -491,7 +493,7 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   )
 }
 
-function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore }: {
+function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision }: {
   readonly controller: FinalFamilyPilotController
   readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly view: ParentView
@@ -500,6 +502,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
   readonly refresh: () => void
   readonly restoreInput: React.RefObject<HTMLInputElement | null>
   readonly onRestore: (file: File | undefined) => Promise<void>
+  readonly revision: number
 }) {
   const students = controller.appSnapshot.state.setup.students
   const [selectedRef, setSelectedRef] = useState(students[0]?.studentRef ?? '')
@@ -516,9 +519,17 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         </select>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
-        {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
+        {(['overview', 'school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`min-h-11 rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} aria-current={view === item ? 'page' : undefined} onClick={() => setView(item)}>{item === 'overview' ? 'Family overview' : item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
       </nav>
-      {!selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
+      {view === 'overview' ? (
+        <FamilyOverview
+          controller={controller}
+          host={autoPlannerHost}
+          revision={revision}
+          onOpenDetails={(studentRef) => { setSelectedRef(studentRef); setView('reports') }}
+          onOpenSchoolPlan={(studentRef) => { setSelectedRef(studentRef); setView('school-plan') }}
+        />
+      ) : !selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
         <FamilySchoolPlanPanel controller={controller} host={autoPlannerHost} student={selected} />
       ) : view === 'assign' ? (
         <ParentAssignments controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
