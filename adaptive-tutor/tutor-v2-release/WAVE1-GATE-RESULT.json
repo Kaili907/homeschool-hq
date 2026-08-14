@@ -3,7 +3,7 @@
   "product": "Manuel Academy Study Tutor V2",
   "wave": "Wave 1 Foundation",
   "foundationGate": "PASS",
-  "finalClassification": "WAVE1_R3_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "finalClassification": "WAVE1_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
   "releaseReady": false,
   "checks": [
     {
@@ -15,7 +15,7 @@
     {
       "name": "canonical-provenance",
       "status": "PASS",
-      "detail": "12/12 pinned remote tips exact, including both repairs and R2",
+      "detail": "14/14 pinned remote tips exact, including B1/B2/B3 and R2/R3",
       "command": "git rev-parse origin/mac/tutor-v2-w1-*"
     },
     {
@@ -29,6 +29,12 @@
       "status": "PASS",
       "detail": "2c8716ed5db5bb824fc92533615295f0b163f7b2",
       "command": "git rev-parse 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a^"
+    },
+    {
+      "name": "b3-repair-direct-parent",
+      "status": "PASS",
+      "detail": "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+      "command": "git rev-parse cf7ee7265c812a86b708b0e8cf2a33e6370e753d^"
     },
     {
       "name": "accepted-lane-tree-equivalence",
@@ -49,6 +55,12 @@
       "command": "git diff --quiet 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a HEAD -- <b2-repair-paths>"
     },
     {
+      "name": "accepted-b3-repair-tree-equivalence",
+      "status": "PASS",
+      "detail": "reviewed-content bridge repair source and tests exact",
+      "command": "git diff --quiet cf7ee7265c812a86b708b0e8cf2a33e6370e753d HEAD -- <b3-repair-paths>"
+    },
+    {
       "name": "provider-port-structural-boundary",
       "status": "PASS",
       "detail": "provider-safe request exported; TutorRequest/StudyAuthorityContext excluded",
@@ -58,13 +70,13 @@
       "name": "v2-typecheck",
       "status": "PASS",
       "detail": "strict TypeScript",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r3/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/.npm/_npx/b3ca12a867cd0704/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
     },
     {
       "name": "v2-compile",
       "status": "PASS",
       "detail": "convergence compilation",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r3/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/.npm/_npx/b3ca12a867cd0704/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
     },
     {
       "name": "schema-runtime-parity-artifacts",
@@ -75,7 +87,7 @@
     {
       "name": "release-evidence-artifacts",
       "status": "PASS",
-      "detail": "8 release artifacts exact",
+      "detail": "9 release artifacts exact",
       "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js --check"
     },
     {
@@ -157,16 +169,52 @@
       "command": "node --test --test-name-pattern=W1-09R3 completed review scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
     },
     {
+      "name": "reviewed-content-privacy-provenance-hard-gate",
+      "status": "PASS",
+      "detail": "78/78 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "w1-10r3-historical-privacy-blockers",
+      "status": "PASS",
+      "detail": "16/16 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-10R3 historical privacy blocker scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "additional-privacy-provenance-hard-gates",
+      "status": "PASS",
+      "detail": "21/21 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B3 additional privacy provenance scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "approval-authority-attacks",
+      "status": "PASS",
+      "detail": "10/10 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B3 approval attack scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "free-form-output-provenance",
+      "status": "PASS",
+      "detail": "15/15 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B3 free-form output provenance scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
+      "name": "structured-control-privacy",
+      "status": "PASS",
+      "detail": "16/16 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=B3 structured control privacy scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js"
+    },
+    {
       "name": "cross-slice-convergence-tests",
       "status": "PASS",
-      "detail": "108/108 pass; 0 fail; 0 skipped",
-      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+      "detail": "186/186 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
     },
     {
       "name": "bridge-typecheck",
       "status": "PASS",
       "detail": "W1-08 bridge compilation",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r3/adaptive-tutor/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/.npm/_npx/b3ca12a867cd0704/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
     },
     {
       "name": "w1-b1-provider-mutation-adversarial",
@@ -181,10 +229,28 @@
       "command": "node --test --test-name-pattern=malicious provider active-assessment|active-assessment structured control|answer-bearing provider field|completed review|provider context excludes protected answer authority study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
     },
     {
+      "name": "w1-b3-reviewed-content-privacy-bridge",
+      "status": "PASS",
+      "detail": "50/50 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-10R3|reviewed-content authority|reviewed learner-safe|grounding digest|raw learner free-form|exact Study-reviewed prose|unapproved reason code|approval cannot|provider-fabricated approval|self-computed digest|authority and approval objects study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
       "name": "repaired-bridge-regression",
       "status": "PASS",
-      "detail": "96/96 pass; 0 fail; 0 skipped",
+      "detail": "169/169 pass; 0 fail; 0 skipped",
       "command": "node --test study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
+      "name": "regex-neutralized-privacy-compile",
+      "status": "PASS",
+      "detail": "temporary copy compiled with lexical RULES empty",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/.npm/_npx/b3ca12a867cd0704/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
+    },
+    {
+      "name": "regex-neutralized-privacy-provenance-hard-gate",
+      "status": "PASS",
+      "detail": "78/78 pass; 0 fail; 0 skipped",
+      "command": "temporary copy: RULES=[]; tsc; node --test reviewed-content-privacy-provenance-adversarial.test.js"
     },
     {
       "name": "evaluation-harness-build-test",
@@ -202,7 +268,7 @@
       "name": "tutor-core-v0.2-typecheck",
       "status": "PASS",
       "detail": "frozen Core typecheck",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r3/adaptive-tutor/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/.npm/_npx/b3ca12a867cd0704/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
     },
     {
       "name": "tutor-core-v0.2-tests",
@@ -253,10 +319,10 @@
       "command": "npm audit --json (study-engine/runtime)"
     },
     {
-      "name": "w1-09r3-path-ownership",
+      "name": "w1-09r4-path-ownership",
       "status": "PASS",
-      "detail": "11 authored files all convergence-owned",
-      "command": "git diff --name-only 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a HEAD plus git status"
+      "detail": "13 authored files all convergence-owned",
+      "command": "git diff --name-only cf7ee7265c812a86b708b0e8cf2a33e6370e753d HEAD plus git status"
     },
     {
       "name": "git-diff-check",

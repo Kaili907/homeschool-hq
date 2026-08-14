@@ -19,6 +19,8 @@ import {
   type TutorV2BridgeResult,
 } from "../../study-engine/bridges/tutor-v2/index.js";
 import {
+  approvalForProposal,
+  defaultReviewedApprovals,
   harness,
   proposalFixture,
   successResult,
@@ -125,7 +127,11 @@ async function runProposal(
   proposal: TutorActionProposal,
   phase: AssessmentPhase,
 ): Promise<TutorV2BridgeResult> {
-  const h = harness([successResult(proposal)]);
+  const approval = await approvalForProposal(proposal);
+  const h = harness(
+    [successResult(proposal)],
+    { approvals: [...defaultReviewedApprovals().slice(0, 3), approval] },
+  );
   setPhase(h.input, phase);
   return await orchestrateTutorV2Bridge(h.input, h.dependencies);
 }

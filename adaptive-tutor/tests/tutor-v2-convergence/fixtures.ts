@@ -24,14 +24,30 @@ import type {
 } from "../../core/v2/providers/ports/index.js";
 import {
   TUTOR_V2_BRIDGE_VERSION,
+  createInMemoryReviewedTutorContentAuthority,
+  reviewedTutorContentDigest,
+  type ReviewedTutorContentApproval,
+  type ReviewedTutorContentAuthorityPort,
   type TutorV2BridgeDependencies,
   type TutorV2BridgeInvocation,
 } from "../../study-engine/bridges/tutor-v2/index.js";
 import { minimizeProviderContext } from "../../study-engine/tutor-v2/privacy/index.js";
 
 export const NOW = Date.parse("2026-08-13T20:01:00.000Z");
-export const DIGEST = `sha256:${"a".repeat(64)}` as const;
-export const OTHER_DIGEST = `sha256:${"b".repeat(64)}` as const;
+export const ITEM_DIGEST = "sha256:967915d7999db7ed7c588118bbfc964674b2941e6909c816b743f6a588231ffb" as const;
+export const DIGEST = "sha256:5d1ae580f548054314e3cf1623b2e91dc090580a676e9acf8005dc610fba237f" as const;
+export const OTHER_DIGEST = "sha256:82aba662c8a2db95797355cd9360522d9939b34a223dd53b7b24b32fbba675c1" as const;
+const ACTION_DIGESTS: Readonly<Record<TutorActionKind, `sha256:${string}`>> = {
+  explain: "sha256:1ede1d5791bda3a3903215aeada2a740369d31650400423941aec219ffada41a",
+  hint: "sha256:7b514229ed7104d2b8c3fb5d0c1bc812ebc5ff1271f1ffd462f125610310a435",
+  "ask-check": "sha256:822f10a89a48b6f81760eae293d7e380ca5036a3548527e2bc3f18bba6416225",
+  "show-example": "sha256:58f2c899389c477bea05f6ffd3e71b28c40f75ccd823e243c4f26c0f848c4feb",
+  reteach: "sha256:7368641f8d8cacbf09c70e8ae4af1ff8ca9d28c05e5da7119caab38e7c0b2217",
+  "check-prerequisite": "sha256:ac238eed49a1f6e60ac59d490fb47ecb63afdc503712be1446274c56f633521d",
+  "suggest-break": "sha256:8cd34d3307fcb09b74a3856fdf7d6e546d623a035403af7b39ae0f63f7a6784e",
+  escalate: "sha256:c3e76cad07fe71271d989624a003dcaa6b0bee46f32117631e1deb2b51e5400c",
+  "return-to-lesson": "sha256:4664fbcaa6d00ebb944894bcd038cfeae3cf8ca71a5381edd7a3d0f46f558c94",
+};
 export const VERSION = {
   contractVersion: TUTOR_V2_CONTRACT_VERSION,
   actionSchemaVersion: TUTOR_V2_ACTION_SCHEMA_VERSION,
@@ -195,6 +211,113 @@ export function proposalFixture(kind: TutorActionKind = "explain"): TutorActionP
   };
 }
 
+export function reviewedScope() {
+  return {
+    householdScopeRef: BASE_SCOPE.householdScopeRef,
+    learnerScopeRef: BASE_SCOPE.learnerScopeRef,
+    sessionRef: BASE_SCOPE.sessionRef,
+    interactionRef: BASE_SCOPE.interactionRef,
+    lessonRef: BASE_SCOPE.lessonRef,
+  };
+}
+
+export function reviewedContext() {
+  return {
+    subjectRef: "subject:mathematics",
+    conceptRef: "concept:fractions",
+    learnerStageRef: BASE_PROFILE.learningStageRef,
+  };
+}
+
+export function defaultReviewedApprovals(): ReviewedTutorContentApproval[] {
+  const input: ReviewedTutorContentApproval[] = [
+    {
+      purpose: "provider-input-learner-safe-item",
+      scope: reviewedScope(),
+      context: reviewedContext(),
+      sourceRef: "item:fraction-parts",
+      contentKind: "short-response",
+      contentDigest: ITEM_DIGEST,
+      actionKind: null,
+      groundingRefs: [],
+      approvalRef: "approval:item-fraction-parts",
+    },
+    {
+      purpose: "provider-input-grounding-content",
+      scope: reviewedScope(),
+      context: reviewedContext(),
+      sourceRef: "grounding:fraction-model",
+      contentKind: "curriculum-excerpt",
+      contentDigest: DIGEST,
+      actionKind: null,
+      groundingRefs: ["grounding:fraction-model"],
+      approvalRef: "approval:grounding-fraction-model",
+    },
+    {
+      purpose: "provider-input-grounding-content",
+      scope: reviewedScope(),
+      context: reviewedContext(),
+      sourceRef: "grounding:reviewed-fallback",
+      contentKind: "static-fallback",
+      contentDigest: OTHER_DIGEST,
+      actionKind: null,
+      groundingRefs: ["grounding:reviewed-fallback"],
+      approvalRef: "approval:grounding-reviewed-fallback",
+    },
+  ];
+  return [
+    ...input,
+    ...TUTOR_ACTION_KINDS.map((kind): ReviewedTutorContentApproval => {
+      const action = actionFor(kind);
+      const freeForm = "content" in action || "question" in action;
+      return {
+        purpose: freeForm ? "learner-facing-action-content" : "learner-facing-control-code",
+        scope: reviewedScope(),
+        context: reviewedContext(),
+        sourceRef: freeForm ? `proposal:${kind}` : action.reasonCode,
+        contentKind: "question" in action
+          ? `question-${action.checkKind}`
+          : freeForm
+            ? "teaching-content"
+            : "policy-reason-code",
+        contentDigest: ACTION_DIGESTS[kind],
+        actionKind: kind,
+        groundingRefs: "groundingRefs" in action ? [...action.groundingRefs] : [],
+        approvalRef: `approval:action-${kind}`,
+      };
+    }),
+  ];
+}
+
+export async function approvalForProposal(
+  proposal: TutorActionProposal,
+  overrides: Partial<ReviewedTutorContentApproval> = {},
+): Promise<ReviewedTutorContentApproval> {
+  const action = proposal.action;
+  const freeForm = "content" in action || "question" in action;
+  const content = "content" in action
+    ? action.content
+    : "question" in action
+      ? action.question
+      : action.reasonCode;
+  return {
+    purpose: freeForm ? "learner-facing-action-content" : "learner-facing-control-code",
+    scope: reviewedScope(),
+    context: reviewedContext(),
+    sourceRef: freeForm ? proposal.proposalRef : content,
+    contentKind: "question" in action
+      ? `question-${action.checkKind}`
+      : freeForm
+        ? "teaching-content"
+        : "policy-reason-code",
+    contentDigest: await reviewedTutorContentDigest(content),
+    actionKind: action.kind,
+    groundingRefs: "groundingRefs" in action ? [...action.groundingRefs] : [],
+    approvalRef: `approval:custom-${action.kind}`,
+    ...overrides,
+  };
+}
+
 export function invocationFixture(): TutorV2BridgeInvocation {
   return {
     bridgeVersion: TUTOR_V2_BRIDGE_VERSION,
@@ -351,7 +474,13 @@ export interface Harness {
   readonly ledger: AtomicLedger;
 }
 
-export function harness(steps: readonly unknown[] = [successResult(proposalFixture())]): Harness {
+export function harness(
+  steps: readonly unknown[] = [successResult(proposalFixture())],
+  options: {
+    readonly reviewedContent?: ReviewedTutorContentAuthorityPort;
+    readonly approvals?: readonly ReviewedTutorContentApproval[];
+  } = {},
+): Harness {
   const input = invocationFixture();
   const memory = new TutorSessionMemoryStore({ now: () => NOW });
   const opened = memory.open({ ...input.memoryAccess, ttlMs: 60_000 });
@@ -366,6 +495,8 @@ export function harness(steps: readonly unknown[] = [successResult(proposalFixtu
     agePolicies: registry.registry,
     ageTurnInspector: { inspect: ({ proposal }) => turnPlan(proposal) },
     staticFallback: { validate: () => ({ status: "accepted" }) },
+    reviewedContent: options.reviewedContent ??
+      createInMemoryReviewedTutorContentAuthority(options.approvals ?? defaultReviewedApprovals()),
     memory,
     provider,
     eventLedger: ledger,

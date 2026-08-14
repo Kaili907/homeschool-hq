@@ -13,11 +13,18 @@
     "contractVersion": "2.0.0"
   },
   "convergenceTestCounts": {
+    "additionalPrivacyProvenance": 21,
+    "approvalAuthorityAttacks": 10,
+    "freeFormOutputProvenance": 15,
+    "historicalPrivacyBlockers": 16,
     "phraseMatrix": 20,
     "providerBoundaryAdversarial": 13,
+    "reviewedContentPrivacyProvenance": 78,
     "structuralAntiAnswerAdversarial": 53,
-    "totalConvergence": 108
+    "structuredControlPrivacy": 16,
+    "totalConvergence": 186
   },
+  "CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED": false,
   "evaluationResult": {
     "classification": "FOUNDATION_GATE_PASS",
     "failed": 0,
@@ -26,7 +33,7 @@
   },
   "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
   "gate": {
-    "finalClassification": "WAVE1_R3_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+    "finalClassification": "WAVE1_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
     "foundationGate": "PASS",
     "releaseReady": false
   },
@@ -149,6 +156,7 @@
     "INHERITED_DEPENDENCY_ADVISORY: three existing high advisories affect @playwright/test, playwright, and nanoid in unchanged Study runtime manifests.",
     "FROZEN_ARCHIVE_VERIFICATION_UNAVAILABLE: four historical external archives are not mounted; exact archive checksum test remains skipped while current frozen manifest/live regressions pass."
   ],
+  "LEXICAL_PRIVACY_MATCHING_IS_DEFENSE_IN_DEPTH_ONLY": true,
   "LIVE_MODEL_COMMERCIAL_CERTIFICATION": false,
   "LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED": true,
   "manifestVersion": 1,
@@ -158,6 +166,7 @@
   "NOT_AUTHORIZED_FOR_MASTER_MERGE": true,
   "NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT": true,
   "POST_PROVIDER_POLICY_USES_IMMUTABLE_STUDY_AUTHORITY": true,
+  "PRIVACY_SECURITY_REQUIRES_REVIEWED_PROVENANCE": true,
   "product": "Manuel Academy Study Tutor V2",
   "PRODUCTION_DEPLOY_AUTHORIZED": false,
   "PRODUCTION_WIRING_ENABLED": false,
@@ -165,8 +174,10 @@
     "ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL": true,
     "ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED": false,
     "COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE": true,
+    "CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED": false,
     "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
     "HOSTED_SUPABASE_CONTACTED_BY_WAVE1": false,
+    "LEXICAL_PRIVACY_MATCHING_IS_DEFENSE_IN_DEPTH_ONLY": true,
     "LIVE_MODEL_COMMERCIAL_CERTIFICATION": false,
     "LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED": true,
     "MASTER_MERGE_AUTHORIZED": false,
@@ -175,12 +186,15 @@
     "NOT_AUTHORIZED_FOR_MASTER_MERGE": true,
     "NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT": true,
     "POST_PROVIDER_POLICY_USES_IMMUTABLE_STUDY_AUTHORITY": true,
+    "PRIVACY_SECURITY_REQUIRES_REVIEWED_PROVENANCE": true,
     "PRODUCTION_DEPLOY_AUTHORIZED": false,
     "PRODUCTION_WIRING_ENABLED": false,
     "PROVIDER_RECEIVES_STUDY_AUTHORITY": false,
+    "RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED": false,
     "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
-    "statusVersion": 3,
+    "statusVersion": 4,
     "STUDY_ENGINE_REMAINS_AUTHORITY": true,
+    "UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED": false,
     "WAVE_1_COMPLETE": false,
     "WAVE1_FOUNDATION_ONLY": true
   },
@@ -203,12 +217,20 @@
     "reconvergenceEvidence": "PROVIDER-BOUNDARY-RECONVERGENCE.json",
     "w1_10Ruling": "HOLD"
   },
+  "RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED": false,
+  "reviewedContentPrivacyHistory": {
+    "finalIndependentRereviewRequired": true,
+    "reconvergenceEvidence": "REVIEWED-CONTENT-PRIVACY-RECONVERGENCE.json",
+    "reviewedContentPrivacyRepairSha": "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
+    "w1_09R3Sha": "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+    "w1_10R3Ruling": "HOLD"
+  },
   "rootManifestRuling": "ROOT_MANIFEST_PRESERVED_FOR_FROZEN_V0_2_PROVENANCE",
   "scenarioCount": 128,
   "selfReferencePolicy": "MANIFEST.json and CHECKSUMS.json do not checksum themselves; the final W1-09 Git SHA is reported after commit.",
   "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
   "staticFallback": "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",
-  "statusVersion": 3,
+  "statusVersion": 4,
   "structuralAntiAnswerHistory": {
     "finalIndependentRereviewRequired": true,
     "reconvergenceEvidence": "STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json",
@@ -228,6 +250,7 @@
     "escalate",
     "return-to-lesson"
   ],
+  "UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED": false,
   "wave": "Wave 1 Foundation",
   "WAVE_1_COMPLETE": false,
   "WAVE1_FOUNDATION_ONLY": true

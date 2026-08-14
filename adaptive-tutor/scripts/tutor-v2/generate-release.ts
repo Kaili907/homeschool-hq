@@ -56,7 +56,7 @@ if (evaluation.classification !== "FOUNDATION_GATE_PASS" || evaluation.releaseRe
 }
 
 const provenance = {
-  provenanceVersion: 3,
+  provenanceVersion: 4,
   product: "Manuel Academy Study Tutor V2",
   wave: "Wave 1 Foundation",
   immutableLearnerBaseline: "7baf8dfbc27168708ed4cf504285a1838d7345f6",
@@ -77,6 +77,16 @@ const provenance = {
       independentRuling: "W1_10_HOLD_PROVIDER_BOUNDARY",
       acceptedAsWave1Release: false,
     },
+    W1_09R2: {
+      sha: "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+      independentRuling: "W1_10R2_HOLD_SEMANTIC_ANTI_ANSWER_BYPASS",
+      acceptedAsWave1Release: false,
+    },
+    W1_09R3: {
+      sha: "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+      independentRuling: "W1_10R3_HOLD_LEXICAL_PRIVACY_BOUNDARY",
+      acceptedAsWave1Release: false,
+    },
   },
   acceptedRepairs: {
     PROVIDER_BOUNDARY_REPAIR: {
@@ -89,6 +99,11 @@ const provenance = {
       directParent: "2c8716ed5db5bb824fc92533615295f0b163f7b2",
       branch: "origin/mac/tutor-v2-w1-anti-answer-repair-r2",
     },
+    REVIEWED_CONTENT_PRIVACY_PROVENANCE_REPAIR: {
+      sha: "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
+      directParent: "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+      branch: "origin/mac/tutor-v2-w1-privacy-provenance-repair-r3",
+    },
   },
   reconvergenceHistory: {
     W1_09R2: {
@@ -100,8 +115,16 @@ const provenance = {
     W1_09R3: {
       session: "STUDY-TUTOR-V2-W1-09R3",
       branch: "mac/tutor-v2-w1-reconvergence-r3",
+      sha: "7435f820dc9e141d8a113b4d7f853044e36ba51d",
       startingRepairSha: "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
-      status: "CANDIDATE_REQUIRES_W1_10R3_INDEPENDENT_REREVIEW",
+      independentRuling: "W1_10R3_HOLD_LEXICAL_PRIVACY_BOUNDARY",
+      acceptedAsWave1Release: false,
+    },
+    W1_09R4: {
+      session: "STUDY-TUTOR-V2-W1-09R4 — Final Wave 1 Privacy Provenance Reconvergence",
+      branch: "mac/tutor-v2-w1-reconvergence-r4",
+      startingRepairSha: "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
+      status: "CANDIDATE_REQUIRES_W1_10R4_FINAL_INDEPENDENT_REREVIEW",
     },
   },
   recordedW1_08IntegrationCommits: {
@@ -126,6 +149,9 @@ const provenance = {
     structuralAntiAnswerRepairPresent: true,
     providerMutationGatesPermanent: true,
     structuralAntiAnswerGatesPermanent: true,
+    reviewedContentPrivacyRepairPresent: true,
+    reviewedContentPrivacyGatesPermanent: true,
+    regexNeutralizedPrivacyValidationRequired: true,
     releaseSecurityOwnershipCrossed: false,
   },
 };
@@ -146,7 +172,7 @@ const evaluationSummary = {
 };
 
 const status = {
-  statusVersion: 3,
+  statusVersion: 4,
   WAVE1_FOUNDATION_ONLY: true,
   STUDY_ENGINE_REMAINS_AUTHORITY: true,
   STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED: true,
@@ -159,6 +185,11 @@ const status = {
   POST_PROVIDER_POLICY_USES_IMMUTABLE_STUDY_AUTHORITY: true,
   ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED: false,
   ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL: true,
+  PRIVACY_SECURITY_REQUIRES_REVIEWED_PROVENANCE: true,
+  LEXICAL_PRIVACY_MATCHING_IS_DEFENSE_IN_DEPTH_ONLY: true,
+  RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED: false,
+  UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED: false,
+  CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED: false,
   WAVE_1_COMPLETE: false,
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
   NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT: true,
@@ -178,7 +209,11 @@ const providerBoundaryReconvergence = {
   w1_10R2Ruling: "HOLD",
   w1_10R2Blocker: "ACTIVE_ASSESSMENT_ANSWER_SECURITY_DEPENDED_ON_FINITE_LEXICAL_PATTERNS",
   structuralAntiAnswerRepairSha: "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
-  w1_09R3Status: "CANDIDATE_REQUIRES_W1_10R3_INDEPENDENT_REREVIEW",
+  w1_09R3Sha: "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+  w1_10R3Ruling: "HOLD",
+  w1_10R3Blocker: "PRIVACY_SECURITY_DEPENDED_ON_FINITE_LEXICAL_PATTERNS",
+  reviewedContentPrivacyRepairSha: "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
+  w1_09R4Status: "CANDIDATE_REQUIRES_W1_10R4_FINAL_INDEPENDENT_REREVIEW",
   structuralRulings: {
     providerPortAcceptsProviderExecutionRequestOnly: true,
     providerReceivesStudyAuthorityContext: false,
@@ -242,11 +277,44 @@ const antiAnswerReconvergence = {
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
 };
 
+const privacyProvenanceReconvergence = {
+  evidenceVersion: 1,
+  w1_09R3Sha: "7435f820dc9e141d8a113b4d7f853044e36ba51d",
+  w1_10R3Ruling: "HOLD",
+  w1_10R3Blocker: "PRIVACY_SECURITY_DEPENDED_ON_FINITE_LEXICAL_PATTERNS",
+  rejectedRepairApproach: "KEYWORD_EXPANSION_CANNOT_AUTHORIZE_ARBITRARY_FREE_FORM_CONTENT",
+  reviewedContentPrivacyRepairSha: "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
+  rootRule: "ARBITRARY_FREE_FORM_CONTENT_REQUIRES_TRUSTED_STUDY_REVIEWED_CONTENT_PROVENANCE",
+  reviewedContentAuthorityOwner: "Study Engine",
+  providerReceivesApprovalAuthority: false,
+  permanentHardGateTest: "tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.ts",
+  hardGateFamilies: {
+    historicalPrivacyBlockers: 16,
+    additionalPrivacyProvenance: 21,
+    approvalAuthorityAttacks: 10,
+    freeFormOutputProvenance: 15,
+    structuredControlPrivacy: 16,
+    fullReviewedContentPrivacySuite: 78,
+  },
+  invariants: {
+    PRIVACY_SECURITY_REQUIRES_REVIEWED_PROVENANCE: true,
+    LEXICAL_PRIVACY_MATCHING_IS_DEFENSE_IN_DEPTH_ONLY: true,
+    RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED: false,
+    UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED: false,
+    CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED: false,
+  },
+  regexNeutralizedTemporaryCopyRequired: true,
+  softScoreCompensationAllowed: false,
+  WAVE_1_COMPLETE: false,
+  FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
+};
+
 const outputs = new Map<string, string>([
   ["PROVENANCE.json", serialize(provenance)],
   ["FOUNDATION-EVALUATION.json", serialize(evaluationSummary)],
   ["PROVIDER-BOUNDARY-RECONVERGENCE.json", serialize(providerBoundaryReconvergence)],
   ["STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json", serialize(antiAnswerReconvergence)],
+  ["REVIEWED-CONTENT-PRIVACY-RECONVERGENCE.json", serialize(privacyProvenanceReconvergence)],
   ["STATUS.json", serialize(status)],
 ]);
 const releaseChecksums = Object.fromEntries(
@@ -285,7 +353,13 @@ const manifest = {
     providerBoundaryAdversarial: providerBoundaryReconvergence.permanentHardGates.length,
     structuralAntiAnswerAdversarial: antiAnswerReconvergence.counts.fullStructuralAntiAnswerSuite,
     phraseMatrix: antiAnswerReconvergence.counts.phraseMatrix,
-    totalConvergence: 108,
+    historicalPrivacyBlockers: privacyProvenanceReconvergence.hardGateFamilies.historicalPrivacyBlockers,
+    additionalPrivacyProvenance: privacyProvenanceReconvergence.hardGateFamilies.additionalPrivacyProvenance,
+    approvalAuthorityAttacks: privacyProvenanceReconvergence.hardGateFamilies.approvalAuthorityAttacks,
+    freeFormOutputProvenance: privacyProvenanceReconvergence.hardGateFamilies.freeFormOutputProvenance,
+    structuredControlPrivacy: privacyProvenanceReconvergence.hardGateFamilies.structuredControlPrivacy,
+    reviewedContentPrivacyProvenance: privacyProvenanceReconvergence.hardGateFamilies.fullReviewedContentPrivacySuite,
+    totalConvergence: 186,
   },
   evaluationResult: {
     passed: evaluation.passed,
@@ -312,6 +386,13 @@ const manifest = {
     w1_10R2Ruling: antiAnswerReconvergence.w1_10R2Ruling,
     structuralAntiAnswerRepairSha: antiAnswerReconvergence.structuralAntiAnswerRepairSha,
     reconvergenceEvidence: "STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json",
+    finalIndependentRereviewRequired: true,
+  },
+  reviewedContentPrivacyHistory: {
+    w1_09R3Sha: privacyProvenanceReconvergence.w1_09R3Sha,
+    w1_10R3Ruling: privacyProvenanceReconvergence.w1_10R3Ruling,
+    reviewedContentPrivacyRepairSha: privacyProvenanceReconvergence.reviewedContentPrivacyRepairSha,
+    reconvergenceEvidence: "REVIEWED-CONTENT-PRIVACY-RECONVERGENCE.json",
     finalIndependentRereviewRequired: true,
   },
   staticFallback: "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",
