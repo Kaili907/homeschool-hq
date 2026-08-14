@@ -11,17 +11,17 @@ Deployed alias: `https://family-dashboard-auto-r1--manuel-academy.netlify.app/fa
 
 The configured Chrome browser connection was unavailable in this Codex session. An isolated Playwright Chromium context was therefore used only as a synthetic deployed-alias probe and as repository regression evidence; it is not evidence from the reporting user's browser profile or persisted household state.
 
-## Deployed-alias reproduction
+## Deployed-alias manual-assignment reproduction
 
-[VERIFIED] A fresh synthetic Grade 3 learner was created at the deployed alias in a 1594 × 920 Chromium viewport. School Plan materialized the real admitted assignment below immediately before Dashboard composition:
+[VERIFIED] A fresh synthetic Grade 3 learner was created at the deployed alias in a 1594 × 920 Chromium viewport. The Parent manually assigned the real admitted lesson through `Assignments & readiness`; School Plan was not configured. Immediately before Dashboard activation there were zero `manuel-academy.study.family-auto-planner.v1` IndexedDB records. The manual assignment was:
 
-- learner ref: `family-setup-student:63b03c8e-0996-4cec-b779-c44ea2675a3b`
-- assignment ref: `assignment:1i4lgdw:9mu3l8`
+- learner ref: `family-setup-student:7e804c5f-5296-4b1f-9ee3-b0431aeed200`
+- assignment ref: `assignment:12sqzsz:9mu3l8`
 - lesson ref: `ma-g3-mathematics-u01-l01`
 - title: `Launch and diagnostic: making sense of unfamiliar problems`
 - state before activation: `planned`
 
-[VERIFIED] The reported failure did not occur. A coordinate-level mouse click at the exact visible center opened Study step 1. Save and exit returned to Dashboard. Reload preserved the active assignment, and Tab → Enter on the skip link → Tab → Space on `Continue lesson` reopened Study step 1 with the same assignment and session reference.
+[VERIFIED] The reported manual-assignment failure did not occur in this synthetic deployed state. A coordinate-level mouse click at the exact visible center opened Study step 1. Save and exit returned to Dashboard. Reload preserved the active assignment, and Tab → Enter on the skip link → Tab → Space on `Continue lesson` reopened Study step 1 with the same assignment and session reference.
 
 `LIVE_REPRODUCED: NO`
 
@@ -45,31 +45,42 @@ At the deployed-alias button center `(225.203125, 507.390625)`:
 
 ## Command and learner binding
 
-[VERIFIED] The visible mission work ref came from the just-built `FamilyPilotStudentDashboardModel`. `ActiveStudentDashboard.commandForWork` authorizes only a `START` or `CONTINUE` command whose learner ref equals the active learner and whose assignment ref equals the presentation ref. The synthetic deployed-alias run opened the exact assignment listed above, changing it from `planned` to `active` and retaining it through save/reload/resume.
+[VERIFIED] The visible mission work ref came from the just-built `FamilyPilotStudentDashboardModel`. `ActiveStudentDashboard.commandForWork` authorizes only a `START` or `CONTINUE` command whose learner ref equals the active learner and whose assignment ref equals the presentation ref. The manually assigned deployed-alias run opened the exact assignment listed above, changing it from `planned` to `active` and retaining it through save/reload/resume.
 
 The retained session ref was:
 
-`block:3c8e-0996-4cec-b779-c44ea2675a3b:2026-08-14:ma-g3-mathematics-u01-l01:session`
+`block:4c5f-5296-4b1f-9ee3-b0431aeed200:2026-08-14:ma-g3-mathematics-u01-l01:session`
 
-`AUTO_PLANNER_COMMAND_STATE: CURRENT FOR SYNTHETIC REPRO`  
-`ASSIGNMENT_REF: assignment:1i4lgdw:9mu3l8`  
+`MANUAL_ASSIGNMENT_COMMAND_STATE: CURRENT FOR SYNTHETIC REPRO`
+
+`ASSIGNMENT_REF: assignment:12sqzsz:9mu3l8`
+
 `LEARNER_BINDING: EXACT MATCH FOR SYNTHETIC REPRO`
 
-This rules out pointer hit-test blocking, an invisible overlay, CSS pointer-events, a disabled mismatch, an unbound handler, command rejection, learner-binding rejection, and Study route failure for a freshly materialized assignment in the tested deployed state. It does not rule out a condition unique to the reporting user's persisted browser state.
+This rules out pointer hit-test blocking, an invisible overlay, CSS pointer-events, a disabled mismatch, an unbound handler, command rejection, learner-binding rejection, and Study route failure for a fresh manually assigned lesson in the tested deployed state. It does not rule out a condition unique to the reporting user's persisted browser state.
+
+## Separate Auto Planner verification
+
+[VERIFIED] Auto Planner was tested only after the independent manual path. A separate synthetic Grade 3 learner received the same admitted lesson through School Plan, with one planner document present. The same `clickMissionCenter` helper hit-tested and clicked the orange mission button, opened the exact assignment in Study, saved, reloaded, and resumed the same session by keyboard.
+
+This proves that an auto-planned assignment can consume the same accepted Dashboard → command validation → Study launch path. It is not evidence that the screenshot assignment was auto-planned, and it does not attribute the reported failure to Auto Planner.
+
+`AUTO_PLANNER_COMMAND_STATE: CURRENT IN SEPARATE SYNTHETIC VERIFICATION`
 
 ## Root cause and fix decision
 
 `ROOT_CAUSE_CLASS: OTHER — FAILURE NOT REPRODUCIBLE / ROOT CAUSE UNKNOWN`
 
-No product behavior was changed. Applying CSS, command-lifecycle, or Study changes without a reproduced failing state would be a blind patch and could disturb accepted Auto Planner and Study authority.
+No product behavior was changed. Applying CSS, command-lifecycle, or Study changes without a reproduced failing state would be a blind patch and could disturb accepted Dashboard and Study authority.
 
-The concrete acceptance gap was corrected in test coverage: the existing production helper `startFromHome` selects the lower Today's Work row by accessible name `Start <lesson title>`. It did not select the orange mission button whose accessible name is `Start lesson`. The visual harness selected the orange button, but it used Playwright locator activation against a fixture callback rather than a newly materialized production assignment and exact center coordinates.
+The concrete acceptance gap was corrected in test coverage: the existing production helper `startFromHome` selects the lower Today's Work row by accessible name `Start <lesson title>`. It did not select the orange mission button whose accessible name is `Start lesson`. The visual harness selected the orange button, but it used Playwright locator activation against a fixture callback rather than a real manually assigned production assignment and exact center coordinates.
 
 ## New regression coverage
 
-`tests/browser/final-family-pilot-launch.spec.ts` now adds:
+`tests/browser/final-family-pilot-launch.spec.ts` now adds the manual-assignment regression first:
 
-- a real Grade 3 learner and School Plan materialization;
+- a real Grade 3 learner and Parent manual assignment;
+- proof that no Auto Planner record exists;
 - the reported 1594 × 920 viewport;
 - exact assignment/lesson/title/state proof before activation;
 - visibility and enabled-state assertions for the orange `Start lesson` button;
@@ -81,6 +92,8 @@ The concrete acceptance gap was corrected in test coverage: the existing product
 - Tab + Enter + Tab + Space keyboard resume;
 - stable assignment and Study session refs after resume.
 
+A separate Auto Planner regression then creates the assignment through School Plan and uses the same center-click helper and Study save/resume path.
+
 ## Verification
 
 [VERIFIED] All commands below completed successfully on 2026-08-14:
@@ -89,11 +102,11 @@ The concrete acceptance gap was corrected in test coverage: the existing product
 - focused Dashboard unit tests — 3 files, 35 tests passed
 - Auto Planner and final-host unit tests — 7 files, 53 tests passed
 - Family Pilot unit suite — 88 files, 925 tests passed
-- focused new production regression — 1 test passed
+- focused manual and Auto Planner mission regressions — 2 tests passed
 - Dashboard visual/accessibility suite — 8 tests passed, including phone, tablet, laptop, desktop, reduced motion, focus, and skip-link checks
 - enabled production build — pass; 90 courses and 8,292 projected lessons
 - browser answer-authority audit — pass; 0 findings and 0 authority-name occurrences
-- production Family Pilot browser suite — 14 tests passed
+- production Family Pilot browser suite — 15 tests passed
 - `npm run audit:web-release` — `WEB_RELEASE_SECURITY_GATE PASS`
 
 ## Acceptance blocker

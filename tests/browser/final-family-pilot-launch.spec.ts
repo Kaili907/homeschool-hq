@@ -155,6 +155,42 @@ async function resumeFromHome(page: Page, lesson: Lesson) {
   await page.getByRole('button', { name: `Continue ${lesson.title}` }).click()
 }
 
+async function clickMissionCenter(page: Page, buttonName: 'Start lesson' | 'Continue lesson') {
+  const missionAction = page.getByRole('button', { name: buttonName, exact: true })
+  await expect(missionAction).toBeVisible()
+  await expect(missionAction).toBeEnabled()
+  const hitTest = await missionAction.evaluate((button) => {
+    const rect = button.getBoundingClientRect()
+    const x = rect.x + rect.width / 2
+    const y = rect.y + rect.height / 2
+    const top = document.elementFromPoint(x, y)
+    return {
+      x,
+      y,
+      topTag: top?.tagName ?? null,
+      topClass: top?.className ?? null,
+      intendedButton: top === button || Boolean(top && button.contains(top)),
+      overlaps: document.elementsFromPoint(x, y).map((element) => ({
+        tag: element.tagName,
+        className: element.className,
+        pointerEvents: getComputedStyle(element).pointerEvents,
+      })),
+    }
+  })
+  expect(hitTest).toMatchObject({
+    topTag: 'BUTTON',
+    topClass: 'family-dashboard__button-primary',
+    intendedButton: true,
+  })
+  expect(hitTest.overlaps[0]).toMatchObject({
+    tag: 'BUTTON',
+    className: 'family-dashboard__button-primary',
+    pointerEvents: 'auto',
+  })
+  await page.mouse.click(hitTest.x, hitTest.y)
+  return hitTest
+}
+
 async function continueStep(page: Page) {
   const status = page.getByRole('status').filter({ hasText: /^Step \d+ of \d+$/ })
   const before = await status.textContent()
@@ -521,7 +557,54 @@ test('Parent School Plan produces idempotent automatic Today work without learne
   expect(JSON.stringify(plannerRecords[0]?.value).match(/materializationRef/g)).toHaveLength(10)
 })
 
-test('auto-planned mission launches through its visible center and keyboard resume', async ({ page }) => {
+test('manually assigned mission launches through its visible center and keyboard resume', async ({ page }) => {
+  await page.setViewportSize({ width: 1594, height: 920 })
+  await setupFamily(page, [{ name: 'Manual Pointer Student', grade: '3' }])
+  await assign(page, 'Manual Pointer Student', LESSON.autoGrade3)
+  await openStudent(page, 'Manual Pointer Student')
+
+  const stateBefore = await supportState(page)
+  const studentRef = stateBefore.app.activeStudentRef
+  const assignment = assignmentFor(stateBefore.core, studentRef, LESSON.autoGrade3.lessonRef)
+  expect(assignment).toMatchObject({
+    lessonRef: LESSON.autoGrade3.lessonRef,
+    title: LESSON.autoGrade3.title,
+    state: 'planned',
+  })
+  const plannerRecords = (await idbRecords(page)).filter((record) => record.key.startsWith('manuel-academy.study.family-auto-planner.v1'))
+  expect(plannerRecords).toHaveLength(0)
+
+  await clickMissionCenter(page, 'Start lesson')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const started = assignmentFor((await supportState(page)).core, studentRef, LESSON.autoGrade3.lessonRef)
+  expect(started).toMatchObject({ assignmentRef: assignment.assignmentRef, state: 'active' })
+  expect(started.sessionRef).toBeTruthy()
+
+  await page.getByRole('button', { name: 'Save and exit' }).click()
+  await expect(page.getByRole('heading', { name: 'Hello, Manual' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Continue lesson', exact: true })).toBeVisible()
+
+  await page.reload()
+  await expect(page.getByRole('heading', { name: 'Hello, Manual' })).toBeVisible()
+  await page.keyboard.press('Tab')
+  const skip = page.getByRole('link', { name: 'Skip to today’s work' })
+  await expect(skip).toBeFocused()
+  await page.keyboard.press('Enter')
+  await page.keyboard.press('Tab')
+  const continueAction = page.getByRole('button', { name: 'Continue lesson', exact: true })
+  await expect(continueAction).toBeFocused()
+  await page.keyboard.press('Space')
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const resumed = assignmentFor((await supportState(page)).core, studentRef, LESSON.autoGrade3.lessonRef)
+  expect(resumed).toMatchObject({
+    assignmentRef: assignment.assignmentRef,
+    lessonRef: LESSON.autoGrade3.lessonRef,
+    state: 'active',
+    sessionRef: started.sessionRef,
+  })
+})
+
+test('auto-planned assignment uses the same centered mission launch path', async ({ page }) => {
   await page.setViewportSize({ width: 1594, height: 920 })
   await setupFamily(page, [{ name: 'Mission Pointer Student', grade: '3' }])
   await configureSchoolPlan(page, 'Mission Pointer Student')
@@ -536,40 +619,10 @@ test('auto-planned mission launches through its visible center and keyboard resu
     title: LESSON.autoGrade3.title,
     state: 'planned',
   })
+  const plannerRecords = (await idbRecords(page)).filter((record) => record.key.startsWith('manuel-academy.study.family-auto-planner.v1'))
+  expect(plannerRecords).toHaveLength(1)
 
-  const missionAction = page.getByRole('button', { name: 'Start lesson', exact: true })
-  await expect(missionAction).toBeVisible()
-  await expect(missionAction).toBeEnabled()
-  const hitTest = await missionAction.evaluate((button) => {
-    const rect = button.getBoundingClientRect()
-    const x = rect.x + rect.width / 2
-    const y = rect.y + rect.height / 2
-    const top = document.elementFromPoint(x, y)
-    return {
-      x,
-      y,
-      topTag: top?.tagName ?? null,
-      topClass: top?.className ?? null,
-      intendedButton: top === button || Boolean(top && button.contains(top)),
-      overlaps: document.elementsFromPoint(x, y).map((element) => ({
-        tag: element.tagName,
-        className: element.className,
-        pointerEvents: getComputedStyle(element).pointerEvents,
-      })),
-    }
-  })
-  expect(hitTest).toMatchObject({
-    topTag: 'BUTTON',
-    topClass: 'family-dashboard__button-primary',
-    intendedButton: true,
-  })
-  expect(hitTest.overlaps[0]).toMatchObject({
-    tag: 'BUTTON',
-    className: 'family-dashboard__button-primary',
-    pointerEvents: 'auto',
-  })
-
-  await page.mouse.click(hitTest.x, hitTest.y)
+  await clickMissionCenter(page, 'Start lesson')
   await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
   const started = assignmentFor((await supportState(page)).core, studentRef, LESSON.autoGrade3.lessonRef)
   expect(started).toMatchObject({ assignmentRef: assignment.assignmentRef, state: 'active' })
