@@ -85,4 +85,23 @@ The convergence is covered by:
 - the production Family Pilot browser workflow for learner/PIN, dashboard landing, Start, Continue, exact process-reopen resume, return from Study, completion refresh, sibling isolation, Lock, Switch learner, Sign out, hard refresh, Safety/source/guardian gates, all supported curriculum routes, IndexedDB refusal, and migration/recovery;
 - production build browser-answer-authority scanning and `npm run audit:web-release`.
 
-Final command results and the pushed acceptance SHA are reported by the session that commits this file.
+Final verification results:
+
+- `npm run typecheck`: PASS.
+- focused adapter, dashboard, and presentation tests: PASS, 35 tests across 3 files.
+- full Family Pilot unit suite: PASS, 872 tests across 81 files.
+- reviewed dashboard responsive/accessibility browser suite: PASS, 8 tests.
+- production Family Pilot browser suite: PASS, 12 tests. This includes the complete family workflow, process reopen, sign out, the 90-cell grade/course matrix, answer-authority negative control, guardian/rubric authority paths, repaired curriculum paths, backup isolation, IndexedDB write refusal, legacy migration, and both corruption fail-closed paths.
+- default-off production feature-flag browser check: PASS, 1 test.
+- `VITE_FAMILY_PILOT_ENABLED=true npm run build`: PASS, 563 modules. The curriculum build contains 90 courses and 8,292 lessons.
+- browser answer-authority build scan: PASS, 4 chunks and zero findings.
+- `npm run audit:web-release`: PASS, including `WEB_RELEASE_SECURITY_GATE PASS`, 10/10 route lifecycle checks, 90 courses, 698 units, 8,292 lessons, 699 assessments, and zero adult-answer leak.
+- `npm audit --omit=dev`: PASS, zero production dependency vulnerabilities.
+
+## Known limitations
+
+- There is no persisted future-planner authority yet, so Upcoming remains honestly empty unless real future `ScheduleItemV1` records are supplied. Auto Planner is deliberately not implemented here.
+- Course cards expose the reviewed course intent port, but Family Pilot does not yet have a separate learner course-browser surface; selecting a course returns focus to current work rather than inventing a new course runtime.
+- Jarvis is intentionally visual-only and reports that Tutor V2 is not connected. It cannot listen, answer, or store a transcript.
+- The dashboard blocks launches from current app/core recovery and adapter readiness state. Durable Study and learner-response IndexedDB health is also revalidated at the existing Study launch boundary, where failures remain fail-closed; no second dashboard storage authority or speculative persistence probe was added.
+- Hosted sync, trusted scorer activation, production deployment, new curriculum depth, and Grade 6 remain outside this convergence.
