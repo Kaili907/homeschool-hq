@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-08-14T02:01:24.728Z",
+  "classification": "READY_FOR_NETLIFY_BRANCH_DEPLOY",
+  "auditedSha": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+  "auditedTree": "4479e7eef885253dd140bee138f0d8a73048bca9",
+  "fixesMade": 0,
+  "population": {
+    "courses": 90,
+    "lessons": 8292,
+    "lessonReady": 8292,
+    "lessonBlocked": 0,
+    "assessments": 699,
+    "assessmentReady": 699,
+    "assessmentBlocked": 0,
+    "assessmentStructuralOnly": 0,
+    "grades": [3, 4, 5, 7, 8, 9, 10, 11, 12]
+  },
+  "browser": {
+    "fileCount": 338,
+    "javascriptCount": 4,
+    "jsonCount": 330,
+    "coursePathPayloadCount": 322,
+    "finalFamilyPilotCoursePayloadCount": 90,
+    "sourceMapCount": 0,
+    "workerCount": 0,
+    "treeSha256": "98adc32bab354576717ed1666bfc6b3c33d9aa77fbb73edaad727c6efdfb6485",
+    "authorityNameOccurrences": {
+      "answerIndex": 0,
+      "correctAnswer": 0,
+      "expectedAnswer": 0,
+      "acceptedAnswers": 0,
+      "solutionKey": 0,
+      "answerKey": 0,
+      "answerKeyMap": 0,
+      "correctChoice": 0,
+      "correctOption": 0
+    },
+    "answerAuthorityFindings": 0,
+    "pinMaterialFindings": 0,
+    "rawTutorTranscriptFindings": 0,
+    "serviceRoleCredentialFindings": 0,
+    "localhostRuntimeEndpointFindings": 0,
+    "totalWebSecurityFindings": 0
+  },
+  "routeIsolation": {
+    "familyStaticModules": 105,
+    "forbiddenFamilyModules": 0,
+    "acceptedLegacyAdapters": 0,
+    "legacyExcludedFromEnabledBuild": true
+  },
+  "netlify": {
+    "context": "mac/web-release-r3-convergence-r1",
+    "zipCount": 31,
+    "manifestCount": 1,
+    "manifestEntryCount": 31,
+    "manifestVersion": 1,
+    "forbiddenCallableNames": [],
+    "resolverCallable": false,
+    "assessmentCallable": true,
+    "treeSha256": "02a0f06dfb20651e94eed0d3b186a8ffd39403524c49edf7524052d0292a8417",
+    "trustedScorer": {
+      "name": "production-item-assessment",
+      "zipBytes": 62866852,
+      "zipSha256": "92f3c7774d3dd66b66a648b5883bf3c383233742cdda4483dacfd51f69761ad9",
+      "archiveEntries": 15918,
+      "productionBindings": 8292,
+      "packageLoaded": true,
+      "postOnly": true,
+      "wrongResolverPathStatus": 404,
+      "unavailableAuthorityStatus": 503
+    }
+  },
+  "tests": {
+    "webSecurityGate": "PASS",
+    "qualityGate": "PASS",
+    "webGateControls": "11/11",
+    "learnerGateControls": "22/22",
+    "convergence": "14 files / 79 tests",
+    "familyPilotAndAssessment": "84 files / 899 tests",
+    "netlify": "95 files / 1845 tests",
+    "scorerAndSurface": "2 files / 17 tests",
+    "persistentChromium": "11/11",
+    "defaultOffChromium": "1/1",
+    "productionDependencyVulnerabilities": 0
+  },
+  "deployed": false
+}
