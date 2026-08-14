@@ -22,14 +22,17 @@ const PACKAGES = resolve(CORPUS, 'packages/technology')
 const GUIDES = resolve(CORPUS, 'scoring-guides/technology')
 const REVIEW_PATH = resolve(REPO, 'docs/curriculum-quality/technology/solution-exposure-review-r1/case-review.json')
 const BINDINGS_PATH = resolve(REPO, 'curriculum-release-admitted/family-pilot-r1/production-bindings.jsonl')
-const EVIDENCE_DIR = resolve(REPO, 'docs/curriculum-quality/technology/solution-exposure-fix-r2')
+const R2_REPORT_PATH = resolve(REPO, 'docs/curriculum-quality/technology/solution-exposure-fix-r2/semantic-gate-report.json')
+const EVIDENCE_DIR = resolve(REPO, 'docs/curriculum-quality/technology/solution-exposure-fix-r3')
 const MAPPING_JSON = resolve(EVIDENCE_DIR, 'case-mapping.json')
 const MAPPING_CSV = resolve(EVIDENCE_DIR, 'case-mapping.csv')
 const REPORT_JSON = resolve(EVIDENCE_DIR, 'semantic-gate-report.json')
 const BROWSER_PROOF_JSON = resolve(EVIDENCE_DIR, 'browser-payload-proof.json')
+const COVERAGE_LEDGER_JSON = resolve(EVIDENCE_DIR, 'full-corpus-coverage-ledger.json')
+const COVERAGE_LEDGER_CSV = resolve(EVIDENCE_DIR, 'full-corpus-coverage-ledger.csv')
 const WRITE = process.argv.includes('--write')
 
-const PARENT_REPAIR = '7de7b9ad0e9af396937270079f4db0e0d4118990'
+const PARENT_REPAIR = '4a3b219421c3a4af7eaf5eec0156319ce1ef8932'
 const REVIEW_COMMIT = '15633ad5677dd5a966adf0fc83b22dca93e6bf1e'
 const BASE_COMMIT = '56dd8a45fee1ca03dd5f83e1466c9f081824d6b9'
 
@@ -79,6 +82,7 @@ function stableWriteOrCheck(path, content) {
 }
 
 const review = readJson(REVIEW_PATH)
+const r2Report = readJson(R2_REPORT_PATH)
 if (review.base_commit !== BASE_COMMIT) throw new Error(`Unexpected review base ${review.base_commit}`)
 if (review.cases.length !== 87) throw new Error(`Expected 87 authoritative reviewed cases, found ${review.cases.length}`)
 
@@ -104,6 +108,10 @@ let codeCases = 0
 let formalAdultKeyLeaks = 0
 let adultAuthoritiesComplete = 0
 let legitimateWorkedExamples = 0
+let lessonsWithSemanticRecord = 0
+let lessonsExplicitlyNonProtected = 0
+let codeDebugSemanticRecords = 0
+let nonCodeSemanticRecords = 0
 
 if (technologyBindings.length !== 336 || bindingByLesson.size !== 336 || browserCourseRefs.length !== 9) {
   failures.push(`Browser binding boundary is ${technologyBindings.length} rows, ${bindingByLesson.size} lessons, ${browserCourseRefs.length} courses; expected 336/336/9`)
@@ -139,7 +147,30 @@ for (const packagePath of packagePaths) {
 
   if (setup?.activity_kind !== 'CODE_OR_DEBUG') {
     if (reviewed) failures.push(`${pkg.lesson_id}: reviewed code/debug case is no longer CODE_OR_DEBUG`)
-    packageRows.push({ lessonId: pkg.lesson_id, packageRaw, guideRaw })
+    if (material && binding) {
+      records.push(recordFromMaterial({
+        material,
+        courseRef: binding.courseRef,
+        protectedTask: false,
+        scoringStance: pkg.scoring_stance,
+        taskType: pkg.task_type,
+        focus: pkg.focus,
+        deliverable: pkg.deliverable,
+      }))
+      lessonsWithSemanticRecord += 1
+      lessonsExplicitlyNonProtected += 1
+      nonCodeSemanticRecords += 1
+    }
+    packageRows.push({
+      lessonId: pkg.lesson_id,
+      packageRaw,
+      guideRaw,
+      packagePath,
+      guidePath,
+      pkg,
+      binding,
+      protectionClassification: 'EXPLICIT_NON_PROTECTED_OPEN_ENDED_RUBRIC_NO_FIXED_RESPONSE_AUTHORITY',
+    })
     continue
   }
 
@@ -201,7 +232,13 @@ for (const packagePath of packagePaths) {
       exactRepair: authority?.exact_repair,
       protectedTask: !isWorkedExample,
       scoringStance: pkg.scoring_stance,
+      taskType: pkg.task_type,
+      focus: pkg.focus,
+      deliverable: pkg.deliverable,
     }))
+    lessonsWithSemanticRecord += 1
+    codeDebugSemanticRecords += 1
+    if (isWorkedExample) lessonsExplicitlyNonProtected += 1
   }
   packageRows.push({
     lessonId: pkg.lesson_id,
@@ -213,12 +250,20 @@ for (const packagePath of packagePaths) {
     isWorkedExample,
     isSummative,
     authorityComplete,
+    pkg,
+    binding,
+    protectionClassification: isWorkedExample
+      ? 'EXPLICIT_NON_PROTECTED_LABELLED_MODEL_FORMATIVE_NO_PENALTY'
+      : 'PROTECTED_EXECUTABLE_REPAIR_AUTHORITY',
   })
 }
 
 if (codeCases !== 87) failures.push(`Found ${codeCases} CODE_OR_DEBUG packages instead of 87`)
 if (legitimateWorkedExamples !== 19) failures.push(`Preserved ${legitimateWorkedExamples} worked examples instead of 19`)
 if (adultAuthoritiesComplete !== 87) failures.push(`Complete adult authorities ${adultAuthoritiesComplete}/87`)
+if (lessonsWithSemanticRecord !== 336) failures.push(`Semantic authority records ${lessonsWithSemanticRecord}/336`)
+if (codeDebugSemanticRecords !== 87) failures.push(`Code/debug semantic records ${codeDebugSemanticRecords}/87`)
+if (nonCodeSemanticRecords !== 249) failures.push(`Non-code semantic records ${nonCodeSemanticRecords}/249`)
 
 const workedRows = review.cases.filter((row) => row.classification === 'LEGITIMATE_WORKED_EXAMPLE')
 const protectedRows = review.cases.filter((row) => row.classification !== 'LEGITIMATE_WORKED_EXAMPLE')
@@ -290,19 +335,19 @@ const payloadCourseHashes = [...projectedByCourse]
     ),
   }))
 const browserProof = {
-  schema_version: 'technology-browser-payload-proof-r2.0',
+  schema_version: 'technology-browser-payload-proof-r3.0',
   projection_authority: 'scripts/build-final-family-pilot-data.mjs projectJsonLearnerMaterial -> one lazy JSON payload per admitted courseRef',
   binding_authority: relative(REPO, BINDINGS_PATH),
   visibility_semantics: 'Selecting a course loads one payload containing every lesson material in that course; lesson order does not hide later material.',
   technology_courses: browserCourseRefs.length,
   technology_lessons: technologyBindings.length,
   projected_materials: [...projectedByCourse.values()].reduce((sum, rows) => sum + rows.length, 0),
-  all_course_payload_roles_compared: ['MODEL', 'GUIDED', 'GUIDED_B', 'PROBE', 'BUILD', 'CORRECT', 'DEMONSTRATE'],
+  all_course_payload_roles_compared: [...new Set(packageRows.map((row) => row.pkg?.work_mode).filter(Boolean))].sort(),
   courses: payloadCourseHashes,
 }
 
 const mappingReport = {
-  schema_version: 'technology-solution-exposure-fix-r2.0',
+  schema_version: 'technology-solution-exposure-fix-r3.0',
   parent_repair: PARENT_REPAIR,
   authoritative_review_commit: REVIEW_COMMIT,
   independent_acceptance_inventory: {
@@ -313,8 +358,75 @@ const mappingReport = {
   mappings: mapping,
 }
 
+const exposuresByProtectedLesson = new Map()
+for (const exposure of exposures) {
+  const bucket = exposuresByProtectedLesson.get(exposure.protectedLessonId) ?? []
+  bucket.push(exposure.sourceLessonId)
+  exposuresByProtectedLesson.set(exposure.protectedLessonId, bucket)
+}
+const coverageEntries = packageRows
+  .map((row) => {
+    const record = recordById.get(row.lessonId)
+    const visibleRefs = (record?.visibleSolutionRefs ?? []).map((entry) =>
+      `${relative(REPO, row.packagePath)}#${entry.path}`,
+    )
+    const trustedRefs = row.reviewed
+      ? [`${relative(REPO, row.guidePath)}#trusted_solution_reference`]
+      : []
+    const exposureSources = exposuresByProtectedLesson.get(row.lessonId) ?? []
+    return {
+      course: row.binding?.courseRef ?? null,
+      lesson_ref: row.lessonId,
+      task_family_type: `${row.pkg?.task_type ?? 'UNKNOWN'}/${row.pkg?.activity_setup?.activity_kind ?? 'UNKNOWN'}`,
+      phase: row.pkg?.phase ?? null,
+      work_mode: row.pkg?.work_mode ?? null,
+      protected: record?.protected ?? null,
+      protection_classification: row.protectionClassification ?? 'UNEXPLAINED',
+      semantic_analyzer_used: record?.analyzer ?? null,
+      learner_visible_solution_example_refs: visibleRefs,
+      trusted_authority_refs: trustedRefs,
+      comparison_status: !record
+        ? 'UNEXPLAINED_SKIP'
+        : exposureSources.length
+          ? `FAIL_EQUIVALENT_SOLUTION_FROM:${exposureSources.join('|')}`
+          : record.protected
+            ? 'PASS_NO_EQUIVALENT_LEARNER_VISIBLE_SOLUTION'
+            : row.reviewed
+              ? 'PASS_NON_PROTECTED_LABELLED_WORKED_EXAMPLE'
+              : 'PASS_EXPLICIT_NON_PROTECTED_OPEN_ENDED_NO_FIXED_RESPONSE',
+    }
+  })
+  .sort((left, right) => left.lesson_ref.localeCompare(right.lesson_ref))
+const unexplainedSkips = coverageEntries.filter((entry) =>
+  !entry.semantic_analyzer_used || entry.protection_classification === 'UNEXPLAINED',
+).length
+if (coverageEntries.length !== 336) failures.push(`Coverage ledger entries ${coverageEntries.length}/336`)
+if (unexplainedSkips !== 0) failures.push(`Coverage ledger contains ${unexplainedSkips} unexplained skips`)
+
+const coverageLedger = {
+  schema_version: 'technology-solution-authority-coverage-ledger-r3.0',
+  browser_payload_scope: 'all admitted Technology lessons co-shipped in each complete browser course payload',
+  summary: {
+    lessons_total: coverageEntries.length,
+    lessons_with_semantic_record: lessonsWithSemanticRecord,
+    lessons_explicitly_non_protected: lessonsExplicitlyNonProtected,
+    protected_lessons: coverageEntries.filter((entry) => entry.protected).length,
+    code_debug_coverage: codeDebugSemanticRecords,
+    non_code_coverage: nonCodeSemanticRecords,
+    unexplained_skips: unexplainedSkips,
+  },
+  entries: coverageEntries,
+}
+
+const packageCorpusHash = sha256(packageRows.map((row) => `${row.lessonId}:${sha256(row.packageRaw)}`).join('\n'))
+const scoringCorpusHash = sha256(packageRows.map((row) => `${row.lessonId}:${sha256(row.guideRaw)}`).join('\n'))
+const browserProjectionHash = sha256(payloadCourseHashes.map((row) => `${row.course_ref}:${row.learner_materials_sha256}`).join('\n'))
+const learnerCurriculumChanged =
+  packageCorpusHash !== r2Report.evidence.technology_package_corpus_sha256 ||
+  browserProjectionHash !== r2Report.evidence.browser_projection_corpus_sha256
+
 const report = {
-  schema_version: 'technology-course-payload-semantic-gate-r2.0',
+  schema_version: 'technology-course-payload-semantic-gate-r3.0',
   status: failures.length === 0 ? 'PASS' : 'FAIL',
   parent_repair: PARENT_REPAIR,
   authoritative_review_commit: REVIEW_COMMIT,
@@ -323,6 +435,11 @@ const report = {
     reviewed_code_or_debug_cases: codeCases,
     browser_course_payloads: browserCourseRefs.length,
     browser_bound_technology_lessons: technologyBindings.length,
+    lessons_with_semantic_record: lessonsWithSemanticRecord,
+    lessons_explicitly_non_protected: lessonsExplicitlyNonProtected,
+    unexplained_skips: unexplainedSkips,
+    code_debug_coverage: `${codeDebugSemanticRecords}/87`,
+    non_code_coverage: `${nonCodeSemanticRecords}/249`,
   },
   results: {
     legitimate_worked_examples: workedRows.length,
@@ -336,26 +453,38 @@ const report = {
     cross_lesson_exposure_pairs_after: exposures.length,
     adult_trusted_authorities_complete: adultAuthoritiesComplete,
     formal_adult_key_leaks: formalAdultKeyLeaks,
+    learner_curriculum_changed: learnerCurriculumChanged,
   },
   equivalence: {
     scope: 'complete admitted course payload, not package or unit',
-    starter: 'JavaScript tokens normalized for whitespace, comments, and consistent identifier renaming; a structure fingerprint also ignores cosmetic literal substitutions.',
-    fixture: 'Starter structure and normalized test fixture must both match, retaining operators and control flow so same-concept/different-defect cases do not collide.',
-    repair: 'Normalized repair tokens, controlled wording synonyms, edit signatures, and bounded token similarity detect cosmetic restatement of the same effective change.',
-    decision: 'A protected task fails only when both its material fixture and effective repair match a learner-visible solution in another lesson of the same course payload.',
+    code_structure: 'A deterministic JavaScript lexical structural graph identifies top-level declarations, execution/test roots, dependency closure, control/data operators, and repair-bearing statements. Identifiers, comments, whitespace, and story literals are normalized.',
+    declaration_order: 'Only unused pure declarations proven outside the execution/test dependency closure are excluded. Independent pure relevant declarations are canonicalized; effectful and dependency-bearing order remains significant.',
+    tests: 'Test/input behavior is normalized as corroborating structure. Story and test vocabulary cannot veto an already equivalent broken program.',
+    repair: 'Repair operation signals plus identifier-independent normalized repair semantics compare the changed operation and location without relying on exact prose.',
+    non_code: 'Every non-code lesson receives task identity, expected artifact, specification, visible exemplar, and authority signatures. Current open-ended rubric tasks have no fixed response authority and are explicitly classified non-protected rather than skipped.',
+    decision: 'A protected task fails when a co-shipped learner-visible source has the same executable defect and effective repair, or when a non-code exemplar matches the complete protected task, artifact, specification, and fixed response authority.',
   },
   negative_controls: {
     command: 'node --test tests/course-payload-solution-equivalence.test.mjs',
-    count: 7,
-    required_outcomes: ['FAIL', 'FAIL', 'FAIL', 'PASS', 'PASS', 'FAIL', 'FAIL_COMPLETE_PAYLOAD'],
+    count: 13,
+    required_outcomes: ['FAIL', 'FAIL', 'FAIL', 'FAIL', 'FAIL', 'FAIL', 'FAIL', 'FAIL', 'PASS', 'PASS', 'PASS', 'FAIL', 'PASS'],
+  },
+  mutation_tests: {
+    command: 'node --test tests/solution-authority-mutations.test.mjs',
+    external_copies_only: true,
+    count: 3,
   },
   evidence: {
     case_mapping_json: relative(REPO, MAPPING_JSON),
     case_mapping_csv: relative(REPO, MAPPING_CSV),
     browser_payload_proof: relative(REPO, BROWSER_PROOF_JSON),
-    technology_package_corpus_sha256: sha256(packageRows.map((row) => `${row.lessonId}:${sha256(row.packageRaw)}`).join('\n')),
-    technology_scoring_corpus_sha256: sha256(packageRows.map((row) => `${row.lessonId}:${sha256(row.guideRaw)}`).join('\n')),
-    browser_projection_corpus_sha256: sha256(payloadCourseHashes.map((row) => `${row.course_ref}:${row.learner_materials_sha256}`).join('\n')),
+    full_corpus_coverage_ledger_json: relative(REPO, COVERAGE_LEDGER_JSON),
+    full_corpus_coverage_ledger_csv: relative(REPO, COVERAGE_LEDGER_CSV),
+    technology_package_corpus_sha256: packageCorpusHash,
+    technology_scoring_corpus_sha256: scoringCorpusHash,
+    browser_projection_corpus_sha256: browserProjectionHash,
+    r2_package_hash_unchanged: packageCorpusHash === r2Report.evidence.technology_package_corpus_sha256,
+    r2_browser_projection_hash_unchanged: browserProjectionHash === r2Report.evidence.browser_projection_corpus_sha256,
   },
   failures,
 }
@@ -372,10 +501,22 @@ const csv = [
   ...mapping.map((row) => columns.map((column) => csvCell(row[column])).join(',')),
 ].join('\n') + '\n'
 
+const ledgerColumns = [
+  'course', 'lesson_ref', 'task_family_type', 'phase', 'work_mode', 'protected',
+  'protection_classification', 'semantic_analyzer_used',
+  'learner_visible_solution_example_refs', 'trusted_authority_refs', 'comparison_status',
+]
+const ledgerCsv = [
+  ledgerColumns.join(','),
+  ...coverageEntries.map((row) => ledgerColumns.map((column) => csvCell(row[column])).join(',')),
+].join('\n') + '\n'
+
 stableWriteOrCheck(MAPPING_JSON, `${JSON.stringify(mappingReport, null, 2)}\n`)
 stableWriteOrCheck(MAPPING_CSV, csv)
 stableWriteOrCheck(REPORT_JSON, `${JSON.stringify(report, null, 2)}\n`)
 stableWriteOrCheck(BROWSER_PROOF_JSON, `${JSON.stringify(browserProof, null, 2)}\n`)
+stableWriteOrCheck(COVERAGE_LEDGER_JSON, `${JSON.stringify(coverageLedger, null, 2)}\n`)
+stableWriteOrCheck(COVERAGE_LEDGER_CSV, ledgerCsv)
 
 console.log(`Technology course-payload solution exposure: ${report.status}`)
 console.log(`Full Technology corpus: ${packagePaths.length}/336 across ${browserCourseRefs.length}/9 browser course payloads`)
@@ -385,6 +526,9 @@ console.log(`Summative remaining exposures: ${summativeBefore} -> ${exposedSumma
 console.log(`Total remaining exposures: ${beforeInventory.length} -> ${exposedLessonIds.size}`)
 console.log(`Adult trusted authorities: ${adultAuthoritiesComplete}/87`)
 console.log(`Formal adult-key leaks: ${formalAdultKeyLeaks}`)
+console.log(`Semantic authority records: ${lessonsWithSemanticRecord}/336 (${codeDebugSemanticRecords} code/debug, ${nonCodeSemanticRecords} non-code)`)
+console.log(`Explicitly non-protected: ${lessonsExplicitlyNonProtected}; unexplained skips: ${unexplainedSkips}`)
+console.log(`Learner curriculum changed from R2: ${learnerCurriculumChanged ? 'YES' : 'NO'}`)
 if (failures.length) {
   for (const failure of failures) console.error(`  - ${failure}`)
   process.exitCode = 1

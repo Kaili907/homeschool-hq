@@ -1,0 +1,77 @@
+{
+  "schema_version": "technology-course-payload-semantic-gate-r3.0",
+  "status": "PASS",
+  "parent_repair": "4a3b219421c3a4af7eaf5eec0156319ce1ef8932",
+  "authoritative_review_commit": "15633ad5677dd5a966adf0fc83b22dca93e6bf1e",
+  "scope": {
+    "technology_lessons": 336,
+    "reviewed_code_or_debug_cases": 87,
+    "browser_course_payloads": 9,
+    "browser_bound_technology_lessons": 336,
+    "lessons_with_semantic_record": 336,
+    "lessons_explicitly_non_protected": 268,
+    "unexplained_skips": 0,
+    "code_debug_coverage": "87/87",
+    "non_code_coverage": "249/249"
+  },
+  "results": {
+    "legitimate_worked_examples": 19,
+    "legitimate_worked_examples_preserved": 19,
+    "non_summative_remaining_before": 45,
+    "non_summative_remaining_after": 0,
+    "summative_remaining_before": 11,
+    "summative_remaining_after": 0,
+    "total_remaining_before": 56,
+    "total_remaining_after": 0,
+    "cross_lesson_exposure_pairs_after": 0,
+    "adult_trusted_authorities_complete": 87,
+    "formal_adult_key_leaks": 0,
+    "learner_curriculum_changed": false
+  },
+  "equivalence": {
+    "scope": "complete admitted course payload, not package or unit",
+    "code_structure": "A deterministic JavaScript lexical structural graph identifies top-level declarations, execution/test roots, dependency closure, control/data operators, and repair-bearing statements. Identifiers, comments, whitespace, and story literals are normalized.",
+    "declaration_order": "Only unused pure declarations proven outside the execution/test dependency closure are excluded. Independent pure relevant declarations are canonicalized; effectful and dependency-bearing order remains significant.",
+    "tests": "Test/input behavior is normalized as corroborating structure. Story and test vocabulary cannot veto an already equivalent broken program.",
+    "repair": "Repair operation signals plus identifier-independent normalized repair semantics compare the changed operation and location without relying on exact prose.",
+    "non_code": "Every non-code lesson receives task identity, expected artifact, specification, visible exemplar, and authority signatures. Current open-ended rubric tasks have no fixed response authority and are explicitly classified non-protected rather than skipped.",
+    "decision": "A protected task fails when a co-shipped learner-visible source has the same executable defect and effective repair, or when a non-code exemplar matches the complete protected task, artifact, specification, and fixed response authority."
+  },
+  "negative_controls": {
+    "command": "node --test tests/course-payload-solution-equivalence.test.mjs",
+    "count": 13,
+    "required_outcomes": [
+      "FAIL",
+      "FAIL",
+      "FAIL",
+      "FAIL",
+      "FAIL",
+      "FAIL",
+      "FAIL",
+      "FAIL",
+      "PASS",
+      "PASS",
+      "PASS",
+      "FAIL",
+      "PASS"
+    ]
+  },
+  "mutation_tests": {
+    "command": "node --test tests/solution-authority-mutations.test.mjs",
+    "external_copies_only": true,
+    "count": 3
+  },
+  "evidence": {
+    "case_mapping_json": "docs/curriculum-quality/technology/solution-exposure-fix-r3/case-mapping.json",
+    "case_mapping_csv": "docs/curriculum-quality/technology/solution-exposure-fix-r3/case-mapping.csv",
+    "browser_payload_proof": "docs/curriculum-quality/technology/solution-exposure-fix-r3/browser-payload-proof.json",
+    "full_corpus_coverage_ledger_json": "docs/curriculum-quality/technology/solution-exposure-fix-r3/full-corpus-coverage-ledger.json",
+    "full_corpus_coverage_ledger_csv": "docs/curriculum-quality/technology/solution-exposure-fix-r3/full-corpus-coverage-ledger.csv",
+    "technology_package_corpus_sha256": "643b7e462f3cf56fb572f3b2f64fa077ab00d169878e100bb8f091bff2cf85d7",
+    "technology_scoring_corpus_sha256": "d6fad8f402e7f5bc9d636896630bc50a9b4f2206de03b438c45511add9b3dc87",
+    "browser_projection_corpus_sha256": "62cd7032ff971acfa4c7073945dfc84cf24d5acf7440b6de0a91814f51bb2a9c",
+    "r2_package_hash_unchanged": true,
+    "r2_browser_projection_hash_unchanged": true
+  },
+  "failures": []
+}

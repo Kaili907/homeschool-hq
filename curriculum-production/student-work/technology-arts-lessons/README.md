@@ -179,18 +179,24 @@ input, unrunnable tool path, incomplete starter code/input/specification/test,
 missing debugging target, unequal fallback, placeholder shell, paid/account
 dependency, credential-shaped literal, or privacy/security gap.
 
-`tests/solution-exposure-audit.mjs` is the course-payload semantic
+`tests/solution-exposure-audit.mjs` is the full-course/full-corpus semantic
 answer-authority gate. It locks the authoritative 87-case review inventory,
 preserves all 19 legitimate instructional examples, checks all 336 Technology
 learner projections for formal adult-key leaks, and proves the adult solution
-authority is complete. It also uses the admitted browser bindings to compare
-every learner-visible solution with every protected code/debug fixture that
-coexists in the same one of nine Technology course payloads. Program tokens,
-identifier renames, cosmetic fixture changes, repair wording, edit signatures,
-and test fixtures are normalized without treating every lesson on the same
-concept as equivalent. The required negative and positive controls live in
-`tests/course-payload-solution-equivalence.test.mjs`; deterministic R2 evidence
-is under `docs/curriculum-quality/technology/solution-exposure-fix-r2/`.
+authority is complete. It emits an explicit semantic record for every lesson:
+87 dependency-sliced JavaScript structural records and 249 task/deliverable
+records for open-ended analysis/design work, with zero unexplained skips.
+Using the admitted browser bindings, it compares every learner-visible source
+with every protected task that coexists in the same one of nine complete
+Technology course payloads. The JavaScript analyzer normalizes identifier,
+function, story, test-vocabulary, comment, and whitespace changes; ignores a
+moved declaration only after proving it pure and irrelevant to execution/test
+roots; and retains control flow, data flow, effects, and repair operations.
+The 13 permanent negative/positive controls live in
+`tests/course-payload-solution-equivalence.test.mjs`; external-copy mutation
+tests live in `tests/solution-authority-mutations.test.mjs`; deterministic R3
+evidence and the 336-row ledger are under
+`docs/curriculum-quality/technology/solution-exposure-fix-r3/`.
 
 ## Reading register
 

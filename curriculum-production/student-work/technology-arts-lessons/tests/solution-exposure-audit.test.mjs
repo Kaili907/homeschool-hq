@@ -20,4 +20,7 @@ test('Technology browser course payloads preserve worked examples without exposi
   assert.match(output, /Total remaining exposures: 56 -> 0/)
   assert.match(output, /Adult trusted authorities: 87\/87/)
   assert.match(output, /Formal adult-key leaks: 0/)
+  assert.match(output, /Semantic authority records: 336\/336 \(87 code\/debug, 249 non-code\)/)
+  assert.match(output, /Explicitly non-protected: 268; unexplained skips: 0/)
+  assert.match(output, /Learner curriculum changed from R2: NO/)
 })
