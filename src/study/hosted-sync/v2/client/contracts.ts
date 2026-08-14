@@ -13,6 +13,8 @@ import {
 } from './types'
 
 export const HOSTED_SYNC_MAX_RPC_BYTES = 96 * 1024
+/** Explicit ceiling for one school-year minimized authority checkpoint. */
+export const HOSTED_SYNC_AUTHORITY_CHECKPOINT_MAX_BYTES = 2 * 1024 * 1024
 export const HOSTED_SYNC_OPERATION_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 const UUID = HOSTED_SYNC_OPERATION_UUID
@@ -31,10 +33,10 @@ function exact(value: unknown, keys: readonly string[]): Record<string, unknown>
   return held.length === keys.length && held.every((key) => keys.includes(key)) ? value : null
 }
 
-function boundedJson(value: unknown): boolean {
+function boundedJson(value: unknown, maximumBytes = HOSTED_SYNC_MAX_RPC_BYTES): boolean {
   try {
     const serialized = JSON.stringify(value)
-    return serialized !== undefined && new TextEncoder().encode(serialized).byteLength <= HOSTED_SYNC_MAX_RPC_BYTES
+    return serialized !== undefined && new TextEncoder().encode(serialized).byteLength <= maximumBytes
   } catch { return false }
 }
 
@@ -67,9 +69,9 @@ function validCommon(input: { tokenDigest: string; studentId: string }): boolean
   return DIGEST.test(input.tokenDigest) && UUID.test(input.studentId)
 }
 
-function safe<T extends Readonly<Record<string, unknown>>>(value: T): T | null {
+function safe<T extends Readonly<Record<string, unknown>>>(value: T, maximumBytes = HOSTED_SYNC_MAX_RPC_BYTES): T | null {
   try { assertHostedSyncPrivate(value) } catch { return null }
-  return boundedJson(value) ? Object.freeze(value) : null
+  return boundedJson(value, maximumBytes) ? Object.freeze(value) : null
 }
 
 export function buildFirstLinkArgs(input: HostedSyncFirstLinkInput): Readonly<Record<string, unknown>> | null {
@@ -80,7 +82,9 @@ export function buildFirstLinkArgs(input: HostedSyncFirstLinkInput): Readonly<Re
     p_student_id: input.studentId,
     p_client_operation_id: input.clientOperationId,
     p_import: input.import,
-  })
+  }, input.import.authorityCheckpoint
+    ? HOSTED_SYNC_AUTHORITY_CHECKPOINT_MAX_BYTES + HOSTED_SYNC_MAX_RPC_BYTES
+    : HOSTED_SYNC_MAX_RPC_BYTES)
 }
 
 export function buildResolveMappingArgs(input: HostedSyncResolveMappingInput): Readonly<Record<string, unknown>> | null {
@@ -110,7 +114,9 @@ export function buildWriteArgs(input: HostedSyncWriteInput): Readonly<Record<str
     p_client_operation_id: input.clientOperationId,
     p_operation: input.operation,
     p_payload: input.payload,
-  })
+  }, input.operation === 'authority-checkpoint:compare-and-swap'
+    ? HOSTED_SYNC_AUTHORITY_CHECKPOINT_MAX_BYTES + 4096
+    : HOSTED_SYNC_MAX_RPC_BYTES)
 }
 
 function revision(value: unknown): value is number {
@@ -138,8 +144,12 @@ export function parseFirstLinkResult(value: unknown): HostedSyncFirstLinkResult 
   if (value.status !== 'imported' && value.status !== 'linked-existing') return null
   const held = exact(value, ['schemaVersion', 'status', 'mapping', 'revisions'])
   const mapped = mapping(value.mapping)
-  const revisions = exact(value.revisions, ['authority', 'session', 'checkpoint'])
-  if (!held || !mapped || !revisions || !Object.values(revisions).every(revision)) return null
+  const revisions = record(value.revisions) ? value.revisions : null
+  const revisionKeys = revisions ? Object.keys(revisions) : []
+  if (!held || !mapped || !revisions ||
+      !['authority', 'session', 'checkpoint'].every((key) => revisionKeys.includes(key)) ||
+      revisionKeys.some((key) => !['authority', 'session', 'checkpoint', 'authorityCheckpoint'].includes(key)) ||
+      !Object.values(revisions).every(revision)) return null
   return Object.freeze({ ...held, mapping: mapped, revisions: Object.freeze(revisions) }) as unknown as HostedSyncFirstLinkResult
 }
 
@@ -155,11 +165,25 @@ export function parseResolveMappingResult(value: unknown): HostedSyncResolveMapp
 export function parseHydrateResult(value: unknown): HostedSyncHydrateResult | null {
   if (!record(value) || value.schemaVersion !== 2) return null
   if (value.status === 'unavailable') return exact(value, ['schemaVersion', 'status']) ? Object.freeze(value) as unknown as HostedSyncHydrateResult : null
-  const held = exact(value, ['schemaVersion', 'status', 'mapping', 'document'])
+  const keys = Object.keys(value)
+  const allowed = ['schemaVersion', 'status', 'mapping', 'document', 'authorityCheckpoint', 'authorityCheckpointRevision']
+  const held = keys.every((key) => allowed.includes(key)) &&
+    ['schemaVersion', 'status', 'mapping', 'document'].every((key) => keys.includes(key)) ? value : null
   const mapped = mapping(value.mapping)
   if (!held || value.status !== 'ready' || !mapped || !record(value.document)) return null
-  try { assertHostedSyncPrivate(value.document) } catch { return null }
-  return Object.freeze({ ...held, mapping: mapped, document: Object.freeze(value.document) }) as unknown as HostedSyncHydrateResult
+  try {
+    assertHostedSyncPrivate(value.document)
+    if (value.authorityCheckpoint !== undefined) assertHostedSyncPrivate(value.authorityCheckpoint)
+  } catch { return null }
+  if ((value.authorityCheckpoint === undefined) !== (value.authorityCheckpointRevision === undefined) ||
+      (value.authorityCheckpoint !== undefined && (!record(value.authorityCheckpoint) || !revision(value.authorityCheckpointRevision)))) return null
+  return Object.freeze({
+    ...held, mapping: mapped, document: Object.freeze(value.document),
+    ...(record(value.authorityCheckpoint) ? {
+      authorityCheckpoint: Object.freeze(value.authorityCheckpoint),
+      authorityCheckpointRevision: value.authorityCheckpointRevision as number,
+    } : {}),
+  }) as unknown as HostedSyncHydrateResult
 }
 
 export function parseWriteResult(value: unknown, input: HostedSyncWriteInput): HostedSyncWriteResult | null {
@@ -177,7 +201,7 @@ export function parseWriteResult(value: unknown, input: HostedSyncWriteInput): H
       ? Object.freeze(value) as unknown as HostedSyncWriteResult : null
   }
   if (value.status !== 'stored' && value.status !== 'revision-conflict') return null
-  if (value.operation !== input.operation || !['authority', 'session', 'checkpoint'].includes(String(value.revisionDomain)) || !revision(value.serverRevision)) return null
+  if (value.operation !== input.operation || !['authority', 'session', 'checkpoint', 'authority-checkpoint'].includes(String(value.revisionDomain)) || !revision(value.serverRevision)) return null
   const required = ['schemaVersion', 'status', 'operation', 'revisionDomain', 'serverRevision']
   if (value.status === 'revision-conflict' && !exact(value, required)) return null
   try { assertHostedSyncPrivate(value) } catch { return null }

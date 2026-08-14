@@ -21,6 +21,7 @@ const files = [
   './migrations/20260813170000_academy_study_actor_authority_convergence.sql',
   './migrations/20260813171000_academy_study_cross_device_authority.sql',
   './migrations/20260813172000_academy_study_sync_lossless_v2.sql',
+  './migrations/20260813173000_academy_study_sync_lossless_checkpoint_r1.sql',
 ] as const
 
 const sources = Promise.all(files.map((filename) =>
@@ -233,6 +234,111 @@ function importDocument(overrides: Record<string, unknown> = {}) {
   }
 }
 
+function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevision = serverRevision) {
+  const assignmentRecord = {
+    assignmentRef: localScope.assignmentRef, lessonRef: 'lesson-import-a', subject: 'mathematics',
+    title: 'Math lesson', state: 'active', sessionRef: localScope.sessionRef,
+    progress: { completedSegmentRefs: ['segment-before-import-a'], totalSegments: 2,
+      lastSegmentRef: 'segment-import-a', activeSeconds: 49 },
+    pause: { pausedAt: null, resumedAt: null, pausedSeconds: 8, resumeSegmentRef: 'segment-import-a' },
+    completedAt: null, createdAt: '2026-08-01T14:00:00.000Z',
+    updatedAt: '2026-08-01T14:05:00.000Z', rawAnswerIncluded: false, transcriptIncluded: false,
+  }
+  const resume = { segmentId: 'segment-import-a', segmentOrdinal: 2,
+    elapsedActiveSecondsInSegment: 17, completedSegmentIds: ['segment-before-import-a'],
+    remainingSegmentIds: ['segment-import-a'], capturedAt: '2026-08-01T14:05:00.000Z' }
+  return {
+    contractVersion: 'hosted-study-sync-state.r2.v1',
+    identity: { householdRef: localScope.householdRef, studentRef: localScope.studentRef,
+      learnerRef: localScope.studentRef },
+    sync: { serverRevision, baseRevision, operationId, idempotencyKey: operationId,
+      operationKind: serverRevision === 0 ? 'FIRST_LINK_IMPORT' : 'CHECKPOINT',
+      deviceRef: 'device:a', localSequence: serverRevision + 1, createdAt: '2026-08-01T14:05:00.000Z' },
+    student: { studentRef: localScope.studentRef, displayName: 'Ada',
+      createdAt: '2026-08-01T13:00:00.000Z', updatedAt: '2026-08-01T14:05:00.000Z',
+      activeAssignmentRef: localScope.assignmentRef, assignments: [assignmentRecord] },
+    studentProfile: { studentRef: localScope.studentRef, displayName: 'Ada', nominalGrade: '5',
+      workingGradeBySubject: { mathematics: '5' }, enabledSubjects: ['mathematics'],
+      createdAt: '2026-08-01T13:00:00.000Z', updatedAt: '2026-08-01T14:05:00.000Z' },
+    appUpdatedAt: '2026-08-01T14:05:00.000Z', setupCompletedAt: '2026-08-01T13:00:00.000Z',
+    assignments: [{ record: assignmentRecord, authorityRevision: 1,
+      sessionIdentity: { assignmentRef: localScope.assignmentRef, lessonRef: 'lesson-import-a',
+        blockRef: 'block-import-a', sessionRef: localScope.sessionRef,
+        lineageRootRef: 'block-import-a', continuationKey: 'root' },
+      completion: { kind: 'INCOMPLETE', completedAt: null } }],
+    assessmentStates: [{ assignmentRef: localScope.assignmentRef, assessmentRef: 'assessment-import-a',
+      studentRef: localScope.studentRef, courseRef: 'course-math-a', subject: 'mathematics', grade: 5,
+      title: 'Math check', authorityClass: 'AUTO_SCOREABLE', status: 'SCORING_COMPLETE',
+      createdAt: '2026-08-01T13:00:00.000Z', updatedAt: '2026-08-01T14:04:00.000Z', completedAt: null,
+      evidenceRefs: ['evidence:math:a'], outcome: { assessmentRecordRef: 'assessment-record:math:a',
+        decision: 'PARTIAL', assessedAt: '2026-08-01T14:04:00.000Z', assessorRef: 'assessor:math' },
+      authorityRevision: 2 }],
+    rflStates: [{ studentRef: localScope.studentRef, assignmentRef: localScope.assignmentRef,
+      lessonRef: 'lesson-import-a', sessionRef: localScope.sessionRef, learnerAssertionState: 'ASSERTED',
+      learnerAssertedAt: '2026-08-01T14:04:00.000Z', guardianState: 'PENDING', certifiedAt: null,
+      attesterRef: null, evidenceMode: null, authorityRevision: 1 }],
+    socialSources: [{ studentRef: localScope.studentRef, assignmentRef: localScope.assignmentRef,
+      lessonRef: 'lesson-import-a', readiness: 'ATTACHED_SATISFIED', sourceRef: 'source:math:a',
+      kind: 'reference', title: 'Math reference', publisher: 'Manuel Academy',
+      publishedAt: '2026-07-01T00:00:00.000Z', attachedAt: '2026-08-01T14:02:00.000Z', sourceRevision: 1 }],
+    safetyHolds: [
+      { holdRef: 'hold:open:a', studentRef: localScope.studentRef, sessionRef: localScope.sessionRef,
+        reasonCode: 'study-safety-uncertain', category: 'UNCERTAIN', source: 'study-safety',
+        dedupeKey: 'hold-open-a', createdAt: '2026-08-01T14:03:00.000Z', status: 'OPEN',
+        acknowledgedAt: null, clearedAt: null, clearAuthority: null, clearerRef: null, logicalRevision: 1 },
+      { holdRef: 'hold:cleared:a', studentRef: localScope.studentRef, sessionRef: localScope.sessionRef,
+        reasonCode: 'parent-review-requested', category: 'ADULT_REVIEW', source: 'parent',
+        dedupeKey: 'hold-cleared-a', createdAt: '2026-08-01T13:30:00.000Z', status: 'CLEARED',
+        acknowledgedAt: '2026-08-01T13:40:00.000Z', clearedAt: '2026-08-01T13:50:00.000Z',
+        clearAuthority: 'GUARDIAN', clearerRef: 'guardian:a', logicalRevision: 2 },
+    ],
+    indexedDbDocument: {
+      schemaVersion: 1, updatedAt: '2026-08-01T14:05:00.000Z',
+      scope: { householdRef: localScope.householdRef, learnerRef: localScope.studentRef },
+      preferences: null, parentSettings: null,
+      calendar: [{
+        block: { schemaVersion: 'calendar-parent-runtime.v1', internalBlockId: 'block-import-a',
+          learnerRef: localScope.studentRef,
+          sourceIdentity: { source: 'manuel_academy', externalItemId: 'lesson-import-a' },
+          lineage: { rootInternalBlockId: 'block-import-a', continuationKey: 'root',
+            completedBeforeOccurrence: [] }, title: 'Math lesson', blockType: 'new_instruction',
+          canonicalTask: { taskType: 'direct-instruction' }, householdTimeZone: 'America/Detroit',
+          scheduledLocalStart: '2026-08-01T10:00', scheduledStartInstant: '2026-08-01T14:00:00.000Z',
+          intendedLocalDate: '2026-08-01', placementSource: 'explicit-offset',
+          estimatedDurationMinutes: 20, actualDurationSeconds: 49, timerVisibility: 'shown',
+          state: 'active', segments: [
+            { segmentId: 'segment-before-import-a', planOrdinal: 1, title: 'Warm up',
+              canonicalTaskType: 'retrieval-practice', estimatedMinutes: 5, required: true,
+              actualActiveSeconds: 32, elapsedActiveSecondsBeforeBlock: 0,
+              completedAt: '2026-08-01T14:03:00.000Z' },
+            { segmentId: 'segment-import-a', planOrdinal: 2, title: 'Practice',
+              canonicalTaskType: 'guided-practice', estimatedMinutes: 15, required: true,
+              actualActiveSeconds: 17, elapsedActiveSecondsBeforeBlock: 0 },
+          ], resumePoint: resume, interruptionHistory: [], revision: 3,
+          lastEventAt: '2026-08-01T14:05:00.000Z', events: [] },
+        plan: { lessonRef: 'lesson-import-a', title: 'Math lesson', subject: 'math',
+          skillRefs: ['skill-import-a'], segments: [
+            { segmentRef: 'segment-before-import-a', title: 'Warm up', taskType: 'retrieval-practice', estimatedMinutes: 5, required: true },
+            { segmentRef: 'segment-import-a', title: 'Practice', taskType: 'guided-practice', estimatedMinutes: 15, required: true },
+          ], masteryAuthority: 'completion-only', source: 'manuel-academy' },
+      }],
+      sessions: [{ scope: { householdRef: localScope.householdRef, learnerRef: localScope.studentRef,
+        sessionRef: localScope.sessionRef }, lessonRef: 'lesson-import-a', segmentRef: 'segment-import-a',
+        status: 'active', updatedAt: '2026-08-01T14:05:00.000Z', lastAcceptedEventRef: null,
+        rawAnswerIncluded: false, transcriptIncluded: false }],
+      checkpoints: [{ checkpointRef: 'durable-checkpoint-import-a', householdRef: localScope.householdRef,
+        learnerRef: localScope.studentRef, sessionRef: localScope.sessionRef, lessonRef: 'lesson-import-a',
+        segmentRef: 'segment-import-a', revision: 3, capturedAt: '2026-08-01T14:05:00.000Z',
+        completedSegmentRefs: ['segment-before-import-a'], elapsedActiveSecondsInSegment: 17,
+        responseDraftRef: null, rawAnswerIncluded: false, transcriptIncluded: false }],
+      reviews: [], events: [], outbox: [],
+    },
+    privacy: { pinIncluded: false, bearerIncluded: false, rawLearnerResponseIncluded: false,
+      rawTutorConversationIncluded: false, rawAudioIncluded: false, inferenceIncluded: false,
+      adultAnswerAuthorityIncluded: false, answerMaterialIncluded: false },
+  }
+}
+
 async function firstLink(
   digest: string,
   studentId: string,
@@ -330,6 +436,7 @@ describe.sequential('Study hosted sync lossless V2', () => {
       service_hydrate: boolean
       service_write: boolean
       mapping_authenticated_grants: number
+      checkpoint_authenticated_grants: number
     }>(`
       select metadata.lossless_sync_version,
         (select count(*)::integer from public.academy_study_session_authority
@@ -358,7 +465,12 @@ describe.sequential('Study hosted sync lossless V2', () => {
           where table_schema = 'academy_private'
             and table_name = 'study_sync_explicit_links_v2'
             and grantee in ('anon', 'authenticated', 'service_role'))
-          as mapping_authenticated_grants
+          as mapping_authenticated_grants,
+        (select count(*)::integer from information_schema.role_table_grants
+          where table_schema = 'academy_private'
+            and table_name = 'study_sync_authority_checkpoints_r1'
+            and grantee in ('anon', 'authenticated', 'service_role'))
+          as checkpoint_authenticated_grants
       from academy_private.study_persistence_metadata as metadata
       where singleton
     `)
@@ -372,6 +484,7 @@ describe.sequential('Study hosted sync lossless V2', () => {
       service_hydrate: false,
       service_write: false,
       mapping_authenticated_grants: 0,
+      checkpoint_authenticated_grants: 0,
     })
   })
 
@@ -693,6 +806,114 @@ describe.sequential('Study hosted sync lossless V2', () => {
         assessment: certifiedAssessment,
       },
     })
+  })
+
+  it('losslessly round-trips canonical A→DB→B and B→DB→A with checkpoint CAS', async () => {
+    const firstId = '57000000-0000-4000-8000-000000000001'
+    const original = authorityCheckpoint(firstId)
+    const linked = await guardian(GUARDIAN_A, () => firstLink(
+      digestA, STUDENT_A, firstId, importDocument({ authorityCheckpoint: original }),
+    ))
+    const hydratedB = await guardian(GUARDIAN_A, () => hydrate(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a',
+    ))
+    expect(linked).toMatchObject({ status: 'linked-existing', revisions: { authorityCheckpoint: 0 } })
+    expect(hydratedB).toMatchObject({ status: 'ready', authorityCheckpointRevision: 0 })
+    expect(hydratedB.authorityCheckpoint).toEqual(original)
+
+    const writeId = '57000000-0000-4000-8000-000000000002'
+    const advanced = structuredClone(authorityCheckpoint(writeId, 1, 0))
+    const durable = advanced.indexedDbDocument as Record<string, any>
+    durable.updatedAt = '2026-08-01T14:06:00.000Z'
+    durable.checkpoints[0].revision = 4
+    durable.checkpoints[0].elapsedActiveSecondsInSegment = 31
+    durable.checkpoints[0].capturedAt = '2026-08-01T14:06:00.000Z'
+    durable.calendar[0].block.resumePoint.elapsedActiveSecondsInSegment = 31
+    durable.calendar[0].block.resumePoint.capturedAt = '2026-08-01T14:06:00.000Z'
+    durable.calendar[0].block.revision = 4
+    durable.calendar[0].block.lastEventAt = '2026-08-01T14:06:00.000Z'
+    durable.sessions[0].updatedAt = '2026-08-01T14:06:00.000Z'
+    const deniedStudent = await student(grantA, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0, writeId,
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: advanced },
+    ))
+    const stored = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0, writeId,
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: advanced },
+    ))
+    const retry = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0, writeId,
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: advanced },
+    ))
+    const collisionPayload = structuredClone(advanced)
+    const collisionDocument = collisionPayload.indexedDbDocument as Record<string, any>
+    collisionDocument.checkpoints[0].elapsedActiveSecondsInSegment = 32
+    const collision = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0, writeId,
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: collisionPayload },
+    ))
+    const stale = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      '57000000-0000-4000-8000-000000000003',
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: advanced },
+    ))
+    const hydratedA = await guardian(GUARDIAN_A, () => hydrate(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a',
+    ))
+    expect(deniedStudent).toMatchObject({ status: 'denied', code: 'actor-not-authorized' })
+    expect(stored).toMatchObject({ status: 'stored', revisionDomain: 'authority-checkpoint', serverRevision: 1 })
+    expect(retry).toEqual(stored)
+    expect(collision).toMatchObject({ status: 'idempotency-collision' })
+    expect(stale).toMatchObject({ status: 'revision-conflict', serverRevision: 1 })
+    expect(hydratedA).toMatchObject({ status: 'ready', authorityCheckpointRevision: 1 })
+    expect(hydratedA.authorityCheckpoint).toEqual(advanced)
+
+    const malformed = structuredClone(authorityCheckpoint(
+      '57000000-0000-4000-8000-000000000004', 2, 1,
+    )) as Record<string, any>
+    malformed.indexedDbDocument.checkpoints[0].unknownAuthority = true
+    const refused = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      '57000000-0000-4000-8000-000000000004',
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: malformed },
+    ))
+    expect(refused).toMatchObject({ status: 'invalid-write', reasonCode: 'invalid-authority-checkpoint' })
+
+    const completeId = '57000000-0000-4000-8000-000000000005'
+    const completedState = structuredClone(authorityCheckpoint(completeId, 2, 1)) as Record<string, any>
+    const completedRecord = { ...completedState.student.assignments[0], state: 'completed',
+      sessionRef: null, completedAt: '2026-08-01T14:10:00.000Z', updatedAt: '2026-08-01T14:10:00.000Z' }
+    completedState.student.assignments[0] = completedRecord
+    completedState.assignments[0].record = completedRecord
+    completedState.assignments[0].completion = { kind: 'NORMAL_CERTIFIED', completedAt: '2026-08-01T14:10:00.000Z' }
+    const completedWrite = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1, completeId,
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: completedState },
+    ))
+    const revertId = '57000000-0000-4000-8000-000000000006'
+    const reverted = authorityCheckpoint(revertId, 3, 2)
+    const revertWrite = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 2, revertId,
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: reverted },
+    ))
+    expect(completedWrite).toMatchObject({ status: 'stored', serverRevision: 2 })
+    expect(revertWrite).toMatchObject({ status: 'invalid-write', reasonCode: 'invalid-authority-checkpoint' })
+    const unsafeId = '57000000-0000-4000-8000-000000000007'
+    const unsafeRemoval = structuredClone(completedState)
+    unsafeRemoval.sync = { ...unsafeRemoval.sync, serverRevision: 3, baseRevision: 2,
+      operationId: unsafeId, idempotencyKey: unsafeId, localSequence: 3 }
+    unsafeRemoval.safetyHolds = unsafeRemoval.safetyHolds.filter((item: any) => item.status === 'CLEARED')
+    const unsafeWrite = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 2, unsafeId,
+      'authority-checkpoint:compare-and-swap', { authorityCheckpoint: unsafeRemoval },
+    ))
+    expect(unsafeWrite).toMatchObject({ status: 'invalid-write', reasonCode: 'invalid-authority-checkpoint' })
+    const oversized = await database.query<{ refused: boolean }>(`
+      select not academy_private.study_sync_authority_checkpoint_shape_valid_r1(
+        jsonb_build_object('oversized', repeat('x', 2097152))
+      ) as refused
+    `)
+    expect(oversized.rows[0].refused).toBe(true)
   })
 
   it('revocation immediately removes hydrate, write and RLS authority', async () => {

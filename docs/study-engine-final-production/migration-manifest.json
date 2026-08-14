@@ -533,6 +533,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "lossless_sync_version:0->2",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260813173000",
+      "filename": "20260813173000_academy_study_sync_lossless_checkpoint_r1.sql",
+      "sha256": "62498e4baef24dfad20b0cecb775bc9e96659c5f833610e247bd6ab5bc29e88a",
+      "dependency": "20260813172000_academy_study_sync_lossless_v2.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "lossless_checkpoint_repair:absent->r1",
+      "supersessionStatus": "current"
     }
   ]
 }
