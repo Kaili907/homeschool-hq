@@ -9,4 +9,13 @@ describe('final Lesson Player learner-response integration guards', () => {
     expect(source).toContain('new LearnerResponseRuntime')
     expect(source).toContain('PENDING_ASSESSMENT')
   })
+
+  it('keeps final lesson-response authority out of localStorage', async () => {
+    const app = await readFile(new URL('../FinalFamilyPilotApp.tsx', import.meta.url), 'utf8')
+    const store = await readFile(new URL('./store.ts', import.meta.url), 'utf8')
+    expect(app).toContain('new BrowserLearnerResponseStore()')
+    expect(app).not.toContain('new BrowserLearnerResponseStore(window.localStorage)')
+    expect(store).toContain('openIndexedDbRecordStore')
+    expect(store).not.toMatch(/legacyStorage\.setItem|localStorage\.setItem/)
+  })
 })

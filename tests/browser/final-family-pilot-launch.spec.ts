@@ -7,6 +7,9 @@ const STORE = 'records'
 const CORE_KEY = 'manuel-academy.study.family-pilot-state.v1'
 const APP_KEY = 'manuel-academy.study.final-family-pilot-app.v1'
 const DURABLE_PREFIX = 'manuel-academy.study.family-pilot-durable-ports.v1'
+const LEGACY_RESPONSE_KEY = 'manuel-academy:family-pilot:learner-responses:v1'
+const RESPONSE_PREFIX = 'family-pilot:learner-response-attempt:v1'
+const RESPONSE_MIGRATION_KEY = `${RESPONSE_PREFIX}:migration:localstorage-v1`
 
 const LESSON = {
   a: {
@@ -135,9 +138,19 @@ async function idbRecords(page: Page): Promise<Array<{ key: string; value: unkno
       request.onerror = () => reject(request.error)
     })
     const values = await new Promise<Array<{ key: string; value: unknown }>>((resolve, reject) => {
-      const request = db.transaction(storeName).objectStore(storeName).getAll()
-      request.onsuccess = () => resolve(request.result as Array<{ key: string; value: unknown }>)
-      request.onerror = () => reject(request.error)
+      const store = db.transaction(storeName).objectStore(storeName)
+      const keysRequest = store.getAllKeys()
+      const valuesRequest = store.getAll()
+      let keys: IDBValidKey[] | null = null
+      let records: unknown[] | null = null
+      const complete = () => {
+        if (!keys || !records) return
+        resolve(records.map((value, index) => ({ key: String(keys[index]), value })))
+      }
+      keysRequest.onsuccess = () => { keys = keysRequest.result; complete() }
+      valuesRequest.onsuccess = () => { records = valuesRequest.result; complete() }
+      keysRequest.onerror = () => reject(keysRequest.error)
+      valuesRequest.onerror = () => reject(valuesRequest.error)
     })
     db.close()
     return values
@@ -145,9 +158,15 @@ async function idbRecords(page: Page): Promise<Array<{ key: string; value: unkno
 }
 
 function studyDocument(records: Array<{ key: string; value: unknown }>, studentRef: string) {
-  const envelope = records.find((record) => record.key.includes(`:learner:${encodeURIComponent(studentRef)}`)) as { value?: string } | undefined
+  const held = records.find((record) => record.key.includes(`:learner:${encodeURIComponent(studentRef)}`))
+  const envelope = held?.value as { value?: string } | undefined
   if (!envelope || typeof envelope.value !== 'string') throw new Error(`No durable Study document for ${studentRef}`)
   return JSON.parse(envelope.value)
+}
+
+function responseDocuments(records: Array<{ key: string; value: unknown }>, studentRef?: string) {
+  return records.filter((record) => record.key.startsWith(`${RESPONSE_PREFIX}:student:`) &&
+    (!studentRef || record.key.includes(`:student:${encodeURIComponent(studentRef)}:`)))
 }
 
 function assignmentFor(core: any, studentRef: string, lessonRef: string) {
@@ -221,10 +240,14 @@ test('complete family workflow survives a real browser-process reopen and stays 
 
     const beforeReopenRecords = await idbRecords(page)
     const beforeReopenDocument = studyDocument(beforeReopenRecords, aRef)
+    const beforeReopenResponses = responseDocuments(beforeReopenRecords, aRef)
     expect(JSON.stringify(beforeReopenDocument)).toContain(LESSON.a.lessonRef)
     expect(JSON.stringify(beforeReopenDocument).match(/completed/g)?.length ?? 0).toBeGreaterThan(1)
+    expect(beforeReopenResponses.length).toBeGreaterThan(0)
+    expect(JSON.stringify(beforeReopenResponses)).toContain('"status":"PENDING_ASSESSMENT"')
     const storageBefore = await supportState(page)
     expect(storageBefore.keys.some((key) => key.startsWith(DURABLE_PREFIX))).toBe(false)
+    expect(storageBefore.keys).not.toContain(LEGACY_RESPONSE_KEY)
     expect(JSON.stringify(storageBefore.core)).not.toContain('calendarState')
 
     await context.close()
@@ -235,7 +258,9 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await openStudent(page, 'Avery Synthetic', '1357')
     await resumeFromHome(page, LESSON.a)
     await expect(page.getByText('Step 3 of 3', { exact: true })).toBeVisible()
-    expect(studyDocument(await idbRecords(page), aRef)).toEqual(beforeReopenDocument)
+    const reopenedRecords = await idbRecords(page)
+    expect(studyDocument(reopenedRecords, aRef)).toEqual(beforeReopenDocument)
+    expect(responseDocuments(reopenedRecords, aRef)).toEqual(beforeReopenResponses)
 
     await page.getByRole('button', { name: 'I need an adult check-in' }).click()
     await expect(page.getByText('A parent check-in is now required')).toBeVisible()
@@ -251,6 +276,10 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await finishThreeStepLesson(page)
     await expect(page.getByRole('heading', { name: `${LESSON.b.title}: lesson complete` })).toBeVisible()
     await page.getByRole('button', { name: 'Done' }).click()
+    const siblingRecords = await idbRecords(page)
+    expect(responseDocuments(siblingRecords, aRef).length).toBeGreaterThan(0)
+    expect(responseDocuments(siblingRecords, bRef).length).toBeGreaterThan(0)
+    expect(responseDocuments(siblingRecords, cRef)).toEqual([])
 
     await page.getByRole('button', { name: 'Parent', exact: true }).click()
     await parentStudent(page, 'Avery Synthetic')
@@ -452,7 +481,102 @@ test('a refused real IndexedDB write does not advance visible or supporting stat
   await expect(page.getByText('Step 2 of 3', { exact: true })).toHaveCount(0)
   expect(studyDocument(await idbRecords(page), studentRef)).toEqual(beforeDocument)
   expect((await supportState(page)).core).toEqual(beforeCore)
-  expect((await idbRecords(page)).some((record) => record.key === `${DURABLE_PREFIX}:health` && record.value === 'write-failed')).toBe(true)
+  expect((await idbRecords(page)).some((record) => record.key === `${DURABLE_PREFIX}:health` &&
+    (record.value as { value?: unknown })?.value === 'write-failed')).toBe(true)
+})
+
+test('legacy learner responses migrate once and are removed only after verified IndexedDB readback', async ({ page }) => {
+  await setupFamily(page, [{ name: 'Migration Student', grade: '5' }])
+  await assign(page, 'Migration Student', LESSON.a)
+  const before = await supportState(page)
+  const studentRef = before.app.setup.students[0].studentRef
+  const assignment = assignmentFor(before.core, studentRef, LESSON.a.lessonRef)
+  const legacy = [{
+    schemaVersion: 1,
+    lessonRef: LESSON.a.lessonRef,
+    studentRef,
+    assignmentRef: assignment.assignmentRef,
+    attemptRef: `${assignment.assignmentRef}:session`,
+    sectionRef: 'legacy:section',
+    itemRef: 'legacy:item',
+    segmentRef: `${LESSON.a.lessonRef}:segment:learn`,
+    responseType: 'TEXT',
+    evidenceMode: 'INDEPENDENT',
+    response: { kind: 'TEXT', text: 'Existing browser response preserved by migration.' },
+    status: 'PENDING_ASSESSMENT',
+    savedAt: '2026-08-13T12:00:00.000Z',
+    assessment: null,
+  }]
+  const raw = JSON.stringify(legacy)
+  await page.evaluate(({ key, value }) => localStorage.setItem(key, value), { key: LEGACY_RESPONSE_KEY, value: raw })
+
+  await openStudent(page, 'Migration Student')
+  await startFromHome(page, LESSON.a)
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  const records = await idbRecords(page)
+  expect(responseDocuments(records, studentRef)).toHaveLength(1)
+  expect(JSON.stringify(responseDocuments(records, studentRef))).toContain('Existing browser response preserved by migration.')
+  expect(records.find((record) => record.key === RESPONSE_MIGRATION_KEY)?.value).toMatchObject({ status: 'complete', recordCount: 1 })
+  expect(await page.evaluate((key) => localStorage.getItem(key), LEGACY_RESPONSE_KEY)).toBeNull()
+
+  await page.reload()
+  await openStudent(page, 'Migration Student')
+  await resumeFromHome(page, LESSON.a)
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  expect(responseDocuments(await idbRecords(page), studentRef)).toEqual(responseDocuments(records, studentRef))
+  expect(await page.evaluate((key) => localStorage.getItem(key), LEGACY_RESPONSE_KEY)).toBeNull()
+})
+
+test('an unavailable learner-response IndexedDB transaction is not reported as saved', async ({ page }) => {
+  await page.addInitScript(() => {
+    const original = IDBDatabase.prototype.transaction
+    IDBDatabase.prototype.transaction = function (storeNames: string | Iterable<string>, mode?: IDBTransactionMode, options?: IDBTransactionOptions) {
+      if (sessionStorage.getItem('family-pilot-refuse-response-idb') === '1') {
+        throw new DOMException('Injected learner-response storage unavailability', 'InvalidStateError')
+      }
+      return original.call(this, storeNames, mode, options)
+    }
+  })
+  await setupFamily(page, [{ name: 'Response Refusal Student', grade: '5' }])
+  await assign(page, 'Response Refusal Student', LESSON.a)
+  const state = await supportState(page)
+  const studentRef = state.app.setup.students[0].studentRef
+  await openStudent(page, 'Response Refusal Student')
+  await startFromHome(page, LESSON.a)
+  await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Continue', exact: true }).click()
+  await expect(page.getByText('Step 2 of 3', { exact: true })).toBeVisible()
+  await page.evaluate(() => sessionStorage.setItem('family-pilot-refuse-response-idb', '1'))
+  const choice = page.getByRole('radio').first()
+  if (await choice.isVisible().catch(() => false)) {
+    await choice.check()
+    await page.getByRole('button', { name: 'Submit answer', exact: true }).click()
+  } else {
+    await page.getByLabel(/Your response|Describe what you completed/).fill('This write must be refused.')
+    const completion = page.getByRole('checkbox', { name: 'I completed the action described above.' })
+    if (await completion.isVisible().catch(() => false)) await completion.check()
+    await page.getByRole('button', { name: 'Submit', exact: true }).click()
+  }
+  await expect(page.getByRole('alert')).toContainText('Nothing advanced')
+  await expect(page.getByText('Step 2 of 3', { exact: true })).toBeVisible()
+  await page.evaluate(() => sessionStorage.removeItem('family-pilot-refuse-response-idb'))
+  expect(responseDocuments(await idbRecords(page), studentRef)).toEqual([])
+  expect((await supportState(page)).keys).not.toContain(LEGACY_RESPONSE_KEY)
+})
+
+test('corrupt legacy learner responses fail closed and remain untouched', async ({ page }) => {
+  await setupFamily(page, [{ name: 'Corrupt Legacy Student', grade: '5' }])
+  await assign(page, 'Corrupt Legacy Student', LESSON.a)
+  await page.evaluate((key) => localStorage.setItem(key, '{not-json'), LEGACY_RESPONSE_KEY)
+  await openStudent(page, 'Corrupt Legacy Student')
+  await startFromHome(page, LESSON.a)
+
+  await expect(page.getByRole('heading', { name: 'Responses not available' })).toBeVisible()
+  await expect(page.getByRole('alert')).toContainText('cannot be safely migrated')
+  expect(await page.evaluate((key) => localStorage.getItem(key), LEGACY_RESPONSE_KEY)).toBe('{not-json')
+  const records = await idbRecords(page)
+  expect(records.some((record) => record.key === RESPONSE_MIGRATION_KEY)).toBe(false)
+  expect(responseDocuments(records)).toEqual([])
 })
 
 test('a corrupt durable Study document fails closed and preserves quarantine evidence', async ({}, testInfo) => {

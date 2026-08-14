@@ -43,10 +43,10 @@ export class LearnerResponseRuntime {
     if (this.#lesson.lessonRef !== context.lessonRef) throw new Error('Wrong lesson material rejected.')
   }
 
-  open(segmentOrdinal: number | null, segmentRef: string | null): LearnerResponsePresentation {
+  async open(segmentOrdinal: number | null, segmentRef: string | null): Promise<LearnerResponsePresentation> {
     const role = SEGMENT_ROLE[segmentOrdinal ?? 1] ?? 'LEARN'
     const segment = this.#lesson.segments.find((candidate) => candidate.role === role)!
-    const records = this.store.list(this.context)
+    const records = await this.store.list(this.context)
     const answered = new Set(records.map((record) => record.itemRef))
     const required = segment.items.filter((item) => item.required)
     const item = required.find((candidate) => !answered.has(candidate.itemRef)) ?? segment.items[0] ?? null
@@ -90,7 +90,7 @@ export class LearnerResponseRuntime {
       assessment: null,
     })
     try {
-      this.store.save(pending)
+      await this.store.save(pending)
     } catch {
       return reject('storage-unavailable', 'The response could not be saved on this device. Nothing advanced.')
     }
@@ -99,7 +99,7 @@ export class LearnerResponseRuntime {
       const receipt = await this.assessor.assess(pending)
       if (receipt.assessorRef !== this.assessor.assessorRef) return { status: 'saved', record: pending, assessmentStatus: 'PENDING_ASSESSMENT' }
       const assessed: LearnerResponseRecord = Object.freeze({ ...pending, status: 'ASSESSED', assessment: Object.freeze({ ...receipt }) })
-      this.store.save(assessed)
+      await this.store.save(assessed)
       return { status: 'saved', record: assessed, assessmentStatus: 'ASSESSED' }
     } catch {
       // Offline/unavailable assessment never changes the locally durable pending response.

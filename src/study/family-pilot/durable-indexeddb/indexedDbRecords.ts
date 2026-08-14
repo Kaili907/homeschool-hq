@@ -182,20 +182,30 @@ export async function openIndexedDbRecordStore(
         const tx = transaction('readwrite')
         const store = tx.objectStore(FAMILY_PILOT_DURABLE_OBJECT_STORE)
         let refused = false
+        let synchronousFailure: unknown = null
         if (precondition) {
           const current = store.get(key)
           current.onsuccess = () => {
-            if (precondition(current.result)) {
-              store.put(value, key)
-              return
+            try {
+              if (precondition(current.result)) {
+                store.put(value, key)
+                return
+              }
+              refused = true
+            } catch (error) {
+              synchronousFailure = error
             }
-            refused = true
             tx.abort()
           }
         } else {
           // A quota refusal surfaces on the transaction, not on the request, so
           // resolving on request success would report a write that never landed.
-          store.put(value, key)
+          try {
+            store.put(value, key)
+          } catch (error) {
+            synchronousFailure = error
+            tx.abort()
+          }
         }
         tx.oncomplete = () => { resolve() }
         tx.onerror = () => {
@@ -204,7 +214,7 @@ export async function openIndexedDbRecordStore(
         tx.onabort = () => {
           reject(refused
             ? new IndexedDbRecordError('conflict', 'Saved Study work changed elsewhere since it was read here.')
-            : new IndexedDbRecordError('transaction-failed', 'Study work could not be saved to this device.', tx.error))
+            : new IndexedDbRecordError('transaction-failed', 'Study work could not be saved to this device.', synchronousFailure ?? tx.error))
         }
       })
     },

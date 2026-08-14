@@ -114,11 +114,11 @@ Ordinary millisecond browser timing initially uncovered an accepted calendar-run
 
 ## IndexedDB, privacy, and corruption proof
 
-The real browser created and used IndexedDB database `manuel-academy.study.family-pilot-durable`, version 1, object store `records`. Canonical Study documents, checkpoints, session/calendar state, health, and quarantine evidence were read directly from that store during acceptance. Normal canonical Study state was absent from localStorage; localStorage held only the intended minimized Core/app projections and local preferences.
+The real browser created and used IndexedDB database `manuel-academy.study.family-pilot-durable`, version 1, object store `records`. Canonical Study documents, checkpoints, session/calendar state, health, quarantine evidence, final lesson-item responses, and final assessment attempts are read directly from that store. Normal canonical Study and learner-response authority are absent from localStorage; localStorage holds the intended minimized Core/app projections and local preferences. The pre-authority-correction learner-response array is migration input only and is removed after verified IndexedDB readback.
 
 After deliberate corruption of the durable Study envelope, a cold process reopen failed closed with `Lesson not ready`, did not show Step 1 or restart the lesson, retained the one-segment Core projection without falsely advancing it, and wrote the original corrupt value to the learner's IndexedDB quarantine record.
 
-No raw learner response, answer key, audio, Tutor transcript, full dynamic-source article, or raw PIN was persisted. The portable backup explicitly retained `learnerTextIncluded: false` and `tutorTranscriptIncluded: false`.
+Raw learner responses are persisted only in student/assignment/attempt-scoped IndexedDB response records; they are absent from canonical Study documents, localStorage after migration, reporting projections, and portable backup. No answer key, adult scoring authority, audio, Tutor transcript, full dynamic-source article, bearer, or raw PIN is persisted. The portable backup explicitly retains `learnerTextIncluded: false` and `tutorTranscriptIncluded: false`.
 
 ## Guardian attestation proof
 

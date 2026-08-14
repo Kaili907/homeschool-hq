@@ -84,8 +84,8 @@ export interface LearnerResponseAssessor {
 }
 
 export interface LearnerResponseStore {
-  list(context: LearnerResponseAttemptContext): readonly LearnerResponseRecord[]
-  save(record: LearnerResponseRecord): void
+  list(context: LearnerResponseAttemptContext): Promise<readonly LearnerResponseRecord[]>
+  save(record: LearnerResponseRecord): Promise<void>
 }
 
 export interface LearnerResponsePresentation {

@@ -762,8 +762,9 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
   const [message, setMessage] = useState('')
   const [tutorText, setTutorText] = useState('')
   const [focus, setFocus] = useState<FamilyPilotFocusSession | null>(null)
-  const [, setResponseRevision] = useState(0)
-  const responseStore = useMemo(() => new BrowserLearnerResponseStore(window.localStorage), [assignmentRef])
+  const [responseView, setResponseView] = useState<{ readonly key: string; readonly presentation: LearnerResponsePresentation } | null>(null)
+  const [responseLoadError, setResponseLoadError] = useState<{ readonly key: string; readonly message: string } | null>(null)
+  const responseStore = useMemo(() => new BrowserLearnerResponseStore(), [assignmentRef, studentRef])
   const assignment = controller.coreSnapshot.state.students.find((item) => item.studentRef === studentRef)?.assignments.find((item) => item.assignmentRef === assignmentRef)
 
   const run = useCallback(async (action: () => Promise<FinalFamilyPilotControllerResult>) => {
@@ -795,9 +796,34 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     return () => window.clearInterval(timer)
   }, [focus?.sessionRef, result?.status === 'ok' ? result.study.sessionStatus : null])
 
+  const responseKey = result?.status === 'ok'
+    ? `${result.study.lessonRef}|${result.study.session.sessionRef}|${result.study.segmentOrdinal ?? ''}|${result.study.segmentRef ?? ''}`
+    : null
+  useEffect(() => {
+    if (result?.status !== 'ok' || !responseKey) return
+    let live = true
+    const runtime = new LearnerResponseRuntime(result.material, {
+      lessonRef: result.study.lessonRef,
+      studentRef: result.study.session.learnerRef,
+      assignmentRef,
+      attemptRef: result.study.session.sessionRef,
+    }, responseStore)
+    void runtime.open(result.study.segmentOrdinal, result.study.segmentRef).then((presentation) => {
+      if (!live) return
+      setResponseView({ key: responseKey, presentation })
+      setResponseLoadError(null)
+    }).catch((error: unknown) => {
+      if (live) setResponseLoadError({ key: responseKey, message: messageOf(error) })
+    })
+    return () => { live = false }
+  }, [assignmentRef, responseKey, responseStore, result])
+
   if (!assignment) return <main className="mx-auto max-w-4xl p-6"><p role="alert">That assignment is unavailable for this student.</p><button onClick={onExit}>Back</button></main>
   if (!result || busy && !result) return <main className="mx-auto max-w-4xl p-6"><p role="status">Opening durable Study and production materials…</p></main>
   if (result.status === 'rejected') return <main className="mx-auto max-w-4xl p-6"><h2 className="text-2xl font-extrabold">Lesson not ready</h2><p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-4 font-semibold" role="alert">{result.message}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back to Home</button></main>
+  if (responseLoadError?.key === responseKey) return <main className="mx-auto max-w-4xl p-6"><h2 className="text-2xl font-extrabold">Responses not available</h2><p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-4 font-semibold" role="alert">{responseLoadError.message}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back to Home</button></main>
+  const responsePresentation = responseView?.key === responseKey ? responseView.presentation : null
+  if (!responsePresentation) return <main className="mx-auto max-w-4xl p-6"><p role="status">Opening durable learner responses…</p></main>
 
   const pending = result.completionStatus === 'PENDING_GUARDIAN_ATTESTATION'
   const certified = result.completionStatus === 'CERTIFIED' && result.study.assignmentState === 'completed'
@@ -808,7 +834,6 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     // Study's stable session is the attempt identity in this completion-authority path.
     attemptRef: result.study.session.sessionRef,
   }, responseStore)
-  const responsePresentation: LearnerResponsePresentation = responseRuntime.open(result.study.segmentOrdinal, result.study.segmentRef)
   const responseItem = responsePresentation.item
   const segmentContent = responseItem ? {
     lessonRef: responseItem.lessonRef,
@@ -844,9 +869,14 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
     if (saved.status === 'rejected') setMessage(saved.message)
     else {
       setMessage(saved.assessmentStatus === 'PENDING_ASSESSMENT'
-        ? 'Response saved on this device. Assessment is pending.'
-        : 'Response saved and assessed by the trusted assessor.')
-      setResponseRevision((revision) => revision + 1)
+        ? 'Response saved and verified in IndexedDB. Assessment is pending.'
+        : 'Response saved and verified in IndexedDB, then assessed by the trusted assessor.')
+      try {
+        const presentation = await responseRuntime.open(result.study.segmentOrdinal, result.study.segmentRef)
+        setResponseView({ key: responseKey as string, presentation })
+      } catch (error) {
+        setMessage(`The response was saved, but could not be reopened: ${messageOf(error)}`)
+      }
     }
     setBusy(false)
     refresh()

@@ -63,7 +63,7 @@ Legacy feature tips were inspected and imported as their missing feature deltas;
 ## Runtime, storage, and state
 
 - Study composition: `createFinalFamilyPilotStudyRuntime`, accepted at `00597916840d7b7c906008718c58f035bd2d7426` and wired through the existing Family Pilot Study transition engine.
-- Storage: IndexedDB database `manuel-academy.study.family-pilot-durable`, version 1, object store `records`; one validated household/student record scope per learner.
+- Storage: IndexedDB database `manuel-academy.study.family-pilot-durable`, version 1, object store `records`; validated household/student Study documents, student/assignment/attempt lesson-response documents, and student/assignment assessment-attempt documents. The legacy localStorage lesson-response array is migration input only.
 - Device companion state is versioned and minimized. Corrupt state is quarantined; future state is read-only; safety-state damage recovers conservatively.
 - Checkpoint, pause/resume, exact cold reopen, ordinary completion, RFL pending/attestation, Social source attachment, safety hold/clear, and sibling isolation use the same controller and student identity.
 - Tutor help uses the existing Tutor gateway bridge when eligible and the accepted static curriculum fallback otherwise. Raw conversations are never included in durable state or backup. Server Tutor production routing remains disabled.
