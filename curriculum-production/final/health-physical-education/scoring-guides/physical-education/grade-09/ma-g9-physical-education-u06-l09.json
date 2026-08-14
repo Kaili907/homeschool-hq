@@ -7,11 +7,11 @@
   "subject": "physical-education",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner holds yoga, stretching, and mindful movement in a genuine trial session of the activity in the learner’s own setting, with their real access constraints applying, in whatever version their body and setting allow.",
+    "The learner holds yoga, stretching, and mindful movement through a safe trial when available or a full no-cost or no-equipment trial simulation in the learner’s own setting, with their real access constraints applying, in whatever version their body and setting allow. Full transfer credit requires applying the learner’s actual access, cost, equipment, location, and time constraints and recording the resulting choice or adjustment. A safe trial or fully modelled trial earns equal credit when it preserves all of that decision evidence.",
     "The learner names what degraded first and why, rather than reporting only whether it worked.",
     "The learner compares this occasion with the earlier one and says what actually changed."
   ],
-  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person.",
+  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit when it supplies the stated transfer evidence. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person. Full transfer credit requires applying the learner’s actual access, cost, equipment, location, and time constraints and recording the resulting choice or adjustment. A safe trial or fully modelled trial earns equal credit when it preserves all of that decision evidence.",
   "masteryRule": "Do not mark mastery from one session. Use safe participation, skill cues, tactical decisions, self-management, personal progress against the learner’s own stated task, and self-assessment — without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or setting.",
   "remediation": "Return to the simplest version of yoga, stretching, and mindful movement — slower, smaller range, closer target, or seated — then rebuild.",
   "adaptiveRoutes": [
@@ -37,11 +37,11 @@
     },
     {
       "signal": "learner declines a task",
-      "action": "Offer the adapted, seated, solo, or described version of yoga, stretching, and mindful movement; the alternate route is full credit and is not logged as a refusal."
+      "action": "Offer the adapted, seated, solo, or described version of yoga, stretching, and mindful movement; the alternate route is full credit when it supplies the stated transfer evidence and is not logged as a refusal. Full transfer credit requires applying the learner’s actual access, cost, equipment, location, and time constraints and recording the resulting choice or adjustment. A safe trial or fully modelled trial earns equal credit when it preserves all of that decision evidence."
     },
     {
       "signal": "transfer condition is too much today",
-      "action": "Drop back to the first-pass version of yoga, stretching, and mindful movement for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation."
+      "action": "Drop back to the first-pass version of yoga, stretching, and mindful movement for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation, but it does not itself satisfy the transfer evidence requirement."
     },
     {
       "signal": "mastery evidence",
@@ -68,7 +68,7 @@
     "Activity choice is the learner’s. No activity is required that the household cannot access or afford."
   ],
   "sourceProvenance": {
-    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g9-physical-education-u06-l09"
   },
   "productionReadiness": {

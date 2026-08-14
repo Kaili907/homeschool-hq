@@ -7,11 +7,11 @@
   "subject": "physical-education",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner holds honest evaluation, including of a cycle that did not work run unsupervised across a full cycle, with the pre-committed rules honoured rather than renegotiated mid-cycle, in whatever version their body and setting allow.",
+    "The learner holds honest evaluation, including of a cycle that did not work carried independently through a guardian-approved cycle or a fully modelled cycle, with the pre-committed rules honoured rather than renegotiated at each stage, in whatever version their body and setting allow. Full transfer credit requires evidence from every stage of the cycle, including the pre-committed adjustment rules and the decision made at each review point. Executing or fully modelling the cycle earns equal credit when the complete decision record is present.",
     "The learner names what degraded first and why, rather than reporting only whether it worked.",
     "The learner compares this occasion with the earlier one and says what actually changed."
   ],
-  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person.",
+  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit when it supplies the stated transfer evidence. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person. Full transfer credit requires evidence from every stage of the cycle, including the pre-committed adjustment rules and the decision made at each review point. Executing or fully modelling the cycle earns equal credit when the complete decision record is present.",
   "masteryRule": "Do not mark mastery from one session. Use safe participation, skill cues, tactical decisions, self-management, personal progress against the learner’s own stated task, and self-assessment — without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or setting.",
   "remediation": "Return to the simplest version of honest evaluation, including of a cycle that did not work — slower, smaller range, closer target, or seated — then rebuild.",
   "adaptiveRoutes": [
@@ -37,11 +37,11 @@
     },
     {
       "signal": "learner declines a task",
-      "action": "Offer the adapted, seated, solo, or described version of honest evaluation, including of a cycle that did not work; the alternate route is full credit and is not logged as a refusal."
+      "action": "Offer the adapted, seated, solo, or described version of honest evaluation, including of a cycle that did not work; the alternate route is full credit when it supplies the stated transfer evidence and is not logged as a refusal. Full transfer credit requires evidence from every stage of the cycle, including the pre-committed adjustment rules and the decision made at each review point. Executing or fully modelling the cycle earns equal credit when the complete decision record is present."
     },
     {
       "signal": "transfer condition is too much today",
-      "action": "Drop back to the first-pass version of honest evaluation, including of a cycle that did not work for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation."
+      "action": "Drop back to the first-pass version of honest evaluation, including of a cycle that did not work for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation, but it does not itself satisfy the transfer evidence requirement."
     },
     {
       "signal": "mastery evidence",
@@ -68,7 +68,7 @@
     "No weight, body composition, measurement, or appearance target appears anywhere in the cycle or its evaluation. Success is defined by the goal task and adherence."
   ],
   "sourceProvenance": {
-    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g12-physical-education-u02-l12"
   },
   "productionReadiness": {

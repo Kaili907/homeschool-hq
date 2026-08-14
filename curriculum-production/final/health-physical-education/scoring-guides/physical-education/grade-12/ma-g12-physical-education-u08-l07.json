@@ -7,11 +7,11 @@
   "subject": "physical-education",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner holds the stop rule as an adult habit rather than a class instruction practised as an unsupervised habit across a full training block, including one real stop decision, in whatever version their body and setting allow.",
+    "The learner holds the stop rule as an adult habit rather than a class instruction built as a learner-managed protocol for a full training-block scenario, executed when guardian-approved or fully modelled, including a realistic stop decision and the required adult-escalation boundary, in whatever version their body and setting allow. Full transfer credit requires the complete block protocol, warning cue, stop decision, recovery boundary, and adult-escalation step. Guardian-approved execution, a table, or a full written or described model earns equal credit when all of that safety reasoning is present.",
     "The learner names what degraded first and why, rather than reporting only whether it worked.",
     "The learner compares this occasion with the earlier one and says what actually changed."
   ],
-  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person.",
+  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit when it supplies the stated transfer evidence. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person. Full transfer credit requires the complete block protocol, warning cue, stop decision, recovery boundary, and adult-escalation step. Guardian-approved execution, a table, or a full written or described model earns equal credit when all of that safety reasoning is present.",
   "masteryRule": "Do not mark mastery from one session. Use safe participation, skill cues, tactical decisions, self-management, personal progress against the learner’s own stated task, and self-assessment — without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or setting.",
   "remediation": "Return to the simplest version of the stop rule as an adult habit rather than a class instruction — slower, smaller range, closer target, or seated — then rebuild.",
   "adaptiveRoutes": [
@@ -37,11 +37,11 @@
     },
     {
       "signal": "learner declines a task",
-      "action": "Offer the adapted, seated, solo, or described version of the stop rule as an adult habit rather than a class instruction; the alternate route is full credit and is not logged as a refusal."
+      "action": "Offer the adapted, seated, solo, or described version of the stop rule as an adult habit rather than a class instruction; the alternate route is full credit when it supplies the stated transfer evidence and is not logged as a refusal. Full transfer credit requires the complete block protocol, warning cue, stop decision, recovery boundary, and adult-escalation step. Guardian-approved execution, a table, or a full written or described model earns equal credit when all of that safety reasoning is present."
     },
     {
       "signal": "transfer condition is too much today",
-      "action": "Drop back to the first-pass version of the stop rule as an adult habit rather than a class instruction for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation."
+      "action": "Drop back to the first-pass version of the stop rule as an adult habit rather than a class instruction for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation, but it does not itself satisfy the transfer evidence requirement."
     },
     {
       "signal": "mastery evidence",
@@ -68,7 +68,7 @@
     "No body measurement, wearable export, sleep log, or health data is requested or recorded. The protocol is written in the learner’s own descriptive language."
   ],
   "sourceProvenance": {
-    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g12-physical-education-u08-l07"
   },
   "productionReadiness": {

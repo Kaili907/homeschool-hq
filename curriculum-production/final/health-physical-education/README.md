@@ -51,15 +51,16 @@ evaluates it. There is no single correct answer to key against.
 | 3 Health | `mac/g3-health-h2` (commit `50399a6`) | Accepted H2 wording and safety-metadata cleanup |
 | 3 PE and all Grade 4 | `mac/g34-health-pe-r1` (commit `d0ebaa0`) | Original Grade 3/4 Health + PE source, excluding the Grade 3 Health repin |
 | 5, 7, 8 | shared base (commit `656efba` onward) | Canonical Health + PE, already in every worktree |
-| 9, 10, 11, 12 | `mac/hs912-health-pe-r1` (commit `e39e2b3`) | HS Health + PE, four years each |
+| 9, 10, 11, 12 Health | `mac/hs912-health-pe-r1` (commit `e39e2b3`) | HS Health, four years |
+| 9, 10, 11, 12 PE | `mac/pe-transfer-authority-fix-r1` | Canonical HS PE with transfer/equal-credit authority correction |
 
-The Grade 3 Health, G3/4, and HS branches have not merged into this branch, so this
+The Grade 3 Health, G3/4, and HS Health branches have not merged into this branch, so this
 generator reads them from sibling git worktrees at generation time
 (`src/lib/sourcePaths.mjs`, overridable via `MA_SOURCE_G3_HEALTH_H2`,
 `MA_SOURCE_G34_HEALTH_PE`, and `MA_SOURCE_HS912_HEALTH_PE`). The canonical 5/7/8 content ships in every
-worktree's shared base and is read from this worktree directly. Once those
-branches merge, only `sourcePaths.mjs` needs to change — the rest of the
-generator is source-branch-agnostic.
+worktree's shared base and is read from this worktree directly. Canonical HS PE
+is now read from this branch's PE-only authoring tree. Once the remaining
+branches merge, only `sourcePaths.mjs` needs to change.
 
 ## Health instructional content
 

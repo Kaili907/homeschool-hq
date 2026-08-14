@@ -47,3 +47,13 @@ test('H3 fails closed when the verified private alternative is absent', () => {
   assert.equal(result.status, 'NOT_READY')
   assert.ok(result.codes.includes('SAFETY_OR_PRIVACY_GAP'))
 })
+
+test('H3 fails closed when PE transfer semantics conflict', () => {
+  const lesson = base()
+  lesson.requiresTransferConsistency = true
+  lesson.transferConsistencyStatus = 'CONFLICT'
+  lesson.transferConsistencyFindings = ['LIVE_OPPONENT_VS_SOLO_AUTHORITY']
+  const result = evaluateLessonProductionReadiness(lesson)
+  assert.equal(result.status, 'NOT_READY')
+  assert.ok(result.codes.includes('TRANSFER_AUTHORITY_CONFLICT'))
+})

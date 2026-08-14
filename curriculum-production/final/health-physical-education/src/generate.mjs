@@ -34,6 +34,7 @@ import {
 import { evaluateLessonProductionReadiness } from './lib/productionGate.mjs'
 import { scanDocument } from './lib/privacyScan.mjs'
 import { auditPeLessonExecutability, buildPeExecution } from './lib/peExecution.mjs'
+import { evaluatePeTransferConsistency } from './lib/transferConsistency.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(HERE, '..')
@@ -193,6 +194,22 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     sourceProvenance: { sourceBranch: sourceBranchLabel(grade, subject), sourceLessonId: lesson.lesson_id },
   }
 
+  const transferConsistency = isHealth
+    ? null
+    : evaluatePeTransferConsistency({
+        sourceLesson: lesson,
+        learnerTask: pkg.studentTask,
+        completionCriteria: pkg.completionCriteria,
+        equipmentAlternative: pkg.equipmentRequirements?.equalCreditNoEquipment,
+        accessibleAdaptation: pkg.accessibleAdaptation,
+        activitySteps: pkg.activitySteps,
+        adultSuccessCriteria: scoringGuide.successCriteria,
+        adultScoringGuidance: scoringGuide.scoringGuidance,
+        adultAdaptiveRoutes: scoringGuide.adaptiveRoutes,
+        adultSafetyAndPrivacy: scoringGuide.safetyAndPrivacyNotes,
+        guardianSafetyReview: scoringGuide.guardianSafetyReview,
+      })
+
   const gateInput = {
     lessonId: lesson.lesson_id,
     title: lesson.title,
@@ -216,6 +233,9 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     assessmentAlignment: standardsAligned(lesson.standards, unit),
     requiresSafetyOrPrivacyReview: true,
     safeAlternative: { present: Boolean(safeAlternativeText), text: safeAlternativeText },
+    requiresTransferConsistency: !isHealth && Boolean(lesson.transfer_condition),
+    transferConsistencyStatus: transferConsistency?.status,
+    transferConsistencyFindings: transferConsistency?.findings.map((item) => `${item.code}: ${item.message}`),
   }
 
   const violations = [...scanDocument(pkg, `packages/${subject}/grade-${gradeToken(grade)}/${lesson.lesson_id}.json`), ...scanDocument(scoringGuide, `scoring-guides/${subject}/grade-${gradeToken(grade)}/${lesson.lesson_id}.json`)]
@@ -427,7 +447,8 @@ function main() {
       grade3Health: 'mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f',
       grade3PeAndGrade4: 'mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434',
       canonical578: 'shared base@656efba (curriculum-content/manuel-academy/1.0.0, grades 5, 7, 8)',
-      hs912: 'mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7',
+      hs912Health: 'mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7',
+      hs912PhysicalEducation: 'mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)',
       healthContentRepair: 'mac/health-content-repair-r1 (objective-specific instruction and learner work for Health grades 5 and 7-12)',
       productionGate: 'mac/curriculum-production-gate-h3@49b3c4b86cc7764627bd4cfbd752222849831abf',
       excluded: 'grade 6 — no curriculum authored for it yet (see src/curriculum/grade-authority)',

@@ -6,12 +6,15 @@ import { resolve, dirname, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { scanDocument } from '../src/lib/privacyScan.mjs'
 import { auditPeLessonExecutability } from '../src/lib/peExecution.mjs'
+import { evaluatePeTransferConsistency } from '../src/lib/transferConsistency.mjs'
+import { courseDir } from '../src/lib/sourcePaths.mjs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const EXPECTED = { lessons: 1296, assessments: 135, items: 1431 }
 const H2 = 'mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f'
 const G34 = 'mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434'
 const HS = 'mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7'
+const HS_PE_REPAIR = 'mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)'
 const CANONICAL = 'shared base@656efba (canonical 5/7/8)'
 
 const FORBIDDEN_PACKAGE_KEYS = [
@@ -38,6 +41,7 @@ function expectedSource(doc) {
   if (doc.grade === 3 && doc.subject === 'health') return H2
   if (doc.grade === 3 || doc.grade === 4) return G34
   if ([5, 7, 8].includes(doc.grade)) return CANONICAL
+  if (doc.subject === 'physical-education') return HS_PE_REPAIR
   return HS
 }
 
@@ -55,6 +59,7 @@ function main() {
   let g3HealthRepinPackages = 0
   let g3HealthRepinGuides = 0
   const peLessonPackages = []
+  const peGuides = new Map()
 
   const packageRelatives = new Set(packageFiles.map((file) => relative(resolve(ROOT, 'packages'), file)))
   const guideRelatives = new Set(guideFiles.map((file) => relative(resolve(ROOT, 'scoring-guides'), file)))
@@ -95,6 +100,7 @@ function main() {
       : doc.rubricDimensions?.some(hasText)
     if (!hasRubric) errors.push(`${label}: rubric authority has no substantive criteria`)
     if (doc.sourceProvenance?.sourceBranch !== expectedSource(doc)) errors.push(`${label}: incorrect source provenance`)
+    if (doc.subject === 'physical-education' && doc.kind === 'lesson-scoring-guide') peGuides.set(doc.lessonId, doc)
     if (doc.grade === 3 && doc.subject === 'health' && doc.sourceProvenance?.sourceBranch === H2) g3HealthRepinGuides += 1
     privacyViolations += scanDocument(doc, label).length
   }
@@ -102,6 +108,35 @@ function main() {
   const manifest = JSON.parse(readFileSync(resolve(ROOT, 'corpus-manifest.json'), 'utf8'))
   const peEvidence = JSON.parse(readFileSync(resolve(ROOT, 'pe-content-repair-evidence.json'), 'utf8'))
   const peAudit = auditPeLessonExecutability(peLessonPackages)
+  const hsSourceLessons = new Map([9, 10, 11, 12].flatMap((grade) => readJsonl(resolve(courseDir(grade, 'physical-education'), 'lessons.jsonl'))).map((lesson) => [lesson.lesson_id, lesson]))
+  let transferLessons = 0
+  let scoringAuthorityConflicts = 0
+  let contentTransferConflicts = 0
+  for (const pkg of peLessonPackages) {
+    const sourceLesson = hsSourceLessons.get(pkg.lessonId)
+    if (!sourceLesson?.transfer_condition) continue
+    transferLessons += 1
+    const guide = peGuides.get(pkg.lessonId)
+    const result = evaluatePeTransferConsistency({
+      sourceLesson,
+      learnerTask: pkg.studentTask,
+      completionCriteria: pkg.completionCriteria,
+      equipmentAlternative: pkg.equipmentRequirements?.equalCreditNoEquipment,
+      accessibleAdaptation: pkg.accessibleAdaptation,
+      activitySteps: pkg.activitySteps,
+      adultSuccessCriteria: guide?.successCriteria,
+      adultScoringGuidance: guide?.scoringGuidance,
+      adultAdaptiveRoutes: guide?.adaptiveRoutes,
+      adultSafetyAndPrivacy: guide?.safetyAndPrivacyNotes,
+      guardianSafetyReview: guide?.guardianSafetyReview,
+    })
+    if (result.classifications.includes('SCORING_AUTHORITY_CONFLICT')) scoringAuthorityConflicts += 1
+    if (result.classifications.includes('CONTENT_TRANSFER_CONFLICT')) contentTransferConflicts += 1
+    for (const finding of result.findings) errors.push(`${pkg.lessonId}: ${finding.classification} ${finding.code}: ${finding.message}`)
+  }
+  if (transferLessons !== 216) errors.push(`HS PE transfer semantic cohort mismatch: ${transferLessons}, expected 216`)
+  if (scoringAuthorityConflicts !== 0) errors.push(`HS PE scoring-authority conflicts: ${scoringAuthorityConflicts}, expected 0`)
+  if (contentTransferConflicts !== 0) errors.push(`HS PE content-transfer conflicts: ${contentTransferConflicts}, expected 0`)
   if (manifest.manifestType !== 'manuel-academy-final-production-corpus') errors.push('manifest is not canonical final-production type')
   if (manifest.totals.lessons !== EXPECTED.lessons || lessons !== EXPECTED.lessons) errors.push(`lesson count mismatch: manifest=${manifest.totals.lessons}, disk=${lessons}`)
   if (manifest.totals.unitAssessments !== EXPECTED.assessments || assessments !== EXPECTED.assessments) errors.push(`assessment count mismatch: manifest=${manifest.totals.unitAssessments}, disk=${assessments}`)
@@ -136,6 +171,7 @@ function main() {
   console.log(`Counts: ${lessons} lessons + ${assessments} assessments = ${packageFiles.length} items.`)
   console.log(`Grade 3 Health H2 provenance: ${g3HealthRepinPackages} packages + ${g3HealthRepinGuides} guides.`)
   console.log(`PE content: ${peAudit.lessonsAudited} executable lessons; ${Object.values(peIssueGroups).reduce((sum, ids) => sum + ids.length, 0)} learner-content issue(s).`)
+  console.log(`HS PE transfer semantics: ${transferLessons} reviewed; ${scoringAuthorityConflicts} scoring-authority conflict(s), ${contentTransferConflicts} content-transfer conflict(s).`)
   if (errors.length) {
     console.error(`\n${errors.length} VALIDATION FAILURE(S):`)
     for (const error of errors) console.error(` - ${error}`)
@@ -143,6 +179,10 @@ function main() {
   } else {
     console.log('All final production, H3, privacy, rubric, provenance, and checksum checks passed.')
   }
+}
+
+function readJsonl(path) {
+  return readFileSync(path, 'utf8').split('\n').filter((line) => line.trim()).map((line) => JSON.parse(line))
 }
 
 function verifyChecksums(errors) {

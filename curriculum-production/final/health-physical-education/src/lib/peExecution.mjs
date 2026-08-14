@@ -180,7 +180,16 @@ function authoredCues(lesson) {
     : []
 }
 
-function buildActivitySteps(focus) {
+function buildActivitySteps(focus, transferEvidence) {
+  if (transferEvidence) {
+    return [
+      'Setup: read the equipment, space, safety, stop, and transfer-evidence rules; clear the area and choose the standard or adapted path.',
+      'Prepare: begin with comfortable joint movements or a low-intensity rehearsal of the planned evidence while breathing normally.',
+      `Practice: apply the movement cues for ${focus} at a self-selected challenge, resting or reducing the range whenever control changes.`,
+      `Apply: perform, simulate, diagram, gesture, or fully describe ${focus} under the authored transfer condition and preserve every required cue, decision, comparison, or revision. ${transferEvidence}`,
+      'Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed beyond the stated transfer evidence.',
+    ]
+  }
   return [
     'Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.',
     'Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.',
@@ -190,7 +199,15 @@ function buildActivitySteps(focus) {
   ]
 }
 
-function buildCompletionCriteria(focus) {
+function buildCompletionCriteria(focus, transferEvidence) {
+  if (transferEvidence) {
+    return [
+      `The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for ${focus}.`,
+      `The learner performs or fully models ${focus} under the authored transfer condition and supplies the stated cue, decision, comparison, or revision evidence. ${transferEvidence}`,
+      'The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.',
+      `A seated, supported, reduced-range, solo, low-space, no-equipment, simulated, diagrammed, or described version earns equal credit only when it preserves the same transfer evidence. ${transferEvidence}`,
+    ]
+  }
   return [
     `The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for ${focus}.`,
     'The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.',
@@ -201,6 +218,9 @@ function buildCompletionCriteria(focus) {
 
 export function buildPeExecution(lesson, grade) {
   const focus = typeof lesson.focus === 'string' && lesson.focus.trim() ? lesson.focus.trim() : 'the lesson focus'
+  const transferEvidence = typeof lesson.transfer_evidence_requirement === 'string' && lesson.transfer_evidence_requirement.trim()
+    ? lesson.transfer_evidence_requirement.trim()
+    : null
   const category = categoryFor(focus)
   const sourceCues = authoredCues(lesson)
   const movementCues = sourceCues.length > 0
@@ -215,7 +235,7 @@ export function buildPeExecution(lesson, grade) {
       required: ['No specialized equipment is required.'],
       optional: [category.optionalEquipment],
       householdSubstitutes: ['Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes.'],
-      equalCreditNoEquipment: category.noEquipment,
+      equalCreditNoEquipment: transferEvidence ? `${category.noEquipment} ${transferEvidence}` : category.noEquipment,
     },
     safetyRules: [
       'Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.',
@@ -224,10 +244,10 @@ export function buildPeExecution(lesson, grade) {
       ...category.safety,
     ],
     stoppingRules: STOP_RULES,
-    accessibleAdaptation: 'Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.',
-    lowSpaceNoEquipmentAlternative: category.noEquipment,
-    activitySteps: buildActivitySteps(focus),
-    completionCriteria: buildCompletionCriteria(focus),
+    accessibleAdaptation: `Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.${transferEvidence ? ` ${transferEvidence}` : ''}`,
+    lowSpaceNoEquipmentAlternative: transferEvidence ? `${category.noEquipment} ${transferEvidence}` : category.noEquipment,
+    activitySteps: buildActivitySteps(focus, transferEvidence),
+    completionCriteria: buildCompletionCriteria(focus, transferEvidence),
     repairCategory: category.id,
   }
 }

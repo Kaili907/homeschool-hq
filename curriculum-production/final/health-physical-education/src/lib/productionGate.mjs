@@ -20,6 +20,7 @@ export const READINESS_CODES = [
   'ASSESSMENT_NOT_ALIGNED',
   'SOURCE_INTEGRITY_GAP',
   'SAFETY_OR_PRIVACY_GAP',
+  'TRANSFER_AUTHORITY_CONFLICT',
   'CREDENTIAL_REQUEST',
   'CREDENTIAL_REQUEST_QUOTED',
   'NEEDS_HUMAN_REVIEW',
@@ -210,6 +211,13 @@ export function evaluateLessonProductionReadiness(lesson) {
       notes.push(missingSafeAlternative ? 'no safe/private alternative on record' : 'safety/privacy gap flagged')
     } else if (!lesson.safetyOrPrivacyStatus || lesson.safetyOrPrivacyStatus === 'UNKNOWN') {
       needsHumanReview = true
+    }
+  }
+
+  if (lesson.requiresTransferConsistency) {
+    if (lesson.transferConsistencyStatus !== 'CONSISTENT') {
+      blockingCodes.push('TRANSFER_AUTHORITY_CONFLICT')
+      notes.push(...(lesson.transferConsistencyFindings ?? ['learner task, transfer evidence, equal-credit expectation, and adult authority are not semantically consistent']))
     }
   }
 

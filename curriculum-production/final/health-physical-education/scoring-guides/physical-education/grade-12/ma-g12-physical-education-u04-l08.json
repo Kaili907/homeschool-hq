@@ -7,11 +7,11 @@
   "subject": "physical-education",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner holds the technical and physical demands the goal implies carried through an actual attempt at the goal, including a setback, and evaluated honestly afterwards, in whatever version their body and setting allow.",
+    "The learner holds the technical and physical demands the goal implies carried through a safe attempt when available or a detailed simulation of the attempt, including a realistic setback and an honest evaluation afterwards, in whatever version their body and setting allow. Full transfer credit requires the goal, attempt plan, realistic setback, response, and evidence-based evaluation. A safe attempt or detailed simulation earns equal credit when it preserves every part of that challenge-and-revision evidence.",
     "The learner names what degraded first and why, rather than reporting only whether it worked.",
     "The learner compares this occasion with the earlier one and says what actually changed."
   ],
-  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person.",
+  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit when it supplies the stated transfer evidence. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person. Full transfer credit requires the goal, attempt plan, realistic setback, response, and evidence-based evaluation. A safe attempt or detailed simulation earns equal credit when it preserves every part of that challenge-and-revision evidence.",
   "masteryRule": "Do not mark mastery from one session. Use safe participation, skill cues, tactical decisions, self-management, personal progress against the learner’s own stated task, and self-assessment — without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or setting.",
   "remediation": "Return to the simplest version of the technical and physical demands the goal implies — slower, smaller range, closer target, or seated — then rebuild.",
   "adaptiveRoutes": [
@@ -37,11 +37,11 @@
     },
     {
       "signal": "learner declines a task",
-      "action": "Offer the adapted, seated, solo, or described version of the technical and physical demands the goal implies; the alternate route is full credit and is not logged as a refusal."
+      "action": "Offer the adapted, seated, solo, or described version of the technical and physical demands the goal implies; the alternate route is full credit when it supplies the stated transfer evidence and is not logged as a refusal. Full transfer credit requires the goal, attempt plan, realistic setback, response, and evidence-based evaluation. A safe attempt or detailed simulation earns equal credit when it preserves every part of that challenge-and-revision evidence."
     },
     {
       "signal": "transfer condition is too much today",
-      "action": "Drop back to the first-pass version of the technical and physical demands the goal implies for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation."
+      "action": "Drop back to the first-pass version of the technical and physical demands the goal implies for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation, but it does not itself satisfy the transfer evidence requirement."
     },
     {
       "signal": "mastery evidence",
@@ -68,7 +68,7 @@
     "The challenge is never a body-composition, weight, or appearance goal, is never compared to another person’s result, and is never required to be witnessed, filmed, or published."
   ],
   "sourceProvenance": {
-    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g12-physical-education-u04-l08"
   },
   "productionReadiness": {

@@ -7,11 +7,11 @@
   "subject": "physical-education",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner holds beat, tempo, and phrasing carried through a complete sequence run without stopping, where a lost count is recovered mid-phrase instead of restarting, in whatever version their body and setting allow.",
+    "The learner holds beat, tempo, and phrasing through a complete sequence in which the learner safely pauses when needed and recovers a lost count or interrupted phrase without restarting the evidence from the beginning, in whatever version their body and setting allow. Full transfer credit requires a complete sequence plus evidence of recovering the count or phrase after an interruption. Performing, notating, storyboarding, or fully describing the sequence earns equal credit, and a safety pause or rest is responsible completion rather than failure.",
     "The learner names what degraded first and why, rather than reporting only whether it worked.",
     "The learner compares this occasion with the earlier one and says what actually changed."
   ],
-  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person.",
+  "scoringGuidance": "Score safe participation, skill cues, tactical reasoning, self-management, and revision. Accept any version of the task the learner’s body and setting allow as full credit when it supplies the stated transfer evidence. Never score body size, weight, body composition, appearance, speed alone, or comparison with another person. Full transfer credit requires a complete sequence plus evidence of recovering the count or phrase after an interruption. Performing, notating, storyboarding, or fully describing the sequence earns equal credit, and a safety pause or rest is responsible completion rather than failure.",
   "masteryRule": "Do not mark mastery from one session. Use safe participation, skill cues, tactical decisions, self-management, personal progress against the learner’s own stated task, and self-assessment — without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or setting.",
   "remediation": "Return to the simplest version of beat, tempo, and phrasing — slower, smaller range, closer target, or seated — then rebuild.",
   "adaptiveRoutes": [
@@ -37,11 +37,11 @@
     },
     {
       "signal": "learner declines a task",
-      "action": "Offer the adapted, seated, solo, or described version of beat, tempo, and phrasing; the alternate route is full credit and is not logged as a refusal."
+      "action": "Offer the adapted, seated, solo, or described version of beat, tempo, and phrasing; the alternate route is full credit when it supplies the stated transfer evidence and is not logged as a refusal. Full transfer credit requires a complete sequence plus evidence of recovering the count or phrase after an interruption. Performing, notating, storyboarding, or fully describing the sequence earns equal credit, and a safety pause or rest is responsible completion rather than failure."
     },
     {
       "signal": "transfer condition is too much today",
-      "action": "Drop back to the first-pass version of beat, tempo, and phrasing for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation."
+      "action": "Drop back to the first-pass version of beat, tempo, and phrasing for this session and re-attempt the added demand on a later occasion. Reducing the demand is the correct response and is scored as full participation, but it does not itself satisfy the transfer evidence requirement."
     },
     {
       "signal": "mastery evidence",
@@ -68,7 +68,7 @@
     "No performance is recorded, filmed, photographed, or shown to any audience beyond one trusted adult, and the learner may decline to perform entirely without losing any credit."
   ],
   "sourceProvenance": {
-    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceBranch": "mac/pe-transfer-authority-fix-r1 (canonical HS PE repair)",
     "sourceLessonId": "ma-g9-physical-education-u05-l07"
   },
   "productionReadiness": {

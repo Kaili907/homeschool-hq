@@ -1,0 +1,43 @@
+{
+  "validation": "HIGH-SCHOOL PE TRANSFER AUTHORITY CORRECTION R1",
+  "status": "PE_TRANSFER_AUTHORITY_FIX_VALIDATED",
+  "base": "56dd8a45fee1ca03dd5f83e1466c9f081824d6b9",
+  "independentReview": "8dd8a9a652d9e3029a09fc6985640d4bd65f6123",
+  "branch": "mac/pe-transfer-authority-fix-r1",
+  "reviewedCases": 216,
+  "before": {
+    "scoringAuthorityConflicts": 60,
+    "contentTransferConflicts": 36,
+    "falsePositives": 120,
+    "totalRealConflicts": 96
+  },
+  "after": {
+    "scoringAuthorityConflicts": 0,
+    "contentTransferConflicts": 0,
+    "totalRealConflicts": 0
+  },
+  "outcomes": {
+    "repaired": 96,
+    "falsePositivesPreserved": 120,
+    "safetyPreserved": 216,
+    "learnerAuthorityBindingsPreserved": 216
+  },
+  "canonicalRepair": {
+    "unitFamiliesChanged": 16,
+    "lessonsChanged": 96,
+    "sourceBoundary": "canonical HS PE course-data.mjs plus build-courses.mjs; no emitted lesson/guide was hand-edited"
+  },
+  "semanticGate": {
+    "implementation": "curriculum-production/final/health-physical-education/src/lib/transferConsistency.mjs",
+    "basis": "actual learner task, authored transfer requirement, equal-credit evidence expectation, completion path, and paired adult RUBRIC authority; no lesson-position predicate",
+    "negativeControls": [
+      "genuine scoring conflict fails",
+      "genuine transfer/content mismatch fails",
+      "reviewed false-positive pattern passes",
+      "valid equal-credit lesson passes",
+      "valid authored transfer lesson passes"
+    ]
+  },
+  "studyBoundary": "Completion-based Study progression and LEARNER_AUTHORITY bindings are unchanged; no Study or Tutor V2 file is part of this repair.",
+  "safety": "Movement safety, stop/rest authority, accessible activity alternatives, guardian boundaries, privacy, and no-body-scoring policies are preserved."
+}
