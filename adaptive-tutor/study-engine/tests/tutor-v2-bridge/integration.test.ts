@@ -32,15 +32,21 @@ import {
 } from "../../../core/v2/providers/ports/index.js";
 import {
   TUTOR_V2_BRIDGE_VERSION,
+  createInMemoryReviewedTutorContentAuthority,
   orchestrateTutorV2Bridge,
+  reviewedTutorContentDigest,
+  type ReviewedTutorContentApproval,
+  type ReviewedTutorContentApprovalRequest,
+  type ReviewedTutorContentAuthorityPort,
   type TutorV2BridgeDependencies,
   type TutorV2BridgeInvocation,
   type TutorV2BridgeResult,
 } from "../../bridges/tutor-v2/index.js";
 
 const NOW = Date.parse("2026-08-13T20:01:00.000Z");
-const DIGEST = `sha256:${"a".repeat(64)}` as const;
-const OTHER_DIGEST = `sha256:${"b".repeat(64)}` as const;
+const ITEM_DIGEST = "sha256:967915d7999db7ed7c588118bbfc964674b2941e6909c816b743f6a588231ffb" as const;
+const DIGEST = "sha256:5d1ae580f548054314e3cf1623b2e91dc090580a676e9acf8005dc610fba237f" as const;
+const OTHER_DIGEST = "sha256:82aba662c8a2db95797355cd9360522d9939b34a223dd53b7b24b32fbba675c1" as const;
 const VERSION = {
   contractVersion: TUTOR_V2_CONTRACT_VERSION,
   actionSchemaVersion: TUTOR_V2_ACTION_SCHEMA_VERSION,
@@ -199,6 +205,131 @@ function actionFor(kind: TutorActionKind): TutorActionProposal["action"] {
     case "return-to-lesson":
       return { kind, reasonCode: "continue-reviewed-lesson", resumeTarget: "study-selected-position" };
   }
+}
+
+const ACTION_DIGESTS: Readonly<Record<TutorActionKind, `sha256:${string}`>> = {
+  explain: "sha256:1ede1d5791bda3a3903215aeada2a740369d31650400423941aec219ffada41a",
+  hint: "sha256:7b514229ed7104d2b8c3fb5d0c1bc812ebc5ff1271f1ffd462f125610310a435",
+  "ask-check": "sha256:822f10a89a48b6f81760eae293d7e380ca5036a3548527e2bc3f18bba6416225",
+  "show-example": "sha256:58f2c899389c477bea05f6ffd3e71b28c40f75ccd823e243c4f26c0f848c4feb",
+  reteach: "sha256:7368641f8d8cacbf09c70e8ae4af1ff8ca9d28c05e5da7119caab38e7c0b2217",
+  "check-prerequisite": "sha256:ac238eed49a1f6e60ac59d490fb47ecb63afdc503712be1446274c56f633521d",
+  "suggest-break": "sha256:8cd34d3307fcb09b74a3856fdf7d6e546d623a035403af7b39ae0f63f7a6784e",
+  escalate: "sha256:c3e76cad07fe71271d989624a003dcaa6b0bee46f32117631e1deb2b51e5400c",
+  "return-to-lesson": "sha256:4664fbcaa6d00ebb944894bcd038cfeae3cf8ca71a5381edd7a3d0f46f558c94",
+};
+
+function reviewedScope() {
+  return {
+    householdScopeRef: BASE_SCOPE.householdScopeRef,
+    learnerScopeRef: BASE_SCOPE.learnerScopeRef,
+    sessionRef: BASE_SCOPE.sessionRef,
+    interactionRef: BASE_SCOPE.interactionRef,
+    lessonRef: BASE_SCOPE.lessonRef,
+  };
+}
+
+function reviewedContext() {
+  return {
+    subjectRef: "subject:mathematics",
+    conceptRef: "concept:fractions",
+    learnerStageRef: BASE_PROFILE.learningStageRef,
+  };
+}
+
+function defaultReviewedApprovals(
+  context = reviewedContext(),
+): ReviewedTutorContentApproval[] {
+  const input: ReviewedTutorContentApproval[] = [
+    {
+      purpose: "provider-input-learner-safe-item",
+      scope: reviewedScope(),
+      context,
+      sourceRef: "item:fraction-parts",
+      contentKind: "short-response",
+      contentDigest: ITEM_DIGEST,
+      actionKind: null,
+      groundingRefs: [],
+      approvalRef: "approval:item-fraction-parts",
+    },
+    {
+      purpose: "provider-input-grounding-content",
+      scope: reviewedScope(),
+      context,
+      sourceRef: "grounding:fraction-model",
+      contentKind: "curriculum-excerpt",
+      contentDigest: DIGEST,
+      actionKind: null,
+      groundingRefs: ["grounding:fraction-model"],
+      approvalRef: "approval:grounding-fraction-model",
+    },
+    {
+      purpose: "provider-input-grounding-content",
+      scope: reviewedScope(),
+      context,
+      sourceRef: "grounding:reviewed-fallback",
+      contentKind: "static-fallback",
+      contentDigest: OTHER_DIGEST,
+      actionKind: null,
+      groundingRefs: ["grounding:reviewed-fallback"],
+      approvalRef: "approval:grounding-reviewed-fallback",
+    },
+  ];
+  return [
+    ...input,
+    ...TUTOR_ACTION_KINDS.map((kind): ReviewedTutorContentApproval => {
+      const action = actionFor(kind);
+      const isFreeForm = "content" in action || "question" in action;
+      return {
+        purpose: isFreeForm
+          ? "learner-facing-action-content"
+          : "learner-facing-control-code",
+        scope: reviewedScope(),
+        context,
+        sourceRef: isFreeForm ? `proposal:${kind}` : action.reasonCode,
+        contentKind: "question" in action
+          ? `question-${action.checkKind}`
+          : isFreeForm
+            ? "teaching-content"
+            : "policy-reason-code",
+        contentDigest: ACTION_DIGESTS[kind],
+        actionKind: kind,
+        groundingRefs: "groundingRefs" in action ? [...action.groundingRefs] : [],
+        approvalRef: `approval:action-${kind}`,
+      };
+    }),
+  ];
+}
+
+async function approvalForProposal(
+  proposal: TutorActionProposal,
+  overrides: Partial<ReviewedTutorContentApproval> = {},
+): Promise<ReviewedTutorContentApproval> {
+  const action = proposal.action;
+  const freeForm = "content" in action || "question" in action;
+  const content = "content" in action
+    ? action.content
+    : "question" in action
+      ? action.question
+      : action.reasonCode;
+  return {
+    purpose: freeForm
+      ? "learner-facing-action-content"
+      : "learner-facing-control-code",
+    scope: reviewedScope(),
+    context: reviewedContext(),
+    sourceRef: freeForm ? proposal.proposalRef : content,
+    contentKind: "question" in action
+      ? `question-${action.checkKind}`
+      : freeForm
+        ? "teaching-content"
+        : "policy-reason-code",
+    contentDigest: await reviewedTutorContentDigest(content),
+    actionKind: action.kind,
+    groundingRefs: "groundingRefs" in action ? [...action.groundingRefs] : [],
+    approvalRef: `approval:custom-${action.kind}`,
+    ...overrides,
+  };
 }
 
 function proposalFixture(
@@ -449,6 +580,8 @@ function harness(options: {
   readonly inspect?: (proposal: TutorActionProposal) => unknown;
   readonly permission?: "accepted" | "rejected" | "throw";
   readonly safety?: "accepted" | "rejected" | "unavailable" | "throw";
+  readonly reviewedContent?: ReviewedTutorContentAuthorityPort;
+  readonly approvals?: readonly ReviewedTutorContentApproval[];
   readonly ttlMs?: number;
 } = {}): Harness {
   let now = NOW;
@@ -498,6 +631,13 @@ function harness(options: {
     agePolicies: registry.registry,
     ageTurnInspector: { inspect: ({ proposal }) => options.inspect?.(proposal) ?? turnPlan(proposal) },
     staticFallback: { validate: () => ({ status: "accepted" }) },
+    reviewedContent: options.reviewedContent ??
+      createInMemoryReviewedTutorContentAuthority(
+        options.approvals ?? defaultReviewedApprovals({
+          ...reviewedContext(),
+          learnerStageRef: profile.learningStageRef,
+        }),
+      ),
     memory,
     provider: options.provider ?? queued,
     eventLedger: ledger,
@@ -961,6 +1101,363 @@ for (const [name, step, reason] of PROVIDER_FAILURES) {
     assert.equal(result.fallback?.action.kind, "return-to-lesson");
   });
 }
+
+const NOVEL_PRIVACY_CONTAMINATION = [
+  ["cross-child private data", "The other pupil's reading log says she misses every Thursday."],
+  ["diagnostic inference", "The observed pattern meets the criteria for dyscalculia."],
+  ["psychological label", "This youngster demonstrates compulsive avoidance."],
+  ["personality judgment", "She is habitually manipulative when work becomes difficult."],
+  ["parent credential", "The family doorway phrase is blue-orchid-77."],
+  ["service credential", "Authenticate the billing robot with cobalt-raven-91."],
+  ["adult private note", "A caregiver observed a separation that has not been shared."],
+  ["paraphrased raw-provider material", "Internal guidance says to steer every reply toward option C."],
+] as const;
+
+for (const [name, content] of NOVEL_PRIVACY_CONTAMINATION) {
+  test(`W1-10R3 ${name} provider-input contamination lacks provenance`, async () => {
+    const h = harness();
+    const item = requestOf(h.input).studyAuthorityContext.instructionContext.learnerSafeItem;
+    assert.notEqual(item, null);
+    if (item !== null) item.learnerSafeContent = content;
+    const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+    assertFallback(result, "POLICY_REJECTION");
+    assert.equal(h.provider.callCount, 0);
+    assert.equal(JSON.stringify(result).includes(content), false);
+  });
+
+  test(`W1-10R3 ${name} provider-output contamination is not learner-facing`, async () => {
+    const proposal = proposalFixture("explain");
+    Object.assign(proposal.action, { content });
+    const h = harness({ steps: [successResult(proposal)] });
+    const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+    assertFallback(result, "POLICY_REJECTION");
+    assert.equal(result.providerCallCount, 1);
+    assert.equal(result.fallback?.action.kind, "return-to-lesson");
+    assert.equal(JSON.stringify(result).includes(content), false);
+  });
+}
+
+test("exact reviewed learner-safe item and grounding content reach the provider", async () => {
+  let received: ProviderExecutionRequest | null = null;
+  const h = harness({
+    provider: new FunctionalProvider((request) => {
+      received = request;
+      return successResult(proposalFixture());
+    }),
+  });
+  assert.equal((await orchestrateTutorV2Bridge(h.input, h.dependencies)).status, "accepted");
+  assert.notEqual(received, null);
+  const providerRequest = received as ProviderExecutionRequest | null;
+  assert.equal(providerRequest?.context.instruction.learnerSafeItem?.learnerSafeContent, "How many equal parts are shown?");
+  assert.equal(providerRequest?.context.instruction.groundingReferences[0]?.contentDigest, DIGEST);
+});
+
+test("same item ref with changed unreviewed content fails before provider execution", async () => {
+  const h = harness();
+  const item = requestOf(h.input).studyAuthorityContext.instructionContext.learnerSafeItem;
+  assert.notEqual(item, null);
+  if (item !== null) item.learnerSafeContent = "A benign but newly authored fraction question.";
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+});
+
+test("approved item content cannot be replayed under a forged ref", async () => {
+  const h = harness();
+  const item = requestOf(h.input).studyAuthorityContext.instructionContext.learnerSafeItem;
+  assert.notEqual(item, null);
+  if (item !== null) item.itemRef = "item:forged-ref";
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+});
+
+test("grounding digest is recomputed and a forged declared digest fails closed", async () => {
+  const h = harness();
+  requestOf(h.input).studyAuthorityContext.instructionContext.groundingReferences[0]!.contentDigest = OTHER_DIGEST;
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+});
+
+test("caller cannot self-approve by changing both grounding content and digest", async () => {
+  const content = "New caller-authored grounding that was never reviewed.";
+  const h = harness();
+  Object.assign(
+    requestOf(h.input).studyAuthorityContext.instructionContext.groundingReferences[0]!,
+    {
+      learnerSafeContent: content,
+      contentDigest: await reviewedTutorContentDigest(content),
+    },
+  );
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+});
+
+test("approved grounding content cannot be replayed under another grounding ref", async () => {
+  const h = harness();
+  requestOf(h.input).studyAuthorityContext.instructionContext.groundingReferences[0]!.groundingRef = "grounding:substituted";
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+});
+
+test("raw learner free-form attempt disclosure is disabled for Wave 1", async () => {
+  const raw = "I used a family situation to work this out.";
+  const h = harness();
+  h.input.disclosurePolicy.learnerAttempt = {
+    mode: "permit-current-attempt",
+    policyPermissionRef: "permission:legacy-attempt",
+    attempt: {
+      itemRef: "item:fraction-parts",
+      responseFormat: "free-form",
+      learnerResponse: raw,
+    },
+  };
+  const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+  assertFallback(result, "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+  assert.equal(JSON.stringify(result).includes(raw), false);
+});
+
+for (const [name, authority] of [
+  ["unavailable", { review: () => ({ status: "unavailable" }) }],
+  ["throw", { review: () => { throw new Error("catalog offline"); } }],
+  ["malformed approval", { review: () => ({ status: "approved", approvalRef: "approval:fake", providerControlled: true }) }],
+] as const satisfies readonly (readonly [string, ReviewedTutorContentAuthorityPort])[]) {
+  test(`reviewed-content authority ${name} fails closed before provider execution`, async () => {
+    const h = harness({ reviewedContent: authority });
+    assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+    assert.equal(h.provider.callCount, 0);
+  });
+}
+
+test("missing reviewed-content authority fails closed before provider execution", async () => {
+  const h = harness();
+  Reflect.deleteProperty(h.dependencies, "reviewedContent");
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+});
+
+for (const [dimension, patch] of [
+  ["another interaction", { interactionRef: "interaction:other" }],
+  ["another learner", { learnerScopeRef: "learner-scope:other" }],
+  ["another lesson", { lessonRef: "lesson:other" }],
+] as const) {
+  test(`provider-input approval from ${dimension} cannot be replayed`, async () => {
+    const approvals = defaultReviewedApprovals().map((approval) => ({
+      ...approval,
+      scope: { ...approval.scope, ...patch },
+    }));
+    const h = harness({ approvals });
+    assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+    assert.equal(h.provider.callCount, 0);
+  });
+}
+
+test("provider-input approval from another instructional context cannot be replayed", async () => {
+  const approvals = defaultReviewedApprovals().map((approval) => ({
+    ...approval,
+    context: { ...approval.context, conceptRef: "concept:decimals" },
+  }));
+  const h = harness({ approvals });
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  assert.equal(h.provider.callCount, 0);
+});
+
+const FREE_FORM_ACTIONS = [
+  "explain",
+  "hint",
+  "ask-check",
+  "show-example",
+  "reteach",
+] as const;
+
+for (const kind of FREE_FORM_ACTIONS) {
+  test(`${kind} exact Study-reviewed prose remains eligible`, async () => {
+    const h = harness({ steps: [successResult(proposalFixture(kind))] });
+    assert.equal((await orchestrateTutorV2Bridge(h.input, h.dependencies)).status, "accepted");
+  });
+
+  for (const [classification, content] of [
+    ["benign novel", `Try a newly worded ${kind} approach.`],
+    ["private novel", `The caregiver's concealed access phrase appears in this ${kind}.`],
+  ] as const) {
+    test(`${kind} ${classification} prose uses reviewed fallback`, async () => {
+      const proposal = proposalFixture(kind);
+      Object.assign(
+        proposal.action,
+        kind === "ask-check" ? { question: content } : { content },
+      );
+      const h = harness({ steps: [successResult(proposal)] });
+      const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+      assertFallback(result, "POLICY_REJECTION");
+      assert.equal(result.fallback?.action.kind, "return-to-lesson");
+      assert.equal(JSON.stringify(result).includes(content), false);
+    });
+  }
+
+  test(`${kind} Study approval cannot override active-assessment prose gate`, async () => {
+    const h = harness({ steps: [successResult(proposalFixture(kind))] });
+    requestOf(h.input).studyAuthorityContext.instructionContext.assessmentPhase =
+      "active-graded-or-mastery-check";
+    assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+  });
+}
+
+for (const kind of [
+  "check-prerequisite",
+  "suggest-break",
+  "escalate",
+  "return-to-lesson",
+] as const) {
+  test(`${kind} exact Study-approved reason code remains eligible`, async () => {
+    const h = harness({ steps: [successResult(proposalFixture(kind))] });
+    assert.equal((await orchestrateTutorV2Bridge(h.input, h.dependencies)).status, "accepted");
+  });
+
+  for (const reasonCode of ["new-benign-control-code", "other-child-medical-record-severe"]) {
+    test(`${kind} unapproved reason code ${reasonCode} fails closed`, async () => {
+      const proposal = proposalFixture(kind);
+      Object.assign(proposal.action, { reasonCode });
+      const h = harness({ steps: [successResult(proposal)] });
+      assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+    });
+  }
+}
+
+test("provider-fabricated approval field is rejected by the closed action schema", async () => {
+  const proposal = structuredClone(proposalFixture()) as unknown as Record<string, unknown>;
+  Object.assign(proposal.action as Record<string, unknown>, {
+    reviewedContentApproval: { status: "approved", approvalRef: "provider:self" },
+  });
+  const h = harness({ steps: [successResult(proposal)] });
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "MALFORMED_RESPONSE");
+});
+
+test("provider self-computed digest is not proof of learner-facing approval", async () => {
+  const content = "A harmless sentence with a digest chosen by the provider.";
+  const proposal = structuredClone(proposalFixture()) as unknown as Record<string, unknown>;
+  Object.assign(proposal.action as Record<string, unknown>, {
+    content,
+    contentDigest: await reviewedTutorContentDigest(content),
+  });
+  const h = harness({ steps: [successResult(proposal)] });
+  const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+  assertFallback(result, "MALFORMED_RESPONSE");
+  assert.equal(JSON.stringify(result).includes(content), false);
+});
+
+test("content approval cannot be replayed across action kind", async () => {
+  const proposal = proposalFixture("hint");
+  const wrong = await approvalForProposal(proposal, { actionKind: "explain" });
+  const h = harness({
+    steps: [successResult(proposal)],
+    approvals: [...defaultReviewedApprovals().slice(0, 3), wrong],
+  });
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+});
+
+test("content approval cannot be replayed across grounding refs", async () => {
+  const proposal = proposalFixture("explain");
+  const wrong = await approvalForProposal(proposal, { groundingRefs: ["grounding:reviewed-fallback"] });
+  const h = harness({
+    steps: [successResult(proposal)],
+    approvals: [...defaultReviewedApprovals().slice(0, 3), wrong],
+  });
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+});
+
+test("content approval cannot be replayed across interaction scope", async () => {
+  const proposal = proposalFixture("explain");
+  const wrong = await approvalForProposal(proposal, {
+    scope: { ...reviewedScope(), interactionRef: "interaction:other" },
+  });
+  const h = harness({
+    steps: [successResult(proposal)],
+    approvals: [...defaultReviewedApprovals().slice(0, 3), wrong],
+  });
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+});
+
+test("learner-facing approval cannot be replayed across learner scope", async () => {
+  const proposal = proposalFixture("explain");
+  const wrong = await approvalForProposal(proposal, {
+    scope: { ...reviewedScope(), learnerScopeRef: "learner-scope:other" },
+  });
+  const h = harness({
+    steps: [successResult(proposal)],
+    approvals: [...defaultReviewedApprovals().slice(0, 3), wrong],
+  });
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+});
+
+test("changing exact content after its catalog admission invalidates the digest binding", async () => {
+  const proposal = proposalFixture("explain");
+  const admitted = await approvalForProposal(proposal);
+  Object.assign(proposal.action, { content: "One byte of this content is now different!" });
+  const h = harness({
+    steps: [successResult(proposal)],
+    approvals: [...defaultReviewedApprovals().slice(0, 3), admitted],
+  });
+  assertFallback(await orchestrateTutorV2Bridge(h.input, h.dependencies), "POLICY_REJECTION");
+});
+
+test("mutable authority decision tampering by provider cannot self-approve output", async () => {
+  const decision: Record<string, unknown> = {
+    status: "approved",
+    approvalRef: "approval:mutable",
+  };
+  let calls = 0;
+  const authority: ReviewedTutorContentAuthorityPort = {
+    review() {
+      calls += 1;
+      return decision;
+    },
+  };
+  const provider = new FunctionalProvider(() => {
+    decision.providerControlled = true;
+    return successResult(proposalFixture());
+  });
+  const h = harness({ provider, reviewedContent: authority });
+  const result = await orchestrateTutorV2Bridge(h.input, h.dependencies);
+  assertFallback(result, "POLICY_REJECTION");
+  assert.ok(calls >= 4);
+});
+
+test("reviewed-content authority and approval objects are absent from provider request", async () => {
+  let received: ProviderExecutionRequest | null = null;
+  const h = harness({
+    provider: new FunctionalProvider((request) => {
+      received = request;
+      return successResult(proposalFixture());
+    }),
+  });
+  assert.equal((await orchestrateTutorV2Bridge(h.input, h.dependencies)).status, "accepted");
+  const keys = recursiveKeys(received).map((key) => key.toLowerCase());
+  for (const forbidden of ["reviewedcontent", "approvalref", "approval", "approved"]) {
+    assert.equal(keys.includes(forbidden), false, forbidden);
+  }
+});
+
+test("reviewed-content authority receives provenance metadata and no raw text", async () => {
+  const captured: ReviewedTutorContentApprovalRequest[] = [];
+  const catalog = createInMemoryReviewedTutorContentAuthority(defaultReviewedApprovals());
+  const authority: ReviewedTutorContentAuthorityPort = {
+    async review(request) {
+      captured.push(structuredClone(request));
+      return catalog.review(request);
+    },
+  };
+  const h = harness({ reviewedContent: authority });
+  assert.equal((await orchestrateTutorV2Bridge(h.input, h.dependencies)).status, "accepted");
+  assert.ok(captured.length >= 4);
+  const serialized = JSON.stringify(captured);
+  for (const raw of [
+    "How many equal parts are shown?",
+    "A fraction names equal parts of a whole.",
+    "Equal parts make a fraction model.",
+  ]) {
+    assert.equal(serialized.includes(raw), false, raw);
+  }
+  assert.match(serialized, /sha256:[a-f0-9]{64}/);
+});
 
 const REQUEST_PRIVACY_CASES: readonly [string, string][] = [
   ["credential contamination", "password=secret-value"],

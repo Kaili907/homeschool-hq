@@ -28,6 +28,7 @@ import {
   ProviderContextDisclosurePolicySchema,
   type MinimizedProviderContext,
 } from "../../tutor-v2/privacy/index.js";
+import type { ReviewedTutorContentAuthorityPort } from "./reviewed-content.js";
 
 export const TUTOR_V2_BRIDGE_VERSION = "1.0.0" as const;
 export const TUTOR_V2_BRIDGE_EVENT_VERSION = 1 as const;
@@ -218,6 +219,12 @@ export interface TutorV2BridgeDependencies {
   };
   readonly ageTurnInspector: StudyTutorAgeTurnInspectorPort;
   readonly staticFallback: StudyReviewedStaticFallbackPort;
+  /**
+   * Study-owned authority; this dependency is never disclosed to the provider.
+   * Optional only for source compatibility with pre-B3 callers: omission fails
+   * closed before provider execution and cannot authorize any content.
+   */
+  readonly reviewedContent?: ReviewedTutorContentAuthorityPort;
   readonly memory: TutorV2MemoryPort;
   readonly provider: TutorProviderPort;
   readonly eventLedger: TutorV2AcceptedEventLedgerPort;

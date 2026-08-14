@@ -46,8 +46,11 @@ import {
 } from "./contracts.js";
 import {
   validateLearnerSafeTutorAction,
-  validateProviderContextContentPrivacy,
 } from "./privacy.js";
+import {
+  authorizeReviewedLearnerAction,
+  authorizeReviewedProviderContext,
+} from "./reviewed-content.js";
 
 const ACTIONS = new Set<string>(TUTOR_ACTION_KINDS);
 const FAILURE_STATUSES = new Set<ProviderFailureStatus>([
@@ -705,10 +708,24 @@ async function resolveInvocation(
     studyAuthorityContext: request.studyAuthorityContext,
     disclosurePolicy: invocation.disclosurePolicy,
   });
-  if (
-    minimized.status !== "accepted" ||
-    validateProviderContextContentPrivacy(minimized.value).status !== "accepted"
-  ) {
+  if (minimized.status !== "accepted") {
+    return fallbackResult(
+      { invocation, request, memory: memory.state, ageProfile: age.profile, reasonCode: "POLICY_REJECTION", providerDetail: null, providerCallCount: 0 },
+      dependencies,
+    );
+  }
+  let contentApproval;
+  try {
+    if (dependencies.reviewedContent === undefined) throw new Error("Reviewed content authority unavailable");
+    contentApproval = await authorizeReviewedProviderContext(
+      minimized.value,
+      invocation.memoryAccess,
+      dependencies.reviewedContent,
+    );
+  } catch {
+    contentApproval = { status: "rejected" as const };
+  }
+  if (contentApproval.status !== "accepted") {
     return fallbackResult(
       { invocation, request, memory: memory.state, ageProfile: age.profile, reasonCode: "POLICY_REJECTION", providerDetail: null, providerCallCount: 0 },
       dependencies,
@@ -750,7 +767,7 @@ export async function orchestrateTutorV2Bridge(
 ): Promise<TutorV2BridgeResult> {
   const resolved = await resolveInvocation(input, dependencies);
   if (!("providerContext" in resolved)) return resolved;
-  const { invocation, request, memory, ageProfile } = resolved;
+  const { invocation, request, memory, ageProfile, providerContext } = resolved;
   const providerRequest = providerExecutionRequest(resolved);
 
   let rawProviderResult: unknown;
@@ -824,11 +841,31 @@ export async function orchestrateTutorV2Bridge(
       dependencies,
     );
   }
-  if (
-    !ACTIONS.has(policy.proposal.action.kind) ||
-    validateLearnerSafeTutorAction(policy.proposal.action).status !== "accepted" ||
-    !validateTurn(dependencies, policy.proposal, ageProfile, memory)
-  ) {
+  if (!ACTIONS.has(policy.proposal.action.kind)) {
+    return fallbackResult(
+      { invocation, request, memory, ageProfile, reasonCode: "POLICY_REJECTION", providerDetail: null, providerCallCount: 1 },
+      dependencies,
+    );
+  }
+  let contentApproval;
+  try {
+    if (dependencies.reviewedContent === undefined) throw new Error("Reviewed content authority unavailable");
+    contentApproval = await authorizeReviewedLearnerAction(
+      policy.proposal,
+      providerContext,
+      invocation.memoryAccess,
+      dependencies.reviewedContent,
+    );
+  } catch {
+    contentApproval = { status: "rejected" as const };
+  }
+  if (contentApproval.status !== "accepted") {
+    return fallbackResult(
+      { invocation, request, memory, ageProfile, reasonCode: "POLICY_REJECTION", providerDetail: null, providerCallCount: 1 },
+      dependencies,
+    );
+  }
+  if (!validateTurn(dependencies, policy.proposal, ageProfile, memory)) {
     return fallbackResult(
       { invocation, request, memory, ageProfile, reasonCode: "POLICY_REJECTION", providerDetail: null, providerCallCount: 1 },
       dependencies,
