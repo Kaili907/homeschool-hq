@@ -1,6 +1,19 @@
 {
   "ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL": true,
   "ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED": false,
+  "APPROVAL_ACCESSORS_ALLOWED": false,
+  "APPROVAL_CUSTOM_PROTOTYPES_ALLOWED": false,
+  "APPROVAL_DECISIONS_VALIDATED_BEFORE_NORMALIZATION": true,
+  "approvalDecisionStructuralValidationHistory": {
+    "approvalDecisionRepairSha": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+    "finalIndependentRereviewRequired": true,
+    "reconvergenceEvidence": "APPROVAL-DECISION-STRUCTURAL-VALIDATION-RECONVERGENCE.json",
+    "w1_09R4Sha": "6f90d351d759c697788b6489bd465d954ce52184",
+    "w1_10R4AcceptedAsAcceptanceEvidence": false,
+    "w1_10R4Blocker": "MALFORMED_APPROVAL_DECISION_NORMALIZED_INTO_VALID_LOOKING_APPROVAL_BEFORE_VALIDATION",
+    "w1_10R4ReproducedBlockerWasReal": true,
+    "w1_10R4ReviewCustodyStatus": "INVALID"
+  },
   "authority": "Study Engine is the sole authoritative state owner. Tutor output is proposal-only and requires Study validation.",
   "checksums": "CHECKSUMS.json",
   "COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE": true,
@@ -15,6 +28,13 @@
   "convergenceTestCounts": {
     "additionalPrivacyProvenance": 21,
     "approvalAuthorityAttacks": 10,
+    "approvalDecisionAccessorAttacks": 10,
+    "approvalDecisionHiddenKeyAttacks": 5,
+    "approvalDecisionHostileReflectionAttacks": 3,
+    "approvalDecisionMalformedValueShapes": 15,
+    "approvalDecisionPrototypeAttacks": 6,
+    "approvalDecisionStructuralValidation": 67,
+    "approvalDecisionW1_10R4HistoricalBlockers": 8,
     "freeFormOutputProvenance": 15,
     "historicalPrivacyBlockers": 16,
     "phraseMatrix": 20,
@@ -22,7 +42,7 @@
     "reviewedContentPrivacyProvenance": 78,
     "structuralAntiAnswerAdversarial": 53,
     "structuredControlPrivacy": 16,
-    "totalConvergence": 186
+    "totalConvergence": 253
   },
   "CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED": false,
   "evaluationResult": {
@@ -33,7 +53,7 @@
   },
   "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
   "gate": {
-    "finalClassification": "WAVE1_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+    "finalClassification": "WAVE1_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
     "foundationGate": "PASS",
     "releaseReady": false
   },
@@ -149,6 +169,13 @@
     "provider_outage_fallback",
     "transcript_non_persistence"
   ],
+  "hardGateFamilies": [
+    "PROVIDER_AUTHORITY_BOUNDARY",
+    "STRUCTURAL_ACTIVE_ASSESSMENT_ANTI_ANSWER",
+    "REVIEWED_CONTENT_PRIVACY_PROVENANCE",
+    "APPROVAL_DECISION_STRUCTURAL_VALIDATION"
+  ],
+  "hardGateFamiliesAreNonCompensable": true,
   "HOSTED_SUPABASE_CONTACTED_BY_WAVE1": false,
   "immutableLearnerBaseline": "7baf8dfbc27168708ed4cf504285a1838d7345f6",
   "knownInheritedFindings": [
@@ -159,6 +186,7 @@
   "LEXICAL_PRIVACY_MATCHING_IS_DEFENSE_IN_DEPTH_ONLY": true,
   "LIVE_MODEL_COMMERCIAL_CERTIFICATION": false,
   "LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED": true,
+  "MALFORMED_APPROVAL_FAILS_CLOSED": true,
   "manifestVersion": 1,
   "MASTER_MERGE_AUTHORIZED": false,
   "NOT_AUTHORIZED_FOR_BROWSER_AI_WIRING": true,
@@ -173,6 +201,9 @@
   "productionStatus": {
     "ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL": true,
     "ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED": false,
+    "APPROVAL_ACCESSORS_ALLOWED": false,
+    "APPROVAL_CUSTOM_PROTOTYPES_ALLOWED": false,
+    "APPROVAL_DECISIONS_VALIDATED_BEFORE_NORMALIZATION": true,
     "COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE": true,
     "CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED": false,
     "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
@@ -180,6 +211,7 @@
     "LEXICAL_PRIVACY_MATCHING_IS_DEFENSE_IN_DEPTH_ONLY": true,
     "LIVE_MODEL_COMMERCIAL_CERTIFICATION": false,
     "LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED": true,
+    "MALFORMED_APPROVAL_FAILS_CLOSED": true,
     "MASTER_MERGE_AUTHORIZED": false,
     "NOT_AUTHORIZED_FOR_BROWSER_AI_WIRING": true,
     "NOT_AUTHORIZED_FOR_HOSTED_SUPABASE": true,
@@ -192,7 +224,7 @@
     "PROVIDER_RECEIVES_STUDY_AUTHORITY": false,
     "RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED": false,
     "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
-    "statusVersion": 4,
+    "statusVersion": 5,
     "STUDY_ENGINE_REMAINS_AUTHORITY": true,
     "UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED": false,
     "WAVE_1_COMPLETE": false,
@@ -230,7 +262,7 @@
   "selfReferencePolicy": "MANIFEST.json and CHECKSUMS.json do not checksum themselves; the final W1-09 Git SHA is reported after commit.",
   "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
   "staticFallback": "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",
-  "statusVersion": 4,
+  "statusVersion": 5,
   "structuralAntiAnswerHistory": {
     "finalIndependentRereviewRequired": true,
     "reconvergenceEvidence": "STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json",

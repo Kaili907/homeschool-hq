@@ -16,6 +16,8 @@ const W1_09R2_SHA = "2c8716ed5db5bb824fc92533615295f0b163f7b2";
 const B2_REPAIR_SHA = "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a";
 const W1_09R3_SHA = "7435f820dc9e141d8a113b4d7f853044e36ba51d";
 const B3_REPAIR_SHA = "cf7ee7265c812a86b708b0e8cf2a33e6370e753d";
+const W1_09R4_SHA = "6f90d351d759c697788b6489bd465d954ce52184";
+const B4_REPAIR_SHA = "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841";
 
 const checks = [];
 let hardFailure = false;
@@ -98,9 +100,11 @@ const refs = {
   "origin/mac/tutor-v2-w1-anti-answer-repair-r2": B2_REPAIR_SHA,
   "origin/mac/tutor-v2-w1-reconvergence-r3": W1_09R3_SHA,
   "origin/mac/tutor-v2-w1-privacy-provenance-repair-r3": B3_REPAIR_SHA,
+  "origin/mac/tutor-v2-w1-reconvergence-r4": W1_09R4_SHA,
+  "origin/mac/tutor-v2-w1-approval-decision-repair-r4": B4_REPAIR_SHA,
 };
 const remoteMismatches = Object.entries(refs).filter(([ref, expected]) => git(["rev-parse", ref]).stdout.trim() !== expected);
-record("canonical-provenance", remoteMismatches.length === 0 ? "PASS" : "FAIL", remoteMismatches.length === 0 ? "14/14 pinned remote tips exact, including B1/B2/B3 and R2/R3" : `${remoteMismatches.length} remote mismatches`, "git rev-parse origin/mac/tutor-v2-w1-*");
+record("canonical-provenance", remoteMismatches.length === 0 ? "PASS" : "FAIL", remoteMismatches.length === 0 ? "16/16 pinned remote tips exact, including B1/B2/B3/B4 and R2/R3/R4" : `${remoteMismatches.length} remote mismatches`, "git rev-parse origin/mac/tutor-v2-w1-*");
 
 const b1Parent = git(["rev-parse", `${B1_REPAIR_SHA}^`]).stdout.trim();
 record("b1-repair-direct-parent", b1Parent === "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d" ? "PASS" : "FAIL", b1Parent, `git rev-parse ${B1_REPAIR_SHA}^`);
@@ -108,6 +112,15 @@ const b2Parent = git(["rev-parse", `${B2_REPAIR_SHA}^`]).stdout.trim();
 record("b2-repair-direct-parent", b2Parent === W1_09R2_SHA ? "PASS" : "FAIL", b2Parent, `git rev-parse ${B2_REPAIR_SHA}^`);
 const b3Parent = git(["rev-parse", `${B3_REPAIR_SHA}^`]).stdout.trim();
 record("b3-repair-direct-parent", b3Parent === W1_09R3_SHA ? "PASS" : "FAIL", b3Parent, `git rev-parse ${B3_REPAIR_SHA}^`);
+
+const b4Parent = git(["rev-parse", `${B4_REPAIR_SHA}^`]).stdout.trim();
+record("b4-repair-direct-parent", b4Parent === W1_09R4_SHA ? "PASS" : "FAIL", b4Parent, `git rev-parse ${B4_REPAIR_SHA}^`);
+const b4RepairScope = git(["diff", "--name-only", W1_09R4_SHA, B4_REPAIR_SHA]).stdout.split("\n").filter(Boolean);
+const b4ScopeExact = JSON.stringify(b4RepairScope.sort()) === JSON.stringify([
+  "adaptive-tutor/study-engine/bridges/tutor-v2/reviewed-content.ts",
+  "adaptive-tutor/study-engine/tests/tutor-v2-bridge/integration.test.ts",
+]);
+record("b4-repair-audited-scope", b4ScopeExact ? "PASS" : "FAIL", b4ScopeExact ? "B4 touched only reviewed-content.ts and the bridge suite" : b4RepairScope.join(", "), `git diff --name-only ${W1_09R4_SHA} ${B4_REPAIR_SHA}`);
 
 const laneTrees = [
   ["befb91bb2321aec0449d2d8e613619a592feb76c", ["adaptive-tutor/core/v2/policy/authority", "adaptive-tutor/core/v2/policy/grounding", "adaptive-tutor/core/v2/policy/refusal"]],
@@ -131,9 +144,17 @@ record("accepted-b2-repair-tree-equivalence", b2RepairTreeExact ? "PASS" : "FAIL
 const b3RepairPaths = [
   "adaptive-tutor/study-engine/bridges/tutor-v2",
   "adaptive-tutor/study-engine/tests/tutor-v2-bridge",
+  ":(exclude)adaptive-tutor/study-engine/bridges/tutor-v2/reviewed-content.ts",
+  ":(exclude)adaptive-tutor/study-engine/tests/tutor-v2-bridge/integration.test.ts",
 ];
 const b3RepairTreeExact = git(["diff", "--quiet", B3_REPAIR_SHA, "HEAD", "--", ...b3RepairPaths]).status === 0;
-record("accepted-b3-repair-tree-equivalence", b3RepairTreeExact ? "PASS" : "FAIL", b3RepairTreeExact ? "reviewed-content bridge repair source and tests exact" : "B3 repair-owned tree drifted", `git diff --quiet ${B3_REPAIR_SHA} HEAD -- <b3-repair-paths>`);
+record("accepted-b3-repair-tree-equivalence", b3RepairTreeExact ? "PASS" : "FAIL", b3RepairTreeExact ? "privacy bridge source outside the audited B4 repair scope exact" : "B3 repair-owned tree drifted", `git diff --quiet ${B3_REPAIR_SHA} HEAD -- <b3-repair-paths minus b4 scope>`);
+const b4RepairPaths = [
+  "adaptive-tutor/study-engine/bridges/tutor-v2",
+  "adaptive-tutor/study-engine/tests/tutor-v2-bridge",
+];
+const b4RepairTreeExact = git(["diff", "--quiet", B4_REPAIR_SHA, "HEAD", "--", ...b4RepairPaths]).status === 0;
+record("accepted-b4-repair-tree-equivalence", b4RepairTreeExact ? "PASS" : "FAIL", b4RepairTreeExact ? "approval-decision parser source and bridge tests exact" : "B4 repair-owned tree drifted", `git diff --quiet ${B4_REPAIR_SHA} HEAD -- <b4-repair-paths>`);
 
 const providerContractsSource = await readFile(resolve(tutorRoot, "core/v2/providers/ports/contracts.ts"), "utf8");
 const sharedV2Source = await readFile(resolve(tutorRoot, "core/v2/index.ts"), "utf8");
@@ -142,10 +163,23 @@ const narrowProviderPort = /execute\(request: ProviderExecutionRequest\): Promis
   && /ProviderExecutionRequest/.test(sharedV2Source);
 record("provider-port-structural-boundary", narrowProviderPort ? "PASS" : "FAIL", narrowProviderPort ? "provider-safe request exported; TutorRequest/StudyAuthorityContext excluded" : "provider port widening detected", "source structural assertion");
 
+const reviewedContentSource = await readFile(resolve(tutorRoot, "study-engine/bridges/tutor-v2/reviewed-content.ts"), "utf8");
+const rawParsedBeforeNormalization =
+  /const rawDecision = await authority\.review\(structuredClone\(request\)\);\s*const decision = parseRawApprovalDecision\(rawDecision\);/.test(reviewedContentSource)
+  && !/structuredClone\(rawDecision\)/.test(reviewedContentSource)
+  && !/JSON\.parse\(JSON\.stringify\(rawDecision\)\)/.test(reviewedContentSource)
+  && !/rawDecision\.(?:status|approvalRef|code)/.test(reviewedContentSource)
+  && /Object\.getPrototypeOf\(candidate\) !== Object\.prototype/.test(reviewedContentSource)
+  && /Reflect\.ownKeys\(candidate\)/.test(reviewedContentSource)
+  && /Object\.getOwnPropertyDescriptors\(candidate\)/.test(reviewedContentSource)
+  && /Object\.hasOwn\(descriptor, "get"\)/.test(reviewedContentSource)
+  && /Object\.hasOwn\(descriptor, "set"\)/.test(reviewedContentSource);
+record("approval-decision-structural-parser-boundary", rawParsedBeforeNormalization ? "PASS" : "FAIL", rawParsedBeforeNormalization ? "raw authority decision validated before normalization or property access" : "approval decision normalization precedes validation", "source structural assertion");
+
 requireSuccess("v2-typecheck", process.execPath, [tsc, "-p", "scripts/tutor-v2/tsconfig.json", "--noEmit"], "strict TypeScript", { cwd: tutorRoot });
 requireSuccess("v2-compile", process.execPath, [tsc, "-p", "scripts/tutor-v2/tsconfig.json"], "convergence compilation", { cwd: tutorRoot });
 requireSuccess("schema-runtime-parity-artifacts", process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-schemas.js", "--check"], "23 schemas + inventory exact", { cwd: tutorRoot });
-requireSuccess("release-evidence-artifacts", process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js", "--check"], "9 release artifacts exact", { cwd: tutorRoot });
+requireSuccess("release-evidence-artifacts", process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js", "--check"], "10 release artifacts exact", { cwd: tutorRoot });
 
 const dist = "scripts/tutor-v2/.dist";
 requireTap("accepted-v2-slice-tests", [
@@ -189,20 +223,38 @@ requireSelectedTap("additional-privacy-provenance-hard-gates", [reviewedPrivacyT
 requireSelectedTap("approval-authority-attacks", [reviewedPrivacyTest], "B3 approval attack", { selected: 10 });
 requireSelectedTap("free-form-output-provenance", [reviewedPrivacyTest], "B3 free-form output provenance", { selected: 15 });
 requireSelectedTap("structured-control-privacy", [reviewedPrivacyTest], "B3 structured control privacy", { selected: 16 });
+const approvalDecisionTest = `${dist}/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js`;
+requireTap("approval-decision-structural-validation-hard-gate", [approvalDecisionTest], { tests: 67, pass: 67 });
+requireSelectedTap("b4-raw-decision-root-invariant", [approvalDecisionTest], "B4 root invariant", { selected: 1 });
+requireSelectedTap("b4-accessor-attacks", [approvalDecisionTest], "B4 accessor attack", { selected: 10 });
+requireSelectedTap("b4-hostile-thenable-attacks", [approvalDecisionTest], "B4 hostile thenable", { selected: 2 });
+requireSelectedTap("b4-prototype-attacks", [approvalDecisionTest], "B4 prototype attack", { selected: 6 });
+requireSelectedTap("b4-hidden-key-attacks", [approvalDecisionTest], "B4 hidden-key attack", { selected: 5 });
+requireSelectedTap("b4-hostile-reflection-attacks", [approvalDecisionTest], "B4 hostile reflection", { selected: 3 });
+requireSelectedTap("b4-malformed-value-shapes", [approvalDecisionTest], "B4 malformed primitive or container|B4 malformed decision shape", { selected: 15 });
+requireSelectedTap("b4-legitimate-decision-regression", [approvalDecisionTest], "B4 legitimate decision regression", { selected: 6 });
+requireSelectedTap("b4-w1-10r4-historical-blockers", [approvalDecisionTest], "B4 W1-10R4 historical", { selected: 8 });
+requireSelectedTap("b4-provider-input-malformed-approval", [approvalDecisionTest], "B4 W1-10R4 historical provider-input|B4 provider-input grounding", { selected: 8 });
+requireSelectedTap("b4-provider-output-malformed-approval", [approvalDecisionTest], "B4 W1-10R4 historical provider-output", { selected: 4 });
+requireSelectedTap("b4-composition-attacks", [approvalDecisionTest], "B4 composition", { selected: 6 });
+requireSelectedTap("b4-failure-data-minimization", [approvalDecisionTest], "B4 failure-data minimization", { selected: 1 });
+
 requireTap("cross-slice-convergence-tests", [
   `${dist}/tests/tutor-v2-convergence/composition.test.js`,
   `${dist}/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js`,
   reviewedPrivacyTest,
   `${dist}/tests/tutor-v2-convergence/schema-parity.test.js`,
   structuralAntiAnswerTest,
-], { tests: 186, pass: 186 });
+  approvalDecisionTest,
+], { tests: 253, pass: 253 });
 
 requireSuccess("bridge-typecheck", process.execPath, [tsc, "-p", "study-engine/tests/tutor-v2-bridge/tsconfig.json"], "W1-08 bridge compilation", { cwd: tutorRoot });
 const bridgeTest = "study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js";
 requireSelectedTap("w1-b1-provider-mutation-adversarial", [bridgeTest], "W1-10 adversarial", { selected: 12 });
 requireSelectedTap("w1-b2-structural-anti-answer-bridge", [bridgeTest], "malicious provider active-assessment|active-assessment structured control|answer-bearing provider field|completed review|provider context excludes protected answer authority", { selected: 13 });
 requireSelectedTap("w1-b3-reviewed-content-privacy-bridge", [bridgeTest], "W1-10R3|reviewed-content authority|reviewed learner-safe|grounding digest|raw learner free-form|exact Study-reviewed prose|unapproved reason code|approval cannot|provider-fabricated approval|self-computed digest|authority and approval objects", { selected: 50 });
-requireTap("repaired-bridge-regression", [bridgeTest], { tests: 169, pass: 169 });
+requireSelectedTap("w1-b4-approval-decision-bridge", [bridgeTest], "raw approval|raw status|throwing approval getter|custom-prototype approval|class-instance approval|null-prototype approval|inherited approval fields|custom prototype supplying|non-enumerable extra key|symbol key on approval|non-enumerable approval metadata|hidden extra key on rejection|exact synchronous|exact asynchronous|frozen exact plain approval|malformed approval failure data|primitive or container authority decision|hostile authority decision|approval fails closed before provider execution|learner-output approval uses reviewed fallback", { selected: 41 });
+requireTap("repaired-bridge-regression", [bridgeTest], { tests: 209, pass: 209 });
 
 let neutralizedRoot;
 try {
@@ -329,19 +381,114 @@ try {
 
 const allowed = (path) => path === "adaptive-tutor/core/v2/index.ts" || path === "adaptive-tutor/core/index.ts" || path === "adaptive-tutor/study-engine/tutor-v2/index.ts" || path === "adaptive-tutor/package.json" || path === "adaptive-tutor/MANIFEST.json" || path.startsWith("adaptive-tutor/json-schema/v2/") || path.startsWith("adaptive-tutor/scripts/tutor-v2/") || path.startsWith("adaptive-tutor/tutor-v2-release/") || path.startsWith("adaptive-tutor/tests/tutor-v2-convergence/") || path.startsWith("docs/study-tutor-v2/wave1/");
 const statusPaths = git(["status", "--porcelain=v1", "--untracked-files=all"]).stdout.split("\n").filter(Boolean).map((line) => line.slice(3));
-const committedPaths = git(["diff", "--name-only", B3_REPAIR_SHA, "HEAD"]).stdout.split("\n").filter(Boolean);
+const committedPaths = git(["diff", "--name-only", B4_REPAIR_SHA, "HEAD"]).stdout.split("\n").filter(Boolean);
 const authoredPaths = [...new Set([...committedPaths, ...statusPaths])];
 const ownershipViolations = authoredPaths.filter((path) => !allowed(path));
-record("w1-09r4-path-ownership", ownershipViolations.length === 0 ? "PASS" : "FAIL", ownershipViolations.length === 0 ? `${authoredPaths.length} authored files all convergence-owned` : ownershipViolations.join(", "), `git diff --name-only ${B3_REPAIR_SHA} HEAD plus git status`);
+record("w1-09r5-path-ownership", ownershipViolations.length === 0 ? "PASS" : "FAIL", ownershipViolations.length === 0 ? `${authoredPaths.length} authored files all convergence-owned` : ownershipViolations.join(", "), `git diff --name-only ${B4_REPAIR_SHA} HEAD plus git status`);
 const diffCheck = git(["diff", "--check"]);
 record("git-diff-check", diffCheck.status === 0 ? "PASS" : "FAIL", diffCheck.status === 0 ? "no whitespace errors" : diffCheck.stdout.trim(), "git diff --check");
+
+const HARD_GATE_FAMILIES = [
+  {
+    name: "PROVIDER_AUTHORITY_BOUNDARY",
+    blocker: "W1-10 HOLD #1: provider received and could mutate Study authority",
+    repair: B1_REPAIR_SHA,
+    members: [
+      "provider-port-structural-boundary",
+      "provider-port-regression",
+      "provider-mutation-convergence-hard-gate",
+      "w1-b1-provider-mutation-adversarial",
+      "accepted-b1-repair-tree-equivalence",
+    ],
+  },
+  {
+    name: "STRUCTURAL_ACTIVE_ASSESSMENT_ANTI_ANSWER",
+    blocker: "W1-10R2 HOLD #2: active-assessment answer security relied on lexical phrases",
+    repair: B2_REPAIR_SHA,
+    members: [
+      "structural-anti-answer-convergence-hard-gate",
+      "active-assessment-explain-structural-hard-gate",
+      "active-assessment-hint-structural-hard-gate",
+      "active-assessment-ask-check-structural-hard-gate",
+      "active-assessment-show-example-structural-hard-gate",
+      "active-assessment-reteach-structural-hard-gate",
+      "active-assessment-phrase-matrix-hard-gate",
+      "active-assessment-structured-controls-regression",
+      "answer-bearing-field-hard-gate",
+      "completed-review-permission-hard-gate",
+      "w1-b2-structural-anti-answer-bridge",
+      "accepted-b2-repair-tree-equivalence",
+    ],
+  },
+  {
+    name: "REVIEWED_CONTENT_PRIVACY_PROVENANCE",
+    blocker: "W1-10R3 HOLD #3: privacy relied on lexical phrases",
+    repair: B3_REPAIR_SHA,
+    members: [
+      "reviewed-content-privacy-provenance-hard-gate",
+      "w1-10r3-historical-privacy-blockers",
+      "additional-privacy-provenance-hard-gates",
+      "approval-authority-attacks",
+      "free-form-output-provenance",
+      "structured-control-privacy",
+      "regex-neutralized-privacy-provenance-hard-gate",
+      "w1-b3-reviewed-content-privacy-bridge",
+      "accepted-b3-repair-tree-equivalence",
+    ],
+  },
+  {
+    name: "APPROVAL_DECISION_STRUCTURAL_VALIDATION",
+    blocker: "W1-10R4 reproduced blocker: malformed approval decisions normalized into valid-looking approvals before validation",
+    repair: B4_REPAIR_SHA,
+    members: [
+      "approval-decision-structural-parser-boundary",
+      "approval-decision-structural-validation-hard-gate",
+      "b4-raw-decision-root-invariant",
+      "b4-accessor-attacks",
+      "b4-hostile-thenable-attacks",
+      "b4-prototype-attacks",
+      "b4-hidden-key-attacks",
+      "b4-hostile-reflection-attacks",
+      "b4-malformed-value-shapes",
+      "b4-legitimate-decision-regression",
+      "b4-w1-10r4-historical-blockers",
+      "b4-provider-input-malformed-approval",
+      "b4-provider-output-malformed-approval",
+      "b4-composition-attacks",
+      "b4-failure-data-minimization",
+      "w1-b4-approval-decision-bridge",
+      "accepted-b4-repair-tree-equivalence",
+      "b4-repair-direct-parent",
+      "b4-repair-audited-scope",
+    ],
+  },
+];
+
+const hardGateFamilies = HARD_GATE_FAMILIES.map((family) => {
+  const resolved = family.members.map((name) => ({ name, status: checks.find((check) => check.name === name)?.status ?? "MISSING" }));
+  const failures = resolved.filter((member) => member.status !== "PASS");
+  if (failures.length > 0) hardFailure = true;
+  return {
+    name: family.name,
+    enforcement: "HARD_NON_COMPENSABLE",
+    compensableByQualityScore: false,
+    blocker: family.blocker,
+    repair: family.repair,
+    status: failures.length === 0 ? "PASS" : "FAIL",
+    memberChecks: resolved,
+    failingChecks: failures.map((member) => `${member.name}:${member.status}`),
+  };
+});
+for (const family of hardGateFamilies) {
+  process.stdout.write(`${family.status} hard-gate-family ${family.name}: ${family.memberChecks.length} member checks${family.status === "PASS" ? "" : `; failing ${family.failingChecks.join(", ")}`}\n`);
+}
 
 const inherited = checks.some((check) => check.status === "INHERITED_FINDING" || check.status === "NOT_AVAILABLE");
 const finalClassification = hardFailure
   ? "WAVE1_HOLD"
   : inherited
-    ? "WAVE1_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
-    : "WAVE1_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW";
+    ? "WAVE1_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
+    : "WAVE1_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW";
 const result = {
   resultVersion: 1,
   product: "Manuel Academy Study Tutor V2",
@@ -349,6 +496,9 @@ const result = {
   foundationGate: hardFailure ? "FAIL" : "PASS",
   finalClassification,
   releaseReady: false,
+  wave1Complete: false,
+  finalIndependentRereviewRequired: true,
+  hardGateFamilies,
   checks,
 };
 await mkdir(resolve(tutorRoot, "tutor-v2-release"), { recursive: true });

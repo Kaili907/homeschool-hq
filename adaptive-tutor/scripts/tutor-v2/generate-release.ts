@@ -56,7 +56,7 @@ if (evaluation.classification !== "FOUNDATION_GATE_PASS" || evaluation.releaseRe
 }
 
 const provenance = {
-  provenanceVersion: 4,
+  provenanceVersion: 5,
   product: "Manuel Academy Study Tutor V2",
   wave: "Wave 1 Foundation",
   immutableLearnerBaseline: "7baf8dfbc27168708ed4cf504285a1838d7345f6",
@@ -104,6 +104,11 @@ const provenance = {
       directParent: "7435f820dc9e141d8a113b4d7f853044e36ba51d",
       branch: "origin/mac/tutor-v2-w1-privacy-provenance-repair-r3",
     },
+    APPROVAL_DECISION_STRUCTURAL_VALIDATION_REPAIR: {
+      sha: "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+      directParent: "6f90d351d759c697788b6489bd465d954ce52184",
+      branch: "origin/mac/tutor-v2-w1-approval-decision-repair-r4",
+    },
   },
   reconvergenceHistory: {
     W1_09R2: {
@@ -123,8 +128,27 @@ const provenance = {
     W1_09R4: {
       session: "STUDY-TUTOR-V2-W1-09R4 — Final Wave 1 Privacy Provenance Reconvergence",
       branch: "mac/tutor-v2-w1-reconvergence-r4",
+      sha: "6f90d351d759c697788b6489bd465d954ce52184",
       startingRepairSha: "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
-      status: "CANDIDATE_REQUIRES_W1_10R4_FINAL_INDEPENDENT_REREVIEW",
+      status: "SUPERSEDED_BY_APPROVAL_DECISION_REPAIR",
+      acceptedAsWave1Release: false,
+    },
+    W1_10R4_ATTEMPTED_REVIEW: {
+      custodyStatus: "INVALID",
+      acceptedAsAcceptanceEvidence: false,
+      reason: "The detached reviewer modified the canonical detached review worktree, so custody was broken and that review cannot serve as Wave 1 acceptance evidence.",
+      canonicalR4BranchModified: false,
+      reproducedBlockerBeforeTermination: true,
+      reproducedBlocker: "MALFORMED_APPROVAL_DECISION_NORMALIZED_INTO_VALID_LOOKING_APPROVAL_BEFORE_VALIDATION",
+      reproducedBlockerWasReal: true,
+      repairedBy: "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+    },
+    W1_09R5: {
+      session: "STUDY-TUTOR-V2-W1-09R5 — Final Wave 1 Approval-Decision Reconvergence",
+      branch: "mac/tutor-v2-w1-reconvergence-r5",
+      startingRepairSha: "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+      status: "CANDIDATE_REQUIRES_W1_10R5_FINAL_INDEPENDENT_REREVIEW",
+      acceptedAsWave1Release: false,
     },
   },
   recordedW1_08IntegrationCommits: {
@@ -152,6 +176,10 @@ const provenance = {
     reviewedContentPrivacyRepairPresent: true,
     reviewedContentPrivacyGatesPermanent: true,
     regexNeutralizedPrivacyValidationRequired: true,
+    approvalDecisionStructuralRepairPresent: true,
+    approvalDecisionStructuralGatesPermanent: true,
+    w1_10R4ReviewCustodyInvalidated: true,
+    w1_10R4ReproducedBlockerWasRealAndRepaired: true,
     releaseSecurityOwnershipCrossed: false,
   },
 };
@@ -172,7 +200,7 @@ const evaluationSummary = {
 };
 
 const status = {
-  statusVersion: 4,
+  statusVersion: 5,
   WAVE1_FOUNDATION_ONLY: true,
   STUDY_ENGINE_REMAINS_AUTHORITY: true,
   STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED: true,
@@ -190,6 +218,10 @@ const status = {
   RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED: false,
   UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED: false,
   CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED: false,
+  APPROVAL_DECISIONS_VALIDATED_BEFORE_NORMALIZATION: true,
+  APPROVAL_ACCESSORS_ALLOWED: false,
+  APPROVAL_CUSTOM_PROTOTYPES_ALLOWED: false,
+  MALFORMED_APPROVAL_FAILS_CLOSED: true,
   WAVE_1_COMPLETE: false,
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
   NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT: true,
@@ -309,12 +341,76 @@ const privacyProvenanceReconvergence = {
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
 };
 
+const approvalDecisionReconvergence = {
+  evidenceVersion: 1,
+  w1_09R4Sha: "6f90d351d759c697788b6489bd465d954ce52184",
+  w1_10R4CustodyIncident: {
+    custodyStatus: "INVALID",
+    acceptedAsAcceptanceEvidence: false,
+    reason: "The detached reviewer modified the canonical detached review worktree, so custody was broken and that review cannot serve as Wave 1 acceptance evidence.",
+    canonicalR4BranchModified: false,
+    reproducedBlockerBeforeTermination: true,
+    reproducedBlockerWasReal: true,
+    finalIndependentRereviewStillRequired: "W1-10R5",
+  },
+  w1_10R4Blocker: "MALFORMED_APPROVAL_DECISION_NORMALIZED_INTO_VALID_LOOKING_APPROVAL_BEFORE_VALIDATION",
+  rejectedRepairApproach: "NORMALIZE_THEN_VALIDATE_CANNOT_CONTAIN_ACCESSOR_PROTOTYPE_OR_HIDDEN_KEY_FORGERY",
+  approvalDecisionRepairSha: "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+  rootRule: "UNTRUSTED_AUTHORITY_DECISIONS_MUST_BE_STRUCTURALLY_VALIDATED_BEFORE_NORMALIZATION_OR_PROPERTY_ACCESS",
+  reviewedContentAuthorityOwner: "Study Engine",
+  providerReceivesApprovalAuthority: false,
+  validationPipeline: [
+    "reject null, non-object, and array candidates",
+    "require the prototype to be exactly Object.prototype",
+    "enumerate every own key with Reflect.ownKeys",
+    "reject symbol keys and any unexpected own key, enumerable or not",
+    "require own data descriptors for every expected field",
+    "reject accessor-backed and setter-backed fields without invoking them",
+    "read status, approvalRef, and code only from validated data descriptors",
+    "validate approvalRef with the canonical OpaqueReferenceSchema",
+    "construct a fresh frozen internal decision",
+    "treat any inspection exception as an authority failure",
+  ],
+  permanentHardGateTest: "tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.ts",
+  hardGateFamilies: {
+    rootInvariant: 1,
+    accessorAttacks: 10,
+    hostileThenableAttacks: 2,
+    prototypeAttacks: 6,
+    hiddenKeyAttacks: 5,
+    hostileReflectionAttacks: 3,
+    malformedValueShapes: 15,
+    legitimateDecisionRegression: 6,
+    w1_10R4HistoricalBlockers: 8,
+    providerInputMalformedApproval: 8,
+    providerOutputMalformedApproval: 4,
+    compositionAttacks: 6,
+    failureDataMinimization: 1,
+    fullApprovalDecisionSuite: 67,
+    bridgeApprovalDecisionSelected: 41,
+  },
+  invariants: {
+    APPROVAL_DECISIONS_VALIDATED_BEFORE_NORMALIZATION: true,
+    APPROVAL_ACCESSORS_ALLOWED: false,
+    APPROVAL_CUSTOM_PROTOTYPES_ALLOWED: false,
+    MALFORMED_APPROVAL_FAILS_CLOSED: true,
+    approvalGetterSideEffectCount: 0,
+    malformedApprovalPreventsProviderExecution: true,
+    malformedApprovalWithholdsLearnerFacingProviderProse: true,
+    malformedApprovalContentPersisted: false,
+  },
+  softScoreCompensationAllowed: false,
+  WAVE_1_COMPLETE: false,
+  FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
+};
+
 const outputs = new Map<string, string>([
   ["PROVENANCE.json", serialize(provenance)],
   ["FOUNDATION-EVALUATION.json", serialize(evaluationSummary)],
   ["PROVIDER-BOUNDARY-RECONVERGENCE.json", serialize(providerBoundaryReconvergence)],
   ["STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json", serialize(antiAnswerReconvergence)],
   ["REVIEWED-CONTENT-PRIVACY-RECONVERGENCE.json", serialize(privacyProvenanceReconvergence)],
+  ["APPROVAL-DECISION-STRUCTURAL-VALIDATION-RECONVERGENCE.json", serialize(approvalDecisionReconvergence)],
   ["STATUS.json", serialize(status)],
 ]);
 const releaseChecksums = Object.fromEntries(
@@ -359,7 +455,14 @@ const manifest = {
     freeFormOutputProvenance: privacyProvenanceReconvergence.hardGateFamilies.freeFormOutputProvenance,
     structuredControlPrivacy: privacyProvenanceReconvergence.hardGateFamilies.structuredControlPrivacy,
     reviewedContentPrivacyProvenance: privacyProvenanceReconvergence.hardGateFamilies.fullReviewedContentPrivacySuite,
-    totalConvergence: 186,
+    approvalDecisionStructuralValidation: approvalDecisionReconvergence.hardGateFamilies.fullApprovalDecisionSuite,
+    approvalDecisionAccessorAttacks: approvalDecisionReconvergence.hardGateFamilies.accessorAttacks,
+    approvalDecisionPrototypeAttacks: approvalDecisionReconvergence.hardGateFamilies.prototypeAttacks,
+    approvalDecisionHiddenKeyAttacks: approvalDecisionReconvergence.hardGateFamilies.hiddenKeyAttacks,
+    approvalDecisionHostileReflectionAttacks: approvalDecisionReconvergence.hardGateFamilies.hostileReflectionAttacks,
+    approvalDecisionMalformedValueShapes: approvalDecisionReconvergence.hardGateFamilies.malformedValueShapes,
+    approvalDecisionW1_10R4HistoricalBlockers: approvalDecisionReconvergence.hardGateFamilies.w1_10R4HistoricalBlockers,
+    totalConvergence: 253,
   },
   evaluationResult: {
     passed: evaluation.passed,
@@ -395,6 +498,23 @@ const manifest = {
     reconvergenceEvidence: "REVIEWED-CONTENT-PRIVACY-RECONVERGENCE.json",
     finalIndependentRereviewRequired: true,
   },
+  approvalDecisionStructuralValidationHistory: {
+    w1_09R4Sha: approvalDecisionReconvergence.w1_09R4Sha,
+    w1_10R4ReviewCustodyStatus: approvalDecisionReconvergence.w1_10R4CustodyIncident.custodyStatus,
+    w1_10R4AcceptedAsAcceptanceEvidence: false,
+    w1_10R4ReproducedBlockerWasReal: true,
+    w1_10R4Blocker: approvalDecisionReconvergence.w1_10R4Blocker,
+    approvalDecisionRepairSha: approvalDecisionReconvergence.approvalDecisionRepairSha,
+    reconvergenceEvidence: "APPROVAL-DECISION-STRUCTURAL-VALIDATION-RECONVERGENCE.json",
+    finalIndependentRereviewRequired: true,
+  },
+  hardGateFamilies: [
+    "PROVIDER_AUTHORITY_BOUNDARY",
+    "STRUCTURAL_ACTIVE_ASSESSMENT_ANTI_ANSWER",
+    "REVIEWED_CONTENT_PRIVACY_PROVENANCE",
+    "APPROVAL_DECISION_STRUCTURAL_VALIDATION",
+  ],
+  hardGateFamiliesAreNonCompensable: true,
   staticFallback: "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",
   productionStatus: status,
   gate: {

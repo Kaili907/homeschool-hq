@@ -4,16 +4,19 @@
 
 - Validation time: 2026-08-14 EDT (-0400)
 - Runtime: Node 22.23.2
-- Session: STUDY-TUTOR-V2-W1-09R4 — Final Wave 1 Privacy Provenance Reconvergence
-- Worktree: `/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r4`
-- Branch: `mac/tutor-v2-w1-reconvergence-r4`
+- Session: STUDY-TUTOR-V2-W1-09R5 — Final Wave 1 Approval-Decision Reconvergence
+- Worktree: `/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r5`
+- Branch: `mac/tutor-v2-w1-reconvergence-r5`
 - Failed W1-09 SHA: `16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d`
 - W1-B1 provider-boundary repair SHA: `d7aa9720b8096205acc0b63d21a895d8fc16de6f`
 - W1-09R2 SHA: `2c8716ed5db5bb824fc92533615295f0b163f7b2`
 - W1-B2 structural anti-answer repair SHA: `9f0b66be0b7f86b2004f05137ef9892d2a3ef09a`
 - W1-09R3 SHA: `7435f820dc9e141d8a113b4d7f853044e36ba51d`
-- Starting W1-B3 reviewed-content privacy repair SHA: `cf7ee7265c812a86b708b0e8cf2a33e6370e753d`
-- Final W1-09R4 SHA: intentionally recorded after commit in the session return; it is not self-referenced by a checksummed artifact.
+- W1-B3 reviewed-content privacy repair SHA: `cf7ee7265c812a86b708b0e8cf2a33e6370e753d`
+- W1-09R4 candidate SHA: `6f90d351d759c697788b6489bd465d954ce52184`
+- Attempted W1-10R4 review: custody invalid; not acceptance evidence
+- Starting W1-B4 approval-decision structural repair SHA: `cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841`
+- Final W1-09R5 SHA: intentionally recorded after commit in the session return; it is not self-referenced by a checksummed artifact.
 
 ## Immutable provenance
 
@@ -35,8 +38,10 @@
 | Structural anti-answer repair | `9f0b66be0b7f86b2004f05137ef9892d2a3ef09a` | Canonical remote exact; direct parent is W1-09R2 |
 | W1-09R3 candidate | `7435f820dc9e141d8a113b4d7f853044e36ba51d` | Rejected by W1-10R3; not an accepted Wave 1 release |
 | Reviewed-content privacy repair | `cf7ee7265c812a86b708b0e8cf2a33e6370e753d` | Canonical remote exact; direct parent is W1-09R3 |
+| W1-09R4 candidate | `6f90d351d759c697788b6489bd465d954ce52184` | Superseded by the approval-decision repair; not an accepted Wave 1 release |
+| Approval-decision structural repair | `cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841` | Canonical remote exact; direct parent is W1-09R4; repair scope audited to two files |
 
-W1-03 through W1-07 were imported into W1-08 as commits `4cf4bda1`, `7a1a12cf`, `c7156bc3`, `42c91482`, and `5a6a191c`. The unrepaired W1-04 through W1-07 lane trees remain byte-for-byte exact. Provider-port source retains W1-B1, anti-answer source retains W1-B2, and the bridge plus bridge integration suite match W1-B3 exactly. W1-09R4 authored no B1, B2, or B3 repair-source change; every R4 path is convergence-owned.
+W1-03 through W1-07 were imported into W1-08 as commits `4cf4bda1`, `7a1a12cf`, `c7156bc3`, `42c91482`, and `5a6a191c`. The unrepaired W1-04 through W1-07 lane trees remain byte-for-byte exact. Provider-port source retains W1-B1 and anti-answer source retains W1-B2. The bridge and bridge integration suite match W1-B4 exactly, and the B3-owned privacy bridge source outside the audited two-file B4 repair scope still matches W1-B3 exactly. The B4 delta against W1-09R4 is confined to `study-engine/bridges/tutor-v2/reviewed-content.ts` and `study-engine/tests/tutor-v2-bridge/integration.test.ts`. W1-09R5 authored no B1, B2, B3, or B4 repair-source change; every R5 path is convergence-owned.
 
 ## Detached-review blockers and repair history
 
@@ -58,7 +63,19 @@ W1-B3 replaced lexical admission as the root boundary with exact Study-owned rev
 
 W1-09R4 independently reconverged B1, B2, and B3. Its new permanent 78-case privacy suite contains 16 historical blocker variants, 21 additional provenance gates, 10 approval-authority attacks, 15 free-form output cases, and 16 structured-control cases. A temporary untracked copy sets the lexical `RULES` array to empty, recompiles, and reruns all 78 cases; the same suite remains fail-closed. Exact reviewed provider prose works outside active assessment, while B2 still rejects that exact reviewed prose during an active graded/mastery check.
 
-`WAVE_1_COMPLETE = false`. Detached W1-10R4 final independent rereview of the exact W1-09R4 commit is still required.
+### W1-10R4 custody incident
+
+The detached W1-10R4 review cannot serve as Wave 1 acceptance evidence. The reviewer modified the canonical detached review worktree, which broke custody of that review. This report does not portray that review as a valid final rereview, and no acceptance ruling is derived from it.
+
+Two facts are recorded separately and both are true. The canonical W1-09R4 branch itself was never modified; `6f90d351...` remains exact on `origin/mac/tutor-v2-w1-reconvergence-r4`. And before termination, that review independently reproduced a real fail-open path, which is recorded here on its technical merits rather than as an acceptance ruling.
+
+The reproduced blocker was real. `isApproved()` normalized the untrusted `ReviewedTutorContentAuthorityPort` result with `structuredClone(rawDecision)` and then validated the normalized copy. Normalization runs before validation, so a malformed decision could be laundered into a valid-looking approval: `structuredClone` invokes accessors, so a getter-backed `status`/`approvalRef` pair materialized as plain approved data; it discards a custom prototype, so a prototype-bearing object became a plain object; and it drops non-enumerable and Symbol keys, so hidden-key decisions normalized clean. The exact-key check then ran against the laundered copy and admitted the approval. Both the provider-input and learner-output admission paths were affected.
+
+W1-B4 repaired the root cause by parsing the raw authority result before any normalization or property access. The pipeline rejects null, non-object, and array candidates; requires the prototype to be exactly `Object.prototype`; enumerates every own key with `Reflect.ownKeys`; rejects Symbol keys and any unexpected own key whether enumerable or not; requires own data descriptors for every expected field, so accessor-backed and setter-backed fields are rejected without being invoked; reads `status`, `approvalRef`, and `code` only from those validated descriptors; validates `approvalRef` with the canonical `OpaqueReferenceSchema`; and constructs a fresh frozen internal decision. Any inspection exception, including a hostile Proxy trap, is an authority failure. `Object.keys` alone is no longer the security boundary.
+
+W1-09R5 verified B4 rather than rewriting it, and reconverged B1, B2, and B3 alongside it. Its new permanent 67-case approval-decision suite covers the raw-decision root invariant, 10 accessor attacks, 2 hostile-thenable attacks, 6 prototype attacks, 5 hidden-key attacks, 3 hostile-reflection attacks, 15 malformed value shapes, 6 legitimate-decision regressions, the 8 W1-10R4 historical blocker cases, 8 provider-input and 4 provider-output end-to-end malformed-approval cases, 6 composition attacks, and failure-data minimization. Measured getter side-effect count is zero. The `await` performed on the authority result still probes `then` at the language level, which is inherent to supporting asynchronous authorities; that probe is inside the fail-closed boundary and is covered by explicit hostile-thenable cases.
+
+`WAVE_1_COMPLETE = false`. Detached W1-10R5 final independent rereview of the exact W1-09R5 commit is still required.
 
 ## Architecture and authority
 
@@ -94,6 +111,7 @@ The vocabulary is generated from the W1-02 constant into the schema and release 
 - Grounding/refusal: PASS. Missing, invented, wrong-reference, or digest-mismatched grounding cannot pass. Insufficient grounding maps to a reviewed static curriculum fallback.
 - Anti-answer/assessment: PASS. Protected answer fields are rejected. All five provider free-form action shapes fail during active assessment independent of wording. Completed-assessment review requires explicit trusted Study authority.
 - Reviewed-content privacy provenance: PASS. Unknown free-form input/output fails without exact Study approval regardless of lexical appearance. Content/ref/digest/context mutation, authority failure, provider self-approval, and cross-child/cross-context replay fail closed. Lexical matching is defense in depth only.
+- Approval-decision structural validation: PASS after repair. The untrusted authority decision is structurally validated before normalization or property access. Accessor-backed, setter-backed, custom-prototype, class-instance, null-prototype, inherited-field, non-enumerable, Symbol-key, and hostile-reflection decisions all fail closed, and getter side-effect count is zero. Malformed approvals prevent provider execution on input and withhold provider prose on output; exact legitimate approved and rejected decisions still behave normally. Failure-data minimization was checked across every persistence surface this seam actually has — the learner-facing result, its reviewed fallback, evidence, and provider-failure detail, plus session memory and the event ledger. The raw malformed decision, accessor-carried data, hidden authority metadata, novel provider prose, and injected credential strings appear in none of them. The bridge emits no telemetry envelope and no runtime log at this seam, so there is no further surface to inspect and none is claimed.
 - Memory: PASS. Memory remains bounded, ephemeral, non-authoritative, and bound to household, learner, session, interaction, and lesson scope. Cross-session and cross-learner access fails before provider execution.
 - Age policy: PASS. Younger and older stage differences remain explicit and machine-testable. Policies are Study-approved bindings, not inferred grades, and age constraints do not acquire Study authority.
 - Evidence minimization: PASS. Only allowlisted, assistance-aware evidence is durable. Raw Tutor/provider prose and transcripts are not persistence-compatible.
@@ -115,7 +133,7 @@ Generated schemas cover:
 
 All security/authority/provider objects retain closed `additionalProperties: false` semantics from the runtime schemas. The generator canonicalizes object keys, records source symbols, and checks SHA-256 inventory values. The drift command regenerates expected content in memory and fails on any file/content mismatch.
 
-W1-B2 changed deterministic policy behavior, not serialized contracts. W1-B3 adds a bridge-internal TypeScript authority port whose request/decision are not serialized or sent to the provider, so creating a public JSON schema would incorrectly widen the boundary. Schema generation and drift checks therefore correctly retain 23 schemas. `ProviderExecutionRequest` remains a stable, runtime-validated serialized boundary. Schema/runtime parity is 13/13: valid request/proposal/provider values pass both runtime and generated validation, while unknown fields, version mismatch, invalid action, Study-authority contamination, answer-authority fields, transcripts, unknown security fields, and raw provider contamination fail closed.
+W1-B2 changed deterministic policy behavior, not serialized contracts. W1-B3 adds a bridge-internal TypeScript authority port whose request/decision are not serialized or sent to the provider, so creating a public JSON schema would incorrectly widen the boundary. W1-B4 changed only how that same bridge-internal decision is parsed; `ReviewedTutorContentApprovalDecision` remains non-serialized, is never sent to the provider, and appears in no schema source symbol, so no serialized contract is affected and no schema was invented for it. Schema generation and drift checks therefore correctly retain 23 schemas. `ProviderExecutionRequest` remains a stable, runtime-validated serialized boundary. Schema/runtime parity is 13/13: valid request/proposal/provider values pass both runtime and generated validation, while unknown fields, version mismatch, invalid action, Study-authority contamination, answer-authority fields, transcripts, unknown security fields, and raw provider contamination fail closed.
 
 ## Release evidence package
 
@@ -127,6 +145,7 @@ W1-B2 changed deterministic policy behavior, not serialized contracts. W1-B3 add
 - `PROVIDER-BOUNDARY-RECONVERGENCE.json` — failed-candidate, W1-10 HOLD, repair, structural-ruling, and 13 permanent hard-gate evidence;
 - `STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json` — W1-09R2, W1-10R2 HOLD, B2 repair, structural rule, phrase matrix, and regression evidence;
 - `REVIEWED-CONTENT-PRIVACY-RECONVERGENCE.json` — W1-09R3, W1-10R3 HOLD, B3 repair, provenance rule, separated privacy counts, and regex-neutralized requirement;
+- `APPROVAL-DECISION-STRUCTURAL-VALIDATION-RECONVERGENCE.json` — W1-09R4, the invalid W1-10R4 review custody incident, the real reproduced blocker, the B4 repair, the validation pipeline, separated approval-decision counts, and the B4 invariants;
 - `STATUS.json` — explicit production/authority booleans;
 - `CHECKSUMS.json` — SHA-256 values for generated schemas and non-self-referential release artifacts;
 - `WAVE1-GATE-RESULT.json` — deterministic aggregate gate result with PASS/FAIL/INHERITED_FINDING/NOT_AVAILABLE separation.
@@ -160,17 +179,32 @@ Root manifest ruling: `ROOT_MANIFEST_PRESERVED_FOR_FROZEN_V0_2_PROVENANCE`. The 
 | W1-09R4 structured-control privacy | 16/16 PASS |
 | W1-09R4 reviewed-content privacy hard gate | 78/78 PASS |
 | W1-09R4 regex-neutralized privacy hard gate | 78/78 PASS in temporary copy with `RULES=[]` |
-| W1-09R4 cross-slice convergence total | 186/186 PASS |
-| Repaired bridge integration | 169/169 PASS |
+| W1-09R5 approval-decision root invariant | 1/1 PASS |
+| W1-09R5 accessor attacks | 10/10 PASS |
+| W1-09R5 hostile-thenable attacks | 2/2 PASS |
+| W1-09R5 prototype attacks | 6/6 PASS |
+| W1-09R5 hidden-key attacks | 5/5 PASS |
+| W1-09R5 hostile-reflection attacks | 3/3 PASS |
+| W1-09R5 malformed value shapes | 15/15 PASS |
+| W1-09R5 legitimate-decision regression | 6/6 PASS |
+| W1-10R4 historical approval blockers | 8/8 PASS |
+| W1-09R5 provider-input malformed approval | 8/8 PASS |
+| W1-09R5 provider-output malformed approval | 4/4 PASS |
+| W1-09R5 approval-decision composition attacks | 6/6 PASS |
+| W1-09R5 approval failure-data minimization | 1/1 PASS |
+| W1-09R5 approval-decision structural hard gate | 67/67 PASS |
+| W1-B4 bridge approval-decision selection | 41/41 PASS |
+| W1-09R5 cross-slice convergence total | 253/253 PASS |
+| Repaired bridge integration | 209/209 PASS |
 | W1-07 harness self-tests | 8/8 PASS |
 | W1-07 foundation corpus | 128/128 PASS; 0 fail; `FOUNDATION_GATE_PASS`; `releaseReady: false` |
 | Tutor Core v0.2 | Typecheck PASS; 21/21 tests; isolated build PASS; smoke PASS |
 | Study Core Bridge 1.0.1 | 35/36 PASS; 0 fail; 1 external-archive checksum test skipped |
 | V2 schemas | 23 schemas + inventory generated; drift check PASS |
-| W1-09R4 release evidence | 9 artifacts generated; drift/checksum check PASS |
-| W1-09R4 aggregate gate | PASS with inherited findings |
+| W1-09R5 release evidence | 10 artifacts generated; drift/checksum check PASS |
+| W1-09R5 aggregate gate | PASS with inherited findings; 4 hard-gate families PASS |
 
-The deterministic W1-07 foundation corpus still has 128 scenarios across 32 primary categories and all 12 original hard-gate dimensions. All 128 passed. It discovered none of the three detached-review blockers, and this report does not claim otherwise. The permanent security layers are reported separately: 13 provider-boundary adversarial cases, 53 structural anti-answer cases (including the 20-item phrase matrix), and 78 reviewed-content privacy-provenance cases. The evaluation is fixture-based and did not call a live model.
+The deterministic W1-07 foundation corpus still has 128 scenarios across 32 primary categories and all 12 original hard-gate dimensions. All 128 passed. It discovered none of the four detached-review blockers, and this report does not claim otherwise. The permanent security layers are reported separately: 13 provider-boundary adversarial cases, 53 structural anti-answer cases (including the 20-item phrase matrix), 78 reviewed-content privacy-provenance cases, and 67 approval-decision structural-validation cases. The aggregate gate enforces these as four separately named, hard, non-compensable families: `PROVIDER_AUTHORITY_BOUNDARY`, `STRUCTURAL_ACTIVE_ASSESSMENT_ANTI_ANSWER`, `REVIEWED_CONTENT_PRIVACY_PROVENANCE`, and `APPROVAL_DECISION_STRUCTURAL_VALIDATION`. No soft evaluation score can compensate for a failure in any of them. The evaluation is fixture-based and did not call a live model.
 
 ## Exact commands run
 
@@ -192,7 +226,9 @@ git rev-parse origin/mac/tutor-v2-w1-reconvergence-r2
 git rev-parse origin/mac/tutor-v2-w1-anti-answer-repair-r2
 git rev-parse origin/mac/tutor-v2-w1-reconvergence-r3
 git rev-parse origin/mac/tutor-v2-w1-privacy-provenance-repair-r3
-git rev-parse cf7ee7265c812a86b708b0e8cf2a33e6370e753d^
+git rev-parse origin/mac/tutor-v2-w1-reconvergence-r4
+git rev-parse origin/mac/tutor-v2-w1-approval-decision-repair-r4
+git rev-parse cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841^
 git merge-base --is-ancestor 7baf8dfbc27168708ed4cf504285a1838d7345f6 HEAD
 git merge-base --is-ancestor 660de6a445ca66b8de5136a6ee388804346dce4b HEAD
 git merge-base --is-ancestor f79271ac2cc57e9128ee61774a4f082c35c6fa77 HEAD
@@ -200,8 +236,9 @@ git show --pretty=format: <accepted-or-integrated-sha> | git patch-id --stable
 git diff --quiet <accepted-lane-sha> HEAD -- <lane-owned-paths>
 git diff --quiet d7aa9720b8096205acc0b63d21a895d8fc16de6f HEAD -- adaptive-tutor/core/v2/providers
 git diff --quiet 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a HEAD -- adaptive-tutor/core/v2/policy/anti-answer
-git diff --quiet cf7ee7265c812a86b708b0e8cf2a33e6370e753d HEAD -- adaptive-tutor/study-engine/bridges/tutor-v2 adaptive-tutor/study-engine/tests/tutor-v2-bridge
-git diff --name-only 7435f820dc9e141d8a113b4d7f853044e36ba51d..cf7ee7265c812a86b708b0e8cf2a33e6370e753d
+git diff --quiet cf7ee7265c812a86b708b0e8cf2a33e6370e753d HEAD -- adaptive-tutor/study-engine/bridges/tutor-v2 adaptive-tutor/study-engine/tests/tutor-v2-bridge ':(exclude)adaptive-tutor/study-engine/bridges/tutor-v2/reviewed-content.ts' ':(exclude)adaptive-tutor/study-engine/tests/tutor-v2-bridge/integration.test.ts'
+git diff --quiet cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841 HEAD -- adaptive-tutor/study-engine/bridges/tutor-v2 adaptive-tutor/study-engine/tests/tutor-v2-bridge
+git diff --name-only 6f90d351d759c697788b6489bd465d954ce52184..cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841
 ```
 
 Convergence, schema, and evaluation:
@@ -221,6 +258,8 @@ node --test --test-name-pattern='W1-10 adversarial' study-engine/tests/tutor-v2-
 node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js
 node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js
 node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js
+node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js
+node --test --test-name-pattern='<b4-approval-decision-selection>' study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js
 temporary copy: set bridge privacy RULES=[]; compile; rerun 78-case privacy-provenance suite
 npm run tutor-v2:wave1-gate
 ```
@@ -236,7 +275,7 @@ npm run validate               # isolated temporary copy; inherited 18/19
 SESSION6_SOURCE_ROOT=<reconstructed-frozen-live-tree> SESSION6_TSC=<typescript-cli> node --test adaptive-tutor/study-engine/tests/tutor-core-bridge/*.test.mjs
 npm audit --json               # adaptive-tutor/study-engine/runtime
 git diff --check
-git diff --name-only cf7ee7265c812a86b708b0e8cf2a33e6370e753d
+git diff --name-only cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841
 ```
 
 No hosted service, live AI provider, browser-to-AI endpoint, Supabase environment, deployment system, or production environment variable was contacted by these commands.
@@ -259,7 +298,7 @@ Ruling: `INHERITED_DEPENDENCY_ADVISORY`.
 
 Ruling: `FROZEN_ARCHIVE_VERIFICATION_UNAVAILABLE`.
 
-The four historical `SESSION6_*_ZIP` archives are not mounted. The exact archive checksum test therefore skipped. A reconstructed copy from the checked-in frozen vendor source built successfully; its frozen 248-file Tutor Core v0.2 manifest verified exactly; and 35 Study Core Bridge tests passed with zero failures. This live-tree evidence does not replace the unavailable archive checksum evidence. W1-10R4 must carry the limitation.
+The four historical `SESSION6_*_ZIP` archives are not mounted. The exact archive checksum test therefore skipped. A reconstructed copy from the checked-in frozen vendor source built successfully; its frozen 248-file Tutor Core v0.2 manifest verified exactly; and 35 Study Core Bridge tests passed with zero failures. This live-tree evidence does not replace the unavailable archive checksum evidence. W1-10R5 must carry the limitation.
 
 ### Wave 1 functional/privacy constraints
 
@@ -287,6 +326,10 @@ Wave 1 does not establish commercial production readiness. Separate dispatches s
 - `RAW_LEARNER_FREE_FORM_ATTEMPT_PROVIDER_DISCLOSURE_ALLOWED = false`
 - `UNREVIEWED_PROVIDER_FREE_FORM_LEARNER_OUTPUT_ALLOWED = false`
 - `CROSS_CHILD_REVIEW_APPROVAL_REUSE_ALLOWED = false`
+- `APPROVAL_DECISIONS_VALIDATED_BEFORE_NORMALIZATION = true`
+- `APPROVAL_ACCESSORS_ALLOWED = false`
+- `APPROVAL_CUSTOM_PROTOTYPES_ALLOWED = false`
+- `MALFORMED_APPROVAL_FAILS_CLOSED = true`
 - `WAVE_1_COMPLETE = false`
 - `FINAL_INDEPENDENT_REREVIEW_REQUIRED = true`
 - `WAVE1_FOUNDATION_ONLY`
@@ -299,4 +342,6 @@ Wave 1 does not establish commercial production readiness. Separate dispatches s
 
 ## Final foundation classification
 
-`WAVE1_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS`
+`WAVE1_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS`
+
+Wave 1 is not complete. Detached W1-10R5 final independent rereview of the exact W1-09R5 commit remains required, and the attempted W1-10R4 review is not acceptance evidence.

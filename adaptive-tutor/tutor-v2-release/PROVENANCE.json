@@ -11,6 +11,11 @@
     "W1_08": "31d5609527f75a11d9d3017ce0f07b3ec1c99b88"
   },
   "acceptedRepairs": {
+    "APPROVAL_DECISION_STRUCTURAL_VALIDATION_REPAIR": {
+      "branch": "origin/mac/tutor-v2-w1-approval-decision-repair-r4",
+      "directParent": "6f90d351d759c697788b6489bd465d954ce52184",
+      "sha": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841"
+    },
     "PROVIDER_BOUNDARY_REPAIR": {
       "branch": "origin/mac/tutor-v2-w1-provider-boundary-repair-r1",
       "directParent": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
@@ -29,7 +34,7 @@
   },
   "immutableLearnerBaseline": "7baf8dfbc27168708ed4cf504285a1838d7345f6",
   "product": "Manuel Academy Study Tutor V2",
-  "provenanceVersion": 4,
+  "provenanceVersion": 5,
   "reconvergenceHistory": {
     "W1_09R2": {
       "acceptedAsWave1Release": false,
@@ -46,10 +51,29 @@
       "startingRepairSha": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a"
     },
     "W1_09R4": {
+      "acceptedAsWave1Release": false,
       "branch": "mac/tutor-v2-w1-reconvergence-r4",
       "session": "STUDY-TUTOR-V2-W1-09R4 — Final Wave 1 Privacy Provenance Reconvergence",
+      "sha": "6f90d351d759c697788b6489bd465d954ce52184",
       "startingRepairSha": "cf7ee7265c812a86b708b0e8cf2a33e6370e753d",
-      "status": "CANDIDATE_REQUIRES_W1_10R4_FINAL_INDEPENDENT_REREVIEW"
+      "status": "SUPERSEDED_BY_APPROVAL_DECISION_REPAIR"
+    },
+    "W1_09R5": {
+      "acceptedAsWave1Release": false,
+      "branch": "mac/tutor-v2-w1-reconvergence-r5",
+      "session": "STUDY-TUTOR-V2-W1-09R5 — Final Wave 1 Approval-Decision Reconvergence",
+      "startingRepairSha": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+      "status": "CANDIDATE_REQUIRES_W1_10R5_FINAL_INDEPENDENT_REREVIEW"
+    },
+    "W1_10R4_ATTEMPTED_REVIEW": {
+      "acceptedAsAcceptanceEvidence": false,
+      "canonicalR4BranchModified": false,
+      "custodyStatus": "INVALID",
+      "reason": "The detached reviewer modified the canonical detached review worktree, so custody was broken and that review cannot serve as Wave 1 acceptance evidence.",
+      "repairedBy": "cb9e546bca8c8d0f5f84b95cdc4ead459f7d4841",
+      "reproducedBlocker": "MALFORMED_APPROVAL_DECISION_NORMALIZED_INTO_VALID_LOOKING_APPROVAL_BEFORE_VALIDATION",
+      "reproducedBlockerBeforeTermination": true,
+      "reproducedBlockerWasReal": true
     }
   },
   "recordedW1_08IntegrationCommits": {
@@ -85,6 +109,8 @@
   },
   "verification": {
     "acceptedLaneTreesEquivalent": true,
+    "approvalDecisionStructuralGatesPermanent": true,
+    "approvalDecisionStructuralRepairPresent": true,
     "canonicalRemoteTipsExact": true,
     "ownershipAdjudicationPresent": true,
     "providerBoundaryRepairPresent": true,
@@ -94,7 +120,9 @@
     "reviewedContentPrivacyGatesPermanent": true,
     "reviewedContentPrivacyRepairPresent": true,
     "structuralAntiAnswerGatesPermanent": true,
-    "structuralAntiAnswerRepairPresent": true
+    "structuralAntiAnswerRepairPresent": true,
+    "w1_10R4ReproducedBlockerWasRealAndRepaired": true,
+    "w1_10R4ReviewCustodyInvalidated": true
   },
   "wave": "Wave 1 Foundation"
 }
