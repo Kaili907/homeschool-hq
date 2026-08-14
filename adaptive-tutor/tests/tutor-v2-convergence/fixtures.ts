@@ -18,6 +18,7 @@ import {
   type TutorTurnPolicyPlan,
 } from "../../core/v2/policy/age/index.js";
 import type {
+  ProviderExecutionRequest,
   ProviderExecutionResult,
   TutorProviderPort,
 } from "../../core/v2/providers/ports/index.js";
@@ -26,6 +27,7 @@ import {
   type TutorV2BridgeDependencies,
   type TutorV2BridgeInvocation,
 } from "../../study-engine/bridges/tutor-v2/index.js";
+import { minimizeProviderContext } from "../../study-engine/tutor-v2/privacy/index.js";
 
 export const NOW = Date.parse("2026-08-13T20:01:00.000Z");
 export const DIGEST = `sha256:${"a".repeat(64)}` as const;
@@ -243,6 +245,25 @@ export function invocationFixture(): TutorV2BridgeInvocation {
         proposalRef: "proposal:reviewed-static-fallback",
       },
     },
+  };
+}
+
+/** Exact provider-safe envelope produced by the repaired Study bridge. */
+export function providerExecutionRequestFixture(): ProviderExecutionRequest {
+  const request = requestFixture();
+  const invocation = invocationFixture();
+  const minimized = minimizeProviderContext({
+    studyAuthorityContext: request.studyAuthorityContext,
+    disclosurePolicy: invocation.disclosurePolicy,
+  });
+  if (minimized.status !== "accepted") throw new Error("provider projection fixture failed");
+  return {
+    ...VERSION,
+    envelope: "provider-execution-request",
+    requestRef: request.requestRef,
+    context: minimized.value,
+    shortTermState: structuredClone(request.shortTermState),
+    budgetRoutingContext: structuredClone(request.budgetRoutingContext),
   };
 }
 

@@ -1,0 +1,33 @@
+{
+  "evidenceVersion": 1,
+  "failedW1_09Sha": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
+  "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
+  "permanentHardGates": [
+    "provider-study-authority-visibility",
+    "provider-authorization-and-credential-visibility",
+    "allowed-actions-replacement",
+    "allowed-actions-in-place-mutation",
+    "grounding-replacement",
+    "grounding-in-place-mutation",
+    "assessment-phase-downgrade",
+    "exact-direct-answer-phase-downgrade",
+    "hint-ceiling-raise",
+    "study-authority-deep-equality",
+    "response-binding-forgery",
+    "provider-mutation-throw-fallback",
+    "legitimate-minimized-provider"
+  ],
+  "permanentHardGateTest": "tests/tutor-v2-convergence/provider-boundary-adversarial.test.ts",
+  "providerBoundaryRepairSha": "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
+  "softScoreCompensationAllowed": false,
+  "structuralRulings": {
+    "postProviderPolicyUsesImmutableStudyAuthority": true,
+    "providerInputDeepDetachedAndFrozen": true,
+    "providerPortAcceptsProviderExecutionRequestOnly": true,
+    "providerReceivesStudyAuthorityContext": false,
+    "responseInteractionBindingRequired": true
+  },
+  "w1_09R2Status": "CANDIDATE_REQUIRES_W1_10R2_INDEPENDENT_REREVIEW",
+  "w1_10Ruling": "HOLD",
+  "WAVE_1_COMPLETE": false
+}

@@ -9,11 +9,17 @@ import {
   TutorRequestSchema,
   validateExact,
 } from "../../core/v2/contracts/index.js";
+import { ProviderExecutionRequestSchema } from "../../core/v2/providers/ports/contracts.js";
 import {
   MinimizedProviderContextSchema,
   minimizeProviderContext,
 } from "../../study-engine/tutor-v2/privacy/index.js";
-import { invocationFixture, proposalFixture, requestFixture } from "./fixtures.js";
+import {
+  invocationFixture,
+  proposalFixture,
+  providerExecutionRequestFixture,
+  requestFixture,
+} from "./fixtures.js";
 
 function generated(file: string): TSchema {
   return JSON.parse(readFileSync(`json-schema/v2/${file}`, "utf8")) as TSchema;
@@ -100,4 +106,39 @@ test("provider context generated schema remains closed", () => {
   assertParity(ProviderContextSchema, "provider-context.schema.json", context, true);
   context.rawProviderResponse = "private";
   assertParity(ProviderContextSchema, "provider-context.schema.json", context, false);
+});
+
+test("provider execution request passes runtime and generated JSON schema", () => {
+  assertParity(
+    ProviderExecutionRequestSchema,
+    "provider-execution-request.schema.json",
+    providerExecutionRequestFixture(),
+    true,
+  );
+});
+
+test("Study authority contamination fails in both provider-request validators", () => {
+  const request = {
+    ...providerExecutionRequestFixture(),
+    studyAuthorityContext: requestFixture().studyAuthorityContext,
+  };
+  assertParity(
+    ProviderExecutionRequestSchema,
+    "provider-execution-request.schema.json",
+    request,
+    false,
+  );
+});
+
+test("unknown answer-authority fields fail in both provider-request validators", () => {
+  const request = structuredClone(providerExecutionRequestFixture()) as unknown as Record<string, unknown>;
+  const context = request.context as Record<string, unknown>;
+  const instruction = context.instruction as Record<string, unknown>;
+  instruction.answerPolicyRef = "policy:forged-answer-authority";
+  assertParity(
+    ProviderExecutionRequestSchema,
+    "provider-execution-request.schema.json",
+    request,
+    false,
+  );
 });

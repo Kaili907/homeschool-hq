@@ -10,19 +10,21 @@
     "compatibilityId": "manuel-academy.study-tutor-v2.contracts.v2",
     "contractVersion": "2.0.0"
   },
+  "convergenceProviderMutationScenarioCount": 13,
   "evaluationResult": {
     "classification": "FOUNDATION_GATE_PASS",
     "failed": 0,
     "passed": 128,
     "releaseReady": false
   },
+  "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
   "gate": {
-    "finalClassification": "WAVE1_CANDIDATE_READY_FOR_INDEPENDENT_REVIEW_WITH_INHERITED_FINDINGS",
+    "finalClassification": "WAVE1_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
     "foundationGate": "PASS",
     "releaseReady": false
   },
   "generatedSchemaInventory": {
-    "count": 22,
+    "count": 23,
     "inventory": "../json-schema/v2/SCHEMA-INVENTORY.json",
     "schemas": [
       {
@@ -90,6 +92,10 @@
         "source": "study-engine/tutor-v2/privacy/provider-context.ts#MinimizedProviderContextSchema"
       },
       {
+        "file": "provider-execution-request.schema.json",
+        "source": "core/v2/providers/ports/contracts.ts#ProviderExecutionRequestSchema"
+      },
+      {
         "file": "durable-tutor-evidence.schema.json",
         "source": "study-engine/tutor-v2/evidence/tutor-evidence.ts#DurableTutorEvidenceSchema"
       },
@@ -144,11 +150,13 @@
   "NOT_AUTHORIZED_FOR_HOSTED_SUPABASE": true,
   "NOT_AUTHORIZED_FOR_MASTER_MERGE": true,
   "NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT": true,
+  "POST_PROVIDER_POLICY_USES_IMMUTABLE_STUDY_AUTHORITY": true,
   "product": "Manuel Academy Study Tutor V2",
   "PRODUCTION_DEPLOY_AUTHORIZED": false,
   "PRODUCTION_WIRING_ENABLED": false,
   "productionStatus": {
     "COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE": true,
+    "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
     "HOSTED_SUPABASE_CONTACTED_BY_WAVE1": false,
     "LIVE_MODEL_COMMERCIAL_CERTIFICATION": false,
     "LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED": true,
@@ -157,11 +165,14 @@
     "NOT_AUTHORIZED_FOR_HOSTED_SUPABASE": true,
     "NOT_AUTHORIZED_FOR_MASTER_MERGE": true,
     "NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT": true,
+    "POST_PROVIDER_POLICY_USES_IMMUTABLE_STUDY_AUTHORITY": true,
     "PRODUCTION_DEPLOY_AUTHORIZED": false,
     "PRODUCTION_WIRING_ENABLED": false,
+    "PROVIDER_RECEIVES_STUDY_AUTHORITY": false,
     "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
-    "statusVersion": 1,
+    "statusVersion": 2,
     "STUDY_ENGINE_REMAINS_AUTHORITY": true,
+    "WAVE_1_COMPLETE": false,
     "WAVE1_FOUNDATION_ONLY": true
   },
   "provenance": {
@@ -175,12 +186,20 @@
     "W1_07": "9b959ab7e8176ebccb4fd3ca7b54bf5584602b35",
     "W1_08": "31d5609527f75a11d9d3017ce0f07b3ec1c99b88"
   },
+  "PROVIDER_RECEIVES_STUDY_AUTHORITY": false,
+  "providerBoundaryHistory": {
+    "failedW1_09Sha": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
+    "finalIndependentRereviewRequired": true,
+    "providerBoundaryRepairSha": "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
+    "reconvergenceEvidence": "PROVIDER-BOUNDARY-RECONVERGENCE.json",
+    "w1_10Ruling": "HOLD"
+  },
   "rootManifestRuling": "ROOT_MANIFEST_PRESERVED_FOR_FROZEN_V0_2_PROVENANCE",
   "scenarioCount": 128,
   "selfReferencePolicy": "MANIFEST.json and CHECKSUMS.json do not checksum themselves; the final W1-09 Git SHA is reported after commit.",
   "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
   "staticFallback": "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",
-  "statusVersion": 1,
+  "statusVersion": 2,
   "STUDY_ENGINE_REMAINS_AUTHORITY": true,
   "tutorActionVocabulary": [
     "explain",
@@ -194,5 +213,6 @@
     "return-to-lesson"
   ],
   "wave": "Wave 1 Foundation",
+  "WAVE_1_COMPLETE": false,
   "WAVE1_FOUNDATION_ONLY": true
 }

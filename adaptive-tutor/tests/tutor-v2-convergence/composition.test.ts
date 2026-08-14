@@ -31,7 +31,7 @@ import {
   failureResult,
   harness,
   proposalFixture,
-  requestFixture,
+  providerExecutionRequestFixture,
   successResult,
 } from "./fixtures.js";
 
@@ -93,7 +93,7 @@ test("provider port receives only canonical provider-safe context and state", as
       },
     },
   });
-  assert.equal((await provider.execute(requestFixture())).status, "success");
+  assert.equal((await provider.execute(providerExecutionRequestFixture())).status, "success");
   assert.notEqual(captured, null);
   const serialized = JSON.stringify(captured);
   for (const forbidden of ["authorizationRef", "answerPolicyRef", "workingLevelInstructionRef", "rawTranscript", "studentId"]) {
@@ -261,7 +261,7 @@ test("provider telemetry remains exact and minimized", async () => {
       metrics: { inputTokenCount: 12, outputTokenCount: 8, latencyMs: 3, costUnits: 1 },
     }) },
   });
-  const result = await provider.execute(requestFixture());
+  const result = await provider.execute(providerExecutionRequestFixture());
   assert.deepEqual(Object.keys(result.telemetry).sort(), [
     "action", "actionCompatibilityId", "actionSchemaVersion", "compatibilityId",
     "contractVersion", "costUnits", "inputTokenCount", "interactionRef", "latencyMs",

@@ -5,7 +5,7 @@
   "bridgeVersion": "1.0.0",
   "compatibilityId": "manuel-academy.study-tutor-v2.contracts.v2",
   "contractVersion": "2.0.0",
-  "generatedSchemaCount": 22,
+  "generatedSchemaCount": 23,
   "product": "Manuel Academy Study Tutor V2",
   "schemaInventoryVersion": 1,
   "schemas": [
@@ -88,6 +88,11 @@
       "file": "minimized-provider-context.schema.json",
       "sha256": "a5d5cbd8a4ed90d54a2a2890854e864913f0d9b5aeb715a3767c3d5c09ce3455",
       "source": "study-engine/tutor-v2/privacy/provider-context.ts#MinimizedProviderContextSchema"
+    },
+    {
+      "file": "provider-execution-request.schema.json",
+      "sha256": "a13fe59b3ab27b700ad8f98ebe205b5e369c4052cdfd7a2324555c7d9a71a63e",
+      "source": "core/v2/providers/ports/contracts.ts#ProviderExecutionRequestSchema"
     },
     {
       "file": "durable-tutor-evidence.schema.json",

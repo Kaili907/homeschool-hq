@@ -33,6 +33,7 @@ import {
   TutorV2BridgeInvocationSchema,
   TutorV2BridgeMemoryAccessSchema,
 } from "../../study-engine/bridges/tutor-v2/contracts.js";
+import { ProviderExecutionRequestSchema } from "../../core/v2/providers/ports/contracts.js";
 import {
   DurableTutorEvidenceSchema,
 } from "../../study-engine/tutor-v2/evidence/index.js";
@@ -64,6 +65,7 @@ const artifacts: readonly SchemaArtifact[] = [
   { file: "tutor-response-envelope.schema.json", title: "Tutor V2 Response Envelope", source: "core/v2/contracts/request-response.ts#TutorResponseEnvelopeSchema", schema: TutorResponseEnvelopeSchema },
   { file: "tutor-validation-result.schema.json", title: "Tutor V2 Validation Result", source: "core/v2/contracts/request-response.ts#TutorValidationResultSchema", schema: TutorValidationResultSchema },
   { file: "minimized-provider-context.schema.json", title: "Tutor V2 Minimized Provider Context", source: "study-engine/tutor-v2/privacy/provider-context.ts#MinimizedProviderContextSchema", schema: MinimizedProviderContextSchema },
+  { file: "provider-execution-request.schema.json", title: "Tutor V2 Provider Execution Request", source: "core/v2/providers/ports/contracts.ts#ProviderExecutionRequestSchema", schema: ProviderExecutionRequestSchema },
   { file: "durable-tutor-evidence.schema.json", title: "Tutor V2 Durable Evidence", source: "study-engine/tutor-v2/evidence/tutor-evidence.ts#DurableTutorEvidenceSchema", schema: DurableTutorEvidenceSchema },
   { file: "bridge-invocation-permission.schema.json", title: "Study Tutor V2 Invocation Permission", source: "study-engine/bridges/tutor-v2/contracts.ts#TutorInvocationPermissionSchema", schema: TutorInvocationPermissionSchema },
   { file: "bridge-memory-access.schema.json", title: "Study Tutor V2 Bridge Memory Access", source: "study-engine/bridges/tutor-v2/contracts.ts#TutorV2BridgeMemoryAccessSchema", schema: TutorV2BridgeMemoryAccessSchema },

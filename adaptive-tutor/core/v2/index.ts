@@ -10,6 +10,8 @@ export * from "./policy/refusal/index.js";
 // transports, vendor adapters, routes, and test providers remain internal.
 export type {
   ClosedStructuredTutorRequest,
+  ProviderExecutionContext,
+  ProviderExecutionRequest,
   ProviderExecutionResult,
   ProviderFailureReason,
   ProviderFailureResult,

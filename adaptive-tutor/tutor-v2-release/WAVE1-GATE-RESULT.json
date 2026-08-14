@@ -3,7 +3,7 @@
   "product": "Manuel Academy Study Tutor V2",
   "wave": "Wave 1 Foundation",
   "foundationGate": "PASS",
-  "finalClassification": "WAVE1_CANDIDATE_READY_FOR_INDEPENDENT_REVIEW_WITH_INHERITED_FINDINGS",
+  "finalClassification": "WAVE1_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
   "releaseReady": false,
   "checks": [
     {
@@ -15,37 +15,55 @@
     {
       "name": "canonical-provenance",
       "status": "PASS",
-      "detail": "9/9 pinned remote tips exact",
+      "detail": "10/10 pinned remote tips exact, including repair",
       "command": "git rev-parse origin/mac/tutor-v2-w1-*"
+    },
+    {
+      "name": "repair-direct-parent",
+      "status": "PASS",
+      "detail": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
+      "command": "git rev-parse d7aa9720b8096205acc0b63d21a895d8fc16de6f^"
     },
     {
       "name": "accepted-lane-tree-equivalence",
       "status": "PASS",
-      "detail": "W1-03 through W1-07 exact",
+      "detail": "unrepaired W1-04 through W1-07 trees exact",
       "command": "git diff --quiet <accepted-sha> HEAD -- <lane-paths>"
+    },
+    {
+      "name": "accepted-repair-tree-equivalence",
+      "status": "PASS",
+      "detail": "repair-owned source and tests exact",
+      "command": "git diff --quiet d7aa9720b8096205acc0b63d21a895d8fc16de6f HEAD -- <repair-paths>"
+    },
+    {
+      "name": "provider-port-structural-boundary",
+      "status": "PASS",
+      "detail": "provider-safe request exported; TutorRequest/StudyAuthorityContext excluded",
+      "command": "source structural assertion"
     },
     {
       "name": "v2-typecheck",
       "status": "PASS",
       "detail": "strict TypeScript",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-convergence-r1/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-grade-migration-r1/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
     },
     {
       "name": "v2-compile",
       "status": "PASS",
       "detail": "convergence compilation",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-convergence-r1/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-grade-migration-r1/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
     },
     {
       "name": "schema-runtime-parity-artifacts",
       "status": "PASS",
-      "detail": "22 schemas + inventory exact",
+      "detail": "23 schemas + inventory exact",
       "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/.dist/scripts/tutor-v2/generate-schemas.js --check"
     },
     {
       "name": "release-evidence-artifacts",
       "status": "PASS",
-      "detail": "6 release artifacts exact",
+      "detail": "7 release artifacts exact",
       "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js --check"
     },
     {
@@ -55,21 +73,39 @@
       "command": "node --test scripts/tutor-v2/.dist/core/v2/contracts/contracts.test.js scripts/tutor-v2/.dist/core/v2/providers/testing/provider-port.test.js scripts/tutor-v2/.dist/core/v2/policy/authority/authority.test.js scripts/tutor-v2/.dist/core/v2/policy/grounding/grounding.test.js scripts/tutor-v2/.dist/core/v2/policy/anti-answer/anti-answer.test.js scripts/tutor-v2/.dist/core/v2/policy/refusal/refusal.test.js scripts/tutor-v2/.dist/core/v2/policy/age/profile.test.js scripts/tutor-v2/.dist/core/v2/memory/session-memory.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/evidence/tutor-evidence.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/privacy/provider-context.test.js"
     },
     {
+      "name": "provider-port-regression",
+      "status": "PASS",
+      "detail": "12/12 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/providers/testing/provider-port.test.js"
+    },
+    {
+      "name": "provider-mutation-convergence-hard-gate",
+      "status": "PASS",
+      "detail": "13/13 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js"
+    },
+    {
       "name": "cross-slice-convergence-tests",
       "status": "PASS",
-      "detail": "39/39 pass; 0 fail; 0 skipped",
-      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js"
+      "detail": "55/55 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js"
     },
     {
       "name": "bridge-typecheck",
       "status": "PASS",
       "detail": "W1-08 bridge compilation",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-convergence-r1/adaptive-tutor/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-grade-migration-r1/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
     },
     {
-      "name": "w1-08-bridge-regression",
+      "name": "w1-b1-provider-mutation-adversarial",
       "status": "PASS",
-      "detail": "75/75 pass; 0 fail; 0 skipped",
+      "detail": "12/12 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-10 adversarial study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
+      "name": "repaired-bridge-regression",
+      "status": "PASS",
+      "detail": "87/87 pass; 0 fail; 0 skipped",
       "command": "node --test study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
     },
     {
@@ -88,7 +124,7 @@
       "name": "tutor-core-v0.2-typecheck",
       "status": "PASS",
       "detail": "frozen Core typecheck",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-convergence-r1/adaptive-tutor/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-grade-migration-r1/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
     },
     {
       "name": "tutor-core-v0.2-tests",
@@ -139,10 +175,10 @@
       "command": "npm audit --json (study-engine/runtime)"
     },
     {
-      "name": "w1-09-path-ownership",
+      "name": "w1-09r2-path-ownership",
       "status": "PASS",
-      "detail": "43 changed files all convergence-owned",
-      "command": "git status --porcelain=v1 --untracked-files=all"
+      "detail": "17 authored files all convergence-owned",
+      "command": "git diff --name-only d7aa9720b8096205acc0b63d21a895d8fc16de6f HEAD plus git status"
     },
     {
       "name": "git-diff-check",

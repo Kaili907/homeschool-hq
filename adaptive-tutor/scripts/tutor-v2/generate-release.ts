@@ -56,7 +56,7 @@ if (evaluation.classification !== "FOUNDATION_GATE_PASS" || evaluation.releaseRe
 }
 
 const provenance = {
-  provenanceVersion: 1,
+  provenanceVersion: 2,
   product: "Manuel Academy Study Tutor V2",
   wave: "Wave 1 Foundation",
   immutableLearnerBaseline: "7baf8dfbc27168708ed4cf504285a1838d7345f6",
@@ -70,6 +70,26 @@ const provenance = {
     W1_06: "b93765552d60a88ac7691ca7840dfc2ae3a23e77",
     W1_07: "9b959ab7e8176ebccb4fd3ca7b54bf5584602b35",
     W1_08: "31d5609527f75a11d9d3017ce0f07b3ec1c99b88",
+  },
+  rejectedCandidates: {
+    W1_09: {
+      sha: "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
+      independentRuling: "W1_10_HOLD_PROVIDER_BOUNDARY",
+      acceptedAsWave1Release: false,
+    },
+  },
+  acceptedRepairs: {
+    PROVIDER_BOUNDARY_REPAIR: {
+      sha: "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
+      directParent: "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
+      branch: "origin/mac/tutor-v2-w1-provider-boundary-repair-r1",
+    },
+  },
+  reconvergence: {
+    session: "STUDY-TUTOR-V2-W1-09R2",
+    branch: "mac/tutor-v2-w1-reconvergence-r2",
+    startingRepairSha: "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
+    status: "CANDIDATE_REQUIRES_W1_10R2_INDEPENDENT_REREVIEW",
   },
   recordedW1_08IntegrationCommits: {
     W1_03: "4cf4bda1c99d0490136f3e53d9c412050166b9ff",
@@ -89,6 +109,8 @@ const provenance = {
     canonicalRemoteTipsExact: true,
     acceptedLaneTreesEquivalent: true,
     ownershipAdjudicationPresent: true,
+    providerBoundaryRepairPresent: true,
+    providerMutationGatesPermanent: true,
     releaseSecurityOwnershipCrossed: false,
   },
 };
@@ -109,7 +131,7 @@ const evaluationSummary = {
 };
 
 const status = {
-  statusVersion: 1,
+  statusVersion: 2,
   WAVE1_FOUNDATION_ONLY: true,
   STUDY_ENGINE_REMAINS_AUTHORITY: true,
   STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED: true,
@@ -118,6 +140,10 @@ const status = {
   MASTER_MERGE_AUTHORIZED: false,
   PRODUCTION_DEPLOY_AUTHORIZED: false,
   LIVE_MODEL_COMMERCIAL_CERTIFICATION: false,
+  PROVIDER_RECEIVES_STUDY_AUTHORITY: false,
+  POST_PROVIDER_POLICY_USES_IMMUTABLE_STUDY_AUTHORITY: true,
+  WAVE_1_COMPLETE: false,
+  FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
   NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT: true,
   NOT_AUTHORIZED_FOR_MASTER_MERGE: true,
   NOT_AUTHORIZED_FOR_HOSTED_SUPABASE: true,
@@ -126,9 +152,44 @@ const status = {
   LIVE_MODEL_COMMERCIAL_CERTIFICATION_NOT_PERFORMED: true,
 };
 
+const providerBoundaryReconvergence = {
+  evidenceVersion: 1,
+  failedW1_09Sha: "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
+  w1_10Ruling: "HOLD",
+  providerBoundaryRepairSha: "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
+  w1_09R2Status: "CANDIDATE_REQUIRES_W1_10R2_INDEPENDENT_REREVIEW",
+  structuralRulings: {
+    providerPortAcceptsProviderExecutionRequestOnly: true,
+    providerReceivesStudyAuthorityContext: false,
+    providerInputDeepDetachedAndFrozen: true,
+    postProviderPolicyUsesImmutableStudyAuthority: true,
+    responseInteractionBindingRequired: true,
+  },
+  permanentHardGateTest: "tests/tutor-v2-convergence/provider-boundary-adversarial.test.ts",
+  permanentHardGates: [
+    "provider-study-authority-visibility",
+    "provider-authorization-and-credential-visibility",
+    "allowed-actions-replacement",
+    "allowed-actions-in-place-mutation",
+    "grounding-replacement",
+    "grounding-in-place-mutation",
+    "assessment-phase-downgrade",
+    "exact-direct-answer-phase-downgrade",
+    "hint-ceiling-raise",
+    "study-authority-deep-equality",
+    "response-binding-forgery",
+    "provider-mutation-throw-fallback",
+    "legitimate-minimized-provider",
+  ],
+  softScoreCompensationAllowed: false,
+  WAVE_1_COMPLETE: false,
+  FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
+};
+
 const outputs = new Map<string, string>([
   ["PROVENANCE.json", serialize(provenance)],
   ["FOUNDATION-EVALUATION.json", serialize(evaluationSummary)],
+  ["PROVIDER-BOUNDARY-RECONVERGENCE.json", serialize(providerBoundaryReconvergence)],
   ["STATUS.json", serialize(status)],
 ]);
 const releaseChecksums = Object.fromEntries(
@@ -163,6 +224,7 @@ const manifest = {
   },
   tutorActionVocabulary: TUTOR_ACTION_KINDS,
   scenarioCount: evaluation.totalScenarios,
+  convergenceProviderMutationScenarioCount: providerBoundaryReconvergence.permanentHardGates.length,
   evaluationResult: {
     passed: evaluation.passed,
     failed: evaluation.failed,
@@ -176,6 +238,13 @@ const manifest = {
     schemas: schemaInventory.schemas.map(({ file, source }) => ({ file, source })),
   },
   authority: "Study Engine is the sole authoritative state owner. Tutor output is proposal-only and requires Study validation.",
+  providerBoundaryHistory: {
+    failedW1_09Sha: providerBoundaryReconvergence.failedW1_09Sha,
+    w1_10Ruling: providerBoundaryReconvergence.w1_10Ruling,
+    providerBoundaryRepairSha: providerBoundaryReconvergence.providerBoundaryRepairSha,
+    reconvergenceEvidence: "PROVIDER-BOUNDARY-RECONVERGENCE.json",
+    finalIndependentRereviewRequired: true,
+  },
   staticFallback: "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",
   productionStatus: status,
   gate: {
