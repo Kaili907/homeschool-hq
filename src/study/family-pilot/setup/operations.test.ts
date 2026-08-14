@@ -200,6 +200,24 @@ describe('setWorkingGrade', () => {
     expect(cleared.students[0].workingGradeBySubject).toEqual({})
   })
 
+  it('does not clear a Grade 6 subject to an unsupported implicit level', () => {
+    const created = expectOk(
+      createStudent(
+        EMPTY_FAMILY_SETUP_STATE,
+        { displayName: 'Sixth', nominalGrade: '6', enabledSubjects: ['mathematics'] },
+        NOW,
+      ),
+    )
+    const ref = created.students[0].studentRef
+    const explicit = expectOk(setWorkingGrade(created, ref, 'mathematics', '5', NOW))
+
+    expect(setWorkingGrade(explicit, ref, 'mathematics', null, LATER)).toEqual({
+      status: 'blocked',
+      reason: 'invalid-working-grade',
+      studentRef: ref,
+    })
+  })
+
   it('refuses an override for a subject the student is not enrolled in', () => {
     const created = addStudent(EMPTY_FAMILY_SETUP_STATE)
     const ref = created.students[0].studentRef
@@ -272,6 +290,24 @@ describe('validateFamilySetup', () => {
 
     expect(validateFamilySetup(invalid).valid).toBe(false)
     expect(validateFamilySetup(invalid).issues).toContainEqual({ studentRef: ref, reason: 'no-enabled-subjects' })
+  })
+
+  it('flags every Grade 6 subject that lacks an explicit published working grade', () => {
+    const created = expectOk(
+      createStudent(
+        EMPTY_FAMILY_SETUP_STATE,
+        { displayName: 'Sixth', nominalGrade: '6', enabledSubjects: ['mathematics', 'science'] },
+        NOW,
+      ),
+    )
+    const ref = created.students[0].studentRef
+    const partial = expectOk(setWorkingGrade(created, ref, 'mathematics', '5', NOW))
+
+    expect(validateFamilySetup(partial).issues).toContainEqual({
+      studentRef: ref,
+      reason: 'invalid-working-grade',
+    })
+    expect(completeSetup(partial, LATER).status).toBe('blocked')
   })
 })
 

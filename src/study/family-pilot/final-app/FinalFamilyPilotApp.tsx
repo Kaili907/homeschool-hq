@@ -4,7 +4,7 @@ import {
   type FinalLearnerAssessmentMaterial,
   type FinalLearnerProductionMaterial,
 } from '../../../curriculum/final-app-data'
-import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
+import type { AcademySubject } from '../../../types'
 import { FamilyPilotStudentLogin } from '../auth'
 import { exportFinalFamilyPilotBackup, downloadFinalFamilyPilotBackup, restoreFinalFamilyPilotBackup } from './backup'
 import {
@@ -14,19 +14,10 @@ import {
 import { fromStudentSelector, toStudentSelector } from '../integration/identity'
 import { FamilyPilotLessonPlayer } from '../lesson-player'
 import { FamilyPilotParentAssignPanel } from '../parent-assign'
-import { FamilyPreferences } from '../preferences'
 import { FamilyPilotRecoveryScreen } from '../recovery'
 import { buildStudentWeeklyReport, FamilyPilotProgressReport } from '../reports'
 import { StudentDashboard } from '../student-dashboard'
-import {
-  completeSetup,
-  createStudent,
-  setPinRequirement,
-  setWorkingGrade,
-  updateStudent,
-  type FamilySetupState,
-  type FamilySetupStudent,
-} from '../setup'
+import type { FamilySetupStudent } from '../setup'
 import {
   recordActiveInterval,
   startFocusSession,
@@ -56,6 +47,7 @@ import { toStudentDashboardPresentation } from './dashboardPresentation'
 import { FinalFamilyAutoPlannerHost } from './autoPlannerHost'
 import { applyAutoPlannerPresentation } from './autoPlannerPresentation'
 import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
+import { FamilyOnboarding } from './FamilyOnboarding'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -185,7 +177,26 @@ function MountedFinalFamilyPilot({
   }
 
   if (!app.state.setup.completedAt) {
-    return <FinalShell onExit={onExit}><SetupScreen controller={controller} refresh={refresh} restoreInput={restoreInput} onRestore={doRestore} onParentAuthorized={() => { setParentAuthorized(true); setMode('parent') }} /></FinalShell>
+    return (
+      <FinalShell onExit={onExit}>
+        <FamilyOnboarding
+          controller={controller}
+          mode="first-run"
+          onContinue={() => {
+            setParentAuthorized(true)
+            setParentView('school-plan')
+            setMode('parent')
+            refresh()
+          }}
+        />
+        <section className="mx-auto mb-8 max-w-6xl rounded-2xl border border-cyan-200 bg-cyan-50 p-5">
+          <h3 className="text-lg font-extrabold">Moving an existing family to this browser?</h3>
+          <p className="mt-2 text-slate-700">Restore a Parent Download Backup instead of creating the family again.</p>
+          <button type="button" className="mt-4 min-h-11 rounded-lg border border-cyan-700 bg-white px-4 py-2 font-bold text-cyan-900" onClick={() => restoreInput.current?.click()}>Restore a Family Pilot backup</button>
+          <input ref={restoreInput} className="hidden" type="file" accept="application/json" onChange={(event) => void doRestore(event.target.files?.[0])} />
+        </section>
+      </FinalShell>
+    )
   }
 
   const openStudentRef = app.state.activeStudentRef
@@ -283,69 +294,6 @@ function MountedFinalFamilyPilot({
         />
       )}
     </FinalShell>
-  )
-}
-
-function SetupScreen({ controller, refresh, restoreInput, onRestore, onParentAuthorized }: {
-  readonly controller: FinalFamilyPilotController
-  readonly refresh: () => void
-  readonly restoreInput: React.RefObject<HTMLInputElement | null>
-  readonly onRestore: (file: File | undefined) => Promise<void>
-  readonly onParentAuthorized: () => void
-}) {
-  const [setup, setSetup] = useState<FamilySetupState>(controller.appSnapshot.state.setup)
-  const [name, setName] = useState('')
-  const [grade, setGrade] = useState<Grade>('5')
-  const [parentPin, setParentPin] = useState('')
-  const [confirmParentPin, setConfirmParentPin] = useState('')
-  const [error, setError] = useState('')
-
-  const add = () => {
-    const result = createStudent(setup, { displayName: name, nominalGrade: grade, enabledSubjects: ACADEMY_SUBJECTS }, new Date().toISOString())
-    if (result.status !== 'ok') { setError(result.reason); return }
-    setSetup(result.state)
-    setName('')
-    setError('')
-  }
-  const finish = () => {
-    if (!/^\d{4}$/.test(parentPin) || parentPin !== confirmParentPin) { setError('Set and confirm a matching 4-digit parent PIN.'); return }
-    const result = completeSetup(setup, new Date().toISOString())
-    if (result.status !== 'ok') { setError(result.reason); return }
-    try { controller.setParentPin(parentPin); controller.saveSetup(result.state); onParentAuthorized(); setParentPin(''); setConfirmParentPin(''); refresh() } catch (cause) { setError(messageOf(cause)) }
-  }
-
-  return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
-      <p className="font-bold text-cyan-700">First-run family setup</p>
-      <h2 className="mt-1 text-3xl font-extrabold">Set up your learners</h2>
-      <p className="mt-2 text-slate-600">Nominal grade is the reporting grade. Working grade is configured separately by subject after setup.</p>
-      <section className="mt-6 rounded-2xl border bg-white p-5">
-        <label className="block font-bold" htmlFor="family-setup-name">Student display name</label>
-        <input id="family-setup-name" className="mt-1 w-full rounded-lg border px-3 py-2" value={name} onChange={(event) => setName(event.target.value)} />
-        <label className="mt-4 block font-bold" htmlFor="family-setup-grade">Nominal grade</label>
-        <select id="family-setup-grade" className="mt-1 rounded-lg border px-3 py-2" value={grade} onChange={(event) => setGrade(event.target.value as Grade)}>
-          {(['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] as Grade[]).map((value) => <option key={value} value={value}>Grade {value}{value === '6' ? ' (profile only; working-grade override required)' : ''}</option>)}
-        </select>
-        <button type="button" className="mt-4 rounded-lg bg-cyan-700 px-4 py-2 font-bold text-white" onClick={add}>Add student</button>
-      </section>
-      <ul className="mt-4 space-y-2">
-        {setup.students.map((student) => <li key={student.studentRef} className="rounded-xl border bg-white p-4 font-semibold">{student.displayName} · Nominal Grade {student.nominalGrade} · {student.enabledSubjects.length} subjects enabled</li>)}
-      </ul>
-      <section className="mt-6 rounded-2xl border bg-white p-5">
-        <h3 className="font-extrabold">Protect the Parent Hub</h3>
-        <p className="mt-1 text-sm text-slate-600">This local PIN authorizes guardian attestations, rubric review, source approval, preferences, and backups. Only a one-way verifier is stored.</p>
-        <label className="mt-3 block font-bold">Parent PIN<input aria-label="Parent PIN" inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" value={parentPin} onChange={(event) => setParentPin(event.target.value.replace(/\D/g, '').slice(0, 4))} /></label>
-        <label className="mt-3 block font-bold">Confirm parent PIN<input aria-label="Confirm parent PIN" inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" value={confirmParentPin} onChange={(event) => setConfirmParentPin(event.target.value.replace(/\D/g, '').slice(0, 4))} /></label>
-      </section>
-      {error ? <p className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
-      <button type="button" className="mt-6 rounded-lg bg-emerald-700 px-5 py-3 font-extrabold text-white disabled:opacity-50" disabled={setup.students.length === 0} onClick={finish}>Finish family setup</button>
-      <section className="mt-8 rounded-2xl border border-cyan-200 bg-cyan-50 p-5">
-        <h3 className="text-lg font-extrabold">Moving an existing pilot to this browser?</h3>
-        <p className="mt-2 text-slate-700">Restore a Parent Download Backup instead of creating the family again.</p>
-        <button type="button" className="mt-4 rounded-lg border border-cyan-700 bg-white px-4 py-2 font-bold text-cyan-900" onClick={() => restoreInput.current?.click()}>Restore a Family Pilot backup</button>
-        <input ref={restoreInput} className="hidden" type="file" accept="application/json" onChange={(event) => void onRestore(event.target.files?.[0])} />
-      </section>
-    </main>
   )
 }
 
@@ -516,16 +464,16 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         </select>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
-        {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
+        {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item === 'preferences' ? 'Family setup' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
       </nav>
-      {!selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
+      {view === 'preferences' ? (
+        <FamilyOnboarding controller={controller} mode="manage" onContinue={() => { setView('school-plan'); refresh() }} />
+      ) : !selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
         <FamilySchoolPlanPanel controller={controller} host={autoPlannerHost} student={selected} />
       ) : view === 'assign' ? (
         <ParentAssignments controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
       ) : view === 'reports' ? (
         <ParentReports controller={controller} student={selected} refresh={refresh} />
-      ) : view === 'preferences' ? (
-        <PreferencesSurface controller={controller} student={selected} refresh={refresh} onClose={() => setView('assign')} />
       ) : (
         <section className="mt-6 rounded-2xl border bg-white p-5">
           <h3 className="text-xl font-extrabold">Backup and recovery</h3>
@@ -685,43 +633,6 @@ function DynamicSourceCard({ controller, student, assignment, attached, refresh 
       <p className="mt-2 text-sm text-slate-600">All 36 contract fields, two-source unit sufficiency, and adult attestation are required. Metadata only: Family Pilot does not fetch arbitrary websites or store source bodies or quotations.</p>
       {error ? <p className="mt-2 font-semibold text-red-700" role="alert">{error}</p> : null}
     </section>
-  )
-}
-
-function PreferencesSurface({ controller, student, refresh, onClose }: {
-  readonly controller: FinalFamilyPilotController
-  readonly student: FamilySetupStudent
-  readonly refresh: () => void
-  readonly onClose: () => void
-}) {
-  const change = (mutation: ReturnType<typeof updateStudent>) => {
-    if (mutation.status !== 'ok') { window.alert(mutation.reason); return }
-    controller.saveSetup(mutation.state)
-    refresh()
-  }
-  return (
-    <FamilyPreferences
-      student={student}
-      onUpdateDisplayName={(studentRef, displayName) => change(updateStudent(controller.appSnapshot.state.setup, studentRef, { displayName }, new Date().toISOString()))}
-      onSetWorkingGrade={(studentRef, subject, grade) => change(setWorkingGrade(controller.appSnapshot.state.setup, studentRef, subject, grade, new Date().toISOString()))}
-      onSetSubjectEnabled={(studentRef, subject, enabled) => {
-        const held = controller.appSnapshot.state.setup.students.find((item) => item.studentRef === studentRef)
-        if (!held) return
-        const enabledSubjects = enabled ? [...held.enabledSubjects, subject] : held.enabledSubjects.filter((item) => item !== subject)
-        change(updateStudent(controller.appSnapshot.state.setup, studentRef, { enabledSubjects }, new Date().toISOString()))
-      }}
-      onSetPinRequired={(studentRef, required) => {
-        const result = setPinRequirement(controller.appSnapshot.state.setup, studentRef, required, new Date().toISOString())
-        if (result.status !== 'ok') return
-        const pin = required ? window.prompt('Choose a 4-digit local access PIN for this student.') : null
-        if (required && !/^\d{4}$/.test(pin ?? '')) { window.alert('PIN was not changed. Enter exactly four digits.'); return }
-        const next = result.state
-        controller.saveSetup(next)
-        controller.setStudentPin(studentRef, required && pin ? pin : null)
-        refresh()
-      }}
-      onClose={onClose}
-    />
   )
 }
 
