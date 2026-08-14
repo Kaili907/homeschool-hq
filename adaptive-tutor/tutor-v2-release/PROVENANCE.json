@@ -15,16 +15,29 @@
       "branch": "origin/mac/tutor-v2-w1-provider-boundary-repair-r1",
       "directParent": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
       "sha": "d7aa9720b8096205acc0b63d21a895d8fc16de6f"
+    },
+    "STRUCTURAL_ANTI_ANSWER_REPAIR": {
+      "branch": "origin/mac/tutor-v2-w1-anti-answer-repair-r2",
+      "directParent": "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+      "sha": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a"
     }
   },
   "immutableLearnerBaseline": "7baf8dfbc27168708ed4cf504285a1838d7345f6",
   "product": "Manuel Academy Study Tutor V2",
-  "provenanceVersion": 2,
-  "reconvergence": {
-    "branch": "mac/tutor-v2-w1-reconvergence-r2",
-    "session": "STUDY-TUTOR-V2-W1-09R2",
-    "startingRepairSha": "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
-    "status": "CANDIDATE_REQUIRES_W1_10R2_INDEPENDENT_REREVIEW"
+  "provenanceVersion": 3,
+  "reconvergenceHistory": {
+    "W1_09R2": {
+      "acceptedAsWave1Release": false,
+      "branch": "origin/mac/tutor-v2-w1-reconvergence-r2",
+      "independentRuling": "W1_10R2_HOLD_LEXICAL_ANTI_ANSWER_BOUNDARY",
+      "sha": "2c8716ed5db5bb824fc92533615295f0b163f7b2"
+    },
+    "W1_09R3": {
+      "branch": "mac/tutor-v2-w1-reconvergence-r3",
+      "session": "STUDY-TUTOR-V2-W1-09R3",
+      "startingRepairSha": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
+      "status": "CANDIDATE_REQUIRES_W1_10R3_INDEPENDENT_REREVIEW"
+    }
   },
   "recordedW1_08IntegrationCommits": {
     "W1_03": "4cf4bda1c99d0490136f3e53d9c412050166b9ff",
@@ -53,7 +66,9 @@
     "ownershipAdjudicationPresent": true,
     "providerBoundaryRepairPresent": true,
     "providerMutationGatesPermanent": true,
-    "releaseSecurityOwnershipCrossed": false
+    "releaseSecurityOwnershipCrossed": false,
+    "structuralAntiAnswerGatesPermanent": true,
+    "structuralAntiAnswerRepairPresent": true
   },
   "wave": "Wave 1 Foundation"
 }

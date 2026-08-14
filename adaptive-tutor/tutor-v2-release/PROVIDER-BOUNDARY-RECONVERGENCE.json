@@ -1,5 +1,5 @@
 {
-  "evidenceVersion": 1,
+  "evidenceVersion": 2,
   "failedW1_09Sha": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
   "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
   "permanentHardGates": [
@@ -20,6 +20,7 @@
   "permanentHardGateTest": "tests/tutor-v2-convergence/provider-boundary-adversarial.test.ts",
   "providerBoundaryRepairSha": "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
   "softScoreCompensationAllowed": false,
+  "structuralAntiAnswerRepairSha": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
   "structuralRulings": {
     "postProviderPolicyUsesImmutableStudyAuthority": true,
     "providerInputDeepDetachedAndFrozen": true,
@@ -27,7 +28,10 @@
     "providerReceivesStudyAuthorityContext": false,
     "responseInteractionBindingRequired": true
   },
-  "w1_09R2Status": "CANDIDATE_REQUIRES_W1_10R2_INDEPENDENT_REREVIEW",
+  "w1_09R2Sha": "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+  "w1_09R3Status": "CANDIDATE_REQUIRES_W1_10R3_INDEPENDENT_REREVIEW",
+  "w1_10R2Blocker": "ACTIVE_ASSESSMENT_ANSWER_SECURITY_DEPENDED_ON_FINITE_LEXICAL_PATTERNS",
+  "w1_10R2Ruling": "HOLD",
   "w1_10Ruling": "HOLD",
   "WAVE_1_COMPLETE": false
 }

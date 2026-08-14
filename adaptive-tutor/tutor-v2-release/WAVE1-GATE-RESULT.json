@@ -3,7 +3,7 @@
   "product": "Manuel Academy Study Tutor V2",
   "wave": "Wave 1 Foundation",
   "foundationGate": "PASS",
-  "finalClassification": "WAVE1_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "finalClassification": "WAVE1_R3_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
   "releaseReady": false,
   "checks": [
     {
@@ -15,26 +15,38 @@
     {
       "name": "canonical-provenance",
       "status": "PASS",
-      "detail": "10/10 pinned remote tips exact, including repair",
+      "detail": "12/12 pinned remote tips exact, including both repairs and R2",
       "command": "git rev-parse origin/mac/tutor-v2-w1-*"
     },
     {
-      "name": "repair-direct-parent",
+      "name": "b1-repair-direct-parent",
       "status": "PASS",
       "detail": "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
       "command": "git rev-parse d7aa9720b8096205acc0b63d21a895d8fc16de6f^"
     },
     {
+      "name": "b2-repair-direct-parent",
+      "status": "PASS",
+      "detail": "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+      "command": "git rev-parse 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a^"
+    },
+    {
       "name": "accepted-lane-tree-equivalence",
       "status": "PASS",
       "detail": "unrepaired W1-04 through W1-07 trees exact",
-      "command": "git diff --quiet <accepted-sha> HEAD -- <lane-paths>"
+      "command": "git diff --quiet <accepted-sha> HEAD -- <unrepaired-lane-paths>"
     },
     {
-      "name": "accepted-repair-tree-equivalence",
+      "name": "accepted-b1-repair-tree-equivalence",
       "status": "PASS",
-      "detail": "repair-owned source and tests exact",
-      "command": "git diff --quiet d7aa9720b8096205acc0b63d21a895d8fc16de6f HEAD -- <repair-paths>"
+      "detail": "provider and bridge repair source exact",
+      "command": "git diff --quiet d7aa9720b8096205acc0b63d21a895d8fc16de6f HEAD -- <b1-repair-paths>"
+    },
+    {
+      "name": "accepted-b2-repair-tree-equivalence",
+      "status": "PASS",
+      "detail": "structural anti-answer repair source and bridge tests exact",
+      "command": "git diff --quiet 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a HEAD -- <b2-repair-paths>"
     },
     {
       "name": "provider-port-structural-boundary",
@@ -46,13 +58,13 @@
       "name": "v2-typecheck",
       "status": "PASS",
       "detail": "strict TypeScript",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-grade-migration-r1/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r3/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit"
     },
     {
       "name": "v2-compile",
       "status": "PASS",
       "detail": "convergence compilation",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-grade-migration-r1/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r3/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json"
     },
     {
       "name": "schema-runtime-parity-artifacts",
@@ -63,13 +75,13 @@
     {
       "name": "release-evidence-artifacts",
       "status": "PASS",
-      "detail": "7 release artifacts exact",
+      "detail": "8 release artifacts exact",
       "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js --check"
     },
     {
       "name": "accepted-v2-slice-tests",
       "status": "PASS",
-      "detail": "112/112 pass; 0 fail; 0 skipped",
+      "detail": "168/168 pass; 0 fail; 0 skipped",
       "command": "node --test scripts/tutor-v2/.dist/core/v2/contracts/contracts.test.js scripts/tutor-v2/.dist/core/v2/providers/testing/provider-port.test.js scripts/tutor-v2/.dist/core/v2/policy/authority/authority.test.js scripts/tutor-v2/.dist/core/v2/policy/grounding/grounding.test.js scripts/tutor-v2/.dist/core/v2/policy/anti-answer/anti-answer.test.js scripts/tutor-v2/.dist/core/v2/policy/refusal/refusal.test.js scripts/tutor-v2/.dist/core/v2/policy/age/profile.test.js scripts/tutor-v2/.dist/core/v2/memory/session-memory.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/evidence/tutor-evidence.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/privacy/provider-context.test.js"
     },
     {
@@ -85,16 +97,76 @@
       "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js"
     },
     {
+      "name": "structural-anti-answer-convergence-hard-gate",
+      "status": "PASS",
+      "detail": "53/53 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-explain-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active explain rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-hint-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active hint rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-ask-check-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active ask-check rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-show-example-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active show-example rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-reteach-structural-hard-gate",
+      "status": "PASS",
+      "detail": "3/3 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=structural anti-answer adversarial .*active reteach rejects scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-phrase-matrix-hard-gate",
+      "status": "PASS",
+      "detail": "20/20 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-09R3 phrase matrix scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "active-assessment-structured-controls-regression",
+      "status": "PASS",
+      "detail": "4/4 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-09R3 structured control scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "answer-bearing-field-hard-gate",
+      "status": "PASS",
+      "detail": "1/1 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=answer-bearing structured field scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
+      "name": "completed-review-permission-hard-gate",
+      "status": "PASS",
+      "detail": "2/2 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=W1-09R3 completed review scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
+    },
+    {
       "name": "cross-slice-convergence-tests",
       "status": "PASS",
-      "detail": "55/55 pass; 0 fail; 0 skipped",
-      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js"
+      "detail": "108/108 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js"
     },
     {
       "name": "bridge-typecheck",
       "status": "PASS",
       "detail": "W1-08 bridge compilation",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-grade-migration-r1/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r3/adaptive-tutor/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json"
     },
     {
       "name": "w1-b1-provider-mutation-adversarial",
@@ -103,9 +175,15 @@
       "command": "node --test --test-name-pattern=W1-10 adversarial study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
     },
     {
+      "name": "w1-b2-structural-anti-answer-bridge",
+      "status": "PASS",
+      "detail": "13/13 selected pass; 0 fail",
+      "command": "node --test --test-name-pattern=malicious provider active-assessment|active-assessment structured control|answer-bearing provider field|completed review|provider context excludes protected answer authority study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
+    },
+    {
       "name": "repaired-bridge-regression",
       "status": "PASS",
-      "detail": "87/87 pass; 0 fail; 0 skipped",
+      "detail": "96/96 pass; 0 fail; 0 skipped",
       "command": "node --test study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js"
     },
     {
@@ -124,7 +202,7 @@
       "name": "tutor-core-v0.2-typecheck",
       "status": "PASS",
       "detail": "frozen Core typecheck",
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-grade-migration-r1/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w1-09-reconvergence-r3/adaptive-tutor/node_modules/typescript/bin/tsc -p tsconfig.json --noEmit"
     },
     {
       "name": "tutor-core-v0.2-tests",
@@ -175,10 +253,10 @@
       "command": "npm audit --json (study-engine/runtime)"
     },
     {
-      "name": "w1-09r2-path-ownership",
+      "name": "w1-09r3-path-ownership",
       "status": "PASS",
-      "detail": "17 authored files all convergence-owned",
-      "command": "git diff --name-only d7aa9720b8096205acc0b63d21a895d8fc16de6f HEAD plus git status"
+      "detail": "11 authored files all convergence-owned",
+      "command": "git diff --name-only 9f0b66be0b7f86b2004f05137ef9892d2a3ef09a HEAD plus git status"
     },
     {
       "name": "git-diff-check",

@@ -11,7 +11,9 @@ const repositoryRoot = resolve(tutorRoot, "..");
 const require = createRequire(resolve(tutorRoot, "package.json"));
 const tsc = resolve(dirname(require.resolve("typescript/package.json")), "bin", "tsc");
 const W1_08_SHA = "31d5609527f75a11d9d3017ce0f07b3ec1c99b88";
-const REPAIR_SHA = "d7aa9720b8096205acc0b63d21a895d8fc16de6f";
+const B1_REPAIR_SHA = "d7aa9720b8096205acc0b63d21a895d8fc16de6f";
+const W1_09R2_SHA = "2c8716ed5db5bb824fc92533615295f0b163f7b2";
+const B2_REPAIR_SHA = "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a";
 
 const checks = [];
 let hardFailure = false;
@@ -89,30 +91,39 @@ const refs = {
   "origin/mac/tutor-v2-w1-evidence-privacy-r1": "b93765552d60a88ac7691ca7840dfc2ae3a23e77",
   "origin/mac/tutor-v2-w1-eval-harness-r1": "9b959ab7e8176ebccb4fd3ca7b54bf5584602b35",
   "origin/mac/tutor-v2-w1-study-bridge-r1": W1_08_SHA,
-  "origin/mac/tutor-v2-w1-provider-boundary-repair-r1": REPAIR_SHA,
+  "origin/mac/tutor-v2-w1-provider-boundary-repair-r1": B1_REPAIR_SHA,
+  "origin/mac/tutor-v2-w1-reconvergence-r2": W1_09R2_SHA,
+  "origin/mac/tutor-v2-w1-anti-answer-repair-r2": B2_REPAIR_SHA,
 };
 const remoteMismatches = Object.entries(refs).filter(([ref, expected]) => git(["rev-parse", ref]).stdout.trim() !== expected);
-record("canonical-provenance", remoteMismatches.length === 0 ? "PASS" : "FAIL", remoteMismatches.length === 0 ? "10/10 pinned remote tips exact, including repair" : `${remoteMismatches.length} remote mismatches`, "git rev-parse origin/mac/tutor-v2-w1-*");
+record("canonical-provenance", remoteMismatches.length === 0 ? "PASS" : "FAIL", remoteMismatches.length === 0 ? "12/12 pinned remote tips exact, including both repairs and R2" : `${remoteMismatches.length} remote mismatches`, "git rev-parse origin/mac/tutor-v2-w1-*");
 
-const repairParent = git(["rev-parse", `${REPAIR_SHA}^`]).stdout.trim();
-record("repair-direct-parent", repairParent === "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d" ? "PASS" : "FAIL", repairParent, `git rev-parse ${REPAIR_SHA}^`);
+const b1Parent = git(["rev-parse", `${B1_REPAIR_SHA}^`]).stdout.trim();
+record("b1-repair-direct-parent", b1Parent === "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d" ? "PASS" : "FAIL", b1Parent, `git rev-parse ${B1_REPAIR_SHA}^`);
+const b2Parent = git(["rev-parse", `${B2_REPAIR_SHA}^`]).stdout.trim();
+record("b2-repair-direct-parent", b2Parent === W1_09R2_SHA ? "PASS" : "FAIL", b2Parent, `git rev-parse ${B2_REPAIR_SHA}^`);
 
 const laneTrees = [
-  ["befb91bb2321aec0449d2d8e613619a592feb76c", ["adaptive-tutor/core/v2/policy/authority", "adaptive-tutor/core/v2/policy/grounding", "adaptive-tutor/core/v2/policy/anti-answer", "adaptive-tutor/core/v2/policy/refusal"]],
+  ["befb91bb2321aec0449d2d8e613619a592feb76c", ["adaptive-tutor/core/v2/policy/authority", "adaptive-tutor/core/v2/policy/grounding", "adaptive-tutor/core/v2/policy/refusal"]],
   ["4a8bded7bc0caf5ff647dae814e011d20c8ae5bf", ["adaptive-tutor/core/v2/policy/age", "adaptive-tutor/core/v2/memory"]],
   ["b93765552d60a88ac7691ca7840dfc2ae3a23e77", ["adaptive-tutor/study-engine/tutor-v2/evidence", "adaptive-tutor/study-engine/tutor-v2/privacy"]],
   ["9b959ab7e8176ebccb4fd3ca7b54bf5584602b35", ["adaptive-tutor/evals/v2/framework", "adaptive-tutor/evals/v2/corpus/foundation"]],
 ];
 const treeFailures = laneTrees.filter(([sha, paths]) => git(["diff", "--quiet", sha, "HEAD", "--", ...paths]).status !== 0);
-record("accepted-lane-tree-equivalence", treeFailures.length === 0 ? "PASS" : "FAIL", treeFailures.length === 0 ? "unrepaired W1-04 through W1-07 trees exact" : `${treeFailures.length} lane tree mismatches`, "git diff --quiet <accepted-sha> HEAD -- <lane-paths>");
+record("accepted-lane-tree-equivalence", treeFailures.length === 0 ? "PASS" : "FAIL", treeFailures.length === 0 ? "unrepaired W1-04 through W1-07 trees exact" : `${treeFailures.length} lane tree mismatches`, "git diff --quiet <accepted-sha> HEAD -- <unrepaired-lane-paths>");
 
-const repairPaths = [
+const b1RepairPaths = [
   "adaptive-tutor/core/v2/providers",
   "adaptive-tutor/study-engine/bridges/tutor-v2",
+];
+const b1RepairTreeExact = git(["diff", "--quiet", B1_REPAIR_SHA, "HEAD", "--", ...b1RepairPaths]).status === 0;
+record("accepted-b1-repair-tree-equivalence", b1RepairTreeExact ? "PASS" : "FAIL", b1RepairTreeExact ? "provider and bridge repair source exact" : "B1 repair-owned source drifted", `git diff --quiet ${B1_REPAIR_SHA} HEAD -- <b1-repair-paths>`);
+const b2RepairPaths = [
+  "adaptive-tutor/core/v2/policy/anti-answer",
   "adaptive-tutor/study-engine/tests/tutor-v2-bridge",
 ];
-const repairTreeExact = git(["diff", "--quiet", REPAIR_SHA, "HEAD", "--", ...repairPaths]).status === 0;
-record("accepted-repair-tree-equivalence", repairTreeExact ? "PASS" : "FAIL", repairTreeExact ? "repair-owned source and tests exact" : "repair-owned tree drifted", `git diff --quiet ${REPAIR_SHA} HEAD -- <repair-paths>`);
+const b2RepairTreeExact = git(["diff", "--quiet", B2_REPAIR_SHA, "HEAD", "--", ...b2RepairPaths]).status === 0;
+record("accepted-b2-repair-tree-equivalence", b2RepairTreeExact ? "PASS" : "FAIL", b2RepairTreeExact ? "structural anti-answer repair source and bridge tests exact" : "B2 repair-owned tree drifted", `git diff --quiet ${B2_REPAIR_SHA} HEAD -- <b2-repair-paths>`);
 
 const providerContractsSource = await readFile(resolve(tutorRoot, "core/v2/providers/ports/contracts.ts"), "utf8");
 const sharedV2Source = await readFile(resolve(tutorRoot, "core/v2/index.ts"), "utf8");
@@ -124,7 +135,7 @@ record("provider-port-structural-boundary", narrowProviderPort ? "PASS" : "FAIL"
 requireSuccess("v2-typecheck", process.execPath, [tsc, "-p", "scripts/tutor-v2/tsconfig.json", "--noEmit"], "strict TypeScript", { cwd: tutorRoot });
 requireSuccess("v2-compile", process.execPath, [tsc, "-p", "scripts/tutor-v2/tsconfig.json"], "convergence compilation", { cwd: tutorRoot });
 requireSuccess("schema-runtime-parity-artifacts", process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-schemas.js", "--check"], "23 schemas + inventory exact", { cwd: tutorRoot });
-requireSuccess("release-evidence-artifacts", process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js", "--check"], "7 release artifacts exact", { cwd: tutorRoot });
+requireSuccess("release-evidence-artifacts", process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js", "--check"], "8 release artifacts exact", { cwd: tutorRoot });
 
 const dist = "scripts/tutor-v2/.dist";
 requireTap("accepted-v2-slice-tests", [
@@ -138,23 +149,41 @@ requireTap("accepted-v2-slice-tests", [
   `${dist}/core/v2/memory/session-memory.test.js`,
   `${dist}/study-engine/tutor-v2/evidence/tutor-evidence.test.js`,
   `${dist}/study-engine/tutor-v2/privacy/provider-context.test.js`,
-], { tests: 112, pass: 112 });
+], { tests: 168, pass: 168 });
 requireTap("provider-port-regression", [
   `${dist}/core/v2/providers/testing/provider-port.test.js`,
 ], { tests: 12, pass: 12 });
 requireTap("provider-mutation-convergence-hard-gate", [
   `${dist}/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js`,
 ], { tests: 13, pass: 13 });
+const structuralAntiAnswerTest = `${dist}/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js`;
+requireTap("structural-anti-answer-convergence-hard-gate", [
+  structuralAntiAnswerTest,
+], { tests: 53, pass: 53 });
+for (const kind of ["explain", "hint", "ask-check", "show-example", "reteach"]) {
+  requireSelectedTap(
+    `active-assessment-${kind}-structural-hard-gate`,
+    [structuralAntiAnswerTest],
+    `structural anti-answer adversarial .*active ${kind} rejects`,
+    { selected: 3 },
+  );
+}
+requireSelectedTap("active-assessment-phrase-matrix-hard-gate", [structuralAntiAnswerTest], "W1-09R3 phrase matrix", { selected: 20 });
+requireSelectedTap("active-assessment-structured-controls-regression", [structuralAntiAnswerTest], "W1-09R3 structured control", { selected: 4 });
+requireSelectedTap("answer-bearing-field-hard-gate", [structuralAntiAnswerTest], "answer-bearing structured field", { selected: 1 });
+requireSelectedTap("completed-review-permission-hard-gate", [structuralAntiAnswerTest], "W1-09R3 completed review", { selected: 2 });
 requireTap("cross-slice-convergence-tests", [
   `${dist}/tests/tutor-v2-convergence/composition.test.js`,
   `${dist}/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js`,
   `${dist}/tests/tutor-v2-convergence/schema-parity.test.js`,
-], { tests: 55, pass: 55 });
+  structuralAntiAnswerTest,
+], { tests: 108, pass: 108 });
 
 requireSuccess("bridge-typecheck", process.execPath, [tsc, "-p", "study-engine/tests/tutor-v2-bridge/tsconfig.json"], "W1-08 bridge compilation", { cwd: tutorRoot });
 const bridgeTest = "study-engine/tests/tutor-v2-bridge/.test-dist/study-engine/tests/tutor-v2-bridge/integration.test.js";
 requireSelectedTap("w1-b1-provider-mutation-adversarial", [bridgeTest], "W1-10 adversarial", { selected: 12 });
-requireTap("repaired-bridge-regression", [bridgeTest], { tests: 87, pass: 87 });
+requireSelectedTap("w1-b2-structural-anti-answer-bridge", [bridgeTest], "malicious provider active-assessment|active-assessment structured control|answer-bearing provider field|completed review|provider context excludes protected answer authority", { selected: 13 });
+requireTap("repaired-bridge-regression", [bridgeTest], { tests: 96, pass: 96 });
 
 const evalTests = requireSuccess("evaluation-harness-build-test", "npm", ["--prefix", "evals/v2/framework", "test"], "harness self-tests", { cwd: tutorRoot });
 const evalCounts = tapCounts(`${evalTests.stdout}${evalTests.stderr}`);
@@ -245,10 +274,10 @@ try {
 
 const allowed = (path) => path === "adaptive-tutor/core/v2/index.ts" || path === "adaptive-tutor/core/index.ts" || path === "adaptive-tutor/study-engine/tutor-v2/index.ts" || path === "adaptive-tutor/package.json" || path === "adaptive-tutor/MANIFEST.json" || path.startsWith("adaptive-tutor/json-schema/v2/") || path.startsWith("adaptive-tutor/scripts/tutor-v2/") || path.startsWith("adaptive-tutor/tutor-v2-release/") || path.startsWith("adaptive-tutor/tests/tutor-v2-convergence/") || path.startsWith("docs/study-tutor-v2/wave1/");
 const statusPaths = git(["status", "--porcelain=v1", "--untracked-files=all"]).stdout.split("\n").filter(Boolean).map((line) => line.slice(3));
-const committedPaths = git(["diff", "--name-only", REPAIR_SHA, "HEAD"]).stdout.split("\n").filter(Boolean);
+const committedPaths = git(["diff", "--name-only", B2_REPAIR_SHA, "HEAD"]).stdout.split("\n").filter(Boolean);
 const authoredPaths = [...new Set([...committedPaths, ...statusPaths])];
 const ownershipViolations = authoredPaths.filter((path) => !allowed(path));
-record("w1-09r2-path-ownership", ownershipViolations.length === 0 ? "PASS" : "FAIL", ownershipViolations.length === 0 ? `${authoredPaths.length} authored files all convergence-owned` : ownershipViolations.join(", "), `git diff --name-only ${REPAIR_SHA} HEAD plus git status`);
+record("w1-09r3-path-ownership", ownershipViolations.length === 0 ? "PASS" : "FAIL", ownershipViolations.length === 0 ? `${authoredPaths.length} authored files all convergence-owned` : ownershipViolations.join(", "), `git diff --name-only ${B2_REPAIR_SHA} HEAD plus git status`);
 const diffCheck = git(["diff", "--check"]);
 record("git-diff-check", diffCheck.status === 0 ? "PASS" : "FAIL", diffCheck.status === 0 ? "no whitespace errors" : diffCheck.stdout.trim(), "git diff --check");
 
@@ -256,8 +285,8 @@ const inherited = checks.some((check) => check.status === "INHERITED_FINDING" ||
 const finalClassification = hardFailure
   ? "WAVE1_HOLD"
   : inherited
-    ? "WAVE1_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
-    : "WAVE1_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW";
+    ? "WAVE1_R3_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
+    : "WAVE1_R3_CANDIDATE_READY_FOR_FINAL_REREVIEW";
 const result = {
   resultVersion: 1,
   product: "Manuel Academy Study Tutor V2",

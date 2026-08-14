@@ -56,7 +56,7 @@ if (evaluation.classification !== "FOUNDATION_GATE_PASS" || evaluation.releaseRe
 }
 
 const provenance = {
-  provenanceVersion: 2,
+  provenanceVersion: 3,
   product: "Manuel Academy Study Tutor V2",
   wave: "Wave 1 Foundation",
   immutableLearnerBaseline: "7baf8dfbc27168708ed4cf504285a1838d7345f6",
@@ -84,12 +84,25 @@ const provenance = {
       directParent: "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
       branch: "origin/mac/tutor-v2-w1-provider-boundary-repair-r1",
     },
+    STRUCTURAL_ANTI_ANSWER_REPAIR: {
+      sha: "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
+      directParent: "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+      branch: "origin/mac/tutor-v2-w1-anti-answer-repair-r2",
+    },
   },
-  reconvergence: {
-    session: "STUDY-TUTOR-V2-W1-09R2",
-    branch: "mac/tutor-v2-w1-reconvergence-r2",
-    startingRepairSha: "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
-    status: "CANDIDATE_REQUIRES_W1_10R2_INDEPENDENT_REREVIEW",
+  reconvergenceHistory: {
+    W1_09R2: {
+      sha: "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+      branch: "origin/mac/tutor-v2-w1-reconvergence-r2",
+      independentRuling: "W1_10R2_HOLD_LEXICAL_ANTI_ANSWER_BOUNDARY",
+      acceptedAsWave1Release: false,
+    },
+    W1_09R3: {
+      session: "STUDY-TUTOR-V2-W1-09R3",
+      branch: "mac/tutor-v2-w1-reconvergence-r3",
+      startingRepairSha: "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
+      status: "CANDIDATE_REQUIRES_W1_10R3_INDEPENDENT_REREVIEW",
+    },
   },
   recordedW1_08IntegrationCommits: {
     W1_03: "4cf4bda1c99d0490136f3e53d9c412050166b9ff",
@@ -110,7 +123,9 @@ const provenance = {
     acceptedLaneTreesEquivalent: true,
     ownershipAdjudicationPresent: true,
     providerBoundaryRepairPresent: true,
+    structuralAntiAnswerRepairPresent: true,
     providerMutationGatesPermanent: true,
+    structuralAntiAnswerGatesPermanent: true,
     releaseSecurityOwnershipCrossed: false,
   },
 };
@@ -131,7 +146,7 @@ const evaluationSummary = {
 };
 
 const status = {
-  statusVersion: 2,
+  statusVersion: 3,
   WAVE1_FOUNDATION_ONLY: true,
   STUDY_ENGINE_REMAINS_AUTHORITY: true,
   STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED: true,
@@ -142,6 +157,8 @@ const status = {
   LIVE_MODEL_COMMERCIAL_CERTIFICATION: false,
   PROVIDER_RECEIVES_STUDY_AUTHORITY: false,
   POST_PROVIDER_POLICY_USES_IMMUTABLE_STUDY_AUTHORITY: true,
+  ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED: false,
+  ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL: true,
   WAVE_1_COMPLETE: false,
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
   NOT_AUTHORIZED_FOR_PRODUCTION_DEPLOYMENT: true,
@@ -153,11 +170,15 @@ const status = {
 };
 
 const providerBoundaryReconvergence = {
-  evidenceVersion: 1,
+  evidenceVersion: 2,
   failedW1_09Sha: "16a86d2f5364ade5744bbe4dc5b7f8b82f396a1d",
   w1_10Ruling: "HOLD",
   providerBoundaryRepairSha: "d7aa9720b8096205acc0b63d21a895d8fc16de6f",
-  w1_09R2Status: "CANDIDATE_REQUIRES_W1_10R2_INDEPENDENT_REREVIEW",
+  w1_09R2Sha: "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+  w1_10R2Ruling: "HOLD",
+  w1_10R2Blocker: "ACTIVE_ASSESSMENT_ANSWER_SECURITY_DEPENDED_ON_FINITE_LEXICAL_PATTERNS",
+  structuralAntiAnswerRepairSha: "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
+  w1_09R3Status: "CANDIDATE_REQUIRES_W1_10R3_INDEPENDENT_REREVIEW",
   structuralRulings: {
     providerPortAcceptsProviderExecutionRequestOnly: true,
     providerReceivesStudyAuthorityContext: false,
@@ -186,10 +207,46 @@ const providerBoundaryReconvergence = {
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
 };
 
+const antiAnswerReconvergence = {
+  evidenceVersion: 1,
+  w1_09R2Sha: "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+  w1_10R2Ruling: "HOLD",
+  w1_10R2BypassPhrases: [
+    "Use 4 as the response.",
+    "Put 4 in the box.",
+    "Your response should be 4.",
+  ],
+  structuralAntiAnswerRepairSha: "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
+  structuralRule: {
+    phase: "active-graded-or-mastery-check",
+    rejectedProviderFreeFormActions: ["explain", "hint", "ask-check", "show-example", "reteach"],
+    eligibleStructuredControlActions: ["check-prerequisite", "suggest-break", "escalate", "return-to-lesson"],
+    lexicalChecksAreSecurityBoundary: false,
+    answerKeyProvidedToProviderOrTutor: false,
+  },
+  permanentHardGateTest: "tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.ts",
+  counts: {
+    structuralActionProseAttacks: 15,
+    phraseMatrix: 20,
+    fullStructuralAntiAnswerSuite: 53,
+  },
+  regressions: {
+    instructionOrPracticeFreeFormActionsFunctional: true,
+    nonGradedReviewFreeFormActionsFunctional: true,
+    completedReviewRemainsStudyAuthorized: true,
+    structuredControlsNotRejectedSolelyByActivePhase: true,
+  },
+  ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED: false,
+  ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL: true,
+  WAVE_1_COMPLETE: false,
+  FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
+};
+
 const outputs = new Map<string, string>([
   ["PROVENANCE.json", serialize(provenance)],
   ["FOUNDATION-EVALUATION.json", serialize(evaluationSummary)],
   ["PROVIDER-BOUNDARY-RECONVERGENCE.json", serialize(providerBoundaryReconvergence)],
+  ["STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json", serialize(antiAnswerReconvergence)],
   ["STATUS.json", serialize(status)],
 ]);
 const releaseChecksums = Object.fromEntries(
@@ -224,7 +281,12 @@ const manifest = {
   },
   tutorActionVocabulary: TUTOR_ACTION_KINDS,
   scenarioCount: evaluation.totalScenarios,
-  convergenceProviderMutationScenarioCount: providerBoundaryReconvergence.permanentHardGates.length,
+  convergenceTestCounts: {
+    providerBoundaryAdversarial: providerBoundaryReconvergence.permanentHardGates.length,
+    structuralAntiAnswerAdversarial: antiAnswerReconvergence.counts.fullStructuralAntiAnswerSuite,
+    phraseMatrix: antiAnswerReconvergence.counts.phraseMatrix,
+    totalConvergence: 108,
+  },
   evaluationResult: {
     passed: evaluation.passed,
     failed: evaluation.failed,
@@ -243,6 +305,13 @@ const manifest = {
     w1_10Ruling: providerBoundaryReconvergence.w1_10Ruling,
     providerBoundaryRepairSha: providerBoundaryReconvergence.providerBoundaryRepairSha,
     reconvergenceEvidence: "PROVIDER-BOUNDARY-RECONVERGENCE.json",
+    finalIndependentRereviewRequired: true,
+  },
+  structuralAntiAnswerHistory: {
+    w1_09R2Sha: antiAnswerReconvergence.w1_09R2Sha,
+    w1_10R2Ruling: antiAnswerReconvergence.w1_10R2Ruling,
+    structuralAntiAnswerRepairSha: antiAnswerReconvergence.structuralAntiAnswerRepairSha,
+    reconvergenceEvidence: "STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json",
     finalIndependentRereviewRequired: true,
   },
   staticFallback: "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",

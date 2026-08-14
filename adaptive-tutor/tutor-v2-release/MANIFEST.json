@@ -1,4 +1,6 @@
 {
+  "ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL": true,
+  "ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED": false,
   "authority": "Study Engine is the sole authoritative state owner. Tutor output is proposal-only and requires Study validation.",
   "checksums": "CHECKSUMS.json",
   "COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE": true,
@@ -10,7 +12,12 @@
     "compatibilityId": "manuel-academy.study-tutor-v2.contracts.v2",
     "contractVersion": "2.0.0"
   },
-  "convergenceProviderMutationScenarioCount": 13,
+  "convergenceTestCounts": {
+    "phraseMatrix": 20,
+    "providerBoundaryAdversarial": 13,
+    "structuralAntiAnswerAdversarial": 53,
+    "totalConvergence": 108
+  },
   "evaluationResult": {
     "classification": "FOUNDATION_GATE_PASS",
     "failed": 0,
@@ -19,7 +26,7 @@
   },
   "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
   "gate": {
-    "finalClassification": "WAVE1_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+    "finalClassification": "WAVE1_R3_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
     "foundationGate": "PASS",
     "releaseReady": false
   },
@@ -155,6 +162,8 @@
   "PRODUCTION_DEPLOY_AUTHORIZED": false,
   "PRODUCTION_WIRING_ENABLED": false,
   "productionStatus": {
+    "ACTIVE_ASSESSMENT_ANSWER_SECURITY_IS_STRUCTURAL": true,
+    "ACTIVE_ASSESSMENT_PROVIDER_FREE_FORM_PROSE_ALLOWED": false,
     "COMMERCIAL_WEB_SECURITY_CONVERGENCE_REMAINS_SEPARATE": true,
     "FINAL_INDEPENDENT_REREVIEW_REQUIRED": true,
     "HOSTED_SUPABASE_CONTACTED_BY_WAVE1": false,
@@ -170,7 +179,7 @@
     "PRODUCTION_WIRING_ENABLED": false,
     "PROVIDER_RECEIVES_STUDY_AUTHORITY": false,
     "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
-    "statusVersion": 2,
+    "statusVersion": 3,
     "STUDY_ENGINE_REMAINS_AUTHORITY": true,
     "WAVE_1_COMPLETE": false,
     "WAVE1_FOUNDATION_ONLY": true
@@ -199,7 +208,14 @@
   "selfReferencePolicy": "MANIFEST.json and CHECKSUMS.json do not checksum themselves; the final W1-09 Git SHA is reported after commit.",
   "STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED": true,
   "staticFallback": "Study-approved reviewed static curriculum fallback is required for provider and policy failure paths.",
-  "statusVersion": 2,
+  "statusVersion": 3,
+  "structuralAntiAnswerHistory": {
+    "finalIndependentRereviewRequired": true,
+    "reconvergenceEvidence": "STRUCTURAL-ANTI-ANSWER-RECONVERGENCE.json",
+    "structuralAntiAnswerRepairSha": "9f0b66be0b7f86b2004f05137ef9892d2a3ef09a",
+    "w1_09R2Sha": "2c8716ed5db5bb824fc92533615295f0b163f7b2",
+    "w1_10R2Ruling": "HOLD"
+  },
   "STUDY_ENGINE_REMAINS_AUTHORITY": true,
   "tutorActionVocabulary": [
     "explain",
