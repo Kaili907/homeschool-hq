@@ -203,6 +203,14 @@ def build() -> None:
             "emptyMasteryAfter": 0,
             "emptyIndependentPracticeAfter": 0,
         },
+        "grade3RoundingSampleR1": {
+            "lessonId": "ma-g3-mathematics-u01-l02",
+            "scope": "one active Grade 3 lesson",
+            "source": "evidence/oracle-sources/grades-03-04/src/g34/grade3RoundingSampleR1.ts",
+            "generator": "evidence/oracle-sources/grades-03-04/tooling/generateGrade3RoundingSampleR1.ts",
+            "directorEvidence": "docs/curriculum-quality/elementary-math/sample-r1/G3_ROUNDING_SAMPLE_R1.md",
+            "admissionChanged": False,
+        },
         "inputs": INPUTS,
         "inputTrees": INPUT_TREES,
         "gateH3": {

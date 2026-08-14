@@ -7,6 +7,10 @@ import type { SourceLesson } from './lessonSources.ts'
 import { hasEquivalentDistractor } from './numericForm.ts'
 import { createRng } from './rng.ts'
 import { solutionReasoningFor } from './solutionReasoning.ts'
+import {
+  emitGrade3RoundingSampleR1,
+  GRADE3_ROUNDING_SAMPLE_R1_LESSON_ID,
+} from './g34/grade3RoundingSampleR1.ts'
 import type {
   AnswerKey,
   AnswerKeyEntry,
@@ -82,6 +86,9 @@ export interface EmittedLesson {
 }
 
 export function emitLesson(lesson: SourceLesson): EmittedLesson {
+  if (lesson.ref.lessonId === GRADE3_ROUNDING_SAMPLE_R1_LESSON_ID) {
+    return emitGrade3RoundingSampleR1(lesson)
+  }
   const blueprint = blueprintFor(lesson.ref.phase)
   const bank = unitBankFor(lesson.ref.grade, lesson.ref.unitNumber)
 
