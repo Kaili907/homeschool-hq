@@ -39,7 +39,8 @@ const ALLOWED_KEYS = new Set<string>([
   'eventRef','semanticKey','event','occurredAt','payload','proposalRef','route','pinIncluded','bearerIncluded',
   'rawLearnerResponseIncluded','rawTutorConversationIncluded','rawAudioIncluded','inferenceIncluded',
   'adultAnswerAuthorityIncluded','answerMaterialIncluded','pausedAt','resumedAt','pausedSeconds','resumeSegmentRef',
-  'totalSegments','lastSegmentRef','activeSeconds','progress','pause',
+  'totalSegments','lastSegmentRef','activeSeconds','activeSecondsByDate','date','progress','pause',
+  'instructionalSession','activeSince','inactiveAt','endedAt',
   // Exact legacy R2 RPC import/write vocabulary. These fields remain only so
   // the lossless authority checkpoint can travel through the already-installed
   // four-RPC surface; the canonical checkpoint parser still supplies the
