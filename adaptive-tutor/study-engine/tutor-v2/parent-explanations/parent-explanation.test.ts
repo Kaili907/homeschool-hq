@@ -303,6 +303,43 @@ test("unknown well-formed reason codes fail closed", () => {
   });
 });
 
+test("pending copy is proposal-safe and legacy applied-state reasons are closed", () => {
+  const explanation = accepted("tutor-unavailable-static-fallback-proposed");
+  assert.equal(explanation.title, "Reviewed fallback proposed");
+  assert.equal(
+    explanation.explanation,
+    "Tutor was unavailable, so reviewed static guidance was proposed for Study to consider for this step.",
+  );
+  assert.match(explanation.explanation, /proposed|available/i);
+  assert.doesNotMatch(
+    `${explanation.title} ${explanation.explanation}`,
+    /Study (?:used|applied|changed|assigned|performed|completed)\b/i,
+  );
+
+  for (const legacyReason of [
+    "hint-level-changed",
+    "tutor-unavailable-static-fallback-used",
+  ]) {
+    const legacy = structuredClone(baseRequest);
+    legacy.recommendation.reasonCode = legacyReason;
+    assert.deepEqual(explainTutorRecommendationForParentHub(legacy), {
+      status: "rejected",
+      code: "PARENT_EXPLANATION_UNKNOWN_REASON",
+    });
+  }
+});
+
+test("all reviewed Parent Why copy avoids Study applied-state claims", () => {
+  for (const reasonCode of PARENT_EXPLANATION_REASON_CODES) {
+    const copy = REVIEWED_PARENT_EXPLANATION_COPY[reasonCode];
+    assert.doesNotMatch(
+      `${copy.title} ${copy.explanation}`,
+      /Study (?:used|applied|changed|assigned|performed|completed)\b/i,
+      reasonCode,
+    );
+  }
+});
+
 test("missing or malformed provenance is rejected", () => {
   const missing = structuredClone(baseRequest) as Record<string, unknown>;
   delete (missing.recommendation as Record<string, unknown>).provenance;
@@ -380,7 +417,7 @@ test("result schema rejects arbitrary sensitive copy substitutions", () => {
     const result = {
       status: "accepted",
       value: structuredClone(
-        accepted("hint-level-changed"),
+        accepted("hint-level-change-proposed"),
       ) as Record<string, unknown>,
     };
     result.value.explanation = unreviewedCopy;
@@ -427,7 +464,7 @@ test("result schema binds each reviewed copy to its reason code", () => {
   const mismatched = {
     status: "accepted",
     value: {
-      ...structuredClone(accepted("hint-level-changed")),
+      ...structuredClone(accepted("hint-level-change-proposed")),
       ...REVIEWED_PARENT_EXPLANATION_COPY["reteach-suggested"],
     },
   };
