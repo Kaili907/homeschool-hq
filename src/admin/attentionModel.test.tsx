@@ -100,16 +100,38 @@ function configuration(resolution: 'saved' | 'fallback' | 'error'): AdminRuntime
   }
 }
 
-function learnerSnapshot(openReviewCount: number, needsDadCount: number, secret = ''): LearnerAnalyticsSnapshot {
+function learnerSnapshot(
+  openReviewCount: number,
+  needsDadCount: number,
+  overrides: {
+    readonly displayName?: string
+    readonly learnerRef?: string
+    readonly nominalGrade?: string
+    readonly workingLevels?: readonly {
+      readonly subject: string
+      readonly subjectLabel: string
+      readonly level: string
+      readonly source: 'explicit' | 'nominal-grade'
+    }[]
+    readonly extra?: Record<string, unknown>
+  } = {},
+): LearnerAnalyticsSnapshot {
+  const learner = {
+    learnerRef: overrides.learnerRef ?? 'p1',
+    displayName: overrides.displayName ?? 'Learner One',
+    nominalGrade: overrides.nominalGrade ?? '5',
+    workingLevels: overrides.workingLevels ?? [],
+    openReviewCount,
+    needsDadCount,
+    study: {
+      status: 'available',
+      value: { scheduled: 0, completed: 0, resumeNeeded: 0, active: 0, pendingReviews: openReviewCount },
+    },
+    ...(overrides.extra ?? {}),
+  }
   return {
     observedAt: NOW,
-    learners: [{
-      learnerRef: 'p1',
-      displayName: secret || 'Learner One',
-      openReviewCount,
-      needsDadCount,
-      study: { status: 'available', value: { scheduled: 0, completed: 0, resumeNeeded: 0, active: 0, pendingReviews: openReviewCount } },
-    }],
+    learners: [learner],
     details: {},
   } as unknown as LearnerAnalyticsSnapshot
 }
@@ -209,15 +231,92 @@ describe('Admin Attention Center composition', () => {
     }))
   })
 
-  it('creates a privacy-minimized learner operational flag', () => {
+  it('presents a bounded learner title with display name and nominal grade, without leaking prohibited fields', () => {
+    const prohibited = 'PRIVATE JOURNAL REASON'
     const model = buildAdminAttentionCenter(['learners:read'], {
-      learners: { status: 'ready', projection: learnerSnapshot(2, 1, 'PRIVATE LEARNER NAME') },
+      learners: {
+        status: 'ready',
+        projection: learnerSnapshot(2, 1, {
+          displayName: 'Ada',
+          nominalGrade: '5',
+          extra: {
+            journal: prohibited,
+            tutorFlagReason: prohibited,
+            conversation: prohibited,
+          },
+        }),
+      },
     })
     expect(model.items[0]).toEqual(expect.objectContaining({
-      itemType: 'learner-operational-flag', reference: 'p1', severity: 'high',
+      itemType: 'learner-operational-flag',
+      reference: 'p1',
+      title: 'Ada · Grade 5',
+      severity: 'high',
       destination: '/academy/admin/learners/p1',
     }))
-    expect(JSON.stringify(model)).not.toContain('PRIVATE LEARNER NAME')
+    expect(JSON.stringify(model)).not.toContain(prohibited)
+  })
+
+  it.each(['3', '4', '5', '7', '8', '9', '10', '11', '12'])('shows nominal grade %s in the learner attention title', (grade) => {
+    const model = buildAdminAttentionCenter(['learners:read'], {
+      learners: {
+        status: 'ready',
+        projection: learnerSnapshot(1, 0, { displayName: 'Test', nominalGrade: grade }),
+      },
+    })
+    expect(model.items[0]?.title).toBe(`Test · Grade ${grade}`)
+    const markup = renderToStaticMarkup(<AdminAttentionCenter state={{ status: 'ready', model }} />)
+    expect(markup).toContain(`Test · Grade ${grade}`)
+  })
+
+  it('accepts expanded learner references that do not match the historical p1-p5 profile pattern', () => {
+    const model = buildAdminAttentionCenter(['learners:read'], {
+      learners: {
+        status: 'ready',
+        projection: learnerSnapshot(2, 0, {
+          learnerRef: 'learner:household-42:emma',
+          displayName: 'Emma',
+          nominalGrade: '11',
+        }),
+      },
+    })
+    expect(model.items).toHaveLength(1)
+    expect(model.items[0]).toEqual(expect.objectContaining({
+      itemType: 'learner-operational-flag',
+      reference: 'learner:household-42:emma',
+      title: 'Emma · Grade 11',
+      destination: '/academy/admin/learners/learner:household-42:emma',
+    }))
+  })
+
+  it('rejects an unsafe learner reference at the presentation boundary without crashing', () => {
+    const model = buildAdminAttentionCenter(['learners:read'], {
+      learners: {
+        status: 'ready',
+        projection: learnerSnapshot(1, 0, {
+          learnerRef: 'bad ref with spaces',
+          displayName: 'Should Not Appear',
+        }),
+      },
+    })
+    expect(model.items.filter((item) => item.itemType === 'learner-operational-flag')).toEqual([])
+  })
+
+  it('appends per-subject working level when it differs from the nominal grade', () => {
+    const model = buildAdminAttentionCenter(['learners:read'], {
+      learners: {
+        status: 'ready',
+        projection: learnerSnapshot(1, 0, {
+          displayName: 'Grace',
+          nominalGrade: '5',
+          workingLevels: [
+            { subject: 'mathematics', subjectLabel: 'Math', level: '7', source: 'explicit' },
+            { subject: 'english-language-arts', subjectLabel: 'ELA', level: '5', source: 'nominal-grade' },
+          ],
+        }),
+      },
+    })
+    expect(model.items[0]?.title).toBe('Grace · Grade 5 (working level Math Grade 7)')
   })
 
   it('uses the actual bounded cost-accounting completeness signal', () => {
@@ -357,5 +456,82 @@ describe('Admin Attention Center composition', () => {
     expect(css).toContain('.attention-filters { align-items: stretch; flex-direction: column; }')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
     expect(css).toContain('animation: none')
+  })
+
+  it('renders human item-type labels in place of raw kebab-case identifiers', () => {
+    const model = buildAdminAttentionCenter(['safety:read', 'learners:read'], {
+      safety: { status: 'ready', projection: safety([safetyEvent()]) },
+      learners: { status: 'ready', projection: learnerSnapshot(1, 0) },
+    })
+    const markup = renderToStaticMarkup(<AdminAttentionCenter state={{ status: 'ready', model }} />)
+    expect(markup).toContain('Safety condition')
+    expect(markup).toContain('Learner operational flag')
+    expect(markup).not.toMatch(/>safety-condition\s+\/</)
+    expect(markup).not.toMatch(/>learner-operational-flag\s+\/</)
+  })
+
+  it('prefers each candidate title over the raw reference in the visible card', () => {
+    const model = buildAdminAttentionCenter(['releases:read', 'health:read', 'configuration:read', 'safety:read', 'learners:read', 'costs:read'], {
+      readiness: { status: 'ready', projection: readiness(check('application.build', 'BLOCKED')) },
+      health: { status: 'ready', projection: health({ overallHealth: 'unavailable', overallReasonCodes: ['stale_evidence'] }) },
+      configuration: { status: 'ready', projection: configuration('error') },
+      safety: { status: 'ready', projection: safety([safetyEvent({ eventRef: 'safety:opaque-eventref-xyz' })]) },
+      learners: { status: 'ready', projection: learnerSnapshot(1, 0, { displayName: 'Test', nominalGrade: '7' }) },
+      costs: { status: 'ready', projection: partialCosts() },
+    })
+    const markup = renderToStaticMarkup(<AdminAttentionCenter state={{ status: 'ready', model }} />)
+    expect(markup).toContain('The production build gate')
+    expect(markup).toContain('Overall system health')
+    expect(markup).toContain('Effective runtime configuration')
+    expect(markup).toContain('Safety stop')
+    expect(markup).toContain('Test · Grade 7')
+    expect(markup).toContain('Provider accounting')
+    expect(markup).not.toContain('safety:opaque-eventref-xyz')
+    expect(markup).not.toContain('application.build')
+  })
+
+  it('renders an accessible error state with retry when attention evidence cannot be composed', () => {
+    const withRetry = renderToStaticMarkup(<AdminAttentionCenter state={{ status: 'error' }} onRetry={() => {}} />)
+    expect(withRetry).toContain('role="alert"')
+    expect(withRetry).toContain('Attention evidence could not be composed')
+    expect(withRetry).toContain('No all-clear is shown')
+    expect(withRetry).toContain('Refetch evidence')
+    expect(withRetry).toContain('type="button"')
+
+    const withoutRetry = renderToStaticMarkup(<AdminAttentionCenter state={{ status: 'error' }} />)
+    expect(withoutRetry).toContain('Attention evidence could not be composed')
+    expect(withoutRetry).not.toContain('type="button"')
+  })
+
+  it('composes safety attention items for events tagged with expanded-curriculum grade tokens', () => {
+    const gradeTokenedEvents: SafetyOperationsEventV1[] = [
+      safetyEvent({
+        eventRef: 'safety:grade-10-event',
+        learner: { reference: 'learner:grade-10:beth' },
+      }),
+      safetyEvent({
+        eventRef: 'safety:grade-11-event',
+        learner: { reference: 'learner:grade-11:cara' },
+      }),
+      safetyEvent({
+        eventRef: 'safety:grade-12-event',
+        learner: { reference: 'learner:grade-12:dana' },
+      }),
+    ]
+    const model = buildAdminAttentionCenter(['safety:read'], {
+      safety: { status: 'ready', projection: safety(gradeTokenedEvents) },
+    })
+    const references = model.items
+      .filter((item) => item.itemType === 'safety-condition' && item.reference !== 'unresolved-summary')
+      .map((item) => item.reference)
+    expect(references).toEqual(expect.arrayContaining([
+      'safety:grade-10-event',
+      'safety:grade-11-event',
+      'safety:grade-12-event',
+    ]))
+    const markup = renderToStaticMarkup(<AdminAttentionCenter state={{ status: 'ready', model }} />)
+    for (const ref of references) {
+      expect(markup).toContain(encodeURIComponent(ref))
+    }
   })
 })

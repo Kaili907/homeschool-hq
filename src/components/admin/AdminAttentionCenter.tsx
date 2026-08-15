@@ -5,6 +5,7 @@ import {
   type AdminAttentionCenterModel,
   type AdminAttentionDomain,
   type AdminAttentionItem,
+  type AdminAttentionItemType,
   type AdminAttentionSeverity,
   type AdminAttentionStatus,
 } from '../../admin/attentionModel'
@@ -31,6 +32,16 @@ const SEVERITY_LABELS: Readonly<Record<AdminAttentionSeverity, string>> = {
   high: 'High',
   medium: 'Medium',
   informational: 'Informational',
+}
+
+const ITEM_TYPE_LABELS: Readonly<Record<AdminAttentionItemType, string>> = {
+  'production-readiness-gate': 'Production readiness gate',
+  'system-health-state': 'System health state',
+  'runtime-configuration-state': 'Runtime configuration state',
+  'learner-operational-flag': 'Learner operational flag',
+  'safety-condition': 'Safety condition',
+  'cost-accounting-state': 'Cost accounting state',
+  'evidence-unavailable': 'Evidence unavailable',
 }
 
 export function AdminAttentionCenter({
@@ -197,10 +208,11 @@ function AttentionItemCard({ item, index }: { readonly item: AdminAttentionItem;
           <span className={`attention-severity is-${item.severity}`}>{SEVERITY_LABELS[item.severity]}</span>
           <span>{ADMIN_ATTENTION_DOMAIN_LABELS[item.domain]}</span>
           <span>{statusLabel(item.status)}</span>
+          <span>{ITEM_TYPE_LABELS[item.itemType]}</span>
         </div>
-        <h4 id={headingId}>{item.explanation}</h4>
+        <h4 id={headingId}>{item.title}</h4>
+        <p className="attention-item__explanation">{item.explanation}</p>
         <dl className="attention-item__evidence">
-          <div><dt>Item</dt><dd>{item.itemType} / {item.reference}</dd></div>
           <div><dt>Evidence</dt><dd>{item.evidence.label}</dd></div>
           <div><dt>Observed</dt><dd>{item.evidence.observedAt
             ? <time dateTime={item.evidence.observedAt}>{item.evidence.observedAt}</time>

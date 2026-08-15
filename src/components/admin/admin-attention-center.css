@@ -50,6 +50,7 @@
 .attention-item__evidence div { min-width: 0; }
 .attention-item__evidence dt { color: var(--admin-muted); font-size: .62rem; font-weight: 750; text-transform: uppercase; }
 .attention-item__evidence dd { margin: .15rem 0 0; overflow-wrap: anywhere; color: #43524c; font-size: .7rem; line-height: 1.4; }
+.attention-item__explanation { margin: 0 0 .8rem; color: #43524c; font-size: .78rem; line-height: 1.5; }
 .attention-item__footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .8rem; }
 .attention-item__footer p, .attention-item__retry { margin: 0; color: var(--admin-muted); font-size: .67rem; }
 .attention-item__footer a { flex: 0 0 auto; color: var(--admin-green); font-size: .72rem; font-weight: 800; text-decoration: none; }
