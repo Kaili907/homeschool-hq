@@ -11,65 +11,252 @@
   "focus": "roles and rotations",
   "essentialQuestion": "How can understanding teamwork, leadership, and conflict repair help us explain, decide, create, or solve something that matters?",
   "estimatedMinutes": "35–60",
+  "standards": [
+    "Michigan PE Standards 4",
+    "5"
+  ],
+  "primaryLessonType": "COOPERATIVE_CREATIVE_ACTIVITY",
+  "secondaryLessonTypes": [
+    "SKILL_DEVELOPMENT"
+  ],
+  "lessonFamilyPlan": {
+    "instructionalPurpose": "create or communicate an inclusive activity response",
+    "guidedEmphasis": "Model the role, consent or space rule, inclusive choice, and cue-based feedback separately.",
+    "independentEvidence": "Create a fresh solo sequence or briefing that includes the same access and safety choices.",
+    "evidencePurpose": "communication, inclusion, creative sequence, planning, and completion"
+  },
+  "goal": "I can create or communicate an inclusive activity response for roles and rotations, using a safe standard or equal-credit adapted route, and explain the cue or decision that shows success.",
+  "successOverview": "Success is safe setup, use of the taught Direction, model, choice, feedback. cue or decision, a fresh bounded application, and a short explanation. Credit never depends on body position, speed, athletic talent, comparison, or use of the standard route.",
+  "readinessCheck": [
+    "Turn one multi-action direction into two one-action cues.",
+    "Choose movement, seated, supported, mobility-aid, low-space, no-equipment, or described evidence without explaining why.",
+    "Use the complete described route if guardian permission, safe space, equipment, movement, a partner, or a real setting is unavailable."
+  ],
   "materials": [
     "No specialized equipment is required.",
-    "Optional household markers may help organize space. A team, audience, facility, uniform, or sport equipment is not required.",
-    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    "Optional: soft household markers or a written cue card.",
+    "Use spoken, signed, drawn, or imagined directions and boundaries."
   ],
   "movementCues": [
-    "Model the movement slowly from a stable position and name one observable action cue at a time.",
-    "Give directions for space, equipment, start, stop, and adaptation before anyone moves.",
-    "Offer seated, supported, reduced-range, solo, and no-equipment choices before practice; each choice earns equal credit.",
-    "Use feedback about the movement or decision, never a person’s body or character, and stop the activity when safety or inclusion breaks down.",
-    "Practice slowly enough to say each cue, and ask a trusted adult to check the cleared area before movement begins."
+    "PREVIEW space, equipment, start, stop, and adaptation before activity.",
+    "MODEL one observable action or decision at a time.",
+    "OFFER seated, supported, reduced-demand, solo, and no-equipment choices before practice.",
+    "FEEDBACK names the cue or decision, never a body, ability, effort, or character."
   ],
-  "ageAppropriateTechnique": "Practice slowly enough to say each cue, and ask a trusted adult to check the cleared area before movement begins.",
-  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "ageAppropriateTechnique": "Use one short action at a time, say the main cue before the attempt, keep the cooperative creative activity choice concrete, and ask a trusted adult to confirm any required permission or space check.",
+  "movementModel": {
+    "title": "Model for roles and rotations",
+    "startingPosition": "Use a solo planning station with the opening cue, boundary, stop signal, and adaptation choices visible.",
+    "action": "State one direction, model or describe it slowly, offer equal-credit routes, and give one cue-based feedback sentence.",
+    "keyCue": "Direction, model, choice, feedback.",
+    "commonError": "Giving many directions at once or presenting adaptation only after a learner struggles.",
+    "correction": "Chunk one action, offer routes before practice, and rewrite feedback around an observable cue.",
+    "notice": "Notice clarity, consent, inclusion, and safe organization rather than compliance or athletic result.",
+    "adaptedModel": "Use the seated, supported, mobility-aid, reduced-range, object-modeled, or described route and preserve this evidence: Notice clarity, consent, inclusion, and safe organization rather than compliance or athletic result.",
+    "safetyBoundary": "Use a solo plan or one trusted household partner only; consent and stop signals apply before any shared activity. No required partner, contact, public leadership, audience, spotting, lifting, or responsibility for another person’s safety decision."
+  },
+  "guidedPractice": [
+    {
+      "id": "guided-1",
+      "prompt": "Model the role, consent or space rule, inclusive choice, and cue-based feedback separately. Turn one multi-action direction into two one-action cues. Apply it to roles and rotations.",
+      "support": "Use the model cue: Direction, model, choice, feedback.",
+      "feedback": "If the target is unclear, return to the starting position and use this correction: Chunk one action, offer routes before practice, and rewrite feedback around an observable cue."
+    },
+    {
+      "id": "guided-2",
+      "prompt": "Present one direction and one equal-credit choice to an imagined learner.",
+      "support": "Watch for this contrast: Giving many directions at once or presenting adaptation only after a learner struggles.",
+      "feedback": "Keep the safe version when the learner can show or explain notice clarity, consent, inclusion, and safe organization rather than compliance or athletic result."
+    }
+  ],
+  "practiceProgression": [
+    {
+      "round": 1,
+      "name": "Entry version",
+      "task": "Model the role, consent or space rule, inclusive choice, and cue-based feedback separately. Present one direction and one equal-credit choice to an imagined learner.",
+      "targetCue": "Direction, model, choice, feedback.",
+      "successCheck": "Show or explain the target for roles and rotations once with the safe boundary intact.",
+      "changedVariable": "None; begin with the simplest safe version.",
+      "learnerChoice": "Remain here, reduce range or pace, add support, rest, or switch to the described route.",
+      "maximumBoundary": "No required partner, contact, public leadership, audience, spotting, lifting, or responsibility for another person’s safety decision."
+    },
+    {
+      "round": 2,
+      "name": "One change",
+      "task": "Present one direction and one equal-credit choice to an imagined learner. Then add only one role, communication need, rule, or access constraint. Keep the communication, inclusion, creative sequence, planning, and completion purpose visible.",
+      "targetCue": "Direction, model, choice, feedback.",
+      "successCheck": "Name what changed and keep the same cue, control, decision, and safety boundary.",
+      "changedVariable": "Add only one role, communication need, rule, or access constraint.",
+      "learnerChoice": "Progress only by choice; repeat or regress whenever the cue or control is not clear.",
+      "maximumBoundary": "No required partner, contact, public leadership, audience, spotting, lifting, or responsibility for another person’s safety decision."
+    },
+    {
+      "round": 3,
+      "name": "Fresh application",
+      "task": "Create a fresh solo sequence or briefing that includes the same access and safety choices. Create a fresh solo activity briefing with setup, model, adaptation, stop signal, and cue-based feedback.",
+      "targetCue": "Direction, model, choice, feedback.",
+      "successCheck": "Complete the fresh bounded application and identify the cue or decision that controlled it.",
+      "changedVariable": "The learner selects a new safe example, arrangement, or condition.",
+      "learnerChoice": "Use any standard or equal-credit route, take breaks, or finish through description without penalty.",
+      "maximumBoundary": "No required partner, contact, public leadership, audience, spotting, lifting, or responsibility for another person’s safety decision."
+    }
+  ],
+  "independentActivity": {
+    "title": "Fresh application: roles and rotations",
+    "directions": [
+      "Choose one approved route.",
+      "Create a fresh solo activity briefing with setup, model, adaptation, stop signal, and cue-based feedback.",
+      "Use this cue or decision: Direction, model, choice, feedback.",
+      "Stop at the maximum boundary.",
+      "Provide the selected evidence without a recording or body metric."
+    ],
+    "freshTask": "Create a fresh solo sequence or briefing that includes the same access and safety choices. Create a fresh solo activity briefing with setup, model, adaptation, stop signal, and cue-based feedback.",
+    "independenceBoundary": "A trusted human or future Tutor may read directions, define a cue, and offer an approved route. They may not perform the decision for the learner, claim unapproved observation, certify physical completion, or provide medical or return clearance."
+  },
+  "warmUpAndFinishPolicy": {
+    "applicability": "REQUIRED_FOR_MOVEMENT",
+    "warmUp": [
+      "Rehearse the opening and stop signals.",
+      "Model one target cue slowly from a stable position."
+    ],
+    "coolDown": [
+      "Return to the easiest comfortable version or rest.",
+      "Restore optional equipment and space safely.",
+      "Name one cue, safety choice, or next adjustment without reporting body data."
+    ],
+    "rationale": null
+  },
+  "spaceSetup": "Use a safe seat or one arm-span. A team, public role, audience, contact, spotting, lifting, or real event is not required. Low-space access remains available before and during the lesson. Cleanup: return optional items only after movement has stopped and the path is clear.",
   "equipmentRequirements": {
     "required": [
       "No specialized equipment is required."
     ],
     "optional": [
-      "Optional household markers may help organize space. A team, audience, facility, uniform, or sport equipment is not required."
+      "Optional: soft household markers or a written cue card."
     ],
     "householdSubstitutes": [
-      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+      "Use spoken, signed, drawn, or imagined directions and boundaries."
     ],
-    "equalCreditNoEquipment": "Equal-credit solo option: design and speak, sign, write, or demonstrate the opening cue, safe setup, adaptation, feedback statement, and stop signal for the activity; no partner or public leadership is required."
+    "prohibited": [
+      "No required partner, contact, public leadership, audience, spotting, lifting, or responsibility for another person’s safety decision."
+    ],
+    "equalCreditNoEquipment": "Equal-credit solo route: design and speak, sign, write, or demonstrate the opening cue, setup, adaptation, feedback statement, and stop signal; no partner or audience is required."
   },
   "safetyRules": [
-    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
-    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
-    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit.",
-    "Use a solo plan or one trusted household partner only. No learner must touch, spot, lift, compete with, or perform in front of another person."
+    "Check the surface, ceiling, boundary, people, pets, cords, breakables, footwear or mobility supports, and any optional item before movement.",
+    "Use a solo plan or one trusted household partner only; consent and stop signals apply before any shared activity.",
+    "Use learner-selected range, pace, and demand. Control, decisions, and understanding matter more than force, distance, duration, or repetitions.",
+    "If the environment cannot be made safe, do not perform movement; use the equal-credit described route or stop and tell a trusted adult."
   ],
   "stoppingRules": [
-    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
-    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
-    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+    "REST / ADJUST: You may pause, rest, reduce pace or range, use support, switch to an approved route, or finish for the day at any time. You may resume only when comfortable and the environment is safe. Rest and adaptation never reduce credit.",
+    "STOP AND TELL: Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, an injury concern, damaged equipment, or an unsafe environment. Tell a trusted adult and do not continue to test the concern.",
+    "DO NOT RESUME: After a head impact, an injury concern, or a symptom that persists or worsens, remain out until the authorized guardian or qualified professional says it is safe. A learner, browser, or Tutor cannot provide clearance."
   ],
-  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
-  "lowSpaceNoEquipmentAlternative": "Equal-credit solo option: design and speak, sign, write, or demonstrate the opening cue, safe setup, adaptation, feedback statement, and stop signal for the activity; no partner or public leadership is required.",
+  "adaptationRoutes": {
+    "seated": "Use a stable seated position and preserve the Direction, model, choice, feedback. evidence through upper-body movement, pointing, gesture, object modeling, or description.",
+    "supported": "Place an approved stable support before beginning and use it through the whole attempt; score the cue or decision for roles and rotations, not unsupported balance.",
+    "reducedRange": "Use the smallest comfortable movement, eye-gaze choice, point, or gesture that still shows the target cue or decision for roles and rotations.",
+    "reducedPaceOrDemand": "Complete one stage at a time with learner-chosen breaks, remain at the entry version, or split the lesson across short sittings.",
+    "mobilityAidCompatible": "Keep the mobility aid positioned and used as approved; adapt the path around the aid and score the same Direction, model, choice, feedback. evidence.",
+    "solo": "Use the supplied solo, shadow, diagram, imagined-role, or fictional-situation route; no partner, opponent, group, or audience is required.",
+    "lowSpace": "Use the one-arm-span or one-seat setup: Equal-credit solo route: design and speak, sign, write, or demonstrate the opening cue, setup, adaptation, feedback statement, and stop signal; no partner or audience is required.",
+    "noEquipment": "Equal-credit solo route: design and speak, sign, write, or demonstrate the opening cue, setup, adaptation, feedback statement, and stop signal; no partner or audience is required.",
+    "describedOrDecisionRoute": "Describe, draw, gesture, point, sign, or model Create a fresh solo activity briefing with setup, model, adaptation, stop signal, and cue-based feedback. This is a complete equal-credit route when movement is not appropriate."
+  },
+  "accessibleAdaptation": "Choose or change any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route without explaining why. Every route earns equal credit for the same notice clarity, consent, inclusion, and safe organization rather than compliance or athletic result. The standard route is never required and adaptation never lowers credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit solo route: design and speak, sign, write, or demonstrate the opening cue, setup, adaptation, feedback statement, and stop signal; no partner or audience is required.",
   "activitySteps": [
-    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
-    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
-    "Practice: apply the movement cues for roles and rotations at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
-    "Apply: show, describe, draw, sign, or write one controlled example of roles and rotations, including the cue or decision that made it work.",
-    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+    "Choose a standard or equal-credit response route.",
+    "Check the required permission.",
+    "Check the space.",
+    "Check any optional equipment.",
+    "Read the REST / ADJUST rule.",
+    "Read the STOP AND TELL rule.",
+    "Complete the warm-up when it applies.",
+    "Study the model.",
+    "Name the key cue.",
+    "Complete guided attempt 1.",
+    "Complete guided attempt 2.",
+    "Choose a progression round.",
+    "Complete the fresh application.",
+    "Use the safe finish when it applies.",
+    "Provide the selected evidence.",
+    "Answer the short reflection or leave it blank."
   ],
   "executionCategory": "leadership-inclusion",
-  "commonErrorToWatchFor": null,
-  "keyPoints": [],
-  "privacySafeScenario": "Lead one safe activity segment and reflect on communication, inclusion, and repair.",
-  "studentTask": "Learner completes a new application of roles and rotations and records both the result and the reasoning, evidence, process, or design choice that produced it.",
-  "knowledgeCheck": "In one concise response, show or explain the most important idea about roles and rotations; then identify one check that would catch an error or weak claim.",
-  "completionCriteria": [
-    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for roles and rotations.",
-    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
-    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
-    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
+  "commonErrorToWatchFor": "Giving many directions at once or presenting adaptation only after a learner struggles.",
+  "evidenceExpectations": {
+    "evidenceTypes": [
+      "COMMUNICATION",
+      "INCLUSION_DECISION",
+      "PLANNING",
+      "COMPLETION"
+    ],
+    "learnerEvidence": [
+      "One guided response using Direction, model, choice, feedback..",
+      "One fresh bounded application or complete described equivalent for roles and rotations.",
+      "One cue, decision, safety, or next-step explanation."
+    ],
+    "physicalCompletion": "NOT_TUTOR_CERTIFIABLE",
+    "observer": "A learner may self-check a cue and a trusted human may review the selected evidence. A Tutor, browser, camera, wearable, or self-report cannot certify physical completion, guardian permission, or safe return.",
+    "doNotCollect": [
+      "weight, appearance, body composition, calories, body shape, fitness norms, speed versus peers, or athletic talent",
+      "diagnosis, disability reason, symptom history, or private medical information",
+      "photo, video, audio, wearable data, location proof, or exercise log"
+    ]
+  },
+  "retryPlan": {
+    "trigger": "Retry when the evidence does not yet show the target cue or decision for roles and rotations; name the missing observable part without judging the learner.",
+    "simplerSetup": "Turn one multi-action direction into two one-action cues.",
+    "differentCue": "Replace the full cue set with: “Direction, model, choice, feedback.”",
+    "alternateModel": "Contrast this common error — Giving many directions at once or presenting adaptation only after a learner struggles. — with this correction — Chunk one action, offer routes before practice, and rewrite feedback around an observable cue.",
+    "boundedPractice": "Present one direction and one equal-credit choice to an imagined learner.",
+    "freshRetry": "Create a fresh solo activity briefing with setup, model, adaptation, stop signal, and cue-based feedback. Use a new safe example rather than repeating the scored attempt.",
+    "exitCriterion": "Return to independent work when the fresh retry shows or explains notice clarity, consent, inclusion, and safe organization rather than compliance or athletic result. A safety stop, rest, or adaptation is never recorded as failure."
+  },
+  "guardianAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "when": "Guardian permission is required before real movement, optional equipment, a real location, partner, outdoor route, or progression is used.",
+    "requiredAction": "The guardian confirms that the bounded space, optional equipment, and activity route are permitted before movement.",
+    "minimumRecord": "Record only permission status or that the equal-credit described route was used; collect no body, health, media, location, or performance data.",
+    "confirmationBoundary": "Guardian confirmation may establish permission or occurrence only. It does not certify academic mastery, physical quality, diagnosis, effort, body status, or safe return.",
+    "equalCreditAlternative": "When guardian review, real movement, equipment, space, partner, or location is unavailable, the supplied solo described/decision route is the complete equal-credit lesson.",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "tutorMetadata": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "may": [
+      "explain approved content and vocabulary",
+      "cue the approved model",
+      "offer an approved presentation or activity route",
+      "coach how the learner presents their own evidence",
+      "route to rest, stop, retry, or adult handoff"
+    ],
+    "mustNot": [
+      "cannot diagnose, prescribe, rehabilitate, or give medical clearance",
+      "cannot claim unapproved observation or certify physical completion",
+      "cannot override rest, stop, adaptation, guardian authority, professional authority, or safe return",
+      "cannot choose the answer or action for fresh independent evidence",
+      "cannot score body data, norms, appearance, talent, or peer comparison"
+    ]
+  },
+  "keyPoints": [
+    "Use a solo planning station with the opening cue, boundary, stop signal, and adaptation choices visible.",
+    "State one direction, model or describe it slowly, offer equal-credit routes, and give one cue-based feedback sentence.",
+    "Direction, model, choice, feedback.",
+    "Chunk one action, offer routes before practice, and rewrite feedback around an observable cue."
   ],
-  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
+  "privacySafeScenario": "Use a supplied or invented non-personal example of roles and rotations; do not disclose private health information or recreate a hazard.",
+  "studentTask": "Create a fresh solo sequence or briefing that includes the same access and safety choices. Create a fresh solo activity briefing with setup, model, adaptation, stop signal, and cue-based feedback. Use any approved standard or equal-credit route. Name the cue or decision that controlled the result; no body metric, comparison, recording, or physical-completion claim is required.",
+  "knowledgeCheck": "State the starting position, action, key cue, common error, and correction for roles and rotations. Then distinguish optional REST / ADJUST from STOP AND TELL and DO NOT RESUME.",
+  "completionCriteria": [
+    "The learner uses a safe setup or accurately describes it for roles and rotations.",
+    "The learner applies Direction, model, choice, feedback. in one guided attempt and one fresh application or complete described equivalent.",
+    "The learner distinguishes learner-controlled rest from STOP AND TELL and DO NOT RESUME conditions.",
+    "Any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route earns equal credit for the same cue or decision evidence."
+  ],
+  "adaptationChoices": "Choose or change any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route without explaining why. Every route earns equal credit for the same notice clarity, consent, inclusion, and safe organization rather than compliance or athletic result. The standard route is never required and adaptation never lowers credit.",
   "extensionChallenge": "Apply roles and rotations under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work.",
   "accessibilitySupports": [
     "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
@@ -80,7 +267,7 @@
     "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
   ],
   "optionalReflection": {
-    "prompt": "Invite the learner to notice one safe, optional example of roles and rotations in daily life. No purchase, account creation, photograph, or private disclosure is required.",
+    "prompt": "Which cue, decision, safety check, or adaptation preserved the target for roles and rotations, and what would you keep or change in a next safe attempt?",
     "private": true,
     "graded": false,
     "optional": true
@@ -96,7 +283,8 @@
   ],
   "sourceProvenance": {
     "sourceBranch": "shared base@656efba (canonical 5/7/8)",
-    "sourceLessonId": "ma-g5-physical-education-u08-l07"
+    "sourceLessonId": "ma-g5-physical-education-u08-l07",
+    "productionDepthRevision": "physical-education-production-depth-r1"
   },
   "productionReadiness": {
     "status": "READY",

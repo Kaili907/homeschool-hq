@@ -13,6 +13,10 @@
     "courseId": { "type": "string" },
     "grade": { "type": "integer", "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12] },
     "subject": { "enum": ["health", "physical-education"] },
+    "standards": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "primaryLessonType": {
+      "enum": ["MOVEMENT_CONCEPT_CUES", "SKILL_DEVELOPMENT", "TACTICS_DECISION_MAKING", "FITNESS_SELF_MANAGEMENT", "SAFETY_STOP_DECISION", "COOPERATIVE_CREATIVE_ACTIVITY", "REVIEW_RETRIEVAL", "REMEDIATION_RETRY", "MASTERY_PERFORMANCE", "PROJECT_LIFETIME_ACTIVITY"]
+    },
     "scoringAuthority": { "const": "RUBRIC" },
     "successCriteria": { "type": "array", "items": { "type": "string" } },
     "scoringGuidance": { "type": ["string", "null"] },
@@ -32,6 +36,11 @@
     "guardianSafetyReview": { "type": ["object", "null"] },
     "safetyAndPrivacyNotes": { "type": "array", "items": { "type": "string" } },
     "rubricDimensions": { "type": "array", "items": { "type": "string" } },
+    "protectedDecisionAuthority": { "type": "array", "minItems": 4, "items": { "type": "string" } },
+    "sufficientEvidence": { "type": "string", "minLength": 20 },
+    "guardianAuthority": { "type": "object" },
+    "evidenceTypes": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "tutorBoundary": { "type": "object" },
     "masteryInterpretation": {
       "type": ["object", "null"],
       "properties": {
@@ -60,5 +69,19 @@
         "notes": { "type": "array", "items": { "type": "string" } }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": { "const": "lesson-scoring-guide" },
+          "subject": { "const": "physical-education" }
+        },
+        "required": ["kind", "subject"]
+      },
+      "then": {
+        "required": ["primaryLessonType", "successCriteria", "rubricDimensions", "scoringGuidance", "masteryRule", "remediation", "adaptiveRoutes", "protectedDecisionAuthority", "sufficientEvidence"]
+      }
+    }
+  ]
 }

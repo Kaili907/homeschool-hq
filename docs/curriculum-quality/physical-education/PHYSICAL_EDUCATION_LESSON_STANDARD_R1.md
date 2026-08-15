@@ -1,6 +1,6 @@
 # Manuel Academy Physical Education Lesson Standard R1
 
-Status: **DRAFT FOR DIRECTOR REVIEW**
+Status: **DIRECTOR-APPROVED PRODUCTION AUTHORING STANDARD**
 
 Applies to: Physical Education lessons, Grades 3–5 and 7–12
 
@@ -29,9 +29,9 @@ The words **MUST**, **MUST NOT**, **SHOULD**, and **MAY** are normative. A
 documented, instructionally sound exception may satisfy a **SHOULD**. It cannot
 waive a **MUST** or **MUST NOT**.
 
-R1 is a draft authoring and human-review standard. It is not a production gate,
-a fitness prescription, a medical clearance, or authority to rewrite the
-current PE corpus.
+R1 is the production authoring and human-review standard for the canonical PE
+corpus. It is not a transfer-authority validator, fitness prescription, medical
+clearance, or Tutor/runtime authority.
 
 ## 2. Audit basis
 
@@ -610,7 +610,7 @@ If required curriculum supply is missing or conflicting, the Tutor-ready state
 is `BLOCKED_MISSING_CURRICULUM` or `BLOCKED_AUTHORITY_CONFLICT`; the Tutor does
 not improvise a repair.
 
-## 18. Draft conformance review
+## 18. Production conformance review
 
 Automated checks MAY verify fields, references, declared authority, adaptation
 parity language, stop/rest presence, and prohibited evidence/body-scoring
@@ -644,9 +644,9 @@ Any conflict between a demanded real/high-risk condition and a promised equal-
 credit alternative blocks conformance until curriculum and authority agree.
 This is an authoring/review rule, not validator hardening in this branch.
 
-## 19. Recommended next-wave PE Director sample
+## 19. Approved PE Director anchor
 
-Recommended lesson: **`ma-g12-physical-education-u08-l07` — “The stop rule as
+Approved lesson: **`ma-g12-physical-education-u08-l07` — “The stop rule as
 an adult habit rather than a class instruction under transfer.”**
 
 Audit package:
@@ -662,32 +662,20 @@ the task and rubric demand an unsupervised full training block and real stop
 decision while completion/adaptation text promises a fully described solo
 route; and the stages are composite.
 
-The next wave SHOULD build one Director sample that demonstrates a no-symptom,
-no-induced-event fictional decision model, one-action presentation, explicit
-described-route precedence, appropriate protected authority, and curriculum-
-side Tutor cues without physical-completion claims. This branch does **not**
-build or rewrite that sample.
+The approved anchor demonstrates a no-symptom, no-induced-event fictional
+decision model, one-action presentation, explicit described-route precedence,
+appropriate protected authority, and curriculum-side Tutor cues without
+physical-completion claims. Production regeneration must preserve it byte for
+byte from generator-owned source.
 
-## 20. Adoption path
+## 20. Production adoption record
 
-Before this draft becomes an enforced standard:
+The Director-approved anchor was accepted at
+`c190f45107dd15f9a6acccac9db1f321bfe66a41`. The production-depth rebuild uses
+canonical generator/source families, covers all authored grades and lesson
+types, preserves the anchor, and requires full-corpus structural, checksum,
+safety, privacy, schema, determinism, reconciliation, and depth evidence before
+convergence. This adoption does not change Tutor V2 runtime, transfer-authority
+validators, production admission, or deployment authority.
 
-1. PE, curriculum, accessibility, safety/privacy, assessment, guardian-
-   authority, and Tutor-contract owners review this document and schema.
-2. The recommended sample is authored in the next wave and reviewed by the
-   Director.
-3. Advisory checks are tested against that safety-decision sample plus
-   meaningfully different skill, tactics, fitness self-management, creative,
-   and project lessons.
-4. Reviewers decide which rules become release-blocking and which remain human
-   review criteria.
-5. A versioned migration plan preserves existing universal safety and
-   adaptation strengths.
-6. Full-corpus structural, checksum, safety, accessibility, authority,
-   readability, and depth evidence is rerun before any acceptance claim.
-
-Until those steps occur, the correct status is **DRAFT**, and this document
-does not authorize curriculum rewrite, Tutor V2 runtime, PE transfer-authority
-validator changes, or production admission changes.
-
-**Draft classification: PHYSICAL_EDUCATION_LESSON_STANDARD_DRAFT_R1**
+**Classification: PHYSICAL_EDUCATION_LESSON_STANDARD_R1_APPROVED**

@@ -74,29 +74,36 @@ Grade 3/4 wording and the Health scoring contract remain unchanged.
 `reports/health-content-repair-r1.json` records the
 independent 324-lesson audit and the exact Grade 3 H2 byte/provenance trace.
 
-## PE learner execution contract
+## PE production-depth contract
 
-All 972 PE lesson task cards are executable in ordinary homeschool conditions.
-The generator preserves the 216 hand-authored Grade 3/4 cue sets and supplies
-focus-specific, age-banded movement technique for the 756 Grade 5-12 lessons
-whose source records do not have a dedicated cue field. Every PE lesson also
-contains:
+All 972 PE lesson task cards are rebuilt deterministically from the canonical
+grade sources through `src/lib/peExecution.mjs`. The projection implements the
+Director-approved Physical Education Lesson Standard R1 across all ten lesson
+types and eleven execution categories. It preserves the 216 hand-authored
+Grade 3/4 cue sets, supplies age-banded movement teaching where source records
+do not have dedicated cues, and gives every lesson:
 
+- a learner-visible goal and readiness choice;
+- a starting position, action, key cue, common error, correction, accessible
+  model, and safety boundary;
+- guided attempts, a one-variable progression, and fresh independent work;
+- a matched warm-up/finish or explicit non-movement rationale;
 - a cleared-space setup and one-arm-span low-space path;
 - explicit required/optional equipment, soft household substitutes, and an
   equal-credit no-equipment path;
-- environment, equipment, controlled-effort, and activity-specific safety
-  rules;
-- stop rules for symptoms, impact/injury, and a changing environment;
-- seated, supported, reduced-range, mobility-aid, solo, and described/gestured
-  adaptations assessed for equal credit;
-- five actionable activity steps and four observable completion criteria.
+- distinct learner-controlled `REST / ADJUST`, mandatory `STOP AND TELL`, and
+  authorized `DO NOT RESUME` rules;
+- runnable seated, supported, reduced-range, reduced-pace, mobility-aid, solo,
+  low-space, no-equipment, and described/decision alternatives for equal credit
+  without reason disclosure;
+- lesson-type-matched evidence, changed-teaching retry, guardian authority, and
+  an explicit prohibition on Tutor physical-completion or return certification.
 
-`src/lib/peExecution.mjs` owns this shared projection. The independent
-validator re-audits the emitted PE lessons and fails if any required block is
-missing. `pe-content-repair-evidence.json` records the confirmed baseline,
-repair counts, post-repair zeroes, category coverage, and convergence
-classification.
+The approved `ma-g12-physical-education-u08-l07` Director anchor and scoring
+guide live as generator-owned source fixtures under `src/approved/` and are
+re-emitted byte for byte. The independent validator verifies those hashes as
+well as complete grade, family, category, safety, adaptation, evidence, retry,
+guardian, Tutor, privacy, and checksum coverage.
 
 ## Never requires
 
@@ -144,6 +151,8 @@ home-use path, or completion criteria.
 ```bash
 node tooling/validate.mjs
 node tooling/health-content-audit.mjs
+node --test tooling/*.test.mjs
+python3 tooling/schema-validate.py
 ```
 
 Independently re-reads every file under `packages/` and `scoring-guides/`

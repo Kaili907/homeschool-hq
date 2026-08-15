@@ -19,8 +19,29 @@
     "focus": { "type": "string" },
     "essentialQuestion": { "type": ["string", "null"] },
     "estimatedMinutes": { "type": ["string", "null"] },
+    "standards": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "primaryLessonType": {
+      "enum": ["MOVEMENT_CONCEPT_CUES", "SKILL_DEVELOPMENT", "TACTICS_DECISION_MAKING", "FITNESS_SELF_MANAGEMENT", "SAFETY_STOP_DECISION", "COOPERATIVE_CREATIVE_ACTIVITY", "REVIEW_RETRIEVAL", "REMEDIATION_RETRY", "MASTERY_PERFORMANCE", "PROJECT_LIFETIME_ACTIVITY"]
+    },
+    "secondaryLessonTypes": { "type": "array", "maxItems": 2, "uniqueItems": true, "items": { "type": "string" } },
+    "lessonFamilyPlan": { "type": "object", "required": ["instructionalPurpose", "guidedEmphasis", "independentEvidence", "evidencePurpose"] },
+    "goal": { "type": "string", "minLength": 20 },
+    "successOverview": { "type": "string", "minLength": 20 },
+    "readinessCheck": { "type": "array", "minItems": 3, "items": { "type": "string" } },
     "materials": { "type": "array", "items": { "type": "string" } },
     "movementCues": { "type": ["array", "null"], "items": { "type": "string" } },
+    "movementModel": { "$ref": "#/definitions/movementModel" },
+    "decisionModel": { "$ref": "#/definitions/movementModel" },
+    "guidedPractice": {
+      "type": "array", "minItems": 2,
+      "items": { "type": "object", "required": ["prompt", "support", "feedback"], "properties": { "prompt": { "type": "string" }, "support": { "type": "string" }, "feedback": { "type": "string" } } }
+    },
+    "practiceProgression": {
+      "type": "array", "minItems": 3,
+      "items": { "type": "object", "required": ["task", "successCheck", "changedVariable", "learnerChoice"], "properties": { "task": { "type": "string" }, "successCheck": { "type": "string" }, "changedVariable": { "type": "string" }, "learnerChoice": { "type": "string" } } }
+    },
+    "independentActivity": { "type": "object" },
+    "warmUpAndFinishPolicy": { "type": "object", "required": ["applicability", "warmUp", "coolDown", "rationale"] },
     "ageAppropriateTechnique": { "type": "string" },
     "spaceSetup": { "type": "string" },
     "equipmentRequirements": {
@@ -36,10 +57,18 @@
     "safetyRules": { "type": "array", "items": { "type": "string" } },
     "stoppingRules": { "type": "array", "items": { "type": "string" } },
     "accessibleAdaptation": { "type": "string" },
+    "adaptationRoutes": {
+      "type": "object",
+      "required": ["seated", "supported", "reducedRange", "reducedPaceOrDemand", "mobilityAidCompatible", "solo", "lowSpace", "noEquipment", "describedOrDecisionRoute"]
+    },
     "lowSpaceNoEquipmentAlternative": { "type": "string" },
     "activitySteps": { "type": "array", "items": { "type": "string" } },
     "executionCategory": { "type": "string" },
     "commonErrorToWatchFor": { "type": ["string", "null"] },
+    "evidenceExpectations": { "type": "object", "required": ["learnerEvidence", "physicalCompletion", "observer", "doNotCollect"] },
+    "retryPlan": { "type": "object", "required": ["trigger", "simplerSetup", "differentCue", "alternateModel", "boundedPractice", "freshRetry", "exitCriterion"] },
+    "guardianAuthority": { "type": "object", "required": ["level", "requiredAction", "minimumRecord", "confirmationBoundary", "equalCreditAlternative", "tutorOrLearnerMaySubstitute"] },
+    "tutorMetadata": { "type": "object", "required": ["scope", "may", "mustNot"] },
     "keyPoints": { "type": "array", "items": { "type": "string" } },
     "privacySafeScenario": {
       "type": ["string", "null"],
@@ -118,15 +147,32 @@
       "then": {
         "required": [
           "movementCues",
+          "primaryLessonType",
+          "goal",
+          "successOverview",
+          "readinessCheck",
+          "guidedPractice",
+          "practiceProgression",
+          "independentActivity",
+          "warmUpAndFinishPolicy",
           "ageAppropriateTechnique",
           "spaceSetup",
           "equipmentRequirements",
           "safetyRules",
           "stoppingRules",
           "accessibleAdaptation",
+          "adaptationRoutes",
           "lowSpaceNoEquipmentAlternative",
           "activitySteps",
-          "completionCriteria"
+          "completionCriteria",
+          "evidenceExpectations",
+          "retryPlan",
+          "guardianAuthority",
+          "tutorMetadata"
+        ],
+        "anyOf": [
+          { "required": ["movementModel"] },
+          { "required": ["decisionModel"] }
         ]
       }
     }
@@ -140,5 +186,19 @@
       { "required": ["rubricDimensions"] },
       { "required": ["scoringGuidance"] }
     ]
+  },
+  "definitions": {
+    "movementModel": {
+      "type": "object",
+      "required": ["startingPosition", "action", "keyCue", "commonError", "correction", "safetyBoundary"],
+      "properties": {
+        "startingPosition": { "type": "string", "minLength": 20 },
+        "action": { "type": "string", "minLength": 20 },
+        "keyCue": { "type": "string", "minLength": 5 },
+        "commonError": { "type": "string", "minLength": 15 },
+        "correction": { "type": "string", "minLength": 15 },
+        "safetyBoundary": { "type": "string", "minLength": 15 }
+      }
+    }
   }
 }

@@ -9,6 +9,7 @@
     "canonical578": "shared base@656efba (curriculum-content/manuel-academy/1.0.0, grades 5, 7, 8)",
     "hs912": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
     "healthContentRepair": "mac/health-content-repair-r1 (objective-specific instruction and learner work for Health grades 5 and 7-12)",
+    "physicalEducationProductionDepth": "physical-education-production-depth-r1 (canonical lesson-family projection plus approved Director anchor source)",
     "productionGate": "mac/curriculum-production-gate-h3@49b3c4b86cc7764627bd4cfbd752222849831abf",
     "excluded": "grade 6 — no curriculum authored for it yet (see src/curriculum/grade-authority)"
   },
@@ -49,7 +50,8 @@
       "movementCueRepairs": 756,
       "equipmentRepairs": 600,
       "safetyRepairs": 324,
-      "repairLevel": "shared generator/template"
+      "productionDepthRebuilds": 972,
+      "repairLevel": "canonical generator lesson-family projection"
     },
     "after": {
       "missingMovementCues": 0,
@@ -57,15 +59,59 @@
       "missingRequiredSafety": 0,
       "missingAdaptation": 0,
       "homeUseBlockers": 0,
-      "missingCompletionCriteria": 0
+      "missingCompletionCriteria": 0,
+      "missingGoalOrReadiness": 0,
+      "missingLessonFamilyPlan": 0,
+      "missingModel": 0,
+      "missingGuidedPractice": 0,
+      "missingProgression": 0,
+      "missingIndependentActivity": 0,
+      "missingRestStopDistinction": 0,
+      "missingEvidenceBoundary": 0,
+      "missingRetry": 0,
+      "missingGuardianBoundary": 0,
+      "missingTutorBoundary": 0,
+      "invalidLessonType": 0
     },
-    "classification": "PE_CONTENT_READY_FOR_CONVERGENCE"
+    "classification": "PHYSICAL_EDUCATION_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE",
+    "lessonFamilyCounts": {
+      "COOPERATIVE_CREATIVE_ACTIVITY": 72,
+      "FITNESS_SELF_MANAGEMENT": 95,
+      "MASTERY_PERFORMANCE": 162,
+      "MOVEMENT_CONCEPT_CUES": 183,
+      "PROJECT_LIFETIME_ACTIVITY": 101,
+      "REMEDIATION_RETRY": 162,
+      "REVIEW_RETRIEVAL": 81,
+      "SAFETY_STOP_DECISION": 12,
+      "SKILL_DEVELOPMENT": 79,
+      "TACTICS_DECISION_MAKING": 25
+    },
+    "focusSpecificExecutionCategories": {
+      "balance-strength-mobility": 64,
+      "leadership-inclusion": 104,
+      "locomotor-space": 70,
+      "movement-literacy": 234,
+      "object-control": 64,
+      "outdoor": 48,
+      "rhythm-sequence": 70,
+      "safety-stop-decision": 26,
+      "striking-target": 54,
+      "tactics-games": 66,
+      "training-planning": 172
+    },
+    "approvedAnchor": {
+      "lessonId": "ma-g12-physical-education-u08-l07",
+      "packageSha256": "4b3987ceabdcb4b6c91769078b6f588ed973584a8efb30fc7231007395589dda",
+      "scoringSha256": "24f379f5083fc16a9651483283f8e55fb59ab92ce525a2fcbbbd4a8e230b4bc5",
+      "packageMatchesApprovedSource": true,
+      "scoringMatchesApprovedSource": true
+    }
   },
   "checksums": {
     "algorithm": "SHA-256",
     "file": "SHA256SUMS.txt",
     "scope": "every corpus file except SHA256SUMS.txt itself",
-    "entries": 2880
+    "entries": 2884
   },
   "byGrade": [
     {

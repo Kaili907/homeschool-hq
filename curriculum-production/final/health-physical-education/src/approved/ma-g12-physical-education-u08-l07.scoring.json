@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g12-physical-education-u08-l07",
+  "courseId": "ma-g12-physical-education",
+  "grade": 12,
+  "subject": "physical-education",
+  "standards": [
+    "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]",
+    "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]"
+  ],
+  "primaryLessonType": "SAFETY_STOP_DECISION",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "For each of four fresh fictional scenarios, the learner selects REST/ADJUST, STOP AND TELL, or DO NOT RESUME and cites one supplied fact that controls the decision.",
+    "The learner states a next safe action without proposing symptom testing, unsafe continuation, diagnosis, treatment, or self-clearance.",
+    "The learner names the trusted-adult handoff and return authority when the supplied scenario requires it.",
+    "The five-line protocol accurately distinguishes learner-controlled rest from warning-sign stops and no-resume conditions.",
+    "Any approved response or access route earns equal credit when it supplies the same decision evidence."
+  ],
+  "rubricDimensions": [
+    "Decision accuracy: uses the supplied condition to select the applicable safety lane.",
+    "Safety action: states the immediate safe action and never continues to test a warning sign.",
+    "Authority: identifies trusted-adult notification and authorized return control when required.",
+    "Transfer protocol: applies NOTICE–PAUSE–ACT–HOLD to a fresh fictional plan.",
+    "Evidence completeness: finishes four cards and the five-line protocol in any approved equal-credit mode."
+  ],
+  "scoringGuidance": "Score decision accuracy, use of supplied facts, safe next action, authority boundary, protocol quality, revision, and completion. Do not score body size, weight, appearance, calories, body composition, speed, fitness norms, athletic talent, symptom tolerance, use of a standard body position, or comparison with another person. Do not reduce credit for rest, stopping, adaptation, assistive technology, guardian restriction, or a described route.",
+  "protectedDecisionAuthority": [
+    "A chosen comfort break with no supplied warning sign or unsafe condition supports REST/ADJUST.",
+    "Pain, dizziness, unusual breathing difficulty, head impact, injury concern, damaged equipment, or unsafe environment supports STOP AND TELL.",
+    "Head impact, injury concern, or a persistent or worsening symptom also supports DO NOT RESUME until the authorized guardian or qualified professional says it is safe.",
+    "A learner, self-report, browser, or Tutor never supplies diagnosis, physical-completion certification, guardian permission, or return clearance."
+  ],
+  "sufficientEvidence": "Sufficient evidence is four independently completed fresh scenario decisions plus the five-line protocol. A human reviewer may ask the learner to clarify which supplied fact controlled a decision. Reflection is optional and cannot establish mastery by itself.",
+  "masteryRule": "Do not mark mastery from this lesson alone. Require accurate independent evidence on at least two occasions separated by time, setting, or meaningful scenario variation. One occasion may be this four-card fictional set; the later occasion must use fresh supplied situations or an authorized real-world planning review. Physical occurrence, learner self-report, Tutor confidence, attendance, standard-route use, speed, body data, and subjective reflection are not mastery evidence.",
+  "remediation": "Name the exact observable gap without judging the learner. Return to three visible lane labels and a two-sentence fictional card. Underline the controlling fact. Re-model with the two questions 'Warning sign or unsafe event?' and 'Impact, injury, or not settling?' Contrast a comfortable chosen break with a warning-sign stop. Practice one card, offer rest or another response mode, then use the fresh loose-equipment retry card. Return to independent work after the learner stops use, cites the unsafe equipment, and hands the condition to a trusted adult.",
+  "adaptiveRoutes": [
+    {
+      "signal": "rest and stop are treated as the same lane",
+      "action": "Contrast a comfortable learner choosing water with a dizzy learner considering one more round. Ask which single supplied fact changes the lane."
+    },
+    {
+      "signal": "adult handoff is missing",
+      "action": "Use the cue 'Stop first; tell next,' then retry with one fresh unsafe-environment card."
+    },
+    {
+      "signal": "continued activity is proposed as a test",
+      "action": "State that warning signs are never tested by continuing. Switch to the decision-only route and retry with a new fictional card."
+    },
+    {
+      "signal": "return clearance is assigned to the learner, browser, or Tutor",
+      "action": "Re-model HOLD: after head impact, injury concern, or a persistent or worsening symptom, only the authorized guardian or qualified professional controls return."
+    },
+    {
+      "signal": "pain, dizziness, unusual breathing difficulty, head impact, injury concern, or a real unsafe condition occurs",
+      "action": "Stop the lesson immediately and tell a trusted adult. Do not resume to finish evidence. Use a described retry later only when appropriate; the safety stop is never failure."
+    },
+    {
+      "signal": "learner chooses rest, support, reduced demand, or another approved route",
+      "action": "Honor the choice without asking for a reason. Score the same lane, fact, next-action, and authority evidence for equal credit."
+    },
+    {
+      "signal": "fresh retry is needed",
+      "action": "Use the loose-equipment card in the learner package, not a repeated independent card. Exit retry when the learner identifies the unsafe equipment, stops use, and tells a trusted adult."
+    },
+    {
+      "signal": "mastery evidence is being considered",
+      "action": "Require a later fresh occasion or meaningful variation. Do not infer mastery from physical occurrence, reflection alone, standard-route use, or Tutor confidence."
+    }
+  ],
+  "guardianOrParentVisibility": "Share only the lesson target, selected evidence mode, academic completion state, guardian-review status for any later household plan, and next instructional step. Do not expose body data, fitness scores, symptoms, diagnoses, disability reasons, photographs, video, recordings, locations, or peer comparisons.",
+  "guardianSafetyReview": {
+    "equipment": "No equipment is required for the fictional lesson. A guardian approves any equipment before later real-world use.",
+    "environment": "The lesson uses a comfortable desk or communication space. A guardian reviews any later personal activity location or household escalation plan.",
+    "movement_hazards": "No movement or induced event is required. If a real warning sign or unsafe condition occurs, the learner stops and tells a trusted adult.",
+    "supervision_note": "Guardian review is required before a personal activity, household contact path, location, equipment, partner, or progression is used later. The guardian confirms only permission and the household escalation path, not mastery, diagnosis, effort, body status, or physical completion.",
+    "guardian_confirmation_required": true,
+    "equal_credit_when_unavailable": "The supplied fictional decision set and generic trusted-adult handoff are the complete equal-credit lesson when guardian review or real activity is unavailable."
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, non-shaming language about bodies, ability, rest, adaptation, and effort.",
+    "Allow a pause, rest, break, support, reduced demand, or alternate response mode without treating it as failure.",
+    "Use supplied fictional scenarios; never induce a symptom, injury, impact, collision, equipment failure, or real stop event.",
+    "Stop for pain, dizziness, unusual breathing difficulty, head impact, injury concern, damaged equipment, or unsafe conditions and tell a trusted adult.",
+    "After head impact, injury concern, or a persistent or worsening symptom, do not resume until the authorized guardian or qualified professional says it is safe.",
+    "Score decisions, safety actions, authority, protocol quality, revision, and completion—never body size, weight, appearance, body composition, calories, fitness norms, speed, athletic talent, or comparison.",
+    "Do not require diagnosis, symptom history, disability reason, medical disclosure, photograph, video, voice recording, wearable export, location proof, or exercise log.",
+    "A Tutor may explain and cue approved curriculum but cannot observe, diagnose, prescribe, certify completion, approve return, or override learner or guardian safety authority."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "sourceLessonId": "ma-g12-physical-education-u08-l07",
+    "directorSampleRevision": "physical-education-director-sample-r1"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

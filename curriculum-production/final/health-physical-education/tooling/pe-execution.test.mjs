@@ -16,6 +16,10 @@ test('preserves authored movement cues while adding the complete execution contr
   assert.match(execution.equipmentRequirements.equalCreditNoEquipment, /equal-credit/i)
   assert.equal(execution.stoppingRules.length, 3)
   assert.equal(execution.completionCriteria.length, 4)
+  assert.equal(execution.guidedPractice.length, 2)
+  assert.equal(execution.practiceProgression.length, 3)
+  assert.match(execution.movementModel.startingPosition, /begin|choose/i)
+  assert.match(execution.retryPlan.alternateModel, /contrast/i)
 })
 
 test('supplies focus-specific, age-appropriate technique for missing cue cohorts', () => {
@@ -35,17 +39,9 @@ test('supplies focus-specific, age-appropriate technique for missing cue cohorts
 test('audit fails closed when any required home-execution block is absent', () => {
   const execution = buildPeExecution({ focus: 'balance and stability' }, 7)
   const complete = {
+    ...execution,
     lessonId: 'complete',
-    movementCues: execution.movementCues,
     ageAppropriateTechnique: execution.techniqueLevel,
-    spaceSetup: execution.spaceSetup,
-    equipmentRequirements: execution.equipmentRequirements,
-    safetyRules: execution.safetyRules,
-    stoppingRules: execution.stoppingRules,
-    accessibleAdaptation: execution.accessibleAdaptation,
-    lowSpaceNoEquipmentAlternative: execution.lowSpaceNoEquipmentAlternative,
-    activitySteps: execution.activitySteps,
-    completionCriteria: execution.completionCriteria,
   }
   const incomplete = { ...complete, lessonId: 'incomplete', stoppingRules: [] }
   const result = auditPeLessonExecutability([complete, incomplete])
@@ -56,4 +52,43 @@ test('audit fails closed when any required home-execution block is absent', () =
   assert.deepEqual(result.missingAdaptation, [])
   assert.deepEqual(result.homeUseBlockers, [])
   assert.deepEqual(result.missingCompletionCriteria, [])
+  assert.deepEqual(result.missingModel, [])
+  assert.deepEqual(result.missingGuidedPractice, [])
+  assert.deepEqual(result.missingProgression, [])
+  assert.deepEqual(result.missingIndependentActivity, [])
+  assert.deepEqual(result.missingRetry, [])
+  assert.deepEqual(result.missingGuardianBoundary, [])
+  assert.deepEqual(result.missingTutorBoundary, [])
+})
+
+test('derives all ten production lesson families from phase and focus authority', () => {
+  const cases = [
+    [{ phase: 'Launch and diagnostic', focus: 'self-space' }, 'MOVEMENT_CONCEPT_CUES'],
+    [{ phase: 'Concept model A', focus: 'throwing accuracy' }, 'SKILL_DEVELOPMENT'],
+    [{ phase: 'Guided practice A', focus: 'offense and defense tactics' }, 'TACTICS_DECISION_MAKING'],
+    [{ phase: 'Concept model B', focus: 'training plan and recovery' }, 'FITNESS_SELF_MANAGEMENT'],
+    [{ phase: 'Investigation or close reading', focus: 'warning signs and the stop rule' }, 'SAFETY_STOP_DECISION'],
+    [{ phase: 'Guided practice B', focus: 'inclusive leadership and feedback' }, 'COOPERATIVE_CREATIVE_ACTIVITY'],
+    [{ phase: 'Synthesis and review', focus: 'throwing accuracy' }, 'REVIEW_RETRIEVAL'],
+    [{ phase: 'Reteach and varied practice', focus: 'throwing accuracy' }, 'REMEDIATION_RETRY'],
+    [{ phase: 'Unit assessment', focus: 'throwing accuracy' }, 'MASTERY_PERFORMANCE'],
+    [{ phase: 'Performance task build', focus: 'route planning' }, 'PROJECT_LIFETIME_ACTIVITY'],
+  ]
+  for (const [lesson, expected] of cases) assert.equal(buildPeExecution(lesson, 8).primaryLessonType, expected)
+})
+
+test('makes adaptation, rest, completion, and Tutor boundaries explicit', () => {
+  const execution = buildPeExecution({ phase: 'Concept model A', focus: 'balance and mobility' }, 10)
+  assert.deepEqual(Object.keys(execution.adaptationRoutes), [
+    'seated', 'supported', 'reducedRange', 'reducedPaceOrDemand', 'mobilityAidCompatible',
+    'solo', 'lowSpace', 'noEquipment', 'describedOrDecisionRoute',
+  ])
+  assert.match(execution.accessibleAdaptation, /without explaining why/i)
+  assert.match(execution.accessibleAdaptation, /equal credit/i)
+  assert.match(execution.stoppingRules[0], /^REST \/ ADJUST:/)
+  assert.match(execution.stoppingRules[1], /^STOP AND TELL:/)
+  assert.match(execution.stoppingRules[2], /^DO NOT RESUME:/)
+  assert.match(execution.evidenceExpectations.observer, /cannot certify physical completion/i)
+  assert.equal(execution.guardianAuthority.tutorOrLearnerMaySubstitute, false)
+  assert.match(execution.tutorMetadata.mustNot.join(' '), /cannot claim.*certify physical completion/i)
 })
