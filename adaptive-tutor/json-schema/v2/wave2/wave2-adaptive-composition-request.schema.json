@@ -1,0 +1,2121 @@
+{
+  "$id": "TutorV2Wave2AdaptiveCompositionRequest",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "capabilityMetadata": {
+      "$id": "TutorV2StudyAdaptiveCapabilityMetadata",
+      "additionalProperties": false,
+      "properties": {
+        "capabilities": {
+          "items": {
+            "$id": "TutorV2AdaptiveCapabilityRecord",
+            "additionalProperties": false,
+            "properties": {
+              "actionFamilies": {
+                "items": {
+                  "maxLength": 96,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "maxItems": 24,
+                "minItems": 1,
+                "type": "array"
+              },
+              "admission": {
+                "anyOf": [
+                  {
+                    "const": "admitted",
+                    "type": "string"
+                  },
+                  {
+                    "const": "not-admitted",
+                    "type": "string"
+                  }
+                ]
+              },
+              "feature": {
+                "anyOf": [
+                  {
+                    "const": "concept-prerequisite-graph",
+                    "type": "string"
+                  },
+                  {
+                    "const": "misconception-analysis",
+                    "type": "string"
+                  },
+                  {
+                    "const": "hint-ladder",
+                    "type": "string"
+                  },
+                  {
+                    "const": "intervention-ladder",
+                    "type": "string"
+                  },
+                  {
+                    "const": "mastery-evidence",
+                    "type": "string"
+                  },
+                  {
+                    "const": "prerequisite-repair",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reteach",
+                    "type": "string"
+                  },
+                  {
+                    "const": "parent-explanation",
+                    "type": "string"
+                  }
+                ]
+              },
+              "reviewedContent": {
+                "anyOf": [
+                  {
+                    "const": "not-required",
+                    "type": "string"
+                  },
+                  {
+                    "const": "required",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "feature",
+              "admission",
+              "actionFamilies",
+              "reviewedContent"
+            ],
+            "type": "object"
+          },
+          "maxItems": 8,
+          "type": "array"
+        },
+        "curriculumAdmission": {
+          "anyOf": [
+            {
+              "const": "admitted",
+              "type": "string"
+            },
+            {
+              "const": "not-admitted",
+              "type": "string"
+            }
+          ]
+        },
+        "curriculumBindingRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "invocationBindingRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "metadataKind": {
+          "const": "study-adaptive-capabilities",
+          "type": "string"
+        },
+        "metadataVersion": {
+          "const": "study-tutor-v2.adaptive-capabilities.v1",
+          "type": "string"
+        },
+        "safetyAdmission": {
+          "anyOf": [
+            {
+              "const": "admitted",
+              "type": "string"
+            },
+            {
+              "const": "restricted",
+              "type": "string"
+            }
+          ]
+        },
+        "source": {
+          "const": "study-authority",
+          "type": "string"
+        },
+        "subjectRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "metadataVersion",
+        "metadataKind",
+        "source",
+        "invocationBindingRef",
+        "subjectRef",
+        "curriculumBindingRef",
+        "curriculumAdmission",
+        "safetyAdmission",
+        "capabilities"
+      ],
+      "type": "object"
+    },
+    "compositionVersion": {
+      "const": "study-tutor-v2.wave2-composition.v1",
+      "type": "string"
+    },
+    "conceptGraph": {
+      "$id": "TutorV2ConceptGraph",
+      "additionalProperties": false,
+      "properties": {
+        "edges": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "dependentConceptRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "prerequisiteConceptRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "prerequisiteConceptRef",
+              "dependentConceptRef"
+            ],
+            "type": "object"
+          },
+          "maxItems": 1000,
+          "type": "array"
+        },
+        "graphRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": false,
+          "properties": {
+            "crossContextAdmissions": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "admissionRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "dependentConceptRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "maximumBoundary": {
+                    "anyOf": [
+                      {
+                        "const": "unit",
+                        "type": "string"
+                      },
+                      {
+                        "const": "course",
+                        "type": "string"
+                      },
+                      {
+                        "const": "subject",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "prerequisiteConceptRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "admissionRef",
+                  "prerequisiteConceptRef",
+                  "dependentConceptRef",
+                  "maximumBoundary"
+                ],
+                "type": "object"
+              },
+              "maxItems": 1000,
+              "type": "array"
+            }
+          },
+          "required": [
+            "crossContextAdmissions"
+          ],
+          "type": "object"
+        },
+        "nodes": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "conceptRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "context": {
+                "additionalProperties": false,
+                "properties": {
+                  "courseRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "subjectRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  },
+                  "unitRef": {
+                    "maxLength": 160,
+                    "minLength": 3,
+                    "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "subjectRef",
+                  "courseRef",
+                  "unitRef"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "conceptRef",
+              "context"
+            ],
+            "type": "object"
+          },
+          "maxItems": 1000,
+          "minItems": 1,
+          "type": "array"
+        },
+        "version": {
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "graphRef",
+        "version",
+        "nodes",
+        "edges",
+        "metadata"
+      ],
+      "type": "object"
+    },
+    "conceptScopeBindings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "conceptRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "curriculumRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "gradeRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "subjectRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "conceptRef",
+          "subjectRef",
+          "gradeRef",
+          "curriculumRef"
+        ],
+        "type": "object"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "type": "array"
+    },
+    "hintSelection": {
+      "$id": "TutorV2HintSelectionRequest",
+      "additionalProperties": false,
+      "properties": {
+        "assessmentPhase": {
+          "anyOf": [
+            {
+              "const": "instruction-or-practice",
+              "type": "string"
+            },
+            {
+              "const": "active-graded-or-mastery-check",
+              "type": "string"
+            },
+            {
+              "const": "completed-assessment-review",
+              "type": "string"
+            },
+            {
+              "const": "non-graded-review",
+              "type": "string"
+            }
+          ]
+        },
+        "attemptCount": {
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "contextRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "interventionHistory": {
+          "items": {
+            "$id": "TutorV2HintInterventionHistoryEntry",
+            "additionalProperties": false,
+            "properties": {
+              "assistanceLevel": {
+                "anyOf": [
+                  {
+                    "const": "independent",
+                    "type": "string"
+                  },
+                  {
+                    "const": "light-hint",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reteach-required",
+                    "type": "string"
+                  }
+                ]
+              },
+              "contextRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "hintLevel": {
+                "anyOf": [
+                  {
+                    "const": "none",
+                    "type": "string"
+                  },
+                  {
+                    "const": "nudge",
+                    "type": "string"
+                  },
+                  {
+                    "const": "concept-cue",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-step",
+                    "type": "string"
+                  }
+                ]
+              },
+              "interventionKind": {
+                "anyOf": [
+                  {
+                    "const": "hint-provided",
+                    "type": "string"
+                  },
+                  {
+                    "const": "comprehension-recheck",
+                    "type": "string"
+                  },
+                  {
+                    "const": "learner-completion",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reteach",
+                    "type": "string"
+                  }
+                ]
+              },
+              "interventionRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "ordinal": {
+                "maximum": 10000,
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "interventionRef",
+              "contextRef",
+              "ordinal",
+              "interventionKind",
+              "hintLevel",
+              "assistanceLevel"
+            ],
+            "type": "object"
+          },
+          "maxItems": 24,
+          "type": "array"
+        },
+        "learnerStageProfile": {
+          "$id": "TutorV2LearnerStageHintProfile",
+          "additionalProperties": false,
+          "properties": {
+            "approvalKind": {
+              "const": "study-approved",
+              "type": "string"
+            },
+            "approvalRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "learningStageRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "maximumHintEscalationsBeforeRecheck": {
+              "maximum": 8,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "profileKind": {
+              "const": "approved-learning-stage-hint-policy",
+              "type": "string"
+            },
+            "profileRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "profileKind",
+            "profileRef",
+            "learningStageRef",
+            "approvalRef",
+            "approvalKind",
+            "maximumHintEscalationsBeforeRecheck"
+          ],
+          "type": "object"
+        },
+        "misconceptionSignalCode": {
+          "anyOf": [
+            {
+              "maxLength": 96,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "previousAssistanceLevel": {
+          "anyOf": [
+            {
+              "const": "independent",
+              "type": "string"
+            },
+            {
+              "const": "light-hint",
+              "type": "string"
+            },
+            {
+              "const": "guided",
+              "type": "string"
+            },
+            {
+              "const": "reteach-required",
+              "type": "string"
+            }
+          ]
+        },
+        "requestKind": {
+          "const": "bounded-hint-selection",
+          "type": "string"
+        },
+        "reviewedHints": {
+          "items": {
+            "$id": "TutorV2ReviewedHintMetadata",
+            "additionalProperties": false,
+            "properties": {
+              "eligibleLearnerStageRefs": {
+                "items": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "maxItems": 12,
+                "type": "array"
+              },
+              "eligibleMisconceptionCodes": {
+                "items": {
+                  "maxLength": 96,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "maxItems": 12,
+                "type": "array"
+              },
+              "hintLevel": {
+                "anyOf": [
+                  {
+                    "const": "nudge",
+                    "type": "string"
+                  },
+                  {
+                    "const": "concept-cue",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-step",
+                    "type": "string"
+                  }
+                ]
+              },
+              "hintRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "metadataKind": {
+                "const": "study-reviewed-hint",
+                "type": "string"
+              },
+              "reviewedContentRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "reviewRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "metadataKind",
+              "hintRef",
+              "reviewedContentRef",
+              "reviewRef",
+              "hintLevel",
+              "eligibleMisconceptionCodes",
+              "eligibleLearnerStageRefs"
+            ],
+            "type": "object"
+          },
+          "maxItems": 24,
+          "type": "array"
+        },
+        "reviewPermission": {
+          "additionalProperties": false,
+          "properties": {
+            "completedAssessmentReviewAllowed": {
+              "type": "boolean"
+            },
+            "privacyApprovalRef": {
+              "anyOf": [
+                {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "completedAssessmentReviewAllowed",
+            "privacyApprovalRef"
+          ],
+          "type": "object"
+        },
+        "studyHintCeiling": {
+          "anyOf": [
+            {
+              "const": "none",
+              "type": "string"
+            },
+            {
+              "const": "nudge",
+              "type": "string"
+            },
+            {
+              "const": "concept-cue",
+              "type": "string"
+            },
+            {
+              "const": "guided-step",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "requestKind",
+        "contextRef",
+        "assessmentPhase",
+        "studyHintCeiling",
+        "previousAssistanceLevel",
+        "attemptCount",
+        "misconceptionSignalCode",
+        "learnerStageProfile",
+        "reviewPermission",
+        "interventionHistory",
+        "reviewedHints"
+      ],
+      "type": "object"
+    },
+    "intervention": {
+      "$id": "TutorV2InterventionLadderInput",
+      "additionalProperties": false,
+      "properties": {
+        "allowedActions": {
+          "items": {
+            "anyOf": [
+              {
+                "const": "explain",
+                "type": "string"
+              },
+              {
+                "const": "hint",
+                "type": "string"
+              },
+              {
+                "const": "ask-check",
+                "type": "string"
+              },
+              {
+                "const": "show-example",
+                "type": "string"
+              },
+              {
+                "const": "reteach",
+                "type": "string"
+              },
+              {
+                "const": "check-prerequisite",
+                "type": "string"
+              },
+              {
+                "const": "suggest-break",
+                "type": "string"
+              },
+              {
+                "const": "escalate",
+                "type": "string"
+              },
+              {
+                "const": "return-to-lesson",
+                "type": "string"
+              }
+            ]
+          },
+          "maxItems": 9,
+          "minItems": 1,
+          "type": "array"
+        },
+        "assessmentPhase": {
+          "anyOf": [
+            {
+              "const": "instruction-or-practice",
+              "type": "string"
+            },
+            {
+              "const": "active-graded-or-mastery-check",
+              "type": "string"
+            },
+            {
+              "const": "completed-assessment-review",
+              "type": "string"
+            },
+            {
+              "const": "non-graded-review",
+              "type": "string"
+            }
+          ]
+        },
+        "assistanceHistory": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "actionKind": {
+                "anyOf": [
+                  {
+                    "const": "explain",
+                    "type": "string"
+                  },
+                  {
+                    "const": "hint",
+                    "type": "string"
+                  },
+                  {
+                    "const": "ask-check",
+                    "type": "string"
+                  },
+                  {
+                    "const": "show-example",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reteach",
+                    "type": "string"
+                  },
+                  {
+                    "const": "check-prerequisite",
+                    "type": "string"
+                  },
+                  {
+                    "const": "suggest-break",
+                    "type": "string"
+                  },
+                  {
+                    "const": "escalate",
+                    "type": "string"
+                  },
+                  {
+                    "const": "return-to-lesson",
+                    "type": "string"
+                  }
+                ]
+              },
+              "outcome": {
+                "anyOf": [
+                  {
+                    "const": "not-observed",
+                    "type": "string"
+                  },
+                  {
+                    "const": "difficulty-persists",
+                    "type": "string"
+                  },
+                  {
+                    "const": "progress-observed",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "actionKind",
+              "outcome"
+            ],
+            "type": "object"
+          },
+          "maxItems": 12,
+          "type": "array"
+        },
+        "attemptCount": {
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "elapsedInstructionalEffortMinutes": {
+          "maximum": 240,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "inputKind": {
+          "const": "study-intervention-evidence",
+          "type": "string"
+        },
+        "interactionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "interventionCount": {
+          "maximum": 12,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "learnerStageProfile": {
+          "$id": "TutorV2LearnerStageInterventionProfile",
+          "additionalProperties": false,
+          "properties": {
+            "approvalKind": {
+              "const": "study-approved",
+              "type": "string"
+            },
+            "approvalRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "attemptsBeforeFirstHint": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "breakSuggestionAfterEffortMinutes": {
+              "maximum": 120,
+              "minimum": 5,
+              "type": "integer"
+            },
+            "breakSuggestionCooldownInterventions": {
+              "maximum": 8,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "learnerStageRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "maximumHintsBeforeReteach": {
+              "maximum": 3,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "maximumInterventionsBeforeEscalation": {
+              "maximum": 12,
+              "minimum": 3,
+              "type": "integer"
+            },
+            "maximumReteachesBeforeEscalation": {
+              "maximum": 3,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "minimumAttemptsBeforeBreakSuggestion": {
+              "maximum": 10,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "profileKind": {
+              "const": "study-approved-intervention-profile",
+              "type": "string"
+            },
+            "profileRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "proposedBreakDurationMinutes": {
+              "maximum": 30,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "profileKind",
+            "profileRef",
+            "learnerStageRef",
+            "approvalRef",
+            "approvalKind",
+            "attemptsBeforeFirstHint",
+            "maximumHintsBeforeReteach",
+            "maximumReteachesBeforeEscalation",
+            "breakSuggestionAfterEffortMinutes",
+            "minimumAttemptsBeforeBreakSuggestion",
+            "breakSuggestionCooldownInterventions",
+            "proposedBreakDurationMinutes",
+            "maximumInterventionsBeforeEscalation"
+          ],
+          "type": "object"
+        },
+        "misconceptionSignal": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "hypothesisRef": {
+                  "type": "null"
+                },
+                "status": {
+                  "const": "none",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "hypothesisRef"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "hypothesisRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "status": {
+                  "anyOf": [
+                    {
+                      "const": "suspected",
+                      "type": "string"
+                    },
+                    {
+                      "const": "persistent",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "hypothesisRef"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "prerequisiteSignal": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "prerequisiteConceptRef": {
+                  "type": "null"
+                },
+                "status": {
+                  "const": "none",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "prerequisiteConceptRef"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "prerequisiteConceptRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "status": {
+                  "anyOf": [
+                    {
+                      "const": "suspected",
+                      "type": "string"
+                    },
+                    {
+                      "const": "confirmed",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "status",
+                "prerequisiteConceptRef"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "recentBreakSuggestion": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "const": "none",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "interventionsSinceSuggestion": {
+                  "maximum": 12,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "status": {
+                  "const": "recent",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "interventionsSinceSuggestion"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "safetyRestriction": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "restrictionRef": {
+                  "type": "null"
+                },
+                "status": {
+                  "const": "none",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "restrictionRef"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "restrictionRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "status": {
+                  "const": "academic-flow-held",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status",
+                "restrictionRef"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "required": [
+        "inputKind",
+        "interactionRef",
+        "attemptCount",
+        "assistanceHistory",
+        "misconceptionSignal",
+        "prerequisiteSignal",
+        "learnerStageProfile",
+        "elapsedInstructionalEffortMinutes",
+        "interventionCount",
+        "safetyRestriction",
+        "recentBreakSuggestion",
+        "assessmentPhase",
+        "allowedActions"
+      ],
+      "type": "object"
+    },
+    "masteryEvidence": {
+      "$id": "TutorV2StudyMasteryEvidenceInput",
+      "additionalProperties": false,
+      "properties": {
+        "conceptRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "envelope": {
+          "const": "study-issued-mastery-evidence",
+          "type": "string"
+        },
+        "evaluatedAt": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$id": "TutorV2StudyMasteryEvidenceItem",
+            "additionalProperties": false,
+            "properties": {
+              "assistanceLevel": {
+                "anyOf": [
+                  {
+                    "const": "independent",
+                    "type": "string"
+                  },
+                  {
+                    "const": "light-hint",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reteach-required",
+                    "type": "string"
+                  }
+                ]
+              },
+              "conceptRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "evidenceRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "issuer": {
+                "const": "study",
+                "type": "string"
+              },
+              "learnerScopeRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "observedAt": {
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+                "type": "string"
+              },
+              "outcome": {
+                "anyOf": [
+                  {
+                    "const": "demonstrated",
+                    "type": "string"
+                  },
+                  {
+                    "const": "not-demonstrated",
+                    "type": "string"
+                  },
+                  {
+                    "const": "inconclusive",
+                    "type": "string"
+                  }
+                ]
+              },
+              "recency": {
+                "anyOf": [
+                  {
+                    "const": "current",
+                    "type": "string"
+                  },
+                  {
+                    "const": "stale",
+                    "type": "string"
+                  }
+                ]
+              },
+              "spacing": {
+                "anyOf": [
+                  {
+                    "const": "same-session",
+                    "type": "string"
+                  },
+                  {
+                    "const": "spaced",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "evidenceRef",
+              "issuer",
+              "learnerScopeRef",
+              "conceptRef",
+              "outcome",
+              "assistanceLevel",
+              "recency",
+              "spacing",
+              "observedAt"
+            ],
+            "type": "object"
+          },
+          "maxItems": 100,
+          "type": "array"
+        },
+        "learnerScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "envelope",
+        "learnerScopeRef",
+        "conceptRef",
+        "evaluatedAt",
+        "evidence"
+      ],
+      "type": "object"
+    },
+    "misconceptionMatch": {
+      "$id": "TutorV2AcademicMisconceptionMatchRequest",
+      "additionalProperties": false,
+      "properties": {
+        "academicMisconceptionCode": {
+          "maxLength": 96,
+          "minLength": 8,
+          "pattern": "^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+){2,7}$",
+          "type": "string"
+        },
+        "conceptRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "evaluatedAt": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$id": "TutorV2StudyApprovedAcademicEvidence",
+            "additionalProperties": false,
+            "properties": {
+              "academicMisconceptionCode": {
+                "maxLength": 96,
+                "minLength": 8,
+                "pattern": "^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+){2,7}$",
+                "type": "string"
+              },
+              "approvalKind": {
+                "const": "study-approved",
+                "type": "string"
+              },
+              "approvalRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "conceptRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "evidenceKind": {
+                "const": "study-approved-structured-academic-evidence",
+                "type": "string"
+              },
+              "evidenceRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "evidenceVersion": {
+                "const": 1,
+                "type": "number"
+              },
+              "finding": {
+                "anyOf": [
+                  {
+                    "const": "consistent-with-misconception-code",
+                    "type": "string"
+                  },
+                  {
+                    "const": "inconsistent-with-misconception-code",
+                    "type": "string"
+                  }
+                ]
+              },
+              "instructionalContextRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "learnerScopeRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "observedAt": {
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+                "type": "string"
+              },
+              "opportunityRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "sourceKind": {
+                "anyOf": [
+                  {
+                    "const": "selected-response-classification",
+                    "type": "string"
+                  },
+                  {
+                    "const": "worked-step-classification",
+                    "type": "string"
+                  },
+                  {
+                    "const": "constructed-response-rubric",
+                    "type": "string"
+                  },
+                  {
+                    "const": "prerequisite-check",
+                    "type": "string"
+                  },
+                  {
+                    "const": "teacher-reviewed-academic-observation",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "evidenceVersion",
+              "evidenceKind",
+              "evidenceRef",
+              "opportunityRef",
+              "learnerScopeRef",
+              "instructionalContextRef",
+              "conceptRef",
+              "academicMisconceptionCode",
+              "sourceKind",
+              "finding",
+              "observedAt",
+              "approvalKind",
+              "approvalRef"
+            ],
+            "type": "object"
+          },
+          "maxItems": 64,
+          "type": "array"
+        },
+        "instructionalContextRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "learnerScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "matcherVersion": {
+          "const": 1,
+          "type": "number"
+        },
+        "scopeKind": {
+          "const": "trusted-study-academic-evidence-scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "matcherVersion",
+        "scopeKind",
+        "learnerScopeRef",
+        "instructionalContextRef",
+        "conceptRef",
+        "academicMisconceptionCode",
+        "evaluatedAt",
+        "evidence"
+      ],
+      "type": "object"
+    },
+    "misconceptionRegistry": {
+      "items": {
+        "$id": "TutorV2AcademicMisconceptionEntry",
+        "additionalProperties": false,
+        "properties": {
+          "academicMisconceptionCode": {
+            "maxLength": 96,
+            "minLength": 8,
+            "pattern": "^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+){2,7}$",
+            "type": "string"
+          },
+          "conceptRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "evidenceRequirements": {
+            "$id": "TutorV2MisconceptionEvidenceRequirements",
+            "additionalProperties": false,
+            "properties": {
+              "acceptedSourceKinds": {
+                "items": {
+                  "anyOf": [
+                    {
+                      "const": "selected-response-classification",
+                      "type": "string"
+                    },
+                    {
+                      "const": "worked-step-classification",
+                      "type": "string"
+                    },
+                    {
+                      "const": "constructed-response-rubric",
+                      "type": "string"
+                    },
+                    {
+                      "const": "prerequisite-check",
+                      "type": "string"
+                    },
+                    {
+                      "const": "teacher-reviewed-academic-observation",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "maxItems": 5,
+                "minItems": 1,
+                "type": "array"
+              },
+              "maximumEvidenceAgeDays": {
+                "maximum": 365,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "minimumDistinctOpportunityCount": {
+                "maximum": 16,
+                "minimum": 2,
+                "type": "integer"
+              },
+              "minimumSupportingEvidenceCount": {
+                "maximum": 16,
+                "minimum": 2,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "minimumSupportingEvidenceCount",
+              "minimumDistinctOpportunityCount",
+              "maximumEvidenceAgeDays",
+              "acceptedSourceKinds"
+            ],
+            "type": "object"
+          },
+          "misconceptionRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "prerequisiteConceptRefs": {
+            "items": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "maxItems": 12,
+            "type": "array"
+          },
+          "reviewApprovalRef": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "reviewedInstructionalResponseRefs": {
+            "items": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "maxItems": 12,
+            "minItems": 1,
+            "type": "array"
+          },
+          "version": {
+            "const": 1,
+            "type": "number"
+          }
+        },
+        "required": [
+          "version",
+          "misconceptionRef",
+          "conceptRef",
+          "academicMisconceptionCode",
+          "reviewApprovalRef",
+          "reviewedInstructionalResponseRefs",
+          "prerequisiteConceptRefs",
+          "evidenceRequirements"
+        ],
+        "type": "object"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "type": "array"
+    },
+    "parentWhy": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "authorizedLearnerRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "policyRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "producedAt": {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+              "type": "string"
+            },
+            "recommendationEventRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "recommendationRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "selectedLearnerRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "selectedLearnerRef",
+            "authorizedLearnerRef",
+            "recommendationRef",
+            "recommendationEventRef",
+            "policyRef",
+            "producedAt"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "repairPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "maximumDepth": {
+          "maximum": 64,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "reviewedContent": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "conceptRef": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "reviewedContentRefs": {
+                "items": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "maxItems": 12,
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "required": [
+              "conceptRef",
+              "reviewedContentRefs"
+            ],
+            "type": "object"
+          },
+          "maxItems": 12,
+          "type": "array"
+        },
+        "reviewedStaticFallback": {
+          "additionalProperties": false,
+          "properties": {
+            "fallbackRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "reviewedContentRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 3,
+              "minItems": 1,
+              "type": "array"
+            }
+          },
+          "required": [
+            "fallbackRef",
+            "reviewedContentRefs"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "maximumDepth",
+        "reviewedStaticFallback",
+        "reviewedContent"
+      ],
+      "type": "object"
+    },
+    "requestKind": {
+      "const": "study-wave2-adaptive-composition",
+      "type": "string"
+    },
+    "reteachPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "maximumRepeatedLoops": {
+          "maximum": 12,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "maximumSteps": {
+          "maximum": 12,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "priorReteachLoops": {
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "reviewedContentRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "type": "array"
+        },
+        "reviewedStaticFallback": {
+          "additionalProperties": false,
+          "properties": {
+            "fallbackRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "reviewedContentRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 4,
+              "minItems": 1,
+              "type": "array"
+            }
+          },
+          "required": [
+            "fallbackRef",
+            "reviewedContentRefs"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "maximumSteps",
+        "priorReteachLoops",
+        "maximumRepeatedLoops",
+        "reviewedStaticFallback",
+        "reviewedContentRefs"
+      ],
+      "type": "object"
+    },
+    "reviewedContentAdmissions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "admission": {
+            "anyOf": [
+              {
+                "const": "admitted",
+                "type": "string"
+              },
+              {
+                "const": "not-admitted",
+                "type": "string"
+              }
+            ]
+          },
+          "feature": {
+            "anyOf": [
+              {
+                "const": "concept-prerequisite-graph",
+                "type": "string"
+              },
+              {
+                "const": "misconception-analysis",
+                "type": "string"
+              },
+              {
+                "const": "hint-ladder",
+                "type": "string"
+              },
+              {
+                "const": "intervention-ladder",
+                "type": "string"
+              },
+              {
+                "const": "mastery-evidence",
+                "type": "string"
+              },
+              {
+                "const": "prerequisite-repair",
+                "type": "string"
+              },
+              {
+                "const": "reteach",
+                "type": "string"
+              },
+              {
+                "const": "parent-explanation",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "feature",
+          "admission"
+        ],
+        "type": "object"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array"
+    },
+    "reviewedStaticFallback": {
+      "additionalProperties": false,
+      "properties": {
+        "fallbackRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "reviewedContentRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "fallbackRef",
+        "reviewedContentRefs"
+      ],
+      "type": "object"
+    },
+    "studyAuthority": {
+      "$id": "TutorV2Wave2StudyAuthority",
+      "additionalProperties": false,
+      "properties": {
+        "allowedActions": {
+          "items": {
+            "anyOf": [
+              {
+                "const": "explain",
+                "type": "string"
+              },
+              {
+                "const": "hint",
+                "type": "string"
+              },
+              {
+                "const": "ask-check",
+                "type": "string"
+              },
+              {
+                "const": "show-example",
+                "type": "string"
+              },
+              {
+                "const": "reteach",
+                "type": "string"
+              },
+              {
+                "const": "check-prerequisite",
+                "type": "string"
+              },
+              {
+                "const": "suggest-break",
+                "type": "string"
+              },
+              {
+                "const": "escalate",
+                "type": "string"
+              },
+              {
+                "const": "return-to-lesson",
+                "type": "string"
+              }
+            ]
+          },
+          "maxItems": 9,
+          "minItems": 1,
+          "type": "array"
+        },
+        "assessmentPhase": {
+          "anyOf": [
+            {
+              "const": "instruction-or-practice",
+              "type": "string"
+            },
+            {
+              "const": "active-graded-or-mastery-check",
+              "type": "string"
+            },
+            {
+              "const": "completed-assessment-review",
+              "type": "string"
+            },
+            {
+              "const": "non-graded-review",
+              "type": "string"
+            }
+          ]
+        },
+        "authorityKind": {
+          "const": "study-wave2-authority",
+          "type": "string"
+        },
+        "currentConceptRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "curriculumBindingRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "eventRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "gradeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "householdScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "instructionalContextRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "interactionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "invocationBindingRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "learnerScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "officialWorkingLevelRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "safetyStatus": {
+          "anyOf": [
+            {
+              "const": "academic-flow-admitted",
+              "type": "string"
+            },
+            {
+              "const": "academic-flow-held",
+              "type": "string"
+            }
+          ]
+        },
+        "sessionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "studyHintCeiling": {
+          "anyOf": [
+            {
+              "const": "none",
+              "type": "string"
+            },
+            {
+              "const": "nudge",
+              "type": "string"
+            },
+            {
+              "const": "concept-cue",
+              "type": "string"
+            },
+            {
+              "const": "guided-step",
+              "type": "string"
+            }
+          ]
+        },
+        "subjectRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authorityKind",
+        "eventRef",
+        "invocationBindingRef",
+        "householdScopeRef",
+        "learnerScopeRef",
+        "sessionRef",
+        "interactionRef",
+        "subjectRef",
+        "gradeRef",
+        "curriculumBindingRef",
+        "officialWorkingLevelRef",
+        "instructionalContextRef",
+        "currentConceptRef",
+        "assessmentPhase",
+        "studyHintCeiling",
+        "safetyStatus",
+        "allowedActions"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "compositionVersion",
+    "requestKind",
+    "studyAuthority",
+    "capabilityMetadata",
+    "reviewedContentAdmissions",
+    "conceptGraph",
+    "conceptScopeBindings",
+    "misconceptionRegistry",
+    "misconceptionMatch",
+    "hintSelection",
+    "intervention",
+    "masteryEvidence",
+    "repairPolicy",
+    "reteachPolicy",
+    "parentWhy",
+    "reviewedStaticFallback"
+  ],
+  "title": "Study Tutor V2 Wave 2 Adaptive Composition Request",
+  "type": "object"
+}

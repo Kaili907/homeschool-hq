@@ -1,0 +1,31 @@
+{
+  "candidate": [
+    {
+      "code": "FINAL_INDEPENDENT_REREVIEW_REQUIRED",
+      "detail": "Wave 2 remains incomplete until detached review of the exact final candidate SHA."
+    },
+    {
+      "code": "REFERENCE_REPLAY_LEDGER_ONLY",
+      "detail": "The included replay ledger is in-memory test/reference infrastructure; durable production persistence is intentionally absent."
+    },
+    {
+      "code": "REFERENCE_ONLY_REVIEWED_CONTENT",
+      "detail": "Composition returns reviewed content references and reviewed Parent copy; no learner-facing production delivery path is wired."
+    },
+    {
+      "code": "NO_LIVE_MODEL_CERTIFICATION",
+      "detail": "No live model or commercial web runtime certification was performed."
+    }
+  ],
+  "inherited": [
+    {
+      "code": "OBSOLETE_BROAD_PLATFORM_VALIDATOR",
+      "detail": "The broad legacy validator remains 18/19 because its platform-boundary substring rule flags accepted authority paths and generated output."
+    },
+    {
+      "code": "SESSION6_ARCHIVES_NOT_MOUNTED",
+      "detail": "Four external Session 6 archives were not mounted; the reconstructed frozen source built and 35 executable Study Core Bridge tests passed, while one archive checksum test skipped."
+    }
+  ],
+  "limitationsVersion": 1
+}

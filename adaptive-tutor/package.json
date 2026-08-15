@@ -16,10 +16,15 @@
     "tutor-v2:test": "node scripts/tutor-v2/run-compiled.mjs test",
     "tutor-v2:schema": "node scripts/tutor-v2/run-compiled.mjs schema",
     "tutor-v2:schema-check": "node scripts/tutor-v2/run-compiled.mjs schema --check",
+    "tutor-v2:wave2-schema": "node scripts/tutor-v2/run-compiled.mjs wave2-schema",
+    "tutor-v2:wave2-schema-check": "node scripts/tutor-v2/run-compiled.mjs wave2-schema --check",
     "tutor-v2:release": "node scripts/tutor-v2/run-compiled.mjs release",
     "tutor-v2:release-check": "node scripts/tutor-v2/run-compiled.mjs release --check",
+    "tutor-v2:wave2-release": "node scripts/tutor-v2/run-compiled.mjs wave2-release",
+    "tutor-v2:wave2-release-check": "node scripts/tutor-v2/run-compiled.mjs wave2-release --check",
     "tutor-v2:evaluate": "npm --prefix evals/v2/framework run evaluate",
-    "tutor-v2:wave1-gate": "node scripts/tutor-v2/wave1-gate.mjs"
+    "tutor-v2:wave1-gate": "node scripts/tutor-v2/wave1-gate.mjs",
+    "tutor-v2:wave2-gate": "node scripts/tutor-v2/wave2-gate.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",

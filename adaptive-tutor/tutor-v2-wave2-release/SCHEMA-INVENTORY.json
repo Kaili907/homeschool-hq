@@ -1,0 +1,20 @@
+{
+  "compositionVersion": "study-tutor-v2.wave2-composition.v1",
+  "generatedSchemaCount": 2,
+  "internalPortSchemasGenerated": 0,
+  "product": "Manuel Academy Study Tutor V2",
+  "schemaInventoryVersion": 1,
+  "schemas": [
+    {
+      "file": "wave2-adaptive-composition-request.schema.json",
+      "sha256": "4c73f1963e77a1f8683769faf560d8149896c69f91eef932782092f3029dd17d",
+      "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2AdaptiveCompositionRequestSchema"
+    },
+    {
+      "file": "wave2-study-decision-packet.schema.json",
+      "sha256": "6fcc337b1231acee2209a59177df5d4bc64fd558a1b6e9773a2817004fe50b51",
+      "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2StudyDecisionPacketSchema"
+    }
+  ],
+  "wave": "Wave 2 Adaptive Intelligence Candidate"
+}

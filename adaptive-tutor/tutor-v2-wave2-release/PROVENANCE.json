@@ -1,0 +1,76 @@
+{
+  "acceptedWave1BaselineSha": "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
+  "branch": "mac/tutor-v2-w2-convergence-r1",
+  "cherryPickOrder": [
+    "W2_01_ADMISSION",
+    "W2_02_CONCEPT_GRAPH",
+    "W2_03_MISCONCEPTION",
+    "W2_04_HINT_LADDER",
+    "W2_05_INTERVENTION",
+    "W2_06_MASTERY_EVIDENCE",
+    "W2_07_PARENT_WHY",
+    "W2_08_REPAIR_RETEACH"
+  ],
+  "lanes": {
+    "W2_01_ADMISSION": {
+      "branch": "origin/mac/tutor-v2-w2-admission-r1",
+      "cherryPickedCommit": "cd8244ff4a3b5065cbe2a7db3bf29ab6f9863d6f",
+      "remoteTip": "d6a1b069a8f5d67023edcb4f247b3c67076306a4",
+      "stablePatchId": "88e8a6bf486dfe2b0fef4c1679acef9d058793d5"
+    },
+    "W2_02_CONCEPT_GRAPH": {
+      "branch": "origin/mac/tutor-v2-w2-concept-graph-r1",
+      "cherryPickedCommit": "d5a4f0af1c0db541c8834e3d8b8d12a0fbaeddbf",
+      "remoteTip": "b971fc4d139449a815e4ff06c34ca4abb5c84005",
+      "stablePatchId": "ad8f3e145ba664e3b0d64135c3cf1d8d2174bd2e"
+    },
+    "W2_03_MISCONCEPTION": {
+      "branch": "origin/mac/tutor-v2-w2-misconception-r1",
+      "cherryPickedCommit": "a30e617454a4c05282fb2c7d96f070e3a6fb5a86",
+      "remoteTip": "f9ed81626d8d9e455ea750989d8c2a71cfe8bd6d",
+      "stablePatchId": "f5f7cca1df95e16b2a193bdbb70177ef9a49560b"
+    },
+    "W2_04_HINT_LADDER": {
+      "branch": "origin/mac/tutor-v2-w2-hint-ladder-r1",
+      "cherryPickedCommit": "aa3ee6e579e049b7971e973e7adc2ddacaa3140f",
+      "remoteTip": "eb941ff897181f761f83b3604dc4006d5e5118d4",
+      "stablePatchId": "7ac35fbee5cb7965f75dba780f3e450d11355091"
+    },
+    "W2_05_INTERVENTION": {
+      "branch": "origin/mac/tutor-v2-w2-intervention-r1",
+      "cherryPickedCommit": "b85caf5f62a8e2de71816239ab7f3640b5f83746",
+      "remoteTip": "94c0d816e6e312af9f61d465a9692ef37919a65b",
+      "stablePatchId": "0f4f407fe5dbf52ef577c19e9617d7ed342097d8"
+    },
+    "W2_06_MASTERY_EVIDENCE": {
+      "branch": "origin/mac/tutor-v2-w2-mastery-evidence-r1",
+      "cherryPickedCommit": "1e7432b02beff1ed5d7ec8e1421a0d6a4c955dfe",
+      "remoteTip": "241cfc7d3b6c673139728302b00bd580cba1e919",
+      "stablePatchId": "7fcc26bee9e30240410e6b124534f9fa259cf9c9"
+    },
+    "W2_07_PARENT_WHY": {
+      "branch": "origin/mac/tutor-v2-w2-parent-why-r1",
+      "cherryPickedCommit": "db5341ef1409173f98617255d0b8ca3a51deb80d",
+      "remoteTip": "661669117497a33e5d2da0a12e6bc3801839a165",
+      "stablePatchId": "89ad1f511b2d71d2d0fc7689586beb9e53068e60"
+    },
+    "W2_08_REPAIR_RETEACH": {
+      "branch": "origin/mac/tutor-v2-w2-repair-reteach-r1",
+      "cherryPickedCommit": "aeff3bde7be983276c9006576d388eabbe81ba97",
+      "remoteTip": "39b8d671f35dce6e44d19bff2d58b1bb2bfa4d81",
+      "stablePatchId": "7ce3fdf3b5fd93d6d2e062667b0fc8b65914bcc1"
+    }
+  },
+  "provenanceVersion": 1,
+  "session": "STUDY-TUTOR-V2-W2-09 — Adaptive Intelligence Convergence",
+  "startingSha": "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
+  "verification": {
+    "allRemoteTipsExact": true,
+    "baseIsDirectParentForEveryLane": true,
+    "convergenceOwnershipPassed": true,
+    "laneTreesUnmodifiedByConvergence": true,
+    "mergeCommitsInLaneRanges": 0,
+    "stablePatchIdsExact": true
+  },
+  "w1_10R5AcceptanceClassification": "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS"
+}

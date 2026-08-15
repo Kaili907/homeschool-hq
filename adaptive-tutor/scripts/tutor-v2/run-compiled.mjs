@@ -18,11 +18,15 @@ run(process.execPath, [tsc, "-p", "scripts/tutor-v2/tsconfig.json"]);
 const [target, ...args] = process.argv.slice(2);
 if (target === "schema") {
   run(process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-schemas.js", ...args]);
+} else if (target === "wave2-schema") {
+  run(process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-wave2-schemas.js", ...args]);
 } else if (target === "release") {
   run(process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-release.js", ...args]);
+} else if (target === "wave2-release") {
+  run(process.execPath, ["scripts/tutor-v2/.dist/scripts/tutor-v2/generate-wave2-release.js", ...args]);
 } else if (target === "test") {
   run(process.execPath, ["--test", "scripts/tutor-v2/.dist/tests/tutor-v2-convergence/*.test.js", ...args]);
 } else {
-  process.stderr.write("Expected target: schema, release, or test.\n");
+  process.stderr.write("Expected target: schema, wave2-schema, release, wave2-release, or test.\n");
   process.exitCode = 2;
 }

@@ -1,0 +1,30 @@
+{
+  "counts": {
+    "foundationHarnessPassed": 8,
+    "foundationHarnessTests": 8,
+    "tutorCorePassed": 21,
+    "tutorCoreTests": 21,
+    "wave1HardGatePassed": 462,
+    "wave1HardGateTests": 462,
+    "wave2CompositionPassed": 17,
+    "wave2CompositionTests": 17,
+    "wave2LanePassed": 164,
+    "wave2LaneTests": 164
+  },
+  "finalClassification": "WAVE2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "hardGateFamiliesPassed": 12,
+  "hardGateFamilyCount": 12,
+  "inheritedFindings": [
+    {
+      "detail": "18/19; accepted obsolete platform-boundary validator finding",
+      "name": "broad-validator",
+      "status": "INHERITED_FINDING"
+    },
+    {
+      "detail": "four external SESSION6 archives not mounted; exact checksum test skipped",
+      "name": "frozen-archive-checksums",
+      "status": "NOT_AVAILABLE"
+    }
+  ],
+  "summaryVersion": 1
+}

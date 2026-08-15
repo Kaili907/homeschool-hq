@@ -1,0 +1,843 @@
+{
+  "$id": "TutorV2Wave2StudyDecisionPacket",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "admissions": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "feature": {
+                "anyOf": [
+                  {
+                    "const": "concept-prerequisite-graph",
+                    "type": "string"
+                  },
+                  {
+                    "const": "misconception-analysis",
+                    "type": "string"
+                  },
+                  {
+                    "const": "hint-ladder",
+                    "type": "string"
+                  },
+                  {
+                    "const": "intervention-ladder",
+                    "type": "string"
+                  },
+                  {
+                    "const": "mastery-evidence",
+                    "type": "string"
+                  },
+                  {
+                    "const": "prerequisite-repair",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reteach",
+                    "type": "string"
+                  },
+                  {
+                    "const": "parent-explanation",
+                    "type": "string"
+                  }
+                ]
+              },
+              "reason": {
+                "maxLength": 96,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "status": {
+                "anyOf": [
+                  {
+                    "const": "admitted",
+                    "type": "string"
+                  },
+                  {
+                    "const": "refused",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "feature",
+              "status",
+              "reason"
+            ],
+            "type": "object"
+          },
+          "maxItems": 8,
+          "minItems": 7,
+          "type": "array"
+        },
+        "compositionVersion": {
+          "const": "study-tutor-v2.wave2-composition.v1",
+          "type": "string"
+        },
+        "concept": {
+          "additionalProperties": false,
+          "properties": {
+            "currentConceptRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "directPrerequisiteRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 1000,
+              "type": "array"
+            },
+            "status": {
+              "const": "accepted",
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "currentConceptRef",
+            "directPrerequisiteRefs"
+          ],
+          "type": "object"
+        },
+        "eventRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "hint": {
+          "additionalProperties": false,
+          "properties": {
+            "hintLevel": {
+              "anyOf": [
+                {
+                  "const": "none",
+                  "type": "string"
+                },
+                {
+                  "const": "nudge",
+                  "type": "string"
+                },
+                {
+                  "const": "concept-cue",
+                  "type": "string"
+                },
+                {
+                  "const": "guided-step",
+                  "type": "string"
+                }
+              ]
+            },
+            "reviewedContentRef": {
+              "anyOf": [
+                {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "const": "recommended",
+                  "type": "string"
+                },
+                {
+                  "const": "no-hint",
+                  "type": "string"
+                }
+              ]
+            },
+            "unrestrictedProviderProseAllowed": {
+              "const": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "status",
+            "hintLevel",
+            "reviewedContentRef",
+            "unrestrictedProviderProseAllowed"
+          ],
+          "type": "object"
+        },
+        "intervention": {
+          "additionalProperties": false,
+          "properties": {
+            "actionKind": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "const": "explain",
+                      "type": "string"
+                    },
+                    {
+                      "const": "hint",
+                      "type": "string"
+                    },
+                    {
+                      "const": "ask-check",
+                      "type": "string"
+                    },
+                    {
+                      "const": "show-example",
+                      "type": "string"
+                    },
+                    {
+                      "const": "reteach",
+                      "type": "string"
+                    },
+                    {
+                      "const": "check-prerequisite",
+                      "type": "string"
+                    },
+                    {
+                      "const": "suggest-break",
+                      "type": "string"
+                    },
+                    {
+                      "const": "escalate",
+                      "type": "string"
+                    },
+                    {
+                      "const": "return-to-lesson",
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "reasonCode": {
+              "maxLength": 96,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "const": "recommended",
+                  "type": "string"
+                },
+                {
+                  "const": "blocked",
+                  "type": "string"
+                }
+              ]
+            },
+            "studyMutationAllowed": {
+              "const": false,
+              "type": "boolean"
+            },
+            "tutorMayExecute": {
+              "const": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "status",
+            "actionKind",
+            "reasonCode",
+            "tutorMayExecute",
+            "studyMutationAllowed"
+          ],
+          "type": "object"
+        },
+        "mastery": {
+          "additionalProperties": false,
+          "properties": {
+            "authoritative": {
+              "const": false,
+              "type": "boolean"
+            },
+            "evaluationStatus": {
+              "anyOf": [
+                {
+                  "const": "summarized",
+                  "type": "string"
+                },
+                {
+                  "const": "rejected",
+                  "type": "string"
+                }
+              ]
+            },
+            "recommendation": {
+              "anyOf": [
+                {
+                  "const": "insufficient-evidence",
+                  "type": "string"
+                },
+                {
+                  "const": "emerging-evidence",
+                  "type": "string"
+                },
+                {
+                  "const": "supported-evidence",
+                  "type": "string"
+                },
+                {
+                  "const": "conflicting-evidence",
+                  "type": "string"
+                }
+              ]
+            },
+            "sampleCount": {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "studyMutationAllowed": {
+              "const": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "evaluationStatus",
+            "recommendation",
+            "sampleCount",
+            "authoritative",
+            "studyMutationAllowed"
+          ],
+          "type": "object"
+        },
+        "misconception": {
+          "additionalProperties": false,
+          "properties": {
+            "academicMisconceptionCode": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "authoritativeDiagnosis": {
+              "const": false,
+              "type": "boolean"
+            },
+            "durableLearnerClassificationAllowed": {
+              "const": false,
+              "type": "boolean"
+            },
+            "possibleInstructionalSignalOnly": {
+              "const": true,
+              "type": "boolean"
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "const": "no-signal",
+                  "type": "string"
+                },
+                {
+                  "const": "insufficient-evidence",
+                  "type": "string"
+                },
+                {
+                  "const": "possible-misconception",
+                  "type": "string"
+                },
+                {
+                  "const": "conflicting-evidence",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "academicMisconceptionCode",
+            "possibleInstructionalSignalOnly",
+            "authoritativeDiagnosis",
+            "durableLearnerClassificationAllowed"
+          ],
+          "type": "object"
+        },
+        "parentExplanation": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "disclaimer": {
+                  "maxLength": 160,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "explanation": {
+                  "maxLength": 240,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "producedAt": {
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+                  "type": "string"
+                },
+                "reasonCode": {
+                  "maxLength": 96,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "recommendationRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "title": {
+                  "maxLength": 80,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "reasonCode",
+                "title",
+                "explanation",
+                "disclaimer",
+                "recommendationRef",
+                "producedAt"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "repair": {
+          "additionalProperties": false,
+          "properties": {
+            "appliedRepairDepth": {
+              "maximum": 3,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "masteryWrite": {
+              "const": "none",
+              "type": "string"
+            },
+            "proposalRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "reasonCode": {
+              "maxLength": 96,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "recommendedConceptRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 12,
+              "type": "array"
+            },
+            "reviewedContentRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 12,
+              "type": "array"
+            },
+            "source": {
+              "anyOf": [
+                {
+                  "const": "adaptive",
+                  "type": "string"
+                },
+                {
+                  "const": "reviewed-static-fallback",
+                  "type": "string"
+                },
+                {
+                  "const": "none",
+                  "type": "string"
+                }
+              ]
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "const": "proposed",
+                  "type": "string"
+                },
+                {
+                  "const": "withheld",
+                  "type": "string"
+                }
+              ]
+            },
+            "workingLevelMutation": {
+              "const": "none",
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "proposalRef",
+            "reasonCode",
+            "source",
+            "recommendedConceptRefs",
+            "reviewedContentRefs",
+            "appliedRepairDepth",
+            "workingLevelMutation",
+            "masteryWrite"
+          ],
+          "type": "object"
+        },
+        "reteach": {
+          "additionalProperties": false,
+          "properties": {
+            "activeAssessmentBypass": {
+              "const": false,
+              "type": "boolean"
+            },
+            "answerAuthority": {
+              "const": "none",
+              "type": "string"
+            },
+            "masteryWrite": {
+              "const": "none",
+              "type": "string"
+            },
+            "proposalRef": {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            "reasonCode": {
+              "maxLength": 96,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            "reviewedContentRefs": {
+              "items": {
+                "maxLength": 160,
+                "minLength": 3,
+                "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                "type": "string"
+              },
+              "maxItems": 4,
+              "type": "array"
+            },
+            "source": {
+              "anyOf": [
+                {
+                  "const": "adaptive",
+                  "type": "string"
+                },
+                {
+                  "const": "reviewed-static-fallback",
+                  "type": "string"
+                },
+                {
+                  "const": "none",
+                  "type": "string"
+                }
+              ]
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "const": "proposed",
+                  "type": "string"
+                },
+                {
+                  "const": "withheld",
+                  "type": "string"
+                }
+              ]
+            },
+            "stepCount": {
+              "maximum": 4,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "workingLevelMutation": {
+              "const": "none",
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "proposalRef",
+            "reasonCode",
+            "source",
+            "reviewedContentRefs",
+            "stepCount",
+            "answerAuthority",
+            "activeAssessmentBypass",
+            "workingLevelMutation",
+            "masteryWrite"
+          ],
+          "type": "object"
+        },
+        "status": {
+          "const": "pending-study-decision",
+          "type": "string"
+        },
+        "studyDecisionRequired": {
+          "const": true,
+          "type": "boolean"
+        },
+        "studyEngineRemainsAuthority": {
+          "const": true,
+          "type": "boolean"
+        },
+        "studyMutationAllowed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanChangeOfficialWorkingLevel": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanDeclareOfficialMastery": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "studyDecisionRequired",
+        "studyMutationAllowed",
+        "studyEngineRemainsAuthority",
+        "tutorCanChangeOfficialWorkingLevel",
+        "tutorCanDeclareOfficialMastery",
+        "compositionVersion",
+        "status",
+        "eventRef",
+        "admissions",
+        "concept",
+        "misconception",
+        "hint",
+        "intervention",
+        "mastery",
+        "repair",
+        "reteach",
+        "parentExplanation"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "compositionVersion": {
+          "const": "study-tutor-v2.wave2-composition.v1",
+          "type": "string"
+        },
+        "eventRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "failedFeature": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "const": "concept-prerequisite-graph",
+                  "type": "string"
+                },
+                {
+                  "const": "misconception-analysis",
+                  "type": "string"
+                },
+                {
+                  "const": "hint-ladder",
+                  "type": "string"
+                },
+                {
+                  "const": "intervention-ladder",
+                  "type": "string"
+                },
+                {
+                  "const": "mastery-evidence",
+                  "type": "string"
+                },
+                {
+                  "const": "prerequisite-repair",
+                  "type": "string"
+                },
+                {
+                  "const": "reteach",
+                  "type": "string"
+                },
+                {
+                  "const": "parent-explanation",
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fallbackRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "reasonCode": {
+          "maxLength": 96,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "reviewedContentRefs": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 3,
+            "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 12,
+          "minItems": 1,
+          "type": "array"
+        },
+        "status": {
+          "const": "reviewed-static-fallback",
+          "type": "string"
+        },
+        "studyDecisionRequired": {
+          "const": true,
+          "type": "boolean"
+        },
+        "studyEngineRemainsAuthority": {
+          "const": true,
+          "type": "boolean"
+        },
+        "studyMutationAllowed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanChangeOfficialWorkingLevel": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanDeclareOfficialMastery": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "studyDecisionRequired",
+        "studyMutationAllowed",
+        "studyEngineRemainsAuthority",
+        "tutorCanChangeOfficialWorkingLevel",
+        "tutorCanDeclareOfficialMastery",
+        "compositionVersion",
+        "status",
+        "eventRef",
+        "reasonCode",
+        "failedFeature",
+        "fallbackRef",
+        "reviewedContentRefs"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "compositionVersion": {
+          "const": "study-tutor-v2.wave2-composition.v1",
+          "type": "string"
+        },
+        "eventRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "reasonCode": {
+          "maxLength": 96,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+          "type": "string"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "duplicate-ignored",
+              "type": "string"
+            },
+            {
+              "const": "quarantined",
+              "type": "string"
+            }
+          ]
+        },
+        "studyDecisionRequired": {
+          "const": true,
+          "type": "boolean"
+        },
+        "studyEngineRemainsAuthority": {
+          "const": true,
+          "type": "boolean"
+        },
+        "studyMutationAllowed": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanChangeOfficialWorkingLevel": {
+          "const": false,
+          "type": "boolean"
+        },
+        "tutorCanDeclareOfficialMastery": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "studyDecisionRequired",
+        "studyMutationAllowed",
+        "studyEngineRemainsAuthority",
+        "tutorCanChangeOfficialWorkingLevel",
+        "tutorCanDeclareOfficialMastery",
+        "compositionVersion",
+        "status",
+        "eventRef",
+        "reasonCode"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "Study Tutor V2 Wave 2 Study Decision Packet"
+}

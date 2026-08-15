@@ -125,7 +125,10 @@ outputs.set("SCHEMA-INVENTORY.json", serialize({
 }));
 
 if (checkOnly) {
-  const actualFiles = (await readdir(outputDirectory)).sort();
+  const actualFiles = (await readdir(outputDirectory, { withFileTypes: true }))
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name)
+    .sort();
   const expectedFiles = [...outputs.keys()].sort();
   if (JSON.stringify(actualFiles) !== JSON.stringify(expectedFiles)) {
     throw new Error(`Generated schema inventory differs: expected ${expectedFiles.join(", ")}; found ${actualFiles.join(", ")}`);

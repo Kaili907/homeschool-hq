@@ -1,0 +1,288 @@
+import {
+  ADAPTIVE_FEATURES,
+  type AdaptiveFeature,
+} from "../../core/v2/admission/index.js";
+import type { Wave2AdaptiveCompositionRequest } from "../../study-engine/tutor-v2/adaptive/index.js";
+
+const ACTION_FAMILIES: Readonly<Record<AdaptiveFeature, string>> = {
+  "concept-prerequisite-graph": "check-prerequisite",
+  "misconception-analysis": "academic-signal",
+  "hint-ladder": "hint",
+  "intervention-ladder": "intervention-recommendation",
+  "mastery-evidence": "mastery-evidence",
+  "prerequisite-repair": "check-prerequisite",
+  reteach: "reteach",
+  "parent-explanation": "parent-explanation",
+};
+
+export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
+  const learnerScopeRef = "learner-scope:wave2-a";
+  const currentConceptRef = "concept:fraction-addition";
+  const prerequisiteConceptRef = "concept:equivalent-fractions";
+  const instructionalContextRef = "instructional-context:fractions-a";
+  const subjectRef = "subject:mathematics";
+  const gradeRef = "grade:study-authorized-a";
+  const curriculumRef = "curriculum:study-authorized-a";
+  const invocationBindingRef = "invocation:wave2-convergence-a";
+  const allowedActions = [
+    "explain", "hint", "ask-check", "show-example", "reteach",
+    "check-prerequisite", "suggest-break", "escalate", "return-to-lesson",
+  ] as const;
+  const capabilities = ADAPTIVE_FEATURES.map((feature) => ({
+    feature,
+    admission: "admitted" as const,
+    actionFamilies: [ACTION_FAMILIES[feature]],
+    reviewedContent: "required" as const,
+  }));
+  const evidence = (suffix: string, opportunity: string, observedAt: string) => ({
+    evidenceVersion: 1 as const,
+    evidenceKind: "study-approved-structured-academic-evidence" as const,
+    evidenceRef: `academic-evidence:${suffix}`,
+    opportunityRef: `opportunity:${opportunity}`,
+    learnerScopeRef,
+    instructionalContextRef,
+    conceptRef: currentConceptRef,
+    academicMisconceptionCode: "MATH_FRACTION_ADD_DENOMINATORS",
+    sourceKind: "selected-response-classification" as const,
+    finding: "consistent-with-misconception-code" as const,
+    observedAt,
+    approvalKind: "study-approved" as const,
+    approvalRef: "approval:wave2-academic-evidence",
+  });
+  return {
+    compositionVersion: "study-tutor-v2.wave2-composition.v1",
+    requestKind: "study-wave2-adaptive-composition",
+    studyAuthority: {
+      authorityKind: "study-wave2-authority",
+      eventRef: "event:wave2-convergence-a",
+      invocationBindingRef,
+      householdScopeRef: "household-scope:wave2-a",
+      learnerScopeRef,
+      sessionRef: "session:wave2-a",
+      interactionRef: "interaction:wave2-a",
+      subjectRef,
+      gradeRef,
+      curriculumBindingRef: curriculumRef,
+      officialWorkingLevelRef: "working-level:official-study-a",
+      instructionalContextRef,
+      currentConceptRef,
+      assessmentPhase: "instruction-or-practice",
+      studyHintCeiling: "concept-cue",
+      safetyStatus: "academic-flow-admitted",
+      allowedActions: [...allowedActions],
+    },
+    capabilityMetadata: {
+      metadataVersion: "study-tutor-v2.adaptive-capabilities.v1",
+      metadataKind: "study-adaptive-capabilities",
+      source: "study-authority",
+      invocationBindingRef,
+      subjectRef,
+      curriculumBindingRef: curriculumRef,
+      curriculumAdmission: "admitted",
+      safetyAdmission: "admitted",
+      capabilities,
+    },
+    reviewedContentAdmissions: ADAPTIVE_FEATURES.map((feature) => ({
+      feature,
+      admission: "admitted" as const,
+    })),
+    conceptGraph: {
+      graphRef: "concept-graph:wave2-fractions-a",
+      version: "1.0.0",
+      nodes: [
+        {
+          conceptRef: prerequisiteConceptRef,
+          context: {
+            subjectRef,
+            courseRef: "course:mathematics-a",
+            unitRef: "unit:fractions-a",
+          },
+        },
+        {
+          conceptRef: currentConceptRef,
+          context: {
+            subjectRef,
+            courseRef: "course:mathematics-a",
+            unitRef: "unit:fractions-a",
+          },
+        },
+      ],
+      edges: [{
+        prerequisiteConceptRef,
+        dependentConceptRef: currentConceptRef,
+      }],
+      metadata: { crossContextAdmissions: [] },
+    },
+    conceptScopeBindings: [prerequisiteConceptRef, currentConceptRef].map((conceptRef) => ({
+      conceptRef,
+      subjectRef,
+      gradeRef,
+      curriculumRef,
+    })),
+    misconceptionRegistry: [{
+      version: 1,
+      misconceptionRef: "misconception:fraction-add-denominators-v1",
+      conceptRef: currentConceptRef,
+      academicMisconceptionCode: "MATH_FRACTION_ADD_DENOMINATORS",
+      reviewApprovalRef: "study-review:wave2-misconception-v1",
+      reviewedInstructionalResponseRefs: ["instructional-response:common-denominator-v1"],
+      prerequisiteConceptRefs: [prerequisiteConceptRef],
+      evidenceRequirements: {
+        minimumSupportingEvidenceCount: 2,
+        minimumDistinctOpportunityCount: 2,
+        maximumEvidenceAgeDays: 30,
+        acceptedSourceKinds: ["selected-response-classification"],
+      },
+    }],
+    misconceptionMatch: {
+      matcherVersion: 1,
+      scopeKind: "trusted-study-academic-evidence-scope",
+      learnerScopeRef,
+      instructionalContextRef,
+      conceptRef: currentConceptRef,
+      academicMisconceptionCode: "MATH_FRACTION_ADD_DENOMINATORS",
+      evaluatedAt: "2026-08-14T20:00:00.000Z",
+      evidence: [
+        evidence("fraction-a", "fraction-a", "2026-08-12T18:00:00.000Z"),
+        evidence("fraction-b", "fraction-b", "2026-08-13T18:00:00.000Z"),
+      ],
+    },
+    hintSelection: {
+      requestKind: "bounded-hint-selection",
+      contextRef: instructionalContextRef,
+      assessmentPhase: "instruction-or-practice",
+      studyHintCeiling: "concept-cue",
+      previousAssistanceLevel: "independent",
+      attemptCount: 2,
+      misconceptionSignalCode: null,
+      learnerStageProfile: {
+        profileKind: "approved-learning-stage-hint-policy",
+        profileRef: "policy-profile:wave2-hints",
+        learningStageRef: "learning-stage:middle",
+        approvalRef: "approval:wave2-hints",
+        approvalKind: "study-approved",
+        maximumHintEscalationsBeforeRecheck: 3,
+      },
+      reviewPermission: {
+        completedAssessmentReviewAllowed: false,
+        privacyApprovalRef: null,
+      },
+      interventionHistory: [],
+      reviewedHints: [
+        {
+          metadataKind: "study-reviewed-hint",
+          hintRef: "hint:wave2-nudge",
+          reviewedContentRef: "reviewed-content:wave2-nudge",
+          reviewRef: "review:wave2-nudge",
+          hintLevel: "nudge",
+          eligibleMisconceptionCodes: [],
+          eligibleLearnerStageRefs: [],
+        },
+        {
+          metadataKind: "study-reviewed-hint",
+          hintRef: "hint:wave2-concept",
+          reviewedContentRef: "reviewed-content:wave2-concept",
+          reviewRef: "review:wave2-concept",
+          hintLevel: "concept-cue",
+          eligibleMisconceptionCodes: ["academic-misconception-signal"],
+          eligibleLearnerStageRefs: ["learning-stage:middle"],
+        },
+      ],
+    },
+    intervention: {
+      inputKind: "study-intervention-evidence",
+      interactionRef: "interaction:wave2-a",
+      attemptCount: 2,
+      assistanceHistory: [],
+      misconceptionSignal: { status: "none", hypothesisRef: null },
+      prerequisiteSignal: { status: "none", prerequisiteConceptRef: null },
+      learnerStageProfile: {
+        profileKind: "study-approved-intervention-profile",
+        profileRef: "policy:wave2-intervention",
+        learnerStageRef: "stage:wave2-middle",
+        approvalRef: "approval:wave2-intervention",
+        approvalKind: "study-approved",
+        attemptsBeforeFirstHint: 1,
+        maximumHintsBeforeReteach: 2,
+        maximumReteachesBeforeEscalation: 1,
+        breakSuggestionAfterEffortMinutes: 20,
+        minimumAttemptsBeforeBreakSuggestion: 2,
+        breakSuggestionCooldownInterventions: 3,
+        proposedBreakDurationMinutes: 5,
+        maximumInterventionsBeforeEscalation: 8,
+      },
+      elapsedInstructionalEffortMinutes: 4,
+      interventionCount: 0,
+      safetyRestriction: { status: "none", restrictionRef: null },
+      recentBreakSuggestion: { status: "none" },
+      assessmentPhase: "instruction-or-practice",
+      allowedActions: [...allowedActions],
+    },
+    masteryEvidence: {
+      envelope: "study-issued-mastery-evidence",
+      learnerScopeRef,
+      conceptRef: currentConceptRef,
+      evaluatedAt: "2026-08-14T20:00:00.000Z",
+      evidence: [
+        {
+          evidenceRef: "study-evidence:wave2-a",
+          issuer: "study",
+          learnerScopeRef,
+          conceptRef: currentConceptRef,
+          outcome: "demonstrated",
+          assistanceLevel: "independent",
+          recency: "current",
+          spacing: "same-session",
+          observedAt: "2026-08-14T18:00:00.000Z",
+        },
+        {
+          evidenceRef: "study-evidence:wave2-b",
+          issuer: "study",
+          learnerScopeRef,
+          conceptRef: currentConceptRef,
+          outcome: "demonstrated",
+          assistanceLevel: "independent",
+          recency: "current",
+          spacing: "spaced",
+          observedAt: "2026-08-12T18:00:00.000Z",
+        },
+      ],
+    },
+    repairPolicy: {
+      maximumDepth: 8,
+      reviewedStaticFallback: {
+        fallbackRef: "fallback:wave2-repair",
+        reviewedContentRefs: ["reviewed-content:wave2-static-repair"],
+      },
+      reviewedContent: [{
+        conceptRef: prerequisiteConceptRef,
+        reviewedContentRefs: ["reviewed-content:equivalent-fractions"],
+      }],
+    },
+    reteachPolicy: {
+      maximumSteps: 8,
+      priorReteachLoops: 0,
+      maximumRepeatedLoops: 8,
+      reviewedStaticFallback: {
+        fallbackRef: "fallback:wave2-reteach",
+        reviewedContentRefs: ["reviewed-content:wave2-static-reteach"],
+      },
+      reviewedContentRefs: [
+        "reviewed-content:reteach-model",
+        "reviewed-content:reteach-cue",
+      ],
+    },
+    parentWhy: {
+      selectedLearnerRef: learnerScopeRef,
+      authorizedLearnerRef: learnerScopeRef,
+      recommendationRef: "recommendation:wave2-a",
+      recommendationEventRef: "event:wave2-convergence-a",
+      policyRef: "policy:wave2-parent-why",
+      producedAt: "2026-08-14T20:00:00.000Z",
+    },
+    reviewedStaticFallback: {
+      fallbackRef: "fallback:wave2-composition",
+      reviewedContentRefs: ["reviewed-content:wave2-composition-static"],
+    },
+  };
+}

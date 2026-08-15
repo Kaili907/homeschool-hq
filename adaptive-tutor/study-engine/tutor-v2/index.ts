@@ -1,5 +1,9 @@
 export * from "./evidence/index.js";
 export * from "./privacy/index.js";
+export * from "./adaptive/index.js";
+export * from "./parent-explanations/index.js";
+export * from "./prerequisite-repair/index.js";
+export * from "./reteach/index.js";
 
 // Public bridge envelopes are stable Study-side boundaries. The orchestration
 // function is intentionally not re-exported here: W1-08 remains the one

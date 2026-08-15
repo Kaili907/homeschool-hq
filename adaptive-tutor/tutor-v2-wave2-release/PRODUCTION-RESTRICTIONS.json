@@ -1,0 +1,19 @@
+{
+  "browserAiWiringAuthorized": false,
+  "candidateOnly": true,
+  "durableReplayLedgerIncluded": false,
+  "hostedSupabaseAuthorized": false,
+  "liveModelCertification": false,
+  "masterMergeAuthorized": false,
+  "notificationDeliveryIncluded": false,
+  "permittedUse": [
+    "local deterministic tests",
+    "independent final rereview",
+    "schema and release evidence verification"
+  ],
+  "persistenceAdapterIncluded": false,
+  "productionDeployAuthorized": false,
+  "productionWiringEnabled": false,
+  "providerOrVendorAdapterIncluded": false,
+  "restrictionVersion": 1
+}

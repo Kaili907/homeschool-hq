@@ -1,0 +1,19 @@
+{
+  "artifacts": [
+    "CHECKSUMS.json",
+    "GATE-SUMMARY.json",
+    "KNOWN-LIMITATIONS.json",
+    "MANIFEST.json",
+    "PRODUCTION-RESTRICTIONS.json",
+    "PROVENANCE.json",
+    "SCHEMA-INVENTORY.json",
+    "STATUS.json",
+    "WAVE2-GATE-RESULT.json"
+  ],
+  "finalClassification": "WAVE2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "finalIndependentRereviewRequired": true,
+  "manifestVersion": 1,
+  "product": "Manuel Academy Study Tutor V2",
+  "wave": "Wave 2 Adaptive Intelligence Candidate",
+  "wave2Complete": false
+}
