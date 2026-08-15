@@ -176,7 +176,13 @@ export function CurriculumReleaseHistoryView({
       <section className="curriculum-history-filters" aria-labelledby="curriculum-history-filters-title">
         <div>
           <h3 id="curriculum-history-filters-title">Find a release</h3>
-          <button type="button" onClick={() => setFilters(INITIAL_FILTERS)}>Clear filters</button>
+          <button
+            type="button"
+            disabled={filters.query === INITIAL_FILTERS.query
+              && filters.lifecycle === INITIAL_FILTERS.lifecycle
+              && filters.eligibility === INITIAL_FILTERS.eligibility}
+            onClick={() => setFilters(INITIAL_FILTERS)}
+          >Clear filters</button>
         </div>
         <div className="curriculum-history-filter-grid">
           <label>
