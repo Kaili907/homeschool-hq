@@ -133,19 +133,31 @@
       "status": "PASS"
     },
     {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-review-privacy-binding-repair-r4",
+      "detail": "feecbf43fedae096ee6f53602edab2aa82e9bcb4 -> eb60f65c85f38783fd4dca96ed098c6ac6409c6d; patch 5df7a58bd2d5b7e5cd4e26fe4d8b1e301e44c923; required parent; ownership exact",
+      "name": "w2_b14-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-parent-truthfulness-repair-r4",
+      "detail": "7c0d4646785bf0daa07b62e66f22890e5bbec60d -> 5940bdce18e70303fd51f4f30f674b58d115386f; patch 02df97f0e5bf1cdce1cc2693f52dd1ea32536847; required parent; ownership exact",
+      "name": "w2_b15-repair-provenance",
+      "status": "PASS"
+    },
+    {
       "command": "git rev-parse origin/mac/study-runtime-tutor-authority-port-r2{,^}",
       "detail": "repair=527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4; parent=7baf8dfbc27168708ed4cf504285a1838d7345f6; separate integration artifact",
       "name": "external-study-progression-authority-port",
       "status": "PASS"
     },
     {
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r4/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r5/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit",
       "detail": "strict TypeScript",
       "name": "strict-v2-typecheck",
       "status": "PASS"
     },
     {
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r4/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r5/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json",
       "detail": "compiled Tutor V2 slice",
       "name": "v2-compile",
       "status": "PASS"
@@ -188,7 +200,7 @@
     },
     {
       "command": "node --test scripts/tutor-v2/.dist/core/v2/admission/admission.test.js scripts/tutor-v2/.dist/core/v2/concepts/graph.test.js scripts/tutor-v2/.dist/core/v2/misconceptions/academic-misconceptions.test.js scripts/tutor-v2/.dist/core/v2/hints/hint-ladder.test.js scripts/tutor-v2/.dist/core/v2/interventions/intervention-ladder.test.js scripts/tutor-v2/.dist/core/v2/mastery/mastery-evidence.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/orchestrator.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/subsystem-fallback.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/composition-repair.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/parent-explanations/parent-explanation.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/prerequisite-repair/prerequisite-repair.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/reteach/reteach.test.js",
-      "detail": "288/288 pass; 0 fail; 0 skipped",
+      "detail": "295/295 pass; 0 fail; 0 skipped",
       "name": "wave2-lane-regression",
       "status": "PASS"
     },
@@ -200,13 +212,13 @@
     },
     {
       "command": "node --test scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/composition-repair.test.js",
-      "detail": "11/11 pass; 0 fail; 0 skipped",
+      "detail": "12/12 pass; 0 fail; 0 skipped",
       "name": "b5-composition-replay-suite",
       "status": "PASS"
     },
     {
       "command": "node --test scripts/tutor-v2/.dist/core/v2/hints/hint-ladder.test.js",
-      "detail": "42/42 pass; 0 fail; 0 skipped",
+      "detail": "46/46 pass; 0 fail; 0 skipped",
       "name": "b6-hint-suite",
       "status": "PASS"
     },
@@ -236,7 +248,7 @@
     },
     {
       "command": "node --test scripts/tutor-v2/.dist/study-engine/tutor-v2/parent-explanations/parent-explanation.test.js",
-      "detail": "23/23 pass; 0 fail; 0 skipped",
+      "detail": "25/25 pass; 0 fail; 0 skipped",
       "name": "b11-parent-why-suite",
       "status": "PASS"
     },
@@ -248,8 +260,20 @@
     },
     {
       "command": "node --test scripts/tutor-v2/.dist/core/v2/hints/hint-ladder.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-r4-contracts.test.js",
-      "detail": "48/48 pass; 0 fail; 0 skipped",
+      "detail": "52/52 pass; 0 fail; 0 skipped",
       "name": "b13-review-permission-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/hints/hint-ladder.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-r4-contracts.test.js",
+      "detail": "52/52 pass; 0 fail; 0 skipped",
+      "name": "b14-review-privacy-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/composition-repair.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/parent-explanations/parent-explanation.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-r4-contracts.test.js",
+      "detail": "43/43 pass; 0 fail; 0 skipped",
+      "name": "b15-parent-truthfulness-suite",
       "status": "PASS"
     },
     {
@@ -296,12 +320,12 @@
     },
     {
       "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/wave2-mutation-proof.mjs",
-      "detail": "17/17 required and provenance mutations killed in disposable compiled copies",
-      "name": "wave2-r4-mutation-proof",
+      "detail": "19/19 required and provenance mutations killed in disposable compiled copies",
+      "name": "wave2-r5-mutation-proof",
       "status": "PASS"
     },
     {
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r4/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r5/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json",
       "detail": "Study Core Bridge compiled",
       "name": "study-bridge-typecheck",
       "status": "PASS"
@@ -391,8 +415,8 @@
       "status": "NOT_AVAILABLE"
     },
     {
-      "command": "git diff --name-only 24b604ac4fc72ea49943fff752a5da5c6e5f4125 HEAD plus status",
-      "detail": "29 R4 convergence-authored paths within ownership",
+      "command": "git diff --name-only 5940bdce18e70303fd51f4f30f674b58d115386f HEAD plus status",
+      "detail": "18 R5 convergence-authored paths within ownership",
       "name": "convergence-ownership",
       "status": "PASS"
     },
@@ -410,8 +434,8 @@
     }
   ],
   "counts": {
-    "focusedRepairPassed": 297,
-    "focusedRepairTests": 297,
+    "focusedRepairPassed": 403,
+    "focusedRepairTests": 403,
     "foundationHarnessPassed": 8,
     "foundationHarnessTests": 8,
     "fullWave2ConvergencePassed": 288,
@@ -424,12 +448,12 @@
     "wave2BlockerHardGateTests": 10,
     "wave2CompositionPassed": 25,
     "wave2CompositionTests": 25,
-    "wave2LanePassed": 288,
-    "wave2LaneTests": 288,
-    "wave2R4HardGateFamilies": 15,
-    "wave2R4HardGateFamiliesPassed": 15
+    "wave2LanePassed": 295,
+    "wave2LaneTests": 295,
+    "wave2R5HardGateFamilies": 15,
+    "wave2R5HardGateFamiliesPassed": 15
   },
-  "finalClassification": "WAVE2_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "finalClassification": "WAVE2_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
   "finalIndependentRereviewRequired": true,
   "hardGateFamilies": [
     {
@@ -650,8 +674,8 @@
     }
   ],
   "product": "Manuel Academy Study Tutor V2",
-  "resultVersion": 4,
-  "wave": "Wave 2 R4 Post-Audit Repair Candidate",
+  "resultVersion": 5,
+  "wave": "Wave 2 R5 Final Two-Blocker Repair Candidate",
   "wave1AcceptanceClassification": "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
   "wave1AcceptedBaselineSha": "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
   "wave2Complete": false

@@ -1,7 +1,7 @@
 {
   "counts": {
-    "focusedRepairPassed": 297,
-    "focusedRepairTests": 297,
+    "focusedRepairPassed": 403,
+    "focusedRepairTests": 403,
     "foundationHarnessPassed": 8,
     "foundationHarnessTests": 8,
     "fullWave2ConvergencePassed": 288,
@@ -14,12 +14,12 @@
     "wave2BlockerHardGateTests": 10,
     "wave2CompositionPassed": 25,
     "wave2CompositionTests": 25,
-    "wave2LanePassed": 288,
-    "wave2LaneTests": 288,
-    "wave2R4HardGateFamilies": 15,
-    "wave2R4HardGateFamiliesPassed": 15
+    "wave2LanePassed": 295,
+    "wave2LaneTests": 295,
+    "wave2R5HardGateFamilies": 15,
+    "wave2R5HardGateFamiliesPassed": 15
   },
-  "finalClassification": "WAVE2_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "finalClassification": "WAVE2_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
   "hardGateFamiliesPassed": 36,
   "hardGateFamilyCount": 36,
   "inheritedFindings": [
@@ -44,5 +44,5 @@
       "status": "NOT_AVAILABLE"
     }
   ],
-  "summaryVersion": 4
+  "summaryVersion": 5
 }

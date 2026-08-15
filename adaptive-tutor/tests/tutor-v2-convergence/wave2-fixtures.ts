@@ -162,6 +162,7 @@ export function wave2Fixture(): Wave2AdaptiveCompositionRequest {
       currentOpportunityRef,
       currentReviewEventRef: null,
       currentReviewPolicyRevisionRef: null,
+      currentReviewPrivacyApprovalRef: null,
       assessmentPhase: "instruction-or-practice",
       studyHintCeiling: "concept-cue",
       previousAssistanceLevel: "independent",

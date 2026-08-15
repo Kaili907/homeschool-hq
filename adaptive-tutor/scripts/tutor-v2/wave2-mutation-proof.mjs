@@ -176,12 +176,30 @@ const mutations = [
     }],
     test: "tests/tutor-v2-convergence/wave2-r4-contracts.test.js",
   },
+  {
+    name: "completed-review-privacy-binding-removed",
+    edits: [{
+      file: "core/v2/hints/hint-ladder.js",
+      search: "permission.policyRevisionRef === request.currentReviewPolicyRevisionRef &&\n        permission.privacyApprovalRef === request.currentReviewPrivacyApprovalRef",
+      replacement: "permission.policyRevisionRef === request.currentReviewPolicyRevisionRef",
+    }],
+    test: "tests/tutor-v2-convergence/wave2-r4-contracts.test.js",
+  },
+  {
+    name: "pending-parent-why-restored-to-applied-state-copy",
+    edits: [{
+      file: "study-engine/tutor-v2/parent-explanations/parent-explanation.js",
+      search: "Tutor was unavailable, so reviewed static guidance was proposed for Study to consider for this step.",
+      replacement: "Tutor was unavailable, so Study used reviewed static guidance for this step.",
+    }],
+    test: "tests/tutor-v2-convergence/wave2-r4-contracts.test.js",
+  },
 ];
 
 let root;
 let failed = false;
 try {
-  root = await mkdtemp(join(tmpdir(), "tutor-v2-wave2-r4-mutations-"));
+  root = await mkdtemp(join(tmpdir(), "tutor-v2-wave2-r5-mutations-"));
   for (const mutation of mutations) {
     const mutationRoot = join(root, mutation.name);
     await cp(compiledRoot, mutationRoot, { recursive: true });
@@ -216,4 +234,4 @@ try {
 }
 
 if (failed) process.exitCode = 1;
-else process.stdout.write(`PASS wave2-r4-mutation-proof ${mutations.length}/${mutations.length} killed\n`);
+else process.stdout.write(`PASS wave2-r5-mutation-proof ${mutations.length}/${mutations.length} killed\n`);

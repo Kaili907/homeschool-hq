@@ -33,6 +33,8 @@ function completedReviewFixture(): Fixture {
   input.hintSelection.attemptCount = 1;
   input.hintSelection.currentReviewEventRef = "review-event:wave2-current";
   input.hintSelection.currentReviewPolicyRevisionRef = "policy-revision:wave2-current";
+  input.hintSelection.currentReviewPrivacyApprovalRef =
+    "privacy-approval:wave2-review-current";
   input.hintSelection.reviewPermission = {
     permissionVersion: "study-tutor-v2.completed-assessment-review-permission.v1",
     status: "authorized",
@@ -75,7 +77,7 @@ test("ADMISSION_STUDY_SCOPE_BINDING rejects cross-household, learner, session, a
   }
 });
 
-test("COMPLETED_REVIEW_PERMISSION_SCOPE rejects replay and legacy booleans while exact review follows policy", async () => {
+test("COMPLETED_REVIEW_PERMISSION_SCOPE reconciles every permission dimension including nullable privacy approval", async () => {
   const exact = await compose(completedReviewFixture());
   assert.equal(exact.status, "pending-study-decision");
   if (exact.status === "pending-study-decision") {
@@ -83,41 +85,75 @@ test("COMPLETED_REVIEW_PERMISSION_SCOPE rejects replay and legacy booleans while
     assert.equal(exact.hint.status, "recommended");
   }
 
-  const mutations: readonly ((input: Fixture) => void)[] = [
-    (input) => {
-      input.hintSelection.currentReviewEventRef = "review-event:wave2-new";
-    },
-    (input) => {
+  const unauthorizedCases: readonly [string, (input: Fixture) => void][] = [
+    ["changed-only-privacy", (input) => {
       if (input.hintSelection.reviewPermission.status === "authorized") {
-        input.hintSelection.reviewPermission.opportunityRef = "opportunity:wave2-new";
+        input.hintSelection.reviewPermission.privacyApprovalRef =
+          "privacy-approval:foreign";
       }
-    },
-    (input) => {
+    }],
+    ["permission-non-null-current-null", (input) => {
+      input.hintSelection.currentReviewPrivacyApprovalRef = null;
+    }],
+    ["permission-null-current-non-null", (input) => {
+      if (input.hintSelection.reviewPermission.status === "authorized") {
+        input.hintSelection.reviewPermission.privacyApprovalRef = null;
+      }
+    }],
+    ["changed-learner", (input) => {
       if (input.hintSelection.reviewPermission.status === "authorized") {
         input.hintSelection.reviewPermission.learnerScopeRef = "learner-scope:foreign";
       }
-    },
-    (input) => {
+    }],
+    ["changed-session", (input) => {
       if (input.hintSelection.reviewPermission.status === "authorized") {
         input.hintSelection.reviewPermission.sessionRef = "session:foreign";
       }
-    },
-    (input) => {
+    }],
+    ["changed-context", (input) => {
       if (input.hintSelection.reviewPermission.status === "authorized") {
         input.hintSelection.reviewPermission.instructionalContextRef =
           "instructional-context:foreign";
       }
-    },
+    }],
+    ["changed-opportunity", (input) => {
+      if (input.hintSelection.reviewPermission.status === "authorized") {
+        input.hintSelection.reviewPermission.opportunityRef = "opportunity:wave2-new";
+      }
+    }],
+    ["changed-review-event", (input) => {
+      if (input.hintSelection.reviewPermission.status === "authorized") {
+        input.hintSelection.reviewPermission.reviewEventRef = "review-event:wave2-new";
+      }
+    }],
+    ["changed-policy-revision", (input) => {
+      if (input.hintSelection.reviewPermission.status === "authorized") {
+        input.hintSelection.reviewPermission.policyRevisionRef =
+          "policy-revision:wave2-new";
+      }
+    }],
   ];
-  for (const mutate of mutations) {
+  for (const [name, mutate] of unauthorizedCases) {
     const input = completedReviewFixture();
     mutate(input);
     setCurrentAssistance(input, "independent");
     const result = await compose(input);
-    assert.equal(result.status, "pending-study-decision");
+    assert.equal(result.status, "pending-study-decision", name);
     if (result.status === "pending-study-decision") {
-      assert.equal(result.hint.status, "no-hint");
+      assert.equal(result.hint.status, "no-hint", name);
+      assert.equal(result.hint.hintLevel, "none", name);
     }
+  }
+
+  const nullPrivacy = completedReviewFixture();
+  nullPrivacy.hintSelection.currentReviewPrivacyApprovalRef = null;
+  if (nullPrivacy.hintSelection.reviewPermission.status === "authorized") {
+    nullPrivacy.hintSelection.reviewPermission.privacyApprovalRef = null;
+  }
+  const nullPrivacyResult = await compose(nullPrivacy);
+  assert.equal(nullPrivacyResult.status, "pending-study-decision");
+  if (nullPrivacyResult.status === "pending-study-decision") {
+    assert.equal(nullPrivacyResult.hint.status, "recommended");
   }
 
   const legacy = completedReviewFixture() as unknown as Record<string, unknown>;
@@ -206,10 +242,79 @@ test("PARENT_WHY_CLOSED_SCOPE_AND_COPY binds Study visibility authorization and 
   assert.equal(result.parentExplanation.authoritative, false);
   assert.equal(result.parentExplanation.studyMutationAllowed, false);
 
+  const outageSubsystems = countingSubsystems(counters());
+  const proposeRepair = outageSubsystems.proposeRepair;
+  Object.defineProperty(outageSubsystems, "proposeRepair", {
+    value(
+      request: Parameters<typeof proposeRepair>[0],
+      dependencies: Parameters<typeof proposeRepair>[1],
+    ) {
+      return proposeRepair(request, {
+        ...dependencies,
+        prerequisiteGraph: {
+          lookup() {
+            throw new Error("repair dependency unavailable");
+          },
+        },
+      });
+    },
+  });
+  const outage = await composeWave2AdaptiveIntelligence(wave2Fixture(), {
+    replayLedger: new InMemoryWave2ReplayLedger(),
+    adaptiveSubsystems: outageSubsystems,
+  });
+  assert.equal(outage.status, "pending-study-decision");
+  if (outage.status !== "pending-study-decision" || outage.parentExplanation === null) {
+    throw new Error("Expected pending fallback Parent Why projection");
+  }
+  assert.equal(outage.intervention.actionKind, "check-prerequisite");
+  assert.equal(outage.repair.source, "reviewed-static-fallback");
+  assert.equal(outage.studyMutationAllowed, false);
+  assert.equal(
+    outage.parentExplanation.explanation.reasonCode,
+    "tutor-unavailable-static-fallback-proposed",
+  );
+  assert.equal(
+    outage.parentExplanation.explanation.title,
+    "Reviewed fallback proposed",
+  );
+  assert.equal(
+    outage.parentExplanation.explanation.explanation,
+    "Tutor was unavailable, so reviewed static guidance was proposed for Study to consider for this step.",
+  );
+  assert.equal(
+    outage.parentExplanation.explanation.disclaimer,
+    "This explains an existing recommendation. It does not make or change a learning decision.",
+  );
+  assert.doesNotMatch(
+    JSON.stringify(outage.parentExplanation),
+    /Study (?:used|applied|changed|assigned|performed|completed)\b/i,
+  );
+
+  const pendingHint = wave2Fixture();
+  pendingHint.misconceptionMatch.evidence = [];
+  const pendingHintResult = await compose(pendingHint);
+  assert.equal(pendingHintResult.status, "pending-study-decision");
+  if (
+    pendingHintResult.status !== "pending-study-decision" ||
+    pendingHintResult.parentExplanation === null
+  ) throw new Error("Expected pending hint Parent Why projection");
+  assert.equal(pendingHintResult.intervention.actionKind, "hint");
+  assert.equal(
+    pendingHintResult.parentExplanation.explanation.reasonCode,
+    "hint-level-change-proposed",
+  );
+  assert.doesNotMatch(
+    JSON.stringify(pendingHintResult.parentExplanation),
+    /Study (?:used|applied|changed|assigned|performed|completed)\b/i,
+  );
+
   for (const prose of [
     "Raw learner transcript: private answer",
     "The correct answer is four.",
     "Credential token: secret",
+    "Private note: the learner disclosed a family concern.",
+    "Diagnosis: attention disorder.",
     "The learner has a personality disorder.",
   ]) {
     const contaminated = structuredClone(result) as unknown as Record<string, unknown>;

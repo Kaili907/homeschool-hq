@@ -7,14 +7,14 @@
   "schemas": [
     {
       "file": "wave2-adaptive-composition-request.schema.json",
-      "sha256": "6f5e2e4d246df6c58113001c96282d3ec4f27bc316ccedfc1b2acaafebe4d0de",
+      "sha256": "329a8cf474e89357ca91570abec03b357c831220d95ce0048274313dd4113f26",
       "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2AdaptiveCompositionRequestSchema"
     },
     {
       "file": "wave2-study-decision-packet.schema.json",
-      "sha256": "867acaf6c370cb293ca4e2a5f4a4becb8636722da8b1d544ce159d82a0f0f7d1",
+      "sha256": "fb0e6403a2c0571523ffcfa97c3c7d859b7cb85930f0e8571168038ff1a94d13",
       "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2StudyDecisionPacketSchema"
     }
   ],
-  "wave": "Wave 2 R4 Post-Audit Repair Candidate"
+  "wave": "Wave 2 R5 Final Two-Blocker Repair Candidate"
 }

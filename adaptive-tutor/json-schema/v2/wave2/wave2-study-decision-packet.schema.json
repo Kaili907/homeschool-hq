@@ -626,7 +626,7 @@
                           "type": "string"
                         },
                         "explanation": {
-                          "const": "Tutor changed the amount of help offered for this part of the activity.",
+                          "const": "Tutor proposed changing the amount of help available for this part of the activity.",
                           "type": "string"
                         },
                         "explanationVersion": {
@@ -712,11 +712,11 @@
                           "type": "object"
                         },
                         "reasonCode": {
-                          "const": "hint-level-changed",
+                          "const": "hint-level-change-proposed",
                           "type": "string"
                         },
                         "title": {
-                          "const": "Hint level changed",
+                          "const": "Hint level change proposed",
                           "type": "string"
                         }
                       },
@@ -1328,7 +1328,7 @@
                           "type": "string"
                         },
                         "explanation": {
-                          "const": "Tutor was unavailable, so Study used reviewed static guidance for this step.",
+                          "const": "Tutor was unavailable, so reviewed static guidance was proposed for Study to consider for this step.",
                           "type": "string"
                         },
                         "explanationVersion": {
@@ -1414,11 +1414,11 @@
                           "type": "object"
                         },
                         "reasonCode": {
-                          "const": "tutor-unavailable-static-fallback-used",
+                          "const": "tutor-unavailable-static-fallback-proposed",
                           "type": "string"
                         },
                         "title": {
-                          "const": "Reviewed fallback used",
+                          "const": "Reviewed fallback proposed",
                           "type": "string"
                         }
                       },

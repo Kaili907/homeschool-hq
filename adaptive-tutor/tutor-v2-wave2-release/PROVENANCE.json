@@ -1,7 +1,7 @@
 {
   "acceptedWave1BaselineSha": "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
   "b4Sha": "22c3734bd436c41ba8d24409dcaa146d35914e2f",
-  "branch": "mac/tutor-v2-w2-reconvergence-r4",
+  "branch": "mac/tutor-v2-w2-reconvergence-r5",
   "earlierRepairs": {
     "W2_B1_GLOBAL_AUTHORITY_FALLBACK": {
       "branch": "origin/mac/tutor-v2-w2-authority-fallback-repair-r1",
@@ -30,7 +30,7 @@
   },
   "failedR1CandidateSha": "8d618502a16a3d4d169143b539286a3b6fb5b925",
   "failedR2CandidateSha": "a251987b28909e827c0af0ee8bbeea668522459f",
-  "finalW2_10R4Required": true,
+  "finalW2_10R5Required": true,
   "lanes": {
     "W2_01_ADMISSION": {
       "branch": "origin/mac/tutor-v2-w2-admission-r1",
@@ -90,7 +90,9 @@
     "W2_B9",
     "W2_B10",
     "W2_B11",
-    "W2_B12"
+    "W2_B12",
+    "W2_B14",
+    "W2_B15"
   ],
   "postAuditRepairs": {
     "W2_B10": {
@@ -113,6 +115,18 @@
       "sourceCommit": "097ada4fe024f7eed7a50038d13801e45b990b62",
       "sourceParent": "67d11f4ba0382c8cf7c6091a20a67a4b6ef1a76c",
       "stablePatchId": "e60b439f91424e425181d24414dc9ced30dabd4e"
+    },
+    "W2_B14": {
+      "cherryPickedCommit": "eb60f65c85f38783fd4dca96ed098c6ac6409c6d",
+      "sourceCommit": "feecbf43fedae096ee6f53602edab2aa82e9bcb4",
+      "sourceParent": "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311",
+      "stablePatchId": "5df7a58bd2d5b7e5cd4e26fe4d8b1e301e44c923"
+    },
+    "W2_B15": {
+      "cherryPickedCommit": "5940bdce18e70303fd51f4f30f674b58d115386f",
+      "sourceCommit": "7c0d4646785bf0daa07b62e66f22890e5bbec60d",
+      "sourceParent": "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311",
+      "stablePatchId": "02df97f0e5bf1cdce1cc2693f52dd1ea32536847"
     },
     "W2_B5": {
       "cherryPickedCommit": "9e89a86bf292108276742cf2ebc3a04432e3d4b2",
@@ -140,19 +154,24 @@
       "stablePatchId": "a85bf0573e4d4e4cd03e6dbada26c82a507af1d5"
     }
   },
-  "provenanceVersion": 4,
+  "provenanceVersion": 5,
   "r4Candidate": {
+    "independentReviewClassification": "WAVE2_VALIDATION_INCONCLUSIVE",
+    "sha": "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311"
+  },
+  "r5Candidate": {
     "exactShaRecordedAfterCommitInSessionReturn": true,
     "selfReferencedInsideChecksummedArtifacts": false,
-    "status": "generated-for-independent-w2-10r4-rereview"
+    "status": "generated-for-independent-w2-10r5-rereview"
   },
   "serializedBoundaryAdjudication": {
     "generatedSchemaCount": 2,
     "internalPortSchemasGenerated": 0,
     "ruling": "W2_SERIALIZED_BOUNDARY_BLOCKER_FOUND"
   },
-  "session": "STUDY-TUTOR-V2-W2-09R4 — Full Wave 2 Post-Audit Repair Reconvergence",
+  "session": "STUDY-TUTOR-V2-W2-09R5 — Final Two-Blocker Wave 2 Reconvergence",
   "startingB4Sha": "22c3734bd436c41ba8d24409dcaa146d35914e2f",
+  "startingR4Sha": "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311",
   "trustBoundaryAdjudication": "W2_TRUST_BOUNDARY_ADJUDICATION_COMPLETE",
   "verification": {
     "convergenceOwnershipPassed": true,
@@ -163,5 +182,11 @@
     "stablePatchIdsExact": true
   },
   "w2_10R1Classification": "WAVE2_HOLD_BLOCKING_FINDINGS",
-  "w2_10R2Classification": "WAVE2_HOLD_BLOCKING_FINDINGS"
+  "w2_10R2Classification": "WAVE2_HOLD_BLOCKING_FINDINGS",
+  "w2_10R4Classification": "WAVE2_VALIDATION_INCONCLUSIVE",
+  "w2_10R4CustodyFinding": "The canonical detached review worktree briefly contained ignored node_modules; custody is recorded separately from the two code defects.",
+  "w2_10R4SubstantiveFindings": [
+    "Completed-review privacyApprovalRef was serialized but not reconciled to current Study authorization.",
+    "Pending reviewed-static fallback Parent Why copy incorrectly claimed Study used the proposal."
+  ]
 }

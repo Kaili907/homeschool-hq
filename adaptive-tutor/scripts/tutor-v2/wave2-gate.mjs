@@ -15,6 +15,8 @@ const R1_CANDIDATE = "8d618502a16a3d4d169143b539286a3b6fb5b925";
 const R2_CANDIDATE = "a251987b28909e827c0af0ee8bbeea668522459f";
 const B4_START = "22c3734bd436c41ba8d24409dcaa146d35914e2f";
 const R4_ADAPTATION_START = "24b604ac4fc72ea49943fff752a5da5c6e5f4125";
+const R4_CANDIDATE = "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311";
+const R5_ADAPTATION_START = "5940bdce18e70303fd51f4f30f674b58d115386f";
 const LEARNER_RELEASE_BASELINE = "7baf8dfbc27168708ed4cf504285a1838d7345f6";
 const STUDY_AUTHORITY_PORT = "527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4";
 
@@ -246,6 +248,32 @@ const postAuditRepairs = [
       "docs/study-tutor-v2/wave2/repairs/w2-b12-misconception-contract/",
     ],
   },
+  {
+    id: "W2_B14",
+    branch: "mac/tutor-v2-w2-review-privacy-binding-repair-r4",
+    tip: "feecbf43fedae096ee6f53602edab2aa82e9bcb4",
+    parent: R4_CANDIDATE,
+    cherryPick: "eb60f65c85f38783fd4dca96ed098c6ac6409c6d",
+    patchId: "5df7a58bd2d5b7e5cd4e26fe4d8b1e301e44c923",
+    roots: [
+      "adaptive-tutor/core/v2/hints/",
+      "docs/study-tutor-v2/wave2/repairs/w2-b14-review-privacy/",
+    ],
+  },
+  {
+    id: "W2_B15",
+    branch: "mac/tutor-v2-w2-parent-truthfulness-repair-r4",
+    tip: "7c0d4646785bf0daa07b62e66f22890e5bbec60d",
+    parent: R4_CANDIDATE,
+    cherryPick: R5_ADAPTATION_START,
+    patchId: "02df97f0e5bf1cdce1cc2693f52dd1ea32536847",
+    roots: [
+      "adaptive-tutor/study-engine/tutor-v2/parent-explanations/",
+      "adaptive-tutor/study-engine/tutor-v2/adaptive/orchestrator.ts",
+      "adaptive-tutor/study-engine/tutor-v2/adaptive/composition-repair.test.ts",
+      "docs/study-tutor-v2/wave2/repairs/w2-b15-parent-truthfulness/",
+    ],
+  },
 ];
 
 const checks = [];
@@ -461,6 +489,15 @@ const focusedCounts = {
     `${dist}/core/v2/hints/hint-ladder.test.js`,
     `${dist}/tests/tutor-v2-convergence/wave2-r4-contracts.test.js`,
   ]),
+  b14: requireTap("b14-review-privacy-suite", [
+    `${dist}/core/v2/hints/hint-ladder.test.js`,
+    `${dist}/tests/tutor-v2-convergence/wave2-r4-contracts.test.js`,
+  ]),
+  b15: requireTap("b15-parent-truthfulness-suite", [
+    `${dist}/study-engine/tutor-v2/adaptive/composition-repair.test.js`,
+    `${dist}/study-engine/tutor-v2/parent-explanations/parent-explanation.test.js`,
+    `${dist}/tests/tutor-v2-convergence/wave2-r4-contracts.test.js`,
+  ]),
 };
 
 const compositionCounts = requireTap("wave2-composition-regression", [
@@ -513,10 +550,10 @@ const blockerCounts = blockerGateChecks.map(({ check, file }) =>
   requireTap(check, [file])
 );
 requireSuccess(
-  "wave2-r4-mutation-proof",
+  "wave2-r5-mutation-proof",
   process.execPath,
   ["scripts/tutor-v2/wave2-mutation-proof.mjs"],
-  "17/17 required and provenance mutations killed in disposable compiled copies",
+  "19/19 required and provenance mutations killed in disposable compiled copies",
   { cwd: tutorRoot },
 );
 
@@ -623,11 +660,11 @@ const allowed = (path) =>
   path.startsWith("docs/study-tutor-v2/wave2/");
 const statusPaths = git(["status", "--porcelain=v1", "--untracked-files=all"]).stdout
   .split("\n").filter(Boolean).map((line) => line.slice(3));
-const authoredPaths = git(["diff", "--name-only", R4_ADAPTATION_START, "HEAD"]).stdout
+const authoredPaths = git(["diff", "--name-only", R5_ADAPTATION_START, "HEAD"]).stdout
   .split("\n").filter(Boolean);
 const allAuthored = [...new Set([...authoredPaths, ...statusPaths])];
 const violations = allAuthored.filter((path) => !allowed(path));
-record("convergence-ownership", violations.length === 0 ? "PASS" : "FAIL", violations.length === 0 ? `${allAuthored.length} R4 convergence-authored paths within ownership` : violations.join(", "), `git diff --name-only ${R4_ADAPTATION_START} HEAD plus status`);
+record("convergence-ownership", violations.length === 0 ? "PASS" : "FAIL", violations.length === 0 ? `${allAuthored.length} R5 convergence-authored paths within ownership` : violations.join(", "), `git diff --name-only ${R5_ADAPTATION_START} HEAD plus status`);
 const candidatePaths = [
   ...git(["diff", "--name-only", B4_START, "HEAD"]).stdout.split("\n").filter(Boolean),
   ...statusPaths,
@@ -668,7 +705,7 @@ const blockerHardGateFamilies = blockerGateChecks.map(({ family, check, file }) 
   status: checks.find(({ name }) => name === check)?.status === "PASS" ? "PASS" : "FAIL",
   permanentTest: file.replace(`${dist}/`, ""),
 }));
-const r4HardGateDefinitions = [
+const r5HardGateDefinitions = [
   ["ADAPTIVE_SUBSYSTEM_EXCEPTION_FALLBACK", "b4-focused-exception-suite", "study-engine/tutor-v2/adaptive/subsystem-fallback.test.ts"],
   ["ADAPTIVE_REPLAY_RECOVERY_AND_DIGEST", "b5-composition-replay-suite", "study-engine/tutor-v2/adaptive/composition-repair.test.ts"],
   ["ADAPTIVE_SUBSYSTEM_RESULT_VALIDATION", "wave2-composition-regression", "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts"],
@@ -676,16 +713,16 @@ const r4HardGateDefinitions = [
   ["EVIDENCE_BACKED_PREREQUISITE_INFERENCE", "b5-composition-replay-suite", "study-engine/tutor-v2/adaptive/composition-repair.test.ts"],
   ["DECISION_OPPORTUNITY_PROVENANCE", "wave2-composition-regression", "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts"],
   ["HINT_OPPORTUNITY_COMPLETION_RESET", "b6-hint-suite", "core/v2/hints/hint-ladder.test.ts"],
-  ["COMPLETED_REVIEW_PERMISSION_SCOPE", "b13-review-permission-suite", "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts"],
+  ["COMPLETED_REVIEW_PERMISSION_SCOPE", "b14-review-privacy-suite", "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts"],
   ["INTERVENTION_HISTORY_STATE_RECONCILIATION", "b7-intervention-suite", "core/v2/interventions/intervention-ladder.test.ts"],
   ["MASTERY_RECENCY_CONTEXT_PARITY", "b8-mastery-suite", "core/v2/mastery/mastery-evidence.test.ts"],
   ["RETEACH_LOOP_CAP_TERMINAL", "b9-reteach-suite", "study-engine/tutor-v2/reteach/reteach.test.ts"],
   ["ADMISSION_STUDY_SCOPE_BINDING", "b10-admission-suite", "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts"],
-  ["PARENT_WHY_CLOSED_SCOPE_AND_COPY", "b11-parent-why-suite", "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts"],
+  ["PARENT_WHY_CLOSED_SCOPE_AND_COPY", "b15-parent-truthfulness-suite", "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts"],
   ["MISCONCEPTION_CODE_SEMANTIC_CLOSURE", "b12-misconception-suite", "tests/tutor-v2-convergence/wave2-schema-parity.test.ts"],
   ["SINGLE_COMPOSITION_ROUTE", "wave2-composition-regression", "tests/tutor-v2-convergence/single-composition-route.test.ts"],
 ];
-const r4HardGateFamilies = r4HardGateDefinitions.map(([name, check, permanentTest]) => ({
+const r5HardGateFamilies = r5HardGateDefinitions.map(([name, check, permanentTest]) => ({
   name,
   enforcement: "HARD_NON_COMPENSABLE",
   status: checks.find(({ name: checkName }) => checkName === check)?.status === "PASS"
@@ -708,7 +745,7 @@ const wave1HardGateFamilies = [
 const hardGateFamilies = [
   ...priorWave2HardGateFamilies,
   ...blockerHardGateFamilies,
-  ...r4HardGateFamilies,
+  ...r5HardGateFamilies,
   ...wave1HardGateFamilies,
 ];
 if (hardGateFamilies.some(({ status }) => status !== "PASS")) hardFailure = true;
@@ -717,12 +754,12 @@ const inherited = checks.some(({ status }) => status === "INHERITED_FINDING" || 
 const finalClassification = hardFailure
   ? "WAVE2_HOLD"
   : inherited
-    ? "WAVE2_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
-    : "WAVE2_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW";
+    ? "WAVE2_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS"
+    : "WAVE2_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW";
 const result = {
-  resultVersion: 4,
+  resultVersion: 5,
   product: "Manuel Academy Study Tutor V2",
-  wave: "Wave 2 R4 Post-Audit Repair Candidate",
+  wave: "Wave 2 R5 Final Two-Blocker Repair Candidate",
   wave1AcceptedBaselineSha: BASE,
   wave1AcceptanceClassification: "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
   wave2Complete: false,
@@ -738,8 +775,8 @@ const result = {
     wave2CompositionPassed: compositionCounts.pass,
     wave2BlockerHardGateTests: blockerCounts.reduce((sum, counts) => sum + counts.tests, 0),
     wave2BlockerHardGatePassed: blockerCounts.reduce((sum, counts) => sum + counts.pass, 0),
-    wave2R4HardGateFamilies: r4HardGateFamilies.length,
-    wave2R4HardGateFamiliesPassed: r4HardGateFamilies.filter(({ status }) => status === "PASS").length,
+    wave2R5HardGateFamilies: r5HardGateFamilies.length,
+    wave2R5HardGateFamiliesPassed: r5HardGateFamilies.filter(({ status }) => status === "PASS").length,
     fullWave2ConvergenceTests: fullConvergenceCounts.tests,
     fullWave2ConvergencePassed: fullConvergenceCounts.pass,
     focusedRepairTests: Object.values(focusedCounts).reduce((sum, counts) => sum + counts.tests, 0),

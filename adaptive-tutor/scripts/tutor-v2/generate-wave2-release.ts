@@ -11,7 +11,7 @@ const gate = JSON.parse(gateText) as {
   readonly counts: Record<string, number>;
   readonly checks: readonly { readonly name: string; readonly status: string; readonly detail: string }[];
 };
-if (gate.finalClassification !== "WAVE2_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS") {
+if (gate.finalClassification !== "WAVE2_R5_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS") {
   throw new Error(`Wave 2 gate is not an inherited-findings candidate: ${gate.finalClassification}`);
 }
 if (gate.hardGateFamilies.some(({ status }) => status !== "PASS")) {
@@ -116,7 +116,7 @@ const repairs = {
 } as const;
 
 const status = {
-  statusVersion: 4,
+  statusVersion: 5,
   WAVE_2_COMPLETE: false,
   WAVE_3_AUTHORIZED_BY_TECHNICAL_ACCEPTANCE: false,
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
@@ -149,7 +149,9 @@ const status = {
   SINGLE_COHERENT_ADAPTIVE_ACTION_REQUIRED: true,
   DECISION_PROVENANCE_REQUIRED_ON_PENDING_PACKETS: true,
   COMPLETED_REVIEW_PERMISSION_IS_STRUCTURED_AND_SCOPE_BOUND: true,
+  COMPLETED_REVIEW_PRIVACY_APPROVAL_IS_EXACTLY_RECONCILED: true,
   PARENT_WHY_COPY_IS_CLOSED_AND_STUDY_VISIBILITY_BOUND: true,
+  PENDING_PARENT_WHY_APPLIED_STATE_CLAIMS_ALLOWED: false,
   MISCONCEPTION_CODE_IS_BOUNDED_ACADEMIC_VOCABULARY: true,
   TUTOR_RECOMMENDATION_IS_ADVISORY: true,
   STUDY_PROGRESSION_DECISION_REQUIRED: true,
@@ -169,21 +171,29 @@ const status = {
 };
 
 const provenance = {
-  provenanceVersion: 4,
-  session: "STUDY-TUTOR-V2-W2-09R4 — Full Wave 2 Post-Audit Repair Reconvergence",
-  branch: "mac/tutor-v2-w2-reconvergence-r4",
+  provenanceVersion: 5,
+  session: "STUDY-TUTOR-V2-W2-09R5 — Final Two-Blocker Wave 2 Reconvergence",
+  branch: "mac/tutor-v2-w2-reconvergence-r5",
+  startingR4Sha: "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311",
   startingB4Sha: "22c3734bd436c41ba8d24409dcaa146d35914e2f",
   acceptedWave1BaselineSha: "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
   failedR1CandidateSha: "8d618502a16a3d4d169143b539286a3b6fb5b925",
   w2_10R1Classification: "WAVE2_HOLD_BLOCKING_FINDINGS",
   failedR2CandidateSha: "a251987b28909e827c0af0ee8bbeea668522459f",
   w2_10R2Classification: "WAVE2_HOLD_BLOCKING_FINDINGS",
+  w2_10R4Classification: "WAVE2_VALIDATION_INCONCLUSIVE",
+  w2_10R4SubstantiveFindings: [
+    "Completed-review privacyApprovalRef was serialized but not reconciled to current Study authorization.",
+    "Pending reviewed-static fallback Parent Why copy incorrectly claimed Study used the proposal.",
+  ],
+  w2_10R4CustodyFinding:
+    "The canonical detached review worktree briefly contained ignored node_modules; custody is recorded separately from the two code defects.",
   b4Sha: "22c3734bd436c41ba8d24409dcaa146d35914e2f",
   lanes,
   earlierRepairs: repairs,
   postAuditRepairCherryPickOrder: [
     "W2_B5", "W2_B6", "W2_B13", "W2_B7", "W2_B8",
-    "W2_B9", "W2_B10", "W2_B11", "W2_B12",
+    "W2_B9", "W2_B10", "W2_B11", "W2_B12", "W2_B14", "W2_B15",
   ],
   postAuditRepairs: {
     W2_B5: { sourceCommit: "c9601aa99bca89ff0673ee6e00858fafa98c70c2", cherryPickedCommit: "9e89a86bf292108276742cf2ebc3a04432e3d4b2", stablePatchId: "1788de549e684b7e9bb3655a1cfc184b842405c3" },
@@ -195,6 +205,8 @@ const provenance = {
     W2_B10: { sourceCommit: "32fd30a7d3aa3b500e3dbaa53a8aa3715fbd9cde", cherryPickedCommit: "783ebb3216a9e7a5919f281fe8f10742bdd0f740", stablePatchId: "c4ec4ed6c14851dda6c77c037a996379fae22fee" },
     W2_B11: { sourceCommit: "5d282f08a5cfbc75e7804dbf461812f218e8db3d", cherryPickedCommit: "dacd2fe203fa93df61e772ce2346395b7c6e507c", stablePatchId: "0955e9b74bb113abaa47fa244eca9a8b36b00a96" },
     W2_B12: { sourceCommit: "c07db50067776457a6eef96f0c2a38b601177031", cherryPickedCommit: "24b604ac4fc72ea49943fff752a5da5c6e5f4125", stablePatchId: "aacfdda8fe7564e6a84437c8b715317ab71b5c1e" },
+    W2_B14: { sourceCommit: "feecbf43fedae096ee6f53602edab2aa82e9bcb4", sourceParent: "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311", cherryPickedCommit: "eb60f65c85f38783fd4dca96ed098c6ac6409c6d", stablePatchId: "5df7a58bd2d5b7e5cd4e26fe4d8b1e301e44c923" },
+    W2_B15: { sourceCommit: "7c0d4646785bf0daa07b62e66f22890e5bbec60d", sourceParent: "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311", cherryPickedCommit: "5940bdce18e70303fd51f4f30f674b58d115386f", stablePatchId: "02df97f0e5bf1cdce1cc2693f52dd1ea32536847" },
   },
   trustBoundaryAdjudication: "W2_TRUST_BOUNDARY_ADJUDICATION_COMPLETE",
   serializedBoundaryAdjudication: {
@@ -209,11 +221,15 @@ const provenance = {
     containedInTutorCandidate: false,
   },
   r4Candidate: {
-    status: "generated-for-independent-w2-10r4-rereview",
+    sha: "2e846e33dffe493ab5cc05fc4fd1d5618ee4a311",
+    independentReviewClassification: "WAVE2_VALIDATION_INCONCLUSIVE",
+  },
+  r5Candidate: {
+    status: "generated-for-independent-w2-10r5-rereview",
     exactShaRecordedAfterCommitInSessionReturn: true,
     selfReferencedInsideChecksummedArtifacts: false,
   },
-  finalW2_10R4Required: true,
+  finalW2_10R5Required: true,
   verification: {
     remoteTipsExact: true,
     sourceParentsExact: true,
@@ -270,7 +286,7 @@ const limitations = {
   candidate: [
     {
       code: "FINAL_INDEPENDENT_REREVIEW_REQUIRED",
-      detail: "Wave 2 remains incomplete until detached review of the exact final candidate SHA.",
+      detail: "Wave 2 remains incomplete until W2-10R5 detached review of the exact final candidate SHA.",
     },
     {
       code: "REFERENCE_REPLAY_LEDGER_ONLY",
@@ -296,7 +312,7 @@ const limitations = {
 };
 
 const gateSummary = {
-  summaryVersion: 4,
+  summaryVersion: 5,
   finalClassification: gate.finalClassification,
   hardGateFamilyCount: gate.hardGateFamilies.length,
   hardGateFamiliesPassed: gate.hardGateFamilies.filter(({ status }) => status === "PASS").length,
@@ -317,9 +333,9 @@ const outputs = new Map<string, string>([
 ]);
 
 const manifest = {
-  manifestVersion: 4,
+  manifestVersion: 5,
   product: "Manuel Academy Study Tutor V2",
-  wave: "Wave 2 R4 Post-Audit Repair Candidate",
+  wave: "Wave 2 R5 Final Two-Blocker Repair Candidate",
   finalClassification: gate.finalClassification,
   wave2Complete: false,
   finalIndependentRereviewRequired: true,

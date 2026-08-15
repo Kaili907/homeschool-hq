@@ -462,6 +462,19 @@
             }
           ]
         },
+        "currentReviewPrivacyApprovalRef": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "interventionHistory": {
           "items": {
             "$id": "TutorV2HintInterventionHistoryEntry",
@@ -897,6 +910,7 @@
         "currentOpportunityRef",
         "currentReviewEventRef",
         "currentReviewPolicyRevisionRef",
+        "currentReviewPrivacyApprovalRef",
         "assessmentPhase",
         "studyHintCeiling",
         "previousAssistanceLevel",
