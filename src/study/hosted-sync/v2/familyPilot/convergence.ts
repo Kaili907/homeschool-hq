@@ -58,11 +58,7 @@ export type FamilyHostedSyncAttentionCodeR1 =
 export interface CurrentFamilyPilotHostedExportR1 {
   /** The exact accepted R2 allowlisted checkpoint. */
   readonly snapshot: HostedSyncStateSnapshotR2
-  /**
-   * The planner document remains local by contract. Returning it explicitly
-   * prevents a caller from mistaking omission from the hosted checkpoint for
-   * permission to delete it after first link or hydrate.
-   */
+  /** Exact School Plan and deterministic materialization provenance in the checkpoint. */
   readonly retainedLocalPlanner: FamilyAutoPlannerDocumentV1
   /** Exact trusted receipt sidecars represented inside `assessmentStates[].outcome`. */
   readonly scoringReceipts: readonly FamilyHostedSyncScoringReceiptR1[]
@@ -72,7 +68,8 @@ export interface CurrentFamilyPilotHostedExportR1 {
 export interface CurrentFamilyPilotHostedHydrateR1 {
   readonly local: HostedSyncLocalBundleR2
   readonly retainedLocalPlanner: FamilyAutoPlannerDocumentV1
-  /** Caller persists these through its existing receipt store; response bodies never hydrate. */
+  readonly learnerResponses: readonly LearnerResponseRecord[]
+  /** Caller persists these through its existing receipt store. */
   readonly scoringReceipts: readonly FamilyHostedSyncScoringReceiptR1[]
   readonly status: 'UP_TO_DATE' | 'NEEDS_ATTENTION'
   readonly attention: readonly FamilyHostedSyncAttentionCodeR1[]
@@ -204,15 +201,16 @@ function plannerAttention(
 }
 
 /**
- * Current-product export over the accepted R2 converter. The Auto Planner
- * document is validated against current deterministic assignment identity, but
- * is deliberately retained on device because it is not in the R2 allowlist.
+ * Current-product export over the accepted R2 converter. School Plan, stable
+ * Auto Planner materializations, and the minimum instructional input payload
+ * are part of the one whole-document CAS checkpoint.
  */
 export function exportCurrentFamilyPilotHostedStateR1(input: {
   readonly identity: HostedSyncStateIdentityR2
   readonly sync: HostedSyncStateMetadataR2
   readonly local: HostedSyncLocalBundleR2
   readonly planner: FamilyAutoPlannerDocumentV1
+  readonly learnerResponses?: readonly LearnerResponseRecord[]
   readonly scoringReceipts?: readonly FamilyHostedSyncScoringReceiptR1[]
   readonly authorityRevisions?: HostedSyncAuthorityRevisionsR2
 }): CurrentFamilyPilotHostedExportR1 {
@@ -220,7 +218,11 @@ export function exportCurrentFamilyPilotHostedStateR1(input: {
   const baseSnapshot = exportLocalBundleToHostedSyncStateR2({
     identity: input.identity,
     sync: input.sync,
-    local: input.local,
+    local: Object.freeze({
+      ...input.local,
+      plannerDocument: input.planner,
+      learnerResponses: Object.freeze([...(input.learnerResponses ?? input.local.learnerResponses ?? [])]),
+    }),
     authorityRevisions: input.authorityRevisions,
   })
   const snapshot = applyScoringReceipts(baseSnapshot, input.scoringReceipts ?? [])
@@ -233,15 +235,15 @@ export function exportCurrentFamilyPilotHostedStateR1(input: {
 }
 
 /**
- * Hydrates the accepted hosted authority without replacing or clearing the
- * device-local planner document. Any planner/assignment disagreement is made
- * visible to the Parent as attention state; it never triggers destructive
- * fallback or automatic duplicate creation.
+ * Hydrates the accepted hosted authority. Remote School Plan and learner input
+ * replace only the selected learner's older projection after the RPC CAS/read;
+ * the caller still owns persistence and must keep its pre-hydrate copy if a
+ * revision conflict is returned before this seam is called.
  */
 export function hydrateCurrentFamilyPilotHostedStateR1(input: {
   readonly snapshot: HostedSyncStateSnapshotR2
   readonly target: HostedSyncLocalBundleR2
-  readonly planner: FamilyAutoPlannerDocumentV1
+  readonly planner?: FamilyAutoPlannerDocumentV1
   readonly expectedIdentity: HostedSyncStateIdentityR2
 }): CurrentFamilyPilotHostedHydrateR1 {
   const local = importHostedSyncStateToLocalBundleR2({
@@ -249,10 +251,13 @@ export function hydrateCurrentFamilyPilotHostedStateR1(input: {
     target: input.target,
     expectedIdentity: input.expectedIdentity,
   })
-  const attention = plannerAttention(local, input.planner, input.expectedIdentity)
+  const planner = local.plannerDocument ?? input.planner
+  if (!planner) throw new Error('Hosted hydrate did not include School Plan authority.')
+  const attention = plannerAttention(local, planner, input.expectedIdentity)
   return Object.freeze({
     local,
-    retainedLocalPlanner: input.planner,
+    retainedLocalPlanner: planner,
+    learnerResponses: Object.freeze([...(local.learnerResponses ?? [])]),
     scoringReceipts: scoringReceipts(input.snapshot),
     status: attention.length ? 'NEEDS_ATTENTION' : 'UP_TO_DATE',
     attention,

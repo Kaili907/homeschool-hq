@@ -1,13 +1,16 @@
 import { ACADEMY_SUBJECTS } from '../../../../types'
 import { parseFamilyPilotStudent } from '../../../family-pilot/core/schema'
 import { parseDurableStudyDocument } from '../../../family-pilot/durable-ports/schema'
+import { parseFamilyAutoPlannerDocument } from '../../../family-pilot/auto-planner/indexedDbStore'
 import { validateDynamicSocialSourceBundle } from '../../../family-pilot/final-app/dynamicSource'
+import { FAMILY_PILOT_TRUSTED_SCORER_REF } from '../../../family-pilot/trusted-scorer'
 import {
   HOSTED_SYNC_STATE_CONTRACT_VERSION,
   HOSTED_SYNC_STATE_OPERATION_KINDS,
   type HostedSyncAssignmentStateR2,
   type HostedSyncAssessmentStateR2,
   type HostedSyncCompletionStateR2,
+  type HostedSyncInstructionalInputR1,
   type HostedSyncRflStateR2,
   type HostedSyncSafetyHoldR2,
   type HostedSyncSocialSourceStateR2,
@@ -26,8 +29,11 @@ const WORKING_GRADES = new Set(['3', '4', '5', '7', '8', '9', '10', '11', '12'])
 const TOP_KEYS = [
   'contractVersion', 'identity', 'sync', 'student', 'studentProfile', 'appUpdatedAt',
   'setupCompletedAt', 'assignments', 'assessmentStates', 'rflStates', 'socialSources',
-  'safetyHolds', 'indexedDbDocument', 'privacy',
+  'safetyHolds', 'plannerDocument', 'instructionalInputs', 'indexedDbDocument', 'privacy',
 ] as const
+
+const MAX_INSTRUCTIONAL_INPUTS = 10_000
+const MAX_INSTRUCTIONAL_TEXT = 16_000
 
 const FORBIDDEN_PRIVATE_KEYS = new Set([
   'pin', 'pindigest', 'pindigests', 'bearer', 'accesstoken', 'refreshtoken',
@@ -237,6 +243,35 @@ function parseSafety(value: unknown, studentRef: string): HostedSyncSafetyHoldR2
   return value as unknown as HostedSyncSafetyHoldR2
 }
 
+function parseInstructionalInput(value: unknown, studentRef: string): HostedSyncInstructionalInputR1 | null {
+  const keys = [
+    'schemaVersion', 'studentRef', 'assignmentRef', 'lessonRef', 'attemptRef', 'sectionRef',
+    'itemRef', 'segmentRef', 'input', 'evidenceMode', 'assessmentState', 'savedAt', 'trustedReceipt',
+  ]
+  if (!isRecord(value) || !exactKeys(value, keys) || value.schemaVersion !== 1 || value.studentRef !== studentRef ||
+    !isRef(value.assignmentRef) || !isRef(value.lessonRef) || !isRef(value.attemptRef) ||
+    !isRef(value.sectionRef) || !isRef(value.itemRef) || !isRef(value.segmentRef) || !isInstant(value.savedAt) ||
+    !(value.evidenceMode === null || ['SUPPORTED', 'INDEPENDENT', 'MASTERY', 'COMPLETION'].includes(String(value.evidenceMode))) ||
+    !['PENDING_ASSESSMENT', 'ASSESSED'].includes(String(value.assessmentState)) || !isRecord(value.input) ||
+    !exactKeys(value.input, ['kind', 'choiceRef', 'text'])) return null
+  const kind = String(value.input.kind)
+  if (kind === 'CHOICE') {
+    if (!isRef(value.input.choiceRef) || value.input.text !== null) return null
+  } else if (['TEXT', 'NUMERIC', 'CONSTRUCTED_RESPONSE', 'ACTIVITY_EVIDENCE'].includes(kind)) {
+    if (value.input.choiceRef !== null || typeof value.input.text !== 'string' ||
+      !value.input.text.trim() || value.input.text.length > MAX_INSTRUCTIONAL_TEXT) return null
+  } else return null
+  if (value.assessmentState === 'PENDING_ASSESSMENT') {
+    if (value.trustedReceipt !== null) return null
+  } else {
+    const receipt = value.trustedReceipt
+    if (!isRecord(receipt) || !exactKeys(receipt, ['assessmentRef', 'assessorRef', 'assessedAt', 'decision']) ||
+      !isRef(receipt.assessmentRef) || receipt.assessorRef !== FAMILY_PILOT_TRUSTED_SCORER_REF || !isInstant(receipt.assessedAt) ||
+      !['CORRECT', 'INCORRECT', 'PARTIAL', 'REVIEW_REQUIRED'].includes(String(receipt.decision))) return null
+  }
+  return value as unknown as HostedSyncInstructionalInputR1
+}
+
 function refused(reason: HostedSyncStateParseFailureR2): HostedSyncStateParseResultR2 {
   return Object.freeze({ status: 'refused', reason })
 }
@@ -274,13 +309,17 @@ export function parseHostedSyncStateSnapshotR2(
   if (!isInstant(value.appUpdatedAt) || !isNullableInstant(value.setupCompletedAt)) return refused('MALFORMED_STATE')
 
   if (!Array.isArray(value.assignments) || !Array.isArray(value.assessmentStates) || !Array.isArray(value.rflStates) ||
-    !Array.isArray(value.socialSources) || !Array.isArray(value.safetyHolds)) return refused('MALFORMED_STATE')
+    !Array.isArray(value.socialSources) || !Array.isArray(value.safetyHolds) ||
+    !Array.isArray(value.instructionalInputs) || value.instructionalInputs.length > MAX_INSTRUCTIONAL_INPUTS) {
+    return refused('MALFORMED_STATE')
+  }
   const assignments = value.assignments.map((item) => parseAssignment(item, identity.studentRef))
   const assessments = value.assessmentStates.map((item) => parseAssessment(item, identity.studentRef))
   const rfl = value.rflStates.map((item) => parseRfl(item, identity.studentRef))
   const sources = value.socialSources.map((item) => parseSocial(item, identity.studentRef))
   const safety = value.safetyHolds.map((item) => parseSafety(item, identity.studentRef))
-  if ([...assignments, ...assessments, ...rfl, ...sources, ...safety].some((item) => item === null)) {
+  const instructionalInputs = value.instructionalInputs.map((item) => parseInstructionalInput(item, identity.studentRef))
+  if ([...assignments, ...assessments, ...rfl, ...sources, ...safety, ...instructionalInputs].some((item) => item === null)) {
     return refused('CROSS_STUDENT_STATE')
   }
   const parsedAssignments = assignments as HostedSyncAssignmentStateR2[]
@@ -294,7 +333,28 @@ export function parseHostedSyncStateSnapshotR2(
   if (!unique(assessments as HostedSyncAssessmentStateR2[], (item) => item.assignmentRef) ||
     !unique(rfl as HostedSyncRflStateR2[], (item) => item.assignmentRef) ||
     !unique(sources as HostedSyncSocialSourceStateR2[], (item) => item.sourceRef) ||
-    !unique(safety as HostedSyncSafetyHoldR2[], (item) => item.holdRef)) return refused('INCONSISTENT_STATE')
+    !unique(safety as HostedSyncSafetyHoldR2[], (item) => item.holdRef) ||
+    !unique(instructionalInputs as HostedSyncInstructionalInputR1[], (item) => `${item.attemptRef}\u0000${item.itemRef}`)) {
+    return refused('INCONSISTENT_STATE')
+  }
+
+  const planner = parseFamilyAutoPlannerDocument(value.plannerDocument, {
+    householdRef: identity.householdRef,
+    learnerRef: identity.learnerRef,
+  })
+  if (!planner) return refused('INCONSISTENT_STATE')
+  const knownAssignmentRefs = new Set([
+    ...parsedAssignments.map((item) => item.record.assignmentRef),
+    ...(assessments as HostedSyncAssessmentStateR2[]).map((item) => item.assignmentRef),
+  ])
+  const continuableAssignmentRefs = new Set([
+    ...parsedAssignments.filter((item) => !['NORMAL_CERTIFIED', 'RFL_CERTIFIED'].includes(item.completion.kind))
+      .map((item) => item.record.assignmentRef),
+    ...(assessments as HostedSyncAssessmentStateR2[]).filter((item) => item.status !== 'CERTIFIED')
+      .map((item) => item.assignmentRef),
+  ])
+  if ((instructionalInputs as HostedSyncInstructionalInputR1[]).some((item) => !continuableAssignmentRefs.has(item.assignmentRef)) ||
+    planner.materializations.some((item) => !knownAssignmentRefs.has(item.assignmentRef))) return refused('INCONSISTENT_STATE')
 
   const durable = parseDurableStudyDocument(value.indexedDbDocument, {
     householdRef: identity.householdRef,
@@ -324,7 +384,14 @@ export function parseHostedSyncStateSnapshotR2(
   if (!isRecord(value.privacy) || !exactKeys(value.privacy, [
     'pinIncluded', 'bearerIncluded', 'rawLearnerResponseIncluded', 'rawTutorConversationIncluded',
     'rawAudioIncluded', 'inferenceIncluded', 'adultAnswerAuthorityIncluded', 'answerMaterialIncluded',
-  ]) || Object.values(value.privacy).some((marker) => marker !== false)) return refused('PRIVACY_VIOLATION')
+    'instructionalInputIncluded',
+  ])) return refused('PRIVACY_VIOLATION')
+  const privacy = value.privacy
+  if (privacy.pinIncluded !== false || privacy.bearerIncluded !== false ||
+    privacy.rawLearnerResponseIncluded !== false || privacy.rawTutorConversationIncluded !== false ||
+    privacy.rawAudioIncluded !== false || privacy.inferenceIncluded !== false ||
+    privacy.adultAnswerAuthorityIncluded !== false || privacy.answerMaterialIncluded !== false ||
+    privacy.instructionalInputIncluded !== (instructionalInputs.length > 0)) return refused('PRIVACY_VIOLATION')
 
   const snapshot = Object.freeze({
     ...value,
@@ -336,6 +403,8 @@ export function parseHostedSyncStateSnapshotR2(
     rflStates: Object.freeze(rfl as HostedSyncRflStateR2[]),
     socialSources: Object.freeze(sources as HostedSyncSocialSourceStateR2[]),
     safetyHolds: Object.freeze(safety as HostedSyncSafetyHoldR2[]),
+    plannerDocument: planner,
+    instructionalInputs: Object.freeze(instructionalInputs as HostedSyncInstructionalInputR1[]),
     indexedDbDocument: durable.document,
   }) as unknown as HostedSyncStateSnapshotR2
   return Object.freeze({ status: 'ready', snapshot })

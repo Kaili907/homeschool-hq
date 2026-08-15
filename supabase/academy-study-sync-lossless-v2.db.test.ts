@@ -23,6 +23,7 @@ const files = [
   './migrations/20260813171000_academy_study_cross_device_authority.sql',
   './migrations/20260813172000_academy_study_sync_lossless_v2.sql',
   './migrations/20260813173000_academy_study_sync_lossless_checkpoint_r1.sql',
+  './migrations/20260814120000_academy_family_cross_device_data_r1.sql',
 ] as const
 
 const sources = Promise.all(files.map((filename) =>
@@ -294,6 +295,28 @@ function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevisi
         acknowledgedAt: '2026-08-01T13:40:00.000Z', clearedAt: '2026-08-01T13:50:00.000Z',
         clearAuthority: 'GUARDIAN', clearerRef: 'guardian:a', logicalRevision: 2 },
     ],
+    plannerDocument: {
+      schemaVersion: 1,
+      scope: { householdRef: localScope.householdRef, learnerRef: localScope.studentRef },
+      revision: 2, updatedAt: '2026-08-01T14:05:00.000Z',
+      schoolPlan: {
+        schemaVersion: 1, householdTimeZone: 'America/Detroit', schoolYearStart: '2026-08-01',
+        schoolYearEnd: '2027-06-30', schoolWeekdays: [1, 2, 3, 4, 5], nonSchoolDates: [], addedSchoolDates: [],
+        subjects: [{ subject: 'mathematics', order: 0, paused: false, courseRef: 'course-math-a',
+          lessonsPerDay: 1, startLocalTime: '09:00' }],
+        configuredAt: '2026-08-01T13:00:00.000Z', updatedAt: '2026-08-01T14:05:00.000Z',
+      },
+      materializations: [{ materializationRef: 'auto:2026-08-01:mathematics:import-a', kind: 'LESSON',
+        localDate: '2026-08-01', subject: 'mathematics', workingGrade: '5', courseRef: 'course-math-a',
+        unitRef: 'unit-math-a', itemRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF,
+        assignmentRef: localScope.assignmentRef, title: 'Math lesson', createdAt: '2026-08-01T13:00:00.000Z' }],
+    },
+    instructionalInputs: [{ schemaVersion: 1, studentRef: localScope.studentRef,
+      assignmentRef: localScope.assignmentRef, lessonRef: HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF,
+      attemptRef: 'attempt-import-a', sectionRef: 'section-import-a', itemRef: 'item-import-a',
+      segmentRef: 'segment-import-a', input: { kind: 'NUMERIC', choiceRef: null, text: '17' },
+      evidenceMode: 'SUPPORTED', assessmentState: 'PENDING_ASSESSMENT',
+      savedAt: '2026-08-01T14:05:00.000Z', trustedReceipt: null }],
     indexedDbDocument: {
       schemaVersion: 1, updatedAt: '2026-08-01T14:05:00.000Z',
       scope: { householdRef: localScope.householdRef, learnerRef: localScope.studentRef },
@@ -337,7 +360,7 @@ function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevisi
     },
     privacy: { pinIncluded: false, bearerIncluded: false, rawLearnerResponseIncluded: false,
       rawTutorConversationIncluded: false, rawAudioIncluded: false, inferenceIncluded: false,
-      adultAnswerAuthorityIncluded: false, answerMaterialIncluded: false },
+      adultAnswerAuthorityIncluded: false, answerMaterialIncluded: false, instructionalInputIncluded: true },
   }
 }
 

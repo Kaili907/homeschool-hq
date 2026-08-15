@@ -543,6 +543,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "lossless_checkpoint_repair:absent->r1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260814120000",
+      "filename": "20260814120000_academy_family_cross_device_data_r1.sql",
+      "sha256": "a1a1d3175b0b5416c9367a70c1411436af626701a9715af93d13587a83c7cfd9",
+      "dependency": "20260813173000_academy_study_sync_lossless_checkpoint_r1.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "family_cross_device_data:absent->r1",
+      "supersessionStatus": "current"
     }
   ]
 }

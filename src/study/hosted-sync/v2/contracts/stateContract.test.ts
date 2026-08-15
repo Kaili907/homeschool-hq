@@ -287,7 +287,57 @@ function localFixture(): HostedSyncLocalBundleR2 {
     studentAccessVerifiers: Object.freeze({ [IDENTITY.studentRef]: 'deadbeef' }),
     parentAccessVerifier: null,
   }) as unknown as FinalFamilyPilotAppStateV1
-  return Object.freeze({ core, app, indexedDb })
+  const plannerDocument = Object.freeze({
+    schemaVersion: 1 as const,
+    scope: Object.freeze({ householdRef: IDENTITY.householdRef, learnerRef: IDENTITY.learnerRef }),
+    revision: 4,
+    updatedAt: NOW,
+    schoolPlan: Object.freeze({
+      schemaVersion: 1 as const,
+      householdTimeZone: 'America/Detroit',
+      schoolYearStart: '2026-08-01',
+      schoolYearEnd: '2027-06-30',
+      schoolWeekdays: Object.freeze([1, 2, 3, 4, 5] as const),
+      nonSchoolDates: Object.freeze(['2026-11-26']),
+      addedSchoolDates: Object.freeze([]),
+      subjects: Object.freeze([Object.freeze({
+        subject: 'mathematics' as const, order: 0, paused: false,
+        courseRef: 'course:math-5', lessonsPerDay: 1, startLocalTime: '09:00',
+      })]),
+      configuredAt: '2026-08-01T12:00:00.000Z',
+      updatedAt: NOW,
+    }),
+    materializations: Object.freeze([Object.freeze({
+      materializationRef: 'auto:2026-08-13:mathematics:math-progress',
+      kind: 'LESSON' as const,
+      localDate: '2026-08-13',
+      subject: 'mathematics' as const,
+      workingGrade: '5' as const,
+      courseRef: 'course:math-5',
+      unitRef: 'unit:math-progress',
+      itemRef: 'lesson:math-progress',
+      assignmentRef: 'assignment:math-progress',
+      title: 'Math progress',
+      createdAt: '2026-08-13T12:00:00.000Z',
+    })]),
+  })
+  const learnerResponses = Object.freeze([Object.freeze({
+    schemaVersion: 1 as const,
+    lessonRef: 'lesson:math-progress',
+    studentRef: IDENTITY.studentRef,
+    assignmentRef: 'assignment:math-progress',
+    attemptRef: 'attempt:math-progress:1',
+    sectionRef: 'section:math-progress:practice',
+    itemRef: 'item:math-progress:2',
+    segmentRef: 'lesson:math-progress:segment:2',
+    responseType: 'NUMERIC' as const,
+    evidenceMode: 'SUPPORTED' as const,
+    response: Object.freeze({ kind: 'NUMERIC' as const, text: '17' }),
+    status: 'PENDING_ASSESSMENT' as const,
+    savedAt: NOW,
+    assessment: null,
+  })])
+  return Object.freeze({ core, app, indexedDb, plannerDocument, learnerResponses })
 }
 
 const REVISIONS: HostedSyncAuthorityRevisionsR2 = Object.freeze({
@@ -331,7 +381,38 @@ describe('Hosted sync lossless state contract R2', () => {
     expect(exported.rflStates.map((item) => item.guardianState)).toEqual(['PENDING', 'CERTIFIED'])
     expect(exported.socialSources[0]).toMatchObject({ readiness: 'ATTACHED_SATISFIED', sourceRevision: 5 })
     expect(exported.safetyHolds.map((item) => item.status)).toEqual(['OPEN', 'CLEARED'])
+    expect(imported.plannerDocument).toEqual(local.plannerDocument)
+    expect(imported.learnerResponses).toEqual(local.learnerResponses)
+    expect(exported.instructionalInputs[0]).toMatchObject({
+      assignmentRef: 'assignment:math-progress',
+      segmentRef: 'lesson:math-progress:segment:2',
+      input: { kind: 'NUMERIC', text: '17' },
+    })
     expect(imported.app.studentAccessVerifiers).toEqual({})
+  })
+
+  it('hydrates one learner without deleting a sibling already present on the receiving device', () => {
+    const local = localFixture()
+    const snapshot = exportLocalBundleToHostedSyncStateR2({ identity: IDENTITY, sync: SYNC, local, authorityRevisions: REVISIONS })
+    const target = emptyTarget(local)
+    const sibling = Object.freeze({
+      studentRef: 'student:bea', displayName: 'Bea', createdAt: NOW, updatedAt: NOW,
+      activeAssignmentRef: null, assignments: Object.freeze([]),
+    })
+    const siblingProfile = Object.freeze({
+      studentRef: 'student:bea', displayName: 'Bea', nominalGrade: '3' as const,
+      workingGradeBySubject: Object.freeze({ mathematics: '3' as const }),
+      enabledSubjects: Object.freeze(['mathematics' as const]), pinRequired: false,
+      createdAt: NOW, updatedAt: NOW,
+    })
+    const withSibling: HostedSyncLocalBundleR2 = Object.freeze({
+      ...target,
+      core: Object.freeze({ ...target.core, students: Object.freeze([sibling]) }),
+      app: Object.freeze({ ...target.app, setup: Object.freeze({ completedAt: NOW, students: Object.freeze([siblingProfile]) }) }),
+    })
+    const hydrated = importHostedSyncStateToLocalBundleR2({ snapshot, target: withSibling, expectedIdentity: IDENTITY })
+    expect(hydrated.core.students.map((item) => item.studentRef).sort()).toEqual(['student:ada', 'student:bea'])
+    expect(hydrated.app.setup.students.map((item) => item.studentRef).sort()).toEqual(['student:ada', 'student:bea'])
   })
 
   it('round-trips A→RPC checkpoint→empty B and B progress→RPC checkpoint→A without invention', async () => {
@@ -345,7 +426,8 @@ describe('Hosted sync lossless state contract R2', () => {
       clientKind: 'AUTHENTICATED_USER' as const, expiresAt: '2027-08-13T00:00:00.000Z', provider,
     } }) }
     const deviceA = createHostedSyncRpcAdapter({ authorization, now: () => new Date(NOW) })
-    const deviceB = createHostedSyncRpcAdapter({ authorization, now: () => new Date(NOW) })
+    let deviceBOnline = true
+    const deviceB = createHostedSyncRpcAdapter({ authorization, now: () => new Date(NOW), isOnline: () => deviceBOnline })
     const firstAssignment = snapshotA.assignments[0]!
     const sessionIdentity = firstAssignment.sessionIdentity!
     const legacyImport = {
@@ -391,21 +473,53 @@ describe('Hosted sync lossless state contract R2', () => {
         revision: checkpoint.revision + 1,
         elapsedActiveSecondsInSegment: checkpoint.elapsedActiveSecondsInSegment + 14,
         capturedAt: '2026-08-13T16:01:00.000Z' }, ...advanced.indexedDbDocument.checkpoints.slice(1)] }
+    advanced.instructionalInputs = [{ ...advanced.instructionalInputs[0],
+      input: { ...advanced.instructionalInputs[0].input, text: '19' },
+      savedAt: '2026-08-13T16:01:00.000Z' }]
     const parsedAdvanced = parseHostedSyncStateSnapshotR2(advanced, IDENTITY)
     expect(parsedAdvanced.status).toBe('ready')
     if (parsedAdvanced.status !== 'ready') throw new Error(parsedAdvanced.reason)
-    const stored = await deviceB.write({ tokenDigest: 'a'.repeat(64),
+    const writeInput = { tokenDigest: 'a'.repeat(64),
       studentId: '00000000-0000-4000-8000-000000000101',
       assignmentRef: 'hosted:assignment:math', sessionId: 'hosted:session:math', expectedRevision: 18,
       clientOperationId: writeId, operation: 'authority-checkpoint:compare-and-swap',
       payload: authorityCheckpointWritePayloadR1({ checkpoint: parsedAdvanced.snapshot,
-        expectedRevision: 18, clientOperationId: writeId }) })
+        expectedRevision: 18, clientOperationId: writeId }) } as const
+    deviceBOnline = false
+    const offline = await deviceB.write(writeInput)
+    expect(offline).toMatchObject({ code: 'OFFLINE' })
+    expect(parsedAdvanced.snapshot.instructionalInputs[0]?.input).toMatchObject({ text: '19' })
+    deviceBOnline = true
+    const stored = await deviceB.write(writeInput)
     expect(stored).toMatchObject({ code: 'SUCCESS', value: { serverRevision: 19 } })
+
+    const staleId = '33333333-3333-4333-8333-333333333333'
+    const stale = structuredClone(snapshotA) as any
+    stale.sync = { ...stale.sync, serverRevision: 19, baseRevision: 18,
+      operationId: staleId, idempotencyKey: staleId, operationKind: 'CHECKPOINT', localSequence: 20,
+      createdAt: '2026-08-13T16:02:00.000Z' }
+    stale.instructionalInputs = [{ ...stale.instructionalInputs[0],
+      input: { ...stale.instructionalInputs[0].input, text: '23' },
+      savedAt: '2026-08-13T16:02:00.000Z' }]
+    const parsedStale = parseHostedSyncStateSnapshotR2(stale, IDENTITY)
+    if (parsedStale.status !== 'ready') throw new Error(parsedStale.reason)
+    const conflict = await deviceA.write({ tokenDigest: 'a'.repeat(64),
+      studentId: '00000000-0000-4000-8000-000000000101',
+      assignmentRef: 'hosted:assignment:math', sessionId: 'hosted:session:math', expectedRevision: 18,
+      clientOperationId: staleId, operation: 'authority-checkpoint:compare-and-swap',
+      payload: authorityCheckpointWritePayloadR1({ checkpoint: parsedStale.snapshot,
+        expectedRevision: 18, clientOperationId: staleId }) })
+    expect(conflict).toMatchObject({ code: 'SUCCESS', value: {
+      status: 'revision-conflict', serverRevision: 19,
+    } })
+    expect(parsedStale.snapshot.instructionalInputs[0]?.input).toMatchObject({ text: '23' })
     const hydratedA = await deviceA.hydrate({ tokenDigest: 'a'.repeat(64),
       studentId: '00000000-0000-4000-8000-000000000101',
       assignmentRef: 'hosted:assignment:math', sessionId: 'hosted:session:math' })
     if (hydratedA.code !== 'SUCCESS') throw new Error('Device A hydrate failed.')
-    expect(authorityCheckpointFromHydrateR1(hydratedA.value, IDENTITY)).toEqual(parsedAdvanced.snapshot)
+    const reconciledA = authorityCheckpointFromHydrateR1(hydratedA.value, IDENTITY)
+    expect(reconciledA).toEqual(parsedAdvanced.snapshot)
+    expect(reconciledA.instructionalInputs[0]?.input).toMatchObject({ text: '19' })
   })
 
   it('supports a scored assessment outcome without learner response content', () => {

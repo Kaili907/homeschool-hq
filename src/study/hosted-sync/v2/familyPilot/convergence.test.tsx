@@ -170,7 +170,7 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
     expect(FAMILY_HOSTED_SYNC_CONVERGENCE_R1).toEqual({
       enabled: false,
       localFirst: true,
-      plannerPersistence: 'DEVICE_LOCAL_INDEXED_DB',
+      plannerPersistence: 'LOCAL_AND_HOSTED_CHECKPOINT',
       hostedContract: 'hosted-study-sync-state.r2.v1',
     })
     expect(currentParentSyncStatusR1()).toBe('LOCAL_ONLY')
@@ -186,7 +186,8 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
     expect(parseHostedSyncStateSnapshotR2(exported.snapshot, IDENTITY)).toMatchObject({ status: 'ready' })
 
     const serialized = JSON.stringify(exported.snapshot)
-    expect(serialized).not.toMatch(/schoolPlan|materializations|deadbeef|feedface/i)
+    expect(exported.snapshot.plannerDocument).toEqual(localPlanner)
+    expect(serialized).not.toMatch(/deadbeef|feedface/i)
     expect(exported.snapshot.privacy).toEqual({
       pinIncluded: false,
       bearerIncluded: false,
@@ -196,6 +197,7 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
       inferenceIncluded: false,
       adultAnswerAuthorityIncluded: false,
       answerMaterialIncluded: false,
+      instructionalInputIncluded: false,
     })
     expect(serialized).not.toMatch(/pinDigest|secret-token|private conversation|full learner response|personality judgment|emotional label/i)
 
@@ -206,14 +208,14 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
       expectedIdentity: IDENTITY,
     })
     expect(hydrated.status).toBe('UP_TO_DATE')
-    expect(hydrated.retainedLocalPlanner).toBe(localPlanner)
+    expect(hydrated.retainedLocalPlanner).toEqual(localPlanner)
     expect(hydrated.local.core.students[0]?.assignments).toEqual(local.core.students[0]?.assignments)
     expect(hydrated.local.indexedDb).toEqual(local.indexedDb)
     expect(hydrated.local.app.studentAccessVerifiers).toEqual({})
     expect(hydrated.local.app.parentAccessVerifier).toBeNull()
   })
 
-  it('round-trips an allowlisted trusted receipt without learner response or answer authority', () => {
+  it('round-trips the minimum learner input and its trusted receipt without answer authority', () => {
     const assessedResponse: LearnerResponseRecord = Object.freeze({
       schemaVersion: 1,
       lessonRef: LESSON_REF,
@@ -241,6 +243,7 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
       sync: SYNC,
       local: localBundle(),
       planner: planner(true),
+      learnerResponses: [assessedResponse],
       scoringReceipts: [receipt],
     })
     expect(first.scoringReceipts).toEqual([receipt])
@@ -252,7 +255,14 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
         assessorRef: 'trusted:production-item:r1',
       },
     })
-    expect(JSON.stringify(first.snapshot)).not.toMatch(/private learner response|answerKey|correctAnswer|workedSolution/i)
+    expect(first.snapshot.instructionalInputs[0]).toMatchObject({
+      assignmentRef: ASSESSMENT_ASSIGNMENT_REF,
+      itemRef: 'item:budgeting:1',
+      input: { kind: 'TEXT', text: 'private learner response' },
+      assessmentState: 'ASSESSED',
+    })
+    expect(JSON.stringify(first.snapshot)).not.toMatch(/answerKey|correctAnswer|workedSolution|"prompt"|"choices"|tutorMessage|tutorPrompt/i)
+    expect(first.snapshot.privacy.instructionalInputIncluded).toBe(true)
 
     const deviceB = hydrateCurrentFamilyPilotHostedStateR1({
       snapshot: first.snapshot,
@@ -261,6 +271,7 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
       expectedIdentity: IDENTITY,
     })
     expect(deviceB.scoringReceipts).toEqual([receipt])
+    expect(deviceB.learnerResponses).toEqual([assessedResponse])
     const second = exportCurrentFamilyPilotHostedStateR1({
       identity: IDENTITY,
       sync: SYNC,
@@ -307,9 +318,9 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
     })
     const facts = assignmentFactsFromFamilyPilotCore(deviceB.local.core, IDENTITY.learnerRef)
     const computed = computeFamilyAutoPlanner({
-      scope: deviceBPlanner.scope,
+      scope: deviceB.retainedLocalPlanner.scope,
       instant: new Date(NOW),
-      document: deviceBPlanner,
+      document: deviceB.retainedLocalPlanner,
       learner: Object.freeze({
         learnerRef: IDENTITY.learnerRef,
         displayName: 'Ada',
@@ -326,12 +337,12 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
 
     expect(facts).toHaveLength(1)
     expect(computed.plan.items).toHaveLength(1)
-    expect(computed.plan.items[0]).toMatchObject({ assignmentRef: ASSIGNMENT_REF, origin: 'MANUAL_OVERRIDE' })
+    expect(computed.plan.items[0]).toMatchObject({ assignmentRef: ASSIGNMENT_REF, origin: 'AUTO' })
     expect(computed.intents).toEqual([])
     expect(finalAssignmentRef(IDENTITY.studentRef, LESSON_REF)).toBe(ASSIGNMENT_REF)
   })
 
-  it('preserves planner data and reports attention instead of deleting or duplicating around a mismatch', () => {
+  it('refuses to publish planner provenance that disagrees with assignment authority', () => {
     const mismatched = Object.freeze({
       ...planner(true),
       materializations: Object.freeze([Object.freeze({
@@ -339,14 +350,12 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
         assignmentRef: 'assignment:legacy:other',
       })]),
     })
-    const exported = exportCurrentFamilyPilotHostedStateR1({
+    expect(() => exportCurrentFamilyPilotHostedStateR1({
       identity: IDENTITY,
       sync: SYNC,
       local: localBundle(),
       planner: mismatched,
-    })
-    expect(exported.attention).toContain('PLANNER_MATERIALIZATION_MISSING_ASSIGNMENT')
-    expect(exported.retainedLocalPlanner).toBe(mismatched)
+    })).toThrow('Local state could not enter hosted sync: INCONSISTENT_STATE')
   })
 
   it('uses only the five Parent-facing status labels and defaults the Parent Hub to Local only', () => {
