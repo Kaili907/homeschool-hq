@@ -37,6 +37,15 @@ import {
   buildArtsLearnerResource,
   HOUSEHOLD_ARTS_MATERIAL_ROUTE,
 } from './artsLearnerResources.mjs'
+import {
+  ARTS_ANCHOR_ID,
+  artsPrimaryProjection,
+  artsRemediationProjection,
+  artsScoringGuidance,
+  buildArtsProductionDepth,
+  buildArtsRubric,
+  classifyArtsLessonType,
+} from './artsProductionDepth.mjs'
 
 /**
  * The specificity heuristic in src/curriculum/production-quality rejects
@@ -195,12 +204,23 @@ function artsPresentationOptions() {
   )
 }
 
-function artsTextOrNoAudioAlternative() {
-  return (
-    'A written alternative is always available and scores the same. Instead of performing, speaking, or recording, you may submit ' +
-    'a written description of what you made or would make, a notated or diagrammed version, a labelled plan, or a written analysis ' +
-    'covering the same criteria. Nothing in this task requires a working microphone, camera, or the ability to perform aloud.'
-  )
+function artsTextOrNoAudioAlternative(taskType) {
+  const opening = 'A written alternative is always available for spoken reflection, explanation, or critique and scores the same. '
+  if (['VISUAL_ART_CONCEPT', 'TECHNIQUE', 'DESIGN', 'CREATION_STUDIO'].includes(taskType)) {
+    return opening +
+      'Use a labelled visual, tactile, constructed, or accessible digital work to preserve the making target; prose alone does not claim visual or material technique evidence. ' +
+      'You may describe the work in writing and have one trusted adult verify a physical artifact without photographing you or your home. No microphone, camera, or recording is required.'
+  }
+  if (taskType === 'PERFORMANCE') {
+    return opening +
+      'Use notation, a cue map, paper blocking, silent gesture, or a private live demonstration to one trusted adult as the target permits. When timing or performance control is the target, prose alone does not claim that evidence; the adult may verify the private attempt without recording it. No microphone, camera, or public audience is required.'
+  }
+  if (['LISTENING', 'RHYTHM', 'MELODY', 'MUSIC_CONCEPT', 'COMPOSITION'].includes(taskType)) {
+    return opening +
+      'Tap, point through, gesture, or use the supplied notation or event map without recording. A written or notated response can show structure and reasoning; it does not claim hearing or performed control that was not actually demonstrated. No instrument, microphone, camera, or public performance is required.'
+  }
+  return opening +
+    'Use a written analysis, labelled plan, evidence table, notation, diagram, or private artifact check that preserves the stated target. No microphone, camera, recording, or public audience is required.'
 }
 
 function copyrightAndAuthorship(subjectKey) {
@@ -251,7 +271,8 @@ function assertStudentFacingText(label, text, lessonId) {
 export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, band, grade, gradeDir }) {
   const isTech = subjectKey === 'technology'
   const mode = modeForPhase(lesson.phase)
-  const taskType = classifyLesson(lesson, unit, subjectKey)
+  let taskType = classifyLesson(lesson, unit, subjectKey)
+  if (!isTech) taskType = classifyArtsLessonType({ lesson, unit, mode })
 
   const taskFocus = taskFacingFocus(lesson.focus, subjectKey)
   const activitySetup = isTech ? buildTechnologyActivitySetup({ lesson, taskType, grade }) : undefined
@@ -327,8 +348,18 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     mode,
     taskType,
     elementary,
+    gradeDir,
   })
-  const taskBody = `${taskRegistry[mode](ctx)}${learnerResource ? ` ${learnerResource.taskInstruction}` : ''}`
+  const artsProduction = isTech ? null : buildArtsProductionDepth({
+    lesson, unit, mode, grade, learnerResource,
+  })
+  if (artsProduction) taskType = artsProduction.lessonType
+  const artsProjection = artsProduction
+    ? artsPrimaryProjection({ depth: artsProduction.depth, lesson, grade })
+    : null
+  const taskBody = artsProjection
+    ? `${artsProjection.primaryTask}${learnerResource ? ` ${learnerResource.taskInstruction}` : ''}`
+    : `${taskRegistry[mode](ctx)}${learnerResource ? ` ${learnerResource.taskInstruction}` : ''}`
   const completeInputNote = isTech
     ? elementary
       ? ' Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app.'
@@ -342,9 +373,11 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
    * arbitrary cut of a long paragraph. Secondary tasks are written as
    * connected prose and are not split.
    */
-  const taskSteps = elementary
-    ? taskBody.split(/(?<=[.!?])\s+/).map((step) => step.trim()).filter(Boolean)
-    : undefined
+  const taskSteps = artsProjection
+    ? artsProjection.taskSteps
+    : elementary
+      ? taskBody.split(/(?<=[.!?])\s+/).map((step) => step.trim()).filter(Boolean)
+      : undefined
 
   const accessibilityProvisions = buildAccessibilityProvisions({
     focus: lesson.focus,
@@ -352,14 +385,28 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     subjectKey,
     elementary,
   })
-  const checks = checkRegistry[mode](ctx)
-  const deliverable = deliverableRegistry[mode]
+  const artsRubric = artsProduction
+    ? buildArtsRubric({
+        depth: artsProduction.depth,
+        profile: artsProduction.profile,
+        mode,
+        focus: lesson.focus,
+      })
+    : null
+  const checks = artsRubric
+    ? artsRubric.map((row) => row.meets)
+    : checkRegistry[mode](ctx)
+  const deliverable = artsProduction
+    ? `${artsProduction.depth.work_blocks.map((block) => block.title).join(', ')}, with the observable Arts evidence and learner-owned decisions identified in each block.`
+    : deliverableRegistry[mode]
   const workLabel = MODE_WORK_LABEL[mode]
 
   const nonPenalty = NON_PENALTY_MODES.has(mode)
   const summative = SUMMATIVE_MODES.has(mode)
 
-  const taskBrief = elementary
+  const taskBrief = artsProjection
+    ? artsProjection.taskBrief
+    : elementary
     ? `This is day ${lesson.day_in_unit} of "${unit.title}". That is unit ${unit.unit_number} in grade ${grade}. ` +
       `Today is ${article(workLabel)} ${workLabel.toLowerCase()} about ${taskFocus}. It takes about ${lesson.estimated_minutes} minutes. ` +
       `It is one day's work, not the whole unit project. ` +
@@ -380,7 +427,13 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
           ? 'This session produces graded evidence of record and must be completed independently.'
           : 'This session produces reviewable evidence toward the unit performance task.')
 
-  const requirements = elementary
+  const requirements = artsProduction
+    ? [
+        ...artsProduction.depth.work_blocks.map((block) => `${block.title}: ${block.prompt}`),
+        `Authored success criteria for ${lesson.focus}: ${joinNatural(lesson.success_criteria.map(reframe))}`,
+        `Learner-owned choices during this ${workLabel.toLowerCase().replace('probe', 'starting point')}: ${artsProduction.profile.choices.join(', ')}.`,
+      ]
+    : elementary
     ? [
         `Do what this lesson asks: ${joinNatural(lesson.success_criteria.map(reframe))}`,
         `Meet today's goal: ${reframe(lesson.learning_objectives[0])}`,
@@ -428,7 +481,9 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     work_mode: mode,
     focus: lesson.focus,
     task_type: taskType,
-    task_label: `${(isTech ? TECH_TASK_LABELS : ARTS_TASK_LABELS)[taskType]} — ${workLabel}`,
+    task_label: isTech
+      ? `${TECH_TASK_LABELS[taskType]} — ${workLabel}`
+      : `${taskType.replaceAll('_', ' ').toLowerCase().replace(/^./, (c) => c.toUpperCase())} — ${workLabel}`,
     scoring_stance: nonPenalty ? 'FORMATIVE_NO_PENALTY' : summative ? 'SUMMATIVE' : 'PROGRESS_EVIDENCE',
     estimated_minutes: lesson.estimated_minutes,
     standards: lesson.standards,
@@ -460,14 +515,16 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
       ? { sandbox_and_credentials_note: techPresentationAndPrivacy() }
       : {
           presentation_options: artsPresentationOptions(),
-          text_or_no_audio_alternative: artsTextOrNoAudioAlternative(),
+          text_or_no_audio_alternative: artsTextOrNoAudioAlternative(taskType),
         },
     copyright_and_authorship: copyrightAndAuthorship(subjectKey),
     accessibility_options: lesson.accessibility_and_accommodations,
     task_accessibility_provisions: accessibilityProvisions,
     safety_and_privacy_rules: lesson.safety_and_privacy,
-    media: lesson.media,
-    remediation: buildRemediation(lesson, taskFocus, reframe),
+    media: learnerResource?.media ?? lesson.media,
+    remediation: artsProduction
+      ? artsRemediationProjection(artsProduction.depth)
+      : buildRemediation(lesson, taskFocus, reframe),
     extension: buildExtension(lesson, taskFocus, subjectKey, reframe),
     unit_context: {
       performance_task: unit.performance_task,
@@ -475,6 +532,12 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
       essential_question: unit.essential_question,
       assessment_id: unit.assessment_id,
     },
+    ...(artsProduction
+      ? {
+          arts_music_r1: artsProduction.depth,
+          ...(lesson.lesson_id === ARTS_ANCHOR_ID ? { r1_sample: artsProduction.depth } : {}),
+        }
+      : {}),
   }
 
   const needsSourceIntegrity =
@@ -498,16 +561,24 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     focus: lesson.focus,
     scoring_authority_kind: 'RUBRIC',
     scoring_stance: taskPackage.scoring_stance,
-    rubric: buildLessonRubric(mode, isTech),
-    scoring_judgment_guidance:
-      `Score this session with the rubric below, not against a fixed answer key — a ${isTech ? 'design, code, or debugging' : 'creative or analytical'} ` +
+    rubric: artsRubric ?? buildLessonRubric(mode, isTech),
+    scoring_judgment_guidance: artsProduction
+      ? artsScoringGuidance({
+          depth: artsProduction.depth,
+          profile: artsProduction.profile,
+          focus: lesson.focus,
+          mode,
+        })
+      : `Score this session with the rubric below, not against a fixed answer key — a ${isTech ? 'design, code, or debugging' : 'creative or analytical'} ` +
       `task legitimately has more than one valid solution. Score only what a ${workLabel.toLowerCase()} on ${taskFocus} can show: ` +
       `${nonPenalty ? 'a wrong prediction or a rough first attempt is expected here and must not reduce the score, provided the record is complete and honest' : summative ? 'this is evidence of record, so it must be independent work checked against the stated criteria' : 'this is one increment of progress, so score the increment and its documentation rather than the unfinished whole'}. ` +
       `Record the level reached on each dimension with one specific reason drawn from the actual submission. Do not infer effort, ` +
       `motivation, diagnosis, or character from an error.`,
     lesson_success_criteria: lesson.success_criteria,
     formative_check: reframe(lesson.formative_check),
-    answer_or_scoring_guidance: lesson.answer_or_scoring_guidance,
+    answer_or_scoring_guidance: artsProduction
+      ? `There is no fixed composition or answer for ${lesson.focus}. Score the authored objective constraints and the focus-specific rubric evidence; accept materially different creative, performance, design, or interpretive choices when the learner supports them against the criteria.`
+      : lesson.answer_or_scoring_guidance,
     mastery_rule: lesson.mastery_rule,
     unit_assessment_reference: {
       assessment_id: assessment.assessment_id,
@@ -539,9 +610,23 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
         : 'No public performance, camera, voice recording, photograph, or audience is required at any point; a private option and a written/no-audio alternative are stated in the task package and score identically.',
     },
     standards: lesson.standards,
+    ...(artsProduction
+      ? {
+          rubric_ref: artsProduction.depth.rubric_ref,
+          objective_constraints: artsProduction.depth.work_blocks.flatMap((block) => block.objective_constraints ?? []),
+          legitimate_variation: artsProduction.depth.legitimate_variation,
+          remediation_paths: artsProduction.depth.remediation_paths,
+        }
+      : {}),
   }
 
-  return { taskPackage, scoringGuide, mode, taskType }
+  return {
+    taskPackage,
+    scoringGuide,
+    mode,
+    taskType,
+    generatedAssets: learnerResource?.generatedAsset ? [learnerResource.generatedAsset] : [],
+  }
 }
 
 export function toGateInput(taskPackage, scoringGuide) {

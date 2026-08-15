@@ -2,6 +2,7 @@
  * Offline, text-native Arts/Music resources for modes that require a model,
  * reference work, or scaffold. All content below is Manuel Academy original.
  */
+import { artsTeachingProfile } from './artsProductionDepth.mjs'
 
 export const ARTS_RESOURCE_MODES = new Set([
   'MODEL_A', 'MODEL_B', 'GUIDED_A', 'GUIDED_B', 'INVESTIGATE',
@@ -15,6 +16,46 @@ const MUSIC = /\b(music|rhythm|beat|meter|syncopat|melod|pitch|harmon|chord|inte
 const THEATRE = /\b(theatre|theater|scene|script|character|gesture|movement|dance|choreograph|blocking|acting|direct|rehears|ensemble|stage|performance|dramaturg|voice|audience|presentation)\b/i
 const PORTFOLIO = /\b(portfolio|artist statement|curat|exhibition|documentation|archiv|pathway|career|application|proposal|scope|timeline|pricing|commission|compensation|goal setting|rights|permission|attribution|research|sourcing)\b/i
 const CONTEXT = /\b(culture|tradition|context|identity|representation|stereotype|censor|appropriation|appreciation|ethic|critique|criticism|aesthetic|historical|funding|social impact|access|ownership)\b/i
+const ANCHOR_ID = 'ma-g9-arts-and-music-u01-l02'
+
+const xml = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
+
+function visualModelAsset(lesson, gradeDir) {
+  const title = `${lesson.focus} — relationship study`
+  const description = `An Academy-original three-stage visual model for ${lesson.focus}. Stage one shows evenly weighted circle, rectangle, and triangle forms. Stage two isolates one dark circle and lowers contrast elsewhere. Stage three adds a directional path and a materially different alternate arrangement. Labels, pattern, value, size, and position carry the comparison without relying on colour alone.`
+  const relativePath = `resources/arts-music/${gradeDir}/${lesson.lesson_id}.arts-model.svg`
+  const locator = `curriculum-production/student-work/technology-arts-lessons/${relativePath}`
+  const content = `<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="model-title model-description">
+  <title id="model-title">${xml(title)}</title><desc id="model-description">${xml(description)}</desc>
+  <rect width="960" height="520" fill="#fffaf0"/><text x="48" y="48" font-family="system-ui,sans-serif" font-size="25" font-weight="700" fill="#172033">${xml(lesson.focus)}</text>
+  <g font-family="system-ui,sans-serif" fill="#172033"><text x="48" y="90" font-size="16">1 — even start</text><text x="350" y="90" font-size="16">2 — isolate one relationship</text><text x="652" y="90" font-size="16">3 — build and test a path</text></g>
+  <g stroke="#172033" stroke-width="4"><rect x="48" y="110" width="260" height="300" rx="16" fill="#f4efe3"/><circle cx="118" cy="205" r="32" fill="#969696"/><rect x="170" y="250" width="70" height="58" fill="#969696"/><path d="M105 360 L180 320 L255 365 Z" fill="#969696"/>
+  <rect x="350" y="110" width="260" height="300" rx="16" fill="#f4efe3"/><circle cx="414" cy="188" r="27" fill="#20242b"/><rect x="470" y="250" width="72" height="58" fill="#a7a7a7"/><path d="M405 370 L490 322 L562 375 Z" fill="#ded7c8"/>
+  <rect x="652" y="110" width="260" height="300" rx="16" fill="#f4efe3"/><circle cx="712" cy="185" r="26" fill="#20242b"/><rect x="764" y="245" width="70" height="58" fill="#a7a7a7"/><path d="M700 370 L795 320 L865 380 Z" fill="#ded7c8"/><path d="M735 200 Q790 205 798 240 Q810 305 820 330" fill="none" stroke="#7a4d22" stroke-width="6" stroke-dasharray="12 8"/></g>
+  <g font-family="system-ui,sans-serif" font-size="15" fill="#172033"><text x="48" y="448">NON-EXAMPLE: equal weight leaves the route unsettled.</text><text x="48" y="478">WORKED CHANGE: one stronger relationship leads; quiet areas support it.</text><text x="48" y="506">VALID VARIATION: reverse, distribute, or soften the route when evidence serves the learner’s intent.</text></g></svg>\n`
+  return { relativePath, locator, content }
+}
+
+function anchorResource(lesson) {
+  const resourceId = `ma-resource:${lesson.lesson_id}`
+  const locator = 'curriculum-production/student-work/technology-arts-lessons/resources/arts-music/grade-09/ma-g9-arts-and-music-u01-l02.visual-hierarchy-model.svg'
+  const sourceReference = [
+    'ATTACHED MANUEL ACADEMY LEARNER RESOURCE', `Resource ID: ${resourceId}`, `Lesson focus: ${lesson.focus}`,
+    'Title: Three Stops — an annotated visual-hierarchy model', 'Creator: Manuel Academy curriculum team',
+    'Role: technique model, worked artistic example, partial exemplar, and one possible finished exemplar',
+    'The delivered SVG shows a flat start, an intermediate state using placement, value, scale, and isolation, a finished three-stop visual path, and a triangle-first variation. The variation proves that the model’s exact arrangement is not the answer.',
+    'Technique sequence: state a focal point; arrange large masses; create the strongest useful difference at the focal point; repeat or direct a feature to build a path; step back or blur-and-glance; revise one variable at a time. Common trouble spot: increasing every contrast equally can make all parts compete.',
+    'Access parallel: pencil or pen and scrap paper are enough. For a tactile route, use three raised or cut-paper shapes. Make one shape noticeably rougher, taller, or more isolated, connect the shapes with string, and trace the intended order by touch.',
+    'Rights: Manuel Academy original; licensed CC BY 4.0 for learner use and adaptation. No third-party work is included.',
+  ].join('\n\n')
+  return {
+    sourceReference,
+    taskInstruction: 'Use the attached Academy-original Three Stops model before guided work; no outside search or teacher-supplied example is required.',
+    materialLine: `Supplied reference ${resourceId}: the complete annotated SVG model and its verbal and tactile description are included with this lesson.`,
+    media: { required: true, kind: 'SVG_VISUAL_MODEL', locator, fallback: 'Use the supplied full verbal description and the tactile three-shape-and-string route. The reference is a committed Academy asset, not a teacher-supplied or outside-search requirement.' },
+    metadata: { resource_id: resourceId, kind: 'ACADEMY_ORIGINAL_MODEL', profile: 'visual', availability: 'ATTACHED_IN_PACKAGE', academy_original: true, license: 'CC-BY-4.0', third_party_content: false, external_dependencies: [], required_paid_tools: [], required_specialized_materials: [], household_accessible: true, silent_text_route_equal_credit: true },
+  }
+}
 
 function profileFor(focus, unitTitle, taskType) {
   // The day's focus outranks the broad unit title and the legacy task-type
@@ -85,6 +126,27 @@ function kindFor(mode) {
   return 'ACADEMY_ORIGINAL_REFERENCE_WORK'
 }
 
+function focusSpecificContent({ lesson, mode, lessonType }) {
+  const p = artsTeachingProfile(lesson.focus, lessonType)
+  const worked = `Worked example for ${lesson.focus}: ${p.example}`
+  const contextBoundary = p.key === 'contextAnalysis'
+    ? ' Source boundary: this invented Academy example teaches analysis procedure only. It is not evidence about a real creator, community, tradition, place, or historical event. Make a real-world context claim only when a substantive cited source is already supplied and accessible; if none is available, label that limitation and keep the response scoped to the Academy example.'
+    : ''
+  if (mode === 'MODEL_A') {
+    return `MODEL A — “One relationship at a time.” ${p.definition} ${p.mechanism} ${worked} Starting state: state the intended effect, question, or criterion before acting. First decision: locate ${p.evidence}. Intermediate state: complete one bounded study, loop, map, or comparison while most features stay stable. Check: cite what changed before judging it. Finished or intentionally partial result: keep the evidence even when it challenges the first intention. Common misapplication: ${p.nonExample} Legitimate variation: another learner may choose different ${p.choices.join(', ')} and still meet the criterion.${contextBoundary}`
+  }
+  if (mode === 'MODEL_B') {
+    return `MODEL B — contrasting route for ${lesson.focus}. Reconnect: ${p.definition} Model A demonstrates: ${p.example} Model B deliberately tests the opposite pressure described here: ${p.tradeoff} Compare the two by locating ${p.evidence}; do not rank them by polish or resemblance. Mark which condition makes each route useful. Then make a third small case that borrows the relationship—not the model’s subject, sequence, wording, style, or interpretation.${contextBoundary}`
+  }
+  if (mode === 'GUIDED_A') {
+    return `GUIDED SCAFFOLD A — first supported pass for ${lesson.focus}. 1 INTENT: name what the study should do. 2 SETUP: choose a safe, available route. 3 NOTICE: locate ${p.evidence}. 4 ACT: complete one small study using this cue—${p.mechanism} 5 CHECK: point to the result before using “works” or “does not work.” 6 SECOND STUDY: change one relationship only. Keep both attempts and circle the exact prompt you are ready to remove. ${worked}${contextBoundary}`
+  }
+  if (mode === 'GUIDED_B') {
+    return `GUIDED SCAFFOLD B — support-fading pass for ${lesson.focus}. Earlier-pass substitute: ${p.example} Mark the relationship involving ${p.evidence.split(', ')[0]} as the fragile move, then hide this resource. Make two new studies, loops, maps, or responses without the prompt. Reopen only afterward; compare the order of decisions and the evidence. Report whether the fragile move held. If it did not, use the criteria to name the mismatch without changing the learner’s intent or copying the example.${contextBoundary}`
+  }
+  return `REFERENCE WORK — Academy study for ${lesson.focus}. Purpose: give the learner a complete work, event map, process record, or described artifact to observe rather than inventing a missing source. ${p.definition} Reference content: ${p.example} Supplied context: ${p.mechanism} Analysis boundary: first describe ${p.evidence}; then interpret; then use only the supplied context. Tradeoff available for evaluation: ${p.tradeoff} Non-example of evidence use: ${p.nonExample} This Academy instructional reference is not presented as an authentic historical or culturally specific work.${contextBoundary}`
+}
+
 function instructionFor(mode, elementary) {
   if (elementary) return 'Use the attached Manuel Academy resource in this package. It gives you the model, example, or help sheet needed for this task.'
   if (mode === 'MODEL_A') return 'Use the attached Academy-original Model A as the first model work; no outside search or teacher-supplied example is required.'
@@ -94,8 +156,9 @@ function instructionFor(mode, elementary) {
   return 'Use the attached Academy-original reference work as the work under investigation; no outside artwork, recording, performance, or web source is required.'
 }
 
-export function buildArtsLearnerResource({ lesson, unit, mode, taskType, elementary }) {
+export function buildArtsLearnerResource({ lesson, unit, mode, taskType, elementary, gradeDir }) {
   if (!ARTS_RESOURCE_MODES.has(mode)) return null
+  if (lesson.lesson_id === ANCHOR_ID) return anchorResource(lesson)
   const profile = profileFor(lesson.focus, unit.title, taskType)
   const key = mode === 'MODEL_A' ? 'modelA' : mode === 'MODEL_B' ? 'modelB'
     : mode === 'GUIDED_A' ? 'scaffoldA' : mode === 'GUIDED_B' ? 'scaffoldB' : 'reference'
@@ -103,20 +166,29 @@ export function buildArtsLearnerResource({ lesson, unit, mode, taskType, element
   const resourceId = `ma-resource:${lesson.lesson_id}`
   const instruction = instructionFor(mode, elementary)
   const rights = 'Manuel Academy original; licensed CC BY 4.0 for learner use and adaptation. No third-party text, image, score, lyric, melody, recording, or performance is included.'
+  const sourceContent = focusSpecificContent({ lesson, mode, lessonType: taskType })
   const sourceReference = [
     'ATTACHED MANUEL ACADEMY LEARNER RESOURCE',
     `Resource ID: ${resourceId}`,
     `Lesson focus: ${lesson.focus}`,
     `Resource type: ${kind}`,
-    `${PROFILES[profile][key]} Use it to study ${lesson.focus}; describe evidence before judging and adapt the example rather than copying a finished work.`,
+    `${sourceContent} Use it to study ${lesson.focus}; describe evidence before judging and adapt the demonstrated relationship rather than copying a finished work.`,
     `How to use it: ${instruction}`,
     `Rights: ${rights}`,
     `Access and materials: ${HOUSEHOLD_ARTS_MATERIAL_ROUTE}`,
   ].join('\n\n')
+  const asset = ['visual', 'context'].includes(profile) ? visualModelAsset(lesson, gradeDir) : null
+  const media = asset
+    ? { required: true, kind: 'SVG_VISUAL_MODEL', locator: asset.locator, fallback: 'Use the complete adjacent verbal description and recreate the relationships with raised or movable paper forms. The required Academy model is attached; no outside search is needed.' }
+    : profile === 'music'
+      ? { required: true, kind: 'LOCALLY_PERFORMABLE_TEXT_NOTATION', locator: `${lesson.lesson_id}#sourceReference`, fallback: 'Count, point through, tap, speak, gesture, or read the complete pulse and pitch map silently; no instrument, speaker, microphone, or recording is required.' }
+      : { required: true, kind: 'ATTACHED_TEXT_MODEL_OR_REFERENCE', locator: `${lesson.lesson_id}#sourceReference`, fallback: 'Use the complete supplied beat map, script, evidence record, or event description. No teacher handout or outside search is required.' }
   return {
     sourceReference,
     taskInstruction: instruction,
     materialLine: `Attached Manuel Academy resource ${resourceId}: the complete model, reference work, or scaffold required by this lesson; available in the Source or reading section.`,
+    media,
+    ...(asset ? { generatedAsset: asset } : {}),
     metadata: {
       resource_id: resourceId,
       kind,

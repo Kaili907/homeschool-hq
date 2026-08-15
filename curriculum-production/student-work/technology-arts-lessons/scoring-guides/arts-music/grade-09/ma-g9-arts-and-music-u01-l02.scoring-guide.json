@@ -13,27 +13,12 @@
   "focus": "advanced composition and visual hierarchy",
   "scoring_authority_kind": "RUBRIC",
   "scoring_stance": "FORMATIVE_NO_PENALTY",
-  "rubric_ref": "rubric:ma-g9-am-u01-l02:visual-hierarchy-r1",
-  "objective_constraints": [
-    "Two placement-only guided thumbnails are present.",
-    "The independent study contains at least three forms or areas and names an intended focal point.",
-    "At least two hierarchy variables are identified in the learner's own work.",
-    "One intermediate state, one visual-path check, and one revision decision are documented.",
-    "Reflection and critique cite observable features; critique may be entirely private."
-  ],
-  "legitimate_variation": [
-    "Any subject, abstraction, medium, format, palette, mood, style, or orientation may meet the target.",
-    "A small, large, central, edge-adjacent, isolated, repeated, detailed, or directional element may serve as the focal point when evidence supports the learner's stated intent.",
-    "The path may be steep, subtle, circular, interrupted, or intentionally ambiguous when the learner states that intention and cites observable evidence.",
-    "A learner may keep a critiqued choice, revise it, or revise the stated intent; the reasoning and evidence are scored, not agreement with the reviewer.",
-    "Difference from the Academy model is never an error and resemblance to it earns no extra credit."
-  ],
   "rubric": [
     {
       "dimension": "Objective constraints",
       "criterion_kind": "OBJECTIVE",
       "exceeds": "All five evidence groups are present: guided pair, original three-form study with named focal point, two named variables, preserved intermediate state plus path check and revision decision, and evidence-based reflection and critique.",
-      "meets": "All required evidence is present; one record may be brief, but the guided pair, original study, two variables, intermediate state, path check, revision decision, reflection, and critique can each be located.",
+      "meets": "All required evidence is present; one note may be brief, but the guided pair, original study, two variables, intermediate state, path check, revision decision, reflection, and critique can each be located.",
       "developing": "The independent visual study is present, but one or two required evidence parts are missing or cannot be located, such as the intermediate state, path check, revision decision, reflection, or critique.",
       "beginning": "The submitted evidence does not yet include an independent three-form visual study with a named focal point, or several required process parts are absent."
     },
@@ -59,18 +44,18 @@
       "exceeds": "The intermediate state, path check, and later state show what was tested; the learner isolates a variable, evaluates its effect, and gives an evidence-based reason to revise or deliberately keep the result.",
       "meets": "The record shows an intermediate state, one criteria-based check, and a learner-chosen revision or reasoned decision to keep the work.",
       "developing": "A change is documented, but the record does not yet make clear what evidence prompted it or which hierarchy variable changed.",
-      "beginning": "No intermediate state or revision decision is visible yet. Invite a small fresh test; do not direct the learner's aesthetic choice or complete the work."
+      "beginning": "No intermediate state or revision decision is visible yet. Invite a small fresh test; do not direct the learner’s aesthetic choice or complete the work."
     }
   ],
-  "scoring_judgment_guidance": "Score the submitted evidence against the four focus-specific dimensions. First record objective presence without judging polish. For hierarchy, intent, and revision, cite a location or process fact from the learner's work. Do not compare the work with the model's shapes, arrangement, palette, mood, or style. If the observed path differs from the learner's first intention, accept a reasoned revision of either the work or the stated intention. A reviewer may offer options, but the learner owns the final choice. Record NOT_YET_EVIDENCED when evidence is absent; never infer talent, care, motivation, diagnosis, or character.",
+  "scoring_judgment_guidance": "Score the submitted evidence against the four focus-specific dimensions. First record objective presence without judging polish. For hierarchy, intent, and revision, cite a location or process fact from the learner’s work. Do not compare the work with the model’s shapes, arrangement, palette, mood, or style. If the observed path differs from the learner’s first intention, accept a reasoned revision of either the work or the stated intention. A reviewer may offer options, but the learner owns the final choice. Record NOT_YET_EVIDENCED when evidence is absent; never infer talent, care, motivation, diagnosis, or character.",
   "lesson_success_criteria": [
     "The learner completes the central task on advanced composition and visual hierarchy.",
     "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
     "The learner checks or revises the work and can name a next step."
   ],
-  "formative_check": "Ask the learner to name the intended first, second, and third stops, point to the hierarchy variables that support each move, and compare the intermediate and later state. An unexpected but evidence-supported path is valid.",
-  "answer_or_scoring_guidance": "There is no fixed composition or answer. Accept multiple valid approaches when the objective evidence is present and the learner connects observable hierarchy relationships to a stated or deliberately revised intent.",
-  "mastery_rule": "This MODEL_A lesson supplies formative concept evidence, not final mastery. A later lesson must show fresh independent transfer of visual hierarchy in another composition or analysis without the model in view before a mastery claim is considered.",
+  "formative_check": "Explain the modelled approach to advanced composition and visual hierarchy in your own words and name the step most likely to go wrong.",
+  "answer_or_scoring_guidance": "There is no fixed composition or answer for advanced composition and visual hierarchy. Score the authored objective constraints and the focus-specific rubric evidence; accept materially different creative, performance, design, or interpretive choices when the learner supports them against the criteria.",
+  "mastery_rule": "Do not mark mastery from one answer. Use sketch or rehearsal record, created or performed work, artist statement, critique response, revision log, and portfolio reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g9-arts-and-music-u01-assessment",
     "total_points": 38,
@@ -86,52 +71,72 @@
       "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
       "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
     },
-    "note": "This sample lesson remains formative; the unit assessment is the separate summative instrument."
+    "note": "This lesson is one session inside the unit; the unit assessment record above is the summative instrument, and this lesson rubric scores only this session's evidence."
   },
-  "remediation_paths": [
-    {
-      "ref": "remediation:visual-hierarchy:value-map",
-      "for_error_id": "error:visual-hierarchy:global-contrast-competition",
-      "observable_signal": "Several major areas have similarly strong contrast, edge, or detail and the intended focal point is not distinct in repeated brief checks.",
-      "do_not_apply_when": "The learner intends distributed, ambiguous, or nonhierarchical attention and supports that intention with evidence.",
-      "alternate_instruction": "Convert the work into light, middle, and dark masses; keep one large value jump near the intended first stop and quiet the others.",
-      "fresh_evidence": "A new three-form thumbnail with different placements plus a fresh three-second visual-path check."
-    },
-    {
-      "ref": "remediation:visual-hierarchy:one-variable-retry",
-      "for_error_id": "error:visual-hierarchy:intended-first-stop-not-evidenced",
-      "observable_signal": "Two brief checks identify a different first stop and the learner cannot locate a hierarchy variable supporting the stated focal point.",
-      "do_not_apply_when": "The learner adopts the observed route as a deliberate, evidence-supported intention.",
-      "alternate_instruction": "Compare the intended focal point with one competing area and change exactly one of value, scale, isolation, edge, or direction on a separate scrap study.",
-      "fresh_evidence": "A new full thumbnail without the model in view plus a fresh visual-path check."
-    }
-  ],
-  "remediation_plan": "Use remediation only for a named observable mismatch and never for a stylistic difference. If several areas compete against the learner's stated intent, use the three-value map, a separate supported thumbnail, and a fresh three-second check. If another area arrives first, compare only that area and the intended focal point, change one variable on scrap paper, then retry with a new arrangement. If the route is clear but differs from the Academy model—or if the learner deliberately supports an ambiguous or distributed hierarchy—no correction is warranted. The earlier attempt stays in the process record and carries no penalty.",
-  "extension_plan": "Optionally create a second composition with the same forms and a different intended focal point. Change two hierarchy variables, compare the paths, and explain the tradeoff. Extension is never required for full credit or assigned as a penalty.",
-  "accommodation_note": "Access supports may change format, pacing, setting, tool, size, contrast, or response mode while preserving the visual relationship being assessed. A tactile arrangement can provide equal evidence; prose alone cannot claim visual-making evidence.",
+  "remediation_plan": "Route 1: Reduce the work to a three-value map. Label each major area light, middle, or dark; circle every large jump. Keep one large jump and lower the others in a fresh thumbnail. Use three forms and only pencil pressure. Create one dark-light jump at the intended first stop; keep the other forms middle or pale. Check yourself: Squint or use the tactile value labels: can you locate one strongest difference? New attempt: Make a new thumbnail with different placements and run a new three-second check. Route 2: Cover the work except for the intended focal point and one competing area. Compare only those two; choose whether value, scale, isolation, edge, or direction should separate them. On scrap paper, redraw the two areas and change exactly one chosen variable. Check yourself: Name the changed variable before deciding which area arrives first. New attempt: Return all areas in a fresh thumbnail and test the intended path without the model in view.",
+  "extension_plan": "Apply advanced composition and visual hierarchy under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on advanced composition and visual hierarchy rather than extra volume: one harder case done well beats three more of the same. Extension work stays private by default and uses only original, public-domain, or properly cited material. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
   "accessibility_options": [
-    "Use enlarged, high-contrast, raised-line, cut-paper, tactile, or accessible digital forms while keeping the hierarchy target unchanged.",
-    "Use relative size, spacing, texture, and touch order so colour perception never carries a criterion by itself.",
-    "Accept typed, handwritten, dictated, labelled, tactile, or adult-verified process evidence; no learner image, voice, or video is required.",
-    "Allow breaks, extended time, reduced copying, and a low-distraction setting without lowering a rubric level."
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, drawn, notated, constructed, or demonstrated responses. Where performance is the target, a private demonstration to one trusted adult carries the same weight as any audience, and requires no recording.",
+    "Provide adaptive instruments and grips, enlarged or braille notation, seated and standing studio access, low-odour and low-dust material substitutes, and hearing protection on request.",
+    "Where documentation quality is itself the target, document the artwork alone with no person in frame, or have an adult verify the physical work directly. Neither route requires an image of the learner, and both preserve the documentation target rather than replacing it."
   ],
   "task_accessibility_provisions": [
-    "The required SVG includes high-contrast forms, pattern as well as value differences, descriptive title and alternative text, and a complete adjacent verbal description.",
-    "The tactile route uses three raised or cut-paper forms plus string; relative size, texture, spacing, and touch order preserve the hierarchy relationship.",
-    "A trusted adult may verify the physical artwork without photographing the learner or the home."
+    "This task centres a visual element (advanced composition and visual hierarchy). Provide tactile, raised-line, or high-relief equivalents, enlarged and high-contrast print, and a verbal description route. Never make colour discrimination alone carry a criterion — pair any colour judgement with value, label, or texture.",
+    "Any model, source, or artifact under study is supplied in an accessible parallel form: text alternative or transcript, described version, and a tactile or enlarged rendering where the original is visual. The learner is never required to perceive the source in one specific channel to analyse it.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
   ],
-  "parent_or_guardian_visibility": "Share the target, completion state, evidence types, rubric levels with cited reasons, and next instructional step. Do not expose private reflection text, raw learner media, diagnosis language, or comparison with other children.",
+  "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
   "source_integrity": {
     "requires_review": true,
     "status": "VERIFIED",
-    "note": "The required Three Stops SVG is committed at the package's declared locator, is Manuel Academy original under CC BY 4.0, and has embedded title/description plus verbal and tactile parallels. No external source is needed."
+    "note": "The complete required learner resource is attached in the task package as ma-resource:ma-g9-arts-and-music-u01-l02. It is Manuel Academy original, CC BY 4.0, contains no third-party content, and requires no external source, paid tool, specialized material, instrument, recording, or public presentation."
   },
   "safety_and_privacy": {
     "requires_review": true,
     "status": "VERIFIED",
-    "note": "Pencil and scrap paper are sufficient. No public display, learner photograph, camera, voice recording, account, outside search, paid tool, or specialized material is required. Private self-critique receives full credit."
+    "note": "No public performance, camera, voice recording, photograph, or audience is required at any point; a private option and a written/no-audio alternative are stated in the task package and score identically."
   },
   "standards": [
     "Michigan Arts Education Standards: Visual Arts — Creating"
+  ],
+  "rubric_ref": "rubric:ma-g9-am-u01-l02:visual-hierarchy-r1",
+  "objective_constraints": [
+    "Use three or more forms or areas.",
+    "Name one intended focal point before developing the study.",
+    "Use at least two hierarchy variables.",
+    "Preserve one intermediate state.",
+    "Run one visual-path check and make or deliberately decline one revision with a reason."
+  ],
+  "legitimate_variation": [
+    "Difference from the Academy model is never an error and resemblance earns no extra credit.",
+    "Subject, abstraction, medium, format, style, palette, and mood remain learner-owned choices.",
+    "A focal point may be created through value, scale, placement, isolation, repetition, edge, direction, or another defensible visual relationship.",
+    "A learner may support a steep, subtle, distributed, ambiguous, or deliberately nonhierarchical route when the evidence matches the stated intent.",
+    "A learner may revise the artwork, revise the stated intention, or keep the result with an evidence-based reason."
+  ],
+  "remediation_paths": [
+    {
+      "ref": "remediation:visual-hierarchy:value-map",
+      "for_error_id": "error:visual-hierarchy:global-contrast-competition",
+      "different_instruction": "Reduce the work to a three-value map. Label each major area light, middle, or dark; circle every large jump. Keep one large jump and lower the others in a fresh thumbnail.",
+      "supported_attempt": "Use three forms and only pencil pressure. Create one dark-light jump at the intended first stop; keep the other forms middle or pale.",
+      "self_noticing_cue": "Squint or use the tactile value labels: can you locate one strongest difference?",
+      "fresh_retry": "Make a new thumbnail with different placements and run a new three-second check."
+    },
+    {
+      "ref": "remediation:visual-hierarchy:one-variable-retry",
+      "for_error_id": "error:visual-hierarchy:intended-first-stop-not-evidenced",
+      "different_instruction": "Cover the work except for the intended focal point and one competing area. Compare only those two; choose whether value, scale, isolation, edge, or direction should separate them.",
+      "supported_attempt": "On scrap paper, redraw the two areas and change exactly one chosen variable.",
+      "self_noticing_cue": "Name the changed variable before deciding which area arrives first.",
+      "fresh_retry": "Return all areas in a fresh thumbnail and test the intended path without the model in view."
+    }
   ]
 }

@@ -4,7 +4,7 @@
  * and scoring-guides/ from the lessons.jsonl / units.json / assessments.json
  * listed in src/courses.mjs. Run with: node generate.mjs
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, rmSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -30,6 +30,20 @@ for (const dir of ['packages', 'scoring-guides']) {
   const target = resolve(HERE, dir)
   if (existsSync(target)) rmSync(target, { recursive: true })
 }
+
+// Generated visual models are source-owned output too. Remove only the
+// generator's *.arts-model.svg files so a deleted/renamed lesson cannot leave
+// a phantom resource; preserve separately authored assets such as the approved
+// Three Stops anchor SVG.
+function removeGeneratedArtsModels(directory) {
+  if (!existsSync(directory)) return
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name)
+    if (entry.isDirectory()) removeGeneratedArtsModels(path)
+    else if (entry.name.endsWith('.arts-model.svg')) rmSync(path)
+  }
+}
+removeGeneratedArtsModels(resolve(HERE, 'resources', 'arts-music'))
 
 let lessonCount = 0
 const summary = []
@@ -65,7 +79,7 @@ for (const course of COURSES) {
       throw new Error(`no assessment ${unit.assessment_id} for unit ${unit.unit_id}`)
     }
 
-    const { taskPackage, scoringGuide, mode } = buildLessonMaterials({
+    const { taskPackage, scoringGuide, mode, generatedAssets } = buildLessonMaterials({
       lesson,
       unit,
       assessment,
@@ -83,6 +97,11 @@ for (const course of COURSES) {
       resolve(HERE, 'scoring-guides', course.subjectKey, course.gradeDir, `${lesson.lesson_id}.scoring-guide.json`),
       scoringGuide,
     )
+    for (const asset of generatedAssets) {
+      const assetPath = resolve(HERE, asset.relativePath)
+      mkdirSync(dirname(assetPath), { recursive: true })
+      writeFileSync(assetPath, asset.content)
+    }
 
     modeCounts.set(mode, (modeCounts.get(mode) ?? 0) + 1)
     lessonCount += 1

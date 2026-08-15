@@ -265,6 +265,24 @@
         }
       }
     },
+    "rubric_ref": {
+      "type": "string",
+      "minLength": 10
+    },
+    "objective_constraints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "legitimate_variation": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string", "minLength": 20 }
+    },
+    "remediation_paths": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "type": "object" }
+    },
     "standards": {
       "type": "array",
       "items": {

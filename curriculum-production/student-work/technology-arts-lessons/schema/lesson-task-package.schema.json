@@ -351,6 +351,40 @@
         }
       }
     },
+    "arts_music_r1": {
+      "description": "Arts/Music only: production teaching, learner-work, remediation, reference, and Tutor-readiness supply authored against the R1 lesson standard.",
+      "type": "object",
+      "required": [
+        "contract_version",
+        "lesson_type",
+        "phase",
+        "learning_goal",
+        "concept_instruction",
+        "technique_sequence",
+        "work_blocks",
+        "remediation_paths",
+        "rubric_ref",
+        "tutor_readiness_manifest"
+      ],
+      "properties": {
+        "contract_version": { "enum": ["manuel-academy.arts-music-lesson-r1.production-1", "manuel-academy.arts-music-lesson-r1.sample-1"] },
+        "lesson_type": {
+          "enum": ["VISUAL_ART_CONCEPT", "TECHNIQUE", "ART_ANALYSIS", "ART_HISTORY_CONTEXT", "DESIGN", "CREATION_STUDIO", "MUSIC_CONCEPT", "RHYTHM", "MELODY", "LISTENING", "PERFORMANCE", "COMPOSITION", "CRITIQUE_REFLECTION", "REVIEW", "REMEDIATION", "MASTERY", "PROJECT"]
+        },
+        "phase": { "type": "string" },
+        "learning_goal": { "type": "string", "minLength": 40 },
+        "concept_instruction": { "type": "array" },
+        "technique_sequence": { "type": "array" },
+        "work_blocks": { "type": "array", "minItems": 2 },
+        "remediation_paths": { "type": "array", "minItems": 2 },
+        "rubric_ref": { "type": "string", "minLength": 10 },
+        "tutor_readiness_manifest": { "type": "object" }
+      }
+    },
+    "r1_sample": {
+      "description": "Director-approved anchor contract retained only on the approved anchor lesson.",
+      "type": "object"
+    },
     "task_steps": {
       "description": "Elementary grades only: the task body chunked into one action per step.",
       "type": "array",
@@ -449,7 +483,8 @@
       },
       "then": {
         "required": [
-          "critique_criteria"
+          "critique_criteria",
+          "arts_music_r1"
         ],
         "allOf": [
           {
