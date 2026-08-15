@@ -57,6 +57,23 @@ describe('StudentDashboard presentation', () => {
     expect(markup).not.toContain('No assignments were supplied for today.')
     expect(markup).not.toContain('No work items were supplied for today.')
   })
+
+  it('exposes the authoritative day state and factual required-item count without a percentage', () => {
+    const fixture = studentDashboardFixture('day-complete')
+    const model = {
+      ...fixture,
+      progressLabel: '2 of 2 required items complete today',
+      dayStatus: {
+        state: 'complete' as const, requiredCount: 2, completedCount: 2, remainingCount: 0,
+        waitingOnParentCount: 0, carryForwardCount: 0, assessmentCount: 1,
+      },
+    }
+    const markup = renderToStaticMarkup(<StudentDashboard model={model} {...callbacks} />)
+    expect(markup).toContain('data-day-state="complete"')
+    expect(markup).toContain('2 items')
+    expect(markup).toContain('aria-describedby="family-dashboard-mission-status family-dashboard-mission-description"')
+    expect(markup).not.toContain('2%')
+  })
 })
 
 describe('JarvisDashboard presentation boundary', () => {

@@ -452,7 +452,7 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   if (error) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="alert">{error}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onLock}>Lock</button></main>
   if (!model || !planning) return <main className="min-h-screen bg-slate-950 p-6 text-white"><p role="status">Preparing today’s schoolwork…</p></main>
 
-  const presentation = applyAutoPlannerPresentation(toStudentDashboardPresentation(model), planning)
+  const presentation = applyAutoPlannerPresentation(toStudentDashboardPresentation(model), planning, model)
   const commandForWork = (assignmentRef: string) => model.today.items
     .map((item) => item.action)
     .find((action) => action && (action.type === 'START' || action.type === 'CONTINUE') && action.studentRef === activeStudentRef && action.assignmentRef === assignmentRef)

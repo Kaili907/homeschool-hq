@@ -41,6 +41,22 @@ const MISSION_BY_STATE: Readonly<Record<StudentDashboardMissionState, StudentDas
     state: 'no-work', eyebrow: 'Today’s plan', title: 'No work scheduled today', statusLabel: 'Your schedule is clear',
     description: 'No assignments were supplied for today.',
   },
+  'day-complete': {
+    state: 'day-complete', eyebrow: 'Today’s school day', title: 'You’re done for today', statusLabel: '3 required items complete',
+    description: 'Everything required for this school day is complete.',
+  },
+  'no-school': {
+    state: 'no-school', eyebrow: 'Today’s school plan', title: 'No school today', statusLabel: 'Your school calendar is clear',
+    description: 'No new daily work is scheduled for this school-local date.',
+  },
+  'waiting-on-parent': {
+    state: 'waiting-on-parent', eyebrow: 'Waiting for review', title: 'Your work is done — waiting for Parent review', statusLabel: '1 required item is waiting for Parent review',
+    description: 'You finished everything you can do right now. A parent or guardian must review this work before Study can continue.',
+  },
+  'work-remaining': {
+    state: 'work-remaining', eyebrow: 'Today’s schoolwork', title: 'You still have work', statusLabel: '2 required items remaining',
+    description: 'Next: Fractions in real-world situations.', workRef: 'work:math-fractions', actionLabel: 'Start lesson',
+  },
   'lesson-ready': BASE_MODEL.mission,
   'continue-lesson': {
     state: 'continue-lesson', eyebrow: 'Continue your mission', title: 'Evidence in a text', context: 'English Language Arts · Grade 7',
@@ -81,6 +97,10 @@ export function studentDashboardFixture(state: StudentDashboardMissionState): St
 
 export const STUDENT_DASHBOARD_FIXTURE_STATES: readonly StudentDashboardMissionState[] = [
   'no-work',
+  'day-complete',
+  'no-school',
+  'waiting-on-parent',
+  'work-remaining',
   'lesson-ready',
   'continue-lesson',
   'assessment-pending',

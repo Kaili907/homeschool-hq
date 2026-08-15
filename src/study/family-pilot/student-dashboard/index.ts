@@ -5,6 +5,8 @@ export type {
   JarvisDashboardMode,
   JarvisDashboardProps,
   StudentDashboardCourse,
+  StudentDashboardDayState,
+  StudentDashboardDayStatus,
   StudentDashboardItemState,
   StudentDashboardMission,
   StudentDashboardMissionState,

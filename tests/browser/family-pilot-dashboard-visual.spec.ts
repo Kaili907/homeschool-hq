@@ -29,6 +29,10 @@ test('route callback fixture and Jarvis activation boundary', async ({ page }) =
 test('all requested fixture states render supplied status copy', async ({ page }) => {
   const states = [
     ['no-work', 'Your schedule is clear'],
+    ['day-complete', '3 required items complete'],
+    ['no-school', 'Your school calendar is clear'],
+    ['waiting-on-parent', '1 required item is waiting for Parent review'],
+    ['work-remaining', '2 required items remaining'],
     ['lesson-ready', 'Ready to begin'],
     ['continue-lesson', 'In progress'],
     ['assessment-pending', 'Assessment pending'],
