@@ -179,7 +179,7 @@ describe('learner analytics projection', () => {
       overview: 'available', curriculum: 'available', progress: 'available',
       assessments: 'available', study: 'available', operationalStatus: 'partial',
     })
-    expect(detail.courses).toMatchObject({ status: 'available', value: [{ completed: 1, total: 2, mastered: 1, reteach: 1 }] })
+    expect(detail.courses).toMatchObject({ status: 'available', value: [{ title: 'Grade 5 Mathematics', subject: 'mathematics', workingLevel: '5', completed: 1, total: 2, mastered: 1, reteach: 1 }] })
     expect(detail.mathMastery.find((skill) => skill.skillRef === 'ratio6')).toMatchObject({ mastery: 82, status: 'mastered' })
     expect(detail.attendance.recentDays).toHaveLength(2)
     expect(detail.interventions.needsDad[0]).toMatchObject({ skillName: 'Ratios & Rates', supportSignal: 'repeated-walkthroughs' })

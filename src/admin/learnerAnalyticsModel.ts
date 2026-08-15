@@ -22,6 +22,15 @@ import {
 import type { AdminCapability } from './contracts'
 
 export const LEARNERS_READ_CAPABILITY = 'learners:read' as const
+export const ADMIN_WORKING_GRADE_CHOICES = [
+  '3', '4', '5', '7', '8', '9', '10', '11', '12',
+] as const
+export type AdminWorkingGrade = (typeof ADMIN_WORKING_GRADE_CHOICES)[number]
+export type AdminDisplayedWorkingGrade = Grade | AdminWorkingGrade
+
+export function isAdminWorkingGrade(value: string): value is AdminWorkingGrade {
+  return ADMIN_WORKING_GRADE_CHOICES.some((grade) => grade === value)
+}
 export const LEARNER_ANALYTICS_LIMITS = Object.freeze({
   learners: 5,
   courses: 32,
@@ -128,7 +137,7 @@ export type StudyLearnerEvidenceState =
 export interface WorkingLevelEvidence {
   readonly subject: AcademySubject
   readonly subjectLabel: string
-  readonly level: Grade
+  readonly level: AdminDisplayedWorkingGrade
   readonly source: 'explicit' | 'nominal-grade'
 }
 
@@ -176,7 +185,7 @@ export interface CourseEvidence {
   readonly courseRef: string
   readonly title: string
   readonly subject: string
-  readonly workingLevel: Grade | null
+  readonly workingLevel: AdminDisplayedWorkingGrade | null
   readonly completed: number
   readonly total: number
   readonly mastered: number | null
@@ -434,11 +443,13 @@ function coursesFor(profile: Profile, catalogs: readonly AcademyCatalog[], index
     const progress = courseProgress(profile, catalog)
     for (const course of knownCourses) {
       const summary = progress.find((item) => item.courseId === course.courseId)!
+      const level = index.gradeByCourseId.get(course.courseId) ?? workingLevelFor(profile, course.subject as AcademySubject)
+      const subjectLabel = ACADEMY_SUBJECT_LABELS[course.subject] ?? safeLabel(course.subject, 'Academy course')
       courses.push({
         courseRef: course.courseId,
-        title: ACADEMY_SUBJECT_LABELS[course.subject] ?? course.subject,
+        title: `Grade ${level} ${subjectLabel}`,
         subject: course.subject,
-        workingLevel: index.gradeByCourseId.get(course.courseId) ?? workingLevelFor(profile, course.subject as AcademySubject),
+        workingLevel: level,
         completed: summary.completed,
         total: summary.total,
         mastered: summary.mastered,
