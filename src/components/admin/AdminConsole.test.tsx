@@ -215,6 +215,89 @@ describe('AdminConsole authorization and load states', () => {
     expect(markup).not.toContain('aria-label="Configuration"')
   })
 
+  it('groups navigation into scannable Home / Programs / Operations / Governance sections', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'admin', capabilities: [
+          'overview:read', 'learners:read', 'curriculum:read',
+          'engines:read', 'costs:read', 'safety:read', 'health:read', 'audit:read',
+          'configuration:read', 'releases:read',
+        ] }}
+        activeSection="overview"
+        title="Overview"
+      ><section>Grouped shell</section></AdminShell>,
+    )
+    for (const header of ['Home', 'Programs', 'Operations', 'Governance']) {
+      expect(markup).toContain(`>${header}<`)
+    }
+    // Every group's label id is wired to its ul via aria-labelledby.
+    for (const id of ['home', 'programs', 'operations', 'governance']) {
+      expect(markup).toContain(`id="admin-nav-group-${id}"`)
+      expect(markup).toContain(`aria-labelledby="admin-nav-group-${id}"`)
+    }
+  })
+
+  it('hides group headers that have no capability-visible destinations', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'viewer', capabilities: ['configuration:read'] }}
+        activeSection="configuration"
+        title="Configuration"
+      ><section>Configuration surface</section></AdminShell>,
+    )
+    // Only Governance has a visible item; other headers must not render.
+    expect(markup).toContain('>Governance<')
+    expect(markup).not.toContain('>Home<')
+    expect(markup).not.toContain('>Programs<')
+    expect(markup).not.toContain('>Operations<')
+  })
+
+  it('reserves a distinct High School Program mount point for DASH-4', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'viewer', capabilities: ['overview:read'] }}
+        activeSection="high-school-program"
+        title="High School Program"
+      ><section>Mount slot</section></AdminShell>,
+    )
+    expect(markup).toContain('aria-label="High School Program"')
+    expect(markup).toContain('aria-current="page"')
+  })
+
+  it('lists every current admin destination reachable from the shell nav', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'owner', capabilities: [
+          'overview:read', 'learners:read', 'curriculum:read',
+          'engines:read', 'costs:read', 'safety:read', 'health:read', 'audit:read',
+          'configuration:read', 'releases:read',
+        ] }}
+        activeSection="overview"
+        title="Overview"
+      ><section>Full nav</section></AdminShell>,
+    )
+    for (const label of [
+      'Attention Center', 'Overview', 'Learners', 'Curriculum', 'High School Program',
+      'Engine Performance', 'AI &amp; Costs', 'Safety', 'Study Operations',
+      'System Health', 'Incident Explorer',
+      'Configuration', 'Audit Log', 'Access &amp; Permissions', 'Production Readiness',
+    ]) {
+      expect(markup).toContain('aria-label="' + label + '"')
+    }
+  })
+
+  it('renders tooltips on nav buttons so icon-rail widths stay discoverable', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'viewer', capabilities: ['overview:read'] }}
+        activeSection="overview"
+        title="Overview"
+      ><section>surface</section></AdminShell>,
+    )
+    expect(markup).toContain('title="Overview"')
+    expect(markup).toContain('title="Attention Center"')
+  })
+
   it('updates the route title and moves focus to the route heading', () => {
     const focus = vi.fn()
     const documentTarget = { title: '' }
@@ -226,17 +309,30 @@ describe('AdminConsole authorization and load states', () => {
   it('contains tablet accessible-name and mobile overflow safeguards', () => {
     const css = readFileSync(new URL('./admin-console.css', import.meta.url), 'utf8')
     const tablet = css.slice(css.indexOf('@media (max-width: 1120px)'), css.indexOf('@media (max-width: 820px)'))
+    const compact = css.slice(css.indexOf('@media (max-width: 820px)'), css.indexOf('@media (max-width: 600px)'))
     const mobile = css.slice(css.indexOf('@media (max-width: 600px)'), css.indexOf('@media (prefers-reduced-motion: reduce)'))
-    expect(tablet).toContain('.admin-nav-text')
-    expect(tablet).toContain('clip: rect(0, 0, 0, 0)')
-    expect(tablet).not.toMatch(/\.admin-nav-text[^}]*display:\s*none/)
-    expect(mobile).toContain('.admin-sidebar nav::after')
-    expect(mobile).toContain('overflow-x: auto')
-    expect(mobile).toContain('max-width: 100vw')
-    expect(mobile).toContain('max-width: 100%')
+    expect(tablet).toContain('grid-template-columns: 220px minmax(0, 1fr)')
+    expect(tablet).not.toContain('clip: rect(0, 0, 0, 0)')
+    expect(compact).toContain('overflow-x: auto')
+    expect(compact).toContain('max-width: 100vw')
+    expect(compact).toContain('min-width: max-content')
     expect(css).toContain('.admin-sidebar { position: sticky; top: 0; display: flex; min-width: 0;')
     expect(mobile).toContain('.admin-main { padding: 1rem .75rem 2.5rem; }')
     expect(css).toContain('overflow-x: clip')
+  })
+
+  it('keeps the group hierarchy legible on tablet and mobile widths', () => {
+    const css = readFileSync(new URL('./admin-console.css', import.meta.url), 'utf8')
+    // Base rule wires vertical spacing + divider between groups so hierarchy stays visible.
+    expect(css).toContain('.admin-nav-group + .admin-nav-group')
+    // Compact desktop keeps labels visible; the top-nav breakpoint keeps group labels visible too.
+    const tablet = css.slice(css.indexOf('@media (max-width: 1120px)'), css.indexOf('@media (max-width: 820px)'))
+    const compact = css.slice(css.indexOf('@media (max-width: 820px)'), css.indexOf('@media (max-width: 600px)'))
+    expect(tablet).not.toMatch(/\.admin-nav-label[^}]*display:\s*none/)
+    expect(compact).toMatch(/\.admin-nav-label[^}]*display:\s*block/)
+    expect(compact).toContain('border-left: 1px solid #31483e')
+    // Main content is capped so widths >=1440 don't stretch the reading measure.
+    expect(css).toMatch(/\.admin-main[^}]*max-width:\s*1540px/)
   })
 
   it('reserves the page-level h1 for the unified Admin shell', () => {
@@ -495,7 +591,9 @@ describe('AdminConsole canonical overview presentation', () => {
     expect(css).toContain('.admin-shell { grid-template-columns: minmax(0, 1fr); }')
     expect(css).toContain('.admin-sidebar { position: static; width: auto; min-width: 0;')
     expect(css).toContain('.admin-sidebar nav { min-width: 0; overflow: hidden; }')
-    expect(css).toContain('.admin-sidebar nav ul { display: flex; overflow-x: auto; }')
+    expect(css).toContain('.admin-sidebar > nav { width: 100%; flex-direction: row;')
+    expect(css).toContain('overflow-x: auto; overflow-y: hidden;')
+    expect(css).toContain('.admin-sidebar nav ul { display: flex; width: auto; max-width: none;')
   })
 
   it('renders the custom range editor without calculating data locally', () => {
