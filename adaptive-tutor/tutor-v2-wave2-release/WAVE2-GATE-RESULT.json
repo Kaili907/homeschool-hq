@@ -8,7 +8,7 @@
     },
     {
       "command": "git provenance checks origin/mac/tutor-v2-w2-admission-r1",
-      "detail": "d6a1b069a8f5d67023edcb4f247b3c67076306a4; patch 88e8a6bf486dfe2b0fef4c1679acef9d058793d5; direct baseline parent; lane tree exact",
+      "detail": "d6a1b069a8f5d67023edcb4f247b3c67076306a4; patch 88e8a6bf486dfe2b0fef4c1679acef9d058793d5; direct baseline parent; verified repair supersession",
       "name": "w2_01-provenance",
       "status": "PASS"
     },
@@ -20,7 +20,7 @@
     },
     {
       "command": "git provenance checks origin/mac/tutor-v2-w2-misconception-r1",
-      "detail": "f9ed81626d8d9e455ea750989d8c2a71cfe8bd6d; patch f5f7cca1df95e16b2a193bdbb70177ef9a49560b; direct baseline parent; lane tree exact",
+      "detail": "f9ed81626d8d9e455ea750989d8c2a71cfe8bd6d; patch f5f7cca1df95e16b2a193bdbb70177ef9a49560b; direct baseline parent; verified repair supersession",
       "name": "w2_03-provenance",
       "status": "PASS"
     },
@@ -44,13 +44,13 @@
     },
     {
       "command": "git provenance checks origin/mac/tutor-v2-w2-parent-why-r1",
-      "detail": "661669117497a33e5d2da0a12e6bc3801839a165; patch 89ad1f511b2d71d2d0fc7689586beb9e53068e60; direct baseline parent; lane tree exact",
+      "detail": "661669117497a33e5d2da0a12e6bc3801839a165; patch 89ad1f511b2d71d2d0fc7689586beb9e53068e60; direct baseline parent; verified repair supersession",
       "name": "w2_07-provenance",
       "status": "PASS"
     },
     {
       "command": "git provenance checks origin/mac/tutor-v2-w2-repair-reteach-r1",
-      "detail": "39b8d671f35dce6e44d19bff2d58b1bb2bfa4d81; patch 7ce3fdf3b5fd93d6d2e062667b0fc8b65914bcc1; direct baseline parent; lane tree exact",
+      "detail": "39b8d671f35dce6e44d19bff2d58b1bb2bfa4d81; patch 7ce3fdf3b5fd93d6d2e062667b0fc8b65914bcc1; direct baseline parent; verified repair supersession",
       "name": "w2_08-provenance",
       "status": "PASS"
     },
@@ -73,15 +73,93 @@
       "status": "PASS"
     },
     {
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r2/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit",
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-subsystem-fallback-repair-r2",
+      "detail": "22c3734bd436c41ba8d24409dcaa146d35914e2f -> 22c3734bd436c41ba8d24409dcaa146d35914e2f; patch d9d4cef96fb1b1750b1c57b096bdda8e7d87ce97; required parent; ownership exact",
+      "name": "w2_b4-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-adaptive-replay-composition-repair-r3",
+      "detail": "c9601aa99bca89ff0673ee6e00858fafa98c70c2 -> 9e89a86bf292108276742cf2ebc3a04432e3d4b2; patch 1788de549e684b7e9bb3655a1cfc184b842405c3; required parent; ownership exact",
+      "name": "w2_b5-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-hint-semantics-repair-r3",
+      "detail": "67d11f4ba0382c8cf7c6091a20a67a4b6ef1a76c -> 7c3320cbc899f79c8206de2435517cc4185c83fe; patch a2f745921d05e630a5bf93f1c90cbdc85d6c861d; required parent; ownership exact",
+      "name": "w2_b6-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-review-permission-repair-r3",
+      "detail": "097ada4fe024f7eed7a50038d13801e45b990b62 -> a11608d5de30d973785482b2d7169152c42e31ca; patch e60b439f91424e425181d24414dc9ced30dabd4e; required parent; ownership exact",
+      "name": "w2_b13-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-intervention-semantics-repair-r3",
+      "detail": "9a6a6a2a851ee5513bc6ddab694e41c1d78cd5f5 -> 0f6f3e827ab4be2ed7a57ebddc7cf5e8db179228; patch ee90ea7ec82fda08769113978964090a5d26a553; required parent; ownership exact",
+      "name": "w2_b7-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-mastery-semantics-repair-r3",
+      "detail": "a907f115894358a5d18b3ead1b361cbab8679390 -> 19e23646c7cc45ecb176976c3ed731b1163cfbff; patch bde79ff946a13eda529e6127d32b0544c36671ab; required parent; ownership exact",
+      "name": "w2_b8-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-reteach-cap-repair-r3",
+      "detail": "367b8f5450510b3e7037cd2ccf32cac1cac79b6a -> 15ae6c42a89557b23614f6e611e912c44122f225; patch a85bf0573e4d4e4cd03e6dbada26c82a507af1d5; required parent; ownership exact",
+      "name": "w2_b9-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-admission-scope-repair-r3",
+      "detail": "32fd30a7d3aa3b500e3dbaa53a8aa3715fbd9cde -> 783ebb3216a9e7a5919f281fe8f10742bdd0f740; patch c4ec4ed6c14851dda6c77c037a996379fae22fee; required parent; ownership exact",
+      "name": "w2_b10-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-parent-contract-repair-r3",
+      "detail": "5d282f08a5cfbc75e7804dbf461812f218e8db3d -> dacd2fe203fa93df61e772ce2346395b7c6e507c; patch 0955e9b74bb113abaa47fa244eca9a8b36b00a96; required parent; ownership exact",
+      "name": "w2_b11-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git repair provenance checks origin/mac/tutor-v2-w2-misconception-contract-repair-r3",
+      "detail": "c07db50067776457a6eef96f0c2a38b601177031 -> 24b604ac4fc72ea49943fff752a5da5c6e5f4125; patch aacfdda8fe7564e6a84437c8b715317ab71b5c1e; required parent; ownership exact",
+      "name": "w2_b12-repair-provenance",
+      "status": "PASS"
+    },
+    {
+      "command": "git rev-parse origin/mac/study-runtime-tutor-authority-port-r2{,^}",
+      "detail": "repair=527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4; parent=7baf8dfbc27168708ed4cf504285a1838d7345f6; separate integration artifact",
+      "name": "external-study-progression-authority-port",
+      "status": "PASS"
+    },
+    {
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r4/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json --noEmit",
       "detail": "strict TypeScript",
       "name": "strict-v2-typecheck",
       "status": "PASS"
     },
     {
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r2/adaptive-tutor/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r4/node_modules/typescript/bin/tsc -p scripts/tutor-v2/tsconfig.json",
       "detail": "compiled Tutor V2 slice",
       "name": "v2-compile",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run typecheck",
+      "detail": "adaptive Tutor root TypeScript",
+      "name": "adaptive-root-typecheck",
+      "status": "PASS"
+    },
+    {
+      "command": "npm run typecheck",
+      "detail": "repository root TypeScript",
+      "name": "repository-root-typecheck",
       "status": "PASS"
     },
     {
@@ -109,15 +187,81 @@
       "status": "PASS"
     },
     {
-      "command": "node --test scripts/tutor-v2/.dist/core/v2/admission/admission.test.js scripts/tutor-v2/.dist/core/v2/concepts/graph.test.js scripts/tutor-v2/.dist/core/v2/misconceptions/academic-misconceptions.test.js scripts/tutor-v2/.dist/core/v2/hints/hint-ladder.test.js scripts/tutor-v2/.dist/core/v2/interventions/intervention-ladder.test.js scripts/tutor-v2/.dist/core/v2/mastery/mastery-evidence.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/orchestrator.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/parent-explanations/parent-explanation.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/prerequisite-repair/prerequisite-repair.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/reteach/reteach.test.js",
-      "detail": "192/192 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/admission/admission.test.js scripts/tutor-v2/.dist/core/v2/concepts/graph.test.js scripts/tutor-v2/.dist/core/v2/misconceptions/academic-misconceptions.test.js scripts/tutor-v2/.dist/core/v2/hints/hint-ladder.test.js scripts/tutor-v2/.dist/core/v2/interventions/intervention-ladder.test.js scripts/tutor-v2/.dist/core/v2/mastery/mastery-evidence.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/orchestrator.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/subsystem-fallback.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/composition-repair.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/parent-explanations/parent-explanation.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/prerequisite-repair/prerequisite-repair.test.js scripts/tutor-v2/.dist/study-engine/tutor-v2/reteach/reteach.test.js",
+      "detail": "288/288 pass; 0 fail; 0 skipped",
       "name": "wave2-lane-regression",
       "status": "PASS"
     },
     {
-      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-schema-parity.test.js",
-      "detail": "17/17 pass; 0 fail; 0 skipped",
+      "command": "node --test scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/subsystem-fallback.test.js",
+      "detail": "27/27 pass; 0 fail; 0 skipped",
+      "name": "b4-focused-exception-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/study-engine/tutor-v2/adaptive/composition-repair.test.js",
+      "detail": "11/11 pass; 0 fail; 0 skipped",
+      "name": "b5-composition-replay-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/hints/hint-ladder.test.js",
+      "detail": "42/42 pass; 0 fail; 0 skipped",
+      "name": "b6-hint-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/interventions/intervention-ladder.test.js",
+      "detail": "25/25 pass; 0 fail; 0 skipped",
+      "name": "b7-intervention-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/mastery/mastery-evidence.test.js",
+      "detail": "33/33 pass; 0 fail; 0 skipped",
+      "name": "b8-mastery-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/study-engine/tutor-v2/reteach/reteach.test.js",
+      "detail": "8/8 pass; 0 fail; 0 skipped",
+      "name": "b9-reteach-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/admission/admission.test.js",
+      "detail": "61/61 pass; 0 fail; 0 skipped",
+      "name": "b10-admission-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/study-engine/tutor-v2/parent-explanations/parent-explanation.test.js",
+      "detail": "23/23 pass; 0 fail; 0 skipped",
+      "name": "b11-parent-why-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/misconceptions/academic-misconceptions.test.js",
+      "detail": "19/19 pass; 0 fail; 0 skipped",
+      "name": "b12-misconception-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/core/v2/hints/hint-ladder.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-r4-contracts.test.js",
+      "detail": "48/48 pass; 0 fail; 0 skipped",
+      "name": "b13-review-permission-suite",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-schema-parity.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-r4-contracts.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/single-composition-route.test.js",
+      "detail": "25/25 pass; 0 fail; 0 skipped",
       "name": "wave2-composition-regression",
+      "status": "PASS"
+    },
+    {
+      "command": "node --test scripts/tutor-v2/.dist/tests/tutor-v2-convergence/adaptive-history-scope-provenance.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/approval-decision-structural-validation-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/assistance-mastery-opportunity-binding.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/global-adaptive-allowed-actions.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/global-adaptive-safety-authority.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/provider-boundary-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/reviewed-content-privacy-provenance-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/schema-parity.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/single-composition-route.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/structural-anti-answer-adversarial.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/trusted-invalid-request-fallback.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-composition.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-r4-contracts.test.js scripts/tutor-v2/.dist/tests/tutor-v2-convergence/wave2-schema-parity.test.js",
+      "detail": "288/288 pass; 0 fail; 0 skipped",
+      "name": "full-wave2-convergence",
       "status": "PASS"
     },
     {
@@ -152,12 +296,12 @@
     },
     {
       "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node scripts/tutor-v2/wave2-mutation-proof.mjs",
-      "detail": "5/5 historical blocker mutations killed in disposable compiled copies",
-      "name": "wave2-r2-mutation-proof",
+      "detail": "17/17 required and provenance mutations killed in disposable compiled copies",
+      "name": "wave2-r4-mutation-proof",
       "status": "PASS"
     },
     {
-      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r2/adaptive-tutor/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json",
+      "command": "/opt/homebrew/Cellar/node@22/22.23.2/bin/node /Users/stephenmanuel/manuel-academy-dev/mac-worktrees/tutor-v2-w2-09-reconvergence-r4/node_modules/typescript/bin/tsc -p study-engine/tests/tutor-v2-bridge/tsconfig.json",
       "detail": "Study Core Bridge compiled",
       "name": "study-bridge-typecheck",
       "status": "PASS"
@@ -247,9 +391,15 @@
       "status": "NOT_AVAILABLE"
     },
     {
-      "command": "git diff --name-only 07587f463565e0a0ddce46499ba010249e0319f3 HEAD plus status",
-      "detail": "27 R2 convergence-authored paths within ownership",
+      "command": "git diff --name-only 24b604ac4fc72ea49943fff752a5da5c6e5f4125 HEAD plus status",
+      "detail": "29 R4 convergence-authored paths within ownership",
       "name": "convergence-ownership",
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --name-only 22c3734bd436c41ba8d24409dcaa146d35914e2f HEAD plus status",
+      "detail": "no src, netlify, supabase, deployment, or production configuration changes",
+      "name": "production-release-isolation",
       "status": "PASS"
     },
     {
@@ -260,20 +410,26 @@
     }
   ],
   "counts": {
+    "focusedRepairPassed": 297,
+    "focusedRepairTests": 297,
     "foundationHarnessPassed": 8,
     "foundationHarnessTests": 8,
+    "fullWave2ConvergencePassed": 288,
+    "fullWave2ConvergenceTests": 288,
     "tutorCorePassed": 21,
     "tutorCoreTests": 21,
     "wave1HardGatePassed": 462,
     "wave1HardGateTests": 462,
     "wave2BlockerHardGatePassed": 10,
     "wave2BlockerHardGateTests": 10,
-    "wave2CompositionPassed": 17,
-    "wave2CompositionTests": 17,
-    "wave2LanePassed": 192,
-    "wave2LaneTests": 192
+    "wave2CompositionPassed": 25,
+    "wave2CompositionTests": 25,
+    "wave2LanePassed": 288,
+    "wave2LaneTests": 288,
+    "wave2R4HardGateFamilies": 15,
+    "wave2R4HardGateFamiliesPassed": 15
   },
-  "finalClassification": "WAVE2_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "finalClassification": "WAVE2_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
   "finalIndependentRereviewRequired": true,
   "hardGateFamilies": [
     {
@@ -380,6 +536,96 @@
     },
     {
       "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "ADAPTIVE_SUBSYSTEM_EXCEPTION_FALLBACK",
+      "permanentTest": "study-engine/tutor-v2/adaptive/subsystem-fallback.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "ADAPTIVE_REPLAY_RECOVERY_AND_DIGEST",
+      "permanentTest": "study-engine/tutor-v2/adaptive/composition-repair.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "ADAPTIVE_SUBSYSTEM_RESULT_VALIDATION",
+      "permanentTest": "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "SINGLE_COHERENT_ADAPTIVE_ACTION",
+      "permanentTest": "study-engine/tutor-v2/adaptive/composition-repair.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "EVIDENCE_BACKED_PREREQUISITE_INFERENCE",
+      "permanentTest": "study-engine/tutor-v2/adaptive/composition-repair.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "DECISION_OPPORTUNITY_PROVENANCE",
+      "permanentTest": "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "HINT_OPPORTUNITY_COMPLETION_RESET",
+      "permanentTest": "core/v2/hints/hint-ladder.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "COMPLETED_REVIEW_PERMISSION_SCOPE",
+      "permanentTest": "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "INTERVENTION_HISTORY_STATE_RECONCILIATION",
+      "permanentTest": "core/v2/interventions/intervention-ladder.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "MASTERY_RECENCY_CONTEXT_PARITY",
+      "permanentTest": "core/v2/mastery/mastery-evidence.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "RETEACH_LOOP_CAP_TERMINAL",
+      "permanentTest": "study-engine/tutor-v2/reteach/reteach.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "ADMISSION_STUDY_SCOPE_BINDING",
+      "permanentTest": "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "PARENT_WHY_CLOSED_SCOPE_AND_COPY",
+      "permanentTest": "tests/tutor-v2-convergence/wave2-r4-contracts.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "MISCONCEPTION_CODE_SEMANTIC_CLOSURE",
+      "permanentTest": "tests/tutor-v2-convergence/wave2-schema-parity.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
+      "name": "SINGLE_COMPOSITION_ROUTE",
+      "permanentTest": "tests/tutor-v2-convergence/single-composition-route.test.ts",
+      "status": "PASS"
+    },
+    {
+      "enforcement": "HARD_NON_COMPENSABLE",
       "name": "PROVIDER_AUTHORITY_BOUNDARY",
       "permanentTest": "tests/tutor-v2-convergence/",
       "status": "PASS"
@@ -404,8 +650,8 @@
     }
   ],
   "product": "Manuel Academy Study Tutor V2",
-  "resultVersion": 2,
-  "wave": "Wave 2 R2 Adaptive Intelligence Candidate",
+  "resultVersion": 4,
+  "wave": "Wave 2 R4 Post-Audit Repair Candidate",
   "wave1AcceptanceClassification": "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
   "wave1AcceptedBaselineSha": "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
   "wave2Complete": false

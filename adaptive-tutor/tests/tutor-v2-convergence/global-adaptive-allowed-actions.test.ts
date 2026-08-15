@@ -45,12 +45,12 @@ test("GLOBAL_ADAPTIVE_ALLOWED_ACTIONS is non-compensable for hint, repair, retea
   const authorized = wave2Fixture();
   const calls = counters();
   const result = requirePending(await composeWithCounters(authorized, calls));
-  assert.equal(calls.hint, 1);
+  assert.equal(calls.hint, 0);
   assert.equal(calls.repair, 1);
-  assert.equal(calls.reteach, 1);
-  assert.equal(result.hint.status, "recommended");
+  assert.equal(calls.reteach, 0);
+  assert.equal(result.hint.status, "no-hint");
   assert.equal(result.repair.status, "proposed");
-  assert.equal(result.reteach.status, "proposed");
+  assert.equal(result.reteach.status, "withheld");
   assert.ok(
     result.intervention.actionKind === null ||
       authorized.studyAuthority.allowedActions.includes(result.intervention.actionKind),

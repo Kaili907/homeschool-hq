@@ -15,6 +15,7 @@ import {
   AcademicMisconceptionSignalResultSchema,
   createAcademicMisconceptionRegistry,
   type AcademicMisconceptionSignalResult,
+  type SerializedAcademicMisconceptionSignal,
 } from "../../../core/v2/misconceptions/index.js";
 import {
   HintSelectionResultSchema,
@@ -289,13 +290,19 @@ function acceptedConceptGraph(value: unknown): AcceptedConceptGraph | null {
 function acceptedMisconceptionRegistry(value: unknown): AcceptedMisconceptionRegistry | null {
   const result = exactDataRecord(value, ["status", "registry"]);
   if (result === null || result.status !== "ready") return null;
-  const registry = exactDataRecord(result.registry, ["version", "entryCount", "match"]);
+  const registry = exactDataRecord(result.registry, [
+    "version",
+    "entryCount",
+    "match",
+    "reviewSerializedSignal",
+  ]);
   if (registry === null) return null;
   if (
     registry.version !== ACADEMIC_MISCONCEPTION_REGISTRY_VERSION ||
     !Number.isSafeInteger(registry.entryCount) ||
     (registry.entryCount as number) < 0 ||
-    typeof registry.match !== "function"
+    typeof registry.match !== "function" ||
+    typeof registry.reviewSerializedSignal !== "function"
   ) return null;
   return {
     status: "ready",
@@ -303,6 +310,8 @@ function acceptedMisconceptionRegistry(value: unknown): AcceptedMisconceptionReg
       version: ACADEMIC_MISCONCEPTION_REGISTRY_VERSION,
       entryCount: registry.entryCount as number,
       match: registry.match as AcceptedMisconceptionRegistry["registry"]["match"],
+      reviewSerializedSignal: registry.reviewSerializedSignal as
+        AcceptedMisconceptionRegistry["registry"]["reviewSerializedSignal"],
     },
   };
 }
@@ -490,7 +499,16 @@ function compositionBindingsAreValid(request: Wave2AdaptiveCompositionRequest): 
   if (parent !== null && (
     parent.selectedLearnerRef !== authority.learnerScopeRef ||
     parent.authorizedLearnerRef !== authority.learnerScopeRef ||
-    parent.recommendationEventRef !== authority.eventRef
+    parent.recommendationEventRef !== authority.eventRef ||
+    parent.guardianVisibilityAuthorization.householdScopeRef !==
+      authority.householdScopeRef ||
+    parent.guardianVisibilityAuthorization.learnerScopeRef !==
+      authority.learnerScopeRef ||
+    parent.guardianVisibilityAuthorization.sessionRef !== authority.sessionRef ||
+    parent.guardianVisibilityAuthorization.instructionalContextRef !==
+      authority.instructionalContextRef ||
+    parent.guardianVisibilityAuthorization.currentOpportunityRef !==
+      authority.currentOpportunityRef
   )) return false;
   return true;
 }
@@ -530,10 +548,9 @@ function effectiveCurrentOpportunityAssistance(
 ): AssistanceLevel {
   const opportunityRef = request.studyAuthority.currentOpportunityRef;
   let effective = mostAssisted(
-    request.masteryEvidence.currentOpportunityAssistanceLevel ?? "independent",
+    request.hintSelection.previousAssistanceLevel,
     hintAssistance(currentHintLevel),
   );
-  effective = mostAssisted(effective, request.hintSelection.previousAssistanceLevel);
   for (const entry of request.hintSelection.interventionHistory) {
     if (entry.opportunityRef === opportunityRef) {
       effective = mostAssisted(effective, entry.assistanceLevel);
@@ -575,9 +592,13 @@ function admissionsFor(
       const rawDecision: unknown = subsystems.evaluateAdmission({
         inputKind: "study-adaptive-admission",
         request: {
-          requestVersion: "study-tutor-v2.adaptive-admission.v1",
+          requestVersion: "study-tutor-v2.adaptive-admission.v2",
           requestKind: "study-adaptive-admission-request",
           invocationBindingRef: request.studyAuthority.invocationBindingRef,
+          householdScopeRef: request.studyAuthority.householdScopeRef,
+          learnerScopeRef: request.studyAuthority.learnerScopeRef,
+          sessionRef: request.studyAuthority.sessionRef,
+          instructionalContextRef: request.studyAuthority.instructionalContextRef,
           subjectRef: request.studyAuthority.subjectRef,
           curriculumBindingRef: request.studyAuthority.curriculumBindingRef,
           feature,
@@ -596,6 +617,11 @@ function admissionsFor(
       decision = validation.value as AdaptiveAdmissionDecision;
       if (decision.status === "admitted" && (
         decision.invocationBindingRef !== request.studyAuthority.invocationBindingRef ||
+        decision.householdScopeRef !== request.studyAuthority.householdScopeRef ||
+        decision.learnerScopeRef !== request.studyAuthority.learnerScopeRef ||
+        decision.sessionRef !== request.studyAuthority.sessionRef ||
+        decision.instructionalContextRef !==
+          request.studyAuthority.instructionalContextRef ||
         decision.subjectRef !== request.studyAuthority.subjectRef ||
         decision.curriculumBindingRef !== request.studyAuthority.curriculumBindingRef ||
         decision.feature !== feature ||
@@ -893,6 +919,49 @@ export async function composeWave2AdaptiveIntelligence(
     misconception.conceptRef !== request.studyAuthority.currentConceptRef
   ) return fallback(request, "misconception-scope-rejected", "misconception-analysis");
 
+  let misconceptionProjectionCandidate: SerializedAcademicMisconceptionSignal;
+  if (misconception.status === "possible-misconception") {
+    if (
+      misconception.misconceptionRef === null ||
+      misconception.academicMisconceptionCode === null
+    ) {
+      return fallback(
+        request,
+        "misconception-serialization-rejected",
+        "misconception-analysis",
+      );
+    }
+    misconceptionProjectionCandidate = {
+        status: "possible-misconception",
+        misconceptionRef: misconception.misconceptionRef,
+        academicMisconceptionCode: misconception.academicMisconceptionCode,
+        possibleInstructionalSignalOnly: true,
+        authoritativeDiagnosis: false,
+        authoritativeMasteryState: false,
+        durableLearnerClassificationAllowed: false,
+    };
+  } else {
+    misconceptionProjectionCandidate = {
+      status: misconception.status,
+      misconceptionRef: null,
+      academicMisconceptionCode: null,
+      possibleInstructionalSignalOnly: true,
+      authoritativeDiagnosis: false,
+      authoritativeMasteryState: false,
+      durableLearnerClassificationAllowed: false,
+    };
+  }
+  const serializedMisconception = registry.registry.reviewSerializedSignal(
+    misconceptionProjectionCandidate,
+  );
+  if (serializedMisconception.status === "rejected") {
+    return fallback(
+      request,
+      "misconception-serialization-rejected",
+      "misconception-analysis",
+    );
+  }
+
   const scopeByConcept = new Map(
     request.conceptScopeBindings.map((scope) => [scope.conceptRef, scope]),
   );
@@ -1170,8 +1239,12 @@ export async function composeWave2AdaptiveIntelligence(
       const rawExplanation: unknown = subsystems.explainParent({
         requestKind: "parent-hub-why",
         scope: {
+          householdScopeRef: request.studyAuthority.householdScopeRef,
           selectedLearnerRef: request.parentWhy.selectedLearnerRef,
           authorizedLearnerRef: request.parentWhy.authorizedLearnerRef,
+          sessionRef: request.studyAuthority.sessionRef,
+          instructionalContextRef: request.studyAuthority.instructionalContextRef,
+          currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
         },
         recommendation: {
           learnerRef: request.studyAuthority.learnerScopeRef,
@@ -1182,6 +1255,13 @@ export async function composeWave2AdaptiveIntelligence(
             recommendationEventRef: request.parentWhy.recommendationEventRef,
             policyRef: request.parentWhy.policyRef,
             producedAt: request.parentWhy.producedAt,
+            scope: {
+              householdScopeRef: request.studyAuthority.householdScopeRef,
+              learnerScopeRef: request.studyAuthority.learnerScopeRef,
+              sessionRef: request.studyAuthority.sessionRef,
+              instructionalContextRef: request.studyAuthority.instructionalContextRef,
+              currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
+            },
           },
         },
       });
@@ -1201,12 +1281,12 @@ export async function composeWave2AdaptiveIntelligence(
       ) return fallback(request, "parent-explanation-unavailable", "parent-explanation");
       const explanation = validation.value;
       parentExplanation = {
-        reasonCode: explanation.reasonCode,
-        title: explanation.title,
-        explanation: explanation.explanation,
-        disclaimer: explanation.disclaimer,
-        recommendationRef: explanation.provenance.recommendationRef,
-        producedAt: explanation.provenance.producedAt,
+        explanation,
+        visibilityAuthorization: {
+          ...request.parentWhy.guardianVisibilityAuthorization,
+        },
+        authoritative: false,
+        studyMutationAllowed: false,
       };
     } catch {
       return fallback(request, "parent-explanation-unavailable", "parent-explanation");
@@ -1217,12 +1297,12 @@ export async function composeWave2AdaptiveIntelligence(
     compositionVersion: WAVE2_ADAPTIVE_COMPOSITION_VERSION,
     status: "pending-study-decision",
     eventRef: request.studyAuthority.eventRef,
-    opportunityProvenance: {
+    decisionProvenance: {
       learnerScopeRef: request.studyAuthority.learnerScopeRef,
       sessionRef: request.studyAuthority.sessionRef,
       instructionalContextRef: request.studyAuthority.instructionalContextRef,
-      currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
-      effectiveCurrentAssistanceLevel: effectiveAssistance,
+      opportunityRef: request.studyAuthority.currentOpportunityRef,
+      effectiveAssistanceLevel: effectiveAssistance,
     },
     admissions: admissions.map(({ feature, decision }) => ({
       feature,
@@ -1234,13 +1314,7 @@ export async function composeWave2AdaptiveIntelligence(
       currentConceptRef: request.studyAuthority.currentConceptRef,
       directPrerequisiteRefs: [...scopedPrerequisiteRefs],
     },
-    misconception: {
-      status: misconception.status,
-      academicMisconceptionCode: misconception.academicMisconceptionCode,
-      possibleInstructionalSignalOnly: true,
-      authoritativeDiagnosis: false,
-      durableLearnerClassificationAllowed: false,
-    },
+    misconception: serializedMisconception.signal,
     hint: hintProjection,
     intervention: {
       status: intervention.status,

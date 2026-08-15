@@ -70,7 +70,10 @@ test("ADAPTIVE_HISTORY_SCOPE_PROVENANCE rejects cross-child/session/context hist
   legitimate.intervention.interventionCount = 1;
   legitimate.intervention.assistanceHistory = [interventionHistory()];
   const accepted = requirePending(await composeWithCounters(legitimate, counters()));
-  assert.equal(accepted.hint.status, "recommended");
+  assert.equal(accepted.intervention.actionKind, "check-prerequisite");
+  assert.equal(accepted.hint.status, "no-hint");
+  assert.equal(accepted.repair.status, "proposed");
+  assert.equal(accepted.reteach.status, "withheld");
 });
 
 test("ADAPTIVE_HISTORY_SCOPE_PROVENANCE binds all request-level opportunity and scope duplicates to Study", async () => {

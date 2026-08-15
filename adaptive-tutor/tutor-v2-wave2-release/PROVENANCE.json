@@ -1,21 +1,36 @@
 {
   "acceptedWave1BaselineSha": "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
-  "branch": "mac/tutor-v2-w2-reconvergence-r2",
-  "cherryPickOrder": [
-    "W2_01_ADMISSION",
-    "W2_02_CONCEPT_GRAPH",
-    "W2_03_MISCONCEPTION",
-    "W2_04_HINT_LADDER",
-    "W2_05_INTERVENTION",
-    "W2_06_MASTERY_EVIDENCE",
-    "W2_07_PARENT_WHY",
-    "W2_08_REPAIR_RETEACH",
-    "W2_B1_GLOBAL_AUTHORITY_FALLBACK",
-    "W2_B2_HISTORY_SCOPE",
-    "W2_B3_MASTERY_ASSISTANCE"
-  ],
+  "b4Sha": "22c3734bd436c41ba8d24409dcaa146d35914e2f",
+  "branch": "mac/tutor-v2-w2-reconvergence-r4",
+  "earlierRepairs": {
+    "W2_B1_GLOBAL_AUTHORITY_FALLBACK": {
+      "branch": "origin/mac/tutor-v2-w2-authority-fallback-repair-r1",
+      "cherryPickedCommit": "461f8298bafcd95b226f8abd76e184e2f58c5ad4",
+      "sourceCommit": "5ed021ed5cf239bf9b4d90b6baefed960565459a",
+      "stablePatchId": "ee25597f03be72840f8417e1efdd506e85c0f79c"
+    },
+    "W2_B2_HISTORY_SCOPE": {
+      "branch": "origin/mac/tutor-v2-w2-history-scope-repair-r1",
+      "cherryPickedCommit": "ee572e7f4d655e101671ce36253c2121e04d7ff8",
+      "sourceCommit": "28849cc7eeef76e9e6eeeb199375523e25317b0b",
+      "stablePatchId": "2caee0379c0a6bc7e5012557fc94a5c073e77f03"
+    },
+    "W2_B3_MASTERY_ASSISTANCE": {
+      "branch": "origin/mac/tutor-v2-w2-mastery-assistance-repair-r1",
+      "cherryPickedCommit": "07587f463565e0a0ddce46499ba010249e0319f3",
+      "sourceCommit": "76839746eebc60a1adf8e24a6daa68661a9adfa9",
+      "stablePatchId": "8b2142f6b809abb7d7462bfb3a918a89bebca462"
+    }
+  },
+  "externalStudyProgressionAuthorityRepair": {
+    "classification": "STUDY_RUNTIME_TUTOR_AUTHORITY_PORT_READY_FOR_TUTOR_CROSS_LINE_R4",
+    "containedInTutorCandidate": false,
+    "learnerReleaseBaseline": "7baf8dfbc27168708ed4cf504285a1838d7345f6",
+    "repairSha": "527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4"
+  },
   "failedR1CandidateSha": "8d618502a16a3d4d169143b539286a3b6fb5b925",
-  "finalW2_10R2Required": true,
+  "failedR2CandidateSha": "a251987b28909e827c0af0ee8bbeea668522459f",
+  "finalW2_10R4Required": true,
   "lanes": {
     "W2_01_ADMISSION": {
       "branch": "origin/mac/tutor-v2-w2-admission-r1",
@@ -66,52 +81,87 @@
       "stablePatchId": "7ce3fdf3b5fd93d6d2e062667b0fc8b65914bcc1"
     }
   },
-  "provenanceVersion": 2,
-  "r2Candidate": {
-    "exactShaRecordedAfterCommitInSessionReturn": true,
-    "selfReferencedInsideChecksummedArtifacts": false,
-    "status": "generated-for-independent-w2-10r2-rereview"
-  },
-  "repairs": {
-    "W2_B1_GLOBAL_AUTHORITY_FALLBACK": {
-      "branch": "origin/mac/tutor-v2-w2-authority-fallback-repair-r1",
-      "cherryPickedCommit": "461f8298bafcd95b226f8abd76e184e2f58c5ad4",
-      "sourceCommit": "5ed021ed5cf239bf9b4d90b6baefed960565459a",
-      "stablePatchId": "ee25597f03be72840f8417e1efdd506e85c0f79c"
+  "postAuditRepairCherryPickOrder": [
+    "W2_B5",
+    "W2_B6",
+    "W2_B13",
+    "W2_B7",
+    "W2_B8",
+    "W2_B9",
+    "W2_B10",
+    "W2_B11",
+    "W2_B12"
+  ],
+  "postAuditRepairs": {
+    "W2_B10": {
+      "cherryPickedCommit": "783ebb3216a9e7a5919f281fe8f10742bdd0f740",
+      "sourceCommit": "32fd30a7d3aa3b500e3dbaa53a8aa3715fbd9cde",
+      "stablePatchId": "c4ec4ed6c14851dda6c77c037a996379fae22fee"
     },
-    "W2_B2_HISTORY_SCOPE": {
-      "branch": "origin/mac/tutor-v2-w2-history-scope-repair-r1",
-      "cherryPickedCommit": "ee572e7f4d655e101671ce36253c2121e04d7ff8",
-      "sourceCommit": "28849cc7eeef76e9e6eeeb199375523e25317b0b",
-      "stablePatchId": "2caee0379c0a6bc7e5012557fc94a5c073e77f03"
+    "W2_B11": {
+      "cherryPickedCommit": "dacd2fe203fa93df61e772ce2346395b7c6e507c",
+      "sourceCommit": "5d282f08a5cfbc75e7804dbf461812f218e8db3d",
+      "stablePatchId": "0955e9b74bb113abaa47fa244eca9a8b36b00a96"
     },
-    "W2_B3_MASTERY_ASSISTANCE": {
-      "branch": "origin/mac/tutor-v2-w2-mastery-assistance-repair-r1",
-      "cherryPickedCommit": "07587f463565e0a0ddce46499ba010249e0319f3",
-      "sourceCommit": "76839746eebc60a1adf8e24a6daa68661a9adfa9",
-      "stablePatchId": "8b2142f6b809abb7d7462bfb3a918a89bebca462"
+    "W2_B12": {
+      "cherryPickedCommit": "24b604ac4fc72ea49943fff752a5da5c6e5f4125",
+      "sourceCommit": "c07db50067776457a6eef96f0c2a38b601177031",
+      "stablePatchId": "aacfdda8fe7564e6a84437c8b715317ab71b5c1e"
+    },
+    "W2_B13": {
+      "cherryPickedCommit": "a11608d5de30d973785482b2d7169152c42e31ca",
+      "sourceCommit": "097ada4fe024f7eed7a50038d13801e45b990b62",
+      "sourceParent": "67d11f4ba0382c8cf7c6091a20a67a4b6ef1a76c",
+      "stablePatchId": "e60b439f91424e425181d24414dc9ced30dabd4e"
+    },
+    "W2_B5": {
+      "cherryPickedCommit": "9e89a86bf292108276742cf2ebc3a04432e3d4b2",
+      "sourceCommit": "c9601aa99bca89ff0673ee6e00858fafa98c70c2",
+      "stablePatchId": "1788de549e684b7e9bb3655a1cfc184b842405c3"
+    },
+    "W2_B6": {
+      "cherryPickedCommit": "7c3320cbc899f79c8206de2435517cc4185c83fe",
+      "sourceCommit": "67d11f4ba0382c8cf7c6091a20a67a4b6ef1a76c",
+      "stablePatchId": "a2f745921d05e630a5bf93f1c90cbdc85d6c861d"
+    },
+    "W2_B7": {
+      "cherryPickedCommit": "0f6f3e827ab4be2ed7a57ebddc7cf5e8db179228",
+      "sourceCommit": "9a6a6a2a851ee5513bc6ddab694e41c1d78cd5f5",
+      "stablePatchId": "ee90ea7ec82fda08769113978964090a5d26a553"
+    },
+    "W2_B8": {
+      "cherryPickedCommit": "19e23646c7cc45ecb176976c3ed731b1163cfbff",
+      "sourceCommit": "a907f115894358a5d18b3ead1b361cbab8679390",
+      "stablePatchId": "bde79ff946a13eda529e6127d32b0544c36671ab"
+    },
+    "W2_B9": {
+      "cherryPickedCommit": "15ae6c42a89557b23614f6e611e912c44122f225",
+      "sourceCommit": "367b8f5450510b3e7037cd2ccf32cac1cac79b6a",
+      "stablePatchId": "a85bf0573e4d4e4cd03e6dbada26c82a507af1d5"
     }
   },
-  "session": "STUDY-TUTOR-V2-W2-09R2 — Wave 2 Blocker Repair Reconvergence",
-  "startingSha": "8d618502a16a3d4d169143b539286a3b6fb5b925",
-  "verification": {
-    "allRemoteTipsExact": true,
-    "baseIsDirectParentForEveryLane": true,
-    "convergenceOwnershipPassed": true,
-    "mergeCommitsInLaneRanges": 0,
-    "repairDirectParentsAreFailedR1Candidate": true,
-    "repairRemoteTipsExact": true,
-    "repairStablePatchIdsExact": true,
-    "stablePatchIdsExact": true,
-    "unrepairedLaneTreesExactAndRepairSupersessionsVerified": true
+  "provenanceVersion": 4,
+  "r4Candidate": {
+    "exactShaRecordedAfterCommitInSessionReturn": true,
+    "selfReferencedInsideChecksummedArtifacts": false,
+    "status": "generated-for-independent-w2-10r4-rereview"
   },
-  "w1_10R5AcceptanceClassification": "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
-  "w2_10R1BlockingFindings": [
-    "Study safety hold did not stop every adaptive subsystem.",
-    "Study allowedActions was bypassed by hint, prerequisite repair, and reteach.",
-    "Current hint assistance was not bound to the mastery evidence opportunity.",
-    "Invalid input controlled supposedly reviewed fallback references.",
-    "Hint and intervention history lacked child/session provenance."
-  ],
-  "w2_10R1Classification": "WAVE2_HOLD_BLOCKING_FINDINGS"
+  "serializedBoundaryAdjudication": {
+    "generatedSchemaCount": 2,
+    "internalPortSchemasGenerated": 0,
+    "ruling": "W2_SERIALIZED_BOUNDARY_BLOCKER_FOUND"
+  },
+  "session": "STUDY-TUTOR-V2-W2-09R4 — Full Wave 2 Post-Audit Repair Reconvergence",
+  "startingB4Sha": "22c3734bd436c41ba8d24409dcaa146d35914e2f",
+  "trustBoundaryAdjudication": "W2_TRUST_BOUNDARY_ADJUDICATION_COMPLETE",
+  "verification": {
+    "convergenceOwnershipPassed": true,
+    "externalStudyAuthorityPortVerifiedAsSeparateArtifact": true,
+    "remoteTipsExact": true,
+    "repairOwnershipExact": true,
+    "sourceParentsExact": true,
+    "stablePatchIdsExact": true
+  },
+  "w2_10R1Classification": "WAVE2_HOLD_BLOCKING_FINDINGS",
+  "w2_10R2Classification": "WAVE2_HOLD_BLOCKING_FINDINGS"
 }

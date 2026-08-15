@@ -202,7 +202,7 @@ test("graph membership without trusted signal does not infer prerequisite defici
   assert.equal(result.intervention.actionKind, "hint");
   assert.equal(result.repair.status, "withheld");
   assert.deepEqual(result.repair.recommendedConceptRefs, []);
-  assert.equal(result.parentExplanation?.reasonCode, "hint-level-changed");
+  assert.equal(result.parentExplanation?.explanation.reasonCode, "hint-level-changed");
 });
 
 test("progress return-to-lesson suppresses unrelated action lanes and Parent Why follows it", async () => {
@@ -217,6 +217,12 @@ test("progress return-to-lesson suppresses unrelated action lanes and Parent Why
     outcome: "progress-observed",
   }];
   request.intervention.interventionCount = 1;
+  request.masteryEvidence.currentOpportunityAssistanceLevel = "light-hint";
+  const currentEvidence = request.masteryEvidence.evidence.find(
+    ({ opportunityRef }) => opportunityRef === request.studyAuthority.currentOpportunityRef,
+  );
+  assert.ok(currentEvidence);
+  currentEvidence.assistanceLevel = "light-hint";
   const result = await composeWave2AdaptiveIntelligence(request, {
     replayLedger: new InMemoryWave2ReplayLedger(),
   });
@@ -226,7 +232,10 @@ test("progress return-to-lesson suppresses unrelated action lanes and Parent Why
   assert.equal(result.hint.status, "no-hint");
   assert.equal(result.repair.status, "withheld");
   assert.equal(result.reteach.status, "withheld");
-  assert.equal(result.parentExplanation?.reasonCode, "independent-practice-requested");
+  assert.equal(
+    result.parentExplanation?.explanation.reasonCode,
+    "independent-practice-requested",
+  );
 });
 
 test("reteach is the sole action proposal and Parent Why explains reteach", async () => {
@@ -241,7 +250,7 @@ test("reteach is the sole action proposal and Parent Why explains reteach", asyn
   assert.equal(result.hint.status, "no-hint");
   assert.equal(result.repair.status, "withheld");
   assert.equal(result.reteach.status, "proposed");
-  assert.equal(result.parentExplanation?.reasonCode, "reteach-suggested");
+  assert.equal(result.parentExplanation?.explanation.reasonCode, "reteach-suggested");
 });
 
 test("foreign-grade prerequisite cannot influence the selected route", async () => {
@@ -251,6 +260,12 @@ test("foreign-grade prerequisite cannot influence the selected route", async () 
   );
   assert.ok(prerequisite);
   prerequisite.gradeRef = "grade:foreign";
+  request.masteryEvidence.currentOpportunityAssistanceLevel = "light-hint";
+  const currentEvidence = request.masteryEvidence.evidence.find(
+    ({ opportunityRef }) => opportunityRef === request.studyAuthority.currentOpportunityRef,
+  );
+  assert.ok(currentEvidence);
+  currentEvidence.assistanceLevel = "light-hint";
   const result = await composeWave2AdaptiveIntelligence(request, {
     replayLedger: new InMemoryWave2ReplayLedger(),
   });
@@ -269,12 +284,12 @@ test("pending result is runtime-valid and carries minimized opportunity provenan
   assert.equal(validateExact(Wave2StudyDecisionPacketSchema, result).status, "accepted");
   assert.equal(result.status, "pending-study-decision");
   if (result.status !== "pending-study-decision") throw new Error("Expected pending decision");
-  assert.deepEqual(result.opportunityProvenance, {
+  assert.deepEqual(result.decisionProvenance, {
     learnerScopeRef: request.studyAuthority.learnerScopeRef,
     sessionRef: request.studyAuthority.sessionRef,
     instructionalContextRef: request.studyAuthority.instructionalContextRef,
-    currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
-    effectiveCurrentAssistanceLevel: "light-hint",
+    opportunityRef: request.studyAuthority.currentOpportunityRef,
+    effectiveAssistanceLevel: "independent",
   });
-  assert.equal(JSON.stringify(result.opportunityProvenance).includes("name"), false);
+  assert.equal(JSON.stringify(result.decisionProvenance).includes("name"), false);
 });

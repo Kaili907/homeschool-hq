@@ -113,7 +113,25 @@
           "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
           "type": "string"
         },
+        "householdScopeRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "instructionalContextRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
         "invocationBindingRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
+        },
+        "learnerScopeRef": {
           "maxLength": 160,
           "minLength": 3,
           "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
@@ -124,7 +142,7 @@
           "type": "string"
         },
         "metadataVersion": {
-          "const": "study-tutor-v2.adaptive-capabilities.v1",
+          "const": "study-tutor-v2.adaptive-capabilities.v2",
           "type": "string"
         },
         "safetyAdmission": {
@@ -138,6 +156,12 @@
               "type": "string"
             }
           ]
+        },
+        "sessionRef": {
+          "maxLength": 160,
+          "minLength": 3,
+          "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+          "type": "string"
         },
         "source": {
           "const": "study-authority",
@@ -155,6 +179,10 @@
         "metadataKind",
         "source",
         "invocationBindingRef",
+        "householdScopeRef",
+        "learnerScopeRef",
+        "sessionRef",
+        "instructionalContextRef",
         "subjectRef",
         "curriculumBindingRef",
         "curriculumAdmission",
@@ -407,6 +435,32 @@
           "minLength": 3,
           "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
           "type": "string"
+        },
+        "currentReviewEventRef": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "currentReviewPolicyRevisionRef": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "minLength": 3,
+              "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "interventionHistory": {
           "items": {
@@ -700,30 +754,113 @@
           "type": "array"
         },
         "reviewPermission": {
-          "additionalProperties": false,
-          "properties": {
-            "completedAssessmentReviewAllowed": {
-              "type": "boolean"
+          "$id": "TutorV2CompletedAssessmentReviewPermission",
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "status": {
+                  "const": "not-authorized",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "status"
+              ],
+              "type": "object"
             },
-            "privacyApprovalRef": {
-              "anyOf": [
-                {
+            {
+              "additionalProperties": false,
+              "properties": {
+                "instructionalContextRef": {
                   "maxLength": 160,
                   "minLength": 3,
                   "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
                   "type": "string"
                 },
-                {
-                  "type": "null"
+                "issuer": {
+                  "const": "study",
+                  "type": "string"
+                },
+                "learnerScopeRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "opportunityRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "permissionKind": {
+                  "const": "study-completed-assessment-review-permission",
+                  "type": "string"
+                },
+                "permissionRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "permissionVersion": {
+                  "const": "study-tutor-v2.completed-assessment-review-permission.v1",
+                  "type": "string"
+                },
+                "policyRevisionRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "privacyApprovalRef": {
+                  "anyOf": [
+                    {
+                      "maxLength": 160,
+                      "minLength": 3,
+                      "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "reviewEventRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "sessionRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "status": {
+                  "const": "authorized",
+                  "type": "string"
                 }
-              ]
+              },
+              "required": [
+                "permissionVersion",
+                "status",
+                "permissionKind",
+                "issuer",
+                "permissionRef",
+                "learnerScopeRef",
+                "sessionRef",
+                "instructionalContextRef",
+                "opportunityRef",
+                "reviewEventRef",
+                "policyRevisionRef",
+                "privacyApprovalRef"
+              ],
+              "type": "object"
             }
-          },
-          "required": [
-            "completedAssessmentReviewAllowed",
-            "privacyApprovalRef"
-          ],
-          "type": "object"
+          ]
         },
         "sessionRef": {
           "maxLength": 160,
@@ -758,6 +895,8 @@
         "sessionRef",
         "contextRef",
         "currentOpportunityRef",
+        "currentReviewEventRef",
+        "currentReviewPolicyRevisionRef",
         "assessmentPhase",
         "studyHintCeiling",
         "previousAssistanceLevel",
@@ -1795,6 +1934,78 @@
               "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
               "type": "string"
             },
+            "guardianVisibilityAuthorization": {
+              "additionalProperties": false,
+              "properties": {
+                "authorizationKind": {
+                  "const": "study-parent-why-visibility-authorization",
+                  "type": "string"
+                },
+                "authorizationRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "currentOpportunityRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "guardianRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "householdScopeRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "instructionalContextRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "issuer": {
+                  "const": "study",
+                  "type": "string"
+                },
+                "learnerScopeRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "sessionRef": {
+                  "maxLength": 160,
+                  "minLength": 3,
+                  "pattern": "^[a-z][a-z0-9-]{1,31}:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+                  "type": "string"
+                },
+                "visibility": {
+                  "const": "parent-hub-why",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "authorizationKind",
+                "issuer",
+                "authorizationRef",
+                "guardianRef",
+                "householdScopeRef",
+                "learnerScopeRef",
+                "sessionRef",
+                "instructionalContextRef",
+                "currentOpportunityRef",
+                "visibility"
+              ],
+              "type": "object"
+            },
             "policyRef": {
               "maxLength": 160,
               "minLength": 3,
@@ -1830,7 +2041,8 @@
             "recommendationRef",
             "recommendationEventRef",
             "policyRef",
-            "producedAt"
+            "producedAt",
+            "guardianVisibilityAuthorization"
           ],
           "type": "object"
         },

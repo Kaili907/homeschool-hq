@@ -7,14 +7,14 @@
   "schemas": [
     {
       "file": "wave2-adaptive-composition-request.schema.json",
-      "sha256": "dd01c7763815124a0c23761b7d9c08fda5f8dced52ad825474ff2624e52fe7fb",
+      "sha256": "6f5e2e4d246df6c58113001c96282d3ec4f27bc316ccedfc1b2acaafebe4d0de",
       "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2AdaptiveCompositionRequestSchema"
     },
     {
       "file": "wave2-study-decision-packet.schema.json",
-      "sha256": "6fcc337b1231acee2209a59177df5d4bc64fd558a1b6e9773a2817004fe50b51",
+      "sha256": "867acaf6c370cb293ca4e2a5f4a4becb8636722da8b1d544ce159d82a0f0f7d1",
       "source": "study-engine/tutor-v2/adaptive/contracts.ts#Wave2StudyDecisionPacketSchema"
     }
   ],
-  "wave": "Wave 2 R2 Adaptive Intelligence Candidate"
+  "wave": "Wave 2 R4 Post-Audit Repair Candidate"
 }

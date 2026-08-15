@@ -1,21 +1,27 @@
 {
   "counts": {
+    "focusedRepairPassed": 297,
+    "focusedRepairTests": 297,
     "foundationHarnessPassed": 8,
     "foundationHarnessTests": 8,
+    "fullWave2ConvergencePassed": 288,
+    "fullWave2ConvergenceTests": 288,
     "tutorCorePassed": 21,
     "tutorCoreTests": 21,
     "wave1HardGatePassed": 462,
     "wave1HardGateTests": 462,
     "wave2BlockerHardGatePassed": 10,
     "wave2BlockerHardGateTests": 10,
-    "wave2CompositionPassed": 17,
-    "wave2CompositionTests": 17,
-    "wave2LanePassed": 192,
-    "wave2LaneTests": 192
+    "wave2CompositionPassed": 25,
+    "wave2CompositionTests": 25,
+    "wave2LanePassed": 288,
+    "wave2LaneTests": 288,
+    "wave2R4HardGateFamilies": 15,
+    "wave2R4HardGateFamiliesPassed": 15
   },
-  "finalClassification": "WAVE2_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
-  "hardGateFamiliesPassed": 21,
-  "hardGateFamilyCount": 21,
+  "finalClassification": "WAVE2_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS",
+  "hardGateFamiliesPassed": 36,
+  "hardGateFamilyCount": 36,
   "inheritedFindings": [
     {
       "detail": "3 existing high advisories: @playwright/test, nanoid, playwright; Study runtime manifests unchanged",
@@ -38,5 +44,5 @@
       "status": "NOT_AVAILABLE"
     }
   ],
-  "summaryVersion": 1
+  "summaryVersion": 4
 }

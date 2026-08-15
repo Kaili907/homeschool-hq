@@ -17,6 +17,7 @@ function noCurrentHint() {
 
 function guidedHint() {
   const input = wave2Fixture();
+  input.misconceptionMatch.evidence = [];
   input.studyAuthority.studyHintCeiling = "guided-step";
   input.hintSelection.studyHintCeiling = "guided-step";
   input.hintSelection.attemptCount = 3;
@@ -26,7 +27,7 @@ function guidedHint() {
     reviewedContentRef: "reviewed-content:wave2-guided",
     reviewRef: "review:wave2-guided",
     hintLevel: "guided-step",
-    eligibleMisconceptionCodes: ["academic-misconception-signal"],
+    eligibleMisconceptionCodes: [],
     eligibleLearnerStageRefs: ["learning-stage:middle"],
   });
   return input;
@@ -40,6 +41,16 @@ test("ASSISTANCE_MASTERY_OPPORTUNITY_BINDING accepts independent evidence only w
 
 test("ASSISTANCE_MASTERY_OPPORTUNITY_BINDING reproduces W2-10R1 concept-cue to independent attack", async () => {
   const input = wave2Fixture();
+  input.misconceptionMatch.evidence = [];
+  input.hintSelection.reviewedHints.push({
+    metadataKind: "study-reviewed-hint",
+    hintRef: "hint:wave2-generic-concept",
+    reviewedContentRef: "reviewed-content:wave2-generic-concept",
+    reviewRef: "review:wave2-generic-concept",
+    hintLevel: "concept-cue",
+    eligibleMisconceptionCodes: [],
+    eligibleLearnerStageRefs: [],
+  });
   setCurrentAssistance(input, "independent");
   const calls = counters();
   const result = await composeWithCounters(input, calls);

@@ -17,10 +17,12 @@ import { ConceptGraphSchema } from "../../../core/v2/concepts/index.js";
 import {
   AcademicMisconceptionEntrySchema,
   AcademicMisconceptionMatchRequestSchema,
+  SerializedAcademicMisconceptionSignalSchema,
 } from "../../../core/v2/misconceptions/index.js";
 import { HintSelectionRequestSchema } from "../../../core/v2/hints/index.js";
 import { InterventionLadderInputSchema } from "../../../core/v2/interventions/index.js";
 import { StudyMasteryEvidenceInputSchema } from "../../../core/v2/mastery/index.js";
+import { ParentExplanationSchema } from "../parent-explanations/index.js";
 
 export const WAVE2_ADAPTIVE_COMPOSITION_VERSION =
   "study-tutor-v2.wave2-composition.v1" as const;
@@ -119,6 +121,21 @@ export const Wave2ParentWhyRequestSchema = Type.Object(
     recommendationEventRef: OpaqueReferenceSchema,
     policyRef: OpaqueReferenceSchema,
     producedAt: ISODateTimeSchema,
+    guardianVisibilityAuthorization: Type.Object(
+      {
+        authorizationKind: Type.Literal("study-parent-why-visibility-authorization"),
+        issuer: Type.Literal("study"),
+        authorizationRef: OpaqueReferenceSchema,
+        guardianRef: OpaqueReferenceSchema,
+        householdScopeRef: OpaqueReferenceSchema,
+        learnerScopeRef: OpaqueReferenceSchema,
+        sessionRef: OpaqueReferenceSchema,
+        instructionalContextRef: OpaqueReferenceSchema,
+        currentOpportunityRef: OpaqueReferenceSchema,
+        visibility: Type.Literal("parent-hub-why"),
+      },
+      { additionalProperties: false },
+    ),
   },
   { additionalProperties: false },
 );
@@ -184,22 +201,6 @@ const ConceptProjectionSchema = Type.Object(
     status: Type.Literal("accepted"),
     currentConceptRef: OpaqueReferenceSchema,
     directPrerequisiteRefs: Type.Array(OpaqueReferenceSchema, { maxItems: 1_000 }),
-  },
-  { additionalProperties: false },
-);
-
-const MisconceptionProjectionSchema = Type.Object(
-  {
-    status: Type.Union([
-      Type.Literal("no-signal"),
-      Type.Literal("insufficient-evidence"),
-      Type.Literal("possible-misconception"),
-      Type.Literal("conflicting-evidence"),
-    ]),
-    academicMisconceptionCode: Type.Union([Type.String(), Type.Null()]),
-    possibleInstructionalSignalOnly: Type.Literal(true),
-    authoritativeDiagnosis: Type.Literal(false),
-    durableLearnerClassificationAllowed: Type.Literal(false),
   },
   { additionalProperties: false },
 );
@@ -280,14 +281,28 @@ const ReteachProjectionSchema = Type.Object(
   { additionalProperties: false },
 );
 
+const ParentVisibilityAuthorizationProjectionSchema = Type.Object(
+  {
+    authorizationKind: Type.Literal("study-parent-why-visibility-authorization"),
+    issuer: Type.Literal("study"),
+    authorizationRef: OpaqueReferenceSchema,
+    guardianRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    instructionalContextRef: OpaqueReferenceSchema,
+    currentOpportunityRef: OpaqueReferenceSchema,
+    visibility: Type.Literal("parent-hub-why"),
+  },
+  { additionalProperties: false },
+);
+
 const ParentProjectionSchema = Type.Object(
   {
-    reasonCode: PolicyCodeSchema,
-    title: Type.String({ minLength: 1, maxLength: 80 }),
-    explanation: Type.String({ minLength: 1, maxLength: 240 }),
-    disclaimer: Type.String({ minLength: 1, maxLength: 160 }),
-    recommendationRef: OpaqueReferenceSchema,
-    producedAt: ISODateTimeSchema,
+    explanation: ParentExplanationSchema,
+    visibilityAuthorization: ParentVisibilityAuthorizationProjectionSchema,
+    authoritative: Type.Literal(false),
+    studyMutationAllowed: Type.Literal(false),
   },
   { additionalProperties: false },
 );
@@ -300,19 +315,19 @@ const PendingDecisionSchema = Type.Composite(
         compositionVersion: Type.Literal(WAVE2_ADAPTIVE_COMPOSITION_VERSION),
         status: Type.Literal("pending-study-decision"),
         eventRef: OpaqueReferenceSchema,
-        opportunityProvenance: Type.Object(
+        decisionProvenance: Type.Object(
           {
             learnerScopeRef: OpaqueReferenceSchema,
             sessionRef: OpaqueReferenceSchema,
             instructionalContextRef: OpaqueReferenceSchema,
-            currentOpportunityRef: OpaqueReferenceSchema,
-            effectiveCurrentAssistanceLevel: AssistanceLevelSchema,
+            opportunityRef: OpaqueReferenceSchema,
+            effectiveAssistanceLevel: AssistanceLevelSchema,
           },
           { additionalProperties: false },
         ),
         admissions: Type.Array(AdmissionProjectionSchema, { minItems: 7, maxItems: 8 }),
         concept: ConceptProjectionSchema,
-        misconception: MisconceptionProjectionSchema,
+        misconception: SerializedAcademicMisconceptionSignalSchema,
         hint: HintProjectionSchema,
         intervention: InterventionProjectionSchema,
         mastery: MasteryProjectionSchema,
@@ -393,6 +408,10 @@ export const Wave2AdaptiveAdmissionDecisionSchema = Type.Union([
           reason: Type.Literal("admitted"),
           tutorFeaturePermission: Type.Literal("allowed"),
           invocationBindingRef: OpaqueReferenceSchema,
+          householdScopeRef: OpaqueReferenceSchema,
+          learnerScopeRef: OpaqueReferenceSchema,
+          sessionRef: OpaqueReferenceSchema,
+          instructionalContextRef: OpaqueReferenceSchema,
           subjectRef: OpaqueReferenceSchema,
           curriculumBindingRef: OpaqueReferenceSchema,
           feature: AdaptiveFeatureSchema,
@@ -411,6 +430,7 @@ export const Wave2AdaptiveAdmissionDecisionSchema = Type.Union([
           status: Type.Literal("refused"),
           reason: Type.Union([
             Type.Literal("insufficient-capability-metadata"),
+            Type.Literal("scope-binding-mismatch"),
             Type.Literal("unsupported-subject-capability"),
             Type.Literal("unsupported-action-family"),
             Type.Literal("safety-restricted"),

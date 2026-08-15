@@ -11,7 +11,7 @@ const gate = JSON.parse(gateText) as {
   readonly counts: Record<string, number>;
   readonly checks: readonly { readonly name: string; readonly status: string; readonly detail: string }[];
 };
-if (gate.finalClassification !== "WAVE2_R2_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS") {
+if (gate.finalClassification !== "WAVE2_R4_CANDIDATE_READY_FOR_FINAL_REREVIEW_WITH_INHERITED_FINDINGS") {
   throw new Error(`Wave 2 gate is not an inherited-findings candidate: ${gate.finalClassification}`);
 }
 if (gate.hardGateFamilies.some(({ status }) => status !== "PASS")) {
@@ -116,8 +116,9 @@ const repairs = {
 } as const;
 
 const status = {
-  statusVersion: 2,
+  statusVersion: 4,
   WAVE_2_COMPLETE: false,
+  WAVE_3_AUTHORIZED_BY_TECHNICAL_ACCEPTANCE: false,
   FINAL_INDEPENDENT_REREVIEW_REQUIRED: true,
   STUDY_ENGINE_REMAINS_AUTHORITY: true,
   STUDY_SAFETY_HOLD_STOPS_ALL_ADAPTIVE_SUBSYSTEMS: true,
@@ -145,6 +146,18 @@ const status = {
   LIVE_MODEL_CERTIFICATION: false,
   PRODUCTION_DEPLOY_AUTHORIZED: false,
   STATIC_REVIEWED_CURRICULUM_FALLBACK_REQUIRED: true,
+  SINGLE_COHERENT_ADAPTIVE_ACTION_REQUIRED: true,
+  DECISION_PROVENANCE_REQUIRED_ON_PENDING_PACKETS: true,
+  COMPLETED_REVIEW_PERMISSION_IS_STRUCTURED_AND_SCOPE_BOUND: true,
+  PARENT_WHY_COPY_IS_CLOSED_AND_STUDY_VISIBILITY_BOUND: true,
+  MISCONCEPTION_CODE_IS_BOUNDED_ACADEMIC_VOCABULARY: true,
+  TUTOR_RECOMMENDATION_IS_ADVISORY: true,
+  STUDY_PROGRESSION_DECISION_REQUIRED: true,
+  TUTOR_CAN_COMPLETE_STUDY_SEGMENT: false,
+  W2_TRUST_BOUNDARY_ADJUDICATION_COMPLETE: true,
+  W2_SERIALIZED_BOUNDARY_BLOCKER_FOUND: true,
+  WAVE2_SERIALIZED_SCHEMA_COUNT: 2,
+  WAVE2_INTERNAL_PORT_SCHEMAS_GENERATED: 0,
   CROSS_CHILD_CONTEXT_REUSE_ALLOWED: false,
   WAVE1_PROVIDER_AUTHORITY_GATE_REMAINS_CLOSED: true,
   WAVE1_STRUCTURAL_ANTI_ANSWER_GATE_REMAINS_CLOSED: true,
@@ -156,45 +169,58 @@ const status = {
 };
 
 const provenance = {
-  provenanceVersion: 2,
-  session: "STUDY-TUTOR-V2-W2-09R2 — Wave 2 Blocker Repair Reconvergence",
-  branch: "mac/tutor-v2-w2-reconvergence-r2",
-  startingSha: "8d618502a16a3d4d169143b539286a3b6fb5b925",
+  provenanceVersion: 4,
+  session: "STUDY-TUTOR-V2-W2-09R4 — Full Wave 2 Post-Audit Repair Reconvergence",
+  branch: "mac/tutor-v2-w2-reconvergence-r4",
+  startingB4Sha: "22c3734bd436c41ba8d24409dcaa146d35914e2f",
   acceptedWave1BaselineSha: "94a8d2e1708d3346e905688c4f0f78a6ed4c4a95",
-  w1_10R5AcceptanceClassification: "WAVE1_ACCEPTED_WITH_INHERITED_FINDINGS",
   failedR1CandidateSha: "8d618502a16a3d4d169143b539286a3b6fb5b925",
   w2_10R1Classification: "WAVE2_HOLD_BLOCKING_FINDINGS",
-  w2_10R1BlockingFindings: [
-    "Study safety hold did not stop every adaptive subsystem.",
-    "Study allowedActions was bypassed by hint, prerequisite repair, and reteach.",
-    "Current hint assistance was not bound to the mastery evidence opportunity.",
-    "Invalid input controlled supposedly reviewed fallback references.",
-    "Hint and intervention history lacked child/session provenance.",
-  ],
-  cherryPickOrder: [
-    ...Object.keys(lanes),
-    "W2_B1_GLOBAL_AUTHORITY_FALLBACK",
-    "W2_B2_HISTORY_SCOPE",
-    "W2_B3_MASTERY_ASSISTANCE",
-  ],
+  failedR2CandidateSha: "a251987b28909e827c0af0ee8bbeea668522459f",
+  w2_10R2Classification: "WAVE2_HOLD_BLOCKING_FINDINGS",
+  b4Sha: "22c3734bd436c41ba8d24409dcaa146d35914e2f",
   lanes,
-  repairs,
-  r2Candidate: {
-    status: "generated-for-independent-w2-10r2-rereview",
+  earlierRepairs: repairs,
+  postAuditRepairCherryPickOrder: [
+    "W2_B5", "W2_B6", "W2_B13", "W2_B7", "W2_B8",
+    "W2_B9", "W2_B10", "W2_B11", "W2_B12",
+  ],
+  postAuditRepairs: {
+    W2_B5: { sourceCommit: "c9601aa99bca89ff0673ee6e00858fafa98c70c2", cherryPickedCommit: "9e89a86bf292108276742cf2ebc3a04432e3d4b2", stablePatchId: "1788de549e684b7e9bb3655a1cfc184b842405c3" },
+    W2_B6: { sourceCommit: "67d11f4ba0382c8cf7c6091a20a67a4b6ef1a76c", cherryPickedCommit: "7c3320cbc899f79c8206de2435517cc4185c83fe", stablePatchId: "a2f745921d05e630a5bf93f1c90cbdc85d6c861d" },
+    W2_B13: { sourceCommit: "097ada4fe024f7eed7a50038d13801e45b990b62", sourceParent: "67d11f4ba0382c8cf7c6091a20a67a4b6ef1a76c", cherryPickedCommit: "a11608d5de30d973785482b2d7169152c42e31ca", stablePatchId: "e60b439f91424e425181d24414dc9ced30dabd4e" },
+    W2_B7: { sourceCommit: "9a6a6a2a851ee5513bc6ddab694e41c1d78cd5f5", cherryPickedCommit: "0f6f3e827ab4be2ed7a57ebddc7cf5e8db179228", stablePatchId: "ee90ea7ec82fda08769113978964090a5d26a553" },
+    W2_B8: { sourceCommit: "a907f115894358a5d18b3ead1b361cbab8679390", cherryPickedCommit: "19e23646c7cc45ecb176976c3ed731b1163cfbff", stablePatchId: "bde79ff946a13eda529e6127d32b0544c36671ab" },
+    W2_B9: { sourceCommit: "367b8f5450510b3e7037cd2ccf32cac1cac79b6a", cherryPickedCommit: "15ae6c42a89557b23614f6e611e912c44122f225", stablePatchId: "a85bf0573e4d4e4cd03e6dbada26c82a507af1d5" },
+    W2_B10: { sourceCommit: "32fd30a7d3aa3b500e3dbaa53a8aa3715fbd9cde", cherryPickedCommit: "783ebb3216a9e7a5919f281fe8f10742bdd0f740", stablePatchId: "c4ec4ed6c14851dda6c77c037a996379fae22fee" },
+    W2_B11: { sourceCommit: "5d282f08a5cfbc75e7804dbf461812f218e8db3d", cherryPickedCommit: "dacd2fe203fa93df61e772ce2346395b7c6e507c", stablePatchId: "0955e9b74bb113abaa47fa244eca9a8b36b00a96" },
+    W2_B12: { sourceCommit: "c07db50067776457a6eef96f0c2a38b601177031", cherryPickedCommit: "24b604ac4fc72ea49943fff752a5da5c6e5f4125", stablePatchId: "aacfdda8fe7564e6a84437c8b715317ab71b5c1e" },
+  },
+  trustBoundaryAdjudication: "W2_TRUST_BOUNDARY_ADJUDICATION_COMPLETE",
+  serializedBoundaryAdjudication: {
+    ruling: "W2_SERIALIZED_BOUNDARY_BLOCKER_FOUND",
+    generatedSchemaCount: 2,
+    internalPortSchemasGenerated: 0,
+  },
+  externalStudyProgressionAuthorityRepair: {
+    learnerReleaseBaseline: "7baf8dfbc27168708ed4cf504285a1838d7345f6",
+    repairSha: "527e1c0ddbc4cb1f7a2ba15dec79ea90f5e9e0c4",
+    classification: "STUDY_RUNTIME_TUTOR_AUTHORITY_PORT_READY_FOR_TUTOR_CROSS_LINE_R4",
+    containedInTutorCandidate: false,
+  },
+  r4Candidate: {
+    status: "generated-for-independent-w2-10r4-rereview",
     exactShaRecordedAfterCommitInSessionReturn: true,
     selfReferencedInsideChecksummedArtifacts: false,
   },
-  finalW2_10R2Required: true,
+  finalW2_10R4Required: true,
   verification: {
-    allRemoteTipsExact: true,
-    baseIsDirectParentForEveryLane: true,
-    mergeCommitsInLaneRanges: 0,
+    remoteTipsExact: true,
+    sourceParentsExact: true,
     stablePatchIdsExact: true,
-    unrepairedLaneTreesExactAndRepairSupersessionsVerified: true,
+    repairOwnershipExact: true,
     convergenceOwnershipPassed: true,
-    repairRemoteTipsExact: true,
-    repairDirectParentsAreFailedR1Candidate: true,
-    repairStablePatchIdsExact: true,
+    externalStudyAuthorityPortVerifiedAsSeparateArtifact: true,
   },
 };
 
@@ -211,6 +237,9 @@ const restrictions = {
   notificationDeliveryIncluded: false,
   providerOrVendorAdapterIncluded: false,
   durableReplayLedgerIncluded: false,
+  externalStudyAuthorityPortContained: false,
+  tutorMayCompleteStudySegment: false,
+  studyProgressionDecisionRequired: true,
   permittedUse: [
     "local deterministic tests",
     "independent final rereview",
@@ -255,11 +284,19 @@ const limitations = {
       code: "NO_LIVE_MODEL_CERTIFICATION",
       detail: "No live model or commercial web runtime certification was performed.",
     },
+    {
+      code: "WAVE3_PROVIDER_HARDENING",
+      detail: "Broad lower-level provider raw-attempt contract width remains a Wave 3 hardening requirement; accepted Wave 1 supported routes reject current learner attempts before provider execution.",
+    },
+    {
+      code: "EXTERNAL_STUDY_AUTHORITY_PORT_SEPARATE",
+      detail: "The verified learner-line Study progression authority repair is a separate integration artifact and is not contained in this Tutor candidate.",
+    },
   ],
 };
 
 const gateSummary = {
-  summaryVersion: 1,
+  summaryVersion: 4,
   finalClassification: gate.finalClassification,
   hardGateFamilyCount: gate.hardGateFamilies.length,
   hardGateFamiliesPassed: gate.hardGateFamilies.filter(({ status }) => status === "PASS").length,
@@ -280,9 +317,9 @@ const outputs = new Map<string, string>([
 ]);
 
 const manifest = {
-  manifestVersion: 1,
+  manifestVersion: 4,
   product: "Manuel Academy Study Tutor V2",
-  wave: "Wave 2 R2 Adaptive Intelligence Candidate",
+  wave: "Wave 2 R4 Post-Audit Repair Candidate",
   finalClassification: gate.finalClassification,
   wave2Complete: false,
   finalIndependentRereviewRequired: true,

@@ -6,7 +6,7 @@ import {
   InMemoryWave2ReplayLedger,
   Wave2StudyDecisionPacketSchema,
   composeWave2AdaptiveIntelligence,
-} from "../../study-engine/tutor-v2/index.js";
+} from "../../study-engine/tutor-v2/adaptive/index.js";
 import { wave2Fixture } from "./wave2-fixtures.js";
 
 async function compose(
@@ -22,17 +22,36 @@ function requirePending(result: Awaited<ReturnType<typeof compose>>) {
   return result;
 }
 
+function selectReteach(input: ReturnType<typeof wave2Fixture>): void {
+  input.intervention.assistanceHistory = [{
+    learnerScopeRef: input.studyAuthority.learnerScopeRef,
+    sessionRef: input.studyAuthority.sessionRef,
+    instructionalContextRef: input.studyAuthority.instructionalContextRef,
+    sourceInteractionRef: "interaction:wave2-reteach-selection",
+    opportunityRef: input.studyAuthority.currentOpportunityRef,
+    actionKind: "check-prerequisite",
+    outcome: "difficulty-persists",
+  }];
+  input.intervention.interventionCount = 1;
+  input.masteryEvidence.currentOpportunityAssistanceLevel = "guided";
+  const current = input.masteryEvidence.evidence.find(
+    ({ opportunityRef }) => opportunityRef === input.studyAuthority.currentOpportunityRef,
+  );
+  assert.ok(current);
+  current.assistanceLevel = "guided";
+}
+
 test("Wave 2 composition runs all admitted lanes and returns control to Study", async () => {
   const result = requirePending(await compose());
   assert.equal(result.admissions.length, 8);
   assert.ok(result.admissions.every(({ status }) => status === "admitted"));
   assert.deepEqual(result.concept.directPrerequisiteRefs, ["concept:equivalent-fractions"]);
   assert.equal(result.misconception.status, "possible-misconception");
-  assert.equal(result.hint.status, "recommended");
+  assert.equal(result.hint.status, "no-hint");
   assert.equal(result.intervention.actionKind, "check-prerequisite");
-  assert.equal(result.mastery.recommendation, "emerging-evidence");
+  assert.equal(result.mastery.recommendation, "supported-evidence");
   assert.equal(result.repair.status, "proposed");
-  assert.equal(result.reteach.status, "proposed");
+  assert.equal(result.reteach.status, "withheld");
   assert.notEqual(result.parentExplanation, null);
   assert.equal(result.studyEngineRemainsAuthority, true);
   assert.equal(result.studyMutationAllowed, false);
@@ -83,8 +102,17 @@ test("HINT_CEILING_GATE never exceeds the Study ceiling", async () => {
   input.studyAuthority.studyHintCeiling = "nudge";
   input.hintSelection.studyHintCeiling = "nudge";
   input.hintSelection.attemptCount = 9;
+  input.misconceptionMatch.evidence = [];
+  input.masteryEvidence.currentOpportunityAssistanceLevel = "light-hint";
+  const current = input.masteryEvidence.evidence.find(
+    ({ opportunityRef }) => opportunityRef === input.studyAuthority.currentOpportunityRef,
+  );
+  assert.ok(current);
+  current.assistanceLevel = "light-hint";
   const result = requirePending(await compose(input));
   assert.equal(result.hint.hintLevel, "nudge");
+  assert.equal(result.repair.status, "withheld");
+  assert.equal(result.reteach.status, "withheld");
 });
 
 test("ACTIVE_ASSESSMENT_GATE structurally withholds hints, repair, and reteach", async () => {
@@ -128,10 +156,14 @@ test("REPAIR_DEPTH_GATE caps repair depth and repeated reteach loops", async () 
   assert.ok(result.reteach.stepCount <= 4);
 
   const input = wave2Fixture();
-  input.reteachPolicy.priorReteachLoops = 2;
+  selectReteach(input);
+  input.reteachPolicy.priorReteachLoops = input.reteachPolicy.maximumRepeatedLoops;
   const capped = requirePending(await compose(input));
-  assert.equal(capped.reteach.source, "reviewed-static-fallback");
+  assert.equal(capped.reteach.status, "withheld");
+  assert.equal(capped.reteach.source, "none");
   assert.equal(capped.reteach.reasonCode, "repeated-reteach-loop-cap-reached");
+  assert.equal(capped.reteach.stepCount, 0);
+  assert.deepEqual(capped.reteach.reviewedContentRefs, []);
 });
 
 test("CROSS_CHILD_ISOLATION_GATE rejects learner reuse", async () => {
@@ -144,12 +176,32 @@ test("CROSS_CHILD_ISOLATION_GATE rejects learner reuse", async () => {
   }
 });
 
-test("PARENT_PRIVACY_GATE returns only reviewed copy and minimized provenance", async () => {
+test("PARENT_PRIVACY_GATE returns closed reviewed copy and Study-bound visibility scope", async () => {
   const result = requirePending(await compose());
   assert.notEqual(result.parentExplanation, null);
+  if (result.parentExplanation === null) throw new Error("Expected Parent Why");
+  assert.equal(
+    result.parentExplanation.explanation.title,
+    "Prerequisite review suggested",
+  );
+  assert.equal(
+    result.parentExplanation.explanation.explanation,
+    "Tutor suggested reviewing an earlier skill that may help with the current work.",
+  );
+  assert.equal(
+    "authoritativeDiagnosis" in result.parentExplanation.explanation,
+    false,
+  );
+  assert.equal(result.parentExplanation.authoritative, false);
+  assert.equal(result.parentExplanation.studyMutationAllowed, false);
+  assert.equal(
+    result.parentExplanation.visibilityAuthorization.learnerScopeRef,
+    "learner-scope:wave2-a",
+  );
+  assert.equal(result.parentExplanation.visibilityAuthorization.issuer, "study");
   const serialized = JSON.stringify(result.parentExplanation);
   for (const forbidden of [
-    "learner-scope:wave2-a", "provider", "transcript", "raw", "academic-evidence",
+    "transcript", "rawLearner", "academic-evidence", "diagnosis", "personality",
   ]) assert.equal(serialized.includes(forbidden), false, forbidden);
 });
 

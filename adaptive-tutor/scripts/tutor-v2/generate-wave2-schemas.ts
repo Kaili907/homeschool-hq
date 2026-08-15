@@ -67,7 +67,7 @@ const inventory = artifacts.map((artifact) => {
 outputs.set("SCHEMA-INVENTORY.json", serialize({
   schemaInventoryVersion: 1,
   product: "Manuel Academy Study Tutor V2",
-  wave: "Wave 2 R2 Adaptive Intelligence Candidate",
+  wave: "Wave 2 R4 Post-Audit Repair Candidate",
   compositionVersion: WAVE2_ADAPTIVE_COMPOSITION_VERSION,
   generatedSchemaCount: artifacts.length,
   internalPortSchemasGenerated: 0,
