@@ -163,6 +163,7 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'project', label: 'Friday project time' },
         ],
       }
+    case '9':
     case '10':
       return {
         weekday: [
@@ -180,6 +181,7 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'catch-up', label: 'Catch-up or elective' },
         ],
       }
+    case '11':
     case '12':
       return {
         // math block pinned first by default order

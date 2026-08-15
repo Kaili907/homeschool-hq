@@ -1,4 +1,5 @@
 import {
+  ACADEMY_GRADES,
   ACADEMY_SUBJECTS,
   type AcademyGrade,
   type AcademySubject,
@@ -25,8 +26,9 @@ interface Props {
   onPatchProfile: (id: string, update: (prev: Profile) => Profile) => void
 }
 
-/** Levels the curriculum release actually publishes content for. */
-const ACADEMY_LEVELS: AcademyGrade[] = ['5', '7', '8']
+/** Canonical curriculum-supported working levels. Delivery remains controlled
+ * independently by the per-grade host flags. */
+const ACADEMY_LEVELS: readonly AcademyGrade[] = ACADEMY_GRADES
 
 export function AcademyLevelsPanel({ profiles, onPatchProfile }: Props) {
   return (

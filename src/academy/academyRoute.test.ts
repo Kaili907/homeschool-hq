@@ -45,8 +45,32 @@ describe('CURR-1 academy routes', () => {
     ).toEqual({ kind: 'home' })
   })
 
-  it('grade-9 style ids are rejected by the id patterns', () => {
-    expect(parseAcademyPath('/academy/course/ma-g9-mathematics')).toEqual({ kind: 'home' })
+  it('accepts every curriculum-supported course grade', () => {
+    for (const grade of [3, 4, 5, 7, 8, 9, 10, 11, 12]) {
+      expect(parseAcademyPath(`/academy/course/ma-g${grade}-mathematics`)).toEqual({
+        kind: 'course',
+        courseId: `ma-g${grade}-mathematics`,
+      })
+    }
+  })
+
+  it('rejects Grade 6 and other unsupported ids', () => {
+    for (const grade of [1, 2, 6, 13]) {
+      expect(parseAcademyPath(`/academy/course/ma-g${grade}-mathematics`)).toEqual({ kind: 'home' })
+    }
+  })
+
+  it('parses two-digit course and lesson ids without truncation', () => {
+    for (const grade of [10, 11, 12]) {
+      expect(parseAcademyPath(
+        `/academy/course/ma-g${grade}-mathematics/unit/1/lesson/ma-g${grade}-mathematics-u01-l01`,
+      )).toEqual({
+        kind: 'lesson',
+        courseId: `ma-g${grade}-mathematics`,
+        unitNumber: 1,
+        lessonId: `ma-g${grade}-mathematics-u01-l01`,
+      })
+    }
   })
 
   it('isAcademyPath matches the surface root and its subpaths only', () => {

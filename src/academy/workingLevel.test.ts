@@ -6,6 +6,7 @@ import {
   enabledAcademyLevels,
   hasEnabledAcademyProgram,
   isAnyAcademyLevelEnabled,
+  resolvedWorkingAcademyGradeFor,
   setWorkingLevel,
   workingLevelFor,
 } from './workingLevel'
@@ -21,7 +22,7 @@ const at = (grade: Grade): Profile => emptyProfile('p1', 'Test', grade)
  * is exactly why gating on profile grade reached nobody. */
 const HOUSEHOLD: Grade[] = ['3', '4', '6', '10', '12']
 
-function enableAll() {
+function enableLegacyRelease() {
   vi.stubEnv('VITE_ACADEMY_GRADE_5_ENABLED', 'true')
   vi.stubEnv('VITE_ACADEMY_GRADE_7_ENABLED', 'true')
   vi.stubEnv('VITE_ACADEMY_GRADE_8_ENABLED', 'true')
@@ -31,7 +32,7 @@ describe('working level resolution', () => {
   afterEach(() => vi.unstubAllEnvs())
 
   it('an unset subject rides her nominal grade, for every grade in the model', () => {
-    for (const grade of ['3', '4', '5', '6', '7', '8', '10', '12'] as Grade[]) {
+    for (const grade of ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] as Grade[]) {
       for (const subject of ACADEMY_SUBJECTS) {
         expect(workingLevelFor(at(grade), subject)).toBe(grade)
       }
@@ -54,6 +55,47 @@ describe('working level resolution', () => {
     expect(cleared.grade).toBe('6')
     expect(cleared.workingLevels).toBeUndefined()
     expect(cleared).toEqual(base)
+  })
+
+  it('resolves only curriculum-supported grades for serving', () => {
+    expect(resolvedWorkingAcademyGradeFor(at('6'), 'mathematics')).toBeNull()
+    expect(resolvedWorkingAcademyGradeFor(at('9'), 'mathematics')).toBe('9')
+  })
+
+  it('fails visibly when a caller forces an unsupported working level', () => {
+    expect(() => setWorkingLevel(at('8'), 'mathematics', '6' as never)).toThrow(RangeError)
+  })
+
+  it('keeps working levels subject-specific without rewriting nominal Grade 8', () => {
+    vi.stubEnv('VITE_ACADEMY_GRADE_7_ENABLED', 'true')
+    vi.stubEnv('VITE_ACADEMY_GRADE_8_ENABLED', 'true')
+    vi.stubEnv('VITE_ACADEMY_GRADE_9_ENABLED', 'true')
+    const profile = setWorkingLevel(
+      setWorkingLevel(
+        setWorkingLevel(
+          setWorkingLevel(at('8'), 'mathematics', '7'),
+          'english-language-arts',
+          '8',
+        ),
+        'science',
+        '8',
+      ),
+      'ready-for-life',
+      '9',
+    )
+    expect(profile.grade).toBe('8')
+    expect(workingLevelFor(profile, 'mathematics')).toBe('7')
+    expect(workingLevelFor(profile, 'english-language-arts')).toBe('8')
+    expect(workingLevelFor(profile, 'science')).toBe('8')
+    expect(workingLevelFor(profile, 'ready-for-life')).toBe('9')
+    expect(resolvedWorkingAcademyGradeFor(profile, 'mathematics')).toBe('7')
+    expect(resolvedWorkingAcademyGradeFor(profile, 'ready-for-life')).toBe('9')
+    expect(enabledAcademyEntries(profile)).toEqual(expect.arrayContaining([
+      { subject: 'mathematics', level: '7' },
+      { subject: 'english-language-arts', level: '8' },
+      { subject: 'science', level: '8' },
+      { subject: 'ready-for-life', level: '9' },
+    ]))
   })
 })
 
@@ -96,11 +138,11 @@ describe('academy gating keys off working level', () => {
   })
 
   it('a level with no published content reaches nothing even if one is forced in', () => {
-    enableAll()
-    // Third layer, and the only one testable at runtime: the type refuses '10'
+    enableLegacyRelease()
+    // Third layer, and the only one testable at runtime: the type refuses '6'
     // and sync validation rejects it (provenance.workingLevel.test.ts), so this
     // asserts the resolver itself still refuses a value that got past both.
-    const p: Profile = { ...at('6'), workingLevels: { mathematics: '10' as never } }
+    const p: Profile = { ...at('6'), workingLevels: { mathematics: '6' as never } }
     expect(enabledAcademyEntries(p)).toEqual([])
     expect(hasEnabledAcademyProgram(p)).toBe(false)
   })
@@ -109,8 +151,8 @@ describe('academy gating keys off working level', () => {
 describe('profiles with no working level behave exactly as before', () => {
   afterEach(() => vi.unstubAllEnvs())
 
-  it('none of the five household grades reaches the academy, even with all flags on', () => {
-    enableAll()
+  it('none of the five seeded household grades reaches the legacy 5/7/8 release flags', () => {
+    enableLegacyRelease()
     for (const grade of HOUSEHOLD) {
       expect(enabledAcademyEntries(at(grade))).toEqual([])
       expect(hasEnabledAcademyProgram(at(grade))).toBe(false)
@@ -124,6 +166,11 @@ describe('profiles with no working level behave exactly as before', () => {
     expect(entries.every((e) => e.level === '7')).toBe(true)
     expect(enabledAcademyLevels(at('7'))).toEqual(['7'])
   })
+
+  it('a two-digit nominal grade resolves when its own host flag is enabled', () => {
+    vi.stubEnv('VITE_ACADEMY_GRADE_10_ENABLED', 'true')
+    expect(enabledAcademyLevels(at('10'))).toEqual(['10'])
+  })
 })
 
 describe('parent-side tab gate', () => {
@@ -131,7 +178,7 @@ describe('parent-side tab gate', () => {
 
   it('is off with no flags and on as soon as any level is enabled', () => {
     expect(isAnyAcademyLevelEnabled()).toBe(false)
-    vi.stubEnv('VITE_ACADEMY_GRADE_8_ENABLED', 'true')
+    vi.stubEnv('VITE_ACADEMY_GRADE_12_ENABLED', 'true')
     expect(isAnyAcademyLevelEnabled()).toBe(true)
   })
 })

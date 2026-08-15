@@ -97,6 +97,57 @@ describe('trusted bound curriculum content resolver', () => {
     expect(source.open).toHaveBeenCalledWith(binding)
   })
 
+  it.each([10, 11, 12])('parses Grade %s lesson context as the full two-digit grade', async (grade) => {
+    const twoDigitLessonRef = `grade-${grade}:academy-week-1-day-1`
+    const skillRef = `ma-g${grade}-mathematics-u01-l01`
+    const content = {
+      schemaVersion: 1,
+      status: 'ready',
+      lessonSummary: () => ({ lessonId: skillRef, courseId: `ma-g${grade}-mathematics`, grade }),
+      scheduleDay: vi.fn(async (actualGrade, week, day) =>
+        actualGrade === grade && week === 1 && day === 1
+          ? { lessonRef: twoDigitLessonRef, skillRefs: [skillRef] }
+          : null),
+      learnerLesson: vi.fn(async () => ({ lessonId: skillRef })),
+    }
+    const source = { isReady: () => true, open: vi.fn(async () => content) }
+    const resolver = createStudyBoundContentResolver({
+      authority: authority({
+        session: {
+          sessionRef: 'session-bound-a', lessonRef: twoDigitLessonRef,
+          subjectRef: 'math', intendedLocalDate: '2026-08-10',
+        },
+        learnerScope: { eligibleCourseRefs: [`ma-g${grade}-mathematics`] },
+      }),
+      packageSource: source,
+    })
+
+    await expect(resolver.resolve(request({
+      lessonRef: twoDigitLessonRef,
+      skillRefs: [skillRef],
+    }))).resolves.toMatchObject({ status: 'ready', lessonRef: twoDigitLessonRef })
+    expect(content.scheduleDay).toHaveBeenCalledWith(grade, 1, 1)
+    expect(content.scheduleDay).not.toHaveBeenCalledWith(1, 1, 1)
+  })
+
+  it('rejects unsupported Grade 6 context before opening content', async () => {
+    const gradeSixRef = 'grade-6:academy-week-1-day-1'
+    const source = { isReady: () => true, open: vi.fn() }
+    const resolver = createStudyBoundContentResolver({
+      authority: authority({
+        session: {
+          sessionRef: 'session-bound-a', lessonRef: gradeSixRef,
+          subjectRef: 'math', intendedLocalDate: '2026-08-10',
+        },
+      }),
+      packageSource: source,
+    })
+    await expect(resolver.resolve(request({ lessonRef: gradeSixRef }))).resolves.toMatchObject({
+      status: 'unsupported', reasonCode: 'lesson-context-unsupported',
+    })
+    expect(source.open).not.toHaveBeenCalled()
+  })
+
   it('distinguishes a missing lesson context, a missing skill, and a skill from elsewhere', async () => {
     const content = curriculumPackage()
     const source = { isReady: () => true, open: vi.fn(async () => content) }

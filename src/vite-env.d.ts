@@ -14,9 +14,15 @@ interface ImportMetaEnv {
   /** M6 sync: Supabase ANON key (public by design). The service key must NEVER be here. */
   readonly VITE_SUPABASE_ANON_KEY?: string
   /** CURR-1: per-grade Manuel Academy curriculum gates. Exact 'true' only; absent is disabled. */
+  readonly VITE_ACADEMY_GRADE_3_ENABLED?: string
+  readonly VITE_ACADEMY_GRADE_4_ENABLED?: string
   readonly VITE_ACADEMY_GRADE_5_ENABLED?: string
   readonly VITE_ACADEMY_GRADE_7_ENABLED?: string
   readonly VITE_ACADEMY_GRADE_8_ENABLED?: string
+  readonly VITE_ACADEMY_GRADE_9_ENABLED?: string
+  readonly VITE_ACADEMY_GRADE_10_ENABLED?: string
+  readonly VITE_ACADEMY_GRADE_11_ENABLED?: string
+  readonly VITE_ACADEMY_GRADE_12_ENABLED?: string
   /** MOUNT-G5-MATH: Grade 5 curriculum math practice gate. Exact 'true' only; absent is disabled. */
   readonly VITE_GRADE5_MATH_PRACTICE_ENABLED?: string
 }
