@@ -31,6 +31,8 @@ interface ImportMetaEnv {
   readonly VITE_FAMILY_PILOT_DIAGNOSTICS?: string
   /** Exact opt-in; also requires an injected non-production scorer composition. */
   readonly VITE_FAMILY_PILOT_TRUSTED_SCORER_ENABLED?: string
+  /** Exact opt-in; also requires the accepted Hosted Sync R2 adapter from an injected non-production composition. */
+  readonly VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED?: string
 }
 
 interface ImportMeta {

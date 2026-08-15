@@ -11,7 +11,9 @@ import { parseHostedSyncStateSnapshotR2 } from '../contracts'
 import {
   exportCurrentFamilyPilotHostedStateR1,
   hydrateCurrentFamilyPilotHostedStateR1,
+  projectTrustedScoringReceiptForHostedSyncR1,
 } from './convergence'
+import type { LearnerResponseRecord } from '../../../family-pilot/final-app/learner-response'
 import { FAMILY_HOSTED_SYNC_CONVERGENCE_R1 } from './policy'
 import { ParentSyncStatusR1, currentParentSyncStatusR1, parentSyncStatusLabelR1 } from './status'
 
@@ -33,6 +35,8 @@ const SYNC: HostedSyncStateMetadataR2 = Object.freeze({
 })
 const LESSON_REF = 'lesson:financial-literacy:12:budgeting'
 const ASSIGNMENT_REF = finalAssignmentRef(IDENTITY.studentRef, LESSON_REF)
+const ASSESSMENT_ASSIGNMENT_REF = 'assessment-assignment:financial-literacy:budgeting'
+const ASSESSMENT_REF = 'assessment:financial-literacy:budgeting'
 
 function localBundle(): HostedSyncLocalBundleR2 {
   const assignment = Object.freeze({
@@ -81,6 +85,20 @@ function localBundle(): HostedSyncLocalBundleR2 {
         })]),
       }),
       activeStudentRef: IDENTITY.studentRef,
+      assessmentAssignments: Object.freeze([Object.freeze({
+        assignmentRef: ASSESSMENT_ASSIGNMENT_REF,
+        assessmentRef: ASSESSMENT_REF,
+        studentRef: IDENTITY.studentRef,
+        courseRef: 'course:financial-literacy:12',
+        subject: 'financial-literacy' as const,
+        grade: 12,
+        title: 'Budgeting assessment',
+        authorityClass: 'AUTO_SCOREABLE' as const,
+        status: 'PENDING_ASSESSMENT' as const,
+        createdAt: NOW,
+        updatedAt: NOW,
+        completedAt: null,
+      })]),
       // Local access material is present to prove the converter omits it.
       studentAccessVerifiers: Object.freeze({ [IDENTITY.studentRef]: 'deadbeef' }),
       parentAccessVerifier: 'feedface',
@@ -193,6 +211,84 @@ describe('current Family Pilot + Hosted Sync R2 convergence', () => {
     expect(hydrated.local.indexedDb).toEqual(local.indexedDb)
     expect(hydrated.local.app.studentAccessVerifiers).toEqual({})
     expect(hydrated.local.app.parentAccessVerifier).toBeNull()
+  })
+
+  it('round-trips an allowlisted trusted receipt without learner response or answer authority', () => {
+    const assessedResponse: LearnerResponseRecord = Object.freeze({
+      schemaVersion: 1,
+      lessonRef: LESSON_REF,
+      studentRef: IDENTITY.studentRef,
+      assignmentRef: ASSESSMENT_ASSIGNMENT_REF,
+      attemptRef: 'attempt:budgeting:1',
+      sectionRef: 'section:budgeting:1',
+      itemRef: 'item:budgeting:1',
+      segmentRef: 'segment:budgeting:1',
+      responseType: 'TEXT',
+      evidenceMode: 'MASTERY',
+      response: Object.freeze({ kind: 'TEXT', text: 'private learner response' }),
+      status: 'ASSESSED',
+      savedAt: NOW,
+      assessment: Object.freeze({
+        assessmentRef: 'pai:receipt:budgeting:1',
+        decision: 'CORRECT',
+        assessedAt: '2026-08-14T13:01:00.000Z',
+        assessorRef: 'trusted:production-item:r1',
+      }),
+    })
+    const receipt = projectTrustedScoringReceiptForHostedSyncR1(assessedResponse, ASSESSMENT_REF)
+    const first = exportCurrentFamilyPilotHostedStateR1({
+      identity: IDENTITY,
+      sync: SYNC,
+      local: localBundle(),
+      planner: planner(true),
+      scoringReceipts: [receipt],
+    })
+    expect(first.scoringReceipts).toEqual([receipt])
+    expect(first.snapshot.assessmentStates[0]).toMatchObject({
+      status: 'SCORING_COMPLETE',
+      outcome: {
+        assessmentRecordRef: receipt.assessmentRecordRef,
+        decision: 'CORRECT',
+        assessorRef: 'trusted:production-item:r1',
+      },
+    })
+    expect(JSON.stringify(first.snapshot)).not.toMatch(/private learner response|answerKey|correctAnswer|workedSolution/i)
+
+    const deviceB = hydrateCurrentFamilyPilotHostedStateR1({
+      snapshot: first.snapshot,
+      target: emptyTarget(),
+      planner: planner(true),
+      expectedIdentity: IDENTITY,
+    })
+    expect(deviceB.scoringReceipts).toEqual([receipt])
+    const second = exportCurrentFamilyPilotHostedStateR1({
+      identity: IDENTITY,
+      sync: SYNC,
+      local: deviceB.local,
+      planner: deviceB.retainedLocalPlanner,
+      scoringReceipts: deviceB.scoringReceipts,
+    })
+    expect(second.snapshot.assessmentStates[0]?.outcome).toEqual(first.snapshot.assessmentStates[0]?.outcome)
+  })
+
+  it('rejects a scorer-shaped object that attempts to add answer authority', () => {
+    const unsafe = Object.freeze({
+      studentRef: IDENTITY.studentRef,
+      assignmentRef: ASSESSMENT_ASSIGNMENT_REF,
+      assessmentRef: ASSESSMENT_REF,
+      assessmentRecordRef: 'pai:receipt:budgeting:unsafe',
+      decision: 'CORRECT' as const,
+      assessedAt: '2026-08-14T13:01:00.000Z',
+      assessorRef: 'trusted:production-item:r1',
+      answerKey: 'forbidden',
+    })
+    expect(() => exportCurrentFamilyPilotHostedStateR1({
+      identity: IDENTITY,
+      sync: SYNC,
+      local: localBundle(),
+      planner: planner(true),
+      scoringReceipts: [unsafe],
+    })).toThrow('outside the Hosted Sync assessment allowlist')
   })
 
   it('does not duplicate a synchronized assignment when Device B has the same school plan but no local provenance row', () => {
