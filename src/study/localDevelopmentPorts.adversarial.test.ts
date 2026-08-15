@@ -42,6 +42,7 @@ describe('local-only Study ports fail closed', () => {
       status: 'active',
       updatedAt: at(1),
       lastAcceptedEventRef: null,
+      lastProgressionDecisionRef: null,
       rawAnswerIncluded: false,
       transcriptIncluded: false,
     }
@@ -69,6 +70,7 @@ describe('local-only Study ports fail closed', () => {
       status: 'completed',
       updatedAt: at(1),
       lastAcceptedEventRef: null,
+      lastProgressionDecisionRef: null,
       rawAnswerIncluded: false,
       transcriptIncluded: false,
     })).rejects.toThrow(/forged completion/i)

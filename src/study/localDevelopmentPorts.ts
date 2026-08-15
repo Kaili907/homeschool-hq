@@ -37,6 +37,7 @@ const SAFE_OPAQUE_REF = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,191}$/
 const EVENT_ALLOWED_KEYS: Readonly<Record<StudySafeEvent['type'], readonly string[]>> = {
   'session-launched': ['lessonRef', 'segmentRef'],
   'tutor-directive': ['bridgeEventVersion', 'eventLedgerIdempotencyKey'],
+  'study-progression-decision': ['decision', 'basis', 'segmentRef'],
   'checkpoint-saved': ['checkpointRef', 'revision'],
   'session-completed': ['blockRef', 'lessonRef'],
   'safety-stop': ['reasonCode', 'deliveryStatus'],
@@ -193,14 +194,37 @@ export class LocalDevelopmentStudyServices {
     if (snapshot.status === 'completed') {
       const completedBlock = [...this.#calendar.values()].find(
         (block) => block.learnerRef === snapshot.scope.learnerRef && block.state === 'completed' &&
-          this.#planByBlock.get(block.internalBlockId)?.lessonRef === snapshot.lessonRef,
+          this.#planByBlock.get(block.internalBlockId)?.lessonRef === snapshot.lessonRef &&
+          block.segments.some((segment) => segment.segmentId === snapshot.segmentRef && !!segment.completedAt),
       )
       if (!completedBlock) throw new Error('Forged completion rejected: canonical calendar work is incomplete.')
       const authority = this.#planByBlock.get(completedBlock.internalBlockId)?.masteryAuthority
+      const decisionValue = snapshot.lastProgressionDecisionRef
+        ? this.#events.get(`${sessionKey(snapshot.scope)}|${snapshot.lastProgressionDecisionRef}`)
+        : null
+      const decisionEvent = decisionValue ? JSON.parse(decisionValue) as StudySafeEvent : null
+      const expectedBasis = authority === 'completion-only' ? 'completion-only' : 'accepted-tutor-continue'
+      if (
+        decisionEvent?.type !== 'study-progression-decision' ||
+        decisionEvent.payload.decision !== 'ADVANCE' ||
+        decisionEvent.payload.basis !== expectedBasis ||
+        decisionEvent.payload.segmentRef !== snapshot.segmentRef
+      ) throw new Error('Forged completion rejected: Study progression authority evidence is required.')
       if (
         authority !== 'completion-only' &&
-        (!snapshot.lastAcceptedEventRef || !this.#events.has(`${sessionKey(snapshot.scope)}|${snapshot.lastAcceptedEventRef}`))
+        (!snapshot.lastAcceptedEventRef || (() => {
+          const value = this.#events.get(`${sessionKey(snapshot.scope)}|${snapshot.lastAcceptedEventRef}`)
+          return !value || (JSON.parse(value) as StudySafeEvent).type !== 'tutor-directive'
+        })())
       ) throw new Error('Forged completion rejected: an accepted Tutor event is required.')
+      const hasCompletionEvent = [...this.#events.entries()].some(([key, value]) => {
+        if (!key.startsWith(`${sessionKey(snapshot.scope)}|`)) return false
+        const event = JSON.parse(value) as StudySafeEvent
+        return event.type === 'session-completed' &&
+          event.payload.blockRef === completedBlock.internalBlockId &&
+          event.payload.lessonRef === snapshot.lessonRef
+      })
+      if (!hasCompletionEvent) throw new Error('Forged completion rejected: session completion evidence is required.')
     }
     this.#sessions.set(sessionKey(snapshot.scope), clone(snapshot))
   }
@@ -535,16 +559,27 @@ export class LocalDevelopmentStudyServices {
       ? `${event.type}|${String(event.payload.blockRef)}|${String(event.payload.lessonRef)}`
       : event.type === 'tutor-directive'
         ? `${event.type}|${String(event.payload.eventLedgerIdempotencyKey)}`
+        : event.type === 'study-progression-decision'
+          ? `${event.type}|${String(event.payload.segmentRef)}|${String(event.payload.basis)}`
         : `${event.type}|${event.eventRef}`
     const semanticKey = `${sessionKey(scope)}|${semanticIdentity}`
     const semanticPrevious = this.#eventSemantics.get(semanticKey)
-    if (semanticPrevious && semanticPrevious !== event.eventRef) return 'duplicate-ignored' as const
+    if (
+      semanticPrevious &&
+      (semanticPrevious !== event.eventRef || event.type === 'study-progression-decision')
+    ) return 'duplicate-ignored' as const
     const previous = this.#events.get(key)
     if (previous === serialized) return 'duplicate-ignored' as const
     if (previous) return 'idempotency-collision' as const
     this.#events.set(key, serialized)
     this.#eventSemantics.set(semanticKey, event.eventRef)
     return 'appended' as const
+  }
+
+  async readEvent(scope: StudyScope, eventRef: string): Promise<StudySafeEvent | null> {
+    this.#bindSession(scope)
+    const value = this.#events.get(`${sessionKey(scope)}|${eventRef}`)
+    return value ? clone(JSON.parse(value) as StudySafeEvent) : null
   }
 
   async propose(scope: StudyLearnerScope, proposal: StudyOutboxProposal) {
@@ -611,7 +646,10 @@ export function createLocalDevelopmentStudyPorts(
     },
     parentSettings: services,
     adultPrivate: services,
-    eventLedger: services,
+    eventLedger: {
+      read: (scope, eventRef) => services.readEvent(scope, eventRef),
+      append: (scope, event) => services.append(scope, event),
+    },
     outbox: services,
     safety: services,
   }

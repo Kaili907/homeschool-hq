@@ -2,6 +2,11 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { JarvisCore } from '../../../adaptive-tutor/study-engine/ui/JarvisCore.tsx'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study/ports'
 import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
+import {
+  applyStudyProgression,
+  recoverAuthorizedStudyCompletion,
+  type StudyTutorAdvisory,
+} from '../../study/progressionAuthority'
 import { runCurrentStudyWork, StudyLifecycleBoundary } from '../../study/production/lifecycleBoundary'
 import { STUDY_LEARNER_STOP_MESSAGE } from '../../study/safety/learnerSafe'
 import { isSessionStoppedByLocalLedger, recordLocalSessionSafetyStop } from '../../study/safety/localStopLedger'
@@ -102,6 +107,17 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         // turn and no calendar transition can happen behind the locked surface.
         if (isSessionStoppedByLocalLedger(stopKey)) return
         assertCompleteStudyPortBundle(ports)
+        if (initialEntry.state === 'completed') {
+          await runCurrentStudyWork(token, () => recoverAuthorizedStudyCompletion({
+            ports,
+            scope,
+            entry: initialEntry,
+            occurredAt: new Date().toISOString(),
+          }))
+          token.assertCurrent()
+          setEntry(initialEntry)
+          return
+        }
         runtime.launch(context, initialEntry, sessionRef)
         let next = initialEntry
         const now = new Date().toISOString()
@@ -115,13 +131,19 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           type: 'session-launched',
           payload: { lessonRef: next.lessonRef, segmentRef: segment.segmentRef },
         }))
+        const previous = await runCurrentStudyWork(token, () => ports.persistence.loadSession(scope))
         await runCurrentStudyWork(token, () => ports.persistence.saveSession({
           scope,
           lessonRef: next.lessonRef,
           segmentRef: segment.segmentRef,
           status: 'active',
           updatedAt: now,
-          lastAcceptedEventRef: null,
+          lastAcceptedEventRef: previous?.segmentRef === segment.segmentRef
+            ? previous.lastAcceptedEventRef
+            : null,
+          lastProgressionDecisionRef: previous?.segmentRef === segment.segmentRef
+            ? previous.lastProgressionDecisionRef
+            : null,
           rawAnswerIncluded: false,
           transcriptIncluded: false,
         }))
@@ -174,6 +196,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         status: 'paused',
         updatedAt: at,
         lastAcceptedEventRef: null,
+        lastProgressionDecisionRef: null,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
       }))
@@ -206,7 +229,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     setAnswer('')
     try {
       const at = new Date().toISOString()
-      let acceptedEventRef: string | null = null
+      let tutorAdvisory: StudyTutorAdvisory | null = null
       if (entry.masteryAuthority === 'tutor-core') {
         const result = await runCurrentStudyWork(token, () => runtime.submit({
           context,
@@ -218,6 +241,17 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           expectedAnswer: 'ready',
           occurredAt: at,
           isCurrentBinding: () => token.isCurrent() && isCurrentBinding(),
+        }))
+        tutorAdvisory = result
+        const progression = await runCurrentStudyWork(token, () => applyStudyProgression({
+          ports: ports as StudyPortBundle,
+          scope,
+          entry,
+          segmentRef: currentSegment.segmentRef,
+          tutorAdvisory,
+          bindingIsCurrent: token.isCurrent() && isCurrentBinding(),
+          safetyStopped: isSessionStoppedByLocalLedger(stopKey),
+          occurredAt: at,
         }))
         if (result.status === 'stopped') {
           // Durable first, before anything that can fail. The lock and the
@@ -259,42 +293,33 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           return
         }
         if (result.status === 'quarantined') throw new Error('quarantined')
-        acceptedEventRef = result.eventRef
         setCheckingTutorSafety(false)
         setJarvisText(result.presentation.visibleText)
         setApprovedTranscript((items) => [...items, result.presentation.visibleText])
+        if (progression.decision.decision === 'HOLD') {
+          token.assertCurrent()
+          setEntry(progression.entry)
+          return
+        }
+        token.assertCurrent()
+        setEntry(progression.entry)
       } else {
         setJarvisText('Activity completion recorded. No mastery decision was made.')
-      }
-      const next = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).calendar.completeCurrentSegment(
-        learnerScope,
-        entry.blockRef,
-        currentSegment.segmentRef,
-        new Date().toISOString(),
-      ))
-      const status = next.state === 'completed' ? 'completed' : 'active'
-      if (status === 'completed') {
-        await runCurrentStudyWork(token, () => (ports as StudyPortBundle).eventLedger.append(scope, {
-          eventRef: `completion:${sessionRef}:${entry.lessonRef}`,
-          occurredAt: new Date().toISOString(),
-          type: 'session-completed',
-          payload: { blockRef: entry.blockRef, lessonRef: entry.lessonRef },
+        const progression = await runCurrentStudyWork(token, () => applyStudyProgression({
+          ports: ports as StudyPortBundle,
+          scope,
+          entry,
+          segmentRef: currentSegment.segmentRef,
+          tutorAdvisory,
+          bindingIsCurrent: token.isCurrent() && isCurrentBinding(),
+          safetyStopped: isSessionStoppedByLocalLedger(stopKey),
+          occurredAt: at,
         }))
+        token.assertCurrent()
+        setEntry(progression.entry)
       }
-      await runCurrentStudyWork(token, () => (ports as StudyPortBundle).persistence.saveSession({
-        scope,
-        lessonRef: entry.lessonRef,
-        segmentRef: currentSegment.segmentRef,
-        status,
-        updatedAt: new Date().toISOString(),
-        lastAcceptedEventRef: acceptedEventRef,
-        rawAnswerIncluded: false,
-        transcriptIncluded: false,
-      }))
-      token.assertCurrent()
-      setEntry(next)
     } catch {
-      if (token.isCurrent()) setError('The Tutor result could not be accepted. No completion was recorded.')
+      if (token.isCurrent()) setError('Study progression could not be authorized. No completion was recorded.')
     } finally {
       if (token.isCurrent()) {
         setCheckingTutorSafety(false)
@@ -349,7 +374,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
             <button type="button" className="mt-4 rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white" disabled={busy || stopped} onClick={resume}>Return to exact step</button>
           </section>
         ) : entry.state === 'completed' ? (
-          <section className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-6"><h2 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">Study block complete</h2><p>No host mastery decision was invented. Tutor Core remains the instructional authority.</p><button type="button" className="mt-4 rounded-lg border bg-white px-4 py-2" onClick={onBack}>Back to plan</button></section>
+          <section className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-6"><h2 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">Study block complete</h2><p>Study authorized this progression. Tutor feedback remained advisory.</p><button type="button" className="mt-4 rounded-lg border bg-white px-4 py-2" onClick={onBack}>Back to plan</button></section>
         ) : currentSegment ? (
           <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_20rem]">
             <section id="current-study-task" className="rounded-2xl border border-slate-200 bg-white p-6">
