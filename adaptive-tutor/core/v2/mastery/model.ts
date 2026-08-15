@@ -106,8 +106,9 @@ interface RecommendationFactors {
   readonly evidence: readonly StudyMasteryEvidenceItem[];
   readonly demonstratedCount: number;
   readonly notDemonstratedCount: number;
-  readonly independentDemonstratedCount: number;
   readonly currentConclusiveCount: number;
+  readonly currentDemonstratedCount: number;
+  readonly currentNotDemonstratedCount: number;
   readonly currentIndependentDemonstratedCount: number;
   readonly currentSpacedIndependentDemonstratedCount: number;
   readonly conflictingReplayCount: number;
@@ -115,11 +116,14 @@ interface RecommendationFactors {
 
 function recommend(factors: RecommendationFactors): MasteryEvidenceRecommendation {
   if (factors.conflictingReplayCount > 0) return "conflicting-evidence";
-  if (factors.demonstratedCount > 0 && factors.notDemonstratedCount > 0) {
+  if (
+    factors.currentDemonstratedCount > 0 &&
+    factors.currentNotDemonstratedCount > 0
+  ) {
     return "conflicting-evidence";
   }
   if (factors.currentConclusiveCount === 0) return "insufficient-evidence";
-  if (factors.demonstratedCount === 0) return "insufficient-evidence";
+  if (factors.currentDemonstratedCount === 0) return "insufficient-evidence";
 
   if (
     factors.currentIndependentDemonstratedCount >= 2 &&
@@ -149,8 +153,23 @@ function reasonCodes(
   }
   if (duplicateReplayCount > 0) reasons.push("replay-deduplicated");
   if (factors.conflictingReplayCount > 0) reasons.push("conflicting-replay");
-  if (factors.demonstratedCount > 0 && factors.notDemonstratedCount > 0) {
+  if (
+    factors.currentDemonstratedCount > 0 &&
+    factors.currentNotDemonstratedCount > 0
+  ) {
     reasons.push("contradiction-detected");
+  }
+  const staleDemonstratedCount = factors.evidence.filter(
+    (item) => item.recency === "stale" && item.outcome === "demonstrated",
+  ).length;
+  const staleNotDemonstratedCount = factors.evidence.filter(
+    (item) => item.recency === "stale" && item.outcome === "not-demonstrated",
+  ).length;
+  if (
+    (factors.currentDemonstratedCount > 0 && staleNotDemonstratedCount > 0) ||
+    (factors.currentNotDemonstratedCount > 0 && staleDemonstratedCount > 0)
+  ) {
+    reasons.push("stale-contradiction-observed");
   }
   if (
     factors.currentConclusiveCount === 0 &&
@@ -158,23 +177,27 @@ function reasonCodes(
   ) {
     reasons.push("stale-evidence-only");
   }
-  if (factors.demonstratedCount === 0 && factors.notDemonstratedCount > 0) {
+  if (
+    factors.currentDemonstratedCount === 0 &&
+    factors.currentNotDemonstratedCount > 0
+  ) {
     reasons.push("failure-evidence-only");
   }
+  const currentDemonstrated = factors.evidence.filter(
+    (item) => item.recency === "current" && item.outcome === "demonstrated",
+  );
   if (
-    factors.demonstratedCount > 0 &&
-    factors.evidence
-      .filter((item) => item.outcome === "demonstrated")
-      .every((item) => item.assistanceLevel === "reteach-required")
+    currentDemonstrated.length > 0 &&
+    currentDemonstrated.every(
+      (item) => item.assistanceLevel === "reteach-required",
+    )
   ) {
     reasons.push("reteach-required-only");
   }
   if (
-    factors.demonstratedCount > 0 &&
-    factors.independentDemonstratedCount === 0 &&
-    factors.evidence
-      .filter((item) => item.outcome === "demonstrated")
-      .every((item) => item.assistanceLevel === "guided")
+    currentDemonstrated.length > 0 &&
+    factors.currentIndependentDemonstratedCount === 0 &&
+    currentDemonstrated.every((item) => item.assistanceLevel === "guided")
   ) {
     reasons.push("guided-evidence-only");
   }
@@ -217,6 +240,12 @@ function summarize(
   const currentConclusiveCount = evidence.filter(
     (item) => item.recency === "current" && item.outcome !== "inconclusive",
   ).length;
+  const currentDemonstratedCount = demonstrated.filter(
+    (item) => item.recency === "current",
+  ).length;
+  const currentNotDemonstratedCount = evidence.filter(
+    (item) => item.recency === "current" && item.outcome === "not-demonstrated",
+  ).length;
   const currentIndependentDemonstratedCount = demonstrated.filter(
     (item) => item.recency === "current" && item.assistanceLevel === "independent",
   ).length;
@@ -230,8 +259,9 @@ function summarize(
     evidence,
     demonstratedCount: demonstrated.length,
     notDemonstratedCount,
-    independentDemonstratedCount,
     currentConclusiveCount,
+    currentDemonstratedCount,
+    currentNotDemonstratedCount,
     currentIndependentDemonstratedCount,
     currentSpacedIndependentDemonstratedCount,
     conflictingReplayCount: replay.conflictingReplayCount,
@@ -270,9 +300,7 @@ export function evaluateMasteryEvidence(input: unknown): MasteryEvidenceEvaluati
   const validation = validateExact(StudyMasteryEvidenceInputSchema, input);
   if (validation.status === "rejected") return rejected(["invalid-study-evidence"]);
 
-  // The exact runtime schema requires the W2-B3 binding fields even though its
-  // temporary static composition projection remains optional until W2-09R2.
-  const value = validation.value as StudyMasteryEvidenceInput;
+  const value = validation.value;
   const reasonCodes: string[] = [];
   if (value.evidence.some((item) => item.learnerScopeRef !== value.learnerScopeRef)) {
     reasonCodes.push("cross-learner-evidence");
@@ -297,6 +325,20 @@ export function evaluateMasteryEvidence(input: unknown): MasteryEvidenceEvaluati
     )
   ) {
     reasonCodes.push("current-opportunity-context-conflict");
+  }
+  const otherCurrentSessionEvidence = value.evidence.filter(
+    (item) =>
+      item.opportunityRef !== value.currentOpportunityRef &&
+      item.sessionRef === value.currentSessionRef &&
+      item.recency === "current",
+  );
+  if (
+    otherCurrentSessionEvidence.some(
+      (item) =>
+        item.instructionalContextRef !== value.currentInstructionalContextRef,
+    )
+  ) {
+    reasonCodes.push("current-session-context-conflict");
   }
   if (
     currentOpportunityEvidence.some(

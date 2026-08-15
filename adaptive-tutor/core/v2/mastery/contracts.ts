@@ -1,4 +1,4 @@
-import { Type, type Static, type TSchema } from "../../schema/typebox.js";
+import { Type, type Static } from "../../schema/typebox.js";
 import {
   AssistanceLevelSchema,
   ISODateTimeSchema,
@@ -23,7 +23,7 @@ export const StudyOutcomeCodeSchema = Type.Union([
 ]);
 export type StudyOutcomeCode = Static<typeof StudyOutcomeCodeSchema>;
 
-const StudyMasteryEvidenceItemRuntimeSchema = Type.Object(
+export const StudyMasteryEvidenceItemSchema = Type.Object(
   {
     evidenceRef: OpaqueReferenceSchema,
     issuer: Type.Literal("study"),
@@ -41,32 +41,10 @@ const StudyMasteryEvidenceItemRuntimeSchema = Type.Object(
   { additionalProperties: false, $id: "TutorV2StudyMasteryEvidenceItem" },
 );
 export type StudyMasteryEvidenceItem = Static<
-  typeof StudyMasteryEvidenceItemRuntimeSchema
+  typeof StudyMasteryEvidenceItemSchema
 >;
 
-type CompositionCompatibleStudyMasteryEvidenceItem = Omit<
-  StudyMasteryEvidenceItem,
-  "sessionRef" | "instructionalContextRef" | "opportunityRef"
-> &
-  Partial<
-    Pick<
-      StudyMasteryEvidenceItem,
-      "sessionRef" | "instructionalContextRef" | "opportunityRef"
-    >
-  >;
-
-/**
- * Runtime-required provenance with a temporary optional static projection.
- * W2-09R2 must populate these fields in the adaptive composition before the
- * compatibility projection can be removed. Exact runtime validation already
- * rejects every item that omits them.
- */
-export const StudyMasteryEvidenceItemSchema =
-  StudyMasteryEvidenceItemRuntimeSchema as TSchema<
-    CompositionCompatibleStudyMasteryEvidenceItem
-  >;
-
-const StudyMasteryEvidenceInputRuntimeSchema = Type.Object(
+export const StudyMasteryEvidenceInputSchema = Type.Object(
   {
     envelope: Type.Literal("study-issued-mastery-evidence"),
     learnerScopeRef: OpaqueReferenceSchema,
@@ -76,42 +54,13 @@ const StudyMasteryEvidenceInputRuntimeSchema = Type.Object(
     currentOpportunityRef: OpaqueReferenceSchema,
     currentOpportunityAssistanceLevel: AssistanceLevelSchema,
     evaluatedAt: ISODateTimeSchema,
-    evidence: Type.Array(StudyMasteryEvidenceItemRuntimeSchema, { maxItems: 100 }),
+    evidence: Type.Array(StudyMasteryEvidenceItemSchema, { maxItems: 100 }),
   },
   { additionalProperties: false, $id: "TutorV2StudyMasteryEvidenceInput" },
 );
 export type StudyMasteryEvidenceInput = Static<
-  typeof StudyMasteryEvidenceInputRuntimeSchema
+  typeof StudyMasteryEvidenceInputSchema
 >;
-
-type CompositionCompatibleStudyMasteryEvidenceInput = Omit<
-  StudyMasteryEvidenceInput,
-  | "currentSessionRef"
-  | "currentInstructionalContextRef"
-  | "currentOpportunityRef"
-  | "currentOpportunityAssistanceLevel"
-  | "evidence"
-> &
-  Partial<
-    Pick<
-      StudyMasteryEvidenceInput,
-      | "currentSessionRef"
-      | "currentInstructionalContextRef"
-      | "currentOpportunityRef"
-      | "currentOpportunityAssistanceLevel"
-    >
-  > & {
-    evidence: CompositionCompatibleStudyMasteryEvidenceItem[];
-  };
-
-/**
- * The runtime schema is deliberately stricter than this temporary static
- * composition projection. See StudyMasteryEvidenceItemSchema above.
- */
-export const StudyMasteryEvidenceInputSchema =
-  StudyMasteryEvidenceInputRuntimeSchema as TSchema<
-    CompositionCompatibleStudyMasteryEvidenceInput
-  >;
 
 export const MasteryAssistanceProfileSchema = Type.Object(
   {

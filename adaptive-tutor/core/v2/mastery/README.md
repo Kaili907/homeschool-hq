@@ -19,9 +19,17 @@ official mastery, progress, grade, and working-level decisions.
 - `emerging-evidence`: current demonstrated evidence that is limited to one
   independent sample or assisted performance.
 - `supported-evidence`: at least two current independent demonstrations, with
-  at least one of those Study-marked as spaced, and no contradictory result.
-- `conflicting-evidence`: demonstrated and not-demonstrated outcomes coexist,
-  or one evidence reference is replayed with conflicting metadata.
+  at least one of those Study-marked as spaced, and no contradictory current
+  result.
+- `conflicting-evidence`: current demonstrated and current not-demonstrated
+  outcomes coexist, or one evidence reference is replayed with conflicting
+  metadata.
+
+Recommendation contradictions are computed only from conclusive evidence that
+Study marks `current`. Stale evidence remains in the bounded counts and can add
+`stale-contradiction-observed`, but it cannot override sufficient current
+independent evidence. A stale demonstration likewise cannot mask a current
+failure-only recommendation.
 
 ## Opportunity and assistance binding
 
@@ -38,6 +46,15 @@ trusted actual level. A less-assisted claim rejects the evaluation with
 `assistance-binding-conflict`; it is never silently counted at the claimed
 level.
 
+For every other opportunity, an item with both the current `sessionRef` and
+`recency: "current"` must use Study's current `instructionalContextRef`; a
+mismatch rejects with `current-session-context-conflict`. An item from a prior
+session may retain that session's older instructional context, including when
+Study still classifies the evidence as current. A same-session item marked
+stale may also retain its older context because it does not claim current
+relevance. These conditions are based only on exact reference equality and are
+independent of learner/concept equality.
+
 Historical evidence may come from older sessions and instructional contexts.
 It remains usable when the current opportunity is assisted, provided it stays
 within the input learner and concept scope and uses a distinct opportunity.
@@ -49,13 +66,11 @@ single attempt cannot inflate sample counts. Cross-learner, cross-concept,
 current-opportunity cross-session/context, future-dated, and schema-invalid
 batches fail closed without producing scoped counts.
 
-## Temporary integration boundary
+## Type/runtime parity
 
-The exact runtime schemas already require all new provenance and current
-binding fields. Their TypeScript projection remains temporarily optional only
-for the existing Wave 2 composition boundary, which this repair does not own.
-Until W2-09R2 supplies the Study hint/history binding, the unchanged R1
-composition request fails exact runtime validation rather than evaluating
-unbound mastery evidence.
-
-`EXPECTED_R2_CONVERGENCE_ASSISTANCE_BINDING_UPDATE_REQUIRED`
+The runtime schemas and their TypeScript projections require the same Study
+provenance. Inputs require `currentSessionRef`,
+`currentInstructionalContextRef`, `currentOpportunityRef`, and
+`currentOpportunityAssistanceLevel`; every evidence item requires `sessionRef`,
+`instructionalContextRef`, and `opportunityRef`. There is no optional
+composition projection for these fields.
