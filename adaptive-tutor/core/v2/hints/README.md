@@ -33,9 +33,13 @@ with the current Study request. A mismatch produces no completed-review hint,
 while malformed, legacy, provider-shaped, or incomplete permissions reject the
 request as `INVALID_HINT_STATE`.
 
-`currentReviewEventRef` and `currentReviewPolicyRevisionRef` are nullable for
-instruction, practice, active assessment, and non-graded review. A completed
-assessment review requires both current Study references. Ordinary instruction,
-practice, and non-graded review do not require completed-review permission.
-Active graded or mastery assessment remains structurally blocked even when an
-otherwise exact completed-review permission is present.
+`currentReviewEventRef`, `currentReviewPolicyRevisionRef`, and
+`currentReviewPrivacyApprovalRef` are nullable for instruction, practice,
+active assessment, and non-graded review. A completed assessment review
+requires the current Study event and policy references, while its permission's
+nullable `privacyApprovalRef` must exactly equal the distinct current Study
+privacy binding. Null matches only null; opaque references are never normalized
+or compared by prefix. Ordinary instruction, practice, and non-graded review do
+not require completed-review permission. Active graded or mastery assessment
+remains structurally blocked even when an otherwise exact completed-review
+permission is present.

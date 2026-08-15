@@ -113,6 +113,10 @@ export const HintSelectionRequestSchema = Type.Object(
       OpaqueReferenceSchema,
       Type.Null(),
     ]),
+    currentReviewPrivacyApprovalRef: Type.Union([
+      OpaqueReferenceSchema,
+      Type.Null(),
+    ]),
     assessmentPhase: AssessmentPhaseSchema,
     studyHintCeiling: HintLevelSchema,
     previousAssistanceLevel: AssistanceLevelSchema,
