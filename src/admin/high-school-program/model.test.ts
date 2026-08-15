@@ -9,9 +9,11 @@ import {
 } from './contracts'
 import {
   deriveHighSchoolProgramView,
+  divergentReconciliations,
   isCoverageStatus,
   isHighSchoolGrade,
   knownGapSummaries,
+  reconciliationVerdictCounts,
   totalCreditsByGrade,
   totalHighSchoolCredits,
 } from './model'
@@ -258,6 +260,186 @@ describe('deriveHighSchoolProgramView — graduation ruling', () => {
     const unverifiedView = deriveHighSchoolProgramView(unverifiedSnap)
     expect(unverifiedView.graduation.overallStatus).toBe('unverified')
     expect(unverifiedView.graduationCompletionClaimable).toBe(false)
+  })
+})
+
+describe('deriveHighSchoolProgramView — source evidence catalog', () => {
+  const view = deriveHighSchoolProgramView(SNAP)
+
+  it('catalogs all eleven expected sources (1 release + 4 science lineage + 6 subject bundles)', () => {
+    expect(view.sources).toHaveLength(11)
+    const keys = view.sources.map((s) => s.source.key).sort()
+    expect(keys).toEqual([
+      'ela-r1',
+      'health-pe-r1',
+      'math-r1',
+      'release',
+      'rfl-finlit-r1',
+      'science-h2',
+      'science-h3',
+      'science-h4',
+      'science-r1',
+      'social-studies-r1',
+      'tech-arts-r1',
+    ])
+  })
+
+  it('records exactly one RELEASE_PLANNING_CONTRACT source (release-r1)', () => {
+    const planning = view.sources.filter((s) => s.source.role === 'RELEASE_PLANNING_CONTRACT')
+    expect(planning).toHaveLength(1)
+    expect(planning[0].source.ref).toBe('origin/mac/hs912-release-r1')
+    expect(planning[0].displayStatus).toBe('COVERED')
+  })
+
+  it('records 6 AUTHORED_SUBJECT_EVIDENCE bundles (math, ela, science-h4, social-studies, health-pe, rfl-finlit, tech-arts)', () => {
+    const authored = view.sources.filter((s) => s.source.role === 'AUTHORED_SUBJECT_EVIDENCE')
+    expect(authored.map((a) => a.source.key).sort()).toEqual([
+      'ela-r1', 'health-pe-r1', 'math-r1', 'rfl-finlit-r1', 'science-h4',
+      'social-studies-r1', 'tech-arts-r1',
+    ])
+  })
+
+  it('marks science-r1, h2, and h3 as SUPERSEDED with supersededBy=science-h4', () => {
+    const superseded = view.sources.filter((s) => s.source.role === 'SUPERSEDED_SUBJECT_EVIDENCE')
+    expect(superseded.map((s) => s.source.key).sort()).toEqual(['science-h2', 'science-h3', 'science-r1'])
+    for (const s of superseded) expect(s.source.supersededBy).toBe('science-h4')
+  })
+
+  it('carries a short git SHA on every source', () => {
+    for (const s of view.sources) {
+      expect(s.source.sha).toMatch(/^[0-9a-f]{7,12}$/)
+    }
+  })
+
+  it('projects every non-superseded family as authored (all 10 subject families have subject evidence)', () => {
+    for (const fam of view.familySourceCoverage) {
+      expect(fam.status).toBe('authored')
+      expect(fam.authorityRefs.length).toBeGreaterThan(0)
+    }
+  })
+})
+
+describe('deriveHighSchoolProgramView — reconciliation', () => {
+  const view = deriveHighSchoolProgramView(SNAP)
+
+  it('reconciles all 40 HS courses (10 subjects × 4 grades)', () => {
+    expect(view.reconciliations).toHaveLength(40)
+  })
+
+  it('every reconciliation names a contract course and a subject ref @ sha', () => {
+    for (const r of view.reconciliations) {
+      expect(r.courseId).toMatch(/^ma-g(?:9|1[0-2])-/)
+      expect(r.subjectRef).not.toBeNull()
+      expect(r.subjectSha).toMatch(/^[0-9a-f]{7,12}$/)
+    }
+  })
+
+  it('math and ELA courses diverge on title (sessions match)', () => {
+    for (const r of view.reconciliations.filter((r) => r.subject === 'mathematics' || r.subject === 'english-language-arts')) {
+      expect(r.sessionsMatch).toBe(true)
+      expect(r.titleMatch).toBe(false)
+      expect(r.idMatch).toBe(true)
+      expect(r.verdict).toBe('DIVERGES_TITLE')
+    }
+  })
+
+  it('science courses diverge on id scheme (ma-hs9-biology, etc.)', () => {
+    for (const r of view.reconciliations.filter((r) => r.subject === 'science')) {
+      expect(r.idMatch).toBe(false)
+      expect(r.verdict).toBe('DIVERGES_ID_SCHEME')
+      expect(r.subjectCourseId).toMatch(/^ma-hs(?:9|1[0-2])-/)
+      expect(r.subjectSessions).toBe(108)
+      expect(r.contractSessions).toBe(180)
+    }
+  })
+
+  it('social studies diverges on title and sessions (180 → 108) for every grade', () => {
+    for (const r of view.reconciliations.filter((r) => r.subject === 'social-studies')) {
+      expect(r.titleMatch).toBe(false)
+      expect(r.sessionsMatch).toBe(false)
+      expect(r.verdict).toBe('DIVERGES_TITLE_AND_SESSIONS')
+    }
+  })
+
+  it('health/PE Grade 9 diverges on sessions (90 → 36 / 90 → 108); Grades 10-12 match on sessions but diverge on titles', () => {
+    const health9 = view.reconciliations.find((r) => r.courseId === 'ma-g9-health')!
+    expect(health9.contractSessions).toBe(90)
+    expect(health9.subjectSessions).toBe(36)
+    expect(health9.sessionsMatch).toBe(false)
+    const pe9 = view.reconciliations.find((r) => r.courseId === 'ma-g9-physical-education')!
+    expect(pe9.contractSessions).toBe(90)
+    expect(pe9.subjectSessions).toBe(108)
+    expect(pe9.sessionsMatch).toBe(false)
+    for (const grade of [10, 11, 12] as const) {
+      const health = view.reconciliations.find((r) => r.courseId === `ma-g${grade}-health`)!
+      const pe = view.reconciliations.find((r) => r.courseId === `ma-g${grade}-physical-education`)!
+      expect(health.sessionsMatch).toBe(true)
+      expect(pe.sessionsMatch).toBe(true)
+    }
+  })
+
+  it('technology diverges on title and sessions in all four grades', () => {
+    for (const r of view.reconciliations.filter((r) => r.subject === 'technology')) {
+      expect(r.titleMatch).toBe(false)
+      expect(r.sessionsMatch).toBe(false)
+      expect(r.verdict).toBe('DIVERGES_TITLE_AND_SESSIONS')
+    }
+  })
+
+  it('financial literacy Grade 9 diverges on sessions (90 → 72); 10-12 sessions match', () => {
+    const fl9 = view.reconciliations.find((r) => r.courseId === 'ma-g9-financial-literacy')!
+    expect(fl9.sessionsMatch).toBe(false)
+    expect(fl9.contractSessions).toBe(90)
+    expect(fl9.subjectSessions).toBe(72)
+    for (const grade of [10, 11, 12] as const) {
+      const fl = view.reconciliations.find((r) => r.courseId === `ma-g${grade}-financial-literacy`)!
+      expect(fl.sessionsMatch).toBe(true)
+    }
+  })
+
+  it('counts divergent reconciliations honestly — none of the 40 currently MATCHES_CONTRACT', () => {
+    // Every HS course in the current evidence diverges from the release matrix on at least one dimension.
+    const counts = reconciliationVerdictCounts(view)
+    expect(counts.MATCHES_CONTRACT).toBe(0)
+    expect(divergentReconciliations(view).length).toBe(view.reconciliations.length)
+  })
+})
+
+describe('deriveHighSchoolProgramView — delivery / integration', () => {
+  const view = deriveHighSchoolProgramView(SNAP)
+
+  it('carries at least one delivery fact and every fact has a source ref + path', () => {
+    expect(view.delivery.length).toBeGreaterThan(0)
+    for (const d of view.delivery) {
+      expect(d.evidenceRef).toBeTruthy()
+      expect(d.evidencePath).toBeTruthy()
+    }
+  })
+
+  it('reports NOT_COVERED when no delivery fact is served in the active release', () => {
+    expect(view.deliveryStatus.servedInReleaseCount).toBe(0)
+    expect(view.deliveryStatus.displayStatus).toBe('NOT_COVERED')
+  })
+
+  it('reports COVERED when every fact is served', () => {
+    const snap = {
+      ...SNAP,
+      delivery: SNAP.delivery.map((d) => ({ ...d, servedInRelease: true })),
+    }
+    const v = deriveHighSchoolProgramView(snap)
+    expect(v.deliveryStatus.displayStatus).toBe('COVERED')
+  })
+
+  it('reports PARTIAL when some facts are served and some are not', () => {
+    const snap = {
+      ...SNAP,
+      delivery: [
+        { ...SNAP.delivery[0], servedInRelease: true },
+        ...SNAP.delivery.slice(1),
+      ],
+    }
+    const v = deriveHighSchoolProgramView(snap)
+    expect(v.deliveryStatus.displayStatus).toBe('PARTIAL')
   })
 })
 

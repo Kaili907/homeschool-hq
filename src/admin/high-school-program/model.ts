@@ -18,18 +18,23 @@ import {
   COVERAGE_STATUS,
   HIGH_SCHOOL_GRADES,
   HIGH_SCHOOL_SUBJECTS,
+  type CourseReconciliation,
   type CoverageGap,
   type CoverageStatus,
+  type DeliveryFact,
+  type EvidenceCoverage,
   type GraduationRuling,
   type GraduationVerdict,
   type HighSchoolCourse,
   type HighSchoolGrade,
   type HighSchoolProgramSnapshot,
   type HighSchoolSubject,
+  type ReconciliationVerdict,
   type SeamFact,
   type SeamContinuityVerdict,
   type StandardsFact,
   type StandardsVerification,
+  type SubjectEvidenceSource,
 } from './contracts'
 
 export interface PrerequisiteView {
@@ -113,6 +118,35 @@ export interface GraduationRulingView extends GraduationRuling {
   readonly reason: string
 }
 
+export interface SourceCoverageRow {
+  readonly source: SubjectEvidenceSource
+  readonly displayStatus: CoverageStatus
+}
+
+export interface FamilySourceCoverage {
+  readonly subject: HighSchoolSubject
+  /**
+   * `authored`     — at least one non-superseded AUTHORED_SUBJECT_EVIDENCE
+   *                  source covers this family.
+   * `unauthored`   — the release contract has the family but no subject
+   *                  source has authored evidence for it. Currently none.
+   */
+  readonly status: 'authored' | 'unauthored'
+  readonly authorityRefs: readonly string[]
+}
+
+export interface DeliveryStatusView {
+  readonly totalFacts: number
+  readonly servedInReleaseCount: number
+  /**
+   * `covered`  — every recorded fact says the programme IS served.
+   * `partial`  — some facts say served, some do not.
+   * `not_covered` — every recorded fact says the programme is NOT served.
+   */
+  readonly displayStatus: CoverageStatus
+  readonly reason: string
+}
+
 export interface HighSchoolProgramView {
   readonly snapshot: HighSchoolProgramSnapshot
   readonly progressionByGrade: readonly GradeProgressionRow[]
@@ -128,6 +162,11 @@ export interface HighSchoolProgramView {
    * hard invariant checked in tests; see rule 1 above.
    */
   readonly graduationCompletionClaimable: boolean
+  readonly sources: readonly SourceCoverageRow[]
+  readonly familySourceCoverage: readonly FamilySourceCoverage[]
+  readonly reconciliations: readonly CourseReconciliation[]
+  readonly delivery: readonly DeliveryFact[]
+  readonly deliveryStatus: DeliveryStatusView
 }
 
 const HIGH_SCHOOL_GRADE_SET: ReadonlySet<HighSchoolGrade> = new Set(HIGH_SCHOOL_GRADES)
@@ -219,6 +258,24 @@ export function deriveHighSchoolProgramView(snapshot: HighSchoolProgramSnapshot)
 
   const graduation = derivegraduationRuling(snapshot.graduationRuling, snapshot.gaps)
 
+  const sources: SourceCoverageRow[] = snapshot.sources.map((s) => ({
+    source: s,
+    displayStatus: evidenceCoverageToDisplay(s.coverage),
+  }))
+
+  const familySourceCoverage: FamilySourceCoverage[] = HIGH_SCHOOL_SUBJECTS.map((subject) => {
+    const authorities = snapshot.sources.filter((s) => (
+      s.role === 'AUTHORED_SUBJECT_EVIDENCE' && s.familiesCovered.includes(subject)
+    ))
+    return {
+      subject,
+      status: authorities.length > 0 ? 'authored' : 'unauthored',
+      authorityRefs: authorities.map((a) => a.ref),
+    }
+  })
+
+  const deliveryStatus = deriveDeliveryStatus(snapshot.delivery)
+
   return {
     snapshot,
     progressionByGrade,
@@ -230,7 +287,35 @@ export function deriveHighSchoolProgramView(snapshot: HighSchoolProgramSnapshot)
     coverageGaps,
     graduation,
     graduationCompletionClaimable: graduation.overallStatus === 'graduation_complete',
+    sources,
+    familySourceCoverage,
+    reconciliations: snapshot.reconciliations,
+    delivery: snapshot.delivery,
+    deliveryStatus,
   }
+}
+
+function evidenceCoverageToDisplay(coverage: EvidenceCoverage): CoverageStatus {
+  switch (coverage) {
+    case 'COVERED': return 'COVERED'
+    case 'PARTIAL': return 'PARTIAL'
+    case 'NOT_COVERED': return 'NOT_COVERED'
+    case 'UNVERIFIED': return 'UNVERIFIED'
+  }
+}
+
+function deriveDeliveryStatus(facts: readonly DeliveryFact[]): DeliveryStatusView {
+  if (facts.length === 0) {
+    return { totalFacts: 0, servedInReleaseCount: 0, displayStatus: 'UNVERIFIED', reason: 'No delivery facts recorded.' }
+  }
+  const served = facts.filter((f) => f.servedInRelease).length
+  const displayStatus: CoverageStatus = served === facts.length ? 'COVERED' : served === 0 ? 'NOT_COVERED' : 'PARTIAL'
+  const reason = served === facts.length
+    ? 'Every recorded delivery fact reports the programme as served in the active release.'
+    : served === 0
+      ? 'No recorded delivery fact reports the programme as served in the active release.'
+      : `${served} of ${facts.length} recorded delivery facts report the programme as served in the active release.`
+  return { totalFacts: facts.length, servedInReleaseCount: served, displayStatus, reason }
 }
 
 function derivegraduationRuling(source: GraduationRuling, gaps: readonly CoverageGap[]): GraduationRulingView {
@@ -291,4 +376,24 @@ export function knownGapSummaries(view: HighSchoolProgramView): readonly {
     displayStatus: g.displayStatus,
     owner: g.owner,
   }))
+}
+
+/** Convenience: reconciliations that diverge from the contract, for header badges. */
+export function divergentReconciliations(view: HighSchoolProgramView): readonly CourseReconciliation[] {
+  return view.reconciliations.filter((r) => r.verdict !== 'MATCHES_CONTRACT' && r.verdict !== 'NO_SUBJECT_EVIDENCE')
+}
+
+/** Convenience: count reconciliations by verdict. */
+export function reconciliationVerdictCounts(view: HighSchoolProgramView): Readonly<Record<ReconciliationVerdict, number>> {
+  const counts: Record<ReconciliationVerdict, number> = {
+    MATCHES_CONTRACT: 0,
+    DIVERGES_TITLE: 0,
+    DIVERGES_SESSIONS: 0,
+    DIVERGES_TITLE_AND_SESSIONS: 0,
+    DIVERGES_ID_SCHEME: 0,
+    DIVERGES_MULTIPLE: 0,
+    NO_SUBJECT_EVIDENCE: 0,
+  }
+  for (const r of view.reconciliations) counts[r.verdict] += 1
+  return counts
 }

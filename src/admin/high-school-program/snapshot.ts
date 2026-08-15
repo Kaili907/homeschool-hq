@@ -20,14 +20,18 @@
 import {
   HIGH_SCHOOL_PROGRAM_CONTRACT_ID,
   HIGH_SCHOOL_PROGRAM_SOURCE_REF,
+  type CourseReconciliation,
   type CoverageGap,
   type CoverageStatus,
+  type DeliveryFact,
   type HighSchoolCourse,
   type HighSchoolGrade,
   type HighSchoolProgramSnapshot,
   type RawCoverageVerdict,
+  type ReconciliationVerdict,
   type SeamFact,
   type StandardsFact,
+  type SubjectEvidenceSource,
 } from './contracts'
 
 const MATRIX_DOC = 'curriculum-authoring/full-family-highschool-9-12/release/course-matrix.json'
@@ -147,9 +151,299 @@ const GRADUATION = {
   sourceDoc: CONTRACT_DOC,
 } as const
 
+/**
+ * Source-evidence catalog. SHAs are the short git SHAs observed on
+ * `origin/mac/hs912-*` at the moment this snapshot was authored
+ * (2026-08-15). They exist so the admin surface can name specific commits;
+ * verify by re-inspecting the ref before acting on any specific field value.
+ */
+const SOURCE_RELEASE_SHA = '5150dfe484ca'
+
+const SOURCES: readonly SubjectEvidenceSource[] = [
+  {
+    key: 'release',
+    ref: 'origin/mac/hs912-release-r1',
+    sha: SOURCE_RELEASE_SHA,
+    headSubject: 'release: assemble final high-school release contract',
+    role: 'RELEASE_PLANNING_CONTRACT',
+    familiesCovered: [
+      'mathematics', 'english-language-arts', 'science', 'social-studies',
+      'health', 'physical-education', 'ready-for-life', 'technology',
+      'arts-and-music', 'financial-literacy',
+    ],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/release/'],
+    validationSummary: 'Contract-mode validator passes with 0 blocking findings. Assembly-mode blocks with ASSEMBLY_INCOMPLETE — no subject session has returned into this branch.',
+    coverage: 'COVERED',
+    note: 'Authoritative programme/planning contract: course sequence, recommended sessions and credits, prerequisite chain, seam rulings, coverage audit, and honest gap declarations. No subject content is authored in release/.',
+    supersededBy: null,
+  },
+  {
+    key: 'math-r1',
+    ref: 'origin/mac/hs912-math-r1',
+    sha: '2b716171035c',
+    headSubject: 'feat(curriculum): add Michigan-aligned HS mathematics grades 9-12',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['mathematics'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/mathematics/'],
+    validationSummary: '19/19 checks PASS (validation-report.md dated 2026-08-12). 4 courses / 40 units / 720 lessons / 40 assessments authored.',
+    coverage: 'COVERED',
+    note: 'Course titles diverge from the release matrix (Algebra and Functions I vs Algebra I, etc.); sessions match at 180/course.',
+    supersededBy: null,
+  },
+  {
+    key: 'ela-r1',
+    ref: 'origin/mac/hs912-ela-r1',
+    sha: '42f2505bb04d',
+    headSubject: 'fix(hs-ela): implement the unit arc, raise the assessed bar, assign the texts',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['english-language-arts'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/english-language-arts/'],
+    validationSummary: '303/303 checks PASS (validation/validation.json dated 2026-08-12). 4 courses / 40 units / 720 lessons / 40 assessments authored, 84 standards in corpus.',
+    coverage: 'COVERED',
+    note: 'Course titles diverge from the release matrix by phrasing; sessions match at 180/course.',
+    supersededBy: null,
+  },
+  {
+    key: 'science-r1',
+    ref: 'origin/mac/hs912-science-r1',
+    sha: 'f58f7f1eec0a',
+    headSubject: 'feat(curriculum): author high school science 9-12 sequence',
+    role: 'SUPERSEDED_SUBJECT_EVIDENCE',
+    familiesCovered: ['science'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/science/'],
+    validationSummary: 'Initial revision; superseded by the h2/h3/h4 fix chain. Use h4 for current authored evidence.',
+    coverage: 'UNVERIFIED',
+    note: 'Retained for lineage. Do not treat as current.',
+    supersededBy: 'science-h4',
+  },
+  {
+    key: 'science-h2',
+    ref: 'origin/mac/hs912-science-h2',
+    sha: '265ea3a75740',
+    headSubject: 'fix(curriculum): correct HS science 9-12 safety and standards defects',
+    role: 'SUPERSEDED_SUBJECT_EVIDENCE',
+    familiesCovered: ['science'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/science/'],
+    validationSummary: 'Superseded by h3 and h4.',
+    coverage: 'UNVERIFIED',
+    note: 'Retained for lineage.',
+    supersededBy: 'science-h4',
+  },
+  {
+    key: 'science-h3',
+    ref: 'origin/mac/hs912-science-h3',
+    sha: 'e7551b959112',
+    headSubject: 'fix(curriculum): close HS science H3 learner-use safety findings',
+    role: 'SUPERSEDED_SUBJECT_EVIDENCE',
+    familiesCovered: ['science'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/science/'],
+    validationSummary: 'Superseded by h4.',
+    coverage: 'UNVERIFIED',
+    note: 'Retained for lineage.',
+    supersededBy: 'science-h4',
+  },
+  {
+    key: 'science-h4',
+    ref: 'origin/mac/hs912-science-h4',
+    sha: 'a86780a315b5',
+    headSubject: 'fix(curriculum): close HS science H4 source-consistency findings',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['science'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/science/'],
+    validationSummary: '63/63 checks PASS (authoring-set/manifest.json + validation/validation-report.json). 4 courses / 36 units / 432 lessons / 36 assessments authored.',
+    coverage: 'PARTIAL',
+    note: 'Latest science evidence. Uses a DIFFERENT id scheme (ma-hs9-biology) from the release matrix (ma-g9-science) and delivers 108 days/course (release matrix records 180 for science 9-12). Reconciliation with the release contract is a downstream integration decision.',
+    supersededBy: null,
+  },
+  {
+    key: 'social-studies-r1',
+    ref: 'origin/mac/hs912-social-studies-r1',
+    sha: 'fa4410d70e8e',
+    headSubject: 'feat(social-studies): add Michigan-aligned high school 9-12 social studies',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['social-studies'],
+    authoringRootPaths: ['curriculum-authoring/full-family-highschool-9-12/subjects/social-studies/'],
+    validationSummary: '27/27 checks PASS (validation/validation.json). 4 courses / 36 units / 432 lessons / 36 assessments; MANIFEST.json + SHA256SUMS.txt present.',
+    coverage: 'PARTIAL',
+    note: 'Course titles diverge from the release matrix; sessions delivered at 108/course (release matrix records 180). Reconciliation with contract is a downstream integration decision.',
+    supersededBy: null,
+  },
+  {
+    key: 'health-pe-r1',
+    ref: 'origin/mac/hs912-health-pe-r1',
+    sha: 'e39e2b343c41',
+    headSubject: 'feat(curriculum): add Grades 9-12 Health and Physical Education',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['health', 'physical-education'],
+    authoringRootPaths: [
+      'curriculum-authoring/full-family-highschool-9-12/subjects/health/',
+      'curriculum-authoring/full-family-highschool-9-12/subjects/physical-education/',
+    ],
+    validationSummary: 'Executable validators (tools/validate-course.mjs) and node --test suites present for both families; no committed pass-count report json.',
+    coverage: 'PARTIAL',
+    note: 'Health delivered at 36 sessions/course (release matrix records 90 for Grade 9 and 36 for 10-12). PE delivered at 108 sessions/course (release matrix records 90 for Grade 9 and 108 for 10-12). Grade 9 diverges in both families; 10-12 match.',
+    supersededBy: null,
+  },
+  {
+    key: 'rfl-finlit-r1',
+    ref: 'origin/mac/hs912-rfl-finlit-r1',
+    sha: '481296a9e794',
+    headSubject: 'feat(curriculum): add High School Ready for Life and Financial Literacy 9-12',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['ready-for-life', 'financial-literacy'],
+    authoringRootPaths: [
+      'curriculum-authoring/full-family-highschool-9-12/subjects/ready-for-life/',
+      'curriculum-authoring/full-family-highschool-9-12/subjects/financial-literacy/',
+    ],
+    validationSummary: 'Financial Literacy 159/159 checks PASS; Ready for Life 142/142 checks PASS (each subject validation/validation.json).',
+    coverage: 'PARTIAL',
+    note: 'Ready for Life delivered at 36 sessions/course (release matrix matches). Financial Literacy Grade 9 delivered at 72 sessions (release matrix records 90); Grade 10-12 match at 72.',
+    supersededBy: null,
+  },
+  {
+    key: 'tech-arts-r1',
+    ref: 'origin/mac/hs912-tech-arts-r1',
+    sha: '627b41c0e794',
+    headSubject: 'feat(hs912): add Grades 9-12 Technology/CS and Arts/Music course packages',
+    role: 'AUTHORED_SUBJECT_EVIDENCE',
+    familiesCovered: ['technology', 'arts-and-music'],
+    authoringRootPaths: [
+      'curriculum-authoring/full-family-highschool-9-12/subjects/technology-computer-science/',
+      'curriculum-authoring/full-family-highschool-9-12/subjects/arts-music/',
+    ],
+    validationSummary: 'Executable validators (subjects/*/validate.mjs) present for both families; no committed pass-count report json.',
+    coverage: 'PARTIAL',
+    note: 'Technology titles and session counts diverge from the release matrix (subject: Grade 9 "Computer Science Foundations and Human-Centered Design" 36 sess; release: "Computer Science Principles and Digital Citizenship" 90 sess). Arts titles diverge; sessions match at 72/course. Subject README explicitly states the packages are authored content only and NOT wired into the served curriculum.',
+    supersededBy: null,
+  },
+]
+
+/**
+ * Per-course reconciliation between the release contract and the subject
+ * branch. Non-null `subjectSessions`/`subjectTitle` are the value observed on
+ * the named `subjectRef`+`subjectSha`. Grade-8 anchors are NOT reconciled
+ * here (they are the frozen published release, not part of this wave).
+ */
+const RECONCILIATIONS: readonly CourseReconciliation[] = ([
+  // mathematics — titles diverge, sessions match
+  { courseId: 'ma-g9-mathematics', subjectSourceKey: 'math-r1', subjectCourseId: 'ma-g9-mathematics', subjectTitle: 'Algebra and Functions I', subjectSessions: 180 },
+  { courseId: 'ma-g10-mathematics', subjectSourceKey: 'math-r1', subjectCourseId: 'ma-g10-mathematics', subjectTitle: 'Geometry: Congruence, Similarity, and Measurement', subjectSessions: 180 },
+  { courseId: 'ma-g11-mathematics', subjectSourceKey: 'math-r1', subjectCourseId: 'ma-g11-mathematics', subjectTitle: 'Advanced Algebra, Functions, and Statistics', subjectSessions: 180 },
+  { courseId: 'ma-g12-mathematics', subjectSourceKey: 'math-r1', subjectCourseId: 'ma-g12-mathematics', subjectTitle: 'Precalculus and Decision Mathematics', subjectSessions: 180 },
+  // english-language-arts — subject subtly re-titles; sessions match
+  { courseId: 'ma-g9-english-language-arts', subjectSourceKey: 'ela-r1', subjectCourseId: 'ma-g9-english-language-arts', subjectTitle: 'English 9: Foundations of Analysis, Argument, and Academic Writing', subjectSessions: 180 },
+  { courseId: 'ma-g10-english-language-arts', subjectSourceKey: 'ela-r1', subjectCourseId: 'ma-g10-english-language-arts', subjectTitle: 'English 10: Independent Analysis, Rhetoric, and Sustained Research', subjectSessions: 180 },
+  { courseId: 'ma-g11-english-language-arts', subjectSourceKey: 'ela-r1', subjectCourseId: 'ma-g11-english-language-arts', subjectTitle: 'English 11: American Literature, Public Argument, and Complex Synthesis', subjectSessions: 180 },
+  { courseId: 'ma-g12-english-language-arts', subjectSourceKey: 'ela-r1', subjectCourseId: 'ma-g12-english-language-arts', subjectTitle: 'English 12: Postsecondary Reading, Research, and Rhetoric', subjectSessions: 180 },
+  // science — id scheme mismatch AND session mismatch
+  { courseId: 'ma-g9-science', subjectSourceKey: 'science-h4', subjectCourseId: 'ma-hs9-biology', subjectTitle: 'Biology', subjectSessions: 108 },
+  { courseId: 'ma-g10-science', subjectSourceKey: 'science-h4', subjectCourseId: 'ma-hs10-chemistry', subjectTitle: 'Chemistry', subjectSessions: 108 },
+  { courseId: 'ma-g11-science', subjectSourceKey: 'science-h4', subjectCourseId: 'ma-hs11-physics', subjectTitle: 'Physics', subjectSessions: 108 },
+  { courseId: 'ma-g12-science', subjectSourceKey: 'science-h4', subjectCourseId: 'ma-hs12-earth-space-environmental', subjectTitle: 'Earth, Space, and Environmental Systems', subjectSessions: 108 },
+  // social-studies — 180 → 108 sessions per course; titles re-phrased
+  { courseId: 'ma-g9-social-studies', subjectSourceKey: 'social-studies-r1', subjectCourseId: 'ma-g9-social-studies', subjectTitle: 'Grade 9 Social Studies: United States History and Geography', subjectSessions: 108 },
+  { courseId: 'ma-g10-social-studies', subjectSourceKey: 'social-studies-r1', subjectCourseId: 'ma-g10-social-studies', subjectTitle: 'Grade 10 Social Studies: World History and Geography', subjectSessions: 108 },
+  { courseId: 'ma-g11-social-studies', subjectSourceKey: 'social-studies-r1', subjectCourseId: 'ma-g11-social-studies', subjectTitle: 'Grade 11 Social Studies: Civics and Economics', subjectSessions: 108 },
+  { courseId: 'ma-g12-social-studies', subjectSourceKey: 'social-studies-r1', subjectCourseId: 'ma-g12-social-studies', subjectTitle: 'Grade 12 Social Studies: Advanced Civic Inquiry, Research, and Policy Analysis', subjectSessions: 108 },
+  // health — Grade 9 diverges (90 → 36 sess); titles diverge everywhere
+  { courseId: 'ma-g9-health', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g9-health', subjectTitle: 'Grade 9 Health', subjectSessions: 36 },
+  { courseId: 'ma-g10-health', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g10-health', subjectTitle: 'Grade 10 Health', subjectSessions: 36 },
+  { courseId: 'ma-g11-health', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g11-health', subjectTitle: 'Grade 11 Health', subjectSessions: 36 },
+  { courseId: 'ma-g12-health', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g12-health', subjectTitle: 'Grade 12 Health', subjectSessions: 36 },
+  // physical-education — Grade 9 diverges (90 → 108 sess); titles diverge everywhere
+  { courseId: 'ma-g9-physical-education', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g9-physical-education', subjectTitle: 'Grade 9 Physical Education', subjectSessions: 108 },
+  { courseId: 'ma-g10-physical-education', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g10-physical-education', subjectTitle: 'Grade 10 Physical Education', subjectSessions: 108 },
+  { courseId: 'ma-g11-physical-education', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g11-physical-education', subjectTitle: 'Grade 11 Physical Education', subjectSessions: 108 },
+  { courseId: 'ma-g12-physical-education', subjectSourceKey: 'health-pe-r1', subjectCourseId: 'ma-g12-physical-education', subjectTitle: 'Grade 12 Physical Education', subjectSessions: 108 },
+  // ready-for-life — sessions match; titles subtly differ
+  { courseId: 'ma-g9-ready-for-life', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g9-ready-for-life', subjectTitle: 'Manuel Academy — Ready for Life, Grade 9', subjectSessions: 36 },
+  { courseId: 'ma-g10-ready-for-life', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g10-ready-for-life', subjectTitle: 'Manuel Academy — Ready for Life, Grade 10', subjectSessions: 36 },
+  { courseId: 'ma-g11-ready-for-life', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g11-ready-for-life', subjectTitle: 'Manuel Academy — Ready for Life, Grade 11', subjectSessions: 36 },
+  { courseId: 'ma-g12-ready-for-life', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g12-ready-for-life', subjectTitle: 'Manuel Academy — Ready for Life, Grade 12', subjectSessions: 36 },
+  // technology — titles and sessions diverge everywhere
+  { courseId: 'ma-g9-technology', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g9-technology', subjectTitle: 'Computer Science Foundations and Human-Centered Design', subjectSessions: 36 },
+  { courseId: 'ma-g10-technology', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g10-technology', subjectTitle: 'Data, Algorithms, and Secure Systems', subjectSessions: 36 },
+  { courseId: 'ma-g11-technology', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g11-technology', subjectTitle: 'Software Engineering, Web Systems, and Applied Data Science', subjectSessions: 36 },
+  { courseId: 'ma-g12-technology', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g12-technology', subjectTitle: 'Advanced Computing, Ethics, and Capstone', subjectSessions: 48 },
+  // arts-and-music — titles diverge; sessions match
+  { courseId: 'ma-g9-arts-and-music', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g9-arts-and-music', subjectTitle: 'Studio Direction, Music Literacy, and Critical Practice', subjectSessions: 72 },
+  { courseId: 'ma-g10-arts-and-music', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g10-arts-and-music', subjectTitle: 'Technique, Composition, and Media Production', subjectSessions: 72 },
+  { courseId: 'ma-g11-arts-and-music', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g11-arts-and-music', subjectTitle: 'Concentration, Craft, and Critical Response', subjectSessions: 72 },
+  { courseId: 'ma-g12-arts-and-music', subjectSourceKey: 'tech-arts-r1', subjectCourseId: 'ma-g12-arts-and-music', subjectTitle: 'Capstone Portfolio and Professional Practice', subjectSessions: 72 },
+  // financial-literacy — Grade 9 diverges (90 → 72 sess); titles differ
+  { courseId: 'ma-g9-financial-literacy', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g9-financial-literacy', subjectTitle: 'Manuel Academy — Financial Literacy, Grade 9', subjectSessions: 72 },
+  { courseId: 'ma-g10-financial-literacy', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g10-financial-literacy', subjectTitle: 'Manuel Academy — Financial Literacy, Grade 10', subjectSessions: 72 },
+  { courseId: 'ma-g11-financial-literacy', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g11-financial-literacy', subjectTitle: 'Manuel Academy — Financial Literacy, Grade 11', subjectSessions: 72 },
+  { courseId: 'ma-g12-financial-literacy', subjectSourceKey: 'rfl-finlit-r1', subjectCourseId: 'ma-g12-financial-literacy', subjectTitle: 'Manuel Academy — Financial Literacy, Grade 12', subjectSessions: 72 },
+] as const).map((row): CourseReconciliation => {
+  const contract = COURSES.find((c) => c.courseId === row.courseId)
+  if (!contract) throw new Error(`reconciliation refers to unknown course ${row.courseId}`)
+  const source = SOURCES.find((s) => s.key === row.subjectSourceKey)
+  if (!source) throw new Error(`reconciliation refers to unknown source ${row.subjectSourceKey}`)
+  const titleMatch = row.subjectTitle === contract.courseName
+  const sessionsMatch = row.subjectSessions === contract.sessions
+  const idMatch = row.subjectCourseId === row.courseId
+  let verdict: ReconciliationVerdict
+  if (titleMatch && sessionsMatch && idMatch) verdict = 'MATCHES_CONTRACT'
+  else if (!idMatch && !titleMatch && !sessionsMatch) verdict = 'DIVERGES_MULTIPLE'
+  else if (!idMatch) verdict = 'DIVERGES_ID_SCHEME'
+  else if (!titleMatch && !sessionsMatch) verdict = 'DIVERGES_TITLE_AND_SESSIONS'
+  else if (!titleMatch) verdict = 'DIVERGES_TITLE'
+  else verdict = 'DIVERGES_SESSIONS'
+  const note = idMatch
+    ? (titleMatch && sessionsMatch)
+      ? 'Subject branch aligns with the contract on id, title, and sessions.'
+      : `${titleMatch ? '' : 'Title'}${!titleMatch && !sessionsMatch ? ' and ' : ''}${sessionsMatch ? '' : 'sessions'} differ.`
+    : `Subject branch uses id scheme "${row.subjectCourseId}" instead of the contracted "${row.courseId}".`
+  return {
+    courseId: row.courseId,
+    grade: contract.grade,
+    subject: contract.subject,
+    contractTitle: contract.courseName,
+    contractSessions: contract.sessions,
+    contractCreditRecommendation: contract.creditRecommendation,
+    subjectRef: source.ref,
+    subjectSha: source.sha,
+    subjectCourseId: row.subjectCourseId,
+    subjectTitle: row.subjectTitle,
+    subjectSessions: row.subjectSessions,
+    subjectSourceDoc: source.authoringRootPaths[0] ?? null,
+    titleMatch,
+    sessionsMatch,
+    idMatch,
+    verdict,
+    note,
+  }
+})
+
+const DELIVERY: readonly DeliveryFact[] = [
+  {
+    fact: 'The runtime does not yet serve Grades 9-12.',
+    servedInRelease: false,
+    evidenceRef: HIGH_SCHOOL_PROGRAM_SOURCE_REF,
+    evidencePath: 'curriculum-authoring/full-family-highschool-9-12/release/authoring-boundaries.md',
+    note: 'The release contract lists roughly a dozen shared files that hard-code the grade set 5|7|8 (AcademyGrade in src/types.ts, identifier regexes in src/academy/ and src/admin/curriculum-validation/, the published lesson schema grade enum, and EXPECTED counts in scripts/build-curriculum.mjs). Extending them is required follow-on work for the integration owner and no session in this wave performs it.',
+  },
+  {
+    fact: 'Subject-authored packages are NOT wired into the served curriculum.',
+    servedInRelease: false,
+    evidenceRef: 'origin/mac/hs912-tech-arts-r1',
+    evidencePath: 'curriculum-authoring/full-family-highschool-9-12/subjects/technology-computer-science/README.md',
+    note: 'The tech/arts README states the packages are authored content only and that node scripts/build-curriculum.mjs still reports the unchanged 30 courses / 232 units / 2736 lessons because it scans curriculum-content/ only. The same disclaimer is repeated by the RFL/finlit and other subject READMEs.',
+  },
+  {
+    fact: 'Grades 9-12 have no active production release entry.',
+    servedInRelease: false,
+    evidenceRef: 'curriculum-content/manuel-academy/production-release-registry.json',
+    evidencePath: 'curriculum-content/manuel-academy/production-release-registry.json',
+    note: 'The registry activates 1.0.0, which is pinned to grades 5/7/8. A high-school release must be a new version rather than a mutation of 1.0.0; this contract does not perform that action.',
+  },
+]
+
 export const HIGH_SCHOOL_PROGRAM_SNAPSHOT: HighSchoolProgramSnapshot = Object.freeze({
   contractId: HIGH_SCHOOL_PROGRAM_CONTRACT_ID,
   sourceRef: HIGH_SCHOOL_PROGRAM_SOURCE_REF,
+  sourceSha: SOURCE_RELEASE_SHA,
   contractStatus: 'HIGH_SCHOOL_RELEASE_CONTRACT_READY',
   authoredOn: '2026-08-12',
   gradeSpan: [8, 9, 10, 11, 12] satisfies readonly HighSchoolGrade[],
@@ -158,4 +452,7 @@ export const HIGH_SCHOOL_PROGRAM_SNAPSHOT: HighSchoolProgramSnapshot = Object.fr
   standards: STANDARDS,
   gaps: GAPS,
   graduationRuling: GRADUATION,
+  sources: SOURCES,
+  reconciliations: RECONCILIATIONS,
+  delivery: DELIVERY,
 })

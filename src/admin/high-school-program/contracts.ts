@@ -147,10 +147,110 @@ export interface GraduationRuling {
   readonly sourceDoc: string
 }
 
+/**
+ * Role a read-only source plays in the programme evidence catalog.
+ *
+ * `RELEASE_PLANNING_CONTRACT` — the contracted PROGRAM matrix (course names,
+ *   recommended sessions/credits, prerequisite chain, coverage rulings). This
+ *   is a PLANNING document, not proof of served or built content.
+ * `AUTHORED_SUBJECT_EVIDENCE` — a subject branch that carries actual authored
+ *   units/lessons/assessments and validation reports. May diverge from the
+ *   contract; those divergences are recorded explicitly.
+ * `SUPERSEDED_SUBJECT_EVIDENCE` — an earlier science revision (r1, h2, h3)
+ *   that a later `hN` fix chain has replaced. Retained for lineage.
+ */
+export const EVIDENCE_ROLES = [
+  'RELEASE_PLANNING_CONTRACT',
+  'AUTHORED_SUBJECT_EVIDENCE',
+  'SUPERSEDED_SUBJECT_EVIDENCE',
+] as const
+export type EvidenceRole = (typeof EVIDENCE_ROLES)[number]
+
+/** Coverage projection for a source-evidence entry. */
+export const EVIDENCE_COVERAGE = ['COVERED', 'PARTIAL', 'NOT_COVERED', 'UNVERIFIED'] as const
+export type EvidenceCoverage = (typeof EVIDENCE_COVERAGE)[number]
+
+/** Verdict for the reconciliation of one course between contract and subject branch. */
+export const RECONCILIATION_VERDICTS = [
+  'MATCHES_CONTRACT',
+  'DIVERGES_TITLE',
+  'DIVERGES_SESSIONS',
+  'DIVERGES_TITLE_AND_SESSIONS',
+  'DIVERGES_ID_SCHEME',
+  'DIVERGES_MULTIPLE',
+  'NO_SUBJECT_EVIDENCE',
+] as const
+export type ReconciliationVerdict = (typeof RECONCILIATION_VERDICTS)[number]
+
+/**
+ * A single source in the evidence catalog. `sha` is the SHORT git SHA
+ * observed at the moment this snapshot was authored; verify by re-inspecting
+ * the ref before acting on any specific field value.
+ */
+export interface SubjectEvidenceSource {
+  readonly key: string
+  readonly ref: string
+  readonly sha: string
+  readonly headSubject: string
+  readonly role: EvidenceRole
+  readonly familiesCovered: readonly HighSchoolSubject[]
+  readonly authoringRootPaths: readonly string[]
+  readonly validationSummary: string
+  readonly coverage: EvidenceCoverage
+  readonly note: string
+  readonly supersededBy: string | null
+}
+
+/**
+ * Per-course reconciliation between the contract matrix and the subject
+ * branch that authored the course.
+ *
+ * `sessionsMatch`/`titleMatch`/`idMatch` compare the SUBJECT-BRANCH observed
+ * value against the RELEASE-MATRIX contracted value. When the subject branch
+ * did not author the course at all, `subjectSessions` and `subjectTitle` are
+ * `null` and `verdict` is `NO_SUBJECT_EVIDENCE`.
+ */
+export interface CourseReconciliation {
+  readonly courseId: string
+  readonly grade: HighSchoolGrade
+  readonly subject: HighSchoolSubject
+  readonly contractTitle: string
+  readonly contractSessions: number
+  readonly contractCreditRecommendation: number | null
+  readonly subjectRef: string | null
+  readonly subjectSha: string | null
+  readonly subjectCourseId: string | null
+  readonly subjectTitle: string | null
+  readonly subjectSessions: number | null
+  readonly subjectSourceDoc: string | null
+  readonly titleMatch: boolean
+  readonly sessionsMatch: boolean
+  readonly idMatch: boolean
+  readonly verdict: ReconciliationVerdict
+  readonly note: string
+}
+
+/**
+ * A delivery/integration fact — whether authored content is actually served
+ * by the runtime today. The release contract explicitly documents that
+ * Grades 9-12 cannot be served without shared-file changes this wave does not
+ * perform, so the default fact is `served: false` and the evidence is the
+ * released authoring-boundaries note plus the subject branches' own README
+ * disclaimers.
+ */
+export interface DeliveryFact {
+  readonly fact: string
+  readonly servedInRelease: boolean
+  readonly evidenceRef: string
+  readonly evidencePath: string
+  readonly note: string
+}
+
 /** The complete data-source contract this module is built on. */
 export interface HighSchoolProgramSnapshot {
   readonly contractId: typeof HIGH_SCHOOL_PROGRAM_CONTRACT_ID
   readonly sourceRef: typeof HIGH_SCHOOL_PROGRAM_SOURCE_REF
+  readonly sourceSha: string
   readonly contractStatus: string
   readonly authoredOn: string
   readonly gradeSpan: readonly HighSchoolGrade[]
@@ -159,4 +259,7 @@ export interface HighSchoolProgramSnapshot {
   readonly standards: readonly StandardsFact[]
   readonly gaps: readonly CoverageGap[]
   readonly graduationRuling: GraduationRuling
+  readonly sources: readonly SubjectEvidenceSource[]
+  readonly reconciliations: readonly CourseReconciliation[]
+  readonly delivery: readonly DeliveryFact[]
 }
