@@ -23,6 +23,7 @@ function readyEnv() {
     HOSTED_SYNC_DATABASE_URL: secret,
     HOSTED_SYNC_TARGET_PROJECT_REF: stagingRef,
     VITE_FAMILY_PILOT_ENABLED: 'false',
+    VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED: 'false',
     VITE_STUDY_ENGINE_ENABLED: 'false',
     ACADEMY_STUDY_ENABLED: 'false',
   }
@@ -40,6 +41,10 @@ test('environment inventory reports presence and disabled state without values',
 
 test('feature gates must exist and equal the exact string false', () => {
   assert.equal(inspectEnvironment({ ...readyEnv(), ACADEMY_STUDY_ENABLED: 'true' }).valid, false)
+  assert.equal(inspectEnvironment({
+    ...readyEnv(),
+    VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED: 'true',
+  }).valid, false)
   const missing = readyEnv()
   delete missing.VITE_FAMILY_PILOT_ENABLED
   assert.equal(inspectEnvironment(missing).valid, false)

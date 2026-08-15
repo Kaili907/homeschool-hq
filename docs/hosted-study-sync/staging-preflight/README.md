@@ -72,6 +72,7 @@ issue, or chat:
 | `HOSTED_SYNC_DATABASE_URL` | present | Secret; presence only is reported |
 | `HOSTED_SYNC_TARGET_PROJECT_REF` | exact same ref as `--target-project-ref` | Non-secret identity guard |
 | `VITE_FAMILY_PILOT_ENABLED` | exact `false` | Family remains disabled |
+| `VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED` | exact `false` | Family Cloud transport remains disabled |
 | `VITE_STUDY_ENGINE_ENABLED` | exact `false` | Browser Study remains disabled |
 | `ACADEMY_STUDY_ENABLED` | exact `false` | Server Study/workers remain disabled |
 

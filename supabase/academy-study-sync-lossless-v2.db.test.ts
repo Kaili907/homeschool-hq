@@ -25,6 +25,7 @@ const files = [
   './migrations/20260813173000_academy_study_sync_lossless_checkpoint_r1.sql',
   './migrations/20260814120000_academy_family_cross_device_data_r1.sql',
   './migrations/20260814120000_academy_family_response_checkpoint_r1.sql',
+  './migrations/20260815120000_academy_family_plan_checkpoint_r1.sql',
 ] as const
 
 const sources = Promise.all(files.map((filename) =>
@@ -422,6 +423,70 @@ function learnerResponseCheckpoint(
   }
 }
 
+function familyPlanCheckpoint(
+  operationId: string,
+  revision = 0,
+  baseRevision = revision,
+  plannerRevision = 3 + revision,
+) {
+  return {
+    contract: 'family-pilot.family-plan-checkpoint.r1',
+    contractVersion: 1,
+    identity: {
+      householdRef: localScope.householdRef,
+      studentRef: localScope.studentRef,
+      learnerRef: localScope.studentRef,
+    },
+    sync: {
+      baseRevision,
+      revision,
+      operationId,
+      savedAt: `2026-08-01T15:${String(revision).padStart(2, '0')}:00.000Z`,
+    },
+    planner: {
+      schemaVersion: 1,
+      scope: {
+        householdRef: localScope.householdRef,
+        learnerRef: localScope.studentRef,
+      },
+      revision: plannerRevision,
+      updatedAt: `2026-08-01T15:${String(revision).padStart(2, '0')}:00.000Z`,
+      schoolPlan: {
+        schemaVersion: 1,
+        householdTimeZone: 'America/Detroit',
+        schoolYearStart: '2026-08-01',
+        schoolYearEnd: '2027-05-31',
+        schoolWeekdays: [1, 2, 3, 4, 5],
+        nonSchoolDates: ['2026-09-07'],
+        addedSchoolDates: ['2026-08-15'],
+        subjects: [{
+          subject: 'mathematics',
+          order: 0,
+          paused: false,
+          courseRef: 'ma-g5-mathematics',
+          lessonsPerDay: 1,
+          startLocalTime: '09:00',
+        }],
+        configuredAt: '2026-08-01T13:00:00.000Z',
+        updatedAt: `2026-08-01T15:${String(revision).padStart(2, '0')}:00.000Z`,
+      },
+      materializations: [{
+        materializationRef: 'auto:2026-08-01:mathematics:1abc',
+        kind: 'LESSON',
+        localDate: '2026-08-01',
+        subject: 'mathematics',
+        workingGrade: '5',
+        courseRef: 'ma-g5-mathematics',
+        unitRef: 'ma-g5-mathematics-u01',
+        itemRef: 'lesson-import-a',
+        assignmentRef: localScope.assignmentRef,
+        title: 'Math lesson',
+        createdAt: '2026-08-01T13:30:00.000Z',
+      }],
+    },
+  }
+}
+
 async function firstLink(
   digest: string,
   studentId: string,
@@ -493,6 +558,16 @@ beforeAll(async () => {
       '00000000-0000-0000-0000-000000000011', '${SIBLING_A}',
       '00000000-0000-0000-0000-0000000000a2', 'identity_manager',
       'active', '${GUARDIAN_A}'
+    );
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, starts_on, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000000ea1',
+      '00000000-0000-0000-0000-000000000011', '${STUDENT_A}',
+      '2026-2027', 'mathematics', '5', 'ma-g5-mathematics',
+      'family-pilot-r2', 'active', '2026-08-01', 'parent'
     );
   `)
   const launchA = await issue(GUARDIAN_A, STUDENT_A)
@@ -895,10 +970,12 @@ describe.sequential('Study hosted sync lossless V2', () => {
     const firstId = '57000000-0000-4000-8000-000000000001'
     const original = authorityCheckpoint(firstId)
     const originalResponses = learnerResponseCheckpoint(firstId)
+    const originalPlan = familyPlanCheckpoint(firstId)
     const linked = await guardian(GUARDIAN_A, () => firstLink(
       digestA, STUDENT_A, firstId, importDocument({
         authorityCheckpoint: original,
         learnerResponseCheckpoint: originalResponses,
+        familyPlanCheckpoint: originalPlan,
       }),
     ))
     const hydratedB = await guardian(GUARDIAN_A, () => hydrate(
@@ -906,15 +983,33 @@ describe.sequential('Study hosted sync lossless V2', () => {
     ))
     expect(linked).toMatchObject({
       status: 'linked-existing',
-      revisions: { authorityCheckpoint: 0, learnerResponseCheckpoint: 0 },
+      revisions: {
+        authorityCheckpoint: 0,
+        learnerResponseCheckpoint: 0,
+        familyPlanCheckpoint: 0,
+      },
     })
     expect(hydratedB).toMatchObject({
       status: 'ready',
       authorityCheckpointRevision: 0,
       learnerResponseCheckpointRevision: 0,
+      familyPlanCheckpointRevision: 0,
+      courseEnrollments: [{
+        enrollmentRef: '00000000-0000-0000-0000-000000000ea1',
+        schoolYearKey: '2026-2027',
+        subject: 'mathematics',
+        instructionalLevel: '5',
+        courseRef: 'ma-g5-mathematics',
+        curriculumVersion: 'family-pilot-r2',
+        status: 'active',
+        startsOn: '2026-08-01',
+        endsOn: null,
+        placementSource: 'parent',
+      }],
     })
     expect(hydratedB.authorityCheckpoint).toEqual(original)
     expect(hydratedB.learnerResponseCheckpoint).toEqual(originalResponses)
+    expect(hydratedB.familyPlanCheckpoint).toEqual(originalPlan)
 
     const writeId = '57000000-0000-4000-8000-000000000002'
     const advanced = structuredClone(authorityCheckpoint(writeId, 1, 0))
@@ -1190,6 +1285,68 @@ describe.sequential('Study hosted sync lossless V2', () => {
       reasonCode: 'invalid-learner-response-checkpoint',
     })
 
+    const forbiddenCases: readonly {
+      readonly label: string
+      readonly operationId: string
+      readonly mutate: (candidate: any) => void
+    }[] = [
+      {
+        label: 'wrong household',
+        operationId: '58100000-0000-4000-8000-000000000001',
+        mutate: (candidate) => { candidate.identity.householdRef = 'household:other' },
+      },
+      {
+        label: 'wrong learner',
+        operationId: '58100000-0000-4000-8000-000000000002',
+        mutate: (candidate) => { candidate.identity.learnerRef = 'student:sibling-a' },
+      },
+      {
+        label: 'correct answer',
+        operationId: '58100000-0000-4000-8000-000000000003',
+        mutate: (candidate) => { candidate.responses[0].correctAnswer = 'choice:b' },
+      },
+      {
+        label: 'adult rubric',
+        operationId: '58100000-0000-4000-8000-000000000004',
+        mutate: (candidate) => { candidate.responses[0].adultRubric = 'private scoring rule' },
+      },
+      {
+        label: 'Tutor transcript',
+        operationId: '58100000-0000-4000-8000-000000000005',
+        mutate: (candidate) => { candidate.responses[0].tutorTranscript = ['raw turn'] },
+      },
+      {
+        label: 'PIN',
+        operationId: '58100000-0000-4000-8000-000000000006',
+        mutate: (candidate) => { candidate.parentPin = '1234' },
+      },
+      {
+        label: 'token',
+        operationId: '58100000-0000-4000-8000-000000000007',
+        mutate: (candidate) => { candidate.refreshToken = 'secret' },
+      },
+      {
+        label: 'unknown field',
+        operationId: '58100000-0000-4000-8000-000000000008',
+        mutate: (candidate) => { candidate.responses[0].unexpectedField = true },
+      },
+    ]
+    for (const testCase of forbiddenCases) {
+      const candidate = structuredClone(learnerResponseCheckpoint(
+        testCase.operationId, 2, 1,
+      )) as any
+      testCase.mutate(candidate)
+      const refused = await student(grantA, () => write(
+        digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+        testCase.operationId, 'learner-response-checkpoint:compare-and-swap',
+        { learnerResponseCheckpoint: candidate },
+      ))
+      expect(refused, testCase.label).toMatchObject({
+        status: 'invalid-write',
+        reasonCode: 'invalid-learner-response-checkpoint',
+      })
+    }
+
     const hydrated = await guardian(GUARDIAN_A, () => hydrate(
       digestA, STUDENT_A, 'assignment-import-a', 'session-import-a',
     ))
@@ -1224,6 +1381,143 @@ describe.sequential('Study hosted sync lossless V2', () => {
       { revision: 0, count: 2 },
       { revision: 1, count: 2 },
     ])
+  })
+
+  it('syncs the School Plan and deterministic Auto Planner provenance with Parent-only CAS', async () => {
+    const guardianRows = await guardian(GUARDIAN_A, () => database.query<{
+      student_id: string
+      revision: number
+      local_planner_revision: number
+    }>(`
+      select student_id, revision, local_planner_revision
+      from public.academy_family_plan_checkpoints
+    `))
+    const otherHouseholdRows = await guardian(GUARDIAN_B, () => database.query<{
+      student_id: string
+    }>(`
+      select student_id from public.academy_family_plan_checkpoints
+    `))
+    const learnerRows = await student(grantA, () => database.query<{
+      student_id: string
+    }>(`
+      select student_id from public.academy_family_plan_checkpoints
+    `))
+    expect(guardianRows.rows).toEqual([{
+      student_id: STUDENT_A,
+      revision: 0,
+      local_planner_revision: 3,
+    }])
+    expect(otherHouseholdRows.rows).toEqual([])
+    expect(learnerRows.rows).toEqual([{ student_id: STUDENT_A }])
+
+    await expect(asRole('anon', null, false, () => database.query(`
+      select student_id from public.academy_family_plan_checkpoints
+    `))).rejects.toThrow()
+    await expect(guardian(GUARDIAN_A, () => database.exec(`
+      update public.academy_family_plan_checkpoints
+      set revision = 99
+      where student_id = '${STUDENT_A}'
+    `))).rejects.toThrow()
+
+    const writeId = '59000000-0000-4000-8000-000000000001'
+    const advanced = familyPlanCheckpoint(writeId, 1, 0, 4)
+    const studentDenied = await student(grantA, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      writeId, 'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: advanced },
+    ))
+    const stored = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      writeId, 'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: advanced },
+    ))
+    const retry = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      writeId, 'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: advanced },
+    ))
+    const collisionCandidate = structuredClone(advanced)
+    collisionCandidate.planner.schoolPlan!.subjects[0].paused = true
+    const collision = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      writeId, 'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: collisionCandidate },
+    ))
+    expect(studentDenied).toMatchObject({
+      status: 'denied',
+      code: 'actor-not-authorized',
+    })
+    expect(stored).toMatchObject({
+      status: 'stored',
+      revisionDomain: 'family-plan-checkpoint',
+      serverRevision: 1,
+    })
+    expect(retry).toEqual(stored)
+    expect(collision).toMatchObject({ status: 'idempotency-collision' })
+
+    const staleId = '59000000-0000-4000-8000-000000000002'
+    const stale = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      staleId, 'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: familyPlanCheckpoint(staleId, 1, 0, 4) },
+    ))
+    const wrongHousehold = await guardian(GUARDIAN_B, () => write(
+      digestB, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      '59000000-0000-4000-8000-000000000003',
+      'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: advanced },
+    ))
+    const wrongLearnerId = '59000000-0000-4000-8000-000000000004'
+    const wrongLearner = structuredClone(familyPlanCheckpoint(wrongLearnerId, 2, 1, 5))
+    wrongLearner.identity.learnerRef = 'student:sibling-a'
+    wrongLearner.planner.scope.learnerRef = 'student:sibling-a'
+    const refusedLearner = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      wrongLearnerId, 'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: wrongLearner },
+    ))
+    const removalId = '59000000-0000-4000-8000-000000000005'
+    const removal = structuredClone(familyPlanCheckpoint(removalId, 2, 1, 5))
+    removal.planner.materializations = []
+    const refusedRemoval = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      removalId, 'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: removal },
+    ))
+    const unknownId = '59000000-0000-4000-8000-000000000006'
+    const unknown = structuredClone(familyPlanCheckpoint(unknownId, 2, 1, 5)) as any
+    unknown.planner.schoolPlan.cloudImplementationState = { arbitrary: true }
+    const refusedUnknown = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      unknownId, 'family-plan-checkpoint:compare-and-swap',
+      { familyPlanCheckpoint: unknown },
+    ))
+    expect(stale).toMatchObject({ status: 'revision-conflict', serverRevision: 1 })
+    expect(wrongHousehold).toMatchObject({
+      status: 'denied',
+      code: 'study-session-invalid',
+    })
+    expect(refusedLearner).toMatchObject({
+      status: 'invalid-write',
+      reasonCode: 'invalid-family-plan-checkpoint',
+    })
+    expect(refusedRemoval).toMatchObject({
+      status: 'invalid-write',
+      reasonCode: 'invalid-family-plan-checkpoint',
+    })
+    expect(refusedUnknown).toMatchObject({
+      status: 'invalid-write',
+      reasonCode: 'invalid-family-plan-checkpoint',
+    })
+
+    const hydrated = await guardian(GUARDIAN_A, () => hydrate(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a',
+    ))
+    expect(hydrated).toMatchObject({
+      status: 'ready',
+      familyPlanCheckpointRevision: 1,
+    })
+    expect(hydrated.familyPlanCheckpoint).toEqual(advanced)
   })
 
   it('revocation immediately removes hydrate, write and RLS authority', async () => {

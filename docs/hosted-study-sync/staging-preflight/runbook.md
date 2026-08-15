@@ -174,10 +174,11 @@ its own authorization and must be validated again from step 4.
 
 ## 11. Consider family enablement only afterward
 
-Do not enable `VITE_FAMILY_PILOT_ENABLED`, `VITE_STUDY_ENGINE_ENABLED`, or
-`ACADEMY_STUDY_ENABLED` during preflight, inventory, migration apply, probes, or
-cross-device validation. Successful staging validation is evidence for a later
-go/no-go decision, not activation authority.
+Do not enable `VITE_FAMILY_PILOT_ENABLED`,
+`VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED`, `VITE_STUDY_ENGINE_ENABLED`, or
+`ACADEMY_STUDY_ENABLED` during preflight, inventory, migration apply, probes,
+or cross-device validation. Successful staging validation is evidence for a
+later go/no-go decision, not activation authority.
 
 Family enablement requires a separate reviewed deployment change, fresh target
 and backup checks, production-specific readiness/security review, monitoring
