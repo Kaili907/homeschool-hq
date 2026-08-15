@@ -1,10 +1,10 @@
-/**
- * R2 remains deliberately inactive. The production serializer is now present,
- * but this module exposes no network client, environment switch, or App wiring.
- */
+import { isFamilyCloudBrowserEnabledFromHost } from '../../../family-pilot/cloud-auth/browserConfiguration'
+
 export const HOSTED_SYNC_PRODUCTION_ACTIVATION = Object.freeze({
-  enabled: false as const,
-  reason: 'HOSTED_SYNC_R2_INACTIVE_PENDING_STAGING' as const,
+  enabled: isFamilyCloudBrowserEnabledFromHost(),
+  reason: isFamilyCloudBrowserEnabledFromHost()
+    ? 'HOSTED_SYNC_R2_EXPLICITLY_CONFIGURED' as const
+    : 'HOSTED_SYNC_R2_DEFAULT_OFF' as const,
 })
 
 export function requireHostedSyncProductionPrivacySerializer(): true {

@@ -12,6 +12,8 @@ const harness = vi.hoisted(() => ({
   scoringModuleLoads: 0,
   tutorStateModuleLoads: 0,
   tutorTranscriptModuleLoads: 0,
+  cloudRootRenders: 0,
+  cloudAuthInjections: 0,
 }))
 
 vi.mock('./sync/useSync', () => {
@@ -52,12 +54,19 @@ vi.mock('./tutor/voice', async (importOriginal) => ({
   purgeVoiceCache: async () => {},
 }))
 vi.mock('./study/family-pilot/final-app/FinalFamilyPilotApp', () => ({
-  FinalFamilyPilotApp: ({ onExit }: { onExit: () => void }) => (
-    <main>
+  FinalFamilyPilotApp: ({ onExit, familyCloudAuth }: { onExit: () => void; familyCloudAuth?: object }) => {
+    if (familyCloudAuth) harness.cloudAuthInjections += 1
+    return <main>
       <p>Final Family Pilot</p>
       <button type="button" onClick={onExit}>Back home</button>
     </main>
-  ),
+  },
+}))
+vi.mock('./study/family-pilot/cloud-auth/FamilyPilotCloudRoot', () => ({
+  FamilyPilotCloudRoot: ({ children }: { children: (auth: object) => React.ReactNode }) => {
+    harness.cloudRootRenders += 1
+    return <main><p>Family Cloud account gateway</p>{children({})}</main>
+  },
 }))
 
 class MemStorage implements Storage {
@@ -142,6 +151,8 @@ describe('App final Family Pilot route lifecycle', () => {
     harness.scoringModuleLoads = 0
     harness.tutorStateModuleLoads = 0
     harness.tutorTranscriptModuleLoads = 0
+    harness.cloudRootRenders = 0
+    harness.cloudAuthInjections = 0
     root = null
     pathname = '/family-pilot'
     storage = new MemStorage()
@@ -232,6 +243,25 @@ describe('App final Family Pilot route lifecycle', () => {
     expect(harness.scoringModuleLoads).toBe(0)
     expect(harness.tutorStateModuleLoads).toBe(0)
     expect(harness.tutorTranscriptModuleLoads).toBe(0)
+  })
+
+  it('selects the guarded Family Cloud root only for exact staging configuration', async () => {
+    vi.stubEnv('VITE_FAMILY_PILOT_ENABLED', 'true')
+    vi.stubEnv('VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED', 'true')
+    vi.stubEnv('VITE_SUPABASE_URL', 'https://fqzcxrkvpaivpnzdbuol.supabase.co')
+    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'public-build-test-key')
+    await mountApp(seeded(null))
+    await waitForText('Family Cloud account gateway')
+    expect(harness.cloudRootRenders).toBeGreaterThan(0)
+    expect(harness.cloudAuthInjections).toBeGreaterThan(0)
+  })
+
+  it('does not instantiate the Family Cloud root in the default build', async () => {
+    vi.stubEnv('VITE_FAMILY_PILOT_ENABLED', 'true')
+    await mountApp(seeded(null))
+    await waitForText('Final Family Pilot')
+    expect(harness.cloudRootRenders).toBe(0)
+    expect(harness.cloudAuthInjections).toBe(0)
   })
 
   it('keeps the production route unreachable when the exact flag is absent', async () => {

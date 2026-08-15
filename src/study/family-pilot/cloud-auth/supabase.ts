@@ -111,6 +111,7 @@ export function createSupabaseFamilyHouseholdAuthority(options: {
   readonly url?: string
   readonly anonKey?: string
   readonly fetchImpl?: typeof fetch
+  readonly bootstrap?: (context: VerifiedAuthContext, signal?: AbortSignal) => Promise<string | null>
 } = {}): FamilyHouseholdAuthorityPort {
   const url = (options.url ?? supabaseUrl()).replace(/\/+$/, '')
   const anonKey = options.anonKey ?? supabaseAnonKey()
@@ -143,6 +144,12 @@ export function createSupabaseFamilyHouseholdAuthority(options: {
       let rows: readonly string[] | null
       try { rows = membershipRows(await response.json()) } catch { rows = null }
       if (!rows) return Object.freeze({ status: 'UNAVAILABLE' })
+      if (rows.length === 0 && options.bootstrap) {
+        const householdRef = await options.bootstrap(context, signal).catch(() => null)
+        return householdRef && UUID.test(householdRef)
+          ? Object.freeze({ status: 'RESOLVED', householdRef })
+          : Object.freeze({ status: 'NO_ACTIVE_HOUSEHOLD' })
+      }
       if (rows.length === 0) return Object.freeze({ status: 'NO_ACTIVE_HOUSEHOLD' })
       if (rows.length > 1) return Object.freeze({ status: 'AMBIGUOUS_HOUSEHOLD' })
       return Object.freeze({ status: 'RESOLVED', householdRef: rows[0] })

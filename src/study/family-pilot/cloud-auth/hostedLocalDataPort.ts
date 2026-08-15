@@ -258,7 +258,7 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
     const resolved = await this.#options.directory.resolve(input).catch(() => ({ status: 'UNAVAILABLE' as const }))
     if (input.signal?.aborted || generation !== this.#generation) return 'UNAVAILABLE'
     if (resolved.status !== 'READY') return resolved.status
-    if (!validDirectory(input.householdRef, resolved.learners) || resolved.learners.length === 0) return 'UNAVAILABLE'
+    if (!validDirectory(input.householdRef, resolved.learners)) return 'UNAVAILABLE'
     const local = await this.#options.repository.readHousehold(input.householdRef).catch(() => null)
     if (!local || local.some((item) => !validLocal(input.householdRef, item))) return 'UNAVAILABLE'
     const localByLearner = new Map(local.map((item) => [item.learnerRef, item]))
@@ -297,15 +297,25 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
     const generation = this.#generation
     const active = this.#active
     if (!active || active.householdRef !== input.householdRef || active.authorization.user.id !== input.authorization.user.id) return 'UNAVAILABLE'
+    const resolved = await this.#options.directory.resolve(input).catch(() => ({ status: 'UNAVAILABLE' as const }))
+    if (resolved.status === 'OFFLINE') return 'OFFLINE'
+    if (resolved.status !== 'READY' || !validDirectory(input.householdRef, resolved.learners)) return 'UNAVAILABLE'
     const local = await this.#options.repository.readHousehold(input.householdRef).catch(() => null)
     if (input.signal?.aborted || generation !== this.#generation) return 'UNAVAILABLE'
     if (!local || local.some((item) => !validLocal(input.householdRef, item))) return 'UNAVAILABLE'
     const remoteByLearner = new Map(active.remote.map((item) => [item.learnerRef, item]))
-    const directoryByLearner = new Map(active.directory.map((item) => [item.learnerRef, item]))
+    const directoryByLearner = new Map(resolved.learners.map((item) => [item.learnerRef, item]))
     for (const current of local) {
       const remote = remoteByLearner.get(current.learnerRef)
       const entry = directoryByLearner.get(current.learnerRef)
-      if (!remote || !entry || !remote.linked) return 'UNAVAILABLE'
+      if (!entry) return 'UNAVAILABLE'
+      if (!remote || !remote.linked) {
+        const firstLinked = await this.#firstLink(entry, current, input.signal)
+        if (firstLinked.status === 'OFFLINE') return 'OFFLINE'
+        if (firstLinked.status !== 'READY') return 'CONFLICT'
+        remoteByLearner.set(current.learnerRef, firstLinked.state)
+        continue
+      }
       const conflict = await this.#writeChangedDomains(entry, current, remote, input.signal)
       if (input.signal?.aborted || generation !== this.#generation) return 'UNAVAILABLE'
       if (conflict === 'OFFLINE') return 'OFFLINE'
@@ -318,7 +328,7 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
       }
     }
     const refreshed: FamilyCloudLocalLearnerStateR1[] = []
-    for (const entry of active.directory) {
+    for (const entry of resolved.learners) {
       const current = local.find((item) => item.learnerRef === entry.learnerRef) ?? null
       const hydrated = await this.#hydrate(entry, current, input.signal)
       if (input.signal?.aborted || generation !== this.#generation) return 'UNAVAILABLE'
@@ -331,7 +341,7 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
     }).catch(() => false)
     if (input.signal?.aborted || generation !== this.#generation) return 'UNAVAILABLE'
     if (!committed) return 'CONFLICT'
-    this.#active = Object.freeze({ ...active, authorization: input.authorization, remote: Object.freeze(refreshed) })
+    this.#active = Object.freeze({ ...active, authorization: input.authorization, directory: Object.freeze([...resolved.learners]), remote: Object.freeze(refreshed) })
     return 'UP_TO_DATE'
   }
 

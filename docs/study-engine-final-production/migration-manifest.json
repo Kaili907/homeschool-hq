@@ -583,6 +583,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "family_session_safety_clear_shape:unreconciled->normalized",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260815190000",
+      "filename": "20260815190000_academy_family_cloud_household_bootstrap_r1.sql",
+      "sha256": "b982994c1029a705c48303fc1817e004e7c21898b683f32862d02161952ce6dd",
+      "dependency": "20260815180000_academy_family_session_safety_clear_shape_r1.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "family_cloud_household_bootstrap:absent->r1",
+      "supersessionStatus": "current"
     }
   ]
 }

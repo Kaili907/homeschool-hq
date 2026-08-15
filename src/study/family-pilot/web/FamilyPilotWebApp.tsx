@@ -1,10 +1,15 @@
 import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from '../core/route'
+import { isFamilyCloudBrowserEnabledFromHost } from '../cloud-auth/browserConfiguration'
 
 const FinalFamilyPilotApp = lazy(() =>
   import('../final-app/FinalFamilyPilotApp').then((module) => ({
     default: module.FinalFamilyPilotApp,
   })),
+)
+
+const FamilyPilotCloudRoot = lazy(() =>
+  import('../cloud-auth/FamilyPilotCloudRoot').then((module) => ({ default: module.FamilyPilotCloudRoot })),
 )
 
 /**
@@ -27,14 +32,15 @@ export default function FamilyPilotWebApp() {
     )
   }
 
+  const onExit = () => {
+    leaveFamilyPilotPath()
+    setOnPilotRoute(false)
+  }
   return (
     <Suspense fallback={<main aria-busy="true">Loading the Family Pilot.</main>}>
-      <FinalFamilyPilotApp
-        onExit={() => {
-          leaveFamilyPilotPath()
-          setOnPilotRoute(false)
-        }}
-      />
+      {isFamilyCloudBrowserEnabledFromHost()
+        ? <FamilyPilotCloudRoot>{(auth) => <FinalFamilyPilotApp onExit={onExit} familyCloudAuth={auth} />}</FamilyPilotCloudRoot>
+        : <FinalFamilyPilotApp onExit={onExit} />}
     </Suspense>
   )
 }

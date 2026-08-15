@@ -146,7 +146,7 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
 }) {
   const [revision, setRevision] = useState(0)
   const [cloudSyncStatus, setCloudSyncStatus] = useState<ParentSyncStatusValueR1>(() =>
-    cloudState?.status === 'READY' ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'NEEDS_ATTENTION' : parentSyncStatus)
+    cloudState?.status === 'READY' ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'OFFLINE_SAVED' : parentSyncStatus)
   const reconcileController = useRef<AbortController | null>(null)
   const storage = useMemo(
     () => cloudState ? createBrowserHouseholdScopedStorage(cloudState.householdRef) : undefined,
@@ -166,7 +166,7 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
   useEffect(() => () => controller.close(), [controller])
   useEffect(() => {
     setCloudSyncStatus(cloudState?.status === 'READY'
-      ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'NEEDS_ATTENTION' : parentSyncStatus)
+      ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'OFFLINE_SAVED' : parentSyncStatus)
   }, [cloudState?.status, parentSyncStatus])
   useEffect(() => () => reconcileController.current?.abort(), [])
   const refresh = useCallback(() => {
@@ -182,7 +182,8 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
         controller.refresh()
         setRevision((value) => value + 1)
         setCloudSyncStatus('UP_TO_DATE')
-      } else if (result === 'CONFLICT' || result === 'UNAVAILABLE') setCloudSyncStatus('NEEDS_ATTENTION')
+      } else if (result === 'OFFLINE') setCloudSyncStatus('OFFLINE_SAVED')
+      else if (result === 'CONFLICT' || result === 'UNAVAILABLE') setCloudSyncStatus('NEEDS_ATTENTION')
     }).finally(() => {
       if (reconcileController.current === abort) reconcileController.current = null
     })
@@ -366,6 +367,22 @@ function MountedFinalFamilyPilot({
     )
   }
 
+  const learnersMissingDevicePins = cloudState
+    ? app.state.setup.students.filter((student) => !app.state.studentAccessVerifiers[student.studentRef])
+    : []
+  if (learnersMissingDevicePins.length > 0) {
+    return (
+      <FinalShell onExit={onExit} cloudState={cloudState}>
+        <FreshDeviceLearnerPinSetup
+          controller={controller}
+          students={learnersMissingDevicePins}
+          onComplete={refresh}
+          onSignOut={onHouseholdSignOut}
+        />
+      </FinalShell>
+    )
+  }
+
   const openStudentRef = app.state.activeStudentRef
   if (openAssignmentRef && openStudentRef) {
     return (
@@ -470,6 +487,64 @@ function MountedFinalFamilyPilot({
       )}
     </FinalShell>
   )
+}
+
+function FreshDeviceLearnerPinSetup({ controller, students, onComplete, onSignOut }: {
+  readonly controller: FinalFamilyPilotController
+  readonly students: readonly FamilySetupStudent[]
+  readonly onComplete: () => void
+  readonly onSignOut?: () => void
+}) {
+  const [pins, setPins] = useState<Readonly<Record<string, string>>>({})
+  const [confirmations, setConfirmations] = useState<Readonly<Record<string, string>>>({})
+  const [error, setError] = useState('')
+  const save = () => {
+    for (const student of students) {
+      const pin = pins[student.studentRef] ?? ''
+      if (!/^\d{4}$/.test(pin) || confirmations[student.studentRef] !== pin) {
+        setError(`Enter the same 4-digit PIN twice for ${student.displayName}.`)
+        return
+      }
+    }
+    for (const student of students) controller.setStudentPin(student.studentRef, pins[student.studentRef]!)
+    controller.saveSetup({
+      ...controller.appSnapshot.state.setup,
+      students: Object.freeze(controller.appSnapshot.state.setup.students.map((student) => Object.freeze({
+        ...student,
+        pinRequired: true,
+      }))),
+    })
+    setError('')
+    onComplete()
+  }
+  const pinField = (studentRef: string, confirmation: boolean) => {
+    const values = confirmation ? confirmations : pins
+    const setValues = confirmation ? setConfirmations : setPins
+    return {
+      value: values[studentRef] ?? '',
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => setValues({
+        ...values,
+        [studentRef]: event.target.value.replace(/\D/g, '').slice(0, 4),
+      }),
+    }
+  }
+  return <main className="mx-auto max-w-xl px-4 py-10" data-testid="fresh-device-learner-pin-setup">
+    <p className="font-bold text-cyan-700">New device security</p>
+    <h2 className="mt-1 text-3xl font-extrabold">Set learner PINs for this device</h2>
+    <p className="mt-3 text-slate-700">Learner PINs stay only on this computer and are never uploaded. Your family data is connected, but each learner needs a new local PIN before independent access on this device.</p>
+    <div className="mt-6 space-y-5">
+      {students.map((student) => <fieldset key={student.studentRef} className="rounded-xl border border-slate-200 bg-white p-4">
+        <legend className="px-1 font-extrabold">{student.displayName}</legend>
+        <div className="mt-2 grid gap-3 sm:grid-cols-2">
+          <label className="font-bold">New 4-digit PIN<input {...pinField(student.studentRef, false)} aria-label={`${student.displayName} new learner PIN`} inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" /></label>
+          <label className="font-bold">Confirm PIN<input {...pinField(student.studentRef, true)} aria-label={`${student.displayName} confirm learner PIN`} inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" /></label>
+        </div>
+      </fieldset>)}
+    </div>
+    <button type="button" className="mt-6 min-h-11 rounded-lg bg-slate-900 px-5 py-3 font-extrabold text-white" onClick={save}>Save learner PINs on this device</button>
+    {onSignOut ? <button type="button" className="ml-3 mt-3 min-h-11 rounded-lg border border-slate-300 bg-white px-4 py-2 font-bold" onClick={onSignOut}>Sign out</button> : null}
+    {error ? <p className="mt-3 rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
+  </main>
 }
 
 function ParentPinGate({ controller, onAuthorized }: { readonly controller: FinalFamilyPilotController; readonly onAuthorized: () => void }) {

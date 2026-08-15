@@ -43,7 +43,8 @@ export interface IndexedDbRecordStore {
    * precondition aborts the transaction and rejects with `kind: 'conflict'`.
    */
   write(key: string, value: unknown, precondition?: (current: unknown) => boolean): Promise<void>
-  remove(key: string): Promise<void>
+  /** Removes only when the optional precondition still matches in the delete transaction. */
+  remove(key: string, precondition?: (current: unknown) => boolean): Promise<void>
   /** Bytes this origin is using and may use, when the platform reports it. */
   estimate(): Promise<{ readonly usage: number | null; readonly quota: number | null }>
   close(): void
@@ -219,16 +220,37 @@ export async function openIndexedDbRecordStore(
       })
     },
 
-    async remove(key) {
+    async remove(key, precondition) {
       return new Promise((resolve, reject) => {
         const tx = transaction('readwrite')
-        tx.objectStore(FAMILY_PILOT_DURABLE_OBJECT_STORE).delete(key)
+        const store = tx.objectStore(FAMILY_PILOT_DURABLE_OBJECT_STORE)
+        let refused = false
+        let synchronousFailure: unknown = null
+        if (precondition) {
+          const current = store.get(key)
+          current.onsuccess = () => {
+            try {
+              if (precondition(current.result)) {
+                store.delete(key)
+                return
+              }
+              refused = true
+            } catch (error) {
+              synchronousFailure = error
+            }
+            tx.abort()
+          }
+        } else {
+          try { store.delete(key) } catch (error) { synchronousFailure = error; tx.abort() }
+        }
         tx.oncomplete = () => { resolve() }
         tx.onerror = () => {
           reject(new IndexedDbRecordError('transaction-failed', 'Saved Study work could not be removed.', tx.error))
         }
         tx.onabort = () => {
-          reject(new IndexedDbRecordError('transaction-failed', 'Saved Study work could not be removed.', tx.error))
+          reject(refused
+            ? new IndexedDbRecordError('conflict', 'Saved Study work changed elsewhere since it was read here.')
+            : new IndexedDbRecordError('transaction-failed', 'Saved Study work could not be removed.', synchronousFailure ?? tx.error))
         }
       })
     },

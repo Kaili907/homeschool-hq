@@ -7,6 +7,7 @@ export type ParentSyncStatusR1 =
   | 'SYNCING'
   | 'UP_TO_DATE'
   | 'NEEDS_ATTENTION'
+  | 'OFFLINE_SAVED'
 
 const LABEL: Readonly<Record<ParentSyncStatusR1, string>> = Object.freeze({
   LOCAL_ONLY: 'Local only',
@@ -14,6 +15,7 @@ const LABEL: Readonly<Record<ParentSyncStatusR1, string>> = Object.freeze({
   SYNCING: 'Syncing',
   UP_TO_DATE: 'Up to date',
   NEEDS_ATTENTION: 'Needs attention',
+  OFFLINE_SAVED: 'Offline / saved on this device',
 })
 
 export function parentSyncStatusLabelR1(status: ParentSyncStatusR1): string {
