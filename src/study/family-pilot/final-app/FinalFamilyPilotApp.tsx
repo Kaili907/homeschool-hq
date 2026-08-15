@@ -55,10 +55,8 @@ import { FamilySchoolPlanPanel } from './FamilySchoolPlanPanel'
 import { FamilyOnboarding } from './FamilyOnboarding'
 import { ParentReviewCenter } from './review-center'
 import { FamilyOverview } from './FamilyOverview'
-import {
-  resolveFamilyPilotTrustedScorer,
-  type FamilyPilotTrustedScorerPilotConfiguration,
-} from '../trusted-scorer'
+import { ParentSyncStatusR1, type ParentSyncStatusR1 as ParentSyncStatusValueR1 } from '../../hosted-sync/v2/familyPilot/status'
+import { resolveFamilyServicesR1, type FamilyServicesPilotConfigurationR1 } from '../family-services'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -89,11 +87,11 @@ function learnerAssessmentState(status: FinalAssessmentAttemptV1['status']): str
 
 export interface FinalFamilyPilotAppProps {
   readonly onExit: () => void
-  /** Injected only by an explicitly flagged non-production composition. */
-  readonly trustedScorerPilot?: FamilyPilotTrustedScorerPilotConfiguration
+  /** One injected composition for independently flagged non-production family services. */
+  readonly familyServicesPilot?: FamilyServicesPilotConfigurationR1
 }
 
-export function FinalFamilyPilotApp({ onExit, trustedScorerPilot }: FinalFamilyPilotAppProps) {
+export function FinalFamilyPilotApp({ onExit, familyServicesPilot }: FinalFamilyPilotAppProps) {
   const [catalog, setCatalog] = useState<Awaited<ReturnType<typeof loadFinalFamilyPilotCatalog>> | null>(null)
   const [catalogError, setCatalogError] = useState<string | null>(null)
   const [revision, setRevision] = useState(0)
@@ -109,9 +107,10 @@ export function FinalFamilyPilotApp({ onExit, trustedScorerPilot }: FinalFamilyP
   }, [])
 
   const controller = useMemo(() => catalog ? new FinalFamilyPilotController({ catalog }) : null, [catalog])
-  const trustedScorer = resolveFamilyPilotTrustedScorer({
-    featureFlagValue: import.meta.env.VITE_FAMILY_PILOT_TRUSTED_SCORER_ENABLED,
-    configuration: trustedScorerPilot,
+  const familyServices = resolveFamilyServicesR1({
+    hostedSyncFeatureFlagValue: import.meta.env.VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED,
+    trustedScorerFeatureFlagValue: import.meta.env.VITE_FAMILY_PILOT_TRUSTED_SCORER_ENABLED,
+    configuration: familyServicesPilot,
   })
   useEffect(() => () => controller?.close(), [controller])
   const refresh = useCallback(() => {
@@ -126,7 +125,14 @@ export function FinalFamilyPilotApp({ onExit, trustedScorerPilot }: FinalFamilyP
     return <FinalShell onExit={onExit}><p className="rounded-xl border border-red-300 bg-red-50 p-6 font-semibold" role="alert">{catalogError ?? 'The final curriculum could not be loaded.'}</p></FinalShell>
   }
 
-  return <MountedFinalFamilyPilot controller={controller} onExit={onExit} refresh={refresh} revision={revision} trustedScorer={trustedScorer} />
+  return <MountedFinalFamilyPilot
+    controller={controller}
+    onExit={onExit}
+    refresh={refresh}
+    revision={revision}
+    trustedScorer={familyServices.trustedScorer}
+    parentSyncStatus={familyServices.parentSyncStatus}
+  />
 }
 
 function FinalShell({ onExit, children }: { readonly onExit: () => void; readonly children: React.ReactNode }) {
@@ -157,6 +163,7 @@ function MountedFinalFamilyPilot({
   refresh,
   revision,
   trustedScorer,
+  parentSyncStatus,
 }: {
   readonly controller: FinalFamilyPilotController
   readonly onExit: () => void
@@ -164,6 +171,7 @@ function MountedFinalFamilyPilot({
   /** Forces a projection refresh without remounting an open Study session. */
   readonly revision: number
   readonly trustedScorer?: LearnerResponseAssessor
+  readonly parentSyncStatus: ParentSyncStatusValueR1
 }) {
   const [mode, setMode] = useState<Mode>('student')
   const [parentAuthorized, setParentAuthorized] = useState(false)
@@ -370,6 +378,7 @@ function MountedFinalFamilyPilot({
           restoreInput={restoreInput}
           onRestore={doRestore}
           revision={revision}
+          syncStatus={parentSyncStatus}
         />
       )}
     </FinalShell>
@@ -529,7 +538,7 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   )
 }
 
-function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision }: {
+function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision, syncStatus }: {
   readonly controller: FinalFamilyPilotController
   readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly view: ParentView
@@ -539,6 +548,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
   readonly restoreInput: React.RefObject<HTMLInputElement | null>
   readonly onRestore: (file: File | undefined) => Promise<void>
   readonly revision: number
+  readonly syncStatus: ParentSyncStatusValueR1
 }) {
   const students = controller.appSnapshot.state.setup.students
   const [selectedRef, setSelectedRef] = useState(students[0]?.studentRef ?? '')
@@ -550,9 +560,12 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           <p className="font-bold text-cyan-700">Parent Hub</p>
           <h2 className="text-2xl font-extrabold">Household learning</h2>
         </div>
-        <select aria-label="Parent student" className="rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
-          {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
-        </select>
+        <div className="flex items-center gap-3">
+          <ParentSyncStatusR1 status={syncStatus} />
+          <select aria-label="Parent student" className="rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
+            {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
+          </select>
+        </div>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
         {(['overview', 'preferences', 'school-plan', 'review', 'reports', 'backup'] as ParentView[]).map((item) => {

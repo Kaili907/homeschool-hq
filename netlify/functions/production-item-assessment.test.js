@@ -112,6 +112,21 @@ describe('production item trusted resolver and gateway', () => {
     })
   })
 
+  it('does not let the independent Hosted Sync flag open the scorer Netlify boundary', async () => {
+    const service = { isReady: () => true }
+    const handler = createProductionItemAssessmentHandler({
+      env: {
+        ACADEMY_STUDY_ENABLED: 'true',
+        ACADEMY_FAMILY_PILOT_HOSTED_SYNC_ENABLED: 'true',
+        ACADEMY_DEPLOYMENT_ENV: 'staging',
+      },
+      service,
+    })
+    await expect(handler(event('project', mathIdentity))).resolves.toMatchObject({
+      statusCode: 503, body: JSON.stringify({ error: { code: 'gateway_disabled' } }),
+    })
+  })
+
   it('projects G5 Math U1 L1 without answer authority leakage', async () => {
     const { handler } = harness()
     const response = await handler(event('project', mathIdentity))
