@@ -38,6 +38,11 @@ export type InterventionActionKind = Static<typeof InterventionActionKindSchema>
 
 export const AssistanceHistoryEntrySchema = Type.Object(
   {
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    instructionalContextRef: OpaqueReferenceSchema,
+    sourceInteractionRef: OpaqueReferenceSchema,
+    opportunityRef: OpaqueReferenceSchema,
     actionKind: TutorActionKindSchema,
     outcome: Type.Union([
       Type.Literal("not-observed"),
@@ -141,6 +146,10 @@ export type LearnerStageInterventionProfile = Static<
 export const InterventionLadderInputSchema = Type.Object(
   {
     inputKind: Type.Literal("study-intervention-evidence"),
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    instructionalContextRef: OpaqueReferenceSchema,
+    currentOpportunityRef: OpaqueReferenceSchema,
     interactionRef: OpaqueReferenceSchema,
     attemptCount: Type.Integer({ minimum: 0, maximum: 100 }),
     assistanceHistory: Type.Array(AssistanceHistoryEntrySchema, {
@@ -345,9 +354,19 @@ function withOptionalBreak(
 }
 
 function isSemanticallyValid(input: InterventionLadderInput): boolean {
+  const sourceInteractionRefs = input.assistanceHistory.map(
+    (entry) => entry.sourceInteractionRef,
+  );
   return (
     new Set(input.allowedActions).size === input.allowedActions.length &&
-    input.assistanceHistory.length <= input.interventionCount
+    input.assistanceHistory.length <= input.interventionCount &&
+    new Set(sourceInteractionRefs).size === sourceInteractionRefs.length &&
+    input.assistanceHistory.every(
+      (entry) =>
+        entry.learnerScopeRef === input.learnerScopeRef &&
+        entry.sessionRef === input.sessionRef &&
+        entry.instructionalContextRef === input.instructionalContextRef,
+    )
   );
 }
 

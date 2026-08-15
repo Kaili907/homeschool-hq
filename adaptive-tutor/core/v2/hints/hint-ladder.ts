@@ -77,11 +77,21 @@ function isSemanticallyValidHistoryEntry(entry: HintInterventionHistoryEntry): b
 
 function isSemanticallyValidRequest(request: HintSelectionRequest): boolean {
   const interventionRefs = request.interventionHistory.map((entry) => entry.interventionRef);
+  const sourceInteractionRefs = request.interventionHistory.map(
+    (entry) => entry.sourceInteractionRef,
+  );
   const hintRefs = request.reviewedHints.map((hint) => hint.hintRef);
   return (
     new Set(interventionRefs).size === interventionRefs.length &&
+    new Set(sourceInteractionRefs).size === sourceInteractionRefs.length &&
     new Set(hintRefs).size === hintRefs.length &&
-    request.interventionHistory.every(isSemanticallyValidHistoryEntry) &&
+    request.interventionHistory.every(
+      (entry) =>
+        entry.learnerScopeRef === request.learnerScopeRef &&
+        entry.sessionRef === request.sessionRef &&
+        entry.contextRef === request.contextRef &&
+        isSemanticallyValidHistoryEntry(entry),
+    ) &&
     request.reviewedHints.every(
       (hint) =>
         new Set(hint.eligibleMisconceptionCodes).size ===
@@ -92,11 +102,10 @@ function isSemanticallyValidRequest(request: HintSelectionRequest): boolean {
   );
 }
 
-function sortedContextHistory(
+function sortedHistory(
   request: HintSelectionRequest,
 ): readonly HintInterventionHistoryEntry[] {
   return request.interventionHistory
-    .filter((entry) => entry.contextRef === request.contextRef)
     .sort(
       (left, right) =>
         left.ordinal - right.ordinal ||
@@ -241,7 +250,7 @@ export function selectBoundedHint(requestCandidate: unknown): HintSelectionResul
     return invalidHintState();
   }
 
-  const history = sortedContextHistory(request);
+  const history = sortedHistory(request);
   const currentAssistance = assistanceFromState(request, history, "none");
 
   // Wave 1 structural anti-answer policy is authoritative. Neither completed

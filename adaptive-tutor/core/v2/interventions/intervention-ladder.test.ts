@@ -6,11 +6,17 @@ import {
   ABSOLUTE_MAXIMUM_INTERVENTIONS,
   InterventionLadderResultSchema,
   recommendNextIntervention,
+  type AssistanceHistoryEntry,
   type InterventionLadderInput,
   type InterventionLadderResult,
   type InterventionRecommendation,
   type LearnerStageInterventionProfile,
 } from "./intervention-ladder.js";
+
+const LEARNER_SCOPE_REF = "learner-scope:learner-a";
+const SESSION_REF = "session:session-a";
+const INSTRUCTIONAL_CONTEXT_REF = "instructional-context:fractions-item";
+const CURRENT_OPPORTUNITY_REF = "opportunity:fractions-current";
 
 const PROFILE: LearnerStageInterventionProfile = {
   profileKind: "study-approved-intervention-profile",
@@ -33,6 +39,10 @@ function input(
 ): InterventionLadderInput {
   return {
     inputKind: "study-intervention-evidence",
+    learnerScopeRef: LEARNER_SCOPE_REF,
+    sessionRef: SESSION_REF,
+    instructionalContextRef: INSTRUCTIONAL_CONTEXT_REF,
+    currentOpportunityRef: CURRENT_OPPORTUNITY_REF,
     interactionRef: "interaction:ladder-test",
     attemptCount: 1,
     assistanceHistory: [],
@@ -45,6 +55,24 @@ function input(
     recentBreakSuggestion: { status: "none" },
     assessmentPhase: "instruction-or-practice",
     allowedActions: [...TUTOR_ACTION_KINDS],
+    ...overrides,
+  };
+}
+
+function historyEntry(
+  actionKind: AssistanceHistoryEntry["actionKind"],
+  outcome: AssistanceHistoryEntry["outcome"],
+  ordinal = 1,
+  overrides: Partial<AssistanceHistoryEntry> = {},
+): AssistanceHistoryEntry {
+  return {
+    learnerScopeRef: LEARNER_SCOPE_REF,
+    sessionRef: SESSION_REF,
+    instructionalContextRef: INSTRUCTIONAL_CONTEXT_REF,
+    sourceInteractionRef: `interaction:assistance-history-${ordinal}`,
+    opportunityRef: `opportunity:assistance-history-${ordinal}`,
+    actionKind,
+    outcome,
     ...overrides,
   };
 }
@@ -72,7 +100,7 @@ test("repeated difficulty recommends a bounded hint", () => {
         attemptCount: 2,
         interventionCount: 1,
         assistanceHistory: [
-          { actionKind: "return-to-lesson", outcome: "difficulty-persists" },
+          historyEntry("return-to-lesson", "difficulty-persists"),
         ],
       }),
     ),
@@ -89,8 +117,8 @@ test("hint exhaustion enters the reteach path", () => {
         attemptCount: 4,
         interventionCount: 2,
         assistanceHistory: [
-          { actionKind: "hint", outcome: "difficulty-persists" },
-          { actionKind: "hint", outcome: "difficulty-persists" },
+          historyEntry("hint", "difficulty-persists", 1),
+          historyEntry("hint", "difficulty-persists", 2),
         ],
       }),
     ),
@@ -123,7 +151,7 @@ test("persistent misconception signal uses the bounded reteach path", () => {
       input({
         attemptCount: 3,
         interventionCount: 1,
-        assistanceHistory: [{ actionKind: "hint", outcome: "difficulty-persists" }],
+        assistanceHistory: [historyEntry("hint", "difficulty-persists")],
         misconceptionSignal: {
           status: "persistent",
           hypothesisRef: "misconception:denominator-counts-pieces",
@@ -143,7 +171,7 @@ test("elapsed instructional effort makes an optional break suggestion eligible",
         attemptCount: 3,
         elapsedInstructionalEffortMinutes: 25,
         interventionCount: 1,
-        assistanceHistory: [{ actionKind: "hint", outcome: "difficulty-persists" }],
+        assistanceHistory: [historyEntry("hint", "difficulty-persists")],
       }),
     ),
   );
@@ -163,8 +191,8 @@ test("recent break protection prevents a repeated break suggestion", () => {
         elapsedInstructionalEffortMinutes: 40,
         interventionCount: 2,
         assistanceHistory: [
-          { actionKind: "hint", outcome: "difficulty-persists" },
-          { actionKind: "suggest-break", outcome: "difficulty-persists" },
+          historyEntry("hint", "difficulty-persists", 1),
+          historyEntry("suggest-break", "difficulty-persists", 2),
         ],
         recentBreakSuggestion: {
           status: "recent",
@@ -231,7 +259,7 @@ test("Study allowedActions skips unauthorized recommendations and fails closed",
     attemptCount: 2,
     interventionCount: 1,
     assistanceHistory: [
-      { actionKind: "return-to-lesson", outcome: "difficulty-persists" },
+      historyEntry("return-to-lesson", "difficulty-persists"),
     ],
   });
   const authorizedFallback = recommendation(
@@ -256,8 +284,8 @@ test("active assessment never recommends free-form hinting or reteaching", () =>
     attemptCount: 4,
     interventionCount: 2,
     assistanceHistory: [
-      { actionKind: "hint", outcome: "difficulty-persists" },
-      { actionKind: "hint", outcome: "difficulty-persists" },
+      historyEntry("hint", "difficulty-persists", 1),
+      historyEntry("hint", "difficulty-persists", 2),
     ],
     assessmentPhase: "active-graded-or-mastery-check",
   });
@@ -278,7 +306,7 @@ test("replay is deterministic and does not mutate structured input", () => {
     attemptCount: 2,
     interventionCount: 1,
     assistanceHistory: [
-      { actionKind: "return-to-lesson", outcome: "difficulty-persists" },
+      historyEntry("return-to-lesson", "difficulty-persists"),
     ],
   });
   const snapshot = structuredClone(evidence);
@@ -289,6 +317,132 @@ test("replay is deterministic and does not mutate structured input", () => {
   assert.deepEqual(first, second);
   assert.deepEqual(evidence, snapshot);
   assert.equal(validateExact(InterventionLadderResultSchema, first).status, "accepted");
+});
+
+test("cross-learner intervention history fails closed instead of forcing reteach", () => {
+  const result = recommendNextIntervention(
+    input({
+      attemptCount: 2,
+      interventionCount: 1,
+      prerequisiteSignal: {
+        status: "suspected",
+        prerequisiteConceptRef: "concept:equal-parts",
+      },
+      assistanceHistory: [
+        historyEntry("check-prerequisite", "difficulty-persists", 1, {
+          learnerScopeRef: "learner-scope:learner-b",
+        }),
+      ],
+    }),
+  );
+  assert.deepEqual(result, {
+    status: "blocked",
+    code: "INVALID_INTERVENTION_INPUT",
+    proposalOnly: true,
+    tutorMayExecute: false,
+    studyMutationAllowed: false,
+  });
+});
+
+test("same learner intervention history from another session fails closed", () => {
+  const result = recommendNextIntervention(
+    input({
+      interventionCount: 1,
+      assistanceHistory: [
+        historyEntry("hint", "difficulty-persists", 1, {
+          sessionRef: "session:session-b",
+        }),
+      ],
+    }),
+  );
+  assert.equal(result.status, "blocked");
+  if (result.status === "blocked") {
+    assert.equal(result.code, "INVALID_INTERVENTION_INPUT");
+  }
+});
+
+test("same learner and session intervention history from another context fails closed", () => {
+  const result = recommendNextIntervention(
+    input({
+      interventionCount: 1,
+      assistanceHistory: [
+        historyEntry("hint", "difficulty-persists", 1, {
+          instructionalContextRef: "instructional-context:different-item",
+        }),
+      ],
+    }),
+  );
+  assert.equal(result.status, "blocked");
+  if (result.status === "blocked") {
+    assert.equal(result.code, "INVALID_INTERVENTION_INPUT");
+  }
+});
+
+test("legitimate prior interaction and opportunity in the same intervention scope is accepted", () => {
+  const result = recommendation(
+    recommendNextIntervention(
+      input({
+        attemptCount: 2,
+        interventionCount: 1,
+        prerequisiteSignal: {
+          status: "suspected",
+          prerequisiteConceptRef: "concept:equal-parts",
+        },
+        assistanceHistory: [
+          historyEntry("check-prerequisite", "difficulty-persists", 1, {
+            sourceInteractionRef: "interaction:prior-prerequisite-check",
+            opportunityRef: "opportunity:prior-prerequisite-check",
+          }),
+        ],
+      }),
+    ),
+  );
+  assert.equal(result.state, "reteach");
+  assert.equal(result.reasonCode, "prerequisite-difficulty-persists");
+});
+
+test("duplicate and malformed intervention provenance fails closed", () => {
+  const first = historyEntry("hint", "difficulty-persists");
+  const malformedCandidates: unknown[] = [
+    input({
+      interventionCount: 2,
+      assistanceHistory: [first, structuredClone(first)],
+    }),
+    input({
+      interventionCount: 2,
+      assistanceHistory: [
+        first,
+        historyEntry("reteach", "progress-observed", 2, {
+          sourceInteractionRef: first.sourceInteractionRef,
+        }),
+      ],
+    }),
+    { ...input(), currentOpportunityRef: "not an opaque reference" },
+    input({
+      interventionCount: 1,
+      assistanceHistory: [
+        historyEntry("hint", "difficulty-persists", 1, {
+          opportunityRef: "malformed opportunity",
+        }),
+      ],
+    }),
+    input({
+      interventionCount: 1,
+      assistanceHistory: [
+        historyEntry("hint", "difficulty-persists", 1, {
+          sourceInteractionRef: "malformed interaction",
+        }),
+      ],
+    }),
+  ];
+
+  for (const malformed of malformedCandidates) {
+    const result = recommendNextIntervention(malformed);
+    assert.equal(result.status, "blocked");
+    if (result.status === "blocked") {
+      assert.equal(result.code, "INVALID_INTERVENTION_INPUT");
+    }
+  }
 });
 
 test("bounded intervention count stops after the approved cap", () => {
@@ -314,8 +468,8 @@ test("bounded intervention count stops after the approved cap", () => {
     input({
       interventionCount: 2,
       assistanceHistory: [
-        { actionKind: "hint", outcome: "difficulty-persists" },
-        { actionKind: "escalate", outcome: "not-observed" },
+        historyEntry("hint", "difficulty-persists", 1),
+        historyEntry("escalate", "not-observed", 2),
       ],
     }),
   );
@@ -337,7 +491,7 @@ test("malformed or inconsistent evidence is rejected exactly", () => {
   const inconsistentHistory = recommendNextIntervention(
     input({
       interventionCount: 0,
-      assistanceHistory: [{ actionKind: "hint", outcome: "difficulty-persists" }],
+      assistanceHistory: [historyEntry("hint", "difficulty-persists")],
     }),
   );
   assert.equal(inconsistentHistory.status, "blocked");
