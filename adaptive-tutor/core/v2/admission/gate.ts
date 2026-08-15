@@ -124,6 +124,14 @@ function evaluateAdaptiveAdmissionUnchecked(input: unknown): AdaptiveAdmissionDe
   if (request.invocationBindingRef !== metadata.invocationBindingRef) {
     return refusal("insufficient-capability-metadata");
   }
+  if (
+    request.householdScopeRef !== metadata.householdScopeRef ||
+    request.learnerScopeRef !== metadata.learnerScopeRef ||
+    request.sessionRef !== metadata.sessionRef ||
+    request.instructionalContextRef !== metadata.instructionalContextRef
+  ) {
+    return refusal("scope-binding-mismatch");
+  }
   if (metadata.safetyAdmission !== "admitted") {
     return refusal("safety-restricted");
   }
@@ -162,6 +170,10 @@ function evaluateAdaptiveAdmissionUnchecked(input: unknown): AdaptiveAdmissionDe
     reason: "admitted",
     tutorFeaturePermission: "allowed",
     invocationBindingRef: request.invocationBindingRef,
+    householdScopeRef: request.householdScopeRef,
+    learnerScopeRef: request.learnerScopeRef,
+    sessionRef: request.sessionRef,
+    instructionalContextRef: request.instructionalContextRef,
     subjectRef: request.subjectRef,
     curriculumBindingRef: request.curriculumBindingRef,
     feature: request.feature,
