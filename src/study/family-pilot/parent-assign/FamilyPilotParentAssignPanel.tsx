@@ -183,7 +183,9 @@ export function FamilyPilotParentAssignPanel({
                     <p role="alert" className="text-sm font-semibold text-amber-900">
                       {lesson.canResumeDuplicate
                         ? `Already assigned to ${model.displayName} — currently ${STATUS_LABEL[lesson.duplicateStatus ?? 'in-progress']}.`
-                        : `Already queued for ${model.displayName} — no action needed, it's in Current work above.`}
+                        : lesson.duplicateStatus === 'completed' || lesson.duplicateStatus === 'skipped'
+                          ? `Already ${STATUS_LABEL[lesson.duplicateStatus].toLowerCase()} by ${model.displayName} — an exact duplicate was not created.`
+                          : `Already queued for ${model.displayName} — no action needed, it's in Current work above.`}
                     </p>
                     {lesson.canResumeDuplicate && (
                       <button

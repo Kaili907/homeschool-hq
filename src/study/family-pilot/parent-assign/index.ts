@@ -1,5 +1,10 @@
 export { FamilyPilotParentAssignPanel } from './FamilyPilotParentAssignPanel'
 export { buildAssignViewModel } from './buildViewModel'
+export {
+  assessmentCandidateStatus,
+  lessonCandidateStatus,
+  matchesManualLibrarySearch,
+} from './libraryModel'
 export type {
   FamilyPilotAssignableLessonRow,
   FamilyPilotAssignViewModel,
@@ -13,3 +18,9 @@ export type {
   FamilyPilotParentAssignCallbacks,
   FamilyPilotWorkingGradeEntry,
 } from './types'
+export type {
+  ManualAssignmentCandidateStatus,
+  ManualAssignmentLibraryStatus,
+  ManualAssessmentAssignmentFact,
+  ManualLessonAssignmentFact,
+} from './libraryModel'

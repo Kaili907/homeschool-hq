@@ -5,7 +5,7 @@ import type {
   FinalLearnerProductionMaterial,
   FinalProductionBinding,
 } from '../../../curriculum/final-app-data'
-import type { AcademyGrade, AcademySubject } from '../../../types'
+import { ACADEMY_GRADES, type AcademyGrade, type AcademySubject } from '../../../types'
 import { adaptHostLessonToStudyPlan, type HostLessonDescriptor } from '../../curriculumAdapter'
 import type { StudySafetyPort, StudyPortBundle } from '../../ports'
 import type { HostStudyLaunchContext, StudySafetyRequest, StudySafetyResult, StudySubject } from '../../types'
@@ -84,6 +84,15 @@ export type FinalFamilyPilotControllerResult =
 export interface FinalFamilyPilotReadinessView {
   readonly result: FinalAssignmentReadinessResult
   readonly storage: StudyStorageHealth
+}
+
+export interface FinalManualAssignmentOptions {
+  /**
+   * Required only when Parent deliberately browses a supported level other
+   * than this learner's official subject working level. This authorizes the
+   * one manual assignment; it never mutates learner setup or Auto Planner.
+   */
+  readonly explicitBrowseGrade?: AcademyGrade
 }
 
 function hashRef(value: string): string {
@@ -246,9 +255,14 @@ export class FinalFamilyPilotController {
     }))
   }
 
-  async assignLesson(studentRef: string, lessonRef: string): Promise<FamilyPilotAssignmentRecordV1> {
+  async assignLesson(
+    studentRef: string,
+    lessonRef: string,
+    options: FinalManualAssignmentOptions = {},
+  ): Promise<FamilyPilotAssignmentRecordV1> {
     const student = this.#studentSetup(studentRef)
     if (!student) throw new Error('Student configuration is unavailable.')
+    const assignmentRef = finalAssignmentRef(studentRef, lessonRef)
     const lesson = await this.#catalog.runtime.getLesson(lessonRef)
     const binding = await this.#catalog.getBinding(lessonRef)
     const material = await this.#catalog.getMaterial(lessonRef)
@@ -256,11 +270,20 @@ export class FinalFamilyPilotController {
       throw new Error('That admitted production lesson is unavailable.')
     }
     const expectedGrade = student.workingGradeBySubject[lesson.subject] ?? student.nominalGrade
-    if (!student.enabledSubjects.includes(lesson.subject) || Number(expectedGrade) !== lesson.grade) {
-      throw new Error('That lesson is not enabled at this student’s working grade.')
+    const explicitlySelected = options.explicitBrowseGrade
+    if (
+      !student.enabledSubjects.includes(lesson.subject) ||
+      (Number(expectedGrade) !== lesson.grade && (
+        !explicitlySelected ||
+        !ACADEMY_GRADES.includes(explicitlySelected) ||
+        Number(explicitlySelected) !== lesson.grade
+      ))
+    ) {
+      throw new Error('That lesson is outside this learner’s working level. Choose the different supported level explicitly to assign it without changing the official working level.')
     }
+    const existing = this.#assignment(studentRef, assignmentRef)
+    if (existing) return existing
     const descriptor = finalLessonDescriptor(lesson)
-    const assignmentRef = finalAssignmentRef(studentRef, lessonRef)
     this.#writeCore((state) => addFamilyPilotAssignment(state, studentRef, {
       assignmentRef,
       lessonRef,
@@ -284,22 +307,34 @@ export class FinalFamilyPilotController {
     })
   }
 
-  async assignAssessment(studentRef: string, assessmentRef: string): Promise<FinalFamilyPilotAssessmentAssignment> {
+  async assignAssessment(
+    studentRef: string,
+    assessmentRef: string,
+    options: FinalManualAssignmentOptions = {},
+  ): Promise<FinalFamilyPilotAssessmentAssignment> {
     const student = this.#studentSetup(studentRef)
     if (!student) throw new Error('Student configuration is unavailable.')
+    const assignmentRef = finalAssessmentAssignmentRef(studentRef, assessmentRef)
     const binding = this.#catalog.listAssessments().find((item) => item.assessmentRef === assessmentRef)
     const material = await this.#catalog.getAssessment(assessmentRef)
     if (!binding || !material || material.assessmentRef !== assessmentRef || material.courseRef !== binding.courseRef) {
       throw new Error('That admitted assessment material is unavailable.')
     }
     const expectedGrade = student.workingGradeBySubject[material.subject] ?? student.nominalGrade
-    if (!student.enabledSubjects.includes(material.subject) || Number(expectedGrade) !== material.grade) {
-      throw new Error('That assessment is not enabled at this student’s working grade.')
+    const explicitlySelected = options.explicitBrowseGrade
+    if (
+      !student.enabledSubjects.includes(material.subject) ||
+      (Number(expectedGrade) !== material.grade && (
+        !explicitlySelected ||
+        !ACADEMY_GRADES.includes(explicitlySelected) ||
+        Number(explicitlySelected) !== material.grade
+      ))
+    ) {
+      throw new Error('That assessment is outside this learner’s working level. Choose the different supported level explicitly to assign it without changing the official working level.')
     }
     if (!material.learnerTasks.length || material.productionReadiness.structuralOnly !== false || material.productionReadiness.answerMaterialIncluded !== false) {
       throw new Error('That assessment failed its learner-material admission contract.')
     }
-    const assignmentRef = finalAssessmentAssignmentRef(studentRef, assessmentRef)
     const existing = this.#appSnapshot.state.assessmentAssignments.find((item) => item.assignmentRef === assignmentRef)
     if (existing) return existing
     const now = this.#at()

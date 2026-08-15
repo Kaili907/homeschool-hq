@@ -181,7 +181,7 @@ describe('buildAssignViewModel — duplicate/in-progress warning', () => {
     expect(row?.canResumeDuplicate).toBe(true)
   })
 
-  it('does not flag a lesson whose only prior assignment is completed', () => {
+  it('flags a completed exact lesson so an accidental duplicate cannot be assigned', () => {
     const assignment: FamilyPilotAssignment = {
       assignmentRef: 'assignment:4',
       studentRef: ada.studentRef,
@@ -193,7 +193,7 @@ describe('buildAssignViewModel — duplicate/in-progress warning', () => {
     }
     const model = buildAssignViewModel(baseInput({ currentAssignments: [assignment] }))
     const row = model.assignableLessons.find((lesson) => lesson.lessonRef === mathLesson.lessonRef)
-    expect(row?.duplicateAssignmentRef).toBeNull()
+    expect(row?.duplicateAssignmentRef).toBe('assignment:4')
     expect(row?.priorStatus).toBe('completed')
   })
 
