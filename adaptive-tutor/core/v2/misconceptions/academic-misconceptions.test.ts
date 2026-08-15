@@ -1,12 +1,18 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import type { TSchema } from "../../schema/typebox.js";
+import { Value } from "../../schema/value.js";
 import { validateExact } from "../contracts/validation.js";
 import {
   AcademicMisconceptionSignalResultSchema,
+  MAXIMUM_ACADEMIC_MISCONCEPTION_CODE_LENGTH,
+  ReviewedAcademicMisconceptionCodeSchema,
+  SerializedAcademicMisconceptionSignalSchema,
   createAcademicMisconceptionRegistry,
   type AcademicMisconceptionEntry,
   type AcademicMisconceptionMatchRequest,
   type AcademicMisconceptionRegistry,
+  type SerializedAcademicMisconceptionSignal,
   type StudyApprovedAcademicEvidence,
 } from "./index.js";
 
@@ -96,6 +102,162 @@ function assertBoundedResult(candidate: unknown): void {
   }
 }
 
+function generatedSchema(schema: TSchema): TSchema {
+  return JSON.parse(JSON.stringify(schema)) as TSchema;
+}
+
+function serializedPossibleSignal(
+  overrides: Partial<SerializedAcademicMisconceptionSignal> = {},
+): unknown {
+  return {
+    status: "possible-misconception",
+    misconceptionRef: entry.misconceptionRef,
+    academicMisconceptionCode: entry.academicMisconceptionCode,
+    possibleInstructionalSignalOnly: true,
+    authoritativeDiagnosis: false,
+    authoritativeMasteryState: false,
+    durableLearnerClassificationAllowed: false,
+    ...overrides,
+  };
+}
+
+test("academic misconception codes have runtime and serialized-schema parity", () => {
+  const serializedCodeSchema = generatedSchema(
+    ReviewedAcademicMisconceptionCodeSchema,
+  );
+  const tooLongCode = `MATH_${"A".repeat(
+    MAXIMUM_ACADEMIC_MISCONCEPTION_CODE_LENGTH,
+  )}_PATTERN`;
+  const boundaryOverflowCode = `MATH_${"A".repeat(15_993)}_PATTERN`;
+  assert.equal(boundaryOverflowCode.length, 16_006);
+
+  const cases = [
+    { code: entry.academicMisconceptionCode, accepted: true },
+    { code: tooLongCode, accepted: false },
+    { code: boundaryOverflowCode.slice(0, 16_001), accepted: false },
+    {
+      code: "The learner adds denominators whenever fractions look difficult.",
+      accepted: false,
+    },
+    { code: "The learner has a mathematical learning disorder.", accepted: false },
+    { code: "The learner is lazy and unmotivated.", accepted: false },
+    { code: "MATH_FRACTION_加法", accepted: false },
+    { code: "PSYCHOLOGICAL_ANXIETY_DIAGNOSIS", accepted: false },
+    { code: "MATH_FRACTION_ANXIETY", accepted: false },
+    { code: "MATH_STUDENT_STUPID", accepted: false },
+  ] as const;
+
+  for (const candidate of cases) {
+    assert.equal(
+      validateExact(
+        ReviewedAcademicMisconceptionCodeSchema,
+        candidate.code,
+      ).status ===
+        "accepted",
+      candidate.accepted,
+      candidate.code.slice(0, 100),
+    );
+    assert.equal(
+      Value.Check(serializedCodeSchema, candidate.code),
+      candidate.accepted,
+      candidate.code.slice(0, 100),
+    );
+    if (!candidate.accepted) {
+      assert.deepEqual(
+        createAcademicMisconceptionRegistry([
+          { ...entry, academicMisconceptionCode: candidate.code },
+        ]),
+        {
+          status: "rejected",
+          code: "INVALID_MISCONCEPTION_ENTRY",
+          entryIndex: 0,
+        },
+      );
+    }
+  }
+});
+
+test("serialized possible signals require a known reviewed registry ref and matching code", () => {
+  const matcher = registry();
+  const serializedSignalSchema = generatedSchema(
+    SerializedAcademicMisconceptionSignalSchema,
+  );
+  const legitimate = serializedPossibleSignal();
+
+  assert.equal(
+    validateExact(SerializedAcademicMisconceptionSignalSchema, legitimate).status,
+    "accepted",
+  );
+  assert.equal(Value.Check(serializedSignalSchema, legitimate), true);
+  assert.deepEqual(matcher.reviewSerializedSignal(legitimate), {
+    status: "accepted",
+    signal: legitimate,
+  });
+
+  const unknownRegistryRef = serializedPossibleSignal({
+    misconceptionRef: "misconception:unknown-reviewed-registry-entry",
+  });
+  assert.equal(Value.Check(serializedSignalSchema, unknownRegistryRef), true);
+  assert.deepEqual(matcher.reviewSerializedSignal(unknownRegistryRef), {
+    status: "rejected",
+    code: "UNKNOWN_MISCONCEPTION_REF",
+  });
+
+  const nonMisconceptionRef = serializedPossibleSignal({
+    misconceptionRef: "diagnosis:unknown-registry-entry",
+  });
+  assert.deepEqual(matcher.reviewSerializedSignal(nonMisconceptionRef), {
+    status: "rejected",
+    code: "INVALID_SERIALIZED_SIGNAL",
+  });
+
+  const mismatchedCode = serializedPossibleSignal({
+    academicMisconceptionCode: "MATH_FRACTION_MULTIPLY_NUMERATORS",
+  });
+  assert.deepEqual(matcher.reviewSerializedSignal(mismatchedCode), {
+    status: "rejected",
+    code: "MISMATCHED_MISCONCEPTION_CODE",
+  });
+
+  assert.deepEqual(
+    createAcademicMisconceptionRegistry([
+      { ...entry, reviewApprovalRef: "approval:not-a-study-review" },
+    ]),
+    {
+      status: "rejected",
+      code: "INVALID_MISCONCEPTION_ENTRY",
+      entryIndex: 0,
+    },
+  );
+});
+
+test("serialized non-possible signals cannot retain learner classification identifiers", () => {
+  const safeNoSignal = {
+    status: "insufficient-evidence",
+    misconceptionRef: null,
+    academicMisconceptionCode: null,
+    possibleInstructionalSignalOnly: true,
+    authoritativeDiagnosis: false,
+    authoritativeMasteryState: false,
+    durableLearnerClassificationAllowed: false,
+  } as const;
+  assert.equal(
+    validateExact(SerializedAcademicMisconceptionSignalSchema, safeNoSignal).status,
+    "accepted",
+  );
+  assert.equal(registry().reviewSerializedSignal(safeNoSignal).status, "accepted");
+
+  const retainedClassification = {
+    ...safeNoSignal,
+    misconceptionRef: entry.misconceptionRef,
+    academicMisconceptionCode: entry.academicMisconceptionCode,
+  };
+  assert.deepEqual(registry().reviewSerializedSignal(retainedClassification), {
+    status: "rejected",
+    code: "INVALID_SERIALIZED_SIGNAL",
+  });
+});
+
 test("emits a non-authoritative possible signal only after enough distinct academic evidence", () => {
   const result = registry().match(
     request([
@@ -179,7 +341,7 @@ test("supporting and contradicting evidence yields a bounded conflict", () => {
 test("unknown misconception codes fail closed", () => {
   for (const unknownCode of [
     "MATH_FRACTION_UNKNOWN_PATTERN",
-    "PSYCHOLOGICAL_ANXIETY_DIAGNOSIS",
+    "SCIENCE_CELL_UNKNOWN_MODEL",
   ]) {
     const result = registry().match(
       request(
