@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "freeze_id": "DIRECTOR_APPROVED_LESSON_MODELS_R1",
+  "freeze_status": "DIRECTOR_APPROVED_LESSON_MODELS_R1_FROZEN",
+  "approval_date": "2026-08-14",
+  "base_sha": "8f05262563ce6d9e5c5d1687d46cd9cc25094830",
+  "branch": "mac/approved-lesson-models-r1",
+  "models": [
+    {
+      "subject": "Arts/Music",
+      "approved_sample_sha": "2a18b6007868f4bf55258ad3fd087c901ed47413",
+      "lesson_ref": "ma-g9-arts-and-music-u01-l02",
+      "title": "Concept model A: advanced composition and visual hierarchy",
+      "standard_reference": {
+        "sha": "679847806592762da8f956d7a272dc3b352da92d",
+        "path": "docs/curriculum-quality/arts/ARTS_MUSIC_LESSON_STANDARD_R1.md",
+        "title": "Manuel Academy Arts + Music Lesson Standard R1"
+      },
+      "approval_status": "DIRECTOR_APPROVED_FOR_PRODUCTION",
+      "approval_date": "2026-08-14",
+      "production_status": "DIRECTOR_APPROVED_FOR_PRODUCTION"
+    },
+    {
+      "subject": "Technology",
+      "approved_sample_sha": "e9c83f72d366bfad10794f559b27fd119d732cd6",
+      "lesson_ref": "ma-g10-technology-u02-l05",
+      "title": "Mastery check: algorithms, efficiency, and correctness",
+      "standard_reference": {
+        "sha": "9365bc2642e9e575080387434c4af4c8c3375500",
+        "path": "docs/curriculum-quality/technology/TECHNOLOGY_LESSON_STANDARD_R1.md",
+        "title": "Manuel Academy Technology / Computing Lesson Standard R1"
+      },
+      "approval_status": "DIRECTOR_APPROVED_FOR_PRODUCTION",
+      "approval_date": "2026-08-14",
+      "production_status": "DIRECTOR_APPROVED_FOR_PRODUCTION"
+    },
+    {
+      "subject": "Ready for Life",
+      "approved_sample_sha": "8c22d82a249b1ca5c331b82c761c9cd1abb7b3a9",
+      "lesson_ref": "ma-g3-ready-for-life-u01-l04",
+      "title": "Spot, Stop, Ask: A Safe-Space Check",
+      "standard_reference": {
+        "sha": "fe0f0139760edca0138b8da122a982f05e79e8ef",
+        "path": "docs/curriculum-quality/ready-for-life/READY_FOR_LIFE_LESSON_STANDARD_R1.md",
+        "title": "DRAFT — Manuel Academy Ready for Life Lesson Standard R1"
+      },
+      "approval_status": "DIRECTOR_APPROVED_FOR_PRODUCTION",
+      "approval_date": "2026-08-14",
+      "production_status": "DIRECTOR_APPROVED_FOR_PRODUCTION"
+    },
+    {
+      "subject": "Financial Literacy",
+      "approved_sample_sha": "dbcc62cc1589e8fe4ef3feef1a8730b2eaccb82c",
+      "lesson_ref": "ma-g8-financial-literacy-u04-l03",
+      "title": "Guided practice A: credit cards and minimum payments",
+      "standard_reference": {
+        "sha": "71d9e124e95b1f2f4d83bc1473d46ff80c3c316d",
+        "path": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md",
+        "title": "Manuel Academy Financial Literacy Lesson Standard R1"
+      },
+      "approval_status": "DIRECTOR_APPROVED_FOR_PRODUCTION",
+      "approval_date": "2026-08-14",
+      "production_status": "DIRECTOR_APPROVED_FOR_PRODUCTION"
+    },
+    {
+      "subject": "Health",
+      "approved_sample_sha": "61f447082bc3102cab6eb7514a0c443c1bacbc17",
+      "lesson_ref": "ma-g5-health-u01-l01",
+      "title": "Launch and diagnostic: dimensions of health",
+      "standard_reference": {
+        "sha": "0518b817bae286707c28e800b3387d214ffbf61f",
+        "path": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+        "title": "Manuel Academy Health Lesson Standard R1"
+      },
+      "approval_status": "DIRECTOR_APPROVED_FOR_PRODUCTION",
+      "approval_date": "2026-08-14",
+      "production_status": "DIRECTOR_APPROVED_FOR_PRODUCTION"
+    },
+    {
+      "subject": "Physical Education",
+      "approved_sample_sha": "c190f45107dd15f9a6acccac9db1f321bfe66a41",
+      "lesson_ref": "ma-g12-physical-education-u08-l07",
+      "title": "The Stop Rule: Act Without Waiting for a Coach",
+      "standard_reference": {
+        "sha": "0518b817bae286707c28e800b3387d214ffbf61f",
+        "path": "docs/curriculum-quality/physical-education/PHYSICAL_EDUCATION_LESSON_STANDARD_R1.md",
+        "title": "Manuel Academy Physical Education Lesson Standard R1"
+      },
+      "approval_status": "DIRECTOR_APPROVED_FOR_PRODUCTION",
+      "approval_date": "2026-08-14",
+      "production_status": "DIRECTOR_APPROVED_FOR_PRODUCTION"
+    }
+  ]
+}
