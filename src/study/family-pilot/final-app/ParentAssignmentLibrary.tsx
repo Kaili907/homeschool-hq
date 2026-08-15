@@ -216,23 +216,23 @@ export function ParentAssignmentLibrary({
         <legend className="font-extrabold text-slate-900">Browse the admitted curriculum for {student.displayName}</legend>
         <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <label className="grid gap-1 text-sm font-bold text-slate-700">Subject
-            <select className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-950" value={subject} onChange={(event) => setSubject(event.target.value as AcademySubject)}>
+            <select aria-label="Subject" className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-950" value={subject} onChange={(event) => setSubject(event.target.value as AcademySubject)}>
               {student.enabledSubjects.map((value) => <option key={value} value={value}>{SUBJECT_LABEL[value]}</option>)}
             </select>
           </label>
           <label className="grid gap-1 text-sm font-bold text-slate-700">Working level to browse
-            <select className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-950" value={browseGrade} onChange={(event) => { setBrowseGrade(event.target.value ? Number(event.target.value) as FinalCurriculumGrade : ''); setCourseRef(''); setUnitRef(''); setConfirmDifferentLevel(false) }}>
+            <select aria-label="Working level to browse" className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-950" value={browseGrade} onChange={(event) => { setBrowseGrade(event.target.value ? Number(event.target.value) as FinalCurriculumGrade : ''); setCourseRef(''); setUnitRef(''); setConfirmDifferentLevel(false) }}>
               <option value="">Choose a supported level</option>
               {supportedGrades.map((grade) => <option key={grade} value={grade}>Grade {grade}{grade === officialGrade ? ' — official working level' : ' — manual browse choice'}</option>)}
             </select>
           </label>
           <label className="grid gap-1 text-sm font-bold text-slate-700">Course
-            <select disabled={!selectedCourse} className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-950 disabled:bg-slate-100" value={selectedCourse?.courseRef ?? ''} onChange={(event) => { setCourseRef(event.target.value); setUnitRef(''); setQuery('') }}>
+            <select aria-label="Course" disabled={!selectedCourse} className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-950 disabled:bg-slate-100" value={selectedCourse?.courseRef ?? ''} onChange={(event) => { setCourseRef(event.target.value); setUnitRef(''); setQuery('') }}>
               {courses.map((course) => <option key={course.courseRef} value={course.courseRef}>{course.title}</option>)}
             </select>
           </label>
           <label className="grid gap-1 text-sm font-bold text-slate-700">Unit
-            <select disabled={!selectedUnit} className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-950 disabled:bg-slate-100" value={selectedUnit?.unitRef ?? ''} onChange={(event) => { setUnitRef(event.target.value); setQuery('') }}>
+            <select aria-label="Unit" disabled={!selectedUnit} className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-950 disabled:bg-slate-100" value={selectedUnit?.unitRef ?? ''} onChange={(event) => { setUnitRef(event.target.value); setQuery('') }}>
               {units.map((unit) => <option key={unit.unitRef} value={unit.unitRef}>Unit {unit.unitNumber}: {unit.title}</option>)}
             </select>
           </label>
@@ -327,7 +327,7 @@ function UnitCandidates({
         {lessons.map((lesson) => {
           const status = lessonCandidateStatus({ lessonRef: lesson.lessonRef, assignments, waitingAssignmentRefs: pendingAssignmentRefs, blockedAssignmentRefs })
           return (
-            <li key={lesson.lessonRef} className="rounded-xl border border-slate-200 p-4">
+            <li key={lesson.lessonRef} data-lesson-ref={lesson.lessonRef} className="rounded-xl border border-slate-200 p-4">
               <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
                 <div>
                   <p className="text-sm font-bold text-slate-500">Lesson {lesson.dayInUnit} · Course day {lesson.courseDay}</p>
@@ -345,7 +345,7 @@ function UnitCandidates({
           const blocked = assigned && blockedAssessmentRefs.has(assessment.assessmentRef) ? new Set([assigned.assignmentRef]) : new Set<string>()
           const status = assessmentCandidateStatus({ assessmentRef: assessment.assessmentRef, assignments: assessmentAssignments, blockedAssignmentRefs: blocked })
           return (
-            <li key={assessment.assessmentRef} className="rounded-xl border-2 border-violet-200 bg-violet-50/40 p-4">
+            <li key={assessment.assessmentRef} data-assessment-ref={assessment.assessmentRef} className="rounded-xl border-2 border-violet-200 bg-violet-50/40 p-4">
               <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
                 <div>
                   <p className="text-sm font-bold text-violet-700">Unit {unit.unitNumber} assessment</p>

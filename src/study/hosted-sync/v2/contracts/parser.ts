@@ -21,6 +21,7 @@ import {
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,511}$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const GRADES = new Set(['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'])
+const WORKING_GRADES = new Set(['3', '4', '5', '7', '8', '9', '10', '11', '12'])
 
 const TOP_KEYS = [
   'contractVersion', 'identity', 'sync', 'student', 'studentProfile', 'appUpdatedAt',
@@ -126,7 +127,7 @@ function parseProfile(value: unknown, studentRef: string): HostedSyncStudentProf
   if (!value.enabledSubjects.length || !value.enabledSubjects.every((subject) => ACADEMY_SUBJECTS.includes(subject as never))) return null
   if (new Set(value.enabledSubjects).size !== value.enabledSubjects.length) return null
   for (const [subject, grade] of Object.entries(value.workingGradeBySubject)) {
-    if (!ACADEMY_SUBJECTS.includes(subject as never) || !['3', '4', '5', '7', '8'].includes(String(grade))) return null
+    if (!ACADEMY_SUBJECTS.includes(subject as never) || !WORKING_GRADES.has(String(grade))) return null
     if (!value.enabledSubjects.includes(subject)) return null
   }
   if (!isInstant(value.createdAt) || !isInstant(value.updatedAt)) return null

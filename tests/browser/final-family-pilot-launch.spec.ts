@@ -115,17 +115,35 @@ async function parentStudent(page: Page, name: string) {
 }
 
 async function openAssignments(page: Page) {
-  await page.getByRole('button', { name: 'School Plan', exact: true }).click()
-  await page.getByRole('button', { name: 'Assignments & readiness', exact: true }).click()
+  await page.getByRole('button', { name: 'Assignments', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Choose an exact lesson or assessment' })).toBeVisible()
+}
+
+function courseParts(courseRef: string) {
+  const matched = /^ma-g(\d+)-(.+)$/.exec(courseRef)
+  if (!matched) throw new Error(`Unexpected course ref ${courseRef}`)
+  return { grade: matched[1], subject: matched[2] }
+}
+
+async function browseCourse(page: Page, courseRef: string) {
+  const { grade, subject } = courseParts(courseRef)
+  const subjectSelect = page.getByLabel('Subject', { exact: true })
+  if (await subjectSelect.inputValue() !== subject) await subjectSelect.selectOption(subject)
+  const workingLevelSelect = page.getByLabel('Working level to browse')
+  if (await workingLevelSelect.inputValue() !== grade) await workingLevelSelect.selectOption(grade)
+  const differentLevel = page.getByRole('checkbox', { name: new RegExp(`Use Grade ${grade} only for the manual item`) })
+  if (await differentLevel.isVisible().catch(() => false) && !await differentLevel.isChecked()) await differentLevel.check()
+  await expect(page.getByLabel('Course', { exact: true })).toHaveValue(courseRef)
 }
 
 async function assign(page: Page, name: string, lesson: Lesson) {
   await parentStudent(page, name)
-  await page.getByLabel('Admitted course').selectOption(lesson.courseRef)
-  const row = page.getByRole('listitem').filter({ hasText: lesson.title }).last()
+  await browseCourse(page, lesson.courseRef)
+  await page.getByLabel('Search this course').fill(lesson.title)
+  const row = page.locator(`[data-lesson-ref="${lesson.lessonRef}"]`)
   await expect(row).toBeVisible()
-  await row.getByRole('button', { name: `Assign to ${name}` }).click()
-  await expect(page.getByRole('heading', { name: 'Current work' }).locator('..').getByText(lesson.title)).toBeVisible()
+  await row.getByRole('button', { name: /Assign (?:lesson|Grade \d+ lesson as override)/ }).click()
+  await expect(row).toContainText(/assigned|blocked|waiting|current/)
 }
 
 async function configureSchoolPlan(page: Page, name: string) {
@@ -320,14 +338,15 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await page.getByRole('button', { name: 'Save learner changes' }).click()
     await page.getByRole('button', { name: 'Back to School Plan' }).click()
     await openAssignments(page)
-    const courseOptions = await page.getByLabel('Admitted course').locator('option').evaluateAll((options) => options.map((option) => (option as HTMLOptionElement).value))
-    expect(courseOptions).toEqual([
+    const admittedCourses = [
       'ma-g5-mathematics',
       'ma-g7-science',
       'ma-g3-social-studies',
       'ma-g5-ready-for-life',
-    ])
-    expect(courseOptions.some((course) => course.includes('g6'))).toBe(false)
+    ]
+    for (const courseRef of admittedCourses) await browseCourse(page, courseRef)
+    const workingLevelOptions = await page.getByLabel('Working level to browse').locator('option').evaluateAll((options) => options.map((option) => (option as HTMLOptionElement).value))
+    expect(workingLevelOptions).not.toContain('6')
 
     await assign(page, 'Avery Synthetic', LESSON.a)
     await assign(page, 'Blake Synthetic', LESSON.b)
@@ -504,13 +523,16 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await expect(refreshedCasey.locator('dt').filter({ hasText: /^Remaining$/ }).locator('..')).toContainText('1')
     await expect.poll(async () => (await supportState(page)).app.activeStudentRef).toBeNull()
     await page.getByRole('button', { name: 'Progress', exact: true }).click()
-    await expect(page.getByRole('heading', { name: 'Avery Synthetic’s progress' })).toBeVisible()
-    await expect(page.getByText('Mathematics · Working Grade 5', { exact: true }).locator('..')).toContainText('1 of 1 assigned lessons complete')
+    const averyReport = page.locator(`[data-parent-report-student-ref="${aRef}"]`)
+    await expect(averyReport.getByRole('heading', { name: 'Parent Progress Report' })).toBeVisible()
+    await expect(averyReport).toContainText('Learner: Avery Synthetic')
+    await expect(averyReport.getByText('Mathematics · Working Grade 5', { exact: true }).locator('..')).toContainText('1 completed')
     await expect(page.getByText('Pending guardian attestations: 0')).toBeVisible()
     await expect(page.getByText('Open safety holds: 0')).toBeVisible()
     await parentStudent(page, 'Blake Synthetic')
     await page.getByRole('button', { name: 'Progress', exact: true }).click()
-    await expect(page.getByText('Mathematics · Working Grade 8', { exact: true }).locator('..')).toContainText('1 of 1 assigned lessons complete')
+    const blakeReport = page.locator(`[data-parent-report-student-ref="${bRef}"]`)
+    await expect(blakeReport.getByText('Mathematics · Working Grade 8', { exact: true }).locator('..')).toContainText('1 completed')
 
     await parentStudent(page, 'Avery Synthetic')
     await page.getByRole('button', { name: 'Backup/Recovery', exact: true }).click()
@@ -663,16 +685,17 @@ test('all 90 grade-subject cells load in Chromium and every subject launches les
 
   for (const cell of gradeNine) {
     await parentStudent(page, 'Matrix Student')
-    await openAssignments(page)
-    await page.getByLabel('Admitted course').selectOption(cell.courseRef)
-    const lessonRow = page.getByRole('listitem').filter({ hasText: cell.title }).last()
+    await browseCourse(page, cell.courseRef)
+    await page.getByLabel('Search this course').fill(cell.title)
+    const lessonRow = page.locator(`[data-lesson-ref="${cell.lessonRef}"]`)
     await expect(lessonRow).toBeVisible()
-    await lessonRow.getByRole('button', { name: 'Assign to Matrix Student' }).click()
+    await lessonRow.getByRole('button', { name: 'Assign lesson' }).click()
 
-    const assessmentSection = page.getByTestId('family-pilot-assessment-assignment')
-    const assessmentRow = assessmentSection.getByRole('listitem').filter({ hasText: cell.assessmentRef })
+    await page.getByLabel('Search this course').fill('')
+    await page.getByLabel('Unit', { exact: true }).selectOption(cell.assessmentRef.replace(/-assessment$/, ''))
+    const assessmentRow = page.locator(`[data-assessment-ref="${cell.assessmentRef}"]`)
     await assessmentRow.getByRole('button', { name: 'Assign assessment' }).click()
-    await assessmentRow.getByRole('button', { name: 'Open' }).click()
+    await assessmentRow.getByRole('button', { name: 'Open assignment' }).click()
     await expect(page.locator(`[data-assessment-ref="${cell.assessmentRef}"]`)).toBeVisible()
     await expect(page.locator('[data-assessment-task-ref]').first()).toBeVisible()
     await page.getByRole('button', { name: 'Back to Home' }).click()
@@ -695,12 +718,11 @@ test('an incorrect auto-scoreable response stays pending without answer disclosu
   page.on('request', (request) => requests.push(request.url()))
   await setupFamily(page, [{ name: 'Negative Control Student', grade: '9' }])
   await parentStudent(page, 'Negative Control Student')
-  await openAssignments(page)
-  await page.getByLabel('Admitted course').selectOption('ma-g9-mathematics')
-  const assessmentRow = page.getByTestId('family-pilot-assessment-assignment').getByRole('listitem').first()
-  await expect(assessmentRow).toContainText('AUTO SCOREABLE')
+  await browseCourse(page, 'ma-g9-mathematics')
+  const assessmentRow = page.locator('[data-assessment-ref]').first()
+  await expect(assessmentRow).toContainText(/auto scoreable/i)
   await assessmentRow.getByRole('button', { name: 'Assign assessment' }).click()
-  await assessmentRow.getByRole('button', { name: 'Open' }).click()
+  await assessmentRow.getByRole('button', { name: 'Open assignment' }).click()
   await expect(page.locator('[data-assessment-ref]')).toBeVisible()
   const tasks = page.locator('[data-assessment-task-ref]')
   await expect(tasks.first()).toBeVisible()
@@ -731,10 +753,11 @@ test('rubric-review and guardian assessment authority paths require the authoriz
   await openAssignments(page)
 
   const submitAssessment = async (courseRef: string, assessmentRef: string, expectedStatus: RegExp) => {
-    await page.getByLabel('Admitted course').selectOption(courseRef)
-    const row = page.getByTestId('family-pilot-assessment-assignment').getByRole('listitem').filter({ hasText: assessmentRef })
+    await browseCourse(page, courseRef)
+    await page.getByLabel('Unit', { exact: true }).selectOption(assessmentRef.replace(/-assessment$/, ''))
+    const row = page.locator(`[data-assessment-ref="${assessmentRef}"]`)
     await row.getByRole('button', { name: 'Assign assessment' }).click()
-    await row.getByRole('button', { name: 'Open' }).click()
+    await row.getByRole('button', { name: 'Open assignment' }).click()
     const tasks = page.locator('[data-assessment-task-ref]')
     await expect(tasks.first()).toBeVisible()
     for (let index = 0; index < await tasks.count(); index += 1) {
@@ -764,7 +787,9 @@ test('rubric-review and guardian assessment authority paths require the authoriz
   await expect(page.getByRole('status')).toContainText('Guardian certification recorded')
 
   await page.getByRole('button', { name: 'Progress', exact: true }).click()
-  await expect(page.getByText('2 certified · 0 pending', { exact: true })).toBeVisible()
+  const report = page.locator('[data-parent-report-student-ref]')
+  await expect(report.locator('dt').filter({ hasText: /^Certified assessments$/ }).locator('..')).toContainText('2')
+  await expect(report.getByText('No pending assessment records.', { exact: true })).toBeVisible()
 })
 
 test('targeted repaired Math, ELA, and physical Science paths render in the learner UI', async ({ page }) => {

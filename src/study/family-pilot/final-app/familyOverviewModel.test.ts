@@ -42,6 +42,7 @@ function plan(studentRef: string, status: FamilyAutoPlannerTodayPlan['status'], 
     status, reason, scope: Object.freeze({ householdRef: 'household:test', learnerRef: studentRef }),
     householdTimeZone: 'America/Detroit', localDate: DATE, generatedAt: NOW,
     items: Object.freeze(items), blockers: Object.freeze([]), manualOverrideActive: false,
+    completedCourses: Object.freeze([]),
     offlineMaterializedWorkAvailable: false,
   })
 }

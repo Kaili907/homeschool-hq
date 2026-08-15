@@ -136,8 +136,9 @@ describe('Parent device-sync setup presentation', () => {
   it('keeps the production app seam optional and mounts setup only inside ParentSurface', () => {
     const source = readFileSync(new URL('../../../../family-pilot/final-app/FinalFamilyPilotApp.tsx', import.meta.url), 'utf8')
     expect(source).toContain('deviceSyncSetup?: ParentDeviceSyncSetupRuntime')
-    expect(source).toContain("deviceSyncAvailable ? 'SYNC_READY' : currentParentSyncStatusR1()")
+    expect(source).toContain("deviceSyncAvailable ? 'SYNC_READY' : initialSyncStatus")
     expect(source).toContain('<ParentDeviceSyncSetup runtime={deviceSyncSetup}')
+    expect(source).toContain('Hosted Sync is off for this Family Pilot.')
     expect(source.indexOf('function ParentSurface')).toBeLessThan(source.indexOf('<ParentDeviceSyncSetup runtime={deviceSyncSetup}'))
     expect(source).not.toMatch(/createClient|supabaseUrl|VITE_SUPABASE/)
   })

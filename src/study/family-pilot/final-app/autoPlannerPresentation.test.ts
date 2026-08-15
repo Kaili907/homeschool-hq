@@ -23,7 +23,7 @@ function plannerItem(patch: Partial<FamilyAutoPlannerTodayItem> = {}): FamilyAut
 function plan(status: FamilyAutoPlannerTodayPlan['status'], patch: Partial<FamilyAutoPlannerTodayPlan> = {}): FamilyAutoPlannerTodayPlan {
   return {
     status,
-    reason: status === 'NEEDS_PLAN_SETUP' ? 'SCHOOL_PLAN_MISSING' : status === 'NO_SCHOOL_TODAY' ? 'NON_SCHOOL_DAY' : 'NONE',
+    reason: status === 'NEEDS_PLAN_SETUP' ? 'SCHOOL_PLAN_MISSING' : status === 'NO_SCHOOL_TODAY' ? 'NON_SCHOOL_DAY' : status === 'COURSE_COMPLETE' ? 'COURSE_COMPLETE' : 'NONE',
     scope: { householdRef: 'household:test', learnerRef: 'student:ada' }, householdTimeZone: 'America/Detroit',
     localDate: '2026-08-14', generatedAt: '2026-08-14T13:00:00.000Z', items: [], blockers: [],
     completedCourses: status === 'COURSE_COMPLETE' ? [{

@@ -3,7 +3,6 @@ import {
   loadFinalFamilyPilotCatalog,
   type FinalLearnerAssessmentMaterial,
 } from '../../../curriculum/final-app-data'
-import type { AcademySubject } from '../../../types'
 import { FamilyPilotStudentLogin } from '../auth'
 import {
   downloadFinalFamilyPilotBackup,
@@ -63,19 +62,6 @@ import {
 } from '../../hosted-sync/v2/familyPilot/deviceSetup'
 import { resolveFamilyServicesR1, type FamilyServicesPilotConfigurationR1 } from '../family-services'
 import { ParentAssignmentLibrary } from './ParentAssignmentLibrary'
-
-const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
-  mathematics: 'Mathematics',
-  'english-language-arts': 'English Language Arts',
-  science: 'Science',
-  'social-studies': 'Social Studies',
-  health: 'Health',
-  'physical-education': 'Physical Education',
-  'ready-for-life': 'Ready for Life',
-  technology: 'Technology / Computer Science',
-  'arts-and-music': 'Arts / Music',
-  'financial-literacy': 'Financial Literacy',
-})
 
 type Mode = 'parent' | 'student'
 type ParentView = 'overview' | 'school-plan' | 'assign' | 'review' | 'reports' | 'preferences' | 'backup' | 'devices'
