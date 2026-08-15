@@ -1,14 +1,30 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { buildLearnerAnalyticsSnapshot } from '../../admin/learnerAnalyticsModel'
+import { ADMIN_WORKING_GRADE_CHOICES, buildLearnerAnalyticsSnapshot, type LearnerAnalyticsSnapshot } from '../../admin/learnerAnalyticsModel'
+import type { AcademyCatalog } from '../../academy/contentTypes'
 import { emptyProfile } from '../../migration'
 import {
   LearnerAnalytics,
   filterLearnerOperations,
+  learnerWorkingGradeChange,
   moveLearnerSelection,
 } from './LearnerAnalytics'
 
 const TODAY = '2026-09-09'
+
+function academyCatalog(): AcademyCatalog {
+  return {
+    releaseVersion: '1.0.0', grade: '5',
+    courses: [{
+      courseId: 'ma-g5-mathematics', subject: 'mathematics', lessonCount: 2,
+      units: [{
+        unitId: 'ma-g5-mathematics-u01', unitNumber: 1, title: 'Whole Numbers', days: 2,
+        essentialQuestion: 'How do numbers work?', performanceTask: 'Solve problems',
+        lessonIds: ['lesson-1', 'lesson-2'], hasAssessment: false,
+      }],
+    }],
+  }
+}
 
 function readyState() {
   const first = emptyProfile('p1', 'Ada', '6')
@@ -16,6 +32,7 @@ function readyState() {
   first.skills.ratio6 = { attempts: 4, correct: 3, mastery: 78, lastSeen: TODAY }
   first.attendance = { log: [{ date: TODAY, hours: 3.5 }] }
   first.tutorFlags = { ratio6: { since: TODAY, reason: 'PRIVATE REASON', sessionCount: 3, weekCount: 3 } }
+  first.workingLevels = { mathematics: '5' }
   first.academy = {
     releaseVersion: '1.0.0', grade: '5', enrolledAt: '2026-09-01T12:00:00.000Z',
     courseIds: ['ma-g5-mathematics'], lessons: {}, assessments: {},
@@ -23,8 +40,20 @@ function readyState() {
   const second = emptyProfile('p2', 'Grace', '5')
   return {
     status: 'ready' as const,
-    snapshot: buildLearnerAnalyticsSnapshot({ profiles: [first, second], today: TODAY, observedAt: '2026-09-09T18:00:00.000Z' }),
+    snapshot: buildLearnerAnalyticsSnapshot({ profiles: [first, second], today: TODAY, observedAt: '2026-09-09T18:00:00.000Z', academyCatalogs: [academyCatalog()] }),
   }
+}
+
+function highSchoolState(grade: '9' | '10' | '11' | '12') {
+  const state = readyState()
+  const learner = state.snapshot.learners[0]
+  const detail = state.snapshot.details.p1
+  const snapshot = {
+    ...state.snapshot,
+    learners: [{ ...learner, nominalGrade: grade }],
+    details: { p1: { ...detail, nominalGrade: grade, workingLevels: detail.workingLevels.map((level) => ({ ...level, level: grade, source: 'nominal-grade' as const })) } },
+  } as unknown as LearnerAnalyticsSnapshot
+  return { status: 'ready' as const, snapshot }
 }
 
 describe('LearnerAnalytics', () => {
@@ -59,9 +88,39 @@ describe('LearnerAnalytics', () => {
     expect(html).toContain('Study evidence unavailable')
     expect(html).toContain('Learner cost unavailable')
     expect(html).toContain('Usage and cost are not inferred')
+    expect(html).toContain('Course assignments &amp; working grades')
+    expect(html).toContain('Nominal Grade 6 remains reporting truth')
+    expect(html).toContain('Grade 5 Mathematics')
+    expect(html).toContain('Academy course assigned')
+    expect(html).toContain('0 of 2 complete (0%)')
+    expect(html).not.toContain('ma-g5-mathematics')
     expect(html).not.toContain('PRIVATE REASON')
     expect(html).not.toMatch(/ADMIN-[23]/)
     expect(html).not.toMatch(/\b\d+\s+(?:input|output)?\s*tokens?\b/i)
+  })
+
+  it('offers exactly the expanded working-grade choices and never assigns Grade 6', () => {
+    expect(ADMIN_WORKING_GRADE_CHOICES).toEqual(['3', '4', '5', '7', '8', '9', '10', '11', '12'])
+    const html = renderToStaticMarkup(<LearnerAnalytics state={readyState()} onWorkingGradeChange={() => undefined} />)
+    for (const grade of ADMIN_WORKING_GRADE_CHOICES) expect(html).toContain(`<option value="${grade}">Grade ${grade}</option>`)
+    expect(html).not.toContain('<option value="6">Grade 6</option>')
+    expect(html).toContain('Grade 6 may remain the nominal grade')
+    expect(html).toContain('Not assignable at nominal Grade 6')
+  })
+
+  it('builds a working-grade change without a nominal-grade mutation', () => {
+    expect(learnerWorkingGradeChange({ learnerRef: 'p1', nominalGrade: '6' }, 'mathematics', '9')).toEqual({
+      learnerRef: 'p1', subject: 'mathematics', workingGrade: '9', expectedNominalGrade: '6',
+    })
+    expect(learnerWorkingGradeChange({ learnerRef: 'p1', nominalGrade: '6' }, 'mathematics', '')).toMatchObject({ workingGrade: null, expectedNominalGrade: '6' })
+    expect(() => learnerWorkingGradeChange({ learnerRef: 'p1', nominalGrade: '6' }, 'mathematics', '6')).toThrow('Unsupported Academy working grade')
+  })
+
+  it.each(['9', '10', '11', '12'] as const)('renders nominal Grade %s as a first-class learner', (grade) => {
+    const html = renderToStaticMarkup(<LearnerAnalytics state={highSchoolState(grade)} />)
+    expect(html).toContain(`nominal grade ${grade}`)
+    expect(html).toContain(`Nominal Grade ${grade} remains reporting truth`)
+    expect(html).toContain(`Use nominal Grade ${grade}`)
   })
 
   it('uses responsive native controls, routed links, labels, and deterministic keyboard navigation', () => {
@@ -88,7 +147,8 @@ describe('LearnerAnalytics', () => {
   it('searches safe list fields and applies meaningful operational filters', () => {
     const learners = readyState().snapshot.learners
     expect(filterLearnerOperations(learners, 'ada', 'all').map((item) => item.learnerRef)).toEqual(['p1'])
-    expect(filterLearnerOperations(learners, 'grade 5', 'all').map((item) => item.learnerRef)).toEqual(['p2'])
+    expect(filterLearnerOperations(learners, 'grade 5', 'all').map((item) => item.learnerRef)).toEqual(['p1', 'p2'])
+    expect(filterLearnerOperations(learners, 'grade 6', 'all').map((item) => item.learnerRef)).toEqual(['p1'])
     expect(filterLearnerOperations(learners, '', 'needs-attention').map((item) => item.learnerRef)).toEqual(['p1'])
     expect(filterLearnerOperations(learners, '', 'enrolled').map((item) => item.learnerRef)).toEqual(['p1'])
     expect(filterLearnerOperations(learners, '', 'not-configured').map((item) => item.learnerRef)).toEqual(['p2'])
