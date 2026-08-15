@@ -379,6 +379,9 @@ export class BrowserFamilyCloudCheckpointRepositoryR1 implements FamilyCloudChec
     const priorCore = scoped.getItem(FAMILY_PILOT_STATE_KEY)
     const priorApp = scoped.getItem(FINAL_FAMILY_PILOT_APP_STATE_KEY)
     const priorMetadata = scoped.getItem(META_KEY)
+    let publishedCore: string | null = null
+    let publishedApp: string | null = null
+    let publishedMetadata: string | null = null
     const recordBackups = new Map<string, IndexedDbPublicationBackup>()
     const recordStore = await openIndexedDbRecordStore()
     const capturePublishedRecord = async (key: string, publish: () => Promise<void>) => {
@@ -422,14 +425,25 @@ export class BrowserFamilyCloudCheckpointRepositoryR1 implements FamilyCloudChec
           await capturePublishedRecord(responseKey, () => responseStore.save(response))
         }
       }
+      // IndexedDB staging can overlap a foreground Family Pilot save. Refuse
+      // publication if either canonical localStorage document changed after
+      // the initial CAS snapshot; the record-store rollback below is itself
+      // compare-and-swap guarded and therefore preserves the newer writer.
+      if (scoped.getItem(FAMILY_PILOT_STATE_KEY) !== priorCore ||
+          scoped.getItem(FINAL_FAMILY_PILOT_APP_STATE_KEY) !== priorApp) {
+        throw new Error('Family Cloud hydration lost its local publication lease.')
+      }
       if (saveFamilyPilotState(combined.core, { storage: scoped }).status !== 'ready') throw new Error('Core hydration was refused.')
+      publishedCore = scoped.getItem(FAMILY_PILOT_STATE_KEY)
       if (saveFinalFamilyPilotAppState(combined.app, { storage: scoped }).status !== 'saved') throw new Error('App hydration was refused.')
+      publishedApp = scoped.getItem(FINAL_FAMILY_PILOT_APP_STATE_KEY)
 
       const operationIds = Object.fromEntries(input.learners.map((learner) => [learner.learnerRef, learner.authorityCheckpoint.sync.operationId]))
       const linked = Object.fromEntries(input.learners.flatMap((learner) => learner.linked ? [[learner.learnerRef, learner.linked]] : []))
       const metadata: RepositoryMetadataR1 = Object.freeze({ schemaVersion: 1, householdRef: input.householdRef, initialized: true, operationIds, linked })
-      scoped.setItem(META_KEY, JSON.stringify(metadata))
-      if (scoped.getItem(META_KEY) !== JSON.stringify(metadata)) throw new Error('Family Cloud publication marker did not verify.')
+      publishedMetadata = JSON.stringify(metadata)
+      scoped.setItem(META_KEY, publishedMetadata)
+      if (scoped.getItem(META_KEY) !== publishedMetadata) throw new Error('Family Cloud publication marker did not verify.')
       const readback = await this.readHousehold(input.householdRef)
       if (readback.length !== input.learners.length || !readback.every((item, index) => sameLearnerContent(item, input.learners[index]!))) {
         throw new Error('Family Cloud publication read-back did not verify.')
@@ -449,9 +463,16 @@ export class BrowserFamilyCloudCheckpointRepositoryR1 implements FamilyCloudChec
         }
       }
       try {
-        if (priorCore === null) scoped.removeItem(FAMILY_PILOT_STATE_KEY); else scoped.setItem(FAMILY_PILOT_STATE_KEY, priorCore)
-        if (priorApp === null) scoped.removeItem(FINAL_FAMILY_PILOT_APP_STATE_KEY); else scoped.setItem(FINAL_FAMILY_PILOT_APP_STATE_KEY, priorApp)
-        if (priorMetadata === null) scoped.removeItem(META_KEY); else scoped.setItem(META_KEY, priorMetadata)
+        if (publishedCore !== null && scoped.getItem(FAMILY_PILOT_STATE_KEY) === publishedCore) {
+          if (priorCore === null) scoped.removeItem(FAMILY_PILOT_STATE_KEY); else scoped.setItem(FAMILY_PILOT_STATE_KEY, priorCore)
+        }
+        if (publishedApp !== null && scoped.getItem(FINAL_FAMILY_PILOT_APP_STATE_KEY) === publishedApp) {
+          if (priorApp === null) scoped.removeItem(FINAL_FAMILY_PILOT_APP_STATE_KEY); else scoped.setItem(FINAL_FAMILY_PILOT_APP_STATE_KEY, priorApp)
+        }
+        const currentMetadata = scoped.getItem(META_KEY)
+        if (currentMetadata === null || currentMetadata === publishedMetadata) {
+          if (priorMetadata === null) scoped.removeItem(META_KEY); else scoped.setItem(META_KEY, priorMetadata)
+        }
       } catch {
         // A refused localStorage rollback still cannot acquire authority: a
         // fresh device has no valid publication marker, and callers get false.

@@ -148,6 +148,8 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
   const [cloudSyncStatus, setCloudSyncStatus] = useState<ParentSyncStatusValueR1>(() =>
     cloudState?.status === 'READY' ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'OFFLINE_SAVED' : parentSyncStatus)
   const reconcileController = useRef<AbortController | null>(null)
+  const reconcilePending = useRef(false)
+  const runReconcile = useRef<() => void>(() => undefined)
   const storage = useMemo(
     () => cloudState ? createBrowserHouseholdScopedStorage(cloudState.householdRef) : undefined,
     [cloudState?.householdRef],
@@ -168,11 +170,16 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
     setCloudSyncStatus(cloudState?.status === 'READY'
       ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'OFFLINE_SAVED' : parentSyncStatus)
   }, [cloudState?.status, parentSyncStatus])
-  useEffect(() => () => reconcileController.current?.abort(), [])
-  const refresh = useCallback(() => {
-    controller.refresh()
-    setRevision((value) => value + 1)
-    if (!onReconcile || cloudState?.status !== 'READY' || reconcileController.current) return
+  useEffect(() => () => {
+    reconcilePending.current = false
+    reconcileController.current?.abort()
+  }, [])
+  runReconcile.current = () => {
+    if (!onReconcile || cloudState?.status !== 'READY') return
+    if (reconcileController.current) {
+      reconcilePending.current = true
+      return
+    }
     const abort = new AbortController()
     reconcileController.current = abort
     setCloudSyncStatus('SYNCING')
@@ -185,9 +192,19 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
       } else if (result === 'OFFLINE') setCloudSyncStatus('OFFLINE_SAVED')
       else if (result === 'CONFLICT' || result === 'UNAVAILABLE') setCloudSyncStatus('NEEDS_ATTENTION')
     }).finally(() => {
-      if (reconcileController.current === abort) reconcileController.current = null
+      if (reconcileController.current !== abort) return
+      reconcileController.current = null
+      if (reconcilePending.current) {
+        reconcilePending.current = false
+        window.queueMicrotask(() => runReconcile.current())
+      }
     })
-  }, [cloudState?.status, controller, onReconcile])
+  }
+  const refresh = useCallback(() => {
+    controller.refresh()
+    setRevision((value) => value + 1)
+    runReconcile.current()
+  }, [controller])
   const householdSignOut = useCallback(() => {
     reconcileController.current?.abort()
     reconcileController.current = null
@@ -370,12 +387,14 @@ function MountedFinalFamilyPilot({
   const learnersMissingDevicePins = cloudState
     ? app.state.setup.students.filter((student) => !app.state.studentAccessVerifiers[student.studentRef])
     : []
-  if (learnersMissingDevicePins.length > 0) {
+  const parentPinMissing = Boolean(cloudState && !app.state.parentAccessVerifier)
+  if (learnersMissingDevicePins.length > 0 || parentPinMissing) {
     return (
       <FinalShell onExit={onExit} cloudState={cloudState}>
         <FreshDeviceLearnerPinSetup
           controller={controller}
           students={learnersMissingDevicePins}
+          requireParentPin={parentPinMissing}
           onComplete={refresh}
           onSignOut={onHouseholdSignOut}
         />
@@ -489,14 +508,17 @@ function MountedFinalFamilyPilot({
   )
 }
 
-function FreshDeviceLearnerPinSetup({ controller, students, onComplete, onSignOut }: {
+function FreshDeviceLearnerPinSetup({ controller, students, requireParentPin, onComplete, onSignOut }: {
   readonly controller: FinalFamilyPilotController
   readonly students: readonly FamilySetupStudent[]
+  readonly requireParentPin: boolean
   readonly onComplete: () => void
   readonly onSignOut?: () => void
 }) {
   const [pins, setPins] = useState<Readonly<Record<string, string>>>({})
   const [confirmations, setConfirmations] = useState<Readonly<Record<string, string>>>({})
+  const [parentPin, setParentPin] = useState('')
+  const [parentConfirmation, setParentConfirmation] = useState('')
   const [error, setError] = useState('')
   const save = () => {
     for (const student of students) {
@@ -506,7 +528,12 @@ function FreshDeviceLearnerPinSetup({ controller, students, onComplete, onSignOu
         return
       }
     }
+    if (requireParentPin && (!/^\d{4}$/.test(parentPin) || parentConfirmation !== parentPin)) {
+      setError('Enter the same 4-digit Parent PIN twice.')
+      return
+    }
     for (const student of students) controller.setStudentPin(student.studentRef, pins[student.studentRef]!)
+    if (requireParentPin) controller.setParentPin(parentPin)
     controller.saveSetup({
       ...controller.appSnapshot.state.setup,
       students: Object.freeze(controller.appSnapshot.state.setup.students.map((student) => Object.freeze({
@@ -530,8 +557,15 @@ function FreshDeviceLearnerPinSetup({ controller, students, onComplete, onSignOu
   }
   return <main className="mx-auto max-w-xl px-4 py-10" data-testid="fresh-device-learner-pin-setup">
     <p className="font-bold text-cyan-700">New device security</p>
-    <h2 className="mt-1 text-3xl font-extrabold">Set learner PINs for this device</h2>
-    <p className="mt-3 text-slate-700">Learner PINs stay only on this computer and are never uploaded. Your family data is connected, but each learner needs a new local PIN before independent access on this device.</p>
+    <h2 className="mt-1 text-3xl font-extrabold">Set PINs for this device</h2>
+    <p className="mt-3 text-slate-700">PINs stay only on this computer and are never uploaded. Your family data is connected, but this device needs new local PINs before independent learner or Parent Hub access.</p>
+    {requireParentPin ? <fieldset className="mt-6 rounded-xl border border-slate-200 bg-white p-4">
+      <legend className="px-1 font-extrabold">Parent Hub</legend>
+      <div className="mt-2 grid gap-3 sm:grid-cols-2">
+        <label className="font-bold">New Parent PIN<input aria-label="New device Parent PIN" inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" value={parentPin} onChange={(event) => setParentPin(event.target.value.replace(/\D/g, '').slice(0, 4))} /></label>
+        <label className="font-bold">Confirm Parent PIN<input aria-label="Confirm new device Parent PIN" inputMode="numeric" type="password" maxLength={4} className="mt-1 w-full rounded-lg border px-3 py-2" value={parentConfirmation} onChange={(event) => setParentConfirmation(event.target.value.replace(/\D/g, '').slice(0, 4))} /></label>
+      </div>
+    </fieldset> : null}
     <div className="mt-6 space-y-5">
       {students.map((student) => <fieldset key={student.studentRef} className="rounded-xl border border-slate-200 bg-white p-4">
         <legend className="px-1 font-extrabold">{student.displayName}</legend>
@@ -541,7 +575,7 @@ function FreshDeviceLearnerPinSetup({ controller, students, onComplete, onSignOu
         </div>
       </fieldset>)}
     </div>
-    <button type="button" className="mt-6 min-h-11 rounded-lg bg-slate-900 px-5 py-3 font-extrabold text-white" onClick={save}>Save learner PINs on this device</button>
+    <button type="button" className="mt-6 min-h-11 rounded-lg bg-slate-900 px-5 py-3 font-extrabold text-white" onClick={save}>Save PINs on this device</button>
     {onSignOut ? <button type="button" className="ml-3 mt-3 min-h-11 rounded-lg border border-slate-300 bg-white px-4 py-2 font-bold" onClick={onSignOut}>Sign out</button> : null}
     {error ? <p className="mt-3 rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
   </main>
@@ -776,7 +810,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         <ParentReviewCenter controller={controller} student={selected} refresh={refresh} />
       ) : view === 'school-plan' ? (
         <div className="mt-6 space-y-4">
-          <FamilySchoolPlanPanel controller={controller} host={autoPlannerHost} student={selected} />
+          <FamilySchoolPlanPanel controller={controller} host={autoPlannerHost} student={selected} onSaved={refresh} />
           <button type="button" className="min-h-11 rounded-lg border border-cyan-700 bg-white px-4 py-2 font-bold text-cyan-900" onClick={() => setView('assign')}>Assignments &amp; readiness</button>
         </div>
       ) : view === 'assign' ? (

@@ -1,4 +1,4 @@
-import { createSupabaseBrowserClient } from '../../../auth/supabaseSession'
+import { getSupabaseClient } from '../../../auth/supabaseSession'
 import { createHostedSyncRpcAdapter } from '../../hosted-sync/v2/client'
 import { BrowserFamilyCloudCheckpointRepositoryR1 } from './browserCheckpointRepository'
 import { resolveFamilyCloudBrowserConfigurationR1, type FamilyCloudBrowserConfigurationR1 } from './browserConfiguration'
@@ -34,7 +34,8 @@ export function createFamilyCloudBrowserRuntimeR1(
   configuration = resolveFamilyCloudBrowserConfigurationR1(),
 ): FamilyCloudBrowserRuntimeCompositionR1 {
   if (!configuration.enabled) throw new Error(`Family Cloud browser runtime is disabled: ${configuration.reason}`)
-  const client = createSupabaseBrowserClient(configuration.url, configuration.anonKey)
+  const client = getSupabaseClient(configuration.url, configuration.anonKey)
+  if (!client) throw new Error('Family Cloud browser auth client configuration was refused.')
   const deviceRef = browserDeviceRef()
   const repository = new BrowserFamilyCloudCheckpointRepositoryR1(deviceRef)
   const directory = createSupabaseFamilyCloudRemoteDirectory({

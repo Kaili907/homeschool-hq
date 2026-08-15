@@ -261,8 +261,9 @@ describe('full-chain Admin database security red team', () => {
       order by namespace.nspname, routine.proname, identity_arguments
     `)
     // Hosted Sync R2 contributes three SECURITY DEFINER routines. Family
-    // Cloud R1 adds two private response helpers and two RPC wrapper layers.
-    expect(routines.rows).toHaveLength(241)
+    // Cloud R1 adds two private response helpers, two RPC wrapper layers,
+    // and one authenticated household bootstrap RPC.
+    expect(routines.rows).toHaveLength(242)
     expect(routines.rows.every(({ owner_name: owner }) => owner === 'postgres')).toBe(true)
     expect(routines.rows.every(({ configuration }) => (
       configuration?.length === 1

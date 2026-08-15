@@ -133,8 +133,6 @@ function validLocal(householdRef: string, state: FamilyCloudLocalLearnerStateR1)
     authority.snapshot.identity.learnerRef === state.learnerRef &&
     response!.identity.householdRef === householdRef && response!.identity.learnerRef === state.learnerRef &&
     response!.identity.studentRef === authority.snapshot.identity.studentRef &&
-    response!.identity.assignmentRef === state.firstLinkBase.localScope.assignmentRef &&
-    response!.identity.sessionRef === state.firstLinkBase.localScope.sessionRef &&
     plan!.identity.householdRef === householdRef && plan!.identity.learnerRef === state.learnerRef &&
     plan!.identity.studentRef === authority.snapshot.identity.studentRef &&
     state.firstLinkBase.localScope.householdRef === householdRef &&
@@ -234,6 +232,7 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
   readonly #options: HostedFamilyCloudLocalDataPortOptionsR1
   readonly #now: () => Date
   readonly #newOperationId: () => string
+  readonly #issuedOperationIds = new Set<string>()
   #active: ActiveHousehold | null = null
   #generation = 0
 
@@ -263,6 +262,17 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
     if (!local || local.some((item) => !validLocal(input.householdRef, item))) return 'UNAVAILABLE'
     const localByLearner = new Map(local.map((item) => [item.learnerRef, item]))
     if ([...localByLearner.keys()].some((learnerRef) => !resolved.learners.some((entry) => entry.learnerRef === learnerRef))) return 'UNAVAILABLE'
+    // A reconnect or provider-session refresh must reconcile the active
+    // device before any remote hydration can publish. Otherwise a bootstrap
+    // after an offline save could replace newer local work with the last
+    // hosted snapshot.
+    if (
+      this.#active?.householdRef === input.householdRef &&
+      this.#active.authorization.user.id === input.authorization.user.id
+    ) {
+      const reconciled = await this.reconcile(input)
+      return reconciled === 'UP_TO_DATE' ? 'READY' : reconciled === 'OFFLINE' ? 'OFFLINE' : 'UNAVAILABLE'
+    }
     const hydrated: FamilyCloudLocalLearnerStateR1[] = []
     for (const entry of resolved.learners) {
       const current = localByLearner.get(entry.learnerRef)
@@ -316,13 +326,21 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
         remoteByLearner.set(current.learnerRef, firstLinked.state)
         continue
       }
-      const conflict = await this.#writeChangedDomains(entry, current, remote, input.signal)
+      let conflict = await this.#writeChangedDomains(entry, current, remote, input.signal)
+      let conflictRemote = remote
+      for (let attempt = 0; conflict && conflict !== 'OFFLINE' && attempt < 3; attempt += 1) {
+        const fresh = await this.#hydrate(entry, current, input.signal)
+        if (fresh.status !== 'READY' || !this.#wasIssuedHere(fresh.state, conflict)) break
+        conflictRemote = fresh.state
+        remoteByLearner.set(current.learnerRef, fresh.state)
+        conflict = await this.#writeChangedDomains(entry, current, fresh.state, input.signal)
+      }
       if (input.signal?.aborted || generation !== this.#generation) return 'UNAVAILABLE'
       if (conflict === 'OFFLINE') return 'OFFLINE'
       if (conflict) {
         await this.#options.repository.retainConflict({
           householdRef: input.householdRef, learnerRef: current.learnerRef,
-          domain: conflict, local: current, remote,
+          domain: conflict, local: current, remote: conflictRemote,
         }).catch(() => undefined)
         return 'CONFLICT'
       }
@@ -426,9 +444,10 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
         familyPlanRevision: outcome.value.familyPlanCheckpointRevision,
       }),
     })
-    return validLocal(identity.snapshot.identity.householdRef, state)
-      ? { status: 'READY' as const, state }
-      : { status: 'UNAVAILABLE' as const, remote: null }
+    if (!validLocal(identity.snapshot.identity.householdRef, state)) {
+      return { status: 'UNAVAILABLE' as const, remote: null }
+    }
+    return { status: 'READY' as const, state }
   }
 
   async #writeChangedDomains(
@@ -481,6 +500,19 @@ export class HostedFamilyCloudLocalDataPortR1 implements FamilyCloudLocalDataPor
   #operationId(): string {
     const operationId = this.#newOperationId()
     if (!UUID.test(operationId)) throw new Error('Family Cloud operation ID is invalid.')
+    this.#issuedOperationIds.add(operationId)
+    if (this.#issuedOperationIds.size > 64) this.#issuedOperationIds.delete(this.#issuedOperationIds.values().next().value!)
     return operationId
+  }
+
+  #wasIssuedHere(state: FamilyCloudLocalLearnerStateR1, domain: FamilyCloudConflictR1['domain']): boolean {
+    const operationId = domain === 'AUTHORITY'
+      ? state.authorityCheckpoint.sync.operationId
+      : domain === 'LEARNER_RESPONSE'
+        ? state.learnerResponseCheckpoint.sync.operationId
+        : domain === 'FAMILY_PLAN'
+          ? state.familyPlanCheckpoint.sync.operationId
+          : ''
+    return this.#issuedOperationIds.has(operationId)
   }
 }

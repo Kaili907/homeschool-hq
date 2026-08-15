@@ -19,10 +19,11 @@ type FamilyCloudBrowserEnvironment = Readonly<{
 function hostEnvironment(): FamilyCloudBrowserEnvironment {
   // Read only the approved public names. Passing import.meta.env wholesale
   // causes Vite to serialize unrelated VITE_* values into the browser bundle.
+  const environment = import.meta.env
   return Object.freeze({
-    VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED: import.meta.env.VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED,
-    VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
-    VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
+    VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED: environment?.VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED,
+    VITE_SUPABASE_URL: environment?.VITE_SUPABASE_URL,
+    VITE_SUPABASE_ANON_KEY: environment?.VITE_SUPABASE_ANON_KEY,
   })
 }
 

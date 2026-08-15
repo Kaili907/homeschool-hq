@@ -28,6 +28,7 @@ export function supabaseConfigured(): boolean {
  * whole-profile sync into a route bundle.
  */
 let singleton: SupabaseClient | null | undefined
+let singletonConfiguration: string | null = null
 
 export function createSupabaseBrowserClient(
   url = supabaseUrl(),
@@ -43,9 +44,17 @@ export function createSupabaseBrowserClient(
   })
 }
 
-export function getSupabaseClient(): SupabaseClient | null {
-  if (!supabaseConfigured()) return null
-  if (singleton === undefined) singleton = createSupabaseBrowserClient()
+export function getSupabaseClient(
+  url = supabaseUrl(),
+  anonKey = supabaseAnonKey(),
+): SupabaseClient | null {
+  if (!url || !anonKey) return null
+  const configuration = `${url.replace(/\/+$/, '')}\u0000${anonKey}`
+  if (singleton === undefined) {
+    singleton = createSupabaseBrowserClient(url, anonKey)
+    singletonConfiguration = configuration
+  }
+  if (singletonConfiguration !== configuration) return null
   return singleton
 }
 

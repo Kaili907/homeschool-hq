@@ -6,7 +6,7 @@ const local = !process.env.FAMILY_PILOT_APP_URL
 
 export default defineConfig({
   testDir: './tests/browser',
-  testMatch: 'family-two-device-e2e.spec.ts',
+  testMatch: 'family-cloud-browser-composition-e2e.spec.ts',
   timeout: 600_000,
   expect: { timeout: 20_000 },
   fullyParallel: false,
@@ -21,7 +21,7 @@ export default defineConfig({
   },
   ...(local ? {
     webServer: {
-      command: `VITE_FAMILY_PILOT_ENABLED=true npm run build && npm run preview -- --host 127.0.0.1 --port ${port}`,
+      command: `VITE_FAMILY_PILOT_ENABLED=true VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED=true VITE_SUPABASE_URL=https://fqzcxrkvpaivpnzdbuol.supabase.co VITE_SUPABASE_ANON_KEY=sb_publishable_family_cloud_e2e npm run build && npm run preview -- --host 127.0.0.1 --port ${port}`,
       url: `${baseURL}/family-pilot`,
       reuseExistingServer: false,
       timeout: 300_000,

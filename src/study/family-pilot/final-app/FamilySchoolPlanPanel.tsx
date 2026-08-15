@@ -122,10 +122,12 @@ export function FamilySchoolPlanPanel({
   controller,
   host,
   student,
+  onSaved,
 }: {
   readonly controller: FinalFamilyPilotController
   readonly host: FinalFamilyAutoPlannerHost
   readonly student: FamilySetupStudent
+  readonly onSaved?: () => void
 }) {
   const [draft, setDraft] = useState<SchoolPlanDraft | null>(null)
   const [stored, setStored] = useState(false)
@@ -202,6 +204,7 @@ export function FamilySchoolPlanPanel({
     setStored(true)
     setDraft(draftFor(student, controller, result.document.schoolPlan))
     setMessage('School Plan saved. Today’s Work will now be prepared automatically in the family overview or when this learner opens the dashboard.')
+    onSaved?.()
   }
 
   return (
