@@ -11,15 +11,38 @@ export const ACADEMIC_MISCONCEPTION_MATCHER_VERSION = 1 as const;
 export const MAXIMUM_MISCONCEPTION_EVIDENCE_ITEMS = 64;
 export const MAXIMUM_REVIEWED_INSTRUCTIONAL_RESPONSES = 12;
 export const MAXIMUM_PREREQUISITE_CONCEPTS = 12;
+export const MAXIMUM_ACADEMIC_MISCONCEPTION_CODE_LENGTH = 96;
 
 export const AcademicMisconceptionCodeSchema = Type.String({
   minLength: 8,
-  maxLength: 96,
+  maxLength: MAXIMUM_ACADEMIC_MISCONCEPTION_CODE_LENGTH,
   pattern: "^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+){2,7}$",
 });
 export type AcademicMisconceptionCode = Static<
   typeof AcademicMisconceptionCodeSchema
 >;
+
+export const ReviewedAcademicMisconceptionCodeSchema = Type.String({
+  minLength: 8,
+  maxLength: MAXIMUM_ACADEMIC_MISCONCEPTION_CODE_LENGTH,
+  pattern:
+    "^(?!.*(?:^|_)(?:ANXIETY|ANXIOUS|AUTISM|BEHAVIOR|BEHAVIOUR|CHILD|CONDITION|DEPRESSION|DIAGNOSIS|DIAGNOSTIC|DISORDER|DYSLEXIA|EMOTION|EMOTIONAL|IQ|LAZY|LEARNER|MOTIVATION|PERSONALITY|PSYCHOLOGICAL|STUDENT|STUPID|TRAIT|UNMOTIVATED)(?:_|$))(?:ART|ARTS|COMPUTER|ELA|ENGLISH|FINANCIAL|FINLIT|HEALTH|MATH|MUSIC|PE|PHYSICAL|READY|RFL|SCIENCE|SOCIAL|TECHNOLOGY)(?:_[A-Z0-9]+){2,7}$",
+  $id: "TutorV2ReviewedAcademicMisconceptionCode",
+});
+
+export const AcademicMisconceptionReferenceSchema = Type.String({
+  minLength: 16,
+  maxLength: 160,
+  pattern: "^misconception:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+  $id: "TutorV2AcademicMisconceptionReference",
+});
+
+export const StudyMisconceptionReviewReferenceSchema = Type.String({
+  minLength: 14,
+  maxLength: 160,
+  pattern: "^study-review:[A-Za-z0-9][A-Za-z0-9._~-]{0,127}$",
+  $id: "TutorV2StudyMisconceptionReviewReference",
+});
 
 export const AcademicEvidenceSourceKindSchema = Type.Union([
   Type.Literal("selected-response-classification"),
@@ -202,6 +225,53 @@ const NullableAcademicMisconceptionCodeSchema = Type.Union([
   Type.Null(),
 ]);
 
+const SERIALIZED_SIGNAL_AUTHORITY_FIELDS = {
+  possibleInstructionalSignalOnly: Type.Literal(true),
+  authoritativeDiagnosis: Type.Literal(false),
+  authoritativeMasteryState: Type.Literal(false),
+  durableLearnerClassificationAllowed: Type.Literal(false),
+} as const;
+
+const SerializedPossibleAcademicMisconceptionSignalSchema = Type.Object(
+  {
+    status: Type.Literal("possible-misconception"),
+    misconceptionRef: AcademicMisconceptionReferenceSchema,
+    academicMisconceptionCode: ReviewedAcademicMisconceptionCodeSchema,
+    ...SERIALIZED_SIGNAL_AUTHORITY_FIELDS,
+  },
+  { additionalProperties: false },
+);
+
+const SerializedNonPossibleAcademicMisconceptionSignalSchema = Type.Object(
+  {
+    status: Type.Union([
+      Type.Literal("no-signal"),
+      Type.Literal("insufficient-evidence"),
+      Type.Literal("conflicting-evidence"),
+    ]),
+    misconceptionRef: Type.Null(),
+    academicMisconceptionCode: Type.Null(),
+    ...SERIALIZED_SIGNAL_AUTHORITY_FIELDS,
+  },
+  { additionalProperties: false },
+);
+
+/**
+ * Serialization-ready misconception projection for the Wave 2 decision packet.
+ * A possible signal carries only a registry-bound opaque reference and bounded
+ * academic policy code. Every other status suppresses both identifiers.
+ */
+export const SerializedAcademicMisconceptionSignalSchema = Type.Union(
+  [
+    SerializedPossibleAcademicMisconceptionSignalSchema,
+    SerializedNonPossibleAcademicMisconceptionSignalSchema,
+  ],
+  { $id: "TutorV2SerializedAcademicMisconceptionSignal" },
+);
+export type SerializedAcademicMisconceptionSignal = Static<
+  typeof SerializedAcademicMisconceptionSignalSchema
+>;
+
 export const AcademicMisconceptionSignalResultSchema = Type.Object(
   {
     matcherVersion: Type.Literal(ACADEMIC_MISCONCEPTION_MATCHER_VERSION),
@@ -241,10 +311,26 @@ export type AcademicMisconceptionRegistryCreationResult =
       readonly entryIndex: number;
     };
 
+export type SerializedAcademicMisconceptionSignalReviewResult =
+  | {
+      readonly status: "accepted";
+      readonly signal: SerializedAcademicMisconceptionSignal;
+    }
+  | {
+      readonly status: "rejected";
+      readonly code:
+        | "INVALID_SERIALIZED_SIGNAL"
+        | "UNKNOWN_MISCONCEPTION_REF"
+        | "MISMATCHED_MISCONCEPTION_CODE";
+    };
+
 export interface AcademicMisconceptionRegistry {
   readonly version: typeof ACADEMIC_MISCONCEPTION_REGISTRY_VERSION;
   readonly entryCount: number;
   match(candidate: unknown): AcademicMisconceptionSignalResult;
+  reviewSerializedSignal(
+    candidate: unknown,
+  ): SerializedAcademicMisconceptionSignalReviewResult;
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -287,6 +373,18 @@ function hasUniqueItems(items: readonly string[]): boolean {
 function isSemanticallyValidEntry(entry: AcademicMisconceptionEntry): boolean {
   const requirements = entry.evidenceRequirements;
   return (
+    validateExact(
+      ReviewedAcademicMisconceptionCodeSchema,
+      entry.academicMisconceptionCode,
+    ).status === "accepted" &&
+    validateExact(
+      AcademicMisconceptionReferenceSchema,
+      entry.misconceptionRef,
+    ).status === "accepted" &&
+    validateExact(
+      StudyMisconceptionReviewReferenceSchema,
+      entry.reviewApprovalRef,
+    ).status === "accepted" &&
     requirements.minimumDistinctOpportunityCount <=
       requirements.minimumSupportingEvidenceCount &&
     hasUniqueItems(entry.reviewedInstructionalResponseRefs) &&
@@ -554,6 +652,7 @@ export function createAcademicMisconceptionRegistry(
   candidates: readonly unknown[],
 ): AcademicMisconceptionRegistryCreationResult {
   const entriesByCode = new Map<string, AcademicMisconceptionEntry>();
+  const entriesByRef = new Map<string, AcademicMisconceptionEntry>();
   const misconceptionRefs = new Set<string>();
 
   for (const [entryIndex, candidate] of candidates.entries()) {
@@ -583,6 +682,10 @@ export function createAcademicMisconceptionRegistry(
       };
     }
     misconceptionRefs.add(validation.value.misconceptionRef);
+    entriesByRef.set(
+      validation.value.misconceptionRef,
+      structuredClone(validation.value),
+    );
     entriesByCode.set(
       validation.value.academicMisconceptionCode,
       structuredClone(validation.value),
@@ -594,6 +697,34 @@ export function createAcademicMisconceptionRegistry(
     registry: {
       version: ACADEMIC_MISCONCEPTION_REGISTRY_VERSION,
       entryCount: entriesByCode.size,
+      reviewSerializedSignal(
+        candidate: unknown,
+      ): SerializedAcademicMisconceptionSignalReviewResult {
+        const validation = validateExact(
+          SerializedAcademicMisconceptionSignalSchema,
+          candidate,
+        );
+        if (validation.status === "rejected") {
+          return { status: "rejected", code: "INVALID_SERIALIZED_SIGNAL" };
+        }
+        if (validation.value.status !== "possible-misconception") {
+          return { status: "accepted", signal: structuredClone(validation.value) };
+        }
+        const entry = entriesByRef.get(validation.value.misconceptionRef);
+        if (entry === undefined) {
+          return { status: "rejected", code: "UNKNOWN_MISCONCEPTION_REF" };
+        }
+        if (
+          entry.academicMisconceptionCode !==
+          validation.value.academicMisconceptionCode
+        ) {
+          return {
+            status: "rejected",
+            code: "MISMATCHED_MISCONCEPTION_CODE",
+          };
+        }
+        return { status: "accepted", signal: structuredClone(validation.value) };
+      },
       match(candidate: unknown): AcademicMisconceptionSignalResult {
         const validation = validateExact(
           AcademicMisconceptionMatchRequestSchema,
