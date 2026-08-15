@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { ADMIN_ROLE_CAPABILITIES, type AdminOperationalEvent } from '../../admin/contracts'
@@ -7,6 +8,8 @@ import {
   type SystemHealthProjection,
 } from '../../admin/systemHealth'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
+
+const HEALTH_STYLES = readFileSync(new URL('./system-health-dashboard.css', import.meta.url), 'utf8')
 
 const NOW = new Date('2026-08-08T12:00:00.000Z')
 const AUTHORIZED = { status: 'authorized', role: 'viewer', capabilities: ADMIN_ROLE_CAPABILITIES.viewer } as const
@@ -45,6 +48,7 @@ describe('System Health dashboard states and privacy', () => {
     expect(loading).toContain('Loading System Health')
     expect(error).toContain('projection timed out')
     expect(denied).toContain('health:read')
+    expect(error).toContain('role="alert"')
   })
 
   it('renders all engines, service signals, metrics, freshness, time controls, and drilldown', () => {
@@ -124,5 +128,14 @@ describe('System Health dashboard states and privacy', () => {
     expect(markup).toContain(label)
     expect(markup).toContain('Unknown')
     expect(markup).not.toContain('health-badge--healthy')
+  })
+
+  it('uses consistent status pills and responsive tablet/mobile hierarchy', () => {
+    expect(HEALTH_STYLES).toContain('border-radius: 999px')
+    expect(HEALTH_STYLES).toContain('min-height: 2.75rem')
+    expect(HEALTH_STYLES).toContain('@media (max-width: 1000px)')
+    expect(HEALTH_STYLES).toContain('@media (max-width: 650px)')
+    expect(HEALTH_STYLES).toContain('.health-window { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }')
+    expect(HEALTH_STYLES).toContain('@media (prefers-reduced-motion: reduce)')
   })
 })

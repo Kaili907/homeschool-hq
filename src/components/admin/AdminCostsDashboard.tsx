@@ -304,7 +304,7 @@ function CostsContent({
         {model.trend.length === 0 ? (
           <p className="admin-costs-table-empty">No real daily usage points are available for this range.</p>
         ) : (
-          <div className="admin-costs-table-wrap">
+          <div className="admin-costs-table-wrap" tabIndex={0}>
             <table>
               <caption>Daily AI and TTS usage with calculated and reconciled cost</caption>
               <thead><tr><th scope="col">UTC date</th><th scope="col">AI requests</th><th scope="col">TTS requests</th><th scope="col">Tokens</th><th scope="col">TTS characters</th><th scope="col">Calculated</th><th scope="col">Reconciled</th></tr></thead>
@@ -622,7 +622,7 @@ function BreakdownTable({ title, rows, compact = false }: { title: string; rows:
     <section className="admin-costs-panel" aria-labelledby={id}>
       <SectionHeading id={id} eyebrow="Privacy-safe aggregate" title={title} />
       {rows.length === 0 ? <p className="admin-costs-table-empty">No recorded usage.</p> : (
-        <div className="admin-costs-table-wrap">
+        <div className="admin-costs-table-wrap" tabIndex={0}>
           <table>
             <thead><tr><th scope="col">{compact ? 'State' : 'Source'}</th><th scope="col">Requests</th><th scope="col">Calculated</th><th scope="col">Reconciled</th><th scope="col">Cost unavailable</th></tr></thead>
             <tbody>{rows.map((row) => (

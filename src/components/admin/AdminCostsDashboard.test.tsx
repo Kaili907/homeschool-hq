@@ -317,6 +317,8 @@ describe('Admin AI and Costs dashboard', () => {
     expect(COST_STYLES).toContain('@media (max-width: 800px)')
     expect(COST_STYLES).toContain('.admin-provider-coverage__status { grid-template-columns: 1fr; }')
     expect(COST_STYLES).toContain('@media (max-width: 520px)')
+    expect(COST_STYLES).toContain('.admin-costs-card-grid { grid-template-columns: 1fr; }')
     expect(COST_STYLES).toContain('.admin-provider-coverage__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }')
+    expect(render()).toContain('tabindex="0"')
   })
 })
