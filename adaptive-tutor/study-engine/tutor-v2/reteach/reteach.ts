@@ -283,11 +283,29 @@ function heldProposal(
   });
 }
 
+function loopCapProposal(request: ReteachPlanRequest): ReteachPlanProposal {
+  return Object.freeze({
+    ...common(
+      request.requestRef,
+      request.currentConceptRef,
+      Math.min(request.maxReteachSteps, MAX_RETEACH_STEPS),
+      request.priorReteachLoops,
+      Math.min(request.maxRepeatedLoops, MAX_REPEATED_RETEACH_LOOPS),
+    ),
+    status: "withheld",
+    steps: [],
+    reviewedContentRefs: [],
+    source: "none",
+    reasonCode: "REPEATED_RETEACH_LOOP_CAP_REACHED",
+  });
+}
+
 function fallbackProposal(
   request: ReteachPlanRequest,
   reasonCode: Exclude<ReteachReasonCode,
     "RETEACH_RECOMMENDED" | "RETEACH_STEP_CAP_REACHED" |
-    "INVALID_STUDY_REQUEST" | "ACTIVE_ASSESSMENT_HELD" | "SAFETY_HOLD">,
+    "REPEATED_RETEACH_LOOP_CAP_REACHED" | "INVALID_STUDY_REQUEST" |
+    "ACTIVE_ASSESSMENT_HELD" | "SAFETY_HOLD">,
 ): ReteachPlanProposal {
   const maxSteps = Math.min(request.maxReteachSteps, MAX_RETEACH_STEPS);
   const contentRefs = [...request.reviewedStaticFallback.reviewedContentRefs]
@@ -403,7 +421,7 @@ export async function proposeReteachPlan(
     return heldProposal(request, "ACTIVE_ASSESSMENT_HELD");
   }
   if (request.priorReteachLoops >= maxLoops) {
-    return fallbackProposal(request, "REPEATED_RETEACH_LOOP_CAP_REACHED");
+    return loopCapProposal(request);
   }
 
   let recommendation: ReteachRecommendationResult | DependencyFailure;
