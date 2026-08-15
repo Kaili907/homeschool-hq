@@ -37,6 +37,25 @@
     "placeholderInstructionalLessons": 0,
     "evidence": "reports/health-content-repair-r1.json"
   },
+  "healthProductionDepth": {
+    "evidenceFile": "reports/health-production-depth-r1.json",
+    "lessonsRebuilt": 324,
+    "pairedAdultGuides": 324,
+    "lessonTypes": {
+      "CONCEPT_VOCABULARY": 71,
+      "INFORMATION_EVALUATION": 22,
+      "DECISION_REASONING": 29,
+      "COMMUNICATION_HELP_SEEKING": 28,
+      "HEALTH_SKILL_PROCEDURE": 11,
+      "REVIEW_RETRIEVAL": 1,
+      "REMEDIATION_RETRY": 54,
+      "MASTERY_EVIDENCE": 54,
+      "PROJECT_CAPSTONE": 54
+    },
+    "approvedAnchorPreserved": true,
+    "issueCount": 0,
+    "classification": "HEALTH_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE"
+  },
   "scoringPolicy": {
     "gateSemantics": "H3",
     "judgmentWorkAuthority": "RUBRIC",
@@ -65,7 +84,7 @@
     "algorithm": "SHA-256",
     "file": "SHA256SUMS.txt",
     "scope": "every corpus file except SHA256SUMS.txt itself",
-    "entries": 2880
+    "entries": 2883
   },
   "byGrade": [
     {

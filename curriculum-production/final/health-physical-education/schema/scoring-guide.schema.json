@@ -13,6 +13,11 @@
     "courseId": { "type": "string" },
     "grade": { "type": "integer", "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12] },
     "subject": { "enum": ["health", "physical-education"] },
+    "standards": { "type": "array", "items": { "type": "string" } },
+    "primaryLessonType": {
+      "enum": ["CONCEPT_VOCABULARY", "INFORMATION_EVALUATION", "DECISION_REASONING", "COMMUNICATION_HELP_SEEKING", "HEALTH_SKILL_PROCEDURE", "REVIEW_RETRIEVAL", "REMEDIATION_RETRY", "MASTERY_EVIDENCE", "PROJECT_CAPSTONE"]
+    },
+    "secondaryLessonTypes": { "type": "array", "maxItems": 2, "items": { "type": "string" } },
     "scoringAuthority": { "const": "RUBRIC" },
     "successCriteria": { "type": "array", "items": { "type": "string" } },
     "scoringGuidance": { "type": ["string", "null"] },
@@ -31,6 +36,33 @@
     "guardianOrParentVisibility": { "type": ["string", "null"] },
     "guardianSafetyReview": { "type": ["object", "null"] },
     "safetyAndPrivacyNotes": { "type": "array", "items": { "type": "string" } },
+    "protectedAuthority": {
+      "type": "object",
+      "required": ["authorityVersion", "independentEvidence", "acceptableVariation", "misconceptionBoundaries", "safetyCriticalErrors", "scoringNotes"]
+    },
+    "masteryPlan": {
+      "type": "object",
+      "required": ["minimumEvidenceOccasions", "laterRetrievalOrTransferRef", "independenceRule", "privateReflectionContributes", "decisionAuthority"],
+      "properties": {
+        "minimumEvidenceOccasions": { "type": "integer", "minimum": 2 },
+        "laterRetrievalOrTransferRef": { "type": "string" },
+        "independenceRule": { "type": "string" },
+        "privateReflectionContributes": { "const": false },
+        "decisionAuthority": { "type": "string" }
+      }
+    },
+    "reflectionPolicy": {
+      "type": "object",
+      "required": ["mode", "visibleTo", "scored", "contributesToCompletion", "contributesToMastery", "subjectiveJudgmentPolicy"],
+      "properties": {
+        "mode": { "const": "PRIVATE_OPTIONAL" },
+        "visibleTo": { "type": "array", "items": { "type": "string" } },
+        "scored": { "const": false },
+        "contributesToCompletion": { "const": false },
+        "contributesToMastery": { "const": false },
+        "subjectiveJudgmentPolicy": { "const": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG" }
+      }
+    },
     "rubricDimensions": { "type": "array", "items": { "type": "string" } },
     "masteryInterpretation": {
       "type": ["object", "null"],
@@ -60,5 +92,19 @@
         "notes": { "type": "array", "items": { "type": "string" } }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": { "const": "lesson-scoring-guide" },
+          "subject": { "const": "health" }
+        },
+        "required": ["kind", "subject"]
+      },
+      "then": {
+        "required": ["standards", "primaryLessonType", "secondaryLessonTypes", "protectedAuthority", "masteryPlan", "reflectionPolicy"]
+      }
+    }
+  ]
 }

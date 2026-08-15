@@ -12,10 +12,8 @@
   "essentialQuestion": "How do food, water, and movement give my body energy for the things I want to do?",
   "estimatedMinutes": "30-45",
   "materials": [
-    "course notebook or digital equivalent",
-    "pencil or accessible response tool",
-    "paper or a digital planner for day plans",
-    "optional clean, empty food packages"
+    "paper and pencil or an accessible response tool",
+    "the fictional lesson cards included in this task"
   ],
   "keyPoints": [
     "Wash hands before and after handling food.",
@@ -23,41 +21,252 @@
     "Cold food belongs in the fridge; food left out for hours is not safe to eat.",
     "Ask an adult before using knives, the stovetop, the oven, or anything hot."
   ],
-  "privacySafeScenario": "A cutting board was used for raw chicken and is about to be used for cutting apples. What has to happen first, and why?",
-  "studentTask": "The learner applies what they learned about kitchen and food safety basics to a new fictional situation and records the choice plus the reason behind it.",
-  "knowledgeCheck": "Name one thing you corrected or would do differently, and one other place kitchen and food safety basics would be useful.",
+  "privacySafeScenario": "All required evidence uses fictional or public situations. The learner never has to disclose personal health, body, treatment, feelings, family, sexual, or substance-use information.",
+  "studentTask": "Write two facts. Use the lesson idea about kitchen and food safety basics. Choose one safe next step. Name an adult or help source.",
+  "knowledgeCheck": "Name the fact. Fix the wrong claim. Choose a safe action. Name who can help.",
   "completionCriteria": [
-    "The learner completes the central task about kitchen and food safety basics.",
-    "The learner gives a reason, an example, or a documented process rather than an unsupported answer.",
-    "The learner checks or revises the work and can name one next step."
+    "I use two facts.",
+    "I explain kitchen and food safety basics.",
+    "I choose a safe action and give a reason.",
+    "I name the right kind of help."
   ],
-  "adaptationChoices": "Plans may use pictures, cut-outs, dictation, or spoken description. Learners with food allergies, medical diets, religious or cultural food practices, or limited food access plan with the foods actually available to them, and the adult may substitute any example.",
-  "extensionChallenge": "Apply what you learned about kitchen and food safety basics under a new constraint, compare two reasonable approaches, or teach the idea to a family member with an original fictional example.",
+  "adaptationChoices": "Show one short direction at a time. Allow reading aloud, word cards, typing, writing, drawing with labels, signing, selecting, or speaking. Help may repeat a direction but may not choose the fact, action, reason, or help source.",
+  "extensionChallenge": "Create a new fictional or public case about kitchen and food safety basics. Include enough facts, choices or constraints, and support authority for another learner to reason safely. Add an accurate explanation of acceptable variation; use no real person's private information.",
   "accessibilitySupports": [
-    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
-    "Chunk directions into one action at a time and show a worked example or model.",
-    "Allow typed, handwritten, spoken, signed, drawn, or pointed responses; the response mode is never the standard being assessed.",
-    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
-    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for any media.",
-    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+    "Read one short section aloud.",
+    "Show one action at a time.",
+    "Offer a vocabulary card and extra time.",
+    "Accept typing, writing, drawing with labels, signing, selecting, or speaking for equal credit."
   ],
-  "trustedAdultNote": "Direct urgent safety, health, or mental-health concerns to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment.",
+  "trustedAdultNote": "If a real situation feels unsafe or raises a health concern, pause the lesson and tell a parent, guardian, teacher, school staff member, or another trusted adult. A qualified health professional gives medical advice. In an emergency, get an adult and use the local emergency service.",
   "optionalReflection": {
-    "prompt": "With a guardian, look at what the household already keeps for quick snacks and talk about which ones travel well. This is optional. No purchase, account creation, photograph, measurement, or private disclosure is required.",
+    "prompt": "Optional and private: Make up one example that helps you remember kitchen and food safety basics. Keep it for yourself. You do not need to show it or prove that you completed it.",
     "private": true,
     "graded": false,
     "optional": true
   },
   "neverRequires": [
-    "This task never requires body weight, height, BMI, or body-fat percentage.",
-    "This task never requires calorie counting or a diet or weight-loss goal.",
-    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires body weight, height, BMI, body-fat percentage, body comparison, or appearance scoring.",
+    "This task never requires calorie counting, dieting, or a diet or weight-loss goal.",
+    "This task never requires sharing medical history, a diagnosis, treatment, medication, feelings, family conflict, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires advice about an individual learner's treatment, medication, food, supplement, or exercise plan."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
     "sourceLessonId": "ma-g3-health-u02-l06"
+  },
+  "standards": [
+    "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+    "Michigan Health Practice 5: Self-Management and Goal Setting",
+    "Michigan Health Topic (Grades 3-5): Balanced Eating and Physical Activity"
+  ],
+  "primaryLessonType": "REMEDIATION_RETRY",
+  "secondaryLessonTypes": [
+    "DECISION_REASONING",
+    "CONCEPT_VOCABULARY"
+  ],
+  "learningGoal": "I can explain kitchen and food safety basics, use facts, choose a safe next step, and name who can help.",
+  "lessonExperience": {
+    "experienceVersion": "health-production-depth-r1",
+    "learnerTitle": "Learn and apply: kitchen and food safety basics",
+    "privacyNotice": "Write only about the made-up people. Keep private information private.",
+    "entryCheck": {
+      "ref": "ma-g3-health-u02-l06#entry-check",
+      "heading": "Start with a fact",
+      "directions": "Choose the sentence that states a fact.",
+      "choices": [
+        "Wash hands before and after handling food.",
+        "This one detail proves everything about a person's health.",
+        "A popular statement about kitchen and food safety basics needs no evidence."
+      ],
+      "support": "A fact is stated in the lesson or supported by reliable evidence. An assumption adds a conclusion the information cannot establish.",
+      "treatment": "This entry check is unscored. Use the support or prerequisite route before continuing when needed."
+    },
+    "explanation": {
+      "ref": "ma-g3-health-u02-l06#clear-explanation",
+      "heading": "Understand kitchen and food safety basics",
+      "paragraphs": [
+        "Wash hands before and after handling food.",
+        "Keep raw meat separate from food that will not be cooked, and wash anything it touched.",
+        "Cold food belongs in the fridge; food left out for hours is not safe to eat.",
+        "Ask an adult before using knives, the stovetop, the oven, or anything hot."
+      ],
+      "importantDistinction": "Learning about kitchen and food safety basics supports accurate reasoning and safe next steps; it does not authorize a diagnosis, individualized treatment advice, a person label, or a value judgment.",
+      "decisionRule": "FIND the smallest gap. USE a different model. CORRECT one step. RETRY on a fresh case."
+    },
+    "vocabulary": {
+      "ref": "ma-g3-health-u02-l06#vocabulary",
+      "heading": "Words for kitchen and food safety basics",
+      "terms": [
+        {
+          "term": "kitchen and food safety basics",
+          "meaning": "Wash hands before and after handling food.",
+          "boundary": "This idea does not diagnose, label, or determine the value of a person."
+        },
+        {
+          "term": "relevant information",
+          "meaning": "facts or reliable evidence that can change the interpretation, choice, or next step",
+          "boundary": "A guess, popularity, or a personal judgment is not relevant evidence by itself."
+        },
+        {
+          "term": "support route",
+          "meaning": "the responsible adult, qualified professional, service, or public authority able to help with the situation",
+          "boundary": "Naming a support route does not make the learner responsible for diagnosis, treatment, or emergency management."
+        }
+      ]
+    },
+    "vocabularyCheck": {
+      "ref": "ma-g3-health-u02-l06#vocabulary-check",
+      "heading": "Check the words",
+      "directions": [
+        "Say what the topic means.",
+        "Point to one fact.",
+        "Name the help route."
+      ],
+      "selfCheck": "A complete check uses the meaning of kitchen and food safety basics, one accurate fact, and the responsible support route without labeling a person."
+    },
+    "canonicalPracticeContext": {
+      "ref": "ma-g3-health-u02-l06#canonical-practice-context",
+      "heading": "Use the authored practice situation",
+      "situation": "A cutting board was used for raw chicken and is about to be used for cutting apples. What has to happen first, and why?",
+      "treatment": "This canonical context may support teaching or discussion. It does not replace the separate fresh independent, mastery, or remediation-retry cases."
+    },
+    "modelExample": {
+      "ref": "ma-g3-health-u02-l06#model-northside",
+      "heading": "Watch the reasoning: kitchen and food safety basics",
+      "situation": "A fictional Northside response about kitchen and food safety basics only repeats the topic name and adds a guess about a person. The approved fact is: Wash hands before and after handling food. The response must be corrected with a different organizer before a new case is attempted.",
+      "relevantFacts": [
+        "Wash hands before and after handling food.",
+        "Keep raw meat separate from food that will not be cooked, and wash anything it touched."
+      ],
+      "assumptionOrDistraction": "A popular or confident statement about kitchen and food safety basics is not automatically accurate and cannot establish a person's health, motives, or character.",
+      "possibleActions": [
+        "Name the exact gap, use the alternate organizer, correct a parallel case, and retry fresh.",
+        "Repeat the original paragraph.",
+        "Replace the evidence task with a private reflection."
+      ],
+      "successCheck": "The model uses the lesson fact, explains the connection, stays within the learner role, and names responsible help when it is needed.",
+      "workedReasoning": [
+        "Locate one observable gap: fact, vocabulary, reasoning, process order, or support route.",
+        "Use a contrast or visual organizer instead of repeating the first explanation.",
+        "Correct one parallel example, then remove the cue before a fresh retry."
+      ]
+    },
+    "guidedReasoning": {
+      "ref": "ma-g3-health-u02-l06#guided-riverside",
+      "heading": "Try a different case with support",
+      "situation": "A fictional Riverside youth group must explain or act on kitchen and food safety basics. The group has this reliable lesson information: Keep raw meat separate from food that will not be cooked, and wash anything it touched. It has not been given any person's private health information.",
+      "availableChoices": [
+        "Use the stated facts and compare safe options.",
+        "Act from an unsupported assumption.",
+        "Pause and contact the responsible help source."
+      ],
+      "turnOne": [
+        "Name one fact.",
+        "Choose one safe action.",
+        "Name an adult who can help."
+      ],
+      "cue": "Look for the situation, safe choices, relevant information, and who can help.",
+      "feedbackMoves": [
+        "If a response adds a guess, replace it with a fact from the case or lesson.",
+        "If kitchen and food safety basics is named without explanation, link one fact to the concept or process.",
+        "If a choice is reasonable but the reason is missing, add the fact that supports it.",
+        "If a response seeks disclosure, diagnoses, shames, or exceeds the learner role, switch to the fictional facts and the approved help route.",
+        "Accept an equivalent typed, handwritten, drawn-and-labeled, signed, selected, or spoken response when it shows the same reasoning."
+      ],
+      "turnTwo": "Fix one sentence. Use a fact and a safe next step.",
+      "releaseCondition": "Continue when the response uses a stated fact, applies kitchen and food safety basics, and gives a safe next step without private disclosure or a person label."
+    },
+    "independentEvidence": {
+      "ref": "ma-g3-health-u02-l06#independent-maple",
+      "heading": "Show what you know on a fresh case",
+      "situation": "A fictional Maple Community Center response about kitchen and food safety basics contains a fact error, an unsupported conclusion, and no help route. The approved fact is: Wash hands before and after handling food. Identify and repair each gap before the separate fresh retry.",
+      "taskMode": "REMEDIATION_RETRY",
+      "directions": [
+        "Write two facts.",
+        "Use the lesson idea about kitchen and food safety basics.",
+        "Choose one safe next step.",
+        "Name an adult or help source."
+      ],
+      "permittedSupports": [
+        "the lesson vocabulary card",
+        "read-aloud or one direction at a time",
+        "typing, writing, drawing with labels, signing, selecting, or speaking"
+      ],
+      "independenceBoundary": "Support may restate a direction or provide access. It may not choose the controlling fact, conclusion, action, reason, safety judgment, or help route.",
+      "successCriteria": [
+        "I use two facts.",
+        "I explain kitchen and food safety basics.",
+        "I choose a safe action and give a reason.",
+        "I name the right kind of help."
+      ]
+    },
+    "freshMasteryCheck": {
+      "ref": "ma-g3-health-u02-l06#fresh-check-lakeside",
+      "heading": "Check the idea in a new place",
+      "situation": "A fictional Lakeside school committee reviews kitchen and food safety basics. The committee knows: Cold food belongs in the fridge; food left out for hours is not safe to eat. It must correct one unsupported claim and choose a safe next step.",
+      "directions": [
+        "Name the fact.",
+        "Fix the wrong claim.",
+        "Choose a safe action.",
+        "Name who can help."
+      ],
+      "freshnessNote": "This case is different from the model, guided case, and independent case. Do not copy their conclusions."
+    },
+    "remediation": {
+      "ref": "ma-g3-health-u02-l06#remediation-oak-street",
+      "alternateExplanationRefs": [
+        "ma-g3-health-u02-l06#remediation-alternate-model",
+        "ma-g3-health-u02-l06#remediation-contrast"
+      ],
+      "heading": "Try a different model",
+      "trigger": "Use this route after an observable gap in a fact, vocabulary meaning, reasoning step, process order, or help route for kitchen and food safety basics.",
+      "prerequisite": "First restate this approved fact in your own words: Wash hands before and after handling food.",
+      "alternateExplanation": "Use a four-box decision map: SITUATION, SAFE CHOICES, RELEVANT INFORMATION, and HELP. Fill each box with case facts before writing a conclusion.",
+      "contrast": [
+        "Sufficient: uses a stated fact about kitchen and food safety basics, explains the connection, and stays within the learner role.",
+        "Needs revision: repeats a topic word, adds a guess, or gives an action with no factual reason or responsible help source."
+      ],
+      "guidedCorrection": "Cross out the guess. Circle the fact. Add one safe action.",
+      "guidedCorrectionRef": "ma-g3-health-u02-l06#remediation-guided-correction",
+      "freshRetry": {
+        "ref": "ma-g3-health-u02-l06#remediation-fresh-retry",
+        "situation": "A fictional Oak Street library receives a new question about kitchen and food safety basics. Staff provide this approved fact: Keep raw meat separate from food that will not be cooked, and wash anything it touched. The learner must respond without using the Northside, Riverside, Maple, or Lakeside conclusions.",
+        "directions": [
+          "Write the fact.",
+          "Use the lesson idea.",
+          "Choose a safe next step.",
+          "Name who can help."
+        ]
+      },
+      "exitCriterion": "Return to the independent route when the learner accurately uses a fact, applies kitchen and food safety basics, explains a safe response, and identifies support without answer-bearing help.",
+      "nextRoute": "If the same gap remains, return to the named prerequisite with an adult instructor; do not replace the task with private reflection."
+    },
+    "laterTransfer": {
+      "ref": "ma-g3-health-u02-l06#later-transfer",
+      "timing": "Use in a later lesson or a separate session.",
+      "prompt": "Apply kitchen and food safety basics to a meaningfully different fictional or public case. Retrieve the concept, use relevant facts, justify a safe response, and identify the responsible support or authority route.",
+      "masteryBoundary": "The current independent response is one evidence occasion. Mastery requires accurate independent evidence now and accurate later retrieval or transfer."
+    }
+  },
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "retention": "LEARNER_KEPT_ONLY"
+  },
+  "contentProvenance": {
+    "factSourceLane": "canonical-grade-3-4-health-authoring",
+    "productionDepthLane": "mac/health-production-depth-r1",
+    "objective": "Teach and consolidate kitchen and food safety basics, correct any errors from the unit, explain the corrections, and identify where the unit transfers.",
+    "standardRef": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+    "productionDepthVersion": "health-production-depth-r1"
   },
   "productionReadiness": {
     "status": "READY",

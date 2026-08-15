@@ -17,6 +17,12 @@
     "unitTitle": { "type": "string" },
     "title": { "type": "string" },
     "focus": { "type": "string" },
+    "standards": { "type": "array", "items": { "type": "string" } },
+    "primaryLessonType": {
+      "enum": ["CONCEPT_VOCABULARY", "INFORMATION_EVALUATION", "DECISION_REASONING", "COMMUNICATION_HELP_SEEKING", "HEALTH_SKILL_PROCEDURE", "REVIEW_RETRIEVAL", "REMEDIATION_RETRY", "MASTERY_EVIDENCE", "PROJECT_CAPSTONE"]
+    },
+    "secondaryLessonTypes": { "type": "array", "maxItems": 2, "items": { "type": "string" } },
+    "learningGoal": { "type": "string" },
     "essentialQuestion": { "type": ["string", "null"] },
     "estimatedMinutes": { "type": ["string", "null"] },
     "materials": { "type": "array", "items": { "type": "string" } },
@@ -54,6 +60,29 @@
     },
     "extensionChallenge": { "type": ["string", "null"] },
     "accessibilitySupports": { "type": "array", "items": { "type": "string" } },
+    "lessonExperience": {
+      "type": "object",
+      "required": ["experienceVersion", "privacyNotice", "entryCheck", "explanation", "vocabulary", "vocabularyCheck", "modelExample", "guidedReasoning", "independentEvidence", "remediation", "laterTransfer"],
+      "properties": {
+        "experienceVersion": { "type": "string" },
+        "privacyNotice": { "type": "string" },
+        "entryCheck": { "type": "object" },
+        "explanation": { "type": "object" },
+        "vocabulary": { "type": "object" },
+        "vocabularyCheck": { "type": "object" },
+        "modelExample": { "type": "object" },
+        "guidedReasoning": { "type": "object" },
+        "independentEvidence": { "type": "object" },
+        "freshMasteryCheck": { "type": "object" },
+        "freshConceptCheck": { "type": "object" },
+        "remediation": { "type": "object" },
+        "laterTransfer": { "type": "object" }
+      },
+      "anyOf": [
+        { "required": ["freshMasteryCheck"] },
+        { "required": ["freshConceptCheck"] }
+      ]
+    },
     "trustedAdultNote": {
       "type": "string",
       "description": "Health only: directs urgent safety/health/mental-health concerns to a trusted adult or qualified professional."
@@ -66,6 +95,17 @@
         "private": { "const": true },
         "graded": { "const": false },
         "optional": { "const": true }
+      }
+    },
+    "reflectionPolicy": {
+      "type": "object",
+      "required": ["mode", "visibleTo", "scored", "contributesToCompletion", "contributesToMastery"],
+      "properties": {
+        "mode": { "const": "PRIVATE_OPTIONAL" },
+        "visibleTo": { "type": "array", "items": { "type": "string" } },
+        "scored": { "const": false },
+        "contributesToCompletion": { "const": false },
+        "contributesToMastery": { "const": false }
       }
     },
     "prompts": {
@@ -107,6 +147,18 @@
     }
   },
   "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": { "const": "lesson-task-card" },
+          "subject": { "const": "health" }
+        },
+        "required": ["kind", "subject"]
+      },
+      "then": {
+        "required": ["standards", "primaryLessonType", "secondaryLessonTypes", "learningGoal", "lessonExperience", "reflectionPolicy", "trustedAdultNote"]
+      }
+    },
     {
       "if": {
         "properties": {

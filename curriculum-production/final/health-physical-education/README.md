@@ -63,16 +63,24 @@ generator is source-branch-agnostic.
 
 ## Health instructional content
 
-Grade 3/4 lessons carry a dedicated `key_points`/`cues` field with distinct,
-hand-authored facts per topic, so `packages/…/grade-03/…` and `grade-04/…`
-task cards include populated `keyPoints`. Health grades 5 and 7–12 previously
-had empty `keyPoints` and focus-interpolated task/check scaffolds. The Health
-Content Repair R1 layer now supplies three age-appropriate teaching points, a
-concrete fictional-case task, a focused knowledge check, and usable completion
-criteria for each of those 252 lesson objectives. The layer is Health-only:
-Grade 3/4 wording and the Health scoring contract remain unchanged.
-`reports/health-content-repair-r1.json` records the
-independent 324-lesson audit and the exact Grade 3 H2 byte/provenance trace.
+Grade 3/4 lessons carry dedicated, hand-authored topic facts. Health grades 5
+and 7–12 receive the objective-specific facts from Health Content Repair R1.
+Health Production Depth R1 now projects those canonical facts into a complete
+teaching sequence for all 324 Health lessons: clear explanation, vocabulary
+and a meaning check, a separate worked model, guided reasoning, fresh
+independent evidence, a later mastery transfer, and materially different
+remediation with a fresh retry. Each paired adult guide adds lesson-specific
+facts, acceptable variation, misconception and safety boundaries, a two-
+occasion mastery plan, and an explicit exclusion of private reflection.
+
+The projection declares one of nine type-appropriate lesson purposes and uses
+short one-action directions in Grades 3–5, then increasingly complex but
+chunked health-literacy reasoning in Grades 7–12. It is Health-only; PE and
+Health unit assessments keep their existing production contracts. The
+Director-approved `ma-g5-health-u01-l01` learner package and adult guide are
+byte-locked to the approved sample while regeneration rebuilds the complete
+Health lesson corpus. `reports/health-production-depth-r1.json` records counts,
+type coverage, safety/privacy coverage, and the approved anchor hashes.
 
 ## PE learner execution contract
 
@@ -144,6 +152,7 @@ home-use path, or completion criteria.
 ```bash
 node tooling/validate.mjs
 node tooling/health-content-audit.mjs
+node --test tooling/health-production-depth.test.mjs
 ```
 
 Independently re-reads every file under `packages/` and `scoring-guides/`

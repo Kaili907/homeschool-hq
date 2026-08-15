@@ -12,9 +12,8 @@
   "essentialQuestion": "How do I speak up for myself, respect others, and repair a relationship after conflict?",
   "estimatedMinutes": "30-45",
   "materials": [
-    "course notebook or digital equivalent",
-    "pencil or accessible response tool",
-    "paper or a digital tool for scripts"
+    "paper and pencil or an accessible response tool",
+    "the fictional lesson cards included in this task"
   ],
   "keyPoints": [
     "Bullying is deliberate, repeated, and directed at someone struggling to stop it.",
@@ -22,41 +21,252 @@
     "Keep the evidence, do not retaliate, block and report, and tell a trusted adult.",
     "Bystanders shift outcomes by refusing to join in, supporting the person afterwards, and reporting."
   ],
-  "privacySafeScenario": "A group chat is sharing an unkind edited photo of a classmate. List what you do, in order, and what you do not do.",
-  "studentTask": "The learner applies what they learned about bullying and cyberbullying response to a new fictional situation and records the choice plus the reason behind it.",
-  "knowledgeCheck": "Explain bullying and cyberbullying response to someone who has not learned it yet, using one example.",
+  "privacySafeScenario": "All required evidence uses fictional or public situations. The learner never has to disclose personal health, body, treatment, feelings, family, sexual, or substance-use information.",
+  "studentTask": "Write two facts. Use the lesson idea about bullying and cyberbullying response. Choose one safe next step. Name an adult or help source.",
+  "knowledgeCheck": "Name the fact. Fix the wrong claim. Choose a safe action. Name who can help.",
   "completionCriteria": [
-    "The learner completes the central task about bullying and cyberbullying response.",
-    "The learner gives a reason, an example, or a documented process rather than an unsupported answer.",
-    "The learner checks or revises the work and can name one next step."
+    "I use two facts.",
+    "I explain bullying and cyberbullying response.",
+    "I choose a safe action and give a reason.",
+    "I name the right kind of help."
   ],
-  "adaptationChoices": "Scripts may be spoken, signed, typed, drawn as a comic, or acted with figures. Role-play is optional and may always be replaced by describing what a character should say and why.",
-  "extensionChallenge": "Apply what you learned about bullying and cyberbullying response under a new constraint, compare two reasonable approaches, or teach the idea to a family member with an original fictional example.",
+  "adaptationChoices": "Show one short direction at a time. Allow reading aloud, word cards, typing, writing, drawing with labels, signing, selecting, or speaking. Help may repeat a direction but may not choose the fact, action, reason, or help source.",
+  "extensionChallenge": "Create a new fictional or public case about bullying and cyberbullying response. Include enough facts, choices or constraints, and support authority for another learner to reason safely. Add an accurate explanation of acceptable variation; use no real person's private information.",
   "accessibilitySupports": [
-    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
-    "Chunk directions into one action at a time and show a worked example or model.",
-    "Allow typed, handwritten, spoken, signed, drawn, or pointed responses; the response mode is never the standard being assessed.",
-    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
-    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for any media.",
-    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+    "Read one short section aloud.",
+    "Show one action at a time.",
+    "Offer a vocabulary card and extra time.",
+    "Accept typing, writing, drawing with labels, signing, selecting, or speaking for equal credit."
   ],
-  "trustedAdultNote": "Direct urgent safety, health, or mental-health concerns to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment.",
+  "trustedAdultNote": "If a real situation feels unsafe or raises a health concern, pause the lesson and tell a parent, guardian, teacher, school staff member, or another trusted adult. A qualified health professional gives medical advice. In an emergency, get an adult and use the local emergency service.",
   "optionalReflection": {
-    "prompt": "With a guardian, review who is on your list of adults you could tell if something felt wrong. This is optional. No purchase, account creation, photograph, measurement, or private disclosure is required.",
+    "prompt": "Optional and private: Make up one example that helps you remember bullying and cyberbullying response. Keep it for yourself. You do not need to show it or prove that you completed it.",
     "private": true,
     "graded": false,
     "optional": true
   },
   "neverRequires": [
-    "This task never requires body weight, height, BMI, or body-fat percentage.",
-    "This task never requires calorie counting or a diet or weight-loss goal.",
-    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires body weight, height, BMI, body-fat percentage, body comparison, or appearance scoring.",
+    "This task never requires calorie counting, dieting, or a diet or weight-loss goal.",
+    "This task never requires sharing medical history, a diagnosis, treatment, medication, feelings, family conflict, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires advice about an individual learner's treatment, medication, food, supplement, or exercise plan."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
     "sourceLessonId": "ma-g4-health-u04-l05"
+  },
+  "standards": [
+    "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+    "Michigan Health Practice 6: Advocacy and Health Promotion",
+    "Michigan Health Topic (Grades 3-5): Healthy Relationships"
+  ],
+  "primaryLessonType": "MASTERY_EVIDENCE",
+  "secondaryLessonTypes": [
+    "COMMUNICATION_HELP_SEEKING",
+    "DECISION_REASONING"
+  ],
+  "learningGoal": "I can explain bullying and cyberbullying response, use facts, choose a safe next step, and name who can help.",
+  "lessonExperience": {
+    "experienceVersion": "health-production-depth-r1",
+    "learnerTitle": "Learn and apply: bullying and cyberbullying response",
+    "privacyNotice": "Write only about the made-up people. Keep private information private.",
+    "entryCheck": {
+      "ref": "ma-g4-health-u04-l05#entry-check",
+      "heading": "Start with a fact",
+      "directions": "Choose the sentence that states a fact.",
+      "choices": [
+        "Bullying is deliberate, repeated, and directed at someone struggling to stop it.",
+        "This one detail proves everything about a person's health.",
+        "A popular statement about bullying and cyberbullying response needs no evidence."
+      ],
+      "support": "A fact is stated in the lesson or supported by reliable evidence. An assumption adds a conclusion the information cannot establish.",
+      "treatment": "This entry check is unscored. Use the support or prerequisite route before continuing when needed."
+    },
+    "explanation": {
+      "ref": "ma-g4-health-u04-l05#clear-explanation",
+      "heading": "Understand bullying and cyberbullying response",
+      "paragraphs": [
+        "Bullying is deliberate, repeated, and directed at someone struggling to stop it.",
+        "Cyberbullying follows people home, spreads fast, and leaves a record.",
+        "Keep the evidence, do not retaliate, block and report, and tell a trusted adult.",
+        "Bystanders shift outcomes by refusing to join in, supporting the person afterwards, and reporting."
+      ],
+      "importantDistinction": "Learning about bullying and cyberbullying response supports accurate reasoning and safe next steps; it does not authorize a diagnosis, individualized treatment advice, a person label, or a value judgment.",
+      "decisionRule": "RETRIEVE the taught idea. APPLY it independently. EXPLAIN with facts. TRANSFER it later to a different case."
+    },
+    "vocabulary": {
+      "ref": "ma-g4-health-u04-l05#vocabulary",
+      "heading": "Words for bullying and cyberbullying response",
+      "terms": [
+        {
+          "term": "bullying and cyberbullying response",
+          "meaning": "Bullying is deliberate, repeated, and directed at someone struggling to stop it.",
+          "boundary": "This idea does not diagnose, label, or determine the value of a person."
+        },
+        {
+          "term": "relevant information",
+          "meaning": "facts or reliable evidence that can change the interpretation, choice, or next step",
+          "boundary": "A guess, popularity, or a personal judgment is not relevant evidence by itself."
+        },
+        {
+          "term": "support route",
+          "meaning": "the responsible adult, qualified professional, service, or public authority able to help with the situation",
+          "boundary": "Naming a support route does not make the learner responsible for diagnosis, treatment, or emergency management."
+        }
+      ]
+    },
+    "vocabularyCheck": {
+      "ref": "ma-g4-health-u04-l05#vocabulary-check",
+      "heading": "Check the words",
+      "directions": [
+        "Say what the topic means.",
+        "Point to one fact.",
+        "Name the help route."
+      ],
+      "selfCheck": "A complete check uses the meaning of bullying and cyberbullying response, one accurate fact, and the responsible support route without labeling a person."
+    },
+    "canonicalPracticeContext": {
+      "ref": "ma-g4-health-u04-l05#canonical-practice-context",
+      "heading": "Use the authored practice situation",
+      "situation": "A group chat is sharing an unkind edited photo of a classmate. List what you do, in order, and what you do not do.",
+      "treatment": "This canonical context may support teaching or discussion. It does not replace the separate fresh independent, mastery, or remediation-retry cases."
+    },
+    "modelExample": {
+      "ref": "ma-g4-health-u04-l05#model-northside",
+      "heading": "Watch the reasoning: bullying and cyberbullying response",
+      "situation": "A fictional Northside assessment card presents a new case about bullying and cyberbullying response and this relevant fact: Bullying is deliberate, repeated, and directed at someone struggling to stop it. The learner must retrieve the taught idea, justify a safe response independently, and leave all private information out.",
+      "relevantFacts": [
+        "Bullying is deliberate, repeated, and directed at someone struggling to stop it.",
+        "Cyberbullying follows people home, spreads fast, and leaves a record."
+      ],
+      "assumptionOrDistraction": "A popular or confident statement about bullying and cyberbullying response is not automatically accurate and cannot establish a person's health, motives, or character.",
+      "possibleActions": [
+        "Complete the fresh case independently and schedule later transfer.",
+        "Copy the worked model.",
+        "Mark mastery from this one response."
+      ],
+      "successCheck": "The model uses the lesson fact, explains the connection, stays within the learner role, and names responsible help when it is needed.",
+      "workedReasoning": [
+        "Retrieve the taught concept without copying the model.",
+        "Use stated facts to complete the fresh task independently and explain the decision boundary.",
+        "Record one evidence occasion only; mastery waits for later accurate transfer."
+      ]
+    },
+    "guidedReasoning": {
+      "ref": "ma-g4-health-u04-l05#guided-riverside",
+      "heading": "Try a different case with support",
+      "situation": "A fictional Riverside youth group must explain or act on bullying and cyberbullying response. The group has this reliable lesson information: Cyberbullying follows people home, spreads fast, and leaves a record. It has not been given any person's private health information.",
+      "availableChoices": [
+        "Use the stated facts and compare safe options.",
+        "Act from an unsupported assumption.",
+        "Pause and contact the responsible help source."
+      ],
+      "turnOne": [
+        "Name one fact.",
+        "Choose one safe action.",
+        "Name an adult who can help."
+      ],
+      "cue": "Look for the situation, safe choices, relevant information, and who can help.",
+      "feedbackMoves": [
+        "If a response adds a guess, replace it with a fact from the case or lesson.",
+        "If bullying and cyberbullying response is named without explanation, link one fact to the concept or process.",
+        "If a choice is reasonable but the reason is missing, add the fact that supports it.",
+        "If a response seeks disclosure, diagnoses, shames, or exceeds the learner role, switch to the fictional facts and the approved help route.",
+        "Accept an equivalent typed, handwritten, drawn-and-labeled, signed, selected, or spoken response when it shows the same reasoning."
+      ],
+      "turnTwo": "Fix one sentence. Use a fact and a safe next step.",
+      "releaseCondition": "Continue when the response uses a stated fact, applies bullying and cyberbullying response, and gives a safe next step without private disclosure or a person label."
+    },
+    "independentEvidence": {
+      "ref": "ma-g4-health-u04-l05#independent-maple",
+      "heading": "Show what you know on a fresh case",
+      "situation": "A fictional Maple Community Center presents a fresh case about bullying and cyberbullying response. It supplies this relevant information: Bullying is deliberate, repeated, and directed at someone struggling to stop it. Complete the type-appropriate response independently and explain the safety and authority boundary.",
+      "taskMode": "MASTERY_EVIDENCE",
+      "directions": [
+        "Write two facts.",
+        "Use the lesson idea about bullying and cyberbullying response.",
+        "Choose one safe next step.",
+        "Name an adult or help source."
+      ],
+      "permittedSupports": [
+        "the lesson vocabulary card",
+        "read-aloud or one direction at a time",
+        "typing, writing, drawing with labels, signing, selecting, or speaking"
+      ],
+      "independenceBoundary": "Support may restate a direction or provide access. It may not choose the controlling fact, conclusion, action, reason, safety judgment, or help route.",
+      "successCriteria": [
+        "I use two facts.",
+        "I explain bullying and cyberbullying response.",
+        "I choose a safe action and give a reason.",
+        "I name the right kind of help."
+      ]
+    },
+    "freshMasteryCheck": {
+      "ref": "ma-g4-health-u04-l05#fresh-check-lakeside",
+      "heading": "Check the idea in a new place",
+      "situation": "A fictional Lakeside school committee reviews bullying and cyberbullying response. The committee knows: Keep the evidence, do not retaliate, block and report, and tell a trusted adult. It must correct one unsupported claim and choose a safe next step.",
+      "directions": [
+        "Name the fact.",
+        "Fix the wrong claim.",
+        "Choose a safe action.",
+        "Name who can help."
+      ],
+      "freshnessNote": "This case is different from the model, guided case, and independent case. Do not copy their conclusions."
+    },
+    "remediation": {
+      "ref": "ma-g4-health-u04-l05#remediation-oak-street",
+      "alternateExplanationRefs": [
+        "ma-g4-health-u04-l05#remediation-alternate-model",
+        "ma-g4-health-u04-l05#remediation-contrast"
+      ],
+      "heading": "Try a different model",
+      "trigger": "Use this route after an observable gap in a fact, vocabulary meaning, reasoning step, process order, or help route for bullying and cyberbullying response.",
+      "prerequisite": "First restate this approved fact in your own words: Bullying is deliberate, repeated, and directed at someone struggling to stop it.",
+      "alternateExplanation": "Use a four-box decision map: SITUATION, SAFE CHOICES, RELEVANT INFORMATION, and HELP. Fill each box with case facts before writing a conclusion.",
+      "contrast": [
+        "Sufficient: uses a stated fact about bullying and cyberbullying response, explains the connection, and stays within the learner role.",
+        "Needs revision: repeats a topic word, adds a guess, or gives an action with no factual reason or responsible help source."
+      ],
+      "guidedCorrection": "Cross out the guess. Circle the fact. Add one safe action.",
+      "guidedCorrectionRef": "ma-g4-health-u04-l05#remediation-guided-correction",
+      "freshRetry": {
+        "ref": "ma-g4-health-u04-l05#remediation-fresh-retry",
+        "situation": "A fictional Oak Street library receives a new question about bullying and cyberbullying response. Staff provide this approved fact: Cyberbullying follows people home, spreads fast, and leaves a record. The learner must respond without using the Northside, Riverside, Maple, or Lakeside conclusions.",
+        "directions": [
+          "Write the fact.",
+          "Use the lesson idea.",
+          "Choose a safe next step.",
+          "Name who can help."
+        ]
+      },
+      "exitCriterion": "Return to the independent route when the learner accurately uses a fact, applies bullying and cyberbullying response, explains a safe response, and identifies support without answer-bearing help.",
+      "nextRoute": "If the same gap remains, return to the named prerequisite with an adult instructor; do not replace the task with private reflection."
+    },
+    "laterTransfer": {
+      "ref": "ma-g4-health-u04-l05#later-transfer",
+      "timing": "Use in a later lesson or a separate session.",
+      "prompt": "Apply bullying and cyberbullying response to a meaningfully different fictional or public case. Retrieve the concept, use relevant facts, justify a safe response, and identify the responsible support or authority route.",
+      "masteryBoundary": "The current independent response is one evidence occasion. Mastery requires accurate independent evidence now and accurate later retrieval or transfer."
+    }
+  },
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "retention": "LEARNER_KEPT_ONLY"
+  },
+  "contentProvenance": {
+    "factSourceLane": "canonical-grade-3-4-health-authoring",
+    "productionDepthLane": "mac/health-production-depth-r1",
+    "objective": "Demonstrate current understanding of bullying and cyberbullying response through scenario response and applied evidence.",
+    "standardRef": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+    "productionDepthVersion": "health-production-depth-r1"
   },
   "productionReadiness": {
     "status": "READY",

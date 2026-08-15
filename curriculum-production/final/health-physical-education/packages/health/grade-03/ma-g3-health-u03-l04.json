@@ -12,10 +12,8 @@
   "essentialQuestion": "How can I notice what I feel and choose a helpful next step?",
   "estimatedMinutes": "30-45",
   "materials": [
-    "course notebook or digital equivalent",
-    "pencil or accessible response tool",
-    "paper or cards for a calm-down menu",
-    "a card the guardian keeps for trusted-adult contacts"
+    "paper and pencil or an accessible response tool",
+    "the fictional lesson cards included in this task"
   ],
   "keyPoints": [
     "Slow breathing out for longer than you breathe in settles the body down.",
@@ -23,41 +21,252 @@
     "Grounding works: name things you can see, hear, and touch right now.",
     "Different tools suit different feelings and places, so having a menu beats having one trick."
   ],
-  "privacySafeScenario": "A calming tool that works at home is not allowed in the middle of a lesson. What else could work in that setting?",
-  "studentTask": "The learner applies what they learned about calming and coping tools to a new fictional situation and records the choice plus the reason behind it.",
-  "knowledgeCheck": "Show one part of your project that uses calming and coping tools and say why you made that choice.",
+  "privacySafeScenario": "All required evidence uses fictional or public situations. The learner never has to disclose personal health, body, treatment, feelings, family, sexual, or substance-use information.",
+  "studentTask": "Write two facts. Use the lesson idea about calming and coping tools. Choose one safe next step. Name an adult or help source.",
+  "knowledgeCheck": "Name the fact. Fix the wrong claim. Choose a safe action. Name who can help.",
   "completionCriteria": [
-    "The learner completes the central task about calming and coping tools.",
-    "The learner gives a reason, an example, or a documented process rather than an unsupported answer.",
-    "The learner checks or revises the work and can name one next step."
+    "I use two facts.",
+    "I explain calming and coping tools.",
+    "I choose a safe action and give a reason.",
+    "I name the right kind of help."
   ],
-  "adaptationChoices": "Calming tools may be movement-based, still, sensory, verbal, or silent, and each learner picks tools their body and setting allow. Any scenario may be answered by pointing, choosing from options, drawing, or speaking.",
-  "extensionChallenge": "Apply what you learned about calming and coping tools under a new constraint, compare two reasonable approaches, or teach the idea to a family member with an original fictional example.",
+  "adaptationChoices": "Show one short direction at a time. Allow reading aloud, word cards, typing, writing, drawing with labels, signing, selecting, or speaking. Help may repeat a direction but may not choose the fact, action, reason, or help source.",
+  "extensionChallenge": "Create a new fictional or public case about calming and coping tools. Include enough facts, choices or constraints, and support authority for another learner to reason safely. Add an accurate explanation of acceptable variation; use no real person's private information.",
   "accessibilitySupports": [
-    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
-    "Chunk directions into one action at a time and show a worked example or model.",
-    "Allow typed, handwritten, spoken, signed, drawn, or pointed responses; the response mode is never the standard being assessed.",
-    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
-    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for any media.",
-    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+    "Read one short section aloud.",
+    "Show one action at a time.",
+    "Offer a vocabulary card and extra time.",
+    "Accept typing, writing, drawing with labels, signing, selecting, or speaking for equal credit."
   ],
-  "trustedAdultNote": "Direct urgent safety, health, or mental-health concerns to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment.",
+  "trustedAdultNote": "If a real situation feels unsafe or raises a health concern, pause the lesson and tell a parent, guardian, teacher, school staff member, or another trusted adult. A qualified health professional gives medical advice. In an emergency, get an adult and use the local emergency service.",
   "optionalReflection": {
-    "prompt": "With a guardian, agree on one calm-down option that is allowed at home and one that is allowed away from home. This is optional. No purchase, account creation, photograph, measurement, or private disclosure is required.",
+    "prompt": "Optional and private: Make up one example that helps you remember calming and coping tools. Keep it for yourself. You do not need to show it or prove that you completed it.",
     "private": true,
     "graded": false,
     "optional": true
   },
   "neverRequires": [
-    "This task never requires body weight, height, BMI, or body-fat percentage.",
-    "This task never requires calorie counting or a diet or weight-loss goal.",
-    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires body weight, height, BMI, body-fat percentage, body comparison, or appearance scoring.",
+    "This task never requires calorie counting, dieting, or a diet or weight-loss goal.",
+    "This task never requires sharing medical history, a diagnosis, treatment, medication, feelings, family conflict, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires advice about an individual learner's treatment, medication, food, supplement, or exercise plan."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
     "sourceLessonId": "ma-g3-health-u03-l04"
+  },
+  "standards": [
+    "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+    "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+    "Michigan Health Topic (Grades 3-5): Mental and Emotional Health"
+  ],
+  "primaryLessonType": "PROJECT_CAPSTONE",
+  "secondaryLessonTypes": [
+    "DECISION_REASONING",
+    "CONCEPT_VOCABULARY"
+  ],
+  "learningGoal": "I can explain calming and coping tools, use facts, choose a safe next step, and name who can help.",
+  "lessonExperience": {
+    "experienceVersion": "health-production-depth-r1",
+    "learnerTitle": "Learn and apply: calming and coping tools",
+    "privacyNotice": "Write only about the made-up people. Keep private information private.",
+    "entryCheck": {
+      "ref": "ma-g3-health-u03-l04#entry-check",
+      "heading": "Start with a fact",
+      "directions": "Choose the sentence that states a fact.",
+      "choices": [
+        "Slow breathing out for longer than you breathe in settles the body down.",
+        "This one detail proves everything about a person's health.",
+        "A popular statement about calming and coping tools needs no evidence."
+      ],
+      "support": "A fact is stated in the lesson or supported by reliable evidence. An assumption adds a conclusion the information cannot establish.",
+      "treatment": "This entry check is unscored. Use the support or prerequisite route before continuing when needed."
+    },
+    "explanation": {
+      "ref": "ma-g3-health-u03-l04#clear-explanation",
+      "heading": "Understand calming and coping tools",
+      "paragraphs": [
+        "Slow breathing out for longer than you breathe in settles the body down.",
+        "Moving, stretching, drinking water, or stepping outside can all help.",
+        "Grounding works: name things you can see, hear, and touch right now.",
+        "Different tools suit different feelings and places, so having a menu beats having one trick."
+      ],
+      "importantDistinction": "Learning about calming and coping tools supports accurate reasoning and safe next steps; it does not authorize a diagnosis, individualized treatment advice, a person label, or a value judgment.",
+      "decisionRule": "DEFINE the public or fictional need. USE accurate evidence. BUILD a feasible response. CHECK authority, access, privacy, and impact."
+    },
+    "vocabulary": {
+      "ref": "ma-g3-health-u03-l04#vocabulary",
+      "heading": "Words for calming and coping tools",
+      "terms": [
+        {
+          "term": "calming and coping tools",
+          "meaning": "Slow breathing out for longer than you breathe in settles the body down.",
+          "boundary": "This idea does not diagnose, label, or determine the value of a person."
+        },
+        {
+          "term": "relevant information",
+          "meaning": "facts or reliable evidence that can change the interpretation, choice, or next step",
+          "boundary": "A guess, popularity, or a personal judgment is not relevant evidence by itself."
+        },
+        {
+          "term": "support route",
+          "meaning": "the responsible adult, qualified professional, service, or public authority able to help with the situation",
+          "boundary": "Naming a support route does not make the learner responsible for diagnosis, treatment, or emergency management."
+        }
+      ]
+    },
+    "vocabularyCheck": {
+      "ref": "ma-g3-health-u03-l04#vocabulary-check",
+      "heading": "Check the words",
+      "directions": [
+        "Say what the topic means.",
+        "Point to one fact.",
+        "Name the help route."
+      ],
+      "selfCheck": "A complete check uses the meaning of calming and coping tools, one accurate fact, and the responsible support route without labeling a person."
+    },
+    "canonicalPracticeContext": {
+      "ref": "ma-g3-health-u03-l04#canonical-practice-context",
+      "heading": "Use the authored practice situation",
+      "situation": "A calming tool that works at home is not allowed in the middle of a lesson. What else could work in that setting?",
+      "treatment": "This canonical context may support teaching or discussion. It does not replace the separate fresh independent, mastery, or remediation-retry cases."
+    },
+    "modelExample": {
+      "ref": "ma-g3-health-u03-l04#model-northside",
+      "heading": "Watch the reasoning: calming and coping tools",
+      "situation": "A fictional Northside youth council is designing a public resource about calming and coping tools. It has this approved evidence: Slow breathing out for longer than you breathe in settles the body down. The resource must name its audience, a feasible action, the actor with authority, an access or privacy safeguard, and a measure of impact.",
+      "relevantFacts": [
+        "Slow breathing out for longer than you breathe in settles the body down.",
+        "Moving, stretching, drinking water, or stepping outside can all help."
+      ],
+      "assumptionOrDistraction": "A popular or confident statement about calming and coping tools is not automatically accurate and cannot establish a person's health, motives, or character.",
+      "possibleActions": [
+        "Build the bounded public resource with evidence, authority, safeguards, and a measure.",
+        "Require a real personal health plan.",
+        "Publish a claim without checking evidence or access."
+      ],
+      "successCheck": "The model uses the lesson fact, explains the connection, stays within the learner role, and names responsible help when it is needed.",
+      "workedReasoning": [
+        "Define one bounded fictional or public need and the audience affected.",
+        "Use the lesson fact, identify the actor with authority, and propose a feasible response.",
+        "Add an access or privacy safeguard and a measure that could show whether the response worked."
+      ]
+    },
+    "guidedReasoning": {
+      "ref": "ma-g3-health-u03-l04#guided-riverside",
+      "heading": "Try a different case with support",
+      "situation": "A fictional Riverside youth group must explain or act on calming and coping tools. The group has this reliable lesson information: Moving, stretching, drinking water, or stepping outside can all help. It has not been given any person's private health information.",
+      "availableChoices": [
+        "Use the stated facts and compare safe options.",
+        "Act from an unsupported assumption.",
+        "Pause and contact the responsible help source."
+      ],
+      "turnOne": [
+        "Name one fact.",
+        "Choose one safe action.",
+        "Name an adult who can help."
+      ],
+      "cue": "Look for the situation, safe choices, relevant information, and who can help.",
+      "feedbackMoves": [
+        "If a response adds a guess, replace it with a fact from the case or lesson.",
+        "If calming and coping tools is named without explanation, link one fact to the concept or process.",
+        "If a choice is reasonable but the reason is missing, add the fact that supports it.",
+        "If a response seeks disclosure, diagnoses, shames, or exceeds the learner role, switch to the fictional facts and the approved help route.",
+        "Accept an equivalent typed, handwritten, drawn-and-labeled, signed, selected, or spoken response when it shows the same reasoning."
+      ],
+      "turnTwo": "Fix one sentence. Use a fact and a safe next step.",
+      "releaseCondition": "Continue when the response uses a stated fact, applies calming and coping tools, and gives a safe next step without private disclosure or a person label."
+    },
+    "independentEvidence": {
+      "ref": "ma-g3-health-u03-l04#independent-maple",
+      "heading": "Show what you know on a fresh case",
+      "situation": "A fictional Maple Community Center requests a bounded public resource about calming and coping tools. Use this evidence: Slow breathing out for longer than you breathe in settles the body down. Define the audience and need, propose a feasible action, identify authority, add an access or privacy safeguard, and define a measure.",
+      "taskMode": "PROJECT_CAPSTONE",
+      "directions": [
+        "Write two facts.",
+        "Use the lesson idea about calming and coping tools.",
+        "Choose one safe next step.",
+        "Name an adult or help source."
+      ],
+      "permittedSupports": [
+        "the lesson vocabulary card",
+        "read-aloud or one direction at a time",
+        "typing, writing, drawing with labels, signing, selecting, or speaking"
+      ],
+      "independenceBoundary": "Support may restate a direction or provide access. It may not choose the controlling fact, conclusion, action, reason, safety judgment, or help route.",
+      "successCriteria": [
+        "I use two facts.",
+        "I explain calming and coping tools.",
+        "I choose a safe action and give a reason.",
+        "I name the right kind of help."
+      ]
+    },
+    "freshMasteryCheck": {
+      "ref": "ma-g3-health-u03-l04#fresh-check-lakeside",
+      "heading": "Check the idea in a new place",
+      "situation": "A fictional Lakeside school committee reviews calming and coping tools. The committee knows: Grounding works: name things you can see, hear, and touch right now. It must correct one unsupported claim and choose a safe next step.",
+      "directions": [
+        "Name the fact.",
+        "Fix the wrong claim.",
+        "Choose a safe action.",
+        "Name who can help."
+      ],
+      "freshnessNote": "This case is different from the model, guided case, and independent case. Do not copy their conclusions."
+    },
+    "remediation": {
+      "ref": "ma-g3-health-u03-l04#remediation-oak-street",
+      "alternateExplanationRefs": [
+        "ma-g3-health-u03-l04#remediation-alternate-model",
+        "ma-g3-health-u03-l04#remediation-contrast"
+      ],
+      "heading": "Try a different model",
+      "trigger": "Use this route after an observable gap in a fact, vocabulary meaning, reasoning step, process order, or help route for calming and coping tools.",
+      "prerequisite": "First restate this approved fact in your own words: Slow breathing out for longer than you breathe in settles the body down.",
+      "alternateExplanation": "Use a bridge diagram: NEED and EVIDENCE are one side; ACTION, AUTHORITY, SAFEGUARD, and MEASURE are the spans. A proposal cannot cross the bridge when one span is missing.",
+      "contrast": [
+        "Sufficient: uses a stated fact about calming and coping tools, explains the connection, and stays within the learner role.",
+        "Needs revision: repeats a topic word, adds a guess, or gives an action with no factual reason or responsible help source."
+      ],
+      "guidedCorrection": "Cross out the guess. Circle the fact. Add one safe action.",
+      "guidedCorrectionRef": "ma-g3-health-u03-l04#remediation-guided-correction",
+      "freshRetry": {
+        "ref": "ma-g3-health-u03-l04#remediation-fresh-retry",
+        "situation": "A fictional Oak Street library receives a new question about calming and coping tools. Staff provide this approved fact: Moving, stretching, drinking water, or stepping outside can all help. The learner must respond without using the Northside, Riverside, Maple, or Lakeside conclusions.",
+        "directions": [
+          "Write the fact.",
+          "Use the lesson idea.",
+          "Choose a safe next step.",
+          "Name who can help."
+        ]
+      },
+      "exitCriterion": "Return to the independent route when the learner accurately uses a fact, applies calming and coping tools, explains a safe response, and identifies support without answer-bearing help.",
+      "nextRoute": "If the same gap remains, return to the named prerequisite with an adult instructor; do not replace the task with private reflection."
+    },
+    "laterTransfer": {
+      "ref": "ma-g3-health-u03-l04#later-transfer",
+      "timing": "Use in a later lesson or a separate session.",
+      "prompt": "Apply calming and coping tools to a meaningfully different fictional or public case. Retrieve the concept, use relevant facts, justify a safe response, and identify the responsible support or authority route.",
+      "masteryBoundary": "The current independent response is one evidence occasion. Mastery requires accurate independent evidence now and accurate later retrieval or transfer."
+    }
+  },
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "retention": "LEARNER_KEPT_ONLY"
+  },
+  "contentProvenance": {
+    "factSourceLane": "canonical-grade-3-4-health-authoring",
+    "productionDepthLane": "mac/health-production-depth-r1",
+    "objective": "Apply calming and coping tools to the unit performance task and justify the choices made.",
+    "standardRef": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+    "productionDepthVersion": "health-production-depth-r1"
   },
   "productionReadiness": {
     "status": "READY",

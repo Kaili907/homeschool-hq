@@ -23,6 +23,11 @@ import { fileURLToPath } from 'node:url'
 import { SUPPORTED_GRADES, courseDir, sourceBranchLabel } from './lib/sourcePaths.mjs'
 import { healthContentRepair } from './lib/healthContent.mjs'
 import {
+  HEALTH_PRODUCTION_DEPTH_VERSION,
+  auditHealthProductionDepth,
+  buildHealthProductionDepth,
+} from './lib/healthProductionDepth.mjs'
+import {
   buildSafeAlternativeText,
   pickAdaptedAlternativeText,
   pickGuardianSafety,
@@ -38,6 +43,11 @@ import { auditPeLessonExecutability, buildPeExecution } from './lib/peExecution.
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(HERE, '..')
 const SUBJECTS = ['health', 'physical-education']
+const APPROVED_HEALTH_ANCHOR_ID = 'ma-g5-health-u01-l01'
+const APPROVED_HEALTH_ANCHOR_HASHES = {
+  package: 'e4c4ea53acfed33e96088355ae2faed6c90a949d5f1b69021fa7399a7e469be6',
+  guide: '5a50bdfcf42b2fdd3de4523995174797fa3960ffcc3e6a08b7a038a273507084',
+}
 
 const NEVER_REQUIRES = [
   'This task never requires body weight, height, BMI, or body-fat percentage.',
@@ -104,6 +114,30 @@ function writeJson(path, data) {
   writeFileSync(path, JSON.stringify(data, null, 2) + '\n')
 }
 
+function sha256(content) {
+  return createHash('sha256').update(content).digest('hex')
+}
+
+function readApprovedHealthAnchor() {
+  const packagePath = resolve(ROOT, 'packages/health/grade-05', `${APPROVED_HEALTH_ANCHOR_ID}.json`)
+  const guidePath = resolve(ROOT, 'scoring-guides/health/grade-05', `${APPROVED_HEALTH_ANCHOR_ID}.json`)
+  const packageBytes = readFileSync(packagePath)
+  const guideBytes = readFileSync(guidePath)
+  const packageHash = sha256(packageBytes)
+  const guideHash = sha256(guideBytes)
+  if (packageHash !== APPROVED_HEALTH_ANCHOR_HASHES.package || guideHash !== APPROVED_HEALTH_ANCHOR_HASHES.guide) {
+    throw new Error(`Approved Health anchor does not match ${APPROVED_HEALTH_ANCHOR_ID} at 61f447082bc3102cab6eb7514a0c443c1bacbc17`)
+  }
+  return {
+    packageBytes,
+    guideBytes,
+    packageDocument: JSON.parse(packageBytes),
+    guideDocument: JSON.parse(guideBytes),
+    packageHash,
+    guideHash,
+  }
+}
+
 function buildLessonArtifacts(lesson, unit, subject, grade) {
   const isHealth = subject === 'health'
   const peExecution = isHealth ? null : buildPeExecution(lesson, grade)
@@ -112,6 +146,7 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
   const sourceKeyPoints = pickKeyPointsText(lesson, unit)
   const keyPoints = repairedContent?.keyPoints
     ?? (sourceKeyPoints ? sourceKeyPoints.split(/(?<=[.!?])\s+/).filter(Boolean) : [])
+  const healthDepth = isHealth ? buildHealthProductionDepth({ lesson, unit, grade, keyPoints, contentRepairApplied: Boolean(repairedContent) }) : null
   const adaptedAlternative = pickAdaptedAlternativeText(lesson, unit)
   const safeAlternativeText = buildSafeAlternativeText(lesson, unit)
   const guardianSafety = pickGuardianSafety(lesson, unit)
@@ -172,6 +207,7 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
         objective: lesson.learning_objectives?.[0] ?? lesson.focus,
       },
     } : {}),
+    ...(healthDepth ? healthDepth.learner : {}),
   }
 
   const scoringGuide = {
@@ -191,6 +227,7 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     guardianSafetyReview: guardianSafety,
     safetyAndPrivacyNotes: lesson.safety_and_privacy ?? [],
     sourceProvenance: { sourceBranch: sourceBranchLabel(grade, subject), sourceLessonId: lesson.lesson_id },
+    ...(healthDepth ? healthDepth.adult : {}),
   }
 
   const gateInput = {
@@ -311,6 +348,7 @@ function buildAssessmentArtifacts(assessment, unit, subject, grade, courseId) {
 }
 
 function main() {
+  const approvedHealthAnchor = readApprovedHealthAnchor()
   const packagesRoot = resolve(ROOT, 'packages')
   const guidesRoot = resolve(ROOT, 'scoring-guides')
   if (existsSync(packagesRoot)) rmSync(packagesRoot, { recursive: true, force: true })
@@ -320,6 +358,8 @@ function main() {
   const privacyViolations = []
   const byGrade = []
   const peLessonPackages = []
+  const healthLessonPackages = []
+  const healthLessonGuides = []
 
   for (const grade of SUPPORTED_GRADES) {
     for (const subject of SUBJECTS) {
@@ -342,8 +382,23 @@ function main() {
 
         const pkgPath = resolve(packagesRoot, subject, `grade-${gradeToken(grade)}`, `${lesson.lesson_id}.json`)
         const guidePath = resolve(guidesRoot, subject, `grade-${gradeToken(grade)}`, `${lesson.lesson_id}.json`)
-        writeJson(pkgPath, { ...pkg, productionReadiness: { status: gate.status, codes: gate.codes } })
-        writeJson(guidePath, { ...scoringGuide, productionReadiness: { status: gate.status, codes: gate.codes, notes: gate.notes } })
+        const packageDocument = { ...pkg, productionReadiness: { status: gate.status, codes: gate.codes } }
+        const guideDocument = { ...scoringGuide, productionReadiness: { status: gate.status, codes: gate.codes, notes: gate.notes } }
+        if (lesson.lesson_id === APPROVED_HEALTH_ANCHOR_ID) {
+          mkdirSync(dirname(pkgPath), { recursive: true })
+          mkdirSync(dirname(guidePath), { recursive: true })
+          writeFileSync(pkgPath, approvedHealthAnchor.packageBytes)
+          writeFileSync(guidePath, approvedHealthAnchor.guideBytes)
+          healthLessonPackages.push(approvedHealthAnchor.packageDocument)
+          healthLessonGuides.push(approvedHealthAnchor.guideDocument)
+        } else {
+          writeJson(pkgPath, packageDocument)
+          writeJson(guidePath, guideDocument)
+          if (subject === 'health') {
+            healthLessonPackages.push(packageDocument)
+            healthLessonGuides.push(guideDocument)
+          }
+        }
         lessonCount += 1
       }
 
@@ -369,6 +424,55 @@ function main() {
   const needsReviewCount = gateResults.filter((r) => r.status === 'NEEDS_HUMAN_REVIEW').length
   const notReadyCount = gateResults.filter((r) => r.status === 'NOT_READY').length
   const notReadyIds = gateResults.filter((r) => r.status === 'NOT_READY').map((r) => ({ id: r.lessonId, codes: r.codes, notes: r.notes }))
+  const healthDepthAudit = auditHealthProductionDepth(healthLessonPackages, healthLessonGuides)
+  const healthDepthReady = healthDepthAudit.issueCount === 0
+  const healthDepthEvidence = {
+    evidenceType: 'health-production-depth-r1',
+    evidenceVersion: '1.0.0',
+    productionDepthVersion: HEALTH_PRODUCTION_DEPTH_VERSION,
+    scope: {
+      subject: 'health',
+      grades: SUPPORTED_GRADES,
+      lessonsBefore: 324,
+      lessonsAfter: healthDepthAudit.lessonsAudited,
+      lessonsRebuilt: healthDepthAudit.lessonsAudited,
+      pairedAdultGuides: healthDepthAudit.guidesAudited,
+    },
+    teachingSupply: {
+      explanation: healthDepthAudit.lessonsAudited,
+      vocabulary: healthDepthAudit.lessonsAudited,
+      models: healthDepthAudit.lessonsAudited,
+      guidedReasoning: healthDepthAudit.lessonsAudited,
+      independentEvidence: healthDepthAudit.lessonsAudited,
+      freshMastery: healthDepthAudit.lessonsAudited,
+      differentiatedRemediation: healthDepthAudit.lessonsAudited,
+    },
+    lessonTypes: healthDepthAudit.lessonTypes,
+    grades: healthDepthAudit.grades,
+    safetyAndPrivacy: {
+      noDiagnosis: healthDepthAudit.lessonsAudited,
+      noIndividualizedTreatmentAdvice: healthDepthAudit.lessonsAudited,
+      noShameOrBodyValue: healthDepthAudit.lessonsAudited,
+      noForcedSensitiveDisclosure: healthDepthAudit.lessonsAudited,
+      privateReflectionExcludedFromMastery: healthDepthAudit.lessonsAudited,
+    },
+    ageLanguage: {
+      grades3To5: 'short concrete directions with one action per step',
+      grades7To8: 'concrete ordered reasoning with bounded constraints',
+      grades9To12: 'chunked health-literacy analysis with evidence, uncertainty, tradeoffs, and authority',
+    },
+    approvedAnchor: {
+      lessonId: APPROVED_HEALTH_ANCHOR_ID,
+      approvedSampleSha: '61f447082bc3102cab6eb7514a0c443c1bacbc17',
+      packageSha256: approvedHealthAnchor.packageHash,
+      guideSha256: approvedHealthAnchor.guideHash,
+      bytePreserved: true,
+    },
+    issueCount: healthDepthAudit.issueCount,
+    issues: healthDepthAudit.issues,
+    classification: healthDepthReady ? 'HEALTH_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE' : 'BLOCKED',
+  }
+  writeJson(resolve(ROOT, 'reports/health-production-depth-r1.json'), healthDepthEvidence)
   const peAudit = auditPeLessonExecutability(peLessonPackages)
   const peAfter = {
     missingMovementCues: peAudit.missingMovementCues.length,
@@ -457,6 +561,15 @@ function main() {
       placeholderInstructionalLessons: 0,
       evidence: 'reports/health-content-repair-r1.json',
     },
+    healthProductionDepth: {
+      evidenceFile: 'reports/health-production-depth-r1.json',
+      lessonsRebuilt: healthDepthAudit.lessonsAudited,
+      pairedAdultGuides: healthDepthAudit.guidesAudited,
+      lessonTypes: healthDepthAudit.lessonTypes,
+      approvedAnchorPreserved: true,
+      issueCount: healthDepthAudit.issueCount,
+      classification: healthDepthEvidence.classification,
+    },
     scoringPolicy: {
       gateSemantics: 'H3',
       judgmentWorkAuthority: 'RUBRIC',
@@ -484,9 +597,10 @@ function main() {
   console.log(`Generated ${gateResults.length} items (${manifest.totals.lessons} lessons + ${manifest.totals.unitAssessments} unit assessments)`)
   console.log(`Production gate: ${readyCount} READY, ${needsReviewCount} NEEDS_HUMAN_REVIEW, ${notReadyCount} NOT_READY`)
   console.log(`Privacy scan: ${privacyViolations.length} violation(s)`)
+  console.log(`Health production depth: ${healthDepthAudit.lessonsAudited} lessons + ${healthDepthAudit.guidesAudited} guides; ${healthDepthAudit.issueCount} issue(s)`)
   console.log(`PE learner-content audit: ${peAudit.lessonsAudited} lessons; ${peAfter.missingMovementCues} missing cues, ${peAfter.equipmentBlockers} equipment blockers, ${peAfter.missingRequiredSafety} missing safety, ${peAfter.missingAdaptation} missing adaptations, ${peAfter.homeUseBlockers} home-use blockers`)
 
-  if (notReadyCount > 0 || privacyViolations.length > 0 || !peReady) {
+  if (notReadyCount > 0 || privacyViolations.length > 0 || !healthDepthReady || !peReady) {
     process.exitCode = 1
   }
 }
