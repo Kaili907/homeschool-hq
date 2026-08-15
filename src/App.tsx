@@ -1,9 +1,6 @@
 import { lazy, Suspense, useState } from 'react'
 import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
 import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
-import { isArtsMusicDirectorPreviewPath } from './study/family-pilot/arts-music-director-preview/route'
-import { isHealthDirectorReviewPath } from './study/family-pilot/health-director-preview/route'
-import { isPhysicalEducationDirectorPreviewPath } from './study/family-pilot/physical-education-director-preview/route'
 
 const LegacyApp = lazy(() => import('./LegacyApp'))
 
@@ -16,21 +13,12 @@ const FinalFamilyPilotApp = lazy(() =>
   })),
 )
 
-const ArtsMusicDirectorPreview = import.meta.env.DEV
-  ? lazy(() => import('./study/family-pilot/arts-music-director-preview/ArtsMusicDirectorPreview').then((module) => ({
-      default: module.ArtsMusicDirectorPreview,
-    })))
-  : null
-
-const HealthDirectorPreview = import.meta.env.DEV
-  ? lazy(() => import('./study/family-pilot/health-director-preview/HealthDirectorPreview').then((module) => ({
-      default: module.HealthDirectorPreview,
-    })))
-  : null
-
-const PhysicalEducationDirectorPreview = import.meta.env.DEV
-  ? lazy(() => import('./study/family-pilot/physical-education-director-preview/PhysicalEducationDirectorPreview').then((module) => ({
-      default: module.PhysicalEducationDirectorPreview,
+// The entire review router is behind Vite's compile-time development flag. Its
+// registry, routes, sample components, lesson imports, and CSS are unreachable
+// from — and tree-shaken out of — production builds.
+const DirectorReviewRouter = import.meta.env.DEV
+  ? lazy(() => import('./study/family-pilot/director-review/DirectorReviewRouter').then((module) => ({
+      default: module.DirectorReviewRouter,
     })))
   : null
 
@@ -42,26 +30,10 @@ export default function App() {
   const [familyPilotSelected, setFamilyPilotSelected] = useState(familyPilotSelectedAtBoot)
   const [returnToLegacyHome, setReturnToLegacyHome] = useState(false)
 
-  if (ArtsMusicDirectorPreview && isArtsMusicDirectorPreviewPath(window.location.pathname)) {
+  if (DirectorReviewRouter && window.location.pathname.startsWith('/__review/')) {
     return (
-      <Suspense fallback={<main aria-busy="true">Loading the Arts/Music Director preview.</main>}>
-        <ArtsMusicDirectorPreview />
-      </Suspense>
-    )
-  }
-
-  if (HealthDirectorPreview && isHealthDirectorReviewPath(window.location.pathname)) {
-    return (
-      <Suspense fallback={<main aria-busy="true">Opening the Health Director preview.</main>}>
-        <HealthDirectorPreview />
-      </Suspense>
-    )
-  }
-
-  if (PhysicalEducationDirectorPreview && isPhysicalEducationDirectorPreviewPath(window.location.pathname)) {
-    return (
-      <Suspense fallback={<main aria-busy="true">Loading the Physical Education Director preview.</main>}>
-        <PhysicalEducationDirectorPreview />
+      <Suspense fallback={<main aria-busy="true">Opening the Director lesson sample review.</main>}>
+        <DirectorReviewRouter />
       </Suspense>
     )
   }

@@ -134,7 +134,8 @@ describe('Health Director sample R1', () => {
     expect(isHealthDirectorReviewPath('/family-pilot', true)).toBe(false)
 
     const appSource = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8')
-    expect(appSource).toMatch(/const HealthDirectorPreview = import\.meta\.env\.DEV/)
+    expect(appSource).toMatch(/const DirectorReviewRouter = import\.meta\.env\.DEV/)
+    expect(appSource).not.toMatch(/import \{ isHealthDirectorReviewPath \}/)
     const css = readFileSync(new URL('../src/study/family-pilot/health-director-preview/health-director-preview.css', import.meta.url), 'utf8')
     expect(css).toMatch(/@media \(max-width: 560px\)/)
     expect(css).toMatch(/prefers-reduced-motion/)

@@ -1,0 +1,261 @@
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+}
+
+.director-review-home {
+  --review-ink: #17253d;
+  --review-muted: #536078;
+  --review-line: #d7dfeb;
+  --review-panel: #ffffff;
+  --review-soft: #f3f6fb;
+  --review-accent: #174d82;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 4vw, 3.5rem);
+  color: var(--review-ink);
+  background: linear-gradient(150deg, #f8faff 0%, #edf3fa 100%);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.director-review-hero,
+.director-review-prompts,
+.director-review-home > section {
+  width: min(75rem, 100%);
+  margin-inline: auto;
+}
+
+.director-review-hero {
+  padding-block: clamp(1rem, 3vw, 2.5rem);
+}
+
+.director-review-eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--review-accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.director-review-home h1,
+.director-review-home h2,
+.director-review-home h3,
+.director-review-home p {
+  overflow-wrap: anywhere;
+}
+
+.director-review-home h1 {
+  max-width: 16ch;
+  margin: 0;
+  font-size: clamp(2.25rem, 7vw, 4.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.director-review-intro {
+  max-width: 47rem;
+  margin: 1.25rem 0 0;
+  color: var(--review-muted);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.65;
+}
+
+.director-review-prompts {
+  box-sizing: border-box;
+  margin-block: 1rem clamp(2rem, 5vw, 4.5rem);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--review-line);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.director-review-prompts h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.director-review-prompts ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem 1.5rem;
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--review-muted);
+  line-height: 1.45;
+}
+
+.director-review-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.director-review-section-heading h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.director-review-count {
+  flex: none;
+  margin: 0;
+  color: var(--review-muted);
+  font-weight: 700;
+}
+
+.director-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.director-review-card {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 25rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--review-line);
+  border-radius: 1.25rem;
+  background: var(--review-panel);
+  box-shadow: 0 0.8rem 2.3rem rgba(23, 37, 61, 0.07);
+}
+
+.director-review-card-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--review-line);
+}
+
+.director-review-card h3 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.director-review-grade {
+  order: 2;
+  margin: 0;
+  color: var(--review-accent);
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.director-review-card dl {
+  display: grid;
+  gap: 1rem;
+  margin: 1.2rem 0 1.5rem;
+}
+
+.director-review-card dt {
+  margin-bottom: 0.25rem;
+  color: var(--review-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.director-review-card dd {
+  margin: 0;
+  line-height: 1.48;
+}
+
+.director-review-card code {
+  font-size: 0.86em;
+  word-break: break-word;
+}
+
+.director-review-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+  margin-top: auto;
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--review-accent);
+  border-radius: 0.75rem;
+  color: #ffffff;
+  background: var(--review-accent);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.director-review-open:hover {
+  background: #0f3b68;
+  border-color: #0f3b68;
+}
+
+.director-review-open:focus-visible {
+  outline: 3px solid #f4a928;
+  outline-offset: 3px;
+}
+
+.director-review-not-found {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  max-width: none;
+}
+
+.director-review-not-found .director-review-open {
+  margin-top: 1rem;
+}
+
+@media (max-width: 760px) {
+  .director-review-prompts ul,
+  .director-review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .director-review-section-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .director-review-card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .director-review-home {
+    padding: 1rem;
+  }
+
+  .director-review-card-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .director-review-grade {
+    order: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .director-review-home *,
+  .director-review-home *::before,
+  .director-review-home *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .director-review-card,
+  .director-review-prompts {
+    border-width: 2px;
+  }
+}
