@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
+import { ADMIN_CURRICULUM_GOVERNANCE_GRADES } from '../curriculum-validation/model'
 import {
   CURRICULUM_STANDARDS_REVIEW_SCHEMA_VERSION,
   CURRICULUM_STANDARDS_REVIEW_STATES,
@@ -13,6 +14,8 @@ import {
 } from './contracts'
 
 type FetchLike = (input: string, init: RequestInit) => Promise<Pick<Response, 'ok' | 'status' | 'json'>>
+
+const GOVERNED_GRADES = new Set<number>(ADMIN_CURRICULUM_GOVERNANCE_GRADES)
 
 function failure(status: number): CurriculumStandardsReviewError {
   if (status === 401) return new CurriculumStandardsReviewError('unauthenticated')
@@ -52,7 +55,7 @@ function decision(
     || (expectedContextKind !== undefined && value.contextKind !== expectedContextKind)
     || !bounded(value.contextRef, 128) || (expectedContextRef !== undefined && value.contextRef !== expectedContextRef)
     || !bounded(value.sourceLabel, 240)
-    || !Number.isSafeInteger(value.grade) || Number(value.grade) < 0 || Number(value.grade) > 12
+    || !Number.isSafeInteger(value.grade) || !GOVERNED_GRADES.has(Number(value.grade))
     || typeof value.courseRef !== 'string' || !/^[a-z0-9][a-z0-9:-]{2,127}$/.test(value.courseRef)
     || value.findingRule !== 'standards.human_review_required'
     || !Number.isSafeInteger(value.affectedCount) || Number(value.affectedCount) < 1
@@ -105,7 +108,7 @@ function occurrence(value: unknown): CurriculumStandardsReviewOccurrence | null 
   const entity = finding.entity
   if (
     !bounded(value.sourceLabel, 240)
-    || !Number.isSafeInteger(value.grade) || Number(value.grade) < 0 || Number(value.grade) > 12
+    || !Number.isSafeInteger(value.grade) || !GOVERNED_GRADES.has(Number(value.grade))
     || typeof value.courseRef !== 'string' || !/^[a-z0-9][a-z0-9:-]{2,127}$/.test(value.courseRef)
     || typeof finding.id !== 'string' || !/^cvf-[0-9a-f]{16}$/.test(finding.id)
     || !['error', 'warning', 'info'].includes(String(finding.severity))

@@ -94,6 +94,7 @@ describe('CurriculumValidationWorkspace', () => {
     const html = renderToStaticMarkup(<CurriculumValidationWorkspace run={run()} />)
 
     expect(html).toContain('id="curriculum-validation-query"')
+    expect(html).toContain('id="curriculum-validation-grade"')
     expect(html).toContain('id="curriculum-validation-severity"')
     expect(html).toContain('id="curriculum-validation-category"')
     expect(html).toContain('id="curriculum-validation-blocking"')
@@ -103,6 +104,26 @@ describe('CurriculumValidationWorkspace', () => {
     expect(html).toContain('Entity')
     expect(html).toContain('Rule')
     expect(html).toContain('Severity')
+  })
+
+  it('derives grade filters from one- and two-digit entity references', () => {
+    const graded = [3, 10, 12].map((grade): CurriculumValidationFinding => ({
+      ...findings[0],
+      id: `cvf-grade-${grade}`,
+      entity: { type: 'lesson', id: `ma-g${grade}-mathematics-u10-l12` },
+    }))
+    const html = renderToStaticMarkup(<CurriculumValidationWorkspace run={{
+      ...run(),
+      findings: graded,
+      summary: { total: 3, errors: 3, warnings: 0, info: 0, blocking: 3, nonBlocking: 0 },
+    }} />)
+
+    expect(html).toContain('<option value="3">Grade 3</option>')
+    expect(html).toContain('<option value="10">Grade 10</option>')
+    expect(html).toContain('<option value="12">Grade 12</option>')
+    expect(filterCurriculumValidationFindings(graded, {
+      query: '', grade: 10, severity: 'all', category: 'all', blocking: 'all',
+    }).map((finding) => finding.id)).toEqual(['cvf-grade-10'])
   })
 
   it('filters by search, category, severity, and publication impact', () => {

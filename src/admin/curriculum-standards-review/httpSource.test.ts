@@ -3,7 +3,7 @@ import { createCurriculumStandardsReviewHttpSource } from './httpSource'
 
 const decision = {
   schemaVersion: 1 as const, reviewKey: 'csr-1234567890abcdef', contextKind: 'published_release' as const,
-  contextRef: '1.0.0', sourceLabel: '2', grade: 5, courseRef: 'ma-g5-physical-education',
+  contextRef: '1.0.0', sourceLabel: 'UNVERIFIED-LOCAL', grade: 10, courseRef: 'ma-g10-physical-education',
   findingRule: 'standards.human_review_required' as const, affectedCount: 1,
   findingIds: ['cvf-1234567890abcdef'], status: 'in_review' as const,
   canonicalStandardId: null, frameworkVersion: null, canonicalTitle: null,
@@ -43,6 +43,7 @@ describe('curriculum standards review HTTP source', () => {
     for (const injected of [
       { ...decision, reviewerNote: null, providerData: { secret: true } },
       { ...decision, contextRef: '2.0.0' },
+      { ...decision, grade: 6, courseRef: 'ma-g6-science' },
     ]) {
       const fetchImpl = vi.fn().mockResolvedValue({
         ok: true, status: 200, json: async () => ({ schemaVersion: 1, decisions: [injected] }),

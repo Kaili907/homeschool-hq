@@ -77,6 +77,35 @@ describe('curriculum validation read model', () => {
     })
   })
 
+  it.each([3, 4, 5, 7, 8, 9, 10, 11, 12])(
+    'retains governed grade %s and its two-digit-safe curriculum references',
+    (grade) => {
+      const course = `ma-g${grade}-language-arts-2`
+      const unit = `${course}-u10`
+      const lesson = `${unit}-l12`
+      const assessment = `${unit}-assessment`
+      const model = buildCurriculumValidationReadModel(evidence([{
+        check: 'broken-reference', result: 'FAIL',
+        affected: { grade, course_id: course, unit_id: unit, lesson_id: lesson, reference: assessment },
+      }], 'FAIL'))
+
+      expect(finding(model, 'Reference integrity')?.scope).toEqual({
+        grade: String(grade), course, unit, lesson, reference: assessment,
+      })
+    },
+  )
+
+  it('does not present unsupported grade or reference metadata as governed scope', () => {
+    const model = buildCurriculumValidationReadModel(evidence([{
+      check: 'broken-reference', result: 'FAIL',
+      affected: { grade: 6, course_id: 'ma-g6-science', lesson_id: 'ma-g6-science-u10-l12' },
+    }], 'FAIL'))
+
+    expect(finding(model, 'Reference integrity')?.scope).toEqual({
+      grade: undefined, course: undefined, unit: undefined, lesson: undefined, reference: undefined,
+    })
+  })
+
   it('returns UNKNOWN when validation evidence is missing', () => {
     const model = buildCurriculumValidationReadModel({ curriculumManifest: { version: '1.2.3' } })
 

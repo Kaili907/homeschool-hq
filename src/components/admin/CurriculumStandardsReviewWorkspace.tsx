@@ -148,6 +148,7 @@ function ReadyWorkspace({
   }), [items, query, grade, course, status])
   const groups = useMemo(() => groupCurriculumStandardsReviewQueue(filtered, groupBy), [filtered, groupBy])
   const selected = items.find((item) => item.reviewKey === selectedKey) ?? filtered[0] ?? null
+  const grades = [...new Set(items.map((item) => item.grade))].sort((left, right) => left - right)
   const courses = [...new Set(items.map((item) => item.courseRef))].sort()
   const unresolved = items.filter((item) => item.status !== 'approved_mapping')
     .reduce((total, item) => total + item.affectedCount, 0)
@@ -172,7 +173,7 @@ function ReadyWorkspace({
 
       <div className="grid gap-3 rounded-2xl border border-slate-700 bg-slate-900 p-4 sm:grid-cols-2 xl:grid-cols-5" aria-label="Standards review filters">
         <label className="text-sm" htmlFor="standards-review-query">Search<input id="standards-review-query" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Label, course, entity…" className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 py-2" /></label>
-        <label className="text-sm" htmlFor="standards-review-grade">Grade<select id="standards-review-grade" value={grade} onChange={(event) => setGrade(event.target.value === 'all' ? 'all' : Number(event.target.value))} className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 py-2"><option value="all">All grades</option>{[5, 7, 8].map((value) => <option key={value} value={value}>Grade {value}</option>)}</select></label>
+        <label className="text-sm" htmlFor="standards-review-grade">Grade<select id="standards-review-grade" value={grade} onChange={(event) => setGrade(event.target.value === 'all' ? 'all' : Number(event.target.value))} className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 py-2"><option value="all">All grades</option>{grades.map((value) => <option key={value} value={value}>Grade {value}</option>)}</select></label>
         <label className="text-sm" htmlFor="standards-review-course">Course<select id="standards-review-course" value={course} onChange={(event) => setCourse(event.target.value)} className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 py-2"><option value="all">All courses</option>{courses.map((value) => <option key={value}>{value}</option>)}</select></label>
         <label className="text-sm" htmlFor="standards-review-status">Review status<select id="standards-review-status" value={status} onChange={(event) => setStatus(event.target.value as CurriculumStandardsReviewState | 'all')} className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 py-2"><option value="all">All states</option>{CURRICULUM_STANDARDS_REVIEW_STATES.map((value) => <option key={value} value={value}>{STATUS_LABELS[value]}</option>)}</select></label>
         <label className="text-sm" htmlFor="standards-review-group">Group by<select id="standards-review-group" value={groupBy} onChange={(event) => setGroupBy(event.target.value as CurriculumStandardsReviewGroupBy)} className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 py-2">{Object.entries(GROUP_LABELS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>

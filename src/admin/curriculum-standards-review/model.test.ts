@@ -29,6 +29,29 @@ describe('curriculum standards review queue', () => {
     expect(occurrence.finding.id).toBe(expected.id)
   })
 
+  it('attributes unit, lesson, and assessment review groups to the referenced two-digit-grade course', () => {
+    const standard = { framework_ref: 'framework:legacy', legacy_label: 'UNVERIFIED-LOCAL', mapping_status: 'human-review' }
+    const snapshot = {
+      courses: [{ course_id: 'ma-g10-science', grade: 10, standards: [standard] }],
+      units: [{ unit_id: 'ma-g10-science-u10', course_ref: 'ma-g10-science', grade: 9, standards: [standard] }],
+      lessons: [{ lesson_id: 'ma-g10-science-u10-l12', course_ref: 'ma-g10-science', grade: 9, standards: [standard] }],
+      assessments: [{
+        assessment_id: 'ma-g10-science-u10-assessment', course_ref: 'ma-g10-science',
+        unit_ref: 'ma-g10-science-u10', standards: [standard],
+      }],
+    } as never
+
+    const occurrences = collectCurriculumStandardsReviewOccurrences(snapshot)
+    expect(occurrences).toHaveLength(4)
+    expect(new Set(occurrences.map((item) => item.grade))).toEqual(new Set([10]))
+    expect(new Set(occurrences.map((item) => item.courseRef))).toEqual(new Set(['ma-g10-science']))
+    const queue = buildCurriculumStandardsReviewQueue(occurrences, { kind: 'draft', ref: 'draft:grade-10' })
+    expect(queue).toHaveLength(1)
+    expect(queue[0]).toMatchObject({ sourceLabel: 'UNVERIFIED-LOCAL', grade: 10, affectedCount: 4, status: 'unreviewed' })
+    expect(groupCurriculumStandardsReviewQueue(queue, 'grade')[0]).toMatchObject({ label: 'Grade 10', affectedCount: 4 })
+    expect(JSON.stringify(queue)).not.toMatch(/canonicalStandardId|frameworkVersion|evidenceSource/)
+  })
+
   it('projects exact repository evidence without inventing canonical standards facts', () => {
     const occurrences = knownCurriculumStandardsReviewOccurrences()
     expect(knownAmbiguousStandardsCounts()).toEqual({ '2': 154, '3': 84, '4': 182, '5': 238 })

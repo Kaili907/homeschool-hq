@@ -1,5 +1,13 @@
 export const CURRICULUM_VALIDATION_CAPABILITY = 'curriculum:read' as const
 
+export const ADMIN_CURRICULUM_GOVERNANCE_GRADES = [3, 4, 5, 7, 8, 9, 10, 11, 12] as const
+
+const ADMIN_CURRICULUM_GOVERNANCE_GRADE_SET = new Set<number>(ADMIN_CURRICULUM_GOVERNANCE_GRADES)
+const COURSE_REFERENCE = /^ma-g(1[0-2]|[1-9])-[a-z0-9]+(?:-[a-z0-9]+)*$/
+const UNIT_REFERENCE = /^(?:ma-g(1[0-2]|[1-9])-[a-z0-9]+(?:-[a-z0-9]+)*-)?u\d{2}$/
+const LESSON_REFERENCE = /^ma-g(1[0-2]|[1-9])-[a-z0-9]+(?:-[a-z0-9]+)*-u\d{2}-l\d{2}$/
+const ASSESSMENT_REFERENCE = /^ma-g(1[0-2]|[1-9])-[a-z0-9]+(?:-[a-z0-9]+)*-u\d{2}-assessment$/
+
 export const VALIDATION_CATEGORY_IDS = [
   'schema',
   'manifest',
@@ -112,7 +120,9 @@ interface FindingPresentation {
 }
 
 const KNOWN_FINDINGS: Readonly<Record<string, FindingPresentation>> = {
-  'three-grades': { category: 'completeness', label: 'Expected grade set', subject: 'The expected curriculum grade set' },
+  'three-grades': { category: 'completeness', label: 'Recorded grade set', subject: 'The grade set recorded by this legacy validation artifact' },
+  'nine-grades': { category: 'completeness', label: 'Expected grade set', subject: 'The expected curriculum grade set' },
+  'expected-grade-set': { category: 'completeness', label: 'Expected grade set', subject: 'The expected curriculum grade set' },
   'ten-courses-per-grade': { category: 'completeness', label: 'Courses per grade', subject: 'Course totals for each grade' },
   'course-count': { category: 'completeness', label: 'Course count', subject: 'The package course count' },
   'lesson-count': { category: 'completeness', label: 'Lesson count', subject: 'The package lesson count' },
@@ -168,30 +178,48 @@ function normalizedFindingCode(value: unknown): string | null {
 }
 
 function safeGrade(value: unknown): string | undefined {
-  const grade = typeof value === 'number' ? String(value) : value
-  return grade === '5' || grade === '7' || grade === '8' ? grade : undefined
+  const grade = typeof value === 'number'
+    ? value
+    : typeof value === 'string' && /^(?:1[0-2]|[1-9])$/.test(value)
+      ? Number(value)
+      : Number.NaN
+  return Number.isSafeInteger(grade) && ADMIN_CURRICULUM_GOVERNANCE_GRADE_SET.has(grade)
+    ? String(grade)
+    : undefined
+}
+
+export function curriculumGovernanceGradeFromReference(value: unknown): number | null {
+  if (typeof value !== 'string') return null
+  const match = /^ma-g(1[0-2]|[1-9])-/.exec(value)
+  if (!match) return null
+  const grade = Number(match[1])
+  return ADMIN_CURRICULUM_GOVERNANCE_GRADE_SET.has(grade) ? grade : null
 }
 
 function safeCourseRef(value: unknown): string | undefined {
-  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*$/.test(value)
+  return typeof value === 'string' && COURSE_REFERENCE.test(value)
+    && curriculumGovernanceGradeFromReference(value) !== null
     ? value
     : undefined
 }
 
 function safeUnitRef(value: unknown): string | undefined {
-  return typeof value === 'string' && /^(?:ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-)?u\d{2}$/.test(value)
-    ? value
-    : undefined
+  if (typeof value !== 'string' || !UNIT_REFERENCE.test(value)) return undefined
+  return value.startsWith('ma-g') && curriculumGovernanceGradeFromReference(value) === null
+    ? undefined
+    : value
 }
 
 function safeLessonRef(value: unknown): string | undefined {
-  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-u\d{2}-l\d{2}$/.test(value)
+  return typeof value === 'string' && LESSON_REFERENCE.test(value)
+    && curriculumGovernanceGradeFromReference(value) !== null
     ? value
     : undefined
 }
 
 function safeAssessmentRef(value: unknown): string | undefined {
-  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-u\d{2}-assessment$/.test(value)
+  return typeof value === 'string' && ASSESSMENT_REFERENCE.test(value)
+    && curriculumGovernanceGradeFromReference(value) !== null
     ? value
     : undefined
 }
