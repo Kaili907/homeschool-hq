@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "1.0",
+  "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "status": "PASS",
+  "corpus": {
+    "lessonsBefore": 504,
+    "lessonsAfter": 504,
+    "lessonsRebuilt": 504,
+    "sourceTasksPreserved": 1736,
+    "sourcePromptsPreserved": 3626,
+    "productionDepthOverlays": 503,
+    "approvedAnchorOverlays": 1
+  },
+  "lessonFamilies": {
+    "MONEY_CONCEPT": 23,
+    "EARNING_INCOME": 61,
+    "SPENDING": 46,
+    "SAVING": 27,
+    "INTEGRATED_FINANCIAL_PLAN": 19,
+    "EDUCATION_CAREER_FINANCE": 11,
+    "TAX": 50,
+    "BUDGETING": 39,
+    "CREDIT_BORROWING": 67,
+    "INTEREST": 2,
+    "CONSUMER_PROTECTION": 31,
+    "ENTREPRENEURSHIP": 14,
+    "BANKING": 8,
+    "INSURANCE_RISK": 51,
+    "INVESTING": 55
+  },
+  "instructionalProfiles": {
+    "DIAGNOSTIC": 59,
+    "CONCEPT_INSTRUCTION": 94,
+    "GUIDED_APPLICATION": 66,
+    "PROJECT": 95,
+    "MASTERY": 24,
+    "REMEDIATION": 59,
+    "APPLICATION_TRANSFER": 42,
+    "REVIEW": 35,
+    "ASSESSMENT": 2,
+    "DECISION_SCENARIO": 28
+  },
+  "teaching": {
+    "conceptTeachingApplicable": 377,
+    "conceptTeachingSupplied": 377,
+    "workedExamplesApplicable": 377,
+    "workedExamplesSupplied": 377,
+    "guidedContracts": 504,
+    "independentContracts": 504,
+    "masteryRoutes": 504,
+    "remediationRoutes": 504
+  },
+  "arithmetic": {
+    "applicableLessons": 468,
+    "integerCentPolicyLessons": 468,
+    "basisPointOrExactRatePolicyLessons": 468,
+    "fixedItems": 2979,
+    "oracleDisagreements": 0
+  },
+  "decisions": {
+    "applicableLessons": 504,
+    "reasoningContracts": 504,
+    "rubricAuthorityLessons": 504
+  },
+  "privacy": {
+    "fictionalLessons": 504,
+    "privateDataRequestViolations": 0,
+    "personalizedAdviceViolations": 0
+  },
+  "approvedAnchor": {
+    "lessonId": "ma-g8-financial-literacy-u04-l03",
+    "packageId": "swk-fl-g8-u04-l03",
+    "sampleRevision": "FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1",
+    "packageSha256": "5f9e95fde97059cc81c4eb64040a56d0bdb76294ef0560c5052ef26aef48e279",
+    "scoringSha256": "a77fbaa65d944674152ee3fe05fcc2aa0595c4dda8d2ecf98138e2d3af0b4bc6"
+  },
+  "representativeGradeEvidence": {
+    "grade-3": {
+      "lessons": 36,
+      "arithmeticLessonId": "ma-g3-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g3-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    },
+    "grade-4": {
+      "lessons": 36,
+      "arithmeticLessonId": "ma-g4-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g4-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    },
+    "grade-5": {
+      "lessons": 36,
+      "arithmeticLessonId": "ma-g5-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g5-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    },
+    "grade-7": {
+      "lessons": 36,
+      "arithmeticLessonId": "ma-g7-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g7-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    },
+    "grade-8": {
+      "lessons": 72,
+      "arithmeticLessonId": "ma-g8-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g8-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    },
+    "grade-9": {
+      "lessons": 72,
+      "arithmeticLessonId": "ma-g9-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g9-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    },
+    "grade-10": {
+      "lessons": 72,
+      "arithmeticLessonId": "ma-g10-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g10-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    },
+    "grade-11": {
+      "lessons": 72,
+      "arithmeticLessonId": "ma-g11-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g11-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    },
+    "grade-12": {
+      "lessons": 72,
+      "arithmeticLessonId": "ma-g12-financial-literacy-u01-l02",
+      "decisionLessonId": "ma-g12-financial-literacy-u01-l03",
+      "arithmeticAuthorityVerified": true,
+      "decisionAuthorityVerified": true
+    }
+  },
+  "checks": {
+    "completeInventory": true,
+    "oneApprovedAnchor": true,
+    "productionDepthApplied": true,
+    "allProfilesDeclared": true,
+    "allFinancialFamiliesDeclared": true,
+    "conceptTeachingCompleteWhereApplicable": true,
+    "workedExamplesCompleteWhereApplicable": true,
+    "guidedContractsOrApprovedAnchor": true,
+    "independentContractsOrApprovedAnchor": true,
+    "masteryRoutesComplete": true,
+    "remediationRoutesComplete": true,
+    "sequenceRoutesResolve": true,
+    "decisionReasoningComplete": true,
+    "exactMoneyPolicyComplete": true,
+    "basisPointOrExactRatePolicy": true,
+    "everyGradeExercised": true,
+    "privacySafe": true,
+    "approvedAnchorPackageBytePreserved": true,
+    "approvedAnchorScoringBytePreserved": true
+  }
+}

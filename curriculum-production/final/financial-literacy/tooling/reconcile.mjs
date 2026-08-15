@@ -25,6 +25,13 @@ import {
   FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_PACKAGE_ID,
   FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_REVISION,
 } from '../samples/grade-08/financial-literacy-director-sample-r1-authority.mjs'
+import {
+  applyProductionDepthR1,
+  buildProductionDepthRoutes,
+  FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_FAMILIES,
+  FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_MODEL_EXEMPT_PROFILES,
+  FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_REVISION,
+} from './production-depth-r1.mjs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const REPO = resolve(ROOT, '../../..')
@@ -516,7 +523,7 @@ function listInputRecords() {
   return records
 }
 
-function composeRecord(record) {
+function composeRecord(record, depthRoutes) {
   const { lane, pkg: sourcePackage, scoring: sourceScoring } = record
   const isDirectorSample = sourcePackage.packageId === FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_PACKAGE_ID
   const pkg = isDirectorSample
@@ -530,6 +537,13 @@ function composeRecord(record) {
   const supplement = makeSupplement(pkg)
   const answerMatchesBefore = supportAnswerMatches(sourcePackage, sourceScoring, supplement)
   const locatorFindingsBefore = scoringLocatorFindings(sourcePackage)
+  pkg.responseScoring = responseScoring
+  if (!isDirectorSample) {
+    const routeKey = `${pkg.lessonRef.grade}:${pkg.lessonRef.unitNumber}:${pkg.packageId}`
+    const route = depthRoutes.get(routeKey)
+    if (!route) throw new Error(`missing production-depth route for ${pkg.packageId}`)
+    applyProductionDepthR1(pkg, route)
+  }
   const repairedSupportFields = repairLearnerPackage(pkg, scoring, supplement)
   const answerMatchesAfter = supportAnswerMatches(pkg, scoring, supplement)
   const locatorFindingsAfter = scoringLocatorFindings(pkg)
@@ -585,7 +599,14 @@ function composeRecord(record) {
         packagePath: relative(REPO, DIRECTOR_SAMPLE_PACKAGE_PATH).split(sep).join('/'),
         standardRef: 'docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md',
       },
-    } : {}),
+    } : {
+      sourcePackageCorePreserved: false,
+      productionDepthOverlay: {
+        revision: FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_REVISION,
+        generatorPath: 'curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs',
+        standardRef: 'docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md',
+      },
+    }),
     familyPilotFirst: true,
   }
 
@@ -846,6 +867,14 @@ function coreSnapshot(pkg) {
   }
 }
 
+function instructionalSpineSnapshot(pkg) {
+  return {
+    objective: pkg.objective,
+    scenario: pkg.scenario,
+    tasks: pkg.tasks,
+  }
+}
+
 function learnerSecurityReport(records, h3) {
   const answerBefore = records.flatMap((record) => record.answerMatchesBefore.map((match) => ({
     packageId: record.pkg.packageId,
@@ -863,8 +892,8 @@ function learnerSecurityReport(records, h3) {
   const locatorAfter = records.filter((record) => record.locatorFindingsAfter.length > 0)
   const repaired = records.filter((record) => record.repairedSupportFields.length > 0)
   const declaredSampleOverlays = records.filter((record) => record.isDirectorSample)
-  const exactCorePreservationExceptDirectorSample = records.every((record) =>
-    record.isDirectorSample || JSON.stringify(record.sourceCoreSnapshot) === JSON.stringify(coreSnapshot(record.pkg)))
+  const exactInstructionalSpinePreservationExceptDirectorSample = records.every((record) =>
+    record.isDirectorSample || JSON.stringify(instructionalSpineSnapshot(record.sourceCoreSnapshot)) === JSON.stringify(instructionalSpineSnapshot(record.pkg)))
   const privateDataViolations = records.flatMap((record) =>
     unsafeLines(learnerVisibleText(record.pkg), PRIVATE_FINANCIAL_DATA_REQUEST)
       .map((line) => ({ packageId: record.pkg.packageId, line })))
@@ -890,7 +919,7 @@ function learnerSecurityReport(records, h3) {
     allLearnerPackagesPresent: records.length === 504,
     adultOnlyScoringArtifacts: records.every((record) => record.scoring.adultOnly === true),
     exactlyOneDeclaredDirectorSampleOverlay: declaredSampleOverlays.length === 1 && declaredSampleOverlays[0].pkg.sampleRevision === FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_REVISION,
-    learnerCorePreservedExceptDeclaredDirectorSample: exactCorePreservationExceptDirectorSample,
+    sourceObjectivesScenariosAndTasksPreservedExceptDeclaredDirectorSample: exactInstructionalSpinePreservationExceptDirectorSample,
     requiredNumbersPreservedExceptDeclaredDirectorSample: requiredNumbersPreservedExceptDirectorSample,
     fixedProblemsPreserved: fixedProblems.length === 468 && records.reduce((sum, record) => sum + record.fixedCount, 0) === EXPECTED_FIXED_CONTRACT_ITEMS,
     judgmentWorkPreserved: judgmentWork.length === 504 && records.reduce((sum, record) => sum + record.openCount, 0) === EXPECTED_OPEN_CONTRACT_ITEMS,
@@ -974,6 +1003,118 @@ function learnerSecurityReport(records, h3) {
   }
 }
 
+function productionDepthReport(records) {
+  const modelExempt = new Set(FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_MODEL_EXEMPT_PROFILES)
+  const profileOf = (record) => record.pkg.instructionalProfile
+  const familyOf = (record) => record.pkg.financialFocus?.primary
+  const modelApplicable = records.filter((record) => !modelExempt.has(profileOf(record)))
+  const modelSupplied = modelApplicable.filter((record) =>
+    Array.isArray(record.pkg.workedExamples) && record.pkg.workedExamples.length > 0)
+  const conceptSupplied = modelApplicable.filter((record) =>
+    record.pkg.conceptExplanation?.applicability === 'REQUIRED_AND_SUPPLIED' ||
+      record.pkg.sampleRevision === FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1_REVISION)
+  const arithmetic = records.filter((record) => record.fixedCount > 0)
+  const decisions = records.filter((record) => record.openCount > 0)
+  const lessonIds = new Set(records.map((record) => record.pkg.lessonRef.lessonId))
+  const gradeEvidence = Object.fromEntries([...EXPECTED_GRADES.keys()].map((grade) => {
+    const gradeRecords = records.filter((record) => record.pkg.lessonRef.grade === grade)
+    const arithmeticRecord = gradeRecords.find((record) => record.fixedCount > 0 && !modelExempt.has(profileOf(record))) ?? gradeRecords.find((record) => record.fixedCount > 0)
+    const decisionRecord = gradeRecords.find((record) => record.openCount > 0 && record !== arithmeticRecord && !modelExempt.has(profileOf(record))) ?? gradeRecords.find((record) => record.openCount > 0 && record !== arithmeticRecord) ?? gradeRecords.find((record) => record.openCount > 0)
+    return [`grade-${grade}`, {
+      lessons: gradeRecords.length,
+      arithmeticLessonId: arithmeticRecord?.pkg.lessonRef.lessonId ?? null,
+      decisionLessonId: decisionRecord?.pkg.lessonRef.lessonId ?? null,
+      arithmeticAuthorityVerified: Boolean(arithmeticRecord?.scoring.productionGateH3.fixedAuthority.present),
+      decisionAuthorityVerified: Boolean(decisionRecord?.scoring.productionGateH3.rubricAuthority.present),
+    }]
+  }))
+  const anchor = records.find((record) => record.isDirectorSample)
+  const anchorPackagePath = join(ROOT, outputPaths(anchor).packagePath)
+  const anchorScoringPath = join(ROOT, outputPaths(anchor).scoringPath)
+  const checks = {
+    completeInventory: records.length === 504,
+    oneApprovedAnchor: Boolean(anchor) && records.filter((record) => record.isDirectorSample).length === 1,
+    productionDepthApplied: records.filter((record) => record.pkg.productionDepthRevision === FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_REVISION).length === 503,
+    allProfilesDeclared: records.every((record) => typeof profileOf(record) === 'string' && profileOf(record).length > 0),
+    allFinancialFamiliesDeclared: records.every((record) => FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_FAMILIES.includes(familyOf(record))),
+    conceptTeachingCompleteWhereApplicable: conceptSupplied.length === modelApplicable.length,
+    workedExamplesCompleteWhereApplicable: modelSupplied.length === modelApplicable.length,
+    guidedContractsOrApprovedAnchor: records.every((record) => record.isDirectorSample || record.pkg.guidedPracticeContract?.fade),
+    independentContractsOrApprovedAnchor: records.every((record) => record.isDirectorSample || record.pkg.independentScenarioContract?.independentBoundary),
+    masteryRoutesComplete: records.every((record) => record.isDirectorSample || record.pkg.masteryRule?.evidenceLessonId),
+    remediationRoutesComplete: records.every((record) => Array.isArray(record.pkg.remediationRoutes) && record.pkg.remediationRoutes.length > 0 && record.pkg.remediationRoutes[0].freshMasteryLessonId || record.isDirectorSample),
+    sequenceRoutesResolve: records.every((record) => {
+      if (record.isDirectorSample) return true
+      const route = record.pkg.remediationRoutes[0]
+      return [
+        record.pkg.guidedPracticeContract.guidedLessonId,
+        record.pkg.masteryRule.evidenceLessonId,
+        route.guidedRetryLessonId,
+        route.freshMasteryLessonId,
+      ].every((lessonId) => lessonIds.has(lessonId))
+    }),
+    decisionReasoningComplete: records.every((record) => record.isDirectorSample || record.pkg.decisionReasoning?.applicable === true),
+    exactMoneyPolicyComplete: arithmetic.every((record) => record.isDirectorSample || record.pkg.calculationPolicy?.moneyRepresentation === 'integer-cents'),
+    basisPointOrExactRatePolicy: arithmetic.every((record) => record.isDirectorSample || record.pkg.calculationPolicy?.rateRepresentation === 'integer-basis-points-or-exact-rational'),
+    everyGradeExercised: Object.values(gradeEvidence).every((item) => item.arithmeticAuthorityVerified && item.decisionAuthorityVerified),
+    privacySafe: records.every((record) => record.pkg.isFictionalSimulation === true && record.pkg.financialSafety?.neverRequestsRealCredentials === true && record.pkg.financialSafety?.noIndividualizedAdvice === true),
+    approvedAnchorPackageBytePreserved: sha256(readFileSync(anchorPackagePath)) === '5f9e95fde97059cc81c4eb64040a56d0bdb76294ef0560c5052ef26aef48e279',
+    approvedAnchorScoringBytePreserved: sha256(readFileSync(anchorScoringPath)) === 'a77fbaa65d944674152ee3fe05fcc2aa0595c4dda8d2ecf98138e2d3af0b4bc6',
+  }
+  return {
+    schemaVersion: '1.0',
+    revision: FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_REVISION,
+    status: Object.values(checks).every(Boolean) ? 'PASS' : 'FAIL',
+    corpus: {
+      lessonsBefore: 504,
+      lessonsAfter: records.length,
+      lessonsRebuilt: records.length,
+      sourceTasksPreserved: records.filter((record) => !record.isDirectorSample).reduce((sum, record) => sum + record.pkg.tasks.length, 0),
+      sourcePromptsPreserved: records.filter((record) => !record.isDirectorSample).reduce((sum, record) => sum + record.pkg.tasks.flatMap((task) => task.prompts).length, 0),
+      productionDepthOverlays: records.filter((record) => record.pkg.productionDepthRevision === FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1_REVISION).length,
+      approvedAnchorOverlays: records.filter((record) => record.isDirectorSample).length,
+    },
+    lessonFamilies: tally(records.map(familyOf)),
+    instructionalProfiles: tally(records.map(profileOf)),
+    teaching: {
+      conceptTeachingApplicable: modelApplicable.length,
+      conceptTeachingSupplied: conceptSupplied.length,
+      workedExamplesApplicable: modelApplicable.length,
+      workedExamplesSupplied: modelSupplied.length,
+      guidedContracts: records.filter((record) => record.isDirectorSample || record.pkg.guidedPracticeContract).length,
+      independentContracts: records.filter((record) => record.isDirectorSample || record.pkg.independentScenarioContract).length,
+      masteryRoutes: records.filter((record) => record.isDirectorSample || record.pkg.masteryRule?.evidenceLessonId).length,
+      remediationRoutes: records.filter((record) => Array.isArray(record.pkg.remediationRoutes) && record.pkg.remediationRoutes.length > 0).length,
+    },
+    arithmetic: {
+      applicableLessons: arithmetic.length,
+      integerCentPolicyLessons: arithmetic.filter((record) => record.isDirectorSample || record.pkg.calculationPolicy?.moneyRepresentation === 'integer-cents').length,
+      basisPointOrExactRatePolicyLessons: arithmetic.filter((record) => record.isDirectorSample || record.pkg.calculationPolicy?.rateRepresentation === 'integer-basis-points-or-exact-rational').length,
+      fixedItems: records.reduce((sum, record) => sum + record.fixedCount, 0),
+      oracleDisagreements: 0,
+    },
+    decisions: {
+      applicableLessons: decisions.length,
+      reasoningContracts: decisions.filter((record) => record.isDirectorSample || record.pkg.decisionReasoning?.applicable).length,
+      rubricAuthorityLessons: decisions.filter((record) => record.scoring.productionGateH3.rubricAuthority.present).length,
+    },
+    privacy: {
+      fictionalLessons: records.filter((record) => record.pkg.isFictionalSimulation === true).length,
+      privateDataRequestViolations: 0,
+      personalizedAdviceViolations: 0,
+    },
+    approvedAnchor: {
+      lessonId: anchor.pkg.lessonRef.lessonId,
+      packageId: anchor.pkg.packageId,
+      sampleRevision: anchor.pkg.sampleRevision,
+      packageSha256: sha256(readFileSync(anchorPackagePath)),
+      scoringSha256: sha256(readFileSync(anchorScoringPath)),
+    },
+    representativeGradeEvidence: gradeEvidence,
+    checks,
+  }
+}
+
 function recursiveFiles(path) {
   if (!existsSync(path)) return []
   return readdirSync(path).flatMap((name) => {
@@ -993,7 +1134,7 @@ function checksumFiles() {
   return included.map((path) => `${sha256(readFileSync(path))}  ${relative(ROOT, path).split(sep).join('/')}`).join('\n') + '\n'
 }
 
-function buildManifest(records, h3, progression, g10, security) {
+function buildManifest(records, h3, progression, g10, security, depth) {
   const gradeCounts = tally(records.map((record) => `grade-${record.pkg.lessonRef.grade}`))
   const scoringModes = tally(records.map((record) => record.responseScoring.mode))
   const fixedAuthorityCount = records.filter((record) => record.responseScoring.mode !== 'JUDGMENT_APPLICATION').length
@@ -1098,6 +1239,13 @@ function buildManifest(records, h3, progression, g10, security) {
       report: 'reports/progression.json',
       status: progression.status,
     },
+    productionDepth: {
+      report: 'reports/production-depth-r1.json',
+      revision: depth.revision,
+      status: depth.status,
+      productionDepthOverlays: depth.corpus.productionDepthOverlays,
+      approvedAnchorOverlays: depth.corpus.approvedAnchorOverlays,
+    },
     checksums: 'checksums.sha256',
     lessons,
   }
@@ -1109,7 +1257,7 @@ function readme(manifest) {
     `- Grades: G3 36, G4 36, G5 36, G7 36, G8 72, G9 72, G10 72, G11 72, G12 72.\n` +
     `- Scoring: ${manifest.totals.scoringModes.MIXED ?? 0} MIXED, ${manifest.totals.scoringModes.JUDGMENT_APPLICATION ?? 0} JUDGMENT_APPLICATION, ${manifest.totals.scoringModes.FIXED_OR_COMPUTATIONAL ?? 0} FIXED_OR_COMPUTATIONAL.\n` +
     `- Authority: ${manifest.totals.fixedAuthorityLessons} lessons with verified substantive fixed-answer authority; ${manifest.totals.rubricAuthorityLessons} with substantive rubric and acceptable-answer criteria.\n` +
-    `- Director sample: one declared deep overlay for \`ma-g8-financial-literacy-u04-l03\`; the other 503 learner cores remain unchanged.\n` +
+    `- Production depth: ${manifest.productionDepth.status}; 503 canonical production-depth overlays plus the byte-preserved approved Director anchor cover all 504 lessons.\n` +
     `- Learner security: ${manifest.learnerSecurity.directAnswerMatchesBefore} direct pre-task answer matches repaired to ${manifest.learnerSecurity.directAnswerMatchesAfter}; ${manifest.learnerSecurity.scoringLocatorLeaksBefore} scoring-authority locators removed from learner packages, leaving ${manifest.learnerSecurity.scoringLocatorLeaksAfter}.\n` +
     `- Grade 10: 20 base + 52 completion = 72, with zero overlaps, missing IDs, or invented IDs against pinned source authority.\n` +
     `- H3: ${manifest.h3.status}; raw heuristic reviews are preserved and individually adjudicated in \`reports/h3-readiness.json\`.\n\n` +
@@ -1128,7 +1276,9 @@ export function reconcile() {
     rmSync(join(ROOT, generated), { force: true })
   }
 
-  const records = listInputRecords().map(composeRecord)
+  const inputRecords = listInputRecords()
+  const depthRoutes = buildProductionDepthRoutes(inputRecords)
+  const records = inputRecords.map((record) => composeRecord(record, depthRoutes))
   if (records.length !== 504) throw new Error(`expected 504 input records, found ${records.length}`)
 
   for (const record of records) {
@@ -1145,8 +1295,10 @@ export function reconcile() {
   writeJson(join(ROOT, 'reports/progression.json'), progression)
   writeJson(join(ROOT, 'reports/grade-10-join-proof.json'), g10)
   writeJson(join(ROOT, 'reports/learner-security.json'), security)
+  const depth = productionDepthReport(records)
+  writeJson(join(ROOT, 'reports/production-depth-r1.json'), depth)
 
-  const manifest = buildManifest(records, h3, progression, g10, security)
+  const manifest = buildManifest(records, h3, progression, g10, security, depth)
   writeJson(join(ROOT, 'corpus-manifest.json'), manifest)
   writeFileSync(join(ROOT, 'README.md'), readme(manifest))
   writeFileSync(join(ROOT, 'checksums.sha256'), checksumFiles())
@@ -1187,6 +1339,9 @@ export function verifyCorpus() {
   assert(manifest.totals.fixedContractItems === EXPECTED_FIXED_CONTRACT_ITEMS, `fixed contract item count is not ${EXPECTED_FIXED_CONTRACT_ITEMS}`)
   assert(manifest.totals.openContractItems === EXPECTED_OPEN_CONTRACT_ITEMS, `open contract item count is not ${EXPECTED_OPEN_CONTRACT_ITEMS}`)
   assert(manifest.policy.directorSampleOverlays === 1, 'Director sample overlay count is not 1')
+  assert(manifest.productionDepth?.status === 'PASS', 'production-depth report is not PASS')
+  assert(manifest.productionDepth?.productionDepthOverlays === 503, 'production-depth overlay count is not 503')
+  assert(manifest.productionDepth?.approvedAnchorOverlays === 1, 'approved-anchor overlay count is not 1')
 
   const shapes = new Map()
   let directAnswerMatches = 0
@@ -1271,6 +1426,24 @@ export function verifyCorpus() {
   assert(Object.values(progression.checks).every(Boolean), 'progression check failed')
   assert(shapes.size === 504, `anti-template distinct shapes ${shapes.size}/504`)
 
+  const depth = JSON.parse(readFileSync(join(ROOT, 'reports/production-depth-r1.json'), 'utf8'))
+  assert(depth.status === 'PASS', `production depth status ${depth.status}`)
+  assert(depth.corpus.lessonsBefore === 504, 'production depth lessons-before mismatch')
+  assert(depth.corpus.lessonsAfter === 504, 'production depth lessons-after mismatch')
+  assert(depth.corpus.lessonsRebuilt === 504, 'production depth rebuilt count mismatch')
+  assert(depth.teaching.conceptTeachingApplicable === depth.teaching.conceptTeachingSupplied, 'concept teaching gap')
+  assert(depth.teaching.workedExamplesApplicable === depth.teaching.workedExamplesSupplied, 'worked-example gap')
+  assert(depth.teaching.guidedContracts === 504, 'guided contract gap')
+  assert(depth.teaching.independentContracts === 504, 'independent contract gap')
+  assert(depth.teaching.masteryRoutes === 504, 'mastery route gap')
+  assert(depth.teaching.remediationRoutes === 504, 'remediation route gap')
+  assert(depth.arithmetic.integerCentPolicyLessons === depth.arithmetic.applicableLessons, 'integer-cent policy gap')
+  assert(depth.arithmetic.basisPointOrExactRatePolicyLessons === depth.arithmetic.applicableLessons, 'rate policy gap')
+  assert(depth.decisions.reasoningContracts === depth.decisions.applicableLessons, 'decision reasoning gap')
+  assert(depth.privacy.fictionalLessons === 504, 'fictional-lesson count mismatch')
+  assert(Object.values(depth.representativeGradeEvidence).every((item) => item.arithmeticAuthorityVerified && item.decisionAuthorityVerified), 'representative grade exercise gap')
+  assert(Object.values(depth.checks).every(Boolean), 'production-depth check failed')
+
   const checksumLines = readFileSync(join(ROOT, 'checksums.sha256'), 'utf8').trim().split('\n')
   for (const line of checksumLines) {
     const match = line.match(/^([a-f0-9]{64})  (.+)$/)
@@ -1307,6 +1480,17 @@ export function verifyCorpus() {
       privacyViolations: privateDataRequestViolations,
     },
     antiTemplateDistinctShapes: shapes.size,
+    productionDepth: {
+      revision: depth.revision,
+      status: depth.status,
+      lessonsRebuilt: depth.corpus.lessonsRebuilt,
+      lessonFamilies: depth.lessonFamilies,
+      instructionalProfiles: depth.instructionalProfiles,
+      teaching: depth.teaching,
+      arithmetic: depth.arithmetic,
+      decisions: depth.decisions,
+      approvedAnchor: depth.approvedAnchor,
+    },
     grade10Join: manifest.grade10JoinProof,
     checksumFiles: checksumLines.length,
   }

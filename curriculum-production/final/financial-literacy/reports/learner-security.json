@@ -2032,7 +2032,7 @@
     "tasks": 1743,
     "authoredPrompts": 3646,
     "learnerCoreSha256Before": "3e3587c0f74525f9204152beefc6232504976f70d44e6c906f9c541fefa71d6f",
-    "learnerCoreSha256After": "962598f016e4f7bc8c28cc3b1151e0d79f2264b43a3a794e7c83b1577767ddab",
+    "learnerCoreSha256After": "ae71877999e7e29b0fe887c85e3bfaf03af618e6dfcd81319e999304c04b6267",
     "requiredNumberTokenOccurrencesBefore": 4942,
     "requiredNumberTokenOccurrencesAfter": 4958,
     "declaredDirectorSampleOverlays": [
@@ -2076,7 +2076,7 @@
     "allLearnerPackagesPresent": true,
     "adultOnlyScoringArtifacts": true,
     "exactlyOneDeclaredDirectorSampleOverlay": true,
-    "learnerCorePreservedExceptDeclaredDirectorSample": true,
+    "sourceObjectivesScenariosAndTasksPreservedExceptDeclaredDirectorSample": true,
     "requiredNumbersPreservedExceptDeclaredDirectorSample": true,
     "fixedProblemsPreserved": true,
     "judgmentWorkPreserved": true,

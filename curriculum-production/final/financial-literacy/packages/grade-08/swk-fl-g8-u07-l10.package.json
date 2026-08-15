@@ -105,6 +105,223 @@
       }
     ]
   },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "TAX",
+    "secondary": [
+      "DECISION_QUALITY",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "REVIEW",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.tax.1",
+      "meaning": "Taxes fund public purposes and use rules that define a base, rate, timing, and responsibility."
+    },
+    {
+      "conceptId": "finlit.tax.2",
+      "meaning": "A simplified tax calculation applies only to the fictional jurisdiction, year, and assumptions stated."
+    },
+    {
+      "conceptId": "finlit.tax.3",
+      "meaning": "Withholding is a prepayment estimate; it is not automatically the final tax owed."
+    }
+  ],
+  "evidencePurpose": "Develop and apply tax purpose, taxable bases, and stated tax rules through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "title": "Understand tax purpose, taxable bases, and stated tax rules",
+    "paragraphs": [
+      "Taxes fund public purposes and use rules that define a base, rate, timing, and responsibility.",
+      "A simplified tax calculation applies only to the fictional jurisdiction, year, and assumptions stated. In this lesson, the learner uses the provided fictional facts about public goods and policy tradeoffs; no real household information belongs in the work.",
+      "Withholding is a prepayment estimate; it is not automatically the final tax owed. The usable process is: Identify the fictional tax base and included items. Apply only the stated rate or brackets in order. Account for stated credits or withholding after tax is computed. Round at the declared point and label the result."
+    ],
+    "relationship": [
+      "Identify the fictional tax base and included items.",
+      "Apply only the stated rate or brackets in order.",
+      "Account for stated credits or withholding after tax is computed.",
+      "Round at the declared point and label the result."
+    ],
+    "commonConfusion": "A marginal rate applied to one bracket is not automatically the effective rate on all taxable income.",
+    "conditionsAndLimits": "Use only the stated fictional facts, time period, rate meaning, fees, taxes, timing, rounding, goals, and constraints. The result is education for this scenario, not individualized advice."
+  },
+  "calculationPolicy": {
+    "applicable": false,
+    "reason": "The protected response contract is decision and judgment work; calculation is not manufactured merely to add arithmetic.",
+    "moneyRepresentationIfIntroduced": "integer-cents",
+    "rateRepresentationIfIntroduced": "integer-basis-points-or-exact-rational"
+  },
+  "workedExamplePolicy": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "separationRule": "The model uses different fictional people, amounts, wording, and decision conditions from protected independent and mastery work."
+  },
+  "workedExamples": [
+    {
+      "exampleRef": "pd-r1-tax-g8",
+      "title": "Worked example — tax purpose, taxable bases, and stated tax rules",
+      "fictionCue": "Every person, amount, product, institution, and rule in this example is invented for instruction.",
+      "facts": [
+        "Invented taxable base: $300.00.",
+        "Simplified flat instructional tax rate: 5.00%.",
+        "No deductions, credits, or withholding; round once to cents, half up."
+      ],
+      "goal": "Compute the tax under this fictional flat-rate rule.",
+      "relevantInformation": "Use only the listed fictional facts and conditions; do not substitute real household information.",
+      "method": "Identify the fictional tax base and included items. Apply only the stated rate or brackets in order. Account for stated credits or withholding after tax is computed. Round at the declared point and label the result.",
+      "steps": [
+        "Represent $300.00 as 30,000 cents and 5.00% as 500 basis points.",
+        "Tax: 30,000 × 500 ÷ 10,000 = 1,500 cents, or $15.00.",
+        "Amount after this tax: 30,000 − 1,500 = 28,500 cents, or $285.00.",
+        "Check: $15 is one twentieth of $300, which matches 5%."
+      ],
+      "interpretation": "The $15.00 result belongs only to the stated simplified instructional model.",
+      "reasonablenessCheck": "Check: $15 is one twentieth of $300, which matches 5%.",
+      "tradeoff": "Changing the taxable base, jurisdiction, year, bracket rule, credit, or withholding changes the result.",
+      "limits": "The conclusion applies only to the stated fictional facts. A changed rate, fee, time, rule, goal, constraint, or risk can change it.",
+      "calculationAuthority": "All USD calculations shown here are written as integer cents. Percent rates, when used, are integer basis points divided by 10,000; stated rounding is half up at the declared line only."
+    }
+  ],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g8-financial-literacy-u07-l10",
+    "learnerAction": "Identify the goal and constraints, compare alternatives, and support a provisional decision.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A marginal rate applied to one bracket is not automatically the effective rate on all taxable income.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "written comparison or decision reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t1-p1",
+      "t2-p1",
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Connect a result to affordability, time, fees, risk, or alternatives and explain a tradeoff.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.tax.1",
+      "finlit.tax.2",
+      "finlit.tax.3"
+    ],
+    "evidenceLessonId": "ma-g8-financial-literacy-u07-l10",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "A claim supported by relevant fictional evidence, tradeoff or risk reasoning, and acceptable variation under the adult-only rubric.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.tax.core-confusion",
+      "observableSignal": "A marginal rate applied to one bracket is not automatically the effective rate on all taxable income.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-tax-g8",
+        "title": "Alternate model — tax purpose, taxable bases, and stated tax rules",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "Fictional taxable sale: 8,000 cents; invented sales-tax rate: 4.00%; tax is rounded once to cents."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Represent 4.00% as 400 basis points.",
+          "Tax: 8,000 × 400 ÷ 10,000 = 320 cents.",
+          "Total: 8,000 + 320 = 8,320 cents.",
+          "Label this as an invented instructional rate, not current tax advice."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g8-financial-literacy-u07-l08",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g8-financial-literacy-u07-l10",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.tax.1",
+      "finlit.tax.2",
+      "finlit.tax.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g8-financial-literacy-u07-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.tax.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": false,
+      "reason": "The protected response contract is decision and judgment work; calculation is not manufactured merely to add arithmetic.",
+      "moneyRepresentationIfIntroduced": "integer-cents",
+      "rateRepresentationIfIntroduced": "integer-basis-points-or-exact-rational"
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g8-financial-literacy-u07-l10:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "MIDDLE_7_8",
+      "scaffolding": "Use multiple stated constraints, explicit vocabulary support, calculators where declared, and a changed-fact test.",
+      "reasoningDemand": "Connect a result to affordability, time, fees, risk, or alternatives and explain a tradeoff.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "JUDGMENT_APPLICATION",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Use multiple stated constraints, explicit vocabulary support, calculators where declared, and a changed-fact test.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
   "productionProvenance": {
     "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
     "inputLane": "mac/finlit-production-g38-r3",
@@ -120,6 +337,12 @@
       "answerDerivedFromSourceGuidance": false
     },
     "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
     "familyPilotFirst": true
   }
 }

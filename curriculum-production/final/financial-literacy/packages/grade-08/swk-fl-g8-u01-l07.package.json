@@ -104,6 +104,189 @@
       }
     ]
   },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "EDUCATION_CAREER_FINANCE",
+    "secondary": [
+      "DECISION_QUALITY",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "APPLICATION_TRANSFER",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.education_career_finance.1",
+      "meaning": "Education and career choices combine direct cost, time, funding, work conditions, and uncertain earnings."
+    },
+    {
+      "conceptId": "finlit.education_career_finance.2",
+      "meaning": "An estimate or average does not guarantee one person’s outcome."
+    },
+    {
+      "conceptId": "finlit.education_career_finance.3",
+      "meaning": "A sound comparison uses the same time horizon and states assumptions and opportunity costs."
+    }
+  ],
+  "evidencePurpose": "Develop and apply education, career, cost, and uncertain outcomes through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "PROFILE_BOUNDARY",
+    "title": "application transfer boundary",
+    "paragraphs": [],
+    "protectedBoundary": "Retrieve only the named prerequisite; do not model the protected transfer solution before the response.",
+    "conceptLessonId": "ma-g8-financial-literacy-u01-l02"
+  },
+  "calculationPolicy": {
+    "applicable": false,
+    "reason": "The protected response contract is decision and judgment work; calculation is not manufactured merely to add arithmetic.",
+    "moneyRepresentationIfIntroduced": "integer-cents",
+    "rateRepresentationIfIntroduced": "integer-basis-points-or-exact-rational"
+  },
+  "workedExamplePolicy": {
+    "applicability": "DEFERRED_OR_PREREQUISITE_ONLY",
+    "reason": "The transfer task depends on prior teaching; the named concept lesson contains the model.",
+    "modelLessonId": "ma-g8-financial-literacy-u01-l02"
+  },
+  "workedExamples": [],
+  "guidedPracticeContract": {
+    "applicability": "SEQUENCE_HANDOFF",
+    "localTaskRefs": [
+      "t1"
+    ],
+    "guidedLessonId": "ma-g8-financial-literacy-u01-l07",
+    "learnerAction": "Identify the goal and constraints, compare alternatives, and support a provisional decision.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: The option with the highest stated earnings is not automatically best after cost, time, risk, and fit are considered.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t2",
+      "t3"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "written comparison or decision reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t1-p1",
+      "t2-p1",
+      "t3-p1"
+    ],
+    "gradeBandDemand": "Connect a result to affordability, time, fees, risk, or alternatives and explain a tradeoff.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.education_career_finance.1",
+      "finlit.education_career_finance.2",
+      "finlit.education_career_finance.3"
+    ],
+    "evidenceLessonId": "ma-g8-financial-literacy-u01-l10",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "A claim supported by relevant fictional evidence, tradeoff or risk reasoning, and acceptable variation under the adult-only rubric.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.education_career_finance.core-confusion",
+      "observableSignal": "The option with the highest stated earnings is not automatically best after cost, time, risk, and fit are considered.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-education_career_finance-g8",
+        "title": "Alternate model — education, career, cost, and uncertain outcomes",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "Two fictional courses both qualify a learner; one costs 45,000 cents and takes eight weeks, the other costs 30,000 cents and takes twelve weeks."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Compare the 15,000-cent cost difference.",
+          "Compare the four-week time difference.",
+          "Choose based on the stated fictional priority rather than price alone.",
+          "Name a changed funding or schedule fact that could reverse the choice."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g8-financial-literacy-u01-l08",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g8-financial-literacy-u01-l10",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.education_career_finance.1",
+      "finlit.education_career_finance.2",
+      "finlit.education_career_finance.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g8-financial-literacy-u01-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.education_career_finance.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": false,
+      "reason": "The protected response contract is decision and judgment work; calculation is not manufactured merely to add arithmetic.",
+      "moneyRepresentationIfIntroduced": "integer-cents",
+      "rateRepresentationIfIntroduced": "integer-basis-points-or-exact-rational"
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g8-financial-literacy-u01-l07:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "MIDDLE_7_8",
+      "scaffolding": "Use multiple stated constraints, explicit vocabulary support, calculators where declared, and a changed-fact test.",
+      "reasoningDemand": "Connect a result to affordability, time, fees, risk, or alternatives and explain a tradeoff.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "JUDGMENT_APPLICATION",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Use multiple stated constraints, explicit vocabulary support, calculators where declared, and a changed-fact test.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
   "productionProvenance": {
     "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
     "inputLane": "mac/finlit-production-g38-r3",
@@ -119,6 +302,12 @@
       "answerDerivedFromSourceGuidance": false
     },
     "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
     "familyPilotFirst": true
   }
 }
