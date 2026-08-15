@@ -380,20 +380,29 @@ function effectiveCurrentOpportunityAssistance(
 function admissionsFor(
   request: Wave2AdaptiveCompositionRequest,
   subsystems: Wave2AdaptiveSubsystems,
-): readonly {
-  readonly feature: AdaptiveFeature;
-  readonly decision: AdaptiveAdmissionDecision;
-}[] {
+):
+  | {
+    readonly status: "ready";
+    readonly admissions: readonly {
+      readonly feature: AdaptiveFeature;
+      readonly decision: AdaptiveAdmissionDecision;
+    }[];
+  }
+  | { readonly status: "unavailable"; readonly failedFeature: AdaptiveFeature } {
   const features = request.parentWhy === null
     ? REQUIRED_FEATURES
     : ADAPTIVE_FEATURES;
-  return features.map((feature) => {
+  const admissions: {
+    readonly feature: AdaptiveFeature;
+    readonly decision: AdaptiveAdmissionDecision;
+  }[] = [];
+  for (const feature of features) {
     const reviewed = request.reviewedContentAdmissions.find(
       (entry) => entry.feature === feature,
     );
-    return {
-      feature,
-      decision: subsystems.evaluateAdmission({
+    let decision: AdaptiveAdmissionDecision;
+    try {
+      decision = subsystems.evaluateAdmission({
         inputKind: "study-adaptive-admission",
         request: {
           requestVersion: "study-tutor-v2.adaptive-admission.v1",
@@ -406,9 +415,13 @@ function admissionsFor(
           reviewedContentAdmission: reviewed?.admission ?? "not-admitted",
         },
         capabilityMetadata: request.capabilityMetadata,
-      }),
-    };
-  });
+      });
+    } catch {
+      return { status: "unavailable", failedFeature: feature };
+    }
+    admissions.push({ feature, decision });
+  }
+  return { status: "ready", admissions };
 }
 
 function repairDependencies(
@@ -584,29 +597,53 @@ export async function composeWave2AdaptiveIntelligence(
   }
 
   const subsystems = dependencies.adaptiveSubsystems ?? DEFAULT_ADAPTIVE_SUBSYSTEMS;
-  const admissions = admissionsFor(request, subsystems);
+  const admissionResult = admissionsFor(request, subsystems);
+  if (admissionResult.status === "unavailable") {
+    return fallback(request, "adaptive-admission-unavailable", admissionResult.failedFeature);
+  }
+  const admissions = admissionResult.admissions;
   const refused = admissions.find(({ decision }) => decision.status === "refused");
   if (refused !== undefined) {
     return fallback(request, `admission-${refused.decision.reason}`, refused.feature);
   }
 
-  const graph = subsystems.buildConceptGraph(request.conceptGraph);
+  let graph: ReturnType<Wave2AdaptiveSubsystems["buildConceptGraph"]>;
+  try {
+    graph = subsystems.buildConceptGraph(request.conceptGraph);
+  } catch {
+    return fallback(request, "concept-graph-unavailable", "concept-prerequisite-graph");
+  }
   if (graph.status === "rejected") {
     return fallback(request, "invalid-concept-graph", "concept-prerequisite-graph");
   }
-  const prerequisiteQuery = subsystems.queryConceptGraph(
-    graph,
-    request.studyAuthority.currentConceptRef,
-  );
+  let prerequisiteQuery: ReturnType<Wave2AdaptiveSubsystems["queryConceptGraph"]>;
+  try {
+    prerequisiteQuery = subsystems.queryConceptGraph(
+      graph,
+      request.studyAuthority.currentConceptRef,
+    );
+  } catch {
+    return fallback(request, "concept-query-unavailable", "concept-prerequisite-graph");
+  }
   if (prerequisiteQuery.status !== "found") {
     return fallback(request, "concept-query-rejected", "concept-prerequisite-graph");
   }
 
-  const registry = subsystems.createMisconceptionRegistry(request.misconceptionRegistry);
+  let registry: ReturnType<Wave2AdaptiveSubsystems["createMisconceptionRegistry"]>;
+  try {
+    registry = subsystems.createMisconceptionRegistry(request.misconceptionRegistry);
+  } catch {
+    return fallback(request, "misconception-registry-unavailable", "misconception-analysis");
+  }
   if (registry.status === "rejected") {
     return fallback(request, "invalid-misconception-registry", "misconception-analysis");
   }
-  const misconception = subsystems.matchMisconception(registry, request.misconceptionMatch);
+  let misconception: ReturnType<Wave2AdaptiveSubsystems["matchMisconception"]>;
+  try {
+    misconception = subsystems.matchMisconception(registry, request.misconceptionMatch);
+  } catch {
+    return fallback(request, "misconception-match-unavailable", "misconception-analysis");
+  }
   if (
     misconception.reasonCodes.includes("CROSS_LEARNER_EVIDENCE") ||
     misconception.reasonCodes.includes("CROSS_CONTEXT_EVIDENCE") ||
@@ -624,12 +661,17 @@ export async function composeWave2AdaptiveIntelligence(
 
   let hintProjection: PendingStudyDecision["hint"];
   if (request.studyAuthority.allowedActions.includes("hint")) {
-    const hint = subsystems.selectHint({
-      ...request.hintSelection,
-      misconceptionSignalCode: misconception.status === "possible-misconception"
-        ? "academic-misconception-signal"
-        : null,
-    });
+    let hint: ReturnType<Wave2AdaptiveSubsystems["selectHint"]>;
+    try {
+      hint = subsystems.selectHint({
+        ...request.hintSelection,
+        misconceptionSignalCode: misconception.status === "possible-misconception"
+          ? "academic-misconception-signal"
+          : null,
+      });
+    } catch {
+      return fallback(request, "hint-ladder-unavailable", "hint-ladder");
+    }
     if (hint.status === "rejected") {
       return fallback(request, "invalid-hint-state", "hint-ladder");
     }
@@ -651,17 +693,22 @@ export async function composeWave2AdaptiveIntelligence(
   const prerequisiteRef = misconception.status === "possible-misconception"
     ? misconception.prerequisiteConceptRefs[0] ?? prerequisiteQuery.conceptRefs[0]
     : prerequisiteQuery.conceptRefs[0];
-  const intervention = subsystems.recommendIntervention({
-    ...request.intervention,
-    misconceptionSignal: misconception.status === "possible-misconception" &&
-      misconception.misconceptionRef !== null
-      ? { status: "suspected", hypothesisRef: misconception.misconceptionRef }
-      : { status: "none", hypothesisRef: null },
-    prerequisiteSignal: prerequisiteRef === undefined
-      ? { status: "none", prerequisiteConceptRef: null }
-      : { status: "suspected", prerequisiteConceptRef: prerequisiteRef },
-    safetyRestriction: { status: "none", restrictionRef: null },
-  });
+  let intervention: ReturnType<Wave2AdaptiveSubsystems["recommendIntervention"]>;
+  try {
+    intervention = subsystems.recommendIntervention({
+      ...request.intervention,
+      misconceptionSignal: misconception.status === "possible-misconception" &&
+        misconception.misconceptionRef !== null
+        ? { status: "suspected", hypothesisRef: misconception.misconceptionRef }
+        : { status: "none", hypothesisRef: null },
+      prerequisiteSignal: prerequisiteRef === undefined
+        ? { status: "none", prerequisiteConceptRef: null }
+        : { status: "suspected", prerequisiteConceptRef: prerequisiteRef },
+      safetyRestriction: { status: "none", restrictionRef: null },
+    });
+  } catch {
+    return fallback(request, "intervention-ladder-unavailable", "intervention-ladder");
+  }
 
   const effectiveAssistance = effectiveCurrentOpportunityAssistance(
     request,
@@ -676,13 +723,18 @@ export async function composeWave2AdaptiveIntelligence(
       "mastery-evidence",
     );
   }
-  const mastery = subsystems.evaluateMastery({
-    ...request.masteryEvidence,
-    currentSessionRef: request.studyAuthority.sessionRef,
-    currentInstructionalContextRef: request.studyAuthority.instructionalContextRef,
-    currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
-    currentOpportunityAssistanceLevel: effectiveAssistance,
-  });
+  let mastery: ReturnType<Wave2AdaptiveSubsystems["evaluateMastery"]>;
+  try {
+    mastery = subsystems.evaluateMastery({
+      ...request.masteryEvidence,
+      currentSessionRef: request.studyAuthority.sessionRef,
+      currentInstructionalContextRef: request.studyAuthority.instructionalContextRef,
+      currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
+      currentOpportunityAssistanceLevel: effectiveAssistance,
+    });
+  } catch {
+    return fallback(request, "mastery-evidence-unavailable", "mastery-evidence");
+  }
   const binding: ProposalScopeBinding = {
     householdScopeRef: request.studyAuthority.householdScopeRef,
     learnerScopeRef: request.studyAuthority.learnerScopeRef,
@@ -696,15 +748,20 @@ export async function composeWave2AdaptiveIntelligence(
   const safety = { safetyHold: false, mayContinueAcademicFlow: true } as const;
   let repairProjection: PendingStudyDecision["repair"];
   if (request.studyAuthority.allowedActions.includes("check-prerequisite")) {
-    const repair = await subsystems.proposeRepair({
-      requestRef: `request:${request.studyAuthority.eventRef.replace(":", "-")}-repair`,
-      binding,
-      currentConceptRef: request.studyAuthority.currentConceptRef,
-      assessmentPhase: request.studyAuthority.assessmentPhase,
-      safety,
-      maxRepairDepth: request.repairPolicy.maximumDepth,
-      reviewedStaticFallback: request.repairPolicy.reviewedStaticFallback,
-    }, repairDependencies(request, graph, misconception));
+    let repair: Awaited<ReturnType<Wave2AdaptiveSubsystems["proposeRepair"]>>;
+    try {
+      repair = await subsystems.proposeRepair({
+        requestRef: `request:${request.studyAuthority.eventRef.replace(":", "-")}-repair`,
+        binding,
+        currentConceptRef: request.studyAuthority.currentConceptRef,
+        assessmentPhase: request.studyAuthority.assessmentPhase,
+        safety,
+        maxRepairDepth: request.repairPolicy.maximumDepth,
+        reviewedStaticFallback: request.repairPolicy.reviewedStaticFallback,
+      }, repairDependencies(request, graph, misconception));
+    } catch {
+      return fallback(request, "prerequisite-repair-unavailable", "prerequisite-repair");
+    }
     repairProjection = {
       status: repair.status,
       proposalRef: repair.proposalRef,
@@ -732,17 +789,22 @@ export async function composeWave2AdaptiveIntelligence(
 
   let reteachProjection: PendingStudyDecision["reteach"];
   if (request.studyAuthority.allowedActions.includes("reteach")) {
-    const reteach = await subsystems.proposeReteach({
-      requestRef: `request:${request.studyAuthority.eventRef.replace(":", "-")}-reteach`,
-      binding,
-      currentConceptRef: request.studyAuthority.currentConceptRef,
-      assessmentPhase: request.studyAuthority.assessmentPhase,
-      safety,
-      maxReteachSteps: request.reteachPolicy.maximumSteps,
-      priorReteachLoops: request.reteachPolicy.priorReteachLoops,
-      maxRepeatedLoops: request.reteachPolicy.maximumRepeatedLoops,
-      reviewedStaticFallback: request.reteachPolicy.reviewedStaticFallback,
-    }, reteachDependencies(request));
+    let reteach: Awaited<ReturnType<Wave2AdaptiveSubsystems["proposeReteach"]>>;
+    try {
+      reteach = await subsystems.proposeReteach({
+        requestRef: `request:${request.studyAuthority.eventRef.replace(":", "-")}-reteach`,
+        binding,
+        currentConceptRef: request.studyAuthority.currentConceptRef,
+        assessmentPhase: request.studyAuthority.assessmentPhase,
+        safety,
+        maxReteachSteps: request.reteachPolicy.maximumSteps,
+        priorReteachLoops: request.reteachPolicy.priorReteachLoops,
+        maxRepeatedLoops: request.reteachPolicy.maximumRepeatedLoops,
+        reviewedStaticFallback: request.reteachPolicy.reviewedStaticFallback,
+      }, reteachDependencies(request));
+    } catch {
+      return fallback(request, "reteach-unavailable", "reteach");
+    }
     reteachProjection = {
       status: reteach.status,
       proposalRef: reteach.proposalRef,
@@ -781,31 +843,36 @@ export async function composeWave2AdaptiveIntelligence(
     : 0;
   let parentExplanation: PendingStudyDecision["parentExplanation"] = null;
   if (request.parentWhy !== null) {
-    const explanation = subsystems.explainParent({
-      requestKind: "parent-hub-why",
-      scope: {
-        selectedLearnerRef: request.parentWhy.selectedLearnerRef,
-        authorizedLearnerRef: request.parentWhy.authorizedLearnerRef,
-      },
-      recommendation: {
-        learnerRef: request.studyAuthority.learnerScopeRef,
-        recommendationRef: request.parentWhy.recommendationRef,
-        reasonCode: parentReason(
-          hintProjection.status,
-          interventionAction,
-          repairProjection.status,
-          repairProjection.source,
-          reteachProjection.status,
-          mastery.recommendation,
-        ),
-        provenance: {
-          producer: "study-engine",
-          recommendationEventRef: request.parentWhy.recommendationEventRef,
-          policyRef: request.parentWhy.policyRef,
-          producedAt: request.parentWhy.producedAt,
+    let explanation: ReturnType<Wave2AdaptiveSubsystems["explainParent"]>;
+    try {
+      explanation = subsystems.explainParent({
+        requestKind: "parent-hub-why",
+        scope: {
+          selectedLearnerRef: request.parentWhy.selectedLearnerRef,
+          authorizedLearnerRef: request.parentWhy.authorizedLearnerRef,
         },
-      },
-    });
+        recommendation: {
+          learnerRef: request.studyAuthority.learnerScopeRef,
+          recommendationRef: request.parentWhy.recommendationRef,
+          reasonCode: parentReason(
+            hintProjection.status,
+            interventionAction,
+            repairProjection.status,
+            repairProjection.source,
+            reteachProjection.status,
+            mastery.recommendation,
+          ),
+          provenance: {
+            producer: "study-engine",
+            recommendationEventRef: request.parentWhy.recommendationEventRef,
+            policyRef: request.parentWhy.policyRef,
+            producedAt: request.parentWhy.producedAt,
+          },
+        },
+      });
+    } catch {
+      return fallback(request, "parent-explanation-unavailable", "parent-explanation");
+    }
     if (explanation.status === "rejected") {
       return fallback(request, "parent-explanation-rejected", "parent-explanation");
     }
