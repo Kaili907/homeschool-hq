@@ -5,6 +5,7 @@ import type { StudyCalendarEntry, StudyParentSettings, StudyReviewRecommendation
 import type { Profile } from '../types'
 import {
   buildLearnerAnalyticsSnapshot,
+  LEARNER_ANALYTICS_LIMITS,
   loadLearnerAnalytics,
   type LearnerAnalyticsReadSource,
   type StudyLearnerEvidenceState,
@@ -311,9 +312,15 @@ describe('learner analytics projection', () => {
       })),
       attempts: [],
     }
-    const profiles = [profile, ...Array.from({ length: 6 }, (_, index) => emptyProfile(`extra-${index}`, `Extra ${index}`, '6'))]
+    const profiles = [
+      profile,
+      ...Array.from(
+        { length: LEARNER_ANALYTICS_LIMITS.learners + 5 },
+        (_, index) => emptyProfile(`extra-${index}`, `Extra ${index}`, '6'),
+      ),
+    ]
     const snapshot = buildLearnerAnalyticsSnapshot({ profiles, today: TODAY, observedAt: `${TODAY}T12:00:00.000Z` })
-    expect(snapshot.learners).toHaveLength(5)
+    expect(snapshot.learners).toHaveLength(LEARNER_ANALYTICS_LIMITS.learners)
     expect(snapshot.learners[0].displayName).not.toMatch(/[\u0000-\u001f\u007f]/u)
     expect(snapshot.learners[0].displayName.length).toBeLessThanOrEqual(120)
     expect(snapshot.details.p1.courses).toMatchObject({ status: 'available', value: expect.any(Array) })

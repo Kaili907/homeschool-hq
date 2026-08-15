@@ -195,12 +195,6 @@ export function CurriculumBrowserView({
             <button type="button" aria-current={location.mode === 'standards' ? 'page' : undefined} onClick={() => onLocationChange({ mode: 'standards' })} className={navButton(location.mode === 'standards')}>
               Standards coverage
             </button>
-            <a href="/academy/admin/curriculum/validation" className={navButton(false)}>
-              Validation evidence
-            </a>
-            <a href="/academy/admin/curriculum/standards-review" className={navButton(false)}>
-              Standards review
-            </a>
           </nav>
           <dl aria-label="Loaded curriculum totals" className="mt-4 grid grid-cols-2 gap-2 text-sm sm:grid-cols-5">
             <CatalogTotal label="Grades" value={totals.grades} />
@@ -230,7 +224,7 @@ export function CurriculumBrowserView({
                 onChange={onLocationChange}
               />
               {location.lessonId ? (
-                <LessonView detail={lesson} error={lessonError} />
+                <LessonView detail={lesson} error={lessonError} courseTitle={selectedCourse?.title} />
               ) : selectedUnit ? (
                 <UnitView catalog={catalog} unit={selectedUnit} onOpenLesson={openLesson} />
               ) : selectedCourse ? (
@@ -462,7 +456,11 @@ function LessonButtons({ lessons, onOpenLesson }: { lessons: readonly Curriculum
   return <ol className="mt-4 space-y-2">{lessons.map((lesson) => <li key={lesson.lessonId}><button type="button" onClick={() => onOpenLesson(lesson)} className="min-h-16 w-full rounded-xl border border-slate-600 bg-slate-950 p-3 text-left hover:border-cyan-500"><span className="block font-bold">Day {lesson.dayInUnit}: {lesson.title}</span><span className="mt-1 block text-xs text-slate-400">{lesson.lessonId} · {lesson.standards.join(', ') || 'Standards unavailable'}</span></button></li>)}</ol>
 }
 
-function LessonView({ detail, error }: { detail: CurriculumLessonDetail | null; error: string | null }) {
+function LessonView({ detail, error, courseTitle }: {
+  detail: CurriculumLessonDetail | null
+  error: string | null
+  courseTitle?: string
+}) {
   if (error) return <div role="alert" className="rounded-xl border border-amber-700 bg-amber-950 p-4"><h2 className="font-bold">Lesson unavailable</h2><p className="mt-1 text-amber-100">{error}</p></div>
   if (!detail) return <p role="status" className="text-slate-300">Loading authorized lesson detail.</p>
   const media = typeof detail.media === 'string' ? detail.media : detail.media?.description ?? detail.media?.suggestion
@@ -472,7 +470,8 @@ function LessonView({ detail, error }: { detail: CurriculumLessonDetail | null; 
       <div>
         <p className="text-sm font-bold text-cyan-300">{detail.lessonId}</p>
         <h2 id="curriculum-lesson-heading" className="mt-1 text-2xl font-bold">{detail.title}</h2>
-        <p className="mt-2 text-sm text-slate-400">Grade {detail.grade} · {detail.courseId} · Unit {detail.unitNumber} · course day {detail.courseDay} · unit day {detail.dayInUnit} · {detail.estimatedMinutes ?? 'Duration unavailable'}</p>
+        <p className="mt-2 text-sm text-slate-400">Grade {detail.grade} · {courseTitle ?? 'Course'} · Unit {detail.unitNumber} · course day {detail.courseDay} · unit day {detail.dayInUnit} · {detail.estimatedMinutes ?? 'Duration unavailable'}</p>
+        <p className="mt-1 text-xs text-slate-500">Course reference {detail.courseId}</p>
         <p className="mt-1 text-sm text-slate-400">Curriculum {detail.source.version} · lesson schema {detail.schemaVersion} · published source {detail.source.packageId}</p>
       </div>
       <DetailSection title="Objectives"><StringList values={detail.learningObjectives} /></DetailSection>

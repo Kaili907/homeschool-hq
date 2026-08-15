@@ -33,7 +33,6 @@ describe('Admin Console integration route', () => {
     ['/academy/admin/curriculum/activation', 'curriculum-activation'],
     ['/academy/admin/curriculum/history', 'curriculum-history'],
     ['/academy/admin/health', 'system-health'],
-    ['/academy/admin/health/gateway', 'system-health'],
     ['/academy/admin/system-health', 'system-health'],
     ['/academy/admin/configuration', 'configuration'],
     ['/academy/admin/study-operations', 'study-operations'],
@@ -67,10 +66,17 @@ describe('Admin Console integration route', () => {
   it('supports only canonical learner detail deep links and fails closed for unknown references', () => {
     expect(adminRouteLearnerRef('/academy/admin/learners/p1')).toBe('p1')
     expect(adminRouteLearnerRef('/academy/admin/learners/p5/')).toBe('p5')
+    expect(adminRouteLearnerRef('/academy/admin/learners/learner:grade-10:ada')).toBe('learner:grade-10:ada')
+    expect(adminRouteLearnerRef('/academy/admin/learners/learner%3Agrade-12%3Azoe')).toBe('learner:grade-12:zoe')
     expect(adminRouteLearnerRef('/academy/admin/learners')).toBeNull()
-    expect(adminRouteLearnerRef('/academy/admin/learners/other')).toBeNull()
-    expect(adminRouteSection('/academy/admin/learners/other')).toBe('unknown')
+    expect(adminRouteLearnerRef('/academy/admin/learners/bad%2Fref')).toBeNull()
+    expect(adminRouteSection('/academy/admin/learners/bad%2Fref')).toBe('unknown')
     expect(adminRouteSection('/academy/admin/learners/p1/history')).toBe('unknown')
+  })
+
+  it('rejects every unsupported health subroute instead of silently mounting Health', () => {
+    expect(adminRouteSection('/academy/admin/health/gateway')).toBe('unknown')
+    expect(adminRouteSection('/academy/admin/health/anything/deeper')).toBe('unknown')
   })
 
   it('never matches the learner administrator-like path', () => {

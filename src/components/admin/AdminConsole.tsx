@@ -25,9 +25,8 @@ import {
 } from '../../admin/overviewModel'
 import './admin-console.css'
 
-// DASH-7: the sidebar shows one extra reserved slot for DASH-4's High School
-// Program workspace. The vocabulary lives on AdminShellMount so shell types
-// stay aligned across AdminConsole, AdminShell, and the integration route.
+// The vocabulary lives on AdminShellMount so shell types stay aligned across
+// AdminConsole, AdminShell, and the integration route.
 export type AdminNavId = AdminShellMount
 
 interface AdminNavItem {
@@ -59,10 +58,7 @@ const NAV_GROUPS: readonly AdminNavGroup[] = [
     label: 'Programs',
     items: [
       { id: 'learners', label: 'Learners', capabilities: ['learners:read'] },
-      { id: 'curriculum', label: 'Curriculum', capabilities: ['curriculum:read'] },
-      // DASH-4 mount point — this slot is intentionally reserved for the High
-      // School Program admin workspace built on the DASH-4 branch. The shell
-      // renders a distinct placeholder panel until that surface lands.
+      { id: 'curriculum', label: 'Published Curriculum', capabilities: ['curriculum:read'] },
       { id: 'high-school-program', label: 'High School Program', capabilities: ['overview:read'] },
     ],
   },

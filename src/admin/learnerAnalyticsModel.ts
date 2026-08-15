@@ -22,6 +22,12 @@ import {
 import type { AdminCapability } from './contracts'
 
 export const LEARNERS_READ_CAPABILITY = 'learners:read' as const
+export const ADMIN_LEARNER_REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/
+
+export function isAdminLearnerReference(value: unknown): value is string {
+  return typeof value === 'string' && ADMIN_LEARNER_REFERENCE.test(value)
+}
+
 export const ADMIN_WORKING_GRADE_CHOICES = [
   '3', '4', '5', '7', '8', '9', '10', '11', '12',
 ] as const
@@ -32,7 +38,7 @@ export function isAdminWorkingGrade(value: string): value is AdminWorkingGrade {
   return ADMIN_WORKING_GRADE_CHOICES.some((grade) => grade === value)
 }
 export const LEARNER_ANALYTICS_LIMITS = Object.freeze({
-  learners: 5,
+  learners: 250,
   courses: 32,
   assessments: 32,
   recentEvidence: 12,
@@ -75,7 +81,7 @@ export function hasOnlyLearnerOperationsFields(value: unknown, parentKey = '', d
   if (value === null || typeof value !== 'object') return true
   if (Array.isArray(value)) return value.every((item) => hasOnlyLearnerOperationsFields(item, parentKey, depth + 1))
   return Object.entries(value).every(([key, child]) => {
-    const allowed = parentKey === 'details' ? /^p[1-5]$/.test(key) : LEARNER_OPERATIONS_ALLOWED_FIELDS.has(key)
+    const allowed = parentKey === 'details' ? isAdminLearnerReference(key) : LEARNER_OPERATIONS_ALLOWED_FIELDS.has(key)
     return allowed && hasOnlyLearnerOperationsFields(child, key, depth + 1)
   })
 }

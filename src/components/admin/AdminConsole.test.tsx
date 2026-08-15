@@ -252,7 +252,7 @@ describe('AdminConsole authorization and load states', () => {
     expect(markup).not.toContain('>Operations<')
   })
 
-  it('reserves a distinct High School Program mount point for DASH-4', () => {
+  it('exposes a distinct High School Program destination', () => {
     const markup = renderToStaticMarkup(
       <AdminShell
         authorization={{ status: 'authorized', role: 'viewer', capabilities: ['overview:read'] }}
@@ -277,7 +277,7 @@ describe('AdminConsole authorization and load states', () => {
       ><section>Full nav</section></AdminShell>,
     )
     for (const label of [
-      'Attention Center', 'Overview', 'Learners', 'Curriculum', 'High School Program',
+      'Attention Center', 'Overview', 'Learners', 'Published Curriculum', 'High School Program',
       'Engine Performance', 'AI &amp; Costs', 'Safety', 'Study Operations',
       'System Health', 'Incident Explorer',
       'Configuration', 'Audit Log', 'Access &amp; Permissions', 'Production Readiness',

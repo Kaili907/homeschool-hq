@@ -265,7 +265,7 @@ describe('ADMIN-16B curriculum draft authoring database boundary', () => {
     )
     expect(preservedPrivilege.rows[0].allowed).toBe(true)
 
-    const migrationBytes = await readFile(migrationUrls.at(-1)!)
+    const migrationBytes = (await readFile(migrationUrls.at(-1)!, 'utf8')).replace(/\r\n/gu, '\n')
     const custody = JSON.parse(await readFile(
       new URL('../docs/admin-console/curriculum-draft-authoring-migration.json', import.meta.url),
       'utf8',

@@ -539,7 +539,7 @@ describe('curriculum release staging database boundary', () => {
     expect(runtimeTypes).not.toMatch(/staged_releases|read_curriculum_staging/i)
     expect(compiler).not.toMatch(/staged_releases|read_curriculum_staging/i)
 
-    const migrationBytes = await readFile(migrations.at(-1)!)
+    const migrationBytes = (await readFile(migrations.at(-1)!, 'utf8')).replace(/\r\n/gu, '\n')
     const custody = JSON.parse(await readFile(
       new URL('../docs/admin-console/curriculum-release-staging-migration.json', import.meta.url),
       'utf8',

@@ -10,7 +10,7 @@ const ROUTES = [
   ['/academy/admin/costs', 'AI & Costs'],
   ['/academy/admin/costs/provider-pricing', 'Provider Pricing'],
   ['/academy/admin/safety', 'Safety Operations'],
-  ['/academy/admin/curriculum', 'Curriculum'],
+  ['/academy/admin/curriculum', 'Published Curriculum'],
   ['/academy/admin/audit-log', 'Audit Log'],
   ['/academy/admin/correlations', 'Incident Explorer'],
   ['/academy/admin/health', 'System Health'],
@@ -32,7 +32,7 @@ const ROUTES = [
 
 const REQUIRED_VIEWPORTS = [1440, 1280, 1024, 900, 768, 600, 390] as const
 const SHELL_DESTINATIONS = [
-  'Attention Center', 'Overview', 'Learners', 'Curriculum', 'High School Program',
+  'Attention Center', 'Overview', 'Learners', 'Published Curriculum', 'High School Program',
   'Engine Performance', 'AI & Costs', 'Safety', 'Study Operations', 'System Health',
   'Incident Explorer', 'Configuration', 'Audit Log', 'Access & Permissions',
   'Production Readiness',
@@ -97,7 +97,7 @@ function adminPageTitle(page: Page) {
 
 test.beforeEach(async ({ request }) => {
   await request.post('/__admin_test__/state', {
-    data: { authMode: 'owner', swVersion: 'old' },
+    data: { authMode: 'owner', swVersion: 'old', accessMode: 'unavailable' },
   })
 })
 
@@ -131,6 +131,57 @@ test('authorized representative routes survive deep links and reloads', async ({
     expect(pathname.startsWith('/api/admin/')).toBe(false)
     expect(pathname.startsWith('/.netlify/functions/admin-')).toBe(false)
   }
+})
+
+test('High School Program is mounted with real Grade 9-12 evidence', async ({ page }) => {
+  await seedSession(page)
+  await page.goto('/academy/admin/high-school-program')
+  await expect(adminPageTitle(page)).toHaveText('High School Program')
+  await expect(page.getByText('CONTRACTED credits G9-G12', { exact: true })).toBeVisible()
+  for (const grade of ['Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']) {
+    await expect(page.getByText(grade, { exact: true }).first()).toBeVisible()
+  }
+  await expect(page.getByText('Contract ↔ subject-branch reconciliation')).toBeVisible()
+})
+
+test('invalid Health subroutes reject instead of mounting System Health', async ({ page }) => {
+  await seedSession(page)
+  for (const path of ['/academy/admin/health/gateway', '/academy/admin/health/unknown/deeper']) {
+    await page.goto(path)
+    await expect(adminPageTitle(page)).toHaveText('Admin section unavailable')
+    await expect(page.getByRole('heading', { name: 'Admin section unavailable', level: 2 })).toBeVisible()
+  }
+})
+
+test('Access error announces, retries, and prefers verified friendly identity before the raw ref', async ({ page, request }, testInfo) => {
+  await seedSession(page)
+  await page.route('**/auth/v1/user', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify(session(Math.floor(Date.now() / 1_000) + 86_400).user),
+  }))
+  await page.goto('/academy/admin/access')
+  await expect(page.getByRole('alert')).toContainText('Access view unavailable')
+  await request.post('/__admin_test__/state', { data: { accessMode: 'ready' } })
+  await page.getByRole('button', { name: 'Try again' }).click()
+  if (testInfo.project.name === 'webkit') {
+    await expect(page.getByText('Principal 00000000', { exact: true })).toBeVisible()
+  } else {
+    await expect(page.getByText('admin@example.test', { exact: true })).toBeVisible()
+  }
+  await expect(page.getByText('00000000-0000-4000-8000-000000000001', { exact: true })).toBeVisible()
+  const state = await request.post('/__admin_test__/state', { data: {} })
+  expect((await state.json()).accessReads).toBeGreaterThanOrEqual(1)
+})
+
+test('Published Curriculum has one shell destination and one workflow destination', async ({ page }) => {
+  await seedSession(page)
+  await page.goto('/academy/admin/curriculum')
+  await expect(page.getByRole('button', { name: 'Published Curriculum', exact: true })).toHaveCount(1)
+  await expect(page.getByRole('navigation', { name: 'Curriculum pre-publish workflow' })
+    .getByRole('link', { name: /^Published:/ })).toHaveCount(1)
+  await expect(page.getByRole('navigation', { name: 'Curriculum browser views' })
+    .getByRole('link')).toHaveCount(0)
 })
 
 test('an expired session fails closed within the authorization timeout', async ({ page }) => {

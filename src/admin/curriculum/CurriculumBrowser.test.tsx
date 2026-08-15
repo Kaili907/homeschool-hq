@@ -184,8 +184,8 @@ describe('ADMIN-11 read-only Admin surface', () => {
     expect(markup).not.toContain('publish curriculum')
     expect(markup).not.toContain('edit curriculum')
     expect(markup).not.toContain('delete curriculum')
-    expect(markup).toContain('href="/academy/admin/curriculum/validation"')
-    expect(markup).toContain('validation evidence')
+    expect(markup).not.toContain('href="/academy/admin/curriculum/validation"')
+    expect(markup).not.toContain('href="/academy/admin/curriculum/standards-review"')
     expect(markup).not.toContain('<main')
   })
 

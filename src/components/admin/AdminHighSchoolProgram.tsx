@@ -20,10 +20,9 @@ import {
 /**
  * Admin surface for the Grades 8-12 programme.
  *
- * Independently mountable — takes an optional `snapshot` override for tests
- * and defaults to the frozen snapshot derived from
- * `origin/mac/hs912-release-r1`. Does NOT touch AdminConsole navigation.
- * DASH-7 will mount this at a later step.
+ * Takes an optional `snapshot` override for tests and defaults to the frozen
+ * snapshot derived from `origin/mac/hs912-release-r1`. The final Admin route
+ * mounts this component without replacing its evidence with shell-owned data.
  */
 export interface AdminHighSchoolProgramProps {
   readonly snapshot?: HighSchoolProgramSnapshot

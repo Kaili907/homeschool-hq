@@ -5,6 +5,7 @@ import {
 } from './_shared/admin-learner-reader.js'
 import { hasOnlyLearnerOperationsFields } from '../../src/admin/learnerAnalyticsModel.ts'
 import { errorResponse, hasBody, jsonResponse, readQueryEntries } from './_shared/http.js'
+import { isAdminLearnerReference } from '../../src/admin/learnerAnalyticsModel.ts'
 
 const API_PREFIX = '/api/admin/v1/learners'
 const FUNCTION_PREFIX = '/.netlify/functions/admin-learners'
@@ -17,8 +18,14 @@ function routeFromPath(path) {
       ? `${FUNCTION_PREFIX}/`
       : null
   if (!prefix) return null
-  const learnerRef = path.slice(prefix.length)
-  return /^p[1-5]$/.test(learnerRef) ? { kind: 'detail', learnerRef } : null
+  const encodedLearnerRef = path.slice(prefix.length)
+  if (!encodedLearnerRef || encodedLearnerRef.includes('/')) return null
+  try {
+    const learnerRef = decodeURIComponent(encodedLearnerRef)
+    return isAdminLearnerReference(learnerRef) ? { kind: 'detail', learnerRef } : null
+  } catch {
+    return null
+  }
 }
 
 function todayFromEvent(event) {

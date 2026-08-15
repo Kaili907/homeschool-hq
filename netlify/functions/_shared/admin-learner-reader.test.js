@@ -105,10 +105,26 @@ describe('authorized household learner projection reader', () => {
     await expect(reader.readDetail({ accessToken: 'token-b', learnerRef: 'p2' })).resolves.toMatchObject({ detail: { displayName: 'Household B' } })
   })
 
+  it('projects expanded learner identities without changing household sync authority', async () => {
+    const expanded = learner('learner:grade-12:zoe', 'Zoe')
+    const { client } = queryClient({ data: [row(expanded)], error: null })
+    await expect(readerFor(() => client).readDetail({
+      accessToken: 'token-z', learnerRef: 'learner:grade-12:zoe',
+    })).resolves.toMatchObject({
+      detail: { learnerRef: 'learner:grade-12:zoe', displayName: 'Zoe', nominalGrade: '6' },
+    })
+  })
+
   it('fails closed for malformed, oversized, uncertain, or unpinned reads', async () => {
     const cases = [
       { data: [{ profile_id: 'p1', data: { name: 'malformed' }, updated_at: 'now' }], error: null },
-      { data: Array.from({ length: 6 }, () => row(learner())), error: null },
+      {
+        data: Array.from(
+          { length: LEARNER_ANALYTICS_LIMITS.learners + 1 },
+          (_, index) => row(learner(`learner-${index}`, `Learner ${index}`)),
+        ),
+        error: null,
+      },
       { data: null, error: { message: 'private database error' } },
     ]
     for (const result of cases) {

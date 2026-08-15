@@ -14,7 +14,6 @@ import type {
 } from '../../admin/overviewModel'
 import { AdminOverviewReadError, readAdminOverview } from '../../admin/overviewHttpSource'
 import { readAdminCosts, AdminCostsReadError } from '../../admin/costsHttpSource'
-import { withAdminDependencyTimeout } from '../../admin/adminDependencyTimeout'
 import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
 import {
   AdminProviderPricingHttpError,
@@ -62,6 +61,7 @@ import {
   type CurriculumValidationReadState,
 } from '../../admin/curriculum-validation/httpSource'
 import {
+  isAdminLearnerReference,
   loadLearnerAnalytics,
   type LearnerAnalyticsViewState,
 } from '../../admin/learnerAnalyticsModel'
@@ -94,18 +94,17 @@ import { AdminCorrelationExplorer } from './AdminCorrelationExplorer'
 import {
   AdminConfiguration,
   type AdminConfigurationReadState,
-  type AdminVoiceCatalogReadState,
 } from './AdminConfiguration'
 import {
   AdminConfigurationError,
   createAdminConfigurationHttpSource,
   type AdminConfigurationCommitResult,
 } from '../../admin/configurationHttpSource'
-import { createVoiceCatalogAccess } from '../../tutor/voiceCatalog'
 import { createAdminAccessHttpSource, AdminAccessError } from '../../admin/accessHttpSource'
-import { getSupabaseClient } from '../../sync/supabase'
+import { getSupabaseClient, getVerifiedCurrentUser } from '../../sync/supabase'
 import type { AdminAccessReadState } from '../../admin/accessModel'
 import { AdminAccessPermissions } from './AdminAccessPermissions'
+import { AdminHighSchoolProgram } from './AdminHighSchoolProgram'
 import {
   AdminProductionReadinessError,
   readAdminProductionReadiness,
@@ -173,7 +172,8 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (suffix === 'curriculum/activation') return 'curriculum-activation'
   if (suffix === 'curriculum/history') return 'curriculum-history'
   if (suffix === 'costs/provider-pricing') return 'provider-pricing'
-  if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
+  if (suffix === 'health') return 'system-health'
+  if (suffix.startsWith('health/')) return 'unknown'
   if (suffix === 'engines') return 'engines'
   if (suffix.startsWith('engines/')) return adminRouteEngine(pathname) ? 'engines' : 'unknown'
   if (suffix === 'production-readiness' || suffix === 'readiness') return 'releases'
@@ -191,7 +191,12 @@ export function adminRouteLearnerRef(pathname: string): string | null {
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
   const segments = suffix.split('/')
   if (segments.length !== 2 || segments[0] !== 'learners') return null
-  return /^p[1-5]$/.test(segments[1]) ? segments[1] : null
+  try {
+    const learnerRef = decodeURIComponent(segments[1])
+    return isAdminLearnerReference(learnerRef) ? learnerRef : null
+  } catch {
+    return null
+  }
 }
 
 export function adminRouteEngine(pathname: string): AdminEngineId | null {
@@ -288,9 +293,9 @@ export function AdminConsoleRoute() {
   const [incidentRetry, setIncidentRetry] = useState(0)
   const [configurationReadState, setConfigurationReadState] = useState<AdminConfigurationReadState>({ status: 'loading' })
   const [configurationRetry, setConfigurationRetry] = useState(0)
-  const [voiceCatalogState, setVoiceCatalogState] = useState<AdminVoiceCatalogReadState>({ status: 'loading' })
   const [configurationDirty, setConfigurationDirty] = useState(false)
   const [accessReadState, setAccessReadState] = useState<AdminAccessReadState>({ status: 'loading' })
+  const [accessPrincipalLabels, setAccessPrincipalLabels] = useState<Readonly<Record<string, string>>>({})
   const [accessRetry, setAccessRetry] = useState(0)
   const [readinessState, setReadinessState] = useState<ProductionReadinessReadState>({ status: 'loading' })
   const [readinessRetry, setReadinessRetry] = useState(0)
@@ -397,9 +402,18 @@ export function AdminConsoleRoute() {
     }
     const controller = new AbortController()
     setAccessReadState({ status: 'loading' })
+    setAccessPrincipalLabels({})
     void accessSource.read({ signal: controller.signal }).then(
       (projection) => {
-        if (!controller.signal.aborted) setAccessReadState({ status: 'ready', projection })
+        if (controller.signal.aborted) return
+        setAccessReadState({ status: 'ready', projection })
+        void getVerifiedCurrentUser(getSupabaseClient(), controller.signal).then((user) => {
+          if (controller.signal.aborted || !user || user.email === user.id) return
+          if (!projection.principals.some((principal) => (
+            principal.isCurrent && principal.principalRef === user.id.toLowerCase()
+          ))) return
+          setAccessPrincipalLabels({ [user.id.toLowerCase()]: user.email })
+        })
       },
       (error) => {
         if (controller.signal.aborted) return
@@ -533,11 +547,7 @@ export function AdminConsoleRoute() {
       return
     }
     const controller = new AbortController()
-    const voiceCatalogSource = createVoiceCatalogAccess({
-      fetchImpl: (url, init) => fetch(url, init as RequestInit),
-    })
     setConfigurationReadState({ status: 'loading' })
-    setVoiceCatalogState({ status: 'loading' })
     void configurationSource.read({ signal: controller.signal }).then(
       (projection) => {
         if (!controller.signal.aborted) setConfigurationReadState({ status: 'ready', projection })
@@ -549,17 +559,6 @@ export function AdminConsoleRoute() {
           code: error instanceof AdminConfigurationError && error.code === 'configuration_timeout'
             ? 'configuration_timeout' : 'configuration_unavailable',
         })
-      },
-    )
-    void withAdminDependencyTimeout(() => voiceCatalogSource.load()).then(
-      (catalog) => {
-        if (controller.signal.aborted) return
-        setVoiceCatalogState(catalog.catalogVersion === 'unavailable'
-          ? { status: 'unavailable' }
-          : { status: 'ready', catalog })
-      },
-      () => {
-        if (!controller.signal.aborted) setVoiceCatalogState({ status: 'unavailable' })
       },
     )
     return () => controller.abort()
@@ -988,7 +987,7 @@ export function AdminConsoleRoute() {
                             : section === 'audit-log' ? 'Audit Log'
                               : section === 'access' ? 'Access & Permissions'
                                 : section === 'configuration' ? 'Configuration'
-                                  : section === 'curriculum' ? 'Curriculum'
+                                  : section === 'curriculum' ? 'Published Curriculum'
                                     : section === 'high-school-program' ? 'High School Program'
                                       : section === 'releases' ? 'Production Readiness' : 'Admin section unavailable'
 
@@ -1197,7 +1196,6 @@ export function AdminConsoleRoute() {
           <AdminConfiguration
             authorization={authorization}
             state={configurationReadState}
-            voiceCatalog={voiceCatalogState}
             source={configurationSource}
             onCommitted={applyConfigurationCommit}
             onRetry={() => setConfigurationRetry((value) => value + 1)}
@@ -1208,7 +1206,9 @@ export function AdminConsoleRoute() {
           <AdminAccessPermissions
             authorization={authorization}
             state={accessReadState}
+            principalLabels={accessPrincipalLabels}
             source={accessSource}
+            onRetry={() => setAccessRetry((value) => value + 1)}
             onMutated={() => {
               setAccessRetry((value) => value + 1)
               beginAuthorizationRefresh()
@@ -1221,7 +1221,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setReadinessRetry((value) => value + 1)}
           />
         )}
-        {section === 'high-school-program' && <HighSchoolProgramPlaceholder />}
+        {section === 'high-school-program' && <AdminHighSchoolProgram />}
         {!['attention', 'learners', 'engines', 'costs', 'provider-pricing', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-integrity', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'curriculum-activation', 'curriculum-history', 'system-health', 'study-operations', 'incidents', 'configuration', 'audit-log', 'access', 'releases', 'high-school-program'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h2 className="text-2xl font-bold">Admin section unavailable</h2>
@@ -1234,23 +1234,6 @@ export function AdminConsoleRoute() {
 
 function requestCurriculumStudioNavigation(): boolean {
   return window.dispatchEvent(new Event(CURRICULUM_STUDIO_NAVIGATION_REQUEST, { cancelable: true }))
-}
-
-// DASH-7 reserves the High School Program shell slot for DASH-4. Until that
-// workspace lands the mount point renders a visible read-only placeholder so
-// operators can find the location without inventing surrogate data.
-function HighSchoolProgramPlaceholder() {
-  return (
-    <section role="status" aria-labelledby="admin-hs-program-title" className="admin-panel">
-      <p className="admin-eyebrow">Reserved workspace</p>
-      <h2 id="admin-hs-program-title">High School Program</h2>
-      <p className="admin-disclosure">
-        This is the reserved mount point for the High School Program admin workspace.
-        The DASH-4 build will attach the read-only projections and controls here.
-        No substitute data is shown while the mount is empty.
-      </p>
-    </section>
-  )
 }
 
 function costRangeMatches(

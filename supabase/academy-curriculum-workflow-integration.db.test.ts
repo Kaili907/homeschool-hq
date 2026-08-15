@@ -133,7 +133,7 @@ describe('Curriculum pre-publish migration assembly', () => {
       `)
       expect(exposedUnscoped.rows[0].count).toBe(0)
 
-      const hardeningMigration = await readFile(migrationUrls.at(-1)!)
+      const hardeningMigration = (await readFile(migrationUrls.at(-1)!, 'utf8')).replace(/\r\n/gu, '\n')
       const custody = JSON.parse(await readFile(
         new URL('../docs/admin-console/curriculum-privacy-hardening-migration.json', import.meta.url),
         'utf8',

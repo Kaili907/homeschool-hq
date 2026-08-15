@@ -31,12 +31,18 @@ const ready = {
   },
 }
 
-function render(role: 'owner' | 'admin' | 'viewer', state: AdminAccessReadState = ready) {
+function render(
+  role: 'owner' | 'admin' | 'viewer',
+  state: AdminAccessReadState = ready,
+  principalLabels: Readonly<Record<string, string>> = {},
+) {
   return renderToStaticMarkup(
     <AdminAccessPermissions
       authorization={{ role, capabilities: ADMIN_ROLE_CAPABILITIES[role] }}
       state={state}
+      principalLabels={principalLabels}
       source={source}
+      onRetry={() => {}}
       onMutated={() => {}}
     />,
   )
@@ -76,10 +82,20 @@ describe('Admin Access & Permissions UI', () => {
   it('provides loading, unavailable, timeout, and malformed-response states without partial data', () => {
     expect(render('viewer', { status: 'loading' })).toContain('Loading Admin access')
     expect(render('viewer', { status: 'unauthorized' })).toContain('Access view unavailable')
-    expect(render('viewer', { status: 'error', code: 'access_timeout' })).toContain('Access read timed out')
+    const timeout = render('viewer', { status: 'error', code: 'access_timeout' })
+    expect(timeout).toContain('Access read timed out')
+    expect(timeout).toContain('role="alert"')
+    expect(timeout).toContain('Try again')
     const malformed = render('viewer', { status: 'error', code: 'access_malformed' })
     expect(malformed).toContain('No partial or raw data was shown')
     expect(malformed).not.toContain(OWNER_REF)
+  })
+
+  it('prefers a trusted friendly identity while retaining the opaque reference secondarily', () => {
+    const markup = render('owner', ready, { [OWNER_REF]: 'admin@example.test' })
+    expect(markup).toContain('<strong>admin@example.test</strong>')
+    expect(markup).toContain(`<code>${OWNER_REF}</code>`)
+    expect(markup.indexOf('admin@example.test')).toBeLessThan(markup.indexOf(OWNER_REF))
   })
 
   it('includes keyboard confirmation, visible focus, reduced motion, and mobile layout safeguards', () => {

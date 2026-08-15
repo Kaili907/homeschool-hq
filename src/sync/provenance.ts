@@ -834,9 +834,26 @@ export function validateProfileForSync(
   key: string,
   value: unknown,
 ): value is Profile {
+  return PROFILE_ID.test(key) && validateProfileForIdentity(key, value)
+}
+
+const ADMIN_PROFILE_ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/
+
+/** Admin projections can represent future learner identifiers without widening
+ * the household sync keyspace, which remains the canonical p1-p5 set. */
+export function validateProfileForAdminProjection(
+  key: string,
+  value: unknown,
+): value is Profile {
+  return ADMIN_PROFILE_ID.test(key) && validateProfileForIdentity(key, value)
+}
+
+function validateProfileForIdentity(
+  key: string,
+  value: unknown,
+): value is Profile {
   if (!plainRecord(value)) return false
   return (
-    PROFILE_ID.test(key) &&
     value.id === key &&
     key.length > 0 &&
     text(value.name) &&
