@@ -15,6 +15,7 @@ const CONTEXT_REF = "hint-context:item-001";
 const CURRENT_OPPORTUNITY_REF = "opportunity:item-001-current";
 const CURRENT_REVIEW_EVENT_REF = "review-event:item-001-current";
 const CURRENT_REVIEW_POLICY_REVISION_REF = "policy-revision:review-v1";
+const CURRENT_REVIEW_PRIVACY_APPROVAL_REF = "privacy-approval:item-001-current";
 
 type AuthorizedReviewPermission = Extract<
   HintSelectionRequest["reviewPermission"],
@@ -91,6 +92,7 @@ function request(
     currentOpportunityRef: CURRENT_OPPORTUNITY_REF,
     currentReviewEventRef: null,
     currentReviewPolicyRevisionRef: null,
+    currentReviewPrivacyApprovalRef: null,
     assessmentPhase: "instruction-or-practice",
     studyHintCeiling: "guided-step",
     previousAssistanceLevel: "independent",
@@ -264,8 +266,9 @@ test("active assessment structurally blocks hints despite review and privacy app
       assessmentPhase: "active-graded-or-mastery-check",
       currentReviewEventRef: CURRENT_REVIEW_EVENT_REF,
       currentReviewPolicyRevisionRef: CURRENT_REVIEW_POLICY_REVISION_REF,
+      currentReviewPrivacyApprovalRef: CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
       reviewPermission: authorizedReviewPermission({
-        privacyApprovalRef: "privacy-approval:active-item",
+        privacyApprovalRef: CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
       }),
     }),
   );
@@ -305,7 +308,13 @@ test("completed assessment review requires its specific permission", () => {
 });
 
 test("exact completed-review authorization is deterministic under replay", () => {
-  const candidate = completedReviewRequest({ attemptCount: 2 });
+  const candidate = completedReviewRequest({
+    attemptCount: 2,
+    currentReviewPrivacyApprovalRef: CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
+    reviewPermission: authorizedReviewPermission({
+      privacyApprovalRef: CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
+    }),
+  });
   const snapshot = structuredClone(candidate);
   const first = selectBoundedHint(candidate);
   const second = selectBoundedHint(candidate);
@@ -336,12 +345,26 @@ for (const [scope, overrides] of [
   });
 }
 
-test("a copied privacy approval does not authorize another review event", () => {
+test("an exact non-null current privacy approval authorizes completed review", () => {
   const result = selectBoundedHint(
     completedReviewRequest({
-      currentReviewEventRef: "review-event:item-001-next",
+      currentReviewPrivacyApprovalRef: CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
       reviewPermission: authorizedReviewPermission({
-        privacyApprovalRef: "privacy-approval:item-001",
+        privacyApprovalRef: CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
+      }),
+    }),
+  );
+
+  assert.equal(result.status, "recommended");
+  assert.equal(result.hintLevel, "nudge");
+});
+
+test("changing only the permission privacy approval denies completed review", () => {
+  const result = selectBoundedHint(
+    completedReviewRequest({
+      currentReviewPrivacyApprovalRef: CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
+      reviewPermission: authorizedReviewPermission({
+        privacyApprovalRef: "privacy-approval:item-001-current-foreign",
       }),
     }),
   );
@@ -349,6 +372,39 @@ test("a copied privacy approval does not authorize another review event", () => 
   if (result.status === "no-hint") {
     assert.deepEqual(result.reasonCodes, ["completed-review-not-authorized"]);
   }
+});
+
+for (const [scope, currentReviewPrivacyApprovalRef, privacyApprovalRef] of [
+  [
+    "permission non-null and current null",
+    null,
+    CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
+  ],
+  [
+    "permission null and current non-null",
+    CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
+    null,
+  ],
+] as const) {
+  test(`${scope} denies completed review`, () => {
+    const result = selectBoundedHint(
+      completedReviewRequest({
+        currentReviewPrivacyApprovalRef,
+        reviewPermission: authorizedReviewPermission({ privacyApprovalRef }),
+      }),
+    );
+
+    assert.equal(result.status, "no-hint");
+    if (result.status === "no-hint") {
+      assert.deepEqual(result.reasonCodes, ["completed-review-not-authorized"]);
+    }
+  });
+}
+
+test("permission null and current null match for completed review", () => {
+  const result = selectBoundedHint(completedReviewRequest());
+  assert.equal(result.status, "recommended");
+  assert.equal(result.hintLevel, "nudge");
 });
 
 test("a copied permission reference does not authorize another learner", () => {
@@ -403,12 +459,20 @@ test("malformed or non-Study completed-review permission fails closed", () => {
   }
 });
 
-test("ordinary instruction and non-graded review require no completed-review permission", () => {
+test("ordinary instruction and non-graded review ignore completed-review privacy permission", () => {
   for (const assessmentPhase of [
     "instruction-or-practice",
     "non-graded-review",
   ] as const) {
-    const result = selectBoundedHint(request({ assessmentPhase }));
+    const result = selectBoundedHint(
+      request({
+        assessmentPhase,
+        currentReviewPrivacyApprovalRef: CURRENT_REVIEW_PRIVACY_APPROVAL_REF,
+        reviewPermission: authorizedReviewPermission({
+          privacyApprovalRef: "privacy-approval:foreign",
+        }),
+      }),
+    );
     assert.equal(result.status, "recommended");
     assert.equal(result.hintLevel, "nudge");
   }

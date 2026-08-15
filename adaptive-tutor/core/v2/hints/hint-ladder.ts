@@ -118,7 +118,8 @@ function hasCurrentCompletedReviewAuthorization(
     permission.instructionalContextRef === request.contextRef &&
     permission.opportunityRef === request.currentOpportunityRef &&
     permission.reviewEventRef === request.currentReviewEventRef &&
-    permission.policyRevisionRef === request.currentReviewPolicyRevisionRef
+    permission.policyRevisionRef === request.currentReviewPolicyRevisionRef &&
+    permission.privacyApprovalRef === request.currentReviewPrivacyApprovalRef
   );
 }
 
