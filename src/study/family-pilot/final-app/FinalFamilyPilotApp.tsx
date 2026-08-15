@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   loadFinalFamilyPilotCatalog,
+  type FinalFamilyPilotCatalog,
   type FinalLearnerAssessmentMaterial,
 } from '../../../curriculum/final-app-data'
 import { FamilyPilotStudentLogin } from '../auth'
@@ -10,6 +11,7 @@ import {
   parentBackupMessage,
   previewFinalFamilyPilotRestore,
   restoreFinalFamilyPilotBackup,
+  type FinalFamilyPilotBackupOptions,
 } from './backup'
 import { deriveCanonicalCourseCompletion, ParentCourseCompletionReport } from '../course-completion'
 import type { FamilyAutoPlannerSchoolPlanV1 } from '../auto-planner'
@@ -62,6 +64,9 @@ import {
 } from '../../hosted-sync/v2/familyPilot/deviceSetup'
 import { resolveFamilyServicesR1, type FamilyServicesPilotConfigurationR1 } from '../family-services'
 import { ParentAssignmentLibrary } from './ParentAssignmentLibrary'
+import { createBrowserHouseholdScopedStorage } from '../cloud-auth/scopedStorage'
+import { FamilyCloudAuthBoundary } from '../cloud-auth/FamilyCloudAuthBoundary'
+import type { FamilyCloudAuthRuntime, FamilyCloudSessionState } from '../cloud-auth/types'
 
 type Mode = 'parent' | 'student'
 type ParentView = 'overview' | 'school-plan' | 'assign' | 'review' | 'reports' | 'preferences' | 'backup' | 'devices'
@@ -83,12 +88,13 @@ export interface FinalFamilyPilotAppProps {
   readonly familyServicesPilot?: FamilyServicesPilotConfigurationR1
   /** Local/test/staging injection only. Production composition omits this seam. */
   readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
+  /** Canonical Parent household auth composition. Provider sessions stay inside this runtime. */
+  readonly familyCloudAuth?: FamilyCloudAuthRuntime
 }
 
-export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSetup }: FinalFamilyPilotAppProps) {
+export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSetup, familyCloudAuth }: FinalFamilyPilotAppProps) {
   const [catalog, setCatalog] = useState<Awaited<ReturnType<typeof loadFinalFamilyPilotCatalog>> | null>(null)
   const [catalogError, setCatalogError] = useState<string | null>(null)
-  const [revision, setRevision] = useState(0)
 
   useEffect(() => {
     let live = true
@@ -100,37 +106,79 @@ export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSet
     return () => { live = false }
   }, [])
 
-  const controller = useMemo(() => catalog ? new FinalFamilyPilotController({ catalog }) : null, [catalog])
   const familyServices = resolveFamilyServicesR1({
     hostedSyncFeatureFlagValue: import.meta.env.VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED,
     trustedScorerFeatureFlagValue: import.meta.env.VITE_FAMILY_PILOT_TRUSTED_SCORER_ENABLED,
     configuration: familyServicesPilot,
   })
-  useEffect(() => () => controller?.close(), [controller])
-  const refresh = useCallback(() => {
-    controller?.refresh()
-    setRevision((value) => value + 1)
-  }, [controller])
-
   if (!catalog && !catalogError) {
     return <FinalShell onExit={onExit}><p className="rounded-xl bg-white p-6 font-semibold" role="status">Opening the admitted Family Pilot release…</p></FinalShell>
   }
-  if (!catalog || !controller || catalogError) {
+  if (!catalog || catalogError) {
     return <FinalShell onExit={onExit}><p className="rounded-xl border border-red-300 bg-red-50 p-6 font-semibold" role="alert">{catalogError ?? 'The final curriculum could not be loaded.'}</p></FinalShell>
   }
 
+  const app = (cloudState: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null) => (
+    <ReadyFinalFamilyPilotApp
+      catalog={catalog}
+      onExit={onExit}
+      trustedScorer={familyServices.trustedScorer}
+      parentSyncStatus={familyServices.parentSyncStatus}
+      deviceSyncSetup={deviceSyncSetup}
+      cloudState={cloudState}
+      onHouseholdSignOut={familyCloudAuth ? async () => { await familyCloudAuth.signOut(); onExit() } : undefined}
+    />
+  )
+  return familyCloudAuth
+    ? <FamilyCloudAuthBoundary runtime={familyCloudAuth}>{(state) => app(state)}</FamilyCloudAuthBoundary>
+    : app(null)
+}
+
+function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncStatus, deviceSyncSetup, cloudState, onHouseholdSignOut }: {
+  readonly catalog: FinalFamilyPilotCatalog
+  readonly onExit: () => void
+  readonly trustedScorer?: LearnerResponseAssessor
+  readonly parentSyncStatus: ParentSyncStatusValueR1
+  readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
+  readonly cloudState: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null
+  readonly onHouseholdSignOut?: () => void
+}) {
+  const [revision, setRevision] = useState(0)
+  const storage = useMemo(
+    () => cloudState ? createBrowserHouseholdScopedStorage(cloudState.householdRef) : undefined,
+    [cloudState?.householdRef],
+  )
+  const controller = useMemo(() => new FinalFamilyPilotController({
+    catalog,
+    ...(cloudState ? {
+      coreStore: { storage },
+      appStore: { storage, householdRef: cloudState.householdRef },
+    } : {}),
+  }), [catalog, cloudState?.householdRef, storage])
+  const backupOptions = useMemo<FinalFamilyPilotBackupOptions>(() => cloudState ? {
+    coreStore: { storage },
+    appStore: { storage, householdRef: cloudState.householdRef },
+  } : {}, [cloudState?.householdRef, storage])
+  useEffect(() => () => controller.close(), [controller])
+  const refresh = useCallback(() => {
+    controller.refresh()
+    setRevision((value) => value + 1)
+  }, [controller])
   return <MountedFinalFamilyPilot
     controller={controller}
     onExit={onExit}
     refresh={refresh}
     revision={revision}
-    trustedScorer={familyServices.trustedScorer}
-    parentSyncStatus={familyServices.parentSyncStatus}
+    trustedScorer={trustedScorer}
+    parentSyncStatus={parentSyncStatus}
     deviceSyncSetup={deviceSyncSetup}
+    cloudState={cloudState}
+    onHouseholdSignOut={onHouseholdSignOut}
+    backupOptions={backupOptions}
   />
 }
 
-function FinalShell({ onExit, children }: { readonly onExit: () => void; readonly children: React.ReactNode }) {
+function FinalShell({ onExit, children, cloudState = null }: { readonly onExit: () => void; readonly children: React.ReactNode; readonly cloudState?: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null }) {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900" data-family-pilot-release="family-pilot-r1">
       <header className="border-b border-slate-200 bg-slate-950 text-white">
@@ -144,7 +192,11 @@ function FinalShell({ onExit, children }: { readonly onExit: () => void; readonl
       </header>
       <aside className="border-b border-cyan-200 bg-cyan-50" data-testid="family-pilot-device-storage-notice">
         <p className="mx-auto max-w-6xl px-4 py-3 text-sm font-semibold text-slate-700">
-          This pilot currently saves progress in this browser on this device. Download backups regularly. Cross-device sync is coming next.
+          {cloudState?.status === 'READY'
+            ? 'Family account connected. Work is saved on this device and synchronized through the authenticated household.'
+            : cloudState?.status === 'OFFLINE_LOCAL'
+              ? 'Offline / saved on this device. Cloud changes will wait until the family account reconnects; you are not signed out.'
+              : 'This pilot currently saves progress in this browser on this device. Download backups regularly. Cross-device sync is coming next.'}
         </p>
       </aside>
       {children}
@@ -160,6 +212,9 @@ function MountedFinalFamilyPilot({
   trustedScorer,
   parentSyncStatus,
   deviceSyncSetup,
+  cloudState,
+  onHouseholdSignOut,
+  backupOptions,
 }: {
   readonly controller: FinalFamilyPilotController
   readonly onExit: () => void
@@ -169,6 +224,9 @@ function MountedFinalFamilyPilot({
   readonly trustedScorer?: LearnerResponseAssessor
   readonly parentSyncStatus: ParentSyncStatusValueR1
   readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
+  readonly cloudState: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null
+  readonly onHouseholdSignOut?: () => void
+  readonly backupOptions: FinalFamilyPilotBackupOptions
 }) {
   const [mode, setMode] = useState<Mode>('student')
   const [parentAuthorized, setParentAuthorized] = useState(false)
@@ -183,7 +241,7 @@ function MountedFinalFamilyPilot({
   const doRestore = async (file: File | undefined) => {
     if (!file) return
     const text = await file.text()
-    const preview = await previewFinalFamilyPilotRestore(text)
+    const preview = await previewFinalFamilyPilotRestore(text, backupOptions)
     if (preview.status === 'rejected') {
       window.alert(`Backup was not restored. ${parentBackupMessage(preview.reasonCode)}`)
       return
@@ -220,6 +278,7 @@ function MountedFinalFamilyPilot({
       }
     }
     const restored = await restoreFinalFamilyPilotBackup(text, {
+      ...backupOptions,
       preview,
       authority: preview.requiresNewParentPin
         ? { newParentPin }
@@ -239,12 +298,12 @@ function MountedFinalFamilyPilot({
       state: core.state,
     }
     return (
-      <FinalShell onExit={onExit}>
+      <FinalShell onExit={onExit} cloudState={cloudState}>
         <FamilyPilotRecoveryScreen
           snapshot={recovery}
           actions={{
             retry: () => window.location.reload(),
-            exportBackup: () => { void exportFinalFamilyPilotBackup()
+            exportBackup: () => { void exportFinalFamilyPilotBackup(backupOptions)
               .then(downloadFinalFamilyPilotBackup)
               .catch((error: unknown) => window.alert(messageOf(error))) },
             restoreBackup: () => restoreInput.current?.click(),
@@ -258,7 +317,7 @@ function MountedFinalFamilyPilot({
 
   if (!app.state.setup.completedAt) {
     return (
-      <FinalShell onExit={onExit}>
+      <FinalShell onExit={onExit} cloudState={cloudState}>
         <FamilyOnboarding
           controller={controller}
           mode="first-run"
@@ -282,7 +341,7 @@ function MountedFinalFamilyPilot({
   const openStudentRef = app.state.activeStudentRef
   if (openAssignmentRef && openStudentRef) {
     return (
-      <FinalShell onExit={onExit}>
+      <FinalShell onExit={onExit} cloudState={cloudState}>
         {openAssignmentRef.startsWith('assessment:') ? (
           <AssessmentSurface
             key={`${openStudentRef}:${openAssignmentRef}`}
@@ -322,7 +381,7 @@ function MountedFinalFamilyPilot({
         onOpen={setOpenAssignmentRef}
         onLock={closeLearner}
         onSwitchLearner={closeLearner}
-        onSignOut={() => { closeLearner(); onExit() }}
+        onSignOut={() => { closeLearner(); (onHouseholdSignOut ?? onExit)() }}
         onOpenParentView={(view) => {
           controller.selectStudent(null)
           controller.lockParentSession()
@@ -338,7 +397,7 @@ function MountedFinalFamilyPilot({
   }
 
   return (
-    <FinalShell onExit={onExit}>
+    <FinalShell onExit={onExit} cloudState={cloudState}>
       <div className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <p className="text-sm font-semibold text-slate-600">
@@ -357,7 +416,7 @@ function MountedFinalFamilyPilot({
           onOpen={setOpenAssignmentRef}
           onLock={() => { controller.selectStudent(null); refresh() }}
           onSwitchLearner={() => { controller.selectStudent(null); refresh() }}
-          onSignOut={() => { controller.selectStudent(null); refresh(); onExit() }}
+          onSignOut={() => { controller.selectStudent(null); refresh(); (onHouseholdSignOut ?? onExit)() }}
           onOpenParentView={(view) => { controller.lockParentSession(); setParentAuthorized(false); setParentView(view); setMode('parent'); refresh() }}
           refresh={refresh}
           revision={revision}
@@ -377,6 +436,8 @@ function MountedFinalFamilyPilot({
           revision={revision}
           syncStatus={parentSyncStatus}
           deviceSyncSetup={deviceSyncSetup}
+          onSignOut={onHouseholdSignOut}
+          backupOptions={backupOptions}
         />
       )}
     </FinalShell>
@@ -536,7 +597,7 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   )
 }
 
-function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision, syncStatus: initialSyncStatus, deviceSyncSetup }: {
+function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision, syncStatus: initialSyncStatus, deviceSyncSetup, onSignOut, backupOptions }: {
   readonly controller: FinalFamilyPilotController
   readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly view: ParentView
@@ -548,6 +609,8 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
   readonly revision: number
   readonly syncStatus: ParentSyncStatusValueR1
   readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
+  readonly onSignOut?: () => void
+  readonly backupOptions: FinalFamilyPilotBackupOptions
 }) {
   const students = controller.appSnapshot.state.setup.students
   const [selectedRef, setSelectedRef] = useState(students[0]?.studentRef ?? '')
@@ -569,6 +632,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           <select aria-label="Parent student" className="rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
             {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
           </select>
+          {onSignOut ? <button type="button" className="min-h-11 rounded-lg border border-slate-400 bg-white px-3 py-2 font-bold" onClick={onSignOut}>Sign out family</button> : null}
         </div>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2 print:hidden" aria-label="Parent Hub sections">
@@ -625,10 +689,10 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           <p className="mt-2 text-slate-600">Exports learner profiles and working levels, course and assignment progress, exact Study segment references, assessment states, School Plans, source metadata, attestations, preferences, and safety state. It never includes PINs, network secrets, learner answers, answer authority, or Tutor conversations.</p>
           <p className="mt-2 text-sm font-semibold text-slate-700">Restore always verifies the checksum, shows a preview, requires Parent authorization, and creates a local safety snapshot before replacing data.</p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <button type="button" className="rounded-lg bg-cyan-700 px-4 py-2 font-bold text-white" onClick={() => { void exportFinalFamilyPilotBackup()
+            <button type="button" className="rounded-lg bg-cyan-700 px-4 py-2 font-bold text-white" onClick={() => { void exportFinalFamilyPilotBackup(backupOptions)
               .then(downloadFinalFamilyPilotBackup)
               .catch((error: unknown) => window.alert(messageOf(error))) }}>Download family backup</button>
-            <button type="button" className="rounded-lg border border-cyan-700 px-4 py-2 font-bold text-cyan-900" onClick={() => { void exportFinalFamilyPilotBackup({ learnerRef: selected.studentRef })
+            <button type="button" className="rounded-lg border border-cyan-700 px-4 py-2 font-bold text-cyan-900" onClick={() => { void exportFinalFamilyPilotBackup({ ...backupOptions, learnerRef: selected.studentRef })
               .then(downloadFinalFamilyPilotBackup)
               .catch((error: unknown) => window.alert(messageOf(error))) }}>Download {selected.displayName}&apos;s backup</button>
             <button type="button" className="rounded-lg border px-4 py-2 font-bold" onClick={() => restoreInput.current?.click()}>Preview backup to restore</button>
