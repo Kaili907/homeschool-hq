@@ -113,6 +113,30 @@ function sortedHistory(
     );
 }
 
+function activeCurrentOpportunityHistory(
+  request: HintSelectionRequest,
+  history: readonly HintInterventionHistoryEntry[],
+): readonly HintInterventionHistoryEntry[] {
+  const currentOpportunityHistory = history.filter(
+    (entry) => entry.opportunityRef === request.currentOpportunityRef,
+  );
+  let lastCompletionIndex = -1;
+  for (
+    let index = currentOpportunityHistory.length - 1;
+    index >= 0;
+    index -= 1
+  ) {
+    if (
+      currentOpportunityHistory[index]?.interventionKind ===
+      "learner-completion"
+    ) {
+      lastCompletionIndex = index;
+      break;
+    }
+  }
+  return currentOpportunityHistory.slice(lastCompletionIndex + 1);
+}
+
 function assistanceFromState(
   request: HintSelectionRequest,
   contextHistory: readonly HintInterventionHistoryEntry[],
@@ -237,7 +261,7 @@ function invalidHintState(): HintSelectionResult {
 
 /**
  * Selects a Study-reviewed hint reference without authoring learner-facing prose.
- * Assistance classification is monotone within the requested context.
+ * Assistance classification is monotone within the active Study opportunity.
  */
 export function selectBoundedHint(requestCandidate: unknown): HintSelectionResult {
   let request: HintSelectionRequest;
@@ -251,7 +275,8 @@ export function selectBoundedHint(requestCandidate: unknown): HintSelectionResul
   }
 
   const history = sortedHistory(request);
-  const currentAssistance = assistanceFromState(request, history, "none");
+  const activeHistory = activeCurrentOpportunityHistory(request, history);
+  const currentAssistance = assistanceFromState(request, activeHistory, "none");
 
   // Wave 1 structural anti-answer policy is authoritative. Neither completed
   // review permission nor a privacy approval can open this phase to hint prose.
@@ -272,7 +297,7 @@ export function selectBoundedHint(requestCandidate: unknown): HintSelectionResul
   }
 
   const attemptLevel = attemptRecommendation(request.attemptCount);
-  const priorHintLevel = historyHintFloor(history);
+  const priorHintLevel = historyHintFloor(activeHistory);
   let targetLevel = greaterHint(attemptLevel, priorHintLevel);
   const reasons: HintSelectionReasonCode[] = ["attempt-count-recommendation"];
 
@@ -291,7 +316,7 @@ export function selectBoundedHint(requestCandidate: unknown): HintSelectionResul
     HINT_ORDER.indexOf(targetLevel) > HINT_ORDER.indexOf(priorHintLevel);
   if (
     escalationRequested &&
-    hintEscalationsSinceLastRecheck(history) >=
+    hintEscalationsSinceLastRecheck(activeHistory) >=
       request.learnerStageProfile.maximumHintEscalationsBeforeRecheck
   ) {
     return noHint(currentAssistance, "learner-stage-recheck-required");
@@ -312,7 +337,7 @@ export function selectBoundedHint(requestCandidate: unknown): HintSelectionResul
     status: "recommended",
     hintLevel: boundedLevel,
     hintMetadata,
-    assistanceLevel: assistanceFromState(request, history, boundedLevel),
+    assistanceLevel: assistanceFromState(request, activeHistory, boundedLevel),
     reasonCodes: reasons,
     unrestrictedProviderProseAllowed: false,
   };

@@ -95,7 +95,7 @@ function hintHistory(
     interventionRef: `intervention:${contextRef.split(":").at(-1)}-${ordinal}`,
     contextRef,
     sourceInteractionRef: `interaction:hint-history-${ordinal}`,
-    opportunityRef: `opportunity:hint-history-${ordinal}`,
+    opportunityRef: CURRENT_OPPORTUNITY_REF,
     ordinal,
     interventionKind: "hint-provided",
     hintLevel,
@@ -296,7 +296,7 @@ test("guided completion remains guided rather than becoming independent evidence
           interventionRef: "intervention:item-001-2",
           contextRef: CONTEXT_REF,
           sourceInteractionRef: "interaction:hint-history-2",
-          opportunityRef: "opportunity:hint-history-2",
+          opportunityRef: CURRENT_OPPORTUNITY_REF,
           ordinal: 2,
           interventionKind: "learner-completion",
           hintLevel: "none",
@@ -335,7 +335,7 @@ test("learner-stage profile pauses escalation until a comprehension recheck", ()
           interventionRef: "intervention:item-001-recheck",
           contextRef: CONTEXT_REF,
           sourceInteractionRef: "interaction:hint-recheck-2",
-          opportunityRef: "opportunity:hint-history-2",
+          opportunityRef: CURRENT_OPPORTUNITY_REF,
           ordinal: 2,
           interventionKind: "comprehension-recheck",
           hintLevel: "none",
@@ -346,6 +346,144 @@ test("learner-stage profile pauses escalation until a comprehension recheck", ()
   );
   assert.equal(resumed.status, "recommended");
   assert.equal(resumed.hintLevel, "concept-cue");
+});
+
+test("completed prior opportunity does not create a guided floor on a new opportunity", () => {
+  const priorOpportunityRef = "opportunity:item-001-prior";
+  const result = selectBoundedHint(
+    request({
+      attemptCount: 1,
+      interventionHistory: [
+        hintHistory("guided-step", CONTEXT_REF, 1, {
+          opportunityRef: priorOpportunityRef,
+        }),
+        {
+          learnerScopeRef: LEARNER_SCOPE_REF,
+          sessionRef: SESSION_REF,
+          interventionRef: "intervention:item-001-prior-completion",
+          contextRef: CONTEXT_REF,
+          sourceInteractionRef: "interaction:item-001-prior-completion",
+          opportunityRef: priorOpportunityRef,
+          ordinal: 2,
+          interventionKind: "learner-completion",
+          hintLevel: "none",
+          assistanceLevel: "guided",
+        },
+      ],
+    }),
+  );
+
+  assert.equal(result.status, "recommended");
+  if (result.status === "recommended") {
+    assert.equal(result.hintLevel, "nudge");
+    assert.equal(result.assistanceLevel, "light-hint");
+    assert.equal(
+      result.reasonCodes.includes("intervention-history-recommendation"),
+      false,
+    );
+  }
+});
+
+test("unresolved guided assistance in the current opportunity remains guided", () => {
+  const result = selectBoundedHint(
+    request({
+      attemptCount: 1,
+      interventionHistory: [hintHistory("guided-step")],
+    }),
+  );
+
+  assert.equal(result.status, "recommended");
+  if (result.status === "recommended") {
+    assert.equal(result.hintLevel, "guided-step");
+    assert.equal(result.assistanceLevel, "guided");
+    assert.ok(result.reasonCodes.includes("intervention-history-recommendation"));
+  }
+});
+
+test("learner completion closes the current opportunity escalation segment", () => {
+  const result = selectBoundedHint(
+    request({
+      attemptCount: 1,
+      interventionHistory: [
+        hintHistory("guided-step"),
+        {
+          learnerScopeRef: LEARNER_SCOPE_REF,
+          sessionRef: SESSION_REF,
+          interventionRef: "intervention:item-001-current-completion",
+          contextRef: CONTEXT_REF,
+          sourceInteractionRef: "interaction:item-001-current-completion",
+          opportunityRef: CURRENT_OPPORTUNITY_REF,
+          ordinal: 2,
+          interventionKind: "learner-completion",
+          hintLevel: "none",
+          assistanceLevel: "guided",
+        },
+      ],
+    }),
+  );
+
+  assert.equal(result.status, "recommended");
+  if (result.status === "recommended") {
+    assert.equal(result.hintLevel, "nudge");
+    assert.equal(result.assistanceLevel, "light-hint");
+    assert.equal(
+      result.reasonCodes.includes("intervention-history-recommendation"),
+      false,
+    );
+  }
+});
+
+test("new opportunity preserves the Study-provided assistance baseline", () => {
+  const result = selectBoundedHint(
+    request({
+      attemptCount: 1,
+      previousAssistanceLevel: "reteach-required",
+      interventionHistory: [
+        hintHistory("guided-step", CONTEXT_REF, 1, {
+          opportunityRef: "opportunity:item-001-prior",
+        }),
+      ],
+    }),
+  );
+
+  assert.equal(result.status, "recommended");
+  if (result.status === "recommended") {
+    assert.equal(result.hintLevel, "nudge");
+    assert.equal(result.assistanceLevel, "reteach-required");
+  }
+});
+
+test("a prior-opportunity recheck cannot reset the current opportunity budget", () => {
+  const learnerStageProfile = {
+    ...request().learnerStageProfile,
+    maximumHintEscalationsBeforeRecheck: 1,
+  } as const;
+  const result = selectBoundedHint(
+    request({
+      attemptCount: 2,
+      learnerStageProfile,
+      interventionHistory: [
+        hintHistory("nudge"),
+        {
+          learnerScopeRef: LEARNER_SCOPE_REF,
+          sessionRef: SESSION_REF,
+          interventionRef: "intervention:item-001-prior-recheck",
+          contextRef: CONTEXT_REF,
+          sourceInteractionRef: "interaction:item-001-prior-recheck",
+          opportunityRef: "opportunity:item-001-prior",
+          ordinal: 2,
+          interventionKind: "comprehension-recheck",
+          hintLevel: "none",
+          assistanceLevel: "light-hint",
+        },
+      ],
+    }),
+  );
+
+  assert.equal(result.status, "no-hint");
+  if (result.status === "no-hint") {
+    assert.deepEqual(result.reasonCodes, ["learner-stage-recheck-required"]);
+  }
 });
 
 test("selection is deterministic under replay and does not mutate input", () => {
@@ -497,11 +635,11 @@ test("same learner and session hint history from another context fails closed", 
   assert.equal(result.status, "rejected");
 });
 
-test("legitimate prior interaction and opportunity in the same hint scope is accepted", () => {
+test("legitimate prior interaction is accepted without contaminating current escalation", () => {
   const result = selectBoundedHint(
     request({
       interventionHistory: [
-        hintHistory("nudge", CONTEXT_REF, 1, {
+        hintHistory("guided-step", CONTEXT_REF, 1, {
           sourceInteractionRef: "interaction:prior-hint-interaction",
           opportunityRef: "opportunity:prior-hint-opportunity",
         }),
@@ -510,6 +648,13 @@ test("legitimate prior interaction and opportunity in the same hint scope is acc
   );
   assert.equal(result.status, "recommended");
   assert.equal(result.hintLevel, "nudge");
+  if (result.status === "recommended") {
+    assert.equal(result.assistanceLevel, "light-hint");
+    assert.equal(
+      result.reasonCodes.includes("intervention-history-recommendation"),
+      false,
+    );
+  }
 });
 
 test("only reviewed reference metadata is returned, never hint prose", () => {
