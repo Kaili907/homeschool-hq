@@ -1,0 +1,157 @@
+{
+  "contractVersion": "technology-lesson-advisory-r1",
+  "status": "DRAFT_ADVISORY",
+  "lessonId": "ma-g10-technology-u02-l05",
+  "primaryLessonType": "MASTERY",
+  "instructionalModes": [
+    "COMPUTING_CONCEPT",
+    "CODE_READING",
+    "CODE_WRITING",
+    "DEBUGGING",
+    "ALGORITHM_LOGIC",
+    "REMEDIATION"
+  ],
+  "activityKind": "CODE_OR_DEBUG",
+  "taskType": "programming_and_logic",
+  "sourcePhase": "Mastery check / DEMONSTRATE",
+  "phase": "INDEPENDENT",
+  "scoringStance": "SUMMATIVE",
+  "conceptIds": [
+    "tech.algorithms.loop-invariant",
+    "tech.algorithms.correctness",
+    "tech.algorithms.time-space-complexity",
+    "tech.debugging.evidence-cycle"
+  ],
+  "skillIds": [
+    "tech.skill.trace-state",
+    "tech.skill.construct-algorithm",
+    "tech.skill.debug-from-evidence",
+    "tech.skill.verify-boundary-cases",
+    "tech.skill.compare-tradeoffs"
+  ],
+  "prerequisiteConceptIds": [
+    "tech.control.iteration",
+    "tech.control.selection",
+    "tech.data.array-index"
+  ],
+  "prerequisiteSkillIds": [
+    "tech.skill.read-javascript-loop",
+    "tech.skill.record-expected-actual"
+  ],
+  "errorMisconceptionIds": [
+    "tech.error.invariant-restates-goal",
+    "tech.error.edit-before-evidence",
+    "tech.error.self-comparison-as-duplicate",
+    "tech.error.unrecorded-seen-state"
+  ],
+  "languageToolRefs": [
+    {
+      "ref": "JavaScript-ECMAScript-2020",
+      "kind": "LANGUAGE",
+      "versionOrCompatibility": "ECMAScript 2020-compatible syntax",
+      "requiredForTarget": false,
+      "fallbackRef": "ma-g10-technology-u02-l05#paper-trace-route"
+    },
+    {
+      "ref": "local-browser-console-or-approved-editor",
+      "kind": "EDITOR_OR_RUNTIME",
+      "versionOrCompatibility": "Any local runtime supporting the supplied ECMAScript 2020 syntax",
+      "requiredForTarget": false,
+      "fallbackRef": "ma-g10-technology-u02-l05#paper-trace-route"
+    }
+  ],
+  "exampleRefs": [
+    {
+      "ref": "ma-g10-technology-u02-l05#worked-contains-zero-early-return",
+      "kind": "DEBUGGING_THINK_ALOUD",
+      "relationshipToProtectedTask": "ANALOGOUS_NON_TARGET",
+      "evidenceEligible": false
+    }
+  ],
+  "taskRefs": [
+    {
+      "ref": "ma-g10-technology-u02-l05#guided-count-even-update",
+      "role": "GUIDED_PRACTICE",
+      "freshness": "NOT_EVIDENCE",
+      "protectedSolutionRef": "NOT_APPLICABLE—formative guided fixture retired from mastery evidence"
+    },
+    {
+      "ref": "ma-g10-technology-u02-l05#independent-first-drop",
+      "role": "MASTERY_EVIDENCE",
+      "freshness": "FRESH_TRANSFER",
+      "protectedSolutionRef": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l05.scoring-guide.json#trusted_solution_reference.independent_creation"
+    },
+    {
+      "ref": "ma-g10-technology-u02-l05#mastery-has-duplicate",
+      "role": "MASTERY_EVIDENCE",
+      "freshness": "FRESH_TRANSFER",
+      "protectedSolutionRef": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l05.scoring-guide.json#trusted_solution_reference.mastery_debug"
+    },
+    {
+      "ref": "ma-g10-technology-u02-l05#fresh-shared-initial",
+      "role": "REMEDIATION_CHECK",
+      "freshness": "FRESH_TRANSFER",
+      "protectedSolutionRef": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l05.scoring-guide.json#trusted_solution_reference.fresh_remediation_check"
+    }
+  ],
+  "hintCeiling": "LOCATION_OR_EVIDENCE_CUE",
+  "answerPolicy": "INDEPENDENT_WITHHOLD",
+  "ageLanguagePolicyRef": "TECHNOLOGY_LESSON_STANDARD_R1.md#4.6",
+  "safetyPolicyRef": "TECHNOLOGY_LESSON_STANDARD_R1.md#10",
+  "adultAuthorityRef": "curriculum-production/student-work/technology-arts-lessons/scoring-guides/technology/grade-10/ma-g10-technology-u02-l05.scoring-guide.json",
+  "teachingEvidence": {
+    "conceptExplanationRef": "ma-g10-technology-u02-l05#concept-invariants-correctness-efficiency",
+    "demonstrationRefs": [
+      "ma-g10-technology-u02-l05#worked-contains-zero-early-return"
+    ],
+    "guidedTaskRefs": [
+      "ma-g10-technology-u02-l05#guided-count-even-update"
+    ],
+    "supportFadeDescription": "The guided fixture names the state and invariant; the independent build allows term clarification only; the mastery debug allows at most a location/evidence cue; the fresh remediation check allows term clarification only."
+  },
+  "debuggingCycle": {
+    "symptomRef": "ma-g10-technology-u02-l05#mastery-has-duplicate.observed-symptom",
+    "hypothesisPromptRef": "ma-g10-technology-u02-l05#mastery-has-duplicate.debug-log.hypothesis",
+    "inspectionMethodRefs": [
+      "ma-g10-technology-u02-l05#mastery-has-duplicate.position-trace",
+      "ma-g10-technology-u02-l05#paper-trace-route"
+    ],
+    "changeTestRef": "ma-g10-technology-u02-l05#mastery-has-duplicate.debug-log.change-test",
+    "interpretationPromptRef": "ma-g10-technology-u02-l05#mastery-has-duplicate.debug-log.interpretation",
+    "iterationOrVerificationRef": "ma-g10-technology-u02-l05#mastery-has-duplicate.public-rerun"
+  },
+  "evidencePlan": {
+    "taskRef": "ma-g10-technology-u02-l05#independent-mastery-record",
+    "evidenceConceptIds": [
+      "tech.algorithms.loop-invariant",
+      "tech.algorithms.correctness",
+      "tech.algorithms.time-space-complexity",
+      "tech.debugging.evidence-cycle"
+    ],
+    "evidenceSkillIds": [
+      "tech.skill.construct-algorithm",
+      "tech.skill.debug-from-evidence",
+      "tech.skill.verify-boundary-cases",
+      "tech.skill.compare-tradeoffs"
+    ],
+    "commitBoundary": "ALL_REQUIRED_PARTS_DURABLY_SAVED",
+    "postEvidenceReviewPolicy": "ANALOGOUS_REVIEW_ONLY"
+  },
+  "remediationRoutes": [
+    {
+      "triggerId": "tech.error.invariant-restates-goal",
+      "alternateTeachingRef": "ma-g10-technology-u02-l05#remediation-coverage-map",
+      "analogueTaskRef": "ma-g10-technology-u02-l05#remediation-card-pairs-wxyz",
+      "freshCheckTaskRef": "ma-g10-technology-u02-l05#fresh-shared-initial",
+      "originalProtectedSolutionExposed": false
+    },
+    {
+      "triggerId": "tech.error.edit-before-evidence",
+      "alternateTeachingRef": "ma-g10-technology-u02-l05#remediation-evidence-ladder",
+      "analogueTaskRef": "ma-g10-technology-u02-l05#remediation-thermostat-evidence",
+      "freshCheckTaskRef": "ma-g10-technology-u02-l05#fresh-shared-initial",
+      "originalProtectedSolutionExposed": false
+    }
+  ],
+  "metadataApplicabilityNotes": []
+}
