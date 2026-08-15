@@ -20,13 +20,14 @@
 .admin-costs-range__custom input { border: 1px solid #9fb2ba; border-radius: .4rem; min-height: 2.75rem; padding: .35rem .5rem; }
 .admin-costs-range__custom p { color: #9d2d25; flex-basis: 100%; font-size: .8rem; font-weight: 700; }
 .admin-costs-card-grid { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); }
-.admin-costs-card { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; min-height: 8.4rem; padding: 1rem; }
+.admin-costs-card { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; min-height: 8.4rem; padding: 1rem; box-shadow: 0 8px 24px #172a3a0a; }
 .admin-costs-card p { color: #526474; font-size: .8rem; font-weight: 700; min-height: 2.4rem; }
 .admin-costs-card strong { display: block; font-size: 1.35rem; margin-top: .5rem; overflow-wrap: anywhere; }
 .admin-costs-card > span { color: #627581; display: block; font-size: .72rem; margin-top: .35rem; }
 .admin-costs-card--partial { border-left: .35rem solid #b16a13; }
 .admin-costs-card--unavailable { border-left: .35rem solid #a53b33; }
-.admin-costs-value-status { font-size: .7em; font-weight: 700; }
+.admin-costs-value-status { display: inline-flex; align-items: center; min-height: 1.45rem; border-radius: 999px; padding: .15rem .45rem; background: #fff1cf; color: #744b0b; font-size: .62em; font-weight: 800; line-height: 1; vertical-align: middle; white-space: nowrap; }
+.admin-costs-card--unavailable .admin-costs-value-status { background: #fff1ef; color: #7d2923; }
 .admin-costs-banner, .admin-costs-empty, .admin-costs-message { background: #fff9e9; border: 1px solid #e5bd62; border-radius: .85rem; display: grid; gap: .35rem; padding: 1rem; }
 .admin-costs-banner strong { color: #744b0b; }
 .admin-costs-banner--partial ul { list-style: disc; margin: .25rem 0 0 1.2rem; }
@@ -34,7 +35,7 @@
 .admin-costs-message { background: #fff; border-color: #d8e1e4; padding: 1.5rem; }
 .admin-costs-message h1, .admin-costs-message h2 { font-size: 1.5rem; font-weight: 800; }
 .admin-costs-message button { background: #173f4a; color: #fff; justify-self: start; margin-top: .5rem; }
-.admin-costs-panel { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; min-width: 0; padding: 1rem; }
+.admin-costs-panel { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; min-width: 0; padding: 1rem; box-shadow: 0 8px 24px #172a3a0a; }
 .admin-cost-alert { background: #edf8f6; border: 1px solid #9bcac2; border-left: .4rem solid #196b6b; border-radius: .85rem; display: grid; gap: .85rem; padding: 1rem; }
 .admin-cost-alert--warning, .admin-cost-alert--partial { background: #fff9e9; border-color: #e5bd62; border-left-color: #b16a13; }
 .admin-cost-alert--critical, .admin-cost-alert--unavailable { background: #fff2ef; border-color: #e5aaa3; border-left-color: #a53b33; }
@@ -60,7 +61,7 @@
 .admin-provider-coverage__status--partial, .admin-provider-coverage__status--insufficient_evidence { background: #fff9e9; border-color: #e5bd62; border-left-color: #b16a13; }
 .admin-provider-coverage__status--gaps_detected, .admin-provider-coverage__status--reconciliation_conflict { background: #fff2ef; border-color: #e5aaa3; border-left-color: #a53b33; }
 .admin-provider-coverage__metrics { display: grid; gap: .65rem; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); }
-.admin-provider-coverage__metric { background: #f7fafb; border: 1px solid #d8e1e4; border-radius: .7rem; min-height: 7.2rem; padding: .8rem; }
+.admin-provider-coverage__metric { background: #f7fafb; border: 1px solid #d8e1e4; border-radius: .7rem; min-height: 7.2rem; padding: .8rem; font-variant-numeric: tabular-nums; }
 .admin-provider-coverage__metric p { color: #526474; font-size: .74rem; font-weight: 800; min-height: 2.2rem; }
 .admin-provider-coverage__metric strong { display: block; font-size: 1.25rem; margin-top: .35rem; }
 .admin-provider-coverage__metric span { color: #627581; display: block; font-size: .68rem; line-height: 1.35; margin-top: .3rem; }
@@ -81,6 +82,7 @@
 .admin-costs table { border-collapse: collapse; min-width: 46rem; width: 100%; }
 .admin-costs caption { height: 1px; overflow: hidden; position: absolute; width: 1px; clip: rect(0 0 0 0); }
 .admin-costs th, .admin-costs td { border-bottom: 1px solid #e3eaec; font-size: .78rem; padding: .65rem .55rem; text-align: right; vertical-align: top; }
+.admin-costs td { font-variant-numeric: tabular-nums; }
 .admin-costs th:first-child, .admin-costs td:first-child { text-align: left; }
 .admin-costs thead th { color: #526474; font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; }
 .admin-costs tbody th { font-weight: 800; }
@@ -101,6 +103,8 @@
   .admin-provider-coverage__status { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
+  .admin-costs-card-grid { grid-template-columns: 1fr; }
   .admin-provider-coverage__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .admin-provider-coverage__metric { min-height: 6.6rem; padding: .7rem; }
+  .admin-costs-range__custom label, .admin-costs-range__custom input, .admin-costs-range__custom button { width: 100%; }
 }
