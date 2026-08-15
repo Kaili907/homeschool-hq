@@ -56,6 +56,11 @@ import { FamilyOnboarding } from './FamilyOnboarding'
 import { ParentReviewCenter } from './review-center'
 import { FamilyOverview } from './FamilyOverview'
 import { ParentSyncStatusR1, type ParentSyncStatusR1 as ParentSyncStatusValueR1 } from '../../hosted-sync/v2/familyPilot/status'
+import {
+  isParentDeviceSyncSetupSimulation,
+  ParentDeviceSyncSetup,
+  type ParentDeviceSyncSetupRuntime,
+} from '../../hosted-sync/v2/familyPilot/deviceSetup'
 import { resolveFamilyServicesR1, type FamilyServicesPilotConfigurationR1 } from '../family-services'
 import { ParentAssignmentLibrary } from './ParentAssignmentLibrary'
 
@@ -73,7 +78,7 @@ const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
 })
 
 type Mode = 'parent' | 'student'
-type ParentView = 'overview' | 'school-plan' | 'assign' | 'review' | 'reports' | 'preferences' | 'backup'
+type ParentView = 'overview' | 'school-plan' | 'assign' | 'review' | 'reports' | 'preferences' | 'backup' | 'devices'
 
 function messageOf(error: unknown): string {
   return error instanceof Error ? error.message : 'That action could not be completed.'
@@ -90,9 +95,11 @@ export interface FinalFamilyPilotAppProps {
   readonly onExit: () => void
   /** One injected composition for independently flagged non-production family services. */
   readonly familyServicesPilot?: FamilyServicesPilotConfigurationR1
+  /** Local/test/staging injection only. Production composition omits this seam. */
+  readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
 }
 
-export function FinalFamilyPilotApp({ onExit, familyServicesPilot }: FinalFamilyPilotAppProps) {
+export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSetup }: FinalFamilyPilotAppProps) {
   const [catalog, setCatalog] = useState<Awaited<ReturnType<typeof loadFinalFamilyPilotCatalog>> | null>(null)
   const [catalogError, setCatalogError] = useState<string | null>(null)
   const [revision, setRevision] = useState(0)
@@ -133,6 +140,7 @@ export function FinalFamilyPilotApp({ onExit, familyServicesPilot }: FinalFamily
     revision={revision}
     trustedScorer={familyServices.trustedScorer}
     parentSyncStatus={familyServices.parentSyncStatus}
+    deviceSyncSetup={deviceSyncSetup}
   />
 }
 
@@ -165,6 +173,7 @@ function MountedFinalFamilyPilot({
   revision,
   trustedScorer,
   parentSyncStatus,
+  deviceSyncSetup,
 }: {
   readonly controller: FinalFamilyPilotController
   readonly onExit: () => void
@@ -173,6 +182,7 @@ function MountedFinalFamilyPilot({
   readonly revision: number
   readonly trustedScorer?: LearnerResponseAssessor
   readonly parentSyncStatus: ParentSyncStatusValueR1
+  readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
 }) {
   const [mode, setMode] = useState<Mode>('student')
   const [parentAuthorized, setParentAuthorized] = useState(false)
@@ -380,6 +390,7 @@ function MountedFinalFamilyPilot({
           onRestore={doRestore}
           revision={revision}
           syncStatus={parentSyncStatus}
+          deviceSyncSetup={deviceSyncSetup}
         />
       )}
     </FinalShell>
@@ -539,7 +550,7 @@ function ActiveStudentDashboard({ controller, autoPlannerHost, activeStudentRef,
   )
 }
 
-function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision, syncStatus }: {
+function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, refresh, restoreInput, onRestore, revision, syncStatus: initialSyncStatus, deviceSyncSetup }: {
   readonly controller: FinalFamilyPilotController
   readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly view: ParentView
@@ -550,9 +561,15 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
   readonly onRestore: (file: File | undefined) => Promise<void>
   readonly revision: number
   readonly syncStatus: ParentSyncStatusValueR1
+  readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
 }) {
   const students = controller.appSnapshot.state.setup.students
   const [selectedRef, setSelectedRef] = useState(students[0]?.studentRef ?? '')
+  const deviceSyncAvailable = isParentDeviceSyncSetupSimulation(deviceSyncSetup)
+  const [syncStatus, setSyncStatus] = useState<ParentSyncStatusValueR1>(deviceSyncAvailable ? 'SYNC_READY' : initialSyncStatus)
+  useEffect(() => {
+    setSyncStatus(deviceSyncAvailable ? 'SYNC_READY' : initialSyncStatus)
+  }, [deviceSyncAvailable, initialSyncStatus])
   const selected = students.find((item) => item.studentRef === selectedRef) ?? students[0]
   return (
     <main className="mx-auto max-w-6xl px-4 py-6">
@@ -569,18 +586,30 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         </div>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2 print:hidden" aria-label="Parent Hub sections">
-        {(['overview', 'preferences', 'school-plan', 'assign', 'review', 'reports', 'backup'] as ParentView[]).map((item) => {
+        {(['overview', 'preferences', 'school-plan', 'assign', 'review', 'reports', 'backup', 'devices'] as ParentView[]).map((item) => {
           const label = item === 'overview' ? 'Overview'
             : item === 'preferences' ? 'Family setup'
               : item === 'school-plan' ? 'School Plan'
                 : item === 'assign' ? 'Assignments'
                   : item === 'review' ? 'Review Center'
                   : item === 'reports' ? 'Progress'
-                    : 'Backup/Recovery'
+                    : item === 'devices' ? 'Device Sync'
+                      : 'Backup/Recovery'
           return <button key={item} type="button" className={`min-h-11 rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} aria-current={view === item ? 'page' : undefined} onClick={() => setView(item)}>{label}</button>
         })}
       </nav>
-      {view === 'overview' ? (
+      {view === 'devices' ? (
+        deviceSyncAvailable ? (
+          <ParentDeviceSyncSetup runtime={deviceSyncSetup} onStatusChange={setSyncStatus} />
+        ) : (
+          <section className="mt-6 rounded-2xl border bg-white p-5" data-testid="parent-device-sync-local-only">
+            <p className="font-bold text-cyan-700">Device Sync</p>
+            <h3 className="mt-1 text-2xl font-extrabold">Local only</h3>
+            <p className="mt-2 max-w-2xl text-slate-600">Hosted Sync is off for this Family Pilot. Learning and backups continue on this device; no family data is being sent to a hosted service.</p>
+            <button type="button" disabled className="mt-4 min-h-11 rounded-lg border px-4 py-2 font-bold opacity-60">Device setup unavailable</button>
+          </section>
+        )
+      ) : view === 'overview' ? (
         <FamilyOverview
           controller={controller}
           host={autoPlannerHost}
