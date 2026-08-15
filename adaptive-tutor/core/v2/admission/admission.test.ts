@@ -24,6 +24,10 @@ function validInput(feature: AdaptiveFeature = "hint-ladder") {
       requestVersion: ADAPTIVE_ADMISSION_VERSION,
       requestKind: "study-adaptive-admission-request",
       invocationBindingRef: "invocation:wave2-001",
+      householdScopeRef: "household-scope:wave2-a",
+      learnerScopeRef: "learner-scope:wave2-a",
+      sessionRef: "session:wave2-001",
+      instructionalContextRef: "instructional-context:orbital-design-a",
       subjectRef: "subject:orbital-design",
       curriculumBindingRef: "curriculum:orbital-design-r3",
       feature,
@@ -35,6 +39,10 @@ function validInput(feature: AdaptiveFeature = "hint-ladder") {
       metadataKind: "study-adaptive-capabilities",
       source: "study-authority",
       invocationBindingRef: "invocation:wave2-001",
+      householdScopeRef: "household-scope:wave2-a",
+      learnerScopeRef: "learner-scope:wave2-a",
+      sessionRef: "session:wave2-001",
+      instructionalContextRef: "instructional-context:orbital-design-a",
       subjectRef: "subject:orbital-design",
       curriculumBindingRef: "curriculum:orbital-design-r3",
       curriculumAdmission: "admitted",
@@ -78,6 +86,10 @@ test("admits an exact Study capability for the requested context", () => {
     reason: "admitted",
     tutorFeaturePermission: "allowed",
     invocationBindingRef: "invocation:wave2-001",
+    householdScopeRef: "household-scope:wave2-a",
+    learnerScopeRef: "learner-scope:wave2-a",
+    sessionRef: "session:wave2-001",
+    instructionalContextRef: "instructional-context:orbital-design-a",
     subjectRef: "subject:orbital-design",
     curriculumBindingRef: "curriculum:orbital-design-r3",
     feature: "hint-ladder",
@@ -206,6 +218,60 @@ test("refuses cross-context capability reuse", () => {
   assertRefused(input, "insufficient-capability-metadata");
 });
 
+test("refuses a learner A admission envelope reused for learner B", () => {
+  const input = validInput();
+  requestOf(input).learnerScopeRef = "learner-scope:wave2-b";
+  assertRefused(input, "scope-binding-mismatch");
+});
+
+test("refuses the same learner admission envelope in a different session", () => {
+  const input = validInput();
+  requestOf(input).sessionRef = "session:wave2-002";
+  assertRefused(input, "scope-binding-mismatch");
+});
+
+test("refuses the same learner and session in a different instructional context", () => {
+  const input = validInput();
+  requestOf(input).instructionalContextRef =
+    "instructional-context:orbital-design-b";
+  assertRefused(input, "scope-binding-mismatch");
+});
+
+test("refuses an admission envelope from a different household scope", () => {
+  const input = validInput();
+  requestOf(input).householdScopeRef = "household-scope:wave2-b";
+  assertRefused(input, "scope-binding-mismatch");
+});
+
+for (const field of [
+  "householdScopeRef",
+  "learnerScopeRef",
+  "sessionRef",
+  "instructionalContextRef",
+] as const) {
+  test(`refuses a request missing required scope binding ${field}`, () => {
+    const input = validInput();
+    delete requestOf(input)[field];
+    assertRefused(input, "insufficient-capability-metadata");
+  });
+
+  test(`refuses capability metadata missing required scope binding ${field}`, () => {
+    const input = validInput();
+    delete metadataOf(input)[field];
+    assertRefused(input, "insufficient-capability-metadata");
+  });
+}
+
+test("refuses non-opaque scope values at the closed boundary", () => {
+  const requestValue = validInput();
+  requestOf(requestValue).learnerScopeRef = "Learner A raw label";
+  assertRefused(requestValue, "insufficient-capability-metadata");
+
+  const metadataValue = validInput();
+  metadataOf(metadataValue).sessionRef = "session value with prose";
+  assertRefused(metadataValue, "insufficient-capability-metadata");
+});
+
 test("refuses an unsupported action family", () => {
   const input = validInput();
   requestOf(input).actionFamily = "independent-certification";
@@ -275,11 +341,30 @@ for (const [field, value] of Object.entries({
   });
 }
 
-test("requires no raw learner prose", () => {
+test("requires only opaque learner scope and no raw learner prose", () => {
   const input = validInput();
-  assert.equal(JSON.stringify(input).includes("learner"), false);
+  assert.equal("learnerName" in requestOf(input), false);
+  assert.equal("rawLearnerProse" in requestOf(input), false);
+  assert.equal("diagnosticData" in requestOf(input), false);
   assert.equal(evaluateAdaptiveAdmission(input).status, "admitted");
 });
+
+for (const [field, value] of Object.entries({
+  learnerName: "Learner A",
+  rawLearnerProse: "I think the answer is...",
+  inferredGrade: "grade:guessed",
+  diagnosticData: { label: "persistent-deficit" },
+})) {
+  test(`rejects private or inferred learner field ${field}`, () => {
+    const requestValue = validInput();
+    requestOf(requestValue)[field] = value;
+    assertRefused(requestValue, "insufficient-capability-metadata");
+
+    const metadataValue = validInput();
+    metadataOf(metadataValue)[field] = value;
+    assertRefused(metadataValue, "insufficient-capability-metadata");
+  });
+}
 
 test("rejects raw learner prose if it is injected into the closed input", () => {
   const input = validInput();
@@ -289,11 +374,22 @@ test("rejects raw learner prose if it is injected into the closed input", () => 
 
 test("fails closed for unknown request and metadata versions", () => {
   const requestVersion = validInput();
-  requestOf(requestVersion).requestVersion = "study-tutor-v2.adaptive-admission.v2";
+  requestOf(requestVersion).requestVersion = "study-tutor-v2.adaptive-admission.v3";
   assertRefused(requestVersion, "insufficient-capability-metadata");
 
   const metadataVersion = validInput();
-  metadataOf(metadataVersion).metadataVersion = "study-tutor-v2.adaptive-capabilities.v2";
+  metadataOf(metadataVersion).metadataVersion = "study-tutor-v2.adaptive-capabilities.v3";
+  assertRefused(metadataVersion, "insufficient-capability-metadata");
+});
+
+test("fails closed for legacy unscoped admission contract versions", () => {
+  const requestVersion = validInput();
+  requestOf(requestVersion).requestVersion = "study-tutor-v2.adaptive-admission.v1";
+  assertRefused(requestVersion, "insufficient-capability-metadata");
+
+  const metadataVersion = validInput();
+  metadataOf(metadataVersion).metadataVersion =
+    "study-tutor-v2.adaptive-capabilities.v1";
   assertRefused(metadataVersion, "insufficient-capability-metadata");
 });
 

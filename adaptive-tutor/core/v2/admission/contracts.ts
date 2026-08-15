@@ -2,9 +2,9 @@ import { Type, type Static } from "../../schema/typebox.js";
 import { OpaqueReferenceSchema, PolicyCodeSchema } from "../contracts/primitives.js";
 
 export const ADAPTIVE_ADMISSION_VERSION =
-  "study-tutor-v2.adaptive-admission.v1" as const;
+  "study-tutor-v2.adaptive-admission.v2" as const;
 export const ADAPTIVE_CAPABILITY_METADATA_VERSION =
-  "study-tutor-v2.adaptive-capabilities.v1" as const;
+  "study-tutor-v2.adaptive-capabilities.v2" as const;
 
 export const ADAPTIVE_FEATURES = [
   "concept-prerequisite-graph",
@@ -64,6 +64,10 @@ export const StudyAdaptiveCapabilityMetadataSchema = Type.Object(
     metadataKind: Type.Literal("study-adaptive-capabilities"),
     source: Type.Literal("study-authority"),
     invocationBindingRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    instructionalContextRef: OpaqueReferenceSchema,
     subjectRef: OpaqueReferenceSchema,
     curriculumBindingRef: OpaqueReferenceSchema,
     curriculumAdmission: CapabilityAdmissionStateSchema,
@@ -86,6 +90,10 @@ export const AdaptiveAdmissionRequestSchema = Type.Object(
     requestVersion: Type.Literal(ADAPTIVE_ADMISSION_VERSION),
     requestKind: Type.Literal("study-adaptive-admission-request"),
     invocationBindingRef: OpaqueReferenceSchema,
+    householdScopeRef: OpaqueReferenceSchema,
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    instructionalContextRef: OpaqueReferenceSchema,
     subjectRef: OpaqueReferenceSchema,
     curriculumBindingRef: OpaqueReferenceSchema,
     feature: AdaptiveFeatureSchema,
@@ -108,6 +116,7 @@ export type StudyAdaptiveAdmissionInput = Static<typeof StudyAdaptiveAdmissionIn
 
 export const ADMISSION_REFUSAL_REASONS = [
   "insufficient-capability-metadata",
+  "scope-binding-mismatch",
   "unsupported-subject-capability",
   "unsupported-action-family",
   "safety-restricted",
@@ -135,6 +144,10 @@ export type AdaptiveAdmissionDecision =
       readonly reason: "admitted";
       readonly tutorFeaturePermission: "allowed";
       readonly invocationBindingRef: string;
+      readonly householdScopeRef: string;
+      readonly learnerScopeRef: string;
+      readonly sessionRef: string;
+      readonly instructionalContextRef: string;
       readonly subjectRef: string;
       readonly curriculumBindingRef: string;
       readonly feature: AdaptiveFeature;
