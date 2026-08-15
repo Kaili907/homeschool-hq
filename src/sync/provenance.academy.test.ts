@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { validateAppStateForSync } from './provenance'
 import { defaultAppState, emptyProfile } from '../migration'
-import type { AcademyState, AppState } from '../types'
+import { ACADEMY_GRADES, type AcademyState, type AppState } from '../types'
 
 /**
- * CURR-1 — the canonical persistence model must represent Grade 5/7/8 profiles
+ * CURR-1 — the canonical persistence model must represent supported profiles
  * and their academy progress, and must keep rejecting malformed payloads.
  */
 
@@ -45,8 +45,8 @@ function stateWith(mutate: (s: AppState) => void): unknown {
 }
 
 describe('CURR-1 sync validation for academy grades + state', () => {
-  it('accepts grade 5/7/8 profiles carrying academy progress', () => {
-    for (const grade of ['5', '7', '8'] as const) {
+  it('accepts every supported Academy grade carrying progress', () => {
+    for (const grade of ACADEMY_GRADES) {
       const candidate = stateWith((s) => {
         s.profiles.p2.grade = grade
         // ACADEMY-LEVEL-DECOUPLE-C: course records are now scoped to the level
@@ -63,7 +63,7 @@ describe('CURR-1 sync validation for academy grades + state', () => {
 
   it('still rejects grades outside the canonical model', () => {
     const candidate = stateWith((s) => {
-      ;(s.profiles.p2 as { grade: string }).grade = '9'
+      ;(s.profiles.p2 as { grade: string }).grade = '13'
     })
     expect(validateAppStateForSync(candidate).ok).toBe(false)
   })

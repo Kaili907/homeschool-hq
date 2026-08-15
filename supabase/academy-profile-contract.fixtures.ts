@@ -123,7 +123,7 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
     }),
     invalid('missing grade', (candidate) => delete candidate.grade),
     invalid('invalid grade', (candidate) => {
-      candidate.grade = 9
+      candidate.grade = 13
     }),
     invalid('missing pin', (candidate) => delete candidate.pin),
     invalid('invalid pin type', (candidate) => {
