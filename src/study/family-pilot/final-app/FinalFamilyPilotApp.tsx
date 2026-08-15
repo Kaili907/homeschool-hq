@@ -13,6 +13,7 @@ import {
   restoreFinalFamilyPilotBackup,
 } from './backup'
 import { deriveCanonicalCourseCompletion, ParentCourseCompletionReport } from '../course-completion'
+import type { FamilyAutoPlannerSchoolPlanV1 } from '../auto-planner'
 import {
   buildFamilyPilotStudentDashboardModel,
   type FamilyPilotStudentDashboardModel,
@@ -20,7 +21,7 @@ import {
 import { fromStudentSelector, toStudentSelector } from '../integration/identity'
 import { createRichLessonRenderModel, FamilyPilotLessonPlayer } from '../lesson-player'
 import { FamilyPilotRecoveryScreen } from '../recovery'
-import { buildFamilyFactualProgress, FamilyFactualProgress, LearnerFactualProgress } from '../reports'
+import { buildFamilyFactualProgress, LearnerFactualProgress, ParentProgressReport } from '../reports'
 import { StudentDashboard } from '../student-dashboard'
 import type { FamilySetupStudent } from '../setup'
 import {
@@ -567,7 +568,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           </select>
         </div>
       </div>
-      <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
+      <nav className="mt-5 flex flex-wrap gap-2 print:hidden" aria-label="Parent Hub sections">
         {(['overview', 'preferences', 'school-plan', 'assign', 'review', 'reports', 'backup'] as ParentView[]).map((item) => {
           const label = item === 'overview' ? 'Overview'
             : item === 'preferences' ? 'Family setup'
@@ -602,7 +603,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           <ParentAssignments key={selected.studentRef} controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
         </div>
       ) : view === 'reports' ? (
-        <ParentReports controller={controller} student={selected} refresh={refresh} />
+        <ParentReports controller={controller} autoPlannerHost={autoPlannerHost} student={selected} refresh={refresh} />
       ) : (
         <section className="mt-6 rounded-2xl border bg-white p-5">
           <h3 className="text-xl font-extrabold">Backup and recovery</h3>
@@ -688,23 +689,29 @@ function DynamicSourceCard({ controller, student, assignment, attached, refresh 
   )
 }
 
-function ParentReports({ controller, student, refresh }: {
+function ParentReports({ controller, autoPlannerHost, student, refresh }: {
   readonly controller: FinalFamilyPilotController
+  readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly student: FamilySetupStudent
   readonly refresh: () => void
 }) {
+  const [schoolPlan, setSchoolPlan] = useState<FamilyAutoPlannerSchoolPlanV1 | null>(null)
+  useEffect(() => {
+    let live = true
+    setSchoolPlan(null)
+    void autoPlannerHost.loadDocument(student.studentRef).then((loaded) => {
+      if (live) setSchoolPlan(loaded.status === 'ready' ? loaded.document.schoolPlan : null)
+    }).catch(() => { if (live) setSchoolPlan(null) })
+    return () => { live = false }
+  }, [autoPlannerHost, student.studentRef])
   const coreStudent = controller.coreSnapshot.state.students.find((item) => item.studentRef === student.studentRef)
   if (!coreStudent) return <p className="mt-6">No report data.</p>
   const assessmentAssignments = controller.assessmentAssignments(student.studentRef)
   const pendingGuardianAssignmentRefs = new Set(controller.pendingAttestations(student.studentRef)
     .map((attestation) => attestation.assignmentRef))
-  const report = buildFamilyFactualProgress({
-    student,
-    coreState: controller.coreSnapshot.state,
-    assessments: assessmentAssignments,
-    catalog: controller.catalog.runtime,
-    today: new Date().toISOString().slice(0, 10),
-  })
+  const courseRefBySubject = schoolPlan
+    ? Object.fromEntries(schoolPlan.subjects.flatMap((subject) => subject.courseRef ? [[subject.subject, subject.courseRef]] : []))
+    : undefined
   const courseCompletion = student.enabledSubjects.map((subject) => deriveCanonicalCourseCompletion({
     catalog: controller.catalog.runtime,
     studentRef: student.studentRef,
@@ -716,9 +723,19 @@ function ParentReports({ controller, student, refresh }: {
   }))
   return (
     <div className="mt-6 space-y-5">
-      <FamilyFactualProgress model={report} />
+      <ParentProgressReport
+        source={{
+          student,
+          coreState: controller.coreSnapshot.state,
+          assessments: assessmentAssignments,
+          catalog: controller.catalog.runtime,
+          courseRefBySubject,
+        }}
+        today={new Date().toISOString().slice(0, 10)}
+        schoolYear={schoolPlan ? { startDate: schoolPlan.schoolYearStart, endDate: schoolPlan.schoolYearEnd } : null}
+      />
       <ParentCourseCompletionReport courses={courseCompletion} />
-      <section className="rounded-2xl border bg-white p-5">
+      <section className="rounded-2xl border bg-white p-5 print:hidden">
         <h3 className="text-xl font-extrabold">Pending records</h3>
         <p className="mt-3 font-semibold">Pending guardian attestations: {controller.pendingAttestations(student.studentRef).length}</p>
         <p className="font-semibold">Open safety holds: {controller.openSafetyHolds(student.studentRef).length}</p>
