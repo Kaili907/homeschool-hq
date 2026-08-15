@@ -11,6 +11,10 @@ const baseInput = {
   envelope: "study-issued-mastery-evidence",
   learnerScopeRef: "learner-scope:learner-a",
   conceptRef: "concept:fraction-equivalence",
+  currentSessionRef: "session:current-a",
+  currentInstructionalContextRef: "instructional-context:fractions-a",
+  currentOpportunityRef: "opportunity:current-a",
+  currentOpportunityAssistanceLevel: "independent",
   evaluatedAt: "2026-08-14T16:00:00.000Z",
   evidence: [],
 } as const;
@@ -24,6 +28,9 @@ function evidence(
     issuer: "study",
     learnerScopeRef: baseInput.learnerScopeRef,
     conceptRef: baseInput.conceptRef,
+    sessionRef: baseInput.currentSessionRef,
+    instructionalContextRef: baseInput.currentInstructionalContextRef,
+    opportunityRef: `opportunity:${evidenceRef.split(":").slice(1).join("-")}`,
     outcome: "demonstrated",
     assistanceLevel: "independent",
     recency: "current",
@@ -33,8 +40,11 @@ function evidence(
   };
 }
 
-function evaluate(items: readonly Record<string, unknown>[]): MasteryEvidenceEvaluation {
-  const result = evaluateMasteryEvidence({ ...baseInput, evidence: items });
+function evaluateWithInput(
+  items: readonly Record<string, unknown>[],
+  overrides: Record<string, unknown> = {},
+): MasteryEvidenceEvaluation {
+  const result = evaluateMasteryEvidence({ ...baseInput, ...overrides, evidence: items });
   assert.equal(validateExact(MasteryEvidenceEvaluationSchema, result).status, "accepted");
   assert.equal(result.studyDecisionRequired, true);
   assert.equal(result.studyMutationAllowed, false);
@@ -48,6 +58,10 @@ function evaluate(items: readonly Record<string, unknown>[]): MasteryEvidenceEva
     assert.equal(forbiddenOutputField in result, false);
   }
   return result;
+}
+
+function evaluate(items: readonly Record<string, unknown>[]): MasteryEvidenceEvaluation {
+  return evaluateWithInput(items);
 }
 
 function requireSummary(result: MasteryEvidenceEvaluation) {
@@ -134,6 +148,121 @@ test("mixed assistance does not inflate one independent result to supported", ()
   });
 });
 
+test("canonical assistance order rejects every understated current-opportunity claim", () => {
+  const assistanceLevels = [
+    "independent",
+    "light-hint",
+    "guided",
+    "reteach-required",
+  ] as const;
+
+  for (const [actualIndex, actual] of assistanceLevels.entries()) {
+    for (const [claimedIndex, claimed] of assistanceLevels.entries()) {
+      const result = evaluateWithInput(
+        [
+          evidence(`study-evidence:order-${actual}-${claimed}`, {
+            opportunityRef: baseInput.currentOpportunityRef,
+            assistanceLevel: claimed,
+          }),
+        ],
+        { currentOpportunityAssistanceLevel: actual },
+      );
+      if (claimedIndex < actualIndex) {
+        assert.equal(result.evaluationStatus, "rejected", `${claimed} < ${actual}`);
+        assert.deepEqual(result.reasonCodes, ["assistance-binding-conflict"]);
+      } else {
+        assert.equal(result.evaluationStatus, "summarized", `${claimed} >= ${actual}`);
+      }
+    }
+  }
+});
+
+test("W2-10 concept-cue assistance cannot be reported as independent", () => {
+  const result = evaluateWithInput(
+    [
+      evidence("study-evidence:w2-10-attack", {
+        opportunityRef: baseInput.currentOpportunityRef,
+        assistanceLevel: "independent",
+      }),
+    ],
+    {
+      // The hint ladder canonically classifies concept-cue as light-hint.
+      currentOpportunityAssistanceLevel: "light-hint",
+    },
+  );
+  assert.equal(result.evaluationStatus, "rejected");
+  assert.equal(result.recommendation, "insufficient-evidence");
+  assert.deepEqual(result.reasonCodes, ["assistance-binding-conflict"]);
+  assert.equal("independentDemonstratedCount" in result, false);
+});
+
+test("current guided opportunity reported as independent rejects", () => {
+  const result = evaluateWithInput(
+    [
+      evidence("study-evidence:guided-as-independent", {
+        opportunityRef: baseInput.currentOpportunityRef,
+        assistanceLevel: "independent",
+      }),
+    ],
+    { currentOpportunityAssistanceLevel: "guided" },
+  );
+  assert.equal(result.evaluationStatus, "rejected");
+  assert.deepEqual(result.reasonCodes, ["assistance-binding-conflict"]);
+  assert.equal("sampleCount" in result, false);
+});
+
+test("current guided opportunity reported as guided remains accepted and bounded", () => {
+  const result = requireSummary(
+    evaluateWithInput(
+      [
+        evidence("study-evidence:current-guided", {
+          opportunityRef: baseInput.currentOpportunityRef,
+          assistanceLevel: "guided",
+        }),
+      ],
+      { currentOpportunityAssistanceLevel: "guided" },
+    ),
+  );
+  assert.equal(result.recommendation, "emerging-evidence");
+  assert.equal(result.independentDemonstratedCount, 0);
+  assert.equal(result.assistanceProfile.guided, 1);
+  assert.deepEqual(result.reasonCodes, ["guided-evidence-only"]);
+});
+
+test("strong historical independent evidence survives a current guided opportunity", () => {
+  const result = requireSummary(
+    evaluateWithInput(
+      [
+        evidence("study-evidence:historical-independent-a", {
+          sessionRef: "session:historical-a",
+          instructionalContextRef: "instructional-context:historical-fractions-a",
+          opportunityRef: "opportunity:historical-a",
+        }),
+        evidence("study-evidence:historical-independent-b", {
+          sessionRef: "session:historical-b",
+          instructionalContextRef: "instructional-context:historical-fractions-b",
+          opportunityRef: "opportunity:historical-b",
+          spacing: "spaced",
+          observedAt: "2026-08-12T15:00:00.000Z",
+        }),
+        evidence("study-evidence:current-guided", {
+          opportunityRef: baseInput.currentOpportunityRef,
+          assistanceLevel: "guided",
+        }),
+      ],
+      { currentOpportunityAssistanceLevel: "guided" },
+    ),
+  );
+  assert.equal(result.recommendation, "supported-evidence");
+  assert.equal(result.sampleCount, 3);
+  assert.equal(result.independentDemonstratedCount, 2);
+  assert.equal(result.assistanceProfile.guided, 1);
+  assert.deepEqual(result.reasonCodes, [
+    "repeated-independent-evidence",
+    "spaced-evidence",
+  ]);
+});
+
 test("contradictory demonstrated and not-demonstrated outcomes conflict", () => {
   const result = requireSummary(
     evaluate([
@@ -184,6 +313,21 @@ test("exact duplicate replay is counted once and cannot create support", () => {
   assert.ok(result.reasonCodes.includes("replay-deduplicated"));
 });
 
+test("distinct evidence references for one opportunity fail closed", () => {
+  const result = evaluate([
+    evidence("study-evidence:opportunity-copy-a", {
+      opportunityRef: "opportunity:shared-attempt",
+    }),
+    evidence("study-evidence:opportunity-copy-b", {
+      opportunityRef: "opportunity:shared-attempt",
+      spacing: "spaced",
+    }),
+  ]);
+  assert.equal(result.evaluationStatus, "rejected");
+  assert.deepEqual(result.reasonCodes, ["duplicate-opportunity-evidence"]);
+  assert.equal("sampleCount" in result, false);
+});
+
 test("conflicting versions of one replay reference force conflicting evidence", () => {
   const result = requireSummary(
     evaluate([
@@ -199,7 +343,10 @@ test("conflicting versions of one replay reference force conflicting evidence", 
 
 test("cross-concept evidence rejects the whole batch without scoped counts", () => {
   const result = evaluate([
-    evidence("study-evidence:foreign-concept", { conceptRef: "concept:decimal-place-value" }),
+    evidence("study-evidence:foreign-concept", {
+      conceptRef: "concept:decimal-place-value",
+      opportunityRef: baseInput.currentOpportunityRef,
+    }),
   ]);
   assert.equal(result.evaluationStatus, "rejected");
   assert.deepEqual(result.reasonCodes, ["cross-concept-evidence"]);
@@ -210,10 +357,35 @@ test("cross-learner evidence rejects the whole batch without scoped counts", () 
   const result = evaluate([
     evidence("study-evidence:foreign-learner", {
       learnerScopeRef: "learner-scope:learner-b",
+      opportunityRef: baseInput.currentOpportunityRef,
     }),
   ]);
   assert.equal(result.evaluationStatus, "rejected");
   assert.deepEqual(result.reasonCodes, ["cross-learner-evidence"]);
+  assert.equal("sampleCount" in result, false);
+});
+
+test("current-opportunity evidence from another session rejects the whole batch", () => {
+  const result = evaluate([
+    evidence("study-evidence:foreign-session", {
+      sessionRef: "session:other",
+      opportunityRef: baseInput.currentOpportunityRef,
+    }),
+  ]);
+  assert.equal(result.evaluationStatus, "rejected");
+  assert.deepEqual(result.reasonCodes, ["current-opportunity-session-conflict"]);
+  assert.equal("sampleCount" in result, false);
+});
+
+test("current-opportunity evidence from another instructional context rejects", () => {
+  const result = evaluate([
+    evidence("study-evidence:foreign-context", {
+      instructionalContextRef: "instructional-context:other",
+      opportunityRef: baseInput.currentOpportunityRef,
+    }),
+  ]);
+  assert.equal(result.evaluationStatus, "rejected");
+  assert.deepEqual(result.reasonCodes, ["current-opportunity-context-conflict"]);
   assert.equal("sampleCount" in result, false);
 });
 
@@ -223,6 +395,31 @@ test("future-dated evidence rejects the whole batch", () => {
   ]);
   assert.equal(result.evaluationStatus, "rejected");
   assert.deepEqual(result.reasonCodes, ["future-evidence"]);
+});
+
+test("current Study binding fields are runtime-required", () => {
+  for (const field of [
+    "currentSessionRef",
+    "currentInstructionalContextRef",
+    "currentOpportunityRef",
+    "currentOpportunityAssistanceLevel",
+  ]) {
+    const input = structuredClone(baseInput) as unknown as Record<string, unknown>;
+    delete input[field];
+    const result = evaluateMasteryEvidence(input);
+    assert.equal(result.evaluationStatus, "rejected", field);
+    assert.deepEqual(result.reasonCodes, ["invalid-study-evidence"]);
+  }
+});
+
+test("every evidence item requires Study opportunity provenance", () => {
+  for (const field of ["sessionRef", "instructionalContextRef", "opportunityRef"]) {
+    const item = evidence(`study-evidence:missing-${field}`);
+    delete item[field];
+    const result = evaluate([item]);
+    assert.equal(result.evaluationStatus, "rejected", field);
+    assert.deepEqual(result.reasonCodes, ["invalid-study-evidence"]);
+  }
 });
 
 test("attempted authoritative mastery fields reject the input", () => {

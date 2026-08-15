@@ -15,6 +15,15 @@ const AUTHORITY_BOUNDARY = {
   authoritative: false,
 } as const;
 
+const ASSISTANCE_ORDER: Readonly<
+  Record<StudyMasteryEvidenceItem["assistanceLevel"], number>
+> = {
+  independent: 0,
+  "light-hint": 1,
+  guided: 2,
+  "reteach-required": 3,
+};
+
 function rejected(reasonCodes: readonly string[]): MasteryEvidenceEvaluation {
   return {
     envelope: "tutor-mastery-evidence-summary",
@@ -30,6 +39,9 @@ function signature(evidence: StudyMasteryEvidenceItem): string {
     evidence.issuer,
     evidence.learnerScopeRef,
     evidence.conceptRef,
+    evidence.sessionRef,
+    evidence.instructionalContextRef,
+    evidence.opportunityRef,
     evidence.outcome,
     evidence.assistanceLevel,
     evidence.recency,
@@ -189,8 +201,10 @@ function reasonCodes(
   return reasons;
 }
 
-function summarize(input: StudyMasteryEvidenceInput): MasteryEvidenceSummary {
-  const replay = resolveReplays(input);
+function summarize(
+  input: StudyMasteryEvidenceInput,
+  replay: ReplayResolution,
+): MasteryEvidenceSummary {
   const evidence = replay.evidence;
   const demonstrated = evidence.filter((item) => item.outcome === "demonstrated");
   const notDemonstratedCount = evidence.filter(
@@ -256,13 +270,42 @@ export function evaluateMasteryEvidence(input: unknown): MasteryEvidenceEvaluati
   const validation = validateExact(StudyMasteryEvidenceInputSchema, input);
   if (validation.status === "rejected") return rejected(["invalid-study-evidence"]);
 
-  const value = validation.value;
+  // The exact runtime schema requires the W2-B3 binding fields even though its
+  // temporary static composition projection remains optional until W2-09R2.
+  const value = validation.value as StudyMasteryEvidenceInput;
   const reasonCodes: string[] = [];
   if (value.evidence.some((item) => item.learnerScopeRef !== value.learnerScopeRef)) {
     reasonCodes.push("cross-learner-evidence");
   }
   if (value.evidence.some((item) => item.conceptRef !== value.conceptRef)) {
     reasonCodes.push("cross-concept-evidence");
+  }
+  const currentOpportunityEvidence = value.evidence.filter(
+    (item) => item.opportunityRef === value.currentOpportunityRef,
+  );
+  if (
+    currentOpportunityEvidence.some(
+      (item) => item.sessionRef !== value.currentSessionRef,
+    )
+  ) {
+    reasonCodes.push("current-opportunity-session-conflict");
+  }
+  if (
+    currentOpportunityEvidence.some(
+      (item) =>
+        item.instructionalContextRef !== value.currentInstructionalContextRef,
+    )
+  ) {
+    reasonCodes.push("current-opportunity-context-conflict");
+  }
+  if (
+    currentOpportunityEvidence.some(
+      (item) =>
+        ASSISTANCE_ORDER[item.assistanceLevel] <
+        ASSISTANCE_ORDER[value.currentOpportunityAssistanceLevel],
+    )
+  ) {
+    reasonCodes.push("assistance-binding-conflict");
   }
   const evaluatedAt = Date.parse(value.evaluatedAt);
   if (
@@ -275,5 +318,17 @@ export function evaluateMasteryEvidence(input: unknown): MasteryEvidenceEvaluati
   }
   if (reasonCodes.length > 0) return rejected(reasonCodes);
 
-  return summarize(value);
+  const replay = resolveReplays(value);
+  const seenOpportunityRefs = new Set<string>();
+  if (
+    replay.evidence.some((item) => {
+      if (seenOpportunityRefs.has(item.opportunityRef)) return true;
+      seenOpportunityRefs.add(item.opportunityRef);
+      return false;
+    })
+  ) {
+    return rejected(["duplicate-opportunity-evidence"]);
+  }
+
+  return summarize(value, replay);
 }

@@ -1,4 +1,4 @@
-import { Type, type Static } from "../../schema/typebox.js";
+import { Type, type Static, type TSchema } from "../../schema/typebox.js";
 import {
   AssistanceLevelSchema,
   ISODateTimeSchema,
@@ -23,12 +23,15 @@ export const StudyOutcomeCodeSchema = Type.Union([
 ]);
 export type StudyOutcomeCode = Static<typeof StudyOutcomeCodeSchema>;
 
-export const StudyMasteryEvidenceItemSchema = Type.Object(
+const StudyMasteryEvidenceItemRuntimeSchema = Type.Object(
   {
     evidenceRef: OpaqueReferenceSchema,
     issuer: Type.Literal("study"),
     learnerScopeRef: OpaqueReferenceSchema,
     conceptRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    instructionalContextRef: OpaqueReferenceSchema,
+    opportunityRef: OpaqueReferenceSchema,
     outcome: StudyOutcomeCodeSchema,
     assistanceLevel: AssistanceLevelSchema,
     recency: Type.Union([Type.Literal("current"), Type.Literal("stale")]),
@@ -37,19 +40,78 @@ export const StudyMasteryEvidenceItemSchema = Type.Object(
   },
   { additionalProperties: false, $id: "TutorV2StudyMasteryEvidenceItem" },
 );
-export type StudyMasteryEvidenceItem = Static<typeof StudyMasteryEvidenceItemSchema>;
+export type StudyMasteryEvidenceItem = Static<
+  typeof StudyMasteryEvidenceItemRuntimeSchema
+>;
 
-export const StudyMasteryEvidenceInputSchema = Type.Object(
+type CompositionCompatibleStudyMasteryEvidenceItem = Omit<
+  StudyMasteryEvidenceItem,
+  "sessionRef" | "instructionalContextRef" | "opportunityRef"
+> &
+  Partial<
+    Pick<
+      StudyMasteryEvidenceItem,
+      "sessionRef" | "instructionalContextRef" | "opportunityRef"
+    >
+  >;
+
+/**
+ * Runtime-required provenance with a temporary optional static projection.
+ * W2-09R2 must populate these fields in the adaptive composition before the
+ * compatibility projection can be removed. Exact runtime validation already
+ * rejects every item that omits them.
+ */
+export const StudyMasteryEvidenceItemSchema =
+  StudyMasteryEvidenceItemRuntimeSchema as TSchema<
+    CompositionCompatibleStudyMasteryEvidenceItem
+  >;
+
+const StudyMasteryEvidenceInputRuntimeSchema = Type.Object(
   {
     envelope: Type.Literal("study-issued-mastery-evidence"),
     learnerScopeRef: OpaqueReferenceSchema,
     conceptRef: OpaqueReferenceSchema,
+    currentSessionRef: OpaqueReferenceSchema,
+    currentInstructionalContextRef: OpaqueReferenceSchema,
+    currentOpportunityRef: OpaqueReferenceSchema,
+    currentOpportunityAssistanceLevel: AssistanceLevelSchema,
     evaluatedAt: ISODateTimeSchema,
-    evidence: Type.Array(StudyMasteryEvidenceItemSchema, { maxItems: 100 }),
+    evidence: Type.Array(StudyMasteryEvidenceItemRuntimeSchema, { maxItems: 100 }),
   },
   { additionalProperties: false, $id: "TutorV2StudyMasteryEvidenceInput" },
 );
-export type StudyMasteryEvidenceInput = Static<typeof StudyMasteryEvidenceInputSchema>;
+export type StudyMasteryEvidenceInput = Static<
+  typeof StudyMasteryEvidenceInputRuntimeSchema
+>;
+
+type CompositionCompatibleStudyMasteryEvidenceInput = Omit<
+  StudyMasteryEvidenceInput,
+  | "currentSessionRef"
+  | "currentInstructionalContextRef"
+  | "currentOpportunityRef"
+  | "currentOpportunityAssistanceLevel"
+  | "evidence"
+> &
+  Partial<
+    Pick<
+      StudyMasteryEvidenceInput,
+      | "currentSessionRef"
+      | "currentInstructionalContextRef"
+      | "currentOpportunityRef"
+      | "currentOpportunityAssistanceLevel"
+    >
+  > & {
+    evidence: CompositionCompatibleStudyMasteryEvidenceItem[];
+  };
+
+/**
+ * The runtime schema is deliberately stricter than this temporary static
+ * composition projection. See StudyMasteryEvidenceItemSchema above.
+ */
+export const StudyMasteryEvidenceInputSchema =
+  StudyMasteryEvidenceInputRuntimeSchema as TSchema<
+    CompositionCompatibleStudyMasteryEvidenceInput
+  >;
 
 export const MasteryAssistanceProfileSchema = Type.Object(
   {
@@ -110,7 +172,7 @@ export const RejectedMasteryEvidenceSummarySchema = Type.Composite(
         envelope: Type.Literal("tutor-mastery-evidence-summary"),
         evaluationStatus: Type.Literal("rejected"),
         recommendation: Type.Literal("insufficient-evidence"),
-        reasonCodes: Type.Array(PolicyCodeSchema, { minItems: 1, maxItems: 4 }),
+        reasonCodes: Type.Array(PolicyCodeSchema, { minItems: 1, maxItems: 8 }),
       },
       { additionalProperties: false },
     ),
