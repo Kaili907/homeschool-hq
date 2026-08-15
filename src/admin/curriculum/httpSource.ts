@@ -1,5 +1,7 @@
 import {
+  CURRICULUM_GRADES,
   CurriculumSourceError,
+  isCurriculumGrade,
   type CurriculumAssessmentEvidence,
   type CurriculumBrowserSource,
   type CurriculumCatalog,
@@ -85,8 +87,6 @@ export function createAdminCurriculumHttpSource(
   }
 }
 
-const GRADES = new Set([5, 7, 8])
-
 function record(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
@@ -127,7 +127,7 @@ function adaptSource(value: unknown): CurriculumSourceIdentity | null {
 function adaptCourse(value: unknown): CurriculumCourseSummary | null {
   if (!record(value) || !exact(value,
     ['courseId', 'grade', 'subject', 'title', 'days'], ['description', 'capstone'])
-    || !text(value.courseId, 160) || !GRADES.has(value.grade as number) || !text(value.subject, 160)
+    || !text(value.courseId, 160) || !isCurriculumGrade(value.grade) || !text(value.subject, 160)
     || !text(value.title, 500) || !integer(value.days, 1)
     || (value.description !== undefined && !text(value.description))
     || (value.capstone !== undefined && !text(value.capstone))) return null
@@ -139,7 +139,7 @@ function adaptUnit(value: unknown): CurriculumUnitSummary | null {
     'unitId', 'courseId', 'grade', 'subject', 'unitNumber', 'title', 'days',
     'standards', 'topics', 'lessonIds',
   ], ['essentialQuestion', 'performanceTask', 'assessmentId'])
-    || !text(value.unitId, 160) || !text(value.courseId, 160) || !GRADES.has(value.grade as number)
+    || !text(value.unitId, 160) || !text(value.courseId, 160) || !isCurriculumGrade(value.grade)
     || !text(value.subject, 160) || !integer(value.unitNumber, 1) || !text(value.title, 500)
     || !integer(value.days, 1) || (value.essentialQuestion !== undefined && !text(value.essentialQuestion))
     || (value.performanceTask !== undefined && !text(value.performanceTask))
@@ -156,7 +156,7 @@ function adaptLessonSummary(value: unknown): CurriculumLessonSummary | null {
     'lessonId', 'courseId', 'grade', 'subject', 'courseDay', 'unitNumber', 'unitTitle',
     'dayInUnit', 'title', 'standards',
   ], ['phase', 'focus']) || !text(value.lessonId, 160) || !text(value.courseId, 160)
-    || !GRADES.has(value.grade as number) || !text(value.subject, 160) || !integer(value.courseDay, 1)
+    || !isCurriculumGrade(value.grade) || !text(value.subject, 160) || !integer(value.courseDay, 1)
     || !integer(value.unitNumber, 1) || !text(value.unitTitle, 500) || !integer(value.dayInUnit, 1)
     || !text(value.title, 500) || (value.phase !== undefined && !text(value.phase, 200))
     || (value.focus !== undefined && !text(value.focus))) return null
@@ -175,8 +175,8 @@ function adaptAssessment(value: unknown): CurriculumAssessmentEvidence | null {
 
 function adaptCatalog(value: unknown): CurriculumCatalog | null {
   if (!record(value) || !exact(value, ['source', 'grades', 'courses', 'units', 'lessons', 'assessments'])
-    || !Array.isArray(value.grades) || value.grades.length > GRADES.size
-    || value.grades.some((grade) => !GRADES.has(grade as number)) || new Set(value.grades).size !== value.grades.length
+    || !Array.isArray(value.grades) || value.grades.length > CURRICULUM_GRADES.length
+    || value.grades.some((grade) => !isCurriculumGrade(grade)) || new Set(value.grades).size !== value.grades.length
     || !Array.isArray(value.courses) || value.courses.length > 1_000
     || !Array.isArray(value.units) || value.units.length > 10_000
     || !Array.isArray(value.lessons) || value.lessons.length > 20_000
@@ -191,9 +191,28 @@ function adaptCatalog(value: unknown): CurriculumCatalog | null {
     || new Set(units.map((item) => item?.unitId)).size !== units.length
     || new Set(lessons.map((item) => item?.lessonId)).size !== lessons.length
     || new Set(assessments.map((item) => item?.assessmentId)).size !== assessments.length) return null
+  const declaredGrades = new Set(value.grades)
+  const coursesById = new Map(courses.map((course) => [course!.courseId, course!]))
+  const unitsByCourseAndNumber = new Map<string, CurriculumUnitSummary>()
+  for (const course of courses) {
+    if (!declaredGrades.has(course!.grade)) return null
+  }
+  for (const unit of units) {
+    const course = coursesById.get(unit!.courseId)
+    const key = `${unit!.courseId}:${unit!.unitNumber}`
+    if (!course || course.grade !== unit!.grade || course.subject !== unit!.subject
+      || unitsByCourseAndNumber.has(key)) return null
+    unitsByCourseAndNumber.set(key, unit!)
+  }
+  for (const lesson of lessons) {
+    const course = coursesById.get(lesson!.courseId)
+    const unit = unitsByCourseAndNumber.get(`${lesson!.courseId}:${lesson!.unitNumber}`)
+    if (!course || !unit || course.grade !== lesson!.grade || course.subject !== lesson!.subject
+      || !unit.lessonIds.includes(lesson!.lessonId)) return null
+  }
   return Object.freeze({
     source,
-    grades: Object.freeze([...value.grades]),
+    grades: Object.freeze(CURRICULUM_GRADES.filter((grade) => declaredGrades.has(grade))),
     courses: Object.freeze(courses), units: Object.freeze(units),
     lessons: Object.freeze(lessons), assessments: Object.freeze(assessments),
   }) as unknown as CurriculumCatalog
