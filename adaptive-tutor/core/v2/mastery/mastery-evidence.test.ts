@@ -276,6 +276,58 @@ test("contradictory demonstrated and not-demonstrated outcomes conflict", () => 
   assert.ok(result.reasonCodes.includes("contradiction-detected"));
 });
 
+test("stale failure cannot override sufficient current independent evidence", () => {
+  const result = requireSummary(
+    evaluate([
+      evidence("study-evidence:current-success-one"),
+      evidence("study-evidence:current-success-two", {
+        sessionRef: "session:prior-current",
+        instructionalContextRef: "instructional-context:prior-current",
+        spacing: "spaced",
+        observedAt: "2026-08-12T15:00:00.000Z",
+      }),
+      evidence("study-evidence:stale-failure", {
+        sessionRef: "session:historical-stale",
+        instructionalContextRef: "instructional-context:historical-stale",
+        outcome: "not-demonstrated",
+        recency: "stale",
+        spacing: "spaced",
+        observedAt: "2026-08-01T15:00:00.000Z",
+      }),
+    ]),
+  );
+  assert.equal(result.recommendation, "supported-evidence");
+  assert.equal(result.demonstratedCount, 2);
+  assert.equal(result.notDemonstratedCount, 1);
+  assert.equal(result.currentEvidenceCount, 2);
+  assert.equal(result.staleEvidenceCount, 1);
+  assert.deepEqual(result.reasonCodes, [
+    "stale-contradiction-observed",
+    "repeated-independent-evidence",
+    "spaced-evidence",
+  ]);
+});
+
+test("stale success cannot mask a current failure-only recommendation", () => {
+  const result = requireSummary(
+    evaluate([
+      evidence("study-evidence:stale-success", {
+        sessionRef: "session:historical-stale",
+        instructionalContextRef: "instructional-context:historical-stale",
+        recency: "stale",
+      }),
+      evidence("study-evidence:current-failure", {
+        outcome: "not-demonstrated",
+      }),
+    ]),
+  );
+  assert.equal(result.recommendation, "insufficient-evidence");
+  assert.deepEqual(result.reasonCodes, [
+    "stale-contradiction-observed",
+    "failure-evidence-only",
+  ]);
+});
+
 test("stale evidence alone is insufficient even when independently demonstrated", () => {
   const result = requireSummary(
     evaluate([
@@ -387,6 +439,43 @@ test("current-opportunity evidence from another instructional context rejects", 
   assert.equal(result.evaluationStatus, "rejected");
   assert.deepEqual(result.reasonCodes, ["current-opportunity-context-conflict"]);
   assert.equal("sampleCount" in result, false);
+});
+
+test("current evidence in the current session requires the current context", () => {
+  const result = evaluate([
+    evidence("study-evidence:same-session-foreign-context", {
+      instructionalContextRef: "instructional-context:other",
+    }),
+  ]);
+  assert.equal(result.evaluationStatus, "rejected");
+  assert.deepEqual(result.reasonCodes, ["current-session-context-conflict"]);
+  assert.equal("sampleCount" in result, false);
+});
+
+test("current evidence from a prior session may retain its historical context", () => {
+  const result = requireSummary(
+    evaluate([
+      evidence("study-evidence:prior-session-context", {
+        sessionRef: "session:prior",
+        instructionalContextRef: "instructional-context:prior",
+      }),
+    ]),
+  );
+  assert.equal(result.recommendation, "emerging-evidence");
+  assert.deepEqual(result.reasonCodes, ["single-independent-sample"]);
+});
+
+test("stale same-session evidence may retain an older context", () => {
+  const result = requireSummary(
+    evaluate([
+      evidence("study-evidence:same-session-stale-context", {
+        instructionalContextRef: "instructional-context:older",
+        recency: "stale",
+      }),
+    ]),
+  );
+  assert.equal(result.recommendation, "insufficient-evidence");
+  assert.deepEqual(result.reasonCodes, ["stale-evidence-only"]);
 });
 
 test("future-dated evidence rejects the whole batch", () => {
