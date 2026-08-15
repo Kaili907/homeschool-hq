@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import {
+  CURRICULUM_GRADES,
   CURRICULUM_READ_CAPABILITY,
   type CurriculumBrowserSource,
   type CurriculumCatalog,
@@ -9,7 +10,7 @@ import {
   type CurriculumReadAuthorization,
   type CurriculumSearchFilters,
 } from './contracts'
-import { buildStandardsCoverage, searchCurriculum } from './readModel'
+import { buildStandardsCoverage, deriveCurriculumCatalogTotals, searchCurriculum } from './readModel'
 
 export interface CurriculumBrowserLocation {
   readonly mode: 'hierarchy' | 'standards'
@@ -151,9 +152,10 @@ export function CurriculumBrowserView({
     ? catalog.units.find((unit) => unit.courseId === selectedCourse.courseId && unit.unitNumber === location.unitNumber)
     : undefined
   const hasSearch = Boolean(
-    filters.keyword?.trim() || filters.standard?.trim() || filters.grade
+    filters.keyword?.trim() || filters.standard?.trim() || filters.grade !== undefined
     || filters.courseId || filters.unitNumber,
   )
+  const totals = useMemo(() => deriveCurriculumCatalogTotals(catalog), [catalog])
   const searchResult = useMemo(
     () => searchCurriculum(catalog, filters),
     [catalog, filters],
@@ -200,6 +202,13 @@ export function CurriculumBrowserView({
               Standards review
             </a>
           </nav>
+          <dl aria-label="Loaded curriculum totals" className="mt-4 grid grid-cols-2 gap-2 text-sm sm:grid-cols-5">
+            <CatalogTotal label="Grades" value={totals.grades} />
+            <CatalogTotal label="Courses" value={totals.courses} />
+            <CatalogTotal label="Units" value={totals.units} />
+            <CatalogTotal label="Lessons" value={totals.lessons} />
+            <CatalogTotal label="Assessments" value={totals.assessments} />
+          </dl>
         </header>
 
         <SearchPanel catalog={catalog} filters={filters} onChange={onFiltersChange} />
@@ -243,19 +252,36 @@ const navButton = (active: boolean) => `min-h-11 rounded-lg border px-4 py-2 tex
   ? 'border-cyan-500 bg-cyan-950 text-cyan-200'
   : 'border-slate-600 bg-slate-950 text-slate-200 hover:border-slate-400'}`
 
+function CatalogTotal({ label, value }: { label: string; value: number }) {
+  return <div className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2"><dt className="text-xs text-slate-400">{label}</dt><dd className="font-bold text-slate-100">{value.toLocaleString('en-US')}</dd></div>
+}
+
 function SearchPanel({ catalog, filters, onChange }: {
   catalog: CurriculumCatalog
   filters: CurriculumSearchFilters
   onChange: (filters: CurriculumSearchFilters) => void
 }) {
-  const courses = filters.grade
+  const courses = filters.grade !== undefined
     ? catalog.courses.filter((course) => course.grade === filters.grade)
     : catalog.courses
   const units = catalog.units.filter((unit) => {
-    if (filters.grade && unit.grade !== filters.grade) return false
+    if (filters.grade !== undefined && unit.grade !== filters.grade) return false
     if (filters.courseId && unit.courseId !== filters.courseId) return false
     return true
   })
+  const unitOptions = filters.courseId
+    ? units.map((unit) => ({
+        key: unit.unitId,
+        value: unit.unitNumber,
+        label: `Unit ${unit.unitNumber}: ${unit.title}`,
+      }))
+    : [...new Set(units.map((unit) => unit.unitNumber))]
+        .sort((a, b) => a - b)
+        .map((unitNumber) => ({
+          key: `all-${unitNumber}`,
+          value: unitNumber,
+          label: `Unit ${unitNumber} · all matching courses`,
+        }))
   return (
     <section aria-labelledby="curriculum-search-heading" className="mt-5 rounded-2xl border border-slate-700 bg-slate-900 p-4">
       <h2 id="curriculum-search-heading" className="font-bold">Search and filter</h2>
@@ -291,7 +317,7 @@ function SearchPanel({ catalog, filters, onChange }: {
             className="mt-1 min-h-11 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 text-slate-100"
           >
             <option value="">All grades</option>
-            {catalog.grades.map((grade) => <option key={grade} value={grade}>Grade {grade}</option>)}
+            {CURRICULUM_GRADES.map((grade) => <option key={grade} value={grade}>Grade {grade}</option>)}
           </select>
         </label>
         <label className="text-sm font-semibold text-slate-300">
@@ -306,7 +332,7 @@ function SearchPanel({ catalog, filters, onChange }: {
             className="mt-1 min-h-11 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 text-slate-100"
           >
             <option value="">All courses</option>
-            {courses.map((course) => <option key={course.courseId} value={course.courseId}>{course.title}</option>)}
+            {courses.map((course) => <option key={course.courseId} value={course.courseId}>{filters.grade === undefined ? `Grade ${course.grade} · ` : ''}{course.title}</option>)}
           </select>
         </label>
         <label className="text-sm font-semibold text-slate-300">
@@ -320,9 +346,9 @@ function SearchPanel({ catalog, filters, onChange }: {
             className="mt-1 min-h-11 w-full rounded-lg border border-slate-600 bg-slate-950 px-3 text-slate-100"
           >
             <option value="">All units</option>
-            {units.map((unit) => (
-              <option key={unit.unitId} value={unit.unitNumber}>
-                {filters.courseId ? `Unit ${unit.unitNumber}: ${unit.title}` : `${unit.courseId} · Unit ${unit.unitNumber}`}
+            {unitOptions.map((unit) => (
+              <option key={unit.key} value={unit.value}>
+                {unit.label}
               </option>
             ))}
           </select>
@@ -373,11 +399,13 @@ function Breadcrumbs({ catalog, location, onChange }: {
 }
 
 function GradePicker({ catalog, onChange }: { catalog: CurriculumCatalog; onChange: (location: CurriculumBrowserLocation) => void }) {
+  const hasPublishedRecords = catalog.courses.length > 0 || catalog.units.length > 0 || catalog.lessons.length > 0
   return (
     <section aria-labelledby="curriculum-grades">
       <h2 id="curriculum-grades" className="text-xl font-bold">Choose a grade</h2>
+      {!hasPublishedRecords && <EmptyState>No published curriculum records are available in this source.</EmptyState>}
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        {catalog.grades.map((grade) => {
+        {CURRICULUM_GRADES.map((grade) => {
           const courses = catalog.courses.filter((course) => course.grade === grade)
           const lessons = catalog.lessons.filter((lesson) => lesson.grade === grade)
           return <button key={grade} type="button" onClick={() => onChange({ mode: 'hierarchy', grade })} className="min-h-24 rounded-xl border border-slate-600 bg-slate-950 p-4 text-left hover:border-cyan-500"><span className="block text-xl font-bold">Grade {grade}</span><span className="mt-1 block text-sm text-slate-400">{courses.length} courses · {lessons.length} lessons</span></button>
@@ -392,7 +420,7 @@ function GradeView({ catalog, grade, onChange }: { catalog: CurriculumCatalog; g
   return (
     <section aria-labelledby="curriculum-grade-heading">
       <h2 id="curriculum-grade-heading" className="text-xl font-bold">Grade {grade} courses</h2>
-      {courses.length === 0 ? <Unavailable /> : <div className="mt-4 grid gap-3 md:grid-cols-2">{courses.map((course) => (
+      {courses.length === 0 ? <EmptyState>No published courses are available for Grade {grade}.</EmptyState> : <div className="mt-4 grid gap-3 md:grid-cols-2">{courses.map((course) => (
         <button key={course.courseId} type="button" onClick={() => onChange({ mode: 'hierarchy', grade, courseId: course.courseId })} className="min-h-24 rounded-xl border border-slate-600 bg-slate-950 p-4 text-left hover:border-cyan-500"><span className="block font-bold">{course.title}</span><span className="mt-1 block text-sm text-slate-400">{course.days} instructional days · {catalog.units.filter((unit) => unit.courseId === course.courseId).length} units</span>{course.description && <span className="mt-2 block text-sm text-slate-300">{course.description}</span>}</button>
       ))}</div>}
     </section>
@@ -407,9 +435,12 @@ function CourseView({ catalog, courseId, onChange }: { catalog: CurriculumCatalo
       <h2 id="curriculum-course-heading" className="text-xl font-bold">{course.title}</h2>
       <p className="mt-2 text-slate-300">{course.description ?? 'Course description unavailable.'}</p>
       <p className="mt-2 text-sm text-slate-400">Capstone: {course.capstone ?? 'Unavailable'}</p>
-      {units.length === 0 ? <Unavailable /> : <ol className="mt-4 grid gap-3 md:grid-cols-2">{units.map((unit) => (
-        <li key={unit.unitId}><button type="button" onClick={() => onChange({ mode: 'hierarchy', grade: course.grade, courseId, unitNumber: unit.unitNumber })} className="min-h-24 w-full rounded-xl border border-slate-600 bg-slate-950 p-4 text-left hover:border-cyan-500"><span className="block font-bold">Unit {unit.unitNumber}: {unit.title}</span><span className="mt-1 block text-sm text-slate-400">{unit.days} days · {unit.lessonIds.length} lessons · {unit.assessmentId ? 'assessment linked' : 'assessment unavailable'}</span></button></li>
-      ))}</ol>}
+      {units.length === 0 ? <EmptyState>No published units are available for this course.</EmptyState> : <ol className="mt-4 grid gap-3 md:grid-cols-2">{units.map((unit) => {
+        const lessonCount = catalog.lessons.filter((lesson) => lesson.courseId === courseId && lesson.unitNumber === unit.unitNumber).length
+        return (
+        <li key={unit.unitId}><button type="button" onClick={() => onChange({ mode: 'hierarchy', grade: course.grade, courseId, unitNumber: unit.unitNumber })} className="min-h-24 w-full rounded-xl border border-slate-600 bg-slate-950 p-4 text-left hover:border-cyan-500"><span className="block font-bold">Unit {unit.unitNumber}: {unit.title}</span><span className="mt-1 block text-sm text-slate-400">{unit.days} days · {lessonCount} lessons · {unit.assessmentId ? 'assessment linked' : 'assessment unavailable'}</span></button></li>
+        )
+      })}</ol>}
     </section>
   )
 }
@@ -422,13 +453,13 @@ function UnitView({ catalog, unit, onOpenLesson }: { catalog: CurriculumCatalog;
       <p className="mt-2 text-slate-300">{unit.essentialQuestion ?? 'Essential question unavailable.'}</p>
       <p className="mt-2 text-sm text-slate-400">Standards: {unit.standards.join(', ') || 'Unavailable'}</p>
       <p className="mt-2 text-sm text-slate-400">Performance task: {unit.performanceTask ?? 'Unavailable'}</p>
-      {lessons.length === 0 ? <Unavailable /> : <LessonButtons lessons={lessons} onOpenLesson={onOpenLesson} />}
+      {lessons.length === 0 ? <EmptyState>No published lessons are available for this unit.</EmptyState> : <LessonButtons lessons={lessons} onOpenLesson={onOpenLesson} />}
     </section>
   )
 }
 
 function LessonButtons({ lessons, onOpenLesson }: { lessons: readonly CurriculumLessonSummary[]; onOpenLesson: (lesson: CurriculumLessonSummary) => void }) {
-  return <ol className="mt-4 space-y-2">{lessons.map((lesson) => <li key={lesson.lessonId}><button type="button" onClick={() => onOpenLesson(lesson)} className="min-h-16 w-full rounded-xl border border-slate-600 bg-slate-950 p-3 text-left hover:border-cyan-500"><span className="block font-bold">Day {lesson.dayInUnit}: {lesson.title}</span><span className="mt-1 block text-xs text-slate-400">{lesson.lessonId} · {lesson.standards.join(', ')}</span></button></li>)}</ol>
+  return <ol className="mt-4 space-y-2">{lessons.map((lesson) => <li key={lesson.lessonId}><button type="button" onClick={() => onOpenLesson(lesson)} className="min-h-16 w-full rounded-xl border border-slate-600 bg-slate-950 p-3 text-left hover:border-cyan-500"><span className="block font-bold">Day {lesson.dayInUnit}: {lesson.title}</span><span className="mt-1 block text-xs text-slate-400">{lesson.lessonId} · {lesson.standards.join(', ') || 'Standards unavailable'}</span></button></li>)}</ol>
 }
 
 function LessonView({ detail, error }: { detail: CurriculumLessonDetail | null; error: string | null }) {
@@ -485,4 +516,8 @@ function TextOrUnavailable({ value }: { value?: string }) {
 
 function Unavailable() {
   return <p className="text-slate-400">Unavailable in this published curriculum source.</p>
+}
+
+function EmptyState({ children }: { children: ReactNode }) {
+  return <p role="status" className="mt-4 rounded-lg border border-slate-700 bg-slate-950 p-4 text-slate-300">{children}</p>
 }

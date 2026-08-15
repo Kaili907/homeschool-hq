@@ -3,8 +3,10 @@ import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
 import {
   CurriculumSourceError,
+  isCurriculumGrade,
   type CurriculumBrowserSource,
   type CurriculumCatalog,
+  type CurriculumGrade,
   type CurriculumLessonDetail,
 } from './contracts'
 import { buildCurriculumCatalog, parseCurriculumLesson } from './readModel'
@@ -56,7 +58,7 @@ export function createFilesystemCurriculumSource(
       await Promise.all(courseRows.map(async (value) => {
         if (!value || typeof value !== 'object') throw new CurriculumSourceError('malformed', 'course index row must be an object')
         const row = value as Record<string, unknown>
-        if (typeof row.course_id !== 'string' || typeof row.grade !== 'number' || typeof row.subject !== 'string') {
+        if (typeof row.course_id !== 'string' || !isCurriculumGrade(row.grade) || typeof row.subject !== 'string') {
           throw new CurriculumSourceError('malformed', 'course index row has invalid identifiers')
         }
         assessmentJsonByCourse[row.course_id] = await readText(
@@ -81,7 +83,7 @@ export function createFilesystemCurriculumSource(
 
   const loadLessonLines = (
     courseId: string,
-    grade: number,
+    grade: CurriculumGrade,
     subject: string,
   ): Promise<Map<string, string>> => {
     const cached = courseLessons.get(courseId)

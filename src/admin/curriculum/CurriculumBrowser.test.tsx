@@ -11,6 +11,7 @@ import {
 import {
   buildCurriculumCatalog,
   buildStandardsCoverage,
+  deriveCurriculumCatalogTotals,
   parseCurriculumLesson,
   searchCurriculum,
 } from './readModel'
@@ -54,7 +55,7 @@ function renderView(
 }
 
 describe('ADMIN-11 canonical read model', () => {
-  it('loads the published manifest and exact release counts', () => {
+  it('loads the published manifest and derives release totals from loaded records', () => {
     expect(catalog.source).toMatchObject({
       packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
       version: '1.0.0',
@@ -62,9 +63,13 @@ describe('ADMIN-11 canonical read model', () => {
       validationStatus: 'passed',
     })
     expect(catalog.grades).toEqual([5, 7, 8])
-    expect(catalog.courses).toHaveLength(30)
-    expect(catalog.units).toHaveLength(232)
-    expect(catalog.lessons).toHaveLength(2736)
+    expect(deriveCurriculumCatalogTotals(catalog)).toEqual({
+      grades: catalog.grades.length,
+      courses: catalog.courses.length,
+      units: catalog.units.length,
+      lessons: catalog.lessons.length,
+      assessments: catalog.assessments.length,
+    })
   })
 
   it('supports grade to course to unit to lesson navigation from canonical indexes', () => {
@@ -106,7 +111,7 @@ describe('ADMIN-11 canonical read model', () => {
     const byUnit = searchCurriculum(catalog, { courseId: 'ma-g5-mathematics', unitNumber: 1 })
     expect(byUnit.lessons).toHaveLength(18)
     expect(byUnit.lessons.every((lesson) => lesson.unitNumber === 1)).toBe(true)
-    expect(searchCurriculum(catalog, {}, 5)).toMatchObject({ limited: true, totalMatches: 2736 })
+    expect(searchCurriculum(catalog, {}, 5)).toMatchObject({ limited: true, totalMatches: catalog.lessons.length })
   })
 
   it('maps standards only to exact lessons and exact unit-assessment evidence', () => {
@@ -182,6 +187,14 @@ describe('ADMIN-11 read-only Admin surface', () => {
     expect(markup).toContain('href="/academy/admin/curriculum/validation"')
     expect(markup).toContain('validation evidence')
     expect(markup).not.toContain('<main')
+  })
+
+  it('offers every canonical grade without inventing records for grades absent from the loaded package', () => {
+    const markup = renderView({ mode: 'hierarchy' })
+    expect(markup).toContain('Grade 3')
+    expect(markup).toContain('Grade 10')
+    expect(markup).toContain('Grade 12')
+    expect(renderView({ mode: 'hierarchy', grade: 3 })).toContain('No published courses are available for Grade 3.')
   })
 
   it('offers retry for a transient curriculum source failure', () => {

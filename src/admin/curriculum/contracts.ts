@@ -1,7 +1,14 @@
 export const CURRICULUM_READ_CAPABILITY = 'curriculum:read' as const
 export const CURRICULUM_SEARCH_LIMIT = 100 as const
+export const CURRICULUM_GRADES = [3, 4, 5, 7, 8, 9, 10, 11, 12] as const
 
-export type CurriculumGrade = 5 | 7 | 8
+export type CurriculumGrade = (typeof CURRICULUM_GRADES)[number]
+
+const CURRICULUM_GRADE_SET: ReadonlySet<number> = new Set(CURRICULUM_GRADES)
+
+export function isCurriculumGrade(value: unknown): value is CurriculumGrade {
+  return typeof value === 'number' && Number.isInteger(value) && CURRICULUM_GRADE_SET.has(value)
+}
 
 export type CurriculumReadAuthorization =
   | { readonly status: 'checking' }
@@ -74,6 +81,14 @@ export interface CurriculumCatalog {
   readonly units: readonly CurriculumUnitSummary[]
   readonly lessons: readonly CurriculumLessonSummary[]
   readonly assessments: readonly CurriculumAssessmentEvidence[]
+}
+
+export interface CurriculumCatalogTotals {
+  readonly grades: number
+  readonly courses: number
+  readonly units: number
+  readonly lessons: number
+  readonly assessments: number
 }
 
 export interface CurriculumLessonFlowSegment {
