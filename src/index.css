@@ -57,3 +57,44 @@ body {
   .wallet-bump { animation: none; }
   .star-glow { animation: none; }
 }
+
+/* Parent factual report: Browser Print -> Save as PDF, with no server. */
+@page {
+  margin: 0.55in;
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #0f172a;
+    font-size: 10pt;
+  }
+
+  .parent-progress-report-document {
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .parent-progress-report-document .report-subject,
+  .parent-progress-report-document .report-fact {
+    break-inside: avoid;
+  }
+
+  .parent-progress-report-document .overflow-x-auto {
+    overflow: visible;
+  }
+
+  .parent-progress-report-document .report-log {
+    font-size: 8.5pt;
+  }
+
+  .parent-progress-report-document thead {
+    display: table-header-group;
+  }
+
+  .parent-progress-report-document tr {
+    break-inside: avoid;
+  }
+}

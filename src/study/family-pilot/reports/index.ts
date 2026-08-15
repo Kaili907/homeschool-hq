@@ -3,6 +3,13 @@ export { reportToPrintableText, reportToCsv } from './exportReport'
 export { FamilyPilotProgressReport } from './FamilyPilotProgressReport'
 export { FamilyFactualProgress, LearnerFactualProgress } from './FamilyFactualProgress'
 export { buildFamilyFactualProgress } from './factualProgress'
+export { ParentProgressReport } from './ParentProgressReport'
+export {
+  buildParentProgressReport,
+  parentProgressReportToJson,
+  parentSchoolLogToCsv,
+  resolveParentReportRange,
+} from './parentReport'
 export type {
   BuildFamilyFactualProgressInput,
   FamilyFactualProgressModel,
@@ -11,6 +18,17 @@ export type {
   FactualSubjectProgress,
   StudyTimeCoverage,
 } from './factualProgress'
+export type {
+  BuildParentProgressReportInput,
+  ParentProgressReportModel,
+  ParentReportAssessmentRecord,
+  ParentReportCompletedLesson,
+  ParentReportRange,
+  ParentReportRangePreset,
+  ParentReportRangeResolution,
+  ParentReportSubjectRecord,
+  ParentSchoolLogDay,
+} from './parentReport'
 export type {
   ReportAttentionKind,
   ReportAttentionItem,

@@ -6,6 +6,7 @@ import {
 } from '../../../curriculum/final-app-data'
 import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
 import { FamilyPilotStudentLogin } from '../auth'
+import type { FamilyAutoPlannerSchoolPlanV1 } from '../auto-planner'
 import { exportFinalFamilyPilotBackup, downloadFinalFamilyPilotBackup, restoreFinalFamilyPilotBackup } from './backup'
 import {
   buildFamilyPilotStudentDashboardModel,
@@ -16,7 +17,7 @@ import { FamilyPilotLessonPlayer } from '../lesson-player'
 import { FamilyPilotParentAssignPanel } from '../parent-assign'
 import { FamilyPreferences } from '../preferences'
 import { FamilyPilotRecoveryScreen } from '../recovery'
-import { buildFamilyFactualProgress, FamilyFactualProgress, LearnerFactualProgress } from '../reports'
+import { buildFamilyFactualProgress, LearnerFactualProgress, ParentProgressReport } from '../reports'
 import { StudentDashboard } from '../student-dashboard'
 import {
   completeSetup,
@@ -111,7 +112,7 @@ export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void })
 function FinalShell({ onExit, children }: { readonly onExit: () => void; readonly children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900" data-family-pilot-release="family-pilot-r1">
-      <header className="border-b border-slate-200 bg-slate-950 text-white">
+      <header className="border-b border-slate-200 bg-slate-950 text-white print:hidden">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-cyan-300">Manuel Academy</p>
@@ -120,7 +121,7 @@ function FinalShell({ onExit, children }: { readonly onExit: () => void; readonl
           <button type="button" className="rounded-lg border border-slate-600 px-3 py-2 font-bold" onClick={onExit}>Exit Family Pilot</button>
         </div>
       </header>
-      <aside className="border-b border-cyan-200 bg-cyan-50" data-testid="family-pilot-device-storage-notice">
+      <aside className="border-b border-cyan-200 bg-cyan-50 print:hidden" data-testid="family-pilot-device-storage-notice">
         <p className="mx-auto max-w-6xl px-4 py-3 text-sm font-semibold text-slate-700">
           This pilot currently saves progress in this browser on this device. Download backups regularly. Cross-device sync is coming next.
         </p>
@@ -244,7 +245,7 @@ function MountedFinalFamilyPilot({
 
   return (
     <FinalShell onExit={onExit}>
-      <div className="border-b border-slate-200 bg-white">
+      <div className="border-b border-slate-200 bg-white print:hidden">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <p className="text-sm font-semibold text-slate-600">
             Admitted release · 90 courses · 8,292 production-bound lessons
@@ -515,8 +516,8 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
   const [selectedRef, setSelectedRef] = useState(students[0]?.studentRef ?? '')
   const selected = students.find((item) => item.studentRef === selectedRef) ?? students[0]
   return (
-    <main className="mx-auto max-w-6xl px-4 py-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+    <main className="mx-auto max-w-6xl px-4 py-6 print:max-w-none print:p-0">
+      <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
         <div>
           <p className="font-bold text-cyan-700">Parent Hub</p>
           <h2 className="text-2xl font-extrabold">Household learning</h2>
@@ -525,7 +526,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
           {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
         </select>
       </div>
-      <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
+      <nav className="mt-5 flex flex-wrap gap-2 print:hidden" aria-label="Parent Hub sections">
         {(['school-plan', 'assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'school-plan' ? 'School Plan' : item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
       </nav>
       {!selected ? <p className="mt-6">No configured students.</p> : view === 'school-plan' ? (
@@ -533,7 +534,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
       ) : view === 'assign' ? (
         <ParentAssignments controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
       ) : view === 'reports' ? (
-        <ParentReports controller={controller} student={selected} refresh={refresh} />
+        <ParentReports controller={controller} autoPlannerHost={autoPlannerHost} student={selected} refresh={refresh} />
       ) : view === 'preferences' ? (
         <PreferencesSurface controller={controller} student={selected} refresh={refresh} onClose={() => setView('assign')} />
       ) : (
@@ -735,24 +736,40 @@ function PreferencesSurface({ controller, student, refresh, onClose }: {
   )
 }
 
-function ParentReports({ controller, student, refresh }: {
+function ParentReports({ controller, autoPlannerHost, student, refresh }: {
   readonly controller: FinalFamilyPilotController
+  readonly autoPlannerHost: FinalFamilyAutoPlannerHost
   readonly student: FamilySetupStudent
   readonly refresh: () => void
 }) {
+  const [schoolPlan, setSchoolPlan] = useState<FamilyAutoPlannerSchoolPlanV1 | null>(null)
+  useEffect(() => {
+    let live = true
+    setSchoolPlan(null)
+    void autoPlannerHost.loadDocument(student.studentRef).then((loaded) => {
+      if (live) setSchoolPlan(loaded.status === 'ready' ? loaded.document.schoolPlan : null)
+    }).catch(() => { if (live) setSchoolPlan(null) })
+    return () => { live = false }
+  }, [autoPlannerHost, student.studentRef])
   const coreStudent = controller.coreSnapshot.state.students.find((item) => item.studentRef === student.studentRef)
   if (!coreStudent) return <p className="mt-6">No report data.</p>
-  const report = buildFamilyFactualProgress({
-    student,
-    coreState: controller.coreSnapshot.state,
-    assessments: controller.assessmentAssignments(student.studentRef),
-    catalog: controller.catalog.runtime,
-    today: new Date().toISOString().slice(0, 10),
-  })
+  const courseRefBySubject = schoolPlan
+    ? Object.fromEntries(schoolPlan.subjects.flatMap((subject) => subject.courseRef ? [[subject.subject, subject.courseRef]] : []))
+    : undefined
   return (
     <div className="mt-6 space-y-5">
-      <FamilyFactualProgress model={report} />
-      <section className="rounded-2xl border bg-white p-5">
+      <ParentProgressReport
+        source={{
+          student,
+          coreState: controller.coreSnapshot.state,
+          assessments: controller.assessmentAssignments(student.studentRef),
+          catalog: controller.catalog.runtime,
+          courseRefBySubject,
+        }}
+        today={new Date().toISOString().slice(0, 10)}
+        schoolYear={schoolPlan ? { startDate: schoolPlan.schoolYearStart, endDate: schoolPlan.schoolYearEnd } : null}
+      />
+      <section className="rounded-2xl border bg-white p-5 print:hidden">
         <h3 className="text-xl font-extrabold">Pending records</h3>
         <p className="mt-3 font-semibold">Pending guardian attestations: {controller.pendingAttestations(student.studentRef).length}</p>
         <p className="font-semibold">Open safety holds: {controller.openSafetyHolds(student.studentRef).length}</p>
