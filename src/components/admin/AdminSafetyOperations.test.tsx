@@ -302,4 +302,74 @@ describe('ADMIN-10 read-only Safety Operations', () => {
     expect(model.events).toHaveLength(SAFETY_OPERATIONS_EVENT_LIMIT)
     expect(model.events.find((event) => event.eventRef === 'safety-event:bounded-0')?.learner?.displayName).toBeUndefined()
   })
+
+  it('preserves curriculum version strings that embed expanded grade tokens (3-12)', () => {
+    const gradeTokenedEvents: SafetyOperationsEventV1[] = [
+      {
+        ...OPEN_STOP,
+        eventRef: 'safety-event:g3-1',
+        learner: { reference: 'learner:grade-3:ada', displayName: 'Ada Grade 3' },
+        versionSnapshot: { appVersion: 'app-1', engineVersion: 'study-1', curriculumVersion: 'family-pilot-grade-3-v1' },
+      },
+      {
+        ...OPEN_STOP,
+        eventRef: 'safety-event:g10-1',
+        learner: { reference: 'learner:grade-10:beth', displayName: 'Beth Grade 10' },
+        versionSnapshot: { appVersion: 'app-1', engineVersion: 'study-1', curriculumVersion: 'family-pilot-grade-10-v2.1' },
+      },
+      {
+        ...OPEN_STOP,
+        eventRef: 'safety-event:g11-1',
+        learner: { reference: 'learner:grade-11:cara' },
+        versionSnapshot: { appVersion: 'app-1', engineVersion: 'study-1', curriculumVersion: 'ready-for-life-g11-v3.0' },
+      },
+      {
+        ...OPEN_STOP,
+        eventRef: 'safety-event:g12-1',
+        learner: { reference: 'learner:grade-12:dana', displayName: 'Dana Grade 12' },
+        versionSnapshot: { appVersion: 'app-1', engineVersion: 'study-1', curriculumVersion: 'finlit-grade-12-capstone.v2' },
+      },
+    ]
+    const model = buildSafetyOperationsModel(snapshot(gradeTokenedEvents))
+    expect(model.events).toHaveLength(4)
+    for (const event of model.events) {
+      expect(event.versionSnapshot?.curriculumVersion).toBeTruthy()
+      expect(event.learner?.reference).toMatch(/grade-(3|10|11|12)/)
+    }
+    const html = render(snapshot(gradeTokenedEvents))
+    expect(html).toContain('family-pilot-grade-3-v1')
+    expect(html).toContain('family-pilot-grade-10-v2.1')
+    expect(html).toContain('ready-for-life-g11-v3.0')
+    expect(html).toContain('finlit-grade-12-capstone.v2')
+    expect(html).toContain('learner:grade-11:cara')
+    expect(html).toContain('Ada Grade 3')
+    expect(html).toContain('Dana Grade 12')
+  })
+
+  it('surfaces the reference when learner displayName is absent, and shows generic label without dropping the reference row', () => {
+    const referenceOnly: SafetyOperationsEventV1 = {
+      ...OPEN_STOP,
+      eventRef: 'safety-event:reference-only',
+      learner: { reference: 'learner:grade-9:reference-only' },
+    }
+    const html = render(snapshot([referenceOnly]))
+    expect(html).toContain('learner:grade-9:reference-only')
+    expect(html).toContain('>Learner<')
+    expect(html.match(/learner:grade-9:reference-only/g)?.length ?? 0).toBeGreaterThanOrEqual(2)
+  })
+
+  it('hides the raw learner reference in the events table when a human displayName exists', () => {
+    const named: SafetyOperationsEventV1 = {
+      ...OPEN_STOP,
+      eventRef: 'safety-event:named-1',
+      learner: { reference: 'learner:grade-8:emma', displayName: 'Emma' },
+    }
+    const html = render(snapshot([named]))
+    const tbody = html.slice(html.indexOf('<tbody'), html.indexOf('</tbody>') + '</tbody>'.length)
+    expect(tbody).toContain('Emma')
+    expect(tbody).not.toContain('learner:grade-8:emma')
+    // Drilldown summary still prefers displayName (never renders the reference alongside),
+    // so the raw learner reference is not visible anywhere in the rendered surface.
+    expect(html).not.toContain('learner:grade-8:emma')
+  })
 })

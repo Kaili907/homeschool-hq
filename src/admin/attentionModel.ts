@@ -1,10 +1,15 @@
 import type { AdminCapability } from './contracts'
 import type { AdminCostsModel } from './costsModel'
 import type { AdminRuntimeConfigurationProjection } from './configurationModel'
-import type { LearnerAnalyticsSnapshot } from './learnerAnalyticsModel'
+import type {
+  LearnerAnalyticsSnapshot,
+  LearnerListItem,
+  WorkingLevelEvidence,
+} from './learnerAnalyticsModel'
 import type { ProductionReadinessProjection } from './productionReadinessModel'
 import {
   safeSafetyReasonMessage,
+  type SafetyEvidenceCategory,
   type SafetyOperationsSnapshotV1,
 } from './safetyOperationsModel'
 import type { SystemHealthProjection } from './systemHealth'
@@ -50,9 +55,20 @@ export interface AdminAttentionSourceAttribution {
 }
 
 export interface AdminAttentionItem {
-  /** Stable bounded type and reference; this is not a persisted record. */
+  /** Stable bounded type and reference; this is not a persisted record.
+   * The reference is INTERNAL: keys, destinations, and dedup only. Presenters
+   * should render {@link title} in the visible card and route through
+   * {@link destination}. Rendering the raw reference where a title exists
+   * exposes an opaque ID that has no human meaning.
+   */
   readonly itemType: AdminAttentionItemType
   readonly reference: string
+  /** Bounded human-readable presentation of what this item is about.
+   * For learner items this is `{name} · Grade {nominal}` with a working-level
+   * suffix when a per-subject level differs from the nominal grade; for other
+   * item types this is a safe generic label (never invented from opaque IDs).
+   */
+  readonly title: string
   readonly domain: AdminAttentionDomain
   readonly severity: AdminAttentionSeverity
   readonly status: AdminAttentionStatus
@@ -179,6 +195,13 @@ const UNAVAILABLE_SEVERITY: Readonly<Record<AdminAttentionDomain, AdminAttention
   costs: 'medium',
 }
 
+const SAFETY_CATEGORY_TITLES: Readonly<Record<SafetyEvidenceCategory, string>> = {
+  'safety-stop': 'Safety stop',
+  'adult-review': 'Adult review',
+  'fail-closed': 'Fail-closed safeguard',
+  'fallback-rejection': 'Fallback or rejection',
+}
+
 function candidate(input: Omit<Candidate, 'sourceAttribution'> & {
   readonly sourceAttribution?: readonly AdminAttentionSourceAttribution[]
 }): Candidate {
@@ -193,6 +216,7 @@ function unavailableCandidate(domain: AdminAttentionDomain): Candidate {
     dedupeKey: `evidence:${domain}`,
     itemType: 'evidence-unavailable',
     reference: domain,
+    title: `${ADMIN_ATTENTION_DOMAIN_LABELS[domain]} evidence`,
     domain,
     severity: UNAVAILABLE_SEVERITY[domain],
     status: 'blocked_unavailable',
@@ -215,6 +239,7 @@ function readinessCandidates(projection: ProductionReadinessProjection): Candida
       dedupeKey: READINESS_DEDUPE_KEYS[check.id] ?? `readiness:${check.id}`,
       itemType: 'production-readiness-gate',
       reference: check.id,
+      title: label,
       domain: 'readiness',
       severity: check.required ? 'critical' : blocking ? 'high' : 'medium',
       status: blocking ? 'blocked_unavailable' : 'warning',
@@ -255,6 +280,7 @@ function healthCandidates(projection: SystemHealthProjection): Candidate[] {
       dedupeKey: evidenceGap ? 'telemetry:operational' : 'health:overall',
       itemType: 'system-health-state',
       reference: 'overall',
+      title: 'Overall system health',
       domain: 'health',
       severity: unavailable ? 'critical' : degraded ? 'high' : 'medium',
       status: unavailable || (!degraded && evidenceGap) ? 'blocked_unavailable' : 'needs_attention',
@@ -283,6 +309,7 @@ function configurationCandidates(projection: AdminRuntimeConfigurationProjection
     dedupeKey: 'configuration:runtime',
     itemType: 'runtime-configuration-state',
     reference: 'runtime',
+    title: 'Effective runtime configuration',
     domain: 'configuration',
     severity: hasError ? 'critical' : hasFallback ? 'high' : 'medium',
     status: hasError ? 'blocked_unavailable' : 'warning',
@@ -297,13 +324,49 @@ function configurationCandidates(projection: AdminRuntimeConfigurationProjection
   })]
 }
 
+const SAFE_LEARNER_REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
+const SAFE_GRADE = /^[A-Za-z0-9][A-Za-z0-9 -]{0,15}$/
+const SAFE_SUBJECT_LABEL = /^[\p{L}\p{M}\p{N} .'&/-]{1,60}$/u
+
+function safePresentation(value: unknown, allowed: RegExp): string | null {
+  return typeof value === 'string' && allowed.test(value) ? value : null
+}
+
+function workingLevelSuffix(learner: LearnerListItem): string {
+  const explicit = (learner.workingLevels ?? []).flatMap((entry): WorkingLevelEvidence[] => {
+    if (!entry || entry.source !== 'explicit') return []
+    if (!safePresentation(entry.level, SAFE_GRADE)) return []
+    if (!safePresentation(entry.subjectLabel, SAFE_SUBJECT_LABEL)) return []
+    return [entry]
+  })
+  if (explicit.length === 0) return ''
+  const parts = explicit
+    .map((entry) => `${entry.subjectLabel} Grade ${entry.level}`)
+    .join(', ')
+  return ` (working level ${parts})`
+}
+
+function safeLearnerTitle(learner: LearnerListItem): string {
+  const nominal = safePresentation(learner.nominalGrade, SAFE_GRADE)
+  const gradeSegment = nominal ? ` · Grade ${nominal}` : ''
+  const workingSegment = workingLevelSuffix(learner)
+  const displayName = typeof learner.displayName === 'string' && learner.displayName.trim() !== ''
+    ? learner.displayName
+    : safePresentation(learner.learnerRef, SAFE_LEARNER_REF)
+      ? `Learner ${learner.learnerRef}`
+      : 'Learner'
+  return `${displayName}${gradeSegment}${workingSegment}`
+}
+
 function learnerCandidates(snapshot: LearnerAnalyticsSnapshot): Candidate[] {
   const items = snapshot.learners.flatMap((learner) => {
-    if (!/^p[1-5]$/.test(learner.learnerRef) || learner.openReviewCount <= 0) return []
+    if (!safePresentation(learner.learnerRef, SAFE_LEARNER_REF)) return []
+    if (learner.openReviewCount <= 0) return []
     return [candidate({
       dedupeKey: `learner:${learner.learnerRef}:operational-review`,
       itemType: 'learner-operational-flag',
       reference: learner.learnerRef,
+      title: safeLearnerTitle(learner),
       domain: 'learners',
       severity: learner.needsDadCount > 0 ? 'high' : 'medium',
       status: 'needs_attention',
@@ -318,6 +381,7 @@ function learnerCandidates(snapshot: LearnerAnalyticsSnapshot): Candidate[] {
       dedupeKey: 'evidence:learners',
       itemType: 'evidence-unavailable',
       reference: 'learner-review-evidence',
+      title: 'Learner review evidence',
       domain: 'learners',
       severity: 'high',
       status: 'blocked_unavailable',
@@ -341,6 +405,7 @@ function safetyCandidates(snapshot: SafetyOperationsSnapshotV1): Candidate[] {
       dedupeKey: 'evidence:safety',
       itemType: 'evidence-unavailable',
       reference: 'safety-coverage',
+      title: 'Safety evidence coverage',
       domain: 'safety',
       severity: 'critical',
       status: 'blocked_unavailable',
@@ -367,6 +432,7 @@ function safetyCandidates(snapshot: SafetyOperationsSnapshotV1): Candidate[] {
       dedupeKey: `safety:${event.eventRef}`,
       itemType: 'safety-condition',
       reference: event.eventRef,
+      title: SAFETY_CATEGORY_TITLES[event.evidenceCategory],
       domain: 'safety',
       severity: 'critical',
       status: event.state === 'unknown' || event.resolution.state === 'unknown'
@@ -392,6 +458,7 @@ function safetyCandidates(snapshot: SafetyOperationsSnapshotV1): Candidate[] {
       dedupeKey: 'safety:unresolved-summary',
       itemType: 'safety-condition',
       reference: 'unresolved-summary',
+      title: 'Unresolved safety conditions',
       domain: 'safety',
       severity: 'critical',
       status: 'needs_attention',
@@ -416,6 +483,7 @@ function costCandidates(model: AdminCostsModel): Candidate[] {
     dedupeKey: 'costs:provider-accounting',
     itemType: 'cost-accounting-state',
     reference: 'provider-accounting',
+    title: 'Provider accounting',
     domain: 'costs',
     severity: 'medium',
     status: 'warning',
