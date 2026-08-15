@@ -30,8 +30,8 @@ const ORDERED_BOUNDARIES: readonly Boundary[] = [
   "queryConceptGraph",
   "createMisconceptionRegistry",
   "matchMisconception",
-  "selectHint",
   "recommendIntervention",
+  "selectHint",
   "evaluateMastery",
   "proposeRepair",
   "proposeReteach",
@@ -153,6 +153,32 @@ function authorize(
   }
 }
 
+function selectBoundaryRoute(
+  request: Wave2AdaptiveCompositionRequest,
+  boundary: Boundary,
+): void {
+  if (boundary === "selectHint") {
+    request.misconceptionMatch.evidence = [];
+  }
+  if (boundary === "proposeReteach") {
+    request.intervention.assistanceHistory = [{
+      learnerScopeRef: request.studyAuthority.learnerScopeRef,
+      sessionRef: request.studyAuthority.sessionRef,
+      instructionalContextRef: request.studyAuthority.instructionalContextRef,
+      sourceInteractionRef: "interaction:prior-prerequisite-check",
+      opportunityRef: request.studyAuthority.currentOpportunityRef,
+      actionKind: "check-prerequisite",
+      outcome: "difficulty-persists",
+    }];
+    request.intervention.interventionCount = 1;
+    request.masteryEvidence.currentOpportunityAssistanceLevel = "guided";
+    const current = request.masteryEvidence.evidence.find(
+      ({ opportunityRef }) => opportunityRef === request.studyAuthority.currentOpportunityRef,
+    );
+    if (current !== undefined) current.assistanceLevel = "guided";
+  }
+}
+
 async function compose(
   request: unknown,
   subsystems: Wave2AdaptiveSubsystems,
@@ -199,6 +225,7 @@ function throwingSubsystems(
 for (const boundary of ORDERED_BOUNDARIES) {
   test(`${boundary} synchronous failure returns reviewed Study fallback`, async () => {
     const request = wave2Fixture();
+    selectBoundaryRoute(request, boundary);
     const calls: Boundary[] = [];
     const result = await compose(
       request,
@@ -218,6 +245,7 @@ for (const boundary of ORDERED_BOUNDARIES) {
 for (const boundary of ["proposeRepair", "proposeReteach"] as const) {
   test(`${boundary} rejected Promise returns reviewed Study fallback`, async () => {
     const request = wave2Fixture();
+    selectBoundaryRoute(request, boundary);
     const calls: Boundary[] = [];
     const subsystems = trackedSubsystems(calls);
     Object.defineProperty(subsystems, boundary, {
@@ -268,6 +296,7 @@ for (const thrown of UNKNOWN_THROWN_VALUES) {
 
 test("late reteach failure discards all earlier adaptive computations", async () => {
   const request = wave2Fixture();
+  selectBoundaryRoute(request, "proposeReteach");
   const calls: Boundary[] = [];
   const result = await compose(
     request,
@@ -276,8 +305,11 @@ test("late reteach failure discards all earlier adaptive computations", async ()
 
   assertReviewedFallback(result, request, "proposeReteach");
   for (const earlier of [
-    "selectHint", "recommendIntervention", "evaluateMastery", "proposeRepair",
+    "recommendIntervention", "evaluateMastery",
   ] as const) assert.equal(calls.includes(earlier), true);
+  for (const unrelated of ["selectHint", "proposeRepair"] as const) {
+    assert.equal(calls.includes(unrelated), false);
+  }
   assert.equal(JSON.stringify(result).includes("private-attempt"), false);
 });
 
