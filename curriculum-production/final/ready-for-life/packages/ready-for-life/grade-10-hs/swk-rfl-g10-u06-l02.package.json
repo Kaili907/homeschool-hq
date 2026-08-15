@@ -13,8 +13,11 @@
     "title": "Skill model: rehearsing the full application sequence"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners rehearse the full, unbroken application sequence with a trusted adult, from a brief self-introduction through five interview questions to a closing question and thank-you, so they experience the whole sequence together rather than as isolated practiced pieces.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic rehearsing the full application sequence task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "A trusted adult plays interviewer for the capstone's full practice interview: the learner delivers a short self-introduction, answers five interview questions out loud without a script, asks one closing question, and closes with a thank-you, all in one continuous run-through, then the adult gives feedback on the sequence as a whole.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -24,7 +27,12 @@
     "requiresTrustedAdultSupervision": true,
     "certifyingActor": "household-authorized guardian",
     "studentSelfReport": "recorded-but-not-certifying",
-    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "evidenceTypes": [
+      "planning page",
+      "written notes",
+      "learner explanation",
+      "guardian confirmation"
+    ],
     "identifiablePhotoRequired": false
   },
   "safetyNotes": [
@@ -35,44 +43,77 @@
     "present": true,
     "description": "If no adult is available to play interviewer at this time, the learner instead writes out the full sequence as a script from introduction to closing thank-you, then reads it aloud once to themselves and self-checks it against the same look-fors a live interviewer would use."
   },
-  "materials": ["five interview questions and notes from earlier this year", "paper or notes app for planning and post-interview notes"],
+  "materials": [
+    "Embedded resource: swk-rfl-g10-u06-l02-model-card",
+    "Embedded resource: swk-rfl-g10-u06-l02-step-card",
+    "Embedded resource: swk-rfl-g10-u06-l02-guided-card",
+    "Embedded resource: swk-rfl-g10-u06-l02-independent-card",
+    "Embedded resource: swk-rfl-g10-u06-l02-evidence-record",
+    "Embedded resource: swk-rfl-g10-u06-l02-retry-pair",
+    "Embedded resource: swk-rfl-g10-u06-l02-delivered-plan",
+    "learner-local: five interview questions and notes from earlier this year",
+    "learner-local: paper or notes app for planning and post-interview notes"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Plan your self-introduction (30-45 seconds) and choose your closing question before beginning.",
+      "directions": "Analyze the complete worked example on swk-rfl-g10-u06-l02-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "extended-response", "text": "Draft your self-introduction and your closing question." }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "With your adult, run the full sequence in one continuous pass: introduction, five questions, closing question, thank-you.",
+      "directions": "Complete the fictional coached case on swk-rfl-g10-u06-l02-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I completed the full sequence in one continuous pass without stopping to restart." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I asked my closing question and thanked the interviewer to close." },
-        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My adult gave feedback on the sequence as a whole, not just individual answers." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "Right after, write down the feedback on the sequence as a whole.",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g10-u06-l02-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize the feedback on how the full sequence flowed, not just individual answers, and name one specific transition you'd smooth out next time." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on the difference between practicing pieces and running the whole sequence.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g10-u06-l02-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "short-response", "text": "What was different about running the whole sequence together compared to practicing individual pieces earlier this year?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "What was different about running the whole sequence together compared to practicing individual pieces earlier this year?"
+        }
       ]
     }
   ],
-  "remediation": "If a learner's introduction and answers feel disconnected, with awkward stops between each part, reteach by having them practice just the three transition moments (intro-to-first-answer, last-answer-to-closing-question, closing-question-to-thank-you) in isolation, then re-run the full sequence.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g10-u06-l02-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g10-u06-l02-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g10-u06-l02-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Sequence completeness and flow: The full sequence is completed in one continuous pass. | Delivery without a script: Learner delivers most of the sequence from memory, glancing at notes occasionally. | Whole-sequence reflection: Names a real difference between practicing pieces and running the whole sequence. Resume at the next unfinished step on swk-rfl-g10-u06-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner run the full sequence a second time with one question swapped for a harder one, and compare how the transitions held up under a less familiar question.",
   "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l02.scoring.json",
   "integrity": {
@@ -80,5 +121,279 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g10-ready-for-life-u06-l02",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic rehearsing the full application sequence task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g10-u06-l02-model-card",
+        "swk-rfl-g10-u06-l02-step-card",
+        "swk-rfl-g10-u06-l02-guided-card",
+        "swk-rfl-g10-u06-l02-independent-card",
+        "swk-rfl-g10-u06-l02-evidence-record",
+        "swk-rfl-g10-u06-l02-retry-pair",
+        "swk-rfl-g10-u06-l02-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g10-u06-l02-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g10-u06-l02-local-1",
+          "label": "five interview questions and notes from earlier this year",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g10-u06-l02-local-2",
+          "label": "paper or notes app for planning and post-interview notes",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g10-u06-l02-model-card",
+        "kind": "model",
+        "title": "rehearsing the full application sequence worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: A trusted adult plays interviewer for the capstone's full practice interview: the learner delivers a short self-introduction, answers five interview questions out loud without a script, asks one closing question, and closes with a thank-you, all in one continuous run-through, then the adult gives feedback on the sequence as a whole.",
+          "Model move 1: Read the condition and name the exact rehearsing the full application sequence decision or action.",
+          "Model move 2: Plan your self-introduction (30-45 seconds) and choose your closing question before beginning.",
+          "Model move 3: With your adult, run the full sequence in one continuous pass: introduction, five questions, closing question, thank-you.",
+          "Model check: Sequence completeness and flow: The full sequence is completed in one continuous pass. | Delivery without a script: Learner delivers most of the sequence from memory, glancing at notes occasionally. | Whole-sequence reflection: Names a real difference between practicing pieces and running the whole sequence."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u06-l02-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "rehearsing the full application sequence action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for rehearsing the full application sequence.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u06-l02-guided-card",
+        "kind": "guided-practice",
+        "title": "rehearsing the full application sequence coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: A trusted adult plays interviewer for the capstone's full practice interview: the learner delivers a short self-introduction, answers five interview questions out loud without a script, asks one closing question, and closes with a thank-you, all in one continuous run-through, then the adult gives feedback on the sequence as a whole.",
+          "Coach direction: Plan your self-introduction (30-45 seconds) and choose your closing question before beginning.",
+          "Learner prompt: Draft your self-introduction and your closing question.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u06-l02-independent-card",
+        "kind": "independent-task",
+        "title": "rehearsing the full application sequence complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult, run the full sequence in one continuous pass: introduction, five questions, closing question, thank-you.",
+          "Response 1 (t2-p1): I completed the full sequence in one continuous pass without stopping to restart.",
+          "Response 2 (t2-p2): I asked my closing question and thanked the interviewer to close.",
+          "Response 3 (t2-p3): My adult gave feedback on the sequence as a whole, not just individual answers.",
+          "Equal-access rule: If no adult is available to play interviewer at this time, the learner instead writes out the full sequence as a script from introduction to closing thank-you, then reads it aloud once to themselves and self-checks it against the same look-fors a live interviewer would use."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u06-l02-evidence-record",
+        "kind": "evidence-record",
+        "title": "rehearsing the full application sequence minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: What was different about running the whole sequence together compared to practicing individual pieces earlier this year?",
+          "Success checks: Sequence completeness and flow: The full sequence is completed in one continuous pass. | Delivery without a script: Learner delivers most of the sequence from memory, glancing at notes occasionally. | Whole-sequence reflection: Names a real difference between practicing pieces and running the whole sequence.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u06-l02-retry-pair",
+        "kind": "retry",
+        "title": "rehearsing the full application sequence supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g10-u06-l02-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g10-u06-l02-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional rehearsing the full application sequence condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Sequence completeness and flow: The full sequence is completed in one continuous pass. | Delivery without a script: Learner delivers most of the sequence from memory, glancing at notes occasionally. | Whole-sequence reflection: Names a real difference between practicing pieces and running the whole sequence..",
+          "Return: resume at the next unfinished step on swk-rfl-g10-u06-l02-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u06-l02-delivered-plan",
+        "kind": "independent-task",
+        "title": "rehearsing the full application sequence delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: A trusted adult plays interviewer for the capstone's full practice interview: the learner delivers a short self-introduction, answers five interview questions out loud without a script, asks one closing question, and closes with a thank-you, all in one continuous run-through, then the adult gives feedback on the sequence as a whole.",
+          "Use steps: With your adult, run the full sequence in one continuous pass: introduction, five questions, closing question, thank-you.",
+          "Field 1 (t2-p1): I completed the full sequence in one continuous pass without stopping to restart.",
+          "Field 2 (t2-p2): I asked my closing question and thanked the interviewer to close.",
+          "Field 3 (t2-p3): My adult gave feedback on the sequence as a whole, not just individual answers.",
+          "Check against: Sequence completeness and flow: The full sequence is completed in one continuous pass. | Delivery without a script: Learner delivers most of the sequence from memory, glancing at notes occasionally. | Whole-sequence reflection: Names a real difference between practicing pieces and running the whole sequence."
+        ]
+      }
+    ],
+    "model": {
+      "title": "rehearsing the full application sequence worked model",
+      "startingCondition": "A trusted adult plays interviewer for the capstone's full practice interview: the learner delivers a short self-introduction, answers five interview questions out loud without a script, asks one closing question, and closes with a thank-you, all in one continuous run-through, then the adult gives feedback on the sequence as a whole.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact rehearsing the full application sequence decision or action.",
+        "Model move 2: Plan your self-introduction (30-45 seconds) and choose your closing question before beginning.",
+        "Model move 3: With your adult, run the full sequence in one continuous pass: introduction, five questions, closing question, thank-you."
+      ],
+      "reasoning": "The model names the condition, follows the ordered rehearsing the full application sequence process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Sequence completeness and flow: The full sequence is completed in one continuous pass.",
+        "Delivery without a script: Learner delivers most of the sequence from memory, glancing at notes occasionally.",
+        "Whole-sequence reflection: Names a real difference between practicing pieces and running the whole sequence."
+      ],
+      "resourceRef": "swk-rfl-g10-u06-l02-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for rehearsing the full application sequence.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g10-u06-l02-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "A trusted adult plays interviewer for the capstone's full practice interview: the learner delivers a short self-introduction, answers five interview questions out loud without a script, asks one closing question, and closes with a thank-you, all in one continuous run-through, then the adult gives feedback on the sequence as a whole.",
+      "prompt": "Draft your self-introduction and your closing question.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Sequence completeness and flow: The full sequence is completed in one continuous pass.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g10-u06-l02-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g10-u06-l02-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "rehearsing the full application sequence — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g10-u06-l02-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult, run the full sequence in one continuous pass: introduction, five questions, closing question, thank-you.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "rehearsing the full application sequence — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g10-u06-l02-independent-card",
+        "directions": "If no adult is available to play interviewer at this time, the learner instead writes out the full sequence as a script from introduction to closing thank-you, then reads it aloud once to themselves and self-checks it against the same look-fors a live interviewer would use.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g10-u06-l02-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "What was different about running the whole sequence together compared to practicing individual pieces earlier this year?",
+      "observableCriteria": [
+        "Sequence completeness and flow: The full sequence is completed in one continuous pass.",
+        "Delivery without a script: Learner delivers most of the sequence from memory, glancing at notes occasionally.",
+        "Whole-sequence reflection: Names a real difference between practicing pieces and running the whole sequence."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g10-u06-l02-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g10-u06-l02-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g10-u06-l02-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g10-u06-l02-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Sequence completeness and flow: The full sequence is completed in one continuous pass. | Delivery without a script: Learner delivers most of the sequence from memory, glancing at notes occasionally. | Whole-sequence reflection: Names a real difference between practicing pieces and running the whole sequence.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g10-u06-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g10-u06-l02-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

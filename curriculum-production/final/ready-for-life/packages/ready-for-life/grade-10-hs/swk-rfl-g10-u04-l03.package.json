@@ -13,8 +13,11 @@
     "title": "Guided practice: returning, cancelling, or disputing something"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners use a provided fictional return/cancellation policy to work out the correct steps for a fictional problem scenario (an item that arrived wrong or a service that didn't happen as agreed) and draft a message requesting the specific remedy the policy actually allows.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic returning, cancelling, or disputing something task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "The learner reads a provided fictional policy document and a fictional problem scenario, determines what remedy the policy actually allows for that specific situation, and drafts a short message requesting exactly that remedy, citing the relevant policy term.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
@@ -24,43 +27,76 @@
     "The policy and scenario are entirely fictional and provided with this lesson; no real business or transaction is involved."
   ],
   "simulationAlternative": null,
-  "materials": ["the provided fictional policy document and problem scenario", "a notebook or document"],
+  "materials": [
+    "Embedded resource: swk-rfl-g10-u04-l03-model-card",
+    "Embedded resource: swk-rfl-g10-u04-l03-step-card",
+    "Embedded resource: swk-rfl-g10-u04-l03-guided-card",
+    "Embedded resource: swk-rfl-g10-u04-l03-independent-card",
+    "Embedded resource: swk-rfl-g10-u04-l03-evidence-record",
+    "Embedded resource: swk-rfl-g10-u04-l03-retry-pair",
+    "Embedded resource: swk-rfl-g10-u04-l03-delivered-scenario",
+    "learner-local: a notebook or document"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Read the fictional problem scenario and, before checking the policy, guess what remedy you think you're owed.",
+      "directions": "Analyze the complete worked example on swk-rfl-g10-u04-l03-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "Write your guess at what remedy you'd be owed, before checking the actual policy." }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Read the fictional policy and determine exactly what remedy it allows for this specific scenario.",
+      "directions": "Complete the fictional coached case on swk-rfl-g10-u04-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "extended-response", "text": "State exactly what the policy allows for this scenario, quoting the specific term that applies." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My stated remedy matches what the policy actually says, not what seems fair in general." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Draft a short message requesting exactly the remedy the policy allows, citing the relevant term.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g10-u04-l03-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "Draft your message: state the problem plainly, cite the specific policy term, and request the exact remedy it allows." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Compare your warm-up guess to the actual policy.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g10-u04-l03-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "short-response", "text": "How did your initial guess compare to what the policy actually allowed, and what would you check first next time?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "How did your initial guess compare to what the policy actually allowed, and what would you check first next time?"
+        }
       ]
     }
   ],
-  "remediation": "If a learner requests a remedy the policy doesn't actually support (for example, asking for a full refund when the policy only allows an exchange), reteach by having them highlight the exact policy sentence that applies before drafting anything, and require the draft's requested remedy to match the highlighted sentence word for word in meaning.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g10-u04-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g10-u04-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g10-u04-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Policy accuracy: The stated remedy matches the policy, with the correct term identified. | Message clarity and citation: The message states the problem, cites the term, and requests a remedy. | Honest self-correction: Names a genuine difference between the guess and the finding. Resume at the next unfinished step on swk-rfl-g10-u04-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner draft a follow-up message for a scenario where the first request is denied, escalating politely and asking what the next step in the process is.",
   "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l03.scoring.json",
   "integrity": {
@@ -68,5 +104,259 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g10-ready-for-life-u04-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "digital-consumer",
+    "practicalGoal": "I can complete a realistic returning, cancelling, or disputing something task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g10-u04-l03-model-card",
+        "swk-rfl-g10-u04-l03-step-card",
+        "swk-rfl-g10-u04-l03-guided-card",
+        "swk-rfl-g10-u04-l03-independent-card",
+        "swk-rfl-g10-u04-l03-evidence-record",
+        "swk-rfl-g10-u04-l03-retry-pair",
+        "swk-rfl-g10-u04-l03-delivered-scenario"
+      ],
+      "referencedArtifactWords": [
+        "scenario"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g10-u04-l03-delivered-scenario"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g10-u04-l03-local-1",
+          "label": "a notebook or document",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g10-u04-l03-model-card",
+        "kind": "model",
+        "title": "returning, cancelling, or disputing something worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner reads a provided fictional policy document and a fictional problem scenario, determines what remedy the policy actually allows for that specific situation, and drafts a short message requesting exactly that remedy, citing the relevant policy term.",
+          "Model move 1: Read the condition and name the exact returning, cancelling, or disputing something decision or action.",
+          "Model move 2: Read the fictional problem scenario and, before checking the policy, guess what remedy you think you're owed.",
+          "Model move 3: Read the fictional policy and determine exactly what remedy it allows for this specific scenario.",
+          "Model check: Policy accuracy: The stated remedy matches the policy, with the correct term identified. | Message clarity and citation: The message states the problem, cites the term, and requests a remedy. | Honest self-correction: Names a genuine difference between the guess and the finding."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u04-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "returning, cancelling, or disputing something action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for returning, cancelling, or disputing something.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u04-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "returning, cancelling, or disputing something coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner reads a provided fictional policy document and a fictional problem scenario, determines what remedy the policy actually allows for that specific situation, and drafts a short message requesting exactly that remedy, citing the relevant policy term.",
+          "Coach direction: Read the fictional problem scenario and, before checking the policy, guess what remedy you think you're owed.",
+          "Learner prompt: Write your guess at what remedy you'd be owed, before checking the actual policy.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u04-l03-independent-card",
+        "kind": "independent-task",
+        "title": "returning, cancelling, or disputing something complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Read the fictional policy and determine exactly what remedy it allows for this specific scenario.",
+          "Response 1 (t2-p1): State exactly what the policy allows for this scenario, quoting the specific term that applies.",
+          "Response 2 (t2-p2): My stated remedy matches what the policy actually says, not what seems fair in general.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u04-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "returning, cancelling, or disputing something minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: How did your initial guess compare to what the policy actually allowed, and what would you check first next time?",
+          "Success checks: Policy accuracy: The stated remedy matches the policy, with the correct term identified. | Message clarity and citation: The message states the problem, cites the term, and requests a remedy. | Honest self-correction: Names a genuine difference between the guess and the finding.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u04-l03-retry-pair",
+        "kind": "retry",
+        "title": "returning, cancelling, or disputing something supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g10-u04-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g10-u04-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional returning, cancelling, or disputing something condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Policy accuracy: The stated remedy matches the policy, with the correct term identified. | Message clarity and citation: The message states the problem, cites the term, and requests a remedy. | Honest self-correction: Names a genuine difference between the guess and the finding..",
+          "Return: resume at the next unfinished step on swk-rfl-g10-u04-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u04-l03-delivered-scenario",
+        "kind": "guided-practice",
+        "title": "returning, cancelling, or disputing something delivered scenario",
+        "purpose": "Resolves the lesson's named scenario so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner reads a provided fictional policy document and a fictional problem scenario, determines what remedy the policy actually allows for that specific situation, and drafts a short message requesting exactly that remedy, citing the relevant policy term.",
+          "Use steps: Read the fictional policy and determine exactly what remedy it allows for this specific scenario.",
+          "Field 1 (t2-p1): State exactly what the policy allows for this scenario, quoting the specific term that applies.",
+          "Field 2 (t2-p2): My stated remedy matches what the policy actually says, not what seems fair in general.",
+          "Check against: Policy accuracy: The stated remedy matches the policy, with the correct term identified. | Message clarity and citation: The message states the problem, cites the term, and requests a remedy. | Honest self-correction: Names a genuine difference between the guess and the finding."
+        ]
+      }
+    ],
+    "model": {
+      "title": "returning, cancelling, or disputing something worked model",
+      "startingCondition": "The learner reads a provided fictional policy document and a fictional problem scenario, determines what remedy the policy actually allows for that specific situation, and drafts a short message requesting exactly that remedy, citing the relevant policy term.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact returning, cancelling, or disputing something decision or action.",
+        "Model move 2: Read the fictional problem scenario and, before checking the policy, guess what remedy you think you're owed.",
+        "Model move 3: Read the fictional policy and determine exactly what remedy it allows for this specific scenario."
+      ],
+      "reasoning": "The model names the condition, follows the ordered returning, cancelling, or disputing something process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Policy accuracy: The stated remedy matches the policy, with the correct term identified.",
+        "Message clarity and citation: The message states the problem, cites the term, and requests a remedy.",
+        "Honest self-correction: Names a genuine difference between the guess and the finding."
+      ],
+      "resourceRef": "swk-rfl-g10-u04-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for returning, cancelling, or disputing something.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g10-u04-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner reads a provided fictional policy document and a fictional problem scenario, determines what remedy the policy actually allows for that specific situation, and drafts a short message requesting exactly that remedy, citing the relevant policy term.",
+      "prompt": "Write your guess at what remedy you'd be owed, before checking the actual policy.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Policy accuracy: The stated remedy matches the policy, with the correct term identified.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g10-u04-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g10-u04-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "returning, cancelling, or disputing something — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g10-u04-l03-independent-card",
+        "directions": "Complete the returning, cancelling, or disputing something task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g10-u04-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "How did your initial guess compare to what the policy actually allowed, and what would you check first next time?",
+      "observableCriteria": [
+        "Policy accuracy: The stated remedy matches the policy, with the correct term identified.",
+        "Message clarity and citation: The message states the problem, cites the term, and requests a remedy.",
+        "Honest self-correction: Names a genuine difference between the guess and the finding."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g10-u04-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g10-u04-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g10-u04-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g10-u04-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Policy accuracy: The stated remedy matches the policy, with the correct term identified. | Message clarity and citation: The message states the problem, cites the term, and requests a remedy. | Honest self-correction: Names a genuine difference between the guess and the finding.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g10-u04-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g10-u04-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

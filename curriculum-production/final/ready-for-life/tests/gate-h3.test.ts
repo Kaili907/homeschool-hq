@@ -8,8 +8,8 @@ describe('Ready for Life final production corpus — Gate H3', () => {
   it('admits all 324 canonical lessons as READY', () => {
     const entries = loadCorpusEntries()
     const result = evaluateCourseProductionReadiness({
-      courseId: 'manuel-academy-ready-for-life-final-r1',
-      title: 'Manuel Academy Ready for Life — final production R1',
+      courseId: 'manuel-academy-ready-for-life-production-depth-r1',
+      title: 'Manuel Academy Ready for Life — production depth R1',
       lessons: entries.map(toH3LessonInput),
     })
     const h3 = {

@@ -63,40 +63,55 @@ generator is source-branch-agnostic.
 
 ## Health instructional content
 
-Grade 3/4 lessons carry a dedicated `key_points`/`cues` field with distinct,
-hand-authored facts per topic, so `packages/…/grade-03/…` and `grade-04/…`
-task cards include populated `keyPoints`. Health grades 5 and 7–12 previously
-had empty `keyPoints` and focus-interpolated task/check scaffolds. The Health
-Content Repair R1 layer now supplies three age-appropriate teaching points, a
-concrete fictional-case task, a focused knowledge check, and usable completion
-criteria for each of those 252 lesson objectives. The layer is Health-only:
-Grade 3/4 wording and the Health scoring contract remain unchanged.
-`reports/health-content-repair-r1.json` records the
-independent 324-lesson audit and the exact Grade 3 H2 byte/provenance trace.
+Grade 3/4 lessons carry dedicated, hand-authored topic facts. Health grades 5
+and 7–12 receive the objective-specific facts from Health Content Repair R1.
+Health Production Depth R1 now projects those canonical facts into a complete
+teaching sequence for all 324 Health lessons: clear explanation, vocabulary
+and a meaning check, a separate worked model, guided reasoning, fresh
+independent evidence, a later mastery transfer, and materially different
+remediation with a fresh retry. Each paired adult guide adds lesson-specific
+facts, acceptable variation, misconception and safety boundaries, a two-
+occasion mastery plan, and an explicit exclusion of private reflection.
 
-## PE learner execution contract
+The projection declares one of nine type-appropriate lesson purposes and uses
+short one-action directions in Grades 3–5, then increasingly complex but
+chunked health-literacy reasoning in Grades 7–12. It is Health-only; PE and
+Health unit assessments keep their existing production contracts. The
+Director-approved `ma-g5-health-u01-l01` learner package and adult guide are
+byte-locked to the approved sample while regeneration rebuilds the complete
+Health lesson corpus. `reports/health-production-depth-r1.json` records counts,
+type coverage, safety/privacy coverage, and the approved anchor hashes.
 
-All 972 PE lesson task cards are executable in ordinary homeschool conditions.
-The generator preserves the 216 hand-authored Grade 3/4 cue sets and supplies
-focus-specific, age-banded movement technique for the 756 Grade 5-12 lessons
-whose source records do not have a dedicated cue field. Every PE lesson also
-contains:
+## PE production-depth contract
 
+All 972 PE lesson task cards are rebuilt deterministically from the canonical
+grade sources through `src/lib/peExecution.mjs`. The projection implements the
+Director-approved Physical Education Lesson Standard R1 across all ten lesson
+types and eleven execution categories. It preserves the 216 hand-authored
+Grade 3/4 cue sets, supplies age-banded movement teaching where source records
+do not have dedicated cues, and gives every lesson:
+
+- a learner-visible goal and readiness choice;
+- a starting position, action, key cue, common error, correction, accessible
+  model, and safety boundary;
+- guided attempts, a one-variable progression, and fresh independent work;
+- a matched warm-up/finish or explicit non-movement rationale;
 - a cleared-space setup and one-arm-span low-space path;
 - explicit required/optional equipment, soft household substitutes, and an
   equal-credit no-equipment path;
-- environment, equipment, controlled-effort, and activity-specific safety
-  rules;
-- stop rules for symptoms, impact/injury, and a changing environment;
-- seated, supported, reduced-range, mobility-aid, solo, and described/gestured
-  adaptations assessed for equal credit;
-- five actionable activity steps and four observable completion criteria.
+- distinct learner-controlled `REST / ADJUST`, mandatory `STOP AND TELL`, and
+  authorized `DO NOT RESUME` rules;
+- runnable seated, supported, reduced-range, reduced-pace, mobility-aid, solo,
+  low-space, no-equipment, and described/decision alternatives for equal credit
+  without reason disclosure;
+- lesson-type-matched evidence, changed-teaching retry, guardian authority, and
+  an explicit prohibition on Tutor physical-completion or return certification.
 
-`src/lib/peExecution.mjs` owns this shared projection. The independent
-validator re-audits the emitted PE lessons and fails if any required block is
-missing. `pe-content-repair-evidence.json` records the confirmed baseline,
-repair counts, post-repair zeroes, category coverage, and convergence
-classification.
+The approved `ma-g12-physical-education-u08-l07` Director anchor and scoring
+guide live as generator-owned source fixtures under `src/approved/` and are
+re-emitted byte for byte. The independent validator verifies those hashes as
+well as complete grade, family, category, safety, adaptation, evidence, retry,
+guardian, Tutor, privacy, and checksum coverage.
 
 ## Never requires
 
@@ -144,6 +159,9 @@ home-use path, or completion criteria.
 ```bash
 node tooling/validate.mjs
 node tooling/health-content-audit.mjs
+node --test tooling/health-production-depth.test.mjs
+node --test tooling/*.test.mjs
+python3 tooling/schema-validate.py
 ```
 
 Independently re-reads every file under `packages/` and `scoring-guides/`

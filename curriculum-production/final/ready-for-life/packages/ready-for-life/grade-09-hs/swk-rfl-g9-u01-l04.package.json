@@ -13,8 +13,11 @@
     "title": "Application or project: calendar, reminder, and paper systems"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners set up a real calendar, reminder, or paper planning system loaded with their actual upcoming commitments for the next two weeks, put it into active use, and have a trusted adult confirm it is genuinely being used, so planning moves from a one-time exercise to a working habit.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic calendar, reminder, and paper systems task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "The learner chooses one system, a phone or computer calendar app, a reminder app, or a paper planner or wall calendar, enters every real commitment they have for the next two weeks (assignments, chores, practices, appointments), and uses it for the household-agreed check-in period, after which a trusted adult confirms the system is actually being consulted and updated.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -24,7 +27,12 @@
     "requiresTrustedAdultSupervision": false,
     "certifyingActor": "household-authorized guardian",
     "studentSelfReport": "recorded-but-not-certifying",
-    "evidenceTypes": ["checklist", "written plan", "learner explanation", "guardian confirmation"],
+    "evidenceTypes": [
+      "checklist",
+      "written plan",
+      "learner explanation",
+      "guardian confirmation"
+    ],
     "identifiablePhotoRequired": false
   },
   "safetyNotes": [
@@ -36,47 +44,76 @@
     "present": true,
     "description": "If the learner cannot get real ongoing use confirmed within this lesson's window, they instead design the complete system in full, specific detail for a fictional sample week: they choose the same tool (calendar app, reminder app, or paper system), fill it with a realistic full week of invented but plausible commitments (specific classes, chores, and activities with specific days and times), and write out exactly how each entry would be created, labeled, and reminded, so the design carries the same level of completeness and specificity as real use would have required."
   },
-  "materials": ["a calendar app, reminder app, or paper planner/wall calendar already available in the household", "a list of the learner's real upcoming commitments for the next two weeks"],
+  "materials": [
+    "Embedded resource: swk-rfl-g9-u01-l04-model-card",
+    "Embedded resource: swk-rfl-g9-u01-l04-step-card",
+    "Embedded resource: swk-rfl-g9-u01-l04-guided-card",
+    "Embedded resource: swk-rfl-g9-u01-l04-independent-card",
+    "Embedded resource: swk-rfl-g9-u01-l04-evidence-record",
+    "Embedded resource: swk-rfl-g9-u01-l04-retry-pair",
+    "adult-or-local: a calendar app, reminder app, or paper planner/wall calendar already available in the household",
+    "adult-or-local: a list of the learner's real upcoming commitments for the next two weeks"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Choose which system you will set up and explain why.",
+      "directions": "Analyze the complete worked example on swk-rfl-g9-u01-l04-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "fixed-choice", "text": "Which system will you set up?", "choices": ["Phone or computer calendar app", "Reminder app", "Paper planner or wall calendar"] },
-        { "ref": "t1-p2", "promptType": "short-response", "text": "Explain in one or two sentences why you chose this system over the others." }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Enter every real commitment you have for the next two weeks into your chosen system, including assignments, chores, practices, and appointments.",
+      "directions": "Complete the fictional coached case on swk-rfl-g9-u01-l04-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I entered every assignment I currently know is due in the next two weeks, each on its correct date." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I entered my recurring chore commitments for the next two weeks." },
-        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I entered my practice, club, or activity schedule for the next two weeks." },
-        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I set at least one reminder or review habit (such as a daily or weekly alert) so I will actually check the system, not just fill it once." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "performance-task",
-      "directions": "Use the system for the household-agreed check-in period. At the end, have a trusted adult review it with you and confirm it is actively in use.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g9-u01-l04-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Did your trusted adult confirm the system is currently being consulted and updated, not just filled in once and abandoned?", "choices": ["Yes, confirmed in active use", "No, not yet confirmed"] },
-        { "ref": "t3-p2", "promptType": "short-response", "text": "Describe one specific instance during the check-in period where you actually checked or updated the system in real life." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on setting up and using a real system.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g9-u01-l04-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "extended-response", "text": "Compare using this real system to how you tracked commitments before this unit. Name one specific moment it already changed what you did or noticed, and one specific weakness you still want to fix about how you're using it." }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Compare using this real system to how you tracked commitments before this unit. Name one specific moment it already changed what you did or noticed, and one specific weakness you still want to fix about how you're using it."
+        }
       ]
     }
   ],
-  "remediation": "If a learner fills the system with entries once but the trusted adult reports no evidence of ongoing use, reteach by having the learner set one specific, low-effort daily trigger for checking it (such as opening it right after breakfast or right when they sit down to start homework) and practice that trigger for three days with the adult checking in each day, rather than asking the learner to simply 'remember to check it more.'",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g9-u01-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g9-u01-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g9-u01-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Completeness of the entered system: The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set. | Confirmed real use versus simulation: Either a guardian confirms active use with one specific real instance described, or the simulation alternative is completed with a full, specific fictional week matching the real task's level of detail. Resume at the next unfinished step on swk-rfl-g9-u01-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner add a second, longer-range layer to the same system covering the next full month, then mark which entries are firm dates versus estimates that may shift, explaining how they will revise the estimated ones as real dates are confirmed.",
   "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l04.scoring.json",
   "integrity": {
@@ -84,5 +121,259 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g9-ready-for-life-u01-l04",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "planning-organization",
+    "practicalGoal": "I can complete a realistic calendar, reminder, and paper systems task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g9-u01-l04-model-card",
+        "swk-rfl-g9-u01-l04-step-card",
+        "swk-rfl-g9-u01-l04-guided-card",
+        "swk-rfl-g9-u01-l04-independent-card",
+        "swk-rfl-g9-u01-l04-evidence-record",
+        "swk-rfl-g9-u01-l04-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g9-u01-l04-local-1",
+          "label": "a calendar app, reminder app, or paper planner/wall calendar already available in the household",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g9-u01-l04-local-2",
+          "label": "a list of the learner's real upcoming commitments for the next two weeks",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g9-u01-l04-model-card",
+        "kind": "model",
+        "title": "calendar, reminder, and paper systems worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner chooses one system, a phone or computer calendar app, a reminder app, or a paper planner or wall calendar, enters every real commitment they have for the next two weeks (assignments, chores, practices, appointments), and uses it for the household-agreed check-in period, after which a trusted adult confirms the system is actually being consulted and updated.",
+          "Model move 1: Read the condition and name the exact calendar, reminder, and paper systems decision or action.",
+          "Model move 2: Choose which system you will set up and explain why.",
+          "Model move 3: Enter every real commitment you have for the next two weeks into your chosen system, including assignments, chores, practices, and appointments.",
+          "Model check: Completeness of the entered system: The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set. | Confirmed real use versus simulation: Either a guardian confirms active use with one specific real instance described, or the simulation alternative is completed with a full, specific fictional week matching the real task's level of detail."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u01-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "calendar, reminder, and paper systems action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for calendar, reminder, and paper systems.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u01-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "calendar, reminder, and paper systems coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner chooses one system, a phone or computer calendar app, a reminder app, or a paper planner or wall calendar, enters every real commitment they have for the next two weeks (assignments, chores, practices, appointments), and uses it for the household-agreed check-in period, after which a trusted adult confirms the system is actually being consulted and updated.",
+          "Coach direction: Choose which system you will set up and explain why.",
+          "Learner prompt: Which system will you set up?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u01-l04-independent-card",
+        "kind": "independent-task",
+        "title": "calendar, reminder, and paper systems complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Enter every real commitment you have for the next two weeks into your chosen system, including assignments, chores, practices, and appointments.",
+          "Response 1 (t2-p1): I entered every assignment I currently know is due in the next two weeks, each on its correct date.",
+          "Response 2 (t2-p2): I entered my recurring chore commitments for the next two weeks.",
+          "Response 3 (t2-p3): I entered my practice, club, or activity schedule for the next two weeks.",
+          "Response 4 (t2-p4): I set at least one reminder or review habit (such as a daily or weekly alert) so I will actually check the system, not just fill it once.",
+          "Equal-access rule: If the learner cannot get real ongoing use confirmed within this lesson's window, they instead design the complete system in full, specific detail for a fictional sample week: they choose the same tool (calendar app, reminder app, or paper system), fill it with a realistic full week of invented but plausible commitments (specific classes, chores, and activities with specific days and times), and write out exactly how each entry would be created, labeled, and reminded, so the design carries the same level of completeness and specificity as real use would have required."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u01-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "calendar, reminder, and paper systems minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Compare using this real system to how you tracked commitments before this unit. Name one specific moment it already changed what you did or noticed, and one specific weakness you still want to fix about how you're using it.",
+          "Success checks: Completeness of the entered system: The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set. | Confirmed real use versus simulation: Either a guardian confirms active use with one specific real instance described, or the simulation alternative is completed with a full, specific fictional week matching the real task's level of detail.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u01-l04-retry-pair",
+        "kind": "retry",
+        "title": "calendar, reminder, and paper systems supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g9-u01-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g9-u01-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional calendar, reminder, and paper systems condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Completeness of the entered system: The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set. | Confirmed real use versus simulation: Either a guardian confirms active use with one specific real instance described, or the simulation alternative is completed with a full, specific fictional week matching the real task's level of detail..",
+          "Return: resume at the next unfinished step on swk-rfl-g9-u01-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "calendar, reminder, and paper systems worked model",
+      "startingCondition": "The learner chooses one system, a phone or computer calendar app, a reminder app, or a paper planner or wall calendar, enters every real commitment they have for the next two weeks (assignments, chores, practices, appointments), and uses it for the household-agreed check-in period, after which a trusted adult confirms the system is actually being consulted and updated.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact calendar, reminder, and paper systems decision or action.",
+        "Model move 2: Choose which system you will set up and explain why.",
+        "Model move 3: Enter every real commitment you have for the next two weeks into your chosen system, including assignments, chores, practices, and appointments."
+      ],
+      "reasoning": "The model names the condition, follows the ordered calendar, reminder, and paper systems process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Completeness of the entered system: The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set.",
+        "Confirmed real use versus simulation: Either a guardian confirms active use with one specific real instance described, or the simulation alternative is completed with a full, specific fictional week matching the real task's level of detail."
+      ],
+      "resourceRef": "swk-rfl-g9-u01-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for calendar, reminder, and paper systems.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g9-u01-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner chooses one system, a phone or computer calendar app, a reminder app, or a paper planner or wall calendar, enters every real commitment they have for the next two weeks (assignments, chores, practices, appointments), and uses it for the household-agreed check-in period, after which a trusted adult confirms the system is actually being consulted and updated.",
+      "prompt": "Which system will you set up?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Completeness of the entered system: The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g9-u01-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g9-u01-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "calendar, reminder, and paper systems — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g9-u01-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Enter every real commitment you have for the next two weeks into your chosen system, including assignments, chores, practices, and appointments.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "calendar, reminder, and paper systems — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g9-u01-l04-independent-card",
+        "directions": "If the learner cannot get real ongoing use confirmed within this lesson's window, they instead design the complete system in full, specific detail for a fictional sample week: they choose the same tool (calendar app, reminder app, or paper system), fill it with a realistic full week of invented but plausible commitments (specific classes, chores, and activities with specific days and times), and write out exactly how each entry would be created, labeled, and reminded, so the design carries the same level of completeness and specificity as real use would have required.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g9-u01-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Compare using this real system to how you tracked commitments before this unit. Name one specific moment it already changed what you did or noticed, and one specific weakness you still want to fix about how you're using it.",
+      "observableCriteria": [
+        "Completeness of the entered system: The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set.",
+        "Confirmed real use versus simulation: Either a guardian confirms active use with one specific real instance described, or the simulation alternative is completed with a full, specific fictional week matching the real task's level of detail."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g9-u01-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g9-u01-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g9-u01-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g9-u01-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Completeness of the entered system: The system includes assignments, chores, and activities for the next two weeks with correct dates, and at least one reminder or review habit is set. | Confirmed real use versus simulation: Either a guardian confirms active use with one specific real instance described, or the simulation alternative is completed with a full, specific fictional week matching the real task's level of detail.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g9-u01-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g9-u01-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

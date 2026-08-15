@@ -13,8 +13,11 @@
     "title": "Explicit model: supply inventory and restocking cycles"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners are shown a simple par-level inventory method (a minimum amount to keep on hand, and a trigger point for restocking) and apply it to one household supply category of their choice, producing a written inventory sheet with current amounts, par levels, and restocking triggers.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic supply inventory and restocking cycles task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "After studying a modeled example of a par-level inventory sheet for a household supply category, the learner picks one real category from their own household (such as bathroom supplies, kitchen supplies, or laundry supplies), lists the specific items in it, and builds their own inventory sheet using the same method.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -24,45 +27,77 @@
     "This task creates a written inventory sheet only; the learner does not need to check prices, compare listed costs, or add anything to an actual shopping list as part of this lesson."
   ],
   "simulationAlternative": null,
-  "materials": ["paper or a document", "the modeled par-level example on this task sheet", "access to view the actual supply category in your household"],
+  "materials": [
+    "Embedded resource: swk-rfl-g9-u02-l02-model-card",
+    "Embedded resource: swk-rfl-g9-u02-l02-step-card",
+    "Embedded resource: swk-rfl-g9-u02-l02-guided-card",
+    "Embedded resource: swk-rfl-g9-u02-l02-independent-card",
+    "Embedded resource: swk-rfl-g9-u02-l02-evidence-record",
+    "Embedded resource: swk-rfl-g9-u02-l02-retry-pair",
+    "Embedded resource: swk-rfl-g9-u02-l02-delivered-example",
+    "learner-local: paper or a document",
+    "adult-or-local: access to view the actual supply category in your household"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Study this modeled example: a household tracks bath towels with a par level of 6 (the minimum they always want on hand) and a restock trigger of 2 (once the clean count drops to 2, someone starts a wash load or flags it for restocking).",
+      "directions": "Analyze the complete worked example on swk-rfl-g9-u02-l02-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "In your own words, explain what a 'par level' and a 'restock trigger' each do in this model." }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Pick one household supply category (such as bathroom supplies, kitchen supplies, or laundry supplies) and list every specific item in it.",
+      "directions": "Complete the fictional coached case on swk-rfl-g9-u02-l02-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I named a specific category and listed at least five specific items in it (not just 'bathroom stuff')." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "For each item, I wrote down the current amount on hand." },
-        { "ref": "t2-p3", "promptType": "short-response", "text": "Which item in your category runs out or gets low the fastest, and how do you know?" }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "For every item on your list, set a par level and a restock trigger, following the modeled example's format.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g9-u02-l02-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your complete inventory sheet: item, current amount, par level, and restock trigger for every item." },
-        { "ref": "t3-p2", "promptType": "short-response", "text": "Explain why you set one specific item's par level higher or lower than the others." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Think about what this system prevents.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g9-u02-l02-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe one specific problem (a supply running out at a bad moment) this inventory system would have caught before it happened, using an example from your own household's history." }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific problem (a supply running out at a bad moment) this inventory system would have caught before it happened, using an example from your own household's history."
+        }
       ]
     }
   ],
-  "remediation": "If a learner sets identical par levels and triggers for every item without reasoning, reteach using two contrasting items (one used daily, one used rarely) side by side, asking the learner to explain aloud why a daily-use item needs a higher par level before they revise the full sheet.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g9-u02-l02-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g9-u02-l02-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g9-u02-l02-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger. | Reasoning behind par levels and triggers: At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used. Resume at the next unfinished step on swk-rfl-g9-u02-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner design a second inventory sheet for a completely different supply category and compare which category needs tighter (lower) restock triggers and why.",
   "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u02-l02.scoring.json",
   "integrity": {
@@ -70,5 +105,265 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g9-ready-for-life-u02-l02",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "health-self-management",
+    "practicalGoal": "I can complete a realistic supply inventory and restocking cycles task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g9-u02-l02-model-card",
+        "swk-rfl-g9-u02-l02-step-card",
+        "swk-rfl-g9-u02-l02-guided-card",
+        "swk-rfl-g9-u02-l02-independent-card",
+        "swk-rfl-g9-u02-l02-evidence-record",
+        "swk-rfl-g9-u02-l02-retry-pair",
+        "swk-rfl-g9-u02-l02-delivered-example"
+      ],
+      "referencedArtifactWords": [
+        "example"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g9-u02-l02-delivered-example"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g9-u02-l02-local-1",
+          "label": "paper or a document",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g9-u02-l02-local-2",
+          "label": "access to view the actual supply category in your household",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g9-u02-l02-model-card",
+        "kind": "model",
+        "title": "supply inventory and restocking cycles worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: After studying a modeled example of a par-level inventory sheet for a household supply category, the learner picks one real category from their own household (such as bathroom supplies, kitchen supplies, or laundry supplies), lists the specific items in it, and builds their own inventory sheet using the same method.",
+          "Model move 1: Read the condition and name the exact supply inventory and restocking cycles decision or action.",
+          "Model move 2: Study this modeled example: a household tracks bath towels with a par level of 6 (the minimum they always want on hand) and a restock trigger of 2 (once the clean count drops to 2, someone starts a wash load or flags it for restocking).",
+          "Model move 3: Pick one household supply category (such as bathroom supplies, kitchen supplies, or laundry supplies) and list every specific item in it.",
+          "Model check: Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger. | Reasoning behind par levels and triggers: At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u02-l02-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "supply inventory and restocking cycles action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for supply inventory and restocking cycles.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u02-l02-guided-card",
+        "kind": "guided-practice",
+        "title": "supply inventory and restocking cycles coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: After studying a modeled example of a par-level inventory sheet for a household supply category, the learner picks one real category from their own household (such as bathroom supplies, kitchen supplies, or laundry supplies), lists the specific items in it, and builds their own inventory sheet using the same method.",
+          "Coach direction: Study this modeled example: a household tracks bath towels with a par level of 6 (the minimum they always want on hand) and a restock trigger of 2 (once the clean count drops to 2, someone starts a wash load or flags it for restocking).",
+          "Learner prompt: In your own words, explain what a 'par level' and a 'restock trigger' each do in this model.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u02-l02-independent-card",
+        "kind": "independent-task",
+        "title": "supply inventory and restocking cycles complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Pick one household supply category (such as bathroom supplies, kitchen supplies, or laundry supplies) and list every specific item in it.",
+          "Response 1 (t2-p1): I named a specific category and listed at least five specific items in it (not just 'bathroom stuff').",
+          "Response 2 (t2-p2): For each item, I wrote down the current amount on hand.",
+          "Response 3 (t2-p3): Which item in your category runs out or gets low the fastest, and how do you know?",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u02-l02-evidence-record",
+        "kind": "evidence-record",
+        "title": "supply inventory and restocking cycles minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Describe one specific problem (a supply running out at a bad moment) this inventory system would have caught before it happened, using an example from your own household's history.",
+          "Success checks: Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger. | Reasoning behind par levels and triggers: At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u02-l02-retry-pair",
+        "kind": "retry",
+        "title": "supply inventory and restocking cycles supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g9-u02-l02-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g9-u02-l02-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional supply inventory and restocking cycles condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger. | Reasoning behind par levels and triggers: At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used..",
+          "Return: resume at the next unfinished step on swk-rfl-g9-u02-l02-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u02-l02-delivered-example",
+        "kind": "model",
+        "title": "supply inventory and restocking cycles delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: After studying a modeled example of a par-level inventory sheet for a household supply category, the learner picks one real category from their own household (such as bathroom supplies, kitchen supplies, or laundry supplies), lists the specific items in it, and builds their own inventory sheet using the same method.",
+          "Use steps: Pick one household supply category (such as bathroom supplies, kitchen supplies, or laundry supplies) and list every specific item in it.",
+          "Field 1 (t2-p1): I named a specific category and listed at least five specific items in it (not just 'bathroom stuff').",
+          "Field 2 (t2-p2): For each item, I wrote down the current amount on hand.",
+          "Field 3 (t2-p3): Which item in your category runs out or gets low the fastest, and how do you know?",
+          "Check against: Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger. | Reasoning behind par levels and triggers: At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used."
+        ]
+      }
+    ],
+    "model": {
+      "title": "supply inventory and restocking cycles worked model",
+      "startingCondition": "After studying a modeled example of a par-level inventory sheet for a household supply category, the learner picks one real category from their own household (such as bathroom supplies, kitchen supplies, or laundry supplies), lists the specific items in it, and builds their own inventory sheet using the same method.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact supply inventory and restocking cycles decision or action.",
+        "Model move 2: Study this modeled example: a household tracks bath towels with a par level of 6 (the minimum they always want on hand) and a restock trigger of 2 (once the clean count drops to 2, someone starts a wash load or flags it for restocking).",
+        "Model move 3: Pick one household supply category (such as bathroom supplies, kitchen supplies, or laundry supplies) and list every specific item in it."
+      ],
+      "reasoning": "The model names the condition, follows the ordered supply inventory and restocking cycles process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger.",
+        "Reasoning behind par levels and triggers: At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used."
+      ],
+      "resourceRef": "swk-rfl-g9-u02-l02-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for supply inventory and restocking cycles.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g9-u02-l02-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "After studying a modeled example of a par-level inventory sheet for a household supply category, the learner picks one real category from their own household (such as bathroom supplies, kitchen supplies, or laundry supplies), lists the specific items in it, and builds their own inventory sheet using the same method.",
+      "prompt": "In your own words, explain what a 'par level' and a 'restock trigger' each do in this model.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g9-u02-l02-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g9-u02-l02-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "supply inventory and restocking cycles — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g9-u02-l02-independent-card",
+        "directions": "Complete the supply inventory and restocking cycles task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g9-u02-l02-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Describe one specific problem (a supply running out at a bad moment) this inventory system would have caught before it happened, using an example from your own household's history.",
+      "observableCriteria": [
+        "Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger.",
+        "Reasoning behind par levels and triggers: At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g9-u02-l02-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g9-u02-l02-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g9-u02-l02-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g9-u02-l02-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Inventory sheet completeness: At least five specific items are listed, each with a current amount, a par level, and a restock trigger. | Reasoning behind par levels and triggers: At least one item's par level or trigger is explained with a specific reason tied to how fast that item is actually used.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g9-u02-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g9-u02-l02-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

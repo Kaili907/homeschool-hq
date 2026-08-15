@@ -139,6 +139,11 @@
       "type": "string",
       "minLength": 1
     },
+    "lesson_type": {
+      "description": "Technology production-depth lesson family after combining content type with the lesson's work mode.",
+      "type": "string",
+      "minLength": 3
+    },
     "task_label": {
       "type": "string",
       "minLength": 1
@@ -351,6 +356,40 @@
         }
       }
     },
+    "arts_music_r1": {
+      "description": "Arts/Music only: production teaching, learner-work, remediation, reference, and Tutor-readiness supply authored against the R1 lesson standard.",
+      "type": "object",
+      "required": [
+        "contract_version",
+        "lesson_type",
+        "phase",
+        "learning_goal",
+        "concept_instruction",
+        "technique_sequence",
+        "work_blocks",
+        "remediation_paths",
+        "rubric_ref",
+        "tutor_readiness_manifest"
+      ],
+      "properties": {
+        "contract_version": { "enum": ["manuel-academy.arts-music-lesson-r1.production-1", "manuel-academy.arts-music-lesson-r1.sample-1"] },
+        "lesson_type": {
+          "enum": ["VISUAL_ART_CONCEPT", "TECHNIQUE", "ART_ANALYSIS", "ART_HISTORY_CONTEXT", "DESIGN", "CREATION_STUDIO", "MUSIC_CONCEPT", "RHYTHM", "MELODY", "LISTENING", "PERFORMANCE", "COMPOSITION", "CRITIQUE_REFLECTION", "REVIEW", "REMEDIATION", "MASTERY", "PROJECT"]
+        },
+        "phase": { "type": "string" },
+        "learning_goal": { "type": "string", "minLength": 40 },
+        "concept_instruction": { "type": "array" },
+        "technique_sequence": { "type": "array" },
+        "work_blocks": { "type": "array", "minItems": 2 },
+        "remediation_paths": { "type": "array", "minItems": 2 },
+        "rubric_ref": { "type": "string", "minLength": 10 },
+        "tutor_readiness_manifest": { "type": "object" }
+      }
+    },
+    "r1_sample": {
+      "description": "Director-approved anchor contract retained only on the approved anchor lesson.",
+      "type": "object"
+    },
     "task_steps": {
       "description": "Elementary grades only: the task body chunked into one action per step.",
       "type": "array",
@@ -416,6 +455,41 @@
           "type": "object"
         }
       }
+    },
+    "learner_experience": {
+      "description": "Static Technology teaching sequence with analogous instruction and protected independent evidence.",
+      "type": "object",
+      "required": [
+        "experience_version",
+        "static_complete",
+        "tutor_required",
+        "sequence_policy",
+        "learning_targets",
+        "concept_teaching",
+        "worked_example",
+        "guided_task",
+        "remediation_routes",
+        "fresh_mastery_check"
+      ],
+      "properties": {
+        "experience_version": { "type": "string", "minLength": 10 },
+        "static_complete": { "const": true },
+        "tutor_required": { "const": false },
+        "sequence_policy": { "type": "string", "minLength": 80 },
+        "learning_targets": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "concept_teaching": { "type": "object" },
+        "worked_example": {
+          "type": "object",
+          "required": ["relationship_to_protected_tasks", "evidence_eligible"],
+          "properties": {
+            "relationship_to_protected_tasks": { "const": "ANALOGOUS_NON_TARGET" },
+            "evidence_eligible": { "const": false }
+          }
+        },
+        "guided_task": { "type": "object" },
+        "remediation_routes": { "type": "array", "minItems": 2 },
+        "fresh_mastery_check": { "type": "object" }
+      }
     }
   },
   "allOf": [
@@ -430,7 +504,8 @@
       "then": {
         "required": [
           "test_or_check_criteria",
-          "activity_setup"
+          "activity_setup",
+          "learner_experience"
         ],
         "not": {
           "required": [
@@ -449,7 +524,8 @@
       },
       "then": {
         "required": [
-          "critique_criteria"
+          "critique_criteria",
+          "arts_music_r1"
         ],
         "allOf": [
           {

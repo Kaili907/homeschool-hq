@@ -44,6 +44,40 @@
   ],
   "formative_check": "In one concise response, show or explain the most important idea about image and media rights; then identify one check that would catch an error or weak claim.",
   "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER",
+    "review_timing": "TRUSTED_ADULT_REVIEW_AFTER_REQUIRED_INDEPENDENT_EVIDENCE_IS_SAVED",
+    "lesson_type": "data",
+    "protected_task": {
+      "task_ref": "ma-g5-technology-u05-l03#protected-independent",
+      "authority": "ADULT_TRUSTED_AUTHORITY",
+      "learner_visibility": "NEVER",
+      "task_kind": "ANALYSIS_OR_DESIGN",
+      "accepted_evidence_model": [
+        "The response accurately links at least three printed details to image and media rights.",
+        "The proposed revision or decision is feasible within the supplied fictional case and does not invent missing facts.",
+        "The pass condition is observable, specific, and tests the proposed revision rather than restating a preference.",
+        "The limitation or trade-off correctly identifies what the supplied evidence cannot establish."
+      ],
+      "decisive_resolution": "Accept multiple defensible responses. A passing response has three traceable evidence links, one feasible revision or decision, one observable check, and one honest limitation; reject claims that require facts outside the package.",
+      "prohibited_shortcut": "Do not give the learner a completed evidence map, selected decision, or finished design before independent evidence is submitted."
+    },
+    "fresh_mastery_check": {
+      "task_ref": "ma-g5-technology-u05-l03#fresh-northstar-case",
+      "accepted_evidence_model": [
+        "Each claim cites N1–N5 and stays within what that label supports.",
+        "The revision addresses N5 while continuing to respect N1 and N2.",
+        "The pass condition is observable and could disconfirm the learner’s preferred revision.",
+        "The limitation names an unresolved question rather than inventing an answer."
+      ],
+      "decisive_resolution": "Accept multiple responses that satisfy all four evidence conditions; no single wording, layout, or decision is required."
+    },
+    "remediation_authority": {
+      "selection_rule": "Choose the smallest alternate route from observable evidence; do not repeat the original task or expose its protected resolution.",
+      "mastery_reconsideration": "Reconsider mastery only from the fresh independent record under the same criteria. A worked or guided response is instruction, not mastery evidence."
+    }
+  },
   "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g5-technology-u05-assessment",

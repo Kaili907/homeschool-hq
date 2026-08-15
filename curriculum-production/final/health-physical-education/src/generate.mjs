@@ -23,6 +23,11 @@ import { fileURLToPath } from 'node:url'
 import { SUPPORTED_GRADES, courseDir, sourceBranchLabel } from './lib/sourcePaths.mjs'
 import { healthContentRepair } from './lib/healthContent.mjs'
 import {
+  HEALTH_PRODUCTION_DEPTH_VERSION,
+  auditHealthProductionDepth,
+  buildHealthProductionDepth,
+} from './lib/healthProductionDepth.mjs'
+import {
   buildSafeAlternativeText,
   pickAdaptedAlternativeText,
   pickGuardianSafety,
@@ -38,6 +43,14 @@ import { auditPeLessonExecutability, buildPeExecution } from './lib/peExecution.
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(HERE, '..')
 const SUBJECTS = ['health', 'physical-education']
+const APPROVED_HEALTH_ANCHOR_ID = 'ma-g5-health-u01-l01'
+const APPROVED_HEALTH_ANCHOR_HASHES = {
+  package: 'e4c4ea53acfed33e96088355ae2faed6c90a949d5f1b69021fa7399a7e469be6',
+  guide: '5a50bdfcf42b2fdd3de4523995174797fa3960ffcc3e6a08b7a038a273507084',
+}
+const APPROVED_PE_ANCHOR_ID = 'ma-g12-physical-education-u08-l07'
+const APPROVED_PE_ANCHOR_PACKAGE = readJson(resolve(HERE, 'approved', `${APPROVED_PE_ANCHOR_ID}.package.json`))
+const APPROVED_PE_ANCHOR_SCORING = readJson(resolve(HERE, 'approved', `${APPROVED_PE_ANCHOR_ID}.scoring.json`))
 
 const NEVER_REQUIRES = [
   'This task never requires body weight, height, BMI, or body-fat percentage.',
@@ -104,14 +117,69 @@ function writeJson(path, data) {
   writeFileSync(path, JSON.stringify(data, null, 2) + '\n')
 }
 
+function sha256(content) {
+  return createHash('sha256').update(content).digest('hex')
+}
+
+function readApprovedHealthAnchor() {
+  const packagePath = resolve(ROOT, 'packages/health/grade-05', `${APPROVED_HEALTH_ANCHOR_ID}.json`)
+  const guidePath = resolve(ROOT, 'scoring-guides/health/grade-05', `${APPROVED_HEALTH_ANCHOR_ID}.json`)
+  const packageBytes = readFileSync(packagePath)
+  const guideBytes = readFileSync(guidePath)
+  const packageHash = sha256(packageBytes)
+  const guideHash = sha256(guideBytes)
+  if (packageHash !== APPROVED_HEALTH_ANCHOR_HASHES.package || guideHash !== APPROVED_HEALTH_ANCHOR_HASHES.guide) {
+    throw new Error(`Approved Health anchor does not match ${APPROVED_HEALTH_ANCHOR_ID} at 61f447082bc3102cab6eb7514a0c443c1bacbc17`)
+  }
+  return {
+    packageBytes,
+    guideBytes,
+    packageDocument: JSON.parse(packageBytes),
+    guideDocument: JSON.parse(guideBytes),
+    packageHash,
+    guideHash,
+  }
+}
+
 function buildLessonArtifacts(lesson, unit, subject, grade) {
   const isHealth = subject === 'health'
+
+  if (!isHealth && lesson.lesson_id === APPROVED_PE_ANCHOR_ID) {
+    const { productionReadiness: _packageReadiness, ...pkg } = APPROVED_PE_ANCHOR_PACKAGE
+    const { productionReadiness: _scoringReadiness, ...scoringGuide } = APPROVED_PE_ANCHOR_SCORING
+    const gateInput = {
+      lessonId: lesson.lesson_id,
+      title: pkg.title,
+      courseId: lesson.course_id,
+      unitId: unit?.unit_id ?? `${lesson.course_id}-u${String(lesson.unit_number).padStart(2, '0')}`,
+      subjectFamily: 'ARTS_RFL_PE_PROJECT',
+      instruction: { present: true, text: pkg.keyPoints.join(' ') },
+      independentWork: { present: true, text: `${pkg.studentTask} ${pkg.knowledgeCheck}` },
+      scoringAuthority: { kind: 'RUBRIC', content: { present: true, text: `${scoringGuide.successCriteria.join(' ')} ${scoringGuide.scoringGuidance}` } },
+      remediation: { present: true, text: scoringGuide.remediation },
+      extension: { present: true, text: pkg.extensionChallenge },
+      assessmentAlignment: standardsAligned(lesson.standards, unit),
+      requiresSafetyOrPrivacyReview: true,
+      safeAlternative: { present: true, text: pkg.accessibleAdaptation },
+    }
+    const violations = [
+      ...scanDocument(pkg, `packages/${subject}/grade-${gradeToken(grade)}/${lesson.lesson_id}.json`),
+      ...scanDocument(scoringGuide, `scoring-guides/${subject}/grade-${gradeToken(grade)}/${lesson.lesson_id}.json`),
+    ]
+    gateInput.safetyOrPrivacyStatus = violations.length === 0 ? 'VERIFIED' : 'GAP'
+    return { pkg, scoringGuide, gateInput, violations }
+  }
+
   const peExecution = isHealth ? null : buildPeExecution(lesson, grade)
   const scenario = pickScenarioText(lesson, unit)
   const repairedContent = healthContentRepair(lesson, unit, subject, grade)
   const sourceKeyPoints = pickKeyPointsText(lesson, unit)
-  const keyPoints = repairedContent?.keyPoints
-    ?? (sourceKeyPoints ? sourceKeyPoints.split(/(?<=[.!?])\s+/).filter(Boolean) : [])
+  const keyPoints = isHealth
+    ? (repairedContent?.keyPoints ?? (sourceKeyPoints ? sourceKeyPoints.split(/(?<=[.!?])\s+/).filter(Boolean) : []))
+    : peExecution.keyPoints
+  const healthDepth = isHealth
+    ? buildHealthProductionDepth({ lesson, unit, grade, keyPoints, contentRepairApplied: Boolean(repairedContent) })
+    : null
   const adaptedAlternative = pickAdaptedAlternativeText(lesson, unit)
   const safeAlternativeText = buildSafeAlternativeText(lesson, unit)
   const guardianSafety = pickGuardianSafety(lesson, unit)
@@ -130,6 +198,15 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     focus: lesson.focus,
     essentialQuestion: lesson.essential_question,
     estimatedMinutes: lesson.estimated_minutes,
+    ...(isHealth ? {} : {
+      standards: peExecution.standards,
+      primaryLessonType: peExecution.primaryLessonType,
+      secondaryLessonTypes: peExecution.secondaryLessonTypes,
+      lessonFamilyPlan: peExecution.lessonFamilyPlan,
+      goal: peExecution.goal,
+      successOverview: peExecution.successOverview,
+      readinessCheck: peExecution.readinessCheck,
+    }),
     materials: isHealth
       ? (lesson.materials ?? [])
       : [
@@ -140,20 +217,30 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     ...(isHealth ? {} : {
       movementCues: peExecution.movementCues,
       ageAppropriateTechnique: peExecution.techniqueLevel,
+      movementModel: peExecution.movementModel,
+      guidedPractice: peExecution.guidedPractice,
+      practiceProgression: peExecution.practiceProgression,
+      independentActivity: peExecution.independentActivity,
+      warmUpAndFinishPolicy: peExecution.warmUpAndFinishPolicy,
       spaceSetup: peExecution.spaceSetup,
       equipmentRequirements: peExecution.equipmentRequirements,
       safetyRules: peExecution.safetyRules,
       stoppingRules: peExecution.stoppingRules,
+      adaptationRoutes: peExecution.adaptationRoutes,
       accessibleAdaptation: peExecution.accessibleAdaptation,
       lowSpaceNoEquipmentAlternative: peExecution.lowSpaceNoEquipmentAlternative,
       activitySteps: peExecution.activitySteps,
       executionCategory: peExecution.repairCategory,
-      commonErrorToWatchFor: lesson.common_error ?? null,
+      commonErrorToWatchFor: peExecution.movementModel.commonError,
+      evidenceExpectations: peExecution.evidenceExpectations,
+      retryPlan: peExecution.retryPlan,
+      guardianAuthority: peExecution.guardianAuthority,
+      tutorMetadata: peExecution.tutorMetadata,
     }),
     keyPoints,
-    privacySafeScenario: scenario,
-    studentTask: repairedContent?.studentTask ?? lesson.student_activity,
-    knowledgeCheck: repairedContent?.knowledgeCheck ?? lesson.formative_check,
+    privacySafeScenario: isHealth ? scenario : peExecution.privacySafeScenario,
+    studentTask: isHealth ? (repairedContent?.studentTask ?? lesson.student_activity) : peExecution.studentTask,
+    knowledgeCheck: isHealth ? (repairedContent?.knowledgeCheck ?? lesson.formative_check) : peExecution.knowledgeCheck,
     completionCriteria: isHealth
       ? (repairedContent?.completionCriteria ?? lesson.success_criteria ?? [])
       : peExecution.completionCriteria,
@@ -161,17 +248,22 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     extensionChallenge: lesson.extension ?? null,
     accessibilitySupports: lesson.accessibility_and_accommodations ?? [],
     ...(isHealth ? { trustedAdultNote: trustedAdultSentence(lesson) } : {}),
-    optionalReflection: lesson.home_connection
-      ? { prompt: lesson.home_connection, private: true, graded: false, optional: true }
-      : null,
+    optionalReflection: isHealth
+      ? (lesson.home_connection ? { prompt: lesson.home_connection, private: true, graded: false, optional: true } : null)
+      : { prompt: peExecution.reflectionPrompt, private: true, graded: false, optional: true },
     neverRequires: isHealth ? NEVER_REQUIRES : PE_NEVER_REQUIRES,
-    sourceProvenance: { sourceBranch: sourceBranchLabel(grade, subject), sourceLessonId: lesson.lesson_id },
+    sourceProvenance: {
+      sourceBranch: sourceBranchLabel(grade, subject),
+      sourceLessonId: lesson.lesson_id,
+      ...(!isHealth ? { productionDepthRevision: 'physical-education-production-depth-r1' } : {}),
+    },
     ...(repairedContent ? {
       contentProvenance: {
         repairLane: 'mac/health-content-repair-r1',
         objective: lesson.learning_objectives?.[0] ?? lesson.focus,
       },
     } : {}),
+    ...(healthDepth ? healthDepth.learner : {}),
   }
 
   const scoringGuide = {
@@ -181,16 +273,33 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     courseId: lesson.course_id,
     grade,
     subject,
+    ...(!isHealth ? {
+      standards: peExecution.standards,
+      primaryLessonType: peExecution.primaryLessonType,
+    } : {}),
     scoringAuthority: 'RUBRIC',
-    successCriteria: lesson.success_criteria ?? [],
-    scoringGuidance: lesson.answer_or_scoring_guidance ?? null,
-    masteryRule: lesson.mastery_rule ?? null,
-    remediation: remediationText,
-    adaptiveRoutes: lesson.adaptive_tutor_routes ?? [],
+    successCriteria: isHealth ? (lesson.success_criteria ?? []) : peExecution.scoring.successCriteria,
+    ...(!isHealth ? { rubricDimensions: peExecution.scoring.rubricDimensions } : {}),
+    scoringGuidance: isHealth ? (lesson.answer_or_scoring_guidance ?? null) : peExecution.scoring.scoringGuidance,
+    masteryRule: isHealth ? (lesson.mastery_rule ?? null) : peExecution.scoring.masteryRule,
+    remediation: isHealth ? remediationText : peExecution.remediation,
+    adaptiveRoutes: isHealth ? (lesson.adaptive_tutor_routes ?? []) : peExecution.scoring.adaptiveRoutes,
+    ...(!isHealth ? {
+      protectedDecisionAuthority: peExecution.scoring.protectedAuthority,
+      sufficientEvidence: peExecution.scoring.sufficientEvidence,
+      guardianAuthority: peExecution.guardianAuthority,
+      evidenceTypes: peExecution.evidenceExpectations.evidenceTypes,
+      tutorBoundary: peExecution.tutorMetadata,
+    } : {}),
     guardianOrParentVisibility: lesson.parent_or_guardian_visibility ?? null,
     guardianSafetyReview: guardianSafety,
     safetyAndPrivacyNotes: lesson.safety_and_privacy ?? [],
-    sourceProvenance: { sourceBranch: sourceBranchLabel(grade, subject), sourceLessonId: lesson.lesson_id },
+    sourceProvenance: {
+      sourceBranch: sourceBranchLabel(grade, subject),
+      sourceLessonId: lesson.lesson_id,
+      ...(!isHealth ? { productionDepthRevision: 'physical-education-production-depth-r1' } : {}),
+    },
+    ...(healthDepth ? healthDepth.adult : {}),
   }
 
   const gateInput = {
@@ -201,21 +310,27 @@ function buildLessonArtifacts(lesson, unit, subject, grade) {
     subjectFamily: 'ARTS_RFL_PE_PROJECT',
     instruction: keyPoints.length ? { present: true, text: keyPoints.join(' ') } : { present: false },
     independentWork: {
-      present: Boolean(repairedContent?.studentTask ?? lesson.student_activity),
-      text: [repairedContent?.studentTask ?? lesson.student_activity, repairedContent?.knowledgeCheck ?? lesson.formative_check].filter(Boolean).join(' '),
+      present: Boolean(isHealth ? (repairedContent?.studentTask ?? lesson.student_activity) : peExecution.studentTask),
+      text: isHealth
+        ? [repairedContent?.studentTask ?? lesson.student_activity, repairedContent?.knowledgeCheck ?? lesson.formative_check].filter(Boolean).join(' ')
+        : `${peExecution.studentTask} ${peExecution.knowledgeCheck}`,
     },
     scoringAuthority: {
       kind: 'RUBRIC',
       content: {
-        present: Boolean(lesson.answer_or_scoring_guidance) || (Array.isArray(lesson.success_criteria) && lesson.success_criteria.length > 0),
-        text: [...(lesson.success_criteria ?? []), lesson.answer_or_scoring_guidance].filter(Boolean).join(' '),
+        present: isHealth
+          ? Boolean(lesson.answer_or_scoring_guidance) || (Array.isArray(lesson.success_criteria) && lesson.success_criteria.length > 0)
+          : peExecution.scoring.successCriteria.length > 0,
+        text: isHealth
+          ? [...(lesson.success_criteria ?? []), lesson.answer_or_scoring_guidance].filter(Boolean).join(' ')
+          : `${peExecution.scoring.successCriteria.join(' ')} ${peExecution.scoring.scoringGuidance}`,
       },
     },
-    remediation: { present: Boolean(remediationText), text: remediationText ?? undefined },
+    remediation: { present: Boolean(isHealth ? remediationText : peExecution.remediation), text: isHealth ? (remediationText ?? undefined) : peExecution.remediation },
     extension: { present: Boolean(lesson.extension), text: lesson.extension },
     assessmentAlignment: standardsAligned(lesson.standards, unit),
     requiresSafetyOrPrivacyReview: true,
-    safeAlternative: { present: Boolean(safeAlternativeText), text: safeAlternativeText },
+    safeAlternative: { present: true, text: isHealth ? safeAlternativeText : peExecution.accessibleAdaptation },
   }
 
   const violations = [...scanDocument(pkg, `packages/${subject}/grade-${gradeToken(grade)}/${lesson.lesson_id}.json`), ...scanDocument(scoringGuide, `scoring-guides/${subject}/grade-${gradeToken(grade)}/${lesson.lesson_id}.json`)]
@@ -311,6 +426,7 @@ function buildAssessmentArtifacts(assessment, unit, subject, grade, courseId) {
 }
 
 function main() {
+  const approvedHealthAnchor = readApprovedHealthAnchor()
   const packagesRoot = resolve(ROOT, 'packages')
   const guidesRoot = resolve(ROOT, 'scoring-guides')
   if (existsSync(packagesRoot)) rmSync(packagesRoot, { recursive: true, force: true })
@@ -320,6 +436,8 @@ function main() {
   const privacyViolations = []
   const byGrade = []
   const peLessonPackages = []
+  const healthLessonPackages = []
+  const healthLessonGuides = []
 
   for (const grade of SUPPORTED_GRADES) {
     for (const subject of SUBJECTS) {
@@ -342,8 +460,23 @@ function main() {
 
         const pkgPath = resolve(packagesRoot, subject, `grade-${gradeToken(grade)}`, `${lesson.lesson_id}.json`)
         const guidePath = resolve(guidesRoot, subject, `grade-${gradeToken(grade)}`, `${lesson.lesson_id}.json`)
-        writeJson(pkgPath, { ...pkg, productionReadiness: { status: gate.status, codes: gate.codes } })
-        writeJson(guidePath, { ...scoringGuide, productionReadiness: { status: gate.status, codes: gate.codes, notes: gate.notes } })
+        const packageDocument = { ...pkg, productionReadiness: { status: gate.status, codes: gate.codes } }
+        const guideDocument = { ...scoringGuide, productionReadiness: { status: gate.status, codes: gate.codes, notes: gate.notes } }
+        if (lesson.lesson_id === APPROVED_HEALTH_ANCHOR_ID) {
+          mkdirSync(dirname(pkgPath), { recursive: true })
+          mkdirSync(dirname(guidePath), { recursive: true })
+          writeFileSync(pkgPath, approvedHealthAnchor.packageBytes)
+          writeFileSync(guidePath, approvedHealthAnchor.guideBytes)
+          healthLessonPackages.push(approvedHealthAnchor.packageDocument)
+          healthLessonGuides.push(approvedHealthAnchor.guideDocument)
+        } else {
+          writeJson(pkgPath, packageDocument)
+          writeJson(guidePath, guideDocument)
+          if (subject === 'health') {
+            healthLessonPackages.push(packageDocument)
+            healthLessonGuides.push(guideDocument)
+          }
+        }
         lessonCount += 1
       }
 
@@ -369,6 +502,55 @@ function main() {
   const needsReviewCount = gateResults.filter((r) => r.status === 'NEEDS_HUMAN_REVIEW').length
   const notReadyCount = gateResults.filter((r) => r.status === 'NOT_READY').length
   const notReadyIds = gateResults.filter((r) => r.status === 'NOT_READY').map((r) => ({ id: r.lessonId, codes: r.codes, notes: r.notes }))
+  const healthDepthAudit = auditHealthProductionDepth(healthLessonPackages, healthLessonGuides)
+  const healthDepthReady = healthDepthAudit.issueCount === 0
+  const healthDepthEvidence = {
+    evidenceType: 'health-production-depth-r1',
+    evidenceVersion: '1.0.0',
+    productionDepthVersion: HEALTH_PRODUCTION_DEPTH_VERSION,
+    scope: {
+      subject: 'health',
+      grades: SUPPORTED_GRADES,
+      lessonsBefore: 324,
+      lessonsAfter: healthDepthAudit.lessonsAudited,
+      lessonsRebuilt: healthDepthAudit.lessonsAudited,
+      pairedAdultGuides: healthDepthAudit.guidesAudited,
+    },
+    teachingSupply: {
+      explanation: healthDepthAudit.lessonsAudited,
+      vocabulary: healthDepthAudit.lessonsAudited,
+      models: healthDepthAudit.lessonsAudited,
+      guidedReasoning: healthDepthAudit.lessonsAudited,
+      independentEvidence: healthDepthAudit.lessonsAudited,
+      freshMastery: healthDepthAudit.lessonsAudited,
+      differentiatedRemediation: healthDepthAudit.lessonsAudited,
+    },
+    lessonTypes: healthDepthAudit.lessonTypes,
+    grades: healthDepthAudit.grades,
+    safetyAndPrivacy: {
+      noDiagnosis: healthDepthAudit.lessonsAudited,
+      noIndividualizedTreatmentAdvice: healthDepthAudit.lessonsAudited,
+      noShameOrBodyValue: healthDepthAudit.lessonsAudited,
+      noForcedSensitiveDisclosure: healthDepthAudit.lessonsAudited,
+      privateReflectionExcludedFromMastery: healthDepthAudit.lessonsAudited,
+    },
+    ageLanguage: {
+      grades3To5: 'short concrete directions with one action per step',
+      grades7To8: 'concrete ordered reasoning with bounded constraints',
+      grades9To12: 'chunked health-literacy analysis with evidence, uncertainty, tradeoffs, and authority',
+    },
+    approvedAnchor: {
+      lessonId: APPROVED_HEALTH_ANCHOR_ID,
+      approvedSampleSha: '61f447082bc3102cab6eb7514a0c443c1bacbc17',
+      packageSha256: approvedHealthAnchor.packageHash,
+      guideSha256: approvedHealthAnchor.guideHash,
+      bytePreserved: true,
+    },
+    issueCount: healthDepthAudit.issueCount,
+    issues: healthDepthAudit.issues,
+    classification: healthDepthReady ? 'HEALTH_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE' : 'BLOCKED',
+  }
+  writeJson(resolve(ROOT, 'reports/health-production-depth-r1.json'), healthDepthEvidence)
   const peAudit = auditPeLessonExecutability(peLessonPackages)
   const peAfter = {
     missingMovementCues: peAudit.missingMovementCues.length,
@@ -377,6 +559,18 @@ function main() {
     missingAdaptation: peAudit.missingAdaptation.length,
     homeUseBlockers: peAudit.homeUseBlockers.length,
     missingCompletionCriteria: peAudit.missingCompletionCriteria.length,
+    missingGoalOrReadiness: peAudit.missingGoalOrReadiness.length,
+    missingLessonFamilyPlan: peAudit.missingLessonFamilyPlan.length,
+    missingModel: peAudit.missingModel.length,
+    missingGuidedPractice: peAudit.missingGuidedPractice.length,
+    missingProgression: peAudit.missingProgression.length,
+    missingIndependentActivity: peAudit.missingIndependentActivity.length,
+    missingRestStopDistinction: peAudit.missingRestStopDistinction.length,
+    missingEvidenceBoundary: peAudit.missingEvidenceBoundary.length,
+    missingRetry: peAudit.missingRetry.length,
+    missingGuardianBoundary: peAudit.missingGuardianBoundary.length,
+    missingTutorBoundary: peAudit.missingTutorBoundary.length,
+    invalidLessonType: peAudit.invalidLessonType.length,
   }
   const peReady = peAudit.lessonsAudited === CONFIRMED_PE_BASELINE.lessons
     && Object.values(peAfter).every((count) => count === 0)
@@ -385,25 +579,49 @@ function main() {
       .sort()
       .map((category) => [category, peLessonPackages.filter((pkg) => pkg.executionCategory === category).length]),
   )
+  const lessonFamilyCounts = Object.fromEntries(
+    [...new Set(peLessonPackages.map((pkg) => pkg.primaryLessonType))]
+      .sort()
+      .map((type) => [type, peLessonPackages.filter((pkg) => pkg.primaryLessonType === type).length]),
+  )
+  const anchorPackagePath = resolve(packagesRoot, 'physical-education', 'grade-12', `${APPROVED_PE_ANCHOR_ID}.json`)
+  const anchorScoringPath = resolve(guidesRoot, 'physical-education', 'grade-12', `${APPROVED_PE_ANCHOR_ID}.json`)
+  const anchorPackageSha256 = createHash('sha256').update(readFileSync(anchorPackagePath)).digest('hex')
+  const anchorScoringSha256 = createHash('sha256').update(readFileSync(anchorScoringPath)).digest('hex')
+  const approvedPackageSha256 = createHash('sha256').update(readFileSync(resolve(HERE, 'approved', `${APPROVED_PE_ANCHOR_ID}.package.json`))).digest('hex')
+  const approvedScoringSha256 = createHash('sha256').update(readFileSync(resolve(HERE, 'approved', `${APPROVED_PE_ANCHOR_ID}.scoring.json`))).digest('hex')
   const peEvidence = {
-    evidenceType: 'physical-education-learner-content-repair',
-    evidenceVersion: '1.0.0',
+    evidenceType: 'physical-education-production-depth-r1',
+    evidenceVersion: '2.0.0',
+    population: { lessonsBefore: 972, lessonsAfter: 972, lessonsRebuilt: 972 },
     confirmedBaseline: CONFIRMED_PE_BASELINE,
     repairs: {
       movementCueRepairs: CONFIRMED_PE_BASELINE.missingMovementCues,
       equipmentRepairs: CONFIRMED_PE_BASELINE.equipmentBlockers,
       safetyRepairs: CONFIRMED_PE_BASELINE.missingRequiredSafety,
-      repairLevel: 'shared generator/template',
+      productionDepthRebuilds: 972,
+      repairLevel: 'canonical generator lesson-family projection',
     },
     after: peAfter,
     proofs: {
       lessonsAudited: peAudit.lessonsAudited,
+      lessonFamilyCounts,
       focusSpecificExecutionCategories: categoryCounts,
-      movementCueRule: 'At least three movement cues plus an age-band technique note on every PE lesson.',
-      adaptationRule: 'Every lesson states seated, supported, reduced-range, mobility-aid, solo, and equal-credit response paths.',
+      runnabilityRule: 'Every lesson supplies a goal, readiness check, safe setup, model, guided attempts, one-variable progression, fresh independent work, evidence, reflection, and a changed-teaching retry.',
+      movementCueRule: 'Every lesson supplies at least three target cues and a model with starting position, action, key cue, common error, correction, adaptation, observation focus, and safety boundary.',
+      adaptationRule: 'Every lesson states runnable seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, and described/decision routes that earn equal credit without reason disclosure.',
       homeUseRule: 'Every lesson states a cleared low-space setup, no-specialized-equipment requirement, household substitute policy, and equal-credit no-equipment path.',
-      safetyRule: 'Every lesson states environment/equipment checks, controlled-effort rules, at least three stop conditions, and trusted-adult escalation.',
-      completionRule: 'Every lesson has four observable criteria covering setup/path choice, cue use, safety/equipment reasoning, and equal-credit adaptation.',
+      safetyRule: 'Every lesson distinguishes learner-controlled REST / ADJUST from STOP AND TELL and DO NOT RESUME, while preserving guardian/professional return authority.',
+      evidenceRule: 'Evidence is type-matched and no Tutor, browser, learner self-report, camera, or wearable can certify physical completion or safe return.',
+      scoringRule: 'Scoring covers safe participation, decision quality, skill evidence, planning, knowledge, reflection, revision, and completion as appropriate; body and peer-comparison scoring is prohibited.',
+      remediationRule: 'Every retry names an observable gap, simplifies setup, changes cue/model, bounds practice, uses a fresh retry, and states an exit criterion.',
+      approvedAnchor: {
+        lessonId: APPROVED_PE_ANCHOR_ID,
+        packageSha256: anchorPackageSha256,
+        scoringSha256: anchorScoringSha256,
+        packageMatchesApprovedSource: anchorPackageSha256 === approvedPackageSha256,
+        scoringMatchesApprovedSource: anchorScoringSha256 === approvedScoringSha256,
+      },
     },
     issueIdsAfter: {
       missingMovementCues: peAudit.missingMovementCues,
@@ -412,8 +630,20 @@ function main() {
       missingAdaptation: peAudit.missingAdaptation,
       homeUseBlockers: peAudit.homeUseBlockers,
       missingCompletionCriteria: peAudit.missingCompletionCriteria,
+      missingGoalOrReadiness: peAudit.missingGoalOrReadiness,
+      missingLessonFamilyPlan: peAudit.missingLessonFamilyPlan,
+      missingModel: peAudit.missingModel,
+      missingGuidedPractice: peAudit.missingGuidedPractice,
+      missingProgression: peAudit.missingProgression,
+      missingIndependentActivity: peAudit.missingIndependentActivity,
+      missingRestStopDistinction: peAudit.missingRestStopDistinction,
+      missingEvidenceBoundary: peAudit.missingEvidenceBoundary,
+      missingRetry: peAudit.missingRetry,
+      missingGuardianBoundary: peAudit.missingGuardianBoundary,
+      missingTutorBoundary: peAudit.missingTutorBoundary,
+      invalidLessonType: peAudit.invalidLessonType,
     },
-    classification: peReady ? 'PE_CONTENT_READY_FOR_CONVERGENCE' : 'BLOCKED',
+    classification: peReady ? 'PHYSICAL_EDUCATION_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE' : 'BLOCKED',
   }
 
   writeJson(resolve(ROOT, 'pe-content-repair-evidence.json'), peEvidence)
@@ -429,6 +659,7 @@ function main() {
       canonical578: 'shared base@656efba (curriculum-content/manuel-academy/1.0.0, grades 5, 7, 8)',
       hs912: 'mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7',
       healthContentRepair: 'mac/health-content-repair-r1 (objective-specific instruction and learner work for Health grades 5 and 7-12)',
+      physicalEducationProductionDepth: 'physical-education-production-depth-r1 (canonical lesson-family projection plus approved Director anchor source)',
       productionGate: 'mac/curriculum-production-gate-h3@49b3c4b86cc7764627bd4cfbd752222849831abf',
       excluded: 'grade 6 — no curriculum authored for it yet (see src/curriculum/grade-authority)',
     },
@@ -457,6 +688,15 @@ function main() {
       placeholderInstructionalLessons: 0,
       evidence: 'reports/health-content-repair-r1.json',
     },
+    healthProductionDepth: {
+      evidenceFile: 'reports/health-production-depth-r1.json',
+      lessonsRebuilt: healthDepthAudit.lessonsAudited,
+      pairedAdultGuides: healthDepthAudit.guidesAudited,
+      lessonTypes: healthDepthAudit.lessonTypes,
+      approvedAnchorPreserved: true,
+      issueCount: healthDepthAudit.issueCount,
+      classification: healthDepthEvidence.classification,
+    },
     scoringPolicy: {
       gateSemantics: 'H3',
       judgmentWorkAuthority: 'RUBRIC',
@@ -468,6 +708,9 @@ function main() {
       repairs: peEvidence.repairs,
       after: peAfter,
       classification: peEvidence.classification,
+      lessonFamilyCounts,
+      focusSpecificExecutionCategories: categoryCounts,
+      approvedAnchor: peEvidence.proofs.approvedAnchor,
     },
     checksums: {
       algorithm: 'SHA-256',
@@ -484,9 +727,10 @@ function main() {
   console.log(`Generated ${gateResults.length} items (${manifest.totals.lessons} lessons + ${manifest.totals.unitAssessments} unit assessments)`)
   console.log(`Production gate: ${readyCount} READY, ${needsReviewCount} NEEDS_HUMAN_REVIEW, ${notReadyCount} NOT_READY`)
   console.log(`Privacy scan: ${privacyViolations.length} violation(s)`)
+  console.log(`Health production depth: ${healthDepthAudit.lessonsAudited} lessons + ${healthDepthAudit.guidesAudited} guides; ${healthDepthAudit.issueCount} issue(s)`)
   console.log(`PE learner-content audit: ${peAudit.lessonsAudited} lessons; ${peAfter.missingMovementCues} missing cues, ${peAfter.equipmentBlockers} equipment blockers, ${peAfter.missingRequiredSafety} missing safety, ${peAfter.missingAdaptation} missing adaptations, ${peAfter.homeUseBlockers} home-use blockers`)
 
-  if (notReadyCount > 0 || privacyViolations.length > 0 || !peReady) {
+  if (notReadyCount > 0 || privacyViolations.length > 0 || !healthDepthReady || !peReady) {
     process.exitCode = 1
   }
 }

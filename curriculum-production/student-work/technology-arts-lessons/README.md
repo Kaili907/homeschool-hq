@@ -84,6 +84,26 @@ probing, scanning, or accessing any live, production, school, or third-party
 system, or bypassing any filter, licence, access control, or terms of service.
 No credential-shaped literal appears anywhere in the corpus.
 
+Every one of the 336 Technology packages also carries a static, tutor-free
+`learner_experience`: explicit concept teaching, a fully worked analogous
+non-target example, guided practice with a stated support fade, protected
+independent work, a six-move debugging/revision cycle, two representation-
+changing remediation routes, and a fresh mastery check. Code/debug,
+algorithm, design, digital-citizenship/safety, data, systems, creation/project,
+analysis, and review/mastery lessons keep distinct instructional lenses rather
+than being forced into one programming template. Exact protected resolutions
+and accepted evidence models live only in the matching scoring guide under
+`trusted_solution_reference` with `learner_visibility: NEVER`.
+
+The Director-approved `ma-g10-technology-u02-l05` experience is a canonical
+source anchor under `src/approved-anchors/`; regeneration reproduces that task
+package and scoring guide exactly. The independent production-depth audit
+checks the complete Technology corpus, verifies that every worked example is
+marked `ANALOGOUS_NON_TARGET`, compares generated anchor output with its
+approved source, and scans learner packages against adult-only reference
+implementations and decisive repairs. Its current result is 336/336 depth-
+complete lessons and zero current learner solution leaks.
+
 Where an authored lesson's focus is itself an attack concept — grade 7 unit 5
 covers `phishing and social engineering` — student-facing prose renders it
 defensively ("recognising and defending against …") so no task reads as an
@@ -108,6 +128,24 @@ work, has no external dependency, and includes a pencil/paper or equal-credit
 silent notation route. See `arts-music-content-repair-evidence.json` and verify
 all 1,296 Arts/Music production artifacts with
 `sha256sum -c arts-music-checksums.sha256` from this directory.
+
+Every Arts/Music package also carries the production `arts_music_r1` teaching
+contract. The source composer assigns one of 17 canonical lesson types from the
+actual focus, then supplies discipline-specific definitions, mechanisms,
+tradeoffs, worked examples and non-examples, ordered technique steps,
+phase-appropriate work blocks, learner-owned choices, observable retry routes,
+and a focus-facing rubric that separates objective constraints from
+judgment-based criteria. Across the 12 authored Arts phases, work varies among
+2, 3, 4, and 5 blocks rather than using one mechanical count.
+
+The 97 source-dependent visual or contextual lessons whose target requires a
+perceptible image receive generated Academy-original SVG models with embedded
+title/description and a movable-paper or tactile parallel. Music models include
+complete pulse, pitch, or event notation that can be performed, tapped,
+gestured, pointed through, or read silently without an instrument or audio
+device. Theatre/movement, portfolio, and other text-carryable references include
+the complete script, beat map, evidence record, or reference description inside
+the package. No required reference is merely suggested.
 
 **Both.** Every lesson states that the graded submission must be the student's
 own authorship, and that an adult or AI tool may explain, demonstrate, or give
@@ -135,11 +173,19 @@ node tests/validate-corpus.mjs
 ```
 
 ```bash
+node tests/validate-arts-music-production-depth.mjs
+```
+
+```bash
 node tests/schema-check.mjs
 ```
 
 ```bash
 node tests/technology-actionability-audit.mjs
+```
+
+```bash
+node tests/technology-production-depth-audit.mjs
 ```
 
 ```bash
@@ -217,10 +263,11 @@ whose authored focus is a gerund phrase.
 
 ## Known limitations
 
-- **Grades 7–12 share one task body per work mode.** Differentiation across
-  that band comes from the grade-specific expectation sentence and each
-  lesson's own focus and closing check, not from distinct templates per grade.
-  Grades 3–5 are a genuinely separate register.
+- Arts/Music production composition is profile-driven from 12 disciplinary
+  teaching profiles plus 17 canonical lesson types. Generated Academy examples
+  are labeled instructional examples; they do not claim to be historical or
+  culturally authentic works. Claims about a real creator, tradition, place,
+  or event still require a substantive cited source.
 - **200 lessons in grades 9–12 have a focus identical to their unit title**,
   because those units define six topics but contain twelve lessons. That is a
   property of the authored source, which lies outside this corpus's owned

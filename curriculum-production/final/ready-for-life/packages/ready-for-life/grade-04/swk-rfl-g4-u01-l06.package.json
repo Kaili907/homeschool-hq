@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last"
+    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners pick one real household routine task they have already practiced this unit, such as a space reset or a storage system, complete it once, check the result against a specific standard for what 'done' looks like, identify one specific gap between their result and that standard, then correct the gap and compare their first attempt to their corrected result.",
+  "objective": "I can practice finishing the loop. I will do one step at a time and check one result.",
   "scenario": "The learner selects one task they have practiced earlier in this unit, such as resetting a shared space or storing a group of items, and treats finishing as a two-part loop: first completing the task, then checking it against a clear standard and fixing whatever doesn't yet meet it, instead of stopping as soon as the task looks roughly done.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -25,65 +26,65 @@
   "safetyNotes": [],
   "simulationAlternative": null,
   "materials": [
-    "one real household task the learner has already practiced this unit",
-    "paper or a notes app to write the standard and the gap"
+    "Embedded resource: swk-rfl-g4-u01-l06-model-card",
+    "Embedded resource: swk-rfl-g4-u01-l06-step-card",
+    "Embedded resource: swk-rfl-g4-u01-l06-guided-card",
+    "Embedded resource: swk-rfl-g4-u01-l06-independent-card",
+    "Embedded resource: swk-rfl-g4-u01-l06-evidence-record",
+    "Embedded resource: swk-rfl-g4-u01-l06-retry-pair",
+    "adult-or-local: one real household task the learner has already practiced this unit",
+    "learner-local: paper or a notes app to write the standard and the gap"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Pick one task from earlier this unit and write down what 'done' specifically looks like for it before you start.",
+      "directions": "Open swk-rfl-g4-u01-l06-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Name the task you're redoing and write two or three specific things that must be true for it to count as fully done."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Complete the task once, straight through, without stopping to fix anything along the way.",
+      "directions": "Open swk-rfl-g4-u01-l06-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I completed the whole task in one pass before checking it against my standard."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I did not stop partway through to redo or fix anything."
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "I wrote down what my finished first attempt actually looked like."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Check your finished first attempt against the specific standard you wrote in the warm-up and find any gap between them.",
+      "directions": "Open swk-rfl-g4-u01-l06-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "short-response",
-          "text": "Compare your first attempt to your written standard and name one specific thing that doesn't yet match, such as a spot still cluttered, an item not yet stored correctly, or a step skipped."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
         },
         {
           "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Fix that specific gap, then describe exactly what you changed to close it."
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Compare your first attempt to your corrected result.",
+      "directions": "Open swk-rfl-g4-u01-l06-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -93,7 +94,7 @@
       ]
     }
   ],
-  "remediation": "If a learner's stated standard is too vague to check against, such as 'make it nice,' reteach by rewriting the standard as two or three yes-or-no checkable statements, for example 'every item has a specific spot' instead of 'organized,' then have the learner re-run the check against the rewritten standard.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g4-u01-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g4-u01-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g4-u01-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Standard-setting specificity: The standard includes two or three specific, checkable statements written before the task starts. | Self-correction quality: A specific gap between the first attempt and the standard is correctly identified and actually fixed. Resume at the next unfinished step on swk-rfl-g4-u01-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner apply the same finish-and-check loop to a different task from earlier in the unit and compare how large the gap was between their first attempt and their standard on this new task versus the original one.",
   "scoringRef": "scoring/swk-rfl-g4-u01-l06.scoring.json",
   "integrity": {
@@ -101,5 +102,244 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
     "sourceLessonId": "ma-g4-ready-for-life-u01-l06",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "planning-organization",
+    "practicalGoal": "I can practice finishing the loop. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g4-u01-l06-model-card",
+        "swk-rfl-g4-u01-l06-step-card",
+        "swk-rfl-g4-u01-l06-guided-card",
+        "swk-rfl-g4-u01-l06-independent-card",
+        "swk-rfl-g4-u01-l06-evidence-record",
+        "swk-rfl-g4-u01-l06-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g4-u01-l06-local-1",
+          "label": "one real household task the learner has already practiced this unit",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u01-l06-local-2",
+          "label": "paper or a notes app to write the standard and the gap",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g4-u01-l06-model-card",
+        "kind": "model",
+        "title": "finishing the loop worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner selects one task they have practiced earlier in this unit, such as resetting a shared space or storing a group of items, and treats finishing as a two-part loop: first completing the task, then checking it against a clear standard and fixing whatever doesn't yet meet it, instead of stopping as soon as the task looks roughly done.",
+          "Model move 1: Read the condition and name the exact finishing the loop decision or action.",
+          "Model move 2: Pick one task from earlier this unit and write down what 'done' specifically looks like for it before you start.",
+          "Model move 3: Complete the task once, straight through, without stopping to fix anything along the way.",
+          "Model check: Standard-setting specificity: The standard includes two or three specific, checkable statements written before the task starts. | Self-correction quality: A specific gap between the first attempt and the standard is correctly identified and actually fixed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u01-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "finishing the loop action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for finishing the loop.",
+          "2. Watch the worked move on swk-rfl-g4-u01-l06-model-card.",
+          "3. Do one coached move on swk-rfl-g4-u01-l06-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g4-u01-l06-independent-card.",
+          "5. Save the small record on swk-rfl-g4-u01-l06-evidence-record; use swk-rfl-g4-u01-l06-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u01-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "finishing the loop coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner selects one task they have practiced earlier in this unit, such as resetting a shared space or storing a group of items, and treats finishing as a two-part loop: first completing the task, then checking it against a clear standard and fixing whatever doesn't yet meet it, instead of stopping as soon as the task looks roughly done.",
+          "Coach direction: Pick one task from earlier this unit and write down what 'done' specifically looks like for it before you start.",
+          "Learner prompt: Name the task you're redoing and write two or three specific things that must be true for it to count as fully done.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u01-l06-independent-card",
+        "kind": "independent-task",
+        "title": "finishing the loop complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Complete the task once, straight through, without stopping to fix anything along the way.",
+          "Response 1 (t2-p1): I completed the whole task in one pass before checking it against my standard.",
+          "Response 2 (t2-p2): I did not stop partway through to redo or fix anything.",
+          "Response 3 (t2-p3): I wrote down what my finished first attempt actually looked like.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u01-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "finishing the loop minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain what your first attempt was missing that your standard caught, and why checking your own work against a specific standard is different from just deciding a task 'looks done.'",
+          "Success checks: Standard-setting specificity: The standard includes two or three specific, checkable statements written before the task starts. | Self-correction quality: A specific gap between the first attempt and the standard is correctly identified and actually fixed.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u01-l06-retry-pair",
+        "kind": "retry",
+        "title": "finishing the loop supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g4-u01-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g4-u01-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional finishing the loop condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Standard-setting specificity: The standard includes two or three specific, checkable statements written before the task starts. | Self-correction quality: A specific gap between the first attempt and the standard is correctly identified and actually fixed..",
+          "Return: resume at the next unfinished step on swk-rfl-g4-u01-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "finishing the loop worked model",
+      "startingCondition": "The learner selects one task they have practiced earlier in this unit, such as resetting a shared space or storing a group of items, and treats finishing as a two-part loop: first completing the task, then checking it against a clear standard and fixing whatever doesn't yet meet it, instead of stopping as soon as the task looks roughly done.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact finishing the loop decision or action.",
+        "Model move 2: Pick one task from earlier this unit and write down what 'done' specifically looks like for it before you start.",
+        "Model move 3: Complete the task once, straight through, without stopping to fix anything along the way."
+      ],
+      "reasoning": "The model names the condition, follows the ordered finishing the loop process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Standard-setting specificity: The standard includes two or three specific, checkable statements written before the task starts.",
+        "Self-correction quality: A specific gap between the first attempt and the standard is correctly identified and actually fixed."
+      ],
+      "resourceRef": "swk-rfl-g4-u01-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for finishing the loop.",
+        "2. Watch the worked move on swk-rfl-g4-u01-l06-model-card.",
+        "3. Do one coached move on swk-rfl-g4-u01-l06-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g4-u01-l06-independent-card.",
+        "5. Save the small record on swk-rfl-g4-u01-l06-evidence-record; use swk-rfl-g4-u01-l06-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g4-u01-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner selects one task they have practiced earlier in this unit, such as resetting a shared space or storing a group of items, and treats finishing as a two-part loop: first completing the task, then checking it against a clear standard and fixing whatever doesn't yet meet it, instead of stopping as soon as the task looks roughly done.",
+      "prompt": "Name the task you're redoing and write two or three specific things that must be true for it to count as fully done.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Standard-setting specificity: The standard includes two or three specific, checkable statements written before the task starts.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g4-u01-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g4-u01-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "finishing the loop — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g4-u01-l06-independent-card",
+        "directions": "Complete the finishing the loop task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g4-u01-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain what your first attempt was missing that your standard caught, and why checking your own work against a specific standard is different from just deciding a task 'looks done.'",
+      "observableCriteria": [
+        "Standard-setting specificity: The standard includes two or three specific, checkable statements written before the task starts.",
+        "Self-correction quality: A specific gap between the first attempt and the standard is correctly identified and actually fixed."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g4-u01-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g4-u01-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g4-u01-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g4-u01-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Standard-setting specificity: The standard includes two or three specific, checkable statements written before the task starts. | Self-correction quality: A specific gap between the first attempt and the standard is correctly identified and actually fixed.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g4-u01-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g4-u01-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

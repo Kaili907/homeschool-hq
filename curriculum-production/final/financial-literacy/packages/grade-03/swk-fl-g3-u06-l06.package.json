@@ -153,6 +153,245 @@
       }
     ]
   },
+  "productionDepthRevision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+  "financialFocus": {
+    "primary": "INTEGRATED_FINANCIAL_PLAN",
+    "secondary": [
+      "EXACT_MONEY_REASONING",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "REMEDIATION",
+  "targetConcepts": [
+    {
+      "conceptId": "finlit.integrated_financial_plan.1",
+      "meaning": "An integrated plan must make income, obligations, saving, protection, taxes, and goals work together."
+    },
+    {
+      "conceptId": "finlit.integrated_financial_plan.2",
+      "meaning": "A plan is conditional on its assumptions and should be tested against a realistic fictional shock."
+    },
+    {
+      "conceptId": "finlit.integrated_financial_plan.3",
+      "meaning": "Closing one gap usually uses cash or capacity that cannot serve another goal at the same time."
+    }
+  ],
+  "evidencePurpose": "Develop and apply integrated financial planning and stress testing through the existing fictional lesson work, including calculation where relevant and evidence-based decision reasoning.",
+  "conceptExplanation": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "title": "Understand integrated financial planning and stress testing",
+    "paragraphs": [
+      "An integrated plan must make income, obligations, saving, protection, taxes, and goals work together.",
+      "A plan is conditional on its assumptions and should be tested against a realistic fictional shock. In this lesson, the learner uses the provided fictional facts about sharing, giving, and reflecting; no real household information belongs in the work.",
+      "Closing one gap usually uses cash or capacity that cannot serve another goal at the same time. The usable process is: Reconcile the expected fictional plan. Identify assumptions and the weakest constraint. Apply one stated shock in cents and recompute. Revise the plan and defend the sacrifice and remaining risk."
+    ],
+    "relationship": [
+      "Reconcile the expected fictional plan.",
+      "Identify assumptions and the weakest constraint.",
+      "Apply one stated shock in cents and recompute.",
+      "Revise the plan and defend the sacrifice and remaining risk."
+    ],
+    "commonConfusion": "A plan that balances in the expected case is not automatically resilient to timing changes or shocks.",
+    "conditionsAndLimits": "Use only the stated fictional facts, time period, rate meaning, fees, taxes, timing, rounding, goals, and constraints. The result is education for this scenario, not individualized advice."
+  },
+  "calculationPolicy": {
+    "applicable": true,
+    "currency": "USD where a prompt states USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points-or-exact-rational",
+    "family": "INTEGRATED_FINANCIAL_PLAN",
+    "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+    "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+    "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+    "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+    "permittedTools": [
+      "calculator when listed in lesson materials or task directions",
+      "scratch paper",
+      "accessible response tool"
+    ],
+    "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+  },
+  "workedExamplePolicy": {
+    "applicability": "REQUIRED_AND_SUPPLIED",
+    "separationRule": "The model uses different fictional people, amounts, wording, and decision conditions from protected independent and mastery work."
+  },
+  "workedExamples": [
+    {
+      "exampleRef": "pd-r1-integrated_financial_plan-g3",
+      "title": "Worked example — integrated financial planning and stress testing",
+      "fictionCue": "Every person, amount, product, institution, and rule in this example is invented for instruction.",
+      "facts": [
+        "A fictional monthly plan has $2,400.00 inflow, $1,850.00 obligations, and $350.00 goal transfers.",
+        "A one-time $300.00 shock occurs this month."
+      ],
+      "goal": "Stress-test the month and choose a transparent revision.",
+      "relevantInformation": "Use only the listed fictional facts and conditions; do not substitute real household information.",
+      "method": "Reconcile the expected fictional plan. Identify assumptions and the weakest constraint. Apply one stated shock in cents and recompute. Revise the plan and defend the sacrifice and remaining risk.",
+      "steps": [
+        "Expected remainder: 240,000 − 185,000 − 35,000 = 20,000 cents, or $200.00.",
+        "Shock gap: 30,000 − 20,000 = 10,000 cents, or $100.00.",
+        "A complete revision must identify 10,000 cents from a flexible category, reserve, or delayed goal.",
+        "Choose a stated source, recompute the plan to zero or above, and name the goal or flexibility sacrificed."
+      ],
+      "interpretation": "The stress test reveals a $100.00 gap that the expected-case plan did not show.",
+      "reasonablenessCheck": "Choose a stated source, recompute the plan to zero or above, and name the goal or flexibility sacrificed.",
+      "tradeoff": "Using a reserve preserves current obligations but leaves less protection for a later shock.",
+      "limits": "The conclusion applies only to the stated fictional facts. A changed rate, fee, time, rule, goal, constraint, or risk can change it.",
+      "calculationAuthority": "All USD calculations shown here are written as integer cents. Percent rates, when used, are integer basis points divided by 10,000; stated rounding is half up at the declared line only."
+    }
+  ],
+  "guidedPracticeContract": {
+    "applicability": "REQUIRED",
+    "localTaskRefs": [
+      "t1",
+      "t2"
+    ],
+    "guidedLessonId": "ma-g3-financial-literacy-u06-l06",
+    "learnerAction": "Select and carry out the relevant operation with the fictional quantities, then interpret the result.",
+    "supportBeforeAction": "Vocabulary, labelled facts, the approved separate model, and an empty organizer may be used only outside protected attempts.",
+    "feedbackAfterAction": "Check for the observable confusion: A plan that balances in the expected case is not automatically resilient to timing changes or shocks.",
+    "expectedEvidence": "A learner-produced calculation or comparison plus financial meaning in the learner’s own words.",
+    "fade": "Step cues and parallel models end before independent or protected evidence."
+  },
+  "independentScenarioContract": {
+    "localTaskRefs": [
+      "t3",
+      "t4"
+    ],
+    "independentBoundary": "Use only the stated fictional facts and declared tools. No completed step, selected option, decisive justification, or protected result may be supplied.",
+    "permittedSupports": [
+      "read-aloud or vocabulary support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "responseForm": "mixed exact calculation and written reasoning",
+    "freshness": "The protected case keeps the target but changes facts, constraints, timing, representation, or alternatives from the worked model."
+  },
+  "decisionReasoning": {
+    "applicable": true,
+    "itemRefs": [
+      "t4-p1"
+    ],
+    "gradeBandDemand": "Name the goal, compare concrete costs or benefits, and explain one opportunity cost.",
+    "framework": [
+      "State the fictional goal.",
+      "Identify fixed facts, constraints, and assumptions.",
+      "Compare relevant benefits, costs, risks, and opportunity costs.",
+      "Use a calculation only when it answers a decision question.",
+      "Defend a conditional choice and name a changed fact that could change it."
+    ],
+    "neutrality": "More than one conclusion may be defensible when priorities differ; scoring follows relevant evidence and internal consistency, not an adult lifestyle preference."
+  },
+  "masteryRule": {
+    "targetConceptIds": [
+      "finlit.integrated_financial_plan.1",
+      "finlit.integrated_financial_plan.2",
+      "finlit.integrated_financial_plan.3"
+    ],
+    "evidenceLessonId": "ma-g3-financial-literacy-u06-l05",
+    "localTaskRefs": [],
+    "permittedSupports": [
+      "declared accessibility support",
+      "calculator when declared",
+      "scratch paper or unfilled organizer"
+    ],
+    "independenceRule": "Worked examples, completed organizers, answer-bearing hints, or decisive feedback invalidate the protected attempt; use a fresh case after support.",
+    "evidenceRequired": "Correct or acceptably normalized fixed work plus aligned financial interpretation or decision reasoning.",
+    "decisionRule": "Mastery is decided only by the aligned adult-only authority for the named evidence lesson; completion alone is not mastery."
+  },
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.integrated_financial_plan.core-confusion",
+      "observableSignal": "A plan that balances in the expected case is not automatically resilient to timing changes or shocks.",
+      "alternateExplanation": "Use a labelled fact–rule–result–meaning organizer. Separate what the fictional case states from what must be calculated or judged, then connect the result back to the stated goal.",
+      "parallelWorkedCase": {
+        "exampleRef": "pd-r1-remediation-integrated_financial_plan-g3",
+        "title": "Alternate model — integrated financial planning and stress testing",
+        "fictionCue": "This is a different invented case, not a protected task answer.",
+        "facts": [
+          "A pretend plan has 180,000 cents inflow, 145,000 cents obligations, 20,000 cents saving, and a 25,000-cent shock."
+        ],
+        "representation": "Write each money amount as integer cents, label the goal and constraints, and keep assumptions beside the calculation or comparison.",
+        "steps": [
+          "Expected remainder: 180,000 − 145,000 − 20,000 = 15,000 cents.",
+          "Shock gap: 25,000 − 15,000 = 10,000 cents.",
+          "Choose and label a 10,000-cent revision.",
+          "State the sacrificed benefit and one risk still not covered."
+        ],
+        "check": "Reverse the arithmetic where possible and confirm that the conclusion uses a stated goal or constraint."
+      },
+      "guidedRetryLessonId": "ma-g3-financial-literacy-u06-l06",
+      "guidedRetryRule": "Use the alternate representation on a different fictional case, require the learner to complete the decisive step, and fade labels after the attempt.",
+      "freshMasteryLessonId": "ma-g3-financial-literacy-u06-l05",
+      "freshMasteryRule": "Use a fresh protected case after support; do not count the parallel model or supported retry as mastery."
+    }
+  ],
+  "futureTutorManifest": {
+    "dataOnly": true,
+    "conceptIds": [
+      "finlit.integrated_financial_plan.1",
+      "finlit.integrated_financial_plan.2",
+      "finlit.integrated_financial_plan.3"
+    ],
+    "prerequisiteConceptIds": [
+      "lesson:ma-g3-financial-literacy-u06-l02"
+    ],
+    "misconceptionIds": [
+      "finlit.integrated_financial_plan.core-confusion"
+    ],
+    "calculationPolicy": {
+      "applicable": true,
+      "currency": "USD where a prompt states USD",
+      "moneyRepresentation": "integer-cents",
+      "rateRepresentation": "integer-basis-points-or-exact-rational",
+      "family": "INTEGRATED_FINANCIAL_PLAN",
+      "operationOrder": "Use the learner-visible scenario order and apply only the stated inflows, outflows, rates, fees, taxes, interest, deposits, charges, or payments.",
+      "rounding": "Treat exact-cent results as exact. When a prompt requires rounding, round only at its explicitly stated point and to its stated unit; use half-up for cent rounding unless the prompt declares another rule.",
+      "taxAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "interestAssumptions": "not-applicable-unless-stated-in-the-learner-scenario",
+      "normalization": "Follow each prompt’s requested unit and precision. Dollar and cent forms are equivalent only when the adult authority declares that normalization.",
+      "permittedTools": [
+        "calculator when listed in lesson materials or task directions",
+        "scratch paper",
+        "accessible response tool"
+      ],
+      "verification": "Protected fixed authority remains adult-only and is independently recomputed or comparison-derived from integer cents, basis points, exact rationals, or validated decimal strings. Binary floating-point output is never final authority."
+    },
+    "decisionScenarioRefs": [
+      "lesson:ma-g3-financial-literacy-u06-l06:fictional-scenario"
+    ],
+    "hintPolicy": {
+      "order": [
+        "restate-goal",
+        "locate-fictional-facts",
+        "name-rule-or-criterion",
+        "prompt-next-representation",
+        "parallel-case-then-fresh-retry"
+      ],
+      "mayReveal": "Vocabulary, stated assumptions, relevant fact locations, and a non-protected parallel case.",
+      "mustNotReveal": "Protected results, winning options, decisive justifications, adult authority, or enough successive steps to reduce the response to copying.",
+      "independenceEffect": "A parallel worked case or answer-bearing help ends the current independent attempt and requires fresh evidence."
+    },
+    "agePolicy": {
+      "band": "ELEMENTARY_3_5",
+      "scaffolding": "Use concrete choices, at most two interacting constraints at a time, short labelled cent calculations, and one evidence-based reason.",
+      "reasoningDemand": "Name the goal, compare concrete costs or benefits, and explain one opportunity cost.",
+      "privacy": "Never request real household income, debt, balances, spending, tax records, credit data, credentials, or hardship information.",
+      "adviceBoundary": "Discuss only approved fictional cases and general educational questions; do not direct real financial action."
+    },
+    "answerPolicy": {
+      "responseMode": "MIXED",
+      "authority": "adult-only companion scoring artifact resolved by stable package and prompt references",
+      "revealRestriction": "No protected fixed answer, rubric locator, or scoring trace appears in the learner package.",
+      "workedExampleSeparation": "Learner-visible examples are separate instruction and never authority for protected task responses."
+    }
+  },
+  "accessibilitySupports": [
+    "Use concrete choices, at most two interacting constraints at a time, short labelled cent calculations, and one evidence-based reason.",
+    "Read-aloud, vocabulary clarification, labelled text representations, calculator use when declared, and an unfilled organizer may reduce access burden without performing the target work.",
+    "Color, audio, spatial arrangement, and drag interaction are never the sole carrier of a required financial fact."
+  ],
   "productionProvenance": {
     "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
     "inputLane": "mac/finlit-production-g38-r3",
@@ -168,6 +407,12 @@
       "answerDerivedFromSourceGuidance": false
     },
     "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "productionDepthOverlay": {
+      "revision": "FINANCIAL_LITERACY_PRODUCTION_DEPTH_R1",
+      "generatorPath": "curriculum-production/final/financial-literacy/tooling/production-depth-r1.mjs",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
     "familyPilotFirst": true
   }
 }

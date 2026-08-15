@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners perform a timed 20-second soap handwashing routine and an overlapping-stroke counter-wipe technique, then run a second quick water-only rinse and explain why the quick rinse does not remove germs the way the full wash does even though hands may look equally clean.",
+  "objective": "I can practice handwashing and surface cleaning. I will do one step at a time and check one result.",
   "scenario": "Before doing any food task, the learner is asked to demonstrate the household's full handwashing routine and a proper counter-wipe technique, timing the wash against the 20-second food-safety standard, then compares that wash to a quick rinse with no soap.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -25,68 +26,68 @@
   "safetyNotes": [],
   "simulationAlternative": null,
   "materials": [
-    "a sink with soap and water",
-    "a clean towel or paper towel",
-    "a timer or clock",
-    "a kitchen counter or clean table surface",
-    "a clean cloth or paper towel for wiping"
+    "Embedded resource: swk-rfl-g4-u03-l02-model-card",
+    "Embedded resource: swk-rfl-g4-u03-l02-step-card",
+    "Embedded resource: swk-rfl-g4-u03-l02-guided-card",
+    "Embedded resource: swk-rfl-g4-u03-l02-independent-card",
+    "Embedded resource: swk-rfl-g4-u03-l02-evidence-record",
+    "Embedded resource: swk-rfl-g4-u03-l02-retry-pair",
+    "Embedded resource: swk-rfl-g4-u03-l02-delivered-table",
+    "learner-local: a sink with soap and water",
+    "learner-local: a clean towel or paper towel",
+    "learner-local: a timer or clock",
+    "learner-local: a clean cloth or paper towel for wiping"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before washing, predict how long 20 seconds actually feels like.",
+      "directions": "Open swk-rfl-g4-u03-l02-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Guess how many seconds you think you usually spend washing your hands right now, without timing yourself."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Wash your hands at the sink using soap, scrubbing the front, back, and between your fingers for a full 20 seconds timed on a clock, then wipe a kitchen counter or table surface using a clean cloth in overlapping strokes.",
+      "directions": "Open swk-rfl-g4-u03-l02-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I used soap and scrubbed my hands, including between my fingers and around my thumbs, not just my palms."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I timed myself for the full 20 seconds instead of stopping early."
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "I wiped the counter or surface using overlapping strokes so no spot was missed."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Now do a second, quick rinse of your hands with water only, no soap, for about 3 seconds, and compare how each wash felt.",
+      "directions": "Open swk-rfl-g4-u03-l02-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "extended-response",
-          "text": "Explain why a 3-second water-only rinse does not remove germs the way a full 20-second soap wash does, even though your hands might look and feel clean after both."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
         },
         {
           "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Name one specific moment today or this week when you would have used the quick rinse instead of the full wash if you had not practiced this."
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Think about surfaces compared to hands.",
+      "directions": "Open swk-rfl-g4-u03-l02-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -96,7 +97,7 @@
       ]
     }
   ],
-  "remediation": "If a learner scrubs only their palms and skips between their fingers and around their thumbnails, reteach using a visible marker: rub a dot of washable marker on the back of one hand and between two fingers before washing, then check under a light whether the marker is fully gone after the 20-second wash.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g4-u03-l02-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g4-u03-l02-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g4-u03-l02-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface. | Reasoning about germs and time: The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind. Resume at the next unfinished step on swk-rfl-g4-u03-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner time and compare wiping the same counter with a dry cloth only versus a cloth dampened with soapy water, then explain in writing which method actually lifted more visible crumbs or residue and why.",
   "scoringRef": "scoring/swk-rfl-g4-u03-l02.scoring.json",
   "integrity": {
@@ -104,5 +105,275 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
     "sourceLessonId": "ma-g4-ready-for-life-u03-l02",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can practice handwashing and surface cleaning. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "Up to seven days; use only the check-ins explicitly named in the task",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g4-u03-l02-model-card",
+        "swk-rfl-g4-u03-l02-step-card",
+        "swk-rfl-g4-u03-l02-guided-card",
+        "swk-rfl-g4-u03-l02-independent-card",
+        "swk-rfl-g4-u03-l02-evidence-record",
+        "swk-rfl-g4-u03-l02-retry-pair",
+        "swk-rfl-g4-u03-l02-delivered-table"
+      ],
+      "referencedArtifactWords": [
+        "table"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g4-u03-l02-delivered-table"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g4-u03-l02-local-1",
+          "label": "a sink with soap and water",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l02-local-2",
+          "label": "a clean towel or paper towel",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l02-local-3",
+          "label": "a timer or clock",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l02-local-4",
+          "label": "a clean cloth or paper towel for wiping",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g4-u03-l02-model-card",
+        "kind": "model",
+        "title": "handwashing and surface cleaning worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Before doing any food task, the learner is asked to demonstrate the household's full handwashing routine and a proper counter-wipe technique, timing the wash against the 20-second food-safety standard, then compares that wash to a quick rinse with no soap.",
+          "Model move 1: Read the condition and name the exact handwashing and surface cleaning decision or action.",
+          "Model move 2: Before washing, predict how long 20 seconds actually feels like.",
+          "Model move 3: Wash your hands at the sink using soap, scrubbing the front, back, and between your fingers for a full 20 seconds timed on a clock, then wipe a kitchen counter or table surface using a clean cloth in overlapping strokes.",
+          "Model check: Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface. | Reasoning about germs and time: The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l02-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "handwashing and surface cleaning action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for handwashing and surface cleaning.",
+          "2. Watch the worked move on swk-rfl-g4-u03-l02-model-card.",
+          "3. Do one coached move on swk-rfl-g4-u03-l02-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g4-u03-l02-independent-card.",
+          "5. Save the small record on swk-rfl-g4-u03-l02-evidence-record; use swk-rfl-g4-u03-l02-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l02-guided-card",
+        "kind": "guided-practice",
+        "title": "handwashing and surface cleaning coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Before doing any food task, the learner is asked to demonstrate the household's full handwashing routine and a proper counter-wipe technique, timing the wash against the 20-second food-safety standard, then compares that wash to a quick rinse with no soap.",
+          "Coach direction: Before washing, predict how long 20 seconds actually feels like.",
+          "Learner prompt: Guess how many seconds you think you usually spend washing your hands right now, without timing yourself.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l02-independent-card",
+        "kind": "independent-task",
+        "title": "handwashing and surface cleaning complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Wash your hands at the sink using soap, scrubbing the front, back, and between your fingers for a full 20 seconds timed on a clock, then wipe a kitchen counter or table surface using a clean cloth in overlapping strokes.",
+          "Response 1 (t2-p1): I used soap and scrubbed my hands, including between my fingers and around my thumbs, not just my palms.",
+          "Response 2 (t2-p2): I timed myself for the full 20 seconds instead of stopping early.",
+          "Response 3 (t2-p3): I wiped the counter or surface using overlapping strokes so no spot was missed.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l02-evidence-record",
+        "kind": "evidence-record",
+        "title": "handwashing and surface cleaning minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain one way that wiping a counter is similar to washing your hands for food safety, and one way it is different.",
+          "Success checks: Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface. | Reasoning about germs and time: The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l02-retry-pair",
+        "kind": "retry",
+        "title": "handwashing and surface cleaning supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g4-u03-l02-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g4-u03-l02-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional handwashing and surface cleaning condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface. | Reasoning about germs and time: The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind..",
+          "Return: resume at the next unfinished step on swk-rfl-g4-u03-l02-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l02-delivered-table",
+        "kind": "independent-task",
+        "title": "handwashing and surface cleaning delivered table",
+        "purpose": "Resolves the lesson's named table so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Before doing any food task, the learner is asked to demonstrate the household's full handwashing routine and a proper counter-wipe technique, timing the wash against the 20-second food-safety standard, then compares that wash to a quick rinse with no soap.",
+          "Use steps: Wash your hands at the sink using soap, scrubbing the front, back, and between your fingers for a full 20 seconds timed on a clock, then wipe a kitchen counter or table surface using a clean cloth in overlapping strokes.",
+          "Field 1 (t2-p1): I used soap and scrubbed my hands, including between my fingers and around my thumbs, not just my palms.",
+          "Field 2 (t2-p2): I timed myself for the full 20 seconds instead of stopping early.",
+          "Field 3 (t2-p3): I wiped the counter or surface using overlapping strokes so no spot was missed.",
+          "Check against: Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface. | Reasoning about germs and time: The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind."
+        ]
+      }
+    ],
+    "model": {
+      "title": "handwashing and surface cleaning worked model",
+      "startingCondition": "Before doing any food task, the learner is asked to demonstrate the household's full handwashing routine and a proper counter-wipe technique, timing the wash against the 20-second food-safety standard, then compares that wash to a quick rinse with no soap.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact handwashing and surface cleaning decision or action.",
+        "Model move 2: Before washing, predict how long 20 seconds actually feels like.",
+        "Model move 3: Wash your hands at the sink using soap, scrubbing the front, back, and between your fingers for a full 20 seconds timed on a clock, then wipe a kitchen counter or table surface using a clean cloth in overlapping strokes."
+      ],
+      "reasoning": "The model names the condition, follows the ordered handwashing and surface cleaning process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface.",
+        "Reasoning about germs and time: The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind."
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l02-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for handwashing and surface cleaning.",
+        "2. Watch the worked move on swk-rfl-g4-u03-l02-model-card.",
+        "3. Do one coached move on swk-rfl-g4-u03-l02-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g4-u03-l02-independent-card.",
+        "5. Save the small record on swk-rfl-g4-u03-l02-evidence-record; use swk-rfl-g4-u03-l02-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l02-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Before doing any food task, the learner is asked to demonstrate the household's full handwashing routine and a proper counter-wipe technique, timing the wash against the 20-second food-safety standard, then compares that wash to a quick rinse with no soap.",
+      "prompt": "Guess how many seconds you think you usually spend washing your hands right now, without timing yourself.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g4-u03-l02-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g4-u03-l02-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "handwashing and surface cleaning — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g4-u03-l02-independent-card",
+        "directions": "Complete the handwashing and surface cleaning task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g4-u03-l02-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain one way that wiping a counter is similar to washing your hands for food safety, and one way it is different.",
+      "observableCriteria": [
+        "Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface.",
+        "Reasoning about germs and time: The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l02-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g4-u03-l02-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g4-u03-l02-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g4-u03-l02-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Handwashing and wiping technique: The full 20-second soap wash covers palms, backs, fingers, and thumbs, and the counter wipe uses overlapping strokes across the whole surface. | Reasoning about germs and time: The explanation correctly connects soap and full scrub time to removing germs that a brief water-only rinse leaves behind.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g4-u03-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g4-u03-l02-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

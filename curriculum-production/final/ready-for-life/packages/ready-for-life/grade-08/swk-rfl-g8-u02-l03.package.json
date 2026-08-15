@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL Grade 8 progression"
+    "Manuel Academy RFL Grade 8 progression",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners identify common household tools by sight and name across two rounds of guided practice, moving from a supported matching round to an independent naming round, and explain each tool's typical use and one basic safety consideration without operating any tool.",
+  "objective": "I can complete a realistic basic tool identification task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "The learner looks at, but does not pick up or use, a set of common household tools: a screwdriver, a hammer, pliers, a tape measure, an adjustable wrench, and a level, first matching names to tools with support, then naming the same tools without any word bank.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -31,67 +32,76 @@
     "description": "If none of the listed tools are available at home, match each tool to its use and safety note using only the descriptions and line-drawing labels on this sheet instead of handling a physical tool."
   },
   "materials": [
-    "real household tools if available (screwdriver, hammer, pliers, tape measure, adjustable wrench, or a level), or pictures/descriptions of these tools",
-    "paper or a notebook",
-    "a pen or pencil"
+    "Embedded resource: swk-rfl-g8-u02-l03-model-card",
+    "Embedded resource: swk-rfl-g8-u02-l03-step-card",
+    "Embedded resource: swk-rfl-g8-u02-l03-guided-card",
+    "Embedded resource: swk-rfl-g8-u02-l03-independent-card",
+    "Embedded resource: swk-rfl-g8-u02-l03-evidence-record",
+    "Embedded resource: swk-rfl-g8-u02-l03-retry-pair",
+    "adult-or-local: real household tools if available (screwdriver, hammer, pliers, tape measure, adjustable wrench, or a level), or pictures/descriptions of these tools",
+    "learner-local: paper or a notebook",
+    "learner-local: a pen or pencil"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before naming anything, look only (do not pick up) at whatever tools are visible in your household's tool storage area, or study these six tool descriptions if none are available: a screwdriver (long handle with a flat or cross-shaped metal tip), a hammer (weighted head on a handle for driving nails), pliers (two hinged jaws for gripping), a tape measure (a coiled metal ribbon marked with numbers), an adjustable wrench (a jaw that opens and closes to fit different bolt sizes), and a level (a straight bar with a liquid bubble to check flatness).",
+      "directions": "Analyze the complete worked example on swk-rfl-g8-u02-l03-model-card before beginning.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Which of these six tools did you already know by name before starting, and which were unfamiliar?"
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "With the word bank of all six tool names in front of you, match each tool to its correct name and write one sentence about what it's typically used for. This round uses full support, so check your answer against the descriptions above if unsure.",
+      "directions": "Complete the fictional coached case on swk-rfl-g8-u02-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I matched all six tools to their correct names using the word bank."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "fixed-choice",
-          "text": "A tool with two hinged jaws for gripping small objects is called a:",
-          "choices": ["hammer", "pliers", "tape measure", "level"]
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "Now cover the word bank. Without any names to choose from, look at (or reread the plain descriptions of) the same six tools in a different order and write the correct name for each one from memory, along with its typical use and one basic safety consideration.",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g8-u02-l03-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "extended-response",
-          "text": "Without using the word bank, name all six tools from memory in a new order, and for each one write its typical use and one specific safety consideration a person should keep in mind before ever operating it, even though you are not operating any tool in this lesson."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Compare your two rounds.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g8-u02-l03-evidence-record; omit or fictionalize private details.",
       "prompts": [
         {
           "ref": "t4-p1",
-          "promptType": "short-response",
+          "promptType": "extended-response",
           "text": "Which tool was hardest to recall by name alone in round two, and what might make it easier to remember next time?"
         }
       ]
     }
   ],
-  "remediation": "If a learner mixes up similar-looking tools (pliers versus an adjustable wrench, for example), reteach by placing the two tools or descriptions side by side and naming the one distinguishing feature of each (pliers have two independently hinged jaws; a wrench has one jaw that slides to fit a size) before retesting recall separately.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g8-u02-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g8-u02-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g8-u02-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Tool identification accuracy: Correctly names four or five of the six tools in round two. | Use and safety explanation: Provides an accurate, tool-specific use and a plausible, tool-specific safety consideration for at least five of the six tools. Resume at the next unfinished step on swk-rfl-g8-u02-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner identify two additional tools not covered in this lesson (from their own household or from memory) and add them to their name-plus-use-plus-safety-note list, following the same three-part format.",
   "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u02-l03.scoring.json",
   "integrity": {
@@ -99,5 +109,263 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g8-ready-for-life-u02-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "housing-independent-living",
+    "practicalGoal": "I can complete a realistic basic tool identification task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g8-u02-l03-model-card",
+        "swk-rfl-g8-u02-l03-step-card",
+        "swk-rfl-g8-u02-l03-guided-card",
+        "swk-rfl-g8-u02-l03-independent-card",
+        "swk-rfl-g8-u02-l03-evidence-record",
+        "swk-rfl-g8-u02-l03-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g8-u02-l03-local-1",
+          "label": "real household tools if available (screwdriver, hammer, pliers, tape measure, adjustable wrench, or a level), or pictures/descriptions of these tools",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u02-l03-local-2",
+          "label": "paper or a notebook",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u02-l03-local-3",
+          "label": "a pen or pencil",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g8-u02-l03-model-card",
+        "kind": "model",
+        "title": "basic tool identification worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner looks at, but does not pick up or use, a set of common household tools: a screwdriver, a hammer, pliers, a tape measure, an adjustable wrench, and a level, first matching names to tools with support, then naming the same tools without any word bank.",
+          "Model move 1: Read the condition and name the exact basic tool identification decision or action.",
+          "Model move 2: Before naming anything, look only (do not pick up) at whatever tools are visible in your household's tool storage area, or study these six tool descriptions if none are available: a screwdriver (long handle with a flat or cross-shaped metal tip), a hammer (weighted head on a handle for driving nails), pliers (two hinged jaws for gripping), a tape measure (a coiled metal ribbon marked with numbers), an adjustable wrench (a jaw that opens and closes to fit different bolt sizes), and a level (a straight bar with a liquid bubble to check flatness).",
+          "Model move 3: With the word bank of all six tool names in front of you, match each tool to its correct name and write one sentence about what it's typically used for.",
+          "Model check: Tool identification accuracy: Correctly names four or five of the six tools in round two. | Use and safety explanation: Provides an accurate, tool-specific use and a plausible, tool-specific safety consideration for at least five of the six tools."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u02-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "basic tool identification action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for basic tool identification.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u02-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "basic tool identification coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner looks at, but does not pick up or use, a set of common household tools: a screwdriver, a hammer, pliers, a tape measure, an adjustable wrench, and a level, first matching names to tools with support, then naming the same tools without any word bank.",
+          "Coach direction: Before naming anything, look only (do not pick up) at whatever tools are visible in your household's tool storage area, or study these six tool descriptions if none are available: a screwdriver (long handle with a flat or cross-shaped metal tip), a hammer (weighted head on a handle for driving nails), pliers (two hinged jaws for gripping), a tape measure (a coiled metal ribbon marked with numbers), an adjustable wrench (a jaw that opens and closes to fit different bolt sizes), and a level (a straight bar with a liquid bubble to check flatness).",
+          "Learner prompt: Which of these six tools did you already know by name before starting, and which were unfamiliar?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u02-l03-independent-card",
+        "kind": "independent-task",
+        "title": "basic tool identification complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With the word bank of all six tool names in front of you, match each tool to its correct name and write one sentence about what it's typically used for. This round uses full support, so check your answer against the descriptions above if unsure.",
+          "Response 1 (t2-p1): I matched all six tools to their correct names using the word bank.",
+          "Response 2 (t2-p2): A tool with two hinged jaws for gripping small objects is called a:",
+          "Equal-access rule: If none of the listed tools are available at home, match each tool to its use and safety note using only the descriptions and line-drawing labels on this sheet instead of handling a physical tool."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u02-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "basic tool identification minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Which tool was hardest to recall by name alone in round two, and what might make it easier to remember next time?",
+          "Success checks: Tool identification accuracy: Correctly names four or five of the six tools in round two. | Use and safety explanation: Provides an accurate, tool-specific use and a plausible, tool-specific safety consideration for at least five of the six tools.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u02-l03-retry-pair",
+        "kind": "retry",
+        "title": "basic tool identification supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g8-u02-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g8-u02-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional basic tool identification condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Tool identification accuracy: Correctly names four or five of the six tools in round two. | Use and safety explanation: Provides an accurate, tool-specific use and a plausible, tool-specific safety consideration for at least five of the six tools..",
+          "Return: resume at the next unfinished step on swk-rfl-g8-u02-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "basic tool identification worked model",
+      "startingCondition": "The learner looks at, but does not pick up or use, a set of common household tools: a screwdriver, a hammer, pliers, a tape measure, an adjustable wrench, and a level, first matching names to tools with support, then naming the same tools without any word bank.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact basic tool identification decision or action.",
+        "Model move 2: Before naming anything, look only (do not pick up) at whatever tools are visible in your household's tool storage area, or study these six tool descriptions if none are available: a screwdriver (long handle with a flat or cross-shaped metal tip), a hammer (weighted head on a handle for driving nails), pliers (two hinged jaws for gripping), a tape measure (a coiled metal ribbon marked with numbers), an adjustable wrench (a jaw that opens and closes to fit different bolt sizes), and a level (a straight bar with a liquid bubble to check flatness).",
+        "Model move 3: With the word bank of all six tool names in front of you, match each tool to its correct name and write one sentence about what it's typically used for."
+      ],
+      "reasoning": "The model names the condition, follows the ordered basic tool identification process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Tool identification accuracy: Correctly names four or five of the six tools in round two.",
+        "Use and safety explanation: Provides an accurate, tool-specific use and a plausible, tool-specific safety consideration for at least five of the six tools."
+      ],
+      "resourceRef": "swk-rfl-g8-u02-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for basic tool identification.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g8-u02-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner looks at, but does not pick up or use, a set of common household tools: a screwdriver, a hammer, pliers, a tape measure, an adjustable wrench, and a level, first matching names to tools with support, then naming the same tools without any word bank.",
+      "prompt": "Which of these six tools did you already know by name before starting, and which were unfamiliar?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Tool identification accuracy: Correctly names four or five of the six tools in round two.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g8-u02-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g8-u02-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "basic tool identification — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g8-u02-l03-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With the word bank of all six tool names in front of you, match each tool to its correct name and write one sentence about what it's typically used for. This round uses full support, so check your answer against the descriptions above if unsure.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "basic tool identification — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g8-u02-l03-independent-card",
+        "directions": "If none of the listed tools are available at home, match each tool to its use and safety note using only the descriptions and line-drawing labels on this sheet instead of handling a physical tool.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g8-u02-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Which tool was hardest to recall by name alone in round two, and what might make it easier to remember next time?",
+      "observableCriteria": [
+        "Tool identification accuracy: Correctly names four or five of the six tools in round two.",
+        "Use and safety explanation: Provides an accurate, tool-specific use and a plausible, tool-specific safety consideration for at least five of the six tools."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g8-u02-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g8-u02-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g8-u02-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g8-u02-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Tool identification accuracy: Correctly names four or five of the six tools in round two. | Use and safety explanation: Provides an accurate, tool-specific use and a plausible, tool-specific safety consideration for at least five of the six tools.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g8-u02-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g8-u02-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

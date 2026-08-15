@@ -7,47 +7,151 @@
   "subject": "health",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner completes the central task about consent as clear ongoing and reversible.",
-    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
-    "The learner checks or revises the work and can identify a next step."
+    "Uses at least two accurate lesson details and distinguishes fact from assumption.",
+    "Applies consent as clear ongoing and reversible with precise vocabulary and reasoning appropriate to COMMUNICATION_HELP_SEEKING.",
+    "Chooses or designs a safe, feasible response and explains relevant limits or tradeoffs.",
+    "Names the appropriate authority or help route and an escalation or revision condition."
   ],
-  "scoringGuidance": "Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
-  "masteryRule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
-  "remediation": "Return to the smallest prerequisite needed for consent as clear ongoing and reversible, model it with a concrete or text-only representation, then retry one fresh item.",
+  "scoringGuidance": "Judge the learner's accurate use of consent as clear ongoing and reversible, stated facts, type-appropriate reasoning, safe next step, and support or authority route. Accept equivalent wording and response modes. Do not score private experience, feelings, confidence, speed, handwriting, access support, or similarity to the model. Do not infer diagnosis, effort, motivation, character, family situation, or health status.",
+  "masteryRule": "Do not mark mastery of consent as clear ongoing and reversible from the entry check, vocabulary check, worked model, guided case, one response, confidence, or private reflection. Require accurate independent evidence on the Maple case and accurate retrieval or transfer on a later, meaningfully different fictional or public case. Both occasions must meet the lesson-specific criteria without answer-bearing help.",
+  "remediation": "Name the smallest observable gap for consent as clear ongoing and reversible. Use the alternate model in ma-g7-health-u04-l02#remediation-alternate-model instead of repeating the first explanation. Complete the bounded guided correction, then use ma-g7-health-u04-l02#remediation-fresh-retry without answer-bearing help. Exit only when the learner accurately uses a fact, applies the lesson idea, explains a safe response, and identifies responsible support.",
   "adaptiveRoutes": [
     {
-      "signal": "prerequisite gap",
-      "action": "Return to the smallest prerequisite needed for consent as clear ongoing and reversible, model it with a concrete or text-only representation, then retry one fresh item."
+      "signal": "HLTH-G7-CONSENT-AS-CLEAR-ONGOING-AND-REVERSIBLE-ASSUMPTION-AS-FACT",
+      "action": "Replace the assumption with a stated fact and limit the conclusion to what that fact supports. Use the alternate remediation model and guided correction, then remove answer-bearing support for the fresh Oak Street retry."
     },
     {
-      "signal": "procedure without understanding",
-      "action": "Ask the learner to explain or represent why the process for consent as clear ongoing and reversible works before continuing."
+      "signal": "HLTH-G7-CONSENT-AS-CLEAR-ONGOING-AND-REVERSIBLE-TERM-WITHOUT-MEANING",
+      "action": "Connect one required fact to the meaning or process taught in the explanation. Use the alternate remediation model and guided correction, then remove answer-bearing support for the fresh Oak Street retry."
     },
     {
-      "signal": "correct but low confidence",
-      "action": "Confirm the reasoning specifically, offer one varied example of consent as clear ongoing and reversible, and avoid unnecessary remediation."
+      "signal": "HLTH-G7-CONSENT-AS-CLEAR-ONGOING-AND-REVERSIBLE-REASON-MISSING",
+      "action": "Add the controlling fact and explain why it supports the response. Use the alternate remediation model and guided correction, then remove answer-bearing support for the fresh Oak Street retry."
     },
     {
-      "signal": "repeated error pattern",
-      "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review."
-    },
-    {
-      "signal": "mastery evidence",
-      "action": "Require accurate independent application plus explanation on a later or different occasion before marking consent as clear ongoing and reversible mastered."
+      "signal": "HLTH-G7-CONSENT-AS-CLEAR-ONGOING-AND-REVERSIBLE-AUTHORITY-MISSING",
+      "action": "Name the appropriate adult, professional, service, or public authority and the escalation condition. Use the alternate remediation model and guided correction, then remove answer-bearing support for the fresh Oak Street retry."
     }
   ],
-  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, voice recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
-  "guardianSafetyReview": null,
+  "guardianOrParentVisibility": "Share the learning goal, completion state, evidence type, and next instructional step. Do not expose private reflection or ask for proof that it occurred. Do not infer or report diagnosis, feelings, effort, motivation, character, family circumstances, or health status.",
+  "guardianSafetyReview": {
+    "requiredForLessonCompletion": false,
+    "authority": "A parent, guardian, teacher, school staff member, or another trusted adult handles real safety concerns. A qualified health professional gives medical advice. Emergency services handle emergencies.",
+    "boundary": "The lesson and scorer do not diagnose, prescribe, investigate private information, or override guardian, professional, school, legal, or emergency authority."
+  },
   "safetyAndPrivacyNotes": [
-    "Use respectful, non-shaming language.",
-    "Allow a pause, break, or alternate response mode without treating it as failure.",
-    "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
-    "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
-    "Direct urgent safety or health concerns to a trusted adult or qualified professional."
+    "Use respectful, neutral, non-shaming language.",
+    "Required evidence uses fictional or public situations and never requires sensitive personal disclosure.",
+    "Do not infer health, feelings, diagnosis, motives, effort, character, or family circumstances from a response.",
+    "Do not use dieting, calorie-target, weight-loss, body-value, appearance, or body-scoring language.",
+    "Do not provide individualized treatment, medication, food, supplement, or exercise advice.",
+    "Direct real health or safety concerns to a trusted adult or qualified professional; use emergency services for an emergency."
   ],
   "sourceProvenance": {
     "sourceBranch": "shared base@656efba (canonical 5/7/8)",
     "sourceLessonId": "ma-g7-health-u04-l02"
+  },
+  "standards": [
+    "Michigan Health: Interpersonal Communication",
+    "Advocacy"
+  ],
+  "primaryLessonType": "COMMUNICATION_HELP_SEEKING",
+  "secondaryLessonTypes": [
+    "DECISION_REASONING",
+    "CONCEPT_VOCABULARY"
+  ],
+  "protectedAuthority": {
+    "authorityVersion": "health-production-depth-r1",
+    "independentEvidence": {
+      "caseRef": "ma-g7-health-u04-l02#independent-maple",
+      "requiredFacts": [
+        "Consent is a clear, ongoing, specific, and reversible agreement; pressure, fear, impairment, silence, or uncertainty means there is no usable agreement.",
+        "A safe communication plan states the limit clearly, recognizes pressure or danger, identifies an exit, and brings in adult or professional support when direct engagement is unsafe.",
+        "For consent as clear ongoing and reversible, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support."
+      ],
+      "requiredReasoning": [
+        "Accurately applies consent as clear ongoing and reversible rather than merely repeating the topic name.",
+        "Separates stated or observable facts from assumptions, labels, and personal judgments.",
+        "Uses a safe and feasible action, interpretation, communication move, process, or product supported by lesson information.",
+        "Names the adult, professional, service, or public authority responsible when help or escalation is needed."
+      ],
+      "acceptableConclusions": [
+        "The modeled conclusion is not required; another conclusion is sufficient when it uses the same taught facts, stays within the learner role, and meets every safety boundary.",
+        "For COMMUNICATION_HELP_SEEKING, judge the accuracy of the concept and reasoning, not the learner's speed, confidence, response mode, or personal preference."
+      ]
+    },
+    "freshMasteryCheck": {
+      "caseRef": "ma-g7-health-u04-l02#fresh-check-lakeside",
+      "requiredUnderstanding": [
+        "For consent as clear ongoing and reversible, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support.",
+        "The learner must transfer the rule for consent as clear ongoing and reversible instead of copying the model.",
+        "The response must include a safe next step and the responsible support or authority route."
+      ]
+    },
+    "acceptableVariation": [
+      "Equivalent accurate vocabulary is acceptable when the learner explains the same lesson distinction.",
+      "A reasonable alternate action or conclusion is acceptable when it is supported by stated facts, safe, feasible, respectful, and within the learner role.",
+      "Typed, handwritten, drawn-and-labeled, signed, selected, or spoken evidence earns equal credit when it supplies the same reasoning.",
+      "A learner may state uncertainty and request qualified help; appropriate uncertainty is not an error."
+    ],
+    "misconceptionBoundaries": [
+      {
+        "id": "HLTH-G7-CONSENT-AS-CLEAR-ONGOING-AND-REVERSIBLE-ASSUMPTION-AS-FACT",
+        "insufficientPattern": "Adds a diagnosis, motive, character judgment, or private claim that the consent as clear ongoing and reversible case does not provide.",
+        "revisionNeeded": "Replace the assumption with a stated fact and limit the conclusion to what that fact supports."
+      },
+      {
+        "id": "HLTH-G7-CONSENT-AS-CLEAR-ONGOING-AND-REVERSIBLE-TERM-WITHOUT-MEANING",
+        "insufficientPattern": "Names consent as clear ongoing and reversible or a lesson term without explaining what it means in the case.",
+        "revisionNeeded": "Connect one required fact to the meaning or process taught in the explanation."
+      },
+      {
+        "id": "HLTH-G7-CONSENT-AS-CLEAR-ONGOING-AND-REVERSIBLE-REASON-MISSING",
+        "insufficientPattern": "Chooses an action, interpretation, message, process, or product without a reason grounded in lesson information.",
+        "revisionNeeded": "Add the controlling fact and explain why it supports the response."
+      },
+      {
+        "id": "HLTH-G7-CONSENT-AS-CLEAR-ONGOING-AND-REVERSIBLE-AUTHORITY-MISSING",
+        "insufficientPattern": "Leaves out responsible help or directs a learner to act beyond the learner role.",
+        "revisionNeeded": "Name the appropriate adult, professional, service, or public authority and the escalation condition."
+      }
+    ],
+    "safetyCriticalErrors": [
+      "Diagnosing, prescribing, or directing individualized treatment, medication, food, supplement, or exercise changes.",
+      "Requiring private health, body, treatment, family, sexual, substance-use, or feeling information as evidence.",
+      "Never use shame, stigma, dieting, weight-loss, appearance, body-value, or disability-value judgments.",
+      "Directing a learner to manage danger or an emergency alone, exceed current training, or bypass responsible adult or professional authority."
+    ],
+    "scoringNotes": [
+      "A correct term without a fact-to-meaning connection is partial evidence.",
+      "A safe response with incomplete reasoning is partial evidence and receives a bounded fact-link cue before a fresh retry.",
+      "A pause, privacy choice, access support, alternate response mode, or request for adult help is not evidence of failure.",
+      "Subjective reflection, preference, and personal meaning are not automatically right or wrong and are not mastery evidence."
+    ]
+  },
+  "masteryPlan": {
+    "minimumEvidenceOccasions": 2,
+    "occasionOneRef": "ma-g7-health-u04-l02#independent-maple",
+    "laterRetrievalOrTransferRef": "ma-g7-health-u04-l02#later-transfer",
+    "independenceRule": "Definitions, directions, read-aloud, translation, access tools, and response alternatives are permitted. Evidence is guided rather than independent if support supplies the controlling fact, conclusion, action, decisive reason, safety judgment, or help route.",
+    "privateReflectionContributes": false,
+    "decisionAuthority": "An authorized adult or separately approved scoring runtime applies this protected guide. Curriculum coaching cannot make or override the mastery decision."
+  },
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "subjectiveJudgmentPolicy": "SUBJECTIVE_REFLECTION_NOT_AUTOMATICALLY_RIGHT_OR_WRONG"
+  },
+  "contentProvenance": {
+    "factSourceLane": "mac/health-content-repair-r1",
+    "productionDepthLane": "mac/health-production-depth-r1",
+    "standardRef": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+    "productionDepthVersion": "health-production-depth-r1"
   },
   "productionReadiness": {
     "status": "READY",

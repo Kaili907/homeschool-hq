@@ -11,64 +11,253 @@
   "focus": "orienteering basics",
   "essentialQuestion": "How can understanding outdoor and lifetime activities help us explain, decide, create, or solve something that matters?",
   "estimatedMinutes": "35–60",
+  "standards": [
+    "Michigan PE Standards 1",
+    "3",
+    "5"
+  ],
+  "primaryLessonType": "MOVEMENT_CONCEPT_CUES",
+  "secondaryLessonTypes": [
+    "SKILL_DEVELOPMENT"
+  ],
+  "lessonFamilyPlan": {
+    "instructionalPurpose": "identify, model, and apply the target cue or movement concept",
+    "guidedEmphasis": "Compare a supplied example with a non-example and name the one observable feature that changes.",
+    "independentEvidence": "Apply the concept to a new example that was not used in the model.",
+    "evidencePurpose": "knowledge, cue application, error analysis, and completion"
+  },
+  "goal": "I can identify, model, and apply the target cue or movement concept for orienteering basics, using a safe standard or equal-credit adapted route, and explain the cue or decision that shows success.",
+  "successOverview": "Success is safe setup, use of the taught Name it, show it, compare it, correct it. cue or decision, a fresh bounded application, and a short explanation. Credit never depends on body position, speed, athletic talent, comparison, or use of the standard route.",
+  "readinessCheck": [
+    "Identify the target feature in one supplied example.",
+    "Choose movement, seated, supported, mobility-aid, low-space, no-equipment, or described evidence without explaining why.",
+    "Use the complete described route if guardian permission, safe space, equipment, movement, a partner, or a real setting is unavailable."
+  ],
   "materials": [
     "No specialized equipment is required.",
-    "Optional household equipment may be used only when it is safe, available, and helpful. No specialized or purchased equipment is required.",
-    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    "Optional: one soft marker, cue card, or household object.",
+    "Use hand gestures, drawing, pointing, or an imagined movement path."
   ],
   "movementCues": [
-    "Choose a stable start position and a movement small enough to control in the available space.",
-    "Move smoothly while breathing continuously; change one feature at a time so its effect is clear.",
-    "Keep attention on alignment, space, and the lesson focus rather than speed, force, or comparison.",
-    "Return to a stable finish and explain the cue, decision, or adjustment that made the movement safer or more effective.",
-    "Practice slowly enough to say each cue, and ask a trusted adult to check the cleared area before movement begins."
+    "START in a stable position that fits the available space.",
+    "SHOW one movement feature at a time through motion, gesture, object, or description.",
+    "COMPARE an example and non-example using the target cue.",
+    "FINISH by explaining which adjustment improved control or understanding."
   ],
-  "ageAppropriateTechnique": "Practice slowly enough to say each cue, and ask a trusted adult to check the cleared area before movement begins.",
-  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "ageAppropriateTechnique": "Use one short action at a time, say the main cue before the attempt, keep the movement concept cues choice concrete, and ask a trusted adult to confirm any required permission or space check.",
+  "movementModel": {
+    "title": "Model for orienteering basics",
+    "startingPosition": "Choose a stable seated, supported, standing, mobility-aid, or described position and identify the target movement feature.",
+    "action": "Show or describe one example, contrast one non-example, correct it with the key cue, and return to a stable finish.",
+    "keyCue": "Name it, show it, compare it, correct it.",
+    "commonError": "Repeating the direction without showing what changes between the example and non-example.",
+    "correction": "Freeze both versions, name one visible difference, and apply one correction cue.",
+    "notice": "Notice the target relationship, cue, or decision rather than cosmetic body position.",
+    "adaptedModel": "Use the seated, supported, mobility-aid, reduced-range, object-modeled, or described route and preserve this evidence: Notice the target relationship, cue, or decision rather than cosmetic body position.",
+    "safetyBoundary": "Use a small comfortable range and switch to gesture, drawing, or description whenever movement or space is not appropriate. No maximal force, unsafe range, comparison, public performance, or movement beyond the cleared boundary."
+  },
+  "guidedPractice": [
+    {
+      "id": "guided-1",
+      "prompt": "Compare a supplied example with a non-example and name the one observable feature that changes. Identify the target feature in one supplied example. Apply it to orienteering basics.",
+      "support": "Use the model cue: Name it, show it, compare it, correct it.",
+      "feedback": "If the target is unclear, return to the starting position and use this correction: Freeze both versions, name one visible difference, and apply one correction cue."
+    },
+    {
+      "id": "guided-2",
+      "prompt": "Show or describe one controlled example and one non-example.",
+      "support": "Watch for this contrast: Repeating the direction without showing what changes between the example and non-example.",
+      "feedback": "Keep the safe version when the learner can show or explain notice the target relationship, cue, or decision rather than cosmetic body position."
+    }
+  ],
+  "practiceProgression": [
+    {
+      "round": 1,
+      "name": "Entry version",
+      "task": "Compare a supplied example with a non-example and name the one observable feature that changes. Show or describe one controlled example and one non-example.",
+      "targetCue": "Name it, show it, compare it, correct it.",
+      "successCheck": "Show or explain the target for orienteering basics once with the safe boundary intact.",
+      "changedVariable": "None; begin with the simplest safe version.",
+      "learnerChoice": "Remain here, reduce range or pace, add support, rest, or switch to the described route.",
+      "maximumBoundary": "No maximal force, unsafe range, comparison, public performance, or movement beyond the cleared boundary."
+    },
+    {
+      "round": 2,
+      "name": "One change",
+      "task": "Show or describe one controlled example and one non-example. Then change only one relationship, direction, range, pathway, timing, or support. Keep the knowledge, cue application, error analysis, and completion purpose visible.",
+      "targetCue": "Name it, show it, compare it, correct it.",
+      "successCheck": "Name what changed and keep the same cue, control, decision, and safety boundary.",
+      "changedVariable": "Change only one relationship, direction, range, pathway, timing, or support.",
+      "learnerChoice": "Progress only by choice; repeat or regress whenever the cue or control is not clear.",
+      "maximumBoundary": "No maximal force, unsafe range, comparison, public performance, or movement beyond the cleared boundary."
+    },
+    {
+      "round": 3,
+      "name": "Fresh application",
+      "task": "Apply the concept to a new example that was not used in the model. Apply the concept to a fresh movement, gesture, drawing, or described situation and explain the correction cue.",
+      "targetCue": "Name it, show it, compare it, correct it.",
+      "successCheck": "Complete the fresh bounded application and identify the cue or decision that controlled it.",
+      "changedVariable": "The learner selects a new safe example, arrangement, or condition.",
+      "learnerChoice": "Use any standard or equal-credit route, take breaks, or finish through description without penalty.",
+      "maximumBoundary": "No maximal force, unsafe range, comparison, public performance, or movement beyond the cleared boundary."
+    }
+  ],
+  "independentActivity": {
+    "title": "Fresh application: orienteering basics",
+    "directions": [
+      "Choose one approved route.",
+      "Apply the concept to a fresh movement, gesture, drawing, or described situation and explain the correction cue.",
+      "Use this cue or decision: Name it, show it, compare it, correct it.",
+      "Stop at the maximum boundary.",
+      "Provide the selected evidence without a recording or body metric."
+    ],
+    "freshTask": "Apply the concept to a new example that was not used in the model. Apply the concept to a fresh movement, gesture, drawing, or described situation and explain the correction cue.",
+    "independenceBoundary": "A trusted human or future Tutor may read directions, define a cue, and offer an approved route. They may not perform the decision for the learner, claim unapproved observation, certify physical completion, or provide medical or return clearance."
+  },
+  "warmUpAndFinishPolicy": {
+    "applicability": "REQUIRED_FOR_MOVEMENT",
+    "warmUp": [
+      "Preview the target feature with a small comfortable motion or gesture.",
+      "Rehearse the stable start and finish positions."
+    ],
+    "coolDown": [
+      "Return to the easiest comfortable version or rest.",
+      "Restore optional equipment and space safely.",
+      "Name one cue, safety choice, or next adjustment without reporting body data."
+    ],
+    "rationale": null
+  },
+  "spaceSetup": "Clear one arm-span on a safe surface or work from one stable seat. Keep people, pets, cords, and breakables outside the boundary. Low-space access remains available before and during the lesson. Cleanup: return optional items only after movement has stopped and the path is clear.",
   "equipmentRequirements": {
     "required": [
       "No specialized equipment is required."
     ],
     "optional": [
-      "Optional household equipment may be used only when it is safe, available, and helpful. No specialized or purchased equipment is required."
+      "Optional: one soft marker, cue card, or household object."
     ],
     "householdSubstitutes": [
-      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+      "Use hand gestures, drawing, pointing, or an imagined movement path."
     ],
-    "equalCreditNoEquipment": "Equal-credit no-equipment option: demonstrate the movement pattern in place, seated, supported, or with hand gestures, or draw and explain the movement path and safety decision when movement is not appropriate."
+    "prohibited": [
+      "No maximal force, unsafe range, comparison, public performance, or movement beyond the cleared boundary."
+    ],
+    "equalCreditNoEquipment": "Equal-credit no-equipment route: demonstrate in place, seated, supported, or with hand gestures, or draw and explain the example, non-example, correction, and safety choice."
   },
   "safetyRules": [
-    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
-    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
-    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit."
+    "Check the surface, ceiling, boundary, people, pets, cords, breakables, footwear or mobility supports, and any optional item before movement.",
+    "Use a small comfortable range and switch to gesture, drawing, or description whenever movement or space is not appropriate.",
+    "Use learner-selected range, pace, and demand. Control, decisions, and understanding matter more than force, distance, duration, or repetitions.",
+    "If the environment cannot be made safe, do not perform movement; use the equal-credit described route or stop and tell a trusted adult."
   ],
   "stoppingRules": [
-    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
-    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
-    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+    "REST / ADJUST: You may pause, rest, reduce pace or range, use support, switch to an approved route, or finish for the day at any time. You may resume only when comfortable and the environment is safe. Rest and adaptation never reduce credit.",
+    "STOP AND TELL: Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, an injury concern, damaged equipment, or an unsafe environment. Tell a trusted adult and do not continue to test the concern.",
+    "DO NOT RESUME: After a head impact, an injury concern, or a symptom that persists or worsens, remain out until the authorized guardian or qualified professional says it is safe. A learner, browser, or Tutor cannot provide clearance."
   ],
-  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
-  "lowSpaceNoEquipmentAlternative": "Equal-credit no-equipment option: demonstrate the movement pattern in place, seated, supported, or with hand gestures, or draw and explain the movement path and safety decision when movement is not appropriate.",
+  "adaptationRoutes": {
+    "seated": "Use a stable seated position and preserve the Name it, show it, compare it, correct it. evidence through upper-body movement, pointing, gesture, object modeling, or description.",
+    "supported": "Place an approved stable support before beginning and use it through the whole attempt; score the cue or decision for orienteering basics, not unsupported balance.",
+    "reducedRange": "Use the smallest comfortable movement, eye-gaze choice, point, or gesture that still shows the target cue or decision for orienteering basics.",
+    "reducedPaceOrDemand": "Complete one stage at a time with learner-chosen breaks, remain at the entry version, or split the lesson across short sittings.",
+    "mobilityAidCompatible": "Keep the mobility aid positioned and used as approved; adapt the path around the aid and score the same Name it, show it, compare it, correct it. evidence.",
+    "solo": "Use the supplied solo, shadow, diagram, imagined-role, or fictional-situation route; no partner, opponent, group, or audience is required.",
+    "lowSpace": "Use the one-arm-span or one-seat setup: Equal-credit no-equipment route: demonstrate in place, seated, supported, or with hand gestures, or draw and explain the example, non-example, correction, and safety choice.",
+    "noEquipment": "Equal-credit no-equipment route: demonstrate in place, seated, supported, or with hand gestures, or draw and explain the example, non-example, correction, and safety choice.",
+    "describedOrDecisionRoute": "Describe, draw, gesture, point, sign, or model Apply the concept to a fresh movement, gesture, drawing, or described situation and explain the correction cue. This is a complete equal-credit route when movement is not appropriate."
+  },
+  "accessibleAdaptation": "Choose or change any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route without explaining why. Every route earns equal credit for the same notice the target relationship, cue, or decision rather than cosmetic body position. The standard route is never required and adaptation never lowers credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit no-equipment route: demonstrate in place, seated, supported, or with hand gestures, or draw and explain the example, non-example, correction, and safety choice.",
   "activitySteps": [
-    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
-    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
-    "Practice: apply the movement cues for orienteering basics at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
-    "Apply: show, describe, draw, sign, or write one controlled example of orienteering basics, including the cue or decision that made it work.",
-    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+    "Choose a standard or equal-credit response route.",
+    "Check the required permission.",
+    "Check the space.",
+    "Check any optional equipment.",
+    "Read the REST / ADJUST rule.",
+    "Read the STOP AND TELL rule.",
+    "Complete the warm-up when it applies.",
+    "Study the model.",
+    "Name the key cue.",
+    "Complete guided attempt 1.",
+    "Complete guided attempt 2.",
+    "Choose a progression round.",
+    "Complete the fresh application.",
+    "Use the safe finish when it applies.",
+    "Provide the selected evidence.",
+    "Answer the short reflection or leave it blank."
   ],
   "executionCategory": "movement-literacy",
-  "commonErrorToWatchFor": null,
-  "keyPoints": [],
-  "privacySafeScenario": "Plan a safe, accessible outdoor activity with route, equipment, weather, and contingency checks.",
-  "studentTask": "Learner completes a new application of orienteering basics and records both the result and the reasoning, evidence, process, or design choice that produced it.",
-  "knowledgeCheck": "In one concise response, show or explain the most important idea about orienteering basics; then identify one check that would catch an error or weak claim.",
-  "completionCriteria": [
-    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for orienteering basics.",
-    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
-    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
-    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
+  "commonErrorToWatchFor": "Repeating the direction without showing what changes between the example and non-example.",
+  "evidenceExpectations": {
+    "evidenceTypes": [
+      "KNOWLEDGE",
+      "CUE_APPLICATION",
+      "ERROR_ANALYSIS",
+      "COMPLETION"
+    ],
+    "learnerEvidence": [
+      "One guided response using Name it, show it, compare it, correct it..",
+      "One fresh bounded application or complete described equivalent for orienteering basics.",
+      "One cue, decision, safety, or next-step explanation."
+    ],
+    "physicalCompletion": "NOT_TUTOR_CERTIFIABLE",
+    "observer": "A learner may self-check a cue and a trusted human may review the selected evidence. A Tutor, browser, camera, wearable, or self-report cannot certify physical completion, guardian permission, or safe return.",
+    "doNotCollect": [
+      "weight, appearance, body composition, calories, body shape, fitness norms, speed versus peers, or athletic talent",
+      "diagnosis, disability reason, symptom history, or private medical information",
+      "photo, video, audio, wearable data, location proof, or exercise log"
+    ]
+  },
+  "retryPlan": {
+    "trigger": "Retry when the evidence does not yet show the target cue or decision for orienteering basics; name the missing observable part without judging the learner.",
+    "simplerSetup": "Identify the target feature in one supplied example.",
+    "differentCue": "Replace the full cue set with: “Name it, show it, compare it, correct it.”",
+    "alternateModel": "Contrast this common error — Repeating the direction without showing what changes between the example and non-example. — with this correction — Freeze both versions, name one visible difference, and apply one correction cue.",
+    "boundedPractice": "Show or describe one controlled example and one non-example.",
+    "freshRetry": "Apply the concept to a fresh movement, gesture, drawing, or described situation and explain the correction cue. Use a new safe example rather than repeating the scored attempt.",
+    "exitCriterion": "Return to independent work when the fresh retry shows or explains notice the target relationship, cue, or decision rather than cosmetic body position. A safety stop, rest, or adaptation is never recorded as failure."
+  },
+  "guardianAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "when": "Guardian permission is required before real movement, optional equipment, a real location, partner, outdoor route, or progression is used.",
+    "requiredAction": "The guardian confirms that the bounded space, optional equipment, and activity route are permitted before movement.",
+    "minimumRecord": "Record only permission status or that the equal-credit described route was used; collect no body, health, media, location, or performance data.",
+    "confirmationBoundary": "Guardian confirmation may establish permission or occurrence only. It does not certify academic mastery, physical quality, diagnosis, effort, body status, or safe return.",
+    "equalCreditAlternative": "When guardian review, real movement, equipment, space, partner, or location is unavailable, the supplied solo described/decision route is the complete equal-credit lesson.",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "tutorMetadata": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "may": [
+      "explain approved content and vocabulary",
+      "cue the approved model",
+      "offer an approved presentation or activity route",
+      "coach how the learner presents their own evidence",
+      "route to rest, stop, retry, or adult handoff"
+    ],
+    "mustNot": [
+      "cannot diagnose, prescribe, rehabilitate, or give medical clearance",
+      "cannot claim unapproved observation or certify physical completion",
+      "cannot override rest, stop, adaptation, guardian authority, professional authority, or safe return",
+      "cannot choose the answer or action for fresh independent evidence",
+      "cannot score body data, norms, appearance, talent, or peer comparison"
+    ]
+  },
+  "keyPoints": [
+    "Choose a stable seated, supported, standing, mobility-aid, or described position and identify the target movement feature.",
+    "Show or describe one example, contrast one non-example, correct it with the key cue, and return to a stable finish.",
+    "Name it, show it, compare it, correct it.",
+    "Freeze both versions, name one visible difference, and apply one correction cue."
   ],
-  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
+  "privacySafeScenario": "Use a supplied or invented non-personal example of orienteering basics; do not disclose private health information or recreate a hazard.",
+  "studentTask": "Apply the concept to a new example that was not used in the model. Apply the concept to a fresh movement, gesture, drawing, or described situation and explain the correction cue. Use any approved standard or equal-credit route. Name the cue or decision that controlled the result; no body metric, comparison, recording, or physical-completion claim is required.",
+  "knowledgeCheck": "State the starting position, action, key cue, common error, and correction for orienteering basics. Then distinguish optional REST / ADJUST from STOP AND TELL and DO NOT RESUME.",
+  "completionCriteria": [
+    "The learner uses a safe setup or accurately describes it for orienteering basics.",
+    "The learner applies Name it, show it, compare it, correct it. in one guided attempt and one fresh application or complete described equivalent.",
+    "The learner distinguishes learner-controlled rest from STOP AND TELL and DO NOT RESUME conditions.",
+    "Any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route earns equal credit for the same cue or decision evidence."
+  ],
+  "adaptationChoices": "Choose or change any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route without explaining why. Every route earns equal credit for the same notice the target relationship, cue, or decision rather than cosmetic body position. The standard route is never required and adaptation never lowers credit.",
   "extensionChallenge": "Apply orienteering basics under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work.",
   "accessibilitySupports": [
     "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
@@ -79,7 +268,7 @@
     "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
   ],
   "optionalReflection": {
-    "prompt": "Invite the learner to notice one safe, optional example of orienteering basics in daily life. No purchase, account creation, photograph, or private disclosure is required.",
+    "prompt": "Which cue, decision, safety check, or adaptation preserved the target for orienteering basics, and what would you keep or change in a next safe attempt?",
     "private": true,
     "graded": false,
     "optional": true
@@ -95,7 +284,8 @@
   ],
   "sourceProvenance": {
     "sourceBranch": "shared base@656efba (canonical 5/7/8)",
-    "sourceLessonId": "ma-g5-physical-education-u06-l02"
+    "sourceLessonId": "ma-g5-physical-education-u06-l02",
+    "productionDepthRevision": "physical-education-production-depth-r1"
   },
   "productionReadiness": {
     "status": "READY",

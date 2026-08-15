@@ -13,8 +13,11 @@
     "title": "Guided practice: writing a personal statement in the learner's own voice"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners draft a short personal statement responding to an open prompt about a challenge and what was learned from it, choosing either to write about themselves or to write as a provided fictional narrator, so every learner practices the genuine craft of the form without anyone being required to disclose real personal history to complete or be scored on the task.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic writing a personal statement in the learner's own voice task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "The learner responds to the open prompt 'Describe a time you faced a challenge and what you learned from handling it' by either drawing on their own real experience or by writing as the provided fictional narrator, Sam, who is preparing a personal statement for a program Sam is applying to.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -25,44 +28,76 @@
     "No one but the learner (and anyone the learner chooses to share it with) needs to read the finished statement; scoring looks only at craft, not at the truth or quality of the underlying life event."
   ],
   "simulationAlternative": null,
-  "materials": ["paper or notes app", "the provided fictional narrator prompt (Sam) as an optional alternative"],
+  "materials": [
+    "Embedded resource: swk-rfl-g11-u02-l03-model-card",
+    "Embedded resource: swk-rfl-g11-u02-l03-step-card",
+    "Embedded resource: swk-rfl-g11-u02-l03-guided-card",
+    "Embedded resource: swk-rfl-g11-u02-l03-independent-card",
+    "Embedded resource: swk-rfl-g11-u02-l03-evidence-record",
+    "Embedded resource: swk-rfl-g11-u02-l03-retry-pair",
+    "learner-local: paper or notes app",
+    "learner-local: the provided fictional narrator prompt (Sam) as an optional alternative"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before drafting, decide whether you'll write about yourself or as the fictional narrator Sam, and jot the challenge you'll write about either way.",
+      "directions": "Analyze the complete worked example on swk-rfl-g11-u02-l03-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "fixed-choice", "text": "Which option are you choosing for this personal statement?", "choices": ["Writing about my own real experience", "Writing as the provided fictional narrator, Sam"] },
-        { "ref": "t1-p2", "promptType": "short-response", "text": "In one or two sentences, what challenge will the statement be about?" }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Draft an opening paragraph that pulls the reader into a specific moment, rather than starting with a general statement.",
+      "directions": "Complete the fictional coached case on swk-rfl-g11-u02-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write an opening paragraph (3-5 sentences) that puts the reader inside one specific moment of the challenge, rather than summarizing the whole situation in general terms." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My opening paragraph starts with a specific moment or detail, not a general statement like 'Throughout my life I have faced many challenges.'" }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Finish the statement by explaining what was learned and how it changed later choices or actions.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g11-u02-l03-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write the rest of the statement (roughly 200-350 words total including your opening), explaining specifically what was learned from the challenge and one concrete way it changed a later choice or action." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on the choices you made as a writer while drafting this statement.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g11-u02-l03-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "short-response", "text": "What is one sentence in your draft you're proudest of, and what makes it work better than a more generic version would have?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "What is one sentence in your draft you're proudest of, and what makes it work better than a more generic version would have?"
+        }
       ]
     }
   ],
-  "remediation": "If the opening paragraph starts with a general statement instead of a specific moment (a common sign the learner is summarizing rather than showing a scene), reteach by having the learner circle the single most vivid detail anywhere in their full draft and rewrite the opening paragraph to start from that detail instead.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g11-u02-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g11-u02-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g11-u02-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Opening specificity: Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene. | Reflective depth: Statement names a lesson and gives one concrete example of it changing a later choice or action. | Craft awareness: Reflection names a sentence and gives a real reason grounded in craft (specificity, sensory detail, structure) for why it works. Resume at the next unfinished step on swk-rfl-g11-u02-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner write a second, contrasting opening paragraph for the same statement that starts with dialogue instead of action or description, then compare which version is more effective and explain why in two or three sentences.",
   "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l03.scoring.json",
   "integrity": {
@@ -70,5 +105,247 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g11-ready-for-life-u02-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "home-care",
+    "practicalGoal": "I can complete a realistic writing a personal statement in the learner's own voice task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g11-u02-l03-model-card",
+        "swk-rfl-g11-u02-l03-step-card",
+        "swk-rfl-g11-u02-l03-guided-card",
+        "swk-rfl-g11-u02-l03-independent-card",
+        "swk-rfl-g11-u02-l03-evidence-record",
+        "swk-rfl-g11-u02-l03-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g11-u02-l03-local-1",
+          "label": "paper or notes app",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g11-u02-l03-local-2",
+          "label": "the provided fictional narrator prompt (Sam) as an optional alternative",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g11-u02-l03-model-card",
+        "kind": "model",
+        "title": "writing a personal statement in the learner's own voice worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner responds to the open prompt 'Describe a time you faced a challenge and what you learned from handling it' by either drawing on their own real experience or by writing as the provided fictional narrator, Sam, who is preparing a personal statement for a program Sam is applying to.",
+          "Model move 1: Read the condition and name the exact writing a personal statement in the learner's own voice decision or action.",
+          "Model move 2: Before drafting, decide whether you'll write about yourself or as the fictional narrator Sam, and jot the challenge you'll write about either way.",
+          "Model move 3: Draft an opening paragraph that pulls the reader into a specific moment, rather than starting with a general statement.",
+          "Model check: Opening specificity: Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene. | Reflective depth: Statement names a lesson and gives one concrete example of it changing a later choice or action. | Craft awareness: Reflection names a sentence and gives a real reason grounded in craft (specificity, sensory detail, structure) for why it works."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "writing a personal statement in the learner's own voice action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for writing a personal statement in the learner's own voice.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "writing a personal statement in the learner's own voice coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner responds to the open prompt 'Describe a time you faced a challenge and what you learned from handling it' by either drawing on their own real experience or by writing as the provided fictional narrator, Sam, who is preparing a personal statement for a program Sam is applying to.",
+          "Coach direction: Before drafting, decide whether you'll write about yourself or as the fictional narrator Sam, and jot the challenge you'll write about either way.",
+          "Learner prompt: Which option are you choosing for this personal statement?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l03-independent-card",
+        "kind": "independent-task",
+        "title": "writing a personal statement in the learner's own voice complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Draft an opening paragraph that pulls the reader into a specific moment, rather than starting with a general statement.",
+          "Response 1 (t2-p1): Write an opening paragraph (3-5 sentences) that puts the reader inside one specific moment of the challenge, rather than summarizing the whole situation in general terms.",
+          "Response 2 (t2-p2): My opening paragraph starts with a specific moment or detail, not a general statement like 'Throughout my life I have faced many challenges.'",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "writing a personal statement in the learner's own voice minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: What is one sentence in your draft you're proudest of, and what makes it work better than a more generic version would have?",
+          "Success checks: Opening specificity: Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene. | Reflective depth: Statement names a lesson and gives one concrete example of it changing a later choice or action. | Craft awareness: Reflection names a sentence and gives a real reason grounded in craft (specificity, sensory detail, structure) for why it works.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l03-retry-pair",
+        "kind": "retry",
+        "title": "writing a personal statement in the learner's own voice supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g11-u02-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g11-u02-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional writing a personal statement in the learner's own voice condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Opening specificity: Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene. | Reflective depth: Statement names a lesson and gives one concrete example of it changing a later choice or action. | Craft awareness: Reflection names a sentence and gives a real reason grounded in craft (specificity, sensory detail, structure) for why it works..",
+          "Return: resume at the next unfinished step on swk-rfl-g11-u02-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "writing a personal statement in the learner's own voice worked model",
+      "startingCondition": "The learner responds to the open prompt 'Describe a time you faced a challenge and what you learned from handling it' by either drawing on their own real experience or by writing as the provided fictional narrator, Sam, who is preparing a personal statement for a program Sam is applying to.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact writing a personal statement in the learner's own voice decision or action.",
+        "Model move 2: Before drafting, decide whether you'll write about yourself or as the fictional narrator Sam, and jot the challenge you'll write about either way.",
+        "Model move 3: Draft an opening paragraph that pulls the reader into a specific moment, rather than starting with a general statement."
+      ],
+      "reasoning": "The model names the condition, follows the ordered writing a personal statement in the learner's own voice process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Opening specificity: Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene.",
+        "Reflective depth: Statement names a lesson and gives one concrete example of it changing a later choice or action.",
+        "Craft awareness: Reflection names a sentence and gives a real reason grounded in craft (specificity, sensory detail, structure) for why it works."
+      ],
+      "resourceRef": "swk-rfl-g11-u02-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for writing a personal statement in the learner's own voice.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g11-u02-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner responds to the open prompt 'Describe a time you faced a challenge and what you learned from handling it' by either drawing on their own real experience or by writing as the provided fictional narrator, Sam, who is preparing a personal statement for a program Sam is applying to.",
+      "prompt": "Which option are you choosing for this personal statement?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Opening specificity: Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g11-u02-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g11-u02-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "writing a personal statement in the learner's own voice — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g11-u02-l03-independent-card",
+        "directions": "Complete the writing a personal statement in the learner's own voice task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g11-u02-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "What is one sentence in your draft you're proudest of, and what makes it work better than a more generic version would have?",
+      "observableCriteria": [
+        "Opening specificity: Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene.",
+        "Reflective depth: Statement names a lesson and gives one concrete example of it changing a later choice or action.",
+        "Craft awareness: Reflection names a sentence and gives a real reason grounded in craft (specificity, sensory detail, structure) for why it works."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g11-u02-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g11-u02-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g11-u02-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g11-u02-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Opening specificity: Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene. | Reflective depth: Statement names a lesson and gives one concrete example of it changing a later choice or action. | Craft awareness: Reflection names a sentence and gives a real reason grounded in craft (specificity, sensory detail, structure) for why it works.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g11-u02-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g11-u02-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

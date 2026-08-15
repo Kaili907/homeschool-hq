@@ -13,6 +13,8 @@ const H2 = 'mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f'
 const G34 = 'mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434'
 const HS = 'mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7'
 const CANONICAL = 'shared base@656efba (canonical 5/7/8)'
+const PE_READY = 'PHYSICAL_EDUCATION_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE'
+const APPROVED_PE_ANCHOR_ID = 'ma-g12-physical-education-u08-l07'
 
 const FORBIDDEN_PACKAGE_KEYS = [
   'answer_or_scoring_guidance', 'mastery_rule', 'adaptive_tutor_routes',
@@ -119,6 +121,18 @@ function main() {
     missingAdaptation: peAudit.missingAdaptation,
     homeUseBlockers: peAudit.homeUseBlockers,
     missingCompletionCriteria: peAudit.missingCompletionCriteria,
+    missingGoalOrReadiness: peAudit.missingGoalOrReadiness,
+    missingLessonFamilyPlan: peAudit.missingLessonFamilyPlan,
+    missingModel: peAudit.missingModel,
+    missingGuidedPractice: peAudit.missingGuidedPractice,
+    missingProgression: peAudit.missingProgression,
+    missingIndependentActivity: peAudit.missingIndependentActivity,
+    missingRestStopDistinction: peAudit.missingRestStopDistinction,
+    missingEvidenceBoundary: peAudit.missingEvidenceBoundary,
+    missingRetry: peAudit.missingRetry,
+    missingGuardianBoundary: peAudit.missingGuardianBoundary,
+    missingTutorBoundary: peAudit.missingTutorBoundary,
+    invalidLessonType: peAudit.invalidLessonType,
   }
   for (const [kind, ids] of Object.entries(peIssueGroups)) {
     if (ids.length > 0) errors.push(`PE ${kind}: ${ids.length} (${ids.slice(0, 5).join(', ')})`)
@@ -128,7 +142,16 @@ function main() {
   if (peEvidence.confirmedBaseline?.missingMovementCues !== 756 || peEvidence.repairs?.movementCueRepairs !== 756) errors.push('PE movement-cue baseline/repair evidence is not 756')
   if (peEvidence.confirmedBaseline?.equipmentBlockers !== 600 || peEvidence.repairs?.equipmentRepairs !== 600) errors.push('PE equipment baseline/repair evidence is not 600')
   if (peEvidence.confirmedBaseline?.missingRequiredSafety !== 324 || peEvidence.repairs?.safetyRepairs !== 324) errors.push('PE safety baseline/repair evidence is not 324')
-  if (peEvidence.classification !== 'PE_CONTENT_READY_FOR_CONVERGENCE' || manifest.peLearnerContentRepair?.classification !== peEvidence.classification) errors.push('PE repair classification is not ready and consistent')
+  if (Object.keys(peEvidence.proofs?.lessonFamilyCounts ?? {}).length !== 10) errors.push('PE production depth does not cover all ten lesson families')
+  if (Object.values(peEvidence.proofs?.lessonFamilyCounts ?? {}).some((count) => count < 1)) errors.push('PE production depth has an empty lesson family')
+  const anchorPackage = resolve(ROOT, 'packages', 'physical-education', 'grade-12', `${APPROVED_PE_ANCHOR_ID}.json`)
+  const anchorScoring = resolve(ROOT, 'scoring-guides', 'physical-education', 'grade-12', `${APPROVED_PE_ANCHOR_ID}.json`)
+  const approvedPackage = resolve(ROOT, 'src', 'approved', `${APPROVED_PE_ANCHOR_ID}.package.json`)
+  const approvedScoring = resolve(ROOT, 'src', 'approved', `${APPROVED_PE_ANCHOR_ID}.scoring.json`)
+  const digest = (path) => createHash('sha256').update(readFileSync(path)).digest('hex')
+  if (digest(anchorPackage) !== digest(approvedPackage) || peEvidence.proofs?.approvedAnchor?.packageMatchesApprovedSource !== true) errors.push('approved PE anchor learner package was not byte-preserved')
+  if (digest(anchorScoring) !== digest(approvedScoring) || peEvidence.proofs?.approvedAnchor?.scoringMatchesApprovedSource !== true) errors.push('approved PE anchor scoring guide was not byte-preserved')
+  if (peEvidence.classification !== PE_READY || manifest.peLearnerContentRepair?.classification !== peEvidence.classification) errors.push('PE production-depth classification is not ready and consistent')
 
   verifyChecksums(errors)
 

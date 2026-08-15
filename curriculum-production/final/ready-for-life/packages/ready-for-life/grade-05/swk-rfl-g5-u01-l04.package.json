@@ -15,10 +15,10 @@
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
     "Ready for Life v1 Lessons 01–03",
-    "Michigan Health/SEL connections"
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "With a trusted adult, learners walk through two shared spaces in their home and correctly identify at least four real hazards (from categories like sharp edges, trip risks, blocked exits, or unsecured heavy objects), then propose one fix for each.",
-  "scenario": "A trusted adult walks the shared spaces of the home with the learner, and together they look specifically for hazards — not general messiness — such as a cord across a walkway, an unstable stack of items, a blocked doorway, or a sharp edge at a height where someone could bump it. The adult confirms which findings are genuine hazards.",
+  "objective": "I can practice hazard recognition. I will do one step at a time and check one result.",
+  "scenario": "A trusted adult walks the shared spaces of the home with the learner, and together they look specifically for hazards — not general messiness — such as a cord across a walkway, an unstable stack of items, a blocked doorway, or a sharp edge at a height where someone could bump it.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
   "realWorldAction": true,
@@ -45,65 +45,66 @@
     "description": "If a full walk-through of two shared spaces isn't possible, the learner instead reviews four printed or hand-drawn room scenes with their adult, identifies the hazard in each one, names its category, and proposes a fix — reviewed and confirmed by the adult the same way as the real walk-through."
   },
   "materials": [
-    "notebook or paper",
-    "pencil"
+    "Embedded resource: swk-rfl-g5-u01-l04-model-card",
+    "Embedded resource: swk-rfl-g5-u01-l04-step-card",
+    "Embedded resource: swk-rfl-g5-u01-l04-guided-card",
+    "Embedded resource: swk-rfl-g5-u01-l04-independent-card",
+    "Embedded resource: swk-rfl-g5-u01-l04-evidence-record",
+    "Embedded resource: swk-rfl-g5-u01-l04-retry-pair",
+    "Embedded resource: swk-rfl-g5-u01-l04-delivered-example",
+    "learner-local: notebook or paper",
+    "learner-local: pencil"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before the walk-through, list two hazard categories you already know to look for (for example: trip risk, sharp edge, blocked exit, unsecured heavy object).",
+      "directions": "Open swk-rfl-g5-u01-l04-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Name two hazard categories."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "With your adult present for the entire walk-through, look at two shared spaces together and point out anything you think might be a hazard.",
+      "directions": "Open swk-rfl-g5-u01-l04-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I found at least four things to check, not just one."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "My adult confirmed which findings were real hazards and which were not."
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "For every hazard my adult confirmed, I could name which category it fit (trip, sharp edge, blocked exit, unsecured object, other)."
-        },
-        {
-          "ref": "t2-p4",
-          "promptType": "checklist-item",
-          "text": "I did not touch or try to fix anything without checking with my adult first."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "For each confirmed hazard, write down one specific fix, in a form your adult reviews before anything gets moved or changed.",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u01-l04-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "List each confirmed hazard and the one fix you would propose for it."
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on the walk-through.",
+      "directions": "Open swk-rfl-g5-u01-l04-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -113,7 +114,7 @@
       ]
     }
   ],
-  "remediation": "If the learner flags only obvious mess (clutter) rather than genuine hazards, reteach with two contrasting examples distinguishing 'messy but safe' from 'a hazard,' then retry the walk-through focused specifically on the hazard categories from the warm-up.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u01-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u01-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u01-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Hazard identification accuracy: Adult confirms at least four real hazards across two categories. | Category naming and proposed fixes: Names the correct category and proposes a workable fix for each confirmed hazard. Resume at the next unfinished step on swk-rfl-g5-u01-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner do a hazard walk-through of one space outside the home they visit regularly (with an adult), such as a relative's house, and compare which categories of hazard showed up there versus at home.",
   "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u01-l04.scoring.json",
   "integrity": {
@@ -121,5 +122,277 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g5-ready-for-life-u01-l04",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "home-care",
+    "practicalGoal": "I can practice hazard recognition. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u01-l04-model-card",
+        "swk-rfl-g5-u01-l04-step-card",
+        "swk-rfl-g5-u01-l04-guided-card",
+        "swk-rfl-g5-u01-l04-independent-card",
+        "swk-rfl-g5-u01-l04-evidence-record",
+        "swk-rfl-g5-u01-l04-retry-pair",
+        "swk-rfl-g5-u01-l04-delivered-example"
+      ],
+      "referencedArtifactWords": [
+        "example"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g5-u01-l04-delivered-example"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u01-l04-local-1",
+          "label": "notebook or paper",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u01-l04-local-2",
+          "label": "pencil",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u01-l04-model-card",
+        "kind": "model",
+        "title": "hazard recognition worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: A trusted adult walks the shared spaces of the home with the learner, and together they look specifically for hazards — not general messiness — such as a cord across a walkway, an unstable stack of items, a blocked doorway, or a sharp edge at a height where someone could bump it.",
+          "Model move 1: Read the condition and name the exact hazard recognition decision or action.",
+          "Model move 2: Before the walk-through, list two hazard categories you already know to look for (for example: trip risk, sharp edge, blocked exit, unsecured heavy object).",
+          "Model move 3: With your adult present for the entire walk-through, look at two shared spaces together and point out anything you think might be a hazard.",
+          "Model check: Hazard identification accuracy: Adult confirms at least four real hazards across two categories. | Category naming and proposed fixes: Names the correct category and proposes a workable fix for each confirmed hazard."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u01-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "hazard recognition action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for hazard recognition.",
+          "2. Watch the worked move on swk-rfl-g5-u01-l04-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u01-l04-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u01-l04-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u01-l04-evidence-record; use swk-rfl-g5-u01-l04-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u01-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "hazard recognition coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: A trusted adult walks the shared spaces of the home with the learner, and together they look specifically for hazards — not general messiness — such as a cord across a walkway, an unstable stack of items, a blocked doorway, or a sharp edge at a height where someone could bump it.",
+          "Coach direction: Before the walk-through, list two hazard categories you already know to look for (for example: trip risk, sharp edge, blocked exit, unsecured heavy object).",
+          "Learner prompt: Name two hazard categories.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u01-l04-independent-card",
+        "kind": "independent-task",
+        "title": "hazard recognition complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult present for the entire walk-through, look at two shared spaces together and point out anything you think might be a hazard.",
+          "Response 1 (t2-p1): I found at least four things to check, not just one.",
+          "Response 2 (t2-p2): My adult confirmed which findings were real hazards and which were not.",
+          "Response 3 (t2-p3): For every hazard my adult confirmed, I could name which category it fit (trip, sharp edge, blocked exit, unsecured object, other).",
+          "Response 4 (t2-p4): I did not touch or try to fix anything without checking with my adult first.",
+          "Equal-access rule: If a full walk-through of two shared spaces isn't possible, the learner instead reviews four printed or hand-drawn room scenes with their adult, identifies the hazard in each one, names its category, and proposes a fix — reviewed and confirmed by the adult the same way as the real walk-through."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u01-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "hazard recognition minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Which confirmed hazard surprised you the most — something you wouldn't have noticed on your own before this lesson? What made it easy to miss?",
+          "Success checks: Hazard identification accuracy: Adult confirms at least four real hazards across two categories. | Category naming and proposed fixes: Names the correct category and proposes a workable fix for each confirmed hazard.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u01-l04-retry-pair",
+        "kind": "retry",
+        "title": "hazard recognition supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u01-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u01-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional hazard recognition condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Hazard identification accuracy: Adult confirms at least four real hazards across two categories. | Category naming and proposed fixes: Names the correct category and proposes a workable fix for each confirmed hazard..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u01-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u01-l04-delivered-example",
+        "kind": "model",
+        "title": "hazard recognition delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: A trusted adult walks the shared spaces of the home with the learner, and together they look specifically for hazards — not general messiness — such as a cord across a walkway, an unstable stack of items, a blocked doorway, or a sharp edge at a height where someone could bump it.",
+          "Use steps: With your adult present for the entire walk-through, look at two shared spaces together and point out anything you think might be a hazard.",
+          "Field 1 (t2-p1): I found at least four things to check, not just one.",
+          "Field 2 (t2-p2): My adult confirmed which findings were real hazards and which were not.",
+          "Field 3 (t2-p3): For every hazard my adult confirmed, I could name which category it fit (trip, sharp edge, blocked exit, unsecured object, other).",
+          "Field 4 (t2-p4): I did not touch or try to fix anything without checking with my adult first.",
+          "Check against: Hazard identification accuracy: Adult confirms at least four real hazards across two categories. | Category naming and proposed fixes: Names the correct category and proposes a workable fix for each confirmed hazard."
+        ]
+      }
+    ],
+    "model": {
+      "title": "hazard recognition worked model",
+      "startingCondition": "A trusted adult walks the shared spaces of the home with the learner, and together they look specifically for hazards — not general messiness — such as a cord across a walkway, an unstable stack of items, a blocked doorway, or a sharp edge at a height where someone could bump it.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact hazard recognition decision or action.",
+        "Model move 2: Before the walk-through, list two hazard categories you already know to look for (for example: trip risk, sharp edge, blocked exit, unsecured heavy object).",
+        "Model move 3: With your adult present for the entire walk-through, look at two shared spaces together and point out anything you think might be a hazard."
+      ],
+      "reasoning": "The model names the condition, follows the ordered hazard recognition process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Hazard identification accuracy: Adult confirms at least four real hazards across two categories.",
+        "Category naming and proposed fixes: Names the correct category and proposes a workable fix for each confirmed hazard."
+      ],
+      "resourceRef": "swk-rfl-g5-u01-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for hazard recognition.",
+        "2. Watch the worked move on swk-rfl-g5-u01-l04-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u01-l04-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u01-l04-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u01-l04-evidence-record; use swk-rfl-g5-u01-l04-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u01-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "A trusted adult walks the shared spaces of the home with the learner, and together they look specifically for hazards — not general messiness — such as a cord across a walkway, an unstable stack of items, a blocked doorway, or a sharp edge at a height where someone could bump it.",
+      "prompt": "Name two hazard categories.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Hazard identification accuracy: Adult confirms at least four real hazards across two categories.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u01-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u01-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "hazard recognition — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g5-u01-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult present for the entire walk-through, look at two shared spaces together and point out anything you think might be a hazard.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "hazard recognition — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u01-l04-independent-card",
+        "directions": "If a full walk-through of two shared spaces isn't possible, the learner instead reviews four printed or hand-drawn room scenes with their adult, identifies the hazard in each one, names its category, and proposes a fix — reviewed and confirmed by the adult the same way as the real walk-through.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u01-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Which confirmed hazard surprised you the most — something you wouldn't have noticed on your own before this lesson? What made it easy to miss?",
+      "observableCriteria": [
+        "Hazard identification accuracy: Adult confirms at least four real hazards across two categories.",
+        "Category naming and proposed fixes: Names the correct category and proposes a workable fix for each confirmed hazard."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u01-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u01-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u01-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u01-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Hazard identification accuracy: Adult confirms at least four real hazards across two categories. | Category naming and proposed fixes: Names the correct category and proposes a workable fix for each confirmed hazard.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u01-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u01-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

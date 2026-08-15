@@ -16,10 +16,10 @@
   "standardsRefs": [
     "Manuel Academy Ready for Life elementary sequence — Grade 3",
     "Ready for Life v1 safety, supervision, and no-shame policy reference",
-    "Michigan Health/SEL connections",
-    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety"
+    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners sort four example sentences about body signals into neutral-naming and self-critical groups, then rewrite each self-critical sentence using the calm starter phrase 'My body is telling me,' so they build a habit of describing a signal factually instead of judging themselves for having it.",
+  "objective": "I can practice naming a signal kindly. I will do one step at a time and check one result.",
   "scenario": "The learner reads four printed example sentences a kid might say about a body signal, some worded kindly and some worded with frustration or shame, sorts all four into two groups, and rewrites every self-critical sentence into a neutral version using the same naming starter each time.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -28,65 +28,65 @@
   "safetyNotes": [],
   "simulationAlternative": null,
   "materials": [
-    "the four example sentences provided in this lesson",
-    "paper and a pencil"
+    "Embedded resource: swk-rfl-g3-u04-l02-model-card",
+    "Embedded resource: swk-rfl-g3-u04-l02-step-card",
+    "Embedded resource: swk-rfl-g3-u04-l02-guided-card",
+    "Embedded resource: swk-rfl-g3-u04-l02-independent-card",
+    "Embedded resource: swk-rfl-g3-u04-l02-evidence-record",
+    "Embedded resource: swk-rfl-g3-u04-l02-retry-pair",
+    "Embedded resource: swk-rfl-g3-u04-l02-delivered-example",
+    "learner-local: paper and a pencil"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Read all four example sentences quietly before sorting anything.",
+      "directions": "Open swk-rfl-g3-u04-l02-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Of the four sentences, which one would feel kindest to hear someone say about themselves, and what specific word made it feel kind?"
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Sort the four sentences into two groups, neutral naming and self-critical, then rewrite each self-critical sentence using the starter 'My body is telling me.'",
+      "directions": "Open swk-rfl-g3-u04-l02-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I sorted all four sentences into 'neutral naming' or 'self-critical' before rewriting any of them."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I rewrote each self-critical sentence starting with the exact phrase 'My body is telling me.'"
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "I kept the same signal (hunger, thirst, tiredness, or another signal) in my rewrite instead of changing it to a different signal."
-        },
-        {
-          "ref": "t2-p4",
-          "promptType": "checklist-item",
-          "text": "I read my rewritten sentences out loud to check that they sound calm, not judgmental."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Without looking at the four example sentences, apply the same starter phrase to a signal you have felt today.",
+      "directions": "Open swk-rfl-g3-u04-l02-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Write one neutral naming sentence about a signal you have felt today, using the starter 'My body is telling me.'"
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Think of one sentence you have heard someone say about a body signal that sounded unkind or impatient, from a book, a show, or somewhere you have been.",
+      "directions": "Open swk-rfl-g3-u04-l02-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -96,7 +96,7 @@
       ]
     }
   ],
-  "remediation": "If a learner rewrites a self-critical sentence by erasing the signal entirely, such as changing it to 'I'm fine,' reteach with a two-column matching drill that requires the specific signal word to appear in every rewrite before it counts as complete.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g3-u04-l02-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g3-u04-l02-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g3-u04-l02-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical. | Rewriting quality: Each rewrite keeps the same signal and uses the 'My body is telling me' starter. | Applying to a new signal: The learner writes one neutral naming sentence about a signal felt that day, using the starter. Resume at the next unfinished step on swk-rfl-g3-u04-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner write three example naming sentences as if teaching the starter phrase to a favorite character from a book or show, using a different signal in each sentence.",
   "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u04-l02.scoring.json",
   "integrity": {
@@ -104,5 +104,261 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
     "sourceLessonId": "ma-g3-ready-for-life-u04-l02",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "health-self-management",
+    "practicalGoal": "I can practice naming a signal kindly. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g3-u04-l02-model-card",
+        "swk-rfl-g3-u04-l02-step-card",
+        "swk-rfl-g3-u04-l02-guided-card",
+        "swk-rfl-g3-u04-l02-independent-card",
+        "swk-rfl-g3-u04-l02-evidence-record",
+        "swk-rfl-g3-u04-l02-retry-pair",
+        "swk-rfl-g3-u04-l02-delivered-example"
+      ],
+      "referencedArtifactWords": [
+        "example"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g3-u04-l02-delivered-example"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g3-u04-l02-local-1",
+          "label": "paper and a pencil",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g3-u04-l02-model-card",
+        "kind": "model",
+        "title": "naming a signal kindly worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner reads four printed example sentences a kid might say about a body signal, some worded kindly and some worded with frustration or shame, sorts all four into two groups, and rewrites every self-critical sentence into a neutral version using the same naming starter each time.",
+          "Model move 1: Read the condition and name the exact naming a signal kindly decision or action.",
+          "Model move 2: Read all four example sentences quietly before sorting anything.",
+          "Model move 3: Sort the four sentences into two groups, neutral naming and self-critical, then rewrite each self-critical sentence using the starter 'My body is telling me.'",
+          "Model check: Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical. | Rewriting quality: Each rewrite keeps the same signal and uses the 'My body is telling me' starter. | Applying to a new signal: The learner writes one neutral naming sentence about a signal felt that day, using the starter."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u04-l02-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "naming a signal kindly action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for naming a signal kindly.",
+          "2. Watch the worked move on swk-rfl-g3-u04-l02-model-card.",
+          "3. Do one coached move on swk-rfl-g3-u04-l02-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g3-u04-l02-independent-card.",
+          "5. Save the small record on swk-rfl-g3-u04-l02-evidence-record; use swk-rfl-g3-u04-l02-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u04-l02-guided-card",
+        "kind": "guided-practice",
+        "title": "naming a signal kindly coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner reads four printed example sentences a kid might say about a body signal, some worded kindly and some worded with frustration or shame, sorts all four into two groups, and rewrites every self-critical sentence into a neutral version using the same naming starter each time.",
+          "Coach direction: Read all four example sentences quietly before sorting anything.",
+          "Learner prompt: Of the four sentences, which one would feel kindest to hear someone say about themselves, and what specific word made it feel kind?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u04-l02-independent-card",
+        "kind": "independent-task",
+        "title": "naming a signal kindly complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Sort the four sentences into two groups, neutral naming and self-critical, then rewrite each self-critical sentence using the starter 'My body is telling me.'",
+          "Response 1 (t2-p1): I sorted all four sentences into 'neutral naming' or 'self-critical' before rewriting any of them.",
+          "Response 2 (t2-p2): I rewrote each self-critical sentence starting with the exact phrase 'My body is telling me.'",
+          "Response 3 (t2-p3): I kept the same signal (hunger, thirst, tiredness, or another signal) in my rewrite instead of changing it to a different signal.",
+          "Response 4 (t2-p4): I read my rewritten sentences out loud to check that they sound calm, not judgmental.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u04-l02-evidence-record",
+        "kind": "evidence-record",
+        "title": "naming a signal kindly minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Write the unkind sentence you thought of, then write a kinder, neutral version of that same sentence using today's starter phrase.",
+          "Success checks: Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical. | Rewriting quality: Each rewrite keeps the same signal and uses the 'My body is telling me' starter. | Applying to a new signal: The learner writes one neutral naming sentence about a signal felt that day, using the starter.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u04-l02-retry-pair",
+        "kind": "retry",
+        "title": "naming a signal kindly supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g3-u04-l02-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g3-u04-l02-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional naming a signal kindly condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical. | Rewriting quality: Each rewrite keeps the same signal and uses the 'My body is telling me' starter. | Applying to a new signal: The learner writes one neutral naming sentence about a signal felt that day, using the starter..",
+          "Return: resume at the next unfinished step on swk-rfl-g3-u04-l02-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u04-l02-delivered-example",
+        "kind": "model",
+        "title": "naming a signal kindly delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner reads four printed example sentences a kid might say about a body signal, some worded kindly and some worded with frustration or shame, sorts all four into two groups, and rewrites every self-critical sentence into a neutral version using the same naming starter each time.",
+          "Use steps: Sort the four sentences into two groups, neutral naming and self-critical, then rewrite each self-critical sentence using the starter 'My body is telling me.'",
+          "Field 1 (t2-p1): I sorted all four sentences into 'neutral naming' or 'self-critical' before rewriting any of them.",
+          "Field 2 (t2-p2): I rewrote each self-critical sentence starting with the exact phrase 'My body is telling me.'",
+          "Field 3 (t2-p3): I kept the same signal (hunger, thirst, tiredness, or another signal) in my rewrite instead of changing it to a different signal.",
+          "Field 4 (t2-p4): I read my rewritten sentences out loud to check that they sound calm, not judgmental.",
+          "Check against: Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical. | Rewriting quality: Each rewrite keeps the same signal and uses the 'My body is telling me' starter. | Applying to a new signal: The learner writes one neutral naming sentence about a signal felt that day, using the starter."
+        ]
+      }
+    ],
+    "model": {
+      "title": "naming a signal kindly worked model",
+      "startingCondition": "The learner reads four printed example sentences a kid might say about a body signal, some worded kindly and some worded with frustration or shame, sorts all four into two groups, and rewrites every self-critical sentence into a neutral version using the same naming starter each time.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact naming a signal kindly decision or action.",
+        "Model move 2: Read all four example sentences quietly before sorting anything.",
+        "Model move 3: Sort the four sentences into two groups, neutral naming and self-critical, then rewrite each self-critical sentence using the starter 'My body is telling me.'"
+      ],
+      "reasoning": "The model names the condition, follows the ordered naming a signal kindly process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical.",
+        "Rewriting quality: Each rewrite keeps the same signal and uses the 'My body is telling me' starter.",
+        "Applying to a new signal: The learner writes one neutral naming sentence about a signal felt that day, using the starter."
+      ],
+      "resourceRef": "swk-rfl-g3-u04-l02-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for naming a signal kindly.",
+        "2. Watch the worked move on swk-rfl-g3-u04-l02-model-card.",
+        "3. Do one coached move on swk-rfl-g3-u04-l02-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g3-u04-l02-independent-card.",
+        "5. Save the small record on swk-rfl-g3-u04-l02-evidence-record; use swk-rfl-g3-u04-l02-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g3-u04-l02-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner reads four printed example sentences a kid might say about a body signal, some worded kindly and some worded with frustration or shame, sorts all four into two groups, and rewrites every self-critical sentence into a neutral version using the same naming starter each time.",
+      "prompt": "Of the four sentences, which one would feel kindest to hear someone say about themselves, and what specific word made it feel kind?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g3-u04-l02-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g3-u04-l02-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "naming a signal kindly — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g3-u04-l02-independent-card",
+        "directions": "Complete the naming a signal kindly task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g3-u04-l02-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Write the unkind sentence you thought of, then write a kinder, neutral version of that same sentence using today's starter phrase.",
+      "observableCriteria": [
+        "Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical.",
+        "Rewriting quality: Each rewrite keeps the same signal and uses the 'My body is telling me' starter.",
+        "Applying to a new signal: The learner writes one neutral naming sentence about a signal felt that day, using the starter."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g3-u04-l02-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g3-u04-l02-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g3-u04-l02-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g3-u04-l02-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Sorting accuracy: All four example sentences are sorted correctly into neutral naming or self-critical. | Rewriting quality: Each rewrite keeps the same signal and uses the 'My body is telling me' starter. | Applying to a new signal: The learner writes one neutral naming sentence about a signal felt that day, using the starter.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g3-u04-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g3-u04-l02-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

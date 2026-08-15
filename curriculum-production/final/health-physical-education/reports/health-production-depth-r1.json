@@ -1,0 +1,76 @@
+{
+  "evidenceType": "health-production-depth-r1",
+  "evidenceVersion": "1.0.0",
+  "productionDepthVersion": "health-production-depth-r1",
+  "scope": {
+    "subject": "health",
+    "grades": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "lessonsBefore": 324,
+    "lessonsAfter": 324,
+    "lessonsRebuilt": 324,
+    "pairedAdultGuides": 324
+  },
+  "teachingSupply": {
+    "explanation": 324,
+    "vocabulary": 324,
+    "models": 324,
+    "guidedReasoning": 324,
+    "independentEvidence": 324,
+    "freshMastery": 324,
+    "differentiatedRemediation": 324
+  },
+  "lessonTypes": {
+    "CONCEPT_VOCABULARY": 71,
+    "INFORMATION_EVALUATION": 22,
+    "DECISION_REASONING": 29,
+    "COMMUNICATION_HELP_SEEKING": 28,
+    "HEALTH_SKILL_PROCEDURE": 11,
+    "REVIEW_RETRIEVAL": 1,
+    "REMEDIATION_RETRY": 54,
+    "MASTERY_EVIDENCE": 54,
+    "PROJECT_CAPSTONE": 54
+  },
+  "grades": {
+    "3": 36,
+    "4": 36,
+    "5": 36,
+    "7": 36,
+    "8": 36,
+    "9": 36,
+    "10": 36,
+    "11": 36,
+    "12": 36
+  },
+  "safetyAndPrivacy": {
+    "noDiagnosis": 324,
+    "noIndividualizedTreatmentAdvice": 324,
+    "noShameOrBodyValue": 324,
+    "noForcedSensitiveDisclosure": 324,
+    "privateReflectionExcludedFromMastery": 324
+  },
+  "ageLanguage": {
+    "grades3To5": "short concrete directions with one action per step",
+    "grades7To8": "concrete ordered reasoning with bounded constraints",
+    "grades9To12": "chunked health-literacy analysis with evidence, uncertainty, tradeoffs, and authority"
+  },
+  "approvedAnchor": {
+    "lessonId": "ma-g5-health-u01-l01",
+    "approvedSampleSha": "61f447082bc3102cab6eb7514a0c443c1bacbc17",
+    "packageSha256": "e4c4ea53acfed33e96088355ae2faed6c90a949d5f1b69021fa7399a7e469be6",
+    "guideSha256": "5a50bdfcf42b2fdd3de4523995174797fa3960ffcc3e6a08b7a038a273507084",
+    "bytePreserved": true
+  },
+  "issueCount": 0,
+  "issues": [],
+  "classification": "HEALTH_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE"
+}

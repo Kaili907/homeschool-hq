@@ -15,35 +15,46 @@
   "scoring_stance": "PROGRESS_EVIDENCE",
   "rubric": [
     {
-      "dimension": "transfer and connection",
-      "exceeds": "At least three ideas are related with the relationship named, and a worked example genuinely requires two of them together.",
-      "meets": "Connections between unit ideas are drawn and labelled.",
-      "developing": "Ideas are listed together but the relationships are unstated or incorrect.",
-      "beginning": "No connections between ideas are made."
+      "dimension": "Objective evidence",
+      "criterion_kind": "OBJECTIVE",
+      "exceeds": "All required evidence for advanced composition, production, and literacy is present, clearly labelled, and includes the required work blocks and one reviewable process state plus a complete criteria check.",
+      "meets": "The submission contains the required work blocks and one reviewable process state; each required artifact, study, response, or process note can be located.",
+      "developing": "The central Arts work is present, but one required evidence part for advanced composition, production, and literacy is missing or cannot be located.",
+      "beginning": "The submission does not yet contain the central visual art evidence required by this lesson."
     },
     {
-      "dimension": "evidence and reasoning",
-      "exceeds": "Every claim or choice is backed by specific evidence or clearly explained reasoning a reader can follow unaided.",
-      "meets": "Most claims or choices are backed by evidence or reasoning, with only small gaps.",
-      "developing": "Some claims are supported but several are asserted without support.",
-      "beginning": "Claims are asserted with little or no supporting evidence or reasoning."
+      "dimension": "Review evidence",
+      "criterion_kind": "JUDGMENT_BASED",
+      "exceeds": "The learner precisely locates placement, scale, value, edge, isolation, repetition, and direction, explains how multiple relationships work together, and identifies a meaningful tradeoff.",
+      "meets": "The learner locates relevant placement, scale, value, edge, isolation, repetition, and direction and explains how the evidence relates to the stated intent, claim, or criterion.",
+      "developing": "Relevant choices are attempted, but the explanation does not yet locate their effect or connect it consistently with the stated purpose.",
+      "beginning": "The work does not yet provide locatable evidence of advanced composition, production, and literacy; use the registered retry route without judging style or ability."
     },
     {
-      "dimension": "process documentation",
-      "exceeds": "The record shows the actual working order, including abandoned attempts and dead ends, in enough detail to reconstruct the session.",
-      "meets": "The required log, trace, or notes are present and record what was done and why.",
-      "developing": "Documentation exists but is thin, out of order, or written after the fact from memory.",
-      "beginning": "Little or no record of the process was kept."
+      "dimension": "Intent, interpretation, and choice",
+      "criterion_kind": "JUDGMENT_BASED",
+      "exceeds": "The reasoning supports the learner’s choices, recognizes another defensible route, and distinguishes objective constraints from open artistic decisions.",
+      "meets": "The learner states an intent or claim and supports it with observable evidence while retaining ownership of artistic decisions.",
+      "developing": "An intent or interpretation is stated, but key claims rely on preference, polish, or resemblance rather than evidence.",
+      "beginning": "No supported intent or interpretation is visible yet; no particular style, mood, subject, or model-like result is required."
+    },
+    {
+      "dimension": "Process and learner-owned revision",
+      "criterion_kind": "JUDGMENT_BASED",
+      "exceeds": "Earlier and later evidence makes the tested relationship traceable; the learner gives a criteria-based reason to revise or deliberately keep the result.",
+      "meets": "The process record shows a check and a learner-chosen revision or reasoned decision to keep the result.",
+      "developing": "A change is visible, but the evidence that prompted it or the relationship changed is unclear.",
+      "beginning": "No check or revision decision is visible yet; invite a bounded test without directing the learner’s artistic choice."
     }
   ],
-  "scoring_judgment_guidance": "Score this session with the rubric below, not against a fixed answer key — a creative or analytical task legitimately has more than one valid solution. Score only what a synthesis on advanced composition, production, and literacy can show: this is one increment of progress, so score the increment and its documentation rather than the unfinished whole. Record the level reached on each dimension with one specific reason drawn from the actual submission. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoring_judgment_guidance": "Score advanced composition, production, and literacy with the focus-facing rubric, not a fixed answer key. Record objective presence first. For judgment-based dimensions, cite locatable placement, scale, value, edge, isolation, repetition, and direction from the actual submission and connect it to the learner’s intent or claim. Different subject or abstraction, format and medium, focal point, hierarchy variables, final visual path and revision choices are valid when the learner meets objective constraints and supports the result with evidence. Difference from an Academy model is never an error and resemblance earns no extra credit. A learner may revise the work, revise the stated intention, support ambiguity, or keep the result when the evidence-based reasoning is coherent. A rough or model-different result can meet the lesson when the evidence and reasoning satisfy the criterion. Never infer talent, taste, effort, motivation, diagnosis, or character from the work.",
   "lesson_success_criteria": [
     "The learner completes the central task on advanced composition, production, and literacy.",
     "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
     "The learner checks or revises the work and can name a next step."
   ],
   "formative_check": "Identify which unit evidence is strongest, which is thin, and what would strengthen it.",
-  "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "answer_or_scoring_guidance": "There is no fixed composition or answer for advanced composition, production, and literacy. Score the authored objective constraints and the focus-specific rubric evidence; accept materially different creative, performance, design, or interpretive choices when the learner supports them against the criteria.",
   "mastery_rule": "Do not mark mastery from one answer. Use sketch or rehearsal record, created or performed work, artist statement, critique response, revision log, and portfolio reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g11-arts-and-music-u02-assessment",
@@ -62,7 +73,7 @@
     },
     "note": "This lesson is one session inside the unit; the unit assessment record above is the summative instrument, and this lesson rubric scores only this session's evidence."
   },
-  "remediation_plan": "Reteaching for advanced composition, production, and literacy follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for advanced composition, production, and literacy, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to advanced composition, production, and literacy works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of advanced composition, production, and literacy, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking advanced composition, production, and literacy mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "remediation_plan": "Route 1: Reduce advanced composition, production, and literacy to three locatable events, areas, steps, or decisions. Label the intended effect beside each and underline the one placement relationship that should carry it. Use a separate small study, four-event loop, thumbnail, evidence table, or paper plan. The adult may model the noticing process on different material but may not change the learner’s work. Check yourself: Point to or name the exact placement evidence before deciding whether it serves the intent. New attempt: Put the support away and make a new arrangement, passage, response, or plan; record what the new evidence shows. Route 2: Return to the last understandable state. Hold every relationship steady except one chosen feature from placement, scale, value, edge, isolation, repetition, and direction; predict what that single change should do. Test the feature on scrap paper, a silent count, a two-event rehearsal loop, movable shapes, or a short evidence sentence before changing the scored work. Check yourself: Name what stayed the same, what changed, and the first observable result—without using “better” as the evidence. New attempt: Create a different small case using the same one-variable method, then transfer the finding to the original task only if it serves the learner’s intent.",
   "extension_plan": "Apply advanced composition, production, and literacy under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on advanced composition, production, and literacy rather than extra volume: one harder case done well beats three more of the same. Extension work stays private by default and uses only original, public-domain, or properly cited material. Extension work is never required to reach mastery and must not be assigned as a penalty.",
   "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
   "accessibility_options": [
@@ -94,5 +105,30 @@
   "standards": [
     "Michigan Arts Education Standards: Music — Creating",
     "Music — Responding"
+  ],
+  "rubric_ref": "rubric:ma-g11-am-u02-l10:advanced-composition-production-and-literacy-r1",
+  "objective_constraints": [],
+  "legitimate_variation": [
+    "Different subject or abstraction, format and medium, focal point, hierarchy variables, final visual path and revision choices are valid when the learner meets objective constraints and supports the result with evidence.",
+    "Difference from an Academy model is never an error and resemblance earns no extra credit.",
+    "A learner may revise the work, revise the stated intention, support ambiguity, or keep the result when the evidence-based reasoning is coherent."
+  ],
+  "remediation_paths": [
+    {
+      "ref": "remediation:advanced-composition-production-and-literacy:reduced-map",
+      "for_error_id": "error:advanced-composition-production-and-literacy:relationship-not-locatable",
+      "different_instruction": "Reduce advanced composition, production, and literacy to three locatable events, areas, steps, or decisions. Label the intended effect beside each and underline the one placement relationship that should carry it.",
+      "supported_attempt": "Use a separate small study, four-event loop, thumbnail, evidence table, or paper plan. The adult may model the noticing process on different material but may not change the learner’s work.",
+      "self_noticing_cue": "Point to or name the exact placement evidence before deciding whether it serves the intent.",
+      "fresh_retry": "Put the support away and make a new arrangement, passage, response, or plan; record what the new evidence shows."
+    },
+    {
+      "ref": "remediation:advanced-composition-production-and-literacy:one-variable",
+      "for_error_id": "error:advanced-composition-production-and-literacy:all-variables-changed",
+      "different_instruction": "Return to the last understandable state. Hold every relationship steady except one chosen feature from placement, scale, value, edge, isolation, repetition, and direction; predict what that single change should do.",
+      "supported_attempt": "Test the feature on scrap paper, a silent count, a two-event rehearsal loop, movable shapes, or a short evidence sentence before changing the scored work.",
+      "self_noticing_cue": "Name what stayed the same, what changed, and the first observable result—without using “better” as the evidence.",
+      "fresh_retry": "Create a different small case using the same one-variable method, then transfer the finding to the original task only if it serves the learner’s intent."
+    }
   ]
 }

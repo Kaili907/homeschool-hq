@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { validateProductionDepth } from './production-depth.mjs'
 
 export const CORPUS_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 export const SUPPORTED_GRADES = Object.freeze([3, 4, 5, 7, 8, 9, 10, 11, 12])
@@ -255,6 +256,7 @@ export function validateCorpus(entries) {
       issues.push({ rule: 'orphan-scoring-record', lessonId: null, packageId: null, detail: relative(CORPUS_ROOT, path) })
     }
   }
+  issues.push(...entries.flatMap(validateProductionDepth))
   return issues
 }
 

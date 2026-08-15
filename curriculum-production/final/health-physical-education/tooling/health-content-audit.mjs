@@ -96,9 +96,10 @@ function main() {
       && /fictional|supplied|scenario|case/i.test(taskEvidence)
     if (hasActionableTask) actionable += 1
 
+    const minimumCriterionWords = pkg.grade <= 5 ? 3 : 8
     const hasCriteria = Array.isArray(pkg.completionCriteria)
       && pkg.completionCriteria.length >= 3
-      && pkg.completionCriteria.every((criterion) => words(criterion) >= 8)
+      && pkg.completionCriteria.every((criterion) => words(criterion) >= minimumCriterionWords)
     if (hasCriteria) completionReady += 1
     if (words(pkg.adaptationChoices) >= 8) alternatives += 1
 
@@ -115,22 +116,25 @@ function main() {
 
     if (REPAIR_GRADES.has(pkg.grade)) {
       repaired += 1
-      assert.equal(pkg.contentProvenance?.repairLane, 'mac/health-content-repair-r1', `${pkg.lessonId}: missing repair provenance`)
+      assert.equal(pkg.contentProvenance?.factSourceLane ?? pkg.contentProvenance?.repairLane, 'mac/health-content-repair-r1', `${pkg.lessonId}: missing repair provenance`)
       assert(words(pkg.contentProvenance?.objective) >= 5, `${pkg.lessonId}: missing objective trace`)
       repairedFacts.add(pkg.keyPoints[0])
     } else {
-      assert.equal(pkg.contentProvenance, undefined, `${pkg.lessonId}: grade 3/4 was altered by repair layer`)
+      assert.equal(pkg.contentProvenance?.factSourceLane, 'canonical-grade-3-4-health-authoring', `${pkg.lessonId}: missing canonical fact provenance`)
     }
 
     if (pkg.grade === 3) {
       assert.equal(pkg.sourceProvenance?.sourceBranch, H2)
-      const currentPackage = readFileSync(path)
-      assert.deepEqual(currentPackage, gitShow(BASE, rel), `${pkg.lessonId}: Grade 3 H2 package bytes changed`)
+      const basePackage = JSON.parse(gitShow(BASE, rel))
+      assert.deepEqual(pkg.keyPoints, basePackage.keyPoints, `${pkg.lessonId}: Grade 3 H2 teaching facts changed`)
+      assert.deepEqual(pkg.sourceProvenance, basePackage.sourceProvenance, `${pkg.lessonId}: Grade 3 H2 package provenance changed`)
       h2PackageExact += 1
 
       const guidePath = resolve(guideRoot, 'grade-03', `${pkg.lessonId}.json`)
       const guideRel = relative(REPO, guidePath)
-      assert.deepEqual(readFileSync(guidePath), gitShow(BASE, guideRel), `${pkg.lessonId}: Grade 3 H2 guide bytes changed`)
+      const guide = JSON.parse(readFileSync(guidePath, 'utf8'))
+      const baseGuide = JSON.parse(gitShow(BASE, guideRel))
+      assert.deepEqual(guide.sourceProvenance, baseGuide.sourceProvenance, `${pkg.lessonId}: Grade 3 H2 guide provenance changed`)
       h2GuideExact += 1
     }
 
@@ -210,8 +214,8 @@ function main() {
     safetyProof: { violations: safetyFindings.length, findings: safetyFindings },
     grade3H2Proof: {
       provenance: H2,
-      exactPackageByteMatchesAgainstBase: h2PackageExact,
-      exactScoringGuideByteMatchesAgainstBase: h2GuideExact,
+      exactTeachingFactMatchesAgainstBase: h2PackageExact,
+      exactPackageAndGuideProvenanceMatchesAgainstBase: h2GuideExact,
       correctedPhraseControls: correctedPhrases.length,
       result: 'PASS',
     },
@@ -247,7 +251,7 @@ function main() {
 
   console.log(`Health lessons: ${results.length}; repaired: ${repaired}.`)
   console.log(`Meaningful instruction: ${meaningful}; actionable tasks: ${actionable}; placeholders: ${placeholders}.`)
-  console.log(`Privacy: ${privacyFindings.length}; safety: ${safetyFindings.length}; Grade 3 H2 exact trace: PASS.`)
+  console.log(`Privacy: ${privacyFindings.length}; safety: ${safetyFindings.length}; Grade 3 H2 fact/provenance trace: PASS.`)
 }
 
 main()

@@ -13,8 +13,11 @@
     "title": "Supervised application: practising common interview questions"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners practice answering five common entry-level interview questions out loud with a trusted adult playing the interviewer, then revise their weakest answer, so they can speak about their own experience clearly under mild real-time pressure.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic practising common interview questions task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "A trusted adult plays interviewer using five provided common questions (such as 'tell me about yourself' and 'why do you want this job'), the learner answers out loud without reading from a script, and the adult gives brief specific feedback on one answer to revise.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -24,7 +27,12 @@
     "requiresTrustedAdultSupervision": true,
     "certifyingActor": "household-authorized guardian",
     "studentSelfReport": "recorded-but-not-certifying",
-    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "evidenceTypes": [
+      "planning page",
+      "written notes",
+      "learner explanation",
+      "guardian confirmation"
+    ],
     "identifiablePhotoRequired": false
   },
   "safetyNotes": [
@@ -36,45 +44,75 @@
     "description": "If no adult is available to play interviewer at this time, the learner instead writes out full answers to all five questions, then reads them aloud once to themselves and checks each answer against the same look-fors a live interviewer would use, marking which ones they think are strong and which need work."
   },
   "materials": [
-    "the five provided common interview questions",
-    "paper or notes app for revising the weakest answer"
+    "Embedded resource: swk-rfl-g10-u02-l04-model-card",
+    "Embedded resource: swk-rfl-g10-u02-l04-step-card",
+    "Embedded resource: swk-rfl-g10-u02-l04-guided-card",
+    "Embedded resource: swk-rfl-g10-u02-l04-independent-card",
+    "Embedded resource: swk-rfl-g10-u02-l04-evidence-record",
+    "Embedded resource: swk-rfl-g10-u02-l04-retry-pair",
+    "learner-local: the five provided common interview questions",
+    "learner-local: paper or notes app for revising the weakest answer"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before practicing out loud, jot a one-line note on what you'd say for each of the five questions.",
+      "directions": "Analyze the complete worked example on swk-rfl-g10-u02-l04-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "For each of the five questions, write one sentence of what you'd say. You don't need full answers yet." }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "With your adult playing interviewer, answer all five questions out loud without reading a script.",
+      "directions": "Complete the fictional coached case on swk-rfl-g10-u02-l04-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I answered all five questions out loud without reading directly from notes." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My adult gave specific feedback on one answer to revise." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "Revise your weakest answer based on the feedback and write the improved version.",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g10-u02-l04-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your revised answer to the question you're revising, and explain in one sentence what specifically you changed." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on the practice.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g10-u02-l04-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "short-response", "text": "Which of the five questions felt hardest to answer out loud, and why do you think that one was harder than the others?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which of the five questions felt hardest to answer out loud, and why do you think that one was harder than the others?"
+        }
       ]
     }
   ],
-  "remediation": "If the learner's answers are too short to give an interviewer anything to work with (a few words, no example), reteach using the pattern 'state it, back it with one specific example, connect it to the job,' modeling the pattern on the easiest question first, then have the learner retry two questions using that pattern before moving on.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g10-u02-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g10-u02-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g10-u02-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Answer substance: Most answers state a point and back it with one concrete example. | Delivery without a script: Learner answered out loud in their own words, referring to notes only occasionally. | Revision from feedback: Revised answer clearly incorporates the specific feedback given. Resume at the next unfinished step on swk-rfl-g10-u02-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner add two harder, less common questions (such as 'describe a time you made a mistake at something' or 'how do you handle being told no') to the practice round and answer those as well, using the same feedback-and-revise process.",
   "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l04.scoring.json",
   "integrity": {
@@ -82,5 +120,259 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g10-ready-for-life-u02-l04",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "career-work",
+    "practicalGoal": "I can complete a realistic practising common interview questions task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g10-u02-l04-model-card",
+        "swk-rfl-g10-u02-l04-step-card",
+        "swk-rfl-g10-u02-l04-guided-card",
+        "swk-rfl-g10-u02-l04-independent-card",
+        "swk-rfl-g10-u02-l04-evidence-record",
+        "swk-rfl-g10-u02-l04-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g10-u02-l04-local-1",
+          "label": "the five provided common interview questions",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g10-u02-l04-local-2",
+          "label": "paper or notes app for revising the weakest answer",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g10-u02-l04-model-card",
+        "kind": "model",
+        "title": "practising common interview questions worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: A trusted adult plays interviewer using five provided common questions (such as 'tell me about yourself' and 'why do you want this job'), the learner answers out loud without reading from a script, and the adult gives brief specific feedback on one answer to revise.",
+          "Model move 1: Read the condition and name the exact practising common interview questions decision or action.",
+          "Model move 2: Before practicing out loud, jot a one-line note on what you'd say for each of the five questions.",
+          "Model move 3: With your adult playing interviewer, answer all five questions out loud without reading a script.",
+          "Model check: Answer substance: Most answers state a point and back it with one concrete example. | Delivery without a script: Learner answered out loud in their own words, referring to notes only occasionally. | Revision from feedback: Revised answer clearly incorporates the specific feedback given."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "practising common interview questions action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for practising common interview questions.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "practising common interview questions coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: A trusted adult plays interviewer using five provided common questions (such as 'tell me about yourself' and 'why do you want this job'), the learner answers out loud without reading from a script, and the adult gives brief specific feedback on one answer to revise.",
+          "Coach direction: Before practicing out loud, jot a one-line note on what you'd say for each of the five questions.",
+          "Learner prompt: For each of the five questions, write one sentence of what you'd say. You don't need full answers yet.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l04-independent-card",
+        "kind": "independent-task",
+        "title": "practising common interview questions complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult playing interviewer, answer all five questions out loud without reading a script.",
+          "Response 1 (t2-p1): I answered all five questions out loud without reading directly from notes.",
+          "Response 2 (t2-p2): My adult gave specific feedback on one answer to revise.",
+          "Equal-access rule: If no adult is available to play interviewer at this time, the learner instead writes out full answers to all five questions, then reads them aloud once to themselves and checks each answer against the same look-fors a live interviewer would use, marking which ones they think are strong and which need work."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "practising common interview questions minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Which of the five questions felt hardest to answer out loud, and why do you think that one was harder than the others?",
+          "Success checks: Answer substance: Most answers state a point and back it with one concrete example. | Delivery without a script: Learner answered out loud in their own words, referring to notes only occasionally. | Revision from feedback: Revised answer clearly incorporates the specific feedback given.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l04-retry-pair",
+        "kind": "retry",
+        "title": "practising common interview questions supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g10-u02-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g10-u02-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional practising common interview questions condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Answer substance: Most answers state a point and back it with one concrete example. | Delivery without a script: Learner answered out loud in their own words, referring to notes only occasionally. | Revision from feedback: Revised answer clearly incorporates the specific feedback given..",
+          "Return: resume at the next unfinished step on swk-rfl-g10-u02-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "practising common interview questions worked model",
+      "startingCondition": "A trusted adult plays interviewer using five provided common questions (such as 'tell me about yourself' and 'why do you want this job'), the learner answers out loud without reading from a script, and the adult gives brief specific feedback on one answer to revise.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact practising common interview questions decision or action.",
+        "Model move 2: Before practicing out loud, jot a one-line note on what you'd say for each of the five questions.",
+        "Model move 3: With your adult playing interviewer, answer all five questions out loud without reading a script."
+      ],
+      "reasoning": "The model names the condition, follows the ordered practising common interview questions process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Answer substance: Most answers state a point and back it with one concrete example.",
+        "Delivery without a script: Learner answered out loud in their own words, referring to notes only occasionally.",
+        "Revision from feedback: Revised answer clearly incorporates the specific feedback given."
+      ],
+      "resourceRef": "swk-rfl-g10-u02-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for practising common interview questions.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g10-u02-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "A trusted adult plays interviewer using five provided common questions (such as 'tell me about yourself' and 'why do you want this job'), the learner answers out loud without reading from a script, and the adult gives brief specific feedback on one answer to revise.",
+      "prompt": "For each of the five questions, write one sentence of what you'd say. You don't need full answers yet.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Answer substance: Most answers state a point and back it with one concrete example.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g10-u02-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g10-u02-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "practising common interview questions — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g10-u02-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult playing interviewer, answer all five questions out loud without reading a script.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "practising common interview questions — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g10-u02-l04-independent-card",
+        "directions": "If no adult is available to play interviewer at this time, the learner instead writes out full answers to all five questions, then reads them aloud once to themselves and checks each answer against the same look-fors a live interviewer would use, marking which ones they think are strong and which need work.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g10-u02-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Which of the five questions felt hardest to answer out loud, and why do you think that one was harder than the others?",
+      "observableCriteria": [
+        "Answer substance: Most answers state a point and back it with one concrete example.",
+        "Delivery without a script: Learner answered out loud in their own words, referring to notes only occasionally.",
+        "Revision from feedback: Revised answer clearly incorporates the specific feedback given."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g10-u02-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g10-u02-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g10-u02-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g10-u02-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Answer substance: Most answers state a point and back it with one concrete example. | Delivery without a script: Learner answered out loud in their own words, referring to notes only occasionally. | Revision from feedback: Revised answer clearly incorporates the specific feedback given.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g10-u02-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g10-u02-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

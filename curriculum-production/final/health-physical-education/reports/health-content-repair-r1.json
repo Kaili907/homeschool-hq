@@ -22,8 +22,8 @@
   },
   "grade3H2Proof": {
     "provenance": "mac/g3-health-h2@50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
-    "exactPackageByteMatchesAgainstBase": 36,
-    "exactScoringGuideByteMatchesAgainstBase": 36,
+    "exactTeachingFactMatchesAgainstBase": 36,
+    "exactPackageAndGuideProvenanceMatchesAgainstBase": 36,
     "correctedPhraseControls": 14,
     "result": "PASS"
   },
@@ -162,6 +162,6 @@
   },
   "packageDigest": {
     "algorithm": "SHA-256",
-    "value": "097fc67882d77ff0b52e5eab30444d2b9310530df0b09471b31278592be0a028"
+    "value": "0d88b555c0d15946734996036d2f6bfb08ba3d5a528082f1931cb7bb299c21a9"
   }
 }

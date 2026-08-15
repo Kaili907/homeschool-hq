@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1 Lessons 10–12"
+    "Ready for Life v1 Lessons 10–12",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "With an adult, learners practice building two different no-heat meal combinations from the same small set of ingredients, then independently build a third combination on their own, aiming for variety across food groups rather than repeating the same combination.",
+  "objective": "I can practice meal variety. I will do one step at a time and check one result.",
   "scenario": "With an adult, the learner looks at a small set of available no-heat ingredients spanning at least three food groups and practices combining them two different ways, then builds a third combination independently that's meaningfully different from the first two.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -30,60 +31,66 @@
     "description": "If a varied set of real ingredients isn't available, the learner instead plans three different combinations in writing from a provided list of ingredients spanning multiple food groups, describing each combination and its food groups instead of physically assembling it."
   },
   "materials": [
-    "a small set of no-heat ingredients spanning at least three food groups",
-    "a plate or container"
+    "Embedded resource: swk-rfl-g5-u04-l03-model-card",
+    "Embedded resource: swk-rfl-g5-u04-l03-step-card",
+    "Embedded resource: swk-rfl-g5-u04-l03-guided-card",
+    "Embedded resource: swk-rfl-g5-u04-l03-independent-card",
+    "Embedded resource: swk-rfl-g5-u04-l03-evidence-record",
+    "Embedded resource: swk-rfl-g5-u04-l03-retry-pair",
+    "Embedded resource: swk-rfl-g5-u04-l03-delivered-example",
+    "learner-local: a small set of no-heat ingredients spanning at least three food groups",
+    "learner-local: a plate or container"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before building anything, name the food groups you can see represented in today's ingredients (for example: grain, protein, fruit or vegetable, dairy).",
+      "directions": "Open swk-rfl-g5-u04-l03-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "List the food groups you see."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "With your adult, build two different meal combinations from the same ingredient set, using a different food-group mix each time.",
+      "directions": "Open swk-rfl-g5-u04-l03-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "My first combination used at least three food groups."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "My second combination was meaningfully different from the first, not just the same foods rearranged."
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "My adult and I talked through why variety across food groups is useful, not just why it tastes different."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "Build a third combination on your own that's different again from the first two.",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u04-l03-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Describe your third combination and explain what makes it different from combinations one and two."
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Compare your three combinations.",
+      "directions": "Open swk-rfl-g5-u04-l03-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -93,7 +100,7 @@
       ]
     }
   ],
-  "remediation": "If the learner's 'different' combinations are actually just rearranged versions of the same food groups, reteach by naming one food group that's missing from what they've built so far and having them add it specifically before trying again.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u04-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u04-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u04-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Variety across combinations: At least two of three combinations use a meaningfully different food-group mix. | Reflection on preference vs. variety: Reflection names at least one non-taste factor, like how it made them feel. Resume at the next unfinished step on swk-rfl-g5-u04-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Plan a fourth combination that uses an ingredient the learner rarely chooses, and reflect on what made that ingredient a less automatic pick.",
   "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u04-l03.scoring.json",
   "integrity": {
@@ -101,5 +108,275 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g5-ready-for-life-u04-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can practice meal variety. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u04-l03-model-card",
+        "swk-rfl-g5-u04-l03-step-card",
+        "swk-rfl-g5-u04-l03-guided-card",
+        "swk-rfl-g5-u04-l03-independent-card",
+        "swk-rfl-g5-u04-l03-evidence-record",
+        "swk-rfl-g5-u04-l03-retry-pair",
+        "swk-rfl-g5-u04-l03-delivered-example"
+      ],
+      "referencedArtifactWords": [
+        "example"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g5-u04-l03-delivered-example"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u04-l03-local-1",
+          "label": "a small set of no-heat ingredients spanning at least three food groups",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u04-l03-local-2",
+          "label": "a plate or container",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u04-l03-model-card",
+        "kind": "model",
+        "title": "meal variety worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: With an adult, the learner looks at a small set of available no-heat ingredients spanning at least three food groups and practices combining them two different ways, then builds a third combination independently that's meaningfully different from the first two.",
+          "Model move 1: Read the condition and name the exact meal variety decision or action.",
+          "Model move 2: Before building anything, name the food groups you can see represented in today's ingredients (for example: grain, protein, fruit or vegetable, dairy).",
+          "Model move 3: With your adult, build two different meal combinations from the same ingredient set, using a different food-group mix each time.",
+          "Model check: Variety across combinations: At least two of three combinations use a meaningfully different food-group mix. | Reflection on preference vs. variety: Reflection names at least one non-taste factor, like how it made them feel."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u04-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "meal variety action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for meal variety.",
+          "2. Watch the worked move on swk-rfl-g5-u04-l03-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u04-l03-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u04-l03-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u04-l03-evidence-record; use swk-rfl-g5-u04-l03-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u04-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "meal variety coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: With an adult, the learner looks at a small set of available no-heat ingredients spanning at least three food groups and practices combining them two different ways, then builds a third combination independently that's meaningfully different from the first two.",
+          "Coach direction: Before building anything, name the food groups you can see represented in today's ingredients (for example: grain, protein, fruit or vegetable, dairy).",
+          "Learner prompt: List the food groups you see.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u04-l03-independent-card",
+        "kind": "independent-task",
+        "title": "meal variety complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult, build two different meal combinations from the same ingredient set, using a different food-group mix each time.",
+          "Response 1 (t2-p1): My first combination used at least three food groups.",
+          "Response 2 (t2-p2): My second combination was meaningfully different from the first, not just the same foods rearranged.",
+          "Response 3 (t2-p3): My adult and I talked through why variety across food groups is useful, not just why it tastes different.",
+          "Equal-access rule: If a varied set of real ingredients isn't available, the learner instead plans three different combinations in writing from a provided list of ingredients spanning multiple food groups, describing each combination and its food groups instead of physically assembling it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u04-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "meal variety minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Which of your three combinations would you actually want to eat again, and why — taste, how it made you feel, or something else?",
+          "Success checks: Variety across combinations: At least two of three combinations use a meaningfully different food-group mix. | Reflection on preference vs. variety: Reflection names at least one non-taste factor, like how it made them feel.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u04-l03-retry-pair",
+        "kind": "retry",
+        "title": "meal variety supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u04-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u04-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional meal variety condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Variety across combinations: At least two of three combinations use a meaningfully different food-group mix. | Reflection on preference vs. variety: Reflection names at least one non-taste factor, like how it made them feel..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u04-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u04-l03-delivered-example",
+        "kind": "model",
+        "title": "meal variety delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With an adult, the learner looks at a small set of available no-heat ingredients spanning at least three food groups and practices combining them two different ways, then builds a third combination independently that's meaningfully different from the first two.",
+          "Use steps: With your adult, build two different meal combinations from the same ingredient set, using a different food-group mix each time.",
+          "Field 1 (t2-p1): My first combination used at least three food groups.",
+          "Field 2 (t2-p2): My second combination was meaningfully different from the first, not just the same foods rearranged.",
+          "Field 3 (t2-p3): My adult and I talked through why variety across food groups is useful, not just why it tastes different.",
+          "Check against: Variety across combinations: At least two of three combinations use a meaningfully different food-group mix. | Reflection on preference vs. variety: Reflection names at least one non-taste factor, like how it made them feel."
+        ]
+      }
+    ],
+    "model": {
+      "title": "meal variety worked model",
+      "startingCondition": "With an adult, the learner looks at a small set of available no-heat ingredients spanning at least three food groups and practices combining them two different ways, then builds a third combination independently that's meaningfully different from the first two.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact meal variety decision or action.",
+        "Model move 2: Before building anything, name the food groups you can see represented in today's ingredients (for example: grain, protein, fruit or vegetable, dairy).",
+        "Model move 3: With your adult, build two different meal combinations from the same ingredient set, using a different food-group mix each time."
+      ],
+      "reasoning": "The model names the condition, follows the ordered meal variety process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Variety across combinations: At least two of three combinations use a meaningfully different food-group mix.",
+        "Reflection on preference vs. variety: Reflection names at least one non-taste factor, like how it made them feel."
+      ],
+      "resourceRef": "swk-rfl-g5-u04-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for meal variety.",
+        "2. Watch the worked move on swk-rfl-g5-u04-l03-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u04-l03-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u04-l03-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u04-l03-evidence-record; use swk-rfl-g5-u04-l03-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u04-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "With an adult, the learner looks at a small set of available no-heat ingredients spanning at least three food groups and practices combining them two different ways, then builds a third combination independently that's meaningfully different from the first two.",
+      "prompt": "List the food groups you see.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Variety across combinations: At least two of three combinations use a meaningfully different food-group mix.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u04-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u04-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "meal variety — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g5-u04-l03-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult, build two different meal combinations from the same ingredient set, using a different food-group mix each time.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "meal variety — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u04-l03-independent-card",
+        "directions": "If a varied set of real ingredients isn't available, the learner instead plans three different combinations in writing from a provided list of ingredients spanning multiple food groups, describing each combination and its food groups instead of physically assembling it.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u04-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Which of your three combinations would you actually want to eat again, and why — taste, how it made you feel, or something else?",
+      "observableCriteria": [
+        "Variety across combinations: At least two of three combinations use a meaningfully different food-group mix.",
+        "Reflection on preference vs. variety: Reflection names at least one non-taste factor, like how it made them feel."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u04-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u04-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u04-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u04-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Variety across combinations: At least two of three combinations use a meaningfully different food-group mix. | Reflection on preference vs. variety: Reflection names at least one non-taste factor, like how it made them feel.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u04-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u04-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

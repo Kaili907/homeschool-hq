@@ -15,8 +15,9 @@
   "phase": "Application or project",
   "work_mode": "BUILD",
   "focus": "functions or procedures",
-  "task_type": "debugging_and_testing",
-  "task_label": "Debugging and testing — Build and test",
+  "task_type": "programming_and_logic",
+  "lesson_type": "creation_project",
+  "task_label": "Programming and logic — Build and test",
   "scoring_stance": "PROGRESS_EVIDENCE",
   "estimated_minutes": "40–60",
   "standards": [
@@ -89,7 +90,9 @@
     "debugging_target": {
       "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
       "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
-      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "passing_change": "The exact passing change is intentionally withheld from learner material and is available only in the restricted trusted-adult scoring authority after the learner submits complete evidence.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES",
+      "hint_ceiling": "LOCATION_OR_EVIDENCE_CUE",
       "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to functions or procedures is the central evidence."
     },
     "equal_credit_alternative": {
@@ -101,6 +104,187 @@
         "Apply the one repair named in your explanation and trace all three tests again."
       ],
       "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
+  "learner_experience": {
+    "experience_version": "technology-production-depth-r1",
+    "static_complete": true,
+    "tutor_required": false,
+    "lesson_type": "creation_project",
+    "sequence_policy": "Concept teaching, the analogous model, and guided practice precede protected independent evidence. Protected and fresh resolutions are absent from learner material and remain adult-only.",
+    "learning_targets": [
+      "Create, test, or revise a meaningful product that applies functions or procedures and the unit standards.",
+      "Use subject-appropriate evidence or representation to communicate understanding of functions or procedures.",
+      "Check, revise, or improve work about functions or procedures using stated success criteria.",
+      "Explain the evidence chain used to make or evaluate a result about functions or procedures.",
+      "Transfer the reasoning to a fresh case without a completed target response in view."
+    ],
+    "concept_teaching": {
+      "ref": "ma-g8-technology-u02-l04#concept-programming-and-logic",
+      "title": "Specification, state, and correctness: functions or procedures",
+      "entry_check": "Before reading, write one prediction about functions or procedures and one observation that could show the prediction is wrong. This readiness record is no-penalty evidence.",
+      "explanation": [
+        "functions or procedures is treated here as a relationship among a specification, inspectable evidence, and a justified decision. A result is not secure merely because it looks plausible: the learner must state what should be true, identify evidence that bears on it, and explain why the evidence supports the claim.",
+        "Trace one state change at a time, connect the partial state to the specification, and count the operation that repeats as input size grows. This keeps observation separate from interpretation and prevents a preferred answer from being rewritten as evidence after the fact.",
+        "Verification begins before execution or review. Record an expected result or pass condition, include a normal and boundary or stress case, compare actual with expected, and interpret every mismatch. After revision, rerun the complete relevant set so a local fix does not hide a regression elsewhere.",
+        "Correctness and quality require a limitation statement. Name what the supplied case, trace, dataset, or prototype cannot establish, then describe the additional evidence that would settle that point. For creation work, also name a viable alternative and the concrete clarity, access, time, storage, privacy, or reliability trade-off."
+      ],
+      "key_terms": [
+        {
+          "term": "precondition",
+          "definition": "What must be true about an input before the procedure is required to work."
+        },
+        {
+          "term": "invariant",
+          "definition": "A claim about partial state that remains true as the procedure advances."
+        },
+        {
+          "term": "boundary case",
+          "definition": "A smallest, largest, empty, tied, or edge-shaped permitted input."
+        },
+        {
+          "term": "complexity",
+          "definition": "How time or extra storage grows as the input grows."
+        }
+      ],
+      "application_check": [
+        "Can you explain specification, state, and correctness in your own words using a new fictional example?",
+        "Did you write expected behavior or a pass condition before running, tracing, or judging the result?",
+        "Can another reader trace each conclusion to a state row, printed fact, requirement, or observation?",
+        "Did you name a boundary, stress case, missing fact, or limitation instead of assuming it away?"
+      ]
+    },
+    "worked_example": {
+      "ref": "ma-g8-technology-u02-l04#worked-analogue-count-ready",
+      "kind": "WORKED_EXAMPLE_CODE",
+      "relationship_to_protected_tasks": "ANALOGOUS_NON_TARGET",
+      "evidence_eligible": false,
+      "title": "Worked analogue: count ready cards without skipping evidence",
+      "goal": "Return the number of fictional cards whose ready field is true.",
+      "starter_code": "function countReady(cards) {\n  let total = 0;\n  for (const card of cards) {\n    if (card.ready) total += 2;\n  }\n  return total;\n}",
+      "public_observation": "For [{ready: true}, {ready: false}, {ready: true}], expected is 2 but actual is 4. For [], expected and actual are both 0.",
+      "annotations": [
+        {
+          "move": "Specify",
+          "reasoning": "Each ready card contributes exactly one to the count; a non-ready card contributes zero."
+        },
+        {
+          "move": "Predict",
+          "reasoning": "After the first ready card, total should be 1. Write that state before tracing."
+        },
+        {
+          "move": "Inspect",
+          "reasoning": "The first iteration changes total from 0 to 2, so the first divergence is the state update, not the loop boundary or return."
+        },
+        {
+          "move": "Revise",
+          "reasoning": "Change the ready-card update so it adds one. This predicts totals 1, 1, and 2 across the three iterations."
+        },
+        {
+          "move": "Verify",
+          "reasoning": "The mixed case returns 2, [] returns 0, and three ready cards return 3. All expected and actual results match."
+        }
+      ],
+      "completed_code": "function countReady(cards) {\n  let total = 0;\n  for (const card of cards) {\n    if (card.ready) total += 1;\n  }\n  return total;\n}",
+      "correctness_and_efficiency": "After each iteration, total equals the number of ready cards in the prefix already examined. The invariant begins true for the empty prefix, one iteration maintains it, and termination covers the whole list. Time is O(n) and extra space is O(1).",
+      "transfer_prompt": "On the protected task, identify its own first divergent state. Do not copy this update: the protected fixture uses a different data shape and defect.",
+      "difference_from_protected_task": "This model counts object flags and repairs an over-large accumulator update. The protected task uses different inputs, behavior, identifiers, and a separately withheld resolution."
+    },
+    "guided_task": {
+      "ref": "ma-g8-technology-u02-l04#guided-tally-open",
+      "title": "Guided practice: trace before changing a new state update",
+      "starter_code": "function tallyOpen(items) {\n  let open = 0;\n  for (const item of items) {\n    if (item.status === \"open\") open = 1;\n  }\n  return open;\n}",
+      "specification": "Return the number of fictional items whose status is exactly \"open\".",
+      "public_tests": [
+        "[open, closed, open] → 2",
+        "[] → 0",
+        "[closed] → 0"
+      ],
+      "prompts": [
+        "Write the expected open value after each item before tracing.",
+        "Circle the first row where open no longer equals the number of open items examined.",
+        "State a falsifiable cause and the rows one change should affect.",
+        "Make one justified change, rerun every case, and interpret the evidence."
+      ],
+      "immediate_check": "The first cue names the invariant and state column. It does not name the corrected statement.",
+      "support_fade": "Prompts identify the state and evidence order here. The protected independent task supplies only its specification, public checks, and a location/evidence cue; the fresh check permits term or instruction clarification only.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "independent_task": {
+      "ref": "ma-g8-technology-u02-l04#protected-independent",
+      "role": "INDEPENDENT_LESSON_EVIDENCE",
+      "freshness": "FRESH_FROM_WORKED_AND_GUIDED_FIXTURES",
+      "title": "Independent construction/debug: functions or procedures",
+      "central_input_ref": "activity_setup.central_input",
+      "specification": [
+        "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+        "An empty step list must return an empty string, and a one-step list must retain that step.",
+        "The submitted explanation must connect the observed control flow or data state to functions or procedures, not merely state the final number.",
+        "The boundary test must be completed and its actual result compared explicitly with the expected result."
+      ],
+      "public_checks": [
+        "[\"open\", \"check\", \"save\"] → open > check > save",
+        "[] → empty string",
+        "[\"start\"] → start"
+      ],
+      "evidence_requirements": [
+        "Complete corrected code or precise line-by-line pseudocode authored by the learner.",
+        "Expected-before-actual results for every public case plus one learner-designed boundary or deliberate-break case.",
+        "A symptom → hypothesis → first divergent evidence → predicted change → test → interpretation → full rerun log.",
+        "A state invariant or equivalent partial-progress claim connected to termination and the returned result.",
+        "A time/space or reliability trade-off against one viable alternative."
+      ],
+      "support": "TERM_OR_INSTRUCTION_CLARIFICATION; one location/evidence cue may identify where to inspect but may not select the decision or give the resolution.",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
+    },
+    "debugging_reasoning": {
+      "title": "Use the six-move evidence cycle",
+      "required_moves": [
+        "Symptom: record expected versus actual without explaining it away.",
+        "Hypothesis: state one falsifiable cause about the program state before revising.",
+        "Inspection: identify the first trace row or printed detail that bears on the hypothesis.",
+        "Predicted effect: state what one controlled change should alter and what it should leave unchanged.",
+        "Test and interpretation: compare actual with the prediction and mark the hypothesis supported, rejected, or not fully tested.",
+        "Verification: rerun all relevant checks and record any new limitation or next hypothesis."
+      ],
+      "anti_guessing_rule": "A working final artifact without a pre-change hypothesis and inspectable evidence is incomplete debugging/revision evidence."
+    },
+    "remediation_routes": [
+      {
+        "trigger_id": "claim-not-connected-to-partial-state",
+        "learner_signal": "My explanation repeats the final goal but does not describe what is true partway through execution.",
+        "title": "Different representation: token-and-box state walk",
+        "alternate_teaching": "Represent each variable or collection with a labelled box and move one token per executed step. After every move, write one sentence that must still be true. This makes partial state visible without showing the protected repair.",
+        "analogue_task": "Walk through a three-step fictional counter with tokens and state what is true after steps one and two; do not use the protected identifiers or inputs.",
+        "return_check": "Complete the fresh mastery check with teaching materials closed. The original protected solution remains withheld.",
+        "original_protected_solution_exposed": false
+      },
+      {
+        "trigger_id": "revision-before-evidence",
+        "learner_signal": "I changed or chose something before recording the mismatch and a testable reason.",
+        "title": "Different routine: the six-box evidence ladder",
+        "alternate_teaching": "Use six boxes in order: expected/actual, first divergence or decisive detail, hypothesis, predicted effect, one revision, rerun interpretation. Do not enter the revision box until the first four constrain what the change is meant to test.",
+        "analogue_task": "Apply the six boxes to a separate fictional clock-card mismatch related to functions or procedures. Stop after the prediction, explain what result would reject the hypothesis, then finish the check.",
+        "return_check": "Complete the fresh mastery check independently. A correct but low-confidence response receives confirmation tied to evidence, not automatic reteaching.",
+        "original_protected_solution_exposed": false
+      }
+    ],
+    "fresh_mastery_check": {
+      "ref": "ma-g8-technology-u02-l04#fresh-total-label-lengths",
+      "role": "FRESH_MASTERY_OR_REMEDIATION_CHECK",
+      "freshness": "DIFFERENT_FIXTURE_AND_DEFECT_FROM_WORKED_GUIDED_AND_PROTECTED_TASKS",
+      "title": "Fresh transfer: total fictional label lengths",
+      "starter_code": "function totalLabelLengths(labels) {\n  let total = 0;\n  for (const label of labels) {\n    total = label.length;\n  }\n  return total;\n}",
+      "specification": "Return the sum of the character counts of every supplied fictional label; preserve the input.",
+      "observed_symptom": "[\"oak\", \"map\"] should return 6 but returns 3.",
+      "public_tests": [
+        "[\"oak\", \"map\"] → 6",
+        "[] → 0",
+        "[\"cedar\"] → 5"
+      ],
+      "evidence_requirements": "Submit a new six-move log, corrected code or precise pseudocode, every public rerun, a prefix-state invariant, and time/extra-space reasoning.",
+      "hint_ceiling": "TERM_OR_INSTRUCTION_CLARIFICATION",
+      "solution_status": "WITHHELD_FROM_LEARNER_SURFACES"
     }
   },
   "test_or_check_criteria": [

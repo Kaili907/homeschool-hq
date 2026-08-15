@@ -5,37 +5,94 @@
   "courseId": "ma-g8-physical-education",
   "grade": 8,
   "subject": "physical-education",
+  "standards": [
+    "Michigan PE Standards 3",
+    "5"
+  ],
+  "primaryLessonType": "PROJECT_LIFETIME_ACTIVITY",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner completes the central task about active recovery.",
-    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
-    "The learner checks or revises the work and can identify a next step."
+    "The learner uses a safe setup or accurately describes it for active recovery.",
+    "The learner applies Start easy, change one, finish in control. in one guided attempt and one fresh application or complete described equivalent.",
+    "The learner distinguishes learner-controlled rest from STOP AND TELL and DO NOT RESUME conditions.",
+    "Any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route earns equal credit for the same cue or decision evidence."
   ],
-  "scoringGuidance": "Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
-  "masteryRule": "Do not mark mastery from one answer. Use safe participation, skill cues, personal progress, strategy use, and self-assessment without body-size scoring; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
-  "remediation": "Return to the smallest prerequisite needed for active recovery, model it with a concrete or text-only representation, then retry one fresh item.",
+  "rubricDimensions": [
+    "Target evidence: applies Start easy, change one, finish in control..",
+    "Safety and self-management: uses setup, rest, stop, and maximum boundaries correctly.",
+    "Independent application: completes a fresh bounded attempt or equivalent described route.",
+    "Explanation and revision: identifies the cue or decision and a useful next adjustment.",
+    "Access parity: supplies the same target evidence through any approved route."
+  ],
+  "scoringGuidance": "Score safe participation when performed, decision quality, taught cue or skill evidence, planning, knowledge, reflection, revision, and completion as appropriate to the lesson type. Never score weight, appearance, body fat, calories, athletic talent, speed versus peers, body shape, fitness norms, standard-body performance, or willingness to avoid rest. Never reduce credit for adaptation, assistive technology, learner-controlled rest, a safety stop, guardian restriction, or a described route.",
+  "masteryRule": "Require accurate independent evidence of the taught cue, decision, sequence, tactic, or self-management on at least two occasions separated by time, setting, or meaningful variation when feasible. Physical occurrence, attendance, reflection alone, Tutor confidence, standard-route use, body data, speed, or self-report alone when adult confirmation is required cannot establish mastery.",
+  "remediation": "Name the observable gap for active recovery. Use the simpler setup, replace the original wording with “Start easy, change one, finish in control.,” contrast the common error with the correction, practise one bounded change, then use the fresh retry. Offer rest or another route without penalty.",
   "adaptiveRoutes": [
     {
-      "signal": "prerequisite gap",
-      "action": "Return to the smallest prerequisite needed for active recovery, model it with a concrete or text-only representation, then retry one fresh item."
+      "signal": "starting position or setup is unclear",
+      "action": "Arrange a prepare-practice-finish sequence with one rest point."
     },
     {
-      "signal": "procedure without understanding",
-      "action": "Ask the learner to explain or represent why the process for active recovery works before continuing."
+      "signal": "target cue is missing",
+      "action": "Use the alternate cue “Start easy, change one, finish in control.,” then model the contrast once."
     },
     {
-      "signal": "correct but low confidence",
-      "action": "Confirm the reasoning specifically, offer one varied example of active recovery, and avoid unnecessary remediation."
+      "signal": "common error appears",
+      "action": "Return to the entry version, keep one variable, and choose rest, regression, or a described route without penalty."
     },
     {
-      "signal": "repeated error pattern",
-      "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review."
+      "signal": "standard route is unavailable or declined",
+      "action": "Equal-credit home route: build and try or fully describe a short prepare-practice-finish sequence and justify the pace, rest, stop, and next-adjustment choices."
     },
     {
-      "signal": "mastery evidence",
-      "action": "Require accurate independent application plus explanation on a later or different occasion before marking active recovery mastered."
+      "signal": "pain, dizziness, unusual breathing difficulty, head impact, injury concern, damaged equipment, or unsafe conditions occur",
+      "action": "Stop immediately and tell a trusted adult. Do not resume to finish evidence; use a described retry later only when appropriate."
+    },
+    {
+      "signal": "fresh retry is needed",
+      "action": "Build a fresh short plan, try or describe it, and explain one self-management decision and one next adjustment. Use a new safe example rather than repeating the scored attempt."
     }
   ],
+  "protectedDecisionAuthority": [
+    "Target cue or decision: Start easy, change one, finish in control.",
+    "Acceptable evidence: Notice self-management and repeatable control rather than calories, body change, norms, or maximal result.",
+    "Safety-critical boundary: No maximal effort, punishment exercise, breath-holding, forced duration, symptom testing, body metric, or fitness norm.",
+    "Every approved adaptation is equivalent when it supplies the same target evidence.",
+    "A Tutor cannot claim observation, certify physical completion, replace guardian permission, diagnose, prescribe, or clear return."
+  ],
+  "sufficientEvidence": "One guided response, one fresh bounded application or described equivalent, and one cue/decision explanation for active recovery. A safety stop is responsible evidence treatment, not failure.",
+  "guardianAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "when": "Guardian permission is required before real movement, optional equipment, a real location, partner, outdoor route, or progression is used.",
+    "requiredAction": "The guardian confirms that the bounded space, optional equipment, and activity route are permitted before movement.",
+    "minimumRecord": "Record only permission status or that the equal-credit described route was used; collect no body, health, media, location, or performance data.",
+    "confirmationBoundary": "Guardian confirmation may establish permission or occurrence only. It does not certify academic mastery, physical quality, diagnosis, effort, body status, or safe return.",
+    "equalCreditAlternative": "When guardian review, real movement, equipment, space, partner, or location is unavailable, the supplied solo described/decision route is the complete equal-credit lesson.",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "evidenceTypes": [
+    "SELF_MANAGEMENT",
+    "PLANNING",
+    "DECISION_QUALITY",
+    "REFLECTION"
+  ],
+  "tutorBoundary": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "may": [
+      "explain approved content and vocabulary",
+      "cue the approved model",
+      "offer an approved presentation or activity route",
+      "coach how the learner presents their own evidence",
+      "route to rest, stop, retry, or adult handoff"
+    ],
+    "mustNot": [
+      "cannot diagnose, prescribe, rehabilitate, or give medical clearance",
+      "cannot claim unapproved observation or certify physical completion",
+      "cannot override rest, stop, adaptation, guardian authority, professional authority, or safe return",
+      "cannot choose the answer or action for fresh independent evidence",
+      "cannot score body data, norms, appearance, talent, or peer comparison"
+    ]
+  },
   "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, voice recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.",
   "guardianSafetyReview": null,
   "safetyAndPrivacyNotes": [
@@ -47,7 +104,8 @@
   ],
   "sourceProvenance": {
     "sourceBranch": "shared base@656efba (canonical 5/7/8)",
-    "sourceLessonId": "ma-g8-physical-education-u08-l09"
+    "sourceLessonId": "ma-g8-physical-education-u08-l09",
+    "productionDepthRevision": "physical-education-production-depth-r1"
   },
   "productionReadiness": {
     "status": "READY",

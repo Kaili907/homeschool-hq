@@ -14,10 +14,11 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL Grade 8 progression"
+    "Manuel Academy RFL Grade 8 progression",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Given two pieces of fictional supervisor feedback, learners revise a defensive first-draft response into an accountable one, then compare a second note against the first to identify the specific point where a workplace issue stops being something to fix alone and becomes something to escalate to a trusted adult.",
-  "scenario": "At the fictional Riverbend Books, Ms. Castellano leaves the learner a note saying the returns bin was left unsorted overnight again, alongside a rough first-draft response that shifts the blame entirely onto the previous shift. The following week, a second note from Ms. Castellano asks the learner to mark down a full shift on the log even though they didn't actually work all of it, and the learner has to decide whether this note belongs in the same category as the first.",
+  "objective": "I can complete a realistic feedback and problem escalation task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "At the fictional Riverbend Books, Ms.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
   "realWorldAction": false,
@@ -28,60 +29,65 @@
   ],
   "simulationAlternative": null,
   "materials": [
-    "paper or a document",
-    "the two feedback notes on this task sheet"
+    "Embedded resource: swk-rfl-g8-u05-l06-model-card",
+    "Embedded resource: swk-rfl-g8-u05-l06-step-card",
+    "Embedded resource: swk-rfl-g8-u05-l06-guided-card",
+    "Embedded resource: swk-rfl-g8-u05-l06-independent-card",
+    "Embedded resource: swk-rfl-g8-u05-l06-evidence-record",
+    "Embedded resource: swk-rfl-g8-u05-l06-retry-pair",
+    "learner-local: paper or a document",
+    "learner-local: the two feedback notes on this task sheet"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Read Ms. Castellano's first note ('The returns bin was left unsorted again overnight. Please make sure it's cleared before you leave your shift.') and the rough first-draft response ('That's not really on me, the person before me left it messy too, so it's not fair to only blame me.').",
+      "directions": "Analyze the complete worked example on swk-rfl-g8-u05-l06-model-card before beginning.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Name one specific thing about the rough first-draft response that makes it sound defensive rather than accountable."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Revise the rough first-draft response so it takes ownership of the learner's own part in the returns-bin problem, states one specific fix for next time, and drops the defensive framing, while staying honest instead of pretending it was entirely one person's fault.",
+      "directions": "Complete the fictional coached case on swk-rfl-g8-u05-l06-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "extended-response",
-          "text": "Write your revised response to Ms. Castellano's first note here."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "My revised response takes ownership of my own part without either over-blaming myself or blaming the previous shift entirely."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Read Ms. Castellano's second note: 'Don't worry about clocking your actual hours today, just mark down that you worked the full shift like usual, it's easier for me that way.' Decide whether this note is more like routine correction feedback, something the learner can fix and respond to on their own the way the returns-bin note was, or whether it crosses into something that should be escalated to a trusted adult instead of handled alone. Explain specifically what makes this note different from the first one, naming the exact request inside it that raises the concern.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g8-u05-l06-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "extended-response",
-          "text": "Explain whether the second note should be handled the same way as the returns-bin note or escalated to a trusted adult, and name the exact part of the request that makes it different."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
         },
         {
           "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "If this should be escalated, name specifically which trusted adult the learner could go to and what they would tell that adult in one sentence."
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Think about what separates the two notes.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g8-u05-l06-evidence-record; omit or fictionalize private details.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -91,7 +97,7 @@
       ]
     }
   ],
-  "remediation": "If a learner treats the second note as routine and tries to write a polite compliance response the way they did for the first note, reteach by placing the two notes side by side and circling the exact phrase in the second note that asks for false information, then discuss why that specific phrase changes the category of the problem.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g8-u05-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g8-u05-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g8-u05-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Revision quality: The revised response takes honest ownership of the learner's part and states one specific fix. | Escalation judgment: The second note is correctly identified as needing escalation, and the response names the false-hours request specifically. Resume at the next unfinished step on swk-rfl-g8-u05-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner draft a short, calm sentence they could actually say to a trusted adult to explain the second note, practicing saying it out loud once before writing the final version.",
   "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u05-l06.scoring.json",
   "integrity": {
@@ -99,5 +105,245 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g8-ready-for-life-u05-l06",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "career-work",
+    "practicalGoal": "I can complete a realistic feedback and problem escalation task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "Up to seven days; use only the check-ins explicitly named in the task",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g8-u05-l06-model-card",
+        "swk-rfl-g8-u05-l06-step-card",
+        "swk-rfl-g8-u05-l06-guided-card",
+        "swk-rfl-g8-u05-l06-independent-card",
+        "swk-rfl-g8-u05-l06-evidence-record",
+        "swk-rfl-g8-u05-l06-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g8-u05-l06-local-1",
+          "label": "paper or a document",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u05-l06-local-2",
+          "label": "the two feedback notes on this task sheet",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g8-u05-l06-model-card",
+        "kind": "model",
+        "title": "feedback and problem escalation worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: At the fictional Riverbend Books, Ms.",
+          "Model move 1: Read the condition and name the exact feedback and problem escalation decision or action.",
+          "Model move 2: Read Ms.",
+          "Model move 3: Revise the rough first-draft response so it takes ownership of the learner's own part in the returns-bin problem, states one specific fix for next time, and drops the defensive framing, while staying honest instead of pretending it was entirely one person's fault.",
+          "Model check: Revision quality: The revised response takes honest ownership of the learner's part and states one specific fix. | Escalation judgment: The second note is correctly identified as needing escalation, and the response names the false-hours request specifically."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u05-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "feedback and problem escalation action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for feedback and problem escalation.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u05-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "feedback and problem escalation coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: At the fictional Riverbend Books, Ms.",
+          "Coach direction: Read Ms.",
+          "Learner prompt: Name one specific thing about the rough first-draft response that makes it sound defensive rather than accountable.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u05-l06-independent-card",
+        "kind": "independent-task",
+        "title": "feedback and problem escalation complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Revise the rough first-draft response so it takes ownership of the learner's own part in the returns-bin problem, states one specific fix for next time, and drops the defensive framing, while staying honest instead of pretending it was entirely one person's fault.",
+          "Response 1 (t2-p1): Write your revised response to Ms. Castellano's first note here.",
+          "Response 2 (t2-p2): My revised response takes ownership of my own part without either over-blaming myself or blaming the previous shift entirely.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u05-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "feedback and problem escalation minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: In your own words, what is one general signal that tells you a piece of workplace feedback has crossed from 'something to fix myself' into 'something to tell a trusted adult about'?",
+          "Success checks: Revision quality: The revised response takes honest ownership of the learner's part and states one specific fix. | Escalation judgment: The second note is correctly identified as needing escalation, and the response names the false-hours request specifically.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u05-l06-retry-pair",
+        "kind": "retry",
+        "title": "feedback and problem escalation supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g8-u05-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g8-u05-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional feedback and problem escalation condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Revision quality: The revised response takes honest ownership of the learner's part and states one specific fix. | Escalation judgment: The second note is correctly identified as needing escalation, and the response names the false-hours request specifically..",
+          "Return: resume at the next unfinished step on swk-rfl-g8-u05-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "feedback and problem escalation worked model",
+      "startingCondition": "At the fictional Riverbend Books, Ms.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact feedback and problem escalation decision or action.",
+        "Model move 2: Read Ms.",
+        "Model move 3: Revise the rough first-draft response so it takes ownership of the learner's own part in the returns-bin problem, states one specific fix for next time, and drops the defensive framing, while staying honest instead of pretending it was entirely one person's fault."
+      ],
+      "reasoning": "The model names the condition, follows the ordered feedback and problem escalation process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Revision quality: The revised response takes honest ownership of the learner's part and states one specific fix.",
+        "Escalation judgment: The second note is correctly identified as needing escalation, and the response names the false-hours request specifically."
+      ],
+      "resourceRef": "swk-rfl-g8-u05-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for feedback and problem escalation.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g8-u05-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "At the fictional Riverbend Books, Ms.",
+      "prompt": "Name one specific thing about the rough first-draft response that makes it sound defensive rather than accountable.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Revision quality: The revised response takes honest ownership of the learner's part and states one specific fix.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g8-u05-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g8-u05-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "feedback and problem escalation — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g8-u05-l06-independent-card",
+        "directions": "Complete the feedback and problem escalation task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g8-u05-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "In your own words, what is one general signal that tells you a piece of workplace feedback has crossed from 'something to fix myself' into 'something to tell a trusted adult about'?",
+      "observableCriteria": [
+        "Revision quality: The revised response takes honest ownership of the learner's part and states one specific fix.",
+        "Escalation judgment: The second note is correctly identified as needing escalation, and the response names the false-hours request specifically."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g8-u05-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g8-u05-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g8-u05-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g8-u05-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Revision quality: The revised response takes honest ownership of the learner's part and states one specific fix. | Escalation judgment: The second note is correctly identified as needing escalation, and the response names the false-hours request specifically.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g8-u05-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g8-u05-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

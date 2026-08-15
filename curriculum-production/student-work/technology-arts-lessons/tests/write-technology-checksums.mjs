@@ -20,6 +20,7 @@ const inputs = [
   resolve(ROOT, 'schema'),
   resolve(ROOT, 'tests'),
   resolve(ROOT, 'technology-content-repair-evidence.json'),
+  resolve(ROOT, 'technology-production-depth-evidence.json'),
   resolve(ROOT, 'manifest.json'),
   resolve(ROOT, 'README.md'),
 ]

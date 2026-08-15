@@ -14,10 +14,11 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL Grade 8 progression"
+    "Manuel Academy RFL Grade 8 progression",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners sort a real list of their own current tasks and deadlines into a four-box urgent and important grid, first with definitions in front of them and then a second time without support, to decide which real tasks deserve attention first.",
-  "scenario": "Right now the learner almost certainly has several real things pending at once, a school assignment due this week, a chore, a message that needs a reply, practice for something, a promise made to a friend or sibling. This lesson has them dump that real list onto paper and sort it using a four-box grid, once with the definitions handy and once from memory.",
+  "objective": "I can complete a realistic priorities and deadlines task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "Right now the learner almost certainly has several real things pending at once, a school assignment due this week, a chore, a message that needs a reply, practice for something, a promise made to a friend or sibling.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
   "realWorldAction": false,
@@ -25,56 +26,67 @@
   "safetyNotes": [],
   "simulationAlternative": null,
   "materials": [
-    "paper",
-    "a pencil or pen",
-    "a ruler or straightedge, optional, for drawing the grid"
+    "Embedded resource: swk-rfl-g8-u01-l03-model-card",
+    "Embedded resource: swk-rfl-g8-u01-l03-step-card",
+    "Embedded resource: swk-rfl-g8-u01-l03-guided-card",
+    "Embedded resource: swk-rfl-g8-u01-l03-independent-card",
+    "Embedded resource: swk-rfl-g8-u01-l03-evidence-record",
+    "Embedded resource: swk-rfl-g8-u01-l03-retry-pair",
+    "Embedded resource: swk-rfl-g8-u01-l03-delivered-guide",
+    "learner-local: paper",
+    "learner-local: a pencil or pen",
+    "learner-local: a ruler or straightedge, optional, for drawing the grid"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before sorting anything, list at least six real tasks or deadlines you currently have pending, mixing small and large ones.",
+      "directions": "Analyze the complete worked example on swk-rfl-g8-u01-l03-model-card before beginning.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Write your list of at least six real, current tasks or deadlines, in any order."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Round one, with support: draw a four-box grid labeled Urgent and Important, Important and Not Urgent, Urgent and Not Important, and Neither. Using these definitions as your guide, urgent means real time pressure soon, important means it matters for a bigger goal or relationship even without time pressure, sort your first three tasks into the correct boxes.",
+      "directions": "Complete the fictional coached case on swk-rfl-g8-u01-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I placed each of my first three tasks in exactly one box, using the definitions provided."
-        },
-        {
-          "ref": "t2-p2",
           "promptType": "short-response",
-          "text": "For one task you placed, explain in one sentence why it landed in that specific box rather than a neighboring one."
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "performance-task",
-      "directions": "Round two, without support: cover or set aside the definitions and sort your remaining tasks into the same four-box grid on your own. For each task you place in Urgent and Important, write the actual date or deadline attached to it. For each task in Important and Not Urgent, write one specific reason it still matters even though nothing forces you to do it soon.",
+      "kind": "independent",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g8-u01-l03-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "extended-response",
-          "text": "List where each remaining task landed, with the real deadline for anything in Urgent and Important and a specific reason for anything in Important and Not Urgent."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Compare your two rounds of sorting.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g8-u01-l03-evidence-record; omit or fictionalize private details.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -84,7 +96,7 @@
       ]
     }
   ],
-  "remediation": "If a learner consistently confuses urgent with important (treating anything with a deadline as automatically important), reteach with two contrasting examples side by side: a low-stakes task with a tight deadline and a high-stakes task with no deadline, and have them explain the difference out loud before resorting their own list.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g8-u01-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g8-u01-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g8-u01-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given. | Independent transfer: Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions. Resume at the next unfinished step on swk-rfl-g8-u01-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner rank just their Urgent and Important box in the exact order they'll tackle those tasks today, and explain what would happen if they instead started with the Urgent and Not Important box first.",
   "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l03.scoring.json",
   "integrity": {
@@ -92,5 +104,269 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g8-ready-for-life-u01-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "planning-organization",
+    "practicalGoal": "I can complete a realistic priorities and deadlines task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "Up to seven days; use only the check-ins explicitly named in the task",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g8-u01-l03-model-card",
+        "swk-rfl-g8-u01-l03-step-card",
+        "swk-rfl-g8-u01-l03-guided-card",
+        "swk-rfl-g8-u01-l03-independent-card",
+        "swk-rfl-g8-u01-l03-evidence-record",
+        "swk-rfl-g8-u01-l03-retry-pair",
+        "swk-rfl-g8-u01-l03-delivered-guide"
+      ],
+      "referencedArtifactWords": [
+        "guide"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g8-u01-l03-delivered-guide"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g8-u01-l03-local-1",
+          "label": "paper",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u01-l03-local-2",
+          "label": "a pencil or pen",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g8-u01-l03-local-3",
+          "label": "a ruler or straightedge, optional, for drawing the grid",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g8-u01-l03-model-card",
+        "kind": "model",
+        "title": "priorities and deadlines worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Right now the learner almost certainly has several real things pending at once, a school assignment due this week, a chore, a message that needs a reply, practice for something, a promise made to a friend or sibling.",
+          "Model move 1: Read the condition and name the exact priorities and deadlines decision or action.",
+          "Model move 2: Before sorting anything, list at least six real tasks or deadlines you currently have pending, mixing small and large ones.",
+          "Model move 3: Round one, with support: draw a four-box grid labeled Urgent and Important, Important and Not Urgent, Urgent and Not Important, and Neither.",
+          "Model check: Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given. | Independent transfer: Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "priorities and deadlines action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for priorities and deadlines.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "priorities and deadlines coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Right now the learner almost certainly has several real things pending at once, a school assignment due this week, a chore, a message that needs a reply, practice for something, a promise made to a friend or sibling.",
+          "Coach direction: Before sorting anything, list at least six real tasks or deadlines you currently have pending, mixing small and large ones.",
+          "Learner prompt: Write your list of at least six real, current tasks or deadlines, in any order.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l03-independent-card",
+        "kind": "independent-task",
+        "title": "priorities and deadlines complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Round one, with support: draw a four-box grid labeled Urgent and Important, Important and Not Urgent, Urgent and Not Important, and Neither. Using these definitions as your guide, urgent means real time pressure soon, important means it matters for a bigger goal or relationship even without time pressure, sort your first three tasks into the correct boxes.",
+          "Response 1 (t2-p1): I placed each of my first three tasks in exactly one box, using the definitions provided.",
+          "Response 2 (t2-p2): For one task you placed, explain in one sentence why it landed in that specific box rather than a neighboring one.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "priorities and deadlines minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Did anything move to a different box between round one and round two, or did sorting get harder or easier without the definitions in front of you? Explain what changed and why.",
+          "Success checks: Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given. | Independent transfer: Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l03-retry-pair",
+        "kind": "retry",
+        "title": "priorities and deadlines supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g8-u01-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g8-u01-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional priorities and deadlines condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given. | Independent transfer: Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions..",
+          "Return: resume at the next unfinished step on swk-rfl-g8-u01-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u01-l03-delivered-guide",
+        "kind": "reference",
+        "title": "priorities and deadlines delivered guide",
+        "purpose": "Resolves the lesson's named guide so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Right now the learner almost certainly has several real things pending at once, a school assignment due this week, a chore, a message that needs a reply, practice for something, a promise made to a friend or sibling.",
+          "Use steps: Round one, with support: draw a four-box grid labeled Urgent and Important, Important and Not Urgent, Urgent and Not Important, and Neither.",
+          "Field 1 (t2-p1): I placed each of my first three tasks in exactly one box, using the definitions provided.",
+          "Field 2 (t2-p2): For one task you placed, explain in one sentence why it landed in that specific box rather than a neighboring one.",
+          "Check against: Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given. | Independent transfer: Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions."
+        ]
+      }
+    ],
+    "model": {
+      "title": "priorities and deadlines worked model",
+      "startingCondition": "Right now the learner almost certainly has several real things pending at once, a school assignment due this week, a chore, a message that needs a reply, practice for something, a promise made to a friend or sibling.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact priorities and deadlines decision or action.",
+        "Model move 2: Before sorting anything, list at least six real tasks or deadlines you currently have pending, mixing small and large ones.",
+        "Model move 3: Round one, with support: draw a four-box grid labeled Urgent and Important, Important and Not Urgent, Urgent and Not Important, and Neither."
+      ],
+      "reasoning": "The model names the condition, follows the ordered priorities and deadlines process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given.",
+        "Independent transfer: Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions."
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for priorities and deadlines.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Right now the learner almost certainly has several real things pending at once, a school assignment due this week, a chore, a message that needs a reply, practice for something, a promise made to a friend or sibling.",
+      "prompt": "Write your list of at least six real, current tasks or deadlines, in any order.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g8-u01-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g8-u01-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "priorities and deadlines — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g8-u01-l03-independent-card",
+        "directions": "Complete the priorities and deadlines task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g8-u01-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Did anything move to a different box between round one and round two, or did sorting get harder or easier without the definitions in front of you? Explain what changed and why.",
+      "observableCriteria": [
+        "Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given.",
+        "Independent transfer: Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g8-u01-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g8-u01-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g8-u01-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g8-u01-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Grid sorting accuracy: Most tasks in both rounds are placed in a box that reasonably matches the definitions given. | Independent transfer: Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g8-u01-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g8-u01-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

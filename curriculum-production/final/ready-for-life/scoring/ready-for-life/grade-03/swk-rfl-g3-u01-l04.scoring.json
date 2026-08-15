@@ -6,53 +6,70 @@
     "kind": "SCORING_JUDGMENT",
     "criteria": [
       {
-        "dimension": "Hazard identification",
+        "dimension": "Risk reasoning",
         "levels": [
           {
             "label": "Emerging",
-            "descriptor": "Identifies fewer than two real hazards across both spaces."
+            "descriptor": "The record does not yet show this observable criterion: Names a specific risk mechanism or gives a supported safe/unsure decision."
           },
           {
             "label": "Proficient",
-            "descriptor": "Identifies at least four hazards from the target list, confirmed by the adult."
+            "descriptor": "Names a specific risk mechanism or gives a supported safe/unsure decision."
           },
           {
             "label": "Advanced",
-            "descriptor": "Identifies four or more hazards and correctly names the risk word for each one."
+            "descriptor": "Names a specific risk mechanism or gives a supported safe/unsure decision. The learner also explains how the checked move transfers to a fresh invented scene without adding private detail."
           }
         ]
       },
       {
-        "dimension": "Boundary respected",
+        "dimension": "Safety boundary",
         "levels": [
           {
             "label": "Emerging",
-            "descriptor": "Picks up or attempts to handle a hazardous item during the walkthrough."
+            "descriptor": "The record does not yet show this observable criterion: Uses point-without-touching and adult-handling boundaries."
           },
           {
             "label": "Proficient",
-            "descriptor": "Points to or names hazards without touching them; the adult resolves each one."
+            "descriptor": "Uses point-without-touching and adult-handling boundaries."
           },
           {
             "label": "Advanced",
-            "descriptor": "Same as proficient, and independently asks about an ambiguous item before deciding whether it is a hazard."
+            "descriptor": "Uses point-without-touching and adult-handling boundaries. The learner also explains how the checked move transfers to a fresh invented scene without adding private detail."
           }
         ]
       },
       {
-        "dimension": "Recall and reasoning",
+        "dimension": "Complete route and revision",
         "levels": [
           {
             "label": "Emerging",
-            "descriptor": "Cannot recall the hazards or match them to risk words afterward."
+            "descriptor": "The record does not yet show this observable criterion: Completes every checkpoint or scene and revises a missed safety step when prompted."
           },
           {
             "label": "Proficient",
-            "descriptor": "Recalls most hazards and matches most of them to the correct risk word."
+            "descriptor": "Completes every checkpoint or scene and revises a missed safety step when prompted."
           },
           {
             "label": "Advanced",
-            "descriptor": "Recalls all hazards, matches all risk words correctly, and the reflection names a specific fix."
+            "descriptor": "Completes every checkpoint or scene and revises a missed safety step when prompted. The learner also explains how the checked move transfers to a fresh invented scene without adding private detail."
+          }
+        ]
+      },
+      {
+        "dimension": "Privacy-bounded reflection",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The record does not yet show this observable criterion: Gives a relevant reflection without needing a preferred opinion or private detail."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Gives a relevant reflection without needing a preferred opinion or private detail."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Gives a relevant reflection without needing a preferred opinion or private detail. The learner also explains how the checked move transfers to a fresh invented scene without adding private detail."
           }
         ]
       }

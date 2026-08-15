@@ -13,8 +13,11 @@
     "title": "Unit performance task: recovering when a deadline is missed"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners run their tracker across a full cycle of deadlines (their own real ones plus provided simulated ones), then work through a realistic scenario where a deadline was missed or nearly missed, producing a documented recovery plan that is reviewed with a guardian, so learners build the system-level skill of catching and correcting a failure instead of just avoiding failure in the first place.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic recovering when a deadline is missed task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -24,7 +27,12 @@
     "requiresTrustedAdultSupervision": true,
     "certifyingActor": "household-authorized guardian",
     "studentSelfReport": "recorded-but-not-certifying",
-    "evidenceTypes": ["updated tracker", "recovery plan document", "learner explanation", "guardian confirmation"],
+    "evidenceTypes": [
+      "updated tracker",
+      "recovery plan document",
+      "learner explanation",
+      "guardian confirmation"
+    ],
     "identifiablePhotoRequired": false
   },
   "safetyNotes": [
@@ -35,46 +43,79 @@
     "present": true,
     "description": "If the learner has no real deadlines currently active to update, the tracker portion is completed entirely using a provided fully-simulated four-deadline set instead, and the recovery-plan scenario is built around one of those simulated deadlines."
   },
-  "materials": ["the learner's own tracker from day 1 of this unit", "the three provided simulated deadlines", "the provided missed-deadline scenario"],
+  "materials": [
+    "Embedded resource: swk-rfl-g11-u02-l06-model-card",
+    "Embedded resource: swk-rfl-g11-u02-l06-step-card",
+    "Embedded resource: swk-rfl-g11-u02-l06-guided-card",
+    "Embedded resource: swk-rfl-g11-u02-l06-independent-card",
+    "Embedded resource: swk-rfl-g11-u02-l06-evidence-record",
+    "Embedded resource: swk-rfl-g11-u02-l06-retry-pair",
+    "Embedded resource: swk-rfl-g11-u02-l06-delivered-plan",
+    "Embedded resource: swk-rfl-g11-u02-l06-delivered-reference",
+    "Embedded resource: swk-rfl-g11-u02-l06-delivered-scenario",
+    "learner-local: the learner's own tracker from day 1 of this unit",
+    "learner-local: the three provided simulated deadlines"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Update your tracker from day 1 with the current real status of each item, then add the three provided simulated deadlines to it in the same format.",
+      "directions": "Analyze the complete worked example on swk-rfl-g11-u02-l06-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "extended-response", "text": "Show your updated tracker with current statuses for your real items, plus the three simulated deadlines added in the same format." },
-        { "ref": "t1-p2", "promptType": "checklist-item", "text": "The three simulated deadlines are recorded with the same level of detail (deadline date, required documents, status) as my real items." }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
-      "kind": "performance-task",
-      "directions": "Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g11-u02-l06-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "short-response", "text": "Which item did you choose, and what specifically went wrong (what was missed and why, based on your tracker)?" },
-        { "ref": "t2-p2", "promptType": "extended-response", "text": "Write a specific recovery plan: what you would do first, in what order, including who you would contact and what you would say to explain the situation and ask for what you need." },
-        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My recovery plan includes a realistic first message to whoever needs to be contacted (an admissions office, a reference-writer, a program coordinator), not just a list of steps." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "guided",
-      "directions": "Review the recovery plan with your guardian and record what changed or was confirmed after that conversation.",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g11-u02-l06-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "checklist-item", "text": "I reviewed my recovery plan with my guardian before finalizing it." },
-        { "ref": "t3-p2", "promptType": "short-response", "text": "Did your guardian's review change anything about the plan? If so, what, and why?" }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on what this unit's system (the tracker plus this recovery exercise) changes about how you'll handle deadlines going forward.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g11-u02-l06-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "extended-response", "text": "Looking back across this whole unit, what specific habit from your tracker system would have caught this problem earlier, before it became a three-day emergency?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Looking back across this whole unit, what specific habit from your tracker system would have caught this problem earlier, before it became a three-day emergency?"
+        }
       ]
     }
   ],
-  "remediation": "If the recovery plan lists only vague next steps like 'talk to someone' or 'try to fix it' without a specific first message and specific order of actions (a sign the learner can build a tracker but hasn't yet practiced acting under time pressure), reteach by modeling one complete first-contact message together for the chosen scenario, then have the learner write the remaining steps in order, each with a named action and a named person.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g11-u02-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g11-u02-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g11-u02-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail. | Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message. | System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier. Resume at the next unfinished step on swk-rfl-g11-u02-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner add a permanent 'early warning' column or rule to their real tracker (for example, flagging any document still not started with fewer than 14 days left) designed specifically to prevent the kind of near-miss they just worked through, and explain in a sentence how it would have caught this scenario earlier.",
   "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l06.scoring.json",
   "integrity": {
@@ -82,5 +123,313 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g11-ready-for-life-u02-l06",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "home-care",
+    "practicalGoal": "I can complete a realistic recovering when a deadline is missed task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "Three consecutive days; active work is divided across short daily check-ins",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g11-u02-l06-model-card",
+        "swk-rfl-g11-u02-l06-step-card",
+        "swk-rfl-g11-u02-l06-guided-card",
+        "swk-rfl-g11-u02-l06-independent-card",
+        "swk-rfl-g11-u02-l06-evidence-record",
+        "swk-rfl-g11-u02-l06-retry-pair",
+        "swk-rfl-g11-u02-l06-delivered-plan",
+        "swk-rfl-g11-u02-l06-delivered-reference",
+        "swk-rfl-g11-u02-l06-delivered-scenario"
+      ],
+      "referencedArtifactWords": [
+        "plan",
+        "reference",
+        "scenario"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g11-u02-l06-delivered-plan",
+        "swk-rfl-g11-u02-l06-delivered-reference",
+        "swk-rfl-g11-u02-l06-delivered-scenario"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g11-u02-l06-local-1",
+          "label": "the learner's own tracker from day 1 of this unit",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g11-u02-l06-local-2",
+          "label": "the three provided simulated deadlines",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-model-card",
+        "kind": "model",
+        "title": "recovering when a deadline is missed worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
+          "Model move 1: Read the condition and name the exact recovering when a deadline is missed decision or action.",
+          "Model move 2: Update your tracker from day 1 with the current real status of each item, then add the three provided simulated deadlines to it in the same format.",
+          "Model move 3: Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+          "Model check: Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail. | Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message. | System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "recovering when a deadline is missed action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for recovering when a deadline is missed.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "recovering when a deadline is missed coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
+          "Coach direction: Update your tracker from day 1 with the current real status of each item, then add the three provided simulated deadlines to it in the same format.",
+          "Learner prompt: Show your updated tracker with current statuses for your real items, plus the three simulated deadlines added in the same format.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-independent-card",
+        "kind": "independent-task",
+        "title": "recovering when a deadline is missed complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+          "Response 1 (t2-p1): Which item did you choose, and what specifically went wrong (what was missed and why, based on your tracker)?",
+          "Response 2 (t2-p2): Write a specific recovery plan: what you would do first, in what order, including who you would contact and what you would say to explain the situation and ask for what you need.",
+          "Response 3 (t2-p3): My recovery plan includes a realistic first message to whoever needs to be contacted (an admissions office, a reference-writer, a program coordinator), not just a list of steps.",
+          "Equal-access rule: If the learner has no real deadlines currently active to update, the tracker portion is completed entirely using a provided fully-simulated four-deadline set instead, and the recovery-plan scenario is built around one of those simulated deadlines."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "recovering when a deadline is missed minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Looking back across this whole unit, what specific habit from your tracker system would have caught this problem earlier, before it became a three-day emergency?",
+          "Success checks: Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail. | Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message. | System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-retry-pair",
+        "kind": "retry",
+        "title": "recovering when a deadline is missed supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g11-u02-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g11-u02-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional recovering when a deadline is missed condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail. | Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message. | System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier..",
+          "Return: resume at the next unfinished step on swk-rfl-g11-u02-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-delivered-plan",
+        "kind": "independent-task",
+        "title": "recovering when a deadline is missed delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
+          "Use steps: Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+          "Field 1 (t2-p1): Which item did you choose, and what specifically went wrong (what was missed and why, based on your tracker)?",
+          "Field 2 (t2-p2): Write a specific recovery plan: what you would do first, in what order, including who you would contact and what you would say to explain the situation and ask for what you need.",
+          "Field 3 (t2-p3): My recovery plan includes a realistic first message to whoever needs to be contacted (an admissions office, a reference-writer, a program coordinator), not just a list of steps.",
+          "Check against: Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail. | Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message. | System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-delivered-reference",
+        "kind": "reference",
+        "title": "recovering when a deadline is missed delivered reference",
+        "purpose": "Resolves the lesson's named reference so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
+          "Use steps: Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+          "Field 1 (t2-p1): Which item did you choose, and what specifically went wrong (what was missed and why, based on your tracker)?",
+          "Field 2 (t2-p2): Write a specific recovery plan: what you would do first, in what order, including who you would contact and what you would say to explain the situation and ask for what you need.",
+          "Field 3 (t2-p3): My recovery plan includes a realistic first message to whoever needs to be contacted (an admissions office, a reference-writer, a program coordinator), not just a list of steps.",
+          "Check against: Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail. | Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message. | System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u02-l06-delivered-scenario",
+        "kind": "guided-practice",
+        "title": "recovering when a deadline is missed delivered scenario",
+        "purpose": "Resolves the lesson's named scenario so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
+          "Use steps: Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+          "Field 1 (t2-p1): Which item did you choose, and what specifically went wrong (what was missed and why, based on your tracker)?",
+          "Field 2 (t2-p2): Write a specific recovery plan: what you would do first, in what order, including who you would contact and what you would say to explain the situation and ask for what you need.",
+          "Field 3 (t2-p3): My recovery plan includes a realistic first message to whoever needs to be contacted (an admissions office, a reference-writer, a program coordinator), not just a list of steps.",
+          "Check against: Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail. | Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message. | System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier."
+        ]
+      }
+    ],
+    "model": {
+      "title": "recovering when a deadline is missed worked model",
+      "startingCondition": "The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact recovering when a deadline is missed decision or action.",
+        "Model move 2: Update your tracker from day 1 with the current real status of each item, then add the three provided simulated deadlines to it in the same format.",
+        "Model move 3: Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready."
+      ],
+      "reasoning": "The model names the condition, follows the ordered recovering when a deadline is missed process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail.",
+        "Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message.",
+        "System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier."
+      ],
+      "resourceRef": "swk-rfl-g11-u02-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for recovering when a deadline is missed.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g11-u02-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner updates their real tracker from day 1 with current status, runs it against three additional provided simulated deadlines to stress-test the system across a fuller cycle, then works through a scenario where one deadline (real or simulated) was missed or nearly missed, drafting a specific recovery plan that a guardian reviews and discusses with them.",
+      "prompt": "Show your updated tracker with current statuses for your real items, plus the three simulated deadlines added in the same format.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g11-u02-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g11-u02-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "recovering when a deadline is missed — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g11-u02-l06-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Read the provided scenario: one item on your combined tracker (you choose which, real or simulated) has just been discovered to be either missed entirely or dangerously close to missed, three days before its deadline, with one required document still not ready.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "recovering when a deadline is missed — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g11-u02-l06-independent-card",
+        "directions": "If the learner has no real deadlines currently active to update, the tracker portion is completed entirely using a provided fully-simulated four-deadline set instead, and the recovery-plan scenario is built around one of those simulated deadlines.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g11-u02-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Looking back across this whole unit, what specific habit from your tracker system would have caught this problem earlier, before it became a three-day emergency?",
+      "observableCriteria": [
+        "Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail.",
+        "Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message.",
+        "System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g11-u02-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g11-u02-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g11-u02-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g11-u02-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Tracker integration: Real items are updated with current status and simulated deadlines are recorded in the same format and detail. | Recovery plan concreteness: Recovery plan includes an ordered list of specific actions and a realistic first-contact message. | System-level transfer: Reflection names one specific tracker habit or feature that would have caught the problem earlier.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g11-u02-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g11-u02-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

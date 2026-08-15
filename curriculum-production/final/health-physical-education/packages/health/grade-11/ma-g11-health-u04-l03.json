@@ -12,54 +12,249 @@
   "essentialQuestion": "How does a person actually get care, and what does it cost them to try?",
   "estimatedMinutes": "35–55",
   "materials": [
-    "course notebook or digital equivalent",
-    "course-supplied fictional coverage summaries and case files"
+    "paper and pencil or an accessible response tool",
+    "the fictional lesson cards included in this task"
   ],
   "keyPoints": [
     "Care costs reflect service price, setting, coverage, network, and assistance; community clinics, public programs, payment plans, and financial-assistance policies may reduce barriers.",
     "Match the need to the appropriate service or administrative step, ask about access, cost, and privacy, and confirm what action or document comes next.",
     "For what care costs without coverage, and where low-cost options exist, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support."
   ],
-  "privacySafeScenario": "Run three fictional cases through the system: choose the right level of care, estimate the cost path, prepare the questions, and identify the confidentiality rule that applies.",
-  "studentTask": "Route two supplied fictional needs involving what care costs without coverage, and where low-cost options exist. For each, choose the appropriate service or administrative step, list two access or privacy questions to ask, and write the next action the fictional person can complete without disclosing unrelated details.",
-  "knowledgeCheck": "In two or three sentences, explain the most important distinction in what care costs without coverage, and where low-cost options exist; use one lesson fact and name the evidence, safety check, or support route that makes the explanation dependable.",
+  "privacySafeScenario": "All required evidence uses fictional or public situations. The learner never has to disclose personal health, body, treatment, feelings, family, sexual, or substance-use information.",
+  "studentTask": "Identify the relevant facts, constraints, and any uncertainty; exclude unsupported assumptions. Apply the taught concept, evaluation rule, communication move, procedure, or project criteria for what care costs without coverage, and where low-cost options exist. Compare feasible options and justify the selected response with at least two lesson details. State the responsible adult, professional, service, or public authority and the condition that would trigger escalation or revision.",
+  "knowledgeCheck": "State the controlling fact and correct the unsupported claim. Apply the lesson rule under the new setting or constraint. Explain the safe next step, remaining uncertainty, and responsible help source.",
   "completionCriteria": [
-    "The response completes every named part of the what care costs without coverage, and where low-cost options exist task using the supplied fictional or public case.",
-    "The response uses at least two accurate details from the lesson instruction and distinguishes evidence from assumption.",
-    "The response gives a safe, feasible next step or support route and does not depend on private disclosure, body comparison, or recorded media proof."
+    "Uses at least two accurate lesson details and distinguishes fact from assumption.",
+    "Applies what care costs without coverage, and where low-cost options exist with precise vocabulary and reasoning appropriate to DECISION_REASONING.",
+    "Chooses or designs a safe, feasible response and explains relevant limits or tradeoffs.",
+    "Names the appropriate authority or help route and an escalation or revision condition."
   ],
-  "adaptationChoices": "Walkthroughs may be written, charted, narrated, or completed on a supplied decision frame with vocabulary pre-defined.",
-  "extensionChallenge": "Apply what care costs without coverage, and where low-cost options exist under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
+  "adaptationChoices": "Preserve the Health reasoning while offering read-aloud, chunking, vocabulary preview, translation, text-to-speech, speech-to-text, extra time, breaks, or an equivalent typed, written, drawn-and-labeled, signed, selected, or spoken response. Access support may not supply the protected conclusion.",
+  "extensionChallenge": "Create a new fictional or public case about what care costs without coverage, and where low-cost options exist. Include enough facts, choices or constraints, and support authority for another learner to reason safely. Add an accurate explanation of acceptable variation; use no real person's private information.",
   "accessibilitySupports": [
-    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
-    "Chunk directions into one action at a time and show a worked example or model.",
-    "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
-    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
-    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
-    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
-    "Walkthroughs may be written, charted, narrated, or completed on a supplied decision frame with vocabulary pre-defined."
+    "Chunk the explanation and directions.",
+    "Offer vocabulary preview, read-aloud, translation, and access technology.",
+    "Allow extra time, breaks, and a low-distraction setting.",
+    "Accept equivalent typed, written, drawn-and-labeled, signed, selected, or spoken evidence for equal credit."
   ],
-  "trustedAdultNote": "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+  "trustedAdultNote": "If a real situation feels unsafe or raises a health concern, pause the lesson and tell a parent, guardian, teacher, school staff member, or another trusted adult. A qualified health professional gives medical advice. In an emergency, get an adult and use the local emergency service.",
   "optionalReflection": {
-    "prompt": "Invite the learner to notice one safe, optional example of what care costs without coverage, and where low-cost options exist in daily life. No purchase, account creation, photograph, recording, or private disclosure is required.",
+    "prompt": "Optional and private: Make up one example that helps you remember what care costs without coverage, and where low-cost options exist. Keep it for yourself. You do not need to show it or prove that you completed it.",
     "private": true,
     "graded": false,
     "optional": true
   },
   "neverRequires": [
-    "This task never requires body weight, height, BMI, or body-fat percentage.",
-    "This task never requires calorie counting or a diet or weight-loss goal.",
-    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires body weight, height, BMI, body-fat percentage, body comparison, or appearance scoring.",
+    "This task never requires calorie counting, dieting, or a diet or weight-loss goal.",
+    "This task never requires sharing medical history, a diagnosis, treatment, medication, feelings, family conflict, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires advice about an individual learner's treatment, medication, food, supplement, or exercise plan."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
     "sourceLessonId": "ma-g11-health-u04-l03"
   },
   "contentProvenance": {
-    "repairLane": "mac/health-content-repair-r1",
-    "objective": "Explain what care costs without coverage, and where low-cost options exist accurately using current, reliable health information rather than assumption or anecdote."
+    "factSourceLane": "mac/health-content-repair-r1",
+    "productionDepthLane": "mac/health-production-depth-r1",
+    "objective": "Explain what care costs without coverage, and where low-cost options exist accurately using current, reliable health information rather than assumption or anecdote.",
+    "standardRef": "docs/curriculum-quality/health/HEALTH_LESSON_STANDARD_R1.md",
+    "productionDepthVersion": "health-production-depth-r1"
+  },
+  "standards": [
+    "Michigan HESG 2025 Grades 9-12 [12.3.PHW] Personal Health and Wellness — Information and Resource Seeking",
+    "Michigan HESG 2025 Grades 9-12 [12.4.PHW] Personal Health and Wellness — Decision Making and Problem Solving"
+  ],
+  "primaryLessonType": "DECISION_REASONING",
+  "secondaryLessonTypes": [
+    "CONCEPT_VOCABULARY"
+  ],
+  "learningGoal": "I can accurately explain what care costs without coverage, and where low-cost options exist, apply it to a fictional or public case, justify a safe response with evidence and limits, and identify responsible support or authority.",
+  "lessonExperience": {
+    "experienceVersion": "health-production-depth-r1",
+    "learnerTitle": "Learn and apply: what care costs without coverage, and where low-cost options exist",
+    "privacyNotice": "Use only the fictional or public facts supplied here; private health information is neither requested nor scored.",
+    "entryCheck": {
+      "ref": "ma-g11-health-u04-l03#entry-check",
+      "heading": "Start with a fact",
+      "directions": "Separate the stated fact from the unsupported conclusion before beginning.",
+      "choices": [
+        "Care costs reflect service price, setting, coverage, network, and assistance; community clinics, public programs, payment plans, and financial-assistance policies may reduce barriers.",
+        "This one detail proves everything about a person's health.",
+        "A popular statement about what care costs without coverage, and where low-cost options exist needs no evidence."
+      ],
+      "support": "A fact is stated in the lesson or supported by reliable evidence. An assumption adds a conclusion the information cannot establish.",
+      "treatment": "This entry check is unscored. Use the support or prerequisite route before continuing when needed."
+    },
+    "explanation": {
+      "ref": "ma-g11-health-u04-l03#clear-explanation",
+      "heading": "Understand what care costs without coverage, and where low-cost options exist",
+      "paragraphs": [
+        "Care costs reflect service price, setting, coverage, network, and assistance; community clinics, public programs, payment plans, and financial-assistance policies may reduce barriers.",
+        "Match the need to the appropriate service or administrative step, ask about access, cost, and privacy, and confirm what action or document comes next.",
+        "For what care costs without coverage, and where low-cost options exist, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support."
+      ],
+      "importantDistinction": "Learning about what care costs without coverage, and where low-cost options exist supports accurate reasoning and safe next steps; it does not authorize a diagnosis, individualized treatment advice, a person label, or a value judgment.",
+      "decisionRule": "SITUATION: Name the facts. CHOICES: Compare safe options. INFORMATION: Use what matters. HELP: Name the responsible adult or source."
+    },
+    "vocabulary": {
+      "ref": "ma-g11-health-u04-l03#vocabulary",
+      "heading": "Words for what care costs without coverage, and where low-cost options exist",
+      "terms": [
+        {
+          "term": "what care costs without coverage, and where low-cost options exist",
+          "meaning": "Care costs reflect service price, setting, coverage, network, and assistance; community clinics, public programs, payment plans, and financial-assistance policies may reduce barriers.",
+          "boundary": "This idea does not diagnose, label, or determine the value of a person."
+        },
+        {
+          "term": "relevant information",
+          "meaning": "facts or reliable evidence that can change the interpretation, choice, or next step",
+          "boundary": "A guess, popularity, or a personal judgment is not relevant evidence by itself."
+        },
+        {
+          "term": "support route",
+          "meaning": "the responsible adult, qualified professional, service, or public authority able to help with the situation",
+          "boundary": "Naming a support route does not make the learner responsible for diagnosis, treatment, or emergency management."
+        }
+      ]
+    },
+    "vocabularyCheck": {
+      "ref": "ma-g11-health-u04-l03#vocabulary-check",
+      "heading": "Check the words",
+      "directions": [
+        "Define the topic in context.",
+        "Identify which supplied statement is relevant information and explain why.",
+        "Name the support route and the boundary of its authority."
+      ],
+      "selfCheck": "A complete check uses the meaning of what care costs without coverage, and where low-cost options exist, one accurate fact, and the responsible support route without labeling a person."
+    },
+    "modelExample": {
+      "ref": "ma-g11-health-u04-l03#model-northside",
+      "heading": "Watch the reasoning: what care costs without coverage, and where low-cost options exist",
+      "situation": "A fictional Northside group must choose a next step about what care costs without coverage, and where low-cost options exist. The stated situation includes this fact: Care costs reflect service price, setting, coverage, network, and assistance; community clinics, public programs, payment plans, and financial-assistance policies may reduce barriers. The group may pause and gather relevant information, ask the responsible adult or professional, or act immediately from an unsupported guess.",
+      "relevantFacts": [
+        "Care costs reflect service price, setting, coverage, network, and assistance; community clinics, public programs, payment plans, and financial-assistance policies may reduce barriers.",
+        "Match the need to the appropriate service or administrative step, ask about access, cost, and privacy, and confirm what action or document comes next."
+      ],
+      "assumptionOrDistraction": "A popular or confident statement about what care costs without coverage, and where low-cost options exist is not automatically accurate and cannot establish a person's health, motives, or character.",
+      "possibleActions": [
+        "Use the stated fact, compare safe options, and ask the responsible help source.",
+        "Act alone from the unsupported guess.",
+        "Ask a fictional person to reveal private information before helping."
+      ],
+      "successCheck": "The model uses the lesson fact, explains the connection, stays within the learner role, and names responsible help when it is needed.",
+      "workedReasoning": [
+        "List only the stated situation and constraints before judging an option.",
+        "Compare at least two safe choices using the lesson facts and reject choices that depend on guessing or acting beyond the learner role.",
+        "Choose a feasible next step and identify the adult, professional, service, or authority responsible for help."
+      ]
+    },
+    "guidedReasoning": {
+      "ref": "ma-g11-health-u04-l03#guided-riverside",
+      "heading": "Try a different case with support",
+      "situation": "A fictional Riverside youth group must explain or act on what care costs without coverage, and where low-cost options exist. The group has this reliable lesson information: Match the need to the appropriate service or administrative step, ask about access, cost, and privacy, and confirm what action or document comes next. It has not been given any person's private health information.",
+      "availableChoices": [
+        "Use the stated facts and compare safe options.",
+        "Act from an unsupported assumption.",
+        "Pause and contact the responsible help source."
+      ],
+      "turnOne": [
+        "Identify the relevant facts and one assumption to leave out.",
+        "Compare two feasible interpretations or actions.",
+        "Choose a response and identify the evidence, limit, and responsible help source."
+      ],
+      "cue": "Look for the situation, safe choices, relevant information, and who can help.",
+      "feedbackMoves": [
+        "If a response adds a guess, replace it with a fact from the case or lesson.",
+        "If what care costs without coverage, and where low-cost options exist is named without explanation, link one fact to the concept or process.",
+        "If a choice is reasonable but the reason is missing, add the fact that supports it.",
+        "If a response seeks disclosure, diagnoses, shames, or exceeds the learner role, switch to the fictional facts and the approved help route.",
+        "Accept an equivalent typed, handwritten, drawn-and-labeled, signed, selected, or spoken response when it shows the same reasoning."
+      ],
+      "turnTwo": "Revise the response so it states the controlling fact, applies the lesson idea precisely, and explains the support or authority boundary.",
+      "releaseCondition": "Continue when the response uses a stated fact, applies what care costs without coverage, and where low-cost options exist, and gives a safe next step without private disclosure or a person label."
+    },
+    "independentEvidence": {
+      "ref": "ma-g11-health-u04-l03#independent-maple",
+      "heading": "Show what you know on a fresh case",
+      "situation": "A fictional Maple Community Center faces a choice about what care costs without coverage, and where low-cost options exist. Staff provide this relevant fact: Care costs reflect service price, setting, coverage, network, and assistance; community clinics, public programs, payment plans, and financial-assistance policies may reduce barriers. The available options are to use the fact and responsible help, delay briefly to gather missing information, or act alone from a guess.",
+      "taskMode": "DECISION_REASONING",
+      "directions": [
+        "Identify the relevant facts, constraints, and any uncertainty; exclude unsupported assumptions.",
+        "Apply the taught concept, evaluation rule, communication move, procedure, or project criteria for what care costs without coverage, and where low-cost options exist.",
+        "Compare feasible options and justify the selected response with at least two lesson details.",
+        "State the responsible adult, professional, service, or public authority and the condition that would trigger escalation or revision."
+      ],
+      "permittedSupports": [
+        "the lesson vocabulary and fact cards",
+        "read-aloud, chunking, translation, access tools, or extra time",
+        "typed, handwritten, drawn-and-labeled, signed, selected, or spoken response"
+      ],
+      "independenceBoundary": "Support may restate a direction or provide access. It may not choose the controlling fact, conclusion, action, reason, safety judgment, or help route.",
+      "successCriteria": [
+        "Uses at least two accurate lesson details and distinguishes fact from assumption.",
+        "Applies what care costs without coverage, and where low-cost options exist with precise vocabulary and reasoning appropriate to DECISION_REASONING.",
+        "Chooses or designs a safe, feasible response and explains relevant limits or tradeoffs.",
+        "Names the appropriate authority or help route and an escalation or revision condition."
+      ]
+    },
+    "freshMasteryCheck": {
+      "ref": "ma-g11-health-u04-l03#fresh-check-lakeside",
+      "heading": "Check the idea in a new place",
+      "situation": "A fictional Lakeside school committee reviews what care costs without coverage, and where low-cost options exist. The committee knows: For what care costs without coverage, and where low-cost options exist, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support. It must correct one unsupported claim and choose a safe next step.",
+      "directions": [
+        "State the controlling fact and correct the unsupported claim.",
+        "Apply the lesson rule under the new setting or constraint.",
+        "Explain the safe next step, remaining uncertainty, and responsible help source."
+      ],
+      "freshnessNote": "This case is different from the model, guided case, and independent case. Do not copy their conclusions."
+    },
+    "remediation": {
+      "ref": "ma-g11-health-u04-l03#remediation-oak-street",
+      "alternateExplanationRefs": [
+        "ma-g11-health-u04-l03#remediation-alternate-model",
+        "ma-g11-health-u04-l03#remediation-contrast"
+      ],
+      "heading": "Try a different model",
+      "trigger": "Use this route after an observable gap in a fact, vocabulary meaning, reasoning step, process order, or help route for what care costs without coverage, and where low-cost options exist.",
+      "prerequisite": "First restate this approved fact in your own words: Care costs reflect service price, setting, coverage, network, and assistance; community clinics, public programs, payment plans, and financial-assistance policies may reduce barriers.",
+      "alternateExplanation": "Use a four-box decision map: SITUATION, SAFE CHOICES, RELEVANT INFORMATION, and HELP. Fill each box with case facts before writing a conclusion.",
+      "contrast": [
+        "Sufficient: uses a stated fact about what care costs without coverage, and where low-cost options exist, explains the connection, and stays within the learner role.",
+        "Needs revision: repeats a topic word, adds a guess, or gives an action with no factual reason or responsible help source."
+      ],
+      "guidedCorrection": "Annotate a flawed response by marking the unsupported assumption, the missing lesson connection, and the missing authority or safety boundary; then revise only those parts.",
+      "guidedCorrectionRef": "ma-g11-health-u04-l03#remediation-guided-correction",
+      "freshRetry": {
+        "ref": "ma-g11-health-u04-l03#remediation-fresh-retry",
+        "situation": "A fictional Oak Street library receives a new question about what care costs without coverage, and where low-cost options exist. Staff provide this approved fact: Match the need to the appropriate service or administrative step, ask about access, cost, and privacy, and confirm what action or document comes next. The learner must respond without using the Northside, Riverside, Maple, or Lakeside conclusions.",
+        "directions": [
+          "Identify the relevant fact and apply the lesson rule.",
+          "Explain a safe, feasible response and its limit.",
+          "Name the responsible help or authority route."
+        ]
+      },
+      "exitCriterion": "Return to the independent route when the learner accurately uses a fact, applies what care costs without coverage, and where low-cost options exist, explains a safe response, and identifies support without answer-bearing help.",
+      "nextRoute": "If the same gap remains, return to the named prerequisite with an adult instructor; do not replace the task with private reflection."
+    },
+    "laterTransfer": {
+      "ref": "ma-g11-health-u04-l03#later-transfer",
+      "timing": "Use in a later lesson or a separate session.",
+      "prompt": "Apply what care costs without coverage, and where low-cost options exist to a meaningfully different fictional or public case. Retrieve the concept, use relevant facts, justify a safe response, and identify the responsible support or authority route.",
+      "masteryBoundary": "The current independent response is one evidence occasion. Mastery requires accurate independent evidence now and accurate later retrieval or transfer."
+    }
+  },
+  "reflectionPolicy": {
+    "mode": "PRIVATE_OPTIONAL",
+    "visibleTo": [
+      "LEARNER"
+    ],
+    "scored": false,
+    "contributesToCompletion": false,
+    "contributesToMastery": false,
+    "retention": "LEARNER_KEPT_ONLY"
   },
   "productionReadiness": {
     "status": "READY",

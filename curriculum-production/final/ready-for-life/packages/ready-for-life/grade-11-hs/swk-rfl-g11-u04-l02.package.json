@@ -13,9 +13,12 @@
     "title": "Skill model: reading a sample lease and naming its obligations"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners read a provided sample lease excerpt and correctly name what it obligates the tenant to do and what it obligates the landlord to do, so they can recognize the same categories of terms in any lease they encounter later.",
-  "scenario": "A sample lease excerpt is provided for a fictional apartment, Sunrise Apartments. It states: rent is $900 per month, due on the 1st, with a $40 late fee if paid after the 5th. The security deposit is $900, refundable within 21 days of move-out if the unit shows no damage beyond normal wear and tear. The tenant is responsible for carrying renter's insurance, replacing lightbulbs and air filters, keeping the unit reasonably clean, and notifying the landlord within 24 hours of any needed repair. The landlord is responsible for major repairs, including plumbing, heating, and any appliances provided with the unit. Ending the lease requires 60 days of written notice before move-out, and subletting is not allowed without the landlord's written approval. The learner works through this excerpt piece by piece to name exactly what it requires of each party.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic reading a sample lease and naming its obligations task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "A sample lease excerpt is provided for a fictional apartment, Sunrise Apartments.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
   "realWorldAction": false,
@@ -24,45 +27,76 @@
     "The lease excerpt is entirely fictional and provided for this lesson; the learner should not use or reference any real lease or real address."
   ],
   "simulationAlternative": null,
-  "materials": ["the provided sample lease excerpt", "paper or notes app"],
+  "materials": [
+    "Embedded resource: swk-rfl-g11-u04-l02-model-card",
+    "Embedded resource: swk-rfl-g11-u04-l02-step-card",
+    "Embedded resource: swk-rfl-g11-u04-l02-guided-card",
+    "Embedded resource: swk-rfl-g11-u04-l02-independent-card",
+    "Embedded resource: swk-rfl-g11-u04-l02-evidence-record",
+    "Embedded resource: swk-rfl-g11-u04-l02-retry-pair",
+    "Embedded resource: swk-rfl-g11-u04-l02-delivered-sample",
+    "learner-local: paper or notes app"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before reading the sample lease, write your own working definition of the key term.",
+      "directions": "Analyze the complete worked example on swk-rfl-g11-u04-l02-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "Before reading the sample lease, what do you think the word 'obligation' means in the context of an agreement like a lease?" }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Work through the sample lease excerpt in four parts, writing exactly what it states for each.",
+      "directions": "Complete the fictional coached case on swk-rfl-g11-u04-l02-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "extended-response", "text": "Payment terms: what is the rent amount, when is it due, and what happens if it's paid late?" },
-        { "ref": "t2-p2", "promptType": "extended-response", "text": "Deposit terms: how much is the deposit, and under what condition is it refunded, and within what timeframe?" },
-        { "ref": "t2-p3", "promptType": "extended-response", "text": "Tenant responsibilities: list everything the excerpt says the tenant must do." },
-        { "ref": "t2-p4", "promptType": "extended-response", "text": "Notice-to-end terms: how much notice is required before moving out, and what does the excerpt say about subletting?" }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Sort the excerpt's obligations by who they belong to.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g11-u04-l02-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "In your own words, list three things you (as the tenant) would be responsible for doing if you signed this lease, and one thing the landlord is responsible for instead." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on what a first-time tenant might overlook.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g11-u04-l02-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "short-response", "text": "Which clause in this excerpt is one a first-time tenant might not think to look for, and why does missing it matter?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which clause in this excerpt is one a first-time tenant might not think to look for, and why does missing it matter?"
+        }
       ]
     }
   ],
-  "remediation": "If the learner's list in task 3 mixes tenant and landlord responsibilities (for example, listing 'major repairs' as something the tenant must do), reteach by having the learner sort every obligation named in the excerpt into two labeled columns, tenant and landlord, before rewriting the task 3 answer.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g11-u04-l02-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g11-u04-l02-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g11-u04-l02-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt. | Tenant vs. landlord distinction: All listed obligations are correctly attributed to tenant or landlord. | Noticing what's easy to miss: Reflection identifies a specific clause and gives a plausible reason it's easy to miss. Resume at the next unfinished step on swk-rfl-g11-u04-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Provide the learner with a second, slightly more complex lease excerpt that adds a clause the first one didn't have (such as a pet deposit or an early-termination fee) and have them name that new obligation and which party it falls on.",
   "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l02.scoring.json",
   "integrity": {
@@ -70,5 +104,263 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g11-ready-for-life-u04-l02",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "housing-independent-living",
+    "practicalGoal": "I can complete a realistic reading a sample lease and naming its obligations task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g11-u04-l02-model-card",
+        "swk-rfl-g11-u04-l02-step-card",
+        "swk-rfl-g11-u04-l02-guided-card",
+        "swk-rfl-g11-u04-l02-independent-card",
+        "swk-rfl-g11-u04-l02-evidence-record",
+        "swk-rfl-g11-u04-l02-retry-pair",
+        "swk-rfl-g11-u04-l02-delivered-sample"
+      ],
+      "referencedArtifactWords": [
+        "sample"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g11-u04-l02-delivered-sample"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g11-u04-l02-local-1",
+          "label": "paper or notes app",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g11-u04-l02-model-card",
+        "kind": "model",
+        "title": "reading a sample lease and naming its obligations worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: A sample lease excerpt is provided for a fictional apartment, Sunrise Apartments.",
+          "Model move 1: Read the condition and name the exact reading a sample lease and naming its obligations decision or action.",
+          "Model move 2: Before reading the sample lease, write your own working definition of the key term.",
+          "Model move 3: Work through the sample lease excerpt in four parts, writing exactly what it states for each.",
+          "Model check: Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt. | Tenant vs. landlord distinction: All listed obligations are correctly attributed to tenant or landlord. | Noticing what's easy to miss: Reflection identifies a specific clause and gives a plausible reason it's easy to miss."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l02-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "reading a sample lease and naming its obligations action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for reading a sample lease and naming its obligations.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l02-guided-card",
+        "kind": "guided-practice",
+        "title": "reading a sample lease and naming its obligations coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: A sample lease excerpt is provided for a fictional apartment, Sunrise Apartments.",
+          "Coach direction: Before reading the sample lease, write your own working definition of the key term.",
+          "Learner prompt: Before reading the sample lease, what do you think the word 'obligation' means in the context of an agreement like a lease?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l02-independent-card",
+        "kind": "independent-task",
+        "title": "reading a sample lease and naming its obligations complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Work through the sample lease excerpt in four parts, writing exactly what it states for each.",
+          "Response 1 (t2-p1): Payment terms: what is the rent amount, when is it due, and what happens if it's paid late?",
+          "Response 2 (t2-p2): Deposit terms: how much is the deposit, and under what condition is it refunded, and within what timeframe?",
+          "Response 3 (t2-p3): Tenant responsibilities: list everything the excerpt says the tenant must do.",
+          "Response 4 (t2-p4): Notice-to-end terms: how much notice is required before moving out, and what does the excerpt say about subletting?",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l02-evidence-record",
+        "kind": "evidence-record",
+        "title": "reading a sample lease and naming its obligations minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Which clause in this excerpt is one a first-time tenant might not think to look for, and why does missing it matter?",
+          "Success checks: Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt. | Tenant vs. landlord distinction: All listed obligations are correctly attributed to tenant or landlord. | Noticing what's easy to miss: Reflection identifies a specific clause and gives a plausible reason it's easy to miss.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l02-retry-pair",
+        "kind": "retry",
+        "title": "reading a sample lease and naming its obligations supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g11-u04-l02-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g11-u04-l02-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional reading a sample lease and naming its obligations condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt. | Tenant vs. landlord distinction: All listed obligations are correctly attributed to tenant or landlord. | Noticing what's easy to miss: Reflection identifies a specific clause and gives a plausible reason it's easy to miss..",
+          "Return: resume at the next unfinished step on swk-rfl-g11-u04-l02-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l02-delivered-sample",
+        "kind": "model",
+        "title": "reading a sample lease and naming its obligations delivered sample",
+        "purpose": "Resolves the lesson's named sample so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: A sample lease excerpt is provided for a fictional apartment, Sunrise Apartments.",
+          "Use steps: Work through the sample lease excerpt in four parts, writing exactly what it states for each.",
+          "Field 1 (t2-p1): Payment terms: what is the rent amount, when is it due, and what happens if it's paid late?",
+          "Field 2 (t2-p2): Deposit terms: how much is the deposit, and under what condition is it refunded, and within what timeframe?",
+          "Field 3 (t2-p3): Tenant responsibilities: list everything the excerpt says the tenant must do.",
+          "Field 4 (t2-p4): Notice-to-end terms: how much notice is required before moving out, and what does the excerpt say about subletting?",
+          "Check against: Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt. | Tenant vs. landlord distinction: All listed obligations are correctly attributed to tenant or landlord. | Noticing what's easy to miss: Reflection identifies a specific clause and gives a plausible reason it's easy to miss."
+        ]
+      }
+    ],
+    "model": {
+      "title": "reading a sample lease and naming its obligations worked model",
+      "startingCondition": "A sample lease excerpt is provided for a fictional apartment, Sunrise Apartments.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact reading a sample lease and naming its obligations decision or action.",
+        "Model move 2: Before reading the sample lease, write your own working definition of the key term.",
+        "Model move 3: Work through the sample lease excerpt in four parts, writing exactly what it states for each."
+      ],
+      "reasoning": "The model names the condition, follows the ordered reading a sample lease and naming its obligations process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt.",
+        "Tenant vs. landlord distinction: All listed obligations are correctly attributed to tenant or landlord.",
+        "Noticing what's easy to miss: Reflection identifies a specific clause and gives a plausible reason it's easy to miss."
+      ],
+      "resourceRef": "swk-rfl-g11-u04-l02-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for reading a sample lease and naming its obligations.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g11-u04-l02-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "A sample lease excerpt is provided for a fictional apartment, Sunrise Apartments.",
+      "prompt": "Before reading the sample lease, what do you think the word 'obligation' means in the context of an agreement like a lease?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g11-u04-l02-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g11-u04-l02-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "reading a sample lease and naming its obligations — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g11-u04-l02-independent-card",
+        "directions": "Complete the reading a sample lease and naming its obligations task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g11-u04-l02-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Which clause in this excerpt is one a first-time tenant might not think to look for, and why does missing it matter?",
+      "observableCriteria": [
+        "Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt.",
+        "Tenant vs. landlord distinction: All listed obligations are correctly attributed to tenant or landlord.",
+        "Noticing what's easy to miss: Reflection identifies a specific clause and gives a plausible reason it's easy to miss."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g11-u04-l02-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g11-u04-l02-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g11-u04-l02-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g11-u04-l02-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Obligation identification accuracy: All four categories are correctly and specifically stated using details from the excerpt. | Tenant vs. landlord distinction: All listed obligations are correctly attributed to tenant or landlord. | Noticing what's easy to miss: Reflection identifies a specific clause and gives a plausible reason it's easy to miss.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g11-u04-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g11-u04-l02-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

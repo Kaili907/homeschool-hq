@@ -1,5 +1,6 @@
 {
   "schemaVersion": "2.0",
+  "sampleRevision": "FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1",
   "packageId": "swk-fl-g8-u04-l03",
   "lessonRef": {
     "lessonId": "ma-g8-financial-literacy-u04-l03",
@@ -18,97 +19,425 @@
     "PF4",
     "PF4.1"
   ],
-  "objective": "Learners track an invented revolving balance across two months of minimum payments, separating interest from principal reduction.",
-  "scenario": "Gideon is a made-up eighth grader modelling a pretend $2,400.00 revolving balance at an invented 1.75% monthly rate with a $60.00 minimum payment. Nothing here is a real account.",
+  "financialFocus": {
+    "primary": "CREDIT_BORROWING",
+    "secondary": [
+      "INTEREST",
+      "DECISION_SCENARIO"
+    ]
+  },
+  "instructionalProfile": "GUIDED_APPLICATION",
+  "objective": "Explain how a credit-card payment is split between interest and principal, calculate one fictional statement period exactly to the cent, and use the result to reason about a payment tradeoff.",
+  "targetConcepts": [
+    "A payment does not reduce a revolving balance dollar for dollar when interest is due.",
+    "Interest is a borrowing cost; principal is the unpaid balance being reduced.",
+    "A larger payment made under the same statement conditions sends more money to principal, but leaves less cash available now."
+  ],
+  "scenario": "This lesson uses only invented people, balances, rates, payments, and card statements. Do not enter or discuss any real household income, debt, account, card, credit score, or payment history.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
   "realWorldAction": false,
   "signOff": null,
-  "safetyNotes": [
-    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
-    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
-    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
-    "This balance and rate are invented; never write a real card or account number on this sheet."
-  ],
-  "materials": [
-    "pencil or accessible response tool",
-    "this task sheet"
+  "conceptExplanation": {
+    "title": "Why a minimum payment does not all erase debt",
+    "paragraphs": [
+      "A credit-card balance is principal: money still owed from earlier borrowing. Interest is the borrowing cost added for a statement period. When a payment arrives after interest is posted, the payment covers that interest first. Only the amount left over reduces principal.",
+      "That split matters because a payment can feel large while the balance falls by much less. If the starting balance, rate, and timing stay the same, a larger payment sends the extra amount to principal. The tradeoff is that more debt is reduced now, but less cash is available for another goal or need.",
+      "A minimum is a required floor under the fictional statement rule, not a recommendation and not a promise about how fast a balance will be repaid. Real card agreements may use different rates, fees, timing, and minimum-payment formulas."
+    ],
+    "relationship": [
+      "statement interest = starting balance × monthly periodic rate",
+      "principal reduction = payment − rounded statement interest",
+      "ending balance = starting balance − principal reduction"
+    ],
+    "commonConfusion": "Subtracting the whole payment from the starting balance ignores the interest charge. A quick check is that interest plus principal reduction must equal the payment exactly."
+  },
+  "calculationPolicy": {
+    "currency": "USD",
+    "moneyRepresentation": "integer-cents",
+    "rateRepresentation": "integer-basis-points",
+    "rateMeaning": "invented monthly periodic rate, not an annual percentage rate",
+    "interestMethod": "starting statement balance multiplied by the monthly periodic rate for one statement period",
+    "statementTiming": "No new purchases or fees occur. Interest posts first, then the payment is applied to rounded interest and then principal.",
+    "rounding": "Round the interest line once to the nearest cent using half-up rounding. Do not round any other intermediate value.",
+    "normalization": "A USD response may use a dollar sign or omit it, but must state exactly two decimal places. Commas are optional.",
+    "permittedTools": [
+      "calculator",
+      "scratch paper",
+      "the three-line statement organizer"
+    ],
+    "verification": "Adult-only authority independently recomputes every fixed item from integer cents and basis points. Binary floating-point output is not scoring authority."
+  },
+  "workedExamples": [
+    {
+      "exampleRef": "we-jordan",
+      "title": "Worked example — Jordan's fictional statement",
+      "fictionCue": "Jordan and every amount below are invented for instruction.",
+      "facts": [
+        "Starting balance: $800.00",
+        "Invented monthly periodic rate: 1.50%",
+        "Fictional minimum payment: $40.00",
+        "No purchases or fees; interest posts before the payment; round only the interest line to the nearest cent, half up."
+      ],
+      "goal": "Find the interest, the principal reduction, and the ending balance; then interpret the payment split.",
+      "steps": [
+        "Interest: $800.00 × 1.50% = $12.00. The product is already exact to the cent.",
+        "Principal reduction: $40.00 payment − $12.00 interest = $28.00.",
+        "Ending balance: $800.00 − $28.00 = $772.00.",
+        "Payment check: $12.00 interest + $28.00 principal reduction = $40.00 payment."
+      ],
+      "interpretation": "Only $28.00 of the $40.00 payment reduced what Jordan owed. The other $12.00 paid the one-period borrowing cost.",
+      "tradeoff": "Under the same statement facts, paying $60.00 would reduce principal by $48.00 and leave a $752.00 balance. That is $20.00 more debt reduction now, but also $20.00 less cash available now.",
+      "limits": "This one-period model does not predict a real payoff date. A real payoff depends on later rates, fees, purchases, payment timing, and payments."
+    }
   ],
   "tasks": [
     {
       "taskId": "t1",
-      "kind": "warm-up",
-      "directions": "Compute month one interest on Gideon's invented $2,400.00 balance at 1.75%.",
+      "kind": "comprehension-check",
+      "title": "Check the idea",
+      "directions": "Use Jordan's separate worked example. Choose the statement that correctly explains the payment split.",
+      "support": [
+        "Reread the three relationship lines.",
+        "Check which option makes interest plus principal reduction equal the payment."
+      ],
       "prompts": [
         {
           "ref": "t1-p1",
-          "promptType": "fixed-numeric",
-          "text": "How much interest is charged in month one?",
-          "unit": "USD"
+          "promptType": "fixed-choice",
+          "text": "Which statement correctly explains what happens when the fictional payment is applied after interest posts?",
+          "choices": [
+            "The whole payment reduces principal, and interest is ignored.",
+            "Interest is rounded to cents first; the payment covers that interest before the rest reduces the balance.",
+            "The payment is added to the balance before interest is found.",
+            "The interest charge and principal reduction must always be equal."
+          ]
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Split Gideon's $60.00 payment into interest and principal, then compute the new balance.",
+      "title": "Guided calculation — Mika",
+      "scenarioRef": "fs-mika",
+      "directions": "Mika's fictional statement starts at $1,250.00, uses an invented 1.20% monthly periodic rate, and requires a $50.00 payment. No purchases or fees occur. Interest posts first and is rounded once to the nearest cent, half up. Complete the organizer in order.",
+      "support": [
+        "For the first line, use starting balance × monthly rate.",
+        "For the second line, decide what part of the payment is left after interest.",
+        "For the third line, use the starting balance and the principal reduction."
+      ],
+      "fade": "The calculation cues end after this task. The next scenario supplies only facts and the shared statement rule.",
       "prompts": [
         {
           "ref": "t2-p1",
           "promptType": "fixed-numeric",
-          "text": "How much of the payment reduces the balance?",
+          "text": "What is Mika's one-period interest charge?",
           "unit": "USD"
         },
         {
           "ref": "t2-p2",
           "promptType": "fixed-numeric",
-          "text": "What is the balance after month one?",
+          "text": "How much of Mika's payment reduces principal?",
           "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Mika's ending balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "extended-response",
+          "text": "Explain why subtracting the whole payment from the starting balance would misstate Mika's ending balance. Use the payment-split check in your reasoning."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Run month two on Gideon's new balance, rounding the interest to the cent as a statement would.",
+      "title": "Independent scenario — Ari",
+      "scenarioRef": "fs-ari-minimum",
+      "directions": "Work independently. Ari's fictional statement starts at $975.50, uses an invented 1.60% monthly periodic rate, and requires a $45.00 payment. No purchases or fees occur. Apply the shared statement rule and round only the interest line to the nearest cent, half up.",
+      "permittedSupports": [
+        "calculator",
+        "scratch paper",
+        "unfilled three-line organizer"
+      ],
+      "independenceBoundary": "No step cues, answer-bearing feedback, or parallel solved case may be used during this scenario.",
       "prompts": [
         {
           "ref": "t3-p1",
           "promptType": "fixed-numeric",
-          "text": "How much interest is charged in month two?",
+          "text": "What is Ari's one-period interest charge?",
           "unit": "USD"
         },
         {
           "ref": "t3-p2",
           "promptType": "fixed-numeric",
-          "text": "What is the balance after month two?",
+          "text": "How much of Ari's $45.00 payment reduces principal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Ari's ending balance after the $45.00 payment?",
           "unit": "USD"
         }
       ]
     },
     {
       "taskId": "t4",
-      "kind": "reflection",
-      "directions": "Two payments totalling $120.00 cut the balance by about $36.00.",
+      "kind": "independent-decision",
+      "title": "Independent decision — Ari compares two payments",
+      "scenarioRef": "fs-ari-choice",
+      "directions": "Keep Ari's same invented $975.50 starting balance, 1.60% monthly periodic rate, timing, and no-fee assumptions. Compare the $45.00 minimum with a $70.00 payment. Ari's fictional goal is to reduce the balance faster while keeping enough of a $90.00 activity budget for a $35.00 fee due before the next statement.",
+      "independenceBoundary": "Choose and justify an option from the provided facts. There is no single preferred lifestyle choice; scoring follows the evidence and consistency of the reasoning.",
       "prompts": [
         {
           "ref": "t4-p1",
+          "promptType": "fixed-numeric",
+          "text": "What ending balance results if Ari pays $70.00 under the same statement conditions?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t4-p2",
           "promptType": "extended-response",
-          "text": "Using Gideon's figures, explain where the rest of the money went and estimate what doubling the payment would do to the repayment time."
+          "text": "Recommend either the $45.00 or $70.00 payment for Ari's stated goal. Cite the balance effect, explain the cash-available tradeoff, and name one changed fact that could change the recommendation."
+        }
+      ]
+    },
+    {
+      "taskId": "t5",
+      "kind": "mastery",
+      "title": "Fresh mastery — Taylor",
+      "scenarioRef": "fs-taylor-mastery",
+      "directions": "This is a fresh independent case. Taylor's fictional statement starts at $1,140.25, uses an invented 1.40% monthly periodic rate, and requires a $50.00 payment. No purchases or fees occur. Interest posts first and is rounded once to the nearest cent, half up. A calculator, scratch paper, and the unfilled organizer are allowed; step hints and worked examples are not.",
+      "evidencePurpose": "Fresh evidence of the interest-principal relationship, exact-cent calculation, interpretation, and conditional decision reasoning.",
+      "prompts": [
+        {
+          "ref": "t5-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Taylor's one-period interest charge?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t5-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of Taylor's payment reduces principal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t5-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Taylor's ending balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t5-p4",
+          "promptType": "extended-response",
+          "text": "Explain what Taylor's payment split shows about minimum payments. Then explain how a larger payment under the same statement conditions would change principal reduction and the cash available now."
+        }
+      ]
+    },
+    {
+      "taskId": "t6",
+      "kind": "remediation-guided",
+      "title": "Remediation retry with support — Nia",
+      "scenarioRef": "fs-nia-remediation",
+      "directions": "Use the alternate balance-box model first. Nia's fictional statement starts at $500.00, uses an invented 2.00% monthly periodic rate, and requires a $25.00 payment. No purchases or fees occur. Interest posts first and is rounded once to the nearest cent, half up.",
+      "support": [
+        "Box 1: find the interest added for borrowing.",
+        "Box 2: split the payment into interest and principal; the two parts must total $25.00.",
+        "Box 3: subtract only the principal part from the starting balance."
+      ],
+      "prompts": [
+        {
+          "ref": "t6-p1",
+          "promptType": "fixed-numeric",
+          "text": "What amount belongs in Nia's interest box?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t6-p2",
+          "promptType": "fixed-numeric",
+          "text": "What amount belongs in Nia's principal-reduction box?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t6-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Nia's ending balance?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t7",
+      "kind": "remediation-retry",
+      "title": "Fresh remediation check — Omar",
+      "scenarioRef": "fs-omar-retry",
+      "directions": "Try this new case without the balance-box cues. Omar's fictional statement starts at $720.00, uses an invented 1.25% monthly periodic rate, and requires a $35.00 payment. No purchases or fees occur. Apply the shared timing and half-up interest-rounding rule.",
+      "independenceBoundary": "This fresh retry may support a later mastery decision only when all three calculations are independently completed and the payment-split check is shown on scratch work or explained aloud.",
+      "prompts": [
+        {
+          "ref": "t7-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Omar's one-period interest charge?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t7-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of Omar's payment reduces principal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t7-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Omar's ending balance?",
+          "unit": "USD"
         }
       ]
     }
   ],
-  "remediation": "If a learner subtracts the payment from the balance directly, require the interest line to be computed and removed from the payment first for Gideon.",
-  "extension": "Ask the learner to compute Gideon's month three and describe how the interest share of each payment is changing.",
+  "remediation": "If an observable response subtracts the whole payment as principal, use the alternate balance-box explanation and its different fictional worked case. Then complete Nia's supported retry, fade the boxes, and use Omar's fresh case. Do not reveal any protected response.",
+  "remediationRoutes": [
+    {
+      "misconceptionId": "finlit.credit.payment-all-principal",
+      "observableSignal": "The response subtracts the entire payment from the starting balance or cannot make interest plus principal reduction equal the payment.",
+      "alternateExplanation": "Picture three boxes: interest added, payment split, and principal left. The payment first fills the interest part; only the remainder crosses into the principal-reduction box.",
+      "parallelWorkedCase": {
+        "title": "Bo's fictional balance boxes",
+        "facts": "$600.00 starting balance, invented 1.00% monthly periodic rate, $30.00 payment, no purchases or fees, interest first, half-up cent rounding.",
+        "steps": [
+          "Interest box: $600.00 × 1.00% = $6.00.",
+          "Payment-split box: $30.00 = $6.00 interest + $24.00 principal reduction.",
+          "Principal-left box: $600.00 − $24.00 = $576.00.",
+          "Check: $576.00 + $24.00 = $600.00, and $6.00 + $24.00 = $30.00."
+        ]
+      },
+      "guidedRetryTaskRef": "t6",
+      "freshRetryTaskRef": "t7"
+    },
+    {
+      "misconceptionId": "finlit.credit.rate-as-whole-number",
+      "observableSignal": "The response treats 1.60% as 1.60 or 160 rather than 0.016, or shifts the decimal place incorrectly.",
+      "alternateExplanation": "Read percent as 'out of 100.' Convert 1.60% to 160 basis points or 0.016 before multiplying, then estimate that the interest should be much less than the starting balance.",
+      "parallelWorkedCase": {
+        "title": "Percent reasonableness check",
+        "facts": "On an invented $500.00 balance, 1% is $5.00, so 2% is $10.00. An answer near $1,000.00 cannot be a one-period interest charge here.",
+        "steps": [
+          "Find 1% by dividing by 100.",
+          "Scale that amount to the stated percent.",
+          "Compare the result with the starting balance before continuing."
+        ]
+      },
+      "guidedRetryTaskRef": "t6",
+      "freshRetryTaskRef": "t7"
+    }
+  ],
+  "masteryRule": {
+    "targetTaskRef": "t5",
+    "requiredEvidence": [
+      "three aligned exact-cent calculations",
+      "an explanation that distinguishes interest from principal reduction",
+      "a tradeoff statement about debt reduction and cash available now"
+    ],
+    "permittedSupports": [
+      "calculator",
+      "scratch paper",
+      "unfilled three-line organizer",
+      "read-aloud support"
+    ],
+    "notPermittedDuringProtectedAttempt": [
+      "worked-example values",
+      "step-by-step hints",
+      "answer-bearing feedback"
+    ],
+    "decisionRule": "The adult authority must confirm all fixed calculations and the rubric must meet every required evidence dimension. One earlier guided response is not mastery."
+  },
+  "extension": "After the protected work is reviewed, change one invented payment amount while keeping the same fictional balance, rate, and timing. Recompute the statement in integer cents and explain the new debt-reduction versus cash-available tradeoff. Do not use real household information.",
+  "futureTutorManifest": {
+    "concept_ids": [
+      "finlit.credit.revolving-principal",
+      "finlit.credit.periodic-interest",
+      "finlit.credit.payment-allocation",
+      "finlit.credit.payment-tradeoff"
+    ],
+    "prerequisite_concept_ids": [
+      {
+        "id": "finlit.percent.percent-of-amount",
+        "requirement": "required"
+      },
+      {
+        "id": "finlit.money.subtract-decimals",
+        "requirement": "supporting"
+      }
+    ],
+    "misconception_ids": [
+      "finlit.credit.payment-all-principal",
+      "finlit.credit.rate-as-whole-number"
+    ],
+    "calculation_policy": "Use the learner-visible integer-cent, basis-point, statement-timing, and half-up interest-rounding contract in this package.",
+    "decision_scenario_refs": [
+      "fs-ari-choice",
+      "fs-taylor-mastery"
+    ],
+    "hint_policy": {
+      "guided": "Cue one relationship at a time, then fade all step cues.",
+      "independent": "Clarify vocabulary or restate a given assumption only; do not select an operation or reveal a value.",
+      "mastery": "No answer-bearing help. Any step hint invalidates the protected attempt and routes to a fresh case.",
+      "remediation": "Use only the authored alternate explanation, parallel case, guided retry, and fresh retry in that order."
+    },
+    "age_policy": {
+      "gradeBand": "7-8",
+      "vocabularySupport": [
+        "principal",
+        "interest",
+        "monthly periodic rate",
+        "minimum payment"
+      ],
+      "fictionalOnly": true,
+      "noRealHouseholdFinancialData": true,
+      "adviceBoundary": "Education only; no direction to apply for credit, enter an agreement, or make a real payment."
+    },
+    "answer_policy": {
+      "itemModes": "mixed fixed and rubric-scored",
+      "adultOnlyAuthority": true,
+      "workedExampleSeparateFromProtectedItems": true,
+      "reviewTiming": "after the learner submits the relevant task",
+      "revealRestriction": "No protected value, option, or decisive justification may be supplied during independent, mastery, or fresh-retry work."
+    }
+  },
+  "safetyNotes": [
+    "Every person, balance, rate, payment, and statement in this lesson is invented for instruction.",
+    "Do not enter or discuss real household income, debt, account balances, card details, credit scores, payment history, or financial hardship.",
+    "Never enter an account number, card number, PIN, password, Social Security number, tax number, or other credential.",
+    "This lesson is education, not individualized financial, legal, tax, credit, or investment advice. A trusted adult should verify the terms of any real agreement."
+  ],
+  "materials": [
+    "calculator",
+    "pencil or accessible response tool",
+    "scratch paper or an unfilled three-line statement organizer"
+  ],
+  "accessibilitySupports": [
+    "Read-aloud or text-to-speech for directions and scenarios.",
+    "A high-contrast text table for every statement calculation; color is never required.",
+    "Typed, handwritten, spoken, or calculator-supported responses when the same financial reasoning is preserved.",
+    "Extra time, reduced-copying, hidden timer, movement break, and low-distraction options.",
+    "The interest-principal relationship may be represented with labelled boxes or equations; no drag interaction is required."
+  ],
   "financialSafety": {
+    "fictionalInstructionalFinancesOnly": true,
+    "neverRequestsRealHouseholdFinances": true,
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true
   },
   "integrity": {
     "sourceCorpusVersion": "1.0.0",
-    "sourceRef": "worktree",
-    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceRef": "mac/finlit-director-sample-r1",
+    "sourcePath": "curriculum-production/final/financial-literacy/samples/grade-08/swk-fl-g8-u04-l03.sample.package.json",
     "sourceLessonId": "ma-g8-financial-literacy-u04-l03",
     "authoredBy": "manual",
     "answerDerivedFromSourceGuidance": false
@@ -119,32 +448,102 @@
       {
         "ref": "t1-p1",
         "responseMode": "FIXED",
-        "promptText": "How much interest is charged in month one?"
+        "promptText": "Which statement correctly explains what happens when the fictional payment is applied after interest posts?"
       },
       {
         "ref": "t2-p1",
         "responseMode": "FIXED",
-        "promptText": "How much of the payment reduces the balance?"
+        "promptText": "What is Mika's one-period interest charge?"
       },
       {
         "ref": "t2-p2",
         "responseMode": "FIXED",
-        "promptText": "What is the balance after month one?"
+        "promptText": "How much of Mika's payment reduces principal?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Mika's ending balance?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "OPEN",
+        "promptText": "Explain why subtracting the whole payment from the starting balance would misstate Mika's ending balance. Use the payment-split check in your reasoning."
       },
       {
         "ref": "t3-p1",
         "responseMode": "FIXED",
-        "promptText": "How much interest is charged in month two?"
+        "promptText": "What is Ari's one-period interest charge?"
       },
       {
         "ref": "t3-p2",
         "responseMode": "FIXED",
-        "promptText": "What is the balance after month two?"
+        "promptText": "How much of Ari's $45.00 payment reduces principal?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Ari's ending balance after the $45.00 payment?"
       },
       {
         "ref": "t4-p1",
+        "responseMode": "FIXED",
+        "promptText": "What ending balance results if Ari pays $70.00 under the same statement conditions?"
+      },
+      {
+        "ref": "t4-p2",
         "responseMode": "OPEN",
-        "promptText": "Using Gideon's figures, explain where the rest of the money went and estimate what doubling the payment would do to the repayment time."
+        "promptText": "Recommend either the $45.00 or $70.00 payment for Ari's stated goal. Cite the balance effect, explain the cash-available tradeoff, and name one changed fact that could change the recommendation."
+      },
+      {
+        "ref": "t5-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Taylor's one-period interest charge?"
+      },
+      {
+        "ref": "t5-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of Taylor's payment reduces principal?"
+      },
+      {
+        "ref": "t5-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Taylor's ending balance?"
+      },
+      {
+        "ref": "t5-p4",
+        "responseMode": "OPEN",
+        "promptText": "Explain what Taylor's payment split shows about minimum payments. Then explain how a larger payment under the same statement conditions would change principal reduction and the cash available now."
+      },
+      {
+        "ref": "t6-p1",
+        "responseMode": "FIXED",
+        "promptText": "What amount belongs in Nia's interest box?"
+      },
+      {
+        "ref": "t6-p2",
+        "responseMode": "FIXED",
+        "promptText": "What amount belongs in Nia's principal-reduction box?"
+      },
+      {
+        "ref": "t6-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Nia's ending balance?"
+      },
+      {
+        "ref": "t7-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Omar's one-period interest charge?"
+      },
+      {
+        "ref": "t7-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of Omar's payment reduces principal?"
+      },
+      {
+        "ref": "t7-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Omar's ending balance?"
       }
     ]
   },
@@ -163,6 +562,12 @@
       "answerDerivedFromSourceGuidance": false
     },
     "sourceCurriculumUntouched": true,
+    "sourcePackageCorePreserved": false,
+    "directorSampleOverlay": {
+      "revision": "FINANCIAL_LITERACY_DIRECTOR_SAMPLE_R1",
+      "packagePath": "curriculum-production/final/financial-literacy/samples/grade-08/swk-fl-g8-u04-l03.sample.package.json",
+      "standardRef": "docs/curriculum-quality/financial-literacy/FINANCIAL_LITERACY_LESSON_STANDARD_R1.md"
+    },
     "familyPilotFirst": true
   }
 }

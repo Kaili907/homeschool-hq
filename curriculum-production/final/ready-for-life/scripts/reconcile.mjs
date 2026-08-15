@@ -15,6 +15,14 @@ import {
   validateCorpus,
   walk,
 } from './corpus.mjs'
+import {
+  APPROVED_ANCHOR_ID,
+  PRODUCTION_DEPTH_VERSION,
+  buildProductionDepthReport,
+  composeProductionPackage,
+  composeProductionScoring,
+  extendTaskSheetSchema,
+} from './production-depth.mjs'
 
 const INPUTS = Object.freeze([
   {
@@ -192,14 +200,20 @@ function copySources() {
       if (!winner.pkg.scoringRef.startsWith('scoring/') || winner.pkg.scoringRef.includes('..')) {
         throw new Error(`${input.branch}:${winner.path} has unsafe scoringRef ${winner.pkg.scoringRef}`)
       }
-      const packageRelativePath = `packages/ready-for-life/${gradeDirectory}/${winner.pkg.packageId}.package.json`
-      const scoringRelativePath = winner.pkg.scoringRef
+      const composedPackage = composeProductionPackage(winner.pkg, winner.scoring)
+      const composedScoring = composeProductionScoring(winner.scoring, lessonId)
+      const composedPackageRaw = Buffer.from(`${JSON.stringify(composedPackage, null, 2)}\n`)
+      const composedScoringRaw = lessonId === APPROVED_ANCHOR_ID
+        ? Buffer.from(`${JSON.stringify(composedScoring, null, 2)}\n`)
+        : winner.scoringRaw
+      const packageRelativePath = `packages/ready-for-life/${gradeDirectory}/${composedPackage.packageId}.package.json`
+      const scoringRelativePath = composedPackage.scoringRef
       const packageTarget = join(CORPUS_ROOT, packageRelativePath)
       const scoringTarget = join(CORPUS_ROOT, scoringRelativePath)
       mkdirSync(dirname(packageTarget), { recursive: true })
       mkdirSync(dirname(scoringTarget), { recursive: true })
-      writeFileSync(packageTarget, winner.packageRaw)
-      writeFileSync(scoringTarget, winner.scoringRaw)
+      writeFileSync(packageTarget, composedPackageRaw)
+      writeFileSync(scoringTarget, composedScoringRaw)
 
       const discarded = candidates.filter((candidate) => candidate.path !== winner.path)
       ledgerLessons.push({
@@ -211,8 +225,11 @@ function copySources() {
         selectedScoringPath: winner.scoringPath,
         canonicalPackagePath: packageRelativePath,
         canonicalScoringPath: scoringRelativePath,
-        packageSha256: winner.packageSha256,
-        scoringSha256: winner.scoringSha256,
+        sourcePackageSha256: winner.packageSha256,
+        sourceScoringSha256: winner.scoringSha256,
+        packageSha256: sha256(composedPackageRaw),
+        scoringSha256: sha256(composedScoringRaw),
+        compositionVersion: PRODUCTION_DEPTH_VERSION,
         candidateResolution: {
           candidateCount: candidates.length,
           rule: 'Select the grade session authored root in configured order; retain compatibility mirrors only as provenance evidence.',
@@ -228,19 +245,23 @@ function copySources() {
       })
       manifestLessons.push({
         lessonId,
-        packageId: winner.pkg.packageId,
-        courseId: winner.pkg.lessonRef.courseId,
+        packageId: composedPackage.packageId,
+        courseId: composedPackage.lessonRef.courseId,
         grade: input.grade,
         unitNumber: winner.pkg.lessonRef.unitNumber,
         dayInUnit: winner.pkg.lessonRef.dayInUnit,
-        title: winner.pkg.lessonRef.title,
-        completionAuthority: winner.pkg.completionAuthority,
-        realWorldAction: winner.pkg.realWorldAction,
-        fictionalSimulation: winner.pkg.isFictionalSimulation,
+        title: composedPackage.lessonRef.title,
+        completionAuthority: composedPackage.completionAuthority,
+        realWorldAction: composedPackage.realWorldAction,
+        fictionalSimulation: composedPackage.isFictionalSimulation,
+        productionDepthVersion: PRODUCTION_DEPTH_VERSION,
+        lessonFamily: composedPackage.productionDepth.lessonFamily,
+        realRouteCompletionAuthority: composedPackage.productionDepth.independentTask.realRoute?.completionAuthority ?? null,
+        simulationRouteCompletionAuthority: composedPackage.productionDepth.independentTask.simulationRoute.completionAuthority,
         packagePath: packageRelativePath,
         scoringPath: scoringRelativePath,
-        packageSha256: winner.packageSha256,
-        scoringSha256: winner.scoringSha256,
+        packageSha256: sha256(composedPackageRaw),
+        scoringSha256: sha256(composedScoringRaw),
         sourceBranch: input.branch,
         sourceSha: input.sha,
       })
@@ -263,7 +284,7 @@ function copySources() {
     }
   }
 
-  writeFileSync(join(CORPUS_ROOT, 'schemas/task-sheet.schema.json'), canonicalTaskSchema)
+  writeJson(join(CORPUS_ROOT, 'schemas/task-sheet.schema.json'), extendTaskSheetSchema(JSON.parse(canonicalTaskSchema.toString('utf8'))))
   writeFileSync(join(CORPUS_ROOT, 'schemas/scoring-record.schema.json'), canonicalScoringSchema)
   return { ledgerLessons, manifestLessons, schemaEvidence, branchRows }
 }
@@ -273,14 +294,18 @@ function buildArtifacts(source) {
   const counts = gradeCounts(entries)
   const duplicateReport = buildDuplicateReport(entries)
   const progressionReport = buildProgressionReport(entries)
+  const productionDepthReport = buildProductionDepthReport(entries)
   const validationIssues = validateCorpus(entries)
   const guardianEntries = entries.filter((entry) => entry.pkg.completionAuthority === 'guardian')
   const learnerEntries = entries.filter((entry) => entry.pkg.completionAuthority === 'learner')
 
   const manifest = {
     schemaVersion: '1.0',
-    corpusId: 'manuel-academy-ready-for-life-final-r1',
-    classification: 'FINAL_RFL_PRODUCTION_READY',
+    corpusId: 'manuel-academy-ready-for-life-production-depth-r1',
+    classification: 'READY_FOR_LIFE_PRODUCTION_DEPTH_R1_READY_FOR_CONVERGENCE',
+    compositionAuthority: 'MANUEL_ACADEMY_LOCAL_COMPOSITION',
+    productionDepthVersion: PRODUCTION_DEPTH_VERSION,
+    approvedAnchorLessonId: APPROVED_ANCHOR_ID,
     subject: 'ready-for-life',
     supportedGrades: SUPPORTED_GRADES,
     expectedLessonsPerGrade: EXPECTED_LESSONS_PER_GRADE,
@@ -302,6 +327,7 @@ function buildArtifacts(source) {
       attestationRollup: 'reports/attestation-rollup.json',
       duplicateCheck: 'reports/duplicate-report.json',
       progression: 'reports/progression-report.json',
+      productionDepth: 'reports/production-depth-report.json',
     },
     lessons: source.manifestLessons,
   }
@@ -309,7 +335,8 @@ function buildArtifacts(source) {
 
   writeJson(join(CORPUS_ROOT, 'reports/source-branch-ledger.json'), {
     schemaVersion: '1.0',
-    reconciliationPolicy: 'Source lesson ID and authored content, never directory-tree union.',
+    reconciliationPolicy: 'Select immutable source lessons by source lesson ID, then rebuild every selected package through the versioned Manuel Academy local production-depth composition; never union directory trees or hand-edit generated lessons.',
+    compositionVersion: PRODUCTION_DEPTH_VERSION,
     gateInput: GATE_INPUT,
     sourceBranches: source.branchRows,
     schemaEvidence: source.schemaEvidence,
@@ -333,6 +360,10 @@ function buildArtifacts(source) {
       studentPackagePath: lesson.packagePath,
       adultScoringRecordPath: lesson.scoringPath,
       completionAuthority: lesson.completionAuthority,
+      realRouteCompletionAuthority: lesson.realRouteCompletionAuthority,
+      simulationRouteCompletionAuthority: lesson.simulationRouteCompletionAuthority,
+      productionDepthVersion: lesson.productionDepthVersion,
+      lessonFamily: lesson.lessonFamily,
     })),
   })
 
@@ -346,6 +377,10 @@ function buildArtifacts(source) {
       completionAuthority: entry.pkg.completionAuthority,
       learnerAssertionCanCertify: entry.pkg.completionAuthority === 'learner',
       adultAttestationRequired: entry.pkg.completionAuthority === 'guardian',
+      realRouteCompletionAuthority: entry.pkg.productionDepth.independentTask.realRoute?.completionAuthority ?? null,
+      simulationRouteCompletionAuthority: entry.pkg.productionDepth.independentTask.simulationRoute.completionAuthority,
+      simulationLearnerAssertionCanCertify: entry.pkg.productionDepth.independentTask.simulationRoute.completionAuthority === 'learner',
+      tutorMayCertifyPhysicalCompletion: false,
       simulationAlternativeAvailable: Boolean(entry.pkg.simulationAlternative?.present),
       identifiablePhotoRequired: entry.pkg.signOff?.identifiablePhotoRequired ?? false,
     })),
@@ -375,6 +410,7 @@ function buildArtifacts(source) {
   })
   writeJson(join(CORPUS_ROOT, 'reports/duplicate-report.json'), duplicateReport)
   writeJson(join(CORPUS_ROOT, 'reports/progression-report.json'), progressionReport)
+  writeJson(join(CORPUS_ROOT, 'reports/production-depth-report.json'), productionDepthReport)
 
   const coveragePass = entries.length === EXPECTED_TOTAL && SUPPORTED_GRADES.every((grade) => counts[String(grade)] === EXPECTED_LESSONS_PER_GRADE)
   const checks = {
@@ -388,6 +424,7 @@ function buildArtifacts(source) {
     completionAuthority: { status: validationIssues.some((item) => ['completion-authority-match', 'guardian-authority-shape', 'learner-authority-no-attestation'].includes(item.rule)) ? 'FAIL' : 'PASS' },
     progression: { status: progressionReport.status },
     duplicateCollapse: { status: duplicateReport.status },
+    productionDepth: { status: productionDepthReport.status, lessonsRebuilt: productionDepthReport.lessonsRebuilt },
   }
   writeJson(join(CORPUS_ROOT, 'reports/gate-report.json'), {
     schemaVersion: '1.0',
@@ -442,6 +479,7 @@ function verify() {
   const attestation = JSON.parse(readFileSync(join(CORPUS_ROOT, 'reports/attestation-rollup.json'), 'utf8'))
   const duplicate = buildDuplicateReport(entries)
   const progression = buildProgressionReport(entries)
+  const productionDepth = buildProductionDepthReport(entries)
   const issues = validateCorpus(entries)
   const counts = gradeCounts(entries)
 
@@ -450,6 +488,7 @@ function verify() {
   if (issues.length) throw new Error(`corpus validation produced ${issues.length} issue(s): ${JSON.stringify(issues.slice(0, 5))}`)
   if (gate.status !== 'PASS' || gate.h3?.status !== 'READY' || gate.h3?.readyCount !== EXPECTED_TOTAL || gate.h3?.notReadyCount !== 0 || gate.h3?.needsHumanReviewCount !== 0) throw new Error('recorded Production Gate H3 result is not 324/324 READY')
   if (duplicate.status !== 'PASS' || progression.status !== 'PASS') throw new Error('duplicate/progression validation failed')
+  if (productionDepth.status !== 'PASS' || productionDepth.lessonsRebuilt !== EXPECTED_TOTAL || productionDepth.approvedAnchor.status !== 'PRESERVED') throw new Error('production-depth validation failed')
   if (attestation.guardianAuthorityCount + attestation.learnerAuthorityCount !== EXPECTED_TOTAL) throw new Error('attestation rollup does not cover all lessons')
   if (!attestation.invariants.guardianHasCorrectSignoff || !attestation.invariants.guardianHasSimulationAlternative || !attestation.invariants.learnerHasNoSignoff || !attestation.invariants.noMediaProofRequired) throw new Error('attestation invariant failed')
   for (const row of ledger.lessons) {
@@ -466,6 +505,8 @@ function verify() {
     learnerAuthorityCount: attestation.learnerAuthorityCount,
     h3: `${gate.h3.readyCount}/${gate.h3.totalLessons} READY`,
     duplicateCheck: duplicate.status,
+    productionDepth: `${productionDepth.lessonsRebuilt}/${EXPECTED_TOTAL} rebuilt`,
+    approvedAnchor: productionDepth.approvedAnchor.status,
   }
 }
 

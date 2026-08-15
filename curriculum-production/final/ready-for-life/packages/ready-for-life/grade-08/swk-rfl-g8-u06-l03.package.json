@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL Grade 8 progression"
+    "Manuel Academy RFL Grade 8 progression",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners add a weekly food plan and a transportation plan to their fictional persona's month, then check both new plans for consistency against the grocery and transportation figures already set in the persona's fictional budget from the previous lesson.",
+  "objective": "I can complete a realistic food and transportation plan task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
@@ -25,66 +26,77 @@
   "safetyNotes": [],
   "simulationAlternative": null,
   "materials": [
-    "paper or a document",
-    "the persona's calendar and budget template from the previous two lessons",
-    "a blank weekly food-plan grid provided on this task sheet"
+    "Embedded resource: swk-rfl-g8-u06-l03-model-card",
+    "Embedded resource: swk-rfl-g8-u06-l03-step-card",
+    "Embedded resource: swk-rfl-g8-u06-l03-guided-card",
+    "Embedded resource: swk-rfl-g8-u06-l03-independent-card",
+    "Embedded resource: swk-rfl-g8-u06-l03-evidence-record",
+    "Embedded resource: swk-rfl-g8-u06-l03-retry-pair",
+    "Embedded resource: swk-rfl-g8-u06-l03-delivered-example",
+    "Embedded resource: swk-rfl-g8-u06-l03-delivered-plan",
+    "Embedded resource: swk-rfl-g8-u06-l03-delivered-template",
+    "learner-local: paper or a document"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before planning a full week, list the persona's transportation options first.",
+      "directions": "Analyze the complete worked example on swk-rfl-g8-u06-l03-model-card before beginning.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "List one or two ways your persona gets around during a typical week (for example, walking, a bicycle, public transit, a ride-share, or a vehicle the persona owns), and note which errands or work blocks each way is used for."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Sketch a simple weekly food plan for the persona across seven days.",
+      "directions": "Complete the fictional coached case on swk-rfl-g8-u06-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I listed at least one meal or grocery item for each of the seven days."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I kept the food plan realistic for someone living independently rather than listing restaurant meals every day."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Check both new plans against the budget figures from the previous lesson and adjust anything that does not fit.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g8-u06-l03-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "extended-response",
-          "text": "Estimate a rough weekly grocery cost from your food plan, multiply it to a monthly figure, and compare it against the persona's $300 fictional grocery category; then do the same for transportation against the $150 fictional transportation category. For any plan that goes over its category, describe one specific change you would make to bring it back in line, and explain your reasoning."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Consider how the food and transportation plans changed your view of the persona's month.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g8-u06-l03-evidence-record; omit or fictionalize private details.",
       "prompts": [
         {
           "ref": "t4-p1",
-          "promptType": "short-response",
+          "promptType": "extended-response",
           "text": "Did adding the food and transportation plans make the persona's month feel more realistic, or did it reveal a problem you had not noticed before? Explain."
         }
       ]
     }
   ],
-  "remediation": "If a learner's cost estimates are wildly off (for example, guessing $50 total groceries for a month), work through one single day's estimate together using rough real-world grocery prices as a reference, then have the learner recalculate the rest of the week using that same per-day estimate.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g8-u06-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g8-u06-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g8-u06-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost. | Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures. Resume at the next unfinished step on swk-rfl-g8-u06-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner redesign the food plan for one week where the persona's fictional work schedule is unusually busy, explaining what changes (more prepared food, fewer cooked meals) and why.",
   "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u06-l03.scoring.json",
   "integrity": {
@@ -92,5 +104,289 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g8-ready-for-life-u06-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic food and transportation plan task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "Up to seven days; use only the check-ins explicitly named in the task",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g8-u06-l03-model-card",
+        "swk-rfl-g8-u06-l03-step-card",
+        "swk-rfl-g8-u06-l03-guided-card",
+        "swk-rfl-g8-u06-l03-independent-card",
+        "swk-rfl-g8-u06-l03-evidence-record",
+        "swk-rfl-g8-u06-l03-retry-pair",
+        "swk-rfl-g8-u06-l03-delivered-example",
+        "swk-rfl-g8-u06-l03-delivered-plan",
+        "swk-rfl-g8-u06-l03-delivered-template"
+      ],
+      "referencedArtifactWords": [
+        "example",
+        "plan",
+        "template"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g8-u06-l03-delivered-example",
+        "swk-rfl-g8-u06-l03-delivered-plan",
+        "swk-rfl-g8-u06-l03-delivered-template"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g8-u06-l03-local-1",
+          "label": "paper or a document",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-model-card",
+        "kind": "model",
+        "title": "food and transportation plan worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
+          "Model move 1: Read the condition and name the exact food and transportation plan decision or action.",
+          "Model move 2: Before planning a full week, list the persona's transportation options first.",
+          "Model move 3: Sketch a simple weekly food plan for the persona across seven days.",
+          "Model check: Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost. | Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "food and transportation plan action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for food and transportation plan.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "food and transportation plan coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
+          "Coach direction: Before planning a full week, list the persona's transportation options first.",
+          "Learner prompt: List one or two ways your persona gets around during a typical week (for example, walking, a bicycle, public transit, a ride-share, or a vehicle the persona owns), and note which errands or work blocks each way is used for.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-independent-card",
+        "kind": "independent-task",
+        "title": "food and transportation plan complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Sketch a simple weekly food plan for the persona across seven days.",
+          "Response 1 (t2-p1): I listed at least one meal or grocery item for each of the seven days.",
+          "Response 2 (t2-p2): I kept the food plan realistic for someone living independently rather than listing restaurant meals every day.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "food and transportation plan minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Did adding the food and transportation plans make the persona's month feel more realistic, or did it reveal a problem you had not noticed before? Explain.",
+          "Success checks: Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost. | Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-retry-pair",
+        "kind": "retry",
+        "title": "food and transportation plan supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g8-u06-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g8-u06-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional food and transportation plan condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost. | Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures..",
+          "Return: resume at the next unfinished step on swk-rfl-g8-u06-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-delivered-example",
+        "kind": "model",
+        "title": "food and transportation plan delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
+          "Use steps: Sketch a simple weekly food plan for the persona across seven days.",
+          "Field 1 (t2-p1): I listed at least one meal or grocery item for each of the seven days.",
+          "Field 2 (t2-p2): I kept the food plan realistic for someone living independently rather than listing restaurant meals every day.",
+          "Check against: Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost. | Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-delivered-plan",
+        "kind": "independent-task",
+        "title": "food and transportation plan delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
+          "Use steps: Sketch a simple weekly food plan for the persona across seven days.",
+          "Field 1 (t2-p1): I listed at least one meal or grocery item for each of the seven days.",
+          "Field 2 (t2-p2): I kept the food plan realistic for someone living independently rather than listing restaurant meals every day.",
+          "Check against: Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost. | Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g8-u06-l03-delivered-template",
+        "kind": "independent-task",
+        "title": "food and transportation plan delivered template",
+        "purpose": "Resolves the lesson's named template so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
+          "Use steps: Sketch a simple weekly food plan for the persona across seven days.",
+          "Field 1 (t2-p1): I listed at least one meal or grocery item for each of the seven days.",
+          "Field 2 (t2-p2): I kept the food plan realistic for someone living independently rather than listing restaurant meals every day.",
+          "Check against: Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost. | Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures."
+        ]
+      }
+    ],
+    "model": {
+      "title": "food and transportation plan worked model",
+      "startingCondition": "Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact food and transportation plan decision or action.",
+        "Model move 2: Before planning a full week, list the persona's transportation options first.",
+        "Model move 3: Sketch a simple weekly food plan for the persona across seven days."
+      ],
+      "reasoning": "The model names the condition, follows the ordered food and transportation plan process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost.",
+        "Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures."
+      ],
+      "resourceRef": "swk-rfl-g8-u06-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for food and transportation plan.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g8-u06-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Building directly onto the persona's existing calendar and budget, the learner sketches what the persona eats across one representative week (a short list of meals or a simple grocery list) and how the persona gets to work, errands, and other blocks across that same week, then checks whether the food plan fits inside the $300 grocery figure and the transportation plan fits inside the $150 transportation figure from the budget template.",
+      "prompt": "List one or two ways your persona gets around during a typical week (for example, walking, a bicycle, public transit, a ride-share, or a vehicle the persona owns), and note which errands or work blocks each way is used for.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g8-u06-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g8-u06-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "food and transportation plan — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g8-u06-l03-independent-card",
+        "directions": "Complete the food and transportation plan task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g8-u06-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Did adding the food and transportation plans make the persona's month feel more realistic, or did it reveal a problem you had not noticed before? Explain.",
+      "observableCriteria": [
+        "Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost.",
+        "Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g8-u06-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g8-u06-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g8-u06-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g8-u06-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Plan completeness: Both plans cover a full week with enough detail to estimate a rough cost. | Budget consistency check: Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g8-u06-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g8-u06-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

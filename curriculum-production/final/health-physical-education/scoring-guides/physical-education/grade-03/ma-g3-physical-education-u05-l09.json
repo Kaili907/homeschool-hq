@@ -5,37 +5,94 @@
   "courseId": "ma-g3-physical-education",
   "grade": 3,
   "subject": "physical-education",
+  "standards": [
+    "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns",
+    "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities"
+  ],
+  "primaryLessonType": "PROJECT_LIFETIME_ACTIVITY",
   "scoringAuthority": "RUBRIC",
   "successCriteria": [
-    "The learner takes part in the task about approach kick and follow-through at a self-selected challenge level.",
-    "The learner uses or names the movement cues for approach kick and follow-through.",
-    "The learner identifies one adjustment or next step. No score, time, count, or measurement is required."
+    "The learner uses a safe setup or accurately describes it for approach kick and follow-through.",
+    "The learner applies Track, soften, control. in one guided attempt and one fresh application or complete described equivalent.",
+    "The learner distinguishes learner-controlled rest from STOP AND TELL and DO NOT RESUME conditions.",
+    "Any seated, supported, reduced-range, reduced-pace, mobility-aid, solo, low-space, no-equipment, or described route earns equal credit for the same cue or decision evidence."
   ],
-  "scoringGuidance": "Score cue use, control, decision-making, and explanation. Never score speed, distance, repetitions, body measurement, or comparison with another learner. Choosing the adapted path, a rest, or an opt-out is never scored as a deficit. Never infer effort, character, or ability from a movement outcome.",
-  "masteryRule": "Do not mark mastery from one attempt. Use observed control, cue use, decision-making, explanation, and applied performance; require accurate independent evidence and successful transfer on at least two separate occasions. Mastery is never determined by speed, distance, repetition count, body measurement, or comparison with another learner.",
-  "remediation": "Return to the simplest version of approach kick and follow-through — slower, closer, larger, or supported — then retry one fresh attempt.",
+  "rubricDimensions": [
+    "Target evidence: applies Track, soften, control..",
+    "Safety and self-management: uses setup, rest, stop, and maximum boundaries correctly.",
+    "Independent application: completes a fresh bounded attempt or equivalent described route.",
+    "Explanation and revision: identifies the cue or decision and a useful next adjustment.",
+    "Access parity: supplies the same target evidence through any approved route."
+  ],
+  "scoringGuidance": "Score safe participation when performed, decision quality, taught cue or skill evidence, planning, knowledge, reflection, revision, and completion as appropriate to the lesson type. Never score weight, appearance, body fat, calories, athletic talent, speed versus peers, body shape, fitness norms, standard-body performance, or willingness to avoid rest. Never reduce credit for adaptation, assistive technology, learner-controlled rest, a safety stop, guardian restriction, or a described route.",
+  "masteryRule": "Require accurate independent evidence of the taught cue, decision, sequence, tactic, or self-management on at least two occasions separated by time, setting, or meaningful variation when feasible. Physical occurrence, attendance, reflection alone, Tutor confidence, standard-route use, body data, speed, or self-report alone when adult confirmation is required cannot establish mastery.",
+  "remediation": "Name the observable gap for approach kick and follow-through. Use the simpler setup, replace the original wording with “Track, soften, control.,” contrast the common error with the correction, practise one bounded change, then use the fresh retry. Offer rest or another route without penalty.",
   "adaptiveRoutes": [
     {
-      "signal": "prerequisite gap",
-      "action": "Return to the simplest version of approach kick and follow-through — slower, closer, larger, or supported — then retry one fresh attempt."
+      "signal": "starting position or setup is unclear",
+      "action": "Freeze in ready, contact, and recovery positions with an imaginary object."
     },
     {
-      "signal": "procedure without understanding",
-      "action": "Ask the learner to name the cue for approach kick and follow-through and say why it works before continuing."
+      "signal": "target cue is missing",
+      "action": "Use the alternate cue “Track, soften, control.,” then model the contrast once."
     },
     {
-      "signal": "correct but low confidence",
-      "action": "Confirm the specific cue the learner executed well for approach kick and follow-through, offer one varied condition, and avoid unnecessary remediation."
+      "signal": "common error appears",
+      "action": "Move closer, use a slower or imaginary object, shorten the motion, and finish toward the target."
     },
     {
-      "signal": "repeated error pattern",
-      "action": "Name the observable movement pattern neutrally, never as a comment on the learner body, effort, or character, contrast it with a demonstration, and schedule short varied practice."
+      "signal": "standard route is unavailable or declined",
+      "action": "Equal-credit no-equipment route: rehearse ready, aim, contact, follow-through, and recovery in slow motion, then draw or describe the intended object path."
     },
     {
-      "signal": "mastery evidence",
-      "action": "Require controlled independent performance of approach kick and follow-through plus an explanation on a later or different occasion before marking it mastered."
+      "signal": "pain, dizziness, unusual breathing difficulty, head impact, injury concern, damaged equipment, or unsafe conditions occur",
+      "action": "Stop immediately and tell a trusted adult. Do not resume to finish evidence; use a described retry later only when appropriate."
+    },
+    {
+      "signal": "fresh retry is needed",
+      "action": "Choose a fresh target or pathway and complete a controlled send/receive sequence while naming the cue used. Use a new safe example rather than repeating the scored attempt."
     }
   ],
+  "protectedDecisionAuthority": [
+    "Target cue or decision: Track, soften, control.",
+    "Acceptable evidence: Notice object path, soft contact, and recovery rather than force or successful outcome alone.",
+    "Safety-critical boundary: No hard object, full-force send, strike toward a person, or movement outside the cleared boundary.",
+    "Every approved adaptation is equivalent when it supplies the same target evidence.",
+    "A Tutor cannot claim observation, certify physical completion, replace guardian permission, diagnose, prescribe, or clear return."
+  ],
+  "sufficientEvidence": "One guided response, one fresh bounded application or described equivalent, and one cue/decision explanation for approach kick and follow-through. A safety stop is responsible evidence treatment, not failure.",
+  "guardianAuthority": {
+    "level": "GUARDIAN_PERMISSION",
+    "when": "Guardian permission is required before real movement, optional equipment, a real location, partner, outdoor route, or progression is used.",
+    "requiredAction": "The guardian confirms that the bounded space, optional equipment, and activity route are permitted before movement.",
+    "minimumRecord": "Record only permission status or that the equal-credit described route was used; collect no body, health, media, location, or performance data.",
+    "confirmationBoundary": "Guardian confirmation may establish permission or occurrence only. It does not certify academic mastery, physical quality, diagnosis, effort, body status, or safe return.",
+    "equalCreditAlternative": "When guardian review, real movement, equipment, space, partner, or location is unavailable, the supplied solo described/decision route is the complete equal-credit lesson.",
+    "tutorOrLearnerMaySubstitute": false
+  },
+  "evidenceTypes": [
+    "SKILL_EVIDENCE",
+    "SAFE_PARTICIPATION",
+    "CUE_KNOWLEDGE",
+    "REFLECTION"
+  ],
+  "tutorBoundary": {
+    "scope": "CURRICULUM_METADATA_ONLY",
+    "may": [
+      "explain approved content and vocabulary",
+      "cue the approved model",
+      "offer an approved presentation or activity route",
+      "coach how the learner presents their own evidence",
+      "route to rest, stop, retry, or adult handoff"
+    ],
+    "mustNot": [
+      "cannot diagnose, prescribe, rehabilitate, or give medical clearance",
+      "cannot claim unapproved observation or certify physical completion",
+      "cannot override rest, stop, adaptation, guardian authority, professional authority, or safe return",
+      "cannot choose the answer or action for fresh independent evidence",
+      "cannot score body data, norms, appearance, talent, or peer comparison"
+    ]
+  },
   "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, the guardian safety confirmation for equipment and environment, and the next instructional step. Do not expose recordings, images, body data, or health information. Study records completion and progress metadata only; it does not perform or persist physical measurement or fitness tracking.",
   "guardianSafetyReview": {
     "equipment": "Soft, lightweight balls, beanbags, or rolled socks. No hard, heavy, or fast-moving balls indoors.",
@@ -56,7 +113,8 @@
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
-    "sourceLessonId": "ma-g3-physical-education-u05-l09"
+    "sourceLessonId": "ma-g3-physical-education-u05-l09",
+    "productionDepthRevision": "physical-education-production-depth-r1"
   },
   "productionReadiness": {
     "status": "READY",

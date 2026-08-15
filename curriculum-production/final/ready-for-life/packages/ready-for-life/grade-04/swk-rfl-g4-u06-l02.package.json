@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners break the contribution they chose in the previous lesson into at least four ordered steps and list the specific materials, information, or household help each step requires, producing a written step-by-step plan they will use to carry out the project later in this unit.",
+  "objective": "I can practice planning steps and materials. I will do one step at a time and check one result.",
   "scenario": "Using the contribution you chose in the previous lesson, you now build the specific plan for it: what needs to happen first, second, and so on, and what you need on hand for each step, so that day four's carry-out work follows a clear order instead of being figured out on the spot.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -25,65 +26,66 @@
   "safetyNotes": [],
   "simulationAlternative": null,
   "materials": [
-    "paper or a notes app",
-    "the contribution choice recorded in the previous lesson"
+    "Embedded resource: swk-rfl-g4-u06-l02-model-card",
+    "Embedded resource: swk-rfl-g4-u06-l02-step-card",
+    "Embedded resource: swk-rfl-g4-u06-l02-guided-card",
+    "Embedded resource: swk-rfl-g4-u06-l02-independent-card",
+    "Embedded resource: swk-rfl-g4-u06-l02-evidence-record",
+    "Embedded resource: swk-rfl-g4-u06-l02-retry-pair",
+    "Embedded resource: swk-rfl-g4-u06-l02-delivered-plan",
+    "learner-local: paper or a notes app",
+    "learner-local: the contribution choice recorded in the previous lesson"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Picture your chosen contribution from start to finish before writing any steps.",
+      "directions": "Open swk-rfl-g4-u06-l02-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Describe in one or two sentences what your contribution will look like when it is finished."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Break your contribution into at least four ordered steps, from the very first thing you will do to the very last.",
+      "directions": "Open swk-rfl-g4-u06-l02-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I listed at least four steps in the order I will actually do them."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "Each step describes one specific action, not a vague stage like 'get started.'"
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "I checked that no step depends on something that is supposed to happen later, out of order."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "For each step in your plan, list the specific materials, information, or help from another household member you will need, then mark which of those you already have on hand and which you still need to gather or ask about before the carry-out day later this week.",
+      "directions": "Open swk-rfl-g4-u06-l02-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "short-response",
-          "text": "List the materials or help each step requires, and mark which ones you still need to gather or ask about."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
         },
         {
           "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Which single step in your plan needs the most materials or preparation, and why does it need more than the others?"
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Look at your whole ordered plan.",
+      "directions": "Open swk-rfl-g4-u06-l02-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -93,7 +95,7 @@
       ]
     }
   ],
-  "remediation": "If a learner's steps are really one big step split into fake pieces (for example 'start,' 'keep going,' 'finish'), reteach by having them narrate out loud what their hands would be doing at each point in the contribution, writing down each new physical action as its own step.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g4-u06-l02-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g4-u06-l02-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g4-u06-l02-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later. | Materials and resource identification: Each step lists its specific materials or help, correctly marked as on-hand or still needed. Resume at the next unfinished step on swk-rfl-g4-u06-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner add a rough time estimate for each step and total it, then compare that total to how much time they realistically expect to have on the carry-out day.",
   "scoringRef": "scoring/swk-rfl-g4-u06-l02.scoring.json",
   "integrity": {
@@ -101,5 +103,263 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
     "sourceLessonId": "ma-g4-ready-for-life-u06-l02",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can practice planning steps and materials. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "Up to seven days; use only the check-ins explicitly named in the task",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g4-u06-l02-model-card",
+        "swk-rfl-g4-u06-l02-step-card",
+        "swk-rfl-g4-u06-l02-guided-card",
+        "swk-rfl-g4-u06-l02-independent-card",
+        "swk-rfl-g4-u06-l02-evidence-record",
+        "swk-rfl-g4-u06-l02-retry-pair",
+        "swk-rfl-g4-u06-l02-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g4-u06-l02-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g4-u06-l02-local-1",
+          "label": "paper or a notes app",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u06-l02-local-2",
+          "label": "the contribution choice recorded in the previous lesson",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g4-u06-l02-model-card",
+        "kind": "model",
+        "title": "planning steps and materials worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Using the contribution you chose in the previous lesson, you now build the specific plan for it: what needs to happen first, second, and so on, and what you need on hand for each step, so that day four's carry-out work follows a clear order instead of being figured out on the spot.",
+          "Model move 1: Read the condition and name the exact planning steps and materials decision or action.",
+          "Model move 2: Picture your chosen contribution from start to finish before writing any steps.",
+          "Model move 3: Break your contribution into at least four ordered steps, from the very first thing you will do to the very last.",
+          "Model check: Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later. | Materials and resource identification: Each step lists its specific materials or help, correctly marked as on-hand or still needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l02-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "planning steps and materials action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for planning steps and materials.",
+          "2. Watch the worked move on swk-rfl-g4-u06-l02-model-card.",
+          "3. Do one coached move on swk-rfl-g4-u06-l02-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g4-u06-l02-independent-card.",
+          "5. Save the small record on swk-rfl-g4-u06-l02-evidence-record; use swk-rfl-g4-u06-l02-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l02-guided-card",
+        "kind": "guided-practice",
+        "title": "planning steps and materials coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Using the contribution you chose in the previous lesson, you now build the specific plan for it: what needs to happen first, second, and so on, and what you need on hand for each step, so that day four's carry-out work follows a clear order instead of being figured out on the spot.",
+          "Coach direction: Picture your chosen contribution from start to finish before writing any steps.",
+          "Learner prompt: Describe in one or two sentences what your contribution will look like when it is finished.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l02-independent-card",
+        "kind": "independent-task",
+        "title": "planning steps and materials complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Break your contribution into at least four ordered steps, from the very first thing you will do to the very last.",
+          "Response 1 (t2-p1): I listed at least four steps in the order I will actually do them.",
+          "Response 2 (t2-p2): Each step describes one specific action, not a vague stage like 'get started.'",
+          "Response 3 (t2-p3): I checked that no step depends on something that is supposed to happen later, out of order.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l02-evidence-record",
+        "kind": "evidence-record",
+        "title": "planning steps and materials minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain which step you think could most easily go wrong or get skipped, and what you will do to make sure it doesn't.",
+          "Success checks: Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later. | Materials and resource identification: Each step lists its specific materials or help, correctly marked as on-hand or still needed.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l02-retry-pair",
+        "kind": "retry",
+        "title": "planning steps and materials supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g4-u06-l02-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g4-u06-l02-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional planning steps and materials condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later. | Materials and resource identification: Each step lists its specific materials or help, correctly marked as on-hand or still needed..",
+          "Return: resume at the next unfinished step on swk-rfl-g4-u06-l02-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l02-delivered-plan",
+        "kind": "independent-task",
+        "title": "planning steps and materials delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Using the contribution you chose in the previous lesson, you now build the specific plan for it: what needs to happen first, second, and so on, and what you need on hand for each step, so that day four's carry-out work follows a clear order instead of being figured out on the spot.",
+          "Use steps: Break your contribution into at least four ordered steps, from the very first thing you will do to the very last.",
+          "Field 1 (t2-p1): I listed at least four steps in the order I will actually do them.",
+          "Field 2 (t2-p2): Each step describes one specific action, not a vague stage like 'get started.'",
+          "Field 3 (t2-p3): I checked that no step depends on something that is supposed to happen later, out of order.",
+          "Check against: Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later. | Materials and resource identification: Each step lists its specific materials or help, correctly marked as on-hand or still needed."
+        ]
+      }
+    ],
+    "model": {
+      "title": "planning steps and materials worked model",
+      "startingCondition": "Using the contribution you chose in the previous lesson, you now build the specific plan for it: what needs to happen first, second, and so on, and what you need on hand for each step, so that day four's carry-out work follows a clear order instead of being figured out on the spot.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact planning steps and materials decision or action.",
+        "Model move 2: Picture your chosen contribution from start to finish before writing any steps.",
+        "Model move 3: Break your contribution into at least four ordered steps, from the very first thing you will do to the very last."
+      ],
+      "reasoning": "The model names the condition, follows the ordered planning steps and materials process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later.",
+        "Materials and resource identification: Each step lists its specific materials or help, correctly marked as on-hand or still needed."
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l02-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for planning steps and materials.",
+        "2. Watch the worked move on swk-rfl-g4-u06-l02-model-card.",
+        "3. Do one coached move on swk-rfl-g4-u06-l02-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g4-u06-l02-independent-card.",
+        "5. Save the small record on swk-rfl-g4-u06-l02-evidence-record; use swk-rfl-g4-u06-l02-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l02-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Using the contribution you chose in the previous lesson, you now build the specific plan for it: what needs to happen first, second, and so on, and what you need on hand for each step, so that day four's carry-out work follows a clear order instead of being figured out on the spot.",
+      "prompt": "Describe in one or two sentences what your contribution will look like when it is finished.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g4-u06-l02-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g4-u06-l02-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "planning steps and materials — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g4-u06-l02-independent-card",
+        "directions": "Complete the planning steps and materials task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g4-u06-l02-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain which step you think could most easily go wrong or get skipped, and what you will do to make sure it doesn't.",
+      "observableCriteria": [
+        "Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later.",
+        "Materials and resource identification: Each step lists its specific materials or help, correctly marked as on-hand or still needed."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l02-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g4-u06-l02-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g4-u06-l02-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g4-u06-l02-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Step sequencing: At least four specific, correctly ordered steps are listed, with no step depending on something meant to happen later. | Materials and resource identification: Each step lists its specific materials or help, correctly marked as on-hand or still needed.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g4-u06-l02-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g4-u06-l02-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }
