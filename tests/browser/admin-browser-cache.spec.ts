@@ -4,19 +4,38 @@ const DRAFT = '10000000-0000-4000-8000-000000000001'
 const SESSION_KEY = 'sb-example-auth-token'
 const ROUTES = [
   ['/academy/admin', 'Academy overview'],
+  ['/academy/admin/attention', 'Attention Center'],
   ['/academy/admin/learners', 'Learner Operations'],
+  ['/academy/admin/engines', 'Tutor Engine Performance'],
   ['/academy/admin/costs', 'AI & Costs'],
+  ['/academy/admin/costs/provider-pricing', 'Provider Pricing'],
+  ['/academy/admin/safety', 'Safety Operations'],
+  ['/academy/admin/curriculum', 'Curriculum'],
   ['/academy/admin/audit-log', 'Audit Log'],
   ['/academy/admin/correlations', 'Incident Explorer'],
+  ['/academy/admin/health', 'System Health'],
+  ['/academy/admin/study-operations', 'Study Operations'],
   ['/academy/admin/configuration', 'Configuration'],
   ['/academy/admin/access', 'Access & Permissions'],
   ['/academy/admin/production-readiness', 'Production Readiness'],
   ['/academy/admin/curriculum/studio', 'Curriculum Studio'],
+  ['/academy/admin/curriculum/integrity', 'Curriculum Release Integrity / Provenance'],
+  ['/academy/admin/curriculum/validation', 'Curriculum Validation'],
+  ['/academy/admin/curriculum/standards-review', 'Curriculum Standards Review'],
   [`/academy/admin/curriculum/preview?draft=${DRAFT}&revision=7`, 'Curriculum Preview / Diff'],
   [`/academy/admin/curriculum/studio?draft=${DRAFT}&revision=7#curriculum-release-staging`, 'Curriculum Studio'],
   [`/academy/admin/curriculum/studio?draft=${DRAFT}&revision=7#curriculum-release-publishing`, 'Curriculum Studio'],
   ['/academy/admin/curriculum/activation', 'Curriculum Activation & Rollback'],
   ['/academy/admin/curriculum/history', 'Curriculum Release History & Governance'],
+  ['/academy/admin/high-school-program', 'High School Program'],
+] as const
+
+const REQUIRED_VIEWPORTS = [1440, 1280, 1024, 900, 768, 600, 390] as const
+const SHELL_DESTINATIONS = [
+  'Attention Center', 'Overview', 'Learners', 'Curriculum', 'High School Program',
+  'Engine Performance', 'AI & Costs', 'Safety', 'Study Operations', 'System Health',
+  'Incident Explorer', 'Configuration', 'Audit Log', 'Access & Permissions',
+  'Production Readiness',
 ] as const
 
 function base64Url(value: unknown) {
@@ -179,6 +198,42 @@ test('back and forward navigation revalidates and restores the correct route', a
   await expect(adminPageTitle(page)).toHaveText('Learner Operations')
   await page.goForward()
   await expect(adminPageTitle(page)).toHaveText('AI & Costs')
+})
+
+test('shell navigation stays reachable, focused, and overflow-free at required widths', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'chromium', 'One Chromium pass covers the explicit responsive matrix')
+  await seedSession(page)
+
+  for (const width of REQUIRED_VIEWPORTS) {
+    await page.setViewportSize({ width, height: width <= 600 ? 844 : 900 })
+    await page.goto('/academy/admin')
+    await expect(adminPageTitle(page)).toHaveText('Academy overview')
+    await expect(page.locator('.admin-sidebar nav')).toHaveAccessibleName('Admin sections')
+    for (const destination of SHELL_DESTINATIONS) {
+      await expect(page.getByRole('button', { name: destination, exact: true })).toHaveCount(1)
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true)
+
+    const readiness = page.getByRole('button', { name: 'Production Readiness', exact: true })
+    await readiness.scrollIntoViewIfNeeded()
+    await readiness.focus()
+    await expect(readiness).toBeFocused()
+    await readiness.click()
+    await expect(adminPageTitle(page)).toHaveText('Production Readiness')
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true)
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/academy/admin')
+  await expect(adminPageTitle(page)).toHaveText('Academy overview')
+  await page.evaluate(() => {
+    document.body.tabIndex = -1
+    document.body.focus()
+  })
+  await page.keyboard.press('Tab')
+  await expect(page.locator('.admin-skip-link')).toBeFocused()
+  await page.keyboard.press('Enter')
+  await expect(page.locator('#admin-main')).toBeFocused()
 })
 
 test('offline transition hides protected state and online recovery reauthorizes', async ({ page, context, request }, testInfo) => {

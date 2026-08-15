@@ -76,7 +76,7 @@ import { readSystemHealth, type SystemHealthReadState } from '../../admin/system
 import type { SystemHealthWindow } from '../../admin/systemHealth'
 import { readAdminStudyOperations } from '../../admin/studyOperationsHttpSource'
 import type { StudyOperationsReadState } from '../../admin/studyOperationsModel'
-import { AdminConsole, AdminShell } from './AdminConsole'
+import { AdminConsole, AdminShell, type AdminNavId } from './AdminConsole'
 import { AdminCostsDashboard } from './AdminCostsDashboard'
 import { AdminProviderPricingDashboard } from './AdminProviderPricingDashboard'
 import { LearnerAnalytics } from './LearnerAnalytics'
@@ -130,6 +130,7 @@ export type AdminRouteSection = AdminSection
   | 'curriculum-activation'
   | 'curriculum-history'
   | 'provider-pricing'
+  | 'high-school-program'
   | 'unknown'
 
 const ENGINE_PAGE_LABELS: Readonly<Record<AdminEngineId, string>> = {
@@ -177,6 +178,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (suffix.startsWith('engines/')) return adminRouteEngine(pathname) ? 'engines' : 'unknown'
   if (suffix === 'production-readiness' || suffix === 'readiness') return 'releases'
   if (suffix === 'correlations') return 'incidents'
+  if (suffix === 'high-school-program') return 'high-school-program'
   const section = suffix.split('/')[0]
   return [
     'learners', 'engines', 'costs', 'curriculum', 'safety', 'system-health', 'study-operations',
@@ -813,7 +815,7 @@ export function AdminConsoleRoute() {
     return () => window.removeEventListener('popstate', onPopState)
   }, [beginAuthorizationRefresh, pathname, search])
 
-  function navigate(next: AdminSection) {
+  function navigate(next: AdminNavId) {
     if (section === 'configuration' && configurationDirty
       && !window.confirm('Discard unsaved configuration changes?')) return
     if (!requestCurriculumStudioNavigation()) return
@@ -953,7 +955,7 @@ export function AdminConsoleRoute() {
     )
   }
 
-  const activeSection: AdminSection = (
+  const activeSection: AdminNavId = (
     section === 'curriculum-studio'
     || section === 'curriculum-integrity'
     || section === 'curriculum-validation'
@@ -964,16 +966,17 @@ export function AdminConsoleRoute() {
   )
     ? 'curriculum'
     : section === 'provider-pricing' ? 'costs'
+    : section === 'high-school-program' ? 'high-school-program'
     : section === 'unknown' ? 'overview' : section
   const title = section === 'curriculum-studio'
     ? 'Curriculum Studio'
     : section === 'curriculum-integrity' ? 'Curriculum Release Integrity / Provenance'
-    : section === 'curriculum-validation' ? 'Curriculum validation'
+    : section === 'curriculum-validation' ? 'Curriculum Validation'
       : section === 'curriculum-preview' ? 'Curriculum Preview / Diff'
-        : section === 'curriculum-standards-review' ? 'Curriculum standards review'
+        : section === 'curriculum-standards-review' ? 'Curriculum Standards Review'
           : section === 'curriculum-activation' ? 'Curriculum Activation & Rollback'
             : section === 'curriculum-history' ? 'Curriculum Release History & Governance'
-              : section === 'attention' ? 'Admin Attention Center'
+              : section === 'attention' ? 'Attention Center'
                 : section === 'system-health' ? 'System Health'
                   : section === 'engines' ? `${ENGINE_PAGE_LABELS[selectedEngine]} Engine Performance`
                     : section === 'study-operations' ? 'Study Operations'
@@ -986,6 +989,7 @@ export function AdminConsoleRoute() {
                               : section === 'access' ? 'Access & Permissions'
                                 : section === 'configuration' ? 'Configuration'
                                   : section === 'curriculum' ? 'Curriculum'
+                                    : section === 'high-school-program' ? 'High School Program'
                                       : section === 'releases' ? 'Production Readiness' : 'Admin section unavailable'
 
   return (
@@ -1217,7 +1221,8 @@ export function AdminConsoleRoute() {
             onRetry={() => setReadinessRetry((value) => value + 1)}
           />
         )}
-        {!['attention', 'learners', 'engines', 'costs', 'provider-pricing', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-integrity', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'curriculum-activation', 'curriculum-history', 'system-health', 'study-operations', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
+        {section === 'high-school-program' && <HighSchoolProgramPlaceholder />}
+        {!['attention', 'learners', 'engines', 'costs', 'provider-pricing', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-integrity', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'curriculum-activation', 'curriculum-history', 'system-health', 'study-operations', 'incidents', 'configuration', 'audit-log', 'access', 'releases', 'high-school-program'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h2 className="text-2xl font-bold">Admin section unavailable</h2>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>
@@ -1229,6 +1234,23 @@ export function AdminConsoleRoute() {
 
 function requestCurriculumStudioNavigation(): boolean {
   return window.dispatchEvent(new Event(CURRICULUM_STUDIO_NAVIGATION_REQUEST, { cancelable: true }))
+}
+
+// DASH-7 reserves the High School Program shell slot for DASH-4. Until that
+// workspace lands the mount point renders a visible read-only placeholder so
+// operators can find the location without inventing surrogate data.
+function HighSchoolProgramPlaceholder() {
+  return (
+    <section role="status" aria-labelledby="admin-hs-program-title" className="admin-panel">
+      <p className="admin-eyebrow">Reserved workspace</p>
+      <h2 id="admin-hs-program-title">High School Program</h2>
+      <p className="admin-disclosure">
+        This is the reserved mount point for the High School Program admin workspace.
+        The DASH-4 build will attach the read-only projections and controls here.
+        No substitute data is shown while the mount is empty.
+      </p>
+    </section>
+  )
 }
 
 function costRangeMatches(

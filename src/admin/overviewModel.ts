@@ -30,6 +30,11 @@ export const ADMIN_SECTIONS = [
 
 export type AdminSection = (typeof ADMIN_SECTIONS)[number]
 
+// DASH-7: reserved shell mount point for the DASH-4 High School Program
+// workspace. Kept separate from AdminSection so ADMIN-0 read projections stay
+// unchanged; only navigation and shell rendering are aware of this slot.
+export type AdminShellMount = AdminSection | 'high-school-program'
+
 export const OVERVIEW_PRESETS = ['today', '7-days', '30-days', 'school-year'] as const
 export type OverviewPreset = (typeof OVERVIEW_PRESETS)[number]
 
@@ -211,7 +216,7 @@ export type AdminConsoleProps =
       readonly selectedRange: OverviewRange
       readonly onRangeChange: (range: OverviewRange) => void
       readonly onRetry?: () => void
-      readonly onNavigate?: (section: AdminSection) => void
+      readonly onNavigate?: (section: AdminShellMount) => void
     }
 
 export function hasOverviewReadCapability(authorization: ServerResolvedAdminAuthorization): boolean {
