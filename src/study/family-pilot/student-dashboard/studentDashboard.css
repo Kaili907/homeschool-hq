@@ -82,6 +82,9 @@
 .family-dashboard__mission { position: relative; min-height: 242px; overflow: hidden; border: 1px solid rgba(255, 180, 93, 0.4); border-radius: 19px; padding: clamp(24px, 4vw, 34px); background: linear-gradient(122deg, #231b16 0%, #241b15 48%, #182434 100%); box-shadow: 0 20px 52px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06); }
 .family-dashboard__mission--no-work { border-color: var(--family-dashboard-border); background: linear-gradient(145deg, rgba(27, 40, 60, 0.9), rgba(14, 22, 34, 0.9)); }
 .family-dashboard__mission--course-complete { border-color: rgba(95, 224, 168, 0.55); background: linear-gradient(135deg, rgba(13, 62, 52, 0.96), rgba(13, 38, 45, 0.94) 58%, rgba(19, 37, 57, 0.96)); }
+.family-dashboard__mission--day-complete { border-color: rgba(96, 211, 158, 0.48); background: linear-gradient(122deg, #10251d 0%, #14251f 48%, #182434 100%); }
+.family-dashboard__mission--no-school { border-color: rgba(159, 190, 248, 0.42); background: linear-gradient(145deg, rgba(20, 40, 66, 0.92), rgba(14, 22, 34, 0.9)); }
+.family-dashboard__mission--waiting-on-parent { border-color: rgba(255, 199, 111, 0.48); }
 .family-dashboard__mission--safety-blocked,
 .family-dashboard__mission--storage-unavailable { border-color: rgba(255, 145, 122, 0.48); background: linear-gradient(122deg, #2a1718 0%, #22191a 48%, #182434 100%); }
 .family-dashboard__mission--guardian-pending,

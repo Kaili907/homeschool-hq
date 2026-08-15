@@ -96,13 +96,18 @@ export function StudentDashboard({
   const mission = model.mission
   const canOpenMission = Boolean(mission.workRef && mission.actionLabel)
   const initial = (model.student.avatarInitial || model.student.displayName.charAt(0) || '?').toUpperCase()
+  const missionDescriptionIds = [
+    'family-dashboard-mission-status',
+    ...(mission.description ? ['family-dashboard-mission-description'] : []),
+  ].join(' ')
+  const todayCount = model.dayStatus?.requiredCount ?? model.todayItems.length
 
   return (
     <div className="family-dashboard">
       <a className="family-dashboard__skip" href="#family-dashboard-mission">Skip to today&rsquo;s work</a>
       <div className="family-dashboard__ambient family-dashboard__ambient--one" aria-hidden="true" />
       <div className="family-dashboard__ambient family-dashboard__ambient--two" aria-hidden="true" />
-      <main className="family-dashboard__shell" data-mission-state={mission.state}>
+      <main className="family-dashboard__shell" data-mission-state={mission.state} data-day-state={model.dayStatus?.state}>
         <header className="family-dashboard__topbar">
           <div className="family-dashboard__identity">
             <span className="family-dashboard__mark" aria-hidden="true">{initial}</span>
@@ -129,13 +134,13 @@ export function StudentDashboard({
 
         <div className="family-dashboard__primary-grid">
           <div className="family-dashboard__daily-area">
-            <section id="family-dashboard-mission" className={`family-dashboard__mission family-dashboard__mission--${mission.state}`} aria-labelledby="family-dashboard-mission-heading">
+            <section id="family-dashboard-mission" className={`family-dashboard__mission family-dashboard__mission--${mission.state}`} aria-labelledby="family-dashboard-mission-heading" aria-describedby={missionDescriptionIds}>
               <div className="family-dashboard__mission-glow" aria-hidden="true" />
               <p className="family-dashboard__eyebrow">{mission.eyebrow}</p>
               <h2 id="family-dashboard-mission-heading">{mission.title}</h2>
               {mission.context ? <p className="family-dashboard__mission-context">{mission.context}</p> : null}
-              <p className="family-dashboard__mission-status">{mission.statusLabel}</p>
-              {mission.description ? <p className="family-dashboard__mission-description">{mission.description}</p> : null}
+              <p id="family-dashboard-mission-status" className="family-dashboard__mission-status">{mission.statusLabel}</p>
+              {mission.description ? <p id="family-dashboard-mission-description" className="family-dashboard__mission-description">{mission.description}</p> : null}
               {canOpenMission ? (
                 <button type="button" className="family-dashboard__button-primary" onClick={() => onOpenWork(mission.workRef!)}>
                   {mission.actionLabel}<span aria-hidden="true">→</span>
@@ -146,7 +151,7 @@ export function StudentDashboard({
             <section className="family-dashboard__today family-dashboard__panel" aria-labelledby="family-dashboard-today-heading">
               <div className="family-dashboard__section-heading">
                 <div><p className="family-dashboard__eyebrow">Today&rsquo;s sequence</p><h2 id="family-dashboard-today-heading">Today&rsquo;s work</h2></div>
-                <span>{model.todayItems.length} {model.todayItems.length === 1 ? 'item' : 'items'}</span>
+                <span>{todayCount} {todayCount === 1 ? 'item' : 'items'}</span>
               </div>
               {model.todayItems.length ? (
                 <ol className="family-dashboard__timeline">

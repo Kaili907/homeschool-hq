@@ -1,6 +1,10 @@
 export type StudentDashboardMissionState =
   | 'no-work'
   | 'course-complete'
+  | 'day-complete'
+  | 'no-school'
+  | 'waiting-on-parent'
+  | 'work-remaining'
   | 'lesson-ready'
   | 'continue-lesson'
   | 'assessment-pending'
@@ -65,6 +69,25 @@ export interface StudentDashboardQuickTool {
   readonly description?: string
 }
 
+export type StudentDashboardDayState =
+  | 'complete'
+  | 'no-school'
+  | 'waiting-on-parent'
+  | 'waiting-for-assessment'
+  | 'unfinished'
+  | 'needs-plan'
+
+/** Factual school-day counts. These are counts, never inferred percentages. */
+export interface StudentDashboardDayStatus {
+  readonly state: StudentDashboardDayState
+  readonly requiredCount: number
+  readonly completedCount: number
+  readonly remainingCount: number
+  readonly waitingOnParentCount: number
+  readonly carryForwardCount: number
+  readonly assessmentCount: number
+}
+
 export interface StudentDashboardModel {
   readonly student: {
     readonly displayName: string
@@ -73,6 +96,8 @@ export interface StudentDashboardModel {
   readonly periodEyebrow: string
   readonly periodLabel: string
   readonly progressLabel: string
+  /** Present when the Auto Planner host has supplied school-day authority. */
+  readonly dayStatus?: StudentDashboardDayStatus
   readonly mission: StudentDashboardMission
   readonly todayItems: readonly StudentDashboardWorkItem[]
   readonly todayEmptyLabel?: string
