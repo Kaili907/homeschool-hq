@@ -139,6 +139,11 @@
       "type": "string",
       "minLength": 1
     },
+    "lesson_type": {
+      "description": "Technology production-depth lesson family after combining content type with the lesson's work mode.",
+      "type": "string",
+      "minLength": 3
+    },
     "task_label": {
       "type": "string",
       "minLength": 1
@@ -416,6 +421,41 @@
           "type": "object"
         }
       }
+    },
+    "learner_experience": {
+      "description": "Static Technology teaching sequence with analogous instruction and protected independent evidence.",
+      "type": "object",
+      "required": [
+        "experience_version",
+        "static_complete",
+        "tutor_required",
+        "sequence_policy",
+        "learning_targets",
+        "concept_teaching",
+        "worked_example",
+        "guided_task",
+        "remediation_routes",
+        "fresh_mastery_check"
+      ],
+      "properties": {
+        "experience_version": { "type": "string", "minLength": 10 },
+        "static_complete": { "const": true },
+        "tutor_required": { "const": false },
+        "sequence_policy": { "type": "string", "minLength": 80 },
+        "learning_targets": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "concept_teaching": { "type": "object" },
+        "worked_example": {
+          "type": "object",
+          "required": ["relationship_to_protected_tasks", "evidence_eligible"],
+          "properties": {
+            "relationship_to_protected_tasks": { "const": "ANALOGOUS_NON_TARGET" },
+            "evidence_eligible": { "const": false }
+          }
+        },
+        "guided_task": { "type": "object" },
+        "remediation_routes": { "type": "array", "minItems": 2 },
+        "fresh_mastery_check": { "type": "object" }
+      }
     }
   },
   "allOf": [
@@ -430,7 +470,8 @@
       "then": {
         "required": [
           "test_or_check_criteria",
-          "activity_setup"
+          "activity_setup",
+          "learner_experience"
         ],
         "not": {
           "required": [

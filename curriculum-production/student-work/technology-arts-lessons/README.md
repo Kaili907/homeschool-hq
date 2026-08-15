@@ -84,6 +84,26 @@ probing, scanning, or accessing any live, production, school, or third-party
 system, or bypassing any filter, licence, access control, or terms of service.
 No credential-shaped literal appears anywhere in the corpus.
 
+Every one of the 336 Technology packages also carries a static, tutor-free
+`learner_experience`: explicit concept teaching, a fully worked analogous
+non-target example, guided practice with a stated support fade, protected
+independent work, a six-move debugging/revision cycle, two representation-
+changing remediation routes, and a fresh mastery check. Code/debug,
+algorithm, design, digital-citizenship/safety, data, systems, creation/project,
+analysis, and review/mastery lessons keep distinct instructional lenses rather
+than being forced into one programming template. Exact protected resolutions
+and accepted evidence models live only in the matching scoring guide under
+`trusted_solution_reference` with `learner_visibility: NEVER`.
+
+The Director-approved `ma-g10-technology-u02-l05` experience is a canonical
+source anchor under `src/approved-anchors/`; regeneration reproduces that task
+package and scoring guide exactly. The independent production-depth audit
+checks the complete Technology corpus, verifies that every worked example is
+marked `ANALOGOUS_NON_TARGET`, compares generated anchor output with its
+approved source, and scans learner packages against adult-only reference
+implementations and decisive repairs. Its current result is 336/336 depth-
+complete lessons and zero current learner solution leaks.
+
 Where an authored lesson's focus is itself an attack concept — grade 7 unit 5
 covers `phishing and social engineering` — student-facing prose renders it
 defensively ("recognising and defending against …") so no task reads as an
@@ -140,6 +160,10 @@ node tests/schema-check.mjs
 
 ```bash
 node tests/technology-actionability-audit.mjs
+```
+
+```bash
+node tests/technology-production-depth-audit.mjs
 ```
 
 ```bash

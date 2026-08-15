@@ -32,6 +32,9 @@ function buildCodeCase(lesson) {
       observed: 'The code checks visible text instead of the label field, so it reports 0 missing labels when one label is missing.',
       target: 'Change the field used by the filter, explain why visible text and an accessible label are separate data, and rerun all three tests.',
       passing: 'The filter checks control.label; the three tests return 1, 0, and 0.',
+      fixedCode: `function countMissingLabels(controls) {
+  return controls.filter((control) => control.label.trim().length === 0).length;
+}`,
     }
   }
   if (/object|class|encapsulation|inheritance|module|interface|state and data flow/.test(focus)) {
@@ -48,6 +51,9 @@ function buildCodeCase(lesson) {
       observed: 'The add method replaces the stored state instead of composing the new amount with the prior state, so the supplied calls end at 3 instead of 5.',
       target: 'Repair the state update inside add, explain the role of the existing instance value, and rerun all three tests.',
       passing: 'The update combines this.value with amount; the three tests return 5, 0, and 3.',
+      fixedCode: `add(amount) {
+  this.value = this.value + amount;
+}`,
     }
   }
   if (/graph|traversal|search|sort|recursion|complexity|correctness|invariant|greedy|dynamic programming|heuristic/.test(focus)) {
@@ -64,6 +70,13 @@ function buildCodeCase(lesson) {
       observed: 'Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.',
       target: 'Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.',
       passing: 'Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.',
+      fixedCode: `function greatest(values) {
+  let best = values[0];
+  for (const value of values) {
+    if (value > best) best = value;
+  }
+  return best;
+}`,
     }
   }
   if (/concurr|race|thread|process|cache|profil|performance|memory model|resource limit|reliability|failure/.test(focus)) {
@@ -80,6 +93,11 @@ function buildCodeCase(lesson) {
       observed: 'Each update recomputes from the original start value, discarding earlier updates, so the supplied case returns 2 instead of 4.',
       target: 'Replace the stale-state dependency with the current state, explain the update order, and rerun all three tests.',
       passing: 'Each assignment uses current + delta; the tests return 4, 5, and 5.',
+      fixedCode: `function applyUpdates(start, deltas) {
+  let current = start;
+  for (const delta of deltas) current = current + delta;
+  return current;
+}`,
     }
   }
   if (/query|schema|database|array|list\b|dictionar|stack|queue|record|data type|type conversion/.test(focus)) {
@@ -96,6 +114,9 @@ function buildCodeCase(lesson) {
       observed: 'The selection is correct, but the aggregation subtracts each selected value, so the supplied records return -6 instead of 6.',
       target: 'Repair the aggregation operator, explain the selected rows and accumulator state, and rerun all three tests.',
       passing: 'The reducer uses total + record.value; the tests return 6, 0, and 0.',
+      fixedCode: `function summarize(records) {
+  return records.filter((record) => record.active).reduce((total, record) => total + record.value, 0);
+}`,
     }
   }
   return {
@@ -111,13 +132,18 @@ function buildCodeCase(lesson) {
     observed: 'Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.',
     target: 'Repair the initial index, explain the sequence invariant, and rerun all three tests.',
     passing: 'Iteration begins at index 0; all three tests retain every step in order.',
+    fixedCode: `function runSteps(steps) {
+  const completed = [];
+  for (let index = 0; index < steps.length; index += 1) completed.push(steps[index]);
+  return completed.join(" > ");
+}`,
   }
 }
 
 function codeFixture(lesson, grade) {
   const codeCase = buildCodeCase(lesson)
 
-  return {
+  const activitySetup = {
     activity_kind: 'CODE_OR_DEBUG',
     central_input: {
       title: `Inline ${lesson.focus} code case`,
@@ -143,7 +169,9 @@ function codeFixture(lesson, grade) {
     debugging_target: {
       observed_failure: codeCase.observed,
       target: codeCase.target,
-      passing_change: codeCase.passing,
+      passing_change: 'The exact passing change is intentionally withheld from learner material and is available only in the restricted trusted-adult scoring authority after the learner submits complete evidence.',
+      solution_status: 'WITHHELD_FROM_LEARNER_SURFACES',
+      hint_ceiling: 'LOCATION_OR_EVIDENCE_CUE',
       scope_note: `Diagnosing the state, control-flow, or data defect and connecting the repair to ${lesson.focus} is the central evidence.`,
     },
     equal_credit_alternative: {
@@ -155,6 +183,20 @@ function codeFixture(lesson, grade) {
         'Apply the one repair named in your explanation and trace all three tests again.',
       ],
       evidence_to_submit: 'The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests.',
+    },
+  }
+
+  return {
+    activitySetup,
+    trustedSolution: {
+      authority: 'ADULT_TRUSTED_AUTHORITY',
+      learner_visibility: 'NEVER',
+      task_kind: 'CODE_OR_DEBUG',
+      root_cause: codeCase.observed,
+      decisive_resolution: codeCase.passing,
+      reference_implementation: codeCase.fixedCode,
+      expected_results: codeCase.tests,
+      acceptance_note: `Accept any implementation or precise pseudocode that satisfies the specification and all checks for ${lesson.focus}; do not require textual agreement with this reference.`,
     },
   }
 }
@@ -242,7 +284,7 @@ function artifactFixture(lesson, taskType) {
 }
 
 function artifactSetup(lesson, taskType, grade) {
-  return {
+  const activitySetup = {
     activity_kind: 'ANALYSIS_OR_DESIGN',
     central_input: artifactFixture(lesson, taskType),
     expected_behavior_and_specification: [
@@ -266,7 +308,9 @@ function artifactSetup(lesson, taskType, grade) {
     debugging_target: {
       observed_failure: 'An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.',
       target: 'Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.',
-      passing_change: 'A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials.',
+      passing_change: 'The exact accepted evidence map is intentionally withheld from learner material and is available only in the restricted trusted-adult scoring authority after the learner submits complete evidence.',
+      solution_status: 'WITHHELD_FROM_LEARNER_SURFACES',
+      hint_ceiling: 'CRITERION_OR_EVIDENCE_LOCATION_CUE',
     },
     equal_credit_alternative: {
       method: 'A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.',
@@ -279,12 +323,33 @@ function artifactSetup(lesson, taskType, grade) {
       evidence_to_submit: 'Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact.',
     },
   }
+
+  return {
+    activitySetup,
+    trustedSolution: {
+      authority: 'ADULT_TRUSTED_AUTHORITY',
+      learner_visibility: 'NEVER',
+      task_kind: 'ANALYSIS_OR_DESIGN',
+      accepted_evidence_model: [
+        `The response accurately links at least three printed details to ${lesson.focus}.`,
+        'The proposed revision or decision is feasible within the supplied fictional case and does not invent missing facts.',
+        'The pass condition is observable, specific, and tests the proposed revision rather than restating a preference.',
+        'The limitation or trade-off correctly identifies what the supplied evidence cannot establish.',
+      ],
+      decisive_resolution: 'Accept multiple defensible responses. A passing response has three traceable evidence links, one feasible revision or decision, one observable check, and one honest limitation; reject claims that require facts outside the package.',
+      prohibited_shortcut: 'Do not give the learner a completed evidence map, selected decision, or finished design before independent evidence is submitted.',
+    },
+  }
 }
 
-export function buildTechnologyActivitySetup({ lesson, taskType, grade }) {
+export function buildTechnologyActivityMaterials({ lesson, taskType, grade }) {
   return CODE_OR_DEBUG.test(`${lesson.focus} ${lesson.title}`)
     ? codeFixture(lesson, grade)
     : artifactSetup(lesson, taskType, grade)
+}
+
+export function buildTechnologyActivitySetup(args) {
+  return buildTechnologyActivityMaterials(args).activitySetup
 }
 
 export const technologyActivityRequiresCode = (lesson) => CODE_OR_DEBUG.test(`${lesson.focus} ${lesson.title}`)

@@ -44,6 +44,52 @@
   ],
   "formative_check": "Explain the modelled approach to sorting algorithms in your own words and name the step most likely to go wrong.",
   "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER",
+    "review_timing": "TRUSTED_ADULT_REVIEW_AFTER_REQUIRED_INDEPENDENT_EVIDENCE_IS_SAVED",
+    "lesson_type": "algorithms",
+    "protected_task": {
+      "task_ref": "ma-g10-technology-u02-l02#protected-independent",
+      "authority": "ADULT_TRUSTED_AUTHORITY",
+      "learner_visibility": "NEVER",
+      "task_kind": "CODE_OR_DEBUG",
+      "root_cause": "Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.",
+      "decisive_resolution": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+      "reference_implementation": "function greatest(values) {\n  let best = values[0];\n  for (const value of values) {\n    if (value > best) best = value;\n  }\n  return best;\n}",
+      "expected_results": [
+        {
+          "input": "[4, 7, 2]",
+          "expected": "7"
+        },
+        {
+          "input": "[-5, -2, -9]",
+          "expected": "-2"
+        },
+        {
+          "input": "[6]",
+          "expected": "6"
+        }
+      ],
+      "acceptance_note": "Accept any implementation or precise pseudocode that satisfies the specification and all checks for sorting algorithms; do not require textual agreement with this reference."
+    },
+    "fresh_mastery_check": {
+      "task_ref": "ma-g10-technology-u02-l02#fresh-total-label-lengths",
+      "root_cause": "The loop replaces total with the current label length instead of accumulating the current length with prior lengths.",
+      "decisive_resolution": "Update total with total + label.length on each iteration.",
+      "reference_implementation": "function totalLabelLengths(labels) {\n  let total = 0;\n  for (const label of labels) total = total + label.length;\n  return total;\n}",
+      "accepted_invariant": "After each iteration, total equals the sum of the lengths of exactly the prefix already examined.",
+      "expected_results": [
+        "[\"oak\", \"map\"] → 6",
+        "[] → 0",
+        "[\"cedar\"] → 5"
+      ]
+    },
+    "remediation_authority": {
+      "selection_rule": "Choose the smallest alternate route from observable evidence; do not repeat the original task or expose its protected resolution.",
+      "mastery_reconsideration": "Reconsider mastery only from the fresh independent record under the same criteria. A worked or guided response is instruction, not mastery evidence."
+    }
+  },
   "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, commit or test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g10-technology-u02-assessment",

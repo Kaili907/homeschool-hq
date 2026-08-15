@@ -171,6 +171,16 @@
     "answer_or_scoring_guidance": {
       "type": "string"
     },
+    "trusted_solution_reference": {
+      "description": "Restricted adult-only resolution and acceptance authority for protected learner tasks.",
+      "type": "object",
+      "required": ["authority", "learner_visibility", "review_timing"],
+      "properties": {
+        "authority": { "const": "ADULT_TRUSTED_AUTHORITY" },
+        "learner_visibility": { "const": "NEVER" },
+        "review_timing": { "type": "string", "minLength": 30 }
+      }
+    },
     "mastery_rule": {
       "type": "string"
     },
@@ -279,5 +289,17 @@
         "minLength": 40
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "subject": { "const": "technology" }
+        }
+      },
+      "then": {
+        "required": ["trusted_solution_reference"]
+      }
+    }
+  ]
 }

@@ -44,6 +44,52 @@
   ],
   "formative_check": "State how the changed constraint altered your approach to iteration from feedback.",
   "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "trusted_solution_reference": {
+    "authority": "ADULT_TRUSTED_AUTHORITY",
+    "learner_visibility": "NEVER",
+    "review_timing": "TRUSTED_ADULT_REVIEW_AFTER_REQUIRED_INDEPENDENT_EVIDENCE_IS_SAVED",
+    "lesson_type": "algorithms",
+    "protected_task": {
+      "task_ref": "ma-g12-technology-u05-l06#protected-independent",
+      "authority": "ADULT_TRUSTED_AUTHORITY",
+      "learner_visibility": "NEVER",
+      "task_kind": "CODE_OR_DEBUG",
+      "root_cause": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "decisive_resolution": "Iteration begins at index 0; all three tests retain every step in order.",
+      "reference_implementation": "function runSteps(steps) {\n  const completed = [];\n  for (let index = 0; index < steps.length; index += 1) completed.push(steps[index]);\n  return completed.join(\" > \");\n}",
+      "expected_results": [
+        {
+          "input": "[\"open\", \"check\", \"save\"]",
+          "expected": "open > check > save"
+        },
+        {
+          "input": "[]",
+          "expected": "empty string"
+        },
+        {
+          "input": "[\"start\"]",
+          "expected": "start"
+        }
+      ],
+      "acceptance_note": "Accept any implementation or precise pseudocode that satisfies the specification and all checks for iteration from feedback; do not require textual agreement with this reference."
+    },
+    "fresh_mastery_check": {
+      "task_ref": "ma-g12-technology-u05-l06#fresh-total-label-lengths",
+      "root_cause": "The loop replaces total with the current label length instead of accumulating the current length with prior lengths.",
+      "decisive_resolution": "Update total with total + label.length on each iteration.",
+      "reference_implementation": "function totalLabelLengths(labels) {\n  let total = 0;\n  for (const label of labels) total = total + label.length;\n  return total;\n}",
+      "accepted_invariant": "After each iteration, total equals the sum of the lengths of exactly the prefix already examined.",
+      "expected_results": [
+        "[\"oak\", \"map\"] → 6",
+        "[] → 0",
+        "[\"cedar\"] → 5"
+      ]
+    },
+    "remediation_authority": {
+      "selection_rule": "Choose the smallest alternate route from observable evidence; do not repeat the original task or expose its protected resolution.",
+      "mastery_reconsideration": "Reconsider mastery only from the fresh independent record under the same criteria. A worked or guided response is instruction, not mastery evidence."
+    }
+  },
   "mastery_rule": "Do not mark mastery from one answer. Use digital artifact, algorithm or code, commit or test log, source record, design explanation, and safe-use reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.",
   "unit_assessment_reference": {
     "assessment_id": "ma-g12-technology-u05-assessment",

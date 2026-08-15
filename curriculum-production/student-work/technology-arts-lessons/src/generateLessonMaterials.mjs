@@ -32,7 +32,9 @@ import {
 } from './lessonPhasesElementary.mjs'
 import { buildAccessibilityProvisions } from './lessonAccessibility.mjs'
 import { buildLessonRubric } from './lessonRubrics.mjs'
-import { buildTechnologyActivitySetup } from './technologyActivitySetup.mjs'
+import { buildTechnologyActivityMaterials } from './technologyActivitySetup.mjs'
+import { buildTechnologyProductionDepth } from './technologyProductionDepth.mjs'
+import { approvedTechnologyAnchorMaterials } from './technologyApprovedAnchor.mjs'
 import {
   buildArtsLearnerResource,
   HOUSEHOLD_ARTS_MATERIAL_ROUTE,
@@ -108,12 +110,28 @@ function matchersFor(classifiers) {
 }
 
 function classifyLesson(lesson, unit, subjectKey) {
-  const haystack = `${lesson.focus} ${lesson.title} ${unit.title} ${unit.topics.join(' ')}`.toLowerCase()
   const classifiers = subjectKey === 'technology' ? TECH_CLASSIFIERS : ARTS_CLASSIFIERS
-  for (const { taskType, patterns } of matchersFor(classifiers)) {
-    if (patterns.some((pattern) => pattern.test(haystack))) return taskType
+  const compiled = matchersFor(classifiers)
+  if (subjectKey !== 'technology') {
+    const fullContext = `${lesson.focus} ${lesson.title} ${unit.title} ${unit.topics.join(' ')}`.toLowerCase()
+    for (const { taskType, patterns } of compiled) {
+      if (patterns.some((pattern) => pattern.test(fullContext))) return taskType
+    }
+    return 'creative_project'
   }
-  return subjectKey === 'technology' ? 'applied_project' : 'creative_project'
+  const lessonText = `${lesson.focus} ${lesson.title}`.toLowerCase()
+  for (const { taskType, patterns } of compiled) {
+    if (patterns.some((pattern) => pattern.test(lessonText))) return taskType
+  }
+  // The unit title may disambiguate a terse focus, but sibling topic lists may
+  // not override today's authored focus (for example, a capstone review must
+  // not become a security lesson merely because privacy appears elsewhere in
+  // the unit).
+  const unitContext = unit.title.toLowerCase()
+  for (const { taskType, patterns } of compiled) {
+    if (patterns.some((pattern) => pattern.test(unitContext))) return taskType
+  }
+  return 'applied_project'
 }
 
 const TECH_TASK_LABELS = {
@@ -253,8 +271,14 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
   const mode = modeForPhase(lesson.phase)
   const taskType = classifyLesson(lesson, unit, subjectKey)
 
+  const approvedAnchor = isTech ? approvedTechnologyAnchorMaterials(lesson.lesson_id) : null
+  if (approvedAnchor) return { ...approvedAnchor, mode, taskType }
+
   const taskFocus = taskFacingFocus(lesson.focus, subjectKey)
-  const activitySetup = isTech ? buildTechnologyActivitySetup({ lesson, taskType, grade }) : undefined
+  const activityMaterials = isTech
+    ? buildTechnologyActivityMaterials({ lesson, taskType, grade })
+    : undefined
+  const activitySetup = activityMaterials?.activitySetup
 
   /**
    * Authored strings (objectives, success criteria, formative checks, tutor
@@ -358,6 +382,17 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
 
   const nonPenalty = NON_PENALTY_MODES.has(mode)
   const summative = SUMMATIVE_MODES.has(mode)
+  const technologyDepth = isTech
+    ? buildTechnologyProductionDepth({
+        lesson,
+        unit,
+        mode,
+        taskType,
+        grade,
+        activitySetup,
+        adultSolution: activityMaterials.trustedSolution,
+      })
+    : undefined
 
   const taskBrief = elementary
     ? `This is day ${lesson.day_in_unit} of "${unit.title}". That is unit ${unit.unit_number} in grade ${grade}. ` +
@@ -428,6 +463,7 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     work_mode: mode,
     focus: lesson.focus,
     task_type: taskType,
+    ...(technologyDepth ? { lesson_type: technologyDepth.lessonType } : {}),
     task_label: `${(isTech ? TECH_TASK_LABELS : ARTS_TASK_LABELS)[taskType]} — ${workLabel}`,
     scoring_stance: nonPenalty ? 'FORMATIVE_NO_PENALTY' : summative ? 'SUMMATIVE' : 'PROGRESS_EVIDENCE',
     estimated_minutes: lesson.estimated_minutes,
@@ -448,6 +484,7 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     requirements,
     deliverable,
     ...(activitySetup ? { activity_setup: activitySetup } : {}),
+    ...(technologyDepth ? { learner_experience: technologyDepth.learnerExperience } : {}),
     ...(scaffoldNote ? { guided_scaffold_note: scaffoldNote } : {}),
     ...(learnerResource
       ? {
@@ -508,6 +545,9 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     lesson_success_criteria: lesson.success_criteria,
     formative_check: reframe(lesson.formative_check),
     answer_or_scoring_guidance: lesson.answer_or_scoring_guidance,
+    ...(technologyDepth
+      ? { trusted_solution_reference: technologyDepth.trustedSolutionReference }
+      : {}),
     mastery_rule: lesson.mastery_rule,
     unit_assessment_reference: {
       assessment_id: assessment.assessment_id,
