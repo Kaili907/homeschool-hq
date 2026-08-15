@@ -43,6 +43,7 @@ const TARGET_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9.-]+)?$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const ENTITY_REF = /^[a-z0-9][a-z0-9:-]{2,127}$/
 const REVIEW_KEY = /^csr-[0-9a-f]{16}$/
+const CURRICULUM_GOVERNANCE_GRADES = new Set([3, 4, 5, 7, 8, 9, 10, 11, 12])
 const FINDING_ID = /^cvf-[0-9a-f]{16}$/
 const ENTITY_TYPES = new Set(CURRICULUM_DRAFT_ENTITY_TYPES)
 const APPROVAL_DECISIONS = new Set(CURRICULUM_APPROVAL_DECISIONS)
@@ -309,12 +310,16 @@ function parseStandardsReview(event) {
     || new Set(body.findingIds).size !== body.findingIds.length
     || !['in_review', 'approved_mapping', 'rejected_mapping', 'needs_evidence'].includes(body.status)
   ) throw Object.assign(new Error('invalid_request'), { request: true })
+  const grade = boundedInteger(body.grade, 1, 12)
+  if (!CURRICULUM_GOVERNANCE_GRADES.has(grade)) {
+    throw Object.assign(new Error('invalid_request'), { request: true })
+  }
   const input = {
     reviewKey: body.reviewKey,
     contextKind: body.contextKind,
     contextRef: body.contextRef,
     sourceLabel: boundedText(body.sourceLabel, 1, 240),
-    grade: boundedInteger(body.grade, 0, 12),
+    grade,
     courseRef: body.courseRef,
     findingRule: body.findingRule,
     affectedCount: boundedInteger(body.affectedCount, 1, 1000),

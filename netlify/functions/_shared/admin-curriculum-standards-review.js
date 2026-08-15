@@ -5,6 +5,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-
 const REVIEW_KEY = /^csr-[0-9a-f]{16}$/
 const FINDING_ID = /^cvf-[0-9a-f]{16}$/
 const STATES = new Set(['in_review', 'approved_mapping', 'rejected_mapping', 'needs_evidence'])
+const GOVERNED_GRADES = new Set([3, 4, 5, 7, 8, 9, 10, 11, 12])
 
 function config(env) {
   const rawUrl = (env?.SUPABASE_URL || env?.VITE_SUPABASE_URL || '').trim()
@@ -47,7 +48,7 @@ function decision(value) {
     || !['published_release', 'draft'].includes(value.contextKind)
     || typeof value.contextRef !== 'string' || value.contextRef.length > 128
     || typeof value.sourceLabel !== 'string' || value.sourceLabel.length > 240
-    || !Number.isSafeInteger(value.grade) || value.grade < 0 || value.grade > 12
+    || !Number.isSafeInteger(value.grade) || !GOVERNED_GRADES.has(value.grade)
     || typeof value.courseRef !== 'string' || value.findingRule !== 'standards.human_review_required'
     || !Number.isSafeInteger(value.affectedCount) || value.affectedCount < 1 || value.affectedCount > 1000
     || !Array.isArray(value.findingIds) || value.findingIds.length !== value.affectedCount

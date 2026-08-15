@@ -7,12 +7,14 @@ import {
   type CurriculumValidationCategory,
   type CurriculumValidationFinding,
 } from '../../admin/curriculum-validation/engine.ts'
+import { curriculumGovernanceGradeFromReference } from '../../admin/curriculum-validation/model.ts'
 
 export type CurriculumFindingGroupBy = 'entity' | 'rule' | 'severity'
 export const CURRICULUM_VALIDATION_RENDER_BATCH = 250 as const
 
 export interface CurriculumFindingFilters {
   readonly query: string
+  readonly grade?: number | 'all'
   readonly severity: CurriculumFindingSeverity | 'all'
   readonly category: CurriculumValidationCategory | 'all'
   readonly blocking: 'all' | 'blocking' | 'non-blocking'
@@ -80,13 +82,18 @@ function searchableText(finding: CurriculumValidationFinding): string {
   ].join(' ').toLowerCase()
 }
 
+function findingGrade(finding: CurriculumValidationFinding): number | null {
+  return curriculumGovernanceGradeFromReference(finding.entity.id)
+}
+
 export function filterCurriculumValidationFindings(
   findings: readonly CurriculumValidationFinding[],
   filters: CurriculumFindingFilters,
 ): readonly CurriculumValidationFinding[] {
   const query = filters.query.trim().toLowerCase()
   return findings.filter((finding) =>
-    (filters.severity === 'all' || finding.severity === filters.severity)
+    (!filters.grade || filters.grade === 'all' || findingGrade(finding) === filters.grade)
+      && (filters.severity === 'all' || finding.severity === filters.severity)
       && (filters.category === 'all' || finding.category === filters.category)
       && (filters.blocking === 'all'
         || (filters.blocking === 'blocking' ? finding.blocking : !finding.blocking))
@@ -184,19 +191,25 @@ export function CurriculumValidationWorkspace({
   onJumpToEntity,
 }: CurriculumValidationWorkspaceProps) {
   const [query, setQuery] = useState('')
+  const [grade, setGrade] = useState<number | 'all'>('all')
   const [severity, setSeverity] = useState<CurriculumFindingSeverity | 'all'>('all')
   const [category, setCategory] = useState<CurriculumValidationCategory | 'all'>('all')
   const [blocking, setBlocking] = useState<'all' | 'blocking' | 'non-blocking'>('all')
   const [groupBy, setGroupBy] = useState<CurriculumFindingGroupBy>('entity')
   const [renderLimit, setRenderLimit] = useState<number>(CURRICULUM_VALIDATION_RENDER_BATCH)
   const status = STATUS_COPY[run.status]
+  const grades = useMemo(() => [...new Set(run.findings.flatMap((finding) => {
+    const value = findingGrade(finding)
+    return value === null ? [] : [value]
+  }))].sort((left, right) => left - right), [run.findings])
 
   const visibleFindings = useMemo(() => filterCurriculumValidationFindings(run.findings, {
     query,
+    grade,
     severity,
     category,
     blocking,
-  }), [run.findings, query, severity, category, blocking])
+  }), [run.findings, query, grade, severity, category, blocking])
   const renderedFindings = useMemo(() => visibleFindings.slice(0, renderLimit), [renderLimit, visibleFindings])
   const groups = useMemo(
     () => groupCurriculumValidationFindings(renderedFindings, groupBy),
@@ -206,7 +219,7 @@ export function CurriculumValidationWorkspace({
 
   useEffect(() => {
     setRenderLimit(CURRICULUM_VALIDATION_RENDER_BATCH)
-  }, [blocking, category, groupBy, query, run, severity])
+  }, [blocking, category, grade, groupBy, query, run, severity])
 
   return (
     <div className="min-w-0 bg-slate-950 py-6 text-slate-100" aria-labelledby="curriculum-validation-workspace-title">
@@ -288,10 +301,17 @@ export function CurriculumValidationWorkspace({
             <h2 id="all-findings-title" className="text-2xl font-bold">All findings</h2>
             <p className="mt-1 text-sm text-slate-400">Search, filter, group, expand details, and jump back to the owning entity.</p>
           </div>
-          <form className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-5" role="search" onSubmit={(event) => event.preventDefault()}>
+          <form className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-6" role="search" onSubmit={(event) => event.preventDefault()}>
             <div>
               <label htmlFor="curriculum-validation-query" className="mb-1 block text-sm font-medium">Search</label>
               <input id="curriculum-validation-query" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Entity, path, rule…" className="w-full rounded-lg border border-slate-600 bg-slate-900 px-3 py-2" />
+            </div>
+            <div>
+              <label htmlFor="curriculum-validation-grade" className="mb-1 block text-sm font-medium">Grade</label>
+              <select id="curriculum-validation-grade" value={grade} onChange={(event) => setGrade(event.target.value === 'all' ? 'all' : Number(event.target.value))} className="w-full rounded-lg border border-slate-600 bg-slate-900 px-3 py-2">
+                <option value="all">All grades</option>
+                {grades.map((value) => <option key={value} value={value}>Grade {value}</option>)}
+              </select>
             </div>
             <div>
               <label htmlFor="curriculum-validation-severity" className="mb-1 block text-sm font-medium">Severity</label>

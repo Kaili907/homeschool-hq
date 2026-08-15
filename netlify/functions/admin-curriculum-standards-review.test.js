@@ -17,7 +17,7 @@ function event(path, method = 'GET', body) {
 function body(overrides = {}) {
   return {
     reviewKey: 'csr-1234567890abcdef', contextKind: 'published_release', contextRef: '1.0.0',
-    sourceLabel: '2', grade: 5, courseRef: 'ma-g5-physical-education',
+    sourceLabel: 'UNVERIFIED-LOCAL', grade: 10, courseRef: 'ma-g10-physical-education',
     findingRule: 'standards.human_review_required', affectedCount: 2,
     findingIds: ['cvf-1234567890abcdef', 'cvf-fedcba0987654321'], status: 'in_review',
     canonicalStandardId: null, frameworkVersion: null, canonicalTitle: null,
@@ -104,7 +104,10 @@ describe('curriculum standards review API', () => {
       'curriculum:drafts:write', 'curriculum:drafts:write', 'curriculum:drafts:write',
     ])
     for (const call of standardsReview.update.mock.calls) {
-      expect(call[1]).toMatchObject({ sourceLabel: '2', canonicalStandardId: null, frameworkVersion: null })
+      expect(call[1]).toMatchObject({
+        sourceLabel: 'UNVERIFIED-LOCAL', grade: 10, courseRef: 'ma-g10-physical-education',
+        canonicalStandardId: null, frameworkVersion: null,
+      })
       expect(call[1].requestDigest).toMatch(/^[0-9a-f]{64}$/)
     }
   })
@@ -181,6 +184,7 @@ describe('curriculum standards review API', () => {
       { ...body(), actorUserRef: 'forged-owner' },
       body({ findingIds: ['cvf-1234567890abcdef', 'cvf-1234567890abcdef'] }),
       body({ canonicalStandardId: 'silently-invented-id' }),
+      body({ grade: 6, courseRef: 'ma-g6-science' }),
     ]
     for (const attempt of attempts) {
       expect((await handle(event('/api/admin/curriculum/standards-reviews', 'POST', attempt))).statusCode).toBe(400)

@@ -16,6 +16,8 @@ export function collectCurriculumStandardsReviewOccurrences(
 ): readonly CurriculumStandardsReviewOccurrence[] {
   const occurrences: CurriculumStandardsReviewOccurrence[] = []
   const unitById = new Map(snapshot.units.map((unit) => [unit.unit_id, unit]))
+  const courseById = new Map(snapshot.courses.map((course) => [course.course_id, course]))
+  const courseGrade = (courseRef: string, fallback: number) => courseById.get(courseRef)?.grade ?? fallback
   function add(
     standards: readonly StandardReference[],
     owner: { readonly type: 'course' | 'unit' | 'lesson' | 'assessment'; readonly id: string },
@@ -41,18 +43,20 @@ export function collectCurriculumStandardsReviewOccurrences(
     item.standards, { type: 'course', id: item.course_id }, `courses[${index}].standards`, item.grade, item.course_id,
   ))
   snapshot.units.forEach((item, index) => add(
-    item.standards, { type: 'unit', id: item.unit_id }, `units[${index}].standards`, item.grade, item.course_ref,
+    item.standards, { type: 'unit', id: item.unit_id }, `units[${index}].standards`,
+    courseGrade(item.course_ref, item.grade), item.course_ref,
   ))
   snapshot.lessons.forEach((item, index) => add(
-    item.standards, { type: 'lesson', id: item.lesson_id }, `lessons[${index}].standards`, item.grade, item.course_ref,
+    item.standards, { type: 'lesson', id: item.lesson_id }, `lessons[${index}].standards`,
+    courseGrade(item.course_ref, item.grade), item.course_ref,
   ))
   snapshot.assessments.forEach((item, index) => {
     const unit = unitById.get(item.unit_ref)
-    const course = snapshot.courses.find((candidate) => candidate.course_id === item.course_ref)
+    const course = courseById.get(item.course_ref)
     if (!unit && !course) return
     add(
       item.standards, { type: 'assessment', id: item.assessment_id }, `assessments[${index}].standards`,
-      unit?.grade ?? course!.grade, item.course_ref,
+      course?.grade ?? unit!.grade, item.course_ref,
     )
   })
   return occurrences
