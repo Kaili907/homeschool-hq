@@ -1,0 +1,542 @@
+import { validateExact } from "../../v2/contracts/validation.js";
+import {
+  MultimodalAllowanceSchema,
+  type TutorModality,
+} from "../learner-stage-policy/policy.js";
+import type { NormalizedModelOutputResult } from "../model-output/contracts.js";
+import type { MultimodalRequirement } from "../routing/provider-routing/contracts.js";
+import {
+  COMMERCIAL_RESPONSE_CONTRACT_VERSION,
+  CommercialModelResponseSchema,
+  PRESENTATION_CONTRACT_VERSION,
+  PresentationIntentSchema,
+  PresentationMappingContextSchema,
+  TrustedPresentationAcceptanceSchema,
+  W306PresentationPiecesSchema,
+  type CommercialModelResponse,
+  type CommercialProposalResponse,
+  type PresentationDeliveryChannel,
+  type PresentationIntent,
+  type PresentationMappingContext,
+  type ReviewedVisualIntent,
+  type TrustedPresentationAcceptance,
+  type W306PresentationPiece,
+  type W306PresentationPieces,
+} from "./contracts.js";
+
+export type PresentationIntentValidation =
+  | { readonly status: "accepted"; readonly intent: PresentationIntent }
+  | {
+      readonly status: "rejected";
+      readonly code:
+        | "INVALID_PRESENTATION_INTENT"
+        | "PRESENTATION_CONTENT_REQUIRED"
+        | "PRESENTATION_CHANNEL_MISMATCH"
+        | "SPEECH_SOURCE_REQUIRED";
+    };
+
+function equalStringArrays(left: readonly string[], right: readonly string[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function expectedBaseChannels(intent: PresentationIntent): PresentationDeliveryChannel[] {
+  const channels: PresentationDeliveryChannel[] = [];
+  if (intent.reviewedTextRef !== undefined || intent.structuredCheckRef !== undefined) {
+    channels.push("text");
+  }
+  if (intent.reviewedVisual !== undefined) channels.push("visual");
+  return channels;
+}
+
+function normalizedIntent(intent: PresentationIntent): PresentationIntent {
+  const normalized: PresentationIntent = {
+    contractVersion: intent.contractVersion,
+    intentKind: intent.intentKind,
+    ...(intent.reviewedTextRef === undefined
+      ? {}
+      : { reviewedTextRef: intent.reviewedTextRef }),
+    ...(intent.reviewedVisual === undefined
+      ? {}
+      : { reviewedVisual: Object.freeze({ ...intent.reviewedVisual }) }),
+    ...(intent.structuredCheckRef === undefined
+      ? {}
+      : { structuredCheckRef: intent.structuredCheckRef }),
+    ...(intent.accessibilityCaptionRef === undefined
+      ? {}
+      : { accessibilityCaptionRef: intent.accessibilityCaptionRef }),
+    requestedDeliveryChannels: [...intent.requestedDeliveryChannels],
+    ...(intent.fallbackPresentation === undefined
+      ? {}
+      : {
+          fallbackPresentation: {
+            presentationRef: intent.fallbackPresentation.presentationRef,
+            requestedDeliveryChannels: [
+              ...intent.fallbackPresentation.requestedDeliveryChannels,
+            ],
+          },
+        }),
+  };
+  if (normalized.reviewedVisual !== undefined) Object.freeze(normalized.reviewedVisual);
+  Object.freeze(normalized.requestedDeliveryChannels);
+  if (normalized.fallbackPresentation !== undefined) {
+    Object.freeze(normalized.fallbackPresentation.requestedDeliveryChannels);
+    Object.freeze(normalized.fallbackPresentation);
+  }
+  return Object.freeze(normalized);
+}
+
+export function validatePresentationIntent(candidate: unknown): PresentationIntentValidation {
+  const validation = validateExact(PresentationIntentSchema, candidate);
+  if (validation.status === "rejected") {
+    return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
+  }
+
+  const intent = validation.value;
+  const contentCount = Number(intent.reviewedTextRef !== undefined)
+    + Number(intent.reviewedVisual !== undefined)
+    + Number(intent.structuredCheckRef !== undefined);
+  if (contentCount === 0 || (intent.reviewedTextRef !== undefined && intent.structuredCheckRef !== undefined)) {
+    return { status: "rejected", code: "PRESENTATION_CONTENT_REQUIRED" };
+  }
+
+  const channels = intent.requestedDeliveryChannels;
+  const speechRequested = channels.includes("speech-after-acceptance");
+  if (
+    speechRequested
+    && intent.reviewedTextRef === undefined
+    && intent.structuredCheckRef === undefined
+  ) {
+    return { status: "rejected", code: "SPEECH_SOURCE_REQUIRED" };
+  }
+
+  const expected = expectedBaseChannels(intent);
+  if (speechRequested) expected.push("speech-after-acceptance");
+  if (!equalStringArrays(channels, expected)) {
+    return { status: "rejected", code: "PRESENTATION_CHANNEL_MISMATCH" };
+  }
+
+  return { status: "accepted", intent: normalizedIntent(intent) };
+}
+
+export type CommercialResponseMappingResult =
+  | { readonly status: "accepted"; readonly response: CommercialModelResponse }
+  | {
+      readonly status: "rejected";
+      readonly code:
+        | "VALIDATED_OUTPUT_REQUIRED"
+        | "INVALID_PRESENTATION_MAPPING_CONTEXT"
+        | "DISPLAY_CONTENT_ARITY_MISMATCH"
+        | "REVIEWED_VISUAL_BINDING_REQUIRED"
+        | "DUPLICATE_REVIEWED_VISUAL_BINDING"
+        | "SPEECH_SOURCE_REQUIRED"
+        | "INVALID_PRESENTATION_INTENT";
+    };
+
+function visualFor(
+  contentRef: string,
+  context: PresentationMappingContext,
+): ReviewedVisualIntent | undefined {
+  return context.reviewedVisuals.find((visual) => visual.contentRef === contentRef);
+}
+
+function mappedIntent(
+  proposal: Extract<NormalizedModelOutputResult, { status: "accepted-proposal" }>["proposal"],
+  context: PresentationMappingContext,
+): PresentationIntent | null {
+  const refs = proposal.reviewedContentRefs;
+  const common = {
+    contractVersion: PRESENTATION_CONTRACT_VERSION,
+    intentKind: "reference-only-presentation-intent" as const,
+    ...(context.accessibilityCaptionRef === undefined
+      ? {}
+      : { accessibilityCaptionRef: context.accessibilityCaptionRef }),
+    ...(context.fallbackPresentation === undefined
+      ? {}
+      : { fallbackPresentation: context.fallbackPresentation }),
+  };
+
+  const withSpeech = (
+    channels: readonly ("text" | "visual")[],
+  ): PresentationDeliveryChannel[] => [
+    ...channels,
+    ...(context.requestSpeechAfterAcceptance
+      ? (["speech-after-acceptance"] as const)
+      : []),
+  ];
+
+  switch (proposal.instructionalDisplayMode) {
+    case "reviewed-text":
+      return refs.length === 1 && refs[0] !== undefined
+        ? {
+            ...common,
+            reviewedTextRef: refs[0],
+            requestedDeliveryChannels: withSpeech(["text"]),
+          }
+        : null;
+    case "reviewed-visual": {
+      if (refs.length !== 1 || refs[0] === undefined) return null;
+      const visual = visualFor(refs[0], context);
+      if (visual === undefined || context.requestSpeechAfterAcceptance) return null;
+      return {
+        ...common,
+        reviewedVisual: visual,
+        requestedDeliveryChannels: ["visual"],
+      };
+    }
+    case "reviewed-text-and-visual": {
+      if (refs.length !== 2 || refs[0] === undefined || refs[1] === undefined) return null;
+      const visual = visualFor(refs[1], context);
+      return visual === undefined
+        ? null
+        : {
+            ...common,
+            reviewedTextRef: refs[0],
+            reviewedVisual: visual,
+            requestedDeliveryChannels: withSpeech(["text", "visual"]),
+          };
+    }
+    case "structured-check":
+      return refs.length === 1 && refs[0] !== undefined
+        ? {
+            ...common,
+            structuredCheckRef: refs[0],
+            requestedDeliveryChannels: withSpeech(["text"]),
+          }
+        : null;
+  }
+}
+
+export function mapValidatedModelOutputToCommercialResponse(
+  result: NormalizedModelOutputResult,
+  contextCandidate: unknown,
+): CommercialResponseMappingResult {
+  if (result.status === "refused") {
+    const validatedOutput = {
+      responseKind: "refusal" as const,
+      reviewedContentRefs: [],
+      groundingRefs: [],
+      reasonCodes: [...result.refusal.reasonCodes],
+      requestedTutorAction: null,
+      instructionalDisplayMode: "none" as const,
+      refusalState: "refused" as const,
+    };
+    Object.freeze(validatedOutput.reviewedContentRefs);
+    Object.freeze(validatedOutput.groundingRefs);
+    Object.freeze(validatedOutput.reasonCodes);
+    Object.freeze(validatedOutput);
+    const groundingClaim = {
+      claimKind: "reference-only-grounding-claim" as const,
+      claimScope: "references-only" as const,
+      groundingRefs: [],
+    };
+    Object.freeze(groundingClaim.groundingRefs);
+    Object.freeze(groundingClaim);
+    const response: CommercialModelResponse = {
+      contractVersion: COMMERCIAL_RESPONSE_CONTRACT_VERSION,
+      envelope: "commercial-model-response",
+      validationStatus: "refused",
+      validatedOutput,
+      groundingClaim,
+      presentationIntent: null,
+    };
+    Object.freeze(response);
+    if (validateCommercialModelResponse(response).status === "rejected") {
+      return { status: "rejected", code: "VALIDATED_OUTPUT_REQUIRED" };
+    }
+    return { status: "accepted", response };
+  }
+  if (result.status !== "accepted-proposal") {
+    return { status: "rejected", code: "VALIDATED_OUTPUT_REQUIRED" };
+  }
+
+  const contextValidation = validateExact(PresentationMappingContextSchema, contextCandidate);
+  if (contextValidation.status === "rejected") {
+    return { status: "rejected", code: "INVALID_PRESENTATION_MAPPING_CONTEXT" };
+  }
+  const context = contextValidation.value;
+  const visualRefs = context.reviewedVisuals.map((visual) => visual.contentRef);
+  if (new Set(visualRefs).size !== visualRefs.length) {
+    return { status: "rejected", code: "DUPLICATE_REVIEWED_VISUAL_BINDING" };
+  }
+  if (
+    result.proposal.instructionalDisplayMode === "reviewed-visual"
+    && context.requestSpeechAfterAcceptance
+  ) {
+    return { status: "rejected", code: "SPEECH_SOURCE_REQUIRED" };
+  }
+
+  const intentCandidate = mappedIntent(result.proposal, context);
+  if (intentCandidate === null) {
+    const mode = result.proposal.instructionalDisplayMode;
+    const expectedArity = mode === "reviewed-text-and-visual" ? 2 : 1;
+    if (result.proposal.reviewedContentRefs.length !== expectedArity) {
+      return { status: "rejected", code: "DISPLAY_CONTENT_ARITY_MISMATCH" };
+    }
+    return { status: "rejected", code: "REVIEWED_VISUAL_BINDING_REQUIRED" };
+  }
+  const intentValidation = validatePresentationIntent(intentCandidate);
+  if (intentValidation.status === "rejected") {
+    return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
+  }
+
+  const validatedOutput = {
+    responseKind: "proposal" as const,
+    reviewedContentRefs: [...result.proposal.reviewedContentRefs],
+    groundingRefs: [...result.proposal.groundingRefs],
+    reasonCodes: [...result.proposal.reasonCodes],
+    requestedTutorAction: result.proposal.requestedTutorAction,
+    instructionalDisplayMode: result.proposal.instructionalDisplayMode,
+    refusalState: "not-refused" as const,
+  };
+  Object.freeze(validatedOutput.reviewedContentRefs);
+  Object.freeze(validatedOutput.groundingRefs);
+  Object.freeze(validatedOutput.reasonCodes);
+  Object.freeze(validatedOutput);
+  const groundingClaim = {
+    claimKind: "reference-only-grounding-claim" as const,
+    claimScope: "references-only" as const,
+    groundingRefs: [...result.proposal.groundingRefs],
+  };
+  Object.freeze(groundingClaim.groundingRefs);
+  Object.freeze(groundingClaim);
+  const response: CommercialProposalResponse = {
+    contractVersion: COMMERCIAL_RESPONSE_CONTRACT_VERSION,
+    envelope: "commercial-model-response",
+    validationStatus: "accepted-proposal",
+    validatedOutput,
+    groundingClaim,
+    presentationIntent: intentValidation.intent,
+  };
+  Object.freeze(response);
+  if (validateCommercialModelResponse(response).status === "rejected") {
+    return { status: "rejected", code: "VALIDATED_OUTPUT_REQUIRED" };
+  }
+  return { status: "accepted", response };
+}
+
+export type CommercialResponseValidation =
+  | { readonly status: "accepted"; readonly response: CommercialModelResponse }
+  | { readonly status: "rejected"; readonly code: "INVALID_COMMERCIAL_MODEL_RESPONSE" };
+
+function proposalMatchesIntent(response: CommercialProposalResponse): boolean {
+  const output = response.validatedOutput;
+  const intent = response.presentationIntent;
+  const refs = output.reviewedContentRefs;
+  switch (output.instructionalDisplayMode) {
+    case "reviewed-text":
+      return refs.length === 1
+        && intent.reviewedTextRef === refs[0]
+        && intent.reviewedVisual === undefined
+        && intent.structuredCheckRef === undefined;
+    case "reviewed-visual":
+      return refs.length === 1
+        && intent.reviewedTextRef === undefined
+        && intent.reviewedVisual?.contentRef === refs[0]
+        && intent.structuredCheckRef === undefined;
+    case "reviewed-text-and-visual":
+      return refs.length === 2
+        && intent.reviewedTextRef === refs[0]
+        && intent.reviewedVisual?.contentRef === refs[1]
+        && intent.structuredCheckRef === undefined;
+    case "structured-check":
+      return refs.length === 1
+        && intent.reviewedTextRef === undefined
+        && intent.reviewedVisual === undefined
+        && intent.structuredCheckRef === refs[0];
+  }
+}
+
+export function validateCommercialModelResponse(
+  candidate: unknown,
+): CommercialResponseValidation {
+  const validation = validateExact(CommercialModelResponseSchema, candidate);
+  if (validation.status === "rejected") {
+    return { status: "rejected", code: "INVALID_COMMERCIAL_MODEL_RESPONSE" };
+  }
+  const response = validation.value;
+  if (
+    !equalStringArrays(
+      response.groundingClaim.groundingRefs,
+      response.validatedOutput.groundingRefs,
+    )
+  ) {
+    return { status: "rejected", code: "INVALID_COMMERCIAL_MODEL_RESPONSE" };
+  }
+  if (response.validationStatus === "accepted-proposal") {
+    const intentValidation = validatePresentationIntent(response.presentationIntent);
+    if (intentValidation.status === "rejected" || !proposalMatchesIntent(response)) {
+      return { status: "rejected", code: "INVALID_COMMERCIAL_MODEL_RESPONSE" };
+    }
+  }
+  return { status: "accepted", response };
+}
+
+export type LearnerStagePresentationConstraint =
+  | {
+      readonly status: "allowed";
+      readonly intent: PresentationIntent;
+      readonly routingCapabilityRequirement: MultimodalRequirement;
+    }
+  | {
+      readonly status: "denied";
+      readonly code: "LEARNER_STAGE_DENIES_MODALITY" | "LEARNER_STAGE_DENIES_MODALITY_COUNT";
+      readonly deniedModalities: readonly TutorModality[];
+    }
+  | {
+      readonly status: "rejected";
+      readonly code: "INVALID_PRESENTATION_INTENT" | "INVALID_MODALITY_ALLOWANCE";
+    };
+
+function deliveryModalities(intent: PresentationIntent): TutorModality[] {
+  const modalities: TutorModality[] = [];
+  if (intent.requestedDeliveryChannels.includes("text")) modalities.push("text");
+  if (intent.reviewedVisual !== undefined) modalities.push(intent.reviewedVisual.kind);
+  if (intent.requestedDeliveryChannels.includes("speech-after-acceptance")) {
+    modalities.push("audio");
+  }
+  return modalities;
+}
+
+/**
+ * Applies only an already-resolved W3-11 allowance. It receives no learner
+ * facts or stage selector, cannot infer content, and can only allow or deny the
+ * intent's explicit delivery modalities.
+ */
+export function constrainPresentationByLearnerStageAllowance(
+  intentCandidate: unknown,
+  allowanceCandidate: unknown,
+): LearnerStagePresentationConstraint {
+  const intentValidation = validatePresentationIntent(intentCandidate);
+  if (intentValidation.status === "rejected") {
+    return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
+  }
+  const allowanceValidation = validateExact(MultimodalAllowanceSchema, allowanceCandidate);
+  if (allowanceValidation.status === "rejected") {
+    return { status: "rejected", code: "INVALID_MODALITY_ALLOWANCE" };
+  }
+
+  const allowance = allowanceValidation.value;
+  if (
+    new Set(allowance.allowedModalities).size !== allowance.allowedModalities.length
+    || allowance.maximumModalitiesPerResponse > allowance.allowedModalities.length
+  ) {
+    return { status: "rejected", code: "INVALID_MODALITY_ALLOWANCE" };
+  }
+  const modalities = deliveryModalities(intentValidation.intent);
+  const denied = modalities.filter(
+    (modality) => !allowance.allowedModalities.includes(modality),
+  );
+  if (denied.length > 0) {
+    return {
+      status: "denied",
+      code: "LEARNER_STAGE_DENIES_MODALITY",
+      deniedModalities: Object.freeze(denied),
+    };
+  }
+  if (modalities.length > allowance.maximumModalitiesPerResponse) {
+    return {
+      status: "denied",
+      code: "LEARNER_STAGE_DENIES_MODALITY_COUNT",
+      deniedModalities: Object.freeze([]),
+    };
+  }
+
+  return {
+    status: "allowed",
+    intent: intentValidation.intent,
+    routingCapabilityRequirement:
+      intentValidation.intent.reviewedVisual === undefined ? "TEXT_ONLY" : "REVIEWED_IMAGE",
+  };
+}
+
+export type W306PresentationMappingResult =
+  | { readonly status: "accepted"; readonly presentation: W306PresentationPieces }
+  | {
+      readonly status: "rejected";
+      readonly code: "TRUSTED_ACCEPTANCE_REQUIRED" | "INVALID_PRESENTATION_INTENT";
+    };
+
+/**
+ * Produces reference-only pieces for the W3-06 presentation layer. Resolution
+ * into text, pixels, or synthesized speech stays behind Study-owned renderers.
+ */
+export function mapTrustedAcceptedIntentToW306PresentationPieces(
+  acceptanceCandidate: unknown,
+): W306PresentationMappingResult {
+  const acceptanceValidation = validateExact(
+    TrustedPresentationAcceptanceSchema,
+    acceptanceCandidate,
+  );
+  if (acceptanceValidation.status === "rejected") {
+    return { status: "rejected", code: "TRUSTED_ACCEPTANCE_REQUIRED" };
+  }
+  const acceptance: TrustedPresentationAcceptance = acceptanceValidation.value;
+  const intentValidation = validatePresentationIntent(acceptance.presentationIntent);
+  if (intentValidation.status === "rejected") {
+    return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
+  }
+  const intent = intentValidation.intent;
+  const pieces: W306PresentationPiece[] = [];
+
+  if (intent.reviewedTextRef !== undefined) {
+    pieces.push({ pieceKind: "reviewed-text-reference", contentRef: intent.reviewedTextRef });
+  }
+  if (intent.reviewedVisual !== undefined) {
+    pieces.push({
+      pieceKind: intent.reviewedVisual.kind === "image"
+        ? "reviewed-image-reference"
+        : "reviewed-diagram-reference",
+      contentRef: intent.reviewedVisual.contentRef,
+      contentDigest: intent.reviewedVisual.contentDigest,
+      provenanceRef: intent.reviewedVisual.provenanceRef,
+    });
+  }
+  if (intent.structuredCheckRef !== undefined) {
+    pieces.push({
+      pieceKind: "structured-check-reference",
+      contentRef: intent.structuredCheckRef,
+    });
+  }
+  if (intent.accessibilityCaptionRef !== undefined) {
+    pieces.push({
+      pieceKind: "accessibility-caption-metadata",
+      captionRef: intent.accessibilityCaptionRef,
+      instructionalText: false,
+    });
+  }
+  if (intent.requestedDeliveryChannels.includes("speech-after-acceptance")) {
+    const sourceContentRef = intent.reviewedTextRef ?? intent.structuredCheckRef;
+    if (sourceContentRef === undefined) {
+      return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
+    }
+    pieces.push({
+      pieceKind: "speech-delivery",
+      deliveryChannel: "speech-after-acceptance",
+      sourceContentRef,
+      acceptanceRequired: true,
+      rawAudioAuthorityGranted: false,
+    });
+  }
+  if (intent.fallbackPresentation !== undefined) {
+    pieces.push({
+      pieceKind: "fallback-presentation-reference",
+      presentationRef: intent.fallbackPresentation.presentationRef,
+      requestedDeliveryChannels: [...intent.fallbackPresentation.requestedDeliveryChannels],
+    });
+  }
+
+  const presentation: W306PresentationPieces = {
+    adapterKind: "w3-06-reference-presentation-pieces",
+    acceptanceRef: acceptance.acceptanceRef,
+    pieces,
+    rawAudioAccepted: false,
+    rawImageBytesAccepted: false,
+    providerRawMediaAccepted: false,
+  };
+  if (validateExact(W306PresentationPiecesSchema, presentation).status === "rejected") {
+    return { status: "rejected", code: "INVALID_PRESENTATION_INTENT" };
+  }
+  for (const piece of pieces) Object.freeze(piece);
+  Object.freeze(pieces);
+  return { status: "accepted", presentation: Object.freeze(presentation) };
+}
