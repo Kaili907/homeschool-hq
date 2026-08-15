@@ -37,8 +37,12 @@ export type ReviewedHintMetadata = Static<typeof ReviewedHintMetadataSchema>;
 
 export const HintInterventionHistoryEntrySchema = Type.Object(
   {
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
     interventionRef: OpaqueReferenceSchema,
     contextRef: OpaqueReferenceSchema,
+    sourceInteractionRef: OpaqueReferenceSchema,
+    opportunityRef: OpaqueReferenceSchema,
     ordinal: Type.Integer({ minimum: 0, maximum: 10_000 }),
     interventionKind: Type.Union([
       Type.Literal("hint-provided"),
@@ -58,7 +62,10 @@ export type HintInterventionHistoryEntry = Static<
 export const HintSelectionRequestSchema = Type.Object(
   {
     requestKind: Type.Literal("bounded-hint-selection"),
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
     contextRef: OpaqueReferenceSchema,
+    currentOpportunityRef: OpaqueReferenceSchema,
     assessmentPhase: AssessmentPhaseSchema,
     studyHintCeiling: HintLevelSchema,
     previousAssistanceLevel: AssistanceLevelSchema,

@@ -5,6 +5,15 @@ Study supplies exact structured evidence, its allowed Tutor actions, and a
 Study-approved learner-stage profile. The same input always produces the same
 result; the selector has no clock, random source, network access, or storage.
 
+The input is bound to opaque Study-issued learner, session, instructional
+context, current opportunity, and interaction references. Every assistance
+history entry repeats the learner/session/context scope and identifies its
+source interaction and opportunity. Earlier interactions and opportunities in
+that exact scope are valid. Any cross-learner, cross-session, or cross-context
+entry rejects the whole input as `INVALID_INTERVENTION_INPUT`; contaminated
+entries are never filtered or counted. Duplicate source-interaction provenance
+also rejects the input so a replay cannot inflate the ladder.
+
 The ladder states are `continue`, `hint`, `check-prerequisite`, `reteach`,
 `suggest-break`, `escalate`, and `return-to-lesson`. `continue` is an internal
 recommendation state and maps to the already-authorized `return-to-lesson`

@@ -7,6 +7,11 @@ import {
 } from "./contracts.js";
 import { selectBoundedHint } from "./hint-ladder.js";
 
+const LEARNER_SCOPE_REF = "learner-scope:learner-a";
+const SESSION_REF = "session:session-a";
+const CONTEXT_REF = "hint-context:item-001";
+const CURRENT_OPPORTUNITY_REF = "opportunity:item-001-current";
+
 const reviewedHints: HintSelectionRequest["reviewedHints"] = [
   {
     metadataKind: "study-reviewed-hint",
@@ -51,7 +56,10 @@ function request(
 ): HintSelectionRequest {
   return {
     requestKind: "bounded-hint-selection",
-    contextRef: "hint-context:item-001",
+    learnerScopeRef: LEARNER_SCOPE_REF,
+    sessionRef: SESSION_REF,
+    contextRef: CONTEXT_REF,
+    currentOpportunityRef: CURRENT_OPPORTUNITY_REF,
     assessmentPhase: "instruction-or-practice",
     studyHintCeiling: "guided-step",
     previousAssistanceLevel: "independent",
@@ -77,16 +85,22 @@ function request(
 
 function hintHistory(
   hintLevel: "nudge" | "concept-cue" | "guided-step",
-  contextRef = "hint-context:item-001",
+  contextRef = CONTEXT_REF,
   ordinal = 1,
+  overrides: Partial<HintSelectionRequest["interventionHistory"][number]> = {},
 ): HintSelectionRequest["interventionHistory"][number] {
   return {
+    learnerScopeRef: LEARNER_SCOPE_REF,
+    sessionRef: SESSION_REF,
     interventionRef: `intervention:${contextRef.split(":").at(-1)}-${ordinal}`,
     contextRef,
+    sourceInteractionRef: `interaction:hint-history-${ordinal}`,
+    opportunityRef: `opportunity:hint-history-${ordinal}`,
     ordinal,
     interventionKind: "hint-provided",
     hintLevel,
     assistanceLevel: hintLevel === "guided-step" ? "guided" : "light-hint",
+    ...overrides,
   };
 }
 
@@ -277,8 +291,12 @@ test("guided completion remains guided rather than becoming independent evidence
       interventionHistory: [
         hintHistory("guided-step", "hint-context:item-001", 1),
         {
+          learnerScopeRef: LEARNER_SCOPE_REF,
+          sessionRef: SESSION_REF,
           interventionRef: "intervention:item-001-2",
-          contextRef: "hint-context:item-001",
+          contextRef: CONTEXT_REF,
+          sourceInteractionRef: "interaction:hint-history-2",
+          opportunityRef: "opportunity:hint-history-2",
           ordinal: 2,
           interventionKind: "learner-completion",
           hintLevel: "none",
@@ -312,8 +330,12 @@ test("learner-stage profile pauses escalation until a comprehension recheck", ()
       interventionHistory: [
         ...history,
         {
+          learnerScopeRef: LEARNER_SCOPE_REF,
+          sessionRef: SESSION_REF,
           interventionRef: "intervention:item-001-recheck",
-          contextRef: "hint-context:item-001",
+          contextRef: CONTEXT_REF,
+          sourceInteractionRef: "interaction:hint-recheck-2",
+          opportunityRef: "opportunity:hint-history-2",
           ordinal: 2,
           interventionKind: "comprehension-recheck",
           hintLevel: "none",
@@ -337,6 +359,47 @@ test("selection is deterministic under replay and does not mutate input", () => 
   const second = selectBoundedHint(candidate);
   assert.deepEqual(first, second);
   assert.deepEqual(candidate, snapshot);
+});
+
+test("duplicate and malformed hint provenance fails closed", () => {
+  const first = hintHistory("nudge");
+  const malformedCandidates: unknown[] = [
+    request({
+      interventionHistory: [
+        first,
+        hintHistory("concept-cue", CONTEXT_REF, 2, {
+          interventionRef: first.interventionRef,
+        }),
+      ],
+    }),
+    request({
+      interventionHistory: [
+        first,
+        hintHistory("concept-cue", CONTEXT_REF, 1, {
+          interventionRef: "intervention:contradictory-replay",
+        }),
+      ],
+    }),
+    { ...request(), currentOpportunityRef: "not an opaque reference" },
+    request({
+      interventionHistory: [
+        hintHistory("nudge", CONTEXT_REF, 1, {
+          opportunityRef: "malformed opportunity",
+        }),
+      ],
+    }),
+    request({
+      interventionHistory: [
+        hintHistory("nudge", CONTEXT_REF, 1, {
+          sourceInteractionRef: "malformed interaction",
+        }),
+      ],
+    }),
+  ];
+
+  for (const malformed of malformedCandidates) {
+    assert.equal(selectBoundedHint(malformed).status, "rejected");
+  }
 });
 
 test("malformed hint state fails closed", () => {
@@ -392,28 +455,61 @@ test("hostile hint state fails closed without invoking accessors", () => {
   });
 });
 
-test("cross-context history cannot escalate or contaminate assistance evidence", () => {
+test("cross-learner hint history fails closed instead of escalating nudge to concept cue", () => {
   const result = selectBoundedHint(
     request({
       interventionHistory: [
-        hintHistory("guided-step", "hint-context:different-item"),
-        {
-          interventionRef: "intervention:different-item-reteach",
-          contextRef: "hint-context:different-item",
-          ordinal: 2,
-          interventionKind: "reteach",
-          hintLevel: "none",
-          assistanceLevel: "reteach-required",
-        },
+        hintHistory("concept-cue", CONTEXT_REF, 1, {
+          learnerScopeRef: "learner-scope:learner-b",
+        }),
+      ],
+    }),
+  );
+  assert.deepEqual(result, {
+    status: "rejected",
+    code: "INVALID_HINT_STATE",
+    tutorMayProvideHint: false,
+    unrestrictedProviderProseAllowed: false,
+  });
+});
+
+test("same learner hint history from another session fails closed", () => {
+  const result = selectBoundedHint(
+    request({
+      interventionHistory: [
+        hintHistory("concept-cue", CONTEXT_REF, 1, {
+          sessionRef: "session:session-b",
+        }),
+      ],
+    }),
+  );
+  assert.equal(result.status, "rejected");
+});
+
+test("same learner and session hint history from another context fails closed", () => {
+  const result = selectBoundedHint(
+    request({
+      interventionHistory: [
+        hintHistory("concept-cue", "hint-context:different-item"),
+      ],
+    }),
+  );
+  assert.equal(result.status, "rejected");
+});
+
+test("legitimate prior interaction and opportunity in the same hint scope is accepted", () => {
+  const result = selectBoundedHint(
+    request({
+      interventionHistory: [
+        hintHistory("nudge", CONTEXT_REF, 1, {
+          sourceInteractionRef: "interaction:prior-hint-interaction",
+          opportunityRef: "opportunity:prior-hint-opportunity",
+        }),
       ],
     }),
   );
   assert.equal(result.status, "recommended");
-  if (result.status === "recommended") {
-    assert.equal(result.hintLevel, "nudge");
-    assert.equal(result.assistanceLevel, "light-hint");
-    assert.equal(result.reasonCodes.includes("intervention-history-recommendation"), false);
-  }
+  assert.equal(result.hintLevel, "nudge");
 });
 
 test("only reviewed reference metadata is returned, never hint prose", () => {
