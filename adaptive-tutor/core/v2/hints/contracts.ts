@@ -59,6 +59,48 @@ export type HintInterventionHistoryEntry = Static<
   typeof HintInterventionHistoryEntrySchema
 >;
 
+export const COMPLETED_ASSESSMENT_REVIEW_PERMISSION_VERSION =
+  "study-tutor-v2.completed-assessment-review-permission.v1" as const;
+
+export const CompletedAssessmentReviewPermissionSchema = Type.Union(
+  [
+    Type.Object(
+      {
+        status: Type.Literal("not-authorized"),
+      },
+      { additionalProperties: false },
+    ),
+    Type.Object(
+      {
+        permissionVersion: Type.Literal(
+          COMPLETED_ASSESSMENT_REVIEW_PERMISSION_VERSION,
+        ),
+        status: Type.Literal("authorized"),
+        permissionKind: Type.Literal(
+          "study-completed-assessment-review-permission",
+        ),
+        issuer: Type.Literal("study"),
+        permissionRef: OpaqueReferenceSchema,
+        learnerScopeRef: OpaqueReferenceSchema,
+        sessionRef: OpaqueReferenceSchema,
+        instructionalContextRef: OpaqueReferenceSchema,
+        opportunityRef: OpaqueReferenceSchema,
+        reviewEventRef: OpaqueReferenceSchema,
+        policyRevisionRef: OpaqueReferenceSchema,
+        privacyApprovalRef: Type.Union([
+          OpaqueReferenceSchema,
+          Type.Null(),
+        ]),
+      },
+      { additionalProperties: false },
+    ),
+  ],
+  { $id: "TutorV2CompletedAssessmentReviewPermission" },
+);
+export type CompletedAssessmentReviewPermission = Static<
+  typeof CompletedAssessmentReviewPermissionSchema
+>;
+
 export const HintSelectionRequestSchema = Type.Object(
   {
     requestKind: Type.Literal("bounded-hint-selection"),
@@ -66,19 +108,18 @@ export const HintSelectionRequestSchema = Type.Object(
     sessionRef: OpaqueReferenceSchema,
     contextRef: OpaqueReferenceSchema,
     currentOpportunityRef: OpaqueReferenceSchema,
+    currentReviewEventRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
+    currentReviewPolicyRevisionRef: Type.Union([
+      OpaqueReferenceSchema,
+      Type.Null(),
+    ]),
     assessmentPhase: AssessmentPhaseSchema,
     studyHintCeiling: HintLevelSchema,
     previousAssistanceLevel: AssistanceLevelSchema,
     attemptCount: Type.Integer({ minimum: 0, maximum: 100 }),
     misconceptionSignalCode: Type.Union([PolicyCodeSchema, Type.Null()]),
     learnerStageProfile: LearnerStageHintProfileSchema,
-    reviewPermission: Type.Object(
-      {
-        completedAssessmentReviewAllowed: Type.Boolean(),
-        privacyApprovalRef: Type.Union([OpaqueReferenceSchema, Type.Null()]),
-      },
-      { additionalProperties: false },
-    ),
+    reviewPermission: CompletedAssessmentReviewPermissionSchema,
     interventionHistory: Type.Array(HintInterventionHistoryEntrySchema, {
       maxItems: 24,
     }),
