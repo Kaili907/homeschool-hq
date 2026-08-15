@@ -745,11 +745,11 @@ function parentReason(
 ): ParentExplanationReasonCode {
   if (interventionAction === "check-prerequisite") {
     return repairSource === "reviewed-static-fallback"
-      ? "tutor-unavailable-static-fallback-used"
+      ? "tutor-unavailable-static-fallback-proposed"
       : "prerequisite-review-suggested";
   }
   if (interventionAction === "reteach") return "reteach-suggested";
-  if (interventionAction === "hint") return "hint-level-changed";
+  if (interventionAction === "hint") return "hint-level-change-proposed";
   if (interventionAction === "suggest-break") return "break-suggested";
   if (interventionAction === "escalate") return "adult-review-requested";
   if (interventionAction === "return-to-lesson") return "independent-practice-requested";

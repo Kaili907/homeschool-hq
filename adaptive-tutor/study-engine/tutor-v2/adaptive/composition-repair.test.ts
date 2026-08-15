@@ -190,6 +190,58 @@ test("malformed intervention and authority-bearing repair outputs fall back", as
   assert.equal(JSON.stringify(repairResult).includes("declare-mastered"), false);
 });
 
+test("repair dependency outage keeps pending Parent Why proposal-safe", async () => {
+  const injected = subsystems();
+  Object.defineProperty(injected, "proposeRepair", {
+    value: (
+      request: Parameters<typeof proposePrerequisiteRepair>[0],
+      dependencies: Parameters<typeof proposePrerequisiteRepair>[1],
+    ) => proposePrerequisiteRepair(request, {
+      ...dependencies,
+      prerequisiteGraph: {
+        lookup() {
+          throw new Error("repair graph unavailable");
+        },
+      },
+    }),
+  });
+
+  const result = await composeWave2AdaptiveIntelligence(wave2Fixture(), {
+    replayLedger: new InMemoryWave2ReplayLedger(),
+    adaptiveSubsystems: injected,
+  });
+
+  assert.equal(result.status, "pending-study-decision");
+  if (result.status !== "pending-study-decision") {
+    throw new Error("Expected pending decision");
+  }
+  assert.equal(result.intervention.actionKind, "check-prerequisite");
+  assert.equal(result.repair.source, "reviewed-static-fallback");
+  assert.equal(result.studyMutationAllowed, false);
+  assert.equal(result.parentExplanation?.authoritative, false);
+  assert.equal(result.parentExplanation?.studyMutationAllowed, false);
+  assert.equal(
+    result.parentExplanation?.explanation.reasonCode,
+    "tutor-unavailable-static-fallback-proposed",
+  );
+  assert.equal(
+    result.parentExplanation?.explanation.title,
+    "Reviewed fallback proposed",
+  );
+  assert.equal(
+    result.parentExplanation?.explanation.explanation,
+    "Tutor was unavailable, so reviewed static guidance was proposed for Study to consider for this step.",
+  );
+  assert.match(
+    result.parentExplanation?.explanation.explanation ?? "",
+    /proposed|available/i,
+  );
+  assert.doesNotMatch(
+    JSON.stringify(result.parentExplanation),
+    /Study (?:used|applied|changed|assigned|performed|completed)\b/i,
+  );
+});
+
 test("graph membership without trusted signal does not infer prerequisite deficiency", async () => {
   const request = wave2Fixture();
   request.misconceptionMatch.evidence = [];
@@ -202,7 +254,10 @@ test("graph membership without trusted signal does not infer prerequisite defici
   assert.equal(result.intervention.actionKind, "hint");
   assert.equal(result.repair.status, "withheld");
   assert.deepEqual(result.repair.recommendedConceptRefs, []);
-  assert.equal(result.parentExplanation?.explanation.reasonCode, "hint-level-changed");
+  assert.equal(
+    result.parentExplanation?.explanation.reasonCode,
+    "hint-level-change-proposed",
+  );
 });
 
 test("progress return-to-lesson suppresses unrelated action lanes and Parent Why follows it", async () => {

@@ -10,13 +10,13 @@ export const PARENT_EXPLANATION_VERSION = "tutor-parent-explanation/v1" as const
 
 export const PARENT_EXPLANATION_REASON_CODES = [
   "prerequisite-review-suggested",
-  "hint-level-changed",
+  "hint-level-change-proposed",
   "reteach-suggested",
   "break-suggested",
   "adult-review-requested",
   "evidence-not-yet-strong-enough",
   "independent-practice-requested",
-  "tutor-unavailable-static-fallback-used",
+  "tutor-unavailable-static-fallback-proposed",
 ] as const;
 
 export type ParentExplanationReasonCode =
@@ -33,10 +33,10 @@ export const REVIEWED_PARENT_EXPLANATION_COPY = {
     explanation:
       "Tutor suggested reviewing an earlier skill that may help with the current work.",
   },
-  "hint-level-changed": {
-    title: "Hint level changed",
+  "hint-level-change-proposed": {
+    title: "Hint level change proposed",
     explanation:
-      "Tutor changed the amount of help offered for this part of the activity.",
+      "Tutor proposed changing the amount of help available for this part of the activity.",
   },
   "reteach-suggested": {
     title: "Reteach suggested",
@@ -63,10 +63,10 @@ export const REVIEWED_PARENT_EXPLANATION_COPY = {
     explanation:
       "Tutor requested another practice opportunity without Tutor help so Study can observe independent work.",
   },
-  "tutor-unavailable-static-fallback-used": {
-    title: "Reviewed fallback used",
+  "tutor-unavailable-static-fallback-proposed": {
+    title: "Reviewed fallback proposed",
     explanation:
-      "Tutor was unavailable, so Study used reviewed static guidance for this step.",
+      "Tutor was unavailable, so reviewed static guidance was proposed for Study to consider for this step.",
   },
 } as const satisfies Record<
   ParentExplanationReasonCode,
