@@ -13,53 +13,90 @@
     "title": "Launch and diagnostic: audience, tone, and register"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners read three short draft messages about the same scheduling situation, written for a friend, a coach, and a teacher, identify which register each uses and which one does not match its audience, then rewrite the mismatched message and name the specific wording changes that fixed the register.",
-  "scenario": "The learner is given three short messages already drafted on this task sheet, one addressed to a friend, one to a coach, and one to a teacher, all about asking to move a practice or turn in work late. One message uses a register that does not fit its audience. The learner finds it, rewrites it, and explains the shift.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic audience, tone, and register task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "The learner is given three short messages already drafted on this task sheet, one addressed to a friend, one to a coach, and one to a teacher, all about asking to move a practice or turn in work late.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
   "realWorldAction": false,
   "signOff": null,
-  "safetyNotes": ["All three messages on this task sheet are provided examples for analysis; none are sent to a real coach, teacher, or friend as part of this lesson."],
+  "safetyNotes": [
+    "All three messages on this task sheet are provided examples for analysis; none are sent to a real coach, teacher, or friend as part of this lesson."
+  ],
   "simulationAlternative": null,
-  "materials": ["paper or a document", "the three sample messages printed on this task sheet"],
+  "materials": [
+    "Embedded resource: swk-rfl-g9-u05-l01-model-card",
+    "Embedded resource: swk-rfl-g9-u05-l01-step-card",
+    "Embedded resource: swk-rfl-g9-u05-l01-guided-card",
+    "Embedded resource: swk-rfl-g9-u05-l01-independent-card",
+    "Embedded resource: swk-rfl-g9-u05-l01-evidence-record",
+    "Embedded resource: swk-rfl-g9-u05-l01-retry-pair",
+    "Embedded resource: swk-rfl-g9-u05-l01-delivered-sample",
+    "learner-local: paper or a document"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Read the three messages below, all about the same kind of situation. Message A: 'hey can we push practice to friday? sry for last min lol'. Message B: 'Hi Coach Diaz, would it be possible to move Thursday's practice to Friday? I have a scheduling conflict. Thank you.' Message C: 'hey mr thompson can i turn in the essay late lol my bad.' Decide which audience each message fits (a friend, a coach, or a teacher) based on its wording alone.",
+      "directions": "Analyze the complete worked example on swk-rfl-g9-u05-l01-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "Which audience (friend, coach, or teacher) does each message's wording actually fit, and which one message is aimed at an audience its wording doesn't match?" }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Rewrite Message C so its register fits a teacher, using a greeting with the teacher's name and title, no slang, a plainly stated request, and a polite closing with your name.",
+      "directions": "Complete the fictional coached case on swk-rfl-g9-u05-l01-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My rewrite opens with the teacher's name and an appropriate title instead of slang." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My rewrite removes casual abbreviations like 'lol' and 'my bad' and states the request in plain language." },
-        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My rewrite closes with a polite line and my name." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Compare your rewrite of Message C to Message A, the friend message, even though both messages are making a similar kind of request.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g9-u05-l01-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "short-response", "text": "Name three specific words or phrases you changed between the casual version and your teacher-register rewrite, and explain what register each version signals." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Think about why register matters even when the underlying request is the same.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g9-u05-l01-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one real situation where using the wrong register with a teacher or coach could hurt you, even if your request itself was reasonable." }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one real situation where using the wrong register with a teacher or coach could hurt you, even if your request itself was reasonable."
+        }
       ]
     }
   ],
-  "remediation": "If a learner cannot tell Message C is mismatched, have them circle every slang word or abbreviation in all three messages first, then sort messages by how many casual markers they contain before asking again which audience each fits — the mismatch becomes visible once the markers are counted.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g9-u05-l01-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g9-u05-l01-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g9-u05-l01-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one. | Revision quality and justification: Rewrites Message C into an appropriately formal register and names at least two specific wording changes. Resume at the next unfinished step on swk-rfl-g9-u05-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner write a fourth message for the same scheduling situation addressed to a school administrator they've never met, adjusting the register to be more formal than the coach message and explaining what made it more formal.",
   "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u05-l01.scoring.json",
   "integrity": {
@@ -67,5 +104,259 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g9-ready-for-life-u05-l01",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "career-work",
+    "practicalGoal": "I can complete a realistic audience, tone, and register task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g9-u05-l01-model-card",
+        "swk-rfl-g9-u05-l01-step-card",
+        "swk-rfl-g9-u05-l01-guided-card",
+        "swk-rfl-g9-u05-l01-independent-card",
+        "swk-rfl-g9-u05-l01-evidence-record",
+        "swk-rfl-g9-u05-l01-retry-pair",
+        "swk-rfl-g9-u05-l01-delivered-sample"
+      ],
+      "referencedArtifactWords": [
+        "sample"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g9-u05-l01-delivered-sample"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g9-u05-l01-local-1",
+          "label": "paper or a document",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g9-u05-l01-model-card",
+        "kind": "model",
+        "title": "audience, tone, and register worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner is given three short messages already drafted on this task sheet, one addressed to a friend, one to a coach, and one to a teacher, all about asking to move a practice or turn in work late.",
+          "Model move 1: Read the condition and name the exact audience, tone, and register decision or action.",
+          "Model move 2: Read the three messages below, all about the same kind of situation.",
+          "Model move 3: Rewrite Message C so its register fits a teacher, using a greeting with the teacher's name and title, no slang, a plainly stated request, and a polite closing with your name.",
+          "Model check: Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one. | Revision quality and justification: Rewrites Message C into an appropriately formal register and names at least two specific wording changes."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u05-l01-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "audience, tone, and register action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for audience, tone, and register.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u05-l01-guided-card",
+        "kind": "guided-practice",
+        "title": "audience, tone, and register coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner is given three short messages already drafted on this task sheet, one addressed to a friend, one to a coach, and one to a teacher, all about asking to move a practice or turn in work late.",
+          "Coach direction: Read the three messages below, all about the same kind of situation.",
+          "Learner prompt: Which audience (friend, coach, or teacher) does each message's wording actually fit, and which one message is aimed at an audience its wording doesn't match?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u05-l01-independent-card",
+        "kind": "independent-task",
+        "title": "audience, tone, and register complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Rewrite Message C so its register fits a teacher, using a greeting with the teacher's name and title, no slang, a plainly stated request, and a polite closing with your name.",
+          "Response 1 (t2-p1): My rewrite opens with the teacher's name and an appropriate title instead of slang.",
+          "Response 2 (t2-p2): My rewrite removes casual abbreviations like 'lol' and 'my bad' and states the request in plain language.",
+          "Response 3 (t2-p3): My rewrite closes with a polite line and my name.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u05-l01-evidence-record",
+        "kind": "evidence-record",
+        "title": "audience, tone, and register minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain one real situation where using the wrong register with a teacher or coach could hurt you, even if your request itself was reasonable.",
+          "Success checks: Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one. | Revision quality and justification: Rewrites Message C into an appropriately formal register and names at least two specific wording changes.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u05-l01-retry-pair",
+        "kind": "retry",
+        "title": "audience, tone, and register supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g9-u05-l01-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g9-u05-l01-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional audience, tone, and register condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one. | Revision quality and justification: Rewrites Message C into an appropriately formal register and names at least two specific wording changes..",
+          "Return: resume at the next unfinished step on swk-rfl-g9-u05-l01-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u05-l01-delivered-sample",
+        "kind": "model",
+        "title": "audience, tone, and register delivered sample",
+        "purpose": "Resolves the lesson's named sample so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner is given three short messages already drafted on this task sheet, one addressed to a friend, one to a coach, and one to a teacher, all about asking to move a practice or turn in work late.",
+          "Use steps: Rewrite Message C so its register fits a teacher, using a greeting with the teacher's name and title, no slang, a plainly stated request, and a polite closing with your name.",
+          "Field 1 (t2-p1): My rewrite opens with the teacher's name and an appropriate title instead of slang.",
+          "Field 2 (t2-p2): My rewrite removes casual abbreviations like 'lol' and 'my bad' and states the request in plain language.",
+          "Field 3 (t2-p3): My rewrite closes with a polite line and my name.",
+          "Check against: Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one. | Revision quality and justification: Rewrites Message C into an appropriately formal register and names at least two specific wording changes."
+        ]
+      }
+    ],
+    "model": {
+      "title": "audience, tone, and register worked model",
+      "startingCondition": "The learner is given three short messages already drafted on this task sheet, one addressed to a friend, one to a coach, and one to a teacher, all about asking to move a practice or turn in work late.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact audience, tone, and register decision or action.",
+        "Model move 2: Read the three messages below, all about the same kind of situation.",
+        "Model move 3: Rewrite Message C so its register fits a teacher, using a greeting with the teacher's name and title, no slang, a plainly stated request, and a polite closing with your name."
+      ],
+      "reasoning": "The model names the condition, follows the ordered audience, tone, and register process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one.",
+        "Revision quality and justification: Rewrites Message C into an appropriately formal register and names at least two specific wording changes."
+      ],
+      "resourceRef": "swk-rfl-g9-u05-l01-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for audience, tone, and register.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g9-u05-l01-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner is given three short messages already drafted on this task sheet, one addressed to a friend, one to a coach, and one to a teacher, all about asking to move a practice or turn in work late.",
+      "prompt": "Which audience (friend, coach, or teacher) does each message's wording actually fit, and which one message is aimed at an audience its wording doesn't match?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g9-u05-l01-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g9-u05-l01-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "audience, tone, and register — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g9-u05-l01-independent-card",
+        "directions": "Complete the audience, tone, and register task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g9-u05-l01-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain one real situation where using the wrong register with a teacher or coach could hurt you, even if your request itself was reasonable.",
+      "observableCriteria": [
+        "Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one.",
+        "Revision quality and justification: Rewrites Message C into an appropriately formal register and names at least two specific wording changes."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g9-u05-l01-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g9-u05-l01-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g9-u05-l01-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g9-u05-l01-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Register identification: Correctly labels all three messages' intended audiences and identifies Message C as the mismatched one. | Revision quality and justification: Rewrites Message C into an appropriately formal register and names at least two specific wording changes.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g9-u05-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g9-u05-l01-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

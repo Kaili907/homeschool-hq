@@ -16,10 +16,10 @@
   "standardsRefs": [
     "Manuel Academy Ready for Life elementary sequence — Grade 3",
     "Ready for Life v1 safety, supervision, and no-shame policy reference",
-    "Michigan Health/SEL connections",
-    "Manuel Academy RFL G3 Unit 1 — personal and shared space care"
+    "Manuel Academy RFL G3 Unit 1 — personal and shared space care",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners choose five specific loose items from their own space that do not currently have a fixed storage spot, such as a library book, a water bottle, headphones, a hairbrush, or a jacket, assign each one an exact home location where it will always go, and physically move each item to that home while saying the item and its home out loud.",
+  "objective": "I can practice everything has a home. I will do one step at a time and check one result.",
   "scenario": "The learner walks through their own space, gathers five items sitting on the floor or a random surface with no set spot, decides on one exact home for each item, such as a hook by the door or the second shelf of a bookcase, and carries each item to its new home one at a time.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -28,65 +28,65 @@
   "safetyNotes": [],
   "simulationAlternative": null,
   "materials": [
-    "five loose items from your own space that do not yet have a fixed home",
-    "existing storage spots such as a shelf, hook, drawer, or basket"
+    "Embedded resource: swk-rfl-g3-u01-l03-model-card",
+    "Embedded resource: swk-rfl-g3-u01-l03-step-card",
+    "Embedded resource: swk-rfl-g3-u01-l03-guided-card",
+    "Embedded resource: swk-rfl-g3-u01-l03-independent-card",
+    "Embedded resource: swk-rfl-g3-u01-l03-evidence-record",
+    "Embedded resource: swk-rfl-g3-u01-l03-retry-pair",
+    "adult-or-local: five loose items from your own space that do not yet have a fixed home",
+    "learner-local: existing storage spots such as a shelf, hook, drawer, or basket"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before starting, think of one item you often cannot find.",
+      "directions": "Open swk-rfl-g3-u01-l03-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Name one item you often can't find, and guess: does it already have a fixed home, or does it just end up wherever you last used it?"
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Find five loose items with no fixed home, choose one exact spot for each, and move each item to its new home while naming it out loud.",
+      "directions": "Open swk-rfl-g3-u01-l03-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I found five specific loose items in my space that do not have a fixed home."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I chose one exact spot for each item, such as \"the hook by the door,\" not a vague spot like \"somewhere in the closet.\""
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "I moved each of the five items to its new home."
-        },
-        {
-          "ref": "t2-p4",
-          "promptType": "checklist-item",
-          "text": "I said each item's name and its new home out loud as I put it there."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Without looking at what you wrote down, test your memory.",
+      "directions": "Open swk-rfl-g3-u01-l03-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "From memory, name all five items and the home you gave each one. Then check your list — how many of the five did you get right?"
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Pick one of the five items to think about.",
+      "directions": "Open swk-rfl-g3-u01-l03-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -96,7 +96,7 @@
       ]
     }
   ],
-  "remediation": "If a learner assigns homes that are really just new random piles instead of one fixed logical spot, reteach by working one item at a time and asking \"where do I reach for this most often\" before naming its home, rather than assigning all five homes at once.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g3-u01-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g3-u01-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g3-u01-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Home specificity: Assigns one exact, specific home for every one of the five items. | Recall and retention: Recalls four or five of the five item-and-home pairs from memory. Resume at the next unfinished step on swk-rfl-g3-u01-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner assign homes for five more items in a shared space they do not fully control, such as the entryway or a shared bathroom counter, working out each location together with another person who also uses that space.",
   "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u01-l03.scoring.json",
   "integrity": {
@@ -104,5 +104,245 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
     "sourceLessonId": "ma-g3-ready-for-life-u01-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "home-care",
+    "practicalGoal": "I can practice everything has a home. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g3-u01-l03-model-card",
+        "swk-rfl-g3-u01-l03-step-card",
+        "swk-rfl-g3-u01-l03-guided-card",
+        "swk-rfl-g3-u01-l03-independent-card",
+        "swk-rfl-g3-u01-l03-evidence-record",
+        "swk-rfl-g3-u01-l03-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g3-u01-l03-local-1",
+          "label": "five loose items from your own space that do not yet have a fixed home",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g3-u01-l03-local-2",
+          "label": "existing storage spots such as a shelf, hook, drawer, or basket",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g3-u01-l03-model-card",
+        "kind": "model",
+        "title": "everything has a home worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner walks through their own space, gathers five items sitting on the floor or a random surface with no set spot, decides on one exact home for each item, such as a hook by the door or the second shelf of a bookcase, and carries each item to its new home one at a time.",
+          "Model move 1: Read the condition and name the exact everything has a home decision or action.",
+          "Model move 2: Before starting, think of one item you often cannot find.",
+          "Model move 3: Find five loose items with no fixed home, choose one exact spot for each, and move each item to its new home while naming it out loud.",
+          "Model check: Home specificity: Assigns one exact, specific home for every one of the five items. | Recall and retention: Recalls four or five of the five item-and-home pairs from memory."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "everything has a home action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for everything has a home.",
+          "2. Watch the worked move on swk-rfl-g3-u01-l03-model-card.",
+          "3. Do one coached move on swk-rfl-g3-u01-l03-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g3-u01-l03-independent-card.",
+          "5. Save the small record on swk-rfl-g3-u01-l03-evidence-record; use swk-rfl-g3-u01-l03-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "everything has a home coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner walks through their own space, gathers five items sitting on the floor or a random surface with no set spot, decides on one exact home for each item, such as a hook by the door or the second shelf of a bookcase, and carries each item to its new home one at a time.",
+          "Coach direction: Before starting, think of one item you often cannot find.",
+          "Learner prompt: Name one item you often can't find, and guess: does it already have a fixed home, or does it just end up wherever you last used it?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l03-independent-card",
+        "kind": "independent-task",
+        "title": "everything has a home complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Find five loose items with no fixed home, choose one exact spot for each, and move each item to its new home while naming it out loud.",
+          "Response 1 (t2-p1): I found five specific loose items in my space that do not have a fixed home.",
+          "Response 2 (t2-p2): I chose one exact spot for each item, such as \"the hook by the door,\" not a vague spot like \"somewhere in the closet.\"",
+          "Response 3 (t2-p3): I moved each of the five items to its new home.",
+          "Response 4 (t2-p4): I said each item's name and its new home out loud as I put it there.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "everything has a home minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Pick one of the five items. Describe specifically where it used to end up, such as the floor by your bed or the kitchen counter, versus where it lives now, and one specific way that change affects your day.",
+          "Success checks: Home specificity: Assigns one exact, specific home for every one of the five items. | Recall and retention: Recalls four or five of the five item-and-home pairs from memory.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g3-u01-l03-retry-pair",
+        "kind": "retry",
+        "title": "everything has a home supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g3-u01-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g3-u01-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional everything has a home condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Home specificity: Assigns one exact, specific home for every one of the five items. | Recall and retention: Recalls four or five of the five item-and-home pairs from memory..",
+          "Return: resume at the next unfinished step on swk-rfl-g3-u01-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "everything has a home worked model",
+      "startingCondition": "The learner walks through their own space, gathers five items sitting on the floor or a random surface with no set spot, decides on one exact home for each item, such as a hook by the door or the second shelf of a bookcase, and carries each item to its new home one at a time.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact everything has a home decision or action.",
+        "Model move 2: Before starting, think of one item you often cannot find.",
+        "Model move 3: Find five loose items with no fixed home, choose one exact spot for each, and move each item to its new home while naming it out loud."
+      ],
+      "reasoning": "The model names the condition, follows the ordered everything has a home process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Home specificity: Assigns one exact, specific home for every one of the five items.",
+        "Recall and retention: Recalls four or five of the five item-and-home pairs from memory."
+      ],
+      "resourceRef": "swk-rfl-g3-u01-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for everything has a home.",
+        "2. Watch the worked move on swk-rfl-g3-u01-l03-model-card.",
+        "3. Do one coached move on swk-rfl-g3-u01-l03-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g3-u01-l03-independent-card.",
+        "5. Save the small record on swk-rfl-g3-u01-l03-evidence-record; use swk-rfl-g3-u01-l03-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g3-u01-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner walks through their own space, gathers five items sitting on the floor or a random surface with no set spot, decides on one exact home for each item, such as a hook by the door or the second shelf of a bookcase, and carries each item to its new home one at a time.",
+      "prompt": "Name one item you often can't find, and guess: does it already have a fixed home, or does it just end up wherever you last used it?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Home specificity: Assigns one exact, specific home for every one of the five items.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g3-u01-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g3-u01-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "everything has a home — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g3-u01-l03-independent-card",
+        "directions": "Complete the everything has a home task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g3-u01-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Pick one of the five items. Describe specifically where it used to end up, such as the floor by your bed or the kitchen counter, versus where it lives now, and one specific way that change affects your day.",
+      "observableCriteria": [
+        "Home specificity: Assigns one exact, specific home for every one of the five items.",
+        "Recall and retention: Recalls four or five of the five item-and-home pairs from memory."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g3-u01-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g3-u01-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g3-u01-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g3-u01-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Home specificity: Assigns one exact, specific home for every one of the five items. | Recall and retention: Recalls four or five of the five item-and-home pairs from memory.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g3-u01-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g3-u01-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

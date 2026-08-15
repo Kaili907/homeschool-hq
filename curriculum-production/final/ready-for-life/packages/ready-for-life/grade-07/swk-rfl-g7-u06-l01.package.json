@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL middle-grades progression"
+    "Manuel Academy RFL middle-grades progression",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners spend several days paying close attention to their real household and the people connected to it, then identify one genuine, small, and safe need they could realistically help meet as the starting point of a multi-day community contribution project.",
+  "objective": "I can complete a realistic identifying a need task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "Over the next few days, the learner watches for real, recurring needs in their household or among people the household already knows, such as a neighbor, a relative, or a small group the family already supports, and narrows the list down to one specific need that is safe and realistic for them to help with.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -28,65 +29,65 @@
     "description": "If the learner cannot identify a real need on their own after observing, they instead choose one need from this list — organizing a shared household space, weeding or tidying an outdoor area, sorting items for a group the household already supports, or helping a younger household member practice a skill — and explain specifically how that example would apply to their own household."
   },
   "materials": [
-    "a notebook or notes app for daily observations",
-    "a household calendar or planner if available"
+    "Embedded resource: swk-rfl-g7-u06-l01-model-card",
+    "Embedded resource: swk-rfl-g7-u06-l01-step-card",
+    "Embedded resource: swk-rfl-g7-u06-l01-guided-card",
+    "Embedded resource: swk-rfl-g7-u06-l01-independent-card",
+    "Embedded resource: swk-rfl-g7-u06-l01-evidence-record",
+    "Embedded resource: swk-rfl-g7-u06-l01-retry-pair",
+    "learner-local: a notebook or notes app for daily observations",
+    "adult-or-local: a household calendar or planner if available"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before observing, think about what 'a need someone could help with' actually means.",
+      "directions": "Analyze the complete worked example on swk-rfl-g7-u06-l01-model-card before beginning.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Describe one time recently when you noticed someone in your household or nearby seemed to need help with something, even if you didn't help at the time."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Over at least two different days this week, write down one specific thing you notice that could use help — a task left undone, something a household member mentioned struggling with, or something a neighbor or family friend could use support with.",
+      "directions": "Complete the fictional coached case on swk-rfl-g7-u06-l01-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I recorded at least two separate real observations on two different days."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "Each observation names a specific person or group and a specific task or problem, not a vague category."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "Review your observations and choose the one need that is smallest in scope, safest to attempt, and most realistic for you to help with inside your household or with people the household already knows well.",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g7-u06-l01-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "short-response",
-          "text": "Name the specific need you chose, who it affects, and why you ruled out your other observations for this project."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
         },
         {
           "ref": "t3-p2",
-          "promptType": "fixed-choice",
-          "text": "Is the need mainly inside your own household, or does it involve a neighbor or another household your family already knows?",
-          "choices": [
-            "Inside my own household",
-            "A neighbor or family friend's household",
-            "A small group my household already supports"
-          ]
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on how you narrowed your choice.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g7-u06-l01-evidence-record; omit or fictionalize private details.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -96,7 +97,7 @@
       ]
     }
   ],
-  "remediation": "If a learner struggles to identify a real need after several days of observation, walk through the household's daily routine together step by step until a specific, genuine possibility surfaces, then have them choose or adapt one of the example needs from the simulation alternative.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g7-u06-l01-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g7-u06-l01-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g7-u06-l01-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Observation quality: At least two specific observations are recorded on two different days, each naming a person or group and a specific task. | Need selection reasoning: The chosen need is one of the recorded observations, and the learner gives a specific reason it is smaller in scope and safer than the alternatives. Resume at the next unfinished step on swk-rfl-g7-u06-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner identify a second, unrelated real need and compare which of the two would be more valuable to help with and why, without committing to carry out the second one.",
   "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l01.scoring.json",
   "integrity": {
@@ -104,5 +105,257 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g7-ready-for-life-u06-l01",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic identifying a need task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "Up to seven days; use only the check-ins explicitly named in the task",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g7-u06-l01-model-card",
+        "swk-rfl-g7-u06-l01-step-card",
+        "swk-rfl-g7-u06-l01-guided-card",
+        "swk-rfl-g7-u06-l01-independent-card",
+        "swk-rfl-g7-u06-l01-evidence-record",
+        "swk-rfl-g7-u06-l01-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g7-u06-l01-local-1",
+          "label": "a notebook or notes app for daily observations",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g7-u06-l01-local-2",
+          "label": "a household calendar or planner if available",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g7-u06-l01-model-card",
+        "kind": "model",
+        "title": "identifying a need worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Over the next few days, the learner watches for real, recurring needs in their household or among people the household already knows, such as a neighbor, a relative, or a small group the family already supports, and narrows the list down to one specific need that is safe and realistic for them to help with.",
+          "Model move 1: Read the condition and name the exact identifying a need decision or action.",
+          "Model move 2: Before observing, think about what 'a need someone could help with' actually means.",
+          "Model move 3: Over at least two different days this week, write down one specific thing you notice that could use help — a task left undone, something a household member mentioned struggling with, or something a neighbor or family friend could use support with.",
+          "Model check: Observation quality: At least two specific observations are recorded on two different days, each naming a person or group and a specific task. | Need selection reasoning: The chosen need is one of the recorded observations, and the learner gives a specific reason it is smaller in scope and safer than the alternatives."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l01-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "identifying a need action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for identifying a need.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l01-guided-card",
+        "kind": "guided-practice",
+        "title": "identifying a need coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Over the next few days, the learner watches for real, recurring needs in their household or among people the household already knows, such as a neighbor, a relative, or a small group the family already supports, and narrows the list down to one specific need that is safe and realistic for them to help with.",
+          "Coach direction: Before observing, think about what 'a need someone could help with' actually means.",
+          "Learner prompt: Describe one time recently when you noticed someone in your household or nearby seemed to need help with something, even if you didn't help at the time.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l01-independent-card",
+        "kind": "independent-task",
+        "title": "identifying a need complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Over at least two different days this week, write down one specific thing you notice that could use help — a task left undone, something a household member mentioned struggling with, or something a neighbor or family friend could use support with.",
+          "Response 1 (t2-p1): I recorded at least two separate real observations on two different days.",
+          "Response 2 (t2-p2): Each observation names a specific person or group and a specific task or problem, not a vague category.",
+          "Equal-access rule: If the learner cannot identify a real need on their own after observing, they instead choose one need from this list — organizing a shared household space, weeding or tidying an outdoor area, sorting items for a group the household already supports, or helping a younger household member practice a skill — and explain specifically how that example would apply to their own household."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l01-evidence-record",
+        "kind": "evidence-record",
+        "title": "identifying a need minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain what made this particular need stand out as both genuinely useful and safe enough for you to take on, compared to the other needs you noticed.",
+          "Success checks: Observation quality: At least two specific observations are recorded on two different days, each naming a person or group and a specific task. | Need selection reasoning: The chosen need is one of the recorded observations, and the learner gives a specific reason it is smaller in scope and safer than the alternatives.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l01-retry-pair",
+        "kind": "retry",
+        "title": "identifying a need supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g7-u06-l01-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g7-u06-l01-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional identifying a need condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Observation quality: At least two specific observations are recorded on two different days, each naming a person or group and a specific task. | Need selection reasoning: The chosen need is one of the recorded observations, and the learner gives a specific reason it is smaller in scope and safer than the alternatives..",
+          "Return: resume at the next unfinished step on swk-rfl-g7-u06-l01-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "identifying a need worked model",
+      "startingCondition": "Over the next few days, the learner watches for real, recurring needs in their household or among people the household already knows, such as a neighbor, a relative, or a small group the family already supports, and narrows the list down to one specific need that is safe and realistic for them to help with.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact identifying a need decision or action.",
+        "Model move 2: Before observing, think about what 'a need someone could help with' actually means.",
+        "Model move 3: Over at least two different days this week, write down one specific thing you notice that could use help — a task left undone, something a household member mentioned struggling with, or something a neighbor or family friend could use support with."
+      ],
+      "reasoning": "The model names the condition, follows the ordered identifying a need process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Observation quality: At least two specific observations are recorded on two different days, each naming a person or group and a specific task.",
+        "Need selection reasoning: The chosen need is one of the recorded observations, and the learner gives a specific reason it is smaller in scope and safer than the alternatives."
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l01-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for identifying a need.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l01-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Over the next few days, the learner watches for real, recurring needs in their household or among people the household already knows, such as a neighbor, a relative, or a small group the family already supports, and narrows the list down to one specific need that is safe and realistic for them to help with.",
+      "prompt": "Describe one time recently when you noticed someone in your household or nearby seemed to need help with something, even if you didn't help at the time.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Observation quality: At least two specific observations are recorded on two different days, each naming a person or group and a specific task.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g7-u06-l01-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g7-u06-l01-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "identifying a need — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g7-u06-l01-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Over at least two different days this week, write down one specific thing you notice that could use help — a task left undone, something a household member mentioned struggling with, or something a neighbor or family friend could use support with.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "identifying a need — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g7-u06-l01-independent-card",
+        "directions": "If the learner cannot identify a real need on their own after observing, they instead choose one need from this list — organizing a shared household space, weeding or tidying an outdoor area, sorting items for a group the household already supports, or helping a younger household member practice a skill — and explain specifically how that example would apply to their own household.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g7-u06-l01-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain what made this particular need stand out as both genuinely useful and safe enough for you to take on, compared to the other needs you noticed.",
+      "observableCriteria": [
+        "Observation quality: At least two specific observations are recorded on two different days, each naming a person or group and a specific task.",
+        "Need selection reasoning: The chosen need is one of the recorded observations, and the learner gives a specific reason it is smaller in scope and safer than the alternatives."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l01-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g7-u06-l01-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g7-u06-l01-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g7-u06-l01-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Observation quality: At least two specific observations are recorded on two different days, each naming a person or group and a specific task. | Need selection reasoning: The chosen need is one of the recorded observations, and the learner gives a specific reason it is smaller in scope and safer than the alternatives.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g7-u06-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g7-u06-l01-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

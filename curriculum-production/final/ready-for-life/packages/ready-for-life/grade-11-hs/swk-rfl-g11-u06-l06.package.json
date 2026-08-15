@@ -13,8 +13,11 @@
     "title": "Unit performance task: presenting the plan and revising it"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "This is the culminating performance task for the Grade 11 year: the learner presents their completed transition plan — pathway, requirements, timeline, funding outline in general categories, support needs, and contingencies — to a guardian, drawing together the pathway work from Unit 1, the application system from Unit 2, the health self-management practices from Unit 3, the housing analysis from Unit 4, and the decision-making practice from Unit 5, and then revises the plan based on the guardian's feedback.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic presenting the plan and revising it task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -24,7 +27,13 @@
     "requiresTrustedAdultSupervision": true,
     "certifyingActor": "household-authorized guardian",
     "studentSelfReport": "recorded-but-not-certifying",
-    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation", "revised plan document"],
+    "evidenceTypes": [
+      "planning page",
+      "written notes",
+      "learner explanation",
+      "guardian confirmation",
+      "revised plan document"
+    ],
     "identifiablePhotoRequired": false
   },
   "safetyNotes": [
@@ -36,45 +45,78 @@
     "present": true,
     "description": "If a guardian cannot take part in a live presentation right now, the learner instead writes out their explanation of each section as if presenting it aloud, and a guardian reviews and responds to the written version as soon as possible, with revisions still required afterward."
   },
-  "materials": ["the learner's completed transition plan from this unit", "notes from units 1-5 as needed for reference", "paper or a document for capturing guardian feedback and revisions"],
+  "materials": [
+    "Embedded resource: swk-rfl-g11-u06-l06-model-card",
+    "Embedded resource: swk-rfl-g11-u06-l06-step-card",
+    "Embedded resource: swk-rfl-g11-u06-l06-guided-card",
+    "Embedded resource: swk-rfl-g11-u06-l06-independent-card",
+    "Embedded resource: swk-rfl-g11-u06-l06-evidence-record",
+    "Embedded resource: swk-rfl-g11-u06-l06-retry-pair",
+    "Embedded resource: swk-rfl-g11-u06-l06-delivered-example",
+    "Embedded resource: swk-rfl-g11-u06-l06-delivered-plan",
+    "Embedded resource: swk-rfl-g11-u06-l06-delivered-reference",
+    "adult-or-local: paper or a document for capturing guardian feedback and revisions"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before presenting, identify the part of your plan you feel least confident explaining.",
+      "directions": "Analyze the complete worked example on swk-rfl-g11-u06-l06-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "Which section of your plan do you feel least confident explaining out loud, and what's one thing you could clarify for yourself before the presentation?" }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
-      "kind": "performance-task",
-      "directions": "Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+      "kind": "guided",
+      "directions": "Complete the fictional coached case on swk-rfl-g11-u06-l06-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "A guardian was present for the full presentation." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I explained the pathway, requirements, timeline, funding outline, support needs, and contingencies sections, in whatever order made sense." },
-        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I explained at least one specific connection between this plan and earlier work from units 1 through 5 (for example, how the housing analysis shaped the plan's logistics, or how the decision-making practice shaped how a contingency was chosen)." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "guided",
-      "directions": "Capture the guardian's questions and feedback during and after the presentation.",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g11-u06-l06-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize the specific questions or feedback your guardian gave on the plan, including anything they thought was missing, unclear, or worth reconsidering." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Revise the plan based on the feedback and reflect on the year's work.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g11-u06-l06-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe at least one real change you made to the plan based on your guardian's feedback, and why that change makes the plan stronger." },
-        { "ref": "t4-p2", "promptType": "short-response", "text": "Looking back across the whole year, what is the single most useful thing you learned that shaped this final plan?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe at least one real change you made to the plan based on your guardian's feedback, and why that change makes the plan stronger."
+        }
       ]
     }
   ],
-  "remediation": "If the learner's presentation or write-up treats sections as separate and unconnected (no reference to earlier units, or feedback captured only as 'no changes needed'), reteach by walking through the plan with the learner one section at a time and asking directly which specific unit 1-5 artifact shaped it, then having the guardian ask at least one clarifying question live before the write-up is finalized.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g11-u06-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g11-u06-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g11-u06-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making). | Completeness of the plan presented: All six required sections are present and specific enough to explain to another person. | Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback. | Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan. Resume at the next unfinished step on swk-rfl-g11-u06-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner write a short closing statement, to keep with the plan, describing what would make them feel the plan needs to be revisited again (a specific event, deadline, or change in circumstances), turning the plan into something they will actually return to rather than a one-time document.",
   "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l06.scoring.json",
   "integrity": {
@@ -82,5 +124,309 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g11-ready-for-life-u06-l06",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic presenting the plan and revising it task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g11-u06-l06-model-card",
+        "swk-rfl-g11-u06-l06-step-card",
+        "swk-rfl-g11-u06-l06-guided-card",
+        "swk-rfl-g11-u06-l06-independent-card",
+        "swk-rfl-g11-u06-l06-evidence-record",
+        "swk-rfl-g11-u06-l06-retry-pair",
+        "swk-rfl-g11-u06-l06-delivered-example",
+        "swk-rfl-g11-u06-l06-delivered-plan",
+        "swk-rfl-g11-u06-l06-delivered-reference"
+      ],
+      "referencedArtifactWords": [
+        "example",
+        "plan",
+        "reference"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g11-u06-l06-delivered-example",
+        "swk-rfl-g11-u06-l06-delivered-plan",
+        "swk-rfl-g11-u06-l06-delivered-reference"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g11-u06-l06-local-1",
+          "label": "paper or a document for capturing guardian feedback and revisions",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-model-card",
+        "kind": "model",
+        "title": "presenting the plan and revising it worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
+          "Model move 1: Read the condition and name the exact presenting the plan and revising it decision or action.",
+          "Model move 2: Before presenting, identify the part of your plan you feel least confident explaining.",
+          "Model move 3: Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+          "Model check: Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making). | Completeness of the plan presented: All six required sections are present and specific enough to explain to another person. | Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback. | Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "presenting the plan and revising it action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for presenting the plan and revising it.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "presenting the plan and revising it coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
+          "Coach direction: Before presenting, identify the part of your plan you feel least confident explaining.",
+          "Learner prompt: Which section of your plan do you feel least confident explaining out loud, and what's one thing you could clarify for yourself before the presentation?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-independent-card",
+        "kind": "independent-task",
+        "title": "presenting the plan and revising it complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+          "Response 1 (t2-p1): A guardian was present for the full presentation.",
+          "Response 2 (t2-p2): I explained the pathway, requirements, timeline, funding outline, support needs, and contingencies sections, in whatever order made sense.",
+          "Response 3 (t2-p3): I explained at least one specific connection between this plan and earlier work from units 1 through 5 (for example, how the housing analysis shaped the plan's logistics, or how the decision-making practice shaped how a contingency was chosen).",
+          "Equal-access rule: If a guardian cannot take part in a live presentation right now, the learner instead writes out their explanation of each section as if presenting it aloud, and a guardian reviews and responds to the written version as soon as possible, with revisions still required afterward."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "presenting the plan and revising it minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Describe at least one real change you made to the plan based on your guardian's feedback, and why that change makes the plan stronger.",
+          "Success checks: Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making). | Completeness of the plan presented: All six required sections are present and specific enough to explain to another person. | Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback. | Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-retry-pair",
+        "kind": "retry",
+        "title": "presenting the plan and revising it supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g11-u06-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g11-u06-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional presenting the plan and revising it condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making). | Completeness of the plan presented: All six required sections are present and specific enough to explain to another person. | Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback. | Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan..",
+          "Return: resume at the next unfinished step on swk-rfl-g11-u06-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-delivered-example",
+        "kind": "model",
+        "title": "presenting the plan and revising it delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
+          "Use steps: Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+          "Field 1 (t2-p1): A guardian was present for the full presentation.",
+          "Field 2 (t2-p2): I explained the pathway, requirements, timeline, funding outline, support needs, and contingencies sections, in whatever order made sense.",
+          "Field 3 (t2-p3): I explained at least one specific connection between this plan and earlier work from units 1 through 5 (for example, how the housing analysis shaped the plan's logistics, or how the decision-making practice shaped how a contingency was chosen).",
+          "Check against: Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making). | Completeness of the plan presented: All six required sections are present and specific enough to explain to another person. | Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback. | Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-delivered-plan",
+        "kind": "independent-task",
+        "title": "presenting the plan and revising it delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
+          "Use steps: Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+          "Field 1 (t2-p1): A guardian was present for the full presentation.",
+          "Field 2 (t2-p2): I explained the pathway, requirements, timeline, funding outline, support needs, and contingencies sections, in whatever order made sense.",
+          "Field 3 (t2-p3): I explained at least one specific connection between this plan and earlier work from units 1 through 5 (for example, how the housing analysis shaped the plan's logistics, or how the decision-making practice shaped how a contingency was chosen).",
+          "Check against: Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making). | Completeness of the plan presented: All six required sections are present and specific enough to explain to another person. | Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback. | Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l06-delivered-reference",
+        "kind": "reference",
+        "title": "presenting the plan and revising it delivered reference",
+        "purpose": "Resolves the lesson's named reference so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
+          "Use steps: Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+          "Field 1 (t2-p1): A guardian was present for the full presentation.",
+          "Field 2 (t2-p2): I explained the pathway, requirements, timeline, funding outline, support needs, and contingencies sections, in whatever order made sense.",
+          "Field 3 (t2-p3): I explained at least one specific connection between this plan and earlier work from units 1 through 5 (for example, how the housing analysis shaped the plan's logistics, or how the decision-making practice shaped how a contingency was chosen).",
+          "Check against: Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making). | Completeness of the plan presented: All six required sections are present and specific enough to explain to another person. | Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback. | Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan."
+        ]
+      }
+    ],
+    "model": {
+      "title": "presenting the plan and revising it worked model",
+      "startingCondition": "With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact presenting the plan and revising it decision or action.",
+        "Model move 2: Before presenting, identify the part of your plan you feel least confident explaining.",
+        "Model move 3: Present the full plan to a guardian, section by section, explaining the reasoning behind each part."
+      ],
+      "reasoning": "The model names the condition, follows the ordered presenting the plan and revising it process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making).",
+        "Completeness of the plan presented: All six required sections are present and specific enough to explain to another person.",
+        "Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback.",
+        "Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan."
+      ],
+      "resourceRef": "swk-rfl-g11-u06-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for presenting the plan and revising it.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g11-u06-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "With a guardian, the learner walks through the full transition plan section by section, explains the reasoning behind each part and how it connects to what was learned across the year, listens to the guardian's questions and feedback, and then makes at least one real revision to the plan based on that feedback.",
+      "prompt": "Which section of your plan do you feel least confident explaining out loud, and what's one thing you could clarify for yourself before the presentation?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making).",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g11-u06-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g11-u06-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "presenting the plan and revising it — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g11-u06-l06-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "presenting the plan and revising it — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g11-u06-l06-independent-card",
+        "directions": "If a guardian cannot take part in a live presentation right now, the learner instead writes out their explanation of each section as if presenting it aloud, and a guardian reviews and responds to the written version as soon as possible, with revisions still required afterward.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g11-u06-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Describe at least one real change you made to the plan based on your guardian's feedback, and why that change makes the plan stronger.",
+      "observableCriteria": [
+        "Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making).",
+        "Completeness of the plan presented: All six required sections are present and specific enough to explain to another person.",
+        "Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback.",
+        "Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g11-u06-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g11-u06-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g11-u06-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g11-u06-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Integration across the year's work: Presentation explicitly connects at least one part of the plan to specific work from an earlier unit (pathway, applications, health, housing, or decision-making). | Completeness of the plan presented: All six required sections are present and specific enough to explain to another person. | Genuine use of guardian feedback: At least one specific, real revision was made to the plan based on actual guardian feedback. | Reflection on the year: Closing reflection names one specific, real thing learned that shaped the final plan.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g11-u06-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g11-u06-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

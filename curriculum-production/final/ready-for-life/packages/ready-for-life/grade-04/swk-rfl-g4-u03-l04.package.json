@@ -14,10 +14,11 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners look at the real, full list of steps for one simple food their household actually plans to make, sort every step into 'I can do it alone,' 'I can do it right next to an adult,' or 'only the adult does this,' and explain the specific hazard behind each adult-only step before a trusted adult confirms or corrects each call.",
-  "scenario": "A trusted adult picks one simple, real food or drink the household is actually planning to make, such as scrambled eggs, grilled cheese, or a smoothie, and writes out every step from start to finish. Before any step is done, the learner sorts each one and explains their reasoning, and the adult checks the sort against what really happens in the kitchen.",
+  "objective": "I can practice steps that require an adult. I will do one step at a time and check one result.",
+  "scenario": "A trusted adult picks one simple, real food or drink the household is actually planning to make, such as scrambled eggs, grilled cheese, or a smoothie, and writes out every step from start to finish.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
   "realWorldAction": true,
@@ -44,67 +45,67 @@
     "description": "If no real recipe or kitchen access is available, the learner instead reads a printed or written step list for a common simple food, such as instructions for making toast with jam or a basic fruit salad, sorts each step into the same three categories, and writes the specific hazard reasoning for every adult-only step without needing an actual kitchen or ingredients."
   },
   "materials": [
-    "a real, simple recipe or food-prep plan the household is actually using",
-    "paper or a notes app to write the sorted list",
-    "a trusted adult",
-    "the actual kitchen where the food will be made"
+    "Embedded resource: swk-rfl-g4-u03-l04-model-card",
+    "Embedded resource: swk-rfl-g4-u03-l04-step-card",
+    "Embedded resource: swk-rfl-g4-u03-l04-guided-card",
+    "Embedded resource: swk-rfl-g4-u03-l04-independent-card",
+    "Embedded resource: swk-rfl-g4-u03-l04-evidence-record",
+    "Embedded resource: swk-rfl-g4-u03-l04-retry-pair",
+    "Embedded resource: swk-rfl-g4-u03-l04-delivered-plan",
+    "learner-local: paper or a notes app to write the sorted list",
+    "adult-or-local: a trusted adult",
+    "adult-or-local: the actual kitchen where the food will be made"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before sorting anything, read through the whole step list with your adult once, start to finish.",
+      "directions": "Open swk-rfl-g4-u03-l04-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Name one step in the list that you are already sure you can do completely by yourself."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Go through the step list one step at a time with your adult and sort each one into 'alone,' 'next to an adult,' or 'adult only,' saying your reason out loud before writing it down.",
+      "directions": "Open swk-rfl-g4-u03-l04-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I gave every single step in the list one of the three sorting labels."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "For every 'adult only' step, I named the specific hazard: heat, a sharp blade, an appliance, or a cleaning chemical."
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "My adult confirmed or corrected each of my sorting decisions before we moved to the next step."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "After your adult confirms the full sort, write a short plan for how the two of you will actually divide the work: which steps you will do, which you will do next to your adult, and which your adult will do alone while you watch or wait.",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g4-u03-l04-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "extended-response",
-          "text": "Write your division-of-labor plan step by step, naming who does each step and why, based on the hazard reasoning from your sort."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
         },
         {
           "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Name one 'next to an adult' step you are looking forward to being ready to do completely alone someday, and what would need to change for that to happen."
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Think back to a specific time when a kitchen step was done without this kind of sorting first.",
+      "directions": "Open swk-rfl-g4-u03-l04-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -114,7 +115,7 @@
       ]
     }
   ],
-  "remediation": "If a learner sorts a step as 'alone' or 'next to an adult' based on how fun or easy it looks rather than the actual hazard present, reteach with a hazard-only drill: cover the step descriptions and show just four hazard words (heat, blade, appliance, chemical) one at a time, having the learner name a real kitchen action that matches each word before returning to sorting the full step list.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g4-u03-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g4-u03-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g4-u03-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical). | Division-of-labor reasoning: The plan names who does each step and ties the reasoning back to the specific hazard identified earlier. Resume at the next unfinished step on swk-rfl-g4-u03-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner sort the steps for a second, different real food or drink the household plans to make later in the week, then compare in writing which of the two tasks had more adult-only steps and why.",
   "scoringRef": "scoring/swk-rfl-g4-u03-l04.scoring.json",
   "integrity": {
@@ -122,5 +123,281 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
     "sourceLessonId": "ma-g4-ready-for-life-u03-l04",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can practice steps that require an adult. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g4-u03-l04-model-card",
+        "swk-rfl-g4-u03-l04-step-card",
+        "swk-rfl-g4-u03-l04-guided-card",
+        "swk-rfl-g4-u03-l04-independent-card",
+        "swk-rfl-g4-u03-l04-evidence-record",
+        "swk-rfl-g4-u03-l04-retry-pair",
+        "swk-rfl-g4-u03-l04-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g4-u03-l04-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g4-u03-l04-local-1",
+          "label": "paper or a notes app to write the sorted list",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l04-local-2",
+          "label": "a trusted adult",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u03-l04-local-3",
+          "label": "the actual kitchen where the food will be made",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g4-u03-l04-model-card",
+        "kind": "model",
+        "title": "steps that require an adult worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: A trusted adult picks one simple, real food or drink the household is actually planning to make, such as scrambled eggs, grilled cheese, or a smoothie, and writes out every step from start to finish.",
+          "Model move 1: Read the condition and name the exact steps that require an adult decision or action.",
+          "Model move 2: Before sorting anything, read through the whole step list with your adult once, start to finish.",
+          "Model move 3: Go through the step list one step at a time with your adult and sort each one into 'alone,' 'next to an adult,' or 'adult only,' saying your reason out loud before writing it down.",
+          "Model check: Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical). | Division-of-labor reasoning: The plan names who does each step and ties the reasoning back to the specific hazard identified earlier."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "steps that require an adult action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for steps that require an adult.",
+          "2. Watch the worked move on swk-rfl-g4-u03-l04-model-card.",
+          "3. Do one coached move on swk-rfl-g4-u03-l04-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g4-u03-l04-independent-card.",
+          "5. Save the small record on swk-rfl-g4-u03-l04-evidence-record; use swk-rfl-g4-u03-l04-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "steps that require an adult coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: A trusted adult picks one simple, real food or drink the household is actually planning to make, such as scrambled eggs, grilled cheese, or a smoothie, and writes out every step from start to finish.",
+          "Coach direction: Before sorting anything, read through the whole step list with your adult once, start to finish.",
+          "Learner prompt: Name one step in the list that you are already sure you can do completely by yourself.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l04-independent-card",
+        "kind": "independent-task",
+        "title": "steps that require an adult complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Go through the step list one step at a time with your adult and sort each one into 'alone,' 'next to an adult,' or 'adult only,' saying your reason out loud before writing it down.",
+          "Response 1 (t2-p1): I gave every single step in the list one of the three sorting labels.",
+          "Response 2 (t2-p2): For every 'adult only' step, I named the specific hazard: heat, a sharp blade, an appliance, or a cleaning chemical.",
+          "Response 3 (t2-p3): My adult confirmed or corrected each of my sorting decisions before we moved to the next step.",
+          "Equal-access rule: If no real recipe or kitchen access is available, the learner instead reads a printed or written step list for a common simple food, such as instructions for making toast with jam or a basic fruit salad, sorts each step into the same three categories, and writes the specific hazard reasoning for every adult-only step without needing an actual kitchen or ingredients."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "steps that require an adult minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Describe a specific time you remember an adult-only kitchen step being done, and explain what could have gone wrong if a kid had tried that step without an adult.",
+          "Success checks: Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical). | Division-of-labor reasoning: The plan names who does each step and ties the reasoning back to the specific hazard identified earlier.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l04-retry-pair",
+        "kind": "retry",
+        "title": "steps that require an adult supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g4-u03-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g4-u03-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional steps that require an adult condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical). | Division-of-labor reasoning: The plan names who does each step and ties the reasoning back to the specific hazard identified earlier..",
+          "Return: resume at the next unfinished step on swk-rfl-g4-u03-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u03-l04-delivered-plan",
+        "kind": "independent-task",
+        "title": "steps that require an adult delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: A trusted adult picks one simple, real food or drink the household is actually planning to make, such as scrambled eggs, grilled cheese, or a smoothie, and writes out every step from start to finish.",
+          "Use steps: Go through the step list one step at a time with your adult and sort each one into 'alone,' 'next to an adult,' or 'adult only,' saying your reason out loud before writing it down.",
+          "Field 1 (t2-p1): I gave every single step in the list one of the three sorting labels.",
+          "Field 2 (t2-p2): For every 'adult only' step, I named the specific hazard: heat, a sharp blade, an appliance, or a cleaning chemical.",
+          "Field 3 (t2-p3): My adult confirmed or corrected each of my sorting decisions before we moved to the next step.",
+          "Check against: Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical). | Division-of-labor reasoning: The plan names who does each step and ties the reasoning back to the specific hazard identified earlier."
+        ]
+      }
+    ],
+    "model": {
+      "title": "steps that require an adult worked model",
+      "startingCondition": "A trusted adult picks one simple, real food or drink the household is actually planning to make, such as scrambled eggs, grilled cheese, or a smoothie, and writes out every step from start to finish.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact steps that require an adult decision or action.",
+        "Model move 2: Before sorting anything, read through the whole step list with your adult once, start to finish.",
+        "Model move 3: Go through the step list one step at a time with your adult and sort each one into 'alone,' 'next to an adult,' or 'adult only,' saying your reason out loud before writing it down."
+      ],
+      "reasoning": "The model names the condition, follows the ordered steps that require an adult process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical).",
+        "Division-of-labor reasoning: The plan names who does each step and ties the reasoning back to the specific hazard identified earlier."
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for steps that require an adult.",
+        "2. Watch the worked move on swk-rfl-g4-u03-l04-model-card.",
+        "3. Do one coached move on swk-rfl-g4-u03-l04-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g4-u03-l04-independent-card.",
+        "5. Save the small record on swk-rfl-g4-u03-l04-evidence-record; use swk-rfl-g4-u03-l04-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "A trusted adult picks one simple, real food or drink the household is actually planning to make, such as scrambled eggs, grilled cheese, or a smoothie, and writes out every step from start to finish.",
+      "prompt": "Name one step in the list that you are already sure you can do completely by yourself.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical).",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g4-u03-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g4-u03-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "steps that require an adult — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g4-u03-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Go through the step list one step at a time with your adult and sort each one into 'alone,' 'next to an adult,' or 'adult only,' saying your reason out loud before writing it down.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "steps that require an adult — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g4-u03-l04-independent-card",
+        "directions": "If no real recipe or kitchen access is available, the learner instead reads a printed or written step list for a common simple food, such as instructions for making toast with jam or a basic fruit salad, sorts each step into the same three categories, and writes the specific hazard reasoning for every adult-only step without needing an actual kitchen or ingredients.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g4-u03-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Describe a specific time you remember an adult-only kitchen step being done, and explain what could have gone wrong if a kid had tried that step without an adult.",
+      "observableCriteria": [
+        "Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical).",
+        "Division-of-labor reasoning: The plan names who does each step and ties the reasoning back to the specific hazard identified earlier."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g4-u03-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g4-u03-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g4-u03-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g4-u03-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Hazard-based sorting accuracy: Every step is sorted, and every adult-only step names a specific hazard (heat, blade, appliance, or chemical). | Division-of-labor reasoning: The plan names who does each step and ties the reasoning back to the specific hazard identified earlier.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g4-u03-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g4-u03-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

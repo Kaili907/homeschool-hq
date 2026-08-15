@@ -13,8 +13,11 @@
     "title": "Guided practice: gathering references appropriately"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners identify two people outside their family who could genuinely speak to their reliability or work, and draft the message they would send to ask permission to list each as a reference, without sending it, so they understand what makes an appropriate reference and how to ask respectfully.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic gathering references appropriately task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "The learner names two non-family adults who know their work directly (such as a teacher, coach, club leader, or volunteer supervisor), explains in one sentence what each could honestly speak to, and drafts (but does not send) a short, polite message asking permission to list them as a reference.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -25,43 +28,77 @@
     "A reference should be someone who has directly observed the learner's work, not simply someone who likes them; the task requires naming what each person could honestly speak to."
   ],
   "simulationAlternative": null,
-  "materials": ["a notebook or document", "the four-part permission-request pattern on this task sheet"],
+  "materials": [
+    "Embedded resource: swk-rfl-g10-u02-l03-model-card",
+    "Embedded resource: swk-rfl-g10-u02-l03-step-card",
+    "Embedded resource: swk-rfl-g10-u02-l03-guided-card",
+    "Embedded resource: swk-rfl-g10-u02-l03-independent-card",
+    "Embedded resource: swk-rfl-g10-u02-l03-evidence-record",
+    "Embedded resource: swk-rfl-g10-u02-l03-retry-pair",
+    "Embedded resource: swk-rfl-g10-u02-l03-delivered-reference",
+    "learner-local: a notebook or document",
+    "learner-local: the four-part permission-request pattern on this task sheet"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "List two non-family adults who have directly observed your work, and one sentence on what each could honestly speak to.",
+      "directions": "Analyze the complete worked example on swk-rfl-g10-u02-l03-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "Name two people and, for each, one honest thing they could speak to based on what they've actually seen you do." }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Draft a short, polite permission-request message for one of the two people, asking before listing them as a reference.",
+      "directions": "Complete the fictional coached case on swk-rfl-g10-u02-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My draft asks permission before assuming the person agrees to be a reference." },
-        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My draft gives enough context (what I'm applying for, and roughly when they might be contacted) that the person can decide." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Explain why each of your two chosen people is an appropriate reference and not just someone who likes you.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g10-u02-l03-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "For each of your two people, explain what they have directly observed that makes them able to honestly speak to your work, not just a friendly relationship." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on what makes a reference request respectful.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g10-u02-l03-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "short-response", "text": "Name one thing your draft message does to make it easy for the person to say no if they're not comfortable, and why that matters." }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one thing your draft message does to make it easy for the person to say no if they're not comfortable, and why that matters."
+        }
       ]
     }
   ],
-  "remediation": "If a learner names someone who only knows them socially with nothing to observe about their work, reteach by contrasting 'knows me' with 'has seen me do something specific' using two side-by-side examples, then have the learner reconsider their two choices against that distinction.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g10-u02-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g10-u02-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g10-u02-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly. | Permission-request quality: The draft asks permission and gives basic context. | Understanding of what a reference is for: Explanation ties each person to something specific they observed. Resume at the next unfinished step on swk-rfl-g10-u02-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner draft a second permission-request message for a person in a different context (for example, a coach instead of a teacher) and compare what details changed between the two messages.",
   "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l03.scoring.json",
   "integrity": {
@@ -69,5 +106,265 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g10-ready-for-life-u02-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "career-work",
+    "practicalGoal": "I can complete a realistic gathering references appropriately task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g10-u02-l03-model-card",
+        "swk-rfl-g10-u02-l03-step-card",
+        "swk-rfl-g10-u02-l03-guided-card",
+        "swk-rfl-g10-u02-l03-independent-card",
+        "swk-rfl-g10-u02-l03-evidence-record",
+        "swk-rfl-g10-u02-l03-retry-pair",
+        "swk-rfl-g10-u02-l03-delivered-reference"
+      ],
+      "referencedArtifactWords": [
+        "reference"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g10-u02-l03-delivered-reference"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g10-u02-l03-local-1",
+          "label": "a notebook or document",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g10-u02-l03-local-2",
+          "label": "the four-part permission-request pattern on this task sheet",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g10-u02-l03-model-card",
+        "kind": "model",
+        "title": "gathering references appropriately worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner names two non-family adults who know their work directly (such as a teacher, coach, club leader, or volunteer supervisor), explains in one sentence what each could honestly speak to, and drafts (but does not send) a short, polite message asking permission to list them as a reference.",
+          "Model move 1: Read the condition and name the exact gathering references appropriately decision or action.",
+          "Model move 2: List two non-family adults who have directly observed your work, and one sentence on what each could honestly speak to.",
+          "Model move 3: Draft a short, polite permission-request message for one of the two people, asking before listing them as a reference.",
+          "Model check: Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly. | Permission-request quality: The draft asks permission and gives basic context. | Understanding of what a reference is for: Explanation ties each person to something specific they observed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "gathering references appropriately action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for gathering references appropriately.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "gathering references appropriately coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner names two non-family adults who know their work directly (such as a teacher, coach, club leader, or volunteer supervisor), explains in one sentence what each could honestly speak to, and drafts (but does not send) a short, polite message asking permission to list them as a reference.",
+          "Coach direction: List two non-family adults who have directly observed your work, and one sentence on what each could honestly speak to.",
+          "Learner prompt: Name two people and, for each, one honest thing they could speak to based on what they've actually seen you do.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l03-independent-card",
+        "kind": "independent-task",
+        "title": "gathering references appropriately complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Draft a short, polite permission-request message for one of the two people, asking before listing them as a reference.",
+          "Response 1 (t2-p1): My draft asks permission before assuming the person agrees to be a reference.",
+          "Response 2 (t2-p2): My draft gives enough context (what I'm applying for, and roughly when they might be contacted) that the person can decide.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "gathering references appropriately minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Name one thing your draft message does to make it easy for the person to say no if they're not comfortable, and why that matters.",
+          "Success checks: Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly. | Permission-request quality: The draft asks permission and gives basic context. | Understanding of what a reference is for: Explanation ties each person to something specific they observed.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l03-retry-pair",
+        "kind": "retry",
+        "title": "gathering references appropriately supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g10-u02-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g10-u02-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional gathering references appropriately condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly. | Permission-request quality: The draft asks permission and gives basic context. | Understanding of what a reference is for: Explanation ties each person to something specific they observed..",
+          "Return: resume at the next unfinished step on swk-rfl-g10-u02-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g10-u02-l03-delivered-reference",
+        "kind": "reference",
+        "title": "gathering references appropriately delivered reference",
+        "purpose": "Resolves the lesson's named reference so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner names two non-family adults who know their work directly (such as a teacher, coach, club leader, or volunteer supervisor), explains in one sentence what each could honestly speak to, and drafts (but does not send) a short, polite message asking permission to list them as a reference.",
+          "Use steps: Draft a short, polite permission-request message for one of the two people, asking before listing them as a reference.",
+          "Field 1 (t2-p1): My draft asks permission before assuming the person agrees to be a reference.",
+          "Field 2 (t2-p2): My draft gives enough context (what I'm applying for, and roughly when they might be contacted) that the person can decide.",
+          "Check against: Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly. | Permission-request quality: The draft asks permission and gives basic context. | Understanding of what a reference is for: Explanation ties each person to something specific they observed."
+        ]
+      }
+    ],
+    "model": {
+      "title": "gathering references appropriately worked model",
+      "startingCondition": "The learner names two non-family adults who know their work directly (such as a teacher, coach, club leader, or volunteer supervisor), explains in one sentence what each could honestly speak to, and drafts (but does not send) a short, polite message asking permission to list them as a reference.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact gathering references appropriately decision or action.",
+        "Model move 2: List two non-family adults who have directly observed your work, and one sentence on what each could honestly speak to.",
+        "Model move 3: Draft a short, polite permission-request message for one of the two people, asking before listing them as a reference."
+      ],
+      "reasoning": "The model names the condition, follows the ordered gathering references appropriately process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly.",
+        "Permission-request quality: The draft asks permission and gives basic context.",
+        "Understanding of what a reference is for: Explanation ties each person to something specific they observed."
+      ],
+      "resourceRef": "swk-rfl-g10-u02-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for gathering references appropriately.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g10-u02-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner names two non-family adults who know their work directly (such as a teacher, coach, club leader, or volunteer supervisor), explains in one sentence what each could honestly speak to, and drafts (but does not send) a short, polite message asking permission to list them as a reference.",
+      "prompt": "Name two people and, for each, one honest thing they could speak to based on what they've actually seen you do.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g10-u02-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g10-u02-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "gathering references appropriately — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g10-u02-l03-independent-card",
+        "directions": "Complete the gathering references appropriately task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g10-u02-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Name one thing your draft message does to make it easy for the person to say no if they're not comfortable, and why that matters.",
+      "observableCriteria": [
+        "Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly.",
+        "Permission-request quality: The draft asks permission and gives basic context.",
+        "Understanding of what a reference is for: Explanation ties each person to something specific they observed."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g10-u02-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g10-u02-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g10-u02-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g10-u02-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Appropriateness of the two people chosen: Both people have plausibly observed the learner's work directly. | Permission-request quality: The draft asks permission and gives basic context. | Understanding of what a reference is for: Explanation ties each person to something specific they observed.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g10-u02-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g10-u02-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

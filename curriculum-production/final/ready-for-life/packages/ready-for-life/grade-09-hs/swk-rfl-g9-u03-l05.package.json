@@ -13,8 +13,11 @@
     "title": "Mastery check: kitchen tool, heat, and appliance safety"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "With a trusted adult present, learners identify and demonstrate safe handling of one real kitchen tool or heat source, such as correctly gripping a knife by its handle with fingers curled back, setting a stove-safety habit like turning pot handles inward, or using an oven mitt to remove a hot item, so they can build one concrete safety habit under direct supervision.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic kitchen tool, heat, and appliance safety task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "With a trusted adult present the entire time, the learner chooses one real kitchen tool, heat source, or appliance from the guidance sheet's list, explains the specific safety risk it poses, and demonstrates the correct safe-handling technique for it once while the adult watches and confirms it was done correctly.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -24,7 +27,12 @@
     "requiresTrustedAdultSupervision": true,
     "certifyingActor": "household-authorized guardian",
     "studentSelfReport": "recorded-but-not-certifying",
-    "evidenceTypes": ["checklist", "written plan", "learner explanation", "guardian confirmation"],
+    "evidenceTypes": [
+      "checklist",
+      "written plan",
+      "learner explanation",
+      "guardian confirmation"
+    ],
     "identifiablePhotoRequired": false
   },
   "safetyNotes": [
@@ -36,44 +44,78 @@
     "present": true,
     "description": "If real handling is not possible, the learner instead reviews the provided set of six short tool-handling scenario descriptions (such as a hand position on a knife, a pot handle position on a stove, or a way of removing a hot pan) and sorts each as safe or unsafe, explaining the specific reason for each call using the same safety criteria as the real demonstration."
   },
-  "materials": ["access to the real kitchen with a trusted adult present", "the provided kitchen tool and appliance safety guidance sheet", "one real kitchen tool, heat source, or appliance from the guidance sheet's list", "an oven mitt if the chosen demonstration involves a hot item"],
+  "materials": [
+    "Embedded resource: swk-rfl-g9-u03-l05-model-card",
+    "Embedded resource: swk-rfl-g9-u03-l05-step-card",
+    "Embedded resource: swk-rfl-g9-u03-l05-guided-card",
+    "Embedded resource: swk-rfl-g9-u03-l05-independent-card",
+    "Embedded resource: swk-rfl-g9-u03-l05-evidence-record",
+    "Embedded resource: swk-rfl-g9-u03-l05-retry-pair",
+    "adult-or-local: access to the real kitchen with a trusted adult present",
+    "adult-or-local: the provided kitchen tool and appliance safety guidance sheet",
+    "adult-or-local: one real kitchen tool, heat source, or appliance from the guidance sheet's list",
+    "learner-local: an oven mitt if the chosen demonstration involves a hot item"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before demonstrating, choose one tool, heat source, or appliance from the guidance sheet and name the specific risk it poses if handled incorrectly.",
+      "directions": "Analyze the complete worked example on swk-rfl-g9-u03-l05-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the tool, heat source, or appliance you chose and describe the specific injury or hazard that incorrect handling could cause." }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "With your adult, review the guidance sheet's correct technique for your chosen item before demonstrating it.",
+      "directions": "Complete the fictional coached case on swk-rfl-g9-u03-l05-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I read the guidance sheet's correct technique for my chosen item before attempting it." },
-        { "ref": "t2-p2", "promptType": "short-response", "text": "Describe the correct technique in your own words, naming the specific hand or body position involved." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "performance-task",
-      "directions": "With your adult watching the entire time, demonstrate the correct safe-handling technique for your chosen item once.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g9-u03-l05-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Did your adult confirm the demonstration matched the guidance sheet's correct technique?", "choices": ["Yes, my adult confirmed it was correct", "No, my adult had to correct my technique"] },
-        { "ref": "t3-p2", "promptType": "short-response", "text": "If your adult corrected you, describe exactly what changed between your first attempt and the corrected technique." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Think about why this specific safety habit matters.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g9-u03-l05-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one specific situation in the future where forgetting this safety habit could lead to an injury, and name the exact step you will remember to prevent it." }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific situation in the future where forgetting this safety habit could lead to an injury, and name the exact step you will remember to prevent it."
+        }
       ]
     }
   ],
-  "remediation": "If a learner can describe the correct technique in words but their physical demonstration does not match it, such as gripping a knife blade too close to the edge or leaving a pot handle turned outward, reteach by having the adult physically position the learner's hand or the tool correctly once, then have the learner repeat the demonstration from that corrected starting position.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g9-u03-l05-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g9-u03-l05-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g9-u03-l05-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Risk identification: The named risk correctly and specifically describes how the chosen item could cause injury if mishandled. | Safe technique demonstration: The adult confirms the demonstrated technique correctly matched the guidance sheet, with or without one correction. Resume at the next unfinished step on swk-rfl-g9-u03-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner choose a second tool, heat source, or appliance from the guidance sheet's list and repeat the full demonstration and explanation process for it, comparing what risk it shares with the first item and what risk is different.",
   "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l05.scoring.json",
   "integrity": {
@@ -81,5 +123,269 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g9-ready-for-life-u03-l05",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can complete a realistic kitchen tool, heat, and appliance safety task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g9-u03-l05-model-card",
+        "swk-rfl-g9-u03-l05-step-card",
+        "swk-rfl-g9-u03-l05-guided-card",
+        "swk-rfl-g9-u03-l05-independent-card",
+        "swk-rfl-g9-u03-l05-evidence-record",
+        "swk-rfl-g9-u03-l05-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g9-u03-l05-local-1",
+          "label": "access to the real kitchen with a trusted adult present",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g9-u03-l05-local-2",
+          "label": "the provided kitchen tool and appliance safety guidance sheet",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g9-u03-l05-local-3",
+          "label": "one real kitchen tool, heat source, or appliance from the guidance sheet's list",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g9-u03-l05-local-4",
+          "label": "an oven mitt if the chosen demonstration involves a hot item",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g9-u03-l05-model-card",
+        "kind": "model",
+        "title": "kitchen tool, heat, and appliance safety worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: With a trusted adult present the entire time, the learner chooses one real kitchen tool, heat source, or appliance from the guidance sheet's list, explains the specific safety risk it poses, and demonstrates the correct safe-handling technique for it once while the adult watches and confirms it was done correctly.",
+          "Model move 1: Read the condition and name the exact kitchen tool, heat, and appliance safety decision or action.",
+          "Model move 2: Before demonstrating, choose one tool, heat source, or appliance from the guidance sheet and name the specific risk it poses if handled incorrectly.",
+          "Model move 3: With your adult, review the guidance sheet's correct technique for your chosen item before demonstrating it.",
+          "Model check: Risk identification: The named risk correctly and specifically describes how the chosen item could cause injury if mishandled. | Safe technique demonstration: The adult confirms the demonstrated technique correctly matched the guidance sheet, with or without one correction."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u03-l05-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "kitchen tool, heat, and appliance safety action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for kitchen tool, heat, and appliance safety.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u03-l05-guided-card",
+        "kind": "guided-practice",
+        "title": "kitchen tool, heat, and appliance safety coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: With a trusted adult present the entire time, the learner chooses one real kitchen tool, heat source, or appliance from the guidance sheet's list, explains the specific safety risk it poses, and demonstrates the correct safe-handling technique for it once while the adult watches and confirms it was done correctly.",
+          "Coach direction: Before demonstrating, choose one tool, heat source, or appliance from the guidance sheet and name the specific risk it poses if handled incorrectly.",
+          "Learner prompt: Name the tool, heat source, or appliance you chose and describe the specific injury or hazard that incorrect handling could cause.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u03-l05-independent-card",
+        "kind": "independent-task",
+        "title": "kitchen tool, heat, and appliance safety complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult, review the guidance sheet's correct technique for your chosen item before demonstrating it.",
+          "Response 1 (t2-p1): I read the guidance sheet's correct technique for my chosen item before attempting it.",
+          "Response 2 (t2-p2): Describe the correct technique in your own words, naming the specific hand or body position involved.",
+          "Equal-access rule: If real handling is not possible, the learner instead reviews the provided set of six short tool-handling scenario descriptions (such as a hand position on a knife, a pot handle position on a stove, or a way of removing a hot pan) and sorts each as safe or unsafe, explaining the specific reason for each call using the same safety criteria as the real demonstration."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u03-l05-evidence-record",
+        "kind": "evidence-record",
+        "title": "kitchen tool, heat, and appliance safety minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain one specific situation in the future where forgetting this safety habit could lead to an injury, and name the exact step you will remember to prevent it.",
+          "Success checks: Risk identification: The named risk correctly and specifically describes how the chosen item could cause injury if mishandled. | Safe technique demonstration: The adult confirms the demonstrated technique correctly matched the guidance sheet, with or without one correction.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g9-u03-l05-retry-pair",
+        "kind": "retry",
+        "title": "kitchen tool, heat, and appliance safety supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g9-u03-l05-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g9-u03-l05-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional kitchen tool, heat, and appliance safety condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Risk identification: The named risk correctly and specifically describes how the chosen item could cause injury if mishandled. | Safe technique demonstration: The adult confirms the demonstrated technique correctly matched the guidance sheet, with or without one correction..",
+          "Return: resume at the next unfinished step on swk-rfl-g9-u03-l05-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "kitchen tool, heat, and appliance safety worked model",
+      "startingCondition": "With a trusted adult present the entire time, the learner chooses one real kitchen tool, heat source, or appliance from the guidance sheet's list, explains the specific safety risk it poses, and demonstrates the correct safe-handling technique for it once while the adult watches and confirms it was done correctly.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact kitchen tool, heat, and appliance safety decision or action.",
+        "Model move 2: Before demonstrating, choose one tool, heat source, or appliance from the guidance sheet and name the specific risk it poses if handled incorrectly.",
+        "Model move 3: With your adult, review the guidance sheet's correct technique for your chosen item before demonstrating it."
+      ],
+      "reasoning": "The model names the condition, follows the ordered kitchen tool, heat, and appliance safety process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Risk identification: The named risk correctly and specifically describes how the chosen item could cause injury if mishandled.",
+        "Safe technique demonstration: The adult confirms the demonstrated technique correctly matched the guidance sheet, with or without one correction."
+      ],
+      "resourceRef": "swk-rfl-g9-u03-l05-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for kitchen tool, heat, and appliance safety.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g9-u03-l05-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "With a trusted adult present the entire time, the learner chooses one real kitchen tool, heat source, or appliance from the guidance sheet's list, explains the specific safety risk it poses, and demonstrates the correct safe-handling technique for it once while the adult watches and confirms it was done correctly.",
+      "prompt": "Name the tool, heat source, or appliance you chose and describe the specific injury or hazard that incorrect handling could cause.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Risk identification: The named risk correctly and specifically describes how the chosen item could cause injury if mishandled.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g9-u03-l05-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g9-u03-l05-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "kitchen tool, heat, and appliance safety — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g9-u03-l05-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult, review the guidance sheet's correct technique for your chosen item before demonstrating it.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "kitchen tool, heat, and appliance safety — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g9-u03-l05-independent-card",
+        "directions": "If real handling is not possible, the learner instead reviews the provided set of six short tool-handling scenario descriptions (such as a hand position on a knife, a pot handle position on a stove, or a way of removing a hot pan) and sorts each as safe or unsafe, explaining the specific reason for each call using the same safety criteria as the real demonstration.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g9-u03-l05-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain one specific situation in the future where forgetting this safety habit could lead to an injury, and name the exact step you will remember to prevent it.",
+      "observableCriteria": [
+        "Risk identification: The named risk correctly and specifically describes how the chosen item could cause injury if mishandled.",
+        "Safe technique demonstration: The adult confirms the demonstrated technique correctly matched the guidance sheet, with or without one correction."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g9-u03-l05-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g9-u03-l05-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g9-u03-l05-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g9-u03-l05-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Risk identification: The named risk correctly and specifically describes how the chosen item could cause injury if mishandled. | Safe technique demonstration: The adult confirms the demonstrated technique correctly matched the guidance sheet, with or without one correction.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g9-u03-l05-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g9-u03-l05-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL middle-grades progression"
+    "Manuel Academy RFL middle-grades progression",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners evaluate the now-completed, supervised project against its original plan and permission scope, and write handoff notes clear enough that another person could understand what was done and pick up any remaining follow-up.",
+  "objective": "I can complete a realistic evaluation and handoff task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "With the project finished, the learner looks back across every earlier stage — the identified need, the granted permission and scope, the materials plan, the communication, and the actual execution — to judge how well the outcome matched the original intent, then writes handoff notes summarizing what was done and what, if anything, still needs attention.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -25,60 +26,65 @@
   "safetyNotes": [],
   "simulationAlternative": null,
   "materials": [
-    "the plans, notes, and records from every previous lesson in this project",
-    "paper or a notes app for the evaluation and handoff notes"
+    "Embedded resource: swk-rfl-g7-u06-l06-model-card",
+    "Embedded resource: swk-rfl-g7-u06-l06-step-card",
+    "Embedded resource: swk-rfl-g7-u06-l06-guided-card",
+    "Embedded resource: swk-rfl-g7-u06-l06-independent-card",
+    "Embedded resource: swk-rfl-g7-u06-l06-evidence-record",
+    "Embedded resource: swk-rfl-g7-u06-l06-retry-pair",
+    "Embedded resource: swk-rfl-g7-u06-l06-delivered-plan",
+    "learner-local: paper or a notes app for the evaluation and handoff notes"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before evaluating, recall the original need you identified on the first lesson day of this project.",
+      "directions": "Analyze the complete worked example on swk-rfl-g7-u06-l06-model-card before beginning.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Restate the original need in one or two sentences, as you understood it before you did any planning."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Compare the actual outcome of your project to the scope that was granted permission earlier in this project, noting any place where what you did matched, exceeded, or fell short of that original scope.",
+      "directions": "Complete the fictional coached case on swk-rfl-g7-u06-l06-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I compared the actual outcome to the specific scope that was granted, not to a vague memory of my intentions."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I noted at least one place where the outcome matched the plan and one place where it differed."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Write handoff notes that would let someone else who was not involved understand exactly what was done, what materials or steps were used, and what, if anything, still needs follow-up or could be continued by someone else.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g7-u06-l06-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "short-response",
-          "text": "Write the handoff notes themselves: what was done, when, and any specific follow-up task that still remains."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
         },
         {
           "ref": "t3-p2",
-          "promptType": "extended-response",
-          "text": "Explain what a person reading only your handoff notes, with no other context, would need to know to correctly finish or continue any remaining part of this project."
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on the whole capstone project.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g7-u06-l06-evidence-record; omit or fictionalize private details.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -88,7 +94,7 @@
       ]
     }
   ],
-  "remediation": "If a learner's handoff notes are too vague for someone else to act on, have them read the notes aloud to a trusted adult who was not directly involved in the execution step and revise based on what that adult says is unclear.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g7-u06-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g7-u06-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g7-u06-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope. | Handoff clarity: The handoff notes clearly state what was done and name any specific remaining follow-up task. Resume at the next unfinished step on swk-rfl-g7-u06-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner write one sentence recommending whether this specific need is a one-time project or an ongoing responsibility someone in the household could keep up, and why.",
   "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l06.scoring.json",
   "integrity": {
@@ -96,5 +102,257 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g7-ready-for-life-u06-l06",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic evaluation and handoff task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g7-u06-l06-model-card",
+        "swk-rfl-g7-u06-l06-step-card",
+        "swk-rfl-g7-u06-l06-guided-card",
+        "swk-rfl-g7-u06-l06-independent-card",
+        "swk-rfl-g7-u06-l06-evidence-record",
+        "swk-rfl-g7-u06-l06-retry-pair",
+        "swk-rfl-g7-u06-l06-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g7-u06-l06-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g7-u06-l06-local-1",
+          "label": "paper or a notes app for the evaluation and handoff notes",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g7-u06-l06-model-card",
+        "kind": "model",
+        "title": "evaluation and handoff worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: With the project finished, the learner looks back across every earlier stage — the identified need, the granted permission and scope, the materials plan, the communication, and the actual execution — to judge how well the outcome matched the original intent, then writes handoff notes summarizing what was done and what, if anything, still needs attention.",
+          "Model move 1: Read the condition and name the exact evaluation and handoff decision or action.",
+          "Model move 2: Before evaluating, recall the original need you identified on the first lesson day of this project.",
+          "Model move 3: Compare the actual outcome of your project to the scope that was granted permission earlier in this project, noting any place where what you did matched, exceeded, or fell short of that original scope.",
+          "Model check: Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope. | Handoff clarity: The handoff notes clearly state what was done and name any specific remaining follow-up task."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "evaluation and handoff action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for evaluation and handoff.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "evaluation and handoff coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: With the project finished, the learner looks back across every earlier stage — the identified need, the granted permission and scope, the materials plan, the communication, and the actual execution — to judge how well the outcome matched the original intent, then writes handoff notes summarizing what was done and what, if anything, still needs attention.",
+          "Coach direction: Before evaluating, recall the original need you identified on the first lesson day of this project.",
+          "Learner prompt: Restate the original need in one or two sentences, as you understood it before you did any planning.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l06-independent-card",
+        "kind": "independent-task",
+        "title": "evaluation and handoff complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Compare the actual outcome of your project to the scope that was granted permission earlier in this project, noting any place where what you did matched, exceeded, or fell short of that original scope.",
+          "Response 1 (t2-p1): I compared the actual outcome to the specific scope that was granted, not to a vague memory of my intentions.",
+          "Response 2 (t2-p2): I noted at least one place where the outcome matched the plan and one place where it differed.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "evaluation and handoff minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Looking back across identifying the need, getting permission, planning, communicating, and carrying it out, explain which single stage most changed your original idea of the project, and why.",
+          "Success checks: Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope. | Handoff clarity: The handoff notes clearly state what was done and name any specific remaining follow-up task.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l06-retry-pair",
+        "kind": "retry",
+        "title": "evaluation and handoff supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g7-u06-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g7-u06-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional evaluation and handoff condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope. | Handoff clarity: The handoff notes clearly state what was done and name any specific remaining follow-up task..",
+          "Return: resume at the next unfinished step on swk-rfl-g7-u06-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u06-l06-delivered-plan",
+        "kind": "independent-task",
+        "title": "evaluation and handoff delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: With the project finished, the learner looks back across every earlier stage — the identified need, the granted permission and scope, the materials plan, the communication, and the actual execution — to judge how well the outcome matched the original intent, then writes handoff notes summarizing what was done and what, if anything, still needs attention.",
+          "Use steps: Compare the actual outcome of your project to the scope that was granted permission earlier in this project, noting any place where what you did matched, exceeded, or fell short of that original scope.",
+          "Field 1 (t2-p1): I compared the actual outcome to the specific scope that was granted, not to a vague memory of my intentions.",
+          "Field 2 (t2-p2): I noted at least one place where the outcome matched the plan and one place where it differed.",
+          "Check against: Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope. | Handoff clarity: The handoff notes clearly state what was done and name any specific remaining follow-up task."
+        ]
+      }
+    ],
+    "model": {
+      "title": "evaluation and handoff worked model",
+      "startingCondition": "With the project finished, the learner looks back across every earlier stage — the identified need, the granted permission and scope, the materials plan, the communication, and the actual execution — to judge how well the outcome matched the original intent, then writes handoff notes summarizing what was done and what, if anything, still needs attention.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact evaluation and handoff decision or action.",
+        "Model move 2: Before evaluating, recall the original need you identified on the first lesson day of this project.",
+        "Model move 3: Compare the actual outcome of your project to the scope that was granted permission earlier in this project, noting any place where what you did matched, exceeded, or fell short of that original scope."
+      ],
+      "reasoning": "The model names the condition, follows the ordered evaluation and handoff process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope.",
+        "Handoff clarity: The handoff notes clearly state what was done and name any specific remaining follow-up task."
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for evaluation and handoff.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "With the project finished, the learner looks back across every earlier stage — the identified need, the granted permission and scope, the materials plan, the communication, and the actual execution — to judge how well the outcome matched the original intent, then writes handoff notes summarizing what was done and what, if anything, still needs attention.",
+      "prompt": "Restate the original need in one or two sentences, as you understood it before you did any planning.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g7-u06-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g7-u06-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "evaluation and handoff — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g7-u06-l06-independent-card",
+        "directions": "Complete the evaluation and handoff task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g7-u06-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Looking back across identifying the need, getting permission, planning, communicating, and carrying it out, explain which single stage most changed your original idea of the project, and why.",
+      "observableCriteria": [
+        "Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope.",
+        "Handoff clarity: The handoff notes clearly state what was done and name any specific remaining follow-up task."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g7-u06-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g7-u06-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g7-u06-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g7-u06-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Outcome-to-scope comparison: The comparison specifically identifies at least one match and one difference between the actual outcome and the granted scope. | Handoff clarity: The handoff notes clearly state what was done and name any specific remaining follow-up task.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g7-u06-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g7-u06-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

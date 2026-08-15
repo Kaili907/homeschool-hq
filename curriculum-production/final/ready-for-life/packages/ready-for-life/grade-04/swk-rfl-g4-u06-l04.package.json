@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners carry out their planned household contribution step by step with a guardian's permission and supervision as specified in their safety plan, producing a completed contribution and a written record of what happened at each step compared to the original plan.",
+  "objective": "I can practice carrying out the contribution. I will do one step at a time and check one result.",
   "scenario": "Using the plan and supervision notes you built over the last two lessons, and with your household's permission, you carry out your chosen contribution today, whether that is organizing a shared space, building a routine chart, teaching a skill you know to someone else in the household, helping with a non-heat food-prep step, or setting up a checklist system, following your plan's order and your safety notes for any step that needs an adult.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -44,66 +45,67 @@
     "description": "If the planned contribution genuinely cannot be carried out today, for example a needed adult is unavailable or a shared space is unexpectedly unavailable, the learner instead walks through the full plan step by step with an available trusted adult, narrating exactly what they would do and check at each step, including how each supervision-flagged step would be handled, and writes a detailed account of what would happen at each step, earning full credit for demonstrating the same sequencing and safety judgment."
   },
   "materials": [
-    "the plan and supervision notes from the previous two lessons",
-    "the materials or help identified as needed for the chosen contribution",
-    "a trusted adult available for any supervision-flagged step"
+    "Embedded resource: swk-rfl-g4-u06-l04-model-card",
+    "Embedded resource: swk-rfl-g4-u06-l04-step-card",
+    "Embedded resource: swk-rfl-g4-u06-l04-guided-card",
+    "Embedded resource: swk-rfl-g4-u06-l04-independent-card",
+    "Embedded resource: swk-rfl-g4-u06-l04-evidence-record",
+    "Embedded resource: swk-rfl-g4-u06-l04-retry-pair",
+    "Embedded resource: swk-rfl-g4-u06-l04-delivered-checklist",
+    "Embedded resource: swk-rfl-g4-u06-l04-delivered-plan",
+    "learner-local: the materials or help identified as needed for the chosen contribution",
+    "adult-or-local: a trusted adult available for any supervision-flagged step"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before starting, gather your plan and supervision notes and get your adult's go-ahead to begin.",
+      "directions": "Open swk-rfl-g4-u06-l04-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Confirm that a trusted adult has said you can start today, and name the first step you will do."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Work through your plan in order, asking your adult to handle or stay nearby for every step your safety plan marked as needing supervision.",
+      "directions": "Open swk-rfl-g4-u06-l04-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I followed my plan's step order rather than skipping ahead to an easier step first."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "For every supervision-flagged step, my adult was directly involved exactly as my plan specified."
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "I checked in with my adult when I hit something my plan did not cover."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "performance-task",
-      "directions": "Carry out every remaining step of your plan until your contribution is finished, keeping a running note of anything that happened differently from what your plan expected, such as a material you did not have, a step that took longer, or a step your adult decided to change, so you have an accurate record to check against tomorrow.",
+      "directions": "Open swk-rfl-g4-u06-l04-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "short-response",
-          "text": "Describe what you actually did to complete your contribution, step by step, in enough detail that someone who was not there could follow it."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
         },
         {
           "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Name one specific place where what actually happened differed from your written plan, and what you or your adult did about it."
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Look at your finished contribution.",
+      "directions": "Open swk-rfl-g4-u06-l04-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -113,7 +115,7 @@
       ]
     }
   ],
-  "remediation": "If a learner rushes past a supervision-flagged step without involving their adult, reteach by pausing the task, returning to that exact step in the plan, rereading the specific risk named in the previous lesson's safety notes together, and having the adult complete or directly oversee that step before the learner continues.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g4-u06-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g4-u06-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g4-u06-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified. | Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it. Resume at the next unfinished step on swk-rfl-g4-u06-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner note the actual time each major step took as they go, then compare the step that took the longest to the step they expected to take the longest when they built their plan, explaining what caused the gap.",
   "scoringRef": "scoring/swk-rfl-g4-u06-l04.scoring.json",
   "integrity": {
@@ -121,5 +123,292 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
     "sourceLessonId": "ma-g4-ready-for-life-u06-l04",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can practice carrying out the contribution. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "Two short sessions across one day; no continuous monitoring",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g4-u06-l04-model-card",
+        "swk-rfl-g4-u06-l04-step-card",
+        "swk-rfl-g4-u06-l04-guided-card",
+        "swk-rfl-g4-u06-l04-independent-card",
+        "swk-rfl-g4-u06-l04-evidence-record",
+        "swk-rfl-g4-u06-l04-retry-pair",
+        "swk-rfl-g4-u06-l04-delivered-checklist",
+        "swk-rfl-g4-u06-l04-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "checklist",
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g4-u06-l04-delivered-checklist",
+        "swk-rfl-g4-u06-l04-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g4-u06-l04-local-1",
+          "label": "the materials or help identified as needed for the chosen contribution",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g4-u06-l04-local-2",
+          "label": "a trusted adult available for any supervision-flagged step",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g4-u06-l04-model-card",
+        "kind": "model",
+        "title": "carrying out the contribution worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Using the plan and supervision notes you built over the last two lessons, and with your household's permission, you carry out your chosen contribution today, whether that is organizing a shared space, building a routine chart, teaching a skill you know to someone else in the household, helping with a non-heat food-prep step, or setting up a checklist system, following your plan's order and your safety notes for any step that needs an adult.",
+          "Model move 1: Read the condition and name the exact carrying out the contribution decision or action.",
+          "Model move 2: Before starting, gather your plan and supervision notes and get your adult's go-ahead to begin.",
+          "Model move 3: Work through your plan in order, asking your adult to handle or stay nearby for every step your safety plan marked as needing supervision.",
+          "Model check: Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified. | Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "carrying out the contribution action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for carrying out the contribution.",
+          "2. Watch the worked move on swk-rfl-g4-u06-l04-model-card.",
+          "3. Do one coached move on swk-rfl-g4-u06-l04-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g4-u06-l04-independent-card.",
+          "5. Save the small record on swk-rfl-g4-u06-l04-evidence-record; use swk-rfl-g4-u06-l04-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "carrying out the contribution coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Using the plan and supervision notes you built over the last two lessons, and with your household's permission, you carry out your chosen contribution today, whether that is organizing a shared space, building a routine chart, teaching a skill you know to someone else in the household, helping with a non-heat food-prep step, or setting up a checklist system, following your plan's order and your safety notes for any step that needs an adult.",
+          "Coach direction: Before starting, gather your plan and supervision notes and get your adult's go-ahead to begin.",
+          "Learner prompt: Confirm that a trusted adult has said you can start today, and name the first step you will do.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l04-independent-card",
+        "kind": "independent-task",
+        "title": "carrying out the contribution complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Work through your plan in order, asking your adult to handle or stay nearby for every step your safety plan marked as needing supervision.",
+          "Response 1 (t2-p1): I followed my plan's step order rather than skipping ahead to an easier step first.",
+          "Response 2 (t2-p2): For every supervision-flagged step, my adult was directly involved exactly as my plan specified.",
+          "Response 3 (t2-p3): I checked in with my adult when I hit something my plan did not cover.",
+          "Equal-access rule: If the planned contribution genuinely cannot be carried out today, for example a needed adult is unavailable or a shared space is unexpectedly unavailable, the learner instead walks through the full plan step by step with an available trusted adult, narrating exactly what they would do and check at each step, including how each supervision-flagged step would be handled, and writes a detailed account of what would happen at each step, earning full credit for demonstrating the same sequencing and safety judgment."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "carrying out the contribution minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain how closely your finished contribution matches what you originally planned, and what surprised you most about actually doing it.",
+          "Success checks: Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified. | Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l04-retry-pair",
+        "kind": "retry",
+        "title": "carrying out the contribution supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g4-u06-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g4-u06-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional carrying out the contribution condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified. | Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it..",
+          "Return: resume at the next unfinished step on swk-rfl-g4-u06-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l04-delivered-checklist",
+        "kind": "reference",
+        "title": "carrying out the contribution delivered checklist",
+        "purpose": "Resolves the lesson's named checklist so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Using the plan and supervision notes you built over the last two lessons, and with your household's permission, you carry out your chosen contribution today, whether that is organizing a shared space, building a routine chart, teaching a skill you know to someone else in the household, helping with a non-heat food-prep step, or setting up a checklist system, following your plan's order and your safety notes for any step that needs an adult.",
+          "Use steps: Work through your plan in order, asking your adult to handle or stay nearby for every step your safety plan marked as needing supervision.",
+          "Field 1 (t2-p1): I followed my plan's step order rather than skipping ahead to an easier step first.",
+          "Field 2 (t2-p2): For every supervision-flagged step, my adult was directly involved exactly as my plan specified.",
+          "Field 3 (t2-p3): I checked in with my adult when I hit something my plan did not cover.",
+          "Check against: Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified. | Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g4-u06-l04-delivered-plan",
+        "kind": "independent-task",
+        "title": "carrying out the contribution delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Using the plan and supervision notes you built over the last two lessons, and with your household's permission, you carry out your chosen contribution today, whether that is organizing a shared space, building a routine chart, teaching a skill you know to someone else in the household, helping with a non-heat food-prep step, or setting up a checklist system, following your plan's order and your safety notes for any step that needs an adult.",
+          "Use steps: Work through your plan in order, asking your adult to handle or stay nearby for every step your safety plan marked as needing supervision.",
+          "Field 1 (t2-p1): I followed my plan's step order rather than skipping ahead to an easier step first.",
+          "Field 2 (t2-p2): For every supervision-flagged step, my adult was directly involved exactly as my plan specified.",
+          "Field 3 (t2-p3): I checked in with my adult when I hit something my plan did not cover.",
+          "Check against: Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified. | Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it."
+        ]
+      }
+    ],
+    "model": {
+      "title": "carrying out the contribution worked model",
+      "startingCondition": "Using the plan and supervision notes you built over the last two lessons, and with your household's permission, you carry out your chosen contribution today, whether that is organizing a shared space, building a routine chart, teaching a skill you know to someone else in the household, helping with a non-heat food-prep step, or setting up a checklist system, following your plan's order and your safety notes for any step that needs an adult.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact carrying out the contribution decision or action.",
+        "Model move 2: Before starting, gather your plan and supervision notes and get your adult's go-ahead to begin.",
+        "Model move 3: Work through your plan in order, asking your adult to handle or stay nearby for every step your safety plan marked as needing supervision."
+      ],
+      "reasoning": "The model names the condition, follows the ordered carrying out the contribution process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified.",
+        "Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it."
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for carrying out the contribution.",
+        "2. Watch the worked move on swk-rfl-g4-u06-l04-model-card.",
+        "3. Do one coached move on swk-rfl-g4-u06-l04-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g4-u06-l04-independent-card.",
+        "5. Save the small record on swk-rfl-g4-u06-l04-evidence-record; use swk-rfl-g4-u06-l04-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Using the plan and supervision notes you built over the last two lessons, and with your household's permission, you carry out your chosen contribution today, whether that is organizing a shared space, building a routine chart, teaching a skill you know to someone else in the household, helping with a non-heat food-prep step, or setting up a checklist system, following your plan's order and your safety notes for any step that needs an adult.",
+      "prompt": "Confirm that a trusted adult has said you can start today, and name the first step you will do.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g4-u06-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g4-u06-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "carrying out the contribution — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g4-u06-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Work through your plan in order, asking your adult to handle or stay nearby for every step your safety plan marked as needing supervision.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "carrying out the contribution — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g4-u06-l04-independent-card",
+        "directions": "If the planned contribution genuinely cannot be carried out today, for example a needed adult is unavailable or a shared space is unexpectedly unavailable, the learner instead walks through the full plan step by step with an available trusted adult, narrating exactly what they would do and check at each step, including how each supervision-flagged step would be handled, and writes a detailed account of what would happen at each step, earning full credit for demonstrating the same sequencing and safety judgment.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g4-u06-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain how closely your finished contribution matches what you originally planned, and what surprised you most about actually doing it.",
+      "observableCriteria": [
+        "Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified.",
+        "Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g4-u06-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g4-u06-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g4-u06-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g4-u06-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Plan fidelity and supervision follow-through: Steps are carried out in the planned order, and every supervision-flagged step involves the adult exactly as the safety plan specified. | Accuracy of the completion record: The step-by-step account is detailed enough to follow, and at least one specific deviation from the plan is named along with what was done about it.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g4-u06-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g4-u06-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

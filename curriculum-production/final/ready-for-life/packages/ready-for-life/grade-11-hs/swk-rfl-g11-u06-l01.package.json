@@ -13,8 +13,11 @@
     "title": "Launch and planning: assembling the year's work into one plan"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners gather the artifacts and decisions they have produced across units 1 through 5 (pathway shortlist, application system, health self-management plan, housing analysis, and decision-making practice) and organize them into the skeleton of one unified transition plan document, with a clearly labeled section for each required part.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic assembling the year's work into one plan task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "Working from their own record of the year's work, in whatever form they kept it, the learner builds a single outline with a section for each major part of the transition plan and pulls forward what they already know into each section, rather than starting from a blank page.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -24,44 +27,77 @@
     "No new private information needs to be disclosed for this lesson beyond what the learner already produced in earlier units; specifics can stay general or undecided where the learner prefers."
   ],
   "simulationAlternative": null,
-  "materials": ["notes or task sheets from units 1-5, in whatever form the learner kept them", "paper or a document for the plan skeleton"],
+  "materials": [
+    "Embedded resource: swk-rfl-g11-u06-l01-model-card",
+    "Embedded resource: swk-rfl-g11-u06-l01-step-card",
+    "Embedded resource: swk-rfl-g11-u06-l01-guided-card",
+    "Embedded resource: swk-rfl-g11-u06-l01-independent-card",
+    "Embedded resource: swk-rfl-g11-u06-l01-evidence-record",
+    "Embedded resource: swk-rfl-g11-u06-l01-retry-pair",
+    "Embedded resource: swk-rfl-g11-u06-l01-delivered-example",
+    "Embedded resource: swk-rfl-g11-u06-l01-delivered-plan",
+    "learner-local: notes or task sheets from units 1-5, in whatever form the learner kept them"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before assembling anything, predict which part of your plan will be hardest to fill in using only what you already know.",
+      "directions": "Analyze the complete worked example on swk-rfl-g11-u06-l01-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "Which section of a transition plan (pathway, requirements, timeline, funding, support needs, or contingencies) do you expect to be hardest to fill in right now, and why?" }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Build the skeleton of your plan by writing one section header for each of the six required parts, in whatever order makes sense to you.",
+      "directions": "Complete the fictional coached case on swk-rfl-g11-u06-l01-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My skeleton has a labeled section for each of: pathway, requirements, timeline, funding outline, support needs, and contingencies." },
-        { "ref": "t2-p2", "promptType": "short-response", "text": "Which earlier unit's work maps most directly onto which section (for example, which section will your Unit 1 pathway shortlist feed into)?" }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Go through your notes and decisions from units 1 through 5 and pull the specific content that belongs in each section into the skeleton.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g11-u06-l01-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "For at least three of the six sections, write the specific piece of earlier work you are pulling forward and where it originally came from (which unit or task)." },
-        { "ref": "t3-p2", "promptType": "checklist-item", "text": "Every section of my skeleton now has at least one real piece of content in it, even if some sections are still incomplete." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on what assembling the plan revealed.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g11-u06-l01-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "short-response", "text": "Now that you've assembled it, which section turned out to have the least real content behind it, and what does that tell you about what this unit still needs to cover?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Now that you've assembled it, which section turned out to have the least real content behind it, and what does that tell you about what this unit still needs to cover?"
+        }
       ]
     }
   ],
-  "remediation": "If a learner leaves multiple sections blank or writes only vague placeholders (such as 'figure this out later') instead of pulling forward real content, reteach by having the learner locate one specific prior artifact for each empty section (a specific note, worksheet, or decision from units 1-5) and copy the actual detail across before moving to the next section.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g11-u06-l01-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g11-u06-l01-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g11-u06-l01-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units. | Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison'). | Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why. Resume at the next unfinished step on swk-rfl-g11-u06-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner write a short paragraph, in their own words, that could be shared with someone unfamiliar with the plan, summarizing the pathway and naming the single biggest thing still unresolved.",
   "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l01.scoring.json",
   "integrity": {
@@ -69,5 +105,275 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g11-ready-for-life-u06-l01",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic assembling the year's work into one plan task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g11-u06-l01-model-card",
+        "swk-rfl-g11-u06-l01-step-card",
+        "swk-rfl-g11-u06-l01-guided-card",
+        "swk-rfl-g11-u06-l01-independent-card",
+        "swk-rfl-g11-u06-l01-evidence-record",
+        "swk-rfl-g11-u06-l01-retry-pair",
+        "swk-rfl-g11-u06-l01-delivered-example",
+        "swk-rfl-g11-u06-l01-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "example",
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g11-u06-l01-delivered-example",
+        "swk-rfl-g11-u06-l01-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g11-u06-l01-local-1",
+          "label": "notes or task sheets from units 1-5, in whatever form the learner kept them",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g11-u06-l01-model-card",
+        "kind": "model",
+        "title": "assembling the year's work into one plan worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Working from their own record of the year's work, in whatever form they kept it, the learner builds a single outline with a section for each major part of the transition plan and pulls forward what they already know into each section, rather than starting from a blank page.",
+          "Model move 1: Read the condition and name the exact assembling the year's work into one plan decision or action.",
+          "Model move 2: Before assembling anything, predict which part of your plan will be hardest to fill in using only what you already know.",
+          "Model move 3: Build the skeleton of your plan by writing one section header for each of the six required parts, in whatever order makes sense to you.",
+          "Model check: Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units. | Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison'). | Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l01-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "assembling the year's work into one plan action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for assembling the year's work into one plan.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l01-guided-card",
+        "kind": "guided-practice",
+        "title": "assembling the year's work into one plan coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Working from their own record of the year's work, in whatever form they kept it, the learner builds a single outline with a section for each major part of the transition plan and pulls forward what they already know into each section, rather than starting from a blank page.",
+          "Coach direction: Before assembling anything, predict which part of your plan will be hardest to fill in using only what you already know.",
+          "Learner prompt: Which section of a transition plan (pathway, requirements, timeline, funding, support needs, or contingencies) do you expect to be hardest to fill in right now, and why?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l01-independent-card",
+        "kind": "independent-task",
+        "title": "assembling the year's work into one plan complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Build the skeleton of your plan by writing one section header for each of the six required parts, in whatever order makes sense to you.",
+          "Response 1 (t2-p1): My skeleton has a labeled section for each of: pathway, requirements, timeline, funding outline, support needs, and contingencies.",
+          "Response 2 (t2-p2): Which earlier unit's work maps most directly onto which section (for example, which section will your Unit 1 pathway shortlist feed into)?",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l01-evidence-record",
+        "kind": "evidence-record",
+        "title": "assembling the year's work into one plan minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Now that you've assembled it, which section turned out to have the least real content behind it, and what does that tell you about what this unit still needs to cover?",
+          "Success checks: Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units. | Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison'). | Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l01-retry-pair",
+        "kind": "retry",
+        "title": "assembling the year's work into one plan supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g11-u06-l01-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g11-u06-l01-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional assembling the year's work into one plan condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units. | Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison'). | Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why..",
+          "Return: resume at the next unfinished step on swk-rfl-g11-u06-l01-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l01-delivered-example",
+        "kind": "model",
+        "title": "assembling the year's work into one plan delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Working from their own record of the year's work, in whatever form they kept it, the learner builds a single outline with a section for each major part of the transition plan and pulls forward what they already know into each section, rather than starting from a blank page.",
+          "Use steps: Build the skeleton of your plan by writing one section header for each of the six required parts, in whatever order makes sense to you.",
+          "Field 1 (t2-p1): My skeleton has a labeled section for each of: pathway, requirements, timeline, funding outline, support needs, and contingencies.",
+          "Field 2 (t2-p2): Which earlier unit's work maps most directly onto which section (for example, which section will your Unit 1 pathway shortlist feed into)?",
+          "Check against: Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units. | Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison'). | Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u06-l01-delivered-plan",
+        "kind": "independent-task",
+        "title": "assembling the year's work into one plan delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: Working from their own record of the year's work, in whatever form they kept it, the learner builds a single outline with a section for each major part of the transition plan and pulls forward what they already know into each section, rather than starting from a blank page.",
+          "Use steps: Build the skeleton of your plan by writing one section header for each of the six required parts, in whatever order makes sense to you.",
+          "Field 1 (t2-p1): My skeleton has a labeled section for each of: pathway, requirements, timeline, funding outline, support needs, and contingencies.",
+          "Field 2 (t2-p2): Which earlier unit's work maps most directly onto which section (for example, which section will your Unit 1 pathway shortlist feed into)?",
+          "Check against: Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units. | Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison'). | Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why."
+        ]
+      }
+    ],
+    "model": {
+      "title": "assembling the year's work into one plan worked model",
+      "startingCondition": "Working from their own record of the year's work, in whatever form they kept it, the learner builds a single outline with a section for each major part of the transition plan and pulls forward what they already know into each section, rather than starting from a blank page.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact assembling the year's work into one plan decision or action.",
+        "Model move 2: Before assembling anything, predict which part of your plan will be hardest to fill in using only what you already know.",
+        "Model move 3: Build the skeleton of your plan by writing one section header for each of the six required parts, in whatever order makes sense to you."
+      ],
+      "reasoning": "The model names the condition, follows the ordered assembling the year's work into one plan process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units.",
+        "Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison').",
+        "Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why."
+      ],
+      "resourceRef": "swk-rfl-g11-u06-l01-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for assembling the year's work into one plan.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g11-u06-l01-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Working from their own record of the year's work, in whatever form they kept it, the learner builds a single outline with a section for each major part of the transition plan and pulls forward what they already know into each section, rather than starting from a blank page.",
+      "prompt": "Which section of a transition plan (pathway, requirements, timeline, funding, support needs, or contingencies) do you expect to be hardest to fill in right now, and why?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g11-u06-l01-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g11-u06-l01-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "assembling the year's work into one plan — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g11-u06-l01-independent-card",
+        "directions": "Complete the assembling the year's work into one plan task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g11-u06-l01-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Now that you've assembled it, which section turned out to have the least real content behind it, and what does that tell you about what this unit still needs to cover?",
+      "observableCriteria": [
+        "Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units.",
+        "Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison').",
+        "Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g11-u06-l01-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g11-u06-l01-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g11-u06-l01-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g11-u06-l01-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Section completeness: All six required sections are present and each contains at least one specific piece of real content pulled from earlier units. | Accuracy of linking prior work: At least three sections cite a specific, identifiable prior artifact or decision (for example, 'Unit 1 pathway shortlist' or 'Unit 4 housing comparison'). | Self-assessment of gaps: Reflection identifies a specific section with the least real content and explains why.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g11-u06-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g11-u06-l01-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

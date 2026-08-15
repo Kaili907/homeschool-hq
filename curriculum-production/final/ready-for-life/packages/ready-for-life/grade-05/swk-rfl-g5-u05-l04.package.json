@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL extension"
+    "Manuel Academy RFL extension",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners plan and carry out one real instance of borrowing an item using an explicit ask, a stated return date, and follow-through on returning it in the condition it was borrowed in.",
+  "objective": "I can practice borrowing and returning. I will do one step at a time and check one result.",
   "scenario": "The learner identifies something they'd like to borrow, makes an explicit spoken or written request naming what they want and when they'll return it, and then follows through on returning it by that date in good condition.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -30,57 +31,75 @@
     "description": "If no real borrowing opportunity is available right now, the learner instead role-plays the full three-part request (item, person, return date) with an adult playing the other person, including a return conversation, and reflects on how it went the same way as a real exchange."
   },
   "materials": [
-    "none required beyond the item being borrowed"
+    "Embedded resource: swk-rfl-g5-u05-l04-model-card",
+    "Embedded resource: swk-rfl-g5-u05-l04-step-card",
+    "Embedded resource: swk-rfl-g5-u05-l04-guided-card",
+    "Embedded resource: swk-rfl-g5-u05-l04-independent-card",
+    "Embedded resource: swk-rfl-g5-u05-l04-evidence-record",
+    "Embedded resource: swk-rfl-g5-u05-l04-retry-pair",
+    "Embedded resource: swk-rfl-g5-u05-l04-delivered-plan",
+    "learner-local: none required beyond the item being borrowed"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before asking, plan your request: what do you want to borrow, from whom, and what return date will you propose?",
+      "directions": "Open swk-rfl-g5-u05-l04-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "State the item, person, and proposed date."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
-      "kind": "independent",
-      "directions": "Make your borrowing request out loud or in writing, using all three parts: the item, the person, and the return date.",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g5-u05-l04-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "My request named the specific item, not a vague 'can I borrow something.'"
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "My request included a specific return date or timeframe, not 'later.'"
-        },
-        {
-          "ref": "t2-p3",
           "promptType": "short-response",
-          "text": "What did the person say — did they agree, propose a different date, or say no? How did you respond?"
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "reflection",
-      "directions": "Reflect on the return.",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u05-l04-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g5-u05-l04-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
           "promptType": "extended-response",
           "text": "Did you return the item by the date you proposed, in the condition you borrowed it in? If not, what happened, and what would you do differently next time you borrow something?"
         }
       ]
     }
   ],
-  "remediation": "If the learner's request is too vague to act on (no specific item or date), reteach by having them write out the three required parts (item, person, date) before making the request out loud.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u05-l04-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u05-l04-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u05-l04-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Request clarity: Request clearly states all three parts. | Follow-through on return: Item is returned by the agreed date in the condition borrowed. Resume at the next unfinished step on swk-rfl-g5-u05-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Practice the reverse situation: lend something of your own to someone else with the same explicit three-part agreement, and reflect on what it felt like to be the lender instead of the borrower.",
   "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u05-l04.scoring.json",
   "integrity": {
@@ -88,5 +107,269 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g5-ready-for-life-u05-l04",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "communication-relationships",
+    "practicalGoal": "I can practice borrowing and returning. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u05-l04-model-card",
+        "swk-rfl-g5-u05-l04-step-card",
+        "swk-rfl-g5-u05-l04-guided-card",
+        "swk-rfl-g5-u05-l04-independent-card",
+        "swk-rfl-g5-u05-l04-evidence-record",
+        "swk-rfl-g5-u05-l04-retry-pair",
+        "swk-rfl-g5-u05-l04-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g5-u05-l04-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u05-l04-local-1",
+          "label": "none required beyond the item being borrowed",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u05-l04-model-card",
+        "kind": "model",
+        "title": "borrowing and returning worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner identifies something they'd like to borrow, makes an explicit spoken or written request naming what they want and when they'll return it, and then follows through on returning it by that date in good condition.",
+          "Model move 1: Read the condition and name the exact borrowing and returning decision or action.",
+          "Model move 2: Before asking, plan your request: what do you want to borrow, from whom, and what return date will you propose?",
+          "Model move 3: Make your borrowing request out loud or in writing, using all three parts: the item, the person, and the return date.",
+          "Model check: Request clarity: Request clearly states all three parts. | Follow-through on return: Item is returned by the agreed date in the condition borrowed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u05-l04-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "borrowing and returning action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for borrowing and returning.",
+          "2. Watch the worked move on swk-rfl-g5-u05-l04-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u05-l04-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u05-l04-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u05-l04-evidence-record; use swk-rfl-g5-u05-l04-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u05-l04-guided-card",
+        "kind": "guided-practice",
+        "title": "borrowing and returning coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner identifies something they'd like to borrow, makes an explicit spoken or written request naming what they want and when they'll return it, and then follows through on returning it by that date in good condition.",
+          "Coach direction: Before asking, plan your request: what do you want to borrow, from whom, and what return date will you propose?",
+          "Learner prompt: State the item, person, and proposed date.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u05-l04-independent-card",
+        "kind": "independent-task",
+        "title": "borrowing and returning complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Make your borrowing request out loud or in writing, using all three parts: the item, the person, and the return date.",
+          "Response 1 (t2-p1): My request named the specific item, not a vague 'can I borrow something.'",
+          "Response 2 (t2-p2): My request included a specific return date or timeframe, not 'later.'",
+          "Response 3 (t2-p3): What did the person say — did they agree, propose a different date, or say no? How did you respond?",
+          "Equal-access rule: If no real borrowing opportunity is available right now, the learner instead role-plays the full three-part request (item, person, return date) with an adult playing the other person, including a return conversation, and reflects on how it went the same way as a real exchange."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u05-l04-evidence-record",
+        "kind": "evidence-record",
+        "title": "borrowing and returning minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Did you return the item by the date you proposed, in the condition you borrowed it in? If not, what happened, and what would you do differently next time you borrow something?",
+          "Success checks: Request clarity: Request clearly states all three parts. | Follow-through on return: Item is returned by the agreed date in the condition borrowed.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u05-l04-retry-pair",
+        "kind": "retry",
+        "title": "borrowing and returning supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u05-l04-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u05-l04-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional borrowing and returning condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Request clarity: Request clearly states all three parts. | Follow-through on return: Item is returned by the agreed date in the condition borrowed..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u05-l04-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u05-l04-delivered-plan",
+        "kind": "independent-task",
+        "title": "borrowing and returning delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner identifies something they'd like to borrow, makes an explicit spoken or written request naming what they want and when they'll return it, and then follows through on returning it by that date in good condition.",
+          "Use steps: Make your borrowing request out loud or in writing, using all three parts: the item, the person, and the return date.",
+          "Field 1 (t2-p1): My request named the specific item, not a vague 'can I borrow something.'",
+          "Field 2 (t2-p2): My request included a specific return date or timeframe, not 'later.'",
+          "Field 3 (t2-p3): What did the person say — did they agree, propose a different date, or say no? How did you respond?",
+          "Check against: Request clarity: Request clearly states all three parts. | Follow-through on return: Item is returned by the agreed date in the condition borrowed."
+        ]
+      }
+    ],
+    "model": {
+      "title": "borrowing and returning worked model",
+      "startingCondition": "The learner identifies something they'd like to borrow, makes an explicit spoken or written request naming what they want and when they'll return it, and then follows through on returning it by that date in good condition.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact borrowing and returning decision or action.",
+        "Model move 2: Before asking, plan your request: what do you want to borrow, from whom, and what return date will you propose?",
+        "Model move 3: Make your borrowing request out loud or in writing, using all three parts: the item, the person, and the return date."
+      ],
+      "reasoning": "The model names the condition, follows the ordered borrowing and returning process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Request clarity: Request clearly states all three parts.",
+        "Follow-through on return: Item is returned by the agreed date in the condition borrowed."
+      ],
+      "resourceRef": "swk-rfl-g5-u05-l04-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for borrowing and returning.",
+        "2. Watch the worked move on swk-rfl-g5-u05-l04-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u05-l04-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u05-l04-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u05-l04-evidence-record; use swk-rfl-g5-u05-l04-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u05-l04-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner identifies something they'd like to borrow, makes an explicit spoken or written request naming what they want and when they'll return it, and then follows through on returning it by that date in good condition.",
+      "prompt": "State the item, person, and proposed date.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Request clarity: Request clearly states all three parts.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u05-l04-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u05-l04-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "borrowing and returning — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g5-u05-l04-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Make your borrowing request out loud or in writing, using all three parts: the item, the person, and the return date.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "borrowing and returning — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u05-l04-independent-card",
+        "directions": "If no real borrowing opportunity is available right now, the learner instead role-plays the full three-part request (item, person, return date) with an adult playing the other person, including a return conversation, and reflects on how it went the same way as a real exchange.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u05-l04-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Did you return the item by the date you proposed, in the condition you borrowed it in? If not, what happened, and what would you do differently next time you borrow something?",
+      "observableCriteria": [
+        "Request clarity: Request clearly states all three parts.",
+        "Follow-through on return: Item is returned by the agreed date in the condition borrowed."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u05-l04-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u05-l04-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u05-l04-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u05-l04-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Request clarity: Request clearly states all three parts. | Follow-through on return: Item is returned by the agreed date in the condition borrowed.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u05-l04-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u05-l04-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

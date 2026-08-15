@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL middle-grades progression"
+    "Manuel Academy RFL middle-grades progression",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners complete a real, hands-on food-safety check of their own kitchen or wherever their household stores food, examining refrigerator temperature awareness, expiration dates on stored food, and habits that could cause cross-contamination, then compare what they find to safe food-handling practice.",
+  "objective": "I can complete a realistic food safety task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "In their own kitchen or wherever their household stores and prepares food, the learner checks the refrigerator's temperature setting or a thermometer if one is present, looks at the dates on several real stored items, and observes how raw and ready-to-eat foods are currently kept apart, without cooking or handling raw meat directly.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -28,61 +29,66 @@
     "description": "If the learner does not have access to a kitchen or stored food to check, they instead sort a provided list of ten food-handling scenarios into 'safe' and 'unsafe' columns and explain the specific rule each unsafe scenario breaks."
   },
   "materials": [
-    "access to a refrigerator or the place food is stored in the household",
-    "a few real stored food items with visible dates",
-    "paper or a notes app for recording findings"
+    "Embedded resource: swk-rfl-g7-u03-l01-model-card",
+    "Embedded resource: swk-rfl-g7-u03-l01-step-card",
+    "Embedded resource: swk-rfl-g7-u03-l01-guided-card",
+    "Embedded resource: swk-rfl-g7-u03-l01-independent-card",
+    "Embedded resource: swk-rfl-g7-u03-l01-evidence-record",
+    "Embedded resource: swk-rfl-g7-u03-l01-retry-pair",
+    "adult-or-local: access to a refrigerator or the place food is stored in the household",
+    "adult-or-local: a few real stored food items with visible dates",
+    "learner-local: paper or a notes app for recording findings"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before checking anything, write down what you currently believe are the biggest food-safety risks in a kitchen.",
+      "directions": "Analyze the complete worked example on swk-rfl-g7-u03-l01-model-card before beginning.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Name two things you think can make stored or handled food unsafe to eat."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Check the actual refrigerator or food-storage area in your household and record what you find.",
+      "directions": "Complete the fictional coached case on swk-rfl-g7-u03-l01-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I checked whether the refrigerator has a way to know its temperature (a built-in display or a thermometer) and recorded what I found."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I looked at the dates on at least five real stored food items and noted which, if any, were past their date."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "Observe how raw and ready-to-eat foods are currently arranged and stored in your household, then identify at least two specific changes that would reduce the chance of cross-contamination between them.",
+      "kind": "performance-task",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g7-u03-l01-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "short-response",
-          "text": "Describe exactly where raw items (such as uncooked meat, if any is present) are stored relative to foods that will not be cooked again before eating, and name one specific risk this creates."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
         },
         {
           "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Name two specific changes you could make to how items are arranged or stored to reduce that risk."
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Compare what you found during your real check to what you believed before you started.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g7-u03-l01-evidence-record; omit or fictionalize private details.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -92,7 +98,7 @@
       ]
     }
   ],
-  "remediation": "If a learner cannot identify any specific storage or dating issues during the check, reteach using the simulation alternative's scenario list first, then have the learner repeat the real check focusing on one category at a time: temperature, then dates, then separation.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g7-u03-l01-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g7-u03-l01-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g7-u03-l01-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Real-check thoroughness: All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported. | Risk identification and reasoning: At least two specific, real changes are named that are clearly tied to the learner's own findings. Resume at the next unfinished step on swk-rfl-g7-u03-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner check one additional real household space where food might be stored, such as a pantry or a separate freezer, and compare what they find there to what they found in the primary refrigerator check.",
   "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u03-l01.scoring.json",
   "integrity": {
@@ -100,5 +106,263 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g7-ready-for-life-u03-l01",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can complete a realistic food safety task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "35–45 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g7-u03-l01-model-card",
+        "swk-rfl-g7-u03-l01-step-card",
+        "swk-rfl-g7-u03-l01-guided-card",
+        "swk-rfl-g7-u03-l01-independent-card",
+        "swk-rfl-g7-u03-l01-evidence-record",
+        "swk-rfl-g7-u03-l01-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g7-u03-l01-local-1",
+          "label": "access to a refrigerator or the place food is stored in the household",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g7-u03-l01-local-2",
+          "label": "a few real stored food items with visible dates",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g7-u03-l01-local-3",
+          "label": "paper or a notes app for recording findings",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g7-u03-l01-model-card",
+        "kind": "model",
+        "title": "food safety worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: In their own kitchen or wherever their household stores and prepares food, the learner checks the refrigerator's temperature setting or a thermometer if one is present, looks at the dates on several real stored items, and observes how raw and ready-to-eat foods are currently kept apart, without cooking or handling raw meat directly.",
+          "Model move 1: Read the condition and name the exact food safety decision or action.",
+          "Model move 2: Before checking anything, write down what you currently believe are the biggest food-safety risks in a kitchen.",
+          "Model move 3: Check the actual refrigerator or food-storage area in your household and record what you find.",
+          "Model check: Real-check thoroughness: All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported. | Risk identification and reasoning: At least two specific, real changes are named that are clearly tied to the learner's own findings."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u03-l01-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "food safety action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for food safety.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u03-l01-guided-card",
+        "kind": "guided-practice",
+        "title": "food safety coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: In their own kitchen or wherever their household stores and prepares food, the learner checks the refrigerator's temperature setting or a thermometer if one is present, looks at the dates on several real stored items, and observes how raw and ready-to-eat foods are currently kept apart, without cooking or handling raw meat directly.",
+          "Coach direction: Before checking anything, write down what you currently believe are the biggest food-safety risks in a kitchen.",
+          "Learner prompt: Name two things you think can make stored or handled food unsafe to eat.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u03-l01-independent-card",
+        "kind": "independent-task",
+        "title": "food safety complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Check the actual refrigerator or food-storage area in your household and record what you find.",
+          "Response 1 (t2-p1): I checked whether the refrigerator has a way to know its temperature (a built-in display or a thermometer) and recorded what I found.",
+          "Response 2 (t2-p2): I looked at the dates on at least five real stored food items and noted which, if any, were past their date.",
+          "Equal-access rule: If the learner does not have access to a kitchen or stored food to check, they instead sort a provided list of ten food-handling scenarios into 'safe' and 'unsafe' columns and explain the specific rule each unsafe scenario breaks."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u03-l01-evidence-record",
+        "kind": "evidence-record",
+        "title": "food safety minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain one specific finding from your real check that surprised you or confirmed what you expected, and name one change you could make in your household's food storage or handling based on it.",
+          "Success checks: Real-check thoroughness: All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported. | Risk identification and reasoning: At least two specific, real changes are named that are clearly tied to the learner's own findings.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g7-u03-l01-retry-pair",
+        "kind": "retry",
+        "title": "food safety supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g7-u03-l01-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g7-u03-l01-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional food safety condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Real-check thoroughness: All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported. | Risk identification and reasoning: At least two specific, real changes are named that are clearly tied to the learner's own findings..",
+          "Return: resume at the next unfinished step on swk-rfl-g7-u03-l01-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "food safety worked model",
+      "startingCondition": "In their own kitchen or wherever their household stores and prepares food, the learner checks the refrigerator's temperature setting or a thermometer if one is present, looks at the dates on several real stored items, and observes how raw and ready-to-eat foods are currently kept apart, without cooking or handling raw meat directly.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact food safety decision or action.",
+        "Model move 2: Before checking anything, write down what you currently believe are the biggest food-safety risks in a kitchen.",
+        "Model move 3: Check the actual refrigerator or food-storage area in your household and record what you find."
+      ],
+      "reasoning": "The model names the condition, follows the ordered food safety process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Real-check thoroughness: All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported.",
+        "Risk identification and reasoning: At least two specific, real changes are named that are clearly tied to the learner's own findings."
+      ],
+      "resourceRef": "swk-rfl-g7-u03-l01-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for food safety.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g7-u03-l01-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "In their own kitchen or wherever their household stores and prepares food, the learner checks the refrigerator's temperature setting or a thermometer if one is present, looks at the dates on several real stored items, and observes how raw and ready-to-eat foods are currently kept apart, without cooking or handling raw meat directly.",
+      "prompt": "Name two things you think can make stored or handled food unsafe to eat.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Real-check thoroughness: All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g7-u03-l01-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g7-u03-l01-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "food safety — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g7-u03-l01-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Check the actual refrigerator or food-storage area in your household and record what you find.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "food safety — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g7-u03-l01-independent-card",
+        "directions": "If the learner does not have access to a kitchen or stored food to check, they instead sort a provided list of ten food-handling scenarios into 'safe' and 'unsafe' columns and explain the specific rule each unsafe scenario breaks.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g7-u03-l01-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain one specific finding from your real check that surprised you or confirmed what you expected, and name one change you could make in your household's food storage or handling based on it.",
+      "observableCriteria": [
+        "Real-check thoroughness: All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported.",
+        "Risk identification and reasoning: At least two specific, real changes are named that are clearly tied to the learner's own findings."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g7-u03-l01-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g7-u03-l01-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g7-u03-l01-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g7-u03-l01-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Real-check thoroughness: All three real checks (temperature awareness, at least five real dated items, and raw-versus-ready-to-eat placement) are completed and specific findings are reported. | Risk identification and reasoning: At least two specific, real changes are named that are clearly tied to the learner's own findings.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g7-u03-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g7-u03-l01-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

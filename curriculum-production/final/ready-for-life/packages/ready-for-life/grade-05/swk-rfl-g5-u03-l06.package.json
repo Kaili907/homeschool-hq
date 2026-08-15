@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1 Lessons 07–09"
+    "Ready for Life v1 Lessons 07–09",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Using a specific instance of food or kitchen items not stored or cleaned up correctly, learners diagnose the break with an adult and correct both the immediate problem and their storage/cleanup routine.",
+  "objective": "I can practice storage and cleanup. I will do one step at a time and check one result.",
   "scenario": "The learner looks at a real, current kitchen storage or cleanup problem — leftovers left on the counter, a container put in the wrong cabinet, a dirty surface — and works with an adult to trace back exactly where the storage-and-cleanup routine broke down, then fixes it and adjusts the routine.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -30,61 +31,66 @@
     "description": "If there's no current real storage or cleanup problem to diagnose, the learner instead reviews a short written kitchen-storage scenario, identifies the likely sticking-point step, and proposes a specific fix the same way as the guided task."
   },
   "materials": [
-    "the actual current kitchen item(s) needing correction",
-    "storage containers",
-    "cleaning supplies"
+    "Embedded resource: swk-rfl-g5-u03-l06-model-card",
+    "Embedded resource: swk-rfl-g5-u03-l06-step-card",
+    "Embedded resource: swk-rfl-g5-u03-l06-guided-card",
+    "Embedded resource: swk-rfl-g5-u03-l06-independent-card",
+    "Embedded resource: swk-rfl-g5-u03-l06-evidence-record",
+    "Embedded resource: swk-rfl-g5-u03-l06-retry-pair",
+    "adult-or-local: the actual current kitchen item(s) needing correction",
+    "learner-local: storage containers",
+    "learner-local: cleaning supplies"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Describe the specific storage or cleanup problem you're looking at right now — exactly what's out of place or left undone.",
+      "directions": "Open swk-rfl-g5-u03-l06-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Describe the specific problem."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "With your adult, trace back to the exact step where the routine stopped (food not covered, container not labeled, surface not wiped, etc.).",
+      "directions": "Open swk-rfl-g5-u03-l06-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I named the exact step where the routine stopped."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "My adult and I agreed on one specific reason that step was skipped."
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "We named one small change to make that step easier to remember."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "Correct the current problem, then test your one routine change on a second, similar situation.",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u03-l06-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Did the change work the second time? What did you notice?"
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Explain your updated routine.",
+      "directions": "Open swk-rfl-g5-u03-l06-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -94,7 +100,7 @@
       ]
     }
   ],
-  "remediation": "If the learner's proposed fix is vague, reteach by having them name a specific trigger (a location, a time, a linked habit) tied to the sticking-point step, then test it on a small, low-stakes situation before applying it to the real problem.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u03-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u03-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u03-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Diagnosing the sticking point: Names the specific step where the routine stopped. | Correction and testing: Fixes the problem and proposes one specific change. Resume at the next unfinished step on swk-rfl-g5-u03-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Check one additional kitchen storage or cleanup habit for the same kind of breakdown and compare whether it's the same sticking-point step.",
   "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l06.scoring.json",
   "integrity": {
@@ -102,5 +108,262 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g5-ready-for-life-u03-l06",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can practice storage and cleanup. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u03-l06-model-card",
+        "swk-rfl-g5-u03-l06-step-card",
+        "swk-rfl-g5-u03-l06-guided-card",
+        "swk-rfl-g5-u03-l06-independent-card",
+        "swk-rfl-g5-u03-l06-evidence-record",
+        "swk-rfl-g5-u03-l06-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u03-l06-local-1",
+          "label": "the actual current kitchen item(s) needing correction",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u03-l06-local-2",
+          "label": "storage containers",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u03-l06-local-3",
+          "label": "cleaning supplies",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u03-l06-model-card",
+        "kind": "model",
+        "title": "storage and cleanup worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner looks at a real, current kitchen storage or cleanup problem — leftovers left on the counter, a container put in the wrong cabinet, a dirty surface — and works with an adult to trace back exactly where the storage-and-cleanup routine broke down, then fixes it and adjusts the routine.",
+          "Model move 1: Read the condition and name the exact storage and cleanup decision or action.",
+          "Model move 2: Describe the specific storage or cleanup problem you're looking at right now — exactly what's out of place or left undone.",
+          "Model move 3: With your adult, trace back to the exact step where the routine stopped (food not covered, container not labeled, surface not wiped, etc.).",
+          "Model check: Diagnosing the sticking point: Names the specific step where the routine stopped. | Correction and testing: Fixes the problem and proposes one specific change."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "storage and cleanup action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for storage and cleanup.",
+          "2. Watch the worked move on swk-rfl-g5-u03-l06-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u03-l06-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u03-l06-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u03-l06-evidence-record; use swk-rfl-g5-u03-l06-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "storage and cleanup coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner looks at a real, current kitchen storage or cleanup problem — leftovers left on the counter, a container put in the wrong cabinet, a dirty surface — and works with an adult to trace back exactly where the storage-and-cleanup routine broke down, then fixes it and adjusts the routine.",
+          "Coach direction: Describe the specific storage or cleanup problem you're looking at right now — exactly what's out of place or left undone.",
+          "Learner prompt: Describe the specific problem.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l06-independent-card",
+        "kind": "independent-task",
+        "title": "storage and cleanup complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult, trace back to the exact step where the routine stopped (food not covered, container not labeled, surface not wiped, etc.).",
+          "Response 1 (t2-p1): I named the exact step where the routine stopped.",
+          "Response 2 (t2-p2): My adult and I agreed on one specific reason that step was skipped.",
+          "Response 3 (t2-p3): We named one small change to make that step easier to remember.",
+          "Equal-access rule: If there's no current real storage or cleanup problem to diagnose, the learner instead reviews a short written kitchen-storage scenario, identifies the likely sticking-point step, and proposes a specific fix the same way as the guided task."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "storage and cleanup minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain your updated storage-and-cleanup routine in your own words, and name the one step you'll watch most closely next time.",
+          "Success checks: Diagnosing the sticking point: Names the specific step where the routine stopped. | Correction and testing: Fixes the problem and proposes one specific change.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l06-retry-pair",
+        "kind": "retry",
+        "title": "storage and cleanup supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u03-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u03-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional storage and cleanup condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Diagnosing the sticking point: Names the specific step where the routine stopped. | Correction and testing: Fixes the problem and proposes one specific change..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u03-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "storage and cleanup worked model",
+      "startingCondition": "The learner looks at a real, current kitchen storage or cleanup problem — leftovers left on the counter, a container put in the wrong cabinet, a dirty surface — and works with an adult to trace back exactly where the storage-and-cleanup routine broke down, then fixes it and adjusts the routine.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact storage and cleanup decision or action.",
+        "Model move 2: Describe the specific storage or cleanup problem you're looking at right now — exactly what's out of place or left undone.",
+        "Model move 3: With your adult, trace back to the exact step where the routine stopped (food not covered, container not labeled, surface not wiped, etc.)."
+      ],
+      "reasoning": "The model names the condition, follows the ordered storage and cleanup process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Diagnosing the sticking point: Names the specific step where the routine stopped.",
+        "Correction and testing: Fixes the problem and proposes one specific change."
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for storage and cleanup.",
+        "2. Watch the worked move on swk-rfl-g5-u03-l06-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u03-l06-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u03-l06-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u03-l06-evidence-record; use swk-rfl-g5-u03-l06-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner looks at a real, current kitchen storage or cleanup problem — leftovers left on the counter, a container put in the wrong cabinet, a dirty surface — and works with an adult to trace back exactly where the storage-and-cleanup routine broke down, then fixes it and adjusts the routine.",
+      "prompt": "Describe the specific problem.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Diagnosing the sticking point: Names the specific step where the routine stopped.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u03-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u03-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "storage and cleanup — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g5-u03-l06-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult, trace back to the exact step where the routine stopped (food not covered, container not labeled, surface not wiped, etc.).",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "storage and cleanup — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u03-l06-independent-card",
+        "directions": "If there's no current real storage or cleanup problem to diagnose, the learner instead reviews a short written kitchen-storage scenario, identifies the likely sticking-point step, and proposes a specific fix the same way as the guided task.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u03-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain your updated storage-and-cleanup routine in your own words, and name the one step you'll watch most closely next time.",
+      "observableCriteria": [
+        "Diagnosing the sticking point: Names the specific step where the routine stopped.",
+        "Correction and testing: Fixes the problem and proposes one specific change."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u03-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u03-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u03-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Diagnosing the sticking point: Names the specific step where the routine stopped. | Correction and testing: Fixes the problem and proposes one specific change.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u03-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u03-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

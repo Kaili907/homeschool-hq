@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1 Lessons 04–06"
+    "Ready for Life v1 Lessons 04–06",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners sort a real pile of at least eight clothing items into at least three categories (such as color, fabric type, or wash cycle) and explain the sorting rule they used.",
+  "objective": "I can practice sorting clothing. I will do one step at a time and check one result.",
   "scenario": "Before any washing instruction, the learner is given (or gathers) a mixed pile of at least eight clothing items and sorts them using their own best guess at the rule that matters for washing, then compares that sort to what a care label suggests.",
   "isFictionalSimulation": false,
   "completionAuthority": "learner",
@@ -30,53 +31,75 @@
     "description": "If eight real clothing items aren't available to sort, the learner instead sorts eight items from a printed or hand-drawn clothing set using the same one-rule method and checks their rule against a sample care label provided in the lesson."
   },
   "materials": [
-    "at least eight clothing items",
-    "one item's care label"
+    "Embedded resource: swk-rfl-g5-u02-l01-model-card",
+    "Embedded resource: swk-rfl-g5-u02-l01-step-card",
+    "Embedded resource: swk-rfl-g5-u02-l01-guided-card",
+    "Embedded resource: swk-rfl-g5-u02-l01-independent-card",
+    "Embedded resource: swk-rfl-g5-u02-l01-evidence-record",
+    "Embedded resource: swk-rfl-g5-u02-l01-retry-pair",
+    "learner-local: at least eight clothing items",
+    "learner-local: one item's care label"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before sorting, predict: what do you think matters most when sorting clothes for washing — color, fabric, or something else? Why?",
+      "directions": "Open swk-rfl-g5-u02-l01-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "State your prediction and reasoning."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
-      "kind": "independent",
-      "directions": "Sort your pile of at least eight items into at least three groups using one consistent rule, then write down the rule you used.",
+      "kind": "guided",
+      "directions": "Open swk-rfl-g5-u02-l01-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I used the same rule for every item, not a different reason for each pile."
-        },
-        {
-          "ref": "t2-p2",
           "promptType": "short-response",
-          "text": "State the sorting rule you used in one sentence."
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "reflection",
-      "directions": "Check one label against your rule.",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u02-l01-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Open swk-rfl-g5-u02-l01-evidence-record. Save one result and one reflection.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
           "promptType": "extended-response",
           "text": "Check one item's care label. Does your sorting rule match what the label says that item needs? If not, what would you change about your rule?"
         }
       ]
     }
   ],
-  "remediation": "If the learner's piles mix items that would actually need different wash settings (for example a bright red shirt with whites), reteach with a two-pile forced-choice version (this item: darks or lights?) on five items before returning to the full sort.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u02-l01-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u02-l01-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u02-l01-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Consistent sorting rule: One rule applied consistently across all items. | Label comparison: Checks the label and accurately states whether it matches their rule. Resume at the next unfinished step on swk-rfl-g5-u02-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Sort the same pile a second way, using a different rule than the first time (for example fabric type instead of color), and compare which rule would actually matter more on wash day.",
   "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u02-l01.scoring.json",
   "integrity": {
@@ -84,5 +107,255 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g5-ready-for-life-u02-l01",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "clothing-laundry",
+    "practicalGoal": "I can practice sorting clothing. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u02-l01-model-card",
+        "swk-rfl-g5-u02-l01-step-card",
+        "swk-rfl-g5-u02-l01-guided-card",
+        "swk-rfl-g5-u02-l01-independent-card",
+        "swk-rfl-g5-u02-l01-evidence-record",
+        "swk-rfl-g5-u02-l01-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u02-l01-local-1",
+          "label": "at least eight clothing items",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u02-l01-local-2",
+          "label": "one item's care label",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u02-l01-model-card",
+        "kind": "model",
+        "title": "sorting clothing worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: Before any washing instruction, the learner is given (or gathers) a mixed pile of at least eight clothing items and sorts them using their own best guess at the rule that matters for washing, then compares that sort to what a care label suggests.",
+          "Model move 1: Read the condition and name the exact sorting clothing decision or action.",
+          "Model move 2: Before sorting, predict: what do you think matters most when sorting clothes for washing — color, fabric, or something else?",
+          "Model move 3: Sort your pile of at least eight items into at least three groups using one consistent rule, then write down the rule you used.",
+          "Model check: Consistent sorting rule: One rule applied consistently across all items. | Label comparison: Checks the label and accurately states whether it matches their rule."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l01-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "sorting clothing action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for sorting clothing.",
+          "2. Watch the worked move on swk-rfl-g5-u02-l01-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u02-l01-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u02-l01-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u02-l01-evidence-record; use swk-rfl-g5-u02-l01-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l01-guided-card",
+        "kind": "guided-practice",
+        "title": "sorting clothing coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: Before any washing instruction, the learner is given (or gathers) a mixed pile of at least eight clothing items and sorts them using their own best guess at the rule that matters for washing, then compares that sort to what a care label suggests.",
+          "Coach direction: Before sorting, predict: what do you think matters most when sorting clothes for washing — color, fabric, or something else?",
+          "Learner prompt: State your prediction and reasoning.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l01-independent-card",
+        "kind": "independent-task",
+        "title": "sorting clothing complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Sort your pile of at least eight items into at least three groups using one consistent rule, then write down the rule you used.",
+          "Response 1 (t2-p1): I used the same rule for every item, not a different reason for each pile.",
+          "Response 2 (t2-p2): State the sorting rule you used in one sentence.",
+          "Equal-access rule: If eight real clothing items aren't available to sort, the learner instead sorts eight items from a printed or hand-drawn clothing set using the same one-rule method and checks their rule against a sample care label provided in the lesson."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l01-evidence-record",
+        "kind": "evidence-record",
+        "title": "sorting clothing minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Check one item's care label. Does your sorting rule match what the label says that item needs? If not, what would you change about your rule?",
+          "Success checks: Consistent sorting rule: One rule applied consistently across all items. | Label comparison: Checks the label and accurately states whether it matches their rule.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u02-l01-retry-pair",
+        "kind": "retry",
+        "title": "sorting clothing supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u02-l01-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u02-l01-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional sorting clothing condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Consistent sorting rule: One rule applied consistently across all items. | Label comparison: Checks the label and accurately states whether it matches their rule..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u02-l01-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "sorting clothing worked model",
+      "startingCondition": "Before any washing instruction, the learner is given (or gathers) a mixed pile of at least eight clothing items and sorts them using their own best guess at the rule that matters for washing, then compares that sort to what a care label suggests.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact sorting clothing decision or action.",
+        "Model move 2: Before sorting, predict: what do you think matters most when sorting clothes for washing — color, fabric, or something else?",
+        "Model move 3: Sort your pile of at least eight items into at least three groups using one consistent rule, then write down the rule you used."
+      ],
+      "reasoning": "The model names the condition, follows the ordered sorting clothing process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Consistent sorting rule: One rule applied consistently across all items.",
+        "Label comparison: Checks the label and accurately states whether it matches their rule."
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l01-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for sorting clothing.",
+        "2. Watch the worked move on swk-rfl-g5-u02-l01-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u02-l01-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u02-l01-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u02-l01-evidence-record; use swk-rfl-g5-u02-l01-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l01-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "Before any washing instruction, the learner is given (or gathers) a mixed pile of at least eight clothing items and sorts them using their own best guess at the rule that matters for washing, then compares that sort to what a care label suggests.",
+      "prompt": "State your prediction and reasoning.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Consistent sorting rule: One rule applied consistently across all items.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u02-l01-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u02-l01-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "sorting clothing — permitted real-life route",
+        "completionAuthority": "learner",
+        "permissionRule": "Use only a safe, permitted setting and the materials already available to you.",
+        "directionsResourceRef": "swk-rfl-g5-u02-l01-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Sort your pile of at least eight items into at least three groups using one consistent rule, then write down the rule you used.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record and the completed application responses."
+      },
+      "simulationRoute": {
+        "title": "sorting clothing — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u02-l01-independent-card",
+        "directions": "If eight real clothing items aren't available to sort, the learner instead sorts eight items from a printed or hand-drawn clothing set using the same one-rule method and checks their rule against a sample care label provided in the lesson.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u02-l01-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Check one item's care label. Does your sorting rule match what the label says that item needs? If not, what would you change about your rule?",
+      "observableCriteria": [
+        "Consistent sorting rule: One rule applied consistently across all items.",
+        "Label comparison: Checks the label and accurately states whether it matches their rule."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u02-l01-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u02-l01-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u02-l01-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u02-l01-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Consistent sorting rule: One rule applied consistently across all items. | Label comparison: Checks the label and accurately states whether it matches their rule.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u02-l01-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u02-l01-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

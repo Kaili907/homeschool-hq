@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Manuel Academy RFL 9-12 competencies"
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "Learners present their complete transition portfolio to a guardian or another adult and respond to at least two follow-up challenge questions, so the capstone ends with the learner actually defending their plan out loud rather than only having written it down.",
+  "objective": "I can complete a realistic presenting the portfolio and answering challenge task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
   "scenario": "The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -36,72 +37,84 @@
   },
   "safetyNotes": [
     "No audio or video recording is made of this presentation; a written transcript of the learner's own spoken content and the challenge questions is used instead.",
-    "The challenge questions test the plan's reasoning and completeness, not the learner's worth or character \u2014 a 'still deciding' or partially-formed answer to a challenge question is a legitimate outcome, not a failure."
+    "The challenge questions test the plan's reasoning and completeness, not the learner's worth or character — a 'still deciding' or partially-formed answer to a challenge question is a legitimate outcome, not a failure."
   ],
   "simulationAlternative": {
     "present": true,
-    "description": "If a live audience isn't available today, the learner writes out the presentation as a full transcript of what they would say, including at least two anticipated challenge questions and their answers, and presents or reviews this transcript with an adult at the next available opportunity \u2014 this carries equal credit for completing today's lesson."
+    "description": "If a live audience isn't available today, the learner writes out the presentation as a full transcript of what they would say, including at least two anticipated challenge questions and their answers, and presents or reviews this transcript with an adult at the next available opportunity — this carries equal credit for completing today's lesson."
   },
   "materials": [
-    "the learner's complete assembled transition portfolio",
-    "the provided list of example challenge-question categories"
+    "Embedded resource: swk-rfl-g12-u06-l06-model-card",
+    "Embedded resource: swk-rfl-g12-u06-l06-step-card",
+    "Embedded resource: swk-rfl-g12-u06-l06-guided-card",
+    "Embedded resource: swk-rfl-g12-u06-l06-independent-card",
+    "Embedded resource: swk-rfl-g12-u06-l06-evidence-record",
+    "Embedded resource: swk-rfl-g12-u06-l06-retry-pair",
+    "Embedded resource: swk-rfl-g12-u06-l06-delivered-checklist",
+    "Embedded resource: swk-rfl-g12-u06-l06-delivered-example",
+    "Embedded resource: swk-rfl-g12-u06-l06-delivered-plan",
+    "learner-local: the learner's complete assembled transition portfolio"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before presenting, predict the toughest challenge question you might get.",
+      "directions": "Analyze the complete worked example on swk-rfl-g12-u06-l06-model-card before beginning.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "What's the toughest question you predict someone might ask about your plan, and do you already have an answer for it?"
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Present the complete portfolio to a guardian or another adult (or write the full transcript).",
+      "directions": "Complete the fictional coached case on swk-rfl-g12-u06-l06-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I presented all seven portfolio sections, or wrote a complete transcript covering all seven."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I responded to at least two follow-up challenge questions."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
       "kind": "performance-task",
-      "directions": "Record the challenge questions and your actual answers.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g12-u06-l06-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
         {
           "ref": "t3-p1",
-          "promptType": "extended-response",
-          "text": "Write out the at least two challenge questions you were actually asked (or anticipated, if using the transcript alternative) and your actual answers to each."
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on defending the plan out loud.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g12-u06-l06-evidence-record; omit or fictionalize private details.",
       "prompts": [
         {
           "ref": "t4-p1",
-          "promptType": "short-response",
+          "promptType": "extended-response",
           "text": "Was there a moment in the presentation or transcript where explaining the plan out loud changed how you understood it yourself? What was it?"
         }
       ]
     }
   ],
-  "remediation": "If fewer than two genuine challenge questions and answers are recorded, or the recorded answers simply restate the plan without engaging the question, reteach by modeling one example challenge question and a substantive answer, then have the learner redo their own question-and-answer pair.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g12-u06-l06-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g12-u06-l06-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g12-u06-l06-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Presentation completeness: All seven sections are presented or included in the transcript. | Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question. Resume at the next unfinished step on swk-rfl-g12-u06-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Have the learner write one additional challenge question they wish had been asked, and answer it themselves.",
   "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u06-l06.scoring.json",
   "integrity": {
@@ -109,5 +122,301 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g12-ready-for-life-u06-l06",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "capstone-integration",
+    "practicalGoal": "I can complete a realistic presenting the portfolio and answering challenge task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g12-u06-l06-model-card",
+        "swk-rfl-g12-u06-l06-step-card",
+        "swk-rfl-g12-u06-l06-guided-card",
+        "swk-rfl-g12-u06-l06-independent-card",
+        "swk-rfl-g12-u06-l06-evidence-record",
+        "swk-rfl-g12-u06-l06-retry-pair",
+        "swk-rfl-g12-u06-l06-delivered-checklist",
+        "swk-rfl-g12-u06-l06-delivered-example",
+        "swk-rfl-g12-u06-l06-delivered-plan"
+      ],
+      "referencedArtifactWords": [
+        "checklist",
+        "example",
+        "plan"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g12-u06-l06-delivered-checklist",
+        "swk-rfl-g12-u06-l06-delivered-example",
+        "swk-rfl-g12-u06-l06-delivered-plan"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g12-u06-l06-local-1",
+          "label": "the learner's complete assembled transition portfolio",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-model-card",
+        "kind": "model",
+        "title": "presenting the portfolio and answering challenge worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
+          "Model move 1: Read the condition and name the exact presenting the portfolio and answering challenge decision or action.",
+          "Model move 2: Before presenting, predict the toughest challenge question you might get.",
+          "Model move 3: Present the complete portfolio to a guardian or another adult (or write the full transcript).",
+          "Model check: Presentation completeness: All seven sections are presented or included in the transcript. | Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "presenting the portfolio and answering challenge action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for presenting the portfolio and answering challenge.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-guided-card",
+        "kind": "guided-practice",
+        "title": "presenting the portfolio and answering challenge coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
+          "Coach direction: Before presenting, predict the toughest challenge question you might get.",
+          "Learner prompt: What's the toughest question you predict someone might ask about your plan, and do you already have an answer for it?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-independent-card",
+        "kind": "independent-task",
+        "title": "presenting the portfolio and answering challenge complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Present the complete portfolio to a guardian or another adult (or write the full transcript).",
+          "Response 1 (t2-p1): I presented all seven portfolio sections, or wrote a complete transcript covering all seven.",
+          "Response 2 (t2-p2): I responded to at least two follow-up challenge questions.",
+          "Equal-access rule: If a live audience isn't available today, the learner writes out the presentation as a full transcript of what they would say, including at least two anticipated challenge questions and their answers, and presents or reviews this transcript with an adult at the next available opportunity — this carries equal credit for completing today's lesson."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-evidence-record",
+        "kind": "evidence-record",
+        "title": "presenting the portfolio and answering challenge minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Was there a moment in the presentation or transcript where explaining the plan out loud changed how you understood it yourself? What was it?",
+          "Success checks: Presentation completeness: All seven sections are presented or included in the transcript. | Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-retry-pair",
+        "kind": "retry",
+        "title": "presenting the portfolio and answering challenge supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g12-u06-l06-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g12-u06-l06-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional presenting the portfolio and answering challenge condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Presentation completeness: All seven sections are presented or included in the transcript. | Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question..",
+          "Return: resume at the next unfinished step on swk-rfl-g12-u06-l06-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-delivered-checklist",
+        "kind": "reference",
+        "title": "presenting the portfolio and answering challenge delivered checklist",
+        "purpose": "Resolves the lesson's named checklist so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
+          "Use steps: Present the complete portfolio to a guardian or another adult (or write the full transcript).",
+          "Field 1 (t2-p1): I presented all seven portfolio sections, or wrote a complete transcript covering all seven.",
+          "Field 2 (t2-p2): I responded to at least two follow-up challenge questions.",
+          "Check against: Presentation completeness: All seven sections are presented or included in the transcript. | Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-delivered-example",
+        "kind": "model",
+        "title": "presenting the portfolio and answering challenge delivered example",
+        "purpose": "Resolves the lesson's named example so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
+          "Use steps: Present the complete portfolio to a guardian or another adult (or write the full transcript).",
+          "Field 1 (t2-p1): I presented all seven portfolio sections, or wrote a complete transcript covering all seven.",
+          "Field 2 (t2-p2): I responded to at least two follow-up challenge questions.",
+          "Check against: Presentation completeness: All seven sections are presented or included in the transcript. | Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g12-u06-l06-delivered-plan",
+        "kind": "independent-task",
+        "title": "presenting the portfolio and answering challenge delivered plan",
+        "purpose": "Resolves the lesson's named plan so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
+          "Use steps: Present the complete portfolio to a guardian or another adult (or write the full transcript).",
+          "Field 1 (t2-p1): I presented all seven portfolio sections, or wrote a complete transcript covering all seven.",
+          "Field 2 (t2-p2): I responded to at least two follow-up challenge questions.",
+          "Check against: Presentation completeness: All seven sections are presented or included in the transcript. | Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question."
+        ]
+      }
+    ],
+    "model": {
+      "title": "presenting the portfolio and answering challenge worked model",
+      "startingCondition": "The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact presenting the portfolio and answering challenge decision or action.",
+        "Model move 2: Before presenting, predict the toughest challenge question you might get.",
+        "Model move 3: Present the complete portfolio to a guardian or another adult (or write the full transcript)."
+      ],
+      "reasoning": "The model names the condition, follows the ordered presenting the portfolio and answering challenge process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Presentation completeness: All seven sections are presented or included in the transcript.",
+        "Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question."
+      ],
+      "resourceRef": "swk-rfl-g12-u06-l06-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for presenting the portfolio and answering challenge.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g12-u06-l06-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "The learner presents the complete transition portfolio (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) to a guardian or another adult, responds to at least two follow-up challenge questions about the plan, and the adult confirms the presentation and question-and-answer exchange took place.",
+      "prompt": "What's the toughest question you predict someone might ask about your plan, and do you already have an answer for it?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Presentation completeness: All seven sections are presented or included in the transcript.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g12-u06-l06-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g12-u06-l06-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "presenting the portfolio and answering challenge — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g12-u06-l06-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "Present the complete portfolio to a guardian or another adult (or write the full transcript).",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "presenting the portfolio and answering challenge — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g12-u06-l06-independent-card",
+        "directions": "If a live audience isn't available today, the learner writes out the presentation as a full transcript of what they would say, including at least two anticipated challenge questions and their answers, and presents or reviews this transcript with an adult at the next available opportunity — this carries equal credit for completing today's lesson.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g12-u06-l06-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Was there a moment in the presentation or transcript where explaining the plan out loud changed how you understood it yourself? What was it?",
+      "observableCriteria": [
+        "Presentation completeness: All seven sections are presented or included in the transcript.",
+        "Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g12-u06-l06-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g12-u06-l06-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g12-u06-l06-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g12-u06-l06-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Presentation completeness: All seven sections are presented or included in the transcript. | Challenge-response quality: At least two genuine challenge questions are recorded with answers that actually engage the question.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g12-u06-l06-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g12-u06-l06-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

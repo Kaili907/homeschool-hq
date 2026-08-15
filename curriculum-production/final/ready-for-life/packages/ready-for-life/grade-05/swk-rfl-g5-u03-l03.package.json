@@ -14,9 +14,10 @@
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
   "standardsRefs": [
-    "Ready for Life v1 Lessons 07–09"
+    "Ready for Life v1 Lessons 07–09",
+    "Manuel Academy local Ready for Life composition"
   ],
-  "objective": "With an adult, learners practice separating raw-food-risk items from ready-to-eat items using color-coded or labeled zones (cutting boards, plates, or containers) across two supported rounds, then explain the reasoning behind the separation.",
+  "objective": "I can practice cross-contamination basics. I will do one step at a time and check one result.",
   "scenario": "With a trusted adult, the learner practices the basics of avoiding cross-contamination by keeping raw-food-risk items (or an adult-designated stand-in) physically separate from ready-to-eat items, using separate cutting boards or containers and separate hand-washing breaks between handling each type, guided fully the first round and leading the second with adult confirmation.",
   "isFictionalSimulation": false,
   "completionAuthority": "guardian",
@@ -43,67 +44,67 @@
     "description": "If handling an actual raw-food-risk item isn't appropriate for this household, the learner instead uses two clearly labeled stand-in items (for example a red-tagged item representing 'raw' and a green-tagged item representing 'ready-to-eat') to practice the same two-zone separation and hand-washing breaks, with the adult confirming the zones stayed correctly separated."
   },
   "materials": [
-    "two cutting boards or containers",
-    "a raw-food-risk item or adult-designated stand-in",
-    "a ready-to-eat item",
-    "sink and soap"
+    "Embedded resource: swk-rfl-g5-u03-l03-model-card",
+    "Embedded resource: swk-rfl-g5-u03-l03-step-card",
+    "Embedded resource: swk-rfl-g5-u03-l03-guided-card",
+    "Embedded resource: swk-rfl-g5-u03-l03-independent-card",
+    "Embedded resource: swk-rfl-g5-u03-l03-evidence-record",
+    "Embedded resource: swk-rfl-g5-u03-l03-retry-pair",
+    "learner-local: two cutting boards or containers",
+    "adult-or-local: a raw-food-risk item or adult-designated stand-in",
+    "learner-local: a ready-to-eat item",
+    "learner-local: sink and soap"
   ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before practicing, name one reason mixing a raw-food-risk item and a ready-to-eat item on the same surface could be a problem.",
+      "directions": "Open swk-rfl-g5-u03-l03-model-card. Watch one complete example.",
       "prompts": [
         {
           "ref": "t1-p1",
           "promptType": "short-response",
-          "text": "Name one reason."
+          "text": "Name the first move in the model and explain why it comes first."
         }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "With your adult, set up two separate zones (or boards, or containers) — one for the raw-food-risk item, one for a ready-to-eat item — and practice moving between them correctly, washing hands between zones.",
+      "directions": "Open swk-rfl-g5-u03-l03-guided-card. Do the coached move.",
       "prompts": [
         {
           "ref": "t2-p1",
-          "promptType": "checklist-item",
-          "text": "I used a separate surface or container for the raw-food-risk item the whole time."
-        },
-        {
-          "ref": "t2-p2",
-          "promptType": "checklist-item",
-          "text": "I washed my hands after touching the raw-food-risk item and before touching the ready-to-eat item."
-        },
-        {
-          "ref": "t2-p3",
-          "promptType": "checklist-item",
-          "text": "My adult confirmed the zones stayed separate throughout."
-        },
-        {
-          "ref": "t2-p4",
-          "promptType": "checklist-item",
-          "text": "I did not set any ready-to-eat item down on a surface the raw-food-risk item had touched."
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
         }
       ]
     },
     {
       "taskId": "t3",
-      "kind": "independent",
-      "directions": "Lead a second round of the same two-zone setup yourself, with your adult present to confirm, without being told each step.",
+      "kind": "performance-task",
+      "directions": "Open swk-rfl-g5-u03-l03-independent-card. Choose one complete route. Follow its steps.",
       "prompts": [
         {
           "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Permitted real-life route",
+            "Complete fictional route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
           "promptType": "short-response",
-          "text": "Which part of keeping the zones separate did you remember on your own, and which part needed a reminder?"
+          "text": "Record the completed step numbers and one non-sensitive result statement."
         }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Explain the risk of mixing zones.",
+      "directions": "Open swk-rfl-g5-u03-l03-evidence-record. Save one result and one reflection.",
       "prompts": [
         {
           "ref": "t4-p1",
@@ -113,7 +114,7 @@
       ]
     }
   ],
-  "remediation": "If the learner sets an item down on the wrong surface even once, reteach with a smaller, slower version — one item at a time with the adult narrating 'raw zone' or 'ready zone' out loud before each placement — before returning to the full two-round practice.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g5-u03-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g5-u03-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g5-u03-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Maintaining zone separation: Zones stay separate for the full guided round. | Explaining the risk: Names a plausible, specific risk of mixing zones. Resume at the next unfinished step on swk-rfl-g5-u03-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Add a third zone (like a zone for washed produce) and have the learner reason through where it fits relative to the first two, explaining their placement to the adult.",
   "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l03.scoring.json",
   "integrity": {
@@ -121,5 +122,269 @@
     "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
     "sourceLessonId": "ma-g5-ready-for-life-u03-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "food-kitchen",
+    "practicalGoal": "I can practice cross-contamination basics. I will do one step at a time and check one result.",
+    "duration": {
+      "activeLearnerTime": "25–35 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "5 minutes model, 5–7 minutes guided try, 10–15 minutes learner task, 5 minutes evidence and retry check",
+      "adultTime": "10–20 minutes for permission, required supervision or review, and physical-event attestation"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g5-u03-l03-model-card",
+        "swk-rfl-g5-u03-l03-step-card",
+        "swk-rfl-g5-u03-l03-guided-card",
+        "swk-rfl-g5-u03-l03-independent-card",
+        "swk-rfl-g5-u03-l03-evidence-record",
+        "swk-rfl-g5-u03-l03-retry-pair"
+      ],
+      "referencedArtifactWords": [],
+      "artifactResolutionRefs": [],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g5-u03-l03-local-1",
+          "label": "two cutting boards or containers",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u03-l03-local-2",
+          "label": "a raw-food-risk item or adult-designated stand-in",
+          "delivery": "adult-or-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u03-l03-local-3",
+          "label": "a ready-to-eat item",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g5-u03-l03-local-4",
+          "label": "sink and soap",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g5-u03-l03-model-card",
+        "kind": "model",
+        "title": "cross-contamination basics worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: With a trusted adult, the learner practices the basics of avoiding cross-contamination by keeping raw-food-risk items (or an adult-designated stand-in) physically separate from ready-to-eat items, using separate cutting boards or containers and separate hand-washing breaks between handling each type, guided fully the first round and leading the second with adult confirmation.",
+          "Model move 1: Read the condition and name the exact cross-contamination basics decision or action.",
+          "Model move 2: Before practicing, name one reason mixing a raw-food-risk item and a ready-to-eat item on the same surface could be a problem.",
+          "Model move 3: With your adult, set up two separate zones (or boards, or containers) — one for the raw-food-risk item, one for a ready-to-eat item — and practice moving between them correctly, washing hands between zones.",
+          "Model check: Maintaining zone separation: Zones stay separate for the full guided round. | Explaining the risk: Names a plausible, specific risk of mixing zones."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "cross-contamination basics action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal for cross-contamination basics.",
+          "2. Watch the worked move on swk-rfl-g5-u03-l03-model-card.",
+          "3. Do one coached move on swk-rfl-g5-u03-l03-guided-card.",
+          "4. Complete the chosen route on swk-rfl-g5-u03-l03-independent-card.",
+          "5. Save the small record on swk-rfl-g5-u03-l03-evidence-record; use swk-rfl-g5-u03-l03-retry-pair if a step is missed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "cross-contamination basics coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: With a trusted adult, the learner practices the basics of avoiding cross-contamination by keeping raw-food-risk items (or an adult-designated stand-in) physically separate from ready-to-eat items, using separate cutting boards or containers and separate hand-washing breaks between handling each type, guided fully the first round and leading the second with adult confirmation.",
+          "Coach direction: Before practicing, name one reason mixing a raw-food-risk item and a ready-to-eat item on the same surface could be a problem.",
+          "Learner prompt: Name one reason.",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l03-independent-card",
+        "kind": "independent-task",
+        "title": "cross-contamination basics complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: With your adult, set up two separate zones (or boards, or containers) — one for the raw-food-risk item, one for a ready-to-eat item — and practice moving between them correctly, washing hands between zones.",
+          "Response 1 (t2-p1): I used a separate surface or container for the raw-food-risk item the whole time.",
+          "Response 2 (t2-p2): I washed my hands after touching the raw-food-risk item and before touching the ready-to-eat item.",
+          "Response 3 (t2-p3): My adult confirmed the zones stayed separate throughout.",
+          "Response 4 (t2-p4): I did not set any ready-to-eat item down on a surface the raw-food-risk item had touched.",
+          "Equal-access rule: If handling an actual raw-food-risk item isn't appropriate for this household, the learner instead uses two clearly labeled stand-in items (for example a red-tagged item representing 'raw' and a green-tagged item representing 'ready-to-eat') to practice the same two-zone separation and hand-washing breaks, with the adult confirming the zones stayed correctly separated."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "cross-contamination basics minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Explain, in your own words, exactly what could go wrong if the two zones got mixed up — name a specific risk, not just 'it's unsafe.'",
+          "Success checks: Maintaining zone separation: Zones stay separate for the full guided round. | Explaining the risk: Names a plausible, specific risk of mixing zones.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g5-u03-l03-retry-pair",
+        "kind": "retry",
+        "title": "cross-contamination basics supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g5-u03-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g5-u03-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional cross-contamination basics condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Maintaining zone separation: Zones stay separate for the full guided round. | Explaining the risk: Names a plausible, specific risk of mixing zones..",
+          "Return: resume at the next unfinished step on swk-rfl-g5-u03-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      }
+    ],
+    "model": {
+      "title": "cross-contamination basics worked model",
+      "startingCondition": "With a trusted adult, the learner practices the basics of avoiding cross-contamination by keeping raw-food-risk items (or an adult-designated stand-in) physically separate from ready-to-eat items, using separate cutting boards or containers and separate hand-washing breaks between handling each type, guided fully the first round and leading the second with adult confirmation.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact cross-contamination basics decision or action.",
+        "Model move 2: Before practicing, name one reason mixing a raw-food-risk item and a ready-to-eat item on the same surface could be a problem.",
+        "Model move 3: With your adult, set up two separate zones (or boards, or containers) — one for the raw-food-risk item, one for a ready-to-eat item — and practice moving between them correctly, washing hands between zones."
+      ],
+      "reasoning": "The model names the condition, follows the ordered cross-contamination basics process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Maintaining zone separation: Zones stay separate for the full guided round.",
+        "Explaining the risk: Names a plausible, specific risk of mixing zones."
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "SHORT_CONCRETE_ONE_ACTION_PER_STEP",
+      "steps": [
+        "1. Read the goal for cross-contamination basics.",
+        "2. Watch the worked move on swk-rfl-g5-u03-l03-model-card.",
+        "3. Do one coached move on swk-rfl-g5-u03-l03-guided-card.",
+        "4. Complete the chosen route on swk-rfl-g5-u03-l03-independent-card.",
+        "5. Save the small record on swk-rfl-g5-u03-l03-evidence-record; use swk-rfl-g5-u03-l03-retry-pair if a step is missed."
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "With a trusted adult, the learner practices the basics of avoiding cross-contamination by keeping raw-food-risk items (or an adult-designated stand-in) physically separate from ready-to-eat items, using separate cutting boards or containers and separate hand-washing breaks between handling each type, guided fully the first round and leading the second with adult confirmation.",
+      "prompt": "Name one reason.",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Maintaining zone separation: Zones stay separate for the full guided round.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g5-u03-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g5-u03-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": true,
+      "realRoute": {
+        "title": "cross-contamination basics — permitted real-life route",
+        "completionAuthority": "guardian",
+        "permissionRule": "Do not begin the physical action until a household-authorized guardian gives permission and is available for the supervision or review named in this lesson.",
+        "directionsResourceRef": "swk-rfl-g5-u03-l03-independent-card",
+        "steps": [
+          "Confirm the setting, materials, and stop condition before acting.",
+          "With your adult, set up two separate zones (or boards, or containers) — one for the raw-food-risk item, one for a ready-to-eat item — and practice moving between them correctly, washing hands between zones.",
+          "Complete the response prompts on the delivered independent card without recording private identifying details.",
+          "Check the result against the delivered evidence record and correct any missed step."
+        ],
+        "completionCondition": "The learner submits the minimal process record; only the household-authorized guardian attests that the named physical action occurred."
+      },
+      "simulationRoute": {
+        "title": "cross-contamination basics — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g5-u03-l03-independent-card",
+        "directions": "If handling an actual raw-food-risk item isn't appropriate for this household, the learner instead uses two clearly labeled stand-in items (for example a red-tagged item representing 'raw' and a green-tagged item representing 'ready-to-eat') to practice the same two-zone separation and hand-washing breaks, with the adult confirming the zones stayed correctly separated.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g5-u03-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Explain, in your own words, exactly what could go wrong if the two zones got mixed up — name a specific risk, not just 'it's unsafe.'",
+      "observableCriteria": [
+        "Maintaining zone separation: Zones stay separate for the full guided round.",
+        "Explaining the risk: Names a plausible, specific risk of mixing zones."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g5-u03-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g5-u03-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g5-u03-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g5-u03-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Maintaining zone separation: Zones stay separate for the full guided round. | Explaining the risk: Names a plausible, specific risk of mixing zones.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g5-u03-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g5-u03-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": true,
+      "requiredForSimulationRoute": false,
+      "role": "Give permission; provide only the supervision, handling, review, or observation named in the lesson; attest only that the physical event occurred.",
+      "learnerSelfReport": "recorded-but-not-certifying-for-physical-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }

@@ -13,9 +13,12 @@
     "title": "Guided practice: utilities, deposits, and setup sequence"
   },
   "subjectFamily": "ARTS_RFL_PE_PROJECT",
-  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
-  "objective": "Learners sequence the steps of a fictional move-in scenario in a logical order and explain what a security deposit is and when it's typically returned, so they understand both the order of operations for moving in and the reasoning a deposit requires.",
-  "scenario": "In a fictional scenario, a person named Sam has a lease starting on the 1st of next month for a fictional apartment. Sam has a list of eight tasks to complete, in no particular order: confirm the lease start date with the landlord, pay the security deposit, contact the electric company to start service, contact the water/sewer provider to start service, schedule internet installation, complete a written move-in walkthrough noting any existing damage, forward mail to the new address, and pack and transport belongings to the new address. The learner puts these in a logical sequence and explains the reasoning.",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies",
+    "Manuel Academy local Ready for Life composition"
+  ],
+  "objective": "I can complete a realistic utilities, deposits, and setup sequence task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+  "scenario": "In a fictional scenario, a person named Sam has a lease starting on the 1st of next month for a fictional apartment.",
   "isFictionalSimulation": true,
   "completionAuthority": "learner",
   "realWorldAction": false,
@@ -24,42 +27,77 @@
     "Sam and the apartment are fictional; the learner does not need to plan or disclose a real move to complete this lesson."
   ],
   "simulationAlternative": null,
-  "materials": ["the provided list of eight fictional move-in tasks", "paper or notes app"],
+  "materials": [
+    "Embedded resource: swk-rfl-g11-u04-l03-model-card",
+    "Embedded resource: swk-rfl-g11-u04-l03-step-card",
+    "Embedded resource: swk-rfl-g11-u04-l03-guided-card",
+    "Embedded resource: swk-rfl-g11-u04-l03-independent-card",
+    "Embedded resource: swk-rfl-g11-u04-l03-evidence-record",
+    "Embedded resource: swk-rfl-g11-u04-l03-retry-pair",
+    "Embedded resource: swk-rfl-g11-u04-l03-delivered-scenario",
+    "learner-local: the provided list of eight fictional move-in tasks",
+    "learner-local: paper or notes app"
+  ],
   "tasks": [
     {
       "taskId": "t1",
       "kind": "warm-up",
-      "directions": "Before we define it, write your current understanding of the key concept.",
+      "directions": "Analyze the complete worked example on swk-rfl-g11-u04-l03-model-card before beginning.",
       "prompts": [
-        { "ref": "t1-p1", "promptType": "short-response", "text": "Before we define it, what do you think a security deposit is for?" }
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first move in the model and explain why it comes first."
+        }
       ]
     },
     {
       "taskId": "t2",
       "kind": "guided",
-      "directions": "Put Sam's eight tasks in a logical sequence and explain your reasoning for the first two.",
+      "directions": "Complete the fictional coached case on swk-rfl-g11-u04-l03-guided-card, use criterion-specific feedback, and finish its fresh correction turn.",
       "prompts": [
-        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write Sam's eight tasks in the order you would complete them, and explain why the first two tasks on your list have to happen before the rest." }
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Name the move you completed and the success check it meets."
+        }
       ]
     },
     {
       "taskId": "t3",
       "kind": "independent",
-      "directions": "Explain what a security deposit is and how it can be affected.",
+      "directions": "Choose the permitted real-life route or complete fictional route on swk-rfl-g11-u04-l03-independent-card; follow every step and retain only the named minimal evidence.",
       "prompts": [
-        { "ref": "t3-p1", "promptType": "extended-response", "text": "Explain, in your own words, what a security deposit typically is, roughly when it is normally returned after move-out, and one specific thing that could reduce how much of it is returned." }
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which complete route did you use?",
+          "choices": [
+            "Complete fictional route",
+            "Privacy-preserving fictional-detail route"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Record the completed step numbers and one non-sensitive result statement."
+        }
       ]
     },
     {
       "taskId": "t4",
       "kind": "reflection",
-      "directions": "Reflect on what's easiest to forget in your own sequence.",
+      "directions": "Complete the minimal evidence record on swk-rfl-g11-u04-l03-evidence-record; omit or fictionalize private details.",
       "prompts": [
-        { "ref": "t4-p1", "promptType": "short-response", "text": "Which step in your sequence would be easiest to forget under real-life time pressure, and what would help you remember it?" }
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which step in your sequence would be easiest to forget under real-life time pressure, and what would help you remember it?"
+        }
       ]
     }
   ],
-  "remediation": "If the sequence puts utility setup or belongings transport before confirming the lease start date and paying the deposit, reteach by modeling that authorization steps (confirming the lease, paying the deposit) have to happen before a tenant has the standing to set up services or move belongings in, then have the learner re-sequence using that authorization-first rule.",
+  "remediation": "Compare the missed move with the worked move on swk-rfl-g11-u04-l03-model-card; name one observable difference and review only the matching instruction step. Complete the affected move on swk-rfl-g11-u04-l03-guided-card with one coach prompt and receive feedback tied to the success check. Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments. Complete the same move on the fresh parallel condition in swk-rfl-g11-u04-l03-retry-pair without the coach prompt. Exit: The supported and parallel moves both meet the named success check: Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order. | Deposit concept accuracy: Explanation correctly states what a deposit is, roughly when it's returned, and one thing that could reduce it. | Practical foresight: Reflection names a specific step and a specific, workable reason it's easy to forget. Resume at the next unfinished step on swk-rfl-g11-u04-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
   "extension": "Change the scenario so Sam's move-in date shifts two weeks earlier than planned, and have the learner identify which of the eight tasks now have the tightest new deadline and why.",
   "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l03.scoring.json",
   "integrity": {
@@ -67,5 +105,263 @@
     "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
     "sourceLessonId": "ma-g11-ready-for-life-u04-l03",
     "authoredBy": "manual"
+  },
+  "productionDepth": {
+    "version": "ready-for-life-production-depth-r1",
+    "authorityBasis": "MANUEL_ACADEMY_LOCAL_COMPOSITION",
+    "lessonFamily": "housing-independent-living",
+    "practicalGoal": "I can complete a realistic utilities, deposits, and setup sequence task, document the result with minimal private data, and revise a step that does not meet the lesson criteria.",
+    "duration": {
+      "activeLearnerTime": "45–60 minutes",
+      "elapsedWindow": "One session",
+      "sessionPattern": "8–10 minutes model and planning, 8–10 minutes guided try, 20–30 minutes application, 7–10 minutes evidence and revision",
+      "adultTime": "No adult time required unless the learner chooses support"
+    },
+    "materials": {
+      "providedResourceRefs": [
+        "swk-rfl-g11-u04-l03-model-card",
+        "swk-rfl-g11-u04-l03-step-card",
+        "swk-rfl-g11-u04-l03-guided-card",
+        "swk-rfl-g11-u04-l03-independent-card",
+        "swk-rfl-g11-u04-l03-evidence-record",
+        "swk-rfl-g11-u04-l03-retry-pair",
+        "swk-rfl-g11-u04-l03-delivered-scenario"
+      ],
+      "referencedArtifactWords": [
+        "scenario"
+      ],
+      "artifactResolutionRefs": [
+        "swk-rfl-g11-u04-l03-delivered-scenario"
+      ],
+      "localMaterials": [
+        {
+          "materialId": "swk-rfl-g11-u04-l03-local-1",
+          "label": "the provided list of eight fictional move-in tasks",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        },
+        {
+          "materialId": "swk-rfl-g11-u04-l03-local-2",
+          "label": "paper or notes app",
+          "delivery": "learner-local",
+          "availabilityRule": "Use only when already available, safe, permitted, and appropriate. The complete fictional route replaces unavailable real-world access."
+        }
+      ],
+      "noPurchaseRule": "No purchase is required. Use the complete fictional route when a local material, setting, source, or adult is unavailable."
+    },
+    "resources": [
+      {
+        "resourceId": "swk-rfl-g11-u04-l03-model-card",
+        "kind": "model",
+        "title": "utilities, deposits, and setup sequence worked model",
+        "purpose": "Shows the starting condition, visible moves, reasoning, and success check before the learner begins.",
+        "content": [
+          "Starting condition: In a fictional scenario, a person named Sam has a lease starting on the 1st of next month for a fictional apartment.",
+          "Model move 1: Read the condition and name the exact utilities, deposits, and setup sequence decision or action.",
+          "Model move 2: Before we define it, write your current understanding of the key concept.",
+          "Model move 3: Put Sam's eight tasks in a logical sequence and explain your reasoning for the first two.",
+          "Model check: Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order. | Deposit concept accuracy: Explanation correctly states what a deposit is, roughly when it's returned, and one thing that could reduce it. | Practical foresight: Reflection names a specific step and a specific, workable reason it's easy to forget."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l03-step-card",
+        "kind": "step-by-step-instruction",
+        "title": "utilities, deposits, and setup sequence action steps",
+        "purpose": "Provides the ordered directions used by the model, guided attempt, independent task, and retry.",
+        "content": [
+          "1. Read the goal, constraints, and privacy boundary for utilities, deposits, and setup sequence.",
+          "2. Analyze the worked model and identify why its sequence meets the criteria.",
+          "3. Complete the guided case and use feedback before moving on.",
+          "4. Select the permitted real-life route or the complete fictional route.",
+          "5. Carry out the task, retaining only the minimum evidence named in the record.",
+          "6. Compare the result with the success checks and complete the correction loop when needed."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l03-guided-card",
+        "kind": "guided-practice",
+        "title": "utilities, deposits, and setup sequence coached first attempt",
+        "purpose": "Carries the complete first attempt and a fresh correction turn.",
+        "content": [
+          "Fictional practice condition: In a fictional scenario, a person named Sam has a lease starting on the 1st of next month for a fictional apartment.",
+          "Coach direction: Before we define it, write your current understanding of the key concept.",
+          "Learner prompt: Before we define it, what do you think a security deposit is for?",
+          "Feedback check: name the move completed, point to the matching success check, and identify one missing or uncertain step without judging the learner.",
+          "Fresh correction turn: use the same fictional condition with one constraint changed; restate the changed constraint, redo only the affected step, and check the new result."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l03-independent-card",
+        "kind": "independent-task",
+        "title": "utilities, deposits, and setup sequence complete application",
+        "purpose": "Contains the lesson-specific application directions and prompts; it is the delivered card referenced by the learner flow.",
+        "content": [
+          "Application direction: Put Sam's eight tasks in a logical sequence and explain your reasoning for the first two.",
+          "Response 1 (t2-p1): Write Sam's eight tasks in the order you would complete them, and explain why the first two tasks on your list have to happen before the rest.",
+          "Equal-access rule: Use the fictional condition above and complete the same reasoning and evidence without private real-world details."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l03-evidence-record",
+        "kind": "evidence-record",
+        "title": "utilities, deposits, and setup sequence minimal evidence record",
+        "purpose": "Defines exactly what the learner saves and what must not be collected.",
+        "content": [
+          "Record only: selected route, completed step numbers, one non-sensitive result statement, and one revision if a step changed.",
+          "Reflection: Which step in your sequence would be easiest to forget under real-life time pressure, and what would help you remember it?",
+          "Success checks: Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order. | Deposit concept accuracy: Explanation correctly states what a deposit is, roughly when it's returned, and one thing that could reduce it. | Practical foresight: Reflection names a specific step and a specific, workable reason it's easy to forget.",
+          "Do not collect: names, signatures, addresses, or exact locations; account, identification, medical, product, or medicine details; photos, audio, video, passwords, or private household schedules."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l03-retry-pair",
+        "kind": "retry",
+        "title": "utilities, deposits, and setup sequence supported and parallel retry cards",
+        "purpose": "Delivers a real correction loop rather than a direction to try again without support.",
+        "content": [
+          "Contrast reteach: compare the model check on swk-rfl-g11-u04-l03-model-card with the missed or unsupported step; name the one observable difference.",
+          "Supported card: return to swk-rfl-g11-u04-l03-guided-card, complete the affected move with one coach prompt, and receive criterion-specific feedback.",
+          "Parallel card: use a fresh fictional utilities, deposits, and setup sequence condition with one changed constraint; complete the same move without the coach prompt.",
+          "Exit check: the corrected move meets this lesson's checks — Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order. | Deposit concept accuracy: Explanation correctly states what a deposit is, roughly when it's returned, and one thing that could reduce it. | Practical foresight: Reflection names a specific step and a specific, workable reason it's easy to forget..",
+          "Return: resume at the next unfinished step on swk-rfl-g11-u04-l03-independent-card; a physical route resumes only when the authorized adult says it is safe."
+        ]
+      },
+      {
+        "resourceId": "swk-rfl-g11-u04-l03-delivered-scenario",
+        "kind": "guided-practice",
+        "title": "utilities, deposits, and setup sequence delivered scenario",
+        "purpose": "Resolves the lesson's named scenario so the learner is never directed to a phantom material.",
+        "content": [
+          "Starting information: In a fictional scenario, a person named Sam has a lease starting on the 1st of next month for a fictional apartment.",
+          "Use steps: Put Sam's eight tasks in a logical sequence and explain your reasoning for the first two.",
+          "Field 1 (t2-p1): Write Sam's eight tasks in the order you would complete them, and explain why the first two tasks on your list have to happen before the rest.",
+          "Check against: Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order. | Deposit concept accuracy: Explanation correctly states what a deposit is, roughly when it's returned, and one thing that could reduce it. | Practical foresight: Reflection names a specific step and a specific, workable reason it's easy to forget."
+        ]
+      }
+    ],
+    "model": {
+      "title": "utilities, deposits, and setup sequence worked model",
+      "startingCondition": "In a fictional scenario, a person named Sam has a lease starting on the 1st of next month for a fictional apartment.",
+      "actions": [
+        "Model move 1: Read the condition and name the exact utilities, deposits, and setup sequence decision or action.",
+        "Model move 2: Before we define it, write your current understanding of the key concept.",
+        "Model move 3: Put Sam's eight tasks in a logical sequence and explain your reasoning for the first two."
+      ],
+      "reasoning": "The model names the condition, follows the ordered utilities, deposits, and setup sequence process, and checks the result instead of claiming success from effort alone.",
+      "successCheck": [
+        "Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order.",
+        "Deposit concept accuracy: Explanation correctly states what a deposit is, roughly when it's returned, and one thing that could reduce it.",
+        "Practical foresight: Reflection names a specific step and a specific, workable reason it's easy to forget."
+      ],
+      "resourceRef": "swk-rfl-g11-u04-l03-model-card"
+    },
+    "instruction": {
+      "presentationRule": "INDEPENDENT_MULTI_STEP_WITH_EXPLICIT_CONSTRAINTS",
+      "steps": [
+        "1. Read the goal, constraints, and privacy boundary for utilities, deposits, and setup sequence.",
+        "2. Analyze the worked model and identify why its sequence meets the criteria.",
+        "3. Complete the guided case and use feedback before moving on.",
+        "4. Select the permitted real-life route or the complete fictional route.",
+        "5. Carry out the task, retaining only the minimum evidence named in the record.",
+        "6. Compare the result with the success checks and complete the correction loop when needed."
+      ],
+      "resourceRef": "swk-rfl-g11-u04-l03-step-card"
+    },
+    "guidedFirstAttempt": {
+      "fictional": true,
+      "setup": "In a fictional scenario, a person named Sam has a lease starting on the 1st of next month for a fictional apartment.",
+      "prompt": "Before we define it, what do you think a security deposit is for?",
+      "coachMoves": [
+        "Ask the learner to name the condition.",
+        "Point to one model step only.",
+        "Give feedback against one observable success check."
+      ],
+      "successCondition": "Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order.",
+      "correctionTurn": "Use the fresh condition on swk-rfl-g11-u04-l03-guided-card: change one constraint, redo only the affected move, and state why the corrected move now meets the success check.",
+      "resourceRef": "swk-rfl-g11-u04-l03-guided-card"
+    },
+    "independentTask": {
+      "realLifeAppropriate": false,
+      "realRoute": null,
+      "simulationRoute": {
+        "title": "utilities, deposits, and setup sequence — complete fictional route",
+        "completionAuthority": "learner",
+        "equalCredit": true,
+        "directionsResourceRef": "swk-rfl-g11-u04-l03-independent-card",
+        "directions": "Complete the utilities, deposits, and setup sequence task using the fictional condition and invented, non-sensitive details on the delivered independent card.",
+        "completionCondition": "Complete the same decision, procedure, evidence, and revision checks as the real-life route. No adult attests that a physical event occurred."
+      },
+      "privacyAlternative": "The learner may use invented names, dates, amounts, organizations, spaces, and circumstances whenever real details are unnecessary or private.",
+      "resourceRef": "swk-rfl-g11-u04-l03-independent-card"
+    },
+    "evidence": {
+      "learnerEvidence": [
+        "selected route",
+        "completed step numbers",
+        "one non-sensitive result statement",
+        "one revision when a step changed"
+      ],
+      "reflectionPrompt": "Which step in your sequence would be easiest to forget under real-life time pressure, and what would help you remember it?",
+      "observableCriteria": [
+        "Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order.",
+        "Deposit concept accuracy: Explanation correctly states what a deposit is, roughly when it's returned, and one thing that could reduce it.",
+        "Practical foresight: Reflection names a specific step and a specific, workable reason it's easy to forget."
+      ],
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ],
+      "resourceRef": "swk-rfl-g11-u04-l03-evidence-record"
+    },
+    "retry": {
+      "trigger": "Start the correction loop when a required step is missing, the reason does not match the condition, a safety or privacy boundary is crossed, or the evidence does not show the stated result.",
+      "targetedReteach": "Compare the missed move with the worked move on swk-rfl-g11-u04-l03-model-card; name one observable difference and review only the matching instruction step.",
+      "supportedReattempt": "Complete the affected move on swk-rfl-g11-u04-l03-guided-card with one coach prompt and receive feedback tied to the success check.",
+      "feedback": "Name the observable move that now meets the check and the one move, if any, that still needs correction. Do not use shame, trait, effort, or character judgments.",
+      "parallelReattempt": "Complete the same move on the fresh parallel condition in swk-rfl-g11-u04-l03-retry-pair without the coach prompt.",
+      "exitCriterion": "The supported and parallel moves both meet the named success check: Sequencing logic: Sequence places authorization steps before dependent tasks, in a workable overall order. | Deposit concept accuracy: Explanation correctly states what a deposit is, roughly when it's returned, and one thing that could reduce it. | Practical foresight: Reflection names a specific step and a specific, workable reason it's easy to forget.",
+      "returnPath": "Resume at the next unfinished step on swk-rfl-g11-u04-l03-independent-card. A physical task resumes only with required permission and supervision; otherwise finish the equal-credit fictional route.",
+      "resourceRef": "swk-rfl-g11-u04-l03-retry-pair"
+    },
+    "guardianInvolvement": {
+      "requiredForPhysicalRoute": false,
+      "requiredForSimulationRoute": false,
+      "role": "Optional coach only; no guardian attestation is required.",
+      "learnerSelfReport": "certifying-for-learner-route",
+      "signOffBoundary": "A guardian attestation certifies only that the named physical event occurred. It never scores the learner reflection or proves effort, honesty, maturity, responsibility, diagnosis, or character."
+    },
+    "safety": {
+      "stopRule": "Stop the physical route when permission, supervision, a safe setting, or an expected material is missing, or when a new hazard appears. Continue only when the authorized adult resolves it; otherwise use the complete fictional route.",
+      "physicalBoundary": "The learner follows the source safety notes and never performs adult-only handling, transport, account, legal, medical, heat, sharp-tool, electrical, chemical, or machine actions.",
+      "noShameRule": "Describe only the observable step, condition, evidence, or revision. Never label the learner, household, body, ability, effort, maturity, responsibility, or character."
+    },
+    "privacy": {
+      "rule": "Collect the smallest process record that shows the lesson steps. A learner may choose fictional details and may decline private disclosure without losing credit.",
+      "doNotCollect": [
+        "names, signatures, addresses, or exact locations",
+        "account, identification, medical, product, or medicine details",
+        "photos, audio, video, passwords, or private household schedules"
+      ]
+    },
+    "tutorBoundary": {
+      "may": [
+        "read delivered resource cues",
+        "rehearse the ordered steps",
+        "coach the guided and retry cards",
+        "acknowledge saved learner evidence"
+      ],
+      "mayNot": [
+        "grant permission",
+        "observe or claim a physical condition",
+        "direct unsafe handling",
+        "request sensitive evidence",
+        "impersonate a guardian",
+        "certify physical completion",
+        "invent a missing resource"
+      ],
+      "physicalCompletionRule": "Tutor or AI may coach. Tutor or AI may not certify that a real-world physical action occurred.",
+      "missingResourceAction": "Stop and name the unresolved resource. Do not fabricate it; use another complete delivered route only when every resource for that route resolves."
+    }
   }
 }
