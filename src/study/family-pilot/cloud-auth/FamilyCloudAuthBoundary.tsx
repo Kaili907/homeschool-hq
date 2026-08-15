@@ -8,6 +8,8 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
   const [state, setState] = useState<FamilyCloudSessionState>(() => runtime.snapshot())
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [formMode, setFormMode] = useState<'SIGN_IN' | 'CREATE'>('SIGN_IN')
+  const [accountNotice, setAccountNotice] = useState<string | null>(null)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -53,21 +55,42 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
     if (!email.trim() || password.length === 0) return
     const heldPassword = password
     setPassword('')
+    setAccountNotice(null)
+    if (formMode === 'CREATE') {
+      const result = await runtime.createAccount(email.trim(), heldPassword)
+      if (result.status === 'CONFIRM_EMAIL') {
+        setFormMode('SIGN_IN')
+        setAccountNotice('Check your email to confirm the family account, then return here and sign in.')
+      }
+      return
+    }
     await runtime.signIn(email.trim(), heldPassword)
   }
 
   return (
     <main className="mx-auto max-w-md px-4 py-10" aria-labelledby="family-cloud-login-title">
       <p className="font-bold text-cyan-700">Family account</p>
-      <h2 id="family-cloud-login-title" className="mt-1 text-3xl font-extrabold">Sign in to Manuel Academy</h2>
+      <h2 id="family-cloud-login-title" className="mt-1 text-3xl font-extrabold">
+        {formMode === 'CREATE' ? 'Set up Family Cloud' : 'Sign in to Manuel Academy'}
+      </h2>
       <p className="mt-3 font-semibold text-slate-600">{message}</p>
+      {accountNotice ? <p role="status" className="mt-4 rounded-lg border border-cyan-200 bg-cyan-50 p-3 font-semibold text-slate-700">{accountNotice}</p> : null}
       <label className="mt-6 block font-bold">Parent email
         <input aria-label="Parent email" autoComplete="username" inputMode="email" type="email" className="mt-1 min-h-11 w-full rounded-lg border px-3 py-2" value={email} onChange={(event) => setEmail(event.target.value)} />
       </label>
       <label className="mt-4 block font-bold">Password
-        <input aria-label="Family account password" autoComplete="current-password" type="password" className="mt-1 min-h-11 w-full rounded-lg border px-3 py-2" value={password} onChange={(event) => setPassword(event.target.value)} />
+        <input aria-label="Family account password" autoComplete={formMode === 'CREATE' ? 'new-password' : 'current-password'} type="password" className="mt-1 min-h-11 w-full rounded-lg border px-3 py-2" value={password} onChange={(event) => setPassword(event.target.value)} />
       </label>
-      <button type="button" className="mt-5 min-h-11 rounded-lg bg-cyan-700 px-5 py-3 font-extrabold text-white disabled:opacity-60" disabled={!email.trim() || !password} onClick={() => { void submit() }}>Sign in</button>
+      <button type="button" className="mt-5 min-h-11 rounded-lg bg-cyan-700 px-5 py-3 font-extrabold text-white disabled:opacity-60" disabled={!email.trim() || !password} onClick={() => { void submit() }}>
+        {formMode === 'CREATE' ? 'Create family account' : 'Sign in'}
+      </button>
+      <button type="button" className="ml-2 mt-5 min-h-11 rounded-lg border border-cyan-700 px-4 py-3 font-bold text-cyan-800" onClick={() => {
+        setPassword('')
+        setAccountNotice(null)
+        setFormMode((value) => value === 'SIGN_IN' ? 'CREATE' : 'SIGN_IN')
+      }}>
+        {formMode === 'CREATE' ? 'Use an existing account' : 'Set up Family Cloud'}
+      </button>
       <p className="mt-4 text-sm text-slate-500">The account provider manages this password and secure session. Manuel Academy does not store it in family records.</p>
     </main>
   )

@@ -31,10 +31,19 @@ export type FamilyCloudIdentitySignInResult =
   | Readonly<{ status: 'SIGNED_IN'; context: FamilyCloudIdentityContext }>
   | Readonly<{ status: 'INVALID_CREDENTIALS' | 'UNAVAILABLE' }>
 
+export type FamilyCloudIdentitySignUpResult =
+  | Readonly<{ status: 'SIGNED_IN'; context: FamilyCloudIdentityContext }>
+  | Readonly<{ status: 'CONFIRM_EMAIL' | 'INVALID_CREDENTIALS' | 'UNAVAILABLE' }>
+
+export type FamilyCloudAccountCreationResult =
+  | Readonly<{ status: 'CONFIRM_EMAIL' }>
+  | Readonly<{ status: 'SESSION'; state: FamilyCloudSessionState }>
+
 /** Supabase Auth owns credential handling, session persistence, and refresh. */
 export interface FamilyCloudIdentityPort {
   current(signal?: AbortSignal): Promise<FamilyCloudIdentityContext | null>
   signIn(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudIdentitySignInResult>
+  signUp(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudIdentitySignUpResult>
   signOut(): Promise<void>
 }
 
@@ -113,6 +122,7 @@ export interface FamilyCloudAuthRuntime {
   snapshot(): FamilyCloudSessionState
   bootstrap(signal?: AbortSignal): Promise<FamilyCloudSessionState>
   signIn(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudSessionState>
+  createAccount(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudAccountCreationResult>
   signOut(): Promise<FamilyCloudSessionState>
   reconcile(signal?: AbortSignal): Promise<FamilyCloudReconcileResult>
   subscribe(listener: (state: FamilyCloudSessionState) => void): () => void

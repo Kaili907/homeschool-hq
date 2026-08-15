@@ -1,6 +1,7 @@
 import {
   FAMILY_CLOUD_AUTH_SCHEMA_VERSION,
   type FamilyCloudAuthRuntime,
+  type FamilyCloudAccountCreationResult,
   type FamilyCloudIdentityPort,
   type FamilyCloudLocalDataPort,
   type FamilyCloudIdentityContext,
@@ -81,6 +82,29 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
       }))
     }
     return this.#establish(result.context, generation, signal)
+  }
+
+  async createAccount(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudAccountCreationResult> {
+    const generation = ++this.#generation
+    this.#dropCloudAuthority()
+    this.#publish(AUTHENTICATING)
+    let result
+    try { result = await this.#identity.signUp(email, password, signal) } catch { result = { status: 'UNAVAILABLE' as const } }
+    if (generation !== this.#generation || signal?.aborted) {
+      return Object.freeze({ status: 'SESSION', state: this.#state })
+    }
+    if (result.status === 'CONFIRM_EMAIL') {
+      this.#publish(SIGNED_OUT)
+      return Object.freeze({ status: 'CONFIRM_EMAIL' })
+    }
+    if (result.status !== 'SIGNED_IN') {
+      const state = this.#publish(Object.freeze({
+        status: 'NEEDS_ATTENTION', householdRef: null, cloudAuthority: 'NONE', localData: 'UNAVAILABLE',
+        reason: 'AUTH_UNAVAILABLE',
+      }))
+      return Object.freeze({ status: 'SESSION', state })
+    }
+    return Object.freeze({ status: 'SESSION', state: await this.#establish(result.context, generation, signal) })
   }
 
   async signOut(): Promise<FamilyCloudSessionState> {

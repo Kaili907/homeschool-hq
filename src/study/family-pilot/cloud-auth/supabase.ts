@@ -55,6 +55,29 @@ export function createSupabaseFamilyCloudIdentity(
         ? Object.freeze({ status: 'SIGNED_IN' as const, context })
         : Object.freeze({ status: 'UNAVAILABLE' as const })
     },
+    async signUp(email: string, password: string, signal?: AbortSignal) {
+      if (!client || signal?.aborted) return Object.freeze({ status: 'UNAVAILABLE' as const })
+      const emailRedirectTo = typeof window === 'undefined'
+        ? undefined
+        : new URL('/family-pilot', window.location.origin).toString()
+      const { data, error } = await client.auth.signUp({
+        email,
+        password,
+        ...(emailRedirectTo ? { options: { emailRedirectTo } } : {}),
+      })
+      if (error) {
+        return Object.freeze({
+          status: error.status === 400 || error.status === 401 || error.status === 422
+            ? 'INVALID_CREDENTIALS' as const
+            : 'UNAVAILABLE' as const,
+        })
+      }
+      if (!data.session && data.user) return Object.freeze({ status: 'CONFIRM_EMAIL' as const })
+      const context = await currentContext(client, signal)
+      return context
+        ? Object.freeze({ status: 'SIGNED_IN' as const, context })
+        : Object.freeze({ status: 'UNAVAILABLE' as const })
+    },
     async signOut() {
       if (client) await client.auth.signOut()
     },

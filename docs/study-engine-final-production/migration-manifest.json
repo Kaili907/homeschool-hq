@@ -573,6 +573,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "family_plan_checkpoint_contract:absent->r1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260815180000",
+      "filename": "20260815180000_academy_family_session_safety_clear_shape_r1.sql",
+      "sha256": "835382e0a04bb453ba494640bcbeac93cb9d2d76733d362b05cc754bf3964a30",
+      "dependency": "20260815120000_academy_family_plan_checkpoint_r1.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "family_session_safety_clear_shape:unreconciled->normalized",
+      "supersessionStatus": "current"
     }
   ]
 }

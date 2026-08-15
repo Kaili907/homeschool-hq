@@ -1,10 +1,11 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import type { VerifiedAuthContext } from '../../../auth/supabaseSession'
 import { FamilyCloudAuthCoordinator } from './coordinator'
 import { createLinkedFamilyDeviceStore, LINKED_FAMILY_DEVICE_KEY } from './deviceStore'
 import { FamilyLearnerSession } from './learnerSession'
 import { createHouseholdScopedStorage } from './scopedStorage'
-import { createSupabaseFamilyHouseholdAuthority } from './supabase'
+import { createSupabaseFamilyCloudIdentity, createSupabaseFamilyHouseholdAuthority } from './supabase'
 import { digestLocalPin } from '../final-app/state'
 import type {
   FamilyCloudIdentityContext,
@@ -18,6 +19,8 @@ const NOW = new Date('2026-08-14T16:00:00.000Z')
 const HOUSEHOLD_A = '10000000-0000-4000-8000-000000000001'
 const HOUSEHOLD_B = '20000000-0000-4000-8000-000000000002'
 const USER_A = '30000000-0000-4000-8000-000000000003'
+
+afterEach(() => { vi.unstubAllGlobals() })
 
 class MemoryStorage implements Storage {
   readonly values = new Map<string, string>()
@@ -46,6 +49,7 @@ function identity(current: FamilyCloudIdentityContext | null = null): FamilyClou
   return {
     current: vi.fn(async () => current),
     signIn: vi.fn(async () => ({ status: 'SIGNED_IN' as const, context: context() })),
+    signUp: vi.fn(async () => ({ status: 'SIGNED_IN' as const, context: context() })),
     signOut,
   }
 }
@@ -108,6 +112,27 @@ describe('family household cloud auth', () => {
     expect(serialized).not.toContain('header.payload.signature')
     expect(JSON.parse(storage.getItem(LINKED_FAMILY_DEVICE_KEY) ?? '{}')).toEqual({
       schemaVersion: 1, accountRef: USER_A, householdRef: HOUSEHOLD_A, linkedAt: NOW.toISOString(),
+    })
+  })
+
+  it('creates an account through the provider without persisting the password', async () => {
+    const storage = new MemoryStorage()
+    const auth = identity()
+    const runtime = coordinator({ storage, identity: auth })
+    await expect(runtime.createAccount('new-parent@example.test', 'new-provider-password')).resolves.toMatchObject({
+      status: 'SESSION', state: { status: 'READY', householdRef: HOUSEHOLD_A },
+    })
+    expect(auth.signUp).toHaveBeenCalledWith('new-parent@example.test', 'new-provider-password', undefined)
+    expect([...storage.values.values()].join('\n')).not.toContain('new-provider-password')
+  })
+
+  it('returns to signed out while email confirmation is pending', async () => {
+    const auth = identity()
+    auth.signUp = vi.fn(async () => ({ status: 'CONFIRM_EMAIL' as const }))
+    const runtime = coordinator({ identity: auth })
+    await expect(runtime.createAccount('new-parent@example.test', 'password')).resolves.toEqual({ status: 'CONFIRM_EMAIL' })
+    expect(runtime.snapshot()).toEqual({
+      status: 'SIGNED_OUT', householdRef: null, cloudAuthority: 'NONE', localData: 'UNAVAILABLE',
     })
   })
 
@@ -301,6 +326,23 @@ describe('canonical Supabase household membership adapter', () => {
       }]), { status: 200 })) as typeof fetch,
     })
     await expect(malformed.resolve(authorization())).resolves.toEqual({ status: 'UNAVAILABLE' })
+  })
+})
+
+describe('provider-managed Family Cloud account creation', () => {
+  it('uses the staging origin Family Pilot return and reports email confirmation without retaining credentials', async () => {
+    vi.stubGlobal('window', { location: { origin: 'https://family-pilot-cloud-r1--manuel-academy.netlify.app' } })
+    const signUp = vi.fn(async () => ({ data: { user: { id: USER_A }, session: null }, error: null }))
+    const client = { auth: { signUp } } as unknown as SupabaseClient
+    const adapter = createSupabaseFamilyCloudIdentity(client)
+
+    await expect(adapter.signUp('new-parent@example.test', 'provider-owned-password')).resolves.toEqual({
+      status: 'CONFIRM_EMAIL',
+    })
+    expect(signUp).toHaveBeenCalledWith({
+      email: 'new-parent@example.test', password: 'provider-owned-password',
+      options: { emailRedirectTo: 'https://family-pilot-cloud-r1--manuel-academy.netlify.app/family-pilot' },
+    })
   })
 })
 
