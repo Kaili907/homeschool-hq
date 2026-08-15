@@ -7,12 +7,15 @@ import {
 import { cleanupLegacySyncStorage } from './config'
 import {
   createSupabaseBrowserClient,
+  AUTH_VERIFICATION_TIMEOUT_MS,
   getCurrentSession,
   getSupabaseClient,
+  getVerifiedAuthContext,
   resetSupabaseClientForTests,
   supabaseAnonKey,
   supabaseConfigured,
   supabaseUrl,
+  type VerifiedAuthContext,
 } from '../auth/supabaseSession'
 import { validateRemoteProfileRows } from './provenance'
 import type {
@@ -22,14 +25,15 @@ import type {
   SignedInUser,
 } from './types'
 
-export const AUTH_VERIFICATION_TIMEOUT_MS = 8_000
-
 export {
+  AUTH_VERIFICATION_TIMEOUT_MS,
   createSupabaseBrowserClient,
   getCurrentSession,
   getSupabaseClient,
+  getVerifiedAuthContext,
   resetSupabaseClientForTests,
 }
+export type { VerifiedAuthContext }
 
 export function userFromSession(session: Session | null): SignedInUser | null {
   if (!session?.user.id) return null
@@ -104,13 +108,6 @@ async function boundedAuthorization<T>(
       () => finish(null),
     )
   })
-}
-
-export interface VerifiedAuthContext {
-  user: SignedInUser
-  accessToken: string
-  readonly verifiedAt: number
-  readonly kind: 'supabase-access-token'
 }
 
 export class MutationDispatchAuthorizationError extends Error {
@@ -212,45 +209,6 @@ function isVerifiedAuthContext(value: unknown): value is VerifiedAuthContext {
 
 function redactAccessToken(message: string, accessToken: string): string {
   return accessToken ? message.split(accessToken).join('[redacted]') : message
-}
-
-/**
- * Capture one server-verified auth context. Mutations use this fixed token so a
- * different session appearing in another tab cannot retarget an in-flight write.
- */
-export async function getVerifiedAuthContext(
-  client = getSupabaseClient(),
-  signal?: AbortSignal,
-  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
-): Promise<VerifiedAuthContext | null> {
-  if (!client) return null
-  const sessionResult = await boundedAuthorization(
-    client.auth.getSession(),
-    signal,
-    timeoutMs,
-  )
-  if (!sessionResult || signal?.aborted) return null
-  const { data: sessionData, error: sessionError } = sessionResult
-  const accessToken = sessionData.session?.access_token
-  if (sessionError || !accessToken || !accessTokenShapeIsValid(accessToken))
-    return null
-  const userResult = await boundedAuthorization(
-    client.auth.getUser(accessToken),
-    signal,
-    timeoutMs,
-  )
-  if (!userResult || signal?.aborted) return null
-  const { data, error } = userResult
-  if (error || !data.user?.id) return null
-  return {
-    user: {
-      id: data.user.id,
-      email: data.user.email ?? data.user.id,
-    },
-    accessToken,
-    verifiedAt: Date.now(),
-    kind: 'supabase-access-token',
-  }
 }
 
 /**
