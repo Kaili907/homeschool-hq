@@ -17,7 +17,6 @@ import {
 import {
   familyAutoPlannerRecordKey,
   parseFamilyAutoPlannerRecord,
-  type FamilyAutoPlannerRecordV1,
 } from '../../src/study/family-pilot/auto-planner/indexedDbStore'
 import {
   FAMILY_PILOT_LEARNER_RESPONSE_RECORD_PREFIX,
@@ -50,6 +49,14 @@ import {
 import { createHostedSyncRpcAdapter } from '../../src/study/hosted-sync/v2/client/rpcAdapter'
 import { assertHostedSyncPrivacyAllowlistR1 } from '../../src/study/hosted-sync/v2/client/privacyGate'
 import {
+  parseFamilyPlanCheckpointR1,
+  parseFamilyResponseCheckpointR1,
+  restampFamilyPlanCheckpointR1,
+  restampFamilyResponseCheckpointR1,
+  type FamilyPlanCheckpointR1,
+  type FamilyResponseCheckpointR1,
+} from '../../src/study/hosted-sync/v2/client/familyCheckpoints'
+import {
   createLocalDbRpcEmulator,
   type LocalDbRpcEmulator,
 } from '../../src/study/hosted-sync/v2/client/testing/localDbRpcEmulator'
@@ -80,44 +87,11 @@ interface LearnerResponseDocumentV1 {
   readonly records: readonly LearnerResponseRecord[]
 }
 
-export interface FamilyResponseCheckpointR1 {
-  readonly contract: 'family-pilot.learner-response-checkpoint.r1'
-  readonly contractVersion: 1
-  readonly identity: {
-    readonly householdRef: string
-    readonly studentRef: string
-    readonly learnerRef: string
-    readonly assignmentRef: string
-    readonly sessionRef: string
-  }
-  readonly attempt: {
-    readonly attemptRef: string
-    readonly lessonRef: string
-  }
-  readonly sync: {
-    readonly baseRevision: number
-    readonly revision: number
-    readonly operationId: string
-    readonly savedAt: string
-  }
-  readonly responses: readonly LearnerResponseRecord[]
-}
-
-export interface FamilyPlannerCheckpointR1 {
-  readonly contract: 'family-pilot.school-plan-checkpoint.r1'
-  readonly contractVersion: 1
-  readonly identity: {
-    readonly householdRef: string
-    readonly learnerRef: string
-  }
-  readonly record: FamilyAutoPlannerRecordV1 | null
-}
-
 export interface FamilyCloudLearnerBundleR1 {
   readonly contract: 'family-pilot.cross-device-learner-bundle.r1'
   readonly contractVersion: 1
   readonly learner: HostedSyncStateSnapshotR2
-  readonly planner: FamilyPlannerCheckpointR1
+  readonly planner: FamilyPlanCheckpointR1
   readonly responses: readonly FamilyResponseCheckpointR1[]
 }
 
@@ -164,6 +138,15 @@ function canonical(value: unknown): string {
   return JSON.stringify(value)
 }
 
+function checkpointBody<T extends { readonly sync: unknown }>(value: T): Omit<T, 'sync'> {
+  const { sync: _sync, ...body } = value
+  return body
+}
+
+function sameCheckpointBody(a: { readonly sync: unknown }, b: { readonly sync: unknown }): boolean {
+  return canonical(checkpointBody(a)) === canonical(checkpointBody(b))
+}
+
 function responseDocument(value: unknown, learnerRef: string): LearnerResponseDocumentV1 | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
   const held = value as Partial<LearnerResponseDocumentV1>
@@ -177,28 +160,6 @@ function responseDocument(value: unknown, learnerRef: string): LearnerResponseDo
   return clone(held as LearnerResponseDocumentV1)
 }
 
-function validateResponseCheckpoint(checkpoint: FamilyResponseCheckpointR1, expected: { householdRef: string; learnerRef: string }): void {
-  const keys = Object.keys(checkpoint).sort()
-  if (canonical(keys) !== canonical(['attempt', 'contract', 'contractVersion', 'identity', 'responses', 'sync']) ||
-      checkpoint.contract !== 'family-pilot.learner-response-checkpoint.r1' || checkpoint.contractVersion !== 1 ||
-      checkpoint.identity.householdRef !== expected.householdRef || checkpoint.identity.studentRef !== expected.learnerRef ||
-      checkpoint.identity.learnerRef !== expected.learnerRef) {
-    throw new Error('malformed-response-checkpoint')
-  }
-  if (!REF.test(checkpoint.identity.assignmentRef) || !REF.test(checkpoint.identity.sessionRef) ||
-      checkpoint.identity.sessionRef !== checkpoint.attempt.attemptRef || !REF.test(checkpoint.attempt.lessonRef) ||
-      !Number.isSafeInteger(checkpoint.sync.baseRevision) || !Number.isSafeInteger(checkpoint.sync.revision) ||
-      checkpoint.sync.baseRevision < 0 || checkpoint.sync.revision < checkpoint.sync.baseRevision ||
-      !checkpoint.responses.every((record) => responseDocument({
-        schemaVersion: 1,
-        lessonRef: checkpoint.attempt.lessonRef,
-        studentRef: expected.learnerRef,
-        assignmentRef: checkpoint.identity.assignmentRef,
-        attemptRef: checkpoint.attempt.attemptRef,
-        records: [record],
-      }, expected.learnerRef))) throw new Error('malformed-response-checkpoint')
-}
-
 function validateBundle(bundle: FamilyCloudLearnerBundleR1): FamilyCloudLearnerBundleR1 {
   if (bundle.contract !== 'family-pilot.cross-device-learner-bundle.r1' || bundle.contractVersion !== 1) {
     throw new Error('unknown-family-cloud-bundle')
@@ -206,28 +167,33 @@ function validateBundle(bundle: FamilyCloudLearnerBundleR1): FamilyCloudLearnerB
   const parsed = parseHostedSyncStateSnapshotR2(bundle.learner, bundle.learner.identity)
   if (parsed.status !== 'ready') throw new Error(`learner-checkpoint-${parsed.reason.toLowerCase()}`)
   const identity = parsed.snapshot.identity
-  if (bundle.planner.contract !== 'family-pilot.school-plan-checkpoint.r1' || bundle.planner.contractVersion !== 1 ||
-      bundle.planner.identity.householdRef !== identity.householdRef || bundle.planner.identity.learnerRef !== identity.learnerRef) {
+  const planner = parseFamilyPlanCheckpointR1(bundle.planner)
+  const responses = bundle.responses.map(parseFamilyResponseCheckpointR1)
+  if (!planner || planner.identity.householdRef !== identity.householdRef ||
+      planner.identity.studentRef !== identity.studentRef || planner.identity.learnerRef !== identity.learnerRef) {
     throw new Error('planner-checkpoint-identity-mismatch')
   }
-  const plannerScope = { householdRef: identity.householdRef, learnerRef: identity.learnerRef }
-  if (bundle.planner.record && !parseFamilyAutoPlannerRecord(bundle.planner.record, plannerScope)) {
-    throw new Error('planner-checkpoint-malformed')
+  if (responses.length !== 1 || responses.some((checkpoint) => !checkpoint ||
+      checkpoint.identity.householdRef !== identity.householdRef ||
+      checkpoint.identity.studentRef !== identity.studentRef || checkpoint.identity.learnerRef !== identity.learnerRef)) {
+    throw new Error('response-checkpoint-identity-mismatch')
   }
-  bundle.responses.forEach((checkpoint) => validateResponseCheckpoint(checkpoint, identity))
   return Object.freeze({
     contract: bundle.contract,
     contractVersion: bundle.contractVersion,
     learner: parsed.snapshot,
-    planner: clone(bundle.planner),
-    responses: Object.freeze(bundle.responses.map(clone)),
+    planner,
+    responses: Object.freeze(responses as FamilyResponseCheckpointR1[]),
   })
 }
 
-function legacyImport(snapshot: HostedSyncStateSnapshotR2): HostedSyncFirstLinkImport {
-  const suffix = snapshot.identity.studentRef
-  const assignmentRef = `family-cloud:${suffix}`
-  const sessionRef = `${assignmentRef}:session`
+function legacyImport(
+  snapshot: HostedSyncStateSnapshotR2,
+  response: FamilyResponseCheckpointR1,
+  plan: FamilyPlanCheckpointR1,
+): HostedSyncFirstLinkImport {
+  const assignmentRef = response.identity.assignmentRef
+  const sessionRef = response.identity.sessionRef
   const base: HostedSyncFirstLinkImport = Object.freeze({
     localScope: {
       householdRef: snapshot.identity.householdRef,
@@ -237,7 +203,7 @@ function legacyImport(snapshot: HostedSyncStateSnapshotR2): HostedSyncFirstLinkI
     },
     hostedScope: { assignmentRef, sessionRef },
     session: {
-      lessonRef: assignmentRef,
+      lessonRef: response.attempt.lessonRef,
       subjectRef: 'family-cloud',
       state: 'active',
       startedAt: snapshot.sync.createdAt,
@@ -249,6 +215,8 @@ function legacyImport(snapshot: HostedSyncStateSnapshotR2): HostedSyncFirstLinkI
     guardianAttestation: null,
     safetyState: { schemaVersion: 1, holds: [] },
     assessment: null,
+    learnerResponseCheckpoint: response,
+    familyPlanCheckpoint: plan,
   })
   return withAuthorityCheckpointR1(base, snapshot)
 }
@@ -313,7 +281,7 @@ export class LocalFamilyCloudScenarioAdapter implements FamilyCloudScenarioAdapt
       return { status: 'revision-conflict', serverRevision: existing.bundle.learner.sync.serverRevision, remote: clone(existing.bundle) }
     }
     const studentId = `00000000-0000-4000-8000-${(this.#studentSequence++).toString().padStart(12, '0')}`
-    const imported = legacyImport(bundle.learner)
+    const imported = legacyImport(bundle.learner, bundle.responses[0]!, bundle.planner)
     try { assertHostedSyncPrivacyAllowlistR1(imported) }
     catch (error) { return { status: 'refused', reasonCode: error instanceof Error ? error.message : String(error) } }
     const outcome = await this.#client(deviceRef).firstLink({
@@ -375,9 +343,68 @@ export class LocalFamilyCloudScenarioAdapter implements FamilyCloudScenarioAdapt
       return { status: 'revision-conflict', serverRevision: outcome.value.serverRevision, remote: remote.bundle }
     }
     if (outcome.value.status !== 'stored') return { status: 'refused', reasonCode: outcome.value.status }
-    held.bundle = clone(bundle)
+    const storedBundle = clone({
+      ...bundle,
+      planner: held.bundle.planner,
+      responses: held.bundle.responses,
+    })
+    const response = bundle.responses[0]!
+    const heldResponse = held.bundle.responses[0]!
+    if (!sameCheckpointBody(response, heldResponse)) {
+      const operationId = this.nextOperationId()
+      const candidate = restampFamilyResponseCheckpointR1(
+        response, heldResponse.sync.revision, operationId, response.sync.savedAt,
+      )
+      const responseWrite = await this.#client(deviceRef).write({
+        tokenDigest: GUARDIAN_TOKEN_DIGEST, studentId: held.studentId,
+        assignmentRef: held.assignmentRef, sessionId: held.sessionRef,
+        expectedRevision: heldResponse.sync.revision, clientOperationId: operationId,
+        operation: 'learner-response-checkpoint:compare-and-swap',
+        payload: { learnerResponseCheckpoint: candidate },
+      })
+      if (responseWrite.code !== 'SUCCESS') return { status: 'refused', reasonCode: responseWrite.code }
+      if (responseWrite.value.status === 'revision-conflict') {
+        const remote = await this.#hydrateHeld(deviceRef, held)
+        if (remote.status !== 'ready') return { status: 'refused', reasonCode: 'conflict-readback-unavailable' }
+        return { status: 'revision-conflict', serverRevision: remote.revision, remote: remote.bundle }
+      }
+      if (responseWrite.value.status !== 'stored') return { status: 'refused', reasonCode: responseWrite.value.status }
+      storedBundle.responses = [candidate]
+    }
+    if (!sameCheckpointBody(bundle.planner, held.bundle.planner)) {
+      const operationId = this.nextOperationId()
+      const planner = parseFamilyPlanCheckpointR1({
+        ...bundle.planner,
+        planner: {
+          ...bundle.planner.planner,
+          revision: held.bundle.planner.planner.revision + 1,
+        },
+      })
+      if (!planner) return { status: 'refused', reasonCode: 'planner-checkpoint-malformed' }
+      const candidate = restampFamilyPlanCheckpointR1(
+        planner, held.bundle.planner.sync.revision, operationId, bundle.planner.sync.savedAt,
+      )
+      const planWrite = await this.#client(deviceRef).write({
+        tokenDigest: GUARDIAN_TOKEN_DIGEST, studentId: held.studentId,
+        assignmentRef: held.assignmentRef, sessionId: held.sessionRef,
+        expectedRevision: held.bundle.planner.sync.revision, clientOperationId: operationId,
+        operation: 'family-plan-checkpoint:compare-and-swap',
+        payload: { familyPlanCheckpoint: candidate },
+      })
+      if (planWrite.code !== 'SUCCESS') return { status: 'refused', reasonCode: planWrite.code }
+      if (planWrite.value.status === 'revision-conflict') {
+        const remote = await this.#hydrateHeld(deviceRef, held)
+        if (remote.status !== 'ready') return { status: 'refused', reasonCode: 'conflict-readback-unavailable' }
+        return { status: 'revision-conflict', serverRevision: remote.revision, remote: remote.bundle }
+      }
+      if (planWrite.value.status !== 'stored') return { status: 'refused', reasonCode: planWrite.value.status }
+      storedBundle.planner = candidate
+    }
+    held.bundle = validateBundle(storedBundle)
     const readBack = await this.#hydrateHeld(deviceRef, held)
-    const verified = readBack.status === 'ready' && canonical(readBack.bundle) === canonical(bundle)
+    // Response and plan domains receive their own CAS operation IDs/revisions;
+    // verify the exact server-restamped aggregate, not the pre-CAS candidate.
+    const verified = readBack.status === 'ready' && canonical(readBack.bundle) === canonical(storedBundle)
     if (!verified) return { status: 'refused', reasonCode: 'write-readback-mismatch' }
     return { status: 'stored', revision: outcome.value.serverRevision, readBackVerified: true }
   }
@@ -413,11 +440,17 @@ export class LocalFamilyCloudScenarioAdapter implements FamilyCloudScenarioAdapt
       sessionId: held.sessionRef,
     })
     if (outcome.code !== 'SUCCESS') return outcome.code === 'OFFLINE' ? { status: 'offline' } : { status: 'refused', reasonCode: outcome.code }
-    if (outcome.value.status !== 'ready') return { status: 'unavailable' }
+    if (outcome.value.status !== 'ready' || !outcome.value.learnerResponseCheckpoint || !outcome.value.familyPlanCheckpoint) {
+      return { status: 'unavailable' }
+    }
     let snapshot: HostedSyncStateSnapshotR2
     try { snapshot = authorityCheckpointFromHydrateR1(outcome.value, held.bundle.learner.identity) }
     catch (error) { return { status: 'refused', reasonCode: String(error) } }
-    const bundle = validateBundle({ ...clone(held.bundle), learner: snapshot })
+    const bundle = validateBundle({
+      ...clone(held.bundle), learner: snapshot,
+      planner: outcome.value.familyPlanCheckpoint,
+      responses: [outcome.value.learnerResponseCheckpoint],
+    })
     return { status: 'ready', revision: snapshot.sync.serverRevision, bundle }
   }
 }
@@ -490,7 +523,7 @@ function responseCheckpoints(
   operationId: string,
 ): readonly FamilyResponseCheckpointR1[] {
   const entries = state.entries.filter((entry) => entry.key.startsWith(`${FAMILY_PILOT_LEARNER_RESPONSE_RECORD_PREFIX}:student:${encodeURIComponent(learnerRef)}:`))
-  return Object.freeze(entries.map((entry) => {
+  const checkpoints = entries.map((entry) => {
     const document = responseDocument(entry.value, learnerRef)
     if (!document) throw new Error('browser-response-document-unreadable')
     return Object.freeze({
@@ -505,9 +538,44 @@ function responseCheckpoints(
       }),
       attempt: Object.freeze({ attemptRef: document.attemptRef, lessonRef: document.lessonRef }),
       sync: Object.freeze({ baseRevision: 0, revision: 0, operationId, savedAt: document.records.at(-1)?.savedAt ?? state.app.updatedAt }),
-      responses: Object.freeze(document.records.map(clone)),
+      responses: Object.freeze(document.records.map((record) => Object.freeze({
+        itemRef: record.itemRef,
+        sectionRef: record.sectionRef,
+        segmentRef: record.segmentRef,
+        responseType: record.responseType,
+        evidenceMode: record.evidenceMode,
+        response: clone(record.response),
+        status: record.status,
+        savedAt: record.savedAt,
+        assessment: clone(record.assessment),
+      }))),
     })
-  }))
+  })
+  if (checkpoints.length === 0) {
+    const assignment = state.core.students.find((student) => student.studentRef === learnerRef)?.assignments[0]
+    if (!assignment) throw new Error('browser-response-anchor-unavailable')
+    const calendar = durableDocument(state, householdRef, learnerRef).calendar.find(
+      (entry) => entry.plan.lessonRef === assignment.lessonRef,
+    )
+    const sessionRef = assignment.sessionRef ?? (calendar ? `${calendar.block.internalBlockId}:session` : null)
+    if (!sessionRef) throw new Error('browser-response-session-anchor-unavailable')
+    checkpoints.push(Object.freeze({
+      contract: 'family-pilot.learner-response-checkpoint.r1' as const,
+      contractVersion: 1 as const,
+      identity: Object.freeze({
+        householdRef, studentRef: learnerRef, learnerRef,
+        assignmentRef: assignment.assignmentRef, sessionRef,
+      }),
+      attempt: Object.freeze({ attemptRef: sessionRef, lessonRef: assignment.lessonRef }),
+      sync: Object.freeze({ baseRevision: 0, revision: 0, operationId, savedAt: state.app.updatedAt }),
+      responses: Object.freeze([]),
+    }))
+  }
+  // The response RPC revision is scoped to the one Study session selected at
+  // first link. Other continuable-session responses travel in the minimized
+  // authority checkpoint's instructionalInputs collection.
+  checkpoints.sort((a, b) => a.sync.savedAt.localeCompare(b.sync.savedAt))
+  return Object.freeze([checkpoints[0]!])
 }
 
 export async function captureLearnerBundle(
@@ -520,30 +588,43 @@ export async function captureLearnerBundle(
   const identity = Object.freeze({ householdRef, studentRef: learnerRef, learnerRef })
   const plannerScope = Object.freeze({ householdRef, learnerRef })
   const document = durableDocument(state, householdRef, learnerRef)
-  const learner = exportLocalBundleToHostedSyncStateR2({
-    identity,
-    sync,
-    local: { core: state.core, app: state.app, indexedDb: document },
-  })
   const plannerKey = familyAutoPlannerRecordKey(plannerScope)
   const rawPlanner = state.entries.find((entry) => entry.key === plannerKey)?.value
   const plannerRecord = rawPlanner === undefined ? null : parseFamilyAutoPlannerRecord(rawPlanner, plannerScope)
   if (rawPlanner !== undefined && !plannerRecord) throw new Error('browser-planner-document-unreadable')
+  const responseRecords = state.entries
+    .filter((entry) => entry.key.startsWith(`${FAMILY_PILOT_LEARNER_RESPONSE_RECORD_PREFIX}:student:${encodeURIComponent(learnerRef)}:`))
+    .flatMap((entry) => responseDocument(entry.value, learnerRef)?.records ?? [])
+  const learner = exportLocalBundleToHostedSyncStateR2({
+    identity,
+    sync,
+    local: {
+      core: state.core, app: state.app, indexedDb: document,
+      ...(plannerRecord ? { plannerDocument: plannerRecord.document } : {}),
+      learnerResponses: responseRecords,
+    },
+  })
   return validateBundle(Object.freeze({
     contract: 'family-pilot.cross-device-learner-bundle.r1',
     contractVersion: 1,
     learner,
     planner: Object.freeze({
-      contract: 'family-pilot.school-plan-checkpoint.r1',
+      contract: 'family-pilot.family-plan-checkpoint.r1',
       contractVersion: 1,
-      identity: Object.freeze({ householdRef, learnerRef }),
-      record: plannerRecord,
+      identity: Object.freeze({ householdRef, studentRef: learnerRef, learnerRef }),
+      sync: Object.freeze({ baseRevision: 0, revision: 0, operationId: sync.operationId, savedAt: learner.plannerDocument.updatedAt }),
+      planner: learner.plannerDocument,
     }),
     responses: responseCheckpoints(state, householdRef, learnerRef, sync.operationId),
   }))
 }
 
-async function writeIndexedDb(page: Page, learnerRef: string, bundle: FamilyCloudLearnerBundleR1): Promise<void> {
+async function writeIndexedDb(
+  page: Page,
+  learnerRef: string,
+  bundle: FamilyCloudLearnerBundleR1,
+  authorityResponses: readonly LearnerResponseRecord[],
+): Promise<void> {
   const scope = bundle.learner.identity
   const studyKey = durableStudyDocumentKey(scope)
   const plannerKey = familyAutoPlannerRecordKey(scope)
@@ -552,19 +633,37 @@ async function writeIndexedDb(page: Page, learnerRef: string, bundle: FamilyClou
     key: studyKey,
     value: JSON.stringify(bundle.learner.indexedDbDocument),
   }
-  const responseEntries = bundle.responses.map((checkpoint) => ({
-    key: `${FAMILY_PILOT_LEARNER_RESPONSE_RECORD_PREFIX}:student:${encodeURIComponent(learnerRef)}` +
-      `:assignment:${encodeURIComponent(checkpoint.identity.assignmentRef)}:attempt:${encodeURIComponent(checkpoint.attempt.attemptRef)}` +
-      `:lesson:${encodeURIComponent(checkpoint.attempt.lessonRef)}`,
-    value: {
-      schemaVersion: 1,
-      lessonRef: checkpoint.attempt.lessonRef,
-      studentRef: learnerRef,
-      assignmentRef: checkpoint.identity.assignmentRef,
-      attemptRef: checkpoint.attempt.attemptRef,
-      records: checkpoint.responses,
-    },
-  }))
+  const responseRecords = [
+    ...bundle.responses.flatMap((checkpoint) => checkpoint.responses.map((record) => ({
+        schemaVersion: 1,
+        lessonRef: checkpoint.attempt.lessonRef,
+        studentRef: learnerRef,
+        assignmentRef: checkpoint.identity.assignmentRef,
+        attemptRef: checkpoint.attempt.attemptRef,
+        ...record,
+      }))),
+    ...authorityResponses.map((record) => clone(record)),
+  ]
+  const unique = new Map<string, LearnerResponseRecord>()
+  for (const record of responseRecords) unique.set(`${record.attemptRef}\u0000${record.itemRef}`, record)
+  const grouped = new Map<string, LearnerResponseRecord[]>()
+  for (const record of unique.values()) {
+    const key = `${record.assignmentRef}\u0000${record.attemptRef}\u0000${record.lessonRef}`
+    grouped.set(key, [...(grouped.get(key) ?? []), record])
+  }
+  const responseEntries = [...grouped.values()].map((records) => {
+    const first = records[0]!
+    return {
+      key: `${FAMILY_PILOT_LEARNER_RESPONSE_RECORD_PREFIX}:student:${encodeURIComponent(learnerRef)}` +
+        `:assignment:${encodeURIComponent(first.assignmentRef)}:attempt:${encodeURIComponent(first.attemptRef)}` +
+        `:lesson:${encodeURIComponent(first.lessonRef)}`,
+      value: {
+        schemaVersion: 1, lessonRef: first.lessonRef, studentRef: learnerRef,
+        assignmentRef: first.assignmentRef, attemptRef: first.attemptRef,
+        records: records.map((record) => clone(record)),
+      },
+    }
+  })
   await page.evaluate(async ({ databaseName, storeName, learnerPrefix, studyKey, studyEnvelope, plannerKey, plannerRecord, responseEntries }) => {
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
       const request = indexedDB.open(databaseName)
@@ -592,8 +691,7 @@ async function writeIndexedDb(page: Page, learnerRef: string, bundle: FamilyClou
       const transaction = db.transaction(storeName, 'readwrite')
       const store = transaction.objectStore(storeName)
       store.put(studyEnvelope, studyKey)
-      if (plannerRecord === null) store.delete(plannerKey)
-      else store.put(plannerRecord, plannerKey)
+      store.put(plannerRecord, plannerKey)
       responseEntries.forEach((entry) => store.put(entry.value, entry.key))
       transaction.oncomplete = () => resolve()
       transaction.onerror = () => reject(transaction.error)
@@ -607,7 +705,7 @@ async function writeIndexedDb(page: Page, learnerRef: string, bundle: FamilyClou
     studyKey,
     studyEnvelope,
     plannerKey,
-    plannerRecord: bundle.planner.record,
+    plannerRecord: { envelopeVersion: 1, key: plannerKey, document: bundle.planner.planner },
     responseEntries,
   })
 }
@@ -644,7 +742,12 @@ export async function applyLearnerBundle(page: Page, bundle: FamilyCloudLearnerB
     app: parsedApp.state,
     householdRef: validated.learner.identity.householdRef,
   })
-  await writeIndexedDb(page, validated.learner.identity.learnerRef, validated)
+  await writeIndexedDb(
+    page,
+    validated.learner.identity.learnerRef,
+    validated,
+    imported.learnerResponses ?? [],
+  )
 }
 
 export interface DeviceSyncConflict {

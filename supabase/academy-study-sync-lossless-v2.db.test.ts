@@ -23,7 +23,7 @@ const files = [
   './migrations/20260813171000_academy_study_cross_device_authority.sql',
   './migrations/20260813172000_academy_study_sync_lossless_v2.sql',
   './migrations/20260813173000_academy_study_sync_lossless_checkpoint_r1.sql',
-  './migrations/20260814120000_academy_family_cross_device_data_r1.sql',
+  './migrations/20260814110000_academy_family_cross_device_data_r1.sql',
   './migrations/20260814120000_academy_family_response_checkpoint_r1.sql',
   './migrations/20260815120000_academy_family_plan_checkpoint_r1.sql',
 ] as const
@@ -583,6 +583,19 @@ beforeAll(async () => {
 afterAll(async () => database?.close())
 
 describe.sequential('Study hosted sync lossless V2', () => {
+  it('accepts the fragment delimiter used by real published curriculum refs', async () => {
+    const result = await database.query<{ valid: boolean; still_bounded: boolean }>(`
+      select
+        academy_private.study_sync_local_ref_valid_v2(
+          'ma-g5-mathematics-u01-l01#ip-01'
+        ) as valid,
+        not academy_private.study_sync_local_ref_valid_v2(
+          'ma-g5-mathematics-u01-l01#ip-01?answer=private'
+        ) as still_bounded
+    `)
+    expect(result.rows).toEqual([{ valid: true, still_bounded: true }])
+  })
+
   it('replays the fresh/upgrade chain and installs narrow browser RPC ACLs', async () => {
     const result = await database.query<{
       lossless_sync_version: number

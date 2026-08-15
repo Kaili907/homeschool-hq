@@ -52,7 +52,7 @@ The canonical learner payload is `HostedSyncStateSnapshotR2` and is carried by
 the existing Hosted Sync R2 authority-checkpoint RPC. The two additive payloads
 are narrow contracts:
 
-- `family-pilot.school-plan-checkpoint.r1`, containing one validated planner
+- `family-pilot.family-plan-checkpoint.r1`, containing one validated planner
   record for exactly one learner;
 - `family-pilot.learner-response-checkpoint.r1`, matching the forward-only
   Family response checkpoint database contract and containing response values
@@ -70,10 +70,8 @@ Do not use a production project. The first staging run requires:
 - an authenticated Parent test account bound to one disposable test household;
 - the Hosted Sync R2 migration lineage plus the forward-only Family learner
   response checkpoint migration installed;
-- a forward-only Hosted Sync checkpoint validator evolution that admits the
-  minimized `activeSecondsByDate` daily aggregate and `instructionalSession`
-  lifecycle aggregate now emitted by Core (the historical R1 validator must
-  not be rewritten);
+- the forward-only cross-device-data, response-checkpoint, and Family Plan
+  migrations from the final 57-entry manifest;
 - a staging adapter that maps the four interface operations above to the
   non-production RPCs and supplies short-lived authenticated-user sessions;
 - test learner identities and curriculum release data, with no copied

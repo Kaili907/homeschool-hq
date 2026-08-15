@@ -3,6 +3,8 @@ import {
   type FamilyCloudAuthRuntime,
   type FamilyCloudIdentityPort,
   type FamilyCloudLocalDataPort,
+  type FamilyCloudIdentityContext,
+  type FamilyCloudReconcileResult,
   type FamilyCloudSessionState,
   type FamilyHouseholdAuthorityPort,
   type LinkedFamilyDeviceStore,
@@ -35,6 +37,8 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
   readonly #listeners = new Set<(state: FamilyCloudSessionState) => void>()
   #state: FamilyCloudSessionState = SIGNED_OUT
   #generation = 0
+  #context: FamilyCloudIdentityContext | null = null
+  #reconcileController: AbortController | null = null
 
   constructor(options: FamilyCloudAuthCoordinatorOptions) {
     this.#identity = options.identity
@@ -54,6 +58,7 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
 
   async bootstrap(signal?: AbortSignal): Promise<FamilyCloudSessionState> {
     const generation = ++this.#generation
+    this.#dropCloudAuthority()
     this.#publish(AUTHENTICATING)
     let context
     try { context = await this.#identity.current(signal) } catch { context = null }
@@ -64,6 +69,7 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
 
   async signIn(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudSessionState> {
     const generation = ++this.#generation
+    this.#dropCloudAuthority()
     this.#publish(AUTHENTICATING)
     let result
     try { result = await this.#identity.signIn(email, password, signal) } catch { result = { status: 'UNAVAILABLE' as const } }
@@ -79,13 +85,41 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
 
   async signOut(): Promise<FamilyCloudSessionState> {
     ++this.#generation
+    this.#dropCloudAuthority()
     this.#device.clear()
     this.#publish(SIGNED_OUT)
     try { await this.#identity.signOut() } catch { /* local authority is already cleared */ }
     return this.#state
   }
 
+  async reconcile(signal?: AbortSignal): Promise<FamilyCloudReconcileResult> {
+    const context = this.#context
+    const state = this.#state
+    if (!context || (state.status !== 'READY' && state.status !== 'OFFLINE_LOCAL') || !state.householdRef) return 'UNAVAILABLE'
+    if (signal?.aborted) return 'UNAVAILABLE'
+    this.#reconcileController?.abort()
+    const controller = new AbortController()
+    this.#reconcileController = controller
+    const abort = () => controller.abort()
+    signal?.addEventListener('abort', abort, { once: true })
+    try {
+      const result: FamilyCloudReconcileResult = await this.#localData.reconcile({
+        householdRef: state.householdRef, authorization: context.authorization, signal: controller.signal,
+      }).catch((): FamilyCloudReconcileResult => 'UNAVAILABLE')
+      if (controller.signal.aborted) return 'UNAVAILABLE'
+      if (result === 'OFFLINE') this.#publish(Object.freeze({
+        status: 'OFFLINE_LOCAL', householdRef: state.householdRef,
+        cloudAuthority: 'NONE', localData: 'SAVED_ON_DEVICE',
+      }))
+      return result
+    } finally {
+      signal?.removeEventListener('abort', abort)
+      if (this.#reconcileController === controller) this.#reconcileController = null
+    }
+  }
+
   #withoutCurrentSession(): FamilyCloudSessionState {
+    this.#context = null
     const link = this.#device.load()
     const localAvailable = Boolean(link && this.#hasLocalHousehold(link.householdRef))
     if (!this.#isOnline() && link && localAvailable) {
@@ -166,11 +200,13 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
       householdRef: resolved.householdRef,
       linkedAt,
     })) {
+      this.#dropCloudAuthority()
       return this.#publish(Object.freeze({
         status: 'NEEDS_ATTENTION', householdRef: resolved.householdRef,
         cloudAuthority: 'NONE', localData: 'AVAILABLE', reason: 'DATA_UNAVAILABLE',
       }))
     }
+    this.#context = context
     return this.#publish(Object.freeze({
       status: 'READY', householdRef: resolved.householdRef,
       cloudAuthority: 'AUTHENTICATED_PARENT_HOUSEHOLD', localData: 'AVAILABLE',
@@ -186,5 +222,12 @@ export class FamilyCloudAuthCoordinator implements FamilyCloudAuthRuntime {
 
   #hasLocalHousehold(householdRef: string): boolean {
     try { return this.#localData.hasLocalHousehold(householdRef) } catch { return false }
+  }
+
+  #dropCloudAuthority(): void {
+    this.#context = null
+    this.#reconcileController?.abort()
+    this.#reconcileController = null
+    this.#localData.clearCloudAuthority()
   }
 }

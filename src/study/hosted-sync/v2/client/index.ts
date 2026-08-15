@@ -1,4 +1,5 @@
 export * from './types'
+export * from './familyCheckpoints'
 export {
   HOSTED_SYNC_MAX_RPC_BYTES, HOSTED_SYNC_AUTHORITY_CHECKPOINT_MAX_BYTES, HOSTED_SYNC_OPERATION_UUID,
   assertHostedSyncPrivate, buildFirstLinkArgs, buildResolveMappingArgs,

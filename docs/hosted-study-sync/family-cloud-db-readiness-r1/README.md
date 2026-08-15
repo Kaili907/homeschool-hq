@@ -24,10 +24,9 @@ NON_PROD_TARGET_STATUS=NON_PROD_PROJECT_REQUIRED
 
 ## Reconciled migration contract
 
-The four Hosted Sync R2 migrations below are byte-identical in the product
-base, `origin/mac/hosted-sync-r2-final-convergence-r1`, and
-`origin/mac/family-hosted-sync-convergence-r1`. Their SHA-256 values were
-verified locally. None was rewritten.
+The first four Hosted Sync R2 migrations below are byte-identical historical
+inputs and were not rewritten. The final three are the forward-only Family
+Cloud convergence sequence. Their SHA-256 values were verified locally.
 
 | Order | Migration | LF-normalized SHA-256 | Evolution |
 |---:|---|---|---|
@@ -35,8 +34,9 @@ verified locally. None was rewritten.
 | 2 | `20260813171000_academy_study_cross_device_authority.sql` | `49dfe14657fcf48d8bc72c26f77f3c47e3ec610db7ed9d4151c1e295a975edc5` | historical, unchanged |
 | 3 | `20260813172000_academy_study_sync_lossless_v2.sql` | `003bc5adbc7148f32ae15c477fb093f420b69873e85b0d53a8fde147ad42a3e1` | historical, unchanged |
 | 4 | `20260813173000_academy_study_sync_lossless_checkpoint_r1.sql` | `f464ff93d412b3dbcde2d6206b1c1492ae0479e4b26647228a0bc9a269591404` | historical, unchanged |
-| 5 | `20260814120000_academy_family_response_checkpoint_r1.sql` | `46769f46b5453fc25cb13f1817c6c6756b516a2916ea21380a0a4040c51cf282` | new forward-only migration |
-| 6 | `20260815120000_academy_family_plan_checkpoint_r1.sql` | `29693df72fb2e44c7226e64e8de11abdb83e1cf02e6a1b11a92111bc5b0d52d0` | new forward-only migration |
+| 5 | `20260814110000_academy_family_cross_device_data_r1.sql` | `d39049453621aa77945226e560131a670f304f1a37401d2b3efd98f0116111c8` | new forward-only convergence migration |
+| 6 | `20260814120000_academy_family_response_checkpoint_r1.sql` | `46769f46b5453fc25cb13f1817c6c6756b516a2916ea21380a0a4040c51cf282` | new forward-only migration |
+| 7 | `20260815120000_academy_family_plan_checkpoint_r1.sql` | `29693df72fb2e44c7226e64e8de11abdb83e1cf02e6a1b11a92111bc5b0d52d0` | new forward-only migration |
 
 The authoritative full predecessor order and checksums are in
 `docs/study-engine-final-production/migration-manifest.json`. A staging

@@ -545,9 +545,9 @@
       "supersessionStatus": "current"
     },
     {
-      "version": "20260814120000",
-      "filename": "20260814120000_academy_family_cross_device_data_r1.sql",
-      "sha256": "a1a1d3175b0b5416c9367a70c1411436af626701a9715af93d13587a83c7cfd9",
+      "version": "20260814110000",
+      "filename": "20260814110000_academy_family_cross_device_data_r1.sql",
+      "sha256": "d39049453621aa77945226e560131a670f304f1a37401d2b3efd98f0116111c8",
       "dependency": "20260813173000_academy_study_sync_lossless_checkpoint_r1.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
@@ -558,7 +558,7 @@
       "version": "20260814120000",
       "filename": "20260814120000_academy_family_response_checkpoint_r1.sql",
       "sha256": "46769f46b5453fc25cb13f1817c6c6756b516a2916ea21380a0a4040c51cf282",
-      "dependency": "20260813173000_academy_study_sync_lossless_checkpoint_r1.sql",
+      "dependency": "20260814110000_academy_family_cross_device_data_r1.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "family_response_checkpoint_contract:absent->r1",

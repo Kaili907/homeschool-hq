@@ -12,15 +12,22 @@ import {
   type HostedSyncLocalBundleR2,
   type HostedSyncStateIdentityR2,
   type HostedSyncStateMetadataR2,
+  type HostedSyncStateSnapshotR2,
 } from '.'
 import {
   authorityCheckpointFromHydrateR1,
   AuthorityCheckpointPreNetworkGateR1,
   authorityCheckpointWritePayloadR1,
   createHostedSyncRpcAdapter,
+  parseFamilyPlanCheckpointR1,
+  parseFamilyResponseCheckpointR1,
   serializeAuthorityCheckpointPrivacyGateR1,
   withAuthorityCheckpointR1,
 } from '../client'
+import {
+  HostedFamilyCloudLocalDataPortR1,
+  type FamilyCloudLocalLearnerStateR1,
+} from '../../../family-pilot/cloud-auth/hostedLocalDataPort'
 import { createLocalDbRpcEmulator } from '../client/testing/localDbRpcEmulator'
 import { HOSTED_SYNC_DYNAMIC_SOURCE_LESSON_REF, hostedSyncDynamicSourceMetadataFixture } from '../testing/dynamicSourceFixture'
 
@@ -348,6 +355,61 @@ const REVISIONS: HostedSyncAuthorityRevisionsR2 = Object.freeze({
   safetyHolds: Object.freeze({ 'hold:open': 1, 'hold:cleared': 3 }),
 })
 
+function cloudLearnerState(
+  snapshot: HostedSyncStateSnapshotR2,
+  linked: FamilyCloudLocalLearnerStateR1['linked'] = null,
+): FamilyCloudLocalLearnerStateR1 {
+  const input = snapshot.instructionalInputs[0]!
+  const response = parseFamilyResponseCheckpointR1({
+    contract: 'family-pilot.learner-response-checkpoint.r1', contractVersion: 1,
+    identity: {
+      ...snapshot.identity,
+      assignmentRef: input.assignmentRef,
+      sessionRef: `session:${input.assignmentRef}`,
+    },
+    attempt: { attemptRef: input.attemptRef, lessonRef: input.lessonRef },
+    sync: { baseRevision: 0, revision: 0, operationId: snapshot.sync.operationId, savedAt: input.savedAt },
+    responses: [{
+      itemRef: input.itemRef, sectionRef: input.sectionRef, segmentRef: input.segmentRef,
+      responseType: input.input.kind, evidenceMode: input.evidenceMode,
+      response: input.input.kind === 'CHOICE'
+        ? { kind: 'CHOICE', choiceRef: input.input.choiceRef }
+        : { kind: input.input.kind, text: input.input.text },
+      status: input.assessmentState, savedAt: input.savedAt,
+      assessment: input.trustedReceipt,
+    }],
+  })
+  const plan = parseFamilyPlanCheckpointR1({
+    contract: 'family-pilot.family-plan-checkpoint.r1', contractVersion: 1,
+    identity: snapshot.identity,
+    sync: { baseRevision: 0, revision: 0, operationId: snapshot.sync.operationId, savedAt: snapshot.plannerDocument.updatedAt },
+    planner: snapshot.plannerDocument,
+  })
+  if (!response || !plan) throw new Error('Cloud checkpoint fixture refused.')
+  return Object.freeze({
+    learnerRef: snapshot.identity.learnerRef,
+    firstLinkBase: Object.freeze({
+      localScope: {
+        householdRef: snapshot.identity.householdRef,
+        studentRef: snapshot.identity.studentRef,
+        assignmentRef: input.assignmentRef,
+        sessionRef: `session:${input.assignmentRef}`,
+      },
+      session: {
+        lessonRef: input.lessonRef, subjectRef: 'mathematics', state: 'active',
+        startedAt: NOW, completedAt: null, intendedLocalDate: NOW.slice(0, 10),
+      },
+      checkpoint: null, socialSource: null, guardianAttestation: null,
+      safetyState: { schemaVersion: 1 as const, holds: [] }, assessment: null,
+    }),
+    authorityCheckpoint: snapshot,
+    learnerResponseCheckpoint: response,
+    familyPlanCheckpoint: plan,
+    courseEnrollments: Object.freeze([]),
+    linked,
+  })
+}
+
 function emptyTarget(local: HostedSyncLocalBundleR2): HostedSyncLocalBundleR2 {
   return Object.freeze({
     core: Object.freeze({ schemaVersion: 1, updatedAt: NOW, activeStudentRef: null, students: Object.freeze([]) }),
@@ -520,6 +582,109 @@ describe('Hosted sync lossless state contract R2', () => {
     const reconciledA = authorityCheckpointFromHydrateR1(hydratedA.value, IDENTITY)
     expect(reconciledA).toEqual(parsedAdvanced.snapshot)
     expect(reconciledA.instructionalInputs[0]?.input).toMatchObject({ text: '19' })
+  })
+
+  it('uses the converged FamilyCloudLocalDataPort for first link, fresh hydrate, CAS, conflict, and offline retention', async () => {
+    const initial = cloudLearnerState(exportLocalBundleToHostedSyncStateR2({
+      identity: IDENTITY, sync: SYNC, local: localFixture(), authorityRevisions: REVISIONS,
+    }))
+    const provider = createLocalDbRpcEmulator({ now: () => new Date(NOW) })
+    provider.setRole('a'.repeat(64), 'guardian')
+    let onlineA = true
+    const authorizationLease = { acquire: async () => ({ status: 'AUTHORIZED' as const, lease: {
+      clientKind: 'AUTHENTICATED_USER' as const, expiresAt: '2027-08-13T00:00:00.000Z', provider,
+    } }) }
+    const clientA = createHostedSyncRpcAdapter({ authorization: authorizationLease, now: () => new Date(NOW), isOnline: () => onlineA })
+    const clientB = createHostedSyncRpcAdapter({ authorization: authorizationLease, now: () => new Date(NOW) })
+    const remoteLearner = Object.freeze({
+      learnerRef: IDENTITY.learnerRef,
+      hostedStudentId: '00000000-0000-4000-8000-000000000101',
+      tokenDigest: 'a'.repeat(64),
+      hostedScope: { assignmentRef: 'hosted:assignment:math', sessionRef: 'hosted:session:math' },
+    })
+    const directory = { resolve: async () => ({ status: 'READY' as const, learners: [remoteLearner] }) }
+    const conflictsA: unknown[] = []
+    const conflictsB: unknown[] = []
+    function repository(initialLearners: readonly FamilyCloudLocalLearnerStateR1[], conflicts: unknown[]) {
+      let held = structuredClone(initialLearners) as FamilyCloudLocalLearnerStateR1[]
+      return {
+        get held() { return held },
+        replace(next: readonly FamilyCloudLocalLearnerStateR1[]) { held = structuredClone(next) as FamilyCloudLocalLearnerStateR1[] },
+        hasHousehold: () => held.length > 0,
+        readHousehold: async () => structuredClone(held),
+        commitVerifiedHydration: async ({ learners, expectedLocal }: {
+          learners: readonly FamilyCloudLocalLearnerStateR1[]
+          expectedLocal: readonly FamilyCloudLocalLearnerStateR1[]
+        }) => {
+          if (JSON.stringify(held) !== JSON.stringify(expectedLocal)) return false
+          held = structuredClone(learners) as FamilyCloudLocalLearnerStateR1[]
+          return JSON.stringify(held) === JSON.stringify(learners)
+        },
+        retainConflict: async (conflict: unknown) => { conflicts.push(structuredClone(conflict)) },
+      }
+    }
+    const repoA = repository([initial], conflictsA)
+    const repoB = repository([], conflictsB)
+    const operationIdsA = [
+      '11111111-1111-4111-8111-111111111111',
+      '22222222-2222-4222-8222-222222222222',
+      '44444444-4444-4444-8444-444444444444',
+      '55555555-5555-4555-8555-555555555555',
+    ]
+    const operationIdsB = [
+      '33333333-3333-4333-8333-333333333333',
+    ]
+    const portA = new HostedFamilyCloudLocalDataPortR1({
+      directory, repository: repoA, client: clientA, deviceRef: 'device:a',
+      now: () => new Date(NOW), newOperationId: () => operationIdsA.shift()!,
+    })
+    const portB = new HostedFamilyCloudLocalDataPortR1({
+      directory, repository: repoB, client: clientB, deviceRef: 'device:b',
+      now: () => new Date(NOW), newOperationId: () => operationIdsB.shift()!,
+    })
+    const authorization = {
+      kind: 'supabase-access-token' as const, verifiedAt: Date.parse(NOW),
+      user: { id: '00000000-0000-4000-8000-000000000201', email: 'parent@example.test' },
+      accessToken: 'header.payload.signature',
+    }
+    const establish = { householdRef: IDENTITY.householdRef, authorization }
+
+    await expect(portA.establish(establish)).resolves.toBe('READY')
+    expect(repoA.held[0]?.linked).toMatchObject({
+      authorityRevision: 18, learnerResponseRevision: 0, familyPlanRevision: 0,
+    })
+
+    const changedA = structuredClone(repoA.held[0]!)
+    ;(changedA.learnerResponseCheckpoint.responses[0]!.response as { text: string }).text = '19'
+    repoA.replace([changedA])
+    const firstReconcile = await portA.reconcile(establish)
+    expect({ firstReconcile, conflictDomains: conflictsA.map((item: any) => item.domain) })
+      .toEqual({ firstReconcile: 'UP_TO_DATE', conflictDomains: [] })
+    expect(repoA.held[0]?.learnerResponseCheckpoint).toMatchObject({
+      sync: { revision: 1 }, responses: [{ response: { text: '19' } }],
+    })
+
+    await expect(portB.establish(establish)).resolves.toBe('READY')
+    expect(repoB.held[0]?.learnerResponseCheckpoint).toMatchObject({
+      sync: { revision: 1 }, responses: [{ response: { text: '19' } }],
+    })
+
+    const changedB = structuredClone(repoB.held[0]!)
+    ;(changedB.learnerResponseCheckpoint.responses[0]!.response as { text: string }).text = '23'
+    repoB.replace([changedB])
+    await expect(portB.reconcile(establish)).resolves.toBe('UP_TO_DATE')
+
+    const staleA = structuredClone(repoA.held[0]!)
+    ;(staleA.learnerResponseCheckpoint.responses[0]!.response as { text: string }).text = '29'
+    repoA.replace([staleA])
+    await expect(portA.reconcile(establish)).resolves.toBe('CONFLICT')
+    expect(conflictsA).toHaveLength(1)
+    expect(repoA.held[0]?.learnerResponseCheckpoint.responses[0]?.response).toMatchObject({ text: '29' })
+
+    onlineA = false
+    await expect(portA.reconcile(establish)).resolves.toBe('OFFLINE')
+    expect(repoA.held[0]?.learnerResponseCheckpoint.responses[0]?.response).toMatchObject({ text: '29' })
+    expect(conflictsB).toHaveLength(0)
   })
 
   it('supports a scored assessment outcome without learner response content', () => {

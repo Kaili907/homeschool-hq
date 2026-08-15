@@ -46,6 +46,8 @@ export interface LinkedFamilyDeviceStore {
 }
 
 export interface FamilyCloudLocalDataPort {
+  /** Drops all in-memory provider/grant authority without deleting academic data. */
+  clearCloudAuthority(): void
   /** True only when the household's already-saved local data can be opened safely. */
   hasLocalHousehold(householdRef: string): boolean
   /**
@@ -57,7 +59,15 @@ export interface FamilyCloudLocalDataPort {
     authorization: VerifiedAuthContext
     signal?: AbortSignal
   }>): Promise<'READY' | 'OFFLINE' | 'UNAVAILABLE'>
+  /** Reconciles already-established local changes through explicit CAS domains. */
+  reconcile(input: Readonly<{
+    householdRef: string
+    authorization: VerifiedAuthContext
+    signal?: AbortSignal
+  }>): Promise<FamilyCloudReconcileResult>
 }
+
+export type FamilyCloudReconcileResult = 'UP_TO_DATE' | 'OFFLINE' | 'CONFLICT' | 'UNAVAILABLE'
 
 export type FamilyCloudSessionState =
   | Readonly<{
@@ -104,6 +114,7 @@ export interface FamilyCloudAuthRuntime {
   bootstrap(signal?: AbortSignal): Promise<FamilyCloudSessionState>
   signIn(email: string, password: string, signal?: AbortSignal): Promise<FamilyCloudSessionState>
   signOut(): Promise<FamilyCloudSessionState>
+  reconcile(signal?: AbortSignal): Promise<FamilyCloudReconcileResult>
   subscribe(listener: (state: FamilyCloudSessionState) => void): () => void
 }
 

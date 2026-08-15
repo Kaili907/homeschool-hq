@@ -50,13 +50,23 @@ function identity(current: FamilyCloudIdentityContext | null = null): FamilyClou
   }
 }
 
-function data(initial: readonly string[] = []): FamilyCloudLocalDataPort & { local: Set<string>; establish: ReturnType<typeof vi.fn> } {
+function data(initial: readonly string[] = []): FamilyCloudLocalDataPort & {
+  local: Set<string>
+  establish: ReturnType<typeof vi.fn>
+  clearCloudAuthority: ReturnType<typeof vi.fn>
+  reconcile: ReturnType<typeof vi.fn>
+} {
   const local = new Set(initial)
   const establish = vi.fn(async ({ householdRef }: { householdRef: string }) => {
     local.add(householdRef)
     return 'READY' as const
   })
-  return { local, establish, hasLocalHousehold: (householdRef) => local.has(householdRef) }
+  const clearCloudAuthority = vi.fn()
+  return {
+    local, establish, clearCloudAuthority,
+    hasLocalHousehold: (householdRef) => local.has(householdRef),
+    reconcile: vi.fn(async () => 'UP_TO_DATE' as const),
+  }
 }
 
 function authority(result: Awaited<ReturnType<FamilyHouseholdAuthorityPort['resolve']>> = { status: 'RESOLVED', householdRef: HOUSEHOLD_A }): FamilyHouseholdAuthorityPort {
@@ -162,8 +172,41 @@ describe('family household cloud auth', () => {
     await runtime.signIn('parent@example.test', 'password')
     await expect(runtime.signOut()).resolves.toMatchObject({ status: 'SIGNED_OUT' })
     expect(auth.signOut).toHaveBeenCalledOnce()
+    expect(local.clearCloudAuthority).toHaveBeenCalled()
     expect(storage.getItem(LINKED_FAMILY_DEVICE_KEY)).toBeNull()
     expect(local.local.has(HOUSEHOLD_A)).toBe(true)
+  })
+
+  it('reconciles only through the established authenticated household context', async () => {
+    const local = data()
+    const runtime = coordinator({ data: local })
+    await expect(runtime.reconcile()).resolves.toBe('UNAVAILABLE')
+    await runtime.signIn('parent@example.test', 'password')
+    await expect(runtime.reconcile()).resolves.toBe('UP_TO_DATE')
+    expect(local.reconcile).toHaveBeenCalledWith(expect.objectContaining({
+      householdRef: HOUSEHOLD_A,
+      authorization: expect.objectContaining({ user: expect.objectContaining({ id: USER_A }) }),
+    }))
+    await runtime.signOut()
+    await expect(runtime.reconcile()).resolves.toBe('UNAVAILABLE')
+  })
+
+  it('aborts in-flight cloud reconciliation when the household signs out', async () => {
+    const local = data()
+    let heldSignal: AbortSignal | undefined
+    local.reconcile.mockImplementation(async ({ signal }: { signal?: AbortSignal }) => {
+      heldSignal = signal
+      if (!signal) return 'UNAVAILABLE'
+      return new Promise<'UNAVAILABLE'>((resolve) => {
+        signal.addEventListener('abort', () => resolve('UNAVAILABLE'), { once: true })
+      })
+    })
+    const runtime = coordinator({ data: local })
+    await runtime.signIn('parent@example.test', 'password')
+    const pending = runtime.reconcile()
+    await runtime.signOut()
+    await expect(pending).resolves.toBe('UNAVAILABLE')
+    expect(heldSignal?.aborted).toBe(true)
   })
 })
 

@@ -6,6 +6,12 @@
 > `docs/family-pilot/FAMILY_CROSS_DEVICE_DATA_COMPLETENESS_R1.md`; it still excludes
 > prompts, answer authority, scoring guides, Tutor data, audio and inference.
 
+> Family Cloud Sync R1 convergence also supersedes this document's Hosted Sync
+> injection/status matrix. `FamilyCloudAuthRuntime` plus
+> `HostedFamilyCloudLocalDataPortR1` is now the sole cloud composition; Family
+> Services is scorer-only and cannot inject a second sync adapter or display a
+> cloud-ready status. See `docs/family-pilot/family-cloud-sync-r1/README.md`.
+
 Status: `FAMILY_SERVICES_STAGING_CONVERGENCE_R1_READY`
 
 ## Inputs and activation ruling

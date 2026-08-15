@@ -6,6 +6,22 @@
 
 begin;
 
+-- Published curriculum section, item, and choice references use `#` as a
+-- fragment delimiter. Preserve the bounded local-reference contract while
+-- widening it just enough for the real lossless response checkpoint shape.
+create or replace function academy_private.study_sync_local_ref_valid_v2(
+  candidate text
+)
+returns boolean
+language sql
+immutable
+set search_path = pg_catalog
+as $$
+  select candidate is not null
+    and octet_length(candidate) between 1 and 192
+    and candidate ~ '^[A-Za-z0-9][A-Za-z0-9._:/#-]{0,191}$';
+$$;
+
 do $$
 declare marker academy_private.study_persistence_metadata%rowtype;
 begin
@@ -18,7 +34,7 @@ begin
   ]::text[] then
     raise exception 'FAMILY_CROSS_DEVICE_DATA_R1 predecessor marker mismatch';
   end if;
-  if marker.migration_names @> array['20260814120000_academy_family_cross_device_data_r1']::text[]
+  if marker.migration_names @> array['20260814110000_academy_family_cross_device_data_r1']::text[]
      or to_regprocedure('academy_private.study_sync_authority_checkpoint_shape_valid_legacy_r1(jsonb)') is not null then
     raise exception 'FAMILY_CROSS_DEVICE_DATA_R1 object collision';
   end if;
@@ -219,7 +235,7 @@ revoke all on function academy_private.study_sync_authority_checkpoint_shape_val
 revoke all on function academy_private.study_sync_authority_transition_valid_r1(jsonb,jsonb) from public,anon,authenticated,service_role;
 
 update academy_private.study_persistence_metadata set
-  migration_names=array_append(migration_names,'20260814120000_academy_family_cross_device_data_r1'),
+  migration_names=array_append(migration_names,'20260814110000_academy_family_cross_device_data_r1'),
   security_manifest=security_manifest||jsonb_build_object(
     'family_cross_device_data','r1','school_plan_sync',true,
     'auto_planner_identity','deterministic-plus-document-cas',

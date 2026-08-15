@@ -211,6 +211,11 @@ export async function runFamilyTwoDeviceScenario(
     await saveAndExit(pageA)
     await openStudent(pageA, 'Blake Cross Device')
     await expect(pageA.getByRole('button', { name: `Start ${SIBLING.title}` })).toBeVisible()
+    // Establish Blake's deterministic Study session without authoring an
+    // answer, so the empty first-link response checkpoint and later response
+    // CAS share the exact same assignment/session mapping.
+    await pageA.getByRole('button', { name: `Start ${SIBLING.title}` }).click()
+    await saveAndExit(pageA)
     await pageA.getByRole('button', { name: 'Switch learner', exact: true }).click()
 
     const aBeforeLink = await browserStorageEvidence(pageA)
@@ -278,7 +283,7 @@ export async function runFamilyTwoDeviceScenario(
     // A sibling follows the same real flow while the first learner remains byte-stable.
     const mainBeforeSibling = learnerState(await browserStorageEvidence(pageB), mainRef)
     await openStudent(pageB, 'Blake Cross Device')
-    await pageB.getByRole('button', { name: `Start ${SIBLING.title}` }).click()
+    await pageB.getByRole('button', { name: `Continue ${SIBLING.title}` }).click()
     await advanceOnePart(pageB, 'Sibling reaches the first real learner item.')
     await advanceOnePart(pageB, 'Sibling response belongs only to Blake.')
     await saveAndExit(pageB)

@@ -12,6 +12,12 @@ import {
   type HostedSyncWriteResult,
 } from './types'
 import { assertHostedSyncPrivacyAllowlistR1, serializeAuthorityCheckpointPrivacyGateR1 } from './privacyGate'
+import {
+  FAMILY_PLAN_CHECKPOINT_MAX_BYTES_R1,
+  FAMILY_RESPONSE_CHECKPOINT_MAX_BYTES_R1,
+  parseFamilyPlanCheckpointR1,
+  parseFamilyResponseCheckpointR1,
+} from './familyCheckpoints'
 
 export const HOSTED_SYNC_MAX_RPC_BYTES = 96 * 1024
 /** Explicit ceiling for one school-year minimized authority checkpoint. */
@@ -54,7 +60,9 @@ export function assertHostedSyncPrivate(value: unknown, path = 'payload', seen =
     value.forEach((item, index) => assertHostedSyncPrivate(item, `${path}[${index}]`, seen))
   } else {
     for (const [key, item] of Object.entries(value)) {
-      if (FORBIDDEN_KEY.test(key.replace(/[^a-z0-9]/gi, ''))) throw new Error(`Hosted sync privacy refusal at ${path}.${key}.`)
+      const normalizedKey = key.replace(/[^a-z0-9]/gi, '').toLowerCase()
+      const approvedResponseValue = normalizedKey === 'response' && /\.learnerResponseCheckpoint\.responses\[\d+\]$/u.test(path)
+      if (FORBIDDEN_KEY.test(normalizedKey) && !approvedResponseValue) throw new Error(`Hosted sync privacy refusal at ${path}.${key}.`)
       assertHostedSyncPrivate(item, `${path}.${key}`, seen)
     }
   }
@@ -93,15 +101,38 @@ export function buildFirstLinkArgs(input: HostedSyncFirstLinkInput): Readonly<Re
   try {
     assertHostedSyncPrivacyAllowlistR1(input.import)
     if (input.import.authorityCheckpoint) serializeAuthorityCheckpointPrivacyGateR1(input.import.authorityCheckpoint)
+    if ((input.import.learnerResponseCheckpoint || input.import.familyPlanCheckpoint) && !input.import.authorityCheckpoint) return null
+    if (input.import.authorityCheckpoint) {
+      const authoritySync = input.import.authorityCheckpoint.sync
+      if (!record(authoritySync) || authoritySync.operationId !== input.clientOperationId ||
+          authoritySync.idempotencyKey !== input.clientOperationId) return null
+    }
+    if (input.import.learnerResponseCheckpoint) {
+      const response = parseFamilyResponseCheckpointR1(input.import.learnerResponseCheckpoint)
+      if (!response || response.identity.householdRef !== input.import.localScope.householdRef ||
+          response.identity.studentRef !== input.import.localScope.studentRef ||
+          response.identity.assignmentRef !== input.import.localScope.assignmentRef ||
+          response.identity.sessionRef !== input.import.localScope.sessionRef ||
+          response.sync.baseRevision !== 0 || response.sync.revision !== 0 ||
+          response.sync.operationId !== input.clientOperationId) return null
+    }
+    if (input.import.familyPlanCheckpoint) {
+      const plan = parseFamilyPlanCheckpointR1(input.import.familyPlanCheckpoint)
+      if (!plan || plan.identity.householdRef !== input.import.localScope.householdRef ||
+          plan.identity.studentRef !== input.import.localScope.studentRef ||
+          plan.sync.baseRevision !== 0 || plan.sync.revision !== 0 ||
+          plan.sync.operationId !== input.clientOperationId) return null
+    }
   } catch { return null }
   return safe({
     p_token_digest: input.tokenDigest,
     p_student_id: input.studentId,
     p_client_operation_id: input.clientOperationId,
     p_import: input.import,
-  }, input.import.authorityCheckpoint
-    ? HOSTED_SYNC_AUTHORITY_CHECKPOINT_MAX_BYTES + HOSTED_SYNC_MAX_RPC_BYTES
-    : HOSTED_SYNC_MAX_RPC_BYTES)
+  }, HOSTED_SYNC_MAX_RPC_BYTES +
+    (input.import.authorityCheckpoint ? HOSTED_SYNC_AUTHORITY_CHECKPOINT_MAX_BYTES : 0) +
+    (input.import.learnerResponseCheckpoint ? FAMILY_RESPONSE_CHECKPOINT_MAX_BYTES_R1 : 0) +
+    (input.import.familyPlanCheckpoint ? FAMILY_PLAN_CHECKPOINT_MAX_BYTES_R1 : 0))
 }
 
 export function buildResolveMappingArgs(input: HostedSyncResolveMappingInput): Readonly<Record<string, unknown>> | null {
@@ -128,6 +159,16 @@ export function buildWriteArgs(input: HostedSyncWriteInput): Readonly<Record<str
       const held = exact(input.payload, ['authorityCheckpoint'])
       if (!held) return null
       serializeAuthorityCheckpointPrivacyGateR1(held.authorityCheckpoint)
+    } else if (input.operation === 'learner-response-checkpoint:compare-and-swap') {
+      const held = exact(input.payload, ['learnerResponseCheckpoint'])
+      const checkpoint = held ? parseFamilyResponseCheckpointR1(held.learnerResponseCheckpoint) : null
+      if (!checkpoint || checkpoint.sync.baseRevision !== input.expectedRevision ||
+          checkpoint.sync.revision !== input.expectedRevision + 1 || checkpoint.sync.operationId !== input.clientOperationId) return null
+    } else if (input.operation === 'family-plan-checkpoint:compare-and-swap') {
+      const held = exact(input.payload, ['familyPlanCheckpoint'])
+      const checkpoint = held ? parseFamilyPlanCheckpointR1(held.familyPlanCheckpoint) : null
+      if (!checkpoint || checkpoint.sync.baseRevision !== input.expectedRevision ||
+          checkpoint.sync.revision !== input.expectedRevision + 1 || checkpoint.sync.operationId !== input.clientOperationId) return null
     }
   } catch { return null }
   return safe({
@@ -141,7 +182,11 @@ export function buildWriteArgs(input: HostedSyncWriteInput): Readonly<Record<str
     p_payload: input.payload,
   }, input.operation === 'authority-checkpoint:compare-and-swap'
     ? HOSTED_SYNC_AUTHORITY_CHECKPOINT_MAX_BYTES + 4096
-    : HOSTED_SYNC_MAX_RPC_BYTES)
+    : input.operation === 'learner-response-checkpoint:compare-and-swap'
+      ? FAMILY_RESPONSE_CHECKPOINT_MAX_BYTES_R1 + 4096
+      : input.operation === 'family-plan-checkpoint:compare-and-swap'
+        ? FAMILY_PLAN_CHECKPOINT_MAX_BYTES_R1 + 4096
+        : HOSTED_SYNC_MAX_RPC_BYTES)
 }
 
 function revision(value: unknown): value is number {
@@ -173,7 +218,7 @@ export function parseFirstLinkResult(value: unknown): HostedSyncFirstLinkResult 
   const revisionKeys = revisions ? Object.keys(revisions) : []
   if (!held || !mapped || !revisions ||
       !['authority', 'session', 'checkpoint'].every((key) => revisionKeys.includes(key)) ||
-      revisionKeys.some((key) => !['authority', 'session', 'checkpoint', 'authorityCheckpoint'].includes(key)) ||
+      revisionKeys.some((key) => !['authority', 'session', 'checkpoint', 'authorityCheckpoint', 'learnerResponseCheckpoint', 'familyPlanCheckpoint'].includes(key)) ||
       !Object.values(revisions).every(revision)) return null
   return Object.freeze({ ...held, mapping: mapped, revisions: Object.freeze(revisions) }) as unknown as HostedSyncFirstLinkResult
 }
@@ -191,7 +236,11 @@ export function parseHydrateResult(value: unknown): HostedSyncHydrateResult | nu
   if (!record(value) || value.schemaVersion !== 2) return null
   if (value.status === 'unavailable') return exact(value, ['schemaVersion', 'status']) ? Object.freeze(value) as unknown as HostedSyncHydrateResult : null
   const keys = Object.keys(value)
-  const allowed = ['schemaVersion', 'status', 'mapping', 'document', 'authorityCheckpoint', 'authorityCheckpointRevision']
+  const allowed = [
+    'schemaVersion', 'status', 'mapping', 'document', 'authorityCheckpoint', 'authorityCheckpointRevision',
+    'learnerResponseCheckpoint', 'learnerResponseCheckpointRevision',
+    'familyPlanCheckpoint', 'familyPlanCheckpointRevision', 'courseEnrollments',
+  ]
   const held = keys.every((key) => allowed.includes(key)) &&
     ['schemaVersion', 'status', 'mapping', 'document'].every((key) => keys.includes(key)) ? value : null
   const mapped = mapping(value.mapping)
@@ -202,12 +251,25 @@ export function parseHydrateResult(value: unknown): HostedSyncHydrateResult | nu
   } catch { return null }
   if ((value.authorityCheckpoint === undefined) !== (value.authorityCheckpointRevision === undefined) ||
       (value.authorityCheckpoint !== undefined && (!record(value.authorityCheckpoint) || !revision(value.authorityCheckpointRevision)))) return null
+  const response = value.learnerResponseCheckpoint === undefined ? undefined : parseFamilyResponseCheckpointR1(value.learnerResponseCheckpoint)
+  const plan = value.familyPlanCheckpoint === undefined ? undefined : parseFamilyPlanCheckpointR1(value.familyPlanCheckpoint)
+  if ((value.learnerResponseCheckpoint === undefined) !== (value.learnerResponseCheckpointRevision === undefined) ||
+      (value.learnerResponseCheckpoint !== undefined && (!response || !revision(value.learnerResponseCheckpointRevision) ||
+        response.sync.revision !== value.learnerResponseCheckpointRevision))) return null
+  if ((value.familyPlanCheckpoint === undefined) !== (value.familyPlanCheckpointRevision === undefined) ||
+      (value.familyPlanCheckpoint !== undefined && (!plan || !revision(value.familyPlanCheckpointRevision) ||
+        plan.sync.revision !== value.familyPlanCheckpointRevision))) return null
+  if (value.courseEnrollments !== undefined && (!Array.isArray(value.courseEnrollments) ||
+      !value.courseEnrollments.every((entry) => record(entry)))) return null
   return Object.freeze({
     ...held, mapping: mapped, document: Object.freeze(value.document),
     ...(record(value.authorityCheckpoint) ? {
       authorityCheckpoint: Object.freeze(value.authorityCheckpoint),
       authorityCheckpointRevision: value.authorityCheckpointRevision as number,
     } : {}),
+    ...(response ? { learnerResponseCheckpoint: response, learnerResponseCheckpointRevision: value.learnerResponseCheckpointRevision as number } : {}),
+    ...(plan ? { familyPlanCheckpoint: plan, familyPlanCheckpointRevision: value.familyPlanCheckpointRevision as number } : {}),
+    ...(Array.isArray(value.courseEnrollments) ? { courseEnrollments: Object.freeze(value.courseEnrollments.map((entry) => Object.freeze(entry))) } : {}),
   }) as unknown as HostedSyncHydrateResult
 }
 
@@ -226,7 +288,15 @@ export function parseWriteResult(value: unknown, input: HostedSyncWriteInput): H
       ? Object.freeze(value) as unknown as HostedSyncWriteResult : null
   }
   if (value.status !== 'stored' && value.status !== 'revision-conflict') return null
-  if (value.operation !== input.operation || !['authority', 'session', 'checkpoint', 'authority-checkpoint'].includes(String(value.revisionDomain)) || !revision(value.serverRevision)) return null
+  const expectedDomain = input.operation === 'learner-response-checkpoint:compare-and-swap'
+    ? 'learner-response-checkpoint'
+    : input.operation === 'family-plan-checkpoint:compare-and-swap'
+      ? 'family-plan-checkpoint'
+      : null
+  if (value.operation !== input.operation || ![
+    'authority', 'session', 'checkpoint', 'authority-checkpoint',
+    'learner-response-checkpoint', 'family-plan-checkpoint',
+  ].includes(String(value.revisionDomain)) || (expectedDomain && value.revisionDomain !== expectedDomain) || !revision(value.serverRevision)) return null
   const required = ['schemaVersion', 'status', 'operation', 'revisionDomain', 'serverRevision']
   if (value.status === 'revision-conflict' && !exact(value, required)) return null
   try { assertHostedSyncPrivate(value) } catch { return null }

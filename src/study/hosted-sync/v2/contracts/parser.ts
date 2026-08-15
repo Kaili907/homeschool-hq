@@ -21,7 +21,9 @@ import {
   type HostedSyncStudentProfileR2,
 } from './types'
 
-const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,511}$/
+// Published lesson section, item and choice refs use `#` as their fragment
+// delimiter. Keep the allowlist narrow while accepting those real local refs.
+const REF = /^[A-Za-z0-9][A-Za-z0-9._:/#-]{0,511}$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const GRADES = new Set(['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'])
 const WORKING_GRADES = new Set(['3', '4', '5', '7', '8', '9', '10', '11', '12'])

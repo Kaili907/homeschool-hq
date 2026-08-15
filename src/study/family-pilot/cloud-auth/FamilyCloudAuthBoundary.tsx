@@ -17,6 +17,16 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
   }, [runtime])
 
   useEffect(() => {
+    const refresh = () => { void runtime.bootstrap() }
+    window.addEventListener('online', refresh)
+    window.addEventListener('offline', refresh)
+    return () => {
+      window.removeEventListener('online', refresh)
+      window.removeEventListener('offline', refresh)
+    }
+  }, [runtime])
+
+  useEffect(() => {
     if (state.status !== 'READY') return
     const remaining = Date.parse(state.expiresAt) - Date.now()
     const timer = window.setTimeout(() => { void runtime.bootstrap() }, Math.max(0, remaining) + 50)
@@ -62,4 +72,3 @@ export function FamilyCloudAuthBoundary({ runtime, children }: {
     </main>
   )
 }
-

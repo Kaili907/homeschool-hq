@@ -1,3 +1,5 @@
+import type { FamilyPlanCheckpointR1, FamilyResponseCheckpointR1 } from './familyCheckpoints'
+
 export const HOSTED_SYNC_CLIENT_PROTOCOL_VERSION = 2 as const
 
 /** Exact functions installed by 20260813172000_academy_study_sync_lossless_v2.sql. */
@@ -56,6 +58,10 @@ export interface HostedSyncFirstLinkImport {
   readonly assessment: Readonly<Record<string, unknown>> | null
   /** Exact minimized R2 authority checkpoint; legacy callers may omit it. */
   readonly authorityCheckpoint?: Readonly<Record<string, unknown>>
+  /** Separate response CAS domain; accepted only with the authority checkpoint. */
+  readonly learnerResponseCheckpoint?: FamilyResponseCheckpointR1
+  /** Separate Parent-owned School Plan/Auto Planner CAS domain. */
+  readonly familyPlanCheckpoint?: FamilyPlanCheckpointR1
 }
 
 export interface HostedSyncFirstLinkInput {
@@ -82,6 +88,8 @@ export const HOSTED_SYNC_WRITE_OPERATIONS = Object.freeze([
   'checkpoint:compare-and-swap', 'session:complete', 'social-source:attach',
   'rfl:assert', 'rfl:attest', 'safety:hold', 'safety:clear',
   'assessment:set-state', 'authority-checkpoint:compare-and-swap',
+  'learner-response-checkpoint:compare-and-swap',
+  'family-plan-checkpoint:compare-and-swap',
 ] as const)
 
 export type HostedSyncWriteOperation = typeof HOSTED_SYNC_WRITE_OPERATIONS[number]
@@ -105,7 +113,7 @@ export interface HostedSyncMapping {
 }
 
 export type HostedSyncFirstLinkResult =
-  | Readonly<{ schemaVersion: 2; status: 'imported' | 'linked-existing'; mapping: HostedSyncMapping; revisions: Readonly<{ authority: number; session: number; checkpoint: number; authorityCheckpoint?: number }> }>
+  | Readonly<{ schemaVersion: 2; status: 'imported' | 'linked-existing'; mapping: HostedSyncMapping; revisions: Readonly<{ authority: number; session: number; checkpoint: number; authorityCheckpoint?: number; learnerResponseCheckpoint?: number; familyPlanCheckpoint?: number }> }>
   | Readonly<{ schemaVersion: 2; status: 'mapping-conflict' | 'idempotency-collision' }>
   | Readonly<{ schemaVersion: 2; status: 'denied'; code: string }>
 
@@ -114,15 +122,31 @@ export type HostedSyncResolveMappingResult =
   | Readonly<{ schemaVersion: 2; status: 'unavailable' }>
 
 export type HostedSyncHydrateResult =
-  | Readonly<{ schemaVersion: 2; status: 'ready'; mapping: HostedSyncMapping; document: Readonly<Record<string, unknown>>; authorityCheckpoint?: Readonly<Record<string, unknown>>; authorityCheckpointRevision?: number }>
+  | Readonly<{
+      schemaVersion: 2
+      status: 'ready'
+      mapping: HostedSyncMapping
+      document: Readonly<Record<string, unknown>>
+      authorityCheckpoint?: Readonly<Record<string, unknown>>
+      authorityCheckpointRevision?: number
+      learnerResponseCheckpoint?: FamilyResponseCheckpointR1
+      learnerResponseCheckpointRevision?: number
+      familyPlanCheckpoint?: FamilyPlanCheckpointR1
+      familyPlanCheckpointRevision?: number
+      courseEnrollments?: readonly Readonly<Record<string, unknown>>[]
+    }>
   | Readonly<{ schemaVersion: 2; status: 'unavailable' }>
 
 export type HostedSyncWriteResult =
-  | Readonly<{ schemaVersion: 2; status: 'stored'; operation: HostedSyncWriteOperation; revisionDomain: 'authority' | 'session' | 'checkpoint' | 'authority-checkpoint'; serverRevision: number; readonly [key: string]: unknown }>
-  | Readonly<{ schemaVersion: 2; status: 'revision-conflict'; operation: HostedSyncWriteOperation; revisionDomain: 'authority' | 'session' | 'checkpoint' | 'authority-checkpoint'; serverRevision: number }>
+  | Readonly<{ schemaVersion: 2; status: 'stored'; operation: HostedSyncWriteOperation; revisionDomain: HostedSyncRevisionDomain; serverRevision: number; readonly [key: string]: unknown }>
+  | Readonly<{ schemaVersion: 2; status: 'revision-conflict'; operation: HostedSyncWriteOperation; revisionDomain: HostedSyncRevisionDomain; serverRevision: number }>
   | Readonly<{ schemaVersion: 2; status: 'invalid-write'; operation: HostedSyncWriteOperation; reasonCode: string }>
   | Readonly<{ schemaVersion: 2; status: 'denied'; code: string }>
   | Readonly<{ schemaVersion: 2; status: 'idempotency-collision'; operation: HostedSyncWriteOperation }>
+
+export type HostedSyncRevisionDomain =
+  | 'authority' | 'session' | 'checkpoint' | 'authority-checkpoint'
+  | 'learner-response-checkpoint' | 'family-plan-checkpoint'
 
 export type HostedSyncRpcProviderResult =
   | Readonly<{ data: unknown; error: null }>

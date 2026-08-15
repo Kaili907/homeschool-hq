@@ -8,6 +8,10 @@ interface HeldSession {
   revisions: { authority: number; session: number; checkpoint: number }
   authorityCheckpoint?: Json
   authorityCheckpointRevision?: number
+  learnerResponseCheckpoint?: Json
+  learnerResponseCheckpointRevision?: number
+  familyPlanCheckpoint?: Json
+  familyPlanCheckpointRevision?: number
 }
 
 function clone<T>(value: T): T { return structuredClone(value) }
@@ -49,6 +53,16 @@ export function createLocalDbRpcEmulator(input: { now?: () => Date; hostedHouseh
     const localScope = asJson(imported?.localScope)
     const hostedScope = asJson(imported?.hostedScope)
     if (!imported || !localScope || !hostedScope) return data({ schemaVersion: 2, status: 'denied', code: 'invalid-import' })
+    for (const field of ['authorityCheckpoint', 'learnerResponseCheckpoint', 'familyPlanCheckpoint'] as const) {
+      const checkpoint = asJson(imported[field])
+      if (!checkpoint) continue
+      const sync = asJson(checkpoint.sync)
+      if (!sync || sync.operationId !== args.p_client_operation_id ||
+          (field === 'authorityCheckpoint' && sync.idempotencyKey !== args.p_client_operation_id) ||
+          (field !== 'authorityCheckpoint' && (sync.baseRevision !== 0 || sync.revision !== 0))) {
+        return data({ schemaVersion: 2, status: 'denied', code: 'invalid-import' })
+      }
+    }
     const receiptKey = `first:${args.p_client_operation_id}`
     const fingerprint = JSON.stringify(args)
     const prior = receipts.get(receiptKey)
@@ -80,11 +94,21 @@ export function createLocalDbRpcEmulator(input: { now?: () => Date; hostedHouseh
         syncMetadata: { lastAuthorityClientOperationId: args.p_client_operation_id, serverAcceptedAt: now().toISOString() },
       }
       const authorityCheckpoint = asJson(imported.authorityCheckpoint)
+      const learnerResponseCheckpoint = asJson(imported.learnerResponseCheckpoint)
+      const familyPlanCheckpoint = asJson(imported.familyPlanCheckpoint)
       sessions.set(sessionKey, {
         mapping: clone(mapped), document, revisions,
         ...(authorityCheckpoint ? {
           authorityCheckpoint: clone(authorityCheckpoint),
           authorityCheckpointRevision: Number(asJson(authorityCheckpoint.sync)?.serverRevision ?? 0),
+        } : {}),
+        ...(learnerResponseCheckpoint ? {
+          learnerResponseCheckpoint: clone(learnerResponseCheckpoint),
+          learnerResponseCheckpointRevision: Number(asJson(learnerResponseCheckpoint.sync)?.revision ?? 0),
+        } : {}),
+        ...(familyPlanCheckpoint ? {
+          familyPlanCheckpoint: clone(familyPlanCheckpoint),
+          familyPlanCheckpointRevision: Number(asJson(familyPlanCheckpoint.sync)?.revision ?? 0),
         } : {}),
       })
       mappings.set(localKey(localScope), clone(mapped))
@@ -92,7 +116,12 @@ export function createLocalDbRpcEmulator(input: { now?: () => Date; hostedHouseh
     const held = sessions.get(sessionKey)!
     const response = {
       schemaVersion: 2, status: existing ? 'linked-existing' : 'imported', mapping: mapped,
-      revisions: { ...held.revisions, ...(held.authorityCheckpointRevision === undefined ? {} : { authorityCheckpoint: held.authorityCheckpointRevision }) },
+      revisions: {
+        ...held.revisions,
+        ...(held.authorityCheckpointRevision === undefined ? {} : { authorityCheckpoint: held.authorityCheckpointRevision }),
+        ...(held.learnerResponseCheckpointRevision === undefined ? {} : { learnerResponseCheckpoint: held.learnerResponseCheckpointRevision }),
+        ...(held.familyPlanCheckpointRevision === undefined ? {} : { familyPlanCheckpoint: held.familyPlanCheckpointRevision }),
+      },
     }
     receipts.set(receiptKey, { fingerprint, response: clone(response) })
     return responseAfterCommit(HOSTED_SYNC_RPC.firstLink, response)
@@ -116,6 +145,15 @@ export function createLocalDbRpcEmulator(input: { now?: () => Date; hostedHouseh
         authorityCheckpoint: clone(held.authorityCheckpoint),
         authorityCheckpointRevision: held.authorityCheckpointRevision,
       } : {}),
+      ...(held.learnerResponseCheckpoint ? {
+        learnerResponseCheckpoint: clone(held.learnerResponseCheckpoint),
+        learnerResponseCheckpointRevision: held.learnerResponseCheckpointRevision,
+      } : {}),
+      ...(held.familyPlanCheckpoint ? {
+        familyPlanCheckpoint: clone(held.familyPlanCheckpoint),
+        familyPlanCheckpointRevision: held.familyPlanCheckpointRevision,
+      } : {}),
+      courseEnrollments: [],
     }) : data({ schemaVersion: 2, status: 'unavailable' })
   }
 
@@ -124,14 +162,19 @@ export function createLocalDbRpcEmulator(input: { now?: () => Date; hostedHouseh
     const operation = String(args.p_operation)
     const held = sessions.get(key(args.p_student_id, args.p_assignment_ref, args.p_session_id))
     if (!held) return data({ schemaVersion: 2, status: 'denied', code: 'study-session-invalid' })
-    if (roles.get(String(args.p_token_digest)) === 'student' && ['rfl:attest', 'safety:clear'].includes(operation)) return data({ schemaVersion: 2, status: 'denied', code: 'actor-not-authorized' })
+    if (roles.get(String(args.p_token_digest)) === 'student' && ['rfl:attest', 'safety:clear', 'family-plan-checkpoint:compare-and-swap'].includes(operation)) return data({ schemaVersion: 2, status: 'denied', code: 'actor-not-authorized' })
     const domain = operation === 'authority-checkpoint:compare-and-swap' ? 'authority-checkpoint' :
+      operation === 'learner-response-checkpoint:compare-and-swap' ? 'learner-response-checkpoint' :
+        operation === 'family-plan-checkpoint:compare-and-swap' ? 'family-plan-checkpoint' :
       operation === 'checkpoint:compare-and-swap' ? 'checkpoint' : operation === 'session:complete' ? 'session' : 'authority'
     const receiptKey = `write:${args.p_client_operation_id}`
     const fingerprint = JSON.stringify(args)
     const prior = receipts.get(receiptKey)
     if (prior) return prior.fingerprint === fingerprint ? data(clone(prior.response)) : data({ schemaVersion: 2, status: 'idempotency-collision', operation })
-    const revision = domain === 'authority-checkpoint' ? held.authorityCheckpointRevision : held.revisions[domain]
+    const revision = domain === 'authority-checkpoint' ? held.authorityCheckpointRevision
+      : domain === 'learner-response-checkpoint' ? held.learnerResponseCheckpointRevision
+        : domain === 'family-plan-checkpoint' ? held.familyPlanCheckpointRevision
+          : held.revisions[domain]
     if (revision === undefined) return data({ schemaVersion: 2, status: 'invalid-write', operation, reasonCode: 'authority-checkpoint-unavailable' })
     if (args.p_expected_revision !== revision) return data({ schemaVersion: 2, status: 'revision-conflict', operation, revisionDomain: domain, serverRevision: revision })
     const payload = asJson(args.p_payload) ?? {}
@@ -151,6 +194,24 @@ export function createLocalDbRpcEmulator(input: { now?: () => Date; hostedHouseh
       }
       held.authorityCheckpoint = clone(candidate)
       held.authorityCheckpointRevision = revision + 1
+    } else if (operation === 'learner-response-checkpoint:compare-and-swap') {
+      const candidate = asJson(payload.learnerResponseCheckpoint)
+      const sync = asJson(candidate?.sync)
+      if (!candidate || sync?.baseRevision !== revision || sync.revision !== revision + 1 ||
+          sync.operationId !== args.p_client_operation_id) {
+        return data({ schemaVersion: 2, status: 'invalid-write', operation, reasonCode: 'invalid-learner-response-checkpoint' })
+      }
+      held.learnerResponseCheckpoint = clone(candidate)
+      held.learnerResponseCheckpointRevision = revision + 1
+    } else if (operation === 'family-plan-checkpoint:compare-and-swap') {
+      const candidate = asJson(payload.familyPlanCheckpoint)
+      const sync = asJson(candidate?.sync)
+      if (!candidate || sync?.baseRevision !== revision || sync.revision !== revision + 1 ||
+          sync.operationId !== args.p_client_operation_id) {
+        return data({ schemaVersion: 2, status: 'invalid-write', operation, reasonCode: 'invalid-family-plan-checkpoint' })
+      }
+      held.familyPlanCheckpoint = clone(candidate)
+      held.familyPlanCheckpointRevision = revision + 1
     } else if (operation === 'checkpoint:compare-and-swap') {
       const checkpoint = asJson(payload.checkpoint)
       if (!checkpoint || checkpoint.revision !== revision + 1) return data({ schemaVersion: 2, status: 'invalid-write', operation, reasonCode: 'invalid-checkpoint' })
@@ -177,13 +238,17 @@ export function createLocalDbRpcEmulator(input: { now?: () => Date; hostedHouseh
       held.document.assessment = clone(payload.assessment)
       extra = { assessmentStatus: asJson(payload.assessment)?.status }
     }
-    if (domain !== 'authority-checkpoint') {
-      held.revisions[domain] += 1
-      asJson(held.document.revisions)![domain] = held.revisions[domain]
+    if (!['authority-checkpoint', 'learner-response-checkpoint', 'family-plan-checkpoint'].includes(domain)) {
+      const legacyDomain = domain as keyof HeldSession['revisions']
+      held.revisions[legacyDomain] += 1
+      asJson(held.document.revisions)![legacyDomain] = held.revisions[legacyDomain]
     }
     held.document.syncMetadata = { lastAuthorityClientOperationId: args.p_client_operation_id, serverAcceptedAt: now().toISOString() }
     const response = { schemaVersion: 2, status: 'stored', operation, revisionDomain: domain,
-      serverRevision: domain === 'authority-checkpoint' ? held.authorityCheckpointRevision! : held.revisions[domain], ...extra }
+      serverRevision: domain === 'authority-checkpoint' ? held.authorityCheckpointRevision!
+        : domain === 'learner-response-checkpoint' ? held.learnerResponseCheckpointRevision!
+          : domain === 'family-plan-checkpoint' ? held.familyPlanCheckpointRevision!
+            : held.revisions[domain as keyof HeldSession['revisions']], ...extra }
     receipts.set(receiptKey, { fingerprint, response: clone(response) })
     return responseAfterCommit(HOSTED_SYNC_RPC.write, response)
   }

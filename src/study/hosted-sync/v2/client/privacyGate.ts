@@ -13,6 +13,8 @@ const ALLOWED_KEYS = new Set<string>([
   'contractVersion','identity','sync','student','studentProfile','appUpdatedAt','setupCompletedAt','assignments',
   'assessmentStates','rflStates','socialSources','safetyHolds','indexedDbDocument','privacy',
   'plannerDocument','instructionalInputs',
+  'learnerResponseCheckpoint','familyPlanCheckpoint','courseEnrollments','contract','responses','attempt','response','planner',
+  'responseType','assessment','enrollmentRef','schoolYearKey','instructionalLevel','curriculumVersion','startsOn','endsOn',
   'householdRef','studentRef','learnerRef','serverRevision','baseRevision','operationId','idempotencyKey',
   'operationKind','deviceRef','localSequence','createdAt','displayName','updatedAt','activeAssignmentRef',
   'nominalGrade','workingGradeBySubject','enabledSubjects','record','authorityRevision','sessionIdentity','completion',

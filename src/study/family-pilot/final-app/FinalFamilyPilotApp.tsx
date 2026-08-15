@@ -107,7 +107,6 @@ export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSet
   }, [])
 
   const familyServices = resolveFamilyServicesR1({
-    hostedSyncFeatureFlagValue: import.meta.env.VITE_FAMILY_PILOT_HOSTED_SYNC_ENABLED,
     trustedScorerFeatureFlagValue: import.meta.env.VITE_FAMILY_PILOT_TRUSTED_SCORER_ENABLED,
     configuration: familyServicesPilot,
   })
@@ -126,6 +125,7 @@ export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSet
       parentSyncStatus={familyServices.parentSyncStatus}
       deviceSyncSetup={deviceSyncSetup}
       cloudState={cloudState}
+      onReconcile={familyCloudAuth ? (signal) => familyCloudAuth.reconcile(signal) : undefined}
       onHouseholdSignOut={familyCloudAuth ? async () => { await familyCloudAuth.signOut(); onExit() } : undefined}
     />
   )
@@ -134,16 +134,20 @@ export function FinalFamilyPilotApp({ onExit, familyServicesPilot, deviceSyncSet
     : app(null)
 }
 
-function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncStatus, deviceSyncSetup, cloudState, onHouseholdSignOut }: {
+function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncStatus, deviceSyncSetup, cloudState, onReconcile, onHouseholdSignOut }: {
   readonly catalog: FinalFamilyPilotCatalog
   readonly onExit: () => void
   readonly trustedScorer?: LearnerResponseAssessor
   readonly parentSyncStatus: ParentSyncStatusValueR1
   readonly deviceSyncSetup?: ParentDeviceSyncSetupRuntime
   readonly cloudState: Extract<FamilyCloudSessionState, { status: 'READY' | 'OFFLINE_LOCAL' }> | null
+  readonly onReconcile?: (signal?: AbortSignal) => ReturnType<FamilyCloudAuthRuntime['reconcile']>
   readonly onHouseholdSignOut?: () => void
 }) {
   const [revision, setRevision] = useState(0)
+  const [cloudSyncStatus, setCloudSyncStatus] = useState<ParentSyncStatusValueR1>(() =>
+    cloudState?.status === 'READY' ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'NEEDS_ATTENTION' : parentSyncStatus)
+  const reconcileController = useRef<AbortController | null>(null)
   const storage = useMemo(
     () => cloudState ? createBrowserHouseholdScopedStorage(cloudState.householdRef) : undefined,
     [cloudState?.householdRef],
@@ -160,20 +164,44 @@ function ReadyFinalFamilyPilotApp({ catalog, onExit, trustedScorer, parentSyncSt
     appStore: { storage, householdRef: cloudState.householdRef },
   } : {}, [cloudState?.householdRef, storage])
   useEffect(() => () => controller.close(), [controller])
+  useEffect(() => {
+    setCloudSyncStatus(cloudState?.status === 'READY'
+      ? 'UP_TO_DATE' : cloudState?.status === 'OFFLINE_LOCAL' ? 'NEEDS_ATTENTION' : parentSyncStatus)
+  }, [cloudState?.status, parentSyncStatus])
+  useEffect(() => () => reconcileController.current?.abort(), [])
   const refresh = useCallback(() => {
     controller.refresh()
     setRevision((value) => value + 1)
-  }, [controller])
+    if (!onReconcile || cloudState?.status !== 'READY' || reconcileController.current) return
+    const abort = new AbortController()
+    reconcileController.current = abort
+    setCloudSyncStatus('SYNCING')
+    void onReconcile(abort.signal).then((result) => {
+      if (abort.signal.aborted) return
+      if (result === 'UP_TO_DATE') {
+        controller.refresh()
+        setRevision((value) => value + 1)
+        setCloudSyncStatus('UP_TO_DATE')
+      } else if (result === 'CONFLICT' || result === 'UNAVAILABLE') setCloudSyncStatus('NEEDS_ATTENTION')
+    }).finally(() => {
+      if (reconcileController.current === abort) reconcileController.current = null
+    })
+  }, [cloudState?.status, controller, onReconcile])
+  const householdSignOut = useCallback(() => {
+    reconcileController.current?.abort()
+    reconcileController.current = null
+    onHouseholdSignOut?.()
+  }, [onHouseholdSignOut])
   return <MountedFinalFamilyPilot
     controller={controller}
     onExit={onExit}
     refresh={refresh}
     revision={revision}
     trustedScorer={trustedScorer}
-    parentSyncStatus={parentSyncStatus}
+    parentSyncStatus={cloudState ? cloudSyncStatus : parentSyncStatus}
     deviceSyncSetup={deviceSyncSetup}
     cloudState={cloudState}
-    onHouseholdSignOut={onHouseholdSignOut}
+    onHouseholdSignOut={onHouseholdSignOut ? householdSignOut : undefined}
     backupOptions={backupOptions}
   />
 }
