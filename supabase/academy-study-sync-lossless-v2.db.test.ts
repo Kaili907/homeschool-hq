@@ -24,6 +24,7 @@ const files = [
   './migrations/20260813172000_academy_study_sync_lossless_v2.sql',
   './migrations/20260813173000_academy_study_sync_lossless_checkpoint_r1.sql',
   './migrations/20260814120000_academy_family_cross_device_data_r1.sql',
+  './migrations/20260814120000_academy_family_response_checkpoint_r1.sql',
 ] as const
 
 const sources = Promise.all(files.map((filename) =>
@@ -361,6 +362,63 @@ function authorityCheckpoint(operationId: string, serverRevision = 0, baseRevisi
     privacy: { pinIncluded: false, bearerIncluded: false, rawLearnerResponseIncluded: false,
       rawTutorConversationIncluded: false, rawAudioIncluded: false, inferenceIncluded: false,
       adultAnswerAuthorityIncluded: false, answerMaterialIncluded: false, instructionalInputIncluded: true },
+  }
+}
+
+function learnerResponseCheckpoint(
+  operationId: string,
+  revision = 0,
+  baseRevision = revision,
+) {
+  return {
+    contract: 'family-pilot.learner-response-checkpoint.r1',
+    contractVersion: 1,
+    identity: {
+      householdRef: localScope.householdRef,
+      studentRef: localScope.studentRef,
+      learnerRef: localScope.studentRef,
+      assignmentRef: localScope.assignmentRef,
+      sessionRef: localScope.sessionRef,
+    },
+    attempt: {
+      attemptRef: 'attempt:import-a',
+      lessonRef: 'lesson-import-a',
+    },
+    sync: {
+      baseRevision,
+      revision,
+      operationId,
+      savedAt: `2026-08-01T14:${String(5 + revision).padStart(2, '0')}:00.000Z`,
+    },
+    responses: [
+      {
+        itemRef: 'item:choice-a',
+        sectionRef: 'section:practice-a',
+        segmentRef: 'segment-import-a',
+        responseType: 'CHOICE',
+        evidenceMode: 'INDEPENDENT',
+        response: { kind: 'CHOICE', choiceRef: 'choice:b' },
+        status: 'PENDING_ASSESSMENT',
+        savedAt: '2026-08-01T14:04:00.000Z',
+        assessment: null,
+      },
+      {
+        itemRef: 'item:text-a',
+        sectionRef: 'section:reflection-a',
+        segmentRef: 'segment-import-a',
+        responseType: 'TEXT',
+        evidenceMode: 'SUPPORTED',
+        response: { kind: 'TEXT', text: 'I compared the two quantities.' },
+        status: 'ASSESSED',
+        savedAt: '2026-08-01T14:05:00.000Z',
+        assessment: {
+          assessmentRef: 'assessment-record:text-a',
+          assessorRef: 'trusted-scorer:family-pilot:r1',
+          assessedAt: '2026-08-01T14:05:30.000Z',
+          decision: 'PARTIAL',
+        },
+      },
+    ],
   }
 }
 
@@ -836,15 +894,27 @@ describe.sequential('Study hosted sync lossless V2', () => {
   it('losslessly round-trips canonical A→DB→B and B→DB→A with checkpoint CAS', async () => {
     const firstId = '57000000-0000-4000-8000-000000000001'
     const original = authorityCheckpoint(firstId)
+    const originalResponses = learnerResponseCheckpoint(firstId)
     const linked = await guardian(GUARDIAN_A, () => firstLink(
-      digestA, STUDENT_A, firstId, importDocument({ authorityCheckpoint: original }),
+      digestA, STUDENT_A, firstId, importDocument({
+        authorityCheckpoint: original,
+        learnerResponseCheckpoint: originalResponses,
+      }),
     ))
     const hydratedB = await guardian(GUARDIAN_A, () => hydrate(
       digestA, STUDENT_A, 'assignment-import-a', 'session-import-a',
     ))
-    expect(linked).toMatchObject({ status: 'linked-existing', revisions: { authorityCheckpoint: 0 } })
-    expect(hydratedB).toMatchObject({ status: 'ready', authorityCheckpointRevision: 0 })
+    expect(linked).toMatchObject({
+      status: 'linked-existing',
+      revisions: { authorityCheckpoint: 0, learnerResponseCheckpoint: 0 },
+    })
+    expect(hydratedB).toMatchObject({
+      status: 'ready',
+      authorityCheckpointRevision: 0,
+      learnerResponseCheckpointRevision: 0,
+    })
     expect(hydratedB.authorityCheckpoint).toEqual(original)
+    expect(hydratedB.learnerResponseCheckpoint).toEqual(originalResponses)
 
     const writeId = '57000000-0000-4000-8000-000000000002'
     const advanced = structuredClone(authorityCheckpoint(writeId, 1, 0))
@@ -941,6 +1011,221 @@ describe.sequential('Study hosted sync lossless V2', () => {
     expect(oversized.rows[0].refused).toBe(true)
   })
 
+  it('isolates typed learner-response checkpoints and preserves append-only CAS history', async () => {
+    const guardianRows = await guardian(GUARDIAN_A, () => database.query<{
+      session_id: string
+      revision: number
+    }>(`
+      select session_id, revision
+      from public.academy_family_response_checkpoints
+      order by session_id
+    `))
+    const otherHouseholdRows = await guardian(GUARDIAN_B, () => database.query<{
+      session_id: string
+    }>(`
+      select session_id from public.academy_family_response_checkpoints
+    `))
+    const learnerRows = await student(grantA, () => database.query<{
+      item_ref: string
+      checkpoint_revision: number
+    }>(`
+      select item_ref, checkpoint_revision
+      from public.academy_family_response_checkpoint_items
+      order by item_ref
+    `))
+    expect(guardianRows.rows).toEqual([{ session_id: 'session-import-a', revision: 0 }])
+    expect(otherHouseholdRows.rows).toEqual([])
+    expect(learnerRows.rows).toEqual([
+      { item_ref: 'item:choice-a', checkpoint_revision: 0 },
+      { item_ref: 'item:text-a', checkpoint_revision: 0 },
+    ])
+
+    await expect(asRole('anon', null, false, () => database.query(`
+      select session_id from public.academy_family_response_checkpoints
+    `))).rejects.toThrow()
+    await expect(guardian(GUARDIAN_A, () => database.exec(`
+      update public.academy_family_response_checkpoints
+      set revision = 99
+      where session_id = 'session-import-a'
+    `))).rejects.toThrow()
+
+    const acl = await database.query<{
+      header_rls: boolean
+      header_force_rls: boolean
+      item_rls: boolean
+      item_force_rls: boolean
+      anon_header_select: boolean
+      anon_item_select: boolean
+      service_header_select: boolean
+      authenticated_header_update: boolean
+      authenticated_response_write: boolean
+      anon_response_write: boolean
+    }>(`
+      select
+        (select relrowsecurity from pg_catalog.pg_class
+          where oid = 'public.academy_family_response_checkpoints'::regclass)
+          as header_rls,
+        (select relforcerowsecurity from pg_catalog.pg_class
+          where oid = 'public.academy_family_response_checkpoints'::regclass)
+          as header_force_rls,
+        (select relrowsecurity from pg_catalog.pg_class
+          where oid = 'public.academy_family_response_checkpoint_items'::regclass)
+          as item_rls,
+        (select relforcerowsecurity from pg_catalog.pg_class
+          where oid = 'public.academy_family_response_checkpoint_items'::regclass)
+          as item_force_rls,
+        has_table_privilege('anon',
+          'public.academy_family_response_checkpoints', 'select')
+          as anon_header_select,
+        has_table_privilege('anon',
+          'public.academy_family_response_checkpoint_items', 'select')
+          as anon_item_select,
+        has_table_privilege('service_role',
+          'public.academy_family_response_checkpoints', 'select')
+          as service_header_select,
+        has_table_privilege('authenticated',
+          'public.academy_family_response_checkpoints', 'update')
+          as authenticated_header_update,
+        has_function_privilege('authenticated',
+          'public.academy_study_sync_write_v2(text,uuid,text,text,bigint,uuid,text,jsonb)',
+          'execute') as authenticated_response_write,
+        has_function_privilege('anon',
+          'public.academy_study_sync_write_v2(text,uuid,text,text,bigint,uuid,text,jsonb)',
+          'execute') as anon_response_write
+    `)
+    expect(acl.rows[0]).toEqual({
+      header_rls: true,
+      header_force_rls: true,
+      item_rls: true,
+      item_force_rls: true,
+      anon_header_select: false,
+      anon_item_select: false,
+      service_header_select: false,
+      authenticated_header_update: false,
+      authenticated_response_write: true,
+      anon_response_write: false,
+    })
+
+    const writeId = '58000000-0000-4000-8000-000000000001'
+    const advanced = structuredClone(learnerResponseCheckpoint(writeId, 1, 0))
+    advanced.responses[0] = {
+      ...advanced.responses[0],
+      status: 'ASSESSED',
+      savedAt: '2026-08-01T14:06:00.000Z',
+      assessment: {
+        assessmentRef: 'assessment-record:choice-a',
+        assessorRef: 'trusted-scorer:family-pilot:r1',
+        assessedAt: '2026-08-01T14:06:30.000Z',
+        decision: 'CORRECT',
+      },
+    }
+    const stored = await student(grantA, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      writeId, 'learner-response-checkpoint:compare-and-swap',
+      { learnerResponseCheckpoint: advanced },
+    ))
+    const retry = await student(grantA, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      writeId, 'learner-response-checkpoint:compare-and-swap',
+      { learnerResponseCheckpoint: advanced },
+    ))
+    const collisionCandidate = structuredClone(advanced)
+    collisionCandidate.responses[1].response = {
+      kind: 'TEXT',
+      text: 'A conflicting retry.',
+    }
+    const collision = await student(grantA, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      writeId, 'learner-response-checkpoint:compare-and-swap',
+      { learnerResponseCheckpoint: collisionCandidate },
+    ))
+    const staleId = '58000000-0000-4000-8000-000000000002'
+    const staleCandidate = learnerResponseCheckpoint(staleId, 1, 0)
+    const stale = await student(grantA, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 0,
+      staleId, 'learner-response-checkpoint:compare-and-swap',
+      { learnerResponseCheckpoint: staleCandidate },
+    ))
+    const crossHousehold = await guardian(GUARDIAN_B, () => write(
+      digestB, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      '58000000-0000-4000-8000-000000000003',
+      'learner-response-checkpoint:compare-and-swap',
+      { learnerResponseCheckpoint: advanced },
+    ))
+    expect(stored).toMatchObject({
+      status: 'stored',
+      revisionDomain: 'learner-response-checkpoint',
+      serverRevision: 1,
+    })
+    expect(retry).toEqual(stored)
+    expect(collision).toMatchObject({ status: 'idempotency-collision' })
+    expect(stale).toMatchObject({ status: 'revision-conflict', serverRevision: 1 })
+    expect(crossHousehold).toMatchObject({
+      status: 'denied',
+      code: 'study-session-invalid',
+    })
+
+    const removalId = '58000000-0000-4000-8000-000000000004'
+    const removal = structuredClone(learnerResponseCheckpoint(removalId, 2, 1))
+    removal.responses = removal.responses.slice(1)
+    const refusedRemoval = await student(grantA, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      removalId, 'learner-response-checkpoint:compare-and-swap',
+      { learnerResponseCheckpoint: removal },
+    ))
+    const forbiddenId = '58000000-0000-4000-8000-000000000005'
+    const forbidden = structuredClone(learnerResponseCheckpoint(forbiddenId, 2, 1)) as any
+    forbidden.responses[0].answerKey = 'forbidden'
+    const refusedAuthority = await student(grantA, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      forbiddenId, 'learner-response-checkpoint:compare-and-swap',
+      { learnerResponseCheckpoint: forbidden },
+    ))
+    expect(refusedRemoval).toMatchObject({
+      status: 'invalid-write',
+      reasonCode: 'invalid-learner-response-checkpoint',
+    })
+    expect(refusedAuthority).toMatchObject({
+      status: 'invalid-write',
+      reasonCode: 'invalid-learner-response-checkpoint',
+    })
+
+    const hydrated = await guardian(GUARDIAN_A, () => hydrate(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a',
+    ))
+    expect(hydrated).toMatchObject({
+      status: 'ready',
+      learnerResponseCheckpointRevision: 1,
+    })
+    expect(hydrated.learnerResponseCheckpoint).toEqual(advanced)
+    expect(JSON.stringify(hydrated.learnerResponseCheckpoint)).not.toMatch(
+      /answerKey|correctAnswer|scoringGuide|tutorConversation|transcript/i,
+    )
+    const currentLearnerRows = await student(grantA, () => database.query<{
+      checkpoint_revision: number
+    }>(`
+      select checkpoint_revision
+      from public.academy_family_response_checkpoint_items
+      order by item_ref
+    `))
+    expect(currentLearnerRows.rows).toEqual([
+      { checkpoint_revision: 1 },
+      { checkpoint_revision: 1 },
+    ])
+
+    const history = await database.query<{ revision: number; count: number }>(`
+      select checkpoint_revision as revision, count(*)::integer as count
+      from public.academy_family_response_checkpoint_items
+      where session_id = 'session-import-a'
+      group by checkpoint_revision
+      order by checkpoint_revision
+    `)
+    expect(history.rows).toEqual([
+      { revision: 0, count: 2 },
+      { revision: 1, count: 2 },
+    ])
+  })
+
   it('revocation immediately removes hydrate, write and RLS authority', async () => {
     const revoked = await service(() => rpc<Record<string, unknown>>(
       'select public.academy_study_revoke_session_v1($1::text) as result',
@@ -954,12 +1239,27 @@ describe.sequential('Study hosted sync lossless V2', () => {
       '56000000-0000-4000-8000-000000000001', 'assessment:set-state',
       { assessment },
     ))
+    const responseWriteId = '58000000-0000-4000-8000-000000000006'
+    const deniedResponse = await guardian(GUARDIAN_A, () => write(
+      digestA, STUDENT_A, 'assignment-import-a', 'session-import-a', 1,
+      responseWriteId, 'learner-response-checkpoint:compare-and-swap',
+      { learnerResponseCheckpoint: learnerResponseCheckpoint(responseWriteId, 2, 1) },
+    ))
     const learnerRows = await student(grantA, () => database.query<{ count: number }>(`
       select count(*)::integer as count from public.academy_study_session_authority
+    `))
+    const learnerResponseRows = await student(grantA, () => database.query<{ count: number }>(`
+      select count(*)::integer as count
+      from public.academy_family_response_checkpoints
     `))
     expect(revoked).toMatchObject({ status: 'revoked' })
     expect(unavailable).toMatchObject({ status: 'unavailable' })
     expect(denied).toMatchObject({ status: 'denied', code: 'study-session-invalid' })
+    expect(deniedResponse).toMatchObject({
+      status: 'denied',
+      code: 'study-session-invalid',
+    })
     expect(learnerRows.rows[0].count).toBe(0)
+    expect(learnerResponseRows.rows[0].count).toBe(0)
   })
 })

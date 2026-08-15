@@ -553,6 +553,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "family_cross_device_data:absent->r1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260814120000",
+      "filename": "20260814120000_academy_family_response_checkpoint_r1.sql",
+      "sha256": "46769f46b5453fc25cb13f1817c6c6756b516a2916ea21380a0a4040c51cf282",
+      "dependency": "20260813173000_academy_study_sync_lossless_checkpoint_r1.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "family_response_checkpoint_contract:absent->r1",
+      "supersessionStatus": "current"
     }
   ]
 }
