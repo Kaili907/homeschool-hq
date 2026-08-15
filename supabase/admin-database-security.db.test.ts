@@ -169,7 +169,9 @@ describe('full-chain Admin database security red team', () => {
         and relation.relkind in ('r', 'p')
       order by namespace.nspname, relation.relname
     `)
-    expect(relations.rows).toHaveLength(89)
+    // Hosted Sync R2 contributes one private checkpoint table. Family Cloud
+    // R1 adds its typed response header and append-only item table.
+    expect(relations.rows).toHaveLength(92)
     expect(relations.rows.every((relation) => relation.rls_enabled)).toBe(true)
     expect(relations.rows.filter((relation) => !relation.rls_forced)
       .map((relation) => `${relation.schema_name}.${relation.table_name}`)).toEqual([
@@ -258,7 +260,9 @@ describe('full-chain Admin database security red team', () => {
         and routine.prosecdef
       order by namespace.nspname, routine.proname, identity_arguments
     `)
-    expect(routines.rows).toHaveLength(230)
+    // Hosted Sync R2 contributes three SECURITY DEFINER routines. Family
+    // Cloud R1 adds two private table helpers and three RPC wrappers.
+    expect(routines.rows).toHaveLength(238)
     expect(routines.rows.every(({ owner_name: owner }) => owner === 'postgres')).toBe(true)
     expect(routines.rows.every(({ configuration }) => (
       configuration?.length === 1
