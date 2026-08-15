@@ -134,7 +134,7 @@ describe('FamilyPilotParentAssignPanel — duplicate/in-progress warning', () =>
     expect(html).not.toContain('Resume for Ada')
   })
 
-  it('notes a previously completed lesson instead of presenting it as brand new', () => {
+  it('notes a previously completed exact lesson and suppresses a duplicate assignment action', () => {
     const lesson: FamilyPilotAssignLesson = { lessonRef: 'lesson:done-before', title: 'Done before', subject: 'math', grade: 5 }
     const assignment: FamilyPilotAssignment = {
       assignmentRef: 'assignment:done-before',
@@ -146,8 +146,8 @@ describe('FamilyPilotParentAssignPanel — duplicate/in-progress warning', () =>
       optional: false,
     }
     const html = renderPanel(ada, [assignment], [lesson])
-    expect(html).toContain('Assign to Ada')
-    expect(html).toContain('Previously completed by Ada')
+    expect(html).not.toContain('Assign to Ada')
+    expect(html).toContain('Already completed by Ada — an exact duplicate was not created.')
   })
 })
 

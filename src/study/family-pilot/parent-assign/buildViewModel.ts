@@ -80,12 +80,10 @@ export function buildAssignViewModel(input: {
   const assignableLessons: FamilyPilotAssignableLessonRow[] = availableLessons
     .filter((lesson) => enabledSubjectSet.has(lesson.subject))
     .map((lesson) => {
-      const duplicate = studentAssignments.find(
-        (assignment) => assignment.lessonRef === lesson.lessonRef && OPEN_STATUSES.includes(assignment.status),
-      )
-      const priorClosed = duplicate
-        ? undefined
-        : studentAssignments.find((assignment) => assignment.lessonRef === lesson.lessonRef)
+      // Exact canonical work is single-assignment by default, including after
+      // completion. A Parent can see the authoritative prior state, but this
+      // ordinary control never creates an accidental second copy.
+      const duplicate = studentAssignments.find((assignment) => assignment.lessonRef === lesson.lessonRef)
       return {
         lessonRef: lesson.lessonRef,
         title: lesson.title,
@@ -94,7 +92,7 @@ export function buildAssignViewModel(input: {
         duplicateAssignmentRef: duplicate?.assignmentRef ?? null,
         duplicateStatus: duplicate?.status ?? null,
         canResumeDuplicate: duplicate ? RESUMABLE_STATUSES.includes(duplicate.status) : false,
-        priorStatus: priorClosed?.status ?? null,
+        priorStatus: duplicate && !OPEN_STATUSES.includes(duplicate.status) ? duplicate.status : null,
       }
     })
 

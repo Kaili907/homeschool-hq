@@ -19,7 +19,6 @@ import {
 } from '../dashboard-adapter'
 import { fromStudentSelector, toStudentSelector } from '../integration/identity'
 import { createRichLessonRenderModel, FamilyPilotLessonPlayer } from '../lesson-player'
-import { FamilyPilotParentAssignPanel } from '../parent-assign'
 import { FamilyPilotRecoveryScreen } from '../recovery'
 import { buildFamilyFactualProgress, FamilyFactualProgress, LearnerFactualProgress } from '../reports'
 import { StudentDashboard } from '../student-dashboard'
@@ -34,7 +33,6 @@ import {
 import { FAMILY_PILOT_ACTIVE_HEARTBEAT_SECONDS, type FamilyPilotAssignmentRecordV1, type FamilyPilotSnapshot } from '../core'
 import type { FamilyPilotStudySnapshot } from '../study'
 import {
-  academySubjectToStudySubject,
   FinalFamilyPilotController,
   type FinalFamilyPilotControllerResult,
 } from './controller'
@@ -58,6 +56,7 @@ import { ParentReviewCenter } from './review-center'
 import { FamilyOverview } from './FamilyOverview'
 import { ParentSyncStatusR1, type ParentSyncStatusR1 as ParentSyncStatusValueR1 } from '../../hosted-sync/v2/familyPilot/status'
 import { resolveFamilyServicesR1, type FamilyServicesPilotConfigurationR1 } from '../family-services'
+import { ParentAssignmentLibrary } from './ParentAssignmentLibrary'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -569,11 +568,12 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
         </div>
       </div>
       <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
-        {(['overview', 'preferences', 'school-plan', 'review', 'reports', 'backup'] as ParentView[]).map((item) => {
+        {(['overview', 'preferences', 'school-plan', 'assign', 'review', 'reports', 'backup'] as ParentView[]).map((item) => {
           const label = item === 'overview' ? 'Overview'
             : item === 'preferences' ? 'Family setup'
               : item === 'school-plan' ? 'School Plan'
-                : item === 'review' ? 'Review Center'
+                : item === 'assign' ? 'Assignments'
+                  : item === 'review' ? 'Review Center'
                   : item === 'reports' ? 'Progress'
                     : 'Backup/Recovery'
           return <button key={item} type="button" className={`min-h-11 rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} aria-current={view === item ? 'page' : undefined} onClick={() => setView(item)}>{label}</button>
@@ -599,7 +599,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
       ) : view === 'assign' ? (
         <div className="mt-6">
           <button type="button" className="min-h-11 rounded-lg border bg-white px-4 py-2 font-bold" onClick={() => setView('school-plan')}>Back to School Plan</button>
-          <ParentAssignments controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
+          <ParentAssignments key={selected.studentRef} controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
         </div>
       ) : view === 'reports' ? (
         <ParentReports controller={controller} student={selected} refresh={refresh} />
@@ -630,22 +630,10 @@ function ParentAssignments({ controller, student, onOpen, refresh }: {
   readonly onOpen: (studentRef: string, assignmentRef: string) => void
   readonly refresh: () => void
 }) {
-  const courses = controller.coursesFor(student)
-  const [courseRef, setCourseRef] = useState(courses[0]?.courseRef ?? '')
-  const [lessons, setLessons] = useState<Awaited<ReturnType<typeof controller.catalog.runtime.listLessons>>>([])
   const [bindingByAssignment, setBindingByAssignment] = useState<Record<string, Awaited<ReturnType<typeof controller.catalog.getBinding>>>>({})
   const [error, setError] = useState('')
   const assignments = controller.coreSnapshot.state.students.find((item) => item.studentRef === student.studentRef)?.assignments ?? []
-  const selectedCourse = courses.find((item) => item.courseRef === courseRef) ?? courses[0]
-  const availableAssessments = selectedCourse ? controller.assessmentsFor(student, selectedCourse.courseRef) : []
-  const assessmentAssignments = controller.assessmentAssignments(student.studentRef)
 
-  useEffect(() => {
-    let live = true
-    if (!selectedCourse) { setLessons([]); return () => { live = false } }
-    void controller.catalog.runtime.listLessons(selectedCourse.courseRef).then((items) => { if (live) setLessons(items) })
-    return () => { live = false }
-  }, [controller, selectedCourse?.courseRef])
   useEffect(() => {
     let live = true
     void Promise.all(assignments.map(async (assignment) => [assignment.assignmentRef, await controller.catalog.getBinding(assignment.lessonRef)] as const)).then((entries) => {
@@ -654,50 +642,9 @@ function ParentAssignments({ controller, student, onOpen, refresh }: {
     return () => { live = false }
   }, [controller, assignments.map((item) => `${item.assignmentRef}:${item.updatedAt}`).join('|')])
 
-  const studySubject = selectedCourse ? academySubjectToStudySubject(selectedCourse.subject) : 'other'
-  const workingGrade = selectedCourse?.grade ?? Number(student.nominalGrade)
   return (
     <div className="mt-6 space-y-5">
-      <section className="rounded-2xl border bg-white p-5">
-        <label className="font-bold" htmlFor="family-final-course">Admitted course</label>
-        <select id="family-final-course" className="mt-2 w-full rounded-lg border px-3 py-2" value={selectedCourse?.courseRef ?? ''} onChange={(event) => setCourseRef(event.target.value)}>
-          {courses.map((course) => <option key={course.courseRef} value={course.courseRef}>{course.title} · Grade {course.grade} · {course.lessonCount} lessons</option>)}
-        </select>
-        {courses.length === 0 ? <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-3 font-semibold">No curriculum resolves for this configuration. A nominal Grade 6 student needs a supported per-subject working grade.</p> : null}
-        <p className="mt-2 text-sm text-slate-600">Every admitted lesson in this course is available; the course payload is lazy-loaded only after this course is selected.</p>
-      </section>
-      {selectedCourse ? (
-        <FamilyPilotParentAssignPanel
-          student={{ studentRef: student.studentRef, displayName: student.displayName, nominalGrade: Number(student.nominalGrade) }}
-          availableLessons={lessons.map((lesson) => ({ lessonRef: lesson.lessonRef, title: lesson.title, subject: studySubject, grade: lesson.grade }))}
-          currentAssignments={assignments.map((assignment) => ({
-            assignmentRef: assignment.assignmentRef,
-            studentRef: student.studentRef,
-            lessonRef: assignment.lessonRef,
-            lessonTitle: assignment.title,
-            subject: academySubjectToStudySubject(assignment.subject as AcademySubject),
-            status: assignment.state === 'planned' ? 'not-started' : assignment.state === 'active' ? 'in-progress' : assignment.state === 'abandoned' ? 'skipped' : assignment.state,
-            optional: false,
-          }))}
-          workingGrade={[{ subject: studySubject, grade: workingGrade }]}
-          enabledSubjects={[studySubject]}
-          onAssignLesson={async (studentRef, lessonRef) => {
-            try { await controller.assignLesson(studentRef, lessonRef); refresh() } catch (cause) { setError(messageOf(cause)) }
-          }}
-          onResumeAssignment={onOpen}
-        />
-      ) : null}
-      {selectedCourse ? <section className="rounded-2xl border bg-white p-5" data-testid="family-pilot-assessment-assignment">
-        <h3 className="text-xl font-extrabold">Assessments</h3>
-        <p className="mt-1 text-sm text-slate-600">All assessment prompts are learner material. Responses are saved in IndexedDB before submission; answer authority never enters the browser.</p>
-        <ul className="mt-3 space-y-2">{availableAssessments.map((assessment) => {
-          const assigned = assessmentAssignments.find((item) => item.assessmentRef === assessment.assessmentRef)
-          return <li key={assessment.assessmentRef} className="flex flex-wrap items-center justify-between gap-3 rounded-lg bg-slate-100 p-3">
-            <span><strong>{assessment.assessmentRef}</strong><br /><span className="text-sm">{assessment.authorityClass.replaceAll('_', ' ')}{assigned ? ` · ${assigned.status.replaceAll('_', ' ')}` : ''}</span></span>
-            {assigned ? <button type="button" className="rounded-lg border bg-white px-3 py-2 font-bold" onClick={() => onOpen(student.studentRef, assigned.assignmentRef)}>Open</button> : <button type="button" className="rounded-lg bg-cyan-700 px-3 py-2 font-bold text-white" onClick={async () => { try { await controller.assignAssessment(student.studentRef, assessment.assessmentRef); refresh() } catch (cause) { setError(messageOf(cause)) } }}>Assign assessment</button>}
-          </li>
-        })}</ul>
-      </section> : null}
+      <ParentAssignmentLibrary controller={controller} student={student} onOpen={onOpen} refresh={refresh} />
       {assignments.filter((assignment) => bindingByAssignment[assignment.assignmentRef]?.sourceReadinessKind === 'DYNAMIC_SOURCE_REQUIRED').map((assignment) => (
         <DynamicSourceCard key={assignment.assignmentRef} controller={controller} student={student} assignment={assignment} attached={controller.appSnapshot.state.sourceAttachments.some((item) => item.studentRef === student.studentRef && item.assignmentRef === assignment.assignmentRef)} refresh={refresh} />
       ))}

@@ -178,6 +178,31 @@ describe('final Family Pilot real convergence', () => {
     controller.close()
   })
 
+  it('requires an explicit alternate level for manual work, preserves official level, and deduplicates exact items', async () => {
+    const { controller } = makeController()
+    const setup = setupTwo(controller)
+    const student = setup.students.find((item) => item.studentRef === 'student:a')!
+    const alternateLesson = await firstLesson('mathematics', 7)
+
+    await expect(controller.assignLesson('student:a', alternateLesson.lessonRef)).rejects.toThrow(/choose the different supported level explicitly/i)
+    const assigned = await controller.assignLesson('student:a', alternateLesson.lessonRef, { explicitBrowseGrade: '7' })
+    const duplicate = await controller.assignLesson('student:a', alternateLesson.lessonRef, { explicitBrowseGrade: '7' })
+    expect(duplicate.assignmentRef).toBe(assigned.assignmentRef)
+    expect(controller.coreSnapshot.state.students.find((item) => item.studentRef === 'student:a')?.assignments.filter((item) => item.lessonRef === alternateLesson.lessonRef)).toHaveLength(1)
+    expect(student.workingGradeBySubject.mathematics).toBeUndefined()
+    expect(student.nominalGrade).toBe('5')
+
+    const course = catalog.runtime.getCourse(alternateLesson.courseRef)!
+    const assessment = catalog.listAssessments(course.courseRef)[0]!
+    await expect(controller.assignAssessment('student:a', assessment.assessmentRef)).rejects.toThrow(/choose the different supported level explicitly/i)
+    const assignedAssessment = await controller.assignAssessment('student:a', assessment.assessmentRef, { explicitBrowseGrade: '7' })
+    const duplicateAssessment = await controller.assignAssessment('student:a', assessment.assessmentRef, { explicitBrowseGrade: '7' })
+    expect(duplicateAssessment.assignmentRef).toBe(assignedAssessment.assignmentRef)
+    expect(controller.assessmentAssignments('student:a').filter((item) => item.assessmentRef === assessment.assessmentRef)).toHaveLength(1)
+    expect(controller.appSnapshot.state.setup.students.find((item) => item.studentRef === 'student:a')?.workingGradeBySubject.mathematics).toBeUndefined()
+    controller.close()
+  }, 60_000)
+
   it('keeps two students isolated and cold-reopens the exact IndexedDB checkpoint', async () => {
     const { controller, storage, factory } = makeController()
     setupTwo(controller)
