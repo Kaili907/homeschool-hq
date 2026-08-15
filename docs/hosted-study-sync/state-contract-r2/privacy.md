@@ -18,7 +18,7 @@ Dangerous browser authority claims (`role`, `permissions`, `claims`, admin flags
 
 Raw learner responses do not need durable server persistence in this state contract.
 
-The base Family Pilot keeps assessment response values in a separate IndexedDB attempt record and learner-response values in a separate device-local store. Its app document mirrors only assessment status. The Study durable document stores an opaque response-draft ref and minimized assessment/review evidence, never the prose. No existing cross-device authority contract requires review content to be embedded in the sync state.
+The base Family Pilot keeps full learner-response records in separate IndexedDB attempt documents. Family cross-device data R1 adds only the minimum instructional-input projection required to reopen the same item with saved work: opaque attempt/item bindings, selected choice reference or entered text, assessment state, and minimized trusted receipt. The Study durable document still stores only an opaque response-draft reference. Prompts, answer authority, scoring guides, Tutor content, audio and inference remain forbidden.
 
 R2 therefore synchronizes:
 

@@ -1,5 +1,11 @@
 # Family Services staging convergence R1
 
+> Historical boundary note: Family cross-device data completeness R1 supersedes
+> this document's device-local learner-response limitation. The current checkpoint
+> synchronizes the bounded instructional-input projection documented in
+> `docs/family-pilot/FAMILY_CROSS_DEVICE_DATA_COMPLETENESS_R1.md`; it still excludes
+> prompts, answer authority, scoring guides, Tutor data, audio and inference.
+
 Status: `FAMILY_SERVICES_STAGING_CONVERGENCE_R1_READY`
 
 ## Inputs and activation ruling

@@ -1,6 +1,7 @@
 import type { AcademyGrade, AcademySubject, Grade } from '../../../../types'
 import type { FamilyPilotStudentRecordV1 } from '../../../family-pilot/core/schema'
 import type { DurableStudyDocumentV1 } from '../../../family-pilot/durable-ports/schema'
+import type { FamilyAutoPlannerDocumentV1 } from '../../../family-pilot/auto-planner/types'
 
 export const HOSTED_SYNC_STATE_CONTRACT_VERSION = 'hosted-study-sync-state.r2.v1' as const
 
@@ -169,6 +170,44 @@ export interface HostedSyncPrivacyMarkersR2 {
   readonly inferenceIncluded: false
   readonly adultAnswerAuthorityIncluded: false
   readonly answerMaterialIncluded: false
+  /** True only when the bounded instructional-input checkpoint below is non-empty. */
+  readonly instructionalInputIncluded: boolean
+}
+
+export type HostedSyncInstructionalInputValueR1 =
+  | Readonly<{ kind: 'CHOICE'; choiceRef: string; text: null }>
+  | Readonly<{
+      kind: 'TEXT' | 'NUMERIC' | 'CONSTRUCTED_RESPONSE' | 'ACTIVITY_EVIDENCE'
+      choiceRef: null
+      text: string
+    }>
+
+export interface HostedSyncTrustedAssessmentReceiptR1 {
+  readonly assessmentRef: string
+  readonly assessorRef: string
+  readonly assessedAt: string
+  readonly decision: 'CORRECT' | 'INCORRECT' | 'PARTIAL' | 'REVIEW_REQUIRED'
+}
+
+/**
+ * The minimum learner-authored state required to reconstruct a response item on
+ * another device. Prompt text, choices, answer authority, and Tutor state are
+ * deliberately absent because published lesson content supplies the UI.
+ */
+export interface HostedSyncInstructionalInputR1 {
+  readonly schemaVersion: 1
+  readonly studentRef: string
+  readonly assignmentRef: string
+  readonly lessonRef: string
+  readonly attemptRef: string
+  readonly sectionRef: string
+  readonly itemRef: string
+  readonly segmentRef: string
+  readonly input: HostedSyncInstructionalInputValueR1
+  readonly evidenceMode: 'SUPPORTED' | 'INDEPENDENT' | 'MASTERY' | 'COMPLETION' | null
+  readonly assessmentState: 'PENDING_ASSESSMENT' | 'ASSESSED'
+  readonly savedAt: string
+  readonly trustedReceipt: HostedSyncTrustedAssessmentReceiptR1 | null
 }
 
 /**
@@ -189,6 +228,9 @@ export interface HostedSyncStateSnapshotR2 {
   readonly rflStates: readonly HostedSyncRflStateR2[]
   readonly socialSources: readonly HostedSyncSocialSourceStateR2[]
   readonly safetyHolds: readonly HostedSyncSafetyHoldR2[]
+  /** School Plan plus deterministic Auto Planner materialization provenance. */
+  readonly plannerDocument: FamilyAutoPlannerDocumentV1
+  readonly instructionalInputs: readonly HostedSyncInstructionalInputR1[]
   readonly indexedDbDocument: DurableStudyDocumentV1
   readonly privacy: HostedSyncPrivacyMarkersR2
 }

@@ -12,6 +12,7 @@ export const AUTHORITY_CHECKPOINT_PRIVACY_SCHEMA_R1 = 'hosted-study-sync-authori
 const ALLOWED_KEYS = new Set<string>([
   'contractVersion','identity','sync','student','studentProfile','appUpdatedAt','setupCompletedAt','assignments',
   'assessmentStates','rflStates','socialSources','safetyHolds','indexedDbDocument','privacy',
+  'plannerDocument','instructionalInputs',
   'householdRef','studentRef','learnerRef','serverRevision','baseRevision','operationId','idempotencyKey',
   'operationKind','deviceRef','localSequence','createdAt','displayName','updatedAt','activeAssignmentRef',
   'nominalGrade','workingGradeBySubject','enabledSubjects','record','authorityRevision','sessionIdentity','completion',
@@ -39,6 +40,10 @@ const ALLOWED_KEYS = new Set<string>([
   'eventRef','semanticKey','event','occurredAt','payload','proposalRef','route','pinIncluded','bearerIncluded',
   'rawLearnerResponseIncluded','rawTutorConversationIncluded','rawAudioIncluded','inferenceIncluded',
   'adultAnswerAuthorityIncluded','answerMaterialIncluded','pausedAt','resumedAt','pausedSeconds','resumeSegmentRef',
+  'instructionalInputIncluded','input','choiceRef','text','attemptRef','sectionRef','itemRef','assessmentState','savedAt',
+  'trustedReceipt','schoolPlan','materializations','nonSchoolDates','addedSchoolDates','schoolYearStart','schoolYearEnd',
+  'schoolWeekdays','subjects','configuredAt','order','paused','courseRef','lessonsPerDay','startLocalTime',
+  'materializationRef','localDate','workingGrade','unitRef',
   'totalSegments','lastSegmentRef','activeSeconds','progress','pause',
   // Exact legacy R2 RPC import/write vocabulary. These fields remain only so
   // the lossless authority checkpoint can travel through the already-installed

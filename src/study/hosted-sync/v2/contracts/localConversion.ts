@@ -11,11 +11,16 @@ import type {
 import { parseFinalFamilyPilotAppState } from '../../../family-pilot/final-app/state'
 import type { FinalFamilyPilotAttestationRecord } from '../../../family-pilot/final-composition/types'
 import type { SafetyHoldV1 } from '../../../family-pilot/safety/types'
+import { emptyFamilyAutoPlannerDocument } from '../../../family-pilot/auto-planner/plan'
+import { parseFamilyAutoPlannerDocument } from '../../../family-pilot/auto-planner/indexedDbStore'
+import type { FamilyAutoPlannerDocumentV1 } from '../../../family-pilot/auto-planner/types'
+import type { LearnerResponseRecord } from '../../../family-pilot/final-app/learner-response'
 import { parseHostedSyncStateSnapshotR2 } from './parser'
 import {
   HOSTED_SYNC_STATE_CONTRACT_VERSION,
   type HostedSyncAssignmentStateR2,
   type HostedSyncAssessmentStateR2,
+  type HostedSyncInstructionalInputR1,
   type HostedSyncRflStateR2,
   type HostedSyncSafetyCategoryR2,
   type HostedSyncSafetyHoldR2,
@@ -29,6 +34,51 @@ export interface HostedSyncLocalBundleR2 {
   readonly core: FamilyPilotStateV1
   readonly app: FinalFamilyPilotAppStateV1
   readonly indexedDb: DurableStudyDocumentV1
+  readonly plannerDocument?: FamilyAutoPlannerDocumentV1
+  readonly learnerResponses?: readonly LearnerResponseRecord[]
+}
+
+function instructionalInput(record: LearnerResponseRecord): HostedSyncInstructionalInputR1 {
+  const input = record.response.kind === 'CHOICE'
+    ? Object.freeze({ kind: 'CHOICE' as const, choiceRef: record.response.choiceRef, text: null })
+    : Object.freeze({ kind: record.response.kind, choiceRef: null, text: record.response.text })
+  return Object.freeze({
+    schemaVersion: 1 as const,
+    studentRef: record.studentRef,
+    assignmentRef: record.assignmentRef,
+    lessonRef: record.lessonRef,
+    attemptRef: record.attemptRef,
+    sectionRef: record.sectionRef,
+    itemRef: record.itemRef,
+    segmentRef: record.segmentRef,
+    input,
+    evidenceMode: record.evidenceMode,
+    assessmentState: record.status,
+    savedAt: record.savedAt,
+    trustedReceipt: record.assessment ? Object.freeze({ ...record.assessment }) : null,
+  })
+}
+
+function localLearnerResponse(value: HostedSyncInstructionalInputR1): LearnerResponseRecord {
+  const response = value.input.kind === 'CHOICE'
+    ? Object.freeze({ kind: 'CHOICE' as const, choiceRef: value.input.choiceRef })
+    : Object.freeze({ kind: value.input.kind, text: value.input.text })
+  return Object.freeze({
+    schemaVersion: 1,
+    lessonRef: value.lessonRef,
+    studentRef: value.studentRef,
+    assignmentRef: value.assignmentRef,
+    attemptRef: value.attemptRef,
+    sectionRef: value.sectionRef,
+    itemRef: value.itemRef,
+    segmentRef: value.segmentRef,
+    responseType: value.input.kind,
+    evidenceMode: value.evidenceMode,
+    response,
+    status: value.assessmentState,
+    savedAt: value.savedAt,
+    assessment: value.trustedReceipt ? Object.freeze({ ...value.trustedReceipt }) : null,
+  })
 }
 
 export interface HostedSyncAuthorityRevisionsR2 {
@@ -173,6 +223,20 @@ export function exportLocalBundleToHostedSyncStateR2(input: {
   if (!student || !profile) throw new Error('The selected student must exist in both current local documents.')
 
   const studentRfl = local.app.attestations.filter((item) => item.studentRef === identity.studentRef)
+  const plannerDocument = local.plannerDocument ?? emptyFamilyAutoPlannerDocument({
+    householdRef: identity.householdRef,
+    learnerRef: identity.learnerRef,
+  }, local.app.updatedAt)
+  if (!parseFamilyAutoPlannerDocument(plannerDocument, plannerDocument.scope)) {
+    throw new Error('Local School Plan/Auto Planner document is invalid.')
+  }
+  const continuableAssignmentRefs = new Set([
+    ...student.assignments.filter((item) => item.state !== 'completed').map((item) => item.assignmentRef),
+    ...local.app.assessmentAssignments.filter((item) =>
+      item.studentRef === identity.studentRef && item.status !== 'CERTIFIED').map((item) => item.assignmentRef),
+  ])
+  const learnerResponses = (local.learnerResponses ?? []).filter((item) =>
+    item.studentRef === identity.studentRef && continuableAssignmentRefs.has(item.assignmentRef))
   const assignments: HostedSyncAssignmentStateR2[] = student.assignments.map((record) => {
     const saved = local.app.sessions.find((item) => item.studentRef === identity.studentRef && item.assignmentRef === record.assignmentRef)
     const attestation = studentRfl.find((item) => item.assignmentRef === record.assignmentRef)
@@ -208,6 +272,8 @@ export function exportLocalBundleToHostedSyncStateR2(input: {
       .filter((item) => item.studentRef === identity.studentRef).map((item) => socialState(item, revisions))),
     safetyHolds: Object.freeze(local.app.safety.holds
       .filter((item) => item.studentRef === identity.studentRef).map((item) => safetyState(item, revisions))),
+    plannerDocument,
+    instructionalInputs: Object.freeze(learnerResponses.map(instructionalInput)),
     indexedDbDocument: local.indexedDb,
     privacy: Object.freeze({
       pinIncluded: false,
@@ -218,6 +284,7 @@ export function exportLocalBundleToHostedSyncStateR2(input: {
       inferenceIncluded: false,
       adultAnswerAuthorityIncluded: false,
       answerMaterialIncluded: false,
+      instructionalInputIncluded: learnerResponses.length > 0,
     }),
   })
   const parsed = parseHostedSyncStateSnapshotR2(snapshot, identity)
@@ -349,5 +416,11 @@ export function importHostedSyncStateToLocalBundleR2(input: {
     learnerRef: state.identity.learnerRef,
   })
   if (durable.status !== 'current') throw new Error(`Imported IndexedDB state was invalid: ${durable.reasonCode}`)
-  return Object.freeze({ core, app: validatedApp.state, indexedDb: durable.document })
+  return Object.freeze({
+    core,
+    app: validatedApp.state,
+    indexedDb: durable.document,
+    plannerDocument: state.plannerDocument,
+    learnerResponses: Object.freeze(state.instructionalInputs.map(localLearnerResponse)),
+  })
 }

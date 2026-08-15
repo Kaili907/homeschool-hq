@@ -6,6 +6,6 @@
 export const FAMILY_HOSTED_SYNC_CONVERGENCE_R1 = Object.freeze({
   enabled: false as const,
   localFirst: true as const,
-  plannerPersistence: 'DEVICE_LOCAL_INDEXED_DB' as const,
+  plannerPersistence: 'LOCAL_AND_HOSTED_CHECKPOINT' as const,
   hostedContract: 'hosted-study-sync-state.r2.v1' as const,
 })
