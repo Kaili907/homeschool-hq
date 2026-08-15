@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { validateExact } from "../contracts/index.js";
 import {
+  COMPLETED_ASSESSMENT_REVIEW_PERMISSION_VERSION,
+  HintSelectionRequestSchema,
   HintSelectionResultSchema,
   type HintSelectionRequest,
 } from "./contracts.js";
@@ -11,6 +13,33 @@ const LEARNER_SCOPE_REF = "learner-scope:learner-a";
 const SESSION_REF = "session:session-a";
 const CONTEXT_REF = "hint-context:item-001";
 const CURRENT_OPPORTUNITY_REF = "opportunity:item-001-current";
+const CURRENT_REVIEW_EVENT_REF = "review-event:item-001-current";
+const CURRENT_REVIEW_POLICY_REVISION_REF = "policy-revision:review-v1";
+
+type AuthorizedReviewPermission = Extract<
+  HintSelectionRequest["reviewPermission"],
+  { status: "authorized" }
+>;
+
+function authorizedReviewPermission(
+  overrides: Partial<AuthorizedReviewPermission> = {},
+): AuthorizedReviewPermission {
+  return {
+    permissionVersion: COMPLETED_ASSESSMENT_REVIEW_PERMISSION_VERSION,
+    status: "authorized",
+    permissionKind: "study-completed-assessment-review-permission",
+    issuer: "study",
+    permissionRef: "review-permission:item-001-current",
+    learnerScopeRef: LEARNER_SCOPE_REF,
+    sessionRef: SESSION_REF,
+    instructionalContextRef: CONTEXT_REF,
+    opportunityRef: CURRENT_OPPORTUNITY_REF,
+    reviewEventRef: CURRENT_REVIEW_EVENT_REF,
+    policyRevisionRef: CURRENT_REVIEW_POLICY_REVISION_REF,
+    privacyApprovalRef: null,
+    ...overrides,
+  };
+}
 
 const reviewedHints: HintSelectionRequest["reviewedHints"] = [
   {
@@ -60,6 +89,8 @@ function request(
     sessionRef: SESSION_REF,
     contextRef: CONTEXT_REF,
     currentOpportunityRef: CURRENT_OPPORTUNITY_REF,
+    currentReviewEventRef: null,
+    currentReviewPolicyRevisionRef: null,
     assessmentPhase: "instruction-or-practice",
     studyHintCeiling: "guided-step",
     previousAssistanceLevel: "independent",
@@ -74,13 +105,24 @@ function request(
       maximumHintEscalationsBeforeRecheck: 8,
     },
     reviewPermission: {
-      completedAssessmentReviewAllowed: false,
-      privacyApprovalRef: null,
+      status: "not-authorized",
     },
     interventionHistory: [],
     reviewedHints: structuredClone(reviewedHints),
     ...overrides,
   };
+}
+
+function completedReviewRequest(
+  overrides: Partial<HintSelectionRequest> = {},
+): HintSelectionRequest {
+  return request({
+    assessmentPhase: "completed-assessment-review",
+    currentReviewEventRef: CURRENT_REVIEW_EVENT_REF,
+    currentReviewPolicyRevisionRef: CURRENT_REVIEW_POLICY_REVISION_REF,
+    reviewPermission: authorizedReviewPermission(),
+    ...overrides,
+  });
 }
 
 function hintHistory(
@@ -220,10 +262,11 @@ test("active assessment structurally blocks hints despite review and privacy app
     request({
       attemptCount: 3,
       assessmentPhase: "active-graded-or-mastery-check",
-      reviewPermission: {
-        completedAssessmentReviewAllowed: true,
+      currentReviewEventRef: CURRENT_REVIEW_EVENT_REF,
+      currentReviewPolicyRevisionRef: CURRENT_REVIEW_POLICY_REVISION_REF,
+      reviewPermission: authorizedReviewPermission({
         privacyApprovalRef: "privacy-approval:active-item",
-      },
+      }),
     }),
   );
   assert.deepEqual(result, {
@@ -240,10 +283,8 @@ test("completed assessment review requires its specific permission", () => {
   const denied = selectBoundedHint(
     request({
       assessmentPhase: "completed-assessment-review",
-      reviewPermission: {
-        completedAssessmentReviewAllowed: false,
-        privacyApprovalRef: "privacy-approval:review-item",
-      },
+      currentReviewEventRef: CURRENT_REVIEW_EVENT_REF,
+      currentReviewPolicyRevisionRef: CURRENT_REVIEW_POLICY_REVISION_REF,
     }),
   );
   assert.equal(denied.status, "no-hint");
@@ -254,14 +295,123 @@ test("completed assessment review requires its specific permission", () => {
   const allowed = selectBoundedHint(
     request({
       assessmentPhase: "completed-assessment-review",
-      reviewPermission: {
-        completedAssessmentReviewAllowed: true,
-        privacyApprovalRef: null,
-      },
+      currentReviewEventRef: CURRENT_REVIEW_EVENT_REF,
+      currentReviewPolicyRevisionRef: CURRENT_REVIEW_POLICY_REVISION_REF,
+      reviewPermission: authorizedReviewPermission(),
     }),
   );
   assert.equal(allowed.status, "recommended");
   assert.equal(allowed.hintLevel, "nudge");
+});
+
+test("exact completed-review authorization is deterministic under replay", () => {
+  const candidate = completedReviewRequest({ attemptCount: 2 });
+  const snapshot = structuredClone(candidate);
+  const first = selectBoundedHint(candidate);
+  const second = selectBoundedHint(candidate);
+
+  assert.equal(first.status, "recommended");
+  assert.equal(first.hintLevel, "concept-cue");
+  assert.deepEqual(first, second);
+  assert.deepEqual(candidate, snapshot);
+});
+
+for (const [scope, overrides] of [
+  ["review event", { currentReviewEventRef: "review-event:item-001-next" }],
+  ["opportunity", { currentOpportunityRef: "opportunity:item-001-next" }],
+  ["learner", { learnerScopeRef: "learner-scope:learner-b" }],
+  ["session", { sessionRef: "session:session-b" }],
+  ["instructional context", { contextRef: "hint-context:item-002" }],
+  [
+    "review policy revision",
+    { currentReviewPolicyRevisionRef: "policy-revision:review-v2" },
+  ],
+] as const) {
+  test(`completed-review permission cannot be replayed into another ${scope}`, () => {
+    const result = selectBoundedHint(completedReviewRequest(overrides));
+    assert.equal(result.status, "no-hint");
+    if (result.status === "no-hint") {
+      assert.deepEqual(result.reasonCodes, ["completed-review-not-authorized"]);
+    }
+  });
+}
+
+test("a copied privacy approval does not authorize another review event", () => {
+  const result = selectBoundedHint(
+    completedReviewRequest({
+      currentReviewEventRef: "review-event:item-001-next",
+      reviewPermission: authorizedReviewPermission({
+        privacyApprovalRef: "privacy-approval:item-001",
+      }),
+    }),
+  );
+  assert.equal(result.status, "no-hint");
+  if (result.status === "no-hint") {
+    assert.deepEqual(result.reasonCodes, ["completed-review-not-authorized"]);
+  }
+});
+
+test("a copied permission reference does not authorize another learner", () => {
+  const result = selectBoundedHint(
+    completedReviewRequest({ learnerScopeRef: "learner-scope:learner-b" }),
+  );
+  assert.equal(result.status, "no-hint");
+  if (result.status === "no-hint") {
+    assert.deepEqual(result.reasonCodes, ["completed-review-not-authorized"]);
+  }
+});
+
+test("boolean review authority fails the schema and runtime closed", () => {
+  const candidate = {
+    ...completedReviewRequest(),
+    reviewPermission: {
+      completedAssessmentReviewAllowed: true,
+      privacyApprovalRef: "privacy-approval:item-001",
+    },
+  };
+
+  assert.equal(validateExact(HintSelectionRequestSchema, candidate).status, "rejected");
+  assert.equal(selectBoundedHint(candidate).status, "rejected");
+});
+
+test("malformed or non-Study completed-review permission fails closed", () => {
+  const malformedCandidates: unknown[] = [];
+
+  for (const [field, value] of [
+    ["permissionVersion", "study-tutor-v2.completed-assessment-review-permission.v2"],
+    ["permissionKind", "provider-completed-assessment-review-permission"],
+    ["issuer", "provider"],
+  ] as const) {
+    const candidate = structuredClone(completedReviewRequest()) as unknown as {
+      reviewPermission: Record<string, unknown>;
+    };
+    candidate.reviewPermission[field] = value;
+    malformedCandidates.push(candidate);
+  }
+
+  const missingPermissionRef = structuredClone(completedReviewRequest()) as unknown as {
+    reviewPermission: Record<string, unknown>;
+  };
+  delete missingPermissionRef.reviewPermission.permissionRef;
+  malformedCandidates.push(missingPermissionRef);
+
+  const missingReviewEvent = completedReviewRequest({ currentReviewEventRef: null });
+  malformedCandidates.push(missingReviewEvent);
+
+  for (const malformed of malformedCandidates) {
+    assert.equal(selectBoundedHint(malformed).status, "rejected");
+  }
+});
+
+test("ordinary instruction and non-graded review require no completed-review permission", () => {
+  for (const assessmentPhase of [
+    "instruction-or-practice",
+    "non-graded-review",
+  ] as const) {
+    const result = selectBoundedHint(request({ assessmentPhase }));
+    assert.equal(result.status, "recommended");
+    assert.equal(result.hintLevel, "nudge");
+  }
 });
 
 test("assistance classification preserves all four canonical classes", () => {

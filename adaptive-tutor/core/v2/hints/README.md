@@ -22,3 +22,20 @@ deterministic by explicit ordinal with intervention reference as the tie-breaker
 Comprehension rechecks reset the escalation count only within the active current
 opportunity segment. Study hint ceilings and the active-assessment structural
 block remain authoritative after opportunity scoping.
+
+Completed-assessment review uses a separate closed authorization boundary. A
+naked boolean is not accepted. The denied variant contains only
+`status: "not-authorized"`; the authorized variant is versioned, declares
+Study as issuer, and carries an opaque permission reference plus learner,
+session, instructional-context, opportunity, review-event, review-policy, and
+privacy-approval bindings. The selector compares every authorization binding
+with the current Study request. A mismatch produces no completed-review hint,
+while malformed, legacy, provider-shaped, or incomplete permissions reject the
+request as `INVALID_HINT_STATE`.
+
+`currentReviewEventRef` and `currentReviewPolicyRevisionRef` are nullable for
+instruction, practice, active assessment, and non-graded review. A completed
+assessment review requires both current Study references. Ordinary instruction,
+practice, and non-graded review do not require completed-review permission.
+Active graded or mastery assessment remains structurally blocked even when an
+otherwise exact completed-review permission is present.

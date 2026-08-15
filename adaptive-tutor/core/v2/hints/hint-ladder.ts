@@ -85,6 +85,9 @@ function isSemanticallyValidRequest(request: HintSelectionRequest): boolean {
     new Set(interventionRefs).size === interventionRefs.length &&
     new Set(sourceInteractionRefs).size === sourceInteractionRefs.length &&
     new Set(hintRefs).size === hintRefs.length &&
+    (request.assessmentPhase !== "completed-assessment-review" ||
+      (request.currentReviewEventRef !== null &&
+        request.currentReviewPolicyRevisionRef !== null)) &&
     request.interventionHistory.every(
       (entry) =>
         entry.learnerScopeRef === request.learnerScopeRef &&
@@ -99,6 +102,23 @@ function isSemanticallyValidRequest(request: HintSelectionRequest): boolean {
         new Set(hint.eligibleLearnerStageRefs).size ===
           hint.eligibleLearnerStageRefs.length,
     )
+  );
+}
+
+function hasCurrentCompletedReviewAuthorization(
+  request: HintSelectionRequest,
+): boolean {
+  const permission = request.reviewPermission;
+  return (
+    permission.status === "authorized" &&
+    request.currentReviewEventRef !== null &&
+    request.currentReviewPolicyRevisionRef !== null &&
+    permission.learnerScopeRef === request.learnerScopeRef &&
+    permission.sessionRef === request.sessionRef &&
+    permission.instructionalContextRef === request.contextRef &&
+    permission.opportunityRef === request.currentOpportunityRef &&
+    permission.reviewEventRef === request.currentReviewEventRef &&
+    permission.policyRevisionRef === request.currentReviewPolicyRevisionRef
   );
 }
 
@@ -285,7 +305,7 @@ export function selectBoundedHint(requestCandidate: unknown): HintSelectionResul
   }
   if (
     request.assessmentPhase === "completed-assessment-review" &&
-    !request.reviewPermission.completedAssessmentReviewAllowed
+    !hasCurrentCompletedReviewAuthorization(request)
   ) {
     return noHint(currentAssistance, "completed-review-not-authorized");
   }
