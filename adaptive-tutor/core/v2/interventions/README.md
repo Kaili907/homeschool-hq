@@ -9,10 +9,18 @@ The input is bound to opaque Study-issued learner, session, instructional
 context, current opportunity, and interaction references. Every assistance
 history entry repeats the learner/session/context scope and identifies its
 source interaction and opportunity. Earlier interactions and opportunities in
-that exact scope are valid. Any cross-learner, cross-session, or cross-context
-entry rejects the whole input as `INVALID_INTERVENTION_INPUT`; contaminated
-entries are never filtered or counted. Duplicate source-interaction provenance
-also rejects the input so a replay cannot inflate the ladder.
+that exact scope are valid. The array is the complete authoritative ledger in
+oldest-to-newest order. Any cross-learner, cross-session, or cross-context entry
+rejects the whole input as `INVALID_INTERVENTION_INPUT`; contaminated entries
+are never filtered or counted. Duplicate source-interaction provenance also
+rejects the input so a replay cannot inflate the ladder.
+
+`interventionCount` and `recentBreakSuggestion` remain compatibility assertions,
+not decision authority. The count must exactly equal the scoped history length.
+Break cooldown is derived from the latest `suggest-break` in history and the
+number of later ledger entries. While that derived count is inside cooldown,
+the aggregate must say `recent` with the exact same count; without a break or
+once cooldown expires it must say `none`. Any contradiction fails closed.
 
 The ladder states are `continue`, `hint`, `check-prerequisite`, `reteach`,
 `suggest-break`, `escalate`, and `return-to-lesson`. `continue` is an internal
@@ -40,7 +48,9 @@ claim that an escalation reached an adult.
    bounded reteach path; early difficulty continues or hints; exhausted support
    escalates.
 7. A break is always an optional suggestion. Elapsed effort and the approved
-   profile can make it eligible, while a cooldown prevents repeated suggestions.
+   profile can make it eligible, while the history-derived cooldown prevents
+   repeated suggestions. Breaks remain optional and non-punitive; this selector
+   emits no shaming or learner-facing break language.
 
 Every candidate is intersected with Study `allowedActions`. The selector skips
 an unauthorized candidate only when another bounded safe candidate is
