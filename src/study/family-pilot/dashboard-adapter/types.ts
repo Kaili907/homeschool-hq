@@ -1,6 +1,7 @@
 import type { FinalFamilyPilotCatalog } from '../../../curriculum/final-app-data'
 import type { AcademySubject, Grade } from '../../../types'
 import type { FamilyPilotStateV1 } from '../core'
+import type { CanonicalCourseStatus, CanonicalNextCourseOption } from '../course-completion'
 import type { FinalFamilyPilotAttestationRecord, FinalFamilyPilotStorageHealth } from '../final-composition'
 import type {
   FinalFamilyPilotAppStoreStatus,
@@ -96,7 +97,12 @@ export interface FamilyPilotDashboardCourseModel {
   readonly title: string
   readonly assignedLessons: number
   readonly completedLessons: number
+  readonly totalLessons: number
+  readonly requiredAssessments: number
   readonly completionPercent: number | null
+  readonly completionStatus: CanonicalCourseStatus
+  readonly completionDate: string | null
+  readonly nextCourseOptions: readonly CanonicalNextCourseOption[]
   readonly currentUnit: {
     readonly unitRef: string
     readonly unitNumber: number

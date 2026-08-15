@@ -1,5 +1,6 @@
 export type StudentDashboardMissionState =
   | 'no-work'
+  | 'course-complete'
   | 'lesson-ready'
   | 'continue-lesson'
   | 'assessment-pending'

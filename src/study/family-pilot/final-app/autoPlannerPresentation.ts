@@ -6,6 +6,21 @@ export function applyAutoPlannerPresentation(
   model: StudentDashboardModel,
   plan: FamilyAutoPlannerTodayPlan,
 ): StudentDashboardModel {
+  if (plan.status === 'COURSE_COMPLETE') {
+    const titles = plan.completedCourses.map((course) => course.title)
+    return Object.freeze({
+      ...model,
+      progressLabel: titles.length === 1 ? `${titles[0]} complete` : `${titles.length} courses complete`,
+      mission: Object.freeze({
+        state: 'course-complete' as const,
+        eyebrow: 'Course progress',
+        title: 'Course complete',
+        statusLabel: titles.length === 1 ? titles[0] : 'All terminal courses are complete',
+        description: 'Every required lesson and assessment in this course is complete. A parent can review canonical next-course choices; your working level has not changed.',
+      }),
+      todayEmptyLabel: 'Course complete. No next lesson was generated.',
+    })
+  }
   if (plan.status === 'NEEDS_PLAN_SETUP' && model.todayItems.length === 0) {
     return Object.freeze({
       ...model,

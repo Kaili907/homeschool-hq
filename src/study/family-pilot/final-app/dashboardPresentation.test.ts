@@ -64,7 +64,12 @@ function dashboardModel(): FamilyPilotStudentDashboardModel {
         title: 'Grade 5 Mathematics',
         assignedLessons: 0,
         completedLessons: 0,
+        totalLessons: 0,
+        requiredAssessments: 0,
         completionPercent: null,
+        completionStatus: 'NOT_STARTED',
+        completionDate: null,
+        nextCourseOptions: [],
         currentUnit: null,
         assessmentsAssigned: 0,
         assessmentsCertified: 0,
@@ -142,5 +147,30 @@ describe('Family Pilot dashboard presentation convergence', () => {
     expect(serialized).toContain('ma-g5-mathematics')
     expect(serialized).not.toContain('sibling')
     expect(serialized).not.toMatch(/correctAnswer|answerKey|pinDigest|transcript/i)
+  })
+
+  it('shows the exact factual Course complete state on a terminal course card', () => {
+    const source = dashboardModel()
+    const complete: FamilyPilotStudentDashboardModel = {
+      ...source,
+      courses: [{
+        ...source.courses[0],
+        assignedLessons: 2,
+        completedLessons: 2,
+        totalLessons: 2,
+        requiredAssessments: 1,
+        assessmentsAssigned: 1,
+        assessmentsCertified: 1,
+        completionPercent: 100,
+        completionStatus: 'COMPLETE',
+        completionDate: '2026-08-14T13:00:00.000Z',
+      }],
+    }
+    expect(toStudentDashboardPresentation(complete).courses[0]).toMatchObject({
+      completionPercent: 100,
+      progressLabel: 'Course complete',
+      completed: 3,
+      total: 3,
+    })
   })
 })

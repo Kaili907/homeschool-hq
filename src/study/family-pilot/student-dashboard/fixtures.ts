@@ -41,6 +41,10 @@ const MISSION_BY_STATE: Readonly<Record<StudentDashboardMissionState, StudentDas
     state: 'no-work', eyebrow: 'Today’s plan', title: 'No work scheduled today', statusLabel: 'Your schedule is clear',
     description: 'No assignments were supplied for today.',
   },
+  'course-complete': {
+    state: 'course-complete', eyebrow: 'Course progress', title: 'Course complete', statusLabel: 'Grade 5 Mathematics',
+    description: 'Every required lesson and assessment is complete. The working level has not changed.',
+  },
   'lesson-ready': BASE_MODEL.mission,
   'continue-lesson': {
     state: 'continue-lesson', eyebrow: 'Continue your mission', title: 'Evidence in a text', context: 'English Language Arts · Grade 7',
@@ -81,6 +85,7 @@ export function studentDashboardFixture(state: StudentDashboardMissionState): St
 
 export const STUDENT_DASHBOARD_FIXTURE_STATES: readonly StudentDashboardMissionState[] = [
   'no-work',
+  'course-complete',
   'lesson-ready',
   'continue-lesson',
   'assessment-pending',

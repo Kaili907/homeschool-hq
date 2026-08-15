@@ -320,6 +320,41 @@ describe('Family Auto Planner R1 — order, completion, and assessment authority
     const certified = compute({ assignments: [completed], assessments: [{ ...assessment, status: 'CERTIFIED', completedAt: NOW }], catalog: [course] })
     expect(certified.intents[0]).toMatchObject({ kind: 'LESSON', lesson: { lessonRef: secondLesson.lessonRef } })
   })
+
+  it.each(['PLANNED', 'ACTIVE', 'PENDING_ASSESSMENT', 'ADULT_REVIEW_REQUIRED', 'PENDING_GUARDIAN_ATTESTATION'] as const)(
+    'does not report course completion while the final assessment is %s',
+    (status) => {
+      const held = bundle('5', 'mathematics', 1, true)
+      const completed = assignment(held.lessons[0].lessonRef, 'mathematics', 'completed', { completedAt: '2026-08-13T13:00:00.000Z' })
+      const assessmentRef = held.units[0].assessmentRef!
+      const pending: FamilyAutoPlannerAssessmentFact = {
+        assignmentRef: `assessment:${assessmentRef}`, learnerRef: SCOPE.learnerRef,
+        assessmentRef, courseRef: held.course.courseRef, subject: 'mathematics', title: 'Final assessment',
+        status, createdAt: NOW, updatedAt: NOW, completedAt: null,
+      }
+      const result = compute({ assignments: [completed], assessments: [pending], catalog: [held] })
+      expect(result.plan.status).not.toBe('COURSE_COMPLETE')
+      expect(result.plan.completedCourses).toEqual([])
+      expect(result.intents).toEqual([])
+    },
+  )
+
+  it('reports a terminal course only after its final assessment is certified', () => {
+    const held = bundle('5', 'mathematics', 1, true)
+    const completed = assignment(held.lessons[0].lessonRef, 'mathematics', 'completed', { completedAt: '2026-08-13T13:00:00.000Z' })
+    const assessmentRef = held.units[0].assessmentRef!
+    const certified: FamilyAutoPlannerAssessmentFact = {
+      assignmentRef: `assessment:${assessmentRef}`, learnerRef: SCOPE.learnerRef,
+      assessmentRef, courseRef: held.course.courseRef, subject: 'mathematics', title: 'Final assessment',
+      status: 'CERTIFIED', createdAt: NOW, updatedAt: NOW, completedAt: NOW,
+    }
+    const result = compute({ assignments: [completed], assessments: [certified], catalog: [held] })
+    expect(result.plan).toMatchObject({ status: 'COURSE_COMPLETE', reason: 'COURSE_COMPLETE' })
+    expect(result.plan.completedCourses).toEqual([expect.objectContaining({
+      courseRef: held.course.courseRef, subject: 'mathematics', workingGrade: '5', completedAt: NOW,
+    })])
+    expect(result.intents).toEqual([])
+  })
 })
 
 describe('Family Auto Planner R1 — one planner for the whole admitted catalog', () => {
@@ -351,6 +386,24 @@ describe('Family Auto Planner R1 — one planner for the whole admitted catalog'
     expect(result.plan.status).toBe('READY')
     expect(result.intents).toHaveLength(ACADEMY_SUBJECTS.length)
     expect(new Set(result.intents.map((intent) => intent.subject))).toEqual(new Set(ACADEMY_SUBJECTS))
+  })
+
+  it.each(ACADEMY_GRADES)('stops all ten canonical subjects at terminal Grade %s courses', (grade) => {
+    const subjects = [...ACADEMY_SUBJECTS]
+    const catalog = subjects.map((subject) => bundle(grade, subject, 1))
+    const assignments = catalog.map((held) => assignment(held.lessons[0].lessonRef, held.course.subject, 'completed', {
+      completedAt: '2026-08-13T13:00:00.000Z',
+    }))
+    const result = compute({
+      plan: schoolPlan(subjects),
+      learner: learner(grade, subjects),
+      assignments,
+      catalog,
+    })
+    expect(result.plan).toMatchObject({ status: 'COURSE_COMPLETE', reason: 'COURSE_COMPLETE' })
+    expect(result.plan.completedCourses).toHaveLength(ACADEMY_SUBJECTS.length)
+    expect(new Set(result.plan.completedCourses.map((held) => held.subject))).toEqual(new Set(ACADEMY_SUBJECTS))
+    expect(result.intents).toEqual([])
   })
 
   it('makes Grade 6 absence explicit and never changes the official grade', () => {

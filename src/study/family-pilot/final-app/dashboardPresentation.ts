@@ -155,14 +155,18 @@ export function toStudentDashboardPresentation(
       courseRef: course.courseRef ?? `unavailable:${course.subject}`,
       title: course.title,
       context: `${SUBJECT_LABEL[course.subject]} · Working Grade ${course.workingGrade}${course.currentUnit ? ` · Unit ${course.currentUnit.unitNumber}: ${course.currentUnit.title}` : ''}`,
-      completed: course.completedLessons,
-      total: course.assignedLessons,
+      completed: course.completedLessons + course.assessmentsCertified,
+      total: course.totalLessons + course.requiredAssessments,
       completionPercent: course.completionPercent,
-      progressLabel: course.assignedLessons > 0
-        ? `${course.completedLessons} of ${course.assignedLessons} assigned lessons complete`
-        : course.curriculumStatus === 'AVAILABLE'
-          ? 'No assigned work yet'
-          : 'Curriculum unavailable for this working grade',
+      progressLabel: course.completionStatus === 'COMPLETE'
+        ? 'Course complete'
+        : course.completionStatus === 'PENDING_CERTIFICATION'
+          ? 'Final assessment or guardian certification pending — course not complete'
+          : course.curriculumStatus === 'AVAILABLE' && course.totalLessons > 0
+            ? `${course.completedLessons} of ${course.totalLessons} required lessons complete`
+            : course.curriculumStatus === 'AVAILABLE'
+              ? 'No assigned work yet'
+              : 'Curriculum unavailable for this working grade',
       actionable: Boolean(course.action),
     })),
     upcoming: model.upcoming.map((item) => ({

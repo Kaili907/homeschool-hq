@@ -14,6 +14,10 @@ function plan(status: FamilyAutoPlannerTodayPlan['status']): FamilyAutoPlannerTo
     status, reason: status === 'NEEDS_PLAN_SETUP' ? 'SCHOOL_PLAN_MISSING' : status === 'NO_SCHOOL_TODAY' ? 'NON_SCHOOL_DAY' : 'PERSISTENCE_UNAVAILABLE',
     scope: { householdRef: 'household:test', learnerRef: 'student:ada' }, householdTimeZone: 'America/Detroit',
     localDate: '2026-08-14', generatedAt: '2026-08-14T13:00:00.000Z', items: [], blockers: [],
+    completedCourses: status === 'COURSE_COMPLETE' ? [{
+      courseRef: 'ma-g5-mathematics', title: 'Grade 5 Mathematics', subject: 'mathematics',
+      workingGrade: '5', completedAt: '2026-08-14T13:00:00.000Z',
+    }] : [],
     manualOverrideActive: false, offlineMaterializedWorkAvailable: false,
   }
 }
@@ -30,5 +34,12 @@ describe('auto planner learner presentation', () => {
     const result = applyAutoPlannerPresentation(model, plan('NO_SCHOOL_TODAY'))
     expect(result.mission.title).toBe('No school today')
     expect(result.mission.description).toContain('No new daily lessons')
+  })
+
+  it('shows a factual terminal course state without inventing another lesson or changing level', () => {
+    const result = applyAutoPlannerPresentation(model, plan('COURSE_COMPLETE'))
+    expect(result.mission).toMatchObject({ state: 'course-complete', title: 'Course complete' })
+    expect(result.mission.description).toContain('working level has not changed')
+    expect(result.todayEmptyLabel).toContain('No next lesson was generated')
   })
 })

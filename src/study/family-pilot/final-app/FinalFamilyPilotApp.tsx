@@ -12,6 +12,7 @@ import {
   previewFinalFamilyPilotRestore,
   restoreFinalFamilyPilotBackup,
 } from './backup'
+import { deriveCanonicalCourseCompletion, ParentCourseCompletionReport } from '../course-completion'
 import {
   buildFamilyPilotStudentDashboardModel,
   type FamilyPilotStudentDashboardModel,
@@ -747,16 +748,29 @@ function ParentReports({ controller, student, refresh }: {
 }) {
   const coreStudent = controller.coreSnapshot.state.students.find((item) => item.studentRef === student.studentRef)
   if (!coreStudent) return <p className="mt-6">No report data.</p>
+  const assessmentAssignments = controller.assessmentAssignments(student.studentRef)
+  const pendingGuardianAssignmentRefs = new Set(controller.pendingAttestations(student.studentRef)
+    .map((attestation) => attestation.assignmentRef))
   const report = buildFamilyFactualProgress({
     student,
     coreState: controller.coreSnapshot.state,
-    assessments: controller.assessmentAssignments(student.studentRef),
+    assessments: assessmentAssignments,
     catalog: controller.catalog.runtime,
     today: new Date().toISOString().slice(0, 10),
   })
+  const courseCompletion = student.enabledSubjects.map((subject) => deriveCanonicalCourseCompletion({
+    catalog: controller.catalog.runtime,
+    studentRef: student.studentRef,
+    subject,
+    workingGrade: student.workingGradeBySubject[subject] ?? student.nominalGrade,
+    assignments: coreStudent.assignments,
+    assessments: assessmentAssignments,
+    pendingGuardianAssignmentRefs,
+  }))
   return (
     <div className="mt-6 space-y-5">
       <FamilyFactualProgress model={report} />
+      <ParentCourseCompletionReport courses={courseCompletion} />
       <section className="rounded-2xl border bg-white p-5">
         <h3 className="text-xl font-extrabold">Pending records</h3>
         <p className="mt-3 font-semibold">Pending guardian attestations: {controller.pendingAttestations(student.studentRef).length}</p>
