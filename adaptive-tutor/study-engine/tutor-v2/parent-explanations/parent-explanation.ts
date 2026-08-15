@@ -76,13 +76,28 @@ export const REVIEWED_PARENT_EXPLANATION_COPY = {
 export const PARENT_EXPLANATION_DISCLAIMER =
   "This explains an existing recommendation. It does not make or change a learning decision." as const;
 
+const ParentExplanationScopeProvenanceSchema = Type.Object(
+  {
+    householdScopeRef: OpaqueReferenceSchema,
+    learnerScopeRef: OpaqueReferenceSchema,
+    sessionRef: OpaqueReferenceSchema,
+    instructionalContextRef: OpaqueReferenceSchema,
+    currentOpportunityRef: OpaqueReferenceSchema,
+  },
+  { additionalProperties: false },
+);
+
 export const ParentExplanationRequestSchema = Type.Object(
   {
     requestKind: Type.Literal("parent-hub-why"),
     scope: Type.Object(
       {
+        householdScopeRef: OpaqueReferenceSchema,
         selectedLearnerRef: OpaqueReferenceSchema,
         authorizedLearnerRef: OpaqueReferenceSchema,
+        sessionRef: OpaqueReferenceSchema,
+        instructionalContextRef: OpaqueReferenceSchema,
+        currentOpportunityRef: OpaqueReferenceSchema,
       },
       { additionalProperties: false },
     ),
@@ -97,6 +112,7 @@ export const ParentExplanationRequestSchema = Type.Object(
             recommendationEventRef: OpaqueReferenceSchema,
             policyRef: OpaqueReferenceSchema,
             producedAt: ISODateTimeSchema,
+            scope: ParentExplanationScopeProvenanceSchema,
           },
           { additionalProperties: false },
         ),
@@ -110,37 +126,63 @@ export type ParentExplanationRequest = Static<
   typeof ParentExplanationRequestSchema
 >;
 
-export const ParentExplanationSchema = Type.Object(
+const ParentExplanationResultProvenanceSchema = Type.Object(
   {
-    explanationVersion: Type.Literal(PARENT_EXPLANATION_VERSION),
-    audience: Type.Literal("parent-hub"),
-    reasonCode: Type.Union(
-      PARENT_EXPLANATION_REASON_CODES.map((code) => Type.Literal(code)),
-    ),
-    title: Type.String({ minLength: 1, maxLength: 80 }),
-    explanation: Type.String({ minLength: 1, maxLength: 240 }),
-    disclaimer: Type.Literal(PARENT_EXPLANATION_DISCLAIMER),
-    provenance: Type.Object(
+    recommendationRef: OpaqueReferenceSchema,
+    recommendationEventRef: OpaqueReferenceSchema,
+    policyRef: OpaqueReferenceSchema,
+    producedAt: ISODateTimeSchema,
+    scope: ParentExplanationScopeProvenanceSchema,
+  },
+  { additionalProperties: false },
+);
+
+export const ParentExplanationSchema = Type.Union(
+  PARENT_EXPLANATION_REASON_CODES.map((reasonCode) => {
+    const copy = REVIEWED_PARENT_EXPLANATION_COPY[reasonCode];
+    return Type.Object(
       {
-        recommendationRef: OpaqueReferenceSchema,
-        producedAt: ISODateTimeSchema,
+        explanationVersion: Type.Literal(PARENT_EXPLANATION_VERSION),
+        audience: Type.Literal("parent-hub"),
+        reasonCode: Type.Literal(reasonCode),
+        title: Type.Literal(copy.title),
+        explanation: Type.Literal(copy.explanation),
+        disclaimer: Type.Literal(PARENT_EXPLANATION_DISCLAIMER),
+        provenance: ParentExplanationResultProvenanceSchema,
       },
       { additionalProperties: false },
-    ),
-  },
-  { additionalProperties: false, $id: "TutorV2ParentExplanation" },
+    );
+  }),
+  { $id: "TutorV2ParentExplanation" },
 );
 export type ParentExplanation = Static<typeof ParentExplanationSchema>;
 
-export type ParentExplanationResult =
-  | { readonly status: "accepted"; readonly value: ParentExplanation }
-  | {
-      readonly status: "rejected";
-      readonly code:
-        | "PARENT_EXPLANATION_REQUEST_REJECTED"
-        | "PARENT_EXPLANATION_SCOPE_MISMATCH"
-        | "PARENT_EXPLANATION_UNKNOWN_REASON";
-    };
+export const ParentExplanationResultSchema = Type.Union(
+  [
+    Type.Object(
+      {
+        status: Type.Literal("accepted"),
+        value: ParentExplanationSchema,
+      },
+      { additionalProperties: false },
+    ),
+    Type.Object(
+      {
+        status: Type.Literal("rejected"),
+        code: Type.Union([
+          Type.Literal("PARENT_EXPLANATION_REQUEST_REJECTED"),
+          Type.Literal("PARENT_EXPLANATION_SCOPE_MISMATCH"),
+          Type.Literal("PARENT_EXPLANATION_UNKNOWN_REASON"),
+        ]),
+      },
+      { additionalProperties: false },
+    ),
+  ],
+  { $id: "TutorV2ParentExplanationResult" },
+);
+export type ParentExplanationResult = Static<
+  typeof ParentExplanationResultSchema
+>;
 
 function isKnownReasonCode(
   value: string,
@@ -160,9 +202,16 @@ export function explainTutorRecommendationForParentHub(
   }
 
   const { recommendation, scope } = requestResult.value;
+  const recommendationScope = recommendation.provenance.scope;
   if (
     scope.authorizedLearnerRef !== scope.selectedLearnerRef ||
-    recommendation.learnerRef !== scope.selectedLearnerRef
+    recommendation.learnerRef !== scope.selectedLearnerRef ||
+    recommendationScope.householdScopeRef !== scope.householdScopeRef ||
+    recommendationScope.learnerScopeRef !== scope.selectedLearnerRef ||
+    recommendationScope.sessionRef !== scope.sessionRef ||
+    recommendationScope.instructionalContextRef !==
+      scope.instructionalContextRef ||
+    recommendationScope.currentOpportunityRef !== scope.currentOpportunityRef
   ) {
     return {
       status: "rejected",
@@ -187,7 +236,17 @@ export function explainTutorRecommendationForParentHub(
     disclaimer: PARENT_EXPLANATION_DISCLAIMER,
     provenance: {
       recommendationRef: recommendation.recommendationRef,
+      recommendationEventRef:
+        recommendation.provenance.recommendationEventRef,
+      policyRef: recommendation.provenance.policyRef,
       producedAt: recommendation.provenance.producedAt,
+      scope: {
+        householdScopeRef: recommendationScope.householdScopeRef,
+        learnerScopeRef: recommendationScope.learnerScopeRef,
+        sessionRef: recommendationScope.sessionRef,
+        instructionalContextRef: recommendationScope.instructionalContextRef,
+        currentOpportunityRef: recommendationScope.currentOpportunityRef,
+      },
     },
   } as const;
 

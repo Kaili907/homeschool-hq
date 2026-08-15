@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { validateExact } from "../../../core/v2/contracts/index.js";
 import {
   PARENT_EXPLANATION_DISCLAIMER,
   PARENT_EXPLANATION_REASON_CODES,
   PARENT_EXPLANATION_VERSION,
+  ParentExplanationRequestSchema,
+  ParentExplanationResultSchema,
   REVIEWED_PARENT_EXPLANATION_COPY,
   explainTutorRecommendationForParentHub,
 } from "./parent-explanation.js";
@@ -11,8 +14,12 @@ import {
 const baseRequest = {
   requestKind: "parent-hub-why",
   scope: {
+    householdScopeRef: "household:family-a",
     selectedLearnerRef: "learner:child-a",
     authorizedLearnerRef: "learner:child-a",
+    sessionRef: "session:current-a",
+    instructionalContextRef: "instructional-context:fractions-a",
+    currentOpportunityRef: "opportunity:current-a",
   },
   recommendation: {
     learnerRef: "learner:child-a",
@@ -23,6 +30,13 @@ const baseRequest = {
       recommendationEventRef: "event:recommendation-001",
       policyRef: "policy:tutor-v2-parent-why-v1",
       producedAt: "2026-08-14T16:30:00.000Z",
+      scope: {
+        householdScopeRef: "household:family-a",
+        learnerScopeRef: "learner:child-a",
+        sessionRef: "session:current-a",
+        instructionalContextRef: "instructional-context:fractions-a",
+        currentOpportunityRef: "opportunity:current-a",
+      },
     },
   },
 };
@@ -43,6 +57,13 @@ function accepted(reasonCode = baseRequest.recommendation.reasonCode) {
 test("renders reviewed deterministic copy for every explanation class", () => {
   for (const reasonCode of PARENT_EXPLANATION_REASON_CODES) {
     const explanation = accepted(reasonCode);
+    assert.equal(
+      validateExact(ParentExplanationResultSchema, {
+        status: "accepted",
+        value: explanation,
+      }).status,
+      "accepted",
+    );
     assert.deepEqual(
       {
         title: explanation.title,
@@ -53,6 +74,48 @@ test("renders reviewed deterministic copy for every explanation class", () => {
     assert.equal(explanation.reasonCode, reasonCode);
     assert.equal(explanation.disclaimer, PARENT_EXPLANATION_DISCLAIMER);
   }
+});
+
+test("public request and result runtime schemas accept the complete boundary", () => {
+  assert.equal(
+    validateExact(ParentExplanationRequestSchema, baseRequest).status,
+    "accepted",
+  );
+  assert.equal(
+    validateExact(ParentExplanationResultSchema, {
+      status: "accepted",
+      value: accepted(),
+    }).status,
+    "accepted",
+  );
+  assert.equal(
+    validateExact(ParentExplanationResultSchema, {
+      status: "rejected",
+      code: "PARENT_EXPLANATION_SCOPE_MISMATCH",
+    }).status,
+    "accepted",
+  );
+});
+
+test("legacy unbound producer requests fail the public runtime schema", () => {
+  const legacy = structuredClone(baseRequest) as Record<string, unknown>;
+  const scope = legacy.scope as Record<string, unknown>;
+  delete scope.householdScopeRef;
+  delete scope.sessionRef;
+  delete scope.instructionalContextRef;
+  delete scope.currentOpportunityRef;
+  const recommendation = legacy.recommendation as Record<string, unknown>;
+  const provenance = recommendation.provenance as Record<string, unknown>;
+  delete provenance.scope;
+
+  assert.equal(
+    validateExact(ParentExplanationRequestSchema, legacy).status,
+    "rejected",
+  );
+  assert.deepEqual(explainTutorRecommendationForParentHub(legacy), {
+    status: "rejected",
+    code: "PARENT_EXPLANATION_REQUEST_REJECTED",
+  });
 });
 
 test("copy is deterministic and does not claim recommendation authority", () => {
@@ -163,6 +226,10 @@ test("cross-child scope mismatches fail closed without returning child reference
     (value: typeof baseRequest) => {
       value.recommendation.learnerRef = "learner:child-b";
     },
+    (value: typeof baseRequest) => {
+      value.recommendation.provenance.scope.learnerScopeRef =
+        "learner:child-b";
+    },
   ]) {
     const contaminated = structuredClone(baseRequest);
     mutate(contaminated);
@@ -173,6 +240,45 @@ test("cross-child scope mismatches fail closed without returning child reference
     });
     assert.doesNotMatch(JSON.stringify(result), /child-a|child-b/i);
   }
+});
+
+test("cross-household recommendation provenance fails closed", () => {
+  const contaminated = structuredClone(baseRequest);
+  contaminated.recommendation.provenance.scope.householdScopeRef =
+    "household:family-b";
+  assert.deepEqual(explainTutorRecommendationForParentHub(contaminated), {
+    status: "rejected",
+    code: "PARENT_EXPLANATION_SCOPE_MISMATCH",
+  });
+});
+
+test("wrong session recommendation provenance fails closed", () => {
+  const contaminated = structuredClone(baseRequest);
+  contaminated.recommendation.provenance.scope.sessionRef = "session:other";
+  assert.deepEqual(explainTutorRecommendationForParentHub(contaminated), {
+    status: "rejected",
+    code: "PARENT_EXPLANATION_SCOPE_MISMATCH",
+  });
+});
+
+test("wrong instructional context recommendation provenance fails closed", () => {
+  const contaminated = structuredClone(baseRequest);
+  contaminated.recommendation.provenance.scope.instructionalContextRef =
+    "instructional-context:other";
+  assert.deepEqual(explainTutorRecommendationForParentHub(contaminated), {
+    status: "rejected",
+    code: "PARENT_EXPLANATION_SCOPE_MISMATCH",
+  });
+});
+
+test("wrong opportunity recommendation provenance fails closed", () => {
+  const contaminated = structuredClone(baseRequest);
+  contaminated.recommendation.provenance.scope.currentOpportunityRef =
+    "opportunity:other";
+  assert.deepEqual(explainTutorRecommendationForParentHub(contaminated), {
+    status: "rejected",
+    code: "PARENT_EXPLANATION_SCOPE_MISMATCH",
+  });
 });
 
 test("malformed reason values are rejected", () => {
@@ -228,12 +334,20 @@ test("accepted explanations contain only minimized reviewed evidence", () => {
     "title",
   ]);
   assert.deepEqual(Object.keys(explanation.provenance).sort(), [
+    "policyRef",
     "producedAt",
+    "recommendationEventRef",
     "recommendationRef",
+    "scope",
+  ]);
+  assert.deepEqual(Object.keys(explanation.provenance.scope).sort(), [
+    "currentOpportunityRef",
+    "householdScopeRef",
+    "instructionalContextRef",
+    "learnerScopeRef",
+    "sessionRef",
   ]);
   assert.equal("learnerRef" in explanation, false);
-  assert.equal("recommendationEventRef" in explanation.provenance, false);
-  assert.equal("policyRef" in explanation.provenance, false);
 
   const withEvidence = structuredClone(baseRequest) as Record<string, unknown>;
   (withEvidence.recommendation as Record<string, unknown>).evidence = [
@@ -252,6 +366,75 @@ test("answer keys cannot enter the explanation boundary", () => {
   const result = explainTutorRecommendationForParentHub(contaminated);
   assert.equal(result.status, "rejected");
   assert.doesNotMatch(JSON.stringify(result), /private-correct-answer/i);
+});
+
+test("result schema rejects arbitrary sensitive copy substitutions", () => {
+  for (const unreviewedCopy of [
+    "Private note: learner asked not to share this.",
+    "Raw transcript: I think the answer is seven.",
+    "The learner answer was seven.",
+    "Credential: bearer-secret-value.",
+    "Diagnosis: private clinical label.",
+    "Personality judgment: this learner is lazy.",
+  ]) {
+    const result = {
+      status: "accepted",
+      value: structuredClone(
+        accepted("hint-level-changed"),
+      ) as Record<string, unknown>,
+    };
+    result.value.explanation = unreviewedCopy;
+    assert.equal(
+      validateExact(ParentExplanationResultSchema, result).status,
+      "rejected",
+    );
+  }
+});
+
+test("result schema rejects arbitrary private titles and authority fields", () => {
+  const arbitraryTitle = {
+    status: "accepted",
+    value: structuredClone(
+      accepted("break-suggested"),
+    ) as Record<string, unknown>,
+  };
+  arbitraryTitle.value.title = "Private learner answer";
+  assert.equal(
+    validateExact(ParentExplanationResultSchema, arbitraryTitle).status,
+    "rejected",
+  );
+
+  for (const authorityField of [
+    { studyMutationAllowed: true },
+    { masteryDeclared: true },
+    { authoritative: true },
+  ]) {
+    const result = {
+      status: "accepted",
+      value: {
+        ...structuredClone(accepted("break-suggested")),
+        ...authorityField,
+      },
+    };
+    assert.equal(
+      validateExact(ParentExplanationResultSchema, result).status,
+      "rejected",
+    );
+  }
+});
+
+test("result schema binds each reviewed copy to its reason code", () => {
+  const mismatched = {
+    status: "accepted",
+    value: {
+      ...structuredClone(accepted("hint-level-changed")),
+      ...REVIEWED_PARENT_EXPLANATION_COPY["reteach-suggested"],
+    },
+  };
+  assert.equal(
+    validateExact(ParentExplanationResultSchema, mismatched).status,
+    "rejected",
+  );
 });
 
 test("unknown top-level fields are rejected", () => {
