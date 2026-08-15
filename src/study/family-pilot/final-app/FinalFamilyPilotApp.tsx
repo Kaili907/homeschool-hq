@@ -562,7 +562,7 @@ function ParentSurface({ controller, autoPlannerHost, view, setView, onOpen, ref
       ) : view === 'school-plan' ? (
         <div className="mt-6 space-y-4">
           <FamilySchoolPlanPanel controller={controller} host={autoPlannerHost} student={selected} />
-          <button type="button" className="min-h-11 rounded-lg border border-cyan-700 bg-white px-4 py-2 font-bold text-cyan-900" onClick={() => setView('assign')}>Open manual assignments and readiness</button>
+          <button type="button" className="min-h-11 rounded-lg border border-cyan-700 bg-white px-4 py-2 font-bold text-cyan-900" onClick={() => setView('assign')}>Assignments &amp; readiness</button>
         </div>
       ) : view === 'assign' ? (
         <div className="mt-6">
@@ -1039,7 +1039,7 @@ function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh 
             onResume={() => void run(() => controller.resume(studentRef, assignmentRef))}
             onNext={completePresentedSegment}
             onCompleteSegment={completePresentedSegment}
-            onOpenTutor={() => void controller.tutor(studentRef, assignmentRef).then((tutor) => setTutorText(tutor.status === 'ok' ? tutor.step.presentation.visibleText : tutor.message)).catch((error) => setTutorText(messageOf(error)))}
+            onOpenTutor={() => setTutorText('Tutor help is reserved for a future trusted callback. Your lesson and response progress are unchanged.')}
             onExit={(progressRef) => {
               try { controller.hideInstructionalSession(studentRef, assignmentRef) } catch (error) { setMessage(messageOf(error)); return }
               void controller.checkpoint(studentRef, assignmentRef, progressRef ?? null).then(() => onExit())

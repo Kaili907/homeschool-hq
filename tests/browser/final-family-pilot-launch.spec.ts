@@ -67,14 +67,18 @@ function dynamicSourceBundle(lessonRef: string) {
   ]
 }
 
-async function setupFamily(page: Page, students: Array<{ name: string; grade: string }>) {
+async function setupFamily(page: Page, students: Array<{ name: string; grade: string; subjects?: string[] }>) {
   await page.goto(APP_URL)
   await expect(page.getByRole('heading', { name: 'Set up everyone who learns here' })).toBeVisible()
   for (const [index, student] of students.entries()) {
     if (index > 0) await page.getByRole('button', { name: 'Add another learner' }).first().click()
     await page.getByLabel('Display name').fill(student.name)
     await page.getByLabel('Nominal grade').selectOption(student.grade)
-    if (student.grade === '6') {
+    if (student.subjects) {
+      for (const subject of student.subjects) {
+        await page.getByRole('checkbox', { name: subject, exact: true }).check()
+      }
+    } else if (student.grade === '6') {
       await page.getByRole('checkbox', { name: 'Mathematics' }).check()
       await page.getByLabel('Working grade for Mathematics').selectOption('5')
     } else {
@@ -107,12 +111,16 @@ async function parentStudent(page: Page, name: string) {
   }
   await parentStudentSelect.selectOption({ label: name })
   await expect(parentStudentSelect.locator('option:checked')).toHaveText(name)
-  await page.getByRole('button', { name: 'Assignments & readiness' }).click()
+  await openAssignments(page)
+}
+
+async function openAssignments(page: Page) {
+  await page.getByRole('button', { name: 'School Plan', exact: true }).click()
+  await page.getByRole('button', { name: 'Assignments & readiness', exact: true }).click()
 }
 
 async function assign(page: Page, name: string, lesson: Lesson) {
   await parentStudent(page, name)
-  await page.getByRole('button', { name: 'Assignments & readiness' }).click()
   await page.getByLabel('Admitted course').selectOption(lesson.courseRef)
   const row = page.getByRole('listitem').filter({ hasText: lesson.title }).last()
   await expect(row).toBeVisible()
@@ -293,7 +301,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
 
   try {
     await setupFamily(page, [
-      { name: 'Avery Synthetic', grade: '6' },
+      { name: 'Avery Synthetic', grade: '5', subjects: ['Mathematics'] },
       { name: 'Blake Synthetic', grade: '8' },
       { name: 'Casey Synthetic', grade: '12' },
     ])
@@ -311,7 +319,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await page.getByLabel('Confirm learner PIN', { exact: true }).fill('1357')
     await page.getByRole('button', { name: 'Save learner changes' }).click()
     await page.getByRole('button', { name: 'Back to School Plan' }).click()
-    await page.getByRole('button', { name: 'Assignments & readiness' }).click()
+    await openAssignments(page)
     const courseOptions = await page.getByLabel('Admitted course').locator('option').evaluateAll((options) => options.map((option) => (option as HTMLOptionElement).value))
     expect(courseOptions).toEqual([
       'ma-g5-mathematics',
@@ -333,7 +341,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     expect(initial.app.parentAccessVerifier).toBeTruthy()
     expect(JSON.stringify(initial)).not.toMatch(/1357|8642/)
 
-    await page.getByRole('button', { name: 'Family overview' }).click()
+    await page.getByRole('button', { name: 'Overview', exact: true }).click()
     const overview = page.getByTestId('family-overview')
     await expect(overview.getByRole('heading', { name: 'Today across your household' })).toBeVisible()
     const aCard = overview.locator(`[data-learner-ref="${aRef}"]`)
@@ -350,7 +358,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await expect(aCard.getByText('No School Plan', { exact: true })).toBeVisible()
     await expect(overview.getByText('Still has work').locator('..')).toContainText('3')
     await expect.poll(async () => (await supportState(page)).app.activeStudentRef).toBeNull()
-    await page.getByRole('button', { name: 'Assignments & readiness' }).click()
+    await openAssignments(page)
 
     await page.getByRole('button', { name: 'Student', exact: true }).click()
     await page.getByRole('listitem', { name: 'Continue as Avery Synthetic' }).click()
@@ -407,7 +415,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await page.getByRole('button', { name: 'I need an adult check-in' }).click()
     await expect(page.getByText('A parent check-in is now required')).toBeVisible()
     await page.getByRole('button', { name: 'Save and exit' }).click()
-    await expect(page.getByText('This work is paused until a grown-up clears the safety check.', { exact: true }).first()).toBeVisible()
+    await expect(page.getByText('Ask your parent', { exact: true }).first()).toBeVisible()
     await expect(page.getByRole('button', { name: `Continue ${LESSON.a.title}` })).toHaveCount(0)
 
     await page.getByRole('button', { name: 'Switch learner' }).click()
@@ -424,9 +432,11 @@ test('complete family workflow survives a real browser-process reopen and stays 
     expect(responseDocuments(siblingRecords, cRef)).toEqual([])
 
     await parentStudent(page, 'Avery Synthetic')
-    await expect(page.getByRole('heading', { name: 'Safety check-in' })).toBeVisible()
-    await page.getByRole('button', { name: 'Parent checked in — clear hold' }).click()
-    await expect(page.getByRole('heading', { name: 'Safety check-in' })).toHaveCount(0)
+    await page.getByRole('button', { name: 'Review Center', exact: true }).click()
+    await expect(page.getByRole('heading', { name: 'Safety actions' })).toBeVisible()
+    await page.getByRole('button', { name: 'Parent checked in — clear exact hold' }).click()
+    await expect(page.getByRole('status')).toContainText('Safety check-in completed')
+    await expect(page.getByRole('button', { name: 'Parent checked in — clear exact hold' })).toHaveCount(0)
     await openStudent(page, 'Avery Synthetic', '1357')
     await resumeFromHome(page, LESSON.a)
     await expect(page.getByText(/^(?:Part|Step) 3 of 3$/, { exact: true }).first()).toBeVisible()
@@ -447,11 +457,16 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await expect(page.getByTestId('family-overview')).toHaveCount(0)
     await expect(page.getByRole('heading', { name: 'Guardian attestation pending' })).toHaveCount(0)
     await parentStudent(page, 'Avery Synthetic')
+    await page.getByRole('button', { name: 'Review Center', exact: true }).click()
     await page.getByLabel('Parent student').selectOption({ label: 'Blake Synthetic' })
-    await expect(page.getByRole('heading', { name: 'Guardian attestation pending' })).toHaveCount(0)
+    await expect(page.getByRole('heading', { name: 'Blake Synthetic’s Review Center' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Certify adult-observed completion' })).toHaveCount(0)
     await page.getByLabel('Parent student').selectOption({ label: 'Avery Synthetic' })
-    await expect(page.getByRole('heading', { name: 'Guardian attestation pending' })).toBeVisible()
-    await page.getByRole('button', { name: 'Attest: adult observed' }).click()
+    await expect(page.getByRole('heading', { name: 'Avery Synthetic’s Review Center' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Guardian review' })).toBeVisible()
+    await page.getByRole('button', { name: 'Certify adult-observed completion' }).click()
+    await expect(page.getByRole('status')).toContainText('Guardian certification recorded')
+    await openAssignments(page)
     await expect(page.getByRole('heading', { name: 'Guardian attestation pending' })).toHaveCount(0)
 
     await assign(page, 'Avery Synthetic', LESSON.dynamic)
@@ -476,7 +491,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await page.getByRole('button', { name: 'Save and exit' }).click()
 
     await parentStudent(page, 'Avery Synthetic')
-    await page.getByRole('button', { name: 'Family overview' }).click()
+    await page.getByRole('button', { name: 'Overview', exact: true }).click()
     await page.getByRole('button', { name: 'Refresh overview' }).click()
     const refreshedOverview = page.getByTestId('family-overview')
     const refreshedAvery = refreshedOverview.locator(`[data-learner-ref="${aRef}"]`)
@@ -488,19 +503,19 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await expect(refreshedBlake.locator('dt').filter({ hasText: /^Completed$/ }).locator('..')).toContainText('1')
     await expect(refreshedCasey.locator('dt').filter({ hasText: /^Remaining$/ }).locator('..')).toContainText('1')
     await expect.poll(async () => (await supportState(page)).app.activeStudentRef).toBeNull()
-    await page.getByRole('button', { name: 'Reports' }).click()
-    await expect(page.getByRole('heading', { name: 'Subject and grade progress' })).toBeVisible()
-    await expect(page.getByText(/Mathematics · Working Grade 5 · 1\/1 completed/)).toBeVisible()
+    await page.getByRole('button', { name: 'Progress', exact: true }).click()
+    await expect(page.getByRole('heading', { name: 'Avery Synthetic’s progress' })).toBeVisible()
+    await expect(page.getByText('Mathematics · Working Grade 5', { exact: true }).locator('..')).toContainText('1 of 1 assigned lessons complete')
     await expect(page.getByText('Pending guardian attestations: 0')).toBeVisible()
     await expect(page.getByText('Open safety holds: 0')).toBeVisible()
     await parentStudent(page, 'Blake Synthetic')
-    await page.getByRole('button', { name: 'Reports' }).click()
-    await expect(page.getByText(/Mathematics · Working Grade 8 · 1\/1 completed/)).toBeVisible()
+    await page.getByRole('button', { name: 'Progress', exact: true }).click()
+    await expect(page.getByText('Mathematics · Working Grade 8', { exact: true }).locator('..')).toContainText('1 of 1 assigned lessons complete')
 
     await parentStudent(page, 'Avery Synthetic')
-    await page.getByRole('button', { name: 'Backup' }).click()
+    await page.getByRole('button', { name: 'Backup/Recovery', exact: true }).click()
     const downloadPromise = page.waitForEvent('download')
-    await page.getByRole('button', { name: 'Download backup' }).click()
+    await page.getByRole('button', { name: 'Download family backup', exact: true }).click()
     const download = await downloadPromise
     const backupPath = testInfo.outputPath('family-pilot-backup.json')
     await download.saveAs(backupPath)
@@ -508,8 +523,8 @@ test('complete family workflow survives a real browser-process reopen and stays 
     expect(backupText).not.toMatch(/1357|8642|"tutorTranscript"\s*:|rawTutorConversation|"rawAnswer"\s*:/i)
     const backup = JSON.parse(backupText)
     expect(backup.appState.setup.students).toHaveLength(3)
-    expect(backup.learnerTextIncluded).toBe(false)
-    expect(backup.tutorTranscriptIncluded).toBe(false)
+    expect(backup.privacy.learnerAnswerIncluded).toBe(false)
+    expect(backup.privacy.tutorTranscriptIncluded).toBe(false)
     expect(backup.appState.attestations.some((item: any) => item.status === 'CERTIFIED')).toBe(true)
     expect(backup.appState.sourceAttachments[0]).toMatchObject({ title: 'Local government budget update', publisher: 'County public information office' })
     expect(backup.studyDocuments.filter((item: any) => item.record)).toHaveLength(2)
@@ -518,10 +533,19 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await page.getByLabel('Display name').fill('Changed Name')
     await page.getByRole('button', { name: 'Save learner changes' }).click()
     await expect(page.getByRole('heading', { name: 'Edit Changed Name' })).toBeVisible()
-    await page.getByRole('button', { name: 'Backup' }).click()
+    await page.getByRole('button', { name: 'Backup/Recovery', exact: true }).click()
     const chooserPromise = page.waitForEvent('filechooser')
-    await page.getByRole('button', { name: 'Restore validated backup' }).click()
+    await page.getByRole('button', { name: 'Preview backup to restore', exact: true }).click()
+    const restoreConfirmationPromise = page.waitForEvent('dialog')
     await (await chooserPromise).setFiles(backupPath)
+    const restoreConfirmation = await restoreConfirmationPromise
+    expect(restoreConfirmation.type()).toBe('confirm')
+    expect(restoreConfirmation.message()).toContain('Review this backup before restoring')
+    const restoreSuccessPromise = page.waitForEvent('dialog')
+    await restoreConfirmation.accept()
+    const restoreSuccess = await restoreSuccessPromise
+    expect(restoreSuccess.message()).toContain('Backup restored')
+    await restoreSuccess.accept()
     await expect(page.getByLabel('Parent student')).toContainText('Avery Synthetic')
 
     const validBeforeNegative = await supportState(page)
@@ -531,7 +555,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     ]) {
       const alertPromise = page.waitForEvent('dialog')
       const filePromise = page.waitForEvent('filechooser')
-      await page.getByRole('button', { name: 'Restore validated backup' }).click()
+      await page.getByRole('button', { name: 'Preview backup to restore', exact: true }).click()
       await (await filePromise).setFiles(invalid)
       const alert = await alertPromise
       expect(alert.message()).toContain('Backup was not restored')
@@ -639,7 +663,7 @@ test('all 90 grade-subject cells load in Chromium and every subject launches les
 
   for (const cell of gradeNine) {
     await parentStudent(page, 'Matrix Student')
-    await page.getByRole('button', { name: 'Assignments & readiness' }).click()
+    await openAssignments(page)
     await page.getByLabel('Admitted course').selectOption(cell.courseRef)
     const lessonRow = page.getByRole('listitem').filter({ hasText: cell.title }).last()
     await expect(lessonRow).toBeVisible()
@@ -671,7 +695,7 @@ test('an incorrect auto-scoreable response stays pending without answer disclosu
   page.on('request', (request) => requests.push(request.url()))
   await setupFamily(page, [{ name: 'Negative Control Student', grade: '9' }])
   await parentStudent(page, 'Negative Control Student')
-  await page.getByRole('button', { name: 'Assignments & readiness' }).click()
+  await openAssignments(page)
   await page.getByLabel('Admitted course').selectOption('ma-g9-mathematics')
   const assessmentRow = page.getByTestId('family-pilot-assessment-assignment').getByRole('listitem').first()
   await expect(assessmentRow).toContainText('AUTO SCOREABLE')
@@ -691,8 +715,8 @@ test('an incorrect auto-scoreable response stays pending without answer disclosu
   }
   // The first displayed choice is intentionally wrong for the first task (67.0 m² vs 435.8 m²).
   await page.getByRole('button', { name: 'Submit assessment' }).click()
-  await expect(page.getByRole('status')).toContainText('PENDING ASSESSMENT')
-  await expect(page.getByRole('alert')).toContainText(/no correctness was fabricated/i)
+  await expect(page.getByRole('status')).toContainText('Waiting for grading')
+  await expect(page.getByRole('alert')).toContainText(/waiting for trusted grading/i)
   await expect(page.locator('body')).not.toContainText(/correct answer|solution reasoning|answer key/i)
   const records = await idbRecords(page)
   const serialized = JSON.stringify(records)
@@ -704,7 +728,7 @@ test('an incorrect auto-scoreable response stays pending without answer disclosu
 test('rubric-review and guardian assessment authority paths require the authorized parent', async ({ page }) => {
   await setupFamily(page, [{ name: 'Authority Path Student', grade: '10' }])
   await parentStudent(page, 'Authority Path Student')
-  await page.getByRole('button', { name: 'Assignments & readiness' }).click()
+  await openAssignments(page)
 
   const submitAssessment = async (courseRef: string, assessmentRef: string, expectedStatus: RegExp) => {
     await page.getByLabel('Admitted course').selectOption(courseRef)
@@ -726,18 +750,21 @@ test('rubric-review and guardian assessment authority paths require the authoriz
     await page.getByRole('button', { name: 'Back to Home' }).click()
   }
 
-  await submitAssessment('ma-g10-arts-and-music', 'ma-g10-arts-and-music-u01-assessment', /ADULT REVIEW REQUIRED/)
-  await expect(page.getByRole('heading', { name: 'Assessment authority pending' })).toBeVisible()
-  await page.getByRole('button', { name: 'Record rubric review complete' }).click()
-  await expect(page.getByRole('heading', { name: 'Assessment authority pending' })).toHaveCount(0)
+  await submitAssessment('ma-g10-arts-and-music', 'ma-g10-arts-and-music-u01-assessment', /Waiting for review/)
+  await page.getByRole('button', { name: 'Review Center', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Manual review' })).toBeVisible()
+  await page.getByRole('button', { name: 'Confirm authorized manual review complete' }).click()
+  await expect(page.getByRole('status')).toContainText('Manual review recorded')
 
-  await submitAssessment('ma-g10-ready-for-life', 'ma-g10-ready-for-life-u06-assessment', /PENDING GUARDIAN ATTESTATION/)
-  await expect(page.getByRole('heading', { name: 'Assessment authority pending' })).toBeVisible()
-  await page.getByRole('button', { name: 'Guardian attest and certify' }).click()
-  await expect(page.getByRole('heading', { name: 'Assessment authority pending' })).toHaveCount(0)
+  await openAssignments(page)
+  await submitAssessment('ma-g10-ready-for-life', 'ma-g10-ready-for-life-u06-assessment', /Ask your parent/)
+  await page.getByRole('button', { name: 'Review Center', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Guardian review' })).toBeVisible()
+  await page.getByRole('button', { name: 'Guardian certify assessment' }).click()
+  await expect(page.getByRole('status')).toContainText('Guardian certification recorded')
 
-  await page.getByRole('button', { name: 'Reports' }).click()
-  await expect(page.getByText(/Assessments: 2\/2 certified/)).toBeVisible()
+  await page.getByRole('button', { name: 'Progress', exact: true }).click()
+  await expect(page.getByText('2 certified · 0 pending', { exact: true })).toBeVisible()
 })
 
 test('targeted repaired Math, ELA, and physical Science paths render in the learner UI', async ({ page }) => {
@@ -799,9 +826,9 @@ test('a second fresh browser is independent until a Parent Download Backup is re
     await pageA.getByRole('button', { name: 'Save and exit' }).click()
 
     await parentStudent(pageA, 'Transfer Student')
-    await pageA.getByRole('button', { name: 'Backup' }).click()
+    await pageA.getByRole('button', { name: 'Backup/Recovery', exact: true }).click()
     const downloadPromise = pageA.waitForEvent('download')
-    await pageA.getByRole('button', { name: 'Download backup' }).click()
+    await pageA.getByRole('button', { name: 'Download family backup', exact: true }).click()
     const backupPath = testInfo.outputPath('cross-browser-family-pilot-backup.json')
     await (await downloadPromise).saveAs(backupPath)
     const browserAStudy = studyDocument(await idbRecords(pageA), studentRef)
@@ -818,7 +845,16 @@ test('a second fresh browser is independent until a Parent Download Backup is re
 
     const chooserPromise = pageB.waitForEvent('filechooser')
     await pageB.getByRole('button', { name: 'Restore a Family Pilot backup' }).click()
+    const restoreDialogs: Array<{ type: string; message: string }> = []
+    pageB.on('dialog', async (dialog) => {
+      restoreDialogs.push({ type: dialog.type(), message: dialog.message() })
+      await dialog.accept(dialog.type() === 'prompt' ? PARENT_PIN : undefined)
+    })
     await (await chooserPromise).setFiles(backupPath)
+    await expect.poll(() => restoreDialogs.length).toBe(4)
+    expect(restoreDialogs.map((item) => item.type)).toEqual(['confirm', 'prompt', 'prompt', 'alert'])
+    expect(restoreDialogs[0].message).toContain('Review this backup before restoring')
+    expect(restoreDialogs[3].message).toContain('Backup restored')
     await parentStudent(pageB, 'Transfer Student')
     await expect(pageB.getByRole('heading', { name: 'Household learning' })).toBeVisible()
     await expect(pageB.getByLabel('Parent student')).toContainText('Transfer Student')
@@ -858,7 +894,20 @@ test('a refused real IndexedDB write does not advance visible or supporting stat
   await expect(page.getByRole('heading', { name: 'Lesson not ready' })).toBeVisible()
   await expect(page.getByText(/^(?:Part|Step) 2 of 3$/, { exact: true })).toHaveCount(0)
   expect(studyDocument(await idbRecords(page), studentRef)).toEqual(beforeDocument)
-  expect((await supportState(page)).core).toEqual(beforeCore)
+  const afterCore = (await supportState(page)).core
+  const beforeAssignment = assignmentFor(beforeCore, studentRef, LESSON.a.lessonRef)
+  const afterAssignment = assignmentFor(afterCore, studentRef, LESSON.a.lessonRef)
+  expect(afterAssignment).toMatchObject({
+    state: beforeAssignment.state,
+    completedAt: beforeAssignment.completedAt,
+    progress: {
+      completedSegmentRefs: beforeAssignment.progress.completedSegmentRefs,
+      lastSegmentRef: beforeAssignment.progress.lastSegmentRef,
+      totalSegments: beforeAssignment.progress.totalSegments,
+    },
+    pause: beforeAssignment.pause,
+  })
+  expect(afterAssignment.progress.activeSeconds).toBeGreaterThanOrEqual(beforeAssignment.progress.activeSeconds)
   expect((await idbRecords(page)).some((record) => record.key === `${DURABLE_PREFIX}:health` &&
     (record.value as { value?: unknown })?.value === 'write-failed')).toBe(true)
 })
