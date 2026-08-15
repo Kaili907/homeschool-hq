@@ -280,6 +280,7 @@ function recommend(
 ): InterventionLadderResult {
   const isBreak = candidate.state === "suggest-break";
   const isEscalation = candidate.state === "escalate";
+  const interventionCount = input.assistanceHistory.length;
   return {
     status: "recommended",
     recommendation: {
@@ -288,8 +289,8 @@ function recommend(
       state: candidate.state,
       actionKind: actionKindForState(candidate.state),
       reasonCode: candidate.reasonCode,
-      interventionCountAtRecommendation: input.interventionCount,
-      nextInterventionCount: input.interventionCount + 1,
+      interventionCountAtRecommendation: interventionCount,
+      nextInterventionCount: interventionCount + 1,
       terminal: isEscalation,
       breakSuggestionIsOptional: isBreak,
       proposedBreakDurationMinutes: isBreak
@@ -325,12 +326,43 @@ function countAction(input: InterventionLadderInput, actionKind: InterventionAct
   );
 }
 
+/** Study supplies this ledger in oldest-to-newest canonical order. */
+function authoritativeHistory(
+  input: InterventionLadderInput,
+): readonly AssistanceHistoryEntry[] {
+  return input.assistanceHistory;
+}
+
+function interventionsSinceLastBreak(input: InterventionLadderInput): number | null {
+  const history = authoritativeHistory(input);
+  for (let index = history.length - 1; index >= 0; index -= 1) {
+    if (history[index]?.actionKind === "suggest-break") {
+      return history.length - index - 1;
+    }
+  }
+  return null;
+}
+
 function hasRecentBreakProtection(input: InterventionLadderInput): boolean {
-  return (
-    input.recentBreakSuggestion.status === "recent" &&
-    input.recentBreakSuggestion.interventionsSinceSuggestion <
-      input.learnerStageProfile.breakSuggestionCooldownInterventions
-  );
+  const interventionsSinceSuggestion = interventionsSinceLastBreak(input);
+  return interventionsSinceSuggestion !== null &&
+    interventionsSinceSuggestion <
+      input.learnerStageProfile.breakSuggestionCooldownInterventions;
+}
+
+function isBreakAggregateConsistent(input: InterventionLadderInput): boolean {
+  const interventionsSinceSuggestion = interventionsSinceLastBreak(input);
+  const isInsideCooldown = interventionsSinceSuggestion !== null &&
+    interventionsSinceSuggestion <
+      input.learnerStageProfile.breakSuggestionCooldownInterventions;
+
+  if (!isInsideCooldown) {
+    return input.recentBreakSuggestion.status === "none";
+  }
+
+  return input.recentBreakSuggestion.status === "recent" &&
+    input.recentBreakSuggestion.interventionsSinceSuggestion ===
+      interventionsSinceSuggestion;
 }
 
 function breakCandidate(input: InterventionLadderInput): Candidate | null {
@@ -359,8 +391,9 @@ function isSemanticallyValid(input: InterventionLadderInput): boolean {
   );
   return (
     new Set(input.allowedActions).size === input.allowedActions.length &&
-    input.assistanceHistory.length <= input.interventionCount &&
+    input.assistanceHistory.length === input.interventionCount &&
     new Set(sourceInteractionRefs).size === sourceInteractionRefs.length &&
+    isBreakAggregateConsistent(input) &&
     input.assistanceHistory.every(
       (entry) =>
         entry.learnerScopeRef === input.learnerScopeRef &&
@@ -386,13 +419,14 @@ export function recommendNextIntervention(input: unknown): InterventionLadderRes
     ABSOLUTE_MAXIMUM_INTERVENTIONS,
     profile.maximumInterventionsBeforeEscalation,
   );
-  const lastAssistance = evidence.assistanceHistory.at(-1);
+  const interventionCount = evidence.assistanceHistory.length;
+  const lastAssistance = authoritativeHistory(evidence).at(-1);
 
   if (lastAssistance?.actionKind === "escalate") {
     return blocked("ADULT_REVIEW_PENDING");
   }
 
-  if (evidence.interventionCount >= cap) {
+  if (interventionCount >= cap) {
     return blocked("INTERVENTION_LIMIT_REACHED");
   }
 
@@ -404,7 +438,7 @@ export function recommendNextIntervention(input: unknown): InterventionLadderRes
     );
   }
 
-  if (evidence.interventionCount === cap - 1) {
+  if (interventionCount === cap - 1) {
     return firstAuthorized(
       evidence,
       [{ state: "escalate", reasonCode: "bounded-intervention-cap" }],

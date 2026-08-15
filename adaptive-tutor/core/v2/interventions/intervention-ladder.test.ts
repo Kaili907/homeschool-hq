@@ -183,7 +183,7 @@ test("elapsed instructional effort makes an optional break suggestion eligible",
   assert.equal(result.terminal, false);
 });
 
-test("recent break protection prevents a repeated break suggestion", () => {
+test("history-derived break cooldown prevents a repeated break suggestion", () => {
   const result = recommendation(
     recommendNextIntervention(
       input({
@@ -207,11 +207,100 @@ test("recent break protection prevents a repeated break suggestion", () => {
   assert.equal(result.breakSuggestionIsOptional, false);
 });
 
+test("break aggregate that omits a history-backed cooldown fails closed", () => {
+  const result = recommendNextIntervention(
+    input({
+      attemptCount: 4,
+      elapsedInstructionalEffortMinutes: 40,
+      interventionCount: 2,
+      assistanceHistory: [
+        historyEntry("suggest-break", "difficulty-persists", 1),
+        historyEntry("hint", "difficulty-persists", 2),
+      ],
+      recentBreakSuggestion: { status: "none" },
+    }),
+  );
+
+  assert.deepEqual(result, {
+    status: "blocked",
+    code: "INVALID_INTERVENTION_INPUT",
+    proposalOnly: true,
+    tutorMayExecute: false,
+    studyMutationAllowed: false,
+  });
+});
+
+test("break aggregate without matching history fails closed", () => {
+  const result = recommendNextIntervention(
+    input({
+      interventionCount: 1,
+      assistanceHistory: [historyEntry("hint", "difficulty-persists", 1)],
+      recentBreakSuggestion: {
+        status: "recent",
+        interventionsSinceSuggestion: 0,
+      },
+    }),
+  );
+
+  assert.equal(result.status, "blocked");
+  if (result.status === "blocked") {
+    assert.equal(result.code, "INVALID_INTERVENTION_INPUT");
+  }
+});
+
+test("break aggregate count must exactly match scoped history", () => {
+  const result = recommendNextIntervention(
+    input({
+      interventionCount: 2,
+      assistanceHistory: [
+        historyEntry("suggest-break", "difficulty-persists", 1),
+        historyEntry("hint", "difficulty-persists", 2),
+      ],
+      recentBreakSuggestion: {
+        status: "recent",
+        interventionsSinceSuggestion: 0,
+      },
+    }),
+  );
+
+  assert.equal(result.status, "blocked");
+  if (result.status === "blocked") {
+    assert.equal(result.code, "INVALID_INTERVENTION_INPUT");
+  }
+});
+
+test("history-backed break outside cooldown may become eligible again", () => {
+  const result = recommendation(
+    recommendNextIntervention(
+      input({
+        attemptCount: 6,
+        elapsedInstructionalEffortMinutes: 40,
+        interventionCount: 4,
+        assistanceHistory: [
+          historyEntry("suggest-break", "difficulty-persists", 1),
+          historyEntry("hint", "difficulty-persists", 2),
+          historyEntry("hint", "difficulty-persists", 3),
+          historyEntry("reteach", "difficulty-persists", 4),
+        ],
+        recentBreakSuggestion: { status: "none" },
+      }),
+    ),
+  );
+
+  assert.equal(result.state, "suggest-break");
+  assert.equal(result.breakSuggestionIsOptional, true);
+});
+
 test("final available intervention slot escalates only to Study adult review", () => {
   const result = recommendation(
     recommendNextIntervention(
       input({
         interventionCount: 3,
+        assistanceHistory: [
+          historyEntry("return-to-lesson", "difficulty-persists", 1),
+          historyEntry("hint", "difficulty-persists", 2),
+          historyEntry("reteach", "difficulty-persists", 3),
+        ],
         learnerStageProfile: {
           ...PROFILE,
           maximumInterventionsBeforeEscalation: 4,
@@ -378,6 +467,30 @@ test("same learner and session intervention history from another context fails c
   }
 });
 
+test("foreign learner break history fails closed before cooldown can contribute", () => {
+  const result = recommendNextIntervention(
+    input({
+      attemptCount: 4,
+      elapsedInstructionalEffortMinutes: 40,
+      interventionCount: 1,
+      assistanceHistory: [
+        historyEntry("suggest-break", "difficulty-persists", 1, {
+          learnerScopeRef: "learner-scope:learner-b",
+        }),
+      ],
+      recentBreakSuggestion: {
+        status: "recent",
+        interventionsSinceSuggestion: 0,
+      },
+    }),
+  );
+
+  assert.equal(result.status, "blocked");
+  if (result.status === "blocked") {
+    assert.equal(result.code, "INVALID_INTERVENTION_INPUT");
+  }
+});
+
 test("legitimate prior interaction and opportunity in the same intervention scope is accepted", () => {
   const result = recommendation(
     recommendNextIntervention(
@@ -449,6 +562,12 @@ test("bounded intervention count stops after the approved cap", () => {
   const atCap = recommendNextIntervention(
     input({
       interventionCount: 4,
+      assistanceHistory: [
+        historyEntry("return-to-lesson", "difficulty-persists", 1),
+        historyEntry("hint", "difficulty-persists", 2),
+        historyEntry("hint", "difficulty-persists", 3),
+        historyEntry("reteach", "difficulty-persists", 4),
+      ],
       learnerStageProfile: {
         ...PROFILE,
         maximumInterventionsBeforeEscalation: 4,
@@ -498,4 +617,36 @@ test("malformed or inconsistent evidence is rejected exactly", () => {
   if (inconsistentHistory.status === "blocked") {
     assert.equal(inconsistentHistory.code, "INVALID_INTERVENTION_INPUT");
   }
+
+  const unbackedHighCount = recommendNextIntervention(
+    input({
+      interventionCount: 7,
+      learnerStageProfile: {
+        ...PROFILE,
+        maximumInterventionsBeforeEscalation: 8,
+      },
+    }),
+  );
+  assert.equal(unbackedHighCount.status, "blocked");
+  if (unbackedHighCount.status === "blocked") {
+    assert.equal(unbackedHighCount.code, "INVALID_INTERVENTION_INPUT");
+  }
+});
+
+test("latest progress-observed history returns control to the lesson", () => {
+  const result = recommendation(
+    recommendNextIntervention(
+      input({
+        attemptCount: 4,
+        interventionCount: 2,
+        assistanceHistory: [
+          historyEntry("return-to-lesson", "difficulty-persists", 1),
+          historyEntry("hint", "progress-observed", 2),
+        ],
+      }),
+    ),
+  );
+
+  assert.equal(result.state, "return-to-lesson");
+  assert.equal(result.reasonCode, "progress-return-to-study");
 });
