@@ -1,17 +1,33 @@
+import { createHash } from "node:crypto";
+import type { TSchema } from "../../../core/schema/typebox.js";
 import {
   ADAPTIVE_FEATURES,
   evaluateAdaptiveAdmission,
   type AdaptiveAdmissionDecision,
   type AdaptiveFeature,
 } from "../../../core/v2/admission/index.js";
-import { buildConceptGraph } from "../../../core/v2/concepts/index.js";
 import {
+  buildConceptGraph,
+  ConceptPrerequisiteGraph,
+} from "../../../core/v2/concepts/index.js";
+import {
+  ACADEMIC_MISCONCEPTION_REGISTRY_VERSION,
+  AcademicMisconceptionSignalResultSchema,
   createAcademicMisconceptionRegistry,
   type AcademicMisconceptionSignalResult,
 } from "../../../core/v2/misconceptions/index.js";
-import { selectBoundedHint } from "../../../core/v2/hints/index.js";
-import { recommendNextIntervention } from "../../../core/v2/interventions/index.js";
-import { evaluateMasteryEvidence } from "../../../core/v2/mastery/index.js";
+import {
+  HintSelectionResultSchema,
+  selectBoundedHint,
+} from "../../../core/v2/hints/index.js";
+import {
+  InterventionLadderResultSchema,
+  recommendNextIntervention,
+} from "../../../core/v2/interventions/index.js";
+import {
+  evaluateMasteryEvidence,
+  MasteryEvidenceEvaluationSchema,
+} from "../../../core/v2/mastery/index.js";
 import {
   validateExact,
   type AssistanceLevel,
@@ -20,6 +36,7 @@ import {
 } from "../../../core/v2/contracts/index.js";
 import {
   explainTutorRecommendationForParentHub,
+  ParentExplanationSchema,
   type ParentExplanationReasonCode,
 } from "../parent-explanations/index.js";
 import {
@@ -34,7 +51,12 @@ import {
 } from "../reteach/index.js";
 import {
   WAVE2_ADAPTIVE_COMPOSITION_VERSION,
+  Wave2AdaptiveAdmissionDecisionSchema,
   Wave2AdaptiveCompositionRequestSchema,
+  Wave2ConceptQueryResultSchema,
+  Wave2PrerequisiteRepairProposalSchema,
+  Wave2ReteachPlanProposalSchema,
+  Wave2StudyDecisionPacketSchema,
   type Wave2AdaptiveCompositionRequest,
   type Wave2StudyDecisionPacket,
 } from "./contracts.js";
@@ -124,18 +146,165 @@ const INVALID_EVENT_REF = "event:invalid-wave2-request" as const;
 const INVALID_FALLBACK_REF = "fallback:reviewed-static-wave2" as const;
 const INVALID_CONTENT_REF = "content:reviewed-static-wave2" as const;
 
-function canonicalize(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(canonicalize);
+function isSemanticSetPath(path: readonly string[]): boolean {
+  const joined = path.join(".");
+  return joined === "studyAuthority.allowedActions" ||
+    joined === "intervention.allowedActions" ||
+    joined === "reviewedContentAdmissions" ||
+    joined === "capabilityMetadata.capabilities" ||
+    joined === "capabilityMetadata.capabilities.[].actionFamilies";
+}
+
+function canonicalize(value: unknown, path: readonly string[] = []): unknown {
+  if (Array.isArray(value)) {
+    const children = value.map((child) => canonicalize(child, [...path, "[]"]));
+    return isSemanticSetPath(path)
+      ? children.sort((left, right) =>
+        JSON.stringify(left).localeCompare(JSON.stringify(right)))
+      : children;
+  }
   if (value === null || typeof value !== "object") return value;
   return Object.fromEntries(
     Object.entries(value as Record<string, unknown>)
       .sort(([left], [right]) => left.localeCompare(right))
-      .map(([key, child]) => [key, canonicalize(child)]),
+      .map(([key, child]) => [key, canonicalize(child, [...path, key])]),
   );
 }
 
-function requestFingerprint(request: Wave2AdaptiveCompositionRequest): string {
-  return JSON.stringify(canonicalize(request));
+function requestDigest(request: Wave2AdaptiveCompositionRequest): string {
+  const canonicalRequest = JSON.stringify(canonicalize(request));
+  return `sha256:${createHash("sha256").update(canonicalRequest).digest("hex")}`;
+}
+
+const INVALID_SUBSYSTEM_RESULT = Symbol("invalid-wave2-subsystem-result");
+
+function snapshotSubsystemResult(value: unknown): unknown {
+  const ancestors = new Set<object>();
+  const snapshot = (candidate: unknown): unknown => {
+    if (
+      candidate === null ||
+      typeof candidate === "string" ||
+      typeof candidate === "number" ||
+      typeof candidate === "boolean"
+    ) return candidate;
+    if (typeof candidate !== "object" || ancestors.has(candidate)) {
+      throw new TypeError("Subsystem result is not closed JSON data.");
+    }
+    ancestors.add(candidate);
+    try {
+      const prototype = Object.getPrototypeOf(candidate);
+      const descriptors = Object.getOwnPropertyDescriptors(candidate);
+      const ownKeys = Reflect.ownKeys(candidate);
+      if (Array.isArray(candidate)) {
+        if (prototype !== Array.prototype) throw new TypeError("Invalid array prototype.");
+        const length = descriptors.length?.value;
+        if (!Number.isSafeInteger(length) || (length as number) < 0) {
+          throw new TypeError("Invalid array length.");
+        }
+        if (ownKeys.some((key) =>
+          typeof key !== "string" ||
+          (key !== "length" && !/^(?:0|[1-9][0-9]*)$/.test(key)))) {
+          throw new TypeError("Invalid array key.");
+        }
+        const result: unknown[] = [];
+        for (let index = 0; index < (length as number); index += 1) {
+          const descriptor = descriptors[String(index)];
+          if (
+            descriptor === undefined ||
+            descriptor.get !== undefined ||
+            descriptor.set !== undefined ||
+            !("value" in descriptor)
+          ) throw new TypeError("Sparse or accessor array result.");
+          result.push(snapshot(descriptor.value));
+        }
+        return result;
+      }
+      if (prototype !== Object.prototype) throw new TypeError("Invalid object prototype.");
+      if (ownKeys.some((key) => typeof key !== "string")) {
+        throw new TypeError("Symbol subsystem result keys are not allowed.");
+      }
+      const result: Record<string, unknown> = {};
+      for (const key of ownKeys as string[]) {
+        const descriptor = descriptors[key];
+        if (
+          descriptor === undefined ||
+          descriptor.get !== undefined ||
+          descriptor.set !== undefined ||
+          !("value" in descriptor)
+        ) throw new TypeError("Accessor subsystem result.");
+        result[key] = snapshot(descriptor.value);
+      }
+      return result;
+    } finally {
+      ancestors.delete(candidate);
+    }
+  };
+  return snapshot(value);
+}
+
+function validateSubsystemResult<const T extends TSchema>(schema: T, value: unknown) {
+  try {
+    return validateExact(schema, snapshotSubsystemResult(value));
+  } catch {
+    return validateExact(schema, INVALID_SUBSYSTEM_RESULT);
+  }
+}
+
+function exactDataRecord(
+  value: unknown,
+  keys: readonly string[],
+): Record<string, unknown> | null {
+  try {
+    if (
+      value === null ||
+      typeof value !== "object" ||
+      Array.isArray(value) ||
+      Object.getPrototypeOf(value) !== Object.prototype
+    ) return null;
+    const ownKeys = Reflect.ownKeys(value);
+    if (
+      ownKeys.length !== keys.length ||
+      ownKeys.some((key) => typeof key !== "string" || !keys.includes(key))
+    ) return null;
+    const descriptors = Object.getOwnPropertyDescriptors(value);
+    if (!keys.every((key) => {
+      const descriptor = descriptors[key];
+      return descriptor !== undefined && descriptor.get === undefined &&
+        descriptor.set === undefined && "value" in descriptor;
+    })) return null;
+    return Object.fromEntries(keys.map((key) => [key, descriptors[key]?.value]));
+  } catch {
+    return null;
+  }
+}
+
+function acceptedConceptGraph(value: unknown): AcceptedConceptGraph | null {
+  const result = exactDataRecord(value, ["status", "graph"]);
+  if (result === null) return null;
+  return result.status === "accepted" && result.graph instanceof ConceptPrerequisiteGraph
+    ? { status: "accepted", graph: result.graph } as AcceptedConceptGraph
+    : null;
+}
+
+function acceptedMisconceptionRegistry(value: unknown): AcceptedMisconceptionRegistry | null {
+  const result = exactDataRecord(value, ["status", "registry"]);
+  if (result === null || result.status !== "ready") return null;
+  const registry = exactDataRecord(result.registry, ["version", "entryCount", "match"]);
+  if (registry === null) return null;
+  if (
+    registry.version !== ACADEMIC_MISCONCEPTION_REGISTRY_VERSION ||
+    !Number.isSafeInteger(registry.entryCount) ||
+    (registry.entryCount as number) < 0 ||
+    typeof registry.match !== "function"
+  ) return null;
+  return {
+    status: "ready",
+    registry: {
+      version: ACADEMIC_MISCONCEPTION_REGISTRY_VERSION,
+      entryCount: registry.entryCount as number,
+      match: registry.match as AcceptedMisconceptionRegistry["registry"]["match"],
+    },
+  };
 }
 
 function policyCode(value: string): string {
@@ -197,8 +366,8 @@ function safetyHeld(
   };
 }
 
-function sameStringArray(left: readonly string[], right: readonly string[]): boolean {
-  return left.length === right.length && left.every((value, index) => value === right[index]);
+function sameStringSet(left: readonly string[], right: readonly string[]): boolean {
+  return left.length === right.length && left.every((value) => right.includes(value));
 }
 
 function safetyBindingsAreValid(request: Wave2AdaptiveCompositionRequest): boolean {
@@ -283,7 +452,7 @@ function compositionBindingsAreValid(request: Wave2AdaptiveCompositionRequest): 
     request.intervention.currentOpportunityRef !== authority.currentOpportunityRef ||
     request.intervention.interactionRef !== authority.interactionRef ||
     request.intervention.assessmentPhase !== authority.assessmentPhase ||
-    !sameStringArray(request.intervention.allowedActions, authority.allowedActions) ||
+    !sameStringSet(request.intervention.allowedActions, authority.allowedActions) ||
     request.intervention.misconceptionSignal.status !== "none" ||
     request.intervention.prerequisiteSignal.status !== "none" ||
     request.intervention.assistanceHistory.some((entry) =>
@@ -361,9 +530,10 @@ function effectiveCurrentOpportunityAssistance(
 ): AssistanceLevel {
   const opportunityRef = request.studyAuthority.currentOpportunityRef;
   let effective = mostAssisted(
-    request.hintSelection.previousAssistanceLevel,
+    request.masteryEvidence.currentOpportunityAssistanceLevel ?? "independent",
     hintAssistance(currentHintLevel),
   );
+  effective = mostAssisted(effective, request.hintSelection.previousAssistanceLevel);
   for (const entry of request.hintSelection.interventionHistory) {
     if (entry.opportunityRef === opportunityRef) {
       effective = mostAssisted(effective, entry.assistanceLevel);
@@ -402,7 +572,7 @@ function admissionsFor(
     );
     let decision: AdaptiveAdmissionDecision;
     try {
-      decision = subsystems.evaluateAdmission({
+      const rawDecision: unknown = subsystems.evaluateAdmission({
         inputKind: "study-adaptive-admission",
         request: {
           requestVersion: "study-tutor-v2.adaptive-admission.v1",
@@ -416,6 +586,21 @@ function admissionsFor(
         },
         capabilityMetadata: request.capabilityMetadata,
       });
+      const validation = validateSubsystemResult(
+        Wave2AdaptiveAdmissionDecisionSchema,
+        rawDecision,
+      );
+      if (validation.status === "rejected") {
+        return { status: "unavailable", failedFeature: feature };
+      }
+      decision = validation.value as AdaptiveAdmissionDecision;
+      if (decision.status === "admitted" && (
+        decision.invocationBindingRef !== request.studyAuthority.invocationBindingRef ||
+        decision.subjectRef !== request.studyAuthority.subjectRef ||
+        decision.curriculumBindingRef !== request.studyAuthority.curriculumBindingRef ||
+        decision.feature !== feature ||
+        decision.actionFamily !== ACTION_FAMILY[feature]
+      )) return { status: "unavailable", failedFeature: feature };
     } catch {
       return { status: "unavailable", failedFeature: feature };
     }
@@ -427,7 +612,7 @@ function admissionsFor(
 function repairDependencies(
   request: Wave2AdaptiveCompositionRequest,
   graph: AcceptedConceptGraph,
-  signal: AcademicMisconceptionSignalResult,
+  trustedPrerequisiteRefs: readonly string[],
 ): PrerequisiteRepairDependencies {
   const scopeByConcept = new Map(
     request.conceptScopeBindings.map((scope) => [scope.conceptRef, scope]),
@@ -435,6 +620,13 @@ function repairDependencies(
   const reviewedByConcept = new Map(
     request.repairPolicy.reviewedContent.map((entry) => [entry.conceptRef, entry.reviewedContentRefs]),
   );
+  const routeIsCompatible = (conceptRef: string): boolean => {
+    const scope = scopeByConcept.get(conceptRef);
+    return scope !== undefined &&
+      scope.subjectRef === request.studyAuthority.subjectRef &&
+      scope.gradeRef === request.studyAuthority.gradeRef &&
+      scope.curriculumRef === request.studyAuthority.curriculumBindingRef;
+  };
   return {
     prerequisiteGraph: {
       lookup(value) {
@@ -444,7 +636,7 @@ function repairDependencies(
           requestRef: value.requestRef,
           binding: value.binding,
           conceptRef: value.conceptRef,
-          prerequisites: result.conceptRefs.map((conceptRef) => {
+          prerequisites: result.conceptRefs.filter(routeIsCompatible).map((conceptRef) => {
             const scope = scopeByConcept.get(conceptRef);
             if (scope === undefined) throw new Error("Concept scope unavailable");
             return {
@@ -459,19 +651,13 @@ function repairDependencies(
     },
     misconceptionSignals: {
       lookup(value) {
-        const status = signal.status === "conflicting-evidence"
-          ? "conflicting"
-          : signal.status === "possible-misconception"
-            ? "suspected"
-            : "clear";
+        const status = trustedPrerequisiteRefs.length > 0 ? "suspected" : "clear";
         return {
           requestRef: value.requestRef,
           binding: value.binding,
           currentConceptRef: value.currentConceptRef,
           status,
-          suspectedPrerequisiteRefs: status === "suspected"
-            ? [...signal.prerequisiteConceptRefs]
-            : [],
+          suspectedPrerequisiteRefs: status === "suspected" ? [...trustedPrerequisiteRefs] : [],
         };
       },
     },
@@ -527,23 +713,59 @@ function reteachDependencies(request: Wave2AdaptiveCompositionRequest): ReteachD
 }
 
 function parentReason(
-  hintStatus: "recommended" | "no-hint",
   interventionAction: string | null,
-  repairStatus: "proposed" | "withheld",
   repairSource: "adaptive" | "reviewed-static-fallback" | "none",
-  reteachStatus: "proposed" | "withheld",
   masteryRecommendation: string,
 ): ParentExplanationReasonCode {
-  if (repairSource === "reviewed-static-fallback") return "tutor-unavailable-static-fallback-used";
-  if (repairStatus === "proposed") return "prerequisite-review-suggested";
-  if (reteachStatus === "proposed") return "reteach-suggested";
+  if (interventionAction === "check-prerequisite") {
+    return repairSource === "reviewed-static-fallback"
+      ? "tutor-unavailable-static-fallback-used"
+      : "prerequisite-review-suggested";
+  }
+  if (interventionAction === "reteach") return "reteach-suggested";
+  if (interventionAction === "hint") return "hint-level-changed";
   if (interventionAction === "suggest-break") return "break-suggested";
   if (interventionAction === "escalate") return "adult-review-requested";
-  if (hintStatus === "recommended") return "hint-level-changed";
+  if (interventionAction === "return-to-lesson") return "independent-practice-requested";
   if (masteryRecommendation === "insufficient-evidence" || masteryRecommendation === "conflicting-evidence") {
     return "evidence-not-yet-strong-enough";
   }
   return "independent-practice-requested";
+}
+
+async function commitReplayProtectedDecision(
+  request: Wave2AdaptiveCompositionRequest,
+  dependencies: Wave2AdaptiveCompositionDependencies,
+  decision: Wave2StudyDecisionPacket,
+): Promise<Wave2StudyDecisionPacket> {
+  let replayClaim: unknown;
+  try {
+    replayClaim = await dependencies.replayLedger.claim(
+      request.studyAuthority.eventRef,
+      requestDigest(request),
+    );
+  } catch {
+    return request.studyAuthority.safetyStatus === "academic-flow-held"
+      ? safetyHeld(request, "study-safety-held-replay-unavailable")
+      : fallback(request, "replay-ledger-unavailable", null);
+  }
+
+  if (replayClaim === "claimed") return decision;
+  if (replayClaim === "duplicate" || replayClaim === "collision") {
+    return {
+      compositionVersion: WAVE2_ADAPTIVE_COMPOSITION_VERSION,
+      status: replayClaim === "duplicate" ? "duplicate-ignored" : "quarantined",
+      eventRef: request.studyAuthority.eventRef,
+      reasonCode: replayClaim === "duplicate"
+        ? "duplicate-study-effect-prevented"
+        : "event-identity-collision",
+      ...AUTHORITY_BOUNDARY,
+    };
+  }
+
+  return request.studyAuthority.safetyStatus === "academic-flow-held"
+    ? safetyHeld(request, "study-safety-held-replay-unavailable")
+    : fallback(request, "replay-ledger-unavailable", null);
 }
 
 export async function composeWave2AdaptiveIntelligence(
@@ -570,30 +792,12 @@ export async function composeWave2AdaptiveIntelligence(
     return fallback(request, "cross-context-or-authority-binding-rejected", null);
   }
 
-  let replayClaim: Awaited<ReturnType<Wave2ReplayLedgerPort["claim"]>>;
-  try {
-    replayClaim = await dependencies.replayLedger.claim(
-      request.studyAuthority.eventRef,
-      requestFingerprint(request),
-    );
-  } catch {
-    if (request.studyAuthority.safetyStatus === "academic-flow-held") {
-      return safetyHeld(request, "study-safety-held-replay-unavailable");
-    }
-    return fallback(request, "replay-ledger-unavailable", null);
-  }
-  if (replayClaim !== "claimed") {
-    return {
-      compositionVersion: WAVE2_ADAPTIVE_COMPOSITION_VERSION,
-      status: replayClaim === "duplicate" ? "duplicate-ignored" : "quarantined",
-      eventRef: request.studyAuthority.eventRef,
-      reasonCode: replayClaim === "duplicate" ? "duplicate-study-effect-prevented" : "event-identity-collision",
-      ...AUTHORITY_BOUNDARY,
-    };
-  }
-
   if (request.studyAuthority.safetyStatus === "academic-flow-held") {
-    return safetyHeld(request, "study-safety-held");
+    return commitReplayProtectedDecision(
+      request,
+      dependencies,
+      safetyHeld(request, "study-safety-held"),
+    );
   }
 
   const subsystems = dependencies.adaptiveSubsystems ?? DEFAULT_ADAPTIVE_SUBSYSTEMS;
@@ -607,40 +811,65 @@ export async function composeWave2AdaptiveIntelligence(
     return fallback(request, `admission-${refused.decision.reason}`, refused.feature);
   }
 
-  let graph: ReturnType<Wave2AdaptiveSubsystems["buildConceptGraph"]>;
+  let graph: AcceptedConceptGraph;
   try {
-    graph = subsystems.buildConceptGraph(request.conceptGraph);
+    const rawGraph: unknown = subsystems.buildConceptGraph(request.conceptGraph);
+    const accepted = acceptedConceptGraph(rawGraph);
+    if (accepted === null) {
+      return fallback(request, "invalid-concept-graph", "concept-prerequisite-graph");
+    }
+    graph = accepted;
   } catch {
     return fallback(request, "concept-graph-unavailable", "concept-prerequisite-graph");
   }
-  if (graph.status === "rejected") {
-    return fallback(request, "invalid-concept-graph", "concept-prerequisite-graph");
-  }
-  let prerequisiteQuery: ReturnType<Wave2AdaptiveSubsystems["queryConceptGraph"]>;
+  let prerequisiteQuery: Extract<
+    ReturnType<Wave2AdaptiveSubsystems["queryConceptGraph"]>,
+    { readonly status: "found" }
+  >;
   try {
-    prerequisiteQuery = subsystems.queryConceptGraph(
+    const rawQuery: unknown = subsystems.queryConceptGraph(
       graph,
       request.studyAuthority.currentConceptRef,
     );
+    const validation = validateSubsystemResult(Wave2ConceptQueryResultSchema, rawQuery);
+    if (
+      validation.status === "rejected" ||
+      validation.value.status !== "found" ||
+      new Set(validation.value.conceptRefs).size !== validation.value.conceptRefs.length
+    ) return fallback(request, "concept-query-rejected", "concept-prerequisite-graph");
+    prerequisiteQuery = validation.value;
   } catch {
     return fallback(request, "concept-query-unavailable", "concept-prerequisite-graph");
   }
-  if (prerequisiteQuery.status !== "found") {
-    return fallback(request, "concept-query-rejected", "concept-prerequisite-graph");
-  }
 
-  let registry: ReturnType<Wave2AdaptiveSubsystems["createMisconceptionRegistry"]>;
+  let registry: AcceptedMisconceptionRegistry;
   try {
-    registry = subsystems.createMisconceptionRegistry(request.misconceptionRegistry);
+    const rawRegistry: unknown = subsystems.createMisconceptionRegistry(
+      request.misconceptionRegistry,
+    );
+    const accepted = acceptedMisconceptionRegistry(rawRegistry);
+    if (
+      accepted === null ||
+      accepted.registry.entryCount !== request.misconceptionRegistry.length
+    ) return fallback(request, "invalid-misconception-registry", "misconception-analysis");
+    registry = accepted;
   } catch {
     return fallback(request, "misconception-registry-unavailable", "misconception-analysis");
   }
-  if (registry.status === "rejected") {
-    return fallback(request, "invalid-misconception-registry", "misconception-analysis");
-  }
-  let misconception: ReturnType<Wave2AdaptiveSubsystems["matchMisconception"]>;
+  let misconception: AcademicMisconceptionSignalResult;
   try {
-    misconception = subsystems.matchMisconception(registry, request.misconceptionMatch);
+    const rawMisconception: unknown = subsystems.matchMisconception(
+      registry,
+      request.misconceptionMatch,
+    );
+    const validation = validateSubsystemResult(
+      AcademicMisconceptionSignalResultSchema,
+      rawMisconception,
+    );
+    if (validation.status === "rejected") {
+      return fallback(request, "misconception-match-unavailable", "misconception-analysis");
+    }
+    misconception = validation.value;
   } catch {
     return fallback(request, "misconception-match-unavailable", "misconception-analysis");
   }
@@ -659,43 +888,31 @@ export async function composeWave2AdaptiveIntelligence(
     return fallback(request, "misconception-authority-rejected", "misconception-analysis");
   }
 
-  let hintProjection: PendingStudyDecision["hint"];
-  if (request.studyAuthority.allowedActions.includes("hint")) {
-    let hint: ReturnType<Wave2AdaptiveSubsystems["selectHint"]>;
-    try {
-      hint = subsystems.selectHint({
-        ...request.hintSelection,
-        misconceptionSignalCode: misconception.status === "possible-misconception"
-          ? "academic-misconception-signal"
-          : null,
-      });
-    } catch {
-      return fallback(request, "hint-ladder-unavailable", "hint-ladder");
-    }
-    if (hint.status === "rejected") {
-      return fallback(request, "invalid-hint-state", "hint-ladder");
-    }
-    hintProjection = {
-      status: hint.status,
-      hintLevel: hint.hintLevel,
-      reviewedContentRef: hint.hintMetadata?.reviewedContentRef ?? null,
-      unrestrictedProviderProseAllowed: false,
-    };
-  } else {
-    hintProjection = {
-      status: "no-hint",
-      hintLevel: "none",
-      reviewedContentRef: null,
-      unrestrictedProviderProseAllowed: false,
-    };
-  }
+  if (
+    misconception.conceptRef !== null &&
+    misconception.conceptRef !== request.studyAuthority.currentConceptRef
+  ) return fallback(request, "misconception-scope-rejected", "misconception-analysis");
 
-  const prerequisiteRef = misconception.status === "possible-misconception"
-    ? misconception.prerequisiteConceptRefs[0] ?? prerequisiteQuery.conceptRefs[0]
-    : prerequisiteQuery.conceptRefs[0];
+  const scopeByConcept = new Map(
+    request.conceptScopeBindings.map((scope) => [scope.conceptRef, scope]),
+  );
+  const routeIsCompatible = (conceptRef: string): boolean => {
+    const scope = scopeByConcept.get(conceptRef);
+    return scope !== undefined &&
+      scope.subjectRef === request.studyAuthority.subjectRef &&
+      scope.gradeRef === request.studyAuthority.gradeRef &&
+      scope.curriculumRef === request.studyAuthority.curriculumBindingRef;
+  };
+  const scopedPrerequisiteRefs = prerequisiteQuery.conceptRefs.filter(routeIsCompatible);
+  const trustedPrerequisiteRefs = misconception.status === "possible-misconception"
+    ? misconception.prerequisiteConceptRefs.filter((conceptRef) =>
+      scopedPrerequisiteRefs.includes(conceptRef) && routeIsCompatible(conceptRef))
+    : [];
+  const prerequisiteRef = trustedPrerequisiteRefs[0];
+
   let intervention: ReturnType<Wave2AdaptiveSubsystems["recommendIntervention"]>;
   try {
-    intervention = subsystems.recommendIntervention({
+    const rawIntervention: unknown = subsystems.recommendIntervention({
       ...request.intervention,
       misconceptionSignal: misconception.status === "possible-misconception" &&
         misconception.misconceptionRef !== null
@@ -706,8 +923,64 @@ export async function composeWave2AdaptiveIntelligence(
         : { status: "suspected", prerequisiteConceptRef: prerequisiteRef },
       safetyRestriction: { status: "none", restrictionRef: null },
     });
+    const validation = validateSubsystemResult(
+      InterventionLadderResultSchema,
+      rawIntervention,
+    );
+    if (validation.status === "rejected") {
+      return fallback(request, "intervention-ladder-unavailable", "intervention-ladder");
+    }
+    intervention = validation.value;
+    if (intervention.status === "recommended" && (
+      intervention.recommendation.interactionRef !== request.studyAuthority.interactionRef ||
+      !request.studyAuthority.allowedActions.includes(intervention.recommendation.actionKind)
+    )) return fallback(request, "invalid-intervention-state", "intervention-ladder");
   } catch {
     return fallback(request, "intervention-ladder-unavailable", "intervention-ladder");
+  }
+
+  const interventionAction = intervention.status === "recommended"
+    ? intervention.recommendation.actionKind
+    : null;
+  const interventionReason = intervention.status === "recommended"
+    ? intervention.recommendation.reasonCode
+    : intervention.code;
+
+  let hintProjection: PendingStudyDecision["hint"] = {
+    status: "no-hint",
+    hintLevel: "none",
+    reviewedContentRef: null,
+    unrestrictedProviderProseAllowed: false,
+  };
+  if (interventionAction === "hint") {
+    try {
+      const rawHint: unknown = subsystems.selectHint({
+        ...request.hintSelection,
+        misconceptionSignalCode: misconception.status === "possible-misconception"
+          ? "academic-misconception-signal"
+          : null,
+      });
+      const validation = validateSubsystemResult(HintSelectionResultSchema, rawHint);
+      if (validation.status === "rejected" || validation.value.status === "rejected") {
+        return fallback(request, "invalid-hint-state", "hint-ladder");
+      }
+      const hint = validation.value;
+      if (hint.status === "recommended" && !request.hintSelection.reviewedHints.some(
+        (reviewed) =>
+          reviewed.hintRef === hint.hintMetadata.hintRef &&
+          reviewed.reviewedContentRef === hint.hintMetadata.reviewedContentRef &&
+          reviewed.reviewRef === hint.hintMetadata.reviewRef &&
+          reviewed.hintLevel === hint.hintMetadata.hintLevel,
+      )) return fallback(request, "invalid-hint-state", "hint-ladder");
+      hintProjection = {
+        status: hint.status,
+        hintLevel: hint.hintLevel,
+        reviewedContentRef: hint.hintMetadata?.reviewedContentRef ?? null,
+        unrestrictedProviderProseAllowed: false,
+      };
+    } catch {
+      return fallback(request, "hint-ladder-unavailable", "hint-ladder");
+    }
   }
 
   const effectiveAssistance = effectiveCurrentOpportunityAssistance(
@@ -725,13 +998,22 @@ export async function composeWave2AdaptiveIntelligence(
   }
   let mastery: ReturnType<Wave2AdaptiveSubsystems["evaluateMastery"]>;
   try {
-    mastery = subsystems.evaluateMastery({
+    const rawMastery: unknown = subsystems.evaluateMastery({
       ...request.masteryEvidence,
       currentSessionRef: request.studyAuthority.sessionRef,
       currentInstructionalContextRef: request.studyAuthority.instructionalContextRef,
       currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
       currentOpportunityAssistanceLevel: effectiveAssistance,
     });
+    const validation = validateSubsystemResult(MasteryEvidenceEvaluationSchema, rawMastery);
+    if (validation.status === "rejected") {
+      return fallback(request, "mastery-evidence-unavailable", "mastery-evidence");
+    }
+    mastery = validation.value;
+    if (mastery.evaluationStatus === "summarized" && (
+      mastery.learnerScopeRef !== request.studyAuthority.learnerScopeRef ||
+      mastery.conceptRef !== request.studyAuthority.currentConceptRef
+    )) return fallback(request, "invalid-mastery-evidence", "mastery-evidence");
   } catch {
     return fallback(request, "mastery-evidence-unavailable", "mastery-evidence");
   }
@@ -747,18 +1029,38 @@ export async function composeWave2AdaptiveIntelligence(
   };
   const safety = { safetyHold: false, mayContinueAcademicFlow: true } as const;
   let repairProjection: PendingStudyDecision["repair"];
-  if (request.studyAuthority.allowedActions.includes("check-prerequisite")) {
+  if (interventionAction === "check-prerequisite") {
     let repair: Awaited<ReturnType<Wave2AdaptiveSubsystems["proposeRepair"]>>;
+    const repairRequestRef = `request:${request.studyAuthority.eventRef.replace(":", "-")}-repair`;
     try {
-      repair = await subsystems.proposeRepair({
-        requestRef: `request:${request.studyAuthority.eventRef.replace(":", "-")}-repair`,
+      const rawRepair: unknown = await subsystems.proposeRepair({
+        requestRef: repairRequestRef,
         binding,
         currentConceptRef: request.studyAuthority.currentConceptRef,
         assessmentPhase: request.studyAuthority.assessmentPhase,
         safety,
         maxRepairDepth: request.repairPolicy.maximumDepth,
         reviewedStaticFallback: request.repairPolicy.reviewedStaticFallback,
-      }, repairDependencies(request, graph, misconception));
+      }, repairDependencies(request, graph, trustedPrerequisiteRefs));
+      const validation = validateSubsystemResult(
+        Wave2PrerequisiteRepairProposalSchema,
+        rawRepair,
+      );
+      if (validation.status === "rejected") {
+        return fallback(request, "prerequisite-repair-unavailable", "prerequisite-repair");
+      }
+      repair = validation.value;
+      const allowedRepairContentRefs = new Set([
+        ...request.repairPolicy.reviewedStaticFallback.reviewedContentRefs,
+        ...request.repairPolicy.reviewedContent.flatMap((entry) => entry.reviewedContentRefs),
+      ]);
+      if (
+        repair.requestRef !== repairRequestRef ||
+        repair.currentConceptRef !== request.studyAuthority.currentConceptRef ||
+        repair.suspectedMissingPrerequisiteRefs.some((ref) => !routeIsCompatible(ref)) ||
+        repair.recommendedRepairConceptRefs.some((ref) => !routeIsCompatible(ref)) ||
+        repair.reviewedContentRefs.some((ref) => !allowedRepairContentRefs.has(ref))
+      ) return fallback(request, "invalid-prerequisite-repair", "prerequisite-repair");
     } catch {
       return fallback(request, "prerequisite-repair-unavailable", "prerequisite-repair");
     }
@@ -777,7 +1079,9 @@ export async function composeWave2AdaptiveIntelligence(
     repairProjection = {
       status: "withheld",
       proposalRef: "proposal:wave2-repair-withheld",
-      reasonCode: "study-action-not-authorized",
+      reasonCode: request.studyAuthority.allowedActions.includes("check-prerequisite")
+        ? "primary-adaptive-action-not-selected"
+        : "study-action-not-authorized",
       source: "none",
       recommendedConceptRefs: [],
       reviewedContentRefs: [],
@@ -788,11 +1092,12 @@ export async function composeWave2AdaptiveIntelligence(
   }
 
   let reteachProjection: PendingStudyDecision["reteach"];
-  if (request.studyAuthority.allowedActions.includes("reteach")) {
+  if (interventionAction === "reteach") {
     let reteach: Awaited<ReturnType<Wave2AdaptiveSubsystems["proposeReteach"]>>;
+    const reteachRequestRef = `request:${request.studyAuthority.eventRef.replace(":", "-")}-reteach`;
     try {
-      reteach = await subsystems.proposeReteach({
-        requestRef: `request:${request.studyAuthority.eventRef.replace(":", "-")}-reteach`,
+      const rawReteach: unknown = await subsystems.proposeReteach({
+        requestRef: reteachRequestRef,
         binding,
         currentConceptRef: request.studyAuthority.currentConceptRef,
         assessmentPhase: request.studyAuthority.assessmentPhase,
@@ -802,6 +1107,23 @@ export async function composeWave2AdaptiveIntelligence(
         maxRepeatedLoops: request.reteachPolicy.maximumRepeatedLoops,
         reviewedStaticFallback: request.reteachPolicy.reviewedStaticFallback,
       }, reteachDependencies(request));
+      const validation = validateSubsystemResult(Wave2ReteachPlanProposalSchema, rawReteach);
+      if (validation.status === "rejected") {
+        return fallback(request, "reteach-unavailable", "reteach");
+      }
+      reteach = validation.value;
+      const allowedReteachContentRefs = new Set([
+        ...request.reteachPolicy.reviewedContentRefs,
+        ...request.reteachPolicy.reviewedStaticFallback.reviewedContentRefs,
+      ]);
+      if (
+        reteach.requestRef !== reteachRequestRef ||
+        reteach.currentConceptRef !== request.studyAuthority.currentConceptRef ||
+        reteach.steps.some((step) =>
+          step.conceptRef !== request.studyAuthority.currentConceptRef ||
+          !allowedReteachContentRefs.has(step.reviewedContentRef)) ||
+        reteach.reviewedContentRefs.some((ref) => !allowedReteachContentRefs.has(ref))
+      ) return fallback(request, "invalid-reteach-plan", "reteach");
     } catch {
       return fallback(request, "reteach-unavailable", "reteach");
     }
@@ -821,7 +1143,9 @@ export async function composeWave2AdaptiveIntelligence(
     reteachProjection = {
       status: "withheld",
       proposalRef: "proposal:wave2-reteach-withheld",
-      reasonCode: "study-action-not-authorized",
+      reasonCode: request.studyAuthority.allowedActions.includes("reteach")
+        ? "primary-adaptive-action-not-selected"
+        : "study-action-not-authorized",
       source: "none",
       reviewedContentRefs: [],
       stepCount: 0,
@@ -832,20 +1156,18 @@ export async function composeWave2AdaptiveIntelligence(
     };
   }
 
-  const interventionAction = intervention.status === "recommended"
-    ? intervention.recommendation.actionKind
-    : null;
-  const interventionReason = intervention.status === "recommended"
-    ? intervention.recommendation.reasonCode
-    : intervention.code;
   const masterySampleCount = mastery.evaluationStatus === "summarized"
     ? mastery.sampleCount
     : 0;
   let parentExplanation: PendingStudyDecision["parentExplanation"] = null;
   if (request.parentWhy !== null) {
-    let explanation: ReturnType<Wave2AdaptiveSubsystems["explainParent"]>;
+    const explanationReason = parentReason(
+      interventionAction,
+      repairProjection.source,
+      mastery.recommendation,
+    );
     try {
-      explanation = subsystems.explainParent({
+      const rawExplanation: unknown = subsystems.explainParent({
         requestKind: "parent-hub-why",
         scope: {
           selectedLearnerRef: request.parentWhy.selectedLearnerRef,
@@ -854,14 +1176,7 @@ export async function composeWave2AdaptiveIntelligence(
         recommendation: {
           learnerRef: request.studyAuthority.learnerScopeRef,
           recommendationRef: request.parentWhy.recommendationRef,
-          reasonCode: parentReason(
-            hintProjection.status,
-            interventionAction,
-            repairProjection.status,
-            repairProjection.source,
-            reteachProjection.status,
-            mastery.recommendation,
-          ),
+          reasonCode: explanationReason,
           provenance: {
             producer: "study-engine",
             recommendationEventRef: request.parentWhy.recommendationEventRef,
@@ -870,26 +1185,45 @@ export async function composeWave2AdaptiveIntelligence(
           },
         },
       });
+      const explanationResult = exactDataRecord(rawExplanation, ["status", "value"]);
+      if (explanationResult?.status !== "accepted") {
+        return fallback(request, "parent-explanation-rejected", "parent-explanation");
+      }
+      const validation = validateSubsystemResult(
+        ParentExplanationSchema,
+        explanationResult.value,
+      );
+      if (
+        validation.status === "rejected" ||
+        validation.value.reasonCode !== explanationReason ||
+        validation.value.provenance.recommendationRef !== request.parentWhy.recommendationRef ||
+        validation.value.provenance.producedAt !== request.parentWhy.producedAt
+      ) return fallback(request, "parent-explanation-unavailable", "parent-explanation");
+      const explanation = validation.value;
+      parentExplanation = {
+        reasonCode: explanation.reasonCode,
+        title: explanation.title,
+        explanation: explanation.explanation,
+        disclaimer: explanation.disclaimer,
+        recommendationRef: explanation.provenance.recommendationRef,
+        producedAt: explanation.provenance.producedAt,
+      };
     } catch {
       return fallback(request, "parent-explanation-unavailable", "parent-explanation");
     }
-    if (explanation.status === "rejected") {
-      return fallback(request, "parent-explanation-rejected", "parent-explanation");
-    }
-    parentExplanation = {
-      reasonCode: explanation.value.reasonCode,
-      title: explanation.value.title,
-      explanation: explanation.value.explanation,
-      disclaimer: explanation.value.disclaimer,
-      recommendationRef: explanation.value.provenance.recommendationRef,
-      producedAt: explanation.value.provenance.producedAt,
-    };
   }
 
-  return {
+  const pendingDecision: Wave2StudyDecisionPacket = {
     compositionVersion: WAVE2_ADAPTIVE_COMPOSITION_VERSION,
     status: "pending-study-decision",
     eventRef: request.studyAuthority.eventRef,
+    opportunityProvenance: {
+      learnerScopeRef: request.studyAuthority.learnerScopeRef,
+      sessionRef: request.studyAuthority.sessionRef,
+      instructionalContextRef: request.studyAuthority.instructionalContextRef,
+      currentOpportunityRef: request.studyAuthority.currentOpportunityRef,
+      effectiveCurrentAssistanceLevel: effectiveAssistance,
+    },
     admissions: admissions.map(({ feature, decision }) => ({
       feature,
       status: decision.status,
@@ -898,7 +1232,7 @@ export async function composeWave2AdaptiveIntelligence(
     concept: {
       status: "accepted",
       currentConceptRef: request.studyAuthority.currentConceptRef,
-      directPrerequisiteRefs: [...prerequisiteQuery.conceptRefs],
+      directPrerequisiteRefs: [...scopedPrerequisiteRefs],
     },
     misconception: {
       status: misconception.status,
@@ -927,4 +1261,13 @@ export async function composeWave2AdaptiveIntelligence(
     parentExplanation,
     ...AUTHORITY_BOUNDARY,
   };
+  try {
+    const finalValidation = validateExact(Wave2StudyDecisionPacketSchema, pendingDecision);
+    if (finalValidation.status === "rejected") {
+      return fallback(request, "invalid-final-study-decision-packet", null);
+    }
+    return commitReplayProtectedDecision(request, dependencies, finalValidation.value);
+  } catch {
+    return fallback(request, "invalid-final-study-decision-packet", null);
+  }
 }
